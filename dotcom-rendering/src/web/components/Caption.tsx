@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
+	neutral,
 	space,
 	textSans,
 	until,
@@ -22,6 +23,7 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlaid?: boolean;
 	isLeftCol?: boolean;
+	isLightbox?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
 };
@@ -232,6 +234,7 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlaid,
 	isLeftCol,
+	isLightbox,
 	mediaType = 'Gallery',
 	isMainMedia = false,
 }: Props) => {
@@ -276,6 +279,44 @@ export const Caption = ({
 			{!!credit && displayCredit && ` ${credit}`}
 		</figcaption>
 	);
+
+	if (isLightbox) {
+		return (
+			<figcaption
+				css={css`
+					${textSans.xsmall()};
+					line-height: 135%;
+					word-wrap: break4all;
+					padding-top: ${space[2]}px;
+					border-top: 3px solid ${palette.text.caption};
+				`}
+			>
+				{!!captionText && (
+					<span
+						css={[
+							captionLink(palette),
+							css`
+								color: ${neutral[97]};
+							`,
+						]}
+						dangerouslySetInnerHTML={{
+							__html: captionText || '',
+						}}
+						key="caption"
+					/>
+				)}
+				{!!credit && displayCredit && (
+					<div
+						css={css`
+							color: ${neutral[60]};
+						`}
+					>
+						{credit}
+					</div>
+				)}
+			</figcaption>
+		);
+	}
 
 	switch (format.design) {
 		case ArticleDesign.PhotoEssay:

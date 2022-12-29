@@ -1,0 +1,249 @@
+import libDebounce from 'lodash.debounce';
+import { useEffect } from 'react';
+
+export const LightboxJavascript = () => {
+	useEffect(() => {
+		// Document selectors
+		const lightbox =
+			document.querySelector<HTMLDialogElement>('#gu-lightbox');
+		const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
+			'button.open-lightbox',
+		);
+
+		// Lightbox selectors
+		const nextButton =
+			lightbox?.querySelector<HTMLButtonElement>('button.next');
+		const previousButton =
+			lightbox?.querySelector<HTMLButtonElement>('button.previous');
+		const infoButton =
+			lightbox?.querySelector<HTMLButtonElement>('button.info');
+		const closeButton =
+			lightbox?.querySelector<HTMLButtonElement>('button.close');
+		const positionDisplay =
+			lightbox?.querySelector<HTMLElement>('.selected');
+		const imageList = lightbox?.querySelector<HTMLElement>('ul');
+		const totalNoOfImages =
+			lightbox?.querySelectorAll('li img').length ?? 1;
+
+		// Functions
+		function select(position: number): void {
+			if (positionDisplay) {
+				positionDisplay.innerHTML = position.toString();
+			}
+		}
+
+		function pulseButton(button: HTMLButtonElement): void {
+			button.classList.add('selected');
+
+			window.setTimeout(() => {
+				button.classList.remove('selected');
+			}, 75);
+		}
+
+		function scrollTo(position: number): void {
+			const liWidth = lightbox?.querySelector('li')?.clientWidth;
+			if (!imageList || !liWidth) return;
+			switch (position) {
+				case 0:
+				case 1: {
+					imageList.scrollLeft = 0;
+					break;
+				}
+				default: {
+					imageList.scrollLeft = (position - 1) * liWidth;
+				}
+			}
+		}
+
+		function getPosition(): number {
+			const scrollPosition = imageList?.scrollLeft;
+			const liWidth = lightbox?.querySelector('li')?.clientWidth;
+			if (liWidth && scrollPosition) {
+				return Math.round(scrollPosition / liWidth) + 1;
+			}
+			return 1;
+		}
+
+		function getPreviousPosition(positionNow: number): number {
+			if (positionNow === 1) {
+				// Cycle around to the end
+				return totalNoOfImages;
+			} else {
+				return positionNow - 1;
+			}
+		}
+
+		function getNextPosition(positionNow: number): number {
+			if (positionNow === totalNoOfImages) {
+				// Cycle back to the start
+				return 1;
+			} else {
+				return positionNow + 1;
+			}
+		}
+
+		function loadAdjacentImages(currentPosition: number): void {
+			function eagerLoad(position: number) {
+				const allImages =
+					lightbox?.querySelectorAll<HTMLImageElement>('li img');
+				const imgArray = allImages ? Array.from(allImages) : [];
+				const imgElement = imgArray[position - 1];
+				if (imgElement) imgElement.loading = 'eager';
+			}
+			const previousImage = getPreviousPosition(currentPosition);
+			const nextImage = getNextPosition(currentPosition);
+			eagerLoad(previousImage);
+			eagerLoad(nextImage);
+		}
+
+		function goBack(): void {
+			if (previousButton) pulseButton(previousButton);
+			const positionNow = getPosition();
+			const newPosition = getPreviousPosition(positionNow);
+			select(newPosition);
+			scrollTo(newPosition);
+			loadAdjacentImages(newPosition);
+		}
+
+		function goForward(): void {
+			if (nextButton) pulseButton(nextButton);
+			const positionNow = getPosition();
+			const newPosition = getNextPosition(positionNow);
+			select(newPosition);
+			scrollTo(newPosition);
+			loadAdjacentImages(newPosition);
+		}
+
+		function close(): void {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
+			(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		}
+
+		function showInfo(): void {
+			infoButton?.classList.add('selected');
+			imageList?.classList.remove('hide-info');
+		}
+
+		function hideInfo(): void {
+			infoButton?.classList.remove('selected');
+			imageList?.classList.add('hide-info');
+		}
+
+		function toggleInfo(): void {
+			infoButton?.classList.toggle('selected');
+			imageList?.classList.toggle('hide-info');
+		}
+
+		// Event listeners
+		lightboxButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				// We use this class to prevent the main page from scrolling
+				document.documentElement.classList.add('lightbox-open');
+				// Extract the element id for this image out of the button that was clicked on
+				const elementId = button.dataset.elementId;
+
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
+				(lightbox as any)?.showModal(); // See: https://github.com/microsoft/TypeScript/issues/48267
+				// Find the image inside the lightbox and get its index
+				const imageWrapper: HTMLLIElement | null | undefined = elementId
+					? lightbox?.querySelector(
+							`li[data-element-id="${elementId}"]`,
+					  )
+					: null;
+				const stringIndex: string = imageWrapper?.dataset.index ?? '1';
+				const indexOfImageClicked = parseInt(stringIndex);
+				// Now we have the index of the image that was clicked, show it
+				// in the lightbox
+				select(indexOfImageClicked);
+				scrollTo(indexOfImageClicked);
+				loadAdjacentImages(indexOfImageClicked);
+			});
+		});
+
+		lightbox?.addEventListener('keydown', (event) => {
+			switch (event.code) {
+				case 'Tab': {
+					// We're completely taking over tabbing to keep focus inside
+					// the dialog
+					event.preventDefault();
+					switch (document.activeElement) {
+						case closeButton:
+							event.shiftKey
+								? infoButton?.focus()
+								: previousButton?.focus();
+							break;
+						case previousButton:
+							event.shiftKey
+								? closeButton?.focus()
+								: nextButton?.focus();
+							break;
+						case nextButton:
+							event.shiftKey
+								? previousButton?.focus()
+								: infoButton?.focus();
+							break;
+						case infoButton:
+							event.shiftKey
+								? nextButton?.focus()
+								: closeButton?.focus();
+							break;
+						default:
+							break;
+					}
+					break;
+				}
+				case 'ArrowLeft':
+					goBack();
+					break;
+				case 'ArrowRight':
+					goForward();
+					break;
+				case 'KeyI':
+					toggleInfo();
+					break;
+				case 'KeyQ':
+					close();
+					break;
+				case 'ArrowUp':
+					showInfo();
+					break;
+				case 'ArrowDown':
+					hideInfo();
+					break;
+			}
+		});
+
+		imageList?.addEventListener(
+			'scroll',
+			libDebounce(() => {
+				const currentPosition = getPosition();
+				select(currentPosition);
+				loadAdjacentImages(currentPosition);
+			}, 300),
+		);
+
+		closeButton?.addEventListener('click', () => {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
+			(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		});
+
+		previousButton?.addEventListener('click', () => {
+			goBack();
+		});
+
+		nextButton?.addEventListener('click', () => {
+			goForward();
+		});
+
+		infoButton?.addEventListener('click', () => {
+			toggleInfo();
+		});
+
+		lightbox?.addEventListener('close', () => {
+			document.documentElement.classList.remove('lightbox-open');
+		});
+	}, []);
+
+	// Don’t render anything
+	return null;
+};

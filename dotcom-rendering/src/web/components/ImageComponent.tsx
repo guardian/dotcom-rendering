@@ -13,6 +13,7 @@ import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
+import { LightboxButton } from './LightboxButton';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -213,6 +214,37 @@ const CaptionToggle = () => (
 	</>
 );
 
+export const getMaster = (images: Image[]) => {
+	return images.find((image) => image.fields.isMaster)?.url;
+};
+export const getLargest = (images: Image[]) => {
+	const descendingByWidth = (a: Image, b: Image) => {
+		return parseInt(b.fields.width) - parseInt(a.fields.width);
+	};
+	return images.slice().sort(descendingByWidth)[0]?.url;
+};
+
+/**
+ * We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
+ * because the image sources and CSS deal with the sizing. What the height and width gives us is a true
+ * ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
+ *
+ * The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
+ */
+export const getImageDimensions = (
+	element: ImageBlockElement,
+): {
+	width: string;
+	height: string;
+} => {
+	const width = element.media.allImages[0]?.fields.width ?? '620';
+	const height = element.media.allImages[0]?.fields.height ?? '372';
+	return {
+		width,
+		height,
+	};
+};
+
 export const ImageComponent = ({
 	element,
 	format,
@@ -236,33 +268,11 @@ export const ImageComponent = ({
 		format.design !== ArticleDesign.Comment &&
 		format.design !== ArticleDesign.Editorial;
 
-	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
-	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
-	// ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
-	//
-	// The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
-	const imageWidth =
-		(element.media &&
-			element.media.allImages[0] &&
-			element.media.allImages[0].fields.width) ||
-		'620';
-	const imageHeight =
-		(element.media &&
-			element.media.allImages[0] &&
-			element.media.allImages[0].fields.height) ||
-		'372';
+	const dimensions = getImageDimensions(element);
+	const imageWidth = dimensions.width;
+	const imageHeight = dimensions.height;
 
 	const palette = decidePalette(format);
-
-	const getMaster = (images: Image[]) => {
-		return images.find((image) => image.fields.isMaster)?.url;
-	};
-	const getLargest = (images: Image[]) => {
-		const descendingByWidth = (a: Image, b: Image) => {
-			return parseInt(b.fields.width) - parseInt(a.fields.width);
-		};
-		return images.slice().sort(descendingByWidth)[0]?.url;
-	};
 
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =
@@ -356,6 +366,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+				<LightboxButton role={role} elementId={element.elementId} />
 			</div>
 		);
 	}
@@ -428,6 +439,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+				<LightboxButton role={role} elementId={element.elementId} />
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

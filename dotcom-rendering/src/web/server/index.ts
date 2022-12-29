@@ -4,6 +4,7 @@ import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
+import { enhanceImagesForLightbox } from '../../model/enhanceImagesForLightbox';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
@@ -38,6 +39,10 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 		tableOfContents: data.config.switches.tableOfContents
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
+		imagesForLightbox: enhanceImagesForLightbox(
+			enhancedBlocks,
+			data.mainMediaElements,
+		),
 	};
 	return CAPIArticle;
 };

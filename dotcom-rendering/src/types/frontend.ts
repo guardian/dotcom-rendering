@@ -2,7 +2,7 @@ import type { EditionId } from '../web/lib/edition';
 import type { BadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
-import { CAPIElement, Newsletter } from './content';
+import type { CAPIElement, ImageBlockElement, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { CAPIOnwards } from './onwards';
 import type { TagType } from './tag';
@@ -112,6 +112,7 @@ export interface FEArticleType {
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
+	imagesForLightbox?: ImageBlockElement[];
 }
 
 export interface TableOfContents {
