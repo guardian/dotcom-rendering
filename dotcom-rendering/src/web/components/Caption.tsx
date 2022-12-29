@@ -288,7 +288,7 @@ export const Caption = ({
 					line-height: 135%;
 					word-wrap: break4all;
 					padding-top: ${space[2]}px;
-					border-top: 3px solid ${palette.text.caption};
+					border-top: 3px solid ${palette.background.lightboxDivider};
 				`}
 			>
 				{!!captionText && (

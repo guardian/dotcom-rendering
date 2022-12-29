@@ -1027,6 +1027,8 @@ const backgroundImageTitle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundLightboxDivider = backgroundImageTitle;
+
 const backgroundSpeechBubble = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -2105,6 +2107,7 @@ export const decidePalette = (
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
 			imageTitle: backgroundImageTitle(format),
+			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
 			carouselDot: backgroundCarouselDot(format),
 			carouselDotFocus: backgroundCarouselDotFocus(format),

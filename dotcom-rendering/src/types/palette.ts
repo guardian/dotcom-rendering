@@ -94,6 +94,7 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		lightboxDivider: Colour;
 	};
 	fill: {
 		commentCount: Colour;
