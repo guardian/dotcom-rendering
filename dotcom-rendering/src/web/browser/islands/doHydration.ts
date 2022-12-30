@@ -18,11 +18,11 @@ export const doHydration = async (
 	name: string,
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
-): Promise<void> => {
+): Promise<{ success: boolean }> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;
-	if (alreadyHydrated) return;
+	if (alreadyHydrated) return { success: false };
 
 	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
 	importStart();
@@ -72,4 +72,6 @@ export const doHydration = async (
 			}
 			throw error;
 		});
+
+	return { success: true };
 };
