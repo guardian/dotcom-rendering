@@ -39,14 +39,19 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
 
+const getPrefetchHeader = (script: string): string => {
+	return `<${script}>; rel=prefetch`;
+};
+
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceCAPIType(body);
-		const resp = articleToHtml({
+		const { html, clientScript } = articleToHtml({
 			article,
 		});
 
-		res.status(200).send(resp);
+		res.set('Link', getPrefetchHeader(clientScript));
+		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
@@ -79,7 +84,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 			article,
 		});
 
-		res.status(200).send(resp);
+		res.status(200).send(resp.html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}

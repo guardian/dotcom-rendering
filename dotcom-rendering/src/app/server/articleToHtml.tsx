@@ -28,7 +28,9 @@ const decideTitle = (article: FEArticleType): string => {
 	return `${article.headline} | ${article.sectionLabel}`;
 };
 
-export const articleToHtml = ({ article }: Props): string => {
+export const articleToHtml = ({
+	article,
+}: Props): { html: string; clientScript: string } => {
 	const title = decideTitle(article);
 	const key = 'ar';
 	const cache = createCache({ key });
@@ -94,8 +96,9 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
+	const clientScript = getAppScript();
 	const priorityScriptTags = generateScriptTags(
-		[getAppScript()].map((script) =>
+		[clientScript].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
 	);
@@ -172,18 +175,21 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	return pageTemplate({
-		priorityScriptTags,
-		lowPriorityScriptTags,
-		css: extractedCss,
-		html,
-		title,
-		description: article.trailText,
-		windowGuardian,
-		initTwitter:
-			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
-				? initTwitter
-				: undefined,
-		offerHttp3,
-	});
+	return {
+		html: pageTemplate({
+			priorityScriptTags,
+			lowPriorityScriptTags,
+			css: extractedCss,
+			html,
+			title,
+			description: article.trailText,
+			windowGuardian,
+			initTwitter:
+				pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+					? initTwitter
+					: undefined,
+			offerHttp3,
+		}),
+		clientScript,
+	};
 };
