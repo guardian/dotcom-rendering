@@ -43,11 +43,13 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 						void doHydration(name, props, element).then(
 							({ success }) => {
 								if (success) {
-									targetElement.dispatchEvent(
-										new MouseEvent('click', {
-											bubbles: true,
-										}),
-									);
+									setTimeout(() => {
+										targetElement.dispatchEvent(
+											new MouseEvent('click', {
+												bubbles: true,
+											}),
+										);
+									}, 50);
 								}
 							},
 						);
