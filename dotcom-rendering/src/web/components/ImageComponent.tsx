@@ -13,7 +13,8 @@ import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
-import { LightboxButton } from './LightboxButton';
+import { Island } from './Island';
+import { LightboxButton } from './LightboxButton.importable';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -366,7 +367,9 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				<LightboxButton role={role} elementId={element.elementId} />
+				<Island deferUntil="interaction">
+					<LightboxButton role={role} elementId={element.elementId} />
+				</Island>
 			</div>
 		);
 	}
@@ -439,7 +442,9 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				<LightboxButton role={role} elementId={element.elementId} />
+				<Island deferUntil="interaction">
+					<LightboxButton role={role} elementId={element.elementId} />
+				</Island>
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

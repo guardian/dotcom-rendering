@@ -14,7 +14,6 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Lightbox } from './Lightbox';
-import { LightboxJavascript } from './LightboxJavascript.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
@@ -52,6 +51,7 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
+			<Lightbox format={format} images={CAPIArticle.imagesForLightbox} />
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
@@ -92,10 +92,6 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 					isDev={!!CAPIArticle.config.isDev}
 				/>
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<LightboxJavascript />
-			</Island>
-			<Lightbox format={format} images={CAPIArticle.imagesForLightbox} />
 			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
 		</StrictMode>
 	);
