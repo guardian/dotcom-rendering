@@ -4,7 +4,7 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
-if (Cypress.env('isInTeamCity')) {
+if (!Cypress.env('isInTeamCity')) {
 	const paidContentPage =
 		'https://www.theguardian.com/make-work-work/2022/dec/01/tools-tech-and-etiquette-best-practice-of-hybrid-working-for-small-businesses';
 
