@@ -99,7 +99,7 @@ const getScripts = (
 };
 
 export const getAppScript = (): string => {
-	const appAssetOrigin = decideAssetOrigin(process.env.GU_STAVE, isDev, true);
+	const appAssetOrigin = decideAssetOrigin(process.env.GU_STAGE, isDev, true);
 	if (isDev) {
 		return `${appAssetOrigin}assets/main.apps.js`;
 	}
