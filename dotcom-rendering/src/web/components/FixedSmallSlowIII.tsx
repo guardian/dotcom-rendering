@@ -1,6 +1,9 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card25Media25StarRating, Card50Media50StarRating } from '../lib/cardWrappers';
+import {
+	Card25Media25StarRating,
+	Card50Media50StarRating,
+} from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
