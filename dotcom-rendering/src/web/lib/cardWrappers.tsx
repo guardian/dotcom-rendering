@@ -225,6 +225,42 @@ export const Card25Media25 = ({
 };
 /**
  * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
+ * ┃▒▒▒▒▒▒▒▒▒┃         Remaining         ┊
+ * ┃         ┃                           ┊
+ * ┗━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - No trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ *  - Added star rating
+ */
+export const Card25Media25StarRating = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			starRating={trail.starRating}
+		/>
+	);
+};
+/**
+ * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
  * ┃▒▒▒▒▒▒▒▒▒┃                           ┊
  * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
  * ┃         ┃         Remaining         ┊
@@ -295,6 +331,42 @@ export const Card50Media50 = ({
 			showAge={showAge}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment="horizontal"
+		/>
+	);
+};
+/**
+ * ┏━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃        50%       ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃     Remaining    ┊
+ * ┃                  ┃                  ┊
+ * ┗━━━━━━━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 50% of the container, with media that takes up 50%
+ *
+ * Options:
+ *  - Large headline (large on mobile)
+ *  - Small image on the top (top on mobile)
+ *  - No trail text
+ *  - Up to 3 supporting content items, always aligned horizontal
+ *  - Added star rating
+ */
+export const Card50Media50StarRating = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			headlineSize="large"
+			headlineSizeOnMobile="large"
+			imageSize="small"
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			showAge={showAge}
+			supportingContent={trail.supportingContent?.slice(0, 3)}
+			supportingContentAlignment="horizontal"
+			starRating={trail.starRating}
 		/>
 	);
 };
