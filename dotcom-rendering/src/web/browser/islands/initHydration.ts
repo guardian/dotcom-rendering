@@ -44,7 +44,9 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 							({ success }) => {
 								if (success) {
 									targetElement.dispatchEvent(
-										new MouseEvent('click'),
+										new MouseEvent('click', {
+											bubbles: true,
+										}),
 									);
 								}
 							},
