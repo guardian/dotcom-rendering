@@ -426,9 +426,9 @@ export const Lightbox = ({ format, images }: Props) => {
 								>
 									<figure css={figureStyles}>
 										<Picture
-											// I think using the role of immersive here respects the intentions for
-											// lightbox images. Using this role we get a sizes array based on the image
-											// filling the screen
+											// Using the role of immersive here indicates the intentions for lightbox
+											// images but it's moot because the `isLightbox` prop overrides the decision
+											// around what size sources to use
 											role="immersive"
 											alt={image.data.alt ?? ''}
 											// Height and width are only used here so the browser has a ratio to work with
@@ -438,6 +438,7 @@ export const Lightbox = ({ format, images }: Props) => {
 											width={width}
 											master={master}
 											format={format}
+											isLightbox={true}
 										/>
 										<aside css={asideStyles}>
 											{!!image.title && (

@@ -17,6 +17,7 @@ type Props = {
 	width: string;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
+	isLightbox?: boolean;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -39,11 +40,24 @@ const decideImageWidths = ({
 	role,
 	isMainMedia,
 	format,
+	isLightbox,
 }: {
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
+	isLightbox: boolean;
 }): [ImageWidthType, ...ImageWidthType[]] => {
+	if (isLightbox) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 980 },
+			{ breakpoint: breakpoints.desktop, width: 1140 },
+			{ breakpoint: breakpoints.leftCol, width: 1300 },
+			{ breakpoint: breakpoints.wide, width: 1900 },
+		];
+	}
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
@@ -278,10 +292,11 @@ export const Picture = ({
 	width,
 	isMainMedia = false,
 	isLazy = true,
+	isLightbox = false,
 }: Props) => {
 	const sources = generateSources(
 		master,
-		decideImageWidths({ role, format, isMainMedia }),
+		decideImageWidths({ role, format, isMainMedia, isLightbox }),
 	);
 
 	const ratio = parseInt(height, 10) / parseInt(width, 10);
