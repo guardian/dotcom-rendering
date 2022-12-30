@@ -11,8 +11,7 @@ export const decideContainerPalette = (
 	if (palettes?.includes('EventPalette')) return 'EventPalette';
 	if (palettes?.includes('SombreAltPalette')) return 'SombreAltPalette';
 	if (palettes?.includes('EventAltPalette')) return 'EventAltPalette';
-	if (palettes?.includes('InvestigationPalette'))
-		return 'InvestigationPalette';
+	if (palettes?.includes('InvestigationPalette')) return 'InvestigationPalette';
 	if (palettes?.includes('LongRunningAltPalette'))
 		return 'LongRunningAltPalette';
 	if (palettes?.includes('LongRunningPalette')) return 'LongRunningPalette';

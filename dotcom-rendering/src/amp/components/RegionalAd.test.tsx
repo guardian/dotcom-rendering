@@ -67,10 +67,7 @@ describe('RegionalAd', () => {
 
 		const [uk, us, au, int] = Array.from(ampAdElement)
 			.map((el) => el.getAttribute('rtc-config'))
-			.map(
-				(config) =>
-					JSON.parse(config ?? '{}') as Record<string, unknown>,
-			);
+			.map((config) => JSON.parse(config ?? '{}') as Record<string, unknown>);
 
 		expect(uk?.urls).toEqual([permutiveURL]);
 		expect(us?.urls).toEqual([permutiveURL]);
@@ -116,10 +113,7 @@ describe('RegionalAd', () => {
 
 		const [uk, us, au, int] = Array.from(ampAdElement)
 			.map((el) => el.getAttribute('rtc-config'))
-			.map(
-				(config) =>
-					JSON.parse(config ?? '{}') as Record<string, unknown>,
-			);
+			.map((config) => JSON.parse(config ?? '{}') as Record<string, unknown>);
 
 		expect(uk?.urls).toEqual([]);
 		expect(us?.urls).toEqual([]);
@@ -165,10 +159,7 @@ describe('RegionalAd', () => {
 
 		const [uk, us, au, int] = Array.from(ampAdElement)
 			.map((el) => el.getAttribute('rtc-config'))
-			.map(
-				(config) =>
-					JSON.parse(config ?? '{}') as Record<string, unknown>,
-			);
+			.map((config) => JSON.parse(config ?? '{}') as Record<string, unknown>);
 
 		expect(uk?.urls).toEqual([permutiveURL]);
 		expect(us?.urls).toEqual([permutiveURL]);
@@ -209,10 +200,7 @@ describe('RegionalAd', () => {
 
 		const [uk, us, au, int] = Array.from(ampAdElement)
 			.map((el) => el.getAttribute('rtc-config'))
-			.map(
-				(config) =>
-					JSON.parse(config ?? '{}') as Record<string, unknown>,
-			);
+			.map((config) => JSON.parse(config ?? '{}') as Record<string, unknown>);
 
 		expect(uk?.vendors).toEqual(apsVendorObj);
 		expect(us?.vendors).toEqual(apsVendorObj);
@@ -253,10 +241,7 @@ describe('RegionalAd', () => {
 
 		const [uk, us, au, int] = Array.from(ampAdElement)
 			.map((el) => el.getAttribute('rtc-config'))
-			.map(
-				(config) =>
-					JSON.parse(config ?? '{}') as Record<string, unknown>,
-			);
+			.map((config) => JSON.parse(config ?? '{}') as Record<string, unknown>);
 
 		expect(uk?.vendors).toEqual({});
 		expect(us?.vendors).toEqual({});

@@ -195,9 +195,7 @@ try {
 				);
 
 				const type = Array.isArray(images)
-					? '[' +
-					  images.map(() => 'ImageBlockElement').join(',') +
-					  ']'
+					? '[' + images.map(() => 'ImageBlockElement').join(',') + ']'
 					: 'unknown';
 
 				// Write the new fixture data

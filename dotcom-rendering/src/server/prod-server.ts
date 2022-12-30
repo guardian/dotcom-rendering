@@ -109,9 +109,7 @@ export const prodServer = (): void => {
             `);
 		} catch (e) {
 			const message =
-				e instanceof Error
-					? e.stack ?? 'Unknown stack'
-					: 'Unknown error';
+				e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
 			res.status(500).send(`<pre>${message}</pre>`);
 		}
 	});

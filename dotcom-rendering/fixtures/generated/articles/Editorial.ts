@@ -77,7 +77,8 @@ export const Editorial: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value:
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 			],
 		},
@@ -131,7 +132,8 @@ export const Editorial: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value:
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 			],
 		},
@@ -185,7 +187,8 @@ export const Editorial: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value:
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 			],
 		},
@@ -239,7 +242,8 @@ export const Editorial: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value:
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 			],
 		},
@@ -285,7 +289,8 @@ export const Editorial: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+					value:
+						'/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 				},
 				{
 					name: 'sh',
@@ -1152,7 +1157,8 @@ export const Editorial: FEArticleType = {
 	standfirst:
 		'<p>Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried</p>',
 	sectionUrl: 'world/coronavirus-outbreak',
-	pageId: 'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+	pageId:
+		'commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	version: 3,
 	tags: [
 		{
@@ -1252,7 +1258,8 @@ export const Editorial: FEArticleType = {
 		},
 	],
 	pillar: 'opinion',
-	webURL: 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+	webURL:
+		'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Coronavirus',
@@ -1438,8 +1445,7 @@ export const Editorial: FEArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	byline: 'Editorial',
-	headline:
-		'The Guardian view on quarantine: an old method and a vital one   ',
+	headline: 'The Guardian view on quarantine: an old method and a vital one   ',
 	guardianBaseURL: 'https://www.theguardian.com',
 	isLegacyInteractive: false,
 	webPublicationDate: '2021-02-03T18:54:37.000Z',
@@ -1758,7 +1764,8 @@ export const Editorial: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+			'@id':
+				'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1806,10 +1813,12 @@ export const Editorial: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+			'@id':
+				'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			},
 		},
 	],
@@ -1945,8 +1954,7 @@ export const Editorial: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -1978,7 +1986,8 @@ export const Editorial: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

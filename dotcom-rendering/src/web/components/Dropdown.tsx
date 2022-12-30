@@ -225,9 +225,7 @@ const buildOphanComponentWithNotifications = (
 		return {
 			componentType: NOTIFICATION_COMPONENT_TYPE,
 			id: link.id,
-			labels: link.notifications.map(
-				(notification) => notification.ophanLabel,
-			),
+			labels: link.notifications.map((notification) => notification.ophanLabel),
 		};
 	}
 	return undefined;
@@ -446,10 +444,7 @@ export const Dropdown = ({
 						}
 					`}
 				>
-					<label
-						htmlFor={checkboxID}
-						css={[buttonStyles, cssOverrides]}
-					>
+					<label htmlFor={checkboxID} css={[buttonStyles, cssOverrides]}>
 						{label}
 					</label>
 					<input
@@ -480,11 +475,7 @@ export const Dropdown = ({
 				<>
 					<button
 						onClick={handleToggle}
-						css={[
-							buttonStyles,
-							cssOverrides,
-							isExpanded && buttonExpanded,
-						]}
+						css={[buttonStyles, cssOverrides, isExpanded && buttonExpanded]}
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
 						data-cy="dropdown-button"
@@ -501,10 +492,7 @@ export const Dropdown = ({
 						{children ? (
 							<>{children}</>
 						) : (
-							<ul
-								css={[ulStyles, cssOverrides]}
-								data-cy="dropdown-options"
-							>
+							<ul css={[ulStyles, cssOverrides]} data-cy="dropdown-options">
 								{links.map((l, index) => (
 									<DropdownLink link={l} index={index} />
 								))}

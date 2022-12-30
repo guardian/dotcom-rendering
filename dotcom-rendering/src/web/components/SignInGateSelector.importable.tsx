@@ -78,8 +78,7 @@ const generateSignInUrl = ({
 		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
-		browserId:
-			getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
+		browserId: getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
 		visitId: getCookie({ name: 'vsid' }) || undefined,
 		viewId: pageViewId,
 	};
@@ -160,9 +159,7 @@ export const SignInGateSelector = ({
 		// which will happen when the showGate state is set to false
 		// this only happens within the dismissGate method
 		if (isGateDismissed) {
-			document.dispatchEvent(
-				new CustomEvent('article:sign-in-gate-dismissed'),
-			);
+			document.dispatchEvent(new CustomEvent('article:sign-in-gate-dismissed'));
 		}
 	}, [isGateDismissed]);
 

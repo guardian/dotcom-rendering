@@ -54,10 +54,7 @@ const timeoutify = <T>(
 
 			if (candidateConfig.timeoutMillis) {
 				timer = window.setTimeout(() => {
-					recordMessageTimeoutInOphan(
-						candidateConfig.candidate.id,
-						slotName,
-					);
+					recordMessageTimeoutInOphan(candidateConfig.candidate.id, slotName);
 					resolve({ show: false });
 				}, candidateConfig.timeoutMillis);
 			}
@@ -123,24 +120,25 @@ export const pickMessage = ({
 			}),
 		);
 
-		const winnerResult = results.reduce<
-			Promise<WinningMessage<any> | null>
-		>(async (winningMessageSoFar, { candidateConfig, canShow }) => {
-			if (await winningMessageSoFar) {
+		const winnerResult = results.reduce<Promise<WinningMessage<any> | null>>(
+			async (winningMessageSoFar, { candidateConfig, canShow }) => {
+				if (await winningMessageSoFar) {
+					return winningMessageSoFar;
+				}
+
+				const result = await canShow;
+				candidateConfig.cancelTimeout();
+				if (result.show) {
+					return {
+						candidate: candidateConfig.candidate,
+						meta: result.meta,
+					};
+				}
+
 				return winningMessageSoFar;
-			}
-
-			const result = await canShow;
-			candidateConfig.cancelTimeout();
-			if (result.show) {
-				return {
-					candidate: candidateConfig.candidate,
-					meta: result.meta,
-				};
-			}
-
-			return winningMessageSoFar;
-		}, Promise.resolve(null));
+			},
+			Promise.resolve(null),
+		);
 
 		winnerResult
 			.then((winner) => {
@@ -153,7 +151,5 @@ export const pickMessage = ({
 					resolve(() => candidate.show(meta));
 				}
 			})
-			.catch((e) =>
-				console.error(`pickMessage winner - error: ${String(e)}`),
-			);
+			.catch((e) => console.error(`pickMessage winner - error: ${String(e)}`));
 	});

@@ -122,9 +122,7 @@ const buildPayload = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			signInBannerLastClosedAt,
-			mvtId: Number(
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-			),
+			mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 			countryCode,
 			weeklyArticleHistory,
 			articleCountToday,
@@ -336,10 +334,7 @@ const RemoteBanner = ({
 				const msg = `Error importing RR banner: ${String(error)}`;
 
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-banner',
-				);
+				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-banner');
 			});
 	}, []);
 

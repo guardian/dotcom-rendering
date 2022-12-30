@@ -173,9 +173,7 @@ export const SignedInAs = ({
 		return (
 			<div css={containerStyles}>
 				<Heading count={commentCount} />
-				<span css={headlineStyles}>
-					This discussion is closed for comments
-				</span>
+				<span css={headlineStyles}>This discussion is closed for comments</span>
 			</div>
 		);
 	}
@@ -256,9 +254,7 @@ export const SignedInAs = ({
 				</div>
 				<div css={textStyles}>
 					Signed in as
-					<div css={usernameStyles}>
-						{user.displayName || 'Guardian User'}
-					</div>
+					<div css={usernameStyles}>{user.displayName || 'Guardian User'}</div>
 				</div>
 			</div>
 		</div>

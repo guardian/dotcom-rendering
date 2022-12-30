@@ -117,9 +117,7 @@ describe('Callout from', () => {
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
 
-		const textFieldComponent = getByFieldId(
-			textField.id,
-		) as HTMLInputElement;
+		const textFieldComponent = getByFieldId(textField.id) as HTMLInputElement;
 		const textFieldValue = 'textInput';
 		fireEvent.change(textFieldComponent, {
 			target: { value: textFieldValue },
@@ -287,10 +285,7 @@ describe('Callout from', () => {
 	it('submit multiple values', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form
-				formFields={[radioField, checkboxField]}
-				onSubmit={mockSubmit}
-			/>,
+			<Form formFields={[radioField, checkboxField]} onSubmit={mockSubmit} />,
 		);
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);

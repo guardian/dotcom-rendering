@@ -1226,7 +1226,8 @@ export const Feature: FEArticleType = {
 		},
 	],
 	pillar: 'culture',
-	webURL: 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+	webURL:
+		'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Oscars 2020',
@@ -1592,8 +1593,7 @@ export const Feature: FEArticleType = {
 					},
 					data: {
 						alt: 'Taika Waititi.',
-						caption:
-							'‘We can make it here as well’ … Taika Waititi.',
+						caption: '‘We can make it here as well’ … Taika Waititi.',
 						credit: 'Photograph: Eric Gaillard/Reuters',
 					},
 					displayCredit: true,
@@ -1960,8 +1960,7 @@ export const Feature: FEArticleType = {
 					data: {
 						copyright: '2020 Getty Images',
 						alt: 'Brie Larson, Sigourney Weaver, and Gal Gadot.',
-						caption:
-							'Brie Larson, Sigourney Weaver, and Gal Gadot.',
+						caption: 'Brie Larson, Sigourney Weaver, and Gal Gadot.',
 						credit: 'Photograph: Kevin Winter/Getty Images',
 					},
 					displayCredit: true,
@@ -2257,7 +2256,8 @@ export const Feature: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			'@id':
+				'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2305,10 +2305,12 @@ export const Feature: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			'@id':
+				'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 			},
 		},
 	],
@@ -2443,8 +2445,7 @@ export const Feature: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2476,7 +2477,8 @@ export const Feature: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

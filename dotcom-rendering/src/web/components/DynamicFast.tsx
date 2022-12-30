@@ -71,11 +71,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 				<UL direction="column">
 					{columnOne.map((card, cardIndex) => {
 						return (
-							<LI
-								key={card.url}
-								showDivider={false}
-								padSides={true}
-							>
+							<LI key={card.url} showDivider={false} padSides={true}>
 								{/* The first card shows an image */}
 								{cardIndex === 0 ? (
 									<Card25Media25
@@ -103,11 +99,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 				<UL direction="column">
 					{columnTwo.map((card) => {
 						return (
-							<LI
-								key={card.url}
-								showDivider={false}
-								padSides={true}
-							>
+							<LI key={card.url} showDivider={false} padSides={true}>
 								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
@@ -162,8 +154,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									remaining.length -
-										(remaining.length % columns),
+									remaining.length - (remaining.length % columns),
 									columns,
 								)}
 								padSides={true}
@@ -265,8 +256,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									remaining.length -
-										(remaining.length % columns),
+									remaining.length - (remaining.length % columns),
 									columns,
 								)}
 							>
@@ -337,8 +327,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									remaining.length -
-										(remaining.length % columns),
+									remaining.length - (remaining.length % columns),
 									columns,
 								)}
 							>
@@ -516,9 +505,7 @@ export const DynamicFast = ({
 	switch (bigs.length) {
 		case 0: {
 			secondSliceLayout = 'noBigs';
-			secondSliceCards = [
-				...secondSliceGroupedTrails.standard.slice(0, 12),
-			];
+			secondSliceCards = [...secondSliceGroupedTrails.standard.slice(0, 12)];
 			break;
 		}
 		case 1: {

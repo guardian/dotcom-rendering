@@ -326,8 +326,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showComments = CAPIArticle.isCommentable;
 
-	const { branding } =
-		CAPIArticle.commercialProperties[CAPIArticle.editionId];
+	const { branding } = CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
 	const palette = decidePalette(format);
 
@@ -379,21 +378,14 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								discussionApiUrl={
-									CAPIArticle.config.discussionApiUrl
-								}
+								discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!CAPIArticle.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
+								remoteHeader={!!CAPIArticle.config.switches.remoteHeader}
+								contributionsServiceUrl={contributionsServiceUrl}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
-									!!CAPIArticle.config.switches
-										.headerTopBarSearchCapi
+									!!CAPIArticle.config.switches.headerTopBarSearchCapi
 								}
 							/>
 						</Section>
@@ -409,14 +401,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Nav
 							nav={NAV}
 							format={formatForNav}
-							subscribeUrl={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.subscribe
-							}
+							subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 							editionId={CAPIArticle.editionId}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && !isLabs && (
@@ -514,9 +501,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<GetMatchNav
 											matchUrl={footballMatchUrl}
 											format={format}
-											headlineString={
-												CAPIArticle.headline
-											}
+											headlineString={CAPIArticle.headline}
 											tags={CAPIArticle.tags}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
@@ -529,14 +514,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
-									<Island
-										clientOnly={true}
-										placeholderHeight={40}
-									>
-										<GetMatchTabs
-											matchUrl={footballMatchUrl}
-											format={format}
-										/>
+									<Island clientOnly={true} placeholderHeight={40}>
+										<GetMatchTabs matchUrl={footballMatchUrl} format={format} />
 									</Island>
 								)}
 							</div>
@@ -552,28 +531,20 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										!!CAPIArticle.starRating ||
-										CAPIArticle.starRating === 0
+										!!CAPIArticle.starRating || CAPIArticle.starRating === 0
 									}
 								/>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{CAPIArticle.starRating ||
-							CAPIArticle.starRating === 0 ? (
+							{CAPIArticle.starRating || CAPIArticle.starRating === 0 ? (
 								<div css={starWrapper}>
-									<StarRating
-										rating={CAPIArticle.starRating}
-										size="large"
-									/>
+									<StarRating rating={CAPIArticle.starRating} size="large" />
 								</div>
 							) : (
 								<></>
 							)}
-							<Standfirst
-								format={format}
-								standfirst={CAPIArticle.standfirst}
-							/>
+							<Standfirst format={format} standfirst={CAPIArticle.standfirst} />
 						</GridItem>
 						<GridItem area="media">
 							<div css={maxWidth}>
@@ -614,21 +585,16 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									webTitle={CAPIArticle.webTitle}
 									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
-									primaryDateline={
-										CAPIArticle.webPublicationDateDisplay
-									}
+									primaryDateline={CAPIArticle.webPublicationDateDisplay}
 									secondaryDateline={
 										CAPIArticle.webPublicationSecondaryDateDisplay
 									}
 									isCommentable={CAPIArticle.isCommentable}
-									discussionApiUrl={
-										CAPIArticle.config.discussionApiUrl
-									}
+									discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										!!CAPIArticle.config.switches
-											.serverShareCounts
+										!!CAPIArticle.config.switches.serverShareCounts
 									}
 								/>
 							</div>
@@ -638,9 +604,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{CAPIArticle.tableOfContents && (
 									<div>
 										<TableOfContents
-											tableOfContents={
-												CAPIArticle.tableOfContents
-											}
+											tableOfContents={CAPIArticle.tableOfContents}
 										></TableOfContents>
 									</div>
 								)}
@@ -657,16 +621,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isSensitive={CAPIArticle.config.isSensitive}
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
 									section={CAPIArticle.config.section}
-									shouldHideReaderRevenue={
-										CAPIArticle.shouldHideReaderRevenue
-									}
+									shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
 									tags={CAPIArticle.tags}
-									isPaidContent={
-										!!CAPIArticle.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
+									isPaidContent={!!CAPIArticle.config.isPaidContent}
+									contributionsServiceUrl={contributionsServiceUrl}
 									contentType={CAPIArticle.contentType}
 									sectionName={CAPIArticle.sectionName || ''}
 									isPreview={CAPIArticle.config.isPreview}
@@ -691,33 +649,15 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											contentType={
-												CAPIArticle.contentType
-											}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={
-												CAPIArticle.config.idApiUrl
-											}
-											isMinuteArticle={
-												CAPIArticle.pageType
-													.isMinuteArticle
-											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
-											keywordIds={
-												CAPIArticle.config.keywordIds
-											}
+											contentType={CAPIArticle.contentType}
+											contributionsServiceUrl={contributionsServiceUrl}
+											idApiUrl={CAPIArticle.config.idApiUrl}
+											isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
+											isPaidContent={CAPIArticle.pageType.isPaidContent}
+											keywordIds={CAPIArticle.config.keywordIds}
 											pageId={CAPIArticle.pageId}
-											sectionId={
-												CAPIArticle.config.section
-											}
-											sectionName={
-												CAPIArticle.sectionName
-											}
+											sectionId={CAPIArticle.config.section}
+											sectionName={CAPIArticle.sectionName}
 											shouldHideReaderRevenue={
 												CAPIArticle.shouldHideReaderRevenue
 											}
@@ -736,18 +676,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								/>
 								<SubMeta
 									format={format}
-									subMetaKeywordLinks={
-										CAPIArticle.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPIArticle.subMetaSectionLinks
-									}
+									subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+									subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
 									pageId={CAPIArticle.pageId}
 									webUrl={CAPIArticle.webURL}
 									webTitle={CAPIArticle.webTitle}
-									showBottomSocialButtons={
-										CAPIArticle.showBottomSocialButtons
-									}
+									showBottomSocialButtons={CAPIArticle.showBottomSocialButtons}
 									badge={CAPIArticle.badge}
 								/>
 							</ArticleContainer>
@@ -777,21 +711,13 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											shouldHideReaderRevenue={
 												CAPIArticle.shouldHideReaderRevenue
 											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
+											isPaidContent={CAPIArticle.pageType.isPaidContent}
 										/>
 									)}
 									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
+										<Island clientOnly={true} deferUntil="visible">
 											<MostViewedRightWrapper
-												isAdFreeUser={
-													CAPIArticle.isAdFreeUser
-												}
+												isAdFreeUser={CAPIArticle.isAdFreeUser}
 											/>
 										</Island>
 									) : (
@@ -822,22 +748,15 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
+					<DecideOnwards onwards={CAPIArticle.onwards} format={format} />
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
 							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
+										heading={CAPIArticle.storyPackage.heading}
+										trails={CAPIArticle.storyPackage.trails.map(decideTrail)}
 										onwardsSource="more-on-this-story"
 										format={format}
 									/>
@@ -856,12 +775,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
+								isPaidContent={CAPIArticle.config.isPaidContent || false}
+								showRelatedContent={CAPIArticle.config.showRelatedContent}
 								keywordIds={CAPIArticle.config.keywordIds}
 								contentType={CAPIArticle.contentType}
 								tags={CAPIArticle.tags}
@@ -882,9 +797,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						element="section"
 					>
 						<DiscussionLayout
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
+							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 							shortUrlId={CAPIArticle.config.shortUrlId}
 							format={format}
 							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
@@ -892,8 +805,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								!!CAPIArticle.config.switches
-									.enableDiscussionSwitch
+								!!CAPIArticle.config.switches.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
@@ -933,10 +845,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-						/>
+						<AdSlot position="merchandising" display={format.display} />
 					</Section>
 				)}
 			</main>
@@ -973,9 +882,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
 					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 				/>
 			</Section>
 
@@ -993,15 +900,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}
-						shouldHideReaderRevenue={
-							CAPIArticle.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!CAPIArticle.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!CAPIArticle.config.switches.puzzlesBanner
-						}
+						shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
+						remoteBannerSwitch={!!CAPIArticle.config.switches.remoteBanner}
+						puzzleBannerSwitch={!!CAPIArticle.config.switches.puzzlesBanner}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

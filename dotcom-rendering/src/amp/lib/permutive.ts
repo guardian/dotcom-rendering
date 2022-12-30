@@ -56,9 +56,7 @@ export const generatePermutivePayload = (
 	};
 
 	const payload: { [key: string]: any } = Object.keys(config)
-		.filter(
-			(key) => typeof config[key] !== 'undefined' && config[key] !== null,
-		)
+		.filter((key) => typeof config[key] !== 'undefined' && config[key] !== null)
 		.reduce((acc: { [key: string]: any }, key) => {
 			acc[key] = config[key];
 			return acc;

@@ -81,7 +81,8 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value:
+						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 			],
 		},
@@ -139,7 +140,8 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value:
+						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 			],
 		},
@@ -197,7 +199,8 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value:
+						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 			],
 		},
@@ -233,7 +236,8 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value:
+						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'k',
@@ -305,7 +309,8 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value:
+						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'sh',
@@ -1427,7 +1432,8 @@ export const NumberedList: FEArticleType = {
 	standfirst:
 		'<p>Our updated list of the top iOS and Android mobile phones – at the best prices right now</p>',
 	sectionUrl: 'technology/smartphones',
-	pageId: 'technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	pageId:
+		'technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	version: 3,
 	tags: [
 		{
@@ -1526,7 +1532,8 @@ export const NumberedList: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	webURL:
+		'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Smartphones',
@@ -1716,14 +1723,16 @@ export const NumberedList: FEArticleType = {
 		trails: [
 			{
 				url: 'https://www.theguardian.com/technology/2022/jun/07/all-smartphones-to-use-usb-c-charging-ports-from-autumn-2024-says-eu',
-				linkText:
-					'EU deal will force iPhones to use USB-C charger by 2024',
+				linkText: 'EU deal will force iPhones to use USB-C charger by 2024',
 				showByline: false,
 				byline: 'Jedidajah Otte',
-				image: 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
+				image:
+					'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
-					'460': 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=4bd688c1ee9f6054eb8aa44519759dd5',
+					'300':
+						'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
+					'460':
+						'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=4bd688c1ee9f6054eb8aa44519759dd5',
 				},
 				ageWarning: '4 months',
 				isLiveBlog: false,
@@ -1735,21 +1744,22 @@ export const NumberedList: FEArticleType = {
 					display: 'StandardDisplay',
 				},
 				webPublicationDate: '2022-06-07T18:25:06.000Z',
-				headline:
-					'EU deal will force iPhones to use USB-C charger by 2024',
+				headline: 'EU deal will force iPhones to use USB-C charger by 2024',
 				shortUrl: 'https://www.theguardian.com/p/ytt7j',
 				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2022/oct/04/eu-votes-to-force-all-phones-to-use-same-charger-by-2024',
-				linkText:
-					'EU votes to force all phones to use same charger by 2024',
+				linkText: 'EU votes to force all phones to use same charger by 2024',
 				showByline: false,
 				byline: 'Dan Milmo and agency',
-				image: 'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=c70ee134c0ee3d53b14d72fb6dfc9ed0',
+				image:
+					'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=c70ee134c0ee3d53b14d72fb6dfc9ed0',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=c70ee134c0ee3d53b14d72fb6dfc9ed0',
-					'460': 'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=460&quality=85&auto=format&fit=max&s=b11621cdb5e756be78c2d3be91c2daf8',
+					'300':
+						'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=c70ee134c0ee3d53b14d72fb6dfc9ed0',
+					'460':
+						'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=460&quality=85&auto=format&fit=max&s=b11621cdb5e756be78c2d3be91c2daf8',
 				},
 				isLiveBlog: false,
 				pillar: 'news',
@@ -1760,8 +1770,7 @@ export const NumberedList: FEArticleType = {
 					display: 'StandardDisplay',
 				},
 				webPublicationDate: '2022-10-04T15:16:18.000Z',
-				headline:
-					'EU votes to force all phones to use same charger by 2024',
+				headline: 'EU votes to force all phones to use same charger by 2024',
 				shortUrl: 'https://www.theguardian.com/p/mcnx4',
 				showQuotedHeadline: false,
 			},
@@ -1771,10 +1780,13 @@ export const NumberedList: FEArticleType = {
 					'Vodafone to reintroduce roaming fees for UK customers in Europe',
 				showByline: false,
 				byline: 'Mark Sweney',
-				image: 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
+				image:
+					'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
-					'460': 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=460&quality=85&auto=format&fit=max&s=11786a02661ffb47e5b1249dad959e16',
+					'300':
+						'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
+					'460':
+						'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=460&quality=85&auto=format&fit=max&s=11786a02661ffb47e5b1249dad959e16',
 				},
 				ageWarning: '1 year',
 				isLiveBlog: false,
@@ -1797,10 +1809,13 @@ export const NumberedList: FEArticleType = {
 					'Bug leaves iPhones vulnerable to hackers stealing email contents',
 				showByline: false,
 				byline: 'Alex Hern',
-				image: 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
+				image:
+					'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
-					'460': 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=460&quality=85&auto=format&fit=max&s=181534ce45db4426c3f6c2ddc58ab15b',
+					'300':
+						'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
+					'460':
+						'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=460&quality=85&auto=format&fit=max&s=181534ce45db4426c3f6c2ddc58ab15b',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1823,10 +1838,13 @@ export const NumberedList: FEArticleType = {
 					'Mate Xs: Huawei launches latest version of folding smartphone',
 				showByline: false,
 				byline: 'Samuel Gibbs',
-				image: 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
+				image:
+					'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
-					'460': 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=460&quality=85&auto=format&fit=max&s=90eb8b5a7156fe1906637aeb0e5a93ac',
+					'300':
+						'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
+					'460':
+						'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=460&quality=85&auto=format&fit=max&s=90eb8b5a7156fe1906637aeb0e5a93ac',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1849,10 +1867,13 @@ export const NumberedList: FEArticleType = {
 					'Samsung launches Galaxy S20 range with up to 100x zoom camera',
 				showByline: false,
 				byline: 'Samuel Gibbs Consumer technology editor',
-				image: 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
+				image:
+					'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
-					'460': 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=460&quality=85&auto=format&fit=max&s=2cbe7691e08707c0e223ccdee9d8c8b9',
+					'300':
+						'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
+					'460':
+						'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=460&quality=85&auto=format&fit=max&s=2cbe7691e08707c0e223ccdee9d8c8b9',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1871,14 +1892,16 @@ export const NumberedList: FEArticleType = {
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2020/feb/11/samsung-galaxy-z-flip-folding-screen-flip-phone-launches',
-				linkText:
-					'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
+				linkText: 'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
 				showByline: false,
 				byline: 'Samuel Gibbs Consumer technology editor',
-				image: 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
+				image:
+					'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
-					'460': 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=460&quality=85&auto=format&fit=max&s=1aa4f66d90255dacc1e2933ea77c8da3',
+					'300':
+						'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
+					'460':
+						'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=460&quality=85&auto=format&fit=max&s=1aa4f66d90255dacc1e2933ea77c8da3',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1890,8 +1913,7 @@ export const NumberedList: FEArticleType = {
 					display: 'StandardDisplay',
 				},
 				webPublicationDate: '2020-02-11T19:00:11.000Z',
-				headline:
-					'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
+				headline: 'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
 				shortUrl: 'https://www.theguardian.com/p/d9xdb',
 				showQuotedHeadline: false,
 			},
@@ -1901,10 +1923,13 @@ export const NumberedList: FEArticleType = {
 					'Google to add eye detection to Pixel 4 after privacy concerns',
 				showByline: false,
 				byline: 'Alex Hern',
-				image: 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
+				image:
+					'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
-					'460': 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=4634b91d1efaa0361ca2de743eabbd5c',
+					'300':
+						'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
+					'460':
+						'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=4634b91d1efaa0361ca2de743eabbd5c',
 				},
 				ageWarning: '3 years',
 				isLiveBlog: false,
@@ -1923,14 +1948,16 @@ export const NumberedList: FEArticleType = {
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2019/oct/02/microsoft-launches-surface-pro-x-and-previews-folding-phone',
-				linkText:
-					'Microsoft launches Surface Pro X and previews folding phone',
+				linkText: 'Microsoft launches Surface Pro X and previews folding phone',
 				showByline: false,
 				byline: 'Samuel Gibbs Consumer technology editor',
-				image: 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
+				image:
+					'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
-					'460': 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=460&quality=85&auto=format&fit=max&s=1710f18ea560ebf7a0103547985f0f6e',
+					'300':
+						'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
+					'460':
+						'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=460&quality=85&auto=format&fit=max&s=1710f18ea560ebf7a0103547985f0f6e',
 				},
 				ageWarning: '3 years',
 				isLiveBlog: false,
@@ -1942,8 +1969,7 @@ export const NumberedList: FEArticleType = {
 					display: 'StandardDisplay',
 				},
 				webPublicationDate: '2019-10-02T17:37:00.000Z',
-				headline:
-					'Microsoft launches Surface Pro X and previews folding phone',
+				headline: 'Microsoft launches Surface Pro X and previews folding phone',
 				shortUrl: 'https://www.theguardian.com/p/cechh',
 				showQuotedHeadline: false,
 			},
@@ -1953,10 +1979,13 @@ export const NumberedList: FEArticleType = {
 					'Samsung Galaxy Note 10 launch: big screens and stylus air gestures',
 				showByline: false,
 				byline: 'Samuel Gibbs Consumer technology editor',
-				image: 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
+				image:
+					'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
-					'460': 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=460&quality=85&auto=format&fit=max&s=d2b6c757a75a7f68a53a0db0f3896e05',
+					'300':
+						'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
+					'460':
+						'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=460&quality=85&auto=format&fit=max&s=d2b6c757a75a7f68a53a0db0f3896e05',
 				},
 				ageWarning: '3 years',
 				isLiveBlog: false,
@@ -7376,7 +7405,8 @@ export const NumberedList: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+			'@id':
+				'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -7424,10 +7454,12 @@ export const NumberedList: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+			'@id':
+				'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			},
 		},
 	],
@@ -7563,8 +7595,7 @@ export const NumberedList: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -7596,7 +7627,8 @@ export const NumberedList: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

@@ -67,11 +67,7 @@ const buildBrazeEpicConfig = (
 		candidate: {
 			id: 'braze-epic',
 			canShow: () =>
-				canShowBrazeEpic(
-					brazeMessages,
-					brazeArticleContext,
-					contentType,
-				),
+				canShowBrazeEpic(brazeMessages, brazeArticleContext, contentType),
 			show: (meta: any) => () =>
 				(
 					<MaybeBrazeEpic

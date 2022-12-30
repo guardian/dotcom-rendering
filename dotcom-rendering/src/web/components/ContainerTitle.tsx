@@ -109,9 +109,7 @@ export const ContainerTitle = ({
 			{showDateHeader && editionId && (
 				<>
 					<span
-						css={dateTextStyles(
-							overrides?.text.containerDate || news[400],
-						)}
+						css={dateTextStyles(overrides?.text.containerDate || news[400])}
 					>
 						{now.toLocaleDateString(locale, { weekday: 'long' })}
 					</span>
@@ -120,9 +118,7 @@ export const ContainerTitle = ({
 							css`
 								display: block;
 							`,
-							dateTextStyles(
-								overrides?.text.containerDate || news[400],
-							),
+							dateTextStyles(overrides?.text.containerDate || news[400]),
 							bottomMargin,
 						]}
 					>

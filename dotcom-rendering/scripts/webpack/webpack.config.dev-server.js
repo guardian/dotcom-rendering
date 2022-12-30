@@ -40,10 +40,7 @@ module.exports = {
 					req.hostname === (process.env.HOSTNAME || 'localhost') &&
 					req.headers.origin
 				)
-					res.setHeader(
-						'Access-Control-Allow-Origin',
-						req.headers.origin,
-					);
+					res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
 			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
@@ -63,14 +60,7 @@ module.exports = {
 
 			devServer.app.get('/', (req, res) => {
 				res.sendFile(
-					path.join(
-						__dirname,
-						'..',
-						'..',
-						'src',
-						'server',
-						'dev-index.html',
-					),
+					path.join(__dirname, '..', '..', 'src', 'server', 'dev-index.html'),
 				);
 			});
 

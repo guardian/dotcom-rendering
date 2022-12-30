@@ -22,9 +22,7 @@ const ageStyles = (
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
-		color: ${isDynamo
-			? palette.text.dynamoHeadline
-			: palette.text.cardFooter};
+		color: ${isDynamo ? palette.text.dynamoHeadline : palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */

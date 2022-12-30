@@ -268,36 +268,25 @@ export const RichLink = ({
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
-											<QuoteIcon
-												colour={palette.fill.quoteIcon}
-											/>
+											<QuoteIcon colour={palette.fill.quoteIcon} />
 										</Hide>
 										<Hide when="below" breakpoint="wide">
-											<QuoteIcon
-												colour={palette.fill.quoteIcon}
-											/>
+											<QuoteIcon colour={palette.fill.quoteIcon} />
 										</Hide>
 									</>
 								)}
 								{linkText}
 							</div>
 							{isOpinion && (
-								<div css={[byline, textColour(palette)]}>
-									{mainContributor}
-								</div>
+								<div css={[byline, textColour(palette)]}>{mainContributor}</div>
 							)}
 							{!!starRating && (
 								<div css={starWrapper}>
-									<StarRating
-										rating={starRating}
-										size="medium"
-									/>
+									<StarRating rating={starRating} size="medium" />
 								</div>
 							)}
 							{!!(isPaidContent && sponsorName) && (
-								<div css={paidForBranding}>
-									Paid for by {sponsorName}
-								</div>
+								<div css={paidForBranding}>Paid for by {sponsorName}</div>
 							)}
 						</div>
 						{!!(isOpinion && contributorImage) && (
@@ -311,13 +300,7 @@ export const RichLink = ({
 						)}
 						<div css={richLinkReadMore(palette)}>
 							<ArrowInCircle />
-							<div
-								css={
-									isLabs
-										? labsReadMoreTextStyle
-										: readMoreTextStyle
-								}
-							>
+							<div css={isLabs ? labsReadMoreTextStyle : readMoreTextStyle}>
 								{readMoreText(contentType)}
 							</div>
 						</div>

@@ -42,8 +42,7 @@ const listStyles = (format: ArticleFormat) => css`
 	background-color: ${decidePalette(format).background.keyEvent};
 
 	${from.desktop} {
-		background-color: ${decidePalette(format).background
-			.keyEventFromDesktop};
+		background-color: ${decidePalette(format).background.keyEventFromDesktop};
 	}
 `;
 

@@ -114,9 +114,7 @@ describe('dailyArticleCount', () => {
 		incrementDailyArticleCount();
 
 		// set up expected object (views for today should be 1)
-		const [expectedFirst, ...expectedRemaining] = [
-			...validDailyArticleCount,
-		];
+		const [expectedFirst, ...expectedRemaining] = [...validDailyArticleCount];
 		expectedFirst.count = 1;
 
 		const output = getDailyArticleCount();

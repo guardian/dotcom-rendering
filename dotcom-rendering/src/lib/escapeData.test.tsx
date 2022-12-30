@@ -2,8 +2,7 @@ import { escapeData, unescapeData } from './escapeData';
 
 describe('Escaping html', () => {
 	it('should escape script tags', () => {
-		const before =
-			'<script async src="//www.instagram.com/embed.js"></script>';
+		const before = '<script async src="//www.instagram.com/embed.js"></script>';
 		const after =
 			'<\\script async src="//www.instagram.com/embed.js"><\\/script>';
 

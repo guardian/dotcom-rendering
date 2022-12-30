@@ -8,21 +8,13 @@ export default {
 	title: 'Components/FixedLargeSlowXIV',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };
 
 export const Default = () => (
-	<Section
-		title="FixedLargeSlowXIV"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="FixedLargeSlowXIV" padContent={false} centralBorder="partial">
 		<FixedLargeSlowXIV trails={trails} showAge={true} />
 	</Section>
 );

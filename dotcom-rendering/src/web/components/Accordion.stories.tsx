@@ -33,16 +33,16 @@ const accordionContent = (
 			viewport to mobile, phablet or tablet in order to see the accordion.
 		</p>
 		<p css={[textStyle, hideAboveTablet]}>
-			Vaccine passports enjoy substantial support across Europe, a YouGov
-			survey suggests, as a fourth wave of infections prompts a growing
-			number of countries to impose tougher restrictions on people who
-			have not been fully vaccinated.
+			Vaccine passports enjoy substantial support across Europe, a YouGov survey
+			suggests, as a fourth wave of infections prompts a growing number of
+			countries to impose tougher restrictions on people who have not been fully
+			vaccinated.
 		</p>
 		<p css={[textStyle, hideAboveTablet]}>
-			The annual YouGov-Cambridge Globalism Project suggests majorities in
-			all 10 European countries surveyed back compulsory vaccine passes
-			for large events, while in most, more people favour than oppose
-			their use in cafes, restaurants and gyms.
+			The annual YouGov-Cambridge Globalism Project suggests majorities in all
+			10 European countries surveyed back compulsory vaccine passes for large
+			events, while in most, more people favour than oppose their use in cafes,
+			restaurants and gyms.
 		</p>
 	</>
 );

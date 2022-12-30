@@ -47,7 +47,8 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+					value:
+						'/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 				{
 					name: 'sh',
@@ -59,12 +60,7 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'k',
-					value: [
-						'newsletter-sign-up',
-						'sport',
-						'football',
-						'womensfootball',
-					],
+					value: ['newsletter-sign-up', 'sport', 'football', 'womensfootball'],
 				},
 				{
 					name: 'p',
@@ -92,7 +88,8 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+					value:
+						'/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 				{
 					name: 'sh',
@@ -104,12 +101,7 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'k',
-					value: [
-						'newsletter-sign-up',
-						'sport',
-						'football',
-						'womensfootball',
-					],
+					value: ['newsletter-sign-up', 'sport', 'football', 'womensfootball'],
 				},
 				{
 					name: 'p',
@@ -141,12 +133,7 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'k',
-					value: [
-						'newsletter-sign-up',
-						'sport',
-						'football',
-						'womensfootball',
-					],
+					value: ['newsletter-sign-up', 'sport', 'football', 'womensfootball'],
 				},
 				{
 					name: 'p',
@@ -158,7 +145,8 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+					value:
+						'/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 			],
 		},
@@ -178,7 +166,8 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+					value:
+						'/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 				{
 					name: 'sh',
@@ -190,12 +179,7 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'k',
-					value: [
-						'newsletter-sign-up',
-						'sport',
-						'football',
-						'womensfootball',
-					],
+					value: ['newsletter-sign-up', 'sport', 'football', 'womensfootball'],
 				},
 				{
 					name: 'edition',
@@ -223,7 +207,8 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+					value:
+						'/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 				{
 					name: 'sh',
@@ -239,12 +224,7 @@ export const NewsletterSignup: FEArticleType = {
 				},
 				{
 					name: 'k',
-					value: [
-						'newsletter-sign-up',
-						'sport',
-						'football',
-						'womensfootball',
-					],
+					value: ['newsletter-sign-up', 'sport', 'football', 'womensfootball'],
 				},
 				{
 					name: 'p',
@@ -1133,7 +1113,8 @@ export const NewsletterSignup: FEArticleType = {
 	standfirst:
 		'<p>No topic is too small or too big for us to cover as we deliver a weekly roundup of the wonderful world of women’s football</p>',
 	sectionUrl: 'football/football',
-	pageId: 'football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+	pageId:
+		'football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	version: 3,
 	tags: [
 		{
@@ -1188,7 +1169,8 @@ export const NewsletterSignup: FEArticleType = {
 		},
 	],
 	pillar: 'sport',
-	webURL: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+	webURL:
+		'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Football',
@@ -1700,7 +1682,8 @@ export const NewsletterSignup: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+			'@id':
+				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1748,10 +1731,12 @@ export const NewsletterSignup: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+			'@id':
+				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 			},
 		},
 	],
@@ -1887,8 +1872,7 @@ export const NewsletterSignup: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -1920,7 +1904,8 @@ export const NewsletterSignup: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

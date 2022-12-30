@@ -100,11 +100,7 @@ export const MostViewedFooterSecondTierItem = ({
 
 	return (
 		<div css={itemStyles(showRightBorder)}>
-			<a
-				css={headlineLink}
-				href={url}
-				data-link-name={trail.dataLinkName}
-			>
+			<a css={headlineLink} href={url} data-link-name={trail.dataLinkName}>
 				<Flex>
 					<div css={headlineStyles}>
 						<div css={titleStyles}>{title}</div>
@@ -125,11 +121,7 @@ export const MostViewedFooterSecondTierItem = ({
 						{!!avatarToShow && (
 							<div css={avatarContainerStyles}>
 								<div css={avatarSizeStyles}>
-									<Avatar
-										src={avatarToShow}
-										alt=""
-										format={format}
-									/>
+									<Avatar src={avatarToShow} alt="" format={format} />
 								</div>
 							</div>
 						)}

@@ -133,10 +133,7 @@ export const SubMeta = ({
 }: Props) => {
 	const sectionListItems = sections.map((link) => (
 		<li css={itemStyle} key={link.url}>
-			<a
-				css={sectionLinkStyle(pillar)}
-				href={`${guardianBaseURL}${link.url}`}
-			>
+			<a css={sectionLinkStyle(pillar)} href={`${guardianBaseURL}${link.url}`}>
 				{link.title}
 			</a>
 		</li>
@@ -174,10 +171,7 @@ export const SubMeta = ({
 			{/* TODO link to actual (non-AMP) site here. Also handle comment count behaviour. */}
 			<div css={[guardianLines(pillar), siteLinks]}>
 				{isCommentable && (
-					<a
-						css={siteLinkStyle}
-						href={`${guardianBaseURL}/${pageID}#comments`}
-					>
+					<a css={siteLinkStyle} href={`${guardianBaseURL}/${pageID}#comments`}>
 						<CommentIcon css={commentIcon} /> View comments
 					</a>
 				)}

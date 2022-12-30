@@ -45,13 +45,11 @@ describe('MostViewedList', () => {
 		).toBe(5); // Total stories in Related (*= selector contains)
 
 		expect(
-			asFragment().querySelectorAll('[data-link-name="trail | 1"]')
-				.length,
+			asFragment().querySelectorAll('[data-link-name="trail | 1"]').length,
 		).toBe(1); // 1 indexed so should start at 1
 
 		expect(
-			asFragment().querySelectorAll('[data-link-name="trail | 0"]')
-				.length,
+			asFragment().querySelectorAll('[data-link-name="trail | 0"]').length,
 		).toBe(0); // 1 indexed so should start at 1
 	});
 
@@ -86,8 +84,6 @@ describe('MostViewedList', () => {
 			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
 		);
 
-		expect(
-			getByText('Jennifer Rankin and Daniel Boffey'),
-		).toBeInTheDocument();
+		expect(getByText('Jennifer Rankin and Daniel Boffey')).toBeInTheDocument();
 	});
 });

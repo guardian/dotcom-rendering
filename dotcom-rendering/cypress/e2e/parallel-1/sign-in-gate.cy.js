@@ -139,7 +139,8 @@ describe('Sign In Gate Tests', function () {
 				{
 					onBeforeLoad: (win) => {
 						Object.defineProperty(win.navigator, 'userAgent', {
-							value: 'Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
+							value:
+								'Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
 						});
 					},
 				},

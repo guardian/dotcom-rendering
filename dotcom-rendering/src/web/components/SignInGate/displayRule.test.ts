@@ -63,11 +63,7 @@ describe('SignInGate - displayRule methods', () => {
 
 	describe('isIOS9', () => {
 		// spy on user agent to mock return value
-		const userAgentGetter = jest.spyOn(
-			window.navigator,
-			'userAgent',
-			'get',
-		);
+		const userAgentGetter = jest.spyOn(window.navigator, 'userAgent', 'get');
 
 		test('iphone ios9 is true', () => {
 			userAgentGetter.mockReturnValueOnce(

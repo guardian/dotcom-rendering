@@ -49,9 +49,7 @@ export const DividerBlockComponent = ({
 		css={[
 			baseStyles,
 			size === 'partial' ? sizePartialStyle : sizeFullStyle,
-			spaceAbove === 'loose'
-				? looseSpaceAboveStyle
-				: tightSpaceAboveStyle,
+			spaceAbove === 'loose' ? looseSpaceAboveStyle : tightSpaceAboveStyle,
 		]}
 	/>
 );

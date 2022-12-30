@@ -40,11 +40,7 @@ export const Analysis = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
+				<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 					<CardHeadline
 						headlineText={`This is how a ${size} Analysis card headline looks`}
 						format={{
@@ -140,11 +136,7 @@ export const Size = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
+				<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 					<CardHeadline
 						headlineText={`This is how a ${size} card headline looks`}
 						format={{
@@ -166,11 +158,7 @@ export const MobileSize = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
+				<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 					<CardHeadline
 						headlineText={`This is how a mobile ${size} card headline looks`}
 						format={{
@@ -278,11 +266,7 @@ export const OpinionKicker = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					showSideBorders={false}
-				>
+				<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 					<CardHeadline
 						headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
 						format={{

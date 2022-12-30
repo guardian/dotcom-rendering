@@ -26,9 +26,7 @@ export const Default = () =>
 		>
 			<InteractiveContentsBlockComponent
 				subheadingLinks={interactiveContentsBlock.subheadingLinks}
-				endDocumentElementId={
-					interactiveContentsBlock.endDocumentElementId
-				}
+				endDocumentElementId={interactiveContentsBlock.endDocumentElementId}
 			/>
 		</div>
 	) : null;

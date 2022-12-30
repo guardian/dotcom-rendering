@@ -143,9 +143,9 @@ export const YoutubeBlockComponent = ({
 								})}
 							`}
 						>
-							This video has been removed. This could be because
-							it launched early, our rights have expired, there
-							was a legal issue, or for another reason.
+							This video has been removed. This could be because it launched
+							early, our rights have expired, there was a legal issue, or for
+							another reason.
 						</p>
 					</div>
 				</div>

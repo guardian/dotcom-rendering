@@ -42,7 +42,8 @@ export const events: [
 	{
 		id: '1234',
 		blockFirstPublished: 1613762399000,
-		title: 'Kremlin: sending peacekeepers to Ukraine would be ‘reckless and extremely dangerous’',
+		title:
+			'Kremlin: sending peacekeepers to Ukraine would be ‘reckless and extremely dangerous’',
 		format,
 		isSummary: false,
 		filterKeyEvents: false,
@@ -50,7 +51,8 @@ export const events: [
 	{
 		id: '1234',
 		blockFirstPublished: 1613762399000,
-		title: 'Summary: Pentagon condemns Kremlin refusal to rule out use of nuclear weapons',
+		title:
+			'Summary: Pentagon condemns Kremlin refusal to rule out use of nuclear weapons',
 		format,
 		isSummary: true,
 		filterKeyEvents: false,

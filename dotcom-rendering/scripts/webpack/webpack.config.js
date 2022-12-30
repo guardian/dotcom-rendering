@@ -70,10 +70,7 @@ const commonConfigs = ({ platform }) => ({
 									.replace('Building', 'Building initial')
 									.replace('Completed', 'Completed initial');
 							} else {
-								message = message.replace(
-									'Building',
-									'Rebuilding',
-								);
+								message = message.replace('Building', 'Rebuilding');
 							}
 							console.log(message);
 							builds += 1;
@@ -83,10 +80,7 @@ const commonConfigs = ({ platform }) => ({
 			: // PROD plugins
 			  [
 					new BundleAnalyzerPlugin({
-						reportFilename: path.join(
-							dist,
-							`${platform}-bundles.html`,
-						),
+						reportFilename: path.join(dist, `${platform}-bundles.html`),
 						analyzerMode: 'static',
 						openAnalyzer: false,
 						logLevel: 'warn',

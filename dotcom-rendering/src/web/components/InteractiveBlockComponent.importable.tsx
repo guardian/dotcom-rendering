@@ -179,10 +179,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 					}
 					break;
 				case 'scroll-to':
-					if (
-						typeof message.x === 'number' &&
-						typeof message.y === 'number'
-					) {
+					if (typeof message.x === 'number' && typeof message.y === 'number') {
 						window.scrollTo(message.x, message.y);
 					}
 					break;

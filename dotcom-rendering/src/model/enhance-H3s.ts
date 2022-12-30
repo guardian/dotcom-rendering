@@ -19,8 +19,7 @@ const isFalseH3 = (element: TextBlockElement): element is FalseH3 => {
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
 	const containsStrongtags =
 		frag.firstElementChild.outerHTML.includes('<strong>');
-	const doesNotContainLinks =
-		!frag.firstElementChild.outerHTML.includes('<a>');
+	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes('<a>');
 	const startStrong = html.startsWith('<p><strong>');
 	const endsStrong = html.endsWith('</strong></p>');
 

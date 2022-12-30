@@ -85,18 +85,10 @@ export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 			<div css={iconContainerStyles}>
 				<ShareIcon css={iconStyles(palette)} />
 			</div>
-			<div
-				data-testid="long-share-count"
-				css={longStyles}
-				aria-hidden="true"
-			>
+			<div data-testid="long-share-count" css={longStyles} aria-hidden="true">
 				{long}
 			</div>
-			<div
-				data-testid="short-share-count"
-				css={shortStyles}
-				aria-hidden="true"
-			>
+			<div data-testid="short-share-count" css={shortStyles} aria-hidden="true">
 				{short}
 			</div>
 		</div>

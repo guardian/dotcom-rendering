@@ -50,9 +50,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 
 		const isDev =
 			window.guardian.config.page.isDev ||
-			window.location.hostname.includes(
-				process.env.HOSTNAME || 'localhost',
-			);
+			window.location.hostname.includes(process.env.HOSTNAME || 'localhost');
 
 		initCommercialMetrics({
 			pageViewId,
@@ -71,9 +69,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 				}
 			})
 			.catch((e) =>
-				console.error(
-					`Error initialising commercial metrics: ${String(e)}`,
-				),
+				console.error(`Error initialising commercial metrics: ${String(e)}`),
 			);
 	}, [ABTestAPI, adBlockerInUse, enabled]);
 

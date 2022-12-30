@@ -35,7 +35,8 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'p',
@@ -90,7 +91,8 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'p',
@@ -137,7 +139,8 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'p',
@@ -180,7 +183,8 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'edition',
@@ -231,7 +235,8 @@ export const PrintShop: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+					value:
+						'/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'p',
@@ -1096,15 +1101,15 @@ export const PrintShop: FEArticleType = {
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Art and design',
 		'article:published_time': '2020-12-17T09:07:18.000Z',
-		'article:tag':
-			'England,Football,Sport,Photography,Art and design,Culture',
+		'article:tag': 'England,Football,Sport,Photography,Art and design,Culture',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
 	standfirst:
 		'<p>The latest in a Guardian Print Shop <a href="https://guardianprintshop.com/collections/the-big-sport-picture">series</a> featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career</p>',
 	sectionUrl: 'football/england',
-	pageId: 'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+	pageId:
+		'artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	version: 3,
 	tags: [
 		{
@@ -1159,7 +1164,8 @@ export const PrintShop: FEArticleType = {
 		},
 	],
 	pillar: 'culture',
-	webURL: 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+	webURL:
+		'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	showBottomSocialButtons: true,
 	isImmersive: true,
 	sectionLabel: 'England',
@@ -1733,7 +1739,8 @@ export const PrintShop: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+			'@id':
+				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1772,8 +1779,7 @@ export const PrintShop: FEArticleType = {
 				},
 			],
 			datePublished: '2020-12-17T09:07:18.000Z',
-			headline:
-				'Buy a classic sport photograph: the immortal Bobby Moore',
+			headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
 			dateModified: '2020-12-17T14:04:58.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
@@ -1781,10 +1787,12 @@ export const PrintShop: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+			'@id':
+				'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			},
 		},
 	],
@@ -1919,8 +1927,7 @@ export const PrintShop: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -1952,7 +1959,8 @@ export const PrintShop: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

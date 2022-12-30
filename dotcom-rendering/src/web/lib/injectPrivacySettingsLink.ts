@@ -15,21 +15,17 @@ export const injectPrivacySettingsLink = (): void => {
 		if (privacyLinkListItem) {
 			getPrivacyFramework()
 				.then((framework) => {
-					const newPrivacyLink = privacyLink.cloneNode(
-						false,
-					) as Element;
+					const newPrivacyLink = privacyLink.cloneNode(false) as Element;
 
-					newPrivacyLink.setAttribute(
-						'data-link-name',
-						newPrivacyLinkName,
-					);
+					newPrivacyLink.setAttribute('data-link-name', newPrivacyLinkName);
 					newPrivacyLink.setAttribute('href', '#');
 					newPrivacyLink.innerHTML = framework.ccpa
 						? 'California resident – Do Not Sell'
 						: 'Privacy settings';
 
-					const newPrivacyLinkListItem =
-						privacyLinkListItem.cloneNode(false) as Element;
+					const newPrivacyLinkListItem = privacyLinkListItem.cloneNode(
+						false,
+					) as Element;
 
 					newPrivacyLinkListItem.appendChild(newPrivacyLink);
 
@@ -38,14 +34,9 @@ export const injectPrivacySettingsLink = (): void => {
 						newPrivacyLinkListItem,
 					);
 
-					newPrivacyLink.addEventListener(
-						'click',
-						cmp.showPrivacyManager,
-					);
+					newPrivacyLink.addEventListener('click', cmp.showPrivacyManager);
 				})
-				.catch((e) =>
-					console.error(`privacy settings - error: ${String(e)}`),
-				);
+				.catch((e) => console.error(`privacy settings - error: ${String(e)}`));
 		}
 	}
 };

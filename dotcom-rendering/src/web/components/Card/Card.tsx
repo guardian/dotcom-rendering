@@ -373,15 +373,9 @@ export const Card = ({
 							</AvatarContainer>
 						)}
 						{image.type === 'mainMedia' && (
-							<CardPicture
-								master={image.src}
-								imageSize={imageSize}
-								alt=""
-							/>
+							<CardPicture master={image.src} imageSize={imageSize} alt="" />
 						)}
-						{image.type === 'crossword' && (
-							<img src={image.src} alt="" />
-						)}
+						{image.type === 'crossword' && <img src={image.src} alt="" />}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
@@ -398,18 +392,12 @@ export const Card = ({
 							sizeOnMobile={headlineSizeOnMobile}
 							showQuotes={showQuotes}
 							kickerText={
-								format.design === ArticleDesign.LiveBlog
-									? 'Live'
-									: kickerText
+								format.design === ArticleDesign.LiveBlog ? 'Live' : kickerText
 							}
 							showPulsingDot={
-								format.design === ArticleDesign.LiveBlog ||
-								showPulsingDot
+								format.design === ArticleDesign.LiveBlog || showPulsingDot
 							}
-							showSlash={
-								format.design === ArticleDesign.LiveBlog ||
-								showSlash
-							}
+							showSlash={format.design === ArticleDesign.LiveBlog || showSlash}
 							byline={byline}
 							showByline={showByline}
 							isDynamo={isDynamo}

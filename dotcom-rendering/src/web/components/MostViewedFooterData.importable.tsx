@@ -73,14 +73,10 @@ export const MostViewedFooterData = ({
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
 				mostCommented={
-					'mostCommented' in data
-						? decideTrail(data.mostCommented)
-						: undefined
+					'mostCommented' in data ? decideTrail(data.mostCommented) : undefined
 				}
 				mostShared={
-					'mostShared' in data
-						? decideTrail(data.mostShared)
-						: undefined
+					'mostShared' in data ? decideTrail(data.mostShared) : undefined
 				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}

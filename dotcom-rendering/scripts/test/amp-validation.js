@@ -86,9 +86,7 @@ amphtmlValidator.getInstance().then((validator) => {
 							if (error.specUrl !== null) {
 								msg += ` (see ${error.specUrl})`;
 							}
-							(error.severity === 'ERROR'
-								? console.error
-								: console.warn)(msg);
+							(error.severity === 'ERROR' ? console.error : console.warn)(msg);
 						}
 						throw new Error('Failed AMP Validation');
 					}

@@ -55,7 +55,8 @@ export const Interview: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+					value:
+						'/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 				},
 				{
 					name: 'k',
@@ -91,7 +92,8 @@ export const Interview: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+					value:
+						'/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 				},
 				{
 					name: 'k',
@@ -143,7 +145,8 @@ export const Interview: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+					value:
+						'/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 				},
 				{
 					name: 'k',
@@ -183,7 +186,8 @@ export const Interview: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+					value:
+						'/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 				},
 				{
 					name: 'k',
@@ -227,7 +231,8 @@ export const Interview: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+					value:
+						'/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 				},
 				{
 					name: 'edition',
@@ -1336,7 +1341,8 @@ export const Interview: FEArticleType = {
 	standfirst:
 		'<p>The first model to wear a hijab on the cover of Vogue, the first to wear a burkini in Sports Illustrated… Halima Aden is used to breaking barriers. Here she talks about shattering stereotypes and using fashion as a force for change</p>',
 	sectionUrl: 'fashion/models',
-	pageId: 'global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+	pageId:
+		'global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 	version: 3,
 	tags: [
 		{
@@ -1405,7 +1411,8 @@ export const Interview: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+	webURL:
+		'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Models',
@@ -2605,8 +2612,7 @@ export const Interview: FEArticleType = {
 					data: {
 						copyright: '2018 Getty Images',
 						alt: 'Listen up: speaking at a Teen Vogue summit in 2018.',
-						caption:
-							'Listen up: speaking at a Teen Vogue summit in 2018.',
+						caption: 'Listen up: speaking at a Teen Vogue summit in 2018.',
 						credit: 'Photograph: Cindy Ord/Getty Images',
 					},
 					displayCredit: true,
@@ -3570,7 +3576,8 @@ export const Interview: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+			'@id':
+				'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -3618,10 +3625,12 @@ export const Interview: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+			'@id':
+				'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 			},
 		},
 	],
@@ -3757,8 +3766,7 @@ export const Interview: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -3790,7 +3798,8 @@ export const Interview: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

@@ -125,10 +125,7 @@ function decideLogo(branding: BrandingType, format: ArticleFormat) {
 						<img
 							width={branding.logo.dimensions.width}
 							height={branding.logo.dimensions.height}
-							src={
-								branding.logoForDarkBackground?.src ??
-								branding.logo.src
-							}
+							src={branding.logoForDarkBackground?.src ?? branding.logo.src}
 							alt={branding.sponsorName}
 						/>
 					</Hide>
@@ -167,9 +164,7 @@ export const Branding = ({ branding, palette, format }: Props) => {
 
 	return (
 		<div css={brandingStyle}>
-			<div css={brandingLabelStyle(palette, format)}>
-				{branding.logo.label}
-			</div>
+			<div css={brandingLabelStyle(palette, format)}>{branding.logo.label}</div>
 			<div css={brandingLogoStyle}>
 				<a
 					href={branding.logo.link}
@@ -183,10 +178,7 @@ export const Branding = ({ branding, palette, format }: Props) => {
 				</a>
 			</div>
 
-			<a
-				href={branding.aboutThisLink}
-				css={brandingAboutLink(palette, format)}
-			>
+			<a href={branding.aboutThisLink} css={brandingAboutLink(palette, format)}>
 				About this content
 			</a>
 		</div>

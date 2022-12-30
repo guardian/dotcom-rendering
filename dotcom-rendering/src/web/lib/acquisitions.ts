@@ -43,9 +43,7 @@ export const addTrackingCodesToUrl = ({
 			acquisitionData: JSON.stringify(acquisitionData),
 		};
 
-		return `${base}${base.includes('?') ? '&' : '?'}${constructQuery(
-			params,
-		)}`;
+		return `${base}${base.includes('?') ? '&' : '?'}${constructQuery(params)}`;
 	}
 
 	return base;

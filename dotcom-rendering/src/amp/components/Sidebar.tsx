@@ -212,11 +212,7 @@ export const Sidebar = () => {
 			`;
 
 				return (
-					<amp-sidebar
-						class={sidebarStyles}
-						layout="nodisplay"
-						id="sidebar1"
-					>
+					<amp-sidebar class={sidebarStyles} layout="nodisplay" id="sidebar1">
 						<amp-list
 							layout="fill"
 							src="https://amp.theguardian.com/editionalised-nav.json"

@@ -75,9 +75,7 @@ describe('Elements', function () {
 						// hopefully it shows some context for where the problem comes from
 						// but you probably are going to want to be running Cypress locally
 						cy.log(
-							`At ${$el.outerWidth()}, ${
-								$el[0].classList[0]
-							} in parent ${
+							`At ${$el.outerWidth()}, ${$el[0].classList[0]} in parent ${
 								$el[0].parentElement.classList[0]
 							} is wider than ${docWidth}`,
 						);
@@ -158,9 +156,7 @@ describe('Elements', function () {
 
 			const getIframeBody = () => {
 				return cy
-					.get(
-						'[data-cypress="interactive-element-pa%20county%20by%20county"]',
-					)
+					.get('[data-cypress="interactive-element-pa%20county%20by%20county"]')
 					.scrollIntoView({
 						duration: 300,
 						offset: { top: -100, left: 0 },

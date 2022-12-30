@@ -78,8 +78,7 @@ const hasForwardBuffer = (
 ): boolean => {
 	const forwardElements = elements.slice(index + 1, elements.length);
 	const meetsThreshold =
-		getLengthOfFollowingTextElements(forwardElements) >=
-		NONTEXT_BUFFER_FORWARD;
+		getLengthOfFollowingTextElements(forwardElements) >= NONTEXT_BUFFER_FORWARD;
 	const noForwardsEmbeds =
 		forwardElements.filter((e) => isTextElement(e.element)).length ===
 		forwardElements.length;
@@ -88,9 +87,7 @@ const hasForwardBuffer = (
 
 	const neighbour = elements[index];
 
-	const neighbourSuitable = neighbour
-		? suitableAdNeighbour(neighbour)
-		: false;
+	const neighbourSuitable = neighbour ? suitableAdNeighbour(neighbour) : false;
 	return enoughCharsForward && neighbourSuitable;
 };
 

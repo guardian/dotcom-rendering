@@ -295,17 +295,15 @@ export const SignInGateFakeSocial = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={[heading, bodyPadding]}>
-				You need to register to keep reading
-			</h1>
+			<h1 css={[heading, bodyPadding]}>You need to register to keep reading</h1>
 			<h2 css={[bodySeparator, bodyBold, bodyPadding]}>
 				It’s still free to read - this is not a paywall
 			</h2>
 			<p css={[bodyText, bodyPadding]}>
-				We’re committed to keep our quality reporting open. By
-				registering and providing us with insight into your preferences,
-				you’re helping us to engage with you more deeply, and that allow
-				us to keep our journalism free for all.
+				We’re committed to keep our quality reporting open. By registering and
+				providing us with insight into your preferences, you’re helping us to
+				engage with you more deeply, and that allow us to keep our journalism
+				free for all.
 			</p>
 			<p css={[bodyText, bodyPadding]}>
 				You’ll always be able to control your own&nbsp;
@@ -365,9 +363,7 @@ export const SignInGateFakeSocial = ({
 					Sign In
 				</Link>
 			</p>
-			<div css={[separator, separatorText, showMobile]}>
-				or continue with
-			</div>
+			<div css={[separator, separatorText, showMobile]}>or continue with</div>
 			<div
 				css={[
 					bodyBold,

@@ -66,9 +66,7 @@ type BylineMetaProps = {
 };
 
 const BylineMeta = ({ articleData, pillar }: BylineMetaProps) => {
-	const contributorTag = articleData.tags.find(
-		(t) => t.type === 'Contributor',
-	);
+	const contributorTag = articleData.tags.find((t) => t.type === 'Contributor');
 	const contributorCount = articleData.tags.filter(
 		(t) => t.type === 'Contributor',
 	).length;
@@ -81,12 +79,7 @@ const BylineMeta = ({ articleData, pillar }: BylineMetaProps) => {
 
 	return (
 		<div css={bylineWrapper}>
-			<div
-				css={[
-					bylineStyle(pillar),
-					!shouldShowBylineImage && bottomPadding,
-				]}
-			>
+			<div css={[bylineStyle(pillar), !shouldShowBylineImage && bottomPadding]}>
 				<Byline
 					byline={articleData.byline}
 					tags={articleData.tags}
@@ -142,10 +135,7 @@ export const TopMetaOpinion = ({
 			<Standfirst text={articleData.standfirst} pillar={pillar} />
 
 			<TopMetaExtras
-				sharingUrls={getSharingUrls(
-					articleData.pageId,
-					articleData.webTitle,
-				)}
+				sharingUrls={getSharingUrls(articleData.pageId, articleData.webTitle)}
 				pillar={pillar}
 				ageWarning={getAgeWarning(
 					articleData.tags,

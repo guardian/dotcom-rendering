@@ -44,44 +44,32 @@ const applyArithmetic = (elements: CAPIElement[]): CAPIElement[] =>
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
 				return {
 					...element,
-					html: element.html.replaceAll(
-						RECIPE_ELEMENTS,
-						(recipeElement) => {
-							const [match] =
-								recipeElement.matchAll(RECIPE_ELEMENTS);
+					html: element.html.replaceAll(RECIPE_ELEMENTS, (recipeElement) => {
+						const [match] = recipeElement.matchAll(RECIPE_ELEMENTS);
 
-							if (isUndefined(match)) {
-								return `<gu-recipe data-value="${recipeElement}" serves>${recipeElement}</gu-recipe>`;
-							}
+						if (isUndefined(match)) {
+							return `<gu-recipe data-value="${recipeElement}" serves>${recipeElement}</gu-recipe>`;
+						}
 
-							const { groups } = match;
+						const { groups } = match;
 
-							if (isConstant(groups?.unit)) return recipeElement;
+						if (isConstant(groups?.unit)) return recipeElement;
 
-							const attrs = Object.entries(groups ?? {})
-								.map(([key, value]) => {
-									const [numerator, denominator] = value
-										.split('/')
-										.map(parseFloat);
+						const attrs = Object.entries(groups ?? {})
+							.map(([key, value]) => {
+								const [numerator, denominator] = value
+									.split('/')
+									.map(parseFloat);
 
-									if (
-										key === 'value' &&
-										numerator &&
-										denominator
-									) {
-										return `data-value="${
-											numerator / denominator
-										}"`;
-									}
-									return `data-${key}="${
-										fractions.get(value) ?? value
-									}"`;
-								})
-								.join(' ');
+								if (key === 'value' && numerator && denominator) {
+									return `data-value="${numerator / denominator}"`;
+								}
+								return `data-${key}="${fractions.get(value) ?? value}"`;
+							})
+							.join(' ');
 
-							return `<gu-recipe ${attrs} >${recipeElement}</gu-recipe>`;
-						},
-					),
+						return `<gu-recipe ${attrs} >${recipeElement}</gu-recipe>`;
+					}),
 				};
 
 			default:

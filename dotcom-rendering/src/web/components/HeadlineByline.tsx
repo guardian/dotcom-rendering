@@ -161,11 +161,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				<div css={immersiveStyles(format)}>
 					by{' '}
 					<span css={immersiveLinkStyles(palette, format)}>
-						<BylineLink
-							byline={byline}
-							tags={tags}
-							format={format}
-						/>
+						<BylineLink byline={byline} tags={tags} format={format} />
 					</span>
 				</div>
 			);
@@ -178,11 +174,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div css={wrapperStyles}>
 							<div css={yellowBoxStyles(format)}>
-								<BylineLink
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
+								<BylineLink byline={byline} tags={tags} format={format} />
 							</div>
 						</div>
 					);
@@ -197,28 +189,15 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							]}
 						>
 							<div css={opinionStyles(palette, format)}>
-								<BylineLink
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
+								<BylineLink byline={byline} tags={tags} format={format} />
 							</div>
 						</div>
 					);
 				case ArticleDesign.Analysis:
 					return (
 						<div css={opinionWrapperStyles}>
-							<div
-								css={analysisStyles(
-									palette,
-									hasSingleContributor,
-								)}
-							>
-								<BylineLink
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
+							<div css={analysisStyles(palette, hasSingleContributor)}>
+								<BylineLink byline={byline} tags={tags} format={format} />
 							</div>
 						</div>
 					);

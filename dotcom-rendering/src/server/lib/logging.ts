@@ -25,9 +25,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
-	const data = logEvent.data[0] as unknown as
-		| Record<string, unknown>
-		| string;
+	const data = logEvent.data[0] as unknown as Record<string, unknown> | string;
 
 	if (typeof data === 'string') {
 		return {

@@ -26,9 +26,7 @@ export const BrazeBannerComponent = (
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -47,15 +45,10 @@ export const BrazeBannerComponent = (
 			<BrazeMessage
 				componentName={args.componentName}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -95,9 +88,7 @@ export const BrazeAppBannerComponent = (
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -113,15 +104,10 @@ export const BrazeAppBannerComponent = (
 			<BrazeMessage
 				componentName={args.componentName}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -156,9 +142,7 @@ export const BrazeDigitalSubscriberAppBannerComponent = (
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -172,15 +156,10 @@ export const BrazeDigitalSubscriberAppBannerComponent = (
 			<BrazeMessage
 				componentName={args.componentName}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>

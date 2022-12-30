@@ -52,11 +52,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
-						<LiveLayout
-							CAPIArticle={CAPIArticle}
-							NAV={NAV}
-							format={format}
-						/>
+						<LiveLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
@@ -101,11 +97,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
-						<LiveLayout
-							CAPIArticle={CAPIArticle}
-							NAV={NAV}
-							format={format}
-						/>
+						<LiveLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:

@@ -36,9 +36,7 @@ export const doHydration = async (
 			const importDuration = importEnd();
 			const clientOnly = element.getAttribute('clientOnly') === 'true';
 
-			const { start: islandStart, end: islandEnd } = initPerf(
-				`island-${name}`,
-			);
+			const { start: islandStart, end: islandEnd } = initPerf(`island-${name}`);
 			islandStart();
 
 			if (clientOnly) {

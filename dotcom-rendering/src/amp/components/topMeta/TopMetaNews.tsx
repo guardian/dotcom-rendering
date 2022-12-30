@@ -113,10 +113,7 @@ export const TopMetaNews = ({
 			</div>
 
 			<TopMetaExtras
-				sharingUrls={getSharingUrls(
-					articleData.pageId,
-					articleData.webTitle,
-				)}
+				sharingUrls={getSharingUrls(articleData.pageId, articleData.webTitle)}
 				pillar={pillar}
 				ageWarning={getAgeWarning(
 					articleData.tags,

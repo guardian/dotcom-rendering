@@ -69,9 +69,7 @@ export const Caption = ({
 			{children}
 			{!!captionText && (
 				<>
-					<figcaption
-						css={[captionStyle, padCaption && captionPadding]}
-					>
+					<figcaption css={[captionStyle, padCaption && captionPadding]}>
 						<span css={iconStyle}>
 							<TriangleIcon />
 						</span>

@@ -1,8 +1,7 @@
 import { ArticlePillar, ArticleSpecial, isString } from '@guardian/libs';
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {
-	const themeName =
-		ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
+	const themeName = ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
 	if (!themeName) throw new Error('Unknown theme');
 	return themeName;
 };

@@ -114,8 +114,7 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 	)
 		return palette.specialReportAlt[100];
 
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return WHITE;
@@ -185,8 +184,7 @@ const textByline = (format: ArticleFormat): string => {
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
@@ -238,8 +236,7 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 
@@ -296,8 +293,7 @@ const textLastUpdated = (format: ArticleFormat): string => {
 
 const textTwitterHandle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
 
@@ -311,8 +307,7 @@ const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 };
 
 const textCaption = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[100];
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.LiveBlog &&
@@ -331,8 +326,7 @@ const textCaption = (format: ArticleFormat): string => {
 };
 
 const textCaptionLink = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -347,8 +341,7 @@ const textCaptionLink = (format: ArticleFormat): string => {
 
 const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[100];
 	if (
 		format.design === ArticleDesign.DeadBlog ||
 		format.design === ArticleDesign.LiveBlog
@@ -367,8 +360,7 @@ const textSubMeta = (format: ArticleFormat): string => {
 
 const textSubMetaLabel = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.LiveBlog &&
@@ -380,15 +372,13 @@ const textSubMetaLabel = (format: ArticleFormat): string => {
 
 const textSubMetaLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	return text.supporting;
 };
 
 const textSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[100];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -442,8 +432,7 @@ const textArticleLink = (format: ArticleFormat): string => {
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -546,8 +535,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].dark;
 		}
 	}
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[400];
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
@@ -616,8 +604,7 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[100];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -669,8 +656,7 @@ const textCardStandfirst = textCardHeadline;
 
 /** same as textByline except for SpecialReport */
 const textCardByline = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[700];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[700];
 
 	return textByline(format);
 };
@@ -789,8 +775,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		else return news[800];
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[800]; // Note, check theme rather than design here
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[800]; // Note, check theme rather than design here
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[800];
@@ -856,8 +841,7 @@ const backgroundAvatar = (format: ArticleFormat): string => {
 const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[700];
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -918,8 +902,7 @@ const backgroundHeadlineByline = (format: ArticleFormat): string => {
 
 const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -1088,8 +1071,7 @@ const fillCommentCount = (format: ArticleFormat): string => {
 	)
 		return neutral[46];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[100];
@@ -1159,8 +1141,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 		return BLACK;
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -1348,8 +1329,7 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[300];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -1382,8 +1362,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 				return news[600];
 		}
 	}
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[400];
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
@@ -1483,8 +1462,7 @@ const backgroundUnderline = (format: ArticleFormat): string =>
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReport) return specialReport[100];
 
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
@@ -1527,9 +1505,7 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 const textRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
+			return format.design === ArticleDesign.Analysis ? news[300] : news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1575,9 +1551,7 @@ const hoverStandfirstLink = (format: ArticleFormat): string => {
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
+			return format.design === ArticleDesign.Analysis ? news[300] : news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -2044,14 +2018,12 @@ export const decidePalette = (
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline:
-				overrides?.text.cardHeadline ?? textCardHeadline(format),
+			cardHeadline: overrides?.text.cardHeadline ?? textCardHeadline(format),
 			dynamoHeadline:
 				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
 			cardByline: overrides?.text.cardByline ?? textCardByline(format),
 			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
-			dynamoKicker:
-				overrides?.text.dynamoKicker ?? textCardKicker(format),
+			dynamoKicker: overrides?.text.dynamoKicker ?? textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),

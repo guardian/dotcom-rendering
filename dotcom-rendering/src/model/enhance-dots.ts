@@ -6,8 +6,7 @@ const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element, i) => {
 		if (
-			element._type ===
-				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			element._type === 'model.dotcomrendering.pageElements.TextBlockElement' &&
 			element.html.includes('•')
 		) {
 			if (elements.length - 1 === i) {

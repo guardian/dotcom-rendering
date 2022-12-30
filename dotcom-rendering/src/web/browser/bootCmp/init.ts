@@ -44,13 +44,10 @@ const init = async (): Promise<void> => {
 	const { pageViewId } = window.guardian.config.ophan;
 
 	// Track when CMP will show with GA
-	cmp.willShowPrivacyMessage()
+	cmp
+		.willShowPrivacyMessage()
 		.then((willShow) => {
-			trackPerformance(
-				'consent',
-				'acquired',
-				willShow ? 'new' : 'existing',
-			);
+			trackPerformance('consent', 'acquired', willShow ? 'new' : 'existing');
 		})
 		.catch((e) =>
 			log('dotcom', `CMP willShowPrivacyMessage - error: ${String(e)}`),
@@ -81,11 +78,7 @@ const init = async (): Promise<void> => {
 			if (consentState.tcfv2) {
 				const consentUUID = getCookie({ name: 'consentUUID' }) || '';
 				const consentString = consentState.tcfv2.tcString;
-				return [
-					'01:TCF.v2',
-					`02:${consentUUID}`,
-					`03:${consentString}`,
-				];
+				return ['01:TCF.v2', `02:${consentUUID}`, `03:${consentString}`];
 			}
 			if (consentState.ccpa) {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
@@ -94,10 +87,8 @@ const init = async (): Promise<void> => {
 			}
 			if (consentState.aus) {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
-				const consentStatus =
-					getCookie({ name: 'consentStatus' }) || '';
-				const personalisedAdvertising = consentState.aus
-					.personalisedAdvertising
+				const consentStatus = getCookie({ name: 'consentStatus' }) || '';
+				const personalisedAdvertising = consentState.aus.personalisedAdvertising
 					? 'true'
 					: 'false';
 				return [
@@ -126,10 +117,7 @@ const init = async (): Promise<void> => {
 
 		// Check if we have consent for GA so that if the reader removes consent for tracking we
 		// remove ga from the page
-		const consentGivenForGA = getConsentFor(
-			'google-analytics',
-			consentState,
-		);
+		const consentGivenForGA = getConsentFor('google-analytics', consentState);
 		if (consentGivenForGA) {
 			Promise.all([
 				loadScript('https://www.google-analytics.com/analytics.js'),

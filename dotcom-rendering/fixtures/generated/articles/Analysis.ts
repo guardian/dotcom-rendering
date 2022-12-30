@@ -58,7 +58,8 @@ export const Analysis: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 				},
 				{
 					name: 'su',
@@ -105,7 +106,8 @@ export const Analysis: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 				},
 				{
 					name: 'su',
@@ -152,7 +154,8 @@ export const Analysis: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 				},
 				{
 					name: 'su',
@@ -199,7 +202,8 @@ export const Analysis: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 				},
 				{
 					name: 'su',
@@ -246,7 +250,8 @@ export const Analysis: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+					value:
+						'/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 				},
 				{
 					name: 'su',
@@ -1160,15 +1165,15 @@ export const Analysis: FEArticleType = {
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'World news',
 		'article:published_time': '2020-02-10T12:31:25.000Z',
-		'article:tag':
-			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+		'article:tag': 'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
 	standfirst:
 		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
 	sectionUrl: 'world/ireland',
-	pageId: 'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	pageId:
+		'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	version: 3,
 	tags: [
 		{
@@ -1248,7 +1253,8 @@ export const Analysis: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	webURL:
+		'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Ireland',
@@ -1443,10 +1449,13 @@ export const Analysis: FEArticleType = {
 					'Micheál Martin becomes Irish taoiseach in historic coalition',
 				showByline: false,
 				byline: 'Molly Blackall and agencies',
-				image: 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+				image:
+					'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
-					'460': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
+					'300':
+						'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+					'460':
+						'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1469,10 +1478,13 @@ export const Analysis: FEArticleType = {
 					'Ireland to form new government after Green party votes for coalition',
 				showByline: false,
 				byline: 'PA Media',
-				image: 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+				image:
+					'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
-					'460': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
+					'300':
+						'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+					'460':
+						'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1495,10 +1507,13 @@ export const Analysis: FEArticleType = {
 					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+				image:
+					'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
-					'460': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
+					'300':
+						'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+					'460':
+						'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1521,10 +1536,13 @@ export const Analysis: FEArticleType = {
 					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+				image:
+					'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
-					'460': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
+					'300':
+						'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+					'460':
+						'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1547,10 +1565,13 @@ export const Analysis: FEArticleType = {
 					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+				image:
+					'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
-					'460': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
+					'300':
+						'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+					'460':
+						'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1573,10 +1594,13 @@ export const Analysis: FEArticleType = {
 					'Micheál Martin faces a battle of conscience to form Irish government',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+				image:
+					'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
-					'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
+					'300':
+						'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+					'460':
+						'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1595,14 +1619,16 @@ export const Analysis: FEArticleType = {
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
-				linkText:
-					'Varadkar resigns as Irish government enters stalemate',
+				linkText: 'Varadkar resigns as Irish government enters stalemate',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+				image:
+					'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
-					'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
+					'300':
+						'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+					'460':
+						'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1614,8 +1640,7 @@ export const Analysis: FEArticleType = {
 					display: 'StandardDisplay',
 				},
 				webPublicationDate: '2020-02-20T23:28:27.000Z',
-				headline:
-					'Varadkar resigns as Irish government enters stalemate',
+				headline: 'Varadkar resigns as Irish government enters stalemate',
 				shortUrl: 'https://www.theguardian.com/p/dayq6',
 				showQuotedHeadline: false,
 			},
@@ -1625,10 +1650,13 @@ export const Analysis: FEArticleType = {
 					'Varadkar prepares to go into opposition as deadlock continues',
 				showByline: false,
 				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+				image:
+					'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
-					'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
+					'300':
+						'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+					'460':
+						'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
 				},
 				ageWarning: '2 years',
 				isLiveBlog: false,
@@ -1651,10 +1679,13 @@ export const Analysis: FEArticleType = {
 					'Ireland’s shock poll result was a vote against the success of globalisation | Fintan O’Toole',
 				showByline: true,
 				byline: 'Fintan O’Toole',
-				image: 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+				image:
+					'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
 				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
-					'460': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
+					'300':
+						'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+					'460':
+						'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
 				},
 				isLiveBlog: false,
 				pillar: 'opinion',
@@ -1746,8 +1777,7 @@ export const Analysis: FEArticleType = {
 				],
 			},
 			data: {
-				copyright:
-					'Copyright 2020 The Associated Press. All rights reserved.',
+				copyright: 'Copyright 2020 The Associated Press. All rights reserved.',
 				alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
 				caption:
 					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
@@ -2078,7 +2108,8 @@ export const Analysis: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'@id':
+				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2125,10 +2156,12 @@ export const Analysis: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'@id':
+				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 			},
 		},
 	],
@@ -2263,8 +2296,7 @@ export const Analysis: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2296,7 +2328,8 @@ export const Analysis: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

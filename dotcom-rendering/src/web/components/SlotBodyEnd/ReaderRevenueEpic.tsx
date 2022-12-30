@@ -79,12 +79,8 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		isMinuteArticle: data.isMinuteArticle,
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
-		showSupportMessaging: !shouldHideSupportMessaging(
-			data.isSignedIn || false,
-		),
-		isRecurringContributor: isRecurringContributor(
-			data.isSignedIn || false,
-		),
+		showSupportMessaging: !shouldHideSupportMessaging(data.isSignedIn || false),
+		isRecurringContributor: isRecurringContributor(data.isSignedIn || false),
 		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
@@ -93,9 +89,7 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		countryCode: data.countryCode,
 		modulesVersion: MODULES_VERSION,
 		url: window.location.origin + window.location.pathname,
-		browserId: (await hasCmpConsentForBrowserId())
-			? data.browserId
-			: undefined,
+		browserId: (await hasCmpConsentForBrowserId()) ? data.browserId : undefined,
 		isSignedIn: data.isSignedIn,
 	},
 });
@@ -179,10 +173,7 @@ export const ReaderRevenueEpic = ({
 						: 'Unknown error';
 
 				console.log(msg);
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'rr-epic',
-				);
+				window.guardian.modules.sentry.reportError(new Error(msg), 'rr-epic');
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

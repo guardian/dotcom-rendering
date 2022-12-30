@@ -92,11 +92,7 @@ export const CommentCount = ({
 			data-cy="comment-counts"
 			value={`${long} comments on this article`}
 		>
-			<a
-				href="#comments"
-				css={linkStyles}
-				aria-label={`${short} Comments`}
-			>
+			<a href="#comments" css={linkStyles} aria-label={`${short} Comments`}>
 				<div css={iconContainerStyles}>
 					<CommentIcon css={iconStyles(palette)} />
 				</div>

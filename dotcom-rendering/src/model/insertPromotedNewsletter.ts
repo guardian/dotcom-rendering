@@ -220,11 +220,7 @@ export const insertPromotedNewsletter = (
 			return blocks.map((block: Block) => {
 				return {
 					...block,
-					elements: tryToInsert(
-						promotedNewsletter,
-						block.elements,
-						block.id,
-					),
+					elements: tryToInsert(promotedNewsletter, block.elements, block.id),
 				};
 			});
 		default:

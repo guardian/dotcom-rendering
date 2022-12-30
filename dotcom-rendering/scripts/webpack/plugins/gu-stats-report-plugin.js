@@ -44,8 +44,7 @@ class GuStatsReportPlugin {
 
 	fetchGitBranch() {
 		exec('git branch --show-current', (err, stdout) => {
-			if (err)
-				return this.logger.error('Failed to get current git branch');
+			if (err) return this.logger.error('Failed to get current git branch');
 			this.gitBranch = stdout.trim();
 		});
 	}
@@ -67,9 +66,7 @@ class GuStatsReportPlugin {
 			this.buildCount += 1;
 
 			if (!this.isValidConfig)
-				return this.logger.error(
-					'Unable to report stats - invalid config',
-				);
+				return this.logger.error('Unable to report stats - invalid config');
 
 			const URL = 'https://logs.guardianapis.com/log';
 			// @ts-ignore -- the type declaration isn’t playing nice
@@ -121,17 +118,13 @@ class GuStatsReportPlugin {
 						{
 							name: 'buildTime',
 							value:
-								stats.compilation.endTime -
-									stats.compilation.startTime || 0,
+								stats.compilation.endTime - stats.compilation.startTime || 0,
 						},
 						{
 							name: 'memoryUsageKb',
 							// Memory usage in kb to 2dp
 							// Why use RSS? https://stackoverflow.com/questions/12023359/what-do-the-return-values-of-node-js-process-memoryusage-stand-for
-							value:
-								Math.round(
-									(process.memoryUsage().rss / 1024) * 100,
-								) / 100,
+							value: Math.round((process.memoryUsage().rss / 1024) * 100) / 100,
 						},
 					],
 				}),

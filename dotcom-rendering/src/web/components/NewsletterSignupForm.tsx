@@ -59,11 +59,7 @@ export const NewsletterSignupForm = ({ newsletterId }: Props) => (
 					cssOverrides={textInputStyles}
 				/>
 			</div>
-			<Button
-				size="small"
-				type="submit"
-				cssOverrides={buttonCssOverrides}
-			>
+			<Button size="small" type="submit" cssOverrides={buttonCssOverrides}>
 				Sign up
 			</Button>
 		</div>

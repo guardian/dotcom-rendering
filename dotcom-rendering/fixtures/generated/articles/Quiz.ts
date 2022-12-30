@@ -51,7 +51,8 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value:
+						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
@@ -99,7 +100,8 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value:
+						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
@@ -167,7 +169,8 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value:
+						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 			],
 		},
@@ -191,7 +194,8 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value:
+						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
@@ -239,7 +243,8 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value:
+						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
@@ -1142,7 +1147,8 @@ export const Quiz: FEArticleType = {
 	standfirst:
 		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	sectionUrl: 'football/football',
-	pageId: 'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+	pageId:
+		'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	version: 3,
 	tags: [
 		{
@@ -1189,7 +1195,8 @@ export const Quiz: FEArticleType = {
 		},
 	],
 	pillar: 'sport',
-	webURL: 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+	webURL:
+		'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Football',
@@ -1451,7 +1458,8 @@ export const Quiz: FEArticleType = {
 				alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 				caption:
 					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				credit:
+					'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
 			},
 			displayCredit: true,
 			role: 'showcase',
@@ -2142,113 +2150,97 @@ export const Quiz: FEArticleType = {
 						{
 							id: 'f878916e-08c0-4a55-9d77-8da45d37162c',
 							title: 'Flawless',
-							shareText:
-								"I scored 15/15 in the Guardian's football quiz",
+							shareText: "I scored 15/15 in the Guardian's football quiz",
 							minScore: 15,
 						},
 						{
 							id: 'a60f15e7-28cc-4000-baab-ca84014cf989',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 0/15 in the Guardian's football quiz",
+							shareText: "I scored 0/15 in the Guardian's football quiz",
 							minScore: 0,
 						},
 						{
 							id: '5a8fa509-b8b9-4125-b6b3-2ba2431e949d',
 							title: 'A superb score',
-							shareText:
-								"I scored 14/15 in the Guardian's football quiz",
+							shareText: "I scored 14/15 in the Guardian's football quiz",
 							minScore: 14,
 						},
 						{
 							id: '797bd9e1-3891-48b9-9e3d-ceb824c1d9b9',
 							title: 'A superb score',
-							shareText:
-								"I scored 13/15 in the Guardian's football quiz",
+							shareText: "I scored 13/15 in the Guardian's football quiz",
 							minScore: 13,
 						},
 						{
 							id: '73409b4c-cff9-401a-a5b4-8beaca81b5c3',
 							title: 'A superb score',
-							shareText:
-								"I scored 12/15 in the Guardian's football quiz",
+							shareText: "I scored 12/15 in the Guardian's football quiz",
 							minScore: 12,
 						},
 						{
 							id: '4c85e76b-e33f-45e2-8652-a69aa5bf742f',
 							title: 'A superb score',
-							shareText:
-								"I scored 11/15 in the Guardian's football quiz",
+							shareText: "I scored 11/15 in the Guardian's football quiz",
 							minScore: 11,
 						},
 						{
 							id: 'f612ace8-c9cc-4811-b108-7d4a09dd1441',
 							title: 'A superb score',
-							shareText:
-								"I scored 10/15 in the Guardian's football quiz",
+							shareText: "I scored 10/15 in the Guardian's football quiz",
 							minScore: 10,
 						},
 						{
 							id: 'fd5d253e-ad07-42cc-b22d-50ec263ee724',
 							title: 'A fine score',
-							shareText:
-								"I scored 9/15 in the Guardian's football quiz",
+							shareText: "I scored 9/15 in the Guardian's football quiz",
 							minScore: 9,
 						},
 						{
 							id: 'bd399a69-50d3-491f-baa2-fb6eccdbfd6f',
 							title: 'A fine score',
-							shareText:
-								"I scored 8/15 in the Guardian's football quiz",
+							shareText: "I scored 8/15 in the Guardian's football quiz",
 							minScore: 8,
 						},
 						{
 							id: '6e52b1d3-f700-48b9-9798-00ae293d1ac0',
 							title: 'A fine score',
-							shareText:
-								"I scored 7/15 in the Guardian's football quiz",
+							shareText: "I scored 7/15 in the Guardian's football quiz",
 							minScore: 7,
 						},
 						{
 							id: 'a857f84e-8e79-4edb-a0c5-87876809bdfc',
 							title: 'Nice work',
-							shareText:
-								"I scored 6/15 in the Guardian's football quiz",
+							shareText: "I scored 6/15 in the Guardian's football quiz",
 							minScore: 6,
 						},
 						{
 							id: 'a8eee0e2-ca1f-43cb-9956-22ae666b997f',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 5/15 in the Guardian's football quiz",
+							shareText: "I scored 5/15 in the Guardian's football quiz",
 							minScore: 5,
 						},
 						{
 							id: '5469d385-ecbd-4886-a13a-ccf04c6b4aa0',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 4/15 in the Guardian's football quiz",
+							shareText: "I scored 4/15 in the Guardian's football quiz",
 							minScore: 4,
 						},
 						{
 							id: '3535a0f8-c7ea-4b89-82a3-84f6d0a58d09',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 3/15 in the Guardian's football quiz",
+							shareText: "I scored 3/15 in the Guardian's football quiz",
 							minScore: 3,
 						},
 						{
 							id: '89c65806-51f1-4cc5-8069-409092ef98f2',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 1/15 in the Guardian's football quiz",
+							shareText: "I scored 1/15 in the Guardian's football quiz",
 							minScore: 1,
 						},
 						{
 							id: 'c038ed66-a421-4eee-8f95-ce102079974c',
 							title: "Don't worry. It was a long time ago",
-							shareText:
-								"I scored 2/15 in the Guardian's football quiz",
+							shareText: "I scored 2/15 in the Guardian's football quiz",
 							minScore: 2,
 						},
 					],
@@ -2276,7 +2268,8 @@ export const Quiz: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id':
+				'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2323,10 +2316,12 @@ export const Quiz: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id':
+				'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			},
 		},
 	],
@@ -2461,8 +2456,7 @@ export const Quiz: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2494,7 +2488,8 @@ export const Quiz: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

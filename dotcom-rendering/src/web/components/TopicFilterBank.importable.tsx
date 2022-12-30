@@ -128,8 +128,7 @@ export const TopicFilterBank = ({
 
 				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
-					const isActive =
-						!!selectedTopic && isEqual(selectedTopic, topic);
+					const isActive = !!selectedTopic && isEqual(selectedTopic, topic);
 
 					return (
 						<FilterButton
@@ -138,9 +137,7 @@ export const TopicFilterBank = ({
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={() =>
-								handleTopicClick(isActive, buttonParams, id)
-							}
+							onClick={() => handleTopicClick(isActive, buttonParams, id)}
 							key={`filter-${topic.value}`}
 						/>
 					);

@@ -59,7 +59,8 @@ export const Labs: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					value:
+						'/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
 				{
 					name: 'sh',
@@ -116,7 +117,8 @@ export const Labs: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					value:
+						'/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
 				{
 					name: 'sh',
@@ -173,7 +175,8 @@ export const Labs: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					value:
+						'/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
 				{
 					name: 'sh',
@@ -226,7 +229,8 @@ export const Labs: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					value:
+						'/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
 				{
 					name: 'sh',
@@ -283,7 +287,8 @@ export const Labs: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					value:
+						'/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
 				{
 					name: 'tn',
@@ -1107,7 +1112,8 @@ export const Labs: FEArticleType = {
 	},
 	standfirst: '',
 	sectionUrl: 'whats-in-your-blood-',
-	pageId: 'whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+	pageId:
+		'whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	version: 3,
 	tags: [
 		{
@@ -1127,7 +1133,8 @@ export const Labs: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+	webURL:
+		'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	showBottomSocialButtons: true,
 	isImmersive: true,
 	sectionLabel: "What's in your blood?",
@@ -2738,7 +2745,8 @@ export const Labs: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+			'@id':
+				'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2784,10 +2792,12 @@ export const Labs: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+			'@id':
+				'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 			},
 		},
 	],
@@ -2922,8 +2932,7 @@ export const Labs: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2955,7 +2964,8 @@ export const Labs: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

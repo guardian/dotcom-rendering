@@ -31,10 +31,7 @@ export const doStorybookHydration = () => {
 				`../../components/${name}.importable`
 			).then((module) => {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				ReactDOM.render(
-					React.createElement(module[name], props),
-					element,
-				);
+				ReactDOM.render(React.createElement(module[name], props), element);
 			});
 		}
 	});

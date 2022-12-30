@@ -168,16 +168,14 @@ export const ShareIcons = ({
 			{displayIcons.includes('facebook') && (
 				<li css={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?${new URLSearchParams(
-							{
-								app_id: '180444840287',
-								href: getUrl({
-									pageId,
-									blockId,
-									CMP: 'share_btn_fb',
-								}),
-							},
-						).toString()}`}
+						href={`https://www.facebook.com/dialog/share?${new URLSearchParams({
+							app_id: '180444840287',
+							href: getUrl({
+								pageId,
+								blockId,
+								CMP: 'share_btn_fb',
+							}),
+						}).toString()}`}
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
@@ -200,16 +198,14 @@ export const ShareIcons = ({
 			{displayIcons.includes('twitter') && (
 				<li css={liStyles(size)} key="twitter">
 					<a
-						href={`https://twitter.com/intent/tweet?${new URLSearchParams(
-							{
-								text: encodeTitle(webTitle),
-								url: getUrl({
-									pageId,
-									blockId,
-									CMP: 'share_btn_tw',
-								}),
-							},
-						).toString()}`}
+						href={`https://twitter.com/intent/tweet?${new URLSearchParams({
+							text: encodeTitle(webTitle),
+							url: getUrl({
+								pageId,
+								blockId,
+								CMP: 'share_btn_tw',
+							}),
+						}).toString()}`}
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
@@ -264,14 +260,12 @@ export const ShareIcons = ({
 			{displayIcons.includes('linkedIn') && (
 				<li css={liStyles(size)} key="linkedIn">
 					<a
-						href={`http://www.linkedin.com/shareArticle?=${new URLSearchParams(
-							{
-								title: encodeTitle(webTitle),
-								mini: 'true',
-								// TODO?: add &CMP=share_btn_*
-								url: getUrl({ pageId, blockId }),
-							},
-						).toString()}`}
+						href={`http://www.linkedin.com/shareArticle?=${new URLSearchParams({
+							title: encodeTitle(webTitle),
+							mini: 'true',
+							// TODO?: add &CMP=share_btn_*
+							url: getUrl({ pageId, blockId }),
+						}).toString()}`}
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"

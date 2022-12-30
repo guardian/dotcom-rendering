@@ -135,9 +135,7 @@ export const DifferentBackgrounds = () => {
 			borderColour={brandBorder.primary}
 			innerBackgroundColour="#FFE501"
 		>
-			<h1>
-				👀 Share stories with the Guardian securely and confidentially
-			</h1>
+			<h1>👀 Share stories with the Guardian securely and confidentially</h1>
 		</Section>
 	);
 };
@@ -274,11 +272,7 @@ MultipleStory.story = {
 	name: 'with multiple sections',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.leftCol, breakpoints.wide],
 		},
 	},
 };

@@ -22,19 +22,13 @@ describe('SignInGate - dismissGate methods', () => {
 				}),
 			);
 
-			const output = hasUserDismissedGate(
-				'variant-name',
-				'SignInGateName',
-			);
+			const output = hasUserDismissedGate('variant-name', 'SignInGateName');
 
 			expect(output).toBe(true);
 		});
 
 		test('user has not dismissed gate', () => {
-			const output = hasUserDismissedGate(
-				'variant-name',
-				'SignInGateName',
-			);
+			const output = hasUserDismissedGate('variant-name', 'SignInGateName');
 
 			expect(output).toBe(false);
 		});
@@ -44,16 +38,12 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateName-variant-other':
-							new Date().toISOString(),
+						'SignInGateName-variant-other': new Date().toISOString(),
 					},
 				}),
 			);
 
-			const output = hasUserDismissedGate(
-				'variant-current',
-				'SignInGateName',
-			);
+			const output = hasUserDismissedGate('variant-current', 'SignInGateName');
 
 			expect(output).toBe(false);
 		});
@@ -63,16 +53,12 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateOther-variant-name':
-							new Date().toISOString(),
+						'SignInGateOther-variant-name': new Date().toISOString(),
 					},
 				}),
 			);
 
-			const output = hasUserDismissedGate(
-				'variant-name',
-				'SignInGateCurrent',
-			);
+			const output = hasUserDismissedGate('variant-name', 'SignInGateCurrent');
 
 			expect(output).toBe(false);
 		});
@@ -84,8 +70,7 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateCurrent-variant-name':
-							lessThanADayAgo.toISOString(),
+						'SignInGateCurrent-variant-name': lessThanADayAgo.toISOString(),
 					},
 				}),
 			);
@@ -105,8 +90,7 @@ describe('SignInGate - dismissGate methods', () => {
 				'gu.prefs.sign-in-gate',
 				JSON.stringify({
 					value: {
-						'SignInGateCurrent-variant-name':
-							moreThanADayAgo.toISOString(),
+						'SignInGateCurrent-variant-name': moreThanADayAgo.toISOString(),
 					},
 				}),
 			);
@@ -135,10 +119,7 @@ describe('SignInGate - dismissGate methods', () => {
 		test('set user dismissed a sign in gate', () => {
 			setUserDismissedGate('variant-name', 'SignInGateTest');
 
-			const output = hasUserDismissedGate(
-				'variant-name',
-				'SignInGateTest',
-			);
+			const output = hasUserDismissedGate('variant-name', 'SignInGateTest');
 
 			expect(output).toBe(true);
 		});
@@ -171,39 +152,39 @@ describe('SignInGate - dismissGate methods', () => {
 
 	describe('hasUserDismissedGateMoreThanCount and incrementUserDismissedGateCount', () => {
 		test('hasUserDismissedGateMoreThanCount depends on the counter incremented by incrementUserDismissedGateCount', () => {
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 0),
-			).toBe(false);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 0)).toBe(
+				false,
+			);
 
 			incrementUserDismissedGateCount('variant-1', 'test-1');
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 0),
-			).toBe(true);
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 1),
-			).toBe(false);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 0)).toBe(
+				true,
+			);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 1)).toBe(
+				false,
+			);
 
 			incrementUserDismissedGateCount('variant-1', 'test-1');
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 1),
-			).toBe(true);
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 2),
-			).toBe(false);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 1)).toBe(
+				true,
+			);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-1', 2)).toBe(
+				false,
+			);
 
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-2', 'test-1', 0),
-			).toBe(false);
+			expect(hasUserDismissedGateMoreThanCount('variant-2', 'test-1', 0)).toBe(
+				false,
+			);
 		});
 
 		test('incrementing does not affect other variants or tests', () => {
 			incrementUserDismissedGateCount('variant-1', 'test-1');
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-2', 'test-1', 0),
-			).toBe(false);
-			expect(
-				hasUserDismissedGateMoreThanCount('variant-1', 'test-2', 0),
-			).toBe(false);
+			expect(hasUserDismissedGateMoreThanCount('variant-2', 'test-1', 0)).toBe(
+				false,
+			);
+			expect(hasUserDismissedGateMoreThanCount('variant-1', 'test-2', 0)).toBe(
+				false,
+			);
 		});
 	});
 });

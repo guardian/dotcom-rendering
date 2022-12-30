@@ -11,10 +11,7 @@ describe('Byline utilities', () => {
 			},
 		];
 
-		const bylineComponents = getBylineComponentsFromTokens(
-			bylineTokens,
-			tags,
-		);
+		const bylineComponents = getBylineComponentsFromTokens(bylineTokens, tags);
 
 		expect(bylineComponents).toEqual([
 			{ tag: tags[0], token: 'Eva Smith' },
@@ -36,10 +33,7 @@ describe('Byline utilities', () => {
 				title: 'Duncan Campbell',
 			},
 		];
-		const bylineComponents = getBylineComponentsFromTokens(
-			bylineTokens,
-			tags,
-		);
+		const bylineComponents = getBylineComponentsFromTokens(bylineTokens, tags);
 
 		expect(bylineComponents).toEqual([
 			{ tag: tags[0], token: 'Eva Smith' },
@@ -63,10 +57,7 @@ describe('Byline utilities', () => {
 			},
 		];
 
-		const bylineComponents = getBylineComponentsFromTokens(
-			bylineTokens,
-			tags,
-		);
+		const bylineComponents = getBylineComponentsFromTokens(bylineTokens, tags);
 
 		expect(bylineComponents).toEqual([
 			{ tag: tags[0], token: 'Duncan Campbell' },

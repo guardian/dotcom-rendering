@@ -33,11 +33,7 @@ export const SportInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -59,11 +55,7 @@ export const LabsInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -85,11 +77,7 @@ export const LifestyleInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -111,11 +99,7 @@ export const CultureInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -132,11 +116,7 @@ CultureInline.story = {
 
 export const NewsInline = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={defaultFormat}
 				palette={decidePalette(defaultFormat)}
@@ -159,11 +139,7 @@ export const OpinionInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -185,11 +161,7 @@ export const SpecialReportInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -212,11 +184,7 @@ export const SportSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -238,11 +206,7 @@ export const LabsSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -264,11 +228,7 @@ export const LifestyleSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -290,11 +250,7 @@ export const CultureSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -311,11 +267,7 @@ CultureSupporting.story = {
 
 export const NewsSupporting = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={defaultFormat}
 				palette={decidePalette(defaultFormat)}
@@ -338,11 +290,7 @@ export const OpinionSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -364,11 +312,7 @@ export const SpecialReportSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -390,11 +334,7 @@ export const SpecialReportAltInline = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -416,11 +356,7 @@ export const SpecialReportAltSupporting = () => {
 	};
 
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={format}
 				palette={decidePalette(format)}
@@ -438,11 +374,7 @@ SpecialReportAltSupporting.story = {
 // PhotoEssay
 export const PhotoEssayInline = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={photoEssayNews}
 				palette={decidePalette(photoEssayNews)}
@@ -459,11 +391,7 @@ PhotoEssayInline.story = {
 
 export const PhotoEssaySupporting = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<PullQuoteBlockComponent
 				format={photoEssayNews}
 				palette={decidePalette(photoEssayNews)}

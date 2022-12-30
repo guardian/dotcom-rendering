@@ -49,9 +49,7 @@ export const HeaderAdSlot = ({ display }: Props) => (
 				* Bonzai TrueSkin (Australian 3rd Party page skin) is shown
 				* Temporary fix - introduced 06-Sep-2021
 				*/
-				.bz-custom-container
-					~ #bannerandheader
-					.top-banner-ad-container {
+				.bz-custom-container ~ #bannerandheader .top-banner-ad-container {
 					display: none;
 				}
 			`}

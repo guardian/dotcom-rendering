@@ -15,9 +15,7 @@ const SvgReload = ({ size }: { size: 12 | 16 | 18 | 24 | 26 | 28 | 30 }) => {
 	const padding = tight ? 0 : (size - 24) / 2;
 	return (
 		<svg
-			viewBox={
-				tight ? '0 0 24 24' : `-${padding} -${padding} ${size} ${size}`
-			}
+			viewBox={tight ? '0 0 24 24' : `-${padding} -${padding} ${size} ${size}`}
 			width={size}
 			height={size}
 		>
@@ -47,9 +45,7 @@ export const Toast = ({ count, onClick, format }: Props) => {
 					onClick={onClick}
 					format={format}
 					icon={<SvgReload size={30} />}
-				>{`${count} new update${
-					count === 1 ? '' : 's'
-				}`}</EditorialButton>
+				>{`${count} new update${count === 1 ? '' : 's'}`}</EditorialButton>
 			</Hide>
 			<Hide below="phablet">
 				<EditorialButton
@@ -57,9 +53,7 @@ export const Toast = ({ count, onClick, format }: Props) => {
 					onClick={onClick}
 					format={format}
 					icon={<SvgReload size={30} />}
-				>{`${count} new update${
-					count === 1 ? '' : 's'
-				}`}</EditorialButton>
+				>{`${count} new update${count === 1 ? '' : 's'}`}</EditorialButton>
 			</Hide>
 		</div>
 	);

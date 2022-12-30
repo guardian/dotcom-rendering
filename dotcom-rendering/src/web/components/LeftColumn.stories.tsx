@@ -17,8 +17,8 @@ export const PartialRightBorder = () => {
 			<Flex>
 				<LeftColumn borderType="partial">
 					<>
-						The border to my right is only partial, it does not
-						stretch the whole height
+						The border to my right is only partial, it does not stretch the
+						whole height
 					</>
 				</LeftColumn>
 				<ArticleContainer
@@ -28,11 +28,7 @@ export const PartialRightBorder = () => {
 						theme: ArticlePillar.News,
 					}}
 				>
-					<Placeholder
-						height={500}
-						width={600}
-						shouldShimmer={false}
-					/>
+					<Placeholder height={500} width={600} shouldShimmer={false} />
 				</ArticleContainer>
 				<RightColumn>
 					<>Right column content</>
@@ -57,11 +53,7 @@ export const RightBorder = () => {
 						theme: ArticlePillar.News,
 					}}
 				>
-					<Placeholder
-						height={500}
-						width={600}
-						shouldShimmer={false}
-					/>
+					<Placeholder height={500} width={600} shouldShimmer={false} />
 				</ArticleContainer>
 				<RightColumn>
 					<>Right column content</>

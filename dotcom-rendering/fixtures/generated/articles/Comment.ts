@@ -35,7 +35,8 @@ export const Comment: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'ct',
@@ -87,7 +88,8 @@ export const Comment: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'ct',
@@ -179,7 +181,8 @@ export const Comment: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 			],
 		},
@@ -187,7 +190,8 @@ export const Comment: FEArticleType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'ct',
@@ -239,7 +243,8 @@ export const Comment: FEArticleType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value:
+						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'ct',
@@ -1302,7 +1307,8 @@ export const Comment: FEArticleType = {
 		},
 	],
 	pillar: 'opinion',
-	webURL: 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+	webURL:
+		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Austerity',
@@ -1854,7 +1860,8 @@ export const Comment: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id':
+				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1893,8 +1900,7 @@ export const Comment: FEArticleType = {
 				},
 			],
 			datePublished: '2020-02-10T06:00:27.000Z',
-			headline:
-				'Austerity is grinding on – it has cut too deep to ‘level up’',
+			headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 			dateModified: '2020-02-10T11:19:50.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
@@ -1902,10 +1908,12 @@ export const Comment: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id':
+				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			},
 		},
 	],
@@ -2041,8 +2049,7 @@ export const Comment: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2074,7 +2081,8 @@ export const Comment: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

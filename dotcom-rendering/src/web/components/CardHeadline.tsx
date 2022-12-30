@@ -209,9 +209,7 @@ const WithLink = ({
 		return (
 			<Link
 				href={linkTo}
-				cssOverrides={
-					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-				}
+				cssOverrides={isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles}
 			>
 				{children}
 			</Link>
@@ -256,8 +254,7 @@ export const CardHeadline = ({
 								size,
 								fontWeight:
 									containerPalette &&
-									containerPalette !=
-										'SpecialReportAltPalette'
+									containerPalette != 'SpecialReportAltPalette'
 										? 'bold'
 										: 'regular',
 						  }),

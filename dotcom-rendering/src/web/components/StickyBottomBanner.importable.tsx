@@ -261,9 +261,7 @@ export const StickyBottomBanner = ({
 			contributionsServiceUrl,
 			idApiUrl,
 		});
-		const readerRevenue = buildReaderRevenueBannerConfig(
-			remoteBannerSwitch,
-		)({
+		const readerRevenue = buildReaderRevenueBannerConfig(remoteBannerSwitch)({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
@@ -294,13 +292,9 @@ export const StickyBottomBanner = ({
 		};
 
 		pickMessage(bannerConfig)
-			.then((PickedBanner: () => MaybeFC) =>
-				setSelectedBanner(PickedBanner),
-			)
+			.then((PickedBanner: () => MaybeFC) => setSelectedBanner(PickedBanner))
 			.catch((e) =>
-				console.error(
-					`StickyBottomBanner pickMessage - error: ${String(e)}`,
-				),
+				console.error(`StickyBottomBanner pickMessage - error: ${String(e)}`),
 			);
 	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCounts]);
 

@@ -323,19 +323,13 @@ export const ArticleMeta = ({
 
 	return (
 		<div
-			className={
-				isInteractive ? interactiveLegacyClasses.metaContainer : ''
-			}
+			className={isInteractive ? interactiveLegacyClasses.metaContainer : ''}
 			css={metaContainer(format)}
 		>
 			<div css={meta(format)}>
 				{branding && (
 					<Island deferUntil="visible">
-						<Branding
-							branding={branding}
-							palette={palette}
-							format={format}
-						/>
+						<Branding branding={branding} palette={palette} format={format} />
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
@@ -358,21 +352,13 @@ export const ArticleMeta = ({
 					<>
 						{!!avatarUrl && (
 							<MetaAvatarContainer>
-								<Avatar
-									src={avatarUrl}
-									alt={authorName}
-									format={format}
-								/>
+								<Avatar src={avatarUrl} alt={authorName} format={format} />
 							</MetaAvatarContainer>
 						)}
 
 						<div>
 							{shouldShowContributor(format) && !!byline && (
-								<Contributor
-									byline={byline}
-									tags={tags}
-									format={format}
-								/>
+								<Contributor byline={byline} tags={tags} format={format} />
 							)}
 							<Dateline
 								primaryDateline={primaryDateline}
@@ -384,18 +370,11 @@ export const ArticleMeta = ({
 				</RowBelowLeftCol>
 				<div data-print-layout="hide" css={metaFlex}>
 					<div
-						className={
-							isInteractive
-								? interactiveLegacyClasses.shareIcons
-								: ''
-						}
+						className={isInteractive ? interactiveLegacyClasses.shareIcons : ''}
 						css={[
 							metaExtras(palette),
 							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaExtrasLiveBlog,
-								),
+								css(borderColourWhenBackgroundDark, metaExtrasLiveBlog),
 						]}
 					>
 						<ShareIcons
@@ -416,10 +395,7 @@ export const ArticleMeta = ({
 						css={[
 							metaNumbers(palette),
 							format.design === ArticleDesign.LiveBlog &&
-								css(
-									borderColourWhenBackgroundDark,
-									metaNumbersExtrasLiveBlog,
-								),
+								css(borderColourWhenBackgroundDark, metaNumbersExtrasLiveBlog),
 						]}
 					>
 						<Counts format={format}>

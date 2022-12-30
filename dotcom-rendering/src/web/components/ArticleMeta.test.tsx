@@ -35,9 +35,7 @@ describe('ArticleMeta', () => {
 		);
 
 		expect(
-			container.querySelector(
-				`.${interactiveLegacyClasses.metaContainer}`,
-			),
+			container.querySelector(`.${interactiveLegacyClasses.metaContainer}`),
 		).not.toBeNull();
 		expect(
 			container.querySelector(`.${interactiveLegacyClasses.shareIcons}`),
@@ -75,9 +73,7 @@ describe('ArticleMeta', () => {
 		);
 
 		expect(
-			container.querySelector(
-				`.${interactiveLegacyClasses.metaContainer}`,
-			),
+			container.querySelector(`.${interactiveLegacyClasses.metaContainer}`),
 		).toBeNull();
 		expect(
 			container.querySelector(`.${interactiveLegacyClasses.shareIcons}`),

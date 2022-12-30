@@ -235,10 +235,7 @@ export const CalloutEmbedBlockComponent = ({
 					e.preventDefault();
 				}
 
-				if (
-					e.shiftKey &&
-					document.activeElement === firstFieldElementRef
-				) {
+				if (e.shiftKey && document.activeElement === firstFieldElementRef) {
 					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 					lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
 					e.preventDefault();
@@ -304,9 +301,7 @@ export const CalloutEmbedBlockComponent = ({
 								</div>
 							</div>
 							<div css={headingTextStyles(palette)}>
-								<p css={successTextStyles}>
-									Thank you for your contribution
-								</p>
+								<p css={successTextStyles}>Thank you for your contribution</p>
 							</div>
 						</div>
 					</summary>
@@ -366,11 +361,7 @@ export const CalloutEmbedBlockComponent = ({
 					)}
 				</summary>
 
-				<Form
-					formFields={formFields}
-					onSubmit={onSubmit}
-					error={error}
-				/>
+				<Form formFields={formFields} onSubmit={onSubmit} error={error} />
 
 				<span css={buttonWrapperStyles} aria-hidden="true">
 					{isExpanded && (

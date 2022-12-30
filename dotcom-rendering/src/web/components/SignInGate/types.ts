@@ -12,10 +12,7 @@ export type CanShowGateProps = {
 
 export type SignInGateComponent = {
 	gate?: (props: SignInGateProps) => JSX.Element;
-	canShow: ({
-		isSignedIn,
-		currentTest,
-	}: CanShowGateProps) => Promise<boolean>;
+	canShow: ({ isSignedIn, currentTest }: CanShowGateProps) => Promise<boolean>;
 };
 
 export interface SignInGateProps {

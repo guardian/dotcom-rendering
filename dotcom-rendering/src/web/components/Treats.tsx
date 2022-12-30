@@ -135,11 +135,7 @@ export const Treats = ({
 					);
 				}
 
-				if (
-					treat.imageUrl &&
-					treat.altText &&
-					treat.theme !== undefined
-				) {
+				if (treat.imageUrl && treat.altText && treat.theme !== undefined) {
 					const palette = decidePalette({
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,

@@ -44,7 +44,8 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value:
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'p',
@@ -90,7 +91,8 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value:
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'p',
@@ -128,7 +130,8 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value:
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'p',
@@ -182,7 +185,8 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value:
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'p',
@@ -228,7 +232,8 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value:
+						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'p',
@@ -1137,7 +1142,8 @@ export const MatchReport: FEArticleType = {
 	},
 	standfirst: '',
 	sectionUrl: 'football/championship',
-	pageId: 'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+	pageId:
+		'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	version: 3,
 	tags: [
 		{
@@ -1206,7 +1212,8 @@ export const MatchReport: FEArticleType = {
 		},
 	],
 	pillar: 'sport',
-	webURL: 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+	webURL:
+		'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Championship',
@@ -1751,7 +1758,8 @@ export const MatchReport: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+			'@id':
+				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1799,10 +1807,12 @@ export const MatchReport: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+			'@id':
+				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			},
 		},
 	],
@@ -1938,8 +1948,7 @@ export const MatchReport: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -1971,7 +1980,8 @@ export const MatchReport: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

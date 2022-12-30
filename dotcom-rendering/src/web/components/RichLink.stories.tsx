@@ -26,11 +26,7 @@ export default {
 
 export const Article = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -67,11 +63,7 @@ export const Article = () => {
 
 export const Network = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -114,11 +106,7 @@ Network.story = {
 
 export const SectionStory = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -158,11 +146,7 @@ SectionStory.story = {
 
 export const Inline = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -202,11 +186,7 @@ Inline.story = {
 
 export const ImageContent = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -249,11 +229,7 @@ ImageContent.story = {
 
 export const Interactive = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -295,11 +271,7 @@ Interactive.story = {
 
 export const Gallery = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -342,11 +314,7 @@ Gallery.story = {
 
 export const Video = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -390,11 +358,7 @@ Video.story = {
 
 export const Audio = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -431,11 +395,7 @@ export const Audio = () => {
 
 export const LiveBlog = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -478,11 +438,7 @@ LiveBlog.story = {
 
 export const Tag = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -519,11 +475,7 @@ export const Tag = () => {
 
 export const Index = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -567,11 +519,7 @@ export const Index = () => {
 
 export const Crossword = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -608,11 +556,7 @@ export const Crossword = () => {
 
 export const Survey = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -649,11 +593,7 @@ export const Survey = () => {
 
 export const Signup = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -691,11 +631,7 @@ export const Signup = () => {
 
 export const Userid = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -732,11 +668,7 @@ export const Userid = () => {
 
 export const PaidFor = () => {
 	return (
-		<Section
-			showTopBorder={false}
-			centralBorder="full"
-			showSideBorders={false}
-		>
+		<Section showTopBorder={false} centralBorder="full" showSideBorders={false}>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,

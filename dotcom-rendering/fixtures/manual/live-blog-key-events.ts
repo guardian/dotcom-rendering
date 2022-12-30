@@ -367,7 +367,8 @@ export const ShortKeyEvents: Block[] = [
 		blockFirstPublished: 1613758917000,
 		blockFirstPublishedDisplay: '18.21 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.21',
-		title: 'New image of Perseverance shows rover being lowered to Mars surface',
+		title:
+			'New image of Perseverance shows rover being lowered to Mars surface',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -398,7 +399,8 @@ export const ShortKeyEvents: Block[] = [
 		blockFirstPublished: 1613757946000,
 		blockFirstPublishedDisplay: '18.05 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.05',
-		title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
+		title:
+			'Nasa scientists show new images of Perseverance rover after Mars landing',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -804,7 +806,8 @@ export const LongKeyEvents: Block[] = [
 		blockFirstPublished: 1613758917000,
 		blockFirstPublishedDisplay: '18.21 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.21',
-		title: 'New image of Perseverance shows rover being lowered to Mars surface',
+		title:
+			'New image of Perseverance shows rover being lowered to Mars surface',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -835,7 +838,8 @@ export const LongKeyEvents: Block[] = [
 		blockFirstPublished: 1613757946000,
 		blockFirstPublishedDisplay: '18.05 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.05',
-		title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
+		title:
+			'Nasa scientists show new images of Perseverance rover after Mars landing',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -1238,7 +1242,8 @@ export const LongKeyEvents: Block[] = [
 		blockFirstPublished: 1613758917000,
 		blockFirstPublishedDisplay: '18.21 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.21',
-		title: 'New image of Perseverance shows rover being lowered to Mars surface',
+		title:
+			'New image of Perseverance shows rover being lowered to Mars surface',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -1269,7 +1274,8 @@ export const LongKeyEvents: Block[] = [
 		blockFirstPublished: 1613757946000,
 		blockFirstPublishedDisplay: '18.05 GMT',
 		blockFirstPublishedDisplayNoTimezone: '18.05',
-		title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
+		title:
+			'Nasa scientists show new images of Perseverance rover after Mars landing',
 		contributors: [],
 		primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 		secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',

@@ -59,14 +59,12 @@ export const FixedMediumSlowVII = ({
 							imagePositionOnMobile="left"
 							imageSize="medium"
 							trailText={
-								trail.supportingContent &&
-								trail.supportingContent.length > 0
+								trail.supportingContent && trail.supportingContent.length > 0
 									? undefined
 									: trail.trailText
 							}
 							supportingContent={
-								trail.supportingContent &&
-								trail.supportingContent.length > 2
+								trail.supportingContent && trail.supportingContent.length > 2
 									? trail.supportingContent.slice(0, 2)
 									: trail.supportingContent
 							}
@@ -89,8 +87,7 @@ export const FixedMediumSlowVII = ({
 							showAge={showAge}
 							headlineSize="small"
 							supportingContent={
-								trail.supportingContent &&
-								trail.supportingContent.length > 2
+								trail.supportingContent && trail.supportingContent.length > 2
 									? trail.supportingContent.slice(0, 2)
 									: trail.supportingContent
 							}

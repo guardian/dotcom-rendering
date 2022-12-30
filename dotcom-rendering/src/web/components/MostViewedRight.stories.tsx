@@ -44,10 +44,7 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padSides={false}
 					>
-						<MostViewedRight
-							isAdFreeUser={false}
-							adBlockerDetected={false}
-						/>
+						<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
 					</Section>
 				</RightColumn>
 			</Flex>

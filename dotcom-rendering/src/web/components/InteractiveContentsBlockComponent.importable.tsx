@@ -184,9 +184,7 @@ export const InteractiveContentsBlockComponent = ({
 			const onObserve = (entries: IntersectionObserverEntry[]) => {
 				// Check if we've reached the end of the document
 				const endElement = endDocumentElementId
-					? entries.find(
-							(entry) => entry.target.id === endDocumentElementId,
-					  )
+					? entries.find((entry) => entry.target.id === endDocumentElementId)
 					: undefined;
 
 				if (endElement && endElement.isIntersecting)
@@ -194,8 +192,7 @@ export const InteractiveContentsBlockComponent = ({
 
 				// Check if the current element is in this update
 				const currentElement = entries.find(
-					(entry) =>
-						entry.target.id === stickyNavCurrentHeader?.elementId,
+					(entry) => entry.target.id === stickyNavCurrentHeader?.elementId,
 				);
 
 				// If we're no longer intersecting with the current element &
@@ -205,9 +202,7 @@ export const InteractiveContentsBlockComponent = ({
 					!currentElement.isIntersecting &&
 					currentElement.boundingClientRect.y > 0
 				) {
-					const index = getSubheadingIndexById(
-						currentElement.target.id,
-					);
+					const index = getSubheadingIndexById(currentElement.target.id);
 					// If no subheading exists for the index we've probably scrolled past the top of the document
 					return setStickyNavCurrentHeader(
 						enhancedSubheadings[index - 1] ?? null,
@@ -218,9 +213,8 @@ export const InteractiveContentsBlockComponent = ({
 				const element = entries.find((entry) => entry.isIntersecting);
 				if (element && element.target.id)
 					return setStickyNavCurrentHeader(
-						enhancedSubheadings[
-							getSubheadingIndexById(element.target.id)
-						] ?? null,
+						enhancedSubheadings[getSubheadingIndexById(element.target.id)] ??
+							null,
 					);
 
 				// Check if we're scrolling up past the end of the document and set sticky nav to the last element
@@ -245,8 +239,7 @@ export const InteractiveContentsBlockComponent = ({
 			);
 
 			if (endDocumentElementId) {
-				const endDocumentRef =
-					document.getElementById(endDocumentElementId);
+				const endDocumentRef = document.getElementById(endDocumentElementId);
 				if (endDocumentRef) observer.observe(endDocumentRef);
 			}
 
@@ -271,12 +264,7 @@ export const InteractiveContentsBlockComponent = ({
 					css={[stickyNavBaseStyles, stickyNavCurrentHeaderStyles]}
 					onClick={() => setShowStickyNavOption(!showStickyNavOption)}
 				>
-					<span
-						css={[
-							SVGStyles,
-							showStickyNavOption && SVGTransitionStyles,
-						]}
-					>
+					<span css={[SVGStyles, showStickyNavOption && SVGTransitionStyles]}>
 						<SvgChevronDownSingle />
 					</span>
 					{stickyNavCurrentHeader.html}
@@ -288,18 +276,12 @@ export const InteractiveContentsBlockComponent = ({
 					olStyles,
 					// we detach `ol` from the container when `stickyNavCurrentHeader` is defined
 					// this allows us to reuse the list without redefining it
-					stickyNavCurrentHeader &&
-						stickyOlStyles(showStickyNavOption),
+					stickyNavCurrentHeader && stickyOlStyles(showStickyNavOption),
 				]}
 			>
 				{subheadingLinks.map((subheadingLink, index) => {
 					return (
-						<li
-							css={[
-								liStyles,
-								index % 2 === 0 && borderRightStyles,
-							]}
-						>
+						<li css={[liStyles, index % 2 === 0 && borderRightStyles]}>
 							<a
 								data-ignore="global-link-styling"
 								css={linkStyles}

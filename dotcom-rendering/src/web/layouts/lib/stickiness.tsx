@@ -47,9 +47,7 @@ const bannerWrapper = css`
 `;
 
 export const Stuck = ({ children, zIndex }: StuckProps) => (
-	<div css={[stickyStyles, addZindex(zIndex), whiteBackground]}>
-		{children}
-	</div>
+	<div css={[stickyStyles, addZindex(zIndex), whiteBackground]}>{children}</div>
 );
 
 export const SendToBack = ({ children }: Props) => (

@@ -14,10 +14,7 @@ const init = (): Promise<void> => {
 	// So we don't have to load this script as a priority on each load
 	allIframes.forEach((iframe) => {
 		if (iframe && iframe.contentWindow)
-			iframe.contentWindow.postMessage(
-				'resize',
-				'https://www.theguardian.com',
-			);
+			iframe.contentWindow.postMessage('resize', 'https://www.theguardian.com');
 	});
 
 	window.addEventListener('message', (event) => {
@@ -36,8 +33,7 @@ const init = (): Promise<void> => {
 		if (iframes.length !== 0) {
 			try {
 				const message: unknown = JSON.parse(event.data);
-				if (!isObject(message) || typeof message.type !== 'string')
-					return;
+				if (!isObject(message) || typeof message.type !== 'string') return;
 
 				switch (message.type) {
 					case 'set-height':

@@ -187,10 +187,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			>
 				{/* eslint-enable jsx-a11y/no-redundant-roles */}
 				{subNavSections.parent && (
-					<li
-						key={subNavSections.parent.url}
-						css={listItemStyles(palette)}
-					>
+					<li key={subNavSections.parent.url} css={listItemStyles(palette)}>
 						<a
 							data-src-focus-disabled={true}
 							css={linkStyle(palette)}
@@ -209,17 +206,13 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 						 *
 						 * @see https://www.chromatic.com/docs/ignoring-elements#ignore-dom-elements
 						 */
-						data-chromatic={
-							link.title === 'Obituaries' ? 'ignore' : undefined
-						}
+						data-chromatic={link.title === 'Obituaries' ? 'ignore' : undefined}
 					>
 						<a
 							css={linkStyle(palette)}
 							data-src-focus-disabled={true}
 							href={link.url}
-							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
-								link.url,
-							)}`}
+							data-link-name={`nav2 : subnav : ${trimLeadingSlash(link.url)}`}
 						>
 							{link.title === currentNavLink ? (
 								<span css={selected}>{link.title}</span>

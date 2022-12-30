@@ -341,15 +341,13 @@ export const Footer = ({
 		<div css={footerGrid}>
 			<div css={emailSignup}>
 				<div>
-					Original reporting and incisive analysis, direct from the
-					Guardian every morning
+					Original reporting and incisive analysis, direct from the Guardian
+					every morning
 				</div>
 				<LinkButton
 					size="small"
 					href={decideSignupLink(editionId)}
-					data-link-name={`footer : ${decideSignupNewsletterName(
-						editionId,
-					)}`}
+					data-link-name={`footer : ${decideSignupNewsletterName(editionId)}`}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
@@ -367,11 +365,11 @@ export const Footer = ({
 
 			{editionId === 'AU' && (
 				<div css={acknowledgments}>
-					Guardian Australia acknowledges the traditional owners and
-					custodians of Country throughout Australia and their
-					connections to land, waters and community. We pay respect by
-					giving voice to social justice, acknowledging our shared
-					history and valuing the cultures of First Nations.
+					Guardian Australia acknowledges the traditional owners and custodians
+					of Country throughout Australia and their connections to land, waters
+					and community. We pay respect by giving voice to social justice,
+					acknowledging our shared history and valuing the cultures of First
+					Nations.
 				</div>
 			)}
 
@@ -380,8 +378,8 @@ export const Footer = ({
 			</div>
 		</div>
 		<div css={copyright}>
-			© {year} Guardian News & Media Limited or its affiliated companies.
-			All rights reserved. (modern)
+			© {year} Guardian News & Media Limited or its affiliated companies. All
+			rights reserved. (modern)
 		</div>
 	</div>
 );

@@ -174,10 +174,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return (
 				<Island deferUntil="visible">
-					<CalloutEmbedBlockComponent
-						callout={element}
-						format={format}
-					/>
+					<CalloutEmbedBlockComponent callout={element} format={format} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
@@ -202,10 +199,7 @@ export const renderElement = ({
 
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return (
-				<CodeBlockComponent
-					code={element.html}
-					language={element.language}
-				/>
+				<CodeBlockComponent code={element.html} language={element.language} />
 			);
 		case 'model.dotcomrendering.pageElements.CommentBlockElement':
 			return (
@@ -670,13 +664,8 @@ export const renderElement = ({
 					);
 				}
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo': {
-					const {
-						title,
-						description,
-						authorName,
-						youtubeHtml,
-						dateCreated,
-					} = element.witnessTypeData;
+					const { title, description, authorName, youtubeHtml, dateCreated } =
+						element.witnessTypeData;
 					return (
 						<WitnessVideoBlockComponent
 							title={title}

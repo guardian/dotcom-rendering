@@ -323,10 +323,7 @@ export const Columns = ({
 			<li css={desktopBrandExtensionColumn} role="none">
 				<ul css={brandExtensionList} role="menu">
 					{nav.brandExtensions.map((brandExtension) => (
-						<li
-							css={brandExtensionListItem}
-							key={brandExtension.title}
-						>
+						<li css={brandExtensionListItem} key={brandExtension.title}>
 							<a
 								className="selectableMenuItem"
 								css={brandExtensionLink}

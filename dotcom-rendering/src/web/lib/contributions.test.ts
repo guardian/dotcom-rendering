@@ -154,7 +154,8 @@ describe('getPurchaseInfo', () => {
 	it('returns decoded cookie data', () => {
 		setCookie({
 			name: 'GU_CO_COMPLETE',
-			value: '%7B%22userType%22%3A%22guest%22%2C%22product%22%3A%22DigitalPack%22%7D',
+			value:
+				'%7B%22userType%22%3A%22guest%22%2C%22product%22%3A%22DigitalPack%22%7D',
 		});
 		expect(getPurchaseInfo()).toEqual({
 			userType: 'guest',

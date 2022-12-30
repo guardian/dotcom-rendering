@@ -25,9 +25,7 @@ export const BrazeEpicComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -50,15 +48,10 @@ export const BrazeEpicComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -103,9 +96,7 @@ export const BrazeEpicWithReminderComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -129,15 +120,10 @@ export const BrazeEpicWithReminderComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -181,9 +167,7 @@ export const BrazeEpicSpecialHeaderComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -205,15 +189,10 @@ export const BrazeEpicSpecialHeaderComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -257,9 +236,7 @@ export const BrazeUKNewsletterEpicComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -277,15 +254,10 @@ export const BrazeUKNewsletterEpicComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -322,9 +294,7 @@ export const BrazeUSNewsletterEpicComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -342,15 +312,10 @@ export const BrazeUSNewsletterEpicComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -387,9 +352,7 @@ export const BrazeAUNewsletterEpicComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -407,15 +370,10 @@ export const BrazeAUNewsletterEpicComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>
@@ -452,9 +410,7 @@ export const BrazeDownToEarthNewsletterEpicComponent = (
 				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
 			})
 			.catch((e) =>
-				console.error(
-					`braze-components dynamic import - error: ${String(e)}`,
-				),
+				console.error(`braze-components dynamic import - error: ${String(e)}`),
 			);
 	}, []);
 
@@ -472,15 +428,10 @@ export const BrazeDownToEarthNewsletterEpicComponent = (
 				componentName={args.componentName}
 				subscribeToNewsletter={() => Promise.resolve()}
 				logButtonClickWithBraze={(internalButtonId) => {
-					console.log(
-						`Button with internal ID ${internalButtonId} clicked`,
-					);
+					console.log(`Button with internal ID ${internalButtonId} clicked`);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					console.log(
-						'submitComponentEvent called with: ',
-						componentEvent,
-					);
+					console.log('submitComponentEvent called with: ', componentEvent);
 				}}
 				brazeMessageProps={brazeMessageProps}
 			/>

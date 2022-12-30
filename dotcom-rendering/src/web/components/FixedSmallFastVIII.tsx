@@ -53,8 +53,7 @@ export const FixedSmallFastVIII = ({
 								showDivider={cardIndex % columns !== 0}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									remaining.length -
-										(remaining.length % columns),
+									remaining.length - (remaining.length % columns),
 									columns,
 								)}
 							>

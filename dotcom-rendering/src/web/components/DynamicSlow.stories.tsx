@@ -18,11 +18,7 @@ export default {
 	title: 'Components/DynamicSlow',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };
@@ -33,8 +29,7 @@ export const Avatar = () => {
 		return {
 			...trail,
 			trailText: 'This is the trail text',
-			avatarUrl:
-				'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
+			avatarUrl: 'https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png',
 			format: {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,

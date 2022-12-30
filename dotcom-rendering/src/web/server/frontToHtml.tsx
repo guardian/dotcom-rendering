@@ -78,8 +78,7 @@ export const frontToHtml = ({ front }: Props): string => {
 			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				front.config.commercialBundleUrl,
+			process.env.COMMERCIAL_BUNDLE_URL ?? front.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),
@@ -105,9 +104,7 @@ export const frontToHtml = ({ front }: Props): string => {
 	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
 	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
+	const variantScript = gaChunk.find((script) => script.match(VARIANT_SCRIPT));
 	const gaPath = {
 		modern: (modernScript ?? variantScript) as string,
 		legacy: legacyScript as string,

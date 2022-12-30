@@ -88,8 +88,7 @@ const adStyle = css`
 		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-disallowed-list */
-		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-			sans-serif;
+		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 		padding: 3px 10px;
 		color: ${text.supporting};
 		text-align: right;
@@ -153,19 +152,13 @@ export const Body = ({ data, config }: Props) => {
 					return (
 						<React.Fragment key={item.key}>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
+							<div id={`ad-${i + 1}`} data-sort-time="1" css={adStyle}>
 								<RegionalAd
 									editionId={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}
 									config={adConfig}
-									commercialProperties={
-										adInfo.commercialProperties
-									}
+									commercialProperties={adInfo.commercialProperties}
 									adTargeting={adTargeting}
 								/>
 							</div>

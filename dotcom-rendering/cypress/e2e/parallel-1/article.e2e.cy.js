@@ -38,9 +38,7 @@ describe('E2E Page rendering', function () {
 					expect(res.statusCode).to.be.equal(200);
 					expect(res.body).to.have.property('path');
 					expect(res.body).to.have.property('refreshStatus');
-					expect(res.body)
-						.to.have.property('share_count')
-						.that.is.a('number');
+					expect(res.body).to.have.property('share_count').that.is.a('number');
 				});
 			});
 
@@ -122,9 +120,7 @@ describe('E2E Page rendering', function () {
 				'be.visible',
 			);
 
-			cy.get('[data-cy-ab-runnable-test=not-runnable]').should(
-				'be.visible',
-			);
+			cy.get('[data-cy-ab-runnable-test=not-runnable]').should('be.visible');
 		});
 	});
 

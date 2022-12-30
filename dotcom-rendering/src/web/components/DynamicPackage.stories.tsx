@@ -17,11 +17,7 @@ export default {
 	title: 'Components/DynamicPackage',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };
@@ -259,11 +255,7 @@ export const Boosted3 = () => {
 	const remaining = trails.slice(1, 3);
 
 	return (
-		<Section
-			title="DynamicPackage"
-			padContent={false}
-			centralBorder="partial"
-		>
+		<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -285,11 +277,7 @@ export const Boosted4 = () => {
 	const remaining = trails.slice(1, 4);
 
 	return (
-		<Section
-			title="DynamicPackage"
-			padContent={false}
-			centralBorder="partial"
-		>
+		<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -311,11 +299,7 @@ export const Boosted5 = () => {
 	const remaining = trails.slice(1, 5);
 
 	return (
-		<Section
-			title="DynamicPackage"
-			padContent={false}
-			centralBorder="partial"
-		>
+		<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,

@@ -17,9 +17,7 @@ export const DefaultStory = () => {
 DefaultStory.story = { name: 'with defaults' };
 
 export const DescriptionStory = () => {
-	return (
-		<ContainerTitle title="Title text" description="About this content" />
-	);
+	return <ContainerTitle title="Title text" description="About this content" />;
 };
 DescriptionStory.story = { name: 'with description' };
 

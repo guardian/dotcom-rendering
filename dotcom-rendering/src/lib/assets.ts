@@ -48,8 +48,7 @@ const getManifest = (path: string): AssetHash => {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
-			throw new Error('Not a valid AssetHash type');
+		if (!isAssetHash(assetHash)) throw new Error('Not a valid AssetHash type');
 
 		return assetHash;
 	} catch (e) {

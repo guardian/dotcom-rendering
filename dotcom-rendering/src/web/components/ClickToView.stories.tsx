@@ -47,11 +47,7 @@ const RoleStory = ({
 	role: RoleType;
 }) => {
 	return (
-		<Section
-			showTopBorder={false}
-			title="Click To View"
-			centralBorder="full"
-		>
+		<Section showTopBorder={false} title="Click To View" centralBorder="full">
 			<div
 				css={css`
 					max-width: 620px;
@@ -62,12 +58,11 @@ const RoleStory = ({
 				`}
 			>
 				<p css={paragraphStyle}>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo fixie hot
+					chicken art party hell of thundercats skateboard synth. Skateboard
+					thundercats hoodie pitchfork neutra pinterest kitsch literally
+					polaroid irony mumblecore next level. Truffaut street art edison bulb,
+					banh mi cliche post-ironic mixtape
 				</p>
 				<Figure
 					format={{
@@ -89,33 +84,30 @@ const RoleStory = ({
 					</ClickToView>
 				</Figure>
 				<p css={paragraphStyle}>
-					Truffaut deep v before they sold out shoreditch. Enamel pin
-					venmo gochujang shaman +1 try-hard keffiyeh freegan godard
-					air plant humblebrag brooklyn meggings.
+					Truffaut deep v before they sold out shoreditch. Enamel pin venmo
+					gochujang shaman +1 try-hard keffiyeh freegan godard air plant
+					humblebrag brooklyn meggings.
 				</p>
 				<p css={paragraphStyle}>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo fixie hot
+					chicken art party hell of thundercats skateboard synth. Skateboard
+					thundercats hoodie pitchfork neutra pinterest kitsch literally
+					polaroid irony mumblecore next level. Truffaut street art edison bulb,
+					banh mi cliche post-ironic mixtape
 				</p>
 				<p css={paragraphStyle}>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo fixie hot
+					chicken art party hell of thundercats skateboard synth. Skateboard
+					thundercats hoodie pitchfork neutra pinterest kitsch literally
+					polaroid irony mumblecore next level. Truffaut street art edison bulb,
+					banh mi cliche post-ironic mixtape
 				</p>
 				<p css={paragraphStyle}>
-					Lo-fi scenester ethical readymade. Hoodie marfa palo santo
-					fixie hot chicken art party hell of thundercats skateboard
-					synth. Skateboard thundercats hoodie pitchfork neutra
-					pinterest kitsch literally polaroid irony mumblecore next
-					level. Truffaut street art edison bulb, banh mi cliche
-					post-ironic mixtape
+					Lo-fi scenester ethical readymade. Hoodie marfa palo santo fixie hot
+					chicken art party hell of thundercats skateboard synth. Skateboard
+					thundercats hoodie pitchfork neutra pinterest kitsch literally
+					polaroid irony mumblecore next level. Truffaut street art edison bulb,
+					banh mi cliche post-ironic mixtape
 				</p>
 			</div>
 		</Section>
@@ -360,7 +352,8 @@ const spotifyAudioEmbed: SpotifyBlockElement = {
 	width: 300,
 	_type: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
 	caption: 'Listen to the list on Spotify.',
-	title: "Fuel RR playlist: 'love is...', a playlist by matthew.holmes.guardian on Spotify",
+	title:
+		"Fuel RR playlist: 'love is...', a playlist by matthew.holmes.guardian on Spotify",
 	height: 380,
 };
 
@@ -517,8 +510,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a vimeo embed from &apos;embed&apos; element
-					type, the source article is{' '}
+					Example of a vimeo embed from &apos;embed&apos; element type, the
+					source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/12/ultraviolence-ken-fero-documentary-injustice-deaths-police">
 						here
 					</a>
@@ -543,8 +536,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a youtube embed from an &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a youtube embed from an &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2020/may/17/sleaford-mods-all-that-glue-review-scattergun-fury">
 						here
 					</a>
@@ -569,8 +562,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a spotify embed from an &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a spotify embed from an &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
 						here
 					</a>
@@ -595,8 +588,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a bandcamp embed from an &apos;embed&apos;
-					element type, the embed source article is{' '}
+					Example of a bandcamp embed from an &apos;embed&apos; element type,
+					the embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
 						here
 					</a>
@@ -621,8 +614,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a Our World In Data embed from an
-					&apos;embed&apos; element type, the embed source article is{' '}
+					Example of a Our World In Data embed from an &apos;embed&apos; element
+					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/apr/12/coronavirus-statistics-what-can-we-trust-and-what-should-we-ignore">
 						here
 					</a>
@@ -647,8 +640,8 @@ export const EmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a BBC embed from an &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a BBC embed from an &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/20/samuel-l-jackson-interview-enslavement-africa-roots-race-latanya-richardson">
 						here
 					</a>
@@ -750,8 +743,8 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a scribd embed from a &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a scribd embed from a &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
 						here
 					</a>
@@ -777,8 +770,8 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a tiktok embed from a &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a tiktok embed from a &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/tv-and-radio/2020/oct/28/junior-masterchef-weekly-recap-children-routinely-combust-with-joy-and-everything-is-cake">
 						here
 					</a>
@@ -804,8 +797,8 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a twitter embed from an &apos;embed&apos; element
-					type, the embed source article is{' '}
+					Example of a twitter embed from an &apos;embed&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
 						here
 					</a>
@@ -856,8 +849,8 @@ export const VimeoBlockComponentStory = () => {
 				`}
 			>
 				<p css="para">
-					Example of a vimeo embed from &apos;video&apos; element
-					type, the embed source article is{' '}
+					Example of a vimeo embed from &apos;video&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/oct/29/alice-fraser-the-10-funniest-things-i-have-ever-seen-on-the-internet">
 						here
 					</a>
@@ -919,8 +912,8 @@ export const DocumentBlockComponentStory = () => {
 				`}
 			>
 				<p css={paragraphStyle}>
-					Example of a scribd embed from a &apos;document&apos;
-					element type, the embed source article is{' '}
+					Example of a scribd embed from a &apos;document&apos; element type,
+					the embed source article is{' '}
 					<a href="https://www.theguardian.com/politics/2020/jul/21/what-does-the-russia-report-mean-for-british-people-and-politics">
 						here
 					</a>
@@ -976,8 +969,8 @@ export const SoundCloudBlockComponentStory = () => {
 				`}
 			>
 				<p css={paragraphStyle}>
-					Example of a soundcloud embed from an &apos;audio&apos;
-					element type, the embed source article is{' '}
+					Example of a soundcloud embed from an &apos;audio&apos; element type,
+					the embed source article is{' '}
 					<a href="https://www.theguardian.com/culture/2020/aug/31/house-music-flora-willson-watching-and-listening-highlights">
 						here
 					</a>
@@ -997,14 +990,12 @@ export const SoundCloudBlockComponentStory = () => {
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
 					>
-						<SoundcloudBlockComponent
-							element={soundcloudAudioEmbed}
-						/>
+						<SoundcloudBlockComponent element={soundcloudAudioEmbed} />
 					</ClickToView>
 				</Figure>
 				<p css={paragraphStyle}>
-					Example of a soundcloud embed from an &apos;embed&apos;
-					element type, the embed source article is{' '}
+					Example of a soundcloud embed from an &apos;embed&apos; element type,
+					the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2020/sep/11/deep-sea-diver-best-track-of-week">
 						here
 					</a>
@@ -1024,9 +1015,7 @@ export const SoundCloudBlockComponentStory = () => {
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
 					>
-						<SoundcloudBlockComponent
-							element={soundcloudEmbedEmbed}
-						/>
+						<SoundcloudBlockComponent element={soundcloudEmbedEmbed} />
 					</ClickToView>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
@@ -1055,8 +1044,8 @@ export const SpotifyBlockComponentStory = () => {
 				`}
 			>
 				<p css={paragraphStyle}>
-					Example of a spotify embed from an &apos;audio&apos; element
-					type, the embed source article is{' '}
+					Example of a spotify embed from an &apos;audio&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/film/2020/oct/29/david-bowie-biopic-trailer-stardust">
 						here
 					</a>
@@ -1121,8 +1110,8 @@ export const TweetBlockComponentStory = () => {
 				`}
 			>
 				<p css={paragraphStyle}>
-					Example of a twitter embed from an &apos;tweet&apos; element
-					type, the embed source article is{' '}
+					Example of a twitter embed from an &apos;tweet&apos; element type, the
+					embed source article is{' '}
 					<a href="https://www.theguardian.com/world/2020/mar/21/biggest-story-how-journalists-coping-covid-19">
 						here
 					</a>
@@ -1170,8 +1159,8 @@ export const InstagramBlockComponentStory = () => {
 				`}
 			>
 				<p css={paragraphStyle}>
-					Example of a instagram embed from an &apos;instagram&apos;
-					element type, the embed source article is{' '}
+					Example of a instagram embed from an &apos;instagram&apos; element
+					type, the embed source article is{' '}
 					<a href="https://www.theguardian.com/music/2017/aug/23/taylor-swift-reputation-new-album">
 						here
 					</a>

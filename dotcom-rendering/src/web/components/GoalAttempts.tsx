@@ -49,9 +49,7 @@ const Side = ({
 			css={css`
 				position: relative;
 				${headline.medium({ fontWeight: 'bold' })}
-				color: ${isLight(teamColours)
-					? text.ctaSecondary
-					: text.ctaPrimary};
+				color: ${isLight(teamColours) ? text.ctaSecondary : text.ctaPrimary};
 				background: ${teamColours};
 				flex-basis: 50%;
 				line-height: 0.8;

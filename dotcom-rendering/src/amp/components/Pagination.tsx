@@ -62,11 +62,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 						paginationLinkStyle(pagination.newest !== undefined),
 						marginRightStyle,
 					]}
-					href={
-						pagination.newest
-							? `${guardianURL}${pagination.newest}`
-							: ''
-					}
+					href={pagination.newest ? `${guardianURL}${pagination.newest}` : ''}
 				>
 					<span>
 						<ChevronLeftDouble />
@@ -75,11 +71,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 
 				<a
 					css={paginationLinkStyle(pagination.newest !== undefined)}
-					href={
-						pagination.newest
-							? `${guardianURL}${pagination.newest}`
-							: ''
-					}
+					href={pagination.newest ? `${guardianURL}${pagination.newest}` : ''}
 				>
 					<span>
 						<ChevronLeftSingle />
@@ -97,11 +89,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 						paginationLinkStyle(pagination.older !== undefined),
 						marginRightStyle,
 					]}
-					href={
-						pagination.older
-							? `${guardianURL}${pagination.older}`
-							: ''
-					}
+					href={pagination.older ? `${guardianURL}${pagination.older}` : ''}
 				>
 					<span>
 						<ChevronRightSingle />
@@ -110,11 +98,7 @@ export const Pagination = ({ pagination, guardianURL }: Props) => {
 
 				<a
 					css={paginationLinkStyle(pagination.older !== undefined)}
-					href={
-						pagination.older
-							? `${guardianURL}${pagination.older}`
-							: ''
-					}
+					href={pagination.older ? `${guardianURL}${pagination.older}` : ''}
 				>
 					<span>
 						<ChevronRightDouble />

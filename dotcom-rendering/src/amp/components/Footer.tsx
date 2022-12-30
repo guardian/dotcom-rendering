@@ -197,8 +197,8 @@ export const Footer = ({ nav }: FooterProps) => {
 					</span>
 				</a>
 				<div css={copyright}>
-					© {year} Guardian News & Media Limited or its affiliated
-					companies. All rights reserved.
+					© {year} Guardian News & Media Limited or its affiliated companies.
+					All rights reserved.
 				</div>
 			</div>
 		</footer>

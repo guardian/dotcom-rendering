@@ -58,9 +58,7 @@ export const CardBranding = ({ branding, format }: Props) => {
 				rel="nofollow"
 				aria-label={`Visit the ${branding.sponsorName} website`}
 				onClick={() =>
-					trackSponsorLogoLinkClick(
-						branding.sponsorName.toLowerCase(),
-					)
+					trackSponsorLogoLinkClick(branding.sponsorName.toLowerCase())
 				}
 				data-cy="card-branding-logo"
 			>

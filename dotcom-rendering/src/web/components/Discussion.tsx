@@ -109,9 +109,7 @@ export const Discussion = ({
 					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
 				})
-				.catch((e) =>
-					console.error(`getCommentContext - error: ${String(e)}`),
-				);
+				.catch((e) => console.error(`getCommentContext - error: ${String(e)}`));
 		}
 	}, [discussionApiUrl, hashCommentId]);
 
@@ -167,9 +165,7 @@ export const Discussion = ({
 						pillar={format.theme}
 						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
-						isClosedForComments={
-							isClosedForComments || !enableDiscussionSwitch
-						}
+						isClosedForComments={isClosedForComments || !enableDiscussionSwitch}
 						orderByOverride={commentOrderBy}
 						shortUrl={shortUrlId}
 						additionalHeaders={{
@@ -184,9 +180,7 @@ export const Discussion = ({
 							setIsExpanded(true);
 						}}
 					/>
-					{!isExpanded && (
-						<div id="discussion-overlay" css={overlayStyles} />
-					)}
+					{!isExpanded && <div id="discussion-overlay" css={overlayStyles} />}
 				</div>
 			</div>
 			{!isExpanded && (

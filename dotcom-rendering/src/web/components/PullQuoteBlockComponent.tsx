@@ -202,8 +202,7 @@ export const PullQuoteBlockComponent = ({
 								height: 25px;
 								bottom: -25px;
 								position: absolute;
-								background-color: ${palette.background
-									.pullQuote};
+								background-color: ${palette.background.pullQuote};
 							}
 						`,
 					]}
@@ -280,8 +279,7 @@ export const PullQuoteBlockComponent = ({
 								height: 25px;
 								bottom: -25px;
 								position: absolute;
-								background-color: ${palette.background
-									.pullQuote};
+								background-color: ${palette.background.pullQuote};
 							}
 						`,
 					]}

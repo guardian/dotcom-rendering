@@ -127,8 +127,7 @@ export const Snow = () => {
 					.querySelectorAll<HTMLElement>('.snowflake')
 					.forEach((flake) => {
 						const previousFlake =
-							flake.dataset.name &&
-							previousFlakes[flake.dataset.name];
+							flake.dataset.name && previousFlakes[flake.dataset.name];
 						if (previousFlake) {
 							flake.style.transform = `translate3d(${previousFlake.x}vw, ${previousFlake.y}px, 0.0)`;
 						}
@@ -155,11 +154,7 @@ export const Snow = () => {
 	// Get the flakes to render.
 	const snowflakes = useMemo(() => {
 		return Object.values(flakes).map((flake) => (
-			<Snowflake
-				key={flake.name}
-				radius={flake.radius}
-				name={flake.name}
-			/>
+			<Snowflake key={flake.name} radius={flake.radius} name={flake.name} />
 		));
 	}, [flakes]);
 
@@ -196,16 +191,11 @@ export const Snow = () => {
 					</span>
 				</Link>
 				{seeMoreSnowInfo && (
-					<p
-						css={[
-							body.medium,
-							{ color: 'white', marginTop: '4px' },
-						]}
-					>
-						While this is meant to brighten your day, we're aware a
-						lot of people are struggling with the cost of living
-						crisis and many families are sitting freezing in the
-						cold. We hope we can still persuade you to give to our{' '}
+					<p css={[body.medium, { color: 'white', marginTop: '4px' }]}>
+						While this is meant to brighten your day, we're aware a lot of
+						people are struggling with the cost of living crisis and many
+						families are sitting freezing in the cold. We hope we can still
+						persuade you to give to our{' '}
 						<Link
 							href="https://www.theguardian.com/society/2022/dec/09/help-us-support-local-communities-to-tackle-cost-of-living-crisis"
 							cssOverrides={linkStyle}
