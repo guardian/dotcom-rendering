@@ -37,8 +37,7 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: () =>
-							Promise.resolve({ show: true, meta: undefined }),
+						canShow: () => Promise.resolve({ show: true, meta: undefined }),
 						show: () => ChosenMockComponent,
 					},
 					timeoutMillis: null,
@@ -46,8 +45,7 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-3',
-						canShow: () =>
-							Promise.resolve({ show: true, meta: undefined }),
+						canShow: () => Promise.resolve({ show: true, meta: undefined }),
 						show: () => MockComponent,
 					},
 					timeoutMillis: null,
@@ -117,8 +115,7 @@ describe('pickMessage', () => {
 				{
 					candidate: {
 						id: 'banner-2',
-						canShow: () =>
-							Promise.resolve({ show: true, meta: undefined }),
+						canShow: () => Promise.resolve({ show: true, meta: undefined }),
 						show: () => ChosenMockComponent,
 					},
 					timeoutMillis: null,

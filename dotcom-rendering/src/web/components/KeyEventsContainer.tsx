@@ -29,9 +29,9 @@ export const KeyEventsContainer = ({
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title,
-				url: `?filterKeyEvents=${String(
-					filterKeyEvents,
-				)}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
+				url: `?filterKeyEvents=${String(filterKeyEvents)}&page=with:block-${
+					keyEvent.id
+				}#block-${keyEvent.id}`,
 				date: new Date(keyEvent.blockFirstPublished),
 			};
 		});

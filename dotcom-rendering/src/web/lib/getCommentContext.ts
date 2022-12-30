@@ -106,9 +106,6 @@ export const getCommentContext = async (
 		})
 		.then((response) => response.json())
 		.catch((error) => {
-			window.guardian.modules.sentry.reportError(
-				error,
-				'get-comment-page',
-			);
+			window.guardian.modules.sentry.reportError(error, 'get-comment-page');
 		});
 };

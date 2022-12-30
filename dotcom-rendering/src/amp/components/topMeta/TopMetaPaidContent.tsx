@@ -65,12 +65,7 @@ const PaidForByLogo = ({ branding }: PaidForByLogoProps) => {
 				rel="nofollow"
 				aria-label={`Visit the ${sponsorName} website`}
 			>
-				<amp-img
-					src={logo.src}
-					width="140px"
-					height="90px"
-					alt={sponsorName}
-				/>
+				<amp-img src={logo.src} width="140px" height="90px" alt={sponsorName} />
 			</a>
 		</div>
 	);
@@ -119,10 +114,7 @@ export const TopMetaPaidContent = ({
 		</div>
 
 		<TopMetaExtras
-			sharingUrls={getSharingUrls(
-				articleData.pageId,
-				articleData.webTitle,
-			)}
+			sharingUrls={getSharingUrls(articleData.pageId, articleData.webTitle)}
 			pillar={pillar}
 			ageWarning={getAgeWarning(
 				articleData.tags,
@@ -130,8 +122,7 @@ export const TopMetaPaidContent = ({
 			)}
 			webPublicationDate={articleData.webPublicationDateDisplay}
 			twitterHandle={
-				getSoleContributor(articleData.tags, articleData.byline)
-					?.twitterHandle
+				getSoleContributor(articleData.tags, articleData.byline)?.twitterHandle
 			}
 		/>
 	</header>

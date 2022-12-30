@@ -6,9 +6,7 @@ describe('DocumentBlockComponent.getDocumentCloudAssetUrl', () => {
 			getDocumentCloudAssetUrl(
 				'https://embed.documentcloud.org/documents/20417938-test-pdf',
 			),
-		).toBe(
-			'https://assets.documentcloud.org/documents/20417938/test-pdf.pdf',
-		);
+		).toBe('https://assets.documentcloud.org/documents/20417938/test-pdf.pdf');
 	});
 	it('leave and unrecognised url unchanged', () => {
 		expect(

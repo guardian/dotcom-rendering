@@ -385,11 +385,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[
-							merchandisingAdStyles,
-							adStyles,
-							fluidFullWidthAdStyles,
-						]}
+						css={[merchandisingAdStyles, adStyles, fluidFullWidthAdStyles]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						aria-hidden="true"
@@ -410,16 +406,10 @@ export const AdSlot = ({
 				>
 					<div
 						id="dfp-ad--merchandising"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--merchandising',
-						].join(' ')}
-						css={[
-							merchandisingAdStyles,
-							adStyles,
-							fluidFullWidthAdStyles,
-						]}
+						className={['js-ad-slot', 'ad-slot', 'ad-slot--merchandising'].join(
+							' ',
+						)}
+						css={[merchandisingAdStyles, adStyles, fluidFullWidthAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						aria-hidden="true"
@@ -431,11 +421,7 @@ export const AdSlot = ({
 			return (
 				<div
 					id="dfp-ad--survey"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--survey',
-					].join(' ')}
+					className={['js-ad-slot', 'ad-slot', 'ad-slot--survey'].join(' ')}
 					css={outOfPageStyles}
 					data-link-name="ad slot survey"
 					data-name="survey"
@@ -543,7 +529,5 @@ export const AdSlot = ({
 };
 
 export const MobileStickyContainer = () => {
-	return (
-		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
-	);
+	return <div className="mobilesticky-container" css={mobileStickyAdStyles} />;
 };

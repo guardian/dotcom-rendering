@@ -96,11 +96,7 @@ const Renderer = ({
 			default:
 				return (
 					<figure
-						id={
-							'elementId' in element
-								? element.elementId
-								: undefined
-						}
+						id={'elementId' in element ? element.elementId : undefined}
 						key={index}
 					>
 						{el}
@@ -166,13 +162,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							theme: getCurrentPillar(CAPIArticle),
 						}}
 						nav={NAV}
-						subscribeUrl={
-							CAPIArticle.nav.readerRevenueLinks.header.subscribe
-						}
+						subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 						editionId={CAPIArticle.editionId}
-						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
-						}
+						headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 					/>
 				</Section>
 			</div>
@@ -219,21 +211,14 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
+							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!CAPIArticle.config.switches.remoteHeader
-							}
-							contributionsServiceUrl={
-								CAPIArticle.contributionsServiceUrl
-							}
+							remoteHeader={!!CAPIArticle.config.switches.remoteHeader}
+							contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
-								!!CAPIArticle.config.switches
-									.headerTopBarSearchCapi
+								!!CAPIArticle.config.switches.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
@@ -255,13 +240,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						theme: getCurrentPillar(CAPIArticle),
 					}}
 					nav={NAV}
-					subscribeUrl={
-						CAPIArticle.nav.readerRevenueLinks.header.subscribe
-					}
+					subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 					editionId={CAPIArticle.editionId}
-					headerTopBarSwitch={
-						!!CAPIArticle.config.switches.headerTopNav
-					}
+					headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 				/>
 			</Section>
 
@@ -306,11 +287,7 @@ export const FullPageInteractiveLayout = ({
 					background-color: ${palette.background.article};
 				`}
 			>
-				<NavHeader
-					CAPIArticle={CAPIArticle}
-					NAV={NAV}
-					format={format}
-				/>
+				<NavHeader CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
 
 				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
@@ -343,9 +320,7 @@ export const FullPageInteractiveLayout = ({
 					<Renderer
 						format={format}
 						elements={
-							CAPIArticle.blocks[0]
-								? CAPIArticle.blocks[0].elements
-								: []
+							CAPIArticle.blocks[0] ? CAPIArticle.blocks[0].elements : []
 						}
 						host={host}
 						pageId={CAPIArticle.pageId}
@@ -389,9 +364,7 @@ export const FullPageInteractiveLayout = ({
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
 					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 				/>
 			</Section>
 
@@ -399,9 +372,7 @@ export const FullPageInteractiveLayout = ({
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
-						contributionsServiceUrl={
-							CAPIArticle.contributionsServiceUrl
-						}
+						contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
@@ -411,15 +382,9 @@ export const FullPageInteractiveLayout = ({
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}
-						shouldHideReaderRevenue={
-							CAPIArticle.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!CAPIArticle.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!CAPIArticle.config.switches.puzzlesBanner
-						}
+						shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
+						remoteBannerSwitch={!!CAPIArticle.config.switches.remoteBanner}
+						puzzleBannerSwitch={!!CAPIArticle.config.switches.puzzlesBanner}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

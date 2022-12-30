@@ -65,9 +65,7 @@ export const LiveBlogBlocksAndAdverts = ({
 	return (
 		<>
 			{blocks.map((block, i) => {
-				numPixelsOfContentWithoutAdvert += calculateBlockSize(
-					block.elements,
-				);
+				numPixelsOfContentWithoutAdvert += calculateBlockSize(block.elements);
 
 				const willDisplayAdAfterBlock =
 					!isAdFreeUser &&
@@ -102,10 +100,7 @@ export const LiveBlogBlocksAndAdverts = ({
 							pinnedPostId={pinnedPost?.id}
 						/>
 						{willDisplayAdAfterBlock && (
-							<AdSlot
-								position="liveblog-inline"
-								index={numAdvertsInserted}
-							/>
+							<AdSlot position="liveblog-inline" index={numAdvertsInserted} />
 						)}
 					</>
 				);

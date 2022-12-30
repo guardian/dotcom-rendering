@@ -57,11 +57,7 @@ const ColumnOfCards50_Card50 = ({
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
 						return (
-							<LI
-								percentage="100%"
-								key={card.url}
-								padSides={true}
-							>
+							<LI percentage="100%" key={card.url} padSides={true}>
 								<CardDefaultMediaMobile
 									trail={card}
 									containerPalette={containerPalette}
@@ -111,11 +107,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
 						return (
-							<LI
-								percentage="100%"
-								key={card.url}
-								padSides={true}
-							>
+							<LI percentage="100%" key={card.url} padSides={true}>
 								<CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
@@ -227,9 +219,7 @@ export const DynamicSlow = ({
 		case 0: {
 			secondSliceLayout = 'noBigs';
 			// We support up to 8 standards when there are no bigs
-			secondSliceCards = [
-				...secondSliceGroupedTrails.standard.slice(0, 8),
-			];
+			secondSliceCards = [...secondSliceGroupedTrails.standard.slice(0, 8)];
 			break;
 		}
 		case 1: {
@@ -244,10 +234,10 @@ export const DynamicSlow = ({
 			secondSliceLayout = 'twoBigs';
 			// We support up to 2 bigs, any others will be shown as standards,
 			// meaning we support 6 total cards for this slice
-			secondSliceCards = [
-				...bigs,
-				...secondSliceGroupedTrails.standard,
-			].slice(0, 6);
+			secondSliceCards = [...bigs, ...secondSliceGroupedTrails.standard].slice(
+				0,
+				6,
+			);
 			break;
 		}
 	}

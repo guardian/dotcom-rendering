@@ -33,9 +33,7 @@ export const StarRating = ({ rating, size }: Props) => {
 	const stars = (n: number) => {
 		return Array(5)
 			.fill(0)
-			.map((_, i) => (
-				<Star starId={`${size}${i}`} isEmpty={i >= n} key={i} />
-			));
+			.map((_, i) => <Star starId={`${size}${i}`} isEmpty={i >= n} key={i} />);
 	};
 	return <div css={[ratingsWrapper, sizeClass]}>{stars(rating)}</div>;
 };

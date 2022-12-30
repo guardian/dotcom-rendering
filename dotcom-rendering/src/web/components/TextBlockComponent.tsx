@@ -194,8 +194,7 @@ export const TextBlockComponent = ({
 					height: 13px;
 					width: 13px;
 					margin-right: 0.2px;
-					background-color: ${decidePalette(format).background
-						.bullet};
+					background-color: ${decidePalette(format).background.bullet};
 				}
 
 				${until.tablet} {

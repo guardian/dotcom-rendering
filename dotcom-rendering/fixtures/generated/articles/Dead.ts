@@ -51,7 +51,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value:
+						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'p',
@@ -99,7 +100,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value:
+						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'p',
@@ -147,7 +149,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value:
+						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'p',
@@ -191,7 +194,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value:
+						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'edition',
@@ -239,7 +243,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value:
+						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'edition',
@@ -1359,7 +1364,8 @@ export const Dead: FEArticleType = {
 	standfirst:
 		'<p>Team of experts answer questions about mission following safe landing on the red planet on Thursday – follow the briefing live</p>\n<ul>\n <li><a href="https://www.theguardian.com/science/gallery/2021/feb/19/nasa-perseverance-mission-to-mars-in-pictures">In pictures: Perseverance mission to Mars</a></li>\n</ul>',
 	sectionUrl: 'science/mars',
-	pageId: 'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	pageId:
+		'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	version: 3,
 	tags: [
 		{
@@ -1435,7 +1441,8 @@ export const Dead: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	webURL:
+		'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Mars',
@@ -3286,7 +3293,8 @@ export const Dead: FEArticleType = {
 		{
 			'@type': 'LiveBlogPosting',
 			'@context': 'http://schema.org',
-			'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'@id':
+				'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -3528,8 +3536,7 @@ export const Dead: FEArticleType = {
 					dateModified: '2021-02-19T19:47:39.000Z',
 					mainEntityOfPage:
 						'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
-					articleBody:
-						'Have you typed “perseverance” into Google today?',
+					articleBody: 'Have you typed “perseverance” into Google today?',
 				},
 				{
 					'@type': 'BlogPosting',
@@ -3985,10 +3992,12 @@ export const Dead: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'@id':
+				'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			},
 		},
 	],
@@ -4360,7 +4369,8 @@ export const Dead: FEArticleType = {
 			blockFirstPublished: 1613758917000,
 			blockFirstPublishedDisplay: '18.21 GMT',
 			blockFirstPublishedDisplayNoTimezone: '18.21',
-			title: 'New image of Perseverance shows rover being lowered to Mars surface',
+			title:
+				'New image of Perseverance shows rover being lowered to Mars surface',
 			contributors: [],
 			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -4391,7 +4401,8 @@ export const Dead: FEArticleType = {
 			blockFirstPublished: 1613757946000,
 			blockFirstPublishedDisplay: '18.05 GMT',
 			blockFirstPublishedDisplayNoTimezone: '18.05',
-			title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
+			title:
+				'Nasa scientists show new images of Perseverance rover after Mars landing',
 			contributors: [],
 			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
@@ -4426,7 +4437,8 @@ export const Dead: FEArticleType = {
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-					title: 'Nasa mission control erupts as Perseverance rover successfully lands on Mars',
+					title:
+						'Nasa mission control erupts as Perseverance rover successfully lands on Mars',
 					url: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
 					originalUrl: 'https://www.youtube.com/watch?v=Ew24GrPKi3Y',
 					embedUrl:
@@ -4593,8 +4605,7 @@ export const Dead: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -4626,7 +4637,8 @@ export const Dead: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

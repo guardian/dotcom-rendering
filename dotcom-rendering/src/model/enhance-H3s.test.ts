@@ -29,9 +29,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does not set a h3 if the article is not analysis / explainer / numbered list', () => {
@@ -59,9 +57,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, StandardArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, StandardArticle.format)).toEqual(expectedOutput);
 	});
 	it('does set a h3 if there is more than one strong tag', () => {
 		const input: Block[] = [
@@ -88,9 +84,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does set an h3 and extract all text even if it is between strong tags', () => {
@@ -118,9 +112,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does not set a h3 if there is text before the strong tag', () => {
@@ -148,9 +140,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does not set a h3 if there is text after the strong tag', () => {
@@ -178,9 +168,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does not set a h3 if there is text before and after the strong tag', () => {
@@ -208,9 +196,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 
 	it('does not set a h3 if there if the html does not end with a strong p tag combo', () => {
@@ -238,8 +224,6 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
-			expectedOutput,
-		);
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(expectedOutput);
 	});
 });

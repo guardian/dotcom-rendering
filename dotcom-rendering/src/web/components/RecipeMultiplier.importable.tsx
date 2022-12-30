@@ -39,8 +39,8 @@ const isServer = typeof document === 'undefined';
 const serves = isServer
 	? 1
 	: parseFloat(
-			document.querySelector<HTMLElement>('gu-recipe[serves]')?.dataset
-				.value ?? '1',
+			document.querySelector<HTMLElement>('gu-recipe[serves]')?.dataset.value ??
+				'1',
 	  );
 
 const transform = ({
@@ -89,29 +89,26 @@ export const RecipeMultiplier = () => {
 	}, []);
 
 	useEffect(() => {
-		const element =
-			document.querySelector<HTMLElement>('gu-recipe[serves]');
+		const element = document.querySelector<HTMLElement>('gu-recipe[serves]');
 		if (element) element.innerText = servings.toString();
 		setMultiplier(servings / serves);
 	}, [servings]);
 
 	useEffect(() => {
-		document
-			.querySelectorAll<HTMLElement>('gu-recipe')
-			.forEach((element) => {
-				const { value, separator, unit } = element.dataset;
+		document.querySelectorAll<HTMLElement>('gu-recipe').forEach((element) => {
+			const { value, separator, unit } = element.dataset;
 
-				if (isUndefined(value) || isUndefined(separator)) return;
+			if (isUndefined(value) || isUndefined(separator)) return;
 
-				if (isUndefined(unit)) return;
+			if (isUndefined(unit)) return;
 
-				element.innerText = transform({
-					value,
-					separator,
-					unit,
-					multiplier,
-				});
+			element.innerText = transform({
+				value,
+				separator,
+				unit,
+				multiplier,
 			});
+		});
 	}, [multiplier]);
 
 	const handleChange: ChangeEventHandler<HTMLInputElement> = ({

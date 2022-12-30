@@ -115,8 +115,7 @@ export const hasUserDismissedGate = (
 const retrieveDismissedCount = (variant: string, name: string): number => {
 	try {
 		const prefs = getSigninGatePrefsSafely();
-		const dismissed: any =
-			prefs[localStorageDismissedCountKey(variant, name)];
+		const dismissed: any = prefs[localStorageDismissedCountKey(variant, name)];
 
 		if (Number.isFinite(dismissed)) {
 			return dismissed;

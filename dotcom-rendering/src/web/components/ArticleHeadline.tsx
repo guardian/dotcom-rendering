@@ -248,9 +248,7 @@ const WithAgeWarning = ({
 	if (age) {
 		return (
 			<>
-				<div
-					css={[backgroundStyles(palette), ageWarningMargins(format)]}
-				>
+				<div css={[backgroundStyles(palette), ageWarningMargins(format)]}>
 					<AgeWarning age={age} />
 				</div>
 				{children}
@@ -360,9 +358,7 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<h1
@@ -394,16 +390,12 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<h1
 									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: lightFont,
+										format.theme === ArticleSpecial.Labs ? labsFont : lightFont,
 										invertedText,
 										css`
 											color: ${palette.text.headline};
@@ -414,11 +406,7 @@ export const ArticleHeadline = ({
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
-								<HeadlineByline
-									format={format}
-									byline={byline}
-									tags={tags}
-								/>
+								<HeadlineByline format={format} byline={byline} tags={tags} />
 							)}
 						</div>
 					);
@@ -429,9 +417,7 @@ export const ArticleHeadline = ({
 						// wrapper div as this affects the z-index stack
 						<WithAgeWarning
 							tags={tags}
-							webPublicationDateDeprecated={
-								webPublicationDateDeprecated
-							}
+							webPublicationDateDeprecated={webPublicationDateDeprecated}
 							format={format}
 						>
 							<h1
@@ -472,17 +458,13 @@ export const ArticleHeadline = ({
 				>
 					<WithAgeWarning
 						tags={tags}
-						webPublicationDateDeprecated={
-							webPublicationDateDeprecated
-						}
+						webPublicationDateDeprecated={webPublicationDateDeprecated}
 						format={format}
 					>
 						<DesignTag format={format} />
 						<h1
 							css={[
-								format.theme === ArticleSpecial.Labs
-									? labsFont
-									: boldFont,
+								format.theme === ArticleSpecial.Labs ? labsFont : boldFont,
 								topPadding,
 								css`
 									color: ${palette.text.headline};
@@ -512,17 +494,13 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
 								<h1
 									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: boldFont,
+										format.theme === ArticleSpecial.Labs ? labsFont : boldFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -546,17 +524,13 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
 								<h1
 									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: lightFont,
+										format.theme === ArticleSpecial.Labs ? labsFont : lightFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -567,11 +541,7 @@ export const ArticleHeadline = ({
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
-								<HeadlineByline
-									format={format}
-									byline={byline}
-									tags={tags}
-								/>
+								<HeadlineByline format={format} byline={byline} tags={tags} />
 							)}
 						</div>
 					);
@@ -587,17 +557,13 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
 								<h1
 									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: lightFont,
+										format.theme === ArticleSpecial.Labs ? labsFont : lightFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -627,9 +593,7 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
@@ -657,11 +621,7 @@ export const ArticleHeadline = ({
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
-								<HeadlineByline
-									format={format}
-									byline={byline}
-									tags={tags}
-								/>
+								<HeadlineByline format={format} byline={byline} tags={tags} />
 							)}
 						</div>
 					);
@@ -676,9 +636,7 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
@@ -697,11 +655,7 @@ export const ArticleHeadline = ({
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
-								<HeadlineByline
-									format={format}
-									byline={byline}
-									tags={tags}
-								/>
+								<HeadlineByline format={format} byline={byline} tags={tags} />
 							)}
 						</div>
 					);
@@ -717,9 +671,7 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
@@ -757,16 +709,12 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />
 								<h1
-									className={
-										interactiveLegacyClasses.headline
-									}
+									className={interactiveLegacyClasses.headline}
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
@@ -793,9 +741,7 @@ export const ArticleHeadline = ({
 						>
 							<WithAgeWarning
 								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
+								webPublicationDateDeprecated={webPublicationDateDeprecated}
 								format={format}
 							>
 								<DesignTag format={format} />

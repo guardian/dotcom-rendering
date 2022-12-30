@@ -8,11 +8,7 @@ export default {
 	title: 'Components/FixedSmallSlowVThird',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };

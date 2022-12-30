@@ -120,10 +120,7 @@ export const Elements = (
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 				return (
-					<AudioAtomBlockComponent
-						key={element.elementId}
-						element={element}
-					/>
+					<AudioAtomBlockComponent key={element.elementId} element={element} />
 				);
 			case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 				return (
@@ -142,10 +139,7 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.CommentBlockElement':
 				return (
-					<CommentBlockComponent
-						key={element.elementId}
-						element={element}
-					/>
+					<CommentBlockComponent key={element.elementId} element={element} />
 				);
 			case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 				return <ContentAtomBlockComponent key={element.elementId} />;
@@ -159,10 +153,7 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				return (
-					<EmbedBlockComponentAMP
-						key={element.elementId}
-						element={element}
-					/>
+					<EmbedBlockComponentAMP key={element.elementId} element={element} />
 				);
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 				return (
@@ -276,10 +267,7 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 				return (
-					<SoundcloudBlockComponent
-						key={element.elementId}
-						element={element}
-					/>
+					<SoundcloudBlockComponent key={element.elementId} element={element} />
 				);
 			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 				return (

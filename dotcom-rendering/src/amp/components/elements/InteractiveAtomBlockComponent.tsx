@@ -95,11 +95,7 @@ export const InteractiveAtomBlockComponent = ({
 						data-cy="atom-embed-url"
 					>
 						{!!placeholderUrl && (
-							<amp-img
-								placeholder={true}
-								layout="fill"
-								src={placeholderUrl}
-							/>
+							<amp-img placeholder={true} layout="fill" src={placeholderUrl} />
 						)}
 						<div overflow="" className={showMore}>
 							<ShowMoreButton />

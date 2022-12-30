@@ -652,7 +652,8 @@ describe('Enhance Numbered Lists', () => {
 						spaceAbove: 'loose',
 					},
 					{
-						_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 						elementId: 'mockId',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
@@ -707,7 +708,8 @@ describe('Enhance Numbered Lists', () => {
 						spaceAbove: 'loose',
 					},
 					{
-						_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 						elementId: 'mockId1',
 						position: 1,
 						html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
@@ -723,7 +725,8 @@ describe('Enhance Numbered Lists', () => {
 						spaceAbove: 'loose',
 					},
 					{
-						_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 						elementId: 'mockId2',
 						position: 2,
 						html: '<h2 data-ignore="global-h2-styling">Other text</h2>',
@@ -735,7 +738,8 @@ describe('Enhance Numbered Lists', () => {
 						spaceAbove: 'loose',
 					},
 					{
-						_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 
 						elementId: 'mockId3',
 						position: 3,

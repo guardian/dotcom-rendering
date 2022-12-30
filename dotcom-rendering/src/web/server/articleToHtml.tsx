@@ -36,10 +36,7 @@ interface Props {
 }
 
 const decideTitle = (article: FEArticleType): string => {
-	if (
-		decideTheme(article.format) === ArticlePillar.Opinion &&
-		article.byline
-	) {
+	if (decideTheme(article.format) === ArticlePillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
@@ -93,8 +90,7 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const pageHasTweetElements = CAPIElements.some(
 		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.TweetBlockElement',
+			element._type === 'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
 	const shouldServeVariantBundle: boolean = [
@@ -124,8 +120,7 @@ export const articleToHtml = ({ article }: Props): string => {
 			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
+			process.env.COMMERCIAL_BUNDLE_URL ?? article.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
@@ -134,9 +129,7 @@ export const articleToHtml = ({ article }: Props): string => {
 			...expeditedIslands.flatMap((name) =>
 				getScriptArrayFromFile(`${name}.js`),
 			),
-		].map((script) =>
-			offerHttp3 && script ? getHttp3Url(script) : script,
-		),
+		].map((script) => (offerHttp3 && script ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -159,9 +152,7 @@ export const articleToHtml = ({ article }: Props): string => {
 	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
 	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
+	const variantScript = gaChunk.find((script) => script.match(VARIANT_SCRIPT));
 	const gaPath = {
 		modern: (modernScript ?? variantScript) as string,
 		legacy: legacyScript as string,

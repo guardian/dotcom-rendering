@@ -66,9 +66,7 @@ export const HeaderTopBarEditionDropdown = ({
 			  ]
 			: []),
 	].map((link) =>
-		link.id.toUpperCase() === editionId
-			? { ...link, isActive: true }
-			: link,
+		link.id.toUpperCase() === editionId ? { ...link, isActive: true } : link,
 	);
 
 	// Find active link, default to UK

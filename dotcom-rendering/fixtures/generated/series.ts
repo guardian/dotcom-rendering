@@ -26,10 +26,13 @@ export const series = {
 			byline: 'Stuart Jeffries',
 			masterImage:
 				'https://media.guim.co.uk/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg',
-			image: 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
+			image:
+				'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
-				'460': 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=460&quality=85&auto=format&fit=max&s=262fb0eec17d174c48d0893f58cf57f6',
+				'300':
+					'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
+				'460':
+					'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=460&quality=85&auto=format&fit=max&s=262fb0eec17d174c48d0893f58cf57f6',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -53,10 +56,13 @@ export const series = {
 			byline: 'Lucy Mangan',
 			masterImage:
 				'https://media.guim.co.uk/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg',
-			image: 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
+			image:
+				'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
-				'460': 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=460&quality=85&auto=format&fit=max&s=8b53ceaae9fdf6d1daaa3c0cb51e84ae',
+				'300':
+					'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
+				'460':
+					'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=460&quality=85&auto=format&fit=max&s=8b53ceaae9fdf6d1daaa3c0cb51e84ae',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -80,10 +86,13 @@ export const series = {
 			byline: 'Leila Latif',
 			masterImage:
 				'https://media.guim.co.uk/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg',
-			image: 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
+			image:
+				'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
-				'460': 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=10fb6ec2f9da65d46e0f4f3e4a958968',
+				'300':
+					'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
+				'460':
+					'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=10fb6ec2f9da65d46e0f4f3e4a958968',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -107,10 +116,13 @@ export const series = {
 			byline: 'Lucy Mangan',
 			masterImage:
 				'https://media.guim.co.uk/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg',
-			image: 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
+			image:
+				'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
-				'460': 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=460&quality=85&auto=format&fit=max&s=2dd3d66b61401fe1266ca8473058e4dc',
+				'300':
+					'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
+				'460':
+					'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=460&quality=85&auto=format&fit=max&s=2dd3d66b61401fe1266ca8473058e4dc',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -134,10 +146,13 @@ export const series = {
 			byline: 'Stuart Heritage',
 			masterImage:
 				'https://media.guim.co.uk/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg',
-			image: 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
+			image:
+				'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
-				'460': 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=460&quality=85&auto=format&fit=max&s=7969d69bc0479444d699859f0ccc3298',
+				'300':
+					'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
+				'460':
+					'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=460&quality=85&auto=format&fit=max&s=7969d69bc0479444d699859f0ccc3298',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -161,10 +176,13 @@ export const series = {
 			byline: 'Rebecca Nicholson',
 			masterImage:
 				'https://media.guim.co.uk/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg',
-			image: 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
+			image:
+				'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
-				'460': 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=460&quality=85&auto=format&fit=max&s=3df25cae424c7d005f9a205aa8caca14',
+				'300':
+					'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
+				'460':
+					'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=460&quality=85&auto=format&fit=max&s=3df25cae424c7d005f9a205aa8caca14',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -188,10 +206,13 @@ export const series = {
 			byline: 'Rebecca Nicholson',
 			masterImage:
 				'https://media.guim.co.uk/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg',
-			image: 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
+			image:
+				'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
-				'460': 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=562c12574634c9e52b227d08c198af27',
+				'300':
+					'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
+				'460':
+					'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=562c12574634c9e52b227d08c198af27',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -215,10 +236,13 @@ export const series = {
 			byline: 'Rebecca Nicholson',
 			masterImage:
 				'https://media.guim.co.uk/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg',
-			image: 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
+			image:
+				'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
-				'460': 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=460&quality=85&auto=format&fit=max&s=019ab2dd892c58a9f74a0006ddc9911c',
+				'300':
+					'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
+				'460':
+					'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=460&quality=85&auto=format&fit=max&s=019ab2dd892c58a9f74a0006ddc9911c',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -242,10 +266,13 @@ export const series = {
 			byline: 'Lucy Mangan',
 			masterImage:
 				'https://media.guim.co.uk/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
+			image:
+				'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
-				'460': 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c1fd75fde6f0d08ea9daaac5fe092c8d',
+				'300':
+					'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
+				'460':
+					'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c1fd75fde6f0d08ea9daaac5fe092c8d',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -269,10 +296,13 @@ export const series = {
 			byline: 'Stuart Jeffries',
 			masterImage:
 				'https://media.guim.co.uk/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg',
-			image: 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
+			image:
+				'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
-				'460': 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=460&quality=85&auto=format&fit=max&s=31d980274aed29ad6443d4d1f0a0b841',
+				'300':
+					'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
+				'460':
+					'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=460&quality=85&auto=format&fit=max&s=31d980274aed29ad6443d4d1f0a0b841',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',

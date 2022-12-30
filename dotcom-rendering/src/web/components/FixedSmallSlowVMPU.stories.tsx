@@ -8,11 +8,7 @@ export default {
 	title: 'Components/FixedSmallSlowVMPU',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };
@@ -23,11 +19,7 @@ export const FourCards = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 4)}
-			showAge={true}
-			index={1}
-		/>
+		<FixedSmallSlowVMPU trails={trails.slice(0, 4)} showAge={true} index={1} />
 	</Section>
 );
 
@@ -39,11 +31,7 @@ export const ThreeCards = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 3)}
-			showAge={true}
-			index={1}
-		/>
+		<FixedSmallSlowVMPU trails={trails.slice(0, 3)} showAge={true} index={1} />
 	</Section>
 );
 
@@ -55,11 +43,7 @@ export const TwoCards = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 2)}
-			showAge={true}
-			index={1}
-		/>
+		<FixedSmallSlowVMPU trails={trails.slice(0, 2)} showAge={true} index={1} />
 	</Section>
 );
 
@@ -71,11 +55,7 @@ export const OneCard = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU
-			trails={trails.slice(0, 1)}
-			showAge={true}
-			index={1}
-		/>
+		<FixedSmallSlowVMPU trails={trails.slice(0, 1)} showAge={true} index={1} />
 	</Section>
 );
 

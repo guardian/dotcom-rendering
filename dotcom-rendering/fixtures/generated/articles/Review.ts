@@ -62,7 +62,8 @@ export const Review: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+					value:
+						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
 					name: 'sh',
@@ -109,7 +110,8 @@ export const Review: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+					value:
+						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
 					name: 'sh',
@@ -172,7 +174,8 @@ export const Review: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+					value:
+						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
 					name: 'sh',
@@ -223,7 +226,8 @@ export const Review: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+					value:
+						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
 					name: 'sh',
@@ -278,7 +282,8 @@ export const Review: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+					value:
+						'/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 				},
 				{
 					name: 'sh',
@@ -1275,7 +1280,8 @@ export const Review: FEArticleType = {
 		},
 	],
 	pillar: 'culture',
-	webURL: 'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+	webURL:
+		'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'TV comedy',
@@ -1833,8 +1839,7 @@ export const Review: FEArticleType = {
 					},
 					data: {
 						alt: 'Gillian Anderson as Jean.',
-						caption:
-							'Relishing every moment … Gillian Anderson as Jean.',
+						caption: 'Relishing every moment … Gillian Anderson as Jean.',
 						credit: 'Photograph: Netflix',
 					},
 					displayCredit: true,
@@ -2105,7 +2110,8 @@ export const Review: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+			'@id':
+				'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2153,10 +2159,12 @@ export const Review: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+			'@id':
+				'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 			},
 		},
 	],
@@ -2292,8 +2300,7 @@ export const Review: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2325,7 +2332,8 @@ export const Review: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

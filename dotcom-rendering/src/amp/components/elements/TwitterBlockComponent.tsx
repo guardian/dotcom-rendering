@@ -86,9 +86,7 @@ export const TwitterBlockComponent = ({ element, pillar }: Props) => {
 		>
 			{!!fallbackHTML && (
 				<div placeholder="" css={TextStyle(pillar)}>
-					<blockquote
-						dangerouslySetInnerHTML={{ __html: fallbackHTML }}
-					/>
+					<blockquote dangerouslySetInnerHTML={{ __html: fallbackHTML }} />
 				</div>
 			)}
 		</amp-twitter>

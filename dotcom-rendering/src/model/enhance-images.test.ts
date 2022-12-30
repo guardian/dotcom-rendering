@@ -50,9 +50,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('creates a multi image element if 2 images in a row are halfWidth', () => {
@@ -76,7 +74,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -107,9 +106,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('does not create a multi image element if roles are not halfWidth', () => {
@@ -157,9 +154,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('does not use a multi block element for a single image, even when halfWidth', () => {
@@ -196,9 +191,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('sets the title prop for the previous image element when a h2 caption is found', () => {
@@ -208,7 +201,8 @@ describe('Enhance Images', () => {
 					elements: [
 						image,
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>Example title text</h2>',
 						},
@@ -234,9 +228,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('handles when a caption, then a title follow an image, both are used', () => {
@@ -251,7 +243,8 @@ describe('Enhance Images', () => {
 							html: '<ul><li><p>This is the caption</p></li></ul>',
 						},
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
@@ -273,8 +266,7 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								caption: '<ul><li><p>This is the caption</p></li></ul>',
 								credit: '',
 							},
 							title: 'The title',
@@ -288,9 +280,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('halfWidth images without an image to be paired with are placed as single images by themselves', () => {
@@ -315,7 +305,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -346,8 +337,7 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								caption: '<ul><li><p>This is the caption</p></li></ul>',
 								credit: '',
 							},
 						},
@@ -355,9 +345,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('handles when a title, then a caption follow an image, both are used', () => {
@@ -367,7 +355,8 @@ describe('Enhance Images', () => {
 					elements: [
 						image,
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
@@ -394,8 +383,7 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								caption: '<ul><li><p>This is the caption</p></li></ul>',
 								credit: '',
 							},
 							title: 'The title',
@@ -409,9 +397,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('removes default captions for photo essays and sets none at all if no ul element is found', () => {
@@ -439,9 +425,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 		it('handles if the last few images are not followed by any caption or title', () => {
 			const input: Block[] = [
@@ -450,7 +434,8 @@ describe('Enhance Images', () => {
 					elements: [
 						image,
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
@@ -479,8 +464,7 @@ describe('Enhance Images', () => {
 							displayCredit: false,
 							data: {
 								...image.data,
-								caption:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								caption: '<ul><li><p>This is the caption</p></li></ul>',
 								credit: '',
 							},
 							title: 'The title',
@@ -514,9 +498,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 
 		it('will pass through other element types', () => {
@@ -526,7 +508,8 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							// @ts-expect-error -- Need to ignore TS to check test works for other element types
-							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
 							pillar: ArticlePillar.News,
@@ -534,7 +517,8 @@ describe('Enhance Images', () => {
 						},
 						image,
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>The title</h2>',
 						},
@@ -547,7 +531,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
 							pillar: ArticlePillar.News,
@@ -567,9 +552,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
-				expectedOutput,
-			);
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(expectedOutput);
 		});
 	});
 
@@ -621,7 +604,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -639,7 +623,8 @@ describe('Enhance Images', () => {
 							],
 						},
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -655,8 +640,7 @@ describe('Enhance Images', () => {
 									data: { ...image.data, caption: '' },
 								},
 							],
-							caption:
-								'<ul><li><p>This is the caption</p></li></ul>',
+							caption: '<ul><li><p>This is the caption</p></li></ul>',
 						},
 					],
 				},
@@ -724,7 +708,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -858,7 +843,8 @@ describe('Enhance Images', () => {
 					elements: [
 						image,
 						{
-							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2>Example title text</h2>',
 						},
@@ -894,7 +880,8 @@ describe('Enhance Images', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -956,7 +943,8 @@ describe('Enhance Images', () => {
 							},
 						},
 						{
-							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
+							_type:
+								'model.dotcomrendering.pageElements.MultiImageBlockElement',
 							elementId: images[0].elementId,
 							images: [
 								{
@@ -972,8 +960,7 @@ describe('Enhance Images', () => {
 									data: { ...image.data, caption: '' },
 								},
 							],
-							caption:
-								'<ul><li><p>This is the caption</p></li></ul>',
+							caption: '<ul><li><p>This is the caption</p></li></ul>',
 						},
 					],
 				},

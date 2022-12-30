@@ -32,15 +32,12 @@ export const SignInGateMain = ({
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>You need to register to keep reading</h1>
-			<p css={bodyBold}>
-				It’s still free to read - this is not a paywall
-			</p>
+			<p css={bodyBold}>It’s still free to read - this is not a paywall</p>
 			<p css={bodyText}>
-				We’re committed to keeping our quality reporting open. By
-				registering and providing us with insight into your preferences,
-				you’re helping us to engage with you more deeply, and that
-				allows us to keep our journalism free for all. You’ll always be
-				able to control your own{' '}
+				We’re committed to keeping our quality reporting open. By registering
+				and providing us with insight into your preferences, you’re helping us
+				to engage with you more deeply, and that allows us to keep our
+				journalism free for all. You’ll always be able to control your own{' '}
 				<button
 					data-cy="sign-in-gate-main_privacy"
 					css={privacyLink}

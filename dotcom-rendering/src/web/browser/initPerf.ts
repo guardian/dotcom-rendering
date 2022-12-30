@@ -22,9 +22,7 @@ export const initPerf = (
 	const start = () => {
 		const { startTime = -1 } =
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
-			perf.mark(startKey) ??
-			perf.getEntriesByName(startKey, 'mark')[0] ??
-			{};
+			perf.mark(startKey) ?? perf.getEntriesByName(startKey, 'mark')[0] ?? {};
 
 		return Math.ceil(startTime);
 	};

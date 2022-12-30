@@ -11,9 +11,7 @@ describe('getForcedParticipationsFromUrl', () => {
 
 	it('Returns multiple forced ab test variants', () => {
 		expect(
-			getForcedParticipationsFromUrl(
-				'#ab-inTest=variantId,inTest2=variantId2',
-			),
+			getForcedParticipationsFromUrl('#ab-inTest=variantId,inTest2=variantId2'),
 		).toStrictEqual({
 			inTest2: { variant: 'variantId2' },
 			inTest: { variant: 'variantId' },

@@ -12,14 +12,7 @@ const groupedTrails = {
 	huge: [],
 	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
 	big: [trails[2], trails[3]],
-	standard: [
-		trails[4],
-		trails[5],
-		trails[6],
-		trails[7],
-		trails[8],
-		trails[9],
-	],
+	standard: [trails[4], trails[5], trails[6], trails[7], trails[8], trails[9]],
 };
 
 export const EventPalette = () => (
@@ -41,11 +34,7 @@ export const EventPalette = () => (
 EventPalette.story = {
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };

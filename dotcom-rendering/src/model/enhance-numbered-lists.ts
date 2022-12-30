@@ -8,9 +8,7 @@ import type {
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
-	if (
-		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	) {
+	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement') {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);
@@ -20,8 +18,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
 	const containsStrongtags =
 		frag.firstElementChild.outerHTML.includes('<strong>');
-	const doesNotContainLinks =
-		!frag.firstElementChild.outerHTML.includes('<a>');
+	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes('<a>');
 	const htmlLength = html.length;
 	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
@@ -89,8 +86,7 @@ const extractStarCount = (element: CAPIElement): number => {
 
 const isStarableImage = (element: CAPIElement | undefined): boolean => {
 	return (
-		element?._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+		element?._type === 'model.dotcomrendering.pageElements.ImageBlockElement' &&
 		element.role !== 'thumbnail'
 	);
 };
@@ -101,10 +97,7 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement, index) => {
 		switch (thisElement._type) {
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
-				if (
-					isStarRating(thisElement) &&
-					isStarableImage(elements[index + 1])
-				) {
+				if (isStarRating(thisElement) && isStarableImage(elements[index + 1])) {
 					// Remember this rating so we can add it to the next element
 					previousRating = extractStarCount(thisElement);
 				} else {
@@ -113,10 +106,7 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 				}
 				break;
 			case 'model.dotcomrendering.pageElements.ImageBlockElement':
-				if (
-					previousRating !== undefined &&
-					isStarableImage(thisElement)
-				) {
+				if (previousRating !== undefined && isStarableImage(thisElement)) {
 					// Add this image using the rating we remembered
 					starified.push({
 						...thisElement,
@@ -184,9 +174,7 @@ const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
 const isItemLink = (element: CAPIElement): boolean => {
 	if (!element) return false;
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
-	if (
-		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	) {
+	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement') {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);

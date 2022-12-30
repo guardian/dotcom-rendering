@@ -64,15 +64,8 @@ export const Article = ({
 	permutive: { projectId, apiKey, payload },
 }: ArticleProps) => {
 	return (
-		<ContentABTestProvider
-			switches={config.switches}
-			pageId={config.pageId}
-		>
-			<Permutive
-				projectId={projectId}
-				apiKey={apiKey}
-				payload={payload}
-			/>
+		<ContentABTestProvider switches={config.switches} pageId={config.pageId}>
+			<Permutive projectId={projectId} apiKey={apiKey} payload={payload} />
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
@@ -82,10 +75,7 @@ export const Article = ({
 
 			{/* /TODO change to gray bgcolor */}
 			<div key="main" css={[backgroundColour, containerStyles]}>
-				<Header
-					nav={nav}
-					guardianBaseURL={articleData.guardianBaseURL}
-				/>
+				<Header nav={nav} guardianBaseURL={articleData.guardianBaseURL} />
 				<Body data={articleData} config={config} />
 				<Onward
 					pageID={articleData.pageId}

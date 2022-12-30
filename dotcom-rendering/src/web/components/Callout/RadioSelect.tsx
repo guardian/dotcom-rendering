@@ -29,14 +29,11 @@ export const RadioSelect = ({
 		<RadioGroup
 			error={validationErrors?.[formField.id]}
 			name={formField.name}
-			orientation={
-				formField.options.length > 2 ? 'vertical' : 'horizontal'
-			}
+			orientation={formField.options.length > 2 ? 'vertical' : 'horizontal'}
 		>
 			{formField.options.map((option, index) => {
 				const isRadioChecked =
-					formField.id in formData &&
-					formData[formField.id] === option.value;
+					formField.id in formData && formData[formField.id] === option.value;
 				return (
 					<Radio
 						data-testid={`form-field-${option.value}`}

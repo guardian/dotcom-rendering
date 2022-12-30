@@ -298,8 +298,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.byline,
 	)?.bylineLargeImageUrl;
 
-	const { branding } =
-		CAPIArticle.commercialProperties[CAPIArticle.editionId];
+	const { branding } = CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
 	const palette = decidePalette(format);
 
@@ -342,21 +341,14 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								discussionApiUrl={
-									CAPIArticle.config.discussionApiUrl
-								}
+								discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!CAPIArticle.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
+								remoteHeader={!!CAPIArticle.config.switches.remoteHeader}
+								contributionsServiceUrl={contributionsServiceUrl}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
-									!!CAPIArticle.config.switches
-										.headerTopBarSearchCapi
+									!!CAPIArticle.config.switches.headerTopBarSearchCapi
 								}
 							/>
 						</Section>
@@ -376,14 +368,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								...format,
 								theme: getCurrentPillar(CAPIArticle),
 							}}
-							subscribeUrl={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.subscribe
-							}
+							subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 							editionId={CAPIArticle.editionId}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 						/>
 					</Section>
 
@@ -460,8 +447,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											CAPIArticle.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											!!CAPIArticle.starRating ||
-											CAPIArticle.starRating === 0
+											!!CAPIArticle.starRating || CAPIArticle.starRating === 0
 										}
 										hasAvatar={!!avatarUrl}
 									/>
@@ -471,9 +457,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											<div css={avatarPositionStyles}>
 												<ContributorAvatar
 													imageSrc={avatarUrl}
-													imageAlt={
-														CAPIArticle.byline ?? ''
-													}
+													imageAlt={CAPIArticle.byline ?? ''}
 												/>
 											</div>
 										)}
@@ -502,10 +486,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={CAPIArticle.standfirst}
-							/>
+							<Standfirst format={format} standfirst={CAPIArticle.standfirst} />
 						</GridItem>
 						<GridItem area="media">
 							<div
@@ -520,8 +501,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									elements={CAPIArticle.mainMediaElements}
 									adTargeting={adTargeting}
 									starRating={
-										format.design ===
-											ArticleDesign.Review &&
+										format.design === ArticleDesign.Review &&
 										CAPIArticle.starRating
 											? CAPIArticle.starRating
 											: undefined
@@ -545,21 +525,16 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									webTitle={CAPIArticle.webTitle}
 									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
-									primaryDateline={
-										CAPIArticle.webPublicationDateDisplay
-									}
+									primaryDateline={CAPIArticle.webPublicationDateDisplay}
 									secondaryDateline={
 										CAPIArticle.webPublicationSecondaryDateDisplay
 									}
 									isCommentable={CAPIArticle.isCommentable}
-									discussionApiUrl={
-										CAPIArticle.config.discussionApiUrl
-									}
+									discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										!!CAPIArticle.config.switches
-											.serverShareCounts
+										!!CAPIArticle.config.switches.serverShareCounts
 									}
 								/>
 							</div>
@@ -576,63 +551,34 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										webTitle={CAPIArticle.webTitle}
 										ajaxUrl={CAPIArticle.config.ajaxUrl}
 										switches={CAPIArticle.config.switches}
-										isSensitive={
-											CAPIArticle.config.isSensitive
-										}
+										isSensitive={CAPIArticle.config.isSensitive}
 										isAdFreeUser={CAPIArticle.isAdFreeUser}
 										section={CAPIArticle.config.section}
 										shouldHideReaderRevenue={
 											CAPIArticle.shouldHideReaderRevenue
 										}
 										tags={CAPIArticle.tags}
-										isPaidContent={
-											!!CAPIArticle.config.isPaidContent
-										}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
+										isPaidContent={!!CAPIArticle.config.isPaidContent}
+										contributionsServiceUrl={contributionsServiceUrl}
 										contentType={CAPIArticle.contentType}
-										sectionName={
-											CAPIArticle.sectionName || ''
-										}
+										sectionName={CAPIArticle.sectionName || ''}
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										keywordIds={
-											CAPIArticle.config.keywordIds
-										}
+										keywordIds={CAPIArticle.config.keywordIds}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
 											<SlotBodyEnd
-												contentType={
-													CAPIArticle.contentType
-												}
-												contributionsServiceUrl={
-													contributionsServiceUrl
-												}
-												idApiUrl={
-													CAPIArticle.config.idApiUrl
-												}
-												isMinuteArticle={
-													CAPIArticle.pageType
-														.isMinuteArticle
-												}
-												isPaidContent={
-													CAPIArticle.pageType
-														.isPaidContent
-												}
-												keywordIds={
-													CAPIArticle.config
-														.keywordIds
-												}
+												contentType={CAPIArticle.contentType}
+												contributionsServiceUrl={contributionsServiceUrl}
+												idApiUrl={CAPIArticle.config.idApiUrl}
+												isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
+												isPaidContent={CAPIArticle.pageType.isPaidContent}
+												keywordIds={CAPIArticle.config.keywordIds}
 												pageId={CAPIArticle.pageId}
-												sectionId={
-													CAPIArticle.config.section
-												}
-												sectionName={
-													CAPIArticle.sectionName
-												}
+												sectionId={CAPIArticle.config.section}
+												sectionName={CAPIArticle.sectionName}
 												shouldHideReaderRevenue={
 													CAPIArticle.shouldHideReaderRevenue
 												}
@@ -650,12 +596,8 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 									<SubMeta
 										format={format}
-										subMetaKeywordLinks={
-											CAPIArticle.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPIArticle.subMetaSectionLinks
-										}
+										subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+										subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
 										pageId={CAPIArticle.pageId}
 										webUrl={CAPIArticle.webURL}
 										webTitle={CAPIArticle.webTitle}
@@ -692,22 +634,14 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											shouldHideReaderRevenue={
 												CAPIArticle.shouldHideReaderRevenue
 											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
+											isPaidContent={CAPIArticle.pageType.isPaidContent}
 										/>
 									)}
 
 									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
+										<Island clientOnly={true} deferUntil="visible">
 											<MostViewedRightWrapper
-												isAdFreeUser={
-													CAPIArticle.isAdFreeUser
-												}
+												isAdFreeUser={CAPIArticle.isAdFreeUser}
 											/>
 										</Island>
 									) : (
@@ -728,30 +662,20 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<AdSlot
-							position="merchandising-high"
-							display={format.display}
-						/>
+						<AdSlot position="merchandising-high" display={format.display} />
 					</Section>
 				)}
 
 				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
+					<DecideOnwards onwards={CAPIArticle.onwards} format={format} />
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
 							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
+										heading={CAPIArticle.storyPackage.heading}
+										trails={CAPIArticle.storyPackage.trails.map(decideTrail)}
 										onwardsSource="more-on-this-story"
 										format={format}
 									/>
@@ -770,12 +694,8 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
+								isPaidContent={CAPIArticle.config.isPaidContent || false}
+								showRelatedContent={CAPIArticle.config.showRelatedContent}
 								keywordIds={CAPIArticle.config.keywordIds}
 								contentType={CAPIArticle.contentType}
 								tags={CAPIArticle.tags}
@@ -789,15 +709,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						element="aside"
-					>
+					<Section fullWidth={true} sectionId="comments" element="aside">
 						<DiscussionLayout
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
+							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 							shortUrlId={CAPIArticle.config.shortUrlId}
 							format={format}
 							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
@@ -805,8 +719,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								!!CAPIArticle.config.switches
-									.enableDiscussionSwitch
+								!!CAPIArticle.config.switches.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
@@ -845,10 +758,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-						/>
+						<AdSlot position="merchandising" display={format.display} />
 					</Section>
 				)}
 			</main>
@@ -879,9 +789,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
 					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 				/>
 			</Section>
 
@@ -899,15 +807,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}
-						shouldHideReaderRevenue={
-							CAPIArticle.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!CAPIArticle.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!CAPIArticle.config.switches.puzzlesBanner
-						}
+						shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
+						remoteBannerSwitch={!!CAPIArticle.config.switches.remoteBanner}
+						puzzleBannerSwitch={!!CAPIArticle.config.switches.puzzlesBanner}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

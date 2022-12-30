@@ -263,9 +263,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						mmaUrl={CAPIArticle.config.mmaUrl}
 						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={
-							!!CAPIArticle.config.switches.remoteHeader
-						}
+						remoteHeader={!!CAPIArticle.config.switches.remoteHeader}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 						isInEuropeTest={isInEuropeTest}
@@ -289,13 +287,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							...format,
 							theme: getCurrentPillar(CAPIArticle),
 						}}
-						subscribeUrl={
-							CAPIArticle.nav.readerRevenueLinks.header.subscribe
-						}
+						subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 						editionId={CAPIArticle.editionId}
-						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
-						}
+						headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 					/>
 				</Section>
 
@@ -388,9 +382,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							{showRegionalFocus && (
 								<Hide from="leftCol">
 									<div css={regionalFocusDivStyle}>
-										<NewsletterDetail
-											text={regionalFocusText}
-										/>
+										<NewsletterDetail text={regionalFocusText} />
 									</div>
 								</Hide>
 							)}
@@ -403,10 +395,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.webPublicationDateDeprecated
 								}
 							/>
-							<Standfirst
-								format={format}
-								standfirst={CAPIArticle.standfirst}
-							/>
+							<Standfirst format={format} standfirst={CAPIArticle.standfirst} />
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
 									<LinkButton
@@ -423,18 +412,12 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							)}
 
 							<div css={shareDivStyle}>
-								<span css={shareSpanStyle}>
-									Tell your friends
-								</span>
+								<span css={shareSpanStyle}>Tell your friends</span>
 								<ShareIcons
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
 									format={format}
-									displayIcons={[
-										'facebook',
-										'twitter',
-										'email',
-									]}
+									displayIcons={['facebook', 'twitter', 'email']}
 									size="medium"
 									context="ArticleMeta"
 								/>
@@ -444,20 +427,14 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<>
 									<div css={frequencyDivStyle}>
 										<NewsletterFrequency
-											frequency={
-												promotedNewsletter.frequency
-											}
+											frequency={promotedNewsletter.frequency}
 										/>
 									</div>
 
 									<SecureSignup
 										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
+										newsletterId={promotedNewsletter.identityName}
+										successDescription={promotedNewsletter.successDescription}
 										hidePrivacyMessage={true}
 									/>
 
@@ -479,8 +456,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
 										>
-											Click here to see the latest version
-											of this newsletter
+											Click here to see the latest version of this newsletter
 										</Link>
 									</Hide>
 								)}
@@ -510,22 +486,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</Section>
 
 				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
+					<DecideOnwards onwards={CAPIArticle.onwards} format={format} />
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
 							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
+										heading={CAPIArticle.storyPackage.heading}
+										trails={CAPIArticle.storyPackage.trails.map(decideTrail)}
 										onwardsSource="more-on-this-story"
 										format={format}
 									/>
@@ -544,12 +513,8 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent ?? false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
+								isPaidContent={CAPIArticle.config.isPaidContent ?? false}
+								showRelatedContent={CAPIArticle.config.showRelatedContent}
 								keywordIds={CAPIArticle.config.keywordIds}
 								contentType={CAPIArticle.contentType}
 								tags={CAPIArticle.tags}
@@ -579,9 +544,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
 					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 				/>
 			</Section>
 

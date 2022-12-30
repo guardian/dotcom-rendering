@@ -92,8 +92,7 @@ const getMobileAdPositions = (
 				collectionIndex === merchHighPosition ||
 				collectionIndex + 1 === merchHighPosition;
 			const isNearThrasher =
-				collections[collectionIndex + 1]?.collectionType ===
-				'fixed/thrasher';
+				collections[collectionIndex + 1]?.collectionType === 'fixed/thrasher';
 			if (isFirst && isThrasher) return false;
 			if (isNearMerchandising) return false;
 			if (isNearThrasher) return false;
@@ -173,10 +172,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const renderAds = !front.isAdFreeUser;
 
 	const mobileAdPositions = front.isNetworkFront
-		? getMobileAdPositions(
-				front.isNetworkFront,
-				front.pressedPage.collections,
-		  )
+		? getMobileAdPositions(front.isNetworkFront, front.pressedPage.collections)
 		: [];
 
 	return (
@@ -232,13 +228,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Nav
 							nav={NAV}
 							format={format}
-							subscribeUrl={
-								front.nav.readerRevenueLinks.header.subscribe
-							}
+							subscribeUrl={front.nav.readerRevenueLinks.header.subscribe}
 							editionId={front.editionId}
-							headerTopBarSwitch={
-								!!front.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!front.config.switches.headerTopNav}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -279,9 +271,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<main data-layout="FrontLayout" id="maincontent">
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
-					const trails = collection.curated.concat(
-						collection.backfill,
-					);
+					const trails = collection.curated.concat(collection.backfill);
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
@@ -309,8 +299,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
+									front.pressedPage.frontProperties.isPaidContent,
 									format.display,
 									mobileAdPositions,
 								)}
@@ -335,13 +324,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={ophanName}
 									containerName={collection.collectionType}
-									containerPalette={
-										collection.containerPalette
-									}
+									containerPalette={collection.containerPalette}
 									sectionId={collection.id}
-									showDateHeader={
-										collection.config.showDateHeader
-									}
+									showDateHeader={collection.config.showDateHeader}
 									editionId={front.editionId}
 									treats={collection.treats}
 									data-print-layout="hide"
@@ -360,8 +345,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
+									front.pressedPage.frontProperties.isPaidContent,
 									format.display,
 									mobileAdPositions,
 								)}
@@ -389,9 +373,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.isNetworkFront,
 								)}
 								sectionId={collection.id}
-								showDateHeader={
-									collection.config.showDateHeader
-								}
+								showDateHeader={collection.config.showDateHeader}
 								editionId={front.editionId}
 								treats={collection.treats}
 							>
@@ -400,29 +382,18 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
-									containerPalette={
-										collection.containerPalette
-									}
-									showAge={
-										collection.displayName === 'Headlines'
-									}
+									containerPalette={collection.containerPalette}
+									showAge={collection.displayName === 'Headlines'}
 								/>
 								{collection.canShowMore && (
 									<Island deferUntil="interaction">
 										<ShowMore
-											containerTitle={
-												collection.displayName
-											}
+											containerTitle={collection.displayName}
 											containerId={collection.id}
 											path={front.pressedPage.id}
 											baseUrl={front.config.ajaxUrl}
-											containerPalette={
-												collection.containerPalette
-											}
-											showAge={
-												collection.displayName ===
-												'Headlines'
-											}
+											containerPalette={collection.containerPalette}
+											showAge={collection.displayName === 'Headlines'}
 										/>
 									</Island>
 								)}

@@ -92,21 +92,11 @@ describe('getIdFromUrl', () => {
 		}).toThrow();
 
 		expect(() => {
-			getIdFromUrl(
-				'https://theguardian.com?p=test',
-				'nottest',
-				false,
-				'p',
-			);
+			getIdFromUrl('https://theguardian.com?p=test', 'nottest', false, 'p');
 		}).toThrow();
 
 		expect(() => {
-			getIdFromUrl(
-				'https://theguardian.com/test?p=test',
-				'nottest',
-				true,
-				'p',
-			);
+			getIdFromUrl('https://theguardian.com/test?p=test', 'nottest', true, 'p');
 		}).toThrow();
 	});
 });

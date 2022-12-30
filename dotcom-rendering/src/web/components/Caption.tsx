@@ -199,8 +199,7 @@ const CameraIcon = ({ palette, format }: IconProps) => {
 		<span
 			css={[
 				iconStyle(palette),
-				format.display === ArticleDisplay.Immersive &&
-					hideIconBelowLeftCol,
+				format.display === ArticleDisplay.Immersive && hideIconBelowLeftCol,
 			]}
 		>
 			<CameraSvg />
@@ -213,8 +212,7 @@ const VideoIcon = ({ palette, format }: IconProps) => {
 		<span
 			css={[
 				iconStyle(palette),
-				format.display === ArticleDisplay.Immersive &&
-					hideIconBelowLeftCol,
+				format.display === ArticleDisplay.Immersive && hideIconBelowLeftCol,
 				videoIconStyle,
 			]}
 		>
@@ -251,9 +249,7 @@ export const Caption = ({
 			css={[
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
-				isOverlaid
-					? overlaidStyles(palette, format)
-					: bottomMarginStyles,
+				isOverlaid ? overlaidStyles(palette, format) : bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,

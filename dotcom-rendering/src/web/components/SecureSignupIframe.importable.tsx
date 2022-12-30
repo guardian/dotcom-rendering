@@ -90,9 +90,7 @@ const postFormData = async (
 
 	formData.forEach((value, key) => {
 		requestBodyStrings.push(
-			`${encodeURIComponent(key)}=${encodeURIComponent(
-				value.toString(),
-			)}`,
+			`${encodeURIComponent(key)}=${encodeURIComponent(value.toString())}`,
 		);
 	});
 
@@ -184,9 +182,7 @@ export const SecureSignupIframe = ({
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
-	const [responseOk, setResponseOk] = useState<boolean | undefined>(
-		undefined,
-	);
+	const [responseOk, setResponseOk] = useState<boolean | undefined>(undefined);
 	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
@@ -196,8 +192,7 @@ export const SecureSignupIframe = ({
 	const submitForm = async (token: string): Promise<void> => {
 		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
-			iframe?.contentDocument?.querySelector('input[type="email"]') ??
-			null;
+			iframe?.contentDocument?.querySelector('input[type="email"]') ?? null;
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission');
@@ -340,8 +335,7 @@ export const SecureSignupIframe = ({
 				`}
 				style={{
 					height: iframeHeight,
-					display:
-						hasResponse || isWaitingForResponse ? 'none' : 'block',
+					display: hasResponse || isWaitingForResponse ? 'none' : 'block',
 				}}
 				srcDoc={`
 				<html>

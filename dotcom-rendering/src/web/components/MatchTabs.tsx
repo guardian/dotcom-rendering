@@ -68,15 +68,10 @@ export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 				<li
 					css={[
 						tab(palette),
-						format.design === ArticleDesign.MatchReport &&
-							activeTab(palette),
+						format.design === ArticleDesign.MatchReport && activeTab(palette),
 					]}
 				>
-					<a
-						href={reportUrl}
-						data-link-name="report"
-						css={tabLink(palette)}
-					>
+					<a href={reportUrl} data-link-name="report" css={tabLink(palette)}>
 						<span css={tabLabel}>Report</span>
 					</a>
 				</li>

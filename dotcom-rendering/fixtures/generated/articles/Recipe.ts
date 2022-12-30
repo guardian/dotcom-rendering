@@ -39,7 +39,8 @@ export const Recipe: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value:
+						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'ct',
@@ -92,7 +93,8 @@ export const Recipe: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value:
+						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'ct',
@@ -145,7 +147,8 @@ export const Recipe: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value:
+						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'ct',
@@ -194,7 +197,8 @@ export const Recipe: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value:
+						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'ct',
@@ -247,7 +251,8 @@ export const Recipe: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value:
+						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'ct',
@@ -1211,7 +1216,8 @@ export const Recipe: FEArticleType = {
 	standfirst:
 		'<p><em>Cong you bing</em> are coiled spring onion pancakes that are common across China – and irresistible dipped in sesame or sweet-and-sour sauce</p>',
 	sectionUrl: 'food/vegan',
-	pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+	pageId:
+		'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	version: 3,
 	tags: [
 		{
@@ -1305,7 +1311,8 @@ export const Recipe: FEArticleType = {
 		},
 	],
 	pillar: 'lifestyle',
-	webURL: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+	webURL:
+		'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Vegan food and drink',
@@ -1555,9 +1562,9 @@ export const Recipe: FEArticleType = {
 			},
 			data: {
 				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
-				caption:
-					'Meera Sodha’s spring onion pancakes with sesame sauce.',
-				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+				caption: 'Meera Sodha’s spring onion pancakes with sesame sauce.',
+				credit:
+					'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
 			},
 			displayCredit: true,
 			role: 'inline',
@@ -1833,7 +1840,8 @@ export const Recipe: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'@id':
+				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1880,10 +1888,12 @@ export const Recipe: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'@id':
+				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			},
 		},
 	],
@@ -2019,8 +2029,7 @@ export const Recipe: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2052,7 +2061,8 @@ export const Recipe: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

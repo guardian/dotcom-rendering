@@ -8,21 +8,13 @@ export default {
 	title: 'Components/FixedSmallSlowIVSublink',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.tablet, breakpoints.wide],
 		},
 	},
 };
 
 export const Default = () => (
-	<Section
-		title="FixedSmallSlowIV"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="FixedSmallSlowIV" padContent={false} centralBorder="partial">
 		<FixedSmallSlowIV
 			trails={trails}
 			showAge={true}

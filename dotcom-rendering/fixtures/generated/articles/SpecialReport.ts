@@ -52,7 +52,8 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value:
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'se',
@@ -124,7 +125,8 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value:
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'se',
@@ -200,7 +202,8 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value:
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'se',
@@ -259,7 +262,8 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value:
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'se',
@@ -322,7 +326,8 @@ export const SpecialReport: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value:
+						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'p',
@@ -1414,7 +1419,8 @@ export const SpecialReport: FEArticleType = {
 		},
 	},
 	author: {
-		byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
+		byline:
+			'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
 	},
 	designType: 'Analysis',
 	editionId: 'UK',
@@ -1453,7 +1459,8 @@ export const SpecialReport: FEArticleType = {
 	standfirst:
 		'<p>Individual action alone won’t solve the climate crisis. So what political changes might help?</p>\n<ul>\n <li><a href="https://www.theguardian.com/environment/2019/oct/14/rise-renewables-oil-firms-decades-earlier-think">Renewables may see off oil firms decades earlier than they think</a></li>\n</ul>',
 	sectionUrl: 'environment/environment',
-	pageId: 'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+	pageId:
+		'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	version: 3,
 	tags: [
 		{
@@ -1585,7 +1592,8 @@ export const SpecialReport: FEArticleType = {
 			'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
 	},
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+	webURL:
+		'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Environment',
@@ -1770,9 +1778,9 @@ export const SpecialReport: FEArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
-	headline:
-		'How do we rein in the fossil fuel industry? Here are eight ideas',
+	byline:
+		'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
+	headline: 'How do we rein in the fossil fuel industry? Here are eight ideas',
 	guardianBaseURL: 'https://www.theguardian.com',
 	isLegacyInteractive: false,
 	webPublicationDate: '2019-10-14T15:23:44.000Z',
@@ -2147,7 +2155,8 @@ export const SpecialReport: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+			'@id':
+				'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2210,17 +2219,18 @@ export const SpecialReport: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+			'@id':
+				'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			},
 		},
 	],
 	webPublicationDateDisplay: 'Mon 14 Oct 2019 16.23 BST',
 	shouldHideAds: false,
-	webTitle:
-		'How do we rein in the fossil fuel industry? Here are eight ideas',
+	webTitle: 'How do we rein in the fossil fuel industry? Here are eight ideas',
 	isSpecialReport: true,
 	isCommentable: false,
 	keyEvents: [],
@@ -2349,8 +2359,7 @@ export const SpecialReport: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2382,7 +2391,8 @@ export const SpecialReport: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

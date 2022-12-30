@@ -209,25 +209,16 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 	};
 	return (
 		<>
-			<li
-				css={[columnStyle, pillarDivider, pillarDividerExtended]}
-				role="none"
-			>
+			<li css={[columnStyle, pillarDivider, pillarDividerExtended]} role="none">
 				<ul
-					css={[
-						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
-					]}
+					css={[columnLinks, !!moreColumn.pillar && pillarColumnLinks]}
 					role="menu"
 					id={subNavId}
 				>
 					{(moreColumn.children || []).map((link) => (
 						<li
 							key={link.title.toLowerCase()}
-							css={[
-								mainMenuLinkStyle,
-								!!link.mobileOnly && hideDesktop,
-							]}
+							css={[mainMenuLinkStyle, !!link.mobileOnly && hideDesktop]}
 							role="none"
 						>
 							<a
@@ -247,17 +238,10 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 			</li>
 			<li css={columnStyle} role="none">
 				<ul
-					css={[
-						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
-					]}
+					css={[columnLinks, !!moreColumn.pillar && pillarColumnLinks]}
 					role="menu"
 				>
-					<li
-						key="facebook"
-						css={[mainMenuLinkStyle, hideDesktop]}
-						role="none"
-					>
+					<li key="facebook" css={[mainMenuLinkStyle, hideDesktop]} role="none">
 						<a
 							className="selectableMenuItem"
 							css={columnLinkTitle}
@@ -271,11 +255,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 						</a>
 					</li>
 
-					<li
-						key="twitter"
-						css={[mainMenuLinkStyle, hideDesktop]}
-						role="none"
-					>
+					<li key="twitter" css={[mainMenuLinkStyle, hideDesktop]} role="none">
 						<a
 							className="selectableMenuItem"
 							css={columnLinkTitle}

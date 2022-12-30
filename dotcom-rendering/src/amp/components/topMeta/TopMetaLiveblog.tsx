@@ -128,10 +128,7 @@ export const TopMetaLiveblog = ({
 		</div>
 
 		<TopMetaExtras
-			sharingUrls={getSharingUrls(
-				articleData.pageId,
-				articleData.webTitle,
-			)}
+			sharingUrls={getSharingUrls(articleData.pageId, articleData.webTitle)}
 			pillar={pillar}
 			ageWarning={getAgeWarning(
 				articleData.tags,
@@ -139,8 +136,7 @@ export const TopMetaLiveblog = ({
 			)}
 			webPublicationDate={articleData.webPublicationDateDisplay}
 			twitterHandle={
-				getSoleContributor(articleData.tags, articleData.byline)
-					?.twitterHandle
+				getSoleContributor(articleData.tags, articleData.byline)?.twitterHandle
 			}
 		/>
 	</header>

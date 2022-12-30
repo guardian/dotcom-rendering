@@ -115,11 +115,7 @@ const OneImage = ({
 			role={images[0].role}
 		/>
 		{!!caption && (
-			<Caption
-				format={format}
-				captionText={caption}
-				shouldLimitWidth={false}
-			/>
+			<Caption format={format} captionText={caption} shouldLimitWidth={false} />
 		)}
 	</div>
 );
@@ -153,11 +149,7 @@ const TwoImage = ({
 			</GridItem>
 		</SideBySideGrid>
 		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
+			<Caption captionText={caption} format={format} shouldLimitWidth={false} />
 		)}
 	</div>
 );
@@ -199,11 +191,7 @@ const ThreeImage = ({
 			</GridItem>
 		</OneAboveTwoGrid>
 		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
+			<Caption captionText={caption} format={format} shouldLimitWidth={false} />
 		)}
 	</div>
 );
@@ -258,11 +246,7 @@ const FourImage = ({
 			</GridItem>
 		</GridOfFour>
 		{!!caption && (
-			<Caption
-				captionText={caption}
-				format={format}
-				shouldLimitWidth={false}
-			/>
+			<Caption captionText={caption} format={format} shouldLimitWidth={false} />
 		)}
 	</div>
 );
@@ -295,9 +279,7 @@ export const MultiImageBlockComponent = ({
 	}
 
 	if (one && two) {
-		return (
-			<TwoImage images={[one, two]} format={format} caption={caption} />
-		);
+		return <TwoImage images={[one, two]} format={format} caption={caption} />;
 	}
 
 	if (one) {

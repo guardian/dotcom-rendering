@@ -180,13 +180,7 @@ export const OnwardContainer = ({
 										</time>
 									</aside>
 								</div>
-								<a
-									css={link}
-									href={
-										guardianBaseURL +
-										moustacheVariable('url')
-									}
-								>
+								<a css={link} href={guardianBaseURL + moustacheVariable('url')}>
 									<MoustacheVariable name="headline" />
 								</a>
 							</div>

@@ -82,11 +82,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 				<div css={lineWrapperStyles}>
 					{!!trail.image && (
 						<div css={imageWrapperStyles}>
-							<Avatar
-								src={trail.image}
-								alt=""
-								format={trail.format}
-							/>
+							<Avatar src={trail.image} alt="" format={trail.format} />
 						</div>
 					)}
 					<div css={headlineWrapperStyles}>
@@ -99,9 +95,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								link={linkProps}
 								kickerText="Live"
 								showSlash={false}
-								byline={
-									trail.showByline ? trail.byline : undefined
-								}
+								byline={trail.showByline ? trail.byline : undefined}
 							/>
 						) : (
 							<LinkHeadline
@@ -110,17 +104,12 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								size="small"
 								showUnderline={isHovered}
 								link={linkProps}
-								byline={
-									trail.showByline ? trail.byline : undefined
-								}
+								byline={trail.showByline ? trail.byline : undefined}
 							/>
 						)}
 						<div css={marginTopStyles}>
 							{!!trail.ageWarning && (
-								<AgeWarning
-									age={trail.ageWarning}
-									size="small"
-								/>
+								<AgeWarning age={trail.ageWarning} size="small" />
 							)}
 						</div>
 					</div>

@@ -150,15 +150,12 @@ export const MostViewedFooterGrid = ({
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
-						const selectedStyles =
-							selectedListTabStyles(selectedColour);
+						const selectedStyles = selectedListTabStyles(selectedColour);
 						return (
 							<li
 								css={[
 									listTab,
-									isSelected
-										? selectedStyles
-										: unselectedStyles,
+									isSelected ? selectedStyles : unselectedStyles,
 									isFirst && firstTab,
 								]}
 								role="none"

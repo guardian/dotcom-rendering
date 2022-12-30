@@ -57,9 +57,7 @@ export const ShowMore = ({
 
 	useOnce(() => {
 		const container = document.getElementById(containerId);
-		const containerLinks = Array.from(
-			container?.querySelectorAll('a') ?? [],
-		)
+		const containerLinks = Array.from(container?.querySelectorAll('a') ?? [])
 			.map((element) => element.attributes.getNamedItem('href')?.value)
 			// Remove values that are not strings and coerce the type to a string[]
 			.filter((item): item is string => !!item);
@@ -78,9 +76,7 @@ export const ShowMore = ({
 
 	const filteredData =
 		data &&
-		enhanceCards(data).filter(
-			(card) => !existingCardLinks.includes(card.url),
-		);
+		enhanceCards(data).filter((card) => !existingCardLinks.includes(card.url));
 
 	const showMoreContainerId = `show-more-${containerId}`;
 
@@ -119,15 +115,12 @@ export const ShowMore = ({
 									<LI
 										key={card.url}
 										percentage="33.333%"
-										stretch={
-											filteredData.length % columns !== 1
-										}
+										stretch={filteredData.length % columns !== 1}
 										padSides={true}
 										showDivider={cardIndex % columns !== 0}
 										offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 											cardIndex,
-											filteredData.length -
-												(filteredData.length % columns),
+											filteredData.length - (filteredData.length % columns),
 											columns,
 										)}
 									>
@@ -196,8 +189,7 @@ export const ShowMore = ({
 							padding-top: 18px;
 						`}
 					>
-						Sorry, failed to load more stories. Retrying in a few
-						seconds.
+						Sorry, failed to load more stories. Retrying in a few seconds.
 					</InlineError>
 				)}
 			</div>

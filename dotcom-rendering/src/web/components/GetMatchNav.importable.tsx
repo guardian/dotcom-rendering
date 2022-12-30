@@ -62,9 +62,7 @@ export const GetMatchNav = ({
 						headlineString={headlineString}
 						format={format}
 						tags={tags}
-						webPublicationDateDeprecated={
-							webPublicationDateDeprecated
-						}
+						webPublicationDateDeprecated={webPublicationDateDeprecated}
 						isMatch={true}
 					/>
 				</div>

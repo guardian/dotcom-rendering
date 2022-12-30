@@ -255,9 +255,7 @@ export const OnwardsUpper = ({
 
 		// Add any exclude tags to the url
 		if (tagsToExclude.length > 0) {
-			const queryParams = tagsToExclude.map(
-				(tag) => `exclude-tag=${tag}`,
-			);
+			const queryParams = tagsToExclude.map((tag) => `exclude-tag=${tag}`);
 			popularInTagUrl += `&${queryParams.join('&')}`;
 		}
 

@@ -39,12 +39,7 @@ export const enhanceCollections = (
 			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
-			treats: enhanceTreats(
-				collection.treats,
-				displayName,
-				editionId,
-				pageId,
-			),
+			treats: enhanceTreats(collection.treats, displayName, editionId, pageId),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},

@@ -309,10 +309,7 @@ export const Picture = ({
 						media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
 						sizes="167vh"
 						srcSet={sources
-							.map(
-								(source) =>
-									`${source.hiResUrl} ${source.width}w`,
-							)
+							.map((source) => `${source.hiResUrl} ${source.width}w`)
 							.join(',')}
 					/>
 					{/* Low resolution (MDPI) portrait sources*/}
@@ -320,10 +317,7 @@ export const Picture = ({
 						media="(orientation: portrait)"
 						sizes="167vh"
 						srcSet={sources
-							.map(
-								(source) =>
-									`${source.lowResUrl} ${source.width}w`,
-							)
+							.map((source) => `${source.lowResUrl} ${source.width}w`)
 							.join(',')}
 					/>
 				</>
@@ -350,9 +344,7 @@ export const Picture = ({
 				src={fallbackSource.lowResUrl}
 				width={fallbackSource.width}
 				height={fallbackSource.width * ratio}
-				loading={
-					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
-				}
+				loading={isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined}
 				css={block}
 			/>
 		</picture>

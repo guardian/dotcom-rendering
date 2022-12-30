@@ -73,9 +73,7 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
-					shouldHideReaderRevenue={
-						CAPIArticle.shouldHideReaderRevenue
-					}
+					shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
@@ -83,9 +81,7 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						CAPIArticle.config.switches,
-					)}
+					abTestSwitches={filterABTestSwitches(CAPIArticle.config.switches)}
 					pageIsSensitive={CAPIArticle.config.isSensitive}
 					isDev={!!CAPIArticle.config.isDev}
 				/>

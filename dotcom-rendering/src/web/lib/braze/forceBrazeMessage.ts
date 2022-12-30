@@ -34,9 +34,7 @@ export const getBrazeMetaFromUrlFragment = (): Meta | null => {
 			);
 
 			try {
-				const dataFromBraze = JSON.parse(
-					decodeURIComponent(forcedMessage),
-				);
+				const dataFromBraze = JSON.parse(decodeURIComponent(forcedMessage));
 
 				return {
 					dataFromBraze,

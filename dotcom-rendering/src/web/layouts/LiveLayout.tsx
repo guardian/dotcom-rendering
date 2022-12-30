@@ -278,8 +278,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
-	const { branding } =
-		CAPIArticle.commercialProperties[CAPIArticle.editionId];
+	const { branding } = CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
 	const palette = decidePalette(format);
 
@@ -332,19 +331,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
+							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
-							remoteHeader={
-								!!CAPIArticle.config.switches.remoteHeader
-							}
+							remoteHeader={!!CAPIArticle.config.switches.remoteHeader}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
-								!!CAPIArticle.config.switches
-									.headerTopBarSearchCapi
+								!!CAPIArticle.config.switches.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
@@ -363,14 +357,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								...format,
 								theme: getCurrentPillar(CAPIArticle),
 							}}
-							subscribeUrl={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.subscribe
-							}
+							subscribeUrl={CAPIArticle.nav.readerRevenueLinks.header.subscribe}
 							editionId={CAPIArticle.editionId}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
+							headerTopBarSwitch={!!CAPIArticle.config.switches.headerTopNav}
 						/>
 					</Section>
 
@@ -472,9 +461,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									tags={CAPIArticle.tags}
 									sectionLabel={CAPIArticle.sectionLabel}
 									sectionUrl={CAPIArticle.sectionUrl}
-									guardianBaseURL={
-										CAPIArticle.guardianBaseURL
-									}
+									guardianBaseURL={CAPIArticle.guardianBaseURL}
 									badge={CAPIArticle.badge}
 								/>
 							</GridItem>
@@ -483,28 +470,21 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{!footballMatchUrl && (
 										<ArticleHeadline
 											format={format}
-											headlineString={
-												CAPIArticle.headline
-											}
+											headlineString={CAPIArticle.headline}
 											tags={CAPIArticle.tags}
 											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
 											hasStarRating={
-												!!CAPIArticle.starRating ||
-												CAPIArticle.starRating === 0
+												!!CAPIArticle.starRating || CAPIArticle.starRating === 0
 											}
 										/>
 									)}
 								</div>
-								{CAPIArticle.starRating ||
-								CAPIArticle.starRating === 0 ? (
+								{CAPIArticle.starRating || CAPIArticle.starRating === 0 ? (
 									<div css={starWrapper}>
-										<StarRating
-											rating={CAPIArticle.starRating}
-											size="large"
-										/>
+										<StarRating rating={CAPIArticle.starRating} size="large" />
 									</div>
 								) : (
 									<></>
@@ -522,20 +502,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				>
 					<StandFirstGrid>
 						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={CAPIArticle.standfirst}
-							/>
+							<Standfirst format={format} standfirst={CAPIArticle.standfirst} />
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
 								{!!CAPIArticle.blocks[0]?.blockLastUpdated && (
 									<ArticleLastUpdated
 										format={format}
-										lastUpdated={
-											CAPIArticle.blocks[0]
-												.blockLastUpdated
-										}
+										lastUpdated={CAPIArticle.blocks[0].blockLastUpdated}
 									/>
 								)}
 							</Hide>
@@ -546,8 +520,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									<DecideLines
 										format={format}
 										color={
-											format.design ===
-											ArticleDesign.LiveBlog
+											format.design === ArticleDesign.LiveBlog
 												? 'rgba(255, 255, 255, 0.4)'
 												: undefined
 										}
@@ -565,25 +538,16 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										webTitle={CAPIArticle.webTitle}
 										byline={CAPIArticle.byline}
 										tags={CAPIArticle.tags}
-										primaryDateline={
-											CAPIArticle.webPublicationDateDisplay
-										}
+										primaryDateline={CAPIArticle.webPublicationDateDisplay}
 										secondaryDateline={
 											CAPIArticle.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={
-											CAPIArticle.isCommentable
-										}
-										discussionApiUrl={
-											CAPIArticle.config.discussionApiUrl
-										}
-										shortUrlId={
-											CAPIArticle.config.shortUrlId
-										}
+										isCommentable={CAPIArticle.isCommentable}
+										discussionApiUrl={CAPIArticle.config.discussionApiUrl}
+										shortUrlId={CAPIArticle.config.shortUrlId}
 										ajaxUrl={CAPIArticle.config.ajaxUrl}
 										showShareCount={
-											!!CAPIArticle.config.switches
-												.serverShareCounts
+											!!CAPIArticle.config.switches.serverShareCounts
 										}
 									/>
 								</div>
@@ -595,18 +559,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={
-							palette.background.keyEventFromDesktop
-						}
+						backgroundColour={palette.background.keyEventFromDesktop}
 						borderColour={palette.border.article}
 					>
 						<Hide until={'desktop'}>
 							<Island>
 								<KeyEventsCarousel
 									keyEvents={CAPIArticle.keyEvents}
-									filterKeyEvents={
-										CAPIArticle.filterKeyEvents
-									}
+									filterKeyEvents={CAPIArticle.filterKeyEvents}
 									format={format}
 									id={'key-events-carousel-desktop'}
 								/>
@@ -649,21 +609,16 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									filterKeyEvents={
-										CAPIArticle.filterKeyEvents
-									}
+									filterKeyEvents={CAPIArticle.filterKeyEvents}
 									format={format}
 									enhanceTweetsSwitch={
-										!!CAPIArticle.config.switches
-											.enhanceTweets
+										!!CAPIArticle.config.switches.enhanceTweets
 									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={CAPIArticle.webURL}
 									// We default to string here because the property is optional but we
 									// know it will exist for all blogs
-									mostRecentBlockId={
-										CAPIArticle.mostRecentBlockId || ''
-									}
+									mostRecentBlockId={CAPIArticle.mostRecentBlockId || ''}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
 									selectedTopics={CAPIArticle.selectedTopics}
 								/>
@@ -682,10 +637,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
+										<Island clientOnly={true} placeholderHeight={40}>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -693,10 +645,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={172}
-										>
+										<Island clientOnly={true} placeholderHeight={172}>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -712,9 +661,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										webTitle={CAPIArticle.webTitle}
 										ajaxUrl={CAPIArticle.config.ajaxUrl}
 										switches={CAPIArticle.config.switches}
-										isSensitive={
-											CAPIArticle.config.isSensitive
-										}
+										isSensitive={CAPIArticle.config.isSensitive}
 										isAdFreeUser={CAPIArticle.isAdFreeUser}
 									/>
 								</div>
@@ -736,26 +683,16 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											webTitle={CAPIArticle.webTitle}
 											byline={CAPIArticle.byline}
 											tags={CAPIArticle.tags}
-											primaryDateline={
-												CAPIArticle.webPublicationDateDisplay
-											}
+											primaryDateline={CAPIArticle.webPublicationDateDisplay}
 											secondaryDateline={
 												CAPIArticle.webPublicationSecondaryDateDisplay
 											}
-											isCommentable={
-												CAPIArticle.isCommentable
-											}
-											discussionApiUrl={
-												CAPIArticle.config
-													.discussionApiUrl
-											}
-											shortUrlId={
-												CAPIArticle.config.shortUrlId
-											}
+											isCommentable={CAPIArticle.isCommentable}
+											discussionApiUrl={CAPIArticle.config.discussionApiUrl}
+											shortUrlId={CAPIArticle.config.shortUrlId}
 											ajaxUrl={CAPIArticle.config.ajaxUrl}
 											showShareCount={
-												!!CAPIArticle.config.switches
-													.serverShareCounts
+												!!CAPIArticle.config.switches.serverShareCounts
 											}
 										/>
 									</div>
@@ -766,22 +703,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<div css={sidePaddingDesktop}>
 											<Island>
 												<TopicFilterBank
-													availableTopics={
-														CAPIArticle.availableTopics
-													}
-													selectedTopics={
-														CAPIArticle.selectedTopics
-													}
+													availableTopics={CAPIArticle.availableTopics}
+													selectedTopics={CAPIArticle.selectedTopics}
 													format={format}
-													keyEvents={
-														CAPIArticle.keyEvents
-													}
-													filterKeyEvents={
-														CAPIArticle.filterKeyEvents
-													}
-													id={
-														'key-events-carousel-desktop'
-													}
+													keyEvents={CAPIArticle.keyEvents}
+													filterKeyEvents={CAPIArticle.filterKeyEvents}
+													id={'key-events-carousel-desktop'}
 												/>
 											</Island>
 										</div>
@@ -807,9 +734,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
-													filterKeyEvents={
-														CAPIArticle.filterKeyEvents
-													}
+													filterKeyEvents={CAPIArticle.filterKeyEvents}
 													id="filter-toggle-desktop"
 												/>
 											</Island>
@@ -820,21 +745,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{showTopicFilterBank ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
+												{pagination.currentPage !== 1 && (
 													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
+														currentPage={pagination.currentPage}
+														totalPages={pagination.totalPages}
+														newest={pagination.newest}
+														oldest={pagination.oldest}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -843,105 +759,44 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												<ArticleBody
 													format={format}
 													blocks={CAPIArticle.blocks}
-													pinnedPost={
-														CAPIArticle.pinnedPost
-													}
+													pinnedPost={CAPIArticle.pinnedPost}
 													adTargeting={adTargeting}
 													host={host}
 													pageId={CAPIArticle.pageId}
-													webTitle={
-														CAPIArticle.webTitle
-													}
-													ajaxUrl={
-														CAPIArticle.config
-															.ajaxUrl
-													}
-													section={
-														CAPIArticle.config
-															.section
-													}
-													switches={
-														CAPIArticle.config
-															.switches
-													}
-													isSensitive={
-														CAPIArticle.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														CAPIArticle.isAdFreeUser
-													}
+													webTitle={CAPIArticle.webTitle}
+													ajaxUrl={CAPIArticle.config.ajaxUrl}
+													section={CAPIArticle.config.section}
+													switches={CAPIArticle.config.switches}
+													isSensitive={CAPIArticle.config.isSensitive}
+													isAdFreeUser={CAPIArticle.isAdFreeUser}
 													shouldHideReaderRevenue={
 														CAPIArticle.shouldHideReaderRevenue
 													}
 													tags={CAPIArticle.tags}
-													isPaidContent={
-														!!CAPIArticle.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														CAPIArticle.contentType
-													}
-													sectionName={
-														CAPIArticle.sectionName ||
-														''
-													}
-													isPreview={
-														CAPIArticle.config
-															.isPreview
-													}
-													idUrl={
-														CAPIArticle.config
-															.idUrl || ''
-													}
-													isDev={
-														!!CAPIArticle.config
-															.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														CAPIArticle.keyEvents
-													}
-													filterKeyEvents={
-														CAPIArticle.filterKeyEvents
-													}
-													availableTopics={
-														CAPIArticle.availableTopics
-													}
-													selectedTopics={
-														CAPIArticle.selectedTopics
-													}
-													keywordIds={
-														CAPIArticle.config
-															.keywordIds
-													}
+													isPaidContent={!!CAPIArticle.config.isPaidContent}
+													contributionsServiceUrl={contributionsServiceUrl}
+													contentType={CAPIArticle.contentType}
+													sectionName={CAPIArticle.sectionName || ''}
+													isPreview={CAPIArticle.config.isPreview}
+													idUrl={CAPIArticle.config.idUrl || ''}
+													isDev={!!CAPIArticle.config.isDev}
+													onFirstPage={pagination.currentPage === 1}
+													keyEvents={CAPIArticle.keyEvents}
+													filterKeyEvents={CAPIArticle.filterKeyEvents}
+													availableTopics={CAPIArticle.availableTopics}
+													selectedTopics={CAPIArticle.selectedTopics}
+													keywordIds={CAPIArticle.config.keywordIds}
 													isInLiveblogAdSlotTest={
-														CAPIArticle.config
-															.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														CAPIArticle.config.abTests
+															.serverSideLiveblogInlineAdsVariant === 'variant'
 													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
+														currentPage={pagination.currentPage}
+														totalPages={pagination.totalPages}
+														newest={pagination.newest}
+														oldest={pagination.oldest}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -956,17 +811,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												/>
 												<SubMeta
 													format={format}
-													subMetaKeywordLinks={
-														CAPIArticle.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														CAPIArticle.subMetaSectionLinks
-													}
+													subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+													subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
 													pageId={CAPIArticle.pageId}
 													webUrl={CAPIArticle.webURL}
-													webTitle={
-														CAPIArticle.webTitle
-													}
+													webTitle={CAPIArticle.webTitle}
 													showBottomSocialButtons={
 														CAPIArticle.showBottomSocialButtons
 													}
@@ -975,26 +824,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<Accordion accordionTitle="Live feed" context="liveFeed">
 											<ArticleContainer format={format}>
-												{pagination.currentPage !==
-													1 && (
+												{pagination.currentPage !== 1 && (
 													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
+														currentPage={pagination.currentPage}
+														totalPages={pagination.totalPages}
+														newest={pagination.newest}
+														oldest={pagination.oldest}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -1003,105 +840,44 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												<ArticleBody
 													format={format}
 													blocks={CAPIArticle.blocks}
-													pinnedPost={
-														CAPIArticle.pinnedPost
-													}
+													pinnedPost={CAPIArticle.pinnedPost}
 													adTargeting={adTargeting}
 													host={host}
 													pageId={CAPIArticle.pageId}
-													webTitle={
-														CAPIArticle.webTitle
-													}
-													ajaxUrl={
-														CAPIArticle.config
-															.ajaxUrl
-													}
-													section={
-														CAPIArticle.config
-															.section
-													}
-													switches={
-														CAPIArticle.config
-															.switches
-													}
-													isSensitive={
-														CAPIArticle.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														CAPIArticle.isAdFreeUser
-													}
+													webTitle={CAPIArticle.webTitle}
+													ajaxUrl={CAPIArticle.config.ajaxUrl}
+													section={CAPIArticle.config.section}
+													switches={CAPIArticle.config.switches}
+													isSensitive={CAPIArticle.config.isSensitive}
+													isAdFreeUser={CAPIArticle.isAdFreeUser}
 													shouldHideReaderRevenue={
 														CAPIArticle.shouldHideReaderRevenue
 													}
 													tags={CAPIArticle.tags}
-													isPaidContent={
-														!!CAPIArticle.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														CAPIArticle.contentType
-													}
-													sectionName={
-														CAPIArticle.sectionName ||
-														''
-													}
-													isPreview={
-														CAPIArticle.config
-															.isPreview
-													}
-													idUrl={
-														CAPIArticle.config
-															.idUrl || ''
-													}
-													isDev={
-														!!CAPIArticle.config
-															.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													keyEvents={
-														CAPIArticle.keyEvents
-													}
-													filterKeyEvents={
-														CAPIArticle.filterKeyEvents
-													}
-													availableTopics={
-														CAPIArticle.availableTopics
-													}
-													selectedTopics={
-														CAPIArticle.selectedTopics
-													}
-													keywordIds={
-														CAPIArticle.config
-															.keywordIds
-													}
+													isPaidContent={!!CAPIArticle.config.isPaidContent}
+													contributionsServiceUrl={contributionsServiceUrl}
+													contentType={CAPIArticle.contentType}
+													sectionName={CAPIArticle.sectionName || ''}
+													isPreview={CAPIArticle.config.isPreview}
+													idUrl={CAPIArticle.config.idUrl || ''}
+													isDev={!!CAPIArticle.config.isDev}
+													onFirstPage={pagination.currentPage === 1}
+													keyEvents={CAPIArticle.keyEvents}
+													filterKeyEvents={CAPIArticle.filterKeyEvents}
+													availableTopics={CAPIArticle.availableTopics}
+													selectedTopics={CAPIArticle.selectedTopics}
+													keywordIds={CAPIArticle.config.keywordIds}
 													isInLiveblogAdSlotTest={
-														CAPIArticle.config
-															.abTests
-															.serverSideLiveblogInlineAdsVariant ===
-														'variant'
+														CAPIArticle.config.abTests
+															.serverSideLiveblogInlineAdsVariant === 'variant'
 													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
+														currentPage={pagination.currentPage}
+														totalPages={pagination.totalPages}
+														newest={pagination.newest}
+														oldest={pagination.oldest}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -1116,17 +892,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												/>
 												<SubMeta
 													format={format}
-													subMetaKeywordLinks={
-														CAPIArticle.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														CAPIArticle.subMetaSectionLinks
-													}
+													subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+													subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
 													pageId={CAPIArticle.pageId}
 													webUrl={CAPIArticle.webURL}
-													webTitle={
-														CAPIArticle.webTitle
-													}
+													webTitle={CAPIArticle.webTitle}
 													showBottomSocialButtons={
 														CAPIArticle.showBottomSocialButtons
 													}
@@ -1165,10 +935,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												shouldHideReaderRevenue={
 													CAPIArticle.shouldHideReaderRevenue
 												}
-												isPaidContent={
-													CAPIArticle.pageType
-														.isPaidContent
-												}
+												isPaidContent={CAPIArticle.pageType.isPaidContent}
 											/>
 										)}
 									</RightColumn>
@@ -1196,22 +963,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					)}
 
 					{CAPIArticle.onwards ? (
-						<DecideOnwards
-							onwards={CAPIArticle.onwards}
-							format={format}
-						/>
+						<DecideOnwards onwards={CAPIArticle.onwards} format={format} />
 					) : (
 						<>
 							{CAPIArticle.storyPackage && (
 								<Section fullWidth={true}>
 									<Island deferUntil="visible">
 										<Carousel
-											heading={
-												CAPIArticle.storyPackage.heading
-											}
-											trails={CAPIArticle.storyPackage.trails.map(
-												decideTrail,
-											)}
+											heading={CAPIArticle.storyPackage.heading}
+											trails={CAPIArticle.storyPackage.trails.map(decideTrail)}
 											onwardsSource="more-on-this-story"
 											format={format}
 										/>
@@ -1227,18 +987,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<OnwardsUpper
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									hasRelated={CAPIArticle.hasRelated}
-									hasStoryPackage={
-										CAPIArticle.hasStoryPackage
-									}
+									hasStoryPackage={CAPIArticle.hasStoryPackage}
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
 									pageId={CAPIArticle.pageId}
-									isPaidContent={
-										CAPIArticle.config.isPaidContent ||
-										false
-									}
-									showRelatedContent={
-										CAPIArticle.config.showRelatedContent
-									}
+									isPaidContent={CAPIArticle.config.isPaidContent || false}
+									showRelatedContent={CAPIArticle.config.showRelatedContent}
 									keywordIds={CAPIArticle.config.keywordIds}
 									contentType={CAPIArticle.contentType}
 									tags={CAPIArticle.tags}
@@ -1260,20 +1013,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							element="section"
 						>
 							<DiscussionLayout
-								discussionApiUrl={
-									CAPIArticle.config.discussionApiUrl
-								}
+								discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 								shortUrlId={CAPIArticle.config.shortUrlId}
 								format={format}
-								discussionD2Uid={
-									CAPIArticle.config.discussionD2Uid
-								}
+								discussionD2Uid={CAPIArticle.config.discussionD2Uid}
 								discussionApiClientHeader={
 									CAPIArticle.config.discussionApiClientHeader
 								}
 								enableDiscussionSwitch={
-									!!CAPIArticle.config.switches
-										.enableDiscussionSwitch
+									!!CAPIArticle.config.switches.enableDiscussionSwitch
 								}
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								shouldHideAds={CAPIArticle.shouldHideAds}
@@ -1314,10 +1062,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							backgroundColour={neutral[93]}
 							element="aside"
 						>
-							<AdSlot
-								position="merchandising"
-								display={format.display}
-							/>
+							<AdSlot position="merchandising" display={format.display} />
 						</Section>
 					)}
 				</div>
@@ -1355,9 +1100,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
 					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					contributionsServiceUrl={CAPIArticle.contributionsServiceUrl}
 				/>
 			</Section>
 
@@ -1375,15 +1118,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}
-						shouldHideReaderRevenue={
-							CAPIArticle.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!CAPIArticle.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!CAPIArticle.config.switches.puzzlesBanner
-						}
+						shouldHideReaderRevenue={CAPIArticle.shouldHideReaderRevenue}
+						remoteBannerSwitch={!!CAPIArticle.config.switches.remoteBanner}
+						puzzleBannerSwitch={!!CAPIArticle.config.switches.puzzlesBanner}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

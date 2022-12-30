@@ -144,9 +144,7 @@ const changeGeolocation = (
 				}.`,
 			);
 			if (geo === 'UK') {
-				alert(
-					`'UK' is not a valid geolocation - please use 'GB' instead!`,
-				);
+				alert(`'UK' is not a valid geolocation - please use 'GB' instead!`);
 			} else if (geo) {
 				overrideCountryCode(geo as CountryCode);
 				clearCommonReaderRevenueStateAndReload(

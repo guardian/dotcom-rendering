@@ -162,26 +162,17 @@ export const ClickToView = ({
 				>
 					{source ? (
 						<>
-							This article includes content provided by {source}.
-							We ask for your permission before anything is
-							loaded, as they may be using cookies and other
-							technologies. To view this content,{' '}
-							<strong>
-								click &apos;Allow and continue&apos;
-							</strong>
-							.
+							This article includes content provided by {source}. We ask for
+							your permission before anything is loaded, as they may be using
+							cookies and other technologies. To view this content,{' '}
+							<strong>click &apos;Allow and continue&apos;</strong>.
 						</>
 					) : (
 						<>
-							This article includes content hosted on{' '}
-							{sourceDomain}. We ask for your permission before
-							anything is loaded, as the provider may be using
-							cookies and other technologies. To view this
-							content,{' '}
-							<strong>
-								click &apos;Allow and continue&apos;
-							</strong>
-							.
+							This article includes content hosted on {sourceDomain}. We ask for
+							your permission before anything is loaded, as the provider may be
+							using cookies and other technologies. To view this content,{' '}
+							<strong>click &apos;Allow and continue&apos;</strong>.
 						</>
 					)}
 				</p>

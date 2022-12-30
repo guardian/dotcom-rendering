@@ -15,17 +15,11 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils'
 				)
 					.then((utils) =>
-						utils[key](
-							asExistingSupporter,
-							shouldHideReaderRevenue,
-						),
+						utils[key](asExistingSupporter, shouldHideReaderRevenue),
 					)
 
 					.catch((error) =>
-						console.log(
-							'Error loading readerRevenueDevUtils',
-							error,
-						),
+						console.log('Error loading readerRevenueDevUtils', error),
 					);
 
 		if (window && window.guardian) {

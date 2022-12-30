@@ -26,10 +26,7 @@ describe('returns section for each subsection', () => {
 			],
 			'Culture',
 		],
-		[
-			['education', 'higher-education-network', 'teacher-network'],
-			'Education',
-		],
+		[['education', 'higher-education-network', 'teacher-network'], 'Education'],
 		[['environment', 'animals-farmed'], 'Environment'],
 		[['fashion'], 'Fashion'],
 		[['film'], 'Film'],

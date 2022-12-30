@@ -279,10 +279,7 @@ export const Column = ({
 				{(column.children || []).map((link) => (
 					<li
 						key={link.title.toLowerCase()}
-						css={[
-							mainMenuLinkStyle,
-							!!link.mobileOnly && hideDesktop,
-						]}
+						css={[mainMenuLinkStyle, !!link.mobileOnly && hideDesktop]}
 						role="none"
 					>
 						<a

@@ -16,11 +16,7 @@ export const DecideOnwards = ({
 		{onwards.map(({ heading, trails, onwardsSource, url }) => {
 			if (trails.length > 0) {
 				return (
-					<Section
-						fullWidth={true}
-						key={onwardsSource}
-						showTopBorder={false}
-					>
+					<Section fullWidth={true} key={onwardsSource} showTopBorder={false}>
 						<Island deferUntil="visible">
 							<Carousel
 								heading={heading}
@@ -35,11 +31,7 @@ export const DecideOnwards = ({
 
 			if (url) {
 				return (
-					<Section
-						fullWidth={true}
-						key={onwardsSource}
-						showTopBorder={false}
-					>
+					<Section fullWidth={true} key={onwardsSource} showTopBorder={false}>
 						<Island
 							clientOnly={true}
 							deferUntil="visible"

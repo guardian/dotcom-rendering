@@ -103,19 +103,15 @@ describe('Braze messaging', function () {
 			// Make a third call when logged out
 			cy.reload();
 
-			cy.waitUntil(
-				() => localStorage.getItem('gu.brazeUserSet') !== 'true',
-				{
-					errorMsg:
-						'Error waiting for gu.brazeUserSet to not be "true"',
-				},
-			).then(() => {
+			cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') !== 'true', {
+				errorMsg: 'Error waiting for gu.brazeUserSet to not be "true"',
+			}).then(() => {
 				expect(
 					localStorage.getItem('gu.brazeMessageCache.EndOfArticle'),
 				).to.be.equal(null);
-				expect(
-					localStorage.getItem('gu.brazeMessageCache.Banner'),
-				).to.be.equal(null);
+				expect(localStorage.getItem('gu.brazeMessageCache.Banner')).to.be.equal(
+					null,
+				);
 			});
 		});
 	});

@@ -95,8 +95,7 @@ export const EnhancePinnedPost = () => {
 	const checkContentHeight = () => {
 		if (pinnedPostContent) {
 			const contentFitsContainer =
-				pinnedPostContent.scrollHeight <=
-				pinnedPostContent.clientHeight;
+				pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
 			if (contentFitsContainer) toggleShowMore(false);
 			else toggleShowMore(true);
 		}
@@ -125,10 +124,7 @@ export const EnhancePinnedPost = () => {
 		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
 
 		return () => {
-			pinnedPostCheckBox?.removeEventListener(
-				'change',
-				handleClickTracking,
-			);
+			pinnedPostCheckBox?.removeEventListener('change', handleClickTracking);
 		};
 	}, []);
 

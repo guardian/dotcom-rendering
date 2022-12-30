@@ -66,8 +66,8 @@ export const interactiveGlobalStyles = css`
 			margin-bottom: 1rem;
 
 			/* stylelint-disable */
-			font-family: GuardianTextEgyptian, Guardian Text Egyptian Web,
-				Georgia, serif;
+			font-family: GuardianTextEgyptian, Guardian Text Egyptian Web, Georgia,
+				serif;
 			/* stylelint-enable */
 
 			font-size: 1.0625rem;

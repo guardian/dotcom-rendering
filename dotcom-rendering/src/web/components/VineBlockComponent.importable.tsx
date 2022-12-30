@@ -39,10 +39,7 @@ export const VineBlockComponent = ({
 						<p>{element.title}</p>
 					</div>
 
-					<MaintainAspectRatio
-						height={element.height}
-						width={element.width}
-					>
+					<MaintainAspectRatio height={element.height} width={element.width}>
 						<div css="element-vine">
 							<iframe
 								title="vine-embed"

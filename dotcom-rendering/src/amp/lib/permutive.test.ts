@@ -67,8 +67,7 @@ describe('generatePermutivePayload', () => {
 		const expected = {
 			'properties.content.authors!list[string]':
 				'author 1,author 2,author3,author 4',
-			'properties.content.keywords!list[string]':
-				'keyword1,keyword2,keyword3',
+			'properties.content.keywords!list[string]': 'keyword1,keyword2,keyword3',
 			'properties.content.tone!list[string]':
 				'tone/world,tone/worldnews,tone/minutebyminute',
 		};

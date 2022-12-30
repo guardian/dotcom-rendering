@@ -141,10 +141,7 @@ const calculateElementSize = (element: CAPIElement): number => {
 			);
 
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			return calculateElementHeight(
-				richLinkElementHeightData,
-				element.text,
-			);
+			return calculateElementHeight(richLinkElementHeightData, element.text);
 
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':

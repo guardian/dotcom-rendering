@@ -47,10 +47,8 @@ const aboutButtonStyle = css`
 	margin-left: 10px;
 	padding: 10px;
 	border: 0;
-	border-left: solid 1px
-		${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
-	border-right: solid 1px
-		${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
+	border-left: solid 1px ${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
+	border-right: solid 1px ${pillarPalette_DO_NOT_USE[ArticleSpecial.Labs].faded};
 	background: transparent;
 	color: inherit;
 	cursor: pointer;
@@ -119,8 +117,8 @@ export const PaidForBand = () => (
 				</button>
 				<div id="popup" css={popUpStyle} hidden={true}>
 					<div>
-						Paid content is paid for and controlled by an advertiser
-						and produced by the Guardian Labs team.
+						Paid content is paid for and controlled by an advertiser and
+						produced by the Guardian Labs team.
 					</div>
 					<a
 						css={[aStyle, focusColor]}

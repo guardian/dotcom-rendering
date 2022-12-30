@@ -43,17 +43,12 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+					value:
+						'/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
+					value: ['uk', 'photography', 'travel', 'cornwall', 'england'],
 				},
 				{
 					name: 'p',
@@ -89,17 +84,12 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+					value:
+						'/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
+					value: ['uk', 'photography', 'travel', 'cornwall', 'england'],
 				},
 				{
 					name: 'p',
@@ -135,17 +125,12 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+					value:
+						'/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
+					value: ['uk', 'photography', 'travel', 'cornwall', 'england'],
 				},
 				{
 					name: 'p',
@@ -177,17 +162,12 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+					value:
+						'/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
+					value: ['uk', 'photography', 'travel', 'cornwall', 'england'],
 				},
 				{
 					name: 'edition',
@@ -223,17 +203,12 @@ export const PhotoEssay: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+					value:
+						'/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
+					value: ['uk', 'photography', 'travel', 'cornwall', 'england'],
 				},
 				{
 					name: 'edition',
@@ -1113,7 +1088,8 @@ export const PhotoEssay: FEArticleType = {
 	standfirst:
 		'<p>Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life </p>',
 	sectionUrl: 'travel/photography',
-	pageId: 'travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+	pageId:
+		'travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	version: 3,
 	tags: [
 		{
@@ -1168,7 +1144,8 @@ export const PhotoEssay: FEArticleType = {
 		},
 	],
 	pillar: 'lifestyle',
-	webURL: 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+	webURL:
+		'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	showBottomSocialButtons: true,
 	isImmersive: true,
 	sectionLabel: 'Travel photography',
@@ -8743,7 +8720,8 @@ export const PhotoEssay: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+			'@id':
+				'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -8789,10 +8767,12 @@ export const PhotoEssay: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+			'@id':
+				'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 			},
 		},
 	],
@@ -8927,8 +8907,7 @@ export const PhotoEssay: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -8960,7 +8939,8 @@ export const PhotoEssay: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

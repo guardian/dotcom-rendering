@@ -27,10 +27,9 @@ describe('Paid content tests', function () {
 		cy.window().its('ga').should('exist');
 
 		// Wait for a call to Google Analytics to be made - we expect this to happen
-		cy.intercept(
-			'GET',
-			'https://www.google-analytics.com/collect?v=1**',
-		).as('gaRequest');
+		cy.intercept('GET', 'https://www.google-analytics.com/collect?v=1**').as(
+			'gaRequest',
+		);
 
 		cy.get('gu-island[name=Branding]').scrollIntoView({
 			duration: 300,
@@ -68,10 +67,9 @@ describe('Paid content tests', function () {
 		cy.window().its('ga').should('exist');
 
 		// Wait for a call to Google Analytics to be made - we expect this to happen
-		cy.intercept(
-			'GET',
-			'https://www.google-analytics.com/collect?v=1**',
-		).as('gaRequest');
+		cy.intercept('GET', 'https://www.google-analytics.com/collect?v=1**').as(
+			'gaRequest',
+		);
 
 		cy.get('gu-island[name=OnwardsUpper]').scrollIntoView({
 			duration: 300,

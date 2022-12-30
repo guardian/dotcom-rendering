@@ -30,10 +30,9 @@ describe('ClickToView', () => {
 
 		expect(getByText('Allow A Third Party content?')).toBeInTheDocument();
 		expect(
-			getByText(
-				'This article includes content provided by A Third Party',
-				{ exact: false },
-			),
+			getByText('This article includes content provided by A Third Party', {
+				exact: false,
+			}),
 		).toBeInTheDocument();
 	});
 	it('It should render a generic overlay if a source is not present', () => {
@@ -47,10 +46,9 @@ describe('ClickToView', () => {
 			getByText('Allow content provided by a third party?'),
 		).toBeInTheDocument();
 		expect(
-			getByText(
-				'This article includes content hosted on athirdparty.com',
-				{ exact: false },
-			),
+			getByText('This article includes content hosted on athirdparty.com', {
+				exact: false,
+			}),
 		).toBeInTheDocument();
 	});
 });

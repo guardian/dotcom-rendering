@@ -18,7 +18,8 @@ describe('The web document renders with the correct meta and analytics elements 
 		[
 			{
 				name: 'description',
-				value: 'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
+				value:
+					'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
 			},
 			{
 				name: 'viewport',
@@ -71,20 +72,13 @@ describe('The web document renders with the correct meta and analytics elements 
 		cy.visit(
 			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
-		cy.get(`address[data-component="meta-byline"]`).should(
-			'have.length',
-			1,
-		);
+		cy.get(`address[data-component="meta-byline"]`).should('have.length', 1);
 
 		cy.get(`address[data-link-name="byline"]`).should('have.length', 1);
 
 		cy.get(`a[rel="author"]`)
 			.contains('Zoe Williams')
-			.should(
-				'have.attr',
-				'href',
-				'//www.theguardian.com/profile/zoewilliams',
-			);
+			.should('have.attr', 'href', '//www.theguardian.com/profile/zoewilliams');
 	});
 
 	it('Section, Footer and Series ophan data-attributes exist', function () {

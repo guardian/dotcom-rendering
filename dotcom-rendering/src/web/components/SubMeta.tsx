@@ -165,10 +165,7 @@ export const SubMeta = ({
 		>
 			{badge && (
 				<div css={badgeWrapper}>
-					<Badge
-						imageUrl={badge.imageUrl}
-						seriesTag={badge.seriesTag}
-					/>
+					<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
 				</div>
 			)}
 			{(hasSectionLinks || hasKeywordLinks) && (
@@ -182,16 +179,11 @@ export const SubMeta = ({
 										css={[
 											listItemStyles(palette),
 											sectionStyles(format),
-											i ===
-												subMetaSectionLinks.length -
-													1 && hideSlash,
+											i === subMetaSectionLinks.length - 1 && hideSlash,
 										]}
 										key={link.url}
 									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
+										<a css={linkStyles(palette)} href={link.url}>
 											{link.title}
 										</a>
 									</li>
@@ -205,16 +197,11 @@ export const SubMeta = ({
 										css={[
 											listItemStyles(palette),
 											keywordStyles,
-											i ===
-												subMetaKeywordLinks.length -
-													1 && hideSlash,
+											i === subMetaKeywordLinks.length - 1 && hideSlash,
 										]}
 										key={link.url}
 									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
+										<a css={linkStyles(palette)} href={link.url}>
 											{link.title}
 										</a>
 									</li>

@@ -11,10 +11,7 @@ const filterTags = (
 	const tagArr = tags.filter((tag) => tag.type === tagType);
 	const arrOfvalues =
 		tagArr.length > 0 &&
-		tagArr.reduce(
-			(prev: Array<TagType['id']>, tag) => prev.concat(tag.id),
-			[],
-		);
+		tagArr.reduce((prev: Array<TagType['id']>, tag) => prev.concat(tag.id), []);
 
 	return (arrOfvalues && arrOfvalues.join(',')) || '';
 };

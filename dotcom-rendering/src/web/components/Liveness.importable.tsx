@@ -115,10 +115,7 @@ function getKey(
 		url.searchParams.set('lastUpdate', latestBlockId);
 		url.searchParams.set('isLivePage', 'true');
 		url.searchParams.set('dcr', 'true');
-		url.searchParams.set(
-			'filterKeyEvents',
-			filterKeyEvents ? 'true' : 'false',
-		);
+		url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
 		const [topic] = selectedTopics ?? [];
 		if (topic) {
 			url.searchParams.set('topics', `${topic.type}:${topic.value}`);
@@ -273,10 +270,7 @@ export const Liveness = ({
 		window.addEventListener('visibilitychange', handleVisibilityChange);
 
 		return () => {
-			window.removeEventListener(
-				'visibilitychange',
-				handleVisibilityChange,
-			);
+			window.removeEventListener('visibilitychange', handleVisibilityChange);
 		};
 	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 

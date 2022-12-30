@@ -42,9 +42,7 @@ export const groupCards = (
 				),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
+					curated.filter(({ card }) => card.group === '0').concat(backfill),
 					containerPalette,
 				),
 			};
@@ -67,9 +65,7 @@ export const groupCards = (
 				),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
+					curated.filter(({ card }) => card.group === '0').concat(backfill),
 					containerPalette,
 				),
 			};
@@ -85,9 +81,7 @@ export const groupCards = (
 				),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
-					curated
-						.filter(({ card }) => card.group === '0')
-						.concat(backfill),
+					curated.filter(({ card }) => card.group === '0').concat(backfill),
 					containerPalette,
 				),
 			};

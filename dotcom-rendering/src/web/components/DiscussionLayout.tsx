@@ -51,9 +51,7 @@ export const DiscussionLayout = ({
 					</Island>
 				}
 				leftColSize={
-					format.display === ArticleDisplay.Standard
-						? 'wide'
-						: 'compact'
+					format.display === ArticleDisplay.Standard ? 'wide' : 'compact'
 				}
 			>
 				<Flex>
@@ -76,9 +74,7 @@ export const DiscussionLayout = ({
 								discussionApiUrl={discussionApiUrl}
 								shortUrlId={shortUrlId}
 								discussionD2Uid={discussionD2Uid}
-								discussionApiClientHeader={
-									discussionApiClientHeader
-								}
+								discussionApiClientHeader={discussionApiClientHeader}
 								enableDiscussionSwitch={enableDiscussionSwitch}
 							/>
 						</Island>
@@ -93,10 +89,7 @@ export const DiscussionLayout = ({
 										padding-left: 20px;
 									`}
 								>
-									<AdSlot
-										position="comments"
-										display={format.display}
-									/>
+									<AdSlot position="comments" display={format.display} />
 								</div>
 							</RightColumn>
 						)}

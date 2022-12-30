@@ -30,10 +30,8 @@ export const trails: [
 								fields: {
 									displayCredit: 'true',
 									isMaster: 'true',
-									altText:
-										'Woman stressed about big ladder in her tights',
-									mediaId:
-										'a85912b00046f8ba0314e9064a0851ea17ef76d2',
+									altText: 'Woman stressed about big ladder in her tights',
+									mediaId: 'a85912b00046f8ba0314e9064a0851ea17ef76d2',
 									width: '2124',
 									source: 'Getty',
 									photographer: 'artursfoto',
@@ -54,7 +52,8 @@ export const trails: [
 					id: 'fashion/2022/oct/28/forever-tights-idea-really-have-legs-rip-resistant-fasion',
 					webTitle:
 						'Forever tights? Now that’s an idea that could really have legs',
-					webUrl: 'https://www.theguardian.com/fashion/2022/oct/28/forever-tights-idea-really-have-legs-rip-resistant-fasion',
+					webUrl:
+						'https://www.theguardian.com/fashion/2022/oct/28/forever-tights-idea-really-have-legs-rip-resistant-fasion',
 					type: 'Article',
 
 					sectionId: {
@@ -197,7 +196,8 @@ export const trails: [
 								sectionId: 'uk-news',
 								sectionName: 'UK news',
 								webTitle: 'UK news',
-								webUrl: 'https://www.theguardian.com/theguardian/mainsection/uknews',
+								webUrl:
+									'https://www.theguardian.com/theguardian/mainsection/uknews',
 							},
 						},
 						{
@@ -208,7 +208,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'UK Fashion',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/uk-fashion',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/uk-fashion',
 							},
 						},
 					],
@@ -223,7 +224,8 @@ export const trails: [
 				'Forever tights? Now that’s an idea that could really have legs',
 			linkText:
 				'Forever tights? Now that’s an idea that could really have legs',
-			webUrl: 'https://www.theguardian.com/fashion/2022/oct/28/forever-tights-idea-really-have-legs-rip-resistant-fasion',
+			webUrl:
+				'https://www.theguardian.com/fashion/2022/oct/28/forever-tights-idea-really-have-legs-rip-resistant-fasion',
 			editionBrandings: [
 				{
 					edition: {
@@ -320,8 +322,7 @@ export const trails: [
 									isMaster: 'true',
 									altText:
 										'USA. Harris Dickinson in a scene from (C)Neon new film : Triangle of Sadness (2022). Plot: A cruise for the super-rich sinks thus leaving survivors, including a fashion model celebrity couple, trapped on an island. Ref: LMK110-J8273-190822 Supplied by LMKMEDIA. Editorial Only. Landmark Media is not the copyright owner of these Film or TV stills but provides a service only for recognised Media outlets. pictures@lmkmedia.com<br>2JPPN2Y USA. Harris Dickinson in a scene from (C)Neon new film : Triangle of Sadness (2022). Plot: A cruise for the super-rich sinks thus leaving survivors, including a fashion model celebrity couple, trapped on an island. Ref: LMK110-J8273-190822 Supplied by LMKMEDIA. Editorial Only. Landmark Media is not the copyright owner of these Film or TV stills but provides a service only for recognised Media outlets. pictures@lmkmedia.com',
-									mediaId:
-										'c669f6300e637c6eac5b26fd3c3a0eda4b475126',
+									mediaId: 'c669f6300e637c6eac5b26fd3c3a0eda4b475126',
 									width: '4454',
 									source: 'Alamy',
 									photographer: 'Landmark Media',
@@ -342,7 +343,8 @@ export const trails: [
 					id: 'commentisfree/2022/oct/28/triangle-of-sadness-fashion-industry-ruben-ostlund-palm-dor',
 					webTitle:
 						'Rolexes, influencers and H&M grins: Triangle of Sadness nails the fashion industry | Morwenna Ferrier',
-					webUrl: 'https://www.theguardian.com/commentisfree/2022/oct/28/triangle-of-sadness-fashion-industry-ruben-ostlund-palm-dor',
+					webUrl:
+						'https://www.theguardian.com/commentisfree/2022/oct/28/triangle-of-sadness-fashion-industry-ruben-ostlund-palm-dor',
 					type: 'Article',
 					sectionId: {
 						value: 'commentisfree',
@@ -372,7 +374,8 @@ export const trails: [
 								sectionId: 'commentisfree',
 								sectionName: 'Opinion',
 								webTitle: 'Opinion',
-								webUrl: 'https://www.theguardian.com/commentisfree/commentisfree',
+								webUrl:
+									'https://www.theguardian.com/commentisfree/commentisfree',
 							},
 						},
 						{
@@ -509,7 +512,8 @@ export const trails: [
 								sectionId: 'theguardian',
 								sectionName: 'From the Guardian',
 								webTitle: 'Opinion',
-								webUrl: 'https://www.theguardian.com/theguardian/journal/opinion',
+								webUrl:
+									'https://www.theguardian.com/theguardian/journal/opinion',
 							},
 						},
 						{
@@ -520,7 +524,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'UK Opinion',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/uk-opinion',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/uk-opinion',
 							},
 						},
 					],
@@ -542,7 +547,8 @@ export const trails: [
 				'Rolexes, influencers and H&M grins: Triangle of Sadness nails the fashion industry | Morwenna Ferrier',
 			linkText:
 				'Rolexes, influencers and H&M grins: Triangle of Sadness nails the fashion industry | Morwenna Ferrier',
-			webUrl: 'https://www.theguardian.com/commentisfree/2022/oct/28/triangle-of-sadness-fashion-industry-ruben-ostlund-palm-dor',
+			webUrl:
+				'https://www.theguardian.com/commentisfree/2022/oct/28/triangle-of-sadness-fashion-industry-ruben-ostlund-palm-dor',
 			editionBrandings: [
 				{
 					edition: {
@@ -631,8 +637,7 @@ export const trails: [
 									displayCredit: 'true',
 									isMaster: 'true',
 									altText: 'Fire on the Beach - Dana Scruggs',
-									mediaId:
-										'ae693a9bf972f379f725722a1aff5cee881cc574',
+									mediaId: 'ae693a9bf972f379f725722a1aff5cee881cc574',
 									width: '2661',
 									source: 'Dana Scruggs',
 									photographer: 'Dana Scruggs',
@@ -653,7 +658,8 @@ export const trails: [
 					id: 'fashion/gallery/2022/oct/31/new-black-vanguard-photography-between-art-and-fashion-antwaun-sargent-in-pictures',
 					webTitle:
 						'At the vanguard: a new aesthetic in Black portraiture – in pictures',
-					webUrl: 'https://www.theguardian.com/fashion/gallery/2022/oct/31/new-black-vanguard-photography-between-art-and-fashion-antwaun-sargent-in-pictures',
+					webUrl:
+						'https://www.theguardian.com/fashion/gallery/2022/oct/31/new-black-vanguard-photography-between-art-and-fashion-antwaun-sargent-in-pictures',
 					type: 'Gallery',
 					sectionId: {
 						value: 'fashion',
@@ -683,7 +689,8 @@ export const trails: [
 								sectionId: 'fashion',
 								sectionName: 'Fashion',
 								webTitle: 'Fashion photography',
-								webUrl: 'https://www.theguardian.com/fashion/fashion-photography',
+								webUrl:
+									'https://www.theguardian.com/fashion/fashion-photography',
 							},
 						},
 						{
@@ -738,7 +745,8 @@ export const trails: [
 								sectionId: 'artanddesign',
 								sectionName: 'Art and design',
 								webTitle: 'Saatchi gallery',
-								webUrl: 'https://www.theguardian.com/artanddesign/saatchi-gallery',
+								webUrl:
+									'https://www.theguardian.com/artanddesign/saatchi-gallery',
 							},
 						},
 						{
@@ -859,7 +867,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'UK Pictures Guardian News',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/uk-pictures-guardian-news',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/uk-pictures-guardian-news',
 							},
 						},
 					],
@@ -874,7 +883,8 @@ export const trails: [
 				'At the vanguard: a new aesthetic in Black portraiture – in pictures',
 			linkText:
 				'At the vanguard: a new aesthetic in Black portraiture – in pictures',
-			webUrl: 'https://www.theguardian.com/fashion/gallery/2022/oct/31/new-black-vanguard-photography-between-art-and-fashion-antwaun-sargent-in-pictures',
+			webUrl:
+				'https://www.theguardian.com/fashion/gallery/2022/oct/31/new-black-vanguard-photography-between-art-and-fashion-antwaun-sargent-in-pictures',
 			editionBrandings: [
 				{
 					edition: {
@@ -964,8 +974,7 @@ export const trails: [
 									isMaster: 'true',
 									altText:
 										'Fan Special Screening of "Morbius" at Cinemark Playa Vista and XD in Playa Vista<br>Cast member Jared Leto attends a Fan Special Screening of "Morbius" at Cinemark Playa Vista and XD in Playa Vista, California, U.S., March 30, 2022. REUTERS/Aude Guerrucci',
-									mediaId:
-										'db676607592f20362cbe6c6dcb9e2416723d7af1',
+									mediaId: 'db676607592f20362cbe6c6dcb9e2416723d7af1',
 									width: '3500',
 									source: 'Reuters',
 									photographer: 'Aude Guerrucci',
@@ -986,7 +995,8 @@ export const trails: [
 					id: 'fashion/2022/oct/27/jared-leto-skincare-celebrity-men-brad-pitt',
 					webTitle:
 						'Jared Leto says he’s not interested in skincare – while selling $97 eye cream',
-					webUrl: 'https://www.theguardian.com/fashion/2022/oct/27/jared-leto-skincare-celebrity-men-brad-pitt',
+					webUrl:
+						'https://www.theguardian.com/fashion/2022/oct/27/jared-leto-skincare-celebrity-men-brad-pitt',
 					type: 'Article',
 					sectionId: {
 						value: 'fashion',
@@ -1138,7 +1148,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'East coast features',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/east-coast-features',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/east-coast-features',
 							},
 						},
 						{
@@ -1149,7 +1160,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'US Features',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/us-features',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/us-features',
 							},
 						},
 					],
@@ -1164,7 +1176,8 @@ export const trails: [
 				'Jared Leto says he’s not interested in skincare – while selling $97 eye cream',
 			linkText:
 				'Jared Leto says he’s not interested in skincare – while selling $97 eye cream',
-			webUrl: 'https://www.theguardian.com/fashion/2022/oct/27/jared-leto-skincare-celebrity-men-brad-pitt',
+			webUrl:
+				'https://www.theguardian.com/fashion/2022/oct/27/jared-leto-skincare-celebrity-men-brad-pitt',
 			editionBrandings: [
 				{
 					edition: {
@@ -1262,8 +1275,7 @@ export const trails: [
 									source: 'REX/Shutterstock',
 									isMaster: 'true',
 									altText: 'Winter coats',
-									mediaId:
-										'11f672598753a0604016f1d79e9ea57d22773e44',
+									mediaId: '11f672598753a0604016f1d79e9ea57d22773e44',
 									width: '2560',
 									height: '1536',
 									credit: 'Composite: REX/Shutterstock',
@@ -1280,9 +1292,9 @@ export const trails: [
 				},
 				metadata: {
 					id: 'fashion/gallery/2022/oct/29/20-of-the-best-winter-coats-to-wear-now-in-pictures',
-					webTitle:
-						' 20 of the best winter coats to wear now - in pictures ',
-					webUrl: 'https://www.theguardian.com/fashion/gallery/2022/oct/29/20-of-the-best-winter-coats-to-wear-now-in-pictures',
+					webTitle: ' 20 of the best winter coats to wear now - in pictures ',
+					webUrl:
+						'https://www.theguardian.com/fashion/gallery/2022/oct/29/20-of-the-best-winter-coats-to-wear-now-in-pictures',
 					type: 'Gallery',
 					sectionId: {
 						value: 'fashion',
@@ -1379,7 +1391,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'Observer Magazine',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/observer-magazine',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/observer-magazine',
 							},
 						},
 					],
@@ -1392,7 +1405,8 @@ export const trails: [
 			byline: 'by Jo Jones',
 			webTitle: ' 20 of the best winter coats to wear now - in pictures ',
 			linkText: ' 20 of the best winter coats to wear now - in pictures ',
-			webUrl: 'https://www.theguardian.com/fashion/gallery/2022/oct/29/20-of-the-best-winter-coats-to-wear-now-in-pictures',
+			webUrl:
+				'https://www.theguardian.com/fashion/gallery/2022/oct/29/20-of-the-best-winter-coats-to-wear-now-in-pictures',
 			editionBrandings: [
 				{
 					edition: {
@@ -1489,8 +1503,7 @@ export const trails: [
 									source: 'TikTok',
 									isMaster: 'true',
 									altText: 'IMG 0740',
-									mediaId:
-										'dd9d8bd4f8805a0ddd3dabbb1ddb5add71fb8cc9',
+									mediaId: 'dd9d8bd4f8805a0ddd3dabbb1ddb5add71fb8cc9',
 									width: '1170',
 									height: '702',
 									credit: 'Photograph: TikTok',
@@ -1507,9 +1520,9 @@ export const trails: [
 				},
 				metadata: {
 					id: 'lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
-					webTitle:
-						'‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
-					webUrl: 'https://www.theguardian.com/lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
+					webTitle: '‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
+					webUrl:
+						'https://www.theguardian.com/lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
 					type: 'Article',
 					sectionId: {
 						value: 'lifeandstyle',
@@ -1617,7 +1630,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'East coast features',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/east-coast-features',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/east-coast-features',
 							},
 						},
 						{
@@ -1628,7 +1642,8 @@ export const trails: [
 								sectionId: 'global',
 								sectionName: 'global',
 								webTitle: 'US Features',
-								webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/us-features',
+								webUrl:
+									'https://www.theguardian.com/tracking/commissioningdesk/us-features',
 							},
 						},
 					],
@@ -1641,7 +1656,8 @@ export const trails: [
 			byline: 'Alaina Demopoulos',
 			webTitle: '‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
 			linkText: '‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
-			webUrl: 'https://www.theguardian.com/lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
+			webUrl:
+				'https://www.theguardian.com/lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
 			editionBrandings: [
 				{
 					edition: {

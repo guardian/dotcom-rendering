@@ -75,11 +75,7 @@ export const YoutubeBlockComponentAMP = ({
 	}
 
 	return (
-		<Caption
-			captionText={element.mediaTitle}
-			pillar={pillar}
-			padCaption={true}
-		>
+		<Caption captionText={element.mediaTitle} pillar={pillar} padCaption={true}>
 			<amp-youtube {...attributes} />
 		</Caption>
 	);

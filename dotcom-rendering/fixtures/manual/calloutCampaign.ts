@@ -35,7 +35,8 @@ export const calloutCampaign: CalloutBlockElement = {
 		{
 			name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
 			hideLabel: false,
-			label: 'You can upload a photo here if you think it will add to your story',
+			label:
+				'You can upload a photo here if you think it will add to your story',
 			id: '91884877',
 			type: 'file',
 			required: false,
@@ -156,7 +157,8 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 		{
 			name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
 			hideLabel: false,
-			label: 'You can upload a photo here if you think it will add to your story',
+			label:
+				'You can upload a photo here if you think it will add to your story',
 			id: '91884877',
 			type: 'file',
 			required: false,

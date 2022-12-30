@@ -83,10 +83,7 @@ export const Lineup = ({ players }: Props) => {
 						<div>
 							<span>{player.name} </span>
 							{player.events.map((event: EventType) => (
-								<Event
-									type={event.eventType}
-									time={event.eventTime}
-								/>
+								<Event type={event.eventType} time={event.eventTime} />
 							))}
 						</div>
 					</Row>

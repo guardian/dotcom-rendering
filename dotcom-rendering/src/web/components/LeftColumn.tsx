@@ -106,8 +106,7 @@ export const LeftColumn = ({
 		>
 			<div
 				css={[
-					borderType === 'partial' &&
-						partialRightBorder(borderColour),
+					borderType === 'partial' && partialRightBorder(borderColour),
 					css`
 						height: 100%;
 					`,

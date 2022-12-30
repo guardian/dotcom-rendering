@@ -14,9 +14,7 @@ describe('shouldPadWrappableRows', () => {
 				[3, false],
 				[4, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 
@@ -32,9 +30,7 @@ describe('shouldPadWrappableRows', () => {
 				[4, false],
 				[5, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 
@@ -52,9 +48,7 @@ describe('shouldPadWrappableRows', () => {
 				[5, true],
 				[6, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 	});
@@ -70,9 +64,7 @@ describe('shouldPadWrappableRows', () => {
 				[1, true],
 				[2, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 
@@ -86,9 +78,7 @@ describe('shouldPadWrappableRows', () => {
 				[2, false],
 				[3, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 
@@ -104,9 +94,7 @@ describe('shouldPadWrappableRows', () => {
 				[3, true],
 				[4, false],
 			])('card number %s should return %s', (index, expected) => {
-				expect(shouldPadWrappableRows(index, cards, columns)).toBe(
-					expected,
-				);
+				expect(shouldPadWrappableRows(index, cards, columns)).toBe(expected);
 			});
 		});
 	});

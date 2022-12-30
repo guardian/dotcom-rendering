@@ -123,11 +123,7 @@ export const CardsWithDifferentThemes = ({
 								headlineText={title}
 								trailText="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
-								starRating={
-									design === ArticleDesign.Review
-										? 3
-										: undefined
-								}
+								starRating={design === ArticleDesign.Review ? 3 : undefined}
 							/>
 						</CardWrapper>
 					);
@@ -143,11 +139,7 @@ export const CardsWithDifferentThemes = ({
 								headlineText={title}
 								trailText="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
-								starRating={
-									design === ArticleDesign.Review
-										? 3
-										: undefined
-								}
+								starRating={design === ArticleDesign.Review ? 3 : undefined}
 							/>
 						</CardWrapper>
 					);
@@ -168,32 +160,16 @@ export const WithDifferentHeadlineSizes = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					headlineSize="tiny"
-					headlineText="tiny"
-				/>
+				<Card {...basicCardProps} headlineSize="tiny" headlineText="tiny" />
 			</CardWrapper>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					headlineSize="small"
-					headlineText="small"
-				/>
+				<Card {...basicCardProps} headlineSize="small" headlineText="small" />
 			</CardWrapper>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					headlineSize="medium"
-					headlineText="medium"
-				/>
+				<Card {...basicCardProps} headlineSize="medium" headlineText="medium" />
 			</CardWrapper>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					headlineSize="large"
-					headlineText="large"
-				/>
+				<Card {...basicCardProps} headlineSize="large" headlineText="large" />
 			</CardWrapper>
 		</CardGroup>
 	);
@@ -203,11 +179,7 @@ export const WithByline = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					byline="Byline text"
-					showByline={true}
-				/>
+				<Card {...basicCardProps} byline="Byline text" showByline={true} />
 			</CardWrapper>
 		</CardGroup>
 	);
@@ -323,11 +295,7 @@ export const WithDifferentImagePositions = () => {
 				/>
 			</CardWrapper>
 			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="top"
-					headlineText="top"
-				/>
+				<Card {...basicCardProps} imagePosition="top" headlineText="top" />
 			</CardWrapper>
 		</>
 	);
@@ -538,20 +506,17 @@ export const WhenHorizontalAndOpinion = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -569,8 +534,7 @@ export const WhenHorizontalAndOpinion = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -639,20 +603,17 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -691,20 +652,17 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -743,20 +701,17 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -795,20 +750,17 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}
@@ -833,20 +785,17 @@ export const WhenOpinionWithImageAtBottom = () => {
 					supportingContent={[
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 						{
 							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
+							headline: 'A longer headline to see how wrapping works',
 							kickerText: 'Kicker',
 						},
 					]}

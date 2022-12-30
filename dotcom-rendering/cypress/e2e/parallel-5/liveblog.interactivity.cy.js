@@ -145,9 +145,7 @@ describe('Liveblogs', function () {
 				url: /\?lastUpdate=.*/,
 			},
 			(req) => {
-				expect(req.query.lastUpdate).to.equal(
-					'block-62148e2d8f081f9e465d1bb7',
-				);
+				expect(req.query.lastUpdate).to.equal('block-62148e2d8f081f9e465d1bb7');
 			},
 		).as('updateCall');
 		cy.visit(
@@ -199,9 +197,7 @@ describe('Liveblogs', function () {
 				html: tweetBlock,
 				mostRecentBlockId: 'abc',
 			});
-			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
-				'not.be.visible',
-			);
+			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should('not.be.visible');
 
 			// Previously we were using #maincontent as top of blog.
 			// After repositioning the key events, the test scrolling

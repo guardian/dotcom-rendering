@@ -152,7 +152,5 @@ type Props = {
 };
 
 export const MainMedia = ({ element, pillar, adTargeting }: Props) => {
-	return (
-		<div css={expanded}>{asComponent(element, pillar, adTargeting)}</div>
-	);
+	return <div css={expanded}>{asComponent(element, pillar, adTargeting)}</div>;
 };

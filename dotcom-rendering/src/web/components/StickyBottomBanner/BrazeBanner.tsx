@@ -133,10 +133,7 @@ export const BrazeBanner = ({ meta }: Props) => {
 				setBrazeComponent(() => module.BrazeBannerComponent);
 			})
 			.catch((error) =>
-				window.guardian.modules.sentry.reportError(
-					error,
-					'braze-banner',
-				),
+				window.guardian.modules.sentry.reportError(error, 'braze-banner'),
 			);
 	}, []);
 

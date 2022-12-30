@@ -37,9 +37,7 @@ const interceptYouTubeEmbed = ({
 		function (req) {
 			// https://guardian.github.io/commercial-request-parser/ is useful to parse YouTube requests
 			const url = new URL(req.url);
-			const embedConfig = JSON.parse(
-				url.searchParams.get('embed_config'),
-			);
+			const embedConfig = JSON.parse(url.searchParams.get('embed_config'));
 			const adsConfig = embedConfig.adsConfig;
 			const adTagParameters = adsConfig.adTagParameters;
 			// cust_params is double encoded
@@ -70,10 +68,8 @@ const interceptYouTubeEmbed = ({
 					'check nonPersonalisation is FALSE',
 				).to.equal(false);
 				// cmpGvcd = consentState.tcfv2.addtlConsent
-				expect(
-					adTagParameters.cmpGvcd,
-					'check TCFV2 additional consent',
-				).to.not.be.undefined;
+				expect(adTagParameters.cmpGvcd, 'check TCFV2 additional consent').to.not
+					.be.undefined;
 			}
 			// check adunit
 			expect(adTagParameters.iu, 'check adUnit').to.equal(adUnit);
@@ -226,9 +222,7 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
-				cy.wrap(item)
-					.parent()
-					.should('have.attr', 'data-gu-ready', 'true');
+				cy.wrap(item).parent().should('have.attr', 'data-gu-ready', 'true');
 			});
 
 		// Make sure overlays for both videos are displayed
@@ -379,16 +373,13 @@ describe('YouTube Atom', function () {
 		cy.get('[data-component=youtube-atom]')
 			.should('have.length', 3)
 			.each((item) => {
-				cy.wrap(item)
-					.parent()
-					.should('have.attr', 'data-gu-ready', 'true');
+				cy.wrap(item).parent().should('have.attr', 'data-gu-ready', 'true');
 			});
 
 		const mediaDiv = 'div[data-gu-name="media"]';
 		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
 		const stickySelector = '[data-cy^="youtube-sticky-qkC9z-dSAOE"]';
-		const stickyCloseSelector =
-			'[data-cy^="youtube-sticky-close-qkC9z-dSAOE"]';
+		const stickyCloseSelector = '[data-cy^="youtube-sticky-close-qkC9z-dSAOE"]';
 
 		/**
 		 * Main media video
@@ -405,17 +396,11 @@ describe('YouTube Atom', function () {
 		muteYouTube(`${mediaDiv} iframe[id^="youtube-video-qkC9z-dSAOE"]`);
 
 		// Scroll past the main media video to the third block
-		cy.get('.block')
-			.eq(2)
-			.scrollIntoView({ duration: 1000, timeout: 10000 });
+		cy.get('.block').eq(2).scrollIntoView({ duration: 1000, timeout: 10000 });
 
 		// Main media video should now be sticky
 		cy.get(mediaDiv).within(() => {
-			cy.get(stickySelector).should(
-				'have.attr',
-				'data-is-sticky',
-				'true',
-			);
+			cy.get(stickySelector).should('have.attr', 'data-is-sticky', 'true');
 		});
 
 		// Scroll to main media video
@@ -428,17 +413,11 @@ describe('YouTube Atom', function () {
 		});
 
 		// Scroll past the main media video to the third block
-		cy.get('.block')
-			.eq(2)
-			.scrollIntoView({ duration: 1000, timeout: 10000 });
+		cy.get('.block').eq(2).scrollIntoView({ duration: 1000, timeout: 10000 });
 
 		cy.get(mediaDiv).within(() => {
 			// video is sticky again
-			cy.get(stickySelector).should(
-				'have.attr',
-				'data-is-sticky',
-				'true',
-			);
+			cy.get(stickySelector).should('have.attr', 'data-is-sticky', 'true');
 			// close the video
 			// TODO find a way to hover and make the close button visible rather than forcing
 			cy.get(stickyCloseSelector).click({ force: true });

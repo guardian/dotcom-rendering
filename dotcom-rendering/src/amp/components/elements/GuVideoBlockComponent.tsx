@@ -13,8 +13,8 @@ export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 				<div fallback="">
 					Sorry, your browser is unable to play this video.
 					<br />
-					Please <a href="http://whatbrowser.org/">upgrade</a> to a
-					modern browser and try again.
+					Please <a href="http://whatbrowser.org/">upgrade</a> to a modern
+					browser and try again.
 				</div>
 				{element.assets.map(
 					(encoding) =>

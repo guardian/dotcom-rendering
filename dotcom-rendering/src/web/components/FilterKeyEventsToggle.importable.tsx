@@ -59,9 +59,7 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 					onClick={() => handleClick()}
 					cssOverrides={cssOverrides}
 					data-component="filter-key-events"
-					data-link-name={`filter-key-events-${
-						filterKeyEvents ? 'off' : 'on'
-					}`}
+					data-link-name={`filter-key-events-${filterKeyEvents ? 'off' : 'on'}`}
 				/>
 			</div>
 		</>

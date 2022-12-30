@@ -25,8 +25,7 @@ const tagsWithLargeBylineImage = [
 		type: 'Contributor',
 		title: 'Lanre Bakare',
 		twitterHandle: 'lanre_bakare',
-		bylineImageUrl:
-			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
+		bylineImageUrl: 'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 		bylineLargeImageUrl:
 			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},
@@ -37,8 +36,7 @@ const tagsWithSmallBylineImage = [
 		id: 'profile/nicola-slawson',
 		type: 'Contributor',
 		title: 'Nicola Slawson',
-		bylineImageUrl:
-			'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
+		bylineImageUrl: 'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
 	},
 ];
 
@@ -48,8 +46,7 @@ const tagsWithByTwoContributors = [
 		type: 'Contributor',
 		title: 'Lanre Bakare',
 		twitterHandle: 'lanre_bakare',
-		bylineImageUrl:
-			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
+		bylineImageUrl: 'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 		bylineLargeImageUrl:
 			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},

@@ -151,16 +151,10 @@ const ImageTitle = ({
 		case 'thumbnail':
 		case 'halfWidth':
 		case 'supporting':
-			return (
-				<h2 css={[titleWrapper(palette), basicTitlePadding]}>
-					{title}
-				</h2>
-			);
+			return <h2 css={[titleWrapper(palette), basicTitlePadding]}>{title}</h2>;
 		case 'showcase':
 		case 'immersive':
-			return (
-				<h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>
-			);
+			return <h2 css={[titleWrapper(palette), moreTitlePadding]}>{title}</h2>;
 	}
 };
 
@@ -266,8 +260,7 @@ export const ImageComponent = ({
 
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =
-		getMaster(element.media.allImages) ??
-		getLargest(element.media.allImages);
+		getMaster(element.media.allImages) ?? getLargest(element.media.allImages);
 
 	const isSupported = (imageUrl: string) => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
@@ -319,9 +312,7 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} palette={palette} />}
 			</div>
 		);
 	}
@@ -353,9 +344,7 @@ export const ImageComponent = ({
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} palette={palette} />}
 			</div>
 		);
 	}
@@ -425,9 +414,7 @@ export const ImageComponent = ({
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
-				{!!title && (
-					<ImageTitle title={title} role={role} palette={palette} />
-				)}
+				{!!title && <ImageTitle title={title} role={role} palette={palette} />}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

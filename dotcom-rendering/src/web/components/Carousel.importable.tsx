@@ -493,9 +493,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 		const scrolled = current.scrollLeft + offset;
 
-		const nextOffset = offsets
-			.reverse()
-			.find((offset) => offset < scrolled);
+		const nextOffset = offsets.reverse().find((offset) => offset < scrolled);
 
 		if (nextOffset) {
 			current.scrollTo({ left: nextOffset });
@@ -612,10 +610,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 							<button
 								onClick={next}
 								aria-label="Move carousel forwards"
-								css={[
-									buttonStyle,
-									nextButtonStyle(index, trails.length),
-								]}
+								css={[buttonStyle, nextButtonStyle(index, trails.length)]}
 								data-link-name={`${arrowName}-next`}
 							>
 								<SvgChevronRightSingle />
@@ -643,8 +638,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!webPublicationDate) return null;
-						const discussionId =
-							shortUrl && new URL(shortUrl).pathname;
+						const discussionId = shortUrl && new URL(shortUrl).pathname;
 
 						const imageUrl = image && getSourceImageUrl(image);
 

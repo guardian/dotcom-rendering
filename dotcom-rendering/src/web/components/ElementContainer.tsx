@@ -92,8 +92,7 @@ export const ElementContainer = ({
 						shouldCenter && center,
 						showSideBorders && sideBorderStyles(borderColour),
 						showTopBorder && topBorderStyles(borderColour),
-						innerBackgroundColour &&
-							setBackgroundColour(innerBackgroundColour),
+						innerBackgroundColour && setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
 						padBottom && bottomPadding,
 					]}

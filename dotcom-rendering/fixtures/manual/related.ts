@@ -7,7 +7,8 @@ export const related = {
 				'If your dog goes for my sheep, then I will shoot, UK farmers warn walkers',
 			showByline: false,
 			byline: 'Robyn Vinter',
-			image: 'https://i.guim.co.uk/img/media/adf6cb2056b61cc05ae22e38c4f2b975624c612b/0_120_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e42e28a11d514f91623bd6737c055f86',
+			image:
+				'https://i.guim.co.uk/img/media/adf6cb2056b61cc05ae22e38c4f2b975624c612b/0_120_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e42e28a11d514f91623bd6737c055f86',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -27,7 +28,8 @@ export const related = {
 				'Buying lockdown dogs on a whim can lead to trouble, says RSPCA',
 			showByline: false,
 			byline: 'Amelia Hill',
-			image: 'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
+			image:
+				'https://i.guim.co.uk/img/media/4eef434e2737516a57ac9626e63b1d07e8e01e9a/0_123_4986_2991/master/4986.jpg?width=300&quality=85&auto=format&fit=max&s=9c38374041c80ba60360c37874366df6',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -47,7 +49,8 @@ export const related = {
 				' As dog thefts soar, owners and charities call for tougher penalties',
 			showByline: false,
 			byline: 'James Tapper',
-			image: 'https://i.guim.co.uk/img/media/a2eeedf1de383b1e85a13e98c2e6d5920f6248c7/0_248_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=c700dc3f559096aa4057309e0d777495',
+			image:
+				'https://i.guim.co.uk/img/media/a2eeedf1de383b1e85a13e98c2e6d5920f6248c7/0_248_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=c700dc3f559096aa4057309e0d777495',
 			isLiveBlog: false,
 			pillar: 'lifestyle',
 			designType: 'Article',
@@ -67,7 +70,8 @@ export const related = {
 				'Dogs are for life, not just coronavirus lockdown, says charity',
 			showByline: false,
 			byline: 'Ben Quinn',
-			image: 'https://i.guim.co.uk/img/media/0afb0e09b42424a28ef37c305c9ab48befe18ead/0_48_1841_1105/master/1841.jpg?width=300&quality=85&auto=format&fit=max&s=aa37bd0972a58d120def362b4666a012',
+			image:
+				'https://i.guim.co.uk/img/media/0afb0e09b42424a28ef37c305c9ab48befe18ead/0_48_1841_1105/master/1841.jpg?width=300&quality=85&auto=format&fit=max&s=aa37bd0972a58d120def362b4666a012',
 			ageWarning: '10 months',
 			isLiveBlog: false,
 			pillar: 'lifestyle',
@@ -88,7 +92,8 @@ export const related = {
 				'RSPCA urges caution over buying puppies online after spate of deaths',
 			showByline: false,
 			byline: 'Saeed Kamali Dehghan',
-			image: 'https://i.guim.co.uk/img/media/03ba69bab4daa76c6d4f087df0446d97bd4486b1/0_0_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=042d015a633bad5ee81193d4692e0d33',
+			image:
+				'https://i.guim.co.uk/img/media/03ba69bab4daa76c6d4f087df0446d97bd4486b1/0_0_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=042d015a633bad5ee81193d4692e0d33',
 			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
@@ -125,7 +130,8 @@ export const related = {
 			linkText: 'Sale of puppies in pet shops may be banned in crackdown',
 			showByline: false,
 			byline: 'Alexandra Topping',
-			image: 'https://i.guim.co.uk/img/media/6159b71ad23dd7476b59752735e307bddb84e9b7/27_0_2687_1612/master/2687.jpg?width=300&quality=85&auto=format&fit=max&s=9add0945db0ea2aa1b1b4d5d47c5a226',
+			image:
+				'https://i.guim.co.uk/img/media/6159b71ad23dd7476b59752735e307bddb84e9b7/27_0_2687_1612/master/2687.jpg?width=300&quality=85&auto=format&fit=max&s=9add0945db0ea2aa1b1b4d5d47c5a226',
 			ageWarning: '3 years',
 			isLiveBlog: false,
 			pillar: 'news',
@@ -141,11 +147,11 @@ export const related = {
 		},
 		{
 			url: 'https://www.theguardian.com/world/2017/feb/02/sale-of-puppies-under-eight-weeks-old-to-be-made-illegal',
-			linkText:
-				'Sale of puppies under eight weeks old to be made illegal',
+			linkText: 'Sale of puppies under eight weeks old to be made illegal',
 			showByline: false,
 			byline: 'Press Association',
-			image: 'https://i.guim.co.uk/img/media/2564af9e27fafecae93d9d4e47a2c47ce1a873e3/822_126_2250_1350/master/2250.jpg?width=300&quality=85&auto=format&fit=max&s=48f7cda50097291180eb89f0717e9a15',
+			image:
+				'https://i.guim.co.uk/img/media/2564af9e27fafecae93d9d4e47a2c47ce1a873e3/822_126_2250_1350/master/2250.jpg?width=300&quality=85&auto=format&fit=max&s=48f7cda50097291180eb89f0717e9a15',
 			ageWarning: '4 years',
 			isLiveBlog: false,
 			pillar: 'news',
@@ -156,8 +162,7 @@ export const related = {
 				display: 'StandardDisplay',
 			},
 			webPublicationDate: '2017-02-02T00:01:15.000Z',
-			headline:
-				'Sale of puppies under eight weeks old to be made illegal',
+			headline: 'Sale of puppies under eight weeks old to be made illegal',
 			shortUrl: 'https://www.theguardian.com/p/5p7gv',
 		},
 		{
@@ -166,7 +171,8 @@ export const related = {
 				"Michael Heseltine's alsatian-strangling tale was shaggy dog story",
 			showByline: false,
 			byline: 'Haroon Siddique',
-			image: 'https://i.guim.co.uk/img/media/7b85c19715519b898437c297d443b2695a3999f4/0_214_3456_2073/master/3456.jpg?width=300&quality=85&auto=format&fit=max&s=e9b0128c6d311fa5cf333074a635e9e9',
+			image:
+				'https://i.guim.co.uk/img/media/7b85c19715519b898437c297d443b2695a3999f4/0_214_3456_2073/master/3456.jpg?width=300&quality=85&auto=format&fit=max&s=e9b0128c6d311fa5cf333074a635e9e9',
 			ageWarning: '4 years',
 			isLiveBlog: false,
 			pillar: 'news',
@@ -186,7 +192,8 @@ export const related = {
 			linkText: 'Throwaway pup trend makes Britons dogs’ worst enemies',
 			showByline: false,
 			byline: 'Tracy McVeigh',
-			image: 'https://i.guim.co.uk/img/static/sys-images/Observer/Pix/pictures/2015/7/4/1436003561415/TV-vet-Marc-Abraham-exami-009.jpg?width=300&quality=85&auto=format&fit=max&s=b7a3c26962f0831c415e82f755200e2d',
+			image:
+				'https://i.guim.co.uk/img/static/sys-images/Observer/Pix/pictures/2015/7/4/1436003561415/TV-vet-Marc-Abraham-exami-009.jpg?width=300&quality=85&auto=format&fit=max&s=b7a3c26962f0831c415e82f755200e2d',
 			ageWarning: '5 years',
 			isLiveBlog: false,
 			pillar: 'news',
@@ -206,7 +213,8 @@ export const related = {
 				'Battery-farmed puppies are a shame on our nation | Beverley Cuddy',
 			showByline: true,
 			byline: 'Beverley Cuddy',
-			image: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/9/20/1348161243486/A-dog-is-seen-resting-dur-008.jpg?width=300&quality=85&auto=format&fit=max&s=fcbffca41e290fcce16905b456ee674c',
+			image:
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/9/20/1348161243486/A-dog-is-seen-resting-dur-008.jpg?width=300&quality=85&auto=format&fit=max&s=fcbffca41e290fcce16905b456ee674c',
 			isLiveBlog: false,
 			pillar: 'opinion',
 			designType: 'Comment',

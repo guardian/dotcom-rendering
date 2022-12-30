@@ -32,11 +32,7 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 	}
 	if (data) {
 		return (
-			<MatchStats
-				home={data.homeTeam}
-				away={data.awayTeam}
-				format={format}
-			/>
+			<MatchStats home={data.homeTeam} away={data.awayTeam} format={format} />
 		);
 	}
 

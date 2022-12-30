@@ -21,7 +21,8 @@ const fontList: FontDisplay[] = [
 	// GH Guardian Headline, with legacy family name of Guardian Egyptian Web
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.ttf',
 		weight: 300,
@@ -29,7 +30,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Light.ttf',
 		weight: 300,
@@ -37,7 +39,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.ttf',
 		weight: 300,
@@ -45,7 +48,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-LightItalic.ttf',
 		weight: 300,
@@ -53,7 +57,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
 		woff: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Medium.ttf',
 		weight: 500,
@@ -61,7 +66,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
 		woff: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Medium.ttf',
 		weight: 500,
@@ -69,7 +75,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.ttf',
 		weight: 500,
@@ -77,7 +84,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-MediumItalic.ttf',
 		weight: 500,
@@ -85,7 +93,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.ttf',
 		weight: 700,
@@ -93,7 +102,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-Bold.ttf',
 		weight: 700,
@@ -101,7 +111,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GH Guardian Headline',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
 		weight: 700,
@@ -109,7 +120,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Egyptian Web',
-		woff2: 'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-BoldItalic.woff2',
 		woff: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.woff',
 		ttf: 'fonts/guardian-headline/latin1-not-hinted/GHGuardianHeadline-BoldItalic.ttf',
 		weight: 700,
@@ -118,7 +130,8 @@ const fontList: FontDisplay[] = [
 	// GuardianTextEgyptian, with legacy family name of Guardian Text Egyptian Web
 	{
 		family: 'GuardianTextEgyptian',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
 		woff: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Regular.ttf',
 		weight: 400,
@@ -126,7 +139,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
 		woff: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Regular.ttf',
 		weight: 400,
@@ -134,7 +148,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextEgyptian',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.ttf',
 		weight: 400,
@@ -142,7 +157,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-RegularItalic.ttf',
 		weight: 400,
@@ -150,7 +166,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextEgyptian',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.ttf',
 		weight: 700,
@@ -158,7 +175,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-Bold.ttf',
 		weight: 700,
@@ -166,7 +184,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextEgyptian',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
 		weight: 700,
@@ -174,7 +193,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Egyptian Web',
-		woff2: 'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-BoldItalic.woff2',
 		woff: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.woff',
 		ttf: 'fonts/guardian-textegyptian/latin1-not-hinted/GuardianTextEgyptian-BoldItalic.ttf',
 		weight: 700,
@@ -183,7 +203,8 @@ const fontList: FontDisplay[] = [
 	// GuardianTextSans, with legacy family name of Guardian Text Sans Web
 	{
 		family: 'GuardianTextSans',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
 		woff: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Regular.ttf',
 		weight: 400,
@@ -191,7 +212,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Sans Web',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
 		woff: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Regular.ttf',
 		weight: 400,
@@ -199,7 +221,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextSans',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.ttf',
 		weight: 400,
@@ -207,7 +230,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Sans Web',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-RegularItalic.ttf',
 		weight: 400,
@@ -215,7 +239,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextSans',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.ttf',
 		weight: 700,
@@ -223,7 +248,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Sans Web',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-Bold.ttf',
 		weight: 700,
@@ -231,7 +257,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'GuardianTextSans',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
 		weight: 700,
@@ -239,7 +266,8 @@ const fontList: FontDisplay[] = [
 	},
 	{
 		family: 'Guardian Text Sans Web',
-		woff2: 'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
+		woff2:
+			'fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-BoldItalic.woff2',
 		woff: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.woff',
 		ttf: 'fonts/guardian-textsans/latin1-not-hinted/GuardianTextSans-BoldItalic.ttf',
 		weight: 700,

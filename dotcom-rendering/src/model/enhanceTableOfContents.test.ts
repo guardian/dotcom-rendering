@@ -9,7 +9,8 @@ describe('Enhance Table of Contents', () => {
 				...blockMetaData,
 				elements: [
 					{
-						_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: 'mocOne',
 						subheadingLinks: [],
 					},

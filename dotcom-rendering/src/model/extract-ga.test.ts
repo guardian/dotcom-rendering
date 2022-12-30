@@ -14,11 +14,9 @@ const base = {
 		'us-news/us-national-security,us-news/us-politics,world/privacy,business/telecoms,technology/telecoms,business/verizon-communications,technology/data-protection,technology/technology,business/business,world/world,us-news/us-news,us-news/nsa,us-news/the-nsa-files',
 	pillar,
 	section: 'us-news',
-	seriesId:
-		'commentisfree/series/glenn-greenwald-security-liberty,testseries',
+	seriesId: 'commentisfree/series/glenn-greenwald-security-liberty,testseries',
 	toneIds: 'tone/news',
-	webTitle:
-		"Ticket touts face unlimited fines for using 'bots' to buy in bulk",
+	webTitle: "Ticket touts face unlimited fines for using 'bots' to buy in bulk",
 };
 
 const CAPIArticle = {

@@ -77,9 +77,7 @@ const cardStyles = (
 		return css`
 			${baseCardStyles};
 			:hover {
-				filter: brightness(
-					${decidePaletteBrightness(containerPalette)}
-				);
+				filter: brightness(${decidePaletteBrightness(containerPalette)});
 			}
 		`;
 	}

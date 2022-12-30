@@ -27,10 +27,9 @@ export const CoreVitals = () => {
 		integrateIma,
 	];
 
-	const userInClientSideTestToForceMetrics =
-		clientSideTestsToForceMetrics.some((test) =>
-			ABTestAPI?.runnableTest(test),
-		);
+	const userInClientSideTestToForceMetrics = clientSideTestsToForceMetrics.some(
+		(test) => ABTestAPI?.runnableTest(test),
+	);
 
 	const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 		/* linter, please keep this array multi-line */
@@ -39,10 +38,9 @@ export const CoreVitals = () => {
 		'dcrFrontsVariant',
 	];
 
-	const userInServerSideTestToForceMetrics =
-		serverSideTestsToForceMetrics.some((test) =>
-			Object.keys(window.guardian.config.tests).includes(test),
-		);
+	const userInServerSideTestToForceMetrics = serverSideTestsToForceMetrics.some(
+		(test) => Object.keys(window.guardian.config.tests).includes(test),
+	);
 
 	void initCoreWebVitals({
 		browserId,

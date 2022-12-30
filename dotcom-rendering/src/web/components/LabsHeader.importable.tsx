@@ -134,8 +134,8 @@ const About = () => (
 		`}
 	>
 		<p>
-			Paid content is paid for and controlled by an advertiser and
-			produced by the Guardian Labs team.
+			Paid content is paid for and controlled by an advertiser and produced by
+			the Guardian Labs team.
 		</p>
 		<br />
 		<LinkButton

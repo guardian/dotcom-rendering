@@ -217,9 +217,9 @@ const SignedInWithNotifications = ({
 
 const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
 	const { brazeCards } = useBraze(idApiUrl);
-	const [brazeNotifications, setBrazeNotifications] = useState<
-		Notification[]
-	>([]);
+	const [brazeNotifications, setBrazeNotifications] = useState<Notification[]>(
+		[],
+	);
 
 	useEffect(() => {
 		if (brazeCards) {
@@ -232,10 +232,7 @@ const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
 	}, [brazeCards]);
 
 	return (
-		<SignedInWithNotifications
-			{...props}
-			notifications={brazeNotifications}
-		/>
+		<SignedInWithNotifications {...props} notifications={brazeNotifications} />
 	);
 };
 

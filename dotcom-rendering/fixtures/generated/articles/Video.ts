@@ -1413,7 +1413,8 @@ export const Video: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	webURL:
+		'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'US national security',
@@ -1988,7 +1989,8 @@ export const Video: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id':
+				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2036,10 +2038,12 @@ export const Video: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+			'@id':
+				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			},
 		},
 	],
@@ -2175,8 +2179,7 @@ export const Video: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2208,7 +2211,8 @@ export const Video: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

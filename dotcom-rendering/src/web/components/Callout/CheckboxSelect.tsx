@@ -32,9 +32,7 @@ export const CheckboxSelect = ({
 				);
 
 				const filterOutCheckboxFromArray = () =>
-					selectedCheckboxesArray.filter(
-						(ele: string) => ele !== option.value,
-					);
+					selectedCheckboxesArray.filter((ele: string) => ele !== option.value);
 
 				const addCheckboxToArray = () => [
 					...selectedCheckboxesArray,

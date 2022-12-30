@@ -97,8 +97,7 @@ export const LinkHeadline = ({
 							// Composed styles - order matters for colours
 							linkStyles,
 							showUnderline && textDecorationUnderline,
-							link.visitedColour &&
-								visitedStyles(link.visitedColour),
+							link.visitedColour && visitedStyles(link.visitedColour),
 						]}
 						href={link.to}
 						// If link.preventFocus is true, set tabIndex to -1 to ensure this
@@ -108,17 +107,13 @@ export const LinkHeadline = ({
 					>
 						{headlineText}
 					</a>
-					{!!byline && (
-						<Byline text={byline} format={format} size={size} />
-					)}
+					{!!byline && <Byline text={byline} format={format} size={size} />}
 				</>
 			) : (
 				// We don't have a link so simply use a span here
 				<>
 					<span>{headlineText}</span>
-					{!!byline && (
-						<Byline text={byline} size={size} format={format} />
-					)}
+					{!!byline && <Byline text={byline} size={size} format={format} />}
 				</>
 			)}
 		</h4>

@@ -180,9 +180,7 @@ const linkStyle = (display: ArticleDisplay) => css`
 		font-size: 22px;
 		height: 48px;
 		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
-		padding-right: ${display === ArticleDisplay.Immersive
-			? '20px'
-			: '20px'};
+		padding-right: ${display === ArticleDisplay.Immersive ? '20px' : '20px'};
 		padding-bottom: ${display === ArticleDisplay.Immersive ? '0' : '0'};
 		padding-left: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
 	}

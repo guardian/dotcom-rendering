@@ -275,10 +275,10 @@ export const mockRESTCalls = (): void => {
 						userId: '123',
 						displayName: 'Guardian User',
 						webUrl: 'https://profile.test-theguardian.com/user/id/123',
-						apiUrl: 'http://discussion.test-guardianapis.com/discussion-api/profile/123',
+						apiUrl:
+							'http://discussion.test-guardianapis.com/discussion-api/profile/123',
 						avatar: 'https://avatar.test-guimcode.co.uk/user/123',
-						secureAvatarUrl:
-							'https://avatar.test-guimcode.co.uk/user/123',
+						secureAvatarUrl: 'https://avatar.test-guimcode.co.uk/user/123',
 						badge: [],
 						privateFields: {
 							canPostComment: true,

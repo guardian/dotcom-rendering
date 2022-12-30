@@ -23,8 +23,7 @@ export const SetABTests = ({
 	forcedTestVariants,
 }: Props) => {
 	const mvtId = Number(
-		(isDev &&
-			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
+		(isDev && getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
 			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 	);
 	if (!mvtId) {

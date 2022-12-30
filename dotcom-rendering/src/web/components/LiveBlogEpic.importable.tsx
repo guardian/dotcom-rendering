@@ -278,9 +278,7 @@ export const LiveBlogEpic = ({
 		// of the blog
 		const randomPosition = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
 		const aBlockNearTheTop =
-			document.querySelectorAll<HTMLElement>('article.block')[
-				randomPosition
-			];
+			document.querySelectorAll<HTMLElement>('article.block')[randomPosition];
 		if (aBlockNearTheTop) {
 			insertAfter(aBlockNearTheTop, epicPlaceholder);
 		}

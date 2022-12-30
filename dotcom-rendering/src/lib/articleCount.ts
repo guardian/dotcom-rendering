@@ -29,15 +29,9 @@ export const getArticleCounts = async (
 	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 	if (!window.guardian.weeklyArticleCount) {
-		incrementWeeklyArticleCount(
-			storage.local,
-			pageId,
-			keywordIds.split(','),
-		);
+		incrementWeeklyArticleCount(storage.local, pageId, keywordIds.split(','));
 
-		window.guardian.weeklyArticleCount = getWeeklyArticleHistory(
-			storage.local,
-		);
+		window.guardian.weeklyArticleCount = getWeeklyArticleHistory(storage.local);
 	}
 	if (!window.guardian.dailyArticleCount) {
 		incrementDailyArticleCount();

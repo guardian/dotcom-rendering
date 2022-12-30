@@ -92,8 +92,7 @@ export const pageTemplate = ({
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	const twitterMetaTags =
-		twitterData && generateMetaTags(twitterData, 'name');
+	const twitterMetaTags = twitterData && generateMetaTags(twitterData, 'name');
 
 	// Duplicated prefetch and preconnect tags from DCP:
 	// Documented here: https://github.com/guardian/frontend/pull/12935
@@ -202,19 +201,19 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${prefetchTags.join('\n')}
 
                 ${
-					linkedData !== undefined
-						? ` <script type="application/ld+json">
+									linkedData !== undefined
+										? ` <script type="application/ld+json">
                     			${JSON.stringify(linkedData)}
                 			</script>`
-						: '<!-- no linked data -->'
-				}
+										: '<!-- no linked data -->'
+								}
 
                 <!-- TODO make this conditional when we support more content types -->
                 ${
-					ampLink
-						? `<link rel="amphtml" href="${ampLink}">`
-						: '<!-- no Amp link -->'
-				}
+									ampLink
+										? `<link rel="amphtml" href="${ampLink}">`
+										: '<!-- no Amp link -->'
+								}
 
                 ${fontPreloadTags.join('\n')}
 
@@ -316,15 +315,15 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
-						{
-							c1: '2',
-							c2: '6035250',
-							cv: '2.0',
-							cj: '1',
-							cs_ucfr: '0',
-							comscorekw: keywords,
-						},
-					).toString()}" />
+											{
+												c1: '2',
+												c2: '6035250',
+												cv: '2.0',
+												cj: '1',
+												cs_ucfr: '0',
+												comscorekw: keywords,
+											},
+										).toString()}" />
 
 					${islandNoscriptStyles}
                 </noscript>

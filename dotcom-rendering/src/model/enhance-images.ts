@@ -16,8 +16,7 @@ const isHalfWidthImage = (
 ): element is HalfWidthImageBlockElement => {
 	if (!element) return false;
 	return (
-		element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement' &&
 		element.role === 'halfWidth'
 	);
 };
@@ -68,9 +67,7 @@ const extractTitle = (element: SubheadingBlockElement): string => {
 const isCaption = (element?: CAPIElement): element is TextBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
-	if (
-		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
-	) {
+	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement') {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);

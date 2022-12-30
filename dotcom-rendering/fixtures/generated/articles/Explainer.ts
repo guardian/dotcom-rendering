@@ -64,7 +64,8 @@ export const Explainer: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+					value:
+						'/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 			],
 		},
@@ -109,7 +110,8 @@ export const Explainer: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+					value:
+						'/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 			],
 		},
@@ -154,7 +156,8 @@ export const Explainer: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+					value:
+						'/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 			],
 		},
@@ -199,7 +202,8 @@ export const Explainer: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+					value:
+						'/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 			],
 		},
@@ -244,7 +248,8 @@ export const Explainer: FEArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+					value:
+						'/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 			],
 		},
@@ -1261,7 +1266,8 @@ export const Explainer: FEArticleType = {
 	standfirst:
 		'<p>Calls go back decades for a binding agreement between First Nations and the commonwealth. States have started the process but prospects for a federal treaty are less clear</p>\n<ul>\n <li>Get our <a href="https://www.theguardian.com/technology/ng-interactive/2018/may/15/the-guardian-app?CMP=cvau_sfl">free news app</a>, <a href="https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email?CMP=cvau_sfl">morning email briefing</a> or <a href="https://www.theguardian.com/australia-news/series/full-story?CMP=cvau_sfl">daily news podcast</a></li>\n</ul>',
 	sectionUrl: 'australia-news/indigenous-australians',
-	pageId: 'australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+	pageId:
+		'australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	version: 3,
 	tags: [
 		{
@@ -1315,7 +1321,8 @@ export const Explainer: FEArticleType = {
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+	webURL:
+		'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Indigenous Australians',
@@ -1501,8 +1508,7 @@ export const Explainer: FEArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	byline: 'Lorena Allam',
-	headline:
-		'What is an Indigenous treaty and how would it work in Australia?',
+	headline: 'What is an Indigenous treaty and how would it work in Australia?',
 	promotedNewsletter: {
 		identityName: 'morning-mail',
 		name: "Guardian Australia's Morning Mail",
@@ -1801,7 +1807,8 @@ export const Explainer: FEArticleType = {
 					elementId: '734178e7-16a5-4262-b93c-b251fe72061e',
 				},
 				{
-					_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+					_type:
+						'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 					id: 'interactives/2020/04/tableizer/default',
 					url: 'https://api.nextgen.guardianapps.co.uk/embed/atom/interactive/interactives%2F2020%2F04%2Ftableizer%2Fdefault',
 					html: '<div class="interactive-wrapper">\n\t\n\t<div id="toc"></div>\n\n</div>',
@@ -2655,7 +2662,8 @@ export const Explainer: FEArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+			'@id':
+				'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2703,17 +2711,18 @@ export const Explainer: FEArticleType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+			'@id':
+				'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+				target:
+					'android-app://com.guardian/https/www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			},
 		},
 	],
 	webPublicationDateDisplay: 'Sat 20 Aug 2022 21.00 BST',
 	shouldHideAds: false,
-	webTitle:
-		'What is an Indigenous treaty and how would it work in Australia?',
+	webTitle: 'What is an Indigenous treaty and how would it work in Australia?',
 	isSpecialReport: false,
 	isCommentable: false,
 	keyEvents: [],
@@ -2842,8 +2851,7 @@ export const Explainer: FEArticleType = {
 			sh: 'https://www.theguardian.com/p/d8ex5',
 		},
 		toneIds: 'tone/news',
-		dcrSentryDsn:
-			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
 		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
 		commercialBundleUrl:
@@ -2875,7 +2883,8 @@ export const Explainer: FEArticleType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId:
+			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

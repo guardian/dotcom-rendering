@@ -73,8 +73,7 @@ const getLoaders = (bundle) => {
 								'@babel/preset-env',
 								{
 									bugfixes: true,
-									targets:
-										'extends @guardian/browserslist-config',
+									targets: 'extends @guardian/browserslist-config',
 								},
 							],
 						],
@@ -106,8 +105,7 @@ module.exports = ({ bundle, sessionId }) => ({
 		dynamicImport: './src/web/browser/dynamicImport/init.ts',
 		atomIframe: './src/web/browser/atomIframe/init.ts',
 		embedIframe: './src/web/browser/embedIframe/init.ts',
-		newsletterEmbedIframe:
-			'./src/web/browser/newsletterEmbedIframe/init.ts',
+		newsletterEmbedIframe: './src/web/browser/newsletterEmbedIframe/init.ts',
 		relativeTime: './src/web/browser/relativeTime/init.ts',
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
 		debug: './src/web/browser/debug/init.ts',

@@ -382,20 +382,12 @@ export const Epic = ({ webURL }: Props) => {
 							<div css={tickerWrapperStyle}>
 								<div css={tickerInfoStyle}>
 									<div css={leftStyle}>
-										<p css={topLeftStyle}>
-											{moustacheVariable('topLeft')}
-										</p>
-										<p css={labelStyle}>
-											{moustacheVariable('bottomLeft')}
-										</p>
+										<p css={topLeftStyle}>{moustacheVariable('topLeft')}</p>
+										<p css={labelStyle}>{moustacheVariable('bottomLeft')}</p>
 									</div>
 									<div css={rightStyle}>
-										<p css={topRightStyle}>
-											{moustacheVariable('topRight')}
-										</p>
-										<p css={labelStyle}>
-											{moustacheVariable('bottomRight')}
-										</p>
+										<p css={topRightStyle}>{moustacheVariable('topRight')}</p>
+										<p css={labelStyle}>{moustacheVariable('bottomRight')}</p>
 									</div>
 								</div>
 
@@ -417,9 +409,7 @@ export const Epic = ({ webURL }: Props) => {
 											id="ticker-progress"
 											css={tickerProgressStyle}
 											style={{
-												width: `${moustacheVariable(
-													'percentage',
-												)}%`,
+												width: `${moustacheVariable('percentage')}%`,
 											}}
 										/>
 									</div>
@@ -548,10 +538,7 @@ export const Epic = ({ webURL }: Props) => {
 									css={closeButtonStyle}
 									on="tap:AMP.setState({epicState:{reminder:{hideReminderWrapper: true, hideButtons: false}}}),reminderForm.clear"
 								>
-									<svg
-										viewBox="0 0 30 30"
-										xmlns="http://www.w3.org/2000/svg"
-									>
+									<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
 										<path
 											fillRule="evenodd"
 											clipRule="evenodd"
@@ -607,11 +594,7 @@ export const Epic = ({ webURL }: Props) => {
 									</svg>
 									Please enter your email address
 								</div>
-								<input
-									type="hidden"
-									name="isPreContribution"
-									value="true"
-								/>
+								<input type="hidden" name="isPreContribution" value="true" />
 								<input
 									type="hidden"
 									name="reminderDate"
@@ -624,10 +607,7 @@ export const Epic = ({ webURL }: Props) => {
 									type="email"
 									required={true}
 								/>
-								<button
-									css={blueButtonStyle}
-									on="tap:reminderForm.submit"
-								>
+								<button css={blueButtonStyle} on="tap:reminderForm.submit">
 									Set a reminder
 									<svg
 										css={lightArrowStyle}
@@ -644,14 +624,14 @@ export const Epic = ({ webURL }: Props) => {
 									css={reminderErrorStyle}
 									data-amp-bind-hidden="epicState.reminder.hideFailureMessage"
 								>
-									Sorry we couldn&apos;t set a reminder for
-									you this time. Please try again later.
+									Sorry we couldn&apos;t set a reminder for you this time.
+									Please try again later.
 								</div>
 								<div css={reminderTermsStyle}>
 									We will send you a maximum of two emails in{' '}
 									<span data-amp-bind-text="epicState.reminder.reminderLabel" />
-									. To find out what personal data we collect
-									and how we use it, view our{' '}
+									. To find out what personal data we collect and how we use it,
+									view our{' '}
 									{/* eslint-disable-next-line react/jsx-no-target-blank -- we’re linking to Guardian */}
 									<a
 										target="_blank"
@@ -666,11 +646,10 @@ export const Epic = ({ webURL }: Props) => {
 								css={successMessageStyle}
 								data-amp-bind-hidden="epicState.reminder.hideSuccessMessage"
 							>
-								We will be in touch to remind you to contribute.
-								Look out for a message in your inbox in{' '}
-								<span data-amp-bind-text="epicState.reminder.reminderLabel" />
-								. If you have any questions about contributing,
-								please{' '}
+								We will be in touch to remind you to contribute. Look out for a
+								message in your inbox in{' '}
+								<span data-amp-bind-text="epicState.reminder.reminderLabel" />.
+								If you have any questions about contributing, please{' '}
 								<a
 									target="_blank"
 									rel="noreferrer"

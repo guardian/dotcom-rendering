@@ -41,9 +41,7 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 				case 'interaction': {
 					onInteraction(element, (targetElement) => {
 						void doHydration(name, props, element).then(() => {
-							targetElement.dispatchEvent(
-								new MouseEvent('click'),
-							);
+							targetElement.dispatchEvent(new MouseEvent('click'));
 						});
 					});
 					break;

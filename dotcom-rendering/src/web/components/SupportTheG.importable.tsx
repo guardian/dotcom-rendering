@@ -170,8 +170,9 @@ const ReaderRevenueLinksRemote = ({
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
-	const [SupportHeader, setSupportHeader] =
-		useState<React.ElementType | null>(null);
+	const [SupportHeader, setSupportHeader] = useState<React.ElementType | null>(
+		null,
+	);
 
 	useOnce((): void => {
 		setAutomat();
@@ -188,9 +189,7 @@ const ReaderRevenueLinksRemote = ({
 				showSupportMessaging: !shouldHideSupportMessaging(),
 				countryCode,
 				modulesVersion: MODULES_VERSION,
-				mvtId: Number(
-					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-				),
+				mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
 				isSignedIn,
@@ -207,15 +206,9 @@ const ReaderRevenueLinksRemote = ({
 
 				return window
 					.guardianPolyfilledImport(module.url)
-					.then(
-						(headerModule: {
-							[key: string]: React.ElementType;
-						}) => {
-							setSupportHeader(
-								() => headerModule[module.name] ?? null,
-							);
-						},
-					);
+					.then((headerModule: { [key: string]: React.ElementType }) => {
+						setSupportHeader(() => headerModule[module.name] ?? null);
+					});
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
@@ -233,9 +226,9 @@ const ReaderRevenueLinksRemote = ({
 			<div css={headerStyles}>
 				{}
 				<SupportHeader
-					submitComponentEvent={(
-						componentEvent: OphanComponentEvent,
-					) => submitComponentEvent(componentEvent, ophanRecord)}
+					submitComponentEvent={(componentEvent: OphanComponentEvent) =>
+						submitComponentEvent(componentEvent, ophanRecord)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -346,8 +339,7 @@ const ReaderRevenueLinksNative = ({
 			Subscribe <ArrowRightIcon />
 		</a>
 	);
-	const PrimaryButton =
-		editionId === 'UK' ? SubscribeButton : ContributeButton;
+	const PrimaryButton = editionId === 'UK' ? SubscribeButton : ContributeButton;
 	const SecondaryButton =
 		editionId === 'UK' ? ContributeButton : SubscribeButton;
 

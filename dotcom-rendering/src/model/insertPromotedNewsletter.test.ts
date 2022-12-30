@@ -31,9 +31,9 @@ describe('Insert Newsletter Signups', () => {
 			);
 
 		expect(insertedBlock).toBeTruthy();
-		expect(
-			(insertedBlock as NewsletterSignupBlockElement).newsletter,
-		).toEqual(NEWSLETTER);
+		expect((insertedBlock as NewsletterSignupBlockElement).newsletter).toEqual(
+			NEWSLETTER,
+		);
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {

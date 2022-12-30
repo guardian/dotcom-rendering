@@ -238,9 +238,7 @@ export const Section = ({
 				padSides={padSides}
 				padBottom={padBottom}
 				borderColour={borderColour || overrides?.border.container}
-				backgroundColour={
-					backgroundColour || overrides?.background.container
-				}
+				backgroundColour={backgroundColour || overrides?.background.container}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				containerName={containerName}
@@ -261,9 +259,7 @@ export const Section = ({
 			showTopBorder={showTopBorder}
 			padSides={padSides}
 			borderColour={borderColour || overrides?.border.container}
-			backgroundColour={
-				backgroundColour || overrides?.background.container
-			}
+			backgroundColour={backgroundColour || overrides?.background.container}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
@@ -288,9 +284,7 @@ export const Section = ({
 						<div>
 							<ContainerTitle
 								title={title}
-								fontColour={
-									fontColour || overrides?.text.container
-								}
+								fontColour={fontColour || overrides?.text.container}
 								description={description}
 								url={url}
 								containerPalette={containerPalette}
@@ -302,9 +296,7 @@ export const Section = ({
 						{treats && (
 							<Treats
 								treats={treats}
-								borderColour={
-									borderColour ?? overrides?.border.container
-								}
+								borderColour={borderColour ?? overrides?.border.container}
 							/>
 						)}
 					</div>
@@ -319,9 +311,7 @@ export const Section = ({
 						<Hide when="above" breakpoint="leftCol">
 							<ContainerTitle
 								title={title}
-								fontColour={
-									fontColour || overrides?.text.container
-								}
+								fontColour={fontColour || overrides?.text.container}
 								description={description}
 								url={url}
 								containerPalette={containerPalette}
@@ -332,9 +322,7 @@ export const Section = ({
 						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
-								overrideContainerToggleColour={
-									overrides?.text.containerToggle
-								}
+								overrideContainerToggleColour={overrides?.text.containerToggle}
 							/>
 						)}
 					</div>

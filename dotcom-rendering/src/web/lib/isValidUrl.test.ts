@@ -25,11 +25,8 @@ describe('isValidUrl', () => {
 			'http://www.google.com/hello?athing=1&anotherthing=%20',
 		];
 
-		it.each(validInputs)(
-			'returns true for valid input of `%s`',
-			(input) => {
-				expect(isValidUrl(input)).toBeTruthy();
-			},
-		);
+		it.each(validInputs)('returns true for valid input of `%s`', (input) => {
+			expect(isValidUrl(input)).toBeTruthy();
+		});
 	});
 });

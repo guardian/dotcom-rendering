@@ -5,7 +5,8 @@ export const shortDiscussion = {
 	pageSize: 100,
 	orderBy: 'oldest',
 	discussion: {
-		apiUrl: 'https://discussion.guardianapis.com/discussion-api/discussion//p/4v8kk',
+		apiUrl:
+			'https://discussion.guardianapis.com/discussion-api/discussion//p/4v8kk',
 		commentCount: 7,
 		isClosedForComments: true,
 		isClosedForRecommendation: true,
@@ -13,10 +14,12 @@ export const shortDiscussion = {
 		key: '/p/4v8kk',
 		title: 'Stevie Nicks to release double album of songs from her past',
 		topLevelCommentCount: 6,
-		webUrl: 'https://www.theguardian.com/music/2014/jul/25/stevie-nicks-ro-release-double-album-of-songs-from-her-past',
+		webUrl:
+			'https://www.theguardian.com/music/2014/jul/25/stevie-nicks-ro-release-double-album-of-songs-from-her-past',
 		comments: [
 			{
-				apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/38591122',
+				apiUrl:
+					'https://discussion.guardianapis.com/discussion-api/comment/38591122',
 				body: "<p>someone's run out of ideas..!</p>",
 				date: '25 July 2014 9:07am',
 				id: 38591122,
@@ -25,7 +28,8 @@ export const shortDiscussion = {
 				numRecommends: 0,
 				status: 'visible',
 				userProfile: {
-					apiUrl: 'https://discussion.guardianapis.com/discussion-api/profile/12173512',
+					apiUrl:
+						'https://discussion.guardianapis.com/discussion-api/profile/12173512',
 					avatar: 'https://avatar.guim.co.uk/user/12173512',
 					badge: [],
 					displayName: 'bellyofcassano',
@@ -36,7 +40,8 @@ export const shortDiscussion = {
 				webUrl: 'https://discussion.theguardian.com/comment-permalink/38591122',
 			},
 			{
-				apiUrl: 'https://discussion.guardianapis.com/discussion-api/comment/38649787',
+				apiUrl:
+					'https://discussion.guardianapis.com/discussion-api/comment/38649787',
 				body: '<p>Edge of seventeen.</p>',
 				date: '26 July 2014 6:37pm',
 				id: 38649787,
@@ -45,7 +50,8 @@ export const shortDiscussion = {
 				numRecommends: 0,
 				status: 'visible',
 				userProfile: {
-					apiUrl: 'https://discussion.guardianapis.com/discussion-api/profile/4431346',
+					apiUrl:
+						'https://discussion.guardianapis.com/discussion-api/profile/4431346',
 					avatar: 'https://avatar.guim.co.uk/user/4431346',
 					badge: [],
 					displayName: 'halfienoakes',

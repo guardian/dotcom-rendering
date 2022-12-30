@@ -236,8 +236,7 @@ export const HeaderTopBarSearchCapi = () => {
 										>
 											<div
 												css={css`
-													border-top: 1px solid
-														${neutral[46]};
+													border-top: 1px solid ${neutral[46]};
 													padding: 4px 50px 16px 0;
 												`}
 											>

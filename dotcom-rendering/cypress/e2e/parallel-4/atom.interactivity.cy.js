@@ -122,9 +122,7 @@ describe('Why do wombats do square poos?', function () {
 		// We got the question wrong!
 		// Our choice is shown as wrong (red) and the actual correct answer is shown in green
 		cy.get('[data-answer-type=incorrect-answer]').should('exist');
-		cy.get('[data-answer-type=non-selected-correct-answer]').should(
-			'exist',
-		);
+		cy.get('[data-answer-type=non-selected-correct-answer]').should('exist');
 	});
 
 	it('when I get the answer right, it should commend my skills when I click Reveal', function () {

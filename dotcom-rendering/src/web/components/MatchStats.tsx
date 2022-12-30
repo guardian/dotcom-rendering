@@ -353,11 +353,7 @@ export const MatchStats = ({ home, away, format }: Props) => {
 					<RightBorder>
 						<H4>Possession</H4>
 						<Center>
-							<DecideDoughnut
-								home={home}
-								away={away}
-								format={format}
-							/>
+							<DecideDoughnut home={home} away={away} format={format} />
 						</Center>
 					</RightBorder>
 					<br />
@@ -423,16 +419,12 @@ export const MatchStats = ({ home, away, format }: Props) => {
 					<RightBorder>
 						<H4>{home.name}</H4>
 						<Lineup
-							players={home.players.filter(
-								(player) => !player.substitute,
-							)}
+							players={home.players.filter((player) => !player.substitute)}
 						/>
 						<br />
 						<H4>Substitutes</H4>
 						<Lineup
-							players={home.players.filter(
-								(player) => player.substitute,
-							)}
+							players={home.players.filter((player) => player.substitute)}
 						/>
 						<br />
 					</RightBorder>
@@ -440,16 +432,12 @@ export const MatchStats = ({ home, away, format }: Props) => {
 				<GridItem area="away">
 					<H4>{away.name}</H4>
 					<Lineup
-						players={away.players.filter(
-							(player) => !player.substitute,
-						)}
+						players={away.players.filter((player) => !player.substitute)}
 					/>
 					<br />
 					<H4>Substitutes</H4>
 					<Lineup
-						players={away.players.filter(
-							(player) => player.substitute,
-						)}
+						players={away.players.filter((player) => player.substitute)}
 					/>
 					<br />
 				</GridItem>

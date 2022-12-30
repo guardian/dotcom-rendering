@@ -29,9 +29,7 @@ const svgStyles = (palette: Palette, isDynamo?: boolean) => css`
 		height: 14px;
 		width: 14px;
 		margin-right: 2px;
-		fill: ${isDynamo
-			? palette.text.dynamoHeadline
-			: palette.text.cardFooter};
+		fill: ${isDynamo ? palette.text.dynamoHeadline : palette.text.cardFooter};
 	}
 `;
 

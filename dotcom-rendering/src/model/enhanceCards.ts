@@ -81,8 +81,7 @@ const enhanceSupportingContent = (
 			containerPalette,
 		});
 
-		const supportingContentIsLive =
-			subLink.format?.design === 'LiveBlogDesign';
+		const supportingContentIsLive = subLink.format?.design === 'LiveBlogDesign';
 
 		return {
 			format: presentationFormat,
@@ -104,10 +103,7 @@ const decideAvatarUrl = (
 };
 
 const decideImage = (trail: FEFrontCard) => {
-	if (
-		trail.type === 'LinkSnap' ||
-		trail.properties.image?.type === 'Replace'
-	) {
+	if (trail.type === 'LinkSnap' || trail.properties.image?.type === 'Replace') {
 		return trail.properties.image?.item.imageSrc;
 	}
 
@@ -189,9 +185,7 @@ export const enhanceCards = (
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
 			webPublicationDate: faciaCard.card.webPublicationDateOption
-				? new Date(
-						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
+				? new Date(faciaCard.card.webPublicationDateOption).toISOString()
 				: undefined,
 			image: decideImage(faciaCard),
 			kickerText: decideKicker(faciaCard),
@@ -207,8 +201,7 @@ export const enhanceCards = (
 				: undefined,
 			// nb. there is a distinct 'byline' property on FEFrontCard, at
 			// card.properties.byline
-			byline:
-				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			byline: faciaCard.properties.maybeContent?.trail.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,

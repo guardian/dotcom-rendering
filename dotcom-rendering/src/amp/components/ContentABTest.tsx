@@ -59,9 +59,7 @@ export const ContentABTestProvider = ({
 }) => {
 	const group = getGroup(pageId);
 	const providerValue = switches.ampContentAbTesting ? { group } : {};
-	return (
-		<Context.Provider value={providerValue}>{children}</Context.Provider>
-	);
+	return <Context.Provider value={providerValue}>{children}</Context.Provider>;
 };
 
 /**

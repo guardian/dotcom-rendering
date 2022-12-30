@@ -80,9 +80,7 @@ describe('Interactivity', function () {
 				.its('length')
 				.should('eq', 2);
 			// Verify hydration
-			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
-				'be.visible',
-			);
+			cy.get('img[alt="Michael Barnier and the EU flag"]').should('be.visible');
 		});
 		describe('When most viewed is mocked', function () {
 			beforeEach(mockApi);
@@ -114,9 +112,7 @@ describe('Interactivity', function () {
 		it('should render the reader revenue links in the header', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
 			cy.scrollTo('bottom', { duration: 300 });
-			cy.get('header')
-				.contains(READER_REVENUE_TITLE_TEXT)
-				.should('be.visible');
+			cy.get('header').contains(READER_REVENUE_TITLE_TEXT).should('be.visible');
 		});
 	});
 
@@ -190,11 +186,7 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=veggie-burger]').type('{enter}');
 				// Close the news menu
 				cy.focused().type('{enter}').tab();
-				cy.focused().should(
-					'have.attr',
-					'data-cy',
-					'column-collapse-Opinion',
-				);
+				cy.focused().should('have.attr', 'data-cy', 'column-collapse-Opinion');
 				// Open the opinion menu
 				cy.focused().type('{enter}').tab();
 				cy.focused().should(

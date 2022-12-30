@@ -115,10 +115,7 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 							? interactiveLegacyClasses.byline
 							: ''
 					}
-					css={[
-						bylineStyles(format),
-						bylineColorStyles(palette, format),
-					]}
+					css={[bylineStyles(format), bylineColorStyles(palette, format)]}
 				>
 					<BylineLink byline={byline} tags={tags} format={format} />
 				</div>

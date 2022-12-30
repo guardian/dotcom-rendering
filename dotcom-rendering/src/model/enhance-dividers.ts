@@ -42,8 +42,7 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 			previous &&
 			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
 			isDinkus(previous) &&
-			element._type ===
-				'model.dotcomrendering.pageElements.TextBlockElement'
+			element._type === 'model.dotcomrendering.pageElements.TextBlockElement'
 		) {
 			enhanced.push({
 				...element,

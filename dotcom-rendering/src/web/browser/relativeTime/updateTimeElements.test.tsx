@@ -36,12 +36,8 @@ describe('updateTimeElements', () => {
 		expect(screen.getByTestId('1')).toHaveTextContent(
 			'I am missing data-relativeformat',
 		);
-		expect(screen.getByTestId('2')).toHaveTextContent(
-			'I am a div, not time',
-		);
-		expect(screen.getByTestId('3')).toHaveTextContent(
-			'I am missing datatime',
-		);
+		expect(screen.getByTestId('2')).toHaveTextContent('I am a div, not time');
+		expect(screen.getByTestId('3')).toHaveTextContent('I am missing datatime');
 		expect(screen.getByTestId('4')).toHaveTextContent('15s');
 	});
 

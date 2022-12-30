@@ -24,8 +24,7 @@ const adStyle = css`
 		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
 		/* stylelint-disable-next-line property-disallowed-list */
-		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
-			sans-serif;
+		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
 		padding: 3px 10px;
 		color: ${text.supporting};
 		text-align: right;
@@ -96,10 +95,7 @@ export const Blocks = ({
 				css={blockStyle(pillar)}
 			>
 				{!!block.blockFirstPublishedDisplay && (
-					<a
-						css={firstPublishedStyle}
-						href={blockLink(url, block.id)}
-					>
+					<a css={firstPublishedStyle} href={blockLink(url, block.id)}>
 						{block.blockFirstPublishedDisplay}
 					</a>
 				)}
@@ -145,11 +141,7 @@ export const Blocks = ({
 					return (
 						<>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
+							<div id={`ad-${i + 1}`} data-sort-time="1" css={adStyle}>
 								<RegionalAd
 									editionId={editionId}
 									section={section || ''}

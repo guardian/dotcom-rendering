@@ -35,8 +35,7 @@ export const unwrapHtml = ({
 	unwrappedElement: HTMLTag;
 } => {
 	const matchingFix = fixes.find(
-		({ prefix, suffix }) =>
-			html.startsWith(prefix) && html.endsWith(suffix),
+		({ prefix, suffix }) => html.startsWith(prefix) && html.endsWith(suffix),
 	);
 
 	const unwrappedHtml = matchingFix

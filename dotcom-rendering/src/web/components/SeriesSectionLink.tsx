@@ -232,14 +232,9 @@ export const SeriesSectionLink = ({
 										breakWord,
 										css`
 											color: ${seriesTitleColour};
-											background-color: ${palette
-												.background.seriesTitle};
-											box-shadow: -6px 0 0 0
-													${palette.background
-														.seriesTitle},
-												6px 0 0 0
-													${palette.background
-														.seriesTitle};
+											background-color: ${palette.background.seriesTitle};
+											box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+												6px 0 0 0 ${palette.background.seriesTitle};
 										`,
 									]}
 									data-component="series"
@@ -257,16 +252,10 @@ export const SeriesSectionLink = ({
 											displayBlock,
 											breakWord,
 											css`
-												color: ${palette.text
-													.sectionTitle};
-												background-color: ${palette
-													.background.sectionTitle};
-												box-shadow: -6px 0 0 0
-														${palette.background
-															.seriesTitle},
-													6px 0 0 0
-														${palette.background
-															.seriesTitle};
+												color: ${palette.text.sectionTitle};
+												background-color: ${palette.background.sectionTitle};
+												box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+													6px 0 0 0 ${palette.background.seriesTitle};
 											`,
 										]}
 										data-component="section"
@@ -290,14 +279,9 @@ export const SeriesSectionLink = ({
 									breakWord,
 									css`
 										color: ${sectionTitleColour};
-										background-color: ${palette.background
-											.sectionTitle};
-										box-shadow: -6px 0 0 0
-												${palette.background
-													.seriesTitle},
-											6px 0 0 0
-												${palette.background
-													.seriesTitle};
+										background-color: ${palette.background.sectionTitle};
+										box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+											6px 0 0 0 ${palette.background.seriesTitle};
 									`,
 								]}
 								data-component="section"
@@ -313,16 +297,9 @@ export const SeriesSectionLink = ({
 						const title = tag?.title ? tag.title : sectionLabel;
 						const linkExt = tag?.id ? tag.id : sectionUrl;
 						return (
-							<div
-								css={badge && immersiveTitleBadgeStyle(palette)}
-							>
+							<div css={badge && immersiveTitleBadgeStyle(palette)}>
 								{badge && (
-									<div
-										css={[
-											titleBadgeWrapper,
-											sectionPadding,
-										]}
-									>
+									<div css={[titleBadgeWrapper, sectionPadding]}>
 										<Badge
 											imageUrl={badge.imageUrl}
 											seriesTag={badge.seriesTag}
@@ -339,14 +316,9 @@ export const SeriesSectionLink = ({
 										!badge && sectionPadding,
 										css`
 											color: ${seriesTitleColour};
-											background-color: ${palette
-												.background.seriesTitle};
-											box-shadow: -6px 0 0 0
-													${palette.background
-														.seriesTitle},
-												6px 0 0 0
-													${palette.background
-														.seriesTitle};
+											background-color: ${palette.background.seriesTitle};
+											box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+												6px 0 0 0 ${palette.background.seriesTitle};
 										`,
 									]}
 									href={`${guardianBaseURL}/${linkExt}`}
@@ -394,17 +366,14 @@ export const SeriesSectionLink = ({
 								sectionLabelLink,
 								css`
 									color: ${seriesTitleColour};
-									background-color: ${palette.background
-										.seriesTitle};
+									background-color: ${palette.background.seriesTitle};
 								`,
 								marginRight,
 								fontStyles(format),
 								breakWord,
 								css`
-									box-shadow: -6px 0 0 0
-											${palette.background.seriesTitle},
-										6px 0 0 0
-											${palette.background.seriesTitle};
+									box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
+										6px 0 0 0 ${palette.background.seriesTitle};
 								`,
 							]}
 							data-component="series"
@@ -423,8 +392,7 @@ export const SeriesSectionLink = ({
 									breakWord,
 									css`
 										color: ${sectionTitleColour};
-										background-color: ${palette.background
-											.sectionTitle};
+										background-color: ${palette.background.sectionTitle};
 									`,
 								]}
 								data-component="section"
@@ -461,8 +429,7 @@ export const SeriesSectionLink = ({
 							sectionLabelLink,
 							css`
 								color: ${sectionTitleColour};
-								background-color: ${palette.background
-									.sectionTitle};
+								background-color: ${palette.background.sectionTitle};
 							`,
 							marginRight,
 							fontStyles(format),

@@ -36,7 +36,8 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 				});
 				if ('elementId' in element && element.elementId)
 					updatedElements.push({
-						_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+						_type:
+							'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: element.elementId,
 						// Strip the HTML from the subheading links for use as titles within the element
 						subheadingLinks: subheadingLinks.map((subheading) => ({
@@ -44,8 +45,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 							html: stripHTML(subheading.html),
 						})),
 						endDocumentElementId:
-							endDocumentElement &&
-							'elementId' in endDocumentElement
+							endDocumentElement && 'elementId' in endDocumentElement
 								? endDocumentElement.elementId
 								: undefined,
 					});

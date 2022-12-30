@@ -124,10 +124,7 @@ export const KeyEventsCarousel = ({
 			<div
 				ref={carousel}
 				id="key-events-carousel"
-				css={[
-					carouselStyles(palette),
-					shortCarousel && leftMarginStyles,
-				]}
+				css={[carouselStyles(palette), shortCarousel && leftMarginStyles]}
 			>
 				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
 					{filteredKeyEvents.map((keyEvent, index) => {
@@ -136,9 +133,7 @@ export const KeyEventsCarousel = ({
 								format={format}
 								filterKeyEvents={filterKeyEvents}
 								id={keyEvent.id}
-								blockFirstPublished={
-									keyEvent.blockFirstPublished
-								}
+								blockFirstPublished={keyEvent.blockFirstPublished}
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
 								cardPosition={`${index} of ${carouselLength}`}
