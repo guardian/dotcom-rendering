@@ -5,7 +5,7 @@ import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
 const paidContentPage =
-	'https://www.theguardian.com/a-vision-for-better-food/2022/jul/22/a-kitchen-in-a-quarry-why-charlie-bighams-food-campus-was-named-a-riba-building-of-the-year';
+	'https://www.theguardian.com/make-work-work/2022/dec/01/tools-tech-and-etiquette-best-practice-of-hybrid-working-for-small-businesses';
 
 describe('Paid content tests', function () {
 	beforeEach(function () {
@@ -50,7 +50,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=charlie%20bigham%27s');
+			expect(requestURL).to.include('el=microsoft');
 		});
 	});
 
@@ -91,7 +91,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=charlie%20bigham%27s');
+			expect(requestURL).to.include('el=microsoft');
 		});
 	});
 });
