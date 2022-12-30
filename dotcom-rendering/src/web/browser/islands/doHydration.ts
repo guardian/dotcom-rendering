@@ -19,9 +19,15 @@ export const doHydration = async (
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
 ): Promise<{ success: boolean }> => {
-	// If this function has already been run for an element then don't try to
-	// run it a second time
-	const alreadyHydrated = element.dataset.guReady;
+	// If this function has already been run for this element or any other island
+	// with the same name then don't try to run it a second time
+	let alreadyHydrated = false;
+	document
+		.querySelectorAll<HTMLElement>(`gu-island[name="${name}"]`)
+		.forEach((island) => {
+			if (island.dataset.guReady) alreadyHydrated = true;
+		});
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is necessary
 	if (alreadyHydrated) return { success: false };
 
 	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
