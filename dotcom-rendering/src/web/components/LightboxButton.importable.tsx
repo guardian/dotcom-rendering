@@ -296,6 +296,7 @@ export const LightboxButton = ({ elementId, role }: Props) => {
 			data-element-id={elementId}
 			type="button"
 			className="open-lightbox"
+			aria-haspopup="dialog"
 			css={[
 				css`
 					position: absolute;

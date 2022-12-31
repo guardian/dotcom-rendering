@@ -328,12 +328,7 @@ export const Lightbox = ({ format, images }: Props) => {
 					}
 				`}
 			/>
-			<dialog
-				css={dialogStyles}
-				id="gu-lightbox"
-				aria-modal="true"
-				role="alertdialog"
-			>
+			<dialog css={dialogStyles} id="gu-lightbox" aria-modal="true">
 				<div css={containerStyles}>
 					<nav css={navStyles}>
 						<button
