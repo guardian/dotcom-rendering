@@ -1,9 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import {
-	calloutCampaignOnlyTwoRadio as calloutCampaignOnlyTwoRadioV2,
-	calloutCampaign as calloutCampaignV2,
-} from '../../../fixtures/manual/calloutCampaignV2';
+import { calloutCampaign as calloutCampaignV2 } from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const mockFormat = {
@@ -56,23 +53,3 @@ export default {
 	component: CalloutBlockComponent,
 	title: 'Components/CalloutBlockComponent',
 };
-
-export const Radio = () => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
-	return (
-		<CalloutBlockComponent
-			callout={calloutCampaignOnlyTwoRadioV2}
-			format={mockFormat}
-		/>
-	);
-};
-
-Radio.story = { name: 'Radio and multi select' };
