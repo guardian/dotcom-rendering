@@ -210,6 +210,7 @@ const buttonStyles = css`
 	width: 44px;
 	border: none;
 	cursor: pointer;
+	transition: background-color 0.2s;
 	background-color: ${neutral[20]};
 	:hover {
 		background-color: ${neutral[46]};
