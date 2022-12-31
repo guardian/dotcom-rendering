@@ -335,6 +335,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							type="button"
 							css={[buttonStyles, closeButtonStyles]}
 							className="close"
+							title="Close [ESC or Q]"
 						>
 							<SvgCross />
 							<span
@@ -352,6 +353,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							type="button"
 							css={[buttonStyles, arrowButtonStyles]}
 							className="previous"
+							title="Previous image [←]"
 						>
 							<SvgArrowLeftStraight />
 							<span
@@ -366,6 +368,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							type="button"
 							css={[buttonStyles, arrowButtonStyles]}
 							className="next"
+							title="Next image [→]"
 							// eslint-disable-next-line jsx-a11y/no-autofocus -- because it's a dialog and we need to decide this
 							autoFocus={true}
 						>
@@ -382,6 +385,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							type="button"
 							css={[buttonStyles, infoButtonStyles]}
 							className="info"
+							title="Toggle caption [i]"
 						>
 							<SvgInfo />
 							<span
