@@ -5,7 +5,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+import { Button, InlineSuccess } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
@@ -55,22 +55,25 @@ const textStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormProps = {
-	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
-	networkError?: string;
+	submissionURL: string;
+	formID: number;
 };
 
 export const Form = ({
-	onSubmit,
 	formFields,
 	format,
-	networkError,
+	submissionURL,
+	formID,
 }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
 	}>({});
+
+	const [networkError, setNetworkError] = useState('');
+	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
 	const setFieldInFormData = (
 		id: string,
@@ -125,6 +128,59 @@ export const Form = ({
 		return Object.keys(errors).length === 0;
 	};
 
+	const submitForm = async (formDataToSend: FormDataType) => {
+		setNetworkError('');
+
+		// need to add prefix `field_` to all keys in form, required by formstack
+		const formDataWithFieldPrefix = Object.keys(formData).reduce(
+			(acc, cur) => ({
+				...acc,
+				[`field_${cur}`]: formDataToSend[cur],
+			}),
+			{},
+		);
+		console.log(submissionURL);
+		return fetch(submissionURL, {
+			method: 'POST',
+			body: JSON.stringify({
+				formId: formID,
+				...formDataWithFieldPrefix,
+			}),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		})
+			.then((resp) => {
+				if (resp.status === 201) {
+					setSubmissionSuccess(true);
+				} else {
+					setNetworkError(
+						'Sorry, there was a problem submitting your form. Please try again later.',
+					);
+				}
+			})
+			.catch((respError) => {
+				window.guardian.modules.sentry.reportError(
+					respError,
+					'callout-embed-submission',
+				);
+
+				setNetworkError(
+					'Sorry, there was a problem submitting your form. Please try again later.',
+				);
+			});
+	};
+
+	if (submissionSuccess) {
+		return (
+			<InlineSuccess>
+				Thank you, your story has been submitted successfully. One of
+				our journalists will be in touch if we wish to take your
+				submission further.
+			</InlineSuccess>
+		);
+	}
+
 	return (
 		<form
 			action="/formstack-campaign/submit"
@@ -142,7 +198,7 @@ export const Form = ({
 					firstInvalidFormElement.focus();
 					return;
 				}
-				onSubmit(formData);
+				void submitForm(formData);
 			}}
 		>
 			{Object.keys(validationErrors).length > 1 && (
