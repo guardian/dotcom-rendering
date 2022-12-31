@@ -366,6 +366,8 @@ export const Lightbox = ({ format, images }: Props) => {
 							type="button"
 							css={[buttonStyles, arrowButtonStyles]}
 							className="next"
+							// eslint-disable-next-line jsx-a11y/no-autofocus -- because it's a dialog and we need to decide this
+							autoFocus={true}
 						>
 							<SvgArrowRightStraight />
 							<span
