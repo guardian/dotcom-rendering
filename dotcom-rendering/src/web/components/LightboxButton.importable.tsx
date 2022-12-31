@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { storage } from '@guardian/libs';
 import { neutral, space, visuallyHidden } from '@guardian/source-foundations';
 import { SvgArrowExpand } from '@guardian/source-react-components';
 import libDebounce from 'lodash.debounce';
@@ -47,6 +48,12 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const positionDisplay = lightbox.querySelector<HTMLElement>('.selected');
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
 	const totalNoOfImages = lightbox.querySelectorAll('li img').length ?? 1;
+
+	if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
+		hideInfo();
+	} else {
+		showInfo();
+	}
 
 	// Functions
 	function select(position: number): void {
@@ -145,16 +152,21 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	function showInfo(): void {
 		infoButton?.classList.add('selected');
 		imageList?.classList.remove('hide-info');
+		storage.local.set('gu.prefs.lightbox-hideinfo', false);
 	}
 
 	function hideInfo(): void {
 		infoButton?.classList.remove('selected');
 		imageList?.classList.add('hide-info');
+		storage.local.set('gu.prefs.lightbox-hideinfo', true);
 	}
 
 	function toggleInfo(): void {
-		infoButton?.classList.toggle('selected');
-		imageList?.classList.toggle('hide-info');
+		if (imageList?.classList.contains('hide-info')) {
+			showInfo();
+		} else {
+			hideInfo();
+		}
 	}
 
 	// Event listeners
