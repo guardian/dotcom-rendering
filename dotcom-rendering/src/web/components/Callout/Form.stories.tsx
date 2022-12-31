@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaignV2';
+import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
 const mockFormatNews = {

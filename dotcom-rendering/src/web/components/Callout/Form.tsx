@@ -39,7 +39,6 @@ const formStyles = css`
 const formFieldWrapperStyles = css`
 	display: flex;
 	flex-direction: column;
-	margin-top: ${space[2]}px;
 `;
 
 const footerPaddingStyles = css`
@@ -73,13 +72,13 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 		id: string,
 		data: string | string[] | undefined,
 	): void => {
+		const currentErrors = validationErrors;
+		currentErrors[id] = '';
+		setValidationErrors(currentErrors);
+
 		setFormData({
 			...formData,
 			[id]: data,
-		});
-		setValidationErrors({
-			...validationErrors,
-			[id]: '',
 		});
 	};
 
@@ -131,15 +130,7 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 			onSubmit={(e) => {
 				e.preventDefault();
 				const isValid = validateForm();
-				if (!isValid) {
-					const firstInvalidFormElement:
-						| HTMLInputElement
-						| undefined = document.querySelectorAll(
-						':invalid',
-					)[1] as HTMLInputElement;
-					firstInvalidFormElement.focus();
-					return;
-				}
+				if (!isValid) return;
 				onSubmit(formData);
 			}}
 		>
