@@ -131,11 +131,10 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 				e.preventDefault();
 				const isValid = validateForm();
 				if (!isValid) {
-					const firstInvalidFormElement:
-						| HTMLInputElement
-						| undefined = document.querySelectorAll(
-						':invalid',
-					)[1] as HTMLInputElement;
+					const firstInvalidFormElement: HTMLInputElement =
+						document.querySelectorAll(
+							':invalid',
+						)[1] as HTMLInputElement;
 					firstInvalidFormElement.focus();
 					return;
 				}
