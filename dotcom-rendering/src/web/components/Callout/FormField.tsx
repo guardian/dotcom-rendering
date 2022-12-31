@@ -11,6 +11,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
+import { logger } from '../../../server/lib/logging';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -46,6 +47,26 @@ export const FormField = ({
 	const fieldError = validationErrors[formField.id];
 
 	switch (formField.type) {
+		case 'text': {
+			return (
+				<div css={formFieldStyles}>
+					<TextInput
+						name={name}
+						label={label}
+						hideLabel={hideLabel}
+						supporting={description}
+						optional={!required}
+						value={fieldValue}
+						error={fieldError}
+						data-testid={`form-field-${formField.id}`}
+						type={formField.type}
+						onChange={(e): void =>
+							setFieldInFormData(formField.id, e.target.value)
+						}
+					/>
+				</div>
+			);
+		}
 		case 'textarea':
 			return (
 				<div css={formFieldStyles}>
@@ -157,7 +178,7 @@ export const FormField = ({
 									value={option.value}
 									checked={isCheckboxChecked}
 									error={fieldError ? true : false}
-									data-testid={`form-field-${formField.id}`}
+									data-testid={`form-field-${option.value}`}
 									onChange={(): void =>
 										setFieldInFormData(
 											id,
@@ -210,25 +231,8 @@ export const FormField = ({
 					</RadioGroup>
 				</div>
 			);
-		default: {
-			return (
-				<div css={formFieldStyles}>
-					<TextInput
-						name={name}
-						label={label}
-						hideLabel={hideLabel}
-						supporting={description}
-						optional={!required}
-						value={fieldValue}
-						error={fieldError}
-						data-testid={`form-field-${formField.id}`}
-						type={formField.type}
-						onChange={(e): void =>
-							setFieldInFormData(formField.id, e.target.value)
-						}
-					/>
-				</div>
-			);
-		}
+		default:
+			logger.error(`Invalid field ${type} provided for callout`);
+			return null;
 	}
 };
