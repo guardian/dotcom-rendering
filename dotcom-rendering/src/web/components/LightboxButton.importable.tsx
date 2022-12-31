@@ -47,7 +47,8 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		lightbox.querySelector<HTMLButtonElement>('button.close');
 	const positionDisplay = lightbox.querySelector<HTMLElement>('.selected');
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
-	const totalNoOfImages = lightbox.querySelectorAll('li img').length ?? 1;
+	const LIs = lightbox.querySelectorAll('li');
+	const images = lightbox.querySelectorAll('li img');
 
 	if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
 		hideInfo();
@@ -97,14 +98,14 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	function getPreviousPosition(positionNow: number): number {
 		if (positionNow === 1) {
 			// Cycle around to the end
-			return totalNoOfImages;
+			return images.length;
 		} else {
 			return positionNow - 1;
 		}
 	}
 
 	function getNextPosition(positionNow: number): number {
-		if (positionNow === totalNoOfImages) {
+		if (positionNow === images.length) {
 			// Cycle back to the start
 			return 1;
 		} else {
@@ -189,6 +190,12 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			select(indexOfImageClicked);
 			scrollTo(indexOfImageClicked);
 			loadAdjacentImages(indexOfImageClicked);
+		});
+	});
+
+	LIs.forEach((LI) => {
+		LI.addEventListener('click', () => {
+			toggleInfo();
 		});
 	});
 
