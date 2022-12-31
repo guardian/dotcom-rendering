@@ -58,10 +58,15 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
-	error?: string;
+	networkError?: string;
 };
 
-export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
+export const Form = ({
+	onSubmit,
+	formFields,
+	format,
+	networkError,
+}: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -165,7 +170,7 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
 			</div>
-			{!!error && <div css={errorTextStyles}>{error}</div>}
+			{!!networkError && <div css={errorTextStyles}>{networkError}</div>}
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"
