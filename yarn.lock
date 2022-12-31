@@ -3052,6 +3052,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-9.0.0.tgz#9a91775dd6405d9461f7d18b836d8df688143204"
   integrity sha512-A0d0QrqJ+LN+zb8vBLtHqB+aT9gk056tsi2S5oOc0v+pLifZ/y0tOK1htX5EKtjdIjlbsXj0UZc3s+bZtmkHzg==
 
+"@guardian/source-react-components@^9.1.0":
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-9.1.2.tgz#2afe6b660773449ffbedbaa74f2fc1a79cb7c3f8"
+  integrity sha512-cBw9vj9K8UrHrqAARI11fv81hnHQB4fIVVsCUhuzl/J2nvoUCicA4mo4mBl23TtlMRo+mmD+N9dn9HiZYiW95Q==
+
 "@guardian/support-dotcom-components@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.7.tgz#b3aadcca5f6ee35b2c541121144be237d72bd3e0"
