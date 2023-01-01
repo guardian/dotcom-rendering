@@ -287,6 +287,7 @@ const Selection = ({
 					margin-bottom: ${space[2]}px;
 				}
 			`}
+			data-cy="lightbox-selected"
 		>
 			<span css={highlightedStyles} className="selected">
 				{initialPosition}
