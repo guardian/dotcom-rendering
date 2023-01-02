@@ -118,6 +118,10 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 					}
 				}
 				picture {
+					${until.tablet} {
+						display: flex;
+						align-items: center;
+					}
 					flex-grow: 1;
 					${from.tablet} {
 						margin-right: ${space[5]}px;
@@ -146,6 +150,10 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 					}
 				}
 				picture {
+					${until.tablet} {
+						display: flex;
+						align-items: center;
+					}
 					flex-grow: 1;
 					${from.tablet} {
 						margin-right: ${space[5]}px;
