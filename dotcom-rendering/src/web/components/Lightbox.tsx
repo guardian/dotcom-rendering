@@ -40,8 +40,17 @@ const dialogStyles = css`
 		background-color: ${neutral[10]};
 	}
 
-	ul.hide-info aside {
-		display: none;
+	&.hide-info {
+		/* Always hide the info aside when the hide-info class exists on the dialog element */
+		aside {
+			display: none;
+		}
+		${until.tablet} {
+			/* Also hide the nav controls when on mobile */
+			nav {
+				display: none;
+			}
+		}
 	}
 
 	button.selected {
@@ -63,6 +72,8 @@ const navStyles = css`
 	flex-direction: column;
 	${until.tablet} {
 		flex-direction: row;
+		position: absolute;
+		width: 100%;
 	}
 	${from.tablet} {
 		padding-top: ${space[3]}px;

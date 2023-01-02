@@ -153,18 +153,18 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 
 	function showInfo(): void {
 		infoButton?.classList.add('selected');
-		imageList?.classList.remove('hide-info');
+		lightbox.classList.remove('hide-info');
 		storage.local.set('gu.prefs.lightbox-hideinfo', false);
 	}
 
 	function hideInfo(): void {
 		infoButton?.classList.remove('selected');
-		imageList?.classList.add('hide-info');
+		lightbox.classList.add('hide-info');
 		storage.local.set('gu.prefs.lightbox-hideinfo', true);
 	}
 
 	function toggleInfo(): void {
-		if (imageList?.classList.contains('hide-info')) {
+		if (lightbox.classList.contains('hide-info')) {
 			showInfo();
 		} else {
 			hideInfo();
