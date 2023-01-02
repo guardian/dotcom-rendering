@@ -1,8 +1,4 @@
-import type {
-	CAPIElement,
-	EnhancedImageForLightbox,
-	ImageBlockElement,
-} from '../types/content';
+import type { CAPIElement, EnhancedImageForLightbox } from '../types/content';
 
 export const enhanceImagesForLightbox = (
 	format: CAPIFormat,
