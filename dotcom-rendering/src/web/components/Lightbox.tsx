@@ -73,6 +73,7 @@ const navStyles = css`
 	${until.tablet} {
 		flex-direction: row;
 		position: absolute;
+		z-index: 1;
 		width: 100%;
 	}
 	${from.tablet} {
