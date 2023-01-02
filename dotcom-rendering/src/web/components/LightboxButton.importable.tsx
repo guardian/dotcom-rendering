@@ -49,6 +49,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
 	const LIs = lightbox.querySelectorAll('li');
 	const images = lightbox.querySelectorAll('li img');
+	const captionLinks = lightbox.querySelectorAll('li aside a');
 
 	if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
 		hideInfo();
@@ -279,6 +280,17 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 
 	lightbox.addEventListener('close', () => {
 		document.documentElement.classList.remove('lightbox-open');
+	});
+
+	captionLinks.forEach((link) => {
+		link.addEventListener('click', (event) => {
+			// This prevents the event listener from this element's LI parent
+			// from firing. That LI event listener would have tried to hide the
+			// caption but the reader clicked a link inside the caption so they
+			// want to navigate, not hide stuff, and if we did hide it it would
+			// cause a weird flash
+			event.stopPropagation();
+		});
 	});
 }
 
