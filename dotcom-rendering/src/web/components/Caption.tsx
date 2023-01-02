@@ -288,15 +288,24 @@ export const Caption = ({
 					line-height: 135%;
 					word-wrap: break4all;
 					padding-top: ${space[2]}px;
+					padding-bottom: ${space[2]}px;
 					border-top: 3px solid ${palette.background.lightboxDivider};
 				`}
 			>
 				{!!captionText && (
 					<span
 						css={[
-							captionLink(palette),
 							css`
 								color: ${neutral[97]};
+								a {
+									text-decoration: none;
+								}
+								a:hover {
+									text-decoration: underline;
+								}
+								strong {
+									font-weight: bold;
+								}
 							`,
 						]}
 						dangerouslySetInnerHTML={{

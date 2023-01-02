@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import { timeAgo } from '@guardian/libs';
 import {
 	brandAltBackground,
 	from,
@@ -11,19 +12,20 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Hide,
+	Link,
 	SvgArrowLeftStraight,
 	SvgArrowRightStraight,
 	SvgCross,
 } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
-import type { ImageBlockElement } from '../../types/content';
+import type { EnhancedImageForLightbox } from '../../types/content';
 import { Caption } from './Caption';
 import { getImageDimensions, getLargest, getMaster } from './ImageComponent';
 import { Picture } from './Picture';
 
 type Props = {
 	format: ArticleFormat;
-	images?: ImageBlockElement[];
+	images?: EnhancedImageForLightbox[];
 };
 
 const dialogStyles = css`
@@ -507,6 +509,41 @@ export const Lightbox = ({ format, images }: Props) => {
 													image.displayCredit
 												}
 											/>
+											{!!image.blockId &&
+												!!image.firstPublished && (
+													<div
+														css={css`
+															${textSans.xsmall()};
+															color: ${neutral[60]};
+														`}
+													>
+														Posted{' '}
+														<Link
+															href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
+															priority="secondary"
+															cssOverrides={css`
+																color: inherit;
+																font-size: inherit;
+																font-family: inherit;
+																line-height: inherit;
+																:hover {
+																	color: ${neutral[86]};
+																}
+															`}
+														>
+															<time
+																dateTime={new Date(
+																	image.firstPublished,
+																).toISOString()}
+																title="View original post"
+															>
+																{timeAgo(
+																	image.firstPublished,
+																)}
+															</time>
+														</Link>
+													</div>
+												)}
 										</aside>
 									</figure>
 								</li>

@@ -709,6 +709,11 @@ interface TimelineEvent {
 
 export type RatingSizeType = 'large' | 'medium' | 'small';
 
+export type EnhancedImageForLightbox = ImageBlockElement & {
+	blockId?: string;
+	firstPublished?: number;
+};
+
 // -------------------------------------
 // Callout Campaign
 // -------------------------------------

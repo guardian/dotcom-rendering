@@ -40,6 +40,7 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
 		imagesForLightbox: enhanceImagesForLightbox(
+			data.format,
 			enhancedBlocks,
 			data.mainMediaElements,
 		),
