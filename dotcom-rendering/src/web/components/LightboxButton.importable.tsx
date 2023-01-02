@@ -65,10 +65,10 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	function pulseButton(button: HTMLButtonElement): void {
-		button.classList.add('selected');
+		button.classList.add('active');
 
 		window.setTimeout(() => {
-			button.classList.remove('selected');
+			button.classList.remove('active');
 		}, 75);
 	}
 
@@ -152,13 +152,13 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	function showInfo(): void {
-		infoButton?.classList.add('selected');
+		infoButton?.classList.add('active');
 		lightbox.classList.remove('hide-info');
 		storage.local.set('gu.prefs.lightbox-hideinfo', false);
 	}
 
 	function hideInfo(): void {
-		infoButton?.classList.remove('selected');
+		infoButton?.classList.remove('active');
 		lightbox.classList.add('hide-info');
 		storage.local.set('gu.prefs.lightbox-hideinfo', true);
 	}

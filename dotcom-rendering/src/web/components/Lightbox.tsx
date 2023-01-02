@@ -53,7 +53,7 @@ const dialogStyles = css`
 		}
 	}
 
-	button.selected {
+	button.active {
 		background-color: ${neutral[46]};
 	}
 `;
