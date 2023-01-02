@@ -311,10 +311,10 @@ export const LightboxButton = ({ elementId, role }: Props) => {
 					border: none;
 					cursor: pointer;
 					background-color: ${neutral[46]};
-					opacity: 0.5;
+					opacity: 0.7;
 					:hover {
 						filter: brightness(85%);
-						opacity: 0.6;
+						opacity: 0.8;
 					}
 				`,
 				decideSize(role),
