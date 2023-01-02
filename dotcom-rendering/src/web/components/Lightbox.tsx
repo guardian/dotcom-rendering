@@ -114,11 +114,13 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 				img {
 					object-fit: contain;
 					object-position: top;
+					${until.tablet} {
+						object-position: center;
+					}
 					width: auto;
 					max-width: 100%;
 					margin-left: auto;
 					margin-right: auto;
-					margin-top: ${space[3]}px;
 					${from.tablet} {
 						margin-top: ${space[5]}px;
 					}
