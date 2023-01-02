@@ -316,14 +316,18 @@ export const Lightbox = ({ format, images }: Props) => {
 						Remove the article scrollbar whilst the lightbox is open so readers
 						have the same scroll position when they return to the page.
 					*/
-					html:has(dialog#gu-lightbox[open]) {
-						overflow: hidden;
+					@supports (selector(:has(p))) {
+						html:has(dialog#gu-lightbox[open]) {
+							overflow: hidden;
+						}
 					}
 					/*
-						We're using html.lightbox-open here because Firefox doesn't support has().
+						We're using html.lightbox-open here because support for has() is not
+						perfect but it's not far away and once it lands we will be able to remove
+						some javascript.
 						This css (and the associated javascript to add and remove the lightbox-open
-						class) can be deleted once it does.
-						See: https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+						class) can be deleted once the page below looks green.
+						https://developer.mozilla.org/en-US/docs/Web/CSS/:has
 					*/
 					html.lightbox-open {
 						overflow: hidden;
