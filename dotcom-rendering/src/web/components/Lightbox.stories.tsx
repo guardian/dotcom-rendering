@@ -69,8 +69,7 @@ function showModal() {
 
 function showInfo() {
 	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
-	const imageList = lightbox?.querySelector<HTMLElement>('ul');
-	imageList?.classList.remove('hide-info');
+	lightbox?.classList.remove('hide-info');
 }
 
 export const Default = () => {
@@ -137,6 +136,32 @@ export const WithRating = () => {
 				theme: ArticlePillar.News,
 			}}
 			images={[{ ...testImage, starRating: 3 }]}
+		/>
+	);
+};
+
+export const WhenLiveBlog = () => {
+	useEffect(() => {
+		showModal();
+		showInfo();
+	});
+	return (
+		<Lightbox
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
+			}}
+			images={[
+				{
+					...testImage,
+					starRating: 3,
+					title: 'Title',
+					displayCredit: true,
+					firstPublished: 1643816168535,
+					blockId: 'mockId',
+				},
+			]}
 		/>
 	);
 };
