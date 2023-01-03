@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { storage } from '@guardian/libs';
-import { neutral, space, visuallyHidden } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	space,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { SvgArrowExpand } from '@guardian/source-react-components';
 import libDebounce from 'lodash.debounce';
 import { useEffect } from 'react';
@@ -16,8 +21,8 @@ function decideSize(role: RoleType) {
 		case 'halfWidth':
 		case 'supporting': {
 			return css`
-				height: 30px;
-				width: 30px;
+				height: 32px;
+				width: 32px;
 			`;
 		}
 		case 'inline':
@@ -25,8 +30,12 @@ function decideSize(role: RoleType) {
 		case 'immersive':
 		default: {
 			return css`
-				height: 44px;
-				width: 44px;
+				height: 32px;
+				width: 32px;
+				${from.tablet} {
+					height: 44px;
+					width: 44px;
+				}
 			`;
 		}
 	}
