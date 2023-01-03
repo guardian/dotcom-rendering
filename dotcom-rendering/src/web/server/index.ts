@@ -1,6 +1,5 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
-import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
@@ -24,7 +23,6 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
-		isRecipe: isRecipe(data.tags),
 	});
 
 	const CAPIArticle: FEArticleType = {
