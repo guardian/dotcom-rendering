@@ -1,5 +1,6 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card25Media25 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -25,7 +26,7 @@ export const FixedMediumFastXII = ({
 				{firstSlice25.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
-							<FrontCard
+							<Card25Media25
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
