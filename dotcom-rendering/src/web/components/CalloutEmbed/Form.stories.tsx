@@ -7,7 +7,7 @@ import { Form } from './Form';
 
 export default {
 	component: Form,
-	title: 'Components/CalloutEmbed/Form',
+	title: 'Components/CalloutEmbedBlockComponent/Form',
 };
 
 export const Default = () => {

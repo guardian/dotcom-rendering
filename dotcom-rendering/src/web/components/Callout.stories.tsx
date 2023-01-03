@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaignV2';
-import { CalloutBlock } from './CalloutBlock';
+import { calloutCampaign } from '../../../fixtures/manual/calloutCampaignV2';
+import { CalloutBlock } from './Callout';
 
 export default {
 	component: CalloutBlock,
-	title: 'Components/CalloutBlock',
+	title: 'Components/CalloutBlockComponent',
 };
 
 export const Default = () => {
@@ -22,7 +22,6 @@ export const Default = () => {
 	return (
 		<div
 			css={css`
-				width: 630px;
 				padding: 15px;
 			`}
 		>

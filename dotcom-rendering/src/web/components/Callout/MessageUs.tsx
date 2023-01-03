@@ -6,7 +6,7 @@ import {
 	SvgWhatsApp,
 } from '@guardian/source-react-components';
 import type { FC } from 'react';
-import { decidePalette } from '../../../web/lib/decidePalette';
+import { decidePalette } from '../../lib/decidePalette';
 import { space, neutral, textSans } from '@guardian/source-foundations';
 import type { CampaignFieldType } from '../../../types/content';
 
@@ -51,7 +51,7 @@ const CONTACT_NUMBER = '+447766780300';
 const OPEN_WHATSAPP_URL = `https://wa.me/${CONTACT_NUMBER}`;
 const OPEN_TELEGRAM_URL = `https://telegram.me/${CONTACT_NUMBER}`;
 
-export const CalloutMessageUs = ({ format }: CalloutContactProps) => {
+export const MessageUs = ({ format }: CalloutContactProps) => {
 	return (
 		<div className="js-message-us-tab">
 			<p css={descriptionStyles(format)}>
