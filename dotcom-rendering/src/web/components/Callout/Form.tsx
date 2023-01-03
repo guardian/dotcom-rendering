@@ -141,7 +141,8 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 				onSubmit(formData);
 			}}
 		>
-			{Object.keys(validationErrors).length > 1 && (
+			{Object.values(validationErrors).filter((err) => err !== '')
+				.length > 0 && (
 				<ErrorSummary
 					message="Some information is missing."
 					context="Please complete all required fields."
