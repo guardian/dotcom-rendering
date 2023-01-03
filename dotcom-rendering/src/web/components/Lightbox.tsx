@@ -533,38 +533,36 @@ export const Lightbox = ({ format, images }: Props) => {
 											/>
 											{!!image.blockId &&
 												!!image.firstPublished && (
-													<div
-														css={css`
+													<Link
+														href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
+														priority="secondary"
+														cssOverrides={css`
 															${textSans.xsmall()};
 															color: ${neutral[60]};
+															:hover {
+																color: ${neutral[86]};
+															}
 														`}
 													>
-														Posted{' '}
-														<Link
-															href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
-															priority="secondary"
-															cssOverrides={css`
-																color: inherit;
-																font-size: inherit;
-																font-family: inherit;
-																line-height: inherit;
-																:hover {
-																	color: ${neutral[86]};
-																}
-															`}
+														<time
+															dateTime={new Date(
+																image.firstPublished,
+															).toISOString()}
+															title="View original post"
 														>
-															<time
-																dateTime={new Date(
-																	image.firstPublished,
-																).toISOString()}
-																title="View original post"
+															<span
+																css={css`
+																	${visuallyHidden}
+																`}
 															>
-																{timeAgo(
-																	image.firstPublished,
-																)}
-															</time>
-														</Link>
-													</div>
+																Original post
+																published{' '}
+															</span>
+															{timeAgo(
+																image.firstPublished,
+															)}
+														</time>
+													</Link>
 												)}
 										</aside>
 									</figure>
