@@ -67,10 +67,30 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	// Functions
+	function getTabableElements(): HTMLElement[] {
+		return Array.from(
+			lightbox.querySelectorAll(
+				'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
+			),
+		);
+	}
+
 	function select(position: number): void {
 		if (positionDisplay) {
 			positionDisplay.innerHTML = position.toString();
 		}
+		// Mark this page as active
+		lightbox
+			.querySelector(`ul li[data-index="${position}"]`)
+			?.removeAttribute('inert');
+		// Mark all other pages as inert
+		// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert
+		// We do this to prevent the browser tabbing into them
+		lightbox
+			.querySelectorAll(`ul li:not([data-index="${position}"])`)
+			.forEach((li) => {
+				li.setAttribute('inert', 'true');
+			});
 	}
 
 	function pulseButton(button: HTMLButtonElement): void {
@@ -180,6 +200,12 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}
 	}
 
+	function isFocussed(element: HTMLElement): boolean {
+		return (
+			document.activeElement?.classList.value === element.classList.value
+		);
+	}
+
 	// Event listeners
 	lightboxButtons.forEach((button) => {
 		button.addEventListener('click', () => {
@@ -212,32 +238,24 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	lightbox.addEventListener('keydown', (event) => {
 		switch (event.code) {
 			case 'Tab': {
-				// We're completely taking over tabbing to keep focus inside
-				// the dialog
-				event.preventDefault();
-				switch (document.activeElement) {
-					case closeButton:
-						event.shiftKey
-							? infoButton?.focus()
-							: previousButton?.focus();
-						break;
-					case previousButton:
-						event.shiftKey
-							? closeButton?.focus()
-							: nextButton?.focus();
-						break;
-					case nextButton:
-						event.shiftKey
-							? previousButton?.focus()
-							: infoButton?.focus();
-						break;
-					case infoButton:
-						event.shiftKey
-							? nextButton?.focus()
-							: closeButton?.focus();
-						break;
-					default:
-						break;
+				const tabableElements = getTabableElements();
+				const firstFocusableElement = tabableElements[0];
+				const lastFocusableElement =
+					tabableElements[tabableElements.length - 1];
+
+				// This won't happen but we need to appease typescript
+				if (!firstFocusableElement || !lastFocusableElement) return;
+
+				if (event.shiftKey) {
+					if (isFocussed(firstFocusableElement)) {
+						event.preventDefault();
+						lastFocusableElement.focus();
+					}
+				} else {
+					if (isFocussed(lastFocusableElement)) {
+						event.preventDefault();
+						firstFocusableElement.focus();
+					}
 				}
 				break;
 			}
