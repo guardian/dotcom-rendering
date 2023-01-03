@@ -1,23 +1,17 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { headline, neutral, space } from '@guardian/source-foundations';
 import { useState } from 'react';
-import type { FC, ReactElement } from 'react';
-import { CampaignFieldType } from '../../../types/content';
-import { Tabs } from '../Tabs';
+import type { CampaignFieldType } from '../../../types/content';
+import { decidePalette } from '../../lib/decidePalette';
 import {
-	CalloutShare,
 	CalloutDescription,
+	CalloutShare,
 	CalloutTermsAndConditions,
 } from './CalloutComponents';
 import { Form } from './Form';
-import {
-	headline,
-	neutral,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { decidePalette } from '../../lib/decidePalette';
-import { CalloutMessageUs } from './CalloutMessageUs';
+import { MessageUs } from './MessageUs';
+import { Tabs } from '../Tabs';
 
 const ruleStyles = css`
 	border-image: repeating-linear-gradient(
@@ -56,13 +50,6 @@ const subtitleTextHeaderStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const activeUntilStyles = css`
-	position: absolute;
-	bottom: ${space[1]}px;
-	right: ${space[1]}px;
-	display: block;
-`;
-
 export interface CalloutBlockProps {
 	formId: number;
 	heading: string;
@@ -97,7 +84,7 @@ export const CalloutBlock = ({
 		{
 			id: 'contact',
 			text: 'Message us',
-			content: <CalloutMessageUs format={format} />,
+			content: <MessageUs format={format} />,
 		},
 	];
 

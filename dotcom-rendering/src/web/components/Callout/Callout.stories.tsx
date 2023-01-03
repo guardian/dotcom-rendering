@@ -6,7 +6,7 @@ import { CalloutBlock } from './Callout';
 
 export default {
 	component: CalloutBlock,
-	title: 'Components/CalloutBlock',
+	title: 'Components/CalloutBlockComponent/Block',
 };
 
 export const Default = () => {
