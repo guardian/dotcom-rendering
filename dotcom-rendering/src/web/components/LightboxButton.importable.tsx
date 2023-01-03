@@ -321,8 +321,8 @@ export const LightboxButton = ({ elementId, role }: Props) => {
 			css={[
 				css`
 					position: absolute;
-					top: 3px;
-					right: 3px;
+					top: 0px;
+					right: 0px;
 					svg {
 						margin-top: 4px;
 						fill: ${neutral[100]};
