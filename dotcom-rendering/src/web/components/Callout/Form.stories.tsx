@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import fetchMock from 'fetch-mock';
 import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaignV2';
 import { Form } from './Form';
-import fetchMock from 'fetch-mock';
 
 const mockFormatNews = {
 	display: ArticleDisplay.Standard,
@@ -35,8 +35,8 @@ export const News = () => {
 			<Form
 				format={mockFormatNews}
 				formFields={calloutCampaign.formFields}
-				submissionURL={calloutCampaign.calloutsUrl}
 				formID={calloutCampaign.formId}
+				submissionURL={calloutCampaign.calloutsUrl}
 			/>
 			;
 		</>
@@ -60,8 +60,8 @@ export const Opinion = () => {
 			<Form
 				format={mockFormatOpinion}
 				formFields={calloutCampaign.formFields}
-				submissionURL={calloutCampaign.calloutsUrl}
 				formID={calloutCampaign.formId}
+				submissionURL={calloutCampaign.calloutsUrl}
 			/>
 			;
 		</>

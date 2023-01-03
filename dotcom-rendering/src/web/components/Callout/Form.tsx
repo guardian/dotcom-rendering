@@ -126,18 +126,17 @@ export const Form = ({
 		return Object.keys(errors).length === 0;
 	};
 
-	const submitForm = async (formDataToSend: FormDataType) => {
+	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
 		// need to add prefix `field_` to all keys in form, required by formstack
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
 				...acc,
-				[`field_${cur}`]: formDataToSend[cur],
+				[`field_${cur}`]: form[cur],
 			}),
 			{},
 		);
-
 		return fetch(submissionURL, {
 			method: 'POST',
 			body: JSON.stringify({
@@ -199,7 +198,8 @@ export const Form = ({
 				void submitForm(formData);
 			}}
 		>
-			{Object.keys(validationErrors).length > 1 && (
+			{Object.values(validationErrors).filter((err) => err !== '')
+				.length > 0 && (
 				<ErrorSummary
 					message="Some information is missing."
 					context="Please complete all required fields."

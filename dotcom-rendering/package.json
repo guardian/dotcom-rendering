@@ -122,7 +122,7 @@
 		"@types/jsdom": "^16.2.10",
 		"@types/lodash.debounce": "^4.0.7",
 		"@types/lodash.get": "^4.4.7",
-		"@types/node": "^14.18.3",
+		"@types/node": "^14.18.36",
 		"@types/node-fetch": "^2.6.1",
 		"@types/raven-js": "^3.10.0",
 		"@types/react": "^18.0.5",
