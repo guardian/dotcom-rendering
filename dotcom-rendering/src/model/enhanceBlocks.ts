@@ -1,4 +1,4 @@
-import { Newsletter } from '../types/content';
+import type { Newsletter } from '../types/content';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
@@ -88,18 +88,9 @@ class BlockEnhancer {
 		this.blocks = enhanceTweets(this.blocks);
 		return this;
 	}
-
-	/**
-	 * Removing this enhancer temporarily because it's causing a bug in production
-	 */
-	// enhanceRecipes(isRecipe: boolean) {
-	// 	if (isRecipe) this.blocks = enhanceRecipes(this.blocks);
-	// 	return this;
-	// }
 }
 
 type Options = {
-	isRecipe: boolean;
 	promotedNewsletter: Newsletter | undefined;
 };
 
@@ -111,24 +102,18 @@ export const enhanceBlocks = (
 	format: CAPIFormat,
 	options?: Options,
 ): Block[] => {
-	const { isRecipe = false, promotedNewsletter } = options ?? {};
+	const { promotedNewsletter } = options ?? {};
 
-	return (
-		new BlockEnhancer(blocks, format, { isRecipe, promotedNewsletter })
-			.enhanceDividers()
-			.enhanceH3s()
-			.enhanceH2s()
-			.enhanceInteractiveContentsElements()
-			.enhanceBlockquotes()
-			.enhanceDots()
-			.enhanceImages()
-			.enhanceNumberedLists()
-			.enhanceEmbeds()
-			.enhanceTweets()
-			/**
-			 * Removing this enhancer temporarily because it's causing a bug in production
-			 */
-			// .enhanceRecipes(isRecipe)
-			.enhanceNewsletterSignup().blocks
-	);
+	return new BlockEnhancer(blocks, format, { promotedNewsletter })
+		.enhanceDividers()
+		.enhanceH3s()
+		.enhanceH2s()
+		.enhanceInteractiveContentsElements()
+		.enhanceBlockquotes()
+		.enhanceDots()
+		.enhanceImages()
+		.enhanceNumberedLists()
+		.enhanceEmbeds()
+		.enhanceTweets()
+		.enhanceNewsletterSignup().blocks;
 };
