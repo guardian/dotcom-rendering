@@ -128,7 +128,7 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 						height: calc(100vh - 90px);
 					}
 					${from.tablet} {
-						height: calc(100vh - 24px);
+						height: calc(100vh - 40px);
 					}
 				}
 				picture {
@@ -160,7 +160,7 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 						max-height: calc(100vh - 90px);
 					}
 					${from.tablet} {
-						max-height: calc(100vh - 24px);
+						max-height: calc(100vh - 40px);
 					}
 				}
 				picture {
