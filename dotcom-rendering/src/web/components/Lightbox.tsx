@@ -96,6 +96,7 @@ const ulStyles = css`
 	scroll-snap-type: x mandatory;
 	overflow-x: scroll;
 	scroll-behavior: auto;
+	overscroll-behavior: contain;
 	${from.tablet} {
 		margin-left: ${space[5]}px;
 	}
