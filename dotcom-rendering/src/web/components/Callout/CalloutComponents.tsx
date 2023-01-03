@@ -57,7 +57,6 @@ const expiredStyles = css`
 	color: ${palette.brand};
 	background-color: ${palette.brandAlt[400]};
 	width: fit-content;
-	padding-bottom: ${space[4]}px;
 `;
 
 export const CalloutExpired = () => {

@@ -6,6 +6,7 @@ import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 import {
 	CalloutDescription,
+	CalloutExpired,
 	CalloutShare,
 	CalloutTermsAndConditions,
 } from './CalloutComponents';
@@ -51,21 +52,23 @@ const subtitleTextHeaderStyles = css`
 `;
 
 export interface CalloutBlockProps {
-	formId: number;
-	heading: string;
-	formFields: CampaignFieldType[];
 	format: ArticleFormat;
+	heading: string;
 	description: string;
+	formFields: CampaignFieldType[];
+	formId: number;
 	submissionURL: string;
+	activeUntil: number;
 }
 
 export const CalloutBlock = ({
-	formId,
-	heading,
-	formFields,
 	format,
+	heading,
 	description,
+	formFields,
+	formId,
 	submissionURL,
+	activeUntil,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
@@ -87,6 +90,12 @@ export const CalloutBlock = ({
 			content: <MessageUs format={format} />,
 		},
 	];
+	const isExpired = (date: number | undefined): boolean => {
+		if (date) {
+			return Math.floor(new Date().getTime() / 1000) > date;
+		}
+		return false;
+	};
 
 	return (
 		<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
@@ -97,15 +106,19 @@ export const CalloutBlock = ({
 			</div>
 			<CalloutTermsAndConditions format={format} />
 			<CalloutShare format={format} />
-			<Tabs
-				tabsLabel="Tell us"
-				tabElement="button"
-				tabs={tabsContent}
-				selectedTab={selectedTab}
-				onTabChange={(tabName: string): void => {
-					setSelectedTab(tabName);
-				}}
-			/>
+			{isExpired(activeUntil) ? (
+				<CalloutExpired />
+			) : (
+				<Tabs
+					tabsLabel="Tell us"
+					tabElement="button"
+					tabs={tabsContent}
+					selectedTab={selectedTab}
+					onTabChange={(tabName: string): void => {
+						setSelectedTab(tabName);
+					}}
+				/>
+			)}
 		</div>
 	);
 };

@@ -36,6 +36,7 @@ export const Default = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				activeUntil={calloutCampaign.activeUntil}
 			/>
 		</div>
 	);
