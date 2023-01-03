@@ -4,6 +4,7 @@ import { headline, neutral, space } from '@guardian/source-foundations';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
+import { Tabs } from '../Tabs';
 import {
 	CalloutDescription,
 	CalloutExpired,
@@ -12,7 +13,6 @@ import {
 } from './CalloutComponents';
 import { Form } from './Form';
 import { MessageUs } from './MessageUs';
-import { Tabs } from '../Tabs';
 
 const wrapperStyles = css`
 	padding-left: ${space[2]}px;
