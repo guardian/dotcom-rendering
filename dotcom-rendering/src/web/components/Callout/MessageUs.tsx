@@ -80,7 +80,12 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 			</LinkButton>
 
 			<LinkButton
-				cssOverrides={calloutPrimaryButton(format)}
+				cssOverrides={[
+					calloutPrimaryButton(format),
+					css`
+						margin-bottom: ${space[9]}px;
+					`,
+				]}
 				type="submit"
 				priority="primary"
 				icon={<SvgGps />}

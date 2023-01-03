@@ -14,18 +14,6 @@ import { Form } from './Form';
 import { MessageUs } from './MessageUs';
 import { Tabs } from '../Tabs';
 
-const ruleStyles = css`
-	border-image: repeating-linear-gradient(
-			to bottom,
-			${neutral[86]},
-			${neutral[86]} 1px,
-			transparent 1px,
-			transparent 4px
-		)
-		13;
-	border-top: 13px solid ${neutral[86]};
-`;
-
 const wrapperStyles = css`
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
@@ -98,7 +86,7 @@ export const CalloutBlock = ({
 	};
 
 	return (
-		<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
+		<div css={[calloutDetailsStyles, wrapperStyles]}>
 			<div css={summaryContentWrapper}>
 				<div css={titleStyles(format)}>Tell us</div>
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>

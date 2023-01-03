@@ -9,6 +9,9 @@ const mockFormat = {
 	theme: ArticlePillar.Opinion,
 };
 
+const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
+const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
+
 export const Collapsible = () => {
 	fetchMock
 		.restore()
@@ -21,7 +24,11 @@ export const Collapsible = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			callout={{ ...calloutCampaignV2, isNonCollapsible: false }}
+			callout={{
+				...calloutCampaignV2,
+				isNonCollapsible: false,
+				activeUntil: tomorrow,
+			}}
 			format={mockFormat}
 		/>
 	);
@@ -41,13 +48,33 @@ export const NonCollapsible = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			callout={calloutCampaignV2}
+			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			format={mockFormat}
 		/>
 	);
 };
 
 NonCollapsible.story = { name: 'NonCollapsible' };
+
+export const Expired = () => {
+	fetchMock
+		.restore()
+		.post(
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			{
+				status: 201,
+				body: null,
+			},
+		);
+	return (
+		<CalloutBlockComponent
+			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
+			format={mockFormat}
+		/>
+	);
+};
+
+Expired.story = { name: 'Expired' };
 
 export default {
 	component: CalloutBlockComponent,
