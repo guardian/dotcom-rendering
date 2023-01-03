@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, headline, neutral, space } from '@guardian/source-foundations';
+import { from, textSans, neutral, space } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 
 const tabList = css`
@@ -10,16 +10,14 @@ const tabList = css`
 
 const tabButton = css`
 	background-color: ${neutral[97]};
-	${headline.xxxsmall({
-		fontWeight: 'bold',
-	})}
+	${textSans.medium({ fontWeight: 'bold' })}
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-decoration: none;
 	appearance: none;
-	width: 100%;
+	width: 210px;
 	height: ${space[12]}px;
 	text-align: left;
 	color: ${neutral[7]};
@@ -34,13 +32,6 @@ const tabButton = css`
 	}
 	:last-of-type {
 		border-radius: 0 ${space[2]}px 0 0;
-	}
-
-	${from.phablet} {
-		${headline.xxsmall({
-			fontWeight: 'bold',
-		})}
-		width: 210px;
 	}
 
 	&[aria-selected='false'] {
@@ -61,7 +52,6 @@ const tabButton = css`
 `;
 const tabPanel = css`
 	position: relative;
-	padding: ${space[3]}px;
 	border-top: 1px solid ${neutral[60]};
 `;
 

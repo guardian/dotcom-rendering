@@ -17,15 +17,29 @@ interface CalloutContactProps {
 const calloutPrimaryButton = (format: ArticleFormat): SerializedStyles => css`
 	background: ${decidePalette(format).text.calloutAccent};
 	color: ${neutral[100]} !important;
-	margin-top: ${space[2]};
 	width: 100%;
 	justify-content: center;
+	margin-bottom: ${space[4]}px;
+	:hover {
+		background-color: ${neutral[0]};
+	}
 `;
 
-const info = css`
-	${textSans.xsmall()};
-	margin-bottom: ${space[4]};
-`;
+const descriptionStyles = (format: ArticleFormat) =>
+	css`
+		a {
+			color: ${decidePalette(format).text.richLink};
+			border-bottom: 1px solid ${decidePalette(format).text.richLink};
+			text-decoration: none;
+		}
+		padding-bottom: ${space[4]}px;
+		${textSans.small()}
+
+		p {
+			margin-bottom: ${space[3]}px;
+		}
+		margin-top: ${space[2]}px;
+	`;
 
 const WHATSAPP_GUIDANCE_URL =
 	'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian';
@@ -40,7 +54,7 @@ const OPEN_TELEGRAM_URL = `https://telegram.me/${CONTACT_NUMBER}`;
 export const CalloutMessageUs = ({ format }: CalloutContactProps) => {
 	return (
 		<div className="js-message-us-tab">
-			<p css={info}>
+			<p css={descriptionStyles(format)}>
 				You can contact us on WhatsApp or Telegram at {CONTACT_NUMBER}.
 				For more information, please see our guidance on{' '}
 				<a href={WHATSAPP_GUIDANCE_URL}>contacting us via WhatsApp</a>{' '}
@@ -48,24 +62,25 @@ export const CalloutMessageUs = ({ format }: CalloutContactProps) => {
 				<a href={TELEGRAM_GUIDANCE_URL}>contacting us via Telegram</a>.
 			</p>
 
-			<p css={info}>
+			<p css={descriptionStyles(format)}>
 				For true anonymity please use our{' '}
 				<a href={SECURE_DROP_URL}>SecureDrop</a> service instead.
 			</p>
 
 			<LinkButton
-				css={calloutPrimaryButton(format)}
+				cssOverrides={calloutPrimaryButton(format)}
 				type="submit"
 				priority="primary"
 				icon={<SvgWhatsApp />}
 				href={OPEN_WHATSAPP_URL}
 				target="_blank"
+				nudgeIcon={false}
 			>
 				Message us on Whatsapp
 			</LinkButton>
 
 			<LinkButton
-				css={calloutPrimaryButton(format)}
+				cssOverrides={calloutPrimaryButton(format)}
 				type="submit"
 				priority="primary"
 				icon={<SvgGps />}

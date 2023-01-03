@@ -42,12 +42,6 @@ const calloutDetailsStyles = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const summaryStyles = css`
-	padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
-	display: block;
-`;
-
 const summaryContentWrapper = css`
 	visibility: visible;
 `;
@@ -103,24 +97,17 @@ export const CalloutBlock = ({
 		{
 			id: 'contact',
 			text: 'Message us',
-
-			// put contact here
 			content: <CalloutMessageUs format={format} />,
 		},
 	];
 
 	return (
 		<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
-			<summary css={summaryStyles}>
-				<div css={summaryContentWrapper}>
-					<div css={titleStyles(format)}>Tell us</div>
-					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
-					<CalloutDescription
-						format={format}
-						description={description}
-					/>
-				</div>
-			</summary>
+			<div css={summaryContentWrapper}>
+				<div css={titleStyles(format)}>Tell us</div>
+				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				<CalloutDescription format={format} description={description} />
+			</div>
 			<CalloutTermsAndConditions format={format} />
 			<CalloutShare format={format} />
 			<Tabs
