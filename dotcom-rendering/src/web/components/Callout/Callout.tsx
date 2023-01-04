@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, neutral, space } from '@guardian/source-foundations';
+import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
-import { Tabs } from '../Tabs';
 import {
 	CalloutDescription,
 	CalloutExpired,
