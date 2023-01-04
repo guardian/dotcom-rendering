@@ -20,6 +20,7 @@ export const calloutContainer = css`
 	padding-bottom: ${remSpace[12]};
 	background: ${neutral[97]};
 	color: ${neutral[7]};
+
 	${darkModeCss`
 		background: ${neutral[20]};
 		color: ${neutral[86]};
@@ -32,6 +33,7 @@ export const calloutLinkContainer = (
 	a {
 		color: ${text.calloutPrimary(format)};
 	}
+
 	${darkModeCss`
 		a {
 			color: ${neutral[86]};
@@ -78,6 +80,7 @@ export const calloutPrimaryButton = (
 	margin-top: ${remSpace[2]};
 	width: 100%;
 	justify-content: center;
+
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};

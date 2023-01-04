@@ -1,4 +1,3 @@
-import type { FormField as FormFieldType } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	LinkButton,
@@ -6,12 +5,10 @@ import {
 	SvgWhatsApp,
 } from '@guardian/source-react-components';
 import type { FC } from 'react';
-import { calloutPrimaryButton, info } from './styles';
+import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 
 interface CalloutContactProps {
 	format: ArticleFormat;
-	id: number;
-	fields: FormFieldType[];
 }
 
 const WHATSAPP_GUIDANCE_URL =
@@ -24,10 +21,10 @@ const CONTACT_NUMBER = '+447766780300';
 const OPEN_WHATSAPP_URL = `https://wa.me/${CONTACT_NUMBER}`;
 const OPEN_TELEGRAM_URL = `https://telegram.me/${CONTACT_NUMBER}`;
 
-const CalloutContact: FC<CalloutContactProps> = ({ id, fields, format }) => {
+const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 	return (
 		<div className="js-message-us-tab">
-			<p css={info}>
+			<p css={[info, calloutLinkContainer(format)]}>
 				You can contact us on WhatsApp or Telegram at {CONTACT_NUMBER}.
 				For more information, please see our guidance on{' '}
 				<a href={WHATSAPP_GUIDANCE_URL}>contacting us via WhatsApp</a>{' '}
@@ -35,7 +32,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ id, fields, format }) => {
 				<a href={TELEGRAM_GUIDANCE_URL}>contacting us via Telegram</a>.
 			</p>
 
-			<p css={info}>
+			<p css={[info, calloutLinkContainer(format)]}>
 				For true anonymity please use our{' '}
 				<a href={SECURE_DROP_URL}>SecureDrop</a> service instead.
 			</p>

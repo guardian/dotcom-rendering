@@ -4,22 +4,37 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import { calloutShare, calloutSharelink, supportingText } from './styles';
 
-export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
+export const ShareLink: FC<{ format: ArticleFormat; title: string }> = ({
+	format,
+	title,
+}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
 		const url = window.location.href;
+		const shareTitle = `
+Share your experience: ${title}
+`;
+		const shareText = `
+I saw this callout on an article I was reading and thought you might like to share your story.
+${url}
+You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
+		`;
 		if ('share' in navigator) {
 			navigator
 				.share({
 					url,
-					title: 'Share your experience',
-					text: 'I saw this callout on an article I was reading and thought you might like to share your story.',
+					title: shareTitle,
+					text: shareText,
 				})
 				.catch(console.error);
 		} else if ('clipboard' in navigator) {
 			const nav: Navigator = navigator;
-			await nav.clipboard.writeText(url);
+			const share = `
+				${shareTitle}
+				${shareText}
+			`;
+			await nav.clipboard.writeText(share);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}

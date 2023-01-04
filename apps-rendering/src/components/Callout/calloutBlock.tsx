@@ -1,9 +1,9 @@
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
+import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
-import Tabs from '../Tabs';
 import { TermsAndConditions } from './calloutComponents';
 import CalloutContact from './calloutContact';
 import CalloutForm from './calloutForm';
@@ -12,6 +12,8 @@ import {
 	calloutContainer,
 	calloutDescription,
 	calloutHeadingText,
+	calloutInfo,
+	calloutLinkContainer,
 	calloutTitle,
 } from './styles';
 
@@ -42,29 +44,25 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 		{
 			id: 'contact',
 			text: 'Message us',
-			content: (
-				<CalloutContact
-					id={formId}
-					fields={formFields}
-					format={format}
-				/>
-			),
+			content: <CalloutContact format={format} />,
 		},
 	];
 
 	return (
 		<div css={calloutContainer}>
-			<div css={calloutTitle(format)}>{heading}</div>
-			<h4 css={calloutHeadingText}>{name}</h4>
-			{description && (
-				<div css={calloutDescription}>
-					{renderCalloutDescriptionText(format, description)}
-				</div>
-			)}
-			<TermsAndConditions />
-			<ShareLink format={format} />
+			<div css={[calloutInfo, calloutLinkContainer(format)]}>
+				<div css={calloutTitle(format)}>Tell Us</div>
+				<h4 css={calloutHeadingText}>{heading}</h4>
+				{description && (
+					<div css={calloutDescription}>
+						{renderCalloutDescriptionText(format, description)}
+					</div>
+				)}
+				<TermsAndConditions />
+				<ShareLink format={format} title={heading} />
+			</div>
 			<Tabs
-				tabsLabel="Tell us"
+				tabsLabel="Tell us/Message us tabs"
 				tabElement="button"
 				tabs={tabsContent}
 				selectedTab={selectedTab}

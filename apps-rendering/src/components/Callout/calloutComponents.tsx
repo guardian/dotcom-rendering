@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { info, termsConditions } from './styles';
+import { highlight, info, termsConditions } from './styles';
 
 export const TermsAndConditions: FC = () => (
 	<div css={termsConditions}>
@@ -32,5 +32,21 @@ export const ContactText: FC = () => (
 	<div css={info}>
 		One of our journalists will be in contact before we publish your
 		information, so please do leave contact details.
+	</div>
+);
+
+export const InactiveCallout: FC = () => (
+	<div css={highlight}>
+		<p>This callout is now closed to any further submissions.</p>
+		<p>
+			You can see{' '}
+			<a href="https://www.theguardian.com/profile/guardian-community-team">
+				other Guardian community callouts here
+			</a>{' '}
+			or{' '}
+			<a href="https://www.theguardian.com/community/2015/sep/02/guardianwitness-send-us-a-story">
+				tell us about a story here.
+			</a>
+		</p>
 	</div>
 );

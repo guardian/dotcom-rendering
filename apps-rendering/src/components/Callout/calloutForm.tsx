@@ -10,7 +10,7 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
-import { calloutPrimaryButton } from './styles';
+import { calloutLinkContainer, calloutPrimaryButton } from './styles';
 
 interface CalloutFormProps {
 	format: ArticleFormat;
@@ -120,7 +120,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	};
 
 	return (
-		<div className="js-callout-form-tab">
+		<div className="js-callout-form-tab" css={calloutLinkContainer(format)}>
 			{submissionSuccess ? (
 				<InlineSuccess>
 					Thank you, your story has been submitted successfully. One
