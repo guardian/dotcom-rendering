@@ -168,11 +168,7 @@ try {
 
 				import type { FEArticleType } from '../../../src/types/frontend';
 
-				export const ${article.name}: FEArticleType = ${JSON.stringify(
-					json,
-					null,
-					4,
-				)}`;
+				export const ${article.name}: FEArticleType = ${JSON.stringify(json, null, 4)}`;
 				fs.writeFileSync(
 					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,

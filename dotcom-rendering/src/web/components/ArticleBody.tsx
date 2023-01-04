@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
 import type { Switches } from '../../types/config';
+import type { TableOfContentsItem } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
@@ -11,7 +12,6 @@ import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
-import { TableOfContentsItem } from 'src/types/frontend';
 import { TableOfContents } from './TableOfContents';
 
 type Props = {
