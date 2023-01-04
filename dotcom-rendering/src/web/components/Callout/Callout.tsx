@@ -45,7 +45,6 @@ export interface CalloutBlockProps {
 	formFields: CampaignFieldType[];
 	formId: number;
 	submissionURL: string;
-	isExpired: boolean;
 }
 
 export const CalloutBlock = ({
@@ -55,7 +54,6 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
-	isExpired,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
