@@ -164,7 +164,6 @@ export const CalloutEmbedBlockComponent = ({
 			}),
 			{},
 		);
-		console.log(formDataWithFieldPrefix);
 
 		return fetch(callout.calloutsUrl, {
 			method: 'POST',
