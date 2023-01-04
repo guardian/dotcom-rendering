@@ -7,7 +7,6 @@ import type { Body, BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { DeadBlog, Quiz, Standard } from 'item';
 import { Optional } from 'optional';
-import { Result } from 'result';
 import { quiz, article } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import { insertNewsletterIntoItem } from './newsletter';
@@ -31,75 +30,77 @@ const makeTextElementNode = (html: string, outerTag = 'p'): Node => {
 	return doc.firstChild!;
 };
 
-const makeParagraphResult = (html: string): Result<string, BodyElement> =>
-	Result.ok({
+const makeParagraph = (html: string): BodyElement =>
+	({
 		kind: ElementKind.Text,
 		doc: makeTextElementNode(html),
 	});
-const makeHeadingResult = (
+
+const makeHeading = (
 	html: string,
 	id: string,
-): Result<string, BodyElement> =>
-	Result.ok({
+): BodyElement =>
+	({
 		kind: ElementKind.HeadingTwo,
 		id: Optional.some(id),
 		doc: makeTextElementNode(html, 'h2'),
 	});
-const makePullquoteResult = (): Result<string, BodyElement> =>
-	Result.ok({
+
+const makePullquote = (): BodyElement =>
+	({
 		kind: ElementKind.Pullquote,
 		quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
 		attribution: { kind: 0, value: 'Jane Giddins' },
 	});
 
 const makeBodyWithPlaceToInsert = (): Body => [
-	makeParagraphResult('Introductory paragraph.'),
-	makeHeadingResult('first subheading', 'first-subheading'),
-	makeParagraphResult('Another paragraph.'),
-	makeHeadingResult('Another heading', 'another-heading'),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makeHeadingResult('Another heading', 'another-heading'),
-	makeParagraphResult('Another paragraph.'),
-	makePullquoteResult(),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
+	makeParagraph('Introductory paragraph.'),
+	makeHeading('first subheading', 'first-subheading'),
+	makeParagraph('Another paragraph.'),
+	makeHeading('Another heading', 'another-heading'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeHeading('Another heading', 'another-heading'),
+	makeParagraph('Another paragraph.'),
+	makePullquote(),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
 ];
 
 const makeBodyWithNoPlacesToInsert = (): Body => [
-	makeParagraphResult('Introductory paragraph.'),
-	makeHeadingResult('first subheading', 'first-subheading'),
-	makeParagraphResult('Another paragraph.'),
-	makeHeadingResult('Another heading', 'another-heading'),
-	makeParagraphResult('Another paragraph.'),
-	makeHeadingResult('Another heading', 'another-heading'),
-	makeParagraphResult('Another paragraph.'),
-	makePullquoteResult(),
+	makeParagraph('Introductory paragraph.'),
+	makeHeading('first subheading', 'first-subheading'),
+	makeParagraph('Another paragraph.'),
+	makeHeading('Another heading', 'another-heading'),
+	makeParagraph('Another paragraph.'),
+	makeHeading('Another heading', 'another-heading'),
+	makeParagraph('Another paragraph.'),
+	makePullquote(),
 ];
 
 const makeBodyWithNoPlacesToInsertInTheTargetZone = (): Body => [
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makePullquoteResult(),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
-	makeParagraphResult('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makePullquote(),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
+	makeParagraph('Another paragraph.'),
 ];
 
 describe('Insert Newsletter Signups', () => {
@@ -141,9 +142,7 @@ describe('Insert Newsletter Signups', () => {
 		}) as Standard;
 
 		const insertedElement = newItem.body.find(
-			(result) =>
-				result.isOk() &&
-				result.value.kind === ElementKind.NewsletterSignUp,
+			(element) => element.kind === ElementKind.NewsletterSignUp,
 		);
 		expect(insertedElement).toBeTruthy();
 	});

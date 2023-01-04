@@ -1,4 +1,4 @@
-import type { ServerSideTests } from 'src/types/config';
+import type { ServerSideTests } from '../../../types/config';
 import { abTestPayload } from './ophan';
 
 describe('abTestPayload', () => {

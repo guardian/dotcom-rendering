@@ -28,7 +28,7 @@ import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
-import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
+import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
 import { Island } from '../components/Island';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
@@ -136,7 +136,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-}: Props): [boolean, JSX.Element] => {
+}: Props) => {
 	const palette = decidePalette(format);
 
 	const isBlog =
@@ -145,8 +145,7 @@ export const renderElement = ({
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-			return [
-				true,
+			return (
 				<Island>
 					<AudioAtomWrapper
 						id={element.id}
@@ -159,33 +158,30 @@ export const renderElement = ({
 						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
-			return [
-				true,
+			return (
 				<BlockquoteBlockComponent
 					key={index}
 					html={element.html}
 					palette={palette}
 					quoted={element.quoted}
-				/>,
-			];
+				/>
+			);
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<CalloutEmbedBlockComponent
 						callout={element}
 						format={format}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
-			return [
-				true,
+			return (
 				<CaptionBlockComponent
 					key={index}
 					format={format}
@@ -195,27 +191,24 @@ export const renderElement = ({
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
 					isOverlaid={element.isOverlaid}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<ChartAtomWrapper id={element.id} html={element.html} />
-				</Island>,
-			];
+				</Island>
+			);
 
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
-			return [
-				true,
+			return (
 				<CodeBlockComponent
 					code={element.html}
 					language={element.language}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.CommentBlockElement':
-			return [
-				true,
+			return (
 				<CommentBlockComponent
 					body={element.body}
 					avatarURL={element.avatarURL}
@@ -223,21 +216,19 @@ export const renderElement = ({
 					profileName={element.profileName}
 					dateTime={element.dateTime}
 					permalink={element.permalink}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
-			return [true, <DisclaimerBlockComponent html={element.html} />];
+			return <DisclaimerBlockComponent html={element.html} />;
 		case 'model.dotcomrendering.pageElements.DividerBlockElement':
-			return [
-				true,
+			return (
 				<DividerBlockComponent
 					size={element.size}
 					spaceAbove={element.spaceAbove}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
@@ -250,22 +241,20 @@ export const renderElement = ({
 						title={element.title}
 						width={element.width}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
 				if (isMainMedia) {
-					return [
-						true,
+					return (
 						<MainMediaEmbedBlockComponent
 							title={element.alt || ''}
 							srcDoc={element.html}
-						/>,
-					];
+						/>
+					);
 				}
 
-				return [
-					true,
+				return (
 					<Island deferUntil="visible">
 						<UnsafeEmbedBlockComponent
 							key={index}
@@ -279,11 +268,10 @@ export const renderElement = ({
 							sourceDomain={element.sourceDomain}
 							isPinnedPost={isPinnedPost}
 						/>
-					</Island>,
-				];
+					</Island>
+				);
 			}
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<EmbedBlockComponent
 						key={index}
@@ -295,21 +283,19 @@ export const renderElement = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
-			return [
-				true,
+			return (
 				<ExplainerAtom
 					key={index}
 					id={element.id}
 					title={element.title}
 					html={element.body}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<GuideAtomWrapper
 						id={element.id}
@@ -319,27 +305,22 @@ export const renderElement = ({
 						credit={element.credit}
 						pillar={format.theme}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
-			return [
-				true,
+			return (
 				<GuVideoBlockComponent
 					html={element.html}
 					format={format}
 					credit={element.source}
 					isMainMedia={isMainMedia}
 					caption={element.caption}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.HighlightBlockElement':
-			return [
-				true,
-				<HighlightBlockComponent key={index} html={element.html} />,
-			];
+			return <HighlightBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			return [
-				true,
+			return (
 				<ImageBlockComponent
 					format={format}
 					key={index}
@@ -349,11 +330,10 @@ export const renderElement = ({
 					starRating={starRating || element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<InstagramBlockComponent
 						key={index}
@@ -361,25 +341,23 @@ export const renderElement = ({
 						index={index}
 						isMainMedia={isMainMedia}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 			if (
 				format.design === ArticleDesign.Interactive ||
 				format.design === ArticleDesign.FullPageInteractive
 			) {
-				return [
-					true,
+				return (
 					<InteractiveLayoutAtom
 						id={element.id}
 						elementHtml={element.html}
 						elementJs={element.js}
 						elementCss={element.css}
-					/>,
-				];
+					/>
+				);
 			}
-			return [
-				true,
+			return (
 				<InteractiveAtom
 					isMainMedia={isMainMedia}
 					id={element.id}
@@ -387,11 +365,10 @@ export const renderElement = ({
 					elementJs={element.js}
 					elementCss={element.css}
 					format={format}
-				/>,
-			];
-		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
-			return [
-				true,
+				/>
+			);
+		case 'model.dotcomrendering.pageElements.InteractiveBlockElement': {
+			return (
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
 				<Island deferUntil="idle">
@@ -405,13 +382,13 @@ export const renderElement = ({
 						caption={element.caption}
 						isMainMedia={isMainMedia}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
+		}
 		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
-			return [true, <ItemLinkBlockElement html={element.html} />];
+			return <ItemLinkBlockElement html={element.html} />;
 		case 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement':
-			return [
-				true,
+			return (
 				<div id={element.elementId}>
 					<Island deferUntil="visible">
 						<InteractiveContentsBlockComponent
@@ -419,11 +396,10 @@ export const renderElement = ({
 							endDocumentElementId={element.endDocumentElementId}
 						/>
 					</Island>
-				</div>,
-			];
+				</div>
+			);
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<MapEmbedBlockComponent
 						format={format}
@@ -439,29 +415,26 @@ export const renderElement = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
-			return [
-				true,
+			return (
 				<VideoAtom
 					assets={element.assets}
 					poster={element.posterImage?.[0]?.url}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
-			return [
-				true,
+			return (
 				<MultiImageBlockComponent
 					format={format}
 					key={index}
 					images={element.images}
 					caption={element.caption}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return [
-				true,
+			return (
 				<EmailSignup
 					identityName={element.newsletter.identityName}
 					description={element.newsletter.description}
@@ -469,20 +442,18 @@ export const renderElement = ({
 					frequency={element.newsletter.frequency}
 					successDescription={element.newsletter.successDescription}
 					theme={element.newsletter.theme}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
-			return [
-				true,
+			return (
 				<NumberedTitleBlockComponent
 					position={element.position}
 					html={element.html}
 					format={element.format}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<ProfileAtomWrapper
 						id={element.id}
@@ -492,11 +463,10 @@ export const renderElement = ({
 						credit={element.credit}
 						pillar={format.theme}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
-			return [
-				true,
+			return (
 				<PullQuoteBlockComponent
 					key={index}
 					html={element.html}
@@ -504,11 +474,10 @@ export const renderElement = ({
 					format={format}
 					attribution={element.attribution}
 					role={element.role}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.QABlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<QandaAtomWrapper
 						id={element.id}
@@ -518,11 +487,10 @@ export const renderElement = ({
 						credit={element.credit}
 						pillar={format.theme}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
-			return [
-				true,
+			return (
 				<>
 					{element.quizType === 'personality' && (
 						<Island>
@@ -546,11 +514,10 @@ export const renderElement = ({
 							/>
 						</Island>
 					)}
-				</>,
-			];
+				</>
+			);
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="idle">
 					<RichLinkComponent
 						richLinkIndex={index}
@@ -558,13 +525,12 @@ export const renderElement = ({
 						ajaxUrl={ajaxUrl}
 						format={format}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-			return [true, <SoundcloudBlockComponent element={element} />];
+			return <SoundcloudBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<SpotifyBlockComponent
 						embedUrl={element.embedUrl}
@@ -580,39 +546,33 @@ export const renderElement = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.StarRatingBlockElement':
-			return [
-				true,
+			return (
 				<StarRatingBlockComponent
 					key={index}
 					rating={element.rating}
 					size={element.size}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-			return [
-				true,
-				<SubheadingBlockComponent key={index} html={element.html} />,
-			];
+			return <SubheadingBlockComponent key={index} html={element.html} />;
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
-			return [true, <TableBlockComponent element={element} />];
+			return <TableBlockComponent element={element} />;
 
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
-			return [
-				true,
+			return (
 				<TextBlockComponent
 					key={index}
 					isFirstParagraph={index === 0}
 					html={element.html}
 					format={format}
 					forceDropCap={element.dropCap}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<TimelineAtomWrapper
 						id={element.id}
@@ -621,21 +581,19 @@ export const renderElement = ({
 						events={element.events}
 						description={element.description}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			if (switches.enhanceTweets) {
-				return [
-					true,
+				return (
 					<Island deferUntil="visible">
 						<TweetBlockComponent element={element} />
-					</Island>,
-				];
+					</Island>
+				);
 			}
-			return [true, <TweetBlockComponent element={element} />];
+			return <TweetBlockComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<VideoFacebookBlockComponent
 						role={element.role}
@@ -651,11 +609,10 @@ export const renderElement = ({
 						credit={element.caption}
 						title={element.caption}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
-			return [
-				true,
+			return (
 				<VimeoBlockComponent
 					format={format}
 					embedUrl={element.embedUrl}
@@ -665,11 +622,10 @@ export const renderElement = ({
 					credit={element.credit}
 					title={element.title}
 					isMainMedia={isMainMedia}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
-			return [
-				true,
+			return (
 				<YoutubeEmbedBlockComponent
 					format={format}
 					embedUrl={element.embedUrl}
@@ -679,11 +635,10 @@ export const renderElement = ({
 					credit={element.credit}
 					title={element.title}
 					isMainMedia={isMainMedia}
-				/>,
-			];
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
-			return [
-				true,
+			return (
 				<Island deferUntil="visible">
 					<VineBlockComponent
 						element={element}
@@ -694,57 +649,63 @@ export const renderElement = ({
 						source={element.source}
 						sourceDomain={element.sourceDomain}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;
 			switch (witnessType) {
-				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
-					const witnessTypeDataImage = element.witnessTypeData;
-					return [
-						true,
+				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage': {
+					const { caption, title, authorName, dateCreated, alt } =
+						element.witnessTypeData;
+					return (
 						<WitnessImageBlockComponent
 							assets={element.assets}
-							caption={witnessTypeDataImage.caption}
-							title={witnessTypeDataImage.title}
-							authorName={witnessTypeDataImage.authorName}
-							dateCreated={witnessTypeDataImage.dateCreated}
-							alt={witnessTypeDataImage.alt}
+							caption={caption}
+							title={title}
+							authorName={authorName}
+							dateCreated={dateCreated}
+							alt={alt}
 							palette={palette}
-						/>,
-					];
-				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
-					const witnessTypeDataVideo = element.witnessTypeData;
-					return [
-						true,
+						/>
+					);
+				}
+				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo': {
+					const {
+						title,
+						description,
+						authorName,
+						youtubeHtml,
+						dateCreated,
+					} = element.witnessTypeData;
+					return (
 						<WitnessVideoBlockComponent
-							title={witnessTypeDataVideo.title}
-							description={witnessTypeDataVideo.description}
-							authorName={witnessTypeDataVideo.authorName}
-							youtubeHtml={witnessTypeDataVideo.youtubeHtml}
-							dateCreated={witnessTypeDataVideo.dateCreated}
+							title={title}
+							description={description}
+							authorName={authorName}
+							youtubeHtml={youtubeHtml}
+							dateCreated={dateCreated}
 							palette={palette}
-						/>,
-					];
-				case 'model.dotcomrendering.pageElements.WitnessTypeDataText':
+						/>
+					);
+				}
+				case 'model.dotcomrendering.pageElements.WitnessTypeDataText': {
 					const witnessTypeDataText = element.witnessTypeData;
-					return [
-						true,
+					return (
 						<WitnessTextBlockComponent
 							title={witnessTypeDataText.title}
 							description={witnessTypeDataText.description}
 							authorName={witnessTypeDataText.authorName}
 							dateCreated={witnessTypeDataText.dateCreated}
 							palette={palette}
-						/>,
-					];
+						/>
+					);
+				}
 				default:
-					return [false, <></>];
+					return <></>;
 			}
 		}
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-			return [
-				true,
+			return (
 				<Island>
 					<YoutubeBlockComponent
 						format={format}
@@ -765,14 +726,14 @@ export const renderElement = ({
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
 					/>
-				</Island>,
-			];
+				</Island>
+			);
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 		case 'model.dotcomrendering.pageElements.VideoBlockElement':
 		default:
-			return [false, <></>];
+			return <></>;
 	}
 };
 
@@ -815,7 +776,7 @@ export const RenderArticleElement = ({
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
-	const [ok, el] = renderElement({
+	const el = renderElement({
 		format,
 		element: withUpdatedRole,
 		adTargeting,
@@ -832,10 +793,6 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 	});
-
-	if (!ok) {
-		return <></>;
-	}
 
 	const needsFigure = !bareElements.has(element._type);
 	const role = 'role' in element ? (element.role as RoleType) : undefined;

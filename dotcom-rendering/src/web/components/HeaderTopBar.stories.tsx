@@ -14,6 +14,8 @@ export const defaultStory = () => {
 			mmaUrl="mmaUrl"
 			discussionApiUrl="discussionApiUrl"
 			idApiUrl="idApiUrl"
+			headerTopBarSearchCapiSwitch={false}
+			isInEuropeTest={false}
 		/>
 	);
 };

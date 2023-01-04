@@ -2,6 +2,7 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
+		calloutAccent: Colour;
 		headline: Colour;
 		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
@@ -41,6 +42,7 @@ export type Palette = {
 		carouselTitle: Colour;
 		calloutHeading: Colour;
 		pullQuote: Colour;
+		pagination: Colour;
 		pullQuoteAttribution: Colour;
 		dropCap: Colour;
 		blockquote: Colour;
@@ -51,6 +53,7 @@ export type Palette = {
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
+		keyEventFromDesktop: Colour;
 		keyEventTime: Colour;
 		filterButton: Colour;
 		filterButtonHover: Colour;
@@ -130,6 +133,7 @@ export type Palette = {
 		keyEvent: Colour;
 		filterButton: Colour;
 		secondary: Colour;
+		pagination: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -140,6 +144,7 @@ export type Palette = {
 		keyEventLink: Colour;
 		keyEventBullet: Colour;
 		summaryEventBullet: Colour;
+		pagination: Colour;
 	};
 };
 

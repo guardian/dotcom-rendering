@@ -1,45 +1,46 @@
 import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import { Radio, RadioGroup } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
 
 interface RadioInputProps {
-	name: string;
-	label: string;
-	options: FormOption[];
-	cssOverrides: SerializedStyles;
+	formField: FormField;
+	selected?: string;
+	setFieldInFormData: (id: string, data: string | undefined) => void;
+	error?: string;
+	cssOverrides?: SerializedStyles;
 }
 
-const radioStyles = css`
-	margin-bottom: ${remSpace[4]};
-`;
-
-const labelStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })};
-`;
-
-const RadioInput = (props: RadioInputProps): ReactElement => (
-	<label css={labelStyles}>
-		{props.label}
+const RadioInput = ({
+	formField,
+	selected,
+	setFieldInFormData,
+	error,
+	cssOverrides,
+}: RadioInputProps): ReactElement => {
+	const { name, options, id, label, description } = formField;
+	return (
 		<RadioGroup
-			name={props.name}
+			defaultChecked
+			name={name}
 			orientation="horizontal"
-			cssOverrides={radioStyles}
+			cssOverrides={cssOverrides}
+			label={label}
+			supporting={description}
+			id={name}
+			error={error}
 		>
-			{props.options.map(({ value, label }) => {
-				return (
-					<Radio
-						key={value}
-						value={value}
-						label={label}
-						cssOverrides={props.cssOverrides}
-					/>
-				);
-			})}
+			{options.map((option) => (
+				<Radio
+					key={option.value}
+					value={option.value}
+					label={option.label}
+					checked={selected === option.value}
+					onChange={(): void => setFieldInFormData(id, option.value)}
+				/>
+			))}
 		</RadioGroup>
-	</label>
-);
+	);
+};
 
 export default RadioInput;

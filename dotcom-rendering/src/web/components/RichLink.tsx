@@ -191,8 +191,8 @@ const readMoreText: (contentType: string) => string = (contentType) => {
 };
 
 const getMainContributor: (tags: TagType[]) => string = (tags) => {
-	const contributorTags = tags.filter((t) => t.type === 'Contributor');
-	return contributorTags.length > 0 ? contributorTags[0].title : '';
+	const [firstContributorTag] = tags.filter((t) => t.type === 'Contributor');
+	return firstContributorTag ? firstContributorTag.title : '';
 };
 
 const imageStyles = css`
@@ -303,8 +303,8 @@ export const RichLink = ({
 						{!!(isOpinion && contributorImage) && (
 							<div css={contributorImageWrapper}>
 								<Avatar
-									imageSrc={contributorImage}
-									imageAlt={mainContributor}
+									src={contributorImage}
+									alt={mainContributor}
 									format={format}
 								/>
 							</div>

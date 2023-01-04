@@ -32,6 +32,7 @@ export const FrontCard = (props: Props) => {
 		byline: trail.byline,
 		showByline: trail.showByline,
 		showQuotes:
+			!!trail.showQuotedHeadline ||
 			trail.format.design === ArticleDesign.Comment ||
 			trail.format.design === ArticleDesign.Letter,
 		webPublicationDate: trail.webPublicationDate,
@@ -40,6 +41,7 @@ export const FrontCard = (props: Props) => {
 		showSlash: true,
 		showClock: false,
 		imageUrl: trail.image,
+		isCrossword: trail.isCrossword,
 		mediaType: trail.mediaType,
 		mediaDuration: trail.mediaDuration,
 		starRating: trail.starRating,

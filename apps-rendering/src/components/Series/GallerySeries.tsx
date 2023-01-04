@@ -9,9 +9,9 @@ import {
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
+import type { Optional } from 'optional';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -56,12 +56,12 @@ const linkStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	series: Option<Tag>;
+	series: Optional<Tag>;
 	format: ArticleFormat;
 };
 
 const GallerySeries: FC<Props> = (props) =>
-	maybeRender(props.series, (series) => (
+	maybeRender(props.series.toOption(), (series) => (
 		<nav css={styles}>
 			<a href={series.webUrl} css={linkStyles(props.format)}>
 				{series.webTitle}

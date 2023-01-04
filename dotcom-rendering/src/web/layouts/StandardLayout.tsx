@@ -10,6 +10,7 @@ import {
 	from,
 	labs,
 	neutral,
+	space,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -271,8 +272,7 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
+	margin-top: ${space[4]}px;
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
 
@@ -284,9 +284,6 @@ const starWrapper = css`
 		padding-left: 0px;
 		margin-left: -0px;
 	}
-
-	padding-left: 10px;
-	margin-left: -10px;
 `;
 
 interface Props {
@@ -382,10 +379,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -398,8 +391,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
-								headerTopBarSwitch={
-									!!CAPIArticle.config.switches.headerTopNav
+								headerTopBarSearchCapiSwitch={
+									!!CAPIArticle.config.switches
+										.headerTopBarSearchCapi
 								}
 							/>
 						</Section>
@@ -563,6 +557,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 								/>
 							</div>
+						</GridItem>
+						<GridItem area="standfirst">
 							{CAPIArticle.starRating ||
 							CAPIArticle.starRating === 0 ? (
 								<div css={starWrapper}>
@@ -574,8 +570,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							) : (
 								<></>
 							)}
-						</GridItem>
-						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
 								standfirst={CAPIArticle.standfirst}

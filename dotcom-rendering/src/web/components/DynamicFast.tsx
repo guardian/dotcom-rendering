@@ -2,6 +2,11 @@
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
+	Card25Media25,
+	Card50Media50Tall,
+	CardDefault,
+} from '../lib/cardWrappers';
+import {
 	Card100PictureRight,
 	Card100PictureTop,
 	Card25_Card75,
@@ -12,7 +17,6 @@ import {
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features
@@ -53,16 +57,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
 			<LI
@@ -80,25 +78,16 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 							>
 								{/* The first card shows an image */}
 								{cardIndex === 0 ? (
-									<FrontCard
+									<Card25Media25
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										supportingContent={
-											card.supportingContent
-										}
-										headlineSize="medium"
-										imageUrl={card.image}
-										imagePosition="top"
-										imagePositionOnMobile="left"
 									/>
 								) : (
-									<FrontCard
+									<CardDefault
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										imageUrl={undefined}
-										headlineSize="small"
 									/>
 								)}
 							</LI>
@@ -119,12 +108,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -151,16 +138,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="50%" padSides={true} showDivider={false}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
 			<LI percentage="50%">
@@ -187,12 +168,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								)}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -233,12 +212,10 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 								columns,
 							)}
 						>
-							<FrontCard
+							<CardDefault
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
 							/>
 						</LI>
 					);
@@ -263,13 +240,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="25%" padSides={true} showDivider={false}>
-				<FrontCard
+				<Card25Media25
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="medium"
-					imageUrl={big.image}
 				/>
 			</LI>
 			<LI percentage="75%">
@@ -296,12 +270,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -337,13 +309,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						showDivider={cardIndex > 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -373,12 +342,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -414,13 +381,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						showDivider={cardIndex !== 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -442,12 +406,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -482,13 +444,10 @@ const Card25_Card25_Card25_Card25 = ({
 						showDivider={cardIndex !== 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);

@@ -3,9 +3,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { maybeRender } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
-import { until } from '@guardian/source-foundations';
-import Body from 'components/ArticleBody';
+import {
+	brandAlt,
+	remSpace,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
+import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
+import { OptionKind } from '@guardian/types/dist/option';
+import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
@@ -13,9 +21,10 @@ import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
 import { grid } from 'grid/grid';
 import { getFormat } from 'item';
-import type { Item } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { NewsletterSignup } from 'item';
+import type { FC } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
+import InPageNewsletterSignup from '../InPageNewsletterSignup';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -41,13 +50,45 @@ const contentRow = css`
 	${grid.column.centre};
 `;
 
+const frequencyBlockStyles = css`
+	display: flex;
+	margin-bottom: ${remSpace[2]};
+
+	span {
+		margin-left: ${remSpace[1]};
+		${textSans.xsmall()}
+
+		b {
+			${textSans.xsmall({ fontWeight: 'bold' })}
+		}
+	}
+`;
+
+const detailBlockStyles = css`
+	display: flex;
+	align-items: center;
+	margin-bottom: ${remSpace[2]};
+
+	svg {
+		background-color: ${brandAlt[400]};
+		border-radius: 50%;
+		margin-right: ${remSpace[2]};
+		width: ${remSpace[6]};
+		padding: 0.125rem;
+	}
+
+	b {
+		${textSans.xsmall({ fontWeight: 'bold' })}
+	}
+`;
+
 // ----- Component ----- //
+
 interface Props {
-	item: Item;
-	children: ReactNode[];
+	item: NewsletterSignup;
 }
 
-const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
+const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	return (
@@ -60,9 +101,53 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					/>
 				</header>
 				<section css={contentRow}>
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
+						<>
+							{newsletter.regionFocus && (
+								<div css={detailBlockStyles}>
+									<SvgNewsletter size="small" />
+									<b>{newsletter.regionFocus} Focused</b>
+								</div>
+							)}
+						</>
+					))}
+
 					<Headline item={item} />
 					<Standfirst item={item} />
-					<Body format={item}>{children}</Body>
+
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
+						<>
+							<div css={frequencyBlockStyles}>
+								<SvgClock size="xsmall" />
+
+								<span>
+									You&apos;ll receive this newsletter
+									<b> {newsletter.frequency}</b>
+								</span>
+							</div>
+
+							<InPageNewsletterSignup
+								newsletter={newsletter}
+								format={getFormat(item)}
+								fallbackContent={
+									<ArticleBody
+										format={item}
+										body={item.body}
+										shouldHideAdverts={
+											item.shouldHideAdverts
+										}
+									/>
+								}
+							/>
+						</>
+					))}
+					{item.promotedNewsletter.kind === OptionKind.None && (
+						<ArticleBody
+							format={item}
+							body={item.body}
+							shouldHideAdverts={item.shouldHideAdverts}
+						/>
+					)}
 				</section>
 			</article>
 

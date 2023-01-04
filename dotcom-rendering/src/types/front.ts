@@ -162,7 +162,7 @@ export type FEFrontCard = {
 		image?: {
 			type: string;
 			item: {
-				imgSource?: string;
+				imageSrc?: string;
 			};
 		};
 		webTitle: string;
@@ -235,6 +235,7 @@ export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
+	showQuotedHeadline: boolean;
 	trailText?: string;
 	starRating?: number;
 	webPublicationDate?: string;
@@ -281,6 +282,7 @@ type FECollectionConfigType = {
 export type FECollectionType = {
 	id: string;
 	displayName: string;
+	description?: string;
 	curated: FEFrontCard[];
 	backfill: FEFrontCard[];
 	treats: FEFrontCard[];
@@ -301,6 +303,7 @@ export type FECollectionType = {
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
+	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	grouped: DCRGroupedTrails;

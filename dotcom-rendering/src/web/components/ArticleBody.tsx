@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import { isRecipe } from '../../model/enhance-recipes';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
@@ -41,6 +40,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -107,6 +107,9 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
+const isRecipe = (tags: TagType[]): boolean =>
+	tags.some(({ id }) => id === 'tone/recipes');
+
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -135,6 +138,7 @@ export const ArticleBody = ({
 	availableTopics,
 	selectedTopics,
 	keywordIds,
+	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -183,6 +187,7 @@ export const ArticleBody = ({
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
+					isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 				/>
 			</div>
 		);

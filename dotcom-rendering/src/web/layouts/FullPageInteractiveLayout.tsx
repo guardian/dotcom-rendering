@@ -71,7 +71,7 @@ const Renderer = ({
 	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
 	//    But should be soon.
 	const output = elements.map((element, index) => {
-		const [ok, el] = renderElement({
+		const el = renderElement({
 			format,
 
 			element,
@@ -87,30 +87,26 @@ const Renderer = ({
 			switches,
 		});
 
-		if (ok) {
-			switch (element._type) {
-				// Here we think it makes sense not to wrap every `p` inside a `figure`
-				case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
-				case 'model.dotcomrendering.pageElements.TextBlockElement':
-					return el;
+		switch (element._type) {
+			// Here we think it makes sense not to wrap every `p` inside a `figure`
+			case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
+			case 'model.dotcomrendering.pageElements.TextBlockElement':
+				return el;
 
-				default:
-					return (
-						<figure
-							id={
-								'elementId' in element
-									? element.elementId
-									: undefined
-							}
-							key={index}
-						>
-							{el}
-						</figure>
-					);
-			}
+			default:
+				return (
+					<figure
+						id={
+							'elementId' in element
+								? element.elementId
+								: undefined
+						}
+						key={index}
+					>
+						{el}
+					</figure>
+				);
 		}
-
-		return null;
 	});
 
 	const adStyles = css`
@@ -223,10 +219,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
-							supporterCTA={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.supporter
-							}
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
@@ -238,10 +230,11 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.contributionsServiceUrl
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
 							isInEuropeTest={isInEuropeTest}
+							headerTopBarSearchCapiSwitch={
+								!!CAPIArticle.config.switches
+									.headerTopBarSearchCapi
+							}
 						/>
 					</Section>
 				</div>

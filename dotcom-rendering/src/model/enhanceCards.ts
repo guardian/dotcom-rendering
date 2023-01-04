@@ -103,6 +103,29 @@ const decideAvatarUrl = (
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
+const decideImage = (trail: FEFrontCard) => {
+	if (
+		trail.type === 'LinkSnap' ||
+		trail.properties.image?.type === 'Replace'
+	) {
+		return trail.properties.image?.item.imageSrc;
+	}
+
+	if (trail.display.imageHide) return undefined;
+
+	if (trail.properties.isCrossword && trail.properties.maybeContentId) {
+		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
+	}
+
+	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
+};
+
+const decideKicker = (trail: FEFrontCard) => {
+	return trail.properties.isBreaking
+		? 'Breaking news'
+		: trail.header.kicker?.item?.properties.kickerText;
+};
+
 const enhanceTags = (tags: FETagType[]): TagType[] => {
 	return tags.map(({ properties }) => {
 		const {
@@ -170,11 +193,8 @@ export const enhanceCards = (
 						faciaCard.card.webPublicationDateOption,
 				  ).toISOString()
 				: undefined,
-			image: faciaCard.display.imageHide
-				? undefined
-				: faciaCard.properties.maybeContent?.trail.trailPicture
-						?.allImages[0].url,
-			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
+			image: decideImage(faciaCard),
+			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,
@@ -192,6 +212,8 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
+			isCrossword: faciaCard.properties.isCrossword,
+			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'

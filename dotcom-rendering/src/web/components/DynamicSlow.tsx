@@ -1,6 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
+import type { TrailType } from '../../types/trails';
+import {
+	Card25Media25Tall,
+	Card50Media50,
+	CardDefaultMedia,
+	CardDefaultMediaMobile,
+} from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -12,7 +17,6 @@ import {
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -42,14 +46,10 @@ const ColumnOfCards50_Card50 = ({
 					containerPalette={containerPalette}
 					key={card.url}
 				>
-					<FrontCard
+					<Card50Media50
 						trail={card}
-						containerPalette={containerPalette}
-						headlineSize="large"
-						headlineSizeOnMobile="large"
-						imagePositionOnMobile="top"
 						showAge={showAge}
-						supportingContent={card.supportingContent}
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
@@ -62,13 +62,10 @@ const ColumnOfCards50_Card50 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefaultMediaMobile
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imagePosition="left"
-									imagePositionOnMobile="left"
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -88,7 +85,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const bigs = cards.slice(0, 2);
+	const bigs = cards.slice(0, 2).reverse();
 	const remaining = cards.slice(2);
 
 	return (
@@ -102,19 +99,10 @@ const ColumnOfCards50_Card25_Card25 = ({
 						containerPalette={containerPalette}
 						key={big.url}
 					>
-						<FrontCard
+						<Card25Media25Tall
 							trail={big}
-							containerPalette={containerPalette}
-							imagePositionOnMobile="left"
 							showAge={showAge}
-							trailText={
-								// Only show trail text if there is no supportContent
-								big.supportingContent === undefined ||
-								big.supportingContent.length === 0
-									? big.trailText
-									: undefined
-							}
-							supportingContent={big.supportingContent}
+							containerPalette={containerPalette}
 						/>
 					</LI>
 				);
@@ -128,13 +116,10 @@ const ColumnOfCards50_Card25_Card25 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imagePosition="left"
-									imagePositionOnMobile="none"
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -171,12 +156,10 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						)}
 						key={card.url}
 					>
-						<FrontCard
+						<CardDefaultMedia
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							imagePosition="left"
-							imagePositionOnMobile="none"
 						/>
 					</LI>
 				);

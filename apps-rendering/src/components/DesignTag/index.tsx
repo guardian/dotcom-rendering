@@ -59,6 +59,12 @@ const DesignTag: FC<Props> = ({ format }) => {
 					<span css={designTagStyles(format)}>Obituary</span>
 				</div>
 			);
+		case ArticleDesign.Review:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Review</span>
+				</div>
+			);
 		case ArticleDesign.Interview:
 			return <span css={designTagStyles(format)}>Interview</span>;
 		default:

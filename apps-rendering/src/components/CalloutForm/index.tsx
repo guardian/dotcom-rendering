@@ -21,8 +21,7 @@ import {
 	TextArea,
 	TextInput,
 } from '@guardian/source-react-components';
-import FileInput from 'components/FileInput';
-import RadioInput from 'components/RadioInput';
+import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import type { FC, ReactElement } from 'react';
 import { plainTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -170,19 +169,9 @@ const renderField = ({
 		case 'file':
 			return (
 				<FileInput
-					cssOverrides={input}
-					required={mandatory}
-					name={name}
 					label={label}
-				/>
-			);
-		case 'radio':
-			return (
-				<RadioInput
 					cssOverrides={input}
-					options={options}
-					name={name}
-					label={label}
+					optional={!mandatory}
 				/>
 			);
 		default:

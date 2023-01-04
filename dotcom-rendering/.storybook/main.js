@@ -1,5 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const {
+	babelExclude,
+	getLoaders,
+} = require('../scripts/webpack/webpack.config.browser');
 
 // Generate dynamic Card and Layout stories
 require('../scripts/gen-stories/gen-stories');
@@ -14,6 +18,7 @@ module.exports = {
 		builder: 'webpack5',
 	},
 	stories: ['../src/**/*.stories.@(tsx)', '../stories/**/*.stories.@(tsx)'],
+	staticDirs: ['../src/static'],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
@@ -80,6 +85,12 @@ const webpackConfig = (config) => {
 		path.resolve(__dirname, '../src/web/components/SecureSignup.tsx')
 	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
 
+	const webpackLoaders = getLoaders('modern');
+	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
+	if (webpackLoaders[0].loader.startsWith('swc')) {
+		webpackLoaders[0].options.parseMap = true;
+	}
+
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
@@ -88,34 +99,8 @@ const webpackConfig = (config) => {
 			path.resolve(__dirname, '../'),
 			path.resolve(__dirname, '../../common-rendering'),
 		],
-		exclude: require('../scripts/webpack/webpack.config.browser')
-			.babelExclude,
-		use: [
-			{
-				loader: 'babel-loader',
-				options: {
-					presets: [
-						'@babel/preset-react',
-						[
-							'@babel/preset-env',
-							{
-								bugfixes: true,
-								targets: {
-									esmodules: true,
-								},
-							},
-						],
-					],
-				},
-			},
-			{
-				loader: 'ts-loader',
-				options: {
-					configFile: 'dotcom-rendering/tsconfig.build.json',
-					transpileOnly: true,
-				},
-			},
-		],
+		exclude: babelExclude,
+		use: webpackLoaders,
 	});
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
