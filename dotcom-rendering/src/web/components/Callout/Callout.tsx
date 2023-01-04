@@ -7,7 +7,6 @@ import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 import {
 	CalloutDescription,
-	CalloutExpired,
 	CalloutShare,
 	CalloutTermsAndConditions,
 } from './CalloutComponents';
@@ -88,19 +87,15 @@ export const CalloutBlock = ({
 			</div>
 			<CalloutTermsAndConditions format={format} />
 			<CalloutShare format={format} />
-			{isExpired ? (
-				<CalloutExpired />
-			) : (
-				<Tabs
-					tabsLabel="Tell us via online form or message us using your phone"
-					tabElement="button"
-					tabs={tabsContent}
-					selectedTab={selectedTab}
-					onTabChange={(tabName: string): void => {
-						setSelectedTab(tabName);
-					}}
-				/>
-			)}
+			<Tabs
+				tabsLabel="Tell us via online form or message us using your phone"
+				tabElement="button"
+				tabs={tabsContent}
+				selectedTab={selectedTab}
+				onTabChange={(tabName: string): void => {
+					setSelectedTab(tabName);
+				}}
+			/>
 		</div>
 	);
 };

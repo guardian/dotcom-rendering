@@ -6,18 +6,6 @@ import { CalloutBlock } from './Callout/Callout';
 import { CalloutExpired } from './Callout/CalloutComponents';
 import { Deadline } from './Callout/Deadline';
 
-const ruleStyles = css`
-	border-image: repeating-linear-gradient(
-			to bottom,
-			${neutral[86]},
-			${neutral[86]} 1px,
-			transparent 1px,
-			transparent 4px
-		)
-		13;
-	border-top: 13px solid ${neutral[86]};
-`;
-
 export const CalloutBlockComponent = ({
 	callout,
 	format,
@@ -46,6 +34,10 @@ export const CalloutBlockComponent = ({
 		return null;
 	}
 
+	if (isNonCollapsible && isExpired(activeUntil)) {
+		return <CalloutExpired />;
+	}
+
 	return (
 		<>
 			{!isNonCollapsible ? (
@@ -66,17 +58,15 @@ export const CalloutBlockComponent = ({
 					</ExpandingWrapper>
 				</aside>
 			) : (
-				<div css={ruleStyles}>
-					<CalloutBlock
-						formId={formId}
-						heading={title}
-						formFields={formFields}
-						format={format}
-						description={description}
-						submissionURL={calloutsUrl}
-						isExpired={isExpired(activeUntil)}
-					/>
-				</div>
+				<CalloutBlock
+					formId={formId}
+					heading={title}
+					formFields={formFields}
+					format={format}
+					description={description}
+					submissionURL={calloutsUrl}
+					isExpired={isExpired(activeUntil)}
+				/>
 			)}
 		</>
 	);
