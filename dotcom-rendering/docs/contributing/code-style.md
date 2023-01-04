@@ -68,7 +68,7 @@ import Child from '../Child/Child';
 
 We use [React](https://reactjs.org/) for our components, and [Emotion](https://emotion.sh/) for our CSS in JS.
 
-### Use Emotion's [`css`](https://emotion.sh/docs/emotion#css) function to build a class name from styles
+### Use Emotion's [`css`](https://emotion.sh/docs/@emotion/css#css) function to build a class name from styles
 
 > Why? It decouples our CSS declaration from specific components
 
@@ -191,7 +191,7 @@ render(
 );
 ```
 
-### Prefer [`cx`](https://emotion.sh/docs/emotion#cx) for style composition
+### Prefer [`cx`](https://emotion.sh/docs/@emotion/css#cx) for style composition
 
 > Why? `cx` composes given CSS in the most performant way in [_most_ cases](https://github.com/guardian/dotcom-rendering/pull/126#discussion_r209999843). It is more likely to reduce duplication of output CSS. It is also more readable, avoiding tricky syntax such as nested ternaries. However, there are cases in which it is more performant to use [`classNames`](https://github.com/JedWatson/classnames), notably if there are a large number of elements of a particular Component that use different combinations of classes.
 
