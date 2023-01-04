@@ -46,7 +46,7 @@ export interface CalloutBlockProps {
 	formFields: CampaignFieldType[];
 	formId: number;
 	submissionURL: string;
-	activeUntil: number;
+	isExpired: boolean;
 }
 
 export const CalloutBlock = ({
@@ -56,7 +56,7 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
-	activeUntil,
+	isExpired,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
@@ -78,12 +78,6 @@ export const CalloutBlock = ({
 			content: <MessageUs format={format} />,
 		},
 	];
-	const isExpired = (date: number | undefined): boolean => {
-		if (date) {
-			return Math.floor(new Date().getTime() / 1000) > date;
-		}
-		return false;
-	};
 
 	return (
 		<div css={[calloutDetailsStyles, wrapperStyles]}>
@@ -94,7 +88,7 @@ export const CalloutBlock = ({
 			</div>
 			<CalloutTermsAndConditions format={format} />
 			<CalloutShare format={format} />
-			{isExpired(activeUntil) ? (
+			{isExpired ? (
 				<CalloutExpired />
 			) : (
 				<Tabs
