@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { Radio, RadioGroup } from '@guardian/source-react-components';
 import type { CampaignFieldRadio } from '../../../../types/content';
 import { FieldLabel } from './FieldLabel';
@@ -15,7 +16,15 @@ export const RadioSelect = ({
 	formData,
 	setFormData,
 }: FieldProp) => (
-	<div>
+	// work around to enforce `display: flex;` to `RadioGroup`'s fieldset tag
+	// https://github.com/guardian/source/issues/580
+	<div
+		css={css`
+			fieldset {
+				display: flex;
+			}
+		`}
+	>
 		<FieldLabel formField={formField} />
 		<RadioGroup
 			error={validationErrors?.[formField.id]}
