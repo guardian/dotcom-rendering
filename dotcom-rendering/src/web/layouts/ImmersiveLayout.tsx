@@ -643,6 +643,9 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
+									tableOfContents={
+										CAPIArticle.tableOfContents
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

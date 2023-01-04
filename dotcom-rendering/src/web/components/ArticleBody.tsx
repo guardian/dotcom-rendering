@@ -198,7 +198,7 @@ export const ArticleBody = ({
 	}
 	return (
 		<>
-			{tableOfContents && (
+			{tableOfContents && tableOfContents.length > 0 && (
 				<div>
 					<TableOfContents
 						tableOfContents={tableOfContents}
