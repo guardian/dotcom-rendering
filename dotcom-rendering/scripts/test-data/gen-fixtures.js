@@ -166,9 +166,9 @@ try {
 				// Write the new fixture data
 				const contents = `${HEADER}
 
-				import type { CAPIArticleType } from '../../../src/types/frontend';
+				import type { FEArticleType } from '../../../src/types/frontend';
 
-				export const ${article.name}: CAPIArticleType = ${JSON.stringify(
+				export const ${article.name}: FEArticleType = ${JSON.stringify(
 					json,
 					null,
 					4,

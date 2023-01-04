@@ -1031,7 +1031,7 @@ export const Letter: FEArticleType = {
 				support:
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1158,10 +1158,10 @@ export const Letter: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
 				},
 				{
 					text: 'Complaints & corrections',
@@ -1200,10 +1200,10 @@ export const Letter: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
 				},
 			],
 			[
@@ -1327,6 +1327,7 @@ export const Letter: FEArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	showTableOfContents: false,
 	byline: 'Letters',
 	headline: 'Why is a woman’s work never done?',
 	guardianBaseURL: 'https://www.theguardian.com',
@@ -1579,7 +1580,7 @@ export const Letter: FEArticleType = {
 					],
 				},
 			],
-			elementId: '31e18cc5-f89b-49ff-ac87-39306c622662',
+			elementId: '48147d88-005d-4a3b-8ebd-5ea9f05d0b13',
 		},
 	],
 	canonicalUrl:
@@ -1591,17 +1592,17 @@ export const Letter: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'e12cf77f-ad77-4e71-b4c2-9bae6fd460ab',
+					elementId: '8838303e-9f4a-4063-8458-de1ca49b2451',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '02e7ec53-a499-43fc-84ca-93c09ad50e9c',
+					elementId: '995102a3-fbf7-47f0-8662-cf6f3f9cb9d4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
-					elementId: '51d6a74c-4ecd-451a-ba76-b0f622f0e1ef',
+					elementId: 'b7a4d00a-33ac-4b7c-888e-4539b3119ac5',
 				},
 			],
 			attributes: {
@@ -1609,13 +1610,13 @@ export const Letter: FEArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1584705938000,
-			blockCreatedOnDisplay: '12.05 GMT',
+			blockCreatedOn: 1617638661000,
+			blockCreatedOnDisplay: '17.04 BST',
 			blockLastUpdated: 1617631119000,
 			blockLastUpdatedDisplay: '14.58 BST',
-			blockFirstPublished: 1617631111000,
-			blockFirstPublishedDisplay: '14.58 BST',
-			blockFirstPublishedDisplayNoTimezone: '14.58',
+			blockFirstPublished: 1617638661000,
+			blockFirstPublishedDisplay: '17.04 BST',
+			blockFirstPublishedDisplayNoTimezone: '17.04',
 			contributors: [],
 			primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
 			secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
