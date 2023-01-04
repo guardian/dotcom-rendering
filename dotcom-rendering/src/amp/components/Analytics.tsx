@@ -29,6 +29,26 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
+		`<amp-analytics>
+			<script type="application/json">
+      {
+        "requests": {
+          "pageview": "\${additionalBase}&consentState=\${consentState}&consentString=\${consentString}"
+        },
+        "triggers": {
+          "trackPageview": {
+            "on": "visible",
+            "request": "pageview",
+            "vars" : {
+              "additionalBase": "https://ophan.theguardian.com/img/2?viewId=\${ophanPageViewId}&ampViewId=\${pageViewId64}",
+						  "componentEvent": {"component":{"componentType":"CONSENT","products":[],"labels":["08:\${consentState}","09:\${consentString}"]},"action":"MANAGE_CONSENT"},
+              "component": "%7B%22component%22%3A%7B%22componentType%22%3A%22CONSENT%22%2C%22products%22%3A%5B%5D%2C%22labels%22%3A%5B%2208%3A%5C%24%7B\${consentState}%7D%22%2C%2209%3A%5C%24%7B\${consentString}%7D%22%5D%7D%2C%22action%22%3A%22MANAGE_CONSENT%22%7D"
+            }
+          }
+        }
+      }
+			</script>
+		</amp-analytics>`,
 		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
              <script type="application/json">
                {
