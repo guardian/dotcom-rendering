@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-import { neutral } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type { CalloutBlockElementV2 } from '../../types/content';
 import { CalloutBlock } from './Callout/Callout';
