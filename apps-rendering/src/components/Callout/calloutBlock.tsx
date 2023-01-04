@@ -15,6 +15,7 @@ import {
 	calloutInfo,
 	calloutLinkContainer,
 	calloutTitle,
+	calloutInfo,
 } from './styles';
 
 export interface CalloutBlockProps {

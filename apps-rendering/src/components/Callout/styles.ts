@@ -55,6 +55,10 @@ export const highlight = css`
 	`}
 `;
 
+export const calloutInfo = css`
+	padding: ${containerPadding};
+`;
+
 export const calloutTitle = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
 	color: ${text.calloutPrimary(format)};
@@ -82,7 +86,7 @@ export const calloutPrimaryButton = (
 	justify-content: center;
 	${darkModeCss`
 		background: ${neutral[86]};
-		color: ${neutral[7]};
+		color: ${neutral[7]} !important;
 	`}
 `;
 
