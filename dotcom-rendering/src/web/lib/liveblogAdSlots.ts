@@ -10,22 +10,24 @@ import type {
 } from '../../types/content';
 
 /**
- * Maximum number of inline ads to display on the page.
+ * Maximum number of inline ads to display on liveblog pages.
  */
 const MAX_INLINE_ADS = 8;
 
 /**
- * Minimum allowed space between the top of the liveblog container and the highest inline ad.
+ * Minimum amount of space in pixels between the top of
+ * the liveblog container and the highest inline ad.
  */
 const MIN_SPACE_BEFORE_FIRST_AD = 500;
 
 /**
- * Minimum allowed space between inline ads in pixels.
+ * Minimum amount of space in pixels between any pair of inline ads.
  */
 const MIN_SPACE_BETWEEN_ADS = 1_800;
 
 /**
- * Estimated margin associated with an element. Sometimes this is more or less
+ * Estimated margin associated with an element.
+ * This can sometimes be slightly more or less.
  */
 export const ELEMENT_MARGIN = 12;
 
@@ -35,26 +37,25 @@ const BLOCK_FOOTER = 25; // Sharing links (Facebook, Twitter)
 const BLOCK_SPACING = 30; // Padding and margins
 
 type BlockElementTextData = {
-	lineHeight: number; // approx line height on desktop
-	lineLength: number; // approx number of character that fits on a line on desktop
+	lineHeight: number; // approx line height
+	lineLength: number; // approx number of characters that fit on a line
 };
 
-type BlockElementHeightData =
+type BlockElementHeightData = { heightExcludingText: number } & (
 	| {
-			heightExcludingText: number;
 			textHeight: BlockElementTextData;
 			text: (element: CAPIElement) => string;
 	  }
 	| {
-			heightExcludingText: number;
 			textHeight?: never;
 			text?: never;
-	  };
+	  }
+);
 
 /**
  * All known element types that are used in a liveblog block. There are other elements that
- * may be used (see CAPIElement type), but these other elements have not been sighted in
- * a liveblog page, so are not considered here.
+ * it is possible to use (see CAPIElement type), but these other elements have not been
+ * sighted in a liveblog page, so are not considered.
  */
 type KnownBlockElementType =
 	| 'model.dotcomrendering.pageElements.BlockquoteBlockElement'
@@ -73,9 +74,9 @@ type KnownBlockElementType =
 	| 'model.dotcomrendering.pageElements.YoutubeBlockElement';
 
 /**
- * Approximations of the size each block element type will take up on the page in pixels.
- * Predictions are made for mobile viewports, as data suggests that the majority of liveblog page
- * views are made using mobile devices.
+ * Approximations of the height of each type of block element in pixels.
+ * Predictions are made for MOBILE viewports, as data suggests that the
+ * majority of liveblog page views are made using mobile devices.
  */
 const elementHeightDataMap: {
 	[key in KnownBlockElementType]: BlockElementHeightData;
@@ -160,51 +161,48 @@ const elementHeightDataMap: {
 	},
 };
 
-const calculateElementHeight = (
+export const calculateApproximateElementHeight = (
 	element: CAPIElement,
-	heightData: BlockElementHeightData,
-) => {
-	let height = heightData.heightExcludingText + ELEMENT_MARGIN;
+): number => {
+	// Is there a height estimate for this element type?
+	const isElementTypeKnown = Object.keys(elementHeightDataMap).includes(
+		element._type,
+	);
+	if (!isElementTypeKnown) {
+		// Unknown element. Indicates an infrequently used element in liveblogs.
+		// Assume a smallish height as we would rather include too few than too many ads
+		return 200;
+	}
 
+	const elementType = element._type as KnownBlockElementType;
+	const heightData = elementHeightDataMap[elementType];
+
+	let estimatedHeight = heightData.heightExcludingText + ELEMENT_MARGIN;
+
+	// If the element has text that contributes to the height of the element, estimate
+	// the height of the text and increment the height
 	if (heightData.textHeight) {
 		const { lineHeight, lineLength } = heightData.textHeight;
 		const characterCount = heightData.text(element).length;
 
-		height += lineHeight * Math.ceil(characterCount / lineLength);
+		estimatedHeight += lineHeight * Math.ceil(characterCount / lineLength);
 	}
 
-	return height;
-};
-
-export const calculateElementSize = (element: CAPIElement): number => {
-	const isElementTypeKnown = Object.keys(elementHeightDataMap).includes(
-		element._type,
-	);
-
-	if (isElementTypeKnown) {
-		const elementHeightData =
-			elementHeightDataMap[element._type as KnownBlockElementType];
-
-		return calculateElementHeight(element, elementHeightData);
-	}
-
-	// Unknown element. Indicates an infrequently used element in liveblogs.
-	// Assume a smallish size as we would rather include too few than too many ads
-	return 200;
+	return estimatedHeight;
 };
 
 /**
- * Approximates the size of a block.
+ * Approximates the height of a block.
  * A block is a list of Elements that make up one liveblog update
  * An element can be a few paragraphs of text, an image, a twitter embed, etc.
  */
-const calculateBlockSize = (elements: CAPIElement[]): number => {
+const calculateApproximateBlockHeight = (elements: CAPIElement[]): number => {
 	if (!elements.length) return 0;
 
 	const defaultBlockHeight = BLOCK_HEADER + BLOCK_FOOTER + BLOCK_SPACING;
 
 	return elements.reduce((total, element) => {
-		return total + calculateElementSize(element);
+		return total + calculateApproximateElementHeight(element);
 	}, defaultBlockHeight);
 };
 
@@ -231,4 +229,4 @@ const shouldDisplayAd = (
 	return numPixelsWithoutAdvert > minSpaceToShowAd;
 };
 
-export { calculateBlockSize, shouldDisplayAd };
+export { calculateApproximateBlockHeight, shouldDisplayAd };

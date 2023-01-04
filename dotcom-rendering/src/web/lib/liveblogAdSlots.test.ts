@@ -1,7 +1,10 @@
 import type { CAPIElement } from '../../types/content';
-import { calculateBlockSize, shouldDisplayAd } from './liveblogAdSlots';
+import {
+	calculateApproximateBlockHeight,
+	shouldDisplayAd,
+} from './liveblogAdSlots';
 
-describe('calculateBlockSize', () => {
+describe('calculateApproximateBlockHeight', () => {
 	const textElementOneLine: CAPIElement[] = [
 		{
 			elementId: '1',
@@ -47,7 +50,7 @@ describe('calculateBlockSize', () => {
 
 	describe('zero elements', () => {
 		it('should return zero when there are zero elements', () => {
-			expect(calculateBlockSize([])).toEqual(0);
+			expect(calculateApproximateBlockHeight([])).toEqual(0);
 		});
 	});
 
@@ -55,10 +58,12 @@ describe('calculateBlockSize', () => {
 		const textLineHeight = 25.5;
 
 		it('should return the correct height for varying line length', () => {
-			expect(calculateBlockSize(textElementOneLine)).toEqual(
+			expect(calculateApproximateBlockHeight(textElementOneLine)).toEqual(
 				textLineHeight + defaultBlockSpacing + defaultElementSpacing,
 			);
-			expect(calculateBlockSize(textElementTwoLines)).toEqual(
+			expect(
+				calculateApproximateBlockHeight(textElementTwoLines),
+			).toEqual(
 				2 * textLineHeight +
 					defaultBlockSpacing +
 					defaultElementSpacing,
@@ -66,13 +71,15 @@ describe('calculateBlockSize', () => {
 		});
 
 		it('should return the correct height when there are multiple elements', () => {
-			expect(calculateBlockSize(multipleTextElements)).toEqual(201);
+			expect(
+				calculateApproximateBlockHeight(multipleTextElements),
+			).toEqual(201);
 		});
 	});
 
 	describe('youtube block elements', () => {
 		it('should return the correct height', () => {
-			expect(calculateBlockSize(youtubeElement)).toEqual(
+			expect(calculateApproximateBlockHeight(youtubeElement)).toEqual(
 				239 + defaultBlockSpacing + defaultElementSpacing,
 			);
 		});
