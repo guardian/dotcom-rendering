@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import fetchMock from 'fetch-mock';
+import fetchMock, { FetchMockStatic } from 'fetch-mock';
 import { calloutCampaign as calloutCampaignV2 } from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
@@ -12,7 +12,7 @@ const mockFormat = {
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
 
-export const Collapsible = () => {
+const goodRequest = () => {
 	fetchMock
 		.restore()
 		.post(
@@ -22,6 +22,22 @@ export const Collapsible = () => {
 				body: null,
 			},
 		);
+};
+
+const badRequest = () => {
+	fetchMock
+		.restore()
+		.post(
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			{
+				status: 400,
+				body: null,
+			},
+		);
+};
+
+export const Collapsible = () => {
+	goodRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{
@@ -37,15 +53,7 @@ export const Collapsible = () => {
 Collapsible.story = { name: 'Collapsible' };
 
 export const NonCollapsible = () => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
+	goodRequest();
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
@@ -56,16 +64,24 @@ export const NonCollapsible = () => {
 
 NonCollapsible.story = { name: 'NonCollapsible' };
 
+export const SubmissionFailure = () => {
+	badRequest();
+	return (
+		<CalloutBlockComponent
+			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
+			format={mockFormat}
+		/>
+	);
+};
+
+SubmissionFailure.story = { name: 'Submission Failure' };
+
+export default {
+	component: CalloutBlockComponent,
+	title: 'Components/CalloutBlockComponent',
+};
+
 export const Expired = () => {
-	fetchMock
-		.restore()
-		.post(
-			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-			{
-				status: 201,
-				body: null,
-			},
-		);
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
@@ -75,8 +91,3 @@ export const Expired = () => {
 };
 
 Expired.story = { name: 'Expired' };
-
-export default {
-	component: CalloutBlockComponent,
-	title: 'Components/CalloutBlockComponent',
-};
