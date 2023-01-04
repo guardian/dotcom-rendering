@@ -1,14 +1,13 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import {
 	LinkButton,
 	SvgGps,
 	SvgWhatsApp,
 } from '@guardian/source-react-components';
-import type { FC } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
-import { space, neutral, textSans } from '@guardian/source-foundations';
-import type { CampaignFieldType } from '../../../types/content';
 
 interface CalloutContactProps {
 	format: ArticleFormat;
@@ -16,7 +15,7 @@ interface CalloutContactProps {
 
 const calloutPrimaryButton = (format: ArticleFormat): SerializedStyles => css`
 	background: ${decidePalette(format).text.calloutAccent};
-	color: ${neutral[100]} !important;
+	color: ${neutral[100]};
 	width: 100%;
 	justify-content: center;
 	margin-bottom: ${space[4]}px;

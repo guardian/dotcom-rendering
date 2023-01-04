@@ -3,6 +3,7 @@ import { neutral } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type { CalloutBlockElementV2 } from '../../types/content';
 import { CalloutBlock } from './Callout/Callout';
+import { CalloutExpired } from './Callout/CalloutComponents';
 import { Deadline } from './Callout/Deadline';
 
 const ruleStyles = css`
@@ -24,9 +25,15 @@ export const CalloutBlockComponent = ({
 	callout: CalloutBlockElementV2;
 	format: ArticleFormat;
 }) => {
-	const { title, description, formFields, activeUntil, calloutsUrl, formId } =
-		callout;
-	const isEmbed = !callout.isNonCollapsible;
+	const {
+		title,
+		description,
+		formFields,
+		activeUntil,
+		calloutsUrl,
+		formId,
+		isNonCollapsible,
+	} = callout;
 
 	const isExpired = (date: number | undefined): boolean => {
 		if (date) {
@@ -35,13 +42,13 @@ export const CalloutBlockComponent = ({
 		return false;
 	};
 
-	if (isEmbed && isExpired(activeUntil)) {
+	if (!isNonCollapsible && isExpired(activeUntil)) {
 		return null;
 	}
 
 	return (
 		<>
-			{isEmbed ? (
+			{!isNonCollapsible ? (
 				<aside>
 					<ExpandingWrapper
 						name={`${callout.formId} form`}

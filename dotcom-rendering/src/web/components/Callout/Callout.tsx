@@ -92,7 +92,7 @@ export const CalloutBlock = ({
 				<CalloutExpired />
 			) : (
 				<Tabs
-					tabsLabel="Tell us"
+					tabsLabel="Tell us via online form or message us using your phone"
 					tabElement="button"
 					tabs={tabsContent}
 					selectedTab={selectedTab}
