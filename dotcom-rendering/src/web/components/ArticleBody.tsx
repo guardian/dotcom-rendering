@@ -199,11 +199,9 @@ export const ArticleBody = ({
 	return (
 		<>
 			{tableOfContents && tableOfContents.length > 0 && (
-				<div>
-					<TableOfContents
-						tableOfContents={tableOfContents}
-					></TableOfContents>
-				</div>
+				<TableOfContents
+					tableOfContents={tableOfContents}
+				></TableOfContents>
 			)}
 
 			<div

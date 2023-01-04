@@ -33,12 +33,9 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
-		tableOfContents:
-			// TODO: do we still want to use a switch?
-			// data.config.switches.tableOfContents &&
-			data.showTableOfContents
-				? enhanceTableOfContents(data.format, enhancedBlocks)
-				: undefined,
+		tableOfContents: data.showTableOfContents
+			? enhanceTableOfContents(data.format, enhancedBlocks)
+			: undefined,
 	};
 	return CAPIArticle;
 };
