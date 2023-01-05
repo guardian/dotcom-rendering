@@ -71,6 +71,7 @@ export const CalloutExpired = () => {
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
+	padding-bottom: ${space[2]}px;
 `;
 
 const shareCalloutTextStyles = css`
@@ -149,7 +150,7 @@ const termsAndConditionsStyles = (format: ArticleFormat) =>
 			text-decoration: none;
 		}
 		${textSans.small()}
-		padding: ${space[4]}px 0px;
+		padding-bottom: ${space[4]}px;
 	`;
 
 export const CalloutTermsAndConditions = ({ format }: Props) => (

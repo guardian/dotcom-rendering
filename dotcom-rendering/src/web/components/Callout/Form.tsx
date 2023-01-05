@@ -32,8 +32,6 @@ const formStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
 `;
 
 const formFieldWrapperStyles = css`
