@@ -1,6 +1,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card25Media25Tall, CardDefault } from '../lib/cardWrappers';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -26,7 +27,7 @@ export const FixedSmallSlowVMPU = ({
 		<UL direction="row">
 			{firstSlice33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} key={trail.url}>
-					<FrontCard
+					<Card25Media25Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -42,12 +43,10 @@ export const FixedSmallSlowVMPU = ({
 				<UL direction="column">
 					{remaining.map((trail) => (
 						<LI key={trail.url}>
-							<FrontCard
+							<CardDefault
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
 							/>
 						</LI>
 					))}
