@@ -11,6 +11,7 @@ import type { Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
@@ -171,13 +172,18 @@ export const renderElement = ({
 			);
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return (
 				<Island deferUntil="visible">
 					<CalloutEmbedBlockComponent
 						callout={element}
 						format={format}
 					/>
+				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
+			return (
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
