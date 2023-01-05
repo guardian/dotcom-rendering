@@ -15,7 +15,7 @@ interface CalloutContactProps {
 
 const calloutPrimaryButton = (format: ArticleFormat): SerializedStyles => css`
 	background: ${decidePalette(format).text.calloutAccent};
-	color: ${neutral[100]};
+	color: ${neutral[100]} !important;
 	width: 100%;
 	justify-content: center;
 	margin-bottom: ${space[4]}px;
