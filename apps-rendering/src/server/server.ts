@@ -318,6 +318,8 @@ function editionFromString(editionString: string): Edition {
 			return Edition.AU;
 		case 'international':
 			return Edition.INTERNATIONAL;
+		case 'europe':
+			return Edition.EUROPE;
 		case 'uk':
 		default:
 			return Edition.UK;

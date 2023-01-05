@@ -1680,12 +1680,12 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@guardian/apps-rendering-api-models@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-3.1.0.tgz#2431333383c4000dcac30343c36aa59099f52f70"
-  integrity sha512-DrePdDAG/5IKzELxE0kONu3QcJZUwMdECeYJj8xLMDWKcy3Sx1ogHOUW5CUrHm2SeVIKfQNqQ97Ax7OPt9JtJQ==
+"@guardian/apps-rendering-api-models@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-4.1.0.tgz#a2c5de13241030bd436da7ac9c114806c8ba2aec"
+  integrity sha512-cJ0OLeqL3D8MttJP06w+m8CQDTtuiXkCrI6UQd5SWAF4viPI8OP+9EbPv+b5hrVe13itpJFmxfRi01R3zIyK+g==
   dependencies:
-    "@guardian/content-api-models" "^17.4.0"
+    "@guardian/content-api-models" "^17.4.2"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -1738,10 +1738,10 @@
     react "^17.0.2"
     react-dom "^17.0.2"
 
-"@guardian/content-api-models@^17.4.0":
-  version "17.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
-  integrity sha512-5Hvl7az1Epg9/yWzqRusdcgg5hG8AuJMAXvRkTztvvNIgGCI5Txps8q4hH1lZ13lIUkEitAQDOXp0zOxfm28Aw==
+"@guardian/content-api-models@^17.4.2":
+  version "17.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.2.tgz#d31b401c65ad4ff972d0716fa7c855fd441ccf8a"
+  integrity sha512-xRnOzbZfeGZqtdj9CefQXWJioKy2bfYOK6hWLIXg+/vHFxqDC+kWSSzfKO2E7fxZ3hAAExzMMW7pDhyI32c7ZA==
   dependencies:
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
