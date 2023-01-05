@@ -235,6 +235,15 @@ export const Form = ({
 				>
 					Submit
 				</Button>
+				<div
+					css={css`
+						a,
+						a:hover {
+							border: 0;
+						}
+						text-align: right;
+					`}
+				></div>
 			</div>
 		</form>
 	);
