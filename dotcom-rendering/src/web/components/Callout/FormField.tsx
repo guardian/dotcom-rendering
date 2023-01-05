@@ -11,7 +11,6 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import { logger } from '../../../server/lib/logging';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -232,7 +231,6 @@ export const FormField = ({
 				</div>
 			);
 		default:
-			logger.error(`Invalid field ${type} provided for callout`);
 			return null;
 	}
 };
