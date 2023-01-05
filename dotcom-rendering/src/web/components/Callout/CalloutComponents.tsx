@@ -98,31 +98,17 @@ const supportingText = css`
 	color: ${neutral[46]};
 `;
 
-export const CalloutShare = ({
-	format,
-	title,
-}: {
+interface Props {
 	format: ArticleFormat;
-	title: string;
-}) => {
+}
+
+export const CalloutShare = ({ format }: Props) => {
 	const [isCopied, setIsCopied] = useState(false);
 
-	const url = window.location.href;
-	const shareTitle = `
-	Share your experience: ${title}
-	`;
-	const shareText = `
-	I saw this callout on an article I was reading and thought you might like to share your story.
-	${url}
-	You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
-			`;
-
 	const onShare = async () => {
+		const url = window.location.href;
 		if ('clipboard' in navigator) {
-			await navigator.clipboard.writeText(`
-			${shareTitle}
-			${shareText}
-		`);
+			await navigator.clipboard.writeText(url);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}
@@ -145,7 +131,7 @@ export const CalloutShare = ({
 					<Button
 						size="xsmall"
 						priority="subdued"
-						onClick={void onShare}
+						onClick={onShare}
 						css={shareCalloutLinkStyles(format)}
 					>
 						{' '}
@@ -173,11 +159,7 @@ const termsAndConditionsStyles = (format: ArticleFormat) =>
 		padding-bottom: ${space[4]}px;
 	`;
 
-export const CalloutTermsAndConditions = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => (
+export const CalloutTermsAndConditions = ({ format }: Props) => (
 	<div css={termsAndConditionsStyles(format)}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
