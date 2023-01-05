@@ -1738,10 +1738,10 @@
     react "^17.0.2"
     react-dom "^17.0.2"
 
-"@guardian/content-api-models@^17.4.0":
-  version "17.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
-  integrity sha512-5Hvl7az1Epg9/yWzqRusdcgg5hG8AuJMAXvRkTztvvNIgGCI5Txps8q4hH1lZ13lIUkEitAQDOXp0zOxfm28Aw==
+"@guardian/content-api-models@^17.4.0", "@guardian/content-api-models@^17.4.2":
+  version "17.4.2"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.2.tgz#d31b401c65ad4ff972d0716fa7c855fd441ccf8a"
+  integrity sha512-xRnOzbZfeGZqtdj9CefQXWJioKy2bfYOK6hWLIXg+/vHFxqDC+kWSSzfKO2E7fxZ3hAAExzMMW7pDhyI32c7ZA==
   dependencies:
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
