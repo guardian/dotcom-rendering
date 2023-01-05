@@ -85,7 +85,9 @@ export const CalloutBlock = ({
 				<CalloutDescription format={format} description={description} />
 			</div>
 			<CalloutTermsAndConditions format={format} />
-			<CalloutShare format={format} title={heading} />
+			<div>
+				<CalloutShare format={format} title={heading} />
+			</div>
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"
 				tabElement="button"
