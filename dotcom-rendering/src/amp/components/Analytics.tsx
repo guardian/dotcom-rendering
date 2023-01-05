@@ -29,11 +29,11 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics>
+		`<amp-analytics data-block-on-consent>
 			<script type="application/json">
       {
         "requests": {
-          "pageview": "\${additionalBase}&consentState=\${consentState}&consentString=\${consentString}"
+          "pageview": "\${additionalBase}&componentEvent=\${component}"
         },
         "triggers": {
           "trackPageview": {
