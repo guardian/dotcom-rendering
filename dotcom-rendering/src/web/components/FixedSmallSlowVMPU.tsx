@@ -5,7 +5,6 @@ import { Card25Media25Tall, CardDefault } from '../lib/cardWrappers';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
