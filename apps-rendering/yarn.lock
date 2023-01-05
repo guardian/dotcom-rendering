@@ -1694,10 +1694,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/atoms-rendering@^25.0.3":
-  version "25.0.3"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-25.0.3.tgz#27ec39cc4737a5c09404e482f68a36bb82595b8a"
-  integrity sha512-Uh9Z12GUZbyT9guMCH92TVfSfhMVQT9luKxDsOalzlFwMVkrTAoDqqdzLAhJ8c6IX7SKaMXz76ZtDHZeskptQg==
+"@guardian/atoms-rendering@^23.7.2":
+  version "23.11.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.11.0.tgz#4e472c0be2b157336b8b68dcdc104b3bd7fa3f76"
+  integrity sha512-c/NUoB3Njr4PqndaDLov34GE1gBOMSVIq/h4TydYzGpa+tL+tqn88oNO3zbk+Kk3mK7R7CcBmnSOwaYSaD//UA==
   dependencies:
     is-mobile "^3.1.1"
 

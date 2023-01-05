@@ -441,6 +441,7 @@ const comment: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
 	theme: ArticlePillar.Opinion,
+	outline: fromBodyElements(fields.body),
 };
 
 const letter: Letter = {
@@ -523,6 +524,7 @@ const immersive: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
 	display: ArticleDisplay.Immersive,
+	outline: fromBodyElements(fields.body),
 };
 
 const gallery: Gallery = {
