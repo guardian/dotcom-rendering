@@ -24,8 +24,8 @@ You can share your story by using the form on this article, or by contacting us 
 			navigator
 				.share({
 					url,
-					title: 'Share your experience',
-					text: 'I saw this callout on an article I was reading and thought you might like to share your story.',
+					title: shareTitle,
+					text: shareText,
 				})
 				.catch(console.error);
 		} else if ('clipboard' in navigator) {
