@@ -35,7 +35,7 @@
 	"prettier": "@guardian/prettier",
 	"dependencies": {
 		"@babel/core": "^7.18.13",
-		"@babel/preset-env": "^7.15.6",
+		"@babel/preset-env": "^7.20.2",
 		"@creditkarma/thrift-server-core": "^1.0.4",
 		"@emotion/cache": "^11.4.0",
 		"@emotion/jest": "^11.10.0",
