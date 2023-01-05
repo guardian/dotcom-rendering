@@ -20,7 +20,6 @@ import {
 	sport,
 	text,
 } from '@guardian/source-foundations';
-import formatsPlugin from 'ajv-formats';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 import type { DCRContainerPalette } from '../../types/front';
