@@ -92,7 +92,6 @@
 		"@sentry/browser": "^6.19.7",
 		"@sentry/integrations": "^6.19.7",
 		"@storybook/addon-essentials": "^6.4.0",
-		"@storybook/addon-knobs": "^6.4.0",
 		"@storybook/addons": "^6.4.0",
 		"@storybook/api": "^6.4.0",
 		"@storybook/builder-webpack5": "^6.4.0",

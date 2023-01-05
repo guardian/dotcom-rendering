@@ -1,5 +1,4 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
 
@@ -31,12 +30,14 @@ export default {
 			],
 		},
 	},
-	decorators: [withSectionWrapper, withKnobs],
+	decorators: [withSectionWrapper],
 };
 
-const hidePrivacyMessage = (): boolean => boolean('hidePrivacyMessage', false);
-
-export const Default = () => (
+export const Default = ({
+	hidePrivacyMessage,
+}: {
+	hidePrivacyMessage: boolean;
+}) => (
 	<EmailSignup
 		identityName="patriarchy"
 		description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
@@ -44,11 +45,15 @@ export const Default = () => (
 		frequency="Weekly"
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="opinion"
-		hidePrivacyMessage={hidePrivacyMessage()}
+		hidePrivacyMessage={hidePrivacyMessage}
 	/>
 );
 
-export const NewsTheme = () => (
+export const NewsTheme = ({
+	hidePrivacyMessage,
+}: {
+	hidePrivacyMessage: boolean;
+}) => (
 	<EmailSignup
 		identityName="morning-briefing"
 		description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
@@ -56,11 +61,15 @@ export const NewsTheme = () => (
 		frequency="Every weekday"
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="news"
-		hidePrivacyMessage={hidePrivacyMessage()}
+		hidePrivacyMessage={hidePrivacyMessage}
 	/>
 );
 
-export const IrregularFrequency = () => (
+export const IrregularFrequency = ({
+	hidePrivacyMessage,
+}: {
+	hidePrivacyMessage: boolean;
+}) => (
 	<EmailSignup
 		identityName="documentaries"
 		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
@@ -68,10 +77,25 @@ export const IrregularFrequency = () => (
 		frequency="Whenever a new film is available"
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="features"
-		hidePrivacyMessage={hidePrivacyMessage()}
+		hidePrivacyMessage={hidePrivacyMessage}
 	/>
 );
 
-Default.story = { name: 'default' };
-NewsTheme.story = { name: 'news theme' };
-IrregularFrequency.story = { name: 'irregular frequency' };
+Default.story = {
+	name: 'default',
+	args: {
+		hidePrivacyMessage: false,
+	},
+};
+NewsTheme.story = {
+	name: 'news theme',
+	args: {
+		hidePrivacyMessage: false,
+	},
+};
+IrregularFrequency.story = {
+	name: 'irregular frequency',
+	args: {
+		hidePrivacyMessage: false,
+	},
+};
