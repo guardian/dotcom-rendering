@@ -98,21 +98,38 @@ const supportingText = css`
 	color: ${neutral[46]};
 `;
 
-interface Props {
+export const CalloutShare = ({
+	format,
+}: {
 	format: ArticleFormat;
-}
-
-export const CalloutShare = ({ format }: Props) => {
+	title: string;
+}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async () => {
 		const url = window.location.href;
+		if ('share' in navigator) {
+			const shareTitle = `
+			Share your experience: ${'PLACEHOLDER TITLE'}
+			`;
+			const shareText = `
+			I saw this callout on an article I was reading and thought you might like to share your story.
+			${url}
+			You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
+					`;
+			await navigator.share({
+				title: shareTitle,
+				text: shareText,
+			});
+		}
+
 		if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(url);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
+
 	if (typeof window === 'undefined' || typeof navigator === 'undefined')
 		return <></>;
 
@@ -159,7 +176,11 @@ const termsAndConditionsStyles = (format: ArticleFormat) =>
 		padding-bottom: ${space[4]}px;
 	`;
 
-export const CalloutTermsAndConditions = ({ format }: Props) => (
+export const CalloutTermsAndConditions = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<div css={termsAndConditionsStyles(format)}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, neutral, space } from '@guardian/source-foundations';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
+import { head } from 'fetch-mock';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
@@ -85,7 +86,7 @@ export const CalloutBlock = ({
 				<CalloutDescription format={format} description={description} />
 			</div>
 			<CalloutTermsAndConditions format={format} />
-			<CalloutShare format={format} />
+			<CalloutShare format={format} title={heading} />
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"
 				tabElement="button"
