@@ -34,12 +34,12 @@ export const Analytics = ({
 			<script type="application/json">
       {
         "requests": {
-          "pageview": "\${additionalBase}&componentEvent=\${component}"
+          "pageviewWithConsent": "\${additionalBase}&componentEvent=\${component}"
         },
         "triggers": {
           "trackPageview": {
             "on": "visible",
-            "request": "pageview",
+            "request": "pageviewWithConsent",
             "vars" : {
               "additionalBase": "https://ophan.theguardian.com/img/2?viewId=\${ophanPageViewId}&ampViewId=\${pageViewId64}",
 						  "componentObject": {"component":{"componentType":"CONSENT","products":[],"labels":["08:\${consentState}","09:\${consentString}"]},"action":"MANAGE_CONSENT"},
