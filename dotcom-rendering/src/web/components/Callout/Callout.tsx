@@ -55,7 +55,6 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
-	isExpired,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
