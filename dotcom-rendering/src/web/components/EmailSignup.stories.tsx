@@ -36,7 +36,7 @@ export default {
 export const Default = ({
 	hidePrivacyMessage,
 }: {
-	hidePrivacyMessage: boolean;
+	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
 		identityName="patriarchy"
@@ -52,7 +52,7 @@ export const Default = ({
 export const NewsTheme = ({
 	hidePrivacyMessage,
 }: {
-	hidePrivacyMessage: boolean;
+	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
 		identityName="morning-briefing"
@@ -68,7 +68,7 @@ export const NewsTheme = ({
 export const IrregularFrequency = ({
 	hidePrivacyMessage,
 }: {
-	hidePrivacyMessage: boolean;
+	hidePrivacyMessage?: boolean;
 }) => (
 	<EmailSignup
 		identityName="documentaries"
