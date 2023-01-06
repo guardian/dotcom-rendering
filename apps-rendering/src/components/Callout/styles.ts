@@ -118,7 +118,7 @@ export const textarea = (hasError: boolean): SerializedStyles => css`
 	${darkModeCss`
 		background-color: ${neutral[7]};
 		color: ${neutral[97]};
-		border:  ${hasError ? `4px solid ${error[500]}` : `2px solid ${neutral[46]}`};
+		border: ${hasError ? `4px solid ${error[500]}` : `2px solid ${neutral[46]}`};
 	`}
 `;
 

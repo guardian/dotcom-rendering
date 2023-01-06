@@ -50,7 +50,6 @@ const Callout: FC<CalloutProps> = ({
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
-						name={name}
 						formFields={formFields}
 						format={format}
 						description={description}
@@ -76,7 +75,6 @@ const Callout: FC<CalloutProps> = ({
 						<CalloutBlock
 							formId={formId}
 							heading={heading}
-							name={name}
 							formFields={formFields}
 							format={format}
 							description={description}
@@ -115,7 +113,7 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 	return h(
 		'div',
 		{
-			hydrationprops: serverSideProps,
+			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
 		},
 		Callout({
