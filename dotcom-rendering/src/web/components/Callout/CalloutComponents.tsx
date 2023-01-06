@@ -91,6 +91,7 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 		border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
 		text-decoration: none;
 		font-weight: normal;
+		margin: 0 ${space[1]}px;
 	`;
 
 const supportingText = css`
@@ -144,18 +145,18 @@ export const CalloutShare = ({
 					<SvgShareCallout />
 				</div>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{' '}
+					Know others who are affected?{'   '}
 					<Button
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
 						css={shareCalloutLinkStyles(format)}
 					>
-						{' '}
 						Please share this callout.
 					</Button>
 					{isCopied && (
 						<span css={supportingText} role="alert">
+							{' '}
 							Link copied to clipboard
 						</span>
 					)}
