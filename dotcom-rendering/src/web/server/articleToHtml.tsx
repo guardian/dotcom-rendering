@@ -48,15 +48,13 @@ const decideTitle = (article: FEArticleType): string => {
 export const articleToHtml = ({ article }: Props): string => {
 	const NAV = extractNAV(article.nav);
 	const title = decideTitle(article);
-	const key = 'dcr';
-	const cache = createCache({ key });
 	const linkedData = article.linkedData;
 
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-		createEmotionServer(cache);
-
 	const format: ArticleFormat = decideFormat(article.format);
+
+	const key = 'dcr';
+	const cache = createCache({ key });
+	const emotionServer = createEmotionServer(cache);
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
@@ -64,8 +62,8 @@ export const articleToHtml = ({ article }: Props): string => {
 		</CacheProvider>,
 	);
 
-	const chunks = extractCriticalToChunks(html);
-	const extractedCss = constructStyleTagsFromChunks(chunks);
+	const chunks = emotionServer.extractCriticalToChunks(html);
+	const extractedCss = emotionServer.constructStyleTagsFromChunks(chunks);
 
 	// Expedited islands scripts are added to the document head as 'high priority'
 	const expeditedIslands = extractExpeditedIslands(html);

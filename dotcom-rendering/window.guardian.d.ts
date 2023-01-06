@@ -1,3 +1,4 @@
+import type { EmotionCache } from '@emotion/react';
 import type {
 	Callback,
 	CMP,
@@ -20,6 +21,7 @@ declare global {
 			polyfilled: boolean;
 			onPolyfilled: () => void;
 			queue: Array<() => void>;
+			emotionCache?: EmotionCache;
 			config: WindowGuardianConfig;
 			ophan?: {
 				setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.

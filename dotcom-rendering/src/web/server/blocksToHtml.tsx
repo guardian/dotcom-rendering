@@ -1,3 +1,6 @@
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { decideFormat } from '../lib/decideFormat';
@@ -38,28 +41,37 @@ export const blocksToHtml = ({
 		adUnit,
 	});
 
+	const key = 'dcr';
+	const cache = createCache({ key });
+	const emotionServer = createEmotionServer(cache);
+
 	const html = renderToString(
-		<LiveBlogRenderer
-			blocks={blocks}
-			format={format}
-			adTargeting={adTargeting}
-			host={host}
-			pageId={pageId}
-			webTitle={webTitle}
-			ajaxUrl={ajaxUrl}
-			isSensitive={isSensitive}
-			isAdFreeUser={isAdFreeUser}
-			switches={switches}
-			isLiveUpdate={true}
-			section={section}
-			// The props below are never used because isLiveUpdate is true but, typescript...
-			shouldHideReaderRevenue={false}
-			tags={[]}
-			isPaidContent={false}
-			contributionsServiceUrl=""
-			keywordIds={keywordIds}
-		/>,
+		<CacheProvider value={cache}>
+			<LiveBlogRenderer
+				blocks={blocks}
+				format={format}
+				adTargeting={adTargeting}
+				host={host}
+				pageId={pageId}
+				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
+				isSensitive={isSensitive}
+				isAdFreeUser={isAdFreeUser}
+				switches={switches}
+				isLiveUpdate={true}
+				section={section}
+				// The props below are never used because isLiveUpdate is true but, typescript...
+				shouldHideReaderRevenue={false}
+				tags={[]}
+				isPaidContent={false}
+				contributionsServiceUrl=""
+				keywordIds={keywordIds}
+			/>
+		</CacheProvider>,
 	);
 
-	return html;
+	const chunks = emotionServer.extractCriticalToChunks(html);
+	const extractedCss = emotionServer.constructStyleTagsFromChunks(chunks);
+
+	return extractedCss + html;
 };

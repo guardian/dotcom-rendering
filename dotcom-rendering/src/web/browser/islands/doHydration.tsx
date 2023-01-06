@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
+import type { EmotionCache } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import { log } from '@guardian/libs';
-import { h, hydrate, render } from 'preact';
+import { createElement } from 'react';
+import { hydrate, render } from 'react-dom';
 import { initPerf } from '../initPerf';
 
 /**
@@ -18,6 +21,7 @@ export const doHydration = async (
 	name: string,
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
+	emotionCache: EmotionCache,
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
@@ -43,9 +47,19 @@ export const doHydration = async (
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				render(h(module[name], data), element);
+				render(
+					<CacheProvider value={emotionCache}>
+						{createElement(module[name], data)}
+					</CacheProvider>,
+					element,
+				);
 			} else {
-				hydrate(h(module[name], data), element);
+				hydrate(
+					<CacheProvider value={emotionCache}>
+						{createElement(module[name], data)}
+					</CacheProvider>,
+					element,
+				);
 			}
 
 			element.setAttribute('data-gu-ready', 'true');
