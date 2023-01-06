@@ -1549,7 +1549,9 @@ const textRichLink = (format: ArticleFormat): string => {
 const textCalloutAccent = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return format.design === ArticleDesign.Analysis
+				? news[300]
+				: news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1558,7 +1560,11 @@ const textCalloutAccent = (format: ArticleFormat): string => {
 			return sport[400];
 		case ArticlePillar.Opinion:
 			return opinion[300];
-		default:
+		case ArticleSpecial.Labs:
+			return BLACK;
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
 			return news[400];
 	}
 };
@@ -1746,23 +1752,6 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 		}
 	}
 	return pillarPalette[format.theme].main;
-};
-
-const textCalloutHeading = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[300];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[300];
-		default:
-			return news[300];
-	}
 };
 
 const textDropCap = (format: ArticleFormat): string => {
@@ -2102,7 +2091,6 @@ export const decidePalette = (
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			calloutHeading: textCalloutHeading(format),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),

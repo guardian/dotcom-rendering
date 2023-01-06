@@ -16,7 +16,7 @@ const submitButtonStyles = (format: ArticleFormat) => css`
 	margin: 20px 0px;
 	width: 100%;
 	display: block;
-	background-color: ${decidePalette(format).text.richLink};
+	background-color: ${decidePalette(format).text.calloutAccent};
 	:hover {
 		background-color: ${neutral[0]};
 	}

@@ -30,7 +30,7 @@ const summaryContentWrapper = css`
 
 const titleStyles = (format: ArticleFormat) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
-	color: ${decidePalette(format).text.calloutHeading};
+	color: ${decidePalette(format).text.calloutAccent};
 `;
 
 const subtitleTextHeaderStyles = css`

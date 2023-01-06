@@ -169,8 +169,8 @@ export const CalloutShare = ({
 const termsAndConditionsStyles = (format: ArticleFormat) =>
 	css`
 		a {
-			color: ${decidePalette(format).text.calloutAccent};
-			border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
+			color: ${decidePalette(format).text.richLink};
+			border-bottom: 1px solid ${decidePalette(format).text.richLink};
 			text-decoration: none;
 		}
 		${textSans.small()}
