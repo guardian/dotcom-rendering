@@ -109,7 +109,12 @@ export const CalloutShare = ({
 
 	const onShare = async () => {
 		const url = window.location.href;
-		if ('share' in navigator) {
+		if (
+			'share' in navigator &&
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent,
+			)
+		) {
 			const shareTitle = `
 			Share your experience: ${'PLACEHOLDER TITLE'}
 			`;
