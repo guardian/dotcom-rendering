@@ -24,21 +24,10 @@ import type { Parser } from 'parser';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { Result } from 'result';
+import type { Callout } from '../bodyElement';
 import CalloutComponent from '../components/Callout';
 
 // **** Hydration **** \\
-
-type Callout = {
-	kind: ElementKind.Callout;
-	isNonCollapsible: boolean;
-	heading: string;
-	formId: number;
-	formFields: FormField[];
-	name: string;
-	description?: DocumentFragment;
-	activeUntil?: number;
-};
-
 interface ArticleFormatProps {
 	theme: ArticleTheme;
 }
