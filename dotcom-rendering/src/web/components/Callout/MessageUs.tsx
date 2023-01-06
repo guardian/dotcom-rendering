@@ -67,6 +67,7 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 			</p>
 
 			<LinkButton
+				data-ignore="global-link-styling"
 				cssOverrides={calloutPrimaryButton(format)}
 				type="submit"
 				priority="primary"
@@ -79,6 +80,7 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 			</LinkButton>
 
 			<LinkButton
+				data-ignore="global-link-styling"
 				cssOverrides={[
 					calloutPrimaryButton(format),
 					css`
