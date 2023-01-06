@@ -29,7 +29,7 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-    // The componentEvent is the encoded version of componentObject using https://www.urlencoder.org/
+		// The componentEvent is the encoded version of componentObject using https://www.urlencoder.org/
 		`<amp-analytics data-block-on-consent>
 			<script type="application/json">
       {
