@@ -50,7 +50,6 @@ const Callout: FC<CalloutProps> = ({
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
-						name={name}
 						formFields={formFields}
 						format={format}
 						description={description}
@@ -76,7 +75,6 @@ const Callout: FC<CalloutProps> = ({
 						<CalloutBlock
 							formId={formId}
 							heading={heading}
-							name={name}
 							formFields={formFields}
 							format={format}
 							description={description}
