@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgArrowExpand } from '@guardian/source-react-components';
 import libDebounce from 'lodash.debounce';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import type { RoleType } from '../../types/content';
 
 type Props = {
@@ -46,6 +46,8 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
 		'button.open-lightbox',
 	);
+	const overlays =
+		document.querySelectorAll<HTMLElement>('div.open-lightbox');
 
 	// Lightbox selectors
 	const nextButton = lightbox.querySelector<HTMLButtonElement>('button.next');
@@ -229,6 +231,14 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		});
 	});
 
+	overlays.forEach((overlay) => {
+		overlay.addEventListener('click', (event) => {
+			(event.target as HTMLElement)
+				.querySelector('button')
+				?.dispatchEvent(new MouseEvent('click'));
+		});
+	});
+
 	LIs.forEach((LI) => {
 		LI.addEventListener('click', () => {
 			toggleInfo();
@@ -321,6 +331,66 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	});
 }
 
+/**
+ * This overlay makes it possible to click anywhere on an image and the lightbox
+ * will hydrate/appear.
+ *
+ * How?
+ * ----
+ * ```html
+ * <gu-island deferUntil="onInteraction">
+ *   <ClickOverlay>
+ *     <button>Open lightbox</button>
+ *   </ClickOverlay>
+ * </gu-island>
+ * ```
+ *
+ * Both gu-island and ClickOverlay have click event listeners that will replay any
+ * click event to their children using synthetic events. The gu-island listener is
+ * set on page load which in turn triggers hydration for this file, adding event
+ * listeners to the ClickOverlay and button.
+ *
+ * The flow is:
+ *
+ * 1) Page loads, gu-island has a click event listener set
+ * 2) User clicks on the island (which wraps both button and overlay)
+ * 3) This file is hydrated, setting listeners on both the ClickOverlay and the button
+ * 4) gu-island fires a synthetic click event to the element originally clicked
+ * 5) If that was ClickOverlay, another synthetic event is sent to the button
+ * 6) If it was the button then the lightbox is opened
+ *
+ * Why?
+ * ----
+ * This approach means that it is possible for images to be clickable without the
+ * requirement to hydrate images - we never want to serialize images into the page! It
+ * also means we keep the feature where the lightbox code is only downloaded on
+ * interaction.
+ *
+ * What about accessibility?
+ * -------------------------
+ * The child button element is still the primary method for opening
+ * the lightbox and this is the element that we want assitive technologies like
+ * screen readers to interact with. This overlay is intentionally hidden from
+ * keyboards and screen readers and can be thought of as progressive enhancement
+ * for mouse and touch users.
+ *
+ */
+const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
+	return (
+		<div
+			css={css`
+				position: absolute;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			`}
+			className="open-lightbox"
+		>
+			{children}
+		</div>
+	);
+};
+
 export const LightboxButton = ({ elementId, role }: Props) => {
 	useEffect(() => {
 		const lightbox =
@@ -331,42 +401,43 @@ export const LightboxButton = ({ elementId, role }: Props) => {
 	// Don't show the button over thumbnails; they're too small
 	if (role === 'thumbnail') return null;
 	return (
-		<button
-			data-element-id={elementId}
-			type="button"
-			className="open-lightbox"
-			aria-haspopup="dialog"
-			css={[
-				css`
-					position: absolute;
-					top: 0px;
-					right: 0px;
-					svg {
-						margin-top: 4px;
-						fill: ${neutral[100]};
-					}
-					margin: ${space[2]}px;
-					border-radius: 50%;
-					border: none;
-					cursor: pointer;
-					background-color: ${neutral[46]};
-					opacity: 0.7;
-					:hover {
-						filter: brightness(85%);
-						opacity: 0.8;
-					}
-				`,
-				decideSize(role),
-			]}
-		>
-			<SvgArrowExpand />
-			<span
-				css={css`
-					${visuallyHidden}
-				`}
+		<ClickOverlay>
+			<button
+				data-element-id={elementId}
+				type="button"
+				className="open-lightbox"
+				aria-haspopup="dialog"
+				css={[
+					css`
+						position: absolute;
+						right: 0;
+						svg {
+							margin-top: 4px;
+							fill: ${neutral[100]};
+						}
+						margin: ${space[2]}px;
+						border-radius: 50%;
+						border: none;
+						cursor: pointer;
+						background-color: ${neutral[46]};
+						opacity: 0.7;
+						:hover {
+							filter: brightness(85%);
+							opacity: 0.8;
+						}
+					`,
+					decideSize(role),
+				]}
 			>
-				View in fullscreen
-			</span>
-		</button>
+				<SvgArrowExpand />
+				<span
+					css={css`
+						${visuallyHidden}
+					`}
+				>
+					View in fullscreen
+				</span>
+			</button>
+		</ClickOverlay>
 	);
 };
