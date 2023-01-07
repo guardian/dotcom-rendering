@@ -78,6 +78,8 @@ const navStyles = css`
 	}
 	${from.tablet} {
 		padding-top: ${space[3]}px;
+		padding-left: ${space[4]}px;
+		padding-right: ${space[4]}px;
 		height: 100vh;
 	}
 	color: white;
@@ -229,7 +231,11 @@ const buttonStyles = css`
 	svg {
 		fill: ${neutral[100]};
 	}
-	margin: ${space[2]}px;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+	${until.tablet} {
+		margin-left: ${space[2]}px;
+	}
 	border-radius: 50%;
 	height: 44px;
 	width: 44px;
@@ -305,6 +311,7 @@ const Selection = ({
 				${from.tablet} {
 					text-align: center;
 					padding-top: 2.25rem;
+					margin-bottom: ${space[1]}px;
 				}
 				${textSans.xsmall()};
 				color: ${neutral[86]};
