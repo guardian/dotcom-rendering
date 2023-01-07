@@ -257,8 +257,11 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	});
 
 	LIs.forEach((LI) => {
-		LI.addEventListener('click', () => {
+		LI.addEventListener('mousedown', (event) => {
 			toggleInfo();
+			// We want to maintain focus so halt all further actions
+			event.preventDefault();
+			event.stopPropagation();
 		});
 	});
 
