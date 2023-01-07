@@ -69,12 +69,29 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	// Functions
+
+	/**
+	 * Returns a list of all the html elements on the *active* page that can be tabbed to
+	 *
+	 * Any elements that are off screen, such as caption links for images that are not
+	 * currently showing, are ignored
+	 */
 	function getTabableElements(): HTMLElement[] {
-		return Array.from(
-			lightbox.querySelectorAll(
-				'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
-			),
+		function getElements(parent: HTMLElement): HTMLElement[] {
+			return Array.from(
+				parent.querySelectorAll(
+					'button:not([disabled]), a:not([disabled]), input:not([disabled]), select:not([disabled])',
+				),
+			);
+		}
+		const currentPosition = getPosition();
+		const currentPage = lightbox.querySelector<HTMLElement>(
+			`li[data-index="${currentPosition}"]`,
 		);
+		const nav = lightbox.querySelector('nav');
+		const elementsFromPage = currentPage ? getElements(currentPage) : [];
+		const elementsFromNav = nav ? getElements(nav) : [];
+		return [...elementsFromNav, ...elementsFromPage];
 	}
 
 	function select(position: number): void {
