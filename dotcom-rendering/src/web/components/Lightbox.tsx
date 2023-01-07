@@ -230,6 +230,7 @@ const figureStyles = css`
 const buttonStyles = css`
 	svg {
 		fill: ${neutral[100]};
+		margin-top: 3px;
 	}
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[2]}px;
