@@ -89,31 +89,20 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			`li[data-index="${currentPosition}"]`,
 		);
 		const nav = lightbox.querySelector('nav');
-		const elementsFromPage = currentPage ? getElements(currentPage) : [];
+		const elementsFromCaption = currentPage ? getElements(currentPage) : [];
 		const elementsFromNav = nav ? getElements(nav) : [];
-		return [...elementsFromPage, ...elementsFromNav];
+		if (lightbox.classList.contains('hide-info')) {
+			// The caption is hidden
+			return elementsFromNav;
+		} else {
+			return [...elementsFromCaption, ...elementsFromNav];
+		}
 	}
 
 	function select(position: number): void {
 		if (positionDisplay) {
 			positionDisplay.innerHTML = position.toString();
 		}
-		// Mark this page as active
-		lightbox
-			.querySelector(
-				`ul#lightbox-images > li[data-index="${position}"] aside`,
-			)
-			?.removeAttribute('inert');
-		// Mark all other pages as inert
-		// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert
-		// We do this to prevent the browser tabbing into them
-		lightbox
-			.querySelectorAll(
-				`ul#lightbox-images > li:not([data-index="${position}"]) aside`,
-			)
-			.forEach((aside) => {
-				aside.setAttribute('inert', '');
-			});
 	}
 
 	function pulseButton(button: HTMLButtonElement): void {
@@ -223,12 +212,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}
 	}
 
-	function isFocussed(element: HTMLElement): boolean {
-		return (
-			document.activeElement?.classList.value === element.classList.value
-		);
-	}
-
 	// Event listeners
 	lightboxButtons.forEach((button) => {
 		button.addEventListener('click', () => {
@@ -272,25 +255,40 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	lightbox.addEventListener('keydown', (event) => {
 		switch (event.code) {
 			case 'Tab': {
+				event.preventDefault();
 				const tabableElements = getTabableElements();
-				const firstFocusableElement = tabableElements[0];
-				const lastFocusableElement =
+				const activeElement = tabableElements.find(
+					(element) => element === document.activeElement,
+				);
+				const firstTabableElement = tabableElements[0];
+				const lastTabableElement =
 					tabableElements[tabableElements.length - 1];
 
-				// This won't happen but we need to appease typescript
-				if (!firstFocusableElement || !lastFocusableElement) return;
-
-				if (event.shiftKey) {
-					if (isFocussed(firstFocusableElement)) {
-						event.preventDefault();
-						lastFocusableElement.focus();
-					}
+				if (!activeElement) {
+					// Start at the start
+					firstTabableElement?.focus();
 				} else {
-					if (isFocussed(lastFocusableElement)) {
-						event.preventDefault();
-						firstFocusableElement.focus();
+					const currentPosition =
+						tabableElements.indexOf(activeElement);
+					const firstElementHasFocus = currentPosition === 0;
+					const lastElementHasFocus =
+						currentPosition === tabableElements.length - 1;
+
+					if (event.shiftKey) {
+						if (firstElementHasFocus) {
+							lastTabableElement?.focus();
+						} else {
+							tabableElements[currentPosition - 1]?.focus();
+						}
+					} else {
+						if (lastElementHasFocus) {
+							firstTabableElement?.focus();
+						} else {
+							tabableElements[currentPosition + 1]?.focus();
+						}
 					}
 				}
+
 				break;
 			}
 			case 'ArrowLeft':
