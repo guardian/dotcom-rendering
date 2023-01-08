@@ -61,7 +61,7 @@ const dialogStyles = css`
 const containerStyles = css`
 	display: flex;
 	height: 100%;
-	flex-direction: row-reverse;
+	flex-direction: row;
 	${until.tablet} {
 		flex-direction: column;
 	}
@@ -369,73 +369,6 @@ export const Lightbox = ({ format, images }: Props) => {
 			/>
 			<dialog css={dialogStyles} id="gu-lightbox" aria-modal="true">
 				<div css={containerStyles}>
-					<nav css={navStyles}>
-						<button
-							type="button"
-							css={[buttonStyles, closeButtonStyles]}
-							className="close"
-							title="Close [ESC or Q]"
-						>
-							<SvgCross />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Close dialogue
-							</span>
-						</button>
-						<Hide until="tablet">
-							<Selection countOfImages={images.length} />
-						</Hide>
-						<button
-							type="button"
-							css={[buttonStyles, arrowButtonStyles]}
-							className="previous"
-							title="Previous image [←]"
-						>
-							<SvgArrowLeftStraight />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Previous image
-							</span>
-						</button>
-						<button
-							type="button"
-							css={[buttonStyles, arrowButtonStyles]}
-							className="next"
-							title="Next image [→]"
-							// eslint-disable-next-line jsx-a11y/no-autofocus -- because it's a dialog and we need to decide this
-							autoFocus={true}
-						>
-							<SvgArrowRightStraight />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Next image
-							</span>
-						</button>
-						<button
-							type="button"
-							css={[buttonStyles, infoButtonStyles]}
-							className="info"
-							title="Toggle caption [i]"
-						>
-							<SvgInfo />
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Toggle caption
-							</span>
-						</button>
-					</nav>
 					<ul id="lightbox-images" css={ulStyles}>
 						{images.map((image, index) => {
 							// Legacy images do not have a master so we fallback to the largest available
@@ -579,6 +512,71 @@ export const Lightbox = ({ format, images }: Props) => {
 							);
 						})}
 					</ul>
+					<nav css={navStyles}>
+						<button
+							type="button"
+							css={[buttonStyles, closeButtonStyles]}
+							className="close"
+							title="Close [ESC or Q]"
+						>
+							<SvgCross />
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								Close dialogue
+							</span>
+						</button>
+						<Hide until="tablet">
+							<Selection countOfImages={images.length} />
+						</Hide>
+						<button
+							type="button"
+							css={[buttonStyles, arrowButtonStyles]}
+							className="previous"
+							title="Previous image [←]"
+						>
+							<SvgArrowLeftStraight />
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								Previous image
+							</span>
+						</button>
+						<button
+							type="button"
+							css={[buttonStyles, arrowButtonStyles]}
+							className="next"
+							title="Next image [→]"
+						>
+							<SvgArrowRightStraight />
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								Next image
+							</span>
+						</button>
+						<button
+							type="button"
+							css={[buttonStyles, infoButtonStyles]}
+							className="info"
+							title="Toggle caption [i]"
+						>
+							<SvgInfo />
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								Toggle caption
+							</span>
+						</button>
+					</nav>
 				</div>
 			</dialog>
 		</>
