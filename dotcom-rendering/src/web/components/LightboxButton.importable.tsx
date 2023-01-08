@@ -91,7 +91,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		const nav = lightbox.querySelector('nav');
 		const elementsFromPage = currentPage ? getElements(currentPage) : [];
 		const elementsFromNav = nav ? getElements(nav) : [];
-		return [...elementsFromNav, ...elementsFromPage];
+		return [...elementsFromPage, ...elementsFromNav];
 	}
 
 	function select(position: number): void {
