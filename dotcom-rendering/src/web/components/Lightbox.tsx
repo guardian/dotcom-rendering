@@ -370,7 +370,11 @@ export const Lightbox = ({ format, images }: Props) => {
 			/>
 			<dialog css={dialogStyles} id="gu-lightbox" aria-modal="true">
 				<div css={containerStyles}>
-					<ul id="lightbox-images" css={ulStyles}>
+					<ul
+						id="lightbox-images"
+						css={ulStyles}
+						aria-label="All images"
+					>
 						{images.map((image, index) => {
 							// Legacy images do not have a master so we fallback to the largest available
 							const master: string | undefined =
