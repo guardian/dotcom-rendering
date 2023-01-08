@@ -100,17 +100,19 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}
 		// Mark this page as active
 		lightbox
-			.querySelector(`ul#lightbox-images > li[data-index="${position}"]`)
+			.querySelector(
+				`ul#lightbox-images > li[data-index="${position}"] aside`,
+			)
 			?.removeAttribute('inert');
 		// Mark all other pages as inert
 		// https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert
 		// We do this to prevent the browser tabbing into them
 		lightbox
 			.querySelectorAll(
-				`ul#lightbox-images > li:not([data-index="${position}"])`,
+				`ul#lightbox-images > li:not([data-index="${position}"]) aside`,
 			)
-			.forEach((li) => {
-				li.setAttribute('inert', 'true');
+			.forEach((aside) => {
+				aside.setAttribute('inert', '');
 			});
 	}
 
