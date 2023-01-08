@@ -320,6 +320,7 @@ const Selection = ({
 					margin-bottom: ${space[2]}px;
 				}
 			`}
+			aria-hidden="true"
 			data-cy="lightbox-selected"
 		>
 			<span css={highlightedStyles} className="selected">
