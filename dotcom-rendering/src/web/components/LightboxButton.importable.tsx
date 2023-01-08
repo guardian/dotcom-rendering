@@ -159,7 +159,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		function eagerLoad(position: number) {
 			const allImages =
 				lightbox.querySelectorAll<HTMLImageElement>('li img');
-			const imgArray = allImages ? Array.from(allImages) : [];
+			const imgArray = Array.from(allImages);
 			const imgElement = imgArray[position - 1];
 			if (imgElement) imgElement.loading = 'eager';
 		}
