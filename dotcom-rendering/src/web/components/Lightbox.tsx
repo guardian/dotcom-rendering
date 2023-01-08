@@ -436,7 +436,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							</span>
 						</button>
 					</nav>
-					<ul css={ulStyles}>
+					<ul id="lightbox-images" css={ulStyles}>
 						{images.map((image, index) => {
 							// Legacy images do not have a master so we fallback to the largest available
 							const master: string | undefined =
