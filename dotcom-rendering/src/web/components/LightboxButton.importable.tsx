@@ -56,7 +56,8 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const infoButton = lightbox.querySelector<HTMLButtonElement>('button.info');
 	const closeButton =
 		lightbox.querySelector<HTMLButtonElement>('button.close');
-	const positionDisplay = lightbox.querySelector<HTMLElement>('.selected');
+	const positionDisplay =
+		lightbox.querySelector<HTMLElement>('nav .selected');
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
 	const LIs = lightbox.querySelectorAll('li');
 	const images = lightbox.querySelectorAll('li img');
