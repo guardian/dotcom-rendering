@@ -4,10 +4,11 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import { calloutShare, calloutSharelink, supportingText } from './styles';
 
-export const ShareLink: FC<{ format: ArticleFormat; title: string }> = ({
-	format,
-	title,
-}) => {
+export const ShareLink: FC<{
+	format: ArticleFormat;
+	title: string;
+	urlAnchor: string;
+}> = ({ format, title, urlAnchor }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
@@ -17,7 +18,7 @@ Share your experience: ${title}
 `;
 		const shareText = `
 I saw this callout on an article I was reading and thought you might like to share your story.
-${url}
+${url}#${urlAnchor}
 You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
 		`;
 		if ('share' in navigator) {

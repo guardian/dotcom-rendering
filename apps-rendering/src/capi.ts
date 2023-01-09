@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
@@ -20,7 +21,6 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
-import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 
 // ----- Lookups ----- //
 
@@ -249,71 +249,70 @@ const getMockPromotedNewsletter = (
  * @param content the content to check for presence of a callout tag
  * @returns a mock `Campaign`, or `[]` if `content` does not include a callout tag
  */
-const getMockCampaigns = (
-	content: Content,
-): Campaign[] => {
+const getMockCampaigns = (content: Content): Campaign[] => {
 	const campaigns: Campaign[] = [];
 	const calloutTagPrefix = 'campaign/callout/';
 	const calloutTag = tagsOfType(TagType.CAMPAIGN)(content.tags).find(
 		(campaignTag) => campaignTag.id.startsWith(calloutTagPrefix),
 	);
 	if (calloutTag) {
-		campaigns.push(
-			{
-				id: "f0ca1269-69d6-4535-9540-51a43c2a8217",
-				name: 'Test callout',
-				priority: 0,
-				displayOnSensitive: false,
-				fields: {
-					kind: "callout",
-					callout: {
-					  callout: "Share your experiences",
-					  formId: 3936020,
-					  tagName: "callout-breaking-news-event",
-					  description: "<p>If you have been affected or have any information, we'd like to hear \nfrom you</p>",
-					  formFields: [
+		campaigns.push({
+			id: 'f0ca1269-69d6-4535-9540-51a43c2a8217',
+			name: 'Test callout',
+			priority: 0,
+			displayOnSensitive: false,
+			fields: {
+				kind: 'callout',
+				callout: {
+					callout: 'Share your experiences',
+					formId: 3936020,
+					tagName: 'callout-breaking-news-event',
+					description:
+						"<p>If you have been affected or have any information, we'd like to hear \nfrom you</p>",
+					formFields: [
 						{
-						  id: "94480027",
-						  label: "Share your experiences or news tips here",
-						  name: "share_your_experiences_or_news_tips_here",
-						  description: "Please include as much detail as possible ",
-						  type: "textarea",
-						  mandatory: true,
-						  options: []
+							id: '94480027',
+							label: 'Share your experiences or news tips here',
+							name: 'share_your_experiences_or_news_tips_here',
+							description:
+								'Please include as much detail as possible ',
+							type: 'textarea',
+							mandatory: true,
+							options: [],
 						},
 						{
-						  id: "94480028",
-						  label: "Name",
-						  name: "name",
-						  description: "You do not need to use your full name",
-						  type: "text",
-						  mandatory: true,
-						  options: []
+							id: '94480028',
+							label: 'Name',
+							name: 'name',
+							description:
+								'You do not need to use your full name',
+							type: 'text',
+							mandatory: true,
+							options: [],
 						},
 						{
-						  id: "94480031",
-						  label: "Can we publish your response?",
-						  name: "can_we_publish_your_response",
-						  type: "radio",
-						  mandatory: true,
-						  options: [
-							{
-							  label: "Yes, but please contact me first",
-							  value: "Yes, but please contact me first"
-							},
-							{
-							  label: "No, this is information only",
-							  value: "No, this is information only"
-							}
-						  ]
+							id: '94480031',
+							label: 'Can we publish your response?',
+							name: 'can_we_publish_your_response',
+							type: 'radio',
+							mandatory: true,
+							options: [
+								{
+									label: 'Yes, but please contact me first',
+									value: 'Yes, but please contact me first',
+								},
+								{
+									label: 'No, this is information only',
+									value: 'No, this is information only',
+								},
+							],
 						},
-
-					  ],
-					  formUrl: "https://guardiannewsandmedia.formstack.com/forms/breaking_news_event"
-					},
-				  }
-			}
-		)
+					],
+					formUrl:
+						'https://guardiannewsandmedia.formstack.com/forms/breaking_news_event',
+				},
+			},
+		});
 	}
 	return campaigns;
 };

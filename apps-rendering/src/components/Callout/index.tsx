@@ -111,6 +111,7 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 		{
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
+			id: `${calloutProps.heading.replace(/[\s_]+/g, '-')}-callout`,
 		},
 		Callout({
 			...calloutProps,

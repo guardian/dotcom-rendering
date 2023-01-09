@@ -17,7 +17,11 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
-import { capiEndpoint, getMockPromotedNewsletter, getMockCampaigns } from 'capi';
+import {
+	capiEndpoint,
+	getMockCampaigns,
+	getMockPromotedNewsletter,
+} from 'capi';
 import compression from 'compression';
 import type {
 	Response as ExpressResponse,
