@@ -49,9 +49,6 @@ const formatters = {
 		[Edition.UK]: dateTimeFormatter('Europe/London'),
 		[Edition.US]: dateTimeFormatter('America/New_York'),
 		[Edition.AU]: dateTimeFormatter('Australia/Sydney'),
-		// TODO: Talk to someone about this.
-		// The major bump in the version of apps-rendering-api-models requires
-		// it in order to bring in the showTableOfContents field.
 		[Edition.EUROPE]: dateTimeFormatter('Europe/Paris'),
 		[Edition.INTERNATIONAL]: dateTimeFormatter('Europe/London'),
 	},
