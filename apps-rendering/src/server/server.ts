@@ -17,7 +17,7 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
-import { capiEndpoint, getMockPromotedNewsletter } from 'capi';
+import { capiEndpoint, getMockPromotedNewsletter, getMockCampaigns } from 'capi';
 import compression from 'compression';
 import type {
 	Response as ExpressResponse,
@@ -353,6 +353,7 @@ async function serveArticleGet(
 					footballContent: resultToNullable(footballContent),
 					edition,
 					promotedNewsletter: getMockPromotedNewsletter(content),
+					campaigns: getMockCampaigns(content),
 				};
 
 				const richLinkDetails = req.query.richlink === '';
