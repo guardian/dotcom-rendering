@@ -123,6 +123,6 @@
 		"webpack-manifest-plugin": "^5.0.0",
 		"whatwg-fetch": "^3.6.2",
 		"winston": "^3.8.2",
-		"winston-daily-rotate-file": "^4.5.5"
+		"winston-daily-rotate-file": "^4.7.1"
 	}
 }
