@@ -9,7 +9,8 @@ import type { CountryCode } from '@guardian/libs';
  */
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
 	return getLocale().catch((error) => {
-		if ('name' in error && error.name === 'SecurityError') return null;
+		if (error instanceof Error && error.name === 'SecurityError')
+			return null;
 
 		console.log(`Error getting location from libs/getLocale`);
 		window.guardian.modules.sentry.reportError(error, 'get-country-code');
