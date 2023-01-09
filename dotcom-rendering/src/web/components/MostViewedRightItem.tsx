@@ -37,11 +37,11 @@ const linkTagStyles = css`
 		color: ${text.anchorSecondary};
 	}
 
-	&:visited h3 {
+	&:visited h4 {
 		color: ${neutral[46]};
 	}
 
-	&:hover h3 {
+	&:hover h4 {
 		text-decoration: underline;
 	}
 `;
