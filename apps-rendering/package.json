@@ -60,7 +60,7 @@
 		"@guardian/types": "^9.0.1",
 		"@storybook/addon-knobs": "^6.4.0",
 		"@storybook/addons": "^6.4.0",
-		"@storybook/api": "^6.4.0",
+		"@storybook/api": "^6.5.15",
 		"@storybook/builder-webpack5": "^6.4.0",
 		"@storybook/components": "^6.5.15",
 		"@storybook/core-events": "^6.4.0",
