@@ -181,11 +181,15 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			return (
-				<Island deferUntil="visible">
-					<CalloutBlockComponent callout={element} format={format} />
-				</Island>
-			);
+			if (switches.callouts) {
+				return (
+					<Island deferUntil="visible">
+						<CalloutBlockComponent callout={element} format={format} />
+					</Island>
+				);
+			}
+			return null;
+
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
 				<CaptionBlockComponent
