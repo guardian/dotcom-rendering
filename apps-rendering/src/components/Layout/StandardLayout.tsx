@@ -24,6 +24,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import type { MatchScores } from 'football';
 import { getFormat } from 'item';
@@ -163,6 +164,15 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+
+					{!!item.outline?.length && (
+						<section css={articleWidthStyles}>
+							<TableOfContents
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
+					)}
 				</header>
 				<ArticleBody
 					className={[articleWidthStyles]}
