@@ -75,7 +75,7 @@ interface Fields extends ArticleFormat {
 	edition: Edition;
 	promotedNewsletter: Option<Newsletter>;
 	shouldHideAdverts: boolean;
-	outline?: Outline;
+	outline: Outline;
 }
 
 interface MatchReport extends Fields {
@@ -360,7 +360,7 @@ const parseItemFields = (
 		shouldHideAdverts: request.content.fields?.shouldHideAdverts ?? false,
 		outline: request.content.fields?.showTableOfContents
 			? fromBodyElements(body)
-			: undefined,
+			: [],
 	};
 };
 
