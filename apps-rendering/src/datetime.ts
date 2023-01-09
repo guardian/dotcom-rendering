@@ -56,7 +56,7 @@ const formatters = {
 		[Edition.UK]: timeFormatter('Europe/London', 'en-GB'),
 		[Edition.US]: timeFormatter('America/New_York', 'en-US'),
 		[Edition.AU]: timeFormatter('Australia/Sydney', 'en-AU'),
-		[Edition.EUROPE]: timeFormatter('Europe/Paris', 'en-FR'),
+		[Edition.EUROPE]: timeFormatter('Europe/Paris', 'en-GB'),
 		[Edition.INTERNATIONAL]: timeFormatter('Europe/London', 'en-GB'),
 	},
 };
