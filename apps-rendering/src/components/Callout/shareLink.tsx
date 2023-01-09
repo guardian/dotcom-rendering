@@ -17,9 +17,8 @@ export const ShareLink: FC<{
 Share your experience: ${title}
 `;
 		const shareText = `
-I saw this callout on an article I was reading and thought you might like to share your story.
-${url}#${urlAnchor}
-You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
+I saw this callout in an article: ${url}#${urlAnchor}
+You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.
 		`;
 		if ('share' in navigator) {
 			navigator

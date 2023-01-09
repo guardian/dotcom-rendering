@@ -66,9 +66,6 @@ const articleContributors = (content: Content): Tag[] =>
 const isImage = (elem: BlockElement): boolean =>
 	elem.type === ElementType.IMAGE;
 
-const isCallout = (elem: BlockElement): boolean =>
-	elem.type === ElementType.CALLOUT;
-
 const isVideo = (elem: BlockElement): boolean =>
 	elem.type === ElementType.CONTENTATOM &&
 	elem.contentAtomTypeData?.atomType === 'media';
