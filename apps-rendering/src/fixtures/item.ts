@@ -400,6 +400,7 @@ const fields = {
 	promotedNewsletter: none,
 	edition: Edition.UK,
 	shouldHideAdverts: false,
+	outline: [],
 };
 
 const article: Standard = {
