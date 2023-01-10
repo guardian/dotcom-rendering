@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	body,
+	brand,
 	neutral,
 	palette,
 	space,
@@ -13,40 +14,42 @@ import {
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 
-const descriptionStyles = (format: ArticleFormat) =>
-	css`
-		a {
-			color: ${decidePalette(format).text.richLink};
-			border-bottom: 1px solid ${decidePalette(format).text.richLink};
-			text-decoration: none;
-		}
-		padding-bottom: ${space[4]}px;
-		${body.medium()}
+const descriptionStyles = css`
+	a {
+		color: ${brand[500]};
+		border-bottom: 1px solid ${brand[500]};
+		text-decoration: none;
+	}
+	padding-bottom: ${space[4]}px;
+	${body.medium()}
 
-		p {
-			margin-bottom: ${space[3]}px;
-		}
-	`;
+	p {
+		margin-bottom: ${space[3]}px;
+	}
+`;
 
 export const CalloutDescription = ({
 	description,
-	format,
 }: {
 	description: string;
-	format: ArticleFormat;
 }) => (
-	<div css={descriptionStyles(format)}>
+	<div css={descriptionStyles}>
 		<div dangerouslySetInnerHTML={{ __html: description }}></div>
 		<div>
 			Please share your story if you are 18 or over, anonymously if you
 			wish. For more information please see our{' '}
-			<a href="https://www.theguardian.com/help/terms-of-service">
+			<a
+				data-ignore="global-link-styling"
+				href="https://www.theguardian.com/help/terms-of-service"
+			>
 				terms of service
 			</a>{' '}
 			and{' '}
-			<a href="https://www.theguardian.com/help/privacy-policy">
+			<a
+				data-ignore="global-link-styling"
+				href="https://www.theguardian.com/help/privacy-policy"
+			>
 				privacy policy
 			</a>
 			.
@@ -90,14 +93,13 @@ const shareCalloutTextStyles = css`
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = (format: ArticleFormat) =>
-	css`
-		color: ${decidePalette(format).text.calloutAccent};
-		border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
-		text-decoration: none;
-		font-weight: normal;
-		margin: 0 ${space[1]}px;
-	`;
+const shareCalloutLinkStyles = css`
+	color: ${brand[500]};
+	border-bottom: 1px solid ${brand[500]};
+	text-decoration: none;
+	font-weight: normal;
+	margin: 0 ${space[1]}px;
+`;
 
 const tooltipStyles = css`
 	${textSans.xsmall()};
@@ -122,11 +124,9 @@ const tooltipStyles = css`
 `;
 
 export const CalloutShare = ({
-	format,
 	title,
 	urlAnchor,
 }: {
-	format: ArticleFormat;
 	title: string;
 	urlAnchor: string;
 }) => {
@@ -180,7 +180,7 @@ export const CalloutShare = ({
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles(format)}
+						css={shareCalloutLinkStyles}
 					>
 						Please share this callout.
 					</Button>
@@ -196,29 +196,29 @@ export const CalloutShare = ({
 	);
 };
 
-const termsAndConditionsStyles = (format: ArticleFormat) =>
-	css`
-		a {
-			color: ${decidePalette(format).text.richLink};
-			border-bottom: 1px solid ${decidePalette(format).text.richLink};
-			text-decoration: none;
-		}
-		${textSans.small()}
-		padding-bottom: ${space[4]}px;
-	`;
+const termsAndConditionsStyles = css`
+	a {
+		color: ${brand[500]};
+		border-bottom: 1px solid ${brand[500]};
+		text-decoration: none;
+	}
+	${textSans.small()}
+	padding-bottom: ${space[4]}px;
+`;
 
-export const CalloutTermsAndConditions = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => (
-	<div css={termsAndConditionsStyles(format)}>
+export const CalloutTermsAndConditions = () => (
+	<div css={termsAndConditionsStyles}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
 		will only use the data you provide us for the purpose of the feature and
 		we will delete any personal data when we no longer require it for this
 		purpose. For true anonymity please use our{' '}
-		<a href="https://www.theguardian.com/securedrop">SecureDrop</a> service
-		instead.
+		<a
+			data-ignore="global-link-styling"
+			href="https://www.theguardian.com/securedrop"
+		>
+			SecureDrop
+		</a>{' '}
+		service instead.
 	</div>
 );

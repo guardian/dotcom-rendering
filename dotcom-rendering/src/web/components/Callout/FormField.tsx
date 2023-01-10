@@ -1,5 +1,5 @@
-import { css, ThemeProvider } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
+import { ThemeProvider } from '@emotion/react';
+import { brand } from '@guardian/source-foundations';
 import {
 	Checkbox,
 	CheckboxGroup,
@@ -12,13 +12,11 @@ import {
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import type { CampaignFieldType } from '../../../types/content';
-import { decidePalette } from '../../lib/decidePalette';
 
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	validationErrors: { [key in string]: string };
-	format: ArticleFormat;
 	formField: CampaignFieldType;
 	formData: FormDataType;
 	setFieldInFormData: (
@@ -28,7 +26,6 @@ type FormFieldProp = {
 };
 
 export const FormField = ({
-	format,
 	formField,
 	formData,
 	setFieldInFormData,
@@ -81,7 +78,7 @@ export const FormField = ({
 				<ThemeProvider
 					theme={{
 						fileInput: {
-							primary: decidePalette(format).text.richLink,
+							primary: brand[500],
 						},
 					}}
 				>

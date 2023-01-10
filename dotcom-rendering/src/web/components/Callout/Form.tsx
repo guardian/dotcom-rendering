@@ -10,7 +10,6 @@ import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
-import { decidePalette } from '../../lib/decidePalette';
 import { FormField } from './FormField';
 
 const textStyles = css`
@@ -38,11 +37,11 @@ const formFieldWrapperStyles = css`
 	flex-direction: column;
 	margin-bottom: ${space[4]}px;
 `;
-const submitButtonStyles = (format: ArticleFormat) => css`
+const submitButtonStyles = css`
 	margin: 20px 0px;
 	width: 100%;
 	display: block;
-	background-color: ${decidePalette(format).text.richLink};
+	background-color: ${brand[500]};
 	:hover {
 		background-color: ${neutral[0]};
 	}
@@ -59,24 +58,18 @@ type FormDataType = { [key in string]: any };
 
 type FormProps = {
 	formFields: CampaignFieldType[];
-	format: ArticleFormat;
 	submissionURL: string;
 	formID: string;
 };
 
-export const Form = ({
-	formFields,
-	format,
-	submissionURL,
-	formID,
-}: FormProps) => {
+export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
 	}>({});
 
 	const [networkError, setNetworkError] = useState('');
-	const [submissionSuccess, setSubmissionSuccess] = useState(true);
+	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const [twitterHandle, setTwitterHandle] = useState('');
 
 	const setFieldInFormData = (
@@ -234,7 +227,6 @@ export const Form = ({
 				<div css={formFieldWrapperStyles}>
 					<FormField
 						key={formField.id}
-						format={format}
 						formField={formField}
 						formData={formData}
 						setFieldInFormData={setFieldInFormData}
@@ -269,7 +261,7 @@ export const Form = ({
 				<Button
 					priority="primary"
 					type="submit"
-					cssOverrides={submitButtonStyles(format)}
+					cssOverrides={submitButtonStyles}
 				>
 					Submit
 				</Button>

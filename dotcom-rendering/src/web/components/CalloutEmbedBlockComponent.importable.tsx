@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { brand, neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
@@ -102,7 +102,7 @@ const descriptionStyles = css`
 
 const headingTextStyles = (palette: Palette) => css`
 	a {
-		color: ${palette.text.calloutAccent};
+		color: ${brand[500]};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;

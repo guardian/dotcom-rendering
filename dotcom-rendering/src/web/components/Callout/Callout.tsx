@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { headline, neutral, space } from '@guardian/source-foundations';
+import { brand, headline, neutral, space } from '@guardian/source-foundations';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
-import { decidePalette } from '../../lib/decidePalette';
 import {
 	CalloutDescription,
 	CalloutShare,
@@ -28,9 +26,9 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
-const titleStyles = (format: ArticleFormat) => css`
+const titleStyles = css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
-	color: ${decidePalette(format).text.calloutAccent};
+	color: ${brand[500]};
 `;
 
 const subtitleTextHeaderStyles = css`
@@ -39,7 +37,6 @@ const subtitleTextHeaderStyles = css`
 `;
 
 export interface CalloutBlockProps {
-	format: ArticleFormat;
 	heading: string;
 	description: string;
 	formFields: CampaignFieldType[];
@@ -49,7 +46,6 @@ export interface CalloutBlockProps {
 }
 
 export const CalloutBlock = ({
-	format,
 	heading,
 	description,
 	formFields,
@@ -64,7 +60,6 @@ export const CalloutBlock = ({
 			content: (
 				<Form
 					formFields={formFields}
-					format={format}
 					submissionURL={submissionURL}
 					formID={formId}
 				/>
@@ -73,24 +68,20 @@ export const CalloutBlock = ({
 		{
 			id: 'contact',
 			text: 'Message us',
-			content: <MessageUs format={format} />,
+			content: <MessageUs />,
 		},
 	];
 
 	return (
 		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
 			<div css={summaryContentWrapper}>
-				<div css={titleStyles(format)}>Tell us</div>
+				<div css={titleStyles}>Tell us</div>
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
-				<CalloutDescription format={format} description={description} />
+				<CalloutDescription description={description} />
 			</div>
-			<CalloutTermsAndConditions format={format} />
+			<CalloutTermsAndConditions />
 			<div>
-				<CalloutShare
-					format={format}
-					title={heading}
-					urlAnchor={formId}
-				/>
+				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"

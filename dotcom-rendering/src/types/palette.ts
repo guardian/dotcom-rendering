@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		calloutAccent: Colour;
 		headline: Colour;
 		headlineWhenMatch: Colour;
 		seriesTitle: Colour;

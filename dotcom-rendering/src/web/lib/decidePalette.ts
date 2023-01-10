@@ -1546,29 +1546,6 @@ const textRichLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textCalloutAccent = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
-		case ArticlePillar.Culture:
-			return culture[350];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return BLACK;
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const textPagination = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -2046,7 +2023,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			calloutAccent: textCalloutAccent(format),
 			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
