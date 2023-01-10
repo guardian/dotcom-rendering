@@ -183,7 +183,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return (
 				<Island deferUntil="visible">
-					<CalloutBlockComponent callout={element} format={format} />
+					<CalloutBlockComponent callout={element} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
