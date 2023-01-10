@@ -13,6 +13,7 @@ export const Logos = () => (
 	>
 		{editionList.map(({ editionId }) => (
 			<li
+				key={editionId}
 				css={css`
 					position: relative;
 					margin: ${space[3]}px 0;

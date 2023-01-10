@@ -268,6 +268,7 @@ const fields = {
 	edition: Edition.UK,
 	promotedNewsletter: none,
 	shouldHideAdverts: false,
+	outline: [],
 };
 
 const pinnedBlock: LiveBlock = {

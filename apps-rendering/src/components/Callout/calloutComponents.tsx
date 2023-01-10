@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { info, tab, tabContainer, termsConditions } from './styles';
+import { highlight, info, termsConditions } from './styles';
 
 export const TermsAndConditions: FC = () => (
 	<div css={termsConditions}>
@@ -35,11 +35,18 @@ export const ContactText: FC = () => (
 	</div>
 );
 
-/* This component will be replaced with functioning tabs at some point */
-/* But for now its just a styled div, as we don't have the Share tab in scope */
-
-export const PseudoTab: FC = () => (
-	<div css={tabContainer}>
-		<div css={tab}>Tell us here</div>
+export const InactiveCallout: FC = () => (
+	<div css={highlight}>
+		<p>This callout is now closed to any further submissions.</p>
+		<p>
+			You can see{' '}
+			<a href="https://www.theguardian.com/profile/guardian-community-team">
+				other Guardian community callouts here
+			</a>{' '}
+			or{' '}
+			<a href="https://www.theguardian.com/community/2015/sep/02/guardianwitness-send-us-a-story">
+				tell us about a story here.
+			</a>
+		</p>
 	</div>
 );

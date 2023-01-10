@@ -265,6 +265,46 @@ export const Card25Media25Tall = ({
 };
 
 /**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33Tall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			trailText={
+				trail.supportingContent === undefined ||
+				trail.supportingContent.length === 0
+					? trail.trailText
+					: undefined
+			}
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+		/>
+	);
+};
+
+/**
  * ┏━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
  * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃        50%       ┊
  * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃     Remaining    ┊

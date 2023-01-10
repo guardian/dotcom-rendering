@@ -212,7 +212,7 @@ export const DeadBlogStory = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<Wrapper>
+				<Wrapper key={JSON.stringify(format)}>
 					<p>{getThemeNameAsString(format)}</p>
 					<SubMeta
 						format={format}
