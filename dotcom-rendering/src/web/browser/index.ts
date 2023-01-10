@@ -12,6 +12,7 @@ import { relativeTime } from './entries/relativeTime';
 import { sentryLoader } from './entries/sentryLoader';
 import { startup } from './startup';
 
+// this could be smarter, e.g. batching startups or awaiting consent
 startup('sentryLoader', null, sentryLoader);
 startup('bootCmp', null, bootCmp);
 startup('ga', null, ga);
