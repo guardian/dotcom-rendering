@@ -6,7 +6,11 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button, SvgShareCallout } from '@guardian/source-react-components';
+import {
+	Button,
+	SvgShareCallout,
+	InlineSuccess,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -94,9 +98,18 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 		margin: 0 ${space[1]}px;
 	`;
 
-const supportingText = css`
-	${textSans.xsmall()};
-	color: ${neutral[46]};
+const tooltipStyles = css`
+	/* Position the tooltip text */
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0 0 5px 5px ${neutral[60]};
+	padding: 10px;
+	z-index: 1;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -100px;
 `;
 
 export const CalloutShare = ({
@@ -121,13 +134,17 @@ export const CalloutShare = ({
 			const shareTitle = `
 			Share your experience: ${'PLACEHOLDER TITLE'}
 			`;
+
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}
 			You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.`;
+
 			await navigator.share({
 				title: shareTitle,
 				text: shareText,
 			});
+			setIsCopied(true);
+			setTimeout(() => setIsCopied(false), 2000);
 		}
 
 		if ('clipboard' in navigator) {
@@ -161,9 +178,10 @@ export const CalloutShare = ({
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<span css={supportingText} role="alert">
-							{' '}
-							Link copied to clipboard
+						<span css={tooltipStyles} role="alert">
+							<InlineSuccess>
+								Link copied to clipboard
+							</InlineSuccess>
 						</span>
 					)}
 				</div>
