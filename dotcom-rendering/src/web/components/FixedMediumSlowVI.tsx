@@ -1,9 +1,9 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
-	Card25Media25Tall,
+	Card25Media25TallNoTrail,
 	Card25Media25TallSmallHeadline,
-	Card75Media66,
+	Card75Media50Right,
 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -28,7 +28,7 @@ export const FixedMediumSlowVI = ({
 			<UL direction="row" padBottom={true}>
 				{firstSlice75.map((trail) => (
 					<LI key={trail.url} padSides={true} percentage={'75%'}>
-						<Card75Media66
+						<Card75Media50Right
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
@@ -43,7 +43,7 @@ export const FixedMediumSlowVI = ({
 						containerPalette={containerPalette}
 						percentage={'25%'}
 					>
-						<Card25Media25Tall
+						<Card25Media25TallNoTrail
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
