@@ -1,27 +1,26 @@
 import { css } from '@emotion/react';
 import {
+	brand,
 	neutral,
 	palette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button, InlineSuccess } from '@guardian/source-react-components';
+import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 import { FormField } from './FormField';
 
-const submitButtonStyles = (format: ArticleFormat) => css`
-	margin: 20px 0px;
-	width: 100%;
-	display: block;
-	background-color: ${decidePalette(format).text.richLink};
-	:hover {
-		background-color: ${neutral[0]};
-	}
+const textStyles = css`
+	${textSans.xsmall()};
 `;
 
+const tickBoxStyles = css`
+	fill: ${brand[500]};
+	width: 48px;
+`;
 const errorTextStyles = css`
 	color: ${palette.error[400]};
 	${textSans.medium({ fontWeight: 'bold' })};
@@ -37,6 +36,16 @@ const formStyles = css`
 const formFieldWrapperStyles = css`
 	display: flex;
 	flex-direction: column;
+	margin-bottom: ${space[4]}px;
+`;
+const submitButtonStyles = (format: ArticleFormat) => css`
+	margin: 20px 0px;
+	width: 100%;
+	display: block;
+	background-color: ${decidePalette(format).text.richLink};
+	:hover {
+		background-color: ${neutral[0]};
+	}
 `;
 
 const footerPaddingStyles = css`
@@ -44,10 +53,6 @@ const footerPaddingStyles = css`
 	flex-direction: row;
 	justify-content: space-between;
 	padding-bottom: ${space[4]}px;
-`;
-
-const textStyles = css`
-	${textSans.medium()};
 `;
 
 type FormDataType = { [key in string]: any };
@@ -71,7 +76,7 @@ export const Form = ({
 	}>({});
 
 	const [networkError, setNetworkError] = useState('');
-	const [submissionSuccess, setSubmissionSuccess] = useState(false);
+	const [submissionSuccess, setSubmissionSuccess] = useState(true);
 	const [twitterHandle, setTwitterHandle] = useState('');
 
 	const setFieldInFormData = (
@@ -175,11 +180,23 @@ export const Form = ({
 
 	if (submissionSuccess) {
 		return (
-			<InlineSuccess>
-				Thank you, your story has been submitted successfully. One of
-				our journalists will be in touch if we wish to take your
-				submission further.
-			</InlineSuccess>
+			<>
+				<div css={tickBoxStyles}>
+					<SvgTickRound />
+				</div>
+				<div
+					css={css`
+						${textSans.xsmall({ fontWeight: 'bold' })};
+					`}
+				>
+					Thank you!
+				</div>
+				<div css={textStyles}>
+					Your story has been submitted successfully. One of our
+					journalists will be in touch if we wish to take your
+					submission further.
+				</div>
+			</>
 		);
 	}
 

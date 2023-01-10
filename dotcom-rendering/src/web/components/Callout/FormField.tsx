@@ -27,10 +27,6 @@ type FormFieldProp = {
 	) => void;
 };
 
-const formFieldStyles = css`
-	margin-top: ${space[2]}px;
-`;
-
 export const FormField = ({
 	format,
 	formField,
@@ -48,187 +44,173 @@ export const FormField = ({
 	switch (formField.type) {
 		case 'text': {
 			return (
-				<div css={formFieldStyles}>
-					<TextInput
-						name={name}
-						label={label}
-						hideLabel={hideLabel}
-						supporting={description}
-						optional={!required}
-						value={fieldValue}
-						error={fieldError}
-						data-testid={`form-field-${formField.id}`}
-						type={formField.type}
-						onChange={(e): void =>
-							setFieldInFormData(formField.id, e.target.value)
-						}
-					/>
-				</div>
+				<TextInput
+					name={name}
+					label={label}
+					hideLabel={hideLabel}
+					supporting={description}
+					optional={!required}
+					value={fieldValue}
+					error={fieldError}
+					data-testid={`form-field-${formField.id}`}
+					type={formField.type}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+				/>
 			);
 		}
 		case 'textarea':
 			return (
-				<div css={formFieldStyles}>
-					<TextArea
-						name={name}
-						label={label}
-						hideLabel={hideLabel}
-						supporting={description}
-						optional={!required}
-						value={fieldValue}
-						error={fieldError}
-						data-testid={`form-field-${formField.id}`}
-						onChange={(e): void =>
-							setFieldInFormData(formField.id, e.target.value)
-						}
-					/>
-				</div>
+				<TextArea
+					name={name}
+					label={label}
+					hideLabel={hideLabel}
+					supporting={description}
+					optional={!required}
+					value={fieldValue}
+					error={fieldError}
+					data-testid={`form-field-${formField.id}`}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+				/>
 			);
 		case 'file':
 			return (
-				<div css={formFieldStyles}>
-					<ThemeProvider
-						theme={{
-							fileInput: {
-								primary: decidePalette(format).text.richLink,
-							},
-						}}
-					>
-						<FileInput
-							label={label}
-							hideLabel={hideLabel}
-							supporting={description}
-							optional={!required}
-							error={fieldError}
-							data-testid={`form-field-${formField.id}`}
-							onUpload={(file: string | undefined): void =>
-								setFieldInFormData(formField.id, file)
-							}
-						/>
-					</ThemeProvider>
-				</div>
-			);
-		case 'select':
-			return (
-				<div css={formFieldStyles}>
-					<Select
-						name={name}
+				<ThemeProvider
+					theme={{
+						fileInput: {
+							primary: decidePalette(format).text.richLink,
+						},
+					}}
+				>
+					<FileInput
 						label={label}
 						hideLabel={hideLabel}
 						supporting={description}
 						optional={!required}
-						value={fieldValue}
 						error={fieldError}
 						data-testid={`form-field-${formField.id}`}
-						onChange={(e): void =>
-							setFieldInFormData(formField.id, e.target.value)
+						onUpload={(file: string | undefined): void =>
+							setFieldInFormData(formField.id, file)
 						}
-						children={[
-							{
-								value: 'default',
-								label: 'Please choose an option',
-							},
-						]
-							.concat(formField.options)
-							.map(({ value, label }) => {
-								return (
-									<Option key={value} value={value}>
-										{label}
-									</Option>
-								);
-							})}
 					/>
-				</div>
+				</ThemeProvider>
+			);
+		case 'select':
+			return (
+				<Select
+					name={name}
+					label={label}
+					hideLabel={hideLabel}
+					supporting={description}
+					optional={!required}
+					value={fieldValue}
+					error={fieldError}
+					data-testid={`form-field-${formField.id}`}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+					children={[
+						{
+							value: 'default',
+							label: 'Please choose an option',
+						},
+					]
+						.concat(formField.options)
+						.map(({ value, label }) => {
+							return (
+								<Option key={value} value={value}>
+									{label}
+								</Option>
+							);
+						})}
+				/>
 			);
 		case 'checkbox':
 			return (
-				<div css={formFieldStyles}>
-					<CheckboxGroup
-						name={name}
-						label={label}
-						hideLabel={hideLabel}
-						supporting={description}
-						error={fieldError ? fieldError : undefined}
-						data-testid={`form-field-${formField.id}`}
-					>
-						{formField.options.map((option, index) => {
-							const selectedCheckboxesArray: string[] =
-								formData[formField.id] ?? [];
+				<CheckboxGroup
+					name={name}
+					label={label}
+					hideLabel={hideLabel}
+					supporting={description}
+					error={fieldError ? fieldError : undefined}
+					data-testid={`form-field-${formField.id}`}
+				>
+					{formField.options.map((option, index) => {
+						const selectedCheckboxesArray: string[] =
+							formData[formField.id] ?? [];
 
-							const isCheckboxChecked =
-								!!selectedCheckboxesArray.find(
-									(ele: string) => ele === option.value,
-								);
-
-							const filterOutCheckboxFromArray = () =>
-								selectedCheckboxesArray.filter(
-									(ele: string) => ele !== option.value,
-								);
-
-							const addCheckboxToArray = () => [
-								...selectedCheckboxesArray,
-								option.value,
-							];
-
-							return (
-								<Checkbox
-									name={name}
-									label={option.label}
-									value={option.value}
-									checked={isCheckboxChecked}
-									error={fieldError ? true : false}
-									data-testid={`form-field-${option.value}`}
-									onChange={(): void =>
-										setFieldInFormData(
-											id,
-											isCheckboxChecked
-												? filterOutCheckboxFromArray()
-												: addCheckboxToArray(),
-										)
-									}
-								/>
+						const isCheckboxChecked =
+							!!selectedCheckboxesArray.find(
+								(ele: string) => ele === option.value,
 							);
-						})}
-					</CheckboxGroup>
-				</div>
+
+						const filterOutCheckboxFromArray = () =>
+							selectedCheckboxesArray.filter(
+								(ele: string) => ele !== option.value,
+							);
+
+						const addCheckboxToArray = () => [
+							...selectedCheckboxesArray,
+							option.value,
+						];
+
+						return (
+							<Checkbox
+								name={name}
+								label={option.label}
+								value={option.value}
+								checked={isCheckboxChecked}
+								error={fieldError ? true : false}
+								data-testid={`form-field-${option.value}`}
+								onChange={(): void =>
+									setFieldInFormData(
+										id,
+										isCheckboxChecked
+											? filterOutCheckboxFromArray()
+											: addCheckboxToArray(),
+									)
+								}
+							/>
+						);
+					})}
+				</CheckboxGroup>
 			);
 		case 'radio':
 			return (
-				<div css={formFieldStyles}>
-					<RadioGroup
-						label={formField.label}
-						supporting={formField.description}
-						error={validationErrors?.[formField.id]}
-						name={formField.name}
-						orientation={
-							formField.options.length > 2
-								? 'vertical'
-								: 'horizontal'
-						}
-					>
-						{formField.options.map((option, index) => {
-							return (
-								<Radio
-									data-testid={`form-field-${option.value}`}
-									key={index}
-									label={option.label}
-									value={option.value}
-									name={`${formField.id}`}
-									checked={
-										formField.id in formData &&
-										formData[formField.id] === option.value
-									}
-									onChange={(e): void =>
-										setFieldInFormData(
-											formField.id,
-											e.target.value,
-										)
-									}
-								/>
-							);
-						})}
-					</RadioGroup>
-				</div>
+				<RadioGroup
+					label={formField.label}
+					supporting={formField.description}
+					error={validationErrors?.[formField.id]}
+					name={formField.name}
+					orientation={
+						formField.options.length > 2 ? 'vertical' : 'horizontal'
+					}
+				>
+					{formField.options.map((option, index) => {
+						return (
+							<Radio
+								data-testid={`form-field-${option.value}`}
+								key={index}
+								label={option.label}
+								value={option.value}
+								name={`${formField.id}`}
+								checked={
+									formField.id in formData &&
+									formData[formField.id] === option.value
+								}
+								onChange={(e): void =>
+									setFieldInFormData(
+										formField.id,
+										e.target.value,
+									)
+								}
+							/>
+						);
+					})}
+				</RadioGroup>
 			);
 		default:
 			return null;
