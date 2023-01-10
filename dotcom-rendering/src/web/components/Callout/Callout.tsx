@@ -43,7 +43,7 @@ export interface CalloutBlockProps {
 	heading: string;
 	description: string;
 	formFields: CampaignFieldType[];
-	formId: number;
+	formId: string;
 	submissionURL: string;
 	isExpired: boolean;
 }
@@ -78,7 +78,7 @@ export const CalloutBlock = ({
 	];
 
 	return (
-		<div css={[calloutDetailsStyles, wrapperStyles]}>
+		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
 			<div css={summaryContentWrapper}>
 				<div css={titleStyles(format)}>Tell us</div>
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
@@ -86,7 +86,11 @@ export const CalloutBlock = ({
 			</div>
 			<CalloutTermsAndConditions format={format} />
 			<div>
-				<CalloutShare format={format} title={heading} />
+				<CalloutShare
+					format={format}
+					title={heading}
+					urlAnchor={formId}
+				/>
 			</div>
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"

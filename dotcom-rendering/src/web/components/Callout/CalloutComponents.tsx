@@ -101,9 +101,12 @@ const supportingText = css`
 
 export const CalloutShare = ({
 	format,
+	title,
+	urlAnchor,
 }: {
 	format: ArticleFormat;
 	title: string;
+	urlAnchor: string;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -120,7 +123,7 @@ export const CalloutShare = ({
 			`;
 			const shareText = `
 			I saw this callout on an article I was reading and thought you might like to share your story.
-			${url}
+			${url}#${urlAnchor}
 			You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
 					`;
 			await navigator.share({
@@ -130,7 +133,7 @@ export const CalloutShare = ({
 		}
 
 		if ('clipboard' in navigator) {
-			await navigator.clipboard.writeText(url);
+			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}

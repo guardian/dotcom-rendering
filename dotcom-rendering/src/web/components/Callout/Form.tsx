@@ -56,7 +56,7 @@ type FormProps = {
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
 	submissionURL: string;
-	formID: number;
+	formID: string;
 };
 
 export const Form = ({
