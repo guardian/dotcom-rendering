@@ -173,6 +173,7 @@ export const FormField = ({
 
 							return (
 								<Checkbox
+									key={`form-field-${option.value}`}
 									name={name}
 									label={option.label}
 									value={option.value}
@@ -199,7 +200,7 @@ export const FormField = ({
 					<RadioGroup
 						label={formField.label}
 						supporting={formField.description}
-						error={validationErrors?.[formField.id]}
+						error={validationErrors[formField.id]}
 						name={formField.name}
 						orientation={
 							formField.options.length > 2

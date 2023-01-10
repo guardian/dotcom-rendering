@@ -211,9 +211,8 @@ export const Form = ({
 				/>
 			)}
 			{formFields.map((formField) => (
-				<div css={formFieldWrapperStyles}>
+				<div css={formFieldWrapperStyles} key={formField.id}>
 					<FormField
-						key={formField.id}
 						format={format}
 						formField={formField}
 						formData={formData}
