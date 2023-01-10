@@ -1,4 +1,3 @@
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	Button,
 	SvgShareCallout,
@@ -9,10 +8,9 @@ import type { FC } from 'react';
 import { calloutShare, calloutSharelink, sharePopup } from './styles';
 
 export const ShareLink: FC<{
-	format: ArticleFormat;
 	title: string;
 	urlAnchor: string;
-}> = ({ format, title, urlAnchor }) => {
+}> = ({ title, urlAnchor }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
@@ -54,7 +52,7 @@ You can share your story by using the form on this article, or by contacting the
 				size="xsmall"
 				priority="subdued"
 				onClick={onShare}
-				css={calloutSharelink(format)}
+				css={calloutSharelink}
 			>
 				Please share this callout
 				{isCopied && (

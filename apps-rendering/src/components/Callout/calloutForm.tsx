@@ -1,19 +1,22 @@
 import type { FormField as FormFieldType } from '@guardian/apps-rendering-api-models/formField';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	Button,
 	InlineError,
-	InlineSuccess,
 	Link,
+	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
-import { calloutLinkContainer, calloutPrimaryButton } from './styles';
+import {
+	bold,
+	calloutLinkContainer,
+	calloutPrimaryButton,
+	success,
+} from './styles';
 
 interface CalloutFormProps {
-	format: ArticleFormat;
 	id: number;
 	fields: FormFieldType[];
 }
@@ -25,7 +28,7 @@ export type ValidationErrors = { [key in string]: string };
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
-const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
+const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
 		{},
@@ -120,13 +123,19 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	};
 
 	return (
-		<div className="js-callout-form-tab" css={calloutLinkContainer(format)}>
+		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
-				<InlineSuccess>
-					Thank you, your story has been submitted successfully. One
-					of our journalists will be in touch if we wish to take your
-					submission further.
-				</InlineSuccess>
+				<div css={success}>
+					<div>
+						<SvgTickRound size="medium" />
+					</div>
+					<p css={bold}>Thank you!</p>
+					<p>Your story has been submitted successfully.</p>
+					<p>
+						One of our journalists will be in touch if we wish to
+						take your submission further.
+					</p>
+				</div>
 			) : (
 				<form
 					method="post"
@@ -166,7 +175,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 							)}
 						</div>
 						<Button
-							css={calloutPrimaryButton(format)}
+							css={calloutPrimaryButton}
 							type="submit"
 							priority="primary"
 						>

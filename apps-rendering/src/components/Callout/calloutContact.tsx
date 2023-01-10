@@ -1,11 +1,6 @@
-import type { ArticleFormat } from '@guardian/libs';
 import { LinkButton } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
-
-interface CalloutContactProps {
-	format: ArticleFormat;
-}
 
 const WHATSAPP_GUIDANCE_URL =
 	'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian';
@@ -19,10 +14,10 @@ const OPEN_WHATSAPP_URL = `https://wa.me/${WHATSAPP_SIGNAL_NUMBER}`;
 const OPEN_TELEGRAM_URL = `https://telegram.me/${TELEGRAM_NUMBER}`;
 const OPEN_SIGNAL_URL = `https://signal.me/#p/${WHATSAPP_SIGNAL_NUMBER}`;
 
-const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
+const CalloutContact: FC = () => {
 	return (
 		<div className="js-message-us-tab">
-			<p css={[info, calloutLinkContainer(format)]}>
+			<p css={[info, calloutLinkContainer]}>
 				You can contact us on WhatsApp or Signal at{' '}
 				{WHATSAPP_SIGNAL_NUMBER} or Telegram at {TELEGRAM_NUMBER}. For
 				more information, please see our guidance on{' '}
@@ -31,13 +26,13 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 				<a href={TELEGRAM_GUIDANCE_URL}>contacting us via Telegram</a>.
 			</p>
 
-			<p css={[info, calloutLinkContainer(format)]}>
+			<p css={[info, calloutLinkContainer]}>
 				For true anonymity please use our{' '}
 				<a href={SECURE_DROP_URL}>SecureDrop</a> service instead.
 			</p>
 
 			<LinkButton
-				css={calloutPrimaryButton(format)}
+				css={calloutPrimaryButton}
 				type="submit"
 				priority="primary"
 				href={OPEN_WHATSAPP_URL}
@@ -47,7 +42,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 			</LinkButton>
 
 			<LinkButton
-				css={calloutPrimaryButton(format)}
+				css={calloutPrimaryButton}
 				type="submit"
 				priority="primary"
 				href={OPEN_TELEGRAM_URL}
@@ -57,7 +52,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 			</LinkButton>
 
 			<LinkButton
-				css={calloutPrimaryButton(format)}
+				css={calloutPrimaryButton}
 				type="submit"
 				priority="primary"
 				href={OPEN_SIGNAL_URL}
