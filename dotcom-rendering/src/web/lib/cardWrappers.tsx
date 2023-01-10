@@ -115,6 +115,53 @@ export const Card100Media100 = ({
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃Remaining┊
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃         ┊
  * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 75% of the container, with media that takes up 66%
+ *
+ * Options:
+ *  - Large headline
+ *  - Large image on the right (top on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 3 supporting content items, 1-2 aligned vertical, 3 aligned horizontal
+ */
+export const Card75Media66 = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			headlineSize="large"
+			headlineSizeOnMobile="large"
+			imageUrl={trail.image}
+			imageSize="large"
+			imagePosition="right"
+			imagePositionOnMobile="top"
+			trailText={
+				// Only show trail text if there is no supportContent
+				trail.supportingContent === undefined ||
+				trail.supportingContent.length !== 3
+					? trail.trailText
+					: undefined
+			}
+			supportingContent={trail.supportingContent?.slice(0, 3)}
+			supportingContentAlignment={
+				trail.supportingContent && trail.supportingContent.length > 2
+					? 'horizontal'
+					: 'vertical'
+			}
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┐
+ * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃   25%   ┊
+ * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃Remaining┊
+ * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃         ┊
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┘
  * Card designed to take up 75% of the container, with media that takes up 50%
  *
  * Options:
@@ -252,6 +299,47 @@ export const Card25Media25Tall = ({
 			imagePositionOnMobile="left"
 			imageSize="small"
 			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			trailText={
+				trail.supportingContent === undefined ||
+				trail.supportingContent.length === 0
+					? trail.trailText
+					: undefined
+			}
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒┃                           ┊
+ * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
+ * ┃         ┃         Remaining         ┊
+ * ┃         ┃                           ┊
+ * ┗━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Small headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card25Media25TallSmallHeadline = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="small"
 			headlineSizeOnMobile="medium"
 			trailText={
 				trail.supportingContent === undefined ||
