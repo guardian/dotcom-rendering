@@ -1,7 +1,3 @@
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
-import { renderToString } from 'react-dom/server';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -18,6 +14,7 @@ import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
+import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
 
@@ -28,21 +25,10 @@ interface Props {
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
 	const NAV = extractNAV(front.nav);
-	const key = 'dcr';
-	const cache = createCache({ key });
 
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-		createEmotionServer(cache);
-
-	const html = renderToString(
-		<CacheProvider value={cache}>
-			<FrontPage front={front} NAV={NAV} />
-		</CacheProvider>,
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<FrontPage front={front} NAV={NAV} />,
 	);
-
-	const chunks = extractCriticalToChunks(html);
-	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
