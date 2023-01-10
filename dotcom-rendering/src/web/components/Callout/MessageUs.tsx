@@ -46,9 +46,11 @@ const TELEGRAM_GUIDANCE_URL =
 	'https://www.theguardian.com/info/2022/mar/15/telegram-sharing-stories-with-the-guardian';
 const SECURE_DROP_URL = 'https://www.theguardian.com/securedrop';
 const CONTACT_NUMBER = '+447766780300';
+const SIGNAL_NUMBER = '+447766780300';
 
 const OPEN_WHATSAPP_URL = `https://wa.me/${CONTACT_NUMBER}`;
 const OPEN_TELEGRAM_URL = `https://telegram.me/${CONTACT_NUMBER}`;
+const OPEN_SIGNAL_URL = `https://signal.me/#p/${SIGNAL_NUMBER}`;
 
 export const MessageUs = ({ format }: CalloutContactProps) => {
 	return (
@@ -81,6 +83,17 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 
 			<LinkButton
 				data-ignore="global-link-styling"
+				cssOverrides={[calloutPrimaryButton(format)]}
+				type="submit"
+				priority="primary"
+				href={OPEN_TELEGRAM_URL}
+				target="_blank"
+			>
+				Message us on Telegram
+			</LinkButton>
+
+			<LinkButton
+				data-ignore="global-link-styling"
 				cssOverrides={[
 					calloutPrimaryButton(format),
 					css`
@@ -89,11 +102,10 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 				]}
 				type="submit"
 				priority="primary"
-				icon={<SvgGps />}
-				href={OPEN_TELEGRAM_URL}
+				href={OPEN_SIGNAL_URL}
 				target="_blank"
 			>
-				Message us on Telegram
+				Message us on Signal
 			</LinkButton>
 		</div>
 	);
