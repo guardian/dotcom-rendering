@@ -152,7 +152,7 @@ export const FormField = ({
 						error={fieldError ? fieldError : undefined}
 						data-testid={`form-field-${formField.id}`}
 					>
-						{formField.options.map((option, index) => {
+						{formField.options.map((option) => {
 							const selectedCheckboxesArray: string[] =
 								formData[formField.id] ?? [];
 
@@ -208,11 +208,11 @@ export const FormField = ({
 								: 'horizontal'
 						}
 					>
-						{formField.options.map((option, index) => {
+						{formField.options.map((option) => {
 							return (
 								<Radio
 									data-testid={`form-field-${option.value}`}
-									key={index}
+									key={`form-field-${option.value}`}
 									label={option.label}
 									value={option.value}
 									name={`${formField.id}`}
