@@ -21,6 +21,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
@@ -107,6 +108,14 @@ const CommentLayout: FC<Props> = ({ item }) => (
 				<section css={articleWidthStyles}>
 					<Logo item={item} />
 				</section>
+				{item.outline.length > 0 && (
+					<section css={articleWidthStyles}>
+						<TableOfContents
+							format={getFormat(item)}
+							outline={item.outline}
+						/>
+					</section>
+				)}
 			</header>
 			<ArticleBody
 				className={[articleWidthStyles]}

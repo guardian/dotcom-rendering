@@ -82,7 +82,7 @@ const parseURL = (requestURL, requestPath) => {
 	 */
 
 	let url = requestURL.includes('url=')
-		? requestURL.split('url=')[1]
+		? requestURL.split('url=')[1] ?? requestURL
 		: requestURL;
 
 	url = decodeURIComponent(url);

@@ -2987,6 +2987,9 @@
                 "isLiveBlog": {
                     "type": "boolean"
                 },
+                "masterImage": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -3036,6 +3039,9 @@
                     "$ref": "#/definitions/Branding"
                 },
                 "isSnap": {
+                    "type": "boolean"
+                },
+                "isCrossword": {
                     "type": "boolean"
                 },
                 "snapData": {

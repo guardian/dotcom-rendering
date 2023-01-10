@@ -50,6 +50,7 @@ export type Props = {
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
+	isCrossword?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
@@ -180,12 +181,17 @@ const CommentFooter = ({
 const getImage = ({
 	imageUrl,
 	avatarUrl,
+	isCrossword,
 }: {
 	imageUrl?: string;
 	avatarUrl?: string;
+	isCrossword?: boolean;
 }): { type: CardImageType; src: string } | undefined => {
 	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
-	if (imageUrl) return { type: 'mainMedia', src: imageUrl };
+	if (imageUrl) {
+		const type = isCrossword ? 'crossword' : 'mainMedia';
+		return { type, src: imageUrl };
+	}
 	return undefined;
 };
 
@@ -237,6 +243,7 @@ export const Card = ({
 	showAge = false,
 	discussionId,
 	isDynamo,
+	isCrossword,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -324,6 +331,7 @@ export const Card = ({
 	const image = getImage({
 		imageUrl,
 		avatarUrl,
+		isCrossword,
 	});
 
 	return (
@@ -351,24 +359,28 @@ export const Card = ({
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
-						{image.type === 'avatar' ? (
+						{image.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePosition={imagePosition}
 							>
 								<Avatar
-									imageSrc={image.src}
-									imageAlt={byline ?? ''}
+									src={image.src}
+									alt={byline ?? ''}
 									containerPalette={containerPalette}
 									format={format}
 								/>
 							</AvatarContainer>
-						) : (
+						)}
+						{image.type === 'mainMedia' && (
 							<CardPicture
 								master={image.src}
 								imageSize={imageSize}
 								alt=""
 							/>
+						)}
+						{image.type === 'crossword' && (
+							<img src={image.src} alt="" />
 						)}
 					</ImageWrapper>
 				)}

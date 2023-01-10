@@ -41,6 +41,7 @@ export const FrontCard = (props: Props) => {
 		showSlash: true,
 		showClock: false,
 		imageUrl: trail.image,
+		isCrossword: trail.isCrossword,
 		mediaType: trail.mediaType,
 		mediaDuration: trail.mediaDuration,
 		starRating: trail.starRating,

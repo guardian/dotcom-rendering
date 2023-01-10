@@ -36,6 +36,14 @@ const linkTagStyles = css`
 	&:active {
 		color: ${text.anchorSecondary};
 	}
+
+	&:visited h4 {
+		color: ${neutral[46]};
+	}
+
+	&:hover h4 {
+		text-decoration: underline;
+	}
 `;
 
 const lineWrapperStyles = css`
@@ -67,12 +75,6 @@ type Props = {
 export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 	const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
-	const linkProps = {
-		to: trail.url,
-		visitedColour: neutral[46],
-		preventFocus: true,
-	};
-
 	return (
 		<li
 			css={listItemStyles}
@@ -83,8 +85,8 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 					{!!trail.image && (
 						<div css={imageWrapperStyles}>
 							<Avatar
-								imageSrc={trail.image}
-								imageAlt=""
+								src={trail.image}
+								alt=""
 								format={trail.format}
 							/>
 						</div>
@@ -96,7 +98,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
-								link={linkProps}
 								kickerText="Live"
 								showSlash={false}
 								byline={
@@ -109,7 +110,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
-								link={linkProps}
 								byline={
 									trail.showByline ? trail.byline : undefined
 								}

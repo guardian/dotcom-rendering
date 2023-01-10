@@ -1,5 +1,5 @@
-import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import {
 	Card25Media25Tall,
 	Card50Media50,

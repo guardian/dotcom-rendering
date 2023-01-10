@@ -43,7 +43,7 @@ const decideImageWidths = ({
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
-}): ImageWidthType[] => {
+}): [ImageWidthType, ...ImageWidthType[]] => {
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
@@ -179,7 +179,11 @@ const generateImageURL = ({
 	resolution: 'low' | 'high';
 }): string => {
 	const url = new URL(master);
-	const [service] = url.hostname.split('.');
+
+	// In CODE, we do not generate optimised replacement images
+	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
+
+	const service = url.hostname.split('.')[0] ?? '';
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
@@ -229,7 +233,7 @@ type ImageSource = {
  */
 export const generateSources = (
 	master: string,
-	imageWidths: ImageWidthType[],
+	imageWidths: [ImageWidthType, ...ImageWidthType[]],
 ): ImageSource[] =>
 	imageWidths
 		.slice()
@@ -251,6 +255,20 @@ export const generateSources = (
 			};
 		});
 
+/**
+ * The assumption here is readers on devices that do not support srcset
+ * are likely to be on poor network connections so we're going
+ * to fallback to the smallest image.
+ *
+ * Sources are ordered in `descendingByBreakpoint` order,
+ * so the last one is the smallest.
+ */
+export const getFallbackSource = (sources: ImageSource[]): ImageSource => {
+	const [fallback] = sources.slice(-1);
+	if (!fallback) throw new Error('No fallback images found');
+	return fallback;
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -267,15 +285,8 @@ export const Picture = ({
 	);
 
 	const ratio = parseInt(height, 10) / parseInt(width, 10);
-	/**
-	 * The assumption here is readers on devices that do not support srcset
-	 * are likely to be on poor network connections so we're going
-	 * to fallback to the smallest image.
-	 *
-	 * Sources are ordered in `descendingByBreakpoint` order,
-	 * so the last one is the smallest.
-	 */
-	const [fallbackSource] = sources.slice(-1);
+
+	const fallbackSource = getFallbackSource(sources);
 
 	return (
 		<picture css={block}>

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
 import type { ImageWidthType } from './Picture';
-import { generateSources } from './Picture';
+import { generateSources, getFallbackSource } from './Picture';
 
 type Props = {
 	imageSize: ImageSizeType;
@@ -18,7 +18,9 @@ type Props = {
  * This method should cover all use cases with a lot more precision once
  * implemented thoroughly
  */
-const decideImageWidths = (imageSize: ImageSizeType): ImageWidthType[] => {
+const decideImageWidths = (
+	imageSize: ImageSizeType,
+): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		// @TODO missing image size option
 		// case 'tiny':
@@ -90,15 +92,7 @@ const aspectRatio = css`
 export const CardPicture = ({ master, alt, imageSize }: Props) => {
 	const sources = generateSources(master, decideImageWidths(imageSize));
 
-	/**
-	 * The assumption here is readers on devices that do not support srcset
-	 * are likely to be on poor network connections so we're going
-	 * to fallback to the smallest image at low resolution.
-	 *
-	 * Sources are ordered in `descendingByBreakpoint` order,
-	 * so the last one is the smallest.
-	 */
-	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
+	const fallbackSource = getFallbackSource(sources);
 
 	return (
 		<picture data-size={imageSize} css={[block, aspectRatio]}>
@@ -119,7 +113,7 @@ export const CardPicture = ({ master, alt, imageSize }: Props) => {
 				);
 			})}
 
-			<img alt={alt} src={fallbackSource} css={block} />
+			<img alt={alt} src={fallbackSource.lowResUrl} css={block} />
 		</picture>
 	);
 };

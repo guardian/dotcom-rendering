@@ -26,10 +26,12 @@ export const getGroup = (pageId: string): ContentABTestGroup => {
 	// Add the leading slash as this will be present when we apply the equivalent algorithm at the analysis stage
 	const hashedPageId = sha256(`/${pageId}`);
 	// Take the last 4 bytes of the hash
-	const lastFourBytes = hashedPageId.words[hashedPageId.words.length - 1];
+	// the sha256 function will always return a hash, even if the input is undefined.
+	const [lastFourBytes] = hashedPageId.words.slice(-1);
+
 	// Assign the group by applying mod base 12
 	// Mod can return negative values so we apply `Math.abs` to avoid negative groups
-	const group = Math.abs(lastFourBytes) % NUM_GROUPS;
+	const group = Math.abs(lastFourBytes ?? NaN) % NUM_GROUPS;
 
 	if (isContentABTestGroup(group)) {
 		return group;

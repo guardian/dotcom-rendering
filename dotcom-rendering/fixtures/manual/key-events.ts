@@ -14,7 +14,15 @@ const format = {
 	theme: ArticlePillar.News,
 };
 
-export const events: KeyEventCard[] = [
+export const events: [
+	KeyEventCard,
+	KeyEventCard,
+	KeyEventCard,
+	KeyEventCard,
+	KeyEventCard,
+	KeyEventCard,
+	KeyEventCard,
+] = [
 	{
 		id: '1234',
 		blockFirstPublished: 1613762399000,

@@ -87,12 +87,12 @@ describe('returns section for each subsection', () => {
 		[['technology'], 'Technology'],
 		[['travel', 'travel/offers'], 'Travel'],
 		[['tv-and-radio'], 'TvRadio'],
-	];
+	] as const;
 
 	it('returns correct Section for each test case', () => {
-		testCases.forEach((testCase) => {
-			for (const subsection of testCase[0]) {
-				expect(findBySubsection(subsection).name).toEqual(testCase[1]);
+		testCases.forEach(([subsections, section]) => {
+			for (const subsection of subsections) {
+				expect(findBySubsection(subsection).name).toEqual(section);
 			}
 		});
 	});

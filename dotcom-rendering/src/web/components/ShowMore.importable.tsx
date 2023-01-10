@@ -12,8 +12,8 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
+import type { DCRContainerPalette, FEFrontCard } from '../../types/front';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { useApi } from '../lib/useApi';
 import { useOnce } from '../lib/useOnce';
@@ -90,9 +90,11 @@ export const ShowMore = ({
 		 * There's no need to check `isOpen` here because if `isOpen` is
 		 * `false` then `filteredData` will be `undefined`.
 		 * */
-		if (filteredData?.length) {
+
+		const [card] = filteredData ?? [];
+		if (card) {
 			const maybeFirstCard = document.querySelector(
-				`#${showMoreContainerId} [data-link-name="${filteredData[0].dataLinkName}"]`,
+				`#${showMoreContainerId} [data-link-name="${card.dataLinkName}"]`,
 			);
 			if (maybeFirstCard instanceof HTMLElement) {
 				maybeFirstCard.focus();
@@ -150,7 +152,6 @@ export const ShowMore = ({
 				`}
 			>
 				<Button
-					priority="tertiary"
 					size="small"
 					icon={isOpen ? <SvgCross /> : <SvgPlus />}
 					isLoading={loading}
@@ -161,8 +162,10 @@ export const ShowMore = ({
 						margin-right: 10px;
 						color: ${neutral[100]};
 						background-color: ${neutral[7]};
+						border-color: ${neutral[7]};
 						&:hover {
-							color: ${neutral[7]};
+							background-color: ${neutral[46]};
+							border-color: ${neutral[46]};
 						}
 						${from.tablet} {
 							margin-left: 10px;

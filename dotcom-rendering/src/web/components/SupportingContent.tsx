@@ -71,7 +71,8 @@ const liStyles = css`
 const dynamoLiStyles = css`
 	background-color: ${transparentColour(neutral[97], 0.875)};
 	border-top: 1px solid;
-	flex-grow: 1;
+	/* 20% is arbitrary, but the cards should expand thanks for flex-grow */
+	flex: 1 0 25%;
 	margin: 0;
 `;
 
@@ -101,11 +102,13 @@ export const SupportingContent = ({
 				isDynamo ? dynamoStyles : directionStyles(alignment),
 			]}
 		>
-			{supportingContent.map((subLink, index) => {
+			{supportingContent.map((subLink, index, { length }) => {
 				// The model has this property as optional but it is very likely
 				// to exist
 				if (!subLink.headline) return null;
-				const shouldPadLeft = index > 0 && alignment === 'horizontal';
+				const shouldPadLeft =
+					!isDynamo && index > 0 && alignment === 'horizontal';
+				const isLast = index === length - 1;
 				return (
 					<li
 						key={subLink.url}
@@ -122,8 +125,7 @@ export const SupportingContent = ({
 								  ]
 								: liStyles,
 							shouldPadLeft && leftMargin,
-							index === supportingContent.length - 1 &&
-								bottomMargin,
+							isLast && bottomMargin,
 						]}
 					>
 						<CardHeadline

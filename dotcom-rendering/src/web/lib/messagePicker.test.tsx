@@ -250,7 +250,7 @@ describe('pickMessage', () => {
 		expect(got()).toEqual(null);
 		expect(record).toHaveBeenCalledWith({
 			component: 'banner-picker-timeout-dcr',
-			value: config.candidates[0].candidate.id,
+			value: config.candidates[0]?.candidate.id,
 		});
 
 		clearTimeout(timer);

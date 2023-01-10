@@ -9,7 +9,7 @@ import { RichLink } from './RichLink';
 import { Section } from './Section';
 
 const someContributor =
-	'https://i.guim.co.uk/img/uploads/2017/10/09/Oliver-Wainwright,-L.png?width=300&quality=85&auto=format&fit=max&s=e1aa270c46b716e34c4783ced3376cc9';
+	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';
 
 const someImageData = {
 	thumbnailUrl:

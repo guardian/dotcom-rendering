@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { isUndefined, log } from '@guardian/libs';
+import { isString, isUndefined, log } from '@guardian/libs';
 import { lifestyle, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
@@ -36,6 +36,68 @@ const isUnit = (unit: string): unit is typeof units[number] =>
 
 const isServer = typeof document === 'undefined';
 
+/** These values should not update based on servings  */
+const constants = [
+	's',
+	'second',
+	'seconds',
+	'min',
+	'minute',
+	'minutes',
+	'hr',
+	'hour',
+	'hours',
+	'C',
+	'c',
+	'cm',
+	'mm',
+] as const;
+const isConstant = (time?: string): time is typeof constants[number] =>
+	isString(time) &&
+	//@ts-expect-error -- custom type guard
+	constants.includes(time);
+
+const fractions = new Map([
+	['½', 0.5],
+	['⅓', 0.3333],
+	['⅔', 0.6667],
+	['¼', 0.25],
+	['¾', 0.75],
+	['⅕', 0.2],
+	['⅖', 0.4],
+	['⅗', 0.6],
+	['⅘', 0.8],
+	['⅙', 0.1667],
+	['⅚', 0.8333],
+	['⅐', 0.1429],
+	['⅛', 0.125],
+	['⅜', 0.375],
+	['⅝', 0.625],
+	['⅞', 0.875],
+	['⅑', 0.1111],
+	['⅒', 0.1],
+]);
+
+/** Pick any numeric value or range, followed by its unit */
+const RECIPE_ELEMENTS = new RegExp(
+	[
+		// Start after a word is broken, or Makes / Serves
+		`(?:${['', 'Serves ', 'Makes '].join('|')})`,
+		// `value` capturing group
+		`(?<value>${[
+			'\\d+',
+			'\\d+-\\d+',
+			'\\d+/\\d+',
+			...fractions.keys(),
+		].join('|')})`,
+		// `separator` capturing group
+		'(?:(?<separator> ?)',
+		// `unit` capturing group
+		'(?<unit>[a-z]+?\\b)|(?=<))',
+	].join(''),
+	'i',
+);
+
 const serves = isServer
 	? 1
 	: parseFloat(
@@ -47,33 +109,23 @@ const transform = ({
 	value,
 	separator,
 	unit,
-	multiplier,
 }: {
-	value: string;
+	value: number[];
 	separator: string;
 	unit: string;
-	multiplier: number;
 }) => {
-	if (value.includes('-')) {
-		const [from, to] = value.split('-').map(parseFloat);
-
-		const range = `${Math.round(from * multiplier)}-${Math.round(
-			to * multiplier,
-		)}`;
-
-		return [range, separator, unit].join('');
+	const [from, to] = value;
+	if (!from) return `Invalid value`;
+	if (to) {
+		return `${from}-${to}${separator}${unit}`;
 	}
 
-	const base = parseFloat(value);
 	if (isUnit(unit)) {
-		const round = Math.round((base * multiplier) / 5) * 5;
+		const round = Math.round(from / 5) * 5;
 		return `${round}${separator}${unit}`;
 	}
 
-	const round =
-		base > 1
-			? Math.round(base * multiplier)
-			: Math.round(base * multiplier * 100) / 100;
+	const round = from > 1 ? Math.round(from) : Math.round(from * 100) / 100;
 	return `${round}${separator}${unit}`;
 };
 
@@ -86,6 +138,88 @@ export const RecipeMultiplier = () => {
 		const style = document.createElement('style');
 		style.innerHTML = colours;
 		document.body.appendChild(style);
+
+		const root = document.querySelector(
+			'gu-island[name=RecipeMultiplier]',
+		)?.nextSibling;
+
+		if (root instanceof HTMLElement) {
+			const walker = document.createTreeWalker(
+				root,
+				NodeFilter.SHOW_TEXT,
+				null,
+			);
+
+			let node: Node | null;
+
+			while ((node = walker.nextNode())) {
+				if (!(node instanceof Text)) continue;
+
+				const match =
+					node.nodeValue?.match(RECIPE_ELEMENTS) ?? undefined;
+
+				if (!match) continue;
+
+				const { index, groups } = match;
+				const length = match[0].length;
+
+				switch (index) {
+					case undefined:
+					case -1: {
+						// Do nothing
+						break;
+					}
+					case 0: {
+						// Tom explained to me truthiness of 0 in JS. Ta.
+						if (length) node.splitText(length);
+						const recipeElement =
+							document.createElement('gu-recipe');
+						recipeElement.textContent = node.textContent;
+
+						if (isConstant(groups?.unit)) continue;
+
+						Object.entries(groups ?? {})
+							.map(([key, value]) => {
+								const [numerator, denominator] = value
+									.split('/')
+									.map(parseFloat);
+								if (
+									key === 'value' &&
+									value.includes('/') &&
+									numerator &&
+									denominator
+								) {
+									return [
+										key,
+										(numerator / denominator).toString(),
+									] as const;
+								}
+								return [
+									key,
+									fractions.get(value)?.toString() ?? value,
+								] as const;
+							})
+							.forEach(([key, value]) => {
+								recipeElement.setAttribute(
+									`data-${key}`,
+									value,
+								);
+							});
+
+						node.parentNode?.insertBefore(recipeElement, node);
+
+						node.textContent = null;
+						break;
+					}
+					default: {
+						node.splitText(index);
+						break;
+					}
+				}
+
+				log('design', index, length, node.textContent);
+			}
+		}
 	}, []);
 
 	useEffect(() => {
@@ -106,10 +240,12 @@ export const RecipeMultiplier = () => {
 				if (isUndefined(unit)) return;
 
 				element.innerText = transform({
-					value,
+					value: value
+						.split('-')
+						.map(parseFloat)
+						.map((v) => v * multiplier),
 					separator,
 					unit,
-					multiplier,
 				});
 			});
 	}, [multiplier]);

@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source-foundations';
-import type { DCRGroupedTrails } from 'src/types/front';
 import { trails } from '../../../fixtures/manual/trails';
+import type { DCRGroupedTrails } from '../../types/front';
 import { DynamicPackage } from './DynamicPackage';
 import { Section } from './Section';
 

@@ -116,7 +116,7 @@ export const CardsWithDifferentThemes = ({
 			<CardGroup>
 				{cards.slice(0, 4).map((card) => {
 					return (
-						<CardWrapper>
+						<CardWrapper key={card.title}>
 							<Card
 								{...basicCardProps}
 								format={card.format}
@@ -136,7 +136,7 @@ export const CardsWithDifferentThemes = ({
 			<CardGroup>
 				{cards.slice(4).map((card) => {
 					return (
-						<CardWrapper>
+						<CardWrapper key={card.title}>
 							<Card
 								{...basicCardProps}
 								format={card.format}
@@ -445,7 +445,7 @@ export const WithAnAvatar = () => {
 				>
 					<Card
 						{...basicCardProps}
-						avatarUrl="https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3"
+						avatarUrl="https://uploads.guim.co.uk/2017/10/06/George-Monbiot,-L.png"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Comment,

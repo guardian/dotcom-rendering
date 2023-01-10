@@ -160,7 +160,7 @@ const Series: FC<Props> = ({ item }: Props) => {
 		return <GallerySeries series={item.series} format={getFormat(item)} />;
 	}
 
-	return maybeRender(item.series, (series) => (
+	return maybeRender(item.series.toOption(), (series) => (
 		<nav css={getStyles(item)}>
 			<a css={getLinkStyles(item)} href={series.webUrl}>
 				{series.webTitle}

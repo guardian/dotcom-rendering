@@ -43,7 +43,7 @@ describe('Signed in readers', function () {
 	});
 
 	// eslint-disable-next-line mocha/no-skipped-tests -- to reinstate after the  top bar header nav is no long behind a feature switch
-	it.skip('should have the correct urls for the header links', function () {
+	it('should have the correct urls for the header links', function () {
 		cy.setCookie('GU_U', 'true', {
 			log: true,
 		});
@@ -55,20 +55,21 @@ describe('Signed in readers', function () {
 			'GET',
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
-		);
+		).as('profileMe');
 		cy.visit(`Article?url=${articleUrl}`);
+		cy.wait('@profileMe');
 
-		cy.get('a[data-link-name="nav2 : supporter-cta"]')
+		cy.get('a[data-link-name="nav3 : topbar : printsubs"]')
 			.should('have.attr', 'href')
-			.and('contain', 'support.theguardian.com');
+			.and('contain', 'support.theguardian.com/subscribe');
 
-		cy.get('a[data-link-name="nav2 : job-cta"]').should(
+		cy.get('a[data-link-name="nav3 : job-cta"]').should(
 			'have.attr',
 			'href',
 			'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader',
 		);
-		cy.get('button[data-link-name="nav2 : topbar: my account"]');
-		cy.get('a[data-link-name="nav2 : search"]').should(
+		cy.get('button[data-link-name="nav3 : topbar: my account"]');
+		cy.get('a[data-link-name="nav3 : search"]').should(
 			'have.attr',
 			'href',
 			'https://www.google.co.uk/advanced_search?q=site:www.theguardian.com',

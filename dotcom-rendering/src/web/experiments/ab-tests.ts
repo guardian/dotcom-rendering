@@ -8,6 +8,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
+import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-near-newsletter-signup-blocks';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { teadsCookieless } from './tests/teads-cookieless';
@@ -25,4 +26,5 @@ export const tests: ABTest[] = [
 	liveblogDesktopOutstream,
 	teadsCookieless,
 	billboardsInMerch,
+	noCarrotAdsNearNewsletterSignupBlocks,
 ];

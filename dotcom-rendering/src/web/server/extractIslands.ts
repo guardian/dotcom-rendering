@@ -7,7 +7,11 @@ export const extractExpeditedIslands = (html: string): string[] => {
 		onopentag(name, attributes) {
 			// htmlparser2 appears to parse all attributes as lowercase, so we need to check for
 			// attributes.expediteloading not attributes.expediteLoading!
-			if (name === 'gu-island' && attributes.expediteloading === 'true') {
+			if (
+				name === 'gu-island' &&
+				attributes.expediteloading === 'true' &&
+				attributes.name
+			) {
 				islands.push(`${attributes.name}-importable`);
 			}
 		},
