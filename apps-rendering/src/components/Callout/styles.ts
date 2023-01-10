@@ -122,7 +122,7 @@ export const sharePopup = css`
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};
 	font-weight: normal;
-	border-radius: 4px;
+	border-radius: ${remSpace[1]};
 	z-index: 100;
 	padding: ${remSpace[2]};
 	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
