@@ -67,7 +67,12 @@ const chevronPosition = css`
 
 export const TableOfContents = ({ tableOfContents }: Props) => {
 	return (
-		<details open={tableOfContents.length < 5} css={detailsStyles}>
+		<details
+			data-link-name="table-of-contents"
+			data-component="table-of-contents"
+			open={tableOfContents.length < 5}
+			css={detailsStyles}
+		>
 			<summary css={summaryStyles}>
 				<h2 css={titleStyle}>Jump to...</h2>
 				<span className="is-closed" css={chevronPosition}>
@@ -79,8 +84,12 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 			</summary>
 
 			<ul>
-				{tableOfContents.map((item) => (
-					<li key={item.id} css={listItemStyles}>
+				{tableOfContents.map((item, index) => (
+					<li
+						key={item.id}
+						css={listItemStyles}
+						data-link-name={`toc-item-${index}-${item.id}`}
+					>
 						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
 						</a>
