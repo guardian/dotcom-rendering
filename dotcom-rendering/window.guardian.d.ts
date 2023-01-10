@@ -21,6 +21,9 @@ declare global {
 			polyfilled: boolean;
 			onPolyfilled: () => void;
 			queue: Array<() => void>;
+			// Olly N 10/01/2022:
+			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
+			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior
 			emotionCache?: EmotionCache;
 			config: WindowGuardianConfig;
 			ophan?: {
