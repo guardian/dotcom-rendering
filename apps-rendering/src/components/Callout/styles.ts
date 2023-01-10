@@ -9,6 +9,7 @@ import {
 	headline,
 	neutral,
 	remSpace,
+	success,
 	textSans,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
@@ -112,13 +113,31 @@ export const calloutSharelink = (
 	`}
 `;
 
-export const supportingText = css`
-	${textSans.xsmall()};
-	color: ${neutral[46]};
+export const sharePopup = css`
+	${textSans.xxsmall()};
+	position: absolute;
+	transform: translate(0, -100%);
+	display: flex;
+	align-items: center;
+	background-color: ${neutral[100]};
+	color: ${neutral[7]};
+	font-weight: normal;
+	border-radius: 4px;
+	z-index: 100;
+	padding: ${remSpace[2]};
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
 
 	${darkModeCss`
-		color: ${neutral[60]};
+		background-color: ${neutral[0]};
+		color: ${neutral[97]};
 	`}
+
+	> svg {
+		fill: ${success[400]};
+		${darkModeCss`
+			color: ${success[500]};
+	`}
+	}
 `;
 
 // Form fields

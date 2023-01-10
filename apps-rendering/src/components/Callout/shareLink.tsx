@@ -1,8 +1,12 @@
 import type { ArticleFormat } from '@guardian/libs';
-import { Button, SvgShareCallout } from '@guardian/source-react-components';
+import {
+	Button,
+	SvgShareCallout,
+	SvgTickRound,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { calloutShare, calloutSharelink, supportingText } from './styles';
+import { calloutShare, calloutSharelink, sharePopup } from './styles';
 
 export const ShareLink: FC<{
 	format: ArticleFormat;
@@ -53,12 +57,13 @@ You can share your story by using the form on this article, or by contacting the
 				css={calloutSharelink(format)}
 			>
 				Please share this callout
+				{isCopied && (
+					<span css={sharePopup} role="alert">
+						<SvgTickRound size="xsmall" />
+						Link copied to clipboard
+					</span>
+				)}
 			</Button>
-			{isCopied && (
-				<span css={supportingText} role="alert">
-					Link copied to clipboard
-				</span>
-			)}
 		</span>
 	);
 };
