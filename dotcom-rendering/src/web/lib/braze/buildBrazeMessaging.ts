@@ -11,7 +11,7 @@ import {
 } from '@guardian/braze-components/logic';
 import { getCookie, log, storage } from '@guardian/libs';
 import { initPerf } from '../../browser/initPerf';
-import { record } from '../../browser/ophan/ophan';
+import { record } from '../../browser/entries/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,

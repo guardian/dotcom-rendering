@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import { log } from '@guardian/libs';
 import { h, hydrate, render } from 'preact';
-import { initPerf } from '../initPerf';
+import { initPerf } from '../../initPerf';
 
 /**
  * This function dynamically imports and then hydrates a specific component in
@@ -29,7 +29,7 @@ export const doHydration = async (
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
-		`../../components/${name}.importable`
+		`../../../components/${name}.importable`
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */

@@ -5,7 +5,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { submitComponentEvent } from '../../browser/entries/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useIsInView } from '../../lib/useIsInView';

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { trails } from '../../../fixtures/manual/trails';
-import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
+import { doStorybookHydration } from '../browser/entries/islands/doStorybookHydration';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { Section } from './Section';

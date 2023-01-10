@@ -12,9 +12,6 @@ import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
@@ -128,7 +125,8 @@ export const articleToHtml = ({ article }: Props): string => {
 				article.config.commercialBundleUrl,
 			// ...getScriptArrayFromFile('sentryLoader.js'),
 			// ...getScriptArrayFromFile('dynamicImport.js'),
-			...getScriptArrayFromFile('main.js'),
+
+			...getScriptArrayFromFile('index.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			// ...getScriptArrayFromFile('islands.js'),

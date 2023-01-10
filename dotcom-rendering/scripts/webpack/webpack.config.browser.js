@@ -97,47 +97,23 @@ const getLoaders = (bundle) => {
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ bundle, sessionId }) => ({
-	entry: [
-		'./src/web/browser/sentryLoader/init.ts',
-		'./src/web/browser/bootCmp/init.ts',
-		'./src/web/browser/ga/init.ts',
-		'./src/web/browser/ophan/init.ts',
-		'./src/web/browser/islands/init.ts',
-		'./src/web/browser/dynamicImport/init.ts',
-		'./src/web/browser/atomIframe/init.ts',
-		'./src/web/browser/embedIframe/init.ts',
-		'./src/web/browser/newsletterEmbedIframe/init.ts',
-		'./src/web/browser/relativeTime/init.ts',
-		'./src/web/browser/initDiscussion/init.ts',
-		'./src/web/browser/debug/init.ts',
-	],
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-			cacheGroups: {
-				vendor: {
-					test: /[\\/]node_modules[\\/](preact|swr|@emotion)[\\/]/,
-					name: 'vendor',
-					chunks: 'all',
-				},
-			},
-		},
+	entry: {
+		index: './src/web/browser/index.ts',
+		debug: './src/web/browser/entries/debug/index.ts',
 	},
-	// entry: {
-	// 	sentryLoader: './src/web/browser/sentryLoader/init.ts',
-	// 	bootCmp: './src/web/browser/bootCmp/init.ts',
-	// 	ga: './src/web/browser/ga/init.ts',
-	// 	ophan: './src/web/browser/ophan/init.ts',
-	// 	islands: './src/web/browser/islands/init.ts',
-	// 	dynamicImport: './src/web/browser/dynamicImport/init.ts',
-	// 	atomIframe: './src/web/browser/atomIframe/init.ts',
-	// 	embedIframe: './src/web/browser/embedIframe/init.ts',
-	// 	newsletterEmbedIframe:
-	// 		'./src/web/browser/newsletterEmbedIframe/init.ts',
-	// 	relativeTime: './src/web/browser/relativeTime/init.ts',
-	// 	initDiscussion: './src/web/browser/initDiscussion/init.ts',
-	// 	debug: './src/web/browser/debug/init.ts',
-	// },
+	optimization: DEV
+		? {}
+		: {
+				splitChunks: {
+					cacheGroups: {
+						vendor: {
+							test: /[\\/]node_modules[\\/](preact|swr|@emotion)[\\/]/,
+							name: 'vendor',
+							chunks: 'all',
+						},
+					},
+				},
+		  },
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets

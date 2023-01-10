@@ -19,12 +19,12 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-import type { OphanRecordFunction } from '../browser/ophan/ophan';
+import type { OphanRecordFunction } from '../browser/entries/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
-} from '../browser/ophan/ophan';
+} from '../browser/entries/ophan/ophan';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,

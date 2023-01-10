@@ -1,10 +1,8 @@
-import '../webpackPublicPath';
 import { isObject } from '@guardian/libs';
-import { startup } from '../startup';
 
 // No trailing slash!
 const allowedOrigins = ['https://www.theguardian.com'];
-const init = (): Promise<void> => {
+export const newsletterEmbedIframe = (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
 		document.querySelectorAll('.email-sub__iframe'),
 	);
@@ -61,5 +59,3 @@ const init = (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('newsletterEmbedIframe', null, init);

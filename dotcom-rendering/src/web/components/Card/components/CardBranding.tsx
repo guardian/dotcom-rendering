@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import type { Branding } from '../../../../types/branding';
 import type { Palette } from '../../../../types/palette';
-import { trackSponsorLogoLinkClick } from '../../../browser/ga/ga';
+import { trackSponsorLogoLinkClick } from '../../../browser/entries/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';

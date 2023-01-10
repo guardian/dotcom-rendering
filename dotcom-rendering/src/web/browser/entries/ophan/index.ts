@@ -1,11 +1,9 @@
-import '../webpackPublicPath';
-import { startup } from '../startup';
 import { recordPerformance, sendOphanPlatformRecord } from './ophan';
 
 // side effect only
 import 'ophan-tracker-js';
 
-const init = (): Promise<void> => {
+export const ophan = (): Promise<void> => {
 	sendOphanPlatformRecord();
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {
@@ -15,5 +13,3 @@ const init = (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('ophan', null, init);

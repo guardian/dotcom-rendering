@@ -15,7 +15,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useMemo, useState } from 'react';
-import { submitComponentEvent } from '../browser/ophan/ophan';
+import { submitComponentEvent } from '../browser/entries/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';

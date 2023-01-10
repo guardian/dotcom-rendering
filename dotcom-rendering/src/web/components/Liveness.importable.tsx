@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { initHydration } from '../browser/islands/initHydration';
-import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { initHydration } from '../browser/entries/islands/initHydration';
+import { updateTimeElement } from '../browser/entries/relativeTime/updateTimeElements';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 

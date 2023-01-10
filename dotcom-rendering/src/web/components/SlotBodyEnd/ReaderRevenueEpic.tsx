@@ -12,7 +12,7 @@ import type {
 import { useEffect, useState } from 'react';
 import type { TagType } from '../../../types/tag';
 import { initPerf } from '../../browser/initPerf';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { submitComponentEvent } from '../../browser/entries/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	hasCmpConsentForArticleCount,

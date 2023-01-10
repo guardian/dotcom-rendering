@@ -1,4 +1,4 @@
-import { record } from '../browser/ophan/ophan';
+import { record } from '../browser/entries/ophan/ophan';
 import type { CanShowResult, SlotConfig } from './messagePicker';
 import { pickMessage } from './messagePicker';
 

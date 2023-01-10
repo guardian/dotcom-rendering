@@ -2,7 +2,7 @@ import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { getCookie, log } from '@guardian/libs';
 import type { ABTestSwitches } from '../../model/enhance-switches';
-import { getOphanRecordFunction } from '../browser/ophan/ophan';
+import { getOphanRecordFunction } from '../browser/entries/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';

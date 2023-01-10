@@ -5,8 +5,8 @@ import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import type { RoleType } from '../../types/content';
-import { trackVideoInteraction } from '../browser/ga/ga';
-import { record } from '../browser/ophan/ophan';
+import { trackVideoInteraction } from '../browser/entries/ga/ga';
+import { record } from '../browser/entries/ophan/ophan';
 import { useAB } from '../lib/useAB';
 import { Caption } from './Caption';
 

@@ -1,8 +1,6 @@
-import '../webpackPublicPath';
 import { isAdBlockInUse } from '@guardian/commercial-core';
-import { startup } from '../startup';
 
-const init = async (): Promise<void> => {
+export const sentryLoader = async (): Promise<void> => {
 	// We don't send errors on the dev server, or if the enableSentryReporting switch is off.
 	const {
 		switches: { enableSentryReporting },
@@ -85,5 +83,3 @@ const init = async (): Promise<void> => {
 		// We failed to setup Sentry :(
 	}
 };
-
-startup('sentryLoader', null, init);
