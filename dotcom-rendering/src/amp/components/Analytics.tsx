@@ -34,7 +34,7 @@ export const Analytics = ({
 			<script type="application/json">
       {
         "requests": {
-          "pageviewWithConsent": "\${additionalBase}&componentEvent=\${component}"
+          "pageviewWithConsent": "\${z}&componentEvent=\${componentEvent}"
         },
         "triggers": {
           "trackPageview": {
