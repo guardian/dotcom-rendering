@@ -8,7 +8,6 @@ export const CalloutBlockComponent = ({
 	callout,
 }: {
 	callout: CalloutBlockElementV2;
-	format: ArticleFormat;
 }) => {
 	const {
 		title,
