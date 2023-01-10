@@ -122,15 +122,16 @@ export const articleToHtml = ({ article }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			// ...getScriptArrayFromFile('bootCmp.js'),
+			// ...getScriptArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
+			// ...getScriptArrayFromFile('sentryLoader.js'),
+			// ...getScriptArrayFromFile('dynamicImport.js'),
+			...getScriptArrayFromFile('main.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScriptArrayFromFile('islands.js'),
+			// ...getScriptArrayFromFile('islands.js'),
 			...expeditedIslands.flatMap((name) =>
 				getScriptArrayFromFile(`${name}.js`),
 			),
@@ -148,24 +149,24 @@ export const articleToHtml = ({ article }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
+			// ...getScriptArrayFromFile('atomIframe.js'),
+			// ...getScriptArrayFromFile('embedIframe.js'),
+			// ...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+			// ...getScriptArrayFromFile('relativeTime.js'),
+			// ...getScriptArrayFromFile('initDiscussion.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
+	// const gaChunk = getScriptArrayFromFile('ga.js');
+	// const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	// const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	// const variantScript = gaChunk.find((script) =>
+	// 	script.match(VARIANT_SCRIPT),
+	// );
+	// const gaPath = {
+	// 	modern: (modernScript ?? variantScript) as string,
+	// 	legacy: legacyScript as string,
+	// };
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -268,7 +269,7 @@ window.twttr = (function(d, s, id) {
 		title,
 		description: article.trailText,
 		windowGuardian,
-		gaPath,
+		// gaPath,
 		ampLink,
 		openGraphData,
 		twitterData,

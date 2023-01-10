@@ -11,7 +11,7 @@ export const pageTemplate = ({
 	windowGuardian,
 	priorityScriptTags,
 	lowPriorityScriptTags,
-	gaPath,
+	// gaPath,
 	keywords,
 	offerHttp3,
 	title = 'The Guardian',
@@ -29,7 +29,7 @@ export const pageTemplate = ({
 	windowGuardian: string;
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
-	gaPath: { modern: string; legacy: string };
+	// gaPath: { modern: string; legacy: string };
 	keywords: string;
 	offerHttp3: boolean;
 	title?: string;
@@ -235,13 +235,13 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script type="module">
                     window.guardian.mustardCut = true;
-                    window.guardian.gaPath = "${gaPath.modern}";
+                    window.guardian.gaPath = "${/* gaPath.modern */ ''}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
-                    window.guardian.gaPath = "${gaPath.legacy}";
+                    // window.guardian.gaPath = "${/* gaPath.legacy */ ''}";
                 </script>
 
                 <script>
