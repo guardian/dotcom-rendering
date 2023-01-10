@@ -122,10 +122,8 @@ export const CalloutShare = ({
 			Share your experience: ${'PLACEHOLDER TITLE'}
 			`;
 			const shareText = `
-			I saw this callout on an article I was reading and thought you might like to share your story.
-			${url}#${urlAnchor}
-			You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
-					`;
+			I saw this callout in an article: ${url}#${urlAnchor}
+			You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.`;
 			await navigator.share({
 				title: shareTitle,
 				text: shareText,
