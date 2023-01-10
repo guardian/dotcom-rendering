@@ -1813,6 +1813,11 @@
   resolved "https://registry.npmjs.org/@guardian/libs/-/libs-10.0.0.tgz#3624e5ead3a9f4ffb6244327d3ee5c3d55d688fa"
   integrity sha512-N6+5e0DrusWryaZCH6/cppJlLEksuZWFyYnQjHbe/HXM2cLe2i3GAU5kRhIh98pOlPTPer5GennBAYQ6gzQofg==
 
+"@guardian/libs@^11.1.2":
+  version "11.1.2"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-11.1.2.tgz#accd1e79cccb712c12ee34951de9c86814fa7d66"
+  integrity sha512-xO5j2A4qqwhH4q+oP7fkNtkn+2/8mkRoJKy7luCM0zI7+qOyK0WjWDMFAuKEhakmh/sw6EP9FnyssgdNz+06QA==
+
 "@guardian/node-riffraff-artifact@^0.3.2":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@guardian/node-riffraff-artifact/-/node-riffraff-artifact-0.3.2.tgz#6a71bdd9a0d9ca95516d838a135daf0906a604fb"
