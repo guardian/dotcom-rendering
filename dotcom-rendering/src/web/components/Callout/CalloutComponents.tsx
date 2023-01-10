@@ -178,11 +178,11 @@ export const CalloutShare = ({
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<span css={tooltipStyles} role="alert">
+						<div css={tooltipStyles}>
 							<InlineSuccess>
 								Link copied to clipboard
 							</InlineSuccess>
-						</span>
+						</div>
 					)}
 				</div>
 			</div>
