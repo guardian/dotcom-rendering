@@ -18,7 +18,7 @@ interface Props {
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	font-style: italic;
 	position: relative;
-	margin: ${remSpace[4]} 0 ${remSpace[9]} 0;
+	margin: ${remSpace[4]} 0 ${remSpace[4]} 0;
 
 	> svg {
 		width: 18px;

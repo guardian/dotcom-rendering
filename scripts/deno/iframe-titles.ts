@@ -7,7 +7,7 @@ import {
 import { octokit } from './github.ts';
 
 const searchParams = new URLSearchParams({
-	'api-key': 'test',
+	'api-key': Deno.env.get('CAPI_KEY') ?? 'test',
 	'query-fields': 'body',
 	q: 'iframe',
 	'show-fields': 'body',

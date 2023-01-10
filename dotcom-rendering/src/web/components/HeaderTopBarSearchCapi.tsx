@@ -217,9 +217,9 @@ export const HeaderTopBarSearchCapi = () => {
 								padding-top: 8px;
 							`}
 						>
-							{data.response.results.map((result, i) => {
+							{data.response.results.map((result) => {
 								return (
-									<li>
+									<li key={result.webUrl}>
 										<a
 											href={result.webUrl}
 											css={css`

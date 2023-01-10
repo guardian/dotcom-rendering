@@ -53,7 +53,6 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { TableOfContents } from '../components/TableOfContents';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -635,15 +634,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
-								{CAPIArticle.tableOfContents && (
-									<div>
-										<TableOfContents
-											tableOfContents={
-												CAPIArticle.tableOfContents
-											}
-										></TableOfContents>
-									</div>
-								)}
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -674,6 +664,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isDev={!!CAPIArticle.config.isDev}
 									keywordIds={CAPIArticle.config.keywordIds}
 									abTests={CAPIArticle.config.abTests}
+									tableOfContents={
+										CAPIArticle.tableOfContents
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (

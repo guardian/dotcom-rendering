@@ -2987,6 +2987,9 @@
                 "isLiveBlog": {
                     "type": "boolean"
                 },
+                "masterImage": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },

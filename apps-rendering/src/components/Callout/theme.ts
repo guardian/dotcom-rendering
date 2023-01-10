@@ -11,6 +11,7 @@ import {
 import {
 	fileInputDarkTheme,
 	fileInputThemeDefault,
+	tabsDarkTheme,
 } from '@guardian/source-react-components-development-kitchen';
 
 const labelDarkTheme = {
@@ -89,6 +90,7 @@ export const darkTheme = {
 	expander: expandingWrapperDarkTheme,
 	userFeedback: userFeedbackDarkTheme,
 	...fileInputDarkTheme,
+	...tabsDarkTheme,
 };
 
 type LightThemeType = {

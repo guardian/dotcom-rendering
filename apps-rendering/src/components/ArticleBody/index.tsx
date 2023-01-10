@@ -40,7 +40,6 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
 
     p:last-child {
         margin-bottom: 0;
-        padding-bottom: 1em;
     }
 `;
 
