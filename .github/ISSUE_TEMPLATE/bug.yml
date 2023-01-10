@@ -1,0 +1,21 @@
+name: 🐞 Bug Report
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+assignees: ''
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: And what should have happened? Please provide screenshots if they would help debug and resolve this
+  - type: input
+    id: where
+    attributes:
+      label: Where is this happening?
+      description: If possible please provide a URL where we can see this happening
+  - type: textarea
+    id: impact
+    attributes:
+      label: What is the impact?
+      description: How far reaching is the issue, and how is it affecting their experience?
+
