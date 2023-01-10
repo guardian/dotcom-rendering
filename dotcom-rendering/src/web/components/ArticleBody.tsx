@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
@@ -41,6 +41,7 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	isInLiveblogAdSlotTest?: boolean;
+	abTests?: ServerSideTests;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -139,6 +140,7 @@ export const ArticleBody = ({
 	selectedTopics,
 	keywordIds,
 	isInLiveblogAdSlotTest = false,
+	abTests,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -227,6 +229,7 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				abTests={abTests}
 			/>
 		</div>
 	);

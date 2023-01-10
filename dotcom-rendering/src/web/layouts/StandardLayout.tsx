@@ -673,6 +673,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
 									keywordIds={CAPIArticle.config.keywordIds}
+									abTests={CAPIArticle.config.abTests}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
