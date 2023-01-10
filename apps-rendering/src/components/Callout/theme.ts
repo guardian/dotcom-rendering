@@ -94,4 +94,4 @@ const getPrefersDark = (): boolean => {
 	return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
-export const getTheme = getPrefersDark() ? darkTheme : {};
+export const getTheme = () => getPrefersDark() ? darkTheme : {};
