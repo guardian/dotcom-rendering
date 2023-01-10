@@ -7,6 +7,7 @@ import { getCookie } from '@guardian/libs';
 import type { ServerSideTestNames } from '../../types/config';
 import { tests } from '../experiments/ab-tests';
 import { integrateIma } from '../experiments/tests/integrate-ima';
+import { teadsCookieless } from '../experiments/tests/teads-cookieless';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -30,6 +31,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			integrateIma,
+			teadsCookieless,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(

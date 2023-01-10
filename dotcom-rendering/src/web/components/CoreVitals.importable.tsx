@@ -7,6 +7,7 @@ import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
+import { teadsCookieless } from '../experiments/tests/teads-cookieless';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -25,6 +26,7 @@ export const CoreVitals = () => {
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		integrateIma,
+		teadsCookieless,
 	];
 
 	const userInClientSideTestToForceMetrics =
