@@ -2,11 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
-import {
-	LinkButton,
-	SvgGps,
-	SvgWhatsApp,
-} from '@guardian/source-react-components';
+import { LinkButton, SvgWhatsApp } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 
 interface CalloutContactProps {

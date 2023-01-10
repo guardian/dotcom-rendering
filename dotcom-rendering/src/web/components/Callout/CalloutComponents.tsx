@@ -4,12 +4,13 @@ import {
 	neutral,
 	palette,
 	space,
+	success,
 	textSans,
 } from '@guardian/source-foundations';
 import {
 	Button,
 	SvgShareCallout,
-	InlineSuccess,
+	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -99,17 +100,25 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 	`;
 
 const tooltipStyles = css`
-	/* Position the tooltip text */
-	background-color: white;
-	border-radius: 4px;
-	box-shadow: 0 0 5px 5px ${neutral[60]};
-	padding: 10px;
-	z-index: 1;
+	${textSans.xsmall()};
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	margin-top: -50px;
 	margin-left: -100px;
+	display: flex;
+	align-items: center;
+	background-color: ${neutral[100]};
+	color: ${neutral[7]};
+	font-weight: normal;
+	border-radius: 4px;
+	z-index: 1;
+	padding: 0 ${space[1]}px 0 0;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+
+	> svg {
+		fill: ${success[400]};
+	}
 `;
 
 export const CalloutShare = ({
@@ -131,9 +140,7 @@ export const CalloutShare = ({
 				navigator.userAgent,
 			)
 		) {
-			const shareTitle = `
-			Share your experience: ${'PLACEHOLDER TITLE'}
-			`;
+			const shareTitle = `Share your experience: ${title}`;
 
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}
@@ -144,13 +151,13 @@ export const CalloutShare = ({
 				text: shareText,
 			});
 			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 2000);
+			setTimeout(() => setIsCopied(false), 3000);
 		}
 
 		if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 2000);
+			// setTimeout(() => setIsCopied(false), 3000);
 		}
 	};
 
@@ -179,9 +186,8 @@ export const CalloutShare = ({
 					</Button>
 					{isCopied && (
 						<div css={tooltipStyles}>
-							<InlineSuccess>
-								Link copied to clipboard
-							</InlineSuccess>
+							<SvgTickRound size="medium" />
+							Link copied to clipboard
 						</div>
 					)}
 				</div>
