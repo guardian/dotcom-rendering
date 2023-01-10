@@ -56,18 +56,17 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 	return (
 		<div className="js-message-us-tab">
 			<p css={descriptionStyles(format)}>
-				You can contact us on WhatsApp or Telegram at {CONTACT_NUMBER}.
-				For more information, please see our guidance on{' '}
+				You can contact us on WhatsApp or Signal at {SIGNAL_NUMBER} or
+				Telegram at {CONTACT_NUMBER}. For more information, please see
+				our guidance on{' '}
 				<a href={WHATSAPP_GUIDANCE_URL}>contacting us via WhatsApp</a>{' '}
 				and our guidance on{' '}
 				<a href={TELEGRAM_GUIDANCE_URL}>contacting us via Telegram</a>.
 			</p>
-
 			<p css={descriptionStyles(format)}>
 				For true anonymity please use our{' '}
 				<a href={SECURE_DROP_URL}>SecureDrop</a> service instead.
 			</p>
-
 			<LinkButton
 				data-ignore="global-link-styling"
 				cssOverrides={calloutPrimaryButton(format)}
@@ -80,7 +79,6 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 			>
 				Message us on Whatsapp
 			</LinkButton>
-
 			<LinkButton
 				data-ignore="global-link-styling"
 				cssOverrides={[calloutPrimaryButton(format)]}
@@ -91,7 +89,6 @@ export const MessageUs = ({ format }: CalloutContactProps) => {
 			>
 				Message us on Telegram
 			</LinkButton>
-
 			<LinkButton
 				data-ignore="global-link-styling"
 				cssOverrides={[
