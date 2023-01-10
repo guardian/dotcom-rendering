@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
-	border,
 	headline,
 	neutral,
 	space,
@@ -24,8 +23,8 @@ const TextTreat = ({
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? border.secondary};
-			border-top: 1px solid ${borderColour ?? border.secondary};
+			border-left: 1px solid ${borderColour ?? neutral[86]};
+			border-top: 1px solid ${borderColour ?? neutral[86]};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
@@ -59,6 +58,7 @@ const ImageTreat = ({
 		<img src={imageUrl} alt={altText} width="130px" height="auto" />
 		{links.map((link, index) => (
 			<a
+				key={link.linkTo}
 				href={link.linkTo}
 				data-ignore="global-link-styling"
 				css={css`
@@ -124,10 +124,11 @@ export const Treats = ({
 									<SvgCrossword />
 								</a>
 							</li>
-							{treat.links.map((link) => (
+							{treat.links.map(({ linkTo, text }) => (
 								<TextTreat
-									text={link.text}
-									linkTo={link.linkTo}
+									key={linkTo}
+									text={text}
+									linkTo={linkTo}
 									borderColour={borderColour}
 								/>
 							))}
@@ -157,10 +158,11 @@ export const Treats = ({
 
 				return (
 					<>
-						{treat.links.map((link) => (
+						{treat.links.map(({ text, linkTo }) => (
 							<TextTreat
-								text={link.text}
-								linkTo={link.linkTo}
+								key={linkTo}
+								text={text}
+								linkTo={linkTo}
 								borderColour={borderColour}
 							/>
 						))}
