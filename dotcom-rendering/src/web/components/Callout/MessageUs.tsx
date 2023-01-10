@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { brand, neutral, space, textSans } from '@guardian/source-foundations';
 import { LinkButton, SvgWhatsApp } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
 
 const calloutPrimaryButton = css`
 	background: ${brand[500]};
