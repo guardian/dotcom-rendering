@@ -275,7 +275,7 @@ export const Card25Media25Tall = ({
  * Options:
  *  - Medium headline (medium on mobile)
  *  - Small image on the top (left on mobile)
- *  - Trail text when there is no supporting content
+ *  - Trail text when there is no supporting content or avatar
  *  - Up to 2 supporting content items, always aligned vertical
  */
 export const Card33Media33Tall = ({
@@ -294,8 +294,9 @@ export const Card33Media33Tall = ({
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			trailText={
-				trail.supportingContent === undefined ||
-				trail.supportingContent.length === 0
+				trail.avatarUrl === undefined &&
+				(trail.supportingContent === undefined ||
+					trail.supportingContent.length === 0)
 					? trail.trailText
 					: undefined
 			}
@@ -469,6 +470,37 @@ export const CardDefault = ({
 			imageUrl={undefined}
 			headlineSize="small"
 			headlineSizeOnMobile="small"
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃                  ┃  Any% Remaining  ┊
+ * ┗━━━━━━━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up any width of container, with no media and no avatar
+ *
+ * Options:
+ *  - Small headline (small on mobile)
+ *  - No image / media
+ *  - No trail text
+ *  - No supporting content
+ *  - No avatar
+ */
+export const CardDefaultNoAvatar = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imageUrl={undefined}
+			headlineSize="small"
+			headlineSizeOnMobile="small"
+			avatarUrl={undefined}
 		/>
 	);
 };
