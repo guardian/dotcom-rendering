@@ -116,7 +116,7 @@ export const calloutSharelink = (
 export const sharePopup = css`
 	${textSans.xxsmall()};
 	position: absolute;
-	transform: translate(0, -100%);
+	transform: translate(0, 100%);
 	display: flex;
 	align-items: center;
 	background-color: ${neutral[100]};
