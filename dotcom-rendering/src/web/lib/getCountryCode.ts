@@ -9,6 +9,8 @@ import type { CountryCode } from '@guardian/libs';
  */
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
 	return getLocale().catch((error) => {
+		// Generally we see SecurityErrors when a users browser has restrictive privacy settings that prevent access to local storage.
+		// We should avoid reporting these errors to Sentry as they're not very useful to us and create a lot of noise.
 		if (error instanceof Error && error.name === 'SecurityError')
 			return null;
 
