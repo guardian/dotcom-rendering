@@ -601,6 +601,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										keywordIds={
 											CAPIArticle.config.keywordIds
 										}
+										tableOfContents={
+											CAPIArticle.tableOfContents
+										}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>

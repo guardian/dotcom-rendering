@@ -19,10 +19,14 @@ const listItemStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
 	border-bottom: 1px solid ${line.primary};
 	padding: 6px 0;
+
+	&:last-child {
+		border-bottom: none;
+	}
 `;
 
 const detailsStyles = css`
-	padding: 6px 0;
+	padding: ${space[4]}px 0 ${space[6]}px 0;
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;

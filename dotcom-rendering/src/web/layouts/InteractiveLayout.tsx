@@ -539,6 +539,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										keywordIds={
 											CAPIArticle.config.keywordIds
 										}
+										tableOfContents={
+											CAPIArticle.tableOfContents
+										}
 									/>
 								</ArticleContainer>
 							</GridItem>

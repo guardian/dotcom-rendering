@@ -1081,7 +1081,7 @@ export const Quiz: FEArticleType = {
 				support:
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1205,10 +1205,10 @@ export const Quiz: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
 				},
 				{
 					text: 'Complaints & corrections',
@@ -1247,10 +1247,10 @@ export const Quiz: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
 				},
 			],
 			[
@@ -1374,6 +1374,7 @@ export const Quiz: FEArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	showTableOfContents: false,
 	byline: 'Steven Pye',
 	headline: 'Sports quiz: football in the 1980s',
 	guardianBaseURL: 'https://www.theguardian.com',
@@ -1636,7 +1637,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'dfcd0226-3131-4202-a12a-a34dd02e8199',
+			elementId: '641b0290-abd5-4ed5-933d-6a05244feb48',
 		},
 	],
 	canonicalUrl:
@@ -2252,7 +2253,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: 'd640e3b3-8977-4a76-9580-108476a5c3d6',
+					elementId: '4c2c5b57-b3af-4c8d-9293-1f8a903b0fe6',
 				},
 			],
 			attributes: {
@@ -2260,13 +2261,13 @@ export const Quiz: FEArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1591866131000,
-			blockCreatedOnDisplay: '10.02 BST',
+			blockCreatedOn: 1591952964000,
+			blockCreatedOnDisplay: '10.09 BST',
 			blockLastUpdated: 1591917260000,
 			blockLastUpdatedDisplay: '00.14 BST',
-			blockFirstPublished: 1591866202000,
-			blockFirstPublishedDisplay: '10.03 BST',
-			blockFirstPublishedDisplayNoTimezone: '10.03',
+			blockFirstPublished: 1591952964000,
+			blockFirstPublishedDisplay: '10.09 BST',
+			blockFirstPublishedDisplayNoTimezone: '10.09',
 			contributors: [],
 			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
 			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',

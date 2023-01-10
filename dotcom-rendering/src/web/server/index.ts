@@ -33,7 +33,7 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
-		tableOfContents: data.config.switches.tableOfContents
+		tableOfContents: data.showTableOfContents
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
 	};
