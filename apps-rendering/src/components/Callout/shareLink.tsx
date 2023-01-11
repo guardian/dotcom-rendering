@@ -1,13 +1,18 @@
 import type { ArticleFormat } from '@guardian/libs';
-import { Button, SvgShareCallout } from '@guardian/source-react-components';
+import {
+	Button,
+	SvgShareCallout,
+	SvgTickRound,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { calloutShare, calloutSharelink, supportingText } from './styles';
+import { calloutShare, calloutSharelink, sharePopup } from './styles';
 
-export const ShareLink: FC<{ format: ArticleFormat; title: string }> = ({
-	format,
-	title,
-}) => {
+export const ShareLink: FC<{
+	format: ArticleFormat;
+	title: string;
+	urlAnchor: string;
+}> = ({ format, title, urlAnchor }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
@@ -16,9 +21,8 @@ export const ShareLink: FC<{ format: ArticleFormat; title: string }> = ({
 Share your experience: ${title}
 `;
 		const shareText = `
-I saw this callout on an article I was reading and thought you might like to share your story.
-${url}
-You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
+I saw this callout in an article: ${url}#${urlAnchor}
+You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.
 		`;
 		if ('share' in navigator) {
 			navigator
@@ -53,12 +57,13 @@ You can share your story by using the form on this article, or by contacting us 
 				css={calloutSharelink(format)}
 			>
 				Please share this callout
+				{isCopied && (
+					<span css={sharePopup} role="alert">
+						<SvgTickRound size="xsmall" />
+						Link copied to clipboard
+					</span>
+				)}
 			</Button>
-			{isCopied && (
-				<span css={supportingText} role="alert">
-					Link copied to clipboard
-				</span>
-			)}
 		</span>
 	);
 };

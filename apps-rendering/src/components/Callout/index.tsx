@@ -7,7 +7,7 @@ import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { DeadlineDate, isCalloutActive } from '../Deadline/index';
-import CalloutBlock from './calloutBlock';
+import CalloutBlock, { getCalloutId } from './calloutBlock';
 import { InactiveCallout } from './calloutComponents';
 import { getTheme } from './theme';
 
@@ -111,6 +111,7 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 		{
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
+			id: getCalloutId(calloutProps.heading),
 		},
 		Callout({
 			...calloutProps,

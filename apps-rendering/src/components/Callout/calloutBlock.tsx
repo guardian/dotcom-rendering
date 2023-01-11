@@ -17,6 +17,9 @@ import {
 	calloutTitle,
 } from './styles';
 
+export const getCalloutId = (str: string): string =>
+	`${str.replace(/[\s_]+/g, '-').toLowerCase()}-callout`;
+
 export interface CalloutBlockProps {
 	formId: number;
 	heading: string;
@@ -32,6 +35,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 }): ReactElement => {
+	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
 		{
@@ -49,7 +53,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	];
 
 	return (
-		<div css={calloutContainer}>
+		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer(format)]}>
 				<div css={calloutTitle(format)}>Tell Us</div>
 				<h4 css={calloutHeadingText}>{heading}</h4>
@@ -59,7 +63,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 					</div>
 				)}
 				<TermsAndConditions />
-				<ShareLink format={format} title={heading} />
+				<ShareLink format={format} title={heading} urlAnchor={id} />
 			</div>
 			<Tabs
 				tabsLabel="Tell us/Message us tabs"
