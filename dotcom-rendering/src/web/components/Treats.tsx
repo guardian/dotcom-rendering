@@ -148,6 +148,7 @@ export const Treats = ({
 					});
 					return (
 						<ImageTreat
+							key={treat.imageUrl}
 							imageUrl={treat.imageUrl}
 							links={treat.links}
 							altText={treat.altText}
