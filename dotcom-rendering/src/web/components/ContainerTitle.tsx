@@ -2,14 +2,15 @@ import { css } from '@emotion/react';
 import {
 	between,
 	headline,
+	neutral,
 	news,
 	space,
 	text,
 } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 
 type Props = {
@@ -110,7 +111,7 @@ export const ContainerTitle = ({
 				<>
 					<span
 						css={dateTextStyles(
-							overrides?.text.containerDate || news[400],
+							overrides?.text.containerDate || neutral[0],
 						)}
 					>
 						{now.toLocaleDateString(locale, { weekday: 'long' })}
