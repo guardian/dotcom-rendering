@@ -4,6 +4,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
+import { useState } from 'react';
 import type { TableOfContentsItem } from '../../types/frontend';
 
 interface Props {
@@ -66,11 +67,17 @@ const chevronPosition = css`
 `;
 
 export const TableOfContents = ({ tableOfContents }: Props) => {
+	const [open, setOpen] = useState(true);
+	const onToggle = () => {
+		setOpen(!open);
+	};
+
 	return (
 		<details
-			data-link-name="table-of-contents"
+			onToggle={onToggle}
+			data-link-name={open ? 'toc-close' : 'toc-expand'}
 			data-component="table-of-contents"
-			open={tableOfContents.length < 5}
+			open={open}
 			css={detailsStyles}
 		>
 			<summary css={summaryStyles}>
