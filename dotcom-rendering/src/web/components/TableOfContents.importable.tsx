@@ -68,25 +68,25 @@ const chevronPosition = css`
 
 export const TableOfContents = ({ tableOfContents }: Props) => {
 	const [open, setOpen] = useState(tableOfContents.length < 5);
-	const onToggle = () => {
-		setOpen(!open);
-	};
 
 	// The value for data-link-name is evaluated at the time when the component renders,
 	// So at the time when user clicks the table (onToggle is triggered),
 	// the old value of open(before the click event) is used. As a result we need to
 	// use toc-close for when open is true and toc-expand for when it's false
 	return (
-		<details
-			onToggle={onToggle}
-			data-link-name={
-				open ? 'table-of-contents-close' : 'table-of-contents-expand'
-			}
-			data-component="table-of-contents"
-			open={open}
-			css={detailsStyles}
-		>
-			<summary css={summaryStyles}>
+		<details open={open} css={detailsStyles}>
+			<summary
+				onClick={() => {
+					setOpen(!open);
+				}}
+				data-link-name={
+					open
+						? 'table-of-contents-close'
+						: 'table-of-contents-expand'
+				}
+				data-component="table-of-contents"
+				css={summaryStyles}
+			>
 				<h2 css={titleStyle}>Jump to...</h2>
 				<span className="is-closed" css={chevronPosition}>
 					<SvgChevronDownSingle size="xsmall" />
