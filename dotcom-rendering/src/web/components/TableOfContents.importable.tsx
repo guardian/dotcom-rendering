@@ -79,7 +79,9 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 	return (
 		<details
 			onToggle={onToggle}
-			data-link-name={open ? 'toc-close' : 'toc-expand'}
+			data-link-name={
+				open ? 'table-of-contents-close' : 'table-of-contents-expand'
+			}
 			data-component="table-of-contents"
 			open={open}
 			css={detailsStyles}
@@ -99,7 +101,7 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 					<li
 						key={item.id}
 						css={listItemStyles}
-						data-link-name={`toc-item-${index}-${item.id}`}
+						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
