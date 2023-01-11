@@ -6,7 +6,7 @@
  *
  * @type {boolean} prevent TS from narrowing this to its current value
  */
-const BUILD_VARIANT = true;
+const BUILD_VARIANT = false;
 
 /**
  * Server-side test names for `dcr-javascript-bundle`.
