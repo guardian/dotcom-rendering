@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { CAPIElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import {
@@ -45,6 +45,7 @@ type Props = {
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests?: ServerSideTests;
 };
 
 export const ArticleRenderer = ({
@@ -65,6 +66,7 @@ export const ArticleRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	abTests,
 }: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -83,6 +85,7 @@ export const ArticleRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
+				abTests={abTests}
 			/>
 		);
 	});

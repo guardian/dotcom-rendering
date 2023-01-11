@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { TableOfContentsItem } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
@@ -43,6 +43,7 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	isInLiveblogAdSlotTest?: boolean;
+	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
 };
 
@@ -142,6 +143,7 @@ export const ArticleBody = ({
 	selectedTopics,
 	keywordIds,
 	isInLiveblogAdSlotTest = false,
+	abTests,
 	tableOfContents,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
@@ -203,7 +205,6 @@ export const ArticleBody = ({
 					tableOfContents={tableOfContents}
 				></TableOfContents>
 			)}
-
 			<div
 				id="maincontent"
 				css={[
@@ -238,6 +239,7 @@ export const ArticleBody = ({
 					isDev={isDev}
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
+					abTests={abTests}
 				/>
 			</div>
 		</>
