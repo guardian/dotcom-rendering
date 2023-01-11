@@ -3,9 +3,9 @@ import type {
 	DCRSupportingContent,
 } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card25Media25 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -32,13 +32,10 @@ export const FixedSmallSlowIV = ({
 						showDivider={index > 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={trail}
-							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={supportingContent}
-							imageSize="medium"
 						/>
 					</LI>
 				);
