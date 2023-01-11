@@ -17,10 +17,15 @@ import { useState } from 'react';
 
 const descriptionStyles = css`
 	a {
-		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
+		/* Disabled the linter to override link styles as we use dangerouslySetInnerHTML below */
+		// stylelint-disable-next-line declaration-no-important
+		color: ${brand[500]} !important;
+		// stylelint-disable-next-line declaration-no-important
+		border-bottom: 1px solid ${brand[500]} !important;
+		// stylelint-disable-next-line declaration-no-important
+		text-decoration: none !important;
 	}
+
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -33,29 +38,32 @@ export const CalloutDescription = ({
 	description,
 }: {
 	description: string;
-}) => (
-	<div css={descriptionStyles}>
-		<div dangerouslySetInnerHTML={{ __html: description }}></div>
-		<div>
-			Please share your story if you are 18 or over, anonymously if you
-			wish. For more information please see our{' '}
-			<a
-				data-ignore="global-link-styling"
-				href="https://www.theguardian.com/help/terms-of-service"
-			>
-				terms of service
-			</a>{' '}
-			and{' '}
-			<a
-				data-ignore="global-link-styling"
-				href="https://www.theguardian.com/help/privacy-policy"
-			>
-				privacy policy
-			</a>
-			.
+}) => {
+	console.log(description);
+	return (
+		<div css={descriptionStyles}>
+			<div dangerouslySetInnerHTML={{ __html: description }}></div>
+			<div>
+				Please share your story if you are 18 or over, anonymously if
+				you wish. For more information please see our{' '}
+				<a
+					data-ignore="global-link-styling"
+					href="https://www.theguardian.com/help/terms-of-service"
+				>
+					terms of service
+				</a>{' '}
+				and{' '}
+				<a
+					data-ignore="global-link-styling"
+					href="https://www.theguardian.com/help/privacy-policy"
+				>
+					privacy policy
+				</a>
+				.
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 const expiredStyles = css`
 	${textSans.small()};
