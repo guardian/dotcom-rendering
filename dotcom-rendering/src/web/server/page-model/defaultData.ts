@@ -1,7 +1,7 @@
 import { ArticlePillar } from '@guardian/libs';
-import type { NavType } from 'src/model/extract-nav';
-import type { ConfigType } from 'src/types/config';
-import type { FooterType } from 'src/types/footer';
+import type { NavType } from '../../../model/extract-nav';
+import type { ConfigType } from '../../../types/config';
+import type { FooterType } from '../../../types/footer';
 
 export const STATIC_FOOTER: FooterType = { footerLinks: [[]] };
 

@@ -1,9 +1,8 @@
-import type { RequestHandler } from 'express';
-import type { Newsletter } from '../../../src/types/content';
-import type { NewslettersPageModel } from '../../model/pageModel';
+import type { NewslettersPageModel } from '../../../model/pageModel';
+import type { Newsletter } from '../../../types/content';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
-const TEST_NEWSLETTERS: Newsletter[] = [
+export const TEST_NEWSLETTERS: Newsletter[] = [
 	{
 		identityName: 'morning-mail',
 		name: "Guardian Australia's Morning Mail",
@@ -51,8 +50,8 @@ const TEST_NEWSLETTERS: Newsletter[] = [
 	},
 ];
 
-const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
-	newsletters: TEST_NEWSLETTERS,
+export const buildPageModel = (newsletters: Newsletter[]): NewslettersPageModel => ({
+	newsletters,
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
 	config: {
@@ -66,13 +65,5 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-};
+});
 
-export const provideStaticDataMiddleware: RequestHandler = (
-	{ body },
-	res,
-	next,
-): void => {
-	(body as Record<string, unknown>).model = STATIC_NEWSLETTERS_MODEL;
-	next();
-};

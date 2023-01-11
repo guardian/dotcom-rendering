@@ -15,6 +15,10 @@ import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
 import { newslettersToHtml } from './newslettersToHtml';
+import {
+	buildPageModel,
+	TEST_NEWSLETTERS,
+} from './page-model/provideStaticNewslettersModel';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -195,11 +199,17 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
+const enhanceNewsletters = (body: unknown): NewslettersPageModel => {
+	console.log('request body', body);
+
+	return buildPageModel(TEST_NEWSLETTERS);
+};
+
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
 		// TO DO - data validation function
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- in progress
-		const model = body.model as NewslettersPageModel;
+
+		const model = enhanceNewsletters(body);
 		const content = newslettersToHtml(model);
 		res.status(200).send(content);
 	} catch (e) {
