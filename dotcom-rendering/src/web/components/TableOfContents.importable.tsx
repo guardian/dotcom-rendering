@@ -74,7 +74,11 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 	// the old value of open(before the click event) is used. As a result we need to
 	// use toc-close for when open is true and toc-expand for when it's false
 	return (
-		<details open={open} css={detailsStyles}>
+		<details
+			open={open}
+			css={detailsStyles}
+			data-component="table-of-contents"
+		>
 			<summary
 				onClick={() => {
 					setOpen(!open);
@@ -84,7 +88,6 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 						? 'table-of-contents-close'
 						: 'table-of-contents-expand'
 				}
-				data-component="table-of-contents"
 				css={summaryStyles}
 			>
 				<h2 css={titleStyle}>Jump to...</h2>
