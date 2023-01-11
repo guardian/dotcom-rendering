@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { brandAlt, space } from '@guardian/source-foundations';
+import { brandAlt, neutral, space } from '@guardian/source-foundations';
 import { headline } from '@guardian/source-foundations/dist/cjs/typography/api';
 import { LinkButton } from '@guardian/source-react-components';
 import type { Newsletter } from '../../../../src/types/content';
-import { EmailSignup } from '../EmailSignup';
 import { Hide } from '../Hide';
 import { NewsletterPrivacyMessage } from '../NewsletterPrivacyMessage';
 import { Section } from '../Section';
@@ -20,7 +19,6 @@ const putNewslettersInGroups = (
 	newsletters: Newsletter[],
 ): GroupedNewsletters => {
 	const groupedList: GroupedNewsletters = [];
-
 	newsletters.forEach((newsletter) => {
 		const { group: groupName } = newsletter;
 
@@ -34,9 +32,16 @@ const putNewslettersInGroups = (
 			groupedList.push({ groupName, newsletters: [newsletter] });
 		}
 	});
-
 	return groupedList;
 };
+
+const cardStyle = css`
+	display: inline-block;
+	border: ${neutral[0]} 3px dashed;
+	border-radius: 12px;
+	margin-bottom: ${space[3]}px;
+	padding: ${space[2]}px;
+`;
 
 /**
  * @description
@@ -102,10 +107,10 @@ export const NewslettersList = ({
 						</h2>
 					</Hide>
 					{group.newsletters.map((newsletter) => (
-						<EmailSignup
-							{...newsletter}
-							hidePrivacyMessage={true}
-						/>
+						<div css={cardStyle} key={newsletter.listId}>
+							<h3>{newsletter.name}</h3>
+							<p>{newsletter.description}</p>
+						</div>
 					))}
 				</Section>
 			))}

@@ -17,10 +17,8 @@ import { keyEventsToHtml } from './keyEventsToHtml';
 import { newslettersToHtml } from './newslettersToHtml';
 import {
 	buildPageModel,
-	TEST_NEWSLETTERS,
 	validateNewsletter,
 } from './page-model/provideStaticNewslettersModel';
-import { Newsletter } from '../../types/content';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -203,41 +201,24 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 
 const enhanceNewsletters = (body: unknown): NewslettersPageModel => {
 	if (!body || typeof body !== 'object') {
-		console.error('no body record!');
-		return buildPageModel([]);
+		throw new Error('no body record!');
 	}
 
 	const record = body as Record<keyof NewslettersPageModel, unknown>;
 	const { newsletters } = record;
 
 	if (!newsletters || !Array.isArray(newsletters)) {
-		console.error('no newsletters array!');
-		return buildPageModel([]);
+		throw new Error('no newsletters array');
 	}
 
 	const validatedNewsletters = newsletters.filter(validateNewsletter);
-
-	console.log(
-		'enhanceNewsletters okay',
-		validatedNewsletters.length,
-	);
-	return buildPageModel(validatedNewsletters.slice(0, 3));
+	return buildPageModel(validatedNewsletters);
 };
 
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
-
-		const startTime = Date.now()
 		const model = enhanceNewsletters(body);
-		const modelDoneTime = Date.now()
 		const content = newslettersToHtml(model);
-		const renderDoneTime = Date.now()
-
-		console.log({
-			startTime,
-			modelBuild: modelDoneTime - startTime,
-			renderTime: renderDoneTime - modelDoneTime,
-		})
 		res.status(200).send(content);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
