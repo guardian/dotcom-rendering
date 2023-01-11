@@ -1,9 +1,12 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card50_Card25_Card25 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+import {
+	Card25Media25Tall,
+	Card50Media50,
+	CardDefault,
+} from '../lib/cardWrappers';
 
 type Props = {
 	trails: TrailType[];
@@ -43,15 +46,40 @@ export const FixedMediumFastXI = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const firstSlice = trails.slice(0, 3);
+	const firstSlice50 = trails.slice(0, 1);
+	const firstSlice25 = trails.slice(1, 3);
 	const remaining = trails.slice(3, 11);
 	return (
 		<>
-			<Card50_Card25_Card25
-				cards={firstSlice}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
+			<UL direction="row" padBottom={true}>
+				{firstSlice50.map((trail) => {
+					return (
+						<LI key={trail.url} padSides={true} percentage="50%">
+							<Card50Media50
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+							/>
+						</LI>
+					);
+				})}
+				{firstSlice25.map((trail) => {
+					return (
+						<LI
+							key={trail.url}
+							padSides={true}
+							percentage="25%"
+							showDivider={true}
+						>
+							<Card25Media25Tall
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
 			{/*
 			 * This pattern of using wrapCards on the UL + percentage=25 and stretch=true
 			 * on the LI creates a dynanic list of cards over two rows where the second row
@@ -76,12 +104,10 @@ export const FixedMediumFastXI = ({
 						stretch={true}
 						key={trail.url}
 					>
-						<FrontCard
+						<CardDefault
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							imageUrl={undefined}
-							headlineSize="small"
 						/>
 					</LI>
 				))}
