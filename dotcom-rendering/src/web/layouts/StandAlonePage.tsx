@@ -11,7 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
-import type { BasePageModel } from 'src/model/pageModel';
+import type { BasePageModel } from '../../model/pageModel';
 import { AlreadyVisited } from '../components//AlreadyVisited.importable';
 import { CoreVitals } from '../components//CoreVitals.importable';
 import { FocusStyles } from '../components//FocusStyles.importable';
@@ -114,15 +114,11 @@ export const StandAlonePage = ({
 							editionId={editionId}
 							idUrl={config.idUrl}
 							mmaUrl={config.mmaUrl}
-							supporterCTA={
-								nav.readerRevenueLinks.header.supporter
-							}
 							discussionApiUrl={config.discussionApiUrl}
 							urls={nav.readerRevenueLinks.header}
 							remoteHeader={!!config.switches.remoteHeader}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={config.idApiUrl}
-							headerTopBarSwitch={!!config.switches.headerTopNav}
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!config.switches.headerTopBarSearchCapiSwitch
