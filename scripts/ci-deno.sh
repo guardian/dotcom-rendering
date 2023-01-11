@@ -15,6 +15,5 @@ deno run \
 deno run \
 	--no-check=remote \
 	--allow-net \
-	--allow-env="GITHUB_TOKEN" \
-	--allow-env="CAPI_KEY" \
+	--allow-env="GITHUB_TOKEN,CAPI_KEY" \
 	scripts/deno/iframe-titles.ts
