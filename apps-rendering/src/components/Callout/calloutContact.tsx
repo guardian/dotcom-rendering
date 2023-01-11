@@ -42,6 +42,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 				priority="primary"
 				href={OPEN_WHATSAPP_URL}
 				target="_blank"
+				rel="noopener"
 			>
 				Message us on Whatsapp
 			</LinkButton>
@@ -52,6 +53,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 				priority="primary"
 				href={OPEN_TELEGRAM_URL}
 				target="_blank"
+				rel="noopener"
 			>
 				Message us on Telegram
 			</LinkButton>
@@ -62,6 +64,7 @@ const CalloutContact: FC<CalloutContactProps> = ({ format }) => {
 				priority="primary"
 				href={OPEN_SIGNAL_URL}
 				target="_blank"
+				rel="noopener"
 			>
 				Message us on Signal
 			</LinkButton>
