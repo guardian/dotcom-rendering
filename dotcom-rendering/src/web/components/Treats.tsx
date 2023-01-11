@@ -33,7 +33,7 @@ const TextTreat = ({
 			priority="secondary"
 			subdued={true}
 			cssOverrides={css`
-				${textSans.xsmall()}
+				${textSans.xxsmall()}
 				text-decoration: none;
 			`}
 			href={linkTo}
