@@ -1,6 +1,13 @@
 import { getLocale } from '@guardian/libs';
 import type { CountryCode } from '@guardian/libs';
 
+/**
+ * Generally we see SecurityErrors when a users browser has restrictive privacy settings that prevent access to local storage.
+ * We should avoid reporting these errors to Sentry as they're not very useful to us and create a lot of noise.
+ */
+const isSecurityError = (error: unknown) =>
+	error instanceof Error && error.name === 'SecurityError';
+
 /*
 	This method returns the location of the user from guardian/libs getLocale
 	It will return fastly's 'GU_geo_country' if it exists,
@@ -9,10 +16,7 @@ import type { CountryCode } from '@guardian/libs';
  */
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
 	return getLocale().catch((error) => {
-		// Generally we see SecurityErrors when a users browser has restrictive privacy settings that prevent access to local storage.
-		// We should avoid reporting these errors to Sentry as they're not very useful to us and create a lot of noise.
-		if (error instanceof Error && error.name === 'SecurityError')
-			return null;
+		if (isSecurityError(error)) return null;
 
 		console.log(`Error getting location from libs/getLocale`);
 		window.guardian.modules.sentry.reportError(error, 'get-country-code');
