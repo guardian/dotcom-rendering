@@ -467,6 +467,9 @@
                             "displayName": {
                                 "type": "string"
                             },
+                            "description": {
+                                "type": "string"
+                            },
                             "curated": {
                                 "type": "array",
                                 "items": {
@@ -753,7 +756,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -1423,7 +1426,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -2093,7 +2096,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -2984,6 +2987,9 @@
                 "isLiveBlog": {
                     "type": "boolean"
                 },
+                "masterImage": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 },
@@ -3033,6 +3039,9 @@
                     "$ref": "#/definitions/Branding"
                 },
                 "isSnap": {
+                    "type": "boolean"
+                },
+                "isCrossword": {
                     "type": "boolean"
                 },
                 "snapData": {

@@ -5,10 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '../../../../common-rendering/src/fixtures/article';
+import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { SubMeta } from './SubMeta';
 
 export default {
@@ -215,7 +212,7 @@ export const DeadBlogStory = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<Wrapper>
+				<Wrapper key={JSON.stringify(format)}>
 					<p>{getThemeNameAsString(format)}</p>
 					<SubMeta
 						format={format}

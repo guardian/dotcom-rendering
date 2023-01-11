@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
-import Body from 'components/ArticleBody';
+import ArticleBody from 'components/ArticleBody';
 import DesignTag from 'components/DesignTag';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
@@ -24,19 +24,29 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import type { MatchScores } from 'football';
 import { getFormat } from 'item';
 import type {
-	Explainer as ExplainerItem,
+	Correction,
+	Explainer,
+	Feature,
+	Interactive,
+	Interview,
 	Item,
-	MatchReport as MatchReportItem,
-	Review as ReviewItem,
-	Standard as StandardItem,
+	MatchReport,
+	Obituary,
+	PhotoEssay,
+	PrintShop,
+	Quiz,
+	Recipe,
+	Review,
+	Standard,
 } from 'item';
 import { maybeRender, pipe } from 'lib';
 import { Optional } from 'optional';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -74,11 +84,23 @@ const decideLines = (
 };
 
 interface Props {
-	item: StandardItem | ReviewItem | MatchReportItem | ExplainerItem;
-	children: ReactNode[];
+	item:
+		| Feature
+		| Explainer
+		| Review
+		| Standard
+		| Interactive
+		| Quiz
+		| MatchReport
+		| Obituary
+		| Correction
+		| Interview
+		| Recipe
+		| PrintShop
+		| PhotoEssay;
 }
 
-const StandardLayout: FC<Props> = ({ item, children }) => {
+const StandardLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
@@ -142,10 +164,22 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+
+					{item.outline.length > 0 && (
+						<section css={articleWidthStyles}>
+							<TableOfContents
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
+					)}
 				</header>
-				<Body className={[articleWidthStyles]} format={item}>
-					{children}
-				</Body>
+				<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 				{epicContainer}
 				<section className="js-tags" css={articleWidthStyles}>
 					<Tags item={item} />

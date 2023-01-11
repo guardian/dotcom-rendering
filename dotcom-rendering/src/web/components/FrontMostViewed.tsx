@@ -26,7 +26,7 @@ export const FrontMostViewed = ({
 
 	const tabs: TrailTabType[] = [
 		{
-			heading: showMostViewedTab ? sectionName : undefined,
+			heading: sectionName,
 			trails: trails.slice(0, 10),
 		},
 	];

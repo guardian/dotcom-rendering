@@ -1,6 +1,5 @@
-import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
-import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
+import type { KeyEvent } from './KeyEvents';
+import { KeyEvents } from './KeyEvents';
 
 type Props = {
 	keyEvents: Block[];
@@ -37,11 +36,5 @@ export const KeyEventsContainer = ({
 			};
 		});
 
-	return (
-		<KeyEvents
-			format={format}
-			keyEvents={transformedKeyEvents}
-			supportsDarkMode={false}
-		/>
-	);
+	return <KeyEvents format={format} keyEvents={transformedKeyEvents} />;
 };

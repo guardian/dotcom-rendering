@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
-import type { TableOfContentsItem } from 'src/types/frontend';
-import { CAPIElement, SubheadingBlockElement } from '../types/content';
+import type { CAPIElement, SubheadingBlockElement } from '../types/content';
+import type { TableOfContentsItem } from '../types/frontend';
 
 const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	return (
@@ -35,10 +35,7 @@ export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
 ): TableOfContentsItem[] | undefined => {
-	if (
-		format.design !== 'ExplainerDesign' ||
-		hasInteractiveContentsElement(blocks)
-	) {
+	if (hasInteractiveContentsElement(blocks)) {
 		return undefined;
 	}
 

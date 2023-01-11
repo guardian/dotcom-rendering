@@ -97,6 +97,7 @@ module.exports = {
 		'react/jsx-boolean-value': [2, 'always'],
 		'react/jsx-indent-props': [2, 'tab'],
 		'react/jsx-indent': [2, 'tab'],
+		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
@@ -134,6 +135,18 @@ module.exports = {
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
 			{ packageDir: ['..', '.'] },
+		],
+		'no-restricted-imports': [
+			'error',
+			{
+				patterns: [
+					{
+						group: ['src/*'],
+						message:
+							'Paths starting with “src/” are forbidden. Please use a relative path instead',
+					},
+				],
+			},
 		],
 
 		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],

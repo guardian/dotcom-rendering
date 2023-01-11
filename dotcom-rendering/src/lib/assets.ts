@@ -86,6 +86,10 @@ const getScripts = (
 		const manifest = getManifest(manifestPath);
 		const filename = manifest[file];
 
+		if (!filename) {
+			throw new Error(`Missing manifest for ${file}`);
+		}
+
 		return `${ASSET_ORIGIN}assets/${filename}`;
 	});
 };

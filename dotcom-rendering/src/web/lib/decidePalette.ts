@@ -7,7 +7,6 @@ import {
 } from '@guardian/libs';
 import {
 	border,
-	brand,
 	brandAlt,
 	brandAltBackground,
 	culture,
@@ -500,6 +499,27 @@ const textKeyEvent = (format: ArticleFormat): string => {
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
 			return news[300];
+	}
+};
+
+const textKeyEventFromDesktop = ({ theme }: ArticleFormat) => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -1526,6 +1546,50 @@ const textRichLink = (format: ArticleFormat): string => {
 	}
 };
 
+const textCalloutAccent = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return format.design === ArticleDesign.Analysis
+				? news[300]
+				: news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return BLACK;
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
+const textPagination = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const hoverStandfirstLink = (format: ArticleFormat): string => {
 	return textStandfirstLink(format);
 };
@@ -1615,6 +1679,10 @@ const borderSecondary = (format: ArticleFormat) => {
 	return neutral[86];
 };
 
+const borderPagination = () => {
+	return neutral[86];
+};
+
 const fillRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1684,10 +1752,6 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 		}
 	}
 	return pillarPalette[format.theme].main;
-};
-
-const textCalloutHeading = (): string => {
-	return brand[500];
 };
 
 const textDropCap = (format: ArticleFormat): string => {
@@ -1953,6 +2017,27 @@ const hoverSummaryEventBullet = (format: ArticleFormat): string => {
 	}
 };
 
+const hoverPagination = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -1961,6 +2046,7 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
+			calloutAccent: textCalloutAccent(format),
 			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
@@ -1998,13 +2084,13 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),
+			pagination: textPagination(format),
 			pullQuote: textPullQuote(format),
 			pullQuoteAttribution: textPullQuoteAttribution(format),
 			witnessIcon: textWitnessIcon(format),
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
@@ -2014,6 +2100,7 @@ export const decidePalette = (
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
+			keyEventFromDesktop: textKeyEventFromDesktop(format),
 			keyEventTime: textKeyEventTime(),
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
@@ -2093,6 +2180,7 @@ export const decidePalette = (
 			keyEvent: borderKeyEvent(),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),
+			pagination: borderPagination(),
 		},
 		topBar: {
 			card: overrides?.topBar.card ?? topBarCard(format),
@@ -2103,6 +2191,7 @@ export const decidePalette = (
 			keyEventLink: hoverKeyEventLink(format),
 			keyEventBullet: hoverKeyEventBullet(),
 			summaryEventBullet: hoverSummaryEventBullet(format),
+			pagination: hoverPagination(format),
 		},
 	};
 };

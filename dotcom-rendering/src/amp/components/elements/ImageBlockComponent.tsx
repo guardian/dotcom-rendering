@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import TriangleIcon from '../../../static/icons/triangle.svg';
-import type { ImageBlockElement, SrcSetItem } from '../../../types/content';
+import type { ImageBlockElement } from '../../../types/content';
 import { bestFitImage, heightEstimate } from '../../lib/image-fit';
 
 const figureStyle = css`
@@ -23,14 +23,11 @@ type Props = {
 
 export const ImageBlockComponent = ({ element, pillar }: Props) => {
 	const containerWidth = 600;
-	const image: SrcSetItem = bestFitImage(
-		element.imageSources,
-		containerWidth,
-	);
-	const height: number = heightEstimate(
-		element.media.allImages[0],
-		image.width,
-	);
+	const image = bestFitImage(element.imageSources, containerWidth);
+	const [firstImage] = element.media.allImages;
+	if (!image || !firstImage) return null;
+
+	const height: number = heightEstimate(firstImage, image.width);
 	const iconStyle = css`
 		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
 		padding-right: 3px;
@@ -48,10 +45,6 @@ export const ImageBlockComponent = ({ element, pillar }: Props) => {
 			font-weight: bold;
 		}
 	`;
-
-	if (!image) {
-		return null;
-	}
 
 	return (
 		<figure css={figureStyle}>

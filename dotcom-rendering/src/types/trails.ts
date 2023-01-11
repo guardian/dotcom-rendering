@@ -21,6 +21,7 @@ interface BaseTrailType {
 	linkText?: string;
 	branding?: Branding;
 	isSnap?: boolean;
+	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
 }
@@ -50,10 +51,11 @@ export interface CAPITrailType extends BaseTrailType {
 	pillar?: string;
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
+	masterImage?: string;
 }
 
 export interface TrailTabType {
-	heading?: string;
+	heading: string;
 	trails: TrailType[];
 }
 

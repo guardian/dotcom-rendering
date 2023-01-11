@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
+import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
 const Header = ({ children }: { children: React.ReactNode }) => (
@@ -32,7 +33,12 @@ const Nav = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const links = [
+const links: [
+	DropdownLinkType,
+	DropdownLinkType,
+	DropdownLinkType,
+	DropdownLinkType,
+] = [
 	{
 		id: 'uk',
 		url: '/preference/edition/uk',
@@ -120,6 +126,7 @@ const linksWithNotifications = [
 				id: 'example-id',
 				message: 'Billing attempt failed',
 				target: 'billing',
+				ophanLabel: 'notification-label',
 			},
 		],
 	},

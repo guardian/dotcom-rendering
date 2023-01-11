@@ -4,7 +4,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import type { TableOfContentsItem } from 'src/types/frontend';
+import type { TableOfContentsItem } from '../../types/frontend';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
@@ -19,10 +19,14 @@ const listItemStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
 	border-bottom: 1px solid ${line.primary};
 	padding: 6px 0;
+
+	&:last-child {
+		border-bottom: none;
+	}
 `;
 
 const detailsStyles = css`
-	padding: 6px 0;
+	padding: ${space[4]}px 0 ${space[6]}px 0;
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;
@@ -76,7 +80,7 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 
 			<ul>
 				{tableOfContents.map((item) => (
-					<li css={listItemStyles}>
+					<li key={item.id} css={listItemStyles}>
 						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
 						</a>

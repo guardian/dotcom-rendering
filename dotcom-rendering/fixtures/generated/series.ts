@@ -19,17 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/26/kids-tv-the-surprising-story-review-the-fascinating-tale-of-how-cbbc-has-opened-our-minds',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/03/waterloo-road-review-a-lesson-in-how-not-to-revive-a-tv-show',
 			linkText:
-				'Kids’ TV: The Surprising Story review – the fascinating tale of how CBBC has opened our minds',
+				'Waterloo Road review – a lesson in how not to revive a TV show ',
 			showByline: false,
-			byline: 'Stuart Jeffries',
+			byline: 'Jack Seale',
 			masterImage:
-				'https://media.guim.co.uk/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg',
-			image: 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
+				'https://media.guim.co.uk/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg',
+			image: 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=300&quality=85&auto=format&fit=max&s=9b056712f82a4d0484bd6f2402d84f52',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=300&quality=85&auto=format&fit=max&s=38c126c0b35fb9d1bcde4ae99fbb2203',
-				'460': 'https://i.guim.co.uk/img/media/d8ac969a686cb6faceb1583080fc4926f4f6881b/0_490_4039_2425/master/4039.jpg?width=460&quality=85&auto=format&fit=max&s=262fb0eec17d174c48d0893f58cf57f6',
+				'300': 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=300&quality=85&auto=format&fit=max&s=9b056712f82a4d0484bd6f2402d84f52',
+				'460': 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=460&quality=85&auto=format&fit=max&s=31974afca3399ec9150b2a5857fabdf2',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -39,159 +39,24 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-10-26T21:00:11.000Z',
+			webPublicationDate: '2023-01-03T21:00:58.000Z',
 			headline:
-				'Kids’ TV: The Surprising Story review – the fascinating tale of how CBBC has opened our minds',
-			shortUrl: 'https://www.theguardian.com/p/mgq9c',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/25/the-white-lotus-season-two-review-this-immaculate-seriess-writing-is-utterly-unrivalled',
-			linkText:
-				'The White Lotus season two review – this immaculate show’s writing is utterly unrivalled',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg',
-			image: 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=300&quality=85&auto=format&fit=max&s=6043fab5f01851e9cc625c254222d80b',
-				'460': 'https://i.guim.co.uk/img/media/cceac926d6098982cf821d8f3029470a03a042d9/0_180_6240_3744/master/6240.jpg?width=460&quality=85&auto=format&fit=max&s=8b53ceaae9fdf6d1daaa3c0cb51e84ae',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-10-25T16:47:19.000Z',
-			headline:
-				'The White Lotus season two review – this immaculate show’s writing is utterly unrivalled',
-			shortUrl: 'https://www.theguardian.com/p/mgqzf',
-			starRating: 5,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/25/guillermo-del-toro-cabinet-of-curiosities-review-netflix',
-			linkText:
-				'Guillermo del Toro’s Cabinet of Curiosities review – the horror series that’s perfect pre-Halloween viewing',
-			showByline: false,
-			byline: 'Leila Latif',
-			masterImage:
-				'https://media.guim.co.uk/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg',
-			image: 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=e46971f1785c8b0f40d6fc2c0758bf97',
-				'460': 'https://i.guim.co.uk/img/media/d3aec9bcd31907db04073198a061cb3609dafa76/0_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=10fb6ec2f9da65d46e0f4f3e4a958968',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-10-25T15:13:00.000Z',
-			headline:
-				'Guillermo del Toro’s Cabinet of Curiosities review – the horror series that’s perfect pre-Halloween viewing',
-			shortUrl: 'https://www.theguardian.com/p/mgv3c',
-			starRating: 5,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/25/my-massive-cock-review-channel-4',
-			linkText:
-				'My Massive Cock review – you will never be able to unsee this penis documentary',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg',
-			image: 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=300&quality=85&auto=format&fit=max&s=d7ef455c9bd00e91dc09b235aa92dfd4',
-				'460': 'https://i.guim.co.uk/img/media/96eea5a873a0c5f594094b61c8daa74c99146699/0_162_5390_3236/master/5390.jpg?width=460&quality=85&auto=format&fit=max&s=2dd3d66b61401fe1266ca8473058e4dc',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-10-25T09:00:13.000Z',
-			headline:
-				'My Massive Cock review – you will never be able to unsee this penis documentary',
-			shortUrl: 'https://www.theguardian.com/p/mgznz',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/24/house-of-the-dragon-finale-review-this-meticulous-series-saved-its-best-episode-for-last',
-			linkText:
-				'House of the Dragon finale review – this meticulous series saved its best episode for last',
-			showByline: false,
-			byline: 'Stuart Heritage',
-			masterImage:
-				'https://media.guim.co.uk/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg',
-			image: 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=300&quality=85&auto=format&fit=max&s=c4a779ca148a67e1631328922343e809',
-				'460': 'https://i.guim.co.uk/img/media/3744a5ce0db39b272a1ed75ffb249d130f17ed6d/117_541_5765_3459/master/5765.jpg?width=460&quality=85&auto=format&fit=max&s=7969d69bc0479444d699859f0ccc3298',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-10-24T21:10:16.000Z',
-			headline:
-				'House of the Dragon finale review – this meticulous series saved its best episode for last',
-			shortUrl: 'https://www.theguardian.com/p/mgkv3',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/24/28-days-haunted-review-the-ghost-hunting-show-that-will-make-you-roll-your-eyes-like-never-before',
-			linkText:
-				'28 Days Haunted review – the ghost-hunting show that will make you roll your eyes like never before',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg',
-			image: 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=300&quality=85&auto=format&fit=max&s=b00a81a5156ae1109994adb99ff641a5',
-				'460': 'https://i.guim.co.uk/img/media/c0dc138961466b1d920051a04770255b2b9bf145/177_4_5306_3186/master/5306.jpg?width=460&quality=85&auto=format&fit=max&s=3df25cae424c7d005f9a205aa8caca14',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-10-24T17:01:29.000Z',
-			headline:
-				'28 Days Haunted review – the ghost-hunting show that will make you roll your eyes like never before',
-			shortUrl: 'https://www.theguardian.com/p/mgkd5',
+				'Waterloo Road review – a lesson in how not to revive a TV show ',
+			shortUrl: 'https://www.theguardian.com/p/n3dny',
 			starRating: 2,
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/23/una-marson-our-lost-caribbean-voice-review-a-beautiful-moving-portrait-of-bbcs-first-black-broadcaster',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/03/copenhagen-cowboy-review-nicolas-winding-refn-netflix-series',
 			linkText:
-				'Una Marson: Our Lost Caribbean Voice review – a beautiful, moving portrait of BBC’s first Black broadcaster',
+				'Copenhagen Cowboy review – Nicolas Winding Refn’s scattershot Netflix series',
 			showByline: false,
-			byline: 'Rebecca Nicholson',
+			byline: 'Charles Bramesco',
 			masterImage:
-				'https://media.guim.co.uk/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg',
-			image: 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
+				'https://media.guim.co.uk/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg',
+			image: 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=300&quality=85&auto=format&fit=max&s=c865bcc9b91768b64b0aac3aecfe4dfa',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=300&quality=85&auto=format&fit=max&s=ebc6dcbed2ab775a4b92120e287f07c5',
-				'460': 'https://i.guim.co.uk/img/media/b4fd52d38ad78b6857978dd3eb739da9b694e700/0_120_4281_2569/master/4281.jpg?width=460&quality=85&auto=format&fit=max&s=562c12574634c9e52b227d08c198af27',
+				'300': 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=300&quality=85&auto=format&fit=max&s=c865bcc9b91768b64b0aac3aecfe4dfa',
+				'460': 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=460&quality=85&auto=format&fit=max&s=228717bdcaaaeec1dc59a46f4a0e9565',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -201,24 +66,24 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-10-23T21:00:47.000Z',
+			webPublicationDate: '2023-01-03T14:49:36.000Z',
 			headline:
-				'Una Marson: Our Lost Caribbean Voice review – a beautiful, moving portrait of BBC’s first Black broadcaster',
-			shortUrl: 'https://www.theguardian.com/p/mfn6y',
-			starRating: 4,
+				'Copenhagen Cowboy review – Nicolas Winding Refn’s scattershot Netflix series',
+			shortUrl: 'https://www.theguardian.com/p/n3dyq',
+			starRating: 3,
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/23/doctor-who-review-jodie-whittaker-bows-out-with-big-bangs-and-even-bigger-heart',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/02/stonehouse-review-matthew-macfadyen-keeley-hawes',
 			linkText:
-				'Doctor Who review – Jodie Whittaker bows out with big bangs and even bigger heart',
+				'Stonehouse review – Matthew Macfadyen is a brilliantly bad baddie in this fun, death-faking romp ',
 			showByline: false,
 			byline: 'Rebecca Nicholson',
 			masterImage:
-				'https://media.guim.co.uk/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg',
-			image: 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
+				'https://media.guim.co.uk/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg',
+			image: 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=300&quality=85&auto=format&fit=max&s=cbe04db6afa581c0540c7d2807d99469',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=670f475d32058bd1a7cae9c369761dd5',
-				'460': 'https://i.guim.co.uk/img/media/8882dbaa0b45872d3efc521f420106972bbf6cdd/0_125_4800_2880/master/4800.jpg?width=460&quality=85&auto=format&fit=max&s=019ab2dd892c58a9f74a0006ddc9911c',
+				'300': 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=300&quality=85&auto=format&fit=max&s=cbe04db6afa581c0540c7d2807d99469',
+				'460': 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=460&quality=85&auto=format&fit=max&s=8cbd49456e0ef86c6ab250b15060dde0',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -228,24 +93,24 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-10-23T20:00:46.000Z',
+			webPublicationDate: '2023-01-02T22:05:26.000Z',
 			headline:
-				'Doctor Who review – Jodie Whittaker bows out with big bangs and even bigger heart',
-			shortUrl: 'https://www.theguardian.com/p/mgvfx',
+				'Stonehouse review – Matthew Macfadyen is a brilliantly bad baddie in this fun, death-faking romp ',
+			shortUrl: 'https://www.theguardian.com/p/n37z5',
 			starRating: 4,
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/21/the-peripheral-review-chloe-grace-moretz',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/01/happy-valley-review-sally-wainwright-masterwork-is-back',
 			linkText:
-				'The Peripheral review - Westworld creators’ new sci-fi is brilliant  … if you can actually understand it',
+				'Happy Valley review – Sally Wainwright’s masterwork is back!',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
+				'https://media.guim.co.uk/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg',
+			image: 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=300&quality=85&auto=format&fit=max&s=3ed13e4c4f1d6aaae92a1b6f93f129ab',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=4331943109f8fd82f6c717a7b43a833b',
-				'460': 'https://i.guim.co.uk/img/media/1fb6a3d5266bc2c44149fbdd19102a6feb700efe/0_38_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c1fd75fde6f0d08ea9daaac5fe092c8d',
+				'300': 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=300&quality=85&auto=format&fit=max&s=3ed13e4c4f1d6aaae92a1b6f93f129ab',
+				'460': 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=460&quality=85&auto=format&fit=max&s=4d884dacd679f0ac2007418a8aa4021d',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -255,24 +120,105 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-10-21T05:00:16.000Z',
+			webPublicationDate: '2023-01-01T22:00:06.000Z',
 			headline:
-				'The Peripheral review - Westworld creators’ new sci-fi is brilliant  … if you can actually understand it',
-			shortUrl: 'https://www.theguardian.com/p/mfq7k',
+				'Happy Valley review – Sally Wainwright’s masterwork is back!',
+			shortUrl: 'https://www.theguardian.com/p/mqq53',
+			starRating: 5,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/01/romantic-getaway-review-katherine-ryan-and-romesh-ranganathan-are-brilliant-in-ivf-heist-caper',
+			linkText:
+				'Romantic Getaway review – Katherine Ryan and Romesh Ranganathan are brilliant in IVF heist caper',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg',
+			image: 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=300&quality=85&auto=format&fit=max&s=82eef250d1871688859ed9dc93d8e557',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=300&quality=85&auto=format&fit=max&s=82eef250d1871688859ed9dc93d8e557',
+				'460': 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=460&quality=85&auto=format&fit=max&s=5f6b8986a51a3ecb3fe4c3c6b4071163',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-01-01T21:30:05.000Z',
+			headline:
+				'Romantic Getaway review – Katherine Ryan and Romesh Ranganathan are brilliant in IVF heist caper',
+			shortUrl: 'https://www.theguardian.com/p/mqcxz',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/29/prince-andrew-the-musical-review-epstein-channel-4',
+			linkText:
+				'Prince Andrew: The Musical review – plays the Epstein scandal for laughs in a way that is … not OK',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=9c809f6e7abaff2d3901742d6a34b6b4',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=9c809f6e7abaff2d3901742d6a34b6b4',
+				'460': 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=935507690b38e78cf379851d23bba872',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-12-29T22:05:31.000Z',
+			headline:
+				'Prince Andrew: The Musical review – plays the Epstein scandal for laughs in a way that is … not OK',
+			shortUrl: 'https://www.theguardian.com/p/mqk9t',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/29/marie-antoinette-review-bbc',
+			linkText:
+				'Marie Antoinette review – if you loved The Favourite, you’ll adore this fun period drama',
+			showByline: false,
+			byline: 'Emine Saner',
+			masterImage:
+				'https://media.guim.co.uk/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg',
+			image: 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=300&quality=85&auto=format&fit=max&s=cec6d39fd0d61ab1408ed1d835713a7e',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=300&quality=85&auto=format&fit=max&s=cec6d39fd0d61ab1408ed1d835713a7e',
+				'460': 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=460&quality=85&auto=format&fit=max&s=5e7eb136d5be2348b1af06877c5eee6b',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-12-29T21:55:30.000Z',
+			headline:
+				'Marie Antoinette review – if you loved The Favourite, you’ll adore this fun period drama',
+			shortUrl: 'https://www.theguardian.com/p/mqetp',
 			starRating: 4,
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/oct/20/gangs-of-london-season-two-review-why-do-millions-of-people-watch-this-bloody-dross',
+			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/28/mayflies-review-bleak-drama-death-betrayal-best-friends-80s-indie-soundtrack',
 			linkText:
-				'Gangs of London season two review – why do millions of people watch this bloody dross?',
+				'Mayflies review – Martin Compston reveals hidden depths in this drama of death and betrayal',
 			showByline: false,
 			byline: 'Stuart Jeffries',
 			masterImage:
-				'https://media.guim.co.uk/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg',
-			image: 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
+				'https://media.guim.co.uk/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg',
+			image: 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=300&quality=85&auto=format&fit=max&s=fe76d798b9ea4692836737e9176c7379',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=300&quality=85&auto=format&fit=max&s=f4076bbe3074148d3c1123216ac86094',
-				'460': 'https://i.guim.co.uk/img/media/657a9ee5c748ff61c9378dc4257954db97830d62/0_34_8094_4857/master/8094.jpg?width=460&quality=85&auto=format&fit=max&s=31d980274aed29ad6443d4d1f0a0b841',
+				'300': 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=300&quality=85&auto=format&fit=max&s=fe76d798b9ea4692836737e9176c7379',
+				'460': 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=460&quality=85&auto=format&fit=max&s=361deba1effbf13b28ee8a0477037875',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -282,11 +228,65 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-10-20T21:20:04.000Z',
+			webPublicationDate: '2022-12-28T22:00:02.000Z',
 			headline:
-				'Gangs of London season two review – why do millions of people watch this bloody dross?',
-			shortUrl: 'https://www.theguardian.com/p/mfkfx',
-			starRating: 1,
+				'Mayflies review – Martin Compston reveals hidden depths in this drama of death and betrayal',
+			shortUrl: 'https://www.theguardian.com/p/mqadf',
+			starRating: 4,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/28/without-sin-review-vicky-mcclure-itvx-drama',
+			linkText:
+				'Without Sin review – Vicky McClure is fantastic in this heavyweight thriller',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg',
+			image: 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=300&quality=85&auto=format&fit=max&s=b85d286a1f4818616354f54da57e2c95',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=300&quality=85&auto=format&fit=max&s=b85d286a1f4818616354f54da57e2c95',
+				'460': 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=460&quality=85&auto=format&fit=max&s=e19557aaf399658f7bc5372e60b68edd',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-12-28T09:00:46.000Z',
+			headline:
+				'Without Sin review – Vicky McClure is fantastic in this heavyweight thriller',
+			shortUrl: 'https://www.theguardian.com/p/mqe9f',
+			starRating: 4,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/26/detectorists-christmas-special-review-the-best-thing-you-will-watch-all-festive-period',
+			linkText:
+				'Detectorists Christmas Special review – the best thing you will watch all festive period',
+			showByline: false,
+			byline: 'Jack Seale',
+			masterImage:
+				'https://media.guim.co.uk/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg',
+			image: 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=5bdcffc4fe736a6688063ce75eea6700',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=5bdcffc4fe736a6688063ce75eea6700',
+				'460': 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=24bd8fd3a5edcf40178200896b3af40e',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-12-26T22:15:05.000Z',
+			headline:
+				'Detectorists Christmas Special review – the best thing you will watch all festive period',
+			shortUrl: 'https://www.theguardian.com/p/mqpzt',
+			starRating: 4,
 		},
 	],
 };

@@ -9,6 +9,7 @@ import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
+import type { Optional } from 'optional';
 import type { ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -72,7 +73,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	standfirst: Option<DocumentFragment>;
+	standfirst: Optional<DocumentFragment>;
 	byline: string;
 	bylineHtml: Option<DocumentFragment>;
 	format: ArticleFormat;
@@ -84,7 +85,7 @@ const ImmersiveStandfirst: React.FC<Props> = ({
 	byline,
 	bylineHtml,
 }) =>
-	maybeRender(standfirst, (standfirstDoc) => (
+	maybeRender(standfirst.toOption(), (standfirstDoc) => (
 		<div css={styles(format)}>
 			{renderContent(standfirstDoc, format, byline, bylineHtml)}
 		</div>

@@ -10,7 +10,7 @@ import type {
 } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { Form } from './Callout/Form';
+import { Form } from './CalloutEmbed/Form';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -102,7 +102,7 @@ const descriptionStyles = css`
 
 const headingTextStyles = (palette: Palette) => css`
 	a {
-		color: ${palette.text.calloutHeading};
+		color: ${palette.text.calloutAccent};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;

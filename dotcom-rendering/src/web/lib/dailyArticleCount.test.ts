@@ -1,4 +1,4 @@
-import type { DailyArticleHistory } from './dailyArticleCount';
+import type { DailyArticle, DailyArticleHistory } from './dailyArticleCount';
 import {
 	DailyArticleCountKey,
 	getDailyArticleCount,
@@ -7,7 +7,7 @@ import {
 
 const today = Math.floor(Date.now() / 86400000);
 
-const validDailyArticleCount: DailyArticleHistory = [
+const validDailyArticleCount: [DailyArticle, DailyArticle, DailyArticle] = [
 	{
 		day: today,
 		count: 3,
@@ -92,12 +92,12 @@ describe('dailyArticleCount', () => {
 		incrementDailyArticleCount();
 
 		// set up expected object (views for today should be incremented)
-		const expected = [...validDailyArticleCount];
-		expected[0].count += 1;
+		const [expectedFirst, ...expectedRemaining] = validDailyArticleCount;
+		expectedFirst.count += 1;
 
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual(expected);
+		expect(output).toEqual([expectedFirst, ...expectedRemaining]);
 	});
 
 	it('increments daily article count for today if daily article count exists, but not for day', () => {
@@ -114,12 +114,14 @@ describe('dailyArticleCount', () => {
 		incrementDailyArticleCount();
 
 		// set up expected object (views for today should be 1)
-		const expected = [...validDailyArticleCount];
-		expected[0].count = 1;
+		const [expectedFirst, ...expectedRemaining] = [
+			...validDailyArticleCount,
+		];
+		expectedFirst.count = 1;
 
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual(expected);
+		expect(output).toEqual([expectedFirst, ...expectedRemaining]);
 	});
 
 	it('increments daily article for today if it does not exist, and removes any older than 60 days', () => {
@@ -143,11 +145,11 @@ describe('dailyArticleCount', () => {
 		incrementDailyArticleCount();
 
 		// set up expected object (views for today should be incremented, older than 60 days removed)
-		const expected = [...validDailyArticleCount];
-		expected[0].count = 1;
+		const [expectedFirst, ...expectedRemaining] = validDailyArticleCount;
+		expectedFirst.count = 1;
 
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual(expected);
+		expect(output).toEqual([expectedFirst, ...expectedRemaining]);
 	});
 });

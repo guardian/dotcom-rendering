@@ -1,5 +1,5 @@
 import type { DCRCollectionType, FECollectionType } from '../types/front';
-import { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../web/lib/edition';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
@@ -19,14 +19,17 @@ export const enhanceCollections = (
 	pageId: string,
 ): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection) => {
-		const { id, displayName, collectionType, hasMore } = collection;
+		const { id, displayName, collectionType, hasMore, href, description } =
+			collection;
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
 		);
 		return {
 			id,
 			displayName,
+			description,
 			collectionType,
+			href,
 			containerPalette,
 			grouped: groupCards(
 				collectionType,

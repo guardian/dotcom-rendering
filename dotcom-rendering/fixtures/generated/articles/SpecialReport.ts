@@ -1389,7 +1389,7 @@ export const SpecialReport: FEArticleType = {
 				support:
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1541,9 +1541,9 @@ export const SpecialReport: FEArticleType = {
 			type: 'Contributor',
 			title: 'Fiona Harvey',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/12/27/Fiona-Harvey.jpg?width=300&quality=85&auto=format&fit=max&s=7869c3264a0219585179b6e491ea14b3',
+				'https://i.guim.co.uk/img/uploads/2022/12/08/Fiona_Harvey_old_image.jpg?width=300&quality=85&auto=format&fit=max&s=df55c32c5c88b81691b6867c184b460e',
 			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/12/27/Fiona_Harvey,_R.png?width=300&quality=85&auto=format&fit=max&s=66d72d42d428ea06f97eff3debe1ee6a',
+				'https://i.guim.co.uk/img/uploads/2022/12/08/Fiona_Harvey_old_image.png?width=300&quality=85&auto=format&fit=max&s=3d50d6153c8c1316bf23d95433612349',
 		},
 		{
 			id: 'profile/damiancarrington',
@@ -1601,10 +1601,10 @@ export const SpecialReport: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
 				},
 				{
 					text: 'Complaints & corrections',
@@ -1643,10 +1643,10 @@ export const SpecialReport: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
 				},
 			],
 			[
@@ -1770,6 +1770,7 @@ export const SpecialReport: FEArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	showTableOfContents: false,
 	byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
 	headline:
 		'How do we rein in the fossil fuel industry? Here are eight ideas',
@@ -2033,7 +2034,7 @@ export const SpecialReport: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'c0b8e75c-475b-455e-a5cf-d9934b0d9a7d',
+			elementId: '124595a2-339b-41a8-9f8c-36b42ba0e6db',
 		},
 	],
 	canonicalUrl:
@@ -2045,22 +2046,22 @@ export const SpecialReport: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put climate on the ballot paper</strong></h2>',
-					elementId: '0acf3c78-26ff-4af6-9ed1-c6a23f762d03',
+					elementId: '5160606e-4638-4d2c-ab5e-aaeec95aa976',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					elementId: '68508d52-e481-4243-be1c-819daf908368',
+					elementId: 'e0c0e563-9f32-479d-b0a2-f7a99a85fca7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
-					elementId: '599d0925-833a-4677-8f5d-9ad3ed525a8a',
+					elementId: 'e41f6d3b-ed72-41c9-a03b-d2e83bc5e7b3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					elementId: 'a2bcaa03-c680-4416-ac6d-954e632add9e',
+					elementId: '03ae4c96-a3ea-4a4f-acbf-210abb9ccc08',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -2068,62 +2069,62 @@ export const SpecialReport: FEArticleType = {
 					title: 'What is the polluters project?',
 					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					credit: '',
-					elementId: 'e5d567b4-c9a5-46b6-898f-4968553a4f15',
+					elementId: 'e9cb613f-8a59-4ed2-ba6a-1b3950947c8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put a price on carbon</strong></h2>',
-					elementId: '9af089c0-0c3d-480f-94e7-12da806a9521',
+					elementId: '4368d8b8-7504-408c-8bf1-13c91ede77f2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					elementId: 'bae416d2-2551-4fad-b9e7-78571ed48087',
+					elementId: 'b3f6bdd8-4853-4a4b-9790-abbd93a203f4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					elementId: '5d4fd90a-258a-4348-83e0-455e2cdc4cc4',
+					elementId: '53a2dcb9-6253-406a-a453-f4898759c0a0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Stop flaring</strong></h2>',
-					elementId: '1480f900-64c3-4a44-8a97-67cefa15ca78',
+					elementId: '995436e8-a883-48a7-ae15-2dd11ab62470',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>. </p>',
-					elementId: '63922cc6-a719-4374-9dad-6db5debd4c26',
+					elementId: 'a26dc59e-87c9-4b87-9f67-abd7bd072d5d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
-					elementId: '48dca554-6f3c-420c-873b-319dcce2dbb3',
+					elementId: '860a8ea1-8bcc-44d5-bec3-080f3e22f0b7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					elementId: '0d8de6ac-a747-491f-afa8-f8e77a29ac41',
+					elementId: '124ff1b8-9993-431b-9329-8389217e2aee',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Halt investment in fossil fuels</strong></h2>',
-					elementId: 'a42b09f6-f855-44b3-a5fc-3b1b8baa9f07',
+					elementId: 'a5a432ff-a891-4994-936e-bf0f4c26646e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					elementId: '54ec3e79-f40c-49d0-8e31-fdfa7736b534',
+					elementId: '09dcdc5c-22e6-4fd3-8167-47dea0565e61',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Establish market metrics on climate change</strong></h2>',
-					elementId: '2be1d90c-b3c9-4097-9cfd-27228c987333',
+					elementId: 'f70cfe66-ae05-4475-acbd-4bc76b10a64f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					elementId: '663667c2-c184-449f-b443-7da8d6450afa',
+					elementId: 'f73fd144-43f5-4eff-b666-28737612825c',
 				},
 			],
 			attributes: {

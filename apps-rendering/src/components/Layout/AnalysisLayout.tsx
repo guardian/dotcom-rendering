@@ -17,10 +17,11 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -47,10 +48,9 @@ const BorderStyles = css`
 
 interface Props {
 	item: Analysis;
-	children: ReactNode[];
 }
 
-const AnalysisLayout: FC<Props> = ({ item, children }) => (
+const AnalysisLayout: FC<Props> = ({ item }) => (
 	<>
 		<main css={backgroundStyles(item)}>
 			<article css={BorderStyles}>
@@ -69,10 +69,21 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+					{item.outline.length > 0 && (
+						<section css={[articleWidthStyles]}>
+							<TableOfContents
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
+					)}
 				</header>
-				<ArticleBody className={[articleWidthStyles]} format={item}>
-					{children}
-				</ArticleBody>
+				<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 				<section css={articleWidthStyles}>
 					<Tags item={item} />
 				</section>

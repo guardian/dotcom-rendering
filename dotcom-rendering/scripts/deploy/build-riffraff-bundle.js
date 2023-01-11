@@ -1,9 +1,9 @@
 const { promisify } = require('util');
 const writeFile = promisify(require('fs').writeFile);
-
-const execa = require('execa');
-const path = require('path');
 const cpy = require('cpy');
+const execa = require('execa');
+const rimraf = require('rimraf');
+const path = require('path');
 const { warn, log } = require('../env/log');
 
 const target = path.resolve(__dirname, '../..', 'target');
@@ -79,6 +79,11 @@ const zipBundle = () => {
 	});
 };
 
+const removeAR = () => {
+	log(' - removing ../apps-rendering');
+	return new Promise((resolve) => rimraf('../apps-rendering', resolve));
+};
+
 const createBuildConfig = () => {
 	log(' - creating build.json');
 	const buildConfig = {
@@ -97,6 +102,7 @@ const createBuildConfig = () => {
 };
 
 Promise.all([copyCfn(), copyStatic(), copyDist(), copyRiffRaff()])
+	.then(removeAR)
 	.then(zipBundle)
 	.then(createBuildConfig)
 	.catch((err) => {

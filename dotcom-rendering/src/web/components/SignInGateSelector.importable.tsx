@@ -35,6 +35,7 @@ type Props = {
 interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
+	componentId: string;
 	format: ArticleFormat;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
@@ -93,6 +94,7 @@ const generateSignInUrl = ({
 // and show the gate component if it exists
 const ShowSignInGate = ({
 	abTest,
+	componentId,
 	setShowGate,
 	signInUrl,
 	gateVariant,
@@ -101,12 +103,10 @@ const ShowSignInGate = ({
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
 		submitViewEventTracking({
-			component: withComponentId(
-				signInGateTestIdToComponentId[abTest.id],
-			),
+			component: withComponentId(componentId),
 			abTest,
 		});
-	}, [abTest]);
+	}, [abTest, componentId]);
 
 	// some sign in gate ab test variants may not need to show a gate
 	// therefore the gate is optional
@@ -120,7 +120,7 @@ const ShowSignInGate = ({
 				dismissGate(setShowGate, abTest);
 			},
 			abTest,
-			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
+			ophanComponentId: componentId,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -207,6 +207,7 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
+	const componentId = signInGateTestIdToComponentId[currentTest.id];
 	const signInUrl = generateSignInUrl({
 		pageId,
 		host,
@@ -218,10 +219,11 @@ export const SignInGateSelector = ({
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && (
+			{!isGateDismissed && canShowGate && !!componentId && (
 				<ShowSignInGate
 					format={format}
 					abTest={currentTest}
+					componentId={componentId}
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}

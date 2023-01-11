@@ -119,11 +119,11 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		if (selectedTopics && selectedTopics.length > 0)
-			url.searchParams.set(
-				'topics',
-				`${selectedTopics[0].type}:${selectedTopics[0].value}`,
-			);
+		const [topic] = selectedTopics ?? [];
+		if (topic) {
+			url.searchParams.set('topics', `${topic.type}:${topic.value}`);
+		}
+
 		return url.href;
 	} catch {
 		window.guardian.modules.sentry.reportError(
@@ -229,6 +229,8 @@ export const Liveness = ({
 		if (!topOfBlog) return () => {};
 
 		const observer = new window.IntersectionObserver(([entry]) => {
+			if (!entry) return;
+
 			setTopOfBlogVisible(entry.isIntersecting);
 
 			if (entry.isIntersecting && onFirstPage) {

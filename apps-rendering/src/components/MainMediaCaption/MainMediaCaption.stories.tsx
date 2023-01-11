@@ -10,7 +10,7 @@ import MainMediaCaption from '.';
 
 const Default: FC = () => (
 	<MainMediaCaption
-		caption={parseHtml('A caption')}
+		caption={parseHtml('A caption').toOption()}
 		credit={some('By a person')}
 		format={{
 			design: ArticleDesign.Standard,

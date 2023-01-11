@@ -63,7 +63,9 @@ const parse =
 			title: block.title ?? '',
 			firstPublished: firstPublishedDate.value,
 			lastModified: lastModifiedDate.value,
-			body: parseElements(context, campaigns)(block.elements),
+			body: Result.partition(
+				parseElements(context, campaigns)(block.elements),
+			).oks,
 			contributors: tagsToContributors(
 				contributorTags(block.contributors, tags),
 				context,

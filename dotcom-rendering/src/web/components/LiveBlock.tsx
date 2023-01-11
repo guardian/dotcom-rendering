@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
-import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { Switches } from '../../types/config';
 import { RenderArticleElement } from '../lib/renderElement';
 import { LastUpdated } from './LastUpdated';
+import { LiveBlockContainer } from './LiveBlockContainer';
 import { ShareIcons } from './ShareIcons';
 
 type Props = {
@@ -38,6 +37,7 @@ export const LiveBlock = ({
 	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
+
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
 		!!block.blockLastUpdatedDisplay &&
@@ -57,7 +57,6 @@ export const LiveBlock = ({
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
-			supportsDarkMode={false}
 			format={format}
 			isOriginalPinnedPost={isOriginalPinnedPost}
 			host={host}

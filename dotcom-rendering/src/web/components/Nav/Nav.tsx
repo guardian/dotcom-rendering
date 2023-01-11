@@ -8,8 +8,7 @@ import {
 } from '@guardian/source-react-components';
 import { clearFix } from '../../../lib/mixins';
 import type { NavType } from '../../../model/extract-nav';
-import { EditionId } from '../../lib/edition';
-
+import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';
@@ -34,7 +33,7 @@ const rowStyles = css`
 	justify-content: space-between;
 `;
 
-const minHeight = css`
+export const minNavHeight = css`
 	min-height: 48px;
 `;
 
@@ -187,7 +186,7 @@ export const Nav = ({
 				css={[
 					clearFixStyle,
 					rowStyles,
-					format.display === ArticleDisplay.Immersive && minHeight,
+					format.display === ArticleDisplay.Immersive && minNavHeight,
 				]}
 				data-component="nav2"
 			>

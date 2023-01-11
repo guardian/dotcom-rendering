@@ -59,7 +59,7 @@ test('if no image is greater than column width, just return the biggest availabl
 		},
 	];
 	const bestFit = bestFitImage(images, 600);
-	expect(bestFit.src).toBe(
+	expect(bestFit?.src).toBe(
 		'https://i.guim.co.uk/img/media/d78248012632672db90b7cbd766e6a8383542fc0/0_316_4366_2619/master/4366.jpg?width=140&quality=85&auto=format&fit=max&s=92dec489a4ea25b8ba80f8b260ca0bb9',
 	);
 });

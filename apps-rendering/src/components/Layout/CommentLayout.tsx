@@ -21,10 +21,11 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -71,10 +72,9 @@ const commentLineStylePosition = css`
 
 interface Props {
 	item: CommentItem | Editorial;
-	children: ReactNode[];
 }
 
-const CommentLayout: FC<Props> = ({ item, children }) => (
+const CommentLayout: FC<Props> = ({ item }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -108,10 +108,21 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 				<section css={articleWidthStyles}>
 					<Logo item={item} />
 				</section>
+				{item.outline.length > 0 && (
+					<section css={articleWidthStyles}>
+						<TableOfContents
+							format={getFormat(item)}
+							outline={item.outline}
+						/>
+					</section>
+				)}
 			</header>
-			<ArticleBody className={[articleWidthStyles]} format={item}>
-				{children}
-			</ArticleBody>
+			<ArticleBody
+				className={[articleWidthStyles]}
+				format={item}
+				body={item.body}
+				shouldHideAdverts={item.shouldHideAdverts}
+			/>
 			<section css={articleWidthStyles}>
 				<Tags item={item} />
 			</section>

@@ -155,10 +155,11 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 
 	useEffect(() => {
 		const ulEl = ulRef.current;
-		if (ulEl) {
-			const lis = ulEl.querySelectorAll('li');
-			const lastLi = lis[lis.length - 1];
 
+		const lis = ulEl?.querySelectorAll('li');
+		const lastLi = lis && lis[lis.length - 1];
+
+		if (ulEl && lastLi) {
 			const ulTop = ulEl.getBoundingClientRect().top;
 			const liTop = lastLi.getBoundingClientRect().top;
 

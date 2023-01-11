@@ -17,12 +17,14 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
-import type { Item } from 'item';
+import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -82,10 +84,10 @@ const logoStyles = css`
 `;
 
 type Props = {
-	item: Item;
+	item: Exclude<Item, LiveBlog | DeadBlog>;
 };
 
-const ImmersiveLayout: FC<Props> = ({ item, children }) => {
+const ImmersiveLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	return (
@@ -94,7 +96,6 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
-
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
@@ -111,7 +112,17 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 							<Logo item={item} />
 						</div>
 						<Metadata item={item} />
-						<div css={bodyStyles}>{children}</div>
+						<div css={bodyStyles}>
+							{item.outline.length > 0 && (
+								<section>
+									<TableOfContents
+										format={getFormat(item)}
+										outline={item.outline}
+									/>
+								</section>
+							)}
+							{render(item.shouldHideAdverts, format, item.body)}
+						</div>
 						<Tags item={item} />
 					</div>
 				</article>

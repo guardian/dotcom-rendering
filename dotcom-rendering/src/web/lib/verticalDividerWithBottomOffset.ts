@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { border, from } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from 'src/types/front';
+import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from './decideContainerOverrides';
 
 export function verticalDividerWithBottomOffset(
