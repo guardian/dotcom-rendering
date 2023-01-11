@@ -166,13 +166,9 @@ try {
 				// Write the new fixture data
 				const contents = `${HEADER}
 
-				import type { CAPIArticleType } from '../../../src/types/frontend';
+				import type { FEArticleType } from '../../../src/types/frontend';
 
-				export const ${article.name}: CAPIArticleType = ${JSON.stringify(
-					json,
-					null,
-					4,
-				)}`;
+				export const ${article.name}: FEArticleType = ${JSON.stringify(json, null, 4)}`;
 				fs.writeFileSync(
 					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,

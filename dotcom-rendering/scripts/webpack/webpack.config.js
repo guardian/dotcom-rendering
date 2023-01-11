@@ -131,7 +131,9 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	...(BUILD_VARIANT
+	// Only build the variant if in production mode
+	// Use `make build` or remove the PROD check temporarily to build the variant in development
+	...(PROD && BUILD_VARIANT
 		? [
 				merge(
 					commonConfigs({

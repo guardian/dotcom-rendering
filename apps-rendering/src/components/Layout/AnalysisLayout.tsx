@@ -17,6 +17,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
@@ -68,6 +69,14 @@ const AnalysisLayout: FC<Props> = ({ item }) => (
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+					{item.outline.length > 0 && (
+						<section css={[articleWidthStyles]}>
+							<TableOfContents
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
+					)}
 				</header>
 				<ArticleBody
 					className={[articleWidthStyles]}

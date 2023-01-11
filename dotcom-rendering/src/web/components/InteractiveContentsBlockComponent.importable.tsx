@@ -295,6 +295,7 @@ export const InteractiveContentsBlockComponent = ({
 				{subheadingLinks.map((subheadingLink, index) => {
 					return (
 						<li
+							key={subheadingLink.elementId}
 							css={[
 								liStyles,
 								index % 2 === 0 && borderRightStyles,

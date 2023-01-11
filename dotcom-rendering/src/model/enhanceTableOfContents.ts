@@ -35,10 +35,7 @@ export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
 ): TableOfContentsItem[] | undefined => {
-	if (
-		format.design !== 'ExplainerDesign' ||
-		hasInteractiveContentsElement(blocks)
-	) {
+	if (hasInteractiveContentsElement(blocks)) {
 		return undefined;
 	}
 

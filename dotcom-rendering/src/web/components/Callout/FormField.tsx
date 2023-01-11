@@ -11,7 +11,6 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import { logger } from '../../../server/lib/logging';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 
@@ -152,7 +151,7 @@ export const FormField = ({
 						error={fieldError ? fieldError : undefined}
 						data-testid={`form-field-${formField.id}`}
 					>
-						{formField.options.map((option, index) => {
+						{formField.options.map((option) => {
 							const selectedCheckboxesArray: string[] =
 								formData[formField.id] ?? [];
 
@@ -173,6 +172,7 @@ export const FormField = ({
 
 							return (
 								<Checkbox
+									key={`form-field-${option.value}`}
 									name={name}
 									label={option.label}
 									value={option.value}
@@ -199,7 +199,7 @@ export const FormField = ({
 					<RadioGroup
 						label={formField.label}
 						supporting={formField.description}
-						error={validationErrors?.[formField.id]}
+						error={validationErrors[formField.id]}
 						name={formField.name}
 						orientation={
 							formField.options.length > 2
@@ -207,11 +207,11 @@ export const FormField = ({
 								: 'horizontal'
 						}
 					>
-						{formField.options.map((option, index) => {
+						{formField.options.map((option) => {
 							return (
 								<Radio
 									data-testid={`form-field-${option.value}`}
-									key={index}
+									key={`form-field-${option.value}`}
 									label={option.label}
 									value={option.value}
 									name={`${formField.id}`}
@@ -232,7 +232,6 @@ export const FormField = ({
 				</div>
 			);
 		default:
-			logger.error(`Invalid field ${type} provided for callout`);
 			return null;
 	}
 };

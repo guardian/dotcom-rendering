@@ -557,6 +557,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
 									keywordIds={CAPIArticle.config.keywordIds}
+									abTests={CAPIArticle.config.abTests}
+									tableOfContents={
+										CAPIArticle.tableOfContents
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

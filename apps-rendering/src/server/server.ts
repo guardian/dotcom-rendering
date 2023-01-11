@@ -322,6 +322,8 @@ function editionFromString(editionString: string): Edition {
 			return Edition.AU;
 		case 'international':
 			return Edition.INTERNATIONAL;
+		case 'europe':
+			return Edition.EUROPE;
 		case 'uk':
 		default:
 			return Edition.UK;
@@ -417,11 +419,15 @@ app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
 app.get(
-	'/:edition(uk|us|au|international)?/rendered-items/*',
+	'/:edition(uk|us|au|europe|international)?/rendered-items/*',
 	express.raw(),
 	serveArticleGet,
 );
-app.get('/:edition(uk|us|au|international)?/*', express.raw(), serveArticleGet);
+app.get(
+	'/:edition(uk|us|au|europe|international)?/*',
+	express.raw(),
+	serveArticleGet,
+);
 
 app.post('/article', express.raw(), serveArticlePost);
 

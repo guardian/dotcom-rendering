@@ -571,6 +571,9 @@
         },
         "canonicalUrl": {
             "type": "string"
+        },
+        "showTableOfContents": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -610,6 +613,7 @@
         "shouldHideAds",
         "shouldHideReaderRevenue",
         "showBottomSocialButtons",
+        "showTableOfContents",
         "standfirst",
         "subMetaKeywordLinks",
         "subMetaSectionLinks",
@@ -779,6 +783,9 @@
                     "type": "string"
                 },
                 "activeFrom": {
+                    "type": "number"
+                },
+                "activeUntil": {
                     "type": "number"
                 },
                 "displayOnSensitive": {
@@ -4239,6 +4246,9 @@
                 },
                 "isLiveBlog": {
                     "type": "boolean"
+                },
+                "masterImage": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"

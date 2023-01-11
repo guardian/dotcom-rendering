@@ -14,17 +14,17 @@ import Number9 from './9.svg';
 
 export const BigNumber = ({ index }: { index: number }) => {
 	const numbers = [
-		<Number0 />,
-		<Number1 />,
-		<Number2 />,
-		<Number3 />,
-		<Number4 />,
-		<Number5 />,
-		<Number6 />,
-		<Number7 />,
-		<Number8 />,
-		<Number9 />,
-		<Number10 />,
+		<Number0 key={0} />,
+		<Number1 key={1} />,
+		<Number2 key={2} />,
+		<Number3 key={3} />,
+		<Number4 key={4} />,
+		<Number5 key={5} />,
+		<Number6 key={6} />,
+		<Number7 key={7} />,
+		<Number8 key={8} />,
+		<Number9 key={9} />,
+		<Number10 key={10} />,
 	];
 
 	return numbers[index] ?? null;

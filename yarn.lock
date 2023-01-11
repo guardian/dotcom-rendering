@@ -2902,9 +2902,9 @@
   integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
 
 "@guardian/commercial-core@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-5.0.0.tgz#644198cf8143abc8ceca8f075011c9ee5ed2e9a9"
-  integrity sha512-PLSgWvf1oDIvGstwmTrKqpIFnI/G0hU04wJMSr8CGOqk9Apx9HUCvYF1uDdcD9oLCAck3Fz8oveXrBaXLmwsWQ==
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-5.1.3.tgz#f7e845d8ae6e8ee6eaaf51fcce3400d94db81a59"
+  integrity sha512-B7Sa7O0zHHP3jN36XdGHOZ9fAgjEMfRYuRURqX+ziiJE8+lmr7rkLX3MLgbYUJCIUfhagNkj559JZDXTLQoZ6g==
   dependencies:
     type-fest "2.12.2"
 
@@ -2980,10 +2980,10 @@
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/source-react-components-development-kitchen@8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-8.1.0.tgz#9784720a9487b6b56fb20f8131c4bb313d9d1aa1"
-  integrity sha512-F6APcZQBqqujSUDo7sA3zDVGqcPT9TSqjhsHExtRU902MLL3EngaU4u9UFb3P/BQsdP6gefmUnMsCM1CsxKvOw==
+"@guardian/source-react-components-development-kitchen@8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-8.2.0.tgz#b7c9ff6b494f55d42e39acdde897193780dd1e76"
+  integrity sha512-1oDFsjgfEUStb7zTOo7NutBSt1L5OvaNPC9VUR8qvEqkQ31PfYmvBeIo5OEm9uHfvageUBcVS862jz9jn2PDvg==
 
 "@guardian/source-react-components@^9.0.0":
   version "9.0.0"

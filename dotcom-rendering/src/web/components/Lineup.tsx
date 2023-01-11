@@ -67,6 +67,7 @@ export const Lineup = ({ players }: Props) => {
 		<ul>
 			{players.map((player) => (
 				<li
+					key={player.id}
 					css={css`
 						${textSans.small()}
 					`}
@@ -84,6 +85,7 @@ export const Lineup = ({ players }: Props) => {
 							<span>{player.name} </span>
 							{player.events.map((event: EventType) => (
 								<Event
+									key={event.eventTime + event.eventType}
 									type={event.eventType}
 									time={event.eventTime}
 								/>

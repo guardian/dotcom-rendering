@@ -193,6 +193,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
 		'liveBloggingNow',
 		'lastModified',
 		'isInappropriateForSponsorship',
+		'showTableOfContents',
 	];
 
 	const params = new URLSearchParams({

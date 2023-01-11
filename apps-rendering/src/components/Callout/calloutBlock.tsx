@@ -17,6 +17,9 @@ import {
 	calloutTitle,
 } from './styles';
 
+export const getCalloutId = (str: string): string =>
+	`${str.replace(/[\s_]+/g, '-').toLowerCase()}-callout`;
+
 export interface CalloutBlockProps {
 	formId: number;
 	heading: string;
@@ -32,7 +35,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 }): ReactElement => {
-	const id = `${heading.replace(/[\s_]+/g, '-')}-callout`;
+	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
 		{

@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
+import type { TableOfContentsItem } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
@@ -11,6 +12,7 @@ import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { TableOfContents } from './TableOfContents';
 
 type Props = {
 	format: ArticleFormat;
@@ -41,6 +43,8 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	isInLiveblogAdSlotTest?: boolean;
+	abTests?: ServerSideTests;
+	tableOfContents?: TableOfContentsItem[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -139,6 +143,8 @@ export const ArticleBody = ({
 	selectedTopics,
 	keywordIds,
 	isInLiveblogAdSlotTest = false,
+	abTests,
+	tableOfContents,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -193,41 +199,49 @@ export const ArticleBody = ({
 		);
 	}
 	return (
-		<div
-			id="maincontent"
-			css={[
-				isInteractive ? null : bodyPadding,
-				globalH2Styles(format.display),
-				globalH3Styles(format.display),
-				globalOlStyles(),
-				globalStrongStyles,
-				globalLinkStyles(palette),
-			]}
-		>
-			{isRecipe(tags) && (
-				<Island deferUntil="hash" clientOnly={true}>
-					<RecipeMultiplier />
-				</Island>
+		<>
+			{tableOfContents && tableOfContents.length > 0 && (
+				<TableOfContents
+					tableOfContents={tableOfContents}
+				></TableOfContents>
 			)}
-			<ArticleRenderer
-				format={format}
-				elements={blocks[0] ? blocks[0].elements : []}
-				adTargeting={adTargeting}
-				host={host}
-				pageId={pageId}
-				webTitle={webTitle}
-				ajaxUrl={ajaxUrl}
-				contentType={contentType}
-				sectionName={sectionName}
-				tags={tags}
-				isPaidContent={isPaidContent}
-				isPreview={isPreview}
-				idUrl={idUrl}
-				switches={switches}
-				isDev={isDev}
-				isAdFreeUser={isAdFreeUser}
-				isSensitive={isSensitive}
-			/>
-		</div>
+			<div
+				id="maincontent"
+				css={[
+					isInteractive ? null : bodyPadding,
+					globalH2Styles(format.display),
+					globalH3Styles(format.display),
+					globalOlStyles(),
+					globalStrongStyles,
+					globalLinkStyles(palette),
+				]}
+			>
+				{isRecipe(tags) && (
+					<Island deferUntil="hash" clientOnly={true}>
+						<RecipeMultiplier />
+					</Island>
+				)}
+				<ArticleRenderer
+					format={format}
+					elements={blocks[0] ? blocks[0].elements : []}
+					adTargeting={adTargeting}
+					host={host}
+					pageId={pageId}
+					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
+					contentType={contentType}
+					sectionName={sectionName}
+					tags={tags}
+					isPaidContent={isPaidContent}
+					isPreview={isPreview}
+					idUrl={idUrl}
+					switches={switches}
+					isDev={isDev}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					abTests={abTests}
+				/>
+			</div>
+		</>
 	);
 };

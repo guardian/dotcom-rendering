@@ -40,7 +40,6 @@ export type Palette = {
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
 		carouselTitle: Colour;
-		calloutHeading: Colour;
 		pullQuote: Colour;
 		pagination: Colour;
 		pullQuoteAttribution: Colour;
