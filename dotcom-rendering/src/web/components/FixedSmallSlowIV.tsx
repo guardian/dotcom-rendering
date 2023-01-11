@@ -1,7 +1,4 @@
-import type {
-	DCRContainerPalette,
-	DCRSupportingContent,
-} from '../../types/front';
+import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { Card25Media25 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
@@ -11,14 +8,12 @@ type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	supportingContent?: DCRSupportingContent[] | undefined;
 };
 
 export const FixedSmallSlowIV = ({
 	trails,
 	containerPalette,
 	showAge,
-	supportingContent,
 }: Props) => {
 	const firstSlice25 = trails.slice(0, 4);
 
