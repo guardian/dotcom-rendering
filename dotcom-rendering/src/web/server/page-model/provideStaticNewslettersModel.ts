@@ -50,7 +50,41 @@ export const TEST_NEWSLETTERS: Newsletter[] = [
 	},
 ];
 
-export const buildPageModel = (newsletters: Newsletter[]): NewslettersPageModel => ({
+export const validateNewsletter = (subject: unknown): subject is Newsletter => {
+	if (!subject || typeof subject !== 'object') {
+		return false;
+	}
+
+	const record = subject as Record<keyof Newsletter, unknown>;
+
+	const {
+		listId,
+		identityName,
+		name,
+		description,
+		frequency,
+		successDescription,
+		theme,
+		group,
+		regionFocus,
+	} = record;
+
+	return !!(
+		typeof listId === 'number' &&
+		typeof identityName === 'string' &&
+		typeof name === 'string' &&
+		typeof description === 'string' &&
+		typeof frequency === 'string' &&
+		typeof successDescription === 'string' &&
+		typeof theme === 'string' &&
+		typeof group === 'string' &&
+		typeof (regionFocus === 'string' || regionFocus === 'undefined')
+	);
+};
+
+export const buildPageModel = (
+	newsletters: Newsletter[],
+): NewslettersPageModel => ({
 	newsletters,
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
@@ -66,4 +100,3 @@ export const buildPageModel = (newsletters: Newsletter[]): NewslettersPageModel 
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 });
-
