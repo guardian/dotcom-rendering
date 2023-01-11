@@ -4,6 +4,11 @@ import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
+import {
+	Card25Media25,
+	Card25Media25SmallHeadline,
+	Card75Media50Right,
+} from '../lib/cardWrappers';
 
 type Props = {
 	trails: TrailType[];
@@ -24,38 +29,34 @@ export const FixedLargeSlowXIV = ({
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				{firstSlice75.map((card) => (
-					<LI padSides={true} percentage="75%" key={card.url}>
-						<FrontCard
-							trail={card}
-							starRating={card.starRating}
+				{firstSlice75.map((card) => {
+					return (
+						<LI padSides={true} percentage="75%" key={card.url}>
+							<Card75Media50Right
+								trail={card}
+								showAge={showAge}
+								containerPalette={containerPalette}
+							/>
+						</LI>
+					);
+				})}
+				{firstSlice25.map((card) => {
+					return (
+						<LI
+							padSides={true}
+							showDivider={true}
 							containerPalette={containerPalette}
-							showAge={showAge}
-							headlineSize="large"
-							imagePosition="right"
-							imagePositionOnMobile="top"
-							imageSize="large"
-							trailText={card.trailText}
-						/>
-					</LI>
-				))}
-
-				{firstSlice25.map((card) => (
-					<LI
-						padSides={true}
-						showDivider={true}
-						containerPalette={containerPalette}
-						percentage="25%"
-						key={card.url}
-					>
-						<FrontCard
-							trail={card}
-							starRating={card.starRating}
-							containerPalette={containerPalette}
-							showAge={showAge}
-						/>
-					</LI>
-				))}
+							percentage="25%"
+							key={card.url}
+						>
+							<Card25Media25
+								trail={card}
+								showAge={showAge}
+								containerPalette={containerPalette}
+							/>
+						</LI>
+					);
+				})}
 			</UL>
 			<UL direction="row" padBottom={true}>
 				{secondSlice25.map((card, cardIndex) => {
@@ -67,12 +68,10 @@ export const FixedLargeSlowXIV = ({
 							containerPalette={containerPalette}
 							key={card.url}
 						>
-							<FrontCard
+							<Card25Media25SmallHeadline
 								trail={card}
-								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								headlineSize="small"
 							/>
 						</LI>
 					);
