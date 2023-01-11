@@ -16,6 +16,7 @@ import { initPerf } from '../initPerf';
  * @param name The name of the component we want to hydrate
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
+ * @param emotionCache An instance of an emotion cache to use for the island
  */
 export const doHydration = async (
 	name: string,
