@@ -21,7 +21,7 @@ Run `yarn` in the root directory of this project to install packages.
 
 ## Run
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook.
 
 ### `apps rendering`
 
