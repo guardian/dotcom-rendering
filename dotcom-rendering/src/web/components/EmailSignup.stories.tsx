@@ -46,6 +46,7 @@ export const Default = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="opinion"
 		hidePrivacyMessage={hidePrivacyMessage}
+		skipLinkId='skip-link'
 	/>
 );
 
@@ -62,6 +63,7 @@ export const NewsTheme = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="news"
 		hidePrivacyMessage={hidePrivacyMessage}
+		skipLinkId='skip-link'
 	/>
 );
 
@@ -78,6 +80,7 @@ export const IrregularFrequency = ({
 		successDescription="You have signed up, but the newsletter is fake"
 		theme="features"
 		hidePrivacyMessage={hidePrivacyMessage}
+		skipLinkId='skip-link'
 	/>
 );
 

@@ -460,6 +460,7 @@ export const renderElement = ({
 					frequency={element.newsletter.frequency}
 					successDescription={element.newsletter.successDescription}
 					theme={element.newsletter.theme}
+					skipLinkId={`email-sign-up-element-skip-link-${index}-${element.newsletter.identityName}`}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
