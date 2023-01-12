@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
 import type { TableOfContentsItem } from '../../types/frontend';
-import { TableOfContents } from './TableOfContents';
+import { TableOfContents } from './TableOfContents.importable';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
