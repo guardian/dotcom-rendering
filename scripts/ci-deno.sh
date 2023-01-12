@@ -22,5 +22,5 @@ deno run \
 	--no-check=remote \
 	--allow-net \
 	--allow-env="GITHUB_TOKEN" \
-	--allow-run=yarn \
+	--allow-run=yarn,npm \
 	scripts/deno/peer-dependencies.ts
