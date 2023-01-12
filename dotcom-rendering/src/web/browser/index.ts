@@ -1,5 +1,5 @@
 import './webpackPublicPath';
-import { init as initAtomIframe } from './atomIframe/init';
+import { atomIframe } from './entries/atomIframe';
 import { bootCmp } from './entries/bootCmp';
 import { dynamicImport } from './entries/dynamicImport';
 import { embedIframe } from './entries/embedIframe';
@@ -19,7 +19,7 @@ startup('ga', null, ga);
 startup('ophan', null, ophan);
 startup('islands', null, islands);
 startup('dynamicImport', null, dynamicImport);
-startup('atomIframe', null, initAtomIframe);
+startup('atomIframe', null, atomIframe);
 startup('embedIframe', null, embedIframe);
 startup('newsletterEmbedIframe', null, newsletterEmbedIframe);
 startup('relativeTime', null, relativeTime);
