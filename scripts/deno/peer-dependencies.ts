@@ -28,6 +28,9 @@ const peers = async (cwd: string) => {
 	return deps;
 };
 
+type Workspaces = { dcr: string[]; cr: string[]; ar: string[] };
+const initialValue: Workspaces = { dcr: [], cr: [], ar: [] };
+
 const { dcr, ar, cr } = (
 	await Promise.all(['.', './apps-rendering'].map(peers))
 )
@@ -42,33 +45,30 @@ const { dcr, ar, cr } = (
 
 		return { workspace, dependency, peer };
 	})
-	.reduce<{ dcr: string[]; cr: string[]; ar: string[] }>(
-		(acc, { workspace, dependency, peer }) => {
-			const line = `- [ ] \`${dependency}\` requires peer \`${peer}\``;
-			switch (workspace) {
-				case '@guardian/dotcom-rendering':
-					return {
-						...acc,
-						dcr: acc.dcr.concat(line),
-					};
+	.reduce<Workspaces>((acc, { workspace, dependency, peer }) => {
+		const line = `- [ ] \`${dependency}\` requires peer \`${peer}\``;
+		switch (workspace) {
+			case '@guardian/dotcom-rendering':
+				return {
+					...acc,
+					dcr: acc.dcr.concat(line),
+				};
 
-				case '@guardian/common-rendering':
-					return {
-						...acc,
-						cr: acc.cr.concat(line),
-					};
+			case '@guardian/common-rendering':
+				return {
+					...acc,
+					cr: acc.cr.concat(line),
+				};
 
-				case '@guardian/apps-rendering':
-					return {
-						...acc,
-						ar: acc.ar.concat(line),
-					};
-				default:
-					return acc;
-			}
-		},
-		{ dcr: [], cr: [], ar: [] },
-	);
+			case '@guardian/apps-rendering':
+				return {
+					...acc,
+					ar: acc.ar.concat(line),
+				};
+			default:
+				return acc;
+		}
+	}, initialValue);
 
 const body = `## Current peer dependencies mismatch
 
