@@ -12,6 +12,7 @@ export const InlineSkipToWrapper = ({ id, label, children }: Props) => {
 	return (
 		<>
 			<a
+				data-ignore="global-link-styling"
 				href={`#${id}`}
 				css={css`
 					${textSans.medium()}
@@ -41,7 +42,7 @@ export const InlineSkipToWrapper = ({ id, label, children }: Props) => {
 				{label}
 			</a>
 			{children}
-			<span id={id}>{id}</span>
+			<span id={id}></span>
 		</>
 	);
 };

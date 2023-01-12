@@ -88,7 +88,7 @@ export const EmailSignup = ({
 	skipLinkId,
 }: Props) => {
 	return (
-		<InlineSkipToWrapper id={skipLinkId} label="Skip past newsletter promotion">
+		<InlineSkipToWrapper id={skipLinkId} label={`skip ${name} newsletter promotion`}>
 			<aside css={containerStyles} aria-label="Newsletter promotion">
 				<div css={stackBelowTabletStyles}>
 					<p css={titleStyles(theme)}>
