@@ -82,7 +82,7 @@ export const validateNewsletter = (subject: unknown): subject is Newsletter => {
 	);
 };
 
-export const buildPageModel = (
+export const buildNewslettersPageModel = (
 	newsletters: Newsletter[],
 ): NewslettersPageModel => ({
 	newsletters,

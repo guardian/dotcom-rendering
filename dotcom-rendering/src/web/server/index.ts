@@ -14,11 +14,11 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { newslettersToHtml } from './newslettersToHtml';
 import {
-	buildPageModel,
+	buildNewslettersPageModel,
 	validateNewsletter,
-} from './page-model/provideStaticNewslettersModel';
+} from './newsletters-page-model';
+import { newslettersToHtml } from './newslettersToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -212,7 +212,7 @@ const enhanceNewsletters = (body: unknown): NewslettersPageModel => {
 	}
 
 	const validatedNewsletters = newsletters.filter(validateNewsletter);
-	return buildPageModel(validatedNewsletters);
+	return buildNewslettersPageModel(validatedNewsletters);
 };
 
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {

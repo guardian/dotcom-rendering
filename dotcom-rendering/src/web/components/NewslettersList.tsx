@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { brandAlt, neutral, space } from '@guardian/source-foundations';
 import { headline } from '@guardian/source-foundations/dist/cjs/typography/api';
 import { LinkButton } from '@guardian/source-react-components';
-import type { Newsletter } from '../../../../src/types/content';
-import { Hide } from '../Hide';
-import { NewsletterPrivacyMessage } from '../NewsletterPrivacyMessage';
-import { Section } from '../Section';
+import type { Newsletter } from '../../types/content';
+import { Hide } from './Hide';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { Section } from './Section';
 
 export interface NewslettersListProps {
 	newsletters: Newsletter[];
