@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
-import { InlineSkipTo } from './InlineSkipTo';
+import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -88,11 +88,7 @@ export const EmailSignup = ({
 	skipLinkId,
 }: Props) => {
 	return (
-		<>
-			<InlineSkipTo
-				id={skipLinkId}
-				label="Skip past newsletter promotion"
-			/>
+		<InlineSkipToWrapper id={skipLinkId} label="Skip past newsletter promotion">
 			<aside css={containerStyles} aria-label="Newsletter promotion">
 				<div css={stackBelowTabletStyles}>
 					<p css={titleStyles(theme)}>
@@ -110,7 +106,6 @@ export const EmailSignup = ({
 					hidePrivacyMessage={hidePrivacyMessage}
 				/>
 			</aside>
-			<span id={skipLinkId}>{skipLinkId}</span>
-		</>
+		</InlineSkipToWrapper>
 	);
 };
