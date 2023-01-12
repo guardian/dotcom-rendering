@@ -17,13 +17,9 @@ import { useState } from 'react';
 
 const descriptionStyles = css`
 	a {
-		/* Disabled the linter to override link styles as we use dangerouslySetInnerHTML below */
-		// stylelint-disable-next-line declaration-no-important
-		color: ${brand[500]} !important;
-		// stylelint-disable-next-line declaration-no-important
-		border-bottom: 1px solid ${brand[500]} !important;
-		// stylelint-disable-next-line declaration-no-important
-		text-decoration: none !important;
+		color: ${brand[500]};
+		border-bottom: 1px solid ${brand[500]};
+		text-decoration: none;
 	}
 
 	padding-bottom: ${space[4]}px;
