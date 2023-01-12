@@ -7,7 +7,7 @@ import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { DeadlineDate, isCalloutActive } from '../Deadline/index';
-import CalloutBlock from './calloutBlock';
+import CalloutBlock, { getCalloutId } from './calloutBlock';
 import { InactiveCallout } from './calloutComponents';
 import { getTheme } from './theme';
 
@@ -42,7 +42,7 @@ const Callout: FC<CalloutProps> = ({
 	return (
 		<aside className="js-callout">
 			{isNonCollapsible ? (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
@@ -61,7 +61,7 @@ const Callout: FC<CalloutProps> = ({
 					</span>
 				</ThemeProvider>
 			) : (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<ExpandingWrapper
 						renderExtra={(): ReactElement => (
 							<DeadlineDate until={activeUntil} />
@@ -111,6 +111,7 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 		{
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
+			id: getCalloutId(calloutProps.heading),
 		},
 		Callout({
 			...calloutProps,
