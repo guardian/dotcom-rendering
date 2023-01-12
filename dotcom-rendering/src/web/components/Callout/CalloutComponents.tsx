@@ -35,7 +35,6 @@ export const CalloutDescription = ({
 }: {
 	description: string;
 }) => {
-	console.log(description);
 	return (
 		<div css={descriptionStyles}>
 			<div dangerouslySetInnerHTML={{ __html: description }}></div>
@@ -161,7 +160,6 @@ export const CalloutShare = ({
 		if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
-			// setTimeout(() => setIsCopied(false), 3000);
 		}
 	};
 
