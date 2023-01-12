@@ -3,6 +3,7 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -46,6 +47,28 @@ import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
 import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
+
+// ----- Functions ----- //
+
+/**
+ * Updates the `theme` property of an `Item`
+ *
+ * @param theme The value to set `theme` to
+ * @returns A new `Item` object
+ */
+const setTheme =
+	(theme: ArticleTheme) =>
+	<A extends Item>(item: A): A => ({ ...item, theme });
+
+/**
+ * Updates the `edition` property of an `Item`
+ *
+ * @param edition The value to set `edition` to
+ * @returns A new `Item` object
+ */
+const setEdition =
+	(edition: Edition) =>
+	<A extends Item>(item: A): A => ({ ...item, edition });
 
 // ----- Fixture ----- //
 
@@ -521,7 +544,7 @@ const newsletterSignUp: NewsletterSignup = {
 	...partialNewsletterItem,
 };
 
-const immersive: Standard = {
+const standardImmersive: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
 	display: ArticleDisplay.Immersive,
@@ -558,7 +581,9 @@ export {
 	pinnedBlock,
 	explainer,
 	newsletterSignUp,
-	immersive,
+	standardImmersive,
 	gallery,
 	parseHtml,
+	setTheme,
+	setEdition,
 };
