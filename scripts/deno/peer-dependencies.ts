@@ -1,10 +1,9 @@
 import { octokit } from './github.ts';
 
-const peers = async () => {
-	// yarn install --check-files
+const peers = async (cwd: string) => {
 	const process = Deno.run({
-		cwd: './dotcom-rendering/',
-		cmd: ['make', 'reinstall'],
+		cwd,
+		cmd: ['yarn', '--force'],
 		stdout: 'null',
 		stderr: 'piped',
 	});
@@ -13,19 +12,29 @@ const peers = async () => {
 		process.status(),
 		process.stderrOutput(),
 	]);
+
 	if (code !== 0) Deno.exit(code);
 
-	return new TextDecoder()
+	const deps = new TextDecoder()
 		.decode(rawOutput)
 		.split('\n')
+		// keep only incorrect peer dependencies warnings
 		.filter((line) => line.includes('has incorrect peer dependency'))
-		.map((line) => line.replace(/workspace-aggregator-[a-z0-9-]+ > /, ''));
+		// strip out the workspace-aggregator-xyz-012 prefixes
+		.map((line) => line.replace(/workspace-aggregator-[a-z0-9-]+ > /, ''))
+		// apps-rendering are not part of the workspace
+		.map((line) => line.replace('" >', '"@guardian/apps-rendering >'));
+
+	return deps;
 };
 
-const { dcr, ar, cr } = (await peers())
+const { dcr, ar, cr } = (
+	await Promise.all(['.', './apps-rendering'].map(peers))
+)
+	.flat()
 	.map((line) => {
 		const matches = line.match(
-			/warning "(.+?) > (.+?)" has incorrect peer dependency "(.+)"./,
+			/warning "(.*?) > (.+?)" has incorrect peer dependency "(.+)"./,
 		);
 		if (!matches) throw new Error('Invalid string');
 
@@ -43,13 +52,13 @@ const { dcr, ar, cr } = (await peers())
 						dcr: acc.dcr.concat(line),
 					};
 
-				case '@guardian/common-rendering ':
+				case '@guardian/common-rendering':
 					return {
 						...acc,
 						cr: acc.cr.concat(line),
 					};
 
-				case '@guardian/apps-rendering ':
+				case '@guardian/apps-rendering':
 					return {
 						...acc,
 						ar: acc.ar.concat(line),
@@ -60,7 +69,6 @@ const { dcr, ar, cr } = (await peers())
 		},
 		{ dcr: [], cr: [], ar: [] },
 	);
-// .sort(({ workspace: a }, { workspace: b }) => a.localeCompare(b));
 
 const body = `## Current peer dependencies mismatch
 
