@@ -1,9 +1,9 @@
 import { escapeData } from '../../../lib/escapeData';
 import { extractGA } from '../../../model/extract-ga';
-import type { BasePageModel } from '../../../model/pageModel';
 import { makeWindowGuardian } from '../../../model/window-guardian';
+import type { NewslettersPageModel } from '../../../types/NewslettersPageModel';
 
-export const buildWindowGuardian = (model: BasePageModel): string => {
+export const buildWindowGuardian = (model: NewslettersPageModel): string => {
 	const { config, editionId } = model;
 
 	/**

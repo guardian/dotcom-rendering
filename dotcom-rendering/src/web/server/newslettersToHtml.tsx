@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-import type { NewslettersPageModel } from '../../model/pageModel';
+import type { NewslettersPageModel } from '../../types/NewslettersPageModel';
 import { NewslettersList } from '../components/NewslettersList';
 import { StandAlonePage } from '../layouts/StandAlonePage';
 import { populatePageTemplate } from './populatePageTemplate';

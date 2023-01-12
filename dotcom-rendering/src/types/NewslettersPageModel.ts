@@ -1,11 +1,11 @@
 import type { NavType } from '../model/extract-nav';
-import type { ConfigType } from '../types/config';
-import type { Newsletter } from '../types/content';
-import type { FooterType } from '../types/footer';
-import type { TagType } from '../types/tag';
 import type { EditionId } from '../web/lib/edition';
+import type { ConfigType } from './config';
+import type { Newsletter } from './content';
+import type { FooterType } from './footer';
+import type { TagType } from './tag';
 
-export type BasePageModel = {
+export type NewslettersPageModel = {
 	webTitle: string;
 	description?: string;
 	canonicalUrl?: string;
@@ -26,8 +26,5 @@ export type BasePageModel = {
 	config: ConfigType;
 	nav: NavType;
 	footer: FooterType;
-};
-
-export type NewslettersPageModel = BasePageModel & {
 	newsletters: Newsletter[];
 };

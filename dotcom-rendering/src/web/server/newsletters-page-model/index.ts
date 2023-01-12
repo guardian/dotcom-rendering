@@ -1,5 +1,5 @@
-import type { NewslettersPageModel } from '../../../model/pageModel';
 import type { Newsletter } from '../../../types/content';
+import type { NewslettersPageModel } from '../../../types/NewslettersPageModel';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
 export const TEST_NEWSLETTERS: Newsletter[] = [
