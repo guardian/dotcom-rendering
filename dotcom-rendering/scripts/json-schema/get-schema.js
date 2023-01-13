@@ -7,6 +7,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/types/newslettersPage.ts`),
 	],
 	{
 		skipLibCheck: true,

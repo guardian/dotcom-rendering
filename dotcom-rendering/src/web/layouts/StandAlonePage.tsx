@@ -11,7 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
-import type { DCRNewslettersPageType } from '../../types/frontend';
+import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { AlreadyVisited } from '../components//AlreadyVisited.importable';
 import { CoreVitals } from '../components//CoreVitals.importable';
 import { FocusStyles } from '../components//FocusStyles.importable';

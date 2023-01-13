@@ -4,7 +4,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../../scripts/webpack/bundles';
-import type { DCRNewslettersPageType } from '../../../types/frontend';
+import type { DCRNewslettersPageType } from '../../../types/newslettersPage';
 import { extractExpeditedIslands } from '../extractIslands';
 import { pageTemplate } from '../pageTemplate';
 import { buildWindowGuardian } from './makeWindowGuardian';

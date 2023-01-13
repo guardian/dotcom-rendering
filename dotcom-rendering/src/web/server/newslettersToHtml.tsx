@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-import type { DCRNewslettersPageType } from '../../types/frontend';
+import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { NewslettersList } from '../components/NewslettersList';
 import { StandAlonePage } from '../layouts/StandAlonePage';
 import { populatePageTemplate } from './populatePageTemplate';

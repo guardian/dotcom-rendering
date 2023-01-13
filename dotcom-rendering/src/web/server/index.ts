@@ -11,10 +11,8 @@ import {
 	validateAsNewslettersPageType,
 } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
-import type {
-	DCRNewslettersPageType,
-	FEArticleType,
-} from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
+import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';

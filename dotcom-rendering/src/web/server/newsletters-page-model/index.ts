@@ -1,7 +1,4 @@
-import type {
-	DCRNewslettersPageType,
-	FENewslettersPageType,
-} from '../../../types/frontend';
+import type { DCRNewslettersPageType, FENewslettersPageType } from '../../../types/newslettersPage';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
 export const TEST_NEWSLETTERS_PAGE_DATE: FENewslettersPageType = {
