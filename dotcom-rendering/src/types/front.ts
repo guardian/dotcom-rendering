@@ -131,8 +131,8 @@ export type FEFrontCard = {
 							isMaster?: string;
 							altText?: string;
 							height: string;
-							credit: string;
-							mediaId: string;
+							credit?: string;
+							mediaId?: string;
 							width: string;
 						};
 						mediaType: string;

@@ -542,9 +542,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1224,9 +1222,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1906,9 +1902,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
