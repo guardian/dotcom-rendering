@@ -1,14 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette/text';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import {
-	headline,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, remSpace, textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -43,25 +38,25 @@ const listStyles: SerializedStyles = css`
 	margin: 0;
 `;
 
-const defaultListItemStyles: SerializedStyles = css`
-	border-top: 1px solid ${neutral[86]};
+const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	border-top: 1px solid ${border.tableOfContents(format)};
 	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
 	&:last-child {
-		border-bottom: 1px solid ${neutral[86]};
+		border-bottom: 1px solid ${border.tableOfContents(format)};
 	}
 	&:hover {
-		border-top: 1px solid ${neutral[20]};
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
 	}
 	${darkModeCss`
-		border-color: ${neutral[20]};
+		border-color: ${border.tableOfContentsDark(format)};
 		&:last-child {
-			border-bottom-color: ${neutral[20]};
+			border-bottom-color: ${border.tableOfContentsDark(format)};
 		}
 		&:hover {
-			border-color: ${neutral[86]};
+			border-color: ${border.tableOfContentsHoverDark(format)};
 			&:last-child {
-				border-bottom-color: ${neutral[20]};
+				border-bottom-color: ${border.tableOfContentsDark(format)};
 			}
 		}
 	`}
@@ -71,20 +66,20 @@ const listItemStyles = (format: ArticleFormat): SerializedStyles => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return css`
 			${headline.xxxsmall({ fontWeight: 'light' })}
-			${defaultListItemStyles}
+			${defaultListItemStyles(format)}
 		`;
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			${textSans.medium({ fontWeight: 'bold' })}
-			${defaultListItemStyles}
+			${defaultListItemStyles(format)}
 		`;
 	}
 
 	return css`
 		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${defaultListItemStyles}
+		${defaultListItemStyles(format)}
 	`;
 };
 
@@ -104,23 +99,23 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 	list-style: none;
 	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
-	border-top: 1px solid ${neutral[86]};
+	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {
-		border-top: 1px solid ${neutral[20]};
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
 	}
 
 	path {
-		fill: ${neutral[7]};
+		fill: ${text.tableOfContentsTitle(format)};
 	}
 	svg {
 		height: 2rem;
 	}
 	${darkModeCss`
-		border-color: ${neutral[20]};
+		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
-			border-color: ${neutral[86]};
+			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
 
 		path {
