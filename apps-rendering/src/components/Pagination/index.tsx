@@ -1,18 +1,21 @@
-import { SerializedStyles, css } from '@emotion/react';
-
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import {
+	border,
+	hover,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
-	SvgChevronLeftSingle,
 	SvgChevronLeftDouble,
+	SvgChevronLeftSingle,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-
-import { border, hover, text } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 
 type Props = {
 	currentPage: number;

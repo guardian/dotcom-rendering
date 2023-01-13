@@ -1,7 +1,7 @@
+import { getAllThemes } from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Pagination } from '.';
-import { getAllThemes } from '@guardian/common-rendering/src/fixtures/article';
 
 export default {
 	component: Pagination,
