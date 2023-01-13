@@ -120,6 +120,19 @@ const decideImage = (trail: FEFrontCard) => {
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
+const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Video:
+			return 'Video';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		default:
+			return undefined;
+	}
+};
+
 const decideKicker = (trail: FEFrontCard) => {
 	return trail.properties.isBreaking
 		? 'Breaking news'
@@ -222,5 +235,9 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
+			mediaType: decideMediaType(format),
+			mediaDuration:
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
+					?.duration,
 		};
 	});
