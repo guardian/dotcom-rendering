@@ -63,11 +63,12 @@ export function secondsToDuration(secs?: number): string {
 		duration.push(h);
 	}
 	if (m > 0 || h === 0) {
-		// supports 0:59
-		duration.push(m);
+		if (h > 0 && m < 10) duration.push(`0${m}`); // e.g 1:01:11
+		else duration.push(m); // supports 0:59
 	}
 	if (s > 0) {
-		duration.push(s);
+		if (s < 10) duration.push(`0${s}`);
+		else duration.push(s);
 	}
 	return duration.join(':');
 }
