@@ -35,9 +35,15 @@ export const CalloutDescription = ({
 }: {
 	description: string;
 }) => {
+	// this data-ignore attribute ensures correct formatting for links in the description
+	const htmlSplit = description.split('href');
+	const withDataIgnore = htmlSplit.join(
+		'data-ignore="global-link-styling" href',
+	);
+
 	return (
 		<div css={descriptionStyles}>
-			<div dangerouslySetInnerHTML={{ __html: description }}></div>
+			<div dangerouslySetInnerHTML={{ __html: withDataIgnore }}></div>
 			<div>
 				Please share your story if you are 18 or over, anonymously if
 				you wish. For more information please see our{' '}
