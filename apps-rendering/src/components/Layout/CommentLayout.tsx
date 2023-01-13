@@ -31,6 +31,8 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { WithAgeWarning } from 'components/WithAgeWarning';
+import Series from 'components/Series';
 
 // ----- Styles ----- //
 
@@ -73,64 +75,73 @@ interface Props {
 	item: CommentItem | Editorial;
 }
 
-const CommentLayout: FC<Props> = ({ item }) => (
-	<main css={[Styles, DarkStyles]}>
-		<article css={BorderStyles}>
-			<header>
-				<Headline item={item} />
-				<div css={articleWidthStyles}>
-					<Byline {...item} />
-				</div>
+const CommentLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	return (
+		<main css={[Styles, DarkStyles]}>
+			<article css={BorderStyles}>
+				<header>
+					<WithAgeWarning
+						item={item}
+						publishDate={item.publishDate}
+						format={format}
+					></WithAgeWarning>
+					<Series item={item} />
+					<Headline item={item} />
+					<div css={articleWidthStyles}>
+						<Byline {...item} />
+					</div>
 
-				<Cutout
-					contributors={item.contributors}
-					className={articleWidthStyles}
+					<Cutout
+						contributors={item.contributors}
+						className={articleWidthStyles}
+						format={item}
+					/>
+					<StraightLines
+						cssOverrides={[commentLineStylePosition, lineStyles]}
+						count={8}
+					/>
+					<div css={articleWidthStyles}>
+						<Standfirst item={item} />
+					</div>
+
+					<section css={[articleWidthStyles, topBorder]}>
+						<Metadata item={item} />
+					</section>
+
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
+					<section css={articleWidthStyles}>
+						<Logo item={item} />
+					</section>
+					{item.outline.length > 3 && (
+						<section css={articleWidthStyles}>
+							<TableOfContents
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
+					)}
+				</header>
+				<ArticleBody
+					className={[articleWidthStyles]}
 					format={item}
-				/>
-				<StraightLines
-					cssOverrides={[commentLineStylePosition, lineStyles]}
-					count={8}
-				/>
-				<div css={articleWidthStyles}>
-					<Standfirst item={item} />
-				</div>
-
-				<section css={[articleWidthStyles, topBorder]}>
-					<Metadata item={item} />
-				</section>
-
-				<MainMedia
-					format={getFormat(item)}
-					mainMedia={item.mainMedia}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
 				/>
 				<section css={articleWidthStyles}>
-					<Logo item={item} />
+					<Tags item={item} />
 				</section>
-				{item.outline.length >= 3 && (
-					<section css={articleWidthStyles}>
-						<TableOfContents
-							format={getFormat(item)}
-							outline={item.outline}
-						/>
-					</section>
-				)}
-			</header>
-			<ArticleBody
-				className={[articleWidthStyles]}
-				format={item}
-				body={item.body}
-				shouldHideAdverts={item.shouldHideAdverts}
-			/>
-			<section css={articleWidthStyles}>
-				<Tags item={item} />
+			</article>
+			<section css={onwardStyles}>
+				<RelatedContent item={item} />
 			</section>
-		</article>
-		<section css={onwardStyles}>
-			<RelatedContent item={item} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</main>
-);
+			<Footer isCcpa={false} format={item} />
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 

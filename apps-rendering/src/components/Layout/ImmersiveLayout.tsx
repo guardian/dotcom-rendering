@@ -15,9 +15,11 @@ import Logo from 'components/Logo';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
+import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
@@ -95,7 +97,12 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
-
+						<WithAgeWarning
+							item={item}
+							publishDate={item.publishDate}
+							format={format}
+						></WithAgeWarning>
+						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<ImmersiveCaption

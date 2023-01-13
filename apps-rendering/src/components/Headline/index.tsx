@@ -1,14 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { brandAlt, remSpace, textSans } from '@guardian/source-foundations';
-import { Hide, SvgNewsletter } from '@guardian/source-react-components';
 import { fromNullable, OptionKind } from '@guardian/types';
 import DesignTag from 'components/DesignTag';
-import Series from 'components/Series';
-import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { maybeRender } from 'lib';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';
 import FeatureHeadline from './FeatureHeadline';
@@ -24,122 +19,43 @@ interface Props {
 	item: Item;
 }
 
-const seriesStyles = css`
-	padding-bottom: ${remSpace[1]};
-`;
-
-const detailBlockStyles = css`
-	display: flex;
-	align-items: center;
-	margin-bottom: ${remSpace[2]};
-
-	svg {
-		background-color: ${brandAlt[400]};
-		border-radius: 50%;
-		margin-right: ${remSpace[2]};
-		width: ${remSpace[6]};
-		padding: 0.125rem;
-	}
-
-	b {
-		${textSans.xsmall({ fontWeight: 'bold' })}
-	}
-`;
-
 const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const designTag = <DesignTag format={format} />;
 
 	if (format.display === ArticleDisplay.Immersive) {
-		return (
-			<WithAgeWarning
-				item={item}
-				publishDate={item.publishDate}
-				format={format}
-			>
-				<Series item={item} />
-				<ImmersiveHeadline headline={item.headline} format={format} />
-			</WithAgeWarning>
-		);
+		return <ImmersiveHeadline headline={item.headline} format={format} />;
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
-		return (
-			<WithAgeWarning
-				item={item}
-				publishDate={item.publishDate}
-				format={format}
-			>
-				<LabsHeadline item={item} />
-			</WithAgeWarning>
-		);
+		return <LabsHeadline item={item} />;
 	}
 
 	switch (format.design) {
 		case ArticleDesign.Feature:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
-					<FeatureHeadline item={item} />
-				</WithAgeWarning>
-			);
+			return <FeatureHeadline item={item} />;
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
+				<>
 					{designTag}
 					<CommentHeadline item={item} />
-				</WithAgeWarning>
+				</>
 			);
 
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<MediaHeadline item={item} />
-				</WithAgeWarning>
-			);
+			return <MediaHeadline item={item} />;
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Hide from="desktop">
-						<div css={seriesStyles}>
-							<Series item={item} />
-						</div>
-					</Hide>
-					<BlogHeadline item={item} />
-				</WithAgeWarning>
-			);
+			return <BlogHeadline item={item} />;
 		case ArticleDesign.Interview: {
 			const interviewToneTag = fromNullable(
 				item.tags.find((tag) => tag.id === 'tone/interview'),
 			);
 			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
+				<>
 					{interviewToneTag.kind === OptionKind.Some ? (
 						<nav>
 							<a href={interviewToneTag.value.webUrl}>
@@ -150,66 +66,23 @@ const Headline: React.FC<Props> = ({ item }) => {
 						designTag
 					)}
 					<InterviewHeadline item={item} />
-				</WithAgeWarning>
+				</>
 			);
 		}
 
 		case ArticleDesign.Review:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
-					<ReviewHeadline item={item} />
-				</WithAgeWarning>
-			);
+			return <ReviewHeadline item={item} />;
 		case ArticleDesign.Gallery:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
-					<GalleryHeadline headline={item.headline} format={format} />
-				</WithAgeWarning>
-			);
-		case ArticleDesign.NewsletterSignup:
-			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<div css={detailBlockStyles}>
-							<SvgNewsletter size="xsmall" />
-							<b>{newsletter.frequency}</b>
-							{/* TO DO - use regional focus, when on the MAPI type */}
-						</div>
-					))}
-					<DefaultHeadline
-						item={item}
-						styles={css(defaultStyles(item))}
-					/>
-				</WithAgeWarning>
-			);
+			return <GalleryHeadline headline={item.headline} format={format} />;
 		default:
 			return (
-				<WithAgeWarning
-					item={item}
-					publishDate={item.publishDate}
-					format={format}
-				>
-					<Series item={item} />
+				<>
 					{designTag}
 					<DefaultHeadline
 						item={item}
 						styles={css(defaultStyles(item))}
 					/>
-				</WithAgeWarning>
+				</>
 			);
 	}
 };

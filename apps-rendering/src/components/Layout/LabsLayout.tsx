@@ -28,6 +28,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 
 // ----- Styles ----- //
 
@@ -56,6 +57,7 @@ interface Props {
 }
 
 const LabsLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -65,6 +67,11 @@ const LabsLayout: FC<Props> = ({ item }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<div>
+						<WithAgeWarning
+							item={item}
+							publishDate={item.publishDate}
+							format={format}
+						></WithAgeWarning>
 						<Series item={item} />
 						<Headline item={item} />
 						<div css={articleWidthStyles}>

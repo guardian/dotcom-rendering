@@ -26,6 +26,8 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { WithAgeWarning } from 'components/WithAgeWarning';
+import Series from 'components/Series';
 
 // ----- Styles ----- //
 
@@ -48,49 +50,61 @@ interface Props {
 	item: Analysis;
 }
 
-const AnalysisLayout: FC<Props> = ({ item }) => (
-	<>
-		<main css={backgroundStyles(item)}>
-			<article css={BorderStyles}>
-				<header>
-					<MainMedia
-						format={getFormat(item)}
-						mainMedia={item.mainMedia}
-					/>
-					<Headline item={item} />
-					<section css={[articleWidthStyles]}>
-						<Byline {...item} />
-						<Standfirst item={item} />
-						<StraightLines cssOverrides={lineStyles} count={4} />
-						<Metadata item={item} />
-						<Logo item={item} />
-					</section>
-					{item.outline.length >= 3 && (
+const AnalysisLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	return (
+		<>
+			<main css={backgroundStyles(item)}>
+				<article css={BorderStyles}>
+					<header>
+						<MainMedia
+							format={getFormat(item)}
+							mainMedia={item.mainMedia}
+						/>
+						<WithAgeWarning
+							item={item}
+							publishDate={item.publishDate}
+							format={format}
+						></WithAgeWarning>
+						<Series item={item} />
+						<Headline item={item} />
 						<section css={[articleWidthStyles]}>
-							<TableOfContents
-								format={getFormat(item)}
-								outline={item.outline}
+							<Byline {...item} />
+							<Standfirst item={item} />
+							<StraightLines
+								cssOverrides={lineStyles}
+								count={4}
 							/>
+							<Metadata item={item} />
+							<Logo item={item} />
 						</section>
-					)}
-				</header>
-				<ArticleBody
-					className={[articleWidthStyles]}
-					format={item}
-					body={item.body}
-					shouldHideAdverts={item.shouldHideAdverts}
-				/>
-				<section css={articleWidthStyles}>
-					<Tags item={item} />
-				</section>
-			</article>
-		</main>
-		<section css={onwardStyles}>
-			<RelatedContent item={item} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</>
-);
+						{item.outline.length > 3 && (
+							<section css={[articleWidthStyles]}>
+								<TableOfContents
+									format={getFormat(item)}
+									outline={item.outline}
+								/>
+							</section>
+						)}
+					</header>
+					<ArticleBody
+						className={[articleWidthStyles]}
+						format={item}
+						body={item.body}
+						shouldHideAdverts={item.shouldHideAdverts}
+					/>
+					<section css={articleWidthStyles}>
+						<Tags item={item} />
+					</section>
+				</article>
+			</main>
+			<section css={onwardStyles}>
+				<RelatedContent item={item} />
+			</section>
+			<Footer isCcpa={false} format={item} />
+		</>
+	);
+};
 
 // ----- Exports ----- //
 

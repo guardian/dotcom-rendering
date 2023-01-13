@@ -51,6 +51,8 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { WithAgeWarning } from 'components/WithAgeWarning';
+import Series from 'components/Series';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -148,6 +150,12 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
 					/>
+					<WithAgeWarning
+						item={item}
+						publishDate={item.publishDate}
+						format={format}
+					></WithAgeWarning>
+					<Series item={item} />
 
 					<Headline item={item} />
 					<div css={articleWidthStyles}>

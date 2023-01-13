@@ -16,7 +16,6 @@ interface WithAgeWarningProps {
 	item: Item;
 	publishDate: Option<Date>;
 	format: ArticleFormat;
-	children: React.ReactNode;
 }
 
 const getAgeWarning = (
@@ -158,7 +157,6 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 	item,
 	publishDate,
 	format,
-	children,
 }: WithAgeWarningProps) => {
 	if (publishDate.kind === OptionKind.Some) {
 		const age = getAgeWarning(item.tags, publishDate.value);
@@ -169,7 +167,6 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 					<div css={[warningStyles(format, item.series.isSome())]}>
 						<AgeWarning age={age} supportsDarkMode={true} />
 					</div>
-					{children}
 					<AgeWarning
 						age={age}
 						isScreenReader={true}
@@ -179,10 +176,10 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 			);
 		}
 
-		return <>{children}</>;
+		return <></>;
 	}
 
-	return <>{children}</>;
+	return <></>;
 };
 
 export { WithAgeWarning, getAgeWarning };

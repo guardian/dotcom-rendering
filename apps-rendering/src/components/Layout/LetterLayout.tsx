@@ -29,6 +29,8 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { WithAgeWarning } from 'components/WithAgeWarning';
+import Series from 'components/Series';
 
 // ----- Styles ----- //
 
@@ -58,50 +60,59 @@ interface Props {
 	item: LetterItem;
 }
 
-const LetterLayout: FC<Props> = ({ item }) => (
-	<main css={[Styles, DarkStyles]}>
-		<article css={BorderStyles}>
-			<header>
-				<Headline item={item} />
+const LetterLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	return (
+		<main css={[Styles, DarkStyles]}>
+			<article css={BorderStyles}>
+				<header>
+					<WithAgeWarning
+						item={item}
+						publishDate={item.publishDate}
+						format={format}
+					></WithAgeWarning>
+					<Series item={item} />
+					<Headline item={item} />
 
-				<Cutout
-					contributors={item.contributors}
-					className={articleWidthStyles}
+					<Cutout
+						contributors={item.contributors}
+						className={articleWidthStyles}
+						format={item}
+					/>
+					<StraightLines
+						cssOverrides={[linePosition, lineStyles]}
+						count={8}
+					/>
+					<div css={articleWidthStyles}>
+						<Standfirst item={item} />
+						<Byline {...item} />
+						<Metadata item={item} />
+					</div>
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
+					<section css={articleWidthStyles}>
+						<Logo item={item} />
+					</section>
+				</header>
+				<ArticleBody
+					className={[articleWidthStyles]}
 					format={item}
-				/>
-				<StraightLines
-					cssOverrides={[linePosition, lineStyles]}
-					count={8}
-				/>
-				<div css={articleWidthStyles}>
-					<Standfirst item={item} />
-					<Byline {...item} />
-					<Metadata item={item} />
-				</div>
-				<MainMedia
-					format={getFormat(item)}
-					mainMedia={item.mainMedia}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
 				/>
 				<section css={articleWidthStyles}>
-					<Logo item={item} />
+					<Tags item={item} />
 				</section>
-			</header>
-			<ArticleBody
-				className={[articleWidthStyles]}
-				format={item}
-				body={item.body}
-				shouldHideAdverts={item.shouldHideAdverts}
-			/>
-			<section css={articleWidthStyles}>
-				<Tags item={item} />
+			</article>
+			<section css={onwardStyles}>
+				<RelatedContent item={item} />
 			</section>
-		</article>
-		<section css={onwardStyles}>
-			<RelatedContent item={item} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</main>
-);
+			<Footer isCcpa={false} format={item} />
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 
