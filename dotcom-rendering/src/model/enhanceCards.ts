@@ -168,7 +168,7 @@ export const enhanceCards = (
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
 		const format = decideFormat(
-			faciaCard.format || {
+			faciaCard.format ?? {
 				design: 'ArticleDesign',
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
