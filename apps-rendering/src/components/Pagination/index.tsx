@@ -10,9 +10,9 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 
-import { border, hover, text } from '../editorialPalette';
+import { border, hover, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { darkModeCss } from '../lib';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 
 type Props = {
 	currentPage: number;

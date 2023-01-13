@@ -1,11 +1,11 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Pagination } from './Pagination';
-import { getAllThemes } from '../fixtures/article';
+import { Pagination } from '.';
+import { getAllThemes } from '@guardian/common-rendering/src/fixtures/article';
 
 export default {
 	component: Pagination,
-	title: 'Common/Components/Pagination',
+	title: 'AR/Pagination',
 	parameters: {
 		layout: 'padded',
 		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },

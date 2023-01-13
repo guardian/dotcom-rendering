@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
-import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
+import { Pagination } from 'components/Pagination';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
