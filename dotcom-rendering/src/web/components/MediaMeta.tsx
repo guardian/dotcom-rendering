@@ -14,13 +14,16 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	format: ArticleFormat;
 	mediaDuration?: number;
+	hasKicker: boolean;
 };
 
-const iconWrapperStyles = (palette: Palette) => css`
+const iconWrapperStyles = (palette: Palette, hasKicker: boolean) => css`
 	width: 24px;
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
-	background-color: ${palette.text.cardFooter};
+	background-color: ${hasKicker
+		? palette.text.cardKicker
+		: palette.text.cardFooter};
 	border-radius: 50%;
 	display: inline-block;
 
@@ -35,8 +38,8 @@ const iconWrapperStyles = (palette: Palette) => css`
 	}
 `;
 
-const durationStyles = (palette: Palette) => css`
-	color: ${palette.text.cardFooter};
+const durationStyles = (palette: Palette, hasKicker: boolean) => css`
+	color: ${hasKicker ? palette.text.cardKicker : palette.text.cardFooter};
 	${textSans.xxsmall({ fontWeight: `bold` })}
 `;
 
@@ -83,11 +86,13 @@ const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 const MediaIcon = ({
 	mediaType,
 	palette,
+	hasKicker,
 }: {
 	mediaType: MediaType;
 	palette: Palette;
+	hasKicker: boolean;
 }) => (
-	<span css={iconWrapperStyles(palette)}>
+	<span css={iconWrapperStyles(palette, hasKicker)}>
 		<Icon mediaType={mediaType} />
 	</span>
 );
@@ -95,26 +100,38 @@ const MediaIcon = ({
 const MediaDuration = ({
 	mediaDuration,
 	palette,
+	hasKicker,
 }: {
 	mediaDuration: number;
 	palette: Palette;
-}) => <p css={durationStyles(palette)}>{secondsToDuration(mediaDuration)}</p>;
+	hasKicker: boolean;
+}) => (
+	<p css={durationStyles(palette, hasKicker)}>
+		{secondsToDuration(mediaDuration)}
+	</p>
+);
 
 export const MediaMeta = ({
 	mediaType,
 	mediaDuration,
 	format,
 	containerPalette,
+	hasKicker,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<div css={wrapperStyles}>
-			<MediaIcon mediaType={mediaType} palette={palette} />
+			<MediaIcon
+				mediaType={mediaType}
+				palette={palette}
+				hasKicker={hasKicker}
+			/>
 			&nbsp;
 			{!!mediaDuration && (
 				<MediaDuration
 					mediaDuration={mediaDuration}
 					palette={palette}
+					hasKicker={hasKicker}
 				/>
 			)}
 		</div>
