@@ -1,8 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
+	headline,
 	line,
 	neutral,
 	remSpace,
@@ -32,9 +33,6 @@ interface TextElementProps {
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
-	:hover {
-		border-bottom: 0.0625rem solid ${neutral[86]};
-	}
 `;
 
 const listStyles: SerializedStyles = css`
@@ -45,11 +43,37 @@ const listStyles: SerializedStyles = css`
 	margin: 0;
 `;
 
-const listItemStyles: SerializedStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	border-bottom: 1px solid ${line.primary};
+const defaultListItemStyles: SerializedStyles = css`
+	border-top: 1px solid ${line.primary};
 	padding-top: ${remSpace[2]};
+	&:last-child {
+		border-bottom: 1px solid ${line.primary};
+	}
+	&:hover {
+		border-top: 1px solid ${neutral[7]};
+		cursor: pointer;
+	}
 `;
+
+const listItemStyles = (format: ArticleFormat): SerializedStyles => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xxxsmall({ fontWeight: 'light' })}
+			${defaultListItemStyles}
+		`;
+	}
+
+	if (format.theme === ArticleSpecial.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'bold' })}
+		`;
+	}
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${defaultListItemStyles}
+	`;
+};
 
 const detailsStyles: SerializedStyles = css`
 	margin-bottom: ${remSpace[6]};
@@ -68,11 +92,15 @@ const summaryStyles: SerializedStyles = css`
 	list-style: none;
 	padding-top: 0.44rem;
 	padding-bottom: 0.375rem;
-	border-bottom: 1px solid ${line.primary};
 	border-top: 1px solid ${line.primary};
 
+	&:hover {
+		border-top: 1px solid ${neutral[7]};
+		cursor: pointer;
+	}
+
 	path {
-		fill: ${neutral[46]};
+		fill: ${neutral[7]};
 	}
 	svg {
 		height: 2rem;
@@ -164,7 +192,10 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 			</summary>
 			<OrderedList className={listStyles}>
 				{outline.map((outlineItem) => (
-					<ListItem className={listItemStyles} key={outlineItem.id}>
+					<ListItem
+						className={listItemStyles(format)}
+						key={outlineItem.id}
+					>
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}

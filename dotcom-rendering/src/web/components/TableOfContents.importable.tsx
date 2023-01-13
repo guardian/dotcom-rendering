@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	headline,
 	line,
@@ -15,6 +16,7 @@ import type { TableOfContentsItem } from '../../types/frontend';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
+	format: ArticleFormat;
 }
 
 const anchorStyles = css`
@@ -22,15 +24,31 @@ const anchorStyles = css`
 	text-decoration: none;
 `;
 
-const listItemStyles = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+const defaultListItemStyles = css`
 	border-top: 1px solid ${line.primary};
 	padding: 6px 0;
+	&:last-child {
+		border-bottom: 1px solid ${line.primary};
+	}
 	&:hover {
 		border-top: 1px solid ${neutral[7]};
 		cursor: pointer;
 	}
 `;
+
+const listItemStyles = (format: ArticleFormat) => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xxxsmall({ fontWeight: 'light' })}
+			${defaultListItemStyles}
+		`;
+	}
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${defaultListItemStyles}
+	`;
+};
 
 const detailsStyles = css`
 	padding: ${space[4]}px 0 ${space[6]}px 0;
@@ -76,7 +94,7 @@ const chevronPosition = css`
 	top: 0;
 `;
 
-export const TableOfContents = ({ tableOfContents }: Props) => {
+export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	// The value for data-link-name is evaluated at the time when the component renders,
@@ -113,7 +131,7 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 				{tableOfContents.map((item, index) => (
 					<li
 						key={item.id}
-						css={listItemStyles}
+						css={listItemStyles(format)}
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
 						<a href={`#${item.id}`} css={anchorStyles}>
