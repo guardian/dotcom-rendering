@@ -56,6 +56,7 @@ export type Props = {
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	/** Sometimes kickers and headlines are separated by a slash */
