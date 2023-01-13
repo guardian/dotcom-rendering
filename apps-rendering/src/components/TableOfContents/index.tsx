@@ -33,6 +33,9 @@ interface TextElementProps {
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
+	/* :hover {
+		border-bottom: 0.0625rem solid ${neutral[86]};
+	} */
 `;
 
 const listStyles: SerializedStyles = css`
@@ -50,7 +53,7 @@ const defaultListItemStyles: SerializedStyles = css`
 		border-bottom: 1px solid ${neutral[86]};
 	}
 	&:hover {
-		border-top: 1px solid ${neutral[7]};
+		border-top: 1px solid ${neutral[20]};
 		cursor: pointer;
 	}
 `;
@@ -95,7 +98,7 @@ const summaryStyles: SerializedStyles = css`
 	border-top: 1px solid ${neutral[86]};
 
 	&:hover {
-		border-top: 1px solid ${neutral[7]};
+		border-top: 1px solid ${neutral[20]};
 		cursor: pointer;
 	}
 
