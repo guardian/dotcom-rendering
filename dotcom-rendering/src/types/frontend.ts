@@ -1,3 +1,4 @@
+import type { NavType } from '../model/extract-nav';
 import type { EditionId } from '../web/lib/edition';
 import type { BadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
@@ -123,3 +124,31 @@ export interface TableOfContentsItem {
 	id: string;
 	title: string;
 }
+
+export interface FENewslettersPageType {
+	newsletters: Newsletter[];
+}
+
+export type DCRNewslettersPageType = {
+	webTitle: string;
+	description?: string;
+	canonicalUrl?: string;
+	sectionName?: string;
+	format?: CAPIFormat;
+	editionId: EditionId;
+	tags?: TagType[];
+	renderAds?: boolean;
+	subscribeUrl: string;
+	contributionsServiceUrl: string;
+	beaconURL: string;
+	twitterData?: {
+		[key: string]: string;
+	};
+	openGraphData?: {
+		[key: string]: string;
+	};
+	config: ConfigType;
+	nav: NavType;
+	footer: FooterType;
+	newsletters: Newsletter[];
+};

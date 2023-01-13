@@ -30,4 +30,11 @@ module.exports = {
 			4,
 		);
 	},
+	getNewsletterPageSchema:() => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'FENewslettersPageType', settings),
+			null,
+			4,
+		);
+	}
 };

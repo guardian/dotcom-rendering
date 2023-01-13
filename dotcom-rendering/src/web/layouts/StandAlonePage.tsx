@@ -11,7 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
-import type { NewslettersPageModel } from '../../types/NewslettersPageModel';
+import type { DCRNewslettersPageType } from '../../types/frontend';
 import { AlreadyVisited } from '../components//AlreadyVisited.importable';
 import { CoreVitals } from '../components//CoreVitals.importable';
 import { FocusStyles } from '../components//FocusStyles.importable';
@@ -27,7 +27,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { Stuck } from '../layouts/lib/stickiness';
 import { decideFormat } from '../lib/decideFormat';
 
-type Props = NewslettersPageModel & {
+type Props = DCRNewslettersPageType & {
 	children: ReactNode;
 };
 

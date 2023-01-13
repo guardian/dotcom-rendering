@@ -5,19 +5,22 @@ import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
-import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import {
+	validateAsCAPIType,
+	validateAsFrontType,
+	validateAsNewslettersPageType,
+} from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
-import type { FEArticleType } from '../../types/frontend';
-import type { NewslettersPageModel } from '../../types/NewslettersPageModel';
+import type {
+	DCRNewslettersPageType,
+	FEArticleType,
+} from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import {
-	buildNewslettersPageModel,
-	validateNewsletter,
-} from './newsletters-page-model';
+import { buildNewslettersPageModel } from './newsletters-page-model';
 import { newslettersToHtml } from './newslettersToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
@@ -199,26 +202,16 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
-const enhanceNewsletters = (body: unknown): NewslettersPageModel => {
-	if (!body || typeof body !== 'object') {
-		throw new Error('no body record!');
-	}
+const enhanceNewslettersPage = (body: unknown): DCRNewslettersPageType => {
+	const data = validateAsNewslettersPageType(body);
 
-	const record = body as Record<keyof NewslettersPageModel, unknown>;
-	const { newsletters } = record;
-
-	if (!newsletters || !Array.isArray(newsletters)) {
-		throw new Error('no newsletters array');
-	}
-
-	const validatedNewsletters = newsletters.filter(validateNewsletter);
-	return buildNewslettersPageModel(validatedNewsletters);
+	return buildNewslettersPageModel(data);
 };
 
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
-		const model = enhanceNewsletters(body);
-		const html = newslettersToHtml(model);
+		const newslettersPage = enhanceNewslettersPage(body);
+		const html = newslettersToHtml(newslettersPage);
 		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);

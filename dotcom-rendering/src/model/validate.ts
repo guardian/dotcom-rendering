@@ -3,9 +3,10 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
-import type { FEArticleType } from '../types/frontend';
+import type { FEArticleType, FENewslettersPageType } from '../types/frontend';
 import articleSchema from './article-schema.json';
 import frontSchema from './front-schema.json';
+import newslettersPageSchema from './newsletter-page-schema.json';
 
 const options: Options = {
 	verbose: false,
@@ -19,6 +20,9 @@ addFormats(ajv);
 
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
+const validateNewslettersPage = ajv.compile<FENewslettersPageType>(
+	newslettersPageSchema,
+);
 
 export const validateAsCAPIType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
@@ -43,3 +47,12 @@ export const validateAsFrontType = (data: unknown): FEFrontType => {
             ${JSON.stringify(validateFront.errors, null, 2)}`,
 	);
 };
+
+export const validateAsNewslettersPageType = (data:unknown): FENewslettersPageType => {
+	if (validateNewslettersPage(data)) return data
+
+	throw new TypeError(
+		`Unable to validate request body for newsletters page.\n
+		${JSON.stringify(validateNewslettersPage.errors, null, 2)}`,
+	)
+}

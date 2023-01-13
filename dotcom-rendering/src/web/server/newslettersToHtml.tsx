@@ -1,12 +1,12 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-import type { NewslettersPageModel } from '../../types/NewslettersPageModel';
+import type { DCRNewslettersPageType } from '../../types/frontend';
 import { NewslettersList } from '../components/NewslettersList';
 import { StandAlonePage } from '../layouts/StandAlonePage';
 import { populatePageTemplate } from './populatePageTemplate';
 
-export const newslettersToHtml = (model: NewslettersPageModel): string => {
+export const newslettersToHtml = (model: DCRNewslettersPageType): string => {
 	const key = 'dcr';
 	const cache = createCache({ key });
 	const html = renderToString(

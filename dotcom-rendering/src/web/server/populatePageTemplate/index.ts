@@ -4,7 +4,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../../scripts/webpack/bundles';
-import type { NewslettersPageModel } from '../../../types/NewslettersPageModel';
+import type { DCRNewslettersPageType } from '../../../types/frontend';
 import { extractExpeditedIslands } from '../extractIslands';
 import { pageTemplate } from '../pageTemplate';
 import { buildWindowGuardian } from './makeWindowGuardian';
@@ -15,7 +15,7 @@ import {
 } from './scriptTags';
 
 export const populatePageTemplate = (
-	model: NewslettersPageModel,
+	model: DCRNewslettersPageType,
 	html: string,
 	cache: EmotionCache,
 ): string => {
