@@ -427,6 +427,7 @@ export const Card = ({
 								format={format}
 								mediaType={mediaType}
 								mediaDuration={mediaDuration}
+								hasKicker={!!kickerText}
 							/>
 						) : undefined}
 					</HeadlineWrapper>
