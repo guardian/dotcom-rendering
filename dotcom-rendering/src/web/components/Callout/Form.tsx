@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	brand,
-	neutral,
-	palette,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { brand, palette, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
