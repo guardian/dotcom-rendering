@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { line, neutral, space, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	line,
+	neutral,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -12,17 +18,17 @@ interface Props {
 }
 
 const anchorStyles = css`
-	color: black;
+	color: ${neutral[7]};
 	text-decoration: none;
 `;
 
 const listItemStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	border-bottom: 1px solid ${line.primary};
+	${headline.xxxsmall({ fontWeight: 'bold' })}
+	border-top: 1px solid ${line.primary};
 	padding: 6px 0;
-
-	&:last-child {
-		border-bottom: none;
+	&:hover {
+		border-top: 1px solid ${neutral[7]};
+		cursor: pointer;
 	}
 `;
 
@@ -44,11 +50,15 @@ const summaryStyles = css`
 	list-style: none;
 	align-items: center;
 	padding: 6px 0;
-	border-bottom: 1px solid ${line.primary};
 	border-top: 1px solid ${line.primary};
 
+	&:hover {
+		border-top: 1px solid ${neutral[7]};
+		cursor: pointer;
+	}
+
 	path {
-		fill: ${neutral[46]};
+		fill: ${neutral[7]};
 	}
 	svg {
 		height: 32px;
@@ -57,7 +67,7 @@ const summaryStyles = css`
 
 const titleStyle = css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	color: ${neutral[46]};
+	color: ${neutral[7]};
 `;
 
 const chevronPosition = css`
