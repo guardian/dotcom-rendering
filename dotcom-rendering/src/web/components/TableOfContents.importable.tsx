@@ -4,6 +4,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
+import { useState } from 'react';
 import type { TableOfContentsItem } from '../../types/frontend';
 
 interface Props {
@@ -19,10 +20,14 @@ const listItemStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
 	border-bottom: 1px solid ${line.primary};
 	padding: 6px 0;
+
+	&:last-child {
+		border-bottom: none;
+	}
 `;
 
 const detailsStyles = css`
-	padding: 6px 0;
+	padding: ${space[4]}px 0 ${space[6]}px 0;
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;
@@ -62,9 +67,29 @@ const chevronPosition = css`
 `;
 
 export const TableOfContents = ({ tableOfContents }: Props) => {
+	const [open, setOpen] = useState(tableOfContents.length < 5);
+
+	// The value for data-link-name is evaluated at the time when the component renders,
+	// So at the time when user clicks the table (onToggle is triggered),
+	// the old value of open(before the click event) is used. As a result we need to
+	// use toc-close for when open is true and toc-expand for when it's false
 	return (
-		<details open={tableOfContents.length < 5} css={detailsStyles}>
-			<summary css={summaryStyles}>
+		<details
+			open={open}
+			css={detailsStyles}
+			data-component="table-of-contents"
+		>
+			<summary
+				onClick={() => {
+					setOpen(!open);
+				}}
+				data-link-name={
+					open
+						? 'table-of-contents-close'
+						: 'table-of-contents-expand'
+				}
+				css={summaryStyles}
+			>
 				<h2 css={titleStyle}>Jump to...</h2>
 				<span className="is-closed" css={chevronPosition}>
 					<SvgChevronDownSingle size="xsmall" />
@@ -75,8 +100,12 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 			</summary>
 
 			<ul>
-				{tableOfContents.map((item) => (
-					<li css={listItemStyles}>
+				{tableOfContents.map((item, index) => (
+					<li
+						key={item.id}
+						css={listItemStyles}
+						data-link-name={`table-of-contents-item-${index}-${item.id}`}
+					>
 						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
 						</a>

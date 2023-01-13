@@ -27,7 +27,6 @@ import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
-import { DecideOnwards } from '../components/DecideOnwards';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -509,58 +508,47 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Hide>
 				</Section>
 
-				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
-				) : (
-					<>
-						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true}>
-								<Island deferUntil="visible">
-									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
-										onwardsSource="more-on-this-story"
-										format={format}
-									/>
-								</Island>
-							</Section>
-						)}
-
-						<Island
-							clientOnly={true}
-							deferUntil="visible"
-							placeholderHeight={600}
-						>
-							<OnwardsUpper
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasRelated={CAPIArticle.hasRelated}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent ?? false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
-								keywordIds={CAPIArticle.config.keywordIds}
-								contentType={CAPIArticle.contentType}
-								tags={CAPIArticle.tags}
+				{CAPIArticle.storyPackage && (
+					<Section fullWidth={true}>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								onwardsSource="more-on-this-story"
 								format={format}
-								pillar={format.theme}
-								editionId={CAPIArticle.editionId}
-								shortUrlId={CAPIArticle.config.shortUrlId}
 							/>
 						</Island>
-					</>
+					</Section>
 				)}
+
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
+					<OnwardsUpper
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						hasRelated={CAPIArticle.hasRelated}
+						hasStoryPackage={CAPIArticle.hasStoryPackage}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						pageId={CAPIArticle.pageId}
+						isPaidContent={
+							CAPIArticle.config.isPaidContent ?? false
+						}
+						showRelatedContent={
+							CAPIArticle.config.showRelatedContent
+						}
+						keywordIds={CAPIArticle.config.keywordIds}
+						contentType={CAPIArticle.contentType}
+						tags={CAPIArticle.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={CAPIArticle.editionId}
+						shortUrlId={CAPIArticle.config.shortUrlId}
+					/>
+				</Island>
 			</main>
 
 			<Section

@@ -15,5 +15,12 @@ deno run \
 deno run \
 	--no-check=remote \
 	--allow-net \
-	--allow-env="GITHUB_TOKEN" \
+	--allow-env="GITHUB_TOKEN,CAPI_KEY" \
 	scripts/deno/iframe-titles.ts
+
+deno run \
+	--no-check=remote \
+	--allow-net \
+	--allow-env="GITHUB_TOKEN" \
+	--allow-run=yarn,npm \
+	scripts/deno/peer-dependencies.ts

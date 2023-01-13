@@ -153,7 +153,7 @@ export const FormField = ({
 							...selectedCheckboxesArray,
 							option.value,
 						];
-
+            
 						return (
 							<Checkbox
 								name={name}

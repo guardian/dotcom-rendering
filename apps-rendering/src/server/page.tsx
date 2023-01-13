@@ -158,7 +158,7 @@ function render(
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
-	const inlineStyles = requiresInlineStyles(request.content);
+	const inlineStyles = requiresInlineStyles(request);
 	const head = renderHead(
 		item,
 		request,

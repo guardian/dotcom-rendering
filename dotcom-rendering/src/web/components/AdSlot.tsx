@@ -24,7 +24,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Omit<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
+	position: Exclude<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -447,7 +447,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}`}
@@ -471,7 +471,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div className="ad-slot-container">
 					<div
@@ -497,7 +497,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}--mobile`}

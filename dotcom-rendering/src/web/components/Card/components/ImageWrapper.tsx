@@ -89,6 +89,13 @@ export const ImageWrapper = ({
 							margin-bottom: 4px;
 							margin-left: 4px;
 							flex-basis: unset;
+							align-self: flex-start;
+						}
+					`,
+				isHorizontal &&
+					css`
+						${from.tablet} {
+							align-self: flex-start;
 						}
 					`,
 				css`

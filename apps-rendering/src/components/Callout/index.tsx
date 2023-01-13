@@ -6,8 +6,9 @@ import { ExpandingWrapper } from '@guardian/source-react-components-development-
 import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
-import { DeadlineDate, Highlight, isCalloutActive } from '../Deadline/index';
-import CalloutBlock from './calloutBlock';
+import { DeadlineDate, isCalloutActive } from '../Deadline/index';
+import CalloutBlock, { getCalloutId } from './calloutBlock';
+import { InactiveCallout } from './calloutComponents';
 import { getTheme } from './theme';
 
 export interface CalloutProps {
@@ -34,23 +35,17 @@ const Callout: FC<CalloutProps> = ({
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {
-		return (
-			<Highlight>
-				This form has been deactivated and is closed to any further
-				submissions.
-			</Highlight>
-		);
+		return <InactiveCallout />;
 	} else if (!isActive && !isNonCollapsible) {
 		return <></>;
 	}
 	return (
 		<aside className="js-callout">
 			{isNonCollapsible ? (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
-						name={name}
 						formFields={formFields}
 						format={format}
 						description={description}
@@ -66,7 +61,7 @@ const Callout: FC<CalloutProps> = ({
 					</span>
 				</ThemeProvider>
 			) : (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<ExpandingWrapper
 						renderExtra={(): ReactElement => (
 							<DeadlineDate until={activeUntil} />
@@ -76,7 +71,6 @@ const Callout: FC<CalloutProps> = ({
 						<CalloutBlock
 							formId={formId}
 							heading={heading}
-							name={name}
 							formFields={formFields}
 							format={format}
 							description={description}
@@ -115,8 +109,9 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 	return h(
 		'div',
 		{
-			hydrationprops: serverSideProps,
+			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
+			id: getCalloutId(calloutProps.heading),
 		},
 		Callout({
 			...calloutProps,

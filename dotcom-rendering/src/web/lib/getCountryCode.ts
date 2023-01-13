@@ -1,46 +1,12 @@
-import { getCookie, getLocale, isString, storage } from '@guardian/libs';
+import { getLocale } from '@guardian/libs';
 import type { CountryCode } from '@guardian/libs';
-import { countries } from './countryCodes';
 
-const COUNTRY_CODE_KEY = 'GU_geo_country';
-const COUNTRY_CODE_KEY_OVERRIDE = 'gu.geo.override';
-/*
-	Memoizes the location
+/**
+ * Generally we see SecurityErrors when a users browser has restrictive privacy settings that prevent access to local storage.
+ * We should avoid reporting these errors to Sentry as they're not very useful to us and create a lot of noise.
  */
-let locale: CountryCode | null;
-
-/*
-	Can be used to override country code and sets it in localStorage
- */
-export const overrideCountryCode = (countryCode: CountryCode): void => {
-	storage.local.set(COUNTRY_CODE_KEY_OVERRIDE, countryCode);
-	locale = countryCode;
-};
-
-export const isCountryCode = (code: unknown): code is CountryCode => {
-	if (!isString(code)) return false;
-	if (countries.includes(code as CountryCode)) return true;
-	return false;
-};
-
-/*
-	This method can be used as a non async way of getting the country code
-	after getLocaleCode has been called.
- */
-export const getCountryCodeSync = (): CountryCode | null => {
-	if (locale) return locale;
-
-	const storageCountryCode = storage.local.get(COUNTRY_CODE_KEY_OVERRIDE);
-	if (isCountryCode(storageCountryCode)) return storageCountryCode;
-
-	const cookieCountryCode = getCookie({
-		name: COUNTRY_CODE_KEY,
-		shouldMemoize: true,
-	});
-	if (isCountryCode(cookieCountryCode)) return cookieCountryCode;
-
-	return null;
-};
+const isSecurityError = (error: unknown) =>
+	error instanceof Error && error.name === 'SecurityError';
 
 /*
 	This method returns the location of the user from guardian/libs getLocale
@@ -49,18 +15,11 @@ export const getCountryCodeSync = (): CountryCode | null => {
 	or if none of those exists, it will call the geo endpoint to fetch it and set it in `GU_geo_country`
  */
 export const getLocaleCode = async (): Promise<CountryCode | null> => {
-	return getLocale()
-		.then((countryCode) => {
-			locale = countryCode;
-			return countryCode;
-		})
-		.catch((error) => {
-			console.log(`Error getting location from libs/getLocale`);
-			window.guardian.modules.sentry.reportError(
-				error,
-				'get-country-code',
-			);
-			locale = getCountryCodeSync();
-			return locale;
-		});
+	return getLocale().catch((error) => {
+		if (isSecurityError(error)) return null;
+
+		console.log(`Error getting location from libs/getLocale`);
+		window.guardian.modules.sentry.reportError(error, 'get-country-code');
+		return null;
+	});
 };
