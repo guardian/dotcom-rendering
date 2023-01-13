@@ -18,7 +18,10 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { buildNewslettersPageModel } from './newsletters-page-model';
+import {
+	buildNewslettersPageModel,
+	provideTestNewslettersPageModel,
+} from './newsletters-page-model';
 import { newslettersToHtml } from './newslettersToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
@@ -209,6 +212,16 @@ const enhanceNewslettersPage = (body: unknown): DCRNewslettersPageType => {
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
 		const newslettersPage = enhanceNewslettersPage(body);
+		const html = newslettersToHtml(newslettersPage);
+		res.status(200).send(html);
+	} catch (e) {
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
+	}
+};
+
+export const handleNewslettersPageWithTestData: RequestHandler = (_, res) => {
+	try {
+		const newslettersPage = provideTestNewslettersPageModel();
 		const html = newslettersToHtml(newslettersPage);
 		res.status(200).send(html);
 	} catch (e) {

@@ -1,7 +1,10 @@
-import type { DCRNewslettersPageType, FENewslettersPageType } from '../../../types/newslettersPage';
+import type {
+	DCRNewslettersPageType,
+	FENewslettersPageType,
+} from '../../../types/newslettersPage';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
-export const TEST_NEWSLETTERS_PAGE_DATE: FENewslettersPageType = {
+export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 	newsletters: [
 		{
 			identityName: 'morning-mail',
@@ -57,7 +60,6 @@ export const TEST_NEWSLETTERS_PAGE_DATE: FENewslettersPageType = {
 export const buildNewslettersPageModel = (
 	pageRequestData: FENewslettersPageType,
 ): DCRNewslettersPageType => ({
-	newsletters: pageRequestData.newsletters,
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
 	config: {
@@ -71,4 +73,22 @@ export const buildNewslettersPageModel = (
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	...pageRequestData,
+});
+
+export const provideTestNewslettersPageModel = (): DCRNewslettersPageType => ({
+	footer: STATIC_FOOTER,
+	nav: STATIC_NAV,
+	config: {
+		...STATIC_CONFIG,
+		pageId: 'static-email-newsletters',
+	},
+	editionId: 'UK',
+	webTitle: 'Guardian newsletters: sign up',
+	description:
+		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
+	beaconURL: '//phar.gu-web.net',
+	subscribeUrl: '/',
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	...TEST_NEWSLETTERS_PAGE_DATA,
 });

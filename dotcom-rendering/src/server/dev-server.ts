@@ -9,6 +9,7 @@ import {
 	handleInteractive,
 	handleKeyEvents,
 	handleNewslettersPage,
+	handleNewslettersPageWithTestData,
 } from '../web/server';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
@@ -39,7 +40,9 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case '/FrontJSON':
 				return handleFrontJson(req, res, next);
-			case '/email-newsletters':
+			case '/EmailNewslettersTestData':
+				return handleNewslettersPageWithTestData(req, res, next);
+			case '/EmailNewsletters':
 				return handleNewslettersPage(req, res, next);
 			default: {
 				if (req.url.match(ARTICLE_URL)) {
