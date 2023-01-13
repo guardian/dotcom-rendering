@@ -859,3 +859,24 @@ export const WhenOpinionWithImageAtBottom = () => {
 		</>
 	);
 };
+
+export const WithLetterDesign = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesign.story = {
+	name: 'WithLetterDesign',
+};
