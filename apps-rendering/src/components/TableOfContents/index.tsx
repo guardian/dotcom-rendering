@@ -1,10 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	line,
 	neutral,
 	remSpace,
 	textSans,
@@ -44,10 +44,10 @@ const listStyles: SerializedStyles = css`
 `;
 
 const defaultListItemStyles: SerializedStyles = css`
-	border-top: 1px solid ${line.primary};
+	border-top: 1px solid ${neutral[86]};
 	padding-top: ${remSpace[2]};
 	&:last-child {
-		border-bottom: 1px solid ${line.primary};
+		border-bottom: 1px solid ${neutral[86]};
 	}
 	&:hover {
 		border-top: 1px solid ${neutral[7]};
@@ -92,7 +92,7 @@ const summaryStyles: SerializedStyles = css`
 	list-style: none;
 	padding-top: 0.44rem;
 	padding-bottom: 0.375rem;
-	border-top: 1px solid ${line.primary};
+	border-top: 1px solid ${neutral[86]};
 
 	&:hover {
 		border-top: 1px solid ${neutral[7]};

@@ -1,4 +1,5 @@
-import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { explainer } from 'fixtures/item';
 import type { ReactElement } from 'react';
