@@ -70,7 +70,7 @@ export const SecureSignup = ({
 		<>
 			<Island
 				clientOnly={true}
-				deferUntil={'idle'}
+				deferUntil={'visible'}
 				placeholderHeight={65}
 			>
 				<SecureSignupIframe
@@ -85,3 +85,4 @@ export const SecureSignup = ({
 		</>
 	);
 };
+

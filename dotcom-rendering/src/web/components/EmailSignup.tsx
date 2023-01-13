@@ -7,6 +7,10 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
+import {
+	SvgChevronDownSingle,
+	SvgChevronRightSingle,
+} from '@guardian/source-react-components';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
@@ -34,20 +38,45 @@ const containerStyles = css`
 	}
 `;
 
-const stackBelowTabletStyles = css`
-	display: flex;
-	flex-direction: column;
-	margin-bottom: ${space[2]}px;
+const titleAndIconStyles = css`
+	display: inline-flex;
+	align-items: center;
+	flex-grow: 1;
+`;
 
-	${from.tablet} {
-		flex-direction: row;
-		margin-bottom: 6px;
+const detailsStyles = css`
+	&:not([open]) .is-on,
+	&[open] .is-off {
+		display: none;
 	}
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+
+		${from.tablet} {
+			flex-direction: row;
+			margin-bottom: 6px;
+		}
+	}
+
+	&:not([open]) summary {
+		margin-bottom: 0;
+	}
+`;
+
+const arrowPosition = css`
+	position: relative;
+	top: ${space[1]}px;
 `;
 
 const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
-	flex-grow: 1;
 	span {
 		color: ${theme === 'news' ? sport[400] : 'inherit'};
 	}
@@ -68,7 +97,7 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-// max-width is the wdith of the text field, the button and the margin between them
+// max-width is the width of the text field, the button and the margin between them
 const descriptionStyles = css`
 	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
@@ -85,22 +114,34 @@ export const EmailSignup = ({
 	hidePrivacyMessage,
 }: Props) => {
 	return (
-		<aside css={containerStyles}>
-			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span>
-				</p>
-				<div css={noHeightFromTabletStyles}>
-					<NewsletterDetail text={buildDetailText(frequency)} />
+		<aside css={containerStyles} aria-label="Newsletter promotion">
+			<details css={detailsStyles}>
+				<summary>
+					<div css={titleAndIconStyles}>
+						<span className="is-off" css={arrowPosition}>
+							<SvgChevronRightSingle size="xsmall" />
+						</span>
+						<span className="is-on" css={arrowPosition}>
+							<SvgChevronDownSingle size="xsmall" />
+						</span>
+						<span css={titleStyles(theme)}>
+							Sign up to <span>{name}</span>
+						</span>
+					</div>
+					<span css={noHeightFromTabletStyles}>
+						<NewsletterDetail text={buildDetailText(frequency)} />
+					</span>
+				</summary>
+				<div>
+					<p css={descriptionStyles}>{description}</p>
+					<SecureSignup
+						name={name}
+						newsletterId={identityName}
+						successDescription={successDescription}
+						hidePrivacyMessage={hidePrivacyMessage}
+					/>
 				</div>
-			</div>
-			<p css={descriptionStyles}>{description}</p>
-			<SecureSignup
-				name={name}
-				newsletterId={identityName}
-				successDescription={successDescription}
-				hidePrivacyMessage={hidePrivacyMessage}
-			/>
+			</details>
 		</aside>
 	);
 };
