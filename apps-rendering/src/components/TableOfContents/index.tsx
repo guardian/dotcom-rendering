@@ -33,9 +33,6 @@ interface TextElementProps {
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
-	/* :hover {
-		border-bottom: 0.0625rem solid ${neutral[86]};
-	} */
 `;
 
 const listStyles: SerializedStyles = css`
@@ -48,7 +45,7 @@ const listStyles: SerializedStyles = css`
 
 const defaultListItemStyles: SerializedStyles = css`
 	border-top: 1px solid ${neutral[86]};
-	padding-top: ${remSpace[2]};
+	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
 	&:last-child {
 		border-bottom: 1px solid ${neutral[86]};
 	}
@@ -56,6 +53,18 @@ const defaultListItemStyles: SerializedStyles = css`
 		border-top: 1px solid ${neutral[20]};
 		cursor: pointer;
 	}
+	${darkModeCss`
+		border-color: ${neutral[20]};
+		&:last-child {
+			border-bottom-color: ${neutral[20]};
+		}
+		&:hover {
+			border-color: ${neutral[86]};
+			&:last-child {
+				border-bottom-color: ${neutral[20]};
+			}
+		}
+	`}
 `;
 
 const listItemStyles = (format: ArticleFormat): SerializedStyles => {
@@ -69,6 +78,7 @@ const listItemStyles = (format: ArticleFormat): SerializedStyles => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			${textSans.medium({ fontWeight: 'bold' })}
+			${defaultListItemStyles}
 		`;
 	}
 
@@ -89,12 +99,11 @@ const detailsStyles: SerializedStyles = css`
 	}
 `;
 
-const summaryStyles: SerializedStyles = css`
+const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	padding-top: 0.44rem;
-	padding-bottom: 0.375rem;
+	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
 	border-top: 1px solid ${neutral[86]};
 
 	&:hover {
@@ -108,6 +117,16 @@ const summaryStyles: SerializedStyles = css`
 	svg {
 		height: 2rem;
 	}
+	${darkModeCss`
+		border-color: ${neutral[20]};
+		&:hover {
+			border-color: ${neutral[86]};
+		}
+
+		path {
+			fill: ${text.tableOfContentsTitleDark(format)};
+		}
+	`}
 `;
 
 const titleStyle = (format: ArticleFormat): SerializedStyles => css`
@@ -184,7 +203,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles}>
-			<summary css={summaryStyles}>
+			<summary css={summaryStyles(format)}>
 				<h2 css={titleStyle(format)}>Jump to...</h2>
 				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle size="xsmall" />

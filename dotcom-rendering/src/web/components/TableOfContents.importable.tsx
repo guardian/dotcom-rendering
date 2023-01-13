@@ -26,7 +26,7 @@ const anchorStyles = css`
 
 const defaultListItemStyles = css`
 	border-top: 1px solid ${line.primary};
-	padding: 6px 0;
+	padding: 4px 0 8px 0;
 	&:last-child {
 		border-bottom: 1px solid ${line.primary};
 	}
@@ -67,7 +67,7 @@ const summaryStyles = css`
 	position: relative;
 	list-style: none;
 	align-items: center;
-	padding: 6px 0;
+	padding: 4px 0 8px 0;
 	border-top: 1px solid ${line.primary};
 
 	&:hover {
