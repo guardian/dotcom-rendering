@@ -236,5 +236,8 @@ export const enhanceCards = (
 					  )
 					: undefined,
 			mediaType: decideMediaType(format),
+			mediaDuration:
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
+					?.duration,
 		};
 	});

@@ -655,7 +655,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -1325,7 +1337,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -1995,7 +2019,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -2673,6 +2709,14 @@
                 "StandardDisplay"
             ],
             "type": "string"
+        },
+        "FEMediaAtoms": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "number"
+                }
+            }
         },
         "EditionId": {
             "enum": [

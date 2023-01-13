@@ -108,6 +108,10 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
+interface FEMediaAtoms {
+	duration?: number;
+}
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -152,7 +156,10 @@ export type FEFrontCard = {
 				body: string;
 				standfirst?: string;
 			};
-			elements: Record<string, unknown>;
+			elements: {
+				mainVideo?: unknown;
+				mediaAtoms: FEMediaAtoms[];
+			};
 			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
@@ -248,6 +255,8 @@ export type DCRFrontCard = {
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
+	mediaType?: MediaType;
+	mediaDuration?: number;
 };
 
 export type FESnapType = {
