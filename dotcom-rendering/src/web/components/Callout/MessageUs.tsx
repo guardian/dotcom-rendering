@@ -9,7 +9,7 @@ const calloutPrimaryButton = css`
 	justify-content: center;
 	margin-bottom: ${space[4]}px;
 	:hover {
-		background-color: ${neutral[0]};
+		background-color: #234b8a;
 	}
 `;
 

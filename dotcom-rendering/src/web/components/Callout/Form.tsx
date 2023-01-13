@@ -44,7 +44,7 @@ const submitButtonStyles = css`
 	display: block;
 	background-color: ${brand[500]};
 	:hover {
-		background-color: ${neutral[0]};
+		background-color: #234b8a;
 	}
 `;
 
