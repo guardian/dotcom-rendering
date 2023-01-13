@@ -3,11 +3,7 @@ import { brand, headline, neutral, space } from '@guardian/source-foundations';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
-import {
-	CalloutDescription,
-	CalloutShare,
-	CalloutTermsAndConditions,
-} from './CalloutComponents';
+import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
 import { MessageUs } from './MessageUs';
 
@@ -79,7 +75,6 @@ export const CalloutBlock = ({
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
 				<CalloutDescription description={description} />
 			</div>
-			<CalloutTermsAndConditions />
 			<div>
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>

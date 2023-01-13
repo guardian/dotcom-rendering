@@ -10,6 +10,7 @@ import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
+import { CalloutTermsAndConditions } from './CalloutComponents';
 import { FormField } from './FormField';
 
 const textStyles = css`
@@ -194,78 +195,83 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 	}
 
 	return (
-		<form
-			action="/formstack-campaign/submit"
-			method="post"
-			css={formStyles}
-			noValidate={true}
-			onSubmit={(e) => {
-				e.preventDefault();
-				const isValid = validateForm();
-				if (!isValid) {
-					const firstInvalidFormElement: HTMLInputElement =
-						document.querySelectorAll(
-							':invalid',
-						)[1] as HTMLInputElement;
-					firstInvalidFormElement.focus();
-					return;
-				}
-				void submitForm(formData);
-			}}
-		>
-			{Object.values(validationErrors).filter((err) => err !== '')
-				.length > 0 && (
-				<ErrorSummary
-					message="Some information is missing."
-					context="Please complete all required fields."
-					cssOverrides={css`
-						width: fit-content;
+		<>
+			<CalloutTermsAndConditions />
+			<form
+				action="/formstack-campaign/submit"
+				method="post"
+				css={formStyles}
+				noValidate={true}
+				onSubmit={(e) => {
+					e.preventDefault();
+					const isValid = validateForm();
+					if (!isValid) {
+						const firstInvalidFormElement: HTMLInputElement =
+							document.querySelectorAll(
+								':invalid',
+							)[1] as HTMLInputElement;
+						firstInvalidFormElement.focus();
+						return;
+					}
+					void submitForm(formData);
+				}}
+			>
+				{Object.values(validationErrors).filter((err) => err !== '')
+					.length > 0 && (
+					<ErrorSummary
+						message="Some information is missing."
+						context="Please complete all required fields."
+						cssOverrides={css`
+							width: fit-content;
+						`}
+					/>
+				)}
+				{formFields.map((formField) => (
+					<div css={formFieldWrapperStyles}>
+						<FormField
+							key={formField.id}
+							formField={formField}
+							formData={formData}
+							setFieldInFormData={setFieldInFormData}
+							validationErrors={validationErrors}
+						/>
+					</div>
+				))}
+				<div css={textStyles}>
+					One of our journalists will be in contact before we publish
+					your information, so please do leave contact details.
+				</div>
+				{/* this element is a H O N £ Y - P 0 T */}
+				<div
+					css={css`
+						position: absolute;
+						left: -62.5rem;
 					`}
-				/>
-			)}
-			{formFields.map((formField) => (
-				<div css={formFieldWrapperStyles}>
-					<FormField
-						key={formField.id}
-						formField={formField}
-						formData={formData}
-						setFieldInFormData={setFieldInFormData}
-						validationErrors={validationErrors}
+					aria-hidden="true"
+				>
+					<input
+						name="twitter-handle"
+						type="text"
+						id="twitter-handle"
+						tabIndex={-1}
+						placeholder="@mytwitterhandle"
+						value={twitterHandle}
+						onChange={(e) => setTwitterHandle(e.target.value)}
 					/>
 				</div>
-			))}
-			<div css={textStyles}>
-				One of our journalists will be in contact before we publish your
-				information, so please do leave contact details.
-			</div>
-			{/* this element is a H O N £ Y - P 0 T */}
-			<div
-				css={css`
-					position: absolute;
-					left: -62.5rem;
-				`}
-				aria-hidden="true"
-			>
-				<input
-					name="twitter-handle"
-					type="text"
-					id="twitter-handle"
-					tabIndex={-1}
-					placeholder="@mytwitterhandle"
-					value={twitterHandle}
-					onChange={(e) => setTwitterHandle(e.target.value)}
-				/>
-			</div>
-			{!!networkError && <div css={errorTextStyles}>{networkError}</div>}
-			<div css={footerPaddingStyles}>
-				<Button
-					priority="primary"
-					type="submit"
-					cssOverrides={submitButtonStyles}
-				>
-					Submit
-				</Button>
-			</div>
-		</form>
+				{!!networkError && (
+					<div css={errorTextStyles}>{networkError}</div>
+				)}
+				<div css={footerPaddingStyles}>
+					<Button
+						priority="primary"
+						type="submit"
+						cssOverrides={submitButtonStyles}
+					>
+						Submit
+					</Button>
+				</div>
+			</form>
+		</>
 	);
 };
