@@ -29,3 +29,16 @@ export const StandardStandard = () => {
 StandardStandard.story = {
 	name: 'StandardDisplay StandardDesign'
 };
+
+export const StandardLetter = () => {
+	return (
+		<CardsWithDifferentThemes
+			display={ArticleDisplay.Standard}
+			design={ArticleDesign.Letter}
+			title="StandardLetter"
+		/>
+	);
+};
+StandardLetter.story = {
+	name: 'StandardDisplay LetterDesign'
+};

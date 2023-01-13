@@ -404,7 +404,11 @@ export const WithPulsingDotSpecialReportAlt = () => {
 export const WithQuotes = () => {
 	return (
 		<CardWrapper>
-			<Card {...basicCardProps} showQuotes={true} kickerText="Quotes" />
+			<Card
+				{...basicCardProps}
+				showQuotedHeadline={true}
+				kickerText="Quotes"
+			/>
 		</CardWrapper>
 	);
 };
@@ -419,7 +423,7 @@ export const WithQuotesSpecialReportAlt = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticleSpecial.SpecialReportAlt,
 				}}
-				showQuotes={true}
+				showQuotedHeadline={true}
 				kickerText="Quotes"
 			/>
 		</CardWrapper>
