@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source-foundations';
-import { between, brandAlt, from, until } from '@guardian/source-foundations';
+import { PlayIcon } from './PlayIcon';
 
 type Props = {
 	children: React.ReactNode;
@@ -9,6 +9,7 @@ type Props = {
 	imageType?: CardImageType;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	showPlayIcon: boolean;
 };
 
 /**
@@ -48,18 +49,13 @@ const flexBasisStyles = ({
 	}
 };
 
-const iconWrapperStyles = css`
-	position: absolute;
-	bottom: 2px;
-	left: 4px;
-`;
-
 export const ImageWrapper = ({
 	children,
 	imageSize,
 	imageType,
 	imagePosition,
 	imagePositionOnMobile,
+	showPlayIcon,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
 	const isHorizontalOnMobile =
@@ -121,6 +117,13 @@ export const ImageWrapper = ({
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{imageType === 'mainMedia' && <div className="image-overlay" />}
+				{imageType === 'mainMedia' && showPlayIcon && (
+					<PlayIcon
+						imageSize={imageSize}
+						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={imagePosition}
+					/>
+				)}
 			</>
 		</div>
 	);
