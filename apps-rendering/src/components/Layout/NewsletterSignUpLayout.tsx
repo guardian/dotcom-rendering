@@ -19,13 +19,13 @@ import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { grid } from 'grid/grid';
 import { getFormat } from 'item';
 import type { NewsletterSignup } from 'item';
 import type { FC } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from '../InPageNewsletterSignup';
-import { WithAgeWarning } from 'components/WithAgeWarning';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`

@@ -21,9 +21,11 @@ import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
+import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { MatchScores } from 'football';
 import { getFormat } from 'item';
 import type {
@@ -51,8 +53,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { WithAgeWarning } from 'components/WithAgeWarning';
-import Series from 'components/Series';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`

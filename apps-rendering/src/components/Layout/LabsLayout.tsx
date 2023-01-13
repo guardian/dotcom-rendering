@@ -18,6 +18,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
@@ -28,7 +29,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { WithAgeWarning } from 'components/WithAgeWarning';
 
 // ----- Styles ----- //
 
