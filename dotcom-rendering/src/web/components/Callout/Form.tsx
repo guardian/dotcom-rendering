@@ -221,9 +221,8 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 					/>
 				)}
 				{formFields.map((formField) => (
-					<div css={formFieldWrapperStyles}>
+					<div css={formFieldWrapperStyles} key={formField.id}>
 						<FormField
-							key={formField.id}
 							formField={formField}
 							formData={formData}
 							setFieldInFormData={setFieldInFormData}
