@@ -62,10 +62,8 @@ export function secondsToDuration(secs?: number): string {
 	if (h > 0) {
 		duration.push(h);
 	}
-	if (m > 0 || h === 0) {
-		if (h > 0 && m < 10) duration.push(`0${m}`); // e.g 1:01:11
-		else duration.push(m); // supports 0:59
-	}
+	if (h > 0 && m < 10) duration.push(`0${m}`); // e.g 1:01:11
+	else duration.push(m); // supports 0:59
 	if (s > 0) {
 		if (s < 10) duration.push(`0${s}`);
 		else duration.push(s);
