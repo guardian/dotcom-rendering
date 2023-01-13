@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import FigCaption from 'components/FigCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
@@ -12,6 +12,7 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 
 const figureStyles = css`
 	${grid.container}
@@ -150,6 +151,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 			css={captionStyles(format)}
 			format={format}
 			supportsDarkMode={supportsDarkMode}
+			variant={CaptionIconVariant.Image}
 		>
 			{caption}
 		</FigCaption>

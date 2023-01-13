@@ -11,7 +11,7 @@ import {
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
 import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import FigCaption from 'components/FigCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';

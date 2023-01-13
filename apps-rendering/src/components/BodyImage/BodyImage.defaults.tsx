@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import FigCaption from 'components/FigCaption';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -14,6 +14,7 @@ import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
 import type { FC, ReactNode } from 'react';
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 
 const width = '100%';
 const phabletWidth = '620px';
@@ -127,6 +128,7 @@ const DefaultBodyImage: FC<
 			)}
 			format={format}
 			supportsDarkMode={supportsDarkMode}
+			variant={CaptionIconVariant.Image}
 		>
 			{caption}
 		</FigCaption>

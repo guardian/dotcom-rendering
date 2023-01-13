@@ -10,20 +10,19 @@ import { ArticleDesign } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
-import { darkModeCss } from '../lib';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import CaptionIcon, { CaptionIconVariant } from './captionIcon';
+import CaptionIcon, { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import { Styleable } from 'lib';
 
 // ----- Component ----- //
 
-type Props = {
+type Props = Styleable<{
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 	children: Option<ReactNode>;
-	className?: string;
-	css?: SerializedStyles;
-	variant?: CaptionIconVariant;
-};
+	variant: CaptionIconVariant;
+}>;
 
 const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
@@ -65,7 +64,7 @@ const FigCaption: FC<Props> = ({
 	supportsDarkMode,
 	children,
 	className,
-	variant = CaptionIconVariant.Image,
+	variant,
 }) => {
 	switch (children.kind) {
 		case OptionKind.Some:
