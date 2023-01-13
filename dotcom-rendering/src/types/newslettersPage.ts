@@ -7,6 +7,10 @@ import type { TagType } from './tag';
 
 export interface FENewslettersPageType {
 	newsletters: Newsletter[];
+	id: string;
+	webTitle: string;
+	description: string;
+	section: { value?: string };
 }
 
 export type DCRNewslettersPageType = {

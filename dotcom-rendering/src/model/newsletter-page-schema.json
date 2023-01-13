@@ -45,10 +45,31 @@
                     "theme"
                 ]
             }
+        },
+        "id": {
+            "type": "string"
+        },
+        "webTitle": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "section": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            }
         }
     },
     "required": [
-        "newsletters"
+        "description",
+        "id",
+        "newsletters",
+        "section",
+        "webTitle"
     ],
     "$schema": "http://json-schema.org/draft-07/schema#"
 }

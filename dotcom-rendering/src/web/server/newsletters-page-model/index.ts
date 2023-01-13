@@ -55,6 +55,11 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 			group: 'Opinion',
 		},
 	],
+	id: 'test-newsletters-page',
+	webTitle: 'Guardian newsletters: Using Test Data',
+	description:
+		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
+	section: {},
 };
 
 export const buildNewslettersPageModel = (
@@ -64,12 +69,10 @@ export const buildNewslettersPageModel = (
 	nav: STATIC_NAV,
 	config: {
 		...STATIC_CONFIG,
-		pageId: 'static-email-newsletters',
+		pageId: pageRequestData.id,
+		section: pageRequestData.section.value || ''
 	},
 	editionId: 'UK',
-	webTitle: 'Guardian newsletters: sign up',
-	description:
-		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
@@ -84,9 +87,6 @@ export const provideTestNewslettersPageModel = (): DCRNewslettersPageType => ({
 		pageId: 'static-email-newsletters',
 	},
 	editionId: 'UK',
-	webTitle: 'Guardian newsletters: sign up',
-	description:
-		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
