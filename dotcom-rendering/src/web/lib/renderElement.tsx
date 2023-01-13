@@ -7,7 +7,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
@@ -83,6 +83,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
+	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -137,6 +138,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -181,11 +183,18 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			return (
-				<Island deferUntil="visible">
-					<CalloutBlockComponent callout={element} />
-				</Island>
-			);
+			if (
+				switches.callouts &&
+				abTests?.calloutElementsVariant === 'variant'
+			) {
+				return (
+					<Island deferUntil="visible">
+						<CalloutBlockComponent callout={element} />
+					</Island>
+				);
+			}
+			return null;
+
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
 				<CaptionBlockComponent
@@ -779,6 +788,7 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
+	abTests,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -798,6 +808,7 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
+		abTests,
 	});
 
 	const needsFigure = !bareElements.has(element._type);
