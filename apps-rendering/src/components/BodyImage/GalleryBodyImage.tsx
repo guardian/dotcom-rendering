@@ -1,9 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from 'components/FigCaption';
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
+import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
@@ -12,7 +13,6 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 
 const figureStyles = css`
 	${grid.container}

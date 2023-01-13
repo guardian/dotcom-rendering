@@ -1,11 +1,9 @@
-/* eslint-disable import/no-default-export -- exclude stories for this rule */
-
 // ----- Imports ----- //
 
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
 import type { FC, ReactElement } from 'react';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 import FigCaption from '.';
 
 // ----- Stories ----- //

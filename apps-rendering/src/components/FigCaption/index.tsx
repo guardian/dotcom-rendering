@@ -2,18 +2,17 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
-import { neutral } from '@guardian/source-foundations';
-import { textSans } from '@guardian/source-foundations';
+import type { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import CaptionIcon from '@guardian/common-rendering/src/components/captionIcon';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
+import type { Styleable } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import CaptionIcon, { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import { Styleable } from 'lib';
 
 // ----- Component ----- //
 
@@ -24,7 +23,10 @@ type Props = Styleable<{
 	variant: CaptionIconVariant;
 }>;
 
-const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
+const styles = (
+	format: ArticleFormat,
+	supportsDarkMode: boolean,
+): SerializedStyles => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
@@ -34,7 +36,7 @@ const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
   	`}
 `;
 
-const mediaStyles = (supportsDarkMode: boolean) => css`
+const mediaStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	color: ${neutral[86]};
 
 	${darkModeCss(supportsDarkMode)`
