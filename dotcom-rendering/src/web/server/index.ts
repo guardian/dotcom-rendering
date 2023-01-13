@@ -218,8 +218,8 @@ const enhanceNewsletters = (body: unknown): NewslettersPageModel => {
 export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
 		const model = enhanceNewsletters(body);
-		const content = newslettersToHtml(model);
-		res.status(200).send(content);
+		const html = newslettersToHtml(model);
+		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}

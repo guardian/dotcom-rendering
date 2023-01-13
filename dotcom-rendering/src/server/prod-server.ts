@@ -16,6 +16,7 @@ import {
 	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
+	handleNewslettersPage,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -60,6 +61,7 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post('/email-newsletters', logRenderTime, handleNewslettersPage);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
