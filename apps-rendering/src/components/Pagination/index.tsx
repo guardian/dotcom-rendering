@@ -16,6 +16,7 @@ import {
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import type { FC, ReactElement, ReactNode } from 'react';
 
 type Props = {
 	currentPage: number;
@@ -28,7 +29,7 @@ type Props = {
 	supportsDarkMode: boolean;
 };
 
-const NavWrapper = ({ children }: { children: React.ReactNode }) => (
+const NavWrapper: FC<{ children: ReactNode }> = ({ children }) => (
 	<nav
 		// Used to scroll the page to this point when using permalinks
 		id="liveblog-navigation"
@@ -44,13 +45,10 @@ const NavWrapper = ({ children }: { children: React.ReactNode }) => (
 	</nav>
 );
 
-const FlexSection = ({
-	hide = false,
-	children,
-}: {
+const FlexSection: FC<{
 	hide?: boolean;
-	children: React.ReactNode;
-}) => (
+	children: ReactNode;
+}> = ({ hide = false, children }) => (
 	<section
 		css={css`
 			display: flex;
@@ -62,7 +60,7 @@ const FlexSection = ({
 	</section>
 );
 
-const Bold = ({ children }: { children: React.ReactNode }) => (
+const Bold: FC<{ children: ReactNode }> = ({ children }) => (
 	<div
 		css={css`
 			font-weight: bold;
@@ -72,13 +70,10 @@ const Bold = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const Position = ({
-	children,
-	supportsDarkMode,
-}: {
-	children: React.ReactNode;
+const Position: FC<{
+	children: ReactNode;
 	supportsDarkMode: boolean;
-}) => (
+}> = ({ children, supportsDarkMode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -94,9 +89,9 @@ const Position = ({
 	</div>
 );
 
-const Of = () => <span>&nbsp;of&nbsp;</span>;
+const Of = (): ReactElement => <span>&nbsp;of&nbsp;</span>;
 
-const Space = () => (
+const Space = (): ReactElement => (
 	<div
 		css={css`
 			${until.phablet} {
@@ -115,7 +110,7 @@ const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const Pagination = ({
+const Pagination: FC<Props> = ({
 	currentPage,
 	totalPages,
 	oldest,
@@ -124,7 +119,7 @@ const Pagination = ({
 	newer,
 	format,
 	supportsDarkMode,
-}: Props) => {
+}) => {
 	return (
 		<NavWrapper>
 			<FlexSection hide={currentPage === 1}>
