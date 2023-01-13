@@ -114,9 +114,9 @@ export const EmailSignup = ({
 	hidePrivacyMessage,
 }: Props) => {
 	return (
-		<aside css={containerStyles} aria-label="Newsletter promotion">
+		<aside css={containerStyles} aria-label={`Newsletter promotion`}>
 			<details css={detailsStyles}>
-				<summary>
+				<summary aria-label={`open sign up form for ${name}`}>
 					<div css={titleAndIconStyles}>
 						<span className="is-off" css={arrowPosition}>
 							<SvgChevronRightSingle size="xsmall" />
