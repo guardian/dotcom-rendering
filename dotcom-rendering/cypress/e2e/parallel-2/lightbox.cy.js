@@ -24,6 +24,15 @@ describe('Lightbox', function () {
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
 		cy.get('li[data-index="2"] img').should('be.visible');
 	});
+
+	it('should open the lightbox when an image is clicked', function () {
+		cy.visit(`/Article?url=${articleUrl}`);
+		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		// Open lightbox using fifth image on the page
+		cy.get('article img').eq(3).realClick();
+		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('nav [data-cy="lightbox-selected"]').contains('5/22');
+		cy.get('li[data-index="5"] img').should('be.visible');
 	});
 
 	it('should trap focus', function () {
