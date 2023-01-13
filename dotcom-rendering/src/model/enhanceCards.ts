@@ -86,8 +86,8 @@ const enhanceSupportingContent = (
 
 		return {
 			format: presentationFormat,
-			headline: subLink.header?.headline || '',
-			url: subLink.properties.href || subLink.header?.url,
+			headline: subLink.header?.headline ?? '',
+			url: subLink.properties.href ?? subLink.header?.url,
 			kickerText: supportingContentIsLive
 				? 'Live'
 				: subLink.header?.kicker?.item?.properties.kickerText,
