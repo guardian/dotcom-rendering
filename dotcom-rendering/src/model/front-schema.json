@@ -3095,6 +3095,9 @@
                 },
                 "showQuotedHeadline": {
                     "type": "boolean"
+                },
+                "showMainVideo": {
+                    "type": "boolean"
                 }
             },
             "required": [

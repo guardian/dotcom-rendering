@@ -229,6 +229,7 @@ export const Card = ({
 	showClock,
 	mediaType,
 	mediaDuration,
+	showMainVideo,
 	kickerText,
 	showPulsingDot,
 	showSlash,
@@ -359,6 +360,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
+						showPlayIcon={showMainVideo ?? false}
 					>
 						{image.type === 'avatar' && (
 							<AvatarContainer

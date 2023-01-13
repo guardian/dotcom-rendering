@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source-foundations';
+import { between, brandAlt, from, until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
@@ -46,6 +47,12 @@ const flexBasisStyles = ({
 			`;
 	}
 };
+
+const iconWrapperStyles = css`
+	position: absolute;
+	bottom: 2px;
+	left: 4px;
+`;
 
 export const ImageWrapper = ({
 	children,
