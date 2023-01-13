@@ -254,9 +254,7 @@ export const Card = ({
 	);
 
 	const showQuotes =
-		!!showQuotedHeadline ||
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Letter;
+		!!showQuotedHeadline || format.design === ArticleDesign.Comment;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
