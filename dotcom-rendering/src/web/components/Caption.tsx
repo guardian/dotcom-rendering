@@ -298,10 +298,7 @@ export const Caption = ({
 							css`
 								color: ${neutral[97]};
 								a {
-									text-decoration: none;
-								}
-								a:hover {
-									text-decoration: underline;
+									color: inherit;
 								}
 								strong {
 									font-weight: bold;
