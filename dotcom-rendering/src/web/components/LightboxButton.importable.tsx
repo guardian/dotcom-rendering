@@ -14,6 +14,7 @@ import type { RoleType } from '../../types/content';
 type Props = {
 	elementId: string;
 	role: RoleType;
+	isMainMedia?: boolean;
 };
 
 function decideSize(role: RoleType) {
@@ -414,7 +415,7 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export const LightboxButton = ({ elementId, role }: Props) => {
+export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
 	useEffect(() => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('#gu-lightbox');
@@ -450,6 +451,7 @@ export const LightboxButton = ({ elementId, role }: Props) => {
 						}
 					`,
 					decideSize(role),
+					isMainMedia && visuallyHidden,
 				]}
 			>
 				<SvgArrowExpand />

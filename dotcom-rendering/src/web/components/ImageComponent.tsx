@@ -334,6 +334,13 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+				<Island deferUntil="interaction">
+					<LightboxButton
+						role={role}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+					/>
+				</Island>
 			</div>
 		);
 	}
@@ -370,7 +377,11 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				<Island deferUntil="interaction">
-					<LightboxButton role={role} elementId={element.elementId} />
+					<LightboxButton
+						role={role}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+					/>
 				</Island>
 			</div>
 		);
@@ -446,7 +457,11 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				<Island deferUntil="interaction">
-					<LightboxButton role={role} elementId={element.elementId} />
+					<LightboxButton
+						role={role}
+						elementId={element.elementId}
+						isMainMedia={isMainMedia}
+					/>
 				</Island>
 			</div>
 			{isMainMedia ? (
