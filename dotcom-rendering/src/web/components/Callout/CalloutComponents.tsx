@@ -166,6 +166,7 @@ export const CalloutShare = ({
 		if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
+			setTimeout(() => setIsCopied(false), 3000);
 		}
 	};
 
