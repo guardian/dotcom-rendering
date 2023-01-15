@@ -8,9 +8,6 @@ const calloutPrimaryButton = css`
 	width: 100%;
 	justify-content: center;
 	margin-bottom: ${space[4]}px;
-	:hover {
-		background-color: #234b8a;
-	}
 `;
 
 const descriptionStyles = css`
@@ -47,13 +44,27 @@ export const MessageUs = () => {
 				You can contact us on WhatsApp or Signal at{' '}
 				{WHATSAPP_SIGNAL_NUMBER} or Telegram at {TELEGRAM_NUMBER}. For
 				more information, please see our guidance on{' '}
-				<a href={WHATSAPP_GUIDANCE_URL}>contacting us via WhatsApp</a>{' '}
+				<a
+					data-ignore="global-link-styling"
+					href={WHATSAPP_GUIDANCE_URL}
+				>
+					contacting us via WhatsApp
+				</a>{' '}
 				and our guidance on{' '}
-				<a href={TELEGRAM_GUIDANCE_URL}>contacting us via Telegram</a>.
+				<a
+					data-ignore="global-link-styling"
+					href={TELEGRAM_GUIDANCE_URL}
+				>
+					contacting us via Telegram
+				</a>
+				.
 			</p>
 			<p css={descriptionStyles}>
 				For true anonymity please use our{' '}
-				<a href={SECURE_DROP_URL}>SecureDrop</a> service instead.
+				<a data-ignore="global-link-styling" href={SECURE_DROP_URL}>
+					SecureDrop
+				</a>{' '}
+				service instead.
 			</p>
 			<LinkButton
 				data-ignore="global-link-styling"

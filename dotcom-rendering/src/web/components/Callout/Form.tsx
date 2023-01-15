@@ -37,9 +37,6 @@ const submitButtonStyles = css`
 	width: 100%;
 	display: block;
 	background-color: ${brand[500]};
-	:hover {
-		background-color: #234b8a;
-	}
 `;
 
 const footerPaddingStyles = css`
