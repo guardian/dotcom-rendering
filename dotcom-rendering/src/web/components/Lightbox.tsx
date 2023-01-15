@@ -394,7 +394,6 @@ export const Lightbox = ({ format, images }: Props) => {
 
 							return (
 								<li
-									id={`img-${index + 1}`}
 									// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
 									key={`${master}-${index}`}
 									data-index={index + 1}

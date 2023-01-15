@@ -235,6 +235,7 @@ export interface ImageBlockElement {
 	title?: string;
 	starRating?: number;
 	isAvatar?: boolean;
+	position?: number;
 }
 
 export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {

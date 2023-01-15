@@ -1,5 +1,6 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
+import { addImageIDs } from '../../model/addImageIDs';
 import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
@@ -21,7 +22,10 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 }
 
 const enhanceCAPIType = (body: unknown): FEArticleType => {
-	const data = validateAsCAPIType(body);
+	const validated = validateAsCAPIType(body);
+	// addImageIDs needs to take account of both main media elements
+	// and block elements, so it needs to be executed here
+	const data = addImageIDs(validated);
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
