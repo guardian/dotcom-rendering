@@ -36,7 +36,6 @@ const submitButtonStyles = css`
 	margin: 20px 0px;
 	width: 100%;
 	display: block;
-	background-color: ${brand[500]};
 `;
 
 const footerPaddingStyles = css`
