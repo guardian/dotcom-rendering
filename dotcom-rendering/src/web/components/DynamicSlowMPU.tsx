@@ -2,13 +2,15 @@ import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
-	Card25Media25Tall,
 	Card33Media33,
-	Card50Media50,
 	CardDefault,
 	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
-import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
+import {
+	Card50_Card25_Card25,
+	Card50_Card50,
+	Card75_Card25,
+} from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -115,53 +117,6 @@ const ColumnOfThree50_Ad50 = ({
 					<AdSlot position="inline" index={index} />
 				</Hide>
 			</LI>
-		</UL>
-	);
-};
-
-/* ._________________.________.________.
- * |#################|########|########|
- * |                 |        |        |
- * |_________________|________|________|
- */
-const Card50_Card25_Card25 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => {
-	const card50 = cards.slice(0, 1);
-	const cards25 = cards.slice(1, 3);
-
-	return (
-		<UL direction="row" padBottom={true}>
-			{card50.map((card) => (
-				<LI percentage="50%" padSides={true} key={card.url}>
-					<Card50Media50
-						trail={card}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-			{cards25.map((card) => (
-				<LI
-					percentage="25%"
-					padSides={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-					key={card.url}
-				>
-					<Card25Media25Tall
-						trail={card}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
 		</UL>
 	);
 };

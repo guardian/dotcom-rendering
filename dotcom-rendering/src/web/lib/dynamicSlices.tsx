@@ -6,10 +6,9 @@ import {
 	Card100Media100,
 	Card100Media75,
 	Card25Media25,
-	Card33Media33,
+	Card25Media25Tall,
 	Card50Media50,
 	Card50Media50Tall,
-	Card66Media66,
 	Card75Media50Left,
 	Card75Media50Right,
 } from './cardWrappers';
@@ -153,53 +152,6 @@ export const Card25_Card75 = ({
 	);
 };
 
-/* ._______________________.___________.
- * |#######################|###########|
- * |                       |           |
- * |_______________________|___________|
- */
-export const Card66_Card33 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => {
-	const card66 = cards.slice(0, 1);
-	const card33 = cards.slice(1, 2);
-
-	return (
-		<UL direction="row">
-			{card66.map((trail) => (
-				<LI key={trail.shortUrl} percentage="66.666%" padSides={true}>
-					<Card66Media66
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-			{card33.map((trail) => (
-				<LI
-					key={trail.shortUrl}
-					percentage="33.333%"
-					padSides={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
-					<Card33Media33
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-		</UL>
-	);
-};
-
 /* ._________________.________.________.
  * |#################|########|########|
  * |                 |        |        |
@@ -237,7 +189,7 @@ export const Card50_Card25_Card25 = ({
 					showDivider={true}
 					containerPalette={containerPalette}
 				>
-					<Card25Media25
+					<Card25Media25Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
