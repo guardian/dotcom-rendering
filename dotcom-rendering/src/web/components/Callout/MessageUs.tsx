@@ -73,7 +73,7 @@ export const MessageUs = () => {
 				priority="primary"
 				icon={<SvgWhatsApp />}
 				href={OPEN_WHATSAPP_URL}
-				target="_blank"
+				rel="noopener"
 				nudgeIcon={false}
 			>
 				Message us on Whatsapp
@@ -84,7 +84,7 @@ export const MessageUs = () => {
 				type="submit"
 				priority="primary"
 				href={OPEN_TELEGRAM_URL}
-				target="_blank"
+				rel="noopener"
 			>
 				Message us on Telegram
 			</LinkButton>
@@ -99,7 +99,7 @@ export const MessageUs = () => {
 				type="submit"
 				priority="primary"
 				href={OPEN_SIGNAL_URL}
-				target="_blank"
+				rel="noopener"
 			>
 				Message us on Signal
 			</LinkButton>
