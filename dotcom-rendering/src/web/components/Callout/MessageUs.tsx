@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, space, textSans } from '@guardian/source-foundations';
-import { LinkButton, SvgWhatsApp } from '@guardian/source-react-components';
+import { LinkButton } from '@guardian/source-react-components';
 
 const calloutPrimaryButton = css`
 	width: 100%;
@@ -36,14 +36,15 @@ export const MessageUs = () => {
 		<div className="js-message-us-tab">
 			<p css={descriptionStyles}>
 				You can contact us on WhatsApp or Signal at{' '}
-				{WHATSAPP_SIGNAL_NUMBER}.
-				For more information, please see our guidance on{' '}
+				{WHATSAPP_SIGNAL_NUMBER}. For more information, please see our
+				guidance on{' '}
 				<a
 					data-ignore="global-link-styling"
 					href={WHATSAPP_GUIDANCE_URL}
 				>
 					contacting us via WhatsApp
-				</a>.
+				</a>
+				.
 			</p>
 			<p css={descriptionStyles}>
 				For true anonymity please use our{' '}
@@ -57,7 +58,6 @@ export const MessageUs = () => {
 				cssOverrides={calloutPrimaryButton}
 				type="submit"
 				priority="primary"
-				icon={<SvgWhatsApp />}
 				href={OPEN_WHATSAPP_URL}
 				rel="noopener"
 				target="blank"

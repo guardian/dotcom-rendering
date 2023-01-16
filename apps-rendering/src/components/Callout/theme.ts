@@ -7,9 +7,9 @@ import {
 	success,
 } from '@guardian/source-foundations';
 import {
+	expandingWrapperDarkTheme,
 	fileInputDarkTheme,
 	tabsDarkTheme,
-	expandingWrapperDarkTheme,
 } from '@guardian/source-react-components-development-kitchen';
 
 const labelDarkTheme = {

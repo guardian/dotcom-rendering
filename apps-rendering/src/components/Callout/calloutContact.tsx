@@ -15,8 +15,8 @@ const CalloutContact: FC = () => {
 		<div className="js-message-us-tab">
 			<p css={[info, calloutLinkContainer]}>
 				You can contact us on WhatsApp or Signal at{' '}
-				{WHATSAPP_SIGNAL_NUMBER}.
-				For more information, please see our guidance on{' '}
+				{WHATSAPP_SIGNAL_NUMBER}. For more information, please see our
+				guidance on{' '}
 				<a href={WHATSAPP_GUIDANCE_URL}>contacting us via WhatsApp</a>.
 			</p>
 

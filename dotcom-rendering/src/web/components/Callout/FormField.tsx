@@ -1,5 +1,3 @@
-import { ThemeProvider } from '@emotion/react';
-import { brand } from '@guardian/source-foundations';
 import {
 	Checkbox,
 	CheckboxGroup,
