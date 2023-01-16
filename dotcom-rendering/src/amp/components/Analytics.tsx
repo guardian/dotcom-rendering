@@ -30,12 +30,12 @@ export const Analytics = ({
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		// The componentEvent is the encoded version of componentObject using https://www.urlencoder.org/
-		`<amp-analytics data-block-on-consent>
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent>
 			<script type="application/json">
 				{
 					"requests": {
 						"base":  "https://ophan.theguardian.com/img/2?viewId=\${ophanPageViewId}&ampViewId=\${pageViewId64}",
-						"pageviewWithConsent": "\${base}&componentEvent=\${componentEvent}"
+						"pageviewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
 					"trackPageview": {
@@ -46,7 +46,12 @@ export const Analytics = ({
 							"componentEvent": "%7B%22component%22%3A%7B%22componentType%22%3A%22CONSENT%22%2C%22products%22%3A%5B%5D%2C%22labels%22%3A%5B%2208%3A%5C%24%7B\${consentState}%7D%22%2C%2209%3A%5C%24%7B\${consentString}%7D%22%5D%7D%2C%22action%22%3A%22MANAGE_CONSENT%22%7D"
 						}
 					}
-					}
+					},
+          "transport": {
+            "image": true,
+            "xhrpost": false,
+            "beacon": false
+          }
 				}
 			</script>
 		</amp-analytics>`,
