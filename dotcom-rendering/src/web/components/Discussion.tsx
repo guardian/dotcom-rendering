@@ -20,6 +20,7 @@ export type Props = {
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
+	idApiUrl: string;
 };
 
 const overlayStyles = css`
@@ -65,6 +66,7 @@ export const Discussion = ({
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
 	user,
+	idApiUrl,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
@@ -183,6 +185,7 @@ export const Discussion = ({
 						onExpand={() => {
 							setIsExpanded(true);
 						}}
+						// idApiUrl={idApiUrl}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />

@@ -755,6 +755,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</Section>
 				)}

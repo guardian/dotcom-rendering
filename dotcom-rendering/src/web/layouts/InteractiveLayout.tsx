@@ -703,6 +703,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</Section>
 				)}
