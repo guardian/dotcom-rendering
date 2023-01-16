@@ -165,7 +165,7 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						<Logo item={item} />
 					</section>
 
-					{item.outline.length > 0 && (
+					{item.outline.length >= 3 && (
 						<section css={articleWidthStyles}>
 							<TableOfContents
 								format={getFormat(item)}

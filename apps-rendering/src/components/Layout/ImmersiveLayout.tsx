@@ -113,7 +113,7 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 						</div>
 						<Metadata item={item} />
 						<div css={bodyStyles}>
-							{item.outline.length > 0 && (
+							{item.outline.length >= 3 && (
 								<section>
 									<TableOfContents
 										format={getFormat(item)}

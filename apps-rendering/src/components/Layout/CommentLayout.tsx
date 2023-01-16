@@ -108,7 +108,7 @@ const CommentLayout: FC<Props> = ({ item }) => (
 				<section css={articleWidthStyles}>
 					<Logo item={item} />
 				</section>
-				{item.outline.length > 0 && (
+				{item.outline.length >= 3 && (
 					<section css={articleWidthStyles}>
 						<TableOfContents
 							format={getFormat(item)}
