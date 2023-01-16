@@ -17,7 +17,7 @@ const mockFormatOpinion = {
 
 export default {
 	component: Form,
-	title: 'Components/Callout/Form',
+	title: 'Components/CalloutBlockComponent/Form',
 };
 
 export const News = () => {

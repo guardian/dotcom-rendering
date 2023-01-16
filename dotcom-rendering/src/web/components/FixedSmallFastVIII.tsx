@@ -3,7 +3,7 @@ import type { TrailType } from '../../types/trails';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+import { Card25Media25, CardDefault } from '../lib/cardWrappers';
 
 type Props = {
 	trails: TrailType[];
@@ -30,12 +30,10 @@ export const FixedSmallFastVIII = ({
 						showDivider={cardIndex === 1}
 						key={card.url}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -58,12 +56,10 @@ export const FixedSmallFastVIII = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);

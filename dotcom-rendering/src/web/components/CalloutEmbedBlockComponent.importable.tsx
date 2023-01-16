@@ -102,7 +102,7 @@ const descriptionStyles = css`
 
 const headingTextStyles = (palette: Palette) => css`
 	a {
-		color: ${palette.text.calloutHeading};
+		color: ${palette.text.calloutAccent};
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;

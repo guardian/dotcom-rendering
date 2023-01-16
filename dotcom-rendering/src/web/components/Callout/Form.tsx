@@ -32,8 +32,6 @@ const formStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
 `;
 
 const formFieldWrapperStyles = css`
@@ -74,6 +72,7 @@ export const Form = ({
 
 	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
+	const [twitterHandle, setTwitterHandle] = useState('');
 
 	const setFieldInFormData = (
 		id: string,
@@ -131,6 +130,10 @@ export const Form = ({
 	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
+		if (formData.twitterHandle) {
+			setNetworkError('Sorry we think you are a robot.');
+			return;
+		}
 		// need to add prefix `field_` to all keys in form, required by formstack
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
@@ -211,9 +214,8 @@ export const Form = ({
 				/>
 			)}
 			{formFields.map((formField) => (
-				<div css={formFieldWrapperStyles}>
+				<div css={formFieldWrapperStyles} key={formField.id}>
 					<FormField
-						key={formField.id}
 						format={format}
 						formField={formField}
 						formData={formData}
@@ -225,6 +227,24 @@ export const Form = ({
 			<div css={textStyles}>
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
+			</div>
+			{/* this element is a H O N £ Y - P 0 T */}
+			<div
+				css={css`
+					position: absolute;
+					left: -62.5rem;
+				`}
+				aria-hidden="true"
+			>
+				<input
+					name="twitter-handle"
+					type="text"
+					id="twitter-handle"
+					tabIndex={-1}
+					placeholder="@mytwitterhandle"
+					value={twitterHandle}
+					onChange={(e) => setTwitterHandle(e.target.value)}
+				/>
 			</div>
 			{!!networkError && <div css={errorTextStyles}>{networkError}</div>}
 			<div css={footerPaddingStyles}>

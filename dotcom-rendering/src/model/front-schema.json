@@ -542,9 +542,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -655,7 +653,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -1212,9 +1222,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1325,7 +1333,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -1882,9 +1902,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1995,7 +2013,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtoms"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -2674,6 +2704,14 @@
             ],
             "type": "string"
         },
+        "FEMediaAtoms": {
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "number"
+                }
+            }
+        },
         "EditionId": {
             "enum": [
                 "AU",
@@ -2986,6 +3024,9 @@
                 },
                 "isLiveBlog": {
                     "type": "boolean"
+                },
+                "masterImage": {
+                    "type": "string"
                 },
                 "url": {
                     "type": "string"

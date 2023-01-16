@@ -24,7 +24,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
-import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -601,6 +600,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										keywordIds={
 											CAPIArticle.config.keywordIds
 										}
+										abTests={CAPIArticle.config.abTests}
+										tableOfContents={
+											CAPIArticle.tableOfContents
+										}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -735,58 +738,47 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
-				) : (
-					<>
-						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true}>
-								<Island deferUntil="visible">
-									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
-										onwardsSource="more-on-this-story"
-										format={format}
-									/>
-								</Island>
-							</Section>
-						)}
-
-						<Island
-							clientOnly={true}
-							deferUntil="visible"
-							placeholderHeight={600}
-						>
-							<OnwardsUpper
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasRelated={CAPIArticle.hasRelated}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
-								keywordIds={CAPIArticle.config.keywordIds}
-								contentType={CAPIArticle.contentType}
-								tags={CAPIArticle.tags}
+				{CAPIArticle.storyPackage && (
+					<Section fullWidth={true}>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								onwardsSource="more-on-this-story"
 								format={format}
-								pillar={format.theme}
-								editionId={CAPIArticle.editionId}
-								shortUrlId={CAPIArticle.config.shortUrlId}
 							/>
 						</Island>
-					</>
+					</Section>
 				)}
+
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
+					<OnwardsUpper
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						hasRelated={CAPIArticle.hasRelated}
+						hasStoryPackage={CAPIArticle.hasStoryPackage}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						pageId={CAPIArticle.pageId}
+						isPaidContent={
+							CAPIArticle.config.isPaidContent || false
+						}
+						showRelatedContent={
+							CAPIArticle.config.showRelatedContent
+						}
+						keywordIds={CAPIArticle.config.keywordIds}
+						contentType={CAPIArticle.contentType}
+						tags={CAPIArticle.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={CAPIArticle.editionId}
+						shortUrlId={CAPIArticle.config.shortUrlId}
+					/>
+				</Island>
 
 				{!isPaidContent && showComments && (
 					<Section

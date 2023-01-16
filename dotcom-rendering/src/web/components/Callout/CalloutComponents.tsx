@@ -8,7 +8,6 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgShareCallout } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { sanitiseHTML } from '../../../../src/model/sanitise';
 import { decidePalette } from '../../lib/decidePalette';
 
 const descriptionStyles = (format: ArticleFormat) =>
@@ -34,9 +33,7 @@ export const CalloutDescription = ({
 	format: ArticleFormat;
 }) => (
 	<div css={descriptionStyles(format)}>
-		<div
-			dangerouslySetInnerHTML={{ __html: sanitiseHTML(description) }}
-		></div>
+		<div dangerouslySetInnerHTML={{ __html: description }}></div>
 		<div>
 			Please share your story if you are 18 or over, anonymously if you
 			wish. For more information please see our{' '}
@@ -62,8 +59,17 @@ const expiredStyles = css`
 export const CalloutExpired = () => {
 	return (
 		<div css={expiredStyles}>
-			This form has been deactivated and is closed to any further
-			submissions.
+			<p>This callout is now closed to any further submissions.</p>
+			<p>
+				You can see{' '}
+				<a href="https://www.theguardian.com/profile/guardian-community-team">
+					other Guardian community callouts here
+				</a>{' '}
+				or{' '}
+				<a href="https://www.theguardian.com/community/2015/sep/02/guardianwitness-send-us-a-story">
+					tell us about a story here.
+				</a>
+			</p>
 		</div>
 	);
 };
@@ -71,6 +77,7 @@ export const CalloutExpired = () => {
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
+	padding-bottom: ${space[2]}px;
 `;
 
 const shareCalloutTextStyles = css`
@@ -84,6 +91,7 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 		border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
 		text-decoration: none;
 		font-weight: normal;
+		margin: 0 ${space[1]}px;
 	`;
 
 const supportingText = css`
@@ -91,21 +99,43 @@ const supportingText = css`
 	color: ${neutral[46]};
 `;
 
-interface Props {
+export const CalloutShare = ({
+	format,
+}: {
 	format: ArticleFormat;
-}
-
-export const CalloutShare = ({ format }: Props) => {
+	title: string;
+}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async () => {
 		const url = window.location.href;
+		if (
+			'share' in navigator &&
+			/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+				navigator.userAgent,
+			)
+		) {
+			const shareTitle = `
+			Share your experience: ${'PLACEHOLDER TITLE'}
+			`;
+			const shareText = `
+			I saw this callout on an article I was reading and thought you might like to share your story.
+			${url}
+			You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
+					`;
+			await navigator.share({
+				title: shareTitle,
+				text: shareText,
+			});
+		}
+
 		if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(url);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
+
 	if (typeof window === 'undefined' || typeof navigator === 'undefined')
 		return <></>;
 
@@ -120,18 +150,18 @@ export const CalloutShare = ({ format }: Props) => {
 					<SvgShareCallout />
 				</div>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{' '}
+					Know others who are affected?{'   '}
 					<Button
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
 						css={shareCalloutLinkStyles(format)}
 					>
-						{' '}
 						Please share this callout.
 					</Button>
 					{isCopied && (
 						<span css={supportingText} role="alert">
+							{' '}
 							Link copied to clipboard
 						</span>
 					)}
@@ -144,15 +174,19 @@ export const CalloutShare = ({ format }: Props) => {
 const termsAndConditionsStyles = (format: ArticleFormat) =>
 	css`
 		a {
-			color: ${decidePalette(format).text.calloutAccent};
-			border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
+			color: ${decidePalette(format).text.richLink};
+			border-bottom: 1px solid ${decidePalette(format).text.richLink};
 			text-decoration: none;
 		}
 		${textSans.small()}
-		padding: ${space[4]}px 0px;
+		padding-bottom: ${space[4]}px;
 	`;
 
-export const CalloutTermsAndConditions = ({ format }: Props) => (
+export const CalloutTermsAndConditions = ({
+	format,
+}: {
+	format: ArticleFormat;
+}) => (
 	<div css={termsAndConditionsStyles(format)}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We

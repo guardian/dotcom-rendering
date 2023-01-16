@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
+import type { TimelineEvent } from '@guardian/atoms-rendering';
 import { brandAlt, neutral } from '@guardian/source-foundations';
 import { Expandable } from '../Expandable';
 

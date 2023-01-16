@@ -1694,10 +1694,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/atoms-rendering@^23.7.2":
-  version "23.11.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.11.0.tgz#4e472c0be2b157336b8b68dcdc104b3bd7fa3f76"
-  integrity sha512-c/NUoB3Njr4PqndaDLov34GE1gBOMSVIq/h4TydYzGpa+tL+tqn88oNO3zbk+Kk3mK7R7CcBmnSOwaYSaD//UA==
+"@guardian/atoms-rendering@^25.1.0":
+  version "25.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-25.1.0.tgz#9ffb6c44cf5c90ef62fbe9fbed5a50b65834458f"
+  integrity sha512-UXMob/JBTzNI2PTVC116SGWc8Ul4tNF10hu/tfDcwMk3kcS50HEK1enZYDzPrx5HvQs35UbtFlKdnSnOxgzV8A==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -1841,10 +1841,10 @@
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/source-react-components-development-kitchen@8.2.0":
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-8.2.0.tgz#b7c9ff6b494f55d42e39acdde897193780dd1e76"
-  integrity sha512-1oDFsjgfEUStb7zTOo7NutBSt1L5OvaNPC9VUR8qvEqkQ31PfYmvBeIo5OEm9uHfvageUBcVS862jz9jn2PDvg==
+"@guardian/source-react-components-development-kitchen@8.2.1":
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-8.2.1.tgz#c55927fcb9b3d63e6ad20c7b9193c99e9ebfe4f4"
+  integrity sha512-9UOl6PZiKyZ/+H4HgHO2PYAimdqVQIfM6Au+mEzUyGL+Rne9qfz63tyPue2FdMSzexTPkcV5Mi/gZFDs3kbk/g==
 
 "@guardian/source-react-components@^9.0.0":
   version "9.1.0"

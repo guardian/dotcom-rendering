@@ -1,5 +1,5 @@
 import { KnowledgeQuizAtom } from '@guardian/atoms-rendering';
-import type { SharingUrlsType } from '@guardian/atoms-rendering/dist/types/types';
+import type { SharingUrlsType } from '@guardian/atoms-rendering';
 
 // These types are duplicates of those defined in the atom file.
 type AnswerType = {

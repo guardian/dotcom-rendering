@@ -17,6 +17,9 @@ import {
 	calloutTitle,
 } from './styles';
 
+export const getCalloutId = (str: string): string =>
+	`${str.replace(/[\s_]+/g, '-').toLowerCase()}-callout`;
+
 export interface CalloutBlockProps {
 	formId: number;
 	heading: string;
@@ -32,26 +35,25 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 }): ReactElement => {
+	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
 		{
 			id: 'form',
 			text: 'Tell us here',
-			content: (
-				<CalloutForm id={formId} fields={formFields} format={format} />
-			),
+			content: <CalloutForm id={formId} fields={formFields} />,
 		},
 		{
 			id: 'contact',
 			text: 'Message us',
-			content: <CalloutContact format={format} />,
+			content: <CalloutContact />,
 		},
 	];
 
 	return (
-		<div css={calloutContainer}>
-			<div css={[calloutInfo, calloutLinkContainer(format)]}>
-				<div css={calloutTitle(format)}>Tell Us</div>
+		<div css={calloutContainer} id={id}>
+			<div css={[calloutInfo, calloutLinkContainer]}>
+				<div css={calloutTitle}>Tell Us</div>
 				<h4 css={calloutHeadingText}>{heading}</h4>
 				{description && (
 					<div css={calloutDescription}>
@@ -59,7 +61,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 					</div>
 				)}
 				<TermsAndConditions />
-				<ShareLink format={format} title={heading} />
+				<ShareLink title={heading} urlAnchor={id} />
 			</div>
 			<Tabs
 				tabsLabel="Tell us/Message us tabs"

@@ -1,5 +1,6 @@
 import '../webpackPublicPath';
 import { doHydration } from '../islands/doHydration';
+import { getEmotionCache } from '../islands/emotion';
 import { getProps } from '../islands/getProps';
 import { startup } from '../startup';
 
@@ -20,7 +21,7 @@ function forceHydration() {
 		props.expanded = true;
 
 		// Force hydration
-		void doHydration(name, props, guElement);
+		void doHydration(name, props, guElement, getEmotionCache());
 	} catch (err) {
 		// Do nothing
 	}
