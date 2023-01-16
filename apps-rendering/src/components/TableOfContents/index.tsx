@@ -28,6 +28,8 @@ interface TextElementProps {
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
+	display: block;
+	padding: ${remSpace[1]} 0 ${remSpace[4]} 0;
 `;
 
 const listStyles: SerializedStyles = css`
@@ -40,24 +42,15 @@ const listStyles: SerializedStyles = css`
 
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
-	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
-	&:last-child {
-		border-bottom: 1px solid ${border.tableOfContents(format)};
-	}
+	padding-bottom: 0;
 	&:hover {
 		border-top: 1px solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
 	}
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
-		&:last-child {
-			border-bottom-color: ${border.tableOfContentsDark(format)};
-		}
 		&:hover {
 			border-color: ${border.tableOfContentsHoverDark(format)};
-			&:last-child {
-				border-bottom-color: ${border.tableOfContentsDark(format)};
-			}
 		}
 	`}
 `;
@@ -98,7 +91,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
+	padding: ${remSpace[1]} 0 ${remSpace[1]} 0;
 	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {

@@ -22,14 +22,12 @@ interface Props {
 const anchorStyles = css`
 	color: ${neutral[7]};
 	text-decoration: none;
+	display: block;
+	padding: 4px 0 16px 0;
 `;
 
 const defaultListItemStyles = css`
 	border-top: 1px solid ${line.primary};
-	padding: 4px 0 8px 0;
-	&:last-child {
-		border-bottom: 1px solid ${line.primary};
-	}
 	&:hover {
 		border-top: 1px solid ${neutral[7]};
 		cursor: pointer;
@@ -67,7 +65,7 @@ const summaryStyles = css`
 	position: relative;
 	list-style: none;
 	align-items: center;
-	padding: 4px 0 8px 0;
+	padding: 4px 0 4px 0;
 	border-top: 1px solid ${line.primary};
 
 	&:hover {
