@@ -69,7 +69,7 @@ const AnalysisLayout: FC<Props> = ({ item }) => (
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
-					{item.outline.length > 0 && (
+					{item.outline.length >= 3 && (
 						<section css={[articleWidthStyles]}>
 							<TableOfContents
 								format={getFormat(item)}
