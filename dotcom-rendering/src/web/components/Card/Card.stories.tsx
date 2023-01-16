@@ -880,3 +880,25 @@ export const WithLetterDesign = () => {
 WithLetterDesign.story = {
 	name: 'WithLetterDesign',
 };
+
+export const WithLetterDesignAndShowQuotedHeadline = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				showQuotedHeadline={true}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesignAndShowQuotedHeadline.story = {
+	name: 'WithLetterDesignAndShowQuotedHeadline',
+};
