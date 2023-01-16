@@ -32,8 +32,7 @@ Cypress.Commands.add('hydrate', () => {
 		.each((el) => {
 			const deferuntil = el.attr('deferuntil');
 			const name = el.attr('name');
-			const defer = el.attr('deferuntil');
-			const islandMeta = `island: ${name} defer: ${defer}`;
+			const islandMeta = `island: ${name} defer: ${deferuntil}`;
 			if (['idle', 'visible', undefined].includes(deferuntil)) {
 				cy.log(`Scrolling to ${islandMeta}`);
 				cy.wrap(el)
