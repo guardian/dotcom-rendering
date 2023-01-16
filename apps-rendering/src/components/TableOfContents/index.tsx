@@ -45,13 +45,13 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-bottom: 0;
 
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsDark(format)};
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
 	}
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
-			border-color: ${border.tableOfContents(format)};
+			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
 	`}
 `;
@@ -105,7 +105,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsDark(format)};
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
 	}
 
@@ -118,7 +118,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
-			border-color: ${border.tableOfContents(format)};
+			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
 
 		path {
