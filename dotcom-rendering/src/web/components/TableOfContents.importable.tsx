@@ -1,50 +1,46 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import {
-	headline,
-	line,
-	neutral,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, line, space, textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { TableOfContentsItem } from '../../types/frontend';
+import type { Palette } from '../../types/palette';
+import { decidePalette } from '../lib/decidePalette';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
 	format: ArticleFormat;
 }
 
-const anchorStyles = css`
-	color: ${neutral[7]};
+const anchorStyles = (palette: Palette) => css`
+	color: ${palette.text.tableOfContents};
 	text-decoration: none;
 	display: block;
 	padding: ${space[1]}px 0 ${space[4]}px 0;
 `;
 
-const defaultListItemStyles = css`
+const defaultListItemStyles = (palette: Palette) => css`
 	border-top: 1px solid ${line.primary};
 	&:hover {
-		border-top: 1px solid ${neutral[7]};
+		border-top: 1px solid ${palette.text.tableOfContents};
 		cursor: pointer;
 	}
 `;
 
-const listItemStyles = (format: ArticleFormat) => {
+const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return css`
 			${headline.xxxsmall({ fontWeight: 'light' })}
-			${defaultListItemStyles}
+			${defaultListItemStyles(palette)}
 		`;
 	}
 
 	return css`
 		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${defaultListItemStyles}
+		${defaultListItemStyles(palette)}
 	`;
 };
 
@@ -63,7 +59,7 @@ const detailsStyles = css`
 	}
 `;
 
-const summaryStyles = css`
+const summaryStyles = (palette: Palette) => css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
@@ -72,21 +68,21 @@ const summaryStyles = css`
 	border-top: 1px solid ${line.primary};
 
 	&:hover {
-		border-top: 1px solid ${neutral[7]};
+		border-top: 1px solid ${palette.text.tableOfContents};
 		cursor: pointer;
 	}
 
 	path {
-		fill: ${neutral[7]};
+		fill: ${palette.text.tableOfContents};
 	}
 	svg {
 		height: 32px;
 	}
 `;
 
-const titleStyle = css`
+const titleStyle = (palette: Palette) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	color: ${neutral[7]};
+	color: ${palette.text.tableOfContents};
 `;
 
 const chevronPosition = css`
@@ -96,6 +92,7 @@ const chevronPosition = css`
 `;
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
+	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	// The value for data-link-name is evaluated at the time when the component renders,
@@ -117,9 +114,9 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						? 'table-of-contents-close'
 						: 'table-of-contents-expand'
 				}
-				css={summaryStyles}
+				css={summaryStyles(palette)}
 			>
-				<h2 css={titleStyle}>Jump to...</h2>
+				<h2 css={titleStyle(palette)}>Jump to...</h2>
 				<span className="is-closed" css={chevronPosition}>
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
@@ -132,10 +129,10 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 				{tableOfContents.map((item, index) => (
 					<li
 						key={item.id}
-						css={listItemStyles(format)}
+						css={listItemStyles(format, palette)}
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
-						<a href={`#${item.id}`} css={anchorStyles}>
+						<a href={`#${item.id}`} css={anchorStyles(palette)}>
 							{item.title}
 						</a>
 					</li>
