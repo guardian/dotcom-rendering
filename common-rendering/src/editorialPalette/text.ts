@@ -1129,7 +1129,7 @@ const galleryDark = (_format: ArticleFormat): string => {
 };
 
 const tableOfContentsTitle = (_format: ArticleFormat): string => {
-	return neutral[46];
+	return neutral[7];
 };
 
 const tableOfContentsTitleDark = (_format: ArticleFormat): string => {

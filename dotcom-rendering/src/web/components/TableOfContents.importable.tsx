@@ -1,36 +1,57 @@
 import { css } from '@emotion/react';
-import { line, neutral, space, textSans } from '@guardian/source-foundations';
+import { ArticleDisplay } from '@guardian/libs';
+import { headline, line, space, textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { TableOfContentsItem } from '../../types/frontend';
+import type { Palette } from '../../types/palette';
+import { decidePalette } from '../lib/decidePalette';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];
+	format: ArticleFormat;
 }
 
-const anchorStyles = css`
-	color: black;
+const anchorStyles = (palette: Palette) => css`
+	color: ${palette.text.tableOfContents};
 	text-decoration: none;
+	display: block;
+	padding: ${space[1]}px 0 ${space[4]}px 0;
 `;
 
-const listItemStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	border-bottom: 1px solid ${line.primary};
-	padding: 6px 0;
-
-	&:last-child {
-		border-bottom: none;
+const defaultListItemStyles = (palette: Palette) => css`
+	border-top: 1px solid ${line.primary};
+	&:hover {
+		border-top: 1px solid ${palette.text.tableOfContents};
+		cursor: pointer;
 	}
 `;
 
+const listItemStyles = (format: ArticleFormat, palette: Palette) => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xxxsmall({ fontWeight: 'light' })}
+			${defaultListItemStyles(palette)}
+		`;
+	}
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${defaultListItemStyles(palette)}
+	`;
+};
+
 const detailsStyles = css`
-	padding: ${space[4]}px 0 ${space[6]}px 0;
+	margin: ${space[4]}px 0 ${space[6]}px 0;
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;
+	}
+	&:not([open]) {
+		border-bottom: 1px solid ${line.primary};
 	}
 	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
@@ -38,35 +59,40 @@ const detailsStyles = css`
 	}
 `;
 
-const summaryStyles = css`
+const summaryStyles = (palette: Palette) => css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
 	align-items: center;
-	padding: 6px 0;
-	border-bottom: 1px solid ${line.primary};
+	padding: ${space[1]}px 0 ${space[1]}px 0;
 	border-top: 1px solid ${line.primary};
 
+	&:hover {
+		border-top: 1px solid ${palette.text.tableOfContents};
+		cursor: pointer;
+	}
+
 	path {
-		fill: ${neutral[46]};
+		fill: ${palette.text.tableOfContents};
 	}
 	svg {
 		height: 32px;
 	}
 `;
 
-const titleStyle = css`
+const titleStyle = (palette: Palette) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	color: ${neutral[46]};
+	color: ${palette.text.tableOfContents};
 `;
 
 const chevronPosition = css`
 	position: absolute;
 	right: ${space[1]}px;
-	top: 0;
+	top: -2px;
 `;
 
-export const TableOfContents = ({ tableOfContents }: Props) => {
+export const TableOfContents = ({ tableOfContents, format }: Props) => {
+	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	// The value for data-link-name is evaluated at the time when the component renders,
@@ -88,9 +114,9 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 						? 'table-of-contents-close'
 						: 'table-of-contents-expand'
 				}
-				css={summaryStyles}
+				css={summaryStyles(palette)}
 			>
-				<h2 css={titleStyle}>Jump to...</h2>
+				<h2 css={titleStyle(palette)}>Jump to...</h2>
 				<span className="is-closed" css={chevronPosition}>
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
@@ -103,10 +129,10 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 				{tableOfContents.map((item, index) => (
 					<li
 						key={item.id}
-						css={listItemStyles}
+						css={listItemStyles(format, palette)}
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
-						<a href={`#${item.id}`} css={anchorStyles}>
+						<a href={`#${item.id}`} css={anchorStyles(palette)}>
 							{item.title}
 						</a>
 					</li>

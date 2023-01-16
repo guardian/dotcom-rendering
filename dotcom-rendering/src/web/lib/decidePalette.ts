@@ -1795,6 +1795,10 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
+const textTableOfContents = (): string => {
+	return palette.neutral[7];
+};
+
 const textBlockquote = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
 
@@ -2108,6 +2112,7 @@ export const decidePalette = (
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
+			tableOfContents: textTableOfContents(),
 		},
 		background: {
 			article: backgroundArticle(format),

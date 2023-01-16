@@ -1,13 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette/text';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	line,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { headline, remSpace, textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -32,9 +28,8 @@ interface TextElementProps {
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
-	:hover {
-		border-bottom: 0.0625rem solid ${neutral[86]};
-	}
+	display: block;
+	padding: ${remSpace[1]} 0 ${remSpace[4]} 0;
 `;
 
 const listStyles: SerializedStyles = css`
@@ -45,38 +40,91 @@ const listStyles: SerializedStyles = css`
 	margin: 0;
 `;
 
-const listItemStyles: SerializedStyles = css`
-	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	border-bottom: 1px solid ${line.primary};
-	padding-top: ${remSpace[2]};
+const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	border-top: 1px solid ${border.tableOfContents(format)};
+	padding-bottom: 0;
+
+	&:hover {
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
+		cursor: pointer;
+	}
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+		&:hover {
+			border-color: ${border.tableOfContentsHoverDark(format)};
+		}
+	`}
 `;
 
-const detailsStyles: SerializedStyles = css`
+const listItemStyles = (format: ArticleFormat): SerializedStyles => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xxxsmall({ fontWeight: 'light' })}
+			${defaultListItemStyles(format)}
+		`;
+	}
+
+	if (format.theme === ArticleSpecial.Labs) {
+		return css`
+			${textSans.medium({ fontWeight: 'bold' })}
+			${defaultListItemStyles(format)}
+		`;
+	}
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })}
+		${defaultListItemStyles(format)}
+	`;
+};
+
+const detailsStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[6]};
 	&:not([open]) .is-on,
 	&[open] .is-off {
 		display: none;
 	}
+	&:not([open]) {
+		border-bottom: 1px solid ${border.tableOfContents(format)};
+	}
 	summary::-webkit-details-marker {
 		display: none;
 	}
+
+	${darkModeCss`
+		&:not([open]) {
+			border-bottom: 1px solid ${border.tableOfContentsDark(format)};
+		}
+	`}
 `;
 
-const summaryStyles: SerializedStyles = css`
+const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	padding-top: 0.44rem;
-	padding-bottom: 0.375rem;
-	border-bottom: 1px solid ${line.primary};
-	border-top: 1px solid ${line.primary};
+	padding: ${remSpace[1]} 0 ${remSpace[1]} 0;
+	border-top: 1px solid ${border.tableOfContents(format)};
+
+	&:hover {
+		border-top: 1px solid ${border.tableOfContentsHover(format)};
+		cursor: pointer;
+	}
 
 	path {
-		fill: ${neutral[46]};
+		fill: ${text.tableOfContentsTitle(format)};
 	}
 	svg {
 		height: 2rem;
 	}
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+		&:hover {
+			border-color: ${border.tableOfContentsHoverDark(format)};
+		}
+
+		path {
+			fill: ${text.tableOfContentsTitleDark(format)};
+		}
+	`}
 `;
 
 const titleStyle = (format: ArticleFormat): SerializedStyles => css`
@@ -90,7 +138,7 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 const arrowPosition: SerializedStyles = css`
 	position: absolute;
 	right: ${remSpace[1]};
-	top: 0;
+	top: -0.125rem;
 `;
 
 const TocTextElement: React.FC<TextElementProps> = ({
@@ -152,8 +200,8 @@ const TocTextElement: React.FC<TextElementProps> = ({
 
 const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
-		<details open={outline.length < 5} css={detailsStyles}>
-			<summary css={summaryStyles}>
+		<details open={outline.length < 5} css={detailsStyles(format)}>
+			<summary css={summaryStyles(format)}>
 				<h2 css={titleStyle(format)}>Jump to...</h2>
 				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle size="xsmall" />
@@ -164,7 +212,10 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 			</summary>
 			<OrderedList className={listStyles}>
 				{outline.map((outlineItem) => (
-					<ListItem className={listItemStyles} key={outlineItem.id}>
+					<ListItem
+						className={listItemStyles(format)}
+						key={outlineItem.id}
+					>
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}
