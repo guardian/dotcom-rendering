@@ -250,9 +250,7 @@
 		"webpack-sources": "^3.2.3"
 	},
 	"resolutions": {
-		"@types/serve-static": "^1.13.9",
-		"@types/react": "^17.0.52",
-		"@types/react-dom": "^17.0.18"
+		"@types/serve-static": "^1.13.9"
 	},
 	"jest": {
 		"preset": "ts-jest/presets/js-with-ts",
