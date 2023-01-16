@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { KeyEvent } from "./keyEvents";
-import KeyEvents from "./keyEvents";
+import { KeyEvent } from ".";
+import KeyEvents from ".";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial, ArticleTheme } from "@guardian/libs";
 import { css } from "@emotion/react";
 
@@ -96,7 +96,7 @@ const Dark = keyEventWithTheme(true);
 
 export default {
 	component: KeyEvents,
-	title: "Common/Components/KeyEvents",
+	title: "AR/KeyEvents",
 };
 
 export { Default, Dark };

@@ -20,9 +20,9 @@ import {
 	ArticleTheme,
 	timeAgo,
 } from '@guardian/libs';
-import { darkModeCss } from '../lib';
-import Accordion from './accordion';
-import { background, text } from '../editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+import { background, text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
