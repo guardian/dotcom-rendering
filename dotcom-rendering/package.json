@@ -79,7 +79,7 @@
 		"@guardian/eslint-config": "^2.0.3",
 		"@guardian/eslint-config-typescript": "^2.0.0",
 		"@guardian/eslint-plugin-source-react-components": "^10.0.0",
-		"@guardian/libs": "^10.1.0",
+		"@guardian/libs": "11.1.2",
 		"@guardian/prettier": "^2.1.5",
 		"@guardian/shimport": "^1.0.2",
 		"@guardian/source-foundations": "^7.0.1",
@@ -250,7 +250,9 @@
 		"webpack-sources": "^3.2.3"
 	},
 	"resolutions": {
-		"@types/serve-static": "^1.13.9"
+		"@types/serve-static": "^1.13.9",
+		"@types/react": "^17.0.52",
+		"@types/react-dom": "^17.0.18"
 	},
 	"jest": {
 		"preset": "ts-jest/presets/js-with-ts",
