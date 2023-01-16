@@ -102,8 +102,6 @@ export const ImageWrapper = ({
 						}
 					`,
 				css`
-					/* fit-content here prevents the overlay from stretching when the cards height is increased */
-					height: fit-content;
 					/* position relative is required here to bound the image overlay */
 					position: relative;
 					img {
