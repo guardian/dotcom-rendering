@@ -95,10 +95,10 @@ const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
 	padding-bottom: ${space[2]}px;
+	position: relative;
 `;
 
 const shareCalloutTextStyles = css`
-	display: inline-block;
 	${textSans.xsmall()}
 `;
 
@@ -112,13 +112,11 @@ const shareCalloutLinkStyles = css`
 
 const tooltipStyles = css`
 	${textSans.xsmall()};
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-top: -50px;
-	margin-left: -100px;
+	position: absolute;
 	display: flex;
 	align-items: center;
+	min-width: 180px;
+	bottom: -20px;
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};
 	font-weight: normal;
@@ -194,7 +192,7 @@ export const CalloutShare = ({
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<div css={tooltipStyles}>
+						<div css={tooltipStyles} role="alert">
 							<SvgTickRound size="medium" />
 							Link copied to clipboard
 						</div>
