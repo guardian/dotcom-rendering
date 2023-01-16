@@ -262,16 +262,8 @@ const tableOfContents = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
-const tableOfContentsHover = (_format: ArticleFormat): string => {
-	return neutral[20];
-};
-
 const tableOfContentsDark = (_format: ArticleFormat): string => {
 	return neutral[20];
-};
-
-const tableOfContentsHoverDark = (_format: ArticleFormat): string => {
-	return neutral[86];
 };
 
 // ----- API ----- //
@@ -306,9 +298,7 @@ const border = {
 	newsletterSignUpForm,
 	newsletterSignUpFormDark,
 	tableOfContents,
-	tableOfContentsHover,
 	tableOfContentsDark,
-	tableOfContentsHoverDark,
 };
 
 // ----- Exports ----- //

@@ -43,14 +43,15 @@ const listStyles: SerializedStyles = css`
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: 0;
+
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsHover(format)};
+		border-top: 1px solid ${border.tableOfContentsDark(format)};
 		cursor: pointer;
 	}
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
-			border-color: ${border.tableOfContentsHoverDark(format)};
+			border-color: ${border.tableOfContents(format)};
 		}
 	`}
 `;
@@ -76,15 +77,24 @@ const listItemStyles = (format: ArticleFormat): SerializedStyles => {
 	`;
 };
 
-const detailsStyles: SerializedStyles = css`
+const detailsStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[6]};
 	&:not([open]) .is-on,
 	&[open] .is-off {
 		display: none;
 	}
+	&:not([open]) {
+		border-bottom: 1px solid ${border.tableOfContents(format)};
+	}
 	summary::-webkit-details-marker {
 		display: none;
 	}
+
+	${darkModeCss`
+		&:not([open]) {
+			border-bottom: 1px solid ${border.tableOfContentsDark(format)};
+		}
+	`}
 `;
 
 const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -95,7 +105,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsHover(format)};
+		border-top: 1px solid ${border.tableOfContentsDark(format)};
 		cursor: pointer;
 	}
 
@@ -108,7 +118,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
-			border-color: ${border.tableOfContentsHoverDark(format)};
+			border-color: ${border.tableOfContents(format)};
 		}
 
 		path {
@@ -190,7 +200,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 
 const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
-		<details open={outline.length < 5} css={detailsStyles}>
+		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>
 				<h2 css={titleStyle(format)}>Jump to...</h2>
 				<span className="is-off" css={arrowPosition}>

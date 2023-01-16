@@ -23,7 +23,7 @@ const anchorStyles = css`
 	color: ${neutral[7]};
 	text-decoration: none;
 	display: block;
-	padding: 4px 0 16px 0;
+	padding: ${space[1]}px 0 ${space[4]}px 0;
 `;
 
 const defaultListItemStyles = css`
@@ -49,10 +49,13 @@ const listItemStyles = (format: ArticleFormat) => {
 };
 
 const detailsStyles = css`
-	padding: ${space[4]}px 0 ${space[6]}px 0;
+	margin: ${space[4]}px 0 ${space[6]}px 0;
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;
+	}
+	&:not([open]) {
+		border-bottom: 1px solid ${line.primary};
 	}
 	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
@@ -65,7 +68,7 @@ const summaryStyles = css`
 	position: relative;
 	list-style: none;
 	align-items: center;
-	padding: 4px 0 4px 0;
+	padding: ${space[1]}px 0 ${space[1]}px 0;
 	border-top: 1px solid ${line.primary};
 
 	&:hover {
