@@ -88,7 +88,7 @@ const titleStyle = (palette: Palette) => css`
 const chevronPosition = css`
 	position: absolute;
 	right: ${space[1]}px;
-	top: 0;
+	top: -2px;
 `;
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {

@@ -138,7 +138,7 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 const arrowPosition: SerializedStyles = css`
 	position: absolute;
 	right: ${remSpace[1]};
-	top: 0;
+	top: -0.125rem;
 `;
 
 const TocTextElement: React.FC<TextElementProps> = ({
