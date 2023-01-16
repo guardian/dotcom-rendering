@@ -9,6 +9,7 @@ import {
 import {
 	fileInputDarkTheme,
 	tabsDarkTheme,
+	expandingWrapperDarkTheme,
 } from '@guardian/source-react-components-development-kitchen';
 
 const labelDarkTheme = {
@@ -67,17 +68,6 @@ const radioDarkTheme = {
 	borderError: error[500],
 };
 
-const expandingWrapperDarkTheme = {
-	horizontalRules: neutral[60],
-	border: neutral[60],
-	expandBackground: neutral[86],
-	expandBackgroundHover: neutral[100],
-	expandText: neutral[7],
-	collapseBackground: neutral[10],
-	collapseText: neutral[86],
-	collapseBackgroundHover: neutral[86],
-	collapseTextHover: neutral[7],
-};
 const userFeedbackDarkTheme = {
 	textError: error[500],
 };
@@ -88,24 +78,10 @@ export const darkTheme = {
 	textInput: textInputDarkTheme,
 	select: selectDarkTheme,
 	radio: radioDarkTheme,
-	expander: expandingWrapperDarkTheme,
 	userFeedback: userFeedbackDarkTheme,
+	...expandingWrapperDarkTheme,
 	...fileInputDarkTheme,
 	...tabsDarkTheme,
-};
-
-export const lightThemeOverrides = {
-	expander: {
-		horizontalRules: neutral[86],
-		border: neutral[7],
-		expandBackground: neutral[7],
-		expandBackgroundHover: '#454545', // One-off colour  to match the primary button hover
-		expandText: neutral[100],
-		collapseBackground: neutral[100],
-		collapseBackgroundHover: '#E5E5E5', // One-off colour variant to match tertiary button hover
-		collapseText: neutral[7],
-		collapseTextHover: neutral[7],
-	}
 };
 
 const getPrefersDark = (): boolean => {
@@ -113,4 +89,4 @@ const getPrefersDark = (): boolean => {
 	return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
-export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : lightThemeOverrides);
+export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : {});
