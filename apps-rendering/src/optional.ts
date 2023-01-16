@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
 import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
+import type { ReactElement } from 'react';
 import { Result } from 'result';
 
 // ----- Classes ----- //
@@ -93,6 +94,25 @@ abstract class Optional<A> {
 	 */
 	abstract isNone(): this is None<A>;
 
+	/**
+	 * A way to optionally render some React code, depending on the value of the
+	 * {@linkcode Optional}. It takes a "rendering" function, i.e. a function
+	 * that returns a ReactElement, to apply if this is a `Some`. If this is
+	 * a `None`, it will instead return `null`, the way to render nothing in
+	 * React.
+	 *
+	 * @param f The function to apply
+	 * @returns {ReactElement | null} A rendered `ReactElement` if this is a
+	 * `Some`, or `null` if this is a `None`
+	 * @example
+	 * const name: Optional<string> = Optional.some('CP Scott');
+	 * name.maybeRender(n => <p>{n}</p>); // <p>CP Scott</p>
+	 *
+	 * const name: Optional<string> = Optional.none();
+	 * name.maybeRender(n => <p>{n}</p>); // null
+	 */
+	abstract maybeRender(f: (a: A) => ReactElement | null): ReactElement | null;
+
 	// ----- Static Methods
 
 	/**
@@ -105,6 +125,15 @@ abstract class Optional<A> {
 	 */
 	static fromNullable<A>(a: A | null | undefined): Optional<A> {
 		return a === null || a === undefined ? new None() : new Some(a);
+	}
+
+	/**
+	 * Temporary method to convert from the old `Option` type.
+	 */
+	static fromOption<A>(o: Option<A>): Optional<A> {
+		return o.kind === OptionKind.Some
+			? Optional.some(o.value)
+			: Optional.none();
 	}
 
 	/**
@@ -204,6 +233,10 @@ class Some<A> extends Optional<A> {
 		return false;
 	}
 
+	maybeRender(f: (a: A) => ReactElement | null): ReactElement | null {
+		return f(this.value);
+	}
+
 	constructor(a: A) {
 		super();
 		this.value = a;
@@ -233,6 +266,10 @@ class None<A> extends Optional<A> {
 
 	isNone(): this is None<A> {
 		return true;
+	}
+
+	maybeRender(_f: (a: A) => ReactElement | null): ReactElement | null {
+		return null;
 	}
 }
 
