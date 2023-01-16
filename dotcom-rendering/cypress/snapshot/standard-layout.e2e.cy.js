@@ -12,7 +12,6 @@ describe('Visual regression', function () {
 	it('Snapshot all breakpoints', function () {
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-			{ timeout: 30000 },
 		);
 
 		cy.hydrate();
