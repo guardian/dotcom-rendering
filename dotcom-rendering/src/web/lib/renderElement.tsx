@@ -183,16 +183,16 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			if (
-				switches.callouts &&
-				abTests?.calloutElementsVariant === 'variant'
-			) {
-				return (
-					<Island deferUntil="visible">
-						<CalloutBlockComponent callout={element} />
-					</Island>
-				);
-			}
+			// if (
+			// 	switches.callouts &&
+			// 	abTests?.calloutElementsVariant === 'variant'
+			// ) {
+			return (
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} />
+				</Island>
+			);
+			// }
 			return null;
 
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
