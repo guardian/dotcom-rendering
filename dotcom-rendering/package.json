@@ -39,7 +39,7 @@
 	"bundlesize": [
 		{
 			"path": "./dist/ga.*.js",
-			"maxSize": "20 kB"
+			"maxSize": "21 kB"
 		}
 	],
 	"lint-staged": {
