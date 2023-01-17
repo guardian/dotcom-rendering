@@ -76,9 +76,7 @@ export const warningStyles = (
 ): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return css`
-				${galleryStyle(isSeries)}
-			`;
+			return galleryStyle(isSeries);
 
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
