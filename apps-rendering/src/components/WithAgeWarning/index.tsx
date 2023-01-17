@@ -112,9 +112,7 @@ export const warningStyles = (
 			`;
 		default:
 			if (format.display === ArticleDisplay.Immersive) {
-				return css`
-					${immersiveStyle(isSeries)}
-				`;
+				return immersiveStyle(isSeries);
 			}
 			return css`
 				${articleWidthStyles}
