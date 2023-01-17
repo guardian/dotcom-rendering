@@ -84,17 +84,17 @@ const chevronPosition = css`
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);
-	const hasMoreThan5Items = tableOfContents.length < 5;
-	const [open, setOpen] = useState(hasMoreThan5Items);
+	const [open, setOpen] = useState(tableOfContents.length < 5);
 
 	return (
 		<details
-			open={hasMoreThan5Items}
+			open={open}
 			css={detailsStyles}
 			data-component="table-of-contents"
 		>
 			<summary
-				onClick={() => {
+				onClick={(e): void => {
+					e.preventDefault();
 					setOpen(!open);
 				}}
 				data-link-name={
