@@ -290,8 +290,9 @@ export const Card25Media25Tall = ({
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			trailText={
-				trail.supportingContent === undefined ||
-				trail.supportingContent.length === 0
+				trail.avatarUrl === undefined &&
+				(trail.supportingContent === undefined ||
+					trail.supportingContent.length === 0)
 					? trail.trailText
 					: undefined
 			}
