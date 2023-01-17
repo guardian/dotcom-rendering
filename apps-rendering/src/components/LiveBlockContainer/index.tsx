@@ -10,26 +10,24 @@ import { FirstPublished } from '@guardian/common-rendering/src/components/FirstP
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { background, border } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
-
-type BlockContributor = {
-	name: string;
-	imageUrl?: string;
-	largeImageUrl?: string;
-};
+import type { FC, ReactNode } from 'react';
+import type { Contributor } from 'contributor';
+import { Optional } from 'optional';
+import type { Image } from 'image';
 
 type Props = {
 	id: string;
-	children: React.ReactNode;
+	children: ReactNode;
 	format: ArticleFormat;
-	blockTitle?: string;
-	blockFirstPublished?: number;
-	blockFirstPublishedDisplay?: string;
+	blockTitle: Optional<string>;
+	blockFirstPublished: number;
+	blockFirstPublishedDisplay: string;
 	blockId: string;
-	isLiveUpdate?: boolean;
-	contributors?: BlockContributor[];
+	isLiveUpdate: boolean;
+	contributors: Contributor[];
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
-	isOriginalPinnedPost?: boolean;
+	isOriginalPinnedPost: boolean;
 	host?: string;
 	pageId?: string;
 };
@@ -38,7 +36,7 @@ const LEFT_MARGIN_DESKTOP = 60;
 const SIDE_MARGIN = space[5];
 const SIDE_MARGIN_MOBILE = 10;
 
-const Header = ({ children }: { children: React.ReactNode }) => {
+const Header: FC<{ children: ReactNode }> = ({ children }) => {
 	return (
 		<header
 			css={css`
@@ -52,8 +50,8 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-const BlockTitle = ({ title }: { title: string }) => {
-	return (
+const BlockTitle: FC<{ blockTitle: Optional<string> }> = ({ blockTitle }) =>
+	blockTitle.maybeRender((title) => (
 		<h2
 			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
@@ -62,17 +60,16 @@ const BlockTitle = ({ title }: { title: string }) => {
 		>
 			{title}
 		</h2>
-	);
-};
+	));
 
-const BlockByline = ({
-	name,
-	imageUrl,
-	format,
-}: {
+const BlockByline: FC<{
 	name: string;
 	format: ArticleFormat;
-	imageUrl?: string;
+	image: Optional<Image>;
+}> = ({
+	name,
+	image,
+	format,
 }) => {
 	return (
 		<div
@@ -82,10 +79,10 @@ const BlockByline = ({
 				padding-bottom: ${space[1]}px;
 			`}
 		>
-			{imageUrl && (
+			{image.maybeRender(img => (
 				<div style={{ width: '2.25rem', height: '2.25rem' }}>
 					<img
-						src={imageUrl}
+						src={img.src}
 						alt={name}
 						css={css`
 							border-radius: 100%;
@@ -96,13 +93,13 @@ const BlockByline = ({
 						`}
 					/>
 				</div>
-			)}
+			))}
 			<span
 				css={css`
 					${body.medium()}
 					display: flex;
 					align-items: center;
-					padding-left: ${imageUrl ? space[1] : 0}px;
+					padding-left: ${image.isSome() ? space[1] : 0}px;
 				`}
 			>
 				{name}
@@ -111,7 +108,7 @@ const BlockByline = ({
 	);
 };
 
-const LiveBlockContainer = ({
+const LiveBlockContainer: FC<Props> = ({
 	id,
 	children,
 	format,
@@ -126,7 +123,7 @@ const LiveBlockContainer = ({
 	isOriginalPinnedPost = false,
 	host,
 	pageId,
-}: Props) => {
+}) => {
 	return (
 		<article
 			/**
@@ -165,32 +162,25 @@ const LiveBlockContainer = ({
 			`}
 		>
 			<Header>
-				{blockFirstPublished && (
-					<FirstPublished
-						firstPublished={blockFirstPublished}
-						firstPublishedDisplay={blockFirstPublishedDisplay}
-						blockId={blockId}
-						isPinnedPost={isPinnedPost}
-						supportsDarkMode={supportsDarkMode}
-						isOriginalPinnedPost={isOriginalPinnedPost}
+				<FirstPublished
+					firstPublished={blockFirstPublished}
+					firstPublishedDisplay={blockFirstPublishedDisplay}
+					blockId={blockId}
+					isPinnedPost={isPinnedPost}
+					supportsDarkMode={supportsDarkMode}
+					isOriginalPinnedPost={isOriginalPinnedPost}
+					format={format}
+					host={host}
+					pageId={pageId}
+				/>
+				<BlockTitle blockTitle={blockTitle} />
+				{contributors.map((contributor) => (
+					<BlockByline
+						name={contributor.name}
+						image={Optional.fromOption(contributor.image)}
 						format={format}
-						host={host}
-						pageId={pageId}
 					/>
-				)}
-				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
-				{contributors &&
-					contributors.map((contributor) => (
-						<BlockByline
-							name={contributor.name}
-							imageUrl={
-								contributor.largeImageUrl
-									? contributor.largeImageUrl
-									: contributor.imageUrl
-							}
-							format={format}
-						/>
-					))}
+				))}
 			</Header>
 			{children}
 		</article>
@@ -198,4 +188,3 @@ const LiveBlockContainer = ({
 };
 
 export default LiveBlockContainer;
-export type { BlockContributor };
