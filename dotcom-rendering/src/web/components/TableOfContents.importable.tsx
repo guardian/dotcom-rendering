@@ -31,6 +31,7 @@ const defaultListItemStyles = (palette: Palette) => css`
 	border-top: 1px solid ${neutral[86]};
 	padding-bottom: ${space[4]}px;
 	padding-top: ${space[1]}px;
+	transition: 0.3s all ease;
 
 	&:hover {
 		padding-top: 1px;
@@ -79,9 +80,7 @@ const summaryStyles = (palette: Palette) => css`
 	border-top: 1px solid ${neutral[86]};
 
 	&:hover {
-		border-top: ${space[1]}px solid ${palette.text.tableOfContents};
-		padding-top: 1px;
-		cursor: pointer;
+		text-decoration: underline;
 	}
 
 	path {
@@ -119,7 +118,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 				}
 				css={summaryStyles(palette)}
 			>
-				<h2 css={titleStyle(palette)}>Jump to...</h2>
+				<h2 css={titleStyle(palette)}>Jump to</h2>
 				<span className="is-closed">
 					<SvgChevronDownSingle size="xsmall" />
 				</span>

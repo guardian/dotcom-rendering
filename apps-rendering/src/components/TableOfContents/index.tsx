@@ -44,6 +44,7 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: ${remSpace[4]};
 	padding-top: ${remSpace[1]};
+	transition: 0.3s all ease;
 
 	&:hover {
 		padding-top: 1px;
@@ -110,9 +111,7 @@ const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {
-		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
-		padding-top: 1px;
-		cursor: pointer;
+		text-decoration: underline;
 	}
 
 	path {
@@ -199,7 +198,7 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>
-				<h2 css={titleStyle(format)}>Jump to...</h2>
+				<h2 css={titleStyle(format)}>Jump to</h2>
 				<span className="is-off">
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
