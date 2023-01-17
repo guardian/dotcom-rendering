@@ -154,7 +154,7 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						item={item}
 						publishDate={item.publishDate}
 						format={format}
-					></WithAgeWarning>
+					/>
 					<Series item={item} />
 
 					<Headline item={item} />
