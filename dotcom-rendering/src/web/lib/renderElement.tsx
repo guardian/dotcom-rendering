@@ -189,10 +189,7 @@ export const renderElement = ({
 			) {
 				return (
 					<Island deferUntil="visible">
-						<CalloutBlockComponent
-							callout={element}
-							format={format}
-						/>
+						<CalloutBlockComponent callout={element} />
 					</Island>
 				);
 			}
