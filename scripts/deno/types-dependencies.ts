@@ -3,6 +3,8 @@ import { octokit } from './github.ts';
 
 const prefix = '@types/';
 
+const ci = Deno.args[0] === '--ci';
+
 const dependencies = Object.entries(pkg.dependencies)
 	.filter(([dependency]) => dependency.startsWith(prefix))
 	.map(([dependency, version]) => ({
@@ -24,6 +26,31 @@ if (nonTildeVersions.length) {
 	console.error('Some @types/ definition are not using a tilde range');
 	console.error(nonTildeVersions.map(({ type: [dep] }) => dep));
 	Deno.exit(1);
+}
+
+if (ci) {
+	/** For the following @types packages, we accept mismatches */
+	const knownErrors = [
+		'he', // https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/he
+		'webpack-node-externals', // https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/webpack-node-externals
+	];
+
+	const mismatches = dependencies
+		.filter(
+			(o): o is { type: [string, string]; main: [string, string] } =>
+				!!o.main,
+		)
+		.filter(({ main, type }) => main[1] !== type[1])
+		.map(({ main: [dependency] }) => dependency)
+		.filter((dependency) => !knownErrors.includes(dependency));
+
+	if (mismatches.length > 0) {
+		console.error('Mismatches in @types/ packages:', mismatches);
+	} else {
+		console.info('No @types/ package dependency mismatches found!');
+	}
+
+	Deno.exit(mismatches.length);
 }
 
 const body = `## Audit of \`@types/\` packages
