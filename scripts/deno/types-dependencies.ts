@@ -3,23 +3,28 @@ import { octokit } from './github.ts';
 
 const prefix = '@types/';
 
-/**
- * We only look at major.minor versions as per DefinitelyTyped docs:
- * https://github.com/DefinitelyTyped/DefinitelyTyped#how-do-definitely-typed-package-versions-relate-to-versions-of-the-corresponding-library
- */
-const majorMinorVersions = Object.entries(pkg.dependencies).map(
-	([dependency, version]) =>
-		[dependency, version.match(/(\d+\.\d+)/)?.at(0)] as const,
-);
-
-const dependencies = majorMinorVersions
+const dependencies = Object.entries(pkg.dependencies)
 	.filter(([dependency]) => dependency.startsWith(prefix))
 	.map(([dependency, version]) => ({
-		main: majorMinorVersions.find(
+		main: Object.entries(pkg.dependencies).find(
 			([dep]) => dep === dependency.replace(prefix, ''),
 		),
 		type: [dependency, version] as const,
 	}));
+
+/**
+ * We only look at major.minor versions as per DefinitelyTyped docs:
+ * https://github.com/DefinitelyTyped/DefinitelyTyped#how-do-definitely-typed-package-versions-relate-to-versions-of-the-corresponding-library
+ */
+const nonTildeVersions = dependencies.filter(
+	({ main, type: [, version] }) => !!main && !version.startsWith('~'),
+);
+
+if (nonTildeVersions.length) {
+	console.error('Some @types/ definition are not using a tilde range');
+	console.error(nonTildeVersions.map(({ type: [dep] }) => dep));
+	Deno.exit(1);
+}
 
 const body = `## Audit of \`@types/\` packages
 
