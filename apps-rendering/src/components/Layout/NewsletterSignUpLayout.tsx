@@ -103,7 +103,8 @@ const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 				</header>
 				<section css={contentRow}>
 					<WithAgeWarning
-						item={item}
+						tags={item.tags}
+						series={item.series}
 						publishDate={item.publishDate}
 						format={format}
 					/>

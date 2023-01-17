@@ -8,12 +8,13 @@ import { AgeWarning } from '@guardian/source-react-components-development-kitche
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
-import type { Item } from 'item';
 import { isComment, isNews } from 'item';
+import type { Optional } from 'optional';
 import { articleWidthStyles, wideContentWidth } from 'styles';
 
 interface WithAgeWarningProps {
-	item: Item;
+	tags: Tag[];
+	series: Optional<Tag>;
 	publishDate: Option<Date>;
 	format: ArticleFormat;
 }
@@ -150,17 +151,18 @@ const galleryStyle = (isSeries: boolean): SerializedStyles => css`
 `;
 
 const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
-	item,
+	tags,
+	series,
 	publishDate,
 	format,
 }: WithAgeWarningProps) => {
 	if (publishDate.kind === OptionKind.Some) {
-		const age = getAgeWarning(item.tags, publishDate.value);
+		const age = getAgeWarning(tags, publishDate.value);
 
 		if (age) {
 			return (
 				<>
-					<div css={[warningStyles(format, item.series.isSome())]}>
+					<div css={[warningStyles(format, series.isSome())]}>
 						<AgeWarning age={age} supportsDarkMode={true} />
 					</div>
 					<AgeWarning

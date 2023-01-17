@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { fromNullable, OptionKind } from '@guardian/types';
 import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -21,7 +20,6 @@ interface Props {
 
 const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	const designTag = <DesignTag format={format} />;
 
 	if (format.display === ArticleDisplay.Immersive) {
 		return <ImmersiveHeadline headline={item.headline} format={format} />;
@@ -37,12 +35,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return (
-				<>
-					{designTag}
-					<CommentHeadline item={item} />
-				</>
-			);
+			return <CommentHeadline item={item} />;
 
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -51,20 +44,14 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.DeadBlog:
 			return <BlogHeadline item={item} />;
 		case ArticleDesign.Interview: {
-			const interviewToneTag = fromNullable(
-				item.tags.find((tag) => tag.id === 'tone/interview'),
-			);
+			const designTag = <DesignTag format={format} />;
 			return (
 				<>
-					{interviewToneTag.kind === OptionKind.Some ? (
-						<nav>
-							<a href={interviewToneTag.value.webUrl}>
-								{designTag}
-							</a>
-						</nav>
-					) : (
-						designTag
-					)}
+					<nav>
+						<a href={'https://www.theguardian.com/tone/interview'}>
+							{designTag}
+						</a>
+					</nav>
 					<InterviewHeadline item={item} />
 				</>
 			);
@@ -76,13 +63,10 @@ const Headline: React.FC<Props> = ({ item }) => {
 			return <GalleryHeadline headline={item.headline} format={format} />;
 		default:
 			return (
-				<>
-					{designTag}
-					<DefaultHeadline
-						item={item}
-						styles={css(defaultStyles(item))}
-					/>
-				</>
+				<DefaultHeadline
+					item={item}
+					styles={css(defaultStyles(item))}
+				/>
 			);
 	}
 };

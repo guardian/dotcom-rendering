@@ -63,7 +63,8 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 					<Column span={8}>
 						<WithAgeWarning
-							item={item}
+							tags={item.tags}
+							series={item.series}
 							publishDate={item.publishDate}
 							format={format}
 						/>

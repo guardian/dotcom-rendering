@@ -67,7 +67,8 @@ const LetterLayout: FC<Props> = ({ item }) => {
 			<article css={BorderStyles}>
 				<header>
 					<WithAgeWarning
-						item={item}
+						tags={item.tags}
+						series={item.series}
 						publishDate={item.publishDate}
 						format={format}
 					/>

@@ -68,7 +68,8 @@ const LabsLayout: FC<Props> = ({ item }) => {
 					/>
 					<div>
 						<WithAgeWarning
-							item={item}
+							tags={item.tags}
+							series={item.series}
 							publishDate={item.publishDate}
 							format={format}
 						/>

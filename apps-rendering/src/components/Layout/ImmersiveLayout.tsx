@@ -98,7 +98,8 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
 						<WithAgeWarning
-							item={item}
+							tags={item.tags}
+							series={item.series}
 							publishDate={item.publishDate}
 							format={format}
 						/>
