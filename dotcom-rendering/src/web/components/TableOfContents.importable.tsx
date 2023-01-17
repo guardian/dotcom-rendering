@@ -26,31 +26,22 @@ const anchorStyles = (palette: Palette) => css`
 	display: block;
 `;
 
-const defaultListItemStyles = (palette: Palette) => css`
-	box-sizing: border-box;
-	border-top: 1px solid ${neutral[86]};
-	padding-bottom: ${space[4]}px;
-	padding-top: ${space[1]}px;
-	transition: 0.3s all ease;
-
-	&:hover {
-		padding-top: 1px;
-		border-top: ${space[1]}px solid ${palette.text.tableOfContents};
-		cursor: pointer;
-	}
-`;
-
 const listItemStyles = (format: ArticleFormat, palette: Palette) => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return css`
-			${headline.xxxsmall({ fontWeight: 'light' })}
-			${defaultListItemStyles(palette)}
-		`;
-	}
-
+	const fontWeight =
+		format.display === ArticleDisplay.Immersive ? 'light' : 'bold';
 	return css`
-		${headline.xxxsmall({ fontWeight: 'bold' })}
-		${defaultListItemStyles(palette)}
+		${headline.xxxsmall({ fontWeight })};
+		box-sizing: border-box;
+		border-top: 1px solid ${neutral[86]};
+		padding-bottom: ${space[4]}px;
+		padding-top: ${space[1]}px;
+		transition: 0.3s all ease;
+
+		&:hover {
+			padding-top: 1px;
+			border-top: ${space[1]}px solid ${palette.text.tableOfContents};
+			cursor: pointer;
+		}
 	`;
 };
 
@@ -97,10 +88,6 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
 
-	// The value for data-link-name is evaluated at the time when the component renders,
-	// So at the time when user clicks the table (onToggle is triggered),
-	// the old value of open(before the click event) is used. As a result we need to
-	// use toc-close for when open is true and toc-expand for when it's false
 	return (
 		<details
 			open={open}
@@ -108,13 +95,12 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 			data-component="table-of-contents"
 		>
 			<summary
-				onClick={() => {
+				onClick={(e): void => {
+					e.preventDefault();
 					setOpen(!open);
 				}}
 				data-link-name={
-					open
-						? 'table-of-contents-close'
-						: 'table-of-contents-expand'
+					open ? 'table-of-contents-open' : 'table-of-contents-close'
 				}
 				css={summaryStyles(palette)}
 			>
