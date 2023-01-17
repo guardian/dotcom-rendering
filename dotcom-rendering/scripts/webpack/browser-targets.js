@@ -29,7 +29,9 @@ const getTargetsFromBrowsersList =
  *
  * Such tools should set the working directory to the local workspace - as is currently the case.
  */
-const browsers = browserslist('extends @guardian/browserslist-config');
+const browsers = browserslist(
+	'chrome 85, edge 85, safari 14.1, firefox 79, edge 85, opera 71',
+);
 
 /**
  * Transform a list of browsers to targets

@@ -73,8 +73,9 @@ const getLoaders = (bundle) => {
 								'@babel/preset-env',
 								{
 									bugfixes: true,
+									// https://caniuse.com/?feats=mdn-javascript_builtins_string_replaceall,mdn-javascript_builtins_promise_any,mdn-javascript_builtins_weakref,mdn-javascript_operators_logical_or_assignment,mdn-javascript_operators_logical_and_assignment,mdn-javascript_operators_logical_nullish_assignment,mdn-javascript_grammar_numeric_separators,mdn-javascript_builtins_finalizationregistry
 									targets:
-										'extends @guardian/browserslist-config',
+										'chrome 85, edge 85, safari 14.1, firefox 79, edge 85, opera 71',
 								},
 							],
 						],
