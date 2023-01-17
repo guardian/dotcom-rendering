@@ -106,7 +106,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 						item={item}
 						publishDate={item.publishDate}
 						format={format}
-					></WithAgeWarning>
+					/>
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<>
 							{newsletter.regionFocus && (
