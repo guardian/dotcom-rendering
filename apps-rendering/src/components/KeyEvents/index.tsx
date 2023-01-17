@@ -2,30 +2,32 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
 import {
-	textSans,
-	sport,
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, timeAgo } from '@guardian/libs';
+import {
 	culture,
-	lifestyle,
-	opinion,
-	news,
-	neutral,
-	remSpace,
 	from,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
+	remSpace,
+	sport,
+	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import {
-	ArticleFormat,
-	ArticlePillar,
-	ArticleTheme,
-	timeAgo,
-} from '@guardian/libs';
-import { darkModeCss } from '../lib';
-import Accordion from './accordion';
-import { background, text } from '../editorialPalette';
+import type { FC } from 'react';
 
 // ----- Component ----- //
-type paletteId = 300 | 400 | 500;
+
+type PaletteId = 300 | 400 | 500;
+
 interface KeyEvent {
 	date: Date;
 	text: string;
@@ -44,7 +46,7 @@ interface ListItemProps {
 	supportsDarkMode: boolean;
 }
 
-const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
+const getColour = (theme: ArticleTheme, paletteId: PaletteId): string => {
 	switch (theme) {
 		case ArticlePillar.Sport:
 			return sport[paletteId];
@@ -176,9 +178,9 @@ const textStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		color: ${getColor(format.theme, 500)};
+		color: ${getColour(format.theme, 500)};
 		&:hover {
-			color: ${getColor(format.theme, 500)};
+			color: ${getColour(format.theme, 500)};
 		}
 	`}
 `;
@@ -194,7 +196,11 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 `;
 
-const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
+const ListItem: FC<ListItemProps> = ({
+	keyEvent,
+	format,
+	supportsDarkMode,
+}) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
 			<Link
@@ -228,10 +234,15 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
+const KeyEvents: FC<KeyEventsProps> = ({
+	keyEvents,
+	format,
+	supportsDarkMode,
+}) => {
 	return (
 		<nav
-			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+			// https://github.com/guardian/dotcom-rendering/pull/3693
+			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- See PR above.
 			tabIndex={0}
 			id="keyevents"
 			css={keyEventWrapperStyles(

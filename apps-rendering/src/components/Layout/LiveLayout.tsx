@@ -2,8 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
-import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
@@ -17,6 +15,8 @@ import {
 import { fromNullable } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
+import type { KeyEvent } from 'components/KeyEvents';
+import KeyEvents from 'components/KeyEvents';
 import LiveBlocks from 'components/LiveBlocks';
 import LiveblogHeader from 'components/LiveblogHeader';
 import MainMedia from 'components/MainMedia';
