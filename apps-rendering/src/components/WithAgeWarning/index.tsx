@@ -6,10 +6,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import { AgeWarning } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { isComment, isNews } from 'item';
-import type { Optional } from 'optional';
+import { Optional } from 'optional';
 import { articleWidthStyles, wideContentWidth } from 'styles';
 
 interface WithAgeWarningProps {
@@ -21,24 +20,23 @@ interface WithAgeWarningProps {
 
 const getAgeWarning = (
 	tags: Tag[],
+	currentDate: Date,
+) => (
 	publicationDate: Date,
-): string | undefined => {
+): Optional<string> => {
 	const isNewsArticle = isNews(tags);
 	const isOpinion = isComment(tags);
-	let message;
 
 	// Only show an age warning for news or opinion pieces
 	if (isNewsArticle || isOpinion) {
-		const warnLimitDays = 30;
-		const currentDate = new Date();
+		const warnLimitDays = 31;
 		const dateThreshold = new Date();
 
 		dateThreshold.setDate(currentDate.getDate() - warnLimitDays);
 
 		// if the publication date is before the date threshold generate message
 		if (publicationDate < dateThreshold) {
-			// Unary + coerces dates to numbers for TypeScript
-			const diffMilliseconds = +currentDate - +publicationDate;
+			const diffMilliseconds = currentDate.getTime() - publicationDate.getTime();
 			const diffSeconds = Math.floor(diffMilliseconds / 1000);
 			const diffMinutes = diffSeconds / 60;
 			const diffHours = diffMinutes / 60;
@@ -47,18 +45,18 @@ const getAgeWarning = (
 			const diffYears = diffDays / 365;
 
 			if (diffYears >= 2) {
-				message = `${Math.floor(diffYears)} years old`;
+				return Optional.some(`${Math.floor(diffYears)} years old`);
 			} else if (diffYears > 1) {
-				message = '1 year old';
+				return Optional.some('1 year old');
 			} else if (diffMonths >= 2) {
-				message = `${Math.floor(diffMonths)} months old`;
+				return Optional.some(`${Math.floor(diffMonths)} months old`);
 			} else if (diffMonths > 1) {
-				message = '1 month old';
+				return Optional.some('1 month old');
 			}
 		}
 	}
 
-	return message;
+	return Optional.none();
 };
 
 export const defaultWidthStyles: SerializedStyles = css`
@@ -156,28 +154,23 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 	publishDate,
 	format,
 }: WithAgeWarningProps) => {
-	if (publishDate.kind === OptionKind.Some) {
-		const age = getAgeWarning(tags, publishDate.value);
+	const currentDate = new Date();
 
-		if (age) {
-			return (
-				<>
-					<div css={[warningStyles(format, series.isSome())]}>
-						<AgeWarning age={age} supportsDarkMode={true} />
-					</div>
-					<AgeWarning
-						age={age}
-						isScreenReader={true}
-						supportsDarkMode={true}
-					/>
-				</>
-			);
-		}
-
-		return null;
-	}
-
-	return null;
-};
+	return Optional.fromOption(publishDate)
+		.flatMap(getAgeWarning(tags, currentDate))
+		.maybeRender((age) => (
+			<>
+				<div css={[warningStyles(format, series.isSome())]}>
+					<AgeWarning age={age} supportsDarkMode={true} />
+				</div>
+				<AgeWarning
+					age={age}
+					isScreenReader={true}
+					supportsDarkMode={true}
+				/>
+			</>
+		)
+	)
+}
 
 export { WithAgeWarning, getAgeWarning };
