@@ -98,9 +98,7 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 					setOpen(!open);
 				}}
 				data-link-name={
-					open
-						? 'table-of-contents-expand'
-						: 'table-of-contents-close'
+					open ? 'table-of-contents-open' : 'table-of-contents-close'
 				}
 				css={summaryStyles(palette)}
 			>
