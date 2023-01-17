@@ -176,10 +176,10 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 			);
 		}
 
-		return <></>;
+		return null;
 	}
 
-	return <></>;
+	return null;
 };
 
 export { WithAgeWarning, getAgeWarning };
