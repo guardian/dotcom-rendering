@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import LiveBlockContainer from 'components/LiveBlockContainer';
 import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, withDefault } from '@guardian/types';

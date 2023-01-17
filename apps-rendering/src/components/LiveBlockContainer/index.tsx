@@ -6,9 +6,9 @@ import {
 	headline,
 	body,
 } from '@guardian/source-foundations';
-import { FirstPublished } from './FirstPublished';
-import { darkModeCss } from '../lib';
-import { background, border } from '../editorialPalette';
+import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { background, border } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
 
 type BlockContributor = {
