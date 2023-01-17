@@ -171,10 +171,6 @@ const designToString = (design: ArticleDesign): string => {
 			return 'Full Page Interactive';
 		case ArticleDesign.NewsletterSignup:
 			return 'Newsletter Signup';
-		case ArticleDesign.Timeline:
-			return 'Timeline';
-		case ArticleDesign.Profile:
-			return 'Profile';
 	}
 };
 
