@@ -94,7 +94,6 @@ export const CalloutExpired = () => {
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
-	padding-bottom: ${space[2]}px;
 	position: relative;
 `;
 
