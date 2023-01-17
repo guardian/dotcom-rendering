@@ -29,9 +29,10 @@ describe('WithAgeWarning test', () => {
 
 	it('returns undefined given no tag is supported', () => {
 		const publicationDate = new Date('2021-12-16T00:00:00');
-		const ageWarningMessage = getAgeWarning(unsupportedTags, fakeCurrentTime)(
-			publicationDate,
-		);
+		const ageWarningMessage = getAgeWarning(
+			unsupportedTags,
+			fakeCurrentTime,
+		)(publicationDate);
 
 		expect(ageWarningMessage.withDefault('error')).toBe('error');
 	});
@@ -39,7 +40,10 @@ describe('WithAgeWarning test', () => {
 	it('returns "1 month old" given a news article that was published within the last year', () => {
 		const publicationDate = new Date('2022-10-16T00:00:00');
 
-		const ageWarningMessage = getAgeWarning(supportedTags, fakeCurrentTime)(publicationDate);
+		const ageWarningMessage = getAgeWarning(
+			supportedTags,
+			fakeCurrentTime,
+		)(publicationDate);
 
 		expect(ageWarningMessage.withDefault('error')).toBe('1 month old');
 	});
@@ -47,7 +51,10 @@ describe('WithAgeWarning test', () => {
 	it('returns "2 months old" given a news article that was published within the last year', () => {
 		const publicationDate = new Date('2022-09-16T00:00:00');
 
-		const ageWarningMessage = getAgeWarning(supportedTags, fakeCurrentTime)(publicationDate);
+		const ageWarningMessage = getAgeWarning(
+			supportedTags,
+			fakeCurrentTime,
+		)(publicationDate);
 
 		expect(ageWarningMessage.withDefault('error')).toBe('2 months old');
 	});
@@ -55,7 +62,10 @@ describe('WithAgeWarning test', () => {
 	it('returns "1 year old" given a news article that was published within the last 2 years', () => {
 		const publicationDate = new Date('2021-09-16T00:00:00');
 
-		const ageWarningMessage = getAgeWarning(supportedTags, fakeCurrentTime)(publicationDate);
+		const ageWarningMessage = getAgeWarning(
+			supportedTags,
+			fakeCurrentTime,
+		)(publicationDate);
 
 		expect(ageWarningMessage.withDefault('error')).toBe('1 year old');
 	});
@@ -63,7 +73,10 @@ describe('WithAgeWarning test', () => {
 	it('returns "10 years old" given a news article that was published over 10 years ago', () => {
 		const publicationDate = new Date('2012-09-16T00:00:00');
 
-		const ageWarningMessage = getAgeWarning(supportedTags, fakeCurrentTime)(publicationDate);
+		const ageWarningMessage = getAgeWarning(
+			supportedTags,
+			fakeCurrentTime,
+		)(publicationDate);
 
 		expect(ageWarningMessage.withDefault('error')).toBe('10 years old');
 	});

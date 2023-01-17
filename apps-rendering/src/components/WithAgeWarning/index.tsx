@@ -18,46 +18,46 @@ interface WithAgeWarningProps {
 	format: ArticleFormat;
 }
 
-const getAgeWarning = (
-	tags: Tag[],
-	currentDate: Date,
-) => (
-	publicationDate: Date,
-): Optional<string> => {
-	const isNewsArticle = isNews(tags);
-	const isOpinion = isComment(tags);
+const getAgeWarning =
+	(tags: Tag[], currentDate: Date) =>
+	(publicationDate: Date): Optional<string> => {
+		const isNewsArticle = isNews(tags);
+		const isOpinion = isComment(tags);
 
-	// Only show an age warning for news or opinion pieces
-	if (isNewsArticle || isOpinion) {
-		const warnLimitDays = 31;
-		const dateThreshold = new Date();
+		// Only show an age warning for news or opinion pieces
+		if (isNewsArticle || isOpinion) {
+			const warnLimitDays = 31;
+			const dateThreshold = new Date();
 
-		dateThreshold.setDate(currentDate.getDate() - warnLimitDays);
+			dateThreshold.setDate(currentDate.getDate() - warnLimitDays);
 
-		// if the publication date is before the date threshold generate message
-		if (publicationDate < dateThreshold) {
-			const diffMilliseconds = currentDate.getTime() - publicationDate.getTime();
-			const diffSeconds = Math.floor(diffMilliseconds / 1000);
-			const diffMinutes = diffSeconds / 60;
-			const diffHours = diffMinutes / 60;
-			const diffDays = diffHours / 24;
-			const diffMonths = diffDays / 31;
-			const diffYears = diffDays / 365;
+			// if the publication date is before the date threshold generate message
+			if (publicationDate < dateThreshold) {
+				const diffMilliseconds =
+					currentDate.getTime() - publicationDate.getTime();
+				const diffSeconds = Math.floor(diffMilliseconds / 1000);
+				const diffMinutes = diffSeconds / 60;
+				const diffHours = diffMinutes / 60;
+				const diffDays = diffHours / 24;
+				const diffMonths = diffDays / 31;
+				const diffYears = diffDays / 365;
 
-			if (diffYears >= 2) {
-				return Optional.some(`${Math.floor(diffYears)} years old`);
-			} else if (diffYears > 1) {
-				return Optional.some('1 year old');
-			} else if (diffMonths >= 2) {
-				return Optional.some(`${Math.floor(diffMonths)} months old`);
-			} else if (diffMonths > 1) {
-				return Optional.some('1 month old');
+				if (diffYears >= 2) {
+					return Optional.some(`${Math.floor(diffYears)} years old`);
+				} else if (diffYears > 1) {
+					return Optional.some('1 year old');
+				} else if (diffMonths >= 2) {
+					return Optional.some(
+						`${Math.floor(diffMonths)} months old`,
+					);
+				} else if (diffMonths > 1) {
+					return Optional.some('1 month old');
+				}
 			}
 		}
-	}
 
-	return Optional.none();
-};
+		return Optional.none();
+	};
 
 export const defaultWidthStyles: SerializedStyles = css`
 	${from.wide} {
@@ -169,8 +169,7 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 					supportsDarkMode={true}
 				/>
 			</>
-		)
-	)
-}
+		));
+};
 
 export { WithAgeWarning, getAgeWarning };
