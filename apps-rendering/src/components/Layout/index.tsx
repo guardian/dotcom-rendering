@@ -84,7 +84,9 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
 		item.design === ArticleDesign.Interview ||
-		item.design === ArticleDesign.Recipe
+		item.design === ArticleDesign.Recipe ||
+		item.design === ArticleDesign.Timeline ||
+		item.design === ArticleDesign.Profile
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return <ImmersiveLayout item={item} />;

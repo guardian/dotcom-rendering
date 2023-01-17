@@ -38,10 +38,12 @@ import type {
 	Obituary,
 	PhotoEssay,
 	PrintShop,
+	Profile,
 	Quiz,
 	Recipe,
 	Review,
 	Standard,
+	Timeline,
 } from 'item';
 import { maybeRender, pipe } from 'lib';
 import { Optional } from 'optional';
@@ -97,7 +99,9 @@ interface Props {
 		| Interview
 		| Recipe
 		| PrintShop
-		| PhotoEssay;
+		| PhotoEssay
+		| Timeline
+		| Profile;
 }
 
 const StandardLayout: FC<Props> = ({ item }) => {

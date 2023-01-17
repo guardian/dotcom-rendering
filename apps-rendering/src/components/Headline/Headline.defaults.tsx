@@ -47,6 +47,8 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				`}
 			`;
 		case ArticleDesign.Explainer:
+		case ArticleDesign.Profile:
+		case ArticleDesign.Timeline:
 			return css`
 				${baseStyles}
 				${articleWidthStyles}
