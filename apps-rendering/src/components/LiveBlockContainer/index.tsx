@@ -1,19 +1,22 @@
 import { css } from '@emotion/react';
-import {
-	neutral,
-	from,
-	space,
-	headline,
-	body,
-} from '@guardian/source-foundations';
 import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import { background, border } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat } from '@guardian/libs';
-import type { FC, ReactNode } from 'react';
+import type { ArticleFormat } from '@guardian/libs';
+import {
+	body,
+	from,
+	headline,
+	neutral,
+	space,
+} from '@guardian/source-foundations';
 import type { Contributor } from 'contributor';
-import { Optional } from 'optional';
 import type { Image } from 'image';
+import { Optional } from 'optional';
+import type { FC, ReactNode } from 'react';
 
 type Props = {
 	id: string;
@@ -66,11 +69,7 @@ const BlockByline: FC<{
 	name: string;
 	format: ArticleFormat;
 	image: Optional<Image>;
-}> = ({
-	name,
-	image,
-	format,
-}) => {
+}> = ({ name, image, format }) => {
 	return (
 		<div
 			css={css`
@@ -79,7 +78,7 @@ const BlockByline: FC<{
 				padding-bottom: ${space[1]}px;
 			`}
 		>
-			{image.maybeRender(img => (
+			{image.maybeRender((img) => (
 				<div style={{ width: '2.25rem', height: '2.25rem' }}>
 					<img
 						src={img.src}
@@ -127,19 +126,22 @@ const LiveBlockContainer: FC<Props> = ({
 	return (
 		<article
 			/**
-			 * Pinned posts are not the cannonical source for a post, they're a copy. Only the *true* post
-			 * should get the id. This will prevent two elements on the page having the same id.
+			 * Pinned posts are not the cannonical source for a post, they're a
+			 * copy. Only the *true* post should get the id. This will prevent
+			 * two elements on the page having the same id.
 			 * */
 			id={!isPinnedPost ? `block-${id}` : undefined}
 			key={id}
 			/**
 			 *   Classnames
 			 *   ----------
-			 * - 'block' is used by Spacefinder as a possible candidate before which it can insert an inline ad
-			 * - 'pending' is used to mark blocks that have been inserted as part of a live update. We use this
-			 *    to animate the reveal as well as for enhancing twitter embeds
+			 * - 'block' is used by Spacefinder as a possible candidate before
+			 *   which it can insert an inline ad
+			 * - 'pending' is used to mark blocks that have been inserted as
+			 *   part of a live update. We use this to animate the reveal as
+			 *   well as for enhancing twitter embeds
 			 */
-			className={`block ${isLiveUpdate && 'pending'}`}
+			className={`block ${isLiveUpdate ? 'pending' : ''}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				box-sizing: border-box;
@@ -179,6 +181,7 @@ const LiveBlockContainer: FC<Props> = ({
 						name={contributor.name}
 						image={Optional.fromOption(contributor.image)}
 						format={format}
+						key={contributor.id}
 					/>
 				))}
 			</Header>

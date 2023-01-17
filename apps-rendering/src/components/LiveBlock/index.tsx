@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import LiveBlockContainer from 'components/LiveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
 import { LastUpdated } from 'components/LastUpdated';
+import LiveBlockContainer from 'components/LiveBlockContainer';
 import { datetimeFormat, timestampFormat } from 'datetime';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
