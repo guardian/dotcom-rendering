@@ -1,6 +1,8 @@
+import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { renderToString } from 'react-dom/server';
+import ReactDOM from 'react-dom';
 import type { DCRContainerPalette } from '../../types/front';
+import { getEmotionCache } from '../browser/islands/emotion';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
 import { CardCommentCount } from './CardCommentCount';
@@ -28,12 +30,6 @@ type EnhancedCountType = {
 	format: ArticleFormat;
 	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
-};
-
-type RenderedCountType = {
-	id: string;
-	html: string;
-	short: string;
 };
 
 /**
@@ -115,45 +111,28 @@ function enhanceCounts(
  * Takes the long and short version of each count and generates the html
  * for showing the count on the page
  */
-function renderCounts(counts: EnhancedCountType[]): RenderedCountType[] {
-	return counts.map((count) => {
-		const html = renderToString(
-			<CardCommentCount
-				format={count.format}
-				short={count.short}
-				long={count.long}
-				isDynamo={count.isDynamo}
-				containerPalette={count.containerPalette}
-			/>,
+function renderCounts(counts: EnhancedCountType[]) {
+	counts.forEach((count) => {
+		const container = document.querySelector(
+			`[data-discussion-id="${count.id}"]`,
 		);
-		return {
-			id: count.id,
-			html,
-			short: count.short,
-		};
-	});
-}
 
-/**
- * @description
- * Takes html and inserts it into the relevant Card
- *
- */
-function insertCount({
-	id,
-	html,
-	short,
-}: {
-	id: string;
-	html: string;
-	short: string;
-}) {
-	const countContainers = document.querySelectorAll<HTMLElement>(
-		`[data-discussion-id="${id}"]`,
-	);
-	countContainers.forEach((container) => {
-		container.setAttribute('aria-label', `${short} Comments`);
-		container.innerHTML = html;
+		if (container) {
+			ReactDOM.render(
+				<CacheProvider value={getEmotionCache()}>
+					<CardCommentCount
+						format={count.format}
+						short={count.short}
+						long={count.long}
+						isDynamo={count.isDynamo}
+						containerPalette={count.containerPalette}
+					/>
+				</CacheProvider>,
+				container,
+			);
+
+			container.setAttribute('aria-label', `${count.short} Comments`);
+		}
 	});
 }
 
@@ -188,15 +167,7 @@ export const FetchCommentCounts = ({ repeat }: Props) => {
 			const markers = extractMarkers();
 			if (data?.counts) {
 				try {
-					const enhancedCounts = enhanceCounts(data.counts, markers);
-					const renderedCounts = renderCounts(enhancedCounts);
-					renderedCounts.forEach((renderedCount) => {
-						insertCount({
-							id: renderedCount.id,
-							html: renderedCount.html,
-							short: renderedCount.short,
-						});
-					});
+					renderCounts(enhanceCounts(data.counts, markers));
 				} catch (e) {
 					// Do nothing
 				}
