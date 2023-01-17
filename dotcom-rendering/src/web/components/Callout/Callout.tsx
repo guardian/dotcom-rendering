@@ -8,8 +8,6 @@ import { Form } from './Form';
 import { MessageUs } from './MessageUs';
 
 const wrapperStyles = css`
-	padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
 	background-color: ${neutral[97]};
 `;
 
@@ -20,6 +18,7 @@ const calloutDetailsStyles = css`
 
 const summaryContentWrapper = css`
 	visibility: visible;
+	padding: ${space[2]}px;
 `;
 
 const titleStyles = css`
@@ -74,8 +73,6 @@ export const CalloutBlock = ({
 				<div css={titleStyles}>Tell us</div>
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
 				<CalloutDescription description={description} />
-			</div>
-			<div>
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>
 			<Tabs

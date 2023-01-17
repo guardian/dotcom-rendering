@@ -1,5 +1,3 @@
-import { ThemeProvider } from '@emotion/react';
-import { brand } from '@guardian/source-foundations';
 import {
 	Checkbox,
 	CheckboxGroup,
@@ -75,25 +73,17 @@ export const FormField = ({
 			);
 		case 'file':
 			return (
-				<ThemeProvider
-					theme={{
-						fileInput: {
-							primary: brand[500],
-						},
-					}}
-				>
-					<FileInput
-						label={label}
-						hideLabel={hideLabel}
-						supporting={description}
-						optional={!required}
-						error={fieldError}
-						data-testid={`form-field-${formField.id}`}
-						onUpload={(file: string | undefined): void =>
-							setFieldInFormData(formField.id, file)
-						}
-					/>
-				</ThemeProvider>
+				<FileInput
+					label={label}
+					hideLabel={hideLabel}
+					supporting={description}
+					optional={!required}
+					error={fieldError}
+					data-testid={`form-field-${formField.id}`}
+					onUpload={(file: string | undefined): void =>
+						setFieldInFormData(formField.id, file)
+					}
+				/>
 			);
 		case 'select':
 			return (
