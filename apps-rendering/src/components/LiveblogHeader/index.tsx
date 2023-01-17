@@ -66,7 +66,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 							item={item}
 							publishDate={item.publishDate}
 							format={format}
-						></WithAgeWarning>
+						/>
 						<Hide from="desktop">
 							<div css={seriesStyles}>
 								<Series item={item} />
