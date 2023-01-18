@@ -1,6 +1,6 @@
 import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import type { DCRContainerPalette } from '../../types/front';
 import { getEmotionCache } from '../browser/islands/emotion';
 import { formatCount } from '../lib/formatCount';
@@ -118,7 +118,7 @@ function renderCounts(counts: EnhancedCountType[]) {
 		);
 
 		if (container) {
-			ReactDOM.render(
+			render(
 				<CacheProvider value={getEmotionCache()}>
 					<CardCommentCount
 						format={count.format}
