@@ -282,7 +282,7 @@ const body: Body = [
 const pinnedBlock: LiveBlock = {
 	id: '5',
 	isKeyEvent: false,
-	title: 'Block Five',
+	title: Optional.some('Block Five'),
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
 	body: [
