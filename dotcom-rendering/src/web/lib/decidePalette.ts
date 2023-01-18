@@ -539,6 +539,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 		switch (format.theme) {
 			case ArticlePillar.Opinion:
 				return opinion[200];
+			case ArticlePillar.Culture:
 			case ArticlePillar.News:
 				return news[300];
 			default:
@@ -931,7 +932,10 @@ const backgroundBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundBulletStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.DeadBlog ||
+		format.design === ArticleDesign.Analysis
+	) {
 		return neutral[60];
 	}
 
