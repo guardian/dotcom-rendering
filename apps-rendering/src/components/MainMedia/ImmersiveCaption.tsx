@@ -28,7 +28,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	${from.leftCol} {
 		${grid.column.left}
-		grid-row: 4;
+		grid-row: 6;
 		padding-top: ${remSpace[1]};
 	}
 

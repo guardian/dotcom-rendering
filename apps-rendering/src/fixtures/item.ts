@@ -32,6 +32,7 @@ import type {
 	Letter,
 	MatchReport,
 	NewsletterSignup,
+	Obituary,
 	PhotoEssay,
 	PrintShop,
 	Quiz,
@@ -324,6 +325,15 @@ const matchScores: MatchScores = {
 
 const tags: Tag[] = [
 	{
+		id: 'tone/news',
+		type: 6,
+		webTitle: 'News',
+		webUrl: 'https://www.theguardian.com/tone/news',
+		apiUrl: 'https://content.guardianapis.com/tone/news',
+		references: [],
+		internalName: 'News (Tone)',
+	},
+	{
 		id: 'world/refugees',
 		type: TagType.SERIES,
 		webTitle: 'Refugees',
@@ -389,16 +399,21 @@ const fields = {
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00Z')),
 	contributors: contributors,
 	mainMedia: mainMedia,
 	series: Optional.some({
-		id: '',
-		type: 0,
-		webTitle: '',
-		webUrl: '',
-		apiUrl: '',
+		id: 'travel/series/readers-coronavirus-travel-questions',
+		type: 2,
+		sectionId: 'travel',
+		sectionName: 'Travel',
+		webTitle: 'Coronavirus travel Q&A',
+		webUrl: 'https://www.theguardian.com/travel/series/readers-coronavirus-travel-questions',
+		apiUrl: 'https://content.guardianapis.com/travel/series/readers-coronavirus-travel-questions',
 		references: [],
+		description:
+			"<p>A weekly series answering readers' questions&nbsp;about how the coronavirus outbreak is impacting on their travel plans and holidays</p>",
+		internalName: 'Coronavirus travel Q&A',
 	}),
 	commentable: false,
 	tags: tags,
@@ -538,6 +553,11 @@ const explainer: Explainer = {
 	outline: fromBodyElements(fields.body),
 };
 
+const obituary: Obituary = {
+	design: ArticleDesign.Obituary,
+	...fields,
+};
+
 const newsletterSignUp: NewsletterSignup = {
 	...fields,
 	design: ArticleDesign.NewsletterSignup,
@@ -586,4 +606,5 @@ export {
 	parseHtml,
 	setTheme,
 	setEdition,
+	obituary,
 };

@@ -16,6 +16,7 @@ import {
 	letter,
 	matchReport,
 	newsletterSignUp,
+	obituary,
 	photoEssay,
 	printShop,
 	quiz,
@@ -201,6 +202,10 @@ export const AnalysisStandardSpecialReportAlt = pipe(
 export const ExplainerStandardNews = standardLayoutStory(explainer);
 export const ExplainerStandardSpecialReportAlt =
 	standardLayoutStoryWithSpecialReportAlt(explainer);
+
+export const ObituaryStandardNews = standardLayoutStory(obituary);
+export const ObituaryStandardSpecialReportAlt =
+	standardLayoutStoryWithSpecialReportAlt(obituary);
 
 export const LiveBlogStandardNews = pipe(
 	live,
