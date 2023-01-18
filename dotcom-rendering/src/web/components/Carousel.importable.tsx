@@ -375,10 +375,7 @@ const CarouselCard = ({
 			showAge={true}
 			imagePositionOnMobile="top"
 			minWidthInPixels={220}
-			showQuotes={
-				format.design === ArticleDesign.Comment ||
-				format.design === ArticleDesign.Letter
-			}
+			showQuotedHeadline={format.design === ArticleDesign.Comment}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
 			branding={branding}
