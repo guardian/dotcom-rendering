@@ -108,8 +108,7 @@ function enhanceCounts(
 
 /**
  * @description
- * Takes the long and short version of each count and generates the html
- * for showing the count on the page
+ * Takes the long and short version of each count and renders onto the page with react
  */
 function renderCounts(counts: EnhancedCountType[]) {
 	counts.forEach((count) => {
@@ -142,9 +141,12 @@ function renderCounts(counts: EnhancedCountType[]) {
  *
  * For each Card with comments found (by looking for a marker element) it:
  *
+ * - Fetches the comment count data in a single call to Frontend's discussion API
  * - Enhances the data, transforming the count from a number to formatted strings
- * - Creates a html string for each count to be shown using ReactDOM.renderToString
- * - Mutates the DOM with this new html
+ * - Uses react 'render' to add the comment counts to their placeholders
+ *
+ * We do it this was so that we can make a single call, but still render multiple comment counts
+ * Using an individual island for each comment count could be more costly, especially on fronts
  *
  * @param {boolean} repeat If true, the fetch call will be repeated on an interval
  */
