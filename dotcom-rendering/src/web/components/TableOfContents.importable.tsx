@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-import { headline, line, space, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	neutral,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -19,7 +24,6 @@ const anchorStyles = (palette: Palette) => css`
 	color: ${palette.text.tableOfContents};
 	text-decoration: none;
 	display: block;
-	padding: ${space[1]}px 0 ${space[4]}px 0;
 `;
 
 const listItemStyles = (format: ArticleFormat, palette: Palette) => {
@@ -27,9 +31,15 @@ const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 		format.display === ArticleDisplay.Immersive ? 'light' : 'bold';
 	return css`
 		${headline.xxxsmall({ fontWeight })};
-		border-top: 1px solid ${line.primary};
+		box-sizing: border-box;
+		border-top: 1px solid ${neutral[86]};
+		padding-bottom: ${space[4]}px;
+		padding-top: ${space[1]}px;
+		transition: 0.3s all ease;
+
 		&:hover {
-			border-top: 1px solid ${palette.text.tableOfContents};
+			padding-top: 1px;
+			border-top: ${space[1]}px solid ${palette.text.tableOfContents};
 			cursor: pointer;
 		}
 	`;
@@ -42,7 +52,7 @@ const detailsStyles = css`
 		display: none;
 	}
 	&:not([open]) {
-		border-bottom: 1px solid ${line.primary};
+		border-bottom: 1px solid ${neutral[86]};
 	}
 	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
@@ -51,35 +61,27 @@ const detailsStyles = css`
 `;
 
 const summaryStyles = (palette: Palette) => css`
+	display: flex;
+	justify-content: space-between;
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	align-items: center;
-	padding: ${space[1]}px 0 ${space[1]}px 0;
-	border-top: 1px solid ${line.primary};
+
+	padding: ${space[1]}px 0;
+	border-top: 1px solid ${neutral[86]};
 
 	&:hover {
-		border-top: 1px solid ${palette.text.tableOfContents};
-		cursor: pointer;
+		text-decoration: underline;
 	}
 
 	path {
 		fill: ${palette.text.tableOfContents};
-	}
-	svg {
-		height: 32px;
 	}
 `;
 
 const titleStyle = (palette: Palette) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	color: ${palette.text.tableOfContents};
-`;
-
-const chevronPosition = css`
-	position: absolute;
-	right: ${space[1]}px;
-	top: -2px;
 `;
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
@@ -98,15 +100,15 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 					setOpen(!open);
 				}}
 				data-link-name={
-					open ? 'table-of-contents-open' : 'table-of-contents-close'
+					open ? 'table-of-contents-close' : 'table-of-contents-open'
 				}
 				css={summaryStyles(palette)}
 			>
-				<h2 css={titleStyle(palette)}>Jump to...</h2>
-				<span className="is-closed" css={chevronPosition}>
+				<h2 css={titleStyle(palette)}>Jump to</h2>
+				<span className="is-closed">
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
-				<span className="is-open" css={chevronPosition}>
+				<span className="is-open">
 					<SvgChevronUpSingle size="xsmall" />
 				</span>
 			</summary>
