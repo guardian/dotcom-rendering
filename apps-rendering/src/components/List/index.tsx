@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -26,7 +26,7 @@ const styles = (
 		height: 1rem;
 		width: 1rem;
 		margin-right: ${remSpace[2]};
-		background-color: ${neutral[86]};
+		background-color: ${background.bullet(format, false)};
 		margin-left: -${remSpace[6]};
 		vertical-align: middle;
 
