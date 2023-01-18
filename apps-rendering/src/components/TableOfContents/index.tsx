@@ -45,6 +45,8 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-bottom: ${remSpace[4]};
 	padding-top: ${remSpace[1]};
 	transition: 0.3s all ease;
+	display: flex;
+	position: relative;
 
 	&:hover {
 		padding-top: 1px;
@@ -137,6 +139,18 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const indexStyle = css`
+	margin-right: 18px;
+`;
+
+const verticalLineStyle = css`
+	position: absolute;
+	left: 18px;
+	border-left: 1px solid #dcdcdc;
+	height: 22px;
+	top: 0;
+`;
+
 const TocTextElement: React.FC<TextElementProps> = ({
 	node,
 	key,
@@ -207,11 +221,17 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((outlineItem) => (
+				{outline.map((outlineItem, index) => (
 					<ListItem
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
+						{format.display === ArticleDisplay.NumberedList && (
+							<>
+								<span css={indexStyle}>{index + 1}</span>
+								<div css={verticalLineStyle}></div>
+							</>
+						)}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}
