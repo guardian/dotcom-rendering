@@ -28,7 +28,7 @@ describe('WithAgeWarning test', () => {
 	];
 
 	it('returns undefined given no tag is supported', () => {
-		const publicationDate = new Date('2021-12-16T00:00:00');
+		const publicationDate = new Date('2021-12-16T00:00:00Z');
 		const ageWarningMessage = getAgeWarning(
 			unsupportedTags,
 			fakeCurrentTime,
