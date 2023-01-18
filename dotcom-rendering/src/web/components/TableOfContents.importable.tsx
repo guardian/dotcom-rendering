@@ -36,6 +36,8 @@ const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 		padding-bottom: ${space[4]}px;
 		padding-top: ${space[1]}px;
 		transition: 0.3s all ease;
+		display: flex;
+		position: relative;
 
 		&:hover {
 			padding-top: 1px;
@@ -84,6 +86,18 @@ const titleStyle = (palette: Palette) => css`
 	color: ${palette.text.tableOfContents};
 `;
 
+const indexStyle = css`
+	margin-right: 18px;
+`;
+
+const verticalStyle = css`
+	position: absolute;
+	left: 18px;
+	border-left: 1px solid #dcdcdc;
+	height: 22px;
+	top: 0;
+`;
+
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
@@ -120,6 +134,13 @@ export const TableOfContents = ({ tableOfContents, format }: Props) => {
 						css={listItemStyles(format, palette)}
 						data-link-name={`table-of-contents-item-${index}-${item.id}`}
 					>
+						{format.display === ArticleDisplay.NumberedList && (
+							<>
+								<span css={indexStyle}>{index + 1}</span>
+								<div css={verticalStyle}></div>
+							</>
+						)}
+
 						<a href={`#${item.id}`} css={anchorStyles(palette)}>
 							{item.title}
 						</a>
