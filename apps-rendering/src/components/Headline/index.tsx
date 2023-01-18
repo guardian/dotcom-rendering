@@ -48,7 +48,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 			return (
 				<>
 					<nav>
-						<a href={'https://www.theguardian.com/tone/interview'}>
+						<a href="https://www.theguardian.com/tone/interview">
 							{designTag}
 						</a>
 					</nav>
