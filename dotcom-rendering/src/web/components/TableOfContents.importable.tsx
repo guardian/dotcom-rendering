@@ -43,6 +43,9 @@ const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 			padding-top: 1px;
 			border-top: ${space[1]}px solid ${palette.text.tableOfContents};
 			cursor: pointer;
+			div {
+				height: 19px;
+			}
 		}
 	`;
 };
@@ -92,10 +95,11 @@ const indexStyle = css`
 
 const verticalStyle = css`
 	position: absolute;
-	left: 18px;
-	border-left: 1px solid #dcdcdc;
+	left: ${space[4]}px;
+	border-left: 1px solid ${neutral[86]};
 	height: 22px;
 	top: 0;
+	transition: 0.3s all ease;
 `;
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {

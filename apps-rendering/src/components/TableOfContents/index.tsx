@@ -52,6 +52,9 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 		padding-top: 1px;
 		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
+		div {
+			height: 1.188rem;
+		}
 	}
 
 	${darkModeCss`
@@ -143,12 +146,16 @@ const indexStyle = css`
 	margin-right: 18px;
 `;
 
-const verticalLineStyle = css`
+const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
 	position: absolute;
-	left: 18px;
-	border-left: 1px solid #dcdcdc;
-	height: 22px;
+	left: 1.125rem;
+	border-left: 1px solid ${border.tableOfContents(format)};
+	height: 1.375rem;
 	top: 0;
+	transition: 0.3s all ease;
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+	`}
 `;
 
 const TocTextElement: React.FC<TextElementProps> = ({
@@ -209,6 +216,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 };
 
 const TableOfContents: FC<Props> = ({ format, outline }) => {
+	console.log('format.display: ', format.display);
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>
@@ -226,12 +234,12 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
-						{format.display === ArticleDisplay.NumberedList && (
+						{
 							<>
 								<span css={indexStyle}>{index + 1}</span>
-								<div css={verticalLineStyle}></div>
+								<div css={verticalLineStyle(format)}></div>
 							</>
-						)}
+						}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}
