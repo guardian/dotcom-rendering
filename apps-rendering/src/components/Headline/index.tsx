@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import BlogHeadline from './BlogHeadline';
@@ -32,6 +31,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 	switch (format.design) {
 		case ArticleDesign.Feature:
 			return <FeatureHeadline item={item} />;
+
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -40,27 +40,20 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return <MediaHeadline item={item} />;
+
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return <BlogHeadline item={item} />;
-		case ArticleDesign.Interview: {
-			const designTag = <DesignTag format={format} />;
-			return (
-				<>
-					<nav>
-						<a href="https://www.theguardian.com/tone/interview">
-							{designTag}
-						</a>
-					</nav>
-					<InterviewHeadline item={item} />
-				</>
-			);
-		}
+
+		case ArticleDesign.Interview:
+			return <InterviewHeadline item={item} />;
 
 		case ArticleDesign.Review:
 			return <ReviewHeadline item={item} />;
+
 		case ArticleDesign.Gallery:
 			return <GalleryHeadline headline={item.headline} format={format} />;
+
 		default:
 			return (
 				<DefaultHeadline
