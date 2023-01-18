@@ -10,7 +10,6 @@ export interface FENewslettersPageType {
 	id: string;
 	webTitle: string;
 	description: string;
-	section: { value?: string };
 }
 
 export type DCRNewslettersPageType = {

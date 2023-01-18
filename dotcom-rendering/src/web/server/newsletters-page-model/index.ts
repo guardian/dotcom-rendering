@@ -59,7 +59,6 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 	webTitle: 'Guardian newsletters: Using Test Data',
 	description:
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
-	section: {},
 };
 
 export const buildNewslettersPageModel = (
@@ -70,7 +69,6 @@ export const buildNewslettersPageModel = (
 	config: {
 		...STATIC_CONFIG,
 		pageId: pageRequestData.id,
-		section: pageRequestData.section.value || ''
 	},
 	editionId: 'UK',
 	beaconURL: '//phar.gu-web.net',
