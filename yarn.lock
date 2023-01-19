@@ -2918,10 +2918,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-2.0.1.tgz#b04f12ff36f66db800a68b81b65eedfc86289211"
   integrity sha512-xm5oDtRBu37KPmiT61z+E/Wz3HHifayJjVMwd/nfLxNRd1eFOVmplaeTDtygGKy4KjIwX90R5j/Sjs9apTVnLA==
 
-"@guardian/discussion-rendering@^11.0.3":
-  version "11.0.3"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-11.0.3.tgz#4e18a9e28a0d12a4dc61739b3877478c780b36a9"
-  integrity sha512-2hsYGUzuXHKzyCIOGP42X3CVK11I32krP6fffyP5BuCFSQNgrpje4L9ngWIpOGvHi12T2anYnXI7HyouQDGo0A==
+"@guardian/discussion-rendering@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-12.0.0.tgz#08326684b2e83f2d7386681d69e5639846e59d0e"
+  integrity sha512-WCMFjZ/i4cpEYh5OSD600LjyCzYN3UwBdM7v6wCRRChedqQU39VGgo58UDkvYEnN6/fBZhIguIKv3/E8C8CPyg==
 
 "@guardian/eslint-config-typescript@^2.0.0":
   version "2.0.0"
