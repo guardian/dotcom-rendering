@@ -55,7 +55,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
 			</Island>
-			<Island clientOnly={true} expediteLoading={true}>
+			<Island clientOnly={true}>
 				<ShowHideContainers />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
