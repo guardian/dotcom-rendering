@@ -11,6 +11,7 @@ import { teadsCookieless } from '../experiments/tests/teads-cookieless';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
+import { willRecordCoreWebVitals } from './CoreVitals.importable';
 
 type Props = {
 	enabled: boolean;
@@ -64,6 +65,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		})
 			.then(() => {
 				if (
+					willRecordCoreWebVitals ||
 					userInClientSideTestToForceMetrics ||
 					userInServerSideTestToForceMetrics
 				) {
