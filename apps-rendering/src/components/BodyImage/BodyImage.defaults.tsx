@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';

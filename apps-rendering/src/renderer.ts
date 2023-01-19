@@ -10,7 +10,7 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';

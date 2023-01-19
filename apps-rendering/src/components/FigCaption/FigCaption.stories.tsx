@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
 import type { FC, ReactElement } from 'react';

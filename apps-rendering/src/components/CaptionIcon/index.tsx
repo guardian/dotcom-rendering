@@ -3,8 +3,8 @@ import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
 import { FC } from 'react';
-import { fill } from '../editorialPalette';
-import { darkModeCss } from '../lib';
+import { fill } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 
 enum CaptionIconVariant {
 	Image,
