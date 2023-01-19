@@ -1,5 +1,7 @@
 module.exports = {
 	plugins: [
+		// Be careful when adding plugins here!
+		// They can dramatically alter the build size
 		'@babel/plugin-syntax-dynamic-import',
 		'@babel/plugin-transform-react-jsx',
 		'@babel/plugin-proposal-class-properties',
@@ -8,9 +10,7 @@ module.exports = {
 		'babel-plugin-px-to-rem',
 		'@babel/plugin-transform-runtime',
 		'@emotion/babel-plugin',
-		["polyfill-corejs3", { "method": "usage-global", "version": "3.20" }]
 	],
-
 	env: {
 		production: {
 			plugins: [
