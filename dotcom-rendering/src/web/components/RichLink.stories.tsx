@@ -782,6 +782,7 @@ export const Analysis = () => {
 	return (
 		<div
 			css={css`
+				/* stylelint-disable-next-line color-no-hex */
 				background-color: #fff4f2;
 			`}
 		>

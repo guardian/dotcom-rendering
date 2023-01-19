@@ -1707,7 +1707,7 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 		case ArticleDesign.Comment:
 			return '#fbe6d5';
 		case ArticleDesign.Analysis:
-			return neutral[100];
+			return '#F2E8E6';
 
 		default:
 			return neutral[97];
