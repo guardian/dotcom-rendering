@@ -185,7 +185,7 @@ export const Discussion = ({
 						onExpand={() => {
 							setIsExpanded(true);
 						}}
-						// idApiUrl={idApiUrl}
+						idApiUrl={idApiUrl}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />
