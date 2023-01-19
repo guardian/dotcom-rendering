@@ -297,7 +297,7 @@ export const SecureSignupIframe = ({
 		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
 			| undefined
 			| FontFaceSetWithAdd;
-		if (!iframeFontFaceSet || !iframeFontFaceSet.add) {
+		if (!iframeFontFaceSet?.add) {
 			return;
 		}
 

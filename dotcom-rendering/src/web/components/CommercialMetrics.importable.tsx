@@ -51,14 +51,14 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			);
 
 		const isDev =
-			window.guardian.config.page.isDev ||
+			window.guardian.config.page.isDev ??
 			window.location.hostname.includes(
-				process.env.HOSTNAME || 'localhost',
+				process.env.HOSTNAME ?? 'localhost',
 			);
 
 		initCommercialMetrics({
 			pageViewId,
-			browserId: browserId || undefined,
+			browserId: browserId ?? undefined,
 			isDev,
 			adBlockerInUse,
 		})

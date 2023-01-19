@@ -92,7 +92,7 @@ const Heading = ({ count }: { count?: number }) => {
 					color: ${neutral[60]};
 				`}
 			>
-				({count || '…'})
+				({count ?? '…'})
 			</span>
 		</h2>
 	);
@@ -105,8 +105,7 @@ export const SignedInAs = ({
 	user,
 	isClosedForComments,
 }: Props) => {
-	const isBanned =
-		user && user.privateFields && !user.privateFields.canPostComment;
+	const isBanned = user?.privateFields && !user.privateFields.canPostComment;
 
 	if (!enableDiscussionSwitch) {
 		// Discussion is disabled sitewide and user is signed in

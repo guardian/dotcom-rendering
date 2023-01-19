@@ -18,7 +18,7 @@ export const bestFitImage = (
 		.sort((a, b) => a.width - b.width)
 		.find((img) => img.width >= containerWidth);
 
-	return bestFit || srcSets[srcSets.length - 1];
+	return bestFit ?? srcSets[srcSets.length - 1];
 };
 
 // AMP images need their height set explicitly, but

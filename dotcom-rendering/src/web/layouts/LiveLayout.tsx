@@ -491,8 +491,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.webPublicationDateDeprecated
 											}
 											hasStarRating={
-												!!CAPIArticle.starRating ||
-												CAPIArticle.starRating === 0
+												typeof CAPIArticle.starRating ===
+												'number'
 											}
 										/>
 									)}
@@ -661,7 +661,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									// We default to string here because the property is optional but we
 									// know it will exist for all blogs
 									mostRecentBlockId={
-										CAPIArticle.mostRecentBlockId || ''
+										CAPIArticle.mostRecentBlockId ?? ''
 									}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
 									selectedTopics={CAPIArticle.selectedTopics}
@@ -885,7 +885,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.contentType
 													}
 													sectionName={
-														CAPIArticle.sectionName ||
+														CAPIArticle.sectionName ??
 														''
 													}
 													isPreview={
@@ -894,7 +894,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													idUrl={
 														CAPIArticle.config
-															.idUrl || ''
+															.idUrl ?? ''
 													}
 													isDev={
 														!!CAPIArticle.config
@@ -1045,7 +1045,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.contentType
 													}
 													sectionName={
-														CAPIArticle.sectionName ||
+														CAPIArticle.sectionName ??
 														''
 													}
 													isPreview={
@@ -1054,7 +1054,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													idUrl={
 														CAPIArticle.config
-															.idUrl || ''
+															.idUrl ?? ''
 													}
 													isDev={
 														!!CAPIArticle.config
@@ -1220,9 +1220,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							hasStoryPackage={CAPIArticle.hasStoryPackage}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							pageId={CAPIArticle.pageId}
-							isPaidContent={
-								CAPIArticle.config.isPaidContent || false
-							}
+							isPaidContent={!!CAPIArticle.config.isPaidContent}
 							showRelatedContent={
 								CAPIArticle.config.showRelatedContent
 							}

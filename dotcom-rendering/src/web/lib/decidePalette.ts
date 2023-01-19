@@ -2152,7 +2152,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: overrides?.border.lines || borderLines(format),
+			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),

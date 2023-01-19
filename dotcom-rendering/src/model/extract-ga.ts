@@ -2,7 +2,7 @@
 
 import type { FEArticleType } from '../types/frontend';
 import type { TagType } from '../types/tag';
-import { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../web/lib/edition';
 
 const filterTags = (
 	tags: FEArticleType['tags'],
@@ -16,6 +16,7 @@ const filterTags = (
 			[],
 		);
 
+	// eslint-disable-next-line @typescript-eslint/prefer-optional-chain -- this code is cursed
 	return (arrOfvalues && arrOfvalues.join(',')) || '';
 };
 
@@ -26,7 +27,7 @@ const getCommissioningDesk = (
 	const tag = tags.find((thisTag) =>
 		thisTag.id.includes('tracking/commissioningdesk'),
 	);
-	return (tag && tag.title) || '';
+	return tag?.title ?? '';
 };
 
 const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
@@ -70,7 +71,7 @@ export const extractGA = ({
 }): GADataType => ({
 	webTitle,
 	pillar: convertToLegacyPillar(format.theme),
-	section: sectionName || '',
+	section: sectionName ?? '',
 	contentType: formatStringForGa(contentType),
 	commissioningDesks: formatStringForGa(getCommissioningDesk(tags)),
 	contentId: pageId,

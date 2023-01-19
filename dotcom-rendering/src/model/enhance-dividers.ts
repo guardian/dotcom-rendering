@@ -11,7 +11,7 @@ const isDinkus = (element: CAPIElement): boolean => {
 		return false;
 
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstChild) return false;
+	if (!frag.firstChild) return false;
 	// A dinkus is can be spaced or unspaced
 	return (
 		frag.textContent === '***' ||
