@@ -1,24 +1,24 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { TrailType } from '../../src/types/trails';
+import { DCRFrontCard } from '../../src/types/front';
 
 export const trails: [
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
 ] = [
 	{
 		url: 'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',

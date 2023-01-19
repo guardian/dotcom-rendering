@@ -1,9 +1,8 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import { FrontCard } from '../components/FrontCard';
 
 type TrailProps = {
-	trail: TrailType;
+	trail: DCRFrontCard;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 };

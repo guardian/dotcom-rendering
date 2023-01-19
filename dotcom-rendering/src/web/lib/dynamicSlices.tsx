@@ -1,4 +1,8 @@
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
@@ -31,7 +35,7 @@ export const Card50_Card50 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -41,7 +45,7 @@ export const Card50_Card50 = ({
 		<UL direction="row" padBottom={true}>
 			{cards50.map((trail, index) => (
 				<LI
-					key={trail.shortUrl}
+					key={index}
 					percentage="50%"
 					padSides={true}
 					showDivider={index !== 0}
@@ -68,7 +72,7 @@ export const Card75_Card25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -77,8 +81,8 @@ export const Card75_Card25 = ({
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{card75.map((trail) => (
-				<LI key={trail.shortUrl} percentage="75%" padSides={true}>
+			{card75.map((trail, index) => (
+				<LI key={index} percentage="75%" padSides={true}>
 					<Card75Media50Right
 						trail={trail}
 						showAge={showAge}
@@ -86,9 +90,9 @@ export const Card75_Card25 = ({
 					/>
 				</LI>
 			))}
-			{card25.map((trail) => (
+			{card25.map((trail, index) => (
 				<LI
-					key={trail.shortUrl}
+					key={index}
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
@@ -115,7 +119,7 @@ export const Card25_Card75 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -124,8 +128,8 @@ export const Card25_Card75 = ({
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{card25.map((trail) => (
-				<LI key={trail.shortUrl} percentage="25%" padSides={true}>
+			{card25.map((trail, index) => (
+				<LI key={index} percentage="25%" padSides={true}>
 					<Card25Media25
 						trail={trail}
 						showAge={showAge}
@@ -133,9 +137,9 @@ export const Card25_Card75 = ({
 					/>
 				</LI>
 			))}
-			{card75.map((trail) => (
+			{card75.map((trail, index) => (
 				<LI
-					key={trail.shortUrl}
+					key={index}
 					percentage="75%"
 					padSides={true}
 					showDivider={true}
@@ -162,7 +166,7 @@ export const Card50_Card25_Card25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -171,8 +175,8 @@ export const Card50_Card25_Card25 = ({
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{card50.map((trail) => (
-				<LI key={trail.shortUrl} percentage="50%" padSides={true}>
+			{card50.map((trail, index) => (
+				<LI key={index} percentage="50%" padSides={true}>
 					<Card50Media50
 						trail={trail}
 						containerPalette={containerPalette}
@@ -181,9 +185,9 @@ export const Card50_Card25_Card25 = ({
 				</LI>
 			))}
 
-			{cards25.map((trail) => (
+			{cards25.map((trail, index) => (
 				<LI
-					key={trail.shortUrl}
+					key={index}
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
@@ -211,7 +215,7 @@ export const Card100PictureTop = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -219,8 +223,8 @@ export const Card100PictureTop = ({
 
 	return (
 		<UL padBottom={true}>
-			{card100.map((card) => (
-				<LI key={card.shortUrl} percentage="100%" padSides={true}>
+			{card100.map((card, index) => (
+				<LI key={index} percentage="100%" padSides={true}>
 					<Card100Media100
 						trail={card}
 						showAge={showAge}
@@ -243,7 +247,7 @@ export const Card100PictureRight = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -251,8 +255,8 @@ export const Card100PictureRight = ({
 
 	return (
 		<UL padBottom={true}>
-			{card100.map((card) => (
-				<LI key={card.shortUrl} percentage="100%" padSides={true}>
+			{card100.map((card, index) => (
+				<LI key={index} percentage="100%" padSides={true}>
 					<Card100Media75
 						trail={card}
 						containerPalette={containerPalette}

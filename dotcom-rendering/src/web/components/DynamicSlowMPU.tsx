@@ -1,6 +1,9 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import {
 	Card33Media33,
 	CardDefault,
@@ -33,7 +36,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -90,7 +93,7 @@ const ColumnOfThree50_Ad50 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -142,8 +145,8 @@ export const DynamicSlowMPU = ({
 	index,
 }: Props) => {
 	let layout: 'noBigs' | 'twoBigs' | 'twoBigsBoosted' | 'threeBigs';
-	let bigCards: TrailType[] = [];
-	let standardCards: TrailType[] = [];
+	let bigCards: DCRFrontCard[] = [];
+	let standardCards: DCRFrontCard[] = [];
 	switch (groupedTrails.big.length) {
 		case 0: {
 			standardCards = groupedTrails.standard;
