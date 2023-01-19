@@ -56,6 +56,13 @@ const liveBlogRichLinkStyles = css`
 	}
 `;
 
+const analysisRichLinkStyles = css`
+	background-color: #f2e8e6;
+	:hover {
+		background-color: #e9d9d5;
+	}
+`;
+
 const formatFromTheme = (theme: ArticleTheme): ArticleFormat => ({
 	theme,
 	design: ArticleDesign.Standard,
@@ -176,6 +183,8 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return css(richLinkStyles(format), liveBlogRichLinkStyles);
+		case ArticleDesign.Analysis:
+			return css(richLinkStyles(format), analysisRichLinkStyles);
 		default:
 			return richLinkStyles(format);
 	}

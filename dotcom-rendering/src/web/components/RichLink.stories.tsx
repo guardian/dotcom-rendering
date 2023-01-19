@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -774,5 +775,54 @@ export const PaidFor = () => {
 				/>
 			</Figure>
 		</Section>
+	);
+};
+
+export const Analysis = () => {
+	return (
+		<div
+			css={css`
+				background-color: #fff4f2;
+			`}
+		>
+			Analysis Articles have a different color background, so rich links
+			should too.
+			<Section
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Analysis,
+						theme: ArticlePillar.News,
+					}}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink
+						richLinkIndex={1}
+						cardStyle="news"
+						imageData={someImageData}
+						headlineText="Rich link headline"
+						contentType="article"
+						url=""
+						linkFormat={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: ArticlePillar.Culture,
+						}}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: ArticlePillar.Culture,
+						}}
+						tags={[]}
+						sponsorName=""
+					/>
+				</Figure>
+			</Section>
+		</div>
 	);
 };

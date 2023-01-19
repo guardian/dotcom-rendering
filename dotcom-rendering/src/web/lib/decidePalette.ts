@@ -1528,11 +1528,10 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const textRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[300];
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
+			return news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1665,6 +1664,7 @@ const borderPagination = () => {
 };
 
 const fillRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[400];
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
