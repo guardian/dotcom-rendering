@@ -38,6 +38,7 @@ export interface CalloutBlockProps {
 	formId: string;
 	submissionURL: string;
 	isExpired: boolean;
+	showCalloutHeading?: boolean;
 }
 
 export const CalloutBlock = ({
@@ -46,6 +47,7 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
+	showCalloutHeading = true,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
@@ -70,8 +72,8 @@ export const CalloutBlock = ({
 	return (
 		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
 			<div css={summaryContentWrapper}>
-				<div css={titleStyles}>Tell us</div>
-				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				<div css={titleStyles}>Share your experience</div>
+				{showCalloutHeading&&<h4 css={subtitleTextHeaderStyles}>{heading}</h4>}
 				<CalloutDescription description={description} />
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>

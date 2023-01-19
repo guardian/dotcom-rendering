@@ -26,6 +26,7 @@ export interface CalloutBlockProps {
 	formFields: FormField[];
 	format: ArticleFormat;
 	description?: DocumentFragment;
+	showCalloutHeading?: boolean;
 }
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
@@ -34,6 +35,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	formFields,
 	format,
 	description,
+	showCalloutHeading = true,
 }): ReactElement => {
 	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
@@ -53,8 +55,8 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	return (
 		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer]}>
-				<div css={calloutTitle}>Tell Us</div>
-				<h4 css={calloutHeadingText}>{heading}</h4>
+				<div css={calloutTitle}>Share your experience</div>
+				{showCalloutHeading && <h4 css={calloutHeadingText}>{heading}</h4>}
 				{description && (
 					<div css={calloutDescription}>
 						{renderCalloutDescriptionText(format, description)}

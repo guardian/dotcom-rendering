@@ -51,6 +51,7 @@ export const CalloutBlockComponent = ({
 							description={description}
 							submissionURL={calloutsUrl}
 							isExpired={isExpired(activeUntil)}
+							showCalloutTitle={false}
 						/>
 					</ExpandingWrapper>
 				</aside>

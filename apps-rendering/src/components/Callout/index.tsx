@@ -49,6 +49,7 @@ const Callout: FC<CalloutProps> = ({
 						formFields={formFields}
 						format={format}
 						description={description}
+						showCalloutHeading={false}
 					/>
 					<span
 						css={css`
