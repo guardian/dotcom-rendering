@@ -54,13 +54,219 @@
         },
         "description": {
             "type": "string"
+        },
+        "config": {
+            "$ref": "#/definitions/Partial<ConfigType>"
+        },
+        "twitterData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "openGraphData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
         }
     },
     "required": [
+        "config",
         "description",
         "id",
         "newsletters",
         "webTitle"
     ],
+    "definitions": {
+        "Partial<ConfigType>": {
+            "type": "object",
+            "properties": {
+                "dcrCouldRender": {
+                    "type": "boolean"
+                },
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "abTests": {
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "revisionNumber": {
+                    "type": "string"
+                },
+                "shortUrlId": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "adUnit": {
+                    "type": "string"
+                },
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "videoDuration": {
+                    "type": "number"
+                },
+                "edition": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "section": {
+                    "type": "string"
+                },
+                "sharedAdTargeting": {
+                    "type": "object",
+                    "additionalProperties": {}
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "showRelatedContent": {
+                    "type": "boolean"
+                },
+                "shouldHideReaderRevenue": {
+                    "type": "boolean"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
+                "isPhotoEssay": {
+                    "type": "boolean"
+                },
+                "references": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "isLive": {
+                    "type": "boolean"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "pageId": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "number"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "author": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "series": {
+                    "type": "string"
+                },
+                "toneIds": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                }
+            }
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        }
+    },
     "$schema": "http://json-schema.org/draft-07/schema#"
 }

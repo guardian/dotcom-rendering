@@ -10,6 +10,13 @@ export interface FENewslettersPageType {
 	id: string;
 	webTitle: string;
 	description: string;
+	config: Partial<ConfigType>;
+	twitterData?: {
+		[key: string]: string;
+	};
+	openGraphData?: {
+		[key: string]: string;
+	};
 }
 
 export type DCRNewslettersPageType = {

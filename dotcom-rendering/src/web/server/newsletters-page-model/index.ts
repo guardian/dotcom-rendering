@@ -59,6 +59,7 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 	webTitle: 'Guardian newsletters: Using Test Data',
 	description:
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
+	config: STATIC_CONFIG,
 };
 
 export const buildNewslettersPageModel = (
@@ -66,27 +67,26 @@ export const buildNewslettersPageModel = (
 ): DCRNewslettersPageType => ({
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
-	config: {
-		...STATIC_CONFIG,
-		pageId: pageRequestData.id,
-	},
 	editionId: 'UK',
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	...pageRequestData,
+	config: {
+		...STATIC_CONFIG,
+		...pageRequestData.config
+	},
+	openGraphData: pageRequestData.openGraphData,
+	twitterData: pageRequestData.twitterData,
 });
 
 export const provideTestNewslettersPageModel = (): DCRNewslettersPageType => ({
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
-	config: {
-		...STATIC_CONFIG,
-		pageId: 'static-email-newsletters',
-	},
 	editionId: 'UK',
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	...TEST_NEWSLETTERS_PAGE_DATA,
+	config: STATIC_CONFIG,
 });
