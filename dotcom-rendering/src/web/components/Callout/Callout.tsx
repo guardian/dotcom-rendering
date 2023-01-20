@@ -73,7 +73,9 @@ export const CalloutBlock = ({
 		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
 			<div css={summaryContentWrapper}>
 				<div css={titleStyles}>Share your experience</div>
-				{showCalloutHeading&&<h4 css={subtitleTextHeaderStyles}>{heading}</h4>}
+				{showCalloutHeading && (
+					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				)}
 				<CalloutDescription description={description} />
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>
