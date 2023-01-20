@@ -1,5 +1,6 @@
 import type { EditionId } from '../web/lib/edition';
 import type { BadgeType } from './badge';
+import type { CAPIContent } from './capi';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { CAPIElement, Newsletter } from './content';
@@ -16,6 +17,7 @@ import type { CAPITrailType } from './trails';
  * schema definition.
  */
 export interface FEArticleType {
+	capiContent: CAPIContent;
 	headline: string;
 	standfirst: string;
 	webTitle: string;

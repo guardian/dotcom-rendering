@@ -2,6 +2,9 @@
     "description": "This type is what we receive from `frontend`,\nhence the FE prefix.\n\nWARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
+        "capiContent": {
+            "$ref": "#/definitions/CAPIContent"
+        },
         "headline": {
             "type": "string"
         },
@@ -580,6 +583,7 @@
         "beaconURL",
         "blocks",
         "canonicalUrl",
+        "capiContent",
         "commercialProperties",
         "config",
         "contentType",
@@ -629,6 +633,54 @@
         "webURL"
     ],
     "definitions": {
+        "CAPIContent": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "Article",
+                        "Audio",
+                        "Crossword",
+                        "Gallery",
+                        "Interactive",
+                        "Liveblog",
+                        "Picture",
+                        "Video"
+                    ],
+                    "type": "string"
+                },
+                "sectionId": {
+                    "type": "string"
+                },
+                "sectionName": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "webUrl": {
+                    "type": "string"
+                },
+                "apiUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "apiUrl",
+                "id",
+                "sectionId",
+                "sectionName",
+                "type",
+                "webTitle",
+                "webUrl"
+            ]
+        },
         "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
