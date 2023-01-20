@@ -21,4 +21,14 @@ jobs:
           deno-version: v1.29.4
 
       - name: Check @types/ dependencies
-        run: deno run --allow-env="GITHUB_TOKEN" scripts/deno/types-dependencies.ts --ci
+        run: |
+          deno run \
+            --allow-env=GITHUB_TOKEN \
+            scripts/deno/types-dependencies.ts --ci
+
+      - name: Check peer dependencies
+        run: |
+          deno run \
+            --allow-env=GITHUB_TOKEN \
+            --allow-run=yarn \
+            scripts/deno/peer-dependencies.ts --ci
