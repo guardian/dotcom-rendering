@@ -105,6 +105,11 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		if (positionDisplay) {
 			positionDisplay.innerHTML = position.toString();
 		}
+		if (window.location.hash !== `#img-${position}`) {
+			// Update the url based on the fact we've selected (navigated
+			// to) a new image
+			window.history.replaceState({}, '', `#img-${position}`);
+		}
 	}
 
 	function pulseButton(button: HTMLButtonElement): void {
@@ -189,6 +194,24 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		loadAdjacentImages(newPosition);
 	}
 
+	function open(position: number) {
+		// We use this class to prevent the main page from scrolling
+		document.documentElement.classList.add('lightbox-open');
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
+		(lightbox as any)?.showModal(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		// When opening the lightbox, if one doesn't exist already, add a history state referencing
+		// the currently selected image. Doing this means the back action will take the reader back
+		// to the article
+		if (!window.location.hash.startsWith('#img-')) {
+			window.history.pushState({}, '', `#img-${position}`);
+		}
+		// Now we have the index of the image that was clicked, show it
+		// in the lightbox
+		select(position);
+		scrollTo(position);
+		loadAdjacentImages(position);
+	}
+
 	function close(): void {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
 		(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
@@ -217,23 +240,15 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	// Event listeners
 	lightboxButtons.forEach((button) => {
 		button.addEventListener('click', () => {
-			// We use this class to prevent the main page from scrolling
-			document.documentElement.classList.add('lightbox-open');
 			// Extract the element id for this image out of the button that was clicked on
 			const elementId = button.dataset.elementId;
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
-			(lightbox as any)?.showModal(); // See: https://github.com/microsoft/TypeScript/issues/48267
 			// Find the image inside the lightbox and get its index
 			const imageWrapper: HTMLLIElement | null = elementId
 				? lightbox.querySelector(`li[data-element-id="${elementId}"]`)
 				: null;
 			const stringIndex: string = imageWrapper?.dataset.index ?? '1';
 			const indexOfImageClicked = parseInt(stringIndex);
-			// Now we have the index of the image that was clicked, show it
-			// in the lightbox
-			select(indexOfImageClicked);
-			scrollTo(indexOfImageClicked);
-			loadAdjacentImages(indexOfImageClicked);
+			open(indexOfImageClicked);
 		});
 	});
 
@@ -255,6 +270,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	});
 
 	lightbox.addEventListener('keydown', (event) => {
+		if (event.ctrlKey || event.metaKey || event.altKey) return;
 		switch (event.code) {
 			case 'Tab': {
 				event.preventDefault();
@@ -341,6 +357,14 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 
 	lightbox.addEventListener('close', () => {
 		document.documentElement.classList.remove('lightbox-open');
+		// When the lightbox is closed, remove any img hash has from the url
+		if (window.location.hash.startsWith('#img-')) {
+			history.replaceState(
+				{},
+				'',
+				window.location.pathname + window.location.search,
+			);
+		}
 	});
 
 	captionLinks.forEach((link) => {
@@ -352,6 +376,29 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			// cause a weird flash
 			event.stopPropagation();
 		});
+	});
+
+	/**
+	 * popstate is fired when a user goes back or forward, either using buttons
+	 * or the keyboard or via history.back() or history.forward()
+	 *
+	 * If this happens, and if the url has no img- hash, we close the lightbox.
+	 * This means you can open the lightbox, navigate back, and the lightbox will
+	 * be closed.
+	 */
+	window.addEventListener('popstate', () => {
+		const hash = window.location.hash;
+		if (!hash.startsWith('#img-')) {
+			// There's no img hash so close the lightbox
+			close();
+		} else {
+			// The reader navigated to a url that does contain an img hash. If
+			// the lightbox isn't already open, open it at that hash position.
+			if (!lightbox.hasAttribute('open')) {
+				const position = hash.substring(5);
+				open(parseInt(position));
+			}
+		}
 	});
 }
 
