@@ -43,18 +43,22 @@ const dialogStyles = css`
 	&.hide-info {
 		/* Always hide the info aside when the hide-info class exists on the dialog element */
 		aside {
-			display: none;
+			visibility: hidden;
 		}
 		${until.tablet} {
 			/* Also hide the nav controls when on mobile */
 			nav {
-				display: none;
+				visibility: hidden;
 			}
 		}
 	}
 
 	button.active {
 		background-color: ${neutral[46]};
+	}
+
+	button.reveal {
+		visibility: visible;
 	}
 `;
 

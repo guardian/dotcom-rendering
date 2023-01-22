@@ -110,6 +110,12 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			// to) a new image
 			window.history.replaceState({}, '', `#img-${position}`);
 		}
+		// Ensure the close button is always visible on the last slide
+		if (position === images.length) {
+			closeButton?.classList.add('reveal');
+		} else {
+			closeButton?.classList.remove('reveal');
+		}
 	}
 
 	function pulseButton(button: HTMLButtonElement): void {
