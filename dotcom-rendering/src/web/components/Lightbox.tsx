@@ -81,7 +81,7 @@ const navStyles = css`
 		width: 100%;
 	}
 	${from.tablet} {
-		padding-top: ${space[3]}px;
+		padding-top: ${space[1]}px;
 		padding-left: ${space[4]}px;
 		padding-right: ${space[4]}px;
 		height: 100vh;
@@ -129,13 +129,13 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 					margin-left: auto;
 					margin-right: auto;
 					${from.tablet} {
-						margin-top: ${space[5]}px;
+						margin-top: ${space[3]}px;
 					}
 					${until.tablet} {
 						height: calc(100vh - 90px);
 					}
 					${from.tablet} {
-						height: calc(100vh - 40px);
+						height: calc(100vh - 24px);
 					}
 				}
 				picture {
@@ -160,14 +160,11 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 					margin-left: auto;
 					margin-right: auto;
 					margin-top: ${space[3]}px;
-					${from.tablet} {
-						margin-top: ${space[5]}px;
-					}
 					${until.tablet} {
 						max-height: calc(100vh - 90px);
 					}
 					${from.tablet} {
-						max-height: calc(100vh - 40px);
+						max-height: calc(100vh - 24px);
 					}
 				}
 				picture {
@@ -211,7 +208,6 @@ const asideStyles = css`
 	padding-bottom: ${space[3]}px;
 
 	${from.tablet} {
-		padding-top: ${space[5]}px;
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
 	}
