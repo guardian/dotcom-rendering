@@ -1,6 +1,6 @@
 import type { CAPIElement, EnhancedImageForLightbox } from '../types/content';
 
-export const enhanceImagesForLightbox = (
+export const buildLightboxImages = (
 	format: CAPIFormat,
 	blocks: Block[],
 	mainMediaElements: CAPIElement[],
