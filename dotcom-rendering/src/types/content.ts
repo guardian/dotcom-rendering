@@ -236,6 +236,10 @@ export interface ImageBlockElement {
 	starRating?: number;
 	isAvatar?: boolean;
 	position?: number;
+	lightbox?: {
+		credit?: string;
+		caption?: string;
+	};
 }
 
 export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {

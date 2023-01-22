@@ -469,10 +469,10 @@ export const Lightbox = ({ format, images }: Props) => {
 												format={format}
 												isLightbox={true}
 												captionText={
-													image.data.caption ??
+													image.lightbox?.caption ??
 													image.data.alt
 												}
-												credit={image.data.credit}
+												credit={image.lightbox?.credit}
 												displayCredit={
 													image.displayCredit
 												}
