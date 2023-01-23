@@ -1,22 +1,22 @@
 // ----- Imports ----- //
 
-import Accordion from ".";
-import { css } from "@emotion/react";
-import type { SerializedStyles } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import {
-	breakpoints,
-	space,
-	neutral,
-	from,
 	body,
-} from "@guardian/source-foundations";
-import type { FC } from "react";
-import { darkModeCss } from "@guardian/common-rendering/src/lib";
+	breakpoints,
+	from,
+	neutral,
+	space,
+} from '@guardian/source-foundations';
+import type { FC, ReactElement } from 'react';
+import Accordion from '.';
 
 // ----- Stories ----- //
 
 const textStyle = (supportsDarkMode: boolean): SerializedStyles => css`
-	${body.medium({ lineHeight: "loose" })};
+	${body.medium({ lineHeight: 'loose' })};
 	margin-bottom: ${space[3]}px;
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
@@ -41,11 +41,12 @@ const adviceColourAboveTablet: SerializedStyles = css`
 	}
 `;
 
-const accordionContent = (supportsDarkMode: boolean) => (
+const accordionContent = (supportsDarkMode: boolean): ReactElement => (
 	<>
 		<p css={[textStyle(supportsDarkMode), adviceColourAboveTablet]}>
-			There's a trick to viewing this - you need to switch the storybook
-			viewport to mobile, phablet or tablet in order to see the accordion.
+			There&apos;s a trick to viewing this - you need to switch the
+			storybook viewport to mobile, phablet or tablet in order to see the
+			accordion.
 		</p>
 		<p css={[textStyle(supportsDarkMode), hideAboveTablet]}>
 			Vaccine passports enjoy substantial support across Europe, a YouGov
@@ -86,11 +87,11 @@ const Dark: FC = () => (
 
 export default {
 	component: Accordion,
-	title: "Common/Components/Accordion",
+	title: 'AR/Accordion',
 	parameters: {
 		backgrounds: {
-			default: "grey",
-			values: [{ name: "grey", value: "lightgrey" }],
+			default: 'grey',
+			values: [{ name: 'grey', value: 'lightgrey' }],
 		},
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.tablet],

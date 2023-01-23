@@ -1,29 +1,30 @@
 // ----- Imports ----- //
 
-import { css } from "@emotion/react";
-import type { SerializedStyles } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import {
-	neutral,
-	line,
 	background,
-	headline,
-	remSpace,
 	focusHalo,
 	from,
-} from "@guardian/source-foundations";
+	headline,
+	line,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import {
-	SvgChevronUpSingle,
 	SvgChevronDownSingle,
-} from "@guardian/source-react-components";
-import { darkModeCss } from "@guardian/common-rendering/src/lib";
+	SvgChevronUpSingle,
+} from '@guardian/source-react-components';
+import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //
 
 interface AccordionProps {
-	children: React.ReactNode;
+	children: ReactNode;
 	supportsDarkMode: boolean;
 	accordionTitle: string;
-	context: "keyEvents" | "liveFeed";
+	context: 'keyEvents' | 'liveFeed';
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -69,7 +70,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 `;
 
 const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
@@ -87,10 +88,10 @@ const arrowPosition: SerializedStyles = css`
 `;
 
 const backgroundColour = (
-	context: "keyEvents" | "liveFeed",
-	supportsDarkMode: boolean
+	context: 'keyEvents' | 'liveFeed',
+	supportsDarkMode: boolean,
 ): SerializedStyles => {
-	if (context === "keyEvents") {
+	if (context === 'keyEvents') {
 		return css`
 			background-color: ${background.primary};
 			${from.desktop} {
@@ -122,12 +123,12 @@ const paddingBody: SerializedStyles = css`
 	}
 `;
 
-const Accordion = ({
+const Accordion: FC<AccordionProps> = ({
 	children,
 	supportsDarkMode,
 	accordionTitle,
 	context,
-}: AccordionProps) => {
+}) => {
 	return (
 		<details open css={detailsStyles}>
 			<summary css={titleRowStyles(supportsDarkMode)}>
