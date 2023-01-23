@@ -40,7 +40,6 @@ const iconWrapperStyles = css`
 const iconStyles = (size: PlayButtonSize, sizeOnMobile: PlayButtonSize) => css`
 	background-color: ${brandAlt[400]};
 	border-radius: 50%;
-	display: inline-block;
 	width: ${buttonSize(sizeOnMobile)}px;
 	height: ${buttonSize(sizeOnMobile)}px;
 	${from.tablet} {
