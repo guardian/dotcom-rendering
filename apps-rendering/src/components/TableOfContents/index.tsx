@@ -29,6 +29,9 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
 	display: block;
+	${darkModeCss`
+		color: ${text.paragraphDark(format)};
+	`}
 `;
 
 const listStyles: SerializedStyles = css`
@@ -40,6 +43,7 @@ const listStyles: SerializedStyles = css`
 `;
 
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.paragraph(format)};
 	box-sizing: border-box;
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: ${remSpace[4]};
@@ -62,6 +66,7 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 		&:hover {
 			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
+		color: ${text.paragraphDark(format)};
 	`}
 `;
 
@@ -216,7 +221,6 @@ const TocTextElement: React.FC<TextElementProps> = ({
 };
 
 const TableOfContents: FC<Props> = ({ format, outline }) => {
-	console.log('format.display: ', format.display);
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>
@@ -234,12 +238,12 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
-						{
+						{format.display === ArticleDisplay.NumberedList && (
 							<>
 								<span css={indexStyle}>{index + 1}</span>
 								<div css={verticalLineStyle(format)}></div>
 							</>
-						}
+						)}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}
