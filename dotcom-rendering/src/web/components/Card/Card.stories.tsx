@@ -922,6 +922,7 @@ export const WhenVideoWithPlayButton = () => {
 							theme: ArticlePillar.News,
 						}}
 						imagePosition="top"
+						imageSize="medium"
 						imagePositionOnMobile="bottom"
 						mediaDuration={200}
 						mediaType="Video"
@@ -1001,6 +1002,7 @@ export const WhenVideoWithPlayButton = () => {
 						}}
 						imagePosition="top"
 						imagePositionOnMobile="left"
+						imageSize="medium"
 						mediaDuration={200}
 						mediaType="Video"
 						showMainVideo={true}

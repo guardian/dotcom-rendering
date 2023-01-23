@@ -434,7 +434,7 @@ export const Card50Media50 = ({
 			containerPalette={containerPalette}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			showAge={showAge}
@@ -474,7 +474,7 @@ export const Card50Media50Tall = ({
 			supportingContentAlignment="horizontal"
 			imagePosition="top"
 			imagePositionOnMobile="top"
-			imageSize="small"
+			imageSize="medium"
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -510,7 +510,7 @@ export const Card66Media66 = ({
 			headlineSizeOnMobile="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
-			imageSize="small"
+			imageSize="large"
 		/>
 	);
 };
@@ -540,7 +540,7 @@ export const Card33Media33 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			trailText={trail.trailText}
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			headlineSize="medium"

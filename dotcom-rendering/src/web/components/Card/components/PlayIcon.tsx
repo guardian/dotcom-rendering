@@ -71,20 +71,20 @@ const iconStyles = (size: PlayButtonSize, sizeOnMobile: PlayButtonSize) => css`
 const getIconSizeOnDesktop = (
 	imageSize: ImageSizeType,
 	imagePosition: ImagePositionType,
-) => {
-	if (imageSize === 'jumbo') return 60;
-	else if (
-		(imagePosition === 'left' || imagePosition === 'right') &&
-		imageSize === 'small'
-	)
-		return 24;
-	else return 40;
+): PlayButtonSize => {
+	if (imageSize === 'jumbo') return 'xlarge';
+	else if (imageSize === 'large') return 'large';
+	else if (imageSize === 'medium') return 'medium';
+	else if (imageSize === 'small') return 'xsmall';
+	else return 'large';
 };
 
-const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
+const getIconSizeOnMobile = (
+	imagePositionOnMobile: ImagePositionType,
+): PlayButtonSize =>
 	imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right'
-		? 24
-		: 40;
+		? 'xsmall'
+		: 'medium';
 
 export const PlayIcon = ({
 	imageSize,
@@ -97,7 +97,14 @@ export const PlayIcon = ({
 }) => {
 	return (
 		<div css={iconWrapperStyles}>
-			<span css={[iconStyles('medium', 'xsmall')]}>
+			<span
+				css={[
+					iconStyles(
+						getIconSizeOnDesktop(imageSize, imagePosition),
+						getIconSizeOnMobile(imagePositionOnMobile),
+					),
+				]}
+			>
 				<SvgMediaControlsPlay />
 			</span>
 		</div>
