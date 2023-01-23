@@ -35,6 +35,7 @@ export const Basic = () => {
 				enableDiscussionSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</HydratedLayout>
 	);

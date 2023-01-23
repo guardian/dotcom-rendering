@@ -75,7 +75,7 @@
 		"@guardian/commercial-core": "^5.1.3",
 		"@guardian/consent-management-platform": "11.0.0",
 		"@guardian/core-web-vitals": "^2.0.1",
-		"@guardian/discussion-rendering": "^11.0.3",
+		"@guardian/discussion-rendering": "^12.0.0",
 		"@guardian/eslint-config": "^2.0.3",
 		"@guardian/eslint-config-typescript": "^2.0.0",
 		"@guardian/eslint-plugin-source-react-components": "^10.0.0",
