@@ -689,6 +689,10 @@ const textCardKicker = (format: ArticleFormat): string => {
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return BLACK;
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
 				default:
 					return neutral[100];
 			}
@@ -697,7 +701,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
-					return news[600];
+					return news[550];
 				case ArticlePillar.Sport:
 					return sport[600];
 				case ArticlePillar.Opinion:
