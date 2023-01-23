@@ -2,12 +2,10 @@ import { css } from '@emotion/react';
 import { brandAlt, from } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 
-type PlayButtonSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
+type PlayButtonSize = 'small' | 'medium' | 'large' | 'xlarge';
 
 const buttonSize = (size: PlayButtonSize) => {
 	switch (size) {
-		case 'xsmall':
-			return 24;
 		case 'small':
 			return 28;
 		case 'medium':
@@ -21,8 +19,6 @@ const buttonSize = (size: PlayButtonSize) => {
 
 const iconSize = (size: PlayButtonSize) => {
 	switch (size) {
-		case 'xsmall':
-			return 20;
 		case 'small':
 			return 22;
 		case 'medium':
@@ -68,14 +64,11 @@ const iconStyles = (size: PlayButtonSize, sizeOnMobile: PlayButtonSize) => css`
 	}
 `;
 
-const getIconSizeOnDesktop = (
-	imageSize: ImageSizeType,
-	imagePosition: ImagePositionType,
-): PlayButtonSize => {
+const getIconSizeOnDesktop = (imageSize: ImageSizeType): PlayButtonSize => {
 	if (imageSize === 'jumbo') return 'xlarge';
 	else if (imageSize === 'large') return 'large';
 	else if (imageSize === 'medium') return 'medium';
-	else if (imageSize === 'small') return 'xsmall';
+	else if (imageSize === 'small') return 'small';
 	else return 'large';
 };
 
@@ -83,24 +76,22 @@ const getIconSizeOnMobile = (
 	imagePositionOnMobile: ImagePositionType,
 ): PlayButtonSize =>
 	imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right'
-		? 'xsmall'
-		: 'medium';
+		? 'small'
+		: 'large';
 
 export const PlayIcon = ({
 	imageSize,
 	imagePositionOnMobile,
-	imagePosition,
 }: {
 	imageSize: ImageSizeType;
 	imagePositionOnMobile: ImagePositionType;
-	imagePosition: ImagePositionType;
 }) => {
 	return (
 		<div css={iconWrapperStyles}>
 			<span
 				css={[
 					iconStyles(
-						getIconSizeOnDesktop(imageSize, imagePosition),
+						getIconSizeOnDesktop(imageSize),
 						getIconSizeOnMobile(imagePositionOnMobile),
 					),
 				]}

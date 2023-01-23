@@ -119,7 +119,6 @@ export const ImageWrapper = ({
 					<PlayIcon
 						imageSize={imageSize}
 						imagePositionOnMobile={imagePositionOnMobile}
-						imagePosition={imagePosition}
 					/>
 				)}
 			</>
