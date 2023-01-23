@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import TriangleIcon from '../../static/icons/triangle.svg';
@@ -11,7 +11,7 @@ const captionStyle = css`
 	padding-top: 10px;
 	${textSans.xxsmall()};
 	word-wrap: break-word;
-	color: ${text.supporting};
+	color: ${neutral[46]};
 `;
 
 const captionPadding = css`
@@ -57,7 +57,7 @@ export const Caption = ({
 			<span
 				css={captionLink}
 				dangerouslySetInnerHTML={{
-					__html: captionText || '',
+					__html: captionText ?? '',
 				}}
 				key="caption"
 			/>

@@ -18,6 +18,7 @@ type Props = {
 	enableDiscussionSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
+	idApiUrl: string;
 };
 
 export const DiscussionLayout = ({
@@ -29,6 +30,7 @@ export const DiscussionLayout = ({
 	enableDiscussionSwitch,
 	isAdFreeUser,
 	shouldHideAds,
+	idApiUrl,
 }: Props) => {
 	const hideAd = isAdFreeUser || shouldHideAds;
 	return (
@@ -80,6 +82,7 @@ export const DiscussionLayout = ({
 									discussionApiClientHeader
 								}
 								enableDiscussionSwitch={enableDiscussionSwitch}
+								idApiUrl={idApiUrl}
 							/>
 						</Island>
 					</div>

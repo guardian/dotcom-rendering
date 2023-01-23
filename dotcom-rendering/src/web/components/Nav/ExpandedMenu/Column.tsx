@@ -276,7 +276,7 @@ export const Column = ({
 				id={ariaControls}
 				data-cy={ariaControls}
 			>
-				{(column.children || []).map((link) => (
+				{(column.children ?? []).map((link) => (
 					<li
 						key={link.title.toLowerCase()}
 						css={[

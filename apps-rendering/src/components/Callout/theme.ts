@@ -7,6 +7,7 @@ import {
 	success,
 } from '@guardian/source-foundations';
 import {
+	expandingWrapperDarkTheme,
 	fileInputDarkTheme,
 	tabsDarkTheme,
 } from '@guardian/source-react-components-development-kitchen';
@@ -67,13 +68,6 @@ const radioDarkTheme = {
 	borderError: error[500],
 };
 
-const expandingWrapperDarkTheme = {
-	border: neutral[60],
-	expandBackground: neutral[86],
-	expandText: neutral[7],
-	collapseBackground: neutral[10],
-	collapseText: neutral[86],
-};
 const userFeedbackDarkTheme = {
 	textError: error[500],
 };
@@ -84,8 +78,8 @@ export const darkTheme = {
 	textInput: textInputDarkTheme,
 	select: selectDarkTheme,
 	radio: radioDarkTheme,
-	expander: expandingWrapperDarkTheme,
 	userFeedback: userFeedbackDarkTheme,
+	...expandingWrapperDarkTheme,
 	...fileInputDarkTheme,
 	...tabsDarkTheme,
 };

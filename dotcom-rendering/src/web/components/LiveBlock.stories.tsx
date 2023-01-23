@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { images } from '../../../fixtures/generated/images';
+import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { LiveBlock } from './LiveBlock';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
@@ -438,7 +438,7 @@ export const ImageAndTitle = () => {
 ImageAndTitle.story = { name: 'with only a title and an image' };
 
 export const Updated = () => {
-	const publishedDate: number = liveBlock.blockFirstPublished || 999999;
+	const publishedDate: number = liveBlock.blockFirstPublished ?? 999999;
 	const block: Block = {
 		...liveBlock,
 		blockFirstPublished: publishedDate,

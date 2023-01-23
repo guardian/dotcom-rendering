@@ -10,8 +10,6 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -49,11 +47,13 @@ import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
 import Callout from 'components/Callout';
 import Caption from 'components/caption';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import FigCaption from 'components/FigCaption';
 import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';

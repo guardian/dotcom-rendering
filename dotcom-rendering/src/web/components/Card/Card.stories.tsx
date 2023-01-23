@@ -407,7 +407,11 @@ export const WithPulsingDotSpecialReportAlt = () => {
 export const WithQuotes = () => {
 	return (
 		<CardWrapper>
-			<Card {...basicCardProps} showQuotes={true} kickerText="Quotes" />
+			<Card
+				{...basicCardProps}
+				showQuotedHeadline={true}
+				kickerText="Quotes"
+			/>
 		</CardWrapper>
 	);
 };
@@ -422,7 +426,7 @@ export const WithQuotesSpecialReportAlt = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticleSpecial.SpecialReportAlt,
 				}}
-				showQuotes={true}
+				showQuotedHeadline={true}
 				kickerText="Quotes"
 			/>
 		</CardWrapper>
@@ -1011,4 +1015,46 @@ export const WhenVideoWithPlayButton = () => {
 			</UL>
 		</Section>
 	);
+};
+export const WithLetterDesign = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesign.story = {
+	name: 'WithLetterDesign',
+};
+
+export const WithLetterDesignAndShowQuotedHeadline = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				showQuotedHeadline={true}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesignAndShowQuotedHeadline.story = {
+	name: 'WithLetterDesignAndShowQuotedHeadline',
 };

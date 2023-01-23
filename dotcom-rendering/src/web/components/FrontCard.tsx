@@ -31,10 +31,7 @@ export const FrontCard = (props: Props) => {
 		headlineText: trail.headline,
 		byline: trail.byline,
 		showByline: trail.showByline,
-		showQuotes:
-			!!trail.showQuotedHeadline ||
-			trail.format.design === ArticleDesign.Comment ||
-			trail.format.design === ArticleDesign.Letter,
+		showQuotedHeadline: trail.showQuotedHeadline,
 		webPublicationDate: trail.webPublicationDate,
 		kickerText: trail.kickerText,
 		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,

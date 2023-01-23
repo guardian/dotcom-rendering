@@ -161,7 +161,7 @@ const findInsertPosition = (elements: CAPIElement[]): number | null => {
 		.sort(sortPlaces);
 
 	// Return the position to insert the embed or null if none was found
-	return suitablePlacesInOrderOfPrefence[0]?.position || null;
+	return suitablePlacesInOrderOfPrefence[0]?.position ?? null;
 };
 
 /**

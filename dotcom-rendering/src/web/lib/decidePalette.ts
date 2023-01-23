@@ -1546,29 +1546,6 @@ const textRichLink = (format: ArticleFormat): string => {
 	}
 };
 
-const textCalloutAccent = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
-		case ArticlePillar.Culture:
-			return culture[350];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return BLACK;
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const textPagination = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1793,6 +1770,10 @@ const textDateLine = (format: ArticleFormat): string => {
 		return palette.specialReportAlt[100];
 
 	return neutral[46];
+};
+
+const textTableOfContents = (): string => {
+	return palette.neutral[7];
 };
 
 const textBlockquote = (format: ArticleFormat): string => {
@@ -2046,7 +2027,6 @@ export const decidePalette = (
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
-			calloutAccent: textCalloutAccent(format),
 			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
@@ -2108,6 +2088,7 @@ export const decidePalette = (
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
+			tableOfContents: textTableOfContents(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -2171,7 +2152,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: overrides?.border.lines || borderLines(format),
+			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),

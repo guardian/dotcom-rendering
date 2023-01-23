@@ -225,13 +225,12 @@ export const RichLink = ({
 		format.design === ArticleDesign.DeadBlog;
 
 	const showImage =
-		imageData &&
 		imageData.thumbnailUrl &&
 		imageCardStyles.includes(cardStyle) &&
 		!parentIsBlog;
-	const isPaidContent = tags
-		? tags.filter((t) => t.id === 'tone/advertisement-features').length > 0
-		: false;
+	const isPaidContent = !!tags.find(
+		({ id }) => id === 'tone/advertisement-features',
+	);
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;

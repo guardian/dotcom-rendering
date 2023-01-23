@@ -2,30 +2,31 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
-import { neutral } from '@guardian/source-foundations';
-import { textSans } from '@guardian/source-foundations';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
+import CaptionIcon from 'components/CaptionIcon';
+import type { CaptionIconVariant } from 'components/CaptionIcon';
+import type { Styleable } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { darkModeCss } from '../lib';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import CaptionIcon, { CaptionIconVariant } from './captionIcon';
 
 // ----- Component ----- //
 
-type Props = {
+type Props = Styleable<{
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 	children: Option<ReactNode>;
-	className?: string;
-	css?: SerializedStyles;
-	variant?: CaptionIconVariant;
-};
+	variant: CaptionIconVariant;
+}>;
 
-const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
+const styles = (
+	format: ArticleFormat,
+	supportsDarkMode: boolean,
+): SerializedStyles => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
@@ -35,7 +36,7 @@ const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
   	`}
 `;
 
-const mediaStyles = (supportsDarkMode: boolean) => css`
+const mediaStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	color: ${neutral[86]};
 
 	${darkModeCss(supportsDarkMode)`
@@ -65,7 +66,7 @@ const FigCaption: FC<Props> = ({
 	supportsDarkMode,
 	children,
 	className,
-	variant = CaptionIconVariant.Image,
+	variant,
 }) => {
 	switch (children.kind) {
 		case OptionKind.Some:

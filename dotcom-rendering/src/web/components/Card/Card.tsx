@@ -40,8 +40,7 @@ export type Props = {
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
-	/** Even with design !== Comment, a piece can be opinion */
-	showQuotes?: boolean;
+	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
@@ -216,7 +215,7 @@ export const Card = ({
 	headlineText,
 	headlineSize,
 	headlineSizeOnMobile,
-	showQuotes,
+	showQuotedHeadline,
 	byline,
 	showByline,
 	webPublicationDate,
@@ -255,6 +254,9 @@ export const Card = ({
 		imagePosition,
 		supportingContentAlignment,
 	);
+
+	const showQuotes =
+		!!showQuotedHeadline || format.design === ArticleDesign.Comment;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||

@@ -171,6 +171,7 @@ export const textarea = (hasError: boolean): SerializedStyles => css`
 // Other callout components
 export const info = css`
 	${textSans.xsmall()};
+	margin-bottom: ${remSpace[2]};
 `;
 
 export const termsConditions = css`

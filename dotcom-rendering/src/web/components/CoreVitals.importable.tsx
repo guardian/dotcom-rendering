@@ -7,7 +7,6 @@ import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
-import { teadsCookieless } from '../experiments/tests/teads-cookieless';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -16,7 +15,7 @@ export const CoreVitals = () => {
 
 	const isDev =
 		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === (process.env.HOSTNAME || 'localhost') ||
+		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
@@ -26,7 +25,6 @@ export const CoreVitals = () => {
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		integrateIma,
-		teadsCookieless,
 	];
 
 	const userInClientSideTestToForceMetrics =

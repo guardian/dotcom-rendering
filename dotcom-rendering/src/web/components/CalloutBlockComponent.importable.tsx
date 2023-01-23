@@ -6,10 +6,8 @@ import { Deadline } from './Callout/Deadline';
 
 export const CalloutBlockComponent = ({
 	callout,
-	format,
 }: {
 	callout: CalloutBlockElementV2;
-	format: ArticleFormat;
 }) => {
 	const {
 		title,
@@ -36,6 +34,8 @@ export const CalloutBlockComponent = ({
 		return <CalloutExpired />;
 	}
 
+	const id = formId.toString();
+
 	return (
 		<>
 			{!isNonCollapsible ? (
@@ -45,10 +45,9 @@ export const CalloutBlockComponent = ({
 						renderExtra={() => <Deadline until={activeUntil} />}
 					>
 						<CalloutBlock
-							formId={formId}
+							formId={id}
 							heading={title}
 							formFields={formFields}
-							format={format}
 							description={description}
 							submissionURL={calloutsUrl}
 							isExpired={isExpired(activeUntil)}
@@ -57,10 +56,9 @@ export const CalloutBlockComponent = ({
 				</aside>
 			) : (
 				<CalloutBlock
-					formId={formId}
+					formId={id}
 					heading={title}
 					formFields={formFields}
-					format={format}
 					description={description}
 					submissionURL={calloutsUrl}
 					isExpired={isExpired(activeUntil)}
