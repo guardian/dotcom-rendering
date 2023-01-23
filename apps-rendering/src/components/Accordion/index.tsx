@@ -15,7 +15,7 @@ import {
 	SvgChevronUpSingle,
 	SvgChevronDownSingle,
 } from "@guardian/source-react-components";
-import { darkModeCss } from "../lib";
+import { darkModeCss } from "@guardian/common-rendering/src/lib";
 
 // ----- Component ----- //
 

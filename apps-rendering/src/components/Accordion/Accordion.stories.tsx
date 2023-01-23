@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import Accordion from "./accordion";
+import Accordion from ".";
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import {
@@ -11,7 +11,7 @@ import {
 	body,
 } from "@guardian/source-foundations";
 import type { FC } from "react";
-import { darkModeCss } from "../lib";
+import { darkModeCss } from "@guardian/common-rendering/src/lib";
 
 // ----- Stories ----- //
 
