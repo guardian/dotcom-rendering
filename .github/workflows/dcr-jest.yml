@@ -1,0 +1,20 @@
+on:
+  - workflow_call
+
+jobs:
+  jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      - uses: bahmutov/npm-install@v1
+
+      - name: Run Jest
+        run: CI=true yarn test
+        working-directory: dotcom-rendering

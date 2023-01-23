@@ -1,0 +1,51 @@
+on:
+  workflow_call:
+    outputs:
+      container-image:
+        description: 'The generated container image path'
+        value: ${{ jobs.image.outputs.container-image }}
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
+    outputs:
+      container-image: ${{ steps.push.outputs.registry-path }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@3.5.1
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Build Container Image
+        id: build_image
+        uses: redhat-actions/buildah-build@v2.11
+        with:
+          image: dotcom-rendering
+          tags: ${{ github.sha }} ${{ env.GITHUB_REF_SLUG }}
+          context: ./
+          containerfiles: ./dotcom-rendering/Containerfile
+
+      - name: Push Image To GHCR
+        uses: redhat-actions/push-to-registry@v2.7
+        id: push
+        with:
+          image: ${{ steps.build_image.outputs.image }}
+          tags: ${{ steps.build_image.outputs.tags }}
+          registry: ghcr.io/guardian
+          username: ${{ github.actor }}
+          password: ${{ github.token }}

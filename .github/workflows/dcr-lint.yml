@@ -1,12 +1,8 @@
-name: DCR lint 🔎
 on:
-  push:
-    paths-ignore:
-      - 'apps-rendering/**'
+  - workflow_call
 
 jobs:
   lint:
-    name: DCR Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,9 +12,11 @@ jobs:
           cache: 'yarn'
       - run: make install
         working-directory: dotcom-rendering
+
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
+
       - name: Stylelint
         run: make stylelint
         working-directory: dotcom-rendering

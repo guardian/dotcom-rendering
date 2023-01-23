@@ -1,0 +1,8 @@
+FROM node:14.20.1-alpine
+
+WORKDIR /opt/app/dotcom-rendering
+COPY  ./node_modules ./node_modules
+COPY ./dotcom-rendering/node_modules ./node_modules
+COPY ./dotcom-rendering/dist ./dist
+
+ENTRYPOINT ["node", "dist/frontend.server.js"]

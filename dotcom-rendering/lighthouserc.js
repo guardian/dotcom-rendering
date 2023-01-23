@@ -2,8 +2,6 @@ module.exports = {
 	ci: {
 		collect: {
 			url: [process.env.LHCI_URL],
-			startServerCommand:
-				'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js',
 			numberOfRuns: '10',
 			puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
 			settings: {

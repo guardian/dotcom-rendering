@@ -1,0 +1,5 @@
+logs/
+
+.env
+.tsconfig.tsbuildinfo
+yarn-error.log

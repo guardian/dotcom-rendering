@@ -1,0 +1,40 @@
+name: DCR CI/CD
+on:
+  push:
+    branches: '**'
+    paths-ignore:
+      - 'apps-rendering/**'
+
+jobs:
+  image:
+    uses: ./.github/workflows/dcr-image.yml
+
+  lint:
+    uses: ./.github/workflows/dcr-lint.yml
+
+  jest:
+    uses: ./.github/workflows/dcr-jest.yml
+
+  cypress:
+    needs: [image]
+    uses: ./.github/workflows/dcr-cypress.yml
+    with:
+      container-image: ${{ needs.image.outputs.container-image }}
+
+  lighthouse:
+    needs: [image]
+    uses: ./.github/workflows/dcr-lighthouse.yml
+    with:
+      container-image: ${{ needs.image.outputs.container-image }}
+
+  percy:
+    needs: [image]
+    uses: ./.github/workflows/dcr-percy.yml
+    with:
+      container-image: ${{ needs.image.outputs.container-image }}
+
+  deploy:
+    needs: [image, lint, jest, cypress, lighthouse, percy]
+    uses: ./.github/workflows/dcr-deploy.yml
+    with:
+      container-image: ${{ needs.image.outputs.container-image }}

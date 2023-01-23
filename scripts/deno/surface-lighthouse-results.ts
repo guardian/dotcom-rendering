@@ -1,26 +1,6 @@
 import { octokit } from './github.ts';
 import { record, string } from 'npm:zod@3';
-import type { EventPayloadMap } from 'npm:@octokit/webhooks-types@6';
 import 'https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.10.0/types/assert.d.ts';
-
-/* -- Setup -- */
-
-/** Path for workflow event */
-const path = Deno.env.get('GITHUB_EVENT_PATH');
-if (!path) throw new Error('Missing GITHUB_EVENT_PATH');
-
-/**
- * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
- */
-const payload: EventPayloadMap['push' | 'pull_request'] = JSON.parse(
-	Deno.readTextFileSync(path),
-);
-
-const isPullRequestEvent = (
-	payload: EventPayloadMap[keyof EventPayloadMap],
-): payload is EventPayloadMap['pull_request'] =>
-	'pull_request' in payload &&
-	typeof payload.pull_request.number === 'number';
 
 /**
  * One of two values depending on the workflow trigger event
@@ -32,11 +12,7 @@ const isPullRequestEvent = (
  * https://github.com/guardian/dotcom-rendering/issues/4584, which allows
  * to track the state Lighthouse CI Reports on `main` over time.
  */
-const issue_number = isPullRequestEvent(payload)
-	? // If PullRequestEvent
-	  payload.pull_request.number
-	: // If PushEvent
-	  4584;
+const issue_number = parseInt(Deno.env.get('ISSUE') || '4584');
 
 console.log(`Using issue #${issue_number}`);
 

@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container: ${{ inputs.container-image }}
+
+    steps:
+      - run: ls /opt/app/dotcom-rendering

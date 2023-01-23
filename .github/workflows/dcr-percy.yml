@@ -1,29 +1,39 @@
-name: Percy
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
+
 jobs:
   percy:
-    name: Percy
     runs-on: ubuntu-latest
+
+    services:
+      DCR:
+        image: ${{ inputs.container-image }}
+        env:
+          NODE_ENV: production
+          DISABLE_LOGGING_AND_METRICS: true
+        ports:
+          - 9000:9000
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
           cache: 'yarn'
-      - name: Generate production build
-        run: make build
-        working-directory: dotcom-rendering
+
       - name: Install cypress
         uses: cypress-io/github-action@v4
         with:
           runTests: false
-          start: make start-ci
           working-directory: dotcom-rendering
-          wait-on: "http://localhost:9000"
+          wait-on: 'http://localhost:9000'
           wait-on-timeout: 30
+
       - name: Percy Test
         working-directory: dotcom-rendering
         run: yarn cypress:run:percy
