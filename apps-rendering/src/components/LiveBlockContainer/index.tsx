@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { FirstPublished } from 'components/FirstPublished';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	border,
@@ -13,11 +13,11 @@ import {
 	neutral,
 	space,
 } from '@guardian/source-foundations';
+import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { FC, ReactNode } from 'react';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 type Props = {
 	id: string;

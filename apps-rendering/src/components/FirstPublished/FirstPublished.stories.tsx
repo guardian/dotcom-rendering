@@ -3,7 +3,7 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-import { FirstPublished } from '.';
+import FirstPublished from '.';
 
 // ----- Stories ----- //
 
