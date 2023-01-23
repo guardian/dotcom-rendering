@@ -11,7 +11,6 @@ import {
 import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-near-newsletter-signup-blocks';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
-import { teadsCookieless } from './tests/teads-cookieless';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -24,7 +23,6 @@ export const tests: ABTest[] = [
 	consentlessAds,
 	integrateIma,
 	liveblogDesktopOutstream,
-	teadsCookieless,
 	billboardsInMerch,
 	noCarrotAdsNearNewsletterSignupBlocks,
 ];
