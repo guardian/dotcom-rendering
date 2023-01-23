@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import Accordion from '@guardian/common-rendering/src/components/accordion';
+import Accordion from 'components/Accordion';
 import {
 	background,
 	text,
