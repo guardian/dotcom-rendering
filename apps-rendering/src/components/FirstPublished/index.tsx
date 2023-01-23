@@ -1,48 +1,36 @@
 import { css } from '@emotion/react';
-import { ArticleFormat, joinUrl, timeAgo } from '@guardian/libs';
+import { ArticleFormat, timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-
-// TODO: update this code to use shared version when it is available
-const padString = (time: number) => (time < 10 ? `0${time}` : time);
-
-const fallbackDate = (date: Date) =>
-	`${padString(date.getHours())}.${padString(date.getMinutes())}`;
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import { timestampFormat } from 'datetime';
 
 const FirstPublished = ({
 	firstPublished,
-	firstPublishedDisplay,
 	blockId,
 	isPinnedPost,
 	supportsDarkMode,
 	isOriginalPinnedPost,
 	format,
-	host,
-	pageId,
+	edition,
 }: {
-	firstPublished: number;
-	firstPublishedDisplay?: string;
+	firstPublished: Date;
 	blockId: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
 	format: ArticleFormat;
-	host?: string;
-	pageId?: string;
-}) => {
-	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
-
-	const publishedDate = new Date(firstPublished);
-	return (
+	edition: Edition;
+}) => (
 		<div
 			css={css`
 				display: flex;
 			`}
 		>
 			<a
-				href={`${baseHref}?page=with:block-${blockId}#block-${blockId}`}
+				href={`?page=with:block-${blockId}#block-${blockId}`}
 				data-ignore="global-link-styling"
 				css={css`
 					${textSans.xxsmall({ fontWeight: 'bold' })}
@@ -59,7 +47,7 @@ const FirstPublished = ({
 			>
 				{!isPinnedPost && (
 					<time
-						dateTime={publishedDate.toISOString()}
+						dateTime={firstPublished.toISOString()}
 						data-relativeformat="med"
 						css={css`
 							color: ${neutral[46]};
@@ -71,7 +59,7 @@ const FirstPublished = ({
 						`}
 						`}
 					>
-						{timeAgo(firstPublished)}
+						{timeAgo(firstPublished.getTime())}
 					</time>
 				)}
 				<span
@@ -84,12 +72,12 @@ const FirstPublished = ({
 					`}
 					`}
 				>
-					{firstPublishedDisplay || fallbackDate(publishedDate)}
+					{timestampFormat(edition)(firstPublished)}
 				</span>
 			</a>
 			{isOriginalPinnedPost && (
 				<a
-					href={`${baseHref}#pinned-post`}
+					href="#pinned-post"
 					data-ignore="global-link-styling"
 					css={css`
 						${textSans.xxsmall({ fontWeight: 'bold' })}
@@ -124,6 +112,5 @@ const FirstPublished = ({
 			)}
 		</div>
 	);
-};
 
 export { FirstPublished };

@@ -17,22 +17,21 @@ import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { FC, ReactNode } from 'react';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 type Props = {
 	id: string;
 	children: ReactNode;
 	format: ArticleFormat;
 	blockTitle: Optional<string>;
-	blockFirstPublished: number;
-	blockFirstPublishedDisplay: string;
+	blockFirstPublished: Date;
 	blockId: string;
 	isLiveUpdate: boolean;
 	contributors: Contributor[];
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
-	host?: string;
-	pageId?: string;
+	edition: Edition;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -113,15 +112,13 @@ const LiveBlockContainer: FC<Props> = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
-	blockFirstPublishedDisplay,
 	blockId,
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
 	supportsDarkMode,
-	isOriginalPinnedPost = false,
-	host,
-	pageId,
+	isOriginalPinnedPost,
+	edition,
 }) => {
 	return (
 		<article
@@ -166,14 +163,12 @@ const LiveBlockContainer: FC<Props> = ({
 			<Header>
 				<FirstPublished
 					firstPublished={blockFirstPublished}
-					firstPublishedDisplay={blockFirstPublishedDisplay}
 					blockId={blockId}
 					isPinnedPost={isPinnedPost}
 					supportsDarkMode={supportsDarkMode}
 					isOriginalPinnedPost={isOriginalPinnedPost}
 					format={format}
-					host={host}
-					pageId={pageId}
+					edition={edition}
 				/>
 				<BlockTitle blockTitle={blockTitle} />
 				{contributors.map((contributor) => (
