@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import { FirstPublished } from 'components/FirstPublished';
 import {
 	background,
 	border,

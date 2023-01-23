@@ -3,7 +3,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
 
-import { FirstPublished } from './FirstPublished';
+import { FirstPublished } from '.';
 
 // ----- Stories ----- //
 

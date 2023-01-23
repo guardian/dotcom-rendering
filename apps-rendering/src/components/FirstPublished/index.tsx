@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { ArticleFormat, joinUrl, timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
-import { border } from '../editorialPalette';
-import { darkModeCss } from '../lib';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
 
 // TODO: update this code to use shared version when it is available
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
