@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { cmp } from '@guardian/consent-management-platform';
-import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, storage } from '@guardian/libs';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
@@ -25,21 +24,13 @@ import {
 } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import {EpicProps} from "../marketing/types/props/epic";
 
 export type EpicConfig = {
 	module: ModuleData;
 	fetchEmail?: () => Promise<string | null>;
 	hasConsentForArticleCount: boolean;
 	stage: string;
-};
-
-type EpicProps = {
-	fetchEmail?: () => Promise<string | null>;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
-	openCmp: () => void;
-	hasConsentForArticleCount: boolean;
-	stage: string;
-	// Also anything specified by support-dotcom-components
 };
 
 type EpicType = React.ElementType<EpicProps>;
@@ -168,7 +159,9 @@ export const ReaderRevenueEpic = ({
 
 		// window
 		// 	.guardianPolyfilledImport(module.url)
-		import(/* webpackChunkName: "ContributionsEpic" */ '../marketing/ContributionsEpic')
+		// import(/* webpackChunkName: "ContributionsEpic" */ '../marketing/ContributionsEpic')
+		// TODO - why does it make several requests for individual components when module.name is used here?
+		import(/* webpackChunkName: "EpicModule" */ `../marketing/${module.name}`)
 			.then((epicModule: { ContributionsEpic: EpicType }) => {
 				console.log('fetched', epicModule)
 				modulePerf.end();
