@@ -5,7 +5,6 @@
     "stylelint-config-styled-components"
   ],
   "rules": {
-	  "function-calc-no-invalid": null,
     "declaration-no-important": true,
     "no-duplicate-selectors": null,
     "no-descending-specificity": null,
