@@ -5,10 +5,10 @@ import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { CoreVitals } from './CoreVitals.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { Metrics } from './Metrics.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
@@ -50,7 +50,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals />
+				<Metrics enabled={!!front.config.switches.commercialMetrics} />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />

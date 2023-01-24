@@ -8,11 +8,10 @@ import type { FEArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
-import { CommercialMetrics } from './CommercialMetrics.importable';
-import { CoreVitals } from './CoreVitals.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
@@ -61,12 +60,9 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<CommercialMetrics
+				<Metrics
 					enabled={!!CAPIArticle.config.switches.commercialMetrics}
 				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
