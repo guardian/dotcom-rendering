@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	border,
@@ -13,6 +13,7 @@ import {
 	neutral,
 	space,
 } from '@guardian/source-foundations';
+import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
@@ -23,16 +24,14 @@ type Props = {
 	children: ReactNode;
 	format: ArticleFormat;
 	blockTitle: Optional<string>;
-	blockFirstPublished: number;
-	blockFirstPublishedDisplay: string;
+	blockFirstPublished: Date;
 	blockId: string;
 	isLiveUpdate: boolean;
 	contributors: Contributor[];
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
-	host?: string;
-	pageId?: string;
+	edition: Edition;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -113,15 +112,13 @@ const LiveBlockContainer: FC<Props> = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
-	blockFirstPublishedDisplay,
 	blockId,
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
 	supportsDarkMode,
-	isOriginalPinnedPost = false,
-	host,
-	pageId,
+	isOriginalPinnedPost,
+	edition,
 }) => {
 	return (
 		<article
@@ -166,14 +163,12 @@ const LiveBlockContainer: FC<Props> = ({
 			<Header>
 				<FirstPublished
 					firstPublished={blockFirstPublished}
-					firstPublishedDisplay={blockFirstPublishedDisplay}
 					blockId={blockId}
 					isPinnedPost={isPinnedPost}
 					supportsDarkMode={supportsDarkMode}
 					isOriginalPinnedPost={isOriginalPinnedPost}
 					format={format}
-					host={host}
-					pageId={pageId}
+					edition={edition}
 				/>
 				<BlockTitle blockTitle={blockTitle} />
 				{contributors.map((contributor) => (
