@@ -16,7 +16,7 @@ import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
 
 type Props = {
-	enabled: boolean;
+	commercialMetricsEnabled: boolean;
 };
 
 const sampling = 1 / 100;
@@ -36,7 +36,7 @@ const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
 	'dcrFrontsVariant',
 ];
 
-export const Metrics = ({ enabled }: Props) => {
+export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 
@@ -74,8 +74,8 @@ export const Metrics = ({ enabled }: Props) => {
 				team: 'dotcom',
 			});
 
-			if (isDev) void bypassCoreWebVitalsSampling();
-			if (bypassSampling) void bypassCoreWebVitalsSampling('commercial');
+			if (bypassSampling || isDev)
+				void bypassCoreWebVitalsSampling('commercial');
 		},
 		[abTestApi],
 	);
@@ -83,7 +83,7 @@ export const Metrics = ({ enabled }: Props) => {
 	useOnce(
 		function commercialMetrics() {
 			// Only send metrics if the switch is enabled
-			if (!enabled) return;
+			if (!commercialMetricsEnabled) return;
 
 			// abTestApi should be defined inside useOnce
 			const bypassSampling = abTestApi
@@ -107,7 +107,7 @@ export const Metrics = ({ enabled }: Props) => {
 					),
 				);
 		},
-		[abTestApi, adBlockerInUse, enabled],
+		[abTestApi, adBlockerInUse, commercialMetricsEnabled],
 	);
 
 	// We don’t render anything

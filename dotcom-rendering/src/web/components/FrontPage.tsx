@@ -50,7 +50,11 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<Metrics enabled={!!front.config.switches.commercialMetrics} />
+				<Metrics
+					commercialMetricsEnabled={
+						!!front.config.switches.commercialMetrics
+					}
+				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />

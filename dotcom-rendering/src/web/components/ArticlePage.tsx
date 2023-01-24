@@ -61,7 +61,9 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<Metrics
-					enabled={!!CAPIArticle.config.switches.commercialMetrics}
+					commercialMetricsEnabled={
+						!!CAPIArticle.config.switches.commercialMetrics
+					}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
