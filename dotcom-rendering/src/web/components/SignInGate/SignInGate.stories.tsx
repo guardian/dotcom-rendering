@@ -1,6 +1,7 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
+import { SignInGateCopy1 } from "./gateDesigns/SignInGateCopy1";
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 
 export default {
@@ -105,3 +106,20 @@ export const fakeSocialStandaloneVertical = () => {
 fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
+
+export const signInGateCopyTest = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateCopy1
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</Section>
+	);
+}
+
+signInGateCopyTest.story = {
+	name: 'sign_in_gate_copy_test'
+}
