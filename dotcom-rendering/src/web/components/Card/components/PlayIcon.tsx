@@ -9,24 +9,24 @@ const buttonSize = (size: PlayButtonSize) => {
 		case 'small':
 			return 28;
 		case 'medium':
-			return 40;
+			return 44;
 		case 'large':
 			return 48;
 		case 'xlarge':
-			return 56;
+			return 60;
 	}
 };
 
 const iconSize = (size: PlayButtonSize) => {
 	switch (size) {
 		case 'small':
-			return 22;
+			return 26;
 		case 'medium':
-			return 28;
+			return 36;
 		case 'large':
-			return 32;
-		case 'xlarge':
 			return 40;
+		case 'xlarge':
+			return 54;
 	}
 };
 
