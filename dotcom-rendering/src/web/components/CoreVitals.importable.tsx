@@ -9,6 +9,10 @@ import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 
+const sampling = 1 / 100;
+/** defining this here allows to share this with other metrics */
+export const willRecordCoreWebVitals = Math.random() > sampling;
+
 export const CoreVitals = () => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
@@ -17,7 +21,6 @@ export const CoreVitals = () => {
 		window.location.hostname === 'm.code.dev-theguardian.com' ||
 		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
-	const sampling = 1 / 100;
 
 	const ABTestAPI = useAB()?.api;
 
@@ -48,7 +51,7 @@ export const CoreVitals = () => {
 		browserId,
 		pageViewId,
 		isDev,
-		sampling,
+		sampling: 0, // we rely on willRecordCoreWebVitals instead
 		team: 'dotcom',
 	});
 
@@ -56,6 +59,7 @@ export const CoreVitals = () => {
 		void bypassCoreWebVitalsSampling('dotcom');
 	}
 	if (
+		willRecordCoreWebVitals ||
 		userInClientSideTestToForceMetrics ||
 		userInServerSideTestToForceMetrics
 	) {
