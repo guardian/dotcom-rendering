@@ -166,9 +166,11 @@ export const ReaderRevenueEpic = ({
 		const modulePerf = initPerf('contributions-epic-module');
 		modulePerf.start();
 
-		window
-			.guardianPolyfilledImport(module.url)
+		// window
+		// 	.guardianPolyfilledImport(module.url)
+		import(/* webpackChunkName: "ContributionsEpic" */ '../marketing/ContributionsEpic')
 			.then((epicModule: { ContributionsEpic: EpicType }) => {
+				console.log('fetched', epicModule)
 				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
