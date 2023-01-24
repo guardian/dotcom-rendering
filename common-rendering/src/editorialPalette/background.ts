@@ -35,6 +35,9 @@ const adSlot = (format: ArticleFormat): Colour => {
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
 
+const analysisContrastColour = '#f2e8e6';
+const analysisContrastHoverColour = '#e9d9d5';
+
 const mediaArticleBody = (_format: ArticleFormat) => {
 	return neutral[10];
 };
@@ -673,6 +676,8 @@ const background = {
 	adSlot,
 	adSlotDark,
 	articleContentDark,
+	analysisContrastColour,
+	analysisContrastHoverColour,
 	avatar,
 	bullet,
 	bulletDark,

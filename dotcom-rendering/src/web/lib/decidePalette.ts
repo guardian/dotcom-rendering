@@ -1697,6 +1697,9 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
+const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
+
 const backgroundPullQuote = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[800];
@@ -1707,7 +1710,7 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 		case ArticleDesign.Comment:
 			return '#fbe6d5';
 		case ArticleDesign.Analysis:
-			return '#F2E8E6';
+			return backgroundAnalysisContrastColour();
 
 		default:
 			return neutral[97];
@@ -2096,6 +2099,8 @@ export const decidePalette = (
 		},
 		background: {
 			article: backgroundArticle(format),
+			analysisContrast: backgroundAnalysisContrastColour(),
+			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),

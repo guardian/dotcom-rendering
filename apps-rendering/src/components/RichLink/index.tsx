@@ -57,9 +57,9 @@ const liveBlogRichLinkStyles = css`
 `;
 
 const analysisRichLinkStyles = css`
-	background-color: #f2e8e6;
+	background-color: ${background.analysisContrastColour};
 	:hover {
-		background-color: #e9d9d5;
+		background-color: ${background.analysisContrastHoverColour};
 	}
 `;
 

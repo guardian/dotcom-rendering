@@ -40,12 +40,16 @@ export interface RichLinkImageData {
 	height: string;
 }
 
-const neutralBackground = (format: ArticleFormat) => {
+const neutralBackground = (format: ArticleFormat, palette: Palette) => {
 	// One off colours to match the analysis background colour
 	const background =
-		format.design === ArticleDesign.Analysis ? '#F2E8E6' : neutral[97];
+		format.design === ArticleDesign.Analysis
+			? palette.background.analysisContrast
+			: neutral[97];
 	const backgroundHover =
-		format.design === ArticleDesign.Analysis ? '#e9d9d5' : neutral[93];
+		format.design === ArticleDesign.Analysis
+			? palette.background.analysisContrastHover
+			: neutral[93];
 	return css`
 		background-color: ${background};
 		a {
@@ -255,7 +259,7 @@ export const RichLink = ({
 			css={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div css={neutralBackground(format)}>
+			<div css={neutralBackground(format, palette)}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
 					{!!showImage && (
