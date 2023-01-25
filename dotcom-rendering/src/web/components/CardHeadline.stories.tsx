@@ -211,7 +211,6 @@ export const liveStory = () => (
 );
 liveStory.story = { name: 'With Live kicker' };
 
-// TODO: DELETE AFTER KICKER TEST
 export const noSlash = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline

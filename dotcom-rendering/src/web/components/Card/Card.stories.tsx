@@ -430,7 +430,6 @@ export const WithQuotesSpecialReportAlt = () => {
 	);
 };
 
-// TODO: delete following test
 export const WithNoSlash = () => {
 	return (
 		<CardWrapper>
