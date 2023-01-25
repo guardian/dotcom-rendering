@@ -3,7 +3,6 @@ import { abTestTest } from './tests/ab-test-test';
 import { billboardsInMerch } from './tests/billboards-in-merch';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
-import { liveblogDesktopOutstream } from './tests/liveblog-desktop-outstream';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
@@ -22,7 +21,6 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIma,
-	liveblogDesktopOutstream,
 	billboardsInMerch,
 	noCarrotAdsNearNewsletterSignupBlocks,
 ];
