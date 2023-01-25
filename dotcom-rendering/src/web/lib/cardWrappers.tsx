@@ -413,11 +413,11 @@ export const Card33Media33 = ({
  *
  * Options:
  *  - Medium headline (medium on mobile)
- *  - Small image on the top (left on mobile)
+ *  - Medium image on the top (left on mobile)
  *  - No trail text
  *  - Up to 2 supporting content items, always aligned vertical
  */
-export const Card33Media33Sublinks = ({
+export const Card33Media33Tall = ({
 	trail,
 	showAge,
 	containerPalette,
@@ -427,7 +427,7 @@ export const Card33Media33Sublinks = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			headlineSize="medium"
@@ -448,11 +448,11 @@ export const Card33Media33Sublinks = ({
  *
  * Options:
  *  - Medium headline (large on mobile)
- *  - Small image at the top, including on mobile
+ *  - Medium image at the top, including on mobile
  *  - Trail text
  *  - Up to 2 supporting content items, always aligned vertical
  */
-export const Card33Media33MobileTopSublinks = ({
+export const Card33Media33MobileTopTall = ({
 	trail,
 	showAge,
 	containerPalette,
@@ -463,7 +463,7 @@ export const Card33Media33MobileTopSublinks = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			trailText={trail.trailText}
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			headlineSize="medium"

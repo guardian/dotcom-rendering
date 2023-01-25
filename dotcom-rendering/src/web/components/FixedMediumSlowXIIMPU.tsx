@@ -2,14 +2,14 @@ import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
-	Card33Media33MobileTopSublinks,
-	Card33Media33Sublinks,
+	Card33Media33MobileTopTall,
+	Card33Media33Tall,
+	CardDefault,
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -41,7 +41,7 @@ const Card33_Card33_Card33 = ({
 		<UL direction="row" padBottom={padBottom}>
 			{card33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} key={trail.url}>
-					<Card33Media33MobileTopSublinks
+					<Card33Media33MobileTopTall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -55,7 +55,7 @@ const Card33_Card33_Card33 = ({
 					showDivider={true}
 					key={trail.url}
 				>
-					<Card33Media33Sublinks
+					<Card33Media33Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -115,12 +115,10 @@ export const FixedMediumSlowXIIMPU = ({
 								stretch={true}
 								key={trail.url}
 							>
-								<FrontCard
+								<CardDefault
 									trail={trail}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						))}
