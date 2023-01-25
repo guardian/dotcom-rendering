@@ -42,6 +42,8 @@ export const MostViewedFooter = ({
 	sectionName,
 	selectedColour,
 }: Props) => {
+	const removeKickerSlashes = window.guardian.config.tests.removeKickerSlashesVariant === "variant";
+
 	return (
 		<div
 			css={css`
@@ -55,6 +57,7 @@ export const MostViewedFooter = ({
 				data={tabs}
 				sectionName={sectionName}
 				selectedColour={selectedColour}
+				removeKickerSlashes={removeKickerSlashes}
 			/>
 			<div css={[stackBelow('tablet'), secondTierStyles]}>
 				{mostCommented && (

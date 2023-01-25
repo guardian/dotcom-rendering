@@ -15,6 +15,7 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
+	removeKickerSlashes?: boolean;
 }
 
 function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
@@ -42,6 +43,7 @@ export const MostViewedFooterData = ({
 	sectionName,
 	format,
 	ajaxUrl,
+	removeKickerSlashes,
 }: Props) => {
 	const palette = decidePalette(format);
 	// Example usage of AB Tests

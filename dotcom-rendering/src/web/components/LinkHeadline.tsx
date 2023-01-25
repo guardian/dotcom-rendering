@@ -3,6 +3,7 @@ import { headline } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
+import { KickerWithoutSlash } from './KickerWithoutSlash';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
 	byline?: string;
+	removeKickerSlashes?: boolean;
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -75,19 +77,31 @@ export const LinkHeadline = ({
 	size = 'medium',
 	link,
 	byline,
+	removeKickerSlashes,
 }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
 		<h4 css={fontStyles(size)}>
-			{!!kickerText && (
-				<Kicker
-					text={kickerText}
-					color={palette.text.linkKicker}
-					showPulsingDot={showPulsingDot}
-					showSlash={showSlash}
-				/>
-			)}
+			{!!kickerText &&
+				(removeKickerSlashes ? (
+					<>
+						<KickerWithoutSlash
+							text={kickerText}
+							color={palette.text.linkKicker}
+							showPulsingDot={showPulsingDot}
+						/>
+					</>
+				) : (
+					<>
+						<Kicker
+							text={kickerText}
+							color={palette.text.linkKicker}
+							showPulsingDot={showPulsingDot}
+							showSlash={showSlash}
+						/>
+					</>
+				))}
 			{showQuotes && <QuoteIcon colour={palette.text.linkKicker} />}
 			{link ? (
 				// We were passed a link object so headline should be a link, with link styling

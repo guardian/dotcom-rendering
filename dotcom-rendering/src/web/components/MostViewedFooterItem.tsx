@@ -72,6 +72,7 @@ type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	ageWarning?: string;
+	removeKickerSlashes?: boolean;
 };
 
 export const MostViewedFooterItem = ({
@@ -80,6 +81,7 @@ export const MostViewedFooterItem = ({
 	format,
 	headlineText,
 	ageWarning,
+	removeKickerSlashes,
 }: Props) => (
 	<li css={gridItem(position)} data-link-name={`${position} | text`}>
 		<a css={headlineLink} href={url} data-link-name="article">
@@ -96,6 +98,7 @@ export const MostViewedFooterItem = ({
 						showSlash={true}
 						showPulsingDot={true}
 						showQuotes={false}
+						removeKickerSlashes={removeKickerSlashes}
 					/>
 				) : (
 					<LinkHeadline

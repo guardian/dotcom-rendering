@@ -100,6 +100,7 @@ type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
 	selectedColour?: string;
+	removeKickerSlashes?: boolean;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -126,6 +127,7 @@ export const MostViewedFooterGrid = ({
 	data,
 	sectionName = '',
 	selectedColour = neutral[0],
+	removeKickerSlashes,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	/**
@@ -224,6 +226,7 @@ export const MostViewedFooterGrid = ({
 								format={trail.format}
 								headlineText={trail.headline}
 								ageWarning={trail.ageWarning}
+								removeKickerSlashes={removeKickerSlashes}
 							/>
 						))}
 					</ol>
