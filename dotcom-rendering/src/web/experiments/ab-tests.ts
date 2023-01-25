@@ -12,7 +12,6 @@ import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-nea
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { teadsCookieless } from './tests/teads-cookieless';
-import {signInGateCopyTestControl} from "./tests/sign-in-gate-copy-test-control";
 import {signInGateCopyTestVariants} from "./tests/sign-in-gate-copy-test-variants";
 
 // keep in sync with ab-tests in frontend
@@ -21,7 +20,6 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateCopyTestControl,
 	signInGateCopyTestVariants,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,

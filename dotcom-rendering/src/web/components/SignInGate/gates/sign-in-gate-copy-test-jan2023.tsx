@@ -4,22 +4,22 @@ import { Lazy } from '../../Lazy';
 import { canShowSignInGate } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
-const SignInGateCopy1 = React.lazy(() => {
+const SignInGateCopyTestJan2023 = React.lazy(() => {
 	const { start, end } = initPerf('SignInGateCopy1');
 	start();
 	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopy1'
+		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023'
 		).then((module) => {
 		end();
-		return { default: module.SignInGateCopy1 };
+		return { default: module.SignInGateCopyTestJan2023 };
 	});
 });
 
-export const signInGateCopyTestVariant: SignInGateComponent = {
+export const signInGateCopyTestJan2023: SignInGateComponent = {
 	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
 		<Lazy margin={300}>
 			<Suspense fallback={<></>}>
-				<SignInGateCopy1
+				<SignInGateCopyTestJan2023
 					ophanComponentId={ophanComponentId}
 					dismissGate={dismissGate}
 					guUrl={guUrl}

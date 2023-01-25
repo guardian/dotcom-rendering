@@ -7,7 +7,7 @@ export const signInGateCopyTestVariants: ABTest = {
 	author: 'Lindsey Dew',
 	description:
 		'TODO',
-	audience: 0.9,
+	audience: 0.0,
 	audienceOffset: 0.0,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
@@ -19,8 +19,16 @@ export const signInGateCopyTestVariants: ABTest = {
 	canRun: () => true,
 	variants: [
 		{
-			id: 'sign-in-gate-copy-variant',
+			id: 'sign-in-gate-copy-1',
 			test: (): void => {},
 		},
+		{
+			id: 'sign-in-gate-copy-2',
+			test: (): void => {},
+		},
+		{
+			id: 'sign-in-gate-copy-3',
+			test: (): void => {},
+		}
 	],
 };

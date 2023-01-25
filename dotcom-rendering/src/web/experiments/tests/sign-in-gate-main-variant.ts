@@ -19,8 +19,16 @@ export const signInGateMainVariant: ABTest = {
 	canRun: () => true,
 	variants: [
 		{
-			id: 'main-variant-4',
+			id: 'sign-in-gate-copy-1',
 			test: (): void => {},
 		},
+		{
+			id: 'sign-in-gate-copy-2',
+			test: (): void => {},
+		},
+		{
+			id: 'sign-in-gate-copy-3',
+			test: (): void => {},
+		}
 	],
 };

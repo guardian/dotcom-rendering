@@ -1,7 +1,7 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
-import { SignInGateCopy1 } from "./gateDesigns/SignInGateCopy1";
+import { SignInGateCopyTestJan2023 } from "./gateDesigns/SignInGateCopyTestJan2023";
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 
 export default {
@@ -110,7 +110,7 @@ fakeSocialStandaloneVertical.story = {
 export const signInGateCopyTest = () => {
 	return (
 		<Section fullWidth={true}>
-			<SignInGateCopy1
+			<SignInGateCopyTestJan2023
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
