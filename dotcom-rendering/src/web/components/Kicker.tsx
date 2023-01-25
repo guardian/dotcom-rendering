@@ -37,7 +37,7 @@ export const Kicker = ({
 
 	useEffect(() => {
 		setRemoveKickerSlash(
-			window?.guardian.config.tests.removeKickerSlashesVariant ===
+			window.guardian.config.tests.removeKickerSlashesVariant ===
 				'variant',
 		);
 	}, []);
