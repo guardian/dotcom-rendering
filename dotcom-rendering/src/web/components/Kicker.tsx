@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
 import { PulsingDot } from './PulsingDot.importable';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
@@ -30,6 +31,26 @@ export const Kicker = ({
 	showPulsingDot,
 	showSlash = true,
 }: Props) => {
+	const [removeKickerSlash, setRemoveKickerSlash] = useState(false);
+
+	useEffect(() => {
+		setRemoveKickerSlash(
+			window?.guardian.config.tests.removeKickerSlashesVariant ===
+				'variant',
+		);
+	}, []);
+
+	if (removeKickerSlash) {
+		return (
+			<>
+				<span css={kickerStyles(color)}>
+					{showPulsingDot && <PulsingDot colour={color} />}
+					{text}
+				</span>
+				{showSlash && <br />}
+			</>
+		);
+	}
 	return (
 		<span css={kickerStyles(color)}>
 			{showPulsingDot && <PulsingDot colour={color} />}
