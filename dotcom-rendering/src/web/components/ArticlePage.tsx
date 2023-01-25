@@ -4,7 +4,7 @@ import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { DCRArticleType } from '../../types/article';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -18,7 +18,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	article: DCRArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -32,7 +32,7 @@ type Props = {
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
+export const ArticlePage = ({ article, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -62,19 +62,23 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
-					enabled={!!CAPIArticle.config.switches.commercialMetrics}
+					enabled={
+						!!article.frontendData.config.switches.commercialMetrics
+					}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
+				<BrazeMessaging
+					idApiUrl={article.frontendData.config.idApiUrl}
+				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
 					shouldHideReaderRevenue={
-						CAPIArticle.shouldHideReaderRevenue
+						article.frontendData.shouldHideReaderRevenue
 					}
 				/>
 			</Island>
@@ -84,10 +88,10 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
-						CAPIArticle.config.switches,
+						article.frontendData.config.switches,
 					)}
-					pageIsSensitive={CAPIArticle.config.isSensitive}
-					isDev={!!CAPIArticle.config.isDev}
+					pageIsSensitive={article.frontendData.config.isSensitive}
+					isDev={!!article.frontendData.config.isDev}
 				/>
 			</Island>
 			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />

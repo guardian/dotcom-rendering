@@ -16,6 +16,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
+import type { DCRArticleType } from '../../types/article';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
@@ -29,7 +30,7 @@ import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticleType;
 }
 
 const decideTitle = (article: FEArticleType): string => {
@@ -43,11 +44,11 @@ const decideTitle = (article: FEArticleType): string => {
 };
 
 export const articleToHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
-	const title = decideTitle(article);
+	const NAV = extractNAV(article.frontendData.nav);
+	const title = decideTitle(article.frontendData);
 	const linkedData = article.linkedData;
 
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = decideFormat(article.frontendData.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
@@ -58,13 +59,13 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = article.blocks
+	const CAPIElements: CAPIElement[] = article.frontendData.blocks
 		.map((block) => block.elements)
 		.flat();
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = article.config.switches;
+	const { offerHttp3 = false } = article.frontendData.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -85,7 +86,8 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+		article.frontendData.config.abTests[dcrJavascriptBundle('Variant')] ===
+			'variant',
 	].every(Boolean);
 
 	/**
@@ -111,7 +113,7 @@ export const articleToHtml = ({ article }: Props): string => {
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
+				article.frontendData.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
@@ -160,34 +162,37 @@ export const articleToHtml = ({ article }: Props): string => {
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({
-				editionId: article.editionId,
-				stage: article.config.stage,
-				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-				revisionNumber: article.config.revisionNumber,
-				sentryPublicApiKey: article.config.sentryPublicApiKey,
-				sentryHost: article.config.sentryHost,
-				keywordIds: article.config.keywordIds,
-				dfpAccountId: article.config.dfpAccountId,
-				adUnit: article.config.adUnit,
-				ajaxUrl: article.config.ajaxUrl,
-				googletagUrl: article.config.googletagUrl,
-				switches: article.config.switches,
-				abTests: article.config.abTests,
-				brazeApiKey: article.config.brazeApiKey,
-				isPaidContent: article.pageType.isPaidContent,
-				contentType: article.contentType,
-				shouldHideReaderRevenue: article.shouldHideReaderRevenue,
+				editionId: article.frontendData.editionId,
+				stage: article.frontendData.config.stage,
+				frontendAssetsFullURL:
+					article.frontendData.config.frontendAssetsFullURL,
+				revisionNumber: article.frontendData.config.revisionNumber,
+				sentryPublicApiKey:
+					article.frontendData.config.sentryPublicApiKey,
+				sentryHost: article.frontendData.config.sentryHost,
+				keywordIds: article.frontendData.config.keywordIds,
+				dfpAccountId: article.frontendData.config.dfpAccountId,
+				adUnit: article.frontendData.config.adUnit,
+				ajaxUrl: article.frontendData.config.ajaxUrl,
+				googletagUrl: article.frontendData.config.googletagUrl,
+				switches: article.frontendData.config.switches,
+				abTests: article.frontendData.config.abTests,
+				brazeApiKey: article.frontendData.config.brazeApiKey,
+				isPaidContent: article.frontendData.pageType.isPaidContent,
+				contentType: article.frontendData.contentType,
+				shouldHideReaderRevenue:
+					article.frontendData.shouldHideReaderRevenue,
 				GAData: extractGA({
-					webTitle: article.webTitle,
-					format: article.format,
-					sectionName: article.sectionName,
-					contentType: article.contentType,
-					tags: article.tags,
-					pageId: article.pageId,
-					editionId: article.editionId,
-					beaconURL: article.beaconURL,
+					webTitle: article.frontendData.webTitle,
+					format: article.frontendData.format,
+					sectionName: article.frontendData.sectionName,
+					contentType: article.frontendData.contentType,
+					tags: article.frontendData.tags,
+					pageId: article.frontendData.pageId,
+					editionId: article.frontendData.editionId,
+					beaconURL: article.frontendData.beaconURL,
 				}),
-				unknownConfig: article.config,
+				unknownConfig: article.frontendData.config,
 			}),
 		),
 	);
@@ -195,29 +200,31 @@ export const articleToHtml = ({ article }: Props): string => {
 	const getAmpLink = (tags: TagType[]) => {
 		if (
 			!isAmpSupported({
-				format: article.format,
+				format: article.frontendData.format,
 				tags,
-				elements: article.blocks.flatMap((block) => block.elements),
-				switches: article.config.switches,
-				main: article.main,
+				elements: article.frontendData.blocks.flatMap(
+					(block) => block.elements,
+				),
+				switches: article.frontendData.config.switches,
+				main: article.frontendData.main,
 			})
 		) {
 			return undefined;
 		}
 
-		return `https://amp.theguardian.com/${article.pageId}`;
+		return `https://amp.theguardian.com/${article.frontendData.pageId}`;
 	};
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(article.tags);
+	const ampLink = getAmpLink(article.frontendData.tags);
 
-	const { openGraphData } = article;
-	const { twitterData } = article;
+	const { openGraphData } = article.frontendData;
+	const { twitterData } = article.frontendData;
 	const keywords =
-		typeof article.config.keywords === 'undefined' ||
-		article.config.keywords === 'Network Front'
+		typeof article.frontendData.config.keywords === 'undefined' ||
+		article.frontendData.config.keywords === 'Network Front'
 			? ''
-			: article.config.keywords;
+			: article.frontendData.config.keywords;
 
 	const initTwitter = `
 <script>
@@ -240,7 +247,7 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const { webURL, canonicalUrl } = article;
+	const { webURL, canonicalUrl } = article.frontendData;
 
 	const recipeMarkup =
 		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
@@ -252,7 +259,7 @@ window.twttr = (function(d, s, id) {
 		css: extractedCss,
 		html,
 		title,
-		description: article.trailText,
+		description: article.frontendData.trailText,
 		windowGuardian,
 		gaPath,
 		ampLink,

@@ -6,6 +6,7 @@ import { enhanceCommercialProperties } from '../../model/enhanceCommercialProper
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import type { DCRArticleType } from '../../types/article';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
@@ -18,26 +19,42 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: unknown): FEArticleType => {
-	const data = validateAsCAPIType(body);
+const parseArticleData = (body: unknown): DCRArticleType => {
+	const frontendData = validateAsCAPIType(body);
 
-	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
-		promotedNewsletter: data.promotedNewsletter,
-	});
+	const enhancedBlocks = enhanceBlocks(
+		frontendData.blocks,
+		frontendData.format,
+		{
+			promotedNewsletter: frontendData.promotedNewsletter,
+		},
+	);
 
-	const CAPIArticle: FEArticleType = {
-		...data,
+	const enhancedFrontendData: FEArticleType = {
+		...frontendData,
 		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
-		standfirst: enhanceStandfirst(data.standfirst),
-		commercialProperties: enhanceCommercialProperties(
-			data.commercialProperties,
+		pinnedPost: enhancePinnedPost(
+			frontendData.format,
+			frontendData.pinnedPost,
 		),
-		tableOfContents: data.showTableOfContents
-			? enhanceTableOfContents(data.format, enhancedBlocks)
+		standfirst: enhanceStandfirst(frontendData.standfirst),
+		commercialProperties: enhanceCommercialProperties(
+			frontendData.commercialProperties,
+		),
+		tableOfContents: frontendData.showTableOfContents
+			? enhanceTableOfContents(frontendData.format, enhancedBlocks)
 			: undefined,
 	};
-	return CAPIArticle;
+
+	return {
+		frontendData: enhancedFrontendData,
+		/* Frontend provided data */
+		contributionsServiceUrl: frontendData.contributionsServiceUrl,
+		pageFooter: frontendData.pageFooter,
+		linkedData: frontendData.linkedData,
+		/* 'Parsed' CAPI data */
+		webUrl: frontendData.capiContent.webUrl,
+	};
 };
 
 const getStack = (e: unknown): string =>
@@ -68,7 +85,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = parseArticleData(body);
 		const resp = articleToHtml({
 			article,
 		});
@@ -81,7 +98,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const CAPIArticle = parseArticleData(body);
 		const resp = {
 			data: {
 				CAPIArticle,
@@ -101,7 +118,7 @@ export const handlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = parseArticleData(body);
 		const resp = articleToHtml({
 			article,
 		});
