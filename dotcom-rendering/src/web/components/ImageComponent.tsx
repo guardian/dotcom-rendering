@@ -242,15 +242,11 @@ export const ImageComponent = ({
 	//
 	// The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
 	const imageWidth =
-		(element.media &&
-			element.media.allImages[0] &&
-			element.media.allImages[0].fields.width) ||
-		'620';
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
+		element.media?.allImages[0]?.fields.width ?? '620';
 	const imageHeight =
-		(element.media &&
-			element.media.allImages[0] &&
-			element.media.allImages[0].fields.height) ||
-		'372';
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
+		element.media?.allImages[0]?.fields.height ?? '372';
 
 	const palette = decidePalette(format);
 
@@ -313,7 +309,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -344,7 +340,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -378,7 +374,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -409,7 +405,7 @@ export const ImageComponent = ({
 								<CaptionToggle />{' '}
 								<div id="the-caption">
 									<Caption
-										captionText={element.data.caption || ''}
+										captionText={element.data.caption ?? ''}
 										format={format}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
@@ -432,7 +428,7 @@ export const ImageComponent = ({
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
 					<Caption
-						captionText={element.data.caption || ''}
+						captionText={element.data.caption ?? ''}
 						format={format}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
@@ -442,7 +438,7 @@ export const ImageComponent = ({
 				</Hide>
 			) : (
 				<Caption
-					captionText={element.data.caption || ''}
+					captionText={element.data.caption ?? ''}
 					format={format}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}

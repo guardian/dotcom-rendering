@@ -27,7 +27,7 @@ export const useSignInGateSelector = ():
 	}
 
 	const currentTest: CurrentSignInGateABTest = {
-		name: test.dataLinkNames || test.id,
+		name: test.dataLinkNames ?? test.id,
 		variant: test.variantToRun.id,
 		id: test.id,
 	};

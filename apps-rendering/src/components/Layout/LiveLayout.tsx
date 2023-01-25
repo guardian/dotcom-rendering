@@ -2,9 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
-import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
-import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
@@ -18,10 +15,13 @@ import {
 import { fromNullable } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
+import type { KeyEvent } from 'components/KeyEvents';
+import KeyEvents from 'components/KeyEvents';
 import LiveBlocks from 'components/LiveBlocks';
 import LiveblogHeader from 'components/LiveblogHeader';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
+import { Pagination } from 'components/Pagination';
 import RelatedContent from 'components/RelatedContent';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
@@ -103,12 +103,12 @@ const keyEventsWrapperStyles = css`
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 	blocks.reduce<KeyEvent[]>(
 		(events, block) =>
-			block.isKeyEvent
+			block.isKeyEvent && block.title.isSome()
 				? [
 						...events,
 						{
 							date: block.firstPublished,
-							text: block.title,
+							text: block.title.value,
 							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},
 				  ]

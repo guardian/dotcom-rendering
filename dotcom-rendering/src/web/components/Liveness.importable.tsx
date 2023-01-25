@@ -163,7 +163,7 @@ export const Liveness = ({
 	 */
 	const onSuccess = useCallback(
 		(data: LiveUpdateType) => {
-			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+			if (data.numNewBlocks && data.numNewBlocks > 0) {
 				// Insert the new blocks in the dom (but hidden)
 				if (onFirstPage) {
 					try {

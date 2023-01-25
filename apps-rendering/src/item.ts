@@ -75,6 +75,7 @@ interface Fields extends ArticleFormat {
 	edition: Edition;
 	promotedNewsletter: Option<Newsletter>;
 	shouldHideAdverts: boolean;
+	outline: Outline;
 }
 
 interface MatchReport extends Fields {
@@ -167,13 +168,11 @@ interface PrintShop extends Fields {
 interface Analysis extends Fields {
 	design: ArticleDesign.Analysis;
 	body: BodyElement[];
-	outline: Outline;
 }
 
 interface Explainer extends Fields {
 	design: ArticleDesign.Explainer;
 	body: BodyElement[];
-	outline: Outline;
 }
 
 interface Gallery extends Fields {
@@ -312,6 +311,7 @@ const getBranding = ({
 const parseItemFields = (
 	context: Context,
 	request: RenderingRequest,
+	body: BodyElement[],
 ): ItemFields => {
 	const { content, commentCount, relatedContent, campaigns } = request;
 	return {
@@ -358,6 +358,9 @@ const parseItemFields = (
 		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
 		promotedNewsletter: fromNullable(request.promotedNewsletter),
 		shouldHideAdverts: request.content.fields?.shouldHideAdverts ?? false,
+		outline: request.content.fields?.showTableOfContents
+			? fromBodyElements(body)
+			: [],
 	};
 };
 
@@ -392,6 +395,8 @@ const isAudio = hasTag('type/audio');
 const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
+
+const isNews = hasTag('tone/news');
 
 const isReview = hasSomeTag([
 	'tone/reviews',
@@ -465,13 +470,13 @@ const fromCapi =
 	(request: RenderingRequest, page: Option<string>): Item => {
 		const { content } = request;
 		const { tags, fields } = content;
-		const itemFields = parseItemFields(context, request);
+
+		const body = parseBody(context, request);
+		const itemFields = parseItemFields(context, request, body);
 
 		if (isLive(tags)) {
 			return fromCapiLiveBlog(context)(request, page, itemFields);
 		}
-
-		const body = parseBody(context, request);
 
 		// These checks aim for parity with the CAPI Scala client:
 		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
@@ -512,14 +517,12 @@ const fromCapi =
 		} else if (isAnalysis(tags)) {
 			return {
 				design: ArticleDesign.Analysis,
-				outline: fromBodyElements(body),
 				body,
 				...itemFields,
 			};
 		} else if (isExplainer(tags)) {
 			return {
 				design: ArticleDesign.Explainer,
-				outline: fromBodyElements(body),
 				body,
 				...itemFields,
 			};
@@ -647,4 +650,5 @@ export {
 	isLetter,
 	isObituary,
 	isReview,
+	isNews,
 };

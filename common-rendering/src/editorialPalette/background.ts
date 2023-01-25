@@ -35,6 +35,9 @@ const adSlot = (format: ArticleFormat): Colour => {
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
 
+const analysisContrastColour = '#f2e8e6';
+const analysisContrastHoverColour = '#e9d9d5';
+
 const mediaArticleBody = (_format: ArticleFormat) => {
 	return neutral[10];
 };
@@ -245,25 +248,31 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const bullet = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+const bullet = (
+	format: ArticleFormat,
+	returnPillarColour: boolean = true,
+): Colour => {
+	if (returnPillarColour) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[400];
+		}
 	}
+	return format.design === ArticleDesign.Analysis ? neutral[60] : neutral[86];
 };
 
 const bulletDark = (
@@ -506,27 +515,6 @@ const relatedCardImage = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const calloutSpeechBubble = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const supportBanner = (_format: ArticleFormat): Colour => {
 	return brandAlt[400];
 };
@@ -688,10 +676,11 @@ const background = {
 	adSlot,
 	adSlotDark,
 	articleContentDark,
+	analysisContrastColour,
+	analysisContrastHoverColour,
 	avatar,
 	bullet,
 	bulletDark,
-	calloutSpeechBubble,
 	footer,
 	footerDark,
 	headline,

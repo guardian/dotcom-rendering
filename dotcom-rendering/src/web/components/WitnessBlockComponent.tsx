@@ -149,7 +149,7 @@ export const WitnessImageBlockComponent = ({
 	const bestImgSource =
 		assets.find(
 			(asset) => asset.typeData.name === 'mediumoriginalaspectdouble',
-		) || assets[0];
+		) ?? assets[0];
 	return (
 		<WitnessWrapper
 			authorName={authorName}
@@ -161,7 +161,8 @@ export const WitnessImageBlockComponent = ({
 					css={css`
 						width: 100%;
 					`}
-					src={bestImgSource && bestImgSource.file}
+					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it could be undefined, until we have noUncheckedIndexedAccess
+					src={bestImgSource?.file}
 					alt={alt}
 					itemProp="contentURL"
 				/>

@@ -40,8 +40,7 @@ export type Props = {
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
 	headlineSizeOnMobile?: SmallHeadlineSize;
-	/** Even with design !== Comment, a piece can be opinion */
-	showQuotes?: boolean;
+	showQuotedHeadline?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
@@ -56,6 +55,7 @@ export type Props = {
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	/** Sometimes kickers and headlines are separated by a slash */
@@ -215,7 +215,7 @@ export const Card = ({
 	headlineText,
 	headlineSize,
 	headlineSizeOnMobile,
-	showQuotes,
+	showQuotedHeadline,
 	byline,
 	showByline,
 	webPublicationDate,
@@ -228,6 +228,7 @@ export const Card = ({
 	showClock,
 	mediaType,
 	mediaDuration,
+	showMainVideo,
 	kickerText,
 	showPulsingDot,
 	showSlash,
@@ -253,6 +254,9 @@ export const Card = ({
 		imagePosition,
 		supportingContentAlignment,
 	);
+
+	const showQuotes =
+		!!showQuotedHeadline || format.design === ArticleDesign.Comment;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -358,6 +362,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
+						showPlayIcon={showMainVideo ?? false}
 					>
 						{image.type === 'avatar' && (
 							<AvatarContainer
@@ -426,6 +431,7 @@ export const Card = ({
 								format={format}
 								mediaType={mediaType}
 								mediaDuration={mediaDuration}
+								hasKicker={!!kickerText}
 							/>
 						) : undefined}
 					</HeadlineWrapper>

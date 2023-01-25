@@ -114,6 +114,29 @@ const dateParser: Parser<Date> = parser((a) => {
 });
 
 /**
+ * Parses a string to a Document Fragment.
+ */
+const documentFragmentParser: Parser<DocumentFragment> = parser((a) => {
+	if (typeof a === 'string') {
+		const domParser = new DOMParser();
+		try {
+			const frag = new DocumentFragment();
+			const docNodes = domParser.parseFromString(a, 'text/html').body
+				.childNodes;
+			Array.from(docNodes).forEach((node) => {
+				return frag.appendChild(node);
+			});
+			return Result.ok(frag);
+		} catch (e) {
+			return Result.err(
+				`Can't transform ${String(a)} into a DocumentFragment`,
+			);
+		}
+	}
+	return Result.err(`Can't transform ${String(a)} into a DocumentFragment`);
+});
+
+/**
  * Makes the value handled by the given parser optional. **Note:** This
  * will effectively absorb any failure to parse the value, converting it to
  * a `None` instead.
@@ -692,6 +715,7 @@ export {
 	numberParser,
 	booleanParser,
 	dateParser,
+	documentFragmentParser,
 	maybe,
 	fieldParser,
 	indexParser,

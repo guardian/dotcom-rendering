@@ -1,6 +1,6 @@
 import type { EditionLinkType } from '../../model/extract-nav';
 
-export type EditionId = typeof editionList[number]['editionId'];
+export type EditionId = (typeof editionList)[number]['editionId'];
 
 export const editionList = [
 	{

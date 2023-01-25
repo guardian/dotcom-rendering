@@ -127,7 +127,7 @@ export const sendPageView = (): void => {
 		const NG_STORAGE_KEY = 'gu.analytics.referrerVars';
 		const referrerVarsData = window.sessionStorage.getItem(NG_STORAGE_KEY);
 		const referrerVars: { [key: string]: any } = JSON.parse(
-			referrerVarsData || '{}',
+			referrerVarsData ?? '{}',
 		);
 		if (referrerVars.value) {
 			const value = referrerVars.value as {

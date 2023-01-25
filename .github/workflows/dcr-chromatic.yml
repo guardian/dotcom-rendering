@@ -39,7 +39,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
-          untraced: '**/(package**.json|yarn.lock)'
+          untraced: '**/(package**.json|yarn.lock|preview.js)'
           workingDir: dotcom-rendering
 
       - name: Chromatic - DCR Dependency PR

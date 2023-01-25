@@ -17,7 +17,11 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
-import { capiEndpoint, getMockPromotedNewsletter } from 'capi';
+import {
+	capiEndpoint,
+	getMockCampaigns,
+	getMockPromotedNewsletter,
+} from 'capi';
 import compression from 'compression';
 import type {
 	Response as ExpressResponse,
@@ -318,6 +322,8 @@ function editionFromString(editionString: string): Edition {
 			return Edition.AU;
 		case 'international':
 			return Edition.INTERNATIONAL;
+		case 'europe':
+			return Edition.EUROPE;
 		case 'uk':
 		default:
 			return Edition.UK;
@@ -353,6 +359,7 @@ async function serveArticleGet(
 					footballContent: resultToNullable(footballContent),
 					edition,
 					promotedNewsletter: getMockPromotedNewsletter(content),
+					campaigns: getMockCampaigns(content),
 				};
 
 				const richLinkDetails = req.query.richlink === '';
@@ -412,11 +419,15 @@ app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
 app.get(
-	'/:edition(uk|us|au|international)?/rendered-items/*',
+	'/:edition(uk|us|au|europe|international)?/rendered-items/*',
 	express.raw(),
 	serveArticleGet,
 );
-app.get('/:edition(uk|us|au|international)?/*', express.raw(), serveArticleGet);
+app.get(
+	'/:edition(uk|us|au|europe|international)?/*',
+	express.raw(),
+	serveArticleGet,
+);
 
 app.post('/article', express.raw(), serveArticlePost);
 

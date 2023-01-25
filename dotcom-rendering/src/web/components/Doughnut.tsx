@@ -109,7 +109,7 @@ export const Doughnut = ({
 	return (
 		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 			{segments.map((segment) => (
-				<g>
+				<g key={segment.label + segment.color}>
 					<circle
 						cx={center}
 						cy={center}

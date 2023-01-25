@@ -1,6 +1,6 @@
-import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { decideFormat } from '../lib/decideFormat';
+import { renderToStringWithEmotion } from '../lib/emotion';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 
 /**
@@ -38,7 +38,7 @@ export const blocksToHtml = ({
 		adUnit,
 	});
 
-	const html = renderToString(
+	const { html, extractedCss } = renderToStringWithEmotion(
 		<LiveBlogRenderer
 			blocks={blocks}
 			format={format}
@@ -61,5 +61,5 @@ export const blocksToHtml = ({
 		/>,
 	);
 
-	return html;
+	return `${extractedCss}${html}`;
 };

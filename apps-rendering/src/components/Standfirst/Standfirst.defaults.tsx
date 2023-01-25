@@ -44,6 +44,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	a {
 		text-decoration: none;
+		color: ${text.standfirstLink(format)};
 		border-bottom: 0.0625rem solid ${border.standfirstBlogLink(format)};
 	}
 

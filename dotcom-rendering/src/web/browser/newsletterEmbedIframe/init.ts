@@ -13,11 +13,10 @@ const init = (): Promise<void> => {
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
 	allIframes.forEach((iframe) => {
-		if (iframe && iframe.contentWindow)
-			iframe.contentWindow.postMessage(
-				'resize',
-				'https://www.theguardian.com',
-			);
+		iframe.contentWindow?.postMessage(
+			'resize',
+			'https://www.theguardian.com',
+		);
 	});
 
 	window.addEventListener('message', (event) => {

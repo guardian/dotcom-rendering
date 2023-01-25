@@ -6,10 +6,9 @@ import {
 	Card100Media100,
 	Card100Media75,
 	Card25Media25,
-	Card33Media33,
+	Card25Media25Tall,
 	Card50Media50,
 	Card50Media50Tall,
-	Card66Media66,
 	Card75Media50Left,
 	Card75Media50Right,
 } from './cardWrappers';
@@ -42,6 +41,7 @@ export const Card50_Card50 = ({
 		<UL direction="row" padBottom={true}>
 			{cards50.map((trail, index) => (
 				<LI
+					key={trail.shortUrl}
 					percentage="50%"
 					padSides={true}
 					showDivider={index !== 0}
@@ -78,7 +78,7 @@ export const Card75_Card25 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{card75.map((trail) => (
-				<LI percentage="75%" padSides={true}>
+				<LI key={trail.shortUrl} percentage="75%" padSides={true}>
 					<Card75Media50Right
 						trail={trail}
 						showAge={showAge}
@@ -88,6 +88,7 @@ export const Card75_Card25 = ({
 			))}
 			{card25.map((trail) => (
 				<LI
+					key={trail.shortUrl}
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
@@ -124,7 +125,7 @@ export const Card25_Card75 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{card25.map((trail) => (
-				<LI percentage="25%" padSides={true}>
+				<LI key={trail.shortUrl} percentage="25%" padSides={true}>
 					<Card25Media25
 						trail={trail}
 						showAge={showAge}
@@ -134,6 +135,7 @@ export const Card25_Card75 = ({
 			))}
 			{card75.map((trail) => (
 				<LI
+					key={trail.shortUrl}
 					percentage="75%"
 					padSides={true}
 					showDivider={true}
@@ -143,52 +145,6 @@ export const Card25_Card75 = ({
 						trail={trail}
 						showAge={showAge}
 						containerPalette={containerPalette}
-					/>
-				</LI>
-			))}
-		</UL>
-	);
-};
-
-/* ._______________________.___________.
- * |#######################|###########|
- * |                       |           |
- * |_______________________|___________|
- */
-export const Card66_Card33 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => {
-	const card66 = cards.slice(0, 1);
-	const card33 = cards.slice(1, 2);
-
-	return (
-		<UL direction="row">
-			{card66.map((trail) => (
-				<LI percentage="66.666%" padSides={true}>
-					<Card66Media66
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-			{card33.map((trail) => (
-				<LI
-					percentage="33.333%"
-					padSides={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-				>
-					<Card33Media33
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
 					/>
 				</LI>
 			))}
@@ -216,7 +172,7 @@ export const Card50_Card25_Card25 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{card50.map((trail) => (
-				<LI percentage="50%" padSides={true}>
+				<LI key={trail.shortUrl} percentage="50%" padSides={true}>
 					<Card50Media50
 						trail={trail}
 						containerPalette={containerPalette}
@@ -227,12 +183,13 @@ export const Card50_Card25_Card25 = ({
 
 			{cards25.map((trail) => (
 				<LI
+					key={trail.shortUrl}
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
 					containerPalette={containerPalette}
 				>
-					<Card25Media25
+					<Card25Media25Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -263,7 +220,7 @@ export const Card100PictureTop = ({
 	return (
 		<UL padBottom={true}>
 			{card100.map((card) => (
-				<LI percentage="100%" padSides={true}>
+				<LI key={card.shortUrl} percentage="100%" padSides={true}>
 					<Card100Media100
 						trail={card}
 						showAge={showAge}
@@ -295,7 +252,7 @@ export const Card100PictureRight = ({
 	return (
 		<UL padBottom={true}>
 			{card100.map((card) => (
-				<LI percentage="100%" padSides={true}>
+				<LI key={card.shortUrl} percentage="100%" padSides={true}>
 					<Card100Media75
 						trail={card}
 						containerPalette={containerPalette}

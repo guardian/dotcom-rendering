@@ -10,8 +10,6 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -47,13 +45,15 @@ import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
 import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
-import CalloutForm from 'components/CalloutForm';
+import Callout from 'components/Callout';
 import Caption from 'components/caption';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import FigCaption from 'components/FigCaption';
 import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
@@ -320,6 +320,33 @@ const borderFromFormat = (format: ArticleFormat): string => {
 		: 'none';
 };
 
+const calloutDescriptionTextElement =
+	(format: ArticleFormat) =>
+	(node: Node, key: number): ReactNode => {
+		const children = Array.from(node.childNodes).map(
+			calloutDescriptionTextElement(format),
+		);
+		switch (node.nodeName) {
+			case 'P':
+				return h('p', { key }, children);
+			case 'STRONG':
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
+			case 'A': {
+				const url = withDefault('')(getHref(node));
+				const href = url.startsWith('profile/')
+					? `https://www.theguardian.com/${url}`
+					: url;
+				return styledH('a', { key, href }, children);
+			}
+			default:
+				return textElement(format)(node, key);
+		}
+	};
+
 const standfirstTextElement =
 	(format: ArticleFormat) =>
 	(node: Node, key: number): ReactNode => {
@@ -382,6 +409,18 @@ const standfirstText = (
 		? nodes.filter(editionsStandfirstFilter)
 		: nodes;
 	return filteredNodes.map(standfirstTextElement(format));
+};
+
+const calloutDescriptionText = (
+	format: ArticleFormat,
+	doc?: DocumentFragment,
+): ReactNode[] => {
+	if (!doc) return [];
+	const nodes = Array.from(doc.childNodes);
+	const filteredNodes = nodes.filter(
+		(node) => !['A'].includes(node.nodeName),
+	);
+	return filteredNodes.map(calloutDescriptionTextElement(format));
 };
 
 const Tweet = (props: {
@@ -649,7 +688,7 @@ const renderElement =
 				return h(Tweet, { content: element.content, format, key });
 
 			case ElementKind.Callout:
-				return h(CalloutForm, { format, ...element });
+				return h(Callout, { format, ...element });
 
 			case ElementKind.Embed:
 				return h(EmbedComponentWrapper, {
@@ -780,6 +819,7 @@ export {
 	renderText,
 	textElement as renderTextElement,
 	standfirstText as renderStandfirstText,
+	calloutDescriptionText as renderCalloutDescriptionText,
 	getHref,
 	transformHref,
 	plainTextElement,

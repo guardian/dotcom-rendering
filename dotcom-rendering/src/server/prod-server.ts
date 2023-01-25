@@ -133,7 +133,7 @@ export const prodServer = (): void => {
 		}, 10 * 1000);
 	}
 
-	const port = process.env.PORT || 9000;
+	const port = process.env.PORT ?? 9000;
 	app.listen(port);
 
 	console.log(`Started production server on port ${port}\nready`);
