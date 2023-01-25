@@ -207,7 +207,6 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						className={some(
 							getImageStyle(image, format, isPicture),
 						)}
-						supportsDarkMode={false}
 						lightbox={some({
 							className: 'js-launch-slideshow js-main-image',
 							caption: none,

@@ -9,7 +9,6 @@ import FirstPublished from '.';
 
 const Default: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
@@ -25,7 +24,6 @@ const Default: FC = () => (
 
 const PinnedPost: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={true}
@@ -41,7 +39,6 @@ const PinnedPost: FC = () => (
 
 const OriginalPinnedPost: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
 		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}

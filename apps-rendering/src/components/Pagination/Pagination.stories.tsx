@@ -27,7 +27,6 @@ export const notFirstPage = (): ReactElement => {
 					currentPage={2}
 					totalPages={6}
 					format={format}
-					supportsDarkMode
 					key={formatToString(format)}
 				/>
 			))}
@@ -46,7 +45,6 @@ export const firstPageStory = (): ReactElement => {
 					currentPage={1}
 					totalPages={4}
 					format={format}
-					supportsDarkMode
 					key={formatToString(format)}
 				/>
 			))}

@@ -34,7 +34,6 @@ const LiveBlock: FC<LiveBlockProps> = ({
 			blockId={block.id}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			supportsDarkMode={true}
 			contributors={block.contributors}
 			isLiveUpdate={false}
 			edition={edition}

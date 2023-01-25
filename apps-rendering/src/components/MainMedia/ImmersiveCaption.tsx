@@ -60,7 +60,6 @@ const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 				<CaptionIcon
 					variant={CaptionIconVariant.Image}
 					format={format}
-					supportsDarkMode={true}
 				/>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (

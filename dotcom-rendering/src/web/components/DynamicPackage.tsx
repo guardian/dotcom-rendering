@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -24,7 +27,7 @@ const Snap100 = ({
 	containerPalette,
 	showAge,
 }: {
-	snaps: TrailType[];
+	snaps: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -54,7 +57,7 @@ const Card100 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -84,7 +87,7 @@ const Card75_Card25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -137,7 +140,7 @@ const Card25_Card25_Card25_Card25 = ({
 	showImage = true,
 	padBottom,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	showImage?: boolean;
@@ -173,7 +176,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -236,7 +239,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -306,7 +309,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -370,7 +373,7 @@ const Card75_ColumnOfCards25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
@@ -458,10 +461,10 @@ export const DynamicPackage = ({
 		...groupedTrails.standard,
 	].slice(0, 9);
 
-	let firstSlice: TrailType[] = [];
-	let secondSlice: TrailType[] = [];
-	let thirdSlice: TrailType[] = [];
-	let fourthSlice: TrailType[] = [];
+	let firstSlice: DCRFrontCard[] = [];
+	let secondSlice: DCRFrontCard[] = [];
+	let thirdSlice: DCRFrontCard[] = [];
+	let fourthSlice: DCRFrontCard[] = [];
 	switch (cards.length) {
 		case 9: {
 			layout = 'nineStandards';
