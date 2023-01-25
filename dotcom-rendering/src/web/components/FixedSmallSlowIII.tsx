@@ -1,8 +1,5 @@
 import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
-import {
-	Card25Media25StarRating,
-	Card50Media50StarRating,
-} from '../lib/cardWrappers';
+import { Card25Media25, Card50Media50 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
@@ -24,7 +21,7 @@ export const FixedSmallSlowIII = ({
 		<UL direction="row">
 			{firstSlice50.map((trail) => (
 				<LI padSides={true} percentage={'50%'} key={trail.url}>
-					<Card50Media50StarRating
+					<Card50Media50
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -39,7 +36,7 @@ export const FixedSmallSlowIII = ({
 					percentage={'25%'}
 					key={trail.url}
 				>
-					<Card25Media25StarRating
+					<Card25Media25
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
