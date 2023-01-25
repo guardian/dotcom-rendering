@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import { useOnce } from '../lib/useOnce';
 import { PulsingDot } from './PulsingDot.importable';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
@@ -37,7 +38,8 @@ export const Kicker = ({
 
 	useEffect(() => {
 		setRemoveKickerSlash(
-			window.guardian.config.tests.removeKickerSlashesVariant ===
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- window not available on server
+			window && window.guardian.config.tests.removeKickerSlashesVariant ===
 				'variant',
 		);
 	}, []);
