@@ -67,7 +67,7 @@ const results: AssertionResult[] = JSON.parse(
 /* -- Definitions -- */
 
 /** The string to search for when looking for a comment */
-const IDENTIFIER_COMMENT = `<-- url: ${Deno.env.get('LHCI_URL')} -->`;
+const IDENTIFIER_COMMENT = `<!-- url: ${Deno.env.get('LHCI_URL')} -->`;
 const GIHUB_PARAMS = {
 	owner: 'guardian',
 	repo: 'dotcom-rendering',
