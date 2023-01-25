@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { darkModeCss } from 'styles';
 import {
 	body,
 	breakpoints,
@@ -11,6 +10,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import Accordion from '.';
 
 // ----- Stories ----- //
@@ -64,10 +64,7 @@ const accordionContent = (
 );
 
 const Default: FC = () => (
-	<Accordion
-		accordionTitle="Live feed"
-		context="keyEvents"
-	>
+	<Accordion accordionTitle="Live feed" context="keyEvents">
 		{accordionContent}
 	</Accordion>
 );

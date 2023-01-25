@@ -5,7 +5,6 @@ import {
 	hover,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
@@ -17,6 +16,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import type { FC, ReactElement, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 type Props = {
 	currentPage: number;

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { fill } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 enum CaptionIconVariant {
 	Image,

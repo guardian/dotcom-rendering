@@ -3,7 +3,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
@@ -13,6 +12,7 @@ import CaptionIcon from 'components/CaptionIcon';
 import type { CaptionIconVariant } from 'components/CaptionIcon';
 import type { Styleable } from 'lib';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -22,9 +22,7 @@ type Props = Styleable<{
 	variant: CaptionIconVariant;
 }>;
 
-const styles = (
-	format: ArticleFormat,
-): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
@@ -42,39 +40,23 @@ const mediaStyles = css`
   `}
 `;
 
-const getStyles = (
-	format: ArticleFormat,
-): SerializedStyles => {
+const getStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return css(
-				styles(format),
-				mediaStyles,
-			);
+			return css(styles(format), mediaStyles);
 		default:
 			return styles(format);
 	}
 };
 
-const FigCaption: FC<Props> = ({
-	format,
-	children,
-	className,
-	variant,
-}) => {
+const FigCaption: FC<Props> = ({ format, children, className, variant }) => {
 	switch (children.kind) {
 		case OptionKind.Some:
 			return (
-				<figcaption
-					className={className}
-					css={getStyles(format)}
-				>
-					<CaptionIcon
-						format={format}
-						variant={variant}
-					/>
+				<figcaption className={className} css={getStyles(format)}>
+					<CaptionIcon format={format} variant={variant} />
 					{children.value}
 				</figcaption>
 			);

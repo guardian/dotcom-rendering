@@ -4,7 +4,6 @@ import {
 	background,
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
@@ -18,6 +17,7 @@ import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 type Props = {
 	id: string;

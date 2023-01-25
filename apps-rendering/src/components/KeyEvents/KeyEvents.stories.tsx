@@ -57,10 +57,7 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const KeyEventComp = (
-	format: ArticleFormat,
-	title: string,
-): ReactElement => (
+const KeyEventComp = (format: ArticleFormat, title: string): ReactElement => (
 	<div
 		css={css`
 			flex-grow: 1;
@@ -90,19 +87,13 @@ const Default = (): ReactElement => (
 	>
 		{KeyEventComp(getFormat(ArticlePillar.News), 'News')}
 		{KeyEventComp(getFormat(ArticlePillar.Culture), 'Culture')}
-		{KeyEventComp(
-			getFormat(ArticlePillar.Lifestyle),
-			'Lifestyle',
-		)}
+		{KeyEventComp(getFormat(ArticlePillar.Lifestyle), 'Lifestyle')}
 		{KeyEventComp(getFormat(ArticlePillar.Opinion), 'Opinion')}
 		{KeyEventComp(getFormat(ArticlePillar.Sport), 'Sport')}
 		{KeyEventComp(getFormat(ArticleSpecial.Labs), 'Labs')}
-		{KeyEventComp(
-							getFormat(ArticleSpecial.SpecialReport),
-			'SpecialReport',
-		)}
+		{KeyEventComp(getFormat(ArticleSpecial.SpecialReport), 'SpecialReport')}
 	</div>
-)
+);
 
 // ----- Exports ----- //
 

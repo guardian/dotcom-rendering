@@ -6,7 +6,6 @@ import {
 	background,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from 'styles';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, timeAgo } from '@guardian/libs';
 import {
@@ -23,6 +22,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -82,9 +82,7 @@ const keyEventWrapperStyles = (
 	`}
 `;
 
-const listStyles = (
-	format: ArticleFormat,
-): SerializedStyles => css`
+const listStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.keyEvents(format)};
 
 	${from.desktop} {
@@ -149,9 +147,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: 0.5rem;
 `;
 
-const textStyles = (
-	format: ArticleFormat,
-): SerializedStyles => css`
+const textStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	color: ${text.keyEventsInline(format)};
 	display: block;
@@ -191,17 +187,10 @@ const timeStyles = css`
 	`}
 `;
 
-const ListItem: FC<ListItemProps> = ({
-	keyEvent,
-	format,
-}) => {
+const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
 	return (
 		<li css={listItemStyles}>
-			<Link
-				priority="secondary"
-				css={linkStyles}
-				href={keyEvent.url}
-			>
+			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
 				<div css={timeTextWrapperStyles}>
 					<time
 						dateTime={keyEvent.date.toISOString()}
@@ -219,35 +208,24 @@ const ListItem: FC<ListItemProps> = ({
 					>
 						{timeAgo(keyEvent.date.getTime())}
 					</time>
-					<span css={textStyles(format)}>
-						{keyEvent.text}
-					</span>
+					<span css={textStyles(format)}>{keyEvent.text}</span>
 				</div>
 			</Link>
 		</li>
 	);
 };
 
-const KeyEvents: FC<KeyEventsProps> = ({
-	keyEvents,
-	format,
-}) => {
+const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, format }) => {
 	return (
 		<nav
 			// https://github.com/guardian/dotcom-rendering/pull/3693
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- See PR above.
 			tabIndex={0}
 			id="keyevents"
-			css={keyEventWrapperStyles(
-				format,
-				keyEvents.length === 0,
-			)}
+			css={keyEventWrapperStyles(format, keyEvents.length === 0)}
 			aria-label="Key Events"
 		>
-			<Accordion
-				accordionTitle="Key events"
-				context="keyEvents"
-			>
+			<Accordion accordionTitle="Key events" context="keyEvents">
 				<ul css={listStyles(format)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem

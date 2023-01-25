@@ -43,9 +43,7 @@ const BodyImage: FC<Props> = ({
 						image.role,
 						leftColumnBreakpoint,
 					)}
-					imgStyles={getDefaultImgStyles(
-						image.role,
-					)}
+					imgStyles={getDefaultImgStyles(image.role)}
 					captionStyles={none}
 				/>
 			);

@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { darkModeCss } from 'styles';
 import {
 	background,
 	focusHalo,
@@ -17,6 +16,7 @@ import {
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -137,11 +137,7 @@ const Accordion: FC<AccordionProps> = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div
-				css={[backgroundColour(context), paddingBody]}
-			>
-				{children}
-			</div>
+			<div css={[backgroundColour(context), paddingBody]}>{children}</div>
 		</details>
 	);
 };

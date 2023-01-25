@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { darkModeCss } from 'styles';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
@@ -15,6 +14,7 @@ import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 const width = '100%';
 const phabletWidth = '620px';
