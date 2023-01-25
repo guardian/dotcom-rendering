@@ -42,7 +42,8 @@ export const MostViewedFooter = ({
 	sectionName,
 	selectedColour,
 }: Props) => {
-	const removeKickerSlashes = window.guardian.config.tests.removeKickerSlashesVariant === "variant";
+	const removeKickerSlashes =
+		window.guardian.config.tests.removeKickerSlashesVariant === 'variant';
 
 	return (
 		<div
