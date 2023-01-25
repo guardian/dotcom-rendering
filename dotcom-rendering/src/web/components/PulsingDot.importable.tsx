@@ -25,9 +25,12 @@ const livePulse = keyframes`
 `;
 
 const animate = css`
-	animation: ${livePulse} 1s infinite;
-	@media (prefers-reduced-motion: reduce) {
-		animation: none;
+	&[data-animate='true'] {
+		animation: ${livePulse} 1s infinite;
+
+		@media (prefers-reduced-motion: reduce) {
+			animation: none;
+		}
 	}
 `;
 
@@ -36,6 +39,7 @@ interface Props {
 }
 
 export const PulsingDot = ({ colour }: Props) => {
+	const [hydrated, setHydrated] = useState(false);
 	const [shouldFlash, setShouldFlash] = useState(false);
 
 	useEffect(() => {
@@ -49,7 +53,17 @@ export const PulsingDot = ({ colour }: Props) => {
 		// flashingPreference is null if no preference exists and explicitly
 		// false when the reader has said they don't want flashing
 		setShouldFlash(flashingPreference !== false);
+		// We use this to track if the flashing dot is hydrated
+		// Uses of pulsing dot that aren't in islands can instead be hydrated by
+		// the 'AnimatePulsingDot.importable' component
+		setHydrated(true);
 	}, []);
 
-	return <span css={[dotStyles(colour), shouldFlash && animate]} />;
+	return (
+		<span
+			css={[dotStyles(colour), animate]}
+			data-flashing-dot-hydrated={hydrated}
+			data-animate={shouldFlash}
+		/>
+	);
 };
