@@ -430,10 +430,23 @@ export const WithQuotesSpecialReportAlt = () => {
 	);
 };
 
+// TODO: delete following test
 export const WithNoSlash = () => {
 	return (
 		<CardWrapper>
 			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
+		</CardWrapper>
+	);
+};
+
+export const WithNoLinebreak = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				showLineBreak={false}
+				kickerText="No linebreak"
+			/>
 		</CardWrapper>
 	);
 };

@@ -8,6 +8,7 @@ type Props = {
 	color: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
+	showLineBreak?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
@@ -30,6 +31,7 @@ export const Kicker = ({
 	color,
 	showPulsingDot,
 	showSlash = true,
+	showLineBreak = true,
 }: Props) => {
 	const [removeKickerSlash, setRemoveKickerSlash] = useState(false);
 
@@ -47,7 +49,7 @@ export const Kicker = ({
 					{showPulsingDot && <PulsingDot colour={color} />}
 					{text}
 				</span>
-				{showSlash && <br />}
+				{showLineBreak && <br />}
 			</>
 		);
 	}
