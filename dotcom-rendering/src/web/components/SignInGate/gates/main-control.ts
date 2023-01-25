@@ -17,22 +17,20 @@ const canShow = ({
 	isPaidContent,
 	isPreview,
 }: CanShowGateProps): Promise<boolean> => {
-
 	return Promise.resolve(
 		!isSignedIn &&
-		!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
-		isNPageOrHigherPageView(3) &&
-		isValidContentType(contentType) &&
-		isValidSection(sectionName) &&
-		isValidTag(tags) &&
-		// hide the sign in gate on isPaidContent
-		!isPaidContent &&
-		// hide the sign in gate on internal tools preview
-		!isPreview &&
-		!isIOS9(),
+			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
+			isNPageOrHigherPageView(3) &&
+			isValidContentType(contentType) &&
+			isValidSection(sectionName) &&
+			isValidTag(tags) &&
+			// hide the sign in gate on isPaidContent
+			!isPaidContent &&
+			// hide the sign in gate on internal tools preview
+			!isPreview &&
+			!isIOS9(),
 	);
-}
-
+};
 
 export const signInGateComponent: SignInGateComponent = {
 	canShow,

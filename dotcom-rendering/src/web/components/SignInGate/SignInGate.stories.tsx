@@ -1,7 +1,7 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
-import { SignInGateCopyTestJan2023 } from "./gateDesigns/SignInGateCopyTestJan2023";
+import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 
 export default {
@@ -118,8 +118,8 @@ export const signInGateCopyTest = () => {
 			/>
 		</Section>
 	);
-}
+};
 
 signInGateCopyTest.story = {
-	name: 'sign_in_gate_copy_test'
-}
+	name: 'sign_in_gate_copy_test',
+};

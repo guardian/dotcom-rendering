@@ -9,7 +9,7 @@ const SignInGateCopyTestJan2023 = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023'
-		).then((module) => {
+	).then((module) => {
 		end();
 		return { default: module.SignInGateCopyTestJan2023 };
 	});

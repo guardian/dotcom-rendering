@@ -8,8 +8,8 @@ import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main
 import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
 import type { SignInGateTestMap } from './types';
-import {signInGateCopyTestJan2023} from "./gates/sign-in-gate-copy-test-jan2023";
-import {signInGateCopyTestVariants} from "../../experiments/tests/sign-in-gate-copy-test-variants";
+import { signInGateCopyTestJan2023 } from './gates/sign-in-gate-copy-test-jan2023';
+import { signInGateCopyTestVariants } from '../../experiments/tests/sign-in-gate-copy-test-variants';
 
 /* When adding a new test, you need to add the test name to the tests array below,
    and add a entry for each variant that maps it to a SignInGateComponent in
@@ -19,7 +19,7 @@ import {signInGateCopyTestVariants} from "../../experiments/tests/sign-in-gate-c
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateCopyTestVariants
+	signInGateCopyTestVariants,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
@@ -35,5 +35,5 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
-	SignInGateCopyVariant: 'sign_in_gate_copy_variant'
+	SignInGateCopyVariant: 'sign_in_gate_copy_variant',
 };

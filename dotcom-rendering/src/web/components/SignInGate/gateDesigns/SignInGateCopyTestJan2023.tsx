@@ -19,31 +19,38 @@ import {
 	signInLink,
 } from './shared';
 
-
 export const SignInGateCopyTestJan2023 = ({
-								   signInUrl,
-								   guUrl,
-								   dismissGate,
-								   abTest,
-								   ophanComponentId,
-								   isMandatory = false,
-							   }: SignInGateProps) => {
-	const getCopyTextFromVariant: (abVariant: string | undefined) => string = abVariant => {
-		switch(abVariant) {
-			case 'sign-in-gate-copy-1': { return 'This is the first copy text' }
-			case 'sign-in-gate-copy-2': { return 'This is the second copy text'}
-			case 'sign-in-gate-copy-3': { return 'This is the third copy text' }
-			default: { return 'This is the first copy text' }
+	signInUrl,
+	guUrl,
+	dismissGate,
+	abTest,
+	ophanComponentId,
+	isMandatory = false,
+}: SignInGateProps) => {
+	const getCopyTextFromVariant: (abVariant: string | undefined) => string = (
+		abVariant,
+	) => {
+		switch (abVariant) {
+			case 'sign-in-gate-copy-1': {
+				return 'This is the first copy text';
+			}
+			case 'sign-in-gate-copy-2': {
+				return 'This is the second copy text';
+			}
+			case 'sign-in-gate-copy-3': {
+				return 'This is the third copy text';
+			}
+			default: {
+				return 'This is the first copy text';
+			}
 		}
-	}
+	};
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>SignInGate Copy Test</h1>
-			<p css={bodyBold}>
-				{ getCopyTextFromVariant(abTest?.variant) }
-			</p>
+			<p css={bodyBold}>{getCopyTextFromVariant(abTest?.variant)}</p>
 			<p css={bodyText}>
 				We’re committed to keeping our quality reporting open. By
 				registering and providing us with insight into your preferences,

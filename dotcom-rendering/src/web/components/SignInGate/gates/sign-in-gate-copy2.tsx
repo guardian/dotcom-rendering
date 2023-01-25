@@ -9,7 +9,7 @@ const SignInGateCopy1 = React.lazy(() => {
 	start();
 	return import(
 		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopy2'
-		).then((module) => {
+	).then((module) => {
 		end();
 		return { default: module.SignInGateCopy2 };
 	});

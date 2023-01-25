@@ -12,7 +12,7 @@ import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-nea
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { teadsCookieless } from './tests/teads-cookieless';
-import {signInGateCopyTestVariants} from "./tests/sign-in-gate-copy-test-variants";
+import { signInGateCopyTestVariants } from './tests/sign-in-gate-copy-test-variants';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
