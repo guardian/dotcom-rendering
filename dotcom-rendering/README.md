@@ -178,7 +178,6 @@ We recommend using [VSCode](https://code.visualstudio.com/).
 VSCode should prompt you to install our recommended extensions when you open the project.
 
 You can also find these extensions by searching for `@recommended` in the extensions pane.
-
 ### Auto fix on save
 
 We recommend you update your workspace settings to automatically fix formatting errors on save, this avoids code style validation failures. These instructions assume you have installed the `esbenp.prettier-vscode` VSCode plugin:

@@ -16,8 +16,8 @@ const canShow = ({
 	tags,
 	isPaidContent,
 	isPreview,
-}: CanShowGateProps): Promise<boolean> => {
-	return Promise.resolve(
+}: CanShowGateProps): Promise<boolean> =>
+	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
 			isNPageOrHigherPageView(3) &&
@@ -30,7 +30,6 @@ const canShow = ({
 			!isPreview &&
 			!isIOS9(),
 	);
-};
 
 export const signInGateComponent: SignInGateComponent = {
 	canShow,
