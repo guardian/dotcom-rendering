@@ -507,7 +507,6 @@ export const Card33Media33 = ({
 		/>
 	);
 };
-
 /**
  * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
  * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
@@ -519,7 +518,7 @@ export const Card33Media33 = ({
  * Options:
  *  - Medium headline (medium on mobile)
  *  - Medium image on the top (left on mobile)
- *  - Trail text when there is no supporting content or avatar
+ *  - No trail text
  *  - Up to 2 supporting content items, always aligned vertical
  */
 export const Card33Media33Tall = ({
@@ -532,19 +531,49 @@ export const Card33Media33Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
-			imageSize="medium"
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
-			trailText={
-				trail.avatarUrl === undefined &&
-				(trail.supportingContent === undefined ||
-					trail.supportingContent.length === 0)
-					? trail.trailText
-					: undefined
-			}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (large on mobile)
+ *  - Medium image at the top, including on mobile
+ *  - Trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33MobileTopTall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			trailText={trail.trailText}
+			imageSize="medium"
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			headlineSize="medium"
+			headlineSizeOnMobile="large"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
 		/>
 	);
 };
