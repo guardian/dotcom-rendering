@@ -248,7 +248,10 @@ export type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
+	isBoosted?: boolean;
+	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
@@ -257,6 +260,7 @@ export type DCRFrontCard = {
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo: boolean;
 };
 
 export type FESnapType = {
@@ -333,11 +337,11 @@ export type DCRCollectionType = {
 };
 
 export type DCRGroupedTrails = {
-	snap: TrailType[];
-	huge: TrailType[];
-	veryBig: TrailType[];
-	big: TrailType[];
-	standard: TrailType[];
+	snap: DCRFrontCard[];
+	huge: DCRFrontCard[];
+	veryBig: DCRFrontCard[];
+	big: DCRFrontCard[];
+	standard: DCRFrontCard[];
 };
 
 type FEFrontConfigType = {

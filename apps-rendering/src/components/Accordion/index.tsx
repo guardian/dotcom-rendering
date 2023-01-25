@@ -1,29 +1,29 @@
 // ----- Imports ----- //
 
-import { css } from "@emotion/react";
-import type { SerializedStyles } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import {
-	neutral,
-	line,
 	background,
-	headline,
-	remSpace,
 	focusHalo,
 	from,
-} from "@guardian/source-foundations";
+	headline,
+	line,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import {
-	SvgChevronUpSingle,
 	SvgChevronDownSingle,
-} from "@guardian/source-react-components";
-import { darkModeCss } from "../lib";
+	SvgChevronUpSingle,
+} from '@guardian/source-react-components';
+import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 interface AccordionProps {
-	children: React.ReactNode;
-	supportsDarkMode: boolean;
+	children: ReactNode;
 	accordionTitle: string;
-	context: "keyEvents" | "liveFeed";
+	context: 'keyEvents' | 'liveFeed';
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -36,7 +36,7 @@ const detailsStyles: SerializedStyles = css`
 	}
 `;
 
-const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const titleRowStyles = css`
 	cursor: pointer;
 	position: relative;
 	display: block;
@@ -53,7 +53,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	svg {
 		height: 2rem;
 	}
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		path {
 			fill: ${neutral[60]};
 		}
@@ -68,10 +68,10 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 `;
 
-const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
+const titleStyle = css`
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		color: ${neutral[86]};
 	`}
 `;
@@ -87,16 +87,15 @@ const arrowPosition: SerializedStyles = css`
 `;
 
 const backgroundColour = (
-	context: "keyEvents" | "liveFeed",
-	supportsDarkMode: boolean
+	context: 'keyEvents' | 'liveFeed',
 ): SerializedStyles => {
-	if (context === "keyEvents") {
+	if (context === 'keyEvents') {
 		return css`
 			background-color: ${background.primary};
 			${from.desktop} {
 				background-color: transparent;
 			}
-			${darkModeCss(supportsDarkMode)`
+			${darkModeCss`
 				background-color: ${neutral[10]};
 			`}
 		`;
@@ -106,7 +105,7 @@ const backgroundColour = (
 		${from.desktop} {
 			background-color: transparent;
 		}
-		${darkModeCss(supportsDarkMode)`
+		${darkModeCss`
 			background-color: ${neutral[10]};
 		`}
 	`;
@@ -122,16 +121,15 @@ const paddingBody: SerializedStyles = css`
 	}
 `;
 
-const Accordion = ({
+const Accordion: FC<AccordionProps> = ({
 	children,
-	supportsDarkMode,
 	accordionTitle,
 	context,
-}: AccordionProps) => {
+}) => {
 	return (
 		<details open css={detailsStyles}>
-			<summary css={titleRowStyles(supportsDarkMode)}>
-				<h2 css={titleStyle(supportsDarkMode)}>{accordionTitle}</h2>
+			<summary css={titleRowStyles}>
+				<h2 css={titleStyle}>{accordionTitle}</h2>
 				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle />
 				</span>
@@ -139,11 +137,7 @@ const Accordion = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div
-				css={[backgroundColour(context, supportsDarkMode), paddingBody]}
-			>
-				{children}
-			</div>
+			<div css={[backgroundColour(context), paddingBody]}>{children}</div>
 		</details>
 	);
 };

@@ -151,7 +151,7 @@ export const YoutubeBlockComponent = ({
 				</div>
 				{!hideCaption && (
 					<Caption
-						captionText={mediaTitle || ''}
+						captionText={mediaTitle ?? ''}
 						format={format}
 						displayCredit={false}
 						shouldLimitWidth={shouldLimitWidth}
@@ -213,7 +213,7 @@ export const YoutubeBlockComponent = ({
 						: undefined
 				}
 				role={role}
-				alt={altText || mediaTitle || ''}
+				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}
 				consentState={consentState}
 				height={height}
@@ -230,7 +230,7 @@ export const YoutubeBlockComponent = ({
 			/>
 			{!hideCaption && (
 				<Caption
-					captionText={mediaTitle || ''}
+					captionText={mediaTitle ?? ''}
 					format={format}
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}

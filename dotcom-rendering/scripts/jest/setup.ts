@@ -76,7 +76,7 @@ const localStorageMock = (function () {
 	} = {};
 	return {
 		getItem(key: string) {
-			return store[key] || null;
+			return store[key] ?? null;
 		},
 		setItem(key: string, value: string) {
 			store[key] = value.toString();

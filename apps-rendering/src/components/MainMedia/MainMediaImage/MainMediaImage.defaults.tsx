@@ -69,7 +69,6 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 			sizes={sizes}
 			className={imgCss}
 			format={format}
-			supportsDarkMode
 			lightbox={some({
 				className: 'js-launch-slideshow',
 				caption: image.nativeCaption,

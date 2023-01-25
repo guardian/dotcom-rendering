@@ -1,10 +1,8 @@
-/* eslint-disable import/no-default-export -- exclude stories for this rule */
-
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-import CaptionIcon, { CaptionIconVariant } from './captionIcon';
+import CaptionIcon, { CaptionIconVariant } from '.';
 
 // ----- Stories ----- //
 
@@ -15,7 +13,6 @@ const Image: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
 	></CaptionIcon>
 );
@@ -27,7 +24,6 @@ const Video: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
 	></CaptionIcon>
 );
@@ -36,7 +32,7 @@ const Video: FC = () => (
 
 export default {
 	component: CaptionIcon,
-	title: 'Common/Components/CaptionIcon',
+	title: 'AR/CaptionIcon',
 };
 
 export { Image, Video };

@@ -35,7 +35,7 @@ const init = (): Promise<void> => {
 	 *
 	 */
 	const hashLink = window.location.hash;
-	if (hashLink && hashLink.includes('comment')) forceHydration();
+	if (hashLink.includes('comment')) forceHydration();
 
 	return Promise.resolve();
 };

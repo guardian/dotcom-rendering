@@ -50,6 +50,12 @@ const immersiveDisplayFormat: ArticleFormat = {
 	theme: ArticlePillar.News,
 };
 
+const numberedListDisplayFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.NumberedList,
+	theme: ArticlePillar.News,
+};
+
 const tableItems = [headline1, headline2, headline3];
 
 export const defaultStory = () => {
@@ -74,3 +80,16 @@ export const immersive = () => {
 };
 
 immersive.story = { name: 'immersive' };
+
+export const numberedList = () => {
+	return (
+		<Wrapper>
+			<TableOfContents
+				tableOfContents={tableItems}
+				format={numberedListDisplayFormat}
+			/>
+		</Wrapper>
+	);
+};
+
+numberedList.story = { name: 'numberedList' };

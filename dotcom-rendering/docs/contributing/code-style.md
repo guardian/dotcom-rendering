@@ -14,6 +14,7 @@
   - [Define CSS using template literals rather than objects](#define-css-using-template-literals-rather-than-objects)
   - [Never define styles with more than one level of nesting](#never-define-styles-with-more-than-one-level-of-nesting)
   - [Prefer `cx` for style composition](#prefer-cx-for-style-composition)
+  - [Do not use React.FC or equivalent](#do-not-use-reactfc-or-equivalent)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

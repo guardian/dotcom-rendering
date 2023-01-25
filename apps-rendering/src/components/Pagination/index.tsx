@@ -5,7 +5,6 @@ import {
 	hover,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
@@ -17,6 +16,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import type { FC, ReactElement, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 type Props = {
 	currentPage: number;
@@ -26,7 +26,6 @@ type Props = {
 	oldest?: string;
 	older?: string;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 };
 
 const NavWrapper: FC<{ children: ReactNode }> = ({ children }) => (
@@ -72,15 +71,14 @@ const Bold: FC<{ children: ReactNode }> = ({ children }) => (
 
 const Position: FC<{
 	children: ReactNode;
-	supportsDarkMode: boolean;
-}> = ({ children, supportsDarkMode }) => (
+}> = ({ children }) => (
 	<div
 		css={css`
 			display: flex;
 			flex-direction: row;
 			${textSans.small()}
 
-			${darkModeCss(supportsDarkMode)`
+			${darkModeCss`
 				color: ${neutral[60]};
 			`}
 		`}
@@ -118,7 +116,6 @@ const Pagination: FC<Props> = ({
 	newest,
 	newer,
 	format,
-	supportsDarkMode,
 }) => {
 	return (
 		<NavWrapper>
@@ -161,7 +158,7 @@ const Pagination: FC<Props> = ({
 				</LinkButton>
 			</FlexSection>
 			<FlexSection>
-				<Position supportsDarkMode={supportsDarkMode}>
+				<Position>
 					<Bold>{currentPage}</Bold>
 					<Of />
 					<Bold>{totalPages}</Bold>

@@ -189,7 +189,7 @@ export const InteractiveContentsBlockComponent = ({
 					  )
 					: undefined;
 
-				if (endElement && endElement.isIntersecting)
+				if (endElement?.isIntersecting)
 					return setStickyNavCurrentHeader(null);
 
 				// Check if the current element is in this update
@@ -216,7 +216,7 @@ export const InteractiveContentsBlockComponent = ({
 
 				// Check for entry of new element
 				const element = entries.find((entry) => entry.isIntersecting);
-				if (element && element.target.id)
+				if (element?.target.id)
 					return setStickyNavCurrentHeader(
 						enhancedSubheadings[
 							getSubheadingIndexById(element.target.id)

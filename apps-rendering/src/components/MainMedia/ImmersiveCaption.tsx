@@ -2,15 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import CaptionIcon, {
-	CaptionIconVariant,
-} from '@guardian/common-rendering/src/components/captionIcon';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import Caption from 'components/caption';
+import CaptionIcon, { CaptionIconVariant } from 'components/CaptionIcon';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
@@ -62,7 +60,6 @@ const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 				<CaptionIcon
 					variant={CaptionIconVariant.Image}
 					format={format}
-					supportsDarkMode={true}
 				/>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (

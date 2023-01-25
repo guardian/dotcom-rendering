@@ -4,10 +4,9 @@ export const stringifyFileBase64 = (file: File): Promise<string> =>
 		reader.addEventListener(
 			'load',
 			() => {
-				const fileAsBase64 =
-					reader &&
-					reader.result &&
-					reader.result.toString().split(';base64,')[1];
+				const fileAsBase64 = reader.result
+					?.toString()
+					.split(';base64,')[1];
 				// remove data:*/*;base64, from the start of the base64 string
 
 				if (fileAsBase64) {

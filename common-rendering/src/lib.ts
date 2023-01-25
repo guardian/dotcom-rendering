@@ -1,28 +1,10 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from "@emotion/react";
-import { css } from "@emotion/react";
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { ReactElement } from 'react';
 
 // ----- Functions ----- //
-
-const darkModeCss = (supportsDarkMode: boolean) => (
-  styles: TemplateStringsArray,
-  ...placeholders: string[]
-): SerializedStyles =>
-  supportsDarkMode
-    ? css`
-        @media (prefers-color-scheme: dark) {
-          ${styles
-            .map(
-              (style, i) => `${style}${placeholders[i] ? placeholders[i] : ""}`
-            )
-            .join("")}
-        }
-      `
-    : css``;
 
 /**
  * A convenience method for "piping" a value through a series of functions,
@@ -112,4 +94,4 @@ const maybeRender = <A>(
 
 // ----- Exports ----- //
 
-export { darkModeCss, maybeRender, pipe };
+export { maybeRender, pipe };

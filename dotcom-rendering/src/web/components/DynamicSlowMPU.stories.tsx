@@ -92,6 +92,27 @@ export const FirstBigBoosted = () => (
 );
 FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
 
+export const SecondBigBoosted = () => (
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+		<DynamicSlowMPU
+			groupedTrails={{
+				snap: [],
+				huge: [],
+				veryBig: [],
+				big: bigs
+					.slice(0, 2)
+					.map((card, index) =>
+						index === 1 ? { ...card, isBoosted: true } : card,
+					),
+				standard: standards,
+			}}
+			showAge={true}
+			index={1}
+		/>
+	</Section>
+);
+SecondBigBoosted.story = { name: 'with the second of two bigs boosted' };
+
 export const ThreeBigs = () => (
 	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU

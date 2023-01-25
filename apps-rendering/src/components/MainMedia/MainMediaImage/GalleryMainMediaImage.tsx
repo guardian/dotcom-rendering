@@ -55,7 +55,6 @@ const GalleryMainMediaImage: FC<Props> = ({ image, format }) => (
 			sizes={getSizes(image)}
 			className={some(imgStyles)}
 			format={format}
-			supportsDarkMode
 			lightbox={some({
 				className: 'js-launch-slideshow',
 				caption: image.nativeCaption,

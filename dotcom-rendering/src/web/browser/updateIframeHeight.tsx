@@ -31,7 +31,7 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 	});
 
 	iframes.forEach((iframe) => {
-		const src = (iframe.getAttribute('srcdoc') || '')
+		const src = (iframe.getAttribute('srcdoc') ?? '')
 			.replace(/<gu-script>/g, '<script>')
 
 			.replace(/<\/gu-script>/g, '<' + '/script>');

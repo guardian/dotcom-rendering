@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import type { FC, ReactElement } from 'react';
 import FigCaption from '.';
 
@@ -15,7 +15,6 @@ const Image: FC = (): ReactElement => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
 	>
 		{some(
@@ -31,7 +30,6 @@ const Video: FC = (): ReactElement => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
 	>
 		{some(

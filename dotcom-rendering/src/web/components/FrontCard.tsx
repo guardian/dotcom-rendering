@@ -1,10 +1,10 @@
 import { ArticleDesign } from '@guardian/libs';
-import type { TrailType } from '../../types/trails';
+import { DCRFrontCard } from '../../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 
 type Props = {
-	trail: TrailType;
+	trail: DCRFrontCard;
 } & Partial<CardProps>;
 
 /**
@@ -42,11 +42,11 @@ export const FrontCard = (props: Props) => {
 		mediaType: trail.mediaType,
 		mediaDuration: trail.mediaDuration,
 		starRating: trail.starRating,
-		branding: trail.branding,
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
+		showMainVideo: trail.showMainVideo,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });
