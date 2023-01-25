@@ -28,7 +28,8 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 						),
 					);
 
-		if (window && window.guardian) {
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- window.guardian may be missing?
+		if (window?.guardian) {
 			window.guardian.readerRevenue = {
 				changeGeolocation: loadAndRun('changeGeolocation'),
 				showMeTheEpic: loadAndRun('showMeTheEpic'),

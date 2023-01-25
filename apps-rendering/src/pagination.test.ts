@@ -1,12 +1,13 @@
 import { none, some } from '@guardian/types';
 import { LiveBlock } from 'liveBlock';
+import { Optional } from 'optional';
 import { getPagedBlocks, Pagination, PageReference } from 'pagination';
 
 const generateBlocks = (numberOfBlocks: number): LiveBlock[] => {
 	const block: LiveBlock = {
 		id: '1',
 		isKeyEvent: true,
-		title: 'Block One',
+		title: Optional.some('Block One'),
 		firstPublished: new Date('2021-11-02T12:00:00Z'),
 		lastModified: new Date('2021-11-02T13:13:13Z'),
 		body: [],

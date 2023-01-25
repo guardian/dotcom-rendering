@@ -204,7 +204,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				...brandExtension,
 				mobileOnly: true,
 			})),
-			...(column.children || []),
+			...(column.children ?? []),
 		],
 	};
 	return (

@@ -1,11 +1,10 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import { Card25Media25, CardDefault } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -16,8 +15,7 @@ export const FixedMediumFastXII = ({
 	showAge,
 }: Props) => {
 	const firstSlice25 = trails.slice(0, 4);
-	const secondSlice25 = trails.slice(4, 8);
-	const thirdSlice25 = trails.slice(8, 12);
+	const remaining = trails.slice(4, 12);
 
 	return (
 		<>
@@ -25,7 +23,7 @@ export const FixedMediumFastXII = ({
 				{firstSlice25.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
-							<FrontCard
+							<Card25Media25
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -34,29 +32,14 @@ export const FixedMediumFastXII = ({
 					);
 				})}
 			</UL>
-			<UL direction="row" padBottom={true}>
-				{secondSlice25.map((trail) => {
+			<UL direction="row" padBottom={true} wrapCards={true}>
+				{remaining.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
-							<FrontCard
+							<CardDefault
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-							/>
-						</LI>
-					);
-				})}
-			</UL>
-			<UL direction="row" padBottom={true}>
-				{thirdSlice25.map((trail) => {
-					return (
-						<LI key={trail.url} padSides={true} percentage="25%">
-							<FrontCard
-								trail={trail}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								imageUrl={undefined}
 							/>
 						</LI>
 					);

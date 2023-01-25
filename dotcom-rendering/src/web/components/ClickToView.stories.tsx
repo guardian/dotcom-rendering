@@ -715,7 +715,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					<UnsafeEmbedBlockComponent
 						key="1"
 						html={instagramEmbedEmbed.html}
-						alt={instagramEmbedEmbed.alt || ''}
+						alt={instagramEmbedEmbed.alt ?? ''}
 						index={1}
 						isTracking={true}
 						source={instagramEmbedEmbed.source}
@@ -741,7 +741,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					<UnsafeEmbedBlockComponent
 						key="2"
 						html={formStackEmbed.html}
-						alt={formStackEmbed.alt || ''}
+						alt={formStackEmbed.alt ?? ''}
 						index={2}
 						isTracking={true}
 						source={formStackEmbed.source}
@@ -768,7 +768,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					<UnsafeEmbedBlockComponent
 						key="3"
 						html={scribdEmbedEmbed.html}
-						alt={scribdEmbedEmbed.alt || ''}
+						alt={scribdEmbedEmbed.alt ?? ''}
 						index={3}
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
@@ -795,7 +795,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					<UnsafeEmbedBlockComponent
 						key="4"
 						html={tiktokEmbedEmbed.html}
-						alt={tiktokEmbedEmbed.alt || ''}
+						alt={tiktokEmbedEmbed.alt ?? ''}
 						index={4}
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
@@ -822,7 +822,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					<UnsafeEmbedBlockComponent
 						key="5"
 						html={twitterEmbedEmbed.html}
-						alt={twitterEmbedEmbed.alt || ''}
+						alt={twitterEmbedEmbed.alt ?? ''}
 						index={5}
 						isTracking={true}
 						source={scribdEmbedEmbed.source}

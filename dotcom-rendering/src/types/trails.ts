@@ -24,6 +24,7 @@ interface BaseTrailType {
 	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
+	showMainVideo?: boolean;
 }
 
 export interface TrailType extends BaseTrailType {
@@ -51,6 +52,7 @@ export interface CAPITrailType extends BaseTrailType {
 	pillar?: string;
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
+	masterImage?: string;
 }
 
 export interface TrailTabType {

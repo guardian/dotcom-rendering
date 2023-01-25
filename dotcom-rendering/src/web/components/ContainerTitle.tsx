@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import {
 	between,
 	headline,
+	neutral,
 	news,
 	space,
-	text,
 } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 
 const linkStyles = css`
 	text-decoration: none;
-	color: ${text.anchorSecondary};
+	color: ${neutral[7]};
 
 	:hover {
 		text-decoration: underline;
@@ -33,20 +33,20 @@ const linkStyles = css`
 
 const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
-	color: ${fontColour || text.primary};
+	color: ${fontColour ?? neutral[7]};
 	padding-bottom: ${space[1]}px;
 	padding-top: ${space[1]}px;
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
 	${headline.xxxsmall({ fontWeight: 'medium' })};
-	color: ${fontColour || text.supporting};
+	color: ${fontColour ?? neutral[46]};
 	p {
 		/* Handle paragraphs in the description */
 		margin-bottom: ${space[3]}px;
 	}
 	a {
-		color: ${text.primary};
+		color: ${neutral[7]};
 		text-decoration: none;
 	}
 `;
@@ -110,7 +110,7 @@ export const ContainerTitle = ({
 				<>
 					<span
 						css={dateTextStyles(
-							overrides?.text.containerDate || news[400],
+							overrides?.text.containerDate ?? neutral[0],
 						)}
 					>
 						{now.toLocaleDateString(locale, { weekday: 'long' })}
@@ -121,7 +121,7 @@ export const ContainerTitle = ({
 								display: block;
 							`,
 							dateTextStyles(
-								overrides?.text.containerDate || news[400],
+								overrides?.text.containerDate ?? news[400],
 							),
 							bottomMargin,
 						]}

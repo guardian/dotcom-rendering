@@ -6,10 +6,12 @@ export const findPillar: (
 	tags?: TagType[],
 ) => ArticleTheme | undefined = (name, tags?) => {
 	// Flag paid content for Labs pillar (for styling purposes)
-	const isPaidContent = (tag: TagType) =>
-		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
+	const hasPaidContent = !!tags?.some(
+		({ type, id }) =>
+			type === 'Tone' && id === 'tone/advertisement-features',
+	);
 
-	if (tags && tags.some(isPaidContent)) {
+	if (hasPaidContent) {
 		return ArticleSpecial.Labs;
 	}
 

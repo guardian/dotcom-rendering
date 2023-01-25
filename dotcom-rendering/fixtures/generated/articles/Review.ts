@@ -1106,7 +1106,7 @@ export const Review: FEArticleType = {
 				support:
 					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
 				supporter:
-					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
+					'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
 			},
 			ampHeader: {
 				contribute:
@@ -1291,10 +1291,10 @@ export const Review: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
 				},
 				{
 					text: 'Complaints & corrections',
@@ -1333,10 +1333,10 @@ export const Review: FEArticleType = {
 					extraClasses: '',
 				},
 				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
 				},
 			],
 			[
@@ -1461,6 +1461,7 @@ export const Review: FEArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	showTableOfContents: false,
 	starRating: 5,
 	byline: 'Lucy Mangan',
 	headline:
@@ -1725,7 +1726,7 @@ export const Review: FEArticleType = {
 					],
 				},
 			],
-			elementId: '6c7b56d7-bf1d-4c87-a9b1-e0b7d1bd3a00',
+			elementId: '15213089-b0a8-4691-aeca-526fcea995e9',
 		},
 	],
 	canonicalUrl:
@@ -1737,12 +1738,12 @@ export const Review: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: 'f609b2ca-078d-4d31-96f7-d2f5b9bb1a6a',
+					elementId: 'e4c5a882-6ada-4205-8de5-456a31e91cf9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: 'cfbe091e-534b-4a22-b739-880b16438430',
+					elementId: 'd0a9ea22-7744-48e8-a21a-8e1251dd0533',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
@@ -1757,12 +1758,12 @@ export const Review: FEArticleType = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					elementId: '4fdd5fdd-081e-4417-bbf5-2a99d10d2ddf',
+					elementId: 'e0551d6b-26f1-422c-8f37-83f4ecc3614a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: '41255593-188f-44b7-8fd9-dddcb2976e6b',
+					elementId: 'a60c1195-9dbf-41f3-8a06-69b5b37afd18',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2071,17 +2072,17 @@ export const Review: FEArticleType = {
 							],
 						},
 					],
-					elementId: '9624fd45-fd48-48ef-9895-0be6e010ea6a',
+					elementId: 'a2e30222-c9fb-4ade-9d4f-e0f1f91be13c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: '139877ab-b4ea-4b50-93f0-7008b3836033',
+					elementId: '8f64ee58-389a-41c0-9815-562b335a284f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: '766e75d4-353d-47d4-80bf-2f4132f19eff',
+					elementId: 'dc8a3a06-8d8c-4ac2-b9d2-56717ff62750',
 				},
 			],
 			attributes: {
@@ -2089,13 +2090,13 @@ export const Review: FEArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1579021298000,
-			blockCreatedOnDisplay: '17.01 GMT',
+			blockCreatedOn: 1579262405000,
+			blockCreatedOnDisplay: '12.00 GMT',
 			blockLastUpdated: 1579188013000,
 			blockLastUpdatedDisplay: '15.20 GMT',
-			blockFirstPublished: 1579021299000,
-			blockFirstPublishedDisplay: '17.01 GMT',
-			blockFirstPublishedDisplayNoTimezone: '17.01',
+			blockFirstPublished: 1579262405000,
+			blockFirstPublishedDisplay: '12.00 GMT',
+			blockFirstPublishedDisplayNoTimezone: '12.00',
 			contributors: [],
 			primaryDateLine: 'Fri 17 Jan 2020 12.00 GMT',
 			secondaryDateLine: 'Last modified on Tue 31 Mar 2020 11.40 BST',

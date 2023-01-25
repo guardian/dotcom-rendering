@@ -108,6 +108,10 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
+interface FEMediaAtoms {
+	duration?: number;
+}
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -127,8 +131,8 @@ export type FEFrontCard = {
 							isMaster?: string;
 							altText?: string;
 							height: string;
-							credit: string;
-							mediaId: string;
+							credit?: string;
+							mediaId?: string;
 							width: string;
 						};
 						mediaType: string;
@@ -152,7 +156,10 @@ export type FEFrontCard = {
 				body: string;
 				standfirst?: string;
 			};
-			elements: Record<string, unknown>;
+			elements: {
+				mainVideo?: unknown;
+				mediaAtoms: FEMediaAtoms[];
+			};
 			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
@@ -241,13 +248,19 @@ export type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
+	isBoosted?: boolean;
+	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
+	mediaType?: MediaType;
+	mediaDuration?: number;
+	showMainVideo: boolean;
 };
 
 export type FESnapType = {
@@ -324,11 +337,11 @@ export type DCRCollectionType = {
 };
 
 export type DCRGroupedTrails = {
-	snap: TrailType[];
-	huge: TrailType[];
-	veryBig: TrailType[];
-	big: TrailType[];
-	standard: TrailType[];
+	snap: DCRFrontCard[];
+	huge: DCRFrontCard[];
+	veryBig: DCRFrontCard[];
+	big: DCRFrontCard[];
+	standard: DCRFrontCard[];
 };
 
 type FEFrontConfigType = {

@@ -368,17 +368,14 @@ const CarouselCard = ({
 			format={format}
 			headlineText={headlineText}
 			webPublicationDate={webPublicationDate}
-			kickerText={kickerText || ''}
-			imageUrl={imageUrl || ''}
+			kickerText={kickerText}
+			imageUrl={imageUrl}
 			imageSize={imageUrl ? 'carousel' : undefined}
 			showClock={true}
 			showAge={true}
 			imagePositionOnMobile="top"
 			minWidthInPixels={220}
-			showQuotes={
-				format.design === ArticleDesign.Comment ||
-				format.design === ArticleDesign.Letter
-			}
+			showQuotedHeadline={format.design === ArticleDesign.Comment}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
 			branding={branding}

@@ -38,7 +38,6 @@ const NewsletterSignupMainMediaImage: FC<Props> = ({ image, format }) => (
 			sizes={sizes}
 			className={some(styles)}
 			format={format}
-			supportsDarkMode
 			lightbox={none}
 		/>
 	</figure>

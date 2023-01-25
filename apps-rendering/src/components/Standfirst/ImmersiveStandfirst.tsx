@@ -54,6 +54,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xsmall({ fontWeight: 'light' })}
 	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 	color: ${text.standfirst(format)};
+	grid-row: 7/8;
 
 	${from.mobileLandscape} {
 		padding-top: ${remSpace[4]};
@@ -61,10 +62,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	${from.tablet} {
 		padding-top: ${remSpace[1]};
-	}
-
-	${from.leftCol} {
-		grid-row: 5;
 	}
 
 	${darkModeCss`

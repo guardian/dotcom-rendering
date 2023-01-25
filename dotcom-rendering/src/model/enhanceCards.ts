@@ -86,8 +86,8 @@ const enhanceSupportingContent = (
 
 		return {
 			format: presentationFormat,
-			headline: subLink.header?.headline || '',
-			url: subLink.properties.href || subLink.header?.url,
+			headline: subLink.header?.headline ?? '',
+			url: subLink.properties.href ?? subLink.header?.url,
 			kickerText: supportingContentIsLive
 				? 'Live'
 				: subLink.header?.kicker?.item?.properties.kickerText,
@@ -118,6 +118,19 @@ const decideImage = (trail: FEFrontCard) => {
 	}
 
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
+};
+
+const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Video:
+			return 'Video';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		default:
+			return undefined;
+	}
 };
 
 const decideKicker = (trail: FEFrontCard) => {
@@ -155,7 +168,7 @@ export const enhanceCards = (
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
 		const format = decideFormat(
-			faciaCard.format || {
+			faciaCard.format ?? {
 				design: 'ArticleDesign',
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
@@ -222,5 +235,10 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
+			mediaType: decideMediaType(format),
+			mediaDuration:
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
+					?.duration,
+			showMainVideo: faciaCard.properties.showMainVideo,
 		};
 	});

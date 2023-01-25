@@ -19,7 +19,7 @@ const leftWidth = (size: LeftColSize) => {
 
 				${from.leftCol} {
 					/* above 1140 */
-					flex-basis: 230px;
+					flex-basis: 240px;
 					flex-grow: 0;
 					flex-shrink: 0;
 				}
@@ -36,14 +36,14 @@ const leftWidth = (size: LeftColSize) => {
 
 				${between.leftCol.and.wide} {
 					/* above 1140, below 1300 */
-					flex-basis: 151px;
+					flex-basis: 160px;
 					flex-grow: 0;
 					flex-shrink: 0;
 				}
 
 				${from.wide} {
 					/* above 1300 */
-					flex-basis: 230px;
+					flex-basis: 240px;
 					flex-grow: 0;
 					flex-shrink: 0;
 				}

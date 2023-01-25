@@ -32,7 +32,7 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 
 		return null;
 	}
-	if (data && data.match.matchId) {
+	if (data?.match.matchId) {
 		return (
 			<CricketScoreboard
 				match={data.match}

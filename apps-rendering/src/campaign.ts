@@ -5,12 +5,17 @@ import type { ParticipationFields } from '@guardian/apps-rendering-api-models/pa
 import { ArticleSpecial } from '@guardian/libs';
 import { Optional } from 'optional';
 
-// ----- Functions ----- //
+export type CalloutFields = {
+	callout: ParticipationFields;
+	name: string;
+	activeUntil?: number;
+};
 
+// ----- Functions ----- //
 const getCallout = (
 	id: string,
 	campaigns: Campaign[],
-): Optional<ParticipationFields> => {
+): Optional<CalloutFields> => {
 	if (campaigns.length === 0) {
 		return Optional.none();
 	}
@@ -18,7 +23,13 @@ const getCallout = (
 	const campaign = campaigns.find((campaign) => campaign.id === id);
 
 	if (campaign?.fields.kind === 'callout') {
-		return Optional.some(campaign.fields.callout);
+		return Optional.some({
+			callout: campaign.fields.callout,
+			name: campaign.name,
+			...(campaign.activeUntil && {
+				activeUntil: campaign.activeUntil.toNumber(),
+			}),
+		});
 	}
 
 	return Optional.none();

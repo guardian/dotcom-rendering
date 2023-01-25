@@ -1,5 +1,8 @@
 import type { Switches } from '../../types/config';
-import { calculateBlockSize, shouldDisplayAd } from '../lib/liveblogAdSlots';
+import {
+	calculateApproximateBlockHeight,
+	shouldDisplayAd,
+} from '../lib/liveblogAdSlots';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
 
@@ -65,9 +68,8 @@ export const LiveBlogBlocksAndAdverts = ({
 	return (
 		<>
 			{blocks.map((block, i) => {
-				numPixelsOfContentWithoutAdvert += calculateBlockSize(
-					block.elements,
-				);
+				numPixelsOfContentWithoutAdvert +=
+					calculateApproximateBlockHeight(block.elements);
 
 				const willDisplayAdAfterBlock =
 					!isAdFreeUser &&
