@@ -27,6 +27,7 @@ type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
+	showLineBreak?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -233,6 +234,7 @@ export const CardHeadline = ({
 	kickerText,
 	showPulsingDot,
 	showSlash,
+	showLineBreak,
 	size = 'medium',
 	sizeOnMobile,
 	byline,
@@ -273,6 +275,7 @@ export const CardHeadline = ({
 							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
+							showLineBreak={showLineBreak}
 						/>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}

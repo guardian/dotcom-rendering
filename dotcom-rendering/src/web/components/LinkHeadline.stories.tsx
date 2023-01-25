@@ -42,6 +42,7 @@ export const liveStory = () => (
 );
 liveStory.story = { name: 'With Live kicker' };
 
+// TODO remove after test
 export const noSlash = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
@@ -53,6 +54,22 @@ export const noSlash = () => (
 			}}
 			kickerText="Live"
 			showSlash={false}
+		/>
+	</Section>
+);
+noSlash.story = { name: 'With Live kicker but no slash' };
+
+export const noLinebreak = () => (
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<LinkHeadline
+			headlineText="This is how a headline with no kicker slash looks"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
+			kickerText="Live"
+			showLineBreak={false}
 		/>
 	</Section>
 );
@@ -313,6 +330,7 @@ export const Updated = () => (
 			}}
 			showPulsingDot={true}
 			showSlash={false}
+			showLineBreak={false}
 			kickerText="Updated 7m ago"
 			size="tiny"
 		/>

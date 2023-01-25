@@ -211,6 +211,7 @@ export const liveStory = () => (
 );
 liveStory.story = { name: 'With Live kicker' };
 
+// TODO: DELETE AFTER KICKER TEST
 export const noSlash = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
@@ -222,6 +223,22 @@ export const noSlash = () => (
 			}}
 			kickerText="Live"
 			showSlash={false}
+		/>
+	</Section>
+);
+noSlash.story = { name: 'With Live kicker but no slash' };
+
+export const noLinebreak = () => (
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<CardHeadline
+			headlineText="This is how a card headline with no kicker linebreak looks"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
+			kickerText="Live"
+			showLineBreak={false}
 		/>
 	</Section>
 );
