@@ -15,7 +15,6 @@ const Image: FC = (): ReactElement => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
 	>
 		{some(
@@ -31,7 +30,6 @@ const Video: FC = (): ReactElement => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
 	>
 		{some(

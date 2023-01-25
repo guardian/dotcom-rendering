@@ -454,7 +454,6 @@ const imageRenderer = (
 		caption: maybeCaption,
 		format,
 		key,
-		supportsDarkMode: true,
 		lightbox: some({
 			className: 'js-launch-slideshow',
 			caption: nativeCaption,
@@ -611,7 +610,6 @@ const mediaAtomRenderer = (
 	};
 	const figcaption = h(FigCaption, {
 		format: format,
-		supportsDarkMode: true,
 		children: some(h(Caption, { caption, format })),
 		variant: CaptionIconVariant.Video,
 	});

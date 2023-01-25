@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import {
 	body,
 	breakpoints,
@@ -10,15 +9,16 @@ import {
 	neutral,
 	space,
 } from '@guardian/source-foundations';
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import Accordion from '.';
 
 // ----- Stories ----- //
 
-const textStyle = (supportsDarkMode: boolean): SerializedStyles => css`
+const textStyle = css`
 	${body.medium({ lineHeight: 'loose' })};
 	margin-bottom: ${space[3]}px;
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		color: ${neutral[86]};
 	`}
 `;
@@ -41,20 +41,20 @@ const adviceColourAboveTablet: SerializedStyles = css`
 	}
 `;
 
-const accordionContent = (supportsDarkMode: boolean): ReactElement => (
+const accordionContent = (
 	<>
-		<p css={[textStyle(supportsDarkMode), adviceColourAboveTablet]}>
+		<p css={[textStyle, adviceColourAboveTablet]}>
 			There&apos;s a trick to viewing this - you need to switch the
 			storybook viewport to mobile, phablet or tablet in order to see the
 			accordion.
 		</p>
-		<p css={[textStyle(supportsDarkMode), hideAboveTablet]}>
+		<p css={[textStyle, hideAboveTablet]}>
 			Vaccine passports enjoy substantial support across Europe, a YouGov
 			survey suggests, as a fourth wave of infections prompts a growing
 			number of countries to impose tougher restrictions on people who
 			have not been fully vaccinated.
 		</p>
-		<p css={[textStyle(supportsDarkMode), hideAboveTablet]}>
+		<p css={[textStyle, hideAboveTablet]}>
 			The annual YouGov-Cambridge Globalism Project suggests majorities in
 			all 10 European countries surveyed back compulsory vaccine passes
 			for large events, while in most, more people favour than oppose
@@ -64,22 +64,8 @@ const accordionContent = (supportsDarkMode: boolean): ReactElement => (
 );
 
 const Default: FC = () => (
-	<Accordion
-		supportsDarkMode={false}
-		accordionTitle="Live feed"
-		context="keyEvents"
-	>
-		{accordionContent(false)}
-	</Accordion>
-);
-
-const Dark: FC = () => (
-	<Accordion
-		supportsDarkMode={true}
-		accordionTitle="Live feed"
-		context="keyEvents"
-	>
-		{accordionContent(true)}
+	<Accordion accordionTitle="Live feed" context="keyEvents">
+		{accordionContent}
 	</Accordion>
 );
 
@@ -99,4 +85,4 @@ export default {
 	},
 };
 
-export { Default, Dark };
+export { Default };

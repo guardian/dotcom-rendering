@@ -6,7 +6,6 @@ import {
 	background,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, timeAgo } from '@guardian/libs';
 import {
@@ -23,6 +22,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -37,13 +37,11 @@ interface KeyEvent {
 interface KeyEventsProps {
 	keyEvents: KeyEvent[];
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 }
 
 interface ListItemProps {
 	keyEvent: KeyEvent;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 }
 
 const getColour = (theme: ArticleTheme, paletteId: PaletteId): string => {
@@ -63,7 +61,6 @@ const getColour = (theme: ArticleTheme, paletteId: PaletteId): string => {
 
 const keyEventWrapperStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 	hideMobile: boolean,
 ): SerializedStyles => css`
 	width: 100%;
@@ -79,23 +76,20 @@ const keyEventWrapperStyles = (
 		padding-top: ${remSpace[2]};
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		border-top-color: ${neutral[20]};
 		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
-const listStyles = (
-	format: ArticleFormat,
-	supportsDarkMode: boolean,
-): SerializedStyles => css`
+const listStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.keyEvents(format)};
 
 	${from.desktop} {
 		background-color: ${background.keyEventsWide(format)};
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		background-color: ${background.keyEventsDark(format)};
 
 		${from.desktop} {
@@ -104,7 +98,7 @@ const listStyles = (
 	`}
 `;
 
-const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const linkStyles = css`
 	position: initial;
 	text-decoration: none;
 
@@ -123,7 +117,7 @@ const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		background-color: ${neutral[46]};
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		&:hover::before {
 			background-color: ${neutral[100]};
 		}
@@ -135,13 +129,13 @@ const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 `;
 
-const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const listItemStyles = css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[86]};
 	position: relative;
 	transform: translateY(-1px);
 	margin-left: ${remSpace[1]};
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		border-left: 1px solid ${neutral[60]};
 	`}
 	&:last-child {
@@ -153,10 +147,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: 0.5rem;
 `;
 
-const textStyles = (
-	format: ArticleFormat,
-	supportsDarkMode: boolean,
-): SerializedStyles => css`
+const textStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	color: ${text.keyEventsInline(format)};
 	display: block;
@@ -177,7 +168,7 @@ const textStyles = (
 		}
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		color: ${getColour(format.theme, 500)};
 		&:hover {
 			color: ${getColour(format.theme, 500)};
@@ -185,29 +176,21 @@ const textStyles = (
 	`}
 `;
 
-const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const timeStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-4px);
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		color: ${neutral[60]};
 	`}
 `;
 
-const ListItem: FC<ListItemProps> = ({
-	keyEvent,
-	format,
-	supportsDarkMode,
-}) => {
+const ListItem: FC<ListItemProps> = ({ keyEvent, format }) => {
 	return (
-		<li css={listItemStyles(supportsDarkMode)}>
-			<Link
-				priority="secondary"
-				css={linkStyles(supportsDarkMode)}
-				href={keyEvent.url}
-			>
+		<li css={listItemStyles}>
+			<Link priority="secondary" css={linkStyles} href={keyEvent.url}>
 				<div css={timeTextWrapperStyles}>
 					<time
 						dateTime={keyEvent.date.toISOString()}
@@ -221,49 +204,34 @@ const ListItem: FC<ListItemProps> = ({
 							day: 'numeric',
 							timeZoneName: 'long',
 						})}`}
-						css={timeStyles(supportsDarkMode)}
+						css={timeStyles}
 					>
 						{timeAgo(keyEvent.date.getTime())}
 					</time>
-					<span css={textStyles(format, supportsDarkMode)}>
-						{keyEvent.text}
-					</span>
+					<span css={textStyles(format)}>{keyEvent.text}</span>
 				</div>
 			</Link>
 		</li>
 	);
 };
 
-const KeyEvents: FC<KeyEventsProps> = ({
-	keyEvents,
-	format,
-	supportsDarkMode,
-}) => {
+const KeyEvents: FC<KeyEventsProps> = ({ keyEvents, format }) => {
 	return (
 		<nav
 			// https://github.com/guardian/dotcom-rendering/pull/3693
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- See PR above.
 			tabIndex={0}
 			id="keyevents"
-			css={keyEventWrapperStyles(
-				format,
-				supportsDarkMode,
-				keyEvents.length === 0,
-			)}
+			css={keyEventWrapperStyles(format, keyEvents.length === 0)}
 			aria-label="Key Events"
 		>
-			<Accordion
-				supportsDarkMode={supportsDarkMode}
-				accordionTitle="Key events"
-				context="keyEvents"
-			>
-				<ul css={listStyles(format, supportsDarkMode)}>
+			<Accordion accordionTitle="Key events" context="keyEvents">
+				<ul css={listStyles(format)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem
 							key={`${event.url}${index}`}
 							keyEvent={event}
 							format={format}
-							supportsDarkMode={supportsDarkMode}
 						/>
 					))}
 				</ul>

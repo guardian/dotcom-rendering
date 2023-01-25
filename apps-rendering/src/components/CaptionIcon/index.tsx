@@ -1,12 +1,11 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { fill } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 enum CaptionIconVariant {
 	Image,
@@ -15,11 +14,10 @@ enum CaptionIconVariant {
 
 interface IconProps {
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	variant: CaptionIconVariant;
 }
 
-const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const iconStyles = css`
 	display: inline-block;
 	width: 1.2rem;
 	margin-right: ${remSpace[1]};
@@ -39,12 +37,12 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		width: 100%;
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
         fill: ${fill.cameraCaptionIconDark()};
     `}
 `;
 
-const CaptionIcon: FC<IconProps> = ({ format, supportsDarkMode, variant }) => {
+const CaptionIcon: FC<IconProps> = ({ format, variant }) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -52,7 +50,7 @@ const CaptionIcon: FC<IconProps> = ({ format, supportsDarkMode, variant }) => {
 			return null;
 		default:
 			return (
-				<span css={iconStyles(supportsDarkMode)}>
+				<span css={iconStyles}>
 					{variant === CaptionIconVariant.Image ? (
 						<SvgCamera />
 					) : (
