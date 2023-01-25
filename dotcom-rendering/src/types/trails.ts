@@ -24,6 +24,7 @@ interface BaseTrailType {
 	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
+	showMainVideo?: boolean;
 }
 
 export interface TrailType extends BaseTrailType {

@@ -257,6 +257,7 @@ export type DCRFrontCard = {
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo: boolean;
 };
 
 export type FESnapType = {

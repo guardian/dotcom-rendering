@@ -55,6 +55,7 @@ export type Props = {
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	/** Sometimes kickers and headlines are separated by a slash */
@@ -227,6 +228,7 @@ export const Card = ({
 	showClock,
 	mediaType,
 	mediaDuration,
+	showMainVideo,
 	kickerText,
 	showPulsingDot,
 	showSlash,
@@ -360,6 +362,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
+						showPlayIcon={showMainVideo ?? false}
 					>
 						{image.type === 'avatar' && (
 							<AvatarContainer

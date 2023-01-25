@@ -239,5 +239,6 @@ export const enhanceCards = (
 			mediaDuration:
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
+			showMainVideo: faciaCard.properties.showMainVideo,
 		};
 	});
