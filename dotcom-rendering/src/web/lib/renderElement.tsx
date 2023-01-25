@@ -263,7 +263,7 @@ export const renderElement = ({
 				if (isMainMedia) {
 					return (
 						<MainMediaEmbedBlockComponent
-							title={element.alt || ''}
+							title={element.alt ?? ''}
 							srcDoc={element.html}
 						/>
 					);
@@ -274,7 +274,7 @@ export const renderElement = ({
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
-							alt={element.alt || ''}
+							alt={element.alt ?? ''}
 							index={index}
 							role={element.role}
 							isTracking={element.isThirdPartyTracking}
@@ -342,7 +342,7 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating || element.starRating}
+					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 				/>

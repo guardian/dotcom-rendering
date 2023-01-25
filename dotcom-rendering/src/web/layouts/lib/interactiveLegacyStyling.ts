@@ -19,7 +19,7 @@ export const interactiveLegacyFigureClasses = (
 	};
 
 	const roleClass = role ? ` element-${role}` : '';
-	const elementClass = elementClasses[elementType] || '';
+	const elementClass = elementClasses[elementType] ?? '';
 	const legacyRoleClass = role ? ` element--${role}` : '';
 	return `element ${elementClass}${legacyRoleClass}${roleClass}`;
 };

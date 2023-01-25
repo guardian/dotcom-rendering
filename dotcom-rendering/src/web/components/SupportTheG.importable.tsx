@@ -387,7 +387,7 @@ export const SupportTheG = ({
 		const callFetch = () => {
 			getLocaleCode()
 				.then((cc) => {
-					setCountryCode(cc || '');
+					setCountryCode(cc ?? '');
 				})
 				.catch((e) =>
 					console.error(`countryCodePromise - error: ${String(e)}`),

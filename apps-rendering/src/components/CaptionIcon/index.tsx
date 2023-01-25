@@ -1,10 +1,12 @@
-import { css, SerializedStyles } from '@emotion/react';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { fill } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
-import { FC } from 'react';
-import { fill } from '../editorialPalette';
-import { darkModeCss } from '../lib';
+import type { FC } from 'react';
 
 enum CaptionIconVariant {
 	Image,

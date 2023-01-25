@@ -55,7 +55,7 @@ export const MostViewedFooterData = ({
 			'ab-test-variant') ||
 		'ab-test-not-in-test';
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
-	const variantFromRunnable = runnableTest?.variantToRun.id || 'not-runnable';
+	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<

@@ -62,7 +62,7 @@ export const sendOphanComponentEvent = (
 			componentType,
 			products,
 			campaignCode,
-			id: testMeta.campaignId || testMeta.campaignCode,
+			id: testMeta.campaignId ?? testMeta.campaignCode,
 			labels,
 		},
 		abTest: {

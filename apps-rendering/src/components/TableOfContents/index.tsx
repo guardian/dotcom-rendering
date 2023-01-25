@@ -29,6 +29,9 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
 	display: block;
+	${darkModeCss`
+		color: ${text.paragraphDark(format)};
+	`}
 `;
 
 const listStyles: SerializedStyles = css`
@@ -40,16 +43,22 @@ const listStyles: SerializedStyles = css`
 `;
 
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.paragraph(format)};
 	box-sizing: border-box;
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: ${remSpace[4]};
 	padding-top: ${remSpace[1]};
 	transition: 0.3s all ease;
+	display: flex;
+	position: relative;
 
 	&:hover {
 		padding-top: 1px;
 		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
+		div {
+			height: 1.188rem;
+		}
 	}
 
 	${darkModeCss`
@@ -57,6 +66,7 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 		&:hover {
 			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
+		color: ${text.paragraphDark(format)};
 	`}
 `;
 
@@ -137,6 +147,22 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const indexStyle = css`
+	margin-right: 18px;
+`;
+
+const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
+	position: absolute;
+	left: 1.125rem;
+	border-left: 1px solid ${border.tableOfContents(format)};
+	height: 1.375rem;
+	top: 0;
+	transition: 0.3s all ease;
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+	`}
+`;
+
 const TocTextElement: React.FC<TextElementProps> = ({
 	node,
 	key,
@@ -207,11 +233,17 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((outlineItem) => (
+				{outline.map((outlineItem, index) => (
 					<ListItem
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
+						{format.display === ArticleDisplay.NumberedList && (
+							<>
+								<span css={indexStyle}>{index + 1}</span>
+								<div css={verticalLineStyle(format)}></div>
+							</>
+						)}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}

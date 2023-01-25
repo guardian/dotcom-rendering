@@ -1,10 +1,8 @@
-/* eslint-disable import/no-default-export -- exclude stories for this rule */
-
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-import CaptionIcon, { CaptionIconVariant } from './captionIcon';
+import CaptionIcon, { CaptionIconVariant } from '.';
 
 // ----- Stories ----- //
 
@@ -36,7 +34,7 @@ const Video: FC = () => (
 
 export default {
 	component: CaptionIcon,
-	title: 'Common/Components/CaptionIcon',
+	title: 'AR/CaptionIcon',
 };
 
 export { Image, Video };

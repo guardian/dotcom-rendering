@@ -14,15 +14,12 @@ const widthOverride = css`
 export const getDocumentCloudAssetUrl = (
 	embedUrl?: string,
 ): string | undefined => {
-	return (
-		embedUrl &&
-		embedUrl.replace(
-			new RegExp(
-				'https://embed.documentcloud.org/documents/([0-9]+)-([^/]+).*',
-				'g',
-			),
-			'https://assets.documentcloud.org/documents/$1/$2.pdf',
-		)
+	return embedUrl?.replace(
+		new RegExp(
+			'https://embed.documentcloud.org/documents/([0-9]+)-([^/]+).*',
+			'g',
+		),
+		'https://assets.documentcloud.org/documents/$1/$2.pdf',
 	);
 };
 
