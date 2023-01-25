@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
@@ -73,14 +73,13 @@ export const getDefaultStyles = (
 
 export const getDefaultImgStyles = (
 	role: ArticleElementRole,
-	supportsDarkMode: boolean,
 ): Option<SerializedStyles> => {
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
 			return some(css`
 				background-color: transparent;
 
-				${darkModeCss(supportsDarkMode)`
+				${darkModeCss`
                     background-color: transparent;
                 `}
 			`);
@@ -92,7 +91,6 @@ export const getDefaultImgStyles = (
 export type BodyImageProps = {
 	image: Image;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 	caption: Option<ReactNode>;
 };
@@ -106,7 +104,6 @@ const DefaultBodyImage: FC<
 > = ({
 	image,
 	format,
-	supportsDarkMode,
 	lightbox,
 	caption,
 	wrapperStyles,
@@ -119,7 +116,6 @@ const DefaultBodyImage: FC<
 			sizes={getDefaultSizes(image.role)}
 			className={imgStyles}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
 			lightbox={lightbox}
 		/>
 		<FigCaption
@@ -127,7 +123,6 @@ const DefaultBodyImage: FC<
 				captionStyles,
 			)}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
 			variant={CaptionIconVariant.Image}
 		>
 			{caption}

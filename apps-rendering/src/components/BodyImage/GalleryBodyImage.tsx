@@ -131,7 +131,6 @@ const imgSizes = (image: Image): Sizes => {
 const GalleryBodyImage: FC<BodyImageProps> = ({
 	image,
 	format,
-	supportsDarkMode,
 	lightbox,
 	caption,
 }) => (
@@ -140,9 +139,8 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 			<Img
 				image={image}
 				sizes={imgSizes(image)}
-				className={getDefaultImgStyles(image.role, supportsDarkMode)}
+				className={getDefaultImgStyles(image.role)}
 				format={format}
-				supportsDarkMode={supportsDarkMode}
 				lightbox={lightbox}
 			/>
 		</div>
@@ -150,7 +148,6 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		<FigCaption
 			css={captionStyles(format)}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
 			variant={CaptionIconVariant.Image}
 		>
 			{caption}

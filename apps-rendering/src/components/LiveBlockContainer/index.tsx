@@ -4,7 +4,7 @@ import {
 	background,
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
@@ -29,7 +29,6 @@ type Props = {
 	isLiveUpdate: boolean;
 	contributors: Contributor[];
 	isPinnedPost: boolean;
-	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
 	edition: Edition;
 };
@@ -116,7 +115,6 @@ const LiveBlockContainer: FC<Props> = ({
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
-	supportsDarkMode,
 	isOriginalPinnedPost,
 	edition,
 }) => {
@@ -152,7 +150,7 @@ const LiveBlockContainer: FC<Props> = ({
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
 
-				${darkModeCss(supportsDarkMode)`
+				${darkModeCss`
 					border-top: 1px solid ${border.liveBlockDark(format)};
 					background-color: ${neutral[10]};
 					color: ${neutral[100]};
@@ -165,7 +163,6 @@ const LiveBlockContainer: FC<Props> = ({
 					firstPublished={blockFirstPublished}
 					blockId={blockId}
 					isPinnedPost={isPinnedPost}
-					supportsDarkMode={supportsDarkMode}
 					isOriginalPinnedPost={isOriginalPinnedPost}
 					format={format}
 					edition={edition}

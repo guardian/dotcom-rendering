@@ -17,7 +17,6 @@ type Props = BodyImageProps & { leftColumnBreakpoint: Option<Breakpoint> };
 const BodyImage: FC<Props> = ({
 	image,
 	format,
-	supportsDarkMode,
 	lightbox,
 	caption,
 	leftColumnBreakpoint,
@@ -28,7 +27,6 @@ const BodyImage: FC<Props> = ({
 				<GalleryBodyImage
 					image={image}
 					format={format}
-					supportsDarkMode={supportsDarkMode}
 					lightbox={lightbox}
 					caption={caption}
 				/>
@@ -39,7 +37,6 @@ const BodyImage: FC<Props> = ({
 				<DefaultBodyImage
 					image={image}
 					format={format}
-					supportsDarkMode={supportsDarkMode}
 					lightbox={lightbox}
 					caption={caption}
 					wrapperStyles={getDefaultStyles(
@@ -48,7 +45,6 @@ const BodyImage: FC<Props> = ({
 					)}
 					imgStyles={getDefaultImgStyles(
 						image.role,
-						supportsDarkMode,
 					)}
 					captionStyles={none}
 				/>

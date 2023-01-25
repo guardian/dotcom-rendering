@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
@@ -18,52 +18,48 @@ import type { FC, ReactNode } from 'react';
 
 type Props = Styleable<{
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	children: Option<ReactNode>;
 	variant: CaptionIconVariant;
 }>;
 
 const styles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
 	color: ${text.figCaption(format)};
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
     	color: ${text.figCaptionDark(format)};
   	`}
 `;
 
-const mediaStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const mediaStyles = css`
 	color: ${neutral[86]};
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
     color: ${neutral[86]};
   `}
 `;
 
 const getStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 ): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return css(
-				styles(format, supportsDarkMode),
-				mediaStyles(supportsDarkMode),
+				styles(format),
+				mediaStyles,
 			);
 		default:
-			return styles(format, supportsDarkMode);
+			return styles(format);
 	}
 };
 
 const FigCaption: FC<Props> = ({
 	format,
-	supportsDarkMode,
 	children,
 	className,
 	variant,
@@ -73,11 +69,10 @@ const FigCaption: FC<Props> = ({
 			return (
 				<figcaption
 					className={className}
-					css={getStyles(format, supportsDarkMode)}
+					css={getStyles(format)}
 				>
 					<CaptionIcon
 						format={format}
-						supportsDarkMode={supportsDarkMode}
 						variant={variant}
 					/>
 					{children.value}

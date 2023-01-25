@@ -58,7 +58,6 @@ const events: KeyEvent[] = [
 ];
 
 const KeyEventComp = (
-	dark: boolean,
 	format: ArticleFormat,
 	title: string,
 ): ReactElement => (
@@ -68,7 +67,7 @@ const KeyEventComp = (
 		`}
 	>
 		<div>{title}</div>
-		<KeyEvents keyEvents={events} format={format} supportsDarkMode={dark} />
+		<KeyEvents keyEvents={events} format={format} />
 	</div>
 );
 
@@ -80,39 +79,30 @@ const getFormat = (theme: ArticleTheme): ArticleFormat => {
 	};
 };
 
-const keyEventWithTheme = (dark: boolean): (() => ReactElement) => {
-	const KeyEvent = (): ReactElement => (
-		<div
-			css={css`
-				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
-				flex-wrap: wrap;
-			`}
-		>
-			{KeyEventComp(dark, getFormat(ArticlePillar.News), 'News')}
-			{KeyEventComp(dark, getFormat(ArticlePillar.Culture), 'Culture')}
-			{KeyEventComp(
-				dark,
-				getFormat(ArticlePillar.Lifestyle),
-				'Lifestyle',
-			)}
-			{KeyEventComp(dark, getFormat(ArticlePillar.Opinion), 'Opinion')}
-			{KeyEventComp(dark, getFormat(ArticlePillar.Sport), 'Sport')}
-			{KeyEventComp(dark, getFormat(ArticleSpecial.Labs), 'Labs')}
-			{KeyEventComp(
-				dark,
-				getFormat(ArticleSpecial.SpecialReport),
-				'SpecialReport',
-			)}
-		</div>
-	);
-
-	return KeyEvent;
-};
-
-const Default = keyEventWithTheme(false);
-const Dark = keyEventWithTheme(true);
+const Default = (): ReactElement => (
+	<div
+		css={css`
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		`}
+	>
+		{KeyEventComp(getFormat(ArticlePillar.News), 'News')}
+		{KeyEventComp(getFormat(ArticlePillar.Culture), 'Culture')}
+		{KeyEventComp(
+			getFormat(ArticlePillar.Lifestyle),
+			'Lifestyle',
+		)}
+		{KeyEventComp(getFormat(ArticlePillar.Opinion), 'Opinion')}
+		{KeyEventComp(getFormat(ArticlePillar.Sport), 'Sport')}
+		{KeyEventComp(getFormat(ArticleSpecial.Labs), 'Labs')}
+		{KeyEventComp(
+							getFormat(ArticleSpecial.SpecialReport),
+			'SpecialReport',
+		)}
+	</div>
+)
 
 // ----- Exports ----- //
 
@@ -121,4 +111,4 @@ export default {
 	title: 'AR/KeyEvents',
 };
 
-export { Default, Dark };
+export { Default };

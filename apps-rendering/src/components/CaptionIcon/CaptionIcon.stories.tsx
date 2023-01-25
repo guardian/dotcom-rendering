@@ -13,7 +13,6 @@ const Image: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
 	></CaptionIcon>
 );
@@ -25,7 +24,6 @@ const Video: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
 	></CaptionIcon>
 );

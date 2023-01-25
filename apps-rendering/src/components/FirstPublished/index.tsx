@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
@@ -13,7 +13,6 @@ type Props = {
 	firstPublished: Date;
 	blockId: string;
 	isPinnedPost: boolean;
-	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
 	format: ArticleFormat;
 	edition: Edition;
@@ -23,7 +22,6 @@ const FirstPublished: FC<Props> = ({
 	firstPublished,
 	blockId,
 	isPinnedPost,
-	supportsDarkMode,
 	isOriginalPinnedPost,
 	format,
 	edition,
@@ -58,7 +56,7 @@ const FirstPublished: FC<Props> = ({
 						font-weight: bold;
 						margin-right: ${space[2]}px;
 
-						${darkModeCss(supportsDarkMode)`
+						${darkModeCss`
 							color: ${neutral[60]};
 						`}
 					`}
@@ -71,7 +69,7 @@ const FirstPublished: FC<Props> = ({
 					${textSans.xxsmall()};
 					color: ${neutral[46]};
 
-					${darkModeCss(supportsDarkMode)`
+					${darkModeCss`
 						color: ${neutral[60]};
 					`}
 				`}

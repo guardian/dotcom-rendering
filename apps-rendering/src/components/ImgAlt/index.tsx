@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
@@ -40,7 +40,6 @@ type Props = {
 	sizes: Sizes;
 	className: Option<SerializedStyles>;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 };
 
@@ -53,7 +52,6 @@ type Props = {
  */
 const placeholderBackground = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 	imageSubtype: Optional<ImageSubtype>,
 ): SerializedStyles => {
 	if (
@@ -66,7 +64,7 @@ const placeholderBackground = (
 
 	return css`
 		background-color: ${backgroundColour(format)};
-		${darkModeCss(supportsDarkMode)`
+		${darkModeCss`
 			background-color: ${neutral[20]};
 		`}
 	`;
@@ -74,10 +72,9 @@ const placeholderBackground = (
 
 const styles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 	imageSubtype: Optional<ImageSubtype>,
 ): SerializedStyles => css`
-	${placeholderBackground(format, supportsDarkMode, imageSubtype)}
+	${placeholderBackground(format, imageSubtype)}
 	color: ${neutral[60]};
 	display: block;
 `;
@@ -87,7 +84,6 @@ const Img: FC<Props> = ({
 	sizes,
 	className,
 	format,
-	supportsDarkMode,
 	lightbox,
 }) => (
 	<picture>
@@ -103,7 +99,7 @@ const Img: FC<Props> = ({
 			className={getClassName(image.width, lightbox)}
 			css={[
 				sizeStyles(sizes, image.width, image.height),
-				styles(format, supportsDarkMode, image.imageSubtype),
+				styles(format, image.imageSubtype),
 				withDefault<SerializedStyles | undefined>(undefined)(className),
 			]}
 			data-ratio={image.height / image.width}

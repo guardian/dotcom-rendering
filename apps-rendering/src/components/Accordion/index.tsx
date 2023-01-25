@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import { darkModeCss } from 'styles';
 import {
 	background,
 	focusHalo,
@@ -22,7 +22,6 @@ import type { FC, ReactNode } from 'react';
 
 interface AccordionProps {
 	children: ReactNode;
-	supportsDarkMode: boolean;
 	accordionTitle: string;
 	context: 'keyEvents' | 'liveFeed';
 }
@@ -37,7 +36,7 @@ const detailsStyles: SerializedStyles = css`
 	}
 `;
 
-const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const titleRowStyles = css`
 	cursor: pointer;
 	position: relative;
 	display: block;
@@ -54,7 +53,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	svg {
 		height: 2rem;
 	}
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		path {
 			fill: ${neutral[60]};
 		}
@@ -69,10 +68,10 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 `;
 
-const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
+const titleStyle = css`
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		color: ${neutral[86]};
 	`}
 `;
@@ -89,7 +88,6 @@ const arrowPosition: SerializedStyles = css`
 
 const backgroundColour = (
 	context: 'keyEvents' | 'liveFeed',
-	supportsDarkMode: boolean,
 ): SerializedStyles => {
 	if (context === 'keyEvents') {
 		return css`
@@ -97,7 +95,7 @@ const backgroundColour = (
 			${from.desktop} {
 				background-color: transparent;
 			}
-			${darkModeCss(supportsDarkMode)`
+			${darkModeCss`
 				background-color: ${neutral[10]};
 			`}
 		`;
@@ -107,7 +105,7 @@ const backgroundColour = (
 		${from.desktop} {
 			background-color: transparent;
 		}
-		${darkModeCss(supportsDarkMode)`
+		${darkModeCss`
 			background-color: ${neutral[10]};
 		`}
 	`;
@@ -125,14 +123,13 @@ const paddingBody: SerializedStyles = css`
 
 const Accordion: FC<AccordionProps> = ({
 	children,
-	supportsDarkMode,
 	accordionTitle,
 	context,
 }) => {
 	return (
 		<details open css={detailsStyles}>
-			<summary css={titleRowStyles(supportsDarkMode)}>
-				<h2 css={titleStyle(supportsDarkMode)}>{accordionTitle}</h2>
+			<summary css={titleRowStyles}>
+				<h2 css={titleStyle}>{accordionTitle}</h2>
 				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle />
 				</span>
@@ -141,7 +138,7 @@ const Accordion: FC<AccordionProps> = ({
 				</span>
 			</summary>
 			<div
-				css={[backgroundColour(context, supportsDarkMode), paddingBody]}
+				css={[backgroundColour(context), paddingBody]}
 			>
 				{children}
 			</div>
