@@ -23,13 +23,8 @@ const rulesToOverrideGuardianConfig = {
 		},
 	],
 
+	// This is not safe to remove whilst we have noUncheckedIndexedAccess
 	'@typescript-eslint/no-unnecessary-condition': 'warn',
-
-	// use `foo ?? 'a string'` instead of `foo !== null && foo !== undefined ? foo : 'a string'`
-	'@typescript-eslint/prefer-nullish-coalescing': 'warn',
-
-	// use `a?.b` instead of `a && a.b`
-	'@typescript-eslint/prefer-optional-chain': 'warn',
 };
 
 /** @TODO Review these */

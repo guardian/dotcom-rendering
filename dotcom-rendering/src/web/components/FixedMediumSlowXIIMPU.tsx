@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
@@ -9,7 +8,7 @@ import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -26,7 +25,7 @@ const Card33_Card33_Card33 = ({
 	showAge,
 	padBottom,
 }: {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;

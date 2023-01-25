@@ -22,7 +22,8 @@ const isSentryEnabled = ({
 	if (isDev || !enableSentryReporting) return false;
 	// We want to log all errors for users in the bundle variant AB test regardless of
 	// the sample rate. Please ensure that the test sample rate is low.
-	if (isInBrowserVariantTest) return true;
+	// The sample rate is currently 10% but we want to maintain a 1% sample rate so sample 10% of 10%
+	if (isInBrowserVariantTest && randomCentile <= 10) return true;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
 	// measures page views in the billions so we only want to log 1% of errors that

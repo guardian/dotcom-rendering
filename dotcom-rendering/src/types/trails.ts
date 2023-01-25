@@ -29,6 +29,7 @@ interface BaseTrailType {
 		isClosedForComments: boolean;
 		discussionId?: string;
 	};
+	showMainVideo?: boolean;
 }
 
 export interface TrailType extends BaseTrailType {

@@ -19,7 +19,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.headline(format)};
 	padding: ${remSpace[1]} ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.column.centre}
-	grid-row: 3 / 5;
+	grid-row: 4/7;
 
 	${from.mobileLandscape} {
 		padding-top: ${remSpace[3]};
@@ -45,7 +45,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headline(format)};
 	${grid.between('viewport-start', 'centre-column-end')}
-	grid-row: 3 / 5;
+	grid-row: 4 / 7;
 
 	${from.mobileLandscape} {
 		${grid.column.all}

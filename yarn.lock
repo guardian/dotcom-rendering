@@ -2244,10 +2244,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-2.0.0.tgz#d8a9408d5a66ff1f8c684ed458c99517bbee15b1"
   integrity sha512-E5p6l0l37hY0GNFaZmA5/22TlVuavzlMHR3OeweD5eDcY2gB3nGgzPK/d3M67dkbDAJkGjB4a0W84Z5N2YScvQ==
 
-"@guardian/atoms-rendering@^25.1.1":
-  version "25.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-25.1.1.tgz#3316d5f6d16749366a45c4c6e96c8fd778f77048"
-  integrity sha512-FVVtwoChSHoPmuFbt9Y6bIDtpPDYe8EyEtFlvBpMb8LtAGeAT03D5Ju/dOKKAq9lF+C08Xj8szYyquLhl9vIgw==
+"@guardian/atoms-rendering@^25.1.5":
+  version "25.1.5"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-25.1.5.tgz#d5806933ca5c0f4997b0935dfdb08003c9366b8e"
+  integrity sha512-fuHJjrv9xv7FnIuoJWYOrBgGX6y0QzS3RGelgxq+YAHtbqFmBBMDODftkqiDq7RHRuAyPchOI7poi0tKG6vsfg==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -2278,10 +2278,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-2.0.1.tgz#b04f12ff36f66db800a68b81b65eedfc86289211"
   integrity sha512-xm5oDtRBu37KPmiT61z+E/Wz3HHifayJjVMwd/nfLxNRd1eFOVmplaeTDtygGKy4KjIwX90R5j/Sjs9apTVnLA==
 
-"@guardian/discussion-rendering@^11.0.3":
-  version "11.0.3"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-11.0.3.tgz#4e18a9e28a0d12a4dc61739b3877478c780b36a9"
-  integrity sha512-2hsYGUzuXHKzyCIOGP42X3CVK11I32krP6fffyP5BuCFSQNgrpje4L9ngWIpOGvHi12T2anYnXI7HyouQDGo0A==
+"@guardian/discussion-rendering@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-12.0.0.tgz#08326684b2e83f2d7386681d69e5639846e59d0e"
+  integrity sha512-WCMFjZ/i4cpEYh5OSD600LjyCzYN3UwBdM7v6wCRRChedqQU39VGgo58UDkvYEnN6/fBZhIguIKv3/E8C8CPyg==
 
 "@guardian/eslint-config-typescript@^2.0.0":
   version "2.0.1"
@@ -2311,10 +2311,10 @@
     "@typescript-eslint/eslint-plugin" "5.45.0"
     "@typescript-eslint/parser" "5.45.0"
 
-"@guardian/libs@^10.0.0", "@guardian/libs@^10.1.0":
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-10.1.1.tgz#7048c365a68dda068f707d46c78979f430221963"
-  integrity sha512-OdWReBHRWhdbErVmS15hihVzlkdU8DkKrjDsUIN0P8QZiF4twuzcU3qsPwto2UfibAwPkWqKkNwH1k8b6xNclA==
+"@guardian/libs@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-12.0.0.tgz#cb9f78d2d0c04a5afc46d2efaa540d95dccb49f9"
+  integrity sha512-Xjg/GC11x/YhereuwAZt8yKhWafJ49ak7kZJFE5nIc7MlPLAwr5xv+83vFKvYiqbHSnq4P/OHXA2Da9RkEIgsw==
 
 "@guardian/prettier@^2.0.0", "@guardian/prettier@^2.1.5":
   version "2.1.5"

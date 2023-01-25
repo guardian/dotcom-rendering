@@ -4335,6 +4335,9 @@
                         "isClosedForComments",
                         "isCommentable"
                     ]
+                },
+                "showMainVideo": {
+                    "type": "boolean"
                 }
             },
             "required": [

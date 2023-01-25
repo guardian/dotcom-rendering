@@ -63,6 +63,8 @@ export type Palette = {
 	};
 	background: {
 		article: Colour;
+		analysisContrast: Colour;
+		analysisContrastHover: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;

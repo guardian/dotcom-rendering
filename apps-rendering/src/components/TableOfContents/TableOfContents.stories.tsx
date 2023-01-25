@@ -27,6 +27,18 @@ const labsThemeFormat: ArticleFormat = {
 	theme: ArticleSpecial.Labs,
 };
 
+const numberedListDisplayFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.NumberedList,
+	theme: ArticlePillar.News,
+};
+
+const numberedListDisplayLabsThemeFormat: ArticleFormat = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.NumberedList,
+	theme: ArticleSpecial.Labs,
+};
+
 const Default = (): ReactElement => (
 	<TableOfContents outline={explainer.outline} format={format} />
 );
@@ -42,9 +54,22 @@ const Labs = (): ReactElement => (
 	<TableOfContents outline={explainer.outline} format={labsThemeFormat} />
 );
 
+const NumberedList = (): ReactElement => (
+	<TableOfContents
+		outline={explainer.outline}
+		format={numberedListDisplayFormat}
+	/>
+);
+
+const NumberedListLabs = (): ReactElement => (
+	<TableOfContents
+		outline={explainer.outline}
+		format={numberedListDisplayLabsThemeFormat}
+	/>
+);
 export default {
 	component: TableOfContents,
 	title: 'AR/TableOfContents',
 };
 
-export { Default, Immersive, Labs };
+export { Default, Immersive, Labs, NumberedList, NumberedListLabs };

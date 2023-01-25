@@ -29,7 +29,9 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
 	display: block;
-	padding: ${remSpace[1]} 0 ${remSpace[4]} 0;
+	${darkModeCss`
+		color: ${text.paragraphDark(format)};
+	`}
 `;
 
 const listStyles: SerializedStyles = css`
@@ -41,18 +43,30 @@ const listStyles: SerializedStyles = css`
 `;
 
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.paragraph(format)};
+	box-sizing: border-box;
 	border-top: 1px solid ${border.tableOfContents(format)};
-	padding-bottom: 0;
+	padding-bottom: ${remSpace[4]};
+	padding-top: ${remSpace[1]};
+	transition: 0.3s all ease;
+	display: flex;
+	position: relative;
 
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsHover(format)};
+		padding-top: 1px;
+		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
 		cursor: pointer;
+		div {
+			height: 1.188rem;
+		}
 	}
+
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
 		&:hover {
 			border-color: ${border.tableOfContentsHoverDark(format)};
 		}
+		color: ${text.paragraphDark(format)};
 	`}
 `;
 
@@ -98,22 +112,20 @@ const detailsStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const summaryStyles = (format: ArticleFormat): SerializedStyles => css`
+	display: flex;
+	justify-content: space-between;
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	padding: ${remSpace[1]} 0 ${remSpace[1]} 0;
+	padding: ${remSpace[1]} 0;
 	border-top: 1px solid ${border.tableOfContents(format)};
 
 	&:hover {
-		border-top: 1px solid ${border.tableOfContentsHover(format)};
-		cursor: pointer;
+		text-decoration: underline;
 	}
 
 	path {
 		fill: ${text.tableOfContentsTitle(format)};
-	}
-	svg {
-		height: 2rem;
 	}
 	${darkModeCss`
 		border-color: ${border.tableOfContentsDark(format)};
@@ -135,10 +147,20 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const arrowPosition: SerializedStyles = css`
+const indexStyle = css`
+	margin-right: 18px;
+`;
+
+const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
 	position: absolute;
-	right: ${remSpace[1]};
-	top: -0.125rem;
+	left: 1.125rem;
+	border-left: 1px solid ${border.tableOfContents(format)};
+	height: 1.375rem;
+	top: 0;
+	transition: 0.3s all ease;
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+	`}
 `;
 
 const TocTextElement: React.FC<TextElementProps> = ({
@@ -202,20 +224,26 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles(format)}>
 			<summary css={summaryStyles(format)}>
-				<h2 css={titleStyle(format)}>Jump to...</h2>
-				<span className="is-off" css={arrowPosition}>
+				<h2 css={titleStyle(format)}>Jump to</h2>
+				<span className="is-off">
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
-				<span className="is-on" css={arrowPosition}>
+				<span className="is-on">
 					<SvgChevronUpSingle size="xsmall" />
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((outlineItem) => (
+				{outline.map((outlineItem, index) => (
 					<ListItem
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
+						{format.display === ArticleDisplay.NumberedList && (
+							<>
+								<span css={indexStyle}>{index + 1}</span>
+								<div css={verticalLineStyle(format)}></div>
+							</>
+						)}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}

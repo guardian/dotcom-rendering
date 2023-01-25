@@ -11,7 +11,7 @@ import { DefaultByline } from './Byline.defaults';
 const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-bottom: ${remSpace[2]};
 	${grid.column.centre}
-	grid-row: 6/7;
+	grid-row: 8/9;
 	color: ${text.gallery(format)};
 	${headline.xxxsmall({ fontWeight: 'medium', fontStyle: 'italic' })}
 

@@ -29,6 +29,11 @@ const designTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const interviewStyles = css`
+	padding-left: 0;
+	margin-bottom: 0;
+`;
+
 type Props = {
 	format: ArticleFormat;
 };
@@ -66,7 +71,11 @@ const DesignTag: FC<Props> = ({ format }) => {
 				</div>
 			);
 		case ArticleDesign.Interview:
-			return <span css={designTagStyles(format)}>Interview</span>;
+			return (
+				<div css={[designTagWrapper, interviewStyles]}>
+					<span css={designTagStyles(format)}>Interview</span>
+				</div>
+			);
 		default:
 			return null;
 	}

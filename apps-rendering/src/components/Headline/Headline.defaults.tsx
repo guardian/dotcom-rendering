@@ -7,7 +7,9 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
+import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import { articleWidthStyles, darkModeCss } from 'styles';
 
 const boldFontStyles: SerializedStyles = css`
@@ -87,8 +89,14 @@ interface DefaultProps {
 	styles: SerializedStyles;
 }
 
-export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => (
-	<h1 css={styles}>
-		<span>{item.headline}</span>
-	</h1>
-);
+export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => {
+	const format = getFormat(item);
+	return (
+		<>
+			<DesignTag format={format} />
+			<h1 css={styles}>
+				<span>{item.headline}</span>
+			</h1>
+		</>
+	);
+};

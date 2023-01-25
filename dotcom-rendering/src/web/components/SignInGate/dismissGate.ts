@@ -21,7 +21,7 @@ const localStorageDismissedCountKey = (
 const getSigninGatePrefsSafely = (): { [key: string]: any } => {
 	try {
 		const prefs: { [key: string]: any } = JSON.parse(
-			localStorage.getItem(localStorageKey) || '{}',
+			localStorage.getItem(localStorageKey) ?? '{}',
 		);
 
 		if (typeof prefs === 'object' && typeof prefs.value === 'object') {

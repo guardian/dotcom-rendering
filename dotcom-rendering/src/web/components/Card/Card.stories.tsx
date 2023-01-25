@@ -7,8 +7,11 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
+import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
+import { LI } from './components/LI';
+import { UL } from './components/UL';
 
 const basicCardProps: CardProps = {
 	linkTo: '',
@@ -404,7 +407,11 @@ export const WithPulsingDotSpecialReportAlt = () => {
 export const WithQuotes = () => {
 	return (
 		<CardWrapper>
-			<Card {...basicCardProps} showQuotes={true} kickerText="Quotes" />
+			<Card
+				{...basicCardProps}
+				showQuotedHeadline={true}
+				kickerText="Quotes"
+			/>
 		</CardWrapper>
 	);
 };
@@ -419,7 +426,7 @@ export const WithQuotesSpecialReportAlt = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticleSpecial.SpecialReportAlt,
 				}}
-				showQuotes={true}
+				showQuotedHeadline={true}
 				kickerText="Quotes"
 			/>
 		</CardWrapper>
@@ -854,4 +861,200 @@ export const WhenOpinionWithImageAtBottom = () => {
 			</CardWrapper>
 		</>
 	);
+};
+
+export const WhenVideoWithPlayButton = () => {
+	return (
+		<Section title="Play icons" padContent={false} centralBorder="partial">
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'100%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imageSize="jumbo"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'75%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="right"
+						imageSize="large"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<LI percentage={'25%'} padSides={true} showDivider={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'50%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imageSize="medium"
+						imagePositionOnMobile="bottom"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<UL direction="column" showDivider={true}>
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="left"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="right"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="right"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+				</UL>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'66.666%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="right"
+						imageSize="large"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imagePositionOnMobile="left"
+						imageSize="medium"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+		</Section>
+	);
+};
+export const WithLetterDesign = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesign.story = {
+	name: 'WithLetterDesign',
+};
+
+export const WithLetterDesignAndShowQuotedHeadline = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				headlineSize="small"
+				headlineText="Culture"
+				showQuotedHeadline={true}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Letter,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
+WithLetterDesignAndShowQuotedHeadline.story = {
+	name: 'WithLetterDesignAndShowQuotedHeadline',
 };

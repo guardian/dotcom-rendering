@@ -22,7 +22,8 @@ const trackPerformance = (
 		return;
 	}
 
-	if (window.performance && window.performance.now) {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- not supported in all browsers
+	if (window.performance?.now) {
 		ga(
 			'allEditorialPropertyTracker.send',
 			'timing',
@@ -79,7 +80,7 @@ const init = async (): Promise<void> => {
 
 		const decideConsentCarrierLabels = () => {
 			if (consentState.tcfv2) {
-				const consentUUID = getCookie({ name: 'consentUUID' }) || '';
+				const consentUUID = getCookie({ name: 'consentUUID' }) ?? '';
 				const consentString = consentState.tcfv2.tcString;
 				return [
 					'01:TCF.v2',
@@ -88,14 +89,14 @@ const init = async (): Promise<void> => {
 				];
 			}
 			if (consentState.ccpa) {
-				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
+				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
 				const flag = consentState.ccpa.doNotSell ? 'true' : 'false';
 				return ['01:CCPA', `04:${ccpaUUID}`, `05:${flag}`];
 			}
 			if (consentState.aus) {
-				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
+				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
 				const consentStatus =
-					getCookie({ name: 'consentStatus' }) || '';
+					getCookie({ name: 'consentStatus' }) ?? '';
 				const personalisedAdvertising = consentState.aus
 					.personalisedAdvertising
 					? 'true'
@@ -165,7 +166,7 @@ const init = async (): Promise<void> => {
 			browserId: browserId ?? undefined,
 			pageViewId,
 		},
-		country: (await getLocaleCode()) || undefined,
+		country: (await getLocaleCode()) ?? undefined,
 	});
 	log('dotcom', 'CMP initialised');
 

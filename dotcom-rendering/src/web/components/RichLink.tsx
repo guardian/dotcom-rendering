@@ -40,15 +40,26 @@ export interface RichLinkImageData {
 	height: string;
 }
 
-const neutralBackground = css`
-	background-color: ${neutral[97]};
-	a {
-		color: inherit;
-	}
-	:hover {
-		background-color: ${neutral[93]};
-	}
-`;
+const neutralBackground = (format: ArticleFormat, palette: Palette) => {
+	// One off colours to match the analysis background colour
+	const background =
+		format.design === ArticleDesign.Analysis
+			? palette.background.analysisContrast
+			: neutral[97];
+	const backgroundHover =
+		format.design === ArticleDesign.Analysis
+			? palette.background.analysisContrastHover
+			: neutral[93];
+	return css`
+		background-color: ${background};
+		a {
+			color: inherit;
+		}
+		:hover {
+			background-color: ${backgroundHover};
+		}
+	`;
+};
 
 const pillarBackground = (palette: Palette) => {
 	return css`
@@ -225,13 +236,12 @@ export const RichLink = ({
 		format.design === ArticleDesign.DeadBlog;
 
 	const showImage =
-		imageData &&
 		imageData.thumbnailUrl &&
 		imageCardStyles.includes(cardStyle) &&
 		!parentIsBlog;
-	const isPaidContent = tags
-		? tags.filter((t) => t.id === 'tone/advertisement-features').length > 0
-		: false;
+	const isPaidContent = !!tags.find(
+		({ id }) => id === 'tone/advertisement-features',
+	);
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
@@ -248,7 +258,7 @@ export const RichLink = ({
 			css={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div css={neutralBackground}>
+			<div css={neutralBackground(format, palette)}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
 					{!!showImage && (

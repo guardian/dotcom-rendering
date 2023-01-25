@@ -121,6 +121,7 @@ const immersiveStyles = (format: ArticleFormat): SerializedStyles => css`
 const standardStyles: SerializedStyles = css`
 	${articleWidthStyles}
 	padding-top: ${remSpace[1]};
+	padding-bottom: ${remSpace[2]};
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
