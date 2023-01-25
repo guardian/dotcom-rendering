@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 const animatePulsingDots = () => {
 	// Get all the elements that aren't hydrated
 	const elements = document.querySelectorAll(
-		`[data-flashing-dot-hydrated='false']`,
+		`[data-flashing-dot-hydrated="false"]`,
 	);
 
 	elements.forEach((element) => {
 		element.setAttribute('data-flashing-dot-hydrated', 'true');
 		// In PulsingDot.importable.tsx, we set the animation only to run
 		// if this data attribute is set
-		element.setAttribute('data-animated', 'true');
+		element.setAttribute('data-animate', 'true');
 	});
 };
 
