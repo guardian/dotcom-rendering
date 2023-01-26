@@ -54,8 +54,8 @@ export const PulsingDot = ({ colour }: Props) => {
 		// false when the reader has said they don't want flashing
 		setShouldFlash(flashingPreference !== false);
 		// We use this to track if the flashing dot is hydrated
-		// Uses of pulsing dot that aren't in islands can instead be hydrated by
-		// the 'AnimatePulsingDot.importable' component
+		// Uses of pulsing dot that aren't in islands can instead be animated by
+		// the 'AnimatePulsingDots.importable.tsx' component
 		setHydrated(true);
 	}, []);
 
