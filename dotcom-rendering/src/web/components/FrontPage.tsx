@@ -5,7 +5,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { AnimatePulsingDot } from './AnimatePulsingDot.importable';
+import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -48,7 +48,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				<AlreadyVisited />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<AnimatePulsingDot />
+				<AnimatePulsingDots />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />

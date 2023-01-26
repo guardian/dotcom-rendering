@@ -16,11 +16,12 @@ const animatePulsingDots = () => {
 };
 
 /**
- * Island for animating pulsing dots which aren't hydrated
+ * Island for animating pulsing dots which aren't already hydrated
+ * See PulsingDot.importable.tsx for more info
  *
- * We use this for fronts, where we add pulsing dots to the page which aren't wrapped in islands
+ * - We use this for fronts, where we add pulsing dots to the page which aren't wrapped in islands
  */
-export const AnimatePulsingDot = () => {
+export const AnimatePulsingDots = () => {
 	useEffect(() => {
 		// Respect the accessibility flag set here
 		// https://www.theguardian.com/help/accessibility-help
