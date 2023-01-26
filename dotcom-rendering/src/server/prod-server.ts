@@ -26,7 +26,7 @@ import { logger } from './lib/logging';
 const logRenderTime = responseTime(
 	({ body }: Request, _: Response, time: number) => {
 		const { pageId = 'no-page-id-found' } = body as FEArticleType;
-		logger.info({
+		logger.info('Page render time', {
 			pageId,
 			renderTime: time,
 		});
