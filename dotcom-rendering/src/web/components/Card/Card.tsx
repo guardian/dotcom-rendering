@@ -415,11 +415,7 @@ export const Card = ({
 								format.design === ArticleDesign.LiveBlog ||
 								showSlash
 							}
-							hideLineBreak={
-								format.design === ArticleDesign.LiveBlog
-									? false
-									: hideLineBreak
-							}
+							hideLineBreak={hideLineBreak}
 							byline={byline}
 							showByline={showByline}
 							isDynamo={isDynamo}
