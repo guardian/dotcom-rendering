@@ -63,6 +63,19 @@ export const PulsingDot = ({ colour }: Props) => {
 		<span
 			css={[dotStyles(colour), animate]}
 			data-flashing-dot-hydrated={hydrated}
+			/**
+			 * How is the pulsing dot animated?
+			 *
+			 * We only enable the animation for the pulsing dot on the client side,
+			 * this is so that we can check each users flashing-elements configuration
+			 * and only animate if we verify the use doesn't have it disabled.
+			 *
+			 * There are two ways this hydration can be achieved:
+			 * 1. This file is loaded within an island, this happens on liveblogs and in onwards content,
+			 *    where the useEffect will run & enable data-animate below
+			 * 2. An additional island can be loaded on the page 'AnimatePulsingDots.importable.tsx',
+			 *    which checks for un-hydrating pulsing dots and animate them if user settings allow.
+			 */
 			data-animate={shouldFlash}
 		/>
 	);
