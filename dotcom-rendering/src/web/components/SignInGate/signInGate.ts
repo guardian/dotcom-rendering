@@ -27,7 +27,6 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-variant-4': gateMainVariant,
 	'sign-in-gate-copy-1': signInGateCopyTestJan2023,
 	'sign-in-gate-copy-2': signInGateCopyTestJan2023,
-	'sign-in-gate-copy-3': signInGateCopyTestJan2023,
 };
 
 // Component Id does not need to match gate test name, as ab test info passed separately to ophan

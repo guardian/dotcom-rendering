@@ -26,9 +26,5 @@ export const signInGateMainVariant: ABTest = {
 			id: 'sign-in-gate-copy-2',
 			test: (): void => {},
 		},
-		{
-			id: 'sign-in-gate-copy-3',
-			test: (): void => {},
-		},
 	],
 };

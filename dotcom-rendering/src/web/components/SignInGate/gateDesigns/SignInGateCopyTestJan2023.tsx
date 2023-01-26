@@ -32,16 +32,13 @@ export const SignInGateCopyTestJan2023 = ({
 	) => {
 		switch (abVariant) {
 			case 'sign-in-gate-copy-1': {
-				return 'This is the first copy text';
+				return "Register: it's quick and easy";
 			}
 			case 'sign-in-gate-copy-2': {
-				return 'This is the second copy text';
-			}
-			case 'sign-in-gate-copy-3': {
-				return 'This is the third copy text';
+				return 'Take a moment to register';
 			}
 			default: {
-				return 'This is the first copy text';
+				return "Register: it's quick and easy";
 			}
 		}
 	};
@@ -49,8 +46,12 @@ export const SignInGateCopyTestJan2023 = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>SignInGate Copy Test</h1>
-			<p css={bodyBold}>{getCopyTextFromVariant(abTest?.variant)}</p>
+			<h1 css={headingStyles}>
+				{getCopyTextFromVariant(abTest?.variant)}
+			</h1>
+			<p css={bodyBold}>
+				It’s still free to read - this is not a paywall
+			</p>
 			<p css={bodyText}>
 				We’re committed to keeping our quality reporting open. By
 				registering and providing us with insight into your preferences,

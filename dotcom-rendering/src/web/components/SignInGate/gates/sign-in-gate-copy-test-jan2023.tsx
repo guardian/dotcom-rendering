@@ -5,7 +5,7 @@ import { canShowSignInGate } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateCopyTestJan2023 = React.lazy(() => {
-	const { start, end } = initPerf('SignInGateCopy1');
+	const { start, end } = initPerf('SignInGateCopyTestJan2023');
 	start();
 	return import(
 		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023'
