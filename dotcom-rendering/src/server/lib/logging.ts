@@ -38,7 +38,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	if (typeof data === 'string') {
 		return {
 			...coreFields,
-			data,
+			message: data,
 		};
 	}
 
