@@ -443,7 +443,7 @@ export const WithNoLinebreak = () => {
 		<CardWrapper>
 			<Card
 				{...basicCardProps}
-				showLineBreak={false}
+				hideLineBreak={true}
 				kickerText="No linebreak"
 			/>
 		</CardWrapper>

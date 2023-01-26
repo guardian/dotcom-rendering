@@ -237,7 +237,7 @@ export const noLinebreak = () => (
 				theme: ArticlePillar.News,
 			}}
 			kickerText="Live"
-			showLineBreak={false}
+			hideLineBreak={true}
 		/>
 	</Section>
 );

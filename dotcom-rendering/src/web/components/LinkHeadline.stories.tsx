@@ -69,7 +69,7 @@ export const noLinebreak = () => (
 				theme: ArticlePillar.News,
 			}}
 			kickerText="Live"
-			showLineBreak={false}
+			hideLineBreak={true}
 		/>
 	</Section>
 );
@@ -330,7 +330,7 @@ export const Updated = () => (
 			}}
 			showPulsingDot={true}
 			showSlash={false}
-			showLineBreak={false}
+			hideLineBreak={true}
 			kickerText="Updated 7m ago"
 			size="tiny"
 		/>

@@ -94,7 +94,7 @@ export const MostViewedFooterItem = ({
 						size="small"
 						kickerText="Live"
 						showSlash={true}
-						showLineBreak={true}
+						hideLineBreak={false}
 						showPulsingDot={true}
 						showQuotes={false}
 					/>
