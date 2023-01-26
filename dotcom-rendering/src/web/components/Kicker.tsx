@@ -39,8 +39,9 @@ export const Kicker = ({
 	useEffect(() => {
 		setRemoveKickerSlash(
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- window not available on server
-			window && window.guardian.config.tests.removeKickerSlashesVariant ===
-				'variant',
+			window &&
+				window.guardian.config.tests.removeKickerSlashesVariant ===
+					'variant',
 		);
 	}, []);
 
