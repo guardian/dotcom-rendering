@@ -11,7 +11,7 @@ const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
-				padding: 1px;
+				padding: 1px 2px 0 2px;
 				svg {
 					width: 12px;
 					height: 12px;
