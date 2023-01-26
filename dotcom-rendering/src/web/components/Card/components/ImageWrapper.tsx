@@ -85,7 +85,7 @@ export const ImageWrapper = ({
 				isHorizontalOnMobile &&
 					css`
 						${until.tablet} {
-							width: 130px;
+							width: 131px;
 							flex-shrink: 0;
 							margin-top: 4px;
 							margin-right: 0;
