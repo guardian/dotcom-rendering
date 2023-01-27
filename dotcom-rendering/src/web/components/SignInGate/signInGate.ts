@@ -32,5 +32,5 @@ export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
-	SignInGateCopyVariant: 'sign_in_gate_copy_test_variants',
+	SignInGateCopyTest: 'sign_in_gate_copy_test_variants',
 };

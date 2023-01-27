@@ -24,6 +24,6 @@ export const signInGateCopyTest: ABTest = {
 		{
 			id: 'sign-in-gate-copy-take-a-moment',
 			test: (): void => {},
-		},
+		}
 	],
 };
