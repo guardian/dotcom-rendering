@@ -227,6 +227,22 @@ export const noSlash = () => (
 );
 noSlash.story = { name: 'With Live kicker but no slash' };
 
+export const noLinebreak = () => (
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<CardHeadline
+			headlineText="This is how a card headline with no kicker linebreak looks"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
+			kickerText="Live"
+			hideLineBreak={true}
+		/>
+	</Section>
+);
+noSlash.story = { name: 'With Live kicker but no slash' };
+
 export const pulsingDot = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline

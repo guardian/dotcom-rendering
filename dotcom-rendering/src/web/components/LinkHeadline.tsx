@@ -12,6 +12,7 @@ type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
+	hideLineBreak?: boolean;
 	showQuotes?: boolean; // When true the QuoteIcon is shown
 	size?: SmallHeadlineSize;
 	link?: HeadlineLink; // An optional link object configures if/how the component renders an anchor tag
@@ -71,6 +72,7 @@ export const LinkHeadline = ({
 	kickerText,
 	showPulsingDot,
 	showSlash,
+	hideLineBreak,
 	showQuotes = false,
 	size = 'medium',
 	link,
@@ -86,6 +88,7 @@ export const LinkHeadline = ({
 					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					showSlash={showSlash}
+					hideLineBreak={hideLineBreak}
 				/>
 			)}
 			{showQuotes && <QuoteIcon colour={palette.text.linkKicker} />}

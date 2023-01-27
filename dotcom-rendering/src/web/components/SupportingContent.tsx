@@ -132,6 +132,7 @@ export const SupportingContent = ({
 							format={subLink.format}
 							size="tiny"
 							showSlash={false}
+							hideLineBreak={true}
 							showLine={true}
 							linkTo={subLink.url}
 							containerPalette={containerPalette}

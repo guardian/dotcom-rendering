@@ -441,6 +441,18 @@ export const WithNoSlash = () => {
 	);
 };
 
+export const WithNoLinebreak = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				hideLineBreak={true}
+				kickerText="No linebreak"
+			/>
+		</CardWrapper>
+	);
+};
+
 export const WithAnAvatar = () => {
 	return (
 		<>

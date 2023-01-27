@@ -60,6 +60,8 @@ export type Props = {
 	showPulsingDot?: boolean;
 	/** Sometimes kickers and headlines are separated by a slash */
 	showSlash?: boolean;
+	/** Sometimes kickers and headlines are separated by a linebreak */
+	hideLineBreak?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
@@ -232,6 +234,7 @@ export const Card = ({
 	kickerText,
 	showPulsingDot,
 	showSlash,
+	hideLineBreak,
 	starRating,
 	minWidthInPixels,
 	dataLinkName,
@@ -415,6 +418,7 @@ export const Card = ({
 								format.design === ArticleDesign.LiveBlog ||
 								showSlash
 							}
+							hideLineBreak={hideLineBreak}
 							byline={byline}
 							showByline={showByline}
 							isDynamo={isDynamo}
