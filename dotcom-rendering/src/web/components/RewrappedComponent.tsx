@@ -31,9 +31,11 @@ export const RewrappedComponent = ({
 				const isDev = process.env.NODE_ENV !== 'production';
 				logger.warn(
 					'RewrappedComponent called with isUnwrapped === false',
-					isDev,
-					html,
-					tagName,
+					{
+						isDev,
+						html,
+						tagName,
+					},
 				);
 			}
 
