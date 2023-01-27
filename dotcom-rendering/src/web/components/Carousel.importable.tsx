@@ -634,14 +634,13 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 							format: trailFormat,
 							image,
 							kickerText,
-							shortUrl,
 							branding,
+							discussion,
 						} = trail;
+
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!webPublicationDate) return null;
-						const discussionId =
-							shortUrl && new URL(shortUrl).pathname;
 
 						const imageUrl = image && getSourceImageUrl(image);
 
@@ -656,7 +655,11 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 								imageUrl={imageUrl}
 								kickerText={kickerText}
 								dataLinkName={`carousel-small-card-position-${i}`}
-								discussionId={discussionId}
+								discussionId={
+									discussion?.isCommentable
+										? discussion.discussionId
+										: undefined
+								}
 								branding={branding}
 							/>
 						);
