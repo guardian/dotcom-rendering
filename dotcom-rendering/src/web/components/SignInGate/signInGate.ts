@@ -9,7 +9,6 @@ import { signInGateComponent as gateMainVariant } from './gates/main-variant';
 import { signInGateCopyTestJan2023Component } from './gates/sign-in-gate-copy-test-jan2023';
 import type { SignInGateTestMap } from './types';
 
-
 /* When adding a new test, you need to add the test name to the tests array below,
    and add a entry for each variant that maps it to a SignInGateComponent in
    signInGateTestVariantToGateMapping, and in turn match each test id to an component

@@ -38,7 +38,7 @@ export const SignInGateCopyTestJan2023 = ({
 				return 'Take a moment to register';
 			}
 			default: {
-				return "You need to register to keep reading";
+				return 'You need to register to keep reading';
 			}
 		}
 	};

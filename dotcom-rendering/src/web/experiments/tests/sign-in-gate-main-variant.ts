@@ -21,6 +21,6 @@ export const signInGateMainVariant: ABTest = {
 		{
 			id: 'main-variant-4',
 			test: (): void => {},
-		}
+		},
 	],
 };
