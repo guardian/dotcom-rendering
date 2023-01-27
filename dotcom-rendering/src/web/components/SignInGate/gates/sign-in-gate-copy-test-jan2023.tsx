@@ -15,7 +15,7 @@ const SignInGateCopyTestJan2023 = React.lazy(() => {
 	});
 });
 
-export const signInGateCopyTestJan2023: SignInGateComponent = {
+export const signInGateCopyTestJan2023Component: SignInGateComponent = {
 	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
 		<Lazy margin={300}>
 			<Suspense fallback={<></>}>

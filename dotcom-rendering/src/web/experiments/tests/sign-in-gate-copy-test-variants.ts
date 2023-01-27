@@ -1,12 +1,12 @@
-import { ABTest } from '@guardian/ab-core';
+import type { ABTest } from '@guardian/ab-core';
 
-export const signInGateCopyTestVariants: ABTest = {
-	id: 'SignInGateCopyTestVariants',
+export const signInGateCopyTest: ABTest = {
+	id: 'SignInGateCopyTest',
 	start: '2023-01-23',
 	expiry: '2025-12-01',
 	author: 'Lindsey Dew',
 	description: 'TODO',
-	audience: 0.0,
+	audience: 0.1,
 	audienceOffset: 0.0,
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria: 'TODO',
@@ -15,18 +15,15 @@ export const signInGateCopyTestVariants: ABTest = {
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
 	canRun: () => true,
+	// take out sign-in-gate-copy
 	variants: [
 		{
-			id: 'sign-in-gate-copy-1',
+			id: 'sign-in-gate-copy-quick-and-easy',
 			test: (): void => {},
 		},
 		{
-			id: 'sign-in-gate-copy-2',
+			id: 'sign-in-gate-copy-take-a-moment',
 			test: (): void => {},
-		},
-		{
-			id: 'sign-in-gate-copy-3',
-			test: (): void => {},
-		},
+		}
 	],
 };
