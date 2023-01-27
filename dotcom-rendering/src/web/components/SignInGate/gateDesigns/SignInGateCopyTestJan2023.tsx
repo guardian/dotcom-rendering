@@ -31,10 +31,10 @@ export const SignInGateCopyTestJan2023 = ({
 		abVariant,
 	) => {
 		switch (abVariant) {
-			case 'sign-in-gate-copy-quick-and-easy': {
+			case 'quick-and-easy': {
 				return "Register: it's quick and easy";
 			}
-			case 'sign-in-gate-copy-take-a-moment': {
+			case 'take-a-moment': {
 				return 'Take a moment to register';
 			}
 			default: {
