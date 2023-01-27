@@ -62,7 +62,7 @@ noSlash.story = { name: 'With Live kicker but no slash' };
 export const noLinebreak = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			headlineText="This is how a headline with no kicker slash looks"
+			headlineText="This is how a headline with no line break looks"
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -73,7 +73,7 @@ export const noLinebreak = () => (
 		/>
 	</Section>
 );
-noSlash.story = { name: 'With Live kicker but no slash' };
+noLinebreak.story = { name: 'With Live kicker but no line break' };
 
 export const pulsingDot = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
