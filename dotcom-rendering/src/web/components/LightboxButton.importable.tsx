@@ -286,7 +286,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	function close(): void {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
 		(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
-		// Stop litening for keyboard shortcuts
+		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
 	}
 
