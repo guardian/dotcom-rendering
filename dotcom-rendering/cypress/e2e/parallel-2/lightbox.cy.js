@@ -182,7 +182,7 @@ describe('Lightbox', function () {
 		// Turn the info aside back on and then reload once more to check the
 		// caption is again showing by default
 		cy.realPress('i');
-		cy.reload();
+		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] aside').should('be.visible');
 	});
