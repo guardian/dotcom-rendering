@@ -199,4 +199,17 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="1"] img').should('be.visible');
 		cy.get('nav [data-cy="lightbox-selected"]').contains('1/22');
 	});
+
+	it('should navigate to the original block when clicking links in captions', function () {
+		cy.visit(`/Article?url=${liveblogUrl}`);
+		cy.get('button.open-lightbox').eq(1).realClick();
+		// The info aside is visible by default
+		cy.get('li[data-index="2"] aside').should('be.visible');
+		// Click the caption link
+		cy.get('li[data-index="2"] aside a').click();
+		cy.url().should(
+			'include',
+			'?page=with:block-603007c48f08c3cb92a5ca74#block-603007c48f08c3cb92a5ca74',
+		);
+	});
 });
