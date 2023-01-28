@@ -351,21 +351,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}, 300),
 	);
 
-	closeButton?.addEventListener('click', () => {
-		close();
-	});
-
-	previousButton?.addEventListener('click', () => {
-		goBack();
-	});
-
-	nextButton?.addEventListener('click', () => {
-		goForward();
-	});
-
-	infoButton?.addEventListener('click', () => {
-		toggleInfo();
-	});
 
 	lightbox.addEventListener('close', () => {
 		document.documentElement.classList.remove('lightbox-open');
@@ -378,6 +363,10 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			);
 		}
 	});
+	closeButton?.addEventListener('click', close);
+	previousButton?.addEventListener('click', goBack);
+	nextButton?.addEventListener('click', goForward);
+	infoButton?.addEventListener('click', toggleInfo);
 
 	captionLinks.forEach((link) => {
 		link.addEventListener('click', (event) => {
