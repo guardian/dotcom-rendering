@@ -175,7 +175,7 @@ describe('Lightbox', function () {
 		cy.realPress('Escape');
 		// Reload the page to see if my preference for having the caption hidden
 		// has been preserved
-		cy.reload();
+		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('dialog#gu-lightbox').should('be.visible');
 		cy.get('li[data-index="2"] aside').should('not.be.visible');
