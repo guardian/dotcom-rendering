@@ -200,6 +200,69 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		loadAdjacentImages(newPosition);
 	}
 
+	function handleKeydown(event: KeyboardEvent) {
+		console.log(event);
+		if (event.ctrlKey || event.metaKey || event.altKey) return;
+		switch (event.code) {
+			case 'Tab': {
+				event.preventDefault();
+				const tabableElements = getTabableElements();
+				const activeElement = tabableElements.find(
+					(element) => element === document.activeElement,
+				);
+				const firstTabableElement = tabableElements[0];
+				const lastTabableElement =
+					tabableElements[tabableElements.length - 1];
+
+				if (!activeElement) {
+					// Start at the start
+					firstTabableElement?.focus();
+				} else {
+					const currentPosition =
+						tabableElements.indexOf(activeElement);
+					const firstElementHasFocus = currentPosition === 0;
+					const lastElementHasFocus =
+						currentPosition === tabableElements.length - 1;
+
+					if (event.shiftKey) {
+						if (firstElementHasFocus) {
+							lastTabableElement?.focus();
+						} else {
+							tabableElements[currentPosition - 1]?.focus();
+						}
+					} else {
+						if (lastElementHasFocus) {
+							firstTabableElement?.focus();
+						} else {
+							tabableElements[currentPosition + 1]?.focus();
+						}
+					}
+				}
+
+				break;
+			}
+			case 'ArrowLeft':
+				goBack();
+				break;
+			case 'ArrowRight':
+				goForward();
+				break;
+			case 'KeyI':
+				toggleInfo();
+				break;
+			case 'KeyQ':
+			case 'Escape':
+				close();
+				break;
+			case 'ArrowUp':
+				showInfo();
+				break;
+			case 'ArrowDown':
+				hideInfo();
+				break;
+		}
+	}
+
 	function open(position: number) {
 		// We use this class to prevent the main page from scrolling
 		document.documentElement.classList.add('lightbox-open');
@@ -216,11 +279,15 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		select(position);
 		scrollTo(position);
 		loadAdjacentImages(position);
+		// We only want this listener active while the lightbox is open
+		window.addEventListener('keydown', handleKeydown);
 	}
 
 	function close(): void {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
 		(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		// Stop litening for keyboard shortcuts
+		window.removeEventListener('keydown', handleKeydown);
 	}
 
 	function showInfo(): void {
@@ -273,67 +340,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			event.preventDefault();
 			event.stopPropagation();
 		});
-	});
-
-	lightbox.addEventListener('keydown', (event) => {
-		if (event.ctrlKey || event.metaKey || event.altKey) return;
-		switch (event.code) {
-			case 'Tab': {
-				event.preventDefault();
-				const tabableElements = getTabableElements();
-				const activeElement = tabableElements.find(
-					(element) => element === document.activeElement,
-				);
-				const firstTabableElement = tabableElements[0];
-				const lastTabableElement =
-					tabableElements[tabableElements.length - 1];
-
-				if (!activeElement) {
-					// Start at the start
-					firstTabableElement?.focus();
-				} else {
-					const currentPosition =
-						tabableElements.indexOf(activeElement);
-					const firstElementHasFocus = currentPosition === 0;
-					const lastElementHasFocus =
-						currentPosition === tabableElements.length - 1;
-
-					if (event.shiftKey) {
-						if (firstElementHasFocus) {
-							lastTabableElement?.focus();
-						} else {
-							tabableElements[currentPosition - 1]?.focus();
-						}
-					} else {
-						if (lastElementHasFocus) {
-							firstTabableElement?.focus();
-						} else {
-							tabableElements[currentPosition + 1]?.focus();
-						}
-					}
-				}
-
-				break;
-			}
-			case 'ArrowLeft':
-				goBack();
-				break;
-			case 'ArrowRight':
-				goForward();
-				break;
-			case 'KeyI':
-				toggleInfo();
-				break;
-			case 'KeyQ':
-				close();
-				break;
-			case 'ArrowUp':
-				showInfo();
-				break;
-			case 'ArrowDown':
-				hideInfo();
-				break;
-		}
 	});
 
 	imageList?.addEventListener(
