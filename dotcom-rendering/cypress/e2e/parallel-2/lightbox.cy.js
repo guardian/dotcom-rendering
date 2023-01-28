@@ -7,6 +7,9 @@ import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 const articleUrl =
 	'https://www.theguardian.com/artanddesign/2022/dec/26/a-lighter-side-of-life-picture-essay';
 
+const liveblogUrl =
+	'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates';
+
 describe('Lightbox', function () {
 	beforeEach(function () {
 		disableCMP();
@@ -16,8 +19,8 @@ describe('Lightbox', function () {
 	it('should open the lightbox when an expand button is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('dialog#gu-lightbox').should('not.be.visible');
-		// Open lightbox using first button on the page
-		cy.get('button.open-lightbox').first().click();
+		// Open lightbox using the second button on the page (the first is main media)
+		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('dialog#gu-lightbox').should('be.visible');
 		// We expect the second image to be showing because the first is the main media
 		// which doesn't have a button in this case because it's an immersive article.
@@ -67,8 +70,8 @@ describe('Lightbox', function () {
 	it('should respond to keyboard shortcuts', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('dialog#gu-lightbox').should('not.be.visible');
-		// Open lightbox using first button on the page
-		cy.get('button.open-lightbox').first().click();
+		// Open lightbox using the second button on the page (the first is main media)
+		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('dialog#gu-lightbox').should('be.visible');
 		// Close lightbox using q key
 		cy.realPress('q');
@@ -101,7 +104,7 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="22"]').should('be.visible');
 		cy.realPress('ArrowRight');
 		cy.get('li[data-index="1"]').should('be.visible');
-		// Showing and hiding the info caption
+		// Showing and hiding the info caption using 'i'
 		cy.get('li[data-index="1"] aside').should('be.visible');
 		cy.realPress('i');
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
@@ -122,11 +125,9 @@ describe('Lightbox', function () {
 			return cy.get(`li[data-index="${position}"] img`);
 		}
 		cy.visit(`/Article?url=${articleUrl}`);
-		// eq(5) here means the 6th button is clicked (base zero you
-		// see) and this in turn means the *7th* image is selected
-		// because main media doesn't have a button for this immersive
-		// article that we're testing with
-		cy.get('button.open-lightbox').eq(5).click();
+		// eq(6) here means the 7th button is clicked (base zero you
+		// see)
+		cy.get('button.open-lightbox').eq(6).click();
 		// We validate that adjacent images get downloaded early by checking the
 		// value of the `loading` attribute
 		image(5).should('have.attr', 'loading', 'lazy');
@@ -153,7 +154,7 @@ describe('Lightbox', function () {
 
 	it('should remember my preference for showing the caption', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
-		cy.get('button.open-lightbox').first().click();
+		cy.get('button.open-lightbox').eq(1).realClick();
 		// The info aside is visible by default
 		cy.get('li[data-index="2"] aside').should('be.visible');
 		// Clicking an image toggles the caption
@@ -162,27 +163,27 @@ describe('Lightbox', function () {
 		// Close lightbox
 		cy.realPress('Escape');
 		// Re-open lightbox to see if the info aside element is open by default
-		cy.get('button.open-lightbox').first().realPress('Space');
+		cy.get('button.open-lightbox').eq(1).realPress('Space');
 		cy.get('li[data-index="2"] aside').should('not.be.visible');
 		// Close lightbox
 		cy.realPress('Escape');
 		// Reload the page to see if my preference for having the caption hidden
 		// has been preserved
 		cy.reload();
-		cy.get('button.open-lightbox').first().click();
+		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('dialog#gu-lightbox').should('be.visible');
 		cy.get('li[data-index="2"] aside').should('not.be.visible');
 		// Turn the info aside back on and then reload once more to check the
 		// caption is again showing by default
 		cy.realPress('i');
 		cy.reload();
-		cy.get('button.open-lightbox').first().click();
+		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] aside').should('be.visible');
 	});
 
 	it('should be possible to navigate by scrolling', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
-		cy.get('button.open-lightbox').first().click();
+		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] img').should('be.visible');
 		cy.get('li[data-index="5"]').scrollIntoView();
 		cy.get('li[data-index="2"] img').should('not.be.visible');
