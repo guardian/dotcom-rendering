@@ -351,7 +351,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}, 300),
 	);
 
-
 	lightbox.addEventListener('close', () => {
 		document.documentElement.classList.remove('lightbox-open');
 		// When the lightbox is closed, remove any img hash has from the url
