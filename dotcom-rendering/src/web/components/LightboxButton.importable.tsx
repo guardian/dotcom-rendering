@@ -60,7 +60,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const positionDisplay =
 		lightbox.querySelector<HTMLElement>('nav .selected');
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
-	const LIs = lightbox.querySelectorAll('li');
+	const pictures = lightbox.querySelectorAll('li picture');
 	const images = lightbox.querySelectorAll('li img');
 	const captionLinks = lightbox.querySelectorAll('li aside a');
 
@@ -266,8 +266,8 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		});
 	});
 
-	LIs.forEach((LI) => {
-		LI.addEventListener('mousedown', (event) => {
+	pictures.forEach((picture) => {
+		picture.addEventListener('mousedown', (event) => {
 			toggleInfo();
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
