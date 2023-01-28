@@ -212,4 +212,27 @@ describe('Lightbox', function () {
 			'?page=with:block-603007c48f08c3cb92a5ca74#block-603007c48f08c3cb92a5ca74',
 		);
 	});
+
+	it('should use the url to maintain lightbox state', function () {
+		cy.visit(`/Article?url=${articleUrl}`);
+		cy.get('button.open-lightbox').eq(1).realClick();
+		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
+		cy.url().should('contain', '#img-2');
+		cy.realPress('ArrowRight');
+		cy.url().should('contain', '#img-3');
+		cy.go('back');
+		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.url().should('not.contain', '#img-');
+		cy.go('forward');
+		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.url().should('contain', '#img-3');
+		cy.realPress('ArrowRight');
+		cy.realPress('ArrowRight');
+		cy.realPress('ArrowRight');
+		cy.url().should('contain', '#img-6');
+		// It should load the lightbox at page load if the url contains an img hash
+		cy.reload();
+		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('nav [data-cy="lightbox-selected"]').contains('6/22');
+	});
 });
