@@ -67,7 +67,7 @@ describe('Lightbox', function () {
 		cy.get('button.next').should('have.focus');
 	});
 
-	it('should respond to keyboard shortcuts', function () {
+	it('should respond to keyboard shortcuts and image clicks', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('dialog#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
@@ -110,6 +110,12 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		cy.realPress('i');
 		cy.get('li[data-index="1"] aside').should('be.visible');
+		// Showing and hiding the caption by clicking
+		cy.get('li[data-index="1"] picture').click();
+		cy.get('li[data-index="1"] aside').should('not.be.visible');
+		cy.get('li[data-index="1"] picture').click();
+		cy.get('li[data-index="1"] aside').should('be.visible');
+		// Showing and hiding using arrow keys
 		cy.realPress('ArrowDown');
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		cy.realPress('ArrowUp');
