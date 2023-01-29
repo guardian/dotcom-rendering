@@ -515,7 +515,9 @@ export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
 		 *
 		 * See: https://github.com/GoogleChrome/dialog-polyfill
 		 */
-		if (typeof HTMLDialogElement === 'function') {
+		// We need to cast to any here because of this issue: https://github.com/microsoft/TypeScript/issues/48267
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any -- ts v4.3 has a problem with dialog
+		if (typeof (lightbox as any).showModal === 'function') {
 			// No polyfill needed
 			initialiseLightbox(lightbox);
 		} else {
