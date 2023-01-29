@@ -164,6 +164,7 @@
 		"cypress-wait-until": "^1.7.1",
 		"cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
 		"desvg-loader": "^0.1.0",
+		"dialog-polyfill": "^0.5.6",
 		"doctoc": "^2.2.1",
 		"dompurify": "^2.3.6",
 		"dynamic-import-polyfill": "^0.1.1",

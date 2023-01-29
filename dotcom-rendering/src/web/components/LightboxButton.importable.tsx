@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { storage } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -16,6 +16,47 @@ type Props = {
 	role: RoleType;
 	isMainMedia?: boolean;
 };
+
+/**
+ * This css is used by dialog-polyfill.  It is only loaded if the polyfill is needed
+ *
+ * It is a slimmed down version of this file (colour styles and extraneous features
+ * have been removed):
+ * https://github.com/GoogleChrome/dialog-polyfill/blob/master/dist/dialog-polyfill.css
+ *
+ */
+const polyfillStyles = `
+	dialog {
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: -moz-fit-content;
+		width: -webkit-fit-content;
+		width: fit-content;
+		height: -moz-fit-content;
+		height: -webkit-fit-content;
+		height: fit-content;
+		margin: auto;
+		border: solid;
+		display: block;
+	}
+
+	dialog + .backdrop {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	._dialog_overlay {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+`;
 
 function decideSize(role: RoleType) {
 	switch (role) {
@@ -43,6 +84,7 @@ function decideSize(role: RoleType) {
 }
 
 function initialiseLightbox(lightbox: HTMLDialogElement) {
+	log('dotcom', '💡 Initialising lightbox');
 	// Document selectors
 	const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
 		'button.open-lightbox',
@@ -201,7 +243,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
-		console.log(event);
 		if (event.ctrlKey || event.metaKey || event.altKey) return;
 		switch (event.code) {
 			case 'Tab': {
@@ -251,7 +292,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 				toggleInfo();
 				break;
 			case 'KeyQ':
-			case 'Escape':
 				close();
 				break;
 			case 'ArrowUp':
@@ -286,8 +326,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	function close(): void {
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
 		(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
-		// Stop listening for keyboard shortcuts
-		window.removeEventListener('keydown', handleKeydown);
 	}
 
 	function showInfo(): void {
@@ -352,6 +390,7 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	);
 
 	lightbox.addEventListener('close', () => {
+		console.log('Closing');
 		document.documentElement.classList.remove('lightbox-open');
 		// When the lightbox is closed, remove any img hash has from the url
 		if (window.location.hash.startsWith('#img-')) {
@@ -361,6 +400,8 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 				window.location.pathname + window.location.search,
 			);
 		}
+		// Stop listening for keyboard shortcuts
+		window.removeEventListener('keydown', handleKeydown);
 	});
 	closeButton?.addEventListener('click', close);
 	previousButton?.addEventListener('click', goBack);
@@ -465,8 +506,35 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
 	useEffect(() => {
 		const lightbox =
-			document.querySelector<HTMLDialogElement>('#gu-lightbox');
-		if (lightbox) initialiseLightbox(lightbox);
+			document.querySelector<HTMLDialogElement>('dialog#gu-lightbox');
+		if (!lightbox) return;
+		/**
+		 * The <dialog> element is fairly well supported but not completely so
+		 * we check here and use a polyfill if it isn't. In particular, Safari
+		 * only landed support in March 2022 with 15.4
+		 *
+		 * See: https://github.com/GoogleChrome/dialog-polyfill
+		 */
+		if (typeof HTMLDialogElement === 'function') {
+			// No polyfill needed
+			initialiseLightbox(lightbox);
+		} else {
+			log(
+				'dotcom',
+				'💡 No support for dialog detected. Loading polyfill',
+			);
+			// First insert polyfill css
+			const style = document.createElement('style');
+			document.head.appendChild(style);
+			style.id = 'polyfill-css';
+			style.appendChild(document.createTextNode(polyfillStyles));
+			// Now download and run the polyfill javascript
+			// eslint-disable-next-line import/no-extraneous-dependencies -- it does exist, I tell you
+			void import('dialog-polyfill').then((module) => {
+				module.default.registerDialog(lightbox); // <-- Polyfill
+				initialiseLightbox(lightbox);
+			});
+		}
 	}, []);
 
 	// Don't show the button over thumbnails; they're too small

@@ -366,6 +366,16 @@ export const Lightbox = ({ format, images }: Props) => {
 					html.lightbox-open {
 						overflow: hidden;
 					}
+
+					/*
+						This css is taken from the polyfill styles and is always needed, even
+						if the lightbox is not loaded, because we can't depend on the browsers
+						with no support for the dialog element to hide the lightbox when it's
+						inactive
+					*/
+					dialog:not([open]) {
+						display: none;
+					}
 				`}
 			/>
 			<dialog css={dialogStyles} id="gu-lightbox" aria-modal="true">
