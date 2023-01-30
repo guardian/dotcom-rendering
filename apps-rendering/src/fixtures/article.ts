@@ -6,6 +6,7 @@ import type {
 	ArticleFormat,
 } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { themeToString } from 'articleFormat';
 
 // ----- Functions ----- //
 
@@ -21,15 +22,12 @@ const getAllThemes = (format: {
 		{ ...format, theme: ArticlePillar.Opinion },
 		{ ...format, theme: ArticleSpecial.SpecialReport },
 		{ ...format, theme: ArticleSpecial.Labs },
+		{ ...format, theme: ArticleSpecial.SpecialReportAlt },
 	];
 };
 
-const getThemeNameAsString = (format: ArticleFormat): string => {
-	const themeName =
-		ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
-	if (!themeName) throw new Error('Unknown theme');
-	return themeName;
-};
+const getThemeNameAsString = (format: ArticleFormat): string =>
+	themeToString(format.theme);
 
 // ----- Exports ----- //
 
