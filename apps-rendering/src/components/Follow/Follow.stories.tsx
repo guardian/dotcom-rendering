@@ -1,12 +1,9 @@
 // ----- Imports ----- //
 
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
+import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Follow from './';

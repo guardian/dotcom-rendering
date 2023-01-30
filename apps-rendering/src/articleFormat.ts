@@ -248,4 +248,5 @@ export {
 	getPillarOrElseNews,
 	pillarToId,
 	themeToPillar,
+	themeToString,
 };
