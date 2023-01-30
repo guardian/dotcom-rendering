@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { log, storage } from '@guardian/libs';
+import { ArticleDisplay, log, storage } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -14,6 +14,7 @@ import type { RoleType } from '../../types/content';
 type Props = {
 	elementId: string;
 	role: RoleType;
+	format: ArticleFormat;
 	isMainMedia?: boolean;
 };
 
@@ -502,7 +503,12 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
+export const LightboxButton = ({
+	elementId,
+	role,
+	format,
+	isMainMedia,
+}: Props) => {
 	useEffect(() => {
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('dialog#gu-lightbox');
@@ -530,7 +536,7 @@ export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
 			style.id = 'polyfill-css';
 			style.appendChild(document.createTextNode(polyfillStyles));
 			// Now download and run the polyfill javascript
-			// eslint-disable-next-line import/no-extraneous-dependencies -- it does exist, I tell you
+
 			void import('dialog-polyfill').then((module) => {
 				module.default.registerDialog(lightbox); // <-- Polyfill
 				initialiseLightbox(lightbox);
@@ -567,7 +573,9 @@ export const LightboxButton = ({ elementId, role, isMainMedia }: Props) => {
 						}
 					`,
 					decideSize(role),
-					isMainMedia && visuallyHidden,
+					isMainMedia &&
+						format.display === ArticleDisplay.Immersive &&
+						visuallyHidden,
 				]}
 			>
 				<SvgArrowExpand />

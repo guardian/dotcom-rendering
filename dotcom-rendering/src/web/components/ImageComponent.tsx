@@ -337,6 +337,7 @@ export const ImageComponent = ({
 				<Island deferUntil="interaction">
 					<LightboxButton
 						role={role}
+						format={format}
 						elementId={element.elementId}
 						isMainMedia={isMainMedia}
 					/>
@@ -379,6 +380,7 @@ export const ImageComponent = ({
 				<Island deferUntil="interaction">
 					<LightboxButton
 						role={role}
+						format={format}
 						elementId={element.elementId}
 						isMainMedia={isMainMedia}
 					/>
@@ -459,6 +461,7 @@ export const ImageComponent = ({
 				<Island deferUntil="interaction">
 					<LightboxButton
 						role={role}
+						format={format}
 						elementId={element.elementId}
 						isMainMedia={isMainMedia}
 					/>
