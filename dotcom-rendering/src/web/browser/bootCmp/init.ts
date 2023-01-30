@@ -11,30 +11,6 @@ import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
 import { submitComponentEvent } from '../ophan/ophan';
 import { startup } from '../startup';
 
-const trackPerformance = (
-	timingCategory: string,
-	timingVar: any,
-	timingLabel: string,
-): void => {
-	const { ga } = window;
-
-	if (!ga) {
-		return;
-	}
-
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- not supported in all browsers
-	if (window.performance?.now) {
-		ga(
-			'allEditorialPropertyTracker.send',
-			'timing',
-			timingCategory,
-			timingVar,
-			Math.round(window.performance.now()),
-			timingLabel,
-		);
-	}
-};
-
 const init = async (): Promise<void> => {
 	/**
 	 * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
@@ -43,19 +19,6 @@ const init = async (): Promise<void> => {
 	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
-
-	// Track when CMP will show with GA
-	cmp.willShowPrivacyMessage()
-		.then((willShow) => {
-			trackPerformance(
-				'consent',
-				'acquired',
-				willShow ? 'new' : 'existing',
-			);
-		})
-		.catch((e) =>
-			log('dotcom', `CMP willShowPrivacyMessage - error: ${String(e)}`),
-		);
 
 	onConsentChange((consentState: ConsentState) => {
 		if (!consentState) return;
