@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
 import { PulsingDot } from './PulsingDot.importable';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
@@ -7,7 +6,6 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
 	hideLineBreak?: boolean;
 };
 
@@ -22,7 +20,6 @@ export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
-	showSlash = true,
 	hideLineBreak,
 }: Props) => {
 	return (

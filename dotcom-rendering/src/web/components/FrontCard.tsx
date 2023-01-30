@@ -35,7 +35,6 @@ export const FrontCard = (props: Props) => {
 		webPublicationDate: trail.webPublicationDate,
 		kickerText: trail.kickerText,
 		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
-		showSlash: true,
 		showClock: false,
 		imageUrl: trail.image,
 		isCrossword: trail.isCrossword,

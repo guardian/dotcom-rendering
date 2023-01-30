@@ -211,23 +211,7 @@ export const liveStory = () => (
 );
 liveStory.story = { name: 'With Live kicker' };
 
-export const noSlash = () => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a card headline with no kicker slash looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			kickerText="Live"
-			showSlash={false}
-		/>
-	</Section>
-);
-noSlash.story = { name: 'With Live kicker but no slash' };
-
-export const noLinebreak = () => (
+export const noLineBreak = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker linebreak looks"
@@ -241,7 +225,7 @@ export const noLinebreak = () => (
 		/>
 	</Section>
 );
-noSlash.story = { name: 'With Live kicker but no slash' };
+noLineBreak.story = { name: 'With Live kicker but no line break' };
 
 export const pulsingDot = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -308,7 +292,6 @@ export const OpinionKicker = () => (
 						}}
 						showQuotes={true}
 						kickerText="George Monbiot"
-						showSlash={true}
 						size={size}
 					/>
 				</Section>
@@ -335,7 +318,6 @@ export const SpecialReport = () => (
 			}}
 			showQuotes={true}
 			kickerText="Special Report"
-			showSlash={true}
 		/>
 	</Section>
 );
@@ -352,7 +334,6 @@ export const Busy = () => (
 			}}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
-			showSlash={true}
 		/>
 	</Section>
 );
