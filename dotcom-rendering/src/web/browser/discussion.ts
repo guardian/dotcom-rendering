@@ -1,8 +1,6 @@
-import '../webpackPublicPath';
-import { doHydration } from '../islands/doHydration';
-import { getEmotionCache } from '../islands/emotion';
-import { getProps } from '../islands/getProps';
-import { startup } from '../startup';
+import { doHydration } from './islands/doHydration';
+import { getEmotionCache } from './islands/emotion';
+import { getProps } from './islands/getProps';
 
 function forceHydration() {
 	try {
@@ -27,7 +25,7 @@ function forceHydration() {
 	}
 }
 
-const init = (): Promise<void> => {
+export const discussion = (): Promise<void> => {
 	/**
 	 * If we have either a #comment-123456 permalink or the #comments link in the url
 	 * then we want to hydrate and expand the discussion without waiting for the
@@ -39,5 +37,3 @@ const init = (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('initDiscussion', null, init);
