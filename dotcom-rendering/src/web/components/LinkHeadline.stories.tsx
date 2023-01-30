@@ -42,27 +42,10 @@ export const liveStory = () => (
 );
 liveStory.story = { name: 'With Live kicker' };
 
-// TODO remove after test
-export const noSlash = () => (
-	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
-		<LinkHeadline
-			headlineText="This is how a headline with no kicker slash looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			kickerText="Live"
-			showSlash={false}
-		/>
-	</Section>
-);
-noSlash.story = { name: 'With Live kicker but no slash' };
-
 export const noLinebreak = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
-			headlineText="This is how a headline with no line break looks"
+			headlineText="This is how a headline with no kicker line break looks"
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -134,7 +117,6 @@ export const OpinionKicker = () => (
 			}}
 			showQuotes={true}
 			kickerText="George Monbiot"
-			showSlash={true}
 		/>
 	</Section>
 );
@@ -151,7 +133,6 @@ export const SpecialReport = () => (
 			}}
 			showQuotes={true}
 			kickerText="Special Report"
-			showSlash={true}
 		/>
 	</Section>
 );
@@ -169,7 +150,6 @@ export const InUnderlinedState = () => (
 			showUnderline={true}
 			size="small"
 			kickerText="I am never underlined"
-			showSlash={true}
 			link={{
 				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
@@ -188,7 +168,6 @@ export const linkStory = () => (
 				theme: ArticlePillar.Sport,
 			}}
 			kickerText="I am not a link"
-			showSlash={true}
 			link={{
 				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
@@ -208,7 +187,6 @@ export const LiveBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Large live"
-			showSlash={true}
 			showPulsingDot={true}
 			size="large"
 		/>
@@ -222,7 +200,6 @@ export const LiveBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Medium live"
-			showSlash={true}
 			showPulsingDot={true}
 			size="medium"
 		/>
@@ -236,7 +213,6 @@ export const LiveBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Small live"
-			showSlash={true}
 			showPulsingDot={true}
 			size="small"
 		/>
@@ -250,7 +226,6 @@ export const LiveBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Tiny live"
-			showSlash={true}
 			showPulsingDot={true}
 			size="tiny"
 		/>
@@ -269,7 +244,6 @@ export const DeadBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Large dead"
-			showSlash={true}
 			showPulsingDot={false}
 			size="large"
 		/>
@@ -283,7 +257,6 @@ export const DeadBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Medium dead"
-			showSlash={true}
 			showPulsingDot={false}
 			size="medium"
 		/>
@@ -297,7 +270,6 @@ export const DeadBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Small dead"
-			showSlash={true}
 			showPulsingDot={false}
 			size="small"
 		/>
@@ -311,7 +283,6 @@ export const DeadBlogSizes = () => (
 			}}
 			showQuotes={true}
 			kickerText="Tiny dead"
-			showSlash={true}
 			showPulsingDot={false}
 			size="tiny"
 		/>
@@ -329,7 +300,6 @@ export const Updated = () => (
 				theme: ArticlePillar.News,
 			}}
 			showPulsingDot={true}
-			showSlash={false}
 			hideLineBreak={true}
 			kickerText="Updated 7m ago"
 			size="tiny"
