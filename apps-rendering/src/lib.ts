@@ -158,10 +158,12 @@ const toNullable = <A>(opt: Option<A>): A | undefined =>
  *
  * const num = 42
  *
- * // The function names are written in the opposite order to the one they're called in: <-
+ * // The function names are written in the opposite order to the one they're
+ * // called in: <-
  * const resultOne = multFour(subTwo(addThree(num)));
  *
- * // The function names are written in the order in which they're called: ->, and the enclosing brackets are not required
+ * // The function names are written in the order in which they're called: ->,
+ * // and the enclosing brackets are not required
  * const resultTwo = pipe(
  *     num,
  *     addThree,
