@@ -112,7 +112,8 @@ module.exports = ({ bundle, sessionId }) => ({
 					name: 'frameworks',
 					enforce: true,
 				},
-				// webpack defaults 
+				// defining our own chunk above overrides the webpack defaults,
+				// so now we restore them
 				// https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
 				defaultVendors: {
 					test: /[\\/]node_modules[\\/]/,
