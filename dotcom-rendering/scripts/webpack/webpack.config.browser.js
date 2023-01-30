@@ -100,7 +100,6 @@ module.exports = ({ bundle, sessionId }) => ({
 	entry: {
 		index: './src/web/browser/index.ts',
 		debug: './src/web/browser/debug/index.ts',
-		ga: './src/web/browser/ga/init.ts',
 	},
 	optimization: {
 		splitChunks: {

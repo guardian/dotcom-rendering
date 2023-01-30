@@ -8,9 +8,6 @@ import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
@@ -122,17 +119,6 @@ export const articleToHtml = ({ article }: Props): string => {
 		),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
-
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
@@ -233,7 +219,6 @@ window.twttr = (function(d, s, id) {
 		title,
 		description: article.trailText,
 		windowGuardian,
-		gaPath,
 		ampLink,
 		openGraphData,
 		twitterData,
