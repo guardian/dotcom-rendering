@@ -112,7 +112,8 @@ module.exports = ({ bundle, sessionId }) => ({
 					name: 'frameworks',
 					enforce: true,
 				},
-				// webpack defaults
+				// webpack defaults 
+				// https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
 				defaultVendors: {
 					test: /[\\/]node_modules[\\/]/,
 					priority: -10,
