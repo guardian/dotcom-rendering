@@ -30,7 +30,7 @@ type Props = {
 
 const dialogStyles = css`
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	border: none;
 	max-width: 100vw;
 	max-height: 100vh;
