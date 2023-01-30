@@ -27,7 +27,7 @@ export const Kicker = ({
 				kickerStyles(color),
 				hideLineBreak &&
 					css`
-						display: inline;
+						display: inline-block;
 					`,
 			]}
 		>
