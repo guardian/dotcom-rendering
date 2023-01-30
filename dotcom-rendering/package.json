@@ -36,6 +36,7 @@
 		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
 		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
 	},
+	"bundlesize": [],
 	"lint-staged": {
 		"*": "lint"
 	},
