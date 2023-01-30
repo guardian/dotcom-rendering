@@ -26,6 +26,7 @@ export const TopRightAdSlot = ({
 				`,
 				adStyles,
 			]}
+			className="ad-slot-container"
 		>
 			<div
 				id="dfp-ad--right"
