@@ -1,10 +1,6 @@
 // ----- Imports ----- //
 
 import {
-	getAllThemes,
-	getThemeNameAsString,
-} from 'fixtures/article';
-import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
@@ -13,6 +9,7 @@ import {
 import type { Option } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
+import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './';

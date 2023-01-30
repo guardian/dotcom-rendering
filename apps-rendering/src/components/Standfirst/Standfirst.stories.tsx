@@ -1,11 +1,8 @@
 // ----- Imports ----- //
 
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from 'fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import {
 	analysis,
 	article,

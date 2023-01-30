@@ -1,15 +1,18 @@
-import {
-	ArticlePillar,
-	ArticleSpecial,
-	ArticleDisplay,
+// ----- Imports ----- //
+
+import type {
 	ArticleDesign,
+	ArticleDisplay,
 	ArticleFormat,
 } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
-export const getAllThemes = (format: {
+// ----- Functions ----- //
+
+const getAllThemes = (format: {
 	display: ArticleDisplay;
 	design: ArticleDesign;
-}): Array<ArticleFormat> => {
+}): ArticleFormat[] => {
 	return [
 		{ ...format, theme: ArticlePillar.News },
 		{ ...format, theme: ArticlePillar.Sport },
@@ -21,9 +24,13 @@ export const getAllThemes = (format: {
 	];
 };
 
-export const getThemeNameAsString = (format: ArticleFormat): string => {
+const getThemeNameAsString = (format: ArticleFormat): string => {
 	const themeName =
 		ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
 	if (!themeName) throw new Error('Unknown theme');
 	return themeName;
 };
+
+// ----- Exports ----- //
+
+export { getAllThemes, getThemeNameAsString };

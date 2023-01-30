@@ -1,7 +1,7 @@
-import { getAllThemes } from 'fixtures/article';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { formatToString } from 'articleFormat';
+import { getAllThemes } from 'fixtures/article';
 import type { ReactElement } from 'react';
 import { Pagination } from '.';
 
