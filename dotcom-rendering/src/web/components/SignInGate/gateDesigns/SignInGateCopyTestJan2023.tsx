@@ -32,7 +32,7 @@ export const SignInGateCopyTestJan2023 = ({
 	) => {
 		switch (abVariant) {
 			case 'quick-and-easy': {
-				return "Register: it’s quick and easy";
+				return 'Register: it’s quick and easy';
 			}
 			case 'take-a-moment': {
 				return 'Take a moment to register';
