@@ -3,7 +3,7 @@
 import {
 	getAllThemes,
 	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
+} from 'fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { some } from '@guardian/types';

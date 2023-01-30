@@ -3,7 +3,7 @@
 import {
 	getAllThemes,
 	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
+} from 'fixtures/article';
 import {
 	ArticleDesign,
 	ArticleDisplay,
