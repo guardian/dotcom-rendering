@@ -32,7 +32,7 @@ export const SignInGateCopyTestJan2023 = ({
 	) => {
 		switch (abVariant) {
 			case 'quick-and-easy': {
-				return "Register: it's quick and easy";
+				return "Register: it’s quick and easy";
 			}
 			case 'take-a-moment': {
 				return 'Take a moment to register';
@@ -50,7 +50,7 @@ export const SignInGateCopyTestJan2023 = ({
 				{getCopyTextFromVariant(abTest?.variant)}
 			</h1>
 			<p css={bodyBold}>
-				It’s still free to read - this is not a paywall
+				It’s still free to read – this is not a paywall
 			</p>
 			<p css={bodyText}>
 				We’re committed to keeping our quality reporting open. By
