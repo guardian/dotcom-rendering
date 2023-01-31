@@ -315,21 +315,37 @@ export const AdSlot = ({
 				display: block;
 				min-width: 728px;
 			`;
+			const topAboveNavContainerStyles = css`
+				:has(div.ad-slot--fluid) {
+					margin: 0 auto;
+					width: fit-content;
+				}
+
+				:has(div[data-label-show='true']) {
+					margin: 0 auto;
+					width: fit-content;
+				}
+			`;
 			return (
 				<div
-					id="dfp-ad--top-above-nav"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--top-above-nav',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
-					data-link-name="ad slot top-above-nav"
-					data-name="top-above-nav"
-					aria-hidden="true"
-				></div>
+					className="ad-slot-container"
+					css={topAboveNavContainerStyles}
+				>
+					<div
+						id="dfp-ad--top-above-nav"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--top-above-nav',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+						data-link-name="ad slot top-above-nav"
+						data-name="top-above-nav"
+						aria-hidden="true"
+					></div>
+				</div>
 			);
 		}
 		case 'mostpop': {
