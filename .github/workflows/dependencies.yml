@@ -1,0 +1,31 @@
+name: 📦 Dependencies checks
+on:
+  pull_request:
+    paths:
+      - 'dotcom-rendering/package.json'
+      - '**/yarn.lock'
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+jobs:
+  types-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.30.0
+
+      - name: Check dependencies
+        run: |
+          deno run \
+            --allow-read=. \
+            --allow-net=unpkg.com \
+            --import-map=https://raw.githubusercontent.com/guardian/actions-npm-dependencies/0.2.0/deno.jsonc \
+            https://raw.githubusercontent.com/guardian/actions-npm-dependencies/0.2.0/src/main.ts \
+            dotcom-rendering/package.json \
+            --cache
