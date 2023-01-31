@@ -51,7 +51,7 @@ To add an island:
 3. Specify what should trigger hydration (e.g. waiting until the component
   scrolls into view). See `Island.tsx` props for options.
 
-## How can I make an AJAX request in DCR?
+## How to fetch external data on the client?
 
 DCR doesn't make calls to external services from the server. The server's job is only to
 render the data passed to it by a POST request. But it does make requests on the client side.
