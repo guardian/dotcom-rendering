@@ -33,6 +33,7 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
+import { RatingSizeType } from '../../../types/content';
 
 export type Props = {
 	linkTo: string;
@@ -75,7 +76,13 @@ export type Props = {
 	isDynamo?: true;
 };
 
-const StarRatingComponent = ({ rating }: { rating: number }) => (
+const StarRatingComponent = ({
+	rating,
+	sizeOnWide,
+}: {
+	rating: number;
+	sizeOnWide: RatingSizeType;
+}) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
@@ -84,10 +91,10 @@ const StarRatingComponent = ({ rating }: { rating: number }) => (
 		`}
 	>
 		<Hide when="above" breakpoint="desktop">
-			<StarRating rating={rating} size="small" />
+			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<StarRating rating={rating} size="medium" />
+			<StarRating rating={rating} size={sizeOnWide} breakpoint="wide" />
 		</Hide>
 	</div>
 );
@@ -413,7 +420,12 @@ export const Card = ({
 							isDynamo={isDynamo}
 						/>
 						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
+							<StarRatingComponent
+								rating={starRating}
+								sizeOnWide={
+									imageUrl === undefined ? 'small' : 'medium'
+								}
+							/>
 						) : null}
 						{(format.design === ArticleDesign.Gallery ||
 							format.design === ArticleDesign.Audio ||
