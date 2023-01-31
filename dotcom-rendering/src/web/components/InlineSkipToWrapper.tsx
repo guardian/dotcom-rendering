@@ -34,7 +34,11 @@ const skipLinkCss = css`
 	}
 `;
 
-export const InlineSkipToWrapper = ({ id, blockDescription, children }: Props) => {
+export const InlineSkipToWrapper = ({
+	id,
+	blockDescription,
+	children,
+}: Props) => {
 	return (
 		<>
 			<a

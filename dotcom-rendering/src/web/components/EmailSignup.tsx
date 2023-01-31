@@ -8,7 +8,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { buildDetailText } from '../lib/buildNewsletterSignUpText';
-import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -21,7 +20,6 @@ type Props = {
 	theme: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
-	skipLinkId: string;
 };
 
 const containerStyles = css`
@@ -85,30 +83,24 @@ export const EmailSignup = ({
 	successDescription,
 	theme,
 	hidePrivacyMessage,
-	skipLinkId,
 }: Props) => {
 	return (
-		<InlineSkipToWrapper
-			id={skipLinkId}
-			blockDescription="newsletter promotion"
-		>
-			<aside css={containerStyles} aria-label="Newsletter promotion">
-				<div css={stackBelowTabletStyles}>
-					<p css={titleStyles(theme)}>
-						Sign up to <span>{name}</span>
-					</p>
-					<div css={noHeightFromTabletStyles}>
-						<NewsletterDetail text={buildDetailText(frequency)} />
-					</div>
+		<aside css={containerStyles} aria-label="newsletter promotion">
+			<div css={stackBelowTabletStyles}>
+				<p css={titleStyles(theme)}>
+					Sign up to <span>{name}</span>
+				</p>
+				<div css={noHeightFromTabletStyles}>
+					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
-				<p css={descriptionStyles}>{description}</p>
-				<SecureSignup
-					name={name}
-					newsletterId={identityName}
-					successDescription={successDescription}
-					hidePrivacyMessage={hidePrivacyMessage}
-				/>
-			</aside>
-		</InlineSkipToWrapper>
+			</div>
+			<p css={descriptionStyles}>{description}</p>
+			<SecureSignup
+				name={name}
+				newsletterId={identityName}
+				successDescription={successDescription}
+				hidePrivacyMessage={hidePrivacyMessage}
+			/>
+		</aside>
 	);
 };
