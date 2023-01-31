@@ -18,6 +18,11 @@ export type SignInGateComponent = {
 	}: CanShowGateProps) => Promise<boolean>;
 };
 
+export interface CheckoutCompleteCookieData {
+	userType: 'new' | 'guest' | 'current';
+	product: 'Contribution' | 'DigitalPack' | 'Paper' | 'Guardian Weekly';
+}
+
 export interface SignInGateProps {
 	signInUrl: string;
 	guUrl: string;
@@ -25,8 +30,11 @@ export interface SignInGateProps {
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 }
-
+// TODO -> create a type with checkoutCompleteCookieData non optional
+// type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
+// export type SignInGatePropsWithCheckoutCompleteCookieData = WithRequired<SignInGateProps, 'checkoutCompleteCookieData'>
 export type CurrentSignInGateABTest = {
 	name: string;
 	variant: string;

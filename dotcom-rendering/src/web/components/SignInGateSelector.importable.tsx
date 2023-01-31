@@ -15,6 +15,7 @@ import {
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import type {
+	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
@@ -40,6 +41,7 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
+	checkoutComplete?: CheckoutCompleteCookieData;
 }
 
 const dismissGate = (
@@ -99,6 +101,7 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
+	checkoutComplete,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -121,6 +124,7 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: componentId,
+			checkoutCompleteCookieData: checkoutComplete,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -141,6 +145,25 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
+	const checkOutCompleteString = getCookie({
+		name: 'GU_CO_COMPLETE',
+		shouldMemoize: true,
+	});
+
+	const getUserAndProductType = (checkoutCompleteStr: string) => {
+		// todo -> validate we get an object here?
+		const checkoutCompleteDecoded = JSON.parse(
+			decodeURIComponent(checkoutCompleteStr),
+		);
+		return checkoutCompleteDecoded;
+	};
+
+	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
+		checkOutCompleteString !== null
+			? getUserAndProductType(checkOutCompleteString)
+			: undefined;
+
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -228,6 +251,7 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
+					checkoutComplete={checkoutCompleteCookieData}
 				/>
 			)}
 		</>

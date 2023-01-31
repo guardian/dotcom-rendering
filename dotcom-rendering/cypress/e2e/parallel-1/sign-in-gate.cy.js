@@ -37,7 +37,7 @@ describe('Sign In Gate Tests', function () {
 		cy.setCookie(
 			'GU_CO_COMPLETE',
 			encodeURIComponent(
-				`{"userType":"${userType}","product":"${productType}"`,
+				`{"userType":"${userType}","product":"${productType}"}`,
 			),
 		);
 	};
@@ -68,7 +68,6 @@ describe('Sign In Gate Tests', function () {
 
 	describe('SignInGateMain', function () {
 		beforeEach(function () {
-			console.log('does before each run in a nested describe block?');
 			disableCMP();
 			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
 			setMvtCookie('500000');
@@ -201,7 +200,7 @@ describe('Sign In Gate Tests', function () {
 			cy.contains('privacy settings');
 		});
 
-		describe.only('Sign in gate should personalise correctly if GU_CO_COMPLETE cookie is present', function () {
+		describe('Sign in gate should personalise correctly if GU_CO_COMPLETE cookie is present', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
 				visitArticleAndScrollToGateForLazyLoad();
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
@@ -219,7 +218,7 @@ describe('Sign In Gate Tests', function () {
 				);
 			});
 
-			it('should show a personalised copy if a user is new and has a digital subscription', function () {
+			it.only('should show a personalised copy if a user is new and has a digital subscription', function () {
 				setGuCOCompleteCookie('new', 'DigitalPack');
 
 				visitArticleAndScrollToGateForLazyLoad();
