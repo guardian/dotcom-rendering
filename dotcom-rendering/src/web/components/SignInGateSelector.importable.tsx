@@ -1,7 +1,8 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, getSwitches } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
+import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -15,6 +16,7 @@ import {
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import type {
+	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
@@ -40,6 +42,8 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
+	checkoutComplete?: CheckoutCompleteCookieData;
+	personaliseSignInAfterCheckoutSwitch: boolean;
 }
 
 const dismissGate = (
@@ -62,12 +66,14 @@ const generateSignInUrl = ({
 	idUrl,
 	host,
 	currentTest,
+	componentId,
 }: {
 	pageId: string;
 	pageViewId: string;
 	idUrl: string;
 	host: string;
 	currentTest: CurrentSignInGateABTest;
+	componentId?: string;
 }) => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
@@ -75,7 +81,7 @@ const generateSignInUrl = ({
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
 		componentType: 'signingate',
-		componentId: signInGateTestIdToComponentId[currentTest.id],
+		componentId,
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		browserId:
@@ -99,6 +105,8 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
+	checkoutComplete: checkoutCompleteCookieData,
+	personaliseSignInAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -121,6 +129,8 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: componentId,
+			checkoutCompleteCookieData,
+			personaliseSignInAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -141,6 +151,17 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// START: Checkout Complete Personalisation
+	const checkOutCompleteString = getCookie({
+		name: 'GU_CO_COMPLETE',
+		shouldMemoize: true,
+	});
+	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
+		checkOutCompleteString !== null
+			? parseCheckoutCompleteCookieData(checkOutCompleteString)
+			: undefined;
+	// END: Checkout Complete Personalisation
+
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -151,6 +172,7 @@ export const SignInGateSelector = ({
 		CurrentSignInGateABTest | undefined
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
 	const { pageViewId } = window.guardian.config.ophan;
@@ -192,6 +214,12 @@ export const SignInGateSelector = ({
 				})
 				.then(setCanShowGate);
 		}
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		getSwitches().then((switches) => {
+			if (switches.personaliseSignInAfterCheckout) {
+				setPersonaliseSwitch(switches.personaliseSignInAfterCheckout);
+			} else setPersonaliseSwitch(false);
+		});
 	}, [
 		currentTest,
 		gateVariant,
@@ -207,13 +235,28 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	const componentId = signInGateTestIdToComponentId[currentTest.id];
+	const personalisedComponentId = (
+		id?: string,
+		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
+	): string | undefined => {
+		if (!id) return undefined;
+		if (!checkoutCompleteCookieData) return id;
+		const { userType, product } = checkoutCompleteCookieData;
+		return `${id}_personalised_${userType}_${product}`;
+	};
+
+	const componentId = personalisedComponentId(
+		signInGateTestIdToComponentId[currentTest.id],
+		checkoutCompleteCookieData,
+	);
+
 	const signInUrl = generateSignInUrl({
 		pageId,
 		host,
 		pageViewId,
 		idUrl,
 		currentTest,
+		componentId,
 	});
 
 	return (
@@ -228,6 +271,8 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
+					checkoutComplete={checkoutCompleteCookieData}
+					personaliseSignInAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>

@@ -40,6 +40,11 @@ export const bodyBold = css`
 	}
 `;
 
+export const bodySpacing = css`
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+`;
+
 export const bodyText = css`
 	${textSans.medium({ lineHeight: 'regular' })}
 	padding-bottom: ${space[6]}px;
