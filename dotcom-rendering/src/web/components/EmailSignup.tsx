@@ -90,7 +90,7 @@ export const EmailSignup = ({
 	return (
 		<InlineSkipToWrapper
 			id={skipLinkId}
-			label={`skip ${name} newsletter promotion`}
+			blockDescription="newsletter promotion"
 		>
 			<aside css={containerStyles} aria-label="Newsletter promotion">
 				<div css={stackBelowTabletStyles}>
