@@ -3,6 +3,7 @@ import { ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import {
 	between,
+	fontWeights,
 	from,
 	headline,
 	space,
@@ -25,7 +26,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
+	hideLineBreak?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -161,6 +162,7 @@ const sublinkStyles = css`
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: ${fontWeights.medium};
 	line-height: inherit;
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
@@ -192,7 +194,7 @@ const lineStyles = (palette: Palette) => css`
 
 const dynamoStyles = css`
 	display: block;
-	font-weight: 800;
+	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
 
@@ -230,7 +232,7 @@ export const CardHeadline = ({
 	showQuotes,
 	kickerText,
 	showPulsingDot,
-	showSlash,
+	hideLineBreak,
 	size = 'medium',
 	sizeOnMobile,
 	byline,
@@ -254,17 +256,12 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles({
 								size,
-								fontWeight:
-									containerPalette &&
-									containerPalette !=
-										'SpecialReportAltPalette'
-										? 'bold'
-										: 'regular',
+								fontWeight: 'medium',
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							fontWeight: containerPalette ? 'bold' : 'regular',
+							fontWeight: 'medium',
 						}),
 					showLine && !isDynamo && lineStyles(palette),
 				]}
@@ -275,7 +272,7 @@ export const CardHeadline = ({
 							text={kickerText}
 							color={kickerColour}
 							showPulsingDot={showPulsingDot}
-							showSlash={showSlash}
+							hideLineBreak={hideLineBreak}
 						/>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}

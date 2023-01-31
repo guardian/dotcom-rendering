@@ -1,11 +1,13 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Pagination } from './Pagination';
-import { getAllThemes } from '../fixtures/article';
+import { formatToString } from 'articleFormat';
+import { getAllThemes } from 'fixtures/article';
+import type { ReactElement } from 'react';
+import { Pagination } from '.';
 
 export default {
 	component: Pagination,
-	title: 'Common/Components/Pagination',
+	title: 'AR/Pagination',
 	parameters: {
 		layout: 'padded',
 		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
@@ -17,7 +19,7 @@ const formats = getAllThemes({
 	design: ArticleDesign.Standard,
 });
 
-export const notFirstPage = () => {
+export const notFirstPage = (): ReactElement => {
 	return (
 		<>
 			{formats.map((format) => (
@@ -25,7 +27,7 @@ export const notFirstPage = () => {
 					currentPage={2}
 					totalPages={6}
 					format={format}
-					supportsDarkMode
+					key={formatToString(format)}
 				/>
 			))}
 		</>
@@ -35,7 +37,7 @@ notFirstPage.story = {
 	name: 'Not first page',
 };
 
-export const firstPageStory = () => {
+export const firstPageStory = (): ReactElement => {
 	return (
 		<>
 			{formats.map((format) => (
@@ -43,7 +45,7 @@ export const firstPageStory = () => {
 					currentPage={1}
 					totalPages={4}
 					format={format}
-					supportsDarkMode
+					key={formatToString(format)}
 				/>
 			))}
 		</>

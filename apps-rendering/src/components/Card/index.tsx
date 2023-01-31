@@ -455,7 +455,6 @@ const cardImage = (
 						}}
 						format={format}
 						className={some(imgStyles)}
-						supportsDarkMode
 						lightbox={none}
 					/>
 				</div>

@@ -422,9 +422,12 @@ describe('YouTube Atom', function () {
 		cy.get(mediaDiv).scrollIntoView({ duration: 1000, timeout: 10000 });
 
 		// Main media video should NOT be sticky
-		// Attributes set with a value of 'false' are removed from the DOM
 		cy.get(mediaDiv).within(() => {
-			cy.get(stickySelector).should('not.have.attr', 'data-is-sticky');
+			cy.get(stickySelector).should(
+				'have.attr',
+				'data-is-sticky',
+				'false',
+			);
 		});
 
 		// Scroll past the main media video to the third block
@@ -443,7 +446,11 @@ describe('YouTube Atom', function () {
 			// TODO find a way to hover and make the close button visible rather than forcing
 			cy.get(stickyCloseSelector).click({ force: true });
 			// video is NOT sticky
-			cy.get(stickySelector).should('not.have.attr', 'data-is-sticky');
+			cy.get(stickySelector).should(
+				'have.attr',
+				'data-is-sticky',
+				'false',
+			);
 		});
 	});
 });

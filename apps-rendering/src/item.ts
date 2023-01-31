@@ -396,6 +396,8 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
+const isNews = hasTag('tone/news');
+
 const isReview = hasSomeTag([
 	'tone/reviews',
 	'tone/livereview',
@@ -648,4 +650,5 @@ export {
 	isLetter,
 	isObituary,
 	isReview,
+	isNews,
 };

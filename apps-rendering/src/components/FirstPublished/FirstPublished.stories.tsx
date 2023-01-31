@@ -1,16 +1,15 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-
-import { FirstPublished } from './FirstPublished';
+import FirstPublished from '.';
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
-		firstPublished={1613763003000}
+		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={false}
@@ -19,29 +18,13 @@ const Default: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-	/>
-);
-
-const WithFirstPublishedDisplay: FC = () => (
-	<FirstPublished
-		supportsDarkMode={true}
-		firstPublished={1613763003000}
-		firstPublishedDisplay={'99:99'}
-		blockId="#block-60300f5f8f08ad21ea60071e"
-		isPinnedPost={false}
-		isOriginalPinnedPost={false}
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-		}}
+		edition={Edition.UK}
 	/>
 );
 
 const PinnedPost: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
-		firstPublished={1613763003000}
+		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={true}
 		isOriginalPinnedPost={false}
@@ -50,13 +33,13 @@ const PinnedPost: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
+		edition={Edition.UK}
 	/>
 );
 
 const OriginalPinnedPost: FC = () => (
 	<FirstPublished
-		supportsDarkMode={true}
-		firstPublished={1613763003000}
+		firstPublished={new Date(1613763003000)}
 		blockId="#block-60300f5f8f08ad21ea60071e"
 		isPinnedPost={false}
 		isOriginalPinnedPost={true}
@@ -65,6 +48,7 @@ const OriginalPinnedPost: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
+		edition={Edition.UK}
 	/>
 );
 
@@ -72,7 +56,7 @@ const OriginalPinnedPost: FC = () => (
 
 export default {
 	component: FirstPublished,
-	title: 'Common/Components/FirstPublished',
+	title: 'AR/FirstPublished',
 };
 
-export { Default, WithFirstPublishedDisplay, PinnedPost, OriginalPinnedPost };
+export { Default, PinnedPost, OriginalPinnedPost };

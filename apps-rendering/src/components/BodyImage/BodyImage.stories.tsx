@@ -47,7 +47,6 @@ const Default: FC = () => (
 	<BodyImage
 		image={image}
 		format={format}
-		supportsDarkMode={true}
 		lightbox={none}
 		caption={caption}
 		leftColumnBreakpoint={none}
@@ -58,7 +57,6 @@ const NoCaption: FC = () => (
 	<BodyImage
 		image={image}
 		format={format}
-		supportsDarkMode={true}
 		lightbox={none}
 		caption={none}
 		leftColumnBreakpoint={none}
@@ -73,7 +71,6 @@ const Thumbnail: FC = () => (
 				role: ArticleElementRole.Thumbnail,
 			}}
 			format={format}
-			supportsDarkMode={true}
 			lightbox={none}
 			caption={caption}
 			leftColumnBreakpoint={none}
@@ -90,7 +87,6 @@ const ThumbnailNoCaption: FC = () => (
 				role: ArticleElementRole.Thumbnail,
 			}}
 			format={format}
-			supportsDarkMode={true}
 			lightbox={none}
 			caption={none}
 			leftColumnBreakpoint={none}

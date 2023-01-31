@@ -24,6 +24,12 @@ interface BaseTrailType {
 	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
+	discussion?: {
+		isCommentable: boolean;
+		isClosedForComments: boolean;
+		discussionId?: string;
+	};
+	showMainVideo?: boolean;
 }
 
 export interface TrailType extends BaseTrailType {

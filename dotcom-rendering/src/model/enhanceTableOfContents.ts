@@ -4,8 +4,10 @@ import type { TableOfContentsItem } from '../types/frontend';
 
 const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	return (
-		element._type ==
-		'model.dotcomrendering.pageElements.SubheadingBlockElement'
+		element._type ===
+			'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
+		element._type ===
+			'model.dotcomrendering.pageElements.NumberedTitleBlockElement'
 	);
 };
 

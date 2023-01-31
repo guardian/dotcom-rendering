@@ -18,6 +18,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
@@ -56,6 +57,7 @@ interface Props {
 }
 
 const LabsLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -65,6 +67,12 @@ const LabsLayout: FC<Props> = ({ item }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<div>
+						<WithAgeWarning
+							tags={item.tags}
+							series={item.series}
+							publishDate={item.publishDate}
+							format={format}
+						/>
 						<Series item={item} />
 						<Headline item={item} />
 						<div css={articleWidthStyles}>

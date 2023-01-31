@@ -33,6 +33,15 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				randomCentile: 1,
 			}),
 		).toEqual(true);
+		// The sample rate is currently 20% but we want to maintain a 1% sample rate so sample 5% of 20%
+		expect(
+			isSentryEnabled({
+				isDev: false,
+				enableSentryReporting: true,
+				isInBrowserVariantTest: true,
+				randomCentile: 6,
+			}),
+		).toEqual(false);
 	});
 	it('does enable Sentry for 1% of users', () => {
 		expect(

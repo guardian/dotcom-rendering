@@ -1,23 +1,20 @@
-/* eslint-disable import/no-default-export -- exclude stories for this rule */
-
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
-import type { FC } from 'react';
-import { CaptionIconVariant } from './captionIcon';
-import FigCaption from './figCaption';
+import { CaptionIconVariant } from 'components/CaptionIcon';
+import type { FC, ReactElement } from 'react';
+import FigCaption from '.';
 
 // ----- Stories ----- //
 
-const Image: FC = () => (
+const Image: FC = (): ReactElement => (
 	<FigCaption
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
 	>
 		{some(
@@ -26,14 +23,13 @@ const Image: FC = () => (
 	</FigCaption>
 );
 
-const Video: FC = () => (
+const Video: FC = (): ReactElement => (
 	<FigCaption
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
 	>
 		{some(
@@ -46,7 +42,7 @@ const Video: FC = () => (
 
 export default {
 	component: FigCaption,
-	title: 'Common/Components/FigCaption',
+	title: 'AR/FigCaption',
 };
 
 export { Image, Video };

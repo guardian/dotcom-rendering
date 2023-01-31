@@ -6,7 +6,7 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
+	hideLineBreak?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
@@ -16,24 +16,19 @@ const kickerStyles = (colour: string) => css`
 	display: inline-block;
 `;
 
-const slashStyles = css`
-	&::after {
-		content: '/';
-		display: inline-block;
-		margin-left: 4px;
-	}
-`;
-
 export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
-	showSlash = true,
+	hideLineBreak,
 }: Props) => {
 	return (
-		<span css={kickerStyles(color)}>
-			{showPulsingDot && <PulsingDot colour={color} />}
-			<span css={showSlash && slashStyles}>{text}</span>
-		</span>
+		<>
+			<span css={kickerStyles(color)}>
+				{showPulsingDot && <PulsingDot colour={color} />}
+				{text}
+			</span>
+			{!hideLineBreak && <br />}
+		</>
 	);
 };

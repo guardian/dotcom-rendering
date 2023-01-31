@@ -23,7 +23,6 @@ import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { extractExpeditedIslands } from '../lib/extractIslands';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
@@ -52,9 +51,6 @@ export const articleToHtml = ({ article }: Props): string => {
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
 	);
-
-	// Expedited islands scripts are added to the document head as 'high priority'
-	const expeditedIslands = extractExpeditedIslands(html);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
@@ -117,9 +113,6 @@ export const articleToHtml = ({ article }: Props): string => {
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			...getScriptArrayFromFile('islands.js'),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
-			),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),

@@ -52,7 +52,7 @@ export const TimelineBlockComponent = ({
 	pillar,
 }: Props) => (
 	<Expandable id={id} type="Timeline" title={title} pillar={pillar}>
-		{description || ''}
+		{description ?? ''}
 		<ul css={eventsWrapper}>
 			{events.map((e) => (
 				<li css={eventStyle} key={e.title}>
@@ -67,7 +67,7 @@ export const TimelineBlockComponent = ({
 						<h3 css={headingStyle}>{e.title}</h3>
 						<div
 							dangerouslySetInnerHTML={{
-								__html: e.body || '',
+								__html: e.body ?? '',
 							}}
 						/>
 					</div>

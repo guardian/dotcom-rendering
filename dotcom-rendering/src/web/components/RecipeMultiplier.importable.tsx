@@ -30,7 +30,7 @@ const min = 0.5;
 const max = 24;
 
 const units = ['g', 'l'] as const;
-const isUnit = (unit: string): unit is typeof units[number] =>
+const isUnit = (unit: string): unit is (typeof units)[number] =>
 	//@ts-expect-error -- custom type guard
 	units.includes(unit);
 
@@ -52,7 +52,7 @@ const constants = [
 	'cm',
 	'mm',
 ] as const;
-const isConstant = (time?: string): time is typeof constants[number] =>
+const isConstant = (time?: string): time is (typeof constants)[number] =>
 	isString(time) &&
 	//@ts-expect-error -- custom type guard
 	constants.includes(time);

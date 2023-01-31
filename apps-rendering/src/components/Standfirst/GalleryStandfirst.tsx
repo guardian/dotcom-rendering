@@ -17,7 +17,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	color: ${text.standfirst(format)};
-	grid-row: 5/6;
+	grid-row: 7/8;
 	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 
 	${from.mobileLandscape} {

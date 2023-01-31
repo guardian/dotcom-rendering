@@ -204,6 +204,7 @@ export const ArticleBody = ({
 				<Island>
 					<TableOfContents
 						tableOfContents={tableOfContents}
+						format={format}
 					></TableOfContents>
 				</Island>
 			)}

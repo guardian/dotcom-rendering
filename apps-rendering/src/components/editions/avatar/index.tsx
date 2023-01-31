@@ -37,7 +37,6 @@ const Avatar: FC<Props> = ({ item }) => {
 				sizes={sizes}
 				className={some(imgStyles)}
 				format={format}
-				supportsDarkMode={false}
 				lightbox={none}
 			/>
 		)),

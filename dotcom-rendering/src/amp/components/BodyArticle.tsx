@@ -160,7 +160,7 @@ export const Body = ({ data, config }: Props) => {
 							>
 								<RegionalAd
 									editionId={data.editionId}
-									section={data.sectionName || ''}
+									section={data.sectionName ?? ''}
 									contentType={adInfo.contentType}
 									config={adConfig}
 									commercialProperties={
@@ -213,7 +213,7 @@ export const Body = ({ data, config }: Props) => {
 
 			<StickyAd
 				editionId={data.editionId}
-				section={data.sectionName || ''}
+				section={data.sectionName ?? ''}
 				contentType={adInfo.contentType}
 				config={adConfig}
 				commercialProperties={adInfo.commercialProperties}

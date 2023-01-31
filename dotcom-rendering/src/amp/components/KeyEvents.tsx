@@ -78,7 +78,7 @@ export const KeyEvents = ({ events, url }: Props) => {
 		<li css={listItemStyle} key={event.id}>
 			<a css={eventLinkStyle} href={blockLink(url, event.id)}>
 				<span css={timeStyle}>{event.blockCreatedOnDisplay}</span>
-				<span css={listTitleStyle}>{event.title || ''}</span>
+				<span css={listTitleStyle}>{event.title ?? ''}</span>
 			</a>
 		</li>
 	));
