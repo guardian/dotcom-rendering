@@ -18,6 +18,10 @@ export type SignInGateComponent = {
 	}: CanShowGateProps) => Promise<boolean>;
 };
 
+export interface CheckoutCompleteCookieData {
+	userType: 'new' | 'guest' | 'current';
+	product: 'Contribution' | 'DigitalPack' | 'Paper' | 'Guardian Weekly';
+}
 export interface SignInGateProps {
 	signInUrl: string;
 	guUrl: string;
@@ -25,6 +29,7 @@ export interface SignInGateProps {
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 }
 
 export type CurrentSignInGateABTest = {

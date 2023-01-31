@@ -15,19 +15,49 @@ const SignInGateMain = React.lazy(() => {
 	});
 });
 
+const SignInGateMainCheckoutComplete = React.lazy(() => {
+	const { start, end } = initPerf('SignInGateMainCheckoutComplete');
+	start();
+	return import(
+		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMainCheckoutComplete'
+	).then((module) => {
+		end();
+		return { default: module.SignInGateMainCheckoutComplete };
+	});
+});
+
 export const signInGateComponent: SignInGateComponent = {
-	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
-		<Lazy margin={300}>
-			<Suspense fallback={<></>}>
-				<SignInGateMain
-					ophanComponentId={ophanComponentId}
-					dismissGate={dismissGate}
-					guUrl={guUrl}
-					signInUrl={signInUrl}
-					abTest={abTest}
-				/>
-			</Suspense>
-		</Lazy>
-	),
+	gate: ({
+		ophanComponentId,
+		dismissGate,
+		guUrl,
+		signInUrl,
+		abTest,
+		checkoutCompleteCookieData,
+	}) => {
+		return (
+			<Lazy margin={300}>
+				<Suspense fallback={<></>}>
+					{checkoutCompleteCookieData ? (
+						<SignInGateMainCheckoutComplete
+							ophanComponentId={ophanComponentId}
+							dismissGate={dismissGate}
+							guUrl={guUrl}
+							signInUrl={signInUrl}
+							abTest={abTest}
+						/>
+					) : (
+						<SignInGateMain
+							ophanComponentId={ophanComponentId}
+							dismissGate={dismissGate}
+							guUrl={guUrl}
+							signInUrl={signInUrl}
+							abTest={abTest}
+						/>
+					)}
+				</Suspense>
+			</Lazy>
+		);
+	},
 	canShow: canShowSignInGate,
 };
