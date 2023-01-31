@@ -200,7 +200,7 @@ describe('Sign In Gate Tests', function () {
 			cy.contains('privacy settings');
 		});
 
-		describe('Sign in gate should personalise correctly if GU_CO_COMPLETE cookie is present', function () {
+		describe('Sign in gate should personalise based on the GU_CO_COMPLETE cookie', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
 				visitArticleAndScrollToGateForLazyLoad();
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
@@ -218,24 +218,126 @@ describe('Sign In Gate Tests', function () {
 				);
 			});
 
-			it.only('should show a personalised copy if a user is new and has a digital subscription', function () {
-				setGuCOCompleteCookie('new', 'DigitalPack');
+			describe.only('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+				it('user is new and has a digital subscription', function () {
+					setGuCOCompleteCookie('new', 'DigitalPack');
 
-				visitArticleAndScrollToGateForLazyLoad();
+					visitArticleAndScrollToGateForLazyLoad();
 
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'Complete your registration',
-				);
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You have a subscription.',
-				);
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
-				);
-				cy.get('[data-cy=sign-in-gate-main_register]').contains(
-					'Complete registration',
-				);
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You have a subscription.',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Complete registration',
+					);
+				});
+
+				it('user is new and has a paper subscription', function () {
+					setGuCOCompleteCookie('new', 'Paper');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You have a subscription.',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Complete registration',
+					);
+				});
+
+				it('user is new and is a contributor', function () {
+					setGuCOCompleteCookie('new', 'Contribution');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You are a Guardian supporter',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Complete registration',
+					);
+				});
+
+				it('user is existing and has a digital subscription', function () {
+					setGuCOCompleteCookie('existing', 'DigitalPack');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to your account',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You have a subscription.',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Sign in',
+					);
+				});
+
+				it('user is existing and has a paper subscription', function () {
+					setGuCOCompleteCookie('existing', 'Paper');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to your account',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You have a subscription.',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Sign in',
+					);
+				});
+
+				it('user is existing and is a contributor', function () {
+					setGuCOCompleteCookie('existing', 'Contribution');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to your account',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You are a Guardian supporter',
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						'Sign in',
+					);
+				});
 			});
 		});
 	});

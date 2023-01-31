@@ -29,21 +29,23 @@ export const SignInGateMainCheckoutComplete = ({
 	isMandatory = false,
 	checkoutCompleteCookieData,
 }: SignInGateProps) => {
-	const heading: (userType: string, product: string) => string = (
-		userType,
-		product,
-	) => {
-		if (userType === 'new' && product === 'DigitalPack') {
+	const heading: (userType: string) => string = (userType) => {
+		if (userType === 'new') {
 			return 'Complete your registration';
+		} else if (userType === 'existing' || userType === 'current') {
+			return 'Sign in to your account';
 		} else return '';
 	};
 
-	const subHeading: (userType: string, product: string) => string = (
-		userType,
-		product,
-	) => {
-		if (userType === 'new' && product === 'DigitalPack') {
+	const subHeading: (product: string) => string = (product) => {
+		if (
+			product === 'DigitalPack' ||
+			product === 'Paper' ||
+			product === 'GuardianWeekly'
+		) {
 			return 'You have a subscription.';
+		} else if (product === 'Contribution') {
+			return 'You are a Guardian supporter';
 		} else return '';
 	};
 
@@ -53,18 +55,37 @@ export const SignInGateMainCheckoutComplete = ({
 	) => {
 		if (userType === 'new' && product === 'DigitalPack') {
 			return 'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+		} else if (
+			userType === 'new' &&
+			(product === 'Paper' ||
+				product === 'GuardianWeekly' ||
+				product === 'Contribution')
+		) {
+			return 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
+		} else if (
+			(userType === 'existing' || userType === 'current') &&
+			product === 'DigitalPack'
+		) {
+			return 'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.';
+		} else if (
+			(userType === 'existing' || userType === 'current') &&
+			(product === 'Paper' ||
+				product === 'GuardianWeekly' ||
+				product === 'Contribution')
+		) {
+			return 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
 		}
 		return '';
 	};
 
-	const buttonText: (userType: string, product: string) => string = (
-		userType,
-		product,
-	) => {
-		if (userType === 'new' && product === 'DigitalPack') {
+	const buttonText: (userType: string) => string = (userType) => {
+		if (userType === 'new') {
 			return 'Complete registration';
+		} else if (userType === 'existing' || userType === 'current') {
+			return 'Sign in';
 		} else return '';
 	};
+	// TODO - enforce the checkoutCompleteCookieData is set here
 	const { userType, product } =
 		checkoutCompleteCookieData !== undefined
 			? checkoutCompleteCookieData
@@ -74,8 +95,8 @@ export const SignInGateMainCheckoutComplete = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>{heading(userType, product)} </h1>
-			<p css={bodyBold}>{subHeading(userType, product)}</p>
+			<h1 css={headingStyles}>{heading(userType)} </h1>
+			<p css={bodyBold}>{subHeading(product)}</p>
 			<p css={bodyText}>
 				{body(userType, product)}
 				You’ll always be able to control your own{' '}
@@ -103,7 +124,7 @@ export const SignInGateMainCheckoutComplete = ({
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}
 				>
-					{buttonText(userType, product)}
+					{buttonText(userType)}
 				</LinkButton>
 				{!isMandatory && (
 					<Button
