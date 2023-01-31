@@ -1,3 +1,5 @@
+/* eslint-disable mocha/no-exclusive-tests */
+/* eslint-disable mocha/no-setup-in-describe */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
@@ -30,6 +32,15 @@ describe('Sign In Gate Tests', function () {
 		});
 	};
 
+	// check this logs by default
+	const setGuCOCompleteCookie = (userType, productType) => {
+		cy.setCookie(
+			'GU_CO_COMPLETE',
+			encodeURIComponent(
+				`{"userType":"${userType}","product":"${productType}"`,
+			),
+		);
+	};
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
 	const visitArticle = (
@@ -57,6 +68,7 @@ describe('Sign In Gate Tests', function () {
 
 	describe('SignInGateMain', function () {
 		beforeEach(function () {
+			console.log('does before each run in a nested describe block?');
 			disableCMP();
 			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
 			setMvtCookie('500000');
@@ -187,6 +199,45 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
 			cy.contains('privacy settings');
+		});
+
+		describe.only('Sign in gate should personalise correctly if GU_CO_COMPLETE cookie is present', function () {
+			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
+				visitArticleAndScrollToGateForLazyLoad();
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You need to register to keep reading',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'It’s still free to read - this is not a paywall',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'We’re committed to keeping our quality reporting open.',
+				);
+				cy.get('[data-cy=sign-in-gate-main_register]').contains(
+					'Register for free',
+				);
+			});
+
+			it('should show a personalised copy if a user is new and has a digital subscription', function () {
+				setGuCOCompleteCookie('new', 'DigitalPack');
+
+				visitArticleAndScrollToGateForLazyLoad();
+
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'Complete your registration',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You have a subscription.',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+				);
+				cy.get('[data-cy=sign-in-gate-main_register]').contains(
+					'Complete registration',
+				);
+			});
 		});
 	});
 });
