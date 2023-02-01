@@ -241,7 +241,7 @@ function reportNativeElementPositionChanges(): void {
 				void commercialClient.updateAdverts(currentAdSlots);
 			}
 		} catch (ex) {
-			console.log(`Exception updating ads ${ex}`)
+			logger.error(`Exception updating ads`);
 		}
 
 		try {
@@ -252,16 +252,14 @@ function reportNativeElementPositionChanges(): void {
 				void videoClient.updateVideos(currentVideoSlots);
 			}
 		} catch (ex) {
-			console.log(`Exception updating videos ${ex}`)
+			logger.error(`Exception updating videos`);
 		}
 	};
 
-
-	let _setTimeout = window.setTimeout;
 	// After a 3 second wait, attempt to sync up positions again
 	// This is to fix bug with Youtube embeds being 50px higher than they should be
 	// on first load of page, on Android.
-	_setTimeout(callback, 3000);
+	window.setTimeout(callback, 3000);
 
 	let currentAnimationFrame: number | null = null;
 	window.addEventListener(
