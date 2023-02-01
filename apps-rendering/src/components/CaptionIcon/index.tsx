@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { fill } from '@guardian/common-rendering/src/editorialPalette';
+import { fill } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';

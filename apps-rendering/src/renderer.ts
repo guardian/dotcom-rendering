@@ -10,7 +10,7 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from 'palette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';

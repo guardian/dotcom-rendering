@@ -4,7 +4,7 @@ import {
 	background,
 	border,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';

@@ -5,7 +5,7 @@ import {
 	border,
 	fill,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {

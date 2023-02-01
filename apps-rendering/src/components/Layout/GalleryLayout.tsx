@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import {
 	background,
 	border,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import Byline from 'components/Byline';
 import Footer from 'components/Footer';

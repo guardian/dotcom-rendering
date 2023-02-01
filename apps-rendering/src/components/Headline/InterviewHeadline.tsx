@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import {
 	background,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
 import HeadlineByline from 'components/HeadlineByline';

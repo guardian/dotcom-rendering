@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import {
 	background,
 	fill,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground, from } from '@guardian/source-foundations';

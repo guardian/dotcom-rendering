@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';

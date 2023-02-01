@@ -4,7 +4,7 @@ import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	border,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import {

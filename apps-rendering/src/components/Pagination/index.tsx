@@ -4,7 +4,7 @@ import {
 	border,
 	hover,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {

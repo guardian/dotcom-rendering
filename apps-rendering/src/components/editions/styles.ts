@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Colour } from '@guardian/common-rendering/src/editorialPalette';
+import type { Colour } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {

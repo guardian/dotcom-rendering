@@ -5,7 +5,7 @@ import type { SerializedStyles } from '@emotion/react';
 import {
 	background,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, timeAgo } from '@guardian/libs';
 import {

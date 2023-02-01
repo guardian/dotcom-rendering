@@ -6,7 +6,7 @@ import {
 	border,
 	fill,
 	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
