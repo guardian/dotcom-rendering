@@ -48,22 +48,22 @@ const getBodyText: (
 ) => string = (checkoutCompleteCookieData) => {
 	const newOrGuestUserBodyMap: Record<Product, string> = {
 		DigitalPack:
-			'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
-		Paper: 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ',
+		Paper: 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 		Contribution:
-			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 		GuardianWeekly:
-			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 	};
 
 	const currentUserBodyMap: Record<Product, string> = {
 		DigitalPack:
-			'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
-		Paper: 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ',
+		Paper: 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 		Contribution:
-			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 		GuardianWeekly:
-			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
 	};
 
 	const { userType, product } = checkoutCompleteCookieData;

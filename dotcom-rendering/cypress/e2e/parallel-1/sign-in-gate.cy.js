@@ -242,7 +242,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				it('user is new and has a paper subscription', function () {
-					setGuCOCompleteCookie('new', 'Paper');
+					setGuCOCompleteCookie('guest', 'Paper');
 
 					visitArticleAndScrollToGateForLazyLoad();
 
