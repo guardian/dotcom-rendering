@@ -343,7 +343,7 @@ describe('Sign In Gate Tests', function () {
 			});
 
 			describe.only("GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate", function() {
-				it.only("invalid userType", function() {
+				it("invalid userType", function() {
 					setGuCOCompleteCookie('invalid', 'Contribution');
 
 					visitArticleAndScrollToGateForLazyLoad();
@@ -364,6 +364,22 @@ describe('Sign In Gate Tests', function () {
 						'You need to register to keep reading',
 					);
 				})
+				it("invalid field", function() {
+					cy.setCookie(
+						'GU_CO_COMPLETE',
+						encodeURIComponent(
+							`{"invalid":"current","product":"DigitalPack"}`,
+						),
+					);
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+
+				})
 				it("invalid JSON structure", function() {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
@@ -379,7 +395,7 @@ describe('Sign In Gate Tests', function () {
 						'You need to register to keep reading',
 					);
 				})
-				it("not uri encoded", function() {
+				it.only("not uri encoded", function() {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
 						`{"userType":"current","product":"DigitalPack}`,

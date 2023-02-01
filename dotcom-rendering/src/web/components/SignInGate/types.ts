@@ -28,6 +28,7 @@ const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 type UserTypeTuple = typeof ALL_USER_TYPES;
 export type UserType = UserTypeTuple[number];
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function isUserType(value: any): value is UserType {
 	return ALL_USER_TYPES.includes(value as UserType)
 }
@@ -36,7 +37,8 @@ const ALL_PRODUCTS = ['Contribution', 'DigitalPack', 'Paper', 'GuardianWeekly'] 
 type ProductTuple = typeof ALL_PRODUCTS
 export type Product = ProductTuple[number]
 
-export function isProduct(value: string): value is Product {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function isProduct(value: any): value is Product {
 	return ALL_PRODUCTS.includes(value as Product)
 }
 export interface CheckoutCompleteCookieData {
@@ -47,16 +49,22 @@ export interface CheckoutCompleteCookieData {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function isCheckoutCompleteCookieData(o: any): o is CheckoutCompleteCookieData {
 	return "userType" in o &&
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	isUserType(o["userType"]) &&
 	"product" in o &&
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	isProduct(o["product"])
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const safeJsonParse = <T>(guard: (o: any) => o is T) =>
+export const safeJsonParse = <T>(guard: (o: unknown) => o is T) =>
   (text: string): ParseResult<T> => {
-    const parsed: unknown = JSON.parse(text)
-    return guard(parsed) ? { parsed, hasError: false } : { hasError: true }
+	try {
+		const parsed: unknown = JSON.parse(text)
+		return guard(parsed) ? { parsed, hasError: false } : { hasError: true }
+	}
+	catch {
+		return { hasError: true}
+	}
   }
 
 type ParseResult<T> =
