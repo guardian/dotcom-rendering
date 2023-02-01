@@ -162,9 +162,9 @@ export const SignInGateSelector = ({
 		checkoutCompleteStr: string,
 	): CheckoutCompleteCookieData | undefined => {
 		const parseResult = safeJsonParse(isCheckoutCompleteCookieData)(
-			decodeURIComponent(checkoutCompleteStr)
-		)
-		return !parseResult.hasError ? parseResult.parsed : undefined
+			decodeURIComponent(checkoutCompleteStr),
+		);
+		return !parseResult.hasError ? parseResult.parsed : undefined;
 	};
 
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =

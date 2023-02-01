@@ -2,11 +2,11 @@ import { cmp } from '@guardian/consent-management-platform';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
 import type {
+	CheckoutCompleteCookieData,
 	Product,
 	SignInGatePropsWithCheckoutCompleteCookieData,
 	UserType,
 } from '../types';
-// import type { SignInGatePropsWithCheckoutCompleteCookieData } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -43,30 +43,38 @@ const getSubHeadingText: (product: Product) => string = (product) => {
 	return subHeadingMap[product];
 };
 
-const getBodyText: (userType: UserType, product: Product) => string = (
-	userType,
-	product,
-) => {
-	// TS does not support pattern matching by type
-	const pattern = `${userType}, ${product}`;
-	switch (pattern) {
-		case 'new, DigitalPack' || 'guest, DigitalPack':
-			return 'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.';
-		case 'new, Paper' ||
-			'new, GuardianWeekly' ||
-			'new, Contribution' ||
-			'guest, Paper' ||
-			'guest, GuardianWeekly' ||
-			'guest, Contribution':
-			return 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
-		case 'current, DigitalPack':
-			return 'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.';
-		case 'current, Paper' ||
-			'current, GuardianWeekly' ||
-			'current, Contribution':
-			return 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
-		default:
-			return ''; // TODO never case???
+const getBodyText: (
+	checkoutCompleteCookieData: CheckoutCompleteCookieData,
+) => string = (checkoutCompleteCookieData) => {
+	const newOrGuestUserBodyMap: Record<Product, string> = {
+		DigitalPack:
+			'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+		Paper: 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+		Contribution:
+			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+		GuardianWeekly:
+			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+	};
+
+	const currentUserBodyMap: Record<Product, string> = {
+		DigitalPack:
+			'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+		Paper: 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+		Contribution:
+			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+		GuardianWeekly:
+			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+	};
+
+	const { userType, product } = checkoutCompleteCookieData;
+
+	switch (userType) {
+		case 'new':
+			return newOrGuestUserBodyMap[product];
+		case 'guest':
+			return newOrGuestUserBodyMap[product];
+		case 'current':
+			return currentUserBodyMap[product];
 	}
 };
 
@@ -97,7 +105,7 @@ export const SignInGateMainCheckoutComplete = ({
 			<h1 css={headingStyles}>{getHeadingText(userType)} </h1>
 			<p css={bodyBold}>{getSubHeadingText(product)}</p>
 			<p css={bodyText}>
-				{getBodyText(userType, product)}
+				{getBodyText(checkoutCompleteCookieData)}
 				You’ll always be able to control your own{' '}
 				<button
 					data-cy="sign-in-gate-main_privacy"

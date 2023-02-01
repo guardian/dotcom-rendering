@@ -342,8 +342,8 @@ describe('Sign In Gate Tests', function () {
 				});
 			});
 
-			describe.only("GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate", function() {
-				it("invalid userType", function() {
+			describe('GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate', function () {
+				it('invalid userType', function () {
 					setGuCOCompleteCookie('invalid', 'Contribution');
 
 					visitArticleAndScrollToGateForLazyLoad();
@@ -352,9 +352,8 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
-
-				})
-				it("invalid product", function() {
+				});
+				it('invalid product', function () {
 					setGuCOCompleteCookie('current', 'invalid');
 
 					visitArticleAndScrollToGateForLazyLoad();
@@ -363,8 +362,8 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
-				})
-				it("invalid field", function() {
+				});
+				it('invalid field', function () {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
 						encodeURIComponent(
@@ -378,9 +377,8 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
-
-				})
-				it("invalid JSON structure", function() {
+				});
+				it('invalid JSON structure', function () {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
 						encodeURIComponent(
@@ -394,8 +392,8 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
-				})
-				it("not uri encoded", function() {
+				});
+				it('not uri encoded', function () {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
 						`{"userType":"current","product":"DigitalPack}`,
@@ -407,8 +405,8 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
-				})
-			})
+				});
+			});
 		});
 	});
 });

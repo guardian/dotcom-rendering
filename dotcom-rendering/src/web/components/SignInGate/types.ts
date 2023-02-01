@@ -29,41 +29,50 @@ type UserTypeTuple = typeof ALL_USER_TYPES;
 export type UserType = UserTypeTuple[number];
 
 export function isUserType(value: unknown): value is UserType {
-	return ALL_USER_TYPES.includes(value as UserType)
+	return ALL_USER_TYPES.includes(value as UserType);
 }
 
-const ALL_PRODUCTS = ['Contribution', 'DigitalPack', 'Paper', 'GuardianWeekly'] as const;
-type ProductTuple = typeof ALL_PRODUCTS
-export type Product = ProductTuple[number]
+const ALL_PRODUCTS = [
+	'Contribution',
+	'DigitalPack',
+	'Paper',
+	'GuardianWeekly',
+] as const;
+type ProductTuple = typeof ALL_PRODUCTS;
+export type Product = ProductTuple[number];
 
 export function isProduct(value: unknown): value is Product {
-	return ALL_PRODUCTS.includes(value as Product)
+	return ALL_PRODUCTS.includes(value as Product);
 }
 export interface CheckoutCompleteCookieData {
 	userType: UserType;
 	product: Product;
 }
 
-export function isCheckoutCompleteCookieData(obj: unknown): obj is CheckoutCompleteCookieData {
+export function isCheckoutCompleteCookieData(
+	obj: unknown,
+): obj is CheckoutCompleteCookieData {
 	// TODO - validate whether this type casting here is ok
-	const castObj = (obj as CheckoutCompleteCookieData)
+	const castObj = obj as CheckoutCompleteCookieData;
 	return isUserType(castObj.userType) && isProduct(castObj.product);
 }
 
-export const safeJsonParse = <T>(guard: (o: unknown) => o is T) =>
-  (text: string): ParseResult<T> => {
-	try {
-		const parsed = JSON.parse(text) as unknown
-		return guard(parsed) ? { parsed, hasError: false } : { hasError: true }
-	}
-	catch(_) {
-		return { hasError: true}
-	}
-  }
+export const safeJsonParse =
+	<T>(guard: (o: unknown) => o is T) =>
+	(text: string): ParseResult<T> => {
+		try {
+			const parsed = JSON.parse(text) as unknown;
+			return guard(parsed)
+				? { parsed, hasError: false }
+				: { hasError: true };
+		} catch (_) {
+			return { hasError: true };
+		}
+	};
 
 type ParseResult<T> =
-  | { parsed: T; hasError: false; error?: undefined }
-  | { parsed?: undefined; hasError: true; error?: unknown }
+	| { parsed: T; hasError: false; error?: undefined }
+	| { parsed?: undefined; hasError: true; error?: unknown };
 export interface SignInGateProps {
 	signInUrl: string;
 	guUrl: string;

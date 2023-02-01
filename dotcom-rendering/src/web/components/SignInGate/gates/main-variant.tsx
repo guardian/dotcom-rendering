@@ -28,7 +28,7 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
 
 // TODO investigate data tracking component name requirements?
 // TODO Add context Comments
-const showCheckoutCompletePersonalisation: boolean = true;
+const showCheckoutCompletePersonalisation = true;
 
 export const signInGateComponent: SignInGateComponent = {
 	gate: ({

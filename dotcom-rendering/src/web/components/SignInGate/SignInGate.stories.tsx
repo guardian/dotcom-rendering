@@ -2,7 +2,7 @@ import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
-import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete'
+import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
 
 export default {
 	component: SignInGateSelector,
@@ -116,8 +116,11 @@ export const signInGatePersonalisedCopy = () => {
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
-				checkoutCompleteCookieData={{userType: 'new', product: 'DigitalPack'}}
+				checkoutCompleteCookieData={{
+					userType: 'new',
+					product: 'DigitalPack',
+				}}
 			/>
 		</Section>
-	)
-}
+	);
+};
