@@ -484,18 +484,6 @@ type RichLinkCardType =
 	| 'external'
 	| 'news';
 
-// ----------
-// AdSlots //
-// ----------
-type AdSlotType =
-	| 'right'
-	| 'top-above-nav'
-	| 'mostpop'
-	| 'merchandising-high'
-	| 'merchandising'
-	| 'comments'
-	| 'survey';
-
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
