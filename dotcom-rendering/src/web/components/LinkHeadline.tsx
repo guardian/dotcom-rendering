@@ -11,7 +11,6 @@ type Props = {
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
 	hideLineBreak?: boolean;
 	showQuotes?: boolean; // When true the QuoteIcon is shown
 	size?: SmallHeadlineSize;
@@ -71,7 +70,6 @@ export const LinkHeadline = ({
 	showUnderline = false,
 	kickerText,
 	showPulsingDot,
-	showSlash,
 	hideLineBreak,
 	showQuotes = false,
 	size = 'medium',
@@ -87,7 +85,6 @@ export const LinkHeadline = ({
 					text={kickerText}
 					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
-					showSlash={showSlash}
 					hideLineBreak={hideLineBreak}
 				/>
 			)}

@@ -433,26 +433,6 @@ export const WithQuotesSpecialReportAlt = () => {
 	);
 };
 
-export const WithNoSlash = () => {
-	return (
-		<CardWrapper>
-			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
-		</CardWrapper>
-	);
-};
-
-export const WithNoLinebreak = () => {
-	return (
-		<CardWrapper>
-			<Card
-				{...basicCardProps}
-				hideLineBreak={true}
-				kickerText="No linebreak"
-			/>
-		</CardWrapper>
-	);
-};
-
 export const WithAnAvatar = () => {
 	return (
 		<>

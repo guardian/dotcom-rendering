@@ -7,7 +7,6 @@ interface HydrateProps {
 	clientOnly?: false;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: boolean;
 }
 
 interface ClientOnlyProps {
@@ -15,7 +14,6 @@ interface ClientOnlyProps {
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
-	expediteLoading?: boolean;
 }
 
 interface InteractionProps {
@@ -23,7 +21,6 @@ interface InteractionProps {
 	clientOnly?: never;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: never;
 }
 
 interface HashProps {
@@ -31,7 +28,6 @@ interface HashProps {
 	clientOnly: true;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: never;
 }
 
 /**
@@ -73,23 +69,18 @@ const decideChildren = (
  * @param {boolean} props.clientOnly - Should the component be server side rendered
  * @param {number} props.placeholderHeight - The height for the placeholder element
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
- * @param {boolean} props.expediteLoading - Should this component script be included in the document head -
- * 		Use sparingly for critical islands only, don't set without discussing with the dotcom team.
- * 		Should not be used with the 'deferUntil' prop
  */
 export const Island = ({
 	deferUntil,
 	clientOnly,
 	placeholderHeight,
 	children,
-	expediteLoading,
 }: Props) => (
 	<gu-island
 		name={children.type.name}
 		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}
 		clientOnly={clientOnly}
-		expediteLoading={expediteLoading}
 	>
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
