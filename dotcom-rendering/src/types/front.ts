@@ -2,7 +2,7 @@ import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
-import type { FETagType } from './tag';
+import type { FETagType, TagType } from './tag';
 import type { CAPITrailType, TrailType } from './trails';
 
 export interface FEFrontType {
@@ -36,11 +36,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
-	trendingTopics?: TrendingTopicType[];
-}
-
-interface TrendingTopicType {
-	tags: { tags: FETagType[] };
+	trendingTopics?: TagType[];
 }
 
 interface FEPressedPageType {
