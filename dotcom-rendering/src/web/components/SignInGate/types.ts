@@ -28,8 +28,7 @@ const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 type UserTypeTuple = typeof ALL_USER_TYPES;
 export type UserType = UserTypeTuple[number];
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function isUserType(value: any): value is UserType {
+export function isUserType(value: unknown): value is UserType {
 	return ALL_USER_TYPES.includes(value as UserType)
 }
 
@@ -37,8 +36,7 @@ const ALL_PRODUCTS = ['Contribution', 'DigitalPack', 'Paper', 'GuardianWeekly'] 
 type ProductTuple = typeof ALL_PRODUCTS
 export type Product = ProductTuple[number]
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function isProduct(value: any): value is Product {
+export function isProduct(value: unknown): value is Product {
 	return ALL_PRODUCTS.includes(value as Product)
 }
 export interface CheckoutCompleteCookieData {
@@ -46,23 +44,19 @@ export interface CheckoutCompleteCookieData {
 	product: Product;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function isCheckoutCompleteCookieData(o: any): o is CheckoutCompleteCookieData {
-	return "userType" in o &&
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	isUserType(o["userType"]) &&
-	"product" in o &&
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	isProduct(o["product"])
+export function isCheckoutCompleteCookieData(obj: unknown): obj is CheckoutCompleteCookieData {
+	// TODO - validate whether this type casting here is ok
+	const castObj = (obj as CheckoutCompleteCookieData)
+	return isUserType(castObj.userType) && isProduct(castObj.product);
 }
 
 export const safeJsonParse = <T>(guard: (o: unknown) => o is T) =>
   (text: string): ParseResult<T> => {
 	try {
-		const parsed: unknown = JSON.parse(text)
+		const parsed = JSON.parse(text) as unknown
 		return guard(parsed) ? { parsed, hasError: false } : { hasError: true }
 	}
-	catch {
+	catch(_) {
 		return { hasError: true}
 	}
   }

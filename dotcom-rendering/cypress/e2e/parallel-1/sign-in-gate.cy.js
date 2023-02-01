@@ -395,7 +395,7 @@ describe('Sign In Gate Tests', function () {
 						'You need to register to keep reading',
 					);
 				})
-				it.only("not uri encoded", function() {
+				it("not uri encoded", function() {
 					cy.setCookie(
 						'GU_CO_COMPLETE',
 						`{"userType":"current","product":"DigitalPack}`,

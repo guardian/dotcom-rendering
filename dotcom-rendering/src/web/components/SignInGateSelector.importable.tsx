@@ -158,21 +158,18 @@ export const SignInGateSelector = ({
 		shouldMemoize: true,
 	});
 
-	const getUserAndProductType = (
+	const getCheckoutCompleteCookieData = (
 		checkoutCompleteStr: string,
 	): CheckoutCompleteCookieData | undefined => {
 		const parseResult = safeJsonParse(isCheckoutCompleteCookieData)(
 			decodeURIComponent(checkoutCompleteStr)
 		)
-		if(!parseResult.hasError) {
-			return parseResult.parsed
-		}
-		else return undefined
+		return !parseResult.hasError ? parseResult.parsed : undefined
 	};
 
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
 		checkOutCompleteString !== null
-			? getUserAndProductType(checkOutCompleteString)
+			? getCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation
 
