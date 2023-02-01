@@ -37,6 +37,9 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
+const determineBreakpoint = (breakpoint: Breakpoint | undefined) =>
+	breakpoint !== undefined ? breakpoint : '';
+
 type Props = {
 	rating: number;
 	size: RatingSizeType;
@@ -47,41 +50,31 @@ export const StarRating = ({ rating, size, breakpoint }: Props) => (
 	<div css={determineSize(size)}>
 		<div css={starWrapper}>
 			<Star
-				starId={`${size}1-${
-					breakpoint !== undefined ? breakpoint : ''
-				}`}
+				starId={`${size}1-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 1}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
-				starId={`${size}2-${
-					breakpoint !== undefined ? breakpoint : ''
-				}`}
+				starId={`${size}2-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 2}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
-				starId={`${size}3-${
-					breakpoint !== undefined ? breakpoint : ''
-				}`}
+				starId={`${size}3-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 3}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
-				starId={`${size}4-${
-					breakpoint !== undefined ? breakpoint : ''
-				}`}
+				starId={`${size}4-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 4}
 			/>
 		</div>
 		<div css={starWrapper}>
 			<Star
-				starId={`${size}5-${
-					breakpoint !== undefined ? breakpoint : ''
-				}`}
+				starId={`${size}5-${determineBreakpoint(breakpoint)}`}
 				isEmpty={rating < 5}
 			/>
 		</div>
