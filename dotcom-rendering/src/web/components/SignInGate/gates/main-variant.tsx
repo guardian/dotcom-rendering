@@ -26,6 +26,10 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
 	});
 });
 
+// TODO investigate data tracking component name requirements?
+// TODO Add context Comments
+const showCheckoutCompletePersonalisation: boolean = true;
+
 export const signInGateComponent: SignInGateComponent = {
 	gate: ({
 		ophanComponentId,
@@ -38,7 +42,8 @@ export const signInGateComponent: SignInGateComponent = {
 		return (
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
-					{checkoutCompleteCookieData ? (
+					{showCheckoutCompletePersonalisation &&
+					checkoutCompleteCookieData ? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}

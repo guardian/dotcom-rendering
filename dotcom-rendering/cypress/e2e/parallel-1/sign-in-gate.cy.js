@@ -218,7 +218,10 @@ describe('Sign In Gate Tests', function () {
 				);
 			});
 
-			describe.only('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+			// TODO test the flag??
+			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {});
+
+			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
 				it('user is new and has a digital subscription', function () {
 					setGuCOCompleteCookie('new', 'DigitalPack');
 
