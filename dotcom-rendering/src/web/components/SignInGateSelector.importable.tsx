@@ -146,16 +146,19 @@ export const SignInGateSelector = ({
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
+	// START: Checkout Complete Personalisation
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
 	});
 
-	const getUserAndProductType = (checkoutCompleteStr: string) => {
+	const getUserAndProductType = (
+		checkoutCompleteStr: string,
+	): CheckoutCompleteCookieData => {
 		// todo -> validate we get an object here?
 		const checkoutCompleteDecoded = JSON.parse(
 			decodeURIComponent(checkoutCompleteStr),
-		);
+		) as CheckoutCompleteCookieData;
 		return checkoutCompleteDecoded;
 	};
 
@@ -163,6 +166,7 @@ export const SignInGateSelector = ({
 		checkOutCompleteString !== null
 			? getUserAndProductType(checkOutCompleteString)
 			: undefined;
+	// END: Checkout Complete Personalisation
 
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,

@@ -18,9 +18,15 @@ export type SignInGateComponent = {
 	}: CanShowGateProps) => Promise<boolean>;
 };
 
+export type UserType = 'new' | 'guest' | 'current';
+export type Product =
+	| 'Contribution'
+	| 'DigitalPack'
+	| 'Paper'
+	| 'GuardianWeekly';
 export interface CheckoutCompleteCookieData {
-	userType: 'new' | 'guest' | 'current';
-	product: 'Contribution' | 'DigitalPack' | 'Paper' | 'Guardian Weekly';
+	userType: UserType;
+	product: Product;
 }
 
 export interface SignInGateProps {
@@ -32,9 +38,14 @@ export interface SignInGateProps {
 	isMandatory?: boolean;
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
 }
-// TODO -> create a type with checkoutCompleteCookieData non optional
-// type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
-// export type SignInGatePropsWithCheckoutCompleteCookieData = WithRequired<SignInGateProps, 'checkoutCompleteCookieData'>
+
+// Type with checkoutCompleteCookieData non optional
+type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
+export type SignInGatePropsWithCheckoutCompleteCookieData = WithRequired<
+	SignInGateProps,
+	'checkoutCompleteCookieData'
+>;
+
 export type CurrentSignInGateABTest = {
 	name: string;
 	variant: string;
