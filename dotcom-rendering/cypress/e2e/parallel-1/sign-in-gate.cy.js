@@ -32,7 +32,6 @@ describe('Sign In Gate Tests', function () {
 		});
 	};
 
-	// check this logs by default
 	const setGuCOCompleteCookie = (userType, productType) => {
 		cy.setCookie(
 			'GU_CO_COMPLETE',
@@ -283,7 +282,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				it('user is existing and has a digital subscription', function () {
-					setGuCOCompleteCookie('existing', 'DigitalPack');
+					setGuCOCompleteCookie('current', 'DigitalPack');
 
 					visitArticleAndScrollToGateForLazyLoad();
 
@@ -303,7 +302,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				it('user is existing and has a paper subscription', function () {
-					setGuCOCompleteCookie('existing', 'Paper');
+					setGuCOCompleteCookie('current', 'Paper');
 
 					visitArticleAndScrollToGateForLazyLoad();
 
@@ -323,7 +322,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				it('user is existing and is a contributor', function () {
-					setGuCOCompleteCookie('existing', 'Contribution');
+					setGuCOCompleteCookie('current', 'Contribution');
 
 					visitArticleAndScrollToGateForLazyLoad();
 
@@ -342,6 +341,58 @@ describe('Sign In Gate Tests', function () {
 					);
 				});
 			});
+
+			describe.only("GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate", function() {
+				it.only("invalid userType", function() {
+					setGuCOCompleteCookie('invalid', 'Contribution');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+
+				})
+				it("invalid product", function() {
+					setGuCOCompleteCookie('current', 'invalid');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+				})
+				it("invalid JSON structure", function() {
+					cy.setCookie(
+						'GU_CO_COMPLETE',
+						encodeURIComponent(
+							`{"userType":"current","product":"DigitalPack`,
+						),
+					);
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+				})
+				it("not uri encoded", function() {
+					cy.setCookie(
+						'GU_CO_COMPLETE',
+						`{"userType":"current","product":"DigitalPack}`,
+					);
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+				})
+			})
 		});
 	});
 });

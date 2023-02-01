@@ -14,6 +14,12 @@ import {
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
+import {
+	isCheckoutCompleteCookieData,
+	isProduct,
+	isUserType,
+	safeJsonParse,
+} from './SignInGate/types';
 import type {
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
@@ -154,12 +160,14 @@ export const SignInGateSelector = ({
 
 	const getUserAndProductType = (
 		checkoutCompleteStr: string,
-	): CheckoutCompleteCookieData => {
-		// todo -> validate we get an object here?
-		const checkoutCompleteDecoded = JSON.parse(
-			decodeURIComponent(checkoutCompleteStr),
-		) as CheckoutCompleteCookieData;
-		return checkoutCompleteDecoded;
+	): CheckoutCompleteCookieData | undefined => {
+		const parseResult = safeJsonParse(isCheckoutCompleteCookieData)(
+			decodeURIComponent(checkoutCompleteStr)
+		)
+		if(!parseResult.hasError) {
+			return parseResult.parsed
+		}
+		else return undefined
 	};
 
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
