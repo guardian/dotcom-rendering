@@ -1,9 +1,5 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import {
-	background,
-	border,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
@@ -16,6 +12,7 @@ import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
+import { background, border } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

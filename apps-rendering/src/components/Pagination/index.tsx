@@ -1,10 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	border,
-	hover,
-	text,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
@@ -15,6 +10,7 @@ import {
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import { border, hover, text } from 'palette';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

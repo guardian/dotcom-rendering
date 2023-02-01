@@ -1,11 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import { border, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
+import { border, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { pageFonts } from 'styles';

@@ -2,14 +2,10 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	border,
-	text,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
+import { background, border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';

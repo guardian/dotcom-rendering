@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -20,6 +19,7 @@ import LiveblogMetadataLines from 'components/LiveblogMetadataLines';
 import Logo from 'components/Logo';
 import { getFormat } from 'item';
 import type { Item } from 'item';
+import { background } from 'palette';
 import { useState } from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

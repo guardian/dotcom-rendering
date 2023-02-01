@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

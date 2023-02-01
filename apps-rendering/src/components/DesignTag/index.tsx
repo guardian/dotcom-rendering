@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
 

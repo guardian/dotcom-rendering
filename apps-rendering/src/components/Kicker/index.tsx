@@ -1,11 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text as kickerTextPalette } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
+import { text as kickerTextPalette } from 'palette';
 import type { FC, ReactElement } from 'react';
 
 type Props = {

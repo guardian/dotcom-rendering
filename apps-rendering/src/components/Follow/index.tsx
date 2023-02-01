@@ -2,13 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
 import FollowStatus from 'components/FollowStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
+import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

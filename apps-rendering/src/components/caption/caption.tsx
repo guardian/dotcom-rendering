@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -15,6 +14,7 @@ import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import Anchor from 'components/Anchor';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
 import { darkModeCss } from 'styles';

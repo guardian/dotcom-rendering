@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
@@ -13,6 +12,7 @@ import {
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC } from 'react';
 import { kickerPicker } from '../kickerPicker';
 

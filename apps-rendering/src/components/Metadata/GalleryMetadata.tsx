@@ -2,7 +2,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -11,6 +10,7 @@ import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
 import type { Contributor } from 'contributor';
 import { grid } from 'grid/grid';
+import { text } from 'palette';
 import type { FC } from 'react';
 
 // ----- Component ----- //

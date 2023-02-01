@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type {
@@ -20,6 +19,7 @@ import {
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import EditionsAvatar from '../avatar';
 import ShareIcon from '../shareIcon';

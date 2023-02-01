@@ -1,10 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import {
-	background,
-	border,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import {
@@ -24,6 +20,7 @@ import {
 } from '@guardian/source-react-components';
 import LiveBlock from 'components/LiveBlock';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
+import { background, border } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

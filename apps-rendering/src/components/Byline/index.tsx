@@ -1,8 +1,8 @@
 // ----- Imports ----- //
-import { text } from 'palette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
+import { text } from 'palette';
 import type { FC } from 'react';
 import AnalysisByline from './AnalysisByline';
 import {

@@ -1,22 +1,18 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import {
-	ArticleFormat,
-	ArticlePillar,
-	ArticleSpecial,
-	ArticleDesign,
-} from '@guardian/libs';
-import {
-	opinion,
-	sport,
 	culture,
-	lifestyle,
-	news,
 	labs,
-	specialReport,
+	lifestyle,
 	neutral,
+	news,
+	opinion,
+	specialReport,
+	sport,
 } from '@guardian/source-foundations';
-import { Colour } from '.';
+import type { Colour } from '.';
 
 // ----- Functions ----- //
 

@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import { CaptionIconVariant } from 'components/CaptionIcon';
@@ -9,6 +8,7 @@ import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
 import type { Sizes } from 'image/sizes';
+import { border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';

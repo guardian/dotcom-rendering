@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, textSans, until } from '@guardian/source-foundations';
@@ -8,6 +7,7 @@ import Anchor from 'components/Anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

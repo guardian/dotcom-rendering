@@ -1,17 +1,18 @@
 // ----- Imports ----- //
 
-import { ArticleFormat, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import {
-	news,
-	neutral,
-	lifestyle,
-	sport,
 	culture,
-	opinion,
 	labs,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
 	specialReport,
+	sport,
 } from '@guardian/source-foundations';
-import { Colour } from '.';
+import type { Colour } from '.';
 
 // ----- Functions ----- //
 
@@ -36,8 +37,10 @@ const pagination = (format: ArticleFormat): Colour => {
 	}
 };
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
+	neutral[7];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[86];
 
 // ----- API ----- //
 

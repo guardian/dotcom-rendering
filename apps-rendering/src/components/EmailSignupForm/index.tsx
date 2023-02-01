@@ -2,12 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	fill,
-	hover,
-	text,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
@@ -27,6 +21,7 @@ import {
 	TextInput,
 	userFeedbackThemeDefault,
 } from '@guardian/source-react-components';
+import { background, fill, hover, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { background } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
+import { background } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

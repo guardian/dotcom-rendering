@@ -1,24 +1,24 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	ArticleFormat,
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
 import {
-	neutral,
-	culture,
-	sport,
-	lifestyle,
-	opinion,
-	news,
-	specialReport,
-	labs,
 	brandAlt,
+	culture,
+	labs,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
+	specialReport,
+	sport,
 } from '@guardian/source-foundations';
-import { Colour } from '.';
+import type { Colour } from '.';
 
 // ----- Functions ----- //
 
@@ -248,10 +248,7 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const bullet = (
-	format: ArticleFormat,
-	returnPillarColour: boolean = true,
-): Colour => {
+const bullet = (format: ArticleFormat, returnPillarColour = true): Colour => {
 	if (returnPillarColour) {
 		switch (format.theme) {
 			case ArticlePillar.News:

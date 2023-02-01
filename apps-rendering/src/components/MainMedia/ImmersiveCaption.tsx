@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -13,6 +12,7 @@ import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
+import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { immersiveCaptionId } from './MainMedia.defaults';

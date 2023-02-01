@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 
-import { fill } from './fill';
-import { text } from './text';
 import { background } from './background';
 import { border } from './border';
+import { fill } from './fill';
 import { hover } from './hover';
+import { text } from './text';
 
 // ----- Types ----- //
 

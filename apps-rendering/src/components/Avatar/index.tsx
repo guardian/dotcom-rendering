@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
@@ -10,6 +9,7 @@ import Img from 'components/Img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe } from 'lib';
+import { background } from 'palette';
 import type { FC, ReactElement } from 'react';
 
 // ----- Setup ----- //

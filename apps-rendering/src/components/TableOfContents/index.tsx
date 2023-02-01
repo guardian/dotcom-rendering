@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { headline, remSpace, textSans } from '@guardian/source-foundations';
@@ -12,6 +11,7 @@ import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import type { Outline } from 'outline';
+import { border, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 

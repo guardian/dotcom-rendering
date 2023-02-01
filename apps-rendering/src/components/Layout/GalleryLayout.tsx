@@ -1,10 +1,6 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-} from 'palette';
 import type { ArticleFormat } from '@guardian/libs';
 import Byline from 'components/Byline';
 import Footer from 'components/Footer';
@@ -20,6 +16,7 @@ import { WithAgeWarning } from 'components/WithAgeWarning';
 import { grid } from 'grid/grid';
 import type { Gallery } from 'item';
 import { getFormat } from 'item';
+import { background, border } from 'palette';
 import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
