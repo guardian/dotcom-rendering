@@ -16,8 +16,6 @@ import {
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import {
 	isCheckoutCompleteCookieData,
-	isProduct,
-	isUserType,
 	safeJsonParse,
 } from './SignInGate/types';
 import type {
