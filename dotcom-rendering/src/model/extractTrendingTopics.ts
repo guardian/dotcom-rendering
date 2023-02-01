@@ -1,5 +1,5 @@
 import type { FECollectionType } from '../types/front';
-import type { TagType } from '../types/tag';
+import type { FETagType, TagType } from '../types/tag';
 
 export const extractTrendingTopics = (
 	collections: FECollectionType[],
@@ -13,6 +13,22 @@ export const extractTrendingTopics = (
 			(trailTwo) => trailOne.card.id === trailTwo.card.id,
 		),
 	);
+
+	const notUndefined = (value: FETagType | undefined): value is FETagType => value !== undefined;
+
+	const allTags = allTrailsDeduped.flatMap((trail) => trail.properties.maybeContent?.tags.tags).filter(notUndefined);
+
+	const isKeyword = (tag: FETagType) => {
+		/**
+		 * These are the checks from Frontend
+		 */
+		return tag.properties.paidContentType?.includes("Keyword")
+		|| tag.properties.paidContentType?.includes("Topic")
+		|| tag.properties.tagType === "Keyword"
+	}
+
+
+
 	/**
 	 * @todo:
 	 * 	 - Extract all the keyword tags from the trails
