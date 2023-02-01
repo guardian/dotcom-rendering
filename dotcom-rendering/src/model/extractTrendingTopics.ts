@@ -27,6 +27,41 @@ export const extractTrendingTopics = (
 		|| tag.properties.tagType === "Keyword"
 	}
 
+	const desiredTags = allTags.filter(isKeyword)
+
+	const removeSection = desiredTags.filter(x => new Set(x.properties.id.split("/")).size === 2)
+
+	const filterTopFive = (tag: FETagType[]) => {
+		const idCounts: { [key: string]: number } = {};
+
+  tag.forEach(x => {
+    const id = x.properties.id;
+    if (idCounts[id]) {
+      idCounts[id]++;
+    } else {
+      idCounts[id] = 1;
+    }
+  });
+
+  const topFiveIds = Object.entries(idCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(entry => entry[0]);
+
+	return tag.filter(x => topFiveIds.includes(x.properties.id));
+	}
+
+const topFive = filterTopFive(removeSection)
+
+const topFiveUnique = topFive.map(item => item.properties.id)
+  .filter((id, index, self) => self.indexOf(id) === index)
+  .map(id => topFive.find(item => item.properties.id === id));
+
+  const trendingTopics = topFiveUnique.map(item => ({
+	  webTitle: item?.properties.webTitle,
+	  webUrl: item?.properties.webUrl,
+	}))
+
 
 
 	/**
