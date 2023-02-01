@@ -18,7 +18,7 @@ import {
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
-import type { Colour } from '.';
+import type { Colour } from './colour';
 
 // ----- Functions ----- //
 

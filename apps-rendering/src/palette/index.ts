@@ -2,13 +2,10 @@
 
 import { background } from './background';
 import { border } from './border';
+import type { Colour } from './colour';
 import { fill } from './fill';
 import { hover } from './hover';
 import { text } from './text';
-
-// ----- Types ----- //
-
-type Colour = string;
 
 // ----- Exports ----- //
 
