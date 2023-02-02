@@ -255,7 +255,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <script>
                     // record the number of times the browser goes offline during a pageview
                     window.offlineCount = 0;
-                    window.addEventListener('offline', () => offlineCount++);
+                    window.addEventListener('offline', function incrementOfflineCount () { offlineCount++ });
                 </script>
 
                 <script>
