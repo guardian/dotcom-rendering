@@ -24,46 +24,56 @@ import {
 	signInLink,
 } from './shared';
 
+export const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
+export const SIGN_IN_HEADER = 'Sign in to your account';
+
 const getHeadingText: (userType: UserType) => string = (userType) => {
 	const headingMap: Record<UserType, string> = {
-		new: 'Complete your registration',
-		guest: 'Complete your registration',
-		current: 'Sign in to your account',
+		new: COMPLETE_REGISTRATION_HEADER,
+		guest: COMPLETE_REGISTRATION_HEADER,
+		current: SIGN_IN_HEADER,
 	};
 	return headingMap[userType];
 };
 
+export const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
+export const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
+
 const getSubHeadingText: (product: Product) => string = (product) => {
 	const subHeadingMap: Record<Product, string> = {
-		DigitalPack: 'You have a subscription.',
-		Paper: 'You have a subscription.',
-		GuardianWeekly: 'You have a subscription.',
-		Contribution: 'You are a Guardian supporter',
+		DigitalPack: SUBSCRIPTION_SUBHEADER,
+		Paper: SUBSCRIPTION_SUBHEADER,
+		GuardianWeekly: SUBSCRIPTION_SUBHEADER,
+		Contribution: SUPPORTER_SUBHEADER,
 	};
 	return subHeadingMap[product];
 };
+
+// Couldn't think of a better name distinction here...
+export const COMPLETE_REGISTRATION_BODY_STOP_ADS =
+	'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+export const COMPLETE_REGISTRATION_BODY =
+	'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+export const SIGN_IN_BODY_STOP_ADS =
+	'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+export const SIGN_IN_BODY =
+	'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
 
 const getBodyText: (
 	checkoutCompleteCookieData: CheckoutCompleteCookieData,
 ) => string = (checkoutCompleteCookieData) => {
 	const newOrGuestUserBodyMap: Record<Product, string> = {
-		DigitalPack:
-			'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ',
-		Paper: 'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
-		Contribution:
-			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
-		GuardianWeekly:
-			'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
+		DigitalPack: COMPLETE_REGISTRATION_BODY_STOP_ADS,
+		Paper: COMPLETE_REGISTRATION_BODY,
+		Contribution: COMPLETE_REGISTRATION_BODY,
+		GuardianWeekly: COMPLETE_REGISTRATION_BODY,
 	};
 
 	const currentUserBodyMap: Record<Product, string> = {
-		DigitalPack:
-			'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ',
-		Paper: 'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
-		Contribution:
-			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
-		GuardianWeekly:
-			'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ',
+		DigitalPack: SIGN_IN_BODY_STOP_ADS,
+		Paper: SIGN_IN_BODY,
+		Contribution: SIGN_IN_BODY,
+		GuardianWeekly: SIGN_IN_BODY,
 	};
 
 	const { userType, product } = checkoutCompleteCookieData;
@@ -78,11 +88,14 @@ const getBodyText: (
 	}
 };
 
+export const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
+export const SIGN_IN_BUTTON = 'Sign in';
+
 const getButtonText: (userType: UserType) => string = (userType) => {
 	const buttonMap: Record<UserType, string> = {
-		new: 'Complete registration',
-		guest: 'Complete registration',
-		current: 'Sign in',
+		new: COMPLETE_REGISTRATION_BUTTON,
+		guest: COMPLETE_REGISTRATION_BUTTON,
+		current: SIGN_IN_BUTTON,
 	};
 	return buttonMap[userType];
 };
