@@ -398,7 +398,12 @@ export const Card = ({
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<HeadlineWrapper>
+					<HeadlineWrapper
+						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={imagePosition}
+						imageUrl={imageUrl}
+						starRating={starRating}
+					>
 						<CardHeadline
 							headlineText={headlineText}
 							format={format}
