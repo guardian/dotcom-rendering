@@ -1,5 +1,3 @@
-/* eslint-disable mocha/no-exclusive-tests */
-/* eslint-disable mocha/no-setup-in-describe */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
