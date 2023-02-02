@@ -115,6 +115,11 @@ export const signInGateCopyTest = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
+				abTest={{
+					id: 'sign-in-gate-copy-test-jan-2023',
+					name: 'sign-in-gate-copy-test-jan-2023',
+					variant: 'quick-and-easy',
+				}}
 			/>
 		</Section>
 	);
