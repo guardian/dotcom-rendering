@@ -33,7 +33,7 @@ export const SignInGateMain = ({
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>You need to register to keep reading</h1>
 			<p css={bodyBold}>
-				It’s still free to read – this is not a paywall
+				It’s still free to read - this is not a paywall
 			</p>
 			<p css={bodyText}>
 				We’re committed to keeping our quality reporting open. By
