@@ -1,7 +1,7 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
+import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 
 export default {
