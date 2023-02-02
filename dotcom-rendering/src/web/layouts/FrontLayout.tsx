@@ -149,6 +149,26 @@ const decideAdSlot = (
 	return null;
 };
 
+const linkStyle = css`
+	text-decoration: none;
+	font-size: 1em;
+	top: 0;
+	line-height: 1rem;
+	color: #121212;
+	&:after {
+		color: #dcdcdc;
+		font-size: 1em;
+		pointer-events: none;
+		margin: 0.35em;
+		content: '/';
+	}
+	&:last-of-type {
+		&:after {
+			content: '';
+		}
+	}
+`;
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
@@ -439,6 +459,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
+			<Section
+				fullWidth={true}
+				backgroundColour={palette.background.article}
+				padSides={true}
+				showTopBorder={false}
+			>
+				<StraightLines
+					cssOverrides={css`
+						display: block;
+					`}
+					count={4}
+				/>
+			</Section>
+			<Section
+				fullWidth={true}
+				backgroundColour={palette.background.article}
+				padSides={true}
+				showTopBorder={false}
+			>
+				Topics
+				{front.trendingTopics?.map((tag, ind) => {
+					return (
+						<>
+							<a href={tag.properties.webUrl} css={linkStyle}>
+								{tag.properties.webTitle}
+							</a>
+						</>
+					);
+				})}
+			</Section>
 
 			<Section
 				fullWidth={true}

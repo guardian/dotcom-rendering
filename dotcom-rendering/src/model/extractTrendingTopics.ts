@@ -1,9 +1,9 @@
 import type { FECollectionType } from '../types/front';
-import type { FETagType, TagType } from '../types/tag';
+import type { FETagType } from '../types/tag';
 
 export const extractTrendingTopics = (
 	collections: FECollectionType[],
-): TagType[] => {
+): (FETagType | undefined)[] => {
 	const allTrails = collections.flatMap((collection) => [
 		...collection.curated,
 		...collection.backfill,
@@ -18,14 +18,11 @@ export const extractTrendingTopics = (
 
 	const allTags = allTrailsDeduped.flatMap((trail) => trail.properties.maybeContent?.tags.tags).filter(notUndefined);
 
-	const isKeyword = (tag: FETagType) => {
-		/**
-		 * These are the checks from Frontend
-		 */
-		return tag.properties.paidContentType?.includes("Keyword")
+	const isKeyword = (tag: FETagType) =>
+		tag.properties.paidContentType?.includes("Keyword")
 		|| tag.properties.paidContentType?.includes("Topic")
-		|| tag.properties.tagType === "Keyword"
-	}
+		|| tag.properties.tagType === "Keyword";
+
 
 	const desiredTags = allTags.filter(isKeyword)
 
@@ -34,41 +31,30 @@ export const extractTrendingTopics = (
 	const filterTopFive = (tag: FETagType[]) => {
 		const idCounts: { [key: string]: number } = {};
 
-  tag.forEach(x => {
-    const id = x.properties.id;
-    if (idCounts[id]) {
-      idCounts[id]++;
-    } else {
-      idCounts[id] = 1;
-    }
-  });
+		tag.forEach(x => {
+			const id = x.properties.id;
+			if (idCounts[id]) {
+				idCounts[id]++;
+			} else {
+				idCounts[id] = 1;
+			}
+		});
 
-  const topFiveIds = Object.entries(idCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(entry => entry[0]);
+		const topFiveIds = Object.entries(idCounts)
+			.sort((a, b) => b[1] - a[1])
+			.slice(0, 5)
+			.map(entry => entry[0]);
 
-	return tag.filter(x => topFiveIds.includes(x.properties.id));
+		return tag.filter(x => topFiveIds.includes(x.properties.id));
 	}
 
-const topFive = filterTopFive(removeSection)
+	const topFive = filterTopFive(removeSection)
 
-const topFiveUnique = topFive.map(item => item.properties.id)
-  .filter((id, index, self) => self.indexOf(id) === index)
-  .map(id => topFive.find(item => item.properties.id === id));
+	const topFiveUnique = [...new Set(topFive.map((item) => item.properties.id))].map((id) =>
+		topFive.find((item) => item.properties.id === id),
+	);
 
-  const trendingTopics = topFiveUnique.map(item => ({
-	  webTitle: item?.properties.webTitle,
-	  webUrl: item?.properties.webUrl,
-	}))
-
-
-
-	/**
-	 * @todo:
-	 * 	 - Extract all the keyword tags from the trails
-	 *   - Filter out any 'section' tags
-	 *   - Group tags by id and return the top 5 most common.
-	 */
-	return [];
+	return topFiveUnique;
 };
+
+
