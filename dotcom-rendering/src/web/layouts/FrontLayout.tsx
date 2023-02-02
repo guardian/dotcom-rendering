@@ -169,6 +169,14 @@ const linkStyle = css`
 	}
 `;
 
+const topicLabel = css`
+	font-size: 0.75rem;
+	line-height: 1rem;
+	font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+		'Lucida Grande', sans-serif;
+	color: #999;
+`;
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
@@ -478,7 +486,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				padSides={true}
 				showTopBorder={false}
 			>
-				Topics
+				<div css={topicLabel}>Topics</div>
 				{front.trendingTopics?.map((tag, ind) => {
 					return (
 						<>
