@@ -1,6 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 
-export const signInGateCopyTest: ABTest = {
+export const signInGateCopyTestJan2023: ABTest = {
 	id: 'SignInGateCopyTest',
 	start: '2023-01-23',
 	expiry: '2025-12-01',
