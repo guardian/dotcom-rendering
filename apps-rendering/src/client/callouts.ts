@@ -1,3 +1,4 @@
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
@@ -13,7 +14,9 @@ import {
 	fieldParser,
 	map,
 	map2,
+	map4,
 	map7,
+	map8,
 	maybe,
 	numberParser,
 	parse,
@@ -59,6 +62,18 @@ const makeFormFields = (
 	description,
 });
 
+const makeContacts = (
+	name: string,
+	value: string,
+	urlPrefix: string,
+	guidance?: string,
+): Contact => ({
+	name,
+	value,
+	urlPrefix,
+	guidance,
+});
+
 const makeCalloutProps = (
 	callout: Callout,
 	format: ArticleFormatProps,
@@ -75,6 +90,7 @@ const makeCallout = (
 	name: string,
 	description?: DocumentFragment,
 	activeUntil?: number,
+	contacts?: Contact[],
 ): Callout => ({
 	kind: ElementKind.Callout,
 	heading,
@@ -84,6 +100,7 @@ const makeCallout = (
 	name,
 	description,
 	activeUntil,
+	contacts
 });
 
 const makeArticleFormat = (theme: ArticleTheme): ArticleFormatProps => ({
@@ -133,7 +150,14 @@ const formFieldsParser: Parser<FormField> = map7(makeFormFields)(
 	aOrUndefinedParser(fieldParser('description', stringParser)),
 );
 
-const calloutParser: Parser<Callout> = map7(makeCallout)(
+const contactsParser: Parser<Contact> = map4(makeContacts)(
+	fieldParser('name', stringParser),
+	fieldParser('value', stringParser),
+	fieldParser('urlPrefix', stringParser),
+	aOrUndefinedParser(fieldParser('guidance', stringParser)),
+);
+
+const calloutParser: Parser<Callout> = map8(makeCallout)(
 	fieldParser('heading', stringParser),
 	fieldParser('formId', numberParser),
 	fieldParser('formFields', arrayParser(formFieldsParser)),
@@ -141,6 +165,7 @@ const calloutParser: Parser<Callout> = map7(makeCallout)(
 	fieldParser('name', stringParser),
 	fieldParser('description', documentFragmentParser),
 	aOrUndefinedParser(fieldParser('activeUntil', numberParser)),
+	aOrUndefinedParser(fieldParser('contacts', arrayParser(contactsParser))),
 );
 
 const calloutPropsParser: Parser<CalloutProps> = map2(makeCalloutProps)(
