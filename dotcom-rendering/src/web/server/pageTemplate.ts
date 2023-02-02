@@ -253,6 +253,12 @@ https://workforus.theguardian.com/careers/product-engineering/
                 </script>
 
                 <script>
+                    // record the number of times the browser goes offline during a pageview
+                    window.offlineCount = 0;
+                    window.addEventListener('offline', () => offlineCount++);
+                </script>
+
+                <script>
                     // this is a global that's called at the bottom of the pf.io response,
                     // once the polyfills have run. This may be useful for debugging.
                     // mainly to support browsers that don't support async=false or defer
