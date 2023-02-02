@@ -10,7 +10,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Link , SvgExternal } from '@guardian/source-react-components';
+import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
@@ -212,35 +212,36 @@ const WithLink = ({
 }) => {
 	if (linkTo && isExternalLink) {
 		return (
-			<>	<Link
-				href={linkTo}
-				target="_blank"
-				cssOverrides={
-					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-				}
-			>
-				{children}
-			</Link>
+			<>
+				<Link
+					href={linkTo}
+					target="_blank"
+					cssOverrides={
+						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
+					}
+				>
+					{children}
+				</Link>
 				<span>external link</span>
 			</>
 		);
-	}
-	else if (linkTo) {
+	} else if (linkTo) {
 		return (
-			<> <Link
-				href={linkTo}
-				cssOverrides={
-			isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-		}
-	>
-				{children}
-			</Link> 
+			<>
+				<Link
+					href={linkTo}
+					cssOverrides={
+						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
+					}
+				>
+					{children}
+				</Link>
 				<span>not external</span>
-			</>);
+			</>
+		);
 	}
 	return <>{children}</>;
 };
-
 
 /**
 determine if external link, if so:
@@ -250,11 +251,12 @@ this works if the decideIfExternal function does - have confirmed using the kick
 the external link logic isn't working, not sure if linkto is the best to use and maybe cardstyle is.
  */
 
-const decideIfExternalLink = (linkTo: string) => 
-	{if 
-		(linkTo.includes("www.theguardian.com"))
-			{return false}
-	else {return true}
+const decideIfExternalLink = (linkTo: string) => {
+	if (linkTo.includes('www.theguardian.com')) {
+		return false;
+	} else {
+		return true;
+	}
 };
 
 /** Matches headlines starting with short words of 1 to 3 letters followed by a space */
@@ -283,7 +285,7 @@ export const CardHeadline = ({
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
-	const isExternalLink = linkTo ? decideIfExternalLink(linkTo) : false
+	const isExternalLink = linkTo ? decideIfExternalLink(linkTo) : false;
 	return (
 		<>
 			<h3
@@ -302,15 +304,20 @@ export const CardHeadline = ({
 					showLine && !isDynamo && lineStyles(palette),
 				]}
 			>
-				<WithLink linkTo={linkTo} isDynamo={isDynamo} isExternalLink={isExternalLink}>
+				<WithLink
+					linkTo={linkTo}
+					isDynamo={isDynamo}
+					isExternalLink={isExternalLink}
+				>
 					{!!kickerText && (
-					<>	<Kicker
-						text={kickerText}
-						color={kickerColour}
-						showPulsingDot={showPulsingDot}
-						hideLineBreak={hideLineBreak}
-						/>
-					</>
+						<>
+							<Kicker
+								text={kickerText}
+								color={kickerColour}
+								showPulsingDot={showPulsingDot}
+								hideLineBreak={hideLineBreak}
+							/>
+						</>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
 					<span
@@ -321,22 +328,26 @@ export const CardHeadline = ({
 						`}
 						className="show-underline"
 					>
-						{cleanHeadLineText} 
-						{isExternalLink &&
-						<span
-							css={css`stroke:red;`}>
-							<SvgExternal size='xsmall'/>
-						</span>}
+						{cleanHeadLineText}
+						{isExternalLink && (
+							<span
+								css={css`
+									stroke: red;
+								`}
+							>
+								<SvgExternal size="xsmall" />
+							</span>
+						)}
 					</span>
 				</WithLink>
 			</h3>
 			{!!byline && showByline && (
-			<Byline
-				text={byline}
-				format={format}
-				containerPalette={containerPalette}
-				size={size}
-				isCard={true}
+				<Byline
+					text={byline}
+					format={format}
+					containerPalette={containerPalette}
+					size={size}
+					isCard={true}
 				/>
 			)}
 		</>
