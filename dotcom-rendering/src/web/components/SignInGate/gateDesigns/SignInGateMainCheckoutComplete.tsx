@@ -19,24 +19,46 @@ import {
 	laterButton,
 	privacyLink,
 	registerButton,
-	signInGateContainer,
+	signInGateContainer
 } from './shared';
+
+// HEADER TEXT
+const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
+const SIGN_IN_HEADER = 'Sign in to your account';
+
+// SUBHEADER TEXT
+const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
+const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
+
+// BODY TEXT
+const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
+	'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+const COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE =
+	'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+const SIGN_IN_BODY_ADS_INCENTIVE =
+	'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+const SIGN_IN_BODY_NO_ADS_INCENTIVE =
+	'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+
+// BUTTON TEXT
+const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
+const SIGN_IN_BUTTON = 'Sign in';
 
 const getHeadingText: (userType: UserType) => string = (userType) => {
 	const headingMap: Record<UserType, string> = {
-		new: 'Complete your registration',
-		guest: 'Complete your registration',
-		current: 'Sign in to your account',
+		new: COMPLETE_REGISTRATION_HEADER,
+		guest: COMPLETE_REGISTRATION_HEADER,
+		current: SIGN_IN_HEADER,
 	};
 	return headingMap[userType];
 };
 
 const getSubHeadingText: (product: Product) => string = (product) => {
 	const subHeadingMap: Record<Product, string> = {
-		DigitalPack: 'You have a subscription.',
-		Paper: 'You have a subscription.',
-		GuardianWeekly: 'You have a subscription.',
-		Contribution: 'You are a Guardian supporter',
+		DigitalPack: SUBSCRIPTION_SUBHEADER,
+		Paper: SUBSCRIPTION_SUBHEADER,
+		GuardianWeekly: SUBSCRIPTION_SUBHEADER,
+		Contribution: SUPPORTER_SUBHEADER,
 	};
 	return subHeadingMap[product];
 };
@@ -44,27 +66,22 @@ const getSubHeadingText: (product: Product) => string = (product) => {
 const getBodyText: (
 	checkoutCompleteCookieData: CheckoutCompleteCookieData,
 ) => string = (checkoutCompleteCookieData) => {
-	const newOrGuestNonDigitalBodyText =
-		'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
 	const newOrGuestUserBodyMap: Record<Product, string> = {
-		DigitalPack:
-			'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
-		Paper: newOrGuestNonDigitalBodyText,
-		Contribution: newOrGuestNonDigitalBodyText,
-		GuardianWeekly: newOrGuestNonDigitalBodyText,
+		DigitalPack: COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE,
+		Paper: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
+		Contribution: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
+		GuardianWeekly: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
 	};
 
-	const currentNonDigitalBodyText =
-		'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.';
 	const currentUserBodyMap: Record<Product, string> = {
-		DigitalPack:
-			'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ',
-		Paper: currentNonDigitalBodyText,
-		Contribution: currentNonDigitalBodyText,
-		GuardianWeekly: currentNonDigitalBodyText,
+		DigitalPack: SIGN_IN_BODY_ADS_INCENTIVE,
+		Paper: SIGN_IN_BODY_NO_ADS_INCENTIVE,
+		Contribution: SIGN_IN_BODY_NO_ADS_INCENTIVE,
+		GuardianWeekly: SIGN_IN_BODY_NO_ADS_INCENTIVE,
 	};
 
 	const { userType, product } = checkoutCompleteCookieData;
+
 	switch (userType) {
 		case 'new':
 			return newOrGuestUserBodyMap[product];
@@ -77,9 +94,9 @@ const getBodyText: (
 
 const getButtonText: (userType: UserType) => string = (userType) => {
 	const buttonMap: Record<UserType, string> = {
-		new: 'Complete registration',
-		guest: 'Complete registration',
-		current: 'Sign in',
+		new: COMPLETE_REGISTRATION_BUTTON,
+		guest: COMPLETE_REGISTRATION_BUTTON,
+		current: SIGN_IN_BUTTON,
 	};
 	return buttonMap[userType];
 };

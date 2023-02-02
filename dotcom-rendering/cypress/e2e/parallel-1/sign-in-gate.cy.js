@@ -1,6 +1,6 @@
+/* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
@@ -219,6 +219,29 @@ describe('Sign In Gate Tests', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {});
 
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+
+				// HEADER TEXT
+				const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
+				const SIGN_IN_HEADER = 'Sign in to your account';
+
+				// SUBHEADER TEXT
+				const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
+				const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
+
+				// BODY TEXT
+				const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
+					'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+				const COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE =
+					'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+				const SIGN_IN_BODY_ADS_INCENTIVE =
+					'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
+				const SIGN_IN_BODY_NO_ADS_INCENTIVE =
+					'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+
+				// BUTTON TEXT
+				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
+				const SIGN_IN_BUTTON = 'Sign in';
+
 				it('user is new and has a digital subscription', function () {
 					setGuCOCompleteCookie('new', 'DigitalPack');
 
@@ -226,16 +249,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration',
+						COMPLETE_REGISTRATION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You have a subscription.',
+						SUBSCRIPTION_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+						COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Complete registration',
+						COMPLETE_REGISTRATION_BUTTON,
 					);
 				});
 
@@ -246,16 +269,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration',
+						COMPLETE_REGISTRATION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You have a subscription.',
+						SUBSCRIPTION_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+						COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Complete registration',
+						COMPLETE_REGISTRATION_BUTTON,
 					);
 				});
 
@@ -266,16 +289,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration',
+						COMPLETE_REGISTRATION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You are a Guardian supporter',
+						SUPPORTER_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+						COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Complete registration',
+						COMPLETE_REGISTRATION_BUTTON,
 					);
 				});
 
@@ -286,16 +309,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to your account',
+						SIGN_IN_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You have a subscription.',
+						SUBSCRIPTION_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account.',
+						SIGN_IN_BODY_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Sign in',
+						SIGN_IN_BUTTON,
 					);
 				});
 
@@ -306,16 +329,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to your account',
+						SIGN_IN_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You have a subscription.',
+						SUBSCRIPTION_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+						SIGN_IN_BODY_NO_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Sign in',
+						SIGN_IN_BUTTON,
 					);
 				});
 
@@ -326,16 +349,16 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to your account',
+						SIGN_IN_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You are a Guardian supporter',
+						SUPPORTER_SUBHEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment.',
+						SIGN_IN_BODY_NO_ADS_INCENTIVE,
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
-						'Sign in',
+						SIGN_IN_BUTTON,
 					);
 				});
 			});
