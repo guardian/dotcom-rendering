@@ -241,7 +241,7 @@ function reportNativeElementPositionChanges(): void {
 				void commercialClient.updateAdverts(currentAdSlots);
 			}
 		} catch (ex) {
-			logger.error(`Exception updating ads`);
+			logger.error('Exception updating ads');
 		}
 
 		try {
@@ -252,7 +252,7 @@ function reportNativeElementPositionChanges(): void {
 				void videoClient.updateVideos(currentVideoSlots);
 			}
 		} catch (ex) {
-			logger.error(`Exception updating videos`);
+			logger.error('Exception updating videos');
 		}
 	};
 
