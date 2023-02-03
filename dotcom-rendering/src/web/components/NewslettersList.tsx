@@ -1,7 +1,15 @@
 import { css } from '@emotion/react';
-import { brandAlt, headline, neutral, space } from '@guardian/source-foundations';
+import {
+	brandAlt,
+	headline,
+	neutral,
+	space,
+} from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
+import type { EditionLinkType } from 'src/model/extract-nav';
 import type { Newsletter } from '../../types/content';
+import type { EditionId } from '../lib/edition';
+import { getEditionFromId } from '../lib/edition';
 import { Hide } from './Hide';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
@@ -10,14 +18,30 @@ export interface NewslettersListProps {
 	newsletters: Newsletter[];
 	headingText: string;
 	mmaUrl?: string;
+	editionId: EditionId;
 }
 
 type GroupedNewsletters = { groupName: string; newsletters: Newsletter[] }[];
 
 const putNewslettersInGroups = (
 	newsletters: Newsletter[],
+	edition?: EditionLinkType,
 ): GroupedNewsletters => {
 	const groupedList: GroupedNewsletters = [];
+
+	if (edition) {
+		const regionalNewsletters = newsletters.filter(
+			(newsletter) => newsletter.regionFocus === edition.editionId,
+		);
+
+		if (regionalNewsletters.length > 0) {
+			groupedList.push({
+				groupName: edition.longTitle,
+				newsletters: regionalNewsletters,
+			});
+		}
+	}
+
 	newsletters.forEach((newsletter) => {
 		const { group: groupName } = newsletter;
 
@@ -51,8 +75,10 @@ export const NewslettersList = ({
 	newsletters,
 	headingText,
 	mmaUrl,
+	editionId,
 }: NewslettersListProps) => {
-	const groupedNewsletters = putNewslettersInGroups(newsletters);
+	const edition = getEditionFromId(editionId);
+	const groupedNewsletters = putNewslettersInGroups(newsletters, edition);
 
 	return (
 		<>
@@ -64,6 +90,13 @@ export const NewslettersList = ({
 				>
 					{headingText}
 				</h1>
+				<div
+					css={css`
+						${headline.small()}
+					`}
+				>
+					{edition.longTitle}
+				</div>
 
 				{!!mmaUrl && (
 					<LinkButton href={`${mmaUrl}/email-prefs`} size={'small'}>

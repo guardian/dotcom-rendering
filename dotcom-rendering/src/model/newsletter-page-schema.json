@@ -49,6 +49,12 @@
         "id": {
             "type": "string"
         },
+        "editionId": {
+            "$ref": "#/definitions/EditionId"
+        },
+        "editionLongForm": {
+            "type": "string"
+        },
         "webTitle": {
             "type": "string"
         },
@@ -74,11 +80,23 @@
     "required": [
         "config",
         "description",
+        "editionId",
+        "editionLongForm",
         "id",
         "newsletters",
         "webTitle"
     ],
     "definitions": {
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        },
         "Partial<ConfigType>": {
             "type": "object",
             "properties": {
@@ -254,16 +272,6 @@
                 "CODE",
                 "DEV",
                 "PROD"
-            ],
-            "type": "string"
-        },
-        "EditionId": {
-            "enum": [
-                "AU",
-                "EUR",
-                "INT",
-                "UK",
-                "US"
             ],
             "type": "string"
         }

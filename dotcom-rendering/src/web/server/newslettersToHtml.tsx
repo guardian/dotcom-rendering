@@ -16,6 +16,7 @@ export const newslettersToHtml = (model: DCRNewslettersPageType): string => {
 					newsletters={model.newsletters}
 					headingText={model.webTitle}
 					mmaUrl={model.config.mmaUrl}
+					editionId={model.editionId}
 				/>
 			</StandAlonePage>
 		</CacheProvider>,

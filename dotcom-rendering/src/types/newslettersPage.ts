@@ -8,6 +8,8 @@ import type { TagType } from './tag';
 export interface FENewslettersPageType {
 	newsletters: Newsletter[];
 	id: string;
+	editionId: EditionId;
+	editionLongForm: string,
 	webTitle: string;
 	description: string;
 	config: Partial<ConfigType>;
