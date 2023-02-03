@@ -662,28 +662,21 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 				</Island>
 
 				{!isPaidContent && showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						data-print-layout="hide"
-						element="section"
-					>
-						<DiscussionLayout
-							discussionApiUrl={article.config.discussionApiUrl}
-							shortUrlId={article.config.shortUrlId}
-							format={format}
-							discussionD2Uid={article.config.discussionD2Uid}
-							discussionApiClientHeader={
-								article.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								!!article.config.switches.enableDiscussionSwitch
-							}
-							isAdFreeUser={article.isAdFreeUser}
-							shouldHideAds={article.shouldHideAds}
-							idApiUrl={article.config.idApiUrl}
-						/>
-					</Section>
+					<DiscussionLayout
+						discussionApiUrl={article.config.discussionApiUrl}
+						shortUrlId={article.config.shortUrlId}
+						format={format}
+						discussionD2Uid={article.config.discussionD2Uid}
+						discussionApiClientHeader={
+							article.config.discussionApiClientHeader
+						}
+						enableDiscussionSwitch={
+							!!article.config.switches.enableDiscussionSwitch
+						}
+						isAdFreeUser={article.isAdFreeUser}
+						shouldHideAds={article.shouldHideAds}
+						idApiUrl={article.config.idApiUrl}
+					/>
 				)}
 
 				{!isPaidContent && (

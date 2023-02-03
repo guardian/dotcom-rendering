@@ -15,6 +15,15 @@ export default {
 			// This has the effect of turning off the viewports addon by default
 			defaultViewport: 'doesNotExist',
 		},
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 

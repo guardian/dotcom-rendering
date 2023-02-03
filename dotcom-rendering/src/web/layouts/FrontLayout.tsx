@@ -329,7 +329,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									key={ophanName}
 									title="Most viewed"
 									showTopBorder={index > 0}
-									padContent={false}
+									padContent={true}
 									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
@@ -376,7 +376,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								padContent={false}
+								padContent={true}
 								centralBorder="partial"
 								url={collection.href}
 								ophanComponentLink={ophanComponentLink}

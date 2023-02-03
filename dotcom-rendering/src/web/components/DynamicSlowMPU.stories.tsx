@@ -21,7 +21,7 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -38,7 +38,7 @@ export const NoBigs = () => (
 NoBigs.story = { name: 'with no big cards, only standard' };
 
 export const OneBig = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -55,7 +55,7 @@ export const OneBig = () => (
 OneBig.story = { name: 'with just one big' };
 
 export const TwoBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -72,7 +72,7 @@ export const TwoBigs = () => (
 TwoBigs.story = { name: 'with two bigs' };
 
 export const FirstBigBoosted = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -93,7 +93,7 @@ export const FirstBigBoosted = () => (
 FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
 
 export const SecondBigBoosted = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -114,7 +114,7 @@ export const SecondBigBoosted = () => (
 SecondBigBoosted.story = { name: 'with the second of two bigs boosted' };
 
 export const ThreeBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -131,7 +131,7 @@ export const ThreeBigs = () => (
 ThreeBigs.story = { name: 'with three bigs' };
 
 export const AllBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<Section title="DynamicSlowMPU" padContent={true} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
