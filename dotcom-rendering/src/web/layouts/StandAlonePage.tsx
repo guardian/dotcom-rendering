@@ -11,6 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { AlreadyVisited } from '../components//AlreadyVisited.importable';
 import { FocusStyles } from '../components//FocusStyles.importable';
@@ -26,7 +27,9 @@ import { SubNav } from '../components/SubNav.importable';
 import { Stuck } from '../layouts/lib/stickiness';
 import { decideFormat } from '../lib/decideFormat';
 
-type Props = DCRNewslettersPageType & {
+type Props = {
+	model: DCRNewslettersPageType;
+	nav: NavType;
 	children: ReactNode;
 };
 
@@ -35,17 +38,16 @@ type Props = DCRNewslettersPageType & {
  * Article is a high level wrapper for stand alone pages on Dotcom. Sets strict mode and some globals
  *
  * */
-export const StandAlonePage = ({
-	children,
-	renderAds,
-	subscribeUrl,
-	editionId,
-	nav,
-	footer,
-	format,
-	contributionsServiceUrl: pageContributionsServiceUrl,
-	config,
-}: Props) => {
+export const StandAlonePage = ({ children, model, nav }: Props) => {
+	const {
+		renderAds,
+		subscribeUrl,
+		editionId,
+		footer,
+		format,
+		contributionsServiceUrl: pageContributionsServiceUrl,
+		config,
+	} = model;
 	const articleFormat: ArticleFormat = decideFormat(format ?? {});
 
 	const isInEuropeTest =

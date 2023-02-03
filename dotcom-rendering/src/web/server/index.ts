@@ -205,7 +205,6 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 };
 
 const enhanceNewslettersPage = (body: unknown): DCRNewslettersPageType => {
-	// console.log(body);
 	const data = validateAsNewslettersPageType(body);
 	return buildNewslettersPageModel(data);
 };

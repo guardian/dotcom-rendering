@@ -1,4 +1,3 @@
-import type { NavType } from '../model/extract-nav';
 import type { EditionId } from '../web/lib/edition';
 import type { ConfigType } from './config';
 import type { Newsletter } from './content';
@@ -30,6 +29,7 @@ export interface FENewslettersPageType {
 	openGraphData?: {
 		[key: string]: string;
 	};
+	nav: CAPINavType;
 }
 
 export type DCRNewslettersPageType = {
@@ -51,7 +51,7 @@ export type DCRNewslettersPageType = {
 		[key: string]: string;
 	};
 	config: ConfigType;
-	nav: NavType;
+	nav: CAPINavType;
 	footer: FooterType;
 	newsletters: Newsletter[];
 };

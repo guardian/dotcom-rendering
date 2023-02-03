@@ -1,157 +1,163 @@
-import { ArticlePillar } from '@guardian/libs';
-import type { NavType } from '../../../model/extract-nav';
 import type { ConfigType } from '../../../types/config';
 import type { FooterType } from '../../../types/footer';
 
 export const STATIC_FOOTER: FooterType = { footerLinks: [[]] };
 
-export const STATIC_NAV: NavType = {
-	otherLinks: {
-		url: '/uk',
-		title: 'nav link',
-		longTitle: 'this is a nav link',
-		children: [],
-		mobileOnly: false,
-		more: true,
-	},
-	brandExtensions: [],
-	currentNavLink: '/',
-	subNavSections: {
-		links: [
-			{
-				url: '/world',
-				title: 'World',
-				longTitle: 'World news',
-				children: [],
-				mobileOnly: false,
-				more: false,
-			},
-			{
-				url: '/email-newsletters',
-				title: 'Newsletters',
-				longTitle: 'Newsletters',
-				children: [],
-				mobileOnly: false,
-				more: false,
-			},
-		],
-	},
-	readerRevenueLinks: {
-		header: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		footer: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		sideMenu: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		ampHeader: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		ampFooter: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-	},
+export const STATIC_NAV: CAPINavType = {
+	currentUrl: '/newsletter-signup-page',
 	pillars: [
 		{
-			url: '/',
 			title: 'News',
-			longTitle: 'News',
-			pillar: ArticlePillar.News,
-			children: [
-				{
-					title: 'World',
-					url: '/world',
-					longTitle: 'World news',
-					more: true,
-					children: [
-						{
-							title: 'Europe',
-							longTitle: 'Europe',
-							url: '/world/europe-news',
-							children: [],
-						},
-						{
-							title: 'US',
-							url: '/us-news',
-							longTitle: 'US news',
-							children: [],
-						},
-						{
-							title: 'Americas',
-							longTitle: 'Americas',
-							url: '/world/americas',
-							children: [],
-						},
-						{
-							title: 'Asia',
-							longTitle: 'Asia',
-							url: '/world/asia',
-							children: [],
-						},
-						{
-							title: 'Australia',
-							url: '/australia-news',
-							longTitle: 'Australia news',
-							children: [],
-						},
-						{
-							title: 'Middle East',
-							longTitle: 'Middle East',
-							url: '/world/middleeast',
-							children: [],
-						},
-						{
-							title: 'Africa',
-							longTitle: 'Africa',
-							url: '/world/africa',
-							children: [],
-						},
-						{
-							title: 'Inequality',
-							longTitle: 'Inequality',
-							url: '/inequality',
-							children: [],
-						},
-						{
-							title: 'Global development',
-							longTitle: 'Global development',
-							url: '/global-development',
-							children: [],
-						},
-					],
-				},
-			],
+			url: '/',
+			longTitle: 'Headlines',
+			iconName: 'home',
+			children: [],
 		},
 		{
-			url: '/commentisfree',
 			title: 'Opinion',
-			longTitle: 'Opinion',
-			pillar: ArticlePillar.Opinion,
+			url: '/commentisfree',
+			longTitle: 'Opinion home',
+			iconName: 'home',
+			children: [],
 		},
 		{
-			url: '/uk/sport',
 			title: 'Sport',
-			longTitle: 'Sport',
-			pillar: ArticlePillar.Sport,
+			url: '/sport',
+			longTitle: 'Sport home',
+			iconName: 'home',
+			children: [],
+		},
+		{
+			title: 'Culture',
+			url: '/culture',
+			longTitle: 'Culture home',
+			iconName: 'home',
+			children: [],
+		},
+		{
+			title: 'Lifestyle',
+			url: '/lifeandstyle',
+			longTitle: 'Lifestyle home',
+			iconName: 'home',
+			children: [],
 		},
 	],
+	otherLinks: [
+		{
+			title: 'The Guardian app',
+			url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+		},
+		{ title: 'Video', url: '/video' },
+		{ title: 'Podcasts', url: '/podcasts' },
+		{ title: 'Pictures', url: '/inpictures' },
+		{ title: 'Newsletters', url: '/email-newsletters' },
+		{ title: "Today's paper", url: '/theguardian', children: [] },
+		{
+			title: 'Inside the Guardian',
+			url: 'https://www.theguardian.com/membership',
+		},
+		{ title: 'The Observer', url: '/observer', children: [] },
+		{
+			title: 'Guardian Weekly',
+			url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+		},
+		{ title: 'Crosswords', url: '/crosswords', children: [] },
+		{
+			title: 'Corrections',
+			url: '/theguardian/series/corrections-and-clarifications',
+		},
+	],
+	brandExtensions: [
+		{
+			title: 'Search jobs',
+			url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+		},
+		{
+			title: 'Hire with Guardian Jobs',
+			url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+		},
+		{
+			title: 'Holidays',
+			url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+		},
+		{
+			title: 'Live events',
+			url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+		},
+		{ title: 'Masterclasses', url: '/guardian-masterclasses' },
+		{
+			title: 'Digital Archive',
+			url: 'https://theguardian.newspapers.com',
+		},
+		{
+			title: 'Guardian Print Shop',
+			url: '/artanddesign/series/gnm-print-sales',
+		},
+		{
+			title: 'Patrons',
+			url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+		},
+		{
+			title: 'Guardian Puzzles app',
+			url: 'https://puzzles.theguardian.com/download',
+		},
+		{
+			title: 'Guardian content licensing site',
+			url: 'https://licensing.theguardian.com/',
+		},
+	],
+	readerRevenueLinks: {
+		header: {
+			contribute:
+				'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+			subscribe:
+				'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+			support:
+				'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+			supporter:
+				'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+		},
+		footer: {
+			contribute:
+				'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+			subscribe:
+				'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+			support:
+				'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+			supporter:
+				'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
+		},
+		sideMenu: {
+			contribute:
+				'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+			subscribe:
+				'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+			support:
+				'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+			supporter:
+				'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
+		},
+		ampHeader: {
+			contribute:
+				'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+			subscribe:
+				'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+			support:
+				'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+			supporter:
+				'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+		},
+		ampFooter: {
+			contribute:
+				'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+			subscribe:
+				'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+			support:
+				'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+			supporter:
+				'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
+		},
+	},
 };
 
 export const STATIC_CONFIG: ConfigType = {
