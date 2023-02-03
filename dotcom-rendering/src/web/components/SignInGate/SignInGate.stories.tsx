@@ -76,15 +76,16 @@ fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
 
-export const signInGatePersonalisedCopy = () => {
+export const signInGateMainCheckoutCompletePersonalisedCopy = () => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateMainCheckoutComplete
 				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
+				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
+				// TODO add controls for these args
 				checkoutCompleteCookieData={{
 					userType: 'new',
 					product: 'DigitalPack',
@@ -92,4 +93,7 @@ export const signInGatePersonalisedCopy = () => {
 			/>
 		</Section>
 	);
+};
+signInGateMainCheckoutCompletePersonalisedCopy.story = {
+	name: 'main_checkout_complete_personalised',
 };

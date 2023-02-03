@@ -97,6 +97,15 @@ export const SignInGateMainCheckoutComplete = ({
 }: SignInGatePropsWithCheckoutCompleteCookieData) => {
 	const { userType, product } = checkoutCompleteCookieData;
 
+	// send new/guest userType to the /register page instead of /signin
+	const personaliseSignInURl = (url: string): string => {
+		if (userType === 'current') return url;
+
+		const regex = /\/(signin)/;
+		const substitution = `/register`;
+		return url.replace(regex, substitution);
+	};
+
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
@@ -125,7 +134,7 @@ export const SignInGateMainCheckoutComplete = ({
 					css={registerButton}
 					priority="primary"
 					size="small"
-					href={signInUrl}
+					href={personaliseSignInURl(signInUrl)}
 					onClick={() => {
 						trackLink(ophanComponentId, 'register-link', abTest);
 					}}
