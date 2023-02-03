@@ -9,7 +9,6 @@ export const pageTemplate = ({
 	css,
 	html,
 	windowGuardian,
-	gaPath,
 	scriptTags,
 	keywords,
 	offerHttp3,
@@ -26,7 +25,6 @@ export const pageTemplate = ({
 	css: string;
 	html: string;
 	windowGuardian: string;
-	gaPath: { modern: string; legacy: string };
 	scriptTags: string[];
 	keywords: string;
 	offerHttp3: boolean;
@@ -233,13 +231,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script type="module">
                     window.guardian.mustardCut = true;
-                    window.guardian.gaPath = "${gaPath.modern}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
-                    window.guardian.gaPath = "${gaPath.legacy}";
                 </script>
 
                 <script>

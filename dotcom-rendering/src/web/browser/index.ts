@@ -3,6 +3,7 @@ import './webpackPublicPath';
 // these modules are bundled in the initial (i.e. this) chunk, so that they run ASAP
 import { bootCmp } from './bootCmp';
 import { dynamicImport } from './dynamicImport';
+import { ga } from './ga';
 import { islands } from './islands';
 import { ophan } from './ophan';
 import { sentryLoader } from './sentryLoader';
@@ -10,6 +11,7 @@ import { startup } from './startup';
 
 startup('bootCmp', null, bootCmp);
 startup('ophan', null, ophan);
+startup('ga', null, ga);
 startup('sentryLoader', null, sentryLoader);
 startup('dynamicImport', null, dynamicImport);
 startup('islands', null, islands);

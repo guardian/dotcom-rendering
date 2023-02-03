@@ -60,7 +60,6 @@ const windowGuardian = {
 		showNextVariant: () => {},
 		showPreviousVariant: () => {},
 	},
-	gaPath: '/assets/ga.js',
 };
 
 // Stub global Guardian object

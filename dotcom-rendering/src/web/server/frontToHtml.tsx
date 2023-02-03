@@ -2,13 +2,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import {
-	generateScriptTags,
-	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
-} from '../../lib/assets';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -69,17 +63,6 @@ export const frontToHtml = ({ front }: Props): string => {
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
-
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
@@ -114,7 +97,6 @@ export const frontToHtml = ({ front }: Props): string => {
 		title,
 		description: front.pressedPage.seoData.description,
 		windowGuardian,
-		gaPath,
 		keywords,
 		offerHttp3,
 	});
