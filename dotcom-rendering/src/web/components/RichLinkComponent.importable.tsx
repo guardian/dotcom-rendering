@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { RichLinkBlockElement } from '../../types/content';
+import type { RichLinkBlockElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
@@ -13,7 +13,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-interface CAPIRichLinkType {
+interface FERichLinkType {
 	cardStyle: RichLinkCardType;
 	thumbnailUrl: string;
 	headline: string;
@@ -59,7 +59,7 @@ export const RichLinkComponent = ({
 	format,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
-	const { data, error } = useApi<CAPIRichLinkType>(url);
+	const { data, error } = useApi<FERichLinkType>(url);
 
 	if (error) {
 		// Send the error to Sentry
