@@ -10,6 +10,9 @@ export interface FENewslettersPageType {
 	id: string;
 	editionId: EditionId;
 	editionLongForm: string,
+	subscribeUrl: string;
+	contributionsServiceUrl: string;
+	beaconURL: string;
 	webTitle: string;
 	description: string;
 	config: Partial<ConfigType>;

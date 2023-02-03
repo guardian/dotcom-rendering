@@ -59,6 +59,9 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 	webTitle: 'Guardian newsletters: Using Test Data',
 	editionId: 'INT',
 	editionLongForm: 'International Edition',
+	beaconURL: '//',
+	subscribeUrl: '/test-subscribe-url',
+	contributionsServiceUrl: '/test-contributions-url',
 	description:
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	config: STATIC_CONFIG,
@@ -69,9 +72,7 @@ export const buildNewslettersPageModel = (
 ): DCRNewslettersPageType => ({
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
-	beaconURL: '//phar.gu-web.net',
-	subscribeUrl: '/',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+
 	...pageRequestData,
 	config: {
 		...STATIC_CONFIG,
@@ -84,9 +85,6 @@ export const buildNewslettersPageModel = (
 export const provideTestNewslettersPageModel = (): DCRNewslettersPageType => ({
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
-	beaconURL: '//phar.gu-web.net',
-	subscribeUrl: '/',
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	...TEST_NEWSLETTERS_PAGE_DATA,
 	config: STATIC_CONFIG,
 });

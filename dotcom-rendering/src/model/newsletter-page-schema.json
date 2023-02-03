@@ -55,6 +55,15 @@
         "editionLongForm": {
             "type": "string"
         },
+        "subscribeUrl": {
+            "type": "string"
+        },
+        "contributionsServiceUrl": {
+            "type": "string"
+        },
+        "beaconURL": {
+            "type": "string"
+        },
         "webTitle": {
             "type": "string"
         },
@@ -78,12 +87,15 @@
         }
     },
     "required": [
+        "beaconURL",
         "config",
+        "contributionsServiceUrl",
         "description",
         "editionId",
         "editionLongForm",
         "id",
         "newsletters",
+        "subscribeUrl",
         "webTitle"
     ],
     "definitions": {
