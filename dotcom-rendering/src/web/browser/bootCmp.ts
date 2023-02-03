@@ -6,12 +6,11 @@ import {
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { OphanAction, OphanComponentType } from '@guardian/libs';
 import { getCookie, loadScript, log } from '@guardian/libs';
-import { getLocaleCode } from '../../lib/getCountryCode';
-import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
-import { submitComponentEvent } from '../ophan/ophan';
-import { startup } from '../startup';
+import { getLocaleCode } from '../lib/getCountryCode';
+import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
+import { submitComponentEvent } from './ophan/ophan';
 
-const init = async (): Promise<void> => {
+export const bootCmp = async (): Promise<void> => {
 	/**
 	 * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
 	 * mark: CONSENT_TIMING
@@ -135,5 +134,3 @@ const init = async (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('bootCmp', null, init);

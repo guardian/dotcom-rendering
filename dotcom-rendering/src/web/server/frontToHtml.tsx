@@ -59,32 +59,13 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
+	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
-			...getScriptArrayFromFile('islands.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
-
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
@@ -127,8 +108,7 @@ export const frontToHtml = ({ front }: Props): string => {
 	const keywords = front.config.keywords ?? '';
 
 	return pageTemplate({
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,

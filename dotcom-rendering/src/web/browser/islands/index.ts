@@ -1,13 +1,8 @@
-import '../webpackPublicPath';
-
-import { startup } from '../startup';
 import { initHydration } from './initHydration';
 
-const init = () => {
+export const islands = (): Promise<void> => {
 	const elements = document.querySelectorAll('gu-island');
 	initHydration(elements);
 
 	return Promise.resolve();
 };
-
-startup('islands', null, init);
