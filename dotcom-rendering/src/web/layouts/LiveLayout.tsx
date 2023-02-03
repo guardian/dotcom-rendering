@@ -1235,34 +1235,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Island>
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							sectionId="comments"
-							data-print-layout="hide"
-							element="section"
-						>
-							<DiscussionLayout
-								discussionApiUrl={
-									CAPIArticle.config.discussionApiUrl
-								}
-								shortUrlId={CAPIArticle.config.shortUrlId}
-								format={format}
-								discussionD2Uid={
-									CAPIArticle.config.discussionD2Uid
-								}
-								discussionApiClientHeader={
-									CAPIArticle.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									!!CAPIArticle.config.switches
-										.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								shouldHideAds={CAPIArticle.shouldHideAds}
-								idApiUrl={CAPIArticle.config.idApiUrl}
-							/>
-						</Section>
+						<DiscussionLayout
+							discussionApiUrl={
+								CAPIArticle.config.discussionApiUrl
+							}
+							shortUrlId={CAPIArticle.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPIArticle.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!CAPIArticle.config.switches
+									.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							shouldHideAds={CAPIArticle.shouldHideAds}
+							idApiUrl={CAPIArticle.config.idApiUrl}
+						/>
 					)}
 
 					{!isPaidContent && (
