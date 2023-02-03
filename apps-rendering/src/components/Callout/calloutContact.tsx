@@ -9,11 +9,14 @@ const capitalizeFirstLetter = (s: string): string =>
 export const formatContactNumbers = (contacts: Contact[]): string => {
 	const contactNumbers = new Map<string, string[]>();
 
+	// Group each contact by its value, so we can display multiple names for the same number.
 	contacts.forEach(({ name, value }) => {
 		if (!contactNumbers.has(value)) contactNumbers.set(value, []);
 		contactNumbers.get(value)?.push(name);
 	});
 
+	// Join the names for each number together,
+	// and then join all the numbers together into a readable string.
 	return [...contactNumbers.entries()].reduce(
 		(acc, [value, names], index) => {
 			const namesString = names
@@ -34,6 +37,7 @@ const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 		</p>
 	);
 
+	// If any of the contacts have guidance, display it in a readable string.
 	const guidanceText = (
 		<p css={[info, calloutLinkContainer]}>
 			For more information, please see our guidance on{' '}

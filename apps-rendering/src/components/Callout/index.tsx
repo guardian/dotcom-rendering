@@ -35,7 +35,6 @@ const Callout: FC<CalloutProps> = ({
 	name,
 	contacts,
 }): ReactElement => {
-	console.log('*** contacts', contacts);
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {

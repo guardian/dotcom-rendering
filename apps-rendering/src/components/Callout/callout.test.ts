@@ -1,4 +1,3 @@
-
 import { formatContactNumbers } from './calloutContact';
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 
