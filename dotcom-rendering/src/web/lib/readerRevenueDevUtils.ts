@@ -1,5 +1,4 @@
-import type { CountryCode } from '@guardian/libs';
-import { getCookie, removeCookie, setCookie } from '@guardian/libs';
+import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
 import { setAlreadyVisited } from './alreadyVisited';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -8,7 +7,7 @@ import {
 	SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
 } from './contributions';
-import { getLocaleCode, overrideCountryCode } from './getCountryCode';
+import { getLocaleCode } from './getCountryCode';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -37,7 +36,7 @@ const MULTIVARIATE_ID_COOKIE = 'GU_mvt_id';
 const MAX_CLIENT_MVT_ID = 1000000;
 const incrementMvtCookie = (): void => {
 	const mvtId = parseInt(
-		getCookie({ name: MULTIVARIATE_ID_COOKIE }) || '10',
+		getCookie({ name: MULTIVARIATE_ID_COOKIE }) ?? '10',
 		10,
 	);
 	if (mvtId) {
@@ -51,7 +50,7 @@ const incrementMvtCookie = (): void => {
 };
 const decrementMvtCookie = (): void => {
 	const mvtId = parseInt(
-		getCookie({ name: MULTIVARIATE_ID_COOKIE }) || '10',
+		getCookie({ name: MULTIVARIATE_ID_COOKIE }) ?? '10',
 		10,
 	);
 	if (mvtId) {
@@ -148,7 +147,7 @@ const changeGeolocation = (
 					`'UK' is not a valid geolocation - please use 'GB' instead!`,
 				);
 			} else if (geo) {
-				overrideCountryCode(geo as CountryCode);
+				storage.local.set('gu.geo.override', geo);
 				clearCommonReaderRevenueStateAndReload(
 					asExistingSupporter,
 					shouldHideReaderRevenue,

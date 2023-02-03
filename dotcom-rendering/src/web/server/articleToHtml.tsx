@@ -1,8 +1,4 @@
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { renderToString } from 'react-dom/server';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -26,8 +22,8 @@ import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
+import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { extractExpeditedIslands } from './extractIslands';
 import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
@@ -48,27 +44,13 @@ const decideTitle = (article: FEArticleType): string => {
 export const articleToHtml = ({ article }: Props): string => {
 	const NAV = extractNAV(article.nav);
 	const title = decideTitle(article);
-	const key = 'dcr';
-	const cache = createCache({ key });
 	const linkedData = article.linkedData;
-
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-		createEmotionServer(cache);
 
 	const format: ArticleFormat = decideFormat(article.format);
 
-	const html = renderToString(
-		<CacheProvider value={cache}>
-			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
-		</CacheProvider>,
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
 	);
-
-	const chunks = extractCriticalToChunks(html);
-	const extractedCss = constructStyleTagsFromChunks(chunks);
-
-	// Expedited islands scripts are added to the document head as 'high priority'
-	const expeditedIslands = extractExpeditedIslands(html);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
@@ -131,9 +113,6 @@ export const articleToHtml = ({ article }: Props): string => {
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			...getScriptArrayFromFile('islands.js'),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
-			),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),

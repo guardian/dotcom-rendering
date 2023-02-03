@@ -6,7 +6,7 @@ const AB_TEST_GROUPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
 
 const NUM_GROUPS = AB_TEST_GROUPS.length;
 
-type ContentABTestGroup = typeof AB_TEST_GROUPS[number];
+type ContentABTestGroup = (typeof AB_TEST_GROUPS)[number];
 
 const isContentABTestGroup = (n: number): n is ContentABTestGroup =>
 	AB_TEST_GROUPS.includes(n as ContentABTestGroup);

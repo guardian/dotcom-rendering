@@ -20,6 +20,7 @@ export type Props = {
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
+	idApiUrl: string;
 };
 
 const overlayStyles = css`
@@ -49,11 +50,13 @@ const positionRelative = css`
 
 const commentIdFromUrl = () => {
 	if (typeof window === 'undefined') return;
+
 	const { hash } = window.location;
-	if (!hash) return;
 	if (!hash.includes('comment')) return;
+
 	const [, commentId] = hash.split('-');
 	if (!commentId) return;
+
 	return parseInt(commentId, 10);
 };
 
@@ -65,6 +68,7 @@ export const Discussion = ({
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
 	user,
+	idApiUrl,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
@@ -83,9 +87,7 @@ export const Discussion = ({
 	const palette = decidePalette(format);
 
 	const hasCommentsHash =
-		typeof window !== 'undefined' &&
-		window.location &&
-		window.location.hash === '#comments';
+		typeof window !== 'undefined' && window.location.hash === '#comments';
 
 	const handlePermalink = (commentId: number) => {
 		if (typeof window === 'undefined') return false;
@@ -95,6 +97,11 @@ export const Discussion = ({
 		// and reload the discussion based on the resuts
 		setHashCommentId(commentId);
 		return false;
+	};
+
+	const dispatchCommentsExpandedEvent = () => {
+		const event = new CustomEvent('comments-expanded');
+		document.dispatchEvent(event);
 	};
 
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -168,7 +175,7 @@ export const Discussion = ({
 						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
 						isClosedForComments={
-							isClosedForComments || !enableDiscussionSwitch
+							!!isClosedForComments || !enableDiscussionSwitch
 						}
 						orderByOverride={commentOrderBy}
 						shortUrl={shortUrlId}
@@ -183,6 +190,7 @@ export const Discussion = ({
 						onExpand={() => {
 							setIsExpanded(true);
 						}}
+						idApiUrl={idApiUrl}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />
@@ -192,7 +200,10 @@ export const Discussion = ({
 			{!isExpanded && (
 				<EditorialButton
 					format={format}
-					onClick={() => setIsExpanded(true)}
+					onClick={() => {
+						setIsExpanded(true);
+						dispatchCommentsExpandedEvent();
+					}}
 					icon={<SvgPlus />}
 				>
 					View more comments

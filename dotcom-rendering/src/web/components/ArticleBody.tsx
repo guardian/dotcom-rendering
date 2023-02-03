@@ -12,7 +12,7 @@ import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
-import { TableOfContents } from './TableOfContents';
+import { TableOfContents } from './TableOfContents.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -201,9 +201,12 @@ export const ArticleBody = ({
 	return (
 		<>
 			{tableOfContents && tableOfContents.length > 0 && (
-				<TableOfContents
-					tableOfContents={tableOfContents}
-				></TableOfContents>
+				<Island>
+					<TableOfContents
+						tableOfContents={tableOfContents}
+						format={format}
+					></TableOfContents>
+				</Island>
 			)}
 			<div
 				id="maincontent"

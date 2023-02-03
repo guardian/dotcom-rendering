@@ -19,7 +19,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	display: flex;
 	color: ${text.gallery(format)};
 	${grid.column.centre}
-	grid-row: 7/8;
+	grid-row: 9/10;
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 `;
 

@@ -40,4 +40,26 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default };
+const Analysis: FC = () => (
+	<div
+		css={css`
+			background-color: #fff4f2;
+			width: 100vw;
+			height: 100vh;
+		`}
+	>
+		<section css={overrideStyle}>
+			<RichLink
+				format={{
+					design: ArticleDesign.Analysis,
+					display: ArticleDisplay.Standard,
+					theme: selectPillar(ArticlePillar.News),
+				}}
+				linkText={linkText()}
+				url={url()}
+			></RichLink>
+		</section>
+	</div>
+);
+
+export { Default, Analysis };

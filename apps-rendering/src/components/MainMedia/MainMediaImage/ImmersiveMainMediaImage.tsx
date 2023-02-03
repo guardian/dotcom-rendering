@@ -25,7 +25,7 @@ const imgStyles = css`
 const styles = css`
 	margin: 0;
 	${grid.between('viewport-start', 'viewport-end')}
-	grid-row: 1 / 4;
+	grid-row: 1 / 6;
 	height: 63vh;
 
 	${from.desktop} {
@@ -55,7 +55,6 @@ const ImmersiveMainMediaImage: FC<Props> = ({ image, format }) => (
 			sizes={getSizes(image)}
 			className={some(imgStyles)}
 			format={format}
-			supportsDarkMode
 			lightbox={some({
 				className: 'js-launch-slideshow',
 				caption: image.nativeCaption,

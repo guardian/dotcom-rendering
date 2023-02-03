@@ -66,7 +66,7 @@ const firstPopularTag = (
 	}
 
 	const firstTagInAllowedList =
-		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) || false;
+		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) ?? false;
 
 	// For paid content we just return the first tag, otherwise we
 	// filter for the first tag in the allowlist

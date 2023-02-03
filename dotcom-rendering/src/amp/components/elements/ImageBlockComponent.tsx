@@ -69,7 +69,7 @@ export const ImageBlockComponent = ({ element, pillar }: Props) => {
 					<span
 						css={captionLink}
 						dangerouslySetInnerHTML={{
-							__html: element.data.caption || '',
+							__html: element.data.caption ?? '',
 						}}
 						key="caption"
 					/>{' '}

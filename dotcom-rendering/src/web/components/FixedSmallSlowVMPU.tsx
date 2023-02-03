@@ -1,13 +1,12 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import { Card33Media33Tall, CardDefaultNoAvatar } from '../lib/cardWrappers';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;

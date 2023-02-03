@@ -33,7 +33,7 @@ const TextTreat = ({
 			priority="secondary"
 			subdued={true}
 			cssOverrides={css`
-				${textSans.xsmall()}
+				${textSans.xxsmall()}
 				text-decoration: none;
 			`}
 			href={linkTo}
@@ -148,6 +148,7 @@ export const Treats = ({
 					});
 					return (
 						<ImageTreat
+							key={treat.imageUrl}
 							imageUrl={treat.imageUrl}
 							links={treat.links}
 							altText={treat.altText}

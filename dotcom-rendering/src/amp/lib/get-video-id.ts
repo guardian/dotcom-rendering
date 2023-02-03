@@ -33,7 +33,7 @@ export const getIdFromUrl = (
 
 	if (!id) {
 		return logErr(
-			id || ids.join(', '),
+			id ?? ids.join(', '),
 			`Value(s) didn't match regexFormat ${regexFormat}`,
 		);
 	}

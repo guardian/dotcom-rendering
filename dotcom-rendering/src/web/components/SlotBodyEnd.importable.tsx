@@ -114,7 +114,7 @@ export const SlotBodyEnd = ({
 		const callFetch = () => {
 			getLocaleCode()
 				.then((cc) => {
-					setCountryCode(cc || '');
+					setCountryCode(cc ?? '');
 				})
 				.catch((e) =>
 					console.error(`countryCodePromise - error: ${String(e)}`),
@@ -147,7 +147,7 @@ export const SlotBodyEnd = ({
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
-			browserId: browserId || undefined,
+			browserId: browserId ?? undefined,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,

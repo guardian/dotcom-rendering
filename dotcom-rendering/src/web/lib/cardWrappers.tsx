@@ -1,9 +1,8 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import { FrontCard } from '../components/FrontCard';
 
 type TrailProps = {
-	trail: TrailType;
+	trail: DCRFrontCard;
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 };
@@ -223,6 +222,42 @@ export const Card25Media25 = ({
 		/>
 	);
 };
+
+/**
+ * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
+ * ┃▒▒▒▒▒▒▒▒▒┃         Remaining         ┊
+ * ┃         ┃                           ┊
+ * ┗━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - No trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card25Media25SmallHeadline = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="small"
+			headlineSizeOnMobile="medium"
+		/>
+	);
+};
+
 /**
  * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
  * ┃▒▒▒▒▒▒▒▒▒┃                           ┊
@@ -254,8 +289,9 @@ export const Card25Media25Tall = ({
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			trailText={
-				trail.supportingContent === undefined ||
-				trail.supportingContent.length === 0
+				trail.avatarUrl === undefined &&
+				(trail.supportingContent === undefined ||
+					trail.supportingContent.length === 0)
 					? trail.trailText
 					: undefined
 			}
@@ -265,20 +301,20 @@ export const Card25Media25Tall = ({
 };
 
 /**
- * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
- * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
- * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
- * ┃            ┃                        ┊
- * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
- * Card designed to take up 33% of the container, with media that takes up 33%
+ * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒┃                           ┊
+ * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
+ * ┃         ┃         Remaining         ┊
+ * ┃         ┃                           ┊
+ * ┗━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 25% of the container, with media that takes up 25%
  *
  * Options:
  *  - Medium headline (medium on mobile)
  *  - Small image on the top (left on mobile)
- *  - Trail text when there is no supporting content or avatar
  *  - Up to 2 supporting content items, always aligned vertical
  */
-export const Card33Media33Tall = ({
+export const Card25Media25TallNoTrail = ({
 	trail,
 	showAge,
 	containerPalette,
@@ -293,13 +329,40 @@ export const Card33Media33Tall = ({
 			imageSize="small"
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
-			trailText={
-				trail.avatarUrl === undefined &&
-				(trail.supportingContent === undefined ||
-					trail.supportingContent.length === 0)
-					? trail.trailText
-					: undefined
-			}
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒┃                           ┊
+ * ┃▒▒▒▒▒▒▒▒▒┃            75%            ┊
+ * ┃         ┃         Remaining         ┊
+ * ┃         ┃                           ┊
+ * ┗━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Small headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card25Media25TallSmallHeadline = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="small"
+			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
 		/>
 	);
@@ -315,7 +378,7 @@ export const Card33Media33Tall = ({
  *
  * Options:
  *  - Large headline (large on mobile)
- *  - Small image on the top (top on mobile)
+ *  - Medium image on the top (top on mobile)
  *  - No trail text
  *  - Up to 3 supporting content items, always aligned horizontal
  */
@@ -330,7 +393,7 @@ export const Card50Media50 = ({
 			containerPalette={containerPalette}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			showAge={showAge}
@@ -351,7 +414,7 @@ export const Card50Media50 = ({
  *
  * Options:
  *  - Large headline (large on mobile)
- *  - Small image on the top (top on mobile)
+ *  - Medium image on the top (top on mobile)
  *  - Trail text
  *  - Up to 3 supporting content items, always aligned horizontal
  */
@@ -370,7 +433,7 @@ export const Card50Media50Tall = ({
 			supportingContentAlignment="horizontal"
 			imagePosition="top"
 			imagePositionOnMobile="top"
-			imageSize="small"
+			imageSize="medium"
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -387,7 +450,7 @@ export const Card50Media50Tall = ({
  *
  * Options:
  *  - Medium headline (medium on mobile)
- *  - Small image on the top (top on mobile)
+ *  - Large image on the top (top on mobile)
  *  - Trail text
  *  - No supporting content
  */
@@ -406,7 +469,7 @@ export const Card66Media66 = ({
 			headlineSizeOnMobile="medium"
 			imagePosition="top"
 			imagePositionOnMobile="top"
-			imageSize="small"
+			imageSize="large"
 		/>
 	);
 };
@@ -421,7 +484,7 @@ export const Card66Media66 = ({
  *
  * Options:
  *  - Medium headline (medium on mobile)
- *  - Small image on the top (left on mobile)
+ *  - Medium image on the top (left on mobile)
  *  - Trail text
  *  - No supporting content
  */
@@ -436,11 +499,81 @@ export const Card33Media33 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			trailText={trail.trailText}
-			imageSize="small"
+			imageSize="medium"
 			imagePosition="top"
 			imagePositionOnMobile="left"
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
+		/>
+	);
+};
+/**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Medium image on the top (left on mobile)
+ *  - No trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33Tall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imageSize="medium"
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (large on mobile)
+ *  - Medium image at the top, including on mobile
+ *  - Trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33MobileTopTall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			trailText={trail.trailText}
+			imageSize="medium"
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			headlineSize="medium"
+			headlineSizeOnMobile="large"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
 		/>
 	);
 };

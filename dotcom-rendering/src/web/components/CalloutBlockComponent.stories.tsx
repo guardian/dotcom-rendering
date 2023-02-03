@@ -1,13 +1,6 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign as calloutCampaignV2 } from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
-
-const mockFormat = {
-	display: ArticleDisplay.Standard,
-	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Opinion,
-};
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
@@ -50,7 +43,6 @@ export const Collapsible = () => {
 				isNonCollapsible: false,
 				activeUntil: tomorrow,
 			}}
-			format={mockFormat}
 		/>
 	);
 };
@@ -62,7 +54,6 @@ export const NonCollapsible = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
-			format={mockFormat}
 		/>
 	);
 };
@@ -74,7 +65,6 @@ export const SubmissionFailure = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
-			format={mockFormat}
 		/>
 	);
 };
@@ -85,7 +75,6 @@ export const Expired = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
-			format={mockFormat}
 		/>
 	);
 };

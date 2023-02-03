@@ -131,7 +131,7 @@ export const SupportingContent = ({
 						<CardHeadline
 							format={subLink.format}
 							size="tiny"
-							showSlash={false}
+							hideLineBreak={true}
 							showLine={true}
 							linkTo={subLink.url}
 							containerPalette={containerPalette}

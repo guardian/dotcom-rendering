@@ -1,6 +1,4 @@
 import type { Theme } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	brand,
 	error,
@@ -9,8 +7,8 @@ import {
 	success,
 } from '@guardian/source-foundations';
 import {
+	expandingWrapperDarkTheme,
 	fileInputDarkTheme,
-	fileInputThemeDefault,
 	tabsDarkTheme,
 } from '@guardian/source-react-components-development-kitchen';
 
@@ -70,13 +68,6 @@ const radioDarkTheme = {
 	borderError: error[500],
 };
 
-const expandingWrapperDarkTheme = {
-	border: neutral[60],
-	expandBackground: neutral[86],
-	expandText: neutral[7],
-	collapseBackground: neutral[10],
-	collapseText: neutral[86],
-};
 const userFeedbackDarkTheme = {
 	textError: error[500],
 };
@@ -87,32 +78,15 @@ export const darkTheme = {
 	textInput: textInputDarkTheme,
 	select: selectDarkTheme,
 	radio: radioDarkTheme,
-	expander: expandingWrapperDarkTheme,
 	userFeedback: userFeedbackDarkTheme,
+	...expandingWrapperDarkTheme,
 	...fileInputDarkTheme,
 	...tabsDarkTheme,
 };
-
-type LightThemeType = {
-	fileInput: {
-		text: string;
-		supporting: string;
-		primary: string;
-		error: string;
-	};
-};
-
-export const lightThemeOverrides = (format: ArticleFormat): LightThemeType => ({
-	fileInput: {
-		...fileInputThemeDefault.fileInput,
-		primary: text.calloutPrimary(format),
-	},
-});
 
 const getPrefersDark = (): boolean => {
 	if (typeof window === 'undefined') return false;
 	return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
-export const getTheme = (format: ArticleFormat): Theme =>
-	getPrefersDark() ? darkTheme : lightThemeOverrides(format);
+export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : {});

@@ -1,53 +1,70 @@
 import { css } from '@emotion/react';
 import {
 	body,
+	brand,
 	neutral,
 	palette,
 	space,
+	success,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button, SvgShareCallout } from '@guardian/source-react-components';
+import {
+	Button,
+	SvgShareCallout,
+	SvgTickRound,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
 
-const descriptionStyles = (format: ArticleFormat) =>
-	css`
-		a {
-			color: ${decidePalette(format).text.richLink};
-			border-bottom: 1px solid ${decidePalette(format).text.richLink};
-			text-decoration: none;
-		}
-		padding-bottom: ${space[4]}px;
-		${body.medium()}
+const descriptionStyles = css`
+	a {
+		color: ${brand[500]};
+		border-bottom: 1px solid ${brand[500]};
+		text-decoration: none;
+	}
 
-		p {
-			margin-bottom: ${space[3]}px;
-		}
-	`;
+	padding-bottom: ${space[4]}px;
+	${body.medium()}
+
+	p {
+		margin-bottom: ${space[3]}px;
+	}
+`;
 
 export const CalloutDescription = ({
 	description,
-	format,
 }: {
 	description: string;
-	format: ArticleFormat;
-}) => (
-	<div css={descriptionStyles(format)}>
-		<div dangerouslySetInnerHTML={{ __html: description }}></div>
-		<div>
-			Please share your story if you are 18 or over, anonymously if you
-			wish. For more information please see our{' '}
-			<a href="https://www.theguardian.com/help/terms-of-service">
-				terms of service
-			</a>{' '}
-			and{' '}
-			<a href="https://www.theguardian.com/help/privacy-policy">
-				privacy policy
-			</a>
-			.
+}) => {
+	// this data-ignore attribute ensures correct formatting for links in the description
+	const htmlSplit = description.split('href');
+	const withDataIgnore = htmlSplit.join(
+		'data-ignore="global-link-styling" href',
+	);
+
+	return (
+		<div css={descriptionStyles}>
+			<div dangerouslySetInnerHTML={{ __html: withDataIgnore }}></div>
+			<div>
+				Please share your story if you are 18 or over, anonymously if
+				you wish. For more information please see our{' '}
+				<a
+					data-ignore="global-link-styling"
+					href="https://www.theguardian.com/help/terms-of-service"
+				>
+					terms of service
+				</a>{' '}
+				and{' '}
+				<a
+					data-ignore="global-link-styling"
+					href="https://www.theguardian.com/help/privacy-policy"
+				>
+					privacy policy
+				</a>
+				.
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 const expiredStyles = css`
 	${textSans.small()};
@@ -77,33 +94,47 @@ export const CalloutExpired = () => {
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
-	padding-bottom: ${space[2]}px;
+	position: relative;
 `;
 
 const shareCalloutTextStyles = css`
-	display: inline-block;
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = (format: ArticleFormat) =>
-	css`
-		color: ${decidePalette(format).text.calloutAccent};
-		border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
-		text-decoration: none;
-		font-weight: normal;
-		margin: 0 ${space[1]}px;
-	`;
+const shareCalloutLinkStyles = css`
+	color: ${brand[500]};
+	border-bottom: 1px solid ${brand[500]};
+	text-decoration: none;
+	font-weight: normal;
+	margin: 0 ${space[1]}px;
+`;
 
-const supportingText = css`
+const tooltipStyles = css`
 	${textSans.xsmall()};
-	color: ${neutral[46]};
+	position: absolute;
+	display: flex;
+	align-items: center;
+	min-width: 180px;
+	bottom: -20px;
+	background-color: ${neutral[100]};
+	color: ${neutral[7]};
+	font-weight: normal;
+	border-radius: 4px;
+	z-index: 1;
+	padding: 0 ${space[1]}px 0 0;
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+
+	> svg {
+		fill: ${success[400]};
+	}
 `;
 
 export const CalloutShare = ({
-	format,
+	title,
+	urlAnchor,
 }: {
-	format: ArticleFormat;
 	title: string;
+	urlAnchor: string;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
@@ -115,24 +146,24 @@ export const CalloutShare = ({
 				navigator.userAgent,
 			)
 		) {
-			const shareTitle = `
-			Share your experience: ${'PLACEHOLDER TITLE'}
-			`;
+			const shareTitle = `Share your experience: ${title}`;
+
 			const shareText = `
-			I saw this callout on an article I was reading and thought you might like to share your story.
-			${url}
-			You can share your story by using the form on this article, or by contacting us on WhatsApp or Telegram.
-					`;
+			I saw this callout in an article: ${url}#${urlAnchor}
+			You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.`;
+
 			await navigator.share({
 				title: shareTitle,
 				text: shareText,
 			});
+			setIsCopied(true);
+			setTimeout(() => setIsCopied(false), 3000);
 		}
 
 		if ('clipboard' in navigator) {
-			await navigator.clipboard.writeText(url);
+			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 2000);
+			setTimeout(() => setIsCopied(false), 3000);
 		}
 	};
 
@@ -155,15 +186,15 @@ export const CalloutShare = ({
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles(format)}
+						css={shareCalloutLinkStyles}
 					>
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<span css={supportingText} role="alert">
-							{' '}
+						<div css={tooltipStyles} role="alert">
+							<SvgTickRound size="medium" />
 							Link copied to clipboard
-						</span>
+						</div>
 					)}
 				</div>
 			</div>
@@ -171,29 +202,29 @@ export const CalloutShare = ({
 	);
 };
 
-const termsAndConditionsStyles = (format: ArticleFormat) =>
-	css`
-		a {
-			color: ${decidePalette(format).text.richLink};
-			border-bottom: 1px solid ${decidePalette(format).text.richLink};
-			text-decoration: none;
-		}
-		${textSans.small()}
-		padding-bottom: ${space[4]}px;
-	`;
+const termsAndConditionsStyles = css`
+	a {
+		color: ${brand[500]};
+		border-bottom: 1px solid ${brand[500]};
+		text-decoration: none;
+	}
+	${textSans.small()}
+	padding-bottom: ${space[4]}px;
+`;
 
-export const CalloutTermsAndConditions = ({
-	format,
-}: {
-	format: ArticleFormat;
-}) => (
-	<div css={termsAndConditionsStyles(format)}>
+export const CalloutTermsAndConditions = () => (
+	<div css={termsAndConditionsStyles}>
 		Your responses, which can be anonymous, are secure as the form is
 		encrypted and only the Guardian has access to your contributions. We
 		will only use the data you provide us for the purpose of the feature and
 		we will delete any personal data when we no longer require it for this
 		purpose. For true anonymity please use our{' '}
-		<a href="https://www.theguardian.com/securedrop">SecureDrop</a> service
-		instead.
+		<a
+			data-ignore="global-link-styling"
+			href="https://www.theguardian.com/securedrop"
+		>
+			SecureDrop
+		</a>{' '}
+		service instead.
 	</div>
 );

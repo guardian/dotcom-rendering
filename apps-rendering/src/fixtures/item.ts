@@ -3,6 +3,7 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -31,6 +32,7 @@ import type {
 	Letter,
 	MatchReport,
 	NewsletterSignup,
+	Obituary,
 	PhotoEssay,
 	PrintShop,
 	Quiz,
@@ -46,6 +48,28 @@ import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
 import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
+
+// ----- Functions ----- //
+
+/**
+ * Updates the `theme` property of an `Item`
+ *
+ * @param theme The value to set `theme` to
+ * @returns A new `Item` object
+ */
+const setTheme =
+	(theme: ArticleTheme) =>
+	<A extends Item>(item: A): A => ({ ...item, theme });
+
+/**
+ * Updates the `edition` property of an `Item`
+ *
+ * @param edition The value to set `edition` to
+ * @returns A new `Item` object
+ */
+const setEdition =
+	(edition: Edition) =>
+	<A extends Item>(item: A): A => ({ ...item, edition });
 
 // ----- Fixture ----- //
 
@@ -259,7 +283,7 @@ const body: Body = [
 const pinnedBlock: LiveBlock = {
 	id: '5',
 	isKeyEvent: false,
-	title: 'Block Five',
+	title: Optional.some('Block Five'),
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
 	body: [
@@ -300,6 +324,15 @@ const matchScores: MatchScores = {
 };
 
 const tags: Tag[] = [
+	{
+		id: 'tone/news',
+		type: 6,
+		webTitle: 'News',
+		webUrl: 'https://www.theguardian.com/tone/news',
+		apiUrl: 'https://content.guardianapis.com/tone/news',
+		references: [],
+		internalName: 'News (Tone)',
+	},
 	{
 		id: 'world/refugees',
 		type: TagType.SERIES,
@@ -366,16 +399,21 @@ const fields = {
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00Z')),
 	contributors: contributors,
 	mainMedia: mainMedia,
 	series: Optional.some({
-		id: '',
-		type: 0,
-		webTitle: '',
-		webUrl: '',
-		apiUrl: '',
+		id: 'travel/series/readers-coronavirus-travel-questions',
+		type: 2,
+		sectionId: 'travel',
+		sectionName: 'Travel',
+		webTitle: 'Coronavirus travel Q&A',
+		webUrl: 'https://www.theguardian.com/travel/series/readers-coronavirus-travel-questions',
+		apiUrl: 'https://content.guardianapis.com/travel/series/readers-coronavirus-travel-questions',
 		references: [],
+		description:
+			"<p>A weekly series answering readers' questions&nbsp;about how the coronavirus outbreak is impacting on their travel plans and holidays</p>",
+		internalName: 'Coronavirus travel Q&A',
 	}),
 	commentable: false,
 	tags: tags,
@@ -515,13 +553,18 @@ const explainer: Explainer = {
 	outline: fromBodyElements(fields.body),
 };
 
+const obituary: Obituary = {
+	design: ArticleDesign.Obituary,
+	...fields,
+};
+
 const newsletterSignUp: NewsletterSignup = {
 	...fields,
 	design: ArticleDesign.NewsletterSignup,
 	...partialNewsletterItem,
 };
 
-const immersive: Standard = {
+const standardImmersive: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
 	display: ArticleDisplay.Immersive,
@@ -558,7 +601,10 @@ export {
 	pinnedBlock,
 	explainer,
 	newsletterSignUp,
-	immersive,
+	standardImmersive,
 	gallery,
 	parseHtml,
+	setTheme,
+	setEdition,
+	obituary,
 };

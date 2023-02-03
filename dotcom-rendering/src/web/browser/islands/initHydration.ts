@@ -1,4 +1,5 @@
 import { doHydration } from './doHydration';
+import { getEmotionCache } from './emotion';
 import { getName } from './getName';
 import { getProps } from './getProps';
 import { onInteraction } from './onInteraction';
@@ -6,6 +7,9 @@ import { whenIdle } from './whenIdle';
 import { whenVisible } from './whenVisible';
 
 export const initHydration = (elements: NodeListOf<Element>): void => {
+	// Get the emotion cache which is shared between islands
+	const emotionCache = getEmotionCache();
+
 	/**
 	 * Partial Hydration / React Islands
 	 *
@@ -28,19 +32,24 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 			switch (deferUntil) {
 				case 'idle': {
 					whenIdle(() => {
-						void doHydration(name, props, element);
+						void doHydration(name, props, element, emotionCache);
 					});
 					break;
 				}
 				case 'visible': {
 					whenVisible(element, () => {
-						void doHydration(name, props, element);
+						void doHydration(name, props, element, emotionCache);
 					});
 					break;
 				}
 				case 'interaction': {
 					onInteraction(element, (targetElement) => {
-						void doHydration(name, props, element).then(() => {
+						void doHydration(
+							name,
+							props,
+							element,
+							emotionCache,
+						).then(() => {
 							targetElement.dispatchEvent(
 								new MouseEvent('click'),
 							);
@@ -50,12 +59,12 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 				}
 				case 'hash': {
 					if (window.location.hash.includes(name)) {
-						void doHydration(name, props, element);
+						void doHydration(name, props, element, emotionCache);
 					}
 					break;
 				}
 				default: {
-					void doHydration(name, props, element);
+					void doHydration(name, props, element, emotionCache);
 				}
 			}
 		}

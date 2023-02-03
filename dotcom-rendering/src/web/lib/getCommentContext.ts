@@ -45,13 +45,13 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 	try {
 		// Try to read from local storage
 		orderBy = JSON.parse(
-			localStorage.getItem('gu.prefs.discussion.order') || '{}',
+			localStorage.getItem('gu.prefs.discussion.order') ?? '{}',
 		);
 		threads = JSON.parse(
-			localStorage.getItem('gu.prefs.discussion.threading') || '{}',
+			localStorage.getItem('gu.prefs.discussion.threading') ?? '{}',
 		);
 		pageSize = JSON.parse(
-			localStorage.getItem('gu.prefs.discussion.pagesize') || '{}',
+			localStorage.getItem('gu.prefs.discussion.pagesize') ?? '{}',
 		);
 	} catch (error) {
 		// Sometimes it's not possible to access localStorage, we accept this and don't want to
@@ -65,9 +65,9 @@ const initFiltersFromLocalStorage = (): FilterOptions => {
 
 	// If we found something in LS, use it, otherwise return defaults
 	return {
-		orderBy: orderBy && orderBy.value ? orderBy.value : 'newest',
-		threads: threads && threads.value ? threads.value : 'collapsed',
-		pageSize: pageSize && pageSize.value ? pageSize.value : 25,
+		orderBy: orderBy?.value ? orderBy.value : 'newest',
+		threads: threads?.value ? threads.value : 'collapsed',
+		pageSize: pageSize?.value ? pageSize.value : 25,
 	};
 };
 

@@ -1,19 +1,20 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import type { Breakpoint } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { none, some, withDefault } from '@guardian/types';
+import { CaptionIconVariant } from 'components/CaptionIcon';
+import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';
 import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 const width = '100%';
 const phabletWidth = '620px';
@@ -72,14 +73,13 @@ export const getDefaultStyles = (
 
 export const getDefaultImgStyles = (
 	role: ArticleElementRole,
-	supportsDarkMode: boolean,
 ): Option<SerializedStyles> => {
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
 			return some(css`
 				background-color: transparent;
 
-				${darkModeCss(supportsDarkMode)`
+				${darkModeCss`
                     background-color: transparent;
                 `}
 			`);
@@ -91,7 +91,6 @@ export const getDefaultImgStyles = (
 export type BodyImageProps = {
 	image: Image;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 	caption: Option<ReactNode>;
 };
@@ -105,7 +104,6 @@ const DefaultBodyImage: FC<
 > = ({
 	image,
 	format,
-	supportsDarkMode,
 	lightbox,
 	caption,
 	wrapperStyles,
@@ -118,7 +116,6 @@ const DefaultBodyImage: FC<
 			sizes={getDefaultSizes(image.role)}
 			className={imgStyles}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
 			lightbox={lightbox}
 		/>
 		<FigCaption
@@ -126,7 +123,7 @@ const DefaultBodyImage: FC<
 				captionStyles,
 			)}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
+			variant={CaptionIconVariant.Image}
 		>
 			{caption}
 		</FigCaption>

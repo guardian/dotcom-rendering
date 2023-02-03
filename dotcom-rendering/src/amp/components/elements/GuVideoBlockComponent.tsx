@@ -20,6 +20,7 @@ export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 					(encoding) =>
 						encoding.mimeType.includes('video') && (
 							<source
+								key={encoding.url}
 								src={encoding.url.replace('http:', 'https:')} // Force https as CAPI doesn't always send them
 								type={encoding.mimeType}
 							/>

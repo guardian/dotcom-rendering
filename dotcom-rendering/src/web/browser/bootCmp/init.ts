@@ -11,29 +11,6 @@ import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
 import { submitComponentEvent } from '../ophan/ophan';
 import { startup } from '../startup';
 
-const trackPerformance = (
-	timingCategory: string,
-	timingVar: any,
-	timingLabel: string,
-): void => {
-	const { ga } = window;
-
-	if (!ga) {
-		return;
-	}
-
-	if (window.performance && window.performance.now) {
-		ga(
-			'allEditorialPropertyTracker.send',
-			'timing',
-			timingCategory,
-			timingVar,
-			Math.round(window.performance.now()),
-			timingLabel,
-		);
-	}
-};
-
 const init = async (): Promise<void> => {
 	/**
 	 * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
@@ -42,19 +19,6 @@ const init = async (): Promise<void> => {
 	if (!window.guardian.config.switches.consentManagement) return; // CMP turned off!
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
-
-	// Track when CMP will show with GA
-	cmp.willShowPrivacyMessage()
-		.then((willShow) => {
-			trackPerformance(
-				'consent',
-				'acquired',
-				willShow ? 'new' : 'existing',
-			);
-		})
-		.catch((e) =>
-			log('dotcom', `CMP willShowPrivacyMessage - error: ${String(e)}`),
-		);
 
 	onConsentChange((consentState: ConsentState) => {
 		if (!consentState) return;
@@ -79,7 +43,7 @@ const init = async (): Promise<void> => {
 
 		const decideConsentCarrierLabels = () => {
 			if (consentState.tcfv2) {
-				const consentUUID = getCookie({ name: 'consentUUID' }) || '';
+				const consentUUID = getCookie({ name: 'consentUUID' }) ?? '';
 				const consentString = consentState.tcfv2.tcString;
 				return [
 					'01:TCF.v2',
@@ -88,14 +52,14 @@ const init = async (): Promise<void> => {
 				];
 			}
 			if (consentState.ccpa) {
-				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
+				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
 				const flag = consentState.ccpa.doNotSell ? 'true' : 'false';
 				return ['01:CCPA', `04:${ccpaUUID}`, `05:${flag}`];
 			}
 			if (consentState.aus) {
-				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
+				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) ?? '';
 				const consentStatus =
-					getCookie({ name: 'consentStatus' }) || '';
+					getCookie({ name: 'consentStatus' }) ?? '';
 				const personalisedAdvertising = consentState.aus
 					.personalisedAdvertising
 					? 'true'
@@ -165,7 +129,7 @@ const init = async (): Promise<void> => {
 			browserId: browserId ?? undefined,
 			pageViewId,
 		},
-		country: (await getLocaleCode()) || undefined,
+		country: (await getLocaleCode()) ?? undefined,
 	});
 	log('dotcom', 'CMP initialised');
 

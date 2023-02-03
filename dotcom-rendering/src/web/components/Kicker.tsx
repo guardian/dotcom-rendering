@@ -6,34 +6,33 @@ type Props = {
 	text: string;
 	color: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
+	hideLineBreak?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
 	color: ${colour};
 	font-weight: 700;
 	margin-right: 4px;
-	display: inline-block;
-`;
-
-const slashStyles = css`
-	&::after {
-		content: '/';
-		display: inline-block;
-		margin-left: 4px;
-	}
 `;
 
 export const Kicker = ({
 	text,
 	color,
 	showPulsingDot,
-	showSlash = true,
+	hideLineBreak,
 }: Props) => {
 	return (
-		<span css={kickerStyles(color)}>
+		<div
+			css={[
+				kickerStyles(color),
+				hideLineBreak &&
+					css`
+						display: inline-block;
+					`,
+			]}
+		>
 			{showPulsingDot && <PulsingDot colour={color} />}
-			<span css={showSlash && slashStyles}>{text}</span>
-		</span>
+			{text}
+		</div>
 	);
 };

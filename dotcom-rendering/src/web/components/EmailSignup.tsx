@@ -85,7 +85,7 @@ export const EmailSignup = ({
 	hidePrivacyMessage,
 }: Props) => {
 	return (
-		<aside css={containerStyles}>
+		<aside css={containerStyles} aria-label="newsletter promotion">
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span>

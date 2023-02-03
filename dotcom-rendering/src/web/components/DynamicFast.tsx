@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import {
 	Card25Media25,
 	Card50Media50Tall,
@@ -44,7 +47,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -127,7 +130,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -188,7 +191,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 		showAge,
 		containerPalette,
 	}: {
-		cards: TrailType[];
+		cards: DCRFrontCard[];
 		showAge?: boolean;
 		containerPalette?: DCRContainerPalette;
 	}) => {
@@ -229,7 +232,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -289,7 +292,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -361,7 +364,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -425,7 +428,7 @@ const Card25_Card25_Card25_Card25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -469,7 +472,7 @@ export const DynamicFast = ({
 		| 'TwoVeryBigsFirstBoosted'
 		| 'TwoVeryBigsSecondBoosted';
 
-	let firstSliceCards: TrailType[] = [];
+	let firstSliceCards: DCRFrontCard[] = [];
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
@@ -505,7 +508,7 @@ export const DynamicFast = ({
 		filter: firstSliceCards,
 	});
 
-	let secondSliceCards: TrailType[] = [];
+	let secondSliceCards: DCRFrontCard[] = [];
 	const bigs = [
 		// Demote any left over 'huge' or 'veryBig' grouped cards
 		...secondSliceGroupedTrails.huge,

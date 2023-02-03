@@ -27,6 +27,7 @@ import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -189,10 +190,7 @@ export const renderElement = ({
 			) {
 				return (
 					<Island deferUntil="visible">
-						<CalloutBlockComponent
-							callout={element}
-							format={format}
-						/>
+						<CalloutBlockComponent callout={element} />
 					</Island>
 				);
 			}
@@ -266,7 +264,7 @@ export const renderElement = ({
 				if (isMainMedia) {
 					return (
 						<MainMediaEmbedBlockComponent
-							title={element.alt || ''}
+							title={element.alt ?? ''}
 							srcDoc={element.html}
 						/>
 					);
@@ -277,7 +275,7 @@ export const renderElement = ({
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
-							alt={element.alt || ''}
+							alt={element.alt ?? ''}
 							index={index}
 							role={element.role}
 							isTracking={element.isThirdPartyTracking}
@@ -345,7 +343,7 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating || element.starRating}
+					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 				/>
@@ -453,14 +451,21 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			return (
-				<EmailSignup
-					identityName={element.newsletter.identityName}
-					description={element.newsletter.description}
-					name={element.newsletter.name}
-					frequency={element.newsletter.frequency}
-					successDescription={element.newsletter.successDescription}
-					theme={element.newsletter.theme}
-				/>
+				<InlineSkipToWrapper
+					id={`EmailSignup-skip-link-${index}`}
+					blockDescription="newsletter promotion"
+				>
+					<EmailSignup
+						identityName={element.newsletter.identityName}
+						description={element.newsletter.description}
+						name={element.newsletter.name}
+						frequency={element.newsletter.frequency}
+						successDescription={
+							element.newsletter.successDescription
+						}
+						theme={element.newsletter.theme}
+					/>
+				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (

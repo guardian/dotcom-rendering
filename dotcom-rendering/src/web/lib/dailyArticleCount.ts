@@ -24,7 +24,7 @@ export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 		const { value }: DailyArticleCountLocalStorage = JSON.parse(dailyCount);
 
 		// check if value parsed correctly
-		if (!value || !value.length) {
+		if (!value.length) {
 			throw new Error('Invalid gu.history.dailyArticleCount value');
 		}
 
@@ -40,17 +40,13 @@ export const getToday = (): number => Math.floor(Date.now() / 86_400_000);
 
 export const incrementDailyArticleCount = (): void => {
 	// get the daily article count from local storage
-	const dailyArticleCount = getDailyArticleCount() || [];
+	const dailyArticleCount = getDailyArticleCount() ?? [];
 
 	// calculate days since unix epoch for today date
 	const today = getToday();
 
 	// check if latest day is today and increment if so
-	if (
-		dailyArticleCount[0] &&
-		dailyArticleCount[0].day &&
-		dailyArticleCount[0].day === today
-	) {
+	if (dailyArticleCount[0]?.day === today) {
 		dailyArticleCount[0].count += 1;
 	} else {
 		// else set new day
