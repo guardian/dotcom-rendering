@@ -5,17 +5,25 @@ import type { Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { TagType } from './tag';
 
+type KeysNotOnSimplePageConfig =
+	| 'isPaidContent'
+	| 'shortUrlId'
+	| 'keywordIds'
+	| 'shouldHideReaderRevenue'
+	| 'showRelatedContent'
+	| 'webPublicationDate'
+	| 'dcrCouldRender';
+
 export interface FENewslettersPageType {
 	newsletters: Newsletter[];
 	id: string;
 	editionId: EditionId;
-	editionLongForm: string,
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
 	beaconURL: string;
 	webTitle: string;
 	description: string;
-	config: Partial<ConfigType>;
+	config: Omit<ConfigType, KeysNotOnSimplePageConfig>;
 	twitterData?: {
 		[key: string]: string;
 	};

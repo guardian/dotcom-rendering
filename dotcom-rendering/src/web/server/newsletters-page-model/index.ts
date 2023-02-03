@@ -58,7 +58,6 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 	id: 'test-newsletters-page',
 	webTitle: 'Guardian newsletters: Using Test Data',
 	editionId: 'INT',
-	editionLongForm: 'International Edition',
 	beaconURL: '//',
 	subscribeUrl: '/test-subscribe-url',
 	contributionsServiceUrl: '/test-contributions-url',

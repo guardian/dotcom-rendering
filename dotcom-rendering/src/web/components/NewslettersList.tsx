@@ -6,7 +6,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
-import type { EditionLinkType } from 'src/model/extract-nav';
+import type { EditionLinkType } from '../../model/extract-nav';
 import type { Newsletter } from '../../types/content';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';

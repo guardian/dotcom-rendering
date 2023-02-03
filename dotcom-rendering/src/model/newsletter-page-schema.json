@@ -52,9 +52,6 @@
         "editionId": {
             "$ref": "#/definitions/EditionId"
         },
-        "editionLongForm": {
-            "type": "string"
-        },
         "subscribeUrl": {
             "type": "string"
         },
@@ -71,7 +68,7 @@
             "type": "string"
         },
         "config": {
-            "$ref": "#/definitions/Partial<ConfigType>"
+            "$ref": "#/definitions/Omit<ConfigType,KeysNotOnSimplePageConfig>"
         },
         "twitterData": {
             "type": "object",
@@ -92,7 +89,6 @@
         "contributionsServiceUrl",
         "description",
         "editionId",
-        "editionLongForm",
         "id",
         "newsletters",
         "subscribeUrl",
@@ -109,11 +105,20 @@
             ],
             "type": "string"
         },
-        "Partial<ConfigType>": {
+        "Omit<ConfigType,KeysNotOnSimplePageConfig>": {
             "type": "object",
             "properties": {
-                "dcrCouldRender": {
-                    "type": "boolean"
+                "section": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "edition": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "series": {
+                    "type": "string"
                 },
                 "ajaxUrl": {
                     "type": "string"
@@ -150,9 +155,6 @@
                 "revisionNumber": {
                     "type": "string"
                 },
-                "shortUrlId": {
-                    "type": "string"
-                },
                 "isDev": {
                     "type": "boolean"
                 },
@@ -174,27 +176,9 @@
                 "videoDuration": {
                     "type": "number"
                 },
-                "edition": {
-                    "$ref": "#/definitions/EditionId"
-                },
-                "section": {
-                    "type": "string"
-                },
                 "sharedAdTargeting": {
                     "type": "object",
                     "additionalProperties": {}
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "keywordIds": {
-                    "type": "string"
-                },
-                "showRelatedContent": {
-                    "type": "boolean"
-                },
-                "shouldHideReaderRevenue": {
-                    "type": "boolean"
                 },
                 "idApiUrl": {
                     "type": "string"
@@ -220,9 +204,6 @@
                         }
                     }
                 },
-                "host": {
-                    "type": "string"
-                },
                 "idUrl": {
                     "type": "string"
                 },
@@ -247,9 +228,6 @@
                 "pageId": {
                     "type": "string"
                 },
-                "webPublicationDate": {
-                    "type": "number"
-                },
                 "headline": {
                     "type": "string"
                 },
@@ -257,9 +235,6 @@
                     "type": "string"
                 },
                 "keywords": {
-                    "type": "string"
-                },
-                "series": {
                     "type": "string"
                 },
                 "toneIds": {
@@ -271,7 +246,33 @@
                 "ampIframeUrl": {
                     "type": "string"
                 }
-            }
+            },
+            "required": [
+                "abTests",
+                "adUnit",
+                "ajaxUrl",
+                "ampIframeUrl",
+                "commercialBundleUrl",
+                "contentType",
+                "dcrSentryDsn",
+                "dfpAccountId",
+                "discussionApiClientHeader",
+                "discussionApiUrl",
+                "discussionD2Uid",
+                "edition",
+                "frontendAssetsFullURL",
+                "googletagUrl",
+                "idApiUrl",
+                "isSensitive",
+                "pageId",
+                "revisionNumber",
+                "section",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "sharedAdTargeting",
+                "stage",
+                "switches"
+            ]
         },
         "Switches": {
             "type": "object",
