@@ -1,8 +1,8 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
-const addTitleToIframe = (elements: CAPIElement[]): CAPIElement[] => {
-	const enhanced: CAPIElement[] = [];
+const addTitleToIframe = (elements: FEElement[]): FEElement[] => {
+	const enhanced: FEElement[] = [];
 	elements.forEach((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':

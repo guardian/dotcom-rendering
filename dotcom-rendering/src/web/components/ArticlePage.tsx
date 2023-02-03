@@ -17,7 +17,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -27,11 +27,11 @@ type Props = {
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {FEArticleType} props.CAPIArticle - The article JSON data
+ * @param {FEArticleType} props.article - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
+export const ArticlePage = ({ article, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -62,18 +62,16 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<Metrics
 					commercialMetricsEnabled={
-						!!CAPIArticle.config.switches.commercialMetrics
+						!!article.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
+				<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
-					shouldHideReaderRevenue={
-						CAPIArticle.shouldHideReaderRevenue
-					}
+					shouldHideReaderRevenue={article.shouldHideReaderRevenue}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
@@ -82,13 +80,13 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
-						CAPIArticle.config.switches,
+						article.config.switches,
 					)}
-					pageIsSensitive={CAPIArticle.config.isSensitive}
-					isDev={!!CAPIArticle.config.isDev}
+					pageIsSensitive={article.config.isSensitive}
+					isDev={!!article.config.isDev}
 				/>
 			</Island>
-			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
+			<DecideLayout article={article} NAV={NAV} format={format} />
 		</StrictMode>
 	);
 };

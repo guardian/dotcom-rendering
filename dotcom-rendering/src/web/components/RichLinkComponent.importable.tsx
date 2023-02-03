@@ -21,7 +21,7 @@ interface CAPIRichLinkType {
 	url: string;
 	tags: TagType[];
 	sponsorName: string;
-	format: CAPIFormat;
+	format: FEFormat;
 	starRating?: number;
 	contributorImage?: string;
 	imageAsset?: ImageAsset;

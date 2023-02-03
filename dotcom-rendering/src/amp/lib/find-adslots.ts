@@ -17,10 +17,10 @@
  * around the ad and it can be placed.
  */
 
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 
 interface ElementWithLength {
-	element: CAPIElement;
+	element: FEElement;
 	length: number;
 }
 
@@ -29,11 +29,11 @@ export const SMALL_PARA_CHARS = 50;
 const NONTEXT_BUFFER_FORWARD = 300;
 const NONTEXT_BUFFER_BACKWARD = 200;
 
-const isTextElement = (e: CAPIElement): boolean => {
+const isTextElement = (e: FEElement): boolean => {
 	return e._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 };
 
-export const getElementLength = (element: CAPIElement): number => {
+export const getElementLength = (element: FEElement): number => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			// we don't want to count html characters
@@ -44,9 +44,7 @@ export const getElementLength = (element: CAPIElement): number => {
 	}
 };
 
-const getElementsWithLength = (
-	elements: CAPIElement[],
-): ElementWithLength[] => {
+const getElementsWithLength = (elements: FEElement[]): ElementWithLength[] => {
 	return elements.map((e) => {
 		return {
 			element: e,
@@ -141,7 +139,7 @@ const hasSpaceForAd = (
 };
 
 // Returns index of items to place ads *after*
-export const findAdSlots = (elements: CAPIElement[]): number[] => {
+export const findAdSlots = (elements: FEElement[]): number[] => {
 	let charsSinceLastAd = 0;
 	let paragraphsSinceLastAd = 0;
 	let adCount = 0;

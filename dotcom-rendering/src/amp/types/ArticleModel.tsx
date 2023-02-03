@@ -1,5 +1,5 @@
 import type { CommercialProperties } from '../../types/commercial';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import type { EditionId } from '../../web/lib/edition';
 
@@ -8,7 +8,7 @@ export interface ArticleModel {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
-	mainMediaElements: CAPIElement[];
+	mainMediaElements: FEElement[];
 	keyEvents: Block[]; // liveblog-specific
 	pagination?: Pagination;
 	blocks: Block[];
@@ -16,7 +16,7 @@ export interface ArticleModel {
 	webPublicationDateDeprecated: string;
 	webPublicationDateDisplay: string;
 	pageId: string;
-	format: CAPIFormat;
+	format: FEFormat;
 
 	// Include pillar and designType until we remove them upstream
 	// We type designType as `string` for now so that the field is present,
@@ -29,8 +29,8 @@ export interface ArticleModel {
 	sectionUrl?: string;
 	sectionName?: string;
 	tags: TagType[];
-	subMetaSectionLinks: CAPILinkType[];
-	subMetaKeywordLinks: CAPILinkType[];
+	subMetaSectionLinks: FELinkType[];
+	subMetaKeywordLinks: FELinkType[];
 	webURL: string;
 	shouldHideAds: boolean;
 	shouldHideReaderRevenue: boolean;
