@@ -26,20 +26,6 @@ export const mainStandalone = () => {
 };
 mainStandalone.story = { name: 'main_standalone' };
 
-export const mainStandaloneComment = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateMain
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-mainStandaloneComment.story = { name: 'main_standalone_comment' };
-
 export const mainStandaloneMandatory = () => {
 	return (
 		<Section fullWidth={true}>
@@ -54,23 +40,6 @@ export const mainStandaloneMandatory = () => {
 	);
 };
 mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
-
-export const mainStandaloneMandatoryComment = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateMain
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-				isMandatory={true}
-			/>
-		</Section>
-	);
-};
-mainStandaloneMandatoryComment.story = {
-	name: 'main_standalone_mandatory_comment',
-};
 
 export const fakeSocialStandalone = () => {
 	return (
