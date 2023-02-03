@@ -109,6 +109,19 @@ export const faq = css`
 	}
 `;
 
+export const faqPersonalised = css`
+	padding-top: ${space[3]}px;
+	padding-bottom: 18px;
+	margin-top: ${space[5]}px;
+
+	& a {
+		display: block;
+		margin-bottom: ${space[4]}px;
+		text-decoration-color: ${line.primary};
+		text-underline-position: under;
+	}
+`;
+
 export const privacyLink = css`
 	color: ${text.anchorPrimary};
 	text-decoration: underline;

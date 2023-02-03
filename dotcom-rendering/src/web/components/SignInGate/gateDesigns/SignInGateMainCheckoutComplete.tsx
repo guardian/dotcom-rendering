@@ -12,7 +12,7 @@ import {
 	bodyBold,
 	bodySeparator,
 	bodyText,
-	faq,
+	faqPersonalised,
 	firstParagraphOverlay,
 	headingStyles,
 	hideElementsCss,
@@ -20,8 +20,6 @@ import {
 	privacyLink,
 	registerButton,
 	signInGateContainer,
-	signInHeader,
-	signInLink,
 } from './shared';
 
 const getHeadingText: (userType: UserType) => string = (userType) => {
@@ -111,7 +109,7 @@ export const SignInGateMainCheckoutComplete = ({
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>{getHeadingText(userType)} </h1>
-			<p css={bodyBold}>{getSubHeadingText(product)}</p>
+			<p css={[bodySeparator, bodyBold]}>{getSubHeadingText(product)}</p>
 			<p css={bodyText}>
 				{getBodyText(checkoutCompleteCookieData)}
 				You’ll always be able to control your own{' '}
@@ -158,33 +156,7 @@ export const SignInGateMainCheckoutComplete = ({
 				)}
 			</div>
 
-			<p css={[bodySeparator, bodyBold, signInHeader]}>
-				Have a subscription? Made a contribution? Already registered?
-			</p>
-
-			<Link
-				data-cy="sign-in-gate-main_signin"
-				data-ignore="global-link-styling"
-				css={signInLink}
-				href={signInUrl}
-				onClick={() => {
-					trackLink(ophanComponentId, 'sign-in-link', abTest);
-				}}
-			>
-				Sign In
-			</Link>
-
-			<div css={faq}>
-				<Link
-					data-ignore="global-link-styling"
-					href={`${guUrl}/membership/2019/dec/20/signing-in-to-the-guardian`}
-					onClick={() => {
-						trackLink(ophanComponentId, 'how-link', abTest);
-					}}
-				>
-					Why register & how does it help?
-				</Link>
-
+			<div css={[bodySeparator, faqPersonalised]}>
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}

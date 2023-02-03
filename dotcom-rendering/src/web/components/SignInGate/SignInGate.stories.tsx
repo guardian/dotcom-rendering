@@ -84,7 +84,6 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = () => {
 				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				isMandatory={true}
 				// TODO add controls for these args
 				checkoutCompleteCookieData={{
 					userType: 'new',
