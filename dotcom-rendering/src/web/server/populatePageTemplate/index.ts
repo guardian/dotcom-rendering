@@ -5,7 +5,6 @@ import {
 	dcrJavascriptBundle,
 } from '../../../../scripts/webpack/bundles';
 import type { DCRNewslettersPageType } from '../../../types/newslettersPage';
-import { extractExpeditedIslands } from '../extractIslands';
 import { pageTemplate } from '../pageTemplate';
 import { buildWindowGuardian } from './makeWindowGuardian';
 import {
@@ -38,10 +37,8 @@ export const populatePageTemplate = (
 		createEmotionServer(cache);
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
-	const expeditedIslands = extractExpeditedIslands(html);
 
 	const priorityScriptTags = getPriorityScriptTags(
-		expeditedIslands,
 		offerHttp3,
 		shouldServeVariantBundle,
 	);

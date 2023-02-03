@@ -13,7 +13,6 @@ import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { AlreadyVisited } from '../components//AlreadyVisited.importable';
-import { CoreVitals } from '../components//CoreVitals.importable';
 import { FocusStyles } from '../components//FocusStyles.importable';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -78,9 +77,6 @@ export const StandAlonePage = ({
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals />
 			</Island>
 
 			<Island clientOnly={true} deferUntil="idle">

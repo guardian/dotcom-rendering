@@ -7,8 +7,14 @@ import {
 } from '../../../lib/assets';
 import { getHttp3Url } from '../../lib/getHttp3Url';
 
+/**
+ * The highest priority scripts.
+ * These scripts have a considerable impact on site performance.
+ * Only scripts critical to application execution may go in here.
+ * Please talk to the dotcom platform team before adding more.
+ * Scripts will be executed in the order they appear in this array
+ */
 export const getPriorityScriptTags = (
-	expeditedIslands: string[],
 	offerHttp3: boolean,
 	shouldServeVariantBundle: boolean,
 ): string[] => {
@@ -29,9 +35,6 @@ export const getPriorityScriptTags = (
 			...getScriptArrayFromFile('dynamicImport.js'),
 
 			...getScriptArrayFromFile('islands.js'),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
-			),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),

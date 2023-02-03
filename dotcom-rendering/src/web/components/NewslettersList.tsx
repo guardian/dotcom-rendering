@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAlt, neutral, space } from '@guardian/source-foundations';
-import { headline } from '@guardian/source-foundations/dist/cjs/typography/api';
+import { brandAlt, headline, neutral, space } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { Newsletter } from '../../types/content';
 import { Hide } from './Hide';
