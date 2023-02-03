@@ -3,7 +3,7 @@ import type { FEElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import type { EditionId } from '../../web/lib/edition';
 
-// This is a subset of CAPIArticleType for use in AMP and as a result there needs to be parity between the types of shared fields.
+// This is a subset of FEArticleType for use in AMP and as a result there needs to be parity between the types of shared fields.
 export interface ArticleModel {
 	headline: string;
 	standfirst: string;
