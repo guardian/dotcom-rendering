@@ -100,7 +100,7 @@ const makeCallout = (
 	name,
 	description,
 	activeUntil,
-	contacts
+	contacts,
 });
 
 const makeArticleFormat = (theme: ArticleTheme): ArticleFormatProps => ({

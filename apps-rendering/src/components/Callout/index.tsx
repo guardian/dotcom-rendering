@@ -21,7 +21,7 @@ export interface CalloutProps {
 	isNonCollapsible: boolean;
 	activeUntil?: number;
 	name: string;
-	contacts?: Contact[]
+	contacts?: Contact[];
 }
 
 const Callout: FC<CalloutProps> = ({
