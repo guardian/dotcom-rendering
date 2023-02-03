@@ -26,8 +26,17 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
 	});
 });
 
-// TODO investigate data tracking component name requirements?
-// TODO Add context Comments
+/**
+ * GATE PERSONALISATION:
+ *
+ * If the GU_CO_COMPLETE cookie is present, personalise the sign in gate based on the userType
+ * and product information in the cookie value.
+ * AB tracking will be registered as part of the main gate AB test, but the component Id string
+ * in Ophan ComponentEventTracking will have `_personalised_${userType}_${product}` appended.
+ * This occurs in the SignInGateSelector.importable.tsx file
+ *
+ *  * Flip this off to stop gate personalisation.
+ */
 const showCheckoutCompletePersonalisation = true;
 
 export const signInGateComponent: SignInGateComponent = {

@@ -239,7 +239,7 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	//  TODO add to cypress tests for ctu url qp
+	//  TODO add to cypress tests for cta url qp
 	const personalisedComponentId = (
 		id?: string,
 		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
@@ -247,7 +247,7 @@ export const SignInGateSelector = ({
 		if (!id) return undefined;
 		if (!checkoutCompleteCookieData) return id;
 		const { userType, product } = checkoutCompleteCookieData;
-		return id.concat('_personalised_', userType, '_', product);
+		return `${id}_personalised_${userType}_${product}`;
 	};
 
 	const componentId = personalisedComponentId(
