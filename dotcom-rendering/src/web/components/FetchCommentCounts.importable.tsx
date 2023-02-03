@@ -2,7 +2,7 @@ import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import type { DCRContainerPalette } from '../../types/front';
-import { getEmotionCache } from '../browser/islands/emotion';
+import { getEmotionCache } from '../client/islands/emotion';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
 import { CardCommentCount } from './CardCommentCount';

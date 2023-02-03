@@ -12,8 +12,8 @@ import type {
 import { useState } from 'react';
 import type { ArticleCounts } from '../../../lib/articleCount';
 import type { TagType } from '../../../types/tag';
-import { trackNonClickInteraction } from '../../browser/ga/ga';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { trackNonClickInteraction } from '../../client/ga/ga';
+import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
 	getLastOneOffContributionDate,
 	getPurchaseInfo,

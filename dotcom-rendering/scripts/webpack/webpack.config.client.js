@@ -98,8 +98,8 @@ const getLoaders = (bundle) => {
  */
 module.exports = ({ bundle, sessionId }) => ({
 	entry: {
-		index: './src/web/browser/index.ts',
-		debug: './src/web/browser/debug/index.ts',
+		index: './src/web/client/index.ts',
+		debug: './src/web/client/debug/index.ts',
 	},
 	optimization: {
 		splitChunks: {
