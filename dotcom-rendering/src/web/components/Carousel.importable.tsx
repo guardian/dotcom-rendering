@@ -427,6 +427,12 @@ const HeaderAndNav = ({
 	</div>
 );
 
+/**
+ * # Carousel
+ *
+ * A carousel of cards, mainly used in onward journeys,
+ * at the bottom of articles
+ */
 export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);

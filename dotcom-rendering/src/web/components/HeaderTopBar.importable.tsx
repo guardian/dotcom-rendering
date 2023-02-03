@@ -44,6 +44,13 @@ const topBarStyles = css`
 	}
 `;
 
+/**
+ * # Header Top Bar
+ *
+ * The slim dark blue top bar at the very top of Guardian pages
+ *
+ * [Storybook](https://637e40d1bc73bf3f604394b9-rzazjyrwhc.chromatic.com/?path=/story/components-headertopbar)
+ */
 export const HeaderTopBar = ({
 	editionId,
 	dataLinkName,
