@@ -26,9 +26,9 @@ export type ImageWidthType = { breakpoint: number; width: number };
  * All business logic for image sizing is contained in this one function. This
  * is the source of truth.
  *
- * Based on image role, if it's main media or not and the format of the article
- * it is in, this function decides the width the image should have at different
- * breakpoints.
+ * Based on image role, if it's main media or not, if we're in a lightbox or not
+ * and the format of the article it is in, this function decides the width the
+ * image should have at different breakpoints.
  *
  * Previously, this logic was set [in this Frontend file](https://github.com/guardian/frontend/blob/oliver/immersives-for-all/common/app/layout/ContentWidths.scala)
  *

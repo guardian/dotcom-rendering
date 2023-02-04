@@ -1,5 +1,16 @@
 import type { CAPIElement, EnhancedImageForLightbox } from '../types/content';
 
+/**
+ * Generates a new array of lightbox images. Does not mutate.
+ *
+ * We decide this array, prior to rendering, because we create and
+ * insert the lightbox html in the dom at page load and to do this
+ * we need to know which images we want the lightbox to contain.
+ *
+ * This enhancer needs to run at a higher level to most other enhancers
+ * because it need both mainMediaElements and blocks in scope. Most other
+ * enhancers just have blocks in scope.
+ */
 export const buildLightboxImages = (
 	format: CAPIFormat,
 	blocks: Block[],

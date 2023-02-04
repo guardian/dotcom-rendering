@@ -23,6 +23,10 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlaid?: boolean;
 	isLeftCol?: boolean;
+	/**
+	 * Caption can also be rendered inside Lightbox. In this context we style it
+	 * differently
+	 */
 	isLightbox?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
