@@ -88,10 +88,10 @@ const navStyles = css`
 	}
 	color: white;
 	${until.tablet} {
-		border-bottom: 0.0625rem solid ${neutral[20]};
+		border-bottom: 1px solid ${neutral[20]};
 	}
 	${from.tablet} {
-		border-left: 0.0625rem solid ${neutral[20]};
+		border-left: 1px solid ${neutral[20]};
 	}
 	background-color: ${neutral[7]};
 `;
@@ -195,10 +195,10 @@ const asideStyles = css`
 		max-width: 300px;
 	}
 	${until.tablet} {
-		border-top: 0.0625rem solid ${neutral[20]};
+		border-top: 1px solid ${neutral[20]};
 	}
 	${from.tablet} {
-		border-left: 0.0625rem solid ${neutral[20]};
+		border-left: 1px solid ${neutral[20]};
 	}
 	background-color: ${neutral[7]};
 
