@@ -1,15 +1,17 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import {
+	Card33Media33MobileTopTall,
+	Card33Media33Tall,
+	CardDefault,
+} from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -26,7 +28,7 @@ const Card33_Card33_Card33 = ({
 	showAge,
 	padBottom,
 }: {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	padBottom?: boolean;
@@ -38,12 +40,10 @@ const Card33_Card33_Card33 = ({
 		<UL direction="row" padBottom={padBottom}>
 			{card33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} key={trail.url}>
-					<FrontCard
+					<Card33Media33MobileTopTall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="top"
 					/>
 				</LI>
 			))}
@@ -54,12 +54,10 @@ const Card33_Card33_Card33 = ({
 					showDivider={true}
 					key={trail.url}
 				>
-					<FrontCard
+					<Card33Media33Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="left"
 					/>
 				</LI>
 			))}
@@ -116,12 +114,10 @@ export const FixedMediumSlowXIIMPU = ({
 								stretch={true}
 								key={trail.url}
 							>
-								<FrontCard
+								<CardDefault
 									trail={trail}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						))}

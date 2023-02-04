@@ -41,6 +41,10 @@ module.exports = {
 				{
 					matchingUrlPattern: 'http://localhost:9000/Article?.+',
 					assertions: {
+						'total-blocking-time': [
+							'warn',
+							{ maxNumericValue: 219 }
+						],
 						'categories:accessibility': [
 							'error',
 							{ minScore: 0.97 },
@@ -50,6 +54,10 @@ module.exports = {
 				{
 					matchingUrlPattern: 'http://localhost:9000/Front?.+',
 					assertions: {
+						'total-blocking-time': [
+							'warn',
+							{ maxNumericValue: 716 }
+						],
 						'categories:accessibility': [
 							'warn',
 							{ minScore: 0.97 },

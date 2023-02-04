@@ -30,6 +30,6 @@ describe('Tags component renders as expected', () => {
 
 	it('Renders correct number of tags', () => {
 		const tags = renderer.create(<Tags item={article} />);
-		expect(tags.root.findAllByType('li').length).toBe(6);
+		expect(tags.root.findAllByType('li').length).toBe(7);
 	});
 });

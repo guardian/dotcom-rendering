@@ -39,7 +39,6 @@ export type Palette = {
 		witnessAuthor: Colour;
 		witnessTitle: Colour;
 		carouselTitle: Colour;
-		calloutHeading: Colour;
 		pullQuote: Colour;
 		pagination: Colour;
 		pullQuoteAttribution: Colour;
@@ -60,9 +59,12 @@ export type Palette = {
 		betaLabel: Colour;
 		designTag: Colour;
 		dateLine: Colour;
+		tableOfContents: Colour;
 	};
 	background: {
 		article: Colour;
+		analysisContrast: Colour;
+		analysisContrastHover: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;

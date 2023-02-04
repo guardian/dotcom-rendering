@@ -1,14 +1,20 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import {
-	Card25Media25Tall,
 	Card33Media33,
-	Card50Media50,
 	CardDefault,
 	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
-import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
+import {
+	Card25_Card75,
+	Card50_Card25_Card25,
+	Card50_Card50,
+	Card75_Card25,
+} from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -31,7 +37,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -88,7 +94,7 @@ const ColumnOfThree50_Ad50 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -119,53 +125,6 @@ const ColumnOfThree50_Ad50 = ({
 	);
 };
 
-/* ._________________.________.________.
- * |#################|########|########|
- * |                 |        |        |
- * |_________________|________|________|
- */
-const Card50_Card25_Card25 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => {
-	const card50 = cards.slice(0, 1);
-	const cards25 = cards.slice(1, 3);
-
-	return (
-		<UL direction="row" padBottom={true}>
-			{card50.map((card) => (
-				<LI percentage="50%" padSides={true} key={card.url}>
-					<Card50Media50
-						trail={card}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-			{cards25.map((card) => (
-				<LI
-					percentage="25%"
-					padSides={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-					key={card.url}
-				>
-					<Card25Media25Tall
-						trail={card}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-		</UL>
-	);
-};
-
 /**
  * DynamicSlowMPU
  *
@@ -186,9 +145,14 @@ export const DynamicSlowMPU = ({
 	showAge,
 	index,
 }: Props) => {
-	let layout: 'noBigs' | 'twoBigs' | 'twoBigsBoosted' | 'threeBigs';
-	let bigCards: TrailType[] = [];
-	let standardCards: TrailType[] = [];
+	let layout:
+		| 'noBigs'
+		| 'twoBigs'
+		| 'twoBigsFirstBoosted'
+		| 'twoBigsSecondBoosted'
+		| 'threeBigs';
+	let bigCards: DCRFrontCard[] = [];
+	let standardCards: DCRFrontCard[] = [];
 	switch (groupedTrails.big.length) {
 		case 0: {
 			standardCards = groupedTrails.standard;
@@ -208,7 +172,9 @@ export const DynamicSlowMPU = ({
 			bigCards = groupedTrails.big;
 			standardCards = groupedTrails.standard;
 			if (groupedTrails.big[0]?.isBoosted) {
-				layout = 'twoBigsBoosted';
+				layout = 'twoBigsFirstBoosted';
+			} else if (groupedTrails.big[1]?.isBoosted) {
+				layout = 'twoBigsSecondBoosted';
 			} else {
 				layout = 'twoBigs';
 			}
@@ -258,10 +224,27 @@ export const DynamicSlowMPU = ({
 				</>
 			);
 		}
-		case 'twoBigsBoosted': {
+		case 'twoBigsFirstBoosted': {
 			return (
 				<>
 					<Card75_Card25
+						cards={bigCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					<ColumnOfThree50_Ad50
+						cards={standardCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						index={index}
+					/>
+				</>
+			);
+		}
+		case 'twoBigsSecondBoosted': {
+			return (
+				<>
+					<Card25_Card75
 						cards={bigCards}
 						containerPalette={containerPalette}
 						showAge={showAge}

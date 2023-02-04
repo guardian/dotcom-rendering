@@ -26,7 +26,7 @@ import { logger } from './lib/logging';
 const logRenderTime = responseTime(
 	({ body }: Request, _: Response, time: number) => {
 		const { pageId = 'no-page-id-found' } = body as FEArticleType;
-		logger.info({
+		logger.info('Page render time', {
 			pageId,
 			renderTime: time,
 		});
@@ -133,7 +133,7 @@ export const prodServer = (): void => {
 		}, 10 * 1000);
 	}
 
-	const port = process.env.PORT || 9000;
+	const port = process.env.PORT ?? 9000;
 	app.listen(port);
 
 	console.log(`Started production server on port ${port}\nready`);

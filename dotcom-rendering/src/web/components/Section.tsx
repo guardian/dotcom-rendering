@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
@@ -35,13 +35,13 @@ type Props = {
 	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** Defaults to `true`. If we should add padding around the outter left and right edges */
+	/** Defaults to `true`. If we should add padding around the outer left and right edges */
 	padSides?: boolean;
-	/** Defaults to `true`. If we should add padding around the outter left and right edges */
+	/** Defaults to `true`. If we should add padding around the outer left and right edges */
 	padBottom?: boolean;
 	/** Defaults to `false`. If we should add padding to the bottom of `children` */
 	padContent?: boolean;
-	/** The html tag used by Section defaults to `section` but can be overidden here */
+	/** The html tag used by Section defaults to `section` but can be overridden here */
 	element?:
 		| 'div'
 		| 'article'
@@ -78,7 +78,7 @@ type Props = {
 	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md
 	 */
 	containerName?: string;
-	/** Fronts containers can have their styling overidden using a `containerPalette` */
+	/** Fronts containers can have their styling overridden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
 	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
@@ -237,9 +237,9 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				borderColour={borderColour || overrides?.border.container}
+				borderColour={borderColour ?? overrides?.border.container}
 				backgroundColour={
-					backgroundColour || overrides?.background.container
+					backgroundColour ?? overrides?.background.container
 				}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
@@ -260,9 +260,9 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			borderColour={borderColour || overrides?.border.container}
+			borderColour={borderColour ?? overrides?.border.container}
 			backgroundColour={
-				backgroundColour || overrides?.background.container
+				backgroundColour ?? overrides?.background.container
 			}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
@@ -273,7 +273,7 @@ export const Section = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour || overrides?.border.container}
+					borderColour={borderColour ?? overrides?.border.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
 				>
@@ -289,7 +289,7 @@ export const Section = ({
 							<ContainerTitle
 								title={title}
 								fontColour={
-									fontColour || overrides?.text.container
+									fontColour ?? overrides?.text.container
 								}
 								description={description}
 								url={url}
@@ -320,7 +320,7 @@ export const Section = ({
 							<ContainerTitle
 								title={title}
 								fontColour={
-									fontColour || overrides?.text.container
+									fontColour ?? overrides?.text.container
 								}
 								description={description}
 								url={url}

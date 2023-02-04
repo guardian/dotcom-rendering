@@ -1,23 +1,14 @@
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
-import { renderToString } from 'react-dom/server';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import {
-	generateScriptTags,
-	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
-} from '../../lib/assets';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
+import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
 
@@ -28,21 +19,10 @@ interface Props {
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
 	const NAV = extractNAV(front.nav);
-	const key = 'dcr';
-	const cache = createCache({ key });
 
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-		createEmotionServer(cache);
-
-	const html = renderToString(
-		<CacheProvider value={cache}>
-			<FrontPage front={front} NAV={NAV} />
-		</CacheProvider>,
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<FrontPage front={front} NAV={NAV} />,
 	);
-
-	const chunks = extractCriticalToChunks(html);
-	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
@@ -73,45 +53,15 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
+	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
-			...getScriptArrayFromFile('islands.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
-
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
-
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -141,14 +91,12 @@ export const frontToHtml = ({ front }: Props): string => {
 	const keywords = front.config.keywords ?? '';
 
 	return pageTemplate({
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: front.pressedPage.seoData.description,
 		windowGuardian,
-		gaPath,
 		keywords,
 		offerHttp3,
 	});

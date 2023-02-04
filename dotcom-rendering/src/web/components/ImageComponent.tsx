@@ -238,8 +238,17 @@ export const getImageDimensions = (
 	width: string;
 	height: string;
 } => {
-	const width = element.media.allImages[0]?.fields.width ?? '620';
-	const height = element.media.allImages[0]?.fields.height ?? '372';
+	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
+	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
+	// ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
+	//
+	// The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
+	const width =
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
+		element.media?.allImages[0]?.fields.width ?? '620';
+	const height =
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
+		element.media?.allImages[0]?.fields.height ?? '372';
 	return {
 		width,
 		height,
@@ -325,7 +334,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -365,7 +374,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -408,7 +417,7 @@ export const ImageComponent = ({
 					role={role}
 					format={format}
 					master={image}
-					alt={element.data.alt || ''}
+					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
 					isLazy={!isMainMedia}
@@ -439,7 +448,7 @@ export const ImageComponent = ({
 								<CaptionToggle />{' '}
 								<div id="the-caption">
 									<Caption
-										captionText={element.data.caption || ''}
+										captionText={element.data.caption ?? ''}
 										format={format}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
@@ -470,7 +479,7 @@ export const ImageComponent = ({
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
 					<Caption
-						captionText={element.data.caption || ''}
+						captionText={element.data.caption ?? ''}
 						format={format}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
@@ -480,7 +489,7 @@ export const ImageComponent = ({
 				</Hide>
 			) : (
 				<Caption
-					captionText={element.data.caption || ''}
+					captionText={element.data.caption ?? ''}
 					format={format}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}

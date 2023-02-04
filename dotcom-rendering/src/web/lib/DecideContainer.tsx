@@ -3,7 +3,6 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
-	DCRSupportingContent,
 } from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
@@ -30,7 +29,6 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	supportingContent?: DCRSupportingContent[] | undefined;
 };
 
 export const DecideContainer = ({
@@ -40,7 +38,6 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
-	supportingContent,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -90,7 +87,6 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={supportingContent}
 				/>
 			);
 		case 'fixed/small/slow-V-mpu':

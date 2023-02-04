@@ -20,7 +20,12 @@ const formats = getAllThemes({
 export const notFirstPage = () => (
 	<>
 		{formats.map((format) => (
-			<Pagination currentPage={2} totalPages={6} format={format} />
+			<Pagination
+				key={JSON.stringify(format)}
+				currentPage={2}
+				totalPages={6}
+				format={format}
+			/>
 		))}
 	</>
 );
@@ -32,7 +37,12 @@ notFirstPage.story = {
 export const firstPageStory = () => (
 	<>
 		{formats.map((format) => (
-			<Pagination currentPage={1} totalPages={4} format={format} />
+			<Pagination
+				key={JSON.stringify(format)}
+				currentPage={1}
+				totalPages={4}
+				format={format}
+			/>
 		))}
 	</>
 );

@@ -2,7 +2,6 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { addImageIDs } from '../../model/addImageIDs';
 import { buildLightboxImages } from '../../model/buildLightboxImages';
-import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
@@ -29,7 +28,6 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
-		isRecipe: isRecipe(data.tags),
 	});
 
 	const CAPIArticle: FEArticleType = {
@@ -40,7 +38,7 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
-		tableOfContents: data.config.switches.tableOfContents
+		tableOfContents: data.showTableOfContents
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
 		imagesForLightbox: buildLightboxImages(
@@ -68,6 +66,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.pressedPage.collections,
 				data.editionId,
 				data.pageId,
+				data.pressedPage.frontProperties.onPageDescription,
 			),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),

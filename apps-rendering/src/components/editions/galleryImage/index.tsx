@@ -210,7 +210,6 @@ const GalleryImage: FC<Props> = ({ image, format }) => {
 					sizes={sizes}
 					className={none}
 					format={format}
-					supportsDarkMode={false}
 					lightbox={some({
 						className: 'js-launch-slideshow',
 						caption: none,

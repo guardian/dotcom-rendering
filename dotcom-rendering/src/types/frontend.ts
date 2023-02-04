@@ -117,6 +117,7 @@ export interface FEArticleType {
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
 	imagesForLightbox?: EnhancedImageForLightbox[];
+	showTableOfContents: boolean;
 }
 
 export interface TableOfContents {

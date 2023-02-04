@@ -7,7 +7,6 @@ import {
 } from '@guardian/libs';
 import {
 	border,
-	brand,
 	brandAlt,
 	brandAltBackground,
 	culture,
@@ -540,6 +539,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 		switch (format.theme) {
 			case ArticlePillar.Opinion:
 				return opinion[200];
+			case ArticlePillar.Culture:
 			case ArticlePillar.News:
 				return news[300];
 			default:
@@ -690,6 +690,10 @@ const textCardKicker = (format: ArticleFormat): string => {
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return BLACK;
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
 				default:
 					return neutral[100];
 			}
@@ -698,7 +702,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
-					return news[600];
+					return news[550];
 				case ArticlePillar.Sport:
 					return sport[600];
 				case ArticlePillar.Opinion:
@@ -932,7 +936,10 @@ const backgroundBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundBulletStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.DeadBlog ||
+		format.design === ArticleDesign.Analysis
+	) {
 		return neutral[60];
 	}
 
@@ -1527,11 +1534,10 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const textRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[300];
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
+			return news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1664,6 +1670,7 @@ const borderPagination = () => {
 };
 
 const fillRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[400];
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -1696,6 +1703,9 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
+const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
+
 const backgroundPullQuote = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[800];
@@ -1706,7 +1716,7 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 		case ArticleDesign.Comment:
 			return '#fbe6d5';
 		case ArticleDesign.Analysis:
-			return neutral[100];
+			return backgroundAnalysisContrastColour();
 
 		default:
 			return neutral[97];
@@ -1732,10 +1742,6 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 		}
 	}
 	return pillarPalette[format.theme].main;
-};
-
-const textCalloutHeading = (): string => {
-	return brand[500];
 };
 
 const textDropCap = (format: ArticleFormat): string => {
@@ -1777,6 +1783,10 @@ const textDateLine = (format: ArticleFormat): string => {
 		return palette.specialReportAlt[100];
 
 	return neutral[46];
+};
+
+const textTableOfContents = (): string => {
+	return palette.neutral[7];
 };
 
 const textBlockquote = (format: ArticleFormat): string => {
@@ -2074,7 +2084,6 @@ export const decidePalette = (
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			calloutHeading: textCalloutHeading(),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
@@ -2092,9 +2101,12 @@ export const decidePalette = (
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
+			tableOfContents: textTableOfContents(),
 		},
 		background: {
 			article: backgroundArticle(format),
+			analysisContrast: backgroundAnalysisContrastColour(),
+			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
@@ -2156,7 +2168,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: overrides?.border.lines || borderLines(format),
+			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),

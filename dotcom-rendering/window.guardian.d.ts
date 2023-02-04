@@ -1,3 +1,4 @@
+import type { EmotionCache } from '@emotion/react';
 import type {
 	Callback,
 	CMP,
@@ -20,6 +21,10 @@ declare global {
 			polyfilled: boolean;
 			onPolyfilled: () => void;
 			queue: Array<() => void>;
+			// Olly N 10/01/2022:
+			// The 'emotionCache' property would better live as a singleton package/chunk, but we're currently limited
+			// by having multiple entrypoints in webpack, meaning we can't guarantee singleton behavior
+			emotionCache?: EmotionCache;
 			config: WindowGuardianConfig;
 			ophan?: {
 				setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
@@ -44,7 +49,6 @@ declare global {
 				emotionReactJsxRuntime: any;
 			};
 			readerRevenue: ReaderRevenueDevUtils;
-			gaPath: string;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;

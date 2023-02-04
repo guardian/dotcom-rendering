@@ -1,11 +1,14 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import {
+	Card25Media25Tall,
+	Card25Media25TallSmallHeadline,
+	Card50Media50,
+} from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -29,15 +32,10 @@ export const FixedMediumSlowVII = ({
 						showDivider={false}
 						percentage="50%"
 					>
-						<FrontCard
+						<Card50Media50
 							trail={trail}
-							format={trail.format}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize="large"
-							imagePositionOnMobile="top"
-							imageSize="large"
-							supportingContent={trail.supportingContent}
 						/>
 					</LI>
 				))}
@@ -50,26 +48,10 @@ export const FixedMediumSlowVII = ({
 						containerPalette={containerPalette}
 						percentage="25%"
 					>
-						<FrontCard
+						<Card25Media25Tall
 							trail={trail}
-							format={trail.format}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize="medium"
-							imagePositionOnMobile="left"
-							imageSize="medium"
-							trailText={
-								trail.supportingContent &&
-								trail.supportingContent.length > 0
-									? undefined
-									: trail.trailText
-							}
-							supportingContent={
-								trail.supportingContent &&
-								trail.supportingContent.length > 2
-									? trail.supportingContent.slice(0, 2)
-									: trail.supportingContent
-							}
 						/>
 					</LI>
 				))}
@@ -82,18 +64,10 @@ export const FixedMediumSlowVII = ({
 						showDivider={index > 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25TallSmallHeadline
 							trail={trail}
-							format={trail.format}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize="small"
-							supportingContent={
-								trail.supportingContent &&
-								trail.supportingContent.length > 2
-									? trail.supportingContent.slice(0, 2)
-									: trail.supportingContent
-							}
 						/>
 					</LI>
 				))}

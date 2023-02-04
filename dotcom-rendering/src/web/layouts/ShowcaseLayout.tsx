@@ -25,7 +25,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
-import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -227,7 +226,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	});
 
 	const showBodyEndSlot =
-		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
+		parse(CAPIArticle.slotMachineFlags ?? '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
 
 	// TODO:
@@ -457,8 +456,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										!!CAPIArticle.starRating ||
-										CAPIArticle.starRating === 0
+										typeof CAPIArticle.starRating ===
+										'number'
 									}
 								/>
 							</PositionHeadline>
@@ -552,11 +551,15 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										contributionsServiceUrl
 									}
 									contentType={CAPIArticle.contentType}
-									sectionName={CAPIArticle.sectionName || ''}
+									sectionName={CAPIArticle.sectionName ?? ''}
 									isPreview={CAPIArticle.config.isPreview}
-									idUrl={CAPIArticle.config.idUrl || ''}
+									idUrl={CAPIArticle.config.idUrl ?? ''}
 									isDev={!!CAPIArticle.config.isDev}
 									keywordIds={CAPIArticle.config.keywordIds}
+									abTests={CAPIArticle.config.abTests}
+									tableOfContents={
+										CAPIArticle.tableOfContents
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -688,58 +691,45 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
-				) : (
-					<>
-						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true}>
-								<Island deferUntil="visible">
-									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
-										onwardsSource="more-on-this-story"
-										format={format}
-									/>
-								</Island>
-							</Section>
-						)}
-
-						<Island
-							clientOnly={true}
-							deferUntil="visible"
-							placeholderHeight={600}
-						>
-							<OnwardsUpper
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasRelated={CAPIArticle.hasRelated}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
-								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
-								keywordIds={CAPIArticle.config.keywordIds}
-								contentType={CAPIArticle.contentType}
-								tags={CAPIArticle.tags}
+				{CAPIArticle.storyPackage && (
+					<Section fullWidth={true}>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								onwardsSource="more-on-this-story"
 								format={format}
-								pillar={format.theme}
-								editionId={CAPIArticle.editionId}
-								shortUrlId={CAPIArticle.config.shortUrlId}
 							/>
 						</Island>
-					</>
+					</Section>
 				)}
+
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
+					<OnwardsUpper
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						hasRelated={CAPIArticle.hasRelated}
+						hasStoryPackage={CAPIArticle.hasStoryPackage}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						pageId={CAPIArticle.pageId}
+						isPaidContent={!!CAPIArticle.config.isPaidContent}
+						showRelatedContent={
+							CAPIArticle.config.showRelatedContent
+						}
+						keywordIds={CAPIArticle.config.keywordIds}
+						contentType={CAPIArticle.contentType}
+						tags={CAPIArticle.tags}
+						format={format}
+						pillar={format.theme}
+						editionId={CAPIArticle.editionId}
+						shortUrlId={CAPIArticle.config.shortUrlId}
+					/>
+				</Island>
 
 				{!isPaidContent && showComments && (
 					<Section
@@ -763,6 +753,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</Section>
 				)}

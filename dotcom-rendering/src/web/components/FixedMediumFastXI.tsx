@@ -1,12 +1,11 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
-import { Card50_Card25_Card25 } from '../lib/dynamicSlices';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+import { CardDefault } from '../lib/cardWrappers';
+import { Card50_Card25_Card25 } from '../lib/dynamicSlices';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -76,12 +75,10 @@ export const FixedMediumFastXI = ({
 						stretch={true}
 						key={trail.url}
 					>
-						<FrontCard
+						<CardDefault
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							imageUrl={undefined}
-							headlineSize="small"
 						/>
 					</LI>
 				))}

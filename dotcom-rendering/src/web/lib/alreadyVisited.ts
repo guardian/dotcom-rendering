@@ -2,7 +2,7 @@ const AlreadyVisitedKey = 'gu.alreadyVisited';
 
 export const getAlreadyVisitedCount = (): number => {
 	const alreadyVisited = parseInt(
-		localStorage.getItem(AlreadyVisitedKey) || '',
+		localStorage.getItem(AlreadyVisitedKey) ?? '',
 		10,
 	);
 	return !Number.isNaN(alreadyVisited) ? alreadyVisited : 0;

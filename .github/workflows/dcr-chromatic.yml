@@ -25,7 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
       # Cache npm dependencies using https://github.com/bahmutov/npm-install
       # Root yarn installs all workspaces (root, common, dotcom)
@@ -39,7 +42,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
-          untraced: '**/(package**.json|yarn.lock)'
+          untraced: '**/(package**.json|yarn.lock|preview.js)'
           workingDir: dotcom-rendering
 
       - name: Chromatic - DCR Dependency PR

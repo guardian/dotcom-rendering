@@ -18,7 +18,7 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const styles = css`
-	grid-row: 2;
+	grid-row: 3/4;
 	${grid.span('viewport-start', 4)}
 
 	${from.tablet} {

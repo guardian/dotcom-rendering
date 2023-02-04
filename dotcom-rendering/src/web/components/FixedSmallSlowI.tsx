@@ -1,11 +1,10 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import { Card100Media75 } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -21,16 +20,10 @@ export const FixedSmallSlowI = ({
 		<UL>
 			{firstSlice100.map((card) => (
 				<LI padSides={true} key={card.url}>
-					<FrontCard
+					<Card100Media75
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imagePosition="right"
-						imagePositionOnMobile="top"
-						imageSize="jumbo"
-						headlineSize="huge"
-						headlineSizeOnMobile="large"
-						trailText={card.trailText}
 					/>
 				</LI>
 			))}

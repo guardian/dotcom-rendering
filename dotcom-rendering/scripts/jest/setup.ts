@@ -14,6 +14,8 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
+	tests: {
+	}
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -58,7 +60,6 @@ const windowGuardian = {
 		showNextVariant: () => {},
 		showPreviousVariant: () => {},
 	},
-	gaPath: '/assets/ga.js',
 };
 
 // Stub global Guardian object
@@ -76,7 +77,7 @@ const localStorageMock = (function () {
 	} = {};
 	return {
 		getItem(key: string) {
-			return store[key] || null;
+			return store[key] ?? null;
 		},
 		setItem(key: string, value: string) {
 			store[key] = value.toString();

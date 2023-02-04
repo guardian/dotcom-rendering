@@ -1,11 +1,14 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import {
+	Card25Media25TallNoTrail,
+	Card25Media25TallSmallHeadline,
+	Card75Media50Right,
+} from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -24,15 +27,10 @@ export const FixedMediumSlowVI = ({
 			<UL direction="row" padBottom={true}>
 				{firstSlice75.map((trail) => (
 					<LI key={trail.url} padSides={true} percentage={'75%'}>
-						<FrontCard
+						<Card75Media50Right
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize={'large'}
-							imagePosition={'right'}
-							imagePositionOnMobile={'top'}
-							imageSize={'large'}
-							trailText={trail.trailText}
 						/>
 					</LI>
 				))}
@@ -44,15 +42,10 @@ export const FixedMediumSlowVI = ({
 						containerPalette={containerPalette}
 						percentage={'25%'}
 					>
-						<FrontCard
+						<Card25Media25TallNoTrail
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize={'medium'}
-							imagePosition={'top'}
-							imagePositionOnMobile={'left'}
-							imageSize={'medium'}
-							trailText={undefined}
 						/>
 					</LI>
 				))}
@@ -65,11 +58,10 @@ export const FixedMediumSlowVI = ({
 						showDivider={index > 0}
 						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25TallSmallHeadline
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							headlineSize="small"
 						/>
 					</LI>
 				))}

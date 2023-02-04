@@ -96,7 +96,7 @@ dev-legacy: clear clean-dist install
 cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
 
 cypress-open: export NODE_ENV=production
 cypress-open: clear clean-dist install build

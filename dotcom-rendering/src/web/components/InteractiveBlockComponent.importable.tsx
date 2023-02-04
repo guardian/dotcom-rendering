@@ -3,7 +3,7 @@ import { ArticleSpecial } from '@guardian/libs';
 import { body, space, textSans } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
-import { RoleType } from '../../types/content';
+import type { RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
@@ -306,7 +306,7 @@ export const InteractiveBlockComponent = ({
 					role,
 				)}
 				data-alt={alt} // for compatibility with custom boot scripts
-				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
+				data-cypress={`interactive-element-${encodeURI(alt ?? '')}`}
 				data-spacefinder-role={role}
 			>
 				{!loaded && (

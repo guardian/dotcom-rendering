@@ -1,5 +1,8 @@
-import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../../types/front';
 import {
 	Card25Media25Tall,
 	Card50Media50,
@@ -29,7 +32,7 @@ const ColumnOfCards50_Card50 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -81,7 +84,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -135,7 +138,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 	showAge,
 	containerPalette,
 }: {
-	cards: TrailType[];
+	cards: DCRFrontCard[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -186,7 +189,7 @@ export const DynamicSlow = ({
 		| 'TwoVeryBigsFirstBoosted'
 		| 'TwoVeryBigsSecondBoosted';
 
-	let firstSliceCards: TrailType[] = [];
+	let firstSliceCards: DCRFrontCard[] = [];
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
@@ -214,7 +217,7 @@ export const DynamicSlow = ({
 	});
 
 	let secondSliceLayout: 'twoBigs' | 'oneBig' | 'noBigs';
-	let secondSliceCards: TrailType[] = [];
+	let secondSliceCards: DCRFrontCard[] = [];
 	const bigs = [
 		// Demote any left over 'huge' or 'veryBig' grouped cards
 		...secondSliceGroupedTrails.huge,

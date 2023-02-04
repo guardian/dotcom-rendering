@@ -286,7 +286,7 @@ MultipleStory.story = {
 export const TreatsStory = () => {
 	return (
 		<Section
-			title="Treats"
+			title="Treats and Date Header"
 			treats={[
 				{
 					links: [
@@ -309,11 +309,13 @@ export const TreatsStory = () => {
 			]}
 			showTopBorder={false}
 			showSideBorders={false}
+			showDateHeader={true}
+			editionId="UK"
 		>
 			<Grey />
 		</Section>
 	);
 };
 TreatsStory.story = {
-	name: 'with treats',
+	name: 'with treats and date header',
 };

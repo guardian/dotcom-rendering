@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { AdSlot } from './AdSlot';
+import { AdSlot, labelStyles } from './AdSlot';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { Flex } from './Flex';
@@ -18,6 +18,7 @@ type Props = {
 	enableDiscussionSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
+	idApiUrl: string;
 };
 
 export const DiscussionLayout = ({
@@ -29,8 +30,10 @@ export const DiscussionLayout = ({
 	enableDiscussionSwitch,
 	isAdFreeUser,
 	shouldHideAds,
+	idApiUrl,
 }: Props) => {
 	const hideAd = isAdFreeUser || shouldHideAds;
+
 	return (
 		<>
 			<Section
@@ -56,7 +59,7 @@ export const DiscussionLayout = ({
 						: 'compact'
 				}
 			>
-				<Flex>
+				<Flex gap="20px">
 					<div
 						css={css`
 							${from.leftCol} {
@@ -80,27 +83,31 @@ export const DiscussionLayout = ({
 									discussionApiClientHeader
 								}
 								enableDiscussionSwitch={enableDiscussionSwitch}
+								idApiUrl={idApiUrl}
 							/>
 						</Island>
 					</div>
-					<>
-						{!hideAd && (
-							<RightColumn>
-								<div
-									css={css`
-										position: static;
+					{!hideAd && (
+						<RightColumn>
+							<div
+								className="commentsRightColumn"
+								css={[
+									css`
+										display: flex;
+										flex-direction: column;
+										gap: 100vh;
 										height: 100%;
-										padding-left: 20px;
-									`}
-								>
-									<AdSlot
-										position="comments"
-										display={format.display}
-									/>
-								</div>
-							</RightColumn>
-						)}
-					</>
+									`,
+									labelStyles,
+								]}
+							>
+								<AdSlot
+									position="comments"
+									display={format.display}
+								/>
+							</div>
+						</RightColumn>
+					)}
 				</Flex>
 			</Section>
 		</>

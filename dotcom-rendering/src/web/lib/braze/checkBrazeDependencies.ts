@@ -81,10 +81,9 @@ const checkBrazeDependencies = async (
 				return buildFailureResponse(name, result, data);
 			}
 		} catch (e) {
-			const error = e as Error;
 			return buildFailureResponse(
 				name,
-				error && error.message ? error.message : error,
+				e instanceof Error ? e.message : e,
 				data,
 			);
 		}

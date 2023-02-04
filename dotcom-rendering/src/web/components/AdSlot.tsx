@@ -24,7 +24,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Omit<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
+	position: Exclude<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -287,15 +287,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div
-					css={[
-						css`
-							position: static;
-							height: 100%;
-						`,
-						adStyles,
-					]}
-				>
+				<div css={[adStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -306,14 +298,7 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 							'js-sticky-mpu',
 						].join(' ')}
-						css={[
-							css`
-								position: sticky;
-								top: 0;
-								width: 300px;
-							`,
-							adStyles,
-						]}
+						css={[adStyles]}
 						data-link-name="ad slot comments"
 						data-name="comments"
 						aria-hidden="true"
@@ -447,7 +432,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}`}
@@ -471,7 +456,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'liveblog-inline': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div className="ad-slot-container">
 					<div
@@ -497,7 +482,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
-			const advertId = `inline${index as number}`;
+			const advertId = `inline${index}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}--mobile`}

@@ -7,10 +7,11 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
@@ -26,6 +27,7 @@ import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -82,6 +84,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isPinnedPost?: boolean;
+	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -136,6 +139,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -171,7 +175,6 @@ export const renderElement = ({
 			);
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return (
 				<Island deferUntil="visible">
 					<CalloutEmbedBlockComponent
@@ -180,6 +183,19 @@ export const renderElement = ({
 					/>
 				</Island>
 			);
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
+			if (
+				switches.callouts &&
+				abTests?.calloutElementsVariant === 'variant'
+			) {
+				return (
+					<Island deferUntil="visible">
+						<CalloutBlockComponent callout={element} />
+					</Island>
+				);
+			}
+			return null;
+
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
 				<CaptionBlockComponent
@@ -248,7 +264,7 @@ export const renderElement = ({
 				if (isMainMedia) {
 					return (
 						<MainMediaEmbedBlockComponent
-							title={element.alt || ''}
+							title={element.alt ?? ''}
 							srcDoc={element.html}
 						/>
 					);
@@ -259,7 +275,7 @@ export const renderElement = ({
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
-							alt={element.alt || ''}
+							alt={element.alt ?? ''}
 							index={index}
 							role={element.role}
 							isTracking={element.isThirdPartyTracking}
@@ -327,7 +343,7 @@ export const renderElement = ({
 					element={element}
 					hideCaption={hideCaption}
 					isMainMedia={isMainMedia}
-					starRating={starRating || element.starRating}
+					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
 				/>
@@ -435,14 +451,21 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			return (
-				<EmailSignup
-					identityName={element.newsletter.identityName}
-					description={element.newsletter.description}
-					name={element.newsletter.name}
-					frequency={element.newsletter.frequency}
-					successDescription={element.newsletter.successDescription}
-					theme={element.newsletter.theme}
-				/>
+				<InlineSkipToWrapper
+					id={`EmailSignup-skip-link-${index}`}
+					blockDescription="newsletter promotion"
+				>
+					<EmailSignup
+						identityName={element.newsletter.identityName}
+						description={element.newsletter.description}
+						name={element.newsletter.name}
+						frequency={element.newsletter.frequency}
+						successDescription={
+							element.newsletter.successDescription
+						}
+						theme={element.newsletter.theme}
+					/>
+				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
@@ -773,6 +796,7 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
+	abTests,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -792,6 +816,7 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
+		abTests,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

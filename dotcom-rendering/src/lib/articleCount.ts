@@ -45,8 +45,8 @@ export const getArticleCounts = async (
 	}
 
 	return {
-		weeklyArticleHistory: window.guardian.weeklyArticleCount || [],
-		dailyArticleHistory: window.guardian.dailyArticleCount || [],
+		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
+		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
 	};
 };
 
