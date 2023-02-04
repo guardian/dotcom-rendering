@@ -107,10 +107,14 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	const images = lightbox.querySelectorAll('li img');
 	const captionLinks = lightbox.querySelectorAll('li aside a');
 
-	if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
-		hideInfo();
-	} else {
-		showInfo();
+	try {
+		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
+			hideInfo();
+		} else {
+			showInfo();
+		}
+	} catch (error) {
+		// Do nothing. Errors accessing local storage are common
 	}
 
 	// Functions
@@ -332,13 +336,21 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	function showInfo(): void {
 		infoButton?.classList.add('active');
 		lightbox.classList.remove('hide-info');
-		storage.local.set('gu.prefs.lightbox-hideinfo', false);
+		try {
+			storage.local.set('gu.prefs.lightbox-hideinfo', false);
+		} catch (error) {
+			// Do nothing. Errors accessing local storage are common
+		}
 	}
 
 	function hideInfo(): void {
 		infoButton?.classList.remove('active');
 		lightbox.classList.add('hide-info');
-		storage.local.set('gu.prefs.lightbox-hideinfo', true);
+		try {
+			storage.local.set('gu.prefs.lightbox-hideinfo', true);
+		} catch (error) {
+			// Do nothing. Errors accessing local storage are common
+		}
 	}
 
 	function toggleInfo(): void {
