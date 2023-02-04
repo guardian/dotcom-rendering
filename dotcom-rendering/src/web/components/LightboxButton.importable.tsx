@@ -522,6 +522,21 @@ export const LightboxButton = ({
 	isMainMedia,
 }: Props) => {
 	useEffect(() => {
+		/**
+		 * We only want to run this code once so we first check if there are any other
+		 * islands on the page that have already been hydrated (marked with gu-ready)
+		 */
+		const allIslands = document.querySelectorAll<HTMLElement>(
+			'gu-island[name="LightboxButton"]',
+		);
+		const alreadyHydrated = Array.from(allIslands).find((island) => {
+			// The island we're clicking on has already been marked as ready
+			const isIslandClickedOn =
+				island.querySelector('button')?.dataset.elementId === elementId;
+			return !isIslandClickedOn && island.dataset.guReady;
+		});
+		if (alreadyHydrated) return;
+
 		const lightbox =
 			document.querySelector<HTMLDialogElement>('dialog#gu-lightbox');
 		if (!lightbox) return;
@@ -554,7 +569,7 @@ export const LightboxButton = ({
 				initialiseLightbox(lightbox);
 			});
 		}
-	}, []);
+	}, [elementId]);
 
 	// Don't show the button over thumbnails; they're too small
 	if (role === 'thumbnail') return null;
