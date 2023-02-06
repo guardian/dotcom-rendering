@@ -30,6 +30,7 @@ export interface FENewslettersPageType {
 		[key: string]: string;
 	};
 	nav: CAPINavType;
+	pageFooter: FooterType;
 }
 
 export type DCRNewslettersPageType = {
@@ -52,6 +53,6 @@ export type DCRNewslettersPageType = {
 	};
 	config: ConfigType;
 	nav: CAPINavType;
-	footer: FooterType;
+	pageFooter: FooterType;
 	newsletters: Newsletter[];
 };

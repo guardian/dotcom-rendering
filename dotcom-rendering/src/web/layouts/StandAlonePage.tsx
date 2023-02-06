@@ -43,7 +43,7 @@ export const StandAlonePage = ({ children, model, nav }: Props) => {
 		renderAds,
 		subscribeUrl,
 		editionId,
-		footer,
+		pageFooter,
 		format,
 		contributionsServiceUrl: pageContributionsServiceUrl,
 		config,
@@ -188,7 +188,7 @@ export const StandAlonePage = ({ children, model, nav }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={footer}
+					pageFooter={pageFooter}
 					pillar={articleFormat.theme}
 					pillars={nav.pillars}
 					urls={nav.readerRevenueLinks.header}

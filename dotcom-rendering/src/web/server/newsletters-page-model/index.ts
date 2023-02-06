@@ -65,12 +65,12 @@ export const TEST_NEWSLETTERS_PAGE_DATA: FENewslettersPageType = {
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	config: STATIC_CONFIG,
 	nav: STATIC_NAV,
+	pageFooter: STATIC_FOOTER,
 };
 
 export const buildNewslettersPageModel = (
 	pageRequestData: FENewslettersPageType,
 ): DCRNewslettersPageType => ({
-	footer: STATIC_FOOTER,
 	...pageRequestData,
 	config: {
 		...STATIC_CONFIG,
@@ -81,8 +81,6 @@ export const buildNewslettersPageModel = (
 });
 
 export const provideTestNewslettersPageModel = (): DCRNewslettersPageType => ({
-	footer: STATIC_FOOTER,
 	...TEST_NEWSLETTERS_PAGE_DATA,
-	nav: STATIC_NAV,
 	config: STATIC_CONFIG,
 });
