@@ -4,6 +4,7 @@ import {
 	from,
 	headline,
 	line,
+	neutral,
 	space,
 	text,
 	textSans,
@@ -113,12 +114,18 @@ export const faqPersonalised = css`
 	padding-top: ${space[3]}px;
 	padding-bottom: 18px;
 	margin-top: ${space[5]}px;
-
 	& a {
 		display: block;
+		margin-top: ${space[6]}px;
 		margin-bottom: ${space[4]}px;
-		text-decoration-color: ${line.primary};
+		color: ${neutral[20]};
+		text-decoration-color: ${neutral[20]};
 		text-underline-position: under;
+	}
+
+	& a:hover {
+		color: ${neutral[20]};
+		text-decoration-color: ${neutral[20]};
 	}
 `;
 
