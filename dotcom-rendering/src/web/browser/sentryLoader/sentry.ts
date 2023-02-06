@@ -26,6 +26,7 @@ const ignoreErrors = [
 	'UnknownError',
 	'TypeError: Failed to fetch',
 	'TypeError: NetworkError when attempting to fetch resource',
+	'TypeError: Load failed',
 	'The quota has been exceeded',
 ];
 
