@@ -1,10 +1,9 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
-import {
-	breakpoints,
-	from,
-} from '@guardian/source-foundations';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
@@ -21,6 +20,7 @@ import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -28,8 +28,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { background } from 'palette';
-import { ArticleFormat } from '@guardian/libs';
 
 // ----- Styles ----- //
 

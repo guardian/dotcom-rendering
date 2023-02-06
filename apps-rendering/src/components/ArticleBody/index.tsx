@@ -54,12 +54,7 @@ const ArticleBody: FC<ArticleBodyProps> = ({
 }) => {
 	const classNames = className ? className : [];
 	return (
-		<div
-			css={[
-				styles(format),
-				...classNames,
-			]}
-		>
+		<div css={[styles(format), ...classNames]}>
 			{render(shouldHideAdverts, format, body)}
 		</div>
 	);

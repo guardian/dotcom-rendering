@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
@@ -24,6 +26,7 @@ import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -31,8 +34,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { background } from 'palette';
-import { ArticleFormat } from '@guardian/libs';
 
 // ----- Styles ----- //
 

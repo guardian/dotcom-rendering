@@ -15,8 +15,8 @@ import {
 	neutral,
 	news,
 	opinion,
-	specialReport,
 	palette,
+	specialReport,
 	sport,
 } from '@guardian/source-foundations';
 import type { Colour } from './colour';
@@ -43,11 +43,11 @@ const mediaArticleBody = (_format: ArticleFormat): Colour => {
 	return neutral[10];
 };
 
-const headline = ({ design, display, theme}: ArticleFormat): Colour => {
+const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 	if (display === ArticleDisplay.Immersive) {
 		return neutral[7];
 	}
-	
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[97];
