@@ -2,10 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	fill,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -24,6 +20,7 @@ import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
+import { background, fill } from 'palette';
 import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';

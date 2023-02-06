@@ -1,9 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, ThemeProvider } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -13,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
+import { background, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 
