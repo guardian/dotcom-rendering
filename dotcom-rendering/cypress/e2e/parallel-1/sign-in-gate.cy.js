@@ -260,6 +260,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/register?returnUrl=')
 				});
 
 				it('user is new and has a paper subscription', function () {
@@ -280,6 +281,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/register?returnUrl=')
 				});
 
 				it('user is new and is a contributor', function () {
@@ -300,6 +302,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/register?returnUrl=')
 				});
 
 				it('user is existing and has a digital subscription', function () {
@@ -320,6 +323,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/signin?returnUrl=')
 				});
 
 				it('user is existing and has a paper subscription', function () {
@@ -340,6 +344,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/signin?returnUrl=')
 				});
 
 				it('user is existing and is a contributor', function () {
@@ -360,6 +365,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/signin?returnUrl=')
 				});
 			});
 
@@ -373,6 +379,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should('have.attr', 'href').and('contains', '/signin?returnUrl=')
 				});
 			});
 		});
