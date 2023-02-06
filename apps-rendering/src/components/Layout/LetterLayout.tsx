@@ -1,12 +1,9 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import {
 	breakpoints,
 	from,
-	neutral,
-	opinion,
-	palette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
@@ -31,21 +28,20 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { background } from 'palette';
+import { ArticleFormat } from '@guardian/libs';
 
 // ----- Styles ----- //
 
-const Styles = css`
-	background: ${neutral[97]};
-`;
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	background: ${background.articleContent(format)};
 
-const DarkStyles = darkModeCss`
-	background: ${palette.neutral[10]}
+	${darkModeCss`
+		background: ${background.articleContentDark(format)};
+	`}
 `;
 
 const BorderStyles = css`
-	background: ${opinion[800]};
-	${darkModeCss`background: ${palette.neutral[10]};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -63,7 +59,7 @@ interface Props {
 const LetterLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	return (
-		<main css={[Styles, DarkStyles]}>
+		<main css={styles(format)}>
 			<article css={BorderStyles}>
 				<header>
 					<WithAgeWarning
