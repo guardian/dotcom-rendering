@@ -13,6 +13,9 @@ type KeysNotOnSimplePageConfig =
 	| 'webPublicationDate'
 	| 'dcrCouldRender';
 
+export type ConfigNotOnSimplePage = Pick<ConfigType, KeysNotOnSimplePageConfig>
+type SimplePageConfig = Omit<ConfigType, KeysNotOnSimplePageConfig>
+
 export interface FENewslettersPageType {
 	newsletters: Newsletter[];
 	id: string;
@@ -22,7 +25,7 @@ export interface FENewslettersPageType {
 	beaconURL: string;
 	webTitle: string;
 	description: string;
-	config: Omit<ConfigType, KeysNotOnSimplePageConfig>;
+	config: SimplePageConfig;
 	twitterData?: {
 		[key: string]: string;
 	};
