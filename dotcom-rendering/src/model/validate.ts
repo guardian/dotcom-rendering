@@ -53,10 +53,6 @@ export const validateAsNewslettersPageType = (
 	data: unknown,
 ): FENewslettersPageType => {
 	if (validateNewslettersPage(data)) return data;
-	console.log(
-		'validateNewslettersPage.errors',
-		validateNewslettersPage.errors,
-	);
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
 		${JSON.stringify(validateNewslettersPage.errors, null, 2)}`,
