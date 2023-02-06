@@ -165,7 +165,9 @@ BrazeEpic_DefaultWithReminder_Component.args = {
 	remindMeConfirmationHeaderText: 'Thank you! Your reminder is set.',
 };
 
-BrazeEpic_DefaultWithReminder_Component.story = { name: 'Default Epic with reminder' };
+BrazeEpic_DefaultWithReminder_Component.story = {
+	name: 'Default Epic with reminder',
+};
 
 // Braze Epic with special header
 // ---------------------------------------
@@ -306,7 +308,9 @@ BrazeNewsletterEpic_UK_MorningBriefing_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeNewsletterEpic_UK_MorningBriefing_Component.story = { name: 'Newsletter - UK - Morning Briefing' };
+BrazeNewsletterEpic_UK_MorningBriefing_Component.story = {
+	name: 'Newsletter - UK - Morning Briefing',
+};
 
 // Braze Newsletter Epic - US - FirstThing
 // ---------------------------------------
@@ -371,7 +375,9 @@ BrazeEpicNewsletter_US_FirstThing_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_US_FirstThing_Component.story = { name: 'Newsletter - US - First Thing' };
+BrazeEpicNewsletter_US_FirstThing_Component.story = {
+	name: 'Newsletter - US - First Thing',
+};
 
 // Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
@@ -436,7 +442,9 @@ BrazeEpicNewsletter_AUS_MorningMail_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_AUS_MorningMail_Component.story = { name: 'Newsletter - AUS - Morning Mail' };
+BrazeEpicNewsletter_AUS_MorningMail_Component.story = {
+	name: 'Newsletter - AUS - Morning Mail',
+};
 
 // Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
@@ -490,18 +498,20 @@ export const BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component = (
 };
 
 BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.args = {
-    slotName: 'EndOfArticle',
-    header: `Sign up for Guardian Australia's Afternoon Update`,
-    frequency: 'Every weekday',
-    paragraph1:
-        'Our Australian afternoon update breaks down the key stories of the day, telling you what’s happening and why it matters.',
-    paragraph2:
-        'We thought you should know this newsletter may contain information about Guardian products and services.',
-    componentName: 'EpicNewsletter_AU_AfternoonUpdate',
-    ophanComponentId: 'example_ophan_component_id',
+	slotName: 'EndOfArticle',
+	header: `Sign up for Guardian Australia's Afternoon Update`,
+	frequency: 'Every weekday',
+	paragraph1:
+		'Our Australian afternoon update breaks down the key stories of the day, telling you what’s happening and why it matters.',
+	paragraph2:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	componentName: 'EpicNewsletter_AU_AfternoonUpdate',
+	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.story = { name: 'Newsletter - AUS - Morning Mail' };
+BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.story = {
+	name: 'Newsletter - AUS - Morning Mail',
+};
 
 // Braze Newsletter Epic - DownToEarth
 // ---------------------------------------
@@ -622,14 +632,15 @@ export const BrazeEpicNewsletter_TheGuide_Component = (
 };
 
 BrazeEpicNewsletter_TheGuide_Component.args = {
-    slotName: 'EndOfArticle',
-    header: `Sign up for The Guide`,
-    frequency: 'Weekly',
-    paragraph1: 'Get our weekly pop culture email, free in your inbox every Friday.',
-    paragraph2:
-        'We thought you should know this newsletter may contain information about Guardian products and services.',
-    componentName: 'EpicNewsletter_TheGuide',
-    ophanComponentId: 'example_ophan_component_id',
+	slotName: 'EndOfArticle',
+	header: `Sign up for The Guide`,
+	frequency: 'Weekly',
+	paragraph1:
+		'Get our weekly pop culture email, free in your inbox every Friday.',
+	paragraph2:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	componentName: 'EpicNewsletter_TheGuide',
+	ophanComponentId: 'example_ophan_component_id',
 };
 
 BrazeEpicNewsletter_TheGuide_Component.story = {
