@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, palette, space, textSans } from '@guardian/source-foundations';
+import { headline, palette, success, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -9,10 +9,11 @@ import { FormField } from './FormField';
 
 const textStyles = css`
 	${textSans.xsmall()};
+	padding-bottom: 44px;
 `;
 
 const tickBoxStyles = css`
-	fill: ${brand[500]};
+	fill: ${success[400]};
 	width: 48px;
 `;
 const errorTextStyles = css`
@@ -170,7 +171,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 				</div>
 				<div
 					css={css`
-						${textSans.xsmall({ fontWeight: 'bold' })};
+						${headline.xxsmall({ fontWeight: 'bold' })}
 					`}
 				>
 					Thank you!

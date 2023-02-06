@@ -11,15 +11,9 @@ const wrapperStyles = css`
 	background-color: ${neutral[97]};
 `;
 
-const calloutDetailsStyles = css`
-	position: relative;
-	padding-bottom: ${space[2]}px;
-`;
-
 const summaryContentWrapper = css`
 	visibility: visible;
-	padding: ${space[2]}px;
-	padding-bottom: ${space[6]}px;
+	padding: 2px ${space[2]}px ${space[6]}px ${space[2]}px;
 `;
 
 const titleStyles = css`
@@ -69,7 +63,7 @@ export const CalloutBlock = ({
 	];
 
 	return (
-		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
+		<div id={formId} css={wrapperStyles}>
 			<div css={summaryContentWrapper}>
 				<div css={titleStyles}>Tell us</div>
 				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
