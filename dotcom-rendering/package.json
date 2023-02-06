@@ -36,12 +36,7 @@
 		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
 		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
 	},
-	"bundlesize": [
-		{
-			"path": "./dist/ga.*.js",
-			"maxSize": "21 kB"
-		}
-	],
+	"bundlesize": [],
 	"lint-staged": {
 		"*": "lint"
 	},
@@ -79,7 +74,7 @@
 		"@guardian/eslint-config": "^2.0.3",
 		"@guardian/eslint-config-typescript": "^2.0.0",
 		"@guardian/eslint-plugin-source-react-components": "^10.0.0",
-		"@guardian/libs": "^12.0.1",
+		"@guardian/libs": "^13.1.0",
 		"@guardian/prettier": "^2.1.5",
 		"@guardian/shimport": "^1.0.2",
 		"@guardian/source-foundations": "^7.0.1",

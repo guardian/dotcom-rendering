@@ -1,11 +1,9 @@
-import '../webpackPublicPath';
-import { startup } from '../startup';
 import { abTestPayload, record, recordPerformance } from './ophan';
 
 // side effect only
 import 'ophan-tracker-js';
 
-const init = (): Promise<void> => {
+export const ophan = (): Promise<void> => {
 	record({ experiences: 'dotcom-rendering' });
 	record({ edition: window.guardian.config.page.edition });
 
@@ -23,5 +21,3 @@ const init = (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('ophan', null, init);

@@ -1,17 +1,12 @@
-import {
-	cmp,
-	getConsentFor,
-	onConsentChange,
-} from '@guardian/consent-management-platform';
+import { cmp, onConsentChange } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { OphanAction, OphanComponentType } from '@guardian/libs';
-import { getCookie, loadScript, log } from '@guardian/libs';
-import { getLocaleCode } from '../../lib/getCountryCode';
-import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
-import { submitComponentEvent } from '../ophan/ophan';
-import { startup } from '../startup';
+import { getCookie, log } from '@guardian/libs';
+import { getLocaleCode } from '../lib/getCountryCode';
+import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
+import { submitComponentEvent } from './ophan/ophan';
 
-const init = async (): Promise<void> => {
+export const bootCmp = async (): Promise<void> => {
 	/**
 	 * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
 	 * mark: CONSENT_TIMING
@@ -87,29 +82,6 @@ const init = async (): Promise<void> => {
 		};
 
 		submitComponentEvent(event);
-
-		// Check if we have consent for GA so that if the reader removes consent for tracking we
-		// remove ga from the page
-		const consentGivenForGA = getConsentFor(
-			'google-analytics',
-			consentState,
-		);
-		if (consentGivenForGA) {
-			Promise.all([
-				loadScript('https://www.google-analytics.com/analytics.js'),
-				loadScript(window.guardian.gaPath),
-			])
-				.then(() => {
-					log('dotcom', 'GA script loaded');
-				})
-				.catch((e) => console.error(`GA - error: ${String(e)}`));
-		} else {
-			// Disable Google Analytics
-			// Note. We should never be able to directly set things to the global window object
-			// but in this case we want to stub things for testing, so it's ok to ignore this rule
-			// @ts-expect-error
-			window.ga = null;
-		}
 	});
 
 	document.onreadystatechange = () => {
@@ -135,5 +107,3 @@ const init = async (): Promise<void> => {
 
 	return Promise.resolve();
 };
-
-startup('bootCmp', null, init);

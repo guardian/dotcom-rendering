@@ -10,7 +10,6 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
@@ -70,6 +69,7 @@ import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
 import RichLink from 'components/RichLink';
 import { isElement, pipe } from 'lib';
+import { border, text } from 'palette';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';

@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import {
@@ -18,6 +17,7 @@ import Standfirst from 'components/Standfirst';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

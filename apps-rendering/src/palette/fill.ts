@@ -1,22 +1,18 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import {
-	ArticleDesign,
-	ArticleFormat,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
-	news,
-	lifestyle,
-	sport,
 	culture,
-	opinion,
 	labs,
-	specialReport,
+	lifestyle,
 	neutral,
+	news,
+	opinion,
+	specialReport,
+	sport,
 } from '@guardian/source-foundations';
-import { Colour } from '.';
+import type { Colour } from './colour';
 
 // ----- Functions ----- //
 
@@ -225,14 +221,16 @@ const richLinkDark = (_format: ArticleFormat): Colour => {
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ * This is applied server-side. When the page loads, client-side JS applies a
+ * class name that overrides this style.
  */
 const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ * This is applied server-side. When the page loads, client-side JS applies a
+ * class name that overrides this style.
  */
 const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
@@ -242,9 +240,11 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
+	neutral[7];
 
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[86];
 
 // ----- API ----- //
 

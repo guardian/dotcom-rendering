@@ -1,6 +1,4 @@
-import '../webpackPublicPath';
 import dynamicImportPolyfill from 'dynamic-import-polyfill';
-import { startup } from '../startup';
 
 // Provides an import function to use for dynamic imports. **Only works on
 // browsers that cut the mustard (support modules).**
@@ -29,7 +27,7 @@ const initialiseDynamicImportLegacy = () => {
 	);
 };
 
-const init = (): Promise<void> => {
+export const dynamicImport = (): Promise<void> => {
 	window.guardianPolyfilledImport = (url: string) =>
 		Promise.reject(
 			new Error(`import not polyfilled; attempted import(${url})`),
@@ -41,5 +39,3 @@ const init = (): Promise<void> => {
 
 	return initialiseDynamicImportLegacy();
 };
-
-startup('dynamicImport', null, init);

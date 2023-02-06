@@ -233,19 +233,33 @@ function reportNativeElementPositionChanges(): void {
 		attributeFilter: ['style'],
 	};
 	const callback = function (): void {
-		const currentAdSlots = getAdSlots();
-		const currentVideoSlots = getVideoSlots();
+		try {
+			const currentAdSlots = getAdSlots();
 
-		if (positionChanged(currentAdSlots, adSlots)) {
-			adSlots = currentAdSlots;
-			void commercialClient.updateAdverts(currentAdSlots);
+			if (positionChanged(currentAdSlots, adSlots)) {
+				adSlots = currentAdSlots;
+				void commercialClient.updateAdverts(currentAdSlots);
+			}
+		} catch (ex) {
+			logger.error('Exception updating ads');
 		}
 
-		if (positionChanged(currentVideoSlots, videoSlots)) {
-			videoSlots = currentVideoSlots;
-			void videoClient.updateVideos(currentVideoSlots);
+		try {
+			const currentVideoSlots = getVideoSlots();
+
+			if (positionChanged(currentVideoSlots, videoSlots)) {
+				videoSlots = currentVideoSlots;
+				void videoClient.updateVideos(currentVideoSlots);
+			}
+		} catch (ex) {
+			logger.error('Exception updating videos');
 		}
 	};
+
+	// After a 3 second wait, attempt to sync up positions again
+	// This is to fix bug with Youtube embeds being 50px higher than they should be
+	// on first load of page, on Android.
+	window.setTimeout(callback, 3000);
 
 	let currentAnimationFrame: number | null = null;
 	window.addEventListener(
