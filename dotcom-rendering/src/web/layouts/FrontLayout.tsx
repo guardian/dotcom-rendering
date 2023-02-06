@@ -151,15 +151,15 @@ const decideAdSlot = (
 
 const linkStyle = css`
 	text-decoration: none;
-	font-size: 1em;
+	font-size: 16px;
 	top: 0;
-	line-height: 1rem;
-	color: #121212;
+	line-height: 16px;
+	color: ${neutral[7]};
 	&:after {
-		color: #dcdcdc;
-		font-size: 1em;
+		color: ${neutral[86]};
+		font-size: 16px;
 		pointer-events: none;
-		margin: 0.35em;
+		margin: 2.56px;
 		content: '/';
 	}
 	&:last-of-type {
@@ -170,11 +170,13 @@ const linkStyle = css`
 `;
 
 const topicLabel = css`
-	font-size: 0.75rem;
-	line-height: 1rem;
-	font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-		'Lucida Grande', sans-serif;
-	color: #999;
+	font-size: 13.6px;
+	line-height: 22px;
+	color: ${neutral[60]};
+`;
+
+const trendingTopicContainer = css`
+	padding-top: 30px;
 `;
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -473,21 +475,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				padSides={true}
 				showTopBorder={false}
 			>
+				<div css={trendingTopicContainer}></div>
 				<StraightLines
 					cssOverrides={css`
 						display: block;
 					`}
 					count={4}
 				/>
-			</Section>
-			<Section
-				fullWidth={true}
-				backgroundColour={palette.background.article}
-				padSides={true}
-				showTopBorder={false}
-			>
 				<div css={topicLabel}>Topics</div>
-				{front.trendingTopics?.map((tag, ind) => {
+				{/* TODO: Add allpath link
+				https://github.com/guardian/frontend/blob/c7ddab98017f9c97e2fa2a3715de526bd02d576b/common/app/model/PressedPage.scala#L131-L131 */}
+				{front.trendingTopics?.map((tag) => {
 					return (
 						<>
 							<a href={tag.properties.webUrl} css={linkStyle}>
