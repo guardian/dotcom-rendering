@@ -7,11 +7,7 @@ import {
 import type { DCRNewslettersPageType } from '../../../types/newslettersPage';
 import { pageTemplate } from '../pageTemplate';
 import { buildWindowGuardian } from './makeWindowGuardian';
-import {
-	getGaPath,
-	getLowPriorityScriptTags,
-	getPriorityScriptTags,
-} from './scriptTags';
+import { getScriptTags } from './scriptTags';
 
 export const populatePageTemplate = (
 	model: DCRNewslettersPageType,
@@ -32,34 +28,29 @@ export const populatePageTemplate = (
 		config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	// eslint-disable-next-line @typescript-eslint/unbound-method -- because
+	// eslint-disable-next-line @typescript-eslint/unbound-method -- function does not need binding
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
 
-	const priorityScriptTags = getPriorityScriptTags(
+	const scriptTags = getScriptTags(
 		offerHttp3,
 		shouldServeVariantBundle,
+		config.commercialBundleUrl,
+		false,
 	);
-	const lowPriorityScriptTags = getLowPriorityScriptTags(
-		offerHttp3,
-		shouldServeVariantBundle,
-	);
-	const gaPath = getGaPath(shouldServeVariantBundle);
 
 	const windowGuardian = buildWindowGuardian(model);
 
 	return pageTemplate({
 		linkedData: {},
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title: webTitle,
 		description,
 		windowGuardian,
-		gaPath,
 		ampLink: undefined,
 		openGraphData,
 		twitterData,
