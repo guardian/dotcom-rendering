@@ -43,6 +43,7 @@ export const CalloutBlockComponent = ({
 					<ExpandingWrapper
 						name={`${callout.formId} form`}
 						renderExtra={() => <Deadline until={activeUntil} />}
+						collapsedHeight={'180px'}
 					>
 						<CalloutBlock
 							formId={id}
