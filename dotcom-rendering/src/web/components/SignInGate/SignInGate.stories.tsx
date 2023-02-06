@@ -3,6 +3,7 @@ import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
+import type { CheckoutCompleteCookieData } from './types';
 
 export default {
 	component: SignInGateSelector,
@@ -84,15 +85,41 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = () => {
 				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				// TODO add controls for these args
-				checkoutCompleteCookieData={{
-					userType: 'new',
-					product: 'DigitalPack',
-				}}
+				checkoutCompleteCookieData={
+					signInGateMainCheckoutCompletePersonalisedCopy.args
+						.newAndDigital
+				}
 			/>
 		</Section>
 	);
 };
 signInGateMainCheckoutCompletePersonalisedCopy.story = {
 	name: 'main_checkout_complete_personalised',
+};
+
+signInGateMainCheckoutCompletePersonalisedCopy.args = {
+	newAndDigital: {
+		userType: 'new',
+		product: 'DigitalPack',
+	} as CheckoutCompleteCookieData,
+	newAndPrint: {
+		userType: 'new',
+		product: 'Paper',
+	} as CheckoutCompleteCookieData,
+	newAndContributor: {
+		userType: 'new',
+		product: 'Contribution',
+	} as CheckoutCompleteCookieData,
+	existingAndDigital: {
+		userType: 'current',
+		product: 'DigitalPack',
+	} as CheckoutCompleteCookieData,
+	existingAndPrint: {
+		userType: 'current',
+		product: 'Paper',
+	} as CheckoutCompleteCookieData,
+	existingAndContributor: {
+		userType: 'current',
+		product: 'Contribution',
+	} as CheckoutCompleteCookieData,
 };
