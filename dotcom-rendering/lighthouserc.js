@@ -47,7 +47,7 @@ module.exports = {
 						],
 						'categories:accessibility': [
 							'error',
-							{ minScore: 0.97 },
+							{ minScore: 0.98 },
 						],
 					},
 				},
@@ -60,7 +60,7 @@ module.exports = {
 						],
 						'categories:accessibility': [
 							'warn',
-							{ minScore: 0.97 },
+							{ minScore: 0.98 },
 						],
 					},
 				},
