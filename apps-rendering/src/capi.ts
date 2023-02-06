@@ -306,6 +306,27 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							],
 						},
 					],
+					contacts: [
+						{
+							name: 'whatsapp',
+							value: '+447766780300',
+							urlPrefix: 'https://wa.me/',
+							guidance:
+								'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian',
+						},
+						{
+							name: 'signal',
+							value: '+447766780300',
+							urlPrefix: 'https://signal.me/#p/',
+						},
+						{
+							name: 'telegram',
+							value: '+1234',
+							urlPrefix: 'https://telegram.me/',
+							guidance:
+								'https://www.theguardian.com/info/2022/mar/15/telegram-sharing-stories-with-the-guardian',
+						},
+					],
 					formUrl:
 						'https://guardiannewsandmedia.formstack.com/forms/breaking_news_event',
 				},
