@@ -77,7 +77,9 @@ fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
 
-export const signInGateMainCheckoutCompletePersonalisedCopy = () => {
+export function signInGateMainCheckoutCompletePersonalisedCopy(
+	args: CheckoutCompleteCookieData,
+) {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateMainCheckoutComplete
@@ -85,14 +87,11 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = () => {
 				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				checkoutCompleteCookieData={
-					signInGateMainCheckoutCompletePersonalisedCopy.args
-						.newAndDigital
-				}
+				checkoutCompleteCookieData={args}
 			/>
 		</Section>
 	);
-};
+}
 signInGateMainCheckoutCompletePersonalisedCopy.story = {
 	name: 'main_checkout_complete_personalised',
 };
