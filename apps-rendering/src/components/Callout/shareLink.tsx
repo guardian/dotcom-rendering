@@ -1,17 +1,17 @@
 import {
 	Button,
-	SvgShareCallout,
+	SvgShare,
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { calloutShare, calloutSharelink, sharePopup } from './styles';
+import { calloutShare, calloutSharelink, sharePopup, shareIcon } from './styles';
 
 export const ShareLink: FC<{
 	title: string;
 	urlAnchor: string;
 }> = ({ title, urlAnchor }) => {
-	const [isCopied, setIsCopied] = useState(false);
+	const [isCopied, setIsCopied] = useState(true);
 
 	const onShare = async (): Promise<void> => {
 		const url = window.location.href;
@@ -45,9 +45,12 @@ You can share your story by using the form on this article, or by contacting the
 		return <></>;
 
 	return (
-		<span css={calloutShare}>
-			<SvgShareCallout size="medium" />
-			Know others that are affected?
+		<div css={calloutShare}>
+			<span css={shareIcon}>
+					<SvgShare size="small" />
+			</span>
+			<div>
+			Know others that are affected?{' '}
 			<Button
 				size="xsmall"
 				priority="subdued"
@@ -62,6 +65,7 @@ You can share your story by using the form on this article, or by contacting the
 					</span>
 				)}
 			</Button>
-		</span>
+			</div>
+		</div>
 	);
 };

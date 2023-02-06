@@ -13,7 +13,7 @@ import {
 	bold,
 	calloutLinkContainer,
 	calloutPrimaryButton,
-	success,
+	successMessage,
 } from './styles';
 
 interface CalloutFormProps {
@@ -125,7 +125,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 	return (
 		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
-				<div css={success}>
+				<div css={successMessage}>
 					<div>
 						<SvgTickRound size="medium" />
 					</div>
