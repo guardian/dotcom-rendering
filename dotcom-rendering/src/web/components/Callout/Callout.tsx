@@ -19,6 +19,7 @@ const calloutDetailsStyles = css`
 const summaryContentWrapper = css`
 	visibility: visible;
 	padding: ${space[2]}px;
+	padding-bottom: ${space[6]}px;
 `;
 
 const titleStyles = css`

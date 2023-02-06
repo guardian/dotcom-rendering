@@ -10,7 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
-	SvgShareCallout,
+	SvgShare,
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
@@ -103,30 +103,36 @@ const shareCalloutTextStyles = css`
 
 const shareCalloutLinkStyles = css`
 	color: ${brand[500]};
-	border-bottom: 1px solid ${brand[500]};
-	text-decoration: none;
 	font-weight: normal;
-	margin: 0 ${space[1]}px;
+	${textSans.xsmall()}
 `;
 
-const tooltipStyles = css`
+const sharePopupStyles = css`
 	${textSans.xsmall()};
 	position: absolute;
 	display: flex;
 	align-items: center;
 	min-width: 180px;
-	bottom: -20px;
+	transform: translate(100%, 0);
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};
 	font-weight: normal;
-	border-radius: 4px;
+	border-radius: ${space[1]}px;
 	z-index: 1;
 	padding: 0 ${space[1]}px 0 0;
-	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0.125rem ${space[2]}px rgba(0, 0, 0, 0.5);
 
 	> svg {
 		fill: ${success[400]};
 	}
+`;
+const shareIconStyles = css`
+	display: inline-flex;
+	margin-right: ${space[2]}px;
+	border-radius: 50%;
+	border: 1px solid ${brand[500]};
+	box-sizing: border-box;
+	fill: ${brand[500]};
 `;
 
 export const CalloutShare = ({
@@ -158,9 +164,7 @@ export const CalloutShare = ({
 			});
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 3000);
-		}
-
-		if ('clipboard' in navigator) {
+		} else if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 3000);
@@ -173,15 +177,11 @@ export const CalloutShare = ({
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<div
-					css={css`
-						width: 45px;
-					`}
-				>
-					<SvgShareCallout />
-				</div>
+				<span css={shareIconStyles}>
+					<SvgShare size="small" />
+				</span>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{'   '}
+					Know others who are affected?{' '}
 					<Button
 						size="xsmall"
 						priority="subdued"
@@ -191,10 +191,10 @@ export const CalloutShare = ({
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<div css={tooltipStyles} role="alert">
+						<span css={sharePopupStyles} role="alert">
 							<SvgTickRound size="medium" />
 							Link copied to clipboard
-						</div>
+						</span>
 					)}
 				</div>
 			</div>
