@@ -19,7 +19,7 @@ import {
 	laterButton,
 	privacyLink,
 	registerButton,
-	signInGateContainer
+	signInGateContainer,
 } from './shared';
 
 // HEADER TEXT

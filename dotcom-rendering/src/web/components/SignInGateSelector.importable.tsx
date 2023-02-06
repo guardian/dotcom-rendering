@@ -2,6 +2,7 @@ import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
+import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -14,10 +15,6 @@ import {
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
-import {
-	isCheckoutCompleteCookieData,
-	safeJsonParse,
-} from './SignInGate/types';
 import type {
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
@@ -83,7 +80,7 @@ const generateSignInUrl = ({
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
 		componentType: 'signingate',
-		componentId: componentId,
+		componentId,
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		browserId:
@@ -158,18 +155,9 @@ export const SignInGateSelector = ({
 		shouldMemoize: true,
 	});
 
-	const getCheckoutCompleteCookieData = (
-		checkoutCompleteStr: string,
-	): CheckoutCompleteCookieData | undefined => {
-		const parseResult = safeJsonParse(isCheckoutCompleteCookieData)(
-			decodeURIComponent(checkoutCompleteStr),
-		);
-		return !parseResult.hasError ? parseResult.parsed : undefined;
-	};
-
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
 		checkOutCompleteString !== null
-			? getCheckoutCompleteCookieData(checkOutCompleteString)
+			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation
 

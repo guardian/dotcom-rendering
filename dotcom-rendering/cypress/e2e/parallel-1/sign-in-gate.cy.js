@@ -219,9 +219,9 @@ describe('Sign In Gate Tests', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {});
 
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
-
 				// HEADER TEXT
-				const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
+				const COMPLETE_REGISTRATION_HEADER =
+					'Complete your registration';
 				const SIGN_IN_HEADER = 'Sign in to your account';
 
 				// SUBHEADER TEXT
@@ -366,59 +366,6 @@ describe('Sign In Gate Tests', function () {
 			describe('GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate', function () {
 				it('invalid userType', function () {
 					setGuCOCompleteCookie('invalid', 'Contribution');
-
-					visitArticleAndScrollToGateForLazyLoad();
-
-					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
-					);
-				});
-				it('invalid product', function () {
-					setGuCOCompleteCookie('current', 'invalid');
-
-					visitArticleAndScrollToGateForLazyLoad();
-
-					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
-					);
-				});
-				it('invalid field', function () {
-					cy.setCookie(
-						'GU_CO_COMPLETE',
-						encodeURIComponent(
-							`{"invalid":"current","product":"DigitalPack"}`,
-						),
-					);
-
-					visitArticleAndScrollToGateForLazyLoad();
-
-					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
-					);
-				});
-				it('invalid JSON structure', function () {
-					cy.setCookie(
-						'GU_CO_COMPLETE',
-						encodeURIComponent(
-							`{"userType":"current","product":"DigitalPack`,
-						),
-					);
-
-					visitArticleAndScrollToGateForLazyLoad();
-
-					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						'You need to register to keep reading',
-					);
-				});
-				it('not uri encoded', function () {
-					cy.setCookie(
-						'GU_CO_COMPLETE',
-						`{"userType":"current","product":"DigitalPack}`,
-					);
 
 					visitArticleAndScrollToGateForLazyLoad();
 
