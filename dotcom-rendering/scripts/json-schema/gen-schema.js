@@ -2,7 +2,11 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const fs = require('fs');
-const { getArticleSchema, getFrontSchema, getNewsletterPageSchema } = require('./get-schema');
+const {
+	getArticleSchema,
+	getFrontSchema,
+	getNewsletterPageSchema,
+} = require('./get-schema');
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
