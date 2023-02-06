@@ -63,7 +63,7 @@ export const MessageUs = () => {
 				target="blank"
 				nudgeIcon={false}
 			>
-				Message us on Whatsapp
+				Message us on WhatsApp
 			</LinkButton>
 			<LinkButton
 				data-ignore="global-link-styling"

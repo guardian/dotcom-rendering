@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { headline, palette, success, space, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette,
+	space,
+	success,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -214,6 +220,8 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						context="Please complete all required fields."
 						cssOverrides={css`
 							width: fit-content;
+							width: 100%;
+							margin-bottom: 16px;
 						`}
 					/>
 				)}
