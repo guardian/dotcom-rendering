@@ -68,7 +68,9 @@ export const CalloutBlock = ({
 		<div id={formId} css={wrapperStyles}>
 			<div css={summaryContentWrapper}>
 				<div css={titleStyles}>Share your experience</div>
-				{!isNonCollapsible && <h4 css={subtitleTextHeaderStyles}>{heading}</h4>}
+				{!isNonCollapsible && (
+					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				)}
 				<CalloutDescription description={description} />
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>
