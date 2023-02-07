@@ -33,13 +33,13 @@ export const formatContactNumbers = (contacts: Contact[]): string => {
 const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 	const contactText = (
 		<p css={[info, calloutLinkContainer]}>
-			{formatContactNumbers(contacts)}
+			{formatContactNumbers(contacts)}.
 		</p>
 	);
 
 	// If any of the contacts have guidance, display it in a readable string.
 	const guidanceText = (
-		<p css={[info, calloutLinkContainer]}>
+		<span css={[info, calloutLinkContainer]}>
 			For more information, please see our guidance on{' '}
 			{contacts.map(
 				(contact, i) =>
@@ -53,23 +53,21 @@ const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 						</>
 					),
 			)}
-		</p>
+		</span>
 	);
 
 	const secureDropText = (
-		<p css={[info, calloutLinkContainer]}>
+		<span css={[info, calloutLinkContainer]}>
 			For true anonymity please use our{' '}
 			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
 			service instead.
-		</p>
+		</span>
 	);
 
 	return (
 		<>
 			{contactText}
-			{contacts.some((c) => !!c.guidance) && guidanceText}
-
-			{secureDropText}
+			{contacts.some((c) => !!c.guidance) && guidanceText} {secureDropText}
 		</>
 	);
 };
