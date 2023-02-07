@@ -4,7 +4,9 @@ import type { FC } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 
 export const formatContactType = (s: string): string =>
-	s.toLowerCase() === 'whatsapp' ? 'WhatsApp' : s.charAt(0).toUpperCase() + s.slice(1);
+	s.toLowerCase() === 'whatsapp'
+		? 'WhatsApp'
+		: s.charAt(0).toUpperCase() + s.slice(1);
 
 export const formatContactNumbers = (contacts: Contact[]): string => {
 	const contactNumbers = new Map<string, string[]>();
