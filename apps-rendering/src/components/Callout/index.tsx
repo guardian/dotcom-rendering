@@ -72,7 +72,7 @@ const Callout: FC<CalloutProps> = ({
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
-						collapsedHeight={'180px'}
+						collapsedHeight={'160px'}
 					>
 						<CalloutBlock
 							formId={formId}
