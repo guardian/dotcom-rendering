@@ -11,7 +11,7 @@ templates:
       amiParameter: AMIMobileappsrendering
       amiEncrypted: true
       amiTags:
-        Recipe: bionic-mobile-node-ARM
+        Recipe: focal-mobile-node16-ARM
         AmigoStage: PROD
 deployments:
   mobile-apps-rendering-cfn:
