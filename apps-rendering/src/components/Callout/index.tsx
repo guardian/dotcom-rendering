@@ -53,6 +53,7 @@ const Callout: FC<CalloutProps> = ({
 						format={format}
 						description={description}
 						contacts={contacts}
+						isNonCollapsible={isNonCollapsible}
 					/>
 					<span
 						css={css`
@@ -80,6 +81,7 @@ const Callout: FC<CalloutProps> = ({
 							format={format}
 							description={description}
 							contacts={contacts}
+							isNonCollapsible={isNonCollapsible}
 						/>
 					</ExpandingWrapper>
 				</ThemeProvider>

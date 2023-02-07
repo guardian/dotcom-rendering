@@ -34,7 +34,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		{},
 	);
 	const [submissionError, setSubmissionError] = useState<string>('');
-	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(true);
+	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
 
 	const setFieldInFormData = (
 		id: string,
