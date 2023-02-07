@@ -11,7 +11,6 @@ type Props = {
 const starsWrapper = css`
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
-	padding: 1px 1px 0 1px;
 `;
 
 export const StarRatingBlockComponent = ({ rating, size }: Props) => (
