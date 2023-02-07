@@ -4,6 +4,7 @@ import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
 import type { CheckoutCompleteCookieData } from './types';
+import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
 
 export default {
 	component: SignInGateSelector,
@@ -77,9 +78,9 @@ fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
 
-export function signInGateMainCheckoutCompletePersonalisedCopy(
+export const signInGateMainCheckoutCompletePersonalisedCopy = (
 	args: CheckoutCompleteCookieData,
-) {
+) => {
 	return (
 		<Section fullWidth={true}>
 			<SignInGateMainCheckoutComplete
@@ -91,34 +92,26 @@ export function signInGateMainCheckoutCompletePersonalisedCopy(
 			/>
 		</Section>
 	);
-}
+};
 signInGateMainCheckoutCompletePersonalisedCopy.story = {
 	name: 'main_checkout_complete_personalised',
 };
 
-signInGateMainCheckoutCompletePersonalisedCopy.args = {
-	newAndDigital: {
-		userType: 'new',
-		product: 'DigitalPack',
-	} as CheckoutCompleteCookieData,
-	newAndPrint: {
-		userType: 'new',
-		product: 'Paper',
-	} as CheckoutCompleteCookieData,
-	newAndContributor: {
-		userType: 'new',
-		product: 'Contribution',
-	} as CheckoutCompleteCookieData,
-	existingAndDigital: {
-		userType: 'current',
-		product: 'DigitalPack',
-	} as CheckoutCompleteCookieData,
-	existingAndPrint: {
-		userType: 'current',
-		product: 'Paper',
-	} as CheckoutCompleteCookieData,
-	existingAndContributor: {
-		userType: 'current',
-		product: 'Contribution',
-	} as CheckoutCompleteCookieData,
+const defaultCheckoutCompleteCookieData: CheckoutCompleteCookieData = {
+	userType: 'new',
+	product: 'DigitalPack',
+};
+
+signInGateMainCheckoutCompletePersonalisedCopy.args =
+	defaultCheckoutCompleteCookieData;
+
+signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
+	userType: {
+		options: ALL_USER_TYPES,
+		control: { type: 'radio' },
+	},
+	product: {
+		options: ALL_PRODUCTS,
+		control: { type: 'radio' },
+	},
 };

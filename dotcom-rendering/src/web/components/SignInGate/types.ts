@@ -24,7 +24,7 @@ export type SignInGateComponent = {
 // Other option is to use an enum, though there are downside to this:
 // https://dev.to/azure/the-dangers-of-typescript-enums-55pd
 
-const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
+export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 type UserTypeTuple = typeof ALL_USER_TYPES;
 export type UserType = UserTypeTuple[number];
 
@@ -32,7 +32,7 @@ export function isUserType(value: unknown): value is UserType {
 	return ALL_USER_TYPES.includes(value as UserType);
 }
 
-const ALL_PRODUCTS = [
+export const ALL_PRODUCTS = [
 	'Contribution',
 	'DigitalPack',
 	'Paper',
