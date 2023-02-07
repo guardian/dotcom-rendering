@@ -204,6 +204,12 @@
 		"react-dom": "^17.0.2",
 		"react-google-recaptcha": "^2.1.0",
 		"regenerator-runtime": "^0.13.7",
+		"rehype-autolink-headings": "^6.1.1",
+		"rehype-slug": "^5.1.0",
+		"rehype-stringify": "^9.0.3",
+		"remark-html": "^15.0.2",
+		"remark-parse": "^10.0.1",
+		"remark-rehype": "^10.1.0",
 		"require-from-string": "^2.0.2",
 		"response-time": "^2.3.2",
 		"rimraf": "^3.0.2",
@@ -225,6 +231,7 @@
 		"ts-unused-exports": "^8.0.0",
 		"tslib": "^2.4.0",
 		"typescript-json-schema": "^0.54.0",
+		"unified": "^10.1.2",
 		"uuid": "^8.3.2",
 		"web-vitals": "^2.1.0",
 		"webpack": "^5.51.1",
@@ -240,7 +247,8 @@
 		"webpack-merge": "^5.7.3",
 		"webpack-messages": "^2.0.4",
 		"webpack-node-externals": "^3.0.0",
-		"webpack-sources": "^3.2.3"
+		"webpack-sources": "^3.2.3",
+		"zod": "^3.20.2"
 	},
 	"resolutions": {
 		"@types/serve-static": "^1.13.9"
