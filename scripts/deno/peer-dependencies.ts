@@ -54,12 +54,6 @@ const { dcr, ar, cr } = (
 					dcr: acc.dcr.concat(line),
 				};
 
-			case '@guardian/common-rendering':
-				return {
-					...acc,
-					cr: acc.cr.concat(line),
-				};
-
 			case '@guardian/apps-rendering':
 				return {
 					...acc,
@@ -77,10 +71,6 @@ ${dcr.length ? dcr.join('\n') : '- [X] all peer deps matched!'}
 
 ### apps-rendering
 ${ar.length ? ar.join('\n') : '- [X] all peer deps matched!'}
-
-### common-rendering
-${cr.length ? cr.join('\n') : '- [X] all peer deps matched!'}
-`;
 
 if (!octokit) {
 	console.log(body);
