@@ -78,6 +78,10 @@ export const calloutPrimaryButton = css`
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};
+
+		:hover {
+			background: ${neutral[100]};
+		}
 	`}
 `;
 
