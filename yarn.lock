@@ -2266,10 +2266,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-2.0.3.tgz#1c8b832ab564b257f8146ca1b3183b7683026ec9"
   integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
 
-"@guardian/commercial-core@^5.2.1":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-5.2.1.tgz#8b36cea466f4232f1bc06df9fe1efbbfd141d089"
-  integrity sha512-IH5K9j1DUXyDXoFsp6Ve+/wMkzmcislfU3Hh6y4TM8L5INmxoUnRETiySjEjP2uVY6FLhrxYqQqgXd8rbnAOKg==
+"@guardian/commercial-core@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-5.3.0.tgz#0ed7af879ad45e118669936ff061810be4286fcd"
+  integrity sha512-yr00+HugqSium9ZPoN4W85ck2lGnQ8P/M/wGf3NmjwCVtnmv9AmrjNWlVieSxyORxBFu2YDgGD6SUo1FkgR1sA==
   dependencies:
     type-fest "2.12.2"
 
