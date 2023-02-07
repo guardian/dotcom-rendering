@@ -38,7 +38,7 @@ const determineSize = (size: RatingSizeType) => {
 };
 
 const determineBreakpoint = (breakpoint: Breakpoint | undefined) =>
-	breakpoint !== undefined ? breakpoint : '';
+	breakpoint === undefined ? 'all-breakpoints' : breakpoint;
 
 type Props = {
 	rating: number;
