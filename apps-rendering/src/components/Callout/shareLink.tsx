@@ -11,7 +11,7 @@ export const ShareLink: FC<{
 	title: string;
 	urlAnchor: string;
 }> = ({ title, urlAnchor }) => {
-	const [isCopied, setIsCopied] = useState(true);
+	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
 		const url = window.location.href;

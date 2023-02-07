@@ -85,15 +85,17 @@ export const calloutPrimaryButton = css`
 export const successMessage = css`
 	${textSans.small()};
 	svg {
-		fill: ${brand[400]};
+		fill: ${success[400]};
+		width: 48px;
 
 		${darkModeCss`
-		fill: ${sport[400]};
+		fill: ${success[500]};
 		`}
 	}
 `;
-export const bold = css`
-	${textSans.small({ fontWeight: 'bold' })}
+
+export const heading = css`
+	${headline.xxsmall({ fontWeight: 'bold' })}
 `;
 
 // Callout Share Link Styles

@@ -10,9 +10,9 @@ import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
 import {
-	bold,
 	calloutLinkContainer,
 	calloutPrimaryButton,
+	heading,
 	successMessage,
 } from './styles';
 
@@ -34,7 +34,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		{},
 	);
 	const [submissionError, setSubmissionError] = useState<string>('');
-	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
+	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(true);
 
 	const setFieldInFormData = (
 		id: string,
@@ -126,16 +126,20 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
 				<div css={successMessage}>
-					<div>
-						<SvgTickRound size="medium" />
-					</div>
-					<p css={bold}>Thank you!</p>
-					<p>Your story has been submitted successfully.</p>
-					<p>
-						One of our journalists will be in touch if we wish to
-						take your submission further.
-					</p>
+				<div>
+					<SvgTickRound />
 				</div>
+				<div
+					css={heading}
+				>
+					Thank you!
+				</div>
+				<div>
+					Your story has been submitted successfully. One of our
+					journalists will be in touch if we wish to take your
+					submission further.
+				</div>
+			</div>
 			) : (
 				<form
 					method="post"
