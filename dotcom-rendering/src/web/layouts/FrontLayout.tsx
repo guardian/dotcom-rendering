@@ -177,6 +177,7 @@ const topicLabel = css`
 
 const trendingTopicContainer = css`
 	padding-top: 30px;
+	padding-bottom: 20px;
 `;
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -472,28 +473,29 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<Section
 				fullWidth={true}
 				backgroundColour={palette.background.article}
-				padSides={true}
 				showTopBorder={false}
 			>
-				<div css={trendingTopicContainer}></div>
-				<StraightLines
-					cssOverrides={css`
-						display: block;
-					`}
-					count={4}
-				/>
-				<div css={topicLabel}>Topics</div>
-				{/* TODO: Add allpath link
-				https://github.com/guardian/frontend/blob/c7ddab98017f9c97e2fa2a3715de526bd02d576b/common/app/model/PressedPage.scala#L131-L131 */}
-				{front.trendingTopics?.map((tag) => {
-					return (
-						<>
-							<a href={tag.properties.webUrl} css={linkStyle}>
+				<div css={trendingTopicContainer}>
+					<StraightLines
+						cssOverrides={css`
+							display: block;
+						`}
+						count={4}
+					/>
+					<div css={topicLabel}>Topics</div>
+					{/* TODO: Add allpath link */}
+					{front.trendingTopics?.map((tag) => {
+						return (
+							<a
+								key={tag.properties.webTitle}
+								href={tag.properties.webUrl}
+								css={linkStyle}
+							>
 								{tag.properties.webTitle}
 							</a>
-						</>
-					);
-				})}
+						);
+					})}
+				</div>
 			</Section>
 
 			<Section
