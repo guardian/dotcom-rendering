@@ -7,14 +7,15 @@ import type {
 } from '../types';
 import {
 	actionButtons,
-	bodyBold,
 	bodySeparator,
-	bodyText,
 	faqPersonalised,
 	firstParagraphOverlay,
-	headingStyles,
 	hideElementsCss,
 	laterButton,
+	personalisedBodyBold,
+	personalisedBodyList,
+	personalisedBodyTextList,
+	personalisedHeadingStyles,
 	registerButton,
 	signInGateContainer,
 } from './shared';
@@ -95,11 +96,15 @@ export const SignInGateMainCheckoutComplete = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>{getHeadingText(product)} </h1>
-			<p css={[bodySeparator, bodyBold]}>{SIGN_IN_PROMPT}</p>
-			<ul css={bodyText}>
+			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)} </h1>
+			<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
+			<ul css={personalisedBodyList}>
 				{getBodyText(product).map((item) => {
-					return <li key={item}>{item}</li>;
+					return (
+						<li css={personalisedBodyTextList} key={item}>
+							{item}
+						</li>
+					);
 				})}
 			</ul>
 			<div css={actionButtons}>

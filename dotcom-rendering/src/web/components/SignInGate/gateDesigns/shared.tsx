@@ -29,6 +29,15 @@ export const headingStyles = css`
 	}
 `;
 
+export const personalisedHeadingStyles = css`
+	font-family: 'GH Guardian Headline';
+	${headline.small({ fontWeight: 'bold' })};
+	border-top: 2px ${brand[400]} solid;
+	${from.phablet} {
+		padding-right: 160px;
+		${headline.medium({ fontWeight: 'bold' })};
+	}
+`;
 export const bodySeparator = css`
 	border-top: 1px ${line.primary} solid;
 `;
@@ -41,6 +50,15 @@ export const bodyBold = css`
 	}
 `;
 
+export const personalisedBodyBold = css`
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
+	${from.phablet} {
+		padding-right: 130px;
+	}
+	color: ${brand[400]};
+	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
+`;
 export const bodyText = css`
 	${textSans.medium({ lineHeight: 'regular' })}
 	padding-bottom: ${space[6]}px;
@@ -50,6 +68,23 @@ export const bodyText = css`
 	}
 `;
 
+export const personalisedBodyTextList = css`
+	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
+	font-family: 'GH Guardian Headline';
+	padding-bottom: ${space[2]}px;
+	color: black;
+`;
+export const personalisedBodyList = css`
+	list-style: none;
+
+	li::before {
+		content: '•';
+		color: ${brand[400]};
+		display: inline-block;
+		width: 2em;
+		height: 2em;
+	}
+`;
 export const signInHeader = css`
 	padding-bottom: 0;
 `;
