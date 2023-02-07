@@ -226,7 +226,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						cssOverrides={css`
 							width: fit-content;
 							width: 100%;
-							margin-bottom: 16px;
+							margin-bottom: ${space[4]}px;
 						`}
 					/>
 				)}

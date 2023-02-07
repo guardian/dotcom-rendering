@@ -120,7 +120,7 @@ const sharePopupStyles = css`
 	border-radius: ${space[1]}px;
 	z-index: 1;
 	padding: 0 ${space[1]}px 0 0;
-	box-shadow: 0px 0.125rem ${space[2]}px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 2px ${space[2]}px rgba(0, 0, 0, 0.5);
 
 	> svg {
 		fill: ${success[400]};
