@@ -260,7 +260,7 @@ export default {
 	parameters: {
 		layout: 'fullscreen',
 		chromatic: {
-			diffThreshold: 0.4,
+			diffThreshold: 0.063,
 			viewports: [
 				breakpoints.mobile,
 				breakpoints.tablet,
