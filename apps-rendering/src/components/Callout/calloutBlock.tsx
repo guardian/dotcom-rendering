@@ -28,6 +28,7 @@ export interface CalloutBlockProps {
 	format: ArticleFormat;
 	description?: DocumentFragment;
 	contacts?: Contact[];
+	isNonCollapsible: boolean;
 }
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
@@ -37,6 +38,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 	contacts,
+	isNonCollapsible,
 }): ReactElement => {
 	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
@@ -60,8 +62,10 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	return (
 		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer]}>
-				<div css={calloutTitle}>Tell Us</div>
-				<h4 css={calloutHeadingText}>{heading}</h4>
+				<div css={calloutTitle}>Share your experience</div>
+				{!isNonCollapsible && (
+					<h4 css={calloutHeadingText}>{heading}</h4>
+				)}
 				{description && (
 					<div css={calloutDescription}>
 						{renderCalloutDescriptionText(format, description)}

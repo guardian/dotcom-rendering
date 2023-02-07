@@ -3,8 +3,10 @@ import { LinkButton } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 
-const capitalizeFirstLetter = (s: string): string =>
-	s.charAt(0).toUpperCase() + s.slice(1);
+export const formatContactType = (s: string): string =>
+	s.toLowerCase() === 'whatsapp'
+		? 'WhatsApp'
+		: s.charAt(0).toUpperCase() + s.slice(1);
 
 export const formatContactNumbers = (contacts: Contact[]): string => {
 	const contactNumbers = new Map<string, string[]>();
@@ -20,7 +22,7 @@ export const formatContactNumbers = (contacts: Contact[]): string => {
 	return [...contactNumbers.entries()].reduce(
 		(acc, [value, names], index) => {
 			const namesString = names
-				.map((name) => capitalizeFirstLetter(name))
+				.map((name) => formatContactType(name))
 				.join(' or ');
 			return (
 				acc + (index === 0 ? '' : ' or ') + `${namesString} at ${value}`
@@ -33,13 +35,13 @@ export const formatContactNumbers = (contacts: Contact[]): string => {
 const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 	const contactText = (
 		<p css={[info, calloutLinkContainer]}>
-			{formatContactNumbers(contacts)}
+			{formatContactNumbers(contacts)}.
 		</p>
 	);
 
 	// If any of the contacts have guidance, display it in a readable string.
 	const guidanceText = (
-		<p css={[info, calloutLinkContainer]}>
+		<span css={[info, calloutLinkContainer]}>
 			For more information, please see our guidance on{' '}
 			{contacts.map(
 				(contact, i) =>
@@ -47,28 +49,27 @@ const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 						<>
 							<a key={i} href={contact.guidance}>
 								contacting us via{' '}
-								{capitalizeFirstLetter(contact.name)}
+								{formatContactType(contact.name)}
 							</a>
 							{i === contacts.length - 1 ? '.' : ', '}
 						</>
 					),
 			)}
-		</p>
+		</span>
 	);
 
 	const secureDropText = (
-		<p css={[info, calloutLinkContainer]}>
+		<span css={[info, calloutLinkContainer]}>
 			For true anonymity please use our{' '}
 			<a href="https://www.theguardian.com/securedrop">SecureDrop</a>{' '}
 			service instead.
-		</p>
+		</span>
 	);
 
 	return (
 		<>
 			{contactText}
-			{contacts.some((c) => !!c.guidance) && guidanceText}
-
+			{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
 			{secureDropText}
 		</>
 	);
@@ -91,7 +92,7 @@ const CalloutContact: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 							target="_blank"
 							rel="noopener"
 						>
-							Message us on {capitalizeFirstLetter(contact.name)}
+							Message us on {formatContactType(contact.name)}
 						</LinkButton>
 					);
 				}
