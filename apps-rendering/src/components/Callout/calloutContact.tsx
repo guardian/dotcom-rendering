@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { calloutLinkContainer, calloutPrimaryButton, info } from './styles';
 
 const capitalizeFirstLetter = (s: string): string =>
-	s.charAt(0).toUpperCase() + s.slice(1);
+	s === 'whatsapp' ? 'WhatsApp' : s.charAt(0).toUpperCase() + s.slice(1);
 
 export const formatContactNumbers = (contacts: Contact[]): string => {
 	const contactNumbers = new Map<string, string[]>();
@@ -67,7 +67,8 @@ const Disclaimer: FC<{ contacts: Contact[] }> = ({ contacts }) => {
 	return (
 		<>
 			{contactText}
-			{contacts.some((c) => !!c.guidance) && guidanceText} {secureDropText}
+			{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
+			{secureDropText}
 		</>
 	);
 };

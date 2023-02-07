@@ -63,7 +63,9 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer]}>
 				<div css={calloutTitle}>Share your experience</div>
-				{!isNonCollapsible && <h4 css={calloutHeadingText}>{heading}</h4>}
+				{!isNonCollapsible && (
+					<h4 css={calloutHeadingText}>{heading}</h4>
+				)}
 				{description && (
 					<div css={calloutDescription}>
 						{renderCalloutDescriptionText(format, description)}

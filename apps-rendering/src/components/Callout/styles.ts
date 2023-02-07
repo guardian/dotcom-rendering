@@ -127,6 +127,11 @@ export const shareIcon = css`
 	border: 1px solid ${brand[500]};
 	box-sizing: border-box;
 	fill: ${brand[500]};
+
+	${darkModeCss`
+		fill: ${neutral[86]};
+		border-color: ${neutral[86]};
+	`}
 `;
 
 export const sharePopup = css`

@@ -126,20 +126,16 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
 				<div css={successMessage}>
-				<div>
-					<SvgTickRound />
+					<div>
+						<SvgTickRound />
+					</div>
+					<div css={heading}>Thank you!</div>
+					<div>
+						Your story has been submitted successfully. One of our
+						journalists will be in touch if we wish to take your
+						submission further.
+					</div>
 				</div>
-				<div
-					css={heading}
-				>
-					Thank you!
-				</div>
-				<div>
-					Your story has been submitted successfully. One of our
-					journalists will be in touch if we wish to take your
-					submission further.
-				</div>
-			</div>
 			) : (
 				<form
 					method="post"
