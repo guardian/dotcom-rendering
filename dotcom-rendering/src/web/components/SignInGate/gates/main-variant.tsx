@@ -52,7 +52,7 @@ export const signInGateComponent: SignInGateComponent = {
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
 					{showCheckoutCompletePersonalisation &&
-					checkoutCompleteCookieData !== undefined ? (
+					checkoutCompleteCookieData ? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}

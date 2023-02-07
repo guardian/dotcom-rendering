@@ -227,7 +227,6 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	//  TODO add to cypress tests for cta url qp
 	const personalisedComponentId = (
 		id?: string,
 		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
