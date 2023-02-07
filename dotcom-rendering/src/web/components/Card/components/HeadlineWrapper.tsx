@@ -6,7 +6,7 @@ type Props = {
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	imageUrl?: string;
-	starRating?: number;
+	hasStarRating?: boolean;
 };
 
 export const HeadlineWrapper = ({
@@ -14,7 +14,7 @@ export const HeadlineWrapper = ({
 	imagePosition,
 	imagePositionOnMobile,
 	imageUrl,
-	starRating,
+	hasStarRating,
 }: Props) => (
 	<div
 		css={css`
@@ -24,7 +24,7 @@ export const HeadlineWrapper = ({
 			padding-top: ${imageUrl &&
 			imagePositionOnMobile &&
 			imagePositionOnMobile === 'left' &&
-			starRating
+			hasStarRating
 				? '0px'
 				: '1px'};
 			flex-grow: 1;
@@ -37,7 +37,7 @@ export const HeadlineWrapper = ({
 				padding-top: ${imageUrl &&
 				imagePosition &&
 				imagePosition === 'left' &&
-				starRating
+				hasStarRating
 					? '0px'
 					: '1px'};
 			}

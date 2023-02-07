@@ -402,7 +402,7 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 						imagePosition={imagePosition}
 						imageUrl={imageUrl}
-						starRating={starRating}
+						hasStarRating={starRating !== undefined}
 					>
 						<CardHeadline
 							headlineText={headlineText}
