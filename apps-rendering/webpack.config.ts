@@ -121,7 +121,7 @@ const serverConfig = (
 									[
 										'@babel/preset-env',
 										{
-											targets: { node: '14' },
+											targets: { node: '16' },
 										},
 									],
 								],
