@@ -1,5 +1,14 @@
-import { formatContactNumbers } from './calloutContact';
+import { formatContactType, formatContactNumbers } from './calloutContact';
 import type { Contact } from '@guardian/apps-rendering-api-models/contact';
+
+describe('formatContactType', () => {
+	it('treats whatsapp as a special case', () => {
+		expect(formatContactType('whatsapp')).toEqual('WhatsApp');
+	});
+	it('capitalises the first letter of a string', () => {
+		expect(formatContactType('test')).toEqual('Test');
+	});
+});
 
 describe('formatContactNumbers', () => {
 	it('formats contact names into a readable string', () => {
