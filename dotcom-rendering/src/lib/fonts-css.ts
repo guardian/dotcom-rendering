@@ -1,3 +1,5 @@
+import { getHttp3Url } from '../web/lib/getHttp3Url';
+
 type FontFamily =
 	| 'GH Guardian Headline'
 	| 'Guardian Egyptian Web' // Legacy of GH Guardian Headline
@@ -247,36 +249,31 @@ const fontList: FontDisplay[] = [
 	},
 ];
 
-const assetsUrl = (path: string): string =>
-	`https://assets.guim.co.uk/static/frontend/${path}`;
-
-const template: (_: FontDisplay) => string = ({
-	family,
-	woff2,
-	woff,
-	ttf,
-	weight,
-	style,
-}) => `
-    @font-face {
-        font-family: "${family}";
-        src: url(${assetsUrl(woff2)}) format("woff2"),
-                url(${assetsUrl(woff)}) format("woff"),
-                url(${assetsUrl(ttf)}) format("truetype");
-        font-weight: ${weight};
-        font-style: ${style};
-        font-display: swap;
-    }
-`;
-
-const getStyleString: () => string = () => {
-	return fontList.reduce(
-		(styleString, font) => `${styleString}${template(font)}`,
-		'',
-	);
-};
-
 const minifyCssString = (css: string) =>
 	css.replace(/\n/g, '').replace(/\s\s+/g, ' ');
 
-export const getFontsCss = (): string => minifyCssString(getStyleString());
+export const getFontsCss = (offerHttp3 = false): string => {
+	let fontCss = '';
+
+	for (const font of fontList) {
+		if (offerHttp3) {
+			font.woff2 = getHttp3Url(font.woff2);
+			font.woff = getHttp3Url(font.woff);
+			font.ttf = getHttp3Url(font.ttf);
+		}
+
+		fontCss += `
+			@font-face {
+				font-family: "${font.family}";
+				src: url(${font.woff2}) format("woff2"),
+						url(${font.woff}) format("woff"),
+						url(${font.ttf}) format("truetype");
+				font-weight: ${font.weight};
+				font-style: ${font.style};
+				font-display: swap;
+			}
+		`;
+	}
+
+	return minifyCssString(fontCss);
+};
