@@ -25,10 +25,12 @@ import {
 // HEADER TEXT
 const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
 const SIGN_IN_HEADER = 'Sign in to your account';
+const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
 
 // SUBHEADER TEXT
 const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
 const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
+const SIGN_IN_PROMPT = 'Remember to sign in for a better experience';
 
 // BODY TEXT
 const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
@@ -39,18 +41,29 @@ const SIGN_IN_BODY_ADS_INCENTIVE =
 	'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
 const SIGN_IN_BODY_NO_ADS_INCENTIVE =
 	'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
+const SIGN_IN_INCENTIVES_DIGITAL = [
+	'Ad free',
+	'Fewer interruptions',
+	'Newsletters and comments',
+];
+const SIGN_IN_INCENTIVES_NON_DIGITAL = [
+	'Fewer interruptions',
+	'Newsletters and comments',
+	'Manage your account',
+];
 
 // BUTTON TEXT
 const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
 const SIGN_IN_BUTTON = 'Sign in';
 
-const getHeadingText: (userType: UserType) => string = (userType) => {
-	const headingMap: Record<UserType, string> = {
-		new: COMPLETE_REGISTRATION_HEADER,
-		guest: COMPLETE_REGISTRATION_HEADER,
-		current: SIGN_IN_HEADER,
+const getHeadingText: (product: Product) => string = (product) => {
+	const headingMap: Record<Product, string> = {
+		DigitalPack: SUBSCRIPTION_HEADER,
+		Paper: SUBSCRIPTION_HEADER,
+		GuardianWeekly: SUBSCRIPTION_HEADER,
+		Contribution: SUBSCRIPTION_HEADER,
 	};
-	return headingMap[userType];
+	return headingMap[product];
 };
 
 const getSubHeadingText: (product: Product) => string = (product) => {
@@ -63,33 +76,14 @@ const getSubHeadingText: (product: Product) => string = (product) => {
 	return subHeadingMap[product];
 };
 
-const getBodyText: (
-	checkoutCompleteCookieData: CheckoutCompleteCookieData,
-) => string = (checkoutCompleteCookieData) => {
-	const newOrGuestUserBodyMap: Record<Product, string> = {
-		DigitalPack: COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE,
-		Paper: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
-		Contribution: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
-		GuardianWeekly: COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE,
+const getBodyText: (product: Product) => string[] = (product) => {
+	const currentUserBodyMap: Record<Product, string[]> = {
+		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
+		Paper: SIGN_IN_INCENTIVES_DIGITAL,
+		Contribution: SIGN_IN_INCENTIVES_DIGITAL,
+		GuardianWeekly: SIGN_IN_INCENTIVES_DIGITAL,
 	};
-
-	const currentUserBodyMap: Record<Product, string> = {
-		DigitalPack: SIGN_IN_BODY_ADS_INCENTIVE,
-		Paper: SIGN_IN_BODY_NO_ADS_INCENTIVE,
-		Contribution: SIGN_IN_BODY_NO_ADS_INCENTIVE,
-		GuardianWeekly: SIGN_IN_BODY_NO_ADS_INCENTIVE,
-	};
-
-	const { userType, product } = checkoutCompleteCookieData;
-
-	switch (userType) {
-		case 'new':
-			return newOrGuestUserBodyMap[product];
-		case 'guest':
-			return newOrGuestUserBodyMap[product];
-		case 'current':
-			return currentUserBodyMap[product];
-	}
+	return currentUserBodyMap[product];
 };
 
 const getButtonText: (userType: UserType) => string = (userType) => {
@@ -125,23 +119,13 @@ export const SignInGateMainCheckoutComplete = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={headingStyles}>{getHeadingText(userType)} </h1>
-			<p css={[bodySeparator, bodyBold]}>{getSubHeadingText(product)}</p>
-			<p css={bodyText}>
-				{getBodyText(checkoutCompleteCookieData)}
-				You’ll always be able to control your own{' '}
-				<button
-					data-cy="sign-in-gate-main_privacy"
-					css={privacyLink}
-					onClick={() => {
-						cmp.showPrivacyManager();
-						trackLink(ophanComponentId, 'privacy', abTest);
-					}}
-				>
-					privacy settings
-				</button>
-				.
-			</p>
+			<h1 css={headingStyles}>{getHeadingText(product)} </h1>
+			<p css={[bodySeparator, bodyBold]}>{SIGN_IN_PROMPT}</p>
+			<ul css={bodyText}>
+				{getBodyText(product).map((item) => {
+					return <li key={item}>{item}</li>;
+				})}
+			</ul>
 			<div css={actionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-main_register"

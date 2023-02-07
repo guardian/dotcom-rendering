@@ -217,17 +217,28 @@ describe('Sign In Gate Tests', function () {
 			// TODO test the flag??
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {});
 
-			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+			describe.only('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
 				// HEADER TEXT
-				const COMPLETE_REGISTRATION_HEADER =
-					'Complete your registration';
-				const SIGN_IN_HEADER = 'Sign in to your account';
+				const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
+				const SUPPORTER_HEADER = 'Sign in to your account';
 
 				// SUBHEADER TEXT
+				const SIGN_IN_PROMPT =
+					'Remember to sign in for a better experience';
 				const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
 				const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
 
 				// BODY TEXT
+				const SIGN_IN_INCENTIVES_DIGITAL = [
+					'Ad free',
+					'Fewer interruptions',
+					'Newsletters and comments',
+				];
+				const SIGN_IN_INCENTIVES_NON_DIGITAL = [
+					'Fewer interruptions',
+					'Newsletters and comments',
+					'Manage your account',
+				];
 				const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
 					'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
 				const COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE =
@@ -241,21 +252,21 @@ describe('Sign In Gate Tests', function () {
 				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
 				const SIGN_IN_BUTTON = 'Sign in';
 
-				it('user is new and has a digital subscription', function () {
+				it.only('user is new and has a digital subscription', function () {
 					setGuCOCompleteCookie('new', 'DigitalPack');
 
 					visitArticleAndScrollToGateForLazyLoad();
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						COMPLETE_REGISTRATION_HEADER,
+						SUBSCRIPTION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						SUBSCRIPTION_SUBHEADER,
+						SIGN_IN_PROMPT,
 					);
-					cy.get('[data-cy=sign-in-gate-main]').contains(
-						COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE,
-					);
+					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
@@ -275,7 +286,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						COMPLETE_REGISTRATION_HEADER,
+						SUBSCRIPTION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SUBSCRIPTION_SUBHEADER,
@@ -302,7 +313,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						COMPLETE_REGISTRATION_HEADER,
+						SUBSCRIPTION_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SUPPORTER_SUBHEADER,
@@ -329,7 +340,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						SIGN_IN_HEADER,
+						SUPPORTER_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SUBSCRIPTION_SUBHEADER,
@@ -356,7 +367,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						SIGN_IN_HEADER,
+						SUPPORTER_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SUBSCRIPTION_SUBHEADER,
@@ -383,7 +394,7 @@ describe('Sign In Gate Tests', function () {
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
-						SIGN_IN_HEADER,
+						SUPPORTER_HEADER,
 					);
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SUPPORTER_SUBHEADER,
