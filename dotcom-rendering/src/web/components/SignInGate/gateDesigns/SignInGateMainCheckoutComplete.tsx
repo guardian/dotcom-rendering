@@ -1,8 +1,6 @@
-import { cmp } from '@guardian/consent-management-platform';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
 import type {
-	CheckoutCompleteCookieData,
 	Product,
 	SignInGatePropsWithCheckoutCompleteCookieData,
 	UserType,
@@ -17,30 +15,18 @@ import {
 	headingStyles,
 	hideElementsCss,
 	laterButton,
-	privacyLink,
 	registerButton,
 	signInGateContainer,
 } from './shared';
 
 // HEADER TEXT
-const COMPLETE_REGISTRATION_HEADER = 'Complete your registration';
-const SIGN_IN_HEADER = 'Sign in to your account';
 const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
+const SUPPORTER_HEADER = 'Thank you for your support';
 
 // SUBHEADER TEXT
-const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
-const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
 const SIGN_IN_PROMPT = 'Remember to sign in for a better experience';
 
 // BODY TEXT
-const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
-	'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
-const COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE =
-	'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
-const SIGN_IN_BODY_ADS_INCENTIVE =
-	'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
-const SIGN_IN_BODY_NO_ADS_INCENTIVE =
-	'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
 const SIGN_IN_INCENTIVES_DIGITAL = [
 	'Ad free',
 	'Fewer interruptions',
@@ -61,27 +47,17 @@ const getHeadingText: (product: Product) => string = (product) => {
 		DigitalPack: SUBSCRIPTION_HEADER,
 		Paper: SUBSCRIPTION_HEADER,
 		GuardianWeekly: SUBSCRIPTION_HEADER,
-		Contribution: SUBSCRIPTION_HEADER,
+		Contribution: SUPPORTER_HEADER,
 	};
 	return headingMap[product];
-};
-
-const getSubHeadingText: (product: Product) => string = (product) => {
-	const subHeadingMap: Record<Product, string> = {
-		DigitalPack: SUBSCRIPTION_SUBHEADER,
-		Paper: SUBSCRIPTION_SUBHEADER,
-		GuardianWeekly: SUBSCRIPTION_SUBHEADER,
-		Contribution: SUPPORTER_SUBHEADER,
-	};
-	return subHeadingMap[product];
 };
 
 const getBodyText: (product: Product) => string[] = (product) => {
 	const currentUserBodyMap: Record<Product, string[]> = {
 		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
-		Paper: SIGN_IN_INCENTIVES_DIGITAL,
-		Contribution: SIGN_IN_INCENTIVES_DIGITAL,
-		GuardianWeekly: SIGN_IN_INCENTIVES_DIGITAL,
+		Paper: SIGN_IN_INCENTIVES_NON_DIGITAL,
+		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL,
+		GuardianWeekly: SIGN_IN_INCENTIVES_NON_DIGITAL,
 	};
 	return currentUserBodyMap[product];
 };
