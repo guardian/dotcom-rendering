@@ -15,6 +15,11 @@ import { FormField } from './FormField';
 
 const textStyles = css`
 	${textSans.xsmall()};
+	padding-bottom: 16px;
+`;
+
+const successStyles = css`
+	${textSans.xsmall()};
 	padding-bottom: 44px;
 `;
 
@@ -182,7 +187,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 				>
 					Thank you!
 				</div>
-				<div css={textStyles}>
+				<div css={successStyles}>
 					Your story has been submitted successfully. One of our
 					journalists will be in touch if we wish to take your
 					submission further.
