@@ -60,7 +60,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		window
 			.guardianPolyfilledImport(url)
 			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- required for dynamic import
 				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
 			})
 			.catch((err) => {

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
 import { Placeholder } from './Placeholder';
 
 interface HydrateProps {
@@ -77,6 +75,7 @@ export const Island = ({
 	children,
 }: Props) => (
 	<gu-island
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- Type definitions on children are limited
 		name={children.type.name}
 		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}

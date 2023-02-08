@@ -44,6 +44,7 @@ const useIsInView = (
 			observer.current.disconnect();
 		}
 
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety for browser support
 		if (window.IntersectionObserver) {
 			observer.current = new window.IntersectionObserver(
 				intersectionCallback,

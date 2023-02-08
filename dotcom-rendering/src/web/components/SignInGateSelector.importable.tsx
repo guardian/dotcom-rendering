@@ -224,6 +224,7 @@ export const SignInGateSelector = ({
 					format={format}
 					abTest={currentTest}
 					componentId={componentId}
+					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
