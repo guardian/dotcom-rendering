@@ -63,6 +63,8 @@ export const Article = ({
 	experimentsData,
 	permutive: { projectId, apiKey, payload },
 }: ArticleProps) => {
+	console.log("WHAT IS CONFIG")
+	console.log(config)
 	return (
 		<ContentABTestProvider
 			switches={config.switches}

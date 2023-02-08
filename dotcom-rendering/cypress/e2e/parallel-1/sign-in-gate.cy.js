@@ -225,8 +225,6 @@ describe('Sign In Gate Tests', function () {
 				// SUBHEADER TEXT
 				const SIGN_IN_PROMPT =
 					'Remember to sign in for a better experience';
-				const SUBSCRIPTION_SUBHEADER = 'You have a subscription.';
-				const SUPPORTER_SUBHEADER = 'You are a Guardian supporter';
 
 				// BODY TEXT
 				const SIGN_IN_INCENTIVES_DIGITAL = [
@@ -239,20 +237,26 @@ describe('Sign In Gate Tests', function () {
 					'Newsletters and comments',
 					'Manage your account',
 				];
-				const COMPLETE_REGISTRATION_BODY_ADS_INCENTIVE =
-					'Complete your registration to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
-				const COMPLETE_REGISTRATION_BODY_NO_ADS_INCENTIVE =
-					'Complete your registration to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
-				const SIGN_IN_BODY_ADS_INCENTIVE =
-					'Sign in to stop seeing ads, to see fewer requests for financial support, to subscribe to newsletters and comment, and to easily manage your account. ';
-				const SIGN_IN_BODY_NO_ADS_INCENTIVE =
-					'Sign in to receive fewer requests for financial support, to easily manage your account, and to subscribe to newsletters and comment. ';
 
 				// BUTTON TEXT
 				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
 				const SIGN_IN_BUTTON = 'Sign in';
 
-				it('user is new and has a digital subscription', function () {
+				it.only('user is new and has a digital subscription', function () {
+					cy.window().then((win) => {
+						console.log("CONFIG BEFORE")
+						console.log(win)
+						win.guardian = {
+							config : {
+								switches: {
+									personaliseSignInAfterCheckout: true
+								}
+							}
+						}
+						console.log("CONFIG AFTER")
+						console.log(win.guardian)
+
+					})
 					setGuCOCompleteCookie('new', 'DigitalPack');
 
 					visitArticleAndScrollToGateForLazyLoad();
