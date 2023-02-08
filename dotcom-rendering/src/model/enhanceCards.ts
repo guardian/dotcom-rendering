@@ -193,6 +193,8 @@ export const enhanceCards = (
 			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href
 				: faciaCard.header.url;
+		console.log("enhance.ts")
+		console.log(faciaCard.cardStyle)
 
 		return {
 			format,
@@ -240,5 +242,6 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
+			cardStyle: faciaCard.cardStyle,
 		};
 	});

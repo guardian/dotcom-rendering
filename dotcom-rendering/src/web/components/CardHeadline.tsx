@@ -35,6 +35,7 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
+	cardStyle?: {type: string};
 };
 
 const fontStyles = ({
@@ -212,32 +213,27 @@ const WithLink = ({
 }) => {
 	if (linkTo && isExternalLink) {
 		return (
-			<>
-				<Link
-					href={linkTo}
-					target="_blank"
-					cssOverrides={
+			<Link
+				href={linkTo}
+				target="_blank"
+				rel='external'
+				cssOverrides={
 						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 					}
 				>
-					{children}
-				</Link>
-				<span>external link</span>
-			</>
+				{children}
+			</Link>
 		);
 	} else if (linkTo) {
 		return (
-			<>
-				<Link
-					href={linkTo}
-					cssOverrides={
+			<Link
+				href={linkTo}
+				cssOverrides={
 						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 					}
 				>
-					{children}
-				</Link>
-				<span>not external</span>
-			</>
+				{children}
+			</Link>
 		);
 	}
 	return <>{children}</>;
@@ -251,16 +247,19 @@ this works if the decideIfExternal function does - have confirmed using the kick
 the external link logic isn't working, not sure if linkto is the best to use and maybe cardstyle is.
  */
 
-const decideIfExternalLink = (linkTo: string) => {
-	if (linkTo.includes('www.theguardian.com')) {
-		return false;
-	} else {
-		return true;
-	}
-};
+// const decideIfExternalLink = (linkTo: string) => {
+// 	if (linkTo.includes('www.theguardian.com')) {
+// 		return false;
+// 	} else {
+// 		return true;
+// 	}
+// };
 
 /** Matches headlines starting with short words of 1 to 3 letters followed by a space */
 const isFirstWordShort = /^(\w{1,3}) \b/;
+
+const decideLinkType = (cardStyle?: {type: string}) => 
+{if (cardStyle == undefined || cardStyle.type == 'ExternalLink') {return true} else return false}
 
 export const CardHeadline = ({
 	headlineText,
@@ -277,6 +276,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
+	cardStyle,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -285,7 +285,23 @@ export const CardHeadline = ({
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
-	const isExternalLink = linkTo ? decideIfExternalLink(linkTo) : false;
+	const isExternalLink = decideLinkType(cardStyle)
+	console.log("NEW CARD")
+	console.log(headlineText)
+	console.log(format)
+	console.log(containerPalette)
+	console.log(showQuotes)
+	console.log(kickerText)
+	console.log(showPulsingDot)
+	console.log(hideLineBreak)
+	console.log(size)
+	console.log(sizeOnMobile)
+	console.log(byline)
+	console.log(showByline)
+	console.log(showLine)
+	console.log(linkTo)
+	console.log(isDynamo)
+	console.log(cardStyle)
 	return (
 		<>
 			<h3
