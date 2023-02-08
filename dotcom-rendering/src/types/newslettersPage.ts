@@ -13,12 +13,11 @@ type KeysNotOnSimplePageConfig =
 	| 'webPublicationDate'
 	| 'dcrCouldRender';
 
-export type ConfigNotOnSimplePage = Pick<ConfigType, KeysNotOnSimplePageConfig>
-type SimplePageConfig = Omit<ConfigType, KeysNotOnSimplePageConfig>
+type SimplePageConfig = Omit<ConfigType, KeysNotOnSimplePageConfig>;
 
 export interface FENewslettersPageType {
-	newsletters: Newsletter[];
 	id: string;
+	newsletters: Newsletter[];
 	editionId: EditionId;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
@@ -34,28 +33,12 @@ export interface FENewslettersPageType {
 	};
 	nav: CAPINavType;
 	pageFooter: FooterType;
+	canonicalUrl: string;
 }
 
-export type DCRNewslettersPageType = {
-	webTitle: string;
-	description?: string;
-	canonicalUrl?: string;
+export type DCRNewslettersPageType = FENewslettersPageType & {
 	sectionName?: string;
 	format?: CAPIFormat;
-	editionId: EditionId;
 	tags?: TagType[];
 	renderAds?: boolean;
-	subscribeUrl: string;
-	contributionsServiceUrl: string;
-	beaconURL: string;
-	twitterData?: {
-		[key: string]: string;
-	};
-	openGraphData?: {
-		[key: string]: string;
-	};
-	config: ConfigType;
-	nav: CAPINavType;
-	pageFooter: FooterType;
-	newsletters: Newsletter[];
 };

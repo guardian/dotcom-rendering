@@ -1,6 +1,9 @@
 {
     "type": "object",
     "properties": {
+        "id": {
+            "type": "string"
+        },
         "newsletters": {
             "type": "array",
             "items": {
@@ -46,9 +49,6 @@
                 ]
             }
         },
-        "id": {
-            "type": "string"
-        },
         "editionId": {
             "$ref": "#/definitions/EditionId"
         },
@@ -68,7 +68,7 @@
             "type": "string"
         },
         "config": {
-            "$ref": "#/definitions/Omit<ConfigType,KeysNotOnSimplePageConfig>"
+            "$ref": "#/definitions/SimplePageConfig"
         },
         "twitterData": {
             "type": "object",
@@ -84,10 +84,17 @@
         },
         "nav": {
             "$ref": "#/definitions/CAPINavType"
+        },
+        "pageFooter": {
+            "$ref": "#/definitions/FooterType"
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
         "beaconURL",
+        "canonicalUrl",
         "config",
         "contributionsServiceUrl",
         "description",
@@ -95,6 +102,7 @@
         "id",
         "nav",
         "newsletters",
+        "pageFooter",
         "subscribeUrl",
         "webTitle"
     ],
@@ -109,7 +117,7 @@
             ],
             "type": "string"
         },
-        "Omit<ConfigType,KeysNotOnSimplePageConfig>": {
+        "SimplePageConfig": {
             "type": "object",
             "properties": {
                 "section": {
@@ -455,6 +463,45 @@
                 "subscribe",
                 "support",
                 "supporter"
+            ]
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
             ]
         }
     },
