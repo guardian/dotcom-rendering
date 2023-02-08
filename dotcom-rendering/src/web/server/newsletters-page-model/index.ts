@@ -4,7 +4,6 @@ import type {
 } from '../../../types/newslettersPage';
 import { TEST_NEWSLETTERS_PAGE_DATA } from './defaultData';
 
-
 export const buildNewslettersPageModel = (
 	pageRequestData: FENewslettersPageType,
 ): DCRNewslettersPageType => ({

@@ -50,7 +50,7 @@ export const StandAlonePage = ({ children, model, nav }: Props) => {
 	} = model;
 	const articleFormat: ArticleFormat = decideFormat(format ?? {});
 
-	const renderAds = !isAdFreeUser
+	const renderAds = !isAdFreeUser;
 
 	const isInEuropeTest =
 		config.abTests.europeNetworkFrontVariant === 'variant';
