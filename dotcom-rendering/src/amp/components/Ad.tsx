@@ -1,11 +1,7 @@
 import type { CommercialProperties } from '../../types/commercial';
 import type { EditionId } from '../../web/lib/edition';
 import { adJson, stringify } from '../lib/ad-json';
-import {
-	AdType,
-	getRTCParameters,
-	RTCParameters,
-} from '../lib/real-time-config';
+import type { AdType } from '../lib/real-time-config';
 import { realTimeConfig } from '../lib/real-time-config';
 
 // Largest size first
@@ -48,27 +44,6 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
-const pubmaticRealTimeConfig = (
-	usePrebid: boolean,
-	usePermutive: boolean,
-	useAmazon: boolean,
-	adType: AdType,
-): string => {
-	const { profileId, pubId } = getRTCParameters(adType);
-	const pubmaticConfig = {
-		openwrap: {
-			PROFILE_ID: profileId,
-			PUB_ID: pubId,
-		},
-	};
-
-	return realTimeConfig({
-		vendors: usePrebid ? pubmaticConfig : {},
-		usePermutive,
-		useAmazon,
-	});
-};
-
 interface CommercialConfig {
 	usePrebid: boolean;
 	usePermutive: boolean;
@@ -104,7 +79,7 @@ export const Ad = ({
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	// TODO compute RTC directly in here!
-	const rtcConfig = pubmaticRealTimeConfig(
+	const rtcConfig = realTimeConfig(
 		usePrebid,
 		usePermutive,
 		useAmazon,
