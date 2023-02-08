@@ -21,9 +21,7 @@ jobs:
 
             - name: install
               run: yarn --frozen-lockfile
-              working-directory: apps-rendering
             - name: run
-              working-directory: apps-rendering
               run: |
                   npm install -g ngrok
                   npm run watch &

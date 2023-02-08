@@ -24,16 +24,3 @@ updates:
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
       open-pull-requests-limit: 7
-    - package-ecosystem: "npm"
-      directory: "/dotcom-rendering"
-      schedule:
-        interval: "daily"
-      labels:
-        - "DCR Dependency"
-      open-pull-requests-limit: 10
-      rebase-strategy: "disabled"
-    - package-ecosystem: 'github-actions'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      rebase-strategy: "disabled"
