@@ -84,6 +84,10 @@ const BlockByline: FC<{
 							height: 2.25rem;
 							width: 2.25rem;
 							background-color: ${background.avatar(format)};
+
+							${darkModeCss`
+								background-color: ${background.avatarDark(format)};
+							`}
 						`}
 					/>
 				</div>
