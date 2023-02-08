@@ -87,7 +87,7 @@ export const hasUserDismissedGate = (
 	try {
 		const prefs = getSigninGatePrefsSafely();
 		// checks if a dismissal occurred within a given window timeframe in hours
-		if (window) {
+		if (window !== undefined) {
 			// checks if prefs is empty, ie. the user has not dismissed gate before.
 			if (!prefs[localStorageDismissedDateKey(variant, name)]) {
 				return false;

@@ -187,7 +187,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const decideCaption = (mainMedia: ImageBlockElement): string => {
+const decideCaption = (mainMedia: ImageBlockElement | undefined): string => {
 	const caption = [];
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.data?.caption) {
@@ -264,7 +264,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showComments = CAPIArticle.isCommentable;
 
-	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia =
+		CAPIArticle.mainMediaElements[0] &&
+		CAPIArticle.mainMediaElements[0]._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+			? CAPIArticle.mainMediaElements[0]
+			: undefined;
+
 	const captionText = decideCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } =
@@ -392,7 +398,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							CAPIArticle.starRating
+							CAPIArticle.starRating !== undefined
 								? CAPIArticle.starRating
 								: undefined
 						}
@@ -456,8 +462,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											CAPIArticle.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											!!CAPIArticle.starRating ||
-											CAPIArticle.starRating === 0
+											CAPIArticle.starRating !== undefined
 										}
 									/>
 								</Section>

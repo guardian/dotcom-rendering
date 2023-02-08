@@ -81,7 +81,7 @@ export const CommentCount = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	if (!commentCount && commentCount !== 0) return null;
+	if (commentCount !== undefined && commentCount !== 0) return null;
 
 	const { short, long } = formatCount(commentCount);
 	const palette = decidePalette(format);

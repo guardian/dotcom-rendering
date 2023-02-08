@@ -121,7 +121,9 @@ export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');
 export const VARIANT_SCRIPT = getScriptRegex('variant');
 
-export const generateScriptTags = (scripts: Array<string | false>): string[] =>
+export const generateScriptTags = (
+	scripts: Array<string | undefined>,
+): string[] =>
 	scripts.filter(isString).map((script) => {
 		if (script.match(LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;

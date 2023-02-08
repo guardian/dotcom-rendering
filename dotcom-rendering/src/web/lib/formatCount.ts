@@ -3,8 +3,8 @@ import { integerCommas } from '../../lib/formatters';
 export const formatCount = (
 	count?: number,
 ): { short: string; long: string } => {
+	if (count === undefined) return { short: '…', long: '…' };
 	if (count === 0) return { short: '0', long: '0' };
-	if (!count) return { short: '…', long: '…' };
 
 	const countAsInteger = parseInt(count.toFixed(0), 10);
 	const displayCountLong = integerCommas(countAsInteger);

@@ -221,7 +221,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 					role="menu"
 					id={subNavId}
 				>
-					{(moreColumn.children || []).map((link) => (
+					{moreColumn.children.map((link) => (
 						<li
 							key={link.title.toLowerCase()}
 							css={[

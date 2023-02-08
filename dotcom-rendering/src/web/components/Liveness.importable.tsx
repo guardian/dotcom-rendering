@@ -90,7 +90,7 @@ function revealPendingBlocks() {
 		block.classList.remove('pending');
 	});
 
-	if (pendingBlocks?.length)
+	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
 		// Notify commercial that new blocks are available and they can re-run spacefinder
 		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }

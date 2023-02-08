@@ -78,7 +78,7 @@ const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
 const getTopFiveTopics = (availableTopics: Topic[]) =>
 	availableTopics
 		.slice(0, 5)
-		.filter((topic) => !!topic.count && topic.count > 2);
+		.filter((topic) => topic.count !== undefined && topic.count > 2);
 
 export const hasRelevantTopics = (availableTopics?: Topic[]) => {
 	return !!(availableTopics && getTopFiveTopics(availableTopics).length);
@@ -92,7 +92,9 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	if (!hasRelevantTopics(availableTopics) && !keyEvents?.length) return null;
+	const hasKeyEvents = keyEvents !== undefined && keyEvents.length > 0;
+
+	if (!hasRelevantTopics(availableTopics) && !hasKeyEvents) return null;
 	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = getTopFiveTopics(availableTopics);
@@ -114,7 +116,7 @@ export const TopicFilterBank = ({
 				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
 			<div css={topicStyles}>
-				{keyEvents?.length ? (
+				{hasKeyEvents ? (
 					<FilterButton
 						value={'Key events'}
 						count={keyEvents.length}

@@ -361,16 +361,17 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				))}
 			</a>
 
-			{!!link.notifications?.length && (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-right: 8px;
-					`}
-				>
-					<NotificationBadge diameter={22} />
-				</div>
-			)}
+			{link.notifications !== undefined &&
+				link.notifications.length > 0 && (
+					<div
+						css={css`
+							margin-top: 12px;
+							margin-right: 8px;
+						`}
+					>
+						<NotificationBadge diameter={22} />
+					</div>
+				)}
 		</li>
 	);
 };
@@ -498,6 +499,7 @@ export const Dropdown = ({
 						)}
 					</button>
 					<div css={isExpanded ? displayBlock : displayNone}>
+						{/* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Children types are awkward but this should work */}
 						{children ? (
 							<>{children}</>
 						) : (

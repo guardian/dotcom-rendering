@@ -261,7 +261,11 @@ export const InteractiveContentsBlockComponent = ({
 	]);
 
 	return (
-		<div ref={divRef} css={wrapperStyles} style={height ? { height } : {}}>
+		<div
+			ref={divRef}
+			css={wrapperStyles}
+			style={height !== undefined ? { height } : {}}
+		>
 			<h2 css={headerStyles} data-ignore="global-h2-styling">
 				Contents
 			</h2>

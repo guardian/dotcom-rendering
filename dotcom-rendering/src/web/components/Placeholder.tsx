@@ -52,7 +52,7 @@ export const Placeholder = ({
 		<div
 			css={css`
 				height: ${height}px;
-				width: ${width ? `${width}px` : '100%'};
+				width: ${width !== undefined ? `${width}px` : '100%'};
 				margin-bottom: ${spaceBelow && space[spaceBelow]}px;
 				margin-left: ${spaceLeft && space[spaceLeft]}px;
 				background-color: ${backgroundColor};

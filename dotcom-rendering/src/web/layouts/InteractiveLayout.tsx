@@ -427,8 +427,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										}
 									/>
 								</div>
-								{CAPIArticle.starRating ||
-								CAPIArticle.starRating === 0 ? (
+								{CAPIArticle.starRating !== undefined ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={CAPIArticle.starRating}

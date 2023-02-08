@@ -30,7 +30,7 @@ const min = 0.5;
 const max = 24;
 
 const units = ['g', 'l'] as const;
-const isUnit = (unit: string): unit is (typeof units)[number] =>
+const isUnit = (unit: string): unit is typeof units[number] =>
 	//@ts-expect-error -- custom type guard
 	units.includes(unit);
 
@@ -52,7 +52,7 @@ const constants = [
 	'cm',
 	'mm',
 ] as const;
-const isConstant = (time?: string): time is (typeof constants)[number] =>
+const isConstant = (time?: string): time is typeof constants[number] =>
 	isString(time) &&
 	//@ts-expect-error -- custom type guard
 	constants.includes(time);
@@ -115,8 +115,8 @@ const transform = ({
 	unit: string;
 }) => {
 	const [from, to] = value;
-	if (!from) return `Invalid value`;
-	if (to) {
+	if (from === undefined) return `Invalid value`;
+	if (to !== undefined) {
 		return `${from}-${to}${separator}${unit}`;
 	}
 
@@ -186,8 +186,8 @@ export const RecipeMultiplier = () => {
 								if (
 									key === 'value' &&
 									value.includes('/') &&
-									numerator &&
-									denominator
+									numerator !== undefined &&
+									denominator !== undefined
 								) {
 									return [
 										key,

@@ -521,7 +521,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-										CAPIArticle.starRating
+										CAPIArticle.starRating !== undefined
 											? CAPIArticle.starRating
 											: undefined
 									}

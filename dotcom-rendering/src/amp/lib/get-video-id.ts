@@ -15,12 +15,15 @@ export const getIdFromUrl = (
 	const url = parse(urlString);
 
 	// Looks for ID in both formats if provided
-	const ids: string[] = [
-		tryQueryParam &&
-			url.query &&
-			new URLSearchParams(url.query).get(tryQueryParam),
-		tryInPath && url.pathname && url.pathname.split('/').pop(),
-	].filter((tryId): tryId is string => !!tryId);
+	const ids: string[] = [];
+	if (tryQueryParam && url.query) {
+		const maybeId = new URLSearchParams(url.query).get(tryQueryParam);
+		if (maybeId) ids.push(maybeId);
+	}
+	if (tryInPath && url.pathname) {
+		const maybeId = url.pathname.split('/').pop();
+		if (maybeId) ids.push(maybeId);
+	}
 
 	if (!ids.length)
 		logErr(

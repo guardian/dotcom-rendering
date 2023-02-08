@@ -20,7 +20,8 @@ interface Props {
 function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
-		sectionName && !sectionsWithoutPopular.includes(sectionName);
+		sectionName !== undefined &&
+		!sectionsWithoutPopular.includes(sectionName);
 	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }

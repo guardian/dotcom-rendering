@@ -283,10 +283,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const footballMatchUrl =
-		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+		CAPIArticle.matchType === 'FootballMatchType'
+			? CAPIArticle.matchUrl
+			: undefined;
 
 	const cricketMatchUrl =
-		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
+		CAPIArticle.matchType === 'CricketMatchType'
+			? CAPIArticle.matchUrl
+			: undefined;
 
 	const showTopicFilterBank =
 		!!CAPIArticle.config.switches.automaticFilters &&
@@ -497,8 +501,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									)}
 								</div>
-								{CAPIArticle.starRating ||
-								CAPIArticle.starRating === 0 ? (
+								{CAPIArticle.starRating !== undefined ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={CAPIArticle.starRating}
@@ -528,7 +531,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{!!CAPIArticle.blocks[0]?.blockLastUpdated && (
+								{CAPIArticle.blocks[0]?.blockLastUpdated !==
+									undefined && (
 									<ArticleLastUpdated
 										format={format}
 										lastUpdated={

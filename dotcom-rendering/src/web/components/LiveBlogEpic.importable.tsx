@@ -122,7 +122,7 @@ const usePayload = ({
 		targeting: {
 			contentType: 'LiveBlog',
 			sectionId: section,
-			shouldHideReaderRevenue: shouldHideReaderRevenue ?? false,
+			shouldHideReaderRevenue,
 			isMinuteArticle: true,
 			isPaidContent,
 			tags,
@@ -163,7 +163,7 @@ const Render = ({
 }) => {
 	const { Epic } = useEpic({ url, name });
 
-	if (!Epic) return null;
+	if (Epic === undefined) return null;
 	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (

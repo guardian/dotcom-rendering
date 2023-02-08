@@ -317,7 +317,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
 	const footballMatchUrl =
-		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+		CAPIArticle.matchType === 'FootballMatchType'
+			? CAPIArticle.matchUrl
+			: undefined;
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
@@ -557,8 +559,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{CAPIArticle.starRating ||
-							CAPIArticle.starRating === 0 ? (
+							{CAPIArticle.starRating !== undefined ? (
 								<div css={starWrapper}>
 									<StarRating
 										rating={CAPIArticle.starRating}
