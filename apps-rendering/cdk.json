@@ -1,7 +1,0 @@
-{
-  "app": "npx ts-node cdk/bin/cdk.ts",
-  "context": {
-    "aws-cdk:enableDiffNoFail": "true",
-    "@aws-cdk/core:stackRelativeExports": "true"
-  }
-}

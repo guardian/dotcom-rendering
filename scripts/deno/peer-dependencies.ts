@@ -22,8 +22,6 @@ const peers = async (cwd: string) => {
 		.filter((line) => line.includes('has incorrect peer dependency'))
 		// strip out the workspace-aggregator-xyz-012 prefixes
 		.map((line) => line.replace(/workspace-aggregator-[a-z0-9-]+ > /, ''))
-		// apps-rendering are not part of the workspace
-		.map((line) => line.replace('" >', '"@guardian/apps-rendering >'));
 
 	return deps;
 };
@@ -53,12 +51,6 @@ const { dcr, ar, cr } = (
 					...acc,
 					dcr: acc.dcr.concat(line),
 				};
-
-			case '@guardian/apps-rendering':
-				return {
-					...acc,
-					ar: acc.ar.concat(line),
-				};
 			default:
 				return acc;
 		}
@@ -68,9 +60,6 @@ const body = `## Current peer dependencies mismatch
 
 ### dotcom-rendering
 ${dcr.length ? dcr.join('\n') : '- [X] all peer deps matched!'}
-
-### apps-rendering
-${ar.length ? ar.join('\n') : '- [X] all peer deps matched!'}
 
 if (!octokit) {
 	console.log(body);

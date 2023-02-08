@@ -1,8 +1,6 @@
 name: DCR lint 🔎
 on:
   push:
-    paths-ignore:
-      - "apps-rendering/**"
 
 jobs:
   lint:

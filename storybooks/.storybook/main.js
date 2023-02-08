@@ -11,9 +11,5 @@ module.exports = {
 			title: 'dotcom-rendering',
 			url: 'http://localhost:4002',
 		},
-		'apps-rendering': {
-			title: 'apps-rendering',
-			url: 'http://localhost:4003',
-		},
 	}),
 };

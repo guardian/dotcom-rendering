@@ -1,4 +1,3 @@
 # https://github.com/marketplace/actions/labeler
 
 dotcom-rendering: dotcom-rendering/**/*
-apps-rendering: apps-rendering/**/*

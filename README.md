@@ -5,7 +5,7 @@ Ever thought about joining us?
 
 # Dotcom/Apps Rendering
 
-This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
+This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 1 project: `dotcom-rendering`.
 
 ## Developer setup
 
@@ -21,11 +21,7 @@ Run `yarn` in the root directory of this project to install packages.
 
 ## Run
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook.
-
-### `apps rendering`
-
-Go to [apps rendering](apps-rendering/README.md) for more details.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering) except for storybook.
 
 ### `dotcom rendering`
 

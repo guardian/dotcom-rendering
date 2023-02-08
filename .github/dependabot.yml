@@ -5,35 +5,22 @@
 
 version: 2
 updates:
-    - package-ecosystem: 'npm'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      # Set to minimise the number of chromatic runs.
-      rebase-strategy: "disabled"
-    - package-ecosystem: 'npm'
-      directory: '/apps-rendering'
-      schedule:
-          interval: 'daily'
-      labels:
-        - "AR Dependency"
-      rebase-strategy: "disabled"
-      ignore:
-        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
-        - dependency-name: 'aws-cdk'
-        - dependency-name: 'aws-cdk-lib'
-        - dependency-name: 'constructs'
-      open-pull-requests-limit: 7
-    - package-ecosystem: "npm"
-      directory: "/dotcom-rendering"
-      schedule:
-        interval: "daily"
-      labels:
-        - "DCR Dependency"
-      open-pull-requests-limit: 10
-      rebase-strategy: "disabled"
-    - package-ecosystem: 'github-actions'
-      directory: '/'
-      schedule:
-          interval: 'daily'
-      rebase-strategy: "disabled"
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    # Set to minimise the number of chromatic runs.
+    rebase-strategy: 'disabled'
+  - package-ecosystem: 'npm'
+    directory: '/dotcom-rendering'
+    schedule:
+      interval: 'daily'
+    labels:
+      - 'DCR Dependency'
+    open-pull-requests-limit: 10
+    rebase-strategy: 'disabled'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    rebase-strategy: 'disabled'

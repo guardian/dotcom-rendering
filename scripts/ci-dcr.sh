@@ -15,10 +15,6 @@ echo "current branch: $currentBranch"
 files="$(git diff --name-only $currentBranch origin/main)"
 echo "files: $files"
 
-# files that are not within apps-rendering sub directory
-filteredFiles="$(echo "$files" | { grep -v 'apps-rendering' || :; })"
-echo "filteredFiles: $filteredFiles"
-
 # Github actions sets this by default but we also want this variable set in TeamCity
 export CI=true
 

@@ -79,11 +79,6 @@ const zipBundle = () => {
 	});
 };
 
-const removeAR = () => {
-	log(' - removing ../apps-rendering');
-	return new Promise((resolve) => rimraf('../apps-rendering', resolve));
-};
-
 const createBuildConfig = () => {
 	log(' - creating build.json');
 	const buildConfig = {
@@ -102,7 +97,6 @@ const createBuildConfig = () => {
 };
 
 Promise.all([copyCfn(), copyStatic(), copyDist(), copyRiffRaff()])
-	.then(removeAR)
 	.then(zipBundle)
 	.then(createBuildConfig)
 	.catch((err) => {
