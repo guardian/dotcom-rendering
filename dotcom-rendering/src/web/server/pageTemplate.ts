@@ -106,7 +106,6 @@ export const pageTemplate = ({
 		`https://api.nextgen.guardianapps.co.uk`,
 		`https://hits-secure.theguardian.com`,
 		`https://interactive.guim.co.uk`,
-		`https://phar.gu-web.net`,
 		`https://static.theguardian.com`,
 		`https://support.theguardian.com`,
 	];
