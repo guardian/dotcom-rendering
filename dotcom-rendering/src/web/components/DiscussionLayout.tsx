@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { AdSlot, labelStyles } from './AdSlot';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
@@ -52,7 +52,9 @@ export const DiscussionLayout = ({
 					</Island>
 				}
 				leftColSize={
-					format.display === ArticleDisplay.Standard
+					format.display === ArticleDisplay.Standard ||
+					format.design === ArticleDesign.LiveBlog ||
+					format.design === ArticleDesign.DeadBlog
 						? 'wide'
 						: 'compact'
 				}
