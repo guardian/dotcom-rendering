@@ -33,7 +33,6 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { RatingSizeType } from '../../../types/content';
 
 export type Props = {
 	linkTo: string;
@@ -78,17 +77,15 @@ export type Props = {
 
 const StarRatingComponent = ({
 	rating,
-	sizeOnWide,
-	reducedTopPaddingOnMobile,
+	cardHasImage,
 }: {
 	rating: number;
-	sizeOnWide: RatingSizeType;
-	reducedTopPaddingOnMobile: boolean;
+	cardHasImage: boolean;
 }) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
-			margin-top: ${reducedTopPaddingOnMobile ? '2' : space[1]}px;
+			margin-top: ${cardHasImage ? '2' : space[1]}px;
 			display: inline-block;
 
 			${from.tablet} {
@@ -100,7 +97,11 @@ const StarRatingComponent = ({
 			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<StarRating rating={rating} size={sizeOnWide} breakpoint="wide" />
+			<StarRating
+				rating={rating}
+				size={cardHasImage ? 'medium' : 'small'}
+				breakpoint="wide"
+			/>
 		</Hide>
 	</div>
 );
@@ -433,12 +434,7 @@ export const Card = ({
 						{starRating !== undefined ? (
 							<StarRatingComponent
 								rating={starRating}
-								sizeOnWide={
-									imageUrl === undefined ? 'small' : 'medium'
-								}
-								reducedTopPaddingOnMobile={
-									imageUrl === undefined
-								}
+								cardHasImage={imageUrl !== undefined}
 							/>
 						) : null}
 						{(format.design === ArticleDesign.Gallery ||
