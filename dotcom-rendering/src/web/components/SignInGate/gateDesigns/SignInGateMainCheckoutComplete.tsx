@@ -7,13 +7,12 @@ import type {
 } from '../types';
 import {
 	actionButtons,
-	bodySeparator,
+	bulletStyles,
 	faqPersonalised,
 	firstParagraphOverlay,
 	hideElementsCss,
-	laterButton,
+	notNowButton,
 	personalisedBodyBold,
-	personalisedBodyList,
 	personalisedBodyTextList,
 	personalisedHeadingStyles,
 	registerButton,
@@ -98,7 +97,7 @@ export const SignInGateMainCheckoutComplete = ({
 			<div css={firstParagraphOverlay} />
 			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)} </h1>
 			<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
-			<ul css={personalisedBodyList}>
+			<ul css={bulletStyles}>
 				{getBodyText(product).map((item) => {
 					return (
 						<li css={personalisedBodyTextList} key={item}>
@@ -125,7 +124,7 @@ export const SignInGateMainCheckoutComplete = ({
 					<Button
 						data-cy="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
-						css={laterButton}
+						css={notNowButton}
 						priority="subdued"
 						size="small"
 						onClick={() => {
@@ -133,12 +132,12 @@ export const SignInGateMainCheckoutComplete = ({
 							trackLink(ophanComponentId, 'not-now', abTest);
 						}}
 					>
-						I’ll do it later
+						Not now
 					</Button>
 				)}
 			</div>
 
-			<div css={[bodySeparator, faqPersonalised]}>
+			<div css={faqPersonalised}>
 				<Link
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}

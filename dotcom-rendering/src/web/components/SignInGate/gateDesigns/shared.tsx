@@ -68,6 +68,26 @@ export const bodyText = css`
 	}
 `;
 
+export const bulletStyles = css`
+	margin-bottom: ${space[4]}px;
+	${headline.xxsmall({ fontWeight: 'medium' })};
+	color: ${neutral[100]};
+	display: flex;
+	flex-direction: column;
+	li:not(:first-of-type) {
+		margin-top: 10px;
+	}
+	li::before {
+		content: '';
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		margin-right: ${space[2]}px;
+		background: ${brand[400]};
+		border-radius: 50%;
+	}
+`;
+
 export const personalisedBodyTextList = css`
 	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
 	font-family: 'GH Guardian Headline';
@@ -119,6 +139,12 @@ export const laterButton = css`
 	color: ${brand[400]} !important;
 `;
 
+export const notNowButton = css`
+	/* stylelint-disable-next-line declaration-no-important */
+	color: ${brand[400]} !important;
+	text-decoration: none;
+`;
+
 export const signInLink = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	color: ${text.anchorPrimary} !important;
@@ -146,21 +172,20 @@ export const faq = css`
 `;
 
 export const faqPersonalised = css`
-	padding-top: ${space[3]}px;
 	padding-bottom: 18px;
 	margin-top: ${space[5]}px;
 	& a {
 		display: block;
 		margin-top: ${space[6]}px;
 		margin-bottom: ${space[4]}px;
-		color: ${neutral[20]};
-		text-decoration-color: ${neutral[20]};
+		color: ${brand[500]};
+		text-decoration-color: ${brand[500]};
 		text-underline-position: under;
 	}
 
 	& a:hover {
-		color: ${neutral[20]};
-		text-decoration-color: ${neutral[20]};
+		color: ${brand[500]};
+		text-decoration-color: ${brand[500]};
 	}
 `;
 
