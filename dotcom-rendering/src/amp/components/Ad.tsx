@@ -52,8 +52,9 @@ const pubmaticRealTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
-	{ profileId, pubId }: RTCParameters,
+	adType: AdType,
 ): string => {
+	const { profileId, pubId } = getRTCParameters(adType);
 	const pubmaticConfig = {
 		openwrap: {
 			PROFILE_ID: profileId,
@@ -107,7 +108,7 @@ export const Ad = ({
 		usePrebid,
 		usePermutive,
 		useAmazon,
-		getRTCParameters(adType),
+		adType,
 	);
 
 	return (
