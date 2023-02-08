@@ -21,6 +21,7 @@ import { Section } from '../components/Section';
 import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
+import { TrendingTopicComponent } from '../components/TrendingTopicComponent';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import { Stuck } from './lib/stickiness';
@@ -148,37 +149,6 @@ const decideAdSlot = (
 	}
 	return null;
 };
-
-const linkStyle = css`
-	text-decoration: none;
-	font-size: 16px;
-	top: 0;
-	line-height: 16px;
-	color: ${neutral[7]};
-	&:after {
-		color: ${neutral[86]};
-		font-size: 16px;
-		pointer-events: none;
-		margin: 2.56px;
-		content: '/';
-	}
-	&:last-of-type {
-		&:after {
-			content: '';
-		}
-	}
-`;
-
-const topicLabel = css`
-	font-size: 13.6px;
-	line-height: 22px;
-	color: ${neutral[60]};
-`;
-
-const trendingTopicContainer = css`
-	padding-top: 30px;
-	padding-bottom: 20px;
-`;
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
@@ -470,34 +440,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
-			<Section
-				fullWidth={true}
-				backgroundColour={palette.background.article}
-				showTopBorder={false}
-			>
-				<div css={trendingTopicContainer}>
-					<StraightLines
-						cssOverrides={css`
-							display: block;
-						`}
-						count={4}
-					/>
-					<div css={topicLabel}>Topics</div>
-					{/* TODO: Add allpath link */}
-					{front.trendingTopics?.map((tag) => {
-						return (
-							<a
-								key={tag.properties.webTitle}
-								href={tag.properties.webUrl}
-								css={linkStyle}
-							>
-								{tag.properties.webTitle}
-							</a>
-						);
-					})}
-				</div>
-			</Section>
-
+			<TrendingTopicComponent trendingTopics={front.trendingTopics} />
 			<Section
 				fullWidth={true}
 				data-print-layout="hide"
