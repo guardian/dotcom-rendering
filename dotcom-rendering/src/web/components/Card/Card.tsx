@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, space } from '@guardian/source-foundations';
+import { brandAltBackground, from, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Branding } from '../../../types/branding';
@@ -79,15 +79,21 @@ export type Props = {
 const StarRatingComponent = ({
 	rating,
 	sizeOnWide,
+	reducedTopPaddingOnMobile,
 }: {
 	rating: number;
 	sizeOnWide: RatingSizeType;
+	reducedTopPaddingOnMobile: boolean;
 }) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
-			margin-top: ${space[1]}px;
+			margin-top: ${reducedTopPaddingOnMobile ? '2' : space[1]}px;
 			display: inline-block;
+
+			${from.tablet} {
+				margin-top: ${space[1]}px;
+			}
 		`}
 	>
 		<Hide when="above" breakpoint="desktop">
@@ -429,6 +435,9 @@ export const Card = ({
 								rating={starRating}
 								sizeOnWide={
 									imageUrl === undefined ? 'small' : 'medium'
+								}
+								reducedTopPaddingOnMobile={
+									imageUrl === undefined
 								}
 							/>
 						) : null}
