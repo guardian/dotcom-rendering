@@ -156,7 +156,8 @@ const grid = {
 	 *
 	 * - **Centre** exists for all breakpoints
 	 * - **Left** exists from the `leftCol` breakpoint up
-	 * - **Right** exists from the `desktop` breakpoint up
+	 * - **Right** exists from the `desktop` breakpoint up for articles, and
+	 * `wide` for fronts
 	 * - **All** means take up the entire width of the viewport, "all" columns,
 	 * and exists for every breakpoint
 	 */
