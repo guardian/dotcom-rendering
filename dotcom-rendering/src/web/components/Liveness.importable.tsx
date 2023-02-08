@@ -226,7 +226,7 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return () => {};
+		if (!topOfBlog) return;
 
 		const observer = new window.IntersectionObserver(([entry]) => {
 			if (!entry) return;

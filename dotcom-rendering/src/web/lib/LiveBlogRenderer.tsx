@@ -95,8 +95,8 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-				<Hide above="desktop">
 			{keyEvents !== undefined && keyEvents.length > 0 ? (
+				<Hide from="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel
 							keyEvents={keyEvents}

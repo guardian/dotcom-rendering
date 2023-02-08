@@ -176,7 +176,7 @@ export const InteractiveContentsBlockComponent = ({
 	// -> If we stop intersecting with the current element, and its in view > show the preview element
 	// -> If we're intersecting with an element set that to the active one
 	// -> If the end element is in view, but the last element is not > show the last element
-	useEffect((): any => {
+	useEffect((): void | (() => void) => {
 		if ('IntersectionObserver' in window) {
 			const getSubheadingIndexById = (id: string): number =>
 				enhancedSubheadings.findIndex((item) => item.ref?.id === id);
@@ -272,6 +272,7 @@ export const InteractiveContentsBlockComponent = ({
 			{/* only show sticky nav header if defined */}
 			{stickyNavCurrentHeader && (
 				<button
+					type="button"
 					css={[stickyNavBaseStyles, stickyNavCurrentHeaderStyles]}
 					onClick={() => setShowStickyNavOption(!showStickyNavOption)}
 				>

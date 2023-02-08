@@ -145,7 +145,7 @@ export const EnhancePinnedPost = () => {
 			setHasBeenSeen(true);
 			pinnedPostTiming.current?.clear();
 			pinnedPostTiming.current?.start();
-		} else if (hasBeenSeen && !isInView) {
+		} else if (hasBeenSeen) {
 			const timeTaken = pinnedPostTiming.current?.end();
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
