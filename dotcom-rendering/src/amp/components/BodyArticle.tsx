@@ -133,14 +133,18 @@ export const Body = ({ data, config }: Props) => {
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: !!config.switches.ampPrebid,
+			ampPrebidPubmatic: !!config.switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!config.switches.ampPrebidCriteo,
+			ampPrebidOzone: !!config.switches.ampPrebidOzone,
 			permutive: !!config.switches.permutive,
 			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid: adInfo.switches.ampPrebidOzone,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};

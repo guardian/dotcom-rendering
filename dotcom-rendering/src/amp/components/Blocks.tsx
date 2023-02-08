@@ -127,14 +127,18 @@ export const Blocks = ({
 		contentType,
 		commercialProperties,
 		switches: {
-			ampPrebid: !!switches.ampPrebid,
+			ampPrebidPubmatic: !!switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!switches.ampPrebidCriteo,
+			ampPrebidOzone: !!switches.ampPrebidOzone,
 			permutive: !!switches.permutive,
 			ampAmazon: !!switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid: adInfo.switches.ampPrebidOzone,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
