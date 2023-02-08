@@ -253,7 +253,7 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div css={[adStyles]}>
+						<div css={[adStyles]} className="ad-slot-container">
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -378,6 +378,7 @@ export const AdSlot = ({
 						`,
 						adStyles,
 					]}
+					className="ad-slot-container"
 				>
 					<div
 						id="dfp-ad--merchandising-high"
@@ -408,6 +409,7 @@ export const AdSlot = ({
 						`,
 						adStyles,
 					]}
+					className="ad-slot-container"
 				>
 					<div
 						id="dfp-ad--merchandising"
