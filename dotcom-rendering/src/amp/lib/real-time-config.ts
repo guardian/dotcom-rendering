@@ -63,19 +63,15 @@ export const realTimeConfig = ({
 	url = undefined,
 	usePermutive = false,
 	useAmazon = false,
-	timeoutMillis,
 }: {
 	vendors?: Record<string, unknown>;
 	url?: string;
 	usePermutive?: boolean;
 	useAmazon?: boolean;
-	timeoutMillis?: number;
 }): string => {
 	const urls = [url, usePermutive ? permutiveURL : undefined].filter(
 		notUndefined,
 	);
-
-	const options = timeoutMillis ? { timeoutMillis } : {};
 
 	const data = {
 		urls,
@@ -83,7 +79,7 @@ export const realTimeConfig = ({
 			...vendors,
 			...(useAmazon ? amazonConfig : {}),
 		},
-		...options,
+		timeoutMillis: 1000,
 	};
 	return JSON.stringify(data);
 };

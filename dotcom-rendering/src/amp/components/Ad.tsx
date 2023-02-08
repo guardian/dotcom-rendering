@@ -65,7 +65,6 @@ const pubmaticRealTimeConfig = (
 		vendors: usePrebid ? pubmaticConfig : {},
 		usePermutive,
 		useAmazon,
-		timeoutMillis: 1000,
 	});
 };
 
