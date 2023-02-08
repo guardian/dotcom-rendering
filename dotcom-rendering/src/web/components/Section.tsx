@@ -1,7 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, space } from '@guardian/source-foundations';
-import { grid } from '../../lib/grid';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -103,8 +102,81 @@ type Props = {
 	className?: string;
 };
 
+// const mobileColumns =
+// 	;
+// const tabletColumns =
+// 	;
+// const desktopColumns =
+// 	;
+// const leftColColumns =
+// 	;
+// const wideColumns =
+// 	;
+
 const containerStyles = css`
-	${grid.container};
+	display: grid;
+	grid-template-columns:
+		[viewport-start] 0px
+		[content-start title-start]
+		repeat(3, minmax(0, 1fr))
+		[title-end hide-start]
+		minmax(0, 1fr)
+		[content-end hide-end]
+		0px [viewport-end];
+	column-gap: 12px;
+
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+
+	${from.tablet} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[content-start title-start]
+			repeat(11, 40px)
+			[title-end hide-start]
+			40px
+			[content-end hide-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.desktop} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[content-start title-start]
+			repeat(11, 60px)
+			[title-end hide-start]
+			60px
+			[content-end hide-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.leftCol} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(2, 60px)
+			[title-end content-start]
+			repeat(11, 60px)
+			[hide-start]
+			60px
+			[hide-end content-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.wide} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(3, 60px)
+			[title-end content-start]
+			repeat(12, 60px)
+			[content-end hide-start]
+			60px
+			[hide-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
 	grid-auto-flow: dense;
 	grid-template-rows: auto [content-start] auto;
 
@@ -115,7 +187,30 @@ const containerStyles = css`
 
 const wideLeftColumn = css`
 	${from.leftCol} {
-		grid-template-columns: '[viewport-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(7, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(3, 60px)
+			[title-end content-start]
+			repeat(10, 60px)
+			[hide-start]
+			60px
+			[hide-end content-end] minmax(0, 1fr) [viewport-end];
+	}
+`;
+
+const sectionContentStretchedRight = css`
+	${from.wide} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(3, 60px)
+			[title-end content-start]
+			repeat(12, 60px)
+			[hide-start]
+			60px
+			[hide-end content-end]
+			minmax(0, 1fr) [viewport-end];
 	}
 `;
 
@@ -130,12 +225,8 @@ const containerStylesToggleable = css`
 
 const headlineContainerStyles = css`
 	grid-row-start: 1;
-	${grid.column.centre}
-	${from.tablet} {
-		${grid.span('centre-column-start', 11)}
-	}
+	grid-column: title;
 	${from.leftCol} {
-		${grid.column.left}
 		grid-row-end: span 2;
 	}
 
@@ -170,7 +261,7 @@ const margins = css`
 
 const sectionShowHide = css`
 	grid-row-start: 1;
-	${grid.span(-3, 1)}
+	grid-column: hide;
 `;
 
 const sectionContent = css`
@@ -180,23 +271,14 @@ const sectionContent = css`
 		display: none;
 	}
 
-	${grid.column.centre}
-	grid-row-start: content-start;
+	grid-column: content;
 
-	${from.desktop} {
-		${grid.span('centre-column-start', 12)}
-	}
+	grid-row-start: content-start;
 	${from.leftCol} {
 		grid-row-end: span 2;
 	}
 	${from.wide} {
 		grid-row-end: -1;
-	}
-`;
-
-const sectionContentStrechedRight = css`
-	${from.desktop} {
-		${grid.between('centre-column-start', -2)}
 	}
 `;
 
@@ -231,7 +313,7 @@ const sectionTreats = css`
 		display: block;
 		align-self: end;
 		grid-row-start: -2;
-		${grid.column.left}
+		grid-column: title;
 	}
 
 	.hidden > & {
@@ -242,9 +324,9 @@ const sectionTreats = css`
 const decoration = css`
 	grid-row: 1 / -1;
 
-	${grid.column.all}
+	grid-column: 1 / -1;
 	${from.tablet} {
-		${grid.between(2, -2)}
+		grid-column: 2 / -2;
 	}
 
 	border-width: 1px;
@@ -427,6 +509,7 @@ export const Section = ({
 				containerStyles,
 				leftColSize === 'wide' && wideLeftColumn,
 				isToggleable && containerStylesToggleable,
+				stretchRight && sectionContentStretchedRight,
 				css`
 					background-color: ${backgroundColour ??
 					overrides?.background.container};
@@ -477,7 +560,6 @@ export const Section = ({
 			<div
 				css={[
 					sectionContent,
-					stretchRight && sectionContentStrechedRight,
 					padContent && sectionContentPadded,
 					centralBorder === 'full' && sectionContentBorder,
 					verticalMargins && margins,
