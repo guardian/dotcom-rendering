@@ -1,45 +1,117 @@
-## We're hiring!
+## apps-rendering
 
-Ever thought about joining us?
-[https://workforus.theguardian.com/careers/product-engineering/](https://workforus.theguardian.com/careers/product-engineering/)
+### Install
 
-# Dotcom/Apps Rendering
+1. Clone the repo, then CD into the `apps-rendering` subdirectory before running any commands -
+2. Make sure you're using the version of Node specified in [`.nvmrc`](/.nvmrc)
+3. Install dependencies:
 
-This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
+```sh
+yarn
+```
 
-## Developer setup
+### Run (Development)
 
-Install [Node.js](https://nodejs.org).
+**Before you start** get `mobile` Janus credentials (ask someone if you're unsure what this means)
 
-We recommend using [fnm](https://github.com/Schniz/fnm). It is great at managing multiple versions of Node.js on one machine.
+#### Everything
 
-Install [Yarn 1 (Classic)](https://classic.yarnpkg.com/).
+This is the simplest way to get started, but will intermingle all the logs together in one shell. If you're doing development work it might be easier to run the client and server in separate shells as described in the next subsection.
 
-## Install
+```sh
+yarn watch
+```
 
-Run `yarn` in the root directory of this project to install packages.
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport)).
 
-## Run
+The Apps Rendering development server supports the following routes for testing articles:
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook.
+- `/path/to/content`
+  - e.g [http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/path/to/content`
+  - e.g [http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
 
-### `apps rendering`
+Additionally, each route above can take a `?editions` query parameter to render the article as for the Editions app.
 
-Go to [apps rendering](apps-rendering/README.md) for more details.
+_**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 
-### `dotcom rendering`
+#### Client and Server In Separate Shells
 
-Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
+This will output each command's logs to different shells, which can make development easier.
 
-## Root actions
+To start the server:
 
-Most commands are run from within each project but the following are managed from the monorepo root:
+```sh
+yarn watch:server
+```
 
-### Storybook/Chromatic
+To start the client:
 
-`yarn storybook` - Runs Storybook for all projects
-`yarn build-storybook` - Builds Storybook for all projects
+```sh
+yarn watch:client
+```
 
-Chromatic now runs at project level. `cd` into the project dir and run `yarn chromatic -t [CHROMATIC PROJECT TOKEN]`
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
 
-You can find the token in the project Chromatic instance.
+_**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
+
+#### Server Only
+
+You may need to build the client-side code first with:
+
+```sh
+yarn build:client
+```
+
+Then start the server with:
+
+```sh
+yarn watch:server
+```
+
+View in a browser at http://localhost:3040
+
+_**Note**: You will need to refresh the page to see any changes you make to the server code. If you change the client code you will need to rebuild it with the first command mentioned in this subsection._
+
+### Test
+
+The unit tests are built using Jest. They can be run with the following command:
+
+```sh
+yarn test
+```
+
+### Lint
+
+ESLint is used to validate the code. It can be run like this:
+
+```sh
+yarn lint
+```
+
+It can automatically fix problems for you:
+
+```sh
+yarn lint:fix
+```
+
+### Storybook
+
+A good way to see components and test them in isolation is to run storybook:
+
+```sh
+yarn storybook
+```
+
+Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
+
+### Generating `apps-rendering-api-models`
+
+> **Note**
+> These models have moved! You can now find them, along with release instructions, at [`guardian/apps-rendering-api-models`](https://github.com/guardian/apps-rendering-api-models).
+
+[`MAPI`](https://github.com/guardian/mobile-apps-api) uses `apps-rendering-api-models` to communicate with the Apps Rendering API. To render an article, MAPI sends a `RenderingRequest` to Apps Rendering. The `RenderingRequest` includes all the information Apps Rendering requires for rendering. `RenderingRequest` and other associated models are defined in `apps-rendering-api-models`.
