@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
@@ -7,17 +8,14 @@ type Props = {
 	overrideContainerToggleColour?: string;
 };
 
-const showHideButtonCss = (
-	overrideContainerToggleColour: string | undefined,
-) => css`
-	color: ${overrideContainerToggleColour ?? neutral[46]};
+const buttonColourStyles = (overrideContainerToggleColour: string) => css`
+	color: ${overrideContainerToggleColour};
+`;
+
+const buttonStyles = css`
+	color: ${neutral[46]};
 	${textSans.xsmall()};
-
 	margin-top: ${space[2]}px;
-	margin-right: 10px;
-	margin-bottom: ${space[2]}px;
-	align-items: bottom;
-
 	text-decoration: none;
 `;
 
@@ -31,10 +29,15 @@ export const ShowHideButton = ({
 	sectionId,
 	overrideContainerToggleColour,
 }: Props) => {
+	// @ts-expect-error -- Emotion will handle undefined values gracefully
+	const colourStyles: SerializedStyles = overrideContainerToggleColour
+		? buttonColourStyles(overrideContainerToggleColour)
+		: undefined;
+
 	return (
 		<ButtonLink
 			priority="secondary"
-			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
+			cssOverrides={[buttonStyles, colourStyles]}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}
 			aria-controls={sectionId}

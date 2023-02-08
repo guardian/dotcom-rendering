@@ -262,6 +262,7 @@ const margins = css`
 const sectionShowHide = css`
 	grid-row-start: 1;
 	grid-column: hide;
+	justify-self: end;
 `;
 
 const sectionContent = css`
