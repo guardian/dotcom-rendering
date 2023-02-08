@@ -515,7 +515,7 @@ const avatarDark = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return neutral[20];
 	}
-}
+};
 
 const relatedCardBylineImage = (format: ArticleFormat): string => {
 	switch (format.theme) {
