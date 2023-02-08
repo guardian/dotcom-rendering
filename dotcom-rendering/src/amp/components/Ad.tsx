@@ -1,7 +1,11 @@
 import type { CommercialProperties } from '../../types/commercial';
 import type { EditionId } from '../../web/lib/edition';
 import { adJson, stringify } from '../lib/ad-json';
-import type { RTCParameters } from '../lib/real-time-config';
+import {
+	AdType,
+	getRTCParameters,
+	RTCParameters,
+} from '../lib/real-time-config';
 import { realTimeConfig } from '../lib/real-time-config';
 
 // Largest size first
@@ -81,31 +85,30 @@ export interface BaseAdProps {
 }
 
 interface AdProps extends BaseAdProps {
-	isSticky?: boolean;
-	rtcParameters: RTCParameters;
+	adType: AdType;
 }
 
 export const Ad = ({
-	isSticky = false,
 	editionId,
 	section,
 	contentType,
 	commercialProperties,
 	adTargeting,
 	config: { useAmazon, usePrebid, usePermutive },
-	rtcParameters,
+	adType,
 }: AdProps) => {
-	const adSizes = isSticky ? stickySizes : inlineSizes;
+	const adSizes = adType.isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
 	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
+	// TODO compute RTC directly in here!
 	const rtcConfig = pubmaticRealTimeConfig(
 		usePrebid,
 		usePermutive,
 		useAmazon,
-		rtcParameters,
+		getRTCParameters(adType),
 	);
 
 	return (

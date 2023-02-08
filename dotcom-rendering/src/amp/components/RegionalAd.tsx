@@ -1,5 +1,4 @@
 import { ClassNames } from '@emotion/react';
-import { getRTCParameters } from '../lib/real-time-config';
 import { adRegions, regionClasses } from '../lib/region-classes';
 import type { BaseAdProps } from './Ad';
 import { Ad } from './Ad';
@@ -31,14 +30,13 @@ export const RegionalAd = ({
 						)}
 					>
 						<Ad
-							isSticky={false}
 							editionId={editionId}
 							section={section}
 							contentType={contentType}
 							commercialProperties={commercialProperties}
 							config={config}
-							rtcParameters={getRTCParameters({ adRegion })}
 							adTargeting={adTargeting}
+							adType={{ adRegion }}
 						/>
 					</div>
 				)}

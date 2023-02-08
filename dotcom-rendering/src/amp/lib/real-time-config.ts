@@ -5,7 +5,7 @@ import type { AdRegion } from './region-classes';
  *
  * These values determine the computed RTC parameters
  */
-type AdType =
+export type AdType =
 	| { isSticky: true }
 	| {
 			isSticky?: false;
