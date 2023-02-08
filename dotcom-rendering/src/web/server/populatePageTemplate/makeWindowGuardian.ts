@@ -19,7 +19,7 @@ export const buildWindowGuardian = (model: DCRNewslettersPageType): string => {
 				revisionNumber: config.revisionNumber,
 				sentryPublicApiKey: config.sentryPublicApiKey,
 				sentryHost: config.sentryHost,
-				keywordIds: config.keywordIds,
+				keywordIds: '',
 				dfpAccountId: config.dfpAccountId,
 				adUnit: config.adUnit,
 				ajaxUrl: config.ajaxUrl,
@@ -27,9 +27,9 @@ export const buildWindowGuardian = (model: DCRNewslettersPageType): string => {
 				switches: config.switches,
 				abTests: config.abTests,
 				brazeApiKey: config.brazeApiKey,
-				isPaidContent: config.isPaidContent,
+				isPaidContent: false,
 				contentType: config.contentType,
-				shouldHideReaderRevenue: config.shouldHideReaderRevenue,
+				shouldHideReaderRevenue: false,
 				GAData: extractGA({
 					webTitle: model.webTitle,
 					format: model.format ?? {
