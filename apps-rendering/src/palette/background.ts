@@ -15,6 +15,7 @@ import {
 	neutral,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
@@ -42,62 +43,86 @@ const mediaArticleBody = (_format: ArticleFormat): Colour => {
 	return neutral[10];
 };
 
-const headline = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
+const headline = ({ design, display, theme }: ArticleFormat): Colour => {
+	if (display === ArticleDisplay.Immersive) {
 		return neutral[7];
-	} else if (format.design === ArticleDesign.DeadBlog) {
-		return neutral[97];
-	} else if (format.design === ArticleDesign.LiveBlog) {
-		switch (format.theme) {
-			case ArticlePillar.Culture:
-				return culture[300];
-			case ArticlePillar.Sport:
-				return sport[300];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticlePillar.News:
-				return news[300];
-			default:
-				return news[300];
-		}
-	} else if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Letter ||
-		format.design === ArticleDesign.Editorial
-	) {
-		return opinion[800];
-	} else if (format.design === ArticleDesign.Gallery) {
-		return neutral[7];
-	} else if (
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video
-	) {
-		return neutral[10];
-	} else if (format.design === ArticleDesign.Interview) {
-		return neutral[0];
-	} else if (format.design === ArticleDesign.Analysis) {
-		return news[800];
 	}
 
-	return neutral[100];
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[97];
+		case ArticleDesign.LiveBlog: {
+			switch (theme) {
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.News:
+					return news[300];
+				default:
+					return news[300];
+			}
+		}
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return opinion[800];
+			}
+		case ArticleDesign.Gallery:
+			return neutral[7];
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return neutral[10];
+		case ArticleDesign.Interview:
+			return neutral[0];
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return news[800];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return neutral[100];
+			}
+		default:
+			return neutral[100];
+	}
 };
 
 const headlineByline = (_format: ArticleFormat): Colour => brandAlt[400];
 
 const headlineBylineDark = (_format: ArticleFormat): Colour => brandAlt[200];
 
-const headlineDark = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
+const headlineDark = ({ design, display, theme }: ArticleFormat): Colour => {
+	if (display === ArticleDisplay.Immersive) {
 		return neutral[7];
 	}
 
-	switch (format.design) {
+	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[7];
 		case ArticleDesign.LiveBlog: {
-			switch (format.theme) {
+			switch (theme) {
 				case ArticlePillar.Culture:
 					return culture[200];
 				case ArticlePillar.Sport:
@@ -113,6 +138,24 @@ const headlineDark = (format: ArticleFormat): Colour => {
 		}
 		case ArticleDesign.Interview:
 			return neutral[20];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[10];
+			}
 		default:
 			return neutral[10];
 	}
@@ -190,39 +233,53 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 };
 
 const standfirst = ({ design, theme }: ArticleFormat): Colour => {
-	if (design === ArticleDesign.DeadBlog) {
-		return neutral[93];
-	}
-
-	if (design === ArticleDesign.Analysis) {
-		return news[800];
-	}
-
-	if (design === ArticleDesign.LiveBlog) {
-		switch (theme) {
-			case ArticlePillar.Opinion:
-				return opinion[200];
-			case ArticlePillar.Sport:
-				return sport[100];
-			case ArticlePillar.Culture:
-				return culture[200];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[200];
-			case ArticlePillar.News:
-			default:
-				return news[200];
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[93];
+		case ArticleDesign.LiveBlog: {
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticlePillar.Sport:
+					return sport[100];
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.News:
+				default:
+					return news[200];
+			}
 		}
+		case ArticleDesign.Analysis:
+			return news[800];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return opinion[800];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return neutral[100];
+			}
+		default:
+			return neutral[100];
 	}
-
-	if (
-		design === ArticleDesign.Comment ||
-		design === ArticleDesign.Letter ||
-		design === ArticleDesign.Editorial
-	) {
-		return opinion[800];
-	}
-
-	return neutral[100];
 };
 
 const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
@@ -242,6 +299,25 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 				case ArticlePillar.News:
 				default:
 					return news[100];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[10];
 			}
 		default:
 			return neutral[10];
@@ -318,12 +394,71 @@ const bulletDark = (
 	return neutral[46];
 };
 
-const articleContentDark = ({ design }: ArticleFormat): Colour => {
+const articleContent = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return news[800];
+			}
+		case ArticleDesign.Gallery:
+			return neutral[7];
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return opinion[800];
+			}
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return neutral[100];
+			}
+		default:
+			return neutral[100];
+	}
+};
+
+const articleContentDark = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[7];
 		case ArticleDesign.LiveBlog:
 			return neutral[0];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[10];
+			}
 		default:
 			return neutral[10];
 	}
@@ -630,17 +765,6 @@ const footerDark = (format: ArticleFormat): Colour => {
 			return neutral[10];
 		default:
 			return neutral[0];
-	}
-};
-
-const articleContent = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Analysis:
-			return news[800];
-		case ArticleDesign.Gallery:
-			return neutral[7];
-		default:
-			return neutral[100];
 	}
 };
 

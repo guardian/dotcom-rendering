@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering';
@@ -135,6 +136,7 @@ type Callout = {
 	name: string;
 	description?: DocumentFragment;
 	activeUntil?: number;
+	contacts?: Contact[];
 };
 
 type BodyElement =
@@ -376,13 +378,14 @@ const parse =
 				// 			),
 				// 			name: name,
 				// 			activeUntil: activeUntil,
+				// 			contacts: callout.contacts,
 				// 		}),
 				// 	)
 				// 	.withDefault(
 				// 		Result.err<string, Callout>(
 				// 			'This piece contains a callout but no matching campaign',
 				// 		),
-				// 	);
+				// );
 			}
 
 			case ElementType.EMBED: {
