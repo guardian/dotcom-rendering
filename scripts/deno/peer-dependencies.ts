@@ -48,12 +48,6 @@ const { dcr, ar, cr } = (
 	.reduce<Workspaces>((acc, { workspace, dependency, peer }) => {
 		const line = `- [ ] \`${dependency}\` requires peer \`${peer}\``;
 		switch (workspace) {
-			case '@guardian/dotcom-rendering':
-				return {
-					...acc,
-					dcr: acc.dcr.concat(line),
-				};
-
 			case '@guardian/apps-rendering':
 				return {
 					...acc,
