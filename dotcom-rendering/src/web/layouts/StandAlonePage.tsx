@@ -40,15 +40,17 @@ type Props = {
  * */
 export const StandAlonePage = ({ children, model, nav }: Props) => {
 	const {
-		renderAds,
 		subscribeUrl,
 		editionId,
 		pageFooter,
 		format,
 		contributionsServiceUrl: pageContributionsServiceUrl,
 		config,
+		isAdFreeUser,
 	} = model;
 	const articleFormat: ArticleFormat = decideFormat(format ?? {});
+
+	const renderAds = !isAdFreeUser
 
 	const isInEuropeTest =
 		config.abTests.europeNetworkFrontVariant === 'variant';

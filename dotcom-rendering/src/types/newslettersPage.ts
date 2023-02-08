@@ -34,11 +34,11 @@ export interface FENewslettersPageType {
 	nav: CAPINavType;
 	pageFooter: FooterType;
 	canonicalUrl: string;
+	isAdFreeUser: boolean;
 }
 
 export type DCRNewslettersPageType = FENewslettersPageType & {
 	sectionName?: string;
 	format?: CAPIFormat;
 	tags?: TagType[];
-	renderAds?: boolean;
 };
