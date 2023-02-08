@@ -28,6 +28,6 @@ export const signInGateCopyTestJan2023: ABTest = {
 		{
 			id: 'sign-in-copy-control',
 			test: (): void => {},
-		}
+		},
 	],
 };
