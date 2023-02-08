@@ -2237,10 +2237,10 @@
   dependencies:
     is-mobile "^3.1.1"
 
-"@guardian/braze-components@^9.0.1":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-9.0.1.tgz#c6c53de37d677eeb6e19037aca05be22758a5379"
-  integrity sha512-bVNhC5+jEjM0LKMgtX9fE4I1eHTNX7UMpdf7P4cBfY37kcT1ULFsw83/k3uvD1ondvSNmngurugBGY790ZoKqg==
+"@guardian/braze-components@^9.0.2":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-9.0.2.tgz#7778a2283180eba2f154e5f5e96711fb8b12d24c"
+  integrity sha512-s2xt4PJZnOlgEchcLgU+nAl0XDR68e+F0D8s5+6+Y92G8TY4r4X6JzY93shw6myO/ruuw7I7lPE3UkYi8b0jow==
 
 "@guardian/browserslist-config@^2.0.3":
   version "2.0.3"
