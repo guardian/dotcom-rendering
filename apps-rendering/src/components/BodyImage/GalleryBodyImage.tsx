@@ -15,7 +15,7 @@ import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
-	${grid.container}
+	${grid.container.article}
 	width: 100%;
 	margin: 0;
 

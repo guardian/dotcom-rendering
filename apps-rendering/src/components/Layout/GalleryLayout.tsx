@@ -24,7 +24,7 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const headerStyles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.container}
+	${grid.container.article}
 	background-color: ${background.articleContent(format)};
 	border-bottom: 1px solid ${border.galleryImage(format)};
 

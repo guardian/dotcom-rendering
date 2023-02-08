@@ -14,7 +14,7 @@ import { defaultStyles, DefaultTags } from './Tags.defaults';
 // ----- Component ----- //
 
 const containerStyles = css`
-	${grid.container}
+	${grid.container.article}
 `;
 
 const leftColStyles = (format: ArticleFormat): SerializedStyles => css`

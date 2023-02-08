@@ -22,18 +22,25 @@ const mobileColumns =
 	'[viewport-start] 0px [centre-column-start] repeat(4, 1fr) [centre-column-end] 0px [viewport-end]';
 const tabletColumns =
 	'[viewport-start] 1fr [centre-column-start] repeat(12, 40px) [centre-column-end] 1fr [viewport-end]';
-const desktopColumns =
+const articleDesktopColumns =
 	'[viewport-start] 1fr [centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
-const leftColColumns =
+const frontsDesktopColumns =
+	'[viewport-start] 1fr [centre-column-start] repeat(12, 60px) [centre-column-end] 1fr [viewport-end]';
+const articleLeftColColumns =
 	'[viewport-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
-const wideColumns =
+const frontsLeftColColumns =
+	'[viewport-start] 1fr [left-column-start] repeat(2, 60px) [left-column-end centre-column-start] repeat(12, 60px) [centre-column-end] 1fr [viewport-end]';
+const articleWideColumns =
 	'[viewport-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(8, 60px) [centre-column-end] 60px [right-column-start] repeat(4, 60px) [right-column-end] 1fr [viewport-end]';
+const frontsWideColumns =
+	'[viewport-start] 1fr [left-column-start] repeat(3, 60px) [left-column-end centre-column-start] repeat(12, 60px) [centre-column-end right-column-start] 60px [right-column-end] 1fr [viewport-end]';
+
 const mobileColumnGap = '12px';
 const columnGap = '20px';
 
 // ----- Grid Styles ----- //
 
-const container = `
+const articleContainer = `
     display: grid;
     grid-template-columns: ${mobileColumns};
     column-gap: ${mobileColumnGap};
@@ -47,15 +54,41 @@ const container = `
     }
 
     ${from.desktop} {
-        grid-template-columns: ${desktopColumns};
+        grid-template-columns: ${articleDesktopColumns};
     }
 
     ${from.leftCol} {
-        grid-template-columns: ${leftColColumns};
+        grid-template-columns: ${articleLeftColColumns};
     }
 
     ${from.wide} {
-        grid-template-columns: ${wideColumns};
+        grid-template-columns: ${articleWideColumns};
+    }
+`;
+
+const frontsContainer = `
+    display: grid;
+    grid-template-columns: ${mobileColumns};
+    column-gap: ${mobileColumnGap};
+
+    ${from.mobileLandscape} {
+        column-gap: ${columnGap};
+    }
+
+    ${from.tablet} {
+        grid-template-columns: ${tabletColumns};
+    }
+
+    ${from.desktop} {
+        grid-template-columns: ${frontsDesktopColumns};
+    }
+
+    ${from.leftCol} {
+        grid-template-columns: ${frontsLeftColColumns};
+    }
+
+    ${from.wide} {
+        grid-template-columns: ${frontsWideColumns};
     }
 `;
 
@@ -108,12 +141,15 @@ const grid = {
 	 *
 	 * @example
 	 * const Component = () =>
-	 *   <div css={css`${grid.container}`}>
+	 *   <div css={css`${grid.container.article}`}>
 	 *     <h1 css={css`grid-row: 1;`}>Headline</h1>
 	 *     <p css={css`grid-row: 2;`}>Standfirst</p>
 	 *   </div>
 	 */
-	container,
+	container: {
+		article: articleContainer,
+		fronts: frontsContainer,
+	},
 	/**
 	 * Place the element into one of the common Guardian layout columns. The
 	 * breakpoints at which they're available are as follows:
@@ -137,7 +173,7 @@ const grid = {
 		left: between('left-column-start', 'left-column-end'),
 		/**
 		 * Place the element into the right column. Available for `desktop`
-		 * and above breakpoints.
+		 * and above breakpoints for articles, and `wide` breakpoint for fronts.
 		 */
 		right: between('right-column-start', 'right-column-end'),
 		/**

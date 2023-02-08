@@ -37,7 +37,7 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const gridContainerStyles = css`
-	${grid.container}
+	${grid.container.article}
 `;
 
 const imageRow = css`

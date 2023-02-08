@@ -13,7 +13,7 @@ import DefaultFooter, { defaultStyles } from './Footer.defaults';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.container}
+	${grid.container.article}
 	background-color: ${background.footer(format)};
 
 	${darkModeCss`
