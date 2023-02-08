@@ -102,17 +102,6 @@ type Props = {
 	className?: string;
 };
 
-// const mobileColumns =
-// 	;
-// const tabletColumns =
-// 	;
-// const desktopColumns =
-// 	;
-// const leftColColumns =
-// 	;
-// const wideColumns =
-// 	;
-
 const containerStyles = css`
 	display: grid;
 	grid-template-columns:
