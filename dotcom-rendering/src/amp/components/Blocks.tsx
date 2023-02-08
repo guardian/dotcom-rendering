@@ -6,6 +6,7 @@ import type { Switches } from '../../types/config';
 import type { EditionId } from '../../web/lib/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
+import { isOnCriteoTestPage, isOnOzoneTestPage } from '../lib/real-time-config';
 import { Elements } from './Elements';
 import { RegionalAd } from './RegionalAd';
 
@@ -70,6 +71,7 @@ type Props = {
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
+	pageId: string;
 };
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -85,6 +87,7 @@ export const Blocks = ({
 	url,
 	shouldHideAds,
 	adTargeting,
+	pageId,
 }: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {
@@ -137,8 +140,10 @@ export const Blocks = ({
 
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
-		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
-		useOzonePrebid: adInfo.switches.ampPrebidOzone,
+		useCriteoPrebid:
+			adInfo.switches.ampPrebidCriteo && isOnCriteoTestPage(pageId),
+		useOzonePrebid:
+			adInfo.switches.ampPrebidOzone && isOnOzoneTestPage(pageId),
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
