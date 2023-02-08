@@ -75,7 +75,7 @@ export const realTimeConfig = ({
 		notUndefined,
 	);
 
-	const options = timeoutMillis ? { timeoutMillis } : {};
+	const options = timeoutMillis !== undefined ? { timeoutMillis } : {};
 
 	const data = {
 		urls,
