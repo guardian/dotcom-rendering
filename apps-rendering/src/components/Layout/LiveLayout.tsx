@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -28,6 +27,7 @@ import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 

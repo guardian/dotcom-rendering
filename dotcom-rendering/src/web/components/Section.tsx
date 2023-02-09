@@ -129,11 +129,6 @@ const margins = css`
 		breakpoint, based on chat with Harry Fisher
 	*/
 	margin-bottom: ${space[9]}px;
-
-	${from.tablet} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
 `;
 
 const rightMargin = css`

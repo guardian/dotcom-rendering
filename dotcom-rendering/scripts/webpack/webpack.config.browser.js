@@ -98,19 +98,34 @@ const getLoaders = (bundle) => {
  */
 module.exports = ({ bundle, sessionId }) => ({
 	entry: {
-		sentryLoader: './src/web/browser/sentryLoader/init.ts',
-		bootCmp: './src/web/browser/bootCmp/init.ts',
-		ga: './src/web/browser/ga/init.ts',
-		ophan: './src/web/browser/ophan/init.ts',
-		islands: './src/web/browser/islands/init.ts',
-		dynamicImport: './src/web/browser/dynamicImport/init.ts',
-		atomIframe: './src/web/browser/atomIframe/init.ts',
-		embedIframe: './src/web/browser/embedIframe/init.ts',
-		newsletterEmbedIframe:
-			'./src/web/browser/newsletterEmbedIframe/init.ts',
-		relativeTime: './src/web/browser/relativeTime/init.ts',
-		initDiscussion: './src/web/browser/initDiscussion/init.ts',
-		debug: './src/web/browser/debug/init.ts',
+		index: './src/web/browser/index.ts',
+		debug: './src/web/browser/debug/index.ts',
+	},
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				// our own chunk, which is shared between all bundles
+				frameworks: {
+					test: /[\\/]node_modules[\\/](preact|react-is|hoist-non-react-statistics|swr|@emotion|stylis)[\\/]/,
+					chunks: 'all',
+					name: 'frameworks',
+					enforce: true,
+				},
+				// defining our own chunk above overrides the webpack defaults,
+				// so now we restore them
+				// https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
+				defaultVendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+					reuseExistingChunk: true,
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+			},
+		},
 	},
 	output: {
 		filename: (data) => {

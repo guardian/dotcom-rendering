@@ -58,8 +58,6 @@ export type Props = {
 	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	/** Sometimes kickers and headlines are separated by a slash */
-	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
@@ -231,7 +229,6 @@ export const Card = ({
 	showMainVideo,
 	kickerText,
 	showPulsingDot,
-	showSlash,
 	starRating,
 	minWidthInPixels,
 	dataLinkName,
@@ -410,10 +407,6 @@ export const Card = ({
 							showPulsingDot={
 								format.design === ArticleDesign.LiveBlog ||
 								showPulsingDot
-							}
-							showSlash={
-								format.design === ArticleDesign.LiveBlog ||
-								showSlash
 							}
 							byline={byline}
 							showByline={showByline}

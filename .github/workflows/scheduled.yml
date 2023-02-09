@@ -19,8 +19,9 @@ jobs:
         with:
           deno-version: v1.26.2
 
-      - uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
         with:
+          node-version-file: '.nvmrc'
           cache: 'yarn'
 
       - name: Run Deno scripts

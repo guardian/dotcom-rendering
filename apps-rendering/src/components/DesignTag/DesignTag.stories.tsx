@@ -1,10 +1,7 @@
 // ----- Imports ----- //
 
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
 import DesignTag from './';
 

@@ -2,11 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	border,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
@@ -19,6 +14,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgNewsletter } from '@guardian/source-react-components';
 import type { NewsletterSignUp } from 'bodyElement';
+import { background, border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';

@@ -1,12 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import {
-	background,
-	border,
-	fill,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -20,6 +14,7 @@ import { fromNullable, map, withDefault } from '@guardian/types';
 import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
+import { background, border, fill, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 

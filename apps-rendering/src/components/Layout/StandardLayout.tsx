@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
@@ -46,6 +45,7 @@ import type {
 } from 'item';
 import { maybeRender, pipe } from 'lib';
 import { Optional } from 'optional';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,

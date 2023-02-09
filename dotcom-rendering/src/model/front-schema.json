@@ -449,6 +449,9 @@
                         },
                         "isPaidContent": {
                             "type": "boolean"
+                        },
+                        "onPageDescription": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -3095,6 +3098,24 @@
                 },
                 "showQuotedHeadline": {
                     "type": "boolean"
+                },
+                "discussion": {
+                    "type": "object",
+                    "properties": {
+                        "isCommentable": {
+                            "type": "boolean"
+                        },
+                        "isClosedForComments": {
+                            "type": "boolean"
+                        },
+                        "discussionId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "isClosedForComments",
+                        "isCommentable"
+                    ]
                 },
                 "showMainVideo": {
                     "type": "boolean"

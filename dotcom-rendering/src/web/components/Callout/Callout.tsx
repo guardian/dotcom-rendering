@@ -11,14 +11,9 @@ const wrapperStyles = css`
 	background-color: ${neutral[97]};
 `;
 
-const calloutDetailsStyles = css`
-	position: relative;
-	padding-bottom: ${space[2]}px;
-`;
-
 const summaryContentWrapper = css`
 	visibility: visible;
-	padding: ${space[2]}px;
+	padding: 2px ${space[2]}px ${space[6]}px ${space[2]}px;
 `;
 
 const titleStyles = css`
@@ -38,6 +33,7 @@ export interface CalloutBlockProps {
 	formId: string;
 	submissionURL: string;
 	isExpired: boolean;
+	isNonCollapsible: boolean;
 }
 
 export const CalloutBlock = ({
@@ -46,6 +42,7 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
+	isNonCollapsible,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const tabsContent = [
@@ -68,10 +65,12 @@ export const CalloutBlock = ({
 	];
 
 	return (
-		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
+		<div id={formId} css={wrapperStyles}>
 			<div css={summaryContentWrapper}>
-				<div css={titleStyles}>Tell us</div>
-				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				<div css={titleStyles}>Share your experience</div>
+				{!isNonCollapsible && (
+					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				)}
 				<CalloutDescription description={description} />
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>

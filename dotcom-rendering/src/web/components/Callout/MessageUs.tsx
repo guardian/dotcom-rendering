@@ -44,10 +44,7 @@ export const MessageUs = () => {
 				>
 					contacting us via WhatsApp
 				</a>
-				.
-			</p>
-			<p css={descriptionStyles}>
-				For true anonymity please use our{' '}
+				. For true anonymity please use our{' '}
 				<a data-ignore="global-link-styling" href={SECURE_DROP_URL}>
 					SecureDrop
 				</a>{' '}
@@ -63,7 +60,7 @@ export const MessageUs = () => {
 				target="blank"
 				nudgeIcon={false}
 			>
-				Message us on Whatsapp
+				Message us on WhatsApp
 			</LinkButton>
 			<LinkButton
 				data-ignore="global-link-styling"
