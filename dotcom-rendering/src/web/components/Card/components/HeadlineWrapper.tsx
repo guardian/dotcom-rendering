@@ -23,7 +23,8 @@ export const HeadlineWrapper = ({
 			padding-right: 5px;
 			padding-top: ${imageUrl &&
 			imagePositionOnMobile &&
-			imagePositionOnMobile === 'left' &&
+			(imagePositionOnMobile === 'left' ||
+				imagePositionOnMobile === 'right') &&
 			hasStarRating
 				? '0px'
 				: '1px'};
@@ -36,7 +37,7 @@ export const HeadlineWrapper = ({
 			${from.tablet} {
 				padding-top: ${imageUrl &&
 				imagePosition &&
-				imagePosition === 'left' &&
+				(imagePosition === 'left' || imagePosition === 'right') &&
 				hasStarRating
 					? '0px'
 					: '1px'};
