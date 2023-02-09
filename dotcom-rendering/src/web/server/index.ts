@@ -6,8 +6,10 @@ import { enhanceCommercialProperties } from '../../model/enhanceCommercialProper
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { extractTrendingTopics } from '../../model/extractTrendingTopics';
-import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
-import { validateAsArticleType,validateAsFrontType } from '../../model/validate';
+import {
+	validateAsArticleType,
+	validateAsFrontType,
+} from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
