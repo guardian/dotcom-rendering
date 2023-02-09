@@ -11,7 +11,7 @@ module.exports = (...packages) =>
 		} catch (e) {
 			log(`Pre-installing dependency (${packages.join(', ')})...`);
 			require('child_process')
-				.spawn('npm', ['i', ...packages, '--no-save'])
+				.spawn('npm', ['i', ...packages, '--no-save', '--strict-peer-deps=false'])
 				.on('close', (code) => {
 					if (code !== 0) {
 						process.exit(code);
