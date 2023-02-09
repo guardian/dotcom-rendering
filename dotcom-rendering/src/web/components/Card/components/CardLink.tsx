@@ -75,13 +75,20 @@ export const CardLink = ({
 }: Props) => {
 	return (
 		<>
-			{isExternalLink && <ExternalLink
-				linkTo={linkTo}
-				headlineText={headlineText}
-				dataLinkName={dataLinkName}/>}
-			{!isExternalLink && <InternalLink
-				linkTo={linkTo}
-				headlineText={headlineText}
-				dataLinkName={dataLinkName}/>}
+			{isExternalLink && (
+				<ExternalLink
+					linkTo={linkTo}
+					headlineText={headlineText}
+					dataLinkName={dataLinkName}
+				/>
+			)}
+			{!isExternalLink && (
+				<InternalLink
+					linkTo={linkTo}
+					headlineText={headlineText}
+					dataLinkName={dataLinkName}
+				/>
+			)}
 		</>
-)}
+	);
+};
