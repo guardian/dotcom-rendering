@@ -4,7 +4,7 @@ import { textSans } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}

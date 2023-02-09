@@ -14,8 +14,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
 import { Hide } from './Hide';
-import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 type Props = {
 	format: ArticleFormat;
@@ -382,9 +381,7 @@ export const SeriesSectionLink = ({
 										`,
 									]}
 								>
-									<Island deferUntil="idle">
-										<PulsingDot />
-									</Island>
+									<PulsingDot />
 								</span>
 							)}
 						</Hide>
@@ -449,9 +446,7 @@ export const SeriesSectionLink = ({
 									`,
 								]}
 							>
-								<Island deferUntil="idle">
-									<PulsingDot />
-								</Island>
+								<PulsingDot />
 							</span>
 						)}
 					</Hide>

@@ -71,10 +71,11 @@ export const PulsingDot = ({ colour }: Props) => {
 			 * and only animate if we verify the use doesn't have it disabled.
 			 *
 			 * There are two ways this hydration can be achieved:
-			 * 1. This file is loaded within an island, this happens on liveblogs and in onwards content,
+			 * 1. This file is loaded within an island, this happens in onwards content,
 			 *    where the useEffect will run & enable data-animate below
 			 * 2. An additional island can be loaded on the page 'AnimatePulsingDots.importable.tsx',
 			 *    which checks for un-hydrating pulsing dots and animate them if user settings allow.
+			 *    This is seen on Fronts and liveblogs.
 			 *
 			 * This animation is enabled/disabled through the data-animate attribute, which a CSS selector checks for
 			 * before setting the 'animate' property. This method allows us to enable the animation through both methods
