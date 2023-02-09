@@ -60,7 +60,7 @@ const ExternalLink = ({
 			href={linkTo}
 			css={fauxLinkStyles}
 			data-link-name={dataLinkName}
-			aria-label={headlineText + " (opens in new tab)"}
+			aria-label={headlineText + ' (opens in new tab)'}
 			target="_blank"
 			rel="noreferrer"
 		/>
