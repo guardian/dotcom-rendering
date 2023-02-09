@@ -35,7 +35,7 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
-	cardStyle?: {type: string};
+	isExternalLink?: boolean;
 };
 
 const fontStyles = ({
@@ -198,33 +198,16 @@ const dynamoStyles = css`
 	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
-
-//got a couple of extra spans here to visually confirm if it's detecting the external link; will need to remove
 const WithLink = ({
 	linkTo,
 	children,
 	isDynamo,
-	isExternalLink,
 }: {
 	linkTo?: string;
 	children: React.ReactNode;
 	isDynamo?: true;
-	isExternalLink: boolean;
 }) => {
-	if (linkTo && isExternalLink) {
-		return (
-			<Link
-				href={linkTo}
-				target="_blank"
-				rel='external'
-				cssOverrides={
-						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-					}
-				>
-				{children}
-			</Link>
-		);
-	} else if (linkTo) {
+	if (linkTo) {
 		return (
 			<Link
 				href={linkTo}
@@ -233,33 +216,15 @@ const WithLink = ({
 					}
 				>
 				{children}
+				
 			</Link>
 		);
 	}
 	return <>{children}</>;
 };
 
-/**
-determine if external link, if so:
-- make the link open in a new window if external
-- add the red icon at the end
-this works if the decideIfExternal function does - have confirmed using the kickertext value as a test, but
-the external link logic isn't working, not sure if linkto is the best to use and maybe cardstyle is.
- */
-
-// const decideIfExternalLink = (linkTo: string) => {
-// 	if (linkTo.includes('www.theguardian.com')) {
-// 		return false;
-// 	} else {
-// 		return true;
-// 	}
-// };
-
 /** Matches headlines starting with short words of 1 to 3 letters followed by a space */
 const isFirstWordShort = /^(\w{1,3}) \b/;
-
-const decideLinkType = (cardStyle?: {type: string}) => 
-{if (cardStyle == undefined || cardStyle.type == 'ExternalLink') {return true} else return false}
 
 export const CardHeadline = ({
 	headlineText,
@@ -276,7 +241,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
-	cardStyle,
+	isExternalLink,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -285,23 +250,6 @@ export const CardHeadline = ({
 	const cleanHeadLineText = headlineText.match(isFirstWordShort)
 		? headlineText.replace(' ', ' ') // from regular to non-breaking space
 		: headlineText;
-	const isExternalLink = decideLinkType(cardStyle)
-	console.log("NEW CARD")
-	console.log(headlineText)
-	console.log(format)
-	console.log(containerPalette)
-	console.log(showQuotes)
-	console.log(kickerText)
-	console.log(showPulsingDot)
-	console.log(hideLineBreak)
-	console.log(size)
-	console.log(sizeOnMobile)
-	console.log(byline)
-	console.log(showByline)
-	console.log(showLine)
-	console.log(linkTo)
-	console.log(isDynamo)
-	console.log(cardStyle)
 	return (
 		<>
 			<h3
@@ -323,7 +271,6 @@ export const CardHeadline = ({
 				<WithLink
 					linkTo={linkTo}
 					isDynamo={isDynamo}
-					isExternalLink={isExternalLink}
 				>
 					{!!kickerText && (
 						<>
@@ -351,7 +298,7 @@ export const CardHeadline = ({
 									stroke: red;
 								`}
 							>
-								<SvgExternal size="xsmall" />
+								<SvgExternal size="xsmall" isAnnouncedByScreenReader={true}/>
 							</span>
 						)}
 					</span>

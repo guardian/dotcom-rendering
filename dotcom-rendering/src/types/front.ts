@@ -262,9 +262,7 @@ export type DCRFrontCard = {
 	mediaType?: MediaType;
 	mediaDuration?: number;
 	showMainVideo: boolean;
-	cardStyle?: {
-		type: string;
-	};
+	isExternalLink: boolean;
 };
 
 export type FESnapType = {

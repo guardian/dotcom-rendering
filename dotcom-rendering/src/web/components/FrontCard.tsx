@@ -46,11 +46,8 @@ export const FrontCard = (props: Props) => {
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
 		showMainVideo: trail.showMainVideo,
-		cardStyle: trail.cardStyle,
+		isExternalLink: trail.isExternalLink,
 	}; 
-	console.log("frontcard.tsx")
-	console.log(trail.cardStyle)
-	console.log()
 
 	return Card({ ...defaultProps, ...cardProps });
 };
