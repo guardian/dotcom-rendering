@@ -1212,6 +1212,12 @@
                 },
                 "isNonCollapsible": {
                     "type": "boolean"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CalloutContactType"
+                    }
                 }
             },
             "required": [
@@ -1227,6 +1233,28 @@
                 "isNonCollapsible",
                 "tagName",
                 "title"
+            ]
+        },
+        "CalloutContactType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "urlPrefix": {
+                    "type": "string"
+                },
+                "guidance": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "urlPrefix",
+                "value"
             ]
         },
         "ChartAtomBlockElement": {
