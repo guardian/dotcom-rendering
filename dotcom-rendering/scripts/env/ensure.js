@@ -9,8 +9,7 @@ module.exports = (...packages) =>
 		try {
 			resolve(packages.map(require));
 		} catch (e) {
-			const packagesString = packages.join(', ');
-			log(`Pre-installing dependency (${packagesString})...`);
+			log(`Pre-installing dependency (${packages.join(', ')})...`);
 			const npmInstallProcess = require('child_process')
 				.spawn('npm', [
 					'i',
@@ -30,13 +29,9 @@ module.exports = (...packages) =>
 						console.log(e2);
 						process.exit(1);
 					}
-				});
-			npmInstallProcess.stderr.on('data', (data) =>
-				console.error(
-					`Error installing packages ${packagesString}: ${Buffer.from(
-						data,
-					).toString()}`,
-				),
-			);
+				})
+				.stderr.on('data', (data) =>
+					console.error(Buffer.from(data).toString()),
+				);
 		}
 	});
