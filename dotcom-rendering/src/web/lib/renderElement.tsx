@@ -188,13 +188,13 @@ export const renderElement = ({
 				switches.callouts &&
 				abTests?.calloutElementsVariant === 'variant'
 			) {
-			return (
-				<Island deferUntil="visible">
-					<CalloutBlockComponent callout={element} />
-				</Island>
-			);
-		}
-		return null;
+				return (
+					<Island deferUntil="visible">
+						<CalloutBlockComponent callout={element} />
+					</Island>
+				);
+			}
+			return null;
 
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (
