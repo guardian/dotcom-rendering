@@ -58,9 +58,13 @@ const Fixtures: { [key: string]: FEArticleType } = {
 
 mockRESTCalls();
 
-const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: FEArticleType }) => {
-	const NAV = extractNAV(ServerCAPI.nav);
-	const format: ArticleFormat = decideFormat(ServerCAPI.format);
+const HydratedLayout = ({
+	serverArticle,
+}: {
+	serverArticle: FEArticleType;
+}) => {
+	const NAV = extractNAV(serverArticle.nav);
+	const format: ArticleFormat = decideFormat(serverArticle.format);
 	useEffect(() => {
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
@@ -68,9 +72,9 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: FEArticleType }) => {
 		// Manually updates the footer DOM because it's not hydrated
 		injectPrivacySettingsLink();
 		doStorybookHydration();
-	}, [ServerCAPI]);
+	}, [serverArticle]);
 
-	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
+	return <DecideLayout article={serverArticle} NAV={NAV} format={format} />;
 };
 
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
@@ -87,16 +91,16 @@ export const HydratedLayoutWrapper = ({
 }) => {
 	const fixture = Fixtures[designName] ?? Standard;
 
-	const serverCAPI = {
+	const serverArticle = {
 		...fixture,
 		format: {
-			display: `${displayName}Display` as CAPIDisplay,
-			design: `${designName}Design` as CAPIDesign,
-			theme: theme as CAPITheme,
+			display: `${displayName}Display` as FEDisplay,
+			design: `${designName}Design` as FEDesign,
+			theme: theme as FETheme,
 		},
 	};
 
-	return <HydratedLayout ServerCAPI={serverCAPI} />;
+	return <HydratedLayout serverArticle={serverArticle} />;
 };
 
 export default {
@@ -115,7 +119,7 @@ export default {
 export const Liveblog = () => {
 	return (
 		<HydratedLayout
-			ServerCAPI={{
+			serverArticle={{
 				...Live,
 				keyEvents: [],
 			}}

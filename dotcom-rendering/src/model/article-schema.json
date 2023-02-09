@@ -256,13 +256,13 @@
             "type": "object",
             "properties": {
                 "design": {
-                    "$ref": "#/definitions/CAPIDesign"
+                    "$ref": "#/definitions/FEDesign"
                 },
                 "theme": {
-                    "$ref": "#/definitions/CAPITheme"
+                    "$ref": "#/definitions/FETheme"
                 },
                 "display": {
-                    "$ref": "#/definitions/CAPIDisplay"
+                    "$ref": "#/definitions/FEDisplay"
                 }
             },
             "required": [
@@ -292,13 +292,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPILinkType"
+                "$ref": "#/definitions/FELinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPILinkType"
+                "$ref": "#/definitions/FELinkType"
             }
         },
         "shouldHideAds": {
@@ -359,7 +359,7 @@
                 "trails": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPITrailType"
+                        "$ref": "#/definitions/FETrailType"
                     }
                 },
                 "heading": {
@@ -383,7 +383,7 @@
                     "trails": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/CAPITrailType"
+                            "$ref": "#/definitions/FETrailType"
                         }
                     },
                     "description": {
@@ -399,13 +399,13 @@
                         "type": "object",
                         "properties": {
                             "design": {
-                                "$ref": "#/definitions/CAPIDesign"
+                                "$ref": "#/definitions/FEDesign"
                             },
                             "theme": {
-                                "$ref": "#/definitions/CAPITheme"
+                                "$ref": "#/definitions/FETheme"
                             },
                             "display": {
-                                "$ref": "#/definitions/CAPIDisplay"
+                                "$ref": "#/definitions/FEDisplay"
                             }
                         },
                         "required": [
@@ -445,7 +445,7 @@
             "$ref": "#/definitions/BadgeType"
         },
         "nav": {
-            "$ref": "#/definitions/CAPINavType"
+            "$ref": "#/definitions/FENavType"
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
@@ -2418,13 +2418,13 @@
                     "type": "object",
                     "properties": {
                         "design": {
-                            "$ref": "#/definitions/CAPIDesign"
+                            "$ref": "#/definitions/FEDesign"
                         },
                         "theme": {
-                            "$ref": "#/definitions/CAPITheme"
+                            "$ref": "#/definitions/FETheme"
                         },
                         "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
+                            "$ref": "#/definitions/FEDisplay"
                         }
                     },
                     "required": [
@@ -2442,7 +2442,7 @@
                 "position"
             ]
         },
-        "CAPIDesign": {
+        "FEDesign": {
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
@@ -2470,7 +2470,7 @@
             ],
             "type": "string"
         },
-        "CAPITheme": {
+        "FETheme": {
             "enum": [
                 "CulturePillar",
                 "Labs",
@@ -2483,7 +2483,7 @@
             ],
             "type": "string"
         },
-        "CAPIDisplay": {
+        "FEDisplay": {
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -3963,7 +3963,7 @@
             ],
             "type": "string"
         },
-        "CAPILinkType": {
+        "FELinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -3981,7 +3981,7 @@
                 "children": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "pillar": {
@@ -4210,20 +4210,20 @@
             ],
             "type": "string"
         },
-        "CAPITrailType": {
+        "FETrailType": {
             "type": "object",
             "properties": {
                 "format": {
                     "type": "object",
                     "properties": {
                         "design": {
-                            "$ref": "#/definitions/CAPIDesign"
+                            "$ref": "#/definitions/FEDesign"
                         },
                         "theme": {
-                            "$ref": "#/definitions/CAPITheme"
+                            "$ref": "#/definitions/FETheme"
                         },
                         "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
+                            "$ref": "#/definitions/FEDisplay"
                         }
                     },
                     "required": [
@@ -4548,7 +4548,7 @@
                 "seriesTag"
             ]
         },
-        "CAPINavType": {
+        "FENavType": {
             "type": "object",
             "properties": {
                 "currentUrl": {
@@ -4557,23 +4557,23 @@
                 "pillars": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "otherLinks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "brandExtensions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "currentNavLink": {
-                    "$ref": "#/definitions/CAPILinkType"
+                    "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
                     "type": "string"
@@ -4585,12 +4585,12 @@
                     "type": "object",
                     "properties": {
                         "parent": {
-                            "$ref": "#/definitions/CAPILinkType"
+                            "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CAPILinkType"
+                                "$ref": "#/definitions/FELinkType"
                             }
                         }
                     },

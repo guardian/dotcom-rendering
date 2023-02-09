@@ -43,8 +43,8 @@ export interface TrailType extends BaseTrailType {
 	isBoosted?: boolean;
 }
 
-export interface CAPITrailType extends BaseTrailType {
-	format: CAPIFormat;
+export interface FETrailType extends BaseTrailType {
+	format: FEFormat;
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
 	 * We should remove this property upstream in the future
@@ -65,7 +65,7 @@ export interface TrailTabType {
 	trails: TrailType[];
 }
 
-export interface CAPITrailTabType {
+export interface FETrailTabType {
 	heading: string;
-	trails: CAPITrailType[];
+	trails: FETrailType[];
 }
