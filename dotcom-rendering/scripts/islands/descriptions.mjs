@@ -77,7 +77,7 @@ const processor = unified()
 	.use(remarkParse)
 	.use(remarkRehype)
 	.use(rehypeSlug)
-	.use(rehypeAutolinkHeadings, { behavior: 'wrap' })
+	.use(rehypeAutolinkHeadings, { behavior: 'wrap', test: 'h1' })
 	.use(rehypeStringify);
 
 const islands = await readdir(componentsDirectory)
@@ -160,7 +160,11 @@ const islands = await readdir(componentsDirectory)
 const html = await readFile(
 	resolve(fileURLToPath(import.meta.url), '..', 'islands.html'),
 	'utf-8',
-).then((template) => template.replace('<!--ISLANDS-->', islands.join('\n')));
+).then((template) =>
+	template
+		.replace('<!--TIMESTAMP-->', new Date().toISOString())
+		.replace('<!--ISLANDS-->', islands.join('\n')),
+);
 
 await writeFile(
 	resolve(fileURLToPath(import.meta.url), '../../../dist', 'islands.html'),

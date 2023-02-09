@@ -49,7 +49,15 @@ const topBarStyles = css`
  *
  * The slim dark blue top bar at the very top of Guardian pages
  *
- * [Storybook](https://637e40d1bc73bf3f604394b9-rzazjyrwhc.chromatic.com/?path=/story/components-headertopbar)
+ * ## Why does this need to be an Island?
+ *
+ * - We need to check if a user is signed in to show them the right header.
+ * - We track clicks on print subscription with a page view ID
+ * - We (sometimes) have a dynamic search
+ *
+ * ---
+ *
+ * [`HeaderTopBar` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-headertopbar)
  */
 export const HeaderTopBar = ({
 	editionId,

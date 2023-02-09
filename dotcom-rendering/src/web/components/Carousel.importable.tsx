@@ -432,6 +432,14 @@ const HeaderAndNav = ({
  *
  * A carousel of cards, mainly used in onward journeys,
  * at the bottom of articles
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Data is fetched from an API client-side.
+ *
+ * ---
+ *
+ * [`Carousel` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-carousel)
  */
 export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 	const palette = decidePalette(format);

@@ -129,6 +129,19 @@ let hasFormBeenOpened = true;
 
 type FormDataType = { [key in string]: any };
 
+/**
+ * # Callout Embed Block Component
+ *
+ * A callout to readers to share their stories.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page,
+ * and submitting a form via AJAX.
+ *
+ * ---
+ * [`CalloutEmbedBlockComponent` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-calloutembedblockcomponent)
+ */
 export const CalloutEmbedBlockComponent = ({
 	callout,
 	format,
