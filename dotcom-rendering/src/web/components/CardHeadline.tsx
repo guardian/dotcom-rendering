@@ -212,11 +212,10 @@ const WithLink = ({
 			<Link
 				href={linkTo}
 				cssOverrides={
-						isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
-					}
-				>
+					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
+				}
+			>
 				{children}
-				
 			</Link>
 		);
 	}
@@ -268,10 +267,7 @@ export const CardHeadline = ({
 					showLine && !isDynamo && lineStyles(palette),
 				]}
 			>
-				<WithLink
-					linkTo={linkTo}
-					isDynamo={isDynamo}
-				>
+				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
 						<>
 							<Kicker
@@ -298,7 +294,10 @@ export const CardHeadline = ({
 									stroke: red;
 								`}
 							>
-								<SvgExternal size="xsmall" isAnnouncedByScreenReader={true}/>
+								<SvgExternal
+									size="xsmall"
+									isAnnouncedByScreenReader={true}
+								/>
 							</span>
 						)}
 					</span>
