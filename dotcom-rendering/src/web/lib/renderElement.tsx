@@ -184,10 +184,7 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			if (
-				switches.callouts &&
-				abTests?.calloutElementsVariant === 'variant'
-			) {
+			if (switches.callouts) {
 				return (
 					<Island deferUntil="visible">
 						<CalloutBlockComponent callout={element} />
