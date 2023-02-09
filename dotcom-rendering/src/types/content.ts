@@ -78,6 +78,7 @@ export interface CalloutBlockElementV2 {
 	formFields: CampaignFieldType[];
 	role?: RoleType;
 	isNonCollapsible: boolean;
+	contacts?: Contact[];
 }
 
 interface ChartAtomBlockElement {
@@ -730,6 +731,13 @@ interface CampaignField {
 	textSize?: number;
 	hideLabel: boolean;
 	label: string;
+}
+
+interface Contact {
+	name: string;
+	value: string;
+	urlPrefix: string;
+	guidance?: string;
 }
 
 export interface CampaignFieldText extends CampaignField {
