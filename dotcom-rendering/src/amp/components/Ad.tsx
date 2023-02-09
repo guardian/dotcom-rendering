@@ -78,7 +78,6 @@ export const Ad = ({
 	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
-	// TODO compute RTC directly in here!
 	const rtcConfig = realTimeConfig(
 		usePrebid,
 		usePermutive,
