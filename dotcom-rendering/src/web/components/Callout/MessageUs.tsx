@@ -22,12 +22,12 @@ const infoStyles = css`
 	${textSans.xsmall()};
 `;
 
-
-
 const capitalizeFirstLetter = (s: string): string =>
 	s.charAt(0).toUpperCase() + s.slice(1);
 
-export const formatContactNumbers = (contacts: CalloutContactType[]): string => {
+export const formatContactNumbers = (
+	contacts: CalloutContactType[],
+): string => {
 	const contactNumbers = new Map<string, string[]>();
 
 	// Group each contact by its value, so we can display multiple names for the same number.
@@ -53,9 +53,7 @@ export const formatContactNumbers = (contacts: CalloutContactType[]): string => 
 
 const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 	const contactText = (
-		<p css={infoStyles}>
-			{formatContactNumbers(contacts)}.
-		</p>
+		<p css={infoStyles}>{formatContactNumbers(contacts)}.</p>
 	);
 
 	// If any of the contacts have guidance, display it in a readable string.
@@ -66,7 +64,11 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 				(contact, i) =>
 					contact.guidance && (
 						<>
-							<a key={i} href={contact.guidance} data-ignore="global-link-styling">
+							<a
+								key={i}
+								href={contact.guidance}
+								data-ignore="global-link-styling"
+							>
 								contacting us via{' '}
 								{capitalizeFirstLetter(contact.name)}
 							</a>
@@ -80,7 +82,12 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 	const secureDropText = (
 		<span>
 			For true anonymity please use our{' '}
-			<a href="https://www.theguardian.com/securedrop" data-ignore="global-link-styling">SecureDrop</a>{' '}
+			<a
+				href="https://www.theguardian.com/securedrop"
+				data-ignore="global-link-styling"
+			>
+				SecureDrop
+			</a>{' '}
 			service instead.
 		</span>
 	);
@@ -89,7 +96,8 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 		<>
 			{contactText}
 			<p css={infoStyles}>
-				{contacts.some((c) => !!c.guidance) && guidanceText} {secureDropText}
+				{contacts.some((c) => !!c.guidance) && guidanceText}{' '}
+				{secureDropText}
 			</p>
 		</>
 	);
@@ -100,24 +108,26 @@ const MessageUs: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 		<div className="js-message-us-tab">
 			<Disclaimer contacts={contacts} />
 
-			{contacts.map((contact, i) => (!!contact.urlPrefix && !!contact.value) ?
-					(
-						<LinkButton
-							data-ignore="global-link-styling"
-							key={i}
-							css={calloutPrimaryButtonStyles}
-							type="submit"
-							priority="primary"
-							href={`${contact.urlPrefix}${contact.value}`}
-							target="_blank"
-							rel="noopener"
-						>
-							Message us on {capitalizeFirstLetter(contact.name)}
-						</LinkButton>
-					) : <></>
+			{contacts.map((contact, i) =>
+				!!contact.urlPrefix && !!contact.value ? (
+					<LinkButton
+						data-ignore="global-link-styling"
+						key={i}
+						css={calloutPrimaryButtonStyles}
+						type="submit"
+						priority="primary"
+						href={`${contact.urlPrefix}${contact.value}`}
+						target="_blank"
+						rel="noopener"
+					>
+						Message us on {capitalizeFirstLetter(contact.name)}
+					</LinkButton>
+				) : (
+					<></>
+				),
 			)}
 		</div>
 	);
 };
 
-export {MessageUs};
+export { MessageUs };

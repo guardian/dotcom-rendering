@@ -184,39 +184,17 @@ export const renderElement = ({
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
-			// if (
-			// 	switches.callouts &&
-			// 	abTests?.calloutElementsVariant === 'variant'
-			// ) {
-				// Temp to mock out contacts array whilst we wait for the backend to be updated
-				element.contacts = [
-					// {
-					// 	name: 'whatsapp',
-					// 	value: '+447766780300',
-					// 	urlPrefix: 'https://wa.me/',
-					// 	guidance:
-					// 		'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian',
-					// },
-					{
-						name: 'signal',
-						value: '+447766780300',
-						urlPrefix: 'https://signal.me/#p/',
-					},
-					{
-						name: 'telegram',
-						value: '+1234',
-						urlPrefix: 'https://telegram.me/',
-						guidance:
-							'https://www.theguardian.com/info/2022/mar/15/telegram-sharing-stories-with-the-guardian',
-					},
-				];
-				return (
-					<Island deferUntil="visible">
-						<CalloutBlockComponent callout={element} />
-					</Island>
-				);
-			// }
-			// return null;
+			if (
+				switches.callouts &&
+				abTests?.calloutElementsVariant === 'variant'
+			) {
+			return (
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} />
+				</Island>
+			);
+		}
+		return null;
 
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return (

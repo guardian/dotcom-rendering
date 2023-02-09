@@ -64,10 +64,10 @@ export interface CalloutBlockElement {
 }
 
 export interface CalloutContactType {
-	name: string,
-	value: string,
-	urlPrefix: string,
-	guidance?: string,
+	name: string;
+	value: string;
+	urlPrefix: string;
+	guidance?: string;
 }
 
 export interface CalloutBlockElementV2 {
