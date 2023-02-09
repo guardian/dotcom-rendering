@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FETagType } from '../../types/tag';
-import { Section } from './Section';
 
 type Props = {
 	trendingTopics: FETagType[] | undefined;
@@ -39,30 +38,28 @@ const trendingTopicContainer = css`
 	padding-bottom: 20px;
 `;
 
-export const TrendingTopicComponent = ({ trendingTopics }: Props) => {
+export const TrendingTopics = ({ trendingTopics }: Props) => {
 	return (
-		<Section fullWidth={true} showTopBorder={false}>
-			<div css={trendingTopicContainer}>
-				<StraightLines
-					cssOverrides={css`
-						display: block;
-					`}
-					count={4}
-				/>
-				<div css={topicLabel}>Topics</div>
-				{/* TODO: Add allpath link */}
-				{trendingTopics?.map((tag) => {
-					return (
-						<a
-							key={tag.properties.webTitle}
-							href={tag.properties.webUrl}
-							css={linkStyle}
-						>
-							{tag.properties.webTitle}
-						</a>
-					);
-				})}
-			</div>
-		</Section>
+		<div css={trendingTopicContainer}>
+			<StraightLines
+				cssOverrides={css`
+					display: block;
+				`}
+				count={4}
+			/>
+			<div css={topicLabel}>Topics</div>
+			{/* TODO: Add allpath link */}
+			{trendingTopics?.map((tag) => {
+				return (
+					<a
+						key={tag.properties.webTitle}
+						href={tag.properties.webUrl}
+						css={linkStyle}
+					>
+						{tag.properties.webTitle}
+					</a>
+				);
+			})}
+		</div>
 	);
 };
