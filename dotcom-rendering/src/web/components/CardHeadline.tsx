@@ -294,10 +294,7 @@ export const CardHeadline = ({
 									stroke: red;
 								`}
 							>
-								<SvgExternal
-									size="xsmall"
-									isAnnouncedByScreenReader={true}
-								/>
+								<SvgExternal size="xsmall" />
 							</span>
 						)}
 					</span>
