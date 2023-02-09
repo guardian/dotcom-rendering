@@ -12,7 +12,12 @@ module.exports = (...packages) =>
 			const packagesString = packages.join(', ');
 			log(`Pre-installing dependency (${packagesString})...`);
 			const npmInstallProcess = require('child_process')
-				.spawn('npm', ['i', ...packages, '--no-save'])
+				.spawn('npm', [
+					'i',
+					...packages,
+					'--no-save',
+					'--legacy-peer-deps',
+				])
 				.on('close', (code) => {
 					if (code !== 0) {
 						process.exit(code);
