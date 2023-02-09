@@ -7,6 +7,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -79,6 +80,11 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
 			</Island>
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<AnimatePulsingDots />
+				</Island>
+			)}
 			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(

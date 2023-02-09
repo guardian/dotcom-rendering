@@ -1,4 +1,4 @@
-import type { Runnable } from '@guardian/ab-core';
+import type { ABTest, Runnable } from '@guardian/ab-core';
 import {
 	signInGateTests,
 	signInGateTestVariantToGateMapping,
@@ -20,7 +20,7 @@ export const useSignInGateSelector = ():
 	const ab = useAB()?.api;
 	if (!ab) return undefined;
 
-	const test: Runnable | null = ab.firstRunnableTest(signInGateTests);
+	const test: Runnable<ABTest> | null = ab.firstRunnableTest(signInGateTests);
 
 	if (!test) {
 		return [null, null];

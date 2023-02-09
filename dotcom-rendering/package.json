@@ -66,7 +66,7 @@
 		"@emotion/cache": "^11.4.0",
 		"@emotion/react": "^11.4.1",
 		"@emotion/server": "^11.4.0",
-		"@guardian/ab-core": "^2.0.0",
+		"@guardian/ab-core": "^3.1.0",
 		"@guardian/atoms-rendering": "^25.1.5",
 		"@guardian/braze-components": "^9.0.2",
 		"@guardian/browserslist-config": "^2.0.3",
