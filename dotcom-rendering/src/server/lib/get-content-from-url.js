@@ -18,9 +18,10 @@ async function getContentFromURL(_url, _headers) {
 		}
 
 		const url = new URL(_url);
+		console.log(url)
 
 		// searchParams will only work for the first set of query params because 'url' is already a query param itself
-		const searchparams = url.searchParams?.toString();
+		const searchparams = url.searchParams.toString();
 
 		// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
@@ -32,11 +33,15 @@ async function getContentFromURL(_url, _headers) {
 				.filter(([key]) => key.toLowerCase().startsWith('x-gu-'))
 				.filter(isStringTuple),
 		);
-
+		console.log("****")
+		console.log(jsonUrl)
 		// pick all the keys from the JSON except `html`
 		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
 			(response) => response.json(),
 		);
+
+		console.log("CONFIG")
+		console.log(config)
 
 		return config;
 	} catch (error) {
@@ -102,7 +107,8 @@ exports.parseURL = parseURL;
 exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.query.url) {
 		const url = parseURL(req.url, req.path);
-
+		console.log("URL")
+		console.log(url)
 		req.body = await getContentFromURL(url, req.headers);
 	}
 	next();

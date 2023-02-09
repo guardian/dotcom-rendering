@@ -1,3 +1,4 @@
+/* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 /* eslint-disable no-undef */
@@ -214,10 +215,32 @@ describe('Sign In Gate Tests', function () {
 				);
 			});
 
-			// TODO test the flag??
-			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {});
+			it.only('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
+				console.log("VISIT ARTICLE")
+				visitArticle()
+				cy.intercept('https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview', (req) => {
+					console.log('intercept')
+					console.log(req)
+					// req.reply() with a callback will send the request to the destination server
+					req.reply((res) => {
+						console.log('is reply called?')
+					  // 'res' represents the real destination response
+					  // you can manipulate 'res' before it's sent to the browser
+					  console.log(res)
+					  return res
+					})
+				  })
+				setGuCOCompleteCookie('new', 'DigitalPack');
 
-			describe.only('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+				visitArticleAndScrollToGateForLazyLoad();
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You need to register to keep reading',
+				);
+
+			});
+
+			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
 				// HEADER TEXT
 				const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
 				const SUPPORTER_HEADER = 'Thank you for your support';
@@ -242,10 +265,8 @@ describe('Sign In Gate Tests', function () {
 				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
 				const SIGN_IN_BUTTON = 'Sign in';
 
-				it.only('user is new and has a digital subscription', function () {
+				it('user is new and has a digital subscription', function () {
 					cy.window().then((win) => {
-						console.log("CONFIG BEFORE")
-						console.log(win)
 						win.guardian = {
 							config : {
 								switches: {
@@ -253,9 +274,6 @@ describe('Sign In Gate Tests', function () {
 								}
 							}
 						}
-						console.log("CONFIG AFTER")
-						console.log(win.guardian)
-
 					})
 					setGuCOCompleteCookie('new', 'DigitalPack');
 

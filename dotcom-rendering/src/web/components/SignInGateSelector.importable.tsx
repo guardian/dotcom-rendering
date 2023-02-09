@@ -152,8 +152,8 @@ export const SignInGateSelector = ({
 	switches,
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	console.log("&&&&&&&&&")
-	console.log(switches)
+	console.log('&&&&&&&&&');
+	console.log(switches);
 	// START: Checkout Complete Personalisation
 	const isSwitchedOn = switches.personaliseSignInAfterCheckout;
 	const checkOutCompleteString = getCookie({
