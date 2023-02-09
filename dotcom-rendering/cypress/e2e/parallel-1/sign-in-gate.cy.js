@@ -215,21 +215,10 @@ describe('Sign In Gate Tests', function () {
 				);
 			});
 
-			it.only('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
-				console.log("VISIT ARTICLE")
+			// TODO - find a way to configure the switches in the test
+
+			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
 				visitArticle()
-				cy.intercept('https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview', (req) => {
-					console.log('intercept')
-					console.log(req)
-					// req.reply() with a callback will send the request to the destination server
-					req.reply((res) => {
-						console.log('is reply called?')
-					  // 'res' represents the real destination response
-					  // you can manipulate 'res' before it's sent to the browser
-					  console.log(res)
-					  return res
-					})
-				  })
 				setGuCOCompleteCookie('new', 'DigitalPack');
 
 				visitArticleAndScrollToGateForLazyLoad();
@@ -266,18 +255,8 @@ describe('Sign In Gate Tests', function () {
 				const SIGN_IN_BUTTON = 'Sign in';
 
 				it('user is new and has a digital subscription', function () {
-					cy.window().then((win) => {
-						win.guardian = {
-							config : {
-								switches: {
-									personaliseSignInAfterCheckout: true
-								}
-							}
-						}
-					})
 					setGuCOCompleteCookie('new', 'DigitalPack');
-
-					visitArticleAndScrollToGateForLazyLoad();
+					scrollToGateForLazyLoading();
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(

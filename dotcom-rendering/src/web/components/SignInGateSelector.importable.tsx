@@ -32,7 +32,6 @@ type Props = {
 	host?: string;
 	pageId: string;
 	idUrl?: string;
-	switches: Switches;
 };
 
 // interface for the component which shows the sign in gate
@@ -45,7 +44,6 @@ interface ShowSignInGateProps {
 	gateVariant: SignInGateComponent;
 	host: string;
 	checkoutComplete?: CheckoutCompleteCookieData;
-	switches: Switches;
 }
 
 const dismissGate = (
@@ -149,13 +147,22 @@ export const SignInGateSelector = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
-	switches,
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	console.log('&&&&&&&&&');
-	console.log(switches);
+	console.log("=======")
+	console.log("****")
+	console.log(window.guardian.config)
+
+	const switches  = window.guardian.config.switches;
+
+	console.log("switches")
+	console.log(switches)
+
 	// START: Checkout Complete Personalisation
 	const isSwitchedOn = switches.personaliseSignInAfterCheckout;
+
+	console.log("personalised")
+	console.log(switches.personaliseSignInAfterCheckout)
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
