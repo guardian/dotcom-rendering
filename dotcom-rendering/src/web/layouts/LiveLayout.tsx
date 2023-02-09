@@ -177,8 +177,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 20px;
 					grid-template-columns: 240px 700px 1fr;
 					grid-template-areas:
-						'info  		 media     right-column'
-						'info		 body      right-column';
+						'info		media		right-column'
+						'info		body		right-column';
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {

@@ -439,6 +439,7 @@ type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
 	isPaidContent?: boolean;
+	onPageDescription?: string;
 };
 
 export type FESupportingContent = {

@@ -26,7 +26,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
+	hideLineBreak?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -232,7 +232,7 @@ export const CardHeadline = ({
 	showQuotes,
 	kickerText,
 	showPulsingDot,
-	showSlash,
+	hideLineBreak,
 	size = 'medium',
 	sizeOnMobile,
 	byline,
@@ -272,7 +272,7 @@ export const CardHeadline = ({
 							text={kickerText}
 							color={kickerColour}
 							showPulsingDot={showPulsingDot}
-							showSlash={showSlash}
+							hideLineBreak={hideLineBreak}
 						/>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}

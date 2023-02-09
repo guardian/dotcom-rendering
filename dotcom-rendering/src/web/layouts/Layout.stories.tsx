@@ -23,7 +23,7 @@ import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { embedIframe } from '../browser/embedIframe/embedIframe';
+import { embedIframe } from '../browser/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';

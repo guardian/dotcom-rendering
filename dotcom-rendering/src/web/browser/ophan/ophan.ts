@@ -87,17 +87,6 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	return { abTestRegister: records };
 };
 
-export const sendOphanPlatformRecord = (): void => {
-	record({ experiences: 'dotcom-rendering' });
-
-	// Record server-side AB test variants (i.e. control or variant)
-	if (window.guardian.config.tests) {
-		const { tests } = window.guardian.config;
-
-		record(abTestPayload(tests));
-	}
-};
-
 export const recordPerformance = (): void => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =

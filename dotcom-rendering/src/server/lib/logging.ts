@@ -25,18 +25,13 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
-	const data = logEvent.data[0] as unknown as
-		| Record<string, unknown>
-		| string;
+	const [arg1, arg2] = logEvent.data;
 
-	if (typeof data === 'string') {
-		return {
-			...coreFields,
-			message: data,
-		};
-	}
+	const message = typeof arg1 === 'string' ? arg1 : 'DCR Render Event';
+	const data = typeof arg2 === 'object' ? arg2 : {};
+
 	return {
-		message: 'DCR Render event',
+		message,
 		...coreFields,
 		...data,
 	};

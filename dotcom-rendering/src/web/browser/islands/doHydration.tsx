@@ -72,11 +72,11 @@ export const doHydration = async (
 		.then(({ clientOnly, importDuration, islandDuration }) => {
 			if (!('getEntriesByType' in window.performance)) return;
 
-			const action = clientOnly ? 'Rendering' : 'Hydrating';
+			const action = clientOnly ? 'Rendered' : 'Hydrated';
 
 			log(
 				'dotcom',
-				`🏝 ${action} island <${name} /> took ${islandDuration}ms (imported in ${importDuration}ms)`,
+				`🏝 ${action} <${name} /> in ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
 		})
 		.catch((error) => {

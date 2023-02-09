@@ -1,11 +1,16 @@
 import {
 	Button,
-	SvgShareCallout,
+	SvgShare,
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { calloutShare, calloutSharelink, sharePopup } from './styles';
+import {
+	calloutShare,
+	calloutSharelink,
+	shareIcon,
+	sharePopup,
+} from './styles';
 
 export const ShareLink: FC<{
 	title: string;
@@ -45,23 +50,27 @@ You can share your story by using the form on this article, or by contacting the
 		return <></>;
 
 	return (
-		<span css={calloutShare}>
-			<SvgShareCallout size="medium" />
-			Know others that are affected?
-			<Button
-				size="xsmall"
-				priority="subdued"
-				onClick={onShare}
-				css={calloutSharelink}
-			>
-				Please share this callout
-				{isCopied && (
-					<span css={sharePopup} role="alert">
-						<SvgTickRound size="xsmall" />
-						Link copied to clipboard
-					</span>
-				)}
-			</Button>
-		</span>
+		<div css={calloutShare}>
+			<span css={shareIcon}>
+				<SvgShare size="small" />
+			</span>
+			<div>
+				Know others that are affected?{' '}
+				<Button
+					size="xsmall"
+					priority="subdued"
+					onClick={onShare}
+					css={calloutSharelink}
+				>
+					Please share this callout
+					{isCopied && (
+						<span css={sharePopup} role="alert">
+							<SvgTickRound size="xsmall" />
+							Link copied to clipboard
+						</span>
+					)}
+				</Button>
+			</div>
+		</div>
 	);
 };

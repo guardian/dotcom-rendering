@@ -54,6 +54,7 @@ window.guardian = {
 		ophan: {
 			pageViewId: 'mockPageViewId',
 		},
+		tests: {},
 	},
 	ophan: {
 		record: ({}) => {},
