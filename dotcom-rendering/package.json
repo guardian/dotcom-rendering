@@ -6,6 +6,9 @@
 	"tocList": "README.md docs/contributing/**",
 	"private": true,
 	"workspaces": {
+		"packages": [
+			"dotcom-rendering"
+		],
 		"nohoist": [
 			"html-minifier",
 			"html-minifier/**",
@@ -128,7 +131,7 @@
 		"@types/sanitize-html": "^2.6.0",
 		"@types/twitter-for-web": "^0.0.2",
 		"@types/uuid": "^8.3.4",
-		"@types/webpack-bundle-analyzer": "^4.4.1",
+		"@types/webpack-bundle-analyzer": "^4.6.0",
 		"@types/webpack-env": "^1.18.0",
 		"@types/webpack-node-externals": "^2.5.3",
 		"@types/youtube": "^0.0.46",
@@ -240,10 +243,16 @@
 		"webpack-merge": "^5.7.3",
 		"webpack-messages": "^2.0.4",
 		"webpack-node-externals": "^3.0.0",
-		"webpack-sources": "^3.2.3"
+		"webpack-sources": "^3.2.3",
+		"chromatic": "^6.11.4",
+		"husky": "^7.0.0",
+		"prettier": "^2.8.0",
+		"typescript": "^4.9.0"
 	},
 	"resolutions": {
-		"@types/serve-static": "^1.13.9"
+		"@types/serve-static": "^1.13.9",
+		"@types/react": "^17.0.52",
+		"type-fest": "^2.8.0"
 	},
 	"jest": {
 		"preset": "ts-jest/presets/js-with-ts",
