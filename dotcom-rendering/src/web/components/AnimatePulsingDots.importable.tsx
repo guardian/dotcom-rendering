@@ -9,7 +9,7 @@ const animatePulsingDots = () => {
 
 	elements.forEach((element) => {
 		element.setAttribute('data-flashing-dot-hydrated', 'true');
-		// In PulsingDot.importable.tsx, we set the animation only to run
+		// In PulsingDot.tsx, we set the animation only to run
 		// if this data attribute is set
 		element.setAttribute('data-animate', 'true');
 	});
@@ -17,7 +17,7 @@ const animatePulsingDots = () => {
 
 /**
  * Island for animating pulsing dots which aren't already hydrated
- * See PulsingDot.importable.tsx for more info
+ * See PulsingDot.tsx for more info
  *
  * - We use this for fronts, where we add pulsing dots to the page which aren't wrapped in islands
  */
