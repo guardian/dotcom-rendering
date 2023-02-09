@@ -5,7 +5,6 @@ import { neutral } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
