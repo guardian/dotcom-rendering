@@ -25,10 +25,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
       # Cache npm dependencies using https://github.com/bahmutov/npm-install
-      # Root yarn installs all workspaces (root, common, dotcom)
+      # Root yarn installs all workspaces (root, dotcom)
       - uses: bahmutov/npm-install@v1
 
       - name: Chromatic - DCR Non Dependency PR / main

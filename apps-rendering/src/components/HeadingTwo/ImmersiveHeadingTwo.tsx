@@ -2,9 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
+import { text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import type { DefaultProps } from './HeadingTwo.defaults';

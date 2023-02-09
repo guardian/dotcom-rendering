@@ -2,10 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, timeAgo } from '@guardian/libs';
 import {
@@ -21,6 +17,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import Accordion from 'components/Accordion';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

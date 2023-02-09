@@ -49,7 +49,6 @@ declare global {
 				emotionReactJsxRuntime: any;
 			};
 			readerRevenue: ReaderRevenueDevUtils;
-			gaPath: string;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;

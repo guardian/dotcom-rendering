@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
 import { timestampFormat } from 'datetime';
+import { border } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

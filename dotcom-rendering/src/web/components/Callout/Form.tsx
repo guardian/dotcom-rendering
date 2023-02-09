@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { brand, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette,
+	space,
+	success,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -9,10 +15,16 @@ import { FormField } from './FormField';
 
 const textStyles = css`
 	${textSans.xsmall()};
+	padding-bottom: 16px;
+`;
+
+const successStyles = css`
+	${textSans.xsmall()};
+	padding-bottom: 44px;
 `;
 
 const tickBoxStyles = css`
-	fill: ${brand[500]};
+	fill: ${success[400]};
 	width: 48px;
 `;
 const errorTextStyles = css`
@@ -170,12 +182,12 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 				</div>
 				<div
 					css={css`
-						${textSans.xsmall({ fontWeight: 'bold' })};
+						${headline.xxsmall({ fontWeight: 'bold' })}
 					`}
 				>
 					Thank you!
 				</div>
-				<div css={textStyles}>
+				<div css={successStyles}>
 					Your story has been submitted successfully. One of our
 					journalists will be in touch if we wish to take your
 					submission further.
@@ -213,6 +225,8 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						context="Please complete all required fields."
 						cssOverrides={css`
 							width: fit-content;
+							width: 100%;
+							margin-bottom: ${space[4]}px;
 						`}
 					/>
 				)}

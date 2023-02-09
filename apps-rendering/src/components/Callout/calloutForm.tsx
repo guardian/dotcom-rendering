@@ -10,10 +10,10 @@ import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
 import {
-	bold,
 	calloutLinkContainer,
 	calloutPrimaryButton,
-	success,
+	heading,
+	successMessage,
 } from './styles';
 
 interface CalloutFormProps {
@@ -125,16 +125,16 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 	return (
 		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
-				<div css={success}>
+				<div css={successMessage}>
 					<div>
-						<SvgTickRound size="medium" />
+						<SvgTickRound />
 					</div>
-					<p css={bold}>Thank you!</p>
-					<p>Your story has been submitted successfully.</p>
-					<p>
-						One of our journalists will be in touch if we wish to
-						take your submission further.
-					</p>
+					<div css={heading}>Thank you!</div>
+					<div>
+						Your story has been submitted successfully. One of our
+						journalists will be in touch if we wish to take your
+						submission further.
+					</div>
 				</div>
 			) : (
 				<form

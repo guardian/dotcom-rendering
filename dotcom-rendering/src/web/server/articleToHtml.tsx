@@ -8,9 +8,6 @@ import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
@@ -101,50 +98,19 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
+	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScriptArrayFromFile('islands.js'),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
 	);
-
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
-
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -240,14 +206,12 @@ window.twttr = (function(d, s, id) {
 
 	return pageTemplate({
 		linkedData,
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: article.trailText,
 		windowGuardian,
-		gaPath,
 		ampLink,
 		openGraphData,
 		twitterData,

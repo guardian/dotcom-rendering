@@ -2,10 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { labs, neutral } from '@guardian/source-foundations';
+import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

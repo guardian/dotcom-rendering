@@ -1,13 +1,10 @@
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
 import HeadlineByline from 'components/HeadlineByline';
 import type { Item } from 'item';
 import { getFormat } from 'item';
+import { background, text } from 'palette';
 import { darkModeCss } from 'styles';
 import { defaultStyles } from './Headline.defaults';
 

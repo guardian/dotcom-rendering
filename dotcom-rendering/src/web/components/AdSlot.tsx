@@ -287,15 +287,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div
-					css={[
-						css`
-							position: static;
-							height: 100%;
-						`,
-						adStyles,
-					]}
-				>
+				<div css={[adStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -306,14 +298,7 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 							'js-sticky-mpu',
 						].join(' ')}
-						css={[
-							css`
-								position: sticky;
-								top: 0;
-								width: 300px;
-							`,
-							adStyles,
-						]}
+						css={[adStyles]}
 						data-link-name="ad slot comments"
 						data-name="comments"
 						aria-hidden="true"

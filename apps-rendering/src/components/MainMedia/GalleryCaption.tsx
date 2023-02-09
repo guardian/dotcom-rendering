@@ -2,10 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -15,6 +11,7 @@ import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 

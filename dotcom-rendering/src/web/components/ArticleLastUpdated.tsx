@@ -3,8 +3,7 @@ import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { Island } from './Island';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}
@@ -32,9 +31,7 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 		<div css={lastUpdatedStyles(palette)}>
 			{format.design === ArticleDesign.LiveBlog && (
 				<span css={livePulseIconStyles(palette)}>
-					<Island deferUntil="idle">
-						<PulsingDot />
-					</Island>
+					<PulsingDot />
 					LIVE
 				</span>
 			)}

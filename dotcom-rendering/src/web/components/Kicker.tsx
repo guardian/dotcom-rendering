@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
@@ -13,7 +13,6 @@ const kickerStyles = (colour: string) => css`
 	color: ${colour};
 	font-weight: 700;
 	margin-right: 4px;
-	display: inline-block;
 `;
 
 export const Kicker = ({
@@ -23,12 +22,17 @@ export const Kicker = ({
 	hideLineBreak,
 }: Props) => {
 	return (
-		<>
-			<span css={kickerStyles(color)}>
-				{showPulsingDot && <PulsingDot colour={color} />}
-				{text}
-			</span>
-			{!hideLineBreak && <br />}
-		</>
+		<div
+			css={[
+				kickerStyles(color),
+				hideLineBreak &&
+					css`
+						display: inline-block;
+					`,
+			]}
+		>
+			{showPulsingDot && <PulsingDot colour={color} />}
+			{text}
+		</div>
 	);
 };
