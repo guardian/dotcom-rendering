@@ -1,7 +1,7 @@
 import { joinUrl } from '@guardian/libs';
 import type {
-	CAPITrailTabType,
-	CAPITrailType,
+	FETrailTabType,
+	FETrailType,
 	TrailTabType,
 } from '../../types/trails';
 import { abTestTest } from '../experiments/tests/ab-test-test';
@@ -25,7 +25,7 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 
-function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
+function transformTabs(tabs: FETrailTabType[]): TrailTabType[] {
 	return tabs.map((tab) => ({
 		...tab,
 		trails: tab.trails.map((trail) => decideTrail(trail)),
@@ -33,9 +33,9 @@ function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 }
 
 interface MostViewedFooterPayloadType {
-	tabs: CAPITrailTabType[];
-	mostCommented: CAPITrailType;
-	mostShared: CAPITrailType;
+	tabs: FETrailTabType[];
+	mostCommented: FETrailType;
+	mostShared: FETrailType;
 }
 
 export const MostViewedFooterData = ({
@@ -59,7 +59,7 @@ export const MostViewedFooterData = ({
 
 	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
-		MostViewedFooterPayloadType | CAPITrailTabType[]
+		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
 
 	if (error) {

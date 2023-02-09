@@ -5,7 +5,7 @@ import { enhanceBlockquotes } from './enhance-blockquotes';
 
 const example: FEArticleType = ExampleArticle;
 
-const formatIsPhotoEssay: CAPIFormat = {
+const formatIsPhotoEssay: FEFormat = {
 	...example.format,
 	design: 'PhotoEssayDesign',
 };

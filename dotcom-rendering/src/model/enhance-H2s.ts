@@ -1,8 +1,8 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement, SubheadingBlockElement } from '../types/content';
+import type { FEElement, SubheadingBlockElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
-const shouldUseLegacyIDs = (elements: CAPIElement[]): boolean => {
+const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
 	return elements.some(
 		(element) =>
 			element._type ===
@@ -61,9 +61,9 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
  * If our h2 element is a subheading then we want to insert a humanised slug of the header text as its ID.
  * We make sure to store each slug inside an array so that we can verify if this slug already exists as an id. If it does, we add the number of times it appears on the page to make sure the id is always unique.
  */
-const enhance = (elements: CAPIElement[]): CAPIElement[] => {
+const enhance = (elements: FEElement[]): FEElement[] => {
 	const slugifiedIds: string[] = [];
-	const enhanced: CAPIElement[] = [];
+	const enhanced: FEElement[] = [];
 	const shouldUseElementId = shouldUseLegacyIDs(elements);
 	elements.forEach((element) => {
 		if (
