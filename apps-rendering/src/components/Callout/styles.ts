@@ -9,11 +9,10 @@ import {
 	neutral,
 	remSpace,
 	sport,
+	success,
 	textSans,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
-
-const containerPadding = remSpace[2];
 
 // Callout block styles
 export const calloutContainer = css`
@@ -40,7 +39,7 @@ export const calloutLinkContainer = css`
 `;
 
 export const calloutInfo = css`
-	padding: ${containerPadding};
+	padding: 2px ${remSpace[2]} ${remSpace[6]} ${remSpace[2]};
 `;
 
 export const highlight = css`
@@ -79,27 +78,33 @@ export const calloutPrimaryButton = css`
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};
+
+		:hover {
+			background: ${neutral[100]};
+		}
 	`}
 `;
 
 // Callout success Styles
-export const success = css`
+export const successMessage = css`
 	${textSans.small()};
 	svg {
-		fill: ${brand[400]};
+		fill: ${success[400]};
+		width: 48px;
 
 		${darkModeCss`
-		fill: ${sport[400]};
+		fill: ${success[500]};
 		`}
 	}
 `;
-export const bold = css`
-	${textSans.small({ fontWeight: 'bold' })}
+
+export const heading = css`
+	${headline.xxsmall({ fontWeight: 'bold' })}
 `;
 
 // Callout Share Link Styles
 export const calloutShare = css`
-	display: inline-flex;
+	display: flex;
 	align-items: center;
 	padding-right: ${remSpace[2]};
 	padding-bottom: ${remSpace[2]};
@@ -112,11 +117,24 @@ export const calloutShare = css`
 `;
 
 export const calloutSharelink = css`
-	margin: 0 ${remSpace[2]};
-	font-weight: normal;
+	${textSans.xsmall()}
 	color: ${brand[500]};
 	${darkModeCss`
 		color: ${neutral[86]};
+	`}
+`;
+
+export const shareIcon = css`
+	display: inline-flex;
+	margin-right: ${remSpace[2]};
+	border-radius: 50%;
+	border: 1px solid ${brand[500]};
+	box-sizing: border-box;
+	fill: ${brand[500]};
+
+	${darkModeCss`
+		fill: ${neutral[86]};
+		border-color: ${neutral[86]};
 	`}
 `;
 
@@ -140,10 +158,7 @@ export const sharePopup = css`
 	`}
 
 	> svg {
-		fill: ${brand[400]};
-		${darkModeCss`
-			color: ${brand[500]};
-	`}
+		fill: ${success[400]};
 	}
 `;
 

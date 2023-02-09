@@ -5,7 +5,7 @@ Ever thought about joining us?
 
 # Dotcom/Apps Rendering
 
-This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 3 projects, `apps-rendering`, `common-rendering` and `dotcom-rendering`.
+This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
 
 ## Developer setup
 
@@ -30,10 +30,6 @@ Go to [apps rendering](apps-rendering/README.md) for more details.
 ### `dotcom rendering`
 
 Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
-
-### `common rendering`
-
-Go to [common rendering](common-rendering/README.md) for more details.
 
 ## Root actions
 

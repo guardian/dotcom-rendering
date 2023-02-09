@@ -98,10 +98,7 @@ const webpackConfig = (config) => {
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: [
-			path.resolve(__dirname, '../'),
-			path.resolve(__dirname, '../../common-rendering'),
-		],
+		include: [path.resolve(__dirname, '../')],
 		exclude: babelExclude,
 		use: webpackLoaders,
 	});
@@ -117,7 +114,6 @@ const webpackConfig = (config) => {
 
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
-		path.resolve(__dirname, '../../common-rendering/src'),
 	];
 
 	config.resolve.alias = {

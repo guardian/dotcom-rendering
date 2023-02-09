@@ -7,8 +7,10 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import { Fragment } from 'react';
 import type { TreatType } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
+import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
 
 const TextTreat = ({
@@ -53,48 +55,79 @@ const ImageTreat = ({
 	links: { text: string; linkTo: string }[];
 	altText?: string;
 	backgroundColour: string;
-}) => (
-	<li>
-		<img src={imageUrl} alt={altText} width="130px" height="auto" />
-		{links.map((link, index) => (
-			<a
-				key={link.linkTo}
-				href={link.linkTo}
-				data-ignore="global-link-styling"
-				css={css`
-					text-decoration: none;
-				`}
-			>
-				<div
+}) => {
+	const sources = generateSources(imageUrl, [
+		{ breakpoint: 320, width: 130 },
+	]);
+	const fallbackSource = getFallbackSource(sources);
+
+	return (
+		<li>
+			<picture>
+				{sources.map((source) => {
+					return (
+						<Fragment key={source.breakpoint}>
+							{/* High resolution (HDPI) sources*/}
+							<source
+								srcSet={source.hiResUrl}
+								media={`(min-width: ${source.breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.breakpoint}px) and (min-resolution: 120dpi)`}
+							/>
+							{/* Low resolution (MDPI) source*/}
+							<source
+								srcSet={source.lowResUrl}
+								media={`(min-width: ${source.breakpoint}px)`}
+							/>
+						</Fragment>
+					);
+				})}
+				<img
+					src={fallbackSource.lowResUrl}
+					alt={altText}
+					width="130px"
+					height="auto"
+				/>
+			</picture>
+
+			{links.map((link, index) => (
+				<a
+					key={link.linkTo}
+					href={link.linkTo}
+					data-ignore="global-link-styling"
 					css={css`
-						margin-bottom: 8px;
-						display: block;
-						width: 80%;
+						text-decoration: none;
 					`}
 				>
-					<span
+					<div
 						css={css`
-							${headline.xxxsmall({ fontWeight: 'bold' })};
-							background-color: ${index % 2 === 0
-								? neutral[0]
-								: backgroundColour};
-							padding: 0 5px 4px;
-							box-decoration-break: clone;
-							position: relative;
-							color: ${neutral[100]};
-							text-decoration: none;
-							:hover {
-								text-decoration: underline;
-							}
+							margin-bottom: 8px;
+							display: block;
+							width: 80%;
 						`}
 					>
-						{link.text}
-					</span>
-				</div>
-			</a>
-		))}
-	</li>
-);
+						<span
+							css={css`
+								${headline.xxxsmall({ fontWeight: 'bold' })};
+								background-color: ${index % 2 === 0
+									? neutral[0]
+									: backgroundColour};
+								padding: 0 5px 4px;
+								box-decoration-break: clone;
+								position: relative;
+								color: ${neutral[100]};
+								text-decoration: none;
+								:hover {
+									text-decoration: underline;
+								}
+							`}
+						>
+							{link.text}
+						</span>
+					</div>
+				</a>
+			))}
+		</li>
+	);
+};
 
 export const Treats = ({
 	treats,

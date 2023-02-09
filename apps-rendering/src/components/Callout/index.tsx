@@ -53,6 +53,7 @@ const Callout: FC<CalloutProps> = ({
 						format={format}
 						description={description}
 						contacts={contacts}
+						isNonCollapsible={isNonCollapsible}
 					/>
 					<span
 						css={css`
@@ -71,6 +72,7 @@ const Callout: FC<CalloutProps> = ({
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
+						collapsedHeight={'160px'}
 					>
 						<CalloutBlock
 							formId={formId}
@@ -79,6 +81,7 @@ const Callout: FC<CalloutProps> = ({
 							format={format}
 							description={description}
 							contacts={contacts}
+							isNonCollapsible={isNonCollapsible}
 						/>
 					</ExpandingWrapper>
 				</ThemeProvider>

@@ -36,6 +36,7 @@ const callout = (): ReactElement => {
 			isNonCollapsible={false}
 			activeUntil={futureDate.getTime()}
 			description={campaignDescription}
+			contacts={mockCampaign.fields.contacts}
 		/>
 	);
 };
@@ -50,6 +51,7 @@ const closedCallout = (): ReactElement => (
 		isNonCollapsible={true}
 		activeUntil={pastDate.getTime()}
 		description={campaignDescription}
+		contacts={mockCampaign.fields.contacts}
 	/>
 );
 const nonCollapsableCallout = (): ReactElement => {
@@ -72,6 +74,7 @@ const nonCollapsableCallout = (): ReactElement => {
 			format={mockFormat}
 			activeUntil={futureDate.getTime()}
 			description={campaignDescription}
+			contacts={mockCampaign.fields.contacts}
 		/>
 	);
 };
@@ -96,6 +99,7 @@ const calloutWithFormFailure = (): ReactElement => {
 			format={mockFormat}
 			activeUntil={futureDate.getTime()}
 			description={campaignDescription}
+			contacts={mockCampaign.fields.contacts}
 		/>
 	);
 };
