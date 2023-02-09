@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 describe('PulsingDot', () => {
 	it('It should render pulsing dot as expected', () => {

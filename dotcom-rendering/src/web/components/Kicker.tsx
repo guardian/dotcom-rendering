@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { PulsingDot } from './PulsingDot.importable';
+import { PulsingDot } from './PulsingDot';
 
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
