@@ -9,8 +9,9 @@ module.exports = (...packages) =>
 		try {
 			resolve(packages.map(require));
 		} catch (e) {
-			log(`Pre-installing dependency (${packages.join(', ')})...`);
-			require('child_process')
+			const packagesString = packages.join(', ');
+			log(`Pre-installing dependency (${packagesString})...`);
+			const npmInstallProcess = require('child_process')
 				.spawn('npm', ['i', ...packages, '--no-save'])
 				.on('close', (code) => {
 					if (code !== 0) {
@@ -24,5 +25,12 @@ module.exports = (...packages) =>
 						process.exit(1);
 					}
 				});
+			npmInstallProcess.stderr.on('data', (data) =>
+				console.error(
+					`Error installing packages ${packagesString}: ${Buffer.from(
+						data,
+					).toString()}`,
+				),
+			);
 		}
 	});
