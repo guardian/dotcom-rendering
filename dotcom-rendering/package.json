@@ -208,6 +208,7 @@
 		"response-time": "^2.3.2",
 		"rimraf": "^3.0.2",
 		"sanitize-html": "^2.6.0",
+		"semver": "^7.3.8",
 		"simple-progress-webpack-plugin": "^2.0.0",
 		"snyk": "^1.1066.0",
 		"start-server-and-test": "^1.12.1",
