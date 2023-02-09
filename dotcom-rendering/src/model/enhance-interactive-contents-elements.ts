@@ -1,9 +1,9 @@
-import type { CAPIElement, SubheadingBlockElement } from '../types/content';
+import type { FEElement, SubheadingBlockElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 import { stripHTML } from './sanitise';
 
-const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	const updatedElements: CAPIElement[] = [];
+const enhance = (elements: FEElement[]): FEElement[] => {
+	const updatedElements: FEElement[] = [];
 	const hasInteractiveContentsBlockElement = elements.some((element) =>
 		isLegacyTableOfContents(element),
 	);

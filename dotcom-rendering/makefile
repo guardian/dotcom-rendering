@@ -30,38 +30,34 @@ deploy:
 
 # prod #########################################
 
-build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@webpack --config ./scripts/webpack/webpack.config.js --progress
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
 
-build-ci: export NODE_ENV=production
+
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
-start-ci: export NODE_ENV=production
 start-ci: install
 	$(call log, "starting PROD server...")
-	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
-start: export NODE_ENV=production
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start dist/frontend.server.js
+	NODE_ENV=production pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
-	@pm2 logs
+	@NODE_ENV=production pm2 logs
 
 # Used in cloudformation.yml which specifically:
 # - Launches pm2 from /usr/local/node rather than /node_modules
 # - Does not run 'install' task as its not needed & adds time to startup
-start-prod: export NODE_ENV=production
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	NODE_ENV=production /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -81,32 +77,27 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: export NODE_ENV=development
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: export NODE_ENV=development
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 
-cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
 
-cypress-open: export NODE_ENV=production
 cypress-open: clear clean-dist install build
 	$(call log, "starting frontend PROD server and opening Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --e2e --browser electron'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --e2e --browser electron'
 
-ampValidation: export NODE_ENV=production
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
 
 buildCheck:
 	$(call log, "checking build files")
@@ -168,7 +159,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent
+	@yarn --silent --frozen-lockfile
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")

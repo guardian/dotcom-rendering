@@ -18,7 +18,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
-const CAPIArticle = {
+const FEArticle = {
 	tags: [],
 	guardianBaseURL: 'https://theguardian.com',
 	inLeftCol: true,
@@ -26,8 +26,8 @@ const CAPIArticle = {
 	sectionLabel: 'Section label',
 	sectionUrl: '/section_url',
 };
-const brexitCAPI = {
-	...CAPIArticle,
+const FEBrexit = {
+	...FEArticle,
 	...{
 		sectionLabel: 'Brexit',
 		sectionUrl: '/brexit',
@@ -39,8 +39,8 @@ const brexitCAPI = {
 	},
 };
 
-const beyondTheBladeCAPI = {
-	...CAPIArticle,
+const FEBeyondTheBlade = {
+	...FEArticle,
 	...{
 		sectionLabel: 'Beyond the blade',
 		sectionUrl: '/beyond-the-blade',
@@ -61,7 +61,7 @@ export const defaultStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...brexitCAPI}
+				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -77,7 +77,7 @@ export const beyondTheBlade = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...beyondTheBladeCAPI}
+				{...FEBeyondTheBlade}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -98,7 +98,7 @@ export const immersiveComment = () => {
 			`}
 		>
 			<ArticleTitle
-				{...brexitCAPI}
+				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -119,7 +119,7 @@ export const immersiveCommentTag = () => {
 			`}
 		>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -142,7 +142,7 @@ export const ImmersiveSeriesTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -165,7 +165,7 @@ export const ArticleBlogTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -194,7 +194,7 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					{...CAPIArticle}
+					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
 						theme: ArticlePillar.Sport,
@@ -216,7 +216,7 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					{...CAPIArticle}
+					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
 						theme: ArticlePillar.Sport,
@@ -241,7 +241,7 @@ export const ArticleOpinionTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -264,7 +264,7 @@ export const ArticleSeriesTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -287,7 +287,7 @@ export const SpecialReportTitle = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.SpecialReport,
@@ -310,7 +310,7 @@ export const SpecialReportAlt = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.SpecialReportAlt,
@@ -333,7 +333,7 @@ export const ArticleNoTags = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Culture,
@@ -349,7 +349,7 @@ export const LabsStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.Labs,
@@ -372,7 +372,7 @@ export const LongStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -395,7 +395,7 @@ export const LongWord = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -424,7 +424,7 @@ export const ArticleDeadBlogTitle = () => {
 				<div key={JSON.stringify(format)}>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
-						{...CAPIArticle}
+						{...FEArticle}
 						format={format}
 						tags={[
 							{

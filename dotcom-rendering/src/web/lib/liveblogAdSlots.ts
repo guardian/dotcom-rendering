@@ -1,7 +1,7 @@
 import type {
 	BlockquoteBlockElement,
-	CAPIElement,
 	CommentBlockElement,
+	FEElement,
 	ImageBlockElement,
 	RichLinkBlockElement,
 	SubheadingBlockElement,
@@ -44,7 +44,7 @@ type BlockElementTextData = {
 type BlockElementHeightData = { heightExcludingText: number } & (
 	| {
 			textHeight: BlockElementTextData;
-			text: (element: CAPIElement) => string;
+			text: (element: FEElement) => string;
 	  }
 	| {
 			textHeight?: never;
@@ -54,7 +54,7 @@ type BlockElementHeightData = { heightExcludingText: number } & (
 
 /**
  * All known element types that are used in a liveblog block. There are other elements that
- * it is possible to use (see CAPIElement type), but these other elements have not been
+ * it is possible to use (see FEElement type), but these other elements have not been
  * sighted in a liveblog page, so are not considered.
  */
 type KnownBlockElementType =
@@ -162,7 +162,7 @@ const elementHeightDataMap: {
 };
 
 export const calculateApproximateElementHeight = (
-	element: CAPIElement,
+	element: FEElement,
 ): number => {
 	// Is there a height estimate for this element type?
 	const isElementTypeKnown = Object.keys(elementHeightDataMap).includes(
@@ -196,7 +196,7 @@ export const calculateApproximateElementHeight = (
  * A block is a list of Elements that make up one liveblog update
  * An element can be a few paragraphs of text, an image, a twitter embed, etc.
  */
-const calculateApproximateBlockHeight = (elements: CAPIElement[]): number => {
+const calculateApproximateBlockHeight = (elements: FEElement[]): number => {
 	if (!elements.length) return 0;
 
 	const defaultBlockHeight = BLOCK_HEADER + BLOCK_FOOTER + BLOCK_SPACING;

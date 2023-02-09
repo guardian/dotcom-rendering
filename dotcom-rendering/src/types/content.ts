@@ -321,7 +321,7 @@ interface NumberedTitleBlockElement {
 	elementId: string;
 	position: number;
 	html: string;
-	format: CAPIFormat;
+	format: FEFormat;
 }
 
 export interface InteractiveContentsBlockElement {
@@ -586,7 +586,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 
-export type CAPIElement =
+export type FEElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement
