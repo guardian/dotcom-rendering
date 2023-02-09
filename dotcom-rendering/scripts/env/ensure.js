@@ -17,6 +17,7 @@ module.exports = (...packages) =>
 					...packages,
 					'--no-save',
 					'--legacy-peer-deps',
+					'--package-lock=false',
 				])
 				.on('close', (code) => {
 					if (code !== 0) {
