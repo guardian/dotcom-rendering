@@ -2321,15 +2321,15 @@
   dependencies:
     mini-svg-data-uri "1.4.4"
 
-"@guardian/source-react-components-development-kitchen@9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-9.1.0.tgz#07aa6a8bc73b5844f1e063dc292e44ccc9788780"
-  integrity sha512-fTtMyVe8wxBcx/5qy5X9D0FPGqs+D3TACpvnIB72bGrSSNJDonNe1phnNnhHOEY6MerhEU44DcKVfHtvHRa+og==
+"@guardian/source-react-components-development-kitchen@^9.2.0":
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-9.2.0.tgz#c141b39ec16f883ae2a28e17eada7a7856d1d8d7"
+  integrity sha512-yNOq4u7lZOCbv1fGRXXzrFDCHZEs8jfzt7OxL6qQVY2+hGnEhTBD26FtsBjs0SpzmneaazAlxAR9dg2BjUbKlw==
 
-"@guardian/source-react-components@^11.1.0":
-  version "11.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-11.1.0.tgz#58e909b28d9d52800fc1e390079d3688d62c93cc"
-  integrity sha512-h2YDyoshfqbqZxtUhx3oNNAXf6Cto/U28q7V1lv/vU41T4cjRDjkS7Mh5UU5cG+5QU+rHBC/RydxASLe72UtSg==
+"@guardian/source-react-components@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-11.2.0.tgz#4732c2ab994af5c585cf5d6e8f28d4d3e2de1ab8"
+  integrity sha512-xwvKAFThOlu1F5kyHkWv3i7Fa7oxK+XJc9b7TVE/WCt7qJJrVRsSBfLIz4C68YWctbvQ34XDgk2dB0GI8/wKFg==
 
 "@guardian/support-dotcom-components@^1.0.7":
   version "1.0.7"
