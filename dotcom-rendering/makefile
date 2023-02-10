@@ -85,6 +85,11 @@ dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
+dev-debug: clear clean-dist install
+	$(call log, "starting DEV server and debugger")
+	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
+	@NODE_ENV=development SKIP_LEGACY=true NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+
 # tests #####################################
 
 cypress: clear clean-dist install build
