@@ -58,9 +58,11 @@ export const NewslettersList = ({
 				</div>
 			</Section>
 
-			{newsletters.map((newsletter) => {
-				return <p key={newsletter.name}>{newsletter.name}</p>;
-			})}
+			<Section fullWidth={true} padBottom={true}>
+				{newsletters.map((newsletter) => {
+					return <p key={newsletter.name}>{newsletter.name}</p>;
+				})}
+			</Section>
 		</>
 	);
 };
