@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { Star } from '../../../static/icons/Star';
 import type { RatingSizeType } from '../../../types/content';
+import { Breakpoint } from '@guardian/source-foundations';
 
 const starWrapper = css`
 	display: inline-block;
@@ -11,7 +12,7 @@ const determineSize = (size: RatingSizeType) => {
 	switch (size) {
 		case 'small':
 			return css`
-				padding: 1px;
+				padding: 0 2px;
 				svg {
 					width: 12px;
 					height: 12px;
@@ -36,27 +37,46 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
+const determineBreakpoint = (breakpoint: Breakpoint | undefined) =>
+	breakpoint === undefined ? 'all-breakpoints' : breakpoint;
+
 type Props = {
 	rating: number;
 	size: RatingSizeType;
+	breakpoint?: Breakpoint;
 };
 
-export const StarRating = ({ rating, size }: Props) => (
+export const StarRating = ({ rating, size, breakpoint }: Props) => (
 	<div css={determineSize(size)}>
 		<div css={starWrapper}>
-			<Star starId={`${size}1`} isEmpty={rating < 1} />
+			<Star
+				starId={`${size}1-${determineBreakpoint(breakpoint)}`}
+				isEmpty={rating < 1}
+			/>
 		</div>
 		<div css={starWrapper}>
-			<Star starId={`${size}2`} isEmpty={rating < 2} />
+			<Star
+				starId={`${size}2-${determineBreakpoint(breakpoint)}`}
+				isEmpty={rating < 2}
+			/>
 		</div>
 		<div css={starWrapper}>
-			<Star starId={`${size}3`} isEmpty={rating < 3} />
+			<Star
+				starId={`${size}3-${determineBreakpoint(breakpoint)}`}
+				isEmpty={rating < 3}
+			/>
 		</div>
 		<div css={starWrapper}>
-			<Star starId={`${size}4`} isEmpty={rating < 4} />
+			<Star
+				starId={`${size}4-${determineBreakpoint(breakpoint)}`}
+				isEmpty={rating < 4}
+			/>
 		</div>
 		<div css={starWrapper}>
-			<Star starId={`${size}5`} isEmpty={rating < 5} />
+			<Star
+				starId={`${size}5-${determineBreakpoint(breakpoint)}`}
+				isEmpty={rating < 5}
+			/>
 		</div>
 	</div>
 );
