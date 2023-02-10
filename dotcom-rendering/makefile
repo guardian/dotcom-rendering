@@ -88,7 +88,7 @@ dev-legacy: clear clean-dist install
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development SKIP_LEGACY=true node --inspect ../node_modules/webpack/bin/webpack.js serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development SKIP_LEGACY=true NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 
