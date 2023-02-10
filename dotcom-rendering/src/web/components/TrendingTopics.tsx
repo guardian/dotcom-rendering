@@ -40,7 +40,7 @@ const trendingTopicContainer = css`
 
 export const TrendingTopics = ({ trendingTopics }: Props) => {
 	return (
-		<div css={trendingTopicContainer}>
+		<div css={trendingTopicContainer} data-link-name="keywords">
 			<StraightLines
 				cssOverrides={css`
 					display: block;
@@ -55,6 +55,12 @@ export const TrendingTopics = ({ trendingTopics }: Props) => {
 						key={tag.properties.webTitle}
 						href={tag.properties.webUrl}
 						css={linkStyle}
+						data-link-name={
+							'keyword: ' +
+							(tag.properties.url === undefined
+								? tag.properties.webTitle
+								: tag.properties.url)
+						}
 					>
 						{tag.properties.webTitle}
 					</a>

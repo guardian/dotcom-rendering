@@ -440,7 +440,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
-			<Section fullWidth={true} showTopBorder={false}>
+			<Section
+				fullWidth={true}
+				showTopBorder={false}
+				data-component="trending-topics"
+			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
 			<Section
