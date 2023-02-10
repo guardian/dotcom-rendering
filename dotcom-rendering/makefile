@@ -34,6 +34,9 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
 
+rollup: clean-dist
+	$(call log, "building production bundles with rollup")
+	@NODE_ENV=production rollup -c
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")

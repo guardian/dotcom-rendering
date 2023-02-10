@@ -1,4 +1,4 @@
-import './webpackPublicPath';
+// import './webpackPublicPath';
 
 // these modules are bundled in the initial (i.e. this) chunk, so that they run ASAP
 import { bootCmp } from './bootCmp';
