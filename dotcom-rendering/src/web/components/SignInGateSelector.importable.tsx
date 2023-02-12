@@ -148,11 +148,9 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
 	// START: Checkout Complete Personalisation
-	// TODO - add a check for switches
-	// const switches  = window.guardian.config.switches;
-	// const isSwitchedOn = switches.personaliseSignInAfterCheckout;
+	const switches = window.guardian.config.switches;
+	const isSwitchedOn = switches.personaliseSignInAfterCheckout;
 
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',

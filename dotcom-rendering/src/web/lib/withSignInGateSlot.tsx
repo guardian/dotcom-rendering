@@ -19,7 +19,6 @@ type Props = {
 	host?: string;
 	pageId: string;
 	idUrl: string;
-	switches: Switches;
 	isSensitive: boolean;
 	isDev: boolean;
 };
