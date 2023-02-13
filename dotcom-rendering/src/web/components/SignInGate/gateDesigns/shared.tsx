@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	brand,
+	fonts,
 	from,
 	headline,
 	line,
@@ -30,7 +31,7 @@ export const headingStyles = css`
 `;
 
 export const personalisedHeadingStyles = css`
-	font-family: 'GH Guardian Headline';
+	font-family: ${fonts.headline};
 	${headline.small({ fontWeight: 'bold' })};
 	border-top: 2px ${brand[400]} solid;
 	${from.phablet} {
@@ -90,7 +91,7 @@ export const bulletStyles = css`
 
 export const personalisedBodyTextList = css`
 	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
-	font-family: 'GH Guardian Headline';
+	font-family: ${fonts.headline};
 	padding-bottom: ${space[2]}px;
 	color: black;
 `;
