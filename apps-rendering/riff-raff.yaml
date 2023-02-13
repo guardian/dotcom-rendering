@@ -38,7 +38,8 @@ deployments:
   mobile-assets:
     type: aws-s3
     parameters:
-      bucket: mobile-apps-rendering-assets
+      bucketSsmLookup: true
+      bucketSsmKey: /account/services/apps-rendering-static.bucket
       cacheControl: public, max-age=315360000
       prefixStack: false
       publicReadAcl: false
