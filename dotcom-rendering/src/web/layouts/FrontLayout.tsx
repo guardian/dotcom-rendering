@@ -290,6 +290,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
+					const isVideoContainer =
+						collection.collectionType === 'fixed/video';
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<>
@@ -377,12 +380,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								description={collection.description}
 								showTopBorder={index > 0}
 								padContent={false}
-								centralBorder="partial"
 								url={collection.href}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
+								innerBackgroundColour={
+									isVideoContainer ? neutral[7] : undefined
+								}
+								fontColour={
+									isVideoContainer ? neutral[100] : undefined
+								}
 								toggleable={isToggleable(
 									index,
 									collection,

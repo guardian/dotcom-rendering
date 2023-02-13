@@ -21,29 +21,33 @@ const TextTreat = ({
 	text: string;
 	linkTo: string;
 	borderColour?: string;
-}) => (
-	<li
-		css={css`
-			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? neutral[86]};
-			border-top: 1px solid ${borderColour ?? neutral[86]};
-			padding-top: ${space[1]}px;
-			padding-left: ${space[2]}px;
-		`}
-	>
-		<Link
-			priority="secondary"
-			subdued={true}
-			cssOverrides={css`
-				${textSans.xxsmall()}
-				text-decoration: none;
+}) => {
+	const documentariesLinkColor = linkTo === '/documentaries' && neutral[100];
+	return (
+		<li
+			css={css`
+				margin-top: ${space[3]}px;
+				border-left: 1px solid ${borderColour ?? neutral[86]};
+				border-top: 1px solid ${borderColour ?? neutral[86]};
+				padding-top: ${space[1]}px;
+				padding-left: ${space[2]}px;
 			`}
-			href={linkTo}
 		>
-			{text}
-		</Link>
-	</li>
-);
+			<Link
+				priority="secondary"
+				subdued={true}
+				cssOverrides={css`
+					${textSans.xxsmall()}
+					text-decoration: none;
+					color: ${documentariesLinkColor};
+				`}
+				href={linkTo}
+			>
+				{text}
+			</Link>
+		</li>
+	);
+};
 
 const ImageTreat = ({
 	imageUrl,

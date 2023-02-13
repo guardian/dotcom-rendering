@@ -20,6 +20,7 @@ import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
+import { FixedVideo } from '../components/FixedVideo';
 import { NavList } from '../components/NavList';
 
 type Props = {
@@ -166,6 +167,14 @@ export const DecideContainer = ({
 		case 'fixed/small/fast-VIII':
 			return (
 				<FixedSmallFastVIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/video':
+			return (
+				<FixedVideo
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
