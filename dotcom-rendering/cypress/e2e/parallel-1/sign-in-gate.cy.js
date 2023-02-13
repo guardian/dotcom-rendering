@@ -204,7 +204,7 @@ describe('Sign In Gate Tests', function () {
 					'You need to register to keep reading',
 				);
 				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'It’s still free to read - this is not a paywall',
+					'It’s still free to read – this is not a paywall',
 				);
 				cy.get('[data-cy=sign-in-gate-main]').contains(
 					'We’re committed to keeping our quality reporting open.',
