@@ -121,7 +121,6 @@ export const ArticleRenderer = ({
 				host,
 				pageId,
 				idUrl,
-				switches,
 				isSensitive,
 				isDev,
 			})}
