@@ -22,8 +22,10 @@ const infoStyles = css`
 	${textSans.xsmall()};
 `;
 
-const capitalizeFirstLetter = (s: string): string =>
-	s.charAt(0).toUpperCase() + s.slice(1);
+export const formatContactType = (s: string): string =>
+	s.toLowerCase() === 'whatsapp'
+		? 'WhatsApp'
+		: s.charAt(0).toUpperCase() + s.slice(1);
 
 export const formatContactNumbers = (
 	contacts: CalloutContactType[],
@@ -41,7 +43,7 @@ export const formatContactNumbers = (
 	return [...contactNumbers.entries()].reduce(
 		(acc, [value, names], index) => {
 			const namesString = names
-				.map((name) => capitalizeFirstLetter(name))
+				.map((name) => formatContactType(name))
 				.join(' or ');
 			return (
 				acc + (index === 0 ? '' : ' or ') + `${namesString} at ${value}`
@@ -70,7 +72,7 @@ const Disclaimer: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 								data-ignore="global-link-styling"
 							>
 								contacting us via{' '}
-								{capitalizeFirstLetter(contact.name)}
+								{formatContactType(contact.name)}
 							</a>
 							{i === contacts.length - 1 ? '.' : ', '}
 						</>
@@ -120,7 +122,7 @@ const MessageUs: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 						target="_blank"
 						rel="noopener"
 					>
-						Message us on {capitalizeFirstLetter(contact.name)}
+						Message us on {formatContactType(contact.name)}
 					</LinkButton>
 				) : (
 					<></>
