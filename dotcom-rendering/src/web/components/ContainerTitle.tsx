@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	headline,
-	neutral,
-	news,
-	space,
-} from '@guardian/source-foundations';
+import { headline, neutral, news, space } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -55,14 +50,6 @@ const bottomMargin = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const marginStyles = css`
-	margin-left: 0;
-	${between.tablet.and.leftCol} {
-		margin-left: 10px;
-	}
-	margin-bottom: ${space[2]}px;
-`;
-
 const dateTextStyles = (color: Colour) => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	color: ${color};
@@ -92,7 +79,7 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<div css={[marginStyles]}>
+		<>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
@@ -107,7 +94,7 @@ export const ContainerTitle = ({
 				/>
 			)}
 			{showDateHeader && editionId && (
-				<>
+				<Hide until="tablet">
 					<span
 						css={dateTextStyles(
 							overrides?.text.containerDate ?? neutral[0],
@@ -132,8 +119,8 @@ export const ContainerTitle = ({
 							year: 'numeric',
 						})}
 					</span>
-				</>
+				</Hide>
 			)}
-		</div>
+		</>
 	);
 };

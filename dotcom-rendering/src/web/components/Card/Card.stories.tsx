@@ -857,7 +857,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 
 export const WhenVideoWithPlayButton = () => {
 	return (
-		<Section title="Play icons" padContent={false} centralBorder="partial">
+		<Section title="Play icons" padContent={true} centralBorder="partial">
 			<UL direction="row" padBottom={true}>
 				<LI percentage={'100%'} padSides={true}>
 					<Card

@@ -1,5 +1,6 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 
 type Props = {
@@ -7,42 +8,39 @@ type Props = {
 	overrideContainerToggleColour?: string;
 };
 
-const showHideButtonCss = (
-	overrideContainerToggleColour: string | undefined,
-) => css`
-	color: ${overrideContainerToggleColour ?? neutral[46]};
+const buttonColourStyles = (overrideContainerToggleColour: string) => css`
+	color: ${overrideContainerToggleColour};
+`;
+
+const buttonStyles = css`
+	color: ${neutral[46]};
 	${textSans.xsmall()};
-
 	margin-top: ${space[2]}px;
-	margin-right: 10px;
-	margin-bottom: ${space[2]}px;
-	position: relative;
-	align-items: bottom;
-
 	text-decoration: none;
-
-	${from.wide} {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
 `;
 
 /**
- * This component creates the styled button for showing & hiding a container,
- * The functionality for this is implemented in a single island 'ShownHideContainers.importable'
+ * This component creates the styled button for showing & hiding a container.
+ * The functionality for this is implemented in a single island `ShowHideContainers.importable.tsx`
+ *
+ * @see {ShowHideContainers}
  **/
 export const ShowHideButton = ({
 	sectionId,
 	overrideContainerToggleColour,
 }: Props) => {
+	// @ts-expect-error -- Emotion will handle undefined values gracefully
+	const colourStyles: SerializedStyles = overrideContainerToggleColour
+		? buttonColourStyles(overrideContainerToggleColour)
+		: undefined;
+
 	return (
 		<ButtonLink
 			priority="secondary"
-			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
+			cssOverrides={[buttonStyles, colourStyles]}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}
-			aria-controls={`container-${sectionId}`}
+			aria-controls={sectionId}
 			aria-expanded={true}
 		>
 			Hide

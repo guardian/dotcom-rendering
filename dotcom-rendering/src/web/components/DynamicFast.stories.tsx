@@ -31,7 +31,7 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 export const OneHugeTwoBigsSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: oneHuge</br>second slice: twoBigs`}
 	>
@@ -53,7 +53,7 @@ OneHugeTwoBigsSixStandards.story = {
 export const OneVeryBigTwoBigsSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 	>
@@ -75,7 +75,7 @@ OneVeryBigTwoBigsSixStandards.story = {
 export const TwoVeryBigsTwoBigsSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 	>
@@ -97,7 +97,7 @@ TwoVeryBigsTwoBigsSixStandards.story = {
 export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
 	>
@@ -119,7 +119,7 @@ TwoVeryBigs1stBoostedTwoBigsSixStandards.story = {
 export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
 	>
@@ -143,7 +143,7 @@ TwoVeryBigs2ndBoostedTwoBigsSixStandards.story = {
 export const TwoVeryBigsTwelveStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 	>
@@ -165,7 +165,7 @@ TwoVeryBigsTwelveStandards.story = {
 export const TwoVeryBigsOneBigEightStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 	>
@@ -188,7 +188,7 @@ TwoVeryBigsOneBigEightStandards.story = {
 export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: oneBigBoosted`}
 	>
@@ -211,7 +211,7 @@ TwoVeryBigsOneBigBoostedSixStandards.story = {
 export const TwoVeryBigsTwoBigsFiveStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 	>
@@ -234,7 +234,7 @@ TwoVeryBigsTwoBigsFiveStandards.story = {
 export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoOrMoreBigsFirstBoosted`}
 	>
@@ -257,7 +257,7 @@ TwoVeryBigsTwoBigsFirstBoostedEightStandards.story = {
 export const TwoVeryBigsThreeBigsThreeStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: threeBigs`}
 	>
@@ -280,7 +280,7 @@ TwoVeryBigsThreeBigsThreeStandards.story = {
 export const TwoVeryBigsFourBigs = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: fourBigs`}
 	>
@@ -306,7 +306,7 @@ TwoVeryBigsFourBigs.story = {
 export const OneHugeOneVeryBig7Standards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: oneHuge</br>second slice: oneBig`}
 	>
@@ -330,7 +330,7 @@ OneHugeOneVeryBig7Standards.story = {
 export const ThreeVeryBigsFourBigs = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: fourBigs`}
 	>
@@ -353,7 +353,7 @@ OneHugeOneVeryBig7Standards.story = {
 export const TwoBigsFourStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: undefined</br>second slice: twoBigs`}
 	>
@@ -377,7 +377,7 @@ TwoBigsFourStandards.story = {
 export const OneVeryBigTwoBigs = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 	>
@@ -400,7 +400,7 @@ OneVeryBigTwoBigs.story = {
 export const OneVeryBig = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: oneVeryBig</br>second slice: noBigs`}
 	>
@@ -422,7 +422,7 @@ OneVeryBig.story = {
 export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
 	<Section
 		title="DynamicFast"
-		padContent={false}
+		padContent={true}
 		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoOrMoreBigsFirstBoosted`}
 	>

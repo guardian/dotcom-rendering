@@ -1,16 +1,13 @@
 import { css } from '@emotion/react';
 import { App as Comments } from '@guardian/discussion-rendering';
 import { joinUrl } from '@guardian/libs';
-import { neutral, space } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
-import { Hide } from './Hide';
-import { SignedInAs } from './SignedInAs';
 
 export type Props = {
 	format: ArticleFormat;
@@ -84,8 +81,6 @@ export const Discussion = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	const palette = decidePalette(format);
-
 	const hasCommentsHash =
 		typeof window !== 'undefined' && window.location.hash === '#comments';
 
@@ -94,7 +89,7 @@ export const Discussion = ({
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
-		// and reload the discussion based on the resuts
+		// and reload the discussion based on the results
 		setHashCommentId(commentId);
 		return false;
 	};
@@ -151,23 +146,7 @@ export const Discussion = ({
 				css={[positionRelative, revealStyles, !isExpanded && fixHeight]}
 				className="discussion"
 			>
-				<div className="pending">
-					<Hide when="above" breakpoint="leftCol">
-						<div
-							data-cy="discussion"
-							css={css`
-								padding-bottom: ${space[2]}px;
-							`}
-						>
-							<SignedInAs
-								palette={palette}
-								enableDiscussionSwitch={enableDiscussionSwitch}
-								user={user}
-								commentCount={commentCount}
-								isClosedForComments={isClosedForComments}
-							/>
-						</div>
-					</Hide>
+				<div className="pending" data-cy="discussion">
 					<Comments
 						user={user}
 						baseUrl={discussionApiUrl}
