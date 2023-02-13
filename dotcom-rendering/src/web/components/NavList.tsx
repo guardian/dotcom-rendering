@@ -23,17 +23,12 @@ const topBorderColour = (containerOverrides?: ContainerOverrides) => css`
 `;
 
 const ulStyles = css`
-	column-gap: 10px;
+	column-gap: 20px;
 `;
 
 const liStyles = css`
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
-
-	${from.tablet} {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
 `;
 
 const textColumns = css`

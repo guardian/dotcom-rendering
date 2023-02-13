@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import {
@@ -12,6 +11,7 @@ import {
 import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import { maybeRender } from 'lib';
+import { background } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';

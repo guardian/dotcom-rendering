@@ -1,3 +1,4 @@
+import { log } from '@guardian/libs';
 import { initPerf } from './initPerf';
 
 const measure = (name: string, task: () => Promise<void>): void => {
@@ -12,9 +13,11 @@ const measure = (name: string, task: () => Promise<void>): void => {
 		// See: https://github.com/cypress-io/cypress/issues/2651#issuecomment-432698837
 		.then(() => {
 			end();
+			log('dotcom', `🥾 Booted ${name} in ${end()}ms`);
 		})
 		.catch(() => {
 			end();
+			log('dotcom', `🤒 Failed to boot ${name} in ${end()}ms`);
 		});
 };
 

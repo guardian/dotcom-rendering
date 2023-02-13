@@ -1,11 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-	fill,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
@@ -15,6 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
+import { background, border, fill, text } from 'palette';
 import type { ReactElement } from 'react';
 import { darkModeCss, darkModeStyles } from 'styles';
 

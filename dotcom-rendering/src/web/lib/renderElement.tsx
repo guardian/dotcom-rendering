@@ -8,7 +8,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../../types/config';
-import type { CAPIElement, RoleType } from '../../types/content';
+import type { FEElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -27,6 +27,7 @@ import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InlineSkipToWrapper } from '../components/InlineSkipToWrapper';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent.importable';
@@ -69,7 +70,7 @@ import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	element: CAPIElement;
+	element: FEElement;
 	adTargeting?: AdTargeting;
 	host?: string;
 	index: number;
@@ -88,7 +89,7 @@ type Props = {
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
-const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
+const updateRole = (el: FEElement, format: ArticleFormat): FEElement => {
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -117,7 +118,7 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 	}
 };
 
-// renderElement converts a CAPI element to JSX. A boolean 'ok' flag is returned
+// renderElement converts a Frontend element to JSX. A boolean 'ok' flag is returned
 // along with the element to indicate if the element is null, in which case
 // callers can e.g. avoid further work/wrapping as required. Unfortunately,
 // there is no straightforward way to tell if a React element is null by direct
@@ -450,14 +451,21 @@ export const renderElement = ({
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			return (
-				<EmailSignup
-					identityName={element.newsletter.identityName}
-					description={element.newsletter.description}
-					name={element.newsletter.name}
-					frequency={element.newsletter.frequency}
-					successDescription={element.newsletter.successDescription}
-					theme={element.newsletter.theme}
-				/>
+				<InlineSkipToWrapper
+					id={`EmailSignup-skip-link-${index}`}
+					blockDescription="newsletter promotion"
+				>
+					<EmailSignup
+						identityName={element.newsletter.identityName}
+						description={element.newsletter.description}
+						name={element.newsletter.name}
+						frequency={element.newsletter.frequency}
+						successDescription={
+							element.newsletter.successDescription
+						}
+						theme={element.newsletter.theme}
+					/>
+				</InlineSkipToWrapper>
 			);
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return (
@@ -755,7 +763,7 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
-const bareElements = new Set<CAPIElement['_type']>([
+const bareElements = new Set<FEElement['_type']>([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
 	'model.dotcomrendering.pageElements.CodeBlockElement',

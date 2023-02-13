@@ -22,7 +22,7 @@ const fixedWidths = css`
 		min-width: 627px;
 	}
 	${from.wide} {
-		min-width: 718px;
+		min-width: 720px;
 	}
 `;
 

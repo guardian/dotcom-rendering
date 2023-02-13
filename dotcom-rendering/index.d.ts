@@ -1,5 +1,5 @@
 // ------------------------  //
-// CAPIArticleType and its subtypes //
+// Frontend format types     //
 // ------------------------- //
 
 // Pillars are used for styling
@@ -22,11 +22,11 @@ type ThemePillar =
 	| 'LifestylePillar';
 
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
-type CAPITheme = ThemePillar | ThemeSpecial;
+type FETheme = ThemePillar | ThemeSpecial;
 
-// CAPIDesign is what CAPI gives us on the Format field
+// FEDesign is what frontend gives (originating in the capi scala client) us on the Format field
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
-type CAPIDesign =
+type FEDesign =
 	| 'ArticleDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
@@ -51,21 +51,21 @@ type CAPIDesign =
 	| 'FullPageInteractiveDesign'
 	| 'NewsletterSignupDesign';
 
-// CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
+// FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
-type CAPIDisplay =
+type FEDisplay =
 	| 'StandardDisplay'
 	| 'ImmersiveDisplay'
 	| 'ShowcaseDisplay'
 	| 'NumberedListDisplay';
 
-// CAPIFormat is the stringified version of Format passed through from CAPI.
+// FEFormat is the stringified version of Format passed through from Frontend.
 // It gets converted to the @guardian/libs format on platform
 
-type CAPIFormat = {
-	design: CAPIDesign;
-	theme: CAPITheme;
-	display: CAPIDisplay;
+type FEFormat = {
+	design: FEDesign;
+	theme: FETheme;
+	display: FEDisplay;
 };
 
 type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
@@ -153,7 +153,7 @@ interface BlockContributor {
 
 interface Block {
 	id: string;
-	elements: import('./src/types/content').CAPIElement[];
+	elements: import('./src/types/content').FEElement[];
 	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
@@ -241,32 +241,34 @@ type CricketMatch = {
 };
 
 // Data types for the API request bodies from clients that require
-// transformation before internal use. If we use the data as-is, we avoid the
-// CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
-// misleading - the model is *not* the same as the Content API content models.
+// transformation before internal use.
+// Where data types are coming from Frontend we try to use the 'FE' prefix.
+//
+// Prior to this we used 'CAPI' as a prefix which wasn't entirely accurate,
+// and some data structures never received the prefix, meaning some are still missing it.
 
-interface CAPILinkType {
+interface FELinkType {
 	url: string;
 	title: string;
 	longTitle?: string;
 	iconName?: string;
-	children?: CAPILinkType[];
+	children?: FELinkType[];
 	pillar?: LegacyPillar;
 	more?: boolean;
 	classList?: string[];
 }
 
-interface CAPINavType {
+interface FENavType {
 	currentUrl: string;
-	pillars: CAPILinkType[];
-	otherLinks: CAPILinkType[];
-	brandExtensions: CAPILinkType[];
-	currentNavLink?: CAPILinkType;
+	pillars: FELinkType[];
+	otherLinks: FELinkType[];
+	brandExtensions: FELinkType[];
+	currentNavLink?: FELinkType;
 	currentNavLinkTitle?: string;
 	currentPillarTitle?: string;
 	subNavSections?: {
-		parent?: CAPILinkType;
-		links: CAPILinkType[];
+		parent?: FELinkType;
+		links: FELinkType[];
 	};
 	readerRevenueLinks: ReaderRevenuePositions;
 }
@@ -276,9 +278,9 @@ type StageType = 'DEV' | 'CODE' | 'PROD';
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks
  */
-interface BlocksRequest {
+interface FEBlocksRequest {
 	blocks: Block[];
-	format: CAPIFormat;
+	format: FEFormat;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -297,9 +299,9 @@ interface BlocksRequest {
 /**
  * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
  */
-interface KeyEventsRequest {
+interface FEKeyEventsRequest {
 	keyEvents: Block[];
-	format: CAPIFormat;
+	format: FEFormat;
 	filterKeyEvents: boolean;
 }
 
@@ -483,18 +485,6 @@ type RichLinkCardType =
 	| 'letters'
 	| 'external'
 	| 'news';
-
-// ----------
-// AdSlots //
-// ----------
-type AdSlotType =
-	| 'right'
-	| 'top-above-nav'
-	| 'mostpop'
-	| 'merchandising-high'
-	| 'merchandising'
-	| 'comments'
-	| 'survey';
 
 // ------------------------------
 // 3rd party type declarations //

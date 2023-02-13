@@ -194,6 +194,8 @@ export const privacyLink = css`
 	text-underline-position: under;
 	border: 0;
 	background: transparent;
+	/* stylelint-disable-next-line property-disallowed-list */
+	font-family: inherit;
 	font-size: inherit;
 	padding: 0;
 	cursor: pointer;

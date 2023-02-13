@@ -2,13 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { ResizedRelatedContent } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {

@@ -1,5 +1,4 @@
 import { text, textSans } from '@guardian/source-foundations';
-import { getRTCParameters } from '../lib/real-time-config';
 import type { BaseAdProps } from './Ad';
 import { Ad } from './Ad';
 
@@ -28,14 +27,13 @@ export const StickyAd = ({
 	return (
 		<amp-sticky-ad layout="nodisplay">
 			<Ad
-				isSticky={true}
 				editionId={editionId}
 				section={section}
 				contentType={contentType}
 				commercialProperties={commercialProperties}
 				config={config}
 				adTargeting={adTargeting}
-				rtcParameters={getRTCParameters({ isSticky: true })}
+				adType={{ isSticky: true }}
 			/>
 		</amp-sticky-ad>
 	);

@@ -1,9 +1,9 @@
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 import { transformDots } from './transformDots';
 
-const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
+const checkForDots = (elements: FEElement[]): FEElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement
-	const enhanced: CAPIElement[] = [];
+	const enhanced: FEElement[] = [];
 	elements.forEach((element, i) => {
 		if (
 			element._type ===

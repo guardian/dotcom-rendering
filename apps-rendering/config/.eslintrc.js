@@ -107,6 +107,8 @@ module.exports = {
 		// eslint-plugin-react doesn't seem to understand the Emotion `css` prop,
 		// so we ignore it from this rule
 		'react/no-unknown-property': ['error', { ignore: ['css'] }],
+		// We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
+		'no-fallthrough': 'off',
 	},
 	settings: {
 		react: {

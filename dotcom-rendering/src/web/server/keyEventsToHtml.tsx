@@ -10,13 +10,13 @@ import { decideFormat } from '../lib/decideFormat';
  */
 export const keyEventsToHtml = ({
 	keyEvents,
-	format: CAPIFormat,
+	format: FEFormat,
 	filterKeyEvents,
-}: KeyEventsRequest): string => {
+}: FEKeyEventsRequest): string => {
 	const html = renderToString(
 		<KeyEventsContainer
 			keyEvents={keyEvents}
-			format={decideFormat(CAPIFormat)}
+			format={decideFormat(FEFormat)}
 			filterKeyEvents={filterKeyEvents}
 		/>,
 	);

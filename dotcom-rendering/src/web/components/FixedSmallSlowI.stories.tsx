@@ -18,7 +18,7 @@ export default {
 };
 
 export const Default = () => (
-	<Section title="FixedSmallSlowI" padContent={false} centralBorder="partial">
+	<Section title="FixedSmallSlowI" padContent={true} centralBorder="partial">
 		<FixedSmallSlowI trails={trails} showAge={true} />
 	</Section>
 );
