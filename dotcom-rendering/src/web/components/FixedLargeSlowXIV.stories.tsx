@@ -20,7 +20,7 @@ export default {
 export const Default = () => (
 	<Section
 		title="FixedLargeSlowXIV"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedLargeSlowXIV trails={trails} showAge={true} />

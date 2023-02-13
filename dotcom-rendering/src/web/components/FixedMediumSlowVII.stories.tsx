@@ -22,7 +22,7 @@ export const Default = () => (
 		title="FixedMediumSlowVII"
 		showTopBorder={true}
 		showSideBorders={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowVII trails={trails} showAge={true} />

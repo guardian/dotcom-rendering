@@ -791,21 +791,27 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 				</Island>
 
 				{!isPaidContent && showComments && (
-					<DiscussionLayout
-						discussionApiUrl={article.config.discussionApiUrl}
-						shortUrlId={article.config.shortUrlId}
-						format={format}
-						discussionD2Uid={article.config.discussionD2Uid}
-						discussionApiClientHeader={
-							article.config.discussionApiClientHeader
-						}
-						enableDiscussionSwitch={
-							!!article.config.switches.enableDiscussionSwitch
-						}
-						isAdFreeUser={article.isAdFreeUser}
-						shouldHideAds={article.shouldHideAds}
-						idApiUrl={article.config.idApiUrl}
-					/>
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						element="aside"
+					>
+						<DiscussionLayout
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
+							format={format}
+							discussionD2Uid={article.config.discussionD2Uid}
+							discussionApiClientHeader={
+								article.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!article.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={article.isAdFreeUser}
+							shouldHideAds={article.shouldHideAds}
+							idApiUrl={article.config.idApiUrl}
+						/>
+					</Section>
 				)}
 				{!isPaidContent && (
 					<Section

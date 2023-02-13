@@ -1193,21 +1193,32 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 					</Island>
 
 					{!isPaidContent && article.isCommentable && (
-						<DiscussionLayout
-							discussionApiUrl={article.config.discussionApiUrl}
-							shortUrlId={article.config.shortUrlId}
-							format={format}
-							discussionD2Uid={article.config.discussionD2Uid}
-							discussionApiClientHeader={
-								article.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								!!article.config.switches.enableDiscussionSwitch
-							}
-							isAdFreeUser={article.isAdFreeUser}
-							shouldHideAds={article.shouldHideAds}
-							idApiUrl={article.config.idApiUrl}
-						/>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							sectionId="comments"
+							data-print-layout="hide"
+							element="section"
+						>
+							<DiscussionLayout
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
+								shortUrlId={article.config.shortUrlId}
+								format={format}
+								discussionD2Uid={article.config.discussionD2Uid}
+								discussionApiClientHeader={
+									article.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									!!article.config.switches
+										.enableDiscussionSwitch
+								}
+								isAdFreeUser={article.isAdFreeUser}
+								shouldHideAds={article.shouldHideAds}
+								idApiUrl={article.config.idApiUrl}
+							/>
+						</Section>
 					)}
 
 					{!isPaidContent && (

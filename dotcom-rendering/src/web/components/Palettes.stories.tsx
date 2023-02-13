@@ -25,7 +25,7 @@ const groupedTrails = {
 export const EventPalette = () => (
 	<Section
 		title="EventPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventPalette"
 		showDateHeader={true}
@@ -53,7 +53,7 @@ EventPalette.story = {
 export const EventAltPalette = () => (
 	<Section
 		title="EventAltPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
@@ -70,7 +70,7 @@ export const EventAltPalette = () => (
 export const SombrePalette = () => (
 	<Section
 		title="SombrePalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombrePalette"
 		showDateHeader={true}
@@ -87,7 +87,7 @@ export const SombrePalette = () => (
 export const SombreAltPalette = () => (
 	<Section
 		title="SombreAltPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
@@ -104,7 +104,7 @@ export const SombreAltPalette = () => (
 export const BreakingPalette = () => (
 	<Section
 		title="BreakingPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
@@ -121,7 +121,7 @@ export const BreakingPalette = () => (
 export const LongRunningPalette = () => (
 	<Section
 		title="LongRunningPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
@@ -138,7 +138,7 @@ export const LongRunningPalette = () => (
 export const LongRunningAltPalette = () => (
 	<Section
 		title="LongRunningAltPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
@@ -155,7 +155,7 @@ export const LongRunningAltPalette = () => (
 export const InvestigationPalette = () => (
 	<Section
 		title="InvestigationPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
@@ -172,7 +172,7 @@ export const InvestigationPalette = () => (
 export const SpecialReportAltPalette = () => (
 	<Section
 		title="SpecialReportAltPalette"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}

@@ -20,7 +20,7 @@ export default {
 export const Default = () => (
 	<Section
 		title="FixedSmallSlowVThird"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVThird trails={trails} showAge={true} />

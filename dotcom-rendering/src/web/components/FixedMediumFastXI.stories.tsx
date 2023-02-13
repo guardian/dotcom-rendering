@@ -20,7 +20,7 @@ export default {
 export const OneTrail = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 1)} />
@@ -31,7 +31,7 @@ OneTrail.story = { name: 'with one trail' };
 export const TwoTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 2)} />
@@ -42,7 +42,7 @@ TwoTrails.story = { name: 'with two trails' };
 export const ThreeTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 3)} />
@@ -53,7 +53,7 @@ ThreeTrails.story = { name: 'with three trails' };
 export const FourTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 4)} />
@@ -64,7 +64,7 @@ FourTrails.story = { name: 'with four trails' };
 export const FiveTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 5)} />
@@ -75,7 +75,7 @@ FiveTrails.story = { name: 'with five trails' };
 export const SixTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 6)} />
@@ -86,7 +86,7 @@ SixTrails.story = { name: 'with six trails' };
 export const SevenTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 7)} />
@@ -97,7 +97,7 @@ SevenTrails.story = { name: 'with seven trails' };
 export const EightTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 8)} />
@@ -108,7 +108,7 @@ EightTrails.story = { name: 'with eight trails' };
 export const NineTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 9)} />
@@ -119,7 +119,7 @@ NineTrails.story = { name: 'with nine trails' };
 export const TenTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 10)} />
@@ -130,7 +130,7 @@ TenTrails.story = { name: 'with ten trails' };
 export const ElevenTrails = () => (
 	<Section
 		title="FixedMediumFastXI"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXI trails={trails.slice(0, 11)} />

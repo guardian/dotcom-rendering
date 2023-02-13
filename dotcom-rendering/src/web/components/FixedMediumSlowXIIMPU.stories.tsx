@@ -20,7 +20,7 @@ export default {
 export const OneTrail = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -35,7 +35,7 @@ OneTrail.story = { name: 'with one trail' };
 export const TwoTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -50,7 +50,7 @@ TwoTrails.story = { name: 'with two trails' };
 export const ThreeTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -65,7 +65,7 @@ ThreeTrails.story = { name: 'with three trails' };
 export const FourTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -80,7 +80,7 @@ FourTrails.story = { name: 'with four trails' };
 export const FiveTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -95,7 +95,7 @@ FiveTrails.story = { name: 'with five trails' };
 export const SixTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -110,7 +110,7 @@ SixTrails.story = { name: 'with six trails' };
 export const SevenTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -125,7 +125,7 @@ SevenTrails.story = { name: 'with seven trails' };
 export const EightTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -140,7 +140,7 @@ EightTrails.story = { name: 'with eight trails' };
 export const NineTrails = () => (
 	<Section
 		title="FixedMediumSlowXIIMPU"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
