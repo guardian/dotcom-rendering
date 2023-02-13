@@ -6,12 +6,12 @@ import type {
 	UserType,
 } from '../types';
 import {
-	actionButtons,
 	bulletStyles,
 	faqPersonalised,
 	firstParagraphOverlay,
 	hideElementsCss,
 	notNowButton,
+	personalisedActionButtons,
 	personalisedBodyBold,
 	personalisedBodyTextList,
 	personalisedHeadingStyles,
@@ -92,7 +92,7 @@ export const SignInGateMainCheckoutComplete = ({
 					);
 				})}
 			</ul>
-			<div css={actionButtons}>
+			<div css={personalisedActionButtons}>
 				<LinkButton
 					data-cy="sign-in-gate-main_register"
 					data-ignore="global-link-styling"

@@ -36,6 +36,7 @@ export const personalisedHeadingStyles = css`
 		padding-right: 160px;
 		${headline.medium({ fontWeight: 'bold' })};
 	}
+	padding-bottom: ${space[2]}px;
 `;
 export const bodySeparator = css`
 	border-top: 1px ${line.primary} solid;
@@ -89,7 +90,7 @@ export const bulletStyles = css`
 
 export const personalisedBodyTextList = css`
 	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
-	padding-bottom: ${space[2]}px;
+	padding-bottom: ${space[1]}px;
 	color: black;
 `;
 export const personalisedBodyList = css`
@@ -112,6 +113,26 @@ export const actionButtons = css`
 	flex-direction: row;
 	justify-content: flex-start;
 	margin-bottom: 42px;
+
+	> a {
+		/* stylelint-disable-next-line declaration-no-important */
+		margin-right: ${space[4]}px !important;
+
+		${from.mobileMedium} {
+			/* stylelint-disable-next-line declaration-no-important */
+			margin-right: ${space[9]}px !important;
+		}
+
+		/* stylelint-disable-next-line declaration-no-important */
+		text-decoration: none !important;
+	}
+`;
+
+export const personalisedActionButtons = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-bottom: 20px;
 
 	> a {
 		/* stylelint-disable-next-line declaration-no-important */
@@ -171,7 +192,7 @@ export const faq = css`
 
 export const faqPersonalised = css`
 	padding-bottom: 18px;
-	margin-top: ${space[5]}px;
+	margin-top: ${space[3]}px;
 	& a {
 		display: block;
 		margin-top: ${space[6]}px;
