@@ -19,6 +19,6 @@ type OctokitWithRest = {
  * A hydrated Octokit with types for the rest API.
  */
 export const octokit = token
-	? // @ts-expect-error -- Octokit’s own types are not as good as ours
-	  (new Octokit({ auth: token }) as OctokitWithRest)
+	// @ts-expect-error -- Octokit’s own types are not as good as ours
+	? (new Octokit({ auth: token }) as OctokitWithRest)
 	: undefined;

@@ -32,10 +32,10 @@ const isPullRequestEvent = (
  * to track the state Lighthouse CI Reports on `main` over time.
  */
 const issue_number = isPullRequestEvent(payload)
-	? // If PullRequestEvent
-	  payload.pull_request.number
-	: // If PushEvent
-	  4584;
+	// If PullRequestEvent
+	? payload.pull_request.number
+	// If PushEvent
+	: 4584;
 
 console.log(`Using issue #${issue_number}`);
 
@@ -96,19 +96,18 @@ const getStatus = (
 	}
 };
 
-const generateAuditTable = (
-	auditUrl: string,
-	results: AssertionResult[],
-): string => {
+const generateAuditTable = (results: AssertionResult[]): string => {
 	const resultsTemplateString = results.map(
 		({ auditTitle, auditProperty, passed, expected, actual, level }) =>
-			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${getStatus(
-				passed,
-				level,
-			)} | ${expected} | ${formatNumber(expected, actual)} |`,
+			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${
+				getStatus(
+					passed,
+					level,
+				)
+			} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
-	const [, testUrlClean] = Deno.env.get('LHCI_URL').split('?url=');
+	const [, testUrlClean] = Deno.env.get('LHCI_URL')?.split('?url=') ?? [];
 
 	const table = [
 		`> tested url \`${testUrlClean}\``,
@@ -126,7 +125,7 @@ const createLighthouseResultsMd = (): string => {
 	const failedAuditCount = results.filter((result) => !result.passed).length;
 	const reportUrl = results[0].url;
 
-	const [endpoint] = Deno.env.get('LHCI_URL').split('?url=');
+	const [endpoint] = Deno.env.get('LHCI_URL')?.split('?url=') ?? [];
 
 	return [
 		IDENTIFIER_COMMENT,
@@ -135,7 +134,7 @@ const createLighthouseResultsMd = (): string => {
 		failedAuditCount > 0
 			? `⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`
 			: 'All audits passed',
-		generateAuditTable(reportUrl, results),
+		generateAuditTable(results),
 	].join('\n\n');
 };
 
@@ -146,7 +145,7 @@ const getCommentID = async (): Promise<number | null> => {
 	});
 
 	const comment = comments.find((comment) =>
-		comment.body?.includes(IDENTIFIER_COMMENT),
+		comment.body?.includes(IDENTIFIER_COMMENT)
 	);
 
 	return comment?.id ?? null;
@@ -164,14 +163,14 @@ try {
 
 	const { data } = comment_id
 		? await octokit.rest.issues.updateComment({
-				...GIHUB_PARAMS,
-				comment_id,
-				body,
-		  })
+			...GIHUB_PARAMS,
+			comment_id,
+			body,
+		})
 		: await octokit.rest.issues.createComment({
-				...GIHUB_PARAMS,
-				body,
-		  });
+			...GIHUB_PARAMS,
+			body,
+		});
 
 	console.log(
 		`Successfully ${
