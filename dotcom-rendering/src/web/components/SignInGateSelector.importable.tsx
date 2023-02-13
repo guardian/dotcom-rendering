@@ -1,7 +1,6 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
-import type { Switches } from '../../types/config';
 import type { TagType } from '../../types/tag';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { useOnce } from '../lib/useOnce';
