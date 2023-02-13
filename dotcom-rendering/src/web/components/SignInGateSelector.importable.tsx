@@ -157,7 +157,7 @@ export const SignInGateSelector = ({
 		shouldMemoize: true,
 	});
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
-		checkOutCompleteString !== null
+		isSwitchedOn && checkOutCompleteString !== null
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation
