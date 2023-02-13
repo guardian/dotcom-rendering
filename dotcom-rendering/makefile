@@ -215,4 +215,13 @@ arch-diagram:
 	@npx arkit
 
 snyk:
-	@snyk wizard
+	-@snyk test --severity-threshold=high --file="../package.json"
+
+snyk-dcr:
+	-@snyk test --severity-threshold=high --file=package.json
+
+snyk-ar:
+	-@snyk test --severity-threshold=high --file=../apps-rendering/package.json
+
+snyk-storybooks:
+	-@snyk test --severity-threshold=high --file=../storybooks/package.json
