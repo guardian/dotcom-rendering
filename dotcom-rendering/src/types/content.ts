@@ -63,6 +63,13 @@ export interface CalloutBlockElement {
 	role?: RoleType;
 }
 
+export interface CalloutContactType {
+	name: string;
+	value: string;
+	urlPrefix: string;
+	guidance?: string;
+}
+
 export interface CalloutBlockElementV2 {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElementV2';
 	elementId: string;
@@ -78,6 +85,7 @@ export interface CalloutBlockElementV2 {
 	formFields: CampaignFieldType[];
 	role?: RoleType;
 	isNonCollapsible: boolean;
+	contacts?: CalloutContactType[];
 }
 
 interface ChartAtomBlockElement {

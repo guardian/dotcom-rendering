@@ -18,8 +18,6 @@ import { useState } from 'react';
 const descriptionStyles = css`
 	a {
 		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
 	}
 
 	padding-bottom: ${space[4]}px;
@@ -205,8 +203,6 @@ export const CalloutShare = ({
 const termsAndConditionsStyles = css`
 	a {
 		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
 	}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
