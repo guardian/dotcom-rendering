@@ -24,18 +24,14 @@ const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
 const SUPPORTER_HEADER = 'Thank you for your support';
 
 // SUBHEADER TEXT
-const SIGN_IN_PROMPT = 'Remember to sign in for a better experience';
+const SIGN_IN_PROMPT =
+	'Remember to sign in for a better experience. This includes: ';
 
 // BODY TEXT
-const SIGN_IN_INCENTIVES_DIGITAL = [
-	'Ad free',
-	'Fewer interruptions',
-	'Newsletters and comments',
-];
-const SIGN_IN_INCENTIVES_NON_DIGITAL = [
-	'Fewer interruptions',
-	'Newsletters and comments',
-	'Manage your account',
+const SIGN_IN_INCENTIVES = [
+	'Supporter rewards – unlock the benefits of your support',
+	'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+	'Get involved in the discussion – comment on stories',
 ];
 
 // BUTTON TEXT
@@ -50,16 +46,6 @@ const getHeadingText: (product: Product) => string = (product) => {
 		Contribution: SUPPORTER_HEADER,
 	};
 	return headingMap[product];
-};
-
-const getBodyText: (product: Product) => string[] = (product) => {
-	const currentUserBodyMap: Record<Product, string[]> = {
-		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
-		Paper: SIGN_IN_INCENTIVES_NON_DIGITAL,
-		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL,
-		GuardianWeekly: SIGN_IN_INCENTIVES_NON_DIGITAL,
-	};
-	return currentUserBodyMap[product];
 };
 
 const getButtonText: (userType: UserType) => string = (userType) => {
@@ -98,7 +84,7 @@ export const SignInGateMainCheckoutComplete = ({
 			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)} </h1>
 			<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
 			<ul css={bulletStyles}>
-				{getBodyText(product).map((item) => {
+				{SIGN_IN_INCENTIVES.map((item) => {
 					return (
 						<li css={personalisedBodyTextList} key={item}>
 							{item}

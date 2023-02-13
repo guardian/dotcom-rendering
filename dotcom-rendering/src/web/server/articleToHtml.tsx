@@ -150,7 +150,6 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	console.log("MAKE WINDOW!!!")
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({

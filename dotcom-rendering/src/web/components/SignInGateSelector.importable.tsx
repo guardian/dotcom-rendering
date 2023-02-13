@@ -149,27 +149,18 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	console.log("=======")
-	console.log("****")
-	console.log(window.guardian.config)
-
-	const switches  = window.guardian.config.switches;
-
-	console.log("switches")
-	console.log(switches)
 
 	// START: Checkout Complete Personalisation
-	const isSwitchedOn = switches.personaliseSignInAfterCheckout;
+	// TODO - add a check for switches
+	// const switches  = window.guardian.config.switches;
+	// const isSwitchedOn = switches.personaliseSignInAfterCheckout;
 
-	console.log("personalised")
-	console.log(switches.personaliseSignInAfterCheckout)
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
 	});
-
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
-		isSwitchedOn && checkOutCompleteString !== null
+		checkOutCompleteString !== null
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation

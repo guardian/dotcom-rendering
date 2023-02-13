@@ -104,7 +104,6 @@ export const makeWindowGuardian = ({
 	};
 	GAData?: GADataType;
 } => {
-	console.log("DO I GET HERE??")
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.

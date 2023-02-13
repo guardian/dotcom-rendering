@@ -1,4 +1,3 @@
-/* eslint-disable mocha/no-exclusive-tests */
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 /* eslint-disable no-undef */
@@ -217,17 +216,17 @@ describe('Sign In Gate Tests', function () {
 
 			// TODO - find a way to configure the switches in the test
 
-			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
-				visitArticle()
-				setGuCOCompleteCookie('new', 'DigitalPack');
+			// it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
+			// 	visitArticle()
+			// 	setGuCOCompleteCookie('new', 'DigitalPack');
 
-				visitArticleAndScrollToGateForLazyLoad();
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
-				);
+			// 	visitArticleAndScrollToGateForLazyLoad();
+			// 	cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+			// 	cy.get('[data-cy=sign-in-gate-main]').contains(
+			// 		'You need to register to keep reading',
+			// 	);
 
-			});
+			// });
 
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
 				// HEADER TEXT
@@ -236,18 +235,13 @@ describe('Sign In Gate Tests', function () {
 
 				// SUBHEADER TEXT
 				const SIGN_IN_PROMPT =
-					'Remember to sign in for a better experience';
+					'Remember to sign in for a better experience. This includes: ';
 
 				// BODY TEXT
-				const SIGN_IN_INCENTIVES_DIGITAL = [
-					'Ad free',
-					'Fewer interruptions',
-					'Newsletters and comments',
-				];
-				const SIGN_IN_INCENTIVES_NON_DIGITAL = [
-					'Fewer interruptions',
-					'Newsletters and comments',
-					'Manage your account',
+				const SIGN_IN_INCENTIVES = [
+					'Supporter rewards – unlock the benefits of your support',
+					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+					'Get involved in the discussion – comment on stories',
 				];
 
 				// BUTTON TEXT
@@ -256,7 +250,7 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is new and has a digital subscription', function () {
 					setGuCOCompleteCookie('new', 'DigitalPack');
-					scrollToGateForLazyLoading();
+					visitArticleAndScrollToGateForLazyLoad();
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -265,7 +259,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -292,7 +286,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -319,7 +313,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -346,7 +340,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -373,7 +367,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -400,7 +394,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+					SIGN_IN_INCENTIVES.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(

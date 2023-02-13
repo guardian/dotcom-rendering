@@ -21,7 +21,6 @@ export const devServer = (): Handler => {
 	return (req, res, next) => {
 		switch (req.path) {
 			case '/Article':
-				console.log("IN THE SERVER")
 				return handleArticle(req, res, next);
 			case '/ArticleJson':
 				return handleArticleJson(req, res, next);
