@@ -71,6 +71,7 @@ ${dcr.length ? dcr.join('\n') : '- [X] all peer deps matched!'}
 
 ### apps-rendering
 ${ar.length ? ar.join('\n') : '- [X] all peer deps matched!'}
+`;
 
 if (!octokit) {
 	console.log(body);
