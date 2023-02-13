@@ -1,4 +1,4 @@
-import type { Participations, Runnable } from '@guardian/ab-core';
+import type { ABTest, Participations, Runnable } from '@guardian/ab-core';
 import { isObject, isString } from '@guardian/libs';
 
 const isParticipations = (
@@ -11,7 +11,7 @@ const isParticipations = (
 	);
 
 const runnableTestsToParticipations = (
-	runnableTests: readonly Runnable[],
+	runnableTests: readonly Runnable<ABTest>[],
 ): Participations =>
 	runnableTests.reduce(
 		(participations: Participations, { id: testId, variantToRun }) => ({

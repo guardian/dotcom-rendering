@@ -1,6 +1,6 @@
-import type { CAPITrailTabType } from '../../types/trails';
+import type { FETrailTabType } from '../../types/trails';
 
-export const mockTab1: CAPITrailTabType = {
+export const mockTab1: FETrailTabType = {
 	heading: 'Across The Guardian',
 	trails: [
 		{
@@ -177,7 +177,7 @@ export const mockTab1: CAPITrailTabType = {
 	],
 };
 
-export const mockTab2: CAPITrailTabType = {
+export const mockTab2: FETrailTabType = {
 	heading: 'in Music',
 	trails: [
 		{
@@ -385,14 +385,14 @@ export const mockMostShared = {
 	ageWarning: '1 year old',
 };
 
-const twoTabs: [CAPITrailTabType, CAPITrailTabType] = [mockTab1, mockTab2];
+const twoTabs: [FETrailTabType, FETrailTabType] = [mockTab1, mockTab2];
 export const responseWithTwoTabs = {
 	tabs: twoTabs,
 	mostCommented: mockMostCommented,
 	mostShared: mockMostShared,
 };
 
-const oneTab: [CAPITrailTabType] = [mockTab1];
+const oneTab: [FETrailTabType] = [mockTab1];
 export const responseWithOneTab = {
 	tabs: oneTab,
 	mostCommented: mockMostCommented,

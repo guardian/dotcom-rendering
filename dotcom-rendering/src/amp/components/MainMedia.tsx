@@ -5,7 +5,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import InfoIcon from '../../static/icons/info.svg';
-import type { CAPIElement, ImageBlockElement } from '../../types/content';
+import type { FEElement, ImageBlockElement } from '../../types/content';
 import { bestFitImage, heightEstimate } from '../lib/image-fit';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
@@ -125,7 +125,7 @@ const expanded = css`
 `;
 
 const asComponent = (
-	element: CAPIElement,
+	element: FEElement,
 	pillar: ArticleTheme,
 	adTargeting?: any,
 ) => {
@@ -146,7 +146,7 @@ const asComponent = (
 };
 
 type Props = {
-	element: CAPIElement;
+	element: FEElement;
 	pillar: ArticleTheme;
 	adTargeting?: any;
 };

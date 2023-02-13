@@ -137,7 +137,12 @@ const headlineDark = ({ design, display, theme }: ArticleFormat): Colour => {
 			}
 		}
 		case ArticleDesign.Interview:
-			return neutral[20];
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[7];
+				default:
+					return neutral[20];
+			}
 		case ArticleDesign.Standard:
 		case ArticleDesign.Review:
 		case ArticleDesign.Explainer:
@@ -485,6 +490,33 @@ const avatar = (format: ArticleFormat): string => {
 	}
 };
 
+const avatarDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis: {
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[46];
+				default:
+					return neutral[20];
+			}
+		}
+		default:
+			return neutral[20];
+	}
+};
+
 const relatedCardBylineImage = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
@@ -800,6 +832,7 @@ const background = {
 	analysisContrastColour,
 	analysisContrastHoverColour,
 	avatar,
+	avatarDark,
 	bullet,
 	bulletDark,
 	footer,

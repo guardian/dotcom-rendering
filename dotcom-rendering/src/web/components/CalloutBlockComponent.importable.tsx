@@ -17,6 +17,7 @@ export const CalloutBlockComponent = ({
 		calloutsUrl,
 		formId,
 		isNonCollapsible,
+		contacts,
 	} = callout;
 
 	const isExpired = (date: number | undefined): boolean => {
@@ -53,6 +54,7 @@ export const CalloutBlockComponent = ({
 							submissionURL={calloutsUrl}
 							isExpired={isExpired(activeUntil)}
 							isNonCollapsible={isNonCollapsible}
+							contacts={contacts}
 						/>
 					</ExpandingWrapper>
 				</aside>
@@ -65,6 +67,7 @@ export const CalloutBlockComponent = ({
 					submissionURL={calloutsUrl}
 					isExpired={isExpired(activeUntil)}
 					isNonCollapsible={isNonCollapsible}
+					contacts={contacts}
 				/>
 			)}
 		</>

@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
-const isDinkus = (element: CAPIElement): boolean => {
+const isDinkus = (element: FEElement): boolean => {
 	// Classic dinkus do not trigger dropcaps
 	if (
 		element._type !==
@@ -21,12 +21,12 @@ const isDinkus = (element: CAPIElement): boolean => {
 	);
 };
 
-const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
+const checkForDividers = (elements: FEElement[]): FEElement[] => {
 	// checkForDividers loops the array of article elements looking for star flags and
 	// enhancing the data accordingly. In short, if a h2 tag is equal to * * * then we
 	// insert a divider and any the text element immediately afterwards should have dropCap
 	// set to true
-	const enhanced: CAPIElement[] = [];
+	const enhanced: FEElement[] = [];
 	elements.forEach((element, i) => {
 		const previous = elements[i - 1];
 

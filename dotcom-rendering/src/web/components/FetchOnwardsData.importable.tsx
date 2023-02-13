@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import type { OnwardsSource } from '../../types/onwards';
-import type { CAPITrailType, TrailType } from '../../types/trails';
+import type { FETrailType, TrailType } from '../../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 type OnwardsResponse = {
-	trails: CAPITrailType[];
+	trails: FETrailType[];
 	heading: string;
 	displayname: string;
 	description: string;
@@ -35,7 +35,7 @@ export const FetchOnwardsData = ({
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
 
 	const buildTrails = (
-		trails: CAPITrailType[],
+		trails: FETrailType[],
 		trailLimit: number,
 	): TrailType[] => {
 		return trails.slice(0, trailLimit).map(decideTrail);

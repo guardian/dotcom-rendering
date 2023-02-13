@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { ServerSideTests, Switches } from '../../types/config';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import {
 	adCollapseStyles,
@@ -29,7 +29,7 @@ const adStylesDynamic = css`
 
 type Props = {
 	format: ArticleFormat;
-	elements: CAPIElement[];
+	elements: FEElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
 	pageId: string;

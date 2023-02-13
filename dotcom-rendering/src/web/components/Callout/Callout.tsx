@@ -2,7 +2,10 @@ import { css } from '@emotion/react';
 import { brand, headline, neutral, space } from '@guardian/source-foundations';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CampaignFieldType } from '../../../types/content';
+import type {
+	CalloutContactType,
+	CampaignFieldType,
+} from '../../../types/content';
 import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
 import { MessageUs } from './MessageUs';
@@ -34,6 +37,7 @@ export interface CalloutBlockProps {
 	submissionURL: string;
 	isExpired: boolean;
 	isNonCollapsible: boolean;
+	contacts?: CalloutContactType[];
 }
 
 export const CalloutBlock = ({
@@ -43,8 +47,11 @@ export const CalloutBlock = ({
 	formId,
 	submissionURL,
 	isNonCollapsible,
+	contacts,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
+	const shouldShowContacts = contacts && contacts.length > 0;
+
 	const tabsContent = [
 		{
 			id: 'form',
@@ -57,12 +64,15 @@ export const CalloutBlock = ({
 				/>
 			),
 		},
-		{
+	];
+
+	if (shouldShowContacts) {
+		tabsContent.push({
 			id: 'contact',
 			text: 'Message us',
-			content: <MessageUs />,
-		},
-	];
+			content: <MessageUs contacts={contacts} />,
+		});
+	}
 
 	return (
 		<div id={formId} css={wrapperStyles}>

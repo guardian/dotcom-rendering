@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { BlockquoteBlockElement, CAPIElement } from '../types/content';
+import type { BlockquoteBlockElement, FEElement } from '../types/content';
 
 const isQuoted = (element: BlockquoteBlockElement): boolean => {
 	// A quoted blockquote: <blockquote class="quoted"><p>I think therefore I am</p></blockquote>
@@ -7,12 +7,9 @@ const isQuoted = (element: BlockquoteBlockElement): boolean => {
 	return !!frag.querySelector('.quoted');
 };
 
-const enhance = (
-	elements: CAPIElement[],
-	isPhotoEssay: boolean,
-): CAPIElement[] => {
+const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
 	// Loops the array of article elements looking for BlockquoteBlockElements to enhance
-	const enhanced: CAPIElement[] = [];
+	const enhanced: FEElement[] = [];
 	elements.forEach((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -47,7 +44,7 @@ const enhance = (
 
 export const enhanceBlockquotes = (
 	blocks: Block[],
-	format: CAPIFormat,
+	format: FEFormat,
 ): Block[] => {
 	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 

@@ -1,11 +1,11 @@
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
 } from './liveblogAdSlots';
 
 describe('calculateApproximateBlockHeight', () => {
-	const textElementOneLine: CAPIElement[] = [
+	const textElementOneLine: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -13,7 +13,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const textElementTwoLines: CAPIElement[] = [
+	const textElementTwoLines: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -21,7 +21,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const multipleTextElements: CAPIElement[] = [
+	const multipleTextElements: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -34,7 +34,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const youtubeElement: CAPIElement[] = [
+	const youtubeElement: FEElement[] = [
 		{
 			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 			id: '1',

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
 import type { Switches } from '../../types/config';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 
@@ -70,7 +70,7 @@ const chooseWrapper = (format: ArticleFormat) => {
 
 type Props = {
 	format: ArticleFormat;
-	elements: CAPIElement[];
+	elements: FEElement[];
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
 	starRating?: number;

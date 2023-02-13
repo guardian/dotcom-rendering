@@ -107,7 +107,7 @@ type Props = {
 };
 
 export const Body = ({ data, config }: Props) => {
-	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
+	const bodyElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		isSensitive: config.isSensitive,
@@ -120,12 +120,12 @@ export const Body = ({ data, config }: Props) => {
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
-		capiElements,
+		bodyElements,
 		pillar,
 		data.isImmersive,
 		adTargeting,
 	);
-	const slotIndexes = findAdSlots(capiElements);
+	const slotIndexes = findAdSlots(bodyElements);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,

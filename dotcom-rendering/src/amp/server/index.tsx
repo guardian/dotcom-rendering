@@ -3,7 +3,7 @@ import { Standard as ExampleArticle } from '../../../fixtures/generated/articles
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
-import { validateAsCAPIType } from '../../model/validate';
+import { validateAsArticleType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
 import { isAmpSupported } from '../components/Elements';
 import type { PermutiveModel } from '../components/Permutive';
@@ -15,28 +15,28 @@ import { document } from './document';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 	try {
-		const CAPIArticle = validateAsCAPIType(body);
-		const { linkedData } = CAPIArticle;
-		const { config } = CAPIArticle;
-		const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
+		const article = validateAsArticleType(body);
+		const { linkedData } = article;
+		const { config } = article;
+		const elements = article.blocks.flatMap((block) => block.elements);
 
 		if (
 			!isAmpSupported({
-				format: CAPIArticle.format,
-				tags: CAPIArticle.tags,
+				format: article.format,
+				tags: article.tags,
 				elements,
-				switches: CAPIArticle.config.switches,
-				main: CAPIArticle.main,
+				switches: article.config.switches,
+				main: article.main,
 			})
 		) {
 			throw new NotRenderableInDCR();
 		}
 
 		const scripts = [
-			...extractScripts(elements, CAPIArticle.mainMediaElements),
+			...extractScripts(elements, article.mainMediaElements),
 		];
 
-		const sectionName = CAPIArticle.sectionName ?? '';
+		const sectionName = article.sectionName ?? '';
 		const neilsenAPIID = findBySubsection(sectionName).apiID;
 
 		const permutive: PermutiveModel = {
@@ -47,31 +47,31 @@ export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
-			title: CAPIArticle.headline,
+			title: article.headline,
 			comscoreID: '6035250',
 			section: sectionName,
-			contentType: CAPIArticle.contentType,
-			id: CAPIArticle.pageId,
+			contentType: article.contentType,
+			id: article.pageId,
 			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			ipsosSectionName: config.ipsosTag ?? 'guardian',
 		};
 
 		const metadata = {
-			description: CAPIArticle.trailText,
-			canonicalURL: CAPIArticle.webURL,
+			description: article.trailText,
+			canonicalURL: article.webURL,
 		};
 
 		const resp = document({
 			linkedData,
 			scripts,
 			metadata,
-			title: `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`,
+			title: `${article.headline} | ${article.sectionLabel} | The Guardian`,
 			body: (
 				<Article
 					experimentsData={getAmpExperimentCache()}
-					articleData={CAPIArticle}
-					nav={extractNAV(CAPIArticle.nav)}
+					articleData={article}
+					nav={extractNAV(article.nav)}
 					analytics={analytics}
 					permutive={permutive}
 					config={config}
