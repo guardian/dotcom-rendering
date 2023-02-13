@@ -18,7 +18,11 @@ export default {
 };
 
 export const Default = () => (
-	<Section title="FixedSmallSlowVI" padContent={true} centralBorder="partial">
+	<Section
+		title="FixedSmallSlowVI"
+		padContent={false}
+		centralBorder="partial"
+	>
 		<FixedMediumSlowVI trails={trails} showAge={true} />
 	</Section>
 );

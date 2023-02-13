@@ -30,7 +30,7 @@ export const One = () => (
 	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -51,7 +51,7 @@ export const Two = () => (
 	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -69,7 +69,7 @@ Two.story = {
 };
 
 export const Three = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -85,7 +85,7 @@ Three.story = {
 };
 
 export const Four = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -101,7 +101,7 @@ Four.story = {
 };
 
 export const Five = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -120,7 +120,7 @@ export const Six = () => (
 	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -141,7 +141,7 @@ export const Seven = () => (
 	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -162,7 +162,7 @@ export const Eight = () => (
 	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -184,7 +184,7 @@ export const Nine = () => (
 		title="DynamicPackage"
 		showTopBorder={true}
 		showSideBorders={true}
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -208,7 +208,7 @@ export const Boosted1 = () => {
 		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -235,7 +235,7 @@ export const Boosted2 = () => {
 		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -261,7 +261,7 @@ export const Boosted3 = () => {
 	return (
 		<Section
 			title="DynamicPackage"
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -287,7 +287,7 @@ export const Boosted4 = () => {
 	return (
 		<Section
 			title="DynamicPackage"
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -313,7 +313,7 @@ export const Boosted5 = () => {
 	return (
 		<Section
 			title="DynamicPackage"
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -340,7 +340,7 @@ export const Boosted8 = () => {
 		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -367,7 +367,7 @@ export const Boosted9 = () => {
 		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			padContent={true}
+			padContent={false}
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -387,7 +387,7 @@ Boosted9.story = {
 };
 
 export const OneSnapThreeStandard = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -403,7 +403,7 @@ OneSnapThreeStandard.story = {
 };
 
 export const ThreeSnapTwoStandard = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -419,7 +419,7 @@ ThreeSnapTwoStandard.story = {
 };
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
-	<Section title="DynamicPackage" padContent={true} centralBorder="partial">
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
