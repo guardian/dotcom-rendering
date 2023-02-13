@@ -9,7 +9,7 @@ import { FrontContainer } from './FrontContainer';
 
 export default {
 	component: FrontContainer,
-	title: 'Components/FrontGrid',
+	title: 'Components/FrontContainer',
 	parameters: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default
