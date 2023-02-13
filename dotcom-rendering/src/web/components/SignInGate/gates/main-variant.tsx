@@ -35,9 +35,7 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
  * in Ophan ComponentEventTracking will have `_personalised_${userType}_${product}` appended.
  * This occurs in the SignInGateSelector.importable.tsx file
  *
- *  * Flip this off to stop gate personalisation.
  */
-const showCheckoutCompletePersonalisation = true;
 
 export const signInGateComponent: SignInGateComponent = {
 	gate: ({
@@ -51,8 +49,7 @@ export const signInGateComponent: SignInGateComponent = {
 		return (
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
-					{showCheckoutCompletePersonalisation &&
-					checkoutCompleteCookieData ? (
+					{checkoutCompleteCookieData ? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}
