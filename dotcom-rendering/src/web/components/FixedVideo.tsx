@@ -1,6 +1,5 @@
 import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 
-
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
@@ -10,7 +9,7 @@ type Props = {
 export const FixedVideo = ({ trails, containerPalette, showAge }: Props) => {
 	if (!trails[0]) return null;
 
-	return (
+	// return (
 
-	);
+	// );
 };
