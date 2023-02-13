@@ -104,6 +104,7 @@ exports.parseURL = parseURL;
 exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.query.url) {
 		const url = parseURL(req.url, req.path);
+
 		try {
 			req.body = await getContentFromURL(url, req.headers);
 		} catch (error) {
