@@ -22,7 +22,7 @@ const showHideButtonCss = (
 	text-decoration: none;
 
 	${from.wide} {
-		position: absolute;
+		position: relative;
 		top: 0;
 		right: 0;
 	}

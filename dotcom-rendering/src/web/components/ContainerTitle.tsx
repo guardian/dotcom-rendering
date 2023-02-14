@@ -35,7 +35,7 @@ const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${fontColour ?? neutral[7]};
 	padding-bottom: ${space[1]}px;
-	padding-top: ${space[1]}px;
+	padding-top: 6px;
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
@@ -57,10 +57,6 @@ const bottomMargin = css`
 
 const marginStyles = css`
 	margin-left: 0;
-	${between.tablet.and.leftCol} {
-		margin-left: 10px;
-	}
-	margin-bottom: ${space[2]}px;
 `;
 
 const dateTextStyles = (color: Colour) => css`
