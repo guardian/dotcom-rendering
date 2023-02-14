@@ -300,9 +300,7 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 const headlineDark = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return theme === ArticlePillar.Culture
-				? neutral[86]
-				: neutral[93];
+			return theme === ArticlePillar.Culture ? neutral[86] : neutral[93];
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
 		case ArticleDesign.Standard:

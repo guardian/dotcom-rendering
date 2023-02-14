@@ -133,7 +133,7 @@ const headlineByline = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return brandAlt[400];
 	}
-}
+};
 
 const headlineBylineDark = (_format: ArticleFormat): Colour => brandAlt[200];
 
