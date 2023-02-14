@@ -11,7 +11,9 @@
 		],
 		"nohoist": [
 			"type-fest",
-			"**/@types/webpack"
+			"**/@types/webpack",
+			"**/@types/react",
+			"**/@types/express-serve-static-core"
 		]
 	},
 	"scripts": {
