@@ -28,8 +28,14 @@ const SIGN_IN_PROMPT =
 	'Remember to sign in for a better experience. This includes: ';
 
 // BODY TEXT
-const SIGN_IN_INCENTIVES = [
+const SIGN_IN_INCENTIVES_DIGITAL = [
 	'Supporter rewards – unlock the benefits of your support',
+	'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+	'Get involved in the discussion – comment on stories',
+];
+
+const SIGN_IN_INCENTIVES_NON_DIGITAL = [
+	'Fewer interruptions',
 	'Incisive analysis and original reporting direct to your inbox, with our newsletters',
 	'Get involved in the discussion – comment on stories',
 ];
@@ -57,6 +63,16 @@ const getButtonText: (userType: UserType) => string = (userType) => {
 	return buttonMap[userType];
 };
 
+const getBodyText: (product: Product) => string[] = (product) => {
+	const bodyTextMap: Record<Product, string[]> = {
+		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
+		Paper: SIGN_IN_INCENTIVES_NON_DIGITAL,
+		GuardianWeekly: SIGN_IN_INCENTIVES_NON_DIGITAL,
+		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL
+	}
+	return bodyTextMap[product]
+}
+
 export const SignInGateMainCheckoutComplete = ({
 	signInUrl,
 	guUrl,
@@ -70,11 +86,12 @@ export const SignInGateMainCheckoutComplete = ({
 
 	// send new/guest userType to the /register page instead of /signin
 	const personaliseSignInURl = (url: string): string => {
-		if (userType === 'current') return url;
-
-		const regex = /\/(signin)/;
-		const substitution = `/register`;
-		return url.replace(regex, substitution);
+		if (userType === 'new' || userType == 'guest') {
+			const regex = /\/(signin)/;
+			const substitution = `/register`;
+			return url.replace(regex, substitution);
+		}
+		return url;
 	};
 
 	return (
@@ -84,7 +101,7 @@ export const SignInGateMainCheckoutComplete = ({
 			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)} </h1>
 			<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
 			<ul css={bulletStyles}>
-				{SIGN_IN_INCENTIVES.map((item) => {
+				{getBodyText(product).map((item) => {
 					return (
 						<li css={personalisedBodyTextList} key={item}>
 							{item}

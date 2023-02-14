@@ -301,12 +301,17 @@ describe('Sign In Gate Tests', function () {
 					'Remember to sign in for a better experience. This includes: ';
 
 				// BODY TEXT
-				const SIGN_IN_INCENTIVES = [
+				const SIGN_IN_INCENTIVES_DIGITAL = [
 					'Supporter rewards – unlock the benefits of your support',
 					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
 					'Get involved in the discussion – comment on stories',
 				];
 
+				const SIGN_IN_INCENTIVES_NON_DIGITAL = [
+					'Fewer interruptions',
+					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+					'Get involved in the discussion – comment on stories',
+				];
 				// BUTTON TEXT
 				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
 				const SIGN_IN_BUTTON = 'Sign in';
@@ -326,7 +331,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -357,7 +362,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -388,7 +393,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -419,7 +424,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -450,7 +455,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
@@ -481,7 +486,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						SIGN_IN_PROMPT,
 					);
-					SIGN_IN_INCENTIVES.forEach((item) => {
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
 						cy.get('[data-cy=sign-in-gate-main]').contains(item);
 					});
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
