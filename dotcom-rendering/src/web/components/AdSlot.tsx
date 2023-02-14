@@ -316,12 +316,8 @@ export const AdSlot = ({
 				min-width: 728px;
 			`;
 			const topAboveNavContainerStyles = css`
-				:has(div.ad-slot--fluid) {
-					margin: 0 auto;
-					width: fit-content;
-				}
-
-				:has(div[data-label-show='true']) {
+				width: 100%;
+				&[child-ad-rendered] {
 					margin: 0 auto;
 					width: fit-content;
 				}
