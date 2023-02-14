@@ -42,7 +42,7 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_URL: ${{ matrix.group }}
         run: |
-          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
+          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.10.0
           lhci autorun
 
       - name: Setup deno
