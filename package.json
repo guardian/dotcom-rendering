@@ -11,7 +11,8 @@
 		],
 		"nohoist": [
 			"type-fest",
-			"**/@types/webpack"
+			"**/@types/webpack",
+			"**/@types/react"
 		]
 	},
 	"scripts": {
