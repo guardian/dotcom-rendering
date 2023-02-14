@@ -434,9 +434,57 @@ const bylineInlineDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const designTag = (_format: ArticleFormat): Colour => neutral[100];
+const designTagDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[10];
+			}
+		default:
+			return neutral[10];
+	}
+}
 
-const designTagDark = (_format: ArticleFormat): Colour => neutral[10];
+const designTag = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return neutral[100];
+			}
+		default:
+			return neutral[100];
+	}
+}
+
 
 const follow = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.Gallery) {
