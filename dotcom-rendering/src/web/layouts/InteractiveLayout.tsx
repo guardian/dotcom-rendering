@@ -528,6 +528,10 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										tableOfContents={
 											article.tableOfContents
 										}
+										lang={article.lang}
+										isRightToLeftLang={
+											article.isRightToLeftLang
+										}
 									/>
 								</ArticleContainer>
 							</GridItem>
