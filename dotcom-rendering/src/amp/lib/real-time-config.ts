@@ -17,7 +17,7 @@ type PubmaticRTCParameters = {
 	PUB_ID: string;
 };
 
-type CriteoRTCParameters = { NETWORK_ID: string };
+type CriteoRTCParameters = { ZONE_ID: string };
 
 type OzoneRTCParameters = {
 	PUBLISHER_ID: string;
@@ -54,10 +54,33 @@ export const pubmaticRtcParameters = (
 };
 
 export const criteoRTCParamters = (adType: AdType): CriteoRTCParameters => {
-	// TODO set these to true values
-	return {
-		NETWORK_ID: 'xxxx',
-	};
+	if (adType.isSticky) {
+		return { ZONE_ID: '1709360' };
+	} else {
+		switch (adType.adRegion) {
+			case 'UK': {
+				return {
+					ZONE_ID: '1709356',
+				};
+			}
+			case 'US': {
+				return {
+					ZONE_ID: '1709355',
+				};
+			}
+			case 'AU': {
+				return {
+					ZONE_ID: '1709354',
+				};
+			}
+			case 'INT':
+			case 'EUR': /* TODO Confirm Europe */ {
+				return {
+					ZONE_ID: '1709353',
+				};
+			}
+		}
+	}
 };
 
 export const ozoneRTCParameters = (adType: AdType): OzoneRTCParameters => {
