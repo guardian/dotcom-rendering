@@ -142,6 +142,7 @@ test-ci: clear clean-dist install
 
 bundlesize: clear clean-dist install build
 	@bundlesize
+	@node scripts/islands/descriptions.mjs
 
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
