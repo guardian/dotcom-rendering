@@ -13,6 +13,7 @@ import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
+import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -372,12 +373,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<>
-							<Section
+							<FrontSection
 								key={ophanName}
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								padContent={false}
+								padContent={true}
 								centralBorder="partial"
 								url={collection.href}
 								ophanComponentLink={ophanComponentLink}
@@ -428,7 +429,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										/>
 									</Island>
 								)}
-							</Section>
+							</FrontSection>
 							{decideAdSlot(
 								index,
 								front.isNetworkFront,

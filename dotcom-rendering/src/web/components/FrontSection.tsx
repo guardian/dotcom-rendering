@@ -430,7 +430,7 @@ const topBorder = css`
  * └─────┴─────────────────────────┘
  *
  */
-export const FrontContainer = ({
+export const FrontSection = ({
 	element = 'section',
 	title,
 	children,
