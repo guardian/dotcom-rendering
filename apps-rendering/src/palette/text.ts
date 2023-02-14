@@ -458,7 +458,7 @@ const designTag = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return neutral[100];
 	}
-}
+};
 
 const designTagDark = ({ design, theme }: ArticleFormat): Colour => {
 	switch (design) {
@@ -483,7 +483,7 @@ const designTagDark = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return neutral[10];
 	}
-}
+};
 
 const follow = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.Gallery) {
