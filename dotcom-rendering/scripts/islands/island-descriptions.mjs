@@ -26,8 +26,6 @@ const componentsDirectory = resolve(
 	'../../../src/web/components',
 );
 
-const PREFIX = 'window.chartData = ';
-
 const chunk = zod.object({
 	label: zod.string(),
 	isAsset: zod.boolean(),
@@ -41,26 +39,13 @@ const getBundleReport = () =>
 	readFile(
 		resolve(
 			fileURLToPath(import.meta.url),
-			'../../../dist/browser.modern-bundles.html',
+			'../../../dist/browser.modern-bundles.json',
 		),
 		'utf-8',
 	)
-		.then((file) =>
-			file
-				.split('\n')
-				.find((line) => line.trim().startsWith(PREFIX))
-				?.trim(),
-		)
-		.then((bundle_data) =>
-			zod
-				.array(chunk)
-				.parse(
-					JSON.parse(
-						bundle_data?.slice(PREFIX.length, -1).trim() ?? '[]',
-					),
-				),
-		)
+		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
+
 /**
  * Below 1kB – Good
  * Below 5kB – Average

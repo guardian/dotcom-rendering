@@ -91,6 +91,15 @@ const commonConfigs = ({ platform }) => ({
 						openAnalyzer: false,
 						logLevel: 'warn',
 					}),
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							`${platform}-bundles.json`,
+						),
+						analyzerMode: 'json',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
 			  ]),
 	],
 	infrastructureLogging: {
