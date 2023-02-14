@@ -15,6 +15,7 @@ import {
 	neutral,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
@@ -879,16 +880,12 @@ const editionsKicker = (format: ArticleFormat): Colour => {
 	}
 };
 
-const seriesTitle = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return neutral[100];
-	}
-
-	switch (format.design) {
+const seriesTitle = ({ design, display, theme }: ArticleFormat): Colour => {
+	switch (design) {
 		case ArticleDesign.Gallery:
 			return neutral[100];
 		case ArticleDesign.DeadBlog:
-			switch (format.theme) {
+			switch (theme) {
 				case ArticlePillar.News:
 					return news[400];
 				case ArticlePillar.Lifestyle:
@@ -906,9 +903,8 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReportAlt:
 					return news[400];
 			}
-
 		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
+			switch (theme) {
 				case ArticlePillar.News:
 					return news[600];
 				case ArticlePillar.Lifestyle:
@@ -926,24 +922,69 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReportAlt:
 					return news[600];
 			}
-	}
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Letter:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			if (display === ArticleDisplay.Immersive) {
+				switch (theme) {
+					case ArticleSpecial.SpecialReportAlt:
+						return palette.specialReportAlt[100];
+					default:
+						return neutral[100];
+				}
+			}
+
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+			}
+		default:
+			if (display === ArticleDisplay.Immersive) {
+				return neutral[100];
+			}
+
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
+			}
 	}
 };
 
@@ -1004,28 +1045,71 @@ const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
-const seriesTitleDark = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return neutral[100];
-	}
+const seriesTitleDark = ({ design, display, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			if (display === ArticleDisplay.Immersive) {
+				switch (theme) {
+					case ArticleSpecial.SpecialReportAlt:
+						return palette.specialReportAlt[800];
+					default:
+						return neutral[100];
+				}
+			}
 
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticlePillar.Opinion:
-			return opinion[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+			}
+		default:
+			if (display === ArticleDisplay.Immersive) {
+				return neutral[100];
+			}
+
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
+			}
 	}
 };
 
