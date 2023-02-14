@@ -6,7 +6,7 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
-// temporary switch in case we need to revert quickly
+// switch in case we need to revert quickly
 const USE_SWC = true;
 
 const babelLoader = [
