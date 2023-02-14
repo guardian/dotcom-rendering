@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import { brand, space, textSans } from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
-import type { FC } from 'react';
+import {
+	LinkButton,
+	SvgSignalBrand,
+	SvgTelegramBrand,
+	SvgWhatsAppBrand,
+} from '@guardian/source-react-components';
+import type { FC, ReactElement } from 'react';
 import type { CalloutContactType } from '../../../types/content';
 
 const calloutPrimaryButtonStyles = css`
@@ -26,6 +31,19 @@ export const formatContactType = (s: string): string =>
 	s.toLowerCase() === 'whatsapp'
 		? 'WhatsApp'
 		: s.charAt(0).toUpperCase() + s.slice(1);
+
+export const conditionallyRenderContactIcon = (name: string): ReactElement => {
+	switch (name.toLowerCase()) {
+		case 'whatsapp':
+			return <SvgWhatsAppBrand size="small" />;
+		case 'signal':
+			return <SvgSignalBrand size="small" />;
+		case 'telegram':
+			return <SvgTelegramBrand size="small" />;
+		default:
+			return <></>;
+	}
+};
 
 export const formatContactNumbers = (
 	contacts: CalloutContactType[],
@@ -121,6 +139,7 @@ const MessageUs: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 						href={`${contact.urlPrefix}${contact.value}`}
 						target="_blank"
 						rel="noopener"
+						icon={conditionallyRenderContactIcon(contact.name)}
 					>
 						Message us on {formatContactType(contact.name)}
 					</LinkButton>

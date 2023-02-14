@@ -6,7 +6,9 @@ import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import { TermsAndConditions } from './calloutComponents';
-import CalloutContact from './calloutContact';
+import CalloutContact, {
+	conditionallyRenderContactIcon,
+} from './calloutContact';
 import CalloutForm from './calloutForm';
 import { ShareLink } from './shareLink';
 import {
@@ -16,6 +18,8 @@ import {
 	calloutInfo,
 	calloutLinkContainer,
 	calloutTitle,
+	tabIcons,
+	tabTitle,
 } from './styles';
 
 export const getCalloutId = (str: string): string =>
@@ -46,15 +50,26 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	const tabsContent = [
 		{
 			id: 'form',
-			text: 'Tell us here',
+			text: <div>Tell us here</div>,
 			content: <CalloutForm id={formId} fields={formFields} />,
 		},
 	];
 
 	if (shouldShowContacts) {
+		const tabsText = (
+			<div css={tabTitle}>
+				<div>Message us</div>
+				<div css={tabIcons}>
+					{contacts.map((c) =>
+						conditionallyRenderContactIcon(c.name),
+					)}
+				</div>
+			</div>
+		);
+
 		tabsContent.push({
 			id: 'contact',
-			text: 'Message us',
+			text: tabsText,
 			content: <CalloutContact contacts={contacts} />,
 		});
 	}

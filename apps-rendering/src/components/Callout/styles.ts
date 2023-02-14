@@ -85,6 +85,20 @@ export const calloutPrimaryButton = css`
 	`}
 `;
 
+// Callout tabs
+export const tabTitle = css`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-left: ${remSpace[2]};
+`;
+
+export const tabIcons = css`
+	display: flex;
+	align-items: center;
+`;
+
 // Callout success Styles
 export const successMessage = css`
 	${textSans.small()};
