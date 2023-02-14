@@ -1,7 +1,7 @@
-import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-import { FixedMediumFastXII } from './FixedMediumFastXII';
+import { breakpoints } from '@guardian/source-foundations';
 import { Section } from './Section';
+import { FixedMediumFastXII } from './FixedMediumFastXII';
 
 export default {
 	component: FixedMediumFastXII,
@@ -20,7 +20,7 @@ export default {
 export const Default = () => (
 	<Section
 		title="FixedMediumFastXII"
-		padContent={true}
+		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedMediumFastXII trails={trails} showAge={true} />

@@ -41,8 +41,8 @@ const successTextStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
 `;
 
-const summeryStyles = css`
-	/* Removing default styles from summery tag */
+const summaryStyles = css`
+	/* Removing default styles from summary tag */
 	::-webkit-details-marker {
 		display: none;
 	}
@@ -54,7 +54,7 @@ const summeryStyles = css`
 
 	/*
         why hide visibility?
-        because we want to prevent the user for tabbing to the summery HTML element
+        because we want to prevent the user for tabbing to the summary HTML element
         without using tabIndex={-1} which would disable focus on all child DOM elements
 
         NOTE: requires "visibility: visible;" on child elements to display and enable focus
@@ -67,7 +67,7 @@ const summeryStyles = css`
 	}
 `;
 
-const summeryContentWrapper = css`
+const summaryContentWrapper = css`
 	visibility: visible;
 	min-height: 70px;
 	display: flex;
@@ -100,7 +100,7 @@ const descriptionStyles = css`
 	${textSans.xxsmall({ fontWeight: 'bold' })}
 `;
 
-const headingTextStyles = (palette: Palette) => css`
+const headingTextStyles = css`
 	a {
 		color: ${brand[500]};
 		text-decoration: none;
@@ -127,8 +127,21 @@ const buttonWrapperStyles = css`
 // after it was opened
 let hasFormBeenOpened = true;
 
-type FormDataType = { [key in string]: any };
+type FormDataType = { [key in string]: unknown };
 
+/**
+ * # Callout Embed Block Component
+ *
+ * A callout to readers to share their stories.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page,
+ * and submitting a form via AJAX.
+ *
+ * ---
+ * [`CalloutEmbedBlockComponent` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-calloutembedblockcomponent)
+ */
 export const CalloutEmbedBlockComponent = ({
 	callout,
 	format,
@@ -293,14 +306,14 @@ export const CalloutEmbedBlockComponent = ({
 					aria-hidden={true}
 					open={isExpanded}
 				>
-					<summary css={summeryStyles}>
-						<div css={summeryContentWrapper}>
+					<summary css={summaryStyles}>
+						<div css={summaryContentWrapper}>
 							<div css={speechBubbleWrapperStyles}>
 								<div css={speechBubbleStyles(palette)}>
 									<h4>Share your story</h4>
 								</div>
 							</div>
-							<div css={headingTextStyles(palette)}>
+							<div css={headingTextStyles}>
 								<p css={successTextStyles}>
 									Thank you for your contribution
 								</p>
@@ -319,14 +332,14 @@ export const CalloutEmbedBlockComponent = ({
 				aria-hidden={true}
 				open={isExpanded}
 			>
-				<summary css={summeryStyles}>
-					<div css={summeryContentWrapper}>
+				<summary css={summaryStyles}>
+					<div css={summaryContentWrapper}>
 						<div css={speechBubbleWrapperStyles}>
 							<div css={speechBubbleStyles(palette)}>
 								<h4>Share your story</h4>
 							</div>
 						</div>
-						<div css={headingTextStyles(palette)}>
+						<div css={headingTextStyles}>
 							<h4 css={headingTextHeaderStyles}>{title}</h4>
 							{!!description && (
 								<div

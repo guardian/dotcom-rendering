@@ -28,12 +28,10 @@ const peers = async (cwd: string) => {
 	return deps;
 };
 
-type Workspaces = { dcr: string[]; cr: string[]; ar: string[] };
-const initialValue: Workspaces = { dcr: [], cr: [], ar: [] };
+type Workspaces = { dcr: string[]; ar: string[] };
+const initialValue: Workspaces = { dcr: [], ar: [] };
 
-const { dcr, ar, cr } = (
-	await Promise.all(['.', './apps-rendering'].map(peers))
-)
+const { dcr, ar } = (await Promise.all(['.', './apps-rendering'].map(peers)))
 	.flat()
 	.map((line) => {
 		const matches = line.match(
@@ -71,6 +69,7 @@ ${dcr.length ? dcr.join('\n') : '- [X] all peer deps matched!'}
 
 ### apps-rendering
 ${ar.length ? ar.join('\n') : '- [X] all peer deps matched!'}
+`;
 
 if (!octokit) {
 	console.log(body);

@@ -33,6 +33,13 @@ const secondTierStyles = css`
 	}
 `;
 
+/**
+ * # Most Viewed Footer
+ *
+ * List of 10 most viewed articles to show at the bottom of pages.
+ *
+ * @Todo add Storybook link
+ */
 export const MostViewedFooter = ({
 	tabs,
 	mostCommented,

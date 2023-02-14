@@ -1,24 +1,39 @@
 import { css } from '@emotion/react';
 import {
-	brandAltBackground,
-	brandBackground,
-	brandBorder,
+	brand,
+	brandAlt,
 	breakpoints,
+	neutral,
 } from '@guardian/source-foundations';
-import { Section } from './Section';
+import { FrontContainer } from './FrontContainer';
 
 export default {
-	component: Section,
-	title: 'Components/Section',
+	component: FrontContainer,
+	title: 'Components/FrontContainer',
 	parameters: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default
 			defaultViewport: 'doesNotExist',
 		},
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 
-const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
+const Placeholder = ({
+	heightInPixels = 400,
+	text = 'Placeholder Content',
+}: {
+	heightInPixels?: number;
+	text?: string;
+}) => (
 	<div
 		css={css`
 			background-color: lightgrey;
@@ -31,61 +46,50 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 			font-weight: 200;
 		`}
 	>
-		Insert content here
+		{text}
 	</div>
 );
 
-export const PageTitleStory = () => {
-	return (
-		<Section
-			title="No Children"
-			showTopBorder={false}
-			showSideBorders={false}
-		/>
-	);
-};
-PageTitleStory.story = { name: 'with no children' };
-
 export const ContainerStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Default Container"
 			showTopBorder={false}
 			showSideBorders={false}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 ContainerStory.story = { name: 'default container' };
 
 export const NoTitleStory = () => {
 	return (
-		<Section showTopBorder={false} showSideBorders={false}>
-			<Grey />
-		</Section>
+		<FrontContainer showTopBorder={false} showSideBorders={false}>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 NoTitleStory.story = { name: 'with no title' };
 
 export const BordersStory = () => {
 	return (
-		<Section title="Borders" centralBorder="full">
-			<Grey />
-		</Section>
+		<FrontContainer title="Borders" centralBorder="full">
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 BordersStory.story = { name: 'with all borders' };
 
 export const LeftContentStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Borders"
 			centralBorder="full"
-			leftContent={<Grey heightInPixels={200} />}
+			leftContent={<Placeholder text="LeftCol" heightInPixels={200} />}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 LeftContentStory.story = {
@@ -94,32 +98,32 @@ LeftContentStory.story = {
 
 export const BackgroundStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Background Colour"
 			description="About this content"
-			fontColour={brandBackground.ctaPrimary}
+			fontColour={neutral[100]}
 			centralBorder="full"
-			backgroundColour={brandBackground.primary}
-			borderColour={brandBorder.primary}
+			backgroundColour={brand[400]}
+			borderColour={brand[600]}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 BackgroundStory.story = { name: 'with a blue background' };
 
 export const InnerBackgroundStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Inner Background"
 			description="About this content"
-			fontColour={brandBackground.ctaPrimary}
+			fontColour={neutral[100]}
 			centralBorder="full"
-			innerBackgroundColour={brandBackground.primary}
-			borderColour={brandBorder.primary}
+			innerBackgroundColour={brand[400]}
+			borderColour={brand[300]}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 InnerBackgroundStory.story = {
@@ -128,17 +132,17 @@ InnerBackgroundStory.story = {
 
 export const DifferentBackgrounds = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Tip us off"
 			centralBorder="full"
 			backgroundColour="#FFF280"
-			borderColour={brandBorder.primary}
+			borderColour={brand[300]}
 			innerBackgroundColour="#FFE501"
 		>
 			<h1>
 				👀 Share stories with the Guardian securely and confidentially
 			</h1>
-		</Section>
+		</FrontContainer>
 	);
 };
 DifferentBackgrounds.story = {
@@ -147,14 +151,14 @@ DifferentBackgrounds.story = {
 
 export const StretchRightStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Stretched Right"
 			description="About this content"
 			centralBorder="full"
 			stretchRight={true}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 StretchRightStory.story = {
@@ -163,39 +167,42 @@ StretchRightStory.story = {
 
 export const PartialStory = () => {
 	return (
-		<Section title="Borders" showTopBorder={false} centralBorder="partial">
-			<Grey />
-		</Section>
+		<FrontContainer
+			title="Borders"
+			showTopBorder={false}
+			centralBorder="partial"
+		>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 PartialStory.story = { name: 'with a partial border divider' };
 
 export const SidesStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="NoSides"
 			showTopBorder={false}
 			centralBorder="full"
-			padSides={false}
 			padContent={false}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 SidesStory.story = { name: 'with a full border divider' };
 
 export const ToggleableStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Toggleable Container"
 			toggleable={true}
-			sectionId="sectionId"
+			sectionId="section-id"
 			showTopBorder={false}
 			showSideBorders={false}
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 ToggleableStory.story = { name: 'toggleable container' };
@@ -203,27 +210,27 @@ ToggleableStory.story = { name: 'toggleable container' };
 export const MarginsStory = () => {
 	return (
 		<>
-			<Section
+			<FrontContainer
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
 			>
-				<Grey />
-			</Section>
-			<Section
+				<Placeholder />
+			</FrontContainer>
+			<FrontContainer
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
 			>
-				<Grey />
-			</Section>
-			<Section
+				<Placeholder />
+			</FrontContainer>
+			<FrontContainer
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
 			>
-				<Grey />
-			</Section>
+				<Placeholder />
+			</FrontContainer>
 		</>
 	);
 };
@@ -232,46 +239,46 @@ MarginsStory.story = { name: 'with no vertical margins' };
 export const MultipleStory = () => {
 	return (
 		<>
-			<Section title="Page Title" showTopBorder={false} />
-			<Section title="Headlines" centralBorder="partial">
-				<Grey />
-			</Section>
-			<Section title="Useful links" centralBorder="partial" />
-			<Section
+			<FrontContainer title="Page Title" showTopBorder={false} />
+			<FrontContainer title="Headlines" centralBorder="partial">
+				<Placeholder />
+			</FrontContainer>
+			<FrontContainer title="Useful links" centralBorder="partial" />
+			<FrontContainer
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
 				centralBorder="partial"
 			>
-				<Grey />
-			</Section>
-			<Section
+				<Placeholder />
+			</FrontContainer>
+			<FrontContainer
 				showTopBorder={false}
 				showSideBorders={false}
-				backgroundColour={brandAltBackground.primary}
+				backgroundColour={brandAlt[400]}
 			>
 				<h2>Insert call to action here</h2>
-			</Section>
-			<Section
+			</FrontContainer>
+			<FrontContainer
 				title="Videos"
 				fontColour="white"
 				showTopBorder={false}
 				backgroundColour="black"
 				showSideBorders={false}
 			>
-				<Grey />
-			</Section>
-			<Section
+				<Placeholder />
+			</FrontContainer>
+			<FrontContainer
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
 				centralBorder="partial"
 			>
-				<Grey />
-			</Section>
+				<Placeholder />
+			</FrontContainer>
 		</>
 	);
 };
 MultipleStory.story = {
-	name: 'with multiple sections',
+	name: 'with multiple FrontGrids',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -285,7 +292,7 @@ MultipleStory.story = {
 
 export const TreatsStory = () => {
 	return (
-		<Section
+		<FrontContainer
 			title="Treats and Date Header"
 			treats={[
 				{
@@ -312,8 +319,8 @@ export const TreatsStory = () => {
 			showDateHeader={true}
 			editionId="UK"
 		>
-			<Grey />
-		</Section>
+			<Placeholder />
+		</FrontContainer>
 	);
 };
 TreatsStory.story = {

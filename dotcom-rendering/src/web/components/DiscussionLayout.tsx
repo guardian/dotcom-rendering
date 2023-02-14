@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
+import { from } from '@guardian/source-foundations';
 import { AdSlot, labelStyles } from './AdSlot';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
@@ -36,9 +37,10 @@ export const DiscussionLayout = ({
 	return (
 		<>
 			<Section
-				sectionId="comments"
-				element="aside"
+				padSides={false}
+				padContent={false}
 				showTopBorder={false}
+				showSideBorders={false}
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
 				leftContent={
@@ -52,9 +54,7 @@ export const DiscussionLayout = ({
 					</Island>
 				}
 				leftColSize={
-					format.display === ArticleDisplay.Standard ||
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
+					format.display === ArticleDisplay.Standard
 						? 'wide'
 						: 'compact'
 				}
@@ -62,7 +62,11 @@ export const DiscussionLayout = ({
 				<Flex gap="20px">
 					<div
 						css={css`
+							${from.leftCol} {
+								padding-left: 10px;
+							}
 							width: 100%;
+							max-width: 100%;
 						`}
 					>
 						<Island
@@ -83,7 +87,6 @@ export const DiscussionLayout = ({
 							/>
 						</Island>
 					</div>
-
 					{!hideAd && (
 						<RightColumn>
 							<div
