@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	neutral,
-	news,
-	space,
-} from '@guardian/source-foundations';
+import { headline, neutral, news, space } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
