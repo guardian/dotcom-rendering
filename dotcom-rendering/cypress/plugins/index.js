@@ -18,11 +18,11 @@ module.exports = (on, config) => {
 	// Adding this here so that we can use a module from source code in the cypress tests
 	webpackConfig.webpackOptions.resolve = {
 		extensions: ['.ts', '.js'],
-        alias: {
-           'src': path.resolve(__dirname, `../../src`)
-        }
-	}
-	const rules = webpackConfig.webpackOptions.module.rules
+		alias: {
+			src: path.resolve(__dirname, `../../src`),
+		},
+	};
+	const rules = webpackConfig.webpackOptions.module.rules;
 	rules[0].exclude =
 		require('../../scripts/webpack/webpack.config.browser').babelExclude;
 
@@ -32,10 +32,10 @@ module.exports = (on, config) => {
 		loader: 'ts-loader',
 		options: {
 			compilerOptions: {
-			  noEmit: false,
+				noEmit: false,
 			},
 		},
-	})
+	});
 	on('file:preprocessor', webpackPreprocessor(webpackConfig));
 	return config;
 };
