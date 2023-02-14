@@ -6,6 +6,7 @@ import type {
 	UserType,
 } from '../types';
 import {
+	bodySpacing,
 	bulletStyles,
 	faqPersonalised,
 	firstParagraphOverlay,
@@ -24,8 +25,7 @@ const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
 const SUPPORTER_HEADER = 'Thank you for your support';
 
 // SUBHEADER TEXT
-const SIGN_IN_PROMPT =
-	'Remember to sign in for a better experience. This includes: ';
+const SIGN_IN_PROMPT = 'Remember to sign in for a better experience.';
 
 // BODY TEXT
 const SIGN_IN_INCENTIVES_DIGITAL = [
@@ -98,8 +98,11 @@ export const SignInGateMainCheckoutComplete = ({
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
 			<div css={firstParagraphOverlay} />
-			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)} </h1>
-			<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
+			<h1 css={personalisedHeadingStyles}>{getHeadingText(product)}</h1>
+			<div css={bodySpacing}>
+				<p css={personalisedBodyBold}>{SIGN_IN_PROMPT}</p>
+				<p css={personalisedBodyBold}>This includes: </p>
+			</div>
 			<ul css={bulletStyles}>
 				{getBodyText(product).map((item) => {
 					return (

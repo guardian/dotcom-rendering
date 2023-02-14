@@ -56,9 +56,13 @@ export const personalisedBodyBold = css`
 		padding-right: 130px;
 	}
 	color: ${brand[400]};
+`;
+
+export const bodySpacing = css`
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
 `;
+
 export const bodyText = css`
 	${textSans.medium({ lineHeight: 'regular' })}
 	padding-bottom: ${space[6]}px;
@@ -92,17 +96,7 @@ export const personalisedBodyTextList = css`
 	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
 	padding-bottom: ${space[1]}px;
 	color: black;
-`;
-export const personalisedBodyList = css`
-	list-style: none;
-
-	li::before {
-		content: '•';
-		color: ${brand[400]};
-		display: inline-block;
-		width: 2em;
-		height: 2em;
-	}
+	text-indent: -${space[2]}px;
 `;
 export const signInHeader = css`
 	padding-bottom: 0;

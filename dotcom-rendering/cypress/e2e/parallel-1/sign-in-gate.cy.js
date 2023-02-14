@@ -298,7 +298,7 @@ describe('Sign In Gate Tests', function () {
 
 				// SUBHEADER TEXT
 				const SIGN_IN_PROMPT =
-					'Remember to sign in for a better experience. This includes: ';
+					'Remember to sign in for a better experience.';
 
 				// BODY TEXT
 				const SIGN_IN_INCENTIVES_DIGITAL = [
