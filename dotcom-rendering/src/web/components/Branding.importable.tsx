@@ -162,6 +162,19 @@ type Props = {
 	format: ArticleFormat;
 };
 
+/**
+ * # Branding
+ *
+ * Wrapper around the logo and link for sponsored or paid for content.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * So we can track sponsor logo clicks.
+ *
+ * ---
+ *
+ * (No visual story exists)
+ */
 export const Branding = ({ branding, palette, format }: Props) => {
 	const sponsorId = branding.sponsorName.toLowerCase();
 

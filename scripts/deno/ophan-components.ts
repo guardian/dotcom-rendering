@@ -89,43 +89,43 @@ Comparing **\`${attribute}\`** on the international Front between [Frontend][] &
 ### Missing from DCR (${missing.length} / ${components.length})
 
 ${
-	missing.length
-		? missing
+		missing.length
+			? missing
 				.map(
 					({ tag, name }) =>
 						`- [ ] **\`${name}\`** &rarr; \`<${tag}/>\``,
 				)
 				.join('\n')
-		: 'No missing component in DCR 🎉'
-}
+			: 'No missing component in DCR 🎉'
+	}
 
 ### Tag mismatch (${mismatches.length} / ${components.length})
 
 ${
-	mismatches.length
-		? mismatches
+		mismatches.length
+			? mismatches
 				.map(
 					({ tag, name, dcrTag }) =>
 						`- [X] **\`${name}\`** : \`<${dcrTag} />\` &cross; should be &rarr; \`<${tag}/>\``,
 				)
 				.join('\n')
-		: 'No tag mismatches'
-}
+			: 'No tag mismatches'
+	}
 
 ---
 
 ### Identical match (${identical.length} / ${components.length})
 
 ${
-	identical.length
-		? identical
+		identical.length
+			? identical
 				.map(
 					({ tag, name }) =>
 						`- [X] **\`${name}\`** &rarr; \`<${tag}/>\``,
 				)
 				.join('\n')
-		: 'No identical match'
-}
+			: 'No identical match'
+	}
 `;
 
 	const issue_number = issues[attribute];
@@ -152,8 +152,9 @@ ${
 		body,
 	});
 
-	const change: string =
-		previousBody === newBody ? '[no change]' : `[some changes]`;
+	const change: string = previousBody === newBody
+		? '[no change]'
+		: `[some changes]`;
 
 	console.info(`PR dotcom-rendering#${issue_number} ${attribute} ${change}`);
 	console.info(html_url);

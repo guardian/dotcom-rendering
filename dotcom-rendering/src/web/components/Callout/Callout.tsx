@@ -8,7 +8,7 @@ import type {
 } from '../../../types/content';
 import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
-import { MessageUs } from './MessageUs';
+import { conditionallyRenderContactIcon, MessageUs } from './MessageUs';
 
 const wrapperStyles = css`
 	background-color: ${neutral[97]};
@@ -27,6 +27,19 @@ const titleStyles = css`
 const subtitleTextHeaderStyles = css`
 	${headline.xxsmall()}
 	padding-bottom: ${space[3]}px;
+`;
+
+const tabTitle = css`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-left: ${space[2]}px;
+`;
+
+const tabIcons = css`
+	display: flex;
+	align-items: center;
 `;
 
 export interface CalloutBlockProps {
@@ -55,7 +68,7 @@ export const CalloutBlock = ({
 	const tabsContent = [
 		{
 			id: 'form',
-			text: 'Tell us here',
+			text: <div>Tell us here</div>,
 			content: (
 				<Form
 					formFields={formFields}
@@ -67,9 +80,19 @@ export const CalloutBlock = ({
 	];
 
 	if (shouldShowContacts) {
+		const tabsText = (
+			<div css={tabTitle}>
+				<div>Message us</div>
+				<div css={tabIcons}>
+					{contacts.map((c) =>
+						conditionallyRenderContactIcon(c.name),
+					)}
+				</div>
+			</div>
+		);
 		tabsContent.push({
 			id: 'contact',
-			text: 'Message us',
+			text: tabsText,
 			content: <MessageUs contacts={contacts} />,
 		});
 	}
