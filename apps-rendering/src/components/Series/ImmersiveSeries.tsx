@@ -39,6 +39,7 @@ const linkStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-right: ${remSpace[3]};
 
 	${darkModeCss`
+		color: ${text.seriesTitleDark(format)};
         background-color: ${background.seriesDark(format)};
     `}
 

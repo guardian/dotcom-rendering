@@ -2315,9 +2315,9 @@
     mini-svg-data-uri "1.4.4"
 
 "@guardian/source-react-components-development-kitchen@^9.2.0":
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-9.2.0.tgz#c141b39ec16f883ae2a28e17eada7a7856d1d8d7"
-  integrity sha512-yNOq4u7lZOCbv1fGRXXzrFDCHZEs8jfzt7OxL6qQVY2+hGnEhTBD26FtsBjs0SpzmneaazAlxAR9dg2BjUbKlw==
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-9.2.1.tgz#d57f37c213b68090e62aa0661c638fca3e4acf08"
+  integrity sha512-8/YxJrJ1f8sS2kknDETvN2LhiS/szOR8cjb/QX99+sL1AL/BEdMHR2UStFGlZDVlr/m/Bh1KlwO7FmepjHOZjQ==
 
 "@guardian/source-react-components@^11.2.0":
   version "11.2.0"
@@ -19486,9 +19486,9 @@ vfile@^4.0.0:
     vfile-message "^2.0.0"
 
 vfile@^5.0.0:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.6.tgz#61b2e70690cc835a5d0d0fd135beae74e5a39546"
-  integrity sha512-ADBsmerdGBs2WYckrLBEmuETSPyTD4TuLxTrw0DvjirxW1ra4ZwkbzG8ndsv3Q57smvHxo677MHaQrY9yxH8cA==
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.7.tgz#de0677e6683e3380fafc46544cfe603118826ab7"
+  integrity sha512-r7qlzkgErKjobAmyNIkkSpizsFPYiUPuJb5pNW1RB4JcYVZhs4lIbVqk8XPk033CV/1z8ss5pkax8SuhGpcG8g==
   dependencies:
     "@types/unist" "^2.0.0"
     is-buffer "^2.0.0"
@@ -20356,9 +20356,9 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zod@^3.20.2:
-  version "3.20.2"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.20.2.tgz#068606642c8f51b3333981f91c0a8ab37dfc2807"
-  integrity sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==
+  version "3.20.6"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.20.6.tgz#2f2f08ff81291d47d99e86140fedb4e0db08361a"
+  integrity sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==
 
 zwitch@^1.0.0:
   version "1.0.5"
