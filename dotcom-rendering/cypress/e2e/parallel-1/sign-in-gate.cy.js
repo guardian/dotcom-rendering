@@ -1,80 +1,9 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { config } from '../../../fixtures/config';
+import { makeWindowGuardian } from '../../../src/model/window-guardian';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-
-const makeWindowGuardian = ({
-	stage,
-	frontendAssetsFullURL,
-	revisionNumber,
-	sentryPublicApiKey,
-	sentryHost,
-	keywordIds,
-	dfpAccountId,
-	adUnit,
-	ajaxUrl,
-	shouldHideReaderRevenue,
-	isPaidContent,
-	googletagUrl,
-	switches,
-	abTests,
-	editionId,
-	contentType,
-	brazeApiKey,
-	GAData,
-	unknownConfig = {},
-}) => {
-	return {
-		config: {
-			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
-			isDotcomRendering: true,
-			isDev: process.env.NODE_ENV !== 'production',
-			stage,
-			frontendAssetsFullURL,
-			page: Object.assign(unknownConfig, {
-				dcrCouldRender: true,
-				contentType: contentType ? contentType : '',
-				edition: editionId,
-				revisionNumber,
-				dcrSentryDsn:
-					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-				sentryPublicApiKey,
-				sentryHost,
-				keywordIds,
-				dfpAccountId,
-				adUnit,
-				showRelatedContent: true,
-				ajaxUrl,
-				shouldHideReaderRevenue: shouldHideReaderRevenue
-					? shouldHideReaderRevenue
-					: false,
-				isPaidContent: isPaidContent ? isPaidContent : false,
-				brazeApiKey,
-			}),
-			libs: {
-				googletag: googletagUrl,
-			},
-			switches,
-			tests: abTests,
-			ophan: {
-				pageViewId: '',
-				browserId: '',
-			},
-		},
-		polyfilled: false,
-		adBlockers: {
-			active: undefined,
-			onDetect: [],
-		},
-		modules: {
-			sentry: {
-				reportError: () => null,
-			},
-		},
-		GAData,
-	};
-};
 
 const switchOverride = (config, switchName, value) => {
 	return {
