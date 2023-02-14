@@ -109,7 +109,31 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const headlineByline = (_format: ArticleFormat): Colour => brandAlt[400];
+const headlineByline = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Letter:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+				default:
+					return brandAlt[400];
+			}
+		default:
+			return brandAlt[400];
+	}
+}
 
 const headlineBylineDark = (_format: ArticleFormat): Colour => brandAlt[200];
 
@@ -154,7 +178,6 @@ const headlineDark = ({ design, display, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[100];
@@ -457,7 +480,6 @@ const articleContentDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[100];

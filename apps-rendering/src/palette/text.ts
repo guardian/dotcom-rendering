@@ -258,54 +258,71 @@ const dropCapDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const headline = (format: ArticleFormat): Colour => {
-	if (
-		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video ||
-		format.design === ArticleDesign.LiveBlog
-	) {
-		return neutral[100];
-	}
+const headline = ({ design, display, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.Interview:
+			return neutral[100];
+		case ArticleDesign.DeadBlog:
+			return neutral[7];
+		case ArticleDesign.Feature:
+		case ArticleDesign.Review:
+			if (display === ArticleDisplay.Immersive) {
+				return neutral[100];
+			}
 
-	if (format.design === ArticleDesign.DeadBlog) {
-		return neutral[7];
-	}
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[7];
+				default:
+					return news[300];
+			}
+		default:
+			if (display === ArticleDisplay.Immersive) {
+				return neutral[100];
+			}
 
-	if (
-		format.design === ArticleDesign.Feature ||
-		format.design === ArticleDesign.Review
-	) {
-		switch (format.theme) {
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticlePillar.Sport:
-				return sport[300];
-			case ArticlePillar.Culture:
-				return culture[300];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			default:
-				return news[300];
-		}
+			return neutral[7];
 	}
-
-	if (format.design === ArticleDesign.Interview) {
-		return neutral[100];
-	}
-
-	return neutral[7];
 };
 
-const headlineDark = (format: ArticleFormat): Colour => {
-	switch (format.design) {
+const headlineDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return format.theme === ArticlePillar.Culture
+			return theme === ArticlePillar.Culture
 				? neutral[86]
 				: neutral[93];
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[93];
+				default:
+					return neutral[86];
+			}
 		default:
 			return neutral[86];
 	}
