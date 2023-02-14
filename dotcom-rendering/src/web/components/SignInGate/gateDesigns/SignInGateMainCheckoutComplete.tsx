@@ -68,10 +68,10 @@ const getBodyText: (product: Product) => string[] = (product) => {
 		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
 		Paper: SIGN_IN_INCENTIVES_NON_DIGITAL,
 		GuardianWeekly: SIGN_IN_INCENTIVES_NON_DIGITAL,
-		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL
-	}
-	return bodyTextMap[product]
-}
+		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL,
+	};
+	return bodyTextMap[product];
+};
 
 export const SignInGateMainCheckoutComplete = ({
 	signInUrl,
