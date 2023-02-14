@@ -52,6 +52,24 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 	return `${ajaxUrl}/embed/card${path}.json?dcr=true`;
 };
 
+/**
+ * # Rich Link Component
+ *
+ * Wrapper around `RichLink` which fetches the rich links’ images.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * Rich links’ images and formats are not available on the CAPI response,
+ * so they have to be fetched client-side, via the card embed endpoint;
+ * e.g. <https://api.nextgen.guardianapps.co.uk/embed/card/football/2023/feb/08/erik-ten-hag-blasts-manchester-uniteds-start-as-unacceptable-against-leeds.json?dcr=true>
+ *
+ * This enables to have a richer look for these links, rather than simply their
+ * headline and a grey “Read More” unaware of the pillar or design.
+ *
+ * ---
+ *
+ * [`RichLink` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-richlink)
+ */
 export const RichLinkComponent = ({
 	element,
 	ajaxUrl,

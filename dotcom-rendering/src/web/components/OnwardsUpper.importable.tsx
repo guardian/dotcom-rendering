@@ -183,6 +183,23 @@ type Props = {
 	shortUrlId: string;
 };
 
+/**
+ * # Onwards Upper
+ *
+ * A wrapper around `Carousel` for showing related articles at the bottom
+ * of an article. This contains the logic around which articles to show,
+ * depending on a series of factors (story package, paid content, series tag, …)
+ *
+ * ## Why does this need to be an Island?
+ *
+ * It is a client-side only component, which cannot be rendered on the server,
+ * as none of the relevant information comes from the CAPI response.
+ *
+ * ---
+ *
+ * [`Carousel` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-carousel)
+ *
+ */
 export const OnwardsUpper = ({
 	ajaxUrl,
 	hasRelated,

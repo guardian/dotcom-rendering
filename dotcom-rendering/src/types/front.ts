@@ -36,6 +36,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	trendingTopics?: FETagType[];
 }
 
 interface FEPressedPageType {

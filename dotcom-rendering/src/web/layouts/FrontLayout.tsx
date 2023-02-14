@@ -21,6 +21,7 @@ import { Section } from '../components/Section';
 import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
+import { TrendingTopics } from '../components/TrendingTopics';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import { Stuck } from './lib/stickiness';
@@ -439,7 +440,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
-
+			<Section
+				fullWidth={true}
+				showTopBorder={false}
+				data-component="trending-topics"
+			>
+				<TrendingTopics trendingTopics={front.trendingTopics} />
+			</Section>
 			<Section
 				fullWidth={true}
 				data-print-layout="hide"
