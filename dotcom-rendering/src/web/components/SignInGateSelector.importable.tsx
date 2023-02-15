@@ -65,12 +65,14 @@ const generateSignInUrl = ({
 	idUrl,
 	host,
 	currentTest,
+	componentId,
 }: {
 	pageId: string;
 	pageViewId: string;
 	idUrl: string;
 	host: string;
 	currentTest: CurrentSignInGateABTest;
+	componentId?: string;
 }) => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
@@ -78,7 +80,7 @@ const generateSignInUrl = ({
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
 		componentType: 'signingate',
-		componentId: signInGateTestIdToComponentId[currentTest.id],
+		componentId,
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		browserId:
@@ -222,13 +224,28 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	const componentId = signInGateTestIdToComponentId[currentTest.id];
+	const personalisedComponentId = (
+		id?: string,
+		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
+	): string | undefined => {
+		if (!id) return undefined;
+		if (!checkoutCompleteCookieData) return id;
+		const { userType, product } = checkoutCompleteCookieData;
+		return `${id}_personalised_${userType}_${product}`;
+	};
+
+	const componentId = personalisedComponentId(
+		signInGateTestIdToComponentId[currentTest.id],
+		checkoutCompleteCookieData,
+	);
+
 	const signInUrl = generateSignInUrl({
 		pageId,
 		host,
 		pageViewId,
 		idUrl,
 		currentTest,
+		componentId,
 	});
 
 	return (
