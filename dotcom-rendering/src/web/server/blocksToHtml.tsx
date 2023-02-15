@@ -11,7 +11,7 @@ import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
  */
 export const blocksToHtml = ({
 	blocks,
-	format: CAPIFormat,
+	format: FEFormat,
 	host,
 	pageId,
 	webTitle,
@@ -25,8 +25,8 @@ export const blocksToHtml = ({
 	adUnit,
 	switches,
 	keywordIds,
-}: BlocksRequest): string => {
-	const format: ArticleFormat = decideFormat(CAPIFormat);
+}: FEBlocksRequest): string => {
+	const format: ArticleFormat = decideFormat(FEFormat);
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser,

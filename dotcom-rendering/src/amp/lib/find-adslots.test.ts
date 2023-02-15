@@ -1,5 +1,5 @@
 import type {
-	CAPIElement,
+	FEElement,
 	ImageBlockElement,
 	TextBlockElement,
 } from '../../types/content';
@@ -40,7 +40,7 @@ describe('ampadslots', () => {
 		});
 
 		it('adds an advert after 700 chars', () => {
-			const data: CAPIElement[] = [
+			const data: FEElement[] = [
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'mockId',

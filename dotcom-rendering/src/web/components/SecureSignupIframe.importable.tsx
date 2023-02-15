@@ -171,6 +171,20 @@ const sendTracking = (
 	);
 };
 
+/**
+ * # Secure Signup iFrame
+ *
+ * A descendent of `EmailSignup` used to prevent users from entering their email
+ * on the same page as the one we run third-party scripts on.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We can only inject ReCAPTCHA client-side, and need to respond to user input.
+ *
+ * ---
+ *
+ * [`EmailSignup` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-emailsignup)
+ */
 export const SecureSignupIframe = ({
 	name,
 	styles,

@@ -1,6 +1,6 @@
 import { minify } from 'html-minifier';
 import { sanitiseHTML } from '../../model/sanitise';
-import { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 
 // We don't represent lists in InCopy, so things will just come across with bullet characters.
 // These may also be used for emphasis, so bullet characters don't mean list.
@@ -21,7 +21,7 @@ const clean = (html: string) => {
 	});
 };
 
-export const enhance = (elements: CAPIElement[]): CAPIElement[] => {
+export const enhance = (elements: FEElement[]): FEElement[] => {
 	return elements.map((element) => {
 		if (
 			element._type ===

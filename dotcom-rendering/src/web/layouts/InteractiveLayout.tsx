@@ -201,46 +201,45 @@ const starWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: FEArticleType;
+	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
 
-export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
-	} = CAPIArticle;
+	} = article;
 
 	const isInEuropeTest =
-		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPIArticle.isAdFreeUser,
-		isSensitive: CAPIArticle.config.isSensitive,
-		videoDuration: CAPIArticle.config.videoDuration,
-		edition: CAPIArticle.config.edition,
-		section: CAPIArticle.config.section,
-		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
-		adUnit: CAPIArticle.config.adUnit,
+		isAdFreeUser: article.isAdFreeUser,
+		isSensitive: article.config.isSensitive,
+		videoDuration: article.config.videoDuration,
+		edition: article.config.edition,
+		section: article.config.section,
+		sharedAdTargeting: article.config.sharedAdTargeting,
+		adUnit: article.config.adUnit,
 	});
 
-	const showComments = CAPIArticle.isCommentable;
+	const showComments = article.isCommentable;
 
-	const { branding } =
-		CAPIArticle.commercialProperties[CAPIArticle.editionId];
+	const { branding } = article.commercialProperties[article.editionId];
 
 	const palette = decidePalette(format);
 
-	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
+	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
 
 	return (
 		<>
-			{CAPIArticle.isLegacyInteractive && (
+			{article.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
 
@@ -273,23 +272,23 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							element="header"
 						>
 							<Header
-								editionId={CAPIArticle.editionId}
-								idUrl={CAPIArticle.config.idUrl}
-								mmaUrl={CAPIArticle.config.mmaUrl}
+								editionId={article.editionId}
+								idUrl={article.config.idUrl}
+								mmaUrl={article.config.mmaUrl}
 								discussionApiUrl={
-									CAPIArticle.config.discussionApiUrl
+									article.config.discussionApiUrl
 								}
-								urls={CAPIArticle.nav.readerRevenueLinks.header}
+								urls={article.nav.readerRevenueLinks.header}
 								remoteHeader={
-									!!CAPIArticle.config.switches.remoteHeader
+									!!article.config.switches.remoteHeader
 								}
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								idApiUrl={CAPIArticle.config.idApiUrl}
+								idApiUrl={article.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
-									!!CAPIArticle.config.switches
+									!!article.config.switches
 										.headerTopBarSearchCapi
 								}
 							/>
@@ -309,14 +308,14 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						nav={NAV}
 						format={{
 							...format,
-							theme: getCurrentPillar(CAPIArticle),
+							theme: getCurrentPillar(article),
 						}}
 						subscribeUrl={
-							CAPIArticle.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.subscribe
 						}
-						editionId={CAPIArticle.editionId}
+						editionId={article.editionId}
 						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
+							!!article.config.switches.headerTopNav
 						}
 					/>
 				</Section>
@@ -371,7 +370,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</Stuck>
 			)}
 
-			{renderAds && CAPIArticle.config.switches.surveys && (
+			{renderAds && article.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 			<main data-layout="InteractiveLayout">
@@ -394,13 +393,13 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								>
 									<ArticleTitle
 										format={format}
-										tags={CAPIArticle.tags}
-										sectionLabel={CAPIArticle.sectionLabel}
-										sectionUrl={CAPIArticle.sectionUrl}
+										tags={article.tags}
+										sectionLabel={article.sectionLabel}
+										sectionUrl={article.sectionUrl}
 										guardianBaseURL={
-											CAPIArticle.guardianBaseURL
+											article.guardianBaseURL
 										}
-										badge={CAPIArticle.badge}
+										badge={article.badge}
 									/>
 								</div>
 							</GridItem>
@@ -415,23 +414,23 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div css={maxWidth}>
 									<ArticleHeadline
 										format={format}
-										headlineString={CAPIArticle.headline}
-										tags={CAPIArticle.tags}
-										byline={CAPIArticle.byline}
+										headlineString={article.headline}
+										tags={article.tags}
+										byline={article.byline}
 										webPublicationDateDeprecated={
-											CAPIArticle.webPublicationDateDeprecated
+											article.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											typeof CAPIArticle.starRating ===
+											typeof article.starRating ===
 											'number'
 										}
 									/>
 								</div>
-								{CAPIArticle.starRating ||
-								CAPIArticle.starRating === 0 ? (
+								{article.starRating ||
+								article.starRating === 0 ? (
 									<div css={starWrapper}>
 										<StarRating
-											rating={CAPIArticle.starRating}
+											rating={article.starRating}
 											size="large"
 										/>
 									</div>
@@ -442,24 +441,22 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="standfirst">
 								<Standfirst
 									format={format}
-									standfirst={CAPIArticle.standfirst}
+									standfirst={article.standfirst}
 								/>
 							</GridItem>
 							<GridItem area="media">
 								<div css={maxWidth}>
 									<MainMedia
 										format={format}
-										elements={CAPIArticle.mainMediaElements}
+										elements={article.mainMediaElements}
 										adTargeting={adTargeting}
 										host={host}
-										pageId={CAPIArticle.pageId}
-										webTitle={CAPIArticle.webTitle}
-										ajaxUrl={CAPIArticle.config.ajaxUrl}
-										switches={CAPIArticle.config.switches}
-										isAdFreeUser={CAPIArticle.isAdFreeUser}
-										isSensitive={
-											CAPIArticle.config.isSensitive
-										}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										ajaxUrl={article.config.ajaxUrl}
+										switches={article.config.switches}
+										isAdFreeUser={article.isAdFreeUser}
+										isSensitive={article.config.isSensitive}
 									/>
 								</div>
 							</GridItem>
@@ -475,28 +472,24 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									<ArticleMeta
 										branding={branding}
 										format={format}
-										pageId={CAPIArticle.pageId}
-										webTitle={CAPIArticle.webTitle}
-										byline={CAPIArticle.byline}
-										tags={CAPIArticle.tags}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										byline={article.byline}
+										tags={article.tags}
 										primaryDateline={
-											CAPIArticle.webPublicationDateDisplay
+											article.webPublicationDateDisplay
 										}
 										secondaryDateline={
-											CAPIArticle.webPublicationSecondaryDateDisplay
+											article.webPublicationSecondaryDateDisplay
 										}
-										isCommentable={
-											CAPIArticle.isCommentable
-										}
+										isCommentable={article.isCommentable}
 										discussionApiUrl={
-											CAPIArticle.config.discussionApiUrl
+											article.config.discussionApiUrl
 										}
-										shortUrlId={
-											CAPIArticle.config.shortUrlId
-										}
-										ajaxUrl={CAPIArticle.config.ajaxUrl}
+										shortUrlId={article.config.shortUrlId}
+										ajaxUrl={article.config.ajaxUrl}
 										showShareCount={
-											!!CAPIArticle.config.switches
+											!!article.config.switches
 												.serverShareCounts
 										}
 									/>
@@ -506,40 +499,34 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
-										blocks={CAPIArticle.blocks}
+										blocks={article.blocks}
 										adTargeting={adTargeting}
 										host={host}
-										pageId={CAPIArticle.pageId}
-										webTitle={CAPIArticle.webTitle}
-										ajaxUrl={CAPIArticle.config.ajaxUrl}
-										switches={CAPIArticle.config.switches}
-										isSensitive={
-											CAPIArticle.config.isSensitive
-										}
-										isAdFreeUser={CAPIArticle.isAdFreeUser}
-										section={CAPIArticle.config.section}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										ajaxUrl={article.config.ajaxUrl}
+										switches={article.config.switches}
+										isSensitive={article.config.isSensitive}
+										isAdFreeUser={article.isAdFreeUser}
+										section={article.config.section}
 										shouldHideReaderRevenue={
-											CAPIArticle.shouldHideReaderRevenue
+											article.shouldHideReaderRevenue
 										}
-										tags={CAPIArticle.tags}
+										tags={article.tags}
 										isPaidContent={
-											!!CAPIArticle.config.isPaidContent
+											!!article.config.isPaidContent
 										}
 										contributionsServiceUrl={
 											contributionsServiceUrl
 										}
-										contentType={CAPIArticle.contentType}
-										sectionName={
-											CAPIArticle.sectionName ?? ''
-										}
-										isPreview={CAPIArticle.config.isPreview}
-										idUrl={CAPIArticle.config.idUrl ?? ''}
-										isDev={!!CAPIArticle.config.isDev}
-										keywordIds={
-											CAPIArticle.config.keywordIds
-										}
+										contentType={article.contentType}
+										sectionName={article.sectionName ?? ''}
+										isPreview={article.config.isPreview}
+										idUrl={article.config.idUrl ?? ''}
+										isDev={!!article.config.isDev}
+										keywordIds={article.config.keywordIds}
 										tableOfContents={
-											CAPIArticle.tableOfContents
+											article.tableOfContents
 										}
 									/>
 								</ArticleContainer>
@@ -562,26 +549,24 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					>
 						<Island clientOnly={true}>
 							<SlotBodyEnd
-								contentType={CAPIArticle.contentType}
+								contentType={article.contentType}
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
-								idApiUrl={CAPIArticle.config.idApiUrl}
+								idApiUrl={article.config.idApiUrl}
 								isMinuteArticle={
-									CAPIArticle.pageType.isMinuteArticle
+									article.pageType.isMinuteArticle
 								}
-								isPaidContent={
-									CAPIArticle.pageType.isPaidContent
-								}
-								keywordIds={CAPIArticle.config.keywordIds}
-								pageId={CAPIArticle.pageId}
-								sectionId={CAPIArticle.config.section}
-								sectionName={CAPIArticle.sectionName}
+								isPaidContent={article.pageType.isPaidContent}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								sectionId={article.config.section}
+								sectionName={article.sectionName}
 								shouldHideReaderRevenue={
-									CAPIArticle.shouldHideReaderRevenue
+									article.shouldHideReaderRevenue
 								}
-								stage={CAPIArticle.config.stage}
-								tags={CAPIArticle.tags}
+								stage={article.config.stage}
+								tags={article.tags}
 							/>
 						</Island>
 					</div>
@@ -609,15 +594,15 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				>
 					<SubMeta
 						format={format}
-						subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
-						subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
-						pageId={CAPIArticle.pageId}
-						webUrl={CAPIArticle.webURL}
-						webTitle={CAPIArticle.webTitle}
+						subMetaKeywordLinks={article.subMetaKeywordLinks}
+						subMetaSectionLinks={article.subMetaSectionLinks}
+						pageId={article.pageId}
+						webUrl={article.webURL}
+						webTitle={article.webTitle}
 						showBottomSocialButtons={
-							CAPIArticle.showBottomSocialButtons
+							article.showBottomSocialButtons
 						}
-						badge={CAPIArticle.badge}
+						badge={article.badge}
 					/>
 				</Section>
 				{renderAds && (
@@ -638,12 +623,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{CAPIArticle.storyPackage && (
+				{article.storyPackage && (
 					<Section fullWidth={true} showTopBorder={false}>
 						<Island deferUntil="visible">
 							<Carousel
-								heading={CAPIArticle.storyPackage.heading}
-								trails={CAPIArticle.storyPackage.trails.map(
+								heading={article.storyPackage.heading}
+								trails={article.storyPackage.trails.map(
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
@@ -659,22 +644,20 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					placeholderHeight={600}
 				>
 					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={!!CAPIArticle.config.isPaidContent}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={!!article.config.isPaidContent}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
 						format={format}
 						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
 					/>
 				</Island>
 
@@ -686,22 +669,19 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						element="section"
 					>
 						<DiscussionLayout
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
-							shortUrlId={CAPIArticle.config.shortUrlId}
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
 							format={format}
-							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
+							discussionD2Uid={article.config.discussionD2Uid}
 							discussionApiClientHeader={
-								CAPIArticle.config.discussionApiClientHeader
+								article.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								!!CAPIArticle.config.switches
-									.enableDiscussionSwitch
+								!!article.config.switches.enableDiscussionSwitch
 							}
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							idApiUrl={CAPIArticle.config.idApiUrl}
+							isAdFreeUser={article.isAdFreeUser}
+							shouldHideAds={article.shouldHideAds}
+							idApiUrl={article.config.idApiUrl}
 						/>
 					</Section>
 				)}
@@ -719,9 +699,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<MostViewedFooterLayout>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
-									sectionName={CAPIArticle.sectionName}
+									sectionName={article.sectionName}
 									format={format}
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									ajaxUrl={article.config.ajaxUrl}
 								/>
 							</Island>
 						</MostViewedFooterLayout>
@@ -773,41 +753,39 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPIArticle.pageFooter}
+					pageFooter={article.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					urls={article.nav.readerRevenueLinks.header}
+					editionId={article.editionId}
+					contributionsServiceUrl={article.contributionsServiceUrl}
 				/>
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						contentType={CAPIArticle.contentType}
+						contentType={article.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={CAPIArticle.config.idApiUrl}
-						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
-						isPaidContent={CAPIArticle.pageType.isPaidContent}
-						isPreview={!!CAPIArticle.config.isPreview}
-						isSensitive={CAPIArticle.config.isSensitive}
-						keywordIds={CAPIArticle.config.keywordIds}
-						pageId={CAPIArticle.pageId}
-						section={CAPIArticle.config.section}
-						sectionName={CAPIArticle.sectionName}
+						idApiUrl={article.config.idApiUrl}
+						isMinuteArticle={article.pageType.isMinuteArticle}
+						isPaidContent={article.pageType.isPaidContent}
+						isPreview={!!article.config.isPreview}
+						isSensitive={article.config.isSensitive}
+						keywordIds={article.config.keywordIds}
+						pageId={article.pageId}
+						section={article.config.section}
+						sectionName={article.sectionName}
 						shouldHideReaderRevenue={
-							CAPIArticle.shouldHideReaderRevenue
+							article.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							!!CAPIArticle.config.switches.remoteBanner
+							!!article.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							!!CAPIArticle.config.switches.puzzlesBanner
+							!!article.config.switches.puzzlesBanner
 						}
-						tags={CAPIArticle.tags}
+						tags={article.tags}
 					/>
 				</Island>
 			</BannerWrapper>

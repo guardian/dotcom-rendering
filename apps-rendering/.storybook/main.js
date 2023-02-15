@@ -61,10 +61,7 @@ const webpackConfig = (config) => {
 
 	rules.push({
 		test: /\.tsx?$/,
-		include: [
-			path.resolve(__dirname, '..'),
-			path.resolve(__dirname, '../../common-rendering'),
-		],
+		include: [path.resolve(__dirname, '..')],
 		use: [
 			{
 				loader: 'babel-loader',
@@ -99,7 +96,6 @@ const webpackConfig = (config) => {
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
 		path.resolve(__dirname, '../src'),
-		path.resolve(__dirname, '../../common-rendering/src'),
 	];
 
 	config.resolve.alias = {

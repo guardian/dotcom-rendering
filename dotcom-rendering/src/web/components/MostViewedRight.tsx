@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { CAPITrailTabType, TrailType } from '../../types/trails';
+import type { FETrailTabType, TrailType } from '../../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -36,7 +36,7 @@ export const MostViewedRight = ({
 }: Props) => {
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
-	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
+	const { data, error } = useApi<FETrailTabType>(endpointUrl);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-right');

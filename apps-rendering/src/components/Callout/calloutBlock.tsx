@@ -1,3 +1,4 @@
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
@@ -5,7 +6,9 @@ import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import { TermsAndConditions } from './calloutComponents';
-import CalloutContact from './calloutContact';
+import CalloutContact, {
+	conditionallyRenderContactIcon,
+} from './calloutContact';
 import CalloutForm from './calloutForm';
 import { ShareLink } from './shareLink';
 import {
@@ -15,6 +18,8 @@ import {
 	calloutInfo,
 	calloutLinkContainer,
 	calloutTitle,
+	tabIcons,
+	tabTitle,
 } from './styles';
 
 export const getCalloutId = (str: string): string =>
@@ -26,6 +31,8 @@ export interface CalloutBlockProps {
 	formFields: FormField[];
 	format: ArticleFormat;
 	description?: DocumentFragment;
+	contacts?: Contact[];
+	isNonCollapsible: boolean;
 }
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
@@ -34,27 +41,46 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	formFields,
 	format,
 	description,
+	contacts,
+	isNonCollapsible,
 }): ReactElement => {
 	const id = getCalloutId(heading);
 	const [selectedTab, setSelectedTab] = useState('form');
+	const shouldShowContacts = contacts && contacts.length > 0;
 	const tabsContent = [
 		{
 			id: 'form',
-			text: 'Tell us here',
+			text: <div>Tell us here</div>,
 			content: <CalloutForm id={formId} fields={formFields} />,
 		},
-		{
-			id: 'contact',
-			text: 'Message us',
-			content: <CalloutContact />,
-		},
 	];
+
+	if (shouldShowContacts) {
+		const tabsText = (
+			<div css={tabTitle}>
+				<div>Message us</div>
+				<div css={tabIcons}>
+					{contacts.map((c) =>
+						conditionallyRenderContactIcon(c.name),
+					)}
+				</div>
+			</div>
+		);
+
+		tabsContent.push({
+			id: 'contact',
+			text: tabsText,
+			content: <CalloutContact contacts={contacts} />,
+		});
+	}
 
 	return (
 		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer]}>
-				<div css={calloutTitle}>Tell Us</div>
-				<h4 css={calloutHeadingText}>{heading}</h4>
+				<div css={calloutTitle}>Share your experience</div>
+				{!isNonCollapsible && (
+					<h4 css={calloutHeadingText}>{heading}</h4>
+				)}
 				{description && (
 					<div css={calloutDescription}>
 						{renderCalloutDescriptionText(format, description)}

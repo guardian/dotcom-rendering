@@ -7,7 +7,7 @@ import { ArticleDesign } from '@guardian/libs';
 export const decideDesign = ({
 	design,
 	display,
-}: Partial<CAPIFormat>): ArticleDesign => {
+}: Partial<FEFormat>): ArticleDesign => {
 	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
