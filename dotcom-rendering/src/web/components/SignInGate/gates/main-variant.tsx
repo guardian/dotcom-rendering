@@ -47,11 +47,13 @@ export const signInGateComponent: SignInGateComponent = {
 		signInUrl,
 		abTest,
 		checkoutCompleteCookieData,
+		personaliseSignInAfterCheckoutSwitch,
 	}) => {
 		return (
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
-					{checkoutCompleteCookieData ? (
+					{personaliseSignInAfterCheckoutSwitch &&
+					checkoutCompleteCookieData ? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}
@@ -61,6 +63,7 @@ export const signInGateComponent: SignInGateComponent = {
 							checkoutCompleteCookieData={
 								checkoutCompleteCookieData
 							}
+							personaliseSignInAfterCheckoutSwitch={true}
 						/>
 					) : (
 						<SignInGateMain
@@ -69,6 +72,7 @@ export const signInGateComponent: SignInGateComponent = {
 							guUrl={guUrl}
 							signInUrl={signInUrl}
 							abTest={abTest}
+							personaliseSignInAfterCheckoutSwitch={false}
 						/>
 					)}
 				</Suspense>

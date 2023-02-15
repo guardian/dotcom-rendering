@@ -26,6 +26,7 @@ export const signInGateMandatoryComponent: SignInGateComponent = {
 					signInUrl={signInUrl}
 					abTest={abTest}
 					isMandatory={true}
+					personaliseSignInAfterCheckoutSwitch={false}
 				/>
 			</Suspense>
 		</Lazy>

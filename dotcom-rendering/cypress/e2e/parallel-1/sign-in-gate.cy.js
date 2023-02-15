@@ -1,8 +1,42 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-
+import { config } from '../../../fixtures/config';
+import { makeWindowGuardian } from '../../../src/model/window-guardian';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+
+const switchOverride = (config, switchName, value) => {
+	return {
+		...config,
+		switches: {
+			[switchName]: value,
+			...config.switches,
+		},
+	};
+};
+
+const setPersonaliseSignInAfterCheckoutSwitch = (config, value) => {
+	return switchOverride(config, 'personaliseSignInAfterCheckout', value);
+};
+
+const makeGuardianWindowWithConfig = (config) => {
+	return makeWindowGuardian({
+		editionId: config.edition,
+		stage: config.stage,
+		frontendAssetsFullURL: config.frontendAssetsFullURL,
+		revisionNumber: config.revisionNumber,
+		sentryPublicApiKey: config.sentryPublicApiKey,
+		sentryHost: config.sentryHost,
+		keywordIds: config.keywordIds,
+		dfpAccountId: config.dfpAccountId,
+		adUnit: config.adUnit,
+		ajaxUrl: config.ajaxUrl,
+		googletagUrl: config.googletagUrl,
+		switches: config.switches,
+		abTests: config.abTests,
+		brazeApiKey: config.brazeApiKey,
+	});
+};
 
 describe('Sign In Gate Tests', function () {
 	beforeEach(function () {
@@ -46,6 +80,18 @@ describe('Sign In Gate Tests', function () {
 		cy.visit(`/Article?url=${url}`);
 	};
 
+	const visitArticleWithConfig = (
+		config,
+		url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+	) => {
+		cy.visit(`Article?url=${url}`, {
+			onBeforeLoad: (win) => {
+				Object.defineProperty(win, 'guardian', {
+					value: makeGuardianWindowWithConfig(config),
+				});
+			},
+		});
+	};
 	// as the sign in gate is lazy loaded, we need to scroll to the rough position where it
 	// will be inserted to make it visible
 	// can override position if required
@@ -60,6 +106,15 @@ describe('Sign In Gate Tests', function () {
 		roughPosition,
 	} = {}) => {
 		visitArticle(url);
+		scrollToGateForLazyLoading(roughPosition);
+	};
+
+	const visitArticleWithConfigAndScrollToGateForLazyLoad = ({
+		config,
+		url,
+		roughPosition,
+	} = {}) => {
+		visitArticleWithConfig(config, url);
 		scrollToGateForLazyLoading(roughPosition);
 	};
 
@@ -214,9 +269,29 @@ describe('Sign In Gate Tests', function () {
 					'Register for free',
 				);
 			});
+
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
 				setGuCOCompleteCookie('new', 'DigitalPack');
+				const updatedConfig = setPersonaliseSignInAfterCheckoutSwitch(
+					config,
+					false,
+				);
+				visitArticleWithConfigAndScrollToGateForLazyLoad({
+					config: updatedConfig,
+				});
+
 				scrollToGateForLazyLoading();
+
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You need to register to keep reading',
+				);
+			});
+
+			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is not set', function () {
+				setGuCOCompleteCookie('new', 'DigitalPack');
+
+				visitArticleWithConfigAndScrollToGateForLazyLoad({ config });
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 				cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -251,7 +326,11 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is new and has a digital subscription', function () {
 					setGuCOCompleteCookie('new', 'DigitalPack');
-					visitArticleAndScrollToGateForLazyLoad();
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -277,7 +356,12 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is new and has a paper subscription', function () {
 					setGuCOCompleteCookie('guest', 'Paper');
-					visitArticleAndScrollToGateForLazyLoad();
+
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -303,7 +387,12 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is new and is a contributor', function () {
 					setGuCOCompleteCookie('new', 'Contribution');
-					visitArticleAndScrollToGateForLazyLoad();
+
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -318,6 +407,7 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
+
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
 						.and('contains', '/register?returnUrl=')
@@ -329,7 +419,12 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is existing and has a digital subscription', function () {
 					setGuCOCompleteCookie('current', 'DigitalPack');
-					visitArticleAndScrollToGateForLazyLoad();
+
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -355,7 +450,12 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is existing and has a paper subscription', function () {
 					setGuCOCompleteCookie('current', 'Paper');
-					visitArticleAndScrollToGateForLazyLoad();
+
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -381,7 +481,12 @@ describe('Sign In Gate Tests', function () {
 
 				it('user is existing and is a contributor', function () {
 					setGuCOCompleteCookie('current', 'Contribution');
-					visitArticleAndScrollToGateForLazyLoad();
+
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
@@ -411,7 +516,11 @@ describe('Sign In Gate Tests', function () {
 				it('invalid userType', function () {
 					setGuCOCompleteCookie('invalid', 'Contribution');
 
-					visitArticleAndScrollToGateForLazyLoad();
+					const updatedConfig =
+						setPersonaliseSignInAfterCheckoutSwitch(config, true);
+					visitArticleWithConfigAndScrollToGateForLazyLoad({
+						config: updatedConfig,
+					});
 
 					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 					cy.get('[data-cy=sign-in-gate-main]').contains(
