@@ -214,7 +214,7 @@ const shouldDisplayAd = (
 		return false;
 	}
 
-	const isFirstAd = block === 0;
+	const isFirstAd = block === 1;
 	if (isFirstAd) {
 		return true;
 	}

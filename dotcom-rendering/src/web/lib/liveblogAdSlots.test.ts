@@ -121,7 +121,7 @@ describe('shouldDisplayAd', () => {
 
 	describe('inserting the first ad slot', () => {
 		it('should display ad if this is the first block', () => {
-			const block = 0;
+			const block = 1;
 			const totalBlocks = 10;
 			const numAdsInserted = 0;
 			const numPixelsWithoutAdvert = 550;
