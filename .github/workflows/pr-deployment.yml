@@ -15,8 +15,11 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v3
-            - name: Install Node
-              uses: guardian/actions-setup-node@main
+
+            - uses: actions/setup-node@v3
+              with:
+                node-version-file: .nvmrc
+                cache: 'yarn'
             # Make sure we install dependencies in the root directory
             - uses: bahmutov/npm-install@v1
             - run: make build
