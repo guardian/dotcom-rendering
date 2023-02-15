@@ -317,7 +317,7 @@ export const AdSlot = ({
 			`;
 			const topAboveNavContainerStyles = css`
 				width: 100%;
-				&[child-ad-rendered] {
+				&[top-above-nav-ad-rendered] {
 					margin: 0 auto;
 					width: fit-content;
 				}
