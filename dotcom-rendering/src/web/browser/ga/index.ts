@@ -22,7 +22,16 @@ export const ga = (): Promise<void> => {
 					init();
 					sendPageView();
 				})
-				.catch((e) => console.error(`GA - error: ${String(e)}`));
+				.catch((e) => {
+					// We don't need to log script loading errors (these will mostly be adblock, etc),
+					if (!String(e).includes('Error loading script')) {
+						// This is primarily for logging errors with our GA code.
+						window.guardian.modules.sentry.reportError(
+							e instanceof Error ? e : new Error(e),
+							'ga',
+						);
+					}
+				});
 		} else {
 			// Disable Google Analytics
 			// @ts-expect-error -- We should never be able to directly set things to the global window object
