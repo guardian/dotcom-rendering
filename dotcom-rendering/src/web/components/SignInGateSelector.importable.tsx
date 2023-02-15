@@ -2,6 +2,7 @@ import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
+import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -15,6 +16,7 @@ import {
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import type {
+	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
@@ -40,6 +42,7 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
+	checkoutComplete?: CheckoutCompleteCookieData;
 }
 
 const dismissGate = (
@@ -99,6 +102,7 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
+	checkoutComplete: checkoutCompleteCookieData,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -121,6 +125,7 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: componentId,
+			checkoutCompleteCookieData,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -141,6 +146,16 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// START: Checkout Complete Personalisation
+	const checkOutCompleteString = getCookie({
+		name: 'GU_CO_COMPLETE',
+		shouldMemoize: true,
+	});
+	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
+		checkOutCompleteString !== null
+			? parseCheckoutCompleteCookieData(checkOutCompleteString)
+			: undefined;
+	// END: Checkout Complete Personalisation
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -228,6 +243,7 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
+					checkoutComplete={checkoutCompleteCookieData}
 				/>
 			)}
 		</>
