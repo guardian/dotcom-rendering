@@ -1,4 +1,4 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, getSwitches } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
@@ -43,6 +43,7 @@ interface ShowSignInGateProps {
 	gateVariant: SignInGateComponent;
 	host: string;
 	checkoutComplete?: CheckoutCompleteCookieData;
+	personaliseSignInAfterCheckoutSwitch: boolean;
 }
 
 const dismissGate = (
@@ -105,6 +106,7 @@ const ShowSignInGate = ({
 	gateVariant,
 	host,
 	checkoutComplete: checkoutCompleteCookieData,
+	personaliseSignInAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -128,6 +130,7 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: componentId,
 			checkoutCompleteCookieData,
+			personaliseSignInAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -158,6 +161,7 @@ export const SignInGateSelector = ({
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation
+
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -168,6 +172,7 @@ export const SignInGateSelector = ({
 		CurrentSignInGateABTest | undefined
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
 	const { pageViewId } = window.guardian.config.ophan;
@@ -209,6 +214,12 @@ export const SignInGateSelector = ({
 				})
 				.then(setCanShowGate);
 		}
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		getSwitches().then((switches) => {
+			if (switches.personaliseSignInAfterCheckout) {
+				setPersonaliseSwitch(switches.personaliseSignInAfterCheckout);
+			} else setPersonaliseSwitch(false);
+		});
 	}, [
 		currentTest,
 		gateVariant,
@@ -261,6 +272,7 @@ export const SignInGateSelector = ({
 					gateVariant={gateVariant}
 					host={host}
 					checkoutComplete={checkoutCompleteCookieData}
+					personaliseSignInAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>

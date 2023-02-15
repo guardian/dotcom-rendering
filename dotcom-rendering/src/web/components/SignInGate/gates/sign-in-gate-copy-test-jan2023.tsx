@@ -25,6 +25,7 @@ export const signInGateCopyTestJan2023Component: SignInGateComponent = {
 					guUrl={guUrl}
 					signInUrl={signInUrl}
 					abTest={abTest}
+					personaliseSignInAfterCheckoutSwitch={false}
 				/>
 			</Suspense>
 		</Lazy>
