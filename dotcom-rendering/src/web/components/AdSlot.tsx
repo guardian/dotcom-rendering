@@ -11,7 +11,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
-import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlineProps = {
@@ -274,12 +273,10 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<Island>
-							<TopRightAdSlot
-								isPaidContent={isPaidContent}
-								adStyles={adStyles}
-							/>
-						</Island>
+						<TopRightAdSlot
+							isPaidContent={isPaidContent}
+							adStyles={adStyles}
+						/>
 					);
 				}
 				default:

@@ -17,6 +17,11 @@ type Props = {
 	readerCanBeShownAds: boolean;
 };
 
+/**
+ * # AudioAtomWrapper
+ *
+ * Wrapper around [`@guardian/atoms-rendering`’s `AudioAtom`](https://github.com/guardian/csnx/blob/main/libs/%40guardian/atoms-rendering/src/AudioAtom.tsx)
+ */
 export const AudioAtomWrapper = ({
 	id,
 	trackUrl,
