@@ -30,6 +30,14 @@ describe('Sign In Gate Tests', function () {
 		});
 	};
 
+	const setGuCOCompleteCookie = (userType, productType) => {
+		cy.setCookie(
+			'GU_CO_COMPLETE',
+			encodeURIComponent(
+				`{"userType":"${userType}","product":"${productType}"}`,
+			),
+		);
+	};
 	// helper method over the cypress visit method to avoid having to repeat the same url by setting a default
 	// can override the parameter if required
 	const visitArticle = (
@@ -187,6 +195,211 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main_privacy]').click();
 
 			cy.contains('privacy settings');
+		});
+
+		describe('Sign in gate should personalise based on the GU_CO_COMPLETE cookie', function () {
+			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
+				visitArticleAndScrollToGateForLazyLoad();
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You need to register to keep reading',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'It’s still free to read – this is not a paywall',
+				);
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'We’re committed to keeping our quality reporting open.',
+				);
+				cy.get('[data-cy=sign-in-gate-main_register]').contains(
+					'Register for free',
+				);
+			});
+			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
+				setGuCOCompleteCookie('new', 'DigitalPack');
+				scrollToGateForLazyLoading();
+
+				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+				cy.get('[data-cy=sign-in-gate-main]').contains(
+					'You need to register to keep reading',
+				);
+			});
+
+			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
+				// HEADER TEXT
+				const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
+				const SUPPORTER_HEADER = 'Thank you for your support';
+
+				// SUBHEADER TEXT
+				const SIGN_IN_PROMPT =
+					'Remember to sign in for a better experience.';
+
+				// BODY TEXT
+				const SIGN_IN_INCENTIVES_DIGITAL = [
+					'Supporter rewards – unlock the benefits of your support',
+					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+					'Get involved in the discussion – comment on stories',
+				];
+
+				const SIGN_IN_INCENTIVES_NON_DIGITAL = [
+					'Fewer interruptions',
+					'Incisive analysis and original reporting direct to your inbox, with our newsletters',
+					'Get involved in the discussion – comment on stories',
+				];
+				// BUTTON TEXT
+				const COMPLETE_REGISTRATION_BUTTON = 'Complete registration';
+				const SIGN_IN_BUTTON = 'Sign in';
+
+				it('user is new and has a digital subscription', function () {
+					setGuCOCompleteCookie('new', 'DigitalPack');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUBSCRIPTION_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						COMPLETE_REGISTRATION_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+
+				it('user is new and has a paper subscription', function () {
+					setGuCOCompleteCookie('guest', 'Paper');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUBSCRIPTION_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						COMPLETE_REGISTRATION_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+
+				it('user is new and is a contributor', function () {
+					setGuCOCompleteCookie('new', 'Contribution');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUPPORTER_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						COMPLETE_REGISTRATION_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+
+				it('user is existing and has a digital subscription', function () {
+					setGuCOCompleteCookie('current', 'DigitalPack');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUBSCRIPTION_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						SIGN_IN_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+
+				it('user is existing and has a paper subscription', function () {
+					setGuCOCompleteCookie('current', 'Paper');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUBSCRIPTION_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						SIGN_IN_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+
+				it('user is existing and is a contributor', function () {
+					setGuCOCompleteCookie('current', 'Contribution');
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SUPPORTER_HEADER,
+					);
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						SIGN_IN_PROMPT,
+					);
+					SIGN_IN_INCENTIVES_NON_DIGITAL.forEach((item) => {
+						cy.get('[data-cy=sign-in-gate-main]').contains(item);
+					});
+					cy.get('[data-cy=sign-in-gate-main_register]').contains(
+						SIGN_IN_BUTTON,
+					);
+					cy.get('[data-cy=sign-in-gate-main_register]').should(
+						'have.attr',
+						'href',
+					);
+				});
+			});
+
+			describe('GU_CO_COMPLETE is present, with invalid contents should show the main sign in gate', function () {
+				it('invalid userType', function () {
+					setGuCOCompleteCookie('invalid', 'Contribution');
+
+					visitArticleAndScrollToGateForLazyLoad();
+
+					cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
+					cy.get('[data-cy=sign-in-gate-main]').contains(
+						'You need to register to keep reading',
+					);
+				});
+			});
 		});
 	});
 });
