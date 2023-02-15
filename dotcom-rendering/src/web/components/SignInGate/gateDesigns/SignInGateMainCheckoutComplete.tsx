@@ -1,3 +1,11 @@
+import { css } from '@emotion/react';
+import {
+	brand,
+	from,
+	headline,
+	neutral,
+	space,
+} from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
 import type {
@@ -7,18 +15,100 @@ import type {
 } from '../types';
 import {
 	bodySpacing,
-	bulletStyles,
-	faqPersonalised,
 	firstParagraphOverlay,
 	hideElementsCss,
-	notNowButton,
-	personalisedActionButtons,
-	personalisedBodyBold,
-	personalisedBodyTextList,
-	personalisedHeadingStyles,
 	registerButton,
 	signInGateContainer,
 } from './shared';
+
+const personalisedHeadingStyles = css`
+	${headline.small({ fontWeight: 'bold' })};
+	border-top: 2px ${brand[400]} solid;
+	${from.phablet} {
+		padding-right: 160px;
+		${headline.medium({ fontWeight: 'bold' })};
+	}
+	padding-bottom: ${space[2]}px;
+`;
+
+const personalisedBodyBold = css`
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
+	${from.phablet} {
+		padding-right: 130px;
+	}
+	color: ${brand[400]};
+`;
+
+const bulletStyles = css`
+	margin-bottom: ${space[4]}px;
+	${headline.xxsmall({ fontWeight: 'medium' })};
+	color: ${neutral[100]};
+	display: flex;
+	flex-direction: column;
+	li:not(:first-of-type) {
+		margin-top: 10px;
+	}
+	li::before {
+		content: '';
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		margin-right: ${space[2]}px;
+		background: ${brand[400]};
+		border-radius: 50%;
+	}
+`;
+
+const personalisedBodyTextList = css`
+	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
+	padding-bottom: ${space[1]}px;
+	color: black;
+	text-indent: -${space[2]}px;
+`;
+
+const personalisedActionButtons = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+
+	> a {
+		/* stylelint-disable-next-line declaration-no-important */
+		margin-right: ${space[4]}px !important;
+
+		${from.mobileMedium} {
+			/* stylelint-disable-next-line declaration-no-important */
+			margin-right: ${space[9]}px !important;
+		}
+
+		/* stylelint-disable-next-line declaration-no-important */
+		text-decoration: none !important;
+	}
+`;
+
+const notNowButton = css`
+	/* stylelint-disable-next-line declaration-no-important */
+	color: ${brand[400]} !important;
+	text-decoration: none;
+`;
+
+const faqPersonalised = css`
+	padding-bottom: 18px;
+	margin-top: ${space[3]}px;
+	& a {
+		display: block;
+		margin-top: ${space[6]}px;
+		margin-bottom: ${space[4]}px;
+		color: ${brand[500]};
+		text-decoration-color: ${brand[500]};
+		text-underline-position: under;
+	}
+
+	& a:hover {
+		color: ${brand[500]};
+		text-decoration-color: ${brand[500]};
+	}
+`;
 
 // HEADER TEXT
 const SUBSCRIPTION_HEADER = 'Thank you for subscribing';

@@ -4,7 +4,6 @@ import {
 	from,
 	headline,
 	line,
-	neutral,
 	space,
 	text,
 	textSans,
@@ -29,15 +28,6 @@ export const headingStyles = css`
 	}
 `;
 
-export const personalisedHeadingStyles = css`
-	${headline.small({ fontWeight: 'bold' })};
-	border-top: 2px ${brand[400]} solid;
-	${from.phablet} {
-		padding-right: 160px;
-		${headline.medium({ fontWeight: 'bold' })};
-	}
-	padding-bottom: ${space[2]}px;
-`;
 export const bodySeparator = css`
 	border-top: 1px ${line.primary} solid;
 `;
@@ -48,14 +38,6 @@ export const bodyBold = css`
 	${from.phablet} {
 		padding-right: 130px;
 	}
-`;
-
-export const personalisedBodyBold = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	${from.phablet} {
-		padding-right: 130px;
-	}
-	color: ${brand[400]};
 `;
 
 export const bodySpacing = css`
@@ -72,32 +54,6 @@ export const bodyText = css`
 	}
 `;
 
-export const bulletStyles = css`
-	margin-bottom: ${space[4]}px;
-	${headline.xxsmall({ fontWeight: 'medium' })};
-	color: ${neutral[100]};
-	display: flex;
-	flex-direction: column;
-	li:not(:first-of-type) {
-		margin-top: 10px;
-	}
-	li::before {
-		content: '';
-		display: inline-block;
-		width: 15px;
-		height: 15px;
-		margin-right: ${space[2]}px;
-		background: ${brand[400]};
-		border-radius: 50%;
-	}
-`;
-
-export const personalisedBodyTextList = css`
-	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
-	padding-bottom: ${space[1]}px;
-	color: black;
-	text-indent: -${space[2]}px;
-`;
 export const signInHeader = css`
 	padding-bottom: 0;
 `;
@@ -107,26 +63,6 @@ export const actionButtons = css`
 	flex-direction: row;
 	justify-content: flex-start;
 	margin-bottom: 42px;
-
-	> a {
-		/* stylelint-disable-next-line declaration-no-important */
-		margin-right: ${space[4]}px !important;
-
-		${from.mobileMedium} {
-			/* stylelint-disable-next-line declaration-no-important */
-			margin-right: ${space[9]}px !important;
-		}
-
-		/* stylelint-disable-next-line declaration-no-important */
-		text-decoration: none !important;
-	}
-`;
-
-export const personalisedActionButtons = css`
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	margin-bottom: 20px;
 
 	> a {
 		/* stylelint-disable-next-line declaration-no-important */
@@ -152,12 +88,6 @@ export const laterButton = css`
 	color: ${brand[400]} !important;
 `;
 
-export const notNowButton = css`
-	/* stylelint-disable-next-line declaration-no-important */
-	color: ${brand[400]} !important;
-	text-decoration: none;
-`;
-
 export const signInLink = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	color: ${text.anchorPrimary} !important;
@@ -181,24 +111,6 @@ export const faq = css`
 
 	& a:hover {
 		color: ${text.anchorPrimary};
-	}
-`;
-
-export const faqPersonalised = css`
-	padding-bottom: 18px;
-	margin-top: ${space[3]}px;
-	& a {
-		display: block;
-		margin-top: ${space[6]}px;
-		margin-bottom: ${space[4]}px;
-		color: ${brand[500]};
-		text-decoration-color: ${brand[500]};
-		text-underline-position: under;
-	}
-
-	& a:hover {
-		color: ${brand[500]};
-		text-decoration-color: ${brand[500]};
 	}
 `;
 
