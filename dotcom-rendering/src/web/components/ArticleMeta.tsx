@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { MessageForm } from '../../../fixtures/manual/message-us-form';
 import { getSoleContributor } from '../../lib/byline';
 import type { Branding as BrandingType } from '../../types/branding';
 import type { Palette } from '../../types/palette';
@@ -22,6 +23,7 @@ import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
+import { SendAMessage } from './MessageUs';
 import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
@@ -374,6 +376,11 @@ export const ArticleMeta = ({
 									format={format}
 								/>
 							)}
+							<SendAMessage
+								formFields={MessageForm.formFields}
+								submissionURL={MessageForm.submissionURL}
+								formID={MessageForm.formID}
+							/>
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
