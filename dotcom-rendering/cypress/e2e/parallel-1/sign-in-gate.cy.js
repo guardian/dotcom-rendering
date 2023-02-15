@@ -266,10 +266,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/register?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_new_DigitalPack/,
+						);
 				});
 
 				it('user is new and has a paper subscription', function () {
@@ -289,10 +292,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/register?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_guest_Paper/,
+						);
 				});
 
 				it('user is new and is a contributor', function () {
@@ -312,10 +318,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						COMPLETE_REGISTRATION_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/register?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_new_Contribution/,
+						);
 				});
 
 				it('user is existing and has a digital subscription', function () {
@@ -335,10 +344,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/signin?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_current_DigitalPack/,
+						);
 				});
 
 				it('user is existing and has a paper subscription', function () {
@@ -358,10 +370,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/signin?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_current_Paper/,
+						);
 				});
 
 				it('user is existing and is a contributor', function () {
@@ -381,10 +396,14 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main_register]').contains(
 						SIGN_IN_BUTTON,
 					);
-					cy.get('[data-cy=sign-in-gate-main_register]').should(
-						'have.attr',
-						'href',
-					);
+
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/signin?returnUrl=')
+						.and(
+							'match',
+							/componentId%3Dmain_variant_\d_personalised_current_Contribution/,
+						);
 				});
 			});
 
@@ -398,6 +417,13 @@ describe('Sign In Gate Tests', function () {
 					cy.get('[data-cy=sign-in-gate-main]').contains(
 						'You need to register to keep reading',
 					);
+					cy.get('[data-cy=sign-in-gate-main_register]')
+						.should('have.attr', 'href')
+						.and('contains', '/signin?returnUrl=')
+						.and(
+							'not.match',
+							/componentId%3Dmain_variant_\d_personalised/,
+						);
 				});
 			});
 		});
