@@ -1,4 +1,4 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, getSwitches } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
@@ -136,7 +136,7 @@ const ShowSignInGate = ({
 
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
-export const SignInGateSelector = ({
+export const SignInGateSelector = async ({
 	format,
 	contentType,
 	sectionName = '',
@@ -149,8 +149,12 @@ export const SignInGateSelector = ({
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	// START: Checkout Complete Personalisation
-	const switches = window.guardian.config.switches;
-	const isSwitchedOn = switches.personaliseSignInAfterCheckout;
+	const isSwitchedOn: boolean = await getSwitches().then((switches) => {
+		if(switches.personaliseSignInAfterCheckout) {
+			return switches.personaliseSignInAfterCheckout
+		}
+		else return false
+	}).catch(() => false)
 
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',
