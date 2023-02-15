@@ -172,7 +172,7 @@ const icon = ({ design, theme }: ArticleFormat): Colour => {
 				default:
 					return news[400];
 			}
-		}
+	}
 };
 
 const iconDark = ({ design, theme }: ArticleFormat): Colour => {
@@ -224,7 +224,6 @@ const iconDark = ({ design, theme }: ArticleFormat): Colour => {
 					return news[500];
 			}
 	}
-	
 };
 
 const blockquoteIcon = (format: ArticleFormat): Colour => {
