@@ -304,7 +304,12 @@ const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 			}
 		}
 		case ArticleDesign.Analysis:
-			return news[800];
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[800];
+				default:
+					return news[800];
+			}
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial:
@@ -364,7 +369,6 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
 					return palette.specialReportAlt[100];
