@@ -11,6 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
+import { FixedVideo } from '../components/FixedVideo';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { Header } from '../components/Header';
@@ -290,8 +291,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
-					const isVideoContainer =
-						collection.collectionType === 'fixed/video';
+					if (collection.collectionType === 'fixed/video') {
+						return (
+							<FixedVideo
+								trails={trails}
+								key={ophanName}
+								containerName={collection.displayName}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+							/>
+						);
+					}
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -385,12 +395,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								innerBackgroundColour={
-									isVideoContainer ? neutral[7] : undefined
-								}
-								fontColour={
-									isVideoContainer ? neutral[100] : undefined
-								}
 								toggleable={isToggleable(
 									index,
 									collection,

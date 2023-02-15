@@ -1,32 +1,27 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
+	headline,
 	neutral,
 	space,
 	until,
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-
-import type { OnwardsSource } from '../../types/onwards';
-import type { Palette } from '../../types/palette';
+import type { DCRFrontCard } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { decidePalette } from '../lib/decidePalette';
-import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
-import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
+import { FrontCard } from './FrontCard';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
 type Props = {
-	trails: TrailType[];
-	description?: string;
-	url?: string;
-	onwardsSource: OnwardsSource;
-	format: ArticleFormat;
+	trails: DCRFrontCard[];
+	containerName: string;
+	ophanComponentLink: string;
+	ophanComponentName: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -71,17 +66,11 @@ const wrapperStyle = (length: number) => css`
 	${length > 1 && 'justify-content: space-between'}
 	overflow: hidden;
 	/* ${from.wide} {
-		padding-right: 0;
-		margin-left: -390px;
-		margin-top: 30px;
 	}
 	${from.desktop} {
-		padding-right: 0;
-		margin-left: -310px;
 	} */
 	${from.tablet} {
 		padding-right: 0;
-		/* margin-left: 160px; */
 	}
 `;
 
@@ -164,12 +153,12 @@ const dotStyle = css`
 	}
 `;
 
-const dotActiveStyle = (palette: Palette) => css`
-	background-color: ${palette.background.carouselDot};
+const dotActiveStyle = css`
+	background-color: ${brandAlt[400]};
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.background.carouselDotFocus};
+		background-color: ${brandAlt[400]};
 	}
 `;
 
@@ -187,29 +176,15 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
-			return css`
-				${from.leftCol} {
-					left: 205px;
-				}
-			`;
-		}
-		default: {
-			return css`
-				${from.leftCol} {
-					left: 120px;
-				}
-
-				${from.wide} {
-					left: 205px;
-				}
-			`;
-		}
+const prevButtonContainerStyle = css`
+	${from.leftCol} {
+		left: 120px;
 	}
-};
+
+	${from.wide} {
+		left: 205px;
+	}
+`;
 
 const nextButtonContainerStyle = css`
 	right: 10px;
@@ -291,29 +266,31 @@ const headerRowStyles = css`
 	}
 `;
 
+const headerStyles = css`
+	${headline.xsmall({ fontWeight: 'bold' })};
+	color: ${neutral[97]};
+	${headline.xsmall({ fontWeight: 'bold' })};
+	padding-bottom: ${space[2]}px;
+	padding-top: ${space[1]}px;
+	margin-left: 0;
+`;
+
+const titleStyle = css`
+	color: ${neutral[97]};
+`;
+
+const Title = ({ title }: { title: string }) => (
+	<h2 css={headerStyles}>
+		<span css={titleStyle}>{title}</span>
+	</h2>
+);
+
 type CarouselCardProps = {
 	isFirst: boolean;
-	format: ArticleFormat;
-	linkTo: string;
-	headlineText: string;
-	webPublicationDate: string;
-	kickerText?: string;
-	imageUrl?: string;
-	dataLinkName?: string;
-	discussionId?: string;
+	trail: DCRFrontCard;
 };
 
-const CarouselCard = ({
-	format,
-	linkTo,
-	imageUrl,
-	headlineText,
-	webPublicationDate,
-	kickerText,
-	isFirst,
-	dataLinkName,
-	discussionId,
-}: CarouselCardProps) => (
+const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
 		showDivider={!isFirst}
@@ -321,39 +298,31 @@ const CarouselCard = ({
 		padSidesOnMobile={true}
 		snapAlignStart={true}
 	>
-		<Card
-			linkTo={linkTo}
-			format={format}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText}
-			imageUrl={imageUrl}
-			imageSize={imageUrl ? 'carousel' : undefined}
-			showClock={true}
-			showAge={true}
-			imagePositionOnMobile="top"
-			minWidthInPixels={220}
-			showQuotedHeadline={format.design === ArticleDesign.Comment}
-			dataLinkName={dataLinkName}
-			discussionId={discussionId}
+		<FrontCard
+			trail={trail}
+			imageUrl={trail.image}
+			imageSize={trail.image ? 'small' : undefined}
+			imagePositionOnMobile={'bottom'}
+			imagePosition={'none'}
 		/>
 	</LI>
 );
 
 type HeaderAndNavProps = {
 	trails: TrailType[];
-	palette: Palette;
 	index: number;
+	title: string;
 	goToIndex: (newIndex: number) => void;
 };
 
 const HeaderAndNav = ({
 	trails,
-	palette,
 	index,
+	title,
 	goToIndex,
 }: HeaderAndNavProps) => (
 	<div>
+		<Title title={title} />
 		<div css={dotsStyle}>
 			{trails.map((_, i) => (
 				<span
@@ -363,7 +332,7 @@ const HeaderAndNav = ({
 					// not available to keyboard
 					aria-hidden="true"
 					key={`dot-${i}`}
-					css={[dotStyle, i === index && dotActiveStyle(palette)]}
+					css={[dotStyle, i === index && dotActiveStyle]}
 					data-link-name={`carousel-small-nav-dot-${i}`}
 				/>
 			))}
@@ -371,8 +340,12 @@ const HeaderAndNav = ({
 	</div>
 );
 
-export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
-	const palette = decidePalette(format);
+export const MediaCarousel = ({
+	trails,
+	containerName,
+	ophanComponentLink,
+	ophanComponentName,
+}: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -483,14 +456,15 @@ export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
 		<div css={wrapperStyle(trails.length)}>
 			<LeftColumn borderType="partial">
 				<HeaderAndNav
+					title={containerName}
 					trails={trails}
-					palette={palette}
 					index={index}
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
+			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
 				<button
+					type="button"
 					onClick={prev}
 					aria-label="Move carousel backwards"
 					css={[buttonStyle, prevButtonStyle(index)]}
@@ -502,6 +476,7 @@ export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
 
 			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
 				<button
+					type="button"
 					onClick={next}
 					aria-label="Move carousel forwards"
 					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
@@ -510,20 +485,18 @@ export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
 					<SvgChevronRightSingle />
 				</button>
 			</div>
-			<div
-				css={[containerStyles, containerMargins]}
-				data-component={onwardsSource}
-			>
+			<div css={[containerStyles, containerMargins]}>
 				<Hide when="above" breakpoint="leftCol">
 					<div css={headerRowStyles}>
 						<HeaderAndNav
+							title={containerName}
 							trails={trails}
-							palette={palette}
 							index={index}
 							goToIndex={goToIndex}
 						/>
 						<Hide when="below" breakpoint="desktop">
 							<button
+								type="button"
 								onClick={prev}
 								aria-label="Move carousel backwards"
 								css={[buttonStyle, prevButtonStyle(index)]}
@@ -532,6 +505,7 @@ export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
 								<SvgChevronLeftSingle />
 							</button>
 							<button
+								type="button"
 								onClick={next}
 								aria-label="Move carousel forwards"
 								css={[
@@ -552,38 +526,15 @@ export const MediaCarousel = ({ trails, onwardsSource, format }: Props) => {
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
 					{trails.map((trail, i) => {
-						const {
-							url: linkTo,
-							headline: headlineText,
-							webPublicationDate,
-							format: trailFormat,
-							image,
-							kickerText,
-							discussion,
-						} = trail;
-
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
-						if (!webPublicationDate) return null;
-
-						const imageUrl = image && getSourceImageUrl(image);
+						if (!trail.webPublicationDate) return null;
 
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
-								format={trailFormat}
-								linkTo={linkTo}
-								headlineText={headlineText}
-								webPublicationDate={webPublicationDate}
-								imageUrl={imageUrl}
-								kickerText={kickerText}
-								dataLinkName={`carousel-small-card-position-${i}`}
-								discussionId={
-									discussion?.isCommentable
-										? discussion.discussionId
-										: undefined
-								}
+								trail={trail}
 							/>
 						);
 					})}

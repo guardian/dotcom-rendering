@@ -1,25 +1,36 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { neutral } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import { Island } from './Island';
 import { MediaCarousel } from './MediaCarousel.importable';
+import { Section } from './Section';
 
 type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	containerName: string;
+	ophanComponentLink: string;
+	ophanComponentName: string;
 };
 
-export const FixedVideo = ({ trails }: Props) => {
+export const FixedVideo = ({
+	trails,
+	containerName,
+	ophanComponentLink,
+	ophanComponentName,
+}: Props) => {
 	if (!trails[0]) return null;
 
 	return (
-		<MediaCarousel
-			trails={trails}
-			onwardsSource={'more-on-this-story'}
-			format={{
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-		/>
+		<Section fullWidth={true} innerBackgroundColour={neutral[0]}>
+			<Island deferUntil="visible">
+				<MediaCarousel
+					trails={trails}
+					containerName={containerName}
+					ophanComponentLink={ophanComponentLink}
+					ophanComponentName={ophanComponentName}
+				/>
+			</Island>
+		</Section>
 	);
 };
