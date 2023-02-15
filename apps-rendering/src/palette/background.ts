@@ -598,45 +598,113 @@ const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const keyEventsWideDark = articleContentDark;
 
-const designTag = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[300];
-		case ArticlePillar.News:
-			return news[300];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+const designTag = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.News:
+					return news[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.News:
+					return news[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[300];
+			}
 	}
 };
 
-const designTagDark = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticlePillar.Opinion:
-			return opinion[500];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+const designTagDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+			}
+		default:
+			switch (theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
+			}
 	}
 };
 
