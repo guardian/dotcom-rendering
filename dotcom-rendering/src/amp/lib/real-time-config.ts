@@ -12,21 +12,20 @@ export type AdType =
 			adRegion: AdRegion;
 	  };
 
-/**
- * The properties required by different Prebid URLS / vendors
- *
- * These can be computed from the Config type above
- */
-export type RTCParameters = {
+type PubmaticRTCParameters = {
 	PROFILE_ID: string;
 	PUB_ID: string;
 };
+
+type CriteoRTCParameters = { ZONE_ID: string };
 
 /**
  * Determine the pub id and profile id required by Pubmatic to construct an RTC vendor
  *
  */
-export const pubmaticRtcParameters = (adType: AdType): RTCParameters => {
+export const pubmaticRtcParameters = (
+	adType: AdType,
+): PubmaticRTCParameters => {
 	if (
 		adType.isSticky ||
 		adType.adRegion === 'UK' ||
@@ -46,6 +45,36 @@ export const pubmaticRtcParameters = (adType: AdType): RTCParameters => {
 	return { PROFILE_ID: '6696', PUB_ID: '157206' };
 };
 
+export const criteoRTCParamters = (adType: AdType): CriteoRTCParameters => {
+	if (adType.isSticky) {
+		return { ZONE_ID: '1709360' };
+	} else {
+		switch (adType.adRegion) {
+			case 'UK': {
+				return {
+					ZONE_ID: '1709356',
+				};
+			}
+			case 'US': {
+				return {
+					ZONE_ID: '1709355',
+				};
+			}
+			case 'AU': {
+				return {
+					ZONE_ID: '1709354',
+				};
+			}
+			case 'INT':
+			case 'EUR': {
+				return {
+					ZONE_ID: '1709353',
+				};
+			}
+		}
+	}
+};
+
 const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';
 
 const amazonConfig = {
@@ -57,7 +86,8 @@ const amazonConfig = {
  * optional vendors and whether to enable Permutive and Amazon
  */
 export const realTimeConfig = (
-	usePrebid: boolean,
+	usePubmaticPrebid: boolean,
+	useCriteoPrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
 	adType: AdType,
@@ -66,13 +96,24 @@ export const realTimeConfig = (
 		openwrap: pubmaticRtcParameters(adType),
 	};
 
+	const criteoConfig = {
+		criteo: criteoRTCParamters(adType),
+	};
+
 	const data = {
 		urls: usePermutive ? [permutiveURL] : [],
 		vendors: {
-			...(usePrebid ? pubmaticConfig : {}),
+			...(usePubmaticPrebid ? pubmaticConfig : {}),
+			...(useCriteoPrebid ? criteoConfig : {}),
 			...(useAmazon ? amazonConfig : {}),
 		},
 		timeoutMillis: 1000,
 	};
 	return JSON.stringify(data);
 };
+
+/**
+ * For testing purposes, only enable Criteo on a single page with a known id
+ */
+export const isOnCriteoTestPage = (pageId: string): boolean =>
+	pageId === 'science/grrlscientist/2012/may/25/5';
