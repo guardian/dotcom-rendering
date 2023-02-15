@@ -34,7 +34,9 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
  * AB tracking will be registered as part of the main gate AB test, but the component Id string
  * in Ophan ComponentEventTracking will have `_personalised_${userType}_${product}` appended.
  * This occurs in the SignInGateSelector.importable.tsx file
- *
+ * There is a feature switch called `personaliseSignInAfterCheckout` which can be set in the
+ * admin tools, and is checked in the SignInGateSelector.tsx file. It will default to the main
+ * gate if false or undefined.
  */
 
 export const signInGateComponent: SignInGateComponent = {
