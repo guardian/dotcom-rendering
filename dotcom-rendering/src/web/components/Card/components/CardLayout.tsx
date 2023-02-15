@@ -62,6 +62,9 @@ const decidePosition = (
 			}
 		}
 	}
+	if (imagePosition === 'none') {
+		return css``;
+	}
 	return css`
 		flex-direction: ${decideDirection(imagePosition)};
 		${until.tablet} {

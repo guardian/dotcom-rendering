@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	brandAlt,
+	breakpoints,
 	from,
 	headline,
 	neutral,
@@ -16,6 +17,7 @@ import { LI } from './Card/components/LI';
 import { FrontCard } from './FrontCard';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
+import { generateSources } from './Picture';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -176,6 +178,23 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
+
+const adjustNumberOfDotsStyle = (index: number, totalStories: number) => {
+	return css`
+		${from.phablet} {
+			display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+		}
+
+		${from.tablet} {
+			display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+		}
+
+		${from.desktop} {
+			display: ${index >= totalStories - 3 ? 'none' : 'auto'};
+		}
+	`;
+};
+
 const prevButtonContainerStyle = css`
 	${from.leftCol} {
 		left: 120px;
@@ -279,6 +298,16 @@ const titleStyle = css`
 	color: ${neutral[97]};
 `;
 
+const desktopCarouselCardContainer = css`
+	position: relative;
+`;
+
+const frontCardContainer = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+`;
+
 const Title = ({ title }: { title: string }) => (
 	<h2 css={headerStyles}>
 		<span css={titleStyle}>{title}</span>
@@ -291,21 +320,41 @@ type CarouselCardProps = {
 };
 
 const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
-	<LI
-		percentage="25%"
-		showDivider={!isFirst}
-		padSides={true}
-		padSidesOnMobile={true}
-		snapAlignStart={true}
-	>
-		<FrontCard
-			trail={trail}
-			imageUrl={trail.image}
-			imageSize={trail.image ? 'small' : undefined}
-			imagePositionOnMobile={'bottom'}
-			imagePosition={'none'}
-		/>
-	</LI>
+	<>
+		<Hide when="above" breakpoint="desktop">
+			<LI
+				percentage="25%"
+				showDivider={!isFirst}
+				padSides={true}
+				padSidesOnMobile={true}
+				snapAlignStart={true}
+			>
+				<FrontCard
+					trail={trail}
+					imageUrl={trail.image}
+					imageSize={trail.image ? 'small' : undefined}
+					imagePositionOnMobile={'bottom'}
+				/>
+			</LI>
+		</Hide>
+		<Hide when="below" breakpoint="desktop">
+			<LI percentage="100%" showDivider={false} snapAlignStart={true}>
+				<div css={desktopCarouselCardContainer}>
+					<MediaCarouselPicture
+						image={trail.image ?? ''}
+						alt={trail.dataLinkName}
+					/>
+					<div css={frontCardContainer}>
+						<FrontCard
+							trail={trail}
+							imagePosition="none"
+							showMainVideo={false}
+						/>
+					</div>
+				</div>
+			</LI>
+		</Hide>
+	</>
 );
 
 type HeaderAndNavProps = {
@@ -332,13 +381,48 @@ const HeaderAndNav = ({
 					// not available to keyboard
 					aria-hidden="true"
 					key={`dot-${i}`}
-					css={[dotStyle, i === index && dotActiveStyle]}
+					css={[
+						dotStyle,
+						i === index && dotActiveStyle,
+						adjustNumberOfDotsStyle(i, trails.length),
+					]}
 					data-link-name={`carousel-small-nav-dot-${i}`}
 				/>
 			))}
 		</div>
 	</div>
 );
+
+type MediaCarouselPictureProps = {
+	image: string;
+	alt: string;
+};
+
+const imageStyles = css`
+	width: 700px;
+`;
+
+const MediaCarouselPicture = ({ image, alt }: MediaCarouselPictureProps) => {
+	const [source] = generateSources(image, [
+		{ breakpoint: breakpoints.desktop, width: 700 },
+	]);
+
+	if (!source) throw new Error('Missing source');
+
+	return (
+		<picture>
+			{/* High resolution (HDPI) sources*/}
+			<source
+				srcSet={source.hiResUrl}
+				media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
+			/>
+			{/* Low resolution (MDPI) source*/}
+			<source srcSet={source.lowResUrl} />
+
+			<img alt={alt} src={source.lowResUrl} css={imageStyles} />
+		</picture>
+	);
+};
 
 export const MediaCarousel = ({
 	trails,
