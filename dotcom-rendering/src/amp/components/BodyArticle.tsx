@@ -19,6 +19,7 @@ import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
+import { isOnCriteoTestPage } from '../lib/real-time-config';
 import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
@@ -133,14 +134,18 @@ export const Body = ({ data, config }: Props) => {
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: !!config.switches.ampPrebid,
+			ampPrebidPubmatic: !!config.switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!config.switches.ampPrebidCriteo,
 			permutive: !!config.switches.permutive,
 			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid:
+			adInfo.switches.ampPrebidCriteo &&
+			isOnCriteoTestPage(config.pageId),
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};

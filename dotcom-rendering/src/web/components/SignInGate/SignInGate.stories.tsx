@@ -1,5 +1,6 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
@@ -82,6 +83,28 @@ fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
 
+export const signInGateCopyTest = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateCopyTestJan2023
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				abTest={{
+					id: 'sign-in-gate-copy-test-jan-2023',
+					name: 'sign-in-gate-copy-test-jan-2023',
+					variant: 'quick-and-easy',
+				}}
+			/>
+		</Section>
+	);
+};
+
+signInGateCopyTest.story = {
+	name: 'sign_in_gate_copy_test',
+};
+
 export const signInGateMainCheckoutCompletePersonalisedCopy = (
 	args: CheckoutCompleteCookieData,
 ) => {
@@ -96,8 +119,9 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 				personaliseSignInAfterCheckoutSwitch={true}
 			/>
 		</Section>
-	);
-};
+	)
+}
+
 signInGateMainCheckoutCompletePersonalisedCopy.story = {
 	name: 'main_checkout_complete_personalised',
 };
@@ -119,4 +143,4 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 		options: ALL_PRODUCTS,
 		control: { type: 'radio' },
 	},
-};
+}

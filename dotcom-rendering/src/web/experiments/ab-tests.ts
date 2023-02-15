@@ -8,6 +8,7 @@ import {
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
 import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-near-newsletter-signup-blocks';
+import { signInGateCopyTestJan2023 } from './tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -17,6 +18,7 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateCopyTestJan2023,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
