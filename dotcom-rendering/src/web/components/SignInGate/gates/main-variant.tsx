@@ -35,8 +35,8 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
  * in Ophan ComponentEventTracking will have `_personalised_${userType}_${product}` appended.
  * This occurs in the SignInGateSelector.importable.tsx file
  * There is a feature switch called `personaliseSignInAfterCheckout` which can be set in the
- * admin tools, and is checked in the SignInGateSelector.tsx file. It will default to the main
- * gate if false or undefined.
+ * admin tools, and depending on the state of that switch will determine which variant of the
+ * gate to show.
  */
 
 export const signInGateComponent: SignInGateComponent = {
@@ -47,11 +47,13 @@ export const signInGateComponent: SignInGateComponent = {
 		signInUrl,
 		abTest,
 		checkoutCompleteCookieData,
+		personaliseSignInAfterCheckoutSwitch,
 	}) => {
 		return (
 			<Lazy margin={300}>
 				<Suspense fallback={<></>}>
-					{checkoutCompleteCookieData ? (
+					{personaliseSignInAfterCheckoutSwitch &&
+					checkoutCompleteCookieData ? (
 						<SignInGateMainCheckoutComplete
 							ophanComponentId={ophanComponentId}
 							dismissGate={dismissGate}
@@ -61,6 +63,7 @@ export const signInGateComponent: SignInGateComponent = {
 							checkoutCompleteCookieData={
 								checkoutCompleteCookieData
 							}
+							personaliseSignInAfterCheckoutSwitch={true}
 						/>
 					) : (
 						<SignInGateMain
@@ -69,6 +72,7 @@ export const signInGateComponent: SignInGateComponent = {
 							guUrl={guUrl}
 							signInUrl={signInUrl}
 							abTest={abTest}
+							personaliseSignInAfterCheckoutSwitch={false}
 						/>
 					)}
 				</Suspense>

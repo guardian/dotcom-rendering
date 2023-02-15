@@ -64,6 +64,7 @@ export interface SignInGateProps {
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
 	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInAfterCheckoutSwitch: boolean;
 }
 
 // Type with checkoutCompleteCookieData non optional

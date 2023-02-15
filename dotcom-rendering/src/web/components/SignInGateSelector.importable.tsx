@@ -43,6 +43,7 @@ interface ShowSignInGateProps {
 	gateVariant: SignInGateComponent;
 	host: string;
 	checkoutComplete?: CheckoutCompleteCookieData;
+	personaliseSignInAfterCheckoutSwitch: boolean;
 }
 
 const dismissGate = (
@@ -104,7 +105,8 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
-	checkoutComplete,
+	checkoutComplete: checkoutCompleteCookieData,
+	personaliseSignInAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -127,7 +129,8 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: componentId,
-			checkoutCompleteCookieData: checkoutComplete,
+			checkoutCompleteCookieData,
+			personaliseSignInAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -136,7 +139,7 @@ const ShowSignInGate = ({
 
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
-export const SignInGateSelector = async ({
+export const SignInGateSelector = ({
 	format,
 	contentType,
 	sectionName = '',
@@ -149,19 +152,12 @@ export const SignInGateSelector = async ({
 }: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	// START: Checkout Complete Personalisation
-	const isSwitchedOn: boolean = await getSwitches().then((switches) => {
-		if(switches.personaliseSignInAfterCheckout) {
-			return switches.personaliseSignInAfterCheckout
-		}
-		else return false
-	}).catch(() => false)
-
 	const checkOutCompleteString = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
 	});
 	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
-		isSwitchedOn && checkOutCompleteString !== null
+		checkOutCompleteString !== null
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 	// END: Checkout Complete Personalisation
@@ -176,6 +172,7 @@ export const SignInGateSelector = async ({
 		CurrentSignInGateABTest | undefined
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 	const gateSelector = useSignInGateSelector();
 
 	const { pageViewId } = window.guardian.config.ophan;
@@ -217,6 +214,12 @@ export const SignInGateSelector = async ({
 				})
 				.then(setCanShowGate);
 		}
+		// eslint-disable-next-line @typescript-eslint/no-floating-promises
+		getSwitches().then((switches) => {
+			if (switches.personaliseSignInAfterCheckout) {
+				setPersonaliseSwitch(switches.personaliseSignInAfterCheckout);
+			} else setPersonaliseSwitch(false);
+		});
 	}, [
 		currentTest,
 		gateVariant,
@@ -269,6 +272,7 @@ export const SignInGateSelector = async ({
 					gateVariant={gateVariant}
 					host={host}
 					checkoutComplete={checkoutCompleteCookieData}
+					personaliseSignInAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>
