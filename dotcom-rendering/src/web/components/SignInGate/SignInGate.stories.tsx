@@ -96,6 +96,7 @@ export const signInGateCopyTest = () => {
 					name: 'sign-in-gate-copy-test-jan-2023',
 					variant: 'quick-and-easy',
 				}}
+				personaliseSignInAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -119,8 +120,8 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 				personaliseSignInAfterCheckoutSwitch={true}
 			/>
 		</Section>
-	)
-}
+	);
+};
 
 signInGateMainCheckoutCompletePersonalisedCopy.story = {
 	name: 'main_checkout_complete_personalised',
@@ -143,4 +144,4 @@ signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
 		options: ALL_PRODUCTS,
 		control: { type: 'radio' },
 	},
-}
+};
