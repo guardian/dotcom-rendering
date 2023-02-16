@@ -217,6 +217,23 @@ export const WithByline = () => {
 	);
 };
 
+export const WithExternalLink = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					kickerText="Instagram"
+					headlineSize='huge'
+					headlineText="Follow The Guardian now"
+					isExternalLink={true}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WithMediaType = () => {
 	return (
 		<CardGroup>
