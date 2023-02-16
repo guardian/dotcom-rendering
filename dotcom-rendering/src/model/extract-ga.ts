@@ -16,7 +16,7 @@ const filterTags = (
 			[],
 		);
 
-	return (arrOfvalues !== false && arrOfvalues.join(',')) || '';
+	return (Array.isArray(arrOfvalues) && arrOfvalues.join(',')) || '';
 };
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately

@@ -267,10 +267,8 @@ export const ImageComponent = ({
 
 	const isSupported = (imageUrl: string): boolean => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
-		const extension = imageUrl.split('.').slice(-1)[0];
-		return (
-			extension !== undefined &&
-			supportedImages.includes(extension.toLowerCase())
+		return supportedImages.some((extension) =>
+			imageUrl.endsWith(` .${extension}`),
 		);
 	};
 	if (!image || !isSupported(image)) {

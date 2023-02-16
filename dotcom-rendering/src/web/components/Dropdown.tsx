@@ -333,6 +333,9 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		? addTrackingToUrl(link.url, ophanComponent)
 		: link.url;
 
+	const hasNotifications =
+		link.notifications !== undefined && link.notifications.length > 0;
+
 	return (
 		<li css={liStyles} key={link.title} ref={setNode}>
 			<a
@@ -361,17 +364,16 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				))}
 			</a>
 
-			{link.notifications !== undefined &&
-				link.notifications.length > 0 && (
-					<div
-						css={css`
-							margin-top: 12px;
-							margin-right: 8px;
-						`}
-					>
-						<NotificationBadge diameter={22} />
-					</div>
-				)}
+			{hasNotifications && (
+				<div
+					css={css`
+						margin-top: 12px;
+						margin-right: 8px;
+					`}
+				>
+					<NotificationBadge diameter={22} />
+				</div>
+			)}
 		</li>
 	);
 };

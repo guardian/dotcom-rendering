@@ -12,18 +12,25 @@ export const getIdFromUrl = (
 		);
 	};
 
-	const url = parse(urlString);
-
 	// Looks for ID in both formats if provided
-	const ids: string[] = [];
-	if (tryQueryParam && url.query) {
-		const maybeId = new URLSearchParams(url.query).get(tryQueryParam);
-		if (maybeId) ids.push(maybeId);
-	}
-	if (tryInPath && url.pathname) {
-		const maybeId = url.pathname.split('/').pop();
-		if (maybeId) ids.push(maybeId);
-	}
+	const url = new URL(urlString);
+
+	const ids = [
+		tryQueryParam
+			? new URLSearchParams(url.query ?? '').get(tryQueryParam)
+			: undefined,
+		tryInPath ? url.pathname.split('/').at(-1) : undefined,
+	].filter(isString);
+
+	// const ids: string[] = [];
+	// if (tryQueryParam && url.query) {
+	// 	const maybeId = new URLSearchParams(url.query).get(tryQueryParam);
+	// 	if (maybeId) ids.push(maybeId);
+	// }
+	// if (tryInPath && url.pathname) {
+	// 	const maybeId = url.pathname.split('/').pop();
+	// 	if (maybeId) ids.push(maybeId);
+	// }
 
 	if (!ids.length)
 		logErr(

@@ -8,11 +8,7 @@ export const ophan = (): Promise<void> => {
 	record({ edition: window.guardian.config.page.edition });
 
 	// Record server-side AB test variants (i.e. control or variant)
-	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Client-side safety,
-	if (window.guardian.config.tests) {
-		const { tests } = window.guardian.config;
-		record(abTestPayload(tests));
-	}
+	record(abTestPayload(window.guardian.config.tests));
 
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {

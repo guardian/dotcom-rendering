@@ -42,7 +42,7 @@ const decideChildren = (
 	placeholderHeight?: number,
 ) => {
 	if (!clientOnly) return children; // Server side rendering
-	if (placeholderHeight !== undefined && placeholderHeight !== 0)
+	if (placeholderHeight !== undefined && placeholderHeight > 0)
 		return (
 			<Placeholder
 				height={placeholderHeight}

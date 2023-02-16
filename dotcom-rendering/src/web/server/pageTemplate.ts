@@ -60,16 +60,13 @@ export const pageTemplate = ({
 	const generateMetaTags = (
 		dataObject: { [key: string]: string },
 		attributeName: 'name' | 'property',
-	) => {
-		return Object.entries(dataObject)
+	) =>
+		Object.entries(dataObject)
 			.map(
 				([id, value]) =>
 					`<meta ${attributeName}="${id}" content="${value}"/>`,
 			)
 			.join('\n');
-
-		return '';
-	};
 
 	const openGraphMetaTags =
 		openGraphData && generateMetaTags(openGraphData, 'property');

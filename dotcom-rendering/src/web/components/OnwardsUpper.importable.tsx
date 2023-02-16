@@ -47,7 +47,7 @@ const ALLOWED_TAGS = [
 	'football/liverpool',
 ];
 
-// This function looks for the first tag in pageTags, that also exists in our allowlist
+/** This function looks for the first tag in pageTags, that also exists in our allowlist */
 const firstPopularTag = (
 	pageTags: string | string[],
 	isPaidContent: boolean,
@@ -60,8 +60,9 @@ const firstPopularTag = (
 		tags = pageTags;
 	}
 
-	const firstTagInAllowedList =
-		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) ?? undefined;
+	const firstTagInAllowedList = tags.find((tag: string) =>
+		ALLOWED_TAGS.includes(tag),
+	);
 
 	// For paid content we just return the first tag, otherwise we
 	// filter for the first tag in the allowlist
