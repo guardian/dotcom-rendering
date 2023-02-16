@@ -16,9 +16,6 @@
         "guardianBaseURL": {
             "type": "string"
         },
-        "pageId": {
-            "type": "string"
-        },
         "webTitle": {
             "type": "string"
         },
@@ -387,6 +384,9 @@
         },
         "mostShared": {
             "$ref": "#/definitions/FETrailType"
+        },
+        "pageId": {
+            "type": "string"
         }
     },
     "required": [

@@ -212,9 +212,6 @@
         "editionId": {
             "$ref": "#/definitions/EditionId"
         },
-        "pageId": {
-            "type": "string"
-        },
         "version": {
             "type": "number"
         },
@@ -574,6 +571,9 @@
         },
         "showTableOfContents": {
             "type": "boolean"
+        },
+        "pageId": {
+            "type": "string"
         }
     },
     "required": [
