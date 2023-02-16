@@ -1,6 +1,6 @@
 import { octokit } from './github.ts';
-import { record, string } from 'https://deno.land/x/zod@v3.20/mod.ts';
-import type { EventPayloadMap } from 'https://cdn.skypack.dev/@octokit/webhooks-types?dts';
+import { record, string } from 'npm:zod@3';
+import type { EventPayloadMap } from 'npm:@octokit/webhooks-types@6';
 import 'https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.10.0/types/assert.d.ts';
 
 /* -- Setup -- */
@@ -33,10 +33,10 @@ const isPullRequestEvent = (
  * to track the state Lighthouse CI Reports on `main` over time.
  */
 const issue_number = isPullRequestEvent(payload)
-	// If PullRequestEvent
-	? payload.pull_request.number
-	// If PushEvent
-	: 4584;
+	? // If PullRequestEvent
+	  payload.pull_request.number
+	: // If PushEvent
+	  4584;
 
 console.log(`Using issue #${issue_number}`);
 
@@ -51,10 +51,9 @@ const results: AssertionResult[] = JSON.parse(
 const testUrl = new URL(Deno.env.get('LHCI_URL') ?? 'http://localhost:9000/');
 const testUrlWithoutHash = testUrl.href.replace(/#.+$/, '');
 
-const reportURL = record(string())
-	.parse(
-		JSON.parse(await Deno.readTextFile(`${dir}/links.json`)),
-	)[testUrlWithoutHash];
+const reportURL = record(string()).parse(
+	JSON.parse(await Deno.readTextFile(`${dir}/links.json`)),
+)[testUrlWithoutHash];
 
 if (!reportURL) throw new Error('Could not find report URL');
 
@@ -93,12 +92,10 @@ const getStatus = (
 const generateAuditTable = (results: AssertionResult[]): string => {
 	const resultsTemplateString = results.map(
 		({ auditTitle, auditProperty, passed, expected, actual, level }) =>
-			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${
-				getStatus(
-					passed,
-					level,
-				)
-			} | ${expected} | ${formatNumber(expected, actual)} |`,
+			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${getStatus(
+				passed,
+				level,
+			)} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
 	const testedUrl = testUrl.searchParams.get('url') ?? '😪';
@@ -136,7 +133,7 @@ const getCommentID = async (): Promise<number | null> => {
 	});
 
 	const comment = comments.find((comment) =>
-		comment.body?.includes(IDENTIFIER_COMMENT)
+		comment.body?.includes(IDENTIFIER_COMMENT),
 	);
 
 	return comment?.id ?? null;
@@ -154,14 +151,14 @@ try {
 
 	const { data } = comment_id
 		? await octokit.rest.issues.updateComment({
-			...GIHUB_PARAMS,
-			comment_id,
-			body,
-		})
+				...GIHUB_PARAMS,
+				comment_id,
+				body,
+		  })
 		: await octokit.rest.issues.createComment({
-			...GIHUB_PARAMS,
-			body,
-		});
+				...GIHUB_PARAMS,
+				body,
+		  });
 
 	console.log(
 		`Successfully ${

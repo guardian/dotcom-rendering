@@ -1,6 +1,6 @@
-import { array, object, string } from 'https://deno.land/x/zod@v3.17.3/mod.ts';
+import { array, object, string } from 'npm:zod@3';
 import { fetchJSON } from './json.ts';
-import prettyBytes from 'https://esm.sh/pretty-bytes@6.0.0';
+import prettyBytes from 'npm:pretty-bytes@6';
 import { octokit } from './github.ts';
 
 // -- Constants -- //
