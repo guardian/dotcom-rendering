@@ -1,5 +1,6 @@
 import type { Handler } from 'express';
 import { handleAMPArticle } from '../amp/server';
+import { handleAppsArticle } from '../apps/server';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -38,6 +39,8 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case '/FrontJSON':
 				return handleFrontJson(req, res, next);
+			case '/apps/Article':
+				return handleAppsArticle(req, res, next);
 			default: {
 				if (req.url.match(ARTICLE_URL)) {
 					const url = new URL(
