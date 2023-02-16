@@ -1,12 +1,19 @@
+FROM scratch AS dependencies
+
+COPY ./node_modules /opt/app/dotcom-rendering/node_modules
+COPY ./dotcom-rendering/node_modules /opt/app/dotcom-rendering/node_modules
+
 FROM node:16.19.0-alpine
+
+WORKDIR /opt/app/dotcom-rendering
+
+# Seperate dependencies into their own layer to allow for better caching
+COPY --from=dependencies /opt/app/dotcom-rendering/node_modules /opt/app/dotcom-rendering/node_modules
+COPY ./dotcom-rendering/dist /opt/app/dotcom-rendering/dist
+
+EXPOSE 9000
 
 ENV DISABLE_LOGGING_AND_METRICS=true
 ENV NODE_ENV=production
 
-WORKDIR /opt/app/dotcom-rendering
-COPY  ./node_modules ./node_modules
-COPY ./dotcom-rendering/node_modules ./node_modules
-COPY ./dotcom-rendering/dist ./dist
-
-EXPOSE 9000
 ENTRYPOINT ["node", "dist/frontend.server.js"]
