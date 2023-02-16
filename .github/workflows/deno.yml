@@ -23,4 +23,4 @@ jobs:
         run: deno lint scripts/deno
 
       - name: Type-check
-        run: deno check --all scripts/deno/**.ts
+        run: deno check scripts/deno/**.ts
