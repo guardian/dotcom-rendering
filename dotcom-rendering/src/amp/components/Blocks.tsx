@@ -6,7 +6,6 @@ import type { Switches } from '../../types/config';
 import type { EditionId } from '../../web/lib/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
-import { isOnCriteoTestPage } from '../lib/real-time-config';
 import { Elements } from './Elements';
 import { RegionalAd } from './RegionalAd';
 
@@ -139,8 +138,7 @@ export const Blocks = ({
 
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
-		useCriteoPrebid:
-			adInfo.switches.ampPrebidCriteo && isOnCriteoTestPage(pageId),
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};

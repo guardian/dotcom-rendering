@@ -111,9 +111,3 @@ export const realTimeConfig = (
 	};
 	return JSON.stringify(data);
 };
-
-/**
- * For testing purposes, only enable Criteo on a single page with a known id
- */
-export const isOnCriteoTestPage = (pageId: string): boolean =>
-	pageId === 'science/grrlscientist/2012/may/25/5';
