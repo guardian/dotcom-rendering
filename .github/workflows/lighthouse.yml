@@ -42,16 +42,21 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_URL: ${{ matrix.group }}
         run: |
-          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
+          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.10.0
           lhci autorun
 
-      - name: Setup deno
-        uses: denolib/setup-deno@v2
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.21.0
+          deno-version: v1.x
 
       - name: Surface Lighthouse Results
-        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH","LHCI_URL" --allow-read scripts/deno/surface-lighthouse-results.ts
+        run: |
+          deno run \
+            --allow-read \
+            --allow-net=api.github.com \
+            --allow-env=HOME,GITHUB_TOKEN,GITHUB_EVENT_PATH,LHCI_URL \
+            scripts/deno/surface-lighthouse-results.ts
         env:
           LHCI_URL: ${{ matrix.group }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

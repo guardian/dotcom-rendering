@@ -70,6 +70,7 @@ type Props = {
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
+	pageId: string;
 };
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -85,6 +86,7 @@ export const Blocks = ({
 	url,
 	shouldHideAds,
 	adTargeting,
+	pageId,
 }: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {
@@ -127,14 +129,16 @@ export const Blocks = ({
 		contentType,
 		commercialProperties,
 		switches: {
-			ampPrebid: !!switches.ampPrebid,
+			ampPrebidPubmatic: !!switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!switches.ampPrebidCriteo,
 			permutive: !!switches.permutive,
 			ampAmazon: !!switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
