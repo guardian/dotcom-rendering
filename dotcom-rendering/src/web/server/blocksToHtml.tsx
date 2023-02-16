@@ -1,4 +1,5 @@
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import type { FEBlocksRequest } from '../../types/blocksRequest';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';

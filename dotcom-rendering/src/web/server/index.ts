@@ -10,6 +10,7 @@ import {
 	validateAsArticleType,
 	validateAsFrontType,
 } from '../../model/validate';
+import type { FEBlocksRequest } from '../../types/blocksRequest';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
