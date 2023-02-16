@@ -288,8 +288,8 @@ const desktopCarouselCardContainer = css`
 `;
 
 const mobileCarouselCardContainer = css`
-	max-height: 251px;
-	max-width: 250px;
+	height: 251px;
+	width: 250px;
 `;
 
 const frontCardContainer = css`
@@ -321,7 +321,7 @@ const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
 			<LI
-				percentage="25%"
+				// percentage="25%"
 				showDivider={false}
 				padSides={true}
 				padSidesOnMobile={true}
