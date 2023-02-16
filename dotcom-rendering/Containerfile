@@ -1,8 +1,14 @@
 FROM node:16.19.0-alpine
 
+ENV DISABLE_LOGGING_AND_METRICS=true
+ENV NODE_ENV=production
+
 WORKDIR /opt/app/dotcom-rendering
 COPY  ./node_modules ./node_modules
 COPY ./dotcom-rendering/node_modules ./node_modules
-COPY ./dotcom-rendering/dist ./dist
 
+# We want our dist folder to be a seperate layer to allow our dependency layer to be cached
+COPY --link ./dotcom-rendering/dist ./dist
+
+EXPOSE 9000
 ENTRYPOINT ["node", "dist/frontend.server.js"]
