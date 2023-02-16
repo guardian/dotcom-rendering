@@ -324,13 +324,7 @@ export const SecureSignupIframe = ({
 		});
 
 		// add the fonts to the iframe
-		requiredFonts.forEach((font) => {
-			// it shouldn't be necessary to test for the add method again
-			// but still ts considers it possibily undefined
-			if (iframeFontFaceSet.add) {
-				iframeFontFaceSet.add(font);
-			}
-		});
+		requiredFonts.forEach((font) => iframeFontFaceSet.add(font));
 	};
 
 	const onIFrameLoad = (): void => {

@@ -216,7 +216,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				<ul
 					css={[
 						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
+						moreColumn.pillar !== undefined && pillarColumnLinks,
 					]}
 					role="menu"
 					id={subNavId}
@@ -249,7 +249,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				<ul
 					css={[
 						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
+						moreColumn.pillar !== undefined && pillarColumnLinks,
 					]}
 					role="menu"
 				>

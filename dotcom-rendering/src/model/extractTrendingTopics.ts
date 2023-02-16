@@ -31,7 +31,7 @@ const filterTopFive = (tag: FETagType[]): FETagType[] => {
 
 	tag.forEach((x) => {
 		const id = x.properties.id;
-		if (idCounts[id]) {
+		if (idCounts[id] !== undefined) {
 			idCounts[id]++;
 		} else {
 			idCounts[id] = 1;
