@@ -92,7 +92,11 @@ export const FixedLargeSlowXIV = ({
 							)}
 							key={card.url}
 						>
-							<CardDefault trail={card} />
+							<CardDefault
+								trail={card}
+								showAge={showAge}
+								containerPalette={containerPalette}
+							/>
 						</LI>
 					);
 				})}
