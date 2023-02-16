@@ -255,7 +255,7 @@
 		"typescript-json-schema": "^0.54.0",
 		"unified": "^10.1.2",
 		"uuid": "^8.3.2",
-		"web-vitals": "^2.1.0",
+		"web-vitals": "^3.1.1",
 		"webpack": "^5.51.1",
 		"webpack-assets-manifest": "^5.1.0",
 		"webpack-bundle-analyzer": "^4.4.0",
