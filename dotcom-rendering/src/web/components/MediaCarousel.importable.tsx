@@ -14,6 +14,7 @@ import type { DCRFrontCard } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { getZIndex } from '../lib/getZIndex';
 import { LI } from './Card/components/LI';
+import { PlayIcon } from './Card/components/PlayIcon';
 import { FrontCard } from './FrontCard';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
@@ -120,6 +121,7 @@ const carouselStyle = css`
 	scroll-behavior: smooth;
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
 	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
+
 	${from.tablet} {
 		&::-webkit-scrollbar {
 			display: none;
@@ -142,7 +144,7 @@ const dotStyle = css`
 	display: inline-block;
 	height: ${space[3]}px;
 	width: ${space[3]}px;
-	background-color: ${neutral[93]};
+	background-color: ${neutral[46]};
 	border-radius: 100%;
 	border: 0 none;
 	padding: 0;
@@ -300,12 +302,26 @@ const titleStyle = css`
 
 const desktopCarouselCardContainer = css`
 	position: relative;
+	/* height: 482px; */
+`;
+
+const mobileCarouselCardContainer = css`
+	height: 251px;
+	width: 250px;
 `;
 
 const frontCardContainer = css`
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 5px;
+	left: 10px;
+	width: 220px;
+	height: 78px;
+`;
+
+const playIconContainer = css`
+	position: absolute;
+	bottom: 9px;
+	left: 6px;
 `;
 
 const Title = ({ title }: { title: string }) => (
@@ -324,26 +340,35 @@ const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 		<Hide when="above" breakpoint="desktop">
 			<LI
 				percentage="25%"
-				showDivider={!isFirst}
+				showDivider={false}
 				padSides={true}
 				padSidesOnMobile={true}
 				snapAlignStart={true}
 			>
-				<FrontCard
-					trail={trail}
-					imageUrl={trail.image}
-					imageSize={trail.image ? 'small' : undefined}
-					imagePositionOnMobile={'bottom'}
-				/>
+				<div css={mobileCarouselCardContainer}>
+					<FrontCard
+						trail={trail}
+						imageUrl={trail.image}
+						imageSize={trail.image ? 'small' : undefined}
+						imagePositionOnMobile={'bottom'}
+					/>
+				</div>
 			</LI>
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<LI percentage="100%" showDivider={false} snapAlignStart={true}>
+			{/* <LI percentage="100%" showDivider={false} snapAlignStart={true}> */}
+			<a href={trail.url}>
 				<div css={desktopCarouselCardContainer}>
 					<MediaCarouselPicture
 						image={trail.image ?? ''}
 						alt={trail.dataLinkName}
 					/>
+					<div css={playIconContainer}>
+						<PlayIcon
+							imageSize="large"
+							imagePositionOnMobile="bottom"
+						/>
+					</div>
 					<div css={frontCardContainer}>
 						<FrontCard
 							trail={trail}
@@ -352,7 +377,8 @@ const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 						/>
 					</div>
 				</div>
-			</LI>
+			</a>
+			{/* </LI> */}
 		</Hide>
 	</>
 );
@@ -399,28 +425,30 @@ type MediaCarouselPictureProps = {
 };
 
 const imageStyles = css`
-	width: 700px;
+	width: 710px;
 `;
 
 const MediaCarouselPicture = ({ image, alt }: MediaCarouselPictureProps) => {
 	const [source] = generateSources(image, [
-		{ breakpoint: breakpoints.desktop, width: 700 },
+		{ breakpoint: breakpoints.desktop, width: 710 },
 	]);
 
 	if (!source) throw new Error('Missing source');
 
 	return (
-		<picture>
-			{/* High resolution (HDPI) sources*/}
-			<source
-				srcSet={source.hiResUrl}
-				media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
-			/>
-			{/* Low resolution (MDPI) source*/}
-			<source srcSet={source.lowResUrl} />
+		<>
+			<picture>
+				{/* High resolution (HDPI) sources*/}
+				<source
+					srcSet={source.hiResUrl}
+					media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
+				/>
+				{/* Low resolution (MDPI) source*/}
+				<source srcSet={source.lowResUrl} />
 
-			<img alt={alt} src={source.lowResUrl} css={imageStyles} />
-		</picture>
+				<img alt={alt} src={source.lowResUrl} css={imageStyles} />
+			</picture>
+		</>
 	);
 };
 
@@ -538,7 +566,7 @@ export const MediaCarousel = ({
 
 	return (
 		<div css={wrapperStyle(trails.length)}>
-			<LeftColumn borderType="partial">
+			<LeftColumn borderType={undefined}>
 				<HeaderAndNav
 					title={containerName}
 					trails={trails}
