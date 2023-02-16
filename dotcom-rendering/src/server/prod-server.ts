@@ -6,7 +6,7 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
-import type { FEArticleType } from '../types/frontend';
+import type { BaseRequestBody } from '../types/request';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -21,13 +21,20 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 
+const getPageIdFromBody = (body: unknown): string => {
+	const baseBody = body as BaseRequestBody;
+	return baseBody.pageId || 'no-page-id-found';
+};
+
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
-	({ body }: Request, _: Response, time: number) => {
-		const { pageId = 'no-page-id-found' } = body as FEArticleType;
+	({ body, path }: Request, _: Response, time: number) => {
 		logger.info('Page render time', {
-			pageId,
+			req: {
+				path,
+			},
+			pageId: getPageIdFromBody(body),
 			renderTime: time,
 		});
 	},
@@ -40,6 +47,25 @@ export const prodServer = (): void => {
 
 	app.use(express.json({ limit: '50mb' }));
 	app.use(compression());
+
+	app.use((req, res, next) => {
+		res.on('finish', () => {
+			const pageId = getPageIdFromBody(req.body);
+			console.log('hello?', pageId, req.path);
+			logger.info(`${req.method} ${req.path} ${pageId}`, {
+				pageId,
+				req: {
+					path: req.path,
+					method: req.method,
+					headers: req.headers,
+				},
+				resp: {
+					status: res.statusCode,
+				},
+			});
+		});
+		next();
+	});
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
 		res.status(200).send('OKAY');
@@ -119,10 +145,18 @@ export const prodServer = (): void => {
 	// All params to error handlers must be declared for express to identify them as error middleware
 	// https://expressjs.com/en/api.html#:~:text=Error%2Dhandling%20middleware%20always,see%3A%20Error%20handling
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- all params to error handlers must be declared
-	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
+	const handleError: ErrorRequestHandler = (e, req, res, _next) => {
 		const message =
+			e instanceof Error ? e.message ?? 'Unknown stack' : 'Unknown error';
+		const stack =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
-		res.status(500).send(`<pre>${message}</pre>`);
+
+		logger.error(message, {
+			path: req.path, // e.g /Article, /Front, etc
+			pageId: getPageIdFromBody(req.body),
+			stack,
+		});
+		res.status(500).send(`<pre>${stack}</pre>`);
 	};
 
 	app.use(handleError);
