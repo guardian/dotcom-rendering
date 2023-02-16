@@ -122,10 +122,6 @@ const carouselStyle = css`
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
 	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
 
-	${from.desktop} {
-		padding-left: 100px;
-	}
-
 	${from.tablet} {
 		&::-webkit-scrollbar {
 			display: none;
@@ -136,6 +132,10 @@ const carouselStyle = css`
 
 	${until.tablet} {
 		margin-left: -10px; /* Align firstcard on mobile devices */
+	}
+
+	${from.desktop} {
+		padding-left: 200px;
 	}
 `;
 
@@ -178,8 +178,8 @@ const buttonContainerStyle = css`
 	position: absolute;
 	${getZIndex('onwardsCarousel')}
 	height: 100%;
-	padding-bottom: 36px; /* Align buttons centrally with cards */
-
+	margin-right: 165px;
+	margin-top: 10px;
 	${until.leftCol} {
 		display: none;
 	}
@@ -201,16 +201,6 @@ const adjustNumberOfDotsStyle = (index: number, totalStories: number) => {
 	`;
 };
 
-const prevButtonContainerStyle = css`
-	${from.leftCol} {
-		left: 120px;
-	}
-
-	${from.wide} {
-		left: 205px;
-	}
-`;
-
 const nextButtonContainerStyle = css`
 	right: 10px;
 `;
@@ -228,10 +218,6 @@ const buttonStyle = css`
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${brandAlt[400]};
-		svg {
-			fill: ${neutral[7]};
-		}
 	}
 
 	&:focus {
@@ -239,42 +225,32 @@ const buttonStyle = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${neutral[7]};
 		height: 34px;
 	}
 `;
 
 const prevButtonStyle = (index: number) => css`
-	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
+	background-color: ${index !== 0 ? brandAlt[400] : neutral[46]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
-
-		svg {
-			fill: ${neutral[100]};
-		}
+		background-color: ${index !== 0 ? brandAlt[400] : neutral[46]};
 	}
 `;
 
 const nextButtonStyle = (index: number, totalStories: number) => css`
-	padding-left: 5px; /* Fix centering of SVG*/
-	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? neutral[0]
-		: neutral[60]};
+		? brandAlt[400]
+		: neutral[46]};
 	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${!isLastCardShowing(index, totalStories)
 			? brandAlt[400]
-			: neutral[60]};
-
-		svg {
-			fill: ${neutral[100]};
-		}
+			: neutral[46]};
 	}
 `;
 
@@ -307,19 +283,21 @@ const titleStyle = css`
 const desktopCarouselCardContainer = css`
 	position: relative;
 	scroll-snap-align: center;
+	max-height: 425px;
+	max-width: 710px;
 `;
 
 const mobileCarouselCardContainer = css`
-	height: 251px;
-	width: 250px;
+	max-height: 251px;
+	max-width: 250px;
 `;
 
 const frontCardContainer = css`
 	position: absolute;
 	top: 5px;
 	left: 10px;
-	width: 220px;
-	height: 78px;
+	max-width: 220px;
+	max-height: 78px;
 `;
 
 const playIconContainer = css`
@@ -360,7 +338,7 @@ const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 			</LI>
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<LI percentage="100%" showDivider={false} snapAlignStart={false}>
+			<LI percentage="25%" showDivider={false} snapAlignStart={false}>
 				<a href={trail.url}>
 					<div css={desktopCarouselCardContainer}>
 						<MediaCarouselPicture
@@ -566,30 +544,20 @@ export const MediaCarousel = ({
 	// No idea if this is the best approach but it prevents issues with libDebounce
 	// using old data to determine the max index. Instead we say update maxIndex
 	// when index changes and compare it against the prior maxIndex only.
-	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
+	// 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
 	return (
 		<div css={wrapperStyle(trails.length)}>
-			<LeftColumn borderType={undefined}>
-				<HeaderAndNav
-					title={containerName}
-					trails={trails}
-					index={index}
-					goToIndex={goToIndex}
-				/>
-			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
-				<button
-					type="button"
-					onClick={prev}
-					aria-label="Move carousel backwards"
-					css={[buttonStyle, prevButtonStyle(index)]}
-					data-link-name={`${arrowName}-prev`}
-				>
-					<SvgChevronLeftSingle />
-				</button>
-			</div>
-
+			<Hide when="above" breakpoint="desktop">
+				<LeftColumn borderType={undefined}>
+					<HeaderAndNav
+						title={containerName}
+						trails={trails}
+						index={index}
+						goToIndex={goToIndex}
+					/>
+				</LeftColumn>
+			</Hide>
 			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
 				<button
 					type="button"
@@ -600,41 +568,25 @@ export const MediaCarousel = ({
 				>
 					<SvgChevronRightSingle />
 				</button>
+				<button
+					type="button"
+					onClick={prev}
+					aria-label="Move carousel backwards"
+					css={[buttonStyle, prevButtonStyle(index)]}
+					data-link-name={`${arrowName}-prev`}
+				>
+					<SvgChevronLeftSingle />
+				</button>
 			</div>
 			<div css={[containerStyles, containerMargins]}>
-				<Hide when="above" breakpoint="leftCol">
-					<div css={headerRowStyles}>
-						<HeaderAndNav
-							title={containerName}
-							trails={trails}
-							index={index}
-							goToIndex={goToIndex}
-						/>
-						<Hide when="below" breakpoint="desktop">
-							<button
-								type="button"
-								onClick={prev}
-								aria-label="Move carousel backwards"
-								css={[buttonStyle, prevButtonStyle(index)]}
-								data-link-name={`${arrowName}-prev`}
-							>
-								<SvgChevronLeftSingle />
-							</button>
-							<button
-								type="button"
-								onClick={next}
-								aria-label="Move carousel forwards"
-								css={[
-									buttonStyle,
-									nextButtonStyle(index, trails.length),
-								]}
-								data-link-name={`${arrowName}-next`}
-							>
-								<SvgChevronRightSingle />
-							</button>
-						</Hide>
-					</div>
-				</Hide>
+				<div css={headerRowStyles}>
+					<HeaderAndNav
+						title={containerName}
+						trails={trails}
+						index={index}
+						goToIndex={goToIndex}
+					/>
+				</div>
 
 				<ul
 					css={carouselStyle}
