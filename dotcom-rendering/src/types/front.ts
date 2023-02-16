@@ -2,16 +2,16 @@ import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
+import type { BaseRequestBody } from './request';
 import type { FETagType } from './tag';
 import type { FETrailType, TrailType } from './trails';
 
-export interface FEFrontType {
+export interface FEFrontType extends BaseRequestBody {
 	pressedPage: FEPressedPageType;
 	nav: FENavType;
 	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
-	pageId: string;
 	webTitle: string;
 	webURL: string;
 	config: FEFrontConfigType;

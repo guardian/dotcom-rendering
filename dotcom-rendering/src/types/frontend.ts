@@ -5,6 +5,7 @@ import type { ConfigType } from './config';
 import type { FEElement, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
+import type { BaseRequestBody } from './request';
 import type { TagType } from './tag';
 import type { FETrailType } from './trails';
 
@@ -15,7 +16,7 @@ import type { FETrailType } from './trails';
  * WARNING: run `gen-schema` task if changing this to update the associated JSON
  * schema definition.
  */
-export interface FEArticleType {
+export interface FEArticleType extends BaseRequestBody {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
@@ -38,7 +39,6 @@ export interface FEArticleType {
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
 	editionId: EditionId;
-	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
 	format: FEFormat;
