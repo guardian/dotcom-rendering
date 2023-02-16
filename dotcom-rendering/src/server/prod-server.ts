@@ -51,7 +51,6 @@ export const prodServer = (): void => {
 	app.use((req, res, next) => {
 		res.on('finish', () => {
 			const pageId = getPageIdFromBody(req.body);
-			console.log('hello?', pageId, req.path);
 			logger.info(`${req.method} ${req.path} ${pageId}`, {
 				pageId,
 				req: {
