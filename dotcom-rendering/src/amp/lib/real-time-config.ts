@@ -96,13 +96,9 @@ export const realTimeConfig = (
 		openwrap: pubmaticRtcParameters(adType),
 	};
 
-<<<<<<< HEAD
-	const options = timeoutMillis !== undefined ? { timeoutMillis } : {};
-=======
 	const criteoConfig = {
 		criteo: criteoRTCParamters(adType),
 	};
->>>>>>> 85fcc67d2b695aff9271e9e83ce3b9ad83416aaf
 
 	const data = {
 		urls: usePermutive ? [permutiveURL] : [],
