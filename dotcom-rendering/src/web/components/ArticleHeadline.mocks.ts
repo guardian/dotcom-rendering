@@ -1,6 +1,6 @@
-import { CAPIElement } from '../../types/content';
+import { FEElement } from '../../types/content';
 
-export const mainMediaElements: CAPIElement[] = [
+export const mainMediaElements: FEElement[] = [
 	{
 		role: 'showcase',
 		elementId: 'mockId',

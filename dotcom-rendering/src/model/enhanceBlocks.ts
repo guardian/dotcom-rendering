@@ -18,11 +18,11 @@ import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 class BlockEnhancer {
 	blocks: Block[];
 
-	format: CAPIFormat;
+	format: FEFormat;
 
 	options: Options;
 
-	constructor(blocks: Block[], format: CAPIFormat, options: Options) {
+	constructor(blocks: Block[], format: FEFormat, options: Options) {
 		this.blocks = blocks;
 		this.format = format;
 		this.options = options;
@@ -99,7 +99,7 @@ type Options = {
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (
 	blocks: Block[],
-	format: CAPIFormat,
+	format: FEFormat,
 	options?: Options,
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};

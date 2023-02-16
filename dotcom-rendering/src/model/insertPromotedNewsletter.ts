@@ -1,5 +1,5 @@
 import { logger } from '../server/lib/logging';
-import type { CAPIElement, Newsletter } from '../types/content';
+import type { FEElement, Newsletter } from '../types/content';
 
 type PlaceInArticle = {
 	position: number;
@@ -83,13 +83,13 @@ const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
  */
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
-const checkIfAfterText = (index: number, elements: CAPIElement[]): boolean =>
+const checkIfAfterText = (index: number, elements: FEElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
 const getDistanceAfterFloating = (
 	index: number,
-	elements: CAPIElement[],
+	elements: FEElement[],
 ): number => {
 	const lastFloatingElementBeforePlace = elements
 		.slice(0, index)
@@ -146,7 +146,7 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  * @param elements the elements in the article block
  * @returns the index or null if no suitable place found
  */
-const findInsertPosition = (elements: CAPIElement[]): number | null => {
+const findInsertPosition = (elements: FEElement[]): number | null => {
 	// Aim for the middle
 	const targetPosition = Math.floor(elements.length / 2);
 	const places = elements.map((_, index) => ({
@@ -174,9 +174,9 @@ const findInsertPosition = (elements: CAPIElement[]): number | null => {
  */
 const tryToInsert = (
 	promotedNewsletter: Newsletter,
-	elements: CAPIElement[],
+	elements: FEElement[],
 	blockId: string,
-): CAPIElement[] => {
+): FEElement[] => {
 	const insertPosition = findInsertPosition(elements);
 
 	if (insertPosition === null) {
@@ -199,7 +199,7 @@ const tryToInsert = (
 
 export const insertPromotedNewsletter = (
 	blocks: Block[],
-	format: CAPIFormat,
+	format: FEFormat,
 	promotedNewsletter: Newsletter,
 ): Block[] => {
 	switch (format.design) {

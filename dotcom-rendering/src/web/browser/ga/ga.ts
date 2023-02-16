@@ -83,6 +83,10 @@ export const sendPageView = (): void => {
 	const userCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
 	const { ga } = window;
 
+	if (!ga) {
+		return;
+	}
+
 	ga(set, 'forceSSL', true);
 	ga(set, 'title', GAData.webTitle);
 	ga(set, 'anonymizeIp', true);
@@ -177,38 +181,28 @@ export const sendPageView = (): void => {
 
 export const trackNonClickInteraction = (actionName: string): void => {
 	const { ga } = window;
-
-	if (ga) {
-		ga(send, 'event', 'Interaction', actionName, {
-			/**
-			 * set nonInteraction to avoid affecting bounce rate
-			 * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
-			 */
-			nonInteraction: true,
-		});
-	} else {
-		const error = new Error("window.ga doesn't exist");
-		window.guardian.modules.sentry.reportError(
-			error,
-			'trackNonClickInteraction',
-		);
+	if (!ga) {
+		return;
 	}
+
+	ga(send, 'event', 'Interaction', actionName, {
+		/**
+		 * set nonInteraction to avoid affecting bounce rate
+		 * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
+		 */
+		nonInteraction: true,
+	});
 };
 
 export const trackSponsorLogoLinkClick = (sponsorName: string): void => {
 	const { ga } = window;
-
-	if (ga) {
-		ga(send, 'event', 'click', 'sponsor logo', sponsorName, {
-			nonInteraction: true,
-		});
-	} else {
-		const error = new Error("window.ga doesn't exist");
-		window.guardian.modules.sentry.reportError(
-			error,
-			'trackSponsorLogoLinkClick',
-		);
+	if (!ga) {
+		return;
 	}
+
+	ga(send, 'event', 'click', 'sponsor logo', sponsorName, {
+		nonInteraction: true,
+	});
 };
 
 export const trackVideoInteraction = ({

@@ -29,7 +29,7 @@ const getCommissioningDesk = (
 	return tag?.title ?? '';
 };
 
-const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
+const convertToLegacyPillar = (theme: FETheme): LegacyPillar => {
 	switch (theme) {
 		case 'NewsPillar':
 			return 'news';
@@ -60,7 +60,7 @@ export const extractGA = ({
 	beaconURL,
 }: {
 	webTitle: string;
-	format: CAPIFormat;
+	format: FEFormat;
 	sectionName?: string;
 	contentType: string;
 	tags: TagType[];

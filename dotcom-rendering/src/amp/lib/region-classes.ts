@@ -28,11 +28,11 @@ const usRegionClass = css`
 
 /**
  * Class that will display an element if the user accesses the AMP page
- * from Australia
+ * from the Australia geo group (including New Zealand)
  */
 const auRegionClass = css`
 	display: none;
-	.amp-iso-country-au & {
+	.amp-geo-group-au & {
 		display: block;
 	}
 `;

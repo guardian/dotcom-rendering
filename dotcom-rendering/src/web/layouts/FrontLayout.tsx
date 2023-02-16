@@ -21,6 +21,7 @@ import { Section } from '../components/Section';
 import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
+import { TrendingTopics } from '../components/TrendingTopics';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import { Stuck } from './lib/stickiness';
@@ -326,7 +327,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return (
 							<>
 								<Section
-									key={collection.id}
+									key={ophanName}
 									title="Most viewed"
 									showTopBorder={index > 0}
 									padContent={false}
@@ -338,7 +339,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
-									sectionId={collection.id}
+									sectionId={ophanName}
 									showDateHeader={
 										collection.config.showDateHeader
 									}
@@ -372,7 +373,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					return (
 						<>
 							<Section
-								key={collection.id}
+								key={ophanName}
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
@@ -388,7 +389,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									front.isNetworkFront,
 								)}
-								sectionId={collection.id}
+								sectionId={ophanName}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
@@ -413,7 +414,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											containerTitle={
 												collection.displayName
 											}
-											containerId={collection.id}
+											containerId={ophanName}
 											path={front.pressedPage.id}
 											baseUrl={front.config.ajaxUrl}
 											containerPalette={
@@ -439,7 +440,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					);
 				})}
 			</main>
-
+			<Section
+				fullWidth={true}
+				showTopBorder={false}
+				data-component="trending-topics"
+			>
+				<TrendingTopics trendingTopics={front.trendingTopics} />
+			</Section>
 			<Section
 				fullWidth={true}
 				data-print-layout="hide"

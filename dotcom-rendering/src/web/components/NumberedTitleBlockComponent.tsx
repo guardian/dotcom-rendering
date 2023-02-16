@@ -7,7 +7,7 @@ import { decidePalette } from '../lib/decidePalette';
 type Props = {
 	position: number;
 	html: string;
-	format: CAPIFormat;
+	format: FEFormat;
 };
 
 const titleStyles = (palette: Palette) => css`

@@ -1,4 +1,5 @@
 import {
+	APPS_SCRIPT,
 	decideAssetOrigin,
 	LEGACY_SCRIPT,
 	MODERN_SCRIPT,
@@ -58,6 +59,9 @@ describe('regular expression to match files', () => {
 		expect(
 			'https://assets.guim.co.uk/assets/ophan.legacy.eb74205c979f58659ed7.js',
 		).toMatch(LEGACY_SCRIPT);
+		expect(
+			'https://assets.guim.co.uk/assets/ophan.apps.eb74205c979f58659ed7.js',
+		).toMatch(APPS_SCRIPT);
 	});
 
 	it('should handle http3 query param', () => {

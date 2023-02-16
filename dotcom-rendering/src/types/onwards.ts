@@ -1,15 +1,15 @@
-import type { CAPITrailType } from './trails';
+import type { FETrailType } from './trails';
 
 /**
  * Onwards
  */
-export type CAPIOnwards = {
+export type FEOnwards = {
 	heading: string;
-	trails: CAPITrailType[];
+	trails: FETrailType[];
 	description?: string;
 	url?: string;
 	onwardsSource: OnwardsSource;
-	format: CAPIFormat;
+	format: FEFormat;
 	isCuratedContent?: boolean;
 };
 

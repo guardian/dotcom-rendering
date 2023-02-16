@@ -13,7 +13,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
@@ -46,12 +46,12 @@ export const articleToHtml = ({ article }: Props): string => {
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
+		<ArticlePage format={format} article={article} NAV={NAV} />,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = article.blocks
+	const elements: FEElement[] = article.blocks
 		.map((block) => block.elements)
 		.flat();
 
@@ -62,7 +62,7 @@ export const articleToHtml = ({ article }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const pageHasNonBootInteractiveElements = CAPIElements.some(
+	const pageHasNonBootInteractiveElements = elements.some(
 		(element) =>
 			element._type ===
 				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
@@ -70,7 +70,7 @@ export const articleToHtml = ({ article }: Props): string => {
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
-	const pageHasTweetElements = CAPIElements.some(
+	const pageHasTweetElements = elements.some(
 		(element) =>
 			element._type ===
 			'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -87,9 +87,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.

@@ -84,6 +84,21 @@ export const hasRelevantTopics = (availableTopics?: Topic[]) => {
 	return !!(availableTopics && getTopFiveTopics(availableTopics).length);
 };
 
+/**
+ * # Topic Filter Bank
+ *
+ * A wrapper of Filter Buttons.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * ⚠️ It does not need to be! ⚠️
+ *
+ * Redirecting to a URL should not require us to have a click handler.
+ *
+ * ---
+ *
+ * [`TopicFilterBank` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-topicfilterbank)
+ */
 export const TopicFilterBank = ({
 	availableTopics = [],
 	selectedTopics,

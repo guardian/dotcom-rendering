@@ -1,6 +1,6 @@
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../../types/config';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import { enhance } from '../lib/enhance';
 import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
@@ -67,9 +67,9 @@ export const isAmpSupported = ({
 	switches,
 	main,
 }: {
-	format: CAPIFormat;
+	format: FEFormat;
 	tags: TagType[];
-	elements: CAPIElement[];
+	elements: FEElement[];
 	switches: Switches;
 	main: string;
 }): boolean => {
@@ -104,7 +104,7 @@ export const isAmpSupported = ({
 };
 
 export const Elements = (
-	elements: CAPIElement[],
+	elements: FEElement[],
 	pillar: ArticleTheme,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
-import type { CAPIElement, RoleType } from '../../types/content';
+import type { FEElement, RoleType } from '../../types/content';
 
 type Props = {
 	children: React.ReactNode;
@@ -10,7 +10,7 @@ type Props = {
 	role?: RoleType | 'richLink';
 	id?: string;
 	className?: string;
-	type?: CAPIElement['_type'];
+	type?: FEElement['_type'];
 };
 
 const roleCss = {

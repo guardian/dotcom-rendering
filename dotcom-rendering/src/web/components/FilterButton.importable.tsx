@@ -77,6 +77,21 @@ const Label = ({ value, count }: LabelProps) => (
 	</>
 );
 
+/**
+ * # Filter Button
+ *
+ * A child of `TopicFilterBank`
+ *
+ * ## Why does this need to be an Island?
+ *
+ * ⚠️ It does not need to be! ⚠️
+ *
+ * (It is embedded within `TopicFilterBank`)
+ *
+ * ---
+ *
+ * [`FilterButton` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-filterbutton)
+ */
 export const FilterButton = ({
 	type,
 	value,
