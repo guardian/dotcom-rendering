@@ -122,6 +122,10 @@ const carouselStyle = css`
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
 	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
 
+	${from.desktop} {
+		padding-left: 100px;
+	}
+
 	${from.tablet} {
 		&::-webkit-scrollbar {
 			display: none;
@@ -302,7 +306,7 @@ const titleStyle = css`
 
 const desktopCarouselCardContainer = css`
 	position: relative;
-	/* height: 482px; */
+	scroll-snap-align: center;
 `;
 
 const mobileCarouselCardContainer = css`
@@ -356,29 +360,29 @@ const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
 			</LI>
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			{/* <LI percentage="100%" showDivider={false} snapAlignStart={true}> */}
-			<a href={trail.url}>
-				<div css={desktopCarouselCardContainer}>
-					<MediaCarouselPicture
-						image={trail.image ?? ''}
-						alt={trail.dataLinkName}
-					/>
-					<div css={playIconContainer}>
-						<PlayIcon
-							imageSize="large"
-							imagePositionOnMobile="bottom"
+			<LI percentage="100%" showDivider={false} snapAlignStart={false}>
+				<a href={trail.url}>
+					<div css={desktopCarouselCardContainer}>
+						<MediaCarouselPicture
+							image={trail.image ?? ''}
+							alt={trail.dataLinkName}
 						/>
+						<div css={playIconContainer}>
+							<PlayIcon
+								imageSize="large"
+								imagePositionOnMobile="bottom"
+							/>
+						</div>
+						<div css={frontCardContainer}>
+							<FrontCard
+								trail={trail}
+								imagePosition="none"
+								showMainVideo={false}
+							/>
+						</div>
 					</div>
-					<div css={frontCardContainer}>
-						<FrontCard
-							trail={trail}
-							imagePosition="none"
-							showMainVideo={false}
-						/>
-					</div>
-				</div>
-			</a>
-			{/* </LI> */}
+				</a>
+			</LI>
 		</Hide>
 	</>
 );
