@@ -26,7 +26,7 @@ export const ShowHideContainers = () => {
 			const isExpanded = element.getAttribute('aria-expanded') === 'true';
 
 			const section: Element | null = window.document.getElementById(
-				`container-${sectionId}`,
+				sectionId,
 			);
 
 			if (isExpanded) {

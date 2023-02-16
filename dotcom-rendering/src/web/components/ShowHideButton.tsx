@@ -42,7 +42,7 @@ export const ShowHideButton = ({
 			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}
-			aria-controls={`container-${sectionId}`}
+			aria-controls={sectionId}
 			aria-expanded={true}
 		>
 			Hide
