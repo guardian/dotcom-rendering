@@ -544,7 +544,7 @@ export const MediaCarousel = ({
 	// No idea if this is the best approach but it prevents issues with libDebounce
 	// using old data to determine the max index. Instead we say update maxIndex
 	// when index changes and compare it against the prior maxIndex only.
-	// 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
+	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
 	return (
 		<div css={wrapperStyle(trails.length)}>
