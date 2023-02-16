@@ -19,6 +19,7 @@ export const TopRightAdSlot = ({
 	return (
 		<div
 			id="top-right-ad-slot"
+			className="ad-slot-container"
 			css={[
 				css`
 					position: static;
@@ -26,7 +27,6 @@ export const TopRightAdSlot = ({
 				`,
 				adStyles,
 			]}
-			className="ad-slot-container"
 		>
 			<div
 				id="dfp-ad--right"
