@@ -463,13 +463,8 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-<<<<<<< HEAD
-										CAPIArticle.starRating !== undefined
-											? CAPIArticle.starRating
-=======
-										article.starRating
+										article.starRating !== undefined
 											? article.starRating
->>>>>>> 85fcc67d2b695aff9271e9e83ce3b9ad83416aaf
 											: undefined
 									}
 									host={host}

@@ -5,12 +5,7 @@ import type {
 	TextBlockElement,
 } from '../types/content';
 
-<<<<<<< HEAD
-const isFalseH3 = (element: CAPIElement): boolean => {
-=======
 const isFalseH3 = (element: FEElement): boolean => {
-	if (!element) return false;
->>>>>>> 85fcc67d2b695aff9271e9e83ce3b9ad83416aaf
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
@@ -184,12 +179,7 @@ const makeThumbnailsRound = (elements: FEElement[]): FEElement[] => {
 	return inlined;
 };
 
-<<<<<<< HEAD
-const isItemLink = (element: CAPIElement): boolean => {
-=======
 const isItemLink = (element: FEElement): boolean => {
-	if (!element) return false;
->>>>>>> 85fcc67d2b695aff9271e9e83ce3b9ad83416aaf
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
