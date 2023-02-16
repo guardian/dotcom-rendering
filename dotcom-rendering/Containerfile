@@ -1,4 +1,4 @@
-FROM node:14.20.1-alpine
+FROM node:16.19.0-alpine
 
 WORKDIR /opt/app/dotcom-rendering
 COPY  ./node_modules ./node_modules
