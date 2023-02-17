@@ -1,4 +1,9 @@
 import { RequestHandler } from 'express';
+import {
+	recordEnhanceTime,
+	recordRenderTime,
+	recordTypeAndPlatform,
+} from '../../server/lib/logging-store';
 import { enhanceArticleType } from '../../web/server';
 import { articleToHtml } from './articleToHtml';
 
@@ -18,8 +23,11 @@ const makePrefetchHeader = (scriptPaths: string[]): string =>
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceArticleType(body);
-		const { html, clientScripts } = articleToHtml(article);
+		recordTypeAndPlatform('article', 'apps');
+		const article = recordEnhanceTime(() => enhanceArticleType(body));
+		const { html, clientScripts } = recordRenderTime(() =>
+			articleToHtml(article),
+		);
 
 		// The Android app will cache these assets to enable offline reading
 		res.set('Link', makePrefetchHeader(clientScripts)).send(html);

@@ -1,4 +1,8 @@
 import type { RequestHandler } from 'express';
+import {
+	recordRenderTime,
+	recordTypeAndPlatform,
+} from '../../server/lib/logging-store';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
@@ -15,6 +19,7 @@ import { document } from './document';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'amp');
 		const article = validateAsArticleType(body);
 		const { linkedData } = article;
 		const { config } = article;
@@ -62,22 +67,24 @@ export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 			canonicalURL: article.webURL,
 		};
 
-		const resp = document({
-			linkedData,
-			scripts,
-			metadata,
-			title: `${article.headline} | ${article.sectionLabel} | The Guardian`,
-			body: (
-				<Article
-					experimentsData={getAmpExperimentCache()}
-					articleData={article}
-					nav={extractNAV(article.nav)}
-					analytics={analytics}
-					permutive={permutive}
-					config={config}
-				/>
-			),
-		});
+		const resp = recordRenderTime(() =>
+			document({
+				linkedData,
+				scripts,
+				metadata,
+				title: `${article.headline} | ${article.sectionLabel} | The Guardian`,
+				body: (
+					<Article
+						experimentsData={getAmpExperimentCache()}
+						articleData={article}
+						nav={extractNAV(article.nav)}
+						analytics={analytics}
+						permutive={permutive}
+						config={config}
+					/>
+				),
+			}),
+		);
 
 		res.status(200).send(resp);
 	} catch (e) {

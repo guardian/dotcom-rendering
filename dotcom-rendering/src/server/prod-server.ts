@@ -7,7 +7,7 @@ import {
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
 import { handleAppsArticle } from '../apps/server';
-import type { FEArticleType } from '../types/frontend';
+
 import {
 	handleArticle,
 	handleArticleJson,
@@ -22,17 +22,13 @@ import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 
+import { recordTotalTime } from './lib/logging-store';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
+
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
-const logRenderTime = responseTime(
-	({ body, path }: Request, _: Response, renderTime: number) => {
-		const { pageId = 'no-page-id-found' } = body as FEArticleType;
-		logger.info('Page render time', {
-			path,
-			pageId,
-			renderTime,
-		});
-	},
+const logResponseTime = responseTime((_1, _2, time: number) =>
+	recordTotalTime(time),
 );
 
 export const prodServer = (): void => {
@@ -40,7 +36,11 @@ export const prodServer = (): void => {
 
 	const app = express();
 
+	app.use(logResponseTime);
 	app.use(express.json({ limit: '50mb' }));
+
+	app.use(requestLoggerMiddleware);
+
 	app.use(compression());
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
@@ -54,51 +54,27 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	app.post('/Article', logRenderTime, handleArticle);
-	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
-	app.post('/Interactive', logRenderTime, handleInteractive);
-	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
-	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
-	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
+	app.post('/Article', handleArticle);
+	app.post('/AMPArticle', handleAMPArticle);
+	app.post('/AppsArticle', handleAppsArticle);
+	app.post('/Interactive', handleInteractive);
+	app.post('/AMPInteractive', handleAMPArticle);
+	app.post('/Blocks', handleBlocks);
+	app.post('/KeyEvents', handleKeyEvents);
+	app.post('/Front', handleFront);
+	app.post('/FrontJSON', handleFrontJson);
 
 	// These GET's are for checking any given URL directly from PROD
-	app.get(
-		'/Article/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleArticle,
-	);
+	app.get('/Article/*', getContentFromURLMiddleware, handleArticle);
 	app.use('/ArticleJson/*', handleArticleJson);
 
-	app.get(
-		'/AMPArticle/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAMPArticle,
-	);
+	app.get('/AMPArticle/*', getContentFromURLMiddleware, handleAMPArticle);
 
-	app.get(
-		'/Front/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFront,
-	);
-	app.get(
-		'/FrontJSON/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFrontJson,
-	);
+	app.get('/AppsArticle/*', getContentFromURLMiddleware, handleAppsArticle);
 
-	app.get(
-		'/AppsArticle/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAppsArticle,
-	);
+	app.get('/Front/*', getContentFromURLMiddleware, handleFront);
+
+	app.get('/FrontJSON/*', getContentFromURLMiddleware, handleFrontJson);
 
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
@@ -127,6 +103,7 @@ export const prodServer = (): void => {
 				e instanceof Error
 					? e.stack ?? 'Unknown stack'
 					: 'Unknown error';
+			logger.error(message);
 			res.status(500).send(`<pre>${message}</pre>`);
 		}
 	});
@@ -137,6 +114,8 @@ export const prodServer = (): void => {
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
+
+		logger.error(message);
 		res.status(500).send(`<pre>${message}</pre>`);
 	};
 

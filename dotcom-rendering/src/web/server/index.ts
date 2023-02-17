@@ -10,6 +10,11 @@ import {
 	validateAsArticleType,
 	validateAsFrontType,
 } from '../../model/validate';
+import {
+	recordTypeAndPlatform,
+	recordEnhanceTime,
+	recordRenderTime,
+} from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
@@ -28,7 +33,6 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
 	});
-
 	return {
 		...data,
 		blocks: enhancedBlocks,
@@ -73,10 +77,13 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceArticleType(body);
-		const resp = articleToHtml({
-			article,
-		});
+		recordTypeAndPlatform('article', 'web');
+		const article = recordEnhanceTime(() => enhanceArticleType(body));
+		const resp = recordRenderTime(() =>
+			articleToHtml({
+				article,
+			}),
+		);
 
 		res.status(200).send(resp);
 	} catch (e) {
@@ -86,7 +93,8 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceArticleType(body);
+		recordTypeAndPlatform('article', 'json');
+		const article = recordEnhanceTime(() => enhanceArticleType(body));
 		const resp = {
 			data: {
 				// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
@@ -108,10 +116,13 @@ export const handlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceArticleType(body);
-		const resp = articleToHtml({
-			article,
-		});
+		recordTypeAndPlatform('interactive', 'web');
+		const article = recordEnhanceTime(() => enhanceArticleType(body));
+		const resp = recordRenderTime(() =>
+			articleToHtml({
+				article,
+			}),
+		);
 
 		res.status(200).send(resp);
 	} catch (e) {
@@ -120,6 +131,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('blocks');
 	try {
 		const {
 			blocks,
@@ -141,24 +153,28 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 			// The content if body is not checked
 			body as FEBlocksRequest;
 
-		const enhancedBlocks = enhanceBlocks(blocks, format);
-		const html = blocksToHtml({
-			blocks: enhancedBlocks,
-			format,
-			host,
-			pageId,
-			webTitle,
-			ajaxUrl,
-			isAdFreeUser,
-			isSensitive,
-			videoDuration,
-			edition,
-			section,
-			sharedAdTargeting,
-			adUnit,
-			switches,
-			keywordIds,
-		});
+		const enhancedBlocks = recordEnhanceTime(() =>
+			enhanceBlocks(blocks, format),
+		);
+		const html = recordRenderTime(() =>
+			blocksToHtml({
+				blocks: enhancedBlocks,
+				format,
+				host,
+				pageId,
+				webTitle,
+				ajaxUrl,
+				isAdFreeUser,
+				isSensitive,
+				videoDuration,
+				edition,
+				section,
+				sharedAdTargeting,
+				adUnit,
+				switches,
+				keywordIds,
+			}),
+		);
 
 		res.status(200).send(html);
 	} catch (e) {
@@ -167,6 +183,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 };
 
 export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('keyEvents');
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
@@ -185,11 +202,14 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('front');
 	try {
-		const front = enhanceFront(body);
-		const html = frontToHtml({
-			front,
-		});
+		const front = recordEnhanceTime(() => enhanceFront(body));
+		const html = recordRenderTime(() =>
+			frontToHtml({
+				front,
+			}),
+		);
 		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
@@ -197,5 +217,5 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 };
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceFront(body));
+	res.json(recordEnhanceTime(() => enhanceFront(body)));
 };
