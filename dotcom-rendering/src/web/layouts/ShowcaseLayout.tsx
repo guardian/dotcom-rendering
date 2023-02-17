@@ -425,6 +425,29 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<ShowcaseGrid>
+						<GridItem area="media">
+							<div css={mainMediaWrapper}>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										article.starRating
+											? article.starRating
+											: undefined
+									}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -453,29 +476,6 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									}
 								/>
 							</PositionHeadline>
-						</GridItem>
-						<GridItem area="media">
-							<div css={mainMediaWrapper}>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										article.starRating
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
 						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
