@@ -1,3 +1,7 @@
+# yaml-language-server: $schema=./cloudformation.yml
+# ^ this setting effectively prevents the redhat.vscode-yaml from
+# trying (and failing) to validate this against the Cloudformation YAML schema
+# @see: https://github.com/redhat-developer/vscode-yaml/issues/245#issuecomment-885803310
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Frontend rendering service
 Parameters:
