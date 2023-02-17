@@ -218,6 +218,12 @@ const block = css`
 	display: block;
 `;
 
+const absolute = css`
+	position: absolute;
+	top: 0;
+	left: 0;
+`;
+
 type ImageSource = {
 	breakpoint: number;
 	width: number;
@@ -289,7 +295,17 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={block}>
+		<picture
+			css={[
+				block,
+				// When support for the aspect-ratio CSS property is larger,
+				// we may want to switch:
+				// https://caniuse.com/mdn-css_properties_aspect-ratio
+				css`
+					padding-top: ${100 * ratio}%;
+				`,
+			]}
+		>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -348,12 +364,10 @@ export const Picture = ({
 			<img
 				alt={alt}
 				src={fallbackSource.lowResUrl}
-				width={fallbackSource.width}
-				height={fallbackSource.width * ratio}
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
-				css={block}
+				css={[block, absolute]}
 			/>
 		</picture>
 	);
