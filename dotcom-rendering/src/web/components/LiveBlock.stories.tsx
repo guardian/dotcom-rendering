@@ -321,6 +321,11 @@ export const ImageRoles = () => {
 				role: 'halfWidth',
 				title: 'Half width',
 			},
+			{
+				_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+				elementId: 'abcdef-012345',
+				html: 'On Liveblogs, the only allowed roles are “inline” and “thumbnail”, see <code>updateRole</code> in <code>renderElement</code>',
+			},
 		],
 	};
 	return (

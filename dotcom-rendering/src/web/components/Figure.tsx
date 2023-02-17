@@ -15,6 +15,7 @@ type Props = {
 
 const roleCss = {
 	inline: css`
+		clear: left;
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 	`,
