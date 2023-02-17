@@ -15,30 +15,27 @@ export const MessageForm: MessageForm = {
 
 	formFields: [
 		{
-			name: 'your_phone_number',
-			description:
-				'Your contact details will only be seen by the Guardian',
+			name: 'your_message',
 			hideLabel: false,
-			label: 'Your phone number',
-			id: 'phone',
+			label: 'Your message',
+			id: 'message',
+			type: 'textarea',
+			required: true,
+		},
+		{
+			name: 'your_name',
+			hideLabel: false,
+			label: 'Your name',
+			id: 'name',
 			type: 'text',
 			required: true,
 		},
 		{
-			name: 'your_email_address',
+			name: 'your_email',
 			hideLabel: false,
-			label: 'Your e-mail address',
+			label: 'Your e-mail',
 			id: 'email',
 			type: 'text',
-			required: true,
-		},
-		{
-			name: 'additional_information',
-			description: 'Is there anything else you would like to add',
-			hideLabel: false,
-			label: 'Additional information',
-			id: 'additional',
-			type: 'textarea',
 			required: false,
 		},
 	],
