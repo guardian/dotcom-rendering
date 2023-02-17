@@ -210,7 +210,7 @@ const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 
 /**
  * Used on `picture` and `img` to prevent having a line-height,
- * as these elements are which are `inline` by default.
+ * as these elements are `inline` by default.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
  */
