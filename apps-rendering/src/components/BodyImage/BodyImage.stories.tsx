@@ -6,8 +6,9 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, some } from '@guardian/types';
+import { none } from '@guardian/types';
 import { image } from 'fixtures/image';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import BodyImage from '.';
 
@@ -18,7 +19,7 @@ const format = {
 	display: ArticleDisplay.Standard,
 	theme: ArticlePillar.News,
 };
-const caption = some(
+const caption = Optional.some(
 	'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
 );
 const copy = (
@@ -58,7 +59,7 @@ const NoCaption: FC = () => (
 		image={image}
 		format={format}
 		lightbox={none}
-		caption={none}
+		caption={Optional.none()}
 		leftColumnBreakpoint={none}
 	/>
 );
@@ -88,7 +89,7 @@ const ThumbnailNoCaption: FC = () => (
 			}}
 			format={format}
 			lightbox={none}
-			caption={none}
+			caption={Optional.none()}
 			leftColumnBreakpoint={none}
 		/>
 		{copy}
