@@ -13,6 +13,7 @@ import Img from 'components/ImgAlt';
 import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
+import type { Optional } from 'optional';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -92,7 +93,7 @@ export type BodyImageProps = {
 	image: Image;
 	format: ArticleFormat;
 	lightbox: Option<Lightbox>;
-	caption: Option<ReactNode>;
+	caption: Optional<ReactNode>;
 };
 
 const DefaultBodyImage: FC<
