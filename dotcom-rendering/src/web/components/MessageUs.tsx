@@ -1,7 +1,6 @@
 import { css, SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
-	neutral,
 	palette,
 	space,
 	success,
@@ -298,17 +297,17 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 		</div>
 	);
 };
-const iconStyles = css`
-	fill: white;
-`;
+
 const detailsStyles: SerializedStyles = css`
 	&:not([open]) .is-open,
 	&[open] .is-closed {
 		display: none;
 	}
-	&[open] {
-		border-bottom: 1px solid ${neutral[86]};
+
+	&[open] summary {
+		text-decoration: underline;
 	}
+
 	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
 		display: none;
@@ -321,14 +320,31 @@ const summaryStyles = css`
 		${focusHalo};
 	}
 	path {
-		fill: ${neutral[46]};
+		fill: white;
 	}
 	svg {
-		height: 2rem;
+		height: 12px;
 	}
 	${textSans.small()};
 	color: white;
 	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+`;
+
+const popOutStyles = css`
+	height: 18px;
+	width: 18px;
+	background-color: white;
+	border-radius: 9px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 4px;
+	svg {
+		color: black;
+		height: 8px;
+	}
 `;
 
 export const SendAMessage = ({
@@ -339,12 +355,15 @@ export const SendAMessage = ({
 	return (
 		<details css={detailsStyles}>
 			<summary css={summaryStyles}>
-				Send us a message{' '}
-				<span css={iconStyles} className="is-closed">
-					<SvgChevronDownSingle size="xsmall" />
-				</span>
-				<span css={iconStyles} className="is-open">
+				<div css={popOutStyles}>
+					{/* needs svg importing to source */}
+				</div>
+				Send us a message
+				<span className="is-open">
 					<SvgChevronUpSingle size="xsmall" />
+				</span>
+				<span className="is-closed">
+					<SvgChevronDownSingle size="xsmall" />
 				</span>
 			</summary>
 			<Form
