@@ -78,5 +78,5 @@ export const buildLightboxImages = (
 			alreadySeen.push(imageId);
 		}
 	});
-	return uniqueImages;
+	return uniqueImages.filter(image => image.role !== 'thumbnail');
 };
