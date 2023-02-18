@@ -2,23 +2,21 @@ import { css } from '@emotion/react';
 import { brand, headline, neutral, space } from '@guardian/source-foundations';
 import { Tabs } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CampaignFieldType } from '../../../types/content';
+import type {
+	CalloutContactType,
+	CampaignFieldType,
+} from '../../../types/content';
 import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
-import { MessageUs } from './MessageUs';
+import { conditionallyRenderContactIcon, MessageUs } from './MessageUs';
 
 const wrapperStyles = css`
 	background-color: ${neutral[97]};
 `;
 
-const calloutDetailsStyles = css`
-	position: relative;
-	padding-bottom: ${space[2]}px;
-`;
-
 const summaryContentWrapper = css`
 	visibility: visible;
-	padding: ${space[2]}px;
+	padding: 2px ${space[2]}px ${space[6]}px ${space[2]}px;
 `;
 
 const titleStyles = css`
@@ -31,6 +29,19 @@ const subtitleTextHeaderStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
+const tabTitle = css`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	margin-left: ${space[2]}px;
+`;
+
+const tabIcons = css`
+	display: flex;
+	align-items: center;
+`;
+
 export interface CalloutBlockProps {
 	heading: string;
 	description: string;
@@ -38,6 +49,8 @@ export interface CalloutBlockProps {
 	formId: string;
 	submissionURL: string;
 	isExpired: boolean;
+	isNonCollapsible: boolean;
+	contacts?: CalloutContactType[];
 }
 
 export const CalloutBlock = ({
@@ -46,12 +59,16 @@ export const CalloutBlock = ({
 	formFields,
 	formId,
 	submissionURL,
+	isNonCollapsible,
+	contacts,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
+	const shouldShowContacts = contacts && contacts.length > 0;
+
 	const tabsContent = [
 		{
 			id: 'form',
-			text: 'Tell us here',
+			text: <div>Tell us here</div>,
 			content: (
 				<Form
 					formFields={formFields}
@@ -60,18 +77,33 @@ export const CalloutBlock = ({
 				/>
 			),
 		},
-		{
-			id: 'contact',
-			text: 'Message us',
-			content: <MessageUs />,
-		},
 	];
 
+	if (shouldShowContacts) {
+		const tabsText = (
+			<div css={tabTitle}>
+				<div>Message us</div>
+				<div css={tabIcons}>
+					{contacts.map((c) =>
+						conditionallyRenderContactIcon(c.name),
+					)}
+				</div>
+			</div>
+		);
+		tabsContent.push({
+			id: 'contact',
+			text: tabsText,
+			content: <MessageUs contacts={contacts} />,
+		});
+	}
+
 	return (
-		<div id={formId} css={[calloutDetailsStyles, wrapperStyles]}>
+		<div id={formId} css={wrapperStyles}>
 			<div css={summaryContentWrapper}>
-				<div css={titleStyles}>Tell us</div>
-				<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				<div css={titleStyles}>Share your experience</div>
+				{!isNonCollapsible && (
+					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
+				)}
 				<CalloutDescription description={description} />
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>

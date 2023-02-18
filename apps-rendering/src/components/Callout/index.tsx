@@ -1,4 +1,5 @@
 import { css, ThemeProvider } from '@emotion/react';
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
@@ -20,6 +21,7 @@ export interface CalloutProps {
 	isNonCollapsible: boolean;
 	activeUntil?: number;
 	name: string;
+	contacts?: Contact[];
 }
 
 const Callout: FC<CalloutProps> = ({
@@ -31,6 +33,7 @@ const Callout: FC<CalloutProps> = ({
 	isNonCollapsible,
 	activeUntil,
 	name,
+	contacts,
 }): ReactElement => {
 	const isActive = isCalloutActive(activeUntil);
 
@@ -49,6 +52,8 @@ const Callout: FC<CalloutProps> = ({
 						formFields={formFields}
 						format={format}
 						description={description}
+						contacts={contacts}
+						isNonCollapsible={isNonCollapsible}
 					/>
 					<span
 						css={css`
@@ -67,6 +72,7 @@ const Callout: FC<CalloutProps> = ({
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
+						collapsedHeight={'160px'}
 					>
 						<CalloutBlock
 							formId={formId}
@@ -74,6 +80,8 @@ const Callout: FC<CalloutProps> = ({
 							formFields={formFields}
 							format={format}
 							description={description}
+							contacts={contacts}
+							isNonCollapsible={isNonCollapsible}
 						/>
 					</ExpandingWrapper>
 				</ThemeProvider>

@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering';
@@ -12,7 +13,7 @@ import type { Option } from '@guardian/types';
 import { fromNullable } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
-// import { getCallout } from 'campaign';
+import { getCallout } from 'campaign';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -135,6 +136,7 @@ type Callout = {
 	name: string;
 	description?: DocumentFragment;
 	activeUntil?: number;
+	contacts?: Contact[];
 };
 
 type BodyElement =
@@ -344,45 +346,41 @@ const parse =
 			}
 
 			case ElementType.CALLOUT: {
-				/* Temporarily remove the callout implementation.
-				    This will be re-implemented after the A/B test in DCR is complete */
-				return Result.err(
-					'Callouts have not been implemented in Apps Rendering',
-				);
-				// const {
-				// 	campaignId: campaignId,
-				// 	isNonCollapsible: isNonCollapsible,
-				// } = element.calloutTypeData ?? {};
-				// if (
-				// 	campaignId === undefined ||
-				// 	campaignId === '' ||
-				// 	isNonCollapsible === undefined
-				// ) {
-				// 	return Result.err(
-				// 		'No valid campaignId or isNonCollapsible field on calloutTypeData',
-				// 	);
-				// }
+				const {
+					campaignId: campaignId,
+					isNonCollapsible: isNonCollapsible,
+				} = element.calloutTypeData ?? {};
+				if (
+					campaignId === undefined ||
+					campaignId === '' ||
+					isNonCollapsible === undefined
+				) {
+					return Result.err(
+						'No valid campaignId or isNonCollapsible field on calloutTypeData',
+					);
+				}
 
-				// return getCallout(campaignId, campaigns)
-				// 	.map(({ callout, name, activeUntil }) =>
-				// 		Result.ok<string, Callout>({
-				// 			kind: ElementKind.Callout,
-				// 			isNonCollapsible,
-				// 			heading: callout.callout,
-				// 			formFields: callout.formFields,
-				// 			formId: callout.formId,
-				// 			description: context.docParser(
-				// 				callout.description ?? '',
-				// 			),
-				// 			name: name,
-				// 			activeUntil: activeUntil,
-				// 		}),
-				// 	)
-				// 	.withDefault(
-				// 		Result.err<string, Callout>(
-				// 			'This piece contains a callout but no matching campaign',
-				// 		),
-				// 	);
+				return getCallout(campaignId, campaigns)
+					.map(({ callout, name, activeUntil }) =>
+						Result.ok<string, Callout>({
+							kind: ElementKind.Callout,
+							isNonCollapsible,
+							heading: callout.callout,
+							formFields: callout.formFields,
+							formId: callout.formId,
+							description: context.docParser(
+								callout.description ?? '',
+							),
+							name: name,
+							activeUntil: activeUntil,
+							contacts: callout.contacts,
+						}),
+					)
+					.withDefault(
+						Result.err<string, Callout>(
+							'This piece contains a callout but no matching campaign',
+						),
+					);
 			}
 
 			case ElementType.EMBED: {

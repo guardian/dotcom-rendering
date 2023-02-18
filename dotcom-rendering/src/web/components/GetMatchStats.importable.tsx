@@ -11,6 +11,19 @@ type Props = {
 
 const Loading = () => <Placeholder height={800} />;
 
+/**
+ * # Get Match Stats
+ *
+ * Wrapper around `MatchStats`.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * It fetches data from the API.
+ *
+ * ---
+ *
+ * [`MatchStats` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-matchstats)
+ */
 export const GetMatchStats = ({ matchUrl, format }: Props) => {
 	const options: SWRConfiguration = {};
 	// If this blog is live then poll for new stats

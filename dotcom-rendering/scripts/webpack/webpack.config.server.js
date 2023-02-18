@@ -78,10 +78,9 @@ module.exports = ({ sessionId }) => ({
 			additionalModuleDirs: [
 				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
 				// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
-				// but also in project root, and any workspaces we link to (like common-rendering).
+				// but also in project root, and any workspaces we link to.
 				// We want to make sure all of these are removed from the server build.
 				'../node_modules',
-				'../common-rendering/node_modules',
 			],
 		}),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to

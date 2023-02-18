@@ -1,8 +1,8 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement, SubheadingBlockElement } from '../types/content';
+import type { FEElement, SubheadingBlockElement } from '../types/content';
 import type { TableOfContentsItem } from '../types/frontend';
 
-const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
+const isH2 = (element: FEElement): element is SubheadingBlockElement => {
 	return (
 		element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement' ||
@@ -34,7 +34,7 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 };
 
 export const enhanceTableOfContents = (
-	format: CAPIFormat,
+	format: FEFormat,
 	blocks: Block[],
 ): TableOfContentsItem[] | undefined => {
 	if (hasInteractiveContentsElement(blocks)) {

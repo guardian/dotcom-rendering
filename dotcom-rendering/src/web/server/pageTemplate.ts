@@ -48,17 +48,8 @@ export const pageTemplate = ({
 	 * TODO: Identify critical fonts to preload
 	 */
 	const fontFiles = [
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
 	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
 	const fontPreloadTags = fontFiles.map(
@@ -115,7 +106,6 @@ export const pageTemplate = ({
 		`https://api.nextgen.guardianapps.co.uk`,
 		`https://hits-secure.theguardian.com`,
 		`https://interactive.guim.co.uk`,
-		`https://phar.gu-web.net`,
 		`https://static.theguardian.com`,
 		`https://support.theguardian.com`,
 	];
@@ -247,6 +237,12 @@ https://workforus.theguardian.com/careers/product-engineering/
                 </script>
 
                 <script>
+                    // record the number of times the browser goes offline during a pageview
+                    window.guardian.offlineCount = 0;
+                    window.addEventListener('offline', function incrementOfflineCount () { window.guardian.offlineCount++ });
+                </script>
+
+                <script>
                     // this is a global that's called at the bottom of the pf.io response,
                     // once the polyfills have run. This may be useful for debugging.
                     // mainly to support browsers that don't support async=false or defer
@@ -323,7 +319,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					${islandNoscriptStyles}
                 </noscript>
                 ${scriptTags.join('\n')}
-                <style class="webfont">${getFontsCss()}</style>
+                <style class="webfont">${getFontsCss(offerHttp3)}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">

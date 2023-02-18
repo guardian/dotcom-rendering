@@ -1,14 +1,11 @@
 // ----- Imports ----- //
 
-import { fill } from './fill';
-import { text } from './text';
 import { background } from './background';
 import { border } from './border';
+import type { Colour } from './colour';
+import { fill } from './fill';
 import { hover } from './hover';
-
-// ----- Types ----- //
-
-type Colour = string;
+import { text } from './text';
 
 // ----- Exports ----- //
 

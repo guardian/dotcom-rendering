@@ -1,12 +1,12 @@
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 
 const notEmpty = (value: string | null): value is string => value !== null;
 const unique = (value: string | null, index: number, self: (string | null)[]) =>
 	value && self.indexOf(value) === index;
 
 export const extractScripts: (
-	elements: CAPIElement[],
-	mainMediaElements: CAPIElement[],
+	elements: FEElement[],
+	mainMediaElements: FEElement[],
 ) => string[] = (elements, mainMediaElements) => {
 	return [...new Set([...elements, ...mainMediaElements].map((e) => e._type))]
 		.map((t) => {

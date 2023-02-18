@@ -1,22 +1,19 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import {
-	ArticleDesign,
-	ArticleFormat,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
-import {
-	news,
-	lifestyle,
-	sport,
 	culture,
-	opinion,
 	labs,
-	specialReport,
+	lifestyle,
 	neutral,
+	news,
+	opinion,
+	palette,
+	specialReport,
+	sport,
 } from '@guardian/source-foundations';
-import { Colour } from '.';
+import type { Colour } from './colour';
 
 // ----- Functions ----- //
 
@@ -127,39 +124,105 @@ const commentCountWide = (format: ArticleFormat): Colour => {
 	}
 };
 
-const icon = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticlePillar.News:
+const icon = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[200];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
 		default:
-			return news[400];
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticlePillar.News:
+				default:
+					return news[400];
+			}
 	}
 };
 
-const iconDark = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.Opinion:
-			return opinion[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
-		case ArticlePillar.News:
+const iconDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[300];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
 		default:
-			return news[500];
+			switch (theme) {
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+				case ArticlePillar.News:
+				default:
+					return news[500];
+			}
 	}
 };
 
@@ -225,14 +288,16 @@ const richLinkDark = (_format: ArticleFormat): Colour => {
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ * This is applied server-side. When the page loads, client-side JS applies a
+ * class name that overrides this style.
  */
 const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ * This is applied server-side. When the page loads, client-side JS applies a
+ * class name that overrides this style.
  */
 const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
@@ -242,9 +307,11 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
+	neutral[7];
 
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[86];
 
 // ----- API ----- //
 

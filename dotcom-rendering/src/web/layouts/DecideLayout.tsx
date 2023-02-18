@@ -12,12 +12,12 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
 
-export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const DecideLayout = ({ article, NAV, format }: Props) => {
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -29,7 +29,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					// if published before.
 					return (
 						<FullPageInteractiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -38,7 +38,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				default: {
 					return (
 						<ImmersiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -53,7 +53,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -63,7 +63,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -71,7 +71,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				default:
 					return (
 						<ShowcaseLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -84,7 +84,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -92,7 +92,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -102,7 +102,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -112,7 +112,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -120,7 +120,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.NewsletterSignup:
 					return (
 						<NewsletterSignupLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>
@@ -128,7 +128,7 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				default:
 					return (
 						<StandardLayout
-							CAPIArticle={CAPIArticle}
+							article={article}
 							NAV={NAV}
 							format={format}
 						/>

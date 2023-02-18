@@ -1,0 +1,30 @@
+name: 🐞 Bug Report
+description: Let us know about something unexpected that has happened
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for letting us know something has happened.
+
+        If this is urgent, please email dotcom.platform@guardian.co.uk, or let us know on our chat channel.
+
+        The benefit of an issue is that we have a written record of what is going on, that we can track and have discussions around.
+        Please still reach out to facilitate discussion or in case we miss it - we're a lovely bunch!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: And what should have happened? Please provide screenshots if they would help debug and resolve this
+  - type: input
+    id: where
+    attributes:
+      label: Where is this happening?
+      description: If possible please provide a URL where we can see this happening
+  - type: textarea
+    id: impact
+    attributes:
+      label: What is the impact?
+      description: How far reaching is the issue, and how is it affecting their experience?
+

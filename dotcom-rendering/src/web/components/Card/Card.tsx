@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, space } from '@guardian/source-foundations';
+import { brandAltBackground, from, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Branding } from '../../../types/branding';
@@ -75,19 +75,33 @@ export type Props = {
 	isDynamo?: true;
 };
 
-const StarRatingComponent = ({ rating }: { rating: number }) => (
+const StarRatingComponent = ({
+	rating,
+	cardHasImage,
+}: {
+	rating: number;
+	cardHasImage: boolean;
+}) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
-			margin-top: ${space[1]}px;
+			margin-top: ${cardHasImage ? '2' : space[1]}px;
 			display: inline-block;
+
+			${from.tablet} {
+				margin-top: ${space[1]}px;
+			}
 		`}
 	>
 		<Hide when="above" breakpoint="desktop">
-			<StarRating rating={rating} size="small" />
+			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<StarRating rating={rating} size="medium" />
+			<StarRating
+				rating={rating}
+				size={cardHasImage ? 'medium' : 'small'}
+				breakpoint="wide"
+			/>
 		</Hide>
 	</div>
 );
@@ -391,7 +405,12 @@ export const Card = ({
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<HeadlineWrapper>
+					<HeadlineWrapper
+						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={imagePosition}
+						imageUrl={imageUrl}
+						hasStarRating={starRating !== undefined}
+					>
 						<CardHeadline
 							headlineText={headlineText}
 							format={format}
@@ -413,7 +432,10 @@ export const Card = ({
 							isDynamo={isDynamo}
 						/>
 						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={imageUrl !== undefined}
+							/>
 						) : null}
 						{(format.design === ArticleDesign.Gallery ||
 							format.design === ArticleDesign.Audio ||

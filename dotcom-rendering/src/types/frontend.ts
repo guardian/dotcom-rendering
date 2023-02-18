@@ -3,14 +3,14 @@ import type { BadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type {
-	CAPIElement,
 	EnhancedImageForLightbox,
+	FEElement,
 	Newsletter,
 } from './content';
 import type { FooterType } from './footer';
-import type { CAPIOnwards } from './onwards';
+import type { FEOnwards } from './onwards';
 import type { TagType } from './tag';
-import type { CAPITrailType } from './trails';
+import type { FETrailType } from './trails';
 
 /**
  * This type is what we receive from `frontend`,
@@ -23,7 +23,7 @@ export interface FEArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
-	mainMediaElements: CAPIElement[];
+	mainMediaElements: FEElement[];
 	main: string;
 	keyEvents: Block[];
 	blocks: Block[];
@@ -45,7 +45,7 @@ export interface FEArticleType {
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
-	format: CAPIFormat;
+	format: FEFormat;
 
 	// Include pillar and designType until we remove them upstream
 	// We type designType as `string` for now so that the field is present,
@@ -58,8 +58,8 @@ export interface FEArticleType {
 	sectionLabel: string;
 	sectionUrl: string;
 	sectionName?: string;
-	subMetaSectionLinks: CAPILinkType[];
-	subMetaKeywordLinks: CAPILinkType[];
+	subMetaSectionLinks: FELinkType[];
+	subMetaKeywordLinks: FELinkType[];
 	shouldHideAds: boolean;
 	isAdFreeUser: boolean;
 	openGraphData: { [key: string]: string };
@@ -78,10 +78,10 @@ export interface FEArticleType {
 	publication: string; // TODO: check who uses?
 	hasStoryPackage: boolean;
 	storyPackage?: {
-		trails: CAPITrailType[];
+		trails: FETrailType[];
 		heading: string;
 	};
-	onwards?: CAPIOnwards[];
+	onwards?: FEOnwards[];
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
@@ -89,7 +89,7 @@ export interface FEArticleType {
 	trailText: string;
 	badge?: BadgeType;
 
-	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
+	nav: FENavType; // TODO move this out as most code uses a different internal NAV model.
 
 	pageFooter: FooterType;
 

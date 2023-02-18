@@ -1,6 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
-import { EditionId } from '../web/lib/edition';
-
+import type { EditionId } from '../web/lib/edition';
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {
@@ -46,7 +45,7 @@ export interface NavType extends BaseNavType {
 	pillars: PillarType[];
 }
 
-const getLink = (data: CAPILinkType): LinkType => {
+const getLink = (data: FELinkType): LinkType => {
 	const { title, longTitle = title, url } = data;
 	return {
 		title,
@@ -58,7 +57,7 @@ const getLink = (data: CAPILinkType): LinkType => {
 	};
 };
 
-const getPillar = (data: CAPILinkType): PillarType => ({
+const getPillar = (data: FELinkType): PillarType => ({
 	...getLink(data),
 	pillar: findPillar(data.title) ?? ArticlePillar.News,
 });
@@ -79,7 +78,7 @@ const buildRRLinkCategories = (
 
 const buildRRLinkModel = ({
 	readerRevenueLinks,
-}: CAPINavType): ReaderRevenuePositions => ({
+}: FENavType): ReaderRevenuePositions => ({
 	header: buildRRLinkCategories(readerRevenueLinks, 'header'),
 	footer: buildRRLinkCategories(readerRevenueLinks, 'footer'),
 	sideMenu: buildRRLinkCategories(readerRevenueLinks, 'sideMenu'),
@@ -87,7 +86,7 @@ const buildRRLinkModel = ({
 	ampFooter: buildRRLinkCategories(readerRevenueLinks, 'ampFooter'),
 });
 
-export const extractNAV = (data: CAPINavType): NavType => {
+export const extractNAV = (data: FENavType): NavType => {
 	const pillars = data.pillars.map(getPillar);
 
 	const { subNavSections: subnav, currentNavLinkTitle: currentNavLink = '' } =

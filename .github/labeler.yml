@@ -2,4 +2,3 @@
 
 dotcom-rendering: dotcom-rendering/**/*
 apps-rendering: apps-rendering/**/*
-common-rendering: common-rendering/**/*

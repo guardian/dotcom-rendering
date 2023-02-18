@@ -7,7 +7,11 @@ import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
-import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import { extractTrendingTopics } from '../../model/extractTrendingTopics';
+import {
+	validateAsArticleType,
+	validateAsFrontType,
+} from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import { decideTrail } from '../lib/decideTrail';
@@ -16,12 +20,12 @@ import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
 
-function enhancePinnedPost(format: CAPIFormat, block?: Block) {
+function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: unknown): FEArticleType => {
-	const validated = validateAsCAPIType(body);
+const enhanceArticleType = (body: unknown): FEArticleType => {
+	const validated = validateAsArticleType(body);
 	// addImageIDs needs to take account of both main media elements
 	// and block elements, so it needs to be executed here
 	const data = addImageIDs(validated);
@@ -30,7 +34,7 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 		promotedNewsletter: data.promotedNewsletter,
 	});
 
-	const CAPIArticle: FEArticleType = {
+	return {
 		...data,
 		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
@@ -47,7 +51,6 @@ const enhanceCAPIType = (body: unknown): FEArticleType => {
 			data.mainMediaElements,
 		),
 	};
-	return CAPIArticle;
 };
 
 const getStack = (e: unknown): string =>
@@ -74,12 +77,13 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			? decideTrail(data.mostCommented)
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
+		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
 	};
 };
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
 		});
@@ -92,10 +96,12 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceArticleType(body);
 		const resp = {
 			data: {
-				CAPIArticle,
+				// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
+				// where/if this is used.
+				CAPIArticle: article,
 			},
 		};
 
@@ -112,7 +118,7 @@ export const handlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
 		});
@@ -143,7 +149,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 			keywordIds,
 		} =
 			// The content if body is not checked
-			body as BlocksRequest;
+			body as FEBlocksRequest;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
 		const html = blocksToHtml({
@@ -174,7 +180,7 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
-			body as KeyEventsRequest;
+			body as FEKeyEventsRequest;
 
 		const html = keyEventsToHtml({
 			keyEvents,
