@@ -52,7 +52,7 @@ export const ArticlePage = ({ article, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Lightbox format={format} images={CAPIArticle.imagesForLightbox} />
+			<Lightbox format={format} images={article.imagesForLightbox} />
 			<Island clientOnly={true}>
 				<LightboxHash />
 			</Island>

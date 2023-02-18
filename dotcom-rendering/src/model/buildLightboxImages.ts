@@ -1,4 +1,4 @@
-import type { CAPIElement, EnhancedImageForLightbox } from '../types/content';
+import type { EnhancedImageForLightbox, FEElement } from '../types/content';
 
 /**
  * Generates a new array of lightbox images. Does not mutate.
@@ -12,9 +12,9 @@ import type { CAPIElement, EnhancedImageForLightbox } from '../types/content';
  * enhancers just have blocks in scope.
  */
 export const buildLightboxImages = (
-	format: CAPIFormat,
+	format: FEFormat,
 	blocks: Block[],
-	mainMediaElements: CAPIElement[],
+	mainMediaElements: FEElement[],
 ): EnhancedImageForLightbox[] => {
 	const images: EnhancedImageForLightbox[] = [];
 	mainMediaElements.forEach((element) => {

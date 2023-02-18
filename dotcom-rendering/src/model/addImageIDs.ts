@@ -1,4 +1,4 @@
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 import type { FEArticleType } from '../types/frontend';
 
 /**
@@ -16,8 +16,8 @@ export const addImageIDs = (data: FEArticleType): FEArticleType => {
 	// position needs to be defined outside the addPosition function otherwise
 	// it will get reset to 1 each time
 	let position = 1;
-	const addPosition = (elements: CAPIElement[]): CAPIElement[] => {
-		const withPosition: CAPIElement[] = [];
+	const addPosition = (elements: FEElement[]): FEElement[] => {
+		const withPosition: FEElement[] = [];
 		elements.forEach((thisElement) => {
 			if (
 				thisElement._type ===
