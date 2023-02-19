@@ -571,8 +571,6 @@ export const LightboxButton = ({
 		}
 	}, [elementId]);
 
-	// Don't show the button over thumbnails; they're too small
-	if (role === 'thumbnail') return null;
 	return (
 		<ClickOverlay>
 			<button
@@ -593,7 +591,8 @@ export const LightboxButton = ({
 						border: none;
 						cursor: pointer;
 						background-color: ${neutral[46]};
-						opacity: 0.7;
+						/* Don't show the button over thumbnails; they're too small */
+						opacity: ${role === 'thumbnail' ? '0' : '0.7'};
 						:hover {
 							filter: brightness(85%);
 							opacity: 0.8;
