@@ -571,7 +571,7 @@ export const LightboxButton = ({
 		}
 	}, [elementId]);
 
-	// We don't show thumbnails in lightbox
+	// Don't show the button over thumbnails; they're too small
 	if (role === 'thumbnail') return null;
 	return (
 		<ClickOverlay>
