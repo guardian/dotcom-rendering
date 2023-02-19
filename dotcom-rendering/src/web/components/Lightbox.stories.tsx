@@ -61,10 +61,9 @@ export default {
 	},
 };
 
-function showModal() {
+function showLightbox() {
 	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
-	(lightbox as any)?.showModal(); // See: https://github.com/microsoft/TypeScript/issues/48267
+	if (lightbox) lightbox.removeAttribute('hidden');
 }
 
 function showInfo() {
@@ -74,7 +73,7 @@ function showInfo() {
 
 export const Default = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -91,7 +90,7 @@ export const Default = () => {
 
 export const WithTitle = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -108,7 +107,7 @@ export const WithTitle = () => {
 
 export const WithCredit = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -125,7 +124,7 @@ export const WithCredit = () => {
 
 export const WithRating = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -142,7 +141,7 @@ export const WithRating = () => {
 
 export const WhenLiveBlog = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -168,7 +167,7 @@ export const WhenLiveBlog = () => {
 
 export const WithEverything = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -192,7 +191,7 @@ export const WithEverything = () => {
 
 export const WithoutCaption = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 	});
 	return (
 		<Lightbox
@@ -208,7 +207,7 @@ export const WithoutCaption = () => {
 
 export const WithSport = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -232,7 +231,7 @@ export const WithSport = () => {
 
 export const WithCulture = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -256,7 +255,7 @@ export const WithCulture = () => {
 
 export const WithLifestyle = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -280,7 +279,7 @@ export const WithLifestyle = () => {
 
 export const WithOpinion = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -304,7 +303,7 @@ export const WithOpinion = () => {
 
 export const WithSpecialReport = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -328,7 +327,7 @@ export const WithSpecialReport = () => {
 
 export const WithSpecialReportAlt = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (
@@ -352,7 +351,7 @@ export const WithSpecialReportAlt = () => {
 
 export const WithLabs = () => {
 	useEffect(() => {
-		showModal();
+		showLightbox();
 		showInfo();
 	});
 	return (

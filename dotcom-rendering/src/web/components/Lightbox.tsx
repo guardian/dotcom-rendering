@@ -19,6 +19,7 @@ import {
 } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
 import type { EnhancedImageForLightbox } from '../../types/content';
+import { getZIndex } from '../lib/getZIndex';
 import { Caption } from './Caption';
 import { getImageDimensions, getLargest, getMaster } from './ImageComponent';
 import { Picture } from './Picture';
@@ -28,7 +29,7 @@ type Props = {
 	images?: EnhancedImageForLightbox[];
 };
 
-const dialogStyles = css`
+const lightboxStyles = css`
 	width: 100vw;
 	height: 100%;
 	border: none;
@@ -41,7 +42,7 @@ const dialogStyles = css`
 	}
 
 	&.hide-info {
-		/* Always hide the info aside when the hide-info class exists on the dialog element */
+		/* Always hide the info aside when the hide-info class exists on the lightbox element */
 		aside {
 			display: none;
 		}
@@ -357,39 +358,24 @@ export const Lightbox = ({ format, images }: Props) => {
 		<>
 			<Global
 				styles={css`
-					/*
-						Remove the article scrollbar whilst the lightbox is open so readers
-						have the same scroll position when they return to the page.
-					*/
-					@supports (selector(:has(p))) {
-						html:has(dialog#gu-lightbox[open]) {
-							overflow: hidden;
-						}
-					}
-					/*
-						We're using html.lightbox-open here because support for has() is not
-						perfect but it's not far away and once it lands we will be able to remove
-						some javascript.
-						This css (and the associated javascript to add and remove the lightbox-open
-						class) can be deleted once the page below looks green.
-						https://developer.mozilla.org/en-US/docs/Web/CSS/:has
-					*/
 					html.lightbox-open {
 						overflow: hidden;
-					}
 
-					/*
-						This css is taken from the polyfill styles and is always needed, even
-						if the lightbox is not loaded, because we can't depend on the browsers
-						with no support for the dialog element to hide the lightbox when it's
-						inactive
-					*/
-					dialog:not([open]) {
-						display: none;
+						#gu-lightbox {
+							display: block;
+							position: fixed;
+							${getZIndex('lightbox')};
+						}
 					}
 				`}
 			/>
-			<dialog css={dialogStyles} id="gu-lightbox" aria-modal="true">
+			<div
+				css={lightboxStyles}
+				id="gu-lightbox"
+				aria-modal="true"
+				role="dialog"
+				hidden={true}
+			>
 				<div css={containerStyles}>
 					<ul
 						id="lightbox-images"
@@ -603,7 +589,7 @@ export const Lightbox = ({ format, images }: Props) => {
 						</button>
 					</nav>
 				</div>
-			</dialog>
+			</div>
 		</>
 	);
 };

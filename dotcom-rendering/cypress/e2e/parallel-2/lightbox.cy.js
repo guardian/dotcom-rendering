@@ -18,10 +18,10 @@ describe('Lightbox', function () {
 
 	it('should open the lightbox when an expand button is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		// We expect the second image to be showing because the first is the main media
 		// which doesn't have a button in this case because it's an immersive article.
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
@@ -30,10 +30,10 @@ describe('Lightbox', function () {
 
 	it('should open the lightbox when an image is clicked', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using fifth image on the page
 		cy.get('article img').eq(3).realClick();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		cy.get('nav [data-cy="lightbox-selected"]').contains('5/22');
 		cy.get('li[data-index="5"] img').should('be.visible');
 	});
@@ -41,7 +41,8 @@ describe('Lightbox', function () {
 	it('should trap focus', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('article img').first().realClick();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
+		cy.realPress('Tab');
 		cy.get('button.close').should('have.focus');
 		cy.get('button.previous').should('not.have.focus');
 		cy.realPress('Tab');
@@ -69,17 +70,17 @@ describe('Lightbox', function () {
 
 	it('should respond to keyboard shortcuts and image clicks', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		// Close lightbox using q key
 		cy.realPress('q');
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 		// Pressing enter reopens the lightbox because focus was
 		// restored to the open lightbox button
 		cy.realPress('Enter');
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		// We should be able to navigate using arrow keys
 		cy.get('li[data-index="3"]').should('not.be.visible');
 		cy.realPress('ArrowRight');
@@ -120,9 +121,9 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		cy.realPress('ArrowUp');
 		cy.get('li[data-index="1"] aside').should('be.visible');
-		// Closing the dialog using escape
+		// Closing the lightbox using escape
 		cy.realPress('Escape');
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 	});
 
 	it('should download adjacent images before they are viewed', function () {
@@ -177,7 +178,7 @@ describe('Lightbox', function () {
 		// has been preserved
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		cy.get('li[data-index="2"] aside').should('not.be.visible');
 		// Turn the info aside back on and then reload once more to check the
 		// caption is again showing by default
@@ -221,10 +222,10 @@ describe('Lightbox', function () {
 		cy.realPress('ArrowRight');
 		cy.url().should('contain', '#img-3');
 		cy.go('back');
-		cy.get('dialog#gu-lightbox').should('not.be.visible');
+		cy.get('#gu-lightbox').should('not.be.visible');
 		cy.url().should('not.contain', '#img-');
 		cy.go('forward');
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		cy.url().should('contain', '#img-3');
 		cy.realPress('ArrowRight');
 		cy.realPress('ArrowRight');
@@ -232,7 +233,7 @@ describe('Lightbox', function () {
 		cy.url().should('contain', '#img-6');
 		// It should load the lightbox at page load if the url contains an img hash
 		cy.reload();
-		cy.get('dialog#gu-lightbox').should('be.visible');
+		cy.get('#gu-lightbox').should('be.visible');
 		cy.get('nav [data-cy="lightbox-selected"]').contains('6/22');
 	});
 });

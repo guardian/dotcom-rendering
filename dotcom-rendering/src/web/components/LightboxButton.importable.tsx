@@ -18,47 +18,6 @@ type Props = {
 	isMainMedia?: boolean;
 };
 
-/**
- * This css is used by dialog-polyfill.  It is only loaded if the polyfill is needed
- *
- * It is a slimmed down version of this file (colour styles and extraneous features
- * have been removed):
- * https://github.com/GoogleChrome/dialog-polyfill/blob/master/dist/dialog-polyfill.css
- *
- */
-const polyfillStyles = `
-	dialog {
-		position: absolute;
-		left: 0;
-		right: 0;
-		width: -moz-fit-content;
-		width: -webkit-fit-content;
-		width: fit-content;
-		height: -moz-fit-content;
-		height: -webkit-fit-content;
-		height: fit-content;
-		margin: auto;
-		border: solid;
-		display: block;
-	}
-
-	dialog + .backdrop {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-
-	._dialog_overlay {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-`;
-
 function decideSize(role: RoleType) {
 	switch (role) {
 		case 'halfWidth':
@@ -84,7 +43,7 @@ function decideSize(role: RoleType) {
 	}
 }
 
-function initialiseLightbox(lightbox: HTMLDialogElement) {
+function initialiseLightbox(lightbox: HTMLElement) {
 	log('dotcom', '💡 Initialising lightbox');
 	// Document selectors
 	const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
@@ -305,14 +264,22 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 			case 'ArrowDown':
 				hideInfo();
 				break;
+			case 'Escape':
+				close();
+				break;
 		}
 	}
 
+	let previouslyFocused: Element;
 	function open(position: number) {
+		log('dotcom', '💡 Opening lightbox.');
+		// Remember where we were so we can restore focus
+		if (document.activeElement) previouslyFocused = document.activeElement;
 		// We use this class to prevent the main page from scrolling
 		document.documentElement.classList.add('lightbox-open');
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
-		(lightbox as any)?.showModal(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		// Show lightbox
+		lightbox.removeAttribute('hidden');
+
 		// When opening the lightbox, if one doesn't exist already, add a history state referencing
 		// the currently selected image. Doing this means the back action will take the reader back
 		// to the article
@@ -329,8 +296,25 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 	}
 
 	function close(): void {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access , @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any -- because it's a known issue
-		(lightbox as any)?.close(); // See: https://github.com/microsoft/TypeScript/issues/48267
+		log('dotcom', '💡 Closing lightbox.');
+		// Re-enable scrolling
+		document.documentElement.classList.remove('lightbox-open');
+		// Hide lightbox
+		lightbox.setAttribute('hidden', 'true');
+		// When the lightbox is closed, remove any img hash has from the url
+		if (window.location.hash.startsWith('#img-')) {
+			history.replaceState(
+				{},
+				'',
+				window.location.pathname + window.location.search,
+			);
+		}
+		// Stop listening for keyboard shortcuts
+		window.removeEventListener('keydown', handleKeydown);
+		// Resore focus
+		// Okay, sure, it 👋 might not 👋 be a button but it *will* be focusable
+		// because it came from activeElement
+		(previouslyFocused as HTMLButtonElement).focus();
 	}
 
 	function showInfo(): void {
@@ -402,19 +386,6 @@ function initialiseLightbox(lightbox: HTMLDialogElement) {
 		}, 300),
 	);
 
-	lightbox.addEventListener('close', () => {
-		document.documentElement.classList.remove('lightbox-open');
-		// When the lightbox is closed, remove any img hash has from the url
-		if (window.location.hash.startsWith('#img-')) {
-			history.replaceState(
-				{},
-				'',
-				window.location.pathname + window.location.search,
-			);
-		}
-		// Stop listening for keyboard shortcuts
-		window.removeEventListener('keydown', handleKeydown);
-	});
 	closeButton?.addEventListener('click', close);
 	previousButton?.addEventListener('click', goBack);
 	nextButton?.addEventListener('click', goForward);
@@ -538,38 +509,9 @@ export const LightboxButton = ({
 		});
 		if (alreadyHydrated) return;
 
-		const lightbox =
-			document.querySelector<HTMLDialogElement>('dialog#gu-lightbox');
+		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 		if (!lightbox) return;
-		/**
-		 * The <dialog> element is fairly well supported but not completely so
-		 * we check here and use a polyfill if it isn't. In particular, Safari
-		 * only landed support in March 2022 with 15.4
-		 *
-		 * See: https://github.com/GoogleChrome/dialog-polyfill
-		 */
-		// We need to cast to any here because of this issue: https://github.com/microsoft/TypeScript/issues/48267
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any -- ts v4.3 has a problem with dialog
-		if (typeof (lightbox as any).showModal === 'function') {
-			// No polyfill needed
-			initialiseLightbox(lightbox);
-		} else {
-			log(
-				'dotcom',
-				'💡 No support for dialog detected. Loading polyfill',
-			);
-			// First insert polyfill css
-			const style = document.createElement('style');
-			document.head.appendChild(style);
-			style.id = 'polyfill-css';
-			style.appendChild(document.createTextNode(polyfillStyles));
-			// Now download and run the polyfill javascript
-
-			void import('dialog-polyfill').then((module) => {
-				module.default.registerDialog(lightbox); // <-- Polyfill
-				initialiseLightbox(lightbox);
-			});
-		}
+		initialiseLightbox(lightbox);
 	}, [elementId]);
 
 	return (
