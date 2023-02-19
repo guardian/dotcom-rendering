@@ -1,3 +1,4 @@
+import { log } from '@guardian/libs';
 import { useEffect } from 'react';
 
 /**
@@ -15,6 +16,7 @@ export const LightboxHash = () => {
 			const lightboxButton = document.querySelector(
 				`[id="img-${position}"] gu-island button`,
 			);
+			log('dotcom', `💡 Simulating click on image ${position}`);
 			lightboxButton?.dispatchEvent(
 				new MouseEvent('click', { bubbles: true }),
 			);
