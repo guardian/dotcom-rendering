@@ -1,6 +1,34 @@
 import type { EnhancedImageForLightbox, FEElement } from '../types/content';
 
 /**
+ * Only allow the lightbox to show images that have a source with a width greater
+ * than 620 pixels.
+ *
+ * Frontend has similar logic here:
+ * https://github.com/guardian/frontend/blob/126dfcbc1aa961650b7f7ff41ee50a12782bb62e/common/app/model/content.scala#L549
+ *
+ */
+const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
+	const fields = image.media.allImages[0]?.fields;
+	if (!fields) return false; // Unlikely
+	const { width, height } = fields;
+	const orientation =
+		parseInt(width) > parseInt(height) ? 'horizontal' : 'portrait';
+	switch (orientation) {
+		case 'horizontal':
+			// If any width is above 620 we allow this image in lightbox
+			return image.media.allImages.some(
+				(mediaImg) => parseInt(mediaImg.fields.width) > 620,
+			);
+		case 'portrait':
+			// If any height is above 620 we allow this image in lightbox
+			return image.media.allImages.some(
+				(mediaImg) => parseInt(mediaImg.fields.height) > 620,
+			);
+	}
+};
+
+/**
  * Generates a new array of lightbox images. Does not mutate.
  *
  * We decide this array, prior to rendering, because we create and
@@ -78,5 +106,5 @@ export const buildLightboxImages = (
 			alreadySeen.push(imageId);
 		}
 	});
-	return uniqueImages;
+	return uniqueImages.filter(isLightboxable);
 };
