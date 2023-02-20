@@ -1,10 +1,13 @@
 import { css, SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
+	fontWeights,
+	neutral,
 	palette,
 	space,
 	success,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -18,9 +21,12 @@ import type { CampaignFieldType } from 'src/types/content';
 import { FormField } from './Callout/FormField';
 
 const containerStyles = css`
-	background-color: #660505;
+	${until.desktop} {
+		background-color: #660505;
+		color: white;
+	}
+	background-color: ${neutral[86]};
 	padding: 12px;
-	color: white;
 `;
 const textStyles = css`
 	${textSans.xsmall()};
@@ -53,16 +59,21 @@ const formFieldWrapperStyles = css`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: ${space[4]}px;
-	label > div,
-	label > div > span {
-		color: white;
+	${until.desktop} {
+		label > div,
+		label > div > span {
+			color: white;
+		}
 	}
 `;
 
 const submitButtonStyles = css`
+	${until.desktop} {
+		background-color: white;
+		color: black;
+	}
+	background-color: ${neutral[7]};
 	align-self: center;
-	background-color: white;
-	color: black;
 `;
 
 const footerPaddingStyles = css`
@@ -320,29 +331,35 @@ const summaryStyles = css`
 		${focusHalo};
 	}
 	path {
-		fill: white;
+		${until.desktop} {
+			fill: white;
+		}
 	}
 	svg {
 		height: 12px;
 	}
-	${textSans.small()};
-	color: white;
+	${textSans.small({ fontWeight: 'bold' })};
 	display: flex;
 	align-items: center;
 	margin-bottom: 8px;
+	${until.desktop} {
+		color: white;
+	}
 `;
 
 const popOutStyles = css`
 	height: 18px;
 	width: 18px;
-	background-color: white;
+	${until.desktop} {
+		background-color: white;
+	}
+	background-color: black;
 	border-radius: 9px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-right: 4px;
 	svg {
-		color: black;
 		height: 8px;
 	}
 `;
