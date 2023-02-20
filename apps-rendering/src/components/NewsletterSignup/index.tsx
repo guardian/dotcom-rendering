@@ -27,6 +27,7 @@ interface Props {
 	format: ArticleFormat;
 	element: NewsletterSignUp;
 	showByDefault?: boolean;
+	skipLinkIdSuffix?: string;
 }
 
 const containerStyles = (showByDefault: boolean): SerializedStyles => css`
@@ -110,6 +111,7 @@ const NewsletterSignup: FC<Props> = ({
 	format,
 	element,
 	showByDefault = false,
+	skipLinkIdSuffix = '',
 }) => {
 	const {
 		name,
@@ -125,7 +127,7 @@ const NewsletterSignup: FC<Props> = ({
 			css={containerStyles(showByDefault)}
 		>
 			<InlineSkipToWrapper
-				id={`newsletter-promotion-for-${identityName}`}
+				id={`newsletter-promotion-for-${identityName}${skipLinkIdSuffix}`}
 				blockDescription="newsletter promotion"
 			>
 				<div css={frameStyles(format)}>
