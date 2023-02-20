@@ -12,6 +12,7 @@ const { BUILD_VARIANT } = require('./bundles');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
+const BUILD_APPS = process.env.BUILD_APPS === 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
@@ -131,15 +132,19 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	merge(
-		commonConfigs({
-			platform: 'browser.apps',
-		}),
-		require(`./webpack.config.browser`)({
-			bundle: 'apps',
-			sessionId,
-		}),
-	),
+	...(PROD || BUILD_APPS
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.apps',
+					}),
+					require(`./webpack.config.browser`)({
+						bundle: 'apps',
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
 	// Only build the variant if in production mode
 	// Use `make build` or remove the PROD check temporarily to build the variant in development
 	...(PROD && BUILD_VARIANT
