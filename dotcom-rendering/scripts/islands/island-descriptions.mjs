@@ -11,7 +11,12 @@ import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import * as zod from 'zod';
 
-/** @type {(name: string) => RegExp} */
+/**
+ * This regex is dynamic so we can find the precise JSDoc for
+ * the Island that has the name of the file it is in.
+ *
+ * @type {(name: string) => RegExp}
+ */
 const getRegExForIsland = (name) =>
 	new RegExp(
 		'\n/\\*\\*\n?' +
@@ -68,75 +73,74 @@ const processor = unified()
 /**
  * @param {Awaited<ReturnType<typeof getBundleReport>>} report
  */
-const getIslands = (report) =>
-	readdir(componentsDirectory)
-		.then((components) =>
-			components.filter((component) =>
-				component.endsWith('.importable.tsx'),
+const getIslands = async (report) => {
+	const components = await readdir(componentsDirectory);
+
+	const filenames = components.filter((component) =>
+		component.endsWith('.importable.tsx'),
+	);
+
+	const files = await Promise.all(
+		filenames.map(async (filename) => ({
+			filename,
+			content: await readFile(
+				resolve(componentsDirectory, filename),
+				'utf-8',
 			),
-		)
-		.then((filenames) =>
-			Promise.all(
-				filenames.map(async (filename) => ({
-					filename,
-					content: await readFile(
-						resolve(componentsDirectory, filename),
-						'utf-8',
-					),
-				})),
-			),
-		)
-		.then((files) =>
-			Promise.all(
-				files.map(async ({ filename, content }) => {
-					const name = filename.replace('.importable.tsx', '');
-					const { gzipSize = 0, parsedSize = 0 } =
-						report.find(({ label }) =>
-							label.startsWith(name + '-importable.'),
-						) ?? {};
+		})),
+	);
 
-					const matched = content.match(getRegExForIsland(name));
+	const islandsData = await Promise.all(
+		files.map(async ({ filename, content }) => {
+			const name = filename.replace('.importable.tsx', '');
+			const { gzipSize = 0, parsedSize = 0 } =
+				report.find(({ label }) =>
+					label.startsWith(name + '-importable.'),
+				) ?? {};
 
-					const { index, match } = matched
-						? { match: matched[1], index: matched.index ?? -1 }
-						: { match: undefined, index: -1 };
+			const matched = content.match(getRegExForIsland(name));
 
-					const lines = match
-						? '#' +
-						  [
-								content.slice(0, index).split('\n').length + 1,
-								content
-									.slice(0, index + match.length)
-									.split('\n').length + 2,
-						  ]
-								.map((line_count) => `L${line_count}`)
-								.join('-')
-						: '';
+			const { index, match } = matched
+				? { match: matched[1], index: matched.index ?? -1 }
+				: { match: undefined, index: -1 };
 
-					const description =
-						matched?.[1]
-							?.split('\n')
-							.map((jsdoc_line) => jsdoc_line.slice(3))
-							.join('\n') ??
-						`# ${name} \n No description yet… 😢`;
+			const lines = match
+				? '#' +
+				  [
+						content.slice(0, index).split('\n').length + 1,
+						content.slice(0, index + match.length).split('\n')
+							.length + 2,
+				  ]
+						.map((line_count) => `L${line_count}`)
+						.join('-')
+				: '';
 
-					const html = await processor.process(description);
+			const description =
+				matched?.[1]
+					?.split('\n')
+					.map((jsdoc_line) => jsdoc_line.slice(3))
+					.join('\n') ?? `# ${name} \n No description yet… 😢`;
 
-					return { html, gzipSize, parsedSize, filename, lines };
-				}),
-			),
-		)
+			const html = await processor.process(description);
 
-		.then((islandsData) =>
-			islandsData
-				.sort((a, b) => b.gzipSize - a.gzipSize)
-				.map(
-					({ gzipSize, parsedSize, html, filename, lines }) => `<li>
+			return { html, gzipSize, parsedSize, filename, lines };
+		}),
+	);
+
+	return islandsData
+		.slice()
+		.sort((a, b) => b.gzipSize - a.gzipSize)
+		.map(({ gzipSize, parsedSize, html, filename, lines }) => {
+			const gzip = [
+				(gzipSize / 1024).toFixed(1),
+				'kB gzip ',
+				getTrafficLight(gzipSize),
+			].join('');
+			const parsed = `${(parsedSize / 1024).toFixed(1)}kB parsed`;
+			return `<li>
     <header>
-        <h4>${(gzipSize / 1024).toFixed(1)}kB gzip ${getTrafficLight(
-						gzipSize,
-					)}</h4>
-        <h4>${(parsedSize / 1024).toFixed(1)}kB parsed</h4>
+        <h4>${gzip}</h4>
+        <h4>${parsed}</h4>
     </header>
 
     <main>
@@ -146,9 +150,9 @@ const getIslands = (report) =>
     <footer>
     See <a href="https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/components/${filename}${lines}">…/components/${filename}${lines}</a> online
     </footer>
-    </li>`,
-				),
-		);
+    </li>`;
+		});
+};
 
 /**
  * @param {string[]} islands
