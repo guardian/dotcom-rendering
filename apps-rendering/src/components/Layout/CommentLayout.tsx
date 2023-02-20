@@ -97,7 +97,10 @@ const CommentLayout: FC<Props> = ({ item }) => {
 						format={item}
 					/>
 					<StraightLines
-						cssOverrides={[commentLineStylePosition, lineStyles(format)]}
+						cssOverrides={[
+							commentLineStylePosition,
+							lineStyles(format),
+						]}
 						count={8}
 					/>
 					<div css={articleWidthStyles}>

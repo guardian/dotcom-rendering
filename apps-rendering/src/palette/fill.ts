@@ -328,7 +328,7 @@ const linesDark = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return neutral[20];
 	}
-}
+};
 
 const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
 	neutral[7];
