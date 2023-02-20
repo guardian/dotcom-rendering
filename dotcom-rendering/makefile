@@ -37,7 +37,7 @@ build: clean-dist install
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: install
 	$(call log, "starting PROD server...")
@@ -79,24 +79,24 @@ run-ci: stop build-ci start-ci
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-apps: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true BUILD_APPS=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_APPS=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development SKIP_LEGACY=true NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 

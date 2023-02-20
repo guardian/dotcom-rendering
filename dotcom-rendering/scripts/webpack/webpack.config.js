@@ -7,15 +7,15 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
+const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
-const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
+const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
 const BUILD_APPS = process.env.BUILD_APPS === 'true';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
-const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
 const sessionId = uuidv4();
 
@@ -145,7 +145,7 @@ module.exports = [
 		  ]
 		: []),
 	// TODO: ignore static files for legacy compilation
-	...(INCLUDE_LEGACY
+	...(PROD || BUILD_LEGACY
 		? [
 				merge(
 					commonConfigs({
