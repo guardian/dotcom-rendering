@@ -1,4 +1,3 @@
-import { isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -55,18 +54,14 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial = !front.isAdFreeUser;
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
-			loadCommercial &&
-				(process.env.COMMERCIAL_BUNDLE_URL ??
-					front.config.commercialBundleUrl),
-		]
-			.filter(isString)
-			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				front.config.commercialBundleUrl,
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
