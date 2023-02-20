@@ -85,6 +85,10 @@ dev-apps: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development SKIP_LEGACY=true BUILD_APPS=true webpack serve --config ./scripts/webpack/webpack.config.js
 
+dev-variant: clear clean-dist install
+	$(call log, "starting DEV server")
+	@NODE_ENV=development SKIP_LEGACY=true BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
+
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
