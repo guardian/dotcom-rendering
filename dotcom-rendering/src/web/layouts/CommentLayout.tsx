@@ -426,6 +426,35 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<StandardGrid display={format.display}>
+						<GridItem area="media">
+							<div
+								css={
+									format.display === ArticleDisplay.Showcase
+										? mainMediaWrapper
+										: maxWidth
+								}
+							>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										article.starRating
+											? article.starRating
+											: undefined
+									}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -503,35 +532,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
-						</GridItem>
-						<GridItem area="media">
-							<div
-								css={
-									format.display === ArticleDisplay.Showcase
-										? mainMediaWrapper
-										: maxWidth
-								}
-							>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										article.starRating
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
 						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>

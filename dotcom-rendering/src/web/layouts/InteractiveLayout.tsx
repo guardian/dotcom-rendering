@@ -387,6 +387,22 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						className={interactiveLegacyClasses.contentInteractive}
 					>
 						<InteractiveGrid>
+							<GridItem area="media">
+								<div css={maxWidth}>
+									<MainMedia
+										format={format}
+										elements={article.mainMediaElements}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={article.pageId}
+										webTitle={article.webTitle}
+										ajaxUrl={article.config.ajaxUrl}
+										switches={article.config.switches}
+										isAdFreeUser={article.isAdFreeUser}
+										isSensitive={article.config.isSensitive}
+									/>
+								</div>
+							</GridItem>
 							<GridItem area="title" element="aside">
 								<div
 									className={`${interactiveLegacyClasses.contentLabels} ${interactiveLegacyClasses.contentLabelsNotImmersive}`}
@@ -444,22 +460,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 									standfirst={article.standfirst}
 								/>
 							</GridItem>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										elements={article.mainMediaElements}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={article.pageId}
-										webTitle={article.webTitle}
-										ajaxUrl={article.config.ajaxUrl}
-										switches={article.config.switches}
-										isAdFreeUser={article.isAdFreeUser}
-										isSensitive={article.config.isSensitive}
-									/>
-								</div>
-							</GridItem>
+
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
