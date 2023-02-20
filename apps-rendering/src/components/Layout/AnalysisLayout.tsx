@@ -73,7 +73,7 @@ const AnalysisLayout: FC<Props> = ({ item }) => {
 							<Byline {...item} />
 							<Standfirst item={item} />
 							<StraightLines
-								cssOverrides={lineStyles}
+								cssOverrides={lineStyles(format)}
 								count={4}
 							/>
 							<Metadata item={item} />
