@@ -15,15 +15,9 @@ import type {
 const MAX_INLINE_ADS = 8;
 
 /**
- * Minimum amount of space in pixels between the top of
- * the liveblog container and the highest inline ad.
- */
-const MIN_SPACE_BEFORE_FIRST_AD = 500;
-
-/**
  * Minimum amount of space in pixels between any pair of inline ads.
  */
-const MIN_SPACE_BETWEEN_ADS = 1_800;
+const MIN_SPACE_BETWEEN_ADS = 1_600;
 
 /**
  * Estimated margin associated with an element.
@@ -220,13 +214,12 @@ const shouldDisplayAd = (
 		return false;
 	}
 
-	const isFirstAd = numAdsInserted === 0;
+	const isFirstAd = block === 1;
+	if (isFirstAd) {
+		return true;
+	}
 
-	const minSpaceToShowAd = isFirstAd
-		? MIN_SPACE_BEFORE_FIRST_AD
-		: MIN_SPACE_BETWEEN_ADS;
-
-	return numPixelsWithoutAdvert > minSpaceToShowAd;
+	return numPixelsWithoutAdvert > MIN_SPACE_BETWEEN_ADS;
 };
 
 export { calculateApproximateBlockHeight, shouldDisplayAd };

@@ -18,6 +18,20 @@ type Props = {
 
 const Loading = () => <Placeholder height={230} />;
 
+/**
+ * # Get Match Nav
+ *
+ * Wrapper around `MatchNav` with loading and fallback.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We poll the results from the match url on the client-side.
+ * e.g. https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2023/02/08/12/28.json?dcr=true
+ *
+ * ---
+ *
+ * [`MatchNav` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-matchnav)
+ */
 export const GetMatchNav = ({
 	matchUrl,
 	headlineString,

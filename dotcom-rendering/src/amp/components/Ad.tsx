@@ -45,7 +45,8 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 };
 
 interface CommercialConfig {
-	usePrebid: boolean;
+	usePubmaticPrebid: boolean;
+	useCriteoPrebid: boolean;
 	usePermutive: boolean;
 	useAmazon: boolean;
 }
@@ -69,7 +70,7 @@ export const Ad = ({
 	contentType,
 	commercialProperties,
 	adTargeting,
-	config: { useAmazon, usePrebid, usePermutive },
+	config: { useAmazon, usePubmaticPrebid, useCriteoPrebid, usePermutive },
 	adType,
 }: AdProps) => {
 	const adSizes = adType.isSticky ? stickySizes : inlineSizes;
@@ -79,7 +80,8 @@ export const Ad = ({
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	const rtcConfig = realTimeConfig(
-		usePrebid,
+		usePubmaticPrebid,
+		useCriteoPrebid,
 		usePermutive,
 		useAmazon,
 		adType,

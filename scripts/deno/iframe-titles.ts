@@ -1,4 +1,4 @@
-import { array, object, string } from 'https://cdn.skypack.dev/zod@3.17?dts';
+import { array, object, string } from 'npm:zod@3';
 import {
 	DOMParser,
 	Element,
