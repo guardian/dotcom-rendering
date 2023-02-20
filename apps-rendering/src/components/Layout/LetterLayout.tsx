@@ -75,7 +75,7 @@ const LetterLayout: FC<Props> = ({ item }) => {
 						format={item}
 					/>
 					<StraightLines
-						cssOverrides={[linePosition, lineStyles]}
+						cssOverrides={[linePosition, lineStyles(format)]}
 						count={8}
 					/>
 					<div css={articleWidthStyles}>
