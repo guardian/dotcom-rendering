@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import {
 	brandAlt,
-	breakpoints,
 	from,
 	headline,
 	neutral,
@@ -13,18 +13,16 @@ import { useEffect, useRef, useState } from 'react';
 import type { DCRFrontCard } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { getZIndex } from '../lib/getZIndex';
-import { LI } from './Card/components/LI';
-import { PlayIcon } from './Card/components/PlayIcon';
-import { FrontCard } from './FrontCard';
+import type { CarouselCardProps } from './FixedVideo';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
-import { generateSources } from './Picture';
 
 type Props = {
 	trails: DCRFrontCard[];
 	containerName: string;
 	ophanComponentLink: string;
 	ophanComponentName: string;
+	CarouselCard: ({ trail, isFirst }: CarouselCardProps) => EmotionJSX.Element;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -120,7 +118,7 @@ const carouselStyle = css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
-	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
+	overflow-y: scroll; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
 
 	${from.tablet} {
 		&::-webkit-scrollbar {
@@ -134,9 +132,9 @@ const carouselStyle = css`
 		margin-left: -10px; /* Align firstcard on mobile devices */
 	}
 
-	${from.desktop} {
+	/* ${from.desktop} {
 		padding-left: 200px;
-	}
+	} */
 `;
 
 const dotsStyle = css`
@@ -280,89 +278,10 @@ const titleStyle = css`
 	color: ${neutral[97]};
 `;
 
-const desktopCarouselCardContainer = css`
-	position: relative;
-	scroll-snap-align: center;
-	max-height: 425px;
-	max-width: 710px;
-`;
-
-const mobileCarouselCardContainer = css`
-	height: 251px;
-	width: 250px;
-`;
-
-const frontCardContainer = css`
-	position: absolute;
-	top: 5px;
-	left: 10px;
-	max-width: 220px;
-	max-height: 78px;
-`;
-
-const playIconContainer = css`
-	position: absolute;
-	bottom: 9px;
-	left: 6px;
-`;
-
 const Title = ({ title }: { title: string }) => (
 	<h2 css={headerStyles}>
 		<span css={titleStyle}>{title}</span>
 	</h2>
-);
-
-type CarouselCardProps = {
-	isFirst: boolean;
-	trail: DCRFrontCard;
-};
-
-const CarouselCard = ({ trail, isFirst }: CarouselCardProps) => (
-	<>
-		<Hide when="above" breakpoint="desktop">
-			<LI
-				// percentage="25%"
-				showDivider={false}
-				padSides={true}
-				padSidesOnMobile={true}
-				snapAlignStart={true}
-			>
-				<div css={mobileCarouselCardContainer}>
-					<FrontCard
-						trail={trail}
-						imageUrl={trail.image}
-						imageSize={trail.image ? 'small' : undefined}
-						imagePositionOnMobile={'bottom'}
-					/>
-				</div>
-			</LI>
-		</Hide>
-		<Hide when="below" breakpoint="desktop">
-			<LI percentage="25%" showDivider={false} snapAlignStart={false}>
-				<a href={trail.url}>
-					<div css={desktopCarouselCardContainer}>
-						<MediaCarouselPicture
-							image={trail.image ?? ''}
-							alt={trail.dataLinkName}
-						/>
-						<div css={playIconContainer}>
-							<PlayIcon
-								imageSize="large"
-								imagePositionOnMobile="bottom"
-							/>
-						</div>
-						<div css={frontCardContainer}>
-							<FrontCard
-								trail={trail}
-								imagePosition="none"
-								showMainVideo={false}
-							/>
-						</div>
-					</div>
-				</a>
-			</LI>
-		</Hide>
-	</>
 );
 
 type HeaderAndNavProps = {
@@ -401,42 +320,10 @@ const HeaderAndNav = ({
 	</div>
 );
 
-type MediaCarouselPictureProps = {
-	image: string;
-	alt: string;
-};
-
-const imageStyles = css`
-	width: 710px;
-`;
-
-const MediaCarouselPicture = ({ image, alt }: MediaCarouselPictureProps) => {
-	const [source] = generateSources(image, [
-		{ breakpoint: breakpoints.desktop, width: 710 },
-	]);
-
-	if (!source) throw new Error('Missing source');
-
-	return (
-		<>
-			<picture>
-				{/* High resolution (HDPI) sources*/}
-				<source
-					srcSet={source.hiResUrl}
-					media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
-				/>
-				{/* Low resolution (MDPI) source*/}
-				<source srcSet={source.lowResUrl} />
-
-				<img alt={alt} src={source.lowResUrl} css={imageStyles} />
-			</picture>
-		</>
-	);
-};
-
 export const MediaCarousel = ({
 	trails,
 	containerName,
+	CarouselCard,
 	ophanComponentLink,
 	ophanComponentName,
 }: Props) => {
@@ -463,6 +350,7 @@ export const MediaCarousel = ({
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 		const [offset] = offsets;
+
 		if (current === null || offset === undefined) return 0;
 
 		const scrolled = current.scrollLeft + offset;
@@ -541,9 +429,7 @@ export const MediaCarousel = ({
 		}
 	});
 
-	// No idea if this is the best approach but it prevents issues with libDebounce
-	// using old data to determine the max index. Instead we say update maxIndex
-	// when index changes and compare it against the prior maxIndex only.
+	// prevents issues with libDebounce using old data to determine the max index. Instead we say update maxIndex when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
 	return (

@@ -1,16 +1,17 @@
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { neutral } from '@guardian/source-foundations';
-import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
+import type { DCRFrontCard } from '../../types/front';
+import { CarouselCardProps } from './CarouselCard';
 import { Island } from './Island';
 import { MediaCarousel } from './MediaCarousel.importable';
 import { Section } from './Section';
 
 type Props = {
 	trails: DCRFrontCard[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
 	containerName: string;
 	ophanComponentLink: string;
 	ophanComponentName: string;
+	CarouselCard: ({ trail, isFirst }: CarouselCardProps) => EmotionJSX.Element;
 };
 
 export const FixedVideo = ({
@@ -18,6 +19,7 @@ export const FixedVideo = ({
 	containerName,
 	ophanComponentLink,
 	ophanComponentName,
+	CarouselCard,
 }: Props) => {
 	if (!trails[0]) return null;
 
@@ -29,8 +31,10 @@ export const FixedVideo = ({
 					containerName={containerName}
 					ophanComponentLink={ophanComponentLink}
 					ophanComponentName={ophanComponentName}
+					CarouselCard={CarouselCard}
 				/>
 			</Island>
 		</Section>
 	);
 };
+export { CarouselCardProps };
