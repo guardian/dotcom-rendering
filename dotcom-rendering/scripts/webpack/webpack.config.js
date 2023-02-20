@@ -100,7 +100,6 @@ const commonConfigs = ({ platform }) => ({
 });
 
 module.exports = [
-	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
@@ -108,7 +107,15 @@ module.exports = [
 		require(`./webpack.config.server`)({ sessionId }),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
-	// browser bundle configs
+	merge(
+		commonConfigs({
+			platform: 'browser.modern',
+		}),
+		require(`./webpack.config.browser`)({
+			bundle: 'modern',
+			sessionId,
+		}),
+	),
 	// TODO: ignore static files for legacy compilation
 	...(INCLUDE_LEGACY
 		? [
@@ -123,15 +130,6 @@ module.exports = [
 				),
 		  ]
 		: []),
-	merge(
-		commonConfigs({
-			platform: 'browser.modern',
-		}),
-		require(`./webpack.config.browser`)({
-			bundle: 'modern',
-			sessionId,
-		}),
-	),
 	...(PROD || BUILD_APPS
 		? [
 				merge(
