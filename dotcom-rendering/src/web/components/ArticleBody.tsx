@@ -124,7 +124,7 @@ const decideLanguage = (language = ''): string | undefined =>
 
 const decideLanguageDirection = (
 	isRightToLeftLang = false,
-): 'rtl' | undefined => isRightToLeftLang ? 'rtl' : undefined;
+): 'rtl' | undefined => (isRightToLeftLang ? 'rtl' : undefined);
 
 export const ArticleBody = ({
 	format,
