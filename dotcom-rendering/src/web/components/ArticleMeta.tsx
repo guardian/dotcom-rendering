@@ -23,7 +23,7 @@ import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
-import { SendAMessage } from './MessageUs';
+import { SendAMessage } from './SendAMessage';
 import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
@@ -380,6 +380,7 @@ export const ArticleMeta = ({
 								formFields={MessageForm.formFields}
 								submissionURL={MessageForm.submissionURL}
 								formID={MessageForm.formID}
+								format={format}
 							/>
 							<Dateline
 								primaryDateline={primaryDateline}

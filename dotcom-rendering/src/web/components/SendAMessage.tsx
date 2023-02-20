@@ -1,7 +1,6 @@
 import { css, SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
-	fontWeights,
 	neutral,
 	palette,
 	space,
@@ -18,11 +17,12 @@ import {
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from 'src/types/content';
+import { decidePalette } from '../lib/decidePalette';
 import { FormField } from './Callout/FormField';
 
-const containerStyles = css`
+const containerStyles = (format: ArticleFormat) => css`
 	${until.desktop} {
-		background-color: #660505;
+		background-color: ${decidePalette(format).background.messageForm};
 		color: white;
 	}
 	background-color: ${neutral[86]};
@@ -95,9 +95,15 @@ type FormProps = {
 	formFields: CampaignFieldType[];
 	submissionURL: string;
 	formID: string;
+	format: ArticleFormat;
 };
 
-export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
+export const Form = ({
+	formFields,
+	submissionURL,
+	formID,
+	format,
+}: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -208,7 +214,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 
 	if (submissionSuccess) {
 		return (
-			<div css={containerStyles}>
+			<div css={containerStyles(format)}>
 				<div css={tickBoxStyles}>
 					<SvgTickRound />
 				</div>
@@ -220,7 +226,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 	}
 
 	return (
-		<div css={containerStyles}>
+		<div css={containerStyles(format)}>
 			<div css={prefaceStyles}>
 				<span css={{ fontWeight: 'bold' }}>Please note: </span>This is
 				not a public comment – only the Guardian can see your message.
@@ -368,6 +374,7 @@ export const SendAMessage = ({
 	formFields,
 	submissionURL,
 	formID,
+	format,
 }: FormProps) => {
 	return (
 		<details css={detailsStyles}>
@@ -387,6 +394,7 @@ export const SendAMessage = ({
 				formFields={formFields}
 				submissionURL={submissionURL}
 				formID={formID}
+				format={format}
 			/>
 		</details>
 	);
