@@ -39,7 +39,7 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case '/FrontJSON':
 				return handleFrontJson(req, res, next);
-			case '/apps/Article':
+			case '/AppsArticle':
 				return handleAppsArticle(req, res, next);
 			default: {
 				if (req.url.match(ARTICLE_URL)) {

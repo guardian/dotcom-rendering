@@ -61,7 +61,7 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/apps/Article', logRenderTime, handleAppsArticle);
+	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
