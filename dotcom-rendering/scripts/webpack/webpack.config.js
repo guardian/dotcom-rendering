@@ -131,7 +131,7 @@ module.exports = [
 				),
 		  ]
 		: []),
-	...(PROD || (BUILD_VARIANT_SWITCH && BUILD_VARIANT)
+	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? [
 				merge(
 					commonConfigs({
