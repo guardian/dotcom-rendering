@@ -1010,7 +1010,7 @@ const tagDark = ({ design, theme }: ArticleFormat): Colour => {
 		default:
 			return neutral[20];
 	}
-}
+};
 
 const pinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
