@@ -58,6 +58,10 @@ export const decideDesign = ({
 			return ArticleDesign.NewsletterSignup;
 		case 'ExplainerDesign':
 			return ArticleDesign.Explainer;
+		case 'TimelineDesign':
+			return ArticleDesign.Timeline;
+		case 'ProfileDesign':
+			return ArticleDesign.Profile;
 		default:
 			return ArticleDesign.Standard;
 	}
