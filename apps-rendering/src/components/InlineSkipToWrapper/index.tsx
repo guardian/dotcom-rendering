@@ -1,6 +1,10 @@
+// ----- Imports ----- //
+
 import { css } from '@emotion/react';
 import { border, neutral, textSans } from '@guardian/source-foundations';
-import type { ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
+
+// ----- Component ----- //
 
 type Props = {
 	id: string;
@@ -40,7 +44,7 @@ const skipLinkCss = css`
 // announce the text oddly.
 // https://github.com/guardian/dotcom-rendering/pull/6950#pullrequestreview-1279406318
 
-export const InlineSkipToWrapper = ({
+const InlineSkipToWrapper: FC<Props> = ({
 	id,
 	blockDescription,
 	children,
@@ -68,3 +72,7 @@ export const InlineSkipToWrapper = ({
 		</>
 	);
 };
+
+// ----- Exports ----- //
+
+export default InlineSkipToWrapper;

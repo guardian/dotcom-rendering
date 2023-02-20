@@ -18,8 +18,8 @@ import { background, border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
+import InlineSkipToWrapper from '../InlineSkipToWrapper';
 import PrivacyWording from './PrivacyWording';
-import { InlineSkipToWrapper } from 'components/InlineSkipToWrapper';
 
 // ----- Component ----- //
 
