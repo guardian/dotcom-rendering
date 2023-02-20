@@ -225,7 +225,7 @@ export const WithExternalLink = () => {
 					{...basicCardProps}
 					imagePosition="right"
 					kickerText="Instagram"
-					headlineSize='huge'
+					headlineSize="huge"
 					headlineText="Follow The Guardian now"
 					isExternalLink={true}
 				/>
