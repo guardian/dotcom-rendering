@@ -1,5 +1,6 @@
 import type { Handler } from 'express';
 import { handleAMPArticle } from '../amp/server';
+import { handleAppsArticle } from '../apps/server';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -40,6 +41,8 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case '/FrontJSON':
 				return handleFrontJson(req, res, next);
+			case '/AppsArticle':
+				return handleAppsArticle(req, res, next);
 			default: {
 				// Do not redirect assets urls
 				if (req.url.match(ASSETS_URL)) return next();
