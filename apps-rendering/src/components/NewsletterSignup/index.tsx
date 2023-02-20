@@ -19,6 +19,7 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
+import { InlineSkipToWrapper } from 'components/InlineSkipToWrapper';
 
 // ----- Component ----- //
 
@@ -28,10 +29,12 @@ interface Props {
 	showByDefault?: boolean;
 }
 
-const containerStyles = (
-	format: ArticleFormat,
-	showByDefault: boolean,
-): SerializedStyles => css`
+const containerStyles = (showByDefault: boolean): SerializedStyles => css`
+	display: ${showByDefault ? 'block' : 'none'};
+	clear: both;
+`;
+
+const frameStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
 	border: ${border.newsletterSignUpForm(format)} 0.1875rem dashed;
 	color: ${text.newsletterSignUpForm(format)};
@@ -48,8 +51,6 @@ const containerStyles = (
 		border-color: ${border.newsletterSignUpFormDark(format)};
 		color: ${text.newsletterSignUpFormDark(format)};
 	`}
-
-	display: ${showByDefault ? 'block' : 'none'};
 `;
 
 const stackBelowTabletStyles = css`
@@ -105,9 +106,6 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-/**
- * NOTE: this component is non functional and is for demonstration only.
- */
 const NewsletterSignup: FC<Props> = ({
 	format,
 	element,
@@ -123,31 +121,38 @@ const NewsletterSignup: FC<Props> = ({
 	} = element;
 	return (
 		<aside
-			css={containerStyles(format, showByDefault)}
 			className="js-signup-form-container"
+			css={containerStyles(showByDefault)}
 		>
-			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span>
-				</p>
+			<InlineSkipToWrapper
+				id={`newsletter-promotion-for-${identityName}`}
+				blockDescription="newsletter promotion"
+			>
+				<div css={frameStyles(format)}>
+					<div css={stackBelowTabletStyles}>
+						<p css={titleStyles(theme)}>
+							Sign up to <span>{name}</span>
+						</p>
 
-				<div css={noHeightFromTabletStyles}>
-					<div css={iconHolderStyles}>
-						<SvgNewsletter size="small" />
-						<b>{frequency}</b>
+						<div css={noHeightFromTabletStyles}>
+							<div css={iconHolderStyles}>
+								<SvgNewsletter size="small" />
+								<b>{frequency}</b>
+							</div>
+						</div>
 					</div>
+
+					<p css={descriptionStyles}>{description}</p>
+
+					<EmailSignupForm
+						identityName={identityName}
+						format={format}
+						successDescription={successDescription}
+					/>
+
+					<PrivacyWording useCaptcha={false} format={format} />
 				</div>
-			</div>
-
-			<p css={descriptionStyles}>{description}</p>
-
-			<EmailSignupForm
-				identityName={identityName}
-				format={format}
-				successDescription={successDescription}
-			/>
-
-			<PrivacyWording useCaptcha={false} format={format} />
+			</InlineSkipToWrapper>
 		</aside>
 	);
 };
