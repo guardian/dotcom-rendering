@@ -88,7 +88,7 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/apps/Article',
+		'/AppsArticle',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
