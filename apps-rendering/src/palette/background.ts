@@ -949,8 +949,8 @@ const seriesDark = ({ design, display, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const tag = (format: ArticleFormat): Colour => {
-	switch (format.design) {
+const tag = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
 		case ArticleDesign.Gallery:
 			return neutral[10];
 		case ArticleDesign.Editorial:
@@ -960,13 +960,57 @@ const tag = (format: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 			return neutral[93];
 		case ArticleDesign.Analysis:
-			return neutral[100];
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[86];
+				default:
+					return neutral[100];
+			}
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[86];
+				default:
+					return neutral[97];
+			}
 		default:
 			return neutral[97];
 	}
 };
 
-const tagDark = (_format: ArticleFormat): Colour => neutral[20];
+const tagDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[7];
+				default:
+					return neutral[20];
+			}
+		default:
+			return neutral[20];
+	}
+}
 
 const pinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
