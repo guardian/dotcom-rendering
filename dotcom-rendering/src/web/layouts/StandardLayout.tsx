@@ -658,6 +658,10 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 									keywordIds={article.config.keywordIds}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (

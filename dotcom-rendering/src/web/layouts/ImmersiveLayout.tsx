@@ -637,6 +637,10 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isDev={!!article.config.isDev}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

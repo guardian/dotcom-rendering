@@ -113,6 +113,8 @@ export interface FEArticleType {
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
 	showTableOfContents: boolean;
+	lang?: string;
+	isRightToLeftLang?: boolean;
 }
 
 export interface TableOfContents {

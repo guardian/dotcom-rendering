@@ -596,6 +596,10 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										tableOfContents={
 											article.tableOfContents
 										}
+										lang={article.lang}
+										isRightToLeftLang={
+											article.isRightToLeftLang
+										}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>

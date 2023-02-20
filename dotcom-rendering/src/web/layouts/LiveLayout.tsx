@@ -1046,6 +1046,10 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
+													lang={article.lang}
+													isRightToLeftLang={
+														article.isRightToLeftLang
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
