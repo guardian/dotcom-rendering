@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedSmallSlowVMPU,
@@ -18,9 +18,9 @@ export default {
 };
 
 export const FourCards = () => (
-	<Section
-		title="FixedSmallSlowVMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -28,15 +28,15 @@ export const FourCards = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 FourCards.story = { name: 'With 4 cards' };
 
 export const ThreeCards = () => (
-	<Section
-		title="FixedSmallSlowVMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -44,15 +44,15 @@ export const ThreeCards = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 ThreeCards.story = { name: 'With 3 cards' };
 
 export const TwoCards = () => (
-	<Section
-		title="FixedSmallSlowVMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -60,15 +60,15 @@ export const TwoCards = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 TwoCards.story = { name: 'With 2 cards' };
 
 export const OneCard = () => (
-	<Section
-		title="FixedSmallSlowVMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Small Slow V MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -76,7 +76,7 @@ export const OneCard = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 OneCard.story = { name: 'With 1 card' };

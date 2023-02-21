@@ -30,6 +30,7 @@ const headerStyles = (fontColour?: string) => css`
 	color: ${fontColour ?? neutral[7]};
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
+	overflow-wrap: break-word; //if a single word is too long, this will break the word up rather than have the display be affected
 `;
 
 const descriptionStyles = (fontColour?: string) => css`

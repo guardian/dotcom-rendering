@@ -1,7 +1,8 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
+
 
 export default {
 	component: FixedMediumSlowXIIMPU,
@@ -18,9 +19,9 @@ export default {
 };
 
 export const OneTrail = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -28,14 +29,14 @@ export const OneTrail = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 OneTrail.story = { name: 'with one trail' };
 
 export const TwoTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -43,14 +44,14 @@ export const TwoTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 TwoTrails.story = { name: 'with two trails' };
 
 export const ThreeTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -58,14 +59,14 @@ export const ThreeTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 ThreeTrails.story = { name: 'with three trails' };
 
 export const FourTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -73,14 +74,14 @@ export const FourTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 FourTrails.story = { name: 'with four trails' };
 
 export const FiveTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -88,14 +89,14 @@ export const FiveTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 FiveTrails.story = { name: 'with five trails' };
 
 export const SixTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -103,14 +104,14 @@ export const SixTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 SixTrails.story = { name: 'with six trails' };
 
 export const SevenTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -118,14 +119,14 @@ export const SevenTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 SevenTrails.story = { name: 'with seven trails' };
 
 export const EightTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -133,14 +134,14 @@ export const EightTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 EightTrails.story = { name: 'with eight trails' };
 
 export const NineTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
+	<FrontSection
+		title="Fixed Medium Slow XII MPU"
+		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -148,6 +149,6 @@ export const NineTrails = () => (
 			showAge={true}
 			index={1}
 		/>
-	</Section>
+	</FrontSection>
 );
 NineTrails.story = { name: 'with nine trails' };
