@@ -24,6 +24,13 @@ export const devServer = (): Handler => {
 	return (req, res, next) => {
 		const path = req.path.split('/')[1];
 
+		// handle urls with the ?url=… query param
+		const url = new URL(req.url, `http://localhost:3030/`);
+		const sourceUrl = url.searchParams.get('url');
+		if (sourceUrl !== null) {
+			return res.redirect(url.pathname + '/' + sourceUrl);
+		}
+
 		switch (path) {
 			case 'Article':
 				return handleArticle(req, res, next);
