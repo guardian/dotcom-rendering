@@ -11,6 +11,8 @@ import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
 import * as zod from 'zod';
 
+const dir = resolve(fileURLToPath(import.meta.url), '../../../dist/stats');
+
 /**
  * This regex is dynamic so we can find the precise JSDoc for
  * the Island that has the name of the file it is in.
@@ -41,13 +43,7 @@ const chunk = zod.object({
 
 /** Sorted by gzipSize */
 const getBundleReport = () =>
-	readFile(
-		resolve(
-			fileURLToPath(import.meta.url),
-			'../../../dist/browser.modern-bundles.json',
-		),
-		'utf-8',
-	)
+	readFile(resolve(dir, '/browser.modern-bundles.json'), 'utf-8')
 		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
 
@@ -173,14 +169,7 @@ const generateIslandDescriptions = async () => {
 		const islands = await getIslands(report);
 		const html = await getHtml(islands);
 
-		await writeFile(
-			resolve(
-				fileURLToPath(import.meta.url),
-				'../../../dist',
-				'islands.html',
-			),
-			html,
-		);
+		await writeFile(resolve(dir, 'islands.html'), html);
 
 		console.info('Succesfully generated Island report card:');
 		console.info('dist/islands.html');
