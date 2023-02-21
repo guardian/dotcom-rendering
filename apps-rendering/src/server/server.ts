@@ -425,15 +425,11 @@ The DCR route follows the pattern:
 /AppsArticle?url=https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
 */
 app.get(
-	'/AppsArticle',
+	'/AppsArticle/*',
 	express.raw(),
 	(req, res, next) => {
-		const urlQueryParam = req.query.url?.toString();
-		if (!urlQueryParam) {
-			return res.status(400).send('Missing url query parameter');
-		}
-
-		const articleId = new URL(urlQueryParam).pathname;
+		const contentWebUrl = req.params[0];
+		const articleId = new URL(contentWebUrl).pathname;
 		req.params = {
 			0: articleId,
 		};
