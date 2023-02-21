@@ -36,6 +36,8 @@ const ignoreErrors = [
 	// Ignore load script errors for ad and tracking scripts as they can be blocked by browsers and ad blockers
 	// google publisher tag
 	/Error loading script.*googletagservices.com\/tag\/js\/gpt.js/gi,
+	// ipsos mori
+	/Error loading script.*script.dotmetrics.net\/door.js/gi,
 ];
 
 const { config } = window.guardian;
