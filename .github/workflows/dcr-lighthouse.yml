@@ -41,6 +41,9 @@ jobs:
           npm install -g puppeteer-core@2.1.0 @lhci/cli@0.10.0
           lhci autorun
 
+      # We're running the deployment workflow on "push" events so that it can be used in both PRs and on the main branch.
+      # "push" event doesn't give us access to the usual PR info so we need to use an action in order to obtain that information.
+      # This action works by using the Github search API to find a associated PR given a commit ID.
       - uses: 8BitJonny/gh-get-current-pr@2.2.0
         if: github.ref != 'refs/heads/main'
         id: PR
@@ -60,4 +63,6 @@ jobs:
         env:
           LHCI_URL: ${{ matrix.group }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Merge commits will have their corresponding PR as the associated PR.
+          # We don't want to surface information to the PR after its been merged, instead it should be surfaced on #4584.
           ISSUE: ${{ github.ref == 'refs/heads/main' && '4584' || steps.PR.outputs.number }}
