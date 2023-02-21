@@ -33,6 +33,8 @@ deploy:
 build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	$(call log, "generating Islands report card")
+	@node ./scripts/islands/island-descriptions.mjs
 
 
 build-ci: clean-dist install
@@ -142,7 +144,6 @@ test-ci: clear clean-dist install
 
 bundlesize: clear clean-dist install build
 	@bundlesize
-	@node scripts/islands/descriptions.mjs
 
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
