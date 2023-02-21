@@ -3,7 +3,6 @@ import { trails } from '../../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../../types/front';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
-import { Section } from './Section';
 
 export default {
 	component: DynamicFast,
