@@ -15,11 +15,15 @@ module.exports = (on, config) => {
 	config.env = { ...config.env, ...process.env };
 
 	const webpackConfig = webpackPreprocessor.defaultOptions;
-	// Adding this here so that we can use a module from source code in the cypress tests
+	// Adding this here so that we can use the `makeWindowGuardian` method
+	// to override switches configuration
 	webpackConfig.webpackOptions.resolve = {
 		extensions: ['.ts', '.js'],
 		alias: {
-			src: path.resolve(__dirname, `../../src`),
+			windowGuardian$: path.resolve(
+				__dirname,
+				`../../src/model/window-guardian.ts`,
+			),
 		},
 	};
 	const rules = webpackConfig.webpackOptions.module.rules;

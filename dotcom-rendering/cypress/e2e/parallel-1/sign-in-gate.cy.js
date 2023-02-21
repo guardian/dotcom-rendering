@@ -1,7 +1,7 @@
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { config } from '../../../fixtures/config';
-import { makeWindowGuardian } from '../../../src/model/window-guardian';
+import { makeWindowGuardian } from 'windowGuardian';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
