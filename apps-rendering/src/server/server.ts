@@ -418,6 +418,31 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
+/**
+To enable testing in the mobile device emulators,
+this route handler adds compatability with DCR's route for apps articles.
+The DCR route follows the pattern:
+/AppsArticle?url=https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
+*/
+app.get(
+	'/AppsArticle',
+	express.raw(),
+	(req, res, next) => {
+		const urlQueryParam = req.query.url?.toString();
+		if (!urlQueryParam) {
+			return res.status(404).send('Missing url query parameter');
+		}
+
+		const articleId = new URL(urlQueryParam).pathname;
+		req.params = {
+			0: articleId,
+		};
+
+		next();
+	},
+	serveArticleGet,
+);
+
 app.get(
 	'/:edition(uk|us|au|europe|international)?/rendered-items/*',
 	express.raw(),
