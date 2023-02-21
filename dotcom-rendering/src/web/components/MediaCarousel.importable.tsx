@@ -351,7 +351,11 @@ export const MediaCarousel = ({
 		const { current } = carouselRef;
 		const offsets = getItems()
 			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
+			.map((el, ind) =>
+				ind === 0 && isDesktop
+					? el.offsetLeft + desktopMargin
+					: el.offsetLeft,
+			);
 		const [offset] = offsets;
 
 		if (current === null || offset === undefined) return 0;
