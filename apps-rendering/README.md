@@ -24,7 +24,8 @@ yarn watch
 
 View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport)).
 
-The Apps Rendering development server supports the following routes for testing articles:
+The Apps Rendering development server supports the following routes for testing
+articles in the browser:
 
 - `/path/to/content`
   - e.g [http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
@@ -35,7 +36,19 @@ The Apps Rendering development server supports the following routes for testing 
 - `/(uk|us|au|international)/rendered-items/path/to/content`
   - e.g [http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
 
-Additionally, each route above can take a `?editions` query parameter to render the article as for the Editions app.
+Additionally, each route above can take a `?editions` query parameter to render
+the article as for the Editions app.
+
+We also recommend testing articles in the mobile device simulators.
+You can start the development server on port `3030` (the port number expected by
+the device simulator) with `yarn watch:device-simulator`. The development server
+also supports a specific route for
+testing with the device simulator:
+
+- `/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth`
+  - e.g [http://localhost:3030/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+
+This route matches the one implemented by DCR for rendering apps articles.
 
 _**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 
