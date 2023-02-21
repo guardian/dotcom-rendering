@@ -10,10 +10,11 @@ const desktopCarouselCardContainer = css`
 	position: relative;
 	max-height: 425px;
 	max-width: 710px;
+	scroll-snap-align: center;
 `;
 
 const desktopCarouselOuterCardContainer = (isFirst: boolean) => css`
-	${isFirst && 'margin-left: 200px'}
+	margin-left: ${isFirst ? '200' : '0'}px;
 	min-height: 227px;
 	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 	scroll-snap-align: center;
@@ -74,6 +75,7 @@ const MediaCarouselPicture = ({ image, alt }: MediaCarouselPictureProps) => {
 export type CarouselCardProps = {
 	isFirst: boolean;
 	trail: DCRFrontCard;
+	current: number;
 };
 export const CarouselCardMobile = ({ trail }: CarouselCardProps) => {
 	return (
@@ -99,12 +101,16 @@ export const CarouselCardMobile = ({ trail }: CarouselCardProps) => {
 	);
 };
 
-export const CarouselCardDesktop = ({ trail, isFirst }: CarouselCardProps) => {
+export const CarouselCardDesktop = ({
+	trail,
+	isFirst,
+	current,
+}: CarouselCardProps) => {
 	return (
 		<>
-			<LI percentage="25%" showDivider={false} snapAlignStart={true}>
-				<a href={trail.url}>
-					<div css={desktopCarouselOuterCardContainer(isFirst)}>
+			<LI percentage="75%" showDivider={false} snapAlignStart={false}>
+				<div css={desktopCarouselOuterCardContainer(isFirst)}>
+					<a href={trail.url}>
 						<div css={desktopCarouselCardContainer}>
 							<MediaCarouselPicture
 								image={trail.image ?? ''}
@@ -124,8 +130,8 @@ export const CarouselCardDesktop = ({ trail, isFirst }: CarouselCardProps) => {
 								/>
 							</div>
 						</div>
-					</div>
-				</a>
+					</a>
+				</div>
 			</LI>
 		</>
 	);

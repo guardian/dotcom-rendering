@@ -26,6 +26,7 @@ export const FixedVideoWrapper = ({
 					ophanComponentLink={ophanComponentLink}
 					ophanComponentName={ophanComponentName}
 					CarouselCard={CarouselCardMobile}
+					isDesktop={false}
 				/>
 			</Hide>
 			<Hide when="below" breakpoint="desktop">
@@ -36,6 +37,7 @@ export const FixedVideoWrapper = ({
 					ophanComponentLink={ophanComponentLink}
 					ophanComponentName={ophanComponentName}
 					CarouselCard={CarouselCardDesktop}
+					isDesktop={true}
 				/>
 			</Hide>
 		</>

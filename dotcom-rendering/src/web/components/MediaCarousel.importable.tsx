@@ -22,7 +22,12 @@ type Props = {
 	containerName: string;
 	ophanComponentLink: string;
 	ophanComponentName: string;
-	CarouselCard: ({ trail, isFirst }: CarouselCardProps) => EmotionJSX.Element;
+	CarouselCard: ({
+		trail,
+		isFirst,
+		current,
+	}: CarouselCardProps) => EmotionJSX.Element;
+	isDesktop: boolean;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -118,7 +123,7 @@ const carouselStyle = css`
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
-	overflow-y: scroll; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
+	overflow-y: hidden; /*Fixes small problem with 1px vertical scroll on immersive due to top bar */
 
 	${from.tablet} {
 		&::-webkit-scrollbar {
@@ -130,11 +135,6 @@ const carouselStyle = css`
 
 	${until.tablet} {
 		margin-left: -10px; /* Align firstcard on mobile devices */
-	}
-
-	${from.desktop} {
-		/* padding-left: 200px; */
-		scroll-snap-align: center;
 	}
 `;
 
@@ -327,7 +327,9 @@ export const MediaCarousel = ({
 	CarouselCard,
 	ophanComponentLink,
 	ophanComponentName,
+	isDesktop,
 }: Props) => {
+	const desktopMargin = 200;
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -432,7 +434,7 @@ export const MediaCarousel = ({
 
 	// prevents issues with libDebounce using old data to determine the max index. Instead we say update maxIndex when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
-
+	const presInd = getIndex();
 	return (
 		<div css={wrapperStyle(trails.length)}>
 			<Hide when="above" breakpoint="desktop">
@@ -480,7 +482,7 @@ export const MediaCarousel = ({
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
-					{trails.map((trail, i) => {
+					{trails.map((trail, i, current) => {
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!trail.webPublicationDate) return null;
@@ -490,6 +492,7 @@ export const MediaCarousel = ({
 								key={`${trail.url}${i}`}
 								isFirst={i === 0}
 								trail={trail}
+								current={presInd}
 							/>
 						);
 					})}
