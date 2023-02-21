@@ -3,7 +3,6 @@ import { trails } from '../../../fixtures/manual/trails';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
 import { FrontSection } from './FrontSection';
 
-
 export default {
 	component: FixedLargeSlowXIV,
 	title: 'Components/FixedLargeSlowXIV',

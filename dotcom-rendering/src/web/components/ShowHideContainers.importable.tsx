@@ -25,9 +25,8 @@ export const ShowHideContainers = () => {
 		const toggleContainer = (sectionId: string, element: HTMLElement) => {
 			const isExpanded = element.getAttribute('aria-expanded') === 'true';
 
-			const section: Element | null = window.document.getElementById(
-				sectionId,
-			);
+			const section: Element | null =
+				window.document.getElementById(sectionId);
 
 			if (isExpanded) {
 				containerStates[sectionId] = 'closed';

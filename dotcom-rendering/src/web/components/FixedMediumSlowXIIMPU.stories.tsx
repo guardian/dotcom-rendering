@@ -3,7 +3,6 @@ import { trails } from '../../../fixtures/manual/trails';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
 import { FrontSection } from './FrontSection';
 
-
 export default {
 	component: FixedMediumSlowXIIMPU,
 	title: 'Components/FixedMediumSlowXIIMPU',
