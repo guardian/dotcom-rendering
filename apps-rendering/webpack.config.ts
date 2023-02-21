@@ -162,6 +162,7 @@ export const clientConfig: Configuration = {
 		devMiddleware: {
 			publicPath: '/assets/',
 		},
+		port: process.env.PORT ?? 8080,
 		proxy: {
 			'**': 'http://localhost:3040',
 		},
