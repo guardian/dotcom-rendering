@@ -430,7 +430,7 @@ app.get(
 	(req, res, next) => {
 		const urlQueryParam = req.query.url?.toString();
 		if (!urlQueryParam) {
-			return res.status(404).send('Missing url query parameter');
+			return res.status(400).send('Missing url query parameter');
 		}
 
 		const articleId = new URL(urlQueryParam).pathname;
