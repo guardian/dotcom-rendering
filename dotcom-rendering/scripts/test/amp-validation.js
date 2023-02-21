@@ -67,7 +67,7 @@ amphtmlValidator.getInstance().then((validator) => {
 	].map((url) => {
 		// COPIED DIRECTLY FROM https://www.npmjs.com/package/amphtml-validator
 		http.get(
-			`${domain}/AmpArticle?url=https://www.theguardian.com/${url}`,
+			`${domain}/AMPArticle/https://www.theguardian.com/${url}`,
 			(res) => {
 				let data = '';
 				res.on('data', function (chunk) {

@@ -15,7 +15,7 @@ if (!Cypress.env('isInTeamCity')) {
 		});
 
 		it('should send Google Analytics message on click of sponsor logo in metadata', function () {
-			cy.visit(`Article?url=${paidContentPage}`);
+			cy.visit(`/Article/${paidContentPage}`);
 
 			// Open the Privacy setting dialogue
 			cmpIframe().contains("It's your choice");
@@ -56,7 +56,7 @@ if (!Cypress.env('isInTeamCity')) {
 		});
 
 		it('should send Google Analytics message on click of sponsor logo in onwards section', function () {
-			cy.visit(`Article?url=${paidContentPage}`);
+			cy.visit(`/Article/${paidContentPage}`);
 
 			// Open the Privacy setting dialogue
 			cmpIframe().contains("It's your choice");
