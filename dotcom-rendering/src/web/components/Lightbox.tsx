@@ -37,9 +37,6 @@ const lightboxStyles = css`
 	max-height: 100vh;
 	padding: 0;
 	background-color: ${neutral[10]};
-	::backdrop {
-		background-color: ${neutral[10]};
-	}
 
 	&.hide-info {
 		/* Always hide the info aside when the hide-info class exists on the lightbox element */
@@ -362,7 +359,6 @@ export const Lightbox = ({ format, images }: Props) => {
 						overflow: hidden;
 
 						#gu-lightbox {
-							display: block;
 							position: fixed;
 							${getZIndex('lightbox')};
 						}
