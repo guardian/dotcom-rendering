@@ -8,25 +8,15 @@ import { generateSources } from './Picture';
 
 const desktopCarouselCardContainer = css`
 	position: relative;
-	scroll-snap-align: center;
 	max-height: 425px;
 	max-width: 710px;
 `;
 
 const desktopCarouselOuterCardContainer = (isFirst: boolean) => css`
-	height: 425px;
-	${isFirst && 'padding-left: 200px'}
+	${isFirst && 'margin-left: 200px'}
 	min-height: 227px;
 	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
-
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	overflow-x: auto; /* Scrollbar is less intrusive visually on non-desktop devices typically */
-	overflow-y: hidden;
+	scroll-snap-align: center;
 `;
 
 const mobileCarouselCardContainer = css`
@@ -85,55 +75,58 @@ export type CarouselCardProps = {
 	isFirst: boolean;
 	trail: DCRFrontCard;
 };
+export const CarouselCardMobile = ({ trail }: CarouselCardProps) => {
+	return (
+		<>
+			<LI
+				percentage="25%"
+				showDivider={false}
+				padSides={true}
+				padSidesOnMobile={true}
+				snapAlignStart={true}
+			>
+				<div css={mobileCarouselCardContainer}>
+					<FrontCard
+						trail={trail}
+						imageUrl={trail.image}
+						imageSize={trail.image ? 'small' : undefined}
+						imagePositionOnMobile={'bottom'}
+						imagePosition={'bottom'}
+					/>
+				</div>
+			</LI>
+		</>
+	);
+};
 
-export const CarouselCardMobile = ({ trail }: CarouselCardProps) => (
-	<>
-		<LI
-			percentage="25%"
-			showDivider={false}
-			padSides={true}
-			padSidesOnMobile={true}
-			snapAlignStart={true}
-		>
-			<div css={mobileCarouselCardContainer}>
-				<FrontCard
-					trail={trail}
-					imageUrl={trail.image}
-					imageSize={trail.image ? 'small' : undefined}
-					imagePositionOnMobile={'bottom'}
-					imagePosition={'bottom'}
-				/>
-			</div>
-		</LI>
-	</>
-);
-
-export const CarouselCardDesktop = ({ trail, isFirst }: CarouselCardProps) => (
-	<>
-		<LI percentage="25%" showDivider={false} snapAlignStart={true}>
-			<a href={trail.url}>
-				<div css={desktopCarouselOuterCardContainer(isFirst)}>
-					<div css={desktopCarouselCardContainer}>
-						<MediaCarouselPicture
-							image={trail.image ?? ''}
-							alt={trail.dataLinkName}
-						/>
-						<div css={playIconContainer}>
-							<PlayIcon
-								imageSize="large"
-								imagePositionOnMobile="bottom"
+export const CarouselCardDesktop = ({ trail, isFirst }: CarouselCardProps) => {
+	return (
+		<>
+			<LI percentage="25%" showDivider={false} snapAlignStart={true}>
+				<a href={trail.url}>
+					<div css={desktopCarouselOuterCardContainer(isFirst)}>
+						<div css={desktopCarouselCardContainer}>
+							<MediaCarouselPicture
+								image={trail.image ?? ''}
+								alt={trail.dataLinkName}
 							/>
-						</div>
-						<div css={frontCardContainer}>
-							<FrontCard
-								trail={trail}
-								imagePosition="none"
-								showMainVideo={false}
-							/>
+							<div css={playIconContainer}>
+								<PlayIcon
+									imageSize="large"
+									imagePositionOnMobile="bottom"
+								/>
+							</div>
+							<div css={frontCardContainer}>
+								<FrontCard
+									trail={trail}
+									imagePosition="none"
+									showMainVideo={false}
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
-			</a>
-		</LI>
-	</>
-);
+				</a>
+			</LI>
+		</>
+	);
+};

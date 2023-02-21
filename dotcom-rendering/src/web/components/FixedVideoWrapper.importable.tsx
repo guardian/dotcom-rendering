@@ -1,6 +1,4 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import type { DCRFrontCard } from '../../types/front';
-import type { CarouselCardProps } from './CarouselCard';
 import { CarouselCardDesktop, CarouselCardMobile } from './CarouselCard';
 import { FixedVideo } from './FixedVideo';
 import { Hide } from './Hide';
@@ -10,7 +8,6 @@ type Props = {
 	containerName: string;
 	ophanComponentLink: string;
 	ophanComponentName: string;
-	CarouselCard: ({ trail, isFirst }: CarouselCardProps) => EmotionJSX.Element;
 };
 
 export const FixedVideoWrapper = ({
@@ -18,7 +15,6 @@ export const FixedVideoWrapper = ({
 	containerName,
 	ophanComponentLink,
 	ophanComponentName,
-	CarouselCard,
 }: Props) => {
 	return (
 		<>
@@ -29,7 +25,7 @@ export const FixedVideoWrapper = ({
 					containerName={containerName}
 					ophanComponentLink={ophanComponentLink}
 					ophanComponentName={ophanComponentName}
-					CarouselCard={(props) => <CarouselCardMobile {...props} />}
+					CarouselCard={CarouselCardMobile}
 				/>
 			</Hide>
 			<Hide when="below" breakpoint="desktop">
@@ -39,7 +35,7 @@ export const FixedVideoWrapper = ({
 					containerName={containerName}
 					ophanComponentLink={ophanComponentLink}
 					ophanComponentName={ophanComponentName}
-					CarouselCard={(props) => <CarouselCardDesktop {...props} />}
+					CarouselCard={CarouselCardDesktop}
 				/>
 			</Hide>
 		</>

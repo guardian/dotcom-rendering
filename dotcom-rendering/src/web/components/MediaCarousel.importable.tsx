@@ -132,9 +132,10 @@ const carouselStyle = css`
 		margin-left: -10px; /* Align firstcard on mobile devices */
 	}
 
-	/* ${from.desktop} {
-		padding-left: 200px;
-	} */
+	${from.desktop} {
+		/* padding-left: 200px; */
+		scroll-snap-align: center;
+	}
 `;
 
 const dotsStyle = css`
