@@ -1,14 +1,14 @@
 FROM node:16.19.0-alpine AS dependencies
 
 COPY ./node_modules /opt/app/dotcom-rendering/node_modules
-COPY ./dotcom-rendering/node_modules /opt/app/dotcom-rendering/node_modules
+COPY ./dotcom-rendering/node_modules /opt/app/dotcom-rendering/dotcom-rendering/node_modules
 
 # Seperate dependencies into their own layer to allow for better caching
 FROM dependencies
 
-WORKDIR /opt/app/dotcom-rendering
+WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
 
-COPY ./dotcom-rendering/dist /opt/app/dotcom-rendering/dist
+COPY ./dotcom-rendering/dist /opt/app/dotcom-rendering/dotcom-rendering/dist
 
 EXPOSE 9000
 
