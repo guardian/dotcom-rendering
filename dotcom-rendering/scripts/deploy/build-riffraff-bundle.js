@@ -50,7 +50,7 @@ const copyStatic = () => {
 const copyDist = () => {
 	log(' - copying dist');
 	return cpy(
-		['**/*.!(html|json)'],
+		['**/*.!(html|json)', 'stats/*'],
 		path.resolve(target, 'frontend-static', 'assets'),
 		{
 			cwd: path.resolve(__dirname, '../../dist'),
