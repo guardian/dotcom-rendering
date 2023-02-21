@@ -214,6 +214,11 @@ perf-test:
 arch-diagram:
 	@npx arkit
 
+# Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
+# Adding - at the beginning of the command ignores the error and we're getting:
+# make: [snyk] Error 1 (ignored)
+# See docs: https://www.gnu.org/software/make/manual/html_node/Errors.html#:~:text=To%20ignore%20errors%20in%20a,to%20the%20shell%20for%20execution.&text=This%20causes%20make%20to%20continue,unable%20to%20remove%20a%20file
+
 snyk:
 	-@snyk test --severity-threshold=high --file="../package.json"
 

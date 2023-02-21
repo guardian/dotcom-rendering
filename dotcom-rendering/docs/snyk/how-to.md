@@ -6,7 +6,7 @@ Ask your EM or DevX to add you to `guardian-dotcom-n2y` Snyk organisation.
 ### How to log in
 1. Make sure you are logged in your Guardian Google account.
 2. Visit [https://app.snyk.io/login](https://app.snyk.io/login)
-3. Either click on the Google button ![snyk_google_login](snyk_google_login.png) or if you don't see this option click on "Log in with your company SSO", enter your Guardian Google email and proceed.
+3. Either click on the Google button </br></br> ![snyk_google_login](snyk_google_login.png) <br/><br/> or if you don't see this option click on "Log in with your company SSO", enter your Guardian Google email and proceed.
 
 ### What is the DCR Snyk dashboard structure?
 The current Snyk structure
@@ -42,6 +42,11 @@ This is especially helpful if you want to know early in the development cycle wh
 
 ### How to ignore a vulnerability?
 
-By using the UI you can get the following options when you click "Ignore":
+By using the UI you can get the following options when you click "Ignore": <br/><br/>
 ![How to ingore a vulnerabilty](snyk-screenshot.png)
 
+
+### How to see previous scans of a project?
+
+You can find previous scans (up to a day ago) in the `History` tab. This can be useful if you would like to check whether your merged change had an effect on the number of vulnerabilities. <br/><br/>
+![Snyk_History](snyk-history.png)
