@@ -14,7 +14,6 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
 const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
-const BUILD_APPS = process.env.BUILD_APPS === 'true';
 const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
@@ -118,19 +117,15 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	...(PROD || BUILD_APPS
-		? [
-				merge(
-					commonConfigs({
-						platform: 'browser.apps',
-					}),
-					require(`./webpack.config.browser`)({
-						bundle: 'apps',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
+	merge(
+		commonConfigs({
+			platform: 'browser.apps',
+		}),
+		require(`./webpack.config.browser`)({
+			bundle: 'apps',
+			sessionId,
+		}),
+	),
 	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? [
 				merge(
