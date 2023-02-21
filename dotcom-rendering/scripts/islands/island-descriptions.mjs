@@ -43,7 +43,7 @@ const chunk = zod.object({
 
 /** Sorted by gzipSize */
 const getBundleReport = () =>
-	readFile(resolve(dir, '/browser.modern-bundles.json'), 'utf-8')
+	readFile(resolve(dir, 'browser.modern-bundles.json'), 'utf-8')
 		.then((bundle_data) => zod.array(chunk).parse(JSON.parse(bundle_data)))
 		.then((report) => report.sort((a, b) => b.gzipSize - a.gzipSize));
 
@@ -172,10 +172,10 @@ const generateIslandDescriptions = async () => {
 		await writeFile(resolve(dir, 'islands.html'), html);
 
 		console.info('Succesfully generated Island report card:');
-		console.info('dist/islands.html');
+		console.info(dir + '/islands.html');
 	} catch (err) {
 		console.error('Failed to produce the Island description page');
-		console.error(err);
+		throw err;
 	}
 };
 
