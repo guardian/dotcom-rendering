@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	brandBackground,
@@ -12,10 +11,6 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import {
-	CarouselCardDesktop,
-	CarouselCardMobile,
-} from '../components/CarouselCard';
 import { FixedVideoWrapper } from '../components/FixedVideoWrapper.importable';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
