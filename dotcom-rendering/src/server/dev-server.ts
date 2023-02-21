@@ -22,26 +22,35 @@ const ASSETS_URL = /assets\/.*\.js/;
 // for more info
 export const devServer = (): Handler => {
 	return (req, res, next) => {
-		switch (req.path) {
-			case '/Article':
+		const path = req.path.split('/')[1];
+
+		// handle urls with the ?url=… query param
+		const url = new URL(req.url, `http://localhost:3030/`);
+		const sourceUrl = url.searchParams.get('url');
+		if (sourceUrl !== null) {
+			return res.redirect(url.pathname + '/' + sourceUrl);
+		}
+
+		switch (path) {
+			case 'Article':
 				return handleArticle(req, res, next);
-			case '/ArticleJson':
+			case 'ArticleJson':
 				return handleArticleJson(req, res, next);
-			case '/AMPArticle':
+			case 'AMPArticle':
 				return handleAMPArticle(req, res, next);
-			case '/Interactive':
+			case 'Interactive':
 				return handleInteractive(req, res, next);
-			case '/AMPInteractive':
+			case 'AMPInteractive':
 				return handleAMPArticle(req, res, next);
-			case '/Blocks':
+			case 'Blocks':
 				return handleBlocks(req, res, next);
-			case '/KeyEvents':
+			case 'KeyEvents':
 				return handleKeyEvents(req, res, next);
-			case '/Front':
+			case 'Front':
 				return handleFront(req, res, next);
-			case '/FrontJSON':
+			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
-			case '/AppsArticle':
+			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
 			default: {
 				// Do not redirect assets urls
@@ -53,7 +62,7 @@ export const devServer = (): Handler => {
 						'https://www.theguardian.com/',
 					).toString();
 					console.info('redirecting to Article:', url);
-					return res.redirect(`/Article?url=${url}`);
+					return res.redirect(`/Article/${url}`);
 				}
 
 				if (req.url.match(FRONT_URL)) {
@@ -62,7 +71,7 @@ export const devServer = (): Handler => {
 						'https://www.theguardian.com/',
 					).toString();
 					console.info('redirecting to Front:', url);
-					return res.redirect(`/Front?url=${url}`);
+					return res.redirect(`/Front/${url}`);
 				}
 
 				next();

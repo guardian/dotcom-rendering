@@ -6,8 +6,8 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
-import type { FEArticleType } from '../types/frontend';
 import { handleAppsArticle } from '../apps/server';
+import type { FEArticleType } from '../types/frontend';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -65,37 +65,42 @@ export const prodServer = (): void => {
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article',
+		'/Article/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson', handleArticleJson);
+	app.use('/ArticleJson/*', handleArticleJson);
 
 	app.get(
-		'/AMPArticle',
+		'/AMPArticle/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
-	app.get('/Front', logRenderTime, getContentFromURLMiddleware, handleFront);
 	app.get(
-		'/FrontJSON',
+		'/Front/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleFront,
+	);
+	app.get(
+		'/FrontJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
 	app.get(
-		'/AppsArticle',
+		'/AppsArticle/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAppsArticle,
 	);
 
-	app.use('/ArticlePerfTest', handleArticlePerfTest);
-	app.use('/AMPArticlePerfTest', handleAMPArticlePerfTest);
+	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
+	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
 		try {

@@ -9,7 +9,7 @@ describe('The web document renders with the correct meta and analytics elements 
 
 	it(`The page is structured as expected`, function () {
 		cy.visit(
-			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 
 		cy.get(`head`).should('have.length', 1);
@@ -49,7 +49,7 @@ describe('The web document renders with the correct meta and analytics elements 
 
 	it('Subnav links exists with correct values', function () {
 		cy.visit(
-			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 		// Pillar ophan data-link-name exists with correct value
 		cy.get(`a[data-link-name="nav2 : primary : Opinion"]`).should(
@@ -69,7 +69,7 @@ describe('The web document renders with the correct meta and analytics elements 
 
 	it('Meta ophan data-attributes exist, content and attributes are correct', function () {
 		cy.visit(
-			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 		cy.get(`address[data-component="meta-byline"]`).should(
 			'have.length',
@@ -89,7 +89,7 @@ describe('The web document renders with the correct meta and analytics elements 
 
 	it('Section, Footer and Series ophan data-attributes exist', function () {
 		cy.visit(
-			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
+			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 		cy.get(`[data-component="section"]`).should('have.length', 1);
 

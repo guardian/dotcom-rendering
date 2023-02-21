@@ -73,6 +73,7 @@ export type Props = {
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	isExternalLink: boolean;
 };
 
 const StarRatingComponent = ({
@@ -256,6 +257,7 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isExternalLink,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -360,6 +362,7 @@ export const Card = ({
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
+				isExternalLink={isExternalLink}
 			/>
 			<CardLayout
 				imagePosition={imagePosition}
@@ -430,6 +433,7 @@ export const Card = ({
 							byline={byline}
 							showByline={showByline}
 							isDynamo={isDynamo}
+							isExternalLink={isExternalLink}
 						/>
 						{starRating !== undefined ? (
 							<StarRatingComponent

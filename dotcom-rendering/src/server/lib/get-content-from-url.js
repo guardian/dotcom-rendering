@@ -1,3 +1,5 @@
+const { URLSearchParams } = require('url');
+
 // @ts-check
 const fetch = require('node-fetch').default;
 
@@ -49,64 +51,24 @@ async function getContentFromURL(_url, _headers) {
 exports.default = getContentFromURL;
 
 /**
- * @param {string} requestURL
- * @param {string} requestPath
+ * @param {string} requestUrl
+ * @returns {string}
  */
-const parseURL = (requestURL, requestPath) => {
-	/**
-	 * We use string manipulation on the raw value of req.url
-	 * here instead of the url property of the req.query object
-	 * because we want to capture any *other* query params that
-	 * might be being used. Eg.
-	 *
-	 * If my original url is:
-	 *
-	 * http://localhost:3030/Article?url=https://www.theguardian.com/my/article?filterKeyEvents=true
-	 *
-	 * then req.query.url is:
-	 *
-	 * https://www.theguardian.com/my/article
-	 *
-	 * and req.query.filterKeyEvents is:
-	 *
-	 * true
-	 *
-	 * This happens because the url query param isn't serialised. But we actually want everything
-	 * after 'url=' including '?filterKeyEvents=true' and we'd rather not serialise so we just
-	 * split the string instead
-	 *
-	 *
-	 * When in DEV, any params after 'url' are considered additional params and so are preceded by an ampersand.
-	 * If our url includes an '&' but not a '?' then we are within the DEV environment and the first ampersand
-	 * should be replaced by a question mark to indicate the start of the query string.
-	 * In order to achieve this, we are first decoding the URL so that we can read any special characters.
-	 *
-	 */
+const parseURL = (requestUrl) => {
+	const url = decodeURIComponent(requestUrl.split('/').slice(2).join('/'));
 
-	let url = requestURL.includes('url=')
-		? requestURL.split('url=')[1] ?? requestURL
-		: requestURL;
-
-	url = decodeURIComponent(url);
-
-	if (url.includes('&') && !url.includes('?')) {
-		url = url.replace('&', '?');
-	}
-	if (requestPath.startsWith('/AMP')) {
-		url = url.replace('www', 'amp');
-	}
-	return url;
+	return requestUrl.startsWith('/AMP') ? url.replace('www', 'amp') : url;
 };
 
 exports.parseURL = parseURL;
 
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
-	if (req.query.url) {
-		const url = parseURL(req.url, req.path);
+	if (req.path.split('/').length > 2) {
+		const sourceURL = parseURL(req.originalUrl);
 
 		try {
-			req.body = await getContentFromURL(url, req.headers);
+			req.body = await getContentFromURL(sourceURL, req.headers);
 		} catch (error) {
 			console.error(error);
 			next(error);

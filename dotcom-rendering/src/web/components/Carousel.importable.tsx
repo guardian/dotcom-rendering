@@ -379,6 +379,7 @@ const CarouselCard = ({
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
 			branding={branding}
+			isExternalLink={false}
 		/>
 	</LI>
 );
