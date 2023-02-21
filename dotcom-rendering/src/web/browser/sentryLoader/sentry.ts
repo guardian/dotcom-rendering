@@ -33,6 +33,9 @@ const ignoreErrors = [
 	'TypeError: Load failed',
 	'TypeError: Importing a module script failed',
 	'TypeError: error loading dynamically imported module',
+	// Ignore load script errors for ad and tracking scripts as they can be blocked by browsers and ad blockers
+	// google publisher tag
+	/Error loading script.*googletagservices.com\/tag\/js\/gpt.js/gi,
 ];
 
 const { config } = window.guardian;
