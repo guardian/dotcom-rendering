@@ -41,7 +41,7 @@ the article as for the Editions app.
 
 We also recommend testing articles in the mobile device simulators.
 You can start the development server on port `3030` (the port number expected by
-the device simulator) with `yarn watch:device-simulator`. The development server
+the device simulator) with `yarn watch:simulator`. The development server
 also supports a specific route for
 testing with the device simulator:
 

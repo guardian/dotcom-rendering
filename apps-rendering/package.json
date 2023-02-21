@@ -20,7 +20,7 @@
 		"watch:client": "webpack serve --config webpack.config.ts --config-name client",
 		"watch:cdk": "tsc -w -p config/tsconfig.cdk.json",
 		"watch": "yarn watch:server & yarn watch:client",
-		"watch:device-simulator": "PORT=3030 yarn watch",
+		"watch:simulator": "PORT=3030 yarn watch",
 		"build:server": "webpack --config webpack.config.ts --config-name server",
 		"build:client": "webpack --config webpack.config.ts --config-name client",
 		"build:cdk": "tsc -p config/tsconfig.cdk.json",
