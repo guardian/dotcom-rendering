@@ -322,6 +322,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 		</div>
 	);
 
+	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+
 	return (
 		<>
 			<div
@@ -713,13 +715,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 							>
 								<RightColumn>
 									<>
-										{mainMedia && (
+										{mainMedia && renderAds && (
 											<div
 												css={css`
 													margin-top: ${space[4]}px;
 												`}
 											>
-												{!article.shouldHideAds && (
+												{
 													<AdSlot
 														position="right"
 														display={format.display}
@@ -731,7 +733,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 																.isPaidContent
 														}
 													/>
-												)}
+												}
 											</div>
 										)}
 									</>
@@ -740,7 +742,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -838,7 +840,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						</MostViewedFooterLayout>
 					</Section>
 				)}
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -912,7 +914,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			{renderAds && <MobileStickyContainer />}
 		</>
 	);
 };
