@@ -67,7 +67,7 @@ export const EventAltPalette = () => (
 
 export const SombrePalette = () => (
 	<FrontSection
-		title="SombrePalette"
+		title="Sombre Palette"
 		centralBorder="partial"
 		containerPalette="SombrePalette"
 		showDateHeader={true}
@@ -131,7 +131,7 @@ export const LongRunningPalette = () => (
 
 export const LongRunningAltPalette = () => (
 	<FrontSection
-		title="LongRunningAltPalette"
+		title="Long Running Alt Palette"
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
