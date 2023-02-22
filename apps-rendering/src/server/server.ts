@@ -422,7 +422,7 @@ app.get('/fontSize.css', (_, res) => res.status(404).end());
 To enable testing in the mobile device emulators,
 this route handler adds compatability with DCR's route for apps articles.
 The DCR route follows the pattern:
-/AppsArticle?url=https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
+/AppsArticle/https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
 */
 app.get(
 	'/AppsArticle/*',

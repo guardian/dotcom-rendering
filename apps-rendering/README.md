@@ -45,8 +45,8 @@ the device simulator) with `yarn watch:simulator`. The development server
 also supports a specific route for
 testing with the device simulator:
 
-- `/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth`
-  - e.g [http://localhost:3030/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/AppsArticle?url=https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth`
+  - e.g [http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:3030/AppsArticle/https://www.theguardian.com/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
 
 This route matches the one implemented by DCR for rendering apps articles.
 
