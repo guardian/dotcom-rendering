@@ -132,7 +132,6 @@ export const LongRunningPalette = () => (
 export const LongRunningAltPalette = () => (
 	<FrontSection
 		title="Long Running Alt Palette"
-		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
