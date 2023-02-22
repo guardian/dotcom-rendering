@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FETagType } from '../../types/tag';
 
@@ -8,16 +8,12 @@ type Props = {
 };
 
 const linkStyle = css`
-	font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
-		'Lucida Grande', sans-serif;
+	${textSans.xsmall({ lineHeight: 'loose' })}
 	text-decoration: none;
-	font-size: 14px;
 	top: 0;
-	line-height: 14px;
 	color: ${neutral[7]};
 	&:after {
 		color: ${neutral[86]};
-		font-size: 16px;
 		pointer-events: none;
 		margin: 2.56px;
 		content: '/';
@@ -30,8 +26,7 @@ const linkStyle = css`
 `;
 
 const topicLabel = css`
-	font-size: 13.6px;
-	line-height: 22px;
+	${textSans.xxsmall({ lineHeight: 'regular' })}
 	color: ${neutral[60]};
 `;
 
