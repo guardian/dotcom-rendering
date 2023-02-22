@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	body,
 	brand,
 	from,
 	headline,
@@ -31,7 +32,7 @@ const personalisedHeadingStyles = css`
 `;
 
 const personalisedBodyBold = css`
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
+	${body.medium({ fontWeight: 'bold' })}
 	${from.phablet} {
 		padding-right: 130px;
 	}
@@ -41,19 +42,17 @@ const personalisedBodyBold = css`
 const bulletStyles = css`
 	text-indent: -30px; /* second line indentation */
 	margin-left: 30px; /* second line indentation */
-	margin-bottom: ${space[4]}px;
-	${headline.xxsmall({ fontWeight: 'medium' })};
 	color: ${neutral[100]};
 	display: flex;
 	flex-direction: column;
 	li:not(:first-of-type) {
-		margin-top: 10px;
+		margin-top: ${space[1]}px;
 	}
 	li::before {
 		content: '';
 		display: inline-block;
-		width: 15px;
-		height: 15px;
+		width: 12px;
+		height: 12px;
 		margin-right: ${space[4]}px;
 		background: ${brand[400]};
 		border-radius: 50%;
@@ -61,8 +60,7 @@ const bulletStyles = css`
 `;
 
 const personalisedBodyTextList = css`
-	${headline.xxsmall({ fontWeight: 'regular', lineHeight: 'regular' })}
-	padding-bottom: ${space[1]}px;
+	${body.medium({ fontWeight: 'medium' })};
 	color: black;
 `;
 
@@ -70,6 +68,7 @@ const personalisedActionButtons = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
+	margin-top: 20px;
 	margin-bottom: 20px;
 
 	> a {
@@ -112,7 +111,7 @@ const faqPersonalised = css`
 
 export const bodySpacing = css`
 	padding-top: ${space[2]}px;
-	padding-bottom: ${space[2]}px;
+	padding-bottom: ${space[3]}px;
 `;
 
 // HEADER TEXT
