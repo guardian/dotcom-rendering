@@ -111,7 +111,7 @@ const faqPersonalised = css`
 
 export const bodySpacing = css`
 	padding-top: ${space[2]}px;
-	padding-bottom: ${space[3]}px;
+	padding-bottom: ${space[2]}px;
 `;
 
 // HEADER TEXT
