@@ -12,7 +12,7 @@ import { PinnedPost } from '../components/PinnedPost';
 import {
 	hasRelevantTopics,
 	TopicFilterBank,
-} from '../components/TopicFilterBank.importable';
+} from '../components/TopicFilterBank';
 
 type Props = {
 	format: ArticleFormat;
@@ -121,16 +121,14 @@ export const LiveBlogRenderer = ({
 			{switches.automaticFilters &&
 				hasRelevantTopics(availableTopics) && (
 					<Hide above="desktop">
-						<Island>
-							<TopicFilterBank
-								availableTopics={availableTopics}
-								selectedTopics={selectedTopics}
-								format={format}
-								keyEvents={keyEvents}
-								filterKeyEvents={filterKeyEvents}
-								id={'key-events-carousel-mobile'}
-							/>
-						</Island>
+						<TopicFilterBank
+							availableTopics={availableTopics}
+							selectedTopics={selectedTopics}
+							format={format}
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							id={'key-events-carousel-mobile'}
+						/>
 					</Hide>
 				)}
 			<div id="top-of-blog" />

@@ -69,6 +69,7 @@ import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
 import RichLink from 'components/RichLink';
 import { isElement, pipe } from 'lib';
+import { Optional } from 'optional';
 import { border, text } from 'palette';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
@@ -444,11 +445,11 @@ const imageRenderer = (
 
 	const maybeCaption =
 		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
-			? some([
+			? Optional.some([
 					h(Caption, { format, caption }),
 					h(Credit, { credit, format, key }),
 			  ])
-			: none;
+			: Optional.none();
 
 	return h(BodyImage, {
 		caption: maybeCaption,
@@ -610,7 +611,7 @@ const mediaAtomRenderer = (
 	};
 	const figcaption = h(FigCaption, {
 		format: format,
-		children: some(h(Caption, { caption, format })),
+		children: Optional.some(h(Caption, { caption, format })),
 		variant: CaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [

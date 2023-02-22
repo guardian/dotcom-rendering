@@ -85,9 +85,20 @@ const commonConfigs = ({ platform }) => ({
 					new BundleAnalyzerPlugin({
 						reportFilename: path.join(
 							dist,
+							'stats',
 							`${platform}-bundles.html`,
 						),
 						analyzerMode: 'static',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							'stats',
+							`${platform}-bundles.json`,
+						),
+						analyzerMode: 'json',
 						openAnalyzer: false,
 						logLevel: 'warn',
 					}),

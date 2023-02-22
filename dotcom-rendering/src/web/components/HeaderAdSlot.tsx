@@ -29,6 +29,10 @@ const headerAdWrapper = css`
 
 	position: sticky;
 	top: 0;
+
+	&[top-above-nav-ad-rendered] {
+		width: fit-content;
+	}
 `;
 
 export const HeaderAdSlot = ({ display }: Props) => (

@@ -45,6 +45,8 @@ type Props = {
 	isInLiveblogAdSlotTest?: boolean;
 	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
+	lang?: string;
+	isRightToLeftLang?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -114,6 +116,16 @@ const globalLinkStyles = (palette: Palette) => css`
 const isRecipe = (tags: TagType[]): boolean =>
 	tags.some(({ id }) => id === 'tone/recipes');
 
+// CAPI only supports certain languages. If CAPI doesn't recognise the language,
+// it defaults to `en`. We should filter out `en` so we don't set an incorrect value.
+// See https://github.com/guardian/content-api/blob/main/porter/src/main/scala/com.gu.contentapi.porter/integration/LanguageDetector.scala#L17
+const decideLanguage = (language = ''): string | undefined =>
+	language != 'en' ? language : undefined;
+
+const decideLanguageDirection = (
+	isRightToLeftLang = false,
+): 'rtl' | undefined => (isRightToLeftLang ? 'rtl' : undefined);
+
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -145,9 +157,13 @@ export const ArticleBody = ({
 	isInLiveblogAdSlotTest = false,
 	abTests,
 	tableOfContents,
+	lang,
+	isRightToLeftLang = false,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
+	const language = decideLanguage(lang);
+	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -218,6 +234,8 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(palette),
 				]}
+				lang={language}
+				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
 					<Island deferUntil="hash" clientOnly={true}>

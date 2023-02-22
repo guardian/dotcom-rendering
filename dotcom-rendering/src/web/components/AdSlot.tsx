@@ -252,7 +252,7 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div css={[adStyles]}>
+						<div className="ad-slot-container" css={[adStyles]}>
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -284,7 +284,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div css={[adStyles]}>
+				<div className="ad-slot-container" css={[adStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -331,7 +331,7 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div css={[adStyles]}>
+				<div className="ad-slot-container" css={[adStyles]}>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -352,6 +352,7 @@ export const AdSlot = ({
 		case 'merchandising-high': {
 			return (
 				<div
+					className="ad-slot-container"
 					css={[
 						css`
 							display: flex;
@@ -382,6 +383,7 @@ export const AdSlot = ({
 		case 'merchandising': {
 			return (
 				<div
+					className="ad-slot-container"
 					css={[
 						css`
 							display: flex;

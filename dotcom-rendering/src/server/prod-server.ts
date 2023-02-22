@@ -6,6 +6,7 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
+import { handleAppsArticle } from '../apps/server';
 import type { FEArticleType } from '../types/frontend';
 import {
 	handleArticle,
@@ -60,33 +61,46 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article',
+		'/Article/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson', handleArticleJson);
+	app.use('/ArticleJson/*', handleArticleJson);
 
 	app.get(
-		'/AMPArticle',
+		'/AMPArticle/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
-	app.get('/Front', logRenderTime, getContentFromURLMiddleware, handleFront);
 	app.get(
-		'/FrontJSON',
+		'/Front/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleFront,
+	);
+	app.get(
+		'/FrontJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
-	app.use('/ArticlePerfTest', handleArticlePerfTest);
-	app.use('/AMPArticlePerfTest', handleAMPArticlePerfTest);
+	app.get(
+		'/AppsArticle/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAppsArticle,
+	);
+
+	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
+	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
 		try {

@@ -303,9 +303,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
 
 	return (
@@ -426,6 +423,35 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<StandardGrid display={format.display}>
+						<GridItem area="media">
+							<div
+								css={
+									format.display === ArticleDisplay.Showcase
+										? mainMediaWrapper
+										: maxWidth
+								}
+							>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										article.starRating
+											? article.starRating
+											: undefined
+									}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -504,35 +530,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="media">
-							<div
-								css={
-									format.display === ArticleDisplay.Showcase
-										? mainMediaWrapper
-										: maxWidth
-								}
-							>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										article.starRating
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
-						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
@@ -595,6 +592,10 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										abTests={article.config.abTests}
 										tableOfContents={
 											article.tableOfContents
+										}
+										lang={article.lang}
+										isRightToLeftLang={
+											article.isRightToLeftLang
 										}
 									/>
 									{showBodyEndSlot && (
@@ -679,7 +680,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{!article.shouldHideAds && (
+									{renderAds && (
 										<AdSlot
 											position="right"
 											display={format.display}

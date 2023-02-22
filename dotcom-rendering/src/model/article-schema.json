@@ -574,6 +574,12 @@
         },
         "showTableOfContents": {
             "type": "boolean"
+        },
+        "lang": {
+            "type": "string"
+        },
+        "isRightToLeftLang": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -2491,9 +2497,11 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"

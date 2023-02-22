@@ -305,7 +305,30 @@ const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 
 const lines = (_format: ArticleFormat): Colour => neutral[86];
 
-const linesDark = (_format: ArticleFormat): Colour => neutral[20];
+const linesDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[46];
+				default:
+					return neutral[20];
+			}
+		default:
+			return neutral[20];
+	}
+};
 
 const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
 	neutral[7];

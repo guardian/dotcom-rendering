@@ -8,21 +8,25 @@ import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const commentStyles = (format: ArticleFormat): SerializedStyles => css`
-	color: ${text.bylineLeftColumn(format)};
+	color: ${text.byline(format)};
 	width: 75%;
 	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 
 	${between.mobile.and.phablet} {
 		width: 68%;
 	}
+
+	${darkModeCss`
+		color: ${text.bylineDark(format)};
+	`}
 `;
 
 const commentAnchorStyles = (format: ArticleFormat): SerializedStyles => css`
-	color: ${text.bylineLeftColumn(format)};
+	color: ${text.bylineAnchor(format)};
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${text.bylineDark(format)};
+        color: ${text.bylineAnchorDark(format)};
     `}
 `;
 

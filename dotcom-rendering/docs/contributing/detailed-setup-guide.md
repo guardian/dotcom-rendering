@@ -32,6 +32,7 @@ This high level diagram shows the difference between the data flow when DCR is u
 The only things you need to make sure you have installed before you get going are Node and yarn.
 
 #### Node.js
+
 We recommend using a tool to help manage multiple versions of Node.js on on machine.
 [fnm](https://github.com/Schniz/fnm) is popular in the department at the moment, although
 [nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
@@ -43,6 +44,7 @@ If you prefer to [install Node.js manually](https://nodejs.org),
 check the [.nvmrc](https://github.com/guardian/dotcom-rendering/blob/main/.nvmrc) for the current required version.
 
 #### Yarn
+
 Node packages for this project are managed using the 'classic' version of [Yarn](https://classic.yarnpkg.com/).
 Currently [the recommended way to install Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 is with npm, which should be available if you have already installed Node.js. To install Yarn
@@ -77,23 +79,23 @@ This will start the development server on port 3030: [http://localhost:3030](htt
 
 ### Previewing article on local
 
-You can preview an article from `theguardian.com` by appending the query string parameter `url` to your localhost article page. For example:
+You can preview an article from `theguardian.com` by appending the full URL to the path of your localhost article page. For example:
 
-http://localhost:3030/Article?url=https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+http://localhost:3030/Article/https://www.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
 You can use this technique to integrate with a locally running instance of `frontend`. This is especially useful for testing changes to the data model:
 
-http://localhost:3030/Article?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+http://localhost:3030/Article/http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
 ### Previewing AMP on local
 
 You can preview an AMP page similarly to an article, as follows
 
-http://localhost:3030/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+http://localhost:3030/AMPArticle/https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
 or, connecting to a locally running instance of frontend,
 
-http://localhost:3030/AMPArticle?url=http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
+http://localhost:3030/AMPArticle/http://localhost:9000/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance
 
 ### Note on rebasing vs merging
 
