@@ -16,7 +16,7 @@ const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+/;
 /** assets are paths like /assets/index.xxx.js */
-const ASSETS_URL = /assets\/.*\.js/;
+const ASSETS_URL = /^assets\/.+\.js/;
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
