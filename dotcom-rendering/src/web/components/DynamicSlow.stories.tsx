@@ -43,10 +43,7 @@ export const Avatar = () => {
 		};
 	});
 	return (
-		<FrontSection
-			title="Dynamic Slow"
-			centralBorder="partial"
-		>
+		<FrontSection title="Dynamic Slow" centralBorder="partial">
 			<DynamicSlow
 				groupedTrails={{
 					...defaultGroupedTrails,

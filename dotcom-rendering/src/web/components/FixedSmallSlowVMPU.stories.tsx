@@ -18,10 +18,7 @@ export default {
 };
 
 export const FourCards = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
@@ -33,10 +30,7 @@ export const FourCards = () => (
 FourCards.story = { name: 'With 4 cards' };
 
 export const ThreeCards = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
@@ -48,10 +42,7 @@ export const ThreeCards = () => (
 ThreeCards.story = { name: 'With 3 cards' };
 
 export const TwoCards = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
@@ -63,10 +54,7 @@ export const TwoCards = () => (
 TwoCards.story = { name: 'With 2 cards' };
 
 export const OneCard = () => (
-	<FrontSection
-		title="Fixed Small Slow V MPU"
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}

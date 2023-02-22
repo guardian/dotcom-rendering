@@ -67,10 +67,7 @@ Two.story = {
 };
 
 export const Three = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -86,10 +83,7 @@ Three.story = {
 };
 
 export const Four = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -105,10 +99,7 @@ Four.story = {
 };
 
 export const Five = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -211,7 +202,6 @@ export const Boosted1 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -238,7 +228,6 @@ export const Boosted2 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -262,11 +251,7 @@ export const Boosted3 = () => {
 	const remaining = trails.slice(1, 3);
 
 	return (
-		<FrontSection
-			title="Dynamic Package"
-
-			centralBorder="partial"
-		>
+		<FrontSection title="Dynamic Package" centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -288,11 +273,7 @@ export const Boosted4 = () => {
 	const remaining = trails.slice(1, 4);
 
 	return (
-		<FrontSection
-			title="Dynamic Package"
-
-			centralBorder="partial"
-		>
+		<FrontSection title="Dynamic Package" centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -314,11 +295,7 @@ export const Boosted5 = () => {
 	const remaining = trails.slice(1, 5);
 
 	return (
-		<FrontSection
-			title="Dynamic Package"
-
-			centralBorder="partial"
-		>
+		<FrontSection title="Dynamic Package" centralBorder="partial">
 			<DynamicPackage
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -343,7 +320,6 @@ export const Boosted8 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -370,7 +346,6 @@ export const Boosted9 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -390,10 +365,7 @@ Boosted9.story = {
 };
 
 export const OneSnapThreeStandard = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -409,10 +381,7 @@ OneSnapThreeStandard.story = {
 };
 
 export const ThreeSnapTwoStandard = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -428,10 +397,7 @@ ThreeSnapTwoStandard.story = {
 };
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
-	<FrontSection
-		title="Dynamic Package"
-		centralBorder="partial"
-	>
+	<FrontSection title="Dynamic Package" centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
