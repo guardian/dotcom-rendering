@@ -3,15 +3,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, text, textSans } from '@guardian/source-foundations';
+import { from, neutral, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { darkModeCss as darkMode } from 'styles';
+import { darkModeCss } from 'styles';
+import { text } from 'palette';
 
 // ----- Component ----- //
 
@@ -21,22 +22,13 @@ interface Props {
 	edition: Edition;
 }
 
-const darkStyles = darkMode`
-    color: ${neutral[60]};
-`;
-
-const defaultStyles = css`
+const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xsmall()}
-	color: ${text.supporting};
+	color: ${text.dateline(format)};
 
-	${darkStyles}
-`;
-
-const commentDatelineStyles = css`
-	${textSans.xsmall()}
-	color: ${neutral[20]};
-
-	${darkStyles}
+	${darkModeCss`
+		color: ${text.datelineDark(format)};
+	`}
 `;
 
 const getStyles = (
@@ -51,7 +43,7 @@ const getStyles = (
 		color: ${desktopColour};
 	}
 
-	${darkMode`
+	${darkModeCss`
     	color: ${neutral[93]};
 		${from.desktop} {
 			color: ${neutral[60]};
@@ -68,12 +60,7 @@ const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return getStyles(neutral[20], neutral[20]);
 		default:
-			switch (format.theme) {
-				case ArticlePillar.Opinion:
-					return commentDatelineStyles;
-				default:
-					return defaultStyles;
-			}
+			return defaultStyles(format);
 	}
 };
 
