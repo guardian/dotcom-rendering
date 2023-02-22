@@ -49,11 +49,9 @@ exports.default = getContentFromURL;
  * @returns {URL | undefined} the parsed URL, or false if there’s no fully qualified path
  */
 const parseURL = (requestUrl) => {
-	const url = decodeURIComponent(requestUrl.split('/').slice(2).join('/'));
-
 	try {
 		return new URL(
-			requestUrl.startsWith('/AMP') ? url.replace('www', 'amp') : url,
+			decodeURIComponent(requestUrl.split('/').slice(2).join('/')),
 		);
 	} catch (error) {
 		return undefined;
@@ -67,6 +65,15 @@ exports.getContentFromURLMiddleware = async (req, res, next) => {
 	const sourceURL = parseURL(req.originalUrl);
 
 	if (sourceURL) {
+		if (
+			req.path.startsWith('/AMP') &&
+			sourceURL.hostname === 'www.theguardian.com'
+		) {
+			res.redirect(
+				req.path.replace('www.theguardian.com', 'amp.theguardian.com'),
+			);
+		}
+
 		try {
 			req.body = await getContentFromURL(sourceURL, req.headers);
 		} catch (error) {
