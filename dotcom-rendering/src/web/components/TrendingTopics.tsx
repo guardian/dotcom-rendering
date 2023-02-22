@@ -8,10 +8,12 @@ type Props = {
 };
 
 const linkStyle = css`
+	font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+		'Lucida Grande', sans-serif;
 	text-decoration: none;
-	font-size: 16px;
+	font-size: 14px;
 	top: 0;
-	line-height: 16px;
+	line-height: 14px;
 	color: ${neutral[7]};
 	&:after {
 		color: ${neutral[86]};
