@@ -7,6 +7,10 @@ import type { FC, ReactNode } from 'react';
 // ----- Component ----- //
 
 type Props = {
+	/**string to act as the id attribute of the skip target element and used in the
+	 * href attribute of the skip link (`#${id}`). As such, the id needs to be unique
+	 * and follow the requirements at https://html.spec.whatwg.org/multipage/dom.html#the-id-attribute
+	  */
 	id: string;
 	blockDescription: string;
 	children: ReactNode;
@@ -44,6 +48,19 @@ const skipLinkCss = css`
 // announce the text oddly.
 // https://github.com/guardian/dotcom-rendering/pull/6950#pullrequestreview-1279406318
 
+/**
+ * Component that places a visually hidden link before its child, pointing to a visually
+ * hidden target element after it. Intended to allow screen reader users to skip past
+ * complementary blocks inline with the article content, rather than hearing all the text
+ * read out.
+ *
+ * The "id" props is a string to act as the id attribute of the skip target element and used in the
+ * href attribute of the skip link (`#${id}`). As such, the id needs to be unique
+ * and follow the requirements at https://html.spec.whatwg.org/multipage/dom.html#the-id-attribute.
+ *
+ * The "blockDescription" prop will be announced by screen readers when the visually hidden elements
+ * are reached - needs to be a **short** explanation of what the child element is.
+*/
 const InlineSkipToWrapper: FC<Props> = ({
 	id,
 	blockDescription,
