@@ -519,24 +519,58 @@ const articleContentDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
-const avatar = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticleSpecial.SpecialReport:
-			return specialReport[800];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.News:
-			return news[500];
+const avatar = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Analysis:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[700];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.News:
+					return news[500];
+			}
+		default:
+			switch (theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[800];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.News:
+					return news[500];
+			}
 	}
 };
 
@@ -554,14 +588,13 @@ const avatarDark = ({ design, theme }: ArticleFormat): Colour => {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Analysis: {
+		case ArticleDesign.Analysis:
 			switch (theme) {
 				case ArticleSpecial.SpecialReportAlt:
 					return neutral[46];
 				default:
 					return neutral[20];
 			}
-		}
 		default:
 			return neutral[20];
 	}
