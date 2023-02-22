@@ -111,15 +111,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	function requestFullscreen() {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
 		if (screenfull.isEnabled) {
-			void screenfull.request(lightbox);
+			return screenfull.request(lightbox);
 		}
+		return;
 	}
 
 	function exitFullscreen() {
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
-		if (screenfull.isEnabled) {
-			void screenfull.exit();
+		if (screenfull.isEnabled && screenfull.isFullscreen) {
+			return screenfull.exit();
 		}
+		return;
 	}
 
 	function select(position: number): void {
@@ -271,7 +273,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				toggleInfo();
 				break;
 			case 'KeyQ':
-				close();
+				void close();
 				break;
 			case 'ArrowUp':
 				showInfo();
@@ -280,13 +282,13 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				hideInfo();
 				break;
 			case 'Escape':
-				close();
+				void close();
 				break;
 		}
 	}
 
 	let previouslyFocused: Element;
-	function open(position: number) {
+	async function open(position: number) {
 		log('dotcom', '💡 Opening lightbox.');
 		// Remember where we were so we can restore focus
 		if (document.activeElement) previouslyFocused = document.activeElement;
@@ -295,7 +297,11 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		// Show lightbox
 		lightbox.removeAttribute('hidden');
 		// // Try to open the lightbox in fullscreen mode. This may fail
-		requestFullscreen();
+		try {
+			await requestFullscreen();
+		} catch {
+			// Do nothing, requests to open fullscreen are just requests and can fail
+		}
 		// When opening the lightbox, if one doesn't exist already, add a history state referencing
 		// the currently selected image. Doing this means the back action will take the reader back
 		// to the article
@@ -311,10 +317,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		window.addEventListener('keydown', handleKeydown);
 	}
 
-	function close(): void {
+	async function close(): Promise<void> {
 		log('dotcom', '💡 Closing lightbox.');
 		// Re-enable scrolling
 		document.documentElement.classList.remove('lightbox-open');
+		// The lightbox was closed by clicking the close button so we need
+		// to exit fullscreen
+		await exitFullscreen();
+		// Restore focus
+		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
+		// focusable because it came from activeElement
+		(previouslyFocused as HTMLButtonElement).focus();
 		// Hide lightbox
 		lightbox.setAttribute('hidden', 'true');
 		// When the lightbox is closed, remove any img hash has from the url
@@ -327,16 +340,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
-		// Restore focus
-		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
-		// focusable because it came from activeElement
-		(previouslyFocused as HTMLButtonElement).focus();
-		// If we're in fullscreen mode, exit it
-		if (screenfull.isFullscreen) {
-			// The lightbox was closed by clicking the close button so we need
-			// to exit fullscreen
-			exitFullscreen();
-		}
 	}
 
 	function showInfo(): void {
@@ -378,7 +381,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				: null;
 			const stringIndex: string = imageWrapper?.dataset.index ?? '1';
 			const indexOfImageClicked = parseInt(stringIndex);
-			open(indexOfImageClicked);
+			void open(indexOfImageClicked);
 		});
 	});
 
@@ -439,7 +442,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				if (!lightbox.hasAttribute('hidden')) {
 					// If lightbox is still showing then the escape key was probably pressed
 					// which closes fullscreen mode but not the lightbox, so let's close it
-					close();
+					void close();
 				}
 			}
 		});
@@ -457,13 +460,13 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const hash = window.location.hash;
 		if (!hash.startsWith('#img-')) {
 			// There's no img hash so close the lightbox
-			close();
+			void close();
 		} else {
 			// The reader navigated to a url that does contain an img hash. If
 			// the lightbox isn't already open, open it at that hash position.
 			if (!lightbox.hasAttribute('open')) {
 				const position = hash.substring(5);
-				open(parseInt(position));
+				void open(parseInt(position));
 			}
 		}
 	});
