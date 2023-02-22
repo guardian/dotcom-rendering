@@ -458,6 +458,6 @@ app.listen(port, () => {
 	if (process.env.NODE_ENV === 'production') {
 		logger.info(`Server listening on port ${port}!`);
 	} else {
-		logger.info(`Webpack dev server is listening on port 8080`);
+		logger.info(`Webpack dev server is listening on port 3030`);
 	}
 });
