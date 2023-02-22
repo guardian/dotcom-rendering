@@ -1,3 +1,4 @@
+import { isObject } from '@guardian/libs';
 import type { TagType } from '../../../types/tag';
 
 export type CanShowGateProps = {
@@ -17,12 +18,6 @@ export type SignInGateComponent = {
 		currentTest,
 	}: CanShowGateProps) => Promise<boolean>;
 };
-
-// Taking this approach for validating whether a specific
-// string is in a union type as per the advice of this blog:
-// https://dev.to/hansott/how-to-check-if-string-is-member-of-union-type-1j4m
-// Other option is to use an enum, though there are downside to this:
-// https://dev.to/azure/the-dangers-of-typescript-enums-55pd
 
 export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 type UserTypeTuple = typeof ALL_USER_TYPES;
@@ -52,9 +47,7 @@ export interface CheckoutCompleteCookieData {
 export function isCheckoutCompleteCookieData(
 	obj: unknown,
 ): obj is CheckoutCompleteCookieData {
-	// TODO - validate whether this type casting here is ok
-	const castObj = obj as CheckoutCompleteCookieData;
-	return isUserType(castObj.userType) && isProduct(castObj.product);
+	return isObject(obj) && isUserType(obj.userType) && isProduct(obj.product);
 }
 export interface SignInGateProps {
 	signInUrl: string;
