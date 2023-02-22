@@ -123,7 +123,7 @@ const NewsletterSignup: FC<Props> = ({
 	} = element;
 	return (
 		<div
-			role='none'
+			role="none"
 			className="js-signup-form-container"
 			css={containerStyles(showByDefault)}
 		>
@@ -131,7 +131,10 @@ const NewsletterSignup: FC<Props> = ({
 				id={`newsletter-promotion-for-${identityName}${skipLinkIdSuffix}`}
 				blockDescription="newsletter promotion"
 			>
-				<aside css={frameStyles(format)} aria-label='newsletter promotion'>
+				<aside
+					css={frameStyles(format)}
+					aria-label="newsletter promotion"
+				>
 					<div css={stackBelowTabletStyles}>
 						<p css={titleStyles(theme)}>
 							Sign up to <span>{name}</span>

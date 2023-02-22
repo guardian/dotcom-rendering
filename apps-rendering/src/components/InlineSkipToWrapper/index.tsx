@@ -10,7 +10,7 @@ type Props = {
 	/**string to act as the id attribute of the skip target element and used in the
 	 * href attribute of the skip link (`#${id}`). As such, the id needs to be unique
 	 * and follow the requirements at https://html.spec.whatwg.org/multipage/dom.html#the-id-attribute
-	  */
+	 */
 	id: string;
 	blockDescription: string;
 	children: ReactNode;
@@ -60,7 +60,7 @@ const skipLinkCss = css`
  *
  * The "blockDescription" prop will be announced by screen readers when the visually hidden elements
  * are reached - needs to be a **short** explanation of what the child element is.
-*/
+ */
 const InlineSkipToWrapper: FC<Props> = ({
 	id,
 	blockDescription,
