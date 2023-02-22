@@ -303,9 +303,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
 
 	return (
@@ -683,7 +680,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{!article.shouldHideAds && (
+									{renderAds && (
 										<AdSlot
 											position="right"
 											display={format.display}
