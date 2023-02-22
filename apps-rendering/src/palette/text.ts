@@ -1697,6 +1697,63 @@ const headingTwoDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
+const dateline = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[20];
+			}
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.Interview:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[46];
+			}
+		default:
+			return neutral[46];
+	}
+};
+
+const datelineDark = ({ design, theme }: ArticleFormat): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return neutral[93];
+				default:
+					return neutral[60];
+			}
+		default:
+			return neutral[60];
+	}
+};
+
 // ----- API ----- //
 
 const text = {
@@ -1717,6 +1774,8 @@ const text = {
 	commentCount,
 	commentCountDark,
 	commentCountWide,
+	dateline,
+	datelineDark,
 	dropCap,
 	dropCapDark,
 	figCaption,
