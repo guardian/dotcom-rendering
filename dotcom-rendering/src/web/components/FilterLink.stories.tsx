@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { FilterButton } from './FilterButton.importable';
+import { FilterLink } from './FilterLink';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -20,8 +20,8 @@ const format = {
 };
 
 export default {
-	component: FilterButton,
-	title: 'Components/FilterButton',
+	component: FilterLink,
+	title: 'Components/FilterLink',
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: {
@@ -36,13 +36,13 @@ export default {
 
 export const DefaultStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={false}
 			type="ORG"
 			value="nhs"
 			count={21}
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );
@@ -51,13 +51,13 @@ DefaultStory.story = { name: 'Default' };
 
 export const ActiveStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={true}
 			type="ORG"
 			value="nhs"
 			count={21}
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );
@@ -66,13 +66,13 @@ ActiveStory.story = { name: 'Active' };
 
 export const TruncatedStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={false}
 			type="ORG"
 			value="Something thats too long to fit"
 			count={21}
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );
@@ -81,13 +81,13 @@ TruncatedStory.story = { name: 'Truncated' };
 
 export const TruncatedActiveStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={true}
 			type="ORG"
 			value="Something thats too long to fit"
 			count={21}
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );
@@ -96,11 +96,11 @@ TruncatedActiveStory.story = { name: 'TruncatedActive' };
 
 export const FilterKeyEventsStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={false}
 			value="Filter Key Events"
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );
@@ -109,11 +109,11 @@ FilterKeyEventsStory.story = { name: 'FilterKeyEvents' };
 
 export const FilterKeyEventsActiveStory = () => (
 	<Wrapper>
-		<FilterButton
+		<FilterLink
 			isActive={true}
 			value="Filter Key Events"
 			format={format}
-			onClick={() => {}}
+			href={'?#'}
 		/>
 	</Wrapper>
 );

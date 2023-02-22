@@ -55,7 +55,7 @@ import { SubNav } from '../components/SubNav.importable';
 import {
 	hasRelevantTopics,
 	TopicFilterBank,
-} from '../components/TopicFilterBank.importable';
+} from '../components/TopicFilterBank';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -741,26 +741,22 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 								{showTopicFilterBank && (
 									<Hide until="desktop">
 										<div css={sidePaddingDesktop}>
-											<Island>
-												<TopicFilterBank
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													format={format}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id={
-														'key-events-carousel-desktop'
-													}
-												/>
-											</Island>
+											<TopicFilterBank
+												availableTopics={
+													article.availableTopics
+												}
+												selectedTopics={
+													article.selectedTopics
+												}
+												format={format}
+												keyEvents={article.keyEvents}
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												id={
+													'key-events-carousel-desktop'
+												}
+											/>
 										</div>
 									</Hide>
 								)}

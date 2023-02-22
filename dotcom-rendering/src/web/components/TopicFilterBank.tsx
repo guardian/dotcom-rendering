@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, headline, space, textSans } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { FilterButton } from './FilterButton.importable';
+import { FilterLink } from './FilterLink';
 
 type Props = {
 	availableTopics?: Topic[];
@@ -41,34 +41,24 @@ const topicStyles = css`
 	}
 `;
 
-const handleTopicClick = (
-	isActive: boolean,
-	buttonParams: string,
-	id: string,
-) => {
-	const urlParams = new URLSearchParams(window.location.search);
+const getTopicLink = (isActive: boolean, topics: string, id: Props['id']) => {
+	const urlParams = new URLSearchParams(
+		isActive
+			? {
+					topics,
+			  }
+			: {},
+	);
 
-	if (!isActive) {
-		urlParams.set('topics', buttonParams);
-	} else {
-		urlParams.delete('topics');
-	}
-	urlParams.delete('page'); // direct to the first page
-	urlParams.delete('filterKeyEvents');
-
-	window.location.hash = id;
-	window.location.search = urlParams.toString();
+	return `?${urlParams.toString()}#${id}`;
 };
 
-const handleKeyEventClick = (filterKeyEvents: boolean, id: string) => {
-	const urlParams = new URLSearchParams(window.location.search);
+const getKeyEventLink = (filterKeyEvents: boolean, id: Props['id']) => {
+	const urlParams = new URLSearchParams({
+		filterKeyEvents: filterKeyEvents ? 'false' : 'true',
+	});
 
-	urlParams.set('filterKeyEvents', filterKeyEvents ? 'false' : 'true');
-	urlParams.delete('page'); // direct to the first page
-	urlParams.delete('topics');
-
-	window.location.hash = id;
-	window.location.search = urlParams.toString();
+	return `?${urlParams.toString()}#${id}`;
 };
 
 const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
@@ -87,13 +77,7 @@ export const hasRelevantTopics = (availableTopics?: Topic[]) => {
 /**
  * # Topic Filter Bank
  *
- * A wrapper of Filter Buttons.
- *
- * ## Why does this need to be an Island?
- *
- * ⚠️ It does not need to be! ⚠️
- *
- * Redirecting to a URL should not require us to have a click handler.
+ * A wrapper of filter links.
  *
  * ---
  *
@@ -130,32 +114,28 @@ export const TopicFilterBank = ({
 			</div>
 			<div css={topicStyles}>
 				{keyEvents?.length ? (
-					<FilterButton
+					<FilterLink
 						value={'Key events'}
 						count={keyEvents.length}
 						format={format}
 						isActive={filterKeyEvents}
-						onClick={() => {
-							handleKeyEventClick(filterKeyEvents, id);
-						}}
+						href={getKeyEventLink(filterKeyEvents, id)}
 					/>
 				) : null}
 
 				{topFiveTopics.map((topic) => {
-					const buttonParams = `${topic.type}:${topic.value}`;
+					const linkParams = `${topic.type}:${topic.value}`;
 					const isActive =
 						!!selectedTopic && isEqual(selectedTopic, topic);
 
 					return (
-						<FilterButton
+						<FilterLink
 							value={topic.value}
 							type={topic.type}
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={() =>
-								handleTopicClick(isActive, buttonParams, id)
-							}
+							href={getTopicLink(isActive, linkParams, id)}
 							key={`filter-${topic.value}`}
 						/>
 					);
