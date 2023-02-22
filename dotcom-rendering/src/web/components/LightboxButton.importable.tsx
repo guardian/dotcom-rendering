@@ -9,6 +9,7 @@ import {
 import { SvgArrowExpand } from '@guardian/source-react-components';
 import libDebounce from 'lodash.debounce';
 import React, { useEffect } from 'react';
+import screenfull from 'screenfull';
 import type { RoleType } from '../../types/content';
 
 type Props = {
@@ -17,23 +18,6 @@ type Props = {
 	format: ArticleFormat;
 	isMainMedia?: boolean;
 };
-
-/**
- * Typescript doesn't have support for these vender prefixes but we use them with
- * the fullscreen API
- *
- * See: https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullScreen
- */
-interface FullscreenElement extends HTMLElement {
-	mozRequestFullScreen?(): Promise<undefined | TypeError>;
-	msRequestFullscreen?(): Promise<undefined | TypeError>;
-	webkitRequestFullscreen?(): Promise<undefined | TypeError>;
-}
-interface FullscreenDocument extends Document {
-	mozCancelFullScreen?(): Promise<unknown>;
-	msExitFullscreen?(): Promise<unknown>;
-	webkitExitFullscreen?(): Promise<unknown>;
-}
 
 function decideSize(role: RoleType) {
 	switch (role) {
@@ -124,48 +108,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
-	function requestFullscreen(fsElement: FullscreenElement) {
-		const noop = () => {
-			// Sometimes you can't open in fullscreen mode. This can happen for lots of reasons
-			// but a predicatable one is with a permalink like https://...#img-8
-			//
-			// Dropping these errors here but if you think there are problems in this area
-			// you should capture them and send them to Sentry. You might want to filter out
-			// 'Permissions check failed' (Chrome) and 'Fullscreen request denied' (Firefox)
-		};
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is needed
-		if (fsElement.requestFullscreen) {
-			fsElement.requestFullscreen().catch(noop);
-		} else if (fsElement.webkitRequestFullscreen) {
-			fsElement.webkitRequestFullscreen().catch(noop);
-		} else if (fsElement.mozRequestFullScreen) {
-			fsElement.mozRequestFullScreen().catch(noop);
-		} else if (fsElement.msRequestFullscreen) {
-			fsElement.msRequestFullscreen().catch(noop);
-		} else {
-			// Fullscreen API is not supported
+	function requestFullscreen() {
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
+		if (screenfull.isEnabled) {
+			void screenfull.request(lightbox);
 		}
 	}
 
-	function exitFullscreen(fsDocument: FullscreenDocument) {
-		const onError = (error: any) => {
-			// Is this log being too loud in Sentry? If, after having looked at the reported values
-			// you think this error doesn't need to be captured then I encourage you to remove this
-			// code
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- error should be any
-			window.guardian.modules.sentry.reportError(error, 'lightbox');
-		};
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is needed
-		if (fsDocument.exitFullscreen) {
-			fsDocument.exitFullscreen().catch(onError);
-		} else if (fsDocument.webkitExitFullscreen) {
-			fsDocument.webkitExitFullscreen().catch(onError);
-		} else if (fsDocument.mozCancelFullScreen) {
-			fsDocument.mozCancelFullScreen().catch(onError);
-		} else if (fsDocument.msExitFullscreen) {
-			fsDocument.msExitFullscreen().catch(onError);
-		} else {
-			// Fullscreen API is not supported
+	function exitFullscreen() {
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
+		if (screenfull.isEnabled) {
+			void screenfull.exit();
 		}
 	}
 
@@ -341,10 +294,8 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		document.documentElement.classList.add('lightbox-open');
 		// Show lightbox
 		lightbox.removeAttribute('hidden');
-
-		// Try to open the lightbox in fullscreen mode. This may fail
-		requestFullscreen(lightbox as FullscreenElement);
-
+		// // Try to open the lightbox in fullscreen mode. This may fail
+		requestFullscreen();
 		// When opening the lightbox, if one doesn't exist already, add a history state referencing
 		// the currently selected image. Doing this means the back action will take the reader back
 		// to the article
@@ -376,14 +327,15 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
-		// Resore focus
-		// Okay, sure, it 👋 might not 👋 be a button but it *will* be focusable
-		// because it came from activeElement
+		// Restore focus
+		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
+		// focusable because it came from activeElement
 		(previouslyFocused as HTMLButtonElement).focus();
-
-		// If we're in fullscreen mode, close it
-		if (document.fullscreenElement) {
-			exitFullscreen(document);
+		// If we're in fullscreen mode, exit it
+		if (screenfull.isFullscreen) {
+			// The lightbox was closed by clicking the close button so we need
+			// to exit fullscreen
+			exitFullscreen();
 		}
 	}
 
@@ -477,16 +429,21 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * close function in response to the reader closing fullscreen mode. Like
 	 * this there's no need to press escape twice to exit the lightbox
 	 */
-	lightbox.addEventListener('fullscreenchange', () => {
-		if (document.fullscreenElement) {
-			log(
-				'dotcom',
-				`💡 ${document.fullscreenElement.id} entered fullscreen mode.`,
-			);
-		} else {
-			close();
-		}
-	});
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
+	if (screenfull.isEnabled) {
+		screenfull.on('change', () => {
+			if (screenfull.isFullscreen) {
+				log('dotcom', `💡 entered fullscreen mode.`);
+			} else {
+				log('dotcom', `💡 leaving fullscreen mode.`);
+				if (!lightbox.hasAttribute('hidden')) {
+					// If lightbox is still showing then the escape key was probably pressed
+					// which closes fullscreen mode but not the lightbox, so let's close it
+					close();
+				}
+			}
+		});
+	}
 
 	/**
 	 * popstate is fired when a user goes back or forward, either using buttons
