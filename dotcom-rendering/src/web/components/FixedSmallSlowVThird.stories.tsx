@@ -20,7 +20,6 @@ export default {
 export const Default = () => (
 	<FrontSection
 		title="Fixed Small Slow V Third"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVThird trails={trails} showAge={true} />

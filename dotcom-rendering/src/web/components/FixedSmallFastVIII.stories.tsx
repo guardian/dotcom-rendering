@@ -22,7 +22,6 @@ export const Default = () => (
 		title="Fixed Small Fast VIII"
 		showTopBorder={true}
 		showSideBorders={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallFastVIII trails={trails} showAge={true} />

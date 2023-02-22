@@ -20,7 +20,6 @@ export default {
 export const OneTrail = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -35,7 +34,6 @@ OneTrail.story = { name: 'with one trail' };
 export const TwoTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -50,7 +48,6 @@ TwoTrails.story = { name: 'with two trails' };
 export const ThreeTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -65,7 +62,6 @@ ThreeTrails.story = { name: 'with three trails' };
 export const FourTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -80,7 +76,6 @@ FourTrails.story = { name: 'with four trails' };
 export const FiveTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -95,7 +90,6 @@ FiveTrails.story = { name: 'with five trails' };
 export const SixTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -110,7 +104,6 @@ SixTrails.story = { name: 'with six trails' };
 export const SevenTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -125,7 +118,6 @@ SevenTrails.story = { name: 'with seven trails' };
 export const EightTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU
@@ -140,7 +132,6 @@ EightTrails.story = { name: 'with eight trails' };
 export const NineTrails = () => (
 	<FrontSection
 		title="Fixed Medium Slow XII MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowXIIMPU

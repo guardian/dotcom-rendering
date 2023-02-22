@@ -22,7 +22,6 @@ export const Default = () => (
 		title="Fixed Medium Slow VII"
 		showTopBorder={true}
 		showSideBorders={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedMediumSlowVII trails={trails} showAge={true} />

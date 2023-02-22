@@ -378,7 +378,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								padContent={true}
 								centralBorder="partial"
 								url={collection.href}
 								ophanComponentLink={ophanComponentLink}

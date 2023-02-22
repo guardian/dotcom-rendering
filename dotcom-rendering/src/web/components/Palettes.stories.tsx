@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
 
 export default {
 	title: 'Layouts/Palettes',
@@ -23,9 +23,8 @@ const groupedTrails = {
 };
 
 export const EventPalette = () => (
-	<Section
-		title="EventPalette"
-		padContent={false}
+	<FrontSection
+		title="Event Palette"
 		centralBorder="partial"
 		containerPalette="EventPalette"
 		showDateHeader={true}
@@ -36,7 +35,7 @@ export const EventPalette = () => (
 			containerPalette="EventPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 EventPalette.story = {
 	parameters: {
@@ -51,9 +50,8 @@ EventPalette.story = {
 };
 
 export const EventAltPalette = () => (
-	<Section
-		title="EventAltPalette"
-		padContent={false}
+	<FrontSection
+		title="Event Alt Palette"
 		centralBorder="partial"
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
@@ -64,13 +62,12 @@ export const EventAltPalette = () => (
 			containerPalette="EventAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SombrePalette = () => (
-	<Section
+	<FrontSection
 		title="SombrePalette"
-		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombrePalette"
 		showDateHeader={true}
@@ -81,13 +78,12 @@ export const SombrePalette = () => (
 			containerPalette="SombrePalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SombreAltPalette = () => (
-	<Section
-		title="SombreAltPalette"
-		padContent={false}
+	<FrontSection
+		title="Sombre Alt Palette"
 		centralBorder="partial"
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
@@ -98,13 +94,12 @@ export const SombreAltPalette = () => (
 			containerPalette="SombreAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const BreakingPalette = () => (
-	<Section
-		title="BreakingPalette"
-		padContent={false}
+	<FrontSection
+		title="Breaking Palette"
 		centralBorder="partial"
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
@@ -115,13 +110,12 @@ export const BreakingPalette = () => (
 			containerPalette="BreakingPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const LongRunningPalette = () => (
-	<Section
-		title="LongRunningPalette"
-		padContent={false}
+	<FrontSection
+		title="Long Running Palette"
 		centralBorder="partial"
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
@@ -132,11 +126,11 @@ export const LongRunningPalette = () => (
 			containerPalette="LongRunningPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const LongRunningAltPalette = () => (
-	<Section
+	<FrontSection
 		title="LongRunningAltPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -149,13 +143,12 @@ export const LongRunningAltPalette = () => (
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const InvestigationPalette = () => (
-	<Section
-		title="InvestigationPalette"
-		padContent={false}
+	<FrontSection
+		title="Investigation Palette"
 		centralBorder="partial"
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
@@ -166,13 +159,12 @@ export const InvestigationPalette = () => (
 			containerPalette="InvestigationPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SpecialReportAltPalette = () => (
-	<Section
-		title="SpecialReportAltPalette"
-		padContent={false}
+	<FrontSection
+		title="Special Report Alt Palette"
 		centralBorder="partial"
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}
@@ -183,5 +175,5 @@ export const SpecialReportAltPalette = () => (
 			containerPalette="SpecialReportAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );

@@ -20,7 +20,6 @@ export default {
 export const Default = () => (
 	<FrontSection
 		title="Fixed Small Slow III"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowIII trails={trails} showAge={true} />

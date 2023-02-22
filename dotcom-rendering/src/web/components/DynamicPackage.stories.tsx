@@ -30,7 +30,6 @@ export const One = () => (
 	<FrontSection
 		title="Dynamic Package"
 		showTopBorder={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -51,7 +50,6 @@ export const Two = () => (
 	<FrontSection
 		title="Dynamic Package"
 		showTopBorder={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -71,7 +69,6 @@ Two.story = {
 export const Three = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -91,7 +88,6 @@ Three.story = {
 export const Four = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -111,7 +107,6 @@ Four.story = {
 export const Five = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -132,7 +127,6 @@ export const Six = () => (
 	<FrontSection
 		title="Dynamic Package"
 		showTopBorder={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -153,7 +147,6 @@ export const Seven = () => (
 	<FrontSection
 		title="Dynamic Package"
 		showTopBorder={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -174,7 +167,6 @@ export const Eight = () => (
 	<FrontSection
 		title="Dynamic Package"
 		showTopBorder={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -196,7 +188,6 @@ export const Nine = () => (
 		title="Dynamic Package"
 		showTopBorder={true}
 		showSideBorders={true}
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -220,7 +211,7 @@ export const Boosted1 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -247,7 +238,7 @@ export const Boosted2 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -273,7 +264,7 @@ export const Boosted3 = () => {
 	return (
 		<FrontSection
 			title="Dynamic Package"
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -299,7 +290,7 @@ export const Boosted4 = () => {
 	return (
 		<FrontSection
 			title="Dynamic Package"
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -325,7 +316,7 @@ export const Boosted5 = () => {
 	return (
 		<FrontSection
 			title="Dynamic Package"
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -352,7 +343,7 @@ export const Boosted8 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -379,7 +370,7 @@ export const Boosted9 = () => {
 		<FrontSection
 			title="Dynamic Package"
 			showTopBorder={true}
-			padContent={true}
+
 			centralBorder="partial"
 		>
 			<DynamicPackage
@@ -401,7 +392,6 @@ Boosted9.story = {
 export const OneSnapThreeStandard = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -421,7 +411,6 @@ OneSnapThreeStandard.story = {
 export const ThreeSnapTwoStandard = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage
@@ -441,7 +430,6 @@ ThreeSnapTwoStandard.story = {
 export const ThreeSnapTwoStandard2ndBoosted = () => (
 	<FrontSection
 		title="Dynamic Package"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicPackage

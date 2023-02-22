@@ -56,6 +56,7 @@ export const ContainerStory = () => {
 			title="Default Container"
 			showTopBorder={false}
 			showSideBorders={false}
+			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>

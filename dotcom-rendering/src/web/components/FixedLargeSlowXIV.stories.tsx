@@ -20,7 +20,6 @@ export default {
 export const Default = () => (
 	<FrontSection
 		title="Fixed Large Slow XIV"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedLargeSlowXIV trails={trails} showAge={true} />

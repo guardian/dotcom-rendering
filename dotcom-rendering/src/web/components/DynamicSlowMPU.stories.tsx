@@ -23,7 +23,6 @@ const standards = trails.slice(3);
 export const NoBigs = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -44,7 +43,6 @@ NoBigs.story = { name: 'with no big cards, only standard' };
 export const OneBig = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -65,7 +63,6 @@ OneBig.story = { name: 'with just one big' };
 export const TwoBigs = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -86,7 +83,6 @@ TwoBigs.story = { name: 'with two bigs' };
 export const FirstBigBoosted = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -111,7 +107,6 @@ FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
 export const SecondBigBoosted = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -136,7 +131,6 @@ SecondBigBoosted.story = { name: 'with the second of two bigs boosted' };
 export const ThreeBigs = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU
@@ -157,7 +151,6 @@ ThreeBigs.story = { name: 'with three bigs' };
 export const AllBigs = () => (
 	<FrontSection
 		title="Dynamic Slow MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<DynamicSlowMPU

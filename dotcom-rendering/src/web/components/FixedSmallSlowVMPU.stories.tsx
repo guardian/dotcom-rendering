@@ -20,7 +20,6 @@ export default {
 export const FourCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -36,7 +35,6 @@ FourCards.story = { name: 'With 4 cards' };
 export const ThreeCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -52,7 +50,6 @@ ThreeCards.story = { name: 'With 3 cards' };
 export const TwoCards = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
@@ -68,7 +65,6 @@ TwoCards.story = { name: 'With 2 cards' };
 export const OneCard = () => (
 	<FrontSection
 		title="Fixed Small Slow V MPU"
-		padContent={true}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU
