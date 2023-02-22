@@ -10,9 +10,9 @@ import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
+import { text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { text } from 'palette';
 
 // ----- Component ----- //
 

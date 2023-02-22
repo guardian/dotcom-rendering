@@ -1727,7 +1727,7 @@ const dateline = ({ design, theme }: ArticleFormat): string => {
 		default:
 			return neutral[46];
 	}
-}
+};
 
 const datelineDark = ({ design, theme }: ArticleFormat): string => {
 	switch (design) {
@@ -1752,7 +1752,7 @@ const datelineDark = ({ design, theme }: ArticleFormat): string => {
 		default:
 			return neutral[60];
 	}
-}
+};
 
 // ----- API ----- //
 
