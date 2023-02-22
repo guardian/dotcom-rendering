@@ -122,7 +122,8 @@ const NewsletterSignup: FC<Props> = ({
 		successDescription,
 	} = element;
 	return (
-		<aside
+		<div
+			role='none'
 			className="js-signup-form-container"
 			css={containerStyles(showByDefault)}
 		>
@@ -130,7 +131,7 @@ const NewsletterSignup: FC<Props> = ({
 				id={`newsletter-promotion-for-${identityName}${skipLinkIdSuffix}`}
 				blockDescription="newsletter promotion"
 			>
-				<div css={frameStyles(format)}>
+				<aside css={frameStyles(format)} aria-label='newsletter promotion'>
 					<div css={stackBelowTabletStyles}>
 						<p css={titleStyles(theme)}>
 							Sign up to <span>{name}</span>
@@ -153,9 +154,9 @@ const NewsletterSignup: FC<Props> = ({
 					/>
 
 					<PrivacyWording useCaptcha={false} format={format} />
-				</div>
+				</aside>
 			</InlineSkipToWrapper>
-		</aside>
+		</div>
 	);
 };
 
