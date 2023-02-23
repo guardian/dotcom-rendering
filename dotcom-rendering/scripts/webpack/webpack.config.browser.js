@@ -95,7 +95,7 @@ const getLoaders = (bundle) => {
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'variant':
 		case 'modern':
-			return USE_SWC ? swcLoader( getBrowserTargets() ) : babelLoader;
+			return USE_SWC ? swcLoader(getBrowserTargets()) : babelLoader;
 	}
 };
 
