@@ -227,7 +227,9 @@ describe('Sign In Gate Tests', function () {
 		describe('Sign in gate should personalise based on the GU_CO_COMPLETE cookie', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
 				postArticleAndScrollToGateForLazyLoad({
-					switchOverride: { personaliseSignInAfterCheckoutGate: true },
+					switchOverride: {
+						personaliseSignInAfterCheckoutGate: true,
+					},
 				});
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
@@ -249,7 +251,9 @@ describe('Sign In Gate Tests', function () {
 				setGuCOCompleteCookie('new', 'DigitalPack');
 
 				postArticleAndScrollToGateForLazyLoad({
-					switchOverride: { personaliseSignInAfterCheckoutGate: false },
+					switchOverride: {
+						personaliseSignInAfterCheckoutGate: false,
+					},
 				});
 
 				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
