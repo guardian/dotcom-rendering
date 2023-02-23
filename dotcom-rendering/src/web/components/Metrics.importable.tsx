@@ -66,11 +66,17 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 				? shouldBypassSampling(abTestApi)
 				: false;
 
+			/**
+			 * We rely on `bypassSampling` rather than the built-in sampling,
+			 * but set the value to greater than 0 to avoid console warnings.
+			 */
+			const nearZeroSampling = Number.MIN_VALUE;
+
 			void initCoreWebVitals({
 				browserId,
 				pageViewId,
 				isDev,
-				sampling: 0, // we rely on `bypassSampling` instead
+				sampling: nearZeroSampling,
 				team: 'dotcom',
 			});
 
