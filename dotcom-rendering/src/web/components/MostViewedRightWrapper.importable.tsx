@@ -12,21 +12,14 @@ type Props = {
 // Minimum height needed to render MostViewedRight is its own outer height.
 const HEIGHT_REQUIRED = 482 + 24 + 24;
 
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
+const SHADY_PIE_HEIGHT = 400;
+const TOP_RIGHT_AD_HEIGHT = 1059;
 
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
 export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const bodyRef = useRef<HTMLDivElement>(null);
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
-
-	// Styling the data island root so it stretches to cover the full height available in the container.
-	// Requires us to subtract the height of its sibling in the container (StickyAd).
-	const stretchWrapperHeight = css`
-		height: ${adBlockerDetected
-			? `calc(100% - 400px)`
-			: `calc(100% - ${MOSTVIEWED_STICKY_HEIGHT}px)`};
-	`;
 
 	useEffect(() => {
 		const checkHeight = (ref: RefObject<HTMLDivElement>) => {
@@ -50,15 +43,32 @@ export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 		});
 	}, [heightIsAvailable]);
 
+	const rightAdvertHeight = adBlockerDetected
+		? SHADY_PIE_HEIGHT
+		: TOP_RIGHT_AD_HEIGHT;
+
+	// Styling the data island root so it stretches to cover the full height available in the container.
+	// Requires us to subtract the height of its sibling in the container (Sticky top right ad slot).
+	const availableSpaceHeight = css`
+		height: calc(100% - ${rightAdvertHeight}px);
+	`;
+
+	if (!heightIsAvailable) {
+		return <div ref={bodyRef} css={availableSpaceHeight} />;
+	}
+
 	return (
-		<div ref={bodyRef} css={stretchWrapperHeight}>
-			{heightIsAvailable ? (
-				<MostViewedRight
-					limitItems={limitItems}
-					isAdFreeUser={isAdFreeUser}
-					adBlockerDetected={!!adBlockerDetected}
-				/>
-			) : null}
+		<div
+			ref={bodyRef}
+			css={css`
+				height: auto;
+			`}
+		>
+			<MostViewedRight
+				limitItems={limitItems}
+				isAdFreeUser={isAdFreeUser}
+				adBlockerDetected={!!adBlockerDetected}
+			/>
 		</div>
 	);
 };

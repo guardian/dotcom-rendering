@@ -25,11 +25,12 @@ import { logger } from './lib/logging';
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
-	({ body }: Request, _: Response, time: number) => {
+	({ body, path }: Request, _: Response, renderTime: number) => {
 		const { pageId = 'no-page-id-found' } = body as FEArticleType;
 		logger.info('Page render time', {
+			path,
 			pageId,
-			renderTime: time,
+			renderTime,
 		});
 	},
 );
