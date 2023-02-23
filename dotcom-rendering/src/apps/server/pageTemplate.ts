@@ -15,7 +15,16 @@ export const pageTemplate = ({
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'
 			: 'favicon-32x32-dev-yellow.ico';
-	const androidFontSizeStylesheetPath = '/fontSize.css';
+
+	/**
+	 * This workaround enables the reader to adjust interface scaling in the
+	 * Android app. `fontSize.css` does not exist in this repository: the
+	 * Android app intercepts requests for this file and provides the contents.
+	 * @see https://github.com/guardian/android-news-app/blob/f7197b1c75c2bdafe1ea5e8dff547936c6a4df69/android-news-app/src/main/java/com/guardian/feature/renderedarticle/webview/FontSizeInterceptor.kt#L11
+	 */
+	const androidFontSizeWorkaround =
+		'<link rel="stylesheet" type="text/css" href="/fontSize.css" />';
+
 	return `<!doctype html>
 		<html lang="en">
 			<head>
