@@ -228,7 +228,7 @@ describe('Sign In Gate Tests', function () {
 			it('should show the main sign in gate if GU_CO_COMPLETE if not present', function () {
 				postArticleAndScrollToGateForLazyLoad({
 					switchOverride: {
-						personaliseSignInAfterCheckoutGate: true,
+						personaliseSignInGateAfterCheckout: true,
 					},
 				});
 
@@ -252,7 +252,7 @@ describe('Sign In Gate Tests', function () {
 
 				postArticleAndScrollToGateForLazyLoad({
 					switchOverride: {
-						personaliseSignInAfterCheckoutGate: false,
+						personaliseSignInGateAfterCheckout: false,
 					},
 				});
 
@@ -303,7 +303,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -334,7 +334,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -365,7 +365,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -397,7 +397,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -428,7 +428,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -459,7 +459,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 
@@ -493,7 +493,7 @@ describe('Sign In Gate Tests', function () {
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
-							personaliseSignInAfterCheckoutGate: true,
+							personaliseSignInGateAfterCheckout: true,
 						},
 					});
 

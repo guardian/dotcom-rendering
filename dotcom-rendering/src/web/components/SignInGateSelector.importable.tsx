@@ -216,9 +216,9 @@ export const SignInGateSelector = ({
 		}
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		getSwitches().then((switches) => {
-			if (switches.personaliseSignInAfterCheckoutGate) {
+			if (switches.personaliseSignInGateAfterCheckout) {
 				setPersonaliseSwitch(
-					switches.personaliseSignInAfterCheckoutGate,
+					switches.personaliseSignInGateAfterCheckout,
 				);
 			} else setPersonaliseSwitch(false);
 		});
