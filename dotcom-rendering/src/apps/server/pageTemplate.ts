@@ -34,14 +34,16 @@ export const pageTemplate = ({
 				<meta name="description" content="${title}" />
 
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
-				<link rel="stylesheet" type="text/css" href="${androidFontSizeStylesheetPath}" />
+				${androidFontSizeWorkaround}
 
-                <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+                <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 
 				<meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
 				<meta name="twitter:dnt" content="on" />
 
-				${clientScripts.map((scriptSrc) => `<script src="${scriptSrc}"></script>`).join('\n')}
+				${clientScripts
+					.map((scriptSrc) => `<script src="${scriptSrc}"></script>`)
+					.join('\n')}
                 <style>${resets.resetCSS}</style>
 				${css}
 			</head>
