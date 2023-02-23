@@ -32,7 +32,7 @@ export const pageTemplate = ({
 				<meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
 				<meta name="twitter:dnt" content="on" />
 
-				${clientScripts.map((cs) => `<script src="${cs}"></script>`).join('\n')}
+				${clientScripts.map((scriptSrc) => `<script src="${scriptSrc}"></script>`).join('\n')}
                 <style>${resets.resetCSS}</style>
 				${css}
 			</head>
