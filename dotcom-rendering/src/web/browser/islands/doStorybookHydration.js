@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
 import { getName } from './getName';
 import { getProps } from './getProps';
 
@@ -31,10 +31,8 @@ export const doStorybookHydration = () => {
 				`../../components/${name}.importable`
 			).then((module) => {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				ReactDOM.render(
-					React.createElement(module[name], props),
-					element,
-				);
+				const root = createRoot(element);
+				root.render(React.createElement(module[name], props), element);
 			});
 		}
 	});
