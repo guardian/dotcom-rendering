@@ -10,7 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
-import type { SignInGateProps } from '../types';
+import type {  SignInGateWithoutCheckoutData } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -287,7 +287,7 @@ export const SignInGateFakeSocial = ({
 	dismissGate,
 	abTest,
 	ophanComponentId,
-}: SignInGateProps) => {
+}: SignInGateWithoutCheckoutData ) => {
 	const verticalButtonStack =
 		abTest?.variant === 'fake-social-variant-vertical';
 

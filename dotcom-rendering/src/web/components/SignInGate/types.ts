@@ -23,9 +23,8 @@ export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
 type UserTypeTuple = typeof ALL_USER_TYPES;
 export type UserType = UserTypeTuple[number];
 
-export function isUserType(value: unknown): value is UserType {
-	return ALL_USER_TYPES.includes(value as UserType);
-}
+export const isUserType = (value: unknown): value is UserType =>
+	ALL_USER_TYPES.includes(value as UserType);
 
 export const ALL_PRODUCTS = [
 	'Contribution',
@@ -36,9 +35,8 @@ export const ALL_PRODUCTS = [
 type ProductTuple = typeof ALL_PRODUCTS;
 export type Product = ProductTuple[number];
 
-export function isProduct(value: unknown): value is Product {
-	return ALL_PRODUCTS.includes(value as Product);
-}
+export const isProduct = (value: unknown): value is Product =>
+	ALL_PRODUCTS.includes(value as Product);
 export interface CheckoutCompleteCookieData {
 	userType: UserType;
 	product: Product;
@@ -56,19 +54,21 @@ type BaseSignInGateProps = {
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
-}
+};
 
-type SignInGateWithoutCheckoutData = BaseSignInGateProps & {
-     checkoutCompleteCookieData?: never; // Or just leave it as optional CheckoutCompleteCookieData
-      personaliseSignInAfterCheckoutSwitch: false;
-}
+export type SignInGateWithoutCheckoutData = BaseSignInGateProps & {
+	checkoutCompleteCookieData?: never;
+	personaliseSignInGateAfterCheckoutSwitch: false;
+};
 
 export type SignInGateWithCheckoutData = BaseSignInGateProps & {
-     checkoutCompleteCookieData: CheckoutCompleteCookieData;
-      personaliseSignInAfterCheckoutSwitch: true;
-}
+	checkoutCompleteCookieData: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch: true;
+};
 
-export type SignInGateProps = SignInGateWithoutCheckoutData | SignInGateWithCheckoutData
+export type SignInGateProps =
+	| SignInGateWithoutCheckoutData
+	| SignInGateWithCheckoutData;
 
 export type CurrentSignInGateABTest = {
 	name: string;

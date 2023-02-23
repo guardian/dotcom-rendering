@@ -130,7 +130,8 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: componentId,
 			checkoutCompleteCookieData,
-			personaliseSignInAfterCheckoutSwitch,
+			personaliseSignInGateAfterCheckoutSwitch:
+				personaliseSignInAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown

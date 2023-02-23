@@ -23,7 +23,7 @@ export const mainStandalone = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				personaliseSignInAfterCheckoutSwitch={false}
+				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -39,7 +39,7 @@ export const mainStandaloneMandatory = () => {
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
-				personaliseSignInAfterCheckoutSwitch={false}
+				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -54,7 +54,7 @@ export const fakeSocialStandalone = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				personaliseSignInAfterCheckoutSwitch={false}
+				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -74,7 +74,7 @@ export const fakeSocialStandaloneVertical = () => {
 					name: 'fake-social-test',
 					variant: 'fake-social-variant-vertical',
 				}}
-				personaliseSignInAfterCheckoutSwitch={false}
+				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -96,7 +96,7 @@ export const signInGateCopyTest = () => {
 					name: 'sign-in-gate-copy-test-jan-2023',
 					variant: 'quick-and-easy',
 				}}
-				personaliseSignInAfterCheckoutSwitch={false}
+				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -116,7 +116,7 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				checkoutCompleteCookieData={args}
-				personaliseSignInAfterCheckoutSwitch={true}
+				personaliseSignInGateAfterCheckoutSwitch={true}
 			/>
 		</Section>
 	);

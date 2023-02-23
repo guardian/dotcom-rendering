@@ -16,14 +16,7 @@ const SignInGateFakeSocial = React.lazy(() => {
 });
 
 export const signInGateComponent: SignInGateComponent = {
-	gate: ({
-		ophanComponentId,
-		dismissGate,
-		guUrl,
-		signInUrl,
-		abTest,
-		personaliseSignInAfterCheckoutSwitch,
-	}) => (
+	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
 		<Lazy margin={300}>
 			<Suspense fallback={<></>}>
 				<SignInGateFakeSocial
@@ -32,9 +25,7 @@ export const signInGateComponent: SignInGateComponent = {
 					guUrl={guUrl}
 					signInUrl={signInUrl}
 					abTest={abTest}
-					personaliseSignInAfterCheckoutSwitch={
-						personaliseSignInAfterCheckoutSwitch
-					}
+					personaliseSignInGateAfterCheckoutSwitch={false}
 				/>
 			</Suspense>
 		</Lazy>

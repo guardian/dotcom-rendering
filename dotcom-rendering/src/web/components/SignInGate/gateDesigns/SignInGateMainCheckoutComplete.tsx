@@ -9,11 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
-import type {
-	Product,
-	SignInGatePropsWithCheckoutCompleteCookieData,
-	UserType,
-} from '../types';
+import type { Product, SignInGateWithCheckoutData, UserType } from '../types';
 import {
 	firstParagraphOverlay,
 	hideElementsCss,
@@ -175,7 +171,7 @@ export const SignInGateMainCheckoutComplete = ({
 	ophanComponentId,
 	isMandatory = false,
 	checkoutCompleteCookieData,
-}: SignInGatePropsWithCheckoutCompleteCookieData) => {
+}: SignInGateWithCheckoutData) => {
 	const { userType, product } = checkoutCompleteCookieData;
 
 	// send new/guest userType to the /register page instead of /signin
