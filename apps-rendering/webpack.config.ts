@@ -217,6 +217,7 @@ const clientConfigProduction = {
 	plugins: [
 		new WebpackManifestPlugin({}),
 		new HtmlWebpackPlugin({
+			excludeChunks: ['editions'],
 			meta: {
 				'Content-Security-Policy': {
 					'http-equiv': 'Content-Security-Policy',
