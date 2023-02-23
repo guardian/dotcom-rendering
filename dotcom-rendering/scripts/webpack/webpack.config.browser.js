@@ -94,26 +94,13 @@ const getLoaders = (bundle) => {
 		case 'apps':
 			return [
 				{
-					loader: 'babel-loader',
+					loader: 'swc-loader',
 					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets: ['android >= 5', 'ios >= 12'],
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
+						...swcConfig,
+						env: {
+							dynamicImport: true,
+							targets: ['android >= 5', 'ios >= 12'],
+						},
 					},
 				},
 			];
