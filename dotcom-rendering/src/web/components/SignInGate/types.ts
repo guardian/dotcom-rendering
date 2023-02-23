@@ -49,23 +49,26 @@ export function isCheckoutCompleteCookieData(
 ): obj is CheckoutCompleteCookieData {
 	return isObject(obj) && isUserType(obj.userType) && isProduct(obj.product);
 }
-export interface SignInGateProps {
+type BaseSignInGateProps = {
 	signInUrl: string;
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
-	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
-	personaliseSignInAfterCheckoutSwitch: boolean;
 }
 
-// Type with checkoutCompleteCookieData non optional
-type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
-export type SignInGatePropsWithCheckoutCompleteCookieData = WithRequired<
-	SignInGateProps,
-	'checkoutCompleteCookieData'
->;
+type SignInGateWithoutCheckoutData = BaseSignInGateProps & {
+     checkoutCompleteCookieData?: never; // Or just leave it as optional CheckoutCompleteCookieData
+      personaliseSignInAfterCheckoutSwitch: false;
+}
+
+export type SignInGateWithCheckoutData = BaseSignInGateProps & {
+     checkoutCompleteCookieData: CheckoutCompleteCookieData;
+      personaliseSignInAfterCheckoutSwitch: true;
+}
+
+export type SignInGateProps = SignInGateWithoutCheckoutData | SignInGateWithCheckoutData
 
 export type CurrentSignInGateABTest = {
 	name: string;
