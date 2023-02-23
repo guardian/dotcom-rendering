@@ -21,7 +21,7 @@ export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 		const article = enhanceArticleType(body);
 		const { html, clientScripts } = articleToHtml(article);
 
-		// The Android app will cache these assets, enable offline reading
+		// The Android app will cache these assets to enable offline reading
 		res.set('Link', makePrefetchHeader(clientScripts)).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}`);
