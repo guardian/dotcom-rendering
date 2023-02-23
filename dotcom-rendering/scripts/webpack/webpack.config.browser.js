@@ -35,14 +35,14 @@ const babelLoader = [
 	},
 ];
 
-const swcLoader = [
+const swcLoader = (targets) => [
 	{
 		loader: 'swc-loader',
 		options: {
 			...swcConfig,
 			env: {
 				dynamicImport: true,
-				targets: getBrowserTargets(),
+				targets,
 			},
 		},
 	},
@@ -92,21 +92,10 @@ const getLoaders = (bundle) => {
 				},
 			];
 		case 'apps':
-			return [
-				{
-					loader: 'swc-loader',
-					options: {
-						...swcConfig,
-						env: {
-							dynamicImport: true,
-							targets: ['android >= 5', 'ios >= 12'],
-						},
-					},
-				},
-			];
+			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'variant':
 		case 'modern':
-			return USE_SWC ? swcLoader : babelLoader;
+			return USE_SWC ? swcLoader( getBrowserTargets() ) : babelLoader;
 	}
 };
 
