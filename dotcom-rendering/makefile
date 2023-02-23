@@ -81,10 +81,6 @@ dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-web: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development BUILD_APPS=false webpack serve --config ./scripts/webpack/webpack.config.js
-
 dev-variant: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
