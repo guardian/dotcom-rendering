@@ -53,7 +53,7 @@ module.exports = {
 					assertions: {
 						'total-blocking-time': [
 							'warn',
-							{ maxNumericValue: 716 },
+							{ maxNumericValue: 450 },
 						],
 						'categories:accessibility': [
 							'warn',
