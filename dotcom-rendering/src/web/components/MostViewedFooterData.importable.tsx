@@ -15,13 +15,11 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
+	edition: string;
 }
 
-function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
-	const sectionsWithoutPopular = ['info', 'global'];
-	const hasSection =
-		sectionName && !sectionsWithoutPopular.includes(sectionName);
-	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
+function buildSectionUrl(edition: string, ajaxUrl: string) {
+	const endpoint = `/most-read/${edition.toLowerCase()}.json`;
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 
@@ -42,6 +40,7 @@ export const MostViewedFooterData = ({
 	sectionName,
 	format,
 	ajaxUrl,
+	edition,
 }: Props) => {
 	const palette = decidePalette(format);
 	// Example usage of AB Tests
@@ -57,7 +56,7 @@ export const MostViewedFooterData = ({
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
-	const url = buildSectionUrl(ajaxUrl, sectionName);
+	const url = buildSectionUrl(edition, ajaxUrl);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
