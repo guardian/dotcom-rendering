@@ -50,6 +50,9 @@ const Placeholder = ({
 	</div>
 );
 
+/** The stories below consistently have padContent set to false, even though the default value and the one which ends up rendering the component in the application is true.
+ * This is so the stories below can match up with the section stories which the FrontSection component is modeled after. */
+
 export const ContainerStory = () => {
 	return (
 		<FrontSection
