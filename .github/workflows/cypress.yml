@@ -22,7 +22,7 @@ jobs:
         working-directory: dotcom-rendering
 
       - name: Upload build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build
           path: dotcom-rendering/dist
@@ -44,7 +44,7 @@ jobs:
           cache: 'yarn'
 
       - name: Download build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: build
           path: dotcom-rendering/dist
