@@ -38,7 +38,20 @@ function decideButtonText({
 type Props = {
 	containerTitle: string;
 	path: string;
-	containerId: string;
+	/**
+	 * `collectionId` is the id of the collection as it figures in the fronts
+	 * config. It is used to generate the URL for the show-more API endpoint.
+	 */
+	collectionId: string;
+	/**
+	 * The value of the `id` attribute on the container element that this 'show more'
+	 * button sits beneath. The main container is server-side rendered, so this show more
+	 * button needs to access its contents on the client side so that we can check whether
+	 * any of the stories received from the `show-more` endpoint are already being displayed
+	 * in the main container. (This can happen due to a lag between when the page is SSRd
+	 * and when the user clicks the 'show more' button.)
+	 */
+	containerElementId: string;
 	showAge: boolean;
 	baseUrl: string;
 	containerPalette?: DCRContainerPalette;
@@ -47,7 +60,8 @@ type Props = {
 export const ShowMore = ({
 	containerTitle,
 	path,
-	containerId,
+	collectionId,
+	containerElementId,
 	showAge,
 	baseUrl,
 	containerPalette,
@@ -55,8 +69,13 @@ export const ShowMore = ({
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
+	/**
+	 * Store the URLs of the cards in the main container for this button, to
+	 * allow us to filter out duplicated stories when we load them from the
+	 * 'show-more' endpoint.
+	 */
 	useOnce(() => {
-		const container = document.getElementById(containerId);
+		const container = document.getElementById(containerElementId);
 		const containerLinks = Array.from(
 			container?.querySelectorAll('a') ?? [],
 		)
@@ -72,7 +91,7 @@ export const ShowMore = ({
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
 	 */
 	const url = isOpen
-		? `${baseUrl}/${path}/show-more/${containerId}.json?dcr=true`
+		? `${baseUrl}/${path}/show-more/${collectionId}.json?dcr=true`
 		: undefined;
 	const { data, error, loading } = useApi<FEFrontCard[]>(url);
 
@@ -82,7 +101,7 @@ export const ShowMore = ({
 			(card) => !existingCardLinks.includes(card.url),
 		);
 
-	const showMoreContainerId = `show-more-${containerId}`;
+	const showMoreContainerId = `show-more-${containerElementId}`;
 
 	useEffect(() => {
 		/**
@@ -173,8 +192,7 @@ export const ShowMore = ({
 					`}
 					aria-controls={showMoreContainerId}
 					aria-expanded={isOpen && !loading}
-					aria-describedby={`show-more-button-${containerId}-description`}
-					data-cy={`show-more-button-${containerId}`}
+					aria-describedby={`show-more-button-${containerElementId}-description`}
 				>
 					{decideButtonText({
 						isOpen,
@@ -183,7 +201,7 @@ export const ShowMore = ({
 					})}
 				</Button>
 				<span
-					id={`show-more-button-${containerId}-description`}
+					id={`show-more-button-${containerElementId}-description`}
 					css={css`
 						${visuallyHidden}
 					`}
