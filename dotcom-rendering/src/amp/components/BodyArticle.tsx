@@ -19,6 +19,7 @@ import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
+import { isOnOzoneTestPage } from '../lib/real-time-config';
 import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
@@ -135,6 +136,7 @@ export const Body = ({ data, config }: Props) => {
 		switches: {
 			ampPrebidPubmatic: !!config.switches.ampPrebidPubmatic,
 			ampPrebidCriteo: !!config.switches.ampPrebidCriteo,
+			ampPrebidOzone: !!config.switches.ampPrebidOzone,
 			permutive: !!config.switches.permutive,
 			ampAmazon: !!config.switches.ampAmazon,
 		},
@@ -143,6 +145,8 @@ export const Body = ({ data, config }: Props) => {
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
 		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid:
+			adInfo.switches.ampPrebidOzone && isOnOzoneTestPage(config.pageId),
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};

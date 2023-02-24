@@ -44,6 +44,7 @@ describe('RegionalAd', () => {
 					config={{
 						usePubmaticPrebid: true,
 						useCriteoPrebid: false,
+						useOzonePrebid: false,
 						usePermutive: true,
 						useAmazon: false,
 					}}
@@ -94,6 +95,7 @@ describe('RegionalAd', () => {
 					config={{
 						usePubmaticPrebid: true,
 						useCriteoPrebid: false,
+						useOzonePrebid: false,
 						usePermutive: false,
 						useAmazon: false,
 					}}
@@ -144,6 +146,7 @@ describe('RegionalAd', () => {
 					config={{
 						usePubmaticPrebid: false,
 						useCriteoPrebid: false,
+						useOzonePrebid: false,
 						usePermutive: true,
 						useAmazon: false,
 					}}
@@ -189,6 +192,7 @@ describe('RegionalAd', () => {
 					config={{
 						usePubmaticPrebid: false,
 						useCriteoPrebid: false,
+						useOzonePrebid: false,
 						usePermutive: false,
 						useAmazon: true,
 					}}
@@ -234,6 +238,7 @@ describe('RegionalAd', () => {
 					config={{
 						usePubmaticPrebid: false,
 						useCriteoPrebid: false,
+						useOzonePrebid: false,
 						usePermutive: false,
 						useAmazon: false,
 					}}

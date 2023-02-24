@@ -6,6 +6,7 @@ import type { Switches } from '../../types/config';
 import type { EditionId } from '../../web/lib/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
+import { isOnOzoneTestPage } from '../lib/real-time-config';
 import { Elements } from './Elements';
 import { RegionalAd } from './RegionalAd';
 
@@ -131,6 +132,7 @@ export const Blocks = ({
 		switches: {
 			ampPrebidPubmatic: !!switches.ampPrebidPubmatic,
 			ampPrebidCriteo: !!switches.ampPrebidCriteo,
+			ampPrebidOzone: !!switches.ampPrebidOzone,
 			permutive: !!switches.permutive,
 			ampAmazon: !!switches.ampAmazon,
 		},
@@ -139,6 +141,8 @@ export const Blocks = ({
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
 		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid:
+			adInfo.switches.ampPrebidOzone && isOnOzoneTestPage(pageId),
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
