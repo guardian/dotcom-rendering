@@ -26,8 +26,8 @@ function buildSectionUrl(
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
-	const editionCall = edition ? `/${edition.toLowerCase()}` : '';
-	const endpoint = `/most-read${editionCall}${
+	const hasEdition = edition && `/${edition.toLowerCase()}`;
+	const endpoint = `/most-read${hasEdition ? hasEdition : ''}${
 		hasSection ? `/${sectionName}` : ''
 	}.json`;
 
@@ -95,19 +95,17 @@ export const MostViewedFooterData = ({
 		return null;
 	}
 
-	if (sectionResponse.data) {
+	console.log(editionResponse.data);
+	console.log(sectionResponse.data);
+
+	if (editionResponse.data && sectionResponse.data) {
 		const tabs =
-			'tabs' in sectionResponse.data
-				? sectionResponse.data.tabs
-				: sectionResponse.data;
-		const editionTabs =
-			'tabs' in editionResponse.data
-				? editionResponse.data.tabs
+			'tabs' in editionResponse.data && 'tabs' in sectionResponse.data
+				? [editionResponse.data.tabs[0], sectionResponse.data.tabs[1]]
 				: editionResponse.data;
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
-				editionTabs={transformTabs(editionTabs)}
 				mostCommented={
 					'mostCommented' in editionResponse.data
 						? decideTrail(editionResponse.data.mostCommented)

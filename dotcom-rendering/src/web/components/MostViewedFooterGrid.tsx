@@ -98,7 +98,6 @@ const gridContainer = css`
 
 type Props = {
 	data: TrailTabType[];
-	editionTabs: TrailType[];
 	sectionName?: string;
 	selectedColour?: string;
 };
@@ -125,15 +124,11 @@ const TabHeading = ({ heading }: { heading: string }) => {
 
 export const MostViewedFooterGrid = ({
 	data,
-	editionTabs,
 	sectionName = '',
 	selectedColour = neutral[0],
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-	const newData = [data[1]];
-	if (editionTabs) {
-		newData.unshift(editionTabs[0]);
-	}
+
 	/**
 	 * If there is only one 'tab' of content, then we don't want to render this as
 	 * a tabbed interface at all, preferring a simple list of links. This should improve
@@ -201,7 +196,7 @@ export const MostViewedFooterGrid = ({
 				</ul>
 			)}
 			{/* End of 'tab' mapping, beginning of 'tabpanel' mapping. */}
-			{newData.map((tab: TrailTabType, i: number) => (
+			{data.map((tab: TrailTabType, i: number) => (
 				<section
 					role={renderAsTabs ? 'tabpanel' : undefined}
 					id={`tabs-popular-${i}`}

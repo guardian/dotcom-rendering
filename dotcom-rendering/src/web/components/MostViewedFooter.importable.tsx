@@ -7,7 +7,6 @@ import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem
 
 type Props = {
 	tabs: TrailTabType[];
-	editionTabs?: TrailTabType[];
 	selectedColour?: string;
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
@@ -49,7 +48,6 @@ export const MostViewedFooter = ({
 	variantFromRunnable,
 	sectionName,
 	selectedColour,
-	editionTabs,
 }: Props) => {
 	return (
 		<div
@@ -62,7 +60,6 @@ export const MostViewedFooter = ({
 		>
 			<MostViewedFooterGrid
 				data={tabs}
-				editionTabs={editionTabs}
 				sectionName={sectionName}
 				selectedColour={selectedColour}
 			/>
