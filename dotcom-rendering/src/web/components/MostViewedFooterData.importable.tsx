@@ -18,8 +18,19 @@ interface Props {
 	edition: string;
 }
 
-function buildSectionUrl(edition: string, ajaxUrl: string) {
-	const endpoint = `/most-read/${edition.toLowerCase()}.json`;
+function buildSectionUrl(
+	ajaxUrl: string,
+	edition?: string,
+	sectionName?: string,
+) {
+	const sectionsWithoutPopular = ['info', 'global'];
+	const hasSection =
+		sectionName && !sectionsWithoutPopular.includes(sectionName);
+	const editionCall = edition ? `/${edition.toLowerCase()}` : '';
+	const endpoint = `/most-read${editionCall}${
+		hasSection ? `/${sectionName}` : ''
+	}.json`;
+
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 
@@ -56,29 +67,55 @@ export const MostViewedFooterData = ({
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
-	const url = buildSectionUrl(edition, ajaxUrl);
-	const { data, error } = useApi<
+	const editionUrl = buildSectionUrl(ajaxUrl, edition);
+	const editionResponse = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
-	>(url);
+	>(editionUrl);
+	const { data: editionUrlData, error: editionUrlError } = editionResponse;
 
-	if (error) {
-		window.guardian.modules.sentry.reportError(error, 'most-viewed-footer');
+	const sectionUrl = buildSectionUrl(ajaxUrl, sectionName);
+	const sectionResponse = useApi<
+		MostViewedFooterPayloadType | FETrailTabType[]
+	>(sectionUrl);
+	const { data: sectionUrlData, error: sectionUrlError } = sectionResponse;
+
+	if (sectionResponse.error) {
+		window.guardian.modules.sentry.reportError(
+			sectionResponse.error,
+			'most-viewed-footer',
+		);
 		return null;
 	}
 
-	if (data) {
-		const tabs = 'tabs' in data ? data.tabs : data;
+	if (editionResponse.error) {
+		window.guardian.modules.sentry.reportError(
+			editionResponse.error,
+			'most-viewed-footer',
+		);
+		return null;
+	}
+
+	if (sectionResponse.data) {
+		const tabs =
+			'tabs' in sectionResponse.data
+				? sectionResponse.data.tabs
+				: sectionResponse.data;
+		const editionTabs =
+			'tabs' in editionResponse.data
+				? editionResponse.data.tabs
+				: editionResponse.data;
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
+				editionTabs={transformTabs(editionTabs)}
 				mostCommented={
-					'mostCommented' in data
-						? decideTrail(data.mostCommented)
+					'mostCommented' in editionResponse.data
+						? decideTrail(editionResponse.data.mostCommented)
 						: undefined
 				}
 				mostShared={
-					'mostShared' in data
-						? decideTrail(data.mostShared)
+					'mostShared' in editionResponse.data
+						? decideTrail(editionResponse.data.mostShared)
 						: undefined
 				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
