@@ -62,15 +62,15 @@ const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 		${grid.column.left}
 		position: relative;
 		grid-row: 1;
-	}
 
-	&::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		border-left: 1px solid ${neutral[86]};
-		right: -10px;
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			border-left: 1px solid ${neutral[86]};
+			right: -10px;
+		}
 	}
 
 	${darkModeCss`

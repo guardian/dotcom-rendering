@@ -28,12 +28,12 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should render', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 		});
 
 		it('should expand on click', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 			cy.get(`[data-snippet-type=${type}]`)
 				.contains('Show')
@@ -45,7 +45,7 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should expand then contract on second click', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 			cy.get(`[data-snippet-type=${type}]`)
 				.contains('Show')
@@ -61,14 +61,14 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should show feedback message when like is clicked', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).click();
 			cy.get('[data-testid="like"]').click();
 			cy.get('[data-testid="feedback"]').should('be.visible');
 		});
 
 		it('should show feedback message when dislike is clicked', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).click();
 			cy.get('[data-testid="dislike"]').click();
 			cy.get('[data-testid="feedback"]').should('be.visible');
@@ -83,7 +83,7 @@ const atomGenericTests = (type, url) => {
 		});
 
 		it('should render', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 		});
 	});
@@ -101,7 +101,7 @@ describe('Why do wombats do square poos?', function () {
 	});
 
 	it('when I get the answer wrong, it should display the right answer when I click Reveal', function () {
-		cy.visit(`/Article?url=${quizAtomUrl}`);
+		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()
@@ -128,7 +128,7 @@ describe('Why do wombats do square poos?', function () {
 	});
 
 	it('when I get the answer right, it should commend my skills when I click Reveal', function () {
-		cy.visit(`/Article?url=${quizAtomUrl}`);
+		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()

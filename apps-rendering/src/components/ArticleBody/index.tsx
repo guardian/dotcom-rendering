@@ -36,10 +36,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		background: ${background.articleContentDark(format)};
 		color: ${neutral[86]};
 
-		figcaption {
-			color: ${neutral[60]};
-		}
-
 		p:last-child {
 			margin-bottom: 0;
 		}

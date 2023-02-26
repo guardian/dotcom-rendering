@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -99,22 +99,18 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial = !article.isAdFreeUser && !article.shouldHideAds;
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
-			loadCommercial &&
-				(process.env.COMMERCIAL_BUNDLE_URL ??
-					article.config.commercialBundleUrl),
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				article.config.commercialBundleUrl,
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		]
-			.filter(isString)
-			.map((script) =>
-				offerHttp3 && script ? getHttp3Url(script) : script,
-			),
+		].map((script) =>
+			offerHttp3 && script ? getHttp3Url(script) : script,
+		),
 	);
 
 	/**
