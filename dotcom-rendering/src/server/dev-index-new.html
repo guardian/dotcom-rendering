@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			body {
+				margin: 0;
+			}
+
+			header {
+				background-color: #041f4a;
+				padding: 20px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+			}
+			/* Header */
+			header h1 {
+				color: #ffffff;
+				font-size: 36px;
+			}
+
+			.data-source {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+
+			.data-source span {
+				font-size: 24px;
+				color: #ffffff;
+				margin-right: 8px;
+			}
+			.data-source select {
+				padding: 6px;
+				border: none;
+				border-radius: 3px;
+				font-size: 20px;
+			}
+			/* End Header */
+			/* Layout */
+			main {
+				display: flex;
+				flex-direction: row;
+				min-height: 100vh;
+			}
+			/* End Layout */
+			/* Sidebar */
+			.side-bar {
+				background-color: #f6f6f6;
+				padding: 12px;
+				min-height: 100vh;
+				min-width: 300px;
+				margin-right: 24px;
+			}
+			.side-bar li {
+				margin-bottom: 8px;
+			}
+			.side-bar a {
+				font-size: 16px;
+			}
+			/* End Sidebar */
+			/* Main content */
+			.content {
+				padding-top: 12px;
+			}
+
+			.content h2 {
+				margin-bottom: 4px;
+			}
+			.content p {
+				margin-top: 0;
+				color: #454545;
+				font-size: 14px;
+			}
+			.content .platform {
+				background-color: #d9d9d9;
+				border-radius: 3px;
+				padding: 4px 12px;
+				box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.25);
+				margin: 0px 4px;
+			}
+
+			.content .platform a {
+				color: #000000;
+				text-decoration: none;
+				font-size: 14px;
+			}
+
+			.endpoint-list li {
+				margin-bottom: 20px;
+			}
+			.endpoint-list li::marker {
+				content: '';
+			}
+			.endpoint-list .name {
+				margin-right: 16px;
+				font-size: 20px;
+			}
+
+			.endpoint-list .description {
+				color: #454545;
+				font-size: 14px;
+				padding-left: 12px;
+			}
+			/* End main Content */
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>DCR Development Server</h1>
+			<div class="data-source">
+				<span>Data Source</span>
+				<select name="data-source" id="data-source">
+					<option value="prod">Production</option>
+					<option value="code">Code</option>
+					<option value="local-fe">Local Frontend</option>
+				</select>
+			</div>
+		</header>
+		<main>
+			<section class="side-bar">
+				<h2>Resources</h2>
+				<ul>
+					<li><a href="#">Github</a></li>
+					<li><a href="#">Docs</a></li>
+					<li><a href="#">Chat Channel</a></li>
+					<li><a href="#">Debug Tool</a></li>
+					<li><a href="#">Intro to DCR</a></li>
+				</ul>
+			</section>
+			<section class="content">
+				<h2>Welcome to DCR</h2>
+				<p>Some basic blurb about DCR</p>
+				<h2>From your clipboard</h2>
+				<p>
+					If you have guardian URLs in your clipboard, the dev server
+					link for them will appear here
+				</p>
+				<div>
+					<h2>Default Endpoints</h2>
+					<p>
+						DCR has a variety of different endpoints, depending on
+						the content you want to render
+					</p>
+					<ul class="endpoint-list">
+						<li>
+							<span class="platform"><a href="#">Web</a></span>
+							<span class="platform"><a href="#">Apps</a></span>
+							<span class="platform"><a href="#">AMP</a></span>
+							<span class="name">Article</span>
+							<span class="description"
+								>/[web|apps|amp]/Article/[any guardian article
+								URL]</span
+							>
+						</li>
+						<li>
+							<span class="platform"><a href="#">Web</a></span>
+							<span class="platform"><a href="#">AMP</a></span>
+							<span class="name">Interactive</span>
+							<span class="description"
+								>/[web|amp]/Interactive/[any guardian article
+								URL]</span
+							>
+						</li>
+						<li>
+							<span class="platform"><a href="#">Web</a></span>
+							<span class="name">Front</span>
+							<span class="description"
+								>/web/Front/[any guardian article URL]</span
+							>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

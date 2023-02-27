@@ -69,7 +69,7 @@ module.exports = {
 						'..',
 						'src',
 						'server',
-						'dev-index.html',
+						'dev-index-new.html',
 					),
 				);
 			});
