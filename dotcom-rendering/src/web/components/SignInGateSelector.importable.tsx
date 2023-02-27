@@ -171,9 +171,6 @@ export const SignInGateSelector = ({
 	};
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 
-	const shouldPersonaliseComponentId = (): boolean => {
-		return checkoutCompleteCookieData !== undefined && personaliseSwitch;
-	};
 	// END: Checkout Complete Personalisation
 
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
@@ -252,9 +249,10 @@ export const SignInGateSelector = ({
 
 	const componentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const personalisedComponentId = shouldPersonaliseComponentId()
-		? personaliseComponentId(componentId)
-		: componentId;
+	const personalisedComponentId =
+		checkoutCompleteCookieData !== undefined
+			? personaliseComponentId(componentId)
+			: componentId;
 
 	const signInUrl = generateSignInUrl({
 		pageId,
