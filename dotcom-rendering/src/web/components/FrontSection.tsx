@@ -24,8 +24,6 @@ type Props = {
 	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** Defaults to `true`. If we should add padding to the sides of `children`. It should only get overriden in frontsection stories. */
-	padContent?: boolean;
 	/** The html tag used by Section defaults to `section` but can be overridden here */
 	element?:
 		| 'div'
