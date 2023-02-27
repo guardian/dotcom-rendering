@@ -100,7 +100,8 @@ export const Onward = ({
 		'most-popular',
 	);
 
-	const hasSectionMostViewed = sectionID && sectionHasMostViewed(sectionID);
+	const hasSectionMostViewed =
+		sectionID !== undefined && sectionHasMostViewed(sectionID);
 	const sectionMostViewed =
 		sectionID && hasSectionMostViewed
 			? container(

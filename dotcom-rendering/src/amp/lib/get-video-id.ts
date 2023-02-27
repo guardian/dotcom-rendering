@@ -1,4 +1,5 @@
 import { parse, URLSearchParams } from 'url';
+import { isString } from '@guardian/libs';
 
 export const getIdFromUrl = (
 	urlString: string,
@@ -12,15 +13,15 @@ export const getIdFromUrl = (
 		);
 	};
 
+	// Looks for ID in both formats if provided
 	const url = parse(urlString);
 
-	// Looks for ID in both formats if provided
-	const ids: string[] = [
-		tryQueryParam &&
-			url.query &&
-			new URLSearchParams(url.query).get(tryQueryParam),
-		tryInPath && url.pathname && url.pathname.split('/').pop(),
-	].filter((tryId): tryId is string => !!tryId);
+	const ids = [
+		tryQueryParam
+			? new URLSearchParams(url.query ?? '').get(tryQueryParam)
+			: undefined,
+		tryInPath ? (url.pathname ?? '').split('/').at(-1) : undefined,
+	].filter(isString);
 
 	if (!ids.length)
 		logErr(

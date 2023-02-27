@@ -47,16 +47,11 @@ const ALLOWED_TAGS = [
 	'football/liverpool',
 ];
 
+/** This function looks for the first tag in pageTags, that also exists in our allowlist */
 const firstPopularTag = (
 	pageTags: string | string[],
 	isPaidContent: boolean,
-) => {
-	// This function looks for the first tag in pageTags, that also exists in our allowlist
-	if (!pageTags) {
-		// If there are no page tags we will never find a match so
-		return false;
-	}
-
+): string | undefined => {
 	// The problem here is keywordIds is sometimes a string and sometimes an array of strings. Fun times.
 	let tags;
 	if (typeof pageTags === 'string') {
@@ -65,8 +60,9 @@ const firstPopularTag = (
 		tags = pageTags;
 	}
 
-	const firstTagInAllowedList =
-		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) ?? false;
+	const firstTagInAllowedList = tags.find((tag: string) =>
+		ALLOWED_TAGS.includes(tag),
+	);
 
 	// For paid content we just return the first tag, otherwise we
 	// filter for the first tag in the allowlist

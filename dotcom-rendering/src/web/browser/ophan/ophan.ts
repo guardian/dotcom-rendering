@@ -90,6 +90,7 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 export const recordPerformance = (): void => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety on browsers
 		performanceAPI &&
 		'navigation' in performanceAPI &&
 		'timing' in performanceAPI;
