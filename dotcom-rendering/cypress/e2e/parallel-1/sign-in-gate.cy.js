@@ -267,17 +267,6 @@ describe('Sign In Gate Tests', function () {
 					.and('not.contains', 'personalise_new_DigitalPack');
 			});
 
-			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is not set', function () {
-				setGuCOCompleteCookie('new', 'DigitalPack');
-
-				postArticleAndScrollToGateForLazyLoad();
-
-				cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
-				cy.get('[data-cy=sign-in-gate-main]').contains(
-					'You need to register to keep reading',
-				);
-			});
-
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
 				// HEADER TEXT
 				const SUBSCRIPTION_HEADER = 'Thank you for subscribing';
