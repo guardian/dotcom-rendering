@@ -268,7 +268,7 @@ export const ImageComponent = ({
 	const isSupported = (imageUrl: string): boolean => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
 		return supportedImages.some((extension) =>
-			imageUrl.endsWith(` .${extension}`),
+			imageUrl.endsWith(`.${extension}`),
 		);
 	};
 	if (!image || !isSupported(image)) {
