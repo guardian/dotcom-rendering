@@ -49,16 +49,16 @@ const ALLOWED_TAGS = [
 	'football/tottenham-hotspur',
 	'football/liverpool',
 ] as const;
-const isAllowedTag = (tag: string): tag is (typeof ALLOWED_TAGS)[number] =>
-	ALLOWED_TAGS.map(String).includes(tag);
 
-/** This function looks for the first tag in keywordIds, that also exists in our allowlist */
+/** This function looks for item in our allowlist that is present in our keywordIds */
 const firstPopularTag = (keywordIds: string, isPaidContent: boolean) => {
 	const tags = keywordIds.split(',');
 
-	// For paid content we just return the first tag, otherwise we
-	// filter for the first tag in the allowlist
-	return isPaidContent ? tags[0] : tags.find(isAllowedTag);
+	// For paid content we just return the first tag,
+	// otherwise we find the allowlist tag that matches
+	return isPaidContent
+		? tags[0]
+		: ALLOWED_TAGS.find((tag) => tags.includes(tag));
 };
 
 const onwardsWrapper = css`
@@ -305,3 +305,5 @@ export const OnwardsUpper = ({
 		</div>
 	);
 };
+
+export { firstPopularTag };
