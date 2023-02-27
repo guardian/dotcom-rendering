@@ -42,8 +42,8 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
-	checkoutComplete?: CheckoutCompleteCookieData;
-	personaliseSignInAfterCheckoutSwitch: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 }
 
 const dismissGate = (
@@ -105,8 +105,8 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
-	checkoutComplete: checkoutCompleteCookieData,
-	personaliseSignInAfterCheckoutSwitch,
+	checkoutCompleteCookieData,
+	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -130,8 +130,7 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: componentId,
 			checkoutCompleteCookieData,
-			personaliseSignInGateAfterCheckoutSwitch:
-				personaliseSignInAfterCheckoutSwitch,
+			personaliseSignInGateAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -274,8 +273,8 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
-					checkoutComplete={checkoutCompleteCookieData}
-					personaliseSignInAfterCheckoutSwitch={personaliseSwitch}
+					checkoutCompleteCookieData={checkoutCompleteCookieData}
+					personaliseSignInGateAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>

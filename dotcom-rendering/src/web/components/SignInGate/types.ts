@@ -47,28 +47,16 @@ export function isCheckoutCompleteCookieData(
 ): obj is CheckoutCompleteCookieData {
 	return isObject(obj) && isUserType(obj.userType) && isProduct(obj.product);
 }
-type BaseSignInGateProps = {
+export type SignInGateProps = {
 	signInUrl: string;
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 };
-
-export type SignInGateWithoutCheckoutData = BaseSignInGateProps & {
-	checkoutCompleteCookieData?: never;
-	personaliseSignInGateAfterCheckoutSwitch: false;
-};
-
-export type SignInGateWithCheckoutData = BaseSignInGateProps & {
-	checkoutCompleteCookieData: CheckoutCompleteCookieData;
-	personaliseSignInGateAfterCheckoutSwitch: true;
-};
-
-export type SignInGateProps =
-	| SignInGateWithoutCheckoutData
-	| SignInGateWithCheckoutData;
 
 export type CurrentSignInGateABTest = {
 	name: string;

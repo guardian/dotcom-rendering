@@ -23,7 +23,6 @@ export const mainStandalone = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -39,7 +38,6 @@ export const mainStandaloneMandatory = () => {
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
-				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -54,7 +52,6 @@ export const fakeSocialStandalone = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -74,7 +71,6 @@ export const fakeSocialStandaloneVertical = () => {
 					name: 'fake-social-test',
 					variant: 'fake-social-variant-vertical',
 				}}
-				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);
@@ -96,7 +92,6 @@ export const signInGateCopyTest = () => {
 					name: 'sign-in-gate-copy-test-jan-2023',
 					variant: 'quick-and-easy',
 				}}
-				personaliseSignInGateAfterCheckoutSwitch={false}
 			/>
 		</Section>
 	);

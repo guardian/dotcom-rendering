@@ -1,7 +1,7 @@
 import { cmp } from '@guardian/consent-management-platform';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
-import type { SignInGateWithoutCheckoutData } from '../types';
+import type { SignInGateProps } from '../types';
 import {
 	actionButtons,
 	bodyBold,
@@ -26,7 +26,7 @@ export const SignInGateMain = ({
 	abTest,
 	ophanComponentId,
 	isMandatory = false,
-}: SignInGateWithoutCheckoutData) => {
+}: SignInGateProps) => {
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>

@@ -9,13 +9,14 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
-import type { Product, SignInGateWithCheckoutData, UserType } from '../types';
+import type { Product, SignInGateProps, UserType } from '../types';
 import {
 	firstParagraphOverlay,
 	hideElementsCss,
 	registerButton,
 	signInGateContainer,
 } from './shared';
+import { SignInGateMain } from './SignInGateMain';
 
 const personalisedHeadingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -171,7 +172,23 @@ export const SignInGateMainCheckoutComplete = ({
 	ophanComponentId,
 	isMandatory = false,
 	checkoutCompleteCookieData,
-}: SignInGateWithCheckoutData) => {
+}: SignInGateProps) => {
+
+	// There is a type check above which means this shouldn't be
+	// possible to be undefined here, so this is just handling
+	// the fact that the type is optional.
+	// It's an optional type because `SignInGateProps` is shared
+	// with other components that don't use this type
+	if(checkoutCompleteCookieData === undefined) {
+		return <SignInGateMain
+			signInUrl={signInUrl}
+			guUrl={guUrl}
+			dismissGate={dismissGate}
+			abTest={abTest}
+			ophanComponentId={ophanComponentId}
+			isMandatory = {false}
+					/>
+	}
 	const { userType, product } = checkoutCompleteCookieData;
 
 	// send new/guest userType to the /register page instead of /signin

@@ -25,7 +25,6 @@ export const signInGateComponent: SignInGateComponent = {
 					guUrl={guUrl}
 					signInUrl={signInUrl}
 					abTest={abTest}
-					personaliseSignInGateAfterCheckoutSwitch={false}
 				/>
 			</Suspense>
 		</Lazy>
