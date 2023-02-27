@@ -98,10 +98,8 @@ const generateAuditTable = (results: AssertionResult[]): string => {
 			)} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
-	const testedUrl = testUrl.searchParams.get('url') ?? '😪';
-
 	const table = [
-		`> tested url \`${testedUrl}\``,
+		`> tested url \`${testUrl}\``,
 		'',
 		'| Category | Status | Expected | Actual |',
 		'| --- | --- | --- | --- |',
@@ -118,7 +116,7 @@ const createLighthouseResultsMd = (): string => {
 	return [
 		IDENTIFIER_COMMENT,
 		`## ⚡️ Lighthouse report for the changes in this PR`,
-		`### [Report for ${testUrl.pathname}](${reportURL})`,
+		`### [Report for ${testUrl.pathname.split('/').at(1)}](${reportURL})`,
 		failedAuditCount > 0
 			? `⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`
 			: 'All audits passed',

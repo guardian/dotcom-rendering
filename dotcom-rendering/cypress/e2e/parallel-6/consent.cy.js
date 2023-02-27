@@ -14,7 +14,7 @@ describe('Consent tests', function () {
 	});
 
 	it('should make calls to Google Analytics after the reader consents', function () {
-		cy.visit(`Article?url=${firstPage}`);
+		cy.visit(`/Article/${firstPage}`);
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
@@ -36,7 +36,7 @@ describe('Consent tests', function () {
 				return false;
 			}
 		});
-		cy.visit(`Article?url=${firstPage}`);
+		cy.visit(`/Article/${firstPage}`);
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");

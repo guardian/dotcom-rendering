@@ -162,6 +162,7 @@ export const clientConfig: Configuration = {
 		devMiddleware: {
 			publicPath: '/assets/',
 		},
+		port: 3030,
 		proxy: {
 			'**': 'http://localhost:3040',
 		},
@@ -216,6 +217,7 @@ const clientConfigProduction = {
 	plugins: [
 		new WebpackManifestPlugin({}),
 		new HtmlWebpackPlugin({
+			excludeChunks: ['editions'],
 			meta: {
 				'Content-Security-Policy': {
 					'http-equiv': 'Content-Security-Policy',

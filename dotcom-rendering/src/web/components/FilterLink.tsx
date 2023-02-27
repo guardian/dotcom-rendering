@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans } from '@guardian/source-foundations';
-import { Button, SvgCross } from '@guardian/source-react-components';
+import { LinkButton, SvgCross } from '@guardian/source-react-components';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -15,7 +15,7 @@ interface ButtonProps {
 	count?: number;
 	format: ArticleFormat;
 	isActive: boolean;
-	onClick: (...args: unknown[]) => void;
+	href: string;
 }
 
 const buttonStyles = (palette: Palette) => css`
@@ -68,59 +68,53 @@ const valueStyles = css`
 	max-width: 150px;
 `;
 
-const Label = ({ value, count }: LabelProps) => (
+const Label = ({ value, count = 0 }: LabelProps) => (
 	<>
 		<span css={valueStyles}>{value}</span>{' '}
-		{!!count && <span css={countStyles}>({count})</span>}
+		{count !== 0 && <span css={countStyles}>({count})</span>}
 	</>
 );
 
 /**
- * # Filter Button
+ * # Filter Link
  *
  * A child of `TopicFilterBank`
- *
- * ## Why does this need to be an Island?
- *
- * ⚠️ It does not need to be! ⚠️
- *
- * (It is embedded within `TopicFilterBank`)
  *
  * ---
  *
  * [`FilterButton` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-filterbutton)
  */
-export const FilterButton = ({
+export const FilterLink = ({
 	type,
 	value,
 	count,
 	isActive,
 	format,
-	onClick,
+	href,
 }: ButtonProps) => {
 	const palette = decidePalette(format);
 
 	const dataLinkName = type ? `${type}:${value}` : value;
 
 	return isActive ? (
-		<Button
+		<LinkButton
 			cssOverrides={[buttonStyles(palette), activeStyles(palette)]}
-			onClick={onClick}
+			href={href}
 			icon={<SvgCross />}
 			iconSide="right"
 			aria-label={`Deactivate ${value} filter`}
 			data-link-name={`${dataLinkName} | filter off`}
 		>
 			<Label value={value} count={count} />
-		</Button>
+		</LinkButton>
 	) : (
-		<Button
+		<LinkButton
 			cssOverrides={buttonStyles(palette)}
-			onClick={onClick}
+			href={href}
 			aria-label={`Activate ${value} filter`}
 			data-link-name={`${dataLinkName} | filter on`}
 		>
 			<Label value={value} count={count} />
-		</Button>
+		</LinkButton>
 	);
 };

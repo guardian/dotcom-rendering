@@ -43,7 +43,7 @@ describe('Sign In Gate Tests', function () {
 	const visitArticle = (
 		url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 	) => {
-		cy.visit(`/Article?url=${url}`);
+		cy.visit(`/Article/${url}`);
 	};
 
 	const postArticle = ({ switchOverride } = {}) => {
@@ -170,7 +170,7 @@ describe('Sign In Gate Tests', function () {
 		it('should not load the sign in gate on a device with an ios9 user agent string', function () {
 			// can't use visitArticleAndScrollToGateForLazyLoad for this method as overriding user agent
 			cy.visit(
-				'Article?url=https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+				'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 				{
 					onBeforeLoad: (win) => {
 						Object.defineProperty(win.navigator, 'userAgent', {

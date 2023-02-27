@@ -75,6 +75,7 @@ const checkBrazeDependencies = async (
 		try {
 			const result = await value;
 
+			// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- TODO: Complex types, look into this further
 			if (result) {
 				data[name] = result;
 			} else {

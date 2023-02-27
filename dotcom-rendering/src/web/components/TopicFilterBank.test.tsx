@@ -1,4 +1,4 @@
-import { hasRelevantTopics } from './TopicFilterBank.importable';
+import { hasRelevantTopics } from './TopicFilterBank';
 
 describe('hasRelevantTopics', () => {
 	describe('should be false', () => {

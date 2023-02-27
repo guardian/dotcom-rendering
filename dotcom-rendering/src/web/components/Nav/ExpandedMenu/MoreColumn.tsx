@@ -216,12 +216,12 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				<ul
 					css={[
 						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
+						moreColumn.pillar !== undefined && pillarColumnLinks,
 					]}
 					role="menu"
 					id={subNavId}
 				>
-					{(moreColumn.children || []).map((link) => (
+					{moreColumn.children.map((link) => (
 						<li
 							key={link.title.toLowerCase()}
 							css={[
@@ -249,7 +249,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				<ul
 					css={[
 						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
+						moreColumn.pillar !== undefined && pillarColumnLinks,
 					]}
 					role="menu"
 				>

@@ -379,6 +379,7 @@ const CarouselCard = ({
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
 			branding={branding}
+			isExternalLink={false}
 		/>
 	</LI>
 );
@@ -508,7 +509,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 			.reverse()
 			.find((offset) => offset < scrolled);
 
-		if (nextOffset) {
+		if (nextOffset !== undefined && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		} else {
 			current.scrollTo({ left: 0 });
@@ -526,9 +527,9 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 		if (current === null || offset === undefined) return;
 
 		const scrolled = current.scrollLeft + offset;
-		const nextOffset = offsets.find((offset) => offset > scrolled);
+		const nextOffset = offsets.find((currOffset) => currOffset > scrolled);
 
-		if (nextOffset) {
+		if (nextOffset !== undefined && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });
 		}
 
@@ -577,6 +578,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 			</LeftColumn>
 			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
 				<button
+					type="button"
 					onClick={prev}
 					aria-label="Move carousel backwards"
 					css={[buttonStyle, prevButtonStyle(index)]}
@@ -588,6 +590,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
 				<button
+					type="button"
 					onClick={next}
 					aria-label="Move carousel forwards"
 					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
@@ -613,6 +616,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 						/>
 						<Hide when="below" breakpoint="desktop">
 							<button
+								type="button"
 								onClick={prev}
 								aria-label="Move carousel backwards"
 								css={[buttonStyle, prevButtonStyle(index)]}
@@ -621,6 +625,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 								<SvgChevronLeftSingle />
 							</button>
 							<button
+								type="button"
 								onClick={next}
 								aria-label="Move carousel forwards"
 								css={[

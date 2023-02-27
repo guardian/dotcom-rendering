@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition --
+	We check the existence of window.ga frequently, which is required for browser safety despite the type definitions. */
 import { getCookie } from '@guardian/libs';
 import { getCLS, getFID, getLCP } from 'web-vitals';
 

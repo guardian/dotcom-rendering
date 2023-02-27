@@ -151,7 +151,7 @@ export const Treats = ({
 					// treat has this exact url then an svg of a crossword
 					// is displayed above the text
 					return (
-						<>
+						<Fragment key={link.linkTo}>
 							<li>
 								<a href={link.linkTo}>
 									<SvgCrossword />
@@ -165,7 +165,7 @@ export const Treats = ({
 									borderColour={borderColour}
 								/>
 							))}
-						</>
+						</Fragment>
 					);
 				}
 

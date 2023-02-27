@@ -36,7 +36,7 @@ module.exports = {
 					},
 				},
 				{
-					matchingUrlPattern: 'http://localhost:9000/Article?.+',
+					matchingUrlPattern: 'http://localhost:9000/Article/.+',
 					assertions: {
 						'total-blocking-time': [
 							'warn',
@@ -49,7 +49,7 @@ module.exports = {
 					},
 				},
 				{
-					matchingUrlPattern: 'http://localhost:9000/Front?.+',
+					matchingUrlPattern: 'http://localhost:9000/Front/.+',
 					assertions: {
 						'total-blocking-time': [
 							'warn',

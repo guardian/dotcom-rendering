@@ -65,7 +65,7 @@ export const CardAge = ({
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 	const palette = decidePalette(format, containerPalette);
 
-	if (!displayString) {
+	if (displayString === false) {
 		return null;
 	}
 
