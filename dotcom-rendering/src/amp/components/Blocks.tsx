@@ -150,15 +150,13 @@ export const Blocks = ({
 		<>
 			{liveBlogBlocks.map((item, i) => {
 				if (slotIndexes.includes(i)) {
+					const adSlotId = `ad-${i + 1}` as const;
 					return (
 						<>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
+							<div id={adSlotId} data-sort-time="1" css={adStyle}>
 								<InlineAd
+									id={adSlotId}
 									editionId={editionId}
 									section={section ?? ''}
 									contentType={contentType}

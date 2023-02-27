@@ -14,6 +14,7 @@ import { Ad } from './Ad';
  * @returns an Ad component per region
  */
 export const InlineAd = ({
+	id,
 	editionId,
 	section,
 	contentType,
@@ -33,6 +34,7 @@ export const InlineAd = ({
 						)}
 					>
 						<Ad
+							id={id}
 							editionId={editionId}
 							section={section}
 							contentType={contentType}

@@ -156,15 +156,13 @@ export const Body = ({ data, config }: Props) => {
 		<>
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
+					const adSlotId = `ad-${i + 1}` as const;
 					return (
 						<React.Fragment key={item.key}>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
+							<div id={adSlotId} data-sort-time="1" css={adStyle}>
 								<InlineAd
+									id={adSlotId}
 									editionId={data.editionId}
 									section={data.sectionName ?? ''}
 									contentType={adInfo.contentType}
@@ -218,6 +216,7 @@ export const Body = ({ data, config }: Props) => {
 			{epic}
 
 			<StickyAd
+				id="ad-sticky"
 				editionId={data.editionId}
 				section={data.sectionName ?? ''}
 				contentType={adInfo.contentType}

@@ -53,6 +53,7 @@ interface CommercialConfig {
 }
 
 export interface BaseAdProps {
+	id: 'ad-sticky' | `ad-${number}`;
 	editionId: EditionId;
 	section: string;
 	contentType: string;
@@ -66,6 +67,7 @@ interface AdProps extends BaseAdProps {
 }
 
 export const Ad = ({
+	id,
 	editionId,
 	section,
 	contentType,
@@ -92,6 +94,7 @@ export const Ad = ({
 		useOzonePrebid,
 		usePermutive,
 		useAmazon,
+		id,
 		adType,
 	);
 

@@ -38,6 +38,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
+					id="ad-1"
 					editionId="UK"
 					section=""
 					contentType=""
@@ -89,6 +90,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
+					id="ad-1"
 					editionId="UK"
 					section=""
 					contentType=""
@@ -140,6 +142,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
+					id="ad-1"
 					editionId="UK"
 					section=""
 					contentType=""
@@ -186,6 +189,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
+					id="ad-1"
 					editionId="UK"
 					section=""
 					contentType=""
@@ -232,6 +236,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<InlineAd
+					id="ad-1"
 					editionId="UK"
 					section=""
 					contentType=""

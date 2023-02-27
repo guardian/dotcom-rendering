@@ -83,7 +83,10 @@ export const criteoRTCParamters = (adType: AdType): CriteoRTCParameters => {
 	}
 };
 
-export const ozoneRTCParameters = (adType: AdType): OzoneRTCParameters => {
+export const ozoneRTCParameters = (
+	adType: AdType,
+	id: string,
+): OzoneRTCParameters => {
 	const rowPlacementId = '1500000083';
 	const ukPlacementId = '0420420507';
 
@@ -97,7 +100,7 @@ export const ozoneRTCParameters = (adType: AdType): OzoneRTCParameters => {
 		SITE_ID: '4204204209',
 		TAG_ID: '1000000000',
 		PLACEMENT_ID: placementId,
-		AD_UNIT_CODE: 'xxxx',
+		AD_UNIT_CODE: id,
 	};
 };
 
@@ -117,6 +120,7 @@ export const realTimeConfig = (
 	useOzonePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
+	id: string,
 	adType: AdType,
 ): string => {
 	const pubmaticConfig = {
@@ -128,7 +132,7 @@ export const realTimeConfig = (
 	};
 
 	const ozoneConfig = {
-		ozone: ozoneRTCParameters(adType),
+		ozone: ozoneRTCParameters(adType, id),
 	};
 
 	const data = {
