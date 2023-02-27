@@ -325,10 +325,15 @@ export const SecureSignupIframe = ({
 
 		// add the fonts to the iframe
 		requiredFonts.forEach((font) => {
-			// it shouldn't be necessary to test for the add method again
-			// but still ts considers it possibily undefined
-			if (iframeFontFaceSet.add) {
+			try {
 				iframeFontFaceSet.add(font);
+			} catch (error) {
+				// Safari throws an InvalidModificationError
+				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
+				window.guardian.modules.sentry.reportError(
+					error instanceof Error ? error : new Error(String(error)),
+					'secure-signup-iframe',
+				);
 			}
 		});
 	};
