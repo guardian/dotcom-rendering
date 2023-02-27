@@ -260,6 +260,11 @@ describe('Sign In Gate Tests', function () {
 				cy.get('[data-cy=sign-in-gate-main]').contains(
 					'You need to register to keep reading',
 				);
+				cy.get('[data-cy=sign-in-gate-main_register]')
+					.should('have.attr', 'href')
+					.and('contains', '/signin?returnUrl=')
+					.and('match', /componentId%3Dmain_variant_\d/)
+					.and('not.contains', 'personalise_new_DigitalPack');
 			});
 
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is not set', function () {
