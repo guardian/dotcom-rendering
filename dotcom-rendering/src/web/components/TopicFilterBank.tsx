@@ -116,7 +116,7 @@ export const TopicFilterBank = ({
 				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
 			<div css={topicStyles}>
-				{keyEvents && keyEvents.length > 0 ? (
+				{hasKeyEvents ? (
 					<FilterLink
 						value={'Key events'}
 						count={keyEvents.length}
