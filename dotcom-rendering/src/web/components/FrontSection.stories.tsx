@@ -5,6 +5,7 @@ import {
 	breakpoints,
 	neutral,
 } from '@guardian/source-foundations';
+import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
 
 export default {
@@ -34,24 +35,23 @@ const Placeholder = ({
 	heightInPixels?: number;
 	text?: string;
 }) => (
-	<div
-		css={css`
-			background-color: lightgrey;
-			width: 100%;
-			height: ${heightInPixels}px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 2em;
-			font-weight: 200;
-		`}
-	>
-		{text}
-	</div>
+	<LI padSides={true}>
+		<div
+			css={css`
+				background-color: lightgrey;
+				width: 100%;
+				height: ${heightInPixels}px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 2em;
+				font-weight: 200;
+			`}
+		>
+			{text}
+		</div>
+	</LI>
 );
-
-/** The stories below consistently have padContent set to false, even though the default value and the one which ends up rendering the component in the application is true.
- * This is so the stories below can match up with the section stories which the FrontSection component is modeled after. */
 
 export const ContainerStory = () => {
 	return (
@@ -59,7 +59,6 @@ export const ContainerStory = () => {
 			title="Default Container"
 			showTopBorder={false}
 			showSideBorders={false}
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -69,11 +68,7 @@ ContainerStory.story = { name: 'default container' };
 
 export const NoTitleStory = () => {
 	return (
-		<FrontSection
-			showTopBorder={false}
-			showSideBorders={false}
-			padContent={false}
-		>
+		<FrontSection showTopBorder={false} showSideBorders={false}>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -82,7 +77,7 @@ NoTitleStory.story = { name: 'with no title' };
 
 export const BordersStory = () => {
 	return (
-		<FrontSection title="Borders" centralBorder="full" padContent={false}>
+		<FrontSection title="Borders" centralBorder="full">
 			<Placeholder />
 		</FrontSection>
 	);
@@ -94,7 +89,6 @@ export const LeftContentStory = () => {
 		<FrontSection
 			title="Borders"
 			centralBorder="full"
-			padContent={false}
 			leftContent={<Placeholder text="LeftCol" heightInPixels={200} />}
 		>
 			<Placeholder />
@@ -114,7 +108,6 @@ export const BackgroundStory = () => {
 			centralBorder="full"
 			backgroundColour={brand[400]}
 			borderColour={brand[600]}
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -131,7 +124,6 @@ export const InnerBackgroundStory = () => {
 			centralBorder="full"
 			innerBackgroundColour={brand[400]}
 			borderColour={brand[300]}
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -149,7 +141,6 @@ export const DifferentBackgrounds = () => {
 			backgroundColour="#FFF280"
 			borderColour={brand[300]}
 			innerBackgroundColour="#FFE501"
-			padContent={false}
 		>
 			<h1>
 				👀 Share stories with the Guardian securely and confidentially
@@ -168,7 +159,6 @@ export const StretchRightStory = () => {
 			description="About this content"
 			centralBorder="full"
 			stretchRight={true}
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -184,7 +174,6 @@ export const PartialStory = () => {
 			title="Borders"
 			showTopBorder={false}
 			centralBorder="partial"
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -198,7 +187,6 @@ export const SidesStory = () => {
 			title="NoSides"
 			showTopBorder={false}
 			centralBorder="full"
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -214,7 +202,6 @@ export const ToggleableStory = () => {
 			sectionId="section-id"
 			showTopBorder={false}
 			showSideBorders={false}
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -229,7 +216,6 @@ export const MarginsStory = () => {
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -237,7 +223,6 @@ export const MarginsStory = () => {
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -245,7 +230,6 @@ export const MarginsStory = () => {
 				title="No Vertical Margins"
 				centralBorder="full"
 				verticalMargins={false}
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -257,16 +241,8 @@ MarginsStory.story = { name: 'with no vertical margins' };
 export const MultipleStory = () => {
 	return (
 		<>
-			<FrontSection
-				title="Page Title"
-				showTopBorder={false}
-				padContent={false}
-			/>
-			<FrontSection
-				title="Headlines"
-				centralBorder="partial"
-				padContent={false}
-			>
+			<FrontSection title="Page Title" showTopBorder={false} />
+			<FrontSection title="Headlines" centralBorder="partial">
 				<Placeholder />
 			</FrontSection>
 			<FrontSection title="Useful links" centralBorder="partial" />
@@ -274,7 +250,6 @@ export const MultipleStory = () => {
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
 				centralBorder="partial"
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -282,7 +257,6 @@ export const MultipleStory = () => {
 				showTopBorder={false}
 				showSideBorders={false}
 				backgroundColour={brandAlt[400]}
-				padContent={false}
 			>
 				<h2>Insert call to action here</h2>
 			</FrontSection>
@@ -292,7 +266,6 @@ export const MultipleStory = () => {
 				showTopBorder={false}
 				backgroundColour="black"
 				showSideBorders={false}
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -300,7 +273,6 @@ export const MultipleStory = () => {
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
 				centralBorder="partial"
-				padContent={false}
 			>
 				<Placeholder />
 			</FrontSection>
@@ -348,7 +320,6 @@ export const TreatsStory = () => {
 			showSideBorders={false}
 			showDateHeader={true}
 			editionId="UK"
-			padContent={false}
 		>
 			<Placeholder />
 		</FrontSection>

@@ -447,7 +447,6 @@ export const FrontSection = ({
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
-	padContent = true,
 	sectionId,
 	showDateHeader = false,
 	showSideBorders = true,
@@ -533,7 +532,7 @@ export const FrontSection = ({
 			<div
 				css={[
 					sectionContent,
-					padContent && sectionContentPadded,
+					sectionContentPadded,
 					centralBorder === 'full' && sectionContentBorder,
 					verticalMargins && paddings,
 				]}
