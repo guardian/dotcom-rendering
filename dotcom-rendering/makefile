@@ -33,11 +33,13 @@ deploy:
 build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	$(call log, "generating Islands report card")
+	@node ./scripts/islands/island-descriptions.mjs
 
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: install
 	$(call log, "starting PROD server...")
@@ -79,16 +81,20 @@ run-ci: stop build-ci start-ci
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+
+dev-variant: clear clean-dist install
+	$(call log, "starting DEV server")
+	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
-	@NODE_ENV=development SKIP_LEGACY=true NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 
@@ -142,7 +148,6 @@ test-ci: clear clean-dist install
 
 bundlesize: clear clean-dist install build
 	@bundlesize
-	@node scripts/islands/descriptions.mjs
 
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
@@ -213,5 +218,19 @@ perf-test:
 arch-diagram:
 	@npx arkit
 
+# Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
+# Adding - at the beginning of the command ignores the error and we're getting:
+# make: [snyk] Error 1 (ignored)
+# See docs: https://www.gnu.org/software/make/manual/html_node/Errors.html#:~:text=To%20ignore%20errors%20in%20a,to%20the%20shell%20for%20execution.&text=This%20causes%20make%20to%20continue,unable%20to%20remove%20a%20file
+
 snyk:
-	@snyk wizard
+	-@snyk test --severity-threshold=high --file="../package.json"
+
+snyk-dcr:
+	-@snyk test --severity-threshold=high --file=package.json
+
+snyk-ar:
+	-@snyk test --severity-threshold=high --file=../apps-rendering/package.json
+
+snyk-storybooks:
+	-@snyk test --severity-threshold=high --file=../storybooks/package.json

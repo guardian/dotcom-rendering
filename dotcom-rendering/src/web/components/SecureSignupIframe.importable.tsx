@@ -324,7 +324,18 @@ export const SecureSignupIframe = ({
 		});
 
 		// add the fonts to the iframe
-		requiredFonts.forEach((font) => iframeFontFaceSet.add(font));
+		requiredFonts.forEach((font) => {
+			try {
+				iframeFontFaceSet.add(font);
+			} catch (error) {
+				// Safari throws an InvalidModificationError
+				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
+				window.guardian.modules.sentry.reportError(
+					error instanceof Error ? error : new Error(String(error)),
+					'secure-signup-iframe',
+				);
+			}
+		});
 	};
 
 	const onIFrameLoad = (): void => {

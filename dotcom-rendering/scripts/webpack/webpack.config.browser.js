@@ -6,6 +6,48 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
+// switch in case we need to revert
+const USE_SWC = true;
+
+const babelLoader = [
+	{
+		loader: 'babel-loader',
+		options: {
+			presets: [
+				'@babel/preset-react',
+				[
+					'@babel/preset-env',
+					{
+						bugfixes: true,
+						targets: 'extends @guardian/browserslist-config',
+					},
+				],
+			],
+			compact: true,
+		},
+	},
+	{
+		loader: 'ts-loader',
+		options: {
+			configFile: 'tsconfig.build.json',
+			transpileOnly: true,
+		},
+	},
+];
+
+const swcLoader = (targets) => [
+	{
+		loader: 'swc-loader',
+		options: {
+			...swcConfig,
+			env: {
+				dynamicImport: true,
+				targets,
+			},
+		},
+	},
+];
+
 /**
  * @param {'legacy' | 'modern' | 'variant' | 'apps'} bundle
  * @returns {string}
@@ -49,73 +91,11 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'variant':
-			return [
-				{
-					loader: 'swc-loader',
-					options: {
-						...swcConfig,
-						env: {
-							// debug: true,
-							dynamicImport: true,
-							targets: getBrowserTargets(),
-						},
-					},
-				},
-			];
-		case 'modern':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets:
-										'extends @guardian/browserslist-config',
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
 		case 'apps':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets: ['android >= 5', 'ios >= 12'],
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
+			return swcLoader(['android >= 5', 'ios >= 12']);
+		case 'variant':
+		case 'modern':
+			return USE_SWC ? swcLoader(getBrowserTargets()) : babelLoader;
 	}
 };
 

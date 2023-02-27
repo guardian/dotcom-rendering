@@ -241,5 +241,6 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
+			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 		};
 	});

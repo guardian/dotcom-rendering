@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
@@ -10,12 +10,12 @@ import type { ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
-export const defaultStyles = (kicker: string): SerializedStyles => css`
+export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ fontStyle: 'italic' })}
-	color: ${kicker};
+	color: ${text.byline(format)};
 
 	${darkModeCss`
-        color: ${neutral[60]};
+        color: ${text.bylineDark(format)};
     `}
 `;
 

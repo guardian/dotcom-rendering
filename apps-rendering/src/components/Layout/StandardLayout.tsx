@@ -162,7 +162,7 @@ const StandardLayout: FC<Props> = ({ item }) => {
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
 					</div>
-					{decideLines(item, lineStyles)}
+					{decideLines(item, lineStyles(format))}
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						<Logo item={item} />

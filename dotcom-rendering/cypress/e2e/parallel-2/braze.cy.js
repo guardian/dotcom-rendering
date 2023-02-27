@@ -46,7 +46,7 @@ describe('Braze messaging', function () {
 		storage.local.set('gu.geo.override', 'GB');
 
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
@@ -55,7 +55,7 @@ describe('Braze messaging', function () {
 		// eslint-disable-next-line cypress/no-unnecessary-waiting
 		cy.wait('@tcfRequest');
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
@@ -77,7 +77,7 @@ describe('Braze messaging', function () {
 
 		storage.local.set('gu.geo.override', 'GB');
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');
