@@ -160,6 +160,20 @@ export const SignInGateSelector = ({
 		checkOutCompleteString !== null
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
+
+	const personaliseComponentId = (
+		componentId?: string,
+	): string | undefined => {
+		if (!componentId) return undefined;
+		if (!checkoutCompleteCookieData) return componentId
+		const { userType, product } = checkoutCompleteCookieData;
+		return `${componentId}_personalised_${userType}_${product}`;
+	};
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
+
+	const shouldPersonaliseComponentId = (): boolean => {
+		return checkoutCompleteCookieData !== undefined && personaliseSwitch
+	}
 	// END: Checkout Complete Personalisation
 
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
@@ -172,7 +186,7 @@ export const SignInGateSelector = ({
 		CurrentSignInGateABTest | undefined
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
-	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
+
 	const gateSelector = useSignInGateSelector();
 
 	const { pageViewId } = window.guardian.config.ophan;
@@ -201,8 +215,7 @@ export const SignInGateSelector = ({
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			gateVariant
+			void gateVariant
 				.canShow({
 					isSignedIn: !!isSignedIn,
 					currentTest,
@@ -214,8 +227,8 @@ export const SignInGateSelector = ({
 				})
 				.then(setCanShowGate);
 		}
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		getSwitches().then((switches) => {
+
+		void getSwitches().then((switches) => {
 			if (switches.personaliseSignInGateAfterCheckout) {
 				setPersonaliseSwitch(
 					switches.personaliseSignInGateAfterCheckout,
@@ -237,20 +250,9 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	const personalisedComponentId = (
-		id?: string,
-		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
-	): string | undefined => {
-		if (!id) return undefined;
-		if (!checkoutCompleteCookieData) return id;
-		const { userType, product } = checkoutCompleteCookieData;
-		return `${id}_personalised_${userType}_${product}`;
-	};
+	const componentId = signInGateTestIdToComponentId[currentTest.id]
 
-	const componentId = personalisedComponentId(
-		signInGateTestIdToComponentId[currentTest.id],
-		checkoutCompleteCookieData,
-	);
+	const personalisedComponentId = shouldPersonaliseComponentId() ? personaliseComponentId(componentId): componentId;
 
 	const signInUrl = generateSignInUrl({
 		pageId,
@@ -264,11 +266,11 @@ export const SignInGateSelector = ({
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && !!componentId && (
+			{!isGateDismissed && canShowGate && !!personalisedComponentId && (
 				<ShowSignInGate
 					format={format}
 					abTest={currentTest}
-					componentId={componentId}
+					componentId={personalisedComponentId}
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
