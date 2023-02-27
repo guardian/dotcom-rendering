@@ -297,7 +297,7 @@ export const SignInGateSelector = ({
 						format={format}
 						abTest={currentTest}
 						componentId={trackingData.componentId}
-            // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
+						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 						setShowGate={(show) => setIsGateDismissed(!show)}
 						signInUrl={trackingData.signInUrl}
 						gateVariant={gateVariant}
