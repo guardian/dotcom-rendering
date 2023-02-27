@@ -8,7 +8,7 @@ import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
 import { isOnOzoneTestPage } from '../lib/real-time-config';
 import { Elements } from './Elements';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 
 const adStyle = css`
 	background: ${neutral[93]};
@@ -158,7 +158,7 @@ export const Blocks = ({
 								data-sort-time="1"
 								css={adStyle}
 							>
-								<RegionalAd
+								<InlineAd
 									editionId={editionId}
 									section={section ?? ''}
 									contentType={contentType}

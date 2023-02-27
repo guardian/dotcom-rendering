@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { ContentABTestProvider } from './ContentABTest';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 
 describe('RegionalAd', () => {
 	const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';
@@ -37,7 +37,7 @@ describe('RegionalAd', () => {
 	it('rtc-config contains just a permutive URL and prebid object when `usePermutive` and `usePubmaticPrebid` flags are set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
-				<RegionalAd
+				<InlineAd
 					editionId="UK"
 					section=""
 					contentType=""
@@ -88,7 +88,7 @@ describe('RegionalAd', () => {
 	it('rtc-config contains just a prebid object when `usePubmaticPrebid` is true and other flags are false', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
-				<RegionalAd
+				<InlineAd
 					editionId="UK"
 					section=""
 					contentType=""
@@ -139,7 +139,7 @@ describe('RegionalAd', () => {
 	it('rtc-config contains just the permutive URL when `usePermutive` is true and other flags are false', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
-				<RegionalAd
+				<InlineAd
 					editionId="UK"
 					section=""
 					contentType=""
@@ -185,7 +185,7 @@ describe('RegionalAd', () => {
 	it('rtc-config contains the correct vendor config when just `useAmazon` flag is set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
-				<RegionalAd
+				<InlineAd
 					editionId="UK"
 					section=""
 					contentType=""
@@ -231,7 +231,7 @@ describe('RegionalAd', () => {
 	it('rtc-config contains no vendor config when all flags are set to false', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
-				<RegionalAd
+				<InlineAd
 					editionId="UK"
 					section=""
 					contentType=""

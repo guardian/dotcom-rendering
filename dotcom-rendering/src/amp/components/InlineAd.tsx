@@ -4,13 +4,16 @@ import type { BaseAdProps } from './Ad';
 import { Ad } from './Ad';
 
 /**
- * Ad slot component whose config differs based on region.
- * For each adRegion, create an Ad component with styling so that all but the component for the
- * user's region are hidden
- * @param RegionalAdProps
+ * Component for an advert that appears inline in articles / liveblogs
+ *
+ * To allow for differing the configuration of our advertising based on region,
+ * for each region we create an `Ad` component with styling so that only the
+ * component for the user's region (as indicated by the AMP geo runtime) are hidden
+ *
+ * @param {BaseAdProps} props
  * @returns an Ad component per region
  */
-export const RegionalAd = ({
+export const InlineAd = ({
 	editionId,
 	section,
 	contentType,

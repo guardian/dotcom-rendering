@@ -24,7 +24,7 @@ import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
 import { Epic } from './Epic';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 import { StickyAd } from './StickyAd';
 import { SubMeta } from './SubMeta';
 import { TopMeta } from './topMeta/TopMeta';
@@ -164,7 +164,7 @@ export const Body = ({ data, config }: Props) => {
 								data-sort-time="1"
 								css={adStyle}
 							>
-								<RegionalAd
+								<InlineAd
 									editionId={data.editionId}
 									section={data.sectionName ?? ''}
 									contentType={adInfo.contentType}
