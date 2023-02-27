@@ -47,7 +47,7 @@ export const signInGateComponent: SignInGateComponent = {
 		signInUrl,
 		abTest,
 		checkoutCompleteCookieData,
-		personaliseSignInGateAfterCheckoutSwitch
+		personaliseSignInGateAfterCheckoutSwitch,
 	}) => {
 		return (
 			<Lazy margin={300}>

@@ -165,15 +165,15 @@ export const SignInGateSelector = ({
 		componentId?: string,
 	): string | undefined => {
 		if (!componentId) return undefined;
-		if (!checkoutCompleteCookieData) return componentId
+		if (!checkoutCompleteCookieData) return componentId;
 		const { userType, product } = checkoutCompleteCookieData;
 		return `${componentId}_personalised_${userType}_${product}`;
 	};
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 
 	const shouldPersonaliseComponentId = (): boolean => {
-		return checkoutCompleteCookieData !== undefined && personaliseSwitch
-	}
+		return checkoutCompleteCookieData !== undefined && personaliseSwitch;
+	};
 	// END: Checkout Complete Personalisation
 
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
@@ -250,9 +250,11 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	const componentId = signInGateTestIdToComponentId[currentTest.id]
+	const componentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const personalisedComponentId = shouldPersonaliseComponentId() ? personaliseComponentId(componentId): componentId;
+	const personalisedComponentId = shouldPersonaliseComponentId()
+		? personaliseComponentId(componentId)
+		: componentId;
 
 	const signInUrl = generateSignInUrl({
 		pageId,

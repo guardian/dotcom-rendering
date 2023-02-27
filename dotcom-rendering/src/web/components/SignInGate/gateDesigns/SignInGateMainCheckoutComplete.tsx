@@ -173,21 +173,22 @@ export const SignInGateMainCheckoutComplete = ({
 	isMandatory = false,
 	checkoutCompleteCookieData,
 }: SignInGateProps) => {
-
 	// There is a type check above which means this shouldn't be
 	// possible to be undefined here, so this is just handling
 	// the fact that the type is optional.
 	// It's an optional type because `SignInGateProps` is shared
 	// with other components that don't use this type
-	if(checkoutCompleteCookieData === undefined) {
-		return <SignInGateMain
-			signInUrl={signInUrl}
-			guUrl={guUrl}
-			dismissGate={dismissGate}
-			abTest={abTest}
-			ophanComponentId={ophanComponentId}
-			isMandatory = {false}
-					/>
+	if (checkoutCompleteCookieData === undefined) {
+		return (
+			<SignInGateMain
+				signInUrl={signInUrl}
+				guUrl={guUrl}
+				dismissGate={dismissGate}
+				abTest={abTest}
+				ophanComponentId={ophanComponentId}
+				isMandatory={false}
+			/>
+		);
 	}
 	const { userType, product } = checkoutCompleteCookieData;
 
