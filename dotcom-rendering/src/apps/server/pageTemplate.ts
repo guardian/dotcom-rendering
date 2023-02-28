@@ -17,10 +17,10 @@ export const pageTemplate = ({
 			? 'favicon-32x32.ico'
 			: 'favicon-32x32-dev-yellow.ico';
 
-	const staticPreconnectUrls = [`${ASSET_ORIGIN}`, `https://i.guim.co.uk`];
+	const staticPreconnectUrls = [ASSET_ORIGIN, 'https://i.guim.co.uk'];
 	const staticPrefetchUrls = [
 		...staticPreconnectUrls,
-		`https://interactive.guim.co.uk`,
+		'https://interactive.guim.co.uk',
 	];
 	const preconnectTags = staticPreconnectUrls.map(
 		(src) => `<link rel="preconnect" href="${src}">`,
