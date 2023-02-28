@@ -13,9 +13,12 @@ type PillarForContainer =
 	| 'culture'
 	| 'lifestyle';
 
-// This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
-// If you change this list then you should also update ^
-// order matters here (first match wins)
+/**
+ * This list is a direct copy from [`frontend`](https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27).
+ * If you change this list then you should also update `frontend`.
+ *
+ * Order matters here (first match wins).
+ */
 const ALLOWED_TAGS = [
 	// sport tags
 	'sport/cricket',
@@ -45,32 +48,17 @@ const ALLOWED_TAGS = [
 	'football/manchestercity',
 	'football/tottenham-hotspur',
 	'football/liverpool',
-];
+] as const;
 
-const firstPopularTag = (
-	pageTags: string | string[],
-	isPaidContent: boolean,
-) => {
-	// This function looks for the first tag in pageTags, that also exists in our allowlist
-	if (!pageTags) {
-		// If there are no page tags we will never find a match so
-		return false;
-	}
+/** This function looks for item in our allowlist that is present in our keywordIds */
+const firstPopularTag = (keywordIds: string, isPaidContent: boolean) => {
+	const tags = keywordIds.split(',');
 
-	// The problem here is keywordIds is sometimes a string and sometimes an array of strings. Fun times.
-	let tags;
-	if (typeof pageTags === 'string') {
-		tags = pageTags.split(',');
-	} else {
-		tags = pageTags;
-	}
-
-	const firstTagInAllowedList =
-		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) ?? false;
-
-	// For paid content we just return the first tag, otherwise we
-	// filter for the first tag in the allowlist
-	return isPaidContent ? tags[0] : firstTagInAllowedList;
+	// For paid content we just return the first tag,
+	// otherwise we find the allowlist tag that matches
+	return isPaidContent
+		? tags[0]
+		: ALLOWED_TAGS.find((tag) => tags.includes(tag));
 };
 
 const onwardsWrapper = css`
@@ -174,7 +162,7 @@ type Props = {
 	pageId: string;
 	isPaidContent: boolean;
 	showRelatedContent: boolean;
-	keywordIds: string | string[];
+	keywordIds: string;
 	contentType: string;
 	tags: TagType[];
 	format: ArticleFormat;
@@ -317,3 +305,5 @@ export const OnwardsUpper = ({
 		</div>
 	);
 };
+
+export { firstPopularTag };

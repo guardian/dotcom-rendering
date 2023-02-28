@@ -431,7 +431,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-										article.starRating
+										article.starRating !== undefined
 											? article.starRating
 											: undefined
 									}
@@ -469,7 +469,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 										article.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										typeof article.starRating === 'number'
+										article.starRating !== undefined
 									}
 								/>
 							</PositionHeadline>

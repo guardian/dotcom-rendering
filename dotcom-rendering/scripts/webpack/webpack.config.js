@@ -7,12 +7,14 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT } = require('./bundles');
+const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
+const dist = path.resolve(__dirname, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+
+const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
+const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
 
@@ -110,7 +112,6 @@ const commonConfigs = ({ platform }) => ({
 });
 
 module.exports = [
-	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
@@ -118,21 +119,6 @@ module.exports = [
 		require(`./webpack.config.server`)({ sessionId }),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
-	// browser bundle configs
-	// TODO: ignore static files for legacy compilation
-	...(INCLUDE_LEGACY
-		? [
-				merge(
-					commonConfigs({
-						platform: 'browser.legacy',
-					}),
-					require(`./webpack.config.browser`)({
-						bundle: 'legacy',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
 	merge(
 		commonConfigs({
 			platform: 'browser.modern',
@@ -151,9 +137,7 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	// Only build the variant if in production mode
-	// Use `make build` or remove the PROD check temporarily to build the variant in development
-	...(PROD && BUILD_VARIANT
+	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? [
 				merge(
 					commonConfigs({
@@ -161,6 +145,20 @@ module.exports = [
 					}),
 					require(`./webpack.config.browser`)({
 						bundle: 'variant',
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
+	// TODO: ignore static files for legacy compilation
+	...(PROD || BUILD_LEGACY
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.legacy',
+					}),
+					require(`./webpack.config.browser`)({
+						bundle: 'legacy',
 						sessionId,
 					}),
 				),

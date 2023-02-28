@@ -201,11 +201,12 @@ export const enhanceCards = (
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
-			webPublicationDate: faciaCard.card.webPublicationDateOption
-				? new Date(
-						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
-				: undefined,
+			webPublicationDate:
+				faciaCard.card.webPublicationDateOption !== undefined
+					? new Date(
+							faciaCard.card.webPublicationDateOption,
+					  ).toISOString()
+					: undefined,
 			image: decideImage(faciaCard),
 			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent

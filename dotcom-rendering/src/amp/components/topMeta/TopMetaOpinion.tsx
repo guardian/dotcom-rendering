@@ -74,10 +74,12 @@ const BylineMeta = ({ articleData, pillar }: BylineMetaProps) => {
 	).length;
 	const bylineImageUrl = contributorTag
 		? contributorTag.bylineLargeImageUrl
-		: null;
+		: undefined;
 
 	const shouldShowBylineImage =
-		contributorTag && bylineImageUrl && contributorCount === 1;
+		contributorTag !== undefined &&
+		bylineImageUrl !== undefined &&
+		contributorCount === 1;
 
 	return (
 		<div css={bylineWrapper}>

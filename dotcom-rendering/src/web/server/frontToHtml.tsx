@@ -89,7 +89,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		),
 	);
 
-	const keywords = front.config.keywords ?? '';
+	const keywords = front.config.keywords;
 
 	return pageTemplate({
 		scriptTags,

@@ -11,7 +11,7 @@ export interface Link {
 }
 
 export const isOnPlatform = (l: Link, platform: LinkPlatform): boolean => {
-	return !l.onlyOnPlatform || l.onlyOnPlatform === platform;
+	return l.onlyOnPlatform === undefined || l.onlyOnPlatform === platform;
 };
 
 export const footerLinksNew: Link[][] = [
