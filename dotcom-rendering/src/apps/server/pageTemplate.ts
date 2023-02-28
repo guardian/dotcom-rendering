@@ -6,11 +6,13 @@ export const pageTemplate = ({
 	html,
 	title = 'The Guardian',
 	clientScripts,
+	windowGuardian,
 }: {
 	css: string;
 	html: string;
 	title?: string;
 	clientScripts: string[];
+	windowGuardian: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -61,9 +63,19 @@ export const pageTemplate = ({
 				<meta id="twitter-theme" name="twitter:widgets:theme" content="light" />
 				<meta name="twitter:dnt" content="on" />
 
+				<script>
+                    window.guardian = ${windowGuardian};
+					window.guardian.queue = [];
+				</script>
+
+				<script type="module">
+					window.guardian.mustardCut = true;
+				</script>
+
 				${clientScripts
 					.map((scriptSrc) => `<script src="${scriptSrc}"></script>`)
 					.join('\n')}
+
                 <style>${resets.resetCSS}</style>
 				${css}
 			</head>
