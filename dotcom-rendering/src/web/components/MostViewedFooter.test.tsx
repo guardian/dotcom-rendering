@@ -34,7 +34,7 @@ describe('MostViewedFooterData', () => {
 			/>,
 		);
 
-		// Calls api once only
+		// Calls api twice
 		expect(useApi).toHaveBeenCalledTimes(2);
 
 		// Renders all 20 items
