@@ -53,6 +53,29 @@ const Placeholder = ({
 	</LI>
 );
 
+const LeftColPlaceholder = ({
+	heightInPixels = 400,
+	text = 'Placeholder Content',
+}: {
+	heightInPixels?: number;
+	text?: string;
+}) => (
+	<div
+		css={css`
+			background-color: lightgrey;
+			width: 100%;
+			height: ${heightInPixels}px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2em;
+			font-weight: 200;
+		`}
+	>
+		{text}
+	</div>
+);
+
 export const ContainerStory = () => {
 	return (
 		<FrontSection
@@ -89,7 +112,9 @@ export const LeftContentStory = () => {
 		<FrontSection
 			title="Borders"
 			centralBorder="full"
-			leftContent={<Placeholder text="LeftCol" heightInPixels={200} />}
+			leftContent={
+				<LeftColPlaceholder text="LeftCol" heightInPixels={200} />
+			}
 		>
 			<Placeholder />
 		</FrontSection>
