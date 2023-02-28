@@ -68,10 +68,10 @@ const valueStyles = css`
 	max-width: 150px;
 `;
 
-const Label = ({ value, count }: LabelProps) => (
+const Label = ({ value, count = 0 }: LabelProps) => (
 	<>
 		<span css={valueStyles}>{value}</span>{' '}
-		{!!count && <span css={countStyles}>({count})</span>}
+		{count !== 0 && <span css={countStyles}>({count})</span>}
 	</>
 );
 

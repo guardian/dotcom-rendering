@@ -7,7 +7,7 @@ export const updateTimeElement = (element: Element): void => {
 		const absoluteTime = element.getAttribute('datetime');
 		if (!absoluteTime || !relativeFormat) return;
 
-		let newTime;
+		let newTime: false | string = false;
 		switch (relativeFormat) {
 			case 'short':
 			case 'med':
@@ -22,7 +22,8 @@ export const updateTimeElement = (element: Element): void => {
 				break;
 		}
 		const oldTime = element.innerText;
-		if (newTime && newTime !== oldTime) element.innerHTML = newTime;
+		if (newTime !== false && newTime !== oldTime)
+			element.innerHTML = newTime;
 	}
 };
 

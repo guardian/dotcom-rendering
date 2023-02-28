@@ -35,14 +35,14 @@ const babelLoader = [
 	},
 ];
 
-const swcLoader = [
+const swcLoader = (targets) => [
 	{
 		loader: 'swc-loader',
 		options: {
 			...swcConfig,
 			env: {
 				dynamicImport: true,
-				targets: getBrowserTargets(),
+				targets,
 			},
 		},
 	},
@@ -92,34 +92,10 @@ const getLoaders = (bundle) => {
 				},
 			];
 		case 'apps':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets: ['android >= 5', 'ios >= 12'],
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
+			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'variant':
 		case 'modern':
-			return USE_SWC ? swcLoader : babelLoader;
+			return USE_SWC ? swcLoader(getBrowserTargets()) : babelLoader;
 	}
 };
 

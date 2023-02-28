@@ -146,6 +146,21 @@ module.exports = {
 
 		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
 
+		'@typescript-eslint/strict-boolean-expressions': [
+			'error',
+			{
+				// This rule also errors on any ambiguous type comparisons (e.g !! on a type `null | undefined | ""`)
+				// https://typescript-eslint.io/rules/strict-boolean-expressions/
+				allowString: true,
+				allowNumber: true,
+				allowNullableObject: true,
+				allowNullableBoolean: true,
+				allowNullableString: true,
+				allowNullableNumber: false, // We only want to enforce this for numbers
+				allowAny: true,
+			},
+		],
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,

@@ -16,6 +16,7 @@ export const bootCmp = async (): Promise<void> => {
 	const { pageViewId } = window.guardian.config.ophan;
 
 	onConsentChange((consentState: ConsentState) => {
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Review if this check is needed
 		if (!consentState) return;
 		// Register changes in consent state with Ophan
 

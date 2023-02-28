@@ -106,8 +106,9 @@ export const articleToHtml = ({ article }: Props): string => {
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,
-			pageHasNonBootInteractiveElements &&
-				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+			pageHasNonBootInteractiveElements
+				? `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`
+				: undefined,
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),

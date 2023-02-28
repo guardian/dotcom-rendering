@@ -317,7 +317,9 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType' && article.matchUrl;
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
@@ -565,7 +567,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{article.starRating || article.starRating === 0 ? (
+							{article.starRating !== undefined ? (
 								<div css={starWrapper}>
 									<StarRating
 										rating={article.starRating}

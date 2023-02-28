@@ -72,7 +72,7 @@ export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 	}
 
 	const shareCount = shareData?.share_count;
-	if (!shareCount || shareCount === 0) return null;
+	if (shareCount === undefined || shareCount === 0) return null;
 
 	const { short, long } = formatCount(shareCount);
 

@@ -60,7 +60,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 		window
 			.guardianPolyfilledImport(url)
 			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return -- required for dynamic import
 				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
 			})
 			.catch((err) => {
@@ -122,7 +122,7 @@ const usePayload = ({
 		targeting: {
 			contentType: 'LiveBlog',
 			sectionId: section,
-			shouldHideReaderRevenue: shouldHideReaderRevenue ?? false,
+			shouldHideReaderRevenue,
 			isMinuteArticle: true,
 			isPaidContent,
 			tags,
@@ -163,7 +163,7 @@ const Render = ({
 }) => {
 	const { Epic } = useEpic({ url, name });
 
-	if (!Epic) return null;
+	if (Epic === undefined) return null;
 	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (

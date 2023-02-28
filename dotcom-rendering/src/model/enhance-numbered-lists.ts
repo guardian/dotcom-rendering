@@ -6,7 +6,6 @@ import type {
 } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
-	if (!element) return false;
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
@@ -56,7 +55,6 @@ const isStarRating = (element: FEElement): boolean => {
 		return charactor === '★' || charactor === '☆';
 	};
 
-	if (!element) return false;
 	// Checks if this element is a 'star rating' based on the convention: <p>★★★★☆</p>
 	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
 		return false;
@@ -182,7 +180,6 @@ const makeThumbnailsRound = (elements: FEElement[]): FEElement[] => {
 };
 
 const isItemLink = (element: FEElement): boolean => {
-	if (!element) return false;
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'

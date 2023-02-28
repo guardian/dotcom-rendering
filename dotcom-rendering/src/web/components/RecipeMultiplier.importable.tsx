@@ -115,8 +115,8 @@ const transform = ({
 	unit: string;
 }) => {
 	const [from, to] = value;
-	if (!from) return `Invalid value`;
-	if (to) {
+	if (from === undefined) return `Invalid value`;
+	if (to !== undefined) {
 		return `${from}-${to}${separator}${unit}`;
 	}
 
@@ -186,8 +186,8 @@ export const RecipeMultiplier = () => {
 								if (
 									key === 'value' &&
 									value.includes('/') &&
-									numerator &&
-									denominator
+									numerator !== undefined &&
+									denominator !== undefined
 								) {
 									return [
 										key,
