@@ -7,6 +7,7 @@ import type {
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
+import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { MostViewedFooter } from './MostViewedFooter.importable';
@@ -15,13 +16,13 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
-	edition: string;
+	edition: EditionId;
 }
 
 function buildSectionUrl(
 	ajaxUrl: string,
-	edition?: string,
 	sectionName?: string,
+	edition?: EditionId,
 ) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
