@@ -1,4 +1,5 @@
 import { resets } from '@guardian/source-foundations';
+import { ASSET_ORIGIN } from 'src/lib/assets';
 
 export const pageTemplate = ({
 	css,
@@ -15,6 +16,18 @@ export const pageTemplate = ({
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'
 			: 'favicon-32x32-dev-yellow.ico';
+
+	const staticPreconnectUrls = [`${ASSET_ORIGIN}`, `https://i.guim.co.uk`];
+	const staticPrefetchUrls = [
+		...staticPreconnectUrls,
+		`https://interactive.guim.co.uk`,
+	];
+	const preconnectTags = staticPreconnectUrls.map(
+		(src) => `<link rel="preconnect" href="${src}">`,
+	);
+	const prefetchTags = staticPrefetchUrls.map(
+		(src) => `<link rel="dns-prefetch" href="${src}">`,
+	);
 
 	/**
 	 * This workaround enables the reader to adjust interface scaling in the
@@ -34,6 +47,8 @@ export const pageTemplate = ({
 				<meta name="description" content="${title}" />
 
                 <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+                ${preconnectTags.join('\n')}
+                ${prefetchTags.join('\n')}
 				${androidFontSizeWorkaround}
 
                 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
