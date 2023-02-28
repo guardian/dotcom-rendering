@@ -264,7 +264,7 @@ describe('Sign In Gate Tests', function () {
 					.should('have.attr', 'href')
 					.and('contains', '/signin?returnUrl=')
 					.and('match', /componentId%3Dmain_variant_\d/)
-					.and('not.contains', 'personalise_new_DigitalPack');
+					.and('not.contains', 'personalised_new_DigitalPack');
 			});
 
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
