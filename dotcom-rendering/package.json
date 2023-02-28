@@ -35,7 +35,6 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "^3.279.0",
-		"@aws-sdk/client-ssm": "^3.279.0",
 		"@babel/core": "^7.16.12",
 		"@babel/helper-compilation-targets": "^7.20.0",
 		"@babel/helper-create-regexp-features-plugin": "^7.12.17",
