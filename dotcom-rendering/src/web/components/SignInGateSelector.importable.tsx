@@ -184,10 +184,6 @@ export const SignInGateSelector = ({
 		const { userType, product } = checkoutCompleteCookieData;
 		return `${currentComponentId}_personalised_${userType}_${product}`;
 	};
-
-	const shouldPersonaliseComponentId = (): boolean => {
-		return personaliseSwitch && checkoutCompleteCookieData !== undefined;
-	};
 	// END: Checkout Complete Personalisation
 
 	useOnce(() => {
@@ -252,7 +248,7 @@ export const SignInGateSelector = ({
 	}
 	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const componentId = shouldPersonaliseComponentId()
+	const componentId = personaliseSwitch
 		? personaliseComponentId(signInGateComponentId)
 		: signInGateComponentId;
 
