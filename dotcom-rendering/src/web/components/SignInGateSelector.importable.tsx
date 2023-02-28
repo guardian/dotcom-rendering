@@ -211,6 +211,16 @@ export const SignInGateSelector = ({
 		}
 	}, [gateSelector]);
 
+	useOnce(() => {
+		void getSwitches().then((switches) => {
+			if (switches.personaliseSignInGateAfterCheckout) {
+				setPersonaliseSwitch(
+					switches.personaliseSignInGateAfterCheckout,
+				);
+			} else setPersonaliseSwitch(false);
+		});
+	}, [])
+
 	useEffect(() => {
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -226,14 +236,6 @@ export const SignInGateSelector = ({
 				})
 				.then(setCanShowGate);
 		}
-		// eslint-disable-next-line @typescript-eslint/no-floating-promises
-		getSwitches().then((switches) => {
-			if (switches.personaliseSignInGateAfterCheckout) {
-				setPersonaliseSwitch(
-					switches.personaliseSignInGateAfterCheckout,
-				);
-			} else setPersonaliseSwitch(false);
-		});
 	}, [
 		currentTest,
 		gateVariant,
