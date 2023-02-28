@@ -161,14 +161,6 @@ export const SignInGateSelector = ({
 			? parseCheckoutCompleteCookieData(checkOutCompleteString)
 			: undefined;
 
-	const personaliseComponentId = (
-		currentComponentId: string | undefined,
-	): string | undefined => {
-		if (!currentComponentId) return undefined;
-		if (!checkoutCompleteCookieData) return currentComponentId;
-		const { userType, product } = checkoutCompleteCookieData;
-		return `${currentComponentId}_personalised_${userType}_${product}`;
-	};
 	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
 
 	// END: Checkout Complete Personalisation
@@ -186,9 +178,6 @@ export const SignInGateSelector = ({
 
 	const gateSelector = useSignInGateSelector();
 
-	const [trackingData, setTrackingData] = useState<
-		{ componentId: string | undefined; signInUrl: string } | undefined
-	>(undefined);
 	const { pageViewId } = window.guardian.config.ophan;
 
 	useOnce(() => {
@@ -211,45 +200,11 @@ export const SignInGateSelector = ({
 			setGateVariant(gateSelectorVariant);
 			setCurrentTest(gateSelectorTest);
 
-			const componentId =
-				signInGateTestIdToComponentId[gateSelectorTest.id];
-			const signInUrl = generateSignInUrl({
-				pageId,
-				host,
-				pageViewId,
-				idUrl,
-				currentTest: gateSelectorTest,
-				componentId,
-			});
-			setTrackingData({
-				componentId,
-				signInUrl,
-			});
-
 			void getSwitches().then((switches) => {
 				if (switches.personaliseSignInGateAfterCheckout) {
 					setPersonaliseSwitch(
 						switches.personaliseSignInGateAfterCheckout,
 					);
-					if (checkoutCompleteCookieData) {
-						// Add the personalised component id to tracking if
-						// we will show the personalised gate
-						const personalisedComponentId = personaliseComponentId(
-							signInGateTestIdToComponentId[gateSelectorTest.id],
-						);
-						const personalisedSignInUrl = generateSignInUrl({
-							pageId,
-							host,
-							pageViewId,
-							idUrl,
-							currentTest: gateSelectorTest,
-							componentId: personalisedComponentId,
-						});
-						setTrackingData({
-							componentId: personalisedComponentId,
-							signInUrl: personalisedSignInUrl,
-						});
-					}
 				} else {
 					setPersonaliseSwitch(false);
 				}
@@ -286,28 +241,32 @@ export const SignInGateSelector = ({
 	if (!currentTest || !gateVariant) {
 		return null;
 	}
+	const componentId = signInGateTestIdToComponentId[currentTest.id];
+	const signInUrl = generateSignInUrl({
+		pageId,
+		host,
+		pageViewId,
+		idUrl,
+		currentTest,
+		componentId,
+	});
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed &&
-				canShowGate &&
-				!!trackingData &&
-				!!trackingData.componentId && (
-					<ShowSignInGate
-						format={format}
-						abTest={currentTest}
-						componentId={trackingData.componentId}
-						// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
-						setShowGate={(show) => setIsGateDismissed(!show)}
-						signInUrl={trackingData.signInUrl}
-						gateVariant={gateVariant}
-						host={host}
-						checkoutCompleteCookieData={checkoutCompleteCookieData}
-						personaliseSignInGateAfterCheckoutSwitch={
-							personaliseSwitch
-						}
-					/>
-				)}
+			{!isGateDismissed && canShowGate && !!componentId && (
+				<ShowSignInGate
+					format={format}
+					abTest={currentTest}
+					componentId={componentId}
+					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
+					setShowGate={(show) => setIsGateDismissed(!show)}
+					signInUrl={signInUrl}
+					gateVariant={gateVariant}
+					host={host}
+					checkoutCompleteCookieData={checkoutCompleteCookieData}
+					personaliseSignInGateAfterCheckoutSwitch={personaliseSwitch}
+				/>
+			)}
 		</>
 	);
 };

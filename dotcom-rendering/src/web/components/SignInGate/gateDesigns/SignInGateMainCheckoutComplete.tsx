@@ -192,6 +192,23 @@ export const SignInGateMainCheckoutComplete = ({
 	}
 	const { userType, product } = checkoutCompleteCookieData;
 
+	const personalisedComponentId = `${ophanComponentId}_personalised_${userType}_${product}`;
+
+	const signInUrlWithTracking = (): string => {
+		const href = new URL(signInUrl);
+		const componentEventParams = href.searchParams.get(
+			'componentEventParams',
+		);
+		if (componentEventParams) {
+			const urlParams = new URLSearchParams(componentEventParams);
+			urlParams.set('componentId', personalisedComponentId);
+			href.searchParams.set(
+				'componentEventParams',
+				encodeURI(urlParams.toString()),
+			);
+		}
+		return href.toString();
+	};
 	// send new/guest userType to the /register page instead of /signin
 	const personaliseSignInURl = (url: string): string => {
 		if (userType === 'new' || userType == 'guest') {
@@ -227,9 +244,13 @@ export const SignInGateMainCheckoutComplete = ({
 					css={registerButton}
 					priority="primary"
 					size="small"
-					href={personaliseSignInURl(signInUrl)}
+					href={personaliseSignInURl(signInUrlWithTracking())}
 					onClick={() => {
-						trackLink(ophanComponentId, 'register-link', abTest);
+						trackLink(
+							personalisedComponentId,
+							'register-link',
+							abTest,
+						);
 					}}
 				>
 					{getButtonText(userType)}
@@ -243,7 +264,11 @@ export const SignInGateMainCheckoutComplete = ({
 						size="small"
 						onClick={() => {
 							dismissGate();
-							trackLink(ophanComponentId, 'not-now', abTest);
+							trackLink(
+								personalisedComponentId,
+								'not-now',
+								abTest,
+							);
 						}}
 					>
 						Not now
@@ -256,7 +281,7 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/info/2014/nov/03/why-your-data-matters-to-us-full-text`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'why-link', abTest);
+						trackLink(personalisedComponentId, 'why-link', abTest);
 					}}
 				>
 					How will my information & data be used?
@@ -266,7 +291,7 @@ export const SignInGateMainCheckoutComplete = ({
 					data-ignore="global-link-styling"
 					href={`${guUrl}/help/identity-faq`}
 					onClick={() => {
-						trackLink(ophanComponentId, 'help-link', abTest);
+						trackLink(personalisedComponentId, 'help-link', abTest);
 					}}
 				>
 					Get help with registering or signing in
