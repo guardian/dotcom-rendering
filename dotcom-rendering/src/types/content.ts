@@ -737,6 +737,7 @@ interface CampaignField {
 	required: boolean;
 	textSize?: number;
 	hideLabel: boolean;
+	hidden: boolean;
 	label: string;
 }
 

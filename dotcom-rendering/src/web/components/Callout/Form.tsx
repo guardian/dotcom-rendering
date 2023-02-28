@@ -63,9 +63,15 @@ type FormProps = {
 	formFields: CampaignFieldType[];
 	submissionURL: string;
 	formID: string;
+	pageId: string;
 };
 
-export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
+export const Form = ({
+	formFields,
+	submissionURL,
+	formID,
+	pageId,
+}: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -230,16 +236,19 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						`}
 					/>
 				)}
-				{formFields.map((formField) => (
-					<div css={formFieldWrapperStyles} key={formField.id}>
-						<FormField
-							formField={formField}
-							formData={formData}
-							setFieldInFormData={setFieldInFormData}
-							validationErrors={validationErrors}
-						/>
-					</div>
-				))}
+				{formFields.map((formField) => {
+					return (
+						<div css={formFieldWrapperStyles} key={formField.id}>
+							<FormField
+								formField={formField}
+								formData={formData}
+								setFieldInFormData={setFieldInFormData}
+								validationErrors={validationErrors}
+								pageId={pageId}
+							/>
+						</div>
+					);
+				})}
 				<div css={textStyles}>
 					One of our journalists will be in contact before we publish
 					your information, so please do leave contact details.
