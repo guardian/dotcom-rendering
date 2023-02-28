@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>DCR Development Server</title>
+		<link
+			rel="icon"
+			href="https://static.guim.co.uk/images/favicon-32x32-dev-yellow.ico"
+		/>
 		<style>
 			* {
 				box-sizing: border-box;
@@ -27,18 +32,18 @@
 				font-size: 36px;
 			}
 
-			.data-source {
+			.data-source-selector {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 			}
 
-			.data-source span {
+			.data-source-selector span {
 				font-size: 24px;
 				color: #ffffff;
 				margin-right: 8px;
 			}
-			.data-source select {
+			.data-source-selector select {
 				padding: 6px;
 				border: none;
 				border-radius: 3px;
@@ -80,35 +85,72 @@
 				color: #454545;
 				font-size: 14px;
 			}
-			.content .platform {
-				background-color: #d9d9d9;
-				border-radius: 3px;
-				padding: 4px 12px;
-				box-shadow: 2px 4px 5px 0px rgba(0, 0, 0, 0.25);
-				margin: 0px 4px;
+
+			.content .blurb {
+				margin-bottom: 8px;
+				font-size: 16px;
+
+				max-width: 1000px;
 			}
 
 			.content .platform a {
-				color: #000000;
-				text-decoration: none;
-				font-size: 14px;
+				font-size: 18px;
 			}
 
 			.endpoint-list li {
 				margin-bottom: 20px;
 			}
 			.endpoint-list li::marker {
-				content: '';
+				/* content: ''; */
+				font-size: 24px;
 			}
 			.endpoint-list .name {
-				margin-right: 16px;
+				margin-right: 8px;
 				font-size: 20px;
 			}
 
 			.endpoint-list .description {
 				color: #454545;
 				font-size: 14px;
-				padding-left: 12px;
+				padding-left: 8px;
+			}
+
+			.endpoint-list .url-options {
+				background-color: #f6f6f6;
+				box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+				padding: 4px;
+				border-radius: 4px;
+				margin: 0 4px;
+				color: #000000;
+			}
+
+			.clipboard-list {
+				padding-left: 0;
+			}
+
+			.clipboard-list li {
+				margin-bottom: 32px;
+			}
+
+			.clipboard-list li::marker {
+				content: none;
+			}
+
+			.clipboard-list .data-source {
+				color: #000000;
+				background-color: #f6f6f6;
+				box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+				padding: 4px 8px;
+				border-radius: 4px;
+				margin-right: 12px;
+			}
+
+			.clipboard-list .properties {
+				margin-bottom: 12px;
+			}
+
+			.clipboard-list .platform a {
+				font-size: 18px;
 			}
 			/* End main Content */
 		</style>
@@ -116,7 +158,7 @@
 	<body>
 		<header>
 			<h1>DCR Development Server</h1>
-			<div class="data-source">
+			<div class="data-source-selector">
 				<span>Data Source</span>
 				<select name="data-source" id="data-source">
 					<option value="prod">Production</option>
@@ -129,21 +171,63 @@
 			<section class="side-bar">
 				<h2>Resources</h2>
 				<ul>
-					<li><a href="#">Github</a></li>
-					<li><a href="#">Docs</a></li>
+					<li>
+						<a
+							href="https://github.com/guardian/dotcom-rendering"
+							target="_blank"
+							>Github</a
+						>
+					</li>
+					<li>
+						<a
+							href="https://github.com/guardian/dotcom-rendering/tree/main/dotcom-rendering/docs"
+							target="_blank"
+							>Docs</a
+						>
+					</li>
 					<li><a href="#">Chat Channel</a></li>
-					<li><a href="#">Debug Tool</a></li>
+					<li>
+						<a
+							href="https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md"
+							target="_blank"
+							>Debug Tool</a
+						>
+					</li>
 					<li><a href="#">Intro to DCR</a></li>
 				</ul>
 			</section>
 			<section class="content">
 				<h2>Welcome to DCR</h2>
-				<p>Some basic blurb about DCR</p>
-				<h2>From your clipboard</h2>
-				<p>
-					If you have guardian URLs in your clipboard, the dev server
-					link for them will appear here
+				<p class="blurb">
+					This is the development server homepage for DCR
 				</p>
+				<p class="blurb">
+					Here you can find resources for developing with DCR, you can
+					quickly navigate to URLs from your clipboard, and find a
+					selection of example content URLs.
+				</p>
+				<p class="blurb">
+					If you're getting started with DCR, you can use some of the
+					resources on the left to help you learn what DCR is and how
+					it works! Feel free to reach out to the WebEx team who are
+					always available to help you.
+				</p>
+				<p class="blurb">
+					This project is managed the WebEx Team, so if you notice any
+					issues please let us know. We also encourage teams to be
+					independent when working on our platform, so feel free to
+					raise issues, PRs & RFCs as you need!
+				</p>
+				<div>
+					<h2>From your clipboard</h2>
+					<p>
+						If you have guardian URLs in your clipboard, the dev
+						server link for them will appear here
+					</p>
+					<ul class="clipboard-list" id="clipboard-list">
+						<!-- Clipboard content will go here	 -->
+					</ul>
+				</div>
 				<div>
 					<h2>Default Endpoints</h2>
 					<p>
@@ -152,34 +236,158 @@
 					</p>
 					<ul class="endpoint-list">
 						<li>
-							<span class="platform"><a href="#">Web</a></span>
-							<span class="platform"><a href="#">Apps</a></span>
-							<span class="platform"><a href="#">AMP</a></span>
 							<span class="name">Article</span>
+							<span class="platform"
+								><a
+									href="/Article/web/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									>Web</a
+								></span
+							>
+							<span> • </span>
+							<span class="platform"
+								><a
+									href="/Article/apps/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									>Apps</a
+								></span
+							>
+							<span> • </span>
+							<span class="platform"
+								><a
+									href="/Article/amp/https://amp.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									>AMP</a
+								></span
+							>
 							<span class="description"
-								>/[web|apps|amp]/Article/[any guardian article
-								URL]</span
+								>/Article/<span class="url-options"
+									>web | apps | amp</span
+								>/<span class="url-options"
+									>Any guardian article URL</span
+								></span
 							>
 						</li>
 						<li>
-							<span class="platform"><a href="#">Web</a></span>
-							<span class="platform"><a href="#">AMP</a></span>
 							<span class="name">Interactive</span>
+							<span class="platform"
+								><a
+									href="/Interactive/web/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+									>Web</a
+								></span
+							>
+							<span> • </span>
+							<span class="platform"
+								><a
+									href="/Interactive/amp/https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
+									>AMP</a
+								></span
+							>
 							<span class="description"
-								>/[web|amp]/Interactive/[any guardian article
-								URL]</span
+								>/Interactive/<span class="url-options"
+									>web | amp</span
+								>/<span class="url-options"
+									>Any guardian interactive URL</span
+								></span
 							>
 						</li>
 						<li>
-							<span class="platform"><a href="#">Web</a></span>
 							<span class="name">Front</span>
+							<span class="platform"
+								><a
+									href="/Front/web/https://www.theguardian.com/international"
+									>Web</a
+								></span
+							>
 							<span class="description"
-								>/web/Front/[any guardian article URL]</span
+								>/Front/web/<span class="url-options"
+									>Any guardian front URL</span
+								></span
 							>
 						</li>
 					</ul>
 				</div>
 			</section>
 		</main>
+		<!-- Clipboard management -->
+		<script>
+			const hosts = [
+				{ base: 'https://www.theguardian.com/', name: 'PROD' },
+				{ base: 'https://m.code.dev-theguardian.com/', name: 'CODE' },
+				{ base: 'http://localhost:9000/', name: 'Local FE' },
+			];
+
+			// Track the URLs we already have added
+			const urls = new Set();
+
+			const getPageType = (url) => {
+				// All interactive pages include this in the URL
+				if (url.includes('/ng-interactive/')) return 'Interactive';
+				// We're looking for the date string, e.g /2022/jul/30
+				else if (url.match(/[0-9]{4}\/[a-z]{3}\/[0-9]{2}\/.+/))
+					return 'Article';
+				// Fall back to fronts for all other page types
+				else return 'Front';
+			};
+
+			const targetsByContentType = (contentType) => {
+				switch (contentType.toLowerCase()) {
+					case 'front':
+						return ['Web'];
+					case 'interactive':
+						return ['Web', 'AMP'];
+					default:
+						return ['Web', 'Apps', 'AMP'];
+				}
+			};
+
+			const pathFromUrl = (urlString) => {
+				const url = new URL(urlString);
+				return url.pathname;
+			};
+
+			const makeClipboard = (dataSource, contentType, url) => `
+				<li>
+					<div class="properties">
+						<span class="data-source">${dataSource}</span>
+						<span class="content-type">${contentType}</span>
+					</div>
+					${targetsByContentType(contentType)
+						.map(
+							(target) =>
+								`<a href="/${contentType}/${dataSource.toLowerCase()}/${url}" class="platform">${target}</a>`,
+						)
+						.join('<span> • </span>')}
+					<span> - ${pathFromUrl(url)}</span>
+				</li>`;
+
+			const checkClipboard = (e) => {
+				if (document.visibilityState !== 'visible') return;
+				if (!navigator?.clipboard) return;
+				if (!document.hasFocus()) return;
+				if (typeof navigator.clipboard.readText !== 'function') return;
+
+				navigator.clipboard.readText().then((text) => {
+					const guHost = hosts.find((host) =>
+						text.startsWith(host.base),
+					);
+					if (guHost) {
+						if (urls.has(text)) return;
+						urls.add(text);
+
+						const list = document.getElementById('clipboard-list');
+						if (list) {
+							const pageType = getPageType(text);
+							list.innerHTML += makeClipboard(
+								guHost.name,
+								pageType,
+								text,
+							);
+						}
+					}
+				});
+			};
+
+			document.addEventListener('visibilitychange', checkClipboard);
+			window.addEventListener('focus', checkClipboard);
+			checkClipboard();
+		</script>
 	</body>
 </html>
