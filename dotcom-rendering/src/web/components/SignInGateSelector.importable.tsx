@@ -177,7 +177,7 @@ export const SignInGateSelector = ({
 			: undefined;
 
 	const personaliseComponentId = (
-		currentComponentId?: string,
+		currentComponentId: string | undefined,
 	): string | undefined => {
 		if (!currentComponentId) return undefined;
 		if (!checkoutCompleteCookieData) return currentComponentId;
@@ -224,8 +224,7 @@ export const SignInGateSelector = ({
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			gateVariant
+			void gateVariant
 				.canShow({
 					isSignedIn: !!isSignedIn,
 					currentTest,
