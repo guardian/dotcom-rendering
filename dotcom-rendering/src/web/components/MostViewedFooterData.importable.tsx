@@ -71,13 +71,11 @@ export const MostViewedFooterData = ({
 	const editionResponse = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(editionUrl);
-	const { data: editionUrlData, error: editionUrlError } = editionResponse;
 
 	const sectionUrl = buildSectionUrl(ajaxUrl, sectionName);
 	const sectionResponse = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(sectionUrl);
-	const { data: sectionUrlData, error: sectionUrlError } = sectionResponse;
 
 	if (sectionResponse.error) {
 		window.guardian.modules.sentry.reportError(
@@ -95,14 +93,19 @@ export const MostViewedFooterData = ({
 		return null;
 	}
 
-	console.log(editionResponse.data);
-	console.log(sectionResponse.data);
-
 	if (editionResponse.data && sectionResponse.data) {
-		const tabs =
-			'tabs' in editionResponse.data && 'tabs' in sectionResponse.data
-				? [editionResponse.data.tabs[0], sectionResponse.data.tabs[1]]
+		const editionTabs =
+			'tabs' in editionResponse.data
+				? editionResponse.data.tabs
 				: editionResponse.data;
+		const sectionTabs =
+			'tabs' in sectionResponse.data
+				? sectionResponse.data.tabs
+				: sectionResponse.data;
+		const tabs =
+			editionTabs[0] !== undefined && sectionTabs[1] !== undefined
+				? [editionTabs[0], sectionTabs[1]]
+				: sectionTabs;
 		return (
 			<MostViewedFooter
 				tabs={transformTabs(tabs)}
@@ -123,6 +126,5 @@ export const MostViewedFooterData = ({
 			/>
 		);
 	}
-
 	return null;
 };

@@ -128,7 +128,6 @@ export const MostViewedFooterGrid = ({
 	selectedColour = neutral[0],
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
-
 	/**
 	 * If there is only one 'tab' of content, then we don't want to render this as
 	 * a tabbed interface at all, preferring a simple list of links. This should improve
