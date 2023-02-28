@@ -178,14 +178,15 @@ export const SignInGateSelector = ({
 
 	const personaliseComponentId = (
 		currentComponentId?: string,
-		checkoutCompleteCookieData?: CheckoutCompleteCookieData,
-	): string => {
-		if (!currentComponentId) return '';
-		if (!personaliseSwitch) return currentComponentId;
+	): string | undefined => {
+		if (!currentComponentId) return undefined;
 		if (!checkoutCompleteCookieData) return currentComponentId;
-
 		const { userType, product } = checkoutCompleteCookieData;
 		return `${currentComponentId}_personalised_${userType}_${product}`;
+	};
+
+	const shouldPersonaliseComponentId = (): boolean => {
+		return personaliseSwitch && checkoutCompleteCookieData !== undefined;
 	};
 	// END: Checkout Complete Personalisation
 
@@ -219,7 +220,7 @@ export const SignInGateSelector = ({
 				);
 			} else setPersonaliseSwitch(false);
 		});
-	}, [])
+	}, []);
 
 	useEffect(() => {
 		if (gateVariant && currentTest) {
@@ -250,11 +251,11 @@ export const SignInGateSelector = ({
 	if (!currentTest || !gateVariant) {
 		return null;
 	}
+	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const componentId = personaliseComponentId(
-		signInGateTestIdToComponentId[currentTest.id],
-		checkoutCompleteCookieData,
-	);
+	const componentId = shouldPersonaliseComponentId()
+		? personaliseComponentId(signInGateComponentId)
+		: signInGateComponentId;
 
 	const signInUrl = generateSignInUrl({
 		pageId,
@@ -268,7 +269,7 @@ export const SignInGateSelector = ({
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
-			{!isGateDismissed && canShowGate && (
+			{!isGateDismissed && canShowGate && !!componentId && (
 				<ShowSignInGate
 					format={format}
 					abTest={currentTest}
