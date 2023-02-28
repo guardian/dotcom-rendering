@@ -741,7 +741,7 @@ interface CampaignField {
 }
 
 export interface CampaignFieldText extends CampaignField {
-	type: 'text';
+	type: 'text' | 'email' | 'phone';
 }
 
 export interface CampaignFieldTextArea extends CampaignField {
