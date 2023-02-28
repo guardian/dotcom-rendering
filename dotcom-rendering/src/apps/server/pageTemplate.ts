@@ -46,7 +46,12 @@ export const pageTemplate = ({
 				<meta charset="utf-8">
 				<meta name="description" content="${title}" />
 
-                <link rel="icon" href="https://static.guim.co.uk/images/${favicon}">
+				${
+					process.env.NODE_ENV !== 'production'
+						? `<link rel="icon" href="https://static.guim.co.uk/images/${favicon}">`
+						: ''
+				}
+
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
 				${androidFontSizeWorkaround}
