@@ -1,5 +1,5 @@
 import { resets } from '@guardian/source-foundations';
-import { ASSET_ORIGIN } from 'src/lib/assets';
+import { ASSET_ORIGIN } from '../../lib/assets';
 
 export const pageTemplate = ({
 	css,
