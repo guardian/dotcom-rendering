@@ -2,10 +2,26 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const fs = require('fs');
-const { getArticleSchema, getFrontSchema } = require('./get-schema');
+const {
+	getArticleSchema,
+	getFrontSchema,
+	getContentApiContentSchema,
+} = require('./get-schema');
 
+const contentApiContentSchema = getContentApiContentSchema();
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
+
+fs.writeFile(
+	`${root}/src/model/content-api-content-schema.json`,
+	contentApiContentSchema,
+	'utf8',
+	(err) => {
+		if (err) {
+			console.log(err);
+		}
+	},
+);
 
 fs.writeFile(
 	`${root}/src/model/article-schema.json`,
@@ -13,7 +29,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},
@@ -25,7 +40,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},

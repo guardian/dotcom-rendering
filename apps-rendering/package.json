@@ -45,7 +45,7 @@
 		"@guardian/atoms-rendering": "^25.1.5",
 		"@guardian/bridget": "^2.0.0",
 		"@guardian/cdk": "^47.3.3",
-		"@guardian/content-api-models": "^17.4.2",
+		"@guardian/content-api-models": "^17.5.1",
 		"@guardian/content-atom-model": "^3.4.0",
 		"@guardian/discussion-rendering": "^10.1.1",
 		"@guardian/eslint-config-typescript": "^0.7.0",

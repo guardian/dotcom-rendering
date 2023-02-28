@@ -6,8 +6,8 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
-import type { FEArticleType } from '../types/frontend';
 import { handleAppsArticle } from '../apps/server';
+import type { FEArticleType } from '../types/frontend';
 import {
 	handleArticle,
 	handleArticleJson,

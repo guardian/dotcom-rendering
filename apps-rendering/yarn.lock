@@ -1628,10 +1628,34 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
+"@guardian/content-api-models@^17.5.1":
+  version "17.5.1"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.5.1.tgz#ef175b246b886d607eb7f6ac74cdc4f17b9b3d55"
+  integrity sha512-fTgb5y789BJvMGMBTojdFcYqjjtapdlj42TnrSMcwFj8chlklmckhROCKzy5uiZ5cIgV7Hecptukk3TGqlI6Rw==
+  dependencies:
+    "@guardian/content-atom-model" "^3.4.1"
+    "@guardian/content-entity-model" "^2.2.1"
+    "@guardian/story-packages-model" "^2.2.0"
+    "@types/node-int64" "^0.4.29"
+    "@types/thrift" "^0.10.11"
+    node-int64 "^0.4.0"
+    thrift "^0.15.0"
+
 "@guardian/content-atom-model@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@guardian/content-atom-model/-/content-atom-model-3.4.0.tgz#1dfddb7598df0500fd34d7ab9ffbf8a42459b46a"
   integrity sha512-b0cgk+obNJ1RDj0/sOuFjUwf80+I29civ28iBDIa+ZxJRAd5hjE4SXoWyvb2Cpz7fkUEvIF/JJlX/yAsL6MhmA==
+  dependencies:
+    "@guardian/content-entity-model" "^2.2.1"
+    "@types/node-int64" "^0.4.29"
+    "@types/thrift" "^0.10.11"
+    node-int64 "^0.4.0"
+    thrift "^0.15.0"
+
+"@guardian/content-atom-model@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@guardian/content-atom-model/-/content-atom-model-3.4.1.tgz#ed82be08cd93510aeae3fba2e12d5282447428e6"
+  integrity sha512-Yv+qMgTurh1L10WUPgyL2ND2hQPqYrZbZxOP7qawfRzrYxE0HYIp/xd/QAG1OMISl86e6wvs6sMTcq7xPsdINw==
   dependencies:
     "@guardian/content-entity-model" "^2.2.1"
     "@types/node-int64" "^0.4.29"
