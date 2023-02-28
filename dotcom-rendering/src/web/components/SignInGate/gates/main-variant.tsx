@@ -38,7 +38,6 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
  * admin tools, and depending on the state of that switch will determine which variant of the
  * gate to show.
  */
-
 export const signInGateComponent: SignInGateComponent = {
 	gate: ({
 		ophanComponentId,
@@ -63,7 +62,6 @@ export const signInGateComponent: SignInGateComponent = {
 							checkoutCompleteCookieData={
 								checkoutCompleteCookieData
 							}
-							personaliseSignInGateAfterCheckoutSwitch={true}
 						/>
 					) : (
 						<SignInGateMain
