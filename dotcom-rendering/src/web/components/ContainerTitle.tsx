@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, neutral, news, space } from '@guardian/source-foundations';
+import { headline, neutral, news, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -57,6 +57,7 @@ const marginStyles = css`
 const dateTextStyles = (color: Colour) => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	color: ${color};
+	${until.tablet} {display:none}
 `;
 
 /**
