@@ -37,6 +37,8 @@ export const FormField = ({
 	const fieldError = validationErrors[formField.id];
 
 	switch (formField.type) {
+		case 'phone':
+		case 'email':
 		case 'text': {
 			return (
 				<TextInput

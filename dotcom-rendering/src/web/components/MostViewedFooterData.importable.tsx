@@ -25,12 +25,12 @@ function buildSectionUrl(
 ) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
-		sectionName && !sectionsWithoutPopular.includes(sectionName);
+		sectionName !== undefined &&
+		!sectionsWithoutPopular.includes(sectionName);
 	const hasEdition = edition && `/${edition.toLowerCase()}`;
 	const endpoint = `/most-read${hasEdition ? hasEdition : ''}${
 		hasSection ? `/${sectionName}` : ''
 	}.json`;
-
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 

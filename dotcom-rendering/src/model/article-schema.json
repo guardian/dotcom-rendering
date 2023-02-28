@@ -856,10 +856,12 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
                     "enum": [
+                        "email",
+                        "phone",
                         "text"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"

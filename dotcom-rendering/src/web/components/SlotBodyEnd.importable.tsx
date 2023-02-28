@@ -171,7 +171,7 @@ export const SlotBodyEnd = ({
 			);
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
-	if (SelectedEpic) {
+	if (SelectedEpic !== null) {
 		return (
 			<div id="slot-body-end">
 				<SelectedEpic />

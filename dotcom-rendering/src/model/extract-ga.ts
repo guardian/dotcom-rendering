@@ -16,8 +16,7 @@ const filterTags = (
 			[],
 		);
 
-	// eslint-disable-next-line @typescript-eslint/prefer-optional-chain -- this code is cursed
-	return (arrOfvalues && arrOfvalues.join(',')) || '';
+	return (Array.isArray(arrOfvalues) && arrOfvalues.join(',')) || '';
 };
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately

@@ -21,7 +21,7 @@ export const CalloutBlockComponent = ({
 	} = callout;
 
 	const isExpired = (date: number | undefined): boolean => {
-		if (date) {
+		if (date !== undefined) {
 			return Math.floor(new Date().getTime() / 1000) > date;
 		}
 		return false;

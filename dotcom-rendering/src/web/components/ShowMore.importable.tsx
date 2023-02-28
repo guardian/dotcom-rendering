@@ -152,7 +152,7 @@ export const ShowMore = ({
 				`}
 			>
 				<Button
-					size="small"
+					size="xsmall"
 					icon={isOpen ? <SvgCross /> : <SvgPlus />}
 					isLoading={loading}
 					iconSide="left"

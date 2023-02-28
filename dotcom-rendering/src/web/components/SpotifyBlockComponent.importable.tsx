@@ -37,7 +37,8 @@ export const SpotifyBlockComponent = ({
 	source,
 	sourceDomain,
 }: Props) => {
-	if (!embedUrl || !title || !width || !height) return null;
+	if (!embedUrl || !title || width === undefined || height === undefined)
+		return null;
 
 	const embedContainer = css`
 		iframe {

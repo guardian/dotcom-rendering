@@ -163,7 +163,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			/>
 			<div css={rowStyles(palette)}>
 				<SvgPinned />
-				{!!pinnedPost.blockFirstPublished && (
+				{pinnedPost.blockFirstPublished !== undefined && (
 					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
 					</time>
