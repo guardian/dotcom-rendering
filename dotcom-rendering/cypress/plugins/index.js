@@ -15,20 +15,14 @@ module.exports = (on, config) => {
 	config.env = { ...config.env, ...process.env };
 
 	const webpackConfig = webpackPreprocessor.defaultOptions;
-	// Adding this here so that we can import the fixture in a cypress test
 	webpackConfig.webpackOptions.resolve = {
 		extensions: ['.ts', '.js'],
-		alias: {
-			Standard$: path.resolve(
-				__dirname,
-				`../../fixtures/generated/articles/Standard.ts`,
-			),
-		},
 	};
 	const rules = webpackConfig.webpackOptions.module.rules;
 	rules[0].exclude =
 		require('../../scripts/webpack/webpack.config.browser').babelExclude;
 
+	// Adding this here so that we can import the fixture in the sign-in-gate.cy.js file
 	rules.push({
 		test: path.resolve(
 			__dirname,
