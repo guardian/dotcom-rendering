@@ -19,19 +19,17 @@ interface Props {
 	edition: EditionId;
 }
 
-function buildSectionUrl(
-	ajaxUrl: string,
-	sectionName?: string,
-	edition?: EditionId,
-) {
+function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
 		sectionName !== undefined &&
 		!sectionsWithoutPopular.includes(sectionName);
-	const hasEdition = edition && `/${edition.toLowerCase()}`;
-	const endpoint = `/most-read${hasEdition ? hasEdition : ''}${
-		hasSection ? `/${sectionName}` : ''
-	}.json`;
+	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
+	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
+}
+
+function buildEditionUrl(ajaxUrl: string, edition: EditionId) {
+	const endpoint = `/most-read/${edition.toLowerCase()}.json`;
 	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 
@@ -68,7 +66,7 @@ export const MostViewedFooterData = ({
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
-	const editionUrl = buildSectionUrl(ajaxUrl, edition);
+	const editionUrl = buildEditionUrl(ajaxUrl, edition);
 	const editionResponse = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(editionUrl);
