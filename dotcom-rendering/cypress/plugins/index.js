@@ -30,7 +30,10 @@ module.exports = (on, config) => {
 		require('../../scripts/webpack/webpack.config.browser').babelExclude;
 
 	rules.push({
-		test: /\.ts$/,
+		test: path.resolve(
+			__dirname,
+			`../../fixtures/generated/articles/Standard.ts`,
+		),
 		exclude: ['/node_modules/'],
 		loader: 'ts-loader',
 		options: {
