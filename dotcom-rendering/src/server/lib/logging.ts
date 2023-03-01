@@ -89,7 +89,7 @@ if (process.env.NODE_ENV === 'development') {
 		if (e) {
 			// eslint-disable-next-line no-console  -- Seems okay to log this
 			console.log(e);
-		  }
+		}
 	});
 }
 
