@@ -248,7 +248,7 @@ describe('Sign In Gate Tests', function () {
 			});
 
 			it('should show the main sign in gate if GU_CO_COMPLETE is present but flag is false', function () {
-				setGuCOCompleteCookie('new', 'DigitalPack');
+				setGuCOCompleteCookie('new', 'SupporterPlus');
 
 				postArticleAndScrollToGateForLazyLoad({
 					switchOverride: {
@@ -264,7 +264,7 @@ describe('Sign In Gate Tests', function () {
 					.should('have.attr', 'href')
 					.and('contains', '/signin?returnUrl=')
 					.and('match', /componentId%3Dmain_variant_\d/)
-					.and('not.contains', 'personalised_new_DigitalPack');
+					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
 
 			describe('Sign in gate should show personalised copy if GU_CO_COMPLETE is present', function () {
@@ -293,7 +293,7 @@ describe('Sign In Gate Tests', function () {
 				const SIGN_IN_BUTTON = 'Sign in';
 
 				it('user is new and has a digital subscription', function () {
-					setGuCOCompleteCookie('new', 'DigitalPack');
+					setGuCOCompleteCookie('new', 'SupporterPlus');
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
@@ -319,7 +319,7 @@ describe('Sign In Gate Tests', function () {
 						.and('contains', '/register?returnUrl=')
 						.and(
 							'match',
-							/componentId%3Dmain_variant_\d_personalised_new_DigitalPack/,
+							/componentId%3Dmain_variant_\d_personalised_new_SupporterPlus/,
 						);
 				});
 
@@ -387,7 +387,7 @@ describe('Sign In Gate Tests', function () {
 				});
 
 				it('user is existing and has a digital subscription', function () {
-					setGuCOCompleteCookie('current', 'DigitalPack');
+					setGuCOCompleteCookie('current', 'SupporterPlus');
 
 					postArticleAndScrollToGateForLazyLoad({
 						switchOverride: {
@@ -413,7 +413,7 @@ describe('Sign In Gate Tests', function () {
 						.and('contains', '/signin?returnUrl=')
 						.and(
 							'match',
-							/componentId%3Dmain_variant_\d_personalised_current_DigitalPack/,
+							/componentId%3Dmain_variant_\d_personalised_current_SupporterPlus/,
 						);
 				});
 

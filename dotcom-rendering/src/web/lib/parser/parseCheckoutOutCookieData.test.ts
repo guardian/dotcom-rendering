@@ -11,12 +11,12 @@ describe('parseCheckoutCompleteCookieData', () => {
 		it('should successfully parse a url encoded json object with a valid userType and product valid field', () => {
 			const cookieString = encodeCheckoutCompleteCookieDataObj(
 				'new',
-				'DigitalPack',
+				'SupporterPlus',
 			);
 			expect(parseCheckoutCompleteCookieData(cookieString)).toStrictEqual(
 				{
 					userType: 'new',
-					product: 'DigitalPack',
+					product: 'SupporterPlus',
 				},
 			);
 		});
@@ -26,7 +26,7 @@ describe('parseCheckoutCompleteCookieData', () => {
 		it('invalid user type', () => {
 			const cookieString = encodeCheckoutCompleteCookieDataObj(
 				'invalid',
-				'DigitalPack',
+				'SupporterPlus',
 			);
 			expect(parseCheckoutCompleteCookieData(cookieString)).toBe(
 				undefined,
@@ -43,7 +43,7 @@ describe('parseCheckoutCompleteCookieData', () => {
 		});
 		it('invalid field', () => {
 			const cookieString = encodeURIComponent(
-				`{"invalid":"new", "product": "DigitalPack"}`,
+				`{"invalid":"new", "product": "SupporterPlus"}`,
 			);
 			expect(parseCheckoutCompleteCookieData(cookieString)).toBe(
 				undefined,
@@ -51,14 +51,14 @@ describe('parseCheckoutCompleteCookieData', () => {
 		});
 		it('invalid json structure', () => {
 			const cookieString = encodeURIComponent(
-				`{"userType":"new", "product": "DigitalPack"`,
+				`{"userType":"new", "product": "SupporterPlus"`,
 			);
 			expect(parseCheckoutCompleteCookieData(cookieString)).toBe(
 				undefined,
 			);
 		});
 		it('plain string', () => {
-			const cookieString = `{"userType":"new", "product": "DigitalPack"}`;
+			const cookieString = `{"userType":"new", "product": "SupporterPlus"}`;
 			expect(parseCheckoutCompleteCookieData(cookieString)).toBe(
 				undefined,
 			);
