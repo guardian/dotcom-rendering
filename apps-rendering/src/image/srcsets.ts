@@ -29,7 +29,7 @@ interface Srcsets {
 
 /**
  * Get the resizing source for a given CAPI asset
- * 
+ *
  * @param url The asset URL from CAPI
  * @returns An image resizer source
  */
@@ -46,7 +46,7 @@ const getSource = (url: URL): string => {
 		default:
 			return 'media';
 	}
-}
+};
 
 const sign = (salt: string, path: string): string =>
 	createHash('md5')
