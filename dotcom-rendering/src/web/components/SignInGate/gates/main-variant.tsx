@@ -19,7 +19,7 @@ const SignInGateMainCheckoutComplete = React.lazy(() => {
 	const { start, end } = initPerf('SignInGateMainCheckoutComplete');
 	start();
 	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMainCheckoutComplete'
+		/* webpackChunkName: "SignInGateMainCheckoutComplete" */ '../gateDesigns/SignInGateMainCheckoutComplete'
 	).then((module) => {
 		end();
 		return { default: module.SignInGateMainCheckoutComplete };
