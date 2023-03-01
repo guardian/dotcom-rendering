@@ -12,5 +12,5 @@ export const safeJsonParse =
 	};
 
 type ParseResult<T> =
-	| { parsed: T; hasError: false; error?: undefined }
-	| { parsed?: undefined; hasError: true; error?: unknown };
+	| { parsed: T; hasError: false }
+	| { parsed?: undefined; hasError: true };
