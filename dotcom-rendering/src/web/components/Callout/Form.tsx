@@ -39,10 +39,10 @@ const formStyles = css`
 	justify-content: space-between;
 `;
 
-const formFieldWrapperStyles = css`
+const formFieldWrapperStyles = (hidden: boolean) => css`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: ${space[4]}px;
+	margin-bottom: ${hidden ? 0 : space[4]}px;
 `;
 const submitButtonStyles = css`
 	margin: 20px 0px;
@@ -238,7 +238,10 @@ export const Form = ({
 				)}
 				{formFields.map((formField) => {
 					return (
-						<div css={formFieldWrapperStyles} key={formField.id}>
+						<div
+							css={formFieldWrapperStyles(formField.hidden)}
+							key={formField.id}
+						>
 							<FormField
 								formField={formField}
 								formData={formData}
