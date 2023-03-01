@@ -137,7 +137,7 @@ const SIGN_IN_BUTTON = 'Sign in';
 
 const getHeadingText: (product: Product) => string = (product) => {
 	const headingMap: Record<Product, string> = {
-		DigitalPack: SUBSCRIPTION_HEADER,
+		SupporterPlus: SUBSCRIPTION_HEADER,
 		Paper: SUBSCRIPTION_HEADER,
 		GuardianWeekly: SUBSCRIPTION_HEADER,
 		Contribution: SUPPORTER_HEADER,
@@ -156,7 +156,7 @@ const getButtonText: (userType: UserType) => string = (userType) => {
 
 const getBodyText: (product: Product) => string[] = (product) => {
 	const bodyTextMap: Record<Product, string[]> = {
-		DigitalPack: SIGN_IN_INCENTIVES_DIGITAL,
+		SupporterPlus: SIGN_IN_INCENTIVES_DIGITAL,
 		Paper: SIGN_IN_INCENTIVES_NON_DIGITAL,
 		GuardianWeekly: SIGN_IN_INCENTIVES_NON_DIGITAL,
 		Contribution: SIGN_IN_INCENTIVES_NON_DIGITAL,

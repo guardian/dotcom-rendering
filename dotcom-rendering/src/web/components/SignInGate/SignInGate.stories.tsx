@@ -122,7 +122,7 @@ signInGateMainCheckoutCompletePersonalisedCopy.story = {
 
 const defaultCheckoutCompleteCookieData: CheckoutCompleteCookieData = {
 	userType: 'new',
-	product: 'DigitalPack',
+	product: 'SupporterPlus',
 };
 
 signInGateMainCheckoutCompletePersonalisedCopy.args =

@@ -28,7 +28,7 @@ export const isUserType = (value: unknown): value is UserType =>
 
 export const ALL_PRODUCTS = [
 	'Contribution',
-	'DigitalPack',
+	'SupporterPlus',
 	'Paper',
 	'GuardianWeekly',
 ] as const;
