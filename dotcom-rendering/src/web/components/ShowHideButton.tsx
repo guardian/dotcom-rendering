@@ -18,14 +18,7 @@ const showHideButtonCss = (
 	margin-bottom: ${space[2]}px;
 	position: relative;
 	align-items: bottom;
-
 	text-decoration: none;
-
-	${from.wide} {
-		position: relative;
-		top: 0;
-		right: 0;
-	}
 `;
 
 /**
