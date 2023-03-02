@@ -6,8 +6,8 @@ export interface Notification {
 	target: string;
 	message: string;
 	ophanLabel: string;
-	logImpression: () => void;
-	logClick: () => void;
+	logImpression?: () => void;
+	logClick?: () => void;
 }
 
 const hasTargetAndMessage = (
