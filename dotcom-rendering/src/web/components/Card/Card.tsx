@@ -268,8 +268,7 @@ export const Card = ({
 		supportingContentAlignment,
 	);
 
-	const showQuotes =
-		!!showQuotedHeadline || format.design === ArticleDesign.Comment;
+	const showQuotes = !!showQuotedHeadline;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||

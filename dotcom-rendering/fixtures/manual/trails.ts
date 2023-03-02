@@ -121,7 +121,7 @@ export const trails: [
 			display: ArticleDisplay.Standard,
 		},
 		dataLinkName: 'news | group-0 | card-@4',
-		showQuotedHeadline: false,
+		showQuotedHeadline: true,
 		showMainVideo: false,
 		isExternalLink: false,
 	},
