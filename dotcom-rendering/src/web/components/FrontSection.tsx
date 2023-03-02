@@ -463,6 +463,13 @@ export const FrontSection = ({
 	const showDecoration =
 		showTopBorder || showSideBorders || !!innerBackgroundColour;
 
+	const childrenContainerStyles = [
+		sectionContent,
+		sectionContentPadded,
+		centralBorder === 'full' && sectionContentBorder,
+		verticalMargins && paddings,
+	];
+
 	return jsx(
 		element,
 		{
@@ -520,23 +527,24 @@ export const FrontSection = ({
 			{isToggleable && (
 				<div css={sectionShowHide}>
 					<ShowHideButton
-						sectionId={sectionId}
+						sectionId={`container-${sectionId}`}
 						overrideContainerToggleColour={
 							overrides?.text.containerToggle
 						}
 					/>
 				</div>
 			)}
-			<div
-				css={[
-					sectionContent,
-					sectionContentPadded,
-					centralBorder === 'full' && sectionContentBorder,
-					verticalMargins && paddings,
-				]}
-			>
-				{children}
-			</div>
+			{isToggleable ? (
+				<div
+					css={childrenContainerStyles}
+					id={`container-${sectionId}`}
+				>
+					{children}
+				</div>
+			) : (
+				<div css={childrenContainerStyles}>{children}</div>
+			)}
+
 			{treats && (
 				<div css={[sectionTreats, verticalMargins && paddings]}>
 					<Treats
