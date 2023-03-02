@@ -6,7 +6,8 @@ export interface Notification {
 	target: string;
 	message: string;
 	ophanLabel: string;
-	logImpression?: () => void;
+	logImpression: () => void;
+	logClick: () => void;
 }
 
 const hasTargetAndMessage = (
@@ -27,6 +28,9 @@ export const mapBrazeCardsToNotifications = (
 			ophanLabel: card.extras.ophanLabel,
 			logImpression: () => {
 				card.logImpression();
+			},
+			logClick: () => {
+				card.logCardClick();
 			},
 		};
 	});
