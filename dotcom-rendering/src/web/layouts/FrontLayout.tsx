@@ -407,6 +407,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									renderAds={renderAds}
 								/>
 								{collection.canShowMore && (
 									<Island deferUntil="interaction">
