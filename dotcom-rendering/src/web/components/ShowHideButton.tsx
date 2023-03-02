@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 
 type Props = {
