@@ -430,14 +430,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</Island>
 								)}
 							</Section>
-							{decideAdSlot(
-								index,
-								front.isNetworkFront,
-								front.pressedPage.collections.length,
-								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
-								mobileAdPositions,
-							)}
+							{renderAds &&
+								decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
 						</>
 					);
 				})}
