@@ -8,7 +8,7 @@ import {
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import CheckboxInput from 'components/CheckboxInput';
 import RadioInput from 'components/RadioInput';
-import type { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { logger } from '../../logger';
 import type { FormDataType, ValidationErrors } from './calloutForm';
 import { fieldInput, textarea } from './styles';
@@ -36,6 +36,18 @@ export const FormField: FC<FormFieldProp> = ({
 	const fieldValue =
 		formField.id in formData ? (formData[formField.id] as string) : '';
 	const fieldError = validationErrors[formField.id];
+	const firstUpdate = useRef(true);
+
+	useEffect(() => {
+		if (
+			firstUpdate.current &&
+			formField.hidden &&
+			formField.type === 'text'
+		) {
+			setFieldInFormData(formField.id, window.location.pathname);
+			firstUpdate.current = false;
+		}
+	}, [formField, setFieldInFormData]);
 
 	const selectOptions = options.map(({ value, label }) => {
 		return (
@@ -48,6 +60,8 @@ export const FormField: FC<FormFieldProp> = ({
 		selectOptions.unshift(
 			<Option value="">Please select an option</Option>,
 		);
+
+	if (formField.hidden) return null;
 
 	switch (type) {
 		case 'text':

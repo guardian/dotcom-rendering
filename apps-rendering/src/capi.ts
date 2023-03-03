@@ -277,6 +277,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							type: 'textarea',
 							mandatory: true,
 							options: [],
+							hidden: false,
 						},
 						{
 							id: '94480028',
@@ -287,6 +288,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							type: 'text',
 							mandatory: true,
 							options: [],
+							hidden: false,
 						},
 						{
 							id: '94480031',
@@ -294,6 +296,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							name: 'can_we_publish_your_response',
 							type: 'radio',
 							mandatory: true,
+							hidden: false,
 							options: [
 								{
 									label: 'Yes, but please contact me first',
