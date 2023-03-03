@@ -2,10 +2,9 @@ const swcConfig = require('./scripts/webpack/.swcrc.json');
 
 module.exports = {
 	"testEnvironment": "jest-environment-jsdom-sixteen",
-	"moduleFileExtensions": [
-		"ts",
-		"tsx",
-		"js"
+	"moduleDirectories": [
+		"node_modules",
+		"src"
 	],
 	"transform": {
 		"^.+\\.(ts|tsx)$": ["@swc/jest", swcConfig]
