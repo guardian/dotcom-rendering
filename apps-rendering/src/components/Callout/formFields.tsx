@@ -8,7 +8,8 @@ import {
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import CheckboxInput from 'components/CheckboxInput';
 import RadioInput from 'components/RadioInput';
-import { FC, useEffect, useRef } from 'react';
+import type { FC } from 'react';
+import { useEffect, useRef } from 'react';
 import { logger } from '../../logger';
 import type { FormDataType, ValidationErrors } from './calloutForm';
 import { fieldInput, textarea } from './styles';
