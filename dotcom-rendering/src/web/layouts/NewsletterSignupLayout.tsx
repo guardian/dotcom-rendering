@@ -409,6 +409,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										iconSide="left"
 										href={newsletterPreviewUrl}
 										target="_blank"
+										rel="noopener noreferrer"
 										priority="tertiary"
 										size="xsmall"
 									>
@@ -473,6 +474,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
+											rel="noreferrer"
 										>
 											Click here to see the latest version
 											of this newsletter

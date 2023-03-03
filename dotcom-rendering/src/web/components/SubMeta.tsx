@@ -256,7 +256,7 @@ export const SubMeta = ({
 									webUrl,
 								)}&type=article&internalpagecode=${pageId}`}
 								target="_blank"
-								rel="noopener"
+								rel="noopener noreferrer"
 								title="Reuse this content"
 							>
 								Reuse this content

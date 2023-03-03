@@ -44,7 +44,11 @@ const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
 			{text} Please try again or contact{' '}
-			<Link href="mailto:customer.help@theguardian.com" target="_blank">
+			<Link
+				href="mailto:customer.help@theguardian.com"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				customer.help@theguardian.com
 			</Link>
 		</span>

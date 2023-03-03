@@ -178,6 +178,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					<Link
 						priority="secondary"
 						target="_blank"
+						rel="noreferrer noopener"
 						href="https://www.theguardian.com/help/terms-of-service"
 						cssOverrides={css`
 							text-decoration: none;
