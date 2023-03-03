@@ -162,7 +162,7 @@ export const AllBigs = () => (
 AllBigs.story = { name: 'with lots of bigs and no standards' };
 
 export const AdfreeDynamicSlowMPU = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="DynamicSlowMPU" centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -176,6 +176,6 @@ export const AdfreeDynamicSlowMPU = () => (
 			renderAds={false}
 			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
 AdfreeDynamicSlowMPU.story = { name: 'Ad-free dynamic slow MPU' };
