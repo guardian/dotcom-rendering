@@ -51,6 +51,7 @@ export interface CalloutBlockProps {
 	isExpired: boolean;
 	isNonCollapsible: boolean;
 	contacts?: CalloutContactType[];
+	pageId: string;
 }
 
 export const CalloutBlock = ({
@@ -61,10 +62,10 @@ export const CalloutBlock = ({
 	submissionURL,
 	isNonCollapsible,
 	contacts,
+	pageId,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
-
 	const tabsContent = [
 		{
 			id: 'form',
@@ -74,6 +75,7 @@ export const CalloutBlock = ({
 					formFields={formFields}
 					submissionURL={submissionURL}
 					formID={formId}
+					pageId={pageId}
 				/>
 			),
 		},
