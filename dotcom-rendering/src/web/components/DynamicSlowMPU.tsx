@@ -55,12 +55,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	return (
 		<UL direction="row">
 			{card33.map((card) => (
-				<LI
-					percentage="33.333%"
-					padSides={true}
-					key={card.url}
-					stretch={true}
-				>
+				<LI percentage="33.333%" padSides={true} key={card.url}>
 					<Card33Media33
 						trail={card}
 						containerPalette={containerPalette}
