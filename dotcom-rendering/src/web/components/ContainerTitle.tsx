@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	between,
 	body,
 	headline,
 	neutral,
