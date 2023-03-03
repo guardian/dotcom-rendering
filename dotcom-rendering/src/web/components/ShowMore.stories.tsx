@@ -14,8 +14,18 @@ const play = ({ canvasElement }: { canvasElement: HTMLElement }) => {
 
 const containerTitle = 'Opinion';
 const path = 'uk/lifestyle';
-const containerId = '5011-3940-8793-33a9';
+const collectionId = '5011-3940-8793-33a9';
 const baseUrl = 'https://api.nextgen.guardianapps.co.uk';
+const containerElementId = 'container-id';
+
+const defaultProps = {
+	containerTitle,
+	baseUrl,
+	path,
+	collectionId,
+	containerElementId,
+	showAge: false,
+};
 
 export default {
 	component: ShowMore,
@@ -25,18 +35,12 @@ export default {
 export const ShowMoreSuccess = () => {
 	fetchMock
 		.restore()
-		.get(`${baseUrl}/${path}/show-more/${containerId}.json?dcr=true`, {
+		.get(`${baseUrl}/${path}/show-more/${collectionId}.json?dcr=true`, {
 			status: 200,
 			body: trails.slice(0, 6),
 		});
 
-	return ShowMore({
-		containerTitle,
-		path,
-		containerId,
-		showAge: false,
-		baseUrl,
-	});
+	return ShowMore(defaultProps);
 };
 
 ShowMoreSuccess.play = play;
@@ -45,18 +49,12 @@ ShowMoreSuccess.story = { name: 'ShowMore button, success' };
 export const ShowMoreError = () => {
 	fetchMock
 		.restore()
-		.get(`${baseUrl}/${path}/show-more/${containerId}.json?dcr`, {
+		.get(`${baseUrl}/${path}/show-more/${collectionId}.json?dcr`, {
 			status: 404,
 			body: null,
 		});
 
-	return ShowMore({
-		containerTitle,
-		path,
-		containerId,
-		showAge: false,
-		baseUrl,
-	});
+	return ShowMore(defaultProps);
 };
 
 ShowMoreError.play = play;

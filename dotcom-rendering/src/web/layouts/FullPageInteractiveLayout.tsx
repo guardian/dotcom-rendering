@@ -31,6 +31,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -326,7 +327,11 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article id="maincontent">
+				<article
+					id="maincontent"
+					lang={decideLanguage(article.lang)}
+					dir={decideLanguageDirection(article.isRightToLeftLang)}
+				>
 					<Renderer
 						format={format}
 						elements={

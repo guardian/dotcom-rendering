@@ -24,8 +24,6 @@ type Props = {
 	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** Defaults to `false`. If we should add padding to the sides of `children` */
-	padContent?: boolean;
 	/** The html tag used by Section defaults to `section` but can be overridden here */
 	element?:
 		| 'div'
@@ -430,7 +428,7 @@ const topBorder = css`
  * └─────┴─────────────────────────┘
  *
  */
-export const FrontContainer = ({
+export const FrontSection = ({
 	element = 'section',
 	title,
 	children,
@@ -447,7 +445,6 @@ export const FrontContainer = ({
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
-	padContent = false,
 	sectionId,
 	showDateHeader = false,
 	showSideBorders = true,
@@ -465,6 +462,13 @@ export const FrontContainer = ({
 
 	const showDecoration =
 		showTopBorder || showSideBorders || !!innerBackgroundColour;
+
+	const childrenContainerStyles = [
+		sectionContent,
+		sectionContentPadded,
+		centralBorder === 'full' && sectionContentBorder,
+		verticalMargins && paddings,
+	];
 
 	return jsx(
 		element,
@@ -520,26 +524,27 @@ export const FrontContainer = ({
 				/>
 				{leftContent}
 			</div>
-			{isToggleable && (
-				<div css={sectionShowHide}>
-					<ShowHideButton
-						sectionId={sectionId}
-						overrideContainerToggleColour={
-							overrides?.text.containerToggle
-						}
-					/>
-				</div>
+			{isToggleable ? (
+				<>
+					<div css={sectionShowHide}>
+						<ShowHideButton
+							sectionId={`container-${sectionId}`}
+							overrideContainerToggleColour={
+								overrides?.text.containerToggle
+							}
+						/>
+					</div>
+					<div
+						css={childrenContainerStyles}
+						id={`container-${sectionId}`}
+					>
+						{children}
+					</div>
+				</>
+			) : (
+				<div css={childrenContainerStyles}>{children}</div>
 			)}
-			<div
-				css={[
-					sectionContent,
-					padContent && sectionContentPadded,
-					centralBorder === 'full' && sectionContentBorder,
-					verticalMargins && paddings,
-				]}
-			>
-				{children}
-			</div>
+
 			{treats && (
 				<div css={[sectionTreats, verticalMargins && paddings]}>
 					<Treats

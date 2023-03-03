@@ -50,6 +50,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -414,7 +415,12 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout" id="maincontent">
+			<main
+				data-layout="ShowcaseLayout"
+				id="maincontent"
+				lang={decideLanguage(article.lang)}
+				dir={decideLanguageDirection(article.isRightToLeftLang)}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}

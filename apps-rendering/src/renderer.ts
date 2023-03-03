@@ -729,7 +729,11 @@ const renderElement =
 				return h(Quiz, { format, element });
 
 			case ElementKind.NewsletterSignUp:
-				return h(NewsletterSignup, { format, element });
+				return h(NewsletterSignup, {
+					format,
+					element,
+					skipLinkIdSuffix: key.toString(),
+				});
 		}
 	};
 

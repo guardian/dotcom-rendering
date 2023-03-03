@@ -19,11 +19,12 @@ import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
+import { isOnOzoneTestPage } from '../lib/real-time-config';
 import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
 import { Epic } from './Epic';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 import { StickyAd } from './StickyAd';
 import { SubMeta } from './SubMeta';
 import { TopMeta } from './topMeta/TopMeta';
@@ -135,6 +136,7 @@ export const Body = ({ data, config }: Props) => {
 		switches: {
 			ampPrebidPubmatic: !!config.switches.ampPrebidPubmatic,
 			ampPrebidCriteo: !!config.switches.ampPrebidCriteo,
+			ampPrebidOzone: !!config.switches.ampPrebidOzone,
 			permutive: !!config.switches.permutive,
 			ampAmazon: !!config.switches.ampAmazon,
 		},
@@ -143,6 +145,8 @@ export const Body = ({ data, config }: Props) => {
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
 		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid:
+			adInfo.switches.ampPrebidOzone && isOnOzoneTestPage(config.pageId),
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
@@ -152,15 +156,13 @@ export const Body = ({ data, config }: Props) => {
 		<>
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
+					const adSlotId = `ad-${i + 1}` as const;
 					return (
 						<React.Fragment key={item.key}>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
-								<RegionalAd
+							<div id={adSlotId} data-sort-time="1" css={adStyle}>
+								<InlineAd
+									id={adSlotId}
 									editionId={data.editionId}
 									section={data.sectionName ?? ''}
 									contentType={adInfo.contentType}
@@ -214,6 +216,7 @@ export const Body = ({ data, config }: Props) => {
 			{epic}
 
 			<StickyAd
+				id="ad-sticky"
 				editionId={data.editionId}
 				section={data.sectionName ?? ''}
 				contentType={adInfo.contentType}
