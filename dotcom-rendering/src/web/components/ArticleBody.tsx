@@ -13,6 +13,7 @@ import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 
 type Props = {
 	format: ArticleFormat;
@@ -115,16 +116,6 @@ const globalLinkStyles = (palette: Palette) => css`
 
 const isRecipe = (tags: TagType[]): boolean =>
 	tags.some(({ id }) => id === 'tone/recipes');
-
-// CAPI only supports certain languages. If CAPI doesn't recognise the language,
-// it defaults to `en`. We should filter out `en` so we don't set an incorrect value.
-// See https://github.com/guardian/content-api/blob/main/porter/src/main/scala/com.gu.contentapi.porter/integration/LanguageDetector.scala#L17
-const decideLanguage = (language = ''): string | undefined =>
-	language != 'en' ? language : undefined;
-
-const decideLanguageDirection = (
-	isRightToLeftLang = false,
-): 'rtl' | undefined => (isRightToLeftLang ? 'rtl' : undefined);
 
 export const ArticleBody = ({
 	format,
