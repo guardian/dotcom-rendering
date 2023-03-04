@@ -6,37 +6,6 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
-// switch in case we need to revert
-const USE_SWC = true;
-
-const babelLoader = [
-	{
-		loader: 'babel-loader',
-		options: {
-			presets: [
-				// TODO: remove @babel/preset-react once we stop using JSX in server folder
-				'@babel/preset-react',
-				[
-					'@babel/preset-env',
-					{
-						targets: {
-							node: 'current',
-						},
-					},
-				],
-			],
-			compact: true,
-		},
-	},
-	{
-		loader: 'ts-loader',
-		options: {
-			configFile: 'tsconfig.build.json',
-			transpileOnly: true,
-		},
-	},
-];
-
 const swcLoader = [
 	{
 		loader: 'swc-loader',
@@ -44,7 +13,6 @@ const swcLoader = [
 			...swcConfig,
 			minify: DEV ? false : true,
 			env: {
-				// debug: true,
 				targets: {
 					node: nodeVersion,
 				},
@@ -121,8 +89,8 @@ module.exports = ({ sessionId }) => ({
 					and: [/node_modules/],
 					not: [/@guardian/, /dynamic-import-polyfill/],
 				},
-				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- temporary switch
-				use: USE_SWC ? swcLoader : babelLoader,
+
+				use: swcLoader,
 			},
 			// TODO: find a way to remove
 			{
