@@ -3,31 +3,14 @@
  * 1) derive browser targets from @guardian/browserslist-config
  * 2) upgrade any unsupported browsers as described below.
  */
-const path = require('path');
-const browserslist = require('browserslist');
 const getTargetsFromBrowsersList =
 	require('@babel/helper-compilation-targets').default;
+const browserslist = require('browserslist');
 
 /**
- * An explanation in case you see the following build error:
- *
- * Error: Cannot find module '@guardian/browserslist-config'
- *
- * We use the Browserslists extends syntax:
- *
- * `extends @guardian/browserslist-config`
- *
  * Browserslist tries to resolve the stats file relative to the working directory.
- *
  * https://github.com/browserslist/browserslist/blob/74dbf959874e3c05adec93adab98832db35cb66b/node.js#L197-L200
- *
- * @guardian/browserslist-config is not hoisted so when webpack runs the working directory must be the local workspace:
- *
- * 'dotcom-rendering/dotcom-rendering'
- *
- * This is primarily a concern for tools like Storybook that may run webpack from a different directory.
- *
- * Such tools should set the working directory to the local workspace - as is currently the case.
+ * @guardian/browserslist-config is not hoisted so when webpack runs the working directory must be the local workspace
  */
 const browsers = browserslist('extends @guardian/browserslist-config');
 
