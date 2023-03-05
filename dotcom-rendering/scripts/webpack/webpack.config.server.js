@@ -16,8 +16,6 @@ const swcLoader = [
 				targets: {
 					node: nodeVersion,
 				},
-				// fix for @guardian/libs storage.ts class properties
-				include: ['transform-class-properties'],
 			},
 		},
 	},
