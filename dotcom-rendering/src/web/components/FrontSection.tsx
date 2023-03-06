@@ -524,23 +524,23 @@ export const FrontSection = ({
 				/>
 				{leftContent}
 			</div>
-			{isToggleable && (
-				<div css={sectionShowHide}>
-					<ShowHideButton
-						sectionId={sectionId}
-						overrideContainerToggleColour={
-							overrides?.text.containerToggle
-						}
-					/>
-				</div>
-			)}
 			{isToggleable ? (
-				<div
-					css={childrenContainerStyles}
-					id={`container-${sectionId}`}
-				>
-					{children}
-				</div>
+				<>
+					<div css={sectionShowHide}>
+						<ShowHideButton
+							sectionId={sectionId}
+							overrideContainerToggleColour={
+								overrides?.text.containerToggle
+							}
+						/>
+					</div>
+					<div
+						css={childrenContainerStyles}
+						id={`container-${sectionId}`}
+					>
+						{children}
+					</div>
+				</>
 			) : (
 				<div css={childrenContainerStyles}>{children}</div>
 			)}
