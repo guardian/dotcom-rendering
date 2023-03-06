@@ -29,10 +29,6 @@ type Props = {
 	trails: DCRFrontCard[];
 };
 
-type MPUProps = Omit<Props, `renderAds` | `trails`>;
-
-type NonMPUProps = Omit<Props, `groupedTrails` | `index` | `renderAds`>;
-
 /* .___________.___________.___________.
  * |###########|___________|           |
  * |           |___________|    MPU    |
@@ -132,7 +128,14 @@ const ColumnOfThree50_Ad50 = ({
 	);
 };
 
-const RenderMPU = ({
+type MPUProps = {
+	groupedTrails: DCRGroupedTrails;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	index: number;
+};
+
+const MPUSlice = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
@@ -271,7 +274,13 @@ const RenderMPU = ({
 	}
 };
 
-const RenderNonMPU = ({ trails, containerPalette, showAge }: NonMPUProps) => {
+type NonMPUProps = {
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	trails: DCRFrontCard[];
+};
+
+const NonMPUSlice = ({ trails, containerPalette, showAge }: NonMPUProps) => {
 	return (
 		<UL direction="row" padBottom={true}>
 			{trails.slice(0, 4).map((card, cardIndex) => {
@@ -318,14 +327,14 @@ export const DynamicSlowMPU = ({
 	trails,
 }: Props) => {
 	return renderAds ? (
-		<RenderMPU
+		<MPUSlice
 			groupedTrails={groupedTrails}
 			containerPalette={containerPalette}
 			showAge={showAge}
 			index={index}
 		/>
 	) : (
-		<RenderNonMPU
+		<NonMPUSlice
 			trails={trails}
 			containerPalette={containerPalette}
 			showAge={showAge}
