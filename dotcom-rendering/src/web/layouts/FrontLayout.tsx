@@ -407,6 +407,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									renderAds={renderAds}
 								/>
 								{collection.canShowMore && (
 									<Island deferUntil="interaction">
@@ -429,14 +430,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</Island>
 								)}
 							</FrontSection>
-							{decideAdSlot(
-								index,
-								front.isNetworkFront,
-								front.pressedPage.collections.length,
-								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
-								mobileAdPositions,
-							)}
+							{renderAds &&
+								decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
 						</>
 					);
 				})}

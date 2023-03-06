@@ -29,6 +29,7 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	renderAds: boolean;
 };
 
 export const DecideContainer = ({
@@ -38,6 +39,7 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
+	renderAds,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -96,6 +98,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					renderAds={renderAds}
 				/>
 			);
 		case 'fixed/small/slow-III':
