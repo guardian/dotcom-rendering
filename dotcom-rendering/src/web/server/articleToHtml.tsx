@@ -99,7 +99,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial = !article.isAdFreeUser && !article.shouldHideAds;
+	const loadCommercial =
+		!article.isAdFreeUser &&
+		!article.shouldHideAds &&
+		article.config.abTests.poorDeviceConnectivityVariant !== 'variant';
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
