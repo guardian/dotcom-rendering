@@ -102,7 +102,7 @@ export const ContainerTitle = ({
 				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
 			{!!description && (
-				<span
+				<div
 					css={[descriptionStyles(fontColour), bottomMargin]}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
