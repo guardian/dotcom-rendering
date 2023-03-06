@@ -62,7 +62,7 @@ export const FormField: FC<FormFieldProp> = ({
 			<Option value="">Please select an option</Option>,
 		);
 
-	if (formField.hidden) return null;
+	if (formField.hidden) return <input type="hidden" />;
 
 	switch (type) {
 		case 'text':
