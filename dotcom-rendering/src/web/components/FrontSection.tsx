@@ -528,7 +528,7 @@ export const FrontSection = ({
 				<>
 					<div css={sectionShowHide}>
 						<ShowHideButton
-							sectionId={`container-${sectionId}`}
+							sectionId={sectionId}
 							overrideContainerToggleColour={
 								overrides?.text.containerToggle
 							}
