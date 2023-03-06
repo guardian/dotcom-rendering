@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	body,
 	headline,
 	neutral,
 	news,
@@ -40,7 +41,7 @@ const headerStyles = (fontColour?: string) => css`
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
-	${headline.xxxsmall({ fontWeight: 'medium' })};
+	${body.xsmall({ fontWeight: 'medium' })};
 	color: ${fontColour ?? neutral[46]};
 	p {
 		/* Handle paragraphs in the description */
@@ -101,7 +102,7 @@ export const ContainerTitle = ({
 				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
 			{!!description && (
-				<p
+				<div
 					css={[descriptionStyles(fontColour), bottomMargin]}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
