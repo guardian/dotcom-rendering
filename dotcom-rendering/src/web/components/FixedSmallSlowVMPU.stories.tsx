@@ -23,6 +23,7 @@ export const FourCards = () => (
 			trails={trails.slice(0, 4)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -35,6 +36,7 @@ export const ThreeCards = () => (
 			trails={trails.slice(0, 3)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -47,6 +49,7 @@ export const TwoCards = () => (
 			trails={trails.slice(0, 2)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -59,8 +62,22 @@ export const OneCard = () => (
 			trails={trails.slice(0, 1)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
 
 OneCard.story = { name: 'With 1 card' };
+
+export const AdfreeFixedSmallSlowVMPU = () => (
+	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+		<FixedSmallSlowVMPU
+			trails={trails.slice(0, 4)}
+			showAge={true}
+			index={1}
+			renderAds={false}
+		/>
+	</FrontSection>
+);
+
+AdfreeFixedSmallSlowVMPU.story = { name: 'Ad-free Fixed Small Slow V MPU' };
