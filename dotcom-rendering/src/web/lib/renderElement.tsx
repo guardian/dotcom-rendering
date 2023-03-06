@@ -6,6 +6,8 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import sanitise from 'sanitize-html';
+import type { IOptions } from 'sanitize-html';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../../types/config';
 import type { FEElement, RoleType } from '../../types/content';
@@ -85,6 +87,12 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
+};
+
+const sanitiserOptions: IOptions = {
+	allowedTags: false,
+	allowedAttributes: { '*': [''] },
+	allowedClasses: undefined,
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -580,7 +588,12 @@ export const renderElement = ({
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
-			return <SubheadingBlockComponent key={index} html={element.html} />;
+			return (
+				<SubheadingBlockComponent
+					key={index}
+					html={sanitise(element.html, sanitiserOptions)}
+				/>
+			);
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return <TableBlockComponent element={element} />;
 

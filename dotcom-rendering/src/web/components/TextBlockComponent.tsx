@@ -227,6 +227,16 @@ export const TextBlockComponent = ({
 						prefix: '<h3>',
 						suffix: '</h3>',
 					},
+					{
+						prefix: '<footer>',
+						suffix: '</footer>',
+						unwrappedElement: 'footer',
+					},
+					{
+						prefix: '<ol>',
+						suffix: '</ol>',
+						unwrappedElement: 'ol',
+					},
 				],
 				html,
 			});
