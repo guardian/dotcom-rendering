@@ -165,7 +165,7 @@
 		"cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
 		"desvg-loader": "^0.1.0",
 		"doctoc": "^2.2.1",
-		"dompurify": "^2.3.6",
+		"dompurify": "^3.0.1",
 		"dynamic-import-polyfill": "^0.1.1",
 		"eslint": "^8.28.0",
 		"eslint-config-airbnb-base": "^15.0.0",
