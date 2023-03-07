@@ -1,7 +1,6 @@
 const swcConfig = require('./scripts/webpack/.swcrc.json');
 
 module.exports = {
-	"preset": "ts-jest/presets/js-with-ts",
 	"testEnvironment": "jest-environment-jsdom-sixteen",
 	"moduleFileExtensions": [
 		"ts",
