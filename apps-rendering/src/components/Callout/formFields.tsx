@@ -131,6 +131,7 @@ export const FormField: FC<FormFieldProp> = ({
 						id in formData ? (formData[id] as string[]) : []
 					}
 					setFieldInFormData={setFieldInFormData}
+					optional={!mandatory}
 					cssOverrides={fieldInput}
 					error={fieldError}
 				/>

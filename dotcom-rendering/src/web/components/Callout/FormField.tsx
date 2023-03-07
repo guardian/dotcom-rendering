@@ -141,6 +141,7 @@ export const FormField = ({
 					label={label}
 					hideLabel={hideLabel}
 					supporting={description}
+					optional={!required}
 					error={fieldError ? fieldError : undefined}
 					data-testid={`form-field-${formField.id}`}
 				>
