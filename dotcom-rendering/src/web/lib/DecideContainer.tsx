@@ -100,6 +100,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					renderAds={renderAds}
 				/>
 			);
 		case 'fixed/small/slow-III':
