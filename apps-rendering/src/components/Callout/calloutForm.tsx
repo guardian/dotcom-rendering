@@ -81,6 +81,14 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		return Object.keys(errors).length === 0;
 	};
 
+	const cleanFormData = (data: undefined | string | string[]) => {
+		if (Array.isArray(data)) {
+			return data.join('\n');
+		}
+
+		return data;
+	};
+
 	const onSubmit = async (formData: FormDataType): Promise<void> => {
 		// Reset error for new submission attempt
 		setSubmissionError('');
@@ -91,7 +99,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur): SubmitDataType => ({
 				...acc,
-				[`field_${cur}`]: formData[cur],
+				[`field_${cur}`]: cleanFormData(formData[cur]),
 			}),
 			{},
 		);
