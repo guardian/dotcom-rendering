@@ -1,3 +1,4 @@
+import { log } from '@guardian/libs';
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
@@ -12,6 +13,7 @@ import {
 } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
+import { initPerf } from '../browser/initPerf';
 import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
@@ -185,8 +187,12 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
+	const { start: enhanceStart, end: enhanceEnd } = initPerf(`enhance-front`);
 	try {
+		enhanceStart();
 		const front = enhanceFront(body);
+		const enhanceDuration = enhanceEnd();
+		log('dotcom', `Enhanced ${front.webTitle} in ${enhanceDuration}ms`);
 		const html = frontToHtml({
 			front,
 		});
