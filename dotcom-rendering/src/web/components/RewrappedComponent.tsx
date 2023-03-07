@@ -2,7 +2,7 @@ import { ClassNames } from '@emotion/react';
 // @ts-expect-error -- we’re actually using preact
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { unescapeData } from '../../lib/escapeData';
-import type { HTMLTag } from '../../model/unwrapHtml';
+import type { HTMLTag, Prefix } from '../../model/unwrapHtml';
 import { logger } from '../../server/lib/logging';
 
 /**
@@ -19,11 +19,13 @@ export const RewrappedComponent = ({
 	html,
 	elCss,
 	tagName,
+	subheadingBlockComponentId,
 }: {
 	isUnwrapped: boolean;
 	html: string;
 	elCss?: string;
 	tagName: HTMLTag;
+	subheadingBlockComponentId?: string;
 }) => (
 	<ClassNames>
 		{({ css }) => {
@@ -55,6 +57,7 @@ export const RewrappedComponent = ({
 			// default to <span> if we've not been able to unwrap based on prefix & suffix
 			return _jsx(element, {
 				// if style is `undefined`, it will be omitted
+				id: subheadingBlockComponentId,
 				className: style,
 				dangerouslySetInnerHTML: {
 					__html: unescapeData(html),

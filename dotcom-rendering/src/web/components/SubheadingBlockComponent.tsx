@@ -11,15 +11,25 @@ export const SubheadingBlockComponent = ({ html, prefixWithId }: Props) => {
 			{
 				prefix: prefixWithId,
 				suffix: '</h2>',
+				unwrappedElement: 'h2',
 			},
 		],
 		html,
 	});
 
+	const getId = (h2prefix: Prefix): string | undefined => {
+		const match = h2prefix.match(/id=['"]([^'"]+)['"]/);
+		if (match) {
+			return match[1];
+		}
+		return '';
+	};
+
 	return (
 		<RewrappedComponent
 			isUnwrapped={isUnwrapped}
 			html={unwrappedHtml}
+			subheadingBlockComponentId={getId(prefixWithId)}
 			tagName="h2"
 		/>
 	);
