@@ -118,7 +118,7 @@ buildCheck:
 
 tsc: clean-dist install
 	$(call log, "checking for type errors")
-	@tsc
+	@tsc --incremental
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
