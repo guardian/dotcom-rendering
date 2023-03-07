@@ -22,7 +22,12 @@ export const FixedMediumFastXII = ({
 			<UL direction="row" padBottom={true}>
 				{firstSlice25.map((trail) => {
 					return (
-						<LI key={trail.url} padSides={true} percentage="25%">
+						<LI
+							key={trail.url}
+							padSides={true}
+							percentage="25%"
+							showDivider={true}
+						>
 							<Card25Media25
 								trail={trail}
 								containerPalette={containerPalette}
@@ -35,7 +40,12 @@ export const FixedMediumFastXII = ({
 			<UL direction="row" padBottom={true} wrapCards={true}>
 				{remaining.map((trail) => {
 					return (
-						<LI key={trail.url} padSides={true} percentage="25%">
+						<LI
+							key={trail.url}
+							padSides={true}
+							percentage="25%"
+							showDivider={true}
+						>
 							<CardDefault
 								trail={trail}
 								containerPalette={containerPalette}
