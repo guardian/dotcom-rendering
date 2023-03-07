@@ -149,8 +149,8 @@ export const articleToHtml = ({ article }: Props): string => {
 					editionId: article.editionId,
 					beaconURL: article.beaconURL,
 				}),
-				// This is a temporary measure until we understand exactly what
-				// config we need to make available client-side
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
 			}),
 		),
