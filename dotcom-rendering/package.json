@@ -248,7 +248,6 @@
 		"to-string-loader": "^1.2.0",
 		"tough-cookie": "^4.1.2",
 		"trusted-types": "^2.0.0",
-		"ts-jest": "^24.3.0",
 		"ts-loader": "^9.3.0",
 		"ts-unused-exports": "^8.0.0",
 		"tslib": "^2.4.0",
