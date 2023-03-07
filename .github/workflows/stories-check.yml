@@ -3,7 +3,7 @@ on:
   push:
     paths-ignore:
       - 'apps-rendering/**'
-      - "dotcom-rendering/docs/**"
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   build_check:
@@ -18,8 +18,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      # Cache npm dependencies using https://github.com/bahmutov/npm-install
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --frozen-lockfile
 
       - name: Run check-stories script
         run: make check-stories
