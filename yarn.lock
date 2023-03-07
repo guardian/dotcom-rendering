@@ -2276,10 +2276,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-foundations@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-10.0.0.tgz#00ff57158a32a62aa35de487bf0eb317077e0370"
-  integrity sha512-/fx5oOAeTvEnbPb3VDeX9iQ/7U6D6+JLHyRUL4HCocYLPIF/uzbPKI4nDebzO/ZdHE1O84bL1Kw7Jup+jqS1Ug==
+"@guardian/source-foundations@^9.0.0":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-9.0.1.tgz#133704bdf14e870fc2168c5adc0a071f74ef6864"
+  integrity sha512-LK4ymc3U72dNzlfQ04ZKn5cY1omSVzvKhbInvTBbWi7hoTQK8U9mikbkYG1uTMLgS8YlO1JckjYT/JpmG3TwqQ==
   dependencies:
     mini-svg-data-uri "1.4.4"
 

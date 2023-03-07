@@ -4,6 +4,8 @@ import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;
+const pageId =
+	'world/2023/mar/01/tell-us-have-you-been-affected-by-the-train-crash-in-greece';
 
 const goodRequest = () => {
 	fetchMock
@@ -43,6 +45,7 @@ export const Collapsible = () => {
 				isNonCollapsible: false,
 				activeUntil: tomorrow,
 			}}
+			pageId={pageId}
 		/>
 	);
 };
@@ -54,6 +57,7 @@ export const NonCollapsible = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
+			pageId={pageId}
 		/>
 	);
 };
@@ -65,6 +69,7 @@ export const SubmissionFailure = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
+			pageId={pageId}
 		/>
 	);
 };
@@ -75,6 +80,7 @@ export const Expired = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
+			pageId={pageId}
 		/>
 	);
 };
