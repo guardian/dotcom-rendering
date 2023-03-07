@@ -120,7 +120,8 @@ module.exports = {
 		'no-empty-pattern': 'error',
 		'no-fallthrough': 'off', // We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
 		'no-param-reassign': 'error',
-		'no-shadow': 'warn',
+		'no-shadow': 'off', // We use the typescript-eslint version as eslint false positives on enums
+		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
 
