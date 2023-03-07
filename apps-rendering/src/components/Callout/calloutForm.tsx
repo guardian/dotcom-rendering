@@ -81,7 +81,9 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		return Object.keys(errors).length === 0;
 	};
 
-	const cleanFormData = (data: undefined | string | string[]) => {
+	const cleanFormData = (
+		data: undefined | string | string[],
+	): string | undefined => {
 		if (Array.isArray(data)) {
 			return data.join('\n');
 		}
