@@ -148,6 +148,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					renderAds={renderAds}
 					index={index}
 				/>
 			);

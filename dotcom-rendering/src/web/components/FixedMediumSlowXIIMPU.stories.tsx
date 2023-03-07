@@ -23,6 +23,7 @@ export const OneTrail = () => (
 			trails={trails.slice(0, 1)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -34,6 +35,7 @@ export const TwoTrails = () => (
 			trails={trails.slice(0, 2)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -45,6 +47,7 @@ export const ThreeTrails = () => (
 			trails={trails.slice(0, 3)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -56,6 +59,7 @@ export const FourTrails = () => (
 			trails={trails.slice(0, 4)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -67,6 +71,7 @@ export const FiveTrails = () => (
 			trails={trails.slice(0, 5)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -78,6 +83,7 @@ export const SixTrails = () => (
 			trails={trails.slice(0, 6)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -89,6 +95,7 @@ export const SevenTrails = () => (
 			trails={trails.slice(0, 7)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -100,6 +107,7 @@ export const EightTrails = () => (
 			trails={trails.slice(0, 8)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
@@ -111,7 +119,20 @@ export const NineTrails = () => (
 			trails={trails.slice(0, 9)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
 	</FrontSection>
 );
 NineTrails.story = { name: 'with nine trails' };
+
+export const EightTrailsNoAds = () => (
+	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+		<FixedMediumSlowXIIMPU
+			trails={trails.slice(0, 8)}
+			showAge={true}
+			index={1}
+			renderAds={false}
+		/>
+	</FrontSection>
+);
+EightTrailsNoAds.story = { name: 'with eight trails and no ad slot' };
