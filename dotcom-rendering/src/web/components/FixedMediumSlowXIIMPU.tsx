@@ -129,7 +129,7 @@ const ThreeColumnSliceWithAdSlot = ({
 					))}
 				</UL>
 			</LI>
-			<LI percentage="33.333%" showDivider={true}>
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>
