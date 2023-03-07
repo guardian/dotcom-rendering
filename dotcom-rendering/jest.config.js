@@ -10,12 +10,6 @@ module.exports = {
 	"transform": {
 		"^.+\\.(ts|tsx)$": ["@swc/jest", swcConfig]
 	},
-	"globals": {
-		"ts-jest": {
-			"diagnostics": false,
-			"tsConfig": "tsconfig.test.json"
-		}
-	},
 	"testMatch": [
 		"**/*.test.+(ts|tsx|js)"
 	],
