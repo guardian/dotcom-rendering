@@ -6,9 +6,8 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import sanitise from 'sanitize-html';
-import type { IOptions } from 'sanitize-html';
 import { getSharingUrls } from '../../lib/sharing-urls';
+import type { Prefix } from '../../model/unwrapHtml';
 import type { ServerSideTests, Switches } from '../../types/config';
 import type { FEElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
@@ -89,10 +88,12 @@ type Props = {
 	abTests?: ServerSideTests;
 };
 
-const sanitiserOptions: IOptions = {
-	allowedTags: false,
-	allowedAttributes: { '*': [''] },
-	allowedClasses: undefined,
+const getPrefix = (html: string): Prefix => {
+	const match = html.match(/^<\s*h2\s+[^>]*id=(["'])([^"']*)\1[^>]*>/);
+	if (match) {
+		return match[0] as Prefix;
+	}
+	return '<h2>' as Prefix;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -591,7 +592,8 @@ export const renderElement = ({
 			return (
 				<SubheadingBlockComponent
 					key={index}
-					html={sanitise(element.html, sanitiserOptions)}
+					html={element.html}
+					prefixWithId={getPrefix(element.html)}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.TableBlockElement':

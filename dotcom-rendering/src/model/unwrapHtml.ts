@@ -54,4 +54,4 @@ export const unwrapHtml = ({
 	};
 };
 
-export type { HTMLTag };
+export type { HTMLTag, Prefix };
