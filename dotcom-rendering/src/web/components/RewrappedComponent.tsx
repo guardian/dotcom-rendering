@@ -2,7 +2,7 @@ import { ClassNames } from '@emotion/react';
 // @ts-expect-error -- we’re actually using preact
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { unescapeData } from '../../lib/escapeData';
-import type { HTMLTag, Prefix } from '../../model/unwrapHtml';
+import type { HTMLTag } from '../../model/unwrapHtml';
 import { logger } from '../../server/lib/logging';
 
 /**
