@@ -353,7 +353,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						}}
 						nav={NAV}
 						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.contribute
 						}
 						editionId={article.editionId}
 						headerTopBarSwitch={
