@@ -2,7 +2,7 @@ import { initPerf } from '../browser/initPerf';
 import { record } from '../browser/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
-type ShowMessage<T> = (meta: T) => MaybeFC;
+type ShowMessage<T> = (meta: T, idApiUrl?: string) => MaybeFC;
 
 interface ShouldShow<T> {
 	show: true;
@@ -32,6 +32,7 @@ type CandidateConfigWithTimeout<T> = CandidateConfig<T> & {
 export type SlotConfig = {
 	candidates: CandidateConfig<any>[];
 	name: string;
+	idApiUrl?: string;
 };
 
 const recordMessageTimeoutInOphan = (candidateId: string, slotName: string) =>
@@ -101,16 +102,19 @@ const defaultShow = () => null;
 interface PendingMessage<T> {
 	candidateConfig: CandidateConfigWithTimeout<T>;
 	canShow: Promise<CanShowResult<T>>;
+	idApiUrl?: string;
 }
 
 interface WinningMessage<T> {
 	meta: T;
 	candidate: Candidate<T>;
+	idApiUrl?: string;
 }
 
 export const pickMessage = ({
 	candidates,
 	name,
+	idApiUrl,
 }: SlotConfig): Promise<() => MaybeFC> =>
 	new Promise((resolve) => {
 		const candidateConfigsWithTimeout = candidates.map((c) =>
@@ -120,12 +124,13 @@ export const pickMessage = ({
 			(candidateConfig) => ({
 				candidateConfig,
 				canShow: candidateConfig.candidate.canShow(),
+				idApiUrl,
 			}),
 		);
 
 		const winnerResult = results.reduce<
 			Promise<WinningMessage<any> | null>
-		>(async (winningMessageSoFar, { candidateConfig, canShow }) => {
+		>(async (winningMessageSoFar, { candidateConfig, canShow, idApiUrl }) => {
 			if (await winningMessageSoFar) {
 				return winningMessageSoFar;
 			}
@@ -136,6 +141,7 @@ export const pickMessage = ({
 				return {
 					candidate: candidateConfig.candidate,
 					meta: result.meta,
+					idApiUrl,
 				};
 			}
 
@@ -150,7 +156,7 @@ export const pickMessage = ({
 					resolve(defaultShow);
 				} else {
 					const { candidate, meta } = winner;
-					resolve(() => candidate.show(meta));
+					resolve(() => candidate.show(meta, idApiUrl));
 				}
 			})
 			.catch((e) =>
