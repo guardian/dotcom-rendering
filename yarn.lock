@@ -2298,10 +2298,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.7.tgz#b3aadcca5f6ee35b2c541121144be237d72bd3e0"
   integrity sha512-MhaO+rC+ujXMcaMd1TL5D0t0eEuHWGh3OrFkM8BhPwhMkjela/dCOPeVPvGJDJ0a37o4PeMszqy+dSuiR4BvvQ==
 
-"@guardian/tsconfig@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/tsconfig/-/tsconfig-0.2.0.tgz#b1dac8831d2ff7ac557229f350d4b2f8c9fc60b5"
-  integrity sha512-RauppalK+cQZDRK6IssVmDSnU/VyqMNuVOxPxhmI03kVRxEdwcmBuRqexHwDbnClVUxW/N9hYLbFNuAb9V/p+A==
+"@guardian/tsconfig@^0.1.4":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@guardian/tsconfig/-/tsconfig-0.1.6.tgz#2cc3ecce09e84b6bcaea8a1150c7b590e908d2a9"
+  integrity sha512-5GMp2tBMaIxxInmWGDZI9O3v76hbW2CV/3hnWhDDvtXZvgOFs3K41plkAoc+GpPNLZTrtJlAaHHhbZcDDGI9/w==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
