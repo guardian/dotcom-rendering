@@ -34,6 +34,7 @@ const rulesToReview = {
 	'@typescript-eslint/require-await': 'warn', // 22 problems
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
+	'@typescript-eslint/no-explicit-any': 'warn', // 99 problems
 
 	// ES Lint 8
 	'@typescript-eslint/no-unsafe-argument': 'warn',

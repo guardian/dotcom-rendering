@@ -8,10 +8,10 @@ describe('Browser targets are as expected', () => {
 	test('raw targets from browserslist', () => {
 		expect(rawTargets).toEqual({
 			chrome: '67.0.0',
-			edge: '91.0.0',
+			edge: '99.0.0',
 			firefox: '78.0.0',
 			ios: '10.3.0',
-			opera: '88.0.0',
+			opera: '91.0.0',
 			safari: '10.1.0',
 			samsung: '11.1.0',
 		});
@@ -19,10 +19,10 @@ describe('Browser targets are as expected', () => {
 	test('upgrade targets from browserslist', () => {
 		expect(getBrowserTargets()).toEqual({
 			chrome: '67.0.0',
-			edge: '91.0.0',
+			edge: '99.0.0',
 			firefox: '78.0.0',
 			ios: '11', // upgraded
-			opera: '88.0.0',
+			opera: '91.0.0',
 			safari: '11.1.0', // upgraded
 			samsung: '11.1.0',
 		});
