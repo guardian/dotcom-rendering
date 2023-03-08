@@ -167,7 +167,6 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 										<Link
 											href="mailto:customer.help@theguardian.com"
 											target="_blank"
-											rel="noreferrer"
 										>
 											customer.help@theguardian.com
 										</Link>
