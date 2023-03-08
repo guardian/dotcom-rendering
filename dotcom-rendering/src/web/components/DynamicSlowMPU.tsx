@@ -77,7 +77,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 					))}
 				</UL>
 			</LI>
-			<LI percentage="33.333%">
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>
@@ -119,7 +119,7 @@ const ColumnOfThree50_Ad50 = ({
 					))}
 				</UL>
 			</LI>
-			<LI percentage="50%">
+			<LI percentage="50%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>
