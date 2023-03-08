@@ -130,23 +130,29 @@ export const pickMessage = ({
 
 		const winnerResult = results.reduce<
 			Promise<WinningMessage<any> | null>
-		>(async (winningMessageSoFar, { candidateConfig, canShow, idApiUrl }) => {
-			if (await winningMessageSoFar) {
+		>(
+			async (
+				winningMessageSoFar,
+				{ candidateConfig, canShow, idApiUrl },
+			) => {
+				if (await winningMessageSoFar) {
+					return winningMessageSoFar;
+				}
+
+				const result = await canShow;
+				candidateConfig.cancelTimeout();
+				if (result.show) {
+					return {
+						candidate: candidateConfig.candidate,
+						meta: result.meta,
+						idApiUrl,
+					};
+				}
+
 				return winningMessageSoFar;
-			}
-
-			const result = await canShow;
-			candidateConfig.cancelTimeout();
-			if (result.show) {
-				return {
-					candidate: candidateConfig.candidate,
-					meta: result.meta,
-					idApiUrl,
-				};
-			}
-
-			return winningMessageSoFar;
-		}, Promise.resolve(null));
+			},
+			Promise.resolve(null),
+		);
 
 		winnerResult
 			.then((winner) => {

@@ -196,7 +196,8 @@ const buildBrazeBanner = (
 	candidate: {
 		id: 'braze-banner',
 		canShow: () => canShowBrazeBanner(brazeMessages, brazeArticleContext),
-		show: (meta: any, idApiUrl?: string) => () => <BrazeBanner meta={meta} idApiUrl={idApiUrl}/>,
+		show: (meta: any, idApiUrl?: string) => () =>
+			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
