@@ -191,24 +191,24 @@ export const Nav = ({
 			>
 				{/* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */}
 				{format.display === ArticleDisplay.Immersive && (
-						<Hide when="above" breakpoint="tablet">
-							<ThemeProvider theme={buttonThemeReaderRevenue}>
-								<PositionButton>
-									<LinkButton
-										priority="primary"
-										size="small"
-										iconSide="right"
-										icon={<SvgArrowRightStraight />}
-										data-link-name="nav2 : support-cta"
-										data-edition={editionId}
-										href={subscribeUrl}
-									>
-										Support us
-									</LinkButton>
-								</PositionButton>
-							</ThemeProvider>
-						</Hide>
-					)}
+					<Hide when="above" breakpoint="tablet">
+						<ThemeProvider theme={buttonThemeReaderRevenue}>
+							<PositionButton>
+								<LinkButton
+									priority="primary"
+									size="small"
+									iconSide="right"
+									icon={<SvgArrowRightStraight />}
+									data-link-name="nav2 : support-cta"
+									data-edition={editionId}
+									href={subscribeUrl}
+								>
+									Support us
+								</LinkButton>
+							</PositionButton>
+						</ThemeProvider>
+					</Hide>
+				)}
 				{/*
                 IMPORTANT NOTE:
                 It is important to have the input as the 1st sibling for NoJS to work
