@@ -75,6 +75,7 @@ export const Nav = ({
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
 		format.theme === ArticleSpecial.Labs;
+
 	return (
 		<div css={rowStyles}>
 			<Global
@@ -189,7 +190,6 @@ export const Nav = ({
 				]}
 				data-component="nav2"
 			>
-				{/* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */}
 				{format.display === ArticleDisplay.Immersive && (
 					<Hide when="above" breakpoint="tablet">
 						<ThemeProvider theme={buttonThemeReaderRevenue}>
