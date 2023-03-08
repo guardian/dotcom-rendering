@@ -90,6 +90,9 @@ export const frontToHtml = ({ front }: Props): string => {
 				switches: front.config.switches,
 				abTests: front.config.abTests,
 				brazeApiKey: front.config.brazeApiKey,
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
+				unknownConfig: front.config,
 			}),
 		),
 	);

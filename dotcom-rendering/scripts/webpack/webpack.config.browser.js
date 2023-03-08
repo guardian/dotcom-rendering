@@ -6,35 +6,6 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
-// switch in case we need to revert
-const USE_SWC = true;
-
-const babelLoader = [
-	{
-		loader: 'babel-loader',
-		options: {
-			presets: [
-				'@babel/preset-react',
-				[
-					'@babel/preset-env',
-					{
-						bugfixes: true,
-						targets: 'extends @guardian/browserslist-config',
-					},
-				],
-			],
-			compact: true,
-		},
-	},
-	{
-		loader: 'ts-loader',
-		options: {
-			configFile: 'tsconfig.build.json',
-			transpileOnly: true,
-		},
-	},
-];
-
 const swcLoader = (targets) => [
 	{
 		loader: 'swc-loader',
@@ -95,7 +66,7 @@ const getLoaders = (bundle) => {
 			return swcLoader(['android >= 5', 'ios >= 12']);
 		case 'variant':
 		case 'modern':
-			return USE_SWC ? swcLoader(getBrowserTargets()) : babelLoader;
+			return swcLoader(getBrowserTargets());
 	}
 };
 
@@ -196,7 +167,6 @@ module.exports.babelExclude = {
 	not: [
 		// Include all @guardian modules, except automat-modules
 		/@guardian\/(?!(automat-modules))/,
-
 		// Include the dynamic-import-polyfill
 		/dynamic-import-polyfill/,
 	],

@@ -41,7 +41,7 @@
 		"@emotion/jest": "^11.10.0",
 		"@emotion/react": "^11.4.1",
 		"@emotion/server": "^11.4.0",
-		"@guardian/apps-rendering-api-models": "5.0.1",
+		"@guardian/apps-rendering-api-models": "6.0.0",
 		"@guardian/atoms-rendering": "^25.1.5",
 		"@guardian/bridget": "^2.0.0",
 		"@guardian/cdk": "^47.3.3",
