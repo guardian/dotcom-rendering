@@ -33,7 +33,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
       # Make sure we install dependencies in the root directory
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --frozen-lockfile
       - run: make build
         working-directory: dotcom-rendering
       - name: Install and run Lighthouse CI
