@@ -52,7 +52,7 @@ export const RewrappedComponent = ({
 	return jsx(element, {
 		// if style is `undefined`, it will be omitted
 		css: style,
-    id: subheadingBlockComponentId,
+		id: subheadingBlockComponentId,
 		dangerouslySetInnerHTML: {
 			__html: unescapeData(html),
 		},

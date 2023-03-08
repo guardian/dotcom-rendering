@@ -190,45 +190,6 @@ const styles = (format: ArticleFormat) => css`
 	${until.tablet} {
 		/* 	To stop long words going outside of the view port.
 					For compatibility */
-					overflow-wrap: anywhere;
-					word-wrap: break-word;
-				}
-			`;
-
-			const {
-				willUnwrap: isUnwrapped,
-				unwrappedHtml,
-				unwrappedElement,
-			} = unwrapHtml({
-				fixes: [
-					{
-						unwrappedElement: 'p',
-						prefix: '<p>',
-						suffix: '</p>',
-					},
-					{
-						unwrappedElement: 'ul',
-						prefix: '<ul>',
-						suffix: '</ul>',
-					},
-					{
-						unwrappedElement: 'h3',
-						prefix: '<h3>',
-						suffix: '</h3>',
-					},
-					{
-						prefix: '<footer>',
-						suffix: '</footer>',
-						unwrappedElement: 'footer',
-					},
-					{
-						prefix: '<ol>',
-						suffix: '</ol>',
-						unwrappedElement: 'ol',
-					},
-				],
-				html,
-			});
 		overflow-wrap: anywhere;
 		word-wrap: break-word;
 	}
@@ -261,6 +222,17 @@ export const TextBlockComponent = ({
 				unwrappedElement: 'h3',
 				prefix: '<h3>',
 				suffix: '</h3>',
+			},
+
+			{
+				prefix: '<footer>',
+				suffix: '</footer>',
+				unwrappedElement: 'footer',
+			},
+			{
+				prefix: '<ol>',
+				suffix: '</ol>',
+				unwrappedElement: 'ol',
 			},
 		],
 		html,
