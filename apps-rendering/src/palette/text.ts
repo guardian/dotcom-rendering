@@ -1304,9 +1304,9 @@ const kicker = (format: ArticleFormat): Colour => {
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
-	)
+	) {
 		return opinion[550];
-
+	}
 	if (format.theme === ArticleSpecial.SpecialReport) {
 		return brandAlt[400];
 	}

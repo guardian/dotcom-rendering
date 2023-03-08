@@ -46,8 +46,9 @@ You can share your story by using the form on this article, or by contacting the
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
-	if (typeof window === 'undefined' || typeof navigator === 'undefined')
+	if (typeof window === 'undefined' || typeof navigator === 'undefined') {
 		return <></>;
+	}
 
 	return (
 		<div css={calloutShare}>

@@ -194,6 +194,7 @@ const EmailSignupForm: FC<Props> = ({
 							<Link
 								href="mailto:customer.help@theguardian.com"
 								target="_blank"
+								rel="noreferrer"
 							>
 								customer.help@theguardian.com
 							</Link>
