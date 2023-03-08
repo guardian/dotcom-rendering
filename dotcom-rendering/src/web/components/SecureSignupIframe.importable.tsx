@@ -47,7 +47,7 @@ const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 			<Link
 				href="mailto:customer.help@theguardian.com"
 				target="_blank"
-				rel="noopener noreferrer"
+				rel="noreferrer"
 			>
 				customer.help@theguardian.com
 			</Link>

@@ -138,7 +138,7 @@ const MessageUs: FC<{ contacts: CalloutContactType[] }> = ({ contacts }) => {
 						priority="primary"
 						href={`${contact.urlPrefix}${contact.value}`}
 						target="_blank"
-						rel="noreferrer noopener"
+						rel="noreferrer"
 						icon={conditionallyRenderContactIcon(contact.name)}
 					>
 						Message us on {formatContactType(contact.name)}

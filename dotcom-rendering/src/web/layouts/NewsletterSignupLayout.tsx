@@ -409,7 +409,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										iconSide="left"
 										href={newsletterPreviewUrl}
 										target="_blank"
-										rel="noopener noreferrer"
+										rel="noreferrer"
 										priority="tertiary"
 										size="xsmall"
 									>
