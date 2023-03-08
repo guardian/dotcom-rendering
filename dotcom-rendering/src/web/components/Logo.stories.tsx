@@ -32,7 +32,7 @@ export const Logos = () => (
 					{editionId}
 				</h1>
 
-				<Logo editionId={editionId} />
+				<Logo />
 			</li>
 		))}
 	</ul>

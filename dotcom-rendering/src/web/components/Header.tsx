@@ -61,7 +61,7 @@ export const Header = ({
 			<Island deferUntil="hash" clientOnly={true}>
 				<Snow />
 			</Island>
-			<Logo editionId={editionId} />
+			<Logo />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG
 					urls={urls}
