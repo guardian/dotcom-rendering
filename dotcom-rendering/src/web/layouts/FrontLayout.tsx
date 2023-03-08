@@ -174,10 +174,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 */
 	const renderAds = !front.isAdFreeUser;
 
-	const mobileAdPositions = getMobileAdPositions(
+	const mobileAdPositions = renderAds
+		? getMobileAdPositions(
 				front.isNetworkFront,
 				front.pressedPage.collections,
-		  );
+		  )
+		: [];
 
 	return (
 		<>
