@@ -157,7 +157,6 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
 
 const requiresInlineStyles = (renderingRequest: RenderingRequest): boolean => {
 	// return !!(
-	//	   content.fields?.commentable ??
 	//	   content.atoms?.quizzes ??
 	//	   content.atoms?.audios ??
 	//	   content.atoms?.charts
