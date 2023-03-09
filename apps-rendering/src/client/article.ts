@@ -2,7 +2,6 @@
 
 import './liveblog';
 
-import 'regenerator-runtime/runtime.js';
 import { AudioAtom } from '@guardian/atoms-rendering';
 import { Topic } from '@guardian/bridget/Topic';
 import {
