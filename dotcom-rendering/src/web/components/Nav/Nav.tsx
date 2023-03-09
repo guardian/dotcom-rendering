@@ -1,19 +1,15 @@
-import { css, Global, ThemeProvider } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { space, until, visuallyHidden } from '@guardian/source-foundations';
-import {
-	buttonThemeReaderRevenue,
-	LinkButton,
-	SvgArrowRightStraight,
-} from '@guardian/source-react-components';
+import { until, visuallyHidden } from '@guardian/source-foundations';
 import { clearFix } from '../../../lib/mixins';
 import type { NavType } from '../../../model/extract-nav';
 import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
-import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
+import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
+import { Island } from '../Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -54,16 +50,6 @@ const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const PositionButton = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			margin-top: ${space[1]}px;
-			margin-left: ${space[2]}px;
-		`}
-	>
-		{children}
-	</div>
-);
 
 export const Nav = ({
 	format,
@@ -190,24 +176,27 @@ export const Nav = ({
 				]}
 				data-component="nav2"
 			>
-				{format.display === ArticleDisplay.Immersive && (
-					<Hide when="above" breakpoint="tablet">
-						<ThemeProvider theme={buttonThemeReaderRevenue}>
-							<PositionButton>
-								<LinkButton
-									priority="primary"
-									size="small"
-									iconSide="right"
-									icon={<SvgArrowRightStraight />}
-									data-link-name="nav2 : support-cta"
-									data-edition={editionId}
-									href={subscribeUrl}
-								>
-									Support us
-								</LinkButton>
-							</PositionButton>
-						</ThemeProvider>
-					</Hide>
+				{format.display === ArticleDisplay.Immersive &&  (
+					<Island deferUntil="visible" clientOnly={true}>
+						<InteractiveSupportButton editionId={editionId} subscribeUrl={subscribeUrl}/>
+					</Island>
+					// <Hide when="above" breakpoint="tablet">
+					// 	<ThemeProvider theme={buttonThemeReaderRevenue}>
+					// 		<PositionButton>
+					// 			<LinkButton
+					// 				priority="primary"
+					// 				size="small"
+					// 				iconSide="right"
+					// 				icon={<SvgArrowRightStraight />}
+					// 				data-link-name="nav2 : support-cta"
+					// 				data-edition={editionId}
+					// 				href={subscribeUrl}
+					// 			>
+					// 				Support us
+					// 			</LinkButton>
+					// 		</PositionButton>
+					// 	</ThemeProvider>
+					// </Hide>
 				)}
 				{/*
                 IMPORTANT NOTE:
