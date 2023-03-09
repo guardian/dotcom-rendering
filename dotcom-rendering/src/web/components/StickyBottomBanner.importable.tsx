@@ -192,11 +192,12 @@ const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
 const buildBrazeBanner = (
 	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
+	idApiUrl: string,
 ): CandidateConfig<any> => ({
 	candidate: {
 		id: 'braze-banner',
 		canShow: () => canShowBrazeBanner(brazeMessages, brazeArticleContext),
-		show: (meta: any, idApiUrl?: string) => () =>
+		show: (meta: any) => () =>
 			<BrazeBanner meta={meta} idApiUrl={idApiUrl} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -288,6 +289,7 @@ export const StickyBottomBanner = ({
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as BrazeMessagesInterface,
 			brazeArticleContext,
+			idApiUrl,
 		);
 		const bannerConfig: SlotConfig = {
 			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],

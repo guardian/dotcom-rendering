@@ -18,7 +18,7 @@ type Meta = {
 
 type Props = {
 	meta: Meta;
-	idApiUrl?: string;
+	idApiUrl: string;
 };
 
 const containerStyles = css`
@@ -84,7 +84,7 @@ export const canShowBrazeBanner = async (
 type InnerProps = {
 	meta: Meta;
 	BrazeComponent: typeof BrazeBannerComponent;
-	idApiUrl?: string;
+	idApiUrl: string;
 };
 
 // RJR comment - not happy with idApiUrl - marked it as ? for now because I don't understand how it may affect other banners in the bottom slot, but Braze banners will require it to build the URL they need to hit the required endpoint for 1-click-subscribe to newsletters functionality
@@ -113,8 +113,6 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	const componentName = meta.dataFromBraze.componentName;
 	if (!componentName) return null;
 
-	const tempIdApiUrl = idApiUrl ?? '';
-
 	return (
 		<div css={containerStyles}>
 			<BrazeComponent
@@ -122,8 +120,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
 				submitComponentEvent={submitComponentEvent}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
-				subscribeToNewsletter={async (newsletterId) => {
-					await fetch(`${tempIdApiUrl}/users/me/newsletters`, {
+				subscribeToNewsletter={async (newsletterId: string) => {
+					await fetch(`${idApiUrl}/users/me/newsletters`, {
 						method: 'PATCH',
 						body: JSON.stringify({
 							id: newsletterId,
