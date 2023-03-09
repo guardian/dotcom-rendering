@@ -189,7 +189,6 @@ const capiEndpoint = (articleId: string, key: string): string => {
 		'displayHint',
 		'starRating',
 		'commentable',
-		'internalShortId',
 		'liveBloggingNow',
 		'lastModified',
 		'isInappropriateForSponsorship',
