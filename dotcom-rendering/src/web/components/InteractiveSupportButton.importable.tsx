@@ -6,14 +6,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { space } from '@guardian/source-foundations';
-import {
-	HIDE_SUPPORT_MESSAGING_COOKIE,
-	isRecentOneOffContributor,
-	RECURRING_CONTRIBUTOR_COOKIE,
-	shouldHideSupportMessaging,
-	shouldShowSupportMessaging,
-} from '../lib/contributions';
-import { getCookie } from '@guardian/libs';
+import { shouldHideSupportMessaging } from '../lib/contributions';
 import { EditionId } from '../lib/edition';
 
 type InteractiveSupportButtonProps = {
@@ -36,23 +29,7 @@ export const InteractiveSupportButton = ({
 	editionId,
 	subscribeUrl,
 }: InteractiveSupportButtonProps) => {
-	// useEffect(() => {
-	//
-	// });
-
 	const hideSupportMessaging = shouldHideSupportMessaging();
-
-	console.log('shouldShowSupportMessaging()', shouldShowSupportMessaging());
-	console.log(
-		'isRecurringContributor(isSignedIn)',
-		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true',
-	);
-	console.log('isRecentOneOffContributor()', isRecentOneOffContributor());
-	console.log('hideSupportMessaging', hideSupportMessaging);
-	console.log(
-		'GEtCookie',
-		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }),
-	);
 
 	if (!hideSupportMessaging) {
 		return (

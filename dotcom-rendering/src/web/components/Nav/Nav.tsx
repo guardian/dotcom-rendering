@@ -182,23 +182,6 @@ export const Nav = ({
 							subscribeUrl={subscribeUrl}
 						/>
 					</Island>
-					// <Hide when="above" breakpoint="tablet">
-					// 	<ThemeProvider theme={buttonThemeReaderRevenue}>
-					// 		<PositionButton>
-					// 			<LinkButton
-					// 				priority="primary"
-					// 				size="small"
-					// 				iconSide="right"
-					// 				icon={<SvgArrowRightStraight />}
-					// 				data-link-name="nav2 : support-cta"
-					// 				data-edition={editionId}
-					// 				href={subscribeUrl}
-					// 			>
-					// 				Support us
-					// 			</LinkButton>
-					// 		</PositionButton>
-					// 	</ThemeProvider>
-					// </Hide>
 				)}
 				{/*
                 IMPORTANT NOTE:

@@ -34,7 +34,7 @@ export const MODULES_VERSION = 'v3';
 // including but not limited to recurring & one-off contributions,
 // paper & digital subscriptions, as well as user tiers (GU supporters/staff/partners/patrons).
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
-export const shouldShowSupportMessaging = (): boolean => {
+const shouldShowSupportMessaging = (): boolean => {
 	const hideSupportMessaging =
 		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }) === 'true';
 
