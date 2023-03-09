@@ -50,7 +50,6 @@ const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-
 export const Nav = ({
 	format,
 	nav,
@@ -176,9 +175,12 @@ export const Nav = ({
 				]}
 				data-component="nav2"
 			>
-				{format.display === ArticleDisplay.Immersive &&  (
+				{format.display === ArticleDisplay.Immersive && (
 					<Island deferUntil="visible" clientOnly={true}>
-						<InteractiveSupportButton editionId={editionId} subscribeUrl={subscribeUrl}/>
+						<InteractiveSupportButton
+							editionId={editionId}
+							subscribeUrl={subscribeUrl}
+						/>
 					</Island>
 					// <Hide when="above" breakpoint="tablet">
 					// 	<ThemeProvider theme={buttonThemeReaderRevenue}>

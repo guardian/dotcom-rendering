@@ -1,20 +1,25 @@
-import {Hide} from "./Hide";
-import {css, ThemeProvider} from "@emotion/react";
-import {buttonThemeReaderRevenue} from "@guardian/source-react-components";
+import { Hide } from './Hide';
+import { css, ThemeProvider } from '@emotion/react';
+import { buttonThemeReaderRevenue } from '@guardian/source-react-components';
 import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { space} from "@guardian/source-foundations";
+import { space } from '@guardian/source-foundations';
 import {
-	HIDE_SUPPORT_MESSAGING_COOKIE, isRecentOneOffContributor, RECURRING_CONTRIBUTOR_COOKIE,
+	HIDE_SUPPORT_MESSAGING_COOKIE,
+	isRecentOneOffContributor,
+	RECURRING_CONTRIBUTOR_COOKIE,
 	shouldHideSupportMessaging,
-	shouldShowSupportMessaging
-} from "../lib/contributions";
-import {getCookie,} from "@guardian/libs";
-import {EditionId} from "../lib/edition";
+	shouldShowSupportMessaging,
+} from '../lib/contributions';
+import { getCookie } from '@guardian/libs';
+import { EditionId } from '../lib/edition';
 
-type InteractiveSupportButtonProps={editionId:EditionId,subscribeUrl:string};
+type InteractiveSupportButtonProps = {
+	editionId: EditionId;
+	subscribeUrl: string;
+};
 
 const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -27,22 +32,27 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-
-export const InteractiveSupportButton =  ({editionId,subscribeUrl} : InteractiveSupportButtonProps) => {
+export const InteractiveSupportButton = ({
+	editionId,
+	subscribeUrl,
+}: InteractiveSupportButtonProps) => {
 	// useEffect(() => {
 	//
 	// });
 
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
-
-	console.log("shouldShowSupportMessaging()", shouldShowSupportMessaging())
-	console.log("isRecurringContributor(isSignedIn)",getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true')
-	console.log("isRecentOneOffContributor()", isRecentOneOffContributor())
-	console.log("hideSupportMessaging", hideSupportMessaging)
-	console.log("GEtCookie",getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }))
-
-
+	console.log('shouldShowSupportMessaging()', shouldShowSupportMessaging());
+	console.log(
+		'isRecurringContributor(isSignedIn)',
+		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true',
+	);
+	console.log('isRecentOneOffContributor()', isRecentOneOffContributor());
+	console.log('hideSupportMessaging', hideSupportMessaging);
+	console.log(
+		'GEtCookie',
+		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }),
+	);
 
 	if (!hideSupportMessaging) {
 		return (
@@ -53,7 +63,7 @@ export const InteractiveSupportButton =  ({editionId,subscribeUrl} : Interactive
 							priority="primary"
 							size="small"
 							iconSide="right"
-							icon={<SvgArrowRightStraight/>}
+							icon={<SvgArrowRightStraight />}
 							data-link-name="nav2 : support-cta"
 							data-edition={editionId}
 							href={subscribeUrl}
@@ -63,8 +73,7 @@ export const InteractiveSupportButton =  ({editionId,subscribeUrl} : Interactive
 					</PositionButton>
 				</ThemeProvider>
 			</Hide>
-		)
+		);
 	}
 	return null;
-
 };
