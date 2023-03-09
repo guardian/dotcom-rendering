@@ -433,25 +433,27 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index}`;
 			return (
-				<div
-					id={`dfp-ad--${advertId}`}
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						`ad-slot--${advertId}`,
-						'ad-slot--container-inline',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
-					data-link-name={`ad slot ${advertId}`}
-					data-name={advertId}
-					aria-hidden="true"
-				/>
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--container-inline',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+							`,
+							adStyles,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'liveblog-inline': {

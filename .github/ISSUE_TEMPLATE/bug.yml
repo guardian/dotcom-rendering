@@ -1,7 +1,7 @@
 name: 🐞 Bug Report
 description: Let us know about something unexpected that has happened
-title: "[Bug]: "
-labels: ["bug", "needs-triage"]
+title: '[Bug]: '
+labels: ['bug', 'needs-triage']
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,11 @@ body:
 
         If this is urgent, please email dotcom.platform@guardian.co.uk, or let us know on our chat channel.
 
-        The benefit of an issue is that we have a written record of what is going on, that we can track and have discussions around.
+        Before raising a bug, have a [search through our current issues](https://github.com/guardian/dotcom-rendering/issues)
+        and if the issue has already been raised add to the discussion there! If something has been marked as `wontfix`
+        please still add to the issue and let us know, `wontfix` just meant `wontfix` at the time.
+
+        The benefit of an issue is that we have a written record of what is going on and be a reference for future travelers.
         Please still reach out to facilitate discussion or in case we miss it - we're a lovely bunch!
   - type: textarea
     id: what-happened
@@ -27,4 +31,3 @@ body:
     attributes:
       label: What is the impact?
       description: How far reaching is the issue, and how is it affecting their experience?
-
