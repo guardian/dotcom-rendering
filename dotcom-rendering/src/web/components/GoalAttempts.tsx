@@ -20,6 +20,7 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 		css={css`
 			display: flex;
 			flex-direction: row;
+			gap: 2px;
 		`}
 	>
 		{children}
