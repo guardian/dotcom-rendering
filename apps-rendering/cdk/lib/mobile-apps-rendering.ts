@@ -26,6 +26,7 @@ interface AppsStackProps extends GuStackProps {
 	appsRenderingDomain: string;
 	hostedZoneId: string;
 	targetCpuUtilisation: number;
+	instanceSize: InstanceSize;
 }
 
 export class MobileAppsRendering extends GuStack {
@@ -58,7 +59,7 @@ export class MobileAppsRendering extends GuStack {
 			},
 			instanceType: InstanceType.of(
 				InstanceClass.T4G,
-				InstanceSize.SMALL,
+				props.instanceSize,
 			),
 			certificateProps: {
 				domainName,
