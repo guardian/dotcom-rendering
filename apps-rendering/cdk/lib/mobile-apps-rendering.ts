@@ -6,12 +6,8 @@ import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App, CfnElement } from 'aws-cdk-lib';
 import { Duration } from 'aws-cdk-lib';
-import {
-	InstanceClass,
-	InstanceSize,
-	InstanceType,
-	Peer,
-} from 'aws-cdk-lib/aws-ec2';
+import type { InstanceSize } from 'aws-cdk-lib/aws-ec2';
+import { InstanceClass, InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import {
 	HostedZone,
 	RecordSet,
