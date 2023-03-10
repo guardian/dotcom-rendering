@@ -1074,7 +1074,7 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.small",
+        "InstanceType": "t4g.micro",
         "MetadataOptions": Object {
           "HttpTokens": "required",
         },
