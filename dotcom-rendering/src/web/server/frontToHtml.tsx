@@ -55,7 +55,9 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial = !front.isAdFreeUser;
+	const loadCommercial =
+		!front.isAdFreeUser &&
+		front.config.abTests.poorDeviceConnectivityVariant !== 'variant';
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
