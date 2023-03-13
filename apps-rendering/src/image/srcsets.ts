@@ -25,6 +25,8 @@ interface Srcsets {
 	dpr2Srcset: string;
 }
 
+type ResizerSource = 'static' | 'uploads' | 'media';
+
 // ----- Functions ----- //
 
 /**
@@ -33,7 +35,7 @@ interface Srcsets {
  * @param url The asset URL from CAPI
  * @returns An image resizer source
  */
-const getSource = (url: URL): string => {
+const getSource = (url: URL): ResizerSource => {
 	const subdomain = url.hostname.split('.')[0];
 
 	switch (subdomain) {
