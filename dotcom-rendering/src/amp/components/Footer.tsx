@@ -10,11 +10,6 @@ import type { NavType } from '../../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 
-export enum LinkPlatform {
-	Web,
-	Amp,
-}
-
 export interface Link {
 	title: string;
 	url?: string;
