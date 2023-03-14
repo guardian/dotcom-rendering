@@ -61,6 +61,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -296,7 +297,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const hasKeyEvents = !!article.keyEvents.length;
 	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
