@@ -11,6 +11,7 @@ import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { canRenderAds } from '../lib/canRenderAds';
 import { pageTemplate } from './pageTemplate';
 
 interface Props {
@@ -55,9 +56,7 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial =
-		!front.isAdFreeUser &&
-		front.config.abTests.poorDeviceConnectivityVariant !== 'variant';
+	const loadCommercial = canRenderAds(front);
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
