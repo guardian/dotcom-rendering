@@ -420,6 +420,21 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
+interface MessageUsField {
+	id: string;
+	label: string;
+	name: string;
+	required: boolean;
+	type: 'text' | 'email' | 'textarea';
+	minLength?: number;
+	maxLength?: number;
+}
+
+interface MessageUsData {
+	formId: string;
+	formFields: MessageUsField[];
+}
+
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;

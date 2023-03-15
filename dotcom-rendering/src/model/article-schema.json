@@ -521,6 +521,9 @@
                 "$ref": "#/definitions/Topic"
             }
         },
+        "messageUs": {
+            "$ref": "#/definitions/MessageUsData"
+        },
         "promotedNewsletter": {
             "type": "object",
             "properties": {
@@ -4799,6 +4802,62 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "MessageUsData": {
+            "type": "object",
+            "properties": {
+                "formId": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MessageUsField"
+                    }
+                }
+            },
+            "required": [
+                "formFields",
+                "formId"
+            ]
+        },
+        "MessageUsField": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "required": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "email",
+                        "text",
+                        "textarea"
+                    ],
+                    "type": "string"
+                },
+                "minLength": {
+                    "type": "number"
+                },
+                "maxLength": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "id",
+                "label",
+                "name",
+                "required",
+                "type"
+            ]
         },
         "TableOfContentsItem": {
             "type": "object",
