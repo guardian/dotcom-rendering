@@ -213,11 +213,11 @@ export const Form = ({
 			.catch((respError) => {
 				window.guardian.modules.sentry.reportError(
 					respError,
-					'callout-embed-submission',
+					'message-us-submission',
 				);
 
 				setNetworkError(
-					'Sorry, there was a problem submitting your form. Please try again later.',
+					'Sorry, there was a problem submitting your message. Please try again later.',
 				);
 			});
 	};
@@ -260,7 +260,7 @@ export const Form = ({
 						firstInvalidFormElement.focus();
 						return;
 					}
-					// void submitForm(formData);
+					void submitForm(formData);
 				}}
 			>
 				{Object.values(validationErrors).filter((err) => err !== '')
