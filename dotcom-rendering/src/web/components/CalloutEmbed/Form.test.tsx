@@ -1,6 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
+import user from '@testing-library/user-event';
 import type {
 	CampaignFieldCheckbox,
+	CampaignFieldFile,
 	CampaignFieldRadio,
 	CampaignFieldSelect,
 	CampaignFieldText,
@@ -27,6 +29,16 @@ const textAreaField: CampaignFieldTextArea = {
 	id: '91884874',
 	type: 'textarea',
 	required: true,
+	hidden: false,
+};
+
+const fileField: CampaignFieldFile = {
+	name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
+	hideLabel: false,
+	label: 'You can upload a photo here if you think it will add to your story',
+	id: '91884877',
+	type: 'file',
+	required: false,
 	hidden: false,
 };
 
@@ -224,30 +236,30 @@ describe('Callout from', () => {
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
 	});
-	// test('should upload the file', () => {
-	// 	const file = new File(['hello'], 'hello.png', { type: 'image/png' });
-	// 	const mockSubmit = jest.fn();
-	// 	const { queryByText } = render(
-	// 		<Form formFields={[fileField]} onSubmit={mockSubmit} />,
-	// 	);
+	test.skip('should upload the file', () => {
+		const file = new File(['hello'], 'hello.png', { type: 'image/png' });
+		const mockSubmit = jest.fn();
+		const { queryByText } = render(
+			<Form formFields={[fileField]} onSubmit={mockSubmit} />,
+		);
 
-	// 	const input = screen.getByTestId<HTMLInputElement>(
-	// 		`form-field-${fileField.id}`,
-	// 	);
-	// 	user.upload(input, file);
+		const input = screen.getByTestId<HTMLInputElement>(
+			`form-field-${fileField.id}`,
+		);
+		user.upload(input, file);
 
-	// 	const inputFiles = input.files ? input.files : [];
-	// 	expect(inputFiles[0]).toStrictEqual(file);
-	// 	expect(inputFiles).toHaveLength(1);
+		const inputFiles = input.files ? input.files : [];
+		expect(inputFiles[0]).toStrictEqual(file);
+		expect(inputFiles).toHaveLength(1);
 
-	// 	const submitButton = queryByText(
-	// 		'Share with the Guardian',
-	// 	) as HTMLButtonElement;
-	// 	fireEvent.click(submitButton);
+		const submitButton = queryByText(
+			'Share with the Guardian',
+		) as HTMLButtonElement;
+		fireEvent.click(submitButton);
 
-	// 	expect(mockSubmit.mock.calls.length).toBe(1);
-	// 	// TODO: test mockSubmit internal
-	// });
+		expect(mockSubmit.mock.calls.length).toBe(1);
+		// TODO: test mockSubmit internal
+	});
 
 	it('should submit select', () => {
 		const mockSubmit = jest.fn();

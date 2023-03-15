@@ -66,12 +66,19 @@ export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
 				)}`,
 			);
 		return (
-			<RewrappedComponent
-				isUnwrapped={isUnwrapped}
-				html={htmlWithIcon}
-				tagName="blockquote"
-				elCss={quotedBlockquoteStyles(palette)}
-			/>
+			<>
+				{/* renderToString doesn't play nicely with Emotion in React 18
+				 https://github.com/emotion-js/emotion/issues/2906#issuecomment-1372035660  */}
+				<div style={{ display: 'none' }}>
+					<QuoteIcon colour={palette.fill.blockquoteIcon} />
+				</div>
+				<RewrappedComponent
+					isUnwrapped={isUnwrapped}
+					html={htmlWithIcon}
+					tagName="blockquote"
+					elCss={quotedBlockquoteStyles(palette)}
+				/>
+			</>
 		);
 	}
 	return (
