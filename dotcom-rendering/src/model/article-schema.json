@@ -522,7 +522,7 @@
             }
         },
         "messageUs": {
-            "$ref": "#/definitions/MessageUsData"
+            "$ref": "#/definitions/MessageUs"
         },
         "promotedNewsletter": {
             "type": "object",
@@ -4803,7 +4803,7 @@
             ],
             "type": "string"
         },
-        "MessageUsData": {
+        "MessageUs": {
             "type": "object",
             "properties": {
                 "formId": {

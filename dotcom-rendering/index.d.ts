@@ -430,7 +430,7 @@ interface MessageUsField {
 	maxLength?: number;
 }
 
-interface MessageUsData {
+interface MessageUs {
 	formId: string;
 	formFields: MessageUsField[];
 }

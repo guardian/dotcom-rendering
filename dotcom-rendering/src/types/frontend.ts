@@ -108,7 +108,7 @@ export interface FEArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	messageUs?: MessageUsData;
+	messageUs?: MessageUs;
 
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContentsItem[];
