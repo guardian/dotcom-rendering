@@ -16,6 +16,7 @@ const textField: CampaignFieldText = {
 	id: '91884886',
 	type: 'text',
 	required: true,
+	hidden: false,
 };
 
 const textAreaField: CampaignFieldTextArea = {
@@ -26,6 +27,7 @@ const textAreaField: CampaignFieldTextArea = {
 	id: '91884874',
 	type: 'textarea',
 	required: true,
+	hidden: false,
 };
 
 const firstRadioOption = {
@@ -51,6 +53,7 @@ const radioField: CampaignFieldRadio = {
 	id: '91884878',
 	type: 'radio',
 	required: true,
+	hidden: false,
 };
 
 const firstCheckboxOption = {
@@ -76,6 +79,7 @@ const checkboxField: CampaignFieldCheckbox = {
 	id: '91884871',
 	type: 'checkbox',
 	required: true,
+	hidden: false,
 };
 
 const selectField: CampaignFieldSelect = {
@@ -95,6 +99,7 @@ const selectField: CampaignFieldSelect = {
 		},
 	],
 	required: false,
+	hidden: false,
 };
 
 describe('Callout from', () => {

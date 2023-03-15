@@ -44,7 +44,11 @@ const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
 			{text} Please try again or contact{' '}
-			<Link href="mailto:customer.help@theguardian.com" target="_blank">
+			<Link
+				href="mailto:customer.help@theguardian.com"
+				target="_blank"
+				rel="noreferrer"
+			>
 				customer.help@theguardian.com
 			</Link>
 		</span>
@@ -325,10 +329,11 @@ export const SecureSignupIframe = ({
 
 		// add the fonts to the iframe
 		requiredFonts.forEach((font) => {
-			// it shouldn't be necessary to test for the add method again
-			// but still ts considers it possibily undefined
-			if (iframeFontFaceSet.add) {
+			try {
 				iframeFontFaceSet.add(font);
+			} catch (error) {
+				// Safari throws an InvalidModificationError
+				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
 			}
 		});
 	};

@@ -15,15 +15,12 @@ type SectionType = {
 	color: string;
 };
 
-const svgBackground = encodeURIComponent(
-	'<svg xmlns="http://www.w3.org/2000/svg" width="3" height="3" viewBox="0 0 3 3"><circle fill="rgba(255, 255, 255, 0.3)" cx="1.5" cy="1.5" r="1"/></svg>',
-);
-
 const Row = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
 			flex-direction: row;
+			gap: 2px;
 		`}
 	>
 		{children}
@@ -58,9 +55,13 @@ const Side = ({
 
 				height: 132px;
 
-				background-image: url('data:image/svg+xml;utf-8,${svgBackground}');
+				background-image: radial-gradient(
+					circle,
+					rgba(255, 255, 255, 0.3) 1px,
+					transparent 1px
+				);
 				background-repeat: repeat;
-				background-size: 3px;
+				background-size: 3px 3px;
 				background-position-x: 0;
 
 				padding-top: 1px;

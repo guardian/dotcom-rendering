@@ -1,17 +1,14 @@
 import { css } from '@emotion/react';
 import {
-	brandAlt,
 	from,
 	neutral,
 	space,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import {
-	SvgGuardianBestWebsiteLogo,
-	SvgGuardianLogo,
-} from '@guardian/source-react-components';
+import { SvgGuardianLogo } from '@guardian/source-react-components';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
+import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
 const linkStyles = css`
 	float: right;
@@ -59,10 +56,7 @@ export const Logo = ({ editionId }: Props) => {
 					>
 						The Guardian - Back to home
 					</span>
-					<SvgGuardianBestWebsiteLogo
-						textColor={neutral[100]}
-						textAccentColor={brandAlt[400]}
-					/>
+					<SvgGuardianBestNewspaperLogo />
 				</a>
 			);
 

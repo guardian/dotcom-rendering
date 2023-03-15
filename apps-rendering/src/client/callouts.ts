@@ -15,7 +15,6 @@ import {
 	map,
 	map2,
 	map4,
-	map7,
 	map8,
 	maybe,
 	numberParser,
@@ -51,6 +50,7 @@ const makeFormFields = (
 	type: string,
 	mandatory: boolean,
 	options: FormOption[],
+	hidden: boolean,
 	description?: string,
 ): FormField => ({
 	id,
@@ -60,6 +60,7 @@ const makeFormFields = (
 	mandatory,
 	options,
 	description,
+	hidden,
 });
 
 const makeContacts = (
@@ -140,13 +141,14 @@ const optionParser: Parser<FormOption> = map2(makeFormOption)(
 	fieldParser('value', stringParser),
 );
 
-const formFieldsParser: Parser<FormField> = map7(makeFormFields)(
+const formFieldsParser: Parser<FormField> = map8(makeFormFields)(
 	fieldParser('id', stringParser),
 	fieldParser('label', stringParser),
 	fieldParser('name', stringParser),
 	fieldParser('type', stringParser),
 	fieldParser('mandatory', booleanParser),
 	fieldParser('options', arrayParser(optionParser)),
+	fieldParser('hidden', booleanParser),
 	aOrUndefinedParser(fieldParser('description', stringParser)),
 );
 

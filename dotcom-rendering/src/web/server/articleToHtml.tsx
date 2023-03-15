@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -21,6 +21,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { canRenderAds } from '../lib/canRenderAds';
 import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
@@ -99,18 +100,20 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
+	const loadCommercial = canRenderAds(article);
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
+			loadCommercial &&
+				(process.env.COMMERCIAL_BUNDLE_URL ??
+					article.config.commercialBundleUrl),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		].map((script) =>
-			offerHttp3 && script ? getHttp3Url(script) : script,
-		),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -147,6 +150,8 @@ export const articleToHtml = ({ article }: Props): string => {
 					editionId: article.editionId,
 					beaconURL: article.beaconURL,
 				}),
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
 			}),
 		),

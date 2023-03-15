@@ -856,10 +856,12 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
                     "enum": [
+                        "email",
+                        "phone",
                         "text"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -879,11 +881,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",
@@ -919,11 +925,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",
@@ -959,11 +969,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",
@@ -1017,11 +1031,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",
@@ -1076,11 +1094,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",
@@ -1135,11 +1157,15 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
+                "hidden",
                 "hideLabel",
                 "id",
                 "label",

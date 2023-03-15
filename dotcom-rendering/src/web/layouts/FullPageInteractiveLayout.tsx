@@ -31,8 +31,10 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubNav } from '../components/SubNav.importable';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
+import { canRenderAds } from '../lib/canRenderAds';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -138,7 +140,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
@@ -326,7 +328,11 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article id="maincontent">
+				<article
+					id="maincontent"
+					lang={decideLanguage(article.lang)}
+					dir={decideLanguageDirection(article.isRightToLeftLang)}
+				>
 					<Renderer
 						format={format}
 						elements={

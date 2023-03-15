@@ -737,11 +737,12 @@ interface CampaignField {
 	required: boolean;
 	textSize?: number;
 	hideLabel: boolean;
+	hidden: boolean;
 	label: string;
 }
 
 export interface CampaignFieldText extends CampaignField {
-	type: 'text';
+	type: 'text' | 'email' | 'phone';
 }
 
 export interface CampaignFieldTextArea extends CampaignField {

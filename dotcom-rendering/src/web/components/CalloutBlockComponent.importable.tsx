@@ -6,8 +6,10 @@ import { Deadline } from './Callout/Deadline';
 
 export const CalloutBlockComponent = ({
 	callout,
+	pageId,
 }: {
 	callout: CalloutBlockElementV2;
+	pageId: string;
 }) => {
 	const {
 		title,
@@ -21,7 +23,7 @@ export const CalloutBlockComponent = ({
 	} = callout;
 
 	const isExpired = (date: number | undefined): boolean => {
-		if (date) {
+		if (date !== undefined) {
 			return Math.floor(new Date().getTime() / 1000) > date;
 		}
 		return false;
@@ -55,6 +57,7 @@ export const CalloutBlockComponent = ({
 							isExpired={isExpired(activeUntil)}
 							isNonCollapsible={isNonCollapsible}
 							contacts={contacts}
+							pageId={pageId}
 						/>
 					</ExpandingWrapper>
 				</aside>
@@ -68,6 +71,7 @@ export const CalloutBlockComponent = ({
 					isExpired={isExpired(activeUntil)}
 					isNonCollapsible={isNonCollapsible}
 					contacts={contacts}
+					pageId={pageId}
 				/>
 			)}
 		</>

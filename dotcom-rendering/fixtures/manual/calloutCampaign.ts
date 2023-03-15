@@ -22,6 +22,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			id: '91884886',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'share_your_experiences_here',
@@ -31,6 +32,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			id: '91884874',
 			type: 'textarea',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
@@ -39,6 +41,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			id: '91884877',
 			type: 'file',
 			required: false,
+			hidden: false,
 		},
 		{
 			name: 'can_we_publish_your_response',
@@ -65,6 +68,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			id: '91884878',
 			type: 'radio',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'can_we_publish_your_response',
@@ -91,6 +95,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			id: '918848785',
 			type: 'checkbox',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'do_you_have_anything_else_to_add',
@@ -117,6 +122,7 @@ export const calloutCampaign: CalloutBlockElement = {
 				},
 			],
 			required: false,
+			hidden: false,
 		},
 	],
 };
@@ -143,6 +149,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 			id: '91884886',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'share_your_experiences_here',
@@ -152,6 +159,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 			id: '91884874',
 			type: 'textarea',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
@@ -160,6 +168,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 			id: '91884877',
 			type: 'file',
 			required: false,
+			hidden: false,
 		},
 		{
 			name: 'can_we_publish_your_response',
@@ -178,6 +187,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 			id: '91884878',
 			type: 'radio',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'can_we_publish_your_response',
@@ -204,6 +214,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 			id: '918848785',
 			type: 'checkbox',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'do_you_have_anything_else_to_add',
@@ -230,6 +241,7 @@ export const calloutCampaignOnlyTwoRadio: CalloutBlockElement = {
 				},
 			],
 			required: false,
+			hidden: false,
 		},
 	],
 };

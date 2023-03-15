@@ -85,7 +85,9 @@ if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 // doesn't clear up old listeners.
 if (process.env.NODE_ENV === 'development') {
 	shutdown((e) => {
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Stops undefined from being logged
 		if (e) {
+			// eslint-disable-next-line no-console  -- Seems okay to log this
 			console.log(e);
 		}
 	});

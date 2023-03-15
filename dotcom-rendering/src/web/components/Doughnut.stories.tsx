@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source-foundations';
 import { Doughnut } from './Doughnut';
 
 export default {
@@ -58,6 +59,24 @@ const threeSections = [
 	},
 ];
 
+const identicalColours = [
+	{
+		value: 55,
+		label: 'Orange',
+		color: palette.opinion[400],
+	},
+	{
+		value: 35,
+		label: 'Tangerine',
+		color: palette.opinion[400],
+	},
+	{
+		value: 10,
+		label: 'Mandarin',
+		color: palette.opinion[400],
+	},
+];
+
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -104,6 +123,15 @@ export const Three = () => {
 	);
 };
 Three.story = { name: 'with three sections' };
+
+export const Identical = () => {
+	return (
+		<Wrapper>
+			<Doughnut sections={identicalColours} />
+		</Wrapper>
+	);
+};
+Three.story = { name: 'with three identical colours' };
 
 export const Smaller = () => {
 	return (

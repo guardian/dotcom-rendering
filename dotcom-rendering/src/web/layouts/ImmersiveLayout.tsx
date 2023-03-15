@@ -55,6 +55,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -187,7 +188,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const decideCaption = (mainMedia: ImageBlockElement): string => {
+const decideCaption = (mainMedia: ImageBlockElement | undefined): string => {
 	const caption = [];
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.data?.caption) {
@@ -264,7 +265,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const showComments = article.isCommentable;
 
-	const mainMedia = article.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia =
+		article.mainMediaElements[0] &&
+		article.mainMediaElements[0]._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+			? article.mainMediaElements[0]
+			: undefined;
+
 	const captionText = decideCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } = article.commercialProperties[article.editionId];
@@ -322,7 +329,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 		</div>
 	);
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -393,7 +400,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							article.starRating
+							article.starRating !== undefined
 								? article.starRating
 								: undefined
 						}
@@ -455,8 +462,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 											article.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											!!article.starRating ||
-											article.starRating === 0
+											article.starRating !== undefined
 										}
 									/>
 								</Section>

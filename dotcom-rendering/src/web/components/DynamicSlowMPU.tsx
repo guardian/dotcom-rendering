@@ -5,6 +5,7 @@ import type {
 	DCRGroupedTrails,
 } from '../../types/front';
 import {
+	Card25Media25SmallHeadline,
 	Card33Media33,
 	CardDefault,
 	CardDefaultMediaMobile,
@@ -24,6 +25,8 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
+	renderAds: boolean;
+	trails: DCRFrontCard[];
 };
 
 /* .___________.___________.___________.
@@ -74,7 +77,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 					))}
 				</UL>
 			</LI>
-			<LI percentage="33.333%">
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>
@@ -116,7 +119,7 @@ const ColumnOfThree50_Ad50 = ({
 					))}
 				</UL>
 			</LI>
-			<LI percentage="50%">
+			<LI percentage="50%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>
@@ -125,26 +128,19 @@ const ColumnOfThree50_Ad50 = ({
 	);
 };
 
-/**
- * DynamicSlowMPU
- *
- * This container only allows big and standard cards (from groupedTrails)
- *
- * Layout is dynamic deopending on the number of big cards. You're only
- * allowed to have 2 or 3 big cards. If you pass 1 a standard card will
- * get promoted to make two bigs. If you pass more than 3 bigs then the
- * extras will get demoted to standard.
- *
- * If you pass no bigs at all the top slice will not render and a special
- * 3 column layout is used for the remaining slice.
- *
- */
-export const DynamicSlowMPU = ({
+type MPUProps = {
+	groupedTrails: DCRGroupedTrails;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	index: number;
+};
+
+const MPUSlice = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
 	index,
-}: Props) => {
+}: MPUProps) => {
 	let layout:
 		| 'noBigs'
 		| 'twoBigs'
@@ -276,4 +272,72 @@ export const DynamicSlowMPU = ({
 			);
 		}
 	}
+};
+
+type NonMPUProps = {
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	trails: DCRFrontCard[];
+};
+
+const NonMPUSlice = ({ trails, containerPalette, showAge }: NonMPUProps) => {
+	return (
+		<UL direction="row" padBottom={true}>
+			{trails.slice(0, 4).map((card, cardIndex) => {
+				return (
+					<LI
+						padSides={true}
+						percentage="25%"
+						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
+						key={card.url}
+					>
+						<Card25Media25SmallHeadline
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+						/>
+					</LI>
+				);
+			})}
+		</UL>
+	);
+};
+
+/**
+ * DynamicSlowMPU
+ *
+ * This container only allows big and standard cards (from groupedTrails)
+ *
+ * Layout is dynamic deopending on the number of big cards. You're only
+ * allowed to have 2 or 3 big cards. If you pass 1 a standard card will
+ * get promoted to make two bigs. If you pass more than 3 bigs then the
+ * extras will get demoted to standard.
+ *
+ * If you pass no bigs at all the top slice will not render and a special
+ * 3 column layout is used for the remaining slice.
+ *
+ */
+export const DynamicSlowMPU = ({
+	groupedTrails,
+	containerPalette,
+	showAge,
+	index,
+	renderAds,
+	trails,
+}: Props) => {
+	return renderAds ? (
+		<MPUSlice
+			groupedTrails={groupedTrails}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			index={index}
+		/>
+	) : (
+		<NonMPUSlice
+			trails={trails}
+			containerPalette={containerPalette}
+			showAge={showAge}
+		/>
+	);
 };

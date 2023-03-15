@@ -22,7 +22,7 @@ function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceArticleType = (body: unknown): FEArticleType => {
+export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const data = validateAsArticleType(body);
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {

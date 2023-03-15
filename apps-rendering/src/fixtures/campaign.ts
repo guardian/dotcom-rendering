@@ -19,6 +19,7 @@ const mockCampaign = {
 				description: 'Or your nickname',
 				type: 'text',
 				mandatory: true,
+				hidden: false,
 				options: [],
 			},
 			{
@@ -27,6 +28,7 @@ const mockCampaign = {
 				name: 'phone',
 				type: 'phone',
 				mandatory: false,
+				hidden: false,
 				options: [],
 			},
 			{
@@ -35,6 +37,7 @@ const mockCampaign = {
 				name: 'email',
 				type: 'email',
 				mandatory: false,
+				hidden: false,
 				options: [],
 			},
 			{
@@ -44,6 +47,7 @@ const mockCampaign = {
 				description: 'Include as much detail as possible.',
 				type: 'textarea',
 				mandatory: true,
+				hidden: false,
 				options: [],
 			},
 			{
@@ -52,6 +56,7 @@ const mockCampaign = {
 				name: 'if_you_are_happy_to_please_upload_a_photo_of_yourself',
 				type: 'file',
 				mandatory: false,
+				hidden: false,
 				options: [],
 			},
 			{
@@ -60,6 +65,7 @@ const mockCampaign = {
 				name: 'can_we_publish_your_response',
 				type: 'select',
 				mandatory: true,
+				hidden: false,
 				options: [
 					{
 						label: 'Yes, entirely',
@@ -86,6 +92,7 @@ const mockCampaign = {
 				description: 'say yes',
 				type: 'radio',
 				mandatory: true,
+				hidden: false,
 				options: [
 					{
 						label: 'Yes',
@@ -103,6 +110,7 @@ const mockCampaign = {
 				name: 'liked_colours',
 				type: 'checkbox',
 				mandatory: true,
+				hidden: false,
 				options: [
 					{
 						label: 'Blue',

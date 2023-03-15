@@ -15,6 +15,14 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
+	renderAds: boolean;
+};
+
+type MPUSliceProps = {
+	trails: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	index: number;
 };
 
 /* .___________.___________.___________.
@@ -66,6 +74,71 @@ const Card33_Card33_Card33 = ({
 };
 
 /**
+ * Slice with ad slot
+ *
+ *  ┌───────┬───────┬───────┐
+    │       │       │       │
+    ├───────┼───────┤       │
+    │       │       │  MPU  │
+    ├───────┴───────┤       │
+    │               │       │
+    └───────────────┴───────┘
+ */
+const ThreeColumnSliceWithAdSlot = ({
+	trails,
+	containerPalette,
+	showAge,
+	index,
+}: MPUSliceProps) => {
+	return (
+		<UL direction="row">
+			<LI percentage="66.666%">
+				{/*
+				 *	This pattern of using wrapCards on the UL + percentage=50 and stretch=true
+				 * on the LI creates a dynamic list of cards over two columns. Crucially,
+				 * cards align horizontally in rows. If the number of trails is odd the last
+				 * card stretches full width.
+				 *
+				 * E.g:
+				 * .___________.___________.
+				 * |___________|___________|
+				 * |___________|___________|
+				 * |_______________________|
+				 */}
+				<UL direction="row" wrapCards={true}>
+					{trails.map((trail, trailIndex, { length }) => (
+						<LI
+							padSides={true}
+							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+								trailIndex,
+								length - (length % 2),
+								2,
+							)}
+							showDivider={trailIndex % 2 !== 0}
+							containerPalette={containerPalette}
+							percentage="50%"
+							stretch={true}
+							key={trail.url}
+						>
+							<CardDefault
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+							/>
+						</LI>
+					))}
+				</UL>
+			</LI>
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	);
+};
+
+/**
  * FixedMediumSlowXIIMPU
  *
  */
@@ -74,6 +147,7 @@ export const FixedMediumSlowXIIMPU = ({
 	containerPalette,
 	showAge,
 	index,
+	renderAds,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 9);
@@ -85,50 +159,42 @@ export const FixedMediumSlowXIIMPU = ({
 				showAge={showAge}
 				padBottom={true}
 			/>
-			<UL direction="row">
-				<LI percentage="66.666%">
-					{/*
-					 *	This pattern of using wrapCards on the UL + percentage=50 and stretch=true
-					 * on the LI creates a dynamic list of cards over two columns. Crucially,
-					 * cards align horizontally in rows. If the number of trails is odd the last
-					 * card stretches full width.
-					 *
-					 * E.g:
-					 * .___________.___________.
-					 * |___________|___________|
-					 * |___________|___________|
-					 * |_______________________|
-					 */}
-					<UL direction="row" wrapCards={true}>
-						{remaining.map((trail, trailIndex, { length }) => (
-							<LI
-								padSides={true}
-								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-									trailIndex,
-									length - (length % 2),
-									2,
-								)}
-								showDivider={trailIndex % 2 !== 0}
+			{renderAds ? (
+				<ThreeColumnSliceWithAdSlot
+					trails={remaining}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					index={index}
+				/>
+			) : (
+				/**
+				 * If `renderAds` is false then we should just render a
+				 * wrapping three-column layout instead.
+				 */
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((trail, trailIndex) => (
+						<LI
+							padSides={true}
+							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+								trailIndex,
+								remaining.length - (remaining.length % 3),
+								3,
+							)}
+							showDivider={trailIndex % 3 !== 0}
+							containerPalette={containerPalette}
+							percentage="33.333%"
+							stretch={true}
+							key={trail.url}
+						>
+							<CardDefault
+								trail={trail}
 								containerPalette={containerPalette}
-								percentage="50%"
-								stretch={true}
-								key={trail.url}
-							>
-								<CardDefault
-									trail={trail}
-									containerPalette={containerPalette}
-									showAge={showAge}
-								/>
-							</LI>
-						))}
-					</UL>
-				</LI>
-				<LI percentage="33.333%" showDivider={true}>
-					<Hide until="tablet">
-						<AdSlot position="inline" index={index} />
-					</Hide>
-				</LI>
-			</UL>
+								showAge={showAge}
+							/>
+						</LI>
+					))}
+				</UL>
+			)}
 		</>
 	);
 };

@@ -30,9 +30,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      # Cache npm dependencies using https://github.com/bahmutov/npm-install
       # Root yarn installs all workspaces (root, dotcom)
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --frozen-lockfile
 
       - name: Chromatic - DCR Non Dependency PR / main
         uses: chromaui/action@v1

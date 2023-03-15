@@ -61,6 +61,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -282,10 +283,12 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType' && article.matchUrl;
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType' && article.matchUrl;
+		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const showTopicFilterBank =
 		!!article.config.switches.automaticFilters &&
@@ -294,7 +297,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const hasKeyEvents = !!article.keyEvents.length;
 	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -485,8 +488,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 										/>
 									)}
 								</div>
-								{article.starRating ||
-								article.starRating === 0 ? (
+								{article.starRating !== undefined ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
@@ -516,7 +518,8 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{!!article.blocks[0]?.blockLastUpdated && (
+								{article.blocks[0]?.blockLastUpdated !==
+									undefined && (
 									<ArticleLastUpdated
 										format={format}
 										lastUpdated={

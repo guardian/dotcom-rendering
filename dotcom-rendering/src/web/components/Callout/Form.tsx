@@ -39,10 +39,10 @@ const formStyles = css`
 	justify-content: space-between;
 `;
 
-const formFieldWrapperStyles = css`
+const formFieldWrapperStyles = (hidden: boolean) => css`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: ${space[4]}px;
+	margin-bottom: ${hidden ? 0 : space[4]}px;
 `;
 const submitButtonStyles = css`
 	margin: 20px 0px;
@@ -63,9 +63,15 @@ type FormProps = {
 	formFields: CampaignFieldType[];
 	submissionURL: string;
 	formID: string;
+	pageId: string;
 };
 
-export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
+export const Form = ({
+	formFields,
+	submissionURL,
+	formID,
+	pageId,
+}: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -128,6 +134,14 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 		return Object.keys(errors).length === 0;
 	};
 
+	const cleanFormData = (data: undefined | string | string[]) => {
+		if (Array.isArray(data)) {
+			return data.join('\n');
+		}
+
+		return data;
+	};
+
 	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
@@ -139,7 +153,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
 				...acc,
-				[`field_${cur}`]: form[cur],
+				[`field_${cur}`]: cleanFormData(form[cur]),
 			}),
 			{},
 		);
@@ -230,16 +244,22 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						`}
 					/>
 				)}
-				{formFields.map((formField) => (
-					<div css={formFieldWrapperStyles} key={formField.id}>
-						<FormField
-							formField={formField}
-							formData={formData}
-							setFieldInFormData={setFieldInFormData}
-							validationErrors={validationErrors}
-						/>
-					</div>
-				))}
+				{formFields.map((formField) => {
+					return (
+						<div
+							css={formFieldWrapperStyles(formField.hidden)}
+							key={formField.id}
+						>
+							<FormField
+								formField={formField}
+								formData={formData}
+								setFieldInFormData={setFieldInFormData}
+								validationErrors={validationErrors}
+								pageId={pageId}
+							/>
+						</div>
+					);
+				})}
 				<div css={textStyles}>
 					One of our journalists will be in contact before we publish
 					your information, so please do leave contact details.

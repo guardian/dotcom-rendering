@@ -48,7 +48,9 @@ import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
@@ -241,7 +243,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -414,7 +416,12 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout" id="maincontent">
+			<main
+				data-layout="ShowcaseLayout"
+				id="maincontent"
+				lang={decideLanguage(article.lang)}
+				dir={decideLanguageDirection(article.isRightToLeftLang)}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -431,7 +438,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									starRating={
 										format.design ===
 											ArticleDesign.Review &&
-										article.starRating
+										article.starRating !== undefined
 											? article.starRating
 											: undefined
 									}
@@ -469,7 +476,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 										article.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										typeof article.starRating === 'number'
+										article.starRating !== undefined
 									}
 								/>
 							</PositionHeadline>

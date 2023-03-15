@@ -34,6 +34,8 @@ const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
 	dcrJavascriptBundle('Variant'),
 	dcrJavascriptBundle('Control'),
 	'dcrFrontsVariant',
+	'serverSideLiveblogInlineAdsVariant',
+	'serverSideLiveblogInlineAdsControl',
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {

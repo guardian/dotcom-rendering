@@ -13,6 +13,7 @@ import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
+import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -24,6 +25,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { canRenderAds } from '../lib/canRenderAds';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -171,9 +173,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !front.isAdFreeUser;
+	const renderAds = canRenderAds(front);
 
-	const mobileAdPositions = front.isNetworkFront
+	const mobileAdPositions = renderAds
 		? getMobileAdPositions(
 				front.isNetworkFront,
 				front.pressedPage.collections,
@@ -372,12 +374,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<>
-							<Section
+							<FrontSection
 								key={ophanName}
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								padContent={false}
 								centralBorder="partial"
 								url={collection.href}
 								ophanComponentLink={ophanComponentLink}
@@ -407,6 +408,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									renderAds={renderAds}
 								/>
 								{collection.canShowMore && (
 									<Island deferUntil="interaction">
@@ -414,7 +416,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											containerTitle={
 												collection.displayName
 											}
-											containerId={ophanName}
+											collectionId={collection.id}
+											containerElementId={ophanName}
 											path={front.pressedPage.id}
 											baseUrl={front.config.ajaxUrl}
 											containerPalette={
@@ -427,15 +430,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										/>
 									</Island>
 								)}
-							</Section>
-							{decideAdSlot(
-								index,
-								front.isNetworkFront,
-								front.pressedPage.collections.length,
-								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
-								mobileAdPositions,
-							)}
+							</FrontSection>
+							{renderAds &&
+								decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
 						</>
 					);
 				})}
