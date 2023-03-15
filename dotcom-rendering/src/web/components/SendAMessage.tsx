@@ -68,7 +68,14 @@ const formFieldWrapperStyles = css`
 `;
 
 const submitButtonStyles = css`
+	${until.phablet} {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 	${until.desktop} {
+		align-self: flex-start;
 		background-color: white;
 		color: black;
 	}
@@ -79,6 +86,9 @@ const submitButtonStyles = css`
 const footerPaddingStyles = css`
 	display: flex;
 	flex-direction: row;
+	${until.desktop} {
+		justify-content: flex-start;
+	}
 	justify-content: space-around;
 	padding-bottom: ${space[4]}px;
 `;
