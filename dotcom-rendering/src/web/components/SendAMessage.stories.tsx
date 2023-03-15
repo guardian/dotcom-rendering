@@ -2,6 +2,7 @@ import { SendAMessage } from './SendAMessage';
 import { Section } from './Section';
 import { MessageForm } from '../../../fixtures/manual/message-us-form';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
+
 export default {
 	component: SendAMessage,
 	title: 'Components/MessageUs',

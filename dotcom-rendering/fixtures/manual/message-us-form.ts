@@ -1,4 +1,4 @@
-import { CampaignFieldType } from 'src/types/content';
+import { CampaignFieldType } from '../../src/types/content';
 
 type MessageForm = {
 	articleID: string;

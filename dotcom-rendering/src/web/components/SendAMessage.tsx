@@ -16,7 +16,7 @@ import {
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CampaignFieldType } from 'src/types/content';
+import type { CampaignFieldType } from '../../../src/types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { FormField } from './Callout/FormField';
 
