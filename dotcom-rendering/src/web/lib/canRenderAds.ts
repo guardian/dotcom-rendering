@@ -9,7 +9,7 @@ export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
 	if (process.env.LHCI_BUILD_CONTEXT__CURRENT_HASH) {
-		return true;
+		console.log("lightHouseBuild: can't render ads");
 	}
 
 	if (pageData.isAdFreeUser) {
@@ -21,9 +21,9 @@ export const canRenderAds = (
 		return false;
 	}
 
-	if (pageData.config.abTests.poorDeviceConnectivityVariant === 'variant') {
-		return false;
-	}
+	// if (pageData.config.abTests.poorDeviceConnectivityVariant === 'variant') {
+	// 	return false;
+	// }
 
 	return true;
 };
