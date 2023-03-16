@@ -8,6 +8,10 @@ import type { FEArticleType } from '../../types/frontend';
 export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
+	if (process.env.GITHUB_ACTIONS) {
+		return false;
+	}
+
 	if (pageData.isAdFreeUser) {
 		return false;
 	}
