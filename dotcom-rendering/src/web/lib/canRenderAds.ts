@@ -10,7 +10,7 @@ export const canRenderAds = (
 ): boolean => {
 
 	if (pageData.isAdFreeUser) {
-		return false;
+		return true;
 	}
 
 	// DCRFrontType doesn't have a shouldHideAds property
