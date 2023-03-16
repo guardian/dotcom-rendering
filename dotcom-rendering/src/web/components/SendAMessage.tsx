@@ -191,7 +191,7 @@ export const Form = ({
 		return fetch(submissionURL, {
 			method: 'POST',
 			body: JSON.stringify({
-				formId: formId,
+				formId,
 				...formDataWithFieldPrefix,
 			}),
 			headers: {
