@@ -8,9 +8,6 @@ import type { FEArticleType } from '../../types/frontend';
 export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
-	if (process.env.LHCI_BUILD_CONTEXT__CURRENT_HASH) {
-		console.log("lightHouseBuild: can't render ads");
-	}
 
 	if (pageData.isAdFreeUser) {
 		return false;
@@ -21,9 +18,9 @@ export const canRenderAds = (
 		return false;
 	}
 
-	// if (pageData.config.abTests.poorDeviceConnectivityVariant === 'variant') {
-	// 	return false;
-	// }
+	if (pageData.config.abTests.poorDeviceConnectivityVariant === 'variant') {
+		return false;
+	}
 
-	return true;
+	return false;
 };
