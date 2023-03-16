@@ -1111,6 +1111,34 @@ const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	}
 };
 
+const specialReportAltButton = (_format: ArticleFormat): Colour =>
+	palette.specialReportAlt[200];
+
+const specialReportAltButtonDark = ({ design, theme }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Review:
+		case ArticleDesign.Explainer:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Interactive:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.FullPageInteractive:
+		case ArticleDesign.NewsletterSignup:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			switch (theme) {
+				case ArticleSpecial.SpecialReportAlt:
+					return palette.specialReportAlt[100];
+				default:
+					return neutral[10];
+			}
+		default:
+			return neutral[10];
+	}
+}
+
 // ----- API ----- //
 
 const background = {
@@ -1160,6 +1188,8 @@ const background = {
 	articleContent,
 	newsletterSignUpFormDark,
 	editionsCameraIcon,
+	specialReportAltButton,
+	specialReportAltButtonDark,
 };
 
 // ----- Exports ----- //

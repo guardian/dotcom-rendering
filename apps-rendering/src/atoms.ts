@@ -28,6 +28,10 @@ function parseAtom(
 
 	const id = element.contentAtomTypeData.atomId;
 
+	if (id === 'SpecialReportAltAtom') {
+		return Result.ok({ kind: ElementKind.SpecialReportAltAtom });
+	}
+
 	switch (element.contentAtomTypeData.atomType) {
 		case 'interactive': {
 			const atom = atoms.interactives?.find(

@@ -139,6 +139,10 @@ type Callout = {
 	contacts?: Contact[];
 };
 
+type SpecialReportAltAtom = {
+	kind: ElementKind.SpecialReportAltAtom;
+}
+
 type BodyElement =
 	| Text
 	| HeadingTwo
@@ -184,7 +188,8 @@ type BodyElement =
 	| AudioAtom
 	| KnowledgeQuizAtom
 	| PersonalityQuizAtom
-	| NewsletterSignUp;
+	| NewsletterSignUp
+	| SpecialReportAltAtom;
 
 type Elements = BlockElement[] | undefined;
 
