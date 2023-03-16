@@ -12,6 +12,7 @@ import {
 	Button,
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
+	SvgMessageRound,
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
@@ -19,6 +20,9 @@ import { useState } from 'react';
 import type { MessageUsFieldType } from '../../../src/types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { FormField } from './Callout/FormField';
+
+const CALLOUT_URL =
+	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
 const containerStyles = (format: ArticleFormat) => css`
 	${until.desktop} {
@@ -101,13 +105,16 @@ const prefaceStyles = css`
 
 type FormDataType = { [key in string]: any };
 
-type FormProps = {
+type Props = {
 	formFields: MessageUsFieldType[];
-	submissionURL: string;
 	formId: string;
 	format: ArticleFormat;
 	pageId: string;
 };
+
+interface FormProps extends Props {
+	submissionURL: string;
+}
 
 export const Form = ({
 	formFields,
@@ -349,8 +356,11 @@ const summaryStyles = css`
 			fill: white;
 		}
 	}
-	svg {
-		height: 12px;
+	.is-open,
+	.is-closed {
+		svg {
+			height: 12px;
+		}
 	}
 	${textSans.small({ fontWeight: 'bold' })};
 	display: flex;
@@ -361,36 +371,11 @@ const summaryStyles = css`
 	}
 `;
 
-const popOutStyles = css`
-	height: 18px;
-	width: 18px;
-	${until.desktop} {
-		background-color: white;
-	}
-	background-color: black;
-	border-radius: 9px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 4px;
-	svg {
-		height: 8px;
-	}
-`;
-
-export const SendAMessage = ({
-	formFields,
-	submissionURL,
-	formId,
-	format,
-	pageId,
-}: FormProps) => {
+export const SendAMessage = ({ formFields, formId, format, pageId }: Props) => {
 	return (
 		<details css={detailsStyles}>
 			<summary css={summaryStyles}>
-				<div css={popOutStyles}>
-					{/* needs svg importing to source */}
-				</div>
+				<SvgMessageRound size="medium" />
 				Send us a message
 				<span className="is-open">
 					<SvgChevronUpSingle size="xsmall" />
@@ -401,7 +386,7 @@ export const SendAMessage = ({
 			</summary>
 			<Form
 				formFields={formFields}
-				submissionURL={submissionURL}
+				submissionURL={CALLOUT_URL}
 				formId={formId}
 				format={format}
 				pageId={pageId}

@@ -380,7 +380,6 @@ export const ArticleMeta = ({
 							{messageUs && (
 								<SendAMessage
 									formFields={messageUs.formFields}
-									submissionURL={''}
 									formId={messageUs.formId}
 									format={format}
 									pageId={pageId}
