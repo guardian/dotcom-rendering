@@ -22,8 +22,10 @@ export const Default = () => {
 		<Section>
 			<SendAMessage
 				formFields={MessageForm.formFields}
-				submissionURL={MessageForm.submissionURL}
-				formID={MessageForm.formID}
+				submissionURL={
+					'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit'
+				}
+				formId={MessageForm.formId}
 				format={defaultFormat}
 			/>
 		</Section>

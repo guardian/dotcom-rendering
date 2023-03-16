@@ -1,30 +1,15 @@
-import { CampaignFieldType } from '../../src/types/content';
-
-type MessageForm = {
-	articleID: string;
-	formID: string;
-	submissionURL: string;
-	formFields: CampaignFieldType[];
-};
-
-export const MessageForm: MessageForm = {
-	articleID: 'article1234',
-	formID: 'form1234',
-	submissionURL:
-		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
-
+export const MessageForm: MessageUs = {
+	formId: 'form1234',
 	formFields: [
 		{
-			name: 'your_message',
-			hideLabel: false,
-			label: 'Your message',
 			id: 'message',
-			type: 'textarea',
+			label: 'Your message',
+			name: 'your_message',
 			required: true,
+			type: 'textarea',
 		},
 		{
 			name: 'your_name',
-			hideLabel: false,
 			label: 'Your name',
 			id: 'name',
 			type: 'text',
@@ -32,7 +17,6 @@ export const MessageForm: MessageForm = {
 		},
 		{
 			name: 'your_email',
-			hideLabel: false,
 			label: 'Your e-mail',
 			id: 'email',
 			type: 'text',

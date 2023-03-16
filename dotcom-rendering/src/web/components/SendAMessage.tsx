@@ -102,16 +102,16 @@ const prefaceStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormProps = {
-	formFields: CampaignFieldType[];
+	formFields: MessageUsField[];
 	submissionURL: string;
-	formID: string;
+	formId: string;
 	format: ArticleFormat;
 };
 
 export const Form = ({
 	formFields,
 	submissionURL,
-	formID,
+	formId,
 	format,
 }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
@@ -140,18 +140,12 @@ export const Form = ({
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
 		let isValid = true;
-		formFields.forEach((field: CampaignFieldType) => {
+		formFields.forEach((field: MessageUsField) => {
 			if (field.required && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
 				isValid = false;
 			}
-			if (field.type === 'select' && field.required) {
-				if (formData[field.id] === 'Please choose an option') {
-					errors[field.id] =
-						'Please choose an option from the dropdown menu';
-				}
-			}
-			if (field.id === 'email' && formData[field.id]) {
+			if (field.type === 'email' && formData[field.id]) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (!emailRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid email address';
@@ -169,6 +163,7 @@ export const Form = ({
 					errors[field.id] = 'Please include your dialling/area code';
 					isValid = false;
 				}
+				// should we have checks here for min length and max length?
 			}
 			return isValid;
 		});
@@ -194,7 +189,7 @@ export const Form = ({
 		return fetch(submissionURL, {
 			method: 'POST',
 			body: JSON.stringify({
-				formId: formID,
+				formId: formId,
 				...formDataWithFieldPrefix,
 			}),
 			headers: {
@@ -383,7 +378,7 @@ const popOutStyles = css`
 export const SendAMessage = ({
 	formFields,
 	submissionURL,
-	formID,
+	formId,
 	format,
 }: FormProps) => {
 	return (
@@ -403,7 +398,7 @@ export const SendAMessage = ({
 			<Form
 				formFields={formFields}
 				submissionURL={submissionURL}
-				formID={formID}
+				formId={formId}
 				format={format}
 			/>
 		</details>
