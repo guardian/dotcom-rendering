@@ -247,7 +247,7 @@ export const Form = ({
 				{formFields.map((formField) => {
 					return (
 						<div
-							css={formFieldWrapperStyles(formField.hidden)}
+							css={formFieldWrapperStyles(!!formField.hidden)}
 							key={formField.id}
 						>
 							<FormField

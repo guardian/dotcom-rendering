@@ -16,7 +16,7 @@ import {
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CampaignFieldType } from '../../../src/types/content';
+import type { MessageUsFieldType } from '../../../src/types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { FormField } from './Callout/FormField';
 
@@ -102,10 +102,11 @@ const prefaceStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormProps = {
-	formFields: MessageUsField[];
+	formFields: MessageUsFieldType[];
 	submissionURL: string;
 	formId: string;
 	format: ArticleFormat;
+	pageId: string;
 };
 
 export const Form = ({
@@ -113,6 +114,7 @@ export const Form = ({
 	submissionURL,
 	formId,
 	format,
+	pageId,
 }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
@@ -140,7 +142,7 @@ export const Form = ({
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
 		let isValid = true;
-		formFields.forEach((field: MessageUsField) => {
+		formFields.forEach((field: MessageUsFieldType) => {
 			if (field.required && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
 				isValid = false;
@@ -277,6 +279,7 @@ export const Form = ({
 							formData={formData}
 							setFieldInFormData={setFieldInFormData}
 							validationErrors={validationErrors}
+							pageId={pageId}
 						/>
 					</div>
 				))}
@@ -380,6 +383,7 @@ export const SendAMessage = ({
 	submissionURL,
 	formId,
 	format,
+	pageId,
 }: FormProps) => {
 	return (
 		<details css={detailsStyles}>
@@ -400,6 +404,7 @@ export const SendAMessage = ({
 				submissionURL={submissionURL}
 				formId={formId}
 				format={format}
+				pageId={pageId}
 			/>
 		</details>
 	);

@@ -16,7 +16,7 @@ type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	validationErrors: { [key in string]: string };
-	formField: CampaignFieldType;
+	formField: CampaignFieldType | MessageUsFieldType;
 	formData: FormDataType;
 	pageId: string;
 	setFieldInFormData: (

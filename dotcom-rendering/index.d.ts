@@ -1,6 +1,8 @@
+// import { CampaignFieldText, CampaignFieldTextArea } from './src/types/content';
 // ------------------------  //
 // Frontend format types     //
 // ------------------------- //
+
 
 // Pillars are used for styling
 // RealPillars have pillar palette colours
@@ -420,19 +422,11 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
-interface MessageUsField {
-	id: string;
-	label: string;
-	name: string;
-	required: boolean;
-	type: 'text' | 'email' | 'textarea';
-	minLength?: number;
-	maxLength?: number;
-}
+type MessageUsFieldType = import('./src/types/content').CampaignFieldText |   import('./src/types/content').CampaignFieldTextArea;
 
 interface MessageUs {
 	formId: string;
-	formFields: MessageUsField[];
+	formFields: MessageUsFieldType[];
 }
 
 interface GADataType {

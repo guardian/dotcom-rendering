@@ -9,7 +9,6 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { MessageForm } from '../../../fixtures/manual/message-us-form';
 import { getSoleContributor } from '../../lib/byline';
 import type { Branding as BrandingType } from '../../types/branding';
 import type { Palette } from '../../types/palette';
@@ -41,6 +40,7 @@ type Props = {
 	isCommentable: boolean;
 	ajaxUrl: string;
 	showShareCount: boolean;
+	messageUs?: MessageUs;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -312,6 +312,7 @@ export const ArticleMeta = ({
 	isCommentable,
 	ajaxUrl,
 	showShareCount,
+	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -376,12 +377,15 @@ export const ArticleMeta = ({
 									format={format}
 								/>
 							)}
-							<SendAMessage
-								formFields={MessageForm.formFields}
-								submissionURL={MessageForm.submissionURL}
-								formID={MessageForm.formID}
-								format={format}
-							/>
+							{messageUs && (
+								<SendAMessage
+									formFields={messageUs.formFields}
+									submissionURL={''}
+									formId={messageUs.formId}
+									format={format}
+									pageId={pageId}
+								/>
+							)}
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}

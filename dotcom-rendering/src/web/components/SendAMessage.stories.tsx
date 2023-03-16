@@ -27,6 +27,7 @@ export const Default = () => {
 				}
 				formId={MessageForm.formId}
 				format={defaultFormat}
+				pageId=""
 			/>
 		</Section>
 	);
