@@ -8,9 +8,8 @@ import type { FEArticleType } from '../../types/frontend';
 export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
-
 	if (pageData.isAdFreeUser) {
-		return true;
+		return false;
 	}
 
 	// DCRFrontType doesn't have a shouldHideAds property
