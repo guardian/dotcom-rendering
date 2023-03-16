@@ -44,11 +44,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -808,6 +808,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>

@@ -45,10 +45,10 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { canRenderAds } from '../lib/canRenderAds';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
 	interactiveGlobalStyles,
@@ -707,6 +707,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>
