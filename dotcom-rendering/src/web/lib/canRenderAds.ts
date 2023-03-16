@@ -8,7 +8,7 @@ import type { FEArticleType } from '../../types/frontend';
 export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
-	if (process.env.GITHUB_ACTIONS) {
+	if (process.env.LHCI_BUILD_CONTEXT__CURRENT_HASH) {
 		return false;
 	}
 
