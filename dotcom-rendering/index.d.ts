@@ -1,8 +1,6 @@
-// import { CampaignFieldText, CampaignFieldTextArea } from './src/types/content';
 // ------------------------  //
 // Frontend format types     //
 // ------------------------- //
-
 
 // Pillars are used for styling
 // RealPillars have pillar palette colours
