@@ -735,7 +735,7 @@ const renderElement =
 					element,
 					skipLinkIdSuffix: key.toString(),
 				});
-			
+
 			case ElementKind.SpecialReportAltAtom:
 				return h(SpecialReportAltAtom, { format });
 		}

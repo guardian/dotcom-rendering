@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { FC } from 'react';
 import { body } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
