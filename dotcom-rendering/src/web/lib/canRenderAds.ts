@@ -9,7 +9,7 @@ export const canRenderAds = (
 	pageData: FEArticleType | DCRFrontType,
 ): boolean => {
 	if (process.env.LHCI_BUILD_CONTEXT__CURRENT_HASH) {
-		return false;
+		return true;
 	}
 
 	if (pageData.isAdFreeUser) {
