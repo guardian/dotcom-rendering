@@ -892,8 +892,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -909,6 +907,12 @@
                     "enum": [
                         "textarea"
                     ]
+                },
+                "minlength": {
+                    "type": "string"
+                },
+                "maxlength": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -936,8 +940,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -980,8 +982,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1042,8 +1042,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1105,8 +1103,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1168,8 +1164,6 @@
                 }
             },
             "required": [
-                "hidden",
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -4812,51 +4806,20 @@
                 "formFields": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/MessageUsField"
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            }
+                        ]
                     }
                 }
             },
             "required": [
                 "formFields",
                 "formId"
-            ]
-        },
-        "MessageUsField": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "label": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "required": {
-                    "type": "boolean"
-                },
-                "type": {
-                    "enum": [
-                        "email",
-                        "text",
-                        "textarea"
-                    ],
-                    "type": "string"
-                },
-                "minLength": {
-                    "type": "number"
-                },
-                "maxLength": {
-                    "type": "number"
-                }
-            },
-            "required": [
-                "id",
-                "label",
-                "name",
-                "required",
-                "type"
             ]
         },
         "TableOfContentsItem": {
