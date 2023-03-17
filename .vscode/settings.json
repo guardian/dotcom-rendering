@@ -22,6 +22,7 @@
 	],
 	"git.branchProtection": ["main"],
 	"javascript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifier": "relative",
 	"yaml.customTags": [
 		"!Base64 scalar",
 		"!Cidr scalar",
