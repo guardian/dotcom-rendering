@@ -160,7 +160,7 @@
 			<h1>DCR Development Server</h1>
 			<div class="data-source-selector">
 				<span>Data Source</span>
-				<select name="data-source" id="data-source">
+				<select name="data-source-selector" id="data-source-selector">
 					<option value="prod">Production</option>
 					<option value="code">Code</option>
 					<option value="local-fe">Local Frontend</option>
@@ -240,6 +240,7 @@
 							<span class="platform"
 								><a
 									href="/Article/web/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									data-source-switchable
 									>Web</a
 								></span
 							>
@@ -247,6 +248,7 @@
 							<span class="platform"
 								><a
 									href="/Article/apps/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									data-source-switchable
 									>Apps</a
 								></span
 							>
@@ -254,6 +256,7 @@
 							<span class="platform"
 								><a
 									href="/Article/amp/https://amp.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+									data-source-switchable
 									>AMP</a
 								></span
 							>
@@ -270,6 +273,7 @@
 							<span class="platform"
 								><a
 									href="/Interactive/web/https://www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+									data-source-switchable
 									>Web</a
 								></span
 							>
@@ -277,6 +281,7 @@
 							<span class="platform"
 								><a
 									href="/Interactive/amp/https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
+									data-source-switchable
 									>AMP</a
 								></span
 							>
@@ -293,6 +298,7 @@
 							<span class="platform"
 								><a
 									href="/Front/web/https://www.theguardian.com/international"
+									data-source-switchable
 									>Web</a
 								></span
 							>
@@ -306,14 +312,30 @@
 				</div>
 			</section>
 		</main>
-		<!-- Clipboard management -->
 		<script>
 			const hosts = [
-				{ base: 'https://www.theguardian.com/', name: 'PROD' },
-				{ base: 'https://m.code.dev-theguardian.com/', name: 'CODE' },
-				{ base: 'http://localhost:9000/', name: 'Local FE' },
+				{
+					id: 'prod',
+					name: 'PROD',
+					hostname: 'www.theguardian.com',
+					protocol: 'https:',
+				},
+				{
+					id: 'code',
+					name: 'CODE',
+					hostname: 'm.code.dev-theguardian.com',
+					protocol: 'https:',
+				},
+				{
+					id: 'local-fe',
+					name: 'Local FE',
+					hostname: 'localhost:9000',
+					protocol: 'http',
+				},
 			];
-
+		</script>
+		<!-- Clipboard management -->
+		<script>
 			// Track the URLs we already have added
 			const urls = new Set();
 
@@ -352,7 +374,7 @@
 					${targetsByContentType(contentType)
 						.map(
 							(target) =>
-								`<a href="/${contentType}/${dataSource.toLowerCase()}/${url}" class="platform">${target}</a>`,
+								`<a href="/${contentType}/${target.toLowerCase()}/${url}" class="platform">${target}</a>`,
 						)
 						.join('<span> • </span>')}
 					<span> - ${pathFromUrl(url)}</span>
@@ -366,7 +388,7 @@
 
 				navigator.clipboard.readText().then((text) => {
 					const guHost = hosts.find((host) =>
-						text.startsWith(host.base),
+						text.startsWith(`${host.protocol}//${host.hostname}`),
 					);
 					if (guHost) {
 						if (urls.has(text)) return;
@@ -388,6 +410,52 @@
 			document.addEventListener('visibilitychange', checkClipboard);
 			window.addEventListener('focus', checkClipboard);
 			checkClipboard();
+		</script>
+		<!-- Data source switching -->
+		<script>
+			const updateUrl = (link, dataSource) => {
+				const basePath = link.split('/').slice(0, 5).join('/');
+
+				const guUrl = new URL(
+					decodeURIComponent(link.split('/').slice(5).join('/')),
+				);
+				// Update the URL with the new host & path
+				if (dataSource.id === 'local-fe') {
+					guUrl.hostname = dataSource.hostname.split(':')[0];
+					guUrl.port = dataSource.hostname.split(':')[1];
+					guUrl.protocol = dataSource.protocol;
+				} else {
+					guUrl.hostname = dataSource.hostname;
+					guUrl.protocol = dataSource.protocol;
+				}
+
+				return `${basePath}/${guUrl.toString()}`;
+			};
+
+			const switchDataSources = (dataSource) => {
+				const sources = document.querySelectorAll(
+					'[data-source-switchable]',
+				);
+				sources.forEach((source) => {
+					console.log(source.tagName);
+					if (source.tagName === 'A') {
+						source.href = updateUrl(source.href, dataSource);
+					}
+				});
+			};
+			const onDataSourceChange = (e) => {
+				const dataSource = hosts.find(
+					(host) => host.id === e.target.value,
+				);
+				if (dataSource) {
+					switchDataSources(dataSource);
+				}
+			};
+
+			const selector = document.getElementById('data-source-selector');
+			if (selector) {
+				selector.addEventListener('change', onDataSourceChange);
+			}
 		</script>
 	</body>
 </html>
