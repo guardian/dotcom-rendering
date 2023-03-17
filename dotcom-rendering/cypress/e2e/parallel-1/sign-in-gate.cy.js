@@ -35,7 +35,7 @@ describe('Sign In Gate Tests', function () {
 	const visitArticle = (
 		url = 'https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 	) => {
-		cy.visit(`/Article/${url}`);
+		cy.visit(`/Article/web/${url}`);
 	};
 
 	// as the sign in gate is lazy loaded, we need to scroll to the rough position where it
@@ -135,7 +135,7 @@ describe('Sign In Gate Tests', function () {
 		it('should not load the sign in gate on a device with an ios9 user agent string', function () {
 			// can't use visitArticleAndScrollToGateForLazyLoad for this method as overriding user agent
 			cy.visit(
-				'/Article/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+				'/Article/web/https://www.theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 				{
 					onBeforeLoad: (win) => {
 						Object.defineProperty(win.navigator, 'userAgent', {

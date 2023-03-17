@@ -9,7 +9,7 @@ describe('Commercial E2E tests', function () {
 
 	it(`It should load the expected number of ad slots`, function () {
 		cy.visit(
-			`/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
+			`/Article/web/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
 		);
 
 		cy.scrollTo('bottom', { duration: 500 });

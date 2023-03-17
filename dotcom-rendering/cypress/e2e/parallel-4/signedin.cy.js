@@ -36,7 +36,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`/Article/${articleUrl}`);
+		cy.visit(`/Article/web/${articleUrl}`);
 		cy.wait('@profileMe');
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
@@ -56,7 +56,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`/Article/${articleUrl}`);
+		cy.visit(`/Article/web/${articleUrl}`);
 		cy.wait('@profileMe');
 
 		cy.get('a[data-link-name="nav3 : topbar : printsubs"]')
@@ -77,7 +77,7 @@ describe('Signed in readers', function () {
 	});
 
 	it('should not display signed in texts when users are not signed in', function () {
-		cy.visit(`/Article/${articleUrl}`);
+		cy.visit(`/Article/web/${articleUrl}`);
 		cy.scrollTo('bottom', { duration: 300 });
 		// We need this second call to fix flakiness where content loads in pushing the page
 		// down and preventing the scroll request to actually reach the bottom. We will fix

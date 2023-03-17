@@ -19,7 +19,7 @@ describe('The banner', function () {
 			req.reply({});
 		}).as('rrBannerRequest');
 
-		cy.visit(`/Article/${articleUrl}`);
+		cy.visit(`/Article/web/${articleUrl}`);
 		cy.wait('@rrBannerRequest');
 	});
 });

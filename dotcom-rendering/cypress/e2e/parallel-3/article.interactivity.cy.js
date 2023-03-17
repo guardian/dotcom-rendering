@@ -16,7 +16,7 @@ describe('Interactivity', function () {
 
 	describe('Verify elements have been hydrated', function () {
 		it('should open the edition dropdown menu when clicked and hide when expected', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
 			// Open it
 			cy.get('[data-cy=dropdown-button]').click();
@@ -33,12 +33,12 @@ describe('Interactivity', function () {
 		});
 		// eslint-disable-next-line mocha/no-skipped-tests
 		it.skip('should display the share count for an article', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			cy.get('[data-cy=share-counts]').should('exist');
 		});
 		it('loads the discussion when you click the comment count', function () {
 			cy.visit(
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+				`/Article/web/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
 			);
 			cy.get('[data-cy=comment-counts]').should('exist');
 			// The discusion is not yet loaded
@@ -49,7 +49,7 @@ describe('Interactivity', function () {
 		});
 		it('loads the discussion immediately when you use a url ending in #comments', function () {
 			cy.visit(
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
+				`/Article/web/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
 			cy.get('[data-cy=discussion]').should('exist');
 		});
@@ -57,7 +57,7 @@ describe('Interactivity', function () {
 		it('loads the discussion immediately when you use a permalink', function () {
 			// The permalink feature is not currently working but once it does we want this test ready to go
 			cy.visit(
-				`/Article/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
+				`/Article/web/https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
 			);
 			cy.get('gu-island[name=DiscussionContainer]').should(
 				'have.attr',
@@ -67,13 +67,13 @@ describe('Interactivity', function () {
 			cy.get('[id=comment-154433663]').should('be.visible');
 		});
 		it('loads the most viwed list only after starting to scroll the page', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			cy.get('[data-component=geo-most-popular]').should('not.exist');
 			cy.scrollTo('center', { duration: 300 });
 			cy.get('[data-component=geo-most-popular]').should('exist');
 		});
 		it('should display and hydrate all the rich links for an article', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			// Verify two links were server rendered
 			cy.get('[data-component=rich-link]')
 				.should('exist')
@@ -87,7 +87,7 @@ describe('Interactivity', function () {
 		describe('When most viewed is mocked', function () {
 			beforeEach(mockApi);
 			it('should change the list of most viewed items when a tab is clicked', function () {
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.contains('Lifestyle');
 				// Make sure the most viewed html isn't even in the dom yet
 				cy.get('[data-cy=mostviewed-footer]').should('not.exist');
@@ -112,7 +112,7 @@ describe('Interactivity', function () {
 			});
 		});
 		it('should render the reader revenue links in the header', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			cy.scrollTo('bottom', { duration: 300 });
 			cy.get('header')
 				.contains(READER_REVENUE_TITLE_TEXT)
@@ -122,7 +122,7 @@ describe('Interactivity', function () {
 
 	describe('Navigating the pillar menu', function () {
 		it('should expand and close the desktop pillar menu when More is clicked', function () {
-			cy.visit(`/Article/${articleUrl}`);
+			cy.visit(`/Article/web/${articleUrl}`);
 			cy.get('[data-cy=nav-show-more-button]').click();
 			cy.get('[data-cy=expanded-menu]').within(() => {
 				cy.contains('Columnists').should('be.visible');
@@ -144,7 +144,7 @@ describe('Interactivity', function () {
 		describe('On mobile', function () {
 			it('should expand the mobile pillar menu when the VeggieBurger is clicked', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').click();
 				cy.contains('Crosswords');
 				cy.get('[data-cy=column-collapse-Opinion]').click();
@@ -158,21 +158,21 @@ describe('Interactivity', function () {
 
 			it('should transfer focus to the sub nav when tabbing from the veggie burger without opening the menu', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').focus().tab();
 				cy.get('[data-cy=sub-nav] a').first().should('have.focus');
 			});
 
 			it('should immediately focus on the News menu item when the menu first opens', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').click();
 				cy.get('[data-cy=column-collapse-News]').should('have.focus');
 			});
 
 			it('should transfer focus to sub menu items when tabbing from section header', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').click();
 				cy.focused().type('{enter}').tab();
 				// get the first column (news column)
@@ -186,7 +186,7 @@ describe('Interactivity', function () {
 
 			it('should let reader traverse section titles using keyboard', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				cy.get('[data-cy=veggie-burger]').type('{enter}');
 				// Close the news menu
 				cy.focused().type('{enter}').tab();
@@ -206,7 +206,7 @@ describe('Interactivity', function () {
 
 			it('should expand the subnav when "More" is clicked', function () {
 				cy.viewport('iphone-x');
-				cy.visit(`/Article/${articleUrl}`);
+				cy.visit(`/Article/web/${articleUrl}`);
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.first()

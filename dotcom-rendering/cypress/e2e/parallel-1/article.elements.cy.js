@@ -27,7 +27,7 @@ describe('Elements', function () {
 
 		it('should render the corona interactive atom embed', function () {
 			cy.visit(
-				'/AMPArticle/https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
+				'/Article/amp/https://www.theguardian.com/world/2020/apr/24/new-mother-dies-of-coronavirus-six-days-after-giving-birth',
 			);
 
 			getAmpIframeBody('amp-iframe[data-cy="atom-embed-url"] > iframe', {
@@ -37,7 +37,7 @@ describe('Elements', function () {
 
 		it('should render the counted interactive embed', function () {
 			cy.visit(
-				'/AMPArticle/https://www.theguardian.com/us-news/2015/nov/05/police-tasers-deaths-the-counted',
+				'/Article/amp/https://www.theguardian.com/us-news/2015/nov/05/police-tasers-deaths-the-counted',
 			);
 
 			const ampIframeSelector =
@@ -61,7 +61,7 @@ describe('Elements', function () {
 			let hasElementTooWide = false;
 
 			cy.visit(
-				'/Article/https://www.theguardian.com/politics/2022/jan/21/blackmail-allegations-need-to-be-investigated-says-kwasi-kwarteng',
+				'/Article/web/https://www.theguardian.com/politics/2022/jan/21/blackmail-allegations-need-to-be-investigated-says-kwasi-kwarteng',
 			);
 
 			const pageHasXOverflow = (docWidth) => {
@@ -105,7 +105,7 @@ describe('Elements', function () {
 			};
 
 			cy.visit(
-				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/web/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			cy.scrollTo(0, 4500);
@@ -141,7 +141,7 @@ describe('Elements', function () {
 			};
 
 			cy.visit(
-				'/Article/https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem',
+				'/Article/web/https://www.theguardian.com/sport/2019/nov/15/forget-a-super-bowl-slump-the-la-rams-have-a-jared-goff-problem',
 			);
 
 			getIframeBody().contains('The Rams’ dead cap numbers for 2020');
@@ -174,7 +174,7 @@ describe('Elements', function () {
 			};
 
 			cy.visit(
-				'/Article/https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania',
+				'/Article/web/https://www.theguardian.com/us-news/2017/jan/17/donald-trump-america-great-again-northampton-county-pennsylvania',
 			);
 			getIframeBody().contains('Switching parties');
 		});
@@ -188,7 +188,7 @@ describe('Elements', function () {
 					.then(cy.wrap);
 			};
 			cy.visit(
-				'/Article/https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+				'/Article/web/https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
 			);
 
 			getIframeBody();
@@ -202,7 +202,7 @@ describe('Elements', function () {
 					.then(cy.wrap);
 			};
 			cy.visit(
-				'/Article/https://www.theguardian.com/football/2020/jun/10/premier-league-restart-preview-no-5-burnley',
+				'/Article/web/https://www.theguardian.com/football/2020/jun/10/premier-league-restart-preview-no-5-burnley',
 			);
 
 			getBody().contains('Liverpool');
@@ -216,7 +216,7 @@ describe('Elements', function () {
 					.then(cy.wrap);
 			};
 			cy.visit(
-				'/Article/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
+				'/Article/web/https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
 			);
 
 			getBody().contains('affiliate links');

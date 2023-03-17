@@ -23,7 +23,7 @@ import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 
 // Middleware to track route performance using 'response-time' lib
-// Usage: app.post('/Article', logRenderTime, renderArticle);
+// Usage: app.post('/Article/web', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
 	({ body, path }: Request, _: Response, renderTime: number) => {
 		const { pageId = 'no-page-id-found' } = body as FEArticleType;
@@ -130,8 +130,8 @@ export const prodServer = (): void => {
 	app.use('/ArticleJson/web/*', handleWebArticleJson);
 	app.use('/FrontJSON/web/*', handleWebFrontJson);
 
-	app.use('/ArticlePerfTest/*', handleWebArticlePerfTest);
-	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
+	app.use('/ArticlePerfTest/web/*', handleWebArticlePerfTest);
+	app.use('/ArticlePerfTest/amp/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
 		try {
@@ -140,14 +140,14 @@ export const prodServer = (): void => {
                 <html>
                 <body>
                     <ul>
-                        <li><a href="/Article">Article</a></li>
-                        <li><a href="/AMPArticle">⚡️Article</a></li>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+                        <li><a href="/Article/web">Article</a></li>
+                        <li><a href="/Article/amp">⚡️Article</a></li>
+                        <li><a href="/ArticlePerfTest/web">⚡Article (perf test example)</a></li>
+                        <li><a href="/ArticlePerfTest/amp">⚡️Article (perf test example)</a></li>
                     </ul>
                     <ul>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+                        <li><a href="/ArticlePerfTest/web">⚡Article (perf test example)</a></li>
+                        <li><a href="/ArticlePerfTest/amp">⚡️Article (perf test example)</a></li>
                     </ul>
                 </body>
                 </html>

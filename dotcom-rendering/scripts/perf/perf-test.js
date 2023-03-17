@@ -8,7 +8,7 @@ const run = async () => {
 			'--start-cmd',
 			'make build;make start',
 			'--target-url',
-			'http://localhost:9000/ArticlePerfTest',
+			'http://localhost:9000/ArticlePerfTest/web',
 			'--append',
 		]);
 
