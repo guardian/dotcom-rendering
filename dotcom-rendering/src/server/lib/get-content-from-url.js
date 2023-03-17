@@ -51,7 +51,7 @@ exports.default = getContentFromURL;
 const parseURL = (requestUrl) => {
 	try {
 		return new URL(
-			decodeURIComponent(requestUrl.split('/').slice(2).join('/')),
+			decodeURIComponent(requestUrl.split('/').slice(3).join('/')),
 		);
 	} catch (error) {
 		return undefined;

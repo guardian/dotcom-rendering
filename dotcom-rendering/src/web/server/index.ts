@@ -71,7 +71,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	};
 };
 
-export const handleArticle: RequestHandler = ({ body }, res) => {
+export const handleWebArticle: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
@@ -84,7 +84,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleArticleJson: RequestHandler = ({ body }, res) => {
+export const handleWebArticleJson: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceArticleType(body);
 		const resp = {
@@ -103,10 +103,10 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 
 export const handlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
-	handleArticle(req, res, next);
+	handleWebArticle(req, res, next);
 };
 
-export const handleInteractive: RequestHandler = ({ body }, res) => {
+export const handleWebInteractive: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
@@ -119,7 +119,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleBlocks: RequestHandler = ({ body }, res) => {
+export const handleWebBlocks: RequestHandler = ({ body }, res) => {
 	try {
 		const {
 			blocks,
@@ -166,7 +166,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+export const handleWebKeyEvents: RequestHandler = ({ body }, res) => {
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
@@ -184,7 +184,7 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleFront: RequestHandler = ({ body }, res) => {
+export const handleWebFront: RequestHandler = ({ body }, res) => {
 	try {
 		const front = enhanceFront(body);
 		const html = frontToHtml({
@@ -196,6 +196,6 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleFrontJson: RequestHandler = ({ body }, res) => {
+export const handleWebFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
