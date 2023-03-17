@@ -57,7 +57,7 @@
 		"@emotion/server": "^11.4.0",
 		"@guardian/ab-core": "^4.0.0",
 		"@guardian/atoms-rendering": "^27.0.0",
-		"@guardian/braze-components": "^10.0.0",
+		"@guardian/braze-components": "^10.0.1-0",
 		"@guardian/browserslist-config": "^4.0.0",
 		"@guardian/commercial-core": "5.4.3",
 		"@guardian/consent-management-platform": "11.0.0",
