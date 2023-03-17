@@ -97,6 +97,7 @@ export const BrazeAppBannerComponent = (
 	useEffect(() => {
 		import('@guardian/braze-components')
 			.then((module) => {
+				console.log(module);
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
@@ -159,6 +160,7 @@ export const BrazeNewsletterBannerComponent = (
 	useEffect(() => {
 		import('@guardian/braze-components')
 			.then((module) => {
+				console.log(module);
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
@@ -171,7 +173,13 @@ export const BrazeNewsletterBannerComponent = (
 	if (BrazeMessage) {
 		const brazeMessageProps: BrazeMessageProps = {
 			header: args.header,
+			newsletterId: args.newsletterId,
+			frequency: args.frequency,
 			body: args.body,
+			boldText: args.boldText,
+			secondParagraph: args.secondParagraph,
+			imageUrl: args.imageUrl,
+			ophanComponentId: args.ophanComponentId,
 		};
 
 		return (
@@ -197,10 +205,6 @@ export const BrazeNewsletterBannerComponent = (
 };
 
 BrazeNewsletterBannerComponent.args = {
-	// slotName: 'Banner',
-	// header: 'A note to our digital subscribers',
-	// body: 'Hi John, did you know that as a Guardian digital subscriber you can enjoy an enhanced experience of our quality, independent journalism on all your devices, including The Guardian Live app.',
-	// componentName: 'DigitalSubscriberAppBanner',
 	slotName: 'Banner',
 	componentName: 'BannerNewsletter',
 	ophanComponentId: 'change_me_ophan_component_id',
@@ -216,5 +220,5 @@ BrazeNewsletterBannerComponent.args = {
 };
 
 BrazeNewsletterBannerComponent.story = {
-	name: 'NewsletterBanner',
+	name: 'BannerNewsletter',
 };
