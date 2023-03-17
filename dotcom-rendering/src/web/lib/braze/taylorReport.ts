@@ -1,6 +1,6 @@
 import { TagType } from '../../../types/tag';
 
-const tagId = ''; //TODO
+const tagId = 'environment/environment'; //TODO
 
 export const suppressForTaylorReport = (tags: TagType[]): boolean =>
 	window.guardian.config.switches.brazeTaylorReport === true &&
