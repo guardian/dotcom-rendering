@@ -101,7 +101,7 @@ export const handleWebArticleJson: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handlePerfTest: RequestHandler = (req, res, next) => {
+export const handleWebPerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
 	handleWebArticle(req, res, next);
 };

@@ -9,14 +9,14 @@ import {
 import { handleAppsArticle } from '../apps/server';
 import type { FEArticleType } from '../types/frontend';
 import {
-	handleArticle,
-	handleArticleJson,
-	handlePerfTest as handleArticlePerfTest,
-	handleBlocks,
-	handleFront,
-	handleFrontJson,
-	handleInteractive,
-	handleKeyEvents,
+	handleWebArticle,
+	handleWebArticleJson,
+	handleWebPerfTest as handleWebArticlePerfTest,
+	handleWebBlocks,
+	handleWebFront,
+	handleWebFrontJson,
+	handleWebInteractive,
+	handleWebKeyEvents,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -54,53 +54,83 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	app.post('/Article', logRenderTime, handleArticle);
+	app.post('/Article/web', logRenderTime, handleWebArticle);
+	app.post('/Article/apps', logRenderTime, handleAppsArticle);
+	app.post('/Article/amp', logRenderTime, handleAMPArticle);
+	app.post('/Interactive/web', logRenderTime, handleWebInteractive);
+	app.post('/Interactive/amp', logRenderTime, handleAMPArticle);
+	app.post('/Front/web', logRenderTime, handleWebFront);
+	app.post('/FrontJSON/web', logRenderTime, handleWebFrontJson);
+	app.post('/Blocks/web', logRenderTime, handleWebBlocks);
+	app.post('/KeyEvents/web', logRenderTime, handleWebKeyEvents);
+
+	/**
+	 * @deprecated
+	 * These POST endpoints are the old URL structure, and should not be used. Instead use
+	 * the render target suffixed endpoints above.
+	 *
+	 * Remove these once Frontend has been updated to use the new structure.
+	 */
+	app.post('/Article', logRenderTime, handleWebArticle);
 	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
-	app.post('/Interactive', logRenderTime, handleInteractive);
+	app.post('/Interactive', logRenderTime, handleWebInteractive);
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
-	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
-	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post('/Blocks', logRenderTime, handleWebBlocks);
+	app.post('/KeyEvents', logRenderTime, handleWebKeyEvents);
+	app.post('/Front', logRenderTime, handleWebFront);
+	app.post('/FrontJSON', logRenderTime, handleWebFrontJson);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article/*',
+		'/Article/web/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleArticle,
+		handleWebArticle,
 	);
-	app.use('/ArticleJson/*', handleArticleJson);
-
 	app.get(
-		'/AMPArticle/*',
+		'/Article/apps/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAppsArticle,
+	);
+	app.get(
+		'/Article/amp/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
 	app.get(
-		'/Front/*',
+		'/Interactive/web/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleFront,
+		handleWebInteractive,
 	);
 	app.get(
-		'/FrontJSON/*',
+		'/Interactive/web/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleFrontJson,
+		handleWebInteractive,
+	);
+	app.get(
+		'/Interactive/amp/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAMPArticle,
 	);
 
 	app.get(
-		'/AppsArticle/*',
+		'/Front/web/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleAppsArticle,
+		handleWebFront,
 	);
 
-	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
+	app.use('/ArticleJson/web/*', handleWebArticleJson);
+	app.use('/FrontJSON/web/*', handleWebFrontJson);
+
+	app.use('/ArticlePerfTest/*', handleWebArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
