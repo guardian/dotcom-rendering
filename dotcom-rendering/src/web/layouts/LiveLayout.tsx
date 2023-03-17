@@ -56,12 +56,12 @@ import {
 	hasRelevantTopics,
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -1238,6 +1238,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 										sectionName={article.sectionName}
 										format={format}
 										ajaxUrl={article.config.ajaxUrl}
+										edition={article.editionId}
 									/>
 								</Island>
 							</MostViewedFooterLayout>

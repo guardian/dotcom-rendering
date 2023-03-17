@@ -30,6 +30,7 @@ describe('MostViewedFooterData', () => {
 					display: ArticleDisplay.Standard,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				edition="UK"
 			/>,
 		);
 
@@ -66,6 +67,7 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				edition="UK"
 			/>,
 		);
 
@@ -122,6 +124,7 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				edition="UK"
 			/>,
 		);
 
@@ -163,6 +166,7 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				edition="UK"
 			/>,
 		);
 
@@ -181,6 +185,7 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				edition="UK"
 			/>,
 		);
 
