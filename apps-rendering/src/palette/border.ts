@@ -275,7 +275,7 @@ const tableOfContentsHoverDark = (_format: ArticleFormat): string => {
 };
 
 const specialReportAltAtom = (_format: ArticleFormat): string => {
-	return neutral[10];
+	return neutral[46];
 };
 
 const specialReportAltAtomDark = (_format: ArticleFormat): string => {

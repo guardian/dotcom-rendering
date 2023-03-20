@@ -44,7 +44,7 @@ const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
 	neutral[86];
 
 const specialReportAltButton = (_format: ArticleFormat): Colour =>
-	palette.specialReportAlt[300];
+	palette.specialReportAlt[100];
 
 const specialReportAltButtonDark = (_format: ArticleFormat): Colour =>
 	neutral[20];

@@ -12,7 +12,7 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-    padding: 2rem 0;
+    padding: 1rem 0;
     color: ${text.paragraph(format)};
 
     ${darkModeCss`
@@ -21,9 +21,9 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const hrStyles = (format: ArticleFormat): SerializedStyles => css`
-    width: 3rem;
     margin: 0 0 0.5rem 0;
-    border: 1px solid ${border.specialReportAltAtom(format)};
+    border: none;
+    border-top: 1px solid ${border.specialReportAltAtom(format)};
 
     ${darkModeCss`
         border-color: ${border.specialReportAltAtomDark(format)};
@@ -43,6 +43,7 @@ const textStyles = css`
 const buttonStyles = (format: ArticleFormat): SerializedStyles => css`
     color: ${text.specialReportAltButton(format)};
     background-color: ${background.specialReportAltButton(format)};
+    margin-bottom: 1rem;
 
     &:hover {
         background-color: ${hover.specialReportAltButton(format)};
@@ -81,6 +82,7 @@ const SpecialReportAltAtom: FC<Props> = ({ format }) => (
         >
             Find out more
         </LinkButton>
+        <hr css={hrStyles(format)} />
     </aside>
 );
 
