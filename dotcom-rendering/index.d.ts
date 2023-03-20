@@ -420,11 +420,9 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
-type MessageUsFieldType = import('./src/types/content').CampaignFieldText |   import('./src/types/content').CampaignFieldTextArea;
-
 interface MessageUs {
 	formId: string;
-	formFields: MessageUsFieldType[];
+	formFields: import('./src/types/content').MessageUsFieldType[];
 }
 
 interface GADataType {

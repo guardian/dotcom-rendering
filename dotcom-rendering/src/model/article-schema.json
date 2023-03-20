@@ -909,10 +909,10 @@
                     ]
                 },
                 "minlength": {
-                    "type": "string"
+                    "type": "number"
                 },
                 "maxlength": {
-                    "type": "string"
+                    "type": "number"
                 },
                 "id": {
                     "type": "string"

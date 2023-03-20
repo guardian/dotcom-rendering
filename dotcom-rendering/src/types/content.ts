@@ -747,8 +747,8 @@ export interface CampaignFieldText extends CampaignField {
 
 export interface CampaignFieldTextArea extends CampaignField {
 	type: 'textarea';
-	minlength?: string;
-	maxlength?: string;
+	minlength?: number;
+	maxlength?: number;
 }
 
 export interface CampaignFieldFile extends CampaignField {
