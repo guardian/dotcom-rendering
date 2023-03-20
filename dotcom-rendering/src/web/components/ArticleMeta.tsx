@@ -22,7 +22,7 @@ import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
-import { SendAMessage } from './SendAMessage';
+import { SendAMessage } from './SendAMessage.importable';
 import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
@@ -378,12 +378,14 @@ export const ArticleMeta = ({
 								/>
 							)}
 							{messageUs && (
-								<SendAMessage
-									formFields={messageUs.formFields}
-									formId={messageUs.formId}
-									format={format}
-									pageId={pageId}
-								/>
+								<Island>
+									<SendAMessage
+										formFields={messageUs.formFields}
+										formId={messageUs.formId}
+										format={format}
+										pageId={pageId}
+									/>
+								</Island>
 							)}
 							<Dateline
 								primaryDateline={primaryDateline}

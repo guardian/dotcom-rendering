@@ -1,4 +1,4 @@
-import { SendAMessage } from './SendAMessage';
+import { SendAMessage } from './SendAMessage.importable';
 import { Section } from './Section';
 import { MessageForm } from '../../../fixtures/manual/message-us-form';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
