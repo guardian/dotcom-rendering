@@ -735,6 +735,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 												!!article.config.switches
 													.serverShareCounts
 											}
+											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>
