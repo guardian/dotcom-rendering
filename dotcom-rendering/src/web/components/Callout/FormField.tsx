@@ -10,7 +10,10 @@ import {
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useRef } from 'react';
-import type { CampaignFieldType } from '../../../types/content';
+import type {
+	CampaignFieldType,
+	MessageUsFieldType,
+} from '../../../types/content';
 
 type FormDataType = { [key in string]: any };
 
