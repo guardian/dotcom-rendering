@@ -116,7 +116,10 @@ export const Form = ({
 					isValid = false;
 				}
 			}
-			if (['number', 'phone'].includes(field.id) && formData[field.id]) {
+			if (
+				['number', 'phone'].includes(field.type) &&
+				formData[field.id]
+			) {
 				const numberRegex = /^[\d ()+-]+$/;
 				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
