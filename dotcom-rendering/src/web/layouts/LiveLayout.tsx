@@ -56,6 +56,7 @@ import {
 	hasRelevantTopics,
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -296,7 +297,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const hasKeyEvents = !!article.keyEvents.length;
 	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -1237,6 +1238,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 										sectionName={article.sectionName}
 										format={format}
 										ajaxUrl={article.config.ajaxUrl}
+										edition={article.editionId}
 									/>
 								</Island>
 							</MostViewedFooterLayout>

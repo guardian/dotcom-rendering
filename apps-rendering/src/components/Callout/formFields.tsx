@@ -57,10 +57,11 @@ export const FormField: FC<FormFieldProp> = ({
 			</Option>
 		);
 	});
-	if (!fieldValue || !mandatory)
+	if (!fieldValue || !mandatory) {
 		selectOptions.unshift(
 			<Option value="">Please select an option</Option>,
 		);
+	}
 
 	if (formField.hidden) return <input type="hidden" />;
 

@@ -31,7 +31,7 @@
 	},
 	"bundlesize": [],
 	"lint-staged": {
-		"*": "lint"
+		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "^3.279.0",
@@ -257,7 +257,7 @@
 		"webpack": "^5.51.1",
 		"webpack-assets-manifest": "^5.1.0",
 		"webpack-bundle-analyzer": "^4.4.0",
-		"webpack-cli": "^4.5.0",
+		"webpack-cli": "^5.0.1",
 		"webpack-dev-middleware": "^5.3.1",
 		"webpack-dev-server": "^4.7.4",
 		"webpack-filter-warnings-plugin": "^1.2.1",
