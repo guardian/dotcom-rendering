@@ -134,6 +134,14 @@ export const Form = ({
 		return Object.keys(errors).length === 0;
 	};
 
+	const cleanFormData = (data: undefined | string | string[]) => {
+		if (Array.isArray(data)) {
+			return data.join('\n');
+		}
+
+		return data;
+	};
+
 	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
@@ -145,7 +153,7 @@ export const Form = ({
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
 				...acc,
-				[`field_${cur}`]: form[cur],
+				[`field_${cur}`]: cleanFormData(form[cur]),
 			}),
 			{},
 		);

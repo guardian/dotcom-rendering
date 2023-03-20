@@ -15,7 +15,6 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
-      # Cache npm dependencies using https://github.com/bahmutov/npm-install
       - run: yarn install --frozen-lockfile
 
       - name: Prettier check

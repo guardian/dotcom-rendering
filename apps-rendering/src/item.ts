@@ -67,7 +67,6 @@ interface Fields extends ArticleFormat {
 	tags: Tag[];
 	shouldHideReaderRevenue: boolean;
 	branding: Option<Branding>;
-	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
@@ -341,7 +340,6 @@ const parseItemFields = (
 		shouldHideReaderRevenue:
 			content.fields?.shouldHideReaderRevenue ?? false,
 		branding: getBranding(request),
-		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
 		relatedContent: pipe(
 			relatedContent,
