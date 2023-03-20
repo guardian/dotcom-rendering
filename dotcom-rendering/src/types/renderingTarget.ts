@@ -1,5 +1,5 @@
 /**
- * An enum defining what where we are targeting a particular rendered
+ * A type defining what where we are targeting a particular rendered
  * page to be shown
  *
  * This can be used to make decisions during rendering, where there
@@ -9,10 +9,7 @@
  * - Web 	=> A full web browser, such as chrome or safari on a desktop computer, laptop or phone.
  * - Apps 	=> A webview rendered within the Android or iOS live apps
  */
-export enum RenderingTarget {
-	Web,
-	Apps,
-}
+export type RenderingTarget = 'Web' | 'Apps';
 
 /**
  * Takes a generic Props which represent the props defined as 'apps only'
@@ -22,8 +19,8 @@ export enum RenderingTarget {
  * 'void' can be passed to this type when no specific props need to be set
  */
 type AppsProps<Props> = Props extends void
-	? { renderingTarget: RenderingTarget.Apps }
-	: Props & { renderingTarget: RenderingTarget.Apps };
+	? { renderingTarget: 'Apps' }
+	: Props & { renderingTarget: 'Apps' };
 
 /**
  * Takes a generic Props which represent the props defined as 'web only'
@@ -33,8 +30,8 @@ type AppsProps<Props> = Props extends void
  * 'void' can be passed to this type when no specific props need to be set
  */
 type WebProps<Props> = Props extends void
-	? { renderingTarget: RenderingTarget.Web }
-	: Props & { renderingTarget: RenderingTarget.Web };
+	? { renderingTarget: 'Web' }
+	: Props & { renderingTarget: 'Web' };
 
 /**
  * This type can be set to either AppsProps or WebProps, and takes two generics
