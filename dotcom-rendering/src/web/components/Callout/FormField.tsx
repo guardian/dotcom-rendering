@@ -125,10 +125,10 @@ export const FormField = ({
 						},
 					]
 						.concat(formField.options)
-						.map(({ value, label }) => {
+						.map(({ value, label: formLabel }) => {
 							return (
 								<Option key={value} value={value}>
-									{label}
+									{formLabel}
 								</Option>
 							);
 						})}
