@@ -30,11 +30,11 @@ const containerStyles = (format: ArticleFormat) => css`
 		color: white;
 	}
 	background-color: ${neutral[86]};
-	padding: 12px;
+	padding: ${space[3]}px;
 `;
 const textStyles = css`
 	${textSans.xsmall()};
-	padding-bottom: 16px;
+	padding-bottom: ${space[4]}px;
 `;
 
 const successStyles = css`
@@ -44,8 +44,8 @@ const successStyles = css`
 
 const tickBoxStyles = css`
 	fill: ${success[400]};
-	width: 48px;
-	margin-left: -8px;
+	width: ${space[12]}px;
+	margin-left: -${space[2]}px;
 `;
 const errorTextStyles = css`
 	color: ${palette.error[400]};
@@ -100,7 +100,7 @@ const footerPaddingStyles = css`
 const prefaceStyles = css`
 	${textSans.xsmall()};
 	color: 'white';
-	padding-bottom: 16px;
+	padding-bottom: ${space[4]}px;
 `;
 
 type FormDataType = { [key in string]: any };
@@ -116,7 +116,7 @@ interface FormProps extends Props {
 	submissionURL: string;
 }
 
-export const Form = ({
+const Form = ({
 	formFields,
 	submissionURL,
 	formId,
@@ -359,13 +359,13 @@ const summaryStyles = css`
 	.is-open,
 	.is-closed {
 		svg {
-			height: 12px;
+			height: ${space[3]}px;
 		}
 	}
 	${textSans.small({ fontWeight: 'bold' })};
 	display: flex;
 	align-items: center;
-	margin-bottom: 8px;
+	margin-bottom: ${space[2]}px;
 	${until.desktop} {
 		color: white;
 	}
