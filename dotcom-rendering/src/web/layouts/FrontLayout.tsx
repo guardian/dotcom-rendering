@@ -23,9 +23,9 @@ import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { canRenderAds } from '../lib/canRenderAds';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -308,15 +308,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								>
 									<Snap snapData={trail.snapData} />
 								</Section>
-								{decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+								{renderAds &&
+									decideAdSlot(
+										index,
+										front.isNetworkFront,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										format.display,
+										mobileAdPositions,
+									)}
 							</>
 						);
 					}
@@ -359,15 +360,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										isNetworkFront={front.isNetworkFront}
 									/>
 								</Section>
-								{decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+								{renderAds &&
+									decideAdSlot(
+										index,
+										front.isNetworkFront,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										format.display,
+										mobileAdPositions,
+									)}
 							</>
 						);
 					}
@@ -452,18 +454,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
-
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
+			)}
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
