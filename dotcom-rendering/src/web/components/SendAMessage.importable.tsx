@@ -252,8 +252,6 @@ const Form = ({
 				respond to every message.
 			</div>
 			<form
-				action="/formstack-campaign/submit"
-				method="post"
 				css={formStyles}
 				noValidate={true}
 				onSubmit={(e) => {
