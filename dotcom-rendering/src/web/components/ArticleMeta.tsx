@@ -22,6 +22,7 @@ import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
 import { Island } from './Island';
+import { SendAMessage } from './SendAMessage.importable';
 import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
@@ -39,6 +40,7 @@ type Props = {
 	isCommentable: boolean;
 	ajaxUrl: string;
 	showShareCount: boolean;
+	messageUs?: MessageUs;
 };
 
 const meta = (format: ArticleFormat) => {
@@ -310,6 +312,7 @@ export const ArticleMeta = ({
 	isCommentable,
 	ajaxUrl,
 	showShareCount,
+	messageUs,
 }: Props) => {
 	const soleContributor = getSoleContributor(tags, byline);
 	const authorName = soleContributor?.title ?? 'Author Image';
@@ -373,6 +376,16 @@ export const ArticleMeta = ({
 									tags={tags}
 									format={format}
 								/>
+							)}
+							{messageUs && (
+								<Island deferUntil="interaction">
+									<SendAMessage
+										formFields={messageUs.formFields}
+										formId={messageUs.formId}
+										format={format}
+										pageId={pageId}
+									/>
+								</Island>
 							)}
 							<Dateline
 								primaryDateline={primaryDateline}
