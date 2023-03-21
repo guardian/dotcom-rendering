@@ -27,7 +27,7 @@ const CALLOUT_URL =
 const containerStyles = (format: ArticleFormat) => css`
 	${until.desktop} {
 		background-color: ${decidePalette(format).background.messageForm};
-		color: white;
+		color: ${neutral[100]};
 	}
 	background-color: ${neutral[86]};
 	padding: ${space[3]}px;
@@ -39,7 +39,7 @@ const textStyles = css`
 
 const successStyles = css`
 	${textSans.xsmall()};
-	color: white;
+	color: ${neutral[100]};
 `;
 
 const tickBoxStyles = css`
@@ -66,7 +66,7 @@ const formFieldWrapperStyles = css`
 	${until.desktop} {
 		label > div,
 		label > div > span {
-			color: white;
+			color: ${neutral[100]};
 		}
 	}
 `;
@@ -80,8 +80,8 @@ const submitButtonStyles = css`
 	}
 	${until.desktop} {
 		align-self: flex-start;
-		background-color: white;
-		color: black;
+		background-color: ${neutral[100]};
+		color: ${neutral[0]};
 	}
 	background-color: ${neutral[7]};
 	align-self: center;
@@ -99,7 +99,7 @@ const footerPaddingStyles = css`
 
 const prefaceStyles = css`
 	${textSans.xsmall()};
-	color: 'white';
+	color: ${neutral[100]};
 	padding-bottom: ${space[4]}px;
 `;
 
@@ -175,7 +175,7 @@ const Form = ({
 					errors[field.id] = 'Please include your dialling/area code';
 					isValid = false;
 				}
-				// should we have checks here for min length and max length?
+				// We should have checks here for min length and max length - this work is ticketed here https://trello.com/c/7sYM6Zzd/822-add-validation-for-max-min-length-on-the-message-us-work
 			}
 			return isValid;
 		});

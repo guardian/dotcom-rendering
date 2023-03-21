@@ -378,7 +378,7 @@ export const ArticleMeta = ({
 								/>
 							)}
 							{messageUs && (
-								<Island>
+								<Island deferUntil="interaction">
 									<SendAMessage
 										formFields={messageUs.formFields}
 										formId={messageUs.formId}
