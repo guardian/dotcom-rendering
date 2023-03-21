@@ -10,6 +10,7 @@ import { FocusStyles } from '../../web/components/FocusStyles.importable';
 import { Island } from '../../web/components/Island';
 import { Metrics } from '../../web/components/Metrics.importable';
 import { SkipTo } from '../../web/components/SkipTo';
+import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
 	article: FEArticleType;
@@ -47,17 +48,7 @@ export const ArticlePage = ({ article, format }: Props) => {
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
 			)}
 			<Island clientOnly={true} deferUntil="idle">
-				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<Metrics
-					commercialMetricsEnabled={
-						!!article.config.switches.commercialMetrics
-					}
-				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />

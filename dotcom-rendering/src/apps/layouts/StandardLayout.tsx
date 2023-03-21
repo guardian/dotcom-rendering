@@ -29,6 +29,16 @@ import { Island } from '../../web/components/Island';
 import { Section } from '../../web/components/Section';
 import { decidePalette } from '../../web/lib/decidePalette';
 import { getCurrentPillar } from '../../web/lib/layoutHelpers';
+import { RightColumn } from '../../web/components/RightColumn';
+import { MostViewedRightWrapper } from '../../web/components/MostViewedRightWrapper.importable';
+import { Carousel } from '../../web/components/Carousel.importable';
+import { decideTrail } from '../../web/lib/decideTrail';
+import { MostViewedFooterLayout } from '../../web/components/MostViewedFooterLayout';
+import { MostViewedFooterData } from '../../web/components/MostViewedFooterData.importable';
+import { StarRating } from '../../web/components/StarRating/StarRating';
+import { Standfirst } from '../../web/components/Standfirst';
+import { GuardianLabsLines } from '../../web/components/GuardianLabsLines';
+import { DecideLines } from '../../web/components/DecideLines';
 
 const StandardGrid = ({
 	children,
@@ -266,19 +276,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const isInEuropeTest =
-		article.config.abTests.europeNetworkFrontVariant === 'variant';
-
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -300,16 +297,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const palette = decidePalette(format);
-
-	const formatForNav =
-		format.theme === ArticleSpecial.Labs
-			? format
-			: {
-					...format,
-					theme: getCurrentPillar(article),
-			  };
-
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -514,33 +501,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 										/>
 									</Island>
 								)}
-
-							{showBodyEndSlot && (
-								<Island clientOnly={true}>
-									<SlotBodyEnd
-										contentType={article.contentType}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-										idApiUrl={article.config.idApiUrl}
-										isMinuteArticle={
-											article.pageType.isMinuteArticle
-										}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-										keywordIds={article.config.keywordIds}
-										pageId={article.pageId}
-										sectionId={article.config.section}
-										sectionName={article.sectionName}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
-										stage={article.config.stage}
-										tags={article.tags}
-									/>
-								</Island>
-							)}
 							<StraightLines
 								data-print-layout="hide"
 								count={4}
@@ -585,18 +545,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 							`}
 						>
 							<RightColumn>
-								{renderAds && (
-									<AdSlot
-										position="right"
-										display={format.display}
-										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
-										}
-										isPaidContent={
-											article.pageType.isPaidContent
-										}
-									/>
-								)}
 								{!isPaidContent ? (
 									<Island
 										clientOnly={true}
@@ -614,25 +562,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 					</GridItem>
 				</StandardGrid>
 			</Section>
-
-			{renderAds && !isLabs && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
-			)}
-
 			{article.storyPackage && (
 				<Section fullWidth={true}>
 					<Island deferUntil="visible">
@@ -715,20 +644,6 @@ export const StandardLayout = ({ article, format }: Props) => {
 							/>
 						</Island>
 					</MostViewedFooterLayout>
-				</Section>
-			)}
-
-			{renderAds && !isLabs && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
 				</Section>
 			)}
 		</main>

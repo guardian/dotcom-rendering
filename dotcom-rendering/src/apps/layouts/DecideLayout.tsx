@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { FEArticleType } from '../../types/frontend';
+import { StandardLayout } from './StandardLayout';
 
 type Props = {
 	article: FEArticleType;
