@@ -538,7 +538,7 @@ const avatar = ({ design, theme }: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[800];
 				case ArticleSpecial.SpecialReportAlt:
-					return palette.specialReportAlt[700];
+					return palette.specialReportAlt[200];
 				case ArticleSpecial.Labs:
 					return labs[400];
 				case ArticlePillar.Opinion:
