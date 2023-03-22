@@ -15,7 +15,7 @@ export default {
 	title: 'Components/StickyBottomBanner/BrazeBanners',
 };
 
-// Braze Banner
+// Braze Banner story
 // ---------------------------------------
 export const BrazeBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
@@ -86,7 +86,7 @@ BrazeBannerComponent.args = {
 
 BrazeBannerComponent.story = { name: 'BannerWithLink' };
 
-// Braze App Banner
+// Braze App Banner story
 // ---------------------------------------
 export const BrazeAppBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
@@ -149,7 +149,7 @@ BrazeAppBannerComponent.args = {
 
 BrazeAppBannerComponent.story = { name: 'AppBanner' };
 
-// Braze Newsletter Banner
+// Braze Newsletter Banner story
 // ---------------------------------------
 export const BrazeNewsletterBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
