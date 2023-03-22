@@ -1,6 +1,7 @@
 import { css, SerializedStyles } from '@emotion/react';
 import {
 	focusHalo,
+	from,
 	neutral,
 	palette,
 	space,
@@ -72,6 +73,12 @@ const formFieldWrapperStyles = css`
 `;
 
 const submitButtonStyles = css`
+	background-color: ${neutral[100]};
+	color: ${neutral[0]};
+	:hover,
+	:active {
+		background-color: ${neutral[86]};
+	}
 	${until.phablet} {
 		width: 100%;
 		flex-direction: column;
@@ -80,11 +87,16 @@ const submitButtonStyles = css`
 	}
 	${until.desktop} {
 		align-self: flex-start;
-		background-color: ${neutral[100]};
-		color: ${neutral[0]};
 	}
-	background-color: ${neutral[7]};
-	align-self: center;
+	${from.desktop} {
+		color: ${neutral[100]};
+		background-color: ${neutral[7]};
+		align-self: center;
+		:hover,
+		:active {
+			background-color: ${neutral[20]};
+		}
+	}
 `;
 
 const footerPaddingStyles = css`
@@ -101,6 +113,9 @@ const prefaceStyles = css`
 	${textSans.xsmall()};
 	color: ${neutral[100]};
 	padding-bottom: ${space[4]}px;
+	${from.desktop} {
+		color: ${neutral[0]};
+	}
 `;
 
 type FormDataType = { [key in string]: any };
