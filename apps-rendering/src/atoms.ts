@@ -28,7 +28,7 @@ function parseAtom(
 
 	const id = element.contentAtomTypeData.atomId;
 
-	if (id === 'SpecialReportAltAtom') {
+	if (id === 'interactives/2022/10/tr/default-about-the-series') {
 		return Result.ok({ kind: ElementKind.SpecialReportAltAtom });
 	}
 
