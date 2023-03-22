@@ -68,6 +68,7 @@ import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
 import RichLink from 'components/RichLink';
+import SpecialReportAltAtom from 'components/SpecialReportAltAtom';
 import { isElement, pipe } from 'lib';
 import { Optional } from 'optional';
 import { border, text } from 'palette';
@@ -734,6 +735,9 @@ const renderElement =
 					element,
 					skipLinkIdSuffix: key.toString(),
 				});
+
+			case ElementKind.SpecialReportAltAtom:
+				return h(SpecialReportAltAtom, { format });
 		}
 	};
 
