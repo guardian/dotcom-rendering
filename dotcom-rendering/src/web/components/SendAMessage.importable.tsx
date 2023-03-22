@@ -77,7 +77,7 @@ const submitButtonStyles = css`
 	color: ${neutral[0]};
 	:hover,
 	:active {
-		background-color: #dcdcdc;
+		background-color: ${neutral[86]};
 	}
 	${until.phablet} {
 		width: 100%;
@@ -94,7 +94,7 @@ const submitButtonStyles = css`
 		align-self: center;
 		:hover,
 		:active {
-			background-color: #454545;
+			background-color: ${neutral[20]};
 		}
 	}
 `;
@@ -113,6 +113,9 @@ const prefaceStyles = css`
 	${textSans.xsmall()};
 	color: ${neutral[100]};
 	padding-bottom: ${space[4]}px;
+	${from.desktop} {
+		color: ${neutral[0]};
+	}
 `;
 
 type FormDataType = { [key in string]: any };
