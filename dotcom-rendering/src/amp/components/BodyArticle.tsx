@@ -188,9 +188,13 @@ export const Body = ({ data, config }: Props) => {
 		</>
 	);
 
-	const epic = data.shouldHideReaderRevenue ? null : (
-		<Epic webURL={data.webURL} />
-	);
+	const epic =
+		data.shouldHideReaderRevenue ||
+		data.tags.some(
+			(tag) => tag.id === 'us-news/series/cotton-capital',
+		) ? null : (
+			<Epic webURL={data.webURL} />
+		);
 
 	return (
 		<div css={[body(pillar, design), innerContainerStyles]}>
