@@ -38,6 +38,7 @@ const tabTitle = css`
 `;
 
 const tabIcons = css`
+	padding-left: ${space[1]}px;
 	display: flex;
 	align-items: center;
 `;
