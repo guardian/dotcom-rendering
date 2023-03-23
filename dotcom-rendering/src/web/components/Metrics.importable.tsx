@@ -38,6 +38,8 @@ const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
 	'dcrFrontsVariant',
 	'serverSideLiveblogInlineAdsVariant',
 	'serverSideLiveblogInlineAdsControl',
+	'poorDeviceConnectivityVariant',
+	'poorDeviceConnectivityControl',
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {

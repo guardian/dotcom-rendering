@@ -232,6 +232,9 @@ const body: Body = [
 		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	},
 	{
+		kind: ElementKind.SpecialReportAltAtom,
+	},
+	{
 		kind: ElementKind.Text,
 		doc,
 	},

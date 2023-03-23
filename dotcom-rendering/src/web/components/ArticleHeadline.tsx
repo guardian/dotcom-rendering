@@ -344,7 +344,6 @@ export const ArticleHeadline = ({
 	isMatch,
 }: Props) => {
 	const palette = decidePalette(format);
-
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -502,6 +501,8 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Explainer:
+				case ArticleDesign.Timeline:
+				case ArticleDesign.Profile:
 					return (
 						<div
 							css={decideBottomPadding({

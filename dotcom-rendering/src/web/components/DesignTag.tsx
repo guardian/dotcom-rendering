@@ -152,6 +152,22 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					</Tag>
 				</Margins>
 			);
+		case ArticleDesign.Timeline:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/timelines">Timeline</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Profile:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/profiles">Profile</TagLink>
+					</Tag>
+				</Margins>
+			);
 		default:
 			return null;
 	}

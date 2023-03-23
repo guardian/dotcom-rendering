@@ -100,7 +100,7 @@ dev-debug: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting frontend PROD server and opening Cypress")
@@ -151,9 +151,6 @@ bundlesize: clear clean-dist install build
 
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
-
-validate-prepush:
-	@run-p tsc prettier:check lint-staged "test:ci -- --verbose --onlyChanged"
 
 validate-ci: install tsc lint stylelint test-ci bundlesize
 	$(call log, "everything seems 👌")

@@ -1721,6 +1721,27 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundMessageForm = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[100];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[100];
+		case ArticlePillar.Culture:
+			return culture[100];
+		case ArticlePillar.Opinion:
+			return opinion[100];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[100];
+		default:
+			return news[100];
+	}
+};
+
 const textPullQuoteAttribution = (format: ArticleFormat): string =>
 	fillQuoteIcon(format);
 
@@ -2136,6 +2157,7 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
+			messageForm: backgroundMessageForm(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

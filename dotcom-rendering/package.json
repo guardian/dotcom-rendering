@@ -31,7 +31,7 @@
 	},
 	"bundlesize": [],
 	"lint-staged": {
-		"*": "lint"
+		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "^3.279.0",

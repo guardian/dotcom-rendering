@@ -25,6 +25,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { canRenderAds } from '../lib/canRenderAds';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -172,7 +173,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !front.isAdFreeUser;
+	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(

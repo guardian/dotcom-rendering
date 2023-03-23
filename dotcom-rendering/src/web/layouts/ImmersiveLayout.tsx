@@ -49,6 +49,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -328,7 +329,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 		</div>
 	);
 
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -353,7 +354,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						}}
 						nav={NAV}
 						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.contribute
 						}
 						editionId={article.editionId}
 						headerTopBarSwitch={
@@ -840,6 +841,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>

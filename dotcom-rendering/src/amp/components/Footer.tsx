@@ -6,15 +6,100 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import type { Link } from '../../lib/footer-links';
-import {
-	footerLinksNew,
-	isOnPlatform,
-	LinkPlatform,
-} from '../../lib/footer-links';
 import type { NavType } from '../../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
+
+export interface Link {
+	title: string;
+	url?: string;
+	on?: string;
+}
+
+export const footerLinks: Link[][] = [
+	[
+		{
+			title: 'About us',
+			url: 'https://www.theguardian.com/about',
+		},
+		{
+			title: 'Contact us',
+			url: 'https://www.theguardian.com/help/contact-us',
+		},
+		{
+			title: 'Complaints and corrections',
+			url: 'https://www.theguardian.com/info/complaints-and-corrections',
+		},
+		{
+			title: 'Securedrop',
+			url: 'https://www.theguardian.com/securedrop',
+		},
+		{
+			title: 'Work for us',
+			url: 'https://workforus.theguardian.com/locations/london',
+		},
+		{
+			title: 'Privacy settings',
+			on: 'tap:consent.prompt(consent=SourcePoint)',
+		},
+		{
+			title: 'Privacy policy',
+			url: 'https://www.theguardian.com/info/privacy',
+		},
+		{
+			title: 'Cookie policy',
+			url: 'https://www.theguardian.com/info/cookies',
+		},
+		{
+			title: 'Terms & conditions',
+			url: 'https://www.theguardian.com/help/terms-of-service',
+		},
+		{
+			title: 'Help',
+			url: 'https://www.theguardian.com/help',
+		},
+	],
+	[
+		{
+			title: 'All topics',
+			url: 'https://www.theguardian.com/index/subjects/a',
+		},
+		{
+			title: 'All writers',
+			url: 'https://www.theguardian.com/index/contributors',
+		},
+		{
+			title: 'Modern Slavery Act',
+			url: 'https://www.theguardian.com/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+		},
+		{
+			title: 'Digital newspaper archive',
+			url: 'https://theguardian.newspapers.com/',
+		},
+		{
+			title: 'Facebook',
+			url: 'https://www.facebook.com/theguardian',
+		},
+		{
+			title: 'Twitter',
+			url: 'https://twitter.com/guardian',
+		},
+	],
+	[
+		{
+			title: 'Advertise with us',
+			url: 'https://advertising.theguardian.com/',
+		},
+		{
+			title: 'Search jobs',
+			url: 'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+		},
+		{
+			title: 'Patrons',
+			url: 'https://patrons.theguardian.com/?INTCMP=footer_patrons',
+		},
+	],
+];
 
 const innerContainerStyles = css`
 	padding-left: 10px;
@@ -143,15 +228,13 @@ type FooterLinksProps = {
 
 const FooterLinks = ({ links, nav }: FooterLinksProps) => {
 	const linkGroups = links.map((linkGroup) => {
-		const ls = linkGroup
-			.filter((l) => isOnPlatform(l, LinkPlatform.Amp))
-			.map((l, index) => (
-				<li key={`${l.url ?? ''}${index}`}>
-					<a css={footerLink} href={l.url} on={l.on}>
-						{l.title}
-					</a>
-				</li>
-			));
+		const ls = linkGroup.map((l, index) => (
+			<li key={`${l.url ?? ''}${index}`}>
+				<a css={footerLink} href={l.url} on={l.on}>
+					{l.title}
+				</a>
+			</li>
+		));
 		const key = linkGroup.reduce((acc, { title }) => `acc-${title}`, '');
 
 		return (
@@ -186,7 +269,7 @@ export const Footer = ({ nav }: FooterProps) => {
 		<footer data-content-test-group={group} css={footer}>
 			<div css={innerContainerStyles}>
 				<div css={footerInner}>
-					<FooterLinks links={footerLinksNew} nav={nav} />
+					<FooterLinks links={footerLinks} nav={nav} />
 				</div>
 			</div>
 			<div css={[copyrightContainer, innerContainerStyles]}>
