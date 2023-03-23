@@ -15,11 +15,20 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 
-const descriptionStyles = css`
+export const calloutLinkStyles = css`
 	a {
 		color: ${brand[500]};
+		text-decoration: none;
+		border-bottom: 1px solid #12121240;
 	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
+`;
 
+const descriptionStyles = css`
+	${calloutLinkStyles}
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -100,9 +109,14 @@ const shareCalloutTextStyles = css`
 `;
 
 const shareCalloutLinkStyles = css`
-	color: ${brand[500]};
-	font-weight: normal;
 	${textSans.xsmall()}
+	color: ${brand[500]};
+	border-bottom: 1px solid #12121240;
+	text-decoration: none;
+	:hover,
+	:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
 `;
 
 const sharePopupStyles = css`
@@ -184,7 +198,7 @@ export const CalloutShare = ({
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles}
+						cssOverrides={shareCalloutLinkStyles}
 					>
 						Please share this callout.
 					</Button>
@@ -201,9 +215,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	a {
-		color: ${brand[500]};
-	}
+	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;
