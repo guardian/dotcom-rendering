@@ -29,11 +29,22 @@ export const calloutContainer = css`
 export const calloutLinkContainer = css`
 	a {
 		color: ${brand[500]};
+		text-decoration: none;
+		border-bottom: 1px solid #12121240;
+	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
 	}
 
 	${darkModeCss`
 		a {
 			color: ${neutral[86]};
+			border-bottom: 1px solid ${neutral[60]};
+		}
+		a:hover,
+		a:active {
+			border-bottom: 1px solid ${neutral[86]};
 		}
 	`}
 `;
@@ -133,9 +144,19 @@ export const calloutShare = css`
 export const calloutSharelink = css`
 	${textSans.xsmall()}
 	color: ${brand[500]};
+	text-decoration: none;
+	border-bottom: 1px solid #12121240;
+	:hover, :active {
+		border-bottom: 1px solid ${brand[500]};
+	}
 	${darkModeCss`
 		color: ${neutral[86]};
+		border-bottom: 1px solid ${neutral[60]};
+		:hover, :active {
+			border-bottom: 1px solid ${neutral[86]};
+		}
 	`}
+
 `;
 
 export const shareIcon = css`
