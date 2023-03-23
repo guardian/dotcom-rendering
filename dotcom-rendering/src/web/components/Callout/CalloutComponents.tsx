@@ -15,11 +15,14 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 
+/* stylelint-disable-next-line color-no-hex */
+const linkDecorationColour = '#12121240';
+
 export const calloutLinkStyles = css`
 	a {
 		color: ${brand[500]};
 		text-decoration: none;
-		border-bottom: 1px solid #12121240;
+		border-bottom: 1px solid ${linkDecorationColour};
 	}
 	a:hover,
 	a:active {
@@ -111,7 +114,7 @@ const shareCalloutTextStyles = css`
 const shareCalloutLinkStyles = css`
 	${textSans.xsmall()}
 	color: ${brand[500]};
-	border-bottom: 1px solid #12121240;
+	border-bottom: 1px solid ${linkDecorationColour};
 	text-decoration: none;
 	:hover,
 	:active {
