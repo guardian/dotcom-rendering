@@ -102,7 +102,6 @@ export const tabTitle = css`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-left: ${remSpace[2]};
 `;
 
 export const tabIcons = css`
