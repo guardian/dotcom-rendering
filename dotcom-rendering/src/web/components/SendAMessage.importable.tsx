@@ -1,4 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import {
 	focusHalo,
 	from,
@@ -40,7 +41,9 @@ const textStyles = css`
 
 const successStyles = css`
 	${textSans.xsmall()};
-	color: ${neutral[100]};
+	${until.desktop} {
+		color: ${neutral[100]};
+	}
 `;
 
 const tickBoxStyles = css`
@@ -52,6 +55,7 @@ const errorTextStyles = css`
 	color: ${palette.error[400]};
 	${textSans.medium({ fontWeight: 'bold' })};
 	display: flex;
+	padding-bottom: ${space[2]}px;
 `;
 
 const formStyles = css`
