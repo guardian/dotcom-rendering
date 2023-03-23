@@ -106,6 +106,7 @@ export const tabTitle = css`
 `;
 
 export const tabIcons = css`
+	padding-left: ${remSpace[1]};
 	display: flex;
 	align-items: center;
 `;
