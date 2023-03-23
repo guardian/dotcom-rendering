@@ -377,16 +377,17 @@ export const ArticleMeta = ({
 									format={format}
 								/>
 							)}
-							{messageUs && (
-								<Island deferUntil="interaction">
-									<SendAMessage
-										formFields={messageUs.formFields}
-										formId={messageUs.formId}
-										format={format}
-										pageId={pageId}
-									/>
-								</Island>
-							)}
+							{messageUs &&
+								format.design === ArticleDesign.LiveBlog && (
+									<Island deferUntil="interaction">
+										<SendAMessage
+											formFields={messageUs.formFields}
+											formId={messageUs.formId}
+											format={format}
+											pageId={pageId}
+										/>
+									</Island>
+								)}
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
