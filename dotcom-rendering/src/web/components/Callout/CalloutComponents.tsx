@@ -145,6 +145,7 @@ const shareIconStyles = css`
 	border: 1px solid ${brand[500]};
 	box-sizing: border-box;
 	fill: ${brand[500]};
+	padding: 0.5px 0;
 `;
 
 export const CalloutShare = ({
