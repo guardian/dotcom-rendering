@@ -54,7 +54,7 @@
 		"@guardian/renditions": "^0.2.0",
 		"@guardian/source-foundations": "^7.0.1",
 		"@guardian/source-react-components": "^11.4.0",
-		"@guardian/source-react-components-development-kitchen": "9.2.0",
+		"@guardian/source-react-components-development-kitchen": "10.0.1",
 		"@guardian/types": "^9.0.1",
 		"@storybook/addon-knobs": "^6.4.0",
 		"@storybook/addons": "^6.4.0",
