@@ -1,10 +1,13 @@
 import { cmpIframe } from '../../lib/cmpIframe.js';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { storage } from '@guardian/libs';
 
 describe('Commercial E2E tests', function () {
 	beforeEach(function () {
 		setLocalBaseUrl();
+		// Fix the geo so that we know we're interacting with a TCF-framework CMP UI
+		storage.local.set('gu.geo.override', 'GB');
 	});
 
 	it(`It should load the expected number of ad slots`, function () {
