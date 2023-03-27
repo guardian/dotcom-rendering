@@ -1,16 +1,26 @@
-import { disableCMP } from '../../lib/disableCMP';
+import { cmpIframe } from '../../lib/cmpIframe.js';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { storage } from '@guardian/libs';
 
 describe('Commercial E2E tests', function () {
 	beforeEach(function () {
-		disableCMP();
 		setLocalBaseUrl();
+		// Fix the geo so that we know we're interacting with a TCF-framework CMP UI
+		storage.local.set('gu.geo.override', 'GB');
 	});
 
 	it(`It should load the expected number of ad slots`, function () {
 		cy.visit(
 			`/Article/https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
 		);
+
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
 
 		cy.scrollTo('bottom', { duration: 500 });
 
