@@ -1885,6 +1885,14 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
+"@creditkarma/thrift-server-core@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@creditkarma/thrift-server-core/-/thrift-server-core-1.0.4.tgz#ee66a9bf77add286b762fa724da68d3aec2188fd"
+  integrity sha512-Jook5uFJqPeM/D0taSdKHeoerZB6HboSDMqBDWhVDJVSKJGWPSMch4GNALRqr8nCekLKMYkdCgj4FAVetnxpGA==
+  dependencies:
+    "@types/lodash" "^4.14.136"
+    lodash "^4.17.15"
+
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz#00629c35a688e05a88b1cda684fb9d5e73f000a1"
@@ -2184,6 +2192,11 @@
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-10.0.0.tgz#9ff9f6e3cfb681f309808c6e47d0e2cf1a012650"
   integrity sha512-cpR3NBmZrUfCvUlBphbVelLAgcuVth4Lo7M1Ohk7dhfgFrocrie/oQT1ZOWX6a90DuAEQZuKTlebmbHJ0XlFcQ==
+
+"@guardian/bridget@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.3.0.tgz#9e567e60161ca412191e91ebb2b8f8127a37dc59"
+  integrity sha512-L1RsmQifJrjBzIvinf/A5q8FNfLa3pSQkSIrlIk13hoAYSaDTOp1Hw+ZmVWiaMCxSoocJLxLjyHMlTGyQ/FFAw==
 
 "@guardian/browserslist-config@^4.0.0":
   version "4.0.0"
@@ -4574,7 +4587,7 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash@*", "@types/lodash@^4.14.167", "@types/lodash@^4.14.191":
+"@types/lodash@*", "@types/lodash@^4.14.136", "@types/lodash@^4.14.167", "@types/lodash@^4.14.191":
   version "4.14.191"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
   integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
