@@ -29,7 +29,6 @@
 		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
 		"makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
 	},
-	"bundlesize": [],
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
@@ -154,7 +153,6 @@
 		"babel-plugin-transform-runtime": "^6.23.0",
 		"body-parser": "^1.20.1",
 		"browserslist": "^4.21.4",
-		"bundlesize": "^0.18.1",
 		"chalk": "^4.1.0",
 		"compression": "^1.7.3",
 		"cpy": "^8.1.2",
