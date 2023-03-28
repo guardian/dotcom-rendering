@@ -71,7 +71,7 @@ const SpecialReportAltAtom: FC<Props> = ({ format }) => (
         <p css={textStyles}>
             Cotton Capital explores how transatlantic slavery shaped the Guardian,
 			Manchester, Britain and the world. Stemming from an investigation into
-			the Guardian founders' own links to slavery, this continuing series
+			the Guardian founders&#39; own links to slavery, this continuing series
 			explores our history and its enduring legacies today.
         </p>
         <LinkButton
