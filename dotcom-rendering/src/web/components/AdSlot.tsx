@@ -94,8 +94,9 @@ export const labelStyles = css`
 		${textSans.xxsmall()};
 		text-align: left;
 		position: absolute;
-		right: 3px;
-		top: -22px;
+		left: 268px;
+		top: 1px;
+		z-index: 10;
 		padding: 0;
 		border: 0;
 	}
