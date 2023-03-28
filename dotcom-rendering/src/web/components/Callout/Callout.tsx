@@ -34,10 +34,10 @@ const tabTitle = css`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-left: ${space[2]}px;
 `;
 
 const tabIcons = css`
+	padding-left: ${space[1]}px;
 	display: flex;
 	align-items: center;
 `;
