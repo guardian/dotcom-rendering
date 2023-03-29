@@ -35,10 +35,6 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const listStyles: SerializedStyles = css`
-	> li::before {
-		content: none;
-	}
-
 	margin: 0;
 `;
 
@@ -48,23 +44,27 @@ const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: ${remSpace[4]};
 	padding-top: ${remSpace[1]};
-	transition: 0.3s all ease;
 	display: flex;
 	position: relative;
 
-	&:hover {
-		padding-top: 1px;
-		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
-		cursor: pointer;
-		div {
-			height: 1.188rem;
+	&::before {
+			content: '';
+			position: absolute;
+			background-color: ${border.tableOfContentsHover(format)};
+			width: 100%;
+			height: 0;
+			transition: height 0.2s ease;
+			top: 0;
+			left: 0;
 		}
-	}
+
+		&:hover::before {
+			height: ${remSpace[1]};
+		}
 
 	${darkModeCss`
-		border-color: ${border.tableOfContentsDark(format)};
-		&:hover {
-			border-color: ${border.tableOfContentsHoverDark(format)};
+		&::before {
+			background-color: ${border.tableOfContentsHoverDark(format)};
 		}
 		color: ${text.paragraphDark(format)};
 	`}
