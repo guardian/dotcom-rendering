@@ -67,20 +67,20 @@ type Props = {
 const SpecialReportAltAtom: FC<Props> = ({ format }) => (
     <aside css={styles(format)}>
         <hr css={hrStyles(format)} />
-        <h2 css={headingStyles}>What is the Special Report Alt?</h2>
+        <h2 css={headingStyles}>WHAT IS THE COTTON CAPITAL SERIES?</h2>
         <p css={textStyles}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat
-            sit eveniet autem nemo magnam esse nostrum repudiandae dolorem, ab
-            delectus explicabo voluptatibus dolores reiciendis voluptas aliquam
-            illo maxime? Debitis, molestias?
+            Cotton Capital explores how transatlantic slavery shaped the Guardian,
+			Manchester, Britain and the world. Stemming from an investigation into
+			the Guardian founders&#39; own links to slavery, this continuing series
+			explores our history and its enduring legacies today.
         </p>
         <LinkButton
-            href="https://www.theguardian.com"
+            href="https://www.theguardian.com/p/njenc"
             size="small"
             priority="secondary"
             cssOverrides={buttonStyles(format)}
         >
-            Find out more
+            Read more about the series
         </LinkButton>
         <hr css={hrStyles(format)} />
     </aside>

@@ -31,7 +31,7 @@ export const footerLinks: Link[][] = [
 			url: 'https://www.theguardian.com/info/complaints-and-corrections',
 		},
 		{
-			title: 'Securedrop',
+			title: 'SecureDrop',
 			url: 'https://www.theguardian.com/securedrop',
 		},
 		{
