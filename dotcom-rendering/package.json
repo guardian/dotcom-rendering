@@ -153,7 +153,7 @@
 		"aws-cdk-lib": "2.68.0",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-loader": "^8.2.5",
-		"babel-plugin-module-resolver": "^4.1.0",
+		"babel-plugin-module-resolver": "^5.0.0",
 		"babel-plugin-polyfill-corejs3": "^0.6.0",
 		"babel-plugin-px-to-rem": "https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0",
 		"babel-plugin-transform-runtime": "^6.23.0",
