@@ -17,7 +17,10 @@ endef
 
 # deployment #########################################
 
-riffraff-bundle: clean-dist build
+cdk-synth:
+	@yarn cdk:synth
+
+riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.js
 

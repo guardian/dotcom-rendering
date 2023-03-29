@@ -15,6 +15,8 @@ const target = path.resolve(__dirname, '../..', 'target');
 // ├── build.json
 // ├── riff-raff.yaml
 // ├── frontend-cfn
+// │   ├── DotcomRendering-CODE.template.json
+// │   ├── DotcomRendering-PROD.template.json
 // |   └── cloudformation.yml
 // ├── frontend-static
 // │   ├── assets
@@ -31,7 +33,14 @@ const target = path.resolve(__dirname, '../..', 'target');
 
 const copyCfn = () => {
 	log(' - copying cloudformation config');
-	return cpy([`cloudformation.yml`], path.resolve(target, 'frontend-cfn'));
+	return cpy(
+		[
+			'cloudformation.yml',
+			'cdk.out/DotcomRendering-CODE.template.json',
+			'cdk.out/DotcomRendering-PROD.template.json',
+		],
+		path.resolve(target, 'frontend-cfn'),
+	);
 };
 
 const copyStatic = () => {
