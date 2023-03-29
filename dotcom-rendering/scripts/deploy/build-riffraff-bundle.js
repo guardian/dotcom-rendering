@@ -17,7 +17,6 @@ const target = path.resolve(__dirname, '../..', 'target');
 // ├── frontend-cfn
 // │   ├── DotcomRendering-CODE.template.json
 // │   ├── DotcomRendering-PROD.template.json
-// |   └── cloudformation.yml
 // ├── frontend-static
 // │   ├── assets
 // │   │   └── **
@@ -35,7 +34,6 @@ const copyCfn = () => {
 	log(' - copying cloudformation config');
 	return cpy(
 		[
-			'cloudformation.yml',
 			'cdk.out/DotcomRendering-CODE.template.json',
 			'cdk.out/DotcomRendering-PROD.template.json',
 		],

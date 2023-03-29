@@ -9,7 +9,7 @@ deployments:
     parameters:
       templateStagePaths:
         CODE: DotcomRendering-CODE.template.json
-        PROD: cloudformation.yml
+        PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       templateStageParameters:
