@@ -55,6 +55,10 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Comment ||
 		item.design === ArticleDesign.Editorial
 	) {
+		if (item.display === ArticleDisplay.Immersive) {
+			return <ImmersiveLayout item={item} />;
+		}
+
 		return <CommentLayout item={item} />;
 	}
 
