@@ -146,13 +146,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-bundlesize: clear clean-dist install build
-	@bundlesize
-
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: install tsc lint stylelint test-ci bundlesize
+validate-ci: install tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
