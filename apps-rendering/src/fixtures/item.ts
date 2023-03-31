@@ -573,6 +573,13 @@ const standardImmersive: Standard = {
 	outline: fromBodyElements(fields.body),
 };
 
+const commentImmersive: Comment = {
+	design: ArticleDesign.Comment,
+	...fields,
+	display: ArticleDisplay.Immersive,
+	theme: ArticlePillar.Opinion,
+};
+
 const gallery: Gallery = {
 	design: ArticleDesign.Gallery,
 	...fields,
@@ -604,6 +611,7 @@ export {
 	explainer,
 	newsletterSignUp,
 	standardImmersive,
+	commentImmersive,
 	gallery,
 	parseHtml,
 	setTheme,

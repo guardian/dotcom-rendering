@@ -8,6 +8,7 @@ import {
 	analysis,
 	article,
 	comment,
+	commentImmersive,
 	editorial,
 	explainer,
 	feature,
@@ -176,6 +177,12 @@ export const CommentStandardSpecialReportAlt = pipe(
 	comment,
 	setSpecialReportAlt,
 	commentLayoutStory,
+);
+export const CommentImmersiveOpinion = immersiveLayoutStory(commentImmersive);
+export const CommentImmersiveSpecialReportAlt = pipe(
+	commentImmersive,
+	setSpecialReportAlt,
+	immersiveLayoutStory,
 );
 
 export const LetterStandardNews = letterLayoutStory(letter);
