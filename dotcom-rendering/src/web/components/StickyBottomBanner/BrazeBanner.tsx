@@ -9,6 +9,8 @@ import { submitComponentEvent } from '../../browser/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
+import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
+import { TagType } from '../../../types/tag';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };
@@ -41,6 +43,7 @@ const containerStyles = css`
 export const canShowBrazeBanner = async (
 	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
+	tags: TagType[],
 ): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
@@ -48,6 +51,10 @@ export const canShowBrazeBanner = async (
 			show: true,
 			meta: forcedBrazeMeta,
 		};
+	}
+
+	if (suppressForTaylorReport(tags)) {
+		return { show: false };
 	}
 
 	try {
