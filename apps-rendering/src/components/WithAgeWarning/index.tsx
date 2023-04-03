@@ -104,6 +104,10 @@ export const warningStyles = (
 			`;
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
+			if (format.display === ArticleDisplay.Immersive) {
+				return immersiveStyle(isSeries);
+			}
+
 			return css`
 				${articleWidthStyles}
 				padding-top: ${remSpace[2]};

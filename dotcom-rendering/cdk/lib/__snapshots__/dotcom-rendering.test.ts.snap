@@ -1,0 +1,658 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DotcomRendering stack matches the snapshot 1`] = `
+Object {
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Conditions": Object {
+    "HasBackend5XXAlarm": Object {
+      "Fn::Equals": Array [
+        Object {
+          "Ref": "Stage",
+        },
+        "PROD",
+      ],
+    },
+    "HasLatencyScalingAlarm": Object {
+      "Fn::Equals": Array [
+        Object {
+          "Ref": "Stage",
+        },
+        "PROD",
+      ],
+    },
+  },
+  "Description": "Frontend rendering service",
+  "Mappings": Object {
+    "Constants": Object {
+      "App": Object {
+        "Value": "rendering",
+      },
+      "Stack": Object {
+        "Value": "frontend",
+      },
+    },
+    "StageMap": Object {
+      "CODE": Object {
+        "MaxCapacity": 4,
+        "MinCapacity": 1,
+      },
+      "PROD": Object {
+        "MaxCapacity": 60,
+        "MinCapacity": 15,
+      },
+    },
+  },
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": Object {
+    "LoadBalancerUrl": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "InternalLoadBalancer",
+          "DNSName",
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AMI": Object {
+      "Description": "AMI to use for instances",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "App": Object {
+      "Default": "rendering",
+      "Description": "Application name",
+      "Type": "String",
+    },
+    "Backend5XXAlarmPeriod": Object {
+      "Default": "60",
+      "Description": "(Optional) Duration in seconds before 5XX alarm is triggered",
+      "Type": "String",
+    },
+    "Backend5XXAlarmThreshold": Object {
+      "Default": "100",
+      "Description": "(Optional) Max number of errors before the 5XX alarm is triggered",
+      "Type": "String",
+    },
+    "Backend5XXConsecutivePeriod": Object {
+      "Default": "5",
+      "Description": "(Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered",
+      "Type": "String",
+    },
+    "ELKStream": Object {
+      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
+      "Type": "String",
+    },
+    "FrontendConfigKey": Object {
+      "Description": "Parameter store KMS key",
+      "Type": "String",
+    },
+    "InstanceType": Object {
+      "Description": "EC2 Instance Type to use for dotcom-rendering",
+      "Type": "String",
+    },
+    "NotificationAlarmAction": Object {
+      "Default": "",
+      "Description": "(Optional) ARN of action to execute when notification alarms change state",
+      "Type": "CommaDelimitedList",
+    },
+    "Stack": Object {
+      "Default": "frontend",
+      "Description": "Stack name",
+      "Type": "String",
+    },
+    "Stage": Object {
+      "AllowedValues": Array [
+        "PROD",
+        "CODE",
+      ],
+      "Default": "CODE",
+      "Description": "Stage name",
+      "Type": "String",
+    },
+    "Subnets": Object {
+      "Description": "The subnets where rendering instances will run",
+      "Type": "List<AWS::EC2::Subnet::Id>",
+    },
+    "VPCIpBlock": Object {
+      "Default": "10.248.136.0/22",
+      "Description": "CIDR block for IP addresses inside this VPC",
+      "Type": "String",
+    },
+    "VpcId": Object {
+      "Description": "The VPC in which rendering instances will run",
+      "Type": "AWS::EC2::VPC::Id",
+    },
+  },
+  "Resources": Object {
+    "AutoscalingGroup": Object {
+      "Properties": Object {
+        "AvailabilityZones": Object {
+          "Fn::GetAZs": "",
+        },
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchConfigurationName": Object {
+          "Ref": "LaunchConfig",
+        },
+        "LoadBalancerNames": Array [
+          Object {
+            "Ref": "InternalLoadBalancer",
+          },
+        ],
+        "MaxSize": Object {
+          "Fn::FindInMap": Array [
+            "StageMap",
+            Object {
+              "Ref": "Stage",
+            },
+            "MaxCapacity",
+          ],
+        },
+        "MinSize": Object {
+          "Fn::FindInMap": Array [
+            "StageMap",
+            Object {
+              "Ref": "Stage",
+            },
+            "MinCapacity",
+          ],
+        },
+        "Tags": Array [
+          Object {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": Object {
+              "Fn::FindInMap": Array [
+                "Constants",
+                "App",
+                "Value",
+              ],
+            },
+          },
+          Object {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "frontend",
+          },
+          Object {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+        ],
+        "VPCZoneIdentifier": Object {
+          "Ref": "Subnets",
+        },
+      },
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
+    },
+    "Backend5xxAlarm": Object {
+      "Condition": "HasBackend5XXAlarm",
+      "Properties": Object {
+        "AlarmActions": Object {
+          "Ref": "NotificationAlarmAction",
+        },
+        "AlarmDescription": Object {
+          "Fn::Sub": "Alarm if 5XX backend errors are greater than \${Backend5XXAlarmThreshold} over last \${Backend5XXAlarmPeriod} seconds
+",
+        },
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": Array [
+          Object {
+            "Name": "LoadBalancerName",
+            "Value": Object {
+              "Ref": "InternalLoadBalancer",
+            },
+          },
+        ],
+        "EvaluationPeriods": Object {
+          "Ref": "Backend5XXConsecutivePeriod",
+        },
+        "MetricName": "HTTPCode_Backend_5XX",
+        "Namespace": "AWS/ELB",
+        "OKActions": Object {
+          "Ref": "NotificationAlarmAction",
+        },
+        "Period": Object {
+          "Ref": "Backend5XXAlarmPeriod",
+        },
+        "Statistic": "Sum",
+        "Threshold": Object {
+          "Ref": "Backend5XXAlarmThreshold",
+        },
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "InstanceProfile": Object {
+      "Properties": Object {
+        "Path": "/",
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "InstanceRole": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "sts:AssumeRole",
+              ],
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": Array [
+                  "ec2.amazonaws.com",
+                ],
+              },
+            },
+          ],
+        },
+        "ManagedPolicyArns": Array [
+          "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM",
+        ],
+        "Path": "/",
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "s3:GetObject",
+                  "Effect": "Allow",
+                  "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
+                },
+                Object {
+                  "Action": Array [
+                    "cloudwatch:*",
+                    "logs:*",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+                Object {
+                  "Action": Array [
+                    "ec2:DescribeTags",
+                    "ec2:DescribeInstances",
+                    "autoscaling:DescribeAutoScalingGroups",
+                    "autoscaling:DescribeAutoScalingInstances",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*",
+                },
+                Object {
+                  "Action": Array [
+                    "kms:Decrypt",
+                    "kms:DescribeKey",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Ref": "FrontendConfigKey",
+                  },
+                },
+                Object {
+                  "Action": Array [
+                    "ssm:GetParametersByPath",
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Array [
+                    Object {
+                      "Fn::Sub": "arn:aws:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/frontend/*",
+                    },
+                  ],
+                },
+                Object {
+                  "Action": Array [
+                    "ssm:GetParametersByPath",
+                    "ssm:GetParameter",
+                  ],
+                  "Effect": "Allow",
+                  "Resource": Array [
+                    Object {
+                      "Fn::Sub": "arn:aws:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/dotcom/*",
+                    },
+                  ],
+                },
+              ],
+            },
+            "PolicyName": "instance-policy",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          Object {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InstanceSecurityGroup": Object {
+      "Properties": Object {
+        "GroupDescription": "rendering instance",
+        "SecurityGroupIngress": Array [
+          Object {
+            "FromPort": 9000,
+            "IpProtocol": "tcp",
+            "SourceSecurityGroupId": Object {
+              "Ref": "InternalLoadBalancerSecurityGroup",
+            },
+            "ToPort": 9000,
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "App",
+            "Value": Object {
+              "Fn::FindInMap": Array [
+                "Constants",
+                "App",
+                "Value",
+              ],
+            },
+          },
+          Object {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          Object {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalLoadBalancer": Object {
+      "Properties": Object {
+        "AccessLoggingPolicy": Object {
+          "EmitInterval": 5,
+          "Enabled": true,
+          "S3BucketName": "gu-elb-logs",
+          "S3BucketPrefix": Object {
+            "Fn::Join": Array [
+              "/",
+              Array [
+                "ELBLogs",
+                Object {
+                  "Fn::FindInMap": Array [
+                    "Constants",
+                    "Stack",
+                    "Value",
+                  ],
+                },
+                Object {
+                  "Fn::FindInMap": Array [
+                    "Constants",
+                    "App",
+                    "Value",
+                  ],
+                },
+                Object {
+                  "Ref": "Stage",
+                },
+              ],
+            ],
+          },
+        },
+        "CrossZone": true,
+        "HealthCheck": Object {
+          "HealthyThreshold": "2",
+          "Interval": "30",
+          "Target": "HTTP:9000/_healthcheck",
+          "Timeout": "10",
+          "UnhealthyThreshold": "10",
+        },
+        "Listeners": Array [
+          Object {
+            "InstancePort": "9000",
+            "LoadBalancerPort": "80",
+            "Protocol": "HTTP",
+          },
+        ],
+        "LoadBalancerName": Object {
+          "Fn::Sub": "\${Stack}-\${Stage}-\${App}-ELB",
+        },
+        "Scheme": "internal",
+        "SecurityGroups": Array [
+          Object {
+            "Ref": "InternalLoadBalancerSecurityGroup",
+          },
+        ],
+        "Subnets": Object {
+          "Ref": "Subnets",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "App",
+            "Value": Object {
+              "Fn::FindInMap": Array [
+                "Constants",
+                "App",
+                "Value",
+              ],
+            },
+          },
+          Object {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          Object {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+      },
+      "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+    },
+    "InternalLoadBalancerSecurityGroup": Object {
+      "Properties": Object {
+        "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": Object {
+              "Ref": "VPCIpBlock",
+            },
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+          Object {
+            "CidrIp": Object {
+              "Ref": "VPCIpBlock",
+            },
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "App",
+            "Value": Object {
+              "Fn::FindInMap": Array [
+                "Constants",
+                "App",
+                "Value",
+              ],
+            },
+          },
+          Object {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          Object {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LatencyScalingAlarm": Object {
+      "Condition": "HasLatencyScalingAlarm",
+      "Properties": Object {
+        "AlarmActions": Array [
+          Object {
+            "Ref": "ScaleUpPolicy",
+          },
+        ],
+        "AlarmDescription": Object {
+          "Fn::Sub": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
+",
+        },
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": Array [
+          Object {
+            "Name": "LoadBalancerName",
+            "Value": Object {
+              "Ref": "InternalLoadBalancer",
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "Latency",
+        "Namespace": "AWS/ELB",
+        "OKActions": Array [
+          Object {
+            "Ref": "ScaleDownPolicy",
+          },
+        ],
+        "Period": 60,
+        "Statistic": "Average",
+        "Threshold": 0.2,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
+    "LaunchConfig": Object {
+      "Properties": Object {
+        "AssociatePublicIpAddress": true,
+        "IamInstanceProfile": Object {
+          "Ref": "InstanceProfile",
+        },
+        "ImageId": Object {
+          "Ref": "AMI",
+        },
+        "InstanceType": Object {
+          "Ref": "InstanceType",
+        },
+        "SecurityGroups": Array [
+          Object {
+            "Ref": "InstanceSecurityGroup",
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Sub": "#!/bin/bash -ev
+
+groupadd frontend
+useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+usermod -a -G frontend aws-kinesis-agent-user
+cd /home/dotcom-rendering
+
+aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/\${Stage}/\${App}/dist/\${App}.zip ./
+unzip -q \${App}.zip -d \${App}
+
+chown -R dotcom-rendering:frontend \${App}
+
+cd \${App}/dotcom-rendering
+
+export TERM=xterm-256color
+export NODE_ENV=production
+export GU_STAGE=\${Stage}
+
+mkdir /var/log/dotcom-rendering
+chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+
+make start-prod
+
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent \${AWS::Region} \${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
+",
+          },
+        },
+      },
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+    },
+    "ScaleDownPolicy": Object {
+      "Properties": Object {
+        "AdjustmentType": "ChangeInCapacity",
+        "AutoScalingGroupName": Object {
+          "Ref": "AutoscalingGroup",
+        },
+        "Cooldown": "120",
+        "ScalingAdjustment": -1,
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "ScaleUpPolicy": Object {
+      "Properties": Object {
+        "AdjustmentType": "PercentChangeInCapacity",
+        "AutoScalingGroupName": Object {
+          "Ref": "AutoscalingGroup",
+        },
+        "Cooldown": "600",
+        "ScalingAdjustment": 100,
+      },
+      "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+  },
+}
+`;

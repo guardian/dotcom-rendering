@@ -17,7 +17,10 @@ endef
 
 # deployment #########################################
 
-riffraff-bundle: clean-dist build
+cdk-synth:
+	@yarn cdk:synth
+
+riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.js
 
@@ -146,13 +149,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-bundlesize: clear clean-dist install build
-	@bundlesize
-
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: install tsc lint stylelint test-ci bundlesize
+validate-ci: install tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
