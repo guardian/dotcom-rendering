@@ -10,6 +10,7 @@ import {
 import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { eagerPrebid } from '../experiments/tests/eager-prebid';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -27,6 +28,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
+	eagerPrebid,
 ];
 
 const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
