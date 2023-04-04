@@ -18,6 +18,7 @@ import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { decideFormat } from '../lib/decideFormat';
 import { Stuck } from './lib/stickiness';
+import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 
 type Props = {
 	newslettersPage: DCRNewslettersPageType;
@@ -141,13 +142,13 @@ export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="NewsletterPage" id="maincontent">
-				<NewslettersList
-					newsletters={newslettersPage.newsletters}
+			<main data-layout="NewsletterPageLayout" id="maincontent">
+				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
 					editionId={newslettersPage.editionId}
 					headingText={newslettersPage.webTitle}
 				/>
+				<NewslettersList newsletters={newslettersPage.newsletters} />
 			</main>
 
 			<Section
