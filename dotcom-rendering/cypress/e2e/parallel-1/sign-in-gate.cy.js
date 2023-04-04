@@ -114,7 +114,7 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
 
-		it('should not load the sign in gate if the user is signed in', function (done) {
+		it('should not load the sign in gate if the user is signed in', function () {
 			// use GU_U cookie to determine if user is signed in
 			cy.setCookie(
 				'GU_U',
@@ -123,14 +123,6 @@ describe('Sign In Gate Tests', function () {
 			);
 
 			visitArticleAndScrollToGateForLazyLoad();
-
-			// when using GU_U cookie, there is an issue with the commercial.dcr.js bundle
-			// causing a URI Malformed error in cypress
-			// we use this uncaught exception in this test to catch this and continue the rest of the test
-			cy.on('uncaught:exception', () => {
-				done();
-				return false;
-			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
