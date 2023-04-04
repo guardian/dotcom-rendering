@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import {
-	between,
+	body,
 	headline,
 	neutral,
 	news,
 	space,
+	until,
 } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
@@ -35,11 +36,12 @@ const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${fontColour ?? neutral[7]};
 	padding-bottom: ${space[1]}px;
-	padding-top: ${space[1]}px;
+	padding-top: 6px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
-	${headline.xxxsmall({ fontWeight: 'medium' })};
+	${body.xsmall({ fontWeight: 'medium' })};
 	color: ${fontColour ?? neutral[46]};
 	p {
 		/* Handle paragraphs in the description */
@@ -57,15 +59,14 @@ const bottomMargin = css`
 
 const marginStyles = css`
 	margin-left: 0;
-	${between.tablet.and.leftCol} {
-		margin-left: 10px;
-	}
-	margin-bottom: ${space[2]}px;
 `;
 
 const dateTextStyles = (color: Colour) => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	color: ${color};
+	${until.tablet} {
+		display: none;
+	}
 `;
 
 /**
@@ -101,7 +102,7 @@ export const ContainerTitle = ({
 				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
 			{!!description && (
-				<p
+				<div
 					css={[descriptionStyles(fontColour), bottomMargin]}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>

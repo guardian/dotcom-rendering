@@ -5,9 +5,22 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 /**
- * TopRightAdSlot NORMALLY decides if we should render the ShadyPie or not
+ * # Top Right Ad Slot
  *
- * ShadyPie is disabled, pending the rollout of the new supporter plus product
+ * This component NORMALLY decides if we should render the `ShadyPie` or not.
+ *
+ * **Currently**, `ShadyPie` is  disabled, pending the rollout
+ * of the new supporter plus product.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * It relies on running `useAdBlockInUse` on the client.
+ *
+ * **Currently**, it does not need to be.
+ *
+ * ---
+ *
+ * (No visual story exists)
  */
 export const TopRightAdSlot = ({
 	adStyles,
@@ -19,6 +32,7 @@ export const TopRightAdSlot = ({
 	return (
 		<div
 			id="top-right-ad-slot"
+			className="ad-slot-container"
 			css={[
 				css`
 					position: static;

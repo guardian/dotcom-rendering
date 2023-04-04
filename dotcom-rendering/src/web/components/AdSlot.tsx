@@ -11,7 +11,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
-import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlineProps = {
@@ -95,8 +94,9 @@ export const labelStyles = css`
 		${textSans.xxsmall()};
 		text-align: left;
 		position: absolute;
-		right: 3px;
-		top: -22px;
+		left: 268px;
+		top: 1px;
+		z-index: 10;
 		padding: 0;
 		border: 0;
 	}
@@ -253,7 +253,7 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div css={[adStyles]}>
+						<div className="ad-slot-container" css={[adStyles]}>
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -274,12 +274,10 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<Island>
-							<TopRightAdSlot
-								isPaidContent={isPaidContent}
-								adStyles={adStyles}
-							/>
-						</Island>
+						<TopRightAdSlot
+							isPaidContent={isPaidContent}
+							adStyles={adStyles}
+						/>
 					);
 				}
 				default:
@@ -287,7 +285,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div css={[adStyles]}>
+				<div className="ad-slot-container" css={[adStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -334,7 +332,7 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div css={[adStyles]}>
+				<div className="ad-slot-container" css={[adStyles]}>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -355,6 +353,7 @@ export const AdSlot = ({
 		case 'merchandising-high': {
 			return (
 				<div
+					className="ad-slot-container"
 					css={[
 						css`
 							display: flex;
@@ -385,6 +384,7 @@ export const AdSlot = ({
 		case 'merchandising': {
 			return (
 				<div
+					className="ad-slot-container"
 					css={[
 						css`
 							display: flex;
@@ -434,25 +434,27 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index}`;
 			return (
-				<div
-					id={`dfp-ad--${advertId}`}
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						`ad-slot--${advertId}`,
-						'ad-slot--container-inline',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
-					data-link-name={`ad slot ${advertId}`}
-					data-name={advertId}
-					aria-hidden="true"
-				/>
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--container-inline',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+							`,
+							adStyles,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'liveblog-inline': {

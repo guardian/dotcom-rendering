@@ -15,13 +15,23 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 
-const descriptionStyles = css`
+/* stylelint-disable-next-line color-no-hex */
+const linkDecorationColour = '#12121240';
+
+export const calloutLinkStyles = css`
 	a {
 		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
 		text-decoration: none;
+		border-bottom: 1px solid ${linkDecorationColour};
 	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
+`;
 
+const descriptionStyles = css`
+	${calloutLinkStyles}
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -102,9 +112,14 @@ const shareCalloutTextStyles = css`
 `;
 
 const shareCalloutLinkStyles = css`
-	color: ${brand[500]};
-	font-weight: normal;
 	${textSans.xsmall()}
+	color: ${brand[500]};
+	border-bottom: 1px solid ${linkDecorationColour};
+	text-decoration: none;
+	:hover,
+	:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
 `;
 
 const sharePopupStyles = css`
@@ -133,6 +148,7 @@ const shareIconStyles = css`
 	border: 1px solid ${brand[500]};
 	box-sizing: border-box;
 	fill: ${brand[500]};
+	padding: 0.5px 0;
 `;
 
 export const CalloutShare = ({
@@ -186,7 +202,7 @@ export const CalloutShare = ({
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles}
+						cssOverrides={shareCalloutLinkStyles}
 					>
 						Please share this callout.
 					</Button>
@@ -203,11 +219,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	a {
-		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
-	}
+	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;

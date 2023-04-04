@@ -52,6 +52,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -317,7 +318,9 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType' && article.matchUrl;
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
@@ -338,10 +341,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -481,24 +481,6 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<StandardGrid isMatchReport={isMatchReport}>
-						<GridItem area="title" element="aside">
-							<ArticleTitle
-								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
-								isMatch={!!footballMatchUrl}
-							/>
-						</GridItem>
-						<GridItem area="border">
-							{format.theme === ArticleSpecial.Labs ? (
-								<></>
-							) : (
-								<Border format={format} />
-							)}
-						</GridItem>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{isMatchReport && (
@@ -535,6 +517,40 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 								)}
 							</div>
 						</GridItem>
+						<GridItem area="media">
+							<div css={maxWidth}>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
+						<GridItem area="title" element="aside">
+							<ArticleTitle
+								format={format}
+								tags={article.tags}
+								sectionLabel={article.sectionLabel}
+								sectionUrl={article.sectionUrl}
+								guardianBaseURL={article.guardianBaseURL}
+								badge={article.badge}
+								isMatch={!!footballMatchUrl}
+							/>
+						</GridItem>
+						<GridItem area="border">
+							{format.theme === ArticleSpecial.Labs ? (
+								<></>
+							) : (
+								<Border format={format} />
+							)}
+						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>
 								<ArticleHeadline
@@ -552,7 +568,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{article.starRating || article.starRating === 0 ? (
+							{article.starRating !== undefined ? (
 								<div css={starWrapper}>
 									<StarRating
 										rating={article.starRating}
@@ -566,22 +582,6 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 								format={format}
 								standfirst={article.standfirst}
 							/>
-						</GridItem>
-						<GridItem area="media">
-							<div css={maxWidth}>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
 						</GridItem>
 						<GridItem area="lines">
 							<div css={maxWidth}>
@@ -658,6 +658,10 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 									keywordIds={article.config.keywordIds}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -745,7 +749,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{!article.shouldHideAds && (
+									{renderAds && (
 										<AdSlot
 											position="right"
 											display={format.display}
@@ -874,6 +878,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>

@@ -234,7 +234,7 @@ const ReaderRevenueLinksRemote = ({
 			});
 	}, [countryCode]);
 
-	if (SupportHeader && supportHeaderResponse) {
+	if (SupportHeader !== null && supportHeaderResponse) {
 		return (
 			<div css={headerStyles}>
 				{}

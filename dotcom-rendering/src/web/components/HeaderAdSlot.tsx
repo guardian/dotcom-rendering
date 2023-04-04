@@ -31,6 +31,13 @@ const headerAdWrapper = css`
 	top: 0;
 `;
 
+const adSlotContainer = css`
+	&[top-above-nav-ad-rendered] {
+		width: fit-content;
+		margin: auto;
+	}
+`;
+
 export const HeaderAdSlot = ({ display }: Props) => (
 	<div css={headerWrapper}>
 		{/*
@@ -61,7 +68,9 @@ export const HeaderAdSlot = ({ display }: Props) => (
 				css={[headerAdWrapper, labelStyles]}
 				className="top-banner-ad-container"
 			>
-				<AdSlot position="top-above-nav" display={display} />
+				<div css={adSlotContainer} className="ad-slot-container">
+					<AdSlot position="top-above-nav" display={display} />
+				</div>
 			</div>
 		</Hide>
 	</div>

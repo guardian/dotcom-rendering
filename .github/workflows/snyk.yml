@@ -1,4 +1,7 @@
-name: DCR Snyk
+# This monitors all projects in this repository, beecause the DevX workflow
+# passes `--all-projects` to `snyk monitor`
+# This will monitor dotcom-rendering, apps-rendering, storybook etc
+name: Snyk
 on:
     schedule:
         - cron: '0 6 * * *'

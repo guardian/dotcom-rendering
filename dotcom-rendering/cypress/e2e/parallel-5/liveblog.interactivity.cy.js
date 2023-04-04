@@ -43,7 +43,7 @@ describe('Liveblogs', function () {
 
 	it('should show the toast, incrementing the count as new updates are sent', function () {
 		stubUpdates();
-		cy.visit(`/Article?url=${blogUrl}?live=true`);
+		cy.visit(`/Article/${blogUrl}?live=true`);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
@@ -71,7 +71,7 @@ describe('Liveblogs', function () {
 
 	it('should insert the html from the update call', function () {
 		stubUpdates();
-		cy.visit(`/Article?url=${blogUrl}?live=true`);
+		cy.visit(`/Article/${blogUrl}?live=true`);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
@@ -88,7 +88,7 @@ describe('Liveblogs', function () {
 
 	it('should scroll the page to the top and reveal content when the toast is clicked', function () {
 		stubUpdates();
-		cy.visit(`/Article?url=${blogUrl}?live=true`);
+		cy.visit(`/Article/${blogUrl}?live=true`);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
@@ -118,7 +118,7 @@ describe('Liveblogs', function () {
 				.then(cy.wrap);
 		};
 		stubUpdates();
-		cy.visit(`/Article?url=${blogUrl}?live=true`);
+		cy.visit(`/Article/${blogUrl}?live=true`);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
@@ -151,7 +151,7 @@ describe('Liveblogs', function () {
 			},
 		).as('updateCall');
 		cy.visit(
-			`/Article?url=${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
+			`/Article/${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
 		);
 		cy.wait('@updateCall');
 	});
@@ -159,7 +159,7 @@ describe('Liveblogs', function () {
 	it('should handle when the toast is clicked from the second page', function () {
 		stubUpdates();
 		cy.visit(
-			`/Article?url=${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
+			`/Article/${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
 		);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
@@ -187,7 +187,7 @@ describe('Liveblogs', function () {
 
 	it('should initially hide new blocks, only revealing them when the top of blog is in view', function () {
 		stubUpdates();
-		cy.visit(`/Article?url=${blogUrl}?live=true`);
+		cy.visit(`/Article/${blogUrl}?live=true`);
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
@@ -221,7 +221,7 @@ describe('Liveblogs', function () {
 	it.skip('should render live score updates to a cricketblog', function () {
 		// Get article with ?live to force the article to be 'live'
 		cy.visit(
-			'/Article?url=https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live',
+			'/Article/https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live',
 		);
 
 		// Initial request for the cricket data

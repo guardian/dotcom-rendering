@@ -60,17 +60,13 @@ export const pageTemplate = ({
 	const generateMetaTags = (
 		dataObject: { [key: string]: string },
 		attributeName: 'name' | 'property',
-	) => {
-		if (dataObject) {
-			return Object.entries(dataObject)
-				.map(
-					([id, value]) =>
-						`<meta ${attributeName}="${id}" content="${value}"/>`,
-				)
-				.join('\n');
-		}
-		return '';
-	};
+	) =>
+		Object.entries(dataObject)
+			.map(
+				([id, value]) =>
+					`<meta ${attributeName}="${id}" content="${value}"/>`,
+			)
+			.join('\n');
 
 	const openGraphMetaTags =
 		openGraphData && generateMetaTags(openGraphData, 'property');
@@ -234,6 +230,12 @@ https://workforus.theguardian.com/careers/product-engineering/
                         window.performance.mark = function(){};
                         window.performance.measure = function(){};
                     }
+                </script>
+
+                <script>
+                    // record the number of times the browser goes offline during a pageview
+                    window.guardian.offlineCount = 0;
+                    window.addEventListener('offline', function incrementOfflineCount () { window.guardian.offlineCount++ });
                 </script>
 
                 <script>

@@ -109,6 +109,12 @@ module.exports = {
 		'react/no-unknown-property': ['error', { ignore: ['css'] }],
 		// We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
 		'no-fallthrough': 'off',
+		// TODO: review these and see which we want to employ
+		'import/no-named-as-default-member': 'off',
+		'import/no-cycle': 'off',
+		'import/order': 'off',
+		'@typescript-eslint/no-unsafe-argument': 'off',
+		'@typescript-eslint/no-misused-promises': 'off',
 	},
 	settings: {
 		react: {

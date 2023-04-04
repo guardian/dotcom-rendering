@@ -10,7 +10,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
@@ -35,6 +35,7 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
+	isExternalLink?: boolean;
 };
 
 const fontStyles = ({
@@ -197,7 +198,6 @@ const dynamoStyles = css`
 	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
-
 const WithLink = ({
 	linkTo,
 	children,
@@ -240,6 +240,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
+	isExternalLink,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -268,15 +269,16 @@ export const CardHeadline = ({
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
-						<Kicker
-							text={kickerText}
-							color={kickerColour}
-							showPulsingDot={showPulsingDot}
-							hideLineBreak={hideLineBreak}
-						/>
+						<>
+							<Kicker
+								text={kickerText}
+								color={kickerColour}
+								showPulsingDot={showPulsingDot}
+								hideLineBreak={hideLineBreak}
+							/>
+						</>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
-
 					<span
 						css={css`
 							color: ${isDynamo
@@ -286,6 +288,15 @@ export const CardHeadline = ({
 						className="show-underline"
 					>
 						{cleanHeadLineText}
+						{isExternalLink && (
+							<span
+								css={css`
+									stroke: red;
+								`}
+							>
+								<SvgExternal size="xsmall" />
+							</span>
+						)}
 					</span>
 				</WithLink>
 			</h3>

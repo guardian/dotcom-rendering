@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition --
+	We check the existence of window.ga frequently, which is required for browser safety despite the type definitions. */
 import { getCookie } from '@guardian/libs';
 import { getCLS, getFID, getLCP } from 'web-vitals';
 
@@ -80,6 +82,10 @@ export const sendPageView = (): void => {
 	const { GAData } = window.guardian;
 	const userCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
 	const { ga } = window;
+
+	if (!ga) {
+		return;
+	}
 
 	ga(set, 'forceSSL', true);
 	ga(set, 'title', GAData.webTitle);
@@ -175,38 +181,28 @@ export const sendPageView = (): void => {
 
 export const trackNonClickInteraction = (actionName: string): void => {
 	const { ga } = window;
-
-	if (ga) {
-		ga(send, 'event', 'Interaction', actionName, {
-			/**
-			 * set nonInteraction to avoid affecting bounce rate
-			 * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
-			 */
-			nonInteraction: true,
-		});
-	} else {
-		const error = new Error("window.ga doesn't exist");
-		window.guardian.modules.sentry.reportError(
-			error,
-			'trackNonClickInteraction',
-		);
+	if (!ga) {
+		return;
 	}
+
+	ga(send, 'event', 'Interaction', actionName, {
+		/**
+		 * set nonInteraction to avoid affecting bounce rate
+		 * https://support.google.com/analytics/answer/1033068#NonInteractionEvents
+		 */
+		nonInteraction: true,
+	});
 };
 
 export const trackSponsorLogoLinkClick = (sponsorName: string): void => {
 	const { ga } = window;
-
-	if (ga) {
-		ga(send, 'event', 'click', 'sponsor logo', sponsorName, {
-			nonInteraction: true,
-		});
-	} else {
-		const error = new Error("window.ga doesn't exist");
-		window.guardian.modules.sentry.reportError(
-			error,
-			'trackSponsorLogoLinkClick',
-		);
+	if (!ga) {
+		return;
 	}
+
+	ga(send, 'event', 'click', 'sponsor logo', sponsorName, {
+		nonInteraction: true,
+	});
 };
 
 export const trackVideoInteraction = ({

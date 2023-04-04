@@ -45,9 +45,11 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -241,10 +243,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
@@ -417,7 +416,12 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout" id="maincontent">
+			<main
+				data-layout="ShowcaseLayout"
+				id="maincontent"
+				lang={decideLanguage(article.lang)}
+				dir={decideLanguageDirection(article.isRightToLeftLang)}
+			>
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -425,6 +429,29 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<ShowcaseGrid>
+						<GridItem area="media">
+							<div css={mainMediaWrapper}>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										article.starRating !== undefined
+											? article.starRating
+											: undefined
+									}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -449,33 +476,10 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 										article.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										typeof article.starRating === 'number'
+										article.starRating !== undefined
 									}
 								/>
 							</PositionHeadline>
-						</GridItem>
-						<GridItem area="media">
-							<div css={mainMediaWrapper}>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										article.starRating
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
 						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
@@ -550,6 +554,10 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									keywordIds={article.config.keywordIds}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -621,7 +629,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{!article.shouldHideAds && (
+									{renderAds && (
 										<AdSlot
 											position="right"
 											display={format.display}
@@ -748,6 +756,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>

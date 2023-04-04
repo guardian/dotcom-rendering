@@ -352,7 +352,7 @@ const RemoteBanner = ({
 		}
 	}, [hasBeenSeen, meta]);
 
-	if (Banner) {
+	if (Banner !== undefined) {
 		return (
 			// The css here is necessary to put the container div in view, so that we can track the view
 			<div

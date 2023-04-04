@@ -5,11 +5,10 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
 import CaptionIcon from 'components/CaptionIcon';
 import type { CaptionIconVariant } from 'components/CaptionIcon';
 import type { Styleable } from 'lib';
+import type { Optional } from 'optional';
 import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
@@ -18,7 +17,7 @@ import { darkModeCss } from 'styles';
 
 type Props = Styleable<{
 	format: ArticleFormat;
-	children: Option<ReactNode>;
+	children: Optional<ReactNode>;
 	variant: CaptionIconVariant;
 }>;
 
@@ -51,20 +50,18 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const FigCaption: FC<Props> = ({ format, children, className, variant }) => {
-	switch (children.kind) {
-		case OptionKind.Some:
-			return (
-				<figcaption className={className} css={getStyles(format)}>
-					<CaptionIcon format={format} variant={variant} />
-					{children.value}
-				</figcaption>
-			);
-
-		default:
-			return null;
-	}
-};
+const FigCaption: FC<Props> = ({
+	format,
+	children: maybeChildren,
+	className,
+	variant,
+}) =>
+	maybeChildren.maybeRender((children) => (
+		<figcaption className={className} css={getStyles(format)}>
+			<CaptionIcon format={format} variant={variant} />
+			{children}
+		</figcaption>
+	));
 
 // ----- Exports ----- //
 

@@ -49,7 +49,9 @@ type FEDesign =
 	| 'PrintShopDesign'
 	| 'ObituaryDesign'
 	| 'FullPageInteractiveDesign'
-	| 'NewsletterSignupDesign';
+	| 'NewsletterSignupDesign'
+	| 'TimelineDesign'
+	| 'ProfileDesign';
 
 // FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -417,6 +419,11 @@ interface Topic {
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
+
+interface MessageUs {
+	formId: string;
+	formFields: import('./src/types/content').MessageUsFieldType[];
+}
 
 interface GADataType {
 	pillar: LegacyPillar;

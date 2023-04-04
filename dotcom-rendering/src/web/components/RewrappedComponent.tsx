@@ -1,6 +1,5 @@
-import { ClassNames } from '@emotion/react';
-// @ts-expect-error -- we’re actually using preact
-import { jsx as _jsx } from 'react/jsx-runtime';
+import type { SerializedStyles } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { unescapeData } from '../../lib/escapeData';
 import type { HTMLTag } from '../../model/unwrapHtml';
 import { logger } from '../../server/lib/logging';
@@ -22,44 +21,37 @@ export const RewrappedComponent = ({
 }: {
 	isUnwrapped: boolean;
 	html: string;
-	elCss?: string;
+	elCss?: SerializedStyles;
 	tagName: HTMLTag;
-}) => (
-	<ClassNames>
-		{({ css }) => {
-			if (!isUnwrapped) {
-				const isDev = process.env.NODE_ENV !== 'production';
-				logger.warn(
-					'RewrappedComponent called with isUnwrapped === false',
-					{
-						isDev,
-						html,
-						tagName,
-					},
-				);
-			}
+}) => {
+	if (!isUnwrapped) {
+		const isDev = process.env.NODE_ENV !== 'production';
+		logger.warn('RewrappedComponent called with isUnwrapped === false', {
+			isDev,
+			html,
+			tagName,
+		});
+	}
 
-			const element: HTMLTag = isUnwrapped ? tagName : 'span';
+	const element: HTMLTag = isUnwrapped ? tagName : 'span';
 
-			// If we implement a span, we want to apply the CSS to the inner element
-			// to ensure we still style correctly
-			const innerElCss = css`
-				${tagName} {
-					${elCss}
-				}
-			`;
+	// If we implement a span, we want to apply the CSS to the inner element
+	// to ensure we still style correctly
+	const innerElCss = css`
+		${tagName} {
+			${elCss}
+		}
+	`;
 
-			const style = isUnwrapped ? elCss : innerElCss;
+	const style = isUnwrapped ? elCss : innerElCss;
 
-			// Create a react element from the tagName passed in OR
-			// default to <span> if we've not been able to unwrap based on prefix & suffix
-			return _jsx(element, {
-				// if style is `undefined`, it will be omitted
-				className: style,
-				dangerouslySetInnerHTML: {
-					__html: unescapeData(html),
-				},
-			});
-		}}
-	</ClassNames>
-);
+	// Create a react element from the tagName passed in OR
+	// default to <span> if we've not been able to unwrap based on prefix & suffix
+	return jsx(element, {
+		// if style is `undefined`, it will be omitted
+		css: style,
+		dangerouslySetInnerHTML: {
+			__html: unescapeData(html),
+		},
+	});
+};

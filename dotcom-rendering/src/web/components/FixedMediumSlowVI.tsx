@@ -34,11 +34,11 @@ export const FixedMediumSlowVI = ({
 						/>
 					</LI>
 				))}
-				{firstSlice25.map((trail, index) => (
+				{firstSlice25.map((trail) => (
 					<LI
 						key={trail.url}
 						padSides={true}
-						showDivider={index > 0}
+						showDivider={true}
 						containerPalette={containerPalette}
 						percentage={'25%'}
 					>

@@ -94,3 +94,41 @@ export const SpecialReport = () => {
 	);
 };
 SpecialReport.story = { name: 'with design Analysis and theme SpecialReport' };
+
+export const Timeline = () => {
+	return (
+		<div
+			css={css`
+				max-width: 400px;
+			`}
+		>
+			<DesignTag
+				format={{
+					design: ArticleDesign.Timeline,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</div>
+	);
+};
+Timeline.story = { name: 'with design Timeline' };
+
+export const Profile = () => {
+	return (
+		<div
+			css={css`
+				max-width: 400px;
+			`}
+		>
+			<DesignTag
+				format={{
+					design: ArticleDesign.Profile,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</div>
+	);
+};
+Profile.story = { name: 'with design Profile' };

@@ -55,7 +55,8 @@ import { SubNav } from '../components/SubNav.importable';
 import {
 	hasRelevantTopics,
 	TopicFilterBank,
-} from '../components/TopicFilterBank.importable';
+} from '../components/TopicFilterBank';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -282,10 +283,12 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType' && article.matchUrl;
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const cricketMatchUrl =
-		article.matchType === 'CricketMatchType' && article.matchUrl;
+		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
 
 	const showTopicFilterBank =
 		!!article.config.switches.automaticFilters &&
@@ -294,10 +297,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 	const hasKeyEvents = !!article.keyEvents.length;
 	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -488,8 +488,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 										/>
 									)}
 								</div>
-								{article.starRating ||
-								article.starRating === 0 ? (
+								{article.starRating !== undefined ? (
 									<div css={starWrapper}>
 										<StarRating
 											rating={article.starRating}
@@ -519,7 +518,8 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{!!article.blocks[0]?.blockLastUpdated && (
+								{article.blocks[0]?.blockLastUpdated !==
+									undefined && (
 									<ArticleLastUpdated
 										format={format}
 										lastUpdated={
@@ -570,6 +570,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 											!!article.config.switches
 												.serverShareCounts
 										}
+										messageUs={article.messageUs}
 									/>
 								</div>
 							</Hide>
@@ -734,6 +735,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 												!!article.config.switches
 													.serverShareCounts
 											}
+											messageUs={article.messageUs}
 										/>
 									</div>
 								</Hide>
@@ -741,26 +743,22 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 								{showTopicFilterBank && (
 									<Hide until="desktop">
 										<div css={sidePaddingDesktop}>
-											<Island>
-												<TopicFilterBank
-													availableTopics={
-														article.availableTopics
-													}
-													selectedTopics={
-														article.selectedTopics
-													}
-													format={format}
-													keyEvents={
-														article.keyEvents
-													}
-													filterKeyEvents={
-														article.filterKeyEvents
-													}
-													id={
-														'key-events-carousel-desktop'
-													}
-												/>
-											</Island>
+											<TopicFilterBank
+												availableTopics={
+													article.availableTopics
+												}
+												selectedTopics={
+													article.selectedTopics
+												}
+												format={format}
+												keyEvents={article.keyEvents}
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												id={
+													'key-events-carousel-desktop'
+												}
+											/>
 										</div>
 									</Hide>
 								)}
@@ -1046,6 +1044,10 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
+													lang={article.lang}
+													isRightToLeftLang={
+														article.isRightToLeftLang
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1115,7 +1117,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 									`}
 								>
 									<RightColumn>
-										{!article.shouldHideAds && (
+										{renderAds && (
 											<AdSlot
 												position="right"
 												display={format.display}
@@ -1238,6 +1240,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 										sectionName={article.sectionName}
 										format={format}
 										ajaxUrl={article.config.ajaxUrl}
+										edition={article.editionId}
 									/>
 								</Island>
 							</MostViewedFooterLayout>

@@ -10,6 +10,8 @@ import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
+import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
+import { TagType } from '../../../types/tag';
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -33,6 +35,7 @@ export const canShowBrazeEpic = async (
 	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 	contentType: string,
+	tags: TagType[],
 ): Promise<CanShowResult<Meta>> => {
 	if (contentType.toLowerCase() === 'interactive') {
 		return { show: false };
@@ -44,6 +47,10 @@ export const canShowBrazeEpic = async (
 			show: true,
 			meta: forcedBrazeMeta,
 		};
+	}
+
+	if (suppressForTaylorReport(tags)) {
+		return { show: false };
 	}
 
 	try {

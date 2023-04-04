@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
 import { CaptionIconVariant } from 'components/CaptionIcon';
+import { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
 import FigCaption from '.';
 
@@ -17,7 +17,7 @@ const Image: FC = (): ReactElement => (
 		}}
 		variant={CaptionIconVariant.Image}
 	>
-		{some(
+		{Optional.some(
 			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
 		)}
 	</FigCaption>
@@ -32,7 +32,7 @@ const Video: FC = (): ReactElement => (
 		}}
 		variant={CaptionIconVariant.Video}
 	>
-		{some(
+		{Optional.some(
 			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
 		)}
 	</FigCaption>

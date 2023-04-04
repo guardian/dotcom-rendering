@@ -30,6 +30,7 @@ const basicCardProps: CardProps = {
 	imageUrl:
 		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
 	imagePosition: 'top',
+	isExternalLink: false,
 };
 
 const aBasicLink = {

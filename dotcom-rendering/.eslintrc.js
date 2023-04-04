@@ -34,6 +34,7 @@ const rulesToReview = {
 	'@typescript-eslint/require-await': 'warn', // 22 problems
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
+	'@typescript-eslint/no-explicit-any': 'warn', // 99 problems
 
 	// ES Lint 8
 	'@typescript-eslint/no-unsafe-argument': 'warn',
@@ -120,7 +121,8 @@ module.exports = {
 		'no-empty-pattern': 'error',
 		'no-fallthrough': 'off', // We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
 		'no-param-reassign': 'error',
-		'no-shadow': 'warn',
+		'no-shadow': 'off', // We use the typescript-eslint version as eslint false positives on enums
+		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
 
@@ -145,6 +147,21 @@ module.exports = {
 		],
 
 		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
+
+		'@typescript-eslint/strict-boolean-expressions': [
+			'error',
+			{
+				// This rule also errors on any ambiguous type comparisons (e.g !! on a type `null | undefined | ""`)
+				// https://typescript-eslint.io/rules/strict-boolean-expressions/
+				allowString: true,
+				allowNumber: true,
+				allowNullableObject: true,
+				allowNullableBoolean: true,
+				allowNullableString: true,
+				allowNullableNumber: false, // We only want to enforce this for numbers
+				allowAny: true,
+			},
+		],
 
 		...rulesToReview,
 		...rulesToEnforce,

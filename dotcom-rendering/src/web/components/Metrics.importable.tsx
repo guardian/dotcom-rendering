@@ -10,6 +10,7 @@ import {
 import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { eagerPrebid } from '../experiments/tests/eager-prebid';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -27,6 +28,7 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
+	eagerPrebid,
 ];
 
 const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
@@ -34,6 +36,10 @@ const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
 	dcrJavascriptBundle('Variant'),
 	dcrJavascriptBundle('Control'),
 	'dcrFrontsVariant',
+	'serverSideLiveblogInlineAdsVariant',
+	'serverSideLiveblogInlineAdsControl',
+	'poorDeviceConnectivityVariant',
+	'poorDeviceConnectivityControl',
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
@@ -66,11 +72,17 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 				? shouldBypassSampling(abTestApi)
 				: false;
 
+			/**
+			 * We rely on `bypassSampling` rather than the built-in sampling,
+			 * but set the value to greater than 0 to avoid console warnings.
+			 */
+			const nearZeroSampling = Number.MIN_VALUE;
+
 			void initCoreWebVitals({
 				browserId,
 				pageViewId,
 				isDev,
-				sampling: 0, // we rely on `bypassSampling` instead
+				sampling: nearZeroSampling,
 				team: 'dotcom',
 			});
 

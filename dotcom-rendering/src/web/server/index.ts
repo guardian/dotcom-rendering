@@ -5,6 +5,7 @@ import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
+import { extractTrendingTopics } from '../../model/extractTrendingTopics';
 import {
 	validateAsArticleType,
 	validateAsFrontType,
@@ -24,7 +25,7 @@ function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceArticleType = (body: unknown): FEArticleType => {
+export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const data = validateAsArticleType(body);
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
@@ -69,6 +70,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			? decideTrail(data.mostCommented)
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
+		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
 	};
 };
 

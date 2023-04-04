@@ -49,6 +49,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -187,7 +188,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const decideCaption = (mainMedia: ImageBlockElement): string => {
+const decideCaption = (mainMedia: ImageBlockElement | undefined): string => {
 	const caption = [];
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.data?.caption) {
@@ -264,7 +265,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const showComments = article.isCommentable;
 
-	const mainMedia = article.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia =
+		article.mainMediaElements[0] &&
+		article.mainMediaElements[0]._type ===
+			'model.dotcomrendering.pageElements.ImageBlockElement'
+			? article.mainMediaElements[0]
+			: undefined;
+
 	const captionText = decideCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } = article.commercialProperties[article.editionId];
@@ -322,6 +329,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 		</div>
 	);
 
+	const renderAds = canRenderAds(article);
+
 	return (
 		<>
 			<div
@@ -345,7 +354,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						}}
 						nav={NAV}
 						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.contribute
 						}
 						editionId={article.editionId}
 						headerTopBarSwitch={
@@ -391,7 +400,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							article.starRating
+							article.starRating !== undefined
 								? article.starRating
 								: undefined
 						}
@@ -453,8 +462,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 											article.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											!!article.starRating ||
-											article.starRating === 0
+											article.starRating !== undefined
 										}
 									/>
 								</Section>
@@ -637,6 +645,10 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isDev={!!article.config.isDev}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -709,13 +721,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 							>
 								<RightColumn>
 									<>
-										{mainMedia && (
+										{mainMedia && renderAds && (
 											<div
 												css={css`
 													margin-top: ${space[4]}px;
 												`}
 											>
-												{!article.shouldHideAds && (
+												{
 													<AdSlot
 														position="right"
 														display={format.display}
@@ -727,7 +739,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 																.isPaidContent
 														}
 													/>
-												)}
+												}
 											</div>
 										)}
 									</>
@@ -736,7 +748,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -829,12 +841,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>
 					</Section>
 				)}
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -908,7 +921,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			{renderAds && <MobileStickyContainer />}
 		</>
 	);
 };

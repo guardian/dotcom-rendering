@@ -20,6 +20,27 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	`;
 
 	switch (size) {
+		case 'ginormous':
+		case 'huge':
+			if (format.theme === ArticleSpecial.Labs) {
+				return css`
+					${baseStyles};
+					${textSans.xlarge()};
+					font-size: 24px;
+					line-height: 24px;
+					${until.desktop} {
+						${textSans.xlarge()};
+						line-height: 20px;
+					}
+				`;
+			}
+			return css`
+				${baseStyles};
+				${headline.small()};
+				${until.desktop} {
+					${headline.xsmall()};
+				}
+			`;
 		case 'large': {
 			if (format.theme === ArticleSpecial.Labs) {
 				return css`

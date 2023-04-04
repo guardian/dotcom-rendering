@@ -1,8 +1,9 @@
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
+import { getGroup } from '../../amp/components/ContentABTest';
 import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	ASSET_ORIGIN,
@@ -17,6 +18,7 @@ import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
+import { canRenderAds } from '../lib/canRenderAds';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
@@ -87,9 +89,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -98,18 +101,20 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
+	const loadCommercial = canRenderAds(article);
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
+			loadCommercial &&
+				(process.env.COMMERCIAL_BUNDLE_URL ??
+					article.config.commercialBundleUrl),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		].map((script) =>
-			offerHttp3 && script ? getHttp3Url(script) : script,
-		),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -146,6 +151,8 @@ export const articleToHtml = ({ article }: Props): string => {
 					editionId: article.editionId,
 					beaconURL: article.beaconURL,
 				}),
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
 			}),
 		),
@@ -167,8 +174,27 @@ export const articleToHtml = ({ article }: Props): string => {
 		return `https://amp.theguardian.com/${article.pageId}`;
 	};
 
+	// I would have like to have had this closer to the implementation
+	// but we don't have `pageId` available in `pageTemplate.ts`, so this
+	// was as close as I could get it. It's a test and will be removed anywho.
+
+	// We are only including recently published articles to help with data normalisation
+	// hopefully we merge soon so we don't need to keep changing this.
+	const isNewArticle =
+		new Date(article.webPublicationDate) > new Date('2023-03-29');
+
+	// 0-5: control - don't disable link
+	// 6-11: variable - disable link
+	const disableAmpLinkGroup = getGroup(article.pageId);
+
+	const { disableAmpTest: inDisableAmpTest = false } =
+		article.config.switches;
+
+	const disableAmpLink =
+		isNewArticle && inDisableAmpTest && disableAmpLinkGroup > 5;
+
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(article.tags);
+	const ampLink = disableAmpLink ? undefined : getAmpLink(article.tags);
 
 	const { openGraphData } = article;
 	const { twitterData } = article;

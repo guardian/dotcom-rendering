@@ -30,6 +30,7 @@ const basicCardProps: CardProps = {
 		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	imagePosition: 'top',
 	showAge: true,
+	isExternalLink: false,
 };
 
 const aBasicLink = {
@@ -210,6 +211,23 @@ export const WithByline = () => {
 					{...basicCardProps}
 					byline="Byline text"
 					showByline={true}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithExternalLink = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					kickerText="Instagram"
+					headlineSize="huge"
+					headlineText="Follow The Guardian now"
+					isExternalLink={true}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -416,6 +434,22 @@ export const WithQuotes = () => {
 	);
 };
 
+export const CommentThemeWithoutQuotes = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				kickerText="No quotes"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
 export const WithQuotesSpecialReportAlt = () => {
 	return (
 		<CardWrapper>
@@ -469,6 +503,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="top"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -504,6 +539,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -522,6 +558,7 @@ export const WhenHorizontalAndOpinion = () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="right"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -554,6 +591,7 @@ export const WhenHorizontalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -573,6 +611,7 @@ export const WhenHorizontalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -622,6 +661,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="small"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -655,6 +695,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -674,6 +715,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="medium"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -707,6 +749,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -726,6 +769,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="large"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -759,6 +803,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -778,6 +823,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="jumbo"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -811,6 +857,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -849,6 +896,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>

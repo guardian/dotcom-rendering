@@ -9,6 +9,7 @@ import {
 	neutral,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
@@ -42,12 +43,20 @@ const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
 const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
 	neutral[86];
 
+const specialReportAltButton = (_format: ArticleFormat): Colour =>
+	palette.specialReportAlt[100];
+
+const specialReportAltButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[20];
+
 // ----- API ----- //
 
 const hover = {
 	pagination,
 	newsletterSignUpFormButton,
 	newsletterSignUpFormButtonDark,
+	specialReportAltButton,
+	specialReportAltButtonDark,
 };
 
 // ----- Exports ----- //

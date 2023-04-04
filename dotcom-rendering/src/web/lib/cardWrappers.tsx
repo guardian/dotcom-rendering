@@ -601,39 +601,9 @@ export const CardDefault = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			imageUrl={undefined}
-			headlineSize="small"
-			headlineSizeOnMobile="small"
-		/>
-	);
-};
-
-/**
- * ┏━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
- * ┃                  ┃  Any% Remaining  ┊
- * ┗━━━━━━━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
- * Card designed to take up any width of container, with no media and no avatar
- *
- * Options:
- *  - Small headline (small on mobile)
- *  - No image / media
- *  - No trail text
- *  - No supporting content
- *  - No avatar
- */
-export const CardDefaultNoAvatar = ({
-	trail,
-	showAge,
-	containerPalette,
-}: TrailProps) => {
-	return (
-		<FrontCard
-			trail={trail}
-			containerPalette={containerPalette}
-			showAge={showAge}
-			imageUrl={undefined}
-			headlineSize="small"
-			headlineSizeOnMobile="small"
 			avatarUrl={undefined}
+			headlineSize="small"
+			headlineSizeOnMobile="small"
 		/>
 	);
 };

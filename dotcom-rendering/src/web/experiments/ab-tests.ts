@@ -2,12 +2,14 @@ import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { billboardsInMerch } from './tests/billboards-in-merch';
 import { consentlessAds } from './tests/consentless-ads';
+import { eagerPrebid } from './tests/eager-prebid';
+import { elementsManager } from './tests/elements-manager';
 import { integrateIma } from './tests/integrate-ima';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { noCarrotAdsNearNewsletterSignupBlocks } from './tests/no-carrot-ads-near-newsletter-signup-blocks';
+import { signInGateCopyTestJan2023 } from './tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -17,10 +19,12 @@ export const tests: ABTest[] = [
 	abTestTest,
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateCopyTestJan2023,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIma,
 	billboardsInMerch,
-	noCarrotAdsNearNewsletterSignupBlocks,
+	elementsManager,
+	eagerPrebid,
 ];

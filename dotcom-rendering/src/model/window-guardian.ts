@@ -1,5 +1,5 @@
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
-import { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../web/lib/edition';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
@@ -125,8 +125,8 @@ export const makeWindowGuardian = ({
 				adUnit,
 				showRelatedContent: true,
 				ajaxUrl,
-				shouldHideReaderRevenue: shouldHideReaderRevenue ?? false,
-				isPaidContent: isPaidContent ?? false,
+				shouldHideReaderRevenue: !!shouldHideReaderRevenue,
+				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 			}),
 			libs: {

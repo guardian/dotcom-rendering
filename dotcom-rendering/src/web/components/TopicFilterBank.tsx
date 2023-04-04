@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, headline, space, textSans } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { FilterButton } from './FilterButton.importable';
+import { FilterLink } from './FilterLink';
 
 type Props = {
 	availableTopics?: Topic[];
@@ -41,34 +41,25 @@ const topicStyles = css`
 	}
 `;
 
-const handleTopicClick = (
-	isActive: boolean,
-	buttonParams: string,
-	id: string,
-) => {
-	const urlParams = new URLSearchParams(window.location.search);
+const getTopicLink = (isActive: boolean, topics: string, id: Props['id']) => {
+	const urlParams = isActive
+		? // if active, the button links to the the page without the params
+		  ''
+		: // we only add the link if the topic is *inactive*
+		  '?' +
+		  new URLSearchParams({
+				topics,
+		  }).toString();
 
-	if (!isActive) {
-		urlParams.set('topics', buttonParams);
-	} else {
-		urlParams.delete('topics');
-	}
-	urlParams.delete('page'); // direct to the first page
-	urlParams.delete('filterKeyEvents');
-
-	window.location.hash = id;
-	window.location.search = urlParams.toString();
+	return `${urlParams}#${id}`;
 };
 
-const handleKeyEventClick = (filterKeyEvents: boolean, id: string) => {
-	const urlParams = new URLSearchParams(window.location.search);
+const getKeyEventLink = (filterKeyEvents: boolean, id: Props['id']) => {
+	const urlParams = new URLSearchParams({
+		filterKeyEvents: filterKeyEvents ? 'false' : 'true',
+	});
 
-	urlParams.set('filterKeyEvents', filterKeyEvents ? 'false' : 'true');
-	urlParams.delete('page'); // direct to the first page
-	urlParams.delete('topics');
-
-	window.location.hash = id;
-	window.location.search = urlParams.toString();
+	return `?${urlParams.toString()}#${id}`;
 };
 
 const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
@@ -78,12 +69,21 @@ const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
 const getTopFiveTopics = (availableTopics: Topic[]) =>
 	availableTopics
 		.slice(0, 5)
-		.filter((topic) => !!topic.count && topic.count > 2);
+		.filter((topic) => topic.count !== undefined && topic.count > 2);
 
 export const hasRelevantTopics = (availableTopics?: Topic[]) => {
 	return !!(availableTopics && getTopFiveTopics(availableTopics).length);
 };
 
+/**
+ * # Topic Filter Bank
+ *
+ * A wrapper of filter links.
+ *
+ * ---
+ *
+ * [`TopicFilterBank` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-topicfilterbank)
+ */
 export const TopicFilterBank = ({
 	availableTopics = [],
 	selectedTopics,
@@ -92,7 +92,9 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	if (!hasRelevantTopics(availableTopics) && !keyEvents?.length) return null;
+	const hasKeyEvents = keyEvents !== undefined && keyEvents.length > 0;
+
+	if (!hasRelevantTopics(availableTopics) && !hasKeyEvents) return null;
 	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = getTopFiveTopics(availableTopics);
@@ -114,33 +116,29 @@ export const TopicFilterBank = ({
 				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
 			<div css={topicStyles}>
-				{keyEvents?.length ? (
-					<FilterButton
+				{hasKeyEvents ? (
+					<FilterLink
 						value={'Key events'}
 						count={keyEvents.length}
 						format={format}
 						isActive={filterKeyEvents}
-						onClick={() => {
-							handleKeyEventClick(filterKeyEvents, id);
-						}}
+						href={getKeyEventLink(filterKeyEvents, id)}
 					/>
 				) : null}
 
 				{topFiveTopics.map((topic) => {
-					const buttonParams = `${topic.type}:${topic.value}`;
+					const linkParams = `${topic.type}:${topic.value}`;
 					const isActive =
 						!!selectedTopic && isEqual(selectedTopic, topic);
 
 					return (
-						<FilterButton
+						<FilterLink
 							value={topic.value}
 							type={topic.type}
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={() =>
-								handleTopicClick(isActive, buttonParams, id)
-							}
+							href={getTopicLink(isActive, linkParams, id)}
 							key={`filter-${topic.value}`}
 						/>
 					);

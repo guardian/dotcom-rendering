@@ -236,7 +236,7 @@ export const RichLink = ({
 		format.design === ArticleDesign.DeadBlog;
 
 	const showImage =
-		imageData.thumbnailUrl &&
+		imageData.thumbnailUrl !== '' &&
 		imageCardStyles.includes(cardStyle) &&
 		!parentIsBlog;
 	const isPaidContent = !!tags.find(
@@ -256,12 +256,12 @@ export const RichLink = ({
 			data-link-name={`rich-link-${richLinkIndex} | ${richLinkIndex}`}
 			data-component="rich-link"
 			css={pillarBackground(palette)}
-			data-name={(isPlaceholder && 'placeholder') || ''}
+			data-name={isPlaceholder ? 'placeholder' : ''}
 		>
 			<div css={neutralBackground(format, palette)}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
-					{!!showImage && (
+					{showImage && (
 						<div>
 							<img
 								css={imageStyles}
@@ -296,7 +296,7 @@ export const RichLink = ({
 									{mainContributor}
 								</div>
 							)}
-							{!!starRating && (
+							{starRating !== undefined && (
 								<div css={starWrapper}>
 									<StarRating
 										rating={starRating}

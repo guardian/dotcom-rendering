@@ -36,6 +36,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	trendingTopics?: FETagType[];
 }
 
 interface FEPressedPageType {
@@ -261,6 +262,7 @@ export type DCRFrontCard = {
 	mediaType?: MediaType;
 	mediaDuration?: number;
 	showMainVideo: boolean;
+	isExternalLink: boolean;
 };
 
 export type FESnapType = {

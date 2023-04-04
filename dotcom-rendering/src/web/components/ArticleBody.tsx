@@ -13,6 +13,7 @@ import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 
 type Props = {
 	format: ArticleFormat;
@@ -45,6 +46,8 @@ type Props = {
 	isInLiveblogAdSlotTest?: boolean;
 	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
+	lang?: string;
+	isRightToLeftLang?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -145,9 +148,13 @@ export const ArticleBody = ({
 	isInLiveblogAdSlotTest = false,
 	abTests,
 	tableOfContents,
+	lang,
+	isRightToLeftLang = false,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
+	const language = decideLanguage(lang);
+	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -218,6 +225,8 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(palette),
 				]}
+				lang={language}
+				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
 					<Island deferUntil="hash" clientOnly={true}>

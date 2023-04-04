@@ -48,6 +48,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { canRenderAds } from '../lib/canRenderAds';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
@@ -226,7 +227,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -409,6 +410,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 										iconSide="left"
 										href={newsletterPreviewUrl}
 										target="_blank"
+										rel="noreferrer"
 										priority="tertiary"
 										size="xsmall"
 									>
@@ -473,6 +475,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
+											rel="noreferrer"
 										>
 											Click here to see the latest version
 											of this newsletter
