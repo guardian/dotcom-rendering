@@ -26,7 +26,6 @@ import {
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Layout from '.';
 
 // ----- Setup ------ //
@@ -95,7 +94,7 @@ const Default = (): ReactElement => (
 			...article,
 			...isImmersive(),
 			...hasShareIcon(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -108,7 +107,7 @@ const Analysis = (): ReactElement => (
 			...hasShareIcon(),
 
 			tags: [getTag('tone/analysis', 'View from the Guardian ')],
-			theme: selectPillar(ArticlePillar.Lifestyle),
+			theme: ArticlePillar.Lifestyle,
 		}}
 	/>
 );
@@ -121,7 +120,7 @@ const Editorial = (): ReactElement => (
 			...isImmersive(),
 			...hasShareIcon(),
 
-			theme: selectPillar(ArticlePillar.Opinion),
+			theme: ArticlePillar.Opinion,
 		}}
 	/>
 );
@@ -133,7 +132,7 @@ const Feature = (): ReactElement => (
 			...isImmersive(),
 			...hasShareIcon(),
 
-			theme: selectPillar(ArticlePillar.Sport),
+			theme: ArticlePillar.Sport,
 		}}
 	/>
 );
@@ -144,7 +143,7 @@ const Review = (): ReactElement => (
 			...review,
 			...hasShareIcon(),
 
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -156,7 +155,7 @@ const Showcase = (): ReactElement => (
 			...hasShareIcon(),
 
 			display: ArticleDisplay.Showcase,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -168,7 +167,7 @@ const Interview = (): ReactElement => (
 			...hasShareIcon(),
 
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.Sport),
+			theme: ArticlePillar.Sport,
 		}}
 	/>
 );
@@ -180,7 +179,7 @@ const Comment = (): ReactElement => (
 			...hasShareIcon(),
 			...hasContributor(),
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -191,7 +190,7 @@ const Letter = (): ReactElement => (
 			...letter,
 			...hasShareIcon(),
 			tags: [getTag('tone/letters', 'Letters ')],
-			theme: selectPillar(ArticlePillar.Opinion),
+			theme: ArticlePillar.Opinion,
 		}}
 	/>
 );
@@ -206,7 +205,7 @@ const Correction = (): ReactElement => (
 					'Corrections and Clarifications ',
 				),
 			],
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -217,7 +216,7 @@ const MatchReport = (): ReactElement => (
 			...matchReport,
 			...hasShareIcon(),
 			tags: [getTag('tone/sport', 'Sport ')],
-			theme: selectPillar(ArticlePillar.Sport),
+			theme: ArticlePillar.Sport,
 		}}
 	/>
 );
@@ -237,7 +236,7 @@ const Gallery = (): ReactElement => (
 		item={{
 			...media,
 			...hasShareIcon(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );

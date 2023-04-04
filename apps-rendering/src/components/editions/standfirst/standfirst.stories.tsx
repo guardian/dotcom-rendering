@@ -1,12 +1,10 @@
 // ----- Imports ----- //
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
 import type { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Standfirst from '.';
 
 // ----- Setup ----- //
@@ -26,7 +24,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			standfirst,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -38,7 +36,7 @@ const Showcase = (): ReactElement => (
 			...article,
 			standfirst,
 			display: ArticleDisplay.Showcase,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -49,7 +47,7 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			standfirst,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -60,7 +58,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			standfirst,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -76,7 +74,7 @@ const Media = (): ReactElement => (
 			item={{
 				...media,
 				standfirst,
-				theme: selectPillar(ArticlePillar.News),
+				theme: ArticlePillar.News,
 			}}
 		/>
 	</div>
@@ -87,7 +85,6 @@ const Media = (): ReactElement => (
 export default {
 	component: Standfirst,
 	title: 'AR/Editions/Standfirst',
-	decorators: [withKnobs],
 };
 
 export { Default, Showcase, Comment, Analysis, Media };

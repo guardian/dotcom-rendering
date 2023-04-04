@@ -13,7 +13,6 @@ import {
 } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import AnalysisStandfirst from './AnalysisStandfirst';
 import Standfirst from './';
 
@@ -26,7 +25,7 @@ const Default = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -38,7 +37,7 @@ const Review = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -50,7 +49,7 @@ const Feature = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Sport),
+			theme: ArticlePillar.Sport,
 		}}
 	/>
 );
@@ -62,7 +61,7 @@ const Comment = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Opinion),
+			theme: ArticlePillar.Opinion,
 		}}
 	/>
 );
@@ -72,7 +71,7 @@ const Link = (): ReactElement => (
 		item={{
 			...articleWithStandfirstLink,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -106,7 +105,7 @@ const Analysis = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );

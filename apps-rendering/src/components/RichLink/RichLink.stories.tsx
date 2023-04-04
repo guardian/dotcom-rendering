@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import RichLink, { richLinkWidth } from './';
 
 const overrideStyle = css`
@@ -26,7 +25,7 @@ const Default: FC = () => (
 			format={{
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
-				theme: selectPillar(ArticlePillar.News),
+				theme: ArticlePillar.News,
 			}}
 			linkText={linkText()}
 			url={url()}
@@ -53,7 +52,7 @@ const Analysis: FC = () => (
 				format={{
 					design: ArticleDesign.Analysis,
 					display: ArticleDisplay.Standard,
-					theme: selectPillar(ArticlePillar.News),
+					theme: ArticlePillar.News,
 				}}
 				linkText={linkText()}
 				url={url()}
