@@ -6,7 +6,6 @@ import {
 	ArticlePillar,
 } from '@guardian/libs';
 import { none, some } from '@guardian/types';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
 	analysis,
@@ -50,27 +49,12 @@ const contributors: Contributor[] = [
 	},
 ];
 
-const hasContributor = (): { contributors: Contributor[] } => {
-	return {
-		contributors: boolean('Contributors', true) ? contributors : [],
-	};
-};
-
-const isImmersive = (): { display: ArticleDisplay } => {
-	return {
-		display: boolean('Immersive', false)
-			? ArticleDisplay.Immersive
-			: ArticleDisplay.Standard,
-	};
-};
-
 // ----- Stories ----- //
 
 const Default = (): ReactElement => (
 	<Headline
 		item={{
 			...article,
-			...isImmersive(),
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -80,7 +64,6 @@ const Analysis = (): ReactElement => (
 	<Headline
 		item={{
 			...analysis,
-			...isImmersive(),
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -90,7 +73,6 @@ const Feature = (): ReactElement => (
 	<Headline
 		item={{
 			...feature,
-			...isImmersive(),
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -109,7 +91,6 @@ const Showcase = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			...isImmersive(),
 			display: ArticleDisplay.Showcase,
 			theme: ArticlePillar.News,
 		}}
@@ -120,7 +101,6 @@ const Interview = (): ReactElement => (
 	<Headline
 		item={{
 			...interview,
-			...isImmersive(),
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -130,8 +110,7 @@ const Comment = (): ReactElement => (
 	<Headline
 		item={{
 			...comment,
-			...isImmersive(),
-			...hasContributor(),
+			contributors,
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -151,7 +130,6 @@ const Media = (): ReactElement => (
 export default {
 	component: Headline,
 	title: 'AR/Editions/Headline',
-	decorators: [withKnobs],
 };
 
 export {
