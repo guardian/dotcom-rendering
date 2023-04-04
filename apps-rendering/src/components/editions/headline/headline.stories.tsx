@@ -20,7 +20,6 @@ import {
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Headline from '.';
 
 // ----- Setup ------ //
@@ -72,7 +71,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -82,7 +81,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -92,7 +91,7 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -101,7 +100,7 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -112,7 +111,7 @@ const Showcase = (): ReactElement => (
 			...review,
 			...isImmersive(),
 			display: ArticleDisplay.Showcase,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -122,7 +121,7 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -133,7 +132,7 @@ const Comment = (): ReactElement => (
 			...comment,
 			...isImmersive(),
 			...hasContributor(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -142,7 +141,7 @@ const Media = (): ReactElement => (
 	<Headline
 		item={{
 			...media,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );

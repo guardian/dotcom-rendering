@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Anchor from './';
 
 // ----- Setup ----- //
@@ -21,7 +20,7 @@ const Default: FC = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 		href={link()}
 	>
