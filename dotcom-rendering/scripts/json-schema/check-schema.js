@@ -17,7 +17,7 @@ const existingFrontSchema = fs.readFileSync(
 	{ encoding: 'utf-8' },
 );
 const existingNewsletterSchema = fs.readFileSync(
-	`${root}/src/model/front-schema.json`,
+	`${root}/src/model/newsletter-page-schema.json`,
 	{ encoding: 'utf-8' },
 );
 
