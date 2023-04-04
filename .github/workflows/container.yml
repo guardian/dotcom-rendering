@@ -1,9 +1,9 @@
-name: DCR Build Container Image
-
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+  workflow_call:
+    outputs:
+      container-image:
+        description: 'The generated container image path'
+        value: ${{ jobs.image.outputs.container-image }}
 
 jobs:
   image:

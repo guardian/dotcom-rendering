@@ -1,0 +1,17 @@
+name: DCR CICD
+
+on:
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
+      - "dotcom-rendering/docs/**"
+
+jobs:
+  container:
+    uses: ./.github/workflows/container.yml
+
+  cypress:
+    needs: [container]
+    uses: ./.github/workflows/cypress.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
