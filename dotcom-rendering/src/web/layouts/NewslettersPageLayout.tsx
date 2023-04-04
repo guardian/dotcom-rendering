@@ -14,11 +14,11 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { NewslettersList } from '../components/NewsletterList';
+import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { decideFormat } from '../lib/decideFormat';
 import { Stuck } from './lib/stickiness';
-import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 
 type Props = {
 	newslettersPage: DCRNewslettersPageType;
