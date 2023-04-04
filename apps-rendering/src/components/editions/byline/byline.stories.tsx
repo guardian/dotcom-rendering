@@ -17,7 +17,6 @@ import {
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Byline from './index';
 
 // ----- Setup ----- //
@@ -79,7 +78,7 @@ const Default = (): ReactElement => (
 			...article,
 			display: ArticleDisplay.Standard,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -90,7 +89,7 @@ const Analysis = (): ReactElement => (
 			...analysis,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -101,7 +100,7 @@ const Feature = (): ReactElement => (
 			...feature,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -111,7 +110,7 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -122,7 +121,7 @@ const Showcase = (): ReactElement => (
 			...article,
 			display: ArticleDisplay.Showcase,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -133,7 +132,7 @@ const Interview = (): ReactElement => (
 			...interview,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -149,7 +148,7 @@ const Comment = (): ReactElement => (
 				...comment,
 				...isImmersive(),
 				bylineHtml: mockBylineHtml(),
-				theme: selectPillar(ArticlePillar.News),
+				theme: ArticlePillar.News,
 				contributors: contributors,
 			}}
 		/>

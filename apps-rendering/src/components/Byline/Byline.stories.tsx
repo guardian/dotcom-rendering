@@ -11,7 +11,6 @@ import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Byline from './';
 
 // ----- Setup ----- //
@@ -35,7 +34,7 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 
 const Default: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.News)}
+		theme={ArticlePillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
@@ -44,7 +43,7 @@ const Default: FC = () => (
 
 const Analysis: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.News)}
+		theme={ArticlePillar.News}
 		design={ArticleDesign.Analysis}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
@@ -53,7 +52,7 @@ const Analysis: FC = () => (
 
 const Comment: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.Opinion)}
+		theme={ArticlePillar.Opinion}
 		design={ArticleDesign.Comment}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}

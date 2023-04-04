@@ -2,7 +2,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementKind } from 'bodyElementKind';
 import type { FC } from 'react';
-import { selectDesign, selectPillar } from 'storybookHelpers';
 import NewsletterSignup from '.';
 
 // ----- Stories ----- //
@@ -21,9 +20,9 @@ const Default: FC = () => (
 				"We'll send you The Week in Patriarchy every week",
 		}}
 		format={{
-			design: selectDesign(ArticleDesign.Standard),
+			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 		showByDefault={true}
 	/>
@@ -42,9 +41,9 @@ const NewsTheme: FC = () => (
 			successDescription: "We'll send you First Edition every weekday",
 		}}
 		format={{
-			design: selectDesign(ArticleDesign.Standard),
+			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 		showByDefault={true}
 	/>
