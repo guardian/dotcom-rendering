@@ -63,7 +63,7 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/EmailNewsletter', logRenderTime, handleNewslettersPage);
+	app.post('/EmailNewsletters', logRenderTime, handleNewslettersPage);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
@@ -96,7 +96,7 @@ export const prodServer = (): void => {
 	);
 
 	app.get(
-		'/EmailNewsletter',
+		'/EmailNewsletters',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleNewslettersPage,

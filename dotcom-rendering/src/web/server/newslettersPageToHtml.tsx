@@ -43,9 +43,10 @@ export const newsletterPageToHtml = ({ newslettersPage }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -78,7 +79,7 @@ export const newsletterPageToHtml = ({ newslettersPage }: Props): string => {
 				revisionNumber: newslettersPage.config.revisionNumber,
 				sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
 				sentryHost: newslettersPage.config.sentryHost,
-				keywordIds: '', // TODO: Check for implications of having this be just a string
+				keywordIds: '',
 				dfpAccountId: newslettersPage.config.dfpAccountId,
 				adUnit: newslettersPage.config.adUnit,
 				ajaxUrl: newslettersPage.config.ajaxUrl,

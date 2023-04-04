@@ -50,7 +50,7 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
-			case '/EmailNewsletters':
+			case 'EmailNewsletters':
 				return handleNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
