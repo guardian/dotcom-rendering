@@ -24,11 +24,6 @@ type Props = {
 	NAV: NavType;
 };
 
-/**
- * @description
- * Article is a high level wrapper for stand alone pages on Dotcom. Sets strict mode and some globals
- *
- * */
 export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
 	const {
 		subscribeUrl,

@@ -17,11 +17,11 @@ type Props = {
 
 /**
  * @description
- * FrontPage is a high level wrapper for front pages on Dotcom. Sets strict mode and some globals
+ * NewslettersPage is a high level wrapper for the newsletters page on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {DCRFrontType} props.front - The article JSON data
- * @param {NAVType} props.NAV - The article JSON data
+ * @param {DCRNewslettersPageType} props.newslettersPage - The newsletters JSON data
+ * @param {NAVType} props.NAV - The nav JSON data
  * */
 export const NewslettersPage = ({ newslettersPage, NAV }: Props) => {
 	return (
