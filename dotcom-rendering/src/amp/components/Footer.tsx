@@ -92,7 +92,7 @@ export const footerLinks: Link[][] = [
 		},
 		{
 			title: 'Search jobs',
-			url: 'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+			url: 'https://jobs.theguardian.com',
 		},
 		{
 			title: 'Patrons',
