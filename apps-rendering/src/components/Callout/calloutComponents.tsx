@@ -30,8 +30,7 @@ export const Disclaimer: FC = () => (
 
 export const ContactText: FC = () => (
 	<div css={info}>
-		One of our journalists will be in contact before we publish your
-		information, so please do leave contact details.
+		By submitting your response, you are agreeing to share your details with us for this feature.
 	</div>
 );
 
