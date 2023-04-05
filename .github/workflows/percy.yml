@@ -1,8 +1,6 @@
 name: Percy
 on: workflow_dispatch
-  # push:
-  #   paths-ignore:
-  #     - "apps-rendering/**"
+
 jobs:
   percy:
     name: Percy
