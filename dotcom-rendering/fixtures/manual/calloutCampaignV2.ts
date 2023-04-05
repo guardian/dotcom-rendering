@@ -11,6 +11,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 	activeUntil: 1672669481,
 	displayOnSensitive: false,
 	formId: 3860296,
+	prompt: 'Share your experience',
 	title: 'Are you affected by the issues in this article?',
 	isNonCollapsible: true,
 	description:

@@ -86,3 +86,24 @@ export const Expired = () => {
 };
 
 Expired.story = { name: 'Expired' };
+
+export const MinimalCallout = () => {
+	const { title, prompt, description, ...minimalCallout } = calloutCampaignV2;
+	return (
+		<>
+			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>
+				Prompt, title and description are all optional
+			</div>
+			<CalloutBlockComponent
+				callout={{
+					...minimalCallout,
+					activeUntil: tomorrow,
+					isNonCollapsible: false,
+				}}
+				pageId={pageId}
+			/>
+		</>
+	);
+};
+
+Expired.story = { name: 'Expired' };

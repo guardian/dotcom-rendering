@@ -43,8 +43,9 @@ const tabIcons = css`
 `;
 
 export interface CalloutBlockProps {
-	heading: string;
-	description: string;
+	prompt?: string;
+	heading?: string;
+	description?: string;
 	formFields: CampaignFieldType[];
 	formId: string;
 	submissionURL: string;
@@ -55,6 +56,7 @@ export interface CalloutBlockProps {
 }
 
 export const CalloutBlock = ({
+	prompt,
 	heading,
 	description,
 	formFields,
@@ -66,6 +68,7 @@ export const CalloutBlock = ({
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
+	const shouldShowHeading = !!heading && !isNonCollapsible;
 	const tabsContent = [
 		{
 			id: 'form',
@@ -102,11 +105,13 @@ export const CalloutBlock = ({
 	return (
 		<div id={formId} css={wrapperStyles}>
 			<div css={summaryContentWrapper}>
-				<div css={titleStyles}>Share your experience</div>
-				{!isNonCollapsible && (
+				{!!prompt && <div css={titleStyles}>{prompt}</div>}
+				{shouldShowHeading && (
 					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
 				)}
-				<CalloutDescription description={description} />
+				{!!description && (
+					<CalloutDescription description={description} />
+				)}
 				<CalloutShare title={heading} urlAnchor={formId} />
 			</div>
 			<Tabs

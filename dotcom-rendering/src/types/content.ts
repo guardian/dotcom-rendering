@@ -79,8 +79,9 @@ export interface CalloutBlockElementV2 {
 	activeUntil?: number;
 	displayOnSensitive: boolean;
 	formId: number;
-	title: string;
-	description: string;
+	prompt?: string;
+	title?: string;
+	description?: string;
 	tagName: string;
 	formFields: CampaignFieldType[];
 	role?: RoleType;

@@ -1202,6 +1202,9 @@
                 "formId": {
                     "type": "number"
                 },
+                "prompt": {
+                    "type": "string"
+                },
                 "title": {
                     "type": "string"
                 },
@@ -1253,15 +1256,13 @@
                 "_type",
                 "activeFrom",
                 "calloutsUrl",
-                "description",
                 "displayOnSensitive",
                 "elementId",
                 "formFields",
                 "formId",
                 "id",
                 "isNonCollapsible",
-                "tagName",
-                "title"
+                "tagName"
             ]
         },
         "CalloutContactType": {
