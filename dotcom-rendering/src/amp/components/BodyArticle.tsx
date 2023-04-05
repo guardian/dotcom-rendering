@@ -19,7 +19,6 @@ import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
-import { isOnOzoneTestPage } from '../lib/real-time-config';
 import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
@@ -145,8 +144,7 @@ export const Body = ({ data, config }: Props) => {
 	const adConfig = {
 		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
 		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
-		useOzonePrebid:
-			adInfo.switches.ampPrebidOzone && isOnOzoneTestPage(config.pageId),
+		useOzonePrebid: adInfo.switches.ampPrebidOzone,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
@@ -188,9 +186,13 @@ export const Body = ({ data, config }: Props) => {
 		</>
 	);
 
-	const epic = data.shouldHideReaderRevenue ? null : (
-		<Epic webURL={data.webURL} />
-	);
+	const epic =
+		data.shouldHideReaderRevenue ||
+		data.tags.some(
+			(tag) => tag.id === 'us-news/series/cotton-capital',
+		) ? null : (
+			<Epic webURL={data.webURL} />
+		);
 
 	return (
 		<div css={[body(pillar, design), innerContainerStyles]}>

@@ -96,6 +96,7 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		messageForm: Colour;
 	};
 	fill: {
 		commentCount: Colour;

@@ -5,7 +5,6 @@ import { some } from '@guardian/types';
 import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Headline from './';
 
 // ----- Setup ----- //
@@ -32,7 +31,7 @@ const Analysis = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -44,7 +43,7 @@ const Feature = (): ReactElement => (
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );

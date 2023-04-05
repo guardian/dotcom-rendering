@@ -505,9 +505,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 		const scrolled = current.scrollLeft + offset;
 
-		const nextOffset = offsets
-			.reverse()
-			.find((offset) => offset < scrolled);
+		const nextOffset = offsets.reverse().find((o) => o < scrolled);
 
 		if (nextOffset !== undefined && nextOffset !== 0) {
 			current.scrollTo({ left: nextOffset });

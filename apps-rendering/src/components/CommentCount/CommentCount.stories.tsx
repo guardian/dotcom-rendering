@@ -6,7 +6,6 @@ import { some } from '@guardian/types';
 import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC, ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import CommentCount from './';
 
 // ----- Stories ----- //
@@ -14,7 +13,7 @@ import CommentCount from './';
 const Default: FC = () => (
 	<CommentCount
 		count={some(number('Count', 1234, { min: 0 }))}
-		theme={selectPillar(ArticlePillar.News)}
+		theme={ArticlePillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
 		commentable={boolean('Commentable', true)}
