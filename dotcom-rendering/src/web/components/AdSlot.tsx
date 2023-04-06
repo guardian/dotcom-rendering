@@ -486,31 +486,33 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = `inline${index}`;
 			return (
-				<div
-					id={`dfp-ad--${advertId}--mobile`}
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						`ad-slot--${advertId}`,
-						'ad-slot--container-inline',
-						'ad-slot--mobile',
-						'mobile-only',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[
-						css`
-							position: relative;
-							min-height: 274px;
-							min-width: 300px;
-							width: 300px;
-							margin: 12px auto;
-						`,
-						adStyles,
-					]}
-					data-link-name={`ad slot ${advertId}`}
-					data-name={advertId}
-					aria-hidden="true"
-				/>
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id={`dfp-ad--${advertId}--mobile`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--container-inline',
+							'ad-slot--mobile',
+							'mobile-only',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+								min-height: 274px;
+								min-width: 300px;
+								width: 300px;
+								margin: 12px auto;
+							`,
+							adStyles,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'exclusion': {
