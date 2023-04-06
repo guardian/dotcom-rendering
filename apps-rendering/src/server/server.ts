@@ -395,6 +395,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const app = express();
 
+app.get("/_prout", (_, response) => response.send(gitCommitHash));
+
 app.use(express.raw({ limit: '50mb' }));
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 app.use('/assets', express.static(path.resolve(__dirname, '../dist/assets')));

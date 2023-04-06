@@ -1,0 +1,1 @@
+export const gitCommitHash = "This value should get overwritten in CI. See scripts/ci-dcr.sh and scripts/ci-ar.sh";
