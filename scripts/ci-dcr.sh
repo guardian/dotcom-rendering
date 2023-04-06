@@ -11,7 +11,7 @@ echo "git branches: $gitBranches"
 currentBranch="$(git rev-parse --abbrev-ref HEAD)"
 echo "current branch: $currentBranch"
 
-gitCommitHash=$(git rev-parse HEAD)
+gitCommitHash="$(git rev-parse HEAD)"
 echo 'export const gitCommitHash = "'$gitCommitHash'";' > gitCommitHash.ts
 
 # files that were changed between current branch and main
