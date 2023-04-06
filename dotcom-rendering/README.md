@@ -48,8 +48,9 @@ Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subd
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
 $ yarn install
-$ cd dotcom-rendering/dotcom-rendering
+$ cd dotcom-rendering
 $ make dev
 ```
 
