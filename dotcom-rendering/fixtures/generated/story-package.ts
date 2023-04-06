@@ -40,6 +40,11 @@ export const storyPackage = {
 			headline:
 				'New images from Mars will guide search for evidence of ancient life, says study',
 			shortUrl: 'https://www.theguardian.com/p/j6dfk',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/j6dfk',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2021/may/22/chinas-mars-rover-takes-first-drive-on-red-planet',
@@ -67,6 +72,11 @@ export const storyPackage = {
 			headline:
 				'China’s Mars rover drives across planet a week after landing',
 			shortUrl: 'https://www.theguardian.com/p/hg7yt',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/hg7yt',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2021/apr/19/nasas-mars-helicopter-makes-first-ever-powered-flight-on-another-planet',
@@ -94,6 +104,11 @@ export const storyPackage = {
 			headline:
 				'Nasa’s Mars helicopter in first powered, controlled flight on another planet',
 			shortUrl: 'https://www.theguardian.com/p/h5j4b',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/h5j4b',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2021/apr/10/nasa-preparing-to-attempt-first-controlled-flight-on-another-world',
@@ -121,6 +136,11 @@ export const storyPackage = {
 			headline:
 				'Nasa preparing to attempt first controlled flight on another world',
 			shortUrl: 'https://www.theguardian.com/p/h3xzz',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/h3xzz',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2021/feb/23/dare-mighty-things-hidden-message-found-on-nasa-mars-rover-parachute',
@@ -135,7 +155,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=abcf0b829c4186261eae82027442c3f3',
 				'460': 'https://i.guim.co.uk/img/media/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg?width=460&quality=85&auto=format&fit=max&s=ddade4520902a2c16979500f69c21b95',
 			},
-			ageWarning: '1 year',
+			ageWarning: '2 years',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -148,6 +168,11 @@ export const storyPackage = {
 			headline:
 				"'Dare mighty things': hidden message found on Nasa Mars rover parachute",
 			shortUrl: 'https://www.theguardian.com/p/gge5e',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/gge5e',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2021/feb/22/nasa-releases-video-of-perseverance-rover-landing-on-mars',
@@ -162,7 +187,7 @@ export const storyPackage = {
 				'300': 'https://i.guim.co.uk/img/media/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg?width=300&quality=85&auto=format&fit=max&s=fc8b403c03df3d9b24c8cdac635b5d6c',
 				'460': 'https://i.guim.co.uk/img/media/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg?width=460&quality=85&auto=format&fit=max&s=29b950b314ce5d89bf583e8652a9edf0',
 			},
-			ageWarning: '1 year',
+			ageWarning: '2 years',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -175,6 +200,11 @@ export const storyPackage = {
 			headline:
 				'Nasa releases video of Perseverance rover landing on Mars',
 			shortUrl: 'https://www.theguardian.com/p/gga39',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/gga39',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/science/2020/jul/30/nasa-launches-mars-mission-perseverance-in-search-of-evidence-of-ancient-life',
@@ -202,6 +232,11 @@ export const storyPackage = {
 			headline:
 				'Nasa launches Mars mission in search of evidence of ancient life',
 			shortUrl: 'https://www.theguardian.com/p/eeagh',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/eeagh',
+			},
 		},
 		{
 			url: 'https://www.theguardian.com/world/2020/jul/23/china-launches-space-rocket-in-ambitious-mars-landing-mission',
@@ -229,6 +264,11 @@ export const storyPackage = {
 			headline:
 				'China launches space rocket in ambitious Mars landing mission',
 			shortUrl: 'https://www.theguardian.com/p/eckkg',
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/eckkg',
+			},
 		},
 	],
 };
