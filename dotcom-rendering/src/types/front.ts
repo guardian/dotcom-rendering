@@ -470,7 +470,7 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	links: { text: string; linkTo: string }[];
+	links: { text: string; textSlice?: string; linkTo: string }[];
 	theme?: ArticlePillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;

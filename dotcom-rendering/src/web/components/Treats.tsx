@@ -53,7 +53,7 @@ const ImageTreat = ({
 	backgroundColour,
 }: {
 	imageUrl: string;
-	links: { text: string; linkTo: string }[];
+	links: { text: string; textSlice?: string; linkTo: string }[];
 	altText?: string;
 	backgroundColour: string;
 }) => {
@@ -100,7 +100,6 @@ const ImageTreat = ({
 				</picture>
 			</div>
 			{links.map((link, index) => {
-				const linkText = link.text.split(':');
 				return (
 					<a
 						key={link.linkTo}
@@ -148,12 +147,9 @@ const ImageTreat = ({
 										font-weight: bold;
 									`}
 								>
-									{linkText.length > 0 &&
-									linkText[0] !== undefined
-										? `${linkText[0]}:`
-										: linkText[0]}
+									{link.text}
 								</span>
-								{linkText.length > 0 ? linkText[1] : ''}
+								{link.textSlice}
 							</span>
 						</div>
 					</a>

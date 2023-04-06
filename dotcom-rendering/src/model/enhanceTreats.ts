@@ -20,7 +20,8 @@ const PLATFORM_TREATS: TreatType[] = [
 		links: [
 			{
 				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
-				text: 'Guardian Today US: Get the headlines & more in a daily email',
+				text: 'Guardian Today US:',
+				textSlice: ' Get the headlines & more in a daily email',
 			},
 		],
 		theme: ArticlePillar.News,
