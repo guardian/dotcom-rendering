@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline, neutral, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
 
 const scottAvatarStyles = css`
@@ -10,6 +9,9 @@ const scottAvatarStyles = css`
 	border-radius: 100%;
 	overflow: hidden;
 	background-color: #fcebde;
+	${until.mobileLandscape} {
+		margin-top: 5px;
+	}
 `;
 
 const scottPortraitStyles = css`
@@ -20,16 +22,39 @@ const scottTextStyles = css`
 	${headline.xxxsmall()}
 	font-size: 14px;
 	line-height: 16px;
+	${until.leftCol} {
+		margin-right: 10px;
+	}
+	${until.mobileLandscape} {
+		margin-top: 35px;
+	}
 `;
 
 const quoteLineStyles = css`
 	color: ${neutral[46]};
 `;
 
+const containerStyles = css`
+	${until.leftCol} {
+		display: flex;
+		flex-direction: row-reverse;
+		margin-top: -35px;
+		${until.mobileLandscape} {
+			justify-content: space-between;
+		}
+	}
+`;
+
+const textWrapStyle = css`
+	${until.mobileLandscape} {
+		display: inline-block;
+	}
+`;
+
 export const CPScottComponent = () => {
 	return (
 		<>
-			<Hide when="below" breakpoint="leftCol">
+			<div css={containerStyles}>
 				<div css={scottAvatarStyles}>
 					<img
 						css={scottPortraitStyles}
@@ -39,11 +64,11 @@ export const CPScottComponent = () => {
 				</div>
 				<div css={scottTextStyles}>
 					<div css={quoteLineStyles}>
-						<div>
+						<div css={textWrapStyle}>
 							<QuoteIcon colour={neutral[46]} />
 							Comment is free&hellip;
 						</div>
-						<div>but facts are sacred</div>
+						<div css={textWrapStyle}>but facts are sacred</div>
 					</div>
 					<Link
 						href={
@@ -58,7 +83,7 @@ export const CPScottComponent = () => {
 						CP Scott, 1921 Guardian editor
 					</Link>
 				</div>
-			</Hide>
+			</div>
 		</>
 	);
 };
