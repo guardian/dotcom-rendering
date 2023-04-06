@@ -50,6 +50,7 @@ import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { getFootballContent } from './footballContent';
+import { gitCommitHash } from '../../../gitCommitHash';
 
 // ----- Setup ----- //
 

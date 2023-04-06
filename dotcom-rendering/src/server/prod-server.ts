@@ -21,6 +21,7 @@ import {
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
+import { gitCommitHash } from '../../../gitCommitHash';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
@@ -39,6 +40,8 @@ export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
+
+	app.get('/_prout', (_, response) => response.send(gitCommitHash));
 
 	app.use(express.json({ limit: '50mb' }));
 	app.use(compression());
