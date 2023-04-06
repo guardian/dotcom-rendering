@@ -16,6 +16,7 @@ import {
 	getOphanRecordFunction,
 	submitComponentEvent,
 } from '../browser/ophan/ophan';
+import { addFontsToIframe } from '../lib/addFontsToIframe';
 
 const isServer = typeof window === 'undefined';
 
@@ -33,11 +34,6 @@ type Props = {
 	html: string;
 	newsletterId: string;
 	successDescription: string;
-};
-
-// The ts.dom interface for FontFaceSet does not contain the .add method
-type FontFaceSetWithAdd = FontFaceSet & {
-	add?: { (font: FontFace): void };
 };
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -308,62 +304,11 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
-	const addFontsToIframe = (requiredFontNames: string[]) => {
-		const { current: iframe } = iframeRef;
-
-		// FontFace.add is not supported (IE), allow fallback to system fonts
-		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
-			| undefined
-			| FontFaceSetWithAdd;
-		if (!iframeFontFaceSet?.add) {
-			return;
-		}
-
-		// get all the fontFaces on the parent matching the list of font names
-		const requiredFonts: FontFace[] = [];
-		document.fonts.forEach((fontFace) => {
-			if (requiredFontNames.includes(fontFace.family)) {
-				requiredFonts.push(fontFace);
-			}
-		});
-
-		// add the fonts to the iframe
-		let usingAddFailed = false;
-		requiredFonts.forEach((font) => {
-			try {
-				if (usingAddFailed) {
-					return;
-				}
-				iframeFontFaceSet.add(font);
-			} catch (error) {
-				// Safari throws an InvalidModificationError on the add(font) method
-				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
-
-				// This may be a Safari bug - the error indicates that the FontFace is already
-				// defining in the document with a css @font-face declaration. The parent window
-				// has @font-face declarations, but the iframe does not.
-
-				usingAddFailed = true;
-				// As a fallback, clone the whole style element containing the @font-face declarations
-				// from the parent and append it to the iframe's document head.
-
-				const webfontStyleElementOnParent =
-					document.querySelector('.webfont');
-				if (!webfontStyleElementOnParent) {
-					return;
-				}
-				const clonedStyleElement =
-					webfontStyleElementOnParent.cloneNode(true);
-				iframe?.contentWindow?.document.head.appendChild(
-					clonedStyleElement,
-				);
-			}
-		});
-	};
-
 	const onIFrameLoad = (): void => {
 		attachListenersToIframe();
-		addFontsToIframe(['GuardianTextSans']);
+		if (iframeRef.current) {
+			addFontsToIframe(document, iframeRef.current, ['GuardianTextSans']);
+		}
 	};
 
 	const captchaSiteKey = isServer
