@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import {
 	analysis,
@@ -22,9 +21,7 @@ const Default = (): ReactElement => (
 	<Standfirst
 		item={{
 			...article,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -34,9 +31,7 @@ const Review = (): ReactElement => (
 	<Standfirst
 		item={{
 			...review,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.Culture,
 		}}
 	/>
@@ -46,9 +41,7 @@ const Feature = (): ReactElement => (
 	<Standfirst
 		item={{
 			...feature,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.Sport,
 		}}
 	/>
@@ -58,9 +51,7 @@ const Comment = (): ReactElement => (
 	<Standfirst
 		item={{
 			...comment,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.Opinion,
 		}}
 	/>
@@ -102,9 +93,7 @@ const Analysis = (): ReactElement => (
 	<AnalysisStandfirst
 		item={{
 			...analysis,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.Culture,
 		}}
 	/>
@@ -115,7 +104,6 @@ const Analysis = (): ReactElement => (
 export default {
 	component: Standfirst,
 	title: 'AR/Standfirst',
-	decorators: [withKnobs],
 };
 
 export { Default, Review, Feature, Comment, Link, Deadblog, Analysis };
