@@ -19,11 +19,4 @@ describe('canRenderAds', () => {
 
 		expect(canRenderAds(adFreePage)).toBe(false);
 	});
-
-	it('does not show ads if user is in the PDC test variant', () => {
-		const adFreePage = Object.assign({}, standardPage);
-		adFreePage.config.abTests.poorDeviceConnectivityVariant = 'variant';
-
-		expect(canRenderAds(adFreePage)).toBe(false);
-	});
 });
