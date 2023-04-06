@@ -328,12 +328,35 @@ export const SecureSignupIframe = ({
 		});
 
 		// add the fonts to the iframe
+		let usingAddFailed = false;
 		requiredFonts.forEach((font) => {
 			try {
+				if (usingAddFailed) {
+					return;
+				}
 				iframeFontFaceSet.add(font);
 			} catch (error) {
-				// Safari throws an InvalidModificationError
+				// Safari throws an InvalidModificationError on the add(font) method
 				// https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/add#exceptions
+
+				// This may be a Safari bug - the error indicates that the FontFace is already
+				// defining in the document with a css @font-face declaration. The parent window
+				// has @font-face declarations, but the iframe does not.
+
+				usingAddFailed = true;
+				// As a fallback, clone the whole style element containing the @font-face declarations
+				// from the parent and append it to the iframe's document head.
+
+				const webfontStyleElementOnParent =
+					document.querySelector('.webfont');
+				if (!webfontStyleElementOnParent) {
+					return;
+				}
+				const clonedStyleElement =
+					webfontStyleElementOnParent.cloneNode(true);
+				iframe?.contentWindow?.document.head.appendChild(
+					clonedStyleElement,
+				);
 			}
 		});
 	};
