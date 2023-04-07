@@ -241,7 +241,7 @@
 		"snyk": "^1.1103.0",
 		"source-map": "^0.7.4",
 		"source-map-support": "^0.5.21",
-		"start-server-and-test": "^1.12.1",
+		"start-server-and-test": "^2.0.0",
 		"storybook-addon-turbo-build": "^1.0.0-beta.0",
 		"stylelint": "^14.16.1",
 		"stylelint-config-standard": "^29.0.0",
