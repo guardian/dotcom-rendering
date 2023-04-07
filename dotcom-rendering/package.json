@@ -161,7 +161,7 @@
 		"chalk": "^4.1.0",
 		"compression": "^1.7.3",
 		"constructs": "10.1.246",
-		"cpy": "^8.1.2",
+		"cpy": "^9.0.1",
 		"crypto-js": "^4.1.1",
 		"csstype": "^3.1.1",
 		"curlyquotes": "^1.5.5",
