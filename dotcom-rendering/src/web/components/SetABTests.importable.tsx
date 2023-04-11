@@ -41,12 +41,7 @@ export const SetABTests = ({
 	);
 
 	const { clientSideABTests } = window.guardian.config;
-
-	if (!clientSideABTests) {
-		throw Error('No AB test found. Has the stub loaded correctly?');
-	}
-
-	const tests = Object.values(clientSideABTests) as ABTest[];
+	const tests = Object.values(clientSideABTests ?? []) as ABTest[];
 
 	const ab = new AB({
 		mvtId,
