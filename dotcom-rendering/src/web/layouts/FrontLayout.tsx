@@ -11,7 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { CPScottComponent } from '../components/CpscottComponent';
+import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -392,9 +392,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.isNetworkFront,
 								)}
 								leftContent={
-									collection.displayName === 'Opinion' && (
-										<CPScottComponent />
-									)
+									collection.displayName === 'Opinion' &&
+									front.editionId != 'US' && <CPScottHeader />
 								}
 								sectionId={ophanName}
 								showDateHeader={

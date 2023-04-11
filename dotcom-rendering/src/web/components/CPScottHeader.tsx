@@ -26,7 +26,7 @@ const quoteLineStyles = css`
 	color: ${neutral[46]};
 `;
 
-export const CPScottComponent = () => {
+export const CPScottHeader = () => {
 	return (
 		<>
 			<Hide when="below" breakpoint="leftCol">
@@ -34,7 +34,7 @@ export const CPScottComponent = () => {
 					<img
 						css={scottPortraitStyles}
 						src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/1/22/1421924658711/CPScottcutout.png"
-						alt="cp scott portrait"
+						alt="Portrait of CP Scott"
 					/>
 				</div>
 				<div css={scottTextStyles}>
