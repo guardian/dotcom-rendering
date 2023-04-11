@@ -393,6 +393,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								)}
 								leftContent={
 									collection.displayName === 'Opinion' &&
+									front.config.section === 'commentisfree' &&
 									front.editionId != 'US' && <CPScottHeader />
 								}
 								sectionId={ophanName}
