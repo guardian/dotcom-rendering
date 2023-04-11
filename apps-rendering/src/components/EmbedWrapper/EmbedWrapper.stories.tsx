@@ -2,7 +2,6 @@
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { some } from '@guardian/types';
-import { withKnobs } from '@storybook/addon-knobs';
 import { EmbedKind } from 'embed';
 import EmbedComponentWrapper from './';
 
@@ -188,7 +187,6 @@ Instagram.story = {
 export default {
 	component: EmbedComponentWrapper,
 	title: 'AR/EmbedComponentWrapper',
-	decorators: [withKnobs],
 };
 
 export { Generic, Youtube, Spotify, Instagram };

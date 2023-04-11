@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
-import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import RichLink, { richLinkWidth } from './';
 
@@ -11,13 +10,8 @@ const overrideStyle = css`
 	}
 `;
 
-const url = (): string => text('Link', 'https://theguardian.com');
-
-const linkText = (): string =>
-	text(
-		'Link Text',
-		'Axolotls in crisis: the fight to save the water monster of Mexico City.',
-	);
+const url = 'https://theguardian.com';
+const linkText = 'Axolotls in crisis: the fight to save the water monster of Mexico City.';
 
 const Default: FC = () => (
 	<section css={overrideStyle}>
@@ -27,8 +21,8 @@ const Default: FC = () => (
 				display: ArticleDisplay.Standard,
 				theme: ArticlePillar.News,
 			}}
-			linkText={linkText()}
-			url={url()}
+			linkText={linkText}
+			url={url}
 		></RichLink>
 	</section>
 );
@@ -36,7 +30,6 @@ const Default: FC = () => (
 export default {
 	component: RichLink,
 	title: 'AR/Rich Link',
-	decorators: [withKnobs],
 };
 
 const Analysis: FC = () => (
@@ -54,8 +47,8 @@ const Analysis: FC = () => (
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
 				}}
-				linkText={linkText()}
-				url={url()}
+				linkText={linkText}
+				url={url}
 			></RichLink>
 		</section>
 	</div>

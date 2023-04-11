@@ -10,7 +10,6 @@ module.exports = {
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
-		'@storybook/addon-knobs',
 		{
 			name: 'storybook-addon-turbo-build',
 			options: {

@@ -1,17 +1,14 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { text, withKnobs } from '@storybook/addon-knobs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
 import Anchor from './';
 
 // ----- Setup ----- //
 
-const link = (): string => text('Link', 'https://theguardian.com');
-
-const copy = (): string =>
-	text('Copy', '“everything that was recommended was done”.');
+const link = 'https://theguardian.com';
+const copy = '“everything that was recommended was done”.';
 
 // ----- Stories ----- //
 
@@ -22,9 +19,9 @@ const Default: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		href={link()}
+		href={link}
 	>
-		{copy()}
+		{copy}
 	</Anchor>
 );
 
@@ -43,9 +40,9 @@ const Liveblock: FC = () => {
 							display: ArticleDisplay.Standard,
 							theme: format.theme,
 						}}
-						href={link()}
+						href={link}
 					>
-						{copy()}
+						{copy}
 					</Anchor>
 					<br />
 					<br />
@@ -60,7 +57,6 @@ const Liveblock: FC = () => {
 export default {
 	component: Anchor,
 	title: 'AR/Anchor',
-	decorators: [withKnobs],
 };
 
 export { Default, Liveblock };
