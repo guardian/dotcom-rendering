@@ -1,3 +1,4 @@
+import type { ABTest } from '@guardian/ab-core';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../web/lib/edition';
 
@@ -34,6 +35,7 @@ export interface WindowGuardianConfig {
 		pageViewId: string;
 		browserId: string;
 	};
+	clientSideABTests?: Record<string, ABTest | undefined>;
 }
 
 /**
