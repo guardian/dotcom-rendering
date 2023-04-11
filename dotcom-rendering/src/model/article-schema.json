@@ -4201,6 +4201,9 @@
                 "isPreview": {
                     "type": "boolean"
                 },
+                "abScriptUrl": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },

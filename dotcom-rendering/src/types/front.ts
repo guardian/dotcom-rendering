@@ -428,6 +428,7 @@ type FEFrontConfigType = {
 	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
+	abScriptUrl?: string;
 };
 
 type FESeoDataType = {

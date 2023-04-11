@@ -73,4 +73,5 @@ export interface ConfigType extends CommercialConfigType {
 	isLiveBlog?: boolean;
 	isLive?: boolean;
 	isPreview?: boolean;
+	abScriptUrl?: string;
 }

@@ -108,6 +108,7 @@ export const articleToHtml = ({ article }: Props): string => {
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
+			article.config.abScriptUrl,
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,

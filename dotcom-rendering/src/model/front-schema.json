@@ -283,6 +283,9 @@
                 },
                 "fbAppId": {
                     "type": "string"
+                },
+                "abScriptUrl": {
+                    "type": "string"
                 }
             },
             "required": [

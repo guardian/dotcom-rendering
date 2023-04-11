@@ -59,6 +59,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
+			front.config.abScriptUrl,
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
