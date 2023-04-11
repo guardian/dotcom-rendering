@@ -1,8 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
-// Sign in Gate A/B Tests
-import { signInGateCopyTestJan2023 } from '../../experiments/tests/sign-in-gate-copy-test-variants';
-import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
-import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
+import { getTest } from '../SetABTests.importable';
 // Sign in Gate Types
 import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
@@ -15,10 +12,12 @@ import type { SignInGateTestMap } from './types';
    id in signInGateTestIdToComponentId
 */
 export const signInGateTests: ReadonlyArray<ABTest> = [
-	signInGateMainVariant,
-	signInGateMainControl,
-	signInGateCopyTestJan2023,
-];
+	// For now this part of the API becomes clunkier
+	// But we can do some work on this later
+	getTest('SignInGateMainVariant'),
+	getTest('SignInGateMainControl'),
+	getTest('SignInGateCopyTestJan2023'),
+].filter((test): test is ABTest => test !== undefined);
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,

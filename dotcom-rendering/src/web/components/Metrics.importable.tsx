@@ -8,10 +8,10 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
+import { getTest } from './SetABTests.importable';
 
 type Props = {
 	commercialMetricsEnabled: boolean;
@@ -24,8 +24,10 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 // For these tests switch off sampling and collect metrics for 100% of views
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
-	integrateIma,
-];
+	'IntegrateIma',
+]
+	.map((testId) => getTest(testId))
+	.filter((test): test is ABTest => test !== undefined);
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTestApi = useAB()?.api;

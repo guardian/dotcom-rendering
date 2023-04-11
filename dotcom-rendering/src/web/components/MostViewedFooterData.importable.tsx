@@ -4,13 +4,13 @@ import type {
 	FETrailType,
 	TrailTabType,
 } from '../../types/trails';
-import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { MostViewedFooter } from './MostViewedFooter.importable';
+import { getTest } from './SetABTests.importable';
 
 interface Props {
 	sectionName?: string;
@@ -64,7 +64,8 @@ export const MostViewedFooterData = ({
 		(ABTestAPI?.isUserInVariant('AbTestTest', 'variant') &&
 			'ab-test-variant') ||
 		'ab-test-not-in-test';
-	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
+	const abTestTest = getTest('AbTestTest');
+	const runnableTest = abTestTest && ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	const url = buildSectionUrl(ajaxUrl, edition, sectionName);
