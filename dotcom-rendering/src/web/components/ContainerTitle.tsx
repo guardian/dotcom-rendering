@@ -69,6 +69,10 @@ const dateTextStyles = (color: Colour) => css`
 	}
 `;
 
+const containerStyles = css`
+	max-width: 82%;
+`;
+
 /**
  * ContainerTitle
  *
@@ -93,7 +97,7 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<div css={[marginStyles]}>
+		<div css={[marginStyles, containerStyles]}>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
