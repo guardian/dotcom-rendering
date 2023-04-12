@@ -9,7 +9,7 @@ const scottAvatarStyles = css`
 	height: 72px;
 	border-radius: 100%;
 	overflow: hidden;
-	background-color: #fcebde;
+	background-color: #fcebde; /* stylelint-disable-line color-no-hex */
 `;
 
 const scottPortraitStyles = css`
