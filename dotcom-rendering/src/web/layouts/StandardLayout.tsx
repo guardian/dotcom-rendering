@@ -351,111 +351,119 @@ export const StandardLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isWeb = renderingTarget === 'Web';
+
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				<>
-					{renderAds && (
-						<Stuck>
+			{isWeb && (
+				<div data-print-layout="hide" id="bannerandheader">
+					<>
+						{renderAds && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+								>
+									<HeaderAdSlot display={format.display} />
+								</Section>
+							</Stuck>
+						)}
+						{!isLabs && (
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
 								showSideBorders={false}
 								padSides={false}
 								shouldCenter={false}
+								backgroundColour={brandBackground.primary}
+								element="header"
 							>
-								<HeaderAdSlot display={format.display} />
+								<Header
+									editionId={article.editionId}
+									idUrl={article.config.idUrl}
+									mmaUrl={article.config.mmaUrl}
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									urls={article.nav.readerRevenueLinks.header}
+									remoteHeader={
+										!!article.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									idApiUrl={article.config.idApiUrl}
+									isInEuropeTest={isInEuropeTest}
+									headerTopBarSearchCapiSwitch={
+										!!article.config.switches
+											.headerTopBarSearchCapi
+									}
+								/>
 							</Section>
-						</Stuck>
-					)}
-					{!isLabs && (
+						)}
 						<Section
 							fullWidth={true}
+							borderColour={brandLine.primary}
 							showTopBorder={false}
-							showSideBorders={false}
 							padSides={false}
-							shouldCenter={false}
 							backgroundColour={brandBackground.primary}
-							element="header"
+							element="nav"
 						>
-							<Header
+							<Nav
+								nav={NAV}
+								format={formatForNav}
+								subscribeUrl={
+									article.nav.readerRevenueLinks.header
+										.subscribe
+								}
 								editionId={article.editionId}
-								idUrl={article.config.idUrl}
-								mmaUrl={article.config.mmaUrl}
-								discussionApiUrl={
-									article.config.discussionApiUrl
-								}
-								urls={article.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!article.config.switches.remoteHeader
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								idApiUrl={article.config.idApiUrl}
-								isInEuropeTest={isInEuropeTest}
-								headerTopBarSearchCapiSwitch={
-									!!article.config.switches
-										.headerTopBarSearchCapi
+								headerTopBarSwitch={
+									!!article.config.switches.headerTopNav
 								}
 							/>
 						</Section>
-					)}
-					<Section
-						fullWidth={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="nav"
-					>
-						<Nav
-							nav={NAV}
-							format={formatForNav}
-							subscribeUrl={
-								article.nav.readerRevenueLinks.header.subscribe
-							}
-							editionId={article.editionId}
-							headerTopBarSwitch={
-								!!article.config.switches.headerTopNav
-							}
-						/>
-					</Section>
-					{NAV.subNavSections && !isLabs && (
-						<>
-							<Section
-								fullWidth={true}
-								backgroundColour={palette.background.article}
-								padSides={false}
-								element="aside"
-							>
-								<Island deferUntil="idle">
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										format={format}
+						{NAV.subNavSections && !isLabs && (
+							<>
+								<Section
+									fullWidth={true}
+									backgroundColour={
+										palette.background.article
+									}
+									padSides={false}
+									element="aside"
+								>
+									<Island deferUntil="idle">
+										<SubNav
+											subNavSections={NAV.subNavSections}
+											currentNavLink={NAV.currentNavLink}
+											format={format}
+										/>
+									</Island>
+								</Section>
+								<Section
+									fullWidth={true}
+									backgroundColour={
+										palette.background.article
+									}
+									padSides={false}
+									showTopBorder={false}
+								>
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+										color={palette.border.secondary}
 									/>
-								</Island>
-							</Section>
-							<Section
-								fullWidth={true}
-								backgroundColour={palette.background.article}
-								padSides={false}
-								showTopBorder={false}
-							>
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-									color={palette.border.secondary}
-								/>
-							</Section>
-						</>
-					)}
-				</>
-			</div>
-
+								</Section>
+							</>
+						)}
+					</>
+				</div>
+			)}
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<Section
@@ -935,7 +943,7 @@ export const StandardLayout = ({
 				showSideBorders={false}
 				element="footer"
 			>
-				{renderingTarget === 'Web' && (
+				{isWeb && (
 					<Footer
 						pageFooter={article.pageFooter}
 						pillar={format.theme}
@@ -978,13 +986,13 @@ export const StandardLayout = ({
 			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
 			{/* TODO: Remove this test */}
-			{renderingTarget === 'Apps' ? (
+			{isWeb ? (
 				<div>
-					<p>App test</p>
+					<p>Web test</p>
 				</div>
 			) : (
 				<div>
-					<p>Must be web test</p>
+					<p>Must be app test</p>
 				</div>
 			)}
 		</>
