@@ -347,11 +347,10 @@ export const StandardLayout = ({
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = canRenderAds(article);
-
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isWeb = renderingTarget === 'Web';
+	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
@@ -916,74 +915,79 @@ export const StandardLayout = ({
 					</Section>
 				)}
 			</main>
+			{isWeb && (
+				<>
+					{NAV.subNavSections && (
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							element="aside"
+						>
+							<Island deferUntil="visible">
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									format={format}
+								/>
+							</Island>
+						</Section>
+					)}
 
-			{NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
-					<Island deferUntil="visible">
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						backgroundColour={brandBackground.primary}
+						borderColour={brandBorder.primary}
+						showSideBorders={false}
+						element="footer"
+					>
+						<Footer
+							pageFooter={article.pageFooter}
+							pillar={format.theme}
+							pillars={NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
 						/>
-					</Island>
-				</Section>
+					</Section>
+
+					<BannerWrapper data-print-layout="hide">
+						<Island deferUntil="idle" clientOnly={true}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								section={article.config.section}
+								sectionName={article.sectionName}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+				</>
 			)}
-
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				{isWeb && (
-					<Footer
-						pageFooter={article.pageFooter}
-						pillar={format.theme}
-						pillars={NAV.pillars}
-						urls={article.nav.readerRevenueLinks.header}
-						editionId={article.editionId}
-						contributionsServiceUrl={
-							article.contributionsServiceUrl
-						}
-					/>
-				)}
-			</Section>
-
-			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						section={article.config.section}
-						sectionName={article.sectionName}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
 			{/* TODO: Remove this test */}
 			{isWeb ? (
