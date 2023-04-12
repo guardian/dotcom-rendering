@@ -70,6 +70,7 @@ export const trails: [
 		],
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -89,6 +90,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -107,6 +109,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
@@ -124,6 +127,7 @@ export const trails: [
 		showQuotedHeadline: true,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
@@ -141,6 +145,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
@@ -159,6 +164,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
@@ -178,6 +184,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
@@ -196,6 +203,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 
 	{
@@ -216,6 +224,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -235,6 +244,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -254,6 +264,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -273,6 +284,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -292,6 +304,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -311,6 +324,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -330,6 +344,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
@@ -349,6 +364,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -366,5 +382,6 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		isActionCard: false,
 	},
 ];
