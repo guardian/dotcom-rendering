@@ -1802,6 +1802,10 @@ const textDateLine = (format: ArticleFormat): string => {
 	return neutral[46];
 };
 
+const textKickerLabel = (): string => {
+	return palette.neutral[100];
+};
+
 const textTableOfContents = (): string => {
 	return palette.neutral[7];
 };
@@ -1984,6 +1988,27 @@ const backgroundDesignTag = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundKickerLabel = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return palette.news[400];
+		case ArticlePillar.Sport:
+			return palette.sport[400];
+		case ArticlePillar.Lifestyle:
+			return palette.lifestyle[400];
+		case ArticlePillar.Culture:
+			return palette.culture[400];
+		case ArticlePillar.Opinion:
+			return palette.opinion[400];
+		case ArticleSpecial.Labs:
+			return palette.labs[400];
+		case ArticleSpecial.SpecialReport:
+			return palette.specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return palette.specialReportAlt[100];
+	}
+};
+
 const hoverKeyEventLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -2117,6 +2142,7 @@ export const decidePalette = (
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(format),
+			kickerLabel: textKickerLabel(),
 			dateLine: textDateLine(format),
 			tableOfContents: textTableOfContents(),
 		},
@@ -2154,6 +2180,7 @@ export const decidePalette = (
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
+			kickerLabel: backgroundKickerLabel(format),
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
 		},

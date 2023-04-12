@@ -47,6 +47,7 @@ export const FrontCard = (props: Props) => {
 		avatarUrl: trail.avatarUrl,
 		showMainVideo: trail.showMainVideo,
 		isExternalLink: trail.isExternalLink,
+		isActionCard: trail.isActionCard,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

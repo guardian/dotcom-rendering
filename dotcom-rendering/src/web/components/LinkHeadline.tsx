@@ -86,6 +86,7 @@ export const LinkHeadline = ({
 					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					hideLineBreak={hideLineBreak}
+					format={format}
 				/>
 			)}
 			{showQuotes && <QuoteIcon colour={palette.text.linkKicker} />}

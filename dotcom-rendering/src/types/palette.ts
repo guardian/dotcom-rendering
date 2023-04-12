@@ -58,6 +58,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		betaLabel: Colour;
 		designTag: Colour;
+		kickerLabel: Colour;
 		dateLine: Colour;
 		tableOfContents: Colour;
 	};
@@ -95,6 +96,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		treat: Colour;
 		designTag: Colour;
+		kickerLabel: Colour;
 		pullQuote: Colour;
 		messageForm: Colour;
 	};

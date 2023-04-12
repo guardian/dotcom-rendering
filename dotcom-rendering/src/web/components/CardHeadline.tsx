@@ -7,10 +7,16 @@ import {
 	from,
 	headline,
 	space,
+	palette as srcPallet,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Link, SvgExternal } from '@guardian/source-react-components';
+import {
+	Button,
+	Link,
+	SvgArrowRightStraight,
+	SvgExternal,
+} from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
@@ -36,6 +42,7 @@ type Props = {
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
 	isExternalLink?: boolean;
+	isActionCard?: boolean;
 };
 
 const fontStyles = ({
@@ -193,6 +200,16 @@ const lineStyles = (palette: Palette) => css`
 	}
 `;
 
+const tellUsButtonStyles = css`
+	margin: 8px 0px;
+	display: flex;
+	color: ${srcPallet.neutral[7]};
+	border-color: ${srcPallet.neutral[0]};
+	svg {
+		color: ${srcPallet.neutral[0]};
+	}
+`;
+
 const dynamoStyles = css`
 	display: block;
 	font-weight: ${fontWeights.medium};
@@ -241,6 +258,7 @@ export const CardHeadline = ({
 	linkTo,
 	isDynamo,
 	isExternalLink,
+	isActionCard,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -275,6 +293,9 @@ export const CardHeadline = ({
 								color={kickerColour}
 								showPulsingDot={showPulsingDot}
 								hideLineBreak={hideLineBreak}
+								isAction={isActionCard}
+								format={format}
+								size={size}
 							/>
 						</>
 					)}
@@ -308,6 +329,19 @@ export const CardHeadline = ({
 					size={size}
 					isCard={true}
 				/>
+			)}
+			{isActionCard ? (
+				<Button
+					priority="tertiary"
+					size="xsmall"
+					icon={<SvgArrowRightStraight />}
+					iconSide="right"
+					cssOverrides={tellUsButtonStyles}
+				>
+					Tell us
+				</Button>
+			) : (
+				<></>
 			)}
 		</>
 	);

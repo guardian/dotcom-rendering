@@ -74,6 +74,7 @@ export type Props = {
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
 	isExternalLink: boolean;
+	isActionCard: boolean;
 };
 
 const StarRatingComponent = ({
@@ -258,6 +259,7 @@ export const Card = ({
 	isDynamo,
 	isCrossword,
 	isExternalLink,
+	isActionCard,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -433,6 +435,7 @@ export const Card = ({
 							showByline={showByline}
 							isDynamo={isDynamo}
 							isExternalLink={isExternalLink}
+							isActionCard={isActionCard}
 						/>
 						{starRating !== undefined ? (
 							<StarRatingComponent

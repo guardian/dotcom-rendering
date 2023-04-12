@@ -263,6 +263,7 @@ export type DCRFrontCard = {
 	mediaDuration?: number;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
+	isActionCard: boolean;
 };
 
 export type FESnapType = {

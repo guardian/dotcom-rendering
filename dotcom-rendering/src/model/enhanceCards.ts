@@ -194,6 +194,11 @@ export const enhanceCards = (
 				? faciaCard.properties.href
 				: faciaCard.header.url;
 
+		// Action card is a new card type that invites users to take action as opposed to merely
+		// read, view, watch or listen.
+		const isActionCard =
+			tags.filter((tag) => tag.id === 'tone/callout').length > 0;
+
 		return {
 			format,
 			dataLinkName,
@@ -242,5 +247,6 @@ export const enhanceCards = (
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
+			isActionCard,
 		};
 	});

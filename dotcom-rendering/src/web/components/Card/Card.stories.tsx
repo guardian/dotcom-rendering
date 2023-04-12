@@ -13,13 +13,39 @@ import { Card } from './Card';
 import { LI } from './components/LI';
 import { UL } from './components/UL';
 
+const newsTheme = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+
+const opinionTheme = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Opinion,
+};
+
+const sportTheme = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Sport,
+};
+
+const cultureTheme = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Culture,
+};
+
+const lifestyleTheme = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Lifestyle,
+};
+
 const basicCardProps: CardProps = {
 	linkTo: '',
-	format: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	},
+	format: newsTheme,
 	headlineText: 'Headline text',
 	trailText:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
@@ -31,16 +57,13 @@ const basicCardProps: CardProps = {
 	imagePosition: 'top',
 	showAge: true,
 	isExternalLink: false,
+	isActionCard: false,
 };
 
 const aBasicLink = {
 	headline: 'Headline',
 	url: 'https://www.theguardian.com',
-	format: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	},
+	format: newsTheme,
 };
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -197,6 +220,65 @@ export const WithDifferentHeadlineSizes = () => {
 					{...basicCardProps}
 					headlineSize="large"
 					headlineText="large"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithActionKickerWithDifferentHeadlineSizes = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a very long kicker"
+					headlineSize="tiny"
+					headlineText="tiny"
+					isActionCard={true}
+					byline="Byline text"
+					showByline={true}
+					format={newsTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="kicker"
+					headlineSize="small"
+					headlineText="small"
+					isActionCard={true}
+					format={opinionTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="kicker"
+					headlineSize="medium"
+					headlineText="medium"
+					isActionCard={true}
+					format={cultureTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a very long kicker"
+					headlineSize="large"
+					headlineText="large"
+					isActionCard={true}
+					format={lifestyleTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="kicker"
+					headlineSize="huge"
+					headlineText="huge"
+					isActionCard={true}
+					format={sportTheme}
 				/>
 			</CardWrapper>
 		</CardGroup>
