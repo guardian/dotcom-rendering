@@ -380,6 +380,7 @@ const CarouselCard = ({
 			discussionId={discussionId}
 			branding={branding}
 			isExternalLink={false}
+			isActionCard={false}
 		/>
 	</LI>
 );
