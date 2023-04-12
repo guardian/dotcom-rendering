@@ -1,8 +1,11 @@
 import { getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
+import { decideFormat } from '../../web/lib/decideFormat';
 import { renderToStringWithEmotion } from '../../web/lib/emotion';
+import { ArticlePage } from '../components/ArticlePage';
 import { pageTemplate } from './pageTemplate';
 
 export const articleToHtml = (
@@ -11,7 +14,13 @@ export const articleToHtml = (
 	clientScripts: string[];
 	html: string;
 } => {
-	const { html, extractedCss } = renderToStringWithEmotion(<></>);
+	const NAV = extractNAV(article.nav);
+
+	const format: ArticleFormat = decideFormat(article.format);
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ArticlePage format={format} article={article} NAV={NAV} />,
+	);
 
 	const getScriptArrayFromFile = getScriptsFromManifest({
 		platform: 'apps',

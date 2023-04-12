@@ -935,14 +935,18 @@ export const StandardLayout = ({
 				showSideBorders={false}
 				element="footer"
 			>
-				<Footer
-					pageFooter={article.pageFooter}
-					pillar={format.theme}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
+				{renderingTarget === 'Web' && (
+					<Footer
+						pageFooter={article.pageFooter}
+						pillar={format.theme}
+						pillars={NAV.pillars}
+						urls={article.nav.readerRevenueLinks.header}
+						editionId={article.editionId}
+						contributionsServiceUrl={
+							article.contributionsServiceUrl
+						}
+					/>
+				)}
 			</Section>
 
 			<BannerWrapper data-print-layout="hide">
@@ -973,9 +977,14 @@ export const StandardLayout = ({
 				</Island>
 			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
-			{renderingTarget === 'Apps' && (
+			{/* TODO: Remove this test */}
+			{renderingTarget === 'Apps' ? (
 				<div>
-					<p>TEST</p>
+					<p>App test</p>
+				</div>
+			) : (
+				<div>
+					<p>Must be web test</p>
 				</div>
 			)}
 		</>
