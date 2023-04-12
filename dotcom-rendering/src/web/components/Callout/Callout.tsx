@@ -43,9 +43,9 @@ const tabIcons = css`
 `;
 
 export interface CalloutBlockProps {
-	prompt?: string;
-	heading?: string;
-	description?: string;
+	prompt: string;
+	heading: string;
+	description: string;
 	formFields: CampaignFieldType[];
 	formId: string;
 	submissionURL: string;

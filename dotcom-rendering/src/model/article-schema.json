@@ -1256,13 +1256,16 @@
                 "_type",
                 "activeFrom",
                 "calloutsUrl",
+                "description",
                 "displayOnSensitive",
                 "elementId",
                 "formFields",
                 "formId",
                 "id",
                 "isNonCollapsible",
-                "tagName"
+                "prompt",
+                "tagName",
+                "title"
             ]
         },
         "CalloutContactType": {

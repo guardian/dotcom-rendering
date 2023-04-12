@@ -88,7 +88,6 @@ export const Expired = () => {
 Expired.story = { name: 'Expired' };
 
 export const MinimalCallout = () => {
-	const { title, prompt, description, ...minimalCallout } = calloutCampaignV2;
 	return (
 		<>
 			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>
@@ -96,9 +95,12 @@ export const MinimalCallout = () => {
 			</div>
 			<CalloutBlockComponent
 				callout={{
-					...minimalCallout,
+					...calloutCampaignV2,
 					activeUntil: tomorrow,
 					isNonCollapsible: false,
+					title: '',
+					prompt: '',
+					description: '',
 				}}
 				pageId={pageId}
 			/>
