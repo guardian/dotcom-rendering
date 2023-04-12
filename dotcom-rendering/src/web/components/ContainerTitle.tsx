@@ -70,7 +70,9 @@ const dateTextStyles = (color: Colour) => css`
 `;
 
 const containerStyles = css`
-	max-width: 82%;
+	${until.leftCol} {
+		max-width: 82%;
+	}
 `;
 
 /**
