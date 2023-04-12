@@ -232,7 +232,7 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					kickerText="this is a very long kicker"
+					kickerText="kicker"
 					headlineSize="tiny"
 					headlineText="tiny"
 					isActionCard={true}
@@ -264,7 +264,7 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					kickerText="this is a very long kicker"
+					kickerText="kicker"
 					headlineSize="large"
 					headlineText="large"
 					isActionCard={true}
@@ -277,6 +277,85 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 					kickerText="kicker"
 					headlineSize="huge"
 					headlineText="huge"
+					isActionCard={true}
+					format={sportTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="kicker"
+					headlineSize="ginormous"
+					headlineText="ginormous"
+					isActionCard={true}
+					format={sportTheme}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="tiny"
+					headlineText="tiny"
+					isActionCard={true}
+					byline="Byline text"
+					showByline={true}
+					format={newsTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="small"
+					headlineText="small"
+					isActionCard={true}
+					format={opinionTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="medium"
+					headlineText="medium"
+					isActionCard={true}
+					format={cultureTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="large"
+					headlineText="large"
+					isActionCard={true}
+					format={lifestyleTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="huge"
+					headlineText="huge"
+					isActionCard={true}
+					format={sportTheme}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="this is a gggg very long kicker that"
+					headlineSize="ginormous"
+					headlineText="ginormous"
 					isActionCard={true}
 					format={sportTheme}
 				/>
