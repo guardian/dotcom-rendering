@@ -1,6 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, space } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -345,6 +345,12 @@ const topBorder = css`
 	border-top-style: solid;
 `;
 
+const titleStyle = css`
+	${until.leftCol} {
+		max-width: 74%;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -511,6 +517,7 @@ export const FrontSection = ({
 				css={[
 					headlineContainerStyles,
 					centralBorder === 'partial' && headlineContainerBorders,
+					titleStyle,
 				]}
 			>
 				<ContainerTitle
