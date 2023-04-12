@@ -1202,6 +1202,9 @@
                 "formId": {
                     "type": "number"
                 },
+                "prompt": {
+                    "type": "string"
+                },
                 "title": {
                     "type": "string"
                 },
@@ -1260,6 +1263,7 @@
                 "formId",
                 "id",
                 "isNonCollapsible",
+                "prompt",
                 "tagName",
                 "title"
             ]

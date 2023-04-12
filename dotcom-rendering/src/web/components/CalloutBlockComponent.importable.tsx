@@ -12,6 +12,7 @@ export const CalloutBlockComponent = ({
 	pageId: string;
 }) => {
 	const {
+		prompt,
 		title,
 		description,
 		formFields,
@@ -50,9 +51,10 @@ export const CalloutBlockComponent = ({
 					>
 						<CalloutBlock
 							formId={id}
+							prompt={prompt}
 							heading={title}
-							formFields={formFields}
 							description={description}
+							formFields={formFields}
 							submissionURL={calloutsUrl}
 							isExpired={isExpired(activeUntil)}
 							isNonCollapsible={isNonCollapsible}
@@ -64,9 +66,10 @@ export const CalloutBlockComponent = ({
 			) : (
 				<CalloutBlock
 					formId={id}
+					prompt={prompt}
 					heading={title}
-					formFields={formFields}
 					description={description}
+					formFields={formFields}
 					submissionURL={calloutsUrl}
 					isExpired={isExpired(activeUntil)}
 					isNonCollapsible={isNonCollapsible}
