@@ -1,12 +1,13 @@
 import { css, Global } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import type { FEArticleType } from '../../types/frontend';
+import type { NavType } from '../../model/extract-nav';
 import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
 	article: FEArticleType;
+	NAV: NavType;
 	format: ArticleFormat;
 };
 
@@ -18,7 +19,7 @@ type Props = {
  * @param {FEArticleType} props.article - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const ArticlePage = ({ article, format }: Props) => {
+export const ArticlePage = ({ article, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -33,7 +34,7 @@ export const ArticlePage = ({ article, format }: Props) => {
 					}
 				`}
 			/>
-			<DecideLayout article={article} format={format} />
+			<DecideLayout article={article} NAV={NAV} format={format} />
 		</StrictMode>
 	);
 };

@@ -131,6 +131,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={'Web'}
 						/>
 					);
 			}

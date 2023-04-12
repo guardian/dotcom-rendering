@@ -289,9 +289,15 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: string;
 }
 
-export const StandardLayout = ({ article, NAV, format }: Props) => {
+export const StandardLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -967,6 +973,11 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 				</Island>
 			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
+			{renderingTarget === 'Apps' && (
+				<div>
+					<p>TEST</p>
+				</div>
+			)}
 		</>
 	);
 };
