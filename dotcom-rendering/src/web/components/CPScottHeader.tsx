@@ -15,6 +15,7 @@ const scottAvatarStyles = css`
 	border-radius: 100%;
 	overflow: hidden;
 	background-color: ${opinion[800]};
+	flex-shrink: 0;
 	${until.mobileLandscape} {
 		margin-top: 5px;
 		width: 70px;
