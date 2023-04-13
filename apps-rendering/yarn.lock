@@ -12732,10 +12732,10 @@ thrift@^0.15.0:
     q "^1.5.0"
     ws "^5.2.2"
 
-thrift@^0.16.0:
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/thrift/-/thrift-0.16.0.tgz#6497711610aa32d2f94fc2546f88ee4ff6e4106c"
-  integrity sha512-W8DpGyTPlIaK3f+e1XOCLxefaUWXtrOXAaVIDbfYhmVyriYeAKgsBVFNJUV1F9SQ2SPt2sG44AZQxSGwGj/3VA==
+thrift@^0.18.1:
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/thrift/-/thrift-0.18.1.tgz#b17946f79fd220c7b1e839d956ef63071ec6982b"
+  integrity sha512-9FixcJbrFYsqOigzwpHaLAPmaLwQJrCg/StSmslKc2rLZVfwD15yky7UaZfbfLNQD3c/fwUpWXHwS3U8s/7YhA==
   dependencies:
     browser-or-node "^1.2.1"
     isomorphic-ws "^4.0.1"
@@ -13985,15 +13985,10 @@ ws@^7.4.6:
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
   integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
 
-ws@^8.2.3:
+ws@^8.2.3, ws@^8.4.2:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.0.tgz#485074cc392689da78e1828a9ff23585e06cddd8"
   integrity sha512-kU62emKIdKVeEIOIKVegvqpXMSTAMLJozpHZaJNDYqBjzlSYXQGviYwN1osDLJ9av68qHd4a2oSjd7yD4pacig==
-
-ws@^8.4.2:
-  version "8.8.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.8.1.tgz#5dbad0feb7ade8ecc99b830c1d77c913d4955ff0"
-  integrity sha512-bGy2JzvzkPowEJV++hF07hAD6niYSr0JzBNo/J29WsB57A2r7Wlc1UFcTR9IzrPvuNVO4B8LGqF8qcpsVOhJCA==
 
 x-default-browser@^0.4.0:
   version "0.4.0"
