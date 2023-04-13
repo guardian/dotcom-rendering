@@ -21,7 +21,7 @@ addFormats(ajv);
 
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
-const validateNewslettersPage = ajv.compile<FENewslettersPageType>(
+const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
 
@@ -49,12 +49,12 @@ export const validateAsFrontType = (data: unknown): FEFrontType => {
 	);
 };
 
-export const validateAsNewslettersPageType = (
+export const validateAsAllEditorialNewslettersPageType = (
 	data: unknown,
 ): FENewslettersPageType => {
-	if (validateNewslettersPage(data)) return data;
+	if (validateAllEditorialNewslettersPage(data)) return data;
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
-		${JSON.stringify(validateNewslettersPage.errors, null, 2)}`,
+		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
 	);
 };

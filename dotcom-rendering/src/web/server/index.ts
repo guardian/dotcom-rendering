@@ -7,9 +7,9 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { extractTrendingTopics } from '../../model/extractTrendingTopics';
 import {
+	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
 	validateAsFrontType,
-	validateAsNewslettersPageType,
 } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
@@ -19,7 +19,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { newsletterPageToHtml } from './newslettersPageToHtml';
+import { allEditorialNewslettersPageToHtml } from './newslettersPageToHtml';
 
 function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -203,17 +203,22 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
-const enhanceNewslettersPage = (body: unknown): DCRNewslettersPageType => {
-	const newsletterData = validateAsNewslettersPageType(body);
+const enhanceAllEditorialNewslettersPage = (
+	body: unknown,
+): DCRNewslettersPageType => {
+	const newsletterData = validateAsAllEditorialNewslettersPageType(body);
 	return {
 		...newsletterData,
 	};
 };
 
-export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
+export const handleAllEditorialNewslettersPage: RequestHandler = (
+	{ body },
+	res,
+) => {
 	try {
-		const newslettersPage = enhanceNewslettersPage(body);
-		const html = newsletterPageToHtml({ newslettersPage });
+		const newslettersPage = enhanceAllEditorialNewslettersPage(body);
+		const html = allEditorialNewslettersPageToHtml({ newslettersPage });
 		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);

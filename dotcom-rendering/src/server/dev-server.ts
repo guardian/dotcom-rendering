@@ -2,6 +2,7 @@ import type { Handler } from 'express';
 import { handleAMPArticle } from '../amp/server';
 import { handleAppsArticle } from '../apps/server';
 import {
+	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
@@ -9,7 +10,6 @@ import {
 	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-	handleNewslettersPage,
 } from '../web/server';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
@@ -51,7 +51,7 @@ export const devServer = (): Handler => {
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
 			case 'EmailNewsletters':
-				return handleNewslettersPage(req, res, next);
+				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
 			default: {

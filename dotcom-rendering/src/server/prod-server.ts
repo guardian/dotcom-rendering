@@ -9,6 +9,7 @@ import {
 import { handleAppsArticle } from '../apps/server';
 import type { FEArticleType } from '../types/frontend';
 import {
+	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
 	handlePerfTest as handleArticlePerfTest,
@@ -17,7 +18,6 @@ import {
 	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-	handleNewslettersPage,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -63,7 +63,11 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/EmailNewsletters', logRenderTime, handleNewslettersPage);
+	app.post(
+		'/EmailNewsletters',
+		logRenderTime,
+		handleAllEditorialNewslettersPage,
+	);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
@@ -99,7 +103,7 @@ export const prodServer = (): void => {
 		'/EmailNewsletters',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleNewslettersPage,
+		handleAllEditorialNewslettersPage,
 	);
 
 	app.get(

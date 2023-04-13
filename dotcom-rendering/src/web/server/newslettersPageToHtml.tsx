@@ -16,7 +16,9 @@ interface Props {
 	newslettersPage: DCRNewslettersPageType;
 }
 
-export const newsletterPageToHtml = ({ newslettersPage }: Props): string => {
+export const allEditorialNewslettersPageToHtml = ({
+	newslettersPage,
+}: Props): string => {
 	const title = newslettersPage.webTitle;
 	const NAV = extractNAV(newslettersPage.nav);
 
