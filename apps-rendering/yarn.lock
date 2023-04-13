@@ -1460,12 +1460,12 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@guardian/apps-rendering-api-models@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-6.0.0.tgz#cb5ec6d90d00941a20cdbd9708495b545250ea70"
-  integrity sha512-F8bHlzel4tbjisz63osvj7nKeXrrEUpqAn43puhj3qx3u+nvQf4w1Qz6YtRDMhHWS9ZElChud5a4gX9H4nERjA==
+"@guardian/apps-rendering-api-models@6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-6.1.0.tgz#9f8a72d7078f8e20a823d1ea0f0a58aa2090e857"
+  integrity sha512-cXbtpuGy/3wux1zSuUIVUG17i2sof51BPc6Jexkf9m3pjNr69z1e7C7ABaLQeeOKbi/ge+Xuj2eD6kziO41ZEA==
   dependencies:
-    "@guardian/content-api-models" "^17.4.2"
+    "@guardian/content-api-models" "^17.6.2"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -1505,12 +1505,12 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/content-api-models@^17.4.2":
-  version "17.4.2"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.2.tgz#d31b401c65ad4ff972d0716fa7c855fd441ccf8a"
-  integrity sha512-xRnOzbZfeGZqtdj9CefQXWJioKy2bfYOK6hWLIXg+/vHFxqDC+kWSSzfKO2E7fxZ3hAAExzMMW7pDhyI32c7ZA==
+"@guardian/content-api-models@^17.6.2":
+  version "17.6.2"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.6.2.tgz#abedae35d37745ce5b5ff7e99306c7eba7cc413f"
+  integrity sha512-2mmlL9HX73b86EzYZqyYxiNlu4x2EoqWsMVt58vHIiM0QxEj0baQtD4H9bF8yq/hJ2BQKSHBrDnkW/Aak5Ojfg==
   dependencies:
-    "@guardian/content-atom-model" "^3.4.0"
+    "@guardian/content-atom-model" "^3.4.2"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
     "@types/node-int64" "^0.4.29"
@@ -1522,6 +1522,17 @@
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@guardian/content-atom-model/-/content-atom-model-3.4.0.tgz#1dfddb7598df0500fd34d7ab9ffbf8a42459b46a"
   integrity sha512-b0cgk+obNJ1RDj0/sOuFjUwf80+I29civ28iBDIa+ZxJRAd5hjE4SXoWyvb2Cpz7fkUEvIF/JJlX/yAsL6MhmA==
+  dependencies:
+    "@guardian/content-entity-model" "^2.2.1"
+    "@types/node-int64" "^0.4.29"
+    "@types/thrift" "^0.10.11"
+    node-int64 "^0.4.0"
+    thrift "^0.15.0"
+
+"@guardian/content-atom-model@^3.4.2":
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/@guardian/content-atom-model/-/content-atom-model-3.4.4.tgz#289c9c0d2ff1c889787667c2c08cf30bbf72356d"
+  integrity sha512-OeLqmQODJPqSa9Y/RhLhJOTIYj0BK07tSZBn71QZ3OstQhcW2nZGxSCN9tbYLYHhj30Uzn6fsLwZcv4JlNTbtg==
   dependencies:
     "@guardian/content-entity-model" "^2.2.1"
     "@types/node-int64" "^0.4.29"
