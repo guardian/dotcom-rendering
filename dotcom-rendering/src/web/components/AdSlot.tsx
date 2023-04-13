@@ -13,9 +13,11 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
+type InlinePosition = 'inline' | 'liveblog-inline' | 'mobile-front';
+
 type InlineProps = {
 	display?: ArticleDisplay;
-	position: 'inline' | 'liveblog-inline' | 'mobile-front';
+	position: InlinePosition;
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -23,7 +25,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Exclude<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
+	position: Exclude<SlotName, InlinePosition>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -513,17 +515,6 @@ export const AdSlot = ({
 						aria-hidden="true"
 					/>
 				</div>
-			);
-		}
-		case 'exclusion': {
-			return (
-				<div
-					id={'dfp-ad--exclusion'}
-					className={['js-ad-slot', 'ad-slot'].join(' ')}
-					data-name="exclusion"
-					aria-hidden="true"
-					data-label="false"
-				/>
 			);
 		}
 		default:
