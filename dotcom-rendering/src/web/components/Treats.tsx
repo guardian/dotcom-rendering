@@ -53,7 +53,7 @@ const ImageTreat = ({
 	backgroundColour,
 }: {
 	imageUrl: string;
-	links: { text: string; textSlice?: string; linkTo: string }[];
+	links: { text: string; title?: string; linkTo: string }[];
 	altText?: string;
 	backgroundColour: string;
 }) => {
@@ -147,9 +147,9 @@ const ImageTreat = ({
 										font-weight: bold;
 									`}
 								>
-									{link.text}
+									{link.title}
 								</span>
-								{link.textSlice}
+								{link.text}
 							</span>
 						</div>
 					</a>
