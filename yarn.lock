@@ -9080,6 +9080,11 @@ eslint-module-utils@^2.7.3, eslint-module-utils@^2.7.4:
   dependencies:
     debug "^3.2.7"
 
+eslint-plugin-custom-elements@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-custom-elements/-/eslint-plugin-custom-elements-0.0.8.tgz#31ff231a4ab1912c5b5ecd58483eabefe9057522"
+  integrity sha512-726XMAabRLKKm6/yjvYfvY4MKBwX9C4x8yPjj/ap470KhSIBHm+xHbm3P7cKlsFz/4cxq6YrBeSwKmwlacF1jg==
+
 eslint-plugin-cypress@^2.12.1:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.12.1.tgz#9aeee700708ca8c058e00cdafe215199918c2632"
