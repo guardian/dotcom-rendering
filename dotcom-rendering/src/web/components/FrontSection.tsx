@@ -517,18 +517,19 @@ export const FrontSection = ({
 				css={[
 					headlineContainerStyles,
 					centralBorder === 'partial' && headlineContainerBorders,
-					titleStyle,
 				]}
 			>
-				<ContainerTitle
-					title={title}
-					fontColour={fontColour ?? overrides?.text.container}
-					description={description}
-					url={url}
-					containerPalette={containerPalette}
-					showDateHeader={showDateHeader}
-					editionId={editionId}
-				/>
+				<div css={titleStyle}>
+					<ContainerTitle
+						title={title}
+						fontColour={fontColour ?? overrides?.text.container}
+						description={description}
+						url={url}
+						containerPalette={containerPalette}
+						showDateHeader={showDateHeader}
+						editionId={editionId}
+					/>
+				</div>
 				{leftContent}
 			</div>
 			{isToggleable ? (

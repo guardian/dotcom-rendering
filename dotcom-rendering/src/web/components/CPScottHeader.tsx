@@ -6,6 +6,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import { generateSources, getFallbackSource } from './Picture';
 import { QuoteIcon } from './QuoteIcon';
 
 const scottAvatarStyles = css`
@@ -18,10 +19,6 @@ const scottAvatarStyles = css`
 		margin-top: 5px;
 		width: 70px;
 	}
-`;
-
-const scottPortraitStyles = css`
-	width: 82px;
 `;
 
 const scottTextStyles = css`
@@ -59,14 +56,20 @@ const textWrapStyle = css`
 `;
 
 export const CPScottHeader = () => {
+	const sources = generateSources(
+		'https://uploads.guim.co.uk/2023/04/12/CPScottcutout.png',
+		[{ breakpoint: 320, width: 82 }],
+	);
+	const fallbackSource = getFallbackSource(sources);
 	return (
 		<>
 			<div css={containerStyles}>
 				<div css={scottAvatarStyles}>
 					<img
-						css={scottPortraitStyles}
-						src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/1/22/1421924658711/CPScottcutout.png"
-						alt="Portrait of CP Scott"
+						src={fallbackSource.lowResUrl}
+						alt={'Portrait of CP Scott'}
+						width="82px"
+						height="auto"
 					/>
 				</div>
 				<div css={scottTextStyles}>
