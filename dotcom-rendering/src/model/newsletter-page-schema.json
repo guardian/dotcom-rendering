@@ -120,45 +120,14 @@
                 "adUnit": {
                     "type": "string"
                 },
-                "isSensitive": {
-                    "type": "boolean"
-                },
-                "videoDuration": {
-                    "type": "number"
-                },
                 "edition": {
                     "$ref": "#/definitions/EditionId"
-                },
-                "section": {
-                    "type": "string"
-                },
-                "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
                 },
                 "idApiUrl": {
                     "type": "string"
                 },
                 "discussionApiUrl": {
                     "type": "string"
-                },
-                "discussionD2Uid": {
-                    "type": "string"
-                },
-                "discussionApiClientHeader": {
-                    "type": "string"
-                },
-                "isPhotoEssay": {
-                    "type": "boolean"
-                },
-                "references": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        }
-                    }
                 },
                 "host": {
                     "type": "string"
@@ -171,18 +140,6 @@
                 },
                 "brazeApiKey": {
                     "type": "string"
-                },
-                "ipsosTag": {
-                    "type": "string"
-                },
-                "isLiveBlog": {
-                    "type": "boolean"
-                },
-                "isLive": {
-                    "type": "boolean"
-                },
-                "isPreview": {
-                    "type": "boolean"
                 }
             },
             "required": [
@@ -192,19 +149,14 @@
                 "commercialBundleUrl",
                 "dcrSentryDsn",
                 "dfpAccountId",
-                "discussionApiClientHeader",
                 "discussionApiUrl",
-                "discussionD2Uid",
                 "edition",
                 "frontendAssetsFullURL",
                 "googletagUrl",
                 "idApiUrl",
-                "isSensitive",
                 "revisionNumber",
-                "section",
                 "sentryHost",
                 "sentryPublicApiKey",
-                "sharedAdTargeting",
                 "stage",
                 "switches"
             ]
