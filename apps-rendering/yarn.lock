@@ -1481,10 +1481,10 @@
   dependencies:
     is-mobile "3.1.1"
 
-"@guardian/bridget@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
-  integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
+"@guardian/bridget@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.4.0.tgz#0ab23b952bc56a9ae6f2620c35b0f16f7839a63d"
+  integrity sha512-k1RR2mg9MZGhO6bJdznoDLxmC9PS6EIn0HSQUPM3hFzh6C0Wuu/EuGV8CdlZSiq4lFa/KBMna6j0yJwUv7xBPA==
 
 "@guardian/cdk@^47.3.3":
   version "47.3.3"
