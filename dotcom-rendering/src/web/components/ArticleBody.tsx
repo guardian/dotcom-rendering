@@ -8,12 +8,12 @@ import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 import { TableOfContents } from './TableOfContents.importable';
-import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 
 type Props = {
 	format: ArticleFormat;

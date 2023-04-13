@@ -11,7 +11,6 @@ type Props = {
 
 export const DecideLayout = ({ article, NAV, format }: Props) => {
 	// TODO we can probably better express this as data
-
 	return (
 		<StandardLayout
 			article={article}

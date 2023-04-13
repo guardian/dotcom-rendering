@@ -1,8 +1,8 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
-import type { FEArticleType } from '../../types/frontend';
 import type { NavType } from '../../model/extract-nav';
+import type { FEArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
