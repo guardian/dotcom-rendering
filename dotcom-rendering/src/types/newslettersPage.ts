@@ -2,7 +2,6 @@ import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
 import type { FooterType } from './footer';
-import type { TagType } from './tag';
 
 type FENewslettersConfigType = {
 	ajaxUrl: string;
@@ -62,7 +61,7 @@ export interface FENewslettersPageType {
 	isAdFreeUser: boolean;
 }
 
-export type DCRNewslettersPageType = FENewslettersPageType & {
-	sectionName?: string;
-	tags?: TagType[];
-};
+// Types are currently equivalent, but will need to
+// add properties to DCRNewslettersPageType created in
+// the enhanceAllEditorialNewslettersPage function
+export type DCRNewslettersPageType = FENewslettersPageType;
