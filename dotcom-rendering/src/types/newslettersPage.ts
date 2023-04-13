@@ -64,6 +64,5 @@ export interface FENewslettersPageType {
 
 export type DCRNewslettersPageType = FENewslettersPageType & {
 	sectionName?: string;
-	format?: FEFormat;
 	tags?: TagType[];
 };

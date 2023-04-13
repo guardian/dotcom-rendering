@@ -30,12 +30,13 @@ export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
 		subscribeUrl,
 		editionId,
 		pageFooter,
-		format,
 		contributionsServiceUrl: pageContributionsServiceUrl,
 		config,
 		isAdFreeUser,
 	} = newslettersPage;
-	const articleFormat: ArticleFormat = decideFormat(format ?? {});
+
+	// TO DO - there should not be a format for this page - not an article
+	const articleFormat: ArticleFormat = decideFormat({});
 
 	const renderAds = !isAdFreeUser;
 
@@ -58,6 +59,7 @@ export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
+								{/* TO DO - refactor to not need format?  */}
 								<HeaderAdSlot display={articleFormat.display} />
 							</Section>
 						</Stuck>
@@ -99,6 +101,8 @@ export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
+						{/* Can we refactor to not need format? maybe use composition  */}
+						{/* also an issue on fronts layout  */}
 						<Nav
 							headerTopBarSwitch={false}
 							nav={NAV}
