@@ -29,7 +29,6 @@ const actionWrapperStyles = css`
 const kickerLabelStyles = (palette: Palette) => css`
 	background-color: ${palette.background.kickerLabel};
 	color: ${palette.text.kickerLabel};
-	-webkit-box-decoration-break: clone;
 	box-decoration-break: clone;
 	line-height: 115%;
 	font-weight: 700;
@@ -173,7 +172,9 @@ export const Kicker = ({
 					actionKickerFontStylesOnMobile(sizeOnMobile ?? size),
 				]}
 			>
-				<span css={[[kickerLabelStyles(palette)]]}>{text}</span>
+				<span css={[[kickerLabelStyles(palette)]]}>
+					{'a very lggg kicker is here'}
+				</span>
 			</div>
 		);
 	}
