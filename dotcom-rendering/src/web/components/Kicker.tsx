@@ -39,18 +39,19 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
-				margin-top: -5px;
-				margin-bottom: 10px;
+				margin-top: -23px;
+				margin-bottom: 2px;
 				span {
-					padding: 6px 5px 10px 5px;
+					padding: 3px 5px 4px 5px;
+					font-size: 20px;
 					${from.desktop} {
-						font-size: 34px;
+						font-size: 20px;
 					}
 				}
 			`;
 		case 'huge':
 			return css`
-				margin-bottom: 5px;
+				margin-bottom: 4.5px;
 				margin-top: -1px;
 				span {
 					font-size: 20px;
@@ -59,10 +60,11 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'large':
 			return css`
-				margin-bottom: 4px;
+				margin-bottom: 3px;
+				margin-top: -1px;
 				span {
 					font-size: 17px;
-					padding: 3px 5px 4px 5px;
+					padding: 2px 5px 3px 5px;
 				}
 			`;
 		case 'medium':
@@ -70,13 +72,13 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 				margin-bottom: 2px;
 				span {
 					font-size: 15px;
-					padding: 2px 4px 4px 4px;
+					padding: 2px 4px 2px 4px;
 				}
 			`;
 		case 'small':
 			return css`
 				margin-top: 1px;
-				margin-bottom: 2px;
+				margin-bottom: 2.5px;
 				span {
 					font-size: 14px;
 					padding: 2px 4px 2px 4px;
@@ -84,11 +86,11 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'tiny':
 			return css`
-				margin-top: 0;
-				margin-bottom: 2px;
+				margin-top: 2px;
+				margin-bottom: 3px;
 				span {
 					font-size: 12px;
-					padding: 0 4px 2px 4px;
+					padding: 2px 4px 2px 4px;
 				}
 			`;
 	}
@@ -99,30 +101,23 @@ const actionKickerFontStylesOnMobile = (size: SmallHeadlineSize) => {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					margin-top: -1px;
-					margin-bottom: 12px;
+					margin-top: -7px;
+					margin-bottom: 5px;
 				}
 				${between.mobileLandscape.and.desktop} {
-					margin-top: -4px;
-					margin-bottom: 12px;
-				}
-				span {
-					${until.mobileLandscape} {
-						font-size: 24px;
-					}
-					${between.mobileLandscape.and.desktop} {
-						font-size: 28px;
-					}
+					margin-top: -15px;
+					margin-bottom: 3px;
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					margin-bottom: 4px;
-					margin-top: 0;
+					margin-bottom: 3.5px;
+					margin-top: -1px;
 				}
 				span {
 					${until.desktop} {
+						padding: 2px 5px 3px 5px;
 						font-size: 17px;
 					}
 				}
@@ -130,11 +125,12 @@ const actionKickerFontStylesOnMobile = (size: SmallHeadlineSize) => {
 		case 'large':
 			return css`
 				${until.desktop} {
-					margin-bottom: 4px;
-					margin-top: 1px;
+					margin-bottom: 2px;
+					margin-top: -1px;
 				}
 				span {
 					${until.desktop} {
+						padding: 2px 4px 2px 4px;
 						font-size: 15px;
 					}
 				}
@@ -142,8 +138,13 @@ const actionKickerFontStylesOnMobile = (size: SmallHeadlineSize) => {
 		case 'medium':
 			return css`
 				${until.desktop} {
-					margin-top: 3px;
-					margin-bottom: 4px;
+					margin-top: 1px;
+					margin-bottom: 2px;
+				}
+				span {
+					${until.desktop} {
+						font-size: 14px;
+					}
 				}
 			`;
 		default:
@@ -172,9 +173,7 @@ export const Kicker = ({
 					actionKickerFontStylesOnMobile(sizeOnMobile ?? size),
 				]}
 			>
-				<span css={[[kickerLabelStyles(palette)]]}>
-					{'a very lggg kicker is here'}
-				</span>
+				<span css={[[kickerLabelStyles(palette)]]}>{text}</span>
 			</div>
 		);
 	}

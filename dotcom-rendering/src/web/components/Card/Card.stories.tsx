@@ -228,70 +228,126 @@ export const WithDifferentHeadlineSizes = () => {
 
 export const WithActionKickerWithDifferentHeadlineSizes = () => {
 	return (
-		<CardGroup>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="tiny"
-					headlineText="tiny"
-					isActionCard={true}
-					byline="Byline text"
-					showByline={true}
-					format={newsTheme}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="small"
-					headlineText="small"
-					isActionCard={true}
-					format={opinionTheme}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="medium"
-					headlineText="medium"
-					isActionCard={true}
-					format={cultureTheme}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="large"
-					headlineText="large"
-					isActionCard={true}
-					format={lifestyleTheme}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="huge"
-					headlineText="huge"
-					isActionCard={true}
-					format={sportTheme}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="kicker"
-					headlineSize="ginormous"
-					headlineText="ginormous"
-					isActionCard={true}
-					format={sportTheme}
-				/>
-			</CardWrapper>
-		</CardGroup>
+		<>
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="tiny"
+						headlineText="tiny"
+						isActionCard={true}
+						byline="Byline text"
+						showByline={true}
+						format={newsTheme}
+					/>
+					<br></br>
+					<div>Heading size: 14px</div>
+					<div>Kicker size: 12px</div>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="small"
+						headlineText="small"
+						isActionCard={true}
+						format={opinionTheme}
+					/>
+					<br></br>
+					<div>Heading size: 17px</div>
+					<div>Kicker size: 14px</div>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="medium"
+						headlineText="medium"
+						isActionCard={true}
+						format={cultureTheme}
+					/>
+					<br></br>
+					<div>
+						<strong>Until desktop</strong>
+					</div>
+					<div>Heading size: 17px</div>
+					<div>Kicker size: 14px</div>
+					<br></br>
+					<div>
+						<strong>From desktop</strong>
+					</div>
+					<div>Heading size: 20px</div>
+					<div>Kicker size: 15px</div>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="large"
+						headlineText="large"
+						isActionCard={true}
+						format={lifestyleTheme}
+					/>
+					<br></br>
+					<div>
+						<strong>Until desktop</strong>
+					</div>
+					<div>Heading size: 20px</div>
+					<div>Kicker size: 15px</div>
+					<br></br>
+					<div>
+						<strong>From desktop</strong>
+					</div>
+					<div>Heading size: 24px</div>
+					<div>Kicker size: 17px</div>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="huge"
+						headlineText="huge"
+						isActionCard={true}
+						format={sportTheme}
+					/>
+					<br></br>
+					<div>
+						<strong>Until desktop</strong>
+					</div>
+					<div>Heading size: 20px</div>
+					<div>Kicker size: 17px</div>
+					<br></br>
+					<div>
+						<strong>From desktop</strong>
+					</div>
+					<div>Heading size: 24px</div>
+					<div>Kicker size: 17px</div>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						kickerText="kicker"
+						headlineSize="ginormous"
+						headlineText="ginormous"
+						isActionCard={true}
+						format={sportTheme}
+					/>
+					<br></br>
+					<div>
+						<strong>Until desktop</strong>
+					</div>
+					<div>Heading size: 42px</div>
+					<div>Kicker size: 20px</div>
+					<br></br>
+					<div>
+						<strong>From desktop</strong>
+					</div>
+					<div>Heading size: 50px</div>
+					<div>Kicker size: 20px</div>
+				</CardWrapper>
+			</CardGroup>
+		</>
 	);
 };
 
@@ -309,6 +365,9 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					showByline={true}
 					format={newsTheme}
 				/>
+				<br></br>
+				<div>Heading size: 14px</div>
+				<div>Kicker size: 12px</div>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
@@ -319,6 +378,9 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					isActionCard={true}
 					format={opinionTheme}
 				/>
+				<br></br>
+				<div>Heading size: 17px</div>
+				<div>Kicker size: 14px</div>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
@@ -329,6 +391,18 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					isActionCard={true}
 					format={cultureTheme}
 				/>
+				<br></br>
+				<div>
+					<strong>Until desktop</strong>
+				</div>
+				<div>Heading size: 17px</div>
+				<div>Kicker size: 14px</div>
+				<br></br>
+				<div>
+					<strong>From desktop</strong>
+				</div>
+				<div>Heading size: 20px</div>
+				<div>Kicker size: 15px</div>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
@@ -339,6 +413,18 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					isActionCard={true}
 					format={lifestyleTheme}
 				/>
+				<br></br>
+				<div>
+					<strong>Until desktop</strong>
+				</div>
+				<div>Heading size: 20px</div>
+				<div>Kicker size: 15px</div>
+				<br></br>
+				<div>
+					<strong>From desktop</strong>
+				</div>
+				<div>Heading size: 24px</div>
+				<div>Kicker size: 17px</div>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
@@ -349,6 +435,18 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					isActionCard={true}
 					format={sportTheme}
 				/>
+				<br></br>
+				<div>
+					<strong>Until desktop</strong>
+				</div>
+				<div>Heading size: 20px</div>
+				<div>Kicker size: 17px</div>
+				<br></br>
+				<div>
+					<strong>From desktop</strong>
+				</div>
+				<div>Heading size: 24px</div>
+				<div>Kicker size: 17px</div>
 			</CardWrapper>
 			<CardWrapper>
 				<Card
@@ -359,6 +457,18 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 					isActionCard={true}
 					format={sportTheme}
 				/>
+				<br></br>
+				<div>
+					<strong>Until desktop</strong>
+				</div>
+				<div>Heading size: 42px</div>
+				<div>Kicker size: 20px</div>
+				<br></br>
+				<div>
+					<strong>From desktop</strong>
+				</div>
+				<div>Heading size: 50px</div>
+				<div>Kicker size: 20px</div>
 			</CardWrapper>
 		</CardGroup>
 	);
