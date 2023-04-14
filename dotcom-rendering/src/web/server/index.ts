@@ -19,7 +19,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { allEditorialNewslettersPageToHtml } from './newslettersPageToHtml';
+import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
 
 function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
