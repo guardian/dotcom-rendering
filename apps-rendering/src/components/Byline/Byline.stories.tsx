@@ -6,12 +6,9 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import type { Option } from '@guardian/types';
-import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Byline from './';
 
 // ----- Setup ----- //
@@ -19,44 +16,40 @@ import Byline from './';
 const parser = new DOMParser();
 const parseByline = parse(parser);
 
-const profileLink = (): string =>
-	text('Profile Link', 'https://theguardian.com');
+const profileLink = 'https://theguardian.com';
+const byline = 'Jane Smith';
+const job = 'Editor of things';
 
-const byline = (): string => text('Byline', 'Jane Smith');
-
-const job = (): string => text('Job Title', 'Editor of things');
-
-const mockBylineHtml = (): Option<DocumentFragment> =>
-	parseByline(
-		`<a href="${profileLink()}">${byline()}</a> ${job()}`,
-	).toOption();
+const mockBylineHtml = parseByline(
+	`<a href="${profileLink}">${byline}</a> ${job}`,
+).toOption();
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.News)}
+		theme={ArticlePillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
-		bylineHtml={mockBylineHtml()}
+		bylineHtml={mockBylineHtml}
 	/>
 );
 
 const Analysis: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.News)}
+		theme={ArticlePillar.News}
 		design={ArticleDesign.Analysis}
 		display={ArticleDisplay.Standard}
-		bylineHtml={mockBylineHtml()}
+		bylineHtml={mockBylineHtml}
 	/>
 );
 
 const Comment: FC = () => (
 	<Byline
-		theme={selectPillar(ArticlePillar.Opinion)}
+		theme={ArticlePillar.Opinion}
 		design={ArticleDesign.Comment}
 		display={ArticleDisplay.Standard}
-		bylineHtml={mockBylineHtml()}
+		bylineHtml={mockBylineHtml}
 	/>
 );
 
@@ -65,7 +58,7 @@ const Labs: FC = () => (
 		theme={ArticleSpecial.Labs}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
-		bylineHtml={mockBylineHtml()}
+		bylineHtml={mockBylineHtml}
 	/>
 );
 
@@ -82,7 +75,7 @@ const Deadblog: FC = () => {
 						theme={format.theme}
 						design={ArticleDesign.DeadBlog}
 						display={ArticleDisplay.Standard}
-						bylineHtml={mockBylineHtml()}
+						bylineHtml={mockBylineHtml}
 					/>
 					<br />
 				</div>
@@ -96,7 +89,6 @@ const Deadblog: FC = () => {
 export default {
 	component: Byline,
 	title: 'AR/Byline',
-	decorators: [withKnobs],
 };
 
 export { Default, Comment, Labs, Deadblog, Analysis };

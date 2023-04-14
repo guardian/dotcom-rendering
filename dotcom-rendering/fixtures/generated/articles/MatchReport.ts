@@ -278,6 +278,7 @@ export const MatchReport: FEArticleType = {
 		},
 	],
 	contentType: 'Article',
+	isRightToLeftLang: false,
 	nav: {
 		currentUrl: '/football',
 		pillars: [
@@ -929,6 +930,10 @@ export const MatchReport: FEArticleType = {
 				],
 			},
 			{
+				title: 'Wordiply',
+				url: 'https://www.wordiply.com',
+			},
+			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
 			},
@@ -936,7 +941,7 @@ export const MatchReport: FEArticleType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
@@ -971,7 +976,7 @@ export const MatchReport: FEArticleType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 			{
-				title: 'Guardian content licensing site',
+				title: 'Guardian Licensing',
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
@@ -1347,7 +1352,7 @@ export const MatchReport: FEArticleType = {
 				},
 				{
 					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
@@ -1394,6 +1399,7 @@ export const MatchReport: FEArticleType = {
 	matchUrl:
 		'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/05/65/14.json?dcr=true&page=football%2F2021%2Ffeb%2F05%2Fandre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	showTableOfContents: false,
+	lang: 'en',
 	byline: 'Ben Fisher at the Liberty Stadium',
 	headline:
 		'André Ayew sparks Swansea victory over Norwich to close gap at top',
@@ -1647,7 +1653,7 @@ export const MatchReport: FEArticleType = {
 					],
 				},
 			],
-			elementId: '741c71c9-f424-4301-bbfb-e47ff150c6c5',
+			elementId: '31755544-c42c-433c-8f18-70bd2fd294ae',
 		},
 	],
 	canonicalUrl:
@@ -1659,17 +1665,17 @@ export const MatchReport: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					elementId: 'b585f2bc-0a2a-411c-ab0e-06a0cf6313ae',
+					elementId: '20f781c9-0bf6-4f5b-bc51-a1df26abf7c3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					elementId: '4b51a79a-8060-4bf2-bb1a-70ba90f8d2c5',
+					elementId: '781fc246-1afc-4c36-8281-f4e6c58d0f35',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					elementId: '605b1d9e-ae3f-4e70-9190-3f7df00f9b38',
+					elementId: 'add2ea95-67a5-4270-89f6-68cfefd5443f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1677,37 +1683,37 @@ export const MatchReport: FEArticleType = {
 					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '705bd0ce-bdd1-48ab-8996-37df5bff1b0d',
+					elementId: '0c38b125-b314-486b-8725-515d6afe52bc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					elementId: '4a4d9dd0-07b4-4d81-b801-8053c9503370',
+					elementId: 'd8d1eb11-2422-430a-a4db-78e1d9737381',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					elementId: '1971803c-b3b1-4022-a3a5-56518c1b4ace',
+					elementId: 'e3b0bbcd-8fc0-4e08-b5ba-74e5a2cbf93c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					elementId: 'b3732d88-9317-40cd-a53f-991f802c0bfb',
+					elementId: 'f7e12643-349d-4f22-bbb3-739e770a2ad1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					elementId: '9f409e0e-ba6e-46f8-812a-765a3870e085',
+					elementId: 'afdf84f5-717d-4026-bb32-da089923681e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					elementId: 'a8ccebc3-a607-41d2-b579-507e03f12918',
+					elementId: '5f22f92c-3ee5-4dfa-a61a-927dea6bb50f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					elementId: '93a8e8e5-e8ab-48a7-bef6-684c461eeb63',
+					elementId: '86bad57b-8d70-449c-9200-de0df8cc708c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1720,17 +1726,17 @@ export const MatchReport: FEArticleType = {
 					sourceDomain: 'theguardian.com',
 					caption:
 						'<strong>The Fiver: sign up and get our daily football email.</strong>',
-					elementId: '118c43d9-18dc-4d1b-b751-7ff3a9c6e0c3',
+					elementId: '6e435620-2b87-442a-9ec9-d914b5b46379',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					elementId: '2dead61b-7aee-47e0-9253-638c48c5df14',
+					elementId: '577271c0-2bbd-44bc-b697-d7018f9fed20',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					elementId: '2c714c5f-9836-49c0-8932-d03d930e3aca',
+					elementId: '4f0d9029-3cb3-400a-b426-f66b3fe212eb',
 				},
 			],
 			attributes: {

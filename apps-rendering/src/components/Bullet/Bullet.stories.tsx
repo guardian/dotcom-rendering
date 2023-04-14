@@ -1,9 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Bullet from './';
 
 // ----- Stories ----- //
@@ -13,7 +11,7 @@ const Default: FC = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 		text="• Lorem ipsum"
 	/>
@@ -24,7 +22,6 @@ const Default: FC = () => (
 export default {
 	component: Bullet,
 	title: 'AR/Bullet',
-	decorators: [withKnobs],
 };
 
 export { Default };

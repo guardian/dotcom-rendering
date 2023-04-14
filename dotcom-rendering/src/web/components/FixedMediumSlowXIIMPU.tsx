@@ -159,7 +159,7 @@ export const FixedMediumSlowXIIMPU = ({
 				showAge={showAge}
 				padBottom={true}
 			/>
-			{renderAds ? (
+			{renderAds && remaining.length > 0 ? (
 				<ThreeColumnSliceWithAdSlot
 					trails={remaining}
 					containerPalette={containerPalette}

@@ -371,6 +371,9 @@ const summaryStyles = css`
 	&:focus {
 		${focusHalo};
 	}
+	&:first-child {
+		margin-left: -4px;
+	}
 	path {
 		${until.desktop} {
 			fill: white;

@@ -35,33 +35,43 @@ const isOpenQuote = (t: string): boolean => {
 	].includes(t);
 };
 
-const isLongEnough = (html: string): boolean => {
-	// Only show a dropcap if the block of text is 200 characters or
-	// longer. But we first need to strip any markup from our html string so
-	// that we accurately measure the length that the reader will see. Eg. remove
-	// link tag html.
+const stripHtmlFromString = (html: string): string => {
 	// https://stackoverflow.com/questions/822452/strip-html-from-text-javascript is
 	// a good discussion on how this can be done. Of the two approaches, regex and
 	// DOM, both have unikely failure scenarios but the impact for failure with DOM
 	// manipulation carries a potential security risk so we're using a regex.
-	return html.replace(/(<([^>]+)>)/gi, '').length >= 199;
+	return html.replace(/(<([^>]+)>)/gi, '');
 };
 
-const decideDropCapLetter = (html: string): string => {
-	const first = html.substr(0, 1);
-	if (isOpenQuote(first)) {
-		const second = html.substr(1, 1);
+const getDropCappedSentence = (
+	html: string,
+): { dropCap: string; restOfSentence: string } | undefined => {
+	const first = html.substring(0, 1);
 
-		if (!isLetter(second)) {
-			return '';
+	// If it starts with a quote and a letter, drop "“A"
+	if (isOpenQuote(first)) {
+		const second = html.substring(1, 2);
+
+		if (isLetter(second)) {
+			return {
+				dropCap: `${first}${second}`,
+				restOfSentence: html.substring(2),
+			};
 		}
-		return `${first}${second}`;
 	}
 
-	return isLetter(first) ? first : '';
+	// Or just drop if the first is a letter
+	if (isLetter(first)) {
+		return {
+			dropCap: first,
+			restOfSentence: html.substring(1),
+		};
+	}
+
+	return;
 };
 
-const allowsDropCaps = (format: ArticleFormat) => {
+const isValidFormatForDropCap = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.Labs) return false;
 	if (format.display === ArticleDisplay.Immersive) return true;
 	switch (format.design) {
@@ -77,23 +87,27 @@ const allowsDropCaps = (format: ArticleFormat) => {
 	}
 };
 
-const shouldShowDropCap = ({
-	format,
-	isFirstParagraph,
-	forceDropCap,
-}: {
-	format: ArticleFormat;
-	isFirstParagraph: boolean;
-	forceDropCap?: boolean;
-}): boolean => {
-	if (allowsDropCaps(format)) {
+const shouldShowDropCaps = (
+	html: string,
+	format: ArticleFormat,
+	isFirstParagraph: boolean,
+	forceDropCap?: boolean,
+) => {
+	const validDropCapFormat = isValidFormatForDropCap(format);
+	// We need to strip any markup from our html string so that we accurately measure
+	// the length that the reader will see. Eg. remove link tag html.
+	const isLongEnough = stripHtmlFromString(html).length >= 200;
+
+	if (validDropCapFormat && isLongEnough) {
 		// When dropcaps are allowed, we always mark the first paragraph as a drop cap
 		if (isFirstParagraph) return true;
+
 		// For subsequent blocks of text, we only add a dropcap if a dinkus was inserted
 		// prior to it in the article body (Eg: * * *), causing the forceDropCap flag to
 		// be set
 		if (forceDropCap) return true;
 	}
+
 	return false;
 };
 
@@ -198,8 +212,8 @@ const styles = (format: ArticleFormat) => css`
 export const TextBlockComponent = ({
 	html,
 	format,
-	forceDropCap,
 	isFirstParagraph,
+	forceDropCap,
 }: Props) => {
 	const paraStyles = styles(format);
 	const {
@@ -227,26 +241,24 @@ export const TextBlockComponent = ({
 		html,
 	});
 
-	const firstLetter = decideDropCapLetter(unwrappedHtml);
-	const remainingLetters = firstLetter
-		? unwrappedHtml.substr(firstLetter.length)
-		: unwrappedHtml;
+	const showDropCaps = shouldShowDropCaps(
+		html,
+		format,
+		isFirstParagraph,
+		forceDropCap,
+	);
+	const dropCappedSentence = showDropCaps
+		? getDropCappedSentence(unwrappedHtml)
+		: undefined;
 
-	if (
-		shouldShowDropCap({
-			format,
-			isFirstParagraph,
-			forceDropCap,
-		}) &&
-		firstLetter &&
-		isLongEnough(remainingLetters)
-	) {
+	if (dropCappedSentence) {
+		const { dropCap, restOfSentence } = dropCappedSentence;
 		return (
 			<p css={paraStyles}>
-				<DropCap letter={firstLetter} format={format} />
+				<DropCap letter={dropCap} format={format} />
 				<RewrappedComponent
 					isUnwrapped={isUnwrapped}
-					html={sanitise(remainingLetters, sanitiserOptions)}
+					html={sanitise(restOfSentence, sanitiserOptions)}
 					elCss={paraStyles}
 					tagName="span"
 				/>

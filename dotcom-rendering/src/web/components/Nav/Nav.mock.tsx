@@ -1048,7 +1048,7 @@ export const nav: NavType = {
 		{
 			title: 'Search jobs',
 			longTitle: 'Search jobs',
-			url: 'https://jobs.theguardian.com/jobs?INTCMP=jobs_uk_web_newheader_dropdown',
+			url: 'https://jobs.theguardian.com/jobs',
 			children: [],
 			mobileOnly: false,
 		},

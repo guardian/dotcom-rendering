@@ -3,7 +3,6 @@
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { article, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import HeaderMedia from './index';
 
 // ----- Setup ------ //
@@ -29,7 +28,7 @@ const Image = (): ReactElement => (
 	<HeaderMedia
 		item={{
 			...article,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -39,7 +38,7 @@ const FullScreen = (): ReactElement => (
 		item={{
 			...article,
 			display: ArticleDisplay.Immersive,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -48,7 +47,7 @@ const WithStarRating = (): ReactElement => (
 	<HeaderMedia
 		item={{
 			...review,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -58,7 +57,7 @@ const Video = (): ReactElement => (
 		item={{
 			...article,
 			mainMedia: video,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
