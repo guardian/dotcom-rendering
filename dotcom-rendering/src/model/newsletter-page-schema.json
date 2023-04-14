@@ -140,6 +140,9 @@
                 },
                 "brazeApiKey": {
                     "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
                 }
             },
             "required": [
