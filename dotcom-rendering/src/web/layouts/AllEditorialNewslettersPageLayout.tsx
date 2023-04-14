@@ -25,7 +25,10 @@ type Props = {
 	NAV: NavType;
 };
 
-export const NewslettersPageLayout = ({ newslettersPage, NAV }: Props) => {
+export const AllEditorialNewslettersPageLayout = ({
+	newslettersPage,
+	NAV,
+}: Props) => {
 	const {
 		subscribeUrl,
 		editionId,

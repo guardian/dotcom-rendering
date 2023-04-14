@@ -3,7 +3,7 @@ import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { NewslettersPageLayout } from '../layouts/NewslettersPageLayout';
+import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -54,7 +54,7 @@ export const NewslettersPage = ({ newslettersPage, NAV }: Props) => {
 					}
 				/>
 			</Island>
-			<NewslettersPageLayout
+			<AllEditorialNewslettersPageLayout
 				newslettersPage={newslettersPage}
 				NAV={NAV}
 			/>
