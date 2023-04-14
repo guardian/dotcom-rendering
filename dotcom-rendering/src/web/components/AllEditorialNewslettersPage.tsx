@@ -17,13 +17,17 @@ type Props = {
 
 /**
  * @description
- * NewslettersPage is a high level wrapper for the newsletters page on Dotcom. Sets strict mode and some globals
+ * AllEditorialNewslettersPage is a high level wrapper for the
+ * editorial newsletters page on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {DCRNewslettersPageType} props.newslettersPage - The newsletters JSON data
  * @param {NAVType} props.NAV - The nav JSON data
  * */
-export const NewslettersPage = ({ newslettersPage, NAV }: Props) => {
+export const AllEditorialNewslettersPage = ({
+	newslettersPage,
+	NAV,
+}: Props) => {
 	return (
 		<StrictMode>
 			<Global

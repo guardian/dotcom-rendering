@@ -7,7 +7,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { NewslettersPage } from '../components/NewslettersPage';
+import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
@@ -23,7 +23,10 @@ export const allEditorialNewslettersPageToHtml = ({
 	const NAV = extractNAV(newslettersPage.nav);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<NewslettersPage newslettersPage={newslettersPage} NAV={NAV} />,
+		<AllEditorialNewslettersPage
+			newslettersPage={newslettersPage}
+			NAV={NAV}
+		/>,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
