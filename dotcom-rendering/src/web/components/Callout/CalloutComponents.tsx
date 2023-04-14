@@ -155,7 +155,7 @@ export const CalloutShare = ({
 	title,
 	urlAnchor,
 }: {
-	title: string;
+	title?: string;
 	urlAnchor: string;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
@@ -168,7 +168,8 @@ export const CalloutShare = ({
 				navigator.userAgent,
 			)
 		) {
-			const shareTitle = `Share your experience: ${title}`;
+			let shareTitle = `Share your experience`;
+			if (title) shareTitle += `: ${title}`;
 
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}

@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { none, some } from '@guardian/types';
-import { withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import { article } from 'fixtures/item';
 import type { Image } from 'image';
@@ -53,7 +52,6 @@ const Default = (): ReactElement => (
 export default {
 	component: Avatar,
 	title: 'AR/Editions/Avatar',
-	decorators: [withKnobs],
 };
 
 export { Default };

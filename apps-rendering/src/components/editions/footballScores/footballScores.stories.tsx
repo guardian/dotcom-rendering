@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import FootballScores from './index';
 
@@ -10,7 +9,7 @@ import FootballScores from './index';
 
 const Default: FC = () => (
 	<FootballScores
-		league={text('League', 'Premier League')}
+		league="Premier League"
 		stadium="Elland road"
 		homeTeam={{
 			id: '1006',
@@ -48,7 +47,6 @@ const Default: FC = () => (
 export default {
 	component: FootballScores,
 	title: 'AR/Editions/FootballScores',
-	decorators: [withKnobs],
 };
 
 export { Default };

@@ -2,14 +2,9 @@
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
-import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import Headline from './';
-
-// ----- Setup ----- //
-
-const starRating = { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 };
 
 // ----- Stories ----- //
 
@@ -17,9 +12,7 @@ const Default = (): ReactElement => (
 	<Headline
 		item={{
 			...article,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 		}}
 	/>
 );
@@ -28,9 +21,7 @@ const Analysis = (): ReactElement => (
 	<Headline
 		item={{
 			...analysis,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -40,9 +31,7 @@ const Feature = (): ReactElement => (
 	<Headline
 		item={{
 			...feature,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -52,10 +41,8 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			starRating: some(radios('Rating', starRating, 3)),
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
+			starRating: some(3),
+			display: ArticleDisplay.Standard,
 		}}
 	/>
 );
@@ -74,7 +61,6 @@ const Labs = (): ReactElement => (
 export default {
 	component: Headline,
 	title: 'AR/Headline',
-	decorators: [withKnobs],
 };
 
 export { Default, Analysis, Feature, Review, Labs };

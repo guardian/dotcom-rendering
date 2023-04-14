@@ -13,11 +13,12 @@ import { InactiveCallout } from './calloutComponents';
 import { getTheme } from './theme';
 
 export interface CalloutProps {
+	prompt: string;
 	heading: string;
+	description?: DocumentFragment;
 	formId: number;
 	formFields: FormField[];
 	format: ArticleFormat;
-	description?: DocumentFragment;
 	isNonCollapsible: boolean;
 	activeUntil?: number;
 	name: string;
@@ -25,6 +26,7 @@ export interface CalloutProps {
 }
 
 const Callout: FC<CalloutProps> = ({
+	prompt,
 	heading,
 	description,
 	formId,
@@ -48,10 +50,11 @@ const Callout: FC<CalloutProps> = ({
 				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
 						formId={formId}
+						prompt={prompt}
 						heading={heading}
+						description={description}
 						formFields={formFields}
 						format={format}
-						description={description}
 						contacts={contacts}
 						isNonCollapsible={isNonCollapsible}
 					/>
@@ -76,10 +79,11 @@ const Callout: FC<CalloutProps> = ({
 					>
 						<CalloutBlock
 							formId={formId}
+							prompt={prompt}
 							heading={heading}
+							description={description}
 							formFields={formFields}
 							format={format}
-							description={description}
 							contacts={contacts}
 							isNonCollapsible={isNonCollapsible}
 						/>
@@ -119,7 +123,9 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 		{
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
-			id: getCalloutId(calloutProps.heading),
+			id: getCalloutId(
+				calloutProps.heading ? calloutProps.formId.toString() : calloutProps.heading
+			),
 		},
 		Callout({
 			...calloutProps,

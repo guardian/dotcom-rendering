@@ -3,7 +3,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { some } from '@guardian/types';
-import { boolean, number, withKnobs } from '@storybook/addon-knobs';
 import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import type { FC, ReactElement } from 'react';
 import CommentCount from './';
@@ -12,11 +11,11 @@ import CommentCount from './';
 
 const Default: FC = () => (
 	<CommentCount
-		count={some(number('Count', 1234, { min: 0 }))}
+		count={some(1234)}
 		theme={ArticlePillar.News}
 		design={ArticleDesign.Standard}
 		display={ArticleDisplay.Standard}
-		commentable={boolean('Commentable', true)}
+		commentable={true}
 	/>
 );
 
@@ -30,11 +29,11 @@ const Deadblogs = (): ReactElement => {
 				<div key={format.theme}>
 					<p>{getThemeNameAsString(format)}</p>
 					<CommentCount
-						count={some(number('Count', 1234, { min: 0 }))}
+						count={some(1234)}
 						theme={format.theme}
 						design={ArticleDesign.DeadBlog}
 						display={ArticleDisplay.Standard}
-						commentable={boolean('Commentable', true)}
+						commentable={true}
 					/>
 					<br />
 				</div>
@@ -56,7 +55,6 @@ Deadblogs.story = {
 export default {
 	component: CommentCount,
 	title: 'AR/CommentCount',
-	decorators: [withKnobs],
 };
 
 export { Default, Deadblogs };

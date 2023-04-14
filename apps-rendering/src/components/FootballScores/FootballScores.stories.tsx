@@ -1,31 +1,14 @@
 // ----- Imports ----- //
 
-import { select, text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import FootballScores, { MatchStatusKind } from './';
-
-// ----- Helpers ----- //
-
-const matchStatusOptions = {
-	KickOff: MatchStatusKind.KickOff,
-	FirstHalf: MatchStatusKind.FirstHalf,
-	HalfTime: MatchStatusKind.HalfTime,
-	SecondHalf: MatchStatusKind.SecondHalf,
-	FullTime: MatchStatusKind.FullTime,
-	ExtraTime: MatchStatusKind.ExtraTime,
-	Penalties: MatchStatusKind.Penalties,
-	Suspended: MatchStatusKind.Suspended,
-};
-
-const selectMatchStatus = (): MatchStatusKind =>
-	select('Match Status', matchStatusOptions, MatchStatusKind.KickOff);
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
 	<FootballScores
-		league={text('League', 'Premier League')}
-		stadium={text('Stadium', 'Etihad Stadium')}
+		league="Premier League"
+		stadium="Etihad Stadium"
 		homeTeam={{
 			id: '1006',
 			name: 'Arsenal',
@@ -54,7 +37,7 @@ const Default: FC = () => (
 				},
 			],
 		}}
-		status={{ kind: selectMatchStatus(), time: '20:00' }}
+		status={{ kind: MatchStatusKind.KickOff, time: '20:00' }}
 	/>
 );
 
@@ -63,7 +46,6 @@ const Default: FC = () => (
 export default {
 	component: FootballScores,
 	title: 'AR/FootballScores',
-	decorators: [withKnobs],
 };
 
 export { Default };

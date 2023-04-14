@@ -17,9 +17,5 @@ export const canRenderAds = (
 		return false;
 	}
 
-	if (pageData.config.abTests.poorDeviceConnectivityVariant === 'variant') {
-		return false;
-	}
-
 	return true;
 };
