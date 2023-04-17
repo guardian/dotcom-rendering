@@ -661,11 +661,47 @@ const textCardHeadline = (format: ArticleFormat): string => {
 					return WHITE;
 			}
 		default:
-			return BLACK;
+			switch (format.theme) {
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				default:
+					return BLACK;
+			}
 	}
 };
 
-const textCardStandfirst = textCardHeadline;
+// const textCardStandfirst = textCardHeadline;
+
+const textCardStandfirst = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
+	if (format.display === ArticleDisplay.Immersive) return BLACK;
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return pillarPalette[format.theme].dark;
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+			return WHITE;
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return BLACK;
+				case ArticlePillar.News:
+				case ArticlePillar.Sport:
+				case ArticlePillar.Opinion:
+				case ArticlePillar.Culture:
+				case ArticlePillar.Lifestyle:
+				default:
+					return WHITE;
+			}
+		default:
+			return BLACK;
+	}
+};
 
 /** same as textByline except for SpecialReport */
 const textCardByline = (format: ArticleFormat): string => {
