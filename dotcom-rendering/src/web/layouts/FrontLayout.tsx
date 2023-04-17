@@ -11,6 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
+import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -23,9 +24,9 @@ import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { canRenderAds } from '../lib/canRenderAds';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -390,6 +391,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									front.isNetworkFront,
 								)}
+								leftContent={
+									(front.config.pageId ===
+										'uk/commentisfree' ||
+										front.config.pageId ===
+											'au/commentisfree') &&
+									collection.displayName === 'Opinion' && (
+										<CPScottHeader />
+									)
+								}
 								sectionId={ophanName}
 								showDateHeader={
 									collection.config.showDateHeader
