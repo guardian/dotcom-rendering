@@ -392,11 +392,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.isNetworkFront,
 								)}
 								leftContent={
-									collection.displayName === 'Opinion' &&
 									(front.config.pageId ===
 										'uk/commentisfree' ||
 										front.config.pageId ===
-											'au/commentisfree') && (
+											'au/commentisfree') &&
+									collection.displayName === 'Opinion' && (
 										<CPScottHeader />
 									)
 								}
