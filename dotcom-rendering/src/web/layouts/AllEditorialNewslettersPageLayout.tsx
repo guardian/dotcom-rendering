@@ -62,7 +62,6 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								{/* TO DO - refactor to not need format?  */}
 								<HeaderAdSlot display={articleFormat.display} />
 							</Section>
 						</Stuck>
@@ -104,8 +103,6 @@ export const AllEditorialNewslettersPageLayout = ({
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
-						{/* Can we refactor to not need format? maybe use composition  */}
-						{/* also an issue on fronts layout  */}
 						<Nav
 							headerTopBarSwitch={false}
 							nav={NAV}
