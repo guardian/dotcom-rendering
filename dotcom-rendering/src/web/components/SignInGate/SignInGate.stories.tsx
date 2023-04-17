@@ -75,9 +75,8 @@ export const fakeSocialStandaloneVertical = () => {
 		</Section>
 	);
 };
-fakeSocialStandaloneVertical.story = {
-	name: 'fake_social_standalone_vertical',
-};
+fakeSocialStandaloneVertical.storyName =
+	'fake_social_standalone_vertical';
 
 export const signInGateCopyTest = () => {
 	return (
@@ -96,9 +95,8 @@ export const signInGateCopyTest = () => {
 		</Section>
 	);
 };
-signInGateCopyTest.story = {
-	name: 'sign_in_gate_copy_test',
-};
+signInGateCopyTest.storyName =
+	'sign_in_gate_copy_test';
 
 export const signInGateMainCheckoutCompletePersonalisedCopy = (
 	args: CheckoutCompleteCookieData,
@@ -116,9 +114,8 @@ export const signInGateMainCheckoutCompletePersonalisedCopy = (
 		</Section>
 	);
 };
-signInGateMainCheckoutCompletePersonalisedCopy.story = {
-	name: 'main_checkout_complete_personalised',
-};
+signInGateMainCheckoutCompletePersonalisedCopy.storyName =
+	'main_checkout_complete_personalised';
 
 const defaultCheckoutCompleteCookieData: CheckoutCompleteCookieData = {
 	userType: 'new',

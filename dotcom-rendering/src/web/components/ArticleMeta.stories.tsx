@@ -184,9 +184,8 @@ export const FeatureWithMismatchedContributor = () => {
 		</Wrapper>
 	);
 };
-FeatureWithMismatchedContributor.story = {
-	name: 'Feature with a byline mismatching the contributor tag',
-};
+FeatureWithMismatchedContributor.storyName =
+	'Feature with a byline mismatching the contributor tag';
 
 export const FeatureStoryWithSmallBylineImage = () => {
 	return (
@@ -212,9 +211,8 @@ export const FeatureStoryWithSmallBylineImage = () => {
 		</Wrapper>
 	);
 };
-FeatureStoryWithSmallBylineImage.story = {
-	name: 'Feature with Small Byline Image',
-};
+FeatureStoryWithSmallBylineImage.storyName =
+	'Feature with Small Byline Image';
 
 export const SpecialReportStory = () => {
 	return (

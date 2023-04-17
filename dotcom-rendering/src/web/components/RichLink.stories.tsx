@@ -131,9 +131,8 @@ export const SectionStory = () => {
 		</Section>
 	);
 };
-SectionStory.story = {
-	name: 'Section',
-};
+SectionStory.storyName =
+	'Section';
 
 export const Inline = () => {
 	return (
@@ -159,9 +158,8 @@ export const Inline = () => {
 		</Section>
 	);
 };
-Inline.story = {
-	name: 'Inline',
-};
+Inline.storyName =
+	'Inline';
 
 export const ImageContent = () => {
 	return (

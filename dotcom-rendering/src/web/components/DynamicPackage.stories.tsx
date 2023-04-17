@@ -42,9 +42,8 @@ export const One = () => (
 		/>
 	</FrontSection>
 );
-One.story = {
-	name: 'With one standard card',
-};
+One.storyName =
+	'With one standard card';
 
 export const Two = () => (
 	<FrontSection
@@ -62,9 +61,8 @@ export const Two = () => (
 		/>
 	</FrontSection>
 );
-Two.story = {
-	name: 'With two standard cards',
-};
+Two.storyName =
+	'With two standard cards';
 
 export const Three = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -78,9 +76,8 @@ export const Three = () => (
 		/>
 	</FrontSection>
 );
-Three.story = {
-	name: 'With three standard cards',
-};
+Three.storyName =
+	'With three standard cards';
 
 export const Four = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -94,9 +91,8 @@ export const Four = () => (
 		/>
 	</FrontSection>
 );
-Four.story = {
-	name: 'With four standard cards',
-};
+Four.storyName =
+	'With four standard cards';
 
 export const Five = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -110,9 +106,8 @@ export const Five = () => (
 		/>
 	</FrontSection>
 );
-Five.story = {
-	name: 'With five standard cards',
-};
+Five.storyName =
+	'With five standard cards';
 
 export const Six = () => (
 	<FrontSection
@@ -130,9 +125,8 @@ export const Six = () => (
 		/>
 	</FrontSection>
 );
-Six.story = {
-	name: 'With six standard cards',
-};
+Six.storyName =
+	'With six standard cards';
 
 export const Seven = () => (
 	<FrontSection
@@ -150,9 +144,8 @@ export const Seven = () => (
 		/>
 	</FrontSection>
 );
-Seven.story = {
-	name: 'With seven standard cards',
-};
+Seven.storyName =
+	'With seven standard cards';
 
 export const Eight = () => (
 	<FrontSection
@@ -170,9 +163,8 @@ export const Eight = () => (
 		/>
 	</FrontSection>
 );
-Eight.story = {
-	name: 'With eight standard cards',
-};
+Eight.storyName =
+	'With eight standard cards';
 
 export const Nine = () => (
 	<FrontSection
@@ -191,9 +183,8 @@ export const Nine = () => (
 		/>
 	</FrontSection>
 );
-Nine.story = {
-	name: 'With nine standard cards',
-};
+Nine.storyName =
+	'With nine standard cards';
 
 export const Boosted1 = () => {
 	const primary = trails[0];
@@ -216,9 +207,8 @@ export const Boosted1 = () => {
 		</FrontSection>
 	);
 };
-Boosted1.story = {
-	name: 'With one standard card - boosted',
-};
+Boosted1.storyName =
+	'With one standard card - boosted';
 
 export const Boosted2 = () => {
 	const primary = trails[0];
@@ -242,9 +232,8 @@ export const Boosted2 = () => {
 		</FrontSection>
 	);
 };
-Boosted2.story = {
-	name: 'With two standard cards - boosted',
-};
+Boosted2.storyName =
+	'With two standard cards - boosted';
 
 export const Boosted3 = () => {
 	const primary = trails[0];
@@ -264,9 +253,8 @@ export const Boosted3 = () => {
 		</FrontSection>
 	);
 };
-Boosted3.story = {
-	name: 'With three standard cards - boosted',
-};
+Boosted3.storyName =
+	'With three standard cards - boosted';
 
 export const Boosted4 = () => {
 	const primary = trails[0];
@@ -286,9 +274,8 @@ export const Boosted4 = () => {
 		</FrontSection>
 	);
 };
-Boosted4.story = {
-	name: 'With four standard cards - boosted',
-};
+Boosted4.storyName =
+	'With four standard cards - boosted';
 
 export const Boosted5 = () => {
 	const primary = trails[0];
@@ -308,9 +295,8 @@ export const Boosted5 = () => {
 		</FrontSection>
 	);
 };
-Boosted5.story = {
-	name: 'With five standard cards - boosted',
-};
+Boosted5.storyName =
+	'With five standard cards - boosted';
 
 export const Boosted8 = () => {
 	const primary = trails[0];
@@ -334,9 +320,8 @@ export const Boosted8 = () => {
 		</FrontSection>
 	);
 };
-Boosted8.story = {
-	name: 'With eight standard cards - boosted',
-};
+Boosted8.storyName =
+	'With eight standard cards - boosted';
 
 export const Boosted9 = () => {
 	const primary = trails[0];
@@ -360,9 +345,8 @@ export const Boosted9 = () => {
 		</FrontSection>
 	);
 };
-Boosted9.story = {
-	name: 'With nine standard cards - boosted',
-};
+Boosted9.storyName =
+	'With nine standard cards - boosted';
 
 export const OneSnapThreeStandard = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -376,9 +360,8 @@ export const OneSnapThreeStandard = () => (
 		/>
 	</FrontSection>
 );
-OneSnapThreeStandard.story = {
-	name: 'With one snap - three standard cards',
-};
+OneSnapThreeStandard.storyName =
+	'With one snap - three standard cards';
 
 export const ThreeSnapTwoStandard = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -392,9 +375,8 @@ export const ThreeSnapTwoStandard = () => (
 		/>
 	</FrontSection>
 );
-ThreeSnapTwoStandard.story = {
-	name: 'With three snaps - two standard cards',
-};
+ThreeSnapTwoStandard.storyName =
+	'With three snaps - two standard cards';
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
 	<FrontSection title="Dynamic Package" centralBorder="partial">
@@ -408,6 +390,5 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 		/>
 	</FrontSection>
 );
-ThreeSnapTwoStandard2ndBoosted.story = {
-	name: 'With three snaps (2nd boosted) - two standard cards',
-};
+ThreeSnapTwoStandard2ndBoosted.storyName =
+	'With three snaps (2nd boosted) - two standard cards';

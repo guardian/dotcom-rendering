@@ -158,9 +158,8 @@ export const ShowcaseInterviewNobyline = () => {
 		</Section>
 	);
 };
-ShowcaseInterviewNobyline.story = {
-	name: 'Interview (with showcase and NO BYLINE)',
-};
+ShowcaseInterviewNobyline.storyName =
+	'Interview (with showcase and NO BYLINE)';
 
 export const Interview = () => {
 	const format = {
@@ -244,9 +243,8 @@ export const InterviewSpecialReport = () => {
 		</Section>
 	);
 };
-InterviewSpecialReport.story = {
-	name: 'Interview Special Report (without showcase)',
-};
+InterviewSpecialReport.storyName =
+	'Interview Special Report (without showcase)';
 
 export const InterviewNoByline = () => {
 	const format = {
@@ -288,9 +286,8 @@ export const InterviewNoByline = () => {
 		</Section>
 	);
 };
-InterviewNoByline.story = {
-	name: 'Interview (without showcase with NO BYLINE)',
-};
+InterviewNoByline.storyName =
+	'Interview (without showcase with NO BYLINE)';
 
 export const Comment = () => {
 	const format = {

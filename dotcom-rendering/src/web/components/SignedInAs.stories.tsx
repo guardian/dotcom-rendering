@@ -133,9 +133,8 @@ export const NotSignedIn = () => {
 		</Wrapper>
 	);
 };
-NotSignedIn.story = {
-	name: 'when the discussion is open but user is not signed in',
-};
+NotSignedIn.storyName =
+	'when the discussion is open but user is not signed in';
 
 export const DiscussionClosed = () => {
 	return (
@@ -154,9 +153,8 @@ export const DiscussionClosed = () => {
 		</Wrapper>
 	);
 };
-DiscussionClosed.story = {
-	name: 'when the discussion is closed and the user is signed in',
-};
+DiscussionClosed.storyName =
+	'when the discussion is closed and the user is signed in';
 
 export const DiscussionClosedSignedOut = () => {
 	return (
@@ -174,9 +172,8 @@ export const DiscussionClosedSignedOut = () => {
 		</Wrapper>
 	);
 };
-DiscussionClosedSignedOut.story = {
-	name: 'when the discussion is closed and the user is signed out',
-};
+DiscussionClosedSignedOut.storyName =
+	'when the discussion is closed and the user is signed out';
 
 export const DiscussionDisabled = () => {
 	return (
@@ -195,9 +192,8 @@ export const DiscussionDisabled = () => {
 		</Wrapper>
 	);
 };
-DiscussionDisabled.story = {
-	name: 'with discussion disabled sitewide and the user signed in',
-};
+DiscussionDisabled.storyName =
+	'with discussion disabled sitewide and the user signed in';
 
 export const DiscussionDisabledSignedOut = () => {
 	return (
@@ -215,6 +211,5 @@ export const DiscussionDisabledSignedOut = () => {
 		</Wrapper>
 	);
 };
-DiscussionDisabledSignedOut.story = {
-	name: 'with discussion disabled sitewide and the user signed out',
-};
+DiscussionDisabledSignedOut.storyName =
+	'with discussion disabled sitewide and the user signed out';

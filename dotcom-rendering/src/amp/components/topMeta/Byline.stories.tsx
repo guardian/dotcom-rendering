@@ -63,6 +63,5 @@ export const MultipleDuplicateByline = () => (
 	/>
 );
 
-MultipleDuplicateByline.story = {
-	name: 'Byline w/ contributors with identical names',
-};
+MultipleDuplicateByline.storyName =
+	'Byline w/ contributors with identical names';
