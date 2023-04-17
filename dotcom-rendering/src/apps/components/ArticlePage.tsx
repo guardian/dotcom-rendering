@@ -3,12 +3,10 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import type { FEArticleType } from '../../types/frontend';
-import { AlreadyVisited } from '../../web/components/AlreadyVisited.importable';
 import { AnimatePulsingDots } from '../../web/components/AnimatePulsingDots.importable';
 import { FetchCommentCounts } from '../../web/components/FetchCommentCounts.importable';
 import { FocusStyles } from '../../web/components/FocusStyles.importable';
 import { Island } from '../../web/components/Island';
-import { Metrics } from '../../web/components/Metrics.importable';
 import { SkipTo } from '../../web/components/SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 
