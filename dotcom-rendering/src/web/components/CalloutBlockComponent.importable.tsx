@@ -1,15 +1,23 @@
+import { css } from '@emotion/react';
+import { palette } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type { CalloutBlockElementV2 } from '../../types/content';
 import { CalloutBlock } from './Callout/Callout';
 import { CalloutExpired } from './Callout/CalloutComponents';
 import { Deadline } from './Callout/Deadline';
 
+const collapsibleCalloutStyle = css`
+	background-color: ${palette.neutral[97]};
+`;
+
 export const CalloutBlockComponent = ({
 	callout,
 	pageId,
+	format,
 }: {
 	callout: CalloutBlockElementV2;
 	pageId: string;
+	format: ArticleFormat;
 }) => {
 	const {
 		prompt,
@@ -49,18 +57,21 @@ export const CalloutBlockComponent = ({
 						renderExtra={() => <Deadline until={activeUntil} />}
 						collapsedHeight={'160px'}
 					>
-						<CalloutBlock
-							formId={id}
-							prompt={prompt}
-							heading={title}
-							description={description}
-							formFields={formFields}
-							submissionURL={calloutsUrl}
-							isExpired={isExpired(activeUntil)}
-							isNonCollapsible={isNonCollapsible}
-							contacts={contacts}
-							pageId={pageId}
-						/>
+						<div css={collapsibleCalloutStyle}>
+							<CalloutBlock
+								formId={id}
+								prompt={prompt}
+								heading={title}
+								description={description}
+								formFields={formFields}
+								submissionURL={calloutsUrl}
+								isExpired={isExpired(activeUntil)}
+								isNonCollapsible={isNonCollapsible}
+								contacts={contacts}
+								pageId={pageId}
+								format={format}
+							/>
+						</div>
 					</ExpandingWrapper>
 				</aside>
 			) : (
@@ -75,6 +86,7 @@ export const CalloutBlockComponent = ({
 					isNonCollapsible={isNonCollapsible}
 					contacts={contacts}
 					pageId={pageId}
+					format={format}
 				/>
 			)}
 		</>
