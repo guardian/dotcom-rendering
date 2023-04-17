@@ -2,43 +2,43 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	border,
 	brandAltBackground,
-	brandBackground,
-	brandBorder,
-	brandLine,
 	from,
-	labs,
-	neutral,
 	space,
 	until,
 } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { MainMedia } from '../../amp/components/MainMedia';
+import {
+	StarRating,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { parse } from '../../lib/slot-machine-flags';
-import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { ArticleBody } from '../../web/components/ArticleBody';
+import { ArticleContainer } from '../../web/components/ArticleContainer';
 import { ArticleHeadline } from '../../web/components/ArticleHeadline';
+import { ArticleMeta } from '../../web/components/ArticleMeta';
 import { ArticleTitle } from '../../web/components/ArticleTitle';
 import { Border } from '../../web/components/Border';
+import { Carousel } from '../../web/components/Carousel.importable';
+import { DecideLines } from '../../web/components/DecideLines';
 import { GetMatchNav } from '../../web/components/GetMatchNav.importable';
+import { GetMatchStats } from '../../web/components/GetMatchStats.importable';
 import { GetMatchTabs } from '../../web/components/GetMatchTabs.importable';
 import { GridItem } from '../../web/components/GridItem';
-import { Island } from '../../web/components/Island';
-import { Section } from '../../web/components/Section';
-import { decidePalette } from '../../web/lib/decidePalette';
-import { getCurrentPillar } from '../../web/lib/layoutHelpers';
-import { RightColumn } from '../../web/components/RightColumn';
-import { MostViewedRightWrapper } from '../../web/components/MostViewedRightWrapper.importable';
-import { Carousel } from '../../web/components/Carousel.importable';
-import { decideTrail } from '../../web/lib/decideTrail';
-import { MostViewedFooterLayout } from '../../web/components/MostViewedFooterLayout';
-import { MostViewedFooterData } from '../../web/components/MostViewedFooterData.importable';
-import { StarRating } from '../../web/components/StarRating/StarRating';
-import { Standfirst } from '../../web/components/Standfirst';
 import { GuardianLabsLines } from '../../web/components/GuardianLabsLines';
-import { DecideLines } from '../../web/components/DecideLines';
+import { Island } from '../../web/components/Island';
+import { MainMedia } from '../../web/components/MainMedia';
+import { MostViewedFooterData } from '../../web/components/MostViewedFooterData.importable';
+import { MostViewedFooterLayout } from '../../web/components/MostViewedFooterLayout';
+import { MostViewedRightWrapper } from '../../web/components/MostViewedRightWrapper.importable';
+import { OnwardsUpper } from '../../web/components/OnwardsUpper.importable';
+import { RightColumn } from '../../web/components/RightColumn';
+import { Section } from '../../web/components/Section';
+import { Standfirst } from '../../web/components/Standfirst';
+import { SubMeta } from '../../web/components/SubMeta';
+import { getContributionsServiceUrl } from '../../web/lib/contributions';
+import { decidePalette } from '../../web/lib/decidePalette';
+import { decideTrail } from '../../web/lib/decideTrail';
 
 const StandardGrid = ({
 	children,
@@ -276,9 +276,15 @@ export const StandardLayout = ({ article, format }: Props) => {
 		config: { isPaidContent, host },
 	} = article;
 
-	const showBodyEndSlot =
-		parse(article.slotMachineFlags ?? '').showBodyEnd ||
-		article.config.switches.slotBodyEnd;
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: article.isAdFreeUser,
+		isSensitive: article.config.isSensitive,
+		videoDuration: article.config.videoDuration,
+		edition: article.config.edition,
+		section: article.config.section,
+		sharedAdTargeting: article.config.sharedAdTargeting,
+		adUnit: article.config.adUnit,
+	});
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -292,13 +298,13 @@ export const StandardLayout = ({ article, format }: Props) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const showComments = article.isCommentable;
+	// const showComments = article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const palette = decidePalette(format);
 
-	const isLabs = format.theme === ArticleSpecial.Labs;
+	const contributionsServiceUrl = getContributionsServiceUrl(article); // TODO: This isn't needed in the apps layout
 
 	return (
 		<main data-layout="StandardLayout">
@@ -600,30 +606,31 @@ export const StandardLayout = ({ article, format }: Props) => {
 				/>
 			</Island>
 
-			{!isPaidContent && showComments && (
-				<Section
-					fullWidth={true}
-					sectionId="comments"
-					data-print-layout="hide"
-					element="section"
-				>
-					<DiscussionLayout
-						discussionApiUrl={article.config.discussionApiUrl}
-						shortUrlId={article.config.shortUrlId}
-						format={format}
-						discussionD2Uid={article.config.discussionD2Uid}
-						discussionApiClientHeader={
-							article.config.discussionApiClientHeader
-						}
-						enableDiscussionSwitch={
-							!!article.config.switches.enableDiscussionSwitch
-						}
-						isAdFreeUser={article.isAdFreeUser}
-						shouldHideAds={article.shouldHideAds}
-						idApiUrl={article.config.idApiUrl}
-					/>
-				</Section>
-			)}
+			{/* TODO: Discussion support */}
+			{/* {!isPaidContent && showComments && (
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						data-print-layout="hide"
+						element="section"
+					>
+						<DiscussionLayout
+							discussionApiUrl={article.config.discussionApiUrl}
+							shortUrlId={article.config.shortUrlId}
+							format={format}
+							discussionD2Uid={article.config.discussionD2Uid}
+							discussionApiClientHeader={
+								article.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!article.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={article.isAdFreeUser}
+							shouldHideAds={article.shouldHideAds}
+							idApiUrl={article.config.idApiUrl}
+						/>
+					</Section>
+				)} */}
 
 			{!isPaidContent && (
 				<Section
@@ -641,6 +648,7 @@ export const StandardLayout = ({ article, format }: Props) => {
 								sectionName={article.sectionName}
 								format={format}
 								ajaxUrl={article.config.ajaxUrl}
+								edition={article.editionId}
 							/>
 						</Island>
 					</MostViewedFooterLayout>
