@@ -1,6 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, space } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -119,9 +119,9 @@ const containerStyles = css`
 		[viewport-start] 0px
 		[content-start title-start]
 		repeat(3, minmax(0, 1fr))
-		[title-end hide-start]
+		[hide-start]
 		minmax(0, 1fr)
-		[content-end hide-end]
+		[content-end title-end hide-end]
 		0px [viewport-end];
 	column-gap: 10px;
 
@@ -134,9 +134,9 @@ const containerStyles = css`
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
 			repeat(11, 40px)
-			[title-end hide-start]
+			[hide-start]
 			40px
-			[content-end hide-end]
+			[content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -145,9 +145,9 @@ const containerStyles = css`
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
 			repeat(11, 60px)
-			[title-end hide-start]
+			[hide-start]
 			60px
-			[content-end hide-end]
+			[content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -345,6 +345,12 @@ const topBorder = css`
 	border-top-style: solid;
 `;
 
+const titleStyle = css`
+	${until.leftCol} {
+		max-width: 74%;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -361,9 +367,9 @@ const topBorder = css`
  *
  * from `mobile` (320) to `phablet` (660)
  *  1 2 3 4
- * ┌─────┬─┐
- * │Title│X│
- * ├─────┴─┤
+ * ┌───────┐
+ * │Title  │
+ * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
  * └───────┘
@@ -371,10 +377,10 @@ const topBorder = css`
  * from `tablet` (740) to `desktop` (980)
  *
  *  1 2 3 4 5 6 7 8 9 a b c (12)
- * ┌─────────────────────┬─┐
- * │Title                │X│
- * │Date                 │ │
- * ├─────────────────────┴─┤
+ * ┌───────────────────────┐
+ * │Title                  │
+ * │Date                   │
+ * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * └───────────────────────┘
@@ -513,15 +519,17 @@ export const FrontSection = ({
 					centralBorder === 'partial' && headlineContainerBorders,
 				]}
 			>
-				<ContainerTitle
-					title={title}
-					fontColour={fontColour ?? overrides?.text.container}
-					description={description}
-					url={url}
-					containerPalette={containerPalette}
-					showDateHeader={showDateHeader}
-					editionId={editionId}
-				/>
+				<div css={titleStyle}>
+					<ContainerTitle
+						title={title}
+						fontColour={fontColour ?? overrides?.text.container}
+						description={description}
+						url={url}
+						containerPalette={containerPalette}
+						showDateHeader={showDateHeader}
+						editionId={editionId}
+					/>
+				</div>
 				{leftContent}
 			</div>
 			{isToggleable ? (
