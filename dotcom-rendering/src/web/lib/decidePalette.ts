@@ -664,6 +664,10 @@ const textCardHeadline = (format: ArticleFormat): string => {
 			switch (format.theme) {
 				case ArticlePillar.Lifestyle:
 					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[450];
 				default:
 					return BLACK;
 			}
