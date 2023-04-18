@@ -4,6 +4,7 @@ import { between, from } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
 
 type Props = {
+	renderAds: boolean;
 	children: React.ReactNode;
 };
 
@@ -16,7 +17,7 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 	}
 `;
 
-const fixedWidths = css`
+const fixedWidths = (renderAds: boolean) => css`
 	width: 100%;
 	${between.desktop.and.wide} {
 		min-width: 627px;
@@ -24,22 +25,23 @@ const fixedWidths = css`
 	${from.wide} {
 		min-width: 718px;
 	}
+	${renderAds && `${from.leftCol}{width: 76%;}${from.wide}{width: 75%;}`}
 `;
 
-export const MostViewedFooterLayout = ({ children }: Props) => {
+export const MostViewedFooterLayout = ({ renderAds, children }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
 			className="content-footer"
 			css={stackBelow('desktop')}
 		>
-			<div css={fixedWidths}>{children}</div>
+			<div css={fixedWidths(renderAds)}>{children}</div>
 			<div
 				css={css`
 					margin: 6px 0 0 10px;
 				`}
 			>
-				<AdSlot position="mostpop" />
+				{renderAds && <AdSlot position="mostpop" />}
 			</div>
 		</div>
 	);
