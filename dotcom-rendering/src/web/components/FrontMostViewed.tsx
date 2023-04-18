@@ -11,7 +11,7 @@ type Props = {
 	mostShared?: TrailType;
 	displayName: string;
 	isNetworkFront: boolean;
-	renderAds: boolean;
+	renderAds?: boolean;
 };
 
 export const FrontMostViewed = ({
