@@ -4,7 +4,7 @@ import { between, from } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
 
 type Props = {
-	renderAds: boolean;
+	renderAds?: boolean;
 	children: React.ReactNode;
 };
 
@@ -17,7 +17,7 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 	}
 `;
 
-const fixedWidths = (renderAds: boolean) => css`
+const fixedWidths = (renderAds: boolean | undefined) => css`
 	width: 100%;
 	${between.desktop.and.wide} {
 		min-width: 627px;
