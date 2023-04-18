@@ -52,7 +52,7 @@ export const Unbalanced = () => {
 		</Wrapper>
 	);
 };
-Unbalanced.story = { name: "with numbers that don't work as percentages" };
+Unbalanced.storyName = "with numbers that don't work as percentages";
 
 export const Zero = () => {
 	return (

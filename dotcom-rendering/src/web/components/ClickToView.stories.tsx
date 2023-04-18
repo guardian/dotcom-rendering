@@ -134,7 +134,7 @@ export const InlineStory = () => {
 		</RoleStory>
 	);
 };
-InlineStory.story = { name: "Click to view in 'inline' role" };
+InlineStory.storyName = "Click to view in 'inline' role";
 
 export const SupportingStory = () => {
 	return (
@@ -148,7 +148,7 @@ export const SupportingStory = () => {
 		</RoleStory>
 	);
 };
-SupportingStory.story = { name: "Click to view in 'supporting' role" };
+SupportingStory.storyName = "Click to view in 'supporting' role";
 
 export const ShowcaseStory = () => {
 	return (
@@ -162,7 +162,7 @@ export const ShowcaseStory = () => {
 		</RoleStory>
 	);
 };
-ShowcaseStory.story = { name: "Click to view in 'showcase' role" };
+ShowcaseStory.storyName = "Click to view in 'showcase' role";
 
 export const HalfWidthStory = () => {
 	return (
@@ -176,7 +176,7 @@ export const HalfWidthStory = () => {
 		</RoleStory>
 	);
 };
-HalfWidthStory.story = { name: "Click to view in 'halfWidth' role" };
+HalfWidthStory.storyName = "Click to view in 'halfWidth' role";
 
 export const ThumbnailStory = () => {
 	return (
@@ -190,7 +190,7 @@ export const ThumbnailStory = () => {
 		</RoleStory>
 	);
 };
-ThumbnailStory.story = { name: "Click to view in 'thumbnail' role" };
+ThumbnailStory.storyName = "Click to view in 'thumbnail' role";
 
 const Inline: RoleType = 'inline';
 
