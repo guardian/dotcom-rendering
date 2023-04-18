@@ -11,6 +11,7 @@ type Props = {
 	mostShared?: TrailType;
 	displayName: string;
 	isNetworkFront: boolean;
+	renderAds: boolean;
 };
 
 export const FrontMostViewed = ({
@@ -20,6 +21,7 @@ export const FrontMostViewed = ({
 	mostShared,
 	displayName,
 	isNetworkFront,
+	renderAds,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
@@ -39,7 +41,7 @@ export const FrontMostViewed = ({
 	}
 
 	return (
-		<MostViewedFooterLayout>
+		<MostViewedFooterLayout renderAds={renderAds}>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
 				<Island deferUntil="visible">
