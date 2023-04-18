@@ -47,7 +47,7 @@ export const DefaultStory = () => (
 	</Wrapper>
 );
 
-DefaultStory.story = { name: 'Default' };
+DefaultStory.storyName = 'Default';
 
 export const ActiveStory = () => (
 	<Wrapper>
@@ -62,7 +62,7 @@ export const ActiveStory = () => (
 	</Wrapper>
 );
 
-ActiveStory.story = { name: 'Active' };
+ActiveStory.storyName = 'Active';
 
 export const TruncatedStory = () => (
 	<Wrapper>
@@ -77,7 +77,7 @@ export const TruncatedStory = () => (
 	</Wrapper>
 );
 
-TruncatedStory.story = { name: 'Truncated' };
+TruncatedStory.storyName = 'Truncated';
 
 export const TruncatedActiveStory = () => (
 	<Wrapper>
@@ -92,7 +92,7 @@ export const TruncatedActiveStory = () => (
 	</Wrapper>
 );
 
-TruncatedActiveStory.story = { name: 'TruncatedActive' };
+TruncatedActiveStory.storyName = 'TruncatedActive';
 
 export const FilterKeyEventsStory = () => (
 	<Wrapper>
@@ -105,7 +105,7 @@ export const FilterKeyEventsStory = () => (
 	</Wrapper>
 );
 
-FilterKeyEventsStory.story = { name: 'FilterKeyEvents' };
+FilterKeyEventsStory.storyName = 'FilterKeyEvents';
 
 export const FilterKeyEventsActiveStory = () => (
 	<Wrapper>
@@ -118,4 +118,4 @@ export const FilterKeyEventsActiveStory = () => (
 	</Wrapper>
 );
 
-FilterKeyEventsActiveStory.story = { name: 'FilterKeyEventsActive' };
+FilterKeyEventsActiveStory.storyName = 'FilterKeyEventsActive';

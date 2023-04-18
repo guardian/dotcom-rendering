@@ -22,11 +22,11 @@ export const Default = () => (
 		<NavList trails={trails} showImage={false} />
 	</FrontSection>
 );
-Default.story = { name: 'NavList' };
+Default.storyName = 'NavList';
 
 export const DefaultWithImages = () => (
 	<FrontSection title="Nav Media List" centralBorder="partial">
 		<NavList trails={trails} showImage={true} />
 	</FrontSection>
 );
-DefaultWithImages.story = { name: 'NavList with images' };
+DefaultWithImages.storyName = 'NavList with images';

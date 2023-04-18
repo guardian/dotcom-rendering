@@ -132,7 +132,7 @@ export const BrandingStory = () => {
 	);
 };
 
-ArticleStory.story = { name: 'Article' };
+ArticleStory.storyName = 'Article';
 
 export const FeatureStory = () => {
 	return (
@@ -158,7 +158,7 @@ export const FeatureStory = () => {
 		</Wrapper>
 	);
 };
-FeatureStory.story = { name: 'Feature' };
+FeatureStory.storyName = 'Feature';
 
 export const FeatureWithMismatchedContributor = () => {
 	return (
@@ -238,7 +238,7 @@ export const SpecialReportStory = () => {
 		</Wrapper>
 	);
 };
-SpecialReportStory.story = { name: 'SpecialReport' };
+SpecialReportStory.storyName = 'SpecialReport';
 
 export const SpecialReportAlt = () => {
 	return (
@@ -264,7 +264,7 @@ export const SpecialReportAlt = () => {
 		</Wrapper>
 	);
 };
-SpecialReportAlt.story = { name: 'SpecialReportAlt' };
+SpecialReportAlt.storyName = 'SpecialReportAlt';
 
 export const CommentStory = () => {
 	return (
@@ -290,7 +290,7 @@ export const CommentStory = () => {
 		</Wrapper>
 	);
 };
-CommentStory.story = { name: 'Comment' };
+CommentStory.storyName = 'Comment';
 
 export const InterviewStory = () => {
 	return (
@@ -316,7 +316,7 @@ export const InterviewStory = () => {
 		</Wrapper>
 	);
 };
-InterviewStory.story = { name: 'Interview' };
+InterviewStory.storyName = 'Interview';
 
 export const ImmersiveStory = () => {
 	return (
@@ -342,7 +342,7 @@ export const ImmersiveStory = () => {
 		</Wrapper>
 	);
 };
-ImmersiveStory.story = { name: 'Immersive' };
+ImmersiveStory.storyName = 'Immersive';
 
 export const TwoContributorsStory = () => {
 	return (
@@ -368,7 +368,7 @@ export const TwoContributorsStory = () => {
 		</Wrapper>
 	);
 };
-TwoContributorsStory.story = { name: 'Feature, with two contributors' };
+TwoContributorsStory.storyName = 'Feature, with two contributors';
 
 export const DeadBlogStory = () => {
 	return (
@@ -398,7 +398,7 @@ export const DeadBlogStory = () => {
 		</>
 	);
 };
-DeadBlogStory.story = { name: 'Deadblog - All pillars' };
+DeadBlogStory.storyName = 'Deadblog - All pillars';
 
 export const Dateline = () => {
 	return (
@@ -424,4 +424,4 @@ export const Dateline = () => {
 		</Wrapper>
 	);
 };
-Dateline.story = { name: 'With no secondary dateline' };
+Dateline.storyName = 'With no secondary dateline';

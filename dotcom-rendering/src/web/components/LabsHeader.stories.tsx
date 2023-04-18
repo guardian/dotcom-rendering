@@ -19,4 +19,4 @@ export const Default = () => {
 		</Section>
 	);
 };
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

@@ -34,7 +34,7 @@ export const Basic = () => {
 		</Wrapper>
 	);
 };
-Basic.story = { name: 'with values adding up to 100' };
+Basic.storyName = 'with values adding up to 100';
 
 export const Unbalanced = () => {
 	return (
@@ -70,7 +70,7 @@ export const Zero = () => {
 		</Wrapper>
 	);
 };
-Zero.story = { name: 'with one side set to zero' };
+Zero.storyName = 'with one side set to zero';
 
 export const ZeroZero = () => {
 	return (
@@ -88,7 +88,7 @@ export const ZeroZero = () => {
 		</Wrapper>
 	);
 };
-ZeroZero.story = { name: 'with both sides set to zero' };
+ZeroZero.storyName = 'with both sides set to zero';
 
 export const FiftyFifty = () => {
 	return (
@@ -106,4 +106,4 @@ export const FiftyFifty = () => {
 		</Wrapper>
 	);
 };
-FiftyFifty.story = { name: 'with both sides set to fifty' };
+FiftyFifty.storyName = 'with both sides set to fifty';

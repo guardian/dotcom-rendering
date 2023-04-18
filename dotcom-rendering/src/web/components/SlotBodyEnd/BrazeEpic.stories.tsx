@@ -87,7 +87,7 @@ BrazeEpic_Default_Component.args = {
 	componentName: 'Epic',
 };
 
-BrazeEpic_Default_Component.story = { name: 'Default Epic' };
+BrazeEpic_Default_Component.storyName = 'Default Epic';
 
 // Braze Epic with Reminder CTA
 // ---------------------------------------
@@ -242,7 +242,7 @@ BrazeEpic_SpecialHeader_Component.args = {
 	componentName: 'EpicWithSpecialHeader',
 };
 
-BrazeEpic_SpecialHeader_Component.story = { name: 'Epic with special header' };
+BrazeEpic_SpecialHeader_Component.storyName = 'Epic with special header';
 
 // Braze Newsletter Epic - UK - MorningBriefing
 // ---------------------------------------

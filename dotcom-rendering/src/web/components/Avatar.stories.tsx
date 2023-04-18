@@ -35,7 +35,7 @@ export const defaultStory = () => (
 		/>
 	</div>
 );
-defaultStory.story = { name: 'Medium, Opinion (Rich Links)' };
+defaultStory.storyName = 'Medium, Opinion (Rich Links)';
 
 export const largeStory = () => (
 	<div style={{ width: '140px', height: '140px' }}>
@@ -49,14 +49,14 @@ export const largeStory = () => (
 		/>
 	</div>
 );
-largeStory.story = { name: 'Large, Lifestyle (Byline image - Desktop)' };
+largeStory.storyName = 'Large, Lifestyle (Byline image - Desktop)';
 
 export const largeStoryNews = () => (
 	<div style={{ width: '140px', height: '140px' }}>
 		<Avatar src={leahHarper} alt="The alt of the image" format={format} />
 	</div>
 );
-largeStoryNews.story = { name: 'Large, News (Byline image - Desktop)' };
+largeStoryNews.storyName = 'Large, News (Byline image - Desktop)';
 
 export const largeStoryCulture = () => (
 	<div style={{ width: '140px', height: '140px' }}>
@@ -70,7 +70,7 @@ export const largeStoryCulture = () => (
 		/>
 	</div>
 );
-largeStoryCulture.story = { name: 'Large, Culture (Byline image - Desktop)' };
+largeStoryCulture.storyName = 'Large, Culture (Byline image - Desktop)';
 
 export const SpecialReport = () => (
 	<div style={{ width: '140px', height: '140px' }}>
@@ -84,7 +84,7 @@ export const SpecialReport = () => (
 		/>
 	</div>
 );
-SpecialReport.story = { name: 'Large SpecialReport' };
+SpecialReport.storyName = 'Large SpecialReport';
 
 export const smallStory = () => (
 	<div style={{ width: '60px', height: '60px' }}>
@@ -98,4 +98,4 @@ export const smallStory = () => (
 		/>
 	</div>
 );
-smallStory.story = { name: 'Small, Sport (Byline image - Mobile)' };
+smallStory.storyName = 'Small, Sport (Byline image - Mobile)';

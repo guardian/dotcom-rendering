@@ -27,7 +27,7 @@ export const mainStandalone = () => {
 		</Section>
 	);
 };
-mainStandalone.story = { name: 'main_standalone' };
+mainStandalone.storyName = 'main_standalone';
 
 export const mainStandaloneMandatory = () => {
 	return (
@@ -42,7 +42,7 @@ export const mainStandaloneMandatory = () => {
 		</Section>
 	);
 };
-mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
+mainStandaloneMandatory.storyName = 'main_standalone_mandatory';
 
 export const fakeSocialStandalone = () => {
 	return (
@@ -56,7 +56,7 @@ export const fakeSocialStandalone = () => {
 		</Section>
 	);
 };
-fakeSocialStandalone.story = { name: 'fake_social_standalone' };
+fakeSocialStandalone.storyName = 'fake_social_standalone';
 
 export const fakeSocialStandaloneVertical = () => {
 	return (

@@ -28,4 +28,4 @@ export const defaultStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'Cricket Scoreboard' };
+defaultStory.storyName = 'Cricket Scoreboard';

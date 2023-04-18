@@ -24,7 +24,7 @@ export const defaultStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const embeddedBlockquoteStory = () => {
 	const bodyContent = `

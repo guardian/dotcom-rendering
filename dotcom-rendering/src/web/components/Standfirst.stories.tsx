@@ -27,7 +27,7 @@ export const Article = () => {
 		</Section>
 	);
 };
-Article.story = { name: 'Article' };
+Article.storyName = 'Article';
 
 export const Comment = () => {
 	return (
@@ -43,7 +43,7 @@ export const Comment = () => {
 		</Section>
 	);
 };
-Comment.story = { name: 'Comment' };
+Comment.storyName = 'Comment';
 
 export const Letter = () => {
 	return (
@@ -59,7 +59,7 @@ export const Letter = () => {
 		</Section>
 	);
 };
-Letter.story = { name: 'Letter' };
+Letter.storyName = 'Letter';
 
 export const Feature = () => {
 	return (
@@ -75,7 +75,7 @@ export const Feature = () => {
 		</Section>
 	);
 };
-Feature.story = { name: 'Feature' };
+Feature.storyName = 'Feature';
 
 export const Immersive = () => {
 	return (
@@ -91,7 +91,7 @@ export const Immersive = () => {
 		</Section>
 	);
 };
-Immersive.story = { name: 'Immersive' };
+Immersive.storyName = 'Immersive';
 
 export const Review = () => {
 	return (
@@ -107,7 +107,7 @@ export const Review = () => {
 		</Section>
 	);
 };
-Review.story = { name: 'Review' };
+Review.storyName = 'Review';
 
 export const LiveBlog = () => {
 	return (
@@ -152,7 +152,7 @@ export const DeadBlog = () => {
 		</Section>
 	);
 };
-DeadBlog.story = { name: 'DeadBlog' };
+DeadBlog.storyName = 'DeadBlog';
 
 export const Interview = () => {
 	return (
@@ -168,7 +168,7 @@ export const Interview = () => {
 		</Section>
 	);
 };
-Interview.story = { name: 'Interview' };
+Interview.storyName = 'Interview';
 
 export const Analysis = () => {
 	return (
@@ -184,7 +184,7 @@ export const Analysis = () => {
 		</Section>
 	);
 };
-Analysis.story = { name: 'Analysis' };
+Analysis.storyName = 'Analysis';
 
 export const Explainer = () => {
 	return (
@@ -200,7 +200,7 @@ export const Explainer = () => {
 		</Section>
 	);
 };
-Explainer.story = { name: 'Explainer' };
+Explainer.storyName = 'Explainer';
 
 export const Gallery = () => {
 	return (
@@ -216,7 +216,7 @@ export const Gallery = () => {
 		</Section>
 	);
 };
-Gallery.story = { name: 'Gallery' };
+Gallery.storyName = 'Gallery';
 
 export const Audio = () => {
 	return (
@@ -232,7 +232,7 @@ export const Audio = () => {
 		</Section>
 	);
 };
-Audio.story = { name: 'Audio' };
+Audio.storyName = 'Audio';
 
 export const Video = () => {
 	return (
@@ -248,7 +248,7 @@ export const Video = () => {
 		</Section>
 	);
 };
-Video.story = { name: 'Video' };
+Video.storyName = 'Video';
 
 export const Recipe = () => {
 	return (
@@ -264,7 +264,7 @@ export const Recipe = () => {
 		</Section>
 	);
 };
-Recipe.story = { name: 'Recipe' };
+Recipe.storyName = 'Recipe';
 
 export const MatchReport = () => {
 	return (
@@ -280,7 +280,7 @@ export const MatchReport = () => {
 		</Section>
 	);
 };
-MatchReport.story = { name: 'MatchReport' };
+MatchReport.storyName = 'MatchReport';
 
 export const Quiz = () => {
 	return (
@@ -296,7 +296,7 @@ export const Quiz = () => {
 		</Section>
 	);
 };
-Quiz.story = { name: 'Quiz' };
+Quiz.storyName = 'Quiz';
 
 export const SpecialReport = () => {
 	return (
@@ -312,7 +312,7 @@ export const SpecialReport = () => {
 		</Section>
 	);
 };
-SpecialReport.story = { name: 'SpecialReport' };
+SpecialReport.storyName = 'SpecialReport';
 
 export const SpecialReportAlt = () => {
 	return (
@@ -328,7 +328,7 @@ export const SpecialReportAlt = () => {
 		</Section>
 	);
 };
-SpecialReportAlt.story = { name: 'SpecialReportAlt' };
+SpecialReportAlt.storyName = 'SpecialReportAlt';
 
 export const Editorial = () => {
 	return (
@@ -344,7 +344,7 @@ export const Editorial = () => {
 		</Section>
 	);
 };
-Editorial.story = { name: 'Editorial' };
+Editorial.storyName = 'Editorial';
 
 export const PhotoEssay = () => {
 	return (
@@ -360,7 +360,7 @@ export const PhotoEssay = () => {
 		</Section>
 	);
 };
-PhotoEssay.story = { name: 'PhotoEssay' };
+PhotoEssay.storyName = 'PhotoEssay';
 
 export const LabsWithLink = () => {
 	return (
@@ -376,4 +376,4 @@ export const LabsWithLink = () => {
 		</Section>
 	);
 };
-LabsWithLink.story = { name: 'LabsWithLink' };
+LabsWithLink.storyName = 'LabsWithLink';

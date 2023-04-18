@@ -44,7 +44,7 @@ export const defaultStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const DropCap = () => {
 	return (
@@ -62,7 +62,7 @@ export const DropCap = () => {
 		</div>
 	);
 };
-DropCap.story = { name: 'with drop cap' };
+DropCap.storyName = 'with drop cap';
 
 export const QuotedDropCap = () => {
 	return (
@@ -80,7 +80,7 @@ export const QuotedDropCap = () => {
 		</div>
 	);
 };
-QuotedDropCap.story = { name: 'with quoted drop cap' };
+QuotedDropCap.storyName = 'with quoted drop cap';
 
 export const ShortText = () => {
 	return (
@@ -98,7 +98,7 @@ export const ShortText = () => {
 		</div>
 	);
 };
-ShortText.story = { name: 'with text less than 200 characters' };
+ShortText.storyName = 'with text less than 200 characters';
 
 export const NoTags = () => {
 	return (
@@ -116,7 +116,7 @@ export const NoTags = () => {
 		</div>
 	);
 };
-NoTags.story = { name: 'with no p tags' };
+NoTags.storyName = 'with no p tags';
 
 export const FeatureDropCap = () => {
 	return (
@@ -134,7 +134,7 @@ export const FeatureDropCap = () => {
 		</div>
 	);
 };
-FeatureDropCap.story = { name: 'with design of Feature' };
+FeatureDropCap.storyName = 'with design of Feature';
 
 export const AList = () => {
 	return (
@@ -152,7 +152,7 @@ export const AList = () => {
 		</div>
 	);
 };
-AList.story = { name: 'with a list' };
+AList.storyName = 'with a list';
 
 export const BadMarkup = () => {
 	return (
@@ -170,7 +170,7 @@ export const BadMarkup = () => {
 		</div>
 	);
 };
-BadMarkup.story = { name: 'with a bad markup' };
+BadMarkup.storyName = 'with a bad markup';
 
 export const SubSupscript = () => {
 	return (
@@ -188,7 +188,7 @@ export const SubSupscript = () => {
 		</div>
 	);
 };
-SubSupscript.story = { name: 'with a sub and sup' };
+SubSupscript.storyName = 'with a sub and sup';
 
 export const dotStory = () => {
 	return (
@@ -205,7 +205,7 @@ export const dotStory = () => {
 		</div>
 	);
 };
-dotStory.story = { name: 'With Dot' };
+dotStory.storyName = 'With Dot';
 
 export const longWordStory = () => {
 	return (
@@ -222,4 +222,4 @@ export const longWordStory = () => {
 		</div>
 	);
 };
-longWordStory.story = { name: 'Long Words' };
+longWordStory.storyName = 'Long Words';

@@ -84,7 +84,7 @@ BrazeBannerComponent.args = {
 	ophanComponentId: 'change_me_ophan_component_id',
 };
 
-BrazeBannerComponent.story = { name: 'BannerWithLink' };
+BrazeBannerComponent.storyName = 'BannerWithLink';
 
 // Braze App Banner story
 // ---------------------------------------
@@ -147,7 +147,7 @@ BrazeAppBannerComponent.args = {
 		'https://i.guim.co.uk/img/media/de6813b4dd9b9805a2d14dd6af14ae2b48e2e19e/0_0_930_520/master/930.png?quality=45&width=930&s=0beb53509265d32e3d201aa3981323bb',
 };
 
-BrazeAppBannerComponent.story = { name: 'AppBanner' };
+BrazeAppBannerComponent.storyName = 'AppBanner';
 
 // Braze Newsletter Banner story
 // ---------------------------------------

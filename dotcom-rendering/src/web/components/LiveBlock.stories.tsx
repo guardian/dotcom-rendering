@@ -85,7 +85,7 @@ export const VideoAsSecond = () => {
 		</Wrapper>
 	);
 };
-VideoAsSecond.story = { name: 'with recap' };
+VideoAsSecond.storyName = 'with recap';
 
 export const Title = () => {
 	const block: Block = {
@@ -134,7 +134,7 @@ export const Title = () => {
 		</Wrapper>
 	);
 };
-Title.story = { name: 'with a title' };
+Title.storyName = 'with a title';
 
 export const Video = () => {
 	const block: Block = {
@@ -204,7 +204,7 @@ export const Video = () => {
 		</Wrapper>
 	);
 };
-Video.story = { name: 'with a video as the second element' };
+Video.storyName = 'with a video as the second element';
 
 export const RichLink = () => {
 	const block: Block = {
@@ -249,7 +249,7 @@ export const RichLink = () => {
 		</Wrapper>
 	);
 };
-RichLink.story = { name: 'with a rich link being forced inline' };
+RichLink.storyName = 'with a rich link being forced inline';
 
 export const FirstImage = () => {
 	const block: Block = {
@@ -285,7 +285,7 @@ export const FirstImage = () => {
 		</Wrapper>
 	);
 };
-FirstImage.story = { name: 'with an image as the first element' };
+FirstImage.storyName = 'with an image as the first element';
 
 export const ImageRoles = () => {
 	const block: Block = {
@@ -347,7 +347,7 @@ export const ImageRoles = () => {
 		</Wrapper>
 	);
 };
-ImageRoles.story = { name: 'with images at different roles' };
+ImageRoles.storyName = 'with images at different roles';
 
 export const Thumbnail = () => {
 	const block: Block = {
@@ -398,7 +398,7 @@ export const Thumbnail = () => {
 		</Wrapper>
 	);
 };
-Thumbnail.story = { name: 'with a thumbnail image surrounded by text' };
+Thumbnail.storyName = 'with a thumbnail image surrounded by text';
 
 export const ImageAndTitle = () => {
 	const block: Block = {
@@ -435,7 +435,7 @@ export const ImageAndTitle = () => {
 		</Wrapper>
 	);
 };
-ImageAndTitle.story = { name: 'with only a title and an image' };
+ImageAndTitle.storyName = 'with only a title and an image';
 
 export const Updated = () => {
 	const publishedDate: number = liveBlock.blockFirstPublished ?? 999999;
@@ -506,7 +506,7 @@ export const Contributor = () => {
 		</Wrapper>
 	);
 };
-Contributor.story = { name: 'with a contributor' };
+Contributor.storyName = 'with a contributor';
 
 export const NoAvatar = () => {
 	const block: Block = {
@@ -541,7 +541,7 @@ export const NoAvatar = () => {
 		</Wrapper>
 	);
 };
-NoAvatar.story = { name: 'with a contributor but no avatar' };
+NoAvatar.storyName = 'with a contributor but no avatar';
 
 export const TitleAndContributor = () => {
 	const block: Block = {
@@ -579,4 +579,4 @@ export const TitleAndContributor = () => {
 		</Wrapper>
 	);
 };
-TitleAndContributor.story = { name: 'with a contributor and a title' };
+TitleAndContributor.storyName = 'with a contributor and a title';

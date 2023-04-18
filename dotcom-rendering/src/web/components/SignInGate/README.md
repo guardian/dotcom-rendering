@@ -262,7 +262,7 @@ export const mainPatientia = () => {
         </Section>
     );
 };
-mainPatientia.story = { name: 'patientia_standalone' };
+mainPatientia.storyName = 'patientia_standalone';
 ```
 
 The props can be set to anything here, since storybook is only interested in the design of the component.

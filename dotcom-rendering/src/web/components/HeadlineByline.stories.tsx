@@ -25,7 +25,7 @@ export const interviewStory = () => {
 		/>
 	);
 };
-interviewStory.story = { name: 'Interview' };
+interviewStory.storyName = 'Interview';
 
 export const commentStory = () => {
 	return (
@@ -40,7 +40,7 @@ export const commentStory = () => {
 		/>
 	);
 };
-commentStory.story = { name: 'Comment' };
+commentStory.storyName = 'Comment';
 
 export const specialStory = () => {
 	return (
@@ -55,7 +55,7 @@ export const specialStory = () => {
 		/>
 	);
 };
-specialStory.story = { name: 'SpecialReport' };
+specialStory.storyName = 'SpecialReport';
 
 export const commentWithBylineImageStory = () => {
 	// Not visibly different in storybook but will apply a width
@@ -80,7 +80,7 @@ export const commentWithBylineImageStory = () => {
 		/>
 	);
 };
-commentWithBylineImageStory.story = { name: 'Comment with byline image' };
+commentWithBylineImageStory.storyName = 'Comment with byline image';
 
 export const immersiveStory = () => {
 	return (
@@ -101,7 +101,7 @@ export const immersiveStory = () => {
 		/>
 	);
 };
-immersiveStory.story = { name: 'Immersive' };
+immersiveStory.storyName = 'Immersive';
 
 export const ImmersiveComment = () => {
 	return (
@@ -129,7 +129,7 @@ export const ImmersiveComment = () => {
 		</div>
 	);
 };
-ImmersiveComment.story = { name: 'Immersive Comment' };
+ImmersiveComment.storyName = 'Immersive Comment';
 
 export const MultipleStory = () => {
 	return (
@@ -160,7 +160,7 @@ export const MultipleStory = () => {
 		/>
 	);
 };
-MultipleStory.story = { name: 'Immersive with multiple contributors' };
+MultipleStory.storyName = 'Immersive with multiple contributors';
 
 export const MultipleDuplicateStory = () => {
 	return (
@@ -202,7 +202,7 @@ export const noBylineStory = () => {
 		/>
 	);
 };
-noBylineStory.story = { name: 'No byline' };
+noBylineStory.storyName = 'No byline';
 
 export const LabsImmersive = () => {
 	return (
@@ -223,7 +223,7 @@ export const LabsImmersive = () => {
 		/>
 	);
 };
-LabsImmersive.story = { name: 'Labs Immersive' };
+LabsImmersive.storyName = 'Labs Immersive';
 
 export const LabsComment = () => {
 	return (
@@ -244,7 +244,7 @@ export const LabsComment = () => {
 		/>
 	);
 };
-LabsComment.story = { name: 'Labs Comment' };
+LabsComment.storyName = 'Labs Comment';
 
 export const LabsInterview = () => {
 	return (
@@ -265,4 +265,4 @@ export const LabsInterview = () => {
 		/>
 	);
 };
-LabsInterview.story = { name: 'Labs Interview' };
+LabsInterview.storyName = 'Labs Interview';

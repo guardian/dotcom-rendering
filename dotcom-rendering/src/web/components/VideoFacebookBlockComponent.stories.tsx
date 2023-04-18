@@ -69,4 +69,4 @@ export const verticalAspectRatio = () => {
 		</Wrapper>
 	);
 };
-verticalAspectRatio.story = { name: 'with vertical aspect ratio' };
+verticalAspectRatio.storyName = 'with vertical aspect ratio';

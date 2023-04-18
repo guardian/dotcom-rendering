@@ -21,7 +21,7 @@ export const SingleByline = () => (
 	/>
 );
 
-SingleByline.story = { name: 'Byline with single contributor tag' };
+SingleByline.storyName = 'Byline with single contributor tag';
 
 export const MultipleByline = () => (
 	<Byline
@@ -42,7 +42,7 @@ export const MultipleByline = () => (
 	/>
 );
 
-MultipleByline.story = { name: 'Byline with multiple contributors' };
+MultipleByline.storyName = 'Byline with multiple contributors';
 
 export const MultipleDuplicateByline = () => (
 	<Byline

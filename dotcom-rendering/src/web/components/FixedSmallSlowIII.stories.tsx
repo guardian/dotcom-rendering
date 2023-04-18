@@ -22,4 +22,4 @@ export const Default = () => (
 		<FixedSmallSlowIII trails={trails} showAge={true} />
 	</FrontSection>
 );
-Default.story = { name: 'FixedSmallSlowIII' };
+Default.storyName = 'FixedSmallSlowIII';

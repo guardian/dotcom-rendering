@@ -60,7 +60,7 @@ export const Avatar = () => {
 		</FrontSection>
 	);
 };
-Avatar.story = { name: 'With avatars' };
+Avatar.storyName = 'With avatars';
 
 /* First Slice Variants */
 export const OneHugeTwoBigsFourStandards = () => (

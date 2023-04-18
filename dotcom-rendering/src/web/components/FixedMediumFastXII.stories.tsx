@@ -22,4 +22,4 @@ export const Default = () => (
 		<FixedMediumFastXII trails={trails} showAge={true} />
 	</FrontSection>
 );
-Default.story = { name: 'FixedMediumFastXII' };
+Default.storyName = 'FixedMediumFastXII';

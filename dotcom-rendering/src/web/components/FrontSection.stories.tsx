@@ -87,7 +87,7 @@ export const ContainerStory = () => {
 		</FrontSection>
 	);
 };
-ContainerStory.story = { name: 'default container' };
+ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
@@ -96,7 +96,7 @@ export const NoTitleStory = () => {
 		</FrontSection>
 	);
 };
-NoTitleStory.story = { name: 'with no title' };
+NoTitleStory.storyName = 'with no title';
 
 export const BordersStory = () => {
 	return (
@@ -105,7 +105,7 @@ export const BordersStory = () => {
 		</FrontSection>
 	);
 };
-BordersStory.story = { name: 'with all borders' };
+BordersStory.storyName = 'with all borders';
 
 export const LeftContentStory = () => {
 	return (
@@ -137,7 +137,7 @@ export const BackgroundStory = () => {
 		</FrontSection>
 	);
 };
-BackgroundStory.story = { name: 'with a blue background' };
+BackgroundStory.storyName = 'with a blue background';
 
 export const InnerBackgroundStory = () => {
 	return (
@@ -200,7 +200,7 @@ export const PartialStory = () => {
 		</FrontSection>
 	);
 };
-PartialStory.story = { name: 'with a partial border divider' };
+PartialStory.storyName = 'with a partial border divider';
 
 export const SidesStory = () => {
 	return (
@@ -213,7 +213,7 @@ export const SidesStory = () => {
 		</FrontSection>
 	);
 };
-SidesStory.story = { name: 'with a full border divider' };
+SidesStory.storyName = 'with a full border divider';
 
 export const ToggleableStory = () => {
 	return (
@@ -228,7 +228,7 @@ export const ToggleableStory = () => {
 		</FrontSection>
 	);
 };
-ToggleableStory.story = { name: 'toggleable container' };
+ToggleableStory.storyName = 'toggleable container';
 
 export const MarginsStory = () => {
 	return (
@@ -257,7 +257,7 @@ export const MarginsStory = () => {
 		</>
 	);
 };
-MarginsStory.story = { name: 'with no vertical margins' };
+MarginsStory.storyName = 'with no vertical margins';
 
 export const MultipleStory = () => {
 	return (

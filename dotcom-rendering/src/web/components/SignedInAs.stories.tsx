@@ -50,7 +50,7 @@ export const SignedIn = () => {
 		</Wrapper>
 	);
 };
-SignedIn.story = { name: 'when signed in' };
+SignedIn.storyName = 'when signed in';
 
 export const Image = () => {
 	return (
@@ -71,7 +71,7 @@ export const Image = () => {
 		</Wrapper>
 	);
 };
-Image.story = { name: 'when signed in with an avatar set' };
+Image.storyName = 'when signed in with an avatar set';
 
 export const Banned = () => {
 	return (
@@ -95,7 +95,7 @@ export const Banned = () => {
 		</Wrapper>
 	);
 };
-Banned.story = { name: 'when user is banned' };
+Banned.storyName = 'when user is banned';
 
 export const NoDisplayName = () => {
 	return (
@@ -116,7 +116,7 @@ export const NoDisplayName = () => {
 		</Wrapper>
 	);
 };
-NoDisplayName.story = { name: 'before a display name has been set' };
+NoDisplayName.storyName = 'before a display name has been set';
 
 export const NotSignedIn = () => {
 	return (
