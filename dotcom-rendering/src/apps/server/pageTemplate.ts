@@ -5,13 +5,13 @@ export const pageTemplate = ({
 	css,
 	html,
 	title = 'The Guardian',
-	clientScripts,
+	scriptTags,
 	windowGuardian,
 }: {
 	css: string;
 	html: string;
 	title?: string;
-	clientScripts: string[];
+	scriptTags: string[];
 	windowGuardian: string;
 }): string => {
 	const favicon =
@@ -72,9 +72,7 @@ export const pageTemplate = ({
 					window.guardian.mustardCut = true;
 				</script>
 
-				${clientScripts
-					.map((scriptSrc) => `<script src="${scriptSrc}"></script>`)
-					.join('\n')}
+				${scriptTags.join('\n')}
 
                 <style>${resets.resetCSS}</style>
 				${css}

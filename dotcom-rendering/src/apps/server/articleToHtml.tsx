@@ -1,4 +1,5 @@
-import { getScriptsFromManifest } from '../../lib/assets';
+import { isString } from '@guardian/libs';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -27,6 +28,9 @@ export const articleToHtml = (
 	});
 
 	const clientScripts = getScriptArrayFromFile('index.js');
+	const scriptTags = generateScriptTags(
+		[...getScriptArrayFromFile('index.js')].filter(isString),
+	);
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -58,7 +62,7 @@ export const articleToHtml = (
 		css: extractedCss,
 		html,
 		title: article.webTitle,
-		clientScripts,
+		scriptTags,
 		windowGuardian,
 	});
 	return {
