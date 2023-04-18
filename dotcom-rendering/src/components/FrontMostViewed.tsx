@@ -16,7 +16,7 @@ type Props = {
 	isNetworkFront: boolean;
 	deeplyRead?: TrailType[];
 	editionId?: EditionId;
-	renderAds: boolean;
+	renderAds?: boolean;
 };
 
 export const FrontMostViewed = ({
