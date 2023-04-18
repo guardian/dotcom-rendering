@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign as calloutCampaignV2 } from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
@@ -46,6 +47,11 @@ export const Collapsible = () => {
 				activeUntil: tomorrow,
 			}}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
@@ -58,6 +64,11 @@ export const NonCollapsible = () => {
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
@@ -70,6 +81,11 @@ export const SubmissionFailure = () => {
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
@@ -81,6 +97,11 @@ export const Expired = () => {
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
@@ -103,6 +124,11 @@ export const MinimalCallout = () => {
 					description: '',
 				}}
 				pageId={pageId}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			/>
 		</>
 	);
