@@ -28,8 +28,6 @@ type Props = {
 	showTopBorder?: boolean;
 	/** Defaults to `true`. Adds margins to the top and bottom */
 	verticalMargins?: boolean;
-	/** Applies a background colour to the entire width */
-	backgroundColour?: string;
 	/** The colour of borders can be overriden */
 	borderColour?: string;
 	/** A React component can be passed to be inserted inside the left column */
@@ -430,7 +428,6 @@ const titleStyle = css`
 export const FrontSection = ({
 	title,
 	children,
-	backgroundColour,
 	borderColour,
 	centralBorder,
 	containerName,
@@ -486,8 +483,7 @@ export const FrontSection = ({
 				isToggleable && containerStylesToggleable,
 				stretchRight && sectionContentStretchedRight,
 				css`
-					background-color: ${backgroundColour ??
-					overrides?.background.container};
+					background-color: ${overrides?.background.container};
 				`,
 			]}
 		>
