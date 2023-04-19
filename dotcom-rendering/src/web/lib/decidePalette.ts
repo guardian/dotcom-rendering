@@ -667,14 +667,12 @@ const textCardHeadline = (format: ArticleFormat): string => {
 				case ArticlePillar.Sport:
 					return sport[300];
 				case ArticlePillar.Culture:
-					return culture[450];
+					return culture[300];
 				default:
 					return BLACK;
 			}
 	}
 };
-
-// const textCardStandfirst = textCardHeadline;
 
 const textCardStandfirst = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
