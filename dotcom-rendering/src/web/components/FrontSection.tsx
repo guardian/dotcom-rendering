@@ -1,6 +1,5 @@
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
-import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
@@ -24,8 +23,6 @@ type Props = {
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
-	/** @deprecated no longer used */
-	format?: ArticleFormat;
 	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
 	/** The string used to set the `data-link-name` Ophan attribute */
@@ -158,21 +155,6 @@ const containerStyles = css`
 
 	${from.leftCol} {
 		grid-template-rows: [content-start] repeat(2, auto);
-	}
-`;
-
-const sectionContentStretchedRight = css`
-	${from.wide} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(12, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end]
-			minmax(0, 1fr) [viewport-end];
 	}
 `;
 
