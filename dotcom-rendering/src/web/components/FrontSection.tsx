@@ -51,8 +51,6 @@ type Props = {
 	 * to be collapsed
 	 */
 	toggleable?: boolean;
-	/** Applies a background colour only to the content inside the left and right borders */
-	innerBackgroundColour?: string;
 	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
 	 * shown under the title. Typically only used on Headlines containers on fronts
 	 */
@@ -427,7 +425,6 @@ export const FrontSection = ({
 	containerPalette,
 	description,
 	editionId,
-	innerBackgroundColour,
 	leftColSize = 'compact',
 	leftContent,
 	ophanComponentLink,
@@ -448,8 +445,7 @@ export const FrontSection = ({
 
 	const isToggleable = toggleable && !!sectionId;
 
-	const showDecoration =
-		showTopBorder || showSideBorders || !!innerBackgroundColour;
+	const showDecoration = showTopBorder || showSideBorders;
 
 	const childrenContainerStyles = [
 		sectionContent,
@@ -484,10 +480,6 @@ export const FrontSection = ({
 						decoration,
 						showSideBorders && sideBorders,
 						showTopBorder && topBorder,
-						innerBackgroundColour &&
-							css`
-								background-color: ${innerBackgroundColour};
-							`,
 					]}
 				/>
 			)}
