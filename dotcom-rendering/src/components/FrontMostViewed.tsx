@@ -61,7 +61,10 @@ export const FrontMostViewed = ({
 	const showMostPopular = !!deeplyReadType && !!mostViewedItems;
 
 	return (
-		<MostViewedFooterLayout renderAds={renderAds}>
+		<MostViewedFooterLayout
+			renderAds={renderAds}
+			isNetworkFront={isNetworkFront}
+		>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
 				<Island deferUntil="visible">
