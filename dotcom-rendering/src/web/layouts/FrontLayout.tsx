@@ -329,11 +329,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						return (
 							<>
-								<Section
+								<FrontSection
 									key={ophanName}
 									title="Most viewed"
+									centralBorder="partial"
 									showTopBorder={index > 0}
-									padContent={false}
 									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
@@ -342,6 +342,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
+									toggleable={true}
 									sectionId={ophanName}
 									showDateHeader={
 										collection.config.showDateHeader
@@ -360,7 +361,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										isNetworkFront={front.isNetworkFront}
 										renderAds={renderAds}
 									/>
-								</Section>
+								</FrontSection>
 								{decideAdSlot(
 									index,
 									front.isNetworkFront,

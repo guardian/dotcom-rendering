@@ -25,7 +25,8 @@ const fixedWidths = (renderAds: boolean | undefined) => css`
 	${from.wide} {
 		min-width: 718px;
 	}
-	${renderAds && `${from.leftCol}{width: 76%;}${from.wide}{width: 75%;}`}
+	${renderAds &&
+	`${between.leftCol.and.wide}{width: 75%; margin-top: -34px;}${from.wide}{width: 75%;}`}
 `;
 
 export const MostViewedFooterLayout = ({ renderAds, children }: Props) => {
