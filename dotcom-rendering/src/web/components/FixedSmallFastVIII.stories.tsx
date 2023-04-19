@@ -18,12 +18,7 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection
-		title="Fixed Small Fast VIII"
-		showTopBorder={true}
-		showSideBorders={true}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Small Fast VIII" showTopBorder={true}>
 		<FixedSmallFastVIII trails={trails} showAge={true} />
 	</FrontSection>
 );

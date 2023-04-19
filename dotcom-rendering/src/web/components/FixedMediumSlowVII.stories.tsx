@@ -18,12 +18,7 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection
-		title="Fixed Medium Slow VII"
-		showTopBorder={true}
-		showSideBorders={true}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow VII" showTopBorder={true}>
 		<FixedMediumSlowVII trails={trails} showAge={true} />
 	</FrontSection>
 );

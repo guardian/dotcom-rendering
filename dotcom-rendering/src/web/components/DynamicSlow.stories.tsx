@@ -43,7 +43,7 @@ export const Avatar = () => {
 		};
 	});
 	return (
-		<FrontSection title="Dynamic Slow" centralBorder="partial">
+		<FrontSection title="Dynamic Slow">
 			<DynamicSlow
 				groupedTrails={{
 					...defaultGroupedTrails,
@@ -66,7 +66,6 @@ Avatar.storyName = 'With avatars';
 export const OneHugeTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: oneHuge</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -85,7 +84,6 @@ OneHugeTwoBigsFourStandards.storyName = 'With 1 huge card, 2 bigs, 4 standards';
 export const OneVeryBigTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -105,7 +103,6 @@ OneVeryBigTwoBigsFourStandards.storyName =
 export const TwoVeryBigsTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -125,7 +122,6 @@ TwoVeryBigsTwoBigsFourStandards.storyName =
 export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -145,7 +141,6 @@ TwoVeryBigs1stBoostedTwoBigsFourStandards.storyName =
 export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -166,7 +161,6 @@ TwoVeryBigs2ndBoostedTwoBigsFourStandards.storyName =
 export const TwoVeryBigs8Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 	>
 		<DynamicSlow
@@ -184,7 +178,6 @@ TwoVeryBigs8Standards.storyName = 'with 2 very bigs, 8 standards';
 export const TwoVeryBigsOneBig4Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 	>
 		<DynamicSlow
@@ -204,7 +197,6 @@ TwoVeryBigsOneBig4Standards.storyName = 'with 2 very bigs, 1 big, 8 standards';
 export const TwoVeryBigsTwoBigs4Standards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -227,7 +219,6 @@ TwoVeryBigsTwoBigs4Standards.storyName =
 export const TwoVeryBigsFiveStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
 	>
 		<DynamicSlow
@@ -246,7 +237,6 @@ TwoVeryBigsFiveStandards.storyName = 'with 2 very bigs, 5 standards';
 export const ThreeVeryBigsFiveStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 	>
 		<DynamicSlow
@@ -265,7 +255,6 @@ ThreeVeryBigsFiveStandards.storyName = 'with 3 very bigs, 5 standards';
 export const TwoVeryBigsOneBig = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
 	>
 		<DynamicSlow
@@ -284,7 +273,6 @@ TwoVeryBigsOneBig.storyName = 'with 2 very bigs, 1 big';
 export const TwoBigsThreeStandards = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: undefined</br>second slice: twoBigs`}
 	>
 		<DynamicSlow
@@ -303,7 +291,6 @@ TwoBigsThreeStandards.storyName = 'with 2 bigs, 3 standards';
 export const OneVeryBigTwoBigsOneStandard = () => (
 	<FrontSection
 		title="Dynamic Slow"
-		centralBorder="partial"
 		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
 	>
 		<DynamicSlow

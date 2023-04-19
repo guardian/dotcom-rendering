@@ -25,7 +25,6 @@ const groupedTrails = {
 export const EventPalette = () => (
 	<FrontSection
 		title="Event Palette"
-		centralBorder="partial"
 		containerPalette="EventPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -52,7 +51,6 @@ EventPalette.story = {
 export const EventAltPalette = () => (
 	<FrontSection
 		title="Event Alt Palette"
-		centralBorder="partial"
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -68,7 +66,6 @@ export const EventAltPalette = () => (
 export const SombrePalette = () => (
 	<FrontSection
 		title="Sombre Palette"
-		centralBorder="partial"
 		containerPalette="SombrePalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -84,7 +81,6 @@ export const SombrePalette = () => (
 export const SombreAltPalette = () => (
 	<FrontSection
 		title="Sombre Alt Palette"
-		centralBorder="partial"
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -100,7 +96,6 @@ export const SombreAltPalette = () => (
 export const BreakingPalette = () => (
 	<FrontSection
 		title="Breaking Palette"
-		centralBorder="partial"
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -116,7 +111,6 @@ export const BreakingPalette = () => (
 export const LongRunningPalette = () => (
 	<FrontSection
 		title="Long Running Palette"
-		centralBorder="partial"
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -132,7 +126,6 @@ export const LongRunningPalette = () => (
 export const LongRunningAltPalette = () => (
 	<FrontSection
 		title="Long Running Alt Palette"
-		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -148,7 +141,6 @@ export const LongRunningAltPalette = () => (
 export const InvestigationPalette = () => (
 	<FrontSection
 		title="Investigation Palette"
-		centralBorder="partial"
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -164,7 +156,6 @@ export const InvestigationPalette = () => (
 export const SpecialReportAltPalette = () => (
 	<FrontSection
 		title="Special Report Alt Palette"
-		centralBorder="partial"
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}

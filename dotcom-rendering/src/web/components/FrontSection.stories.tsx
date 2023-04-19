@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	brand,
-	brandAlt,
-	breakpoints,
-	neutral,
-} from '@guardian/source-foundations';
+import { breakpoints } from '@guardian/source-foundations';
 import { LI } from './Card/components/LI';
 import { FrontSection } from './FrontSection';
 
@@ -78,11 +73,7 @@ const LeftColPlaceholder = ({
 
 export const ContainerStory = () => {
 	return (
-		<FrontSection
-			title="Default Container"
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<FrontSection title="Default Container" showTopBorder={false}>
 			<Placeholder />
 		</FrontSection>
 	);
@@ -91,27 +82,26 @@ ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
-		<FrontSection showTopBorder={false} showSideBorders={false}>
+		<FrontSection showTopBorder={false}>
 			<Placeholder />
 		</FrontSection>
 	);
 };
 NoTitleStory.storyName = 'with no title';
 
-export const BordersStory = () => {
+export const TopBorderStory = () => {
 	return (
-		<FrontSection title="Borders" centralBorder="full">
+		<FrontSection title="Borders">
 			<Placeholder />
 		</FrontSection>
 	);
 };
-BordersStory.storyName = 'with all borders';
+TopBorderStory.storyName = 'with all borders';
 
 export const LeftContentStory = () => {
 	return (
 		<FrontSection
-			title="Borders"
-			centralBorder="full"
+			title="LeftContent"
 			leftContent={
 				<LeftColPlaceholder text="LeftCol" heightInPixels={200} />
 			}
@@ -122,96 +112,6 @@ export const LeftContentStory = () => {
 };
 LeftContentStory.storyName = 'with an element passed into the left column';
 
-export const BackgroundStory = () => {
-	return (
-		<FrontSection
-			title="Background Colour"
-			description="About this content"
-			fontColour={neutral[100]}
-			centralBorder="full"
-			backgroundColour={brand[400]}
-			borderColour={brand[600]}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-BackgroundStory.storyName = 'with a blue background';
-
-export const InnerBackgroundStory = () => {
-	return (
-		<FrontSection
-			title="Inner Background"
-			description="About this content"
-			fontColour={neutral[100]}
-			centralBorder="full"
-			innerBackgroundColour={brand[400]}
-			borderColour={brand[300]}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-InnerBackgroundStory.storyName = 'with a blue inner background';
-
-export const DifferentBackgrounds = () => {
-	return (
-		<FrontSection
-			title="Tip us off"
-			centralBorder="full"
-			backgroundColour="#FFF280"
-			borderColour={brand[300]}
-			innerBackgroundColour="#FFE501"
-		>
-			<h1>
-				👀 Share stories with the Guardian securely and confidentially
-			</h1>
-		</FrontSection>
-	);
-};
-DifferentBackgrounds.storyName =
-	'with inner background different to main background';
-
-export const StretchRightStory = () => {
-	return (
-		<FrontSection
-			title="Stretched Right"
-			description="About this content"
-			centralBorder="full"
-			stretchRight={true}
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-StretchRightStory.storyName = 'with content stretched to the right (no margin)';
-
-export const PartialStory = () => {
-	return (
-		<FrontSection
-			title="Borders"
-			showTopBorder={false}
-			centralBorder="partial"
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-PartialStory.storyName = 'with a partial border divider';
-
-export const SidesStory = () => {
-	return (
-		<FrontSection
-			title="NoSides"
-			showTopBorder={false}
-			centralBorder="full"
-		>
-			<Placeholder />
-		</FrontSection>
-	);
-};
-SidesStory.storyName = 'with a full border divider';
-
 export const ToggleableStory = () => {
 	return (
 		<FrontSection
@@ -219,7 +119,6 @@ export const ToggleableStory = () => {
 			toggleable={true}
 			sectionId="section-id"
 			showTopBorder={false}
-			showSideBorders={false}
 		>
 			<Placeholder />
 		</FrontSection>
@@ -227,70 +126,29 @@ export const ToggleableStory = () => {
 };
 ToggleableStory.storyName = 'toggleable container';
 
-export const MarginsStory = () => {
-	return (
-		<>
-			<FrontSection
-				title="No Vertical Margins"
-				centralBorder="full"
-				verticalMargins={false}
-			>
-				<Placeholder />
-			</FrontSection>
-			<FrontSection
-				title="No Vertical Margins"
-				centralBorder="full"
-				verticalMargins={false}
-			>
-				<Placeholder />
-			</FrontSection>
-			<FrontSection
-				title="No Vertical Margins"
-				centralBorder="full"
-				verticalMargins={false}
-			>
-				<Placeholder />
-			</FrontSection>
-		</>
-	);
-};
-MarginsStory.storyName = 'with no vertical margins';
-
 export const MultipleStory = () => {
 	return (
 		<>
 			<FrontSection title="Page Title" showTopBorder={false} />
-			<FrontSection title="Headlines" centralBorder="partial">
+			<FrontSection title="Headlines">
 				<Placeholder />
 			</FrontSection>
-			<FrontSection title="Useful links" centralBorder="partial" />
+			<FrontSection title="Useful links" />
 			<FrontSection
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
-				centralBorder="partial"
 			>
 				<Placeholder />
 			</FrontSection>
-			<FrontSection
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={brandAlt[400]}
-			>
+			<FrontSection showTopBorder={false}>
 				<h2>Insert call to action here</h2>
 			</FrontSection>
-			<FrontSection
-				title="Videos"
-				fontColour="white"
-				showTopBorder={false}
-				backgroundColour="black"
-				showSideBorders={false}
-			>
+			<FrontSection title="Videos" showTopBorder={false}>
 				<Placeholder />
 			</FrontSection>
 			<FrontSection
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
-				centralBorder="partial"
 			>
 				<Placeholder />
 			</FrontSection>
@@ -335,7 +193,6 @@ export const TreatsStory = () => {
 				},
 			]}
 			showTopBorder={false}
-			showSideBorders={false}
 			showDateHeader={true}
 			editionId="UK"
 		>
