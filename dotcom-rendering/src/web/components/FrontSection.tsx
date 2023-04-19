@@ -19,8 +19,6 @@ type Props = {
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	/** Defaults to `true`. If we should render the left and right borders */
-	showSideBorders?: boolean;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
 	/** Defaults to `true`. Adds margins to the top and bottom */
@@ -397,7 +395,6 @@ export const FrontSection = ({
 	ophanComponentName,
 	sectionId,
 	showDateHeader = false,
-	showSideBorders = true,
 	showTopBorder = true,
 	stretchRight = false,
 	toggleable = false,
@@ -410,8 +407,6 @@ export const FrontSection = ({
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const isToggleable = toggleable && !!sectionId;
-
-	const showDecoration = showTopBorder || showSideBorders;
 
 	const childrenContainerStyles = [
 		sectionContent,
@@ -439,15 +434,8 @@ export const FrontSection = ({
 				`,
 			]}
 		>
-			{showDecoration && (
-				<div
-					css={[
-						decoration,
-						showSideBorders && sideBorders,
-						showTopBorder && topBorder,
-					]}
-				/>
-			)}
+			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+
 			<div css={[headlineContainerStyles, headlineContainerBorders]}>
 				<Hide until="leftCol">{badge}</Hide>
 				<div css={titleStyle}>
@@ -464,6 +452,7 @@ export const FrontSection = ({
 				</div>
 				{leftContent}
 			</div>
+
 			{isToggleable ? (
 				<>
 					<div css={sectionShowHide}>
