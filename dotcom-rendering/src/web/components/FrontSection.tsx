@@ -21,8 +21,6 @@ type Props = {
 	sectionId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** Defaults to `true`. Adds margins to the top and bottom */
-	verticalMargins?: boolean;
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
@@ -385,7 +383,6 @@ export const FrontSection = ({
 	toggleable = false,
 	treats,
 	url,
-	verticalMargins = true,
 	badge,
 }: Props) => {
 	const overrides =
@@ -396,7 +393,7 @@ export const FrontSection = ({
 	const childrenContainerStyles = [
 		sectionContent,
 		sectionContentPadded,
-		verticalMargins && paddings,
+		paddings,
 	];
 
 	/**
@@ -459,7 +456,7 @@ export const FrontSection = ({
 			)}
 
 			{treats && (
-				<div css={[sectionTreats, verticalMargins && paddings]}>
+				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border.container}
