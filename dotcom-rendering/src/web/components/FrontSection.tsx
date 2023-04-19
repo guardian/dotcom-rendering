@@ -13,8 +13,6 @@ import { Treats } from './Treats';
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
-	/** Allows the colour of the title to be changed */
-	fontColour?: string;
 	/** This text shows below the title */
 	description?: string;
 	/** The title can be made into a link using this property */
@@ -429,7 +427,6 @@ export const FrontSection = ({
 	containerPalette,
 	description,
 	editionId,
-	fontColour,
 	innerBackgroundColour,
 	leftColSize = 'compact',
 	leftContent,
@@ -500,7 +497,7 @@ export const FrontSection = ({
 					<Hide from="leftCol">{badge}</Hide>
 					<ContainerTitle
 						title={title}
-						fontColour={fontColour ?? overrides?.text.container}
+						fontColour={overrides?.text.container}
 						description={description}
 						url={url}
 						containerPalette={containerPalette}
