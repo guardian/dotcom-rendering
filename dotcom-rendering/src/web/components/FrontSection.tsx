@@ -23,13 +23,10 @@ type Props = {
 	sectionId?: string;
 	/** Defaults to `true`. If we should render the left and right borders */
 	showSideBorders?: boolean;
-	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
 	/** Defaults to `true`. Adds margins to the top and bottom */
 	verticalMargins?: boolean;
-	/** The colour of borders can be overriden */
-	borderColour?: string;
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
@@ -428,8 +425,6 @@ const titleStyle = css`
 export const FrontSection = ({
 	title,
 	children,
-	borderColour,
-	centralBorder,
 	containerName,
 	containerPalette,
 	description,
@@ -462,7 +457,6 @@ export const FrontSection = ({
 	const childrenContainerStyles = [
 		sectionContent,
 		sectionContentPadded,
-		centralBorder === 'full' && sectionContentBorder,
 		verticalMargins && paddings,
 	];
 
@@ -500,12 +494,7 @@ export const FrontSection = ({
 					]}
 				/>
 			)}
-			<div
-				css={[
-					headlineContainerStyles,
-					centralBorder === 'partial' && headlineContainerBorders,
-				]}
-			>
+			<div css={[headlineContainerStyles, headlineContainerBorders]}>
 				<Hide until="leftCol">{badge}</Hide>
 				<div css={titleStyle}>
 					<Hide from="leftCol">{badge}</Hide>
@@ -546,9 +535,7 @@ export const FrontSection = ({
 				<div css={[sectionTreats, verticalMargins && paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={
-							borderColour ?? overrides?.border.container
-						}
+						borderColour={overrides?.border.container}
 					/>
 				</div>
 			)}
