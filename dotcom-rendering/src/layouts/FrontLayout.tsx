@@ -324,15 +324,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 						return (
 							<>
-								<Section
+								<FrontSection
 									key={ophanName}
-									title={
-										showMostPopular
-											? mostPopularTitle
-											: 'Most viewed'
-									}
+									title="Most viewed"
+									centralBorder="partial"
 									showTopBorder={index > 0}
-									padContent={false}
 									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
@@ -345,6 +341,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
+									toggleable={true}
 									sectionId={ophanName}
 									showDateHeader={
 										collection.config.showDateHeader
@@ -365,7 +362,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										editionId={front.editionId}
 										renderAds={renderAds}
 									/>
-								</Section>
+								</FrontSection>
 								{decideAdSlot(
 									renderAds,
 									index,
