@@ -26,8 +26,6 @@ type Props = {
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
-	/** Defaults to `false`. If true, `children` is rendered all the way right */
-	stretchRight?: boolean;
 	/** @deprecated no longer used */
 	format?: ArticleFormat;
 	/** The string used to set the `data-component` Ophan attribute */
@@ -370,18 +368,6 @@ const titleStyle = css`
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * └─────┴─────────────────────────┘
  *
- * on `wide` (1300) with `stretchRight`
- *
- *  1 2 3 4 5 6 7 8 9 a b c d e f g (16)
- * ┌─────┬─────────────────────────┐
- * │Title│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Date │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├─────┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * └─────┴─────────────────────────┘
- *
  */
 export const FrontSection = ({
 	title,
@@ -396,7 +382,6 @@ export const FrontSection = ({
 	sectionId,
 	showDateHeader = false,
 	showTopBorder = true,
-	stretchRight = false,
 	toggleable = false,
 	treats,
 	url,
@@ -428,7 +413,6 @@ export const FrontSection = ({
 				fallbackStyles,
 				containerStyles,
 				isToggleable && containerStylesToggleable,
-				stretchRight && sectionContentStretchedRight,
 				css`
 					background-color: ${overrides?.background.container};
 				`,
