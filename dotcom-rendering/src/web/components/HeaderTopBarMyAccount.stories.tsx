@@ -20,8 +20,7 @@ export const defaultStory = () => {
 	);
 };
 
-defaultStory.storyName =
-	'not signed in';
+defaultStory.storyName = 'not signed in';
 
 export const signedInStory = () => {
 	return (
@@ -35,5 +34,4 @@ export const signedInStory = () => {
 	);
 };
 
-signedInStory.storyName =
-	'signed in';
+signedInStory.storyName = 'signed in';

@@ -27,8 +27,7 @@ export const SingleImage = () => {
 		</Section>
 	);
 };
-SingleImage.storyName =
-	'single image';
+SingleImage.storyName = 'single image';
 
 export const SingleImageWithCaption = () => {
 	return (
@@ -45,8 +44,7 @@ export const SingleImageWithCaption = () => {
 		</Section>
 	);
 };
-SingleImageWithCaption.storyName =
-	'single image with caption';
+SingleImageWithCaption.storyName = 'single image with caption';
 
 export const SideBySide = () => {
 	return (
@@ -62,8 +60,7 @@ export const SideBySide = () => {
 		</Section>
 	);
 };
-SideBySide.storyName =
-	'side by side';
+SideBySide.storyName = 'side by side';
 
 export const SideBySideWithCaption = () => {
 	return (
@@ -80,8 +77,7 @@ export const SideBySideWithCaption = () => {
 		</Section>
 	);
 };
-SideBySideWithCaption.storyName =
-	'side by side with caption';
+SideBySideWithCaption.storyName = 'side by side with caption';
 
 export const OneAboveTwo = () => {
 	return (
@@ -97,8 +93,7 @@ export const OneAboveTwo = () => {
 		</Section>
 	);
 };
-OneAboveTwo.storyName =
-	'one above two';
+OneAboveTwo.storyName = 'one above two';
 
 export const OneAboveTwoWithCaption = () => {
 	return (
@@ -115,8 +110,7 @@ export const OneAboveTwoWithCaption = () => {
 		</Section>
 	);
 };
-OneAboveTwoWithCaption.storyName =
-	'one above two with caption';
+OneAboveTwoWithCaption.storyName = 'one above two with caption';
 
 export const GridOfFour = () => {
 	return (
@@ -132,8 +126,7 @@ export const GridOfFour = () => {
 		</Section>
 	);
 };
-GridOfFour.storyName =
-	'grid of four';
+GridOfFour.storyName = 'grid of four';
 
 export const GridOfFourWithCaption = () => {
 	return (
@@ -150,5 +143,4 @@ export const GridOfFourWithCaption = () => {
 		</Section>
 	);
 };
-GridOfFourWithCaption.storyName =
-	'grid of four with caption';
+GridOfFourWithCaption.storyName = 'grid of four with caption';

@@ -88,8 +88,7 @@ export const LeftContentStory = () => {
 		</Section>
 	);
 };
-LeftContentStory.storyName =
-	'with an element passed into the left column';
+LeftContentStory.storyName = 'with an element passed into the left column';
 
 export const BackgroundStory = () => {
 	return (
@@ -121,8 +120,7 @@ export const InnerBackgroundStory = () => {
 		</Section>
 	);
 };
-InnerBackgroundStory.storyName =
-	'with a blue inner background';
+InnerBackgroundStory.storyName = 'with a blue inner background';
 
 export const DifferentBackgrounds = () => {
 	return (
@@ -154,8 +152,7 @@ export const StretchRightStory = () => {
 		</Section>
 	);
 };
-StretchRightStory.storyName =
-	'with content stretched to the right (no margin)';
+StretchRightStory.storyName = 'with content stretched to the right (no margin)';
 
 export const PartialStory = () => {
 	return (
@@ -312,5 +309,4 @@ export const TreatsStory = () => {
 		</Section>
 	);
 };
-TreatsStory.storyName =
-	'with treats and date header';
+TreatsStory.storyName = 'with treats and date header';

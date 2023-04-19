@@ -77,8 +77,7 @@ export const topicBank = () => {
 		</Wrapper>
 	);
 };
-topicBank.storyName =
-	'topicBank';
+topicBank.storyName = 'topicBank';
 
 export const topicBankSelectedIsNotInTop5 = () => {
 	return (
@@ -100,8 +99,7 @@ export const topicBankSelectedIsNotInTop5 = () => {
 		</Wrapper>
 	);
 };
-topicBankSelectedIsNotInTop5.storyName =
-	'topicBankSelectedIsNotInTop5';
+topicBankSelectedIsNotInTop5.storyName = 'topicBankSelectedIsNotInTop5';
 
 export const notShowingTopicsWithLowerCounts = () => {
 	return (
@@ -123,8 +121,7 @@ export const notShowingTopicsWithLowerCounts = () => {
 		</Wrapper>
 	);
 };
-notShowingTopicsWithLowerCounts.storyName =
-	'notShowingTopicsWithLowerCounts';
+notShowingTopicsWithLowerCounts.storyName = 'notShowingTopicsWithLowerCounts';
 
 export const doesNotRenderWhenNoKeyEventsOrRelevantTopics = () => {
 	return (

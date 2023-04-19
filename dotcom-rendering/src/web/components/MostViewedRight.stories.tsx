@@ -109,5 +109,4 @@ export const outsideContextStory = () => {
 		</Section>
 	);
 };
-outsideContextStory.storyName =
-	'inside responsive wrapper';
+outsideContextStory.storyName = 'inside responsive wrapper';

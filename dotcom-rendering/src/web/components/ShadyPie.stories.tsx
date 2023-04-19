@@ -12,5 +12,4 @@ export const Default = () => {
 		</div>
 	);
 };
-Default.storyName =
-	'Default';
+Default.storyName = 'Default';

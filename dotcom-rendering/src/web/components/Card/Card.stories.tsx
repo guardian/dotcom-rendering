@@ -1073,8 +1073,7 @@ export const WithLetterDesign = () => {
 	);
 };
 
-WithLetterDesign.storyName =
-	'WithLetterDesign';
+WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (

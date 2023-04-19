@@ -45,8 +45,7 @@ export const OneHugeTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-OneHugeTwoBigsSixStandards.storyName =
-	'With 1 huge card, 2 bigs, 6 standards';
+OneHugeTwoBigsSixStandards.storyName = 'With 1 huge card, 2 bigs, 6 standards';
 
 export const OneVeryBigTwoBigsSixStandards = () => (
 	<FrontSection
@@ -147,8 +146,7 @@ export const TwoVeryBigsTwelveStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsTwelveStandards.storyName =
-	'with 2 very big cards, 12 standards';
+TwoVeryBigsTwelveStandards.storyName = 'with 2 very big cards, 12 standards';
 
 export const TwoVeryBigsOneBigEightStandards = () => (
 	<FrontSection
@@ -272,8 +270,7 @@ export const TwoVeryBigsFourBigs = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsFourBigs.storyName =
-	'with 2 very big cards, 4 bigs';
+TwoVeryBigsFourBigs.storyName = 'with 2 very big cards, 4 bigs';
 
 /* Edge cases */
 
@@ -297,8 +294,7 @@ export const OneHugeOneVeryBig7Standards = () => (
 	</FrontSection>
 );
 
-OneHugeOneVeryBig7Standards.storyName =
-	'with 1 huge, 1 very big, 7 standards';
+OneHugeOneVeryBig7Standards.storyName = 'with 1 huge, 1 very big, 7 standards';
 
 // Second test: 3 very bigs (& the last big is not shown)
 export const ThreeVeryBigsFourBigs = () => (
@@ -318,8 +314,7 @@ export const ThreeVeryBigsFourBigs = () => (
 	</FrontSection>
 );
 
-OneHugeOneVeryBig7Standards.storyName =
-	'with 1 huge, 1 very big, 7 standards';
+OneHugeOneVeryBig7Standards.storyName = 'with 1 huge, 1 very big, 7 standards';
 
 // No first slice is provided
 export const TwoBigsFourStandards = () => (
@@ -339,8 +334,7 @@ export const TwoBigsFourStandards = () => (
 	</FrontSection>
 );
 
-TwoBigsFourStandards.storyName =
-	'with 2 bigs, 4 standards';
+TwoBigsFourStandards.storyName = 'with 2 bigs, 4 standards';
 
 // No standards are provided
 // First test: there are some (2) bigs
@@ -361,8 +355,7 @@ export const OneVeryBigTwoBigs = () => (
 	</FrontSection>
 );
 
-OneVeryBigTwoBigs.storyName =
-	'with 1 very big, 2 bigs';
+OneVeryBigTwoBigs.storyName = 'with 1 very big, 2 bigs';
 
 // Second test: There are no bigs (first slice only)
 export const OneVeryBig = () => (
@@ -381,8 +374,7 @@ export const OneVeryBig = () => (
 	</FrontSection>
 );
 
-OneVeryBig.storyName =
-	'with 1 very big';
+OneVeryBig.storyName = 'with 1 very big';
 
 // Bigs are demoted in twoOrMoreBigsFirstBoosted layout
 export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (

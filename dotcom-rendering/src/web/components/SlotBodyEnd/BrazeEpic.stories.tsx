@@ -637,5 +637,4 @@ BrazeEpicNewsletter_TheGuide_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_TheGuide_Component.storyName =
-	'Newsletter - The Guide';
+BrazeEpicNewsletter_TheGuide_Component.storyName = 'Newsletter - The Guide';

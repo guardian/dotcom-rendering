@@ -211,8 +211,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 		</Wrapper>
 	);
 };
-FeatureStoryWithSmallBylineImage.storyName =
-	'Feature with Small Byline Image';
+FeatureStoryWithSmallBylineImage.storyName = 'Feature with Small Byline Image';
 
 export const SpecialReportStory = () => {
 	return (

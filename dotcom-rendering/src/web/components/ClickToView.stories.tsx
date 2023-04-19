@@ -1303,5 +1303,4 @@ export const VineBlockComponentStory = () => {
 		</Section>
 	);
 };
-VineBlockComponentStory.storyName =
-	'Click to view wrapping VineBlockComponent';
+VineBlockComponentStory.storyName = 'Click to view wrapping VineBlockComponent';

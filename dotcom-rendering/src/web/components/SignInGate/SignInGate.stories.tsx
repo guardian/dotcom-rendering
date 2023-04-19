@@ -75,8 +75,7 @@ export const fakeSocialStandaloneVertical = () => {
 		</Section>
 	);
 };
-fakeSocialStandaloneVertical.storyName =
-	'fake_social_standalone_vertical';
+fakeSocialStandaloneVertical.storyName = 'fake_social_standalone_vertical';
 
 export const signInGateCopyTest = () => {
 	return (
@@ -95,8 +94,7 @@ export const signInGateCopyTest = () => {
 		</Section>
 	);
 };
-signInGateCopyTest.storyName =
-	'sign_in_gate_copy_test';
+signInGateCopyTest.storyName = 'sign_in_gate_copy_test';
 
 export const signInGateMainCheckoutCompletePersonalisedCopy = (
 	args: CheckoutCompleteCookieData,

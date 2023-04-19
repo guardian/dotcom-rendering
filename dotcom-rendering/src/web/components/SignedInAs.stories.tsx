@@ -133,8 +133,7 @@ export const NotSignedIn = () => {
 		</Wrapper>
 	);
 };
-NotSignedIn.storyName =
-	'when the discussion is open but user is not signed in';
+NotSignedIn.storyName = 'when the discussion is open but user is not signed in';
 
 export const DiscussionClosed = () => {
 	return (

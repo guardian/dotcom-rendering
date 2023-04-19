@@ -468,8 +468,7 @@ export const Updated = () => {
 		</Wrapper>
 	);
 };
-Updated.storyName =
-	'with updated time showing';
+Updated.storyName = 'with updated time showing';
 
 export const Contributor = () => {
 	const block: Block = {

@@ -60,5 +60,4 @@ export const embeddedBlockquoteStory = () => {
 		</div>
 	);
 };
-embeddedBlockquoteStory.storyName =
-	'Comment block which contains a blockquote';
+embeddedBlockquoteStory.storyName = 'Comment block which contains a blockquote';
