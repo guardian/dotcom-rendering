@@ -1234,7 +1234,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 							data-component="most-popular"
 							leftColSize="wide"
 						>
-							<MostViewedFooterLayout>
+							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
 										sectionName={article.sectionName}
