@@ -26,16 +26,6 @@ type Props = {
 	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** The html tag used by Section defaults to `section` but can be overridden here */
-	element?:
-		| 'div'
-		| 'article'
-		| 'aside'
-		| 'nav'
-		| 'main'
-		| 'header'
-		| 'section'
-		| 'footer';
 	/** Defaults to `true`. Adds margins to the top and bottom */
 	verticalMargins?: boolean;
 	/** Applies a background colour to the entire width */
@@ -438,7 +428,6 @@ const titleStyle = css`
  *
  */
 export const FrontSection = ({
-	element = 'section',
 	title,
 	children,
 	backgroundColour,
@@ -480,18 +469,17 @@ export const FrontSection = ({
 		verticalMargins && paddings,
 	];
 
-	return jsx(
-		element,
-		{
-			/**
-			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-			 * this id pre-existed showMore so is probably also being used for something else.
-			 */
-			id: sectionId,
-			'data-link-name': ophanComponentLink,
-			'data-component': ophanComponentName,
-			'data-container-name': containerName,
-			css: [
+	/**
+	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * this id pre-existed showMore so is probably also being used for something else.
+	 */
+	return (
+		<section
+			id={sectionId}
+			data-link-name={ophanComponentLink}
+			data-component={ophanComponentName}
+			data-container-name={containerName}
+			css={[
 				fallbackStyles,
 				containerStyles,
 				leftColSize === 'wide' && wideLeftColumn,
@@ -501,9 +489,8 @@ export const FrontSection = ({
 					background-color: ${backgroundColour ??
 					overrides?.background.container};
 				`,
-			],
-		},
-		<>
+			]}
+		>
 			{showDecoration && (
 				<div
 					css={[
@@ -569,6 +556,6 @@ export const FrontSection = ({
 					/>
 				</div>
 			)}
-		</>,
+		</section>
 	);
 };
