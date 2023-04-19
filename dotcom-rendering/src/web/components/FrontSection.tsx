@@ -30,8 +30,6 @@ type Props = {
 	children?: React.ReactNode;
 	/** Defaults to `false`. If true, `children` is rendered all the way right */
 	stretchRight?: boolean;
-	/** Defaults to `compact`. Some page types have a different left column width */
-	leftColSize?: LeftColSize;
 	/** @deprecated no longer used */
 	format?: ArticleFormat;
 	/** The string used to set the `data-component` Ophan attribute */
@@ -169,20 +167,6 @@ const containerStyles = css`
 	}
 `;
 
-const wideLeftColumn = css`
-	${from.leftCol} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(10, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end] minmax(0, 1fr) [viewport-end];
-	}
-`;
-
 const sectionContentStretchedRight = css`
 	${from.wide} {
 		grid-template-columns:
@@ -260,23 +244,6 @@ const sectionContent = css`
 	}
 	${from.wide} {
 		grid-row-end: -1;
-	}
-`;
-
-const sectionContentBorder = css`
-	position: relative;
-
-	${from.leftCol} {
-		::before {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			bottom: 0;
-			left: -10px;
-			position: absolute;
-			background-color: ${neutral[86]};
-		}
 	}
 `;
 
@@ -425,7 +392,6 @@ export const FrontSection = ({
 	containerPalette,
 	description,
 	editionId,
-	leftColSize = 'compact',
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
@@ -466,7 +432,6 @@ export const FrontSection = ({
 			css={[
 				fallbackStyles,
 				containerStyles,
-				leftColSize === 'wide' && wideLeftColumn,
 				isToggleable && containerStylesToggleable,
 				stretchRight && sectionContentStretchedRight,
 				css`
