@@ -16,6 +16,7 @@ type Props = {
 	isNetworkFront: boolean;
 	deeplyRead?: TrailType[];
 	editionId?: EditionId;
+	isFront?: boolean;
 	renderAds?: boolean;
 };
 
@@ -28,6 +29,7 @@ export const FrontMostViewed = ({
 	isNetworkFront,
 	deeplyRead,
 	editionId,
+	isFront,
 	renderAds,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
@@ -61,10 +63,7 @@ export const FrontMostViewed = ({
 	const showMostPopular = !!deeplyReadType && !!mostViewedItems;
 
 	return (
-		<MostViewedFooterLayout
-			renderAds={renderAds}
-			isNetworkFront={isNetworkFront}
-		>
+		<MostViewedFooterLayout renderAds={renderAds} isFront={isFront}>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
 				<Island deferUntil="visible">
