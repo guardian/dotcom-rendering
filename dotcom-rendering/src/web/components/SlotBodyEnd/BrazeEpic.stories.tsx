@@ -191,6 +191,12 @@ export const BrazeEpic_SpecialHeader_Component = (
 
 	if (BrazeMessage) {
 		const brazeMessageProps: BrazeMessageProps = {
+			authoredEpicImageUrl: args.authoredEpicImageUrl,
+			authoredEpicImageAltText: args.authoredEpicImageAltText,
+			authoredEpicHeader: args.authoredEpicHeader,
+			authoredEpicBylineName: args.authoredEpicBylineName,
+			authoredEpicBylineCopy1: args.authoredEpicBylineCopy1,
+			authoredEpicBylineCopy2: args.authoredEpicBylineCopy2,
 			paragraph1: args.paragraph1,
 			paragraph2: args.paragraph2,
 			paragraph3: args.paragraph3,
@@ -225,6 +231,13 @@ export const BrazeEpic_SpecialHeader_Component = (
 };
 
 BrazeEpic_SpecialHeader_Component.args = {
+	authoredEpicImageUrl:
+		'https://i.guim.co.uk/img/media/cecfef4098a2a8c1e302e3f67b979f11ee529bb6/0_0_470_471/master/470.png?width=300&quality=45&s=d654e72595c07e2095777863f4901863',
+	authoredEpicImageAltText: 'Headshot image of Mark Rice-Oxley',
+	authoredEpicHeader: "You're powering open, independent journalism",
+	authoredEpicBylineName: 'Mark Rice-Oxley',
+	authoredEpicBylineCopy1: 'Executive Editor',
+	authoredEpicBylineCopy2: 'Reader Revenues',
 	paragraph1:
 		'... we have a small favour to ask. More people, <a href="https://example.com">like you</a>, are reading and supporting the Guardian’s independent, investigative journalism than ever before. And unlike many news organisations, we made the choice to keep our reporting open for all, regardless of where they live or what they can afford to pay.',
 	paragraph2:
