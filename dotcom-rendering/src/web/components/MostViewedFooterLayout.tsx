@@ -5,7 +5,7 @@ import { AdSlot } from './AdSlot';
 
 type Props = {
 	renderAds?: boolean;
-	isNetworkFront?: boolean;
+	isFront?: boolean;
 	children: React.ReactNode;
 };
 
@@ -20,7 +20,7 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 
 const fixedWidths = (
 	renderAds: boolean | undefined,
-	isNetworkFront: boolean | undefined,
+	isFront: boolean | undefined,
 ) => css`
 	width: 100%;
 	${between.desktop.and.wide} {
@@ -30,12 +30,12 @@ const fixedWidths = (
 		min-width: 718px;
 	}
 	${renderAds && `${from.leftCol}{width: 75%;}`}
-	${isNetworkFront && `${between.leftCol.and.wide}{margin-top: -34px;}`}
+	${isFront && `${between.leftCol.and.wide}{margin-top: -34px;}`}
 `;
 
 export const MostViewedFooterLayout = ({
 	renderAds,
-	isNetworkFront,
+	isFront,
 	children,
 }: Props) => {
 	return (
@@ -44,7 +44,7 @@ export const MostViewedFooterLayout = ({
 			className="content-footer"
 			css={stackBelow('desktop')}
 		>
-			<div css={fixedWidths(renderAds, isNetworkFront)}>{children}</div>
+			<div css={fixedWidths(renderAds, isFront)}>{children}</div>
 			<div
 				css={css`
 					margin: 6px 0 0 10px;

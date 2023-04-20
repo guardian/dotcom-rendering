@@ -359,6 +359,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
+										isFront={true}
 										renderAds={renderAds}
 									/>
 								</FrontSection>
