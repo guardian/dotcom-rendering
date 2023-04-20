@@ -28,6 +28,7 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import { Stuck } from './lib/stickiness';
+import { Badge } from '../components/Badge';
 
 interface Props {
 	front: DCRFrontType;
@@ -151,6 +152,19 @@ const decideAdSlot = (
 		);
 	}
 	return null;
+};
+
+const showBadge = (displayName: string) => {
+	if (displayName === 'This is Europe')
+		return (
+			<Badge
+				imageUrl={
+					'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg'
+				}
+				seriesTag={'world/series/this-is-europe'}
+			/>
+		);
+	return undefined;
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -400,6 +414,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										<CPScottHeader />
 									)
 								}
+								badge={showBadge(collection.displayName)}
 								sectionId={ophanName}
 								showDateHeader={
 									collection.config.showDateHeader

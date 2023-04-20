@@ -1,6 +1,8 @@
 import { css, jsx } from '@emotion/react';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -76,6 +78,7 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
+	badge?: EmotionJSX.Element;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -460,6 +463,7 @@ export const FrontSection = ({
 	treats,
 	url,
 	verticalMargins = true,
+	badge,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -519,7 +523,9 @@ export const FrontSection = ({
 					centralBorder === 'partial' && headlineContainerBorders,
 				]}
 			>
+				<Hide until="leftCol">{badge}</Hide>
 				<div css={titleStyle}>
+					<Hide from="leftCol">{badge}</Hide>
 					<ContainerTitle
 						title={title}
 						fontColour={fontColour ?? overrides?.text.container}
