@@ -87,7 +87,7 @@ BrazeEpic_Default_Component.args = {
 	componentName: 'Epic',
 };
 
-BrazeEpic_Default_Component.story = { name: 'Default Epic' };
+BrazeEpic_Default_Component.storyName = 'Default Epic';
 
 // Braze Epic with Reminder CTA
 // ---------------------------------------
@@ -165,9 +165,8 @@ BrazeEpic_DefaultWithReminder_Component.args = {
 	remindMeConfirmationHeaderText: 'Thank you! Your reminder is set.',
 };
 
-BrazeEpic_DefaultWithReminder_Component.story = {
-	name: 'Default Epic with reminder',
-};
+BrazeEpic_DefaultWithReminder_Component.storyName =
+	'Default Epic with reminder';
 
 // Braze Epic with special header
 // ---------------------------------------
@@ -256,7 +255,7 @@ BrazeEpic_SpecialHeader_Component.args = {
 	componentName: 'EpicWithSpecialHeader',
 };
 
-BrazeEpic_SpecialHeader_Component.story = { name: 'Epic with special header' };
+BrazeEpic_SpecialHeader_Component.storyName = 'Epic with special header';
 
 // Braze Newsletter Epic - UK - MorningBriefing
 // ---------------------------------------
@@ -321,9 +320,8 @@ BrazeNewsletterEpic_UK_MorningBriefing_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeNewsletterEpic_UK_MorningBriefing_Component.story = {
-	name: 'Newsletter - UK - Morning Briefing',
-};
+BrazeNewsletterEpic_UK_MorningBriefing_Component.storyName =
+	'Newsletter - UK - Morning Briefing';
 
 // Braze Newsletter Epic - US - FirstThing
 // ---------------------------------------
@@ -388,9 +386,8 @@ BrazeEpicNewsletter_US_FirstThing_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_US_FirstThing_Component.story = {
-	name: 'Newsletter - US - First Thing',
-};
+BrazeEpicNewsletter_US_FirstThing_Component.storyName =
+	'Newsletter - US - First Thing';
 
 // Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
@@ -455,9 +452,8 @@ BrazeEpicNewsletter_AUS_MorningMail_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_AUS_MorningMail_Component.story = {
-	name: 'Newsletter - AUS - Morning Mail',
-};
+BrazeEpicNewsletter_AUS_MorningMail_Component.storyName =
+	'Newsletter - AUS - Morning Mail';
 
 // Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
@@ -522,9 +518,8 @@ BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.story = {
-	name: 'Newsletter - AUS - Morning Mail',
-};
+BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.storyName =
+	'Newsletter - AUS - Morning Mail';
 
 // Braze Newsletter Epic - DownToEarth
 // ---------------------------------------
@@ -589,9 +584,8 @@ BrazeEpicNewsletter_DownToEarth_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_DownToEarth_Component.story = {
-	name: 'Newsletter - Down To Earth',
-};
+BrazeEpicNewsletter_DownToEarth_Component.storyName =
+	'Newsletter - Down To Earth';
 
 // Braze Newsletter Epic - The Guide
 // ---------------------------------------
@@ -656,6 +650,4 @@ BrazeEpicNewsletter_TheGuide_Component.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeEpicNewsletter_TheGuide_Component.story = {
-	name: 'Newsletter - The Guide',
-};
+BrazeEpicNewsletter_TheGuide_Component.storyName = 'Newsletter - The Guide';

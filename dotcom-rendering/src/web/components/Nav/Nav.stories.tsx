@@ -32,7 +32,7 @@ export const StandardStory = () => {
 		</Section>
 	);
 };
-StandardStory.story = { name: 'News Highlighted' };
+StandardStory.storyName = 'News Highlighted';
 
 export const StandardStoryTopBarHeader = () => {
 	return (
@@ -57,7 +57,7 @@ export const StandardStoryTopBarHeader = () => {
 		</Section>
 	);
 };
-StandardStoryTopBarHeader.story = { name: 'News Highlighted' };
+StandardStoryTopBarHeader.storyName = 'News Highlighted';
 
 export const OpinionStory = () => {
 	return (
@@ -82,7 +82,7 @@ export const OpinionStory = () => {
 		</Section>
 	);
 };
-OpinionStory.story = { name: 'Opinion Highlighted' };
+OpinionStory.storyName = 'Opinion Highlighted';
 
 export const ImmersiveStory = () => {
 	return (
@@ -108,4 +108,4 @@ export const ImmersiveStory = () => {
 		</Section>
 	);
 };
-ImmersiveStory.story = { name: 'Immersive' };
+ImmersiveStory.storyName = 'Immersive';

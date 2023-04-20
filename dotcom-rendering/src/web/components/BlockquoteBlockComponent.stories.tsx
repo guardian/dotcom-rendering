@@ -47,7 +47,7 @@ export const Unquoted = () => {
 		</div>
 	);
 };
-Unquoted.story = { name: 'Unquoted' };
+Unquoted.storyName = 'Unquoted';
 
 export const Quoted = () => {
 	return (
@@ -186,4 +186,4 @@ export const Quoted = () => {
 		</div>
 	);
 };
-Quoted.story = { name: 'Quoted' };
+Quoted.storyName = 'Quoted';

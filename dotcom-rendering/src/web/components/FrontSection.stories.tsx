@@ -87,7 +87,7 @@ export const ContainerStory = () => {
 		</FrontSection>
 	);
 };
-ContainerStory.story = { name: 'default container' };
+ContainerStory.storyName = 'default container';
 
 export const NoTitleStory = () => {
 	return (
@@ -96,7 +96,7 @@ export const NoTitleStory = () => {
 		</FrontSection>
 	);
 };
-NoTitleStory.story = { name: 'with no title' };
+NoTitleStory.storyName = 'with no title';
 
 export const BordersStory = () => {
 	return (
@@ -105,7 +105,7 @@ export const BordersStory = () => {
 		</FrontSection>
 	);
 };
-BordersStory.story = { name: 'with all borders' };
+BordersStory.storyName = 'with all borders';
 
 export const LeftContentStory = () => {
 	return (
@@ -120,9 +120,7 @@ export const LeftContentStory = () => {
 		</FrontSection>
 	);
 };
-LeftContentStory.story = {
-	name: 'with an element passed into the left column',
-};
+LeftContentStory.storyName = 'with an element passed into the left column';
 
 export const BackgroundStory = () => {
 	return (
@@ -138,7 +136,7 @@ export const BackgroundStory = () => {
 		</FrontSection>
 	);
 };
-BackgroundStory.story = { name: 'with a blue background' };
+BackgroundStory.storyName = 'with a blue background';
 
 export const InnerBackgroundStory = () => {
 	return (
@@ -154,9 +152,7 @@ export const InnerBackgroundStory = () => {
 		</FrontSection>
 	);
 };
-InnerBackgroundStory.story = {
-	name: 'with a blue inner background',
-};
+InnerBackgroundStory.storyName = 'with a blue inner background';
 
 export const DifferentBackgrounds = () => {
 	return (
@@ -173,9 +169,8 @@ export const DifferentBackgrounds = () => {
 		</FrontSection>
 	);
 };
-DifferentBackgrounds.story = {
-	name: 'with inner background different to main background',
-};
+DifferentBackgrounds.storyName =
+	'with inner background different to main background';
 
 export const StretchRightStory = () => {
 	return (
@@ -189,9 +184,7 @@ export const StretchRightStory = () => {
 		</FrontSection>
 	);
 };
-StretchRightStory.story = {
-	name: 'with content stretched to the right (no margin)',
-};
+StretchRightStory.storyName = 'with content stretched to the right (no margin)';
 
 export const PartialStory = () => {
 	return (
@@ -204,7 +197,7 @@ export const PartialStory = () => {
 		</FrontSection>
 	);
 };
-PartialStory.story = { name: 'with a partial border divider' };
+PartialStory.storyName = 'with a partial border divider';
 
 export const SidesStory = () => {
 	return (
@@ -217,7 +210,7 @@ export const SidesStory = () => {
 		</FrontSection>
 	);
 };
-SidesStory.story = { name: 'with a full border divider' };
+SidesStory.storyName = 'with a full border divider';
 
 export const ToggleableStory = () => {
 	return (
@@ -232,7 +225,7 @@ export const ToggleableStory = () => {
 		</FrontSection>
 	);
 };
-ToggleableStory.story = { name: 'toggleable container' };
+ToggleableStory.storyName = 'toggleable container';
 
 export const MarginsStory = () => {
 	return (
@@ -261,7 +254,7 @@ export const MarginsStory = () => {
 		</>
 	);
 };
-MarginsStory.story = { name: 'with no vertical margins' };
+MarginsStory.storyName = 'with no vertical margins';
 
 export const MultipleStory = () => {
 	return (
@@ -350,6 +343,4 @@ export const TreatsStory = () => {
 		</FrontSection>
 	);
 };
-TreatsStory.story = {
-	name: 'with treats and date header',
-};
+TreatsStory.storyName = 'with treats and date header';

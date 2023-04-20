@@ -40,7 +40,7 @@ export const smallAspectRatio = () => {
 		</Wrapper>
 	);
 };
-smallAspectRatio.story = { name: 'with small aspect ratio' };
+smallAspectRatio.storyName = 'with small aspect ratio';
 
 export const largeAspectRatio = () => {
 	return (
@@ -91,4 +91,4 @@ export const verticalAspectRatio = () => {
 		</Wrapper>
 	);
 };
-verticalAspectRatio.story = { name: 'with vertical aspect ratio' };
+verticalAspectRatio.storyName = 'with vertical aspect ratio';

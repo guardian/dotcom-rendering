@@ -18,7 +18,7 @@ export const JustH2 = () => (
 		/>
 	</div>
 );
-JustH2.story = { name: 'with just h2 text' };
+JustH2.storyName = 'with just h2 text';
 
 export const Strong = () => (
 	<div>
@@ -33,7 +33,7 @@ export const Strong = () => (
 		/>
 	</div>
 );
-Strong.story = { name: 'with only strong text' };
+Strong.storyName = 'with only strong text';
 
 export const Leading = () => (
 	<div>
@@ -48,7 +48,7 @@ export const Leading = () => (
 		/>
 	</div>
 );
-Leading.story = { name: 'with leading strong text' };
+Leading.storyName = 'with leading strong text';
 
 export const Trailing = () => (
 	<div>
@@ -63,4 +63,4 @@ export const Trailing = () => (
 		/>
 	</div>
 );
-Trailing.story = { name: 'with trailing strong text' };
+Trailing.storyName = 'with trailing strong text';

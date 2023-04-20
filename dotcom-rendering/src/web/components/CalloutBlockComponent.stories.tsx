@@ -56,7 +56,7 @@ export const Collapsible = () => {
 	);
 };
 
-Collapsible.story = { name: 'Collapsible' };
+Collapsible.storyName = 'Collapsible';
 
 export const NonCollapsible = () => {
 	goodRequest();
@@ -73,7 +73,7 @@ export const NonCollapsible = () => {
 	);
 };
 
-NonCollapsible.story = { name: 'NonCollapsible' };
+NonCollapsible.storyName = 'NonCollapsible';
 
 export const SubmissionFailure = () => {
 	badRequest();
@@ -90,7 +90,7 @@ export const SubmissionFailure = () => {
 	);
 };
 
-SubmissionFailure.story = { name: 'Submission Failure' };
+SubmissionFailure.storyName = 'Submission Failure';
 
 export const Expired = () => {
 	return (
@@ -106,7 +106,7 @@ export const Expired = () => {
 	);
 };
 
-Expired.story = { name: 'Expired' };
+Expired.storyName = 'Expired';
 
 export const MinimalCallout = () => {
 	return (
@@ -134,4 +134,4 @@ export const MinimalCallout = () => {
 	);
 };
 
-Expired.story = { name: 'Expired' };
+Expired.storyName = 'Expired';

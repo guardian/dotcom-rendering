@@ -41,4 +41,4 @@ export const Basic = () => {
 	);
 };
 
-Basic.story = { name: 'A discussion with short comments' };
+Basic.storyName = 'A discussion with short comments';

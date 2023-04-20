@@ -72,9 +72,7 @@ export const StandardArticle = () => {
 		</Wrapper>
 	);
 };
-StandardArticle.story = {
-	name: 'with role inline',
-};
+StandardArticle.storyName = 'with role inline';
 
 export const Immersive = () => {
 	return (
@@ -100,9 +98,7 @@ export const Immersive = () => {
 		</Wrapper>
 	);
 };
-Immersive.story = {
-	name: 'with role immersive',
-};
+Immersive.storyName = 'with role immersive';
 
 export const Showcase = () => {
 	return (
@@ -128,9 +124,7 @@ export const Showcase = () => {
 		</Wrapper>
 	);
 };
-Showcase.story = {
-	name: 'with role showcase',
-};
+Showcase.storyName = 'with role showcase';
 
 export const Thumbnail = () => {
 	return (
@@ -156,9 +150,7 @@ export const Thumbnail = () => {
 		</Wrapper>
 	);
 };
-Thumbnail.story = {
-	name: 'with role thumbnail',
-};
+Thumbnail.storyName = 'with role thumbnail';
 
 export const Supporting = () => {
 	return (
@@ -184,9 +176,7 @@ export const Supporting = () => {
 		</Wrapper>
 	);
 };
-Supporting.story = {
-	name: 'with role supporting',
-};
+Supporting.storyName = 'with role supporting';
 
 export const HideCaption = () => {
 	return (
@@ -213,9 +203,7 @@ export const HideCaption = () => {
 		</Wrapper>
 	);
 };
-HideCaption.story = {
-	name: 'with hideCaption true',
-};
+HideCaption.storyName = 'with hideCaption true';
 
 export const InlineTitle = () => {
 	return (
@@ -311,9 +299,7 @@ export const ImmersiveTitle = () => {
 		</Wrapper>
 	);
 };
-ImmersiveTitle.story = {
-	name: 'with title and role immersive',
-};
+ImmersiveTitle.storyName = 'with title and role immersive';
 
 export const ShowcaseTitle = () => {
 	return (

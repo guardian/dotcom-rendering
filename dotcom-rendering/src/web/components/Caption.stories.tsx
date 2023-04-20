@@ -39,7 +39,7 @@ export const Article = () => (
 		/>
 	</Section>
 );
-Article.story = { name: 'Article' };
+Article.storyName = 'Article';
 
 export const Analysis = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -53,7 +53,7 @@ export const Analysis = () => (
 		/>
 	</Section>
 );
-Analysis.story = { name: 'Analysis' };
+Analysis.storyName = 'Analysis';
 
 export const PhotoEssay = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -67,7 +67,7 @@ export const PhotoEssay = () => (
 		/>
 	</Section>
 );
-PhotoEssay.story = { name: 'PhotoEssay' };
+PhotoEssay.storyName = 'PhotoEssay';
 
 export const SpecialReport = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -81,7 +81,7 @@ export const SpecialReport = () => (
 		/>
 	</Section>
 );
-SpecialReport.story = { name: 'SpecialReport' };
+SpecialReport.storyName = 'SpecialReport';
 
 export const PhotoEssayLimitedWidth = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -96,7 +96,7 @@ export const PhotoEssayLimitedWidth = () => (
 		/>
 	</Section>
 );
-PhotoEssayLimitedWidth.story = { name: 'PhotoEssay with width limited' };
+PhotoEssayLimitedWidth.storyName = 'PhotoEssay with width limited';
 
 export const Credit = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -112,7 +112,7 @@ export const Credit = () => (
 		/>
 	</Section>
 );
-Credit.story = { name: 'with credit' };
+Credit.storyName = 'with credit';
 
 export const WidthLimited = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -127,7 +127,7 @@ export const WidthLimited = () => (
 		/>
 	</Section>
 );
-WidthLimited.story = { name: 'with width limited' };
+WidthLimited.storyName = 'with width limited';
 
 export const Padded = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -142,7 +142,7 @@ export const Padded = () => (
 		/>
 	</Section>
 );
-Padded.story = { name: 'when padded' };
+Padded.storyName = 'when padded';
 
 export const Overlaid = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -176,7 +176,7 @@ export const Overlaid = () => (
 		</div>
 	</Section>
 );
-Overlaid.story = { name: 'when overlaid' };
+Overlaid.storyName = 'when overlaid';
 
 export const OverlaidWithStars = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -219,7 +219,7 @@ export const OverlaidWithStars = () => (
 		</div>
 	</Section>
 );
-OverlaidWithStars.story = { name: 'when overlaid on stars' };
+OverlaidWithStars.storyName = 'when overlaid on stars';
 
 export const VideoCaption = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>

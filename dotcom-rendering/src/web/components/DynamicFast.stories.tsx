@@ -45,9 +45,7 @@ export const OneHugeTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-OneHugeTwoBigsSixStandards.story = {
-	name: 'With 1 huge card, 2 bigs, 6 standards',
-};
+OneHugeTwoBigsSixStandards.storyName = 'With 1 huge card, 2 bigs, 6 standards';
 
 export const OneVeryBigTwoBigsSixStandards = () => (
 	<FrontSection
@@ -66,9 +64,8 @@ export const OneVeryBigTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-OneVeryBigTwoBigsSixStandards.story = {
-	name: 'with 1 very big card, 2 bigs, 6 standards',
-};
+OneVeryBigTwoBigsSixStandards.storyName =
+	'with 1 very big card, 2 bigs, 6 standards';
 
 export const TwoVeryBigsTwoBigsSixStandards = () => (
 	<FrontSection
@@ -87,9 +84,8 @@ export const TwoVeryBigsTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-TwoVeryBigsTwoBigsSixStandards.story = {
-	name: 'with 2 very big cards, 2 bigs, 6 standards',
-};
+TwoVeryBigsTwoBigsSixStandards.storyName =
+	'with 2 very big cards, 2 bigs, 6 standards';
 
 export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 	<FrontSection
@@ -108,9 +104,8 @@ export const TwoVeryBigs1stBoostedTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-TwoVeryBigs1stBoostedTwoBigsSixStandards.story = {
-	name: 'with 2 very big cards (1st boosted), 2 bigs, 6 standards',
-};
+TwoVeryBigs1stBoostedTwoBigsSixStandards.storyName =
+	'with 2 very big cards (1st boosted), 2 bigs, 6 standards';
 
 export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 	<FrontSection
@@ -129,9 +124,8 @@ export const TwoVeryBigs2ndBoostedTwoBigsSixStandards = () => (
 		/>
 	</FrontSection>
 );
-TwoVeryBigs2ndBoostedTwoBigsSixStandards.story = {
-	name: 'with 2 very big cards (2nd boosted), 2 bigs, 6 standards',
-};
+TwoVeryBigs2ndBoostedTwoBigsSixStandards.storyName =
+	'with 2 very big cards (2nd boosted), 2 bigs, 6 standards';
 
 /* Second Slice variants */
 
@@ -152,9 +146,7 @@ export const TwoVeryBigsTwelveStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsTwelveStandards.story = {
-	name: 'with 2 very big cards, 12 standards',
-};
+TwoVeryBigsTwelveStandards.storyName = 'with 2 very big cards, 12 standards';
 
 export const TwoVeryBigsOneBigEightStandards = () => (
 	<FrontSection
@@ -174,9 +166,8 @@ export const TwoVeryBigsOneBigEightStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsOneBigEightStandards.story = {
-	name: 'with 2 very big cards, 1 big, 8 standards',
-};
+TwoVeryBigsOneBigEightStandards.storyName =
+	'with 2 very big cards, 1 big, 8 standards';
 
 export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 	<FrontSection
@@ -196,9 +187,8 @@ export const TwoVeryBigsOneBigBoostedSixStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsOneBigBoostedSixStandards.story = {
-	name: 'with 2 very big cards, 1 big (boosted), 6 standards',
-};
+TwoVeryBigsOneBigBoostedSixStandards.storyName =
+	'with 2 very big cards, 1 big (boosted), 6 standards';
 
 export const TwoVeryBigsTwoBigsFiveStandards = () => (
 	<FrontSection
@@ -218,9 +208,8 @@ export const TwoVeryBigsTwoBigsFiveStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsTwoBigsFiveStandards.story = {
-	name: 'with 2 very big cards, 2 bigs, 5 standards',
-};
+TwoVeryBigsTwoBigsFiveStandards.storyName =
+	'with 2 very big cards, 2 bigs, 5 standards';
 
 export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 	<FrontSection
@@ -240,9 +229,8 @@ export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsTwoBigsFirstBoostedEightStandards.story = {
-	name: 'with 2 very big cards, 2 bigs (first boosted), 8 standards',
-};
+TwoVeryBigsTwoBigsFirstBoostedEightStandards.storyName =
+	'with 2 very big cards, 2 bigs (first boosted), 8 standards';
 
 export const TwoVeryBigsThreeBigsThreeStandards = () => (
 	<FrontSection
@@ -262,9 +250,8 @@ export const TwoVeryBigsThreeBigsThreeStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsThreeBigsThreeStandards.story = {
-	name: 'with 2 very big cards, 3 bigs, 3 standards',
-};
+TwoVeryBigsThreeBigsThreeStandards.storyName =
+	'with 2 very big cards, 3 bigs, 3 standards';
 
 export const TwoVeryBigsFourBigs = () => (
 	<FrontSection
@@ -283,9 +270,7 @@ export const TwoVeryBigsFourBigs = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsFourBigs.story = {
-	name: 'with 2 very big cards, 4 bigs',
-};
+TwoVeryBigsFourBigs.storyName = 'with 2 very big cards, 4 bigs';
 
 /* Edge cases */
 
@@ -309,9 +294,7 @@ export const OneHugeOneVeryBig7Standards = () => (
 	</FrontSection>
 );
 
-OneHugeOneVeryBig7Standards.story = {
-	name: 'with 1 huge, 1 very big, 7 standards',
-};
+OneHugeOneVeryBig7Standards.storyName = 'with 1 huge, 1 very big, 7 standards';
 
 // Second test: 3 very bigs (& the last big is not shown)
 export const ThreeVeryBigsFourBigs = () => (
@@ -331,9 +314,7 @@ export const ThreeVeryBigsFourBigs = () => (
 	</FrontSection>
 );
 
-OneHugeOneVeryBig7Standards.story = {
-	name: 'with 1 huge, 1 very big, 7 standards',
-};
+OneHugeOneVeryBig7Standards.storyName = 'with 1 huge, 1 very big, 7 standards';
 
 // No first slice is provided
 export const TwoBigsFourStandards = () => (
@@ -353,9 +334,7 @@ export const TwoBigsFourStandards = () => (
 	</FrontSection>
 );
 
-TwoBigsFourStandards.story = {
-	name: 'with 2 bigs, 4 standards',
-};
+TwoBigsFourStandards.storyName = 'with 2 bigs, 4 standards';
 
 // No standards are provided
 // First test: there are some (2) bigs
@@ -376,9 +355,7 @@ export const OneVeryBigTwoBigs = () => (
 	</FrontSection>
 );
 
-OneVeryBigTwoBigs.story = {
-	name: 'with 1 very big, 2 bigs',
-};
+OneVeryBigTwoBigs.storyName = 'with 1 very big, 2 bigs';
 
 // Second test: There are no bigs (first slice only)
 export const OneVeryBig = () => (
@@ -397,9 +374,7 @@ export const OneVeryBig = () => (
 	</FrontSection>
 );
 
-OneVeryBig.story = {
-	name: 'with 1 very big',
-};
+OneVeryBig.storyName = 'with 1 very big';
 
 // Bigs are demoted in twoOrMoreBigsFirstBoosted layout
 export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
@@ -420,6 +395,5 @@ export const TwoVeryBigsFourBigsFirstBoostedThreeStandards = () => (
 	</FrontSection>
 );
 
-TwoVeryBigsFourBigsFirstBoostedThreeStandards.story = {
-	name: 'with 2 very big cards, 4 bigs (first boosted), 3 standards',
-};
+TwoVeryBigsFourBigsFirstBoostedThreeStandards.storyName =
+	'with 2 very big cards, 4 bigs (first boosted), 3 standards';

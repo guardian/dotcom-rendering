@@ -222,7 +222,7 @@ export const Headlines = () => (
 	</>
 );
 
-Headlines.story = 'Headlines carousel';
+Headlines.storyName = 'Headlines carousel';
 
 export const SingleItemCarousel = () => (
 	<>
@@ -241,7 +241,7 @@ export const SingleItemCarousel = () => (
 	</>
 );
 
-Headlines.story = 'Carousel with single item';
+SingleItemCarousel.storyName = 'Carousel with single item';
 
 export const Immersive = () => (
 	<>
@@ -272,7 +272,7 @@ export const Immersive = () => (
 	</>
 );
 
-Immersive.story = 'Immersive carousel';
+Immersive.storyName = 'Immersive carousel';
 
 export const SpecialReportAlt = () => {
 	const specialReportTrails = [...trails];
@@ -304,4 +304,4 @@ export const SpecialReportAlt = () => {
 	);
 };
 
-SpecialReportAlt.story = 'SpecialReportAlt';
+SpecialReportAlt.storyName = 'SpecialReportAlt';

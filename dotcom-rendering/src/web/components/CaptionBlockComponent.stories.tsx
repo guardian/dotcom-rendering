@@ -61,9 +61,7 @@ export const StandardArticle = () => {
 		</Wrapper>
 	);
 };
-StandardArticle.story = {
-	name: 'with defaults',
-};
+StandardArticle.storyName = 'with defaults';
 
 export const PhotoEssay = () => {
 	return (
@@ -84,9 +82,7 @@ export const PhotoEssay = () => {
 		</Wrapper>
 	);
 };
-PhotoEssay.story = {
-	name: 'PhotoEssay',
-};
+PhotoEssay.storyName = 'PhotoEssay';
 
 export const PhotoEssayHTML = () => {
 	return (
@@ -107,9 +103,7 @@ export const PhotoEssayHTML = () => {
 		</Wrapper>
 	);
 };
-PhotoEssayHTML.story = {
-	name: 'PhotoEssay using html',
-};
+PhotoEssayHTML.storyName = 'PhotoEssay using html';
 
 export const Padded = () => {
 	return (
@@ -130,9 +124,7 @@ export const Padded = () => {
 		</Wrapper>
 	);
 };
-Padded.story = {
-	name: 'when padded',
-};
+Padded.storyName = 'when padded';
 
 export const WidthLimited = () => {
 	return (
@@ -153,9 +145,7 @@ export const WidthLimited = () => {
 		</Wrapper>
 	);
 };
-WidthLimited.story = {
-	name: 'with width limited',
-};
+WidthLimited.storyName = 'with width limited';
 
 export const Credited = () => {
 	return (
@@ -176,9 +166,7 @@ export const Credited = () => {
 		</Wrapper>
 	);
 };
-Credited.story = {
-	name: 'with credit',
-};
+Credited.storyName = 'with credit';
 
 export const Overlaid = () => {
 	return (
@@ -199,6 +187,4 @@ export const Overlaid = () => {
 		</Wrapper>
 	);
 };
-Overlaid.story = {
-	name: 'when overlaid',
-};
+Overlaid.storyName = 'when overlaid';

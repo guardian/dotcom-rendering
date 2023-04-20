@@ -56,7 +56,7 @@ export const Default = () => {
 		/>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';
 
 export const ZeroZero = () => {
 	return (
@@ -67,12 +67,12 @@ export const ZeroZero = () => {
 		/>
 	);
 };
-ZeroZero.story = { name: 'zero - zero' };
+ZeroZero.storyName = 'zero - zero';
 
 export const NoComments = () => {
 	return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} />;
 };
-NoComments.story = { name: 'with no comments' };
+NoComments.storyName = 'with no comments';
 
 export const InContext = () => {
 	return (
@@ -101,4 +101,4 @@ export const InContext = () => {
 		</Section>
 	);
 };
-InContext.story = { name: 'when placed in article context' };
+InContext.storyName = 'when placed in article context';
