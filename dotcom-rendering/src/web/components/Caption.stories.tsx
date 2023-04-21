@@ -234,8 +234,8 @@ export const VideoCaption = () => (
 		/>
 	</Section>
 );
+VideoCaption.storyName = 'for videos';
 VideoCaption.story = {
-	name: 'for videos',
 	parameters: {
 		chromatic: {
 			viewports: [

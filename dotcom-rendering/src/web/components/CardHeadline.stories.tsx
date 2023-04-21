@@ -187,8 +187,8 @@ export const MobileSize = () => (
 		))}
 	</>
 );
+MobileSize.storyName = 'MobileSize';
 MobileSize.story = {
-	name: 'MobileSize',
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile],
