@@ -41,8 +41,8 @@ export const Default = () => {
 		</Wrapper>
 	);
 };
+Default.storyName = 'with 3 updates';
 Default.story = {
-	name: 'with 3 updates',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 	},
@@ -63,8 +63,8 @@ export const Sport = () => {
 		</Wrapper>
 	);
 };
+Sport.storyName = 'with sport theme';
 Sport.story = {
-	name: 'with sport theme',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 	},
@@ -85,8 +85,8 @@ export const Special = () => {
 		</Wrapper>
 	);
 };
+Special.storyName = 'with special report theme';
 Special.story = {
-	name: 'with special report theme',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 	},
@@ -107,8 +107,8 @@ export const One = () => {
 		</Wrapper>
 	);
 };
+One.storyName = 'with only one update';
 One.story = {
-	name: 'with only one update',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 	},
@@ -129,8 +129,8 @@ export const Lots = () => {
 		</Wrapper>
 	);
 };
+Lots.storyName = 'with many updates';
 Lots.story = {
-	name: 'with many updates',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 	},
@@ -151,8 +151,8 @@ export const Mobile = () => {
 		</Wrapper>
 	);
 };
+Mobile.storyName = 'with mobile viewport';
 Mobile.story = {
-	name: 'with mobile viewport',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: {

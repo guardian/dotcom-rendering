@@ -155,8 +155,8 @@ export const MultipleStory = () => {
 		</>
 	);
 };
+MultipleStory.storyName = 'with multiple FrontGrids';
 MultipleStory.story = {
-	name: 'with multiple FrontGrids',
 	parameters: {
 		chromatic: {
 			viewports: [

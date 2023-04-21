@@ -123,8 +123,8 @@ export const LiveBlog = () => {
 		</Section>
 	);
 };
+LiveBlog.storyName = 'LiveBlog';
 LiveBlog.story = {
-	name: 'LiveBlog',
 	parameters: {
 		backgrounds: {
 			default: 'red',
