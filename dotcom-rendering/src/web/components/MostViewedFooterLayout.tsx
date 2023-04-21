@@ -29,7 +29,7 @@ const fixedWidths = (
 	${from.wide} {
 		min-width: 718px;
 	}
-	${renderAds && `${from.leftCol}{width: 75%;}`}
+	${!renderAds && `${from.leftCol}{width: 75%;}`}
 	${isFront && `${between.leftCol.and.wide}{margin-top: -34px;}`}
 `;
 
