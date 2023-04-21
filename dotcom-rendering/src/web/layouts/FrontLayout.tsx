@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { ArticleDisplay } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -23,14 +23,15 @@ import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { canRenderAds } from '../lib/canRenderAds';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
+	format: ArticleFormat;
 }
 
 const spaces = / /g;
@@ -152,7 +153,7 @@ const decideAdSlot = (
 	return null;
 };
 
-export const FrontLayout = ({ front, NAV }: Props) => {
+export const FrontLayout = ({ front, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent },
 	} = front;
@@ -160,15 +161,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const isInEuropeTest =
 		front.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	};
-
 	const palette = decidePalette(format);
-
-	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	/**
 	 * This property currently only applies to the header and merchandising slots

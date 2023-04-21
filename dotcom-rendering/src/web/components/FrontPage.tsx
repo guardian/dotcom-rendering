@@ -18,6 +18,7 @@ import { SkipTo } from './SkipTo';
 type Props = {
 	front: DCRFrontType;
 	NAV: NavType;
+	format: ArticleFormat;
 };
 
 /**
@@ -27,8 +28,9 @@ type Props = {
  * @param {Props} props
  * @param {DCRFrontType} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
+ * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const FrontPage = ({ front, NAV }: Props) => {
+export const FrontPage = ({ front, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -75,7 +77,7 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					isDev={!!front.config.isDev}
 				/>
 			</Island>
-			<FrontLayout front={front} NAV={NAV} />
+			<FrontLayout front={front} NAV={NAV} format={format} />
 		</StrictMode>
 	);
 };
