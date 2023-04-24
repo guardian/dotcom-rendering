@@ -104,6 +104,7 @@ export const FilterLink = ({
 			iconSide="right"
 			aria-label={`Deactivate ${value} filter`}
 			data-link-name={`${dataLinkName} | filter off`}
+			data-ignore="global-link-styling"
 		>
 			<Label value={value} count={count} />
 		</LinkButton>
@@ -113,6 +114,7 @@ export const FilterLink = ({
 			href={href}
 			aria-label={`Activate ${value} filter`}
 			data-link-name={`${dataLinkName} | filter on`}
+			data-ignore="global-link-styling"
 		>
 			<Label value={value} count={count} />
 		</LinkButton>
