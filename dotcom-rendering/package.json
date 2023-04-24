@@ -257,7 +257,7 @@
 		"ts-loader": "^9.3.0",
 		"ts-unused-exports": "^8.0.0",
 		"tslib": "^2.4.0",
-		"typescript-json-schema": "^0.54.0",
+		"typescript-json-schema": "^0.56.0",
 		"unified": "^10.1.2",
 		"uuid": "^8.3.2",
 		"web-vitals": "^3.1.1",
