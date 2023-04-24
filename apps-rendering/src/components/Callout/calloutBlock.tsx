@@ -27,26 +27,29 @@ export const getCalloutId = (str: string): string =>
 
 export interface CalloutBlockProps {
 	formId: number;
+	prompt: string;
 	heading: string;
+	description?: DocumentFragment;
 	formFields: FormField[];
 	format: ArticleFormat;
-	description?: DocumentFragment;
 	contacts?: Contact[];
 	isNonCollapsible: boolean;
 }
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
 	formId,
+	prompt,
 	heading,
+	description,
 	formFields,
 	format,
-	description,
 	contacts,
 	isNonCollapsible,
 }): ReactElement => {
-	const id = getCalloutId(heading);
+	const id = getCalloutId(heading === "" ? formId.toString() : heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
+	const shouldShowHeading = !!heading && !isNonCollapsible;
 	const tabsContent = [
 		{
 			id: 'form',
@@ -77,11 +80,11 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	return (
 		<div css={calloutContainer} id={id}>
 			<div css={[calloutInfo, calloutLinkContainer]}>
-				<div css={calloutTitle}>Share your experience</div>
-				{!isNonCollapsible && (
+				{!!prompt && <div css={calloutTitle}>{prompt}</div>}
+				{!!shouldShowHeading && (
 					<h4 css={calloutHeadingText}>{heading}</h4>
 				)}
-				{description && (
+				{!!description && (
 					<div css={calloutDescription}>
 						{renderCalloutDescriptionText(format, description)}
 					</div>

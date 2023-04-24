@@ -13,9 +13,11 @@ import {
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
+type InlinePosition = 'inline' | 'liveblog-inline' | 'mobile-front';
+
 type InlineProps = {
 	display?: ArticleDisplay;
-	position: 'inline' | 'liveblog-inline' | 'mobile-front';
+	position: InlinePosition;
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -23,7 +25,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Exclude<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
+	position: Exclude<SlotName, InlinePosition>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -486,42 +488,33 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = `inline${index}`;
 			return (
-				<div
-					id={`dfp-ad--${advertId}--mobile`}
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						`ad-slot--${advertId}`,
-						'ad-slot--container-inline',
-						'ad-slot--mobile',
-						'mobile-only',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[
-						css`
-							position: relative;
-							min-height: 274px;
-							min-width: 300px;
-							width: 300px;
-							margin: 12px auto;
-						`,
-						adStyles,
-					]}
-					data-link-name={`ad slot ${advertId}`}
-					data-name={advertId}
-					aria-hidden="true"
-				/>
-			);
-		}
-		case 'exclusion': {
-			return (
-				<div
-					id={'dfp-ad--exclusion'}
-					className={['js-ad-slot', 'ad-slot'].join(' ')}
-					data-name="exclusion"
-					aria-hidden="true"
-					data-label="false"
-				/>
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id={`dfp-ad--${advertId}--mobile`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--container-inline',
+							'ad-slot--mobile',
+							'mobile-only',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+								min-height: 274px;
+								min-width: 300px;
+								width: 300px;
+								margin: 12px auto;
+							`,
+							adStyles,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		default:

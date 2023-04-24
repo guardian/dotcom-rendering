@@ -81,20 +81,20 @@ export const IrregularFrequency = ({
 	/>
 );
 
+Default.storyName = 'default';
 Default.story = {
-	name: 'default',
 	args: {
 		hidePrivacyMessage: false,
 	},
 };
+NewsTheme.storyName = 'news theme';
 NewsTheme.story = {
-	name: 'news theme',
 	args: {
 		hidePrivacyMessage: false,
 	},
 };
+IrregularFrequency.storyName = 'irregular frequency';
 IrregularFrequency.story = {
-	name: 'irregular frequency',
 	args: {
 		hidePrivacyMessage: false,
 	},

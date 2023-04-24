@@ -38,7 +38,7 @@ export const SearchJobs = () => {
 	return (
 		<div css={linkTablet}>
 			<a
-				href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
+				href="https://jobs.theguardian.com"
 				css={searchLinkStyles}
 				data-link-name="nav3 : job-cta"
 			>

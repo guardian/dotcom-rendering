@@ -31,7 +31,7 @@ export const Medium = () => {
 		/>
 	);
 };
-Medium.story = { name: 'Medium' };
+Medium.storyName = 'Medium';
 
 export const Small = () => {
 	return (
@@ -52,4 +52,4 @@ export const Small = () => {
 		/>
 	);
 };
-Small.story = { name: 'Small' };
+Small.storyName = 'Small';

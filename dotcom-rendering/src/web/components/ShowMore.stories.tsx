@@ -44,7 +44,7 @@ export const ShowMoreSuccess = () => {
 };
 
 ShowMoreSuccess.play = play;
-ShowMoreSuccess.story = { name: 'ShowMore button, success' };
+ShowMoreSuccess.storyName = 'ShowMore button, success';
 
 export const ShowMoreError = () => {
 	fetchMock
@@ -58,4 +58,4 @@ export const ShowMoreError = () => {
 };
 
 ShowMoreError.play = play;
-ShowMoreError.story = { name: 'ShowMore button, error' };
+ShowMoreError.storyName = 'ShowMore button, error';

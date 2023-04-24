@@ -87,7 +87,7 @@ export const InlineStory = () => {
 		</Section>
 	);
 };
-InlineStory.story = { name: 'Inline' };
+InlineStory.storyName = 'Inline';
 
 export const SupportingStory = () => {
 	return (
@@ -129,7 +129,7 @@ export const SupportingStory = () => {
 		</Section>
 	);
 };
-SupportingStory.story = { name: 'Supporting' };
+SupportingStory.storyName = 'Supporting';
 
 export const ImmersiveStory = () => {
 	return (
@@ -166,7 +166,7 @@ export const ImmersiveStory = () => {
 		</Section>
 	);
 };
-ImmersiveStory.story = { name: 'Immersive' };
+ImmersiveStory.storyName = 'Immersive';
 
 export const ThumbnailStory = () => {
 	return (
@@ -204,7 +204,7 @@ export const ThumbnailStory = () => {
 		</Section>
 	);
 };
-ThumbnailStory.story = { name: 'Thumbnail' };
+ThumbnailStory.storyName = 'Thumbnail';
 
 export const ShowcaseStory = () => {
 	return (
@@ -241,7 +241,7 @@ export const ShowcaseStory = () => {
 		</Section>
 	);
 };
-ShowcaseStory.story = { name: 'Showcase' };
+ShowcaseStory.storyName = 'Showcase';
 
 export const HalfWidthStory = () => {
 	return (
@@ -278,4 +278,4 @@ export const HalfWidthStory = () => {
 		</Section>
 	);
 };
-HalfWidthStory.story = { name: 'HalfWidth' };
+HalfWidthStory.storyName = 'HalfWidth';

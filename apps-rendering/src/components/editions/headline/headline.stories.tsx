@@ -6,7 +6,6 @@ import {
 	ArticlePillar,
 } from '@guardian/libs';
 import { none, some } from '@guardian/types';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
 	analysis,
@@ -20,7 +19,6 @@ import {
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Headline from '.';
 
 // ----- Setup ------ //
@@ -51,28 +49,13 @@ const contributors: Contributor[] = [
 	},
 ];
 
-const hasContributor = (): { contributors: Contributor[] } => {
-	return {
-		contributors: boolean('Contributors', true) ? contributors : [],
-	};
-};
-
-const isImmersive = (): { display: ArticleDisplay } => {
-	return {
-		display: boolean('Immersive', false)
-			? ArticleDisplay.Immersive
-			: ArticleDisplay.Standard,
-	};
-};
-
 // ----- Stories ----- //
 
 const Default = (): ReactElement => (
 	<Headline
 		item={{
 			...article,
-			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -81,8 +64,7 @@ const Analysis = (): ReactElement => (
 	<Headline
 		item={{
 			...analysis,
-			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -91,8 +73,7 @@ const Feature = (): ReactElement => (
 	<Headline
 		item={{
 			...feature,
-			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -101,7 +82,7 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -110,9 +91,8 @@ const Showcase = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			...isImmersive(),
 			display: ArticleDisplay.Showcase,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -121,8 +101,7 @@ const Interview = (): ReactElement => (
 	<Headline
 		item={{
 			...interview,
-			...isImmersive(),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -131,9 +110,8 @@ const Comment = (): ReactElement => (
 	<Headline
 		item={{
 			...comment,
-			...isImmersive(),
-			...hasContributor(),
-			theme: selectPillar(ArticlePillar.News),
+			contributors,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -142,7 +120,7 @@ const Media = (): ReactElement => (
 	<Headline
 		item={{
 			...media,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -152,7 +130,6 @@ const Media = (): ReactElement => (
 export default {
 	component: Headline,
 	title: 'AR/Editions/Headline',
-	decorators: [withKnobs],
 };
 
 export {

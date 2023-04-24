@@ -19,17 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/03/waterloo-road-review-a-lesson-in-how-not-to-revive-a-tv-show',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/06/grease-rise-of-the-pink-ladies-review-tv-prequel-paramount',
 			linkText:
-				'Waterloo Road review – a lesson in how not to revive a TV show ',
+				'Grease: Rise of the Pink Ladies review – the TV prequel nobody asked for',
 			showByline: false,
-			byline: 'Jack Seale',
+			byline: 'Adrian Horton',
 			masterImage:
-				'https://media.guim.co.uk/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg',
-			image: 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=300&quality=85&auto=format&fit=max&s=9b056712f82a4d0484bd6f2402d84f52',
+				'https://media.guim.co.uk/49e959e957e7de981385d057ee4d0b630e32ef5d/0_23_3000_1800/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/49e959e957e7de981385d057ee4d0b630e32ef5d/0_23_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=39b5d5944b72194f58cda37654bc7b35',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=300&quality=85&auto=format&fit=max&s=9b056712f82a4d0484bd6f2402d84f52',
-				'460': 'https://i.guim.co.uk/img/media/c4a60c3c6c39c885f1e6a47b301b5ad37855124e/0_0_5061_3038/master/5061.jpg?width=460&quality=85&auto=format&fit=max&s=31974afca3399ec9150b2a5857fabdf2',
+				'300': 'https://i.guim.co.uk/img/media/49e959e957e7de981385d057ee4d0b630e32ef5d/0_23_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=39b5d5944b72194f58cda37654bc7b35',
+				'460': 'https://i.guim.co.uk/img/media/49e959e957e7de981385d057ee4d0b630e32ef5d/0_23_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=db1273c05cca8bbf6c6ab6e27e883abe',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -39,24 +39,93 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-01-03T21:00:58.000Z',
+			webPublicationDate: '2023-04-06T13:15:35.000Z',
 			headline:
-				'Waterloo Road review – a lesson in how not to revive a TV show ',
-			shortUrl: 'https://www.theguardian.com/p/n3dny',
-			starRating: 2,
+				'Grease: Rise of the Pink Ladies review – the TV prequel nobody asked for',
+			shortUrl: 'https://www.theguardian.com/p/ny94j',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/ny94j',
+			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/03/copenhagen-cowboy-review-nicolas-winding-refn-netflix-series',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/06/beef-review-ali-wong-dark-existential-thriller-netflix',
 			linkText:
-				'Copenhagen Cowboy review – Nicolas Winding Refn’s scattershot Netflix series',
+				'Beef review – Ali Wong’s dark, existential thriller is deliciously subversive',
+			showByline: false,
+			byline: 'Ellen E Jones',
+			masterImage:
+				'https://media.guim.co.uk/b910beb6d994907b83cf683ad13b98a81ab47455/0_0_3600_2160/master/3600.jpg',
+			image: 'https://i.guim.co.uk/img/media/b910beb6d994907b83cf683ad13b98a81ab47455/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=61a02ad84e701a87ec903906833e757d',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/b910beb6d994907b83cf683ad13b98a81ab47455/0_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=61a02ad84e701a87ec903906833e757d',
+				'460': 'https://i.guim.co.uk/img/media/b910beb6d994907b83cf683ad13b98a81ab47455/0_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=eb2b9ffdd04b6e132e9fd300a35a26a5',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-04-06T05:00:16.000Z',
+			headline:
+				'Beef review – Ali Wong’s dark, existential thriller is deliciously subversive',
+			shortUrl: 'https://www.theguardian.com/p/ny24f',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/ny24f',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/05/a-very-british-cult-review-lighthouse-bbc-documentary',
+			linkText:
+				'A Very British Cult review – an unrelenting investigation into the worst of humanity',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/c2781e4c32768bcf544cd5e56d4a9a6758096a70/0_0_2222_1334/master/2222.jpg',
+			image: 'https://i.guim.co.uk/img/media/c2781e4c32768bcf544cd5e56d4a9a6758096a70/0_0_2222_1334/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=0b7794564014557e312293a12bf46e26',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/c2781e4c32768bcf544cd5e56d4a9a6758096a70/0_0_2222_1334/master/2222.jpg?width=300&quality=85&auto=format&fit=max&s=0b7794564014557e312293a12bf46e26',
+				'460': 'https://i.guim.co.uk/img/media/c2781e4c32768bcf544cd5e56d4a9a6758096a70/0_0_2222_1334/master/2222.jpg?width=460&quality=85&auto=format&fit=max&s=9422a5b877b47b0a86e54c1f9f31033b',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-04-05T21:00:05.000Z',
+			headline:
+				'A Very British Cult review – an unrelenting investigation into the worst of humanity',
+			shortUrl: 'https://www.theguardian.com/p/nyxhv',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/nyxhv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/05/jury-duty-review-james-marsden',
+			linkText:
+				'Jury Duty review – fake trial prank comedy show courts few laughs',
 			showByline: false,
 			byline: 'Charles Bramesco',
 			masterImage:
-				'https://media.guim.co.uk/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg',
-			image: 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=300&quality=85&auto=format&fit=max&s=c865bcc9b91768b64b0aac3aecfe4dfa',
+				'https://media.guim.co.uk/4842c172feb3efdf9fc3536be739d95d702f3214/150_0_3656_2194/master/3656.jpg',
+			image: 'https://i.guim.co.uk/img/media/4842c172feb3efdf9fc3536be739d95d702f3214/150_0_3656_2194/master/3656.jpg?width=300&quality=85&auto=format&fit=max&s=8904ed4f191b0275a4486e99966e544b',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=300&quality=85&auto=format&fit=max&s=c865bcc9b91768b64b0aac3aecfe4dfa',
-				'460': 'https://i.guim.co.uk/img/media/a7741264f28f2e47cd8f7e00c6965cdea50570be/108_0_2341_1406/master/2341.jpg?width=460&quality=85&auto=format&fit=max&s=228717bdcaaaeec1dc59a46f4a0e9565',
+				'300': 'https://i.guim.co.uk/img/media/4842c172feb3efdf9fc3536be739d95d702f3214/150_0_3656_2194/master/3656.jpg?width=300&quality=85&auto=format&fit=max&s=8904ed4f191b0275a4486e99966e544b',
+				'460': 'https://i.guim.co.uk/img/media/4842c172feb3efdf9fc3536be739d95d702f3214/150_0_3656_2194/master/3656.jpg?width=460&quality=85&auto=format&fit=max&s=2e74618f299e79f7e5e76a9610efa1d4',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -66,24 +135,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-01-03T14:49:36.000Z',
+			webPublicationDate: '2023-04-05T20:01:31.000Z',
 			headline:
-				'Copenhagen Cowboy review – Nicolas Winding Refn’s scattershot Netflix series',
-			shortUrl: 'https://www.theguardian.com/p/n3dyq',
-			starRating: 3,
+				'Jury Duty review – fake trial prank comedy show courts few laughs',
+			shortUrl: 'https://www.theguardian.com/p/ny9xc',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/ny9xc',
+			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/02/stonehouse-review-matthew-macfadyen-keeley-hawes',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/04/rain-dogs-review-no-wonder-daisy-may-cooper-is-being-touted-as-the-next-m-in-bond',
 			linkText:
-				'Stonehouse review – Matthew Macfadyen is a brilliantly bad baddie in this fun, death-faking romp ',
+				'Rain Dogs review – no wonder Daisy May Cooper is being touted as the next M in Bond',
 			showByline: false,
-			byline: 'Rebecca Nicholson',
+			byline: 'Chitra Ramaswamy',
 			masterImage:
-				'https://media.guim.co.uk/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg',
-			image: 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=300&quality=85&auto=format&fit=max&s=cbe04db6afa581c0540c7d2807d99469',
+				'https://media.guim.co.uk/f76455c82c352ad456bca2abc213f8d3732c734e/0_155_4064_2440/master/4064.jpg',
+			image: 'https://i.guim.co.uk/img/media/f76455c82c352ad456bca2abc213f8d3732c734e/0_155_4064_2440/master/4064.jpg?width=300&quality=85&auto=format&fit=max&s=b234a19d2df3f3c57ec9a3324bca38bb',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=300&quality=85&auto=format&fit=max&s=cbe04db6afa581c0540c7d2807d99469',
-				'460': 'https://i.guim.co.uk/img/media/c5d2ccd27db503d1d800af5c15459210876e6f35/0_945_8000_4800/master/8000.jpg?width=460&quality=85&auto=format&fit=max&s=8cbd49456e0ef86c6ab250b15060dde0',
+				'300': 'https://i.guim.co.uk/img/media/f76455c82c352ad456bca2abc213f8d3732c734e/0_155_4064_2440/master/4064.jpg?width=300&quality=85&auto=format&fit=max&s=b234a19d2df3f3c57ec9a3324bca38bb',
+				'460': 'https://i.guim.co.uk/img/media/f76455c82c352ad456bca2abc213f8d3732c734e/0_155_4064_2440/master/4064.jpg?width=460&quality=85&auto=format&fit=max&s=be4084a6d7eb118214f32aa0547f194e',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -93,186 +167,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-01-02T22:05:26.000Z',
+			webPublicationDate: '2023-04-04T22:10:16.000Z',
 			headline:
-				'Stonehouse review – Matthew Macfadyen is a brilliantly bad baddie in this fun, death-faking romp ',
-			shortUrl: 'https://www.theguardian.com/p/n37z5',
+				'Rain Dogs review – no wonder Daisy May Cooper is being touted as the next M in Bond',
+			shortUrl: 'https://www.theguardian.com/p/njz43',
 			starRating: 4,
+			discussion: {
+				isCommentable: true,
+				isClosedForComments: false,
+				discussionId: '/p/njz43',
+			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/01/happy-valley-review-sally-wainwright-masterwork-is-back',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/04/naked-education-review-the-look-at-pubic-hair-is-wonderfully-revelatory',
 			linkText:
-				'Happy Valley review – Sally Wainwright’s masterwork is back!',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg',
-			image: 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=300&quality=85&auto=format&fit=max&s=3ed13e4c4f1d6aaae92a1b6f93f129ab',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=300&quality=85&auto=format&fit=max&s=3ed13e4c4f1d6aaae92a1b6f93f129ab',
-				'460': 'https://i.guim.co.uk/img/media/9496dce06281938f0a5516a5101540e18a9a2991/0_322_6113_3668/master/6113.jpg?width=460&quality=85&auto=format&fit=max&s=4d884dacd679f0ac2007418a8aa4021d',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-01-01T22:00:06.000Z',
-			headline:
-				'Happy Valley review – Sally Wainwright’s masterwork is back!',
-			shortUrl: 'https://www.theguardian.com/p/mqq53',
-			starRating: 5,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jan/01/romantic-getaway-review-katherine-ryan-and-romesh-ranganathan-are-brilliant-in-ivf-heist-caper',
-			linkText:
-				'Romantic Getaway review – Katherine Ryan and Romesh Ranganathan are brilliant in IVF heist caper',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg',
-			image: 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=300&quality=85&auto=format&fit=max&s=82eef250d1871688859ed9dc93d8e557',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=300&quality=85&auto=format&fit=max&s=82eef250d1871688859ed9dc93d8e557',
-				'460': 'https://i.guim.co.uk/img/media/06bb82468a5918cf6fc4eff854c8217c97c98419/0_0_6235_3740/master/6235.jpg?width=460&quality=85&auto=format&fit=max&s=5f6b8986a51a3ecb3fe4c3c6b4071163',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-01-01T21:30:05.000Z',
-			headline:
-				'Romantic Getaway review – Katherine Ryan and Romesh Ranganathan are brilliant in IVF heist caper',
-			shortUrl: 'https://www.theguardian.com/p/mqcxz',
-			starRating: 3,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/29/prince-andrew-the-musical-review-epstein-channel-4',
-			linkText:
-				'Prince Andrew: The Musical review – plays the Epstein scandal for laughs in a way that is … not OK',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg',
-			image: 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=9c809f6e7abaff2d3901742d6a34b6b4',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=9c809f6e7abaff2d3901742d6a34b6b4',
-				'460': 'https://i.guim.co.uk/img/media/2a26ee955b125ed5ab3c150c6631361be02b1d6f/0_192_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=935507690b38e78cf379851d23bba872',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-12-29T22:05:31.000Z',
-			headline:
-				'Prince Andrew: The Musical review – plays the Epstein scandal for laughs in a way that is … not OK',
-			shortUrl: 'https://www.theguardian.com/p/mqk9t',
-			starRating: 3,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/29/marie-antoinette-review-bbc',
-			linkText:
-				'Marie Antoinette review – if you loved The Favourite, you’ll adore this fun period drama',
-			showByline: false,
-			byline: 'Emine Saner',
-			masterImage:
-				'https://media.guim.co.uk/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg',
-			image: 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=300&quality=85&auto=format&fit=max&s=cec6d39fd0d61ab1408ed1d835713a7e',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=300&quality=85&auto=format&fit=max&s=cec6d39fd0d61ab1408ed1d835713a7e',
-				'460': 'https://i.guim.co.uk/img/media/d34157501e16e1c9ad20862e4566db57588d3235/0_181_3780_2269/master/3780.jpg?width=460&quality=85&auto=format&fit=max&s=5e7eb136d5be2348b1af06877c5eee6b',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-12-29T21:55:30.000Z',
-			headline:
-				'Marie Antoinette review – if you loved The Favourite, you’ll adore this fun period drama',
-			shortUrl: 'https://www.theguardian.com/p/mqetp',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/28/mayflies-review-bleak-drama-death-betrayal-best-friends-80s-indie-soundtrack',
-			linkText:
-				'Mayflies review – Martin Compston reveals hidden depths in this drama of death and betrayal',
-			showByline: false,
-			byline: 'Stuart Jeffries',
-			masterImage:
-				'https://media.guim.co.uk/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg',
-			image: 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=300&quality=85&auto=format&fit=max&s=fe76d798b9ea4692836737e9176c7379',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=300&quality=85&auto=format&fit=max&s=fe76d798b9ea4692836737e9176c7379',
-				'460': 'https://i.guim.co.uk/img/media/e3f27863303123cb36c83652c4d92f83057f6bae/0_4_2480_1488/master/2480.jpg?width=460&quality=85&auto=format&fit=max&s=361deba1effbf13b28ee8a0477037875',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-12-28T22:00:02.000Z',
-			headline:
-				'Mayflies review – Martin Compston reveals hidden depths in this drama of death and betrayal',
-			shortUrl: 'https://www.theguardian.com/p/mqadf',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/28/without-sin-review-vicky-mcclure-itvx-drama',
-			linkText:
-				'Without Sin review – Vicky McClure is fantastic in this heavyweight thriller',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg',
-			image: 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=300&quality=85&auto=format&fit=max&s=b85d286a1f4818616354f54da57e2c95',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=300&quality=85&auto=format&fit=max&s=b85d286a1f4818616354f54da57e2c95',
-				'460': 'https://i.guim.co.uk/img/media/223cf08a14730340b23e984017b313863b0105aa/0_117_4060_2436/master/4060.jpg?width=460&quality=85&auto=format&fit=max&s=e19557aaf399658f7bc5372e60b68edd',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-12-28T09:00:46.000Z',
-			headline:
-				'Without Sin review – Vicky McClure is fantastic in this heavyweight thriller',
-			shortUrl: 'https://www.theguardian.com/p/mqe9f',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/dec/26/detectorists-christmas-special-review-the-best-thing-you-will-watch-all-festive-period',
-			linkText:
-				'Detectorists Christmas Special review – the best thing you will watch all festive period',
+				'Naked Education review – the look at pubic hair is wonderfully revelatory',
 			showByline: false,
 			byline: 'Jack Seale',
 			masterImage:
-				'https://media.guim.co.uk/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg',
-			image: 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=5bdcffc4fe736a6688063ce75eea6700',
+				'https://media.guim.co.uk/900c65dc307914a7edc97c6ebaaa6221a75292a7/0_238_3508_2105/master/3508.jpg',
+			image: 'https://i.guim.co.uk/img/media/900c65dc307914a7edc97c6ebaaa6221a75292a7/0_238_3508_2105/master/3508.jpg?width=300&quality=85&auto=format&fit=max&s=e23f4f2aa648d70d654257497bab0089',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=5bdcffc4fe736a6688063ce75eea6700',
-				'460': 'https://i.guim.co.uk/img/media/b623db400749090ffe3fcedb1ec43cd7e1bfa237/0_226_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=24bd8fd3a5edcf40178200896b3af40e',
+				'300': 'https://i.guim.co.uk/img/media/900c65dc307914a7edc97c6ebaaa6221a75292a7/0_238_3508_2105/master/3508.jpg?width=300&quality=85&auto=format&fit=max&s=e23f4f2aa648d70d654257497bab0089',
+				'460': 'https://i.guim.co.uk/img/media/900c65dc307914a7edc97c6ebaaa6221a75292a7/0_238_3508_2105/master/3508.jpg?width=460&quality=85&auto=format&fit=max&s=f9b907dfb013d206aefa4b544f50ec0e',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -282,11 +199,144 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2022-12-26T22:15:05.000Z',
+			webPublicationDate: '2023-04-04T20:00:14.000Z',
 			headline:
-				'Detectorists Christmas Special review – the best thing you will watch all festive period',
-			shortUrl: 'https://www.theguardian.com/p/mqpzt',
+				'Naked Education review – the look at pubic hair is wonderfully revelatory',
+			shortUrl: 'https://www.theguardian.com/p/nkzed',
 			starRating: 4,
+			discussion: {
+				isCommentable: true,
+				isClosedForComments: true,
+				discussionId: '/p/nkzed',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/03/strangers-on-a-plane-review-channel-4',
+			linkText:
+				'Strangers on a Plane review – so dim it makes Made in Chelsea seem like Newsnight',
+			showByline: false,
+			byline: 'Stuart Jeffries',
+			masterImage:
+				'https://media.guim.co.uk/1668b6301d1f74e271c3ee2b4efe0f13a5221c17/0_60_1277_766/master/1277.jpg',
+			image: 'https://i.guim.co.uk/img/media/1668b6301d1f74e271c3ee2b4efe0f13a5221c17/0_60_1277_766/master/1277.jpg?width=300&quality=85&auto=format&fit=max&s=4c3cda16a41c4a7b64533d9d15c2bee4',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/1668b6301d1f74e271c3ee2b4efe0f13a5221c17/0_60_1277_766/master/1277.jpg?width=300&quality=85&auto=format&fit=max&s=4c3cda16a41c4a7b64533d9d15c2bee4',
+				'460': 'https://i.guim.co.uk/img/media/1668b6301d1f74e271c3ee2b4efe0f13a5221c17/0_60_1277_766/master/1277.jpg?width=460&quality=85&auto=format&fit=max&s=0c8183f3b575668b02c1d1eb828e63f6',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-04-03T17:00:23.000Z',
+			headline:
+				'Strangers on a Plane review – so dim it makes Made in Chelsea seem like Newsnight',
+			shortUrl: 'https://www.theguardian.com/p/nkmmf',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/nkmmf',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/apr/03/surviving-r-kelly-part-iii-the-final-chapter-review-documentary',
+			linkText:
+				'Surviving R Kelly Part III: The Final Chapter review – this glorious series has helped to make history',
+			showByline: false,
+			byline: 'Leila Latif',
+			masterImage:
+				'https://media.guim.co.uk/efecd7e05e2ff0c3059a83e0000e3e60f0708291/0_31_6000_3600/master/6000.jpg',
+			image: 'https://i.guim.co.uk/img/media/efecd7e05e2ff0c3059a83e0000e3e60f0708291/0_31_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=af59595edfc479741d7e91655e939240',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/efecd7e05e2ff0c3059a83e0000e3e60f0708291/0_31_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=af59595edfc479741d7e91655e939240',
+				'460': 'https://i.guim.co.uk/img/media/efecd7e05e2ff0c3059a83e0000e3e60f0708291/0_31_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=ab9de8323b3305d5006aeeeaa1d68e33',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-04-03T05:00:40.000Z',
+			headline:
+				'Surviving R Kelly Part III: The Final Chapter review – this glorious series has helped to make history',
+			shortUrl: 'https://www.theguardian.com/p/nk2gd',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/nk2gd',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/mar/31/the-power-review-toni-collette-naomi-alderman',
+			linkText:
+				'The Power review – Toni Collette rules in this sparky sci-fi about superpowered women',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/6fcfce2283c9f55c09de0a2f2ecc61bd97cd6bd8/0_114_3000_1800/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/6fcfce2283c9f55c09de0a2f2ecc61bd97cd6bd8/0_114_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=67e8e82e7662e0e5997000e7896cc4b5',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/6fcfce2283c9f55c09de0a2f2ecc61bd97cd6bd8/0_114_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=67e8e82e7662e0e5997000e7896cc4b5',
+				'460': 'https://i.guim.co.uk/img/media/6fcfce2283c9f55c09de0a2f2ecc61bd97cd6bd8/0_114_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c0d11d79da3272aa3a27ba0ad71c01e3',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-03-31T05:00:13.000Z',
+			headline:
+				'The Power review – Toni Collette rules in this sparky sci-fi about superpowered women',
+			shortUrl: 'https://www.theguardian.com/p/nk2cv',
+			starRating: 3,
+			discussion: {
+				isCommentable: true,
+				isClosedForComments: true,
+				discussionId: '/p/nk2cv',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/mar/30/get-on-up-the-triumph-of-black-america-review-david-harewood-bbc-documentary',
+			linkText:
+				'Get On Up: The Triumph of Black America review – David Harewood’s interviews are puzzlingly shallow',
+			showByline: false,
+			byline: 'Leila Latif',
+			masterImage:
+				'https://media.guim.co.uk/14c2daf9e269188dab21600ff62769e946e379ba/0_0_4579_2748/master/4579.jpg',
+			image: 'https://i.guim.co.uk/img/media/14c2daf9e269188dab21600ff62769e946e379ba/0_0_4579_2748/master/4579.jpg?width=300&quality=85&auto=format&fit=max&s=98723cbcbefd077622d779f200e9963b',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/14c2daf9e269188dab21600ff62769e946e379ba/0_0_4579_2748/master/4579.jpg?width=300&quality=85&auto=format&fit=max&s=98723cbcbefd077622d779f200e9963b',
+				'460': 'https://i.guim.co.uk/img/media/14c2daf9e269188dab21600ff62769e946e379ba/0_0_4579_2748/master/4579.jpg?width=460&quality=85&auto=format&fit=max&s=668d8426d4325eeea58bc1af91282f43',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-03-30T21:00:04.000Z',
+			headline:
+				'Get On Up: The Triumph of Black America review – David Harewood’s interviews are puzzlingly shallow',
+			shortUrl: 'https://www.theguardian.com/p/njp29',
+			starRating: 3,
+			discussion: {
+				isCommentable: true,
+				isClosedForComments: true,
+				discussionId: '/p/njp29',
+			},
 		},
 	],
 };

@@ -66,7 +66,7 @@ describe('Signed in readers', function () {
 		cy.get('a[data-link-name="nav3 : job-cta"]').should(
 			'have.attr',
 			'href',
-			'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader',
+			'https://jobs.theguardian.com',
 		);
 		cy.get('button[data-link-name="nav3 : topbar: my account"]');
 		cy.get('a[data-link-name="nav3 : search"]').should(

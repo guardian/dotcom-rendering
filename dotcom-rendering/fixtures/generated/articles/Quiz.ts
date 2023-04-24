@@ -15,7 +15,7 @@ import type { FEArticleType } from '../../../src/types/frontend';
 
 export const Quiz: FEArticleType = {
 	slotMachineFlags: '',
-	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> \n  <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/football/football',
@@ -283,6 +283,7 @@ export const Quiz: FEArticleType = {
 		},
 	],
 	contentType: 'Article',
+	isRightToLeftLang: false,
 	nav: {
 		currentUrl: '/football',
 		pillars: [
@@ -934,6 +935,10 @@ export const Quiz: FEArticleType = {
 				],
 			},
 			{
+				title: 'Wordiply',
+				url: 'https://www.wordiply.com',
+			},
+			{
 				title: 'Corrections',
 				url: '/theguardian/series/corrections-and-clarifications',
 			},
@@ -941,7 +946,7 @@ export const Quiz: FEArticleType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
@@ -976,7 +981,7 @@ export const Quiz: FEArticleType = {
 				url: 'https://puzzles.theguardian.com/download',
 			},
 			{
-				title: 'Guardian content licensing site',
+				title: 'Guardian Licensing',
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
@@ -1330,7 +1335,7 @@ export const Quiz: FEArticleType = {
 				},
 				{
 					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
@@ -1375,6 +1380,7 @@ export const Quiz: FEArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	showTableOfContents: false,
+	lang: 'en',
 	byline: 'Steven Pye',
 	headline: 'Sports quiz: football in the 1980s',
 	guardianBaseURL: 'https://www.theguardian.com',
@@ -1637,7 +1643,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '641b0290-abd5-4ed5-933d-6a05244feb48',
+			elementId: '256d9075-29bf-4eee-a9f8-f4c9ceeb9f83',
 		},
 	],
 	canonicalUrl:
@@ -2253,7 +2259,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '4c2c5b57-b3af-4c8d-9293-1f8a903b0fe6',
+					elementId: '54681ac4-6822-4b82-89c1-1999a53afe19',
 				},
 			],
 			attributes: {

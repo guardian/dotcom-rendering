@@ -45,4 +45,4 @@ export const standardAspectRatio = () => {
 		</Wrapper>
 	);
 };
-standardAspectRatio.story = { name: 'with standard aspect ratio' };
+standardAspectRatio.storyName = 'with standard aspect ratio';
