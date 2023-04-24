@@ -74,7 +74,6 @@ module.exports = {
 				);
 			});
 
-			// webpack-hot-server-middleware needs to run after webpack-dev-middleware
 			middlewares.push({
 				name: 'server',
 				// @ts-expect-error -- it’s a MultiCompiler
