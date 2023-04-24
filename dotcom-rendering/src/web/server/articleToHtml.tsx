@@ -108,6 +108,8 @@ export const articleToHtml = ({ article }: Props): string => {
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
+			// Ensure the AB script is always executed before the main index.js
+			// This makes sure the set of tests is on the window ready for SetABTests to render
 			article.config.abScriptUrl,
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
