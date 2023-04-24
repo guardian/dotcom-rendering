@@ -14,158 +14,7 @@
         "mainMediaElements": {
             "type": "array",
             "items": {
-                "anyOf": [
-                    {
-                        "$ref": "#/definitions/AudioAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/AudioBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/BlockquoteBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/CaptionBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/CalloutBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/CalloutBlockElementV2"
-                    },
-                    {
-                        "$ref": "#/definitions/ChartAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/QuizAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/CodeBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/CommentBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/ContentAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/DisclaimerBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/DividerBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/DocumentBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/EmbedBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/ExplainerAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/GenericAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/GuideAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/GuVideoBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/HighlightBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/ImageBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InstagramBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InteractiveAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InteractiveBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/ItemLinkBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/MapBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/MediaAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/MultiImageBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/NewsletterSignupBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/NumberedTitleBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/InteractiveContentsBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/ProfileAtomBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/PullquoteBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/QABlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/RichLinkBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/SoundcloudBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/SpotifyBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/StarRatingBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/SubheadingBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/TableBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/TextBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/TimelineBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/TweetBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/VineBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/VideoBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/VideoFacebookBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/VideoVimeoBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/VideoYoutubeBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/YoutubeBlockElement"
-                    },
-                    {
-                        "$ref": "#/definitions/WitnessTypeBlockElement"
-                    }
-                ]
+                "$ref": "#/definitions/FEElement"
             }
         },
         "main": {
@@ -638,6 +487,160 @@
         "webURL"
     ],
     "definitions": {
+        "FEElement": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/AudioAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/AudioBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/BlockquoteBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CaptionBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CalloutBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CalloutBlockElementV2"
+                },
+                {
+                    "$ref": "#/definitions/ChartAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/QuizAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CodeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CommentBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ContentAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/DisclaimerBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/DividerBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/DocumentBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/EmbedBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ExplainerAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/GenericAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/GuideAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/GuVideoBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/HighlightBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ImageBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/InstagramBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/InteractiveAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/InteractiveBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ItemLinkBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/MapBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/MediaAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/MultiImageBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/NewsletterSignupBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/NumberedTitleBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/InteractiveContentsBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/SubheadingBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/ProfileAtomBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/PullquoteBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/QABlockElement"
+                },
+                {
+                    "$ref": "#/definitions/RichLinkBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/SoundcloudBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/SpotifyBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/StarRatingBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/TableBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/TextBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/TimelineBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/TweetBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VineBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VideoBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VideoFacebookBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VideoVimeoBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/VideoYoutubeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/YoutubeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/WitnessTypeBlockElement"
+                }
+            ]
+        },
         "AudioAtomBlockElement": {
             "type": "object",
             "properties": {
@@ -815,26 +818,7 @@
                 "formFields": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/definitions/CampaignFieldText"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldTextArea"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldFile"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldRadio"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldCheckbox"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldSelect"
-                            }
-                        ]
+                        "$ref": "#/definitions/CampaignFieldType"
                     }
                 },
                 "role": {
@@ -853,6 +837,28 @@
                 "id",
                 "tagName",
                 "title"
+            ]
+        },
+        "CampaignFieldType": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/CampaignFieldText"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldTextArea"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldFile"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldRadio"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldCheckbox"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldSelect"
+                }
             ]
         },
         "CampaignFieldText": {
@@ -1217,26 +1223,7 @@
                 "formFields": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/definitions/CampaignFieldText"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldTextArea"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldFile"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldRadio"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldCheckbox"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldSelect"
-                            }
-                        ]
+                        "$ref": "#/definitions/CampaignFieldType"
                     }
                 },
                 "role": {
@@ -3711,158 +3698,7 @@
                 "elements": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/definitions/AudioAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/AudioBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/BlockquoteBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/CaptionBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/CalloutBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/CalloutBlockElementV2"
-                            },
-                            {
-                                "$ref": "#/definitions/ChartAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/QuizAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/CodeBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/CommentBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/ContentAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/DisclaimerBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/DividerBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/DocumentBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/EmbedBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/ExplainerAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/GenericAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/GuideAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/GuVideoBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/HighlightBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/ImageBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InstagramBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InteractiveAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InteractiveBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/ItemLinkBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/MapBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/MediaAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/MultiImageBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/NewsletterSignupBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/NumberedTitleBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/InteractiveContentsBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/ProfileAtomBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/PullquoteBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/QABlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/RichLinkBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/SoundcloudBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/SpotifyBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/StarRatingBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/SubheadingBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/TableBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/TextBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/TimelineBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/TweetBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/VineBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/VideoBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/VideoFacebookBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/VideoVimeoBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/VideoYoutubeBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/YoutubeBlockElement"
-                            },
-                            {
-                                "$ref": "#/definitions/WitnessTypeBlockElement"
-                            }
-                        ]
+                        "$ref": "#/definitions/FEElement"
                     }
                 },
                 "attributes": {
@@ -4530,13 +4366,13 @@
         "CommercialProperties": {
             "type": "object",
             "properties": {
-                "AU": {
+                "UK": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "US": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
-                "UK": {
+                "AU": {
                     "$ref": "#/definitions/EditionCommercialProperties"
                 },
                 "INT": {
@@ -4810,20 +4646,23 @@
                 "formFields": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/definitions/CampaignFieldText"
-                            },
-                            {
-                                "$ref": "#/definitions/CampaignFieldTextArea"
-                            }
-                        ]
+                        "$ref": "#/definitions/MessageUsFieldType"
                     }
                 }
             },
             "required": [
                 "formFields",
                 "formId"
+            ]
+        },
+        "MessageUsFieldType": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/CampaignFieldText"
+                },
+                {
+                    "$ref": "#/definitions/CampaignFieldTextArea"
+                }
             ]
         },
         "TableOfContentsItem": {
