@@ -3,7 +3,10 @@ import { isValidDate } from 'date';
 import type { FC } from 'react';
 import { highlight } from './styles';
 
-const Highlight: FC = ({ children }) => {
+type HighlightProps = {
+	children?: React.ReactNode
+}
+const Highlight: FC<HighlightProps> = ({ children }: HighlightProps) => {
 	return <span css={highlight}>{children}</span>;
 };
 
