@@ -394,7 +394,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								centralBorder="partial"
 								url={
 									collection.href
 										? `https://www.theguardian.com/${collection.href}`
