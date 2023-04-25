@@ -94,10 +94,7 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a
-					css={[linkStyles, bottomMargin]}
-					href={`https://www.theguardian.com/${url}`}
-				>
+				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
