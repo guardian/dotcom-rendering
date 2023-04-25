@@ -394,7 +394,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								url={collection.href}
+								url={
+									collection.href
+										? `https://www.theguardian.com/${collection.href}`
+										: undefined
+								}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
