@@ -666,8 +666,6 @@ const textCardHeadline = (format: ArticleFormat): string => {
 					return news[300];
 				case ArticlePillar.Sport:
 					return sport[300];
-				case ArticlePillar.Opinion:
-					return opinion[300];
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Lifestyle:
