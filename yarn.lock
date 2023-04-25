@@ -3610,6 +3610,13 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@7.0.7":
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.7.tgz#1f91eb2785111c94b7946bda2d32199c11045d71"
+  integrity sha512-EclHjDs5HwHMKB4X2orn/KKA0DTIDmp4AXAUJGRfxb5ArpKEb7tXLHsgrRBlaoz1j5LAwKTmEyZOONh9G3etjg==
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
 "@storybook/components@6.5.16", "@storybook/components@^6.4.0":
   version "6.5.16"
   resolved "https://registry.yarnpkg.com/@storybook/components/-/components-6.5.16.tgz#f8dc51213bc08fe32154be964e1e8b0e2f670ed6"
@@ -3811,6 +3818,11 @@
     doctrine "^3.0.0"
     lodash "^4.17.21"
     regenerator-runtime "^0.13.7"
+
+"@storybook/global@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@storybook/global/-/global-5.0.0.tgz#b793d34b94f572c1d7d9e0f44fac4e0dbc9572ed"
+  integrity sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==
 
 "@storybook/instrumenter@^6.4.0":
   version "6.5.16"
@@ -4098,7 +4110,7 @@
     "@testing-library/user-event" "^13.2.1"
     ts-dedent "^2.2.0"
 
-"@storybook/theming@6.5.16", "@storybook/theming@^6.4.0":
+"@storybook/theming@6.5.16":
   version "6.5.16"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.5.16.tgz#b999bdb98945b605b93b9dfdf7408535b701e2aa"
   integrity sha512-hNLctkjaYLRdk1+xYTkC1mg4dYz2wSv6SqbLpcKMbkPHTE0ElhddGPHQqB362md/w9emYXNkt1LSMD8Xk9JzVQ==
@@ -4107,6 +4119,16 @@
     core-js "^3.8.2"
     memoizerific "^1.11.3"
     regenerator-runtime "^0.13.7"
+
+"@storybook/theming@^7.0.7":
+  version "7.0.7"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.7.tgz#263c162825e3c0ff4eb53e204e586077e596037e"
+  integrity sha512-InTZe+Sgco1NsxgiG+cyUKWQe3GsjlIyU/o5qDdtOTXcZ64HzyBuAZlAequSddqfDeMDqxRFPc2w1J28MAUHxA==
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.7"
+    "@storybook/global" "^5.0.0"
+    memoizerific "^1.11.3"
 
 "@storybook/ui@6.5.16":
   version "6.5.16"
