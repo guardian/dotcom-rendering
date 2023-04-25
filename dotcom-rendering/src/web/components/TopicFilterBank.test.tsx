@@ -34,7 +34,7 @@ describe('hasRelevantTopics', () => {
 });
 
 describe('getTopFiveIncludingSelected', () => {
-	const avaiableTopics: Topic[] = [
+	const availableTopics: Topic[] = [
 		{ type: 'PERSON', value: 'test topic 1', count: 6 },
 		{ type: 'PERSON', value: 'test topic 2', count: 5 },
 		{ type: 'PERSON', value: 'test topic 3', count: 5 },
@@ -52,7 +52,7 @@ describe('getTopFiveIncludingSelected', () => {
 
 			const res = getTopFiveIncludingSelected(
 				selectedTopic,
-				avaiableTopics,
+				availableTopics,
 			);
 
 			const expected = [
@@ -74,7 +74,7 @@ describe('getTopFiveIncludingSelected', () => {
 
 			const res = getTopFiveIncludingSelected(
 				selectedTopic,
-				avaiableTopics,
+				availableTopics,
 			);
 
 			const expected = [
@@ -120,7 +120,7 @@ describe('getTopFiveIncludingSelected', () => {
 			};
 			const res = getTopFiveIncludingSelected(
 				selectedTopic,
-				avaiableTopics,
+				availableTopics,
 			);
 
 			const expected = [

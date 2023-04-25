@@ -62,13 +62,9 @@ const getKeyEventLink = (filterKeyEvents: boolean, id: Props['id']) => {
 	return `?${urlParams.toString()}#${id}`;
 };
 
-const isEqual = (selectedTopic: Topic | undefined, availableTopic: Topic) => {
-	if (!selectedTopic) return false;
-	return (
-		availableTopic.type === selectedTopic.type &&
-		availableTopic.value === selectedTopic.value
-	);
-};
+const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
+	availableTopic.type === selectedTopic.type &&
+	availableTopic.value === selectedTopic.value;
 
 // get top 5 only if they occur in more than 2 blocks
 const getTopFiveTopics = (availableTopics: Topic[]) => {
@@ -87,9 +83,11 @@ export const getTopFiveIncludingSelected = (
 ) => {
 	const topFiveTopics = getTopFiveTopics(availableTopics);
 
-	const selectedIndex = availableTopics.findIndex((availableTopic) =>
-		isEqual(selectedTopic, availableTopic),
-	);
+	const selectedIndex = selectedTopic
+		? availableTopics.findIndex((availableTopic) =>
+				isEqual(selectedTopic, availableTopic),
+		  )
+		: -1;
 
 	// if selected topic is not within the top 5,
 	// replacing the last topic of top 5 with the selected topic
