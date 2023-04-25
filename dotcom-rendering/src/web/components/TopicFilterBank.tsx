@@ -70,6 +70,7 @@ const isEqual = (selectedTopic: Topic | undefined, availableTopic: Topic) => {
 	);
 };
 
+// get top 5 only if they occur in more than 2 blocks
 const getTopFiveTopics = (availableTopics: Topic[]) => {
 	return availableTopics
 		.slice(0, 5)
@@ -90,6 +91,8 @@ export const getTopFiveIncludingSelected = (
 		isEqual(selectedTopic, availableTopic),
 	);
 
+	// if selected topic is not within the top 5,
+	// replacing the last topic of top 5 with the selected topic
 	if (selectedIndex > 4) {
 		const remaining = topFiveTopics.slice(0, topFiveTopics.length - 1);
 
