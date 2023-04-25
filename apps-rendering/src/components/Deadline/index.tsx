@@ -4,8 +4,9 @@ import type { FC } from 'react';
 import { highlight } from './styles';
 
 type HighlightProps = {
-	children?: React.ReactNode
+	children?: React.ReactNode;
 }
+
 const Highlight: FC<HighlightProps> = ({ children }: HighlightProps) => {
 	return <span css={highlight}>{children}</span>;
 };
