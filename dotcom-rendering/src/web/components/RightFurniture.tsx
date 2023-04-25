@@ -26,7 +26,7 @@ export const RightFurniture = ({
 			css={css`
 				/* TODO remove this */
 				outline: 2px solid red;
-				height: ${MAX_HEIGHT_PX}px;
+				height: min(100%, ${MAX_HEIGHT_PX}px);
 				display: flex;
 				flex-direction: column;
 			`}
