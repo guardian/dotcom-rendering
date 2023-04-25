@@ -20,4 +20,4 @@ export const defaultStory = () => {
 	);
 };
 
-defaultStory.story = { name: 'Header top bar signed out' };
+defaultStory.storyName = 'Header top bar signed out';

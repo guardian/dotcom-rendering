@@ -29,6 +29,7 @@ const callout = (): ReactElement => {
 	return (
 		<Callout
 			name={mockCampaign.name}
+			prompt="Share your experience"
 			heading={mockCampaign.fields.callout}
 			formId={mockCampaign.fields.formId}
 			formFields={mockCampaign.fields.formFields}
@@ -44,6 +45,7 @@ const callout = (): ReactElement => {
 const closedCallout = (): ReactElement => (
 	<Callout
 		name={mockCampaign.name}
+		prompt="Share your experience"
 		heading={mockCampaign.fields.callout}
 		formId={mockCampaign.fields.formId}
 		formFields={mockCampaign.fields.formFields}
@@ -68,6 +70,7 @@ const nonCollapsableCallout = (): ReactElement => {
 		<Callout
 			isNonCollapsible={true}
 			name={mockCampaign.name}
+			prompt="Share your experience"
 			heading={mockCampaign.fields.callout}
 			formId={mockCampaign.fields.formId}
 			formFields={mockCampaign.fields.formFields}
@@ -76,6 +79,32 @@ const nonCollapsableCallout = (): ReactElement => {
 			description={campaignDescription}
 			contacts={mockCampaign.fields.contacts}
 		/>
+	);
+};
+const minimalCallout = (): ReactElement => {
+	fetchMock
+		.restore()
+		.post(
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			{
+				status: 201,
+				body: null,
+			},
+		);
+	return (
+		<>A callouts prompt, title and description are optional
+		<Callout
+			isNonCollapsible={true}
+			name={mockCampaign.name}
+			formId={mockCampaign.fields.formId}
+			formFields={mockCampaign.fields.formFields}
+			format={mockFormat}
+			activeUntil={futureDate.getTime()}
+			contacts={mockCampaign.fields.contacts}
+			prompt=""
+			heading=""
+			/>
+			</>
 	);
 };
 
@@ -93,6 +122,7 @@ const calloutWithFormFailure = (): ReactElement => {
 		<Callout
 			isNonCollapsible={true}
 			name={mockCampaign.name}
+			prompt="Share your experience"
 			heading={mockCampaign.fields.callout}
 			formId={mockCampaign.fields.formId}
 			formFields={mockCampaign.fields.formFields}
@@ -114,4 +144,5 @@ export {
 	closedCallout,
 	nonCollapsableCallout,
 	calloutWithFormFailure,
+	minimalCallout,
 };

@@ -18,8 +18,8 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection title="Fixed Large Slow XIV" centralBorder="partial">
+	<FrontSection title="Fixed Large Slow XIV">
 		<FixedLargeSlowXIV trails={trails} showAge={true} />
 	</FrontSection>
 );
-Default.story = { name: 'FixedLargeSlowXIV' };
+Default.storyName = 'FixedLargeSlowXIV';

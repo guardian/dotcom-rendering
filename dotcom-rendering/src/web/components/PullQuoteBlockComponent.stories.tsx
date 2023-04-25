@@ -48,9 +48,7 @@ export const SportInline = () => {
 		</Section>
 	);
 };
-SportInline.story = {
-	name: 'Sport, inline, Article',
-};
+SportInline.storyName = 'Sport, inline, Article';
 
 export const LabsInline = () => {
 	const format = {
@@ -74,9 +72,7 @@ export const LabsInline = () => {
 		</Section>
 	);
 };
-LabsInline.story = {
-	name: 'Labs, inline, Article',
-};
+LabsInline.storyName = 'Labs, inline, Article';
 
 export const LifestyleInline = () => {
 	const format = {
@@ -100,9 +96,7 @@ export const LifestyleInline = () => {
 		</Section>
 	);
 };
-LifestyleInline.story = {
-	name: 'Lifestyle, inline, Article',
-};
+LifestyleInline.storyName = 'Lifestyle, inline, Article';
 
 export const CultureInline = () => {
 	const format = {
@@ -126,9 +120,7 @@ export const CultureInline = () => {
 		</Section>
 	);
 };
-CultureInline.story = {
-	name: 'Culture, inline, Article',
-};
+CultureInline.storyName = 'Culture, inline, Article';
 
 export const NewsInline = () => {
 	return (
@@ -147,9 +139,7 @@ export const NewsInline = () => {
 		</Section>
 	);
 };
-NewsInline.story = {
-	name: 'News, inline, Article',
-};
+NewsInline.storyName = 'News, inline, Article';
 
 export const OpinionInline = () => {
 	const format = {
@@ -174,9 +164,7 @@ export const OpinionInline = () => {
 		</Section>
 	);
 };
-OpinionInline.story = {
-	name: 'Opinion, inline, Comment',
-};
+OpinionInline.storyName = 'Opinion, inline, Comment';
 
 export const SpecialReportInline = () => {
 	const format = {
@@ -200,9 +188,7 @@ export const SpecialReportInline = () => {
 		</Section>
 	);
 };
-SpecialReportInline.story = {
-	name: 'SpecialReport, inline, Article',
-};
+SpecialReportInline.storyName = 'SpecialReport, inline, Article';
 
 // Supporting
 export const SportSupporting = () => {
@@ -227,9 +213,7 @@ export const SportSupporting = () => {
 		</Section>
 	);
 };
-SportSupporting.story = {
-	name: 'Sport, supporting, Article',
-};
+SportSupporting.storyName = 'Sport, supporting, Article';
 
 export const LabsSupporting = () => {
 	const format = {
@@ -253,9 +237,7 @@ export const LabsSupporting = () => {
 		</Section>
 	);
 };
-LabsSupporting.story = {
-	name: 'Labs, supporting, Article',
-};
+LabsSupporting.storyName = 'Labs, supporting, Article';
 
 export const LifestyleSupporting = () => {
 	const format = {
@@ -279,9 +261,7 @@ export const LifestyleSupporting = () => {
 		</Section>
 	);
 };
-LifestyleSupporting.story = {
-	name: 'Lifestyle, supporting, Article',
-};
+LifestyleSupporting.storyName = 'Lifestyle, supporting, Article';
 
 export const CultureSupporting = () => {
 	const format = {
@@ -305,9 +285,7 @@ export const CultureSupporting = () => {
 		</Section>
 	);
 };
-CultureSupporting.story = {
-	name: 'Culture, supporting, Article',
-};
+CultureSupporting.storyName = 'Culture, supporting, Article';
 
 export const NewsSupporting = () => {
 	return (
@@ -326,9 +304,7 @@ export const NewsSupporting = () => {
 		</Section>
 	);
 };
-NewsSupporting.story = {
-	name: 'News, supporting, Article',
-};
+NewsSupporting.storyName = 'News, supporting, Article';
 
 export const OpinionSupporting = () => {
 	const format = {
@@ -353,9 +329,7 @@ export const OpinionSupporting = () => {
 		</Section>
 	);
 };
-OpinionSupporting.story = {
-	name: 'Opinion, supporting, Comment',
-};
+OpinionSupporting.storyName = 'Opinion, supporting, Comment';
 
 export const SpecialReportSupporting = () => {
 	const format = {
@@ -379,9 +353,7 @@ export const SpecialReportSupporting = () => {
 		</Section>
 	);
 };
-SpecialReportSupporting.story = {
-	name: 'SpecialReport, supporting, Article',
-};
+SpecialReportSupporting.storyName = 'SpecialReport, supporting, Article';
 
 export const SpecialReportAltInline = () => {
 	const format = {
@@ -405,9 +377,7 @@ export const SpecialReportAltInline = () => {
 		</Section>
 	);
 };
-SpecialReportAltInline.story = {
-	name: 'SpecialReportAlt, inline, Article',
-};
+SpecialReportAltInline.storyName = 'SpecialReportAlt, inline, Article';
 
 export const SpecialReportAltSupporting = () => {
 	const format = {
@@ -431,9 +401,7 @@ export const SpecialReportAltSupporting = () => {
 		</Section>
 	);
 };
-SpecialReportAltSupporting.story = {
-	name: 'SpecialReportAlt, supporting, Article',
-};
+SpecialReportAltSupporting.storyName = 'SpecialReportAlt, supporting, Article';
 
 // PhotoEssay
 export const PhotoEssayInline = () => {
@@ -453,9 +421,7 @@ export const PhotoEssayInline = () => {
 		</Section>
 	);
 };
-PhotoEssayInline.story = {
-	name: 'News, inline, PhotoEssay',
-};
+PhotoEssayInline.storyName = 'News, inline, PhotoEssay';
 
 export const PhotoEssaySupporting = () => {
 	return (
@@ -474,6 +440,4 @@ export const PhotoEssaySupporting = () => {
 		</Section>
 	);
 };
-PhotoEssaySupporting.story = {
-	name: 'News, supporting, PhotoEssay',
-};
+PhotoEssaySupporting.storyName = 'News, supporting, PhotoEssay';

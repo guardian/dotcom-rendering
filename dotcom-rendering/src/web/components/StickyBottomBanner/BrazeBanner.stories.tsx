@@ -6,12 +6,16 @@ type BrazeMessageProps = {
 	[key: string]: string | undefined;
 };
 
+type NewsletterSubscribeCallback = (id: string) => Promise<void>;
+const subscribeToNewsletter: NewsletterSubscribeCallback = (id: string) =>
+	Promise.resolve();
+
 export default {
 	component: 'BrazeBanners',
 	title: 'Components/StickyBottomBanner/BrazeBanners',
 };
 
-// Braze Banner
+// Braze Banner story
 // ---------------------------------------
 export const BrazeBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
@@ -58,6 +62,7 @@ export const BrazeBannerComponent = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				subscribeToNewsletter={subscribeToNewsletter}
 			/>
 		);
 	}
@@ -79,9 +84,9 @@ BrazeBannerComponent.args = {
 	ophanComponentId: 'change_me_ophan_component_id',
 };
 
-BrazeBannerComponent.story = { name: 'BannerWithLink' };
+BrazeBannerComponent.storyName = 'BannerWithLink';
 
-// Braze App Banner
+// Braze App Banner story
 // ---------------------------------------
 export const BrazeAppBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
@@ -92,6 +97,7 @@ export const BrazeAppBannerComponent = (
 	useEffect(() => {
 		import('@guardian/braze-components')
 			.then((module) => {
+				console.log(module);
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
@@ -124,6 +130,7 @@ export const BrazeAppBannerComponent = (
 					);
 				}}
 				brazeMessageProps={brazeMessageProps}
+				subscribeToNewsletter={subscribeToNewsletter}
 			/>
 		);
 	}
@@ -140,4 +147,76 @@ BrazeAppBannerComponent.args = {
 		'https://i.guim.co.uk/img/media/de6813b4dd9b9805a2d14dd6af14ae2b48e2e19e/0_0_930_520/master/930.png?quality=45&width=930&s=0beb53509265d32e3d201aa3981323bb',
 };
 
-BrazeAppBannerComponent.story = { name: 'AppBanner' };
+BrazeAppBannerComponent.storyName = 'AppBanner';
+
+// Braze Newsletter Banner story
+// ---------------------------------------
+export const BrazeNewsletterBannerComponent = (
+	args: BrazeMessageProps & { componentName: string },
+): ReactElement => {
+	const [BrazeMessage, setBrazeMessage] =
+		useState<typeof BrazeBannerComponentType>();
+
+	useEffect(() => {
+		import('@guardian/braze-components')
+			.then((module) => {
+				console.log(module);
+				setBrazeMessage(() => module.BrazeBannerComponent);
+			})
+			.catch((e) =>
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
+			);
+	}, []);
+
+	if (BrazeMessage) {
+		const brazeMessageProps: BrazeMessageProps = {
+			header: args.header,
+			newsletterId: args.newsletterId,
+			frequency: args.frequency,
+			body: args.body,
+			boldText: args.boldText,
+			secondParagraph: args.secondParagraph,
+			imageUrl: args.imageUrl,
+			ophanComponentId: args.ophanComponentId,
+		};
+
+		return (
+			<BrazeMessage
+				componentName={args.componentName}
+				logButtonClickWithBraze={(internalButtonId) => {
+					console.log(
+						`Button with internal ID ${internalButtonId} clicked`,
+					);
+				}}
+				submitComponentEvent={(componentEvent) => {
+					console.log(
+						'submitComponentEvent called with: ',
+						componentEvent,
+					);
+				}}
+				brazeMessageProps={brazeMessageProps}
+				subscribeToNewsletter={subscribeToNewsletter}
+			/>
+		);
+	}
+	return <div>Loading...</div>;
+};
+
+BrazeNewsletterBannerComponent.args = {
+	slotName: 'Banner',
+	componentName: 'BannerNewsletter',
+	ophanComponentId: 'change_me_ophan_component_id',
+	header: 'The Morning Briefing',
+	newsletterId: '4156',
+	frequency: 'Every day',
+	body: 'Whether it’s the latest manoeuvring in global politics or the ‘and finally’ story that everyone’s talking about, you’ll be bang up to date with the news that counts.',
+	boldText: 'Sign up today!',
+	secondParagraph:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	imageUrl:
+		'https://i.guim.co.uk/img/media/568c6031be78dab6f6c28336010884f3ebd0f97c/0_0_1936_1936/master/1936.png?width=196&quality=45&auto=format&s=2a3630e9625620d5726c31c5cdbf4772',
+};
+
+BrazeNewsletterBannerComponent.storyName = 'BannerNewsletter';

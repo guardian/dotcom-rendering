@@ -26,6 +26,4 @@ export const StandardStandard = () => {
 		/>
 	);
 };
-StandardStandard.story = {
-	name: 'StandardDisplay StandardDesign'
-};
+StandardStandard.storyName = 'StandardDisplay StandardDesign';

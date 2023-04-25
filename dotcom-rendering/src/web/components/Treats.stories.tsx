@@ -45,4 +45,4 @@ export const Default = () => {
 		</Wrapper>
 	);
 };
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

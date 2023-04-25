@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign as calloutCampaignV2 } from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
@@ -46,11 +47,16 @@ export const Collapsible = () => {
 				activeUntil: tomorrow,
 			}}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
 
-Collapsible.story = { name: 'Collapsible' };
+Collapsible.storyName = 'Collapsible';
 
 export const NonCollapsible = () => {
 	goodRequest();
@@ -58,11 +64,16 @@ export const NonCollapsible = () => {
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
 
-NonCollapsible.story = { name: 'NonCollapsible' };
+NonCollapsible.storyName = 'NonCollapsible';
 
 export const SubmissionFailure = () => {
 	badRequest();
@@ -70,19 +81,57 @@ export const SubmissionFailure = () => {
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: tomorrow }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
 
-SubmissionFailure.story = { name: 'Submission Failure' };
+SubmissionFailure.storyName = 'Submission Failure';
 
 export const Expired = () => {
 	return (
 		<CalloutBlockComponent
 			callout={{ ...calloutCampaignV2, activeUntil: yesterday }}
 			pageId={pageId}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
 		/>
 	);
 };
 
-Expired.story = { name: 'Expired' };
+Expired.storyName = 'Expired';
+
+export const MinimalCallout = () => {
+	return (
+		<>
+			<div css={{ fontWeight: 'bold', paddingBottom: '16px' }}>
+				Prompt, title and description are all optional
+			</div>
+			<CalloutBlockComponent
+				callout={{
+					...calloutCampaignV2,
+					activeUntil: tomorrow,
+					isNonCollapsible: false,
+					title: '',
+					prompt: '',
+					description: '',
+				}}
+				pageId={pageId}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			/>
+		</>
+	);
+};
+
+Expired.storyName = 'Expired';

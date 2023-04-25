@@ -85,6 +85,7 @@ module.exports = {
 		'import',
 		'jsx-a11y',
 		'jsx-expressions',
+		'custom-elements',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -125,6 +126,7 @@ module.exports = {
 		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
+		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
 

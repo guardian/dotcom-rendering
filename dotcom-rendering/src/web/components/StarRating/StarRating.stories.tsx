@@ -22,7 +22,7 @@ export const AllSizes = () => (
 		<StarRating rating={3} size="large" />
 	</>
 );
-AllSizes.story = { name: 'All stars sizes' };
+AllSizes.storyName = 'All stars sizes';
 
 export const SmallStory = () => (
 	<>
@@ -45,7 +45,7 @@ export const SmallStory = () => (
 		<StarRating rating={5} size="small" />
 	</>
 );
-SmallStory.story = { name: 'Small stars' };
+SmallStory.storyName = 'Small stars';
 
 export const MediumStory = () => (
 	<>
@@ -68,7 +68,7 @@ export const MediumStory = () => (
 		<StarRating rating={5} size="medium" />
 	</>
 );
-MediumStory.story = { name: 'Medium stars' };
+MediumStory.storyName = 'Medium stars';
 
 export const LargeStory = () => (
 	<>
@@ -91,4 +91,4 @@ export const LargeStory = () => (
 		<StarRating rating={5} size="large" />
 	</>
 );
-LargeStory.story = { name: 'Large stars' };
+LargeStory.storyName = 'Large stars';

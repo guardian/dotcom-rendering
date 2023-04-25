@@ -2,6 +2,7 @@ import type { Handler } from 'express';
 import { handleAMPArticle } from '../amp/server';
 import { handleAppsArticle } from '../apps/server';
 import {
+	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
@@ -49,6 +50,8 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
+			case 'EmailNewsletters':
+				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
 			default: {

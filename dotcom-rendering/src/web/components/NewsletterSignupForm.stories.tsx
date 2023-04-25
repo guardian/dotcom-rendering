@@ -9,4 +9,4 @@ export const Default = () => {
 	return <NewsletterSignupForm newsletterId="1234" />;
 };
 
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

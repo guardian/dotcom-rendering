@@ -1073,9 +1073,7 @@ export const WithLetterDesign = () => {
 	);
 };
 
-WithLetterDesign.story = {
-	name: 'WithLetterDesign',
-};
+WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (
@@ -1095,6 +1093,5 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 	);
 };
 
-WithLetterDesignAndShowQuotedHeadline.story = {
-	name: 'WithLetterDesignAndShowQuotedHeadline',
-};
+WithLetterDesignAndShowQuotedHeadline.storyName =
+	'WithLetterDesignAndShowQuotedHeadline';

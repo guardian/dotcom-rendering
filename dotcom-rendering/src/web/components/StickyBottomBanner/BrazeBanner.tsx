@@ -20,6 +20,7 @@ type Meta = {
 
 type Props = {
 	meta: Meta;
+	idApiUrl: string;
 };
 
 const containerStyles = css`
@@ -90,11 +91,13 @@ export const canShowBrazeBanner = async (
 type InnerProps = {
 	meta: Meta;
 	BrazeComponent: typeof BrazeBannerComponent;
+	idApiUrl: string;
 };
 
 const BrazeBannerWithSatisfiedDependencies = ({
 	BrazeComponent,
 	meta,
+	idApiUrl,
 }: InnerProps) => {
 	useEffect(() => {
 		// Log the impression with Braze
@@ -123,12 +126,22 @@ const BrazeBannerWithSatisfiedDependencies = ({
 				submitComponentEvent={submitComponentEvent}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
+				subscribeToNewsletter={async (newsletterId: string) => {
+					await fetch(`${idApiUrl}/users/me/newsletters`, {
+						method: 'PATCH',
+						body: JSON.stringify({
+							id: newsletterId,
+							subscribed: true,
+						}),
+						credentials: 'include',
+					});
+				}}
 			/>
 		</div>
 	);
 };
 
-export const BrazeBanner = ({ meta }: Props) => {
+export const BrazeBanner = ({ meta, idApiUrl }: Props) => {
 	const [BrazeComponent, setBrazeComponent] =
 		useState<typeof BrazeBannerComponent>();
 
@@ -153,6 +166,7 @@ export const BrazeBanner = ({ meta }: Props) => {
 				<BrazeBannerWithSatisfiedDependencies
 					BrazeComponent={BrazeComponent}
 					meta={meta}
+					idApiUrl={idApiUrl}
 				/>
 			) : (
 				<div />

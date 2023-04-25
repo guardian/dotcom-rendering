@@ -22,7 +22,7 @@ export const defaultStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'Default Disclaimer' };
+defaultStory.storyName = 'Default Disclaimer';
 
 export const OpinionStory = () => {
 	return (
@@ -35,4 +35,4 @@ export const OpinionStory = () => {
 		</div>
 	);
 };
-OpinionStory.story = { name: 'Opinion Disclaimer' };
+OpinionStory.storyName = 'Opinion Disclaimer';

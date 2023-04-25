@@ -16,6 +16,7 @@ import {
 	map2,
 	map4,
 	map8,
+	map9,
 	maybe,
 	numberParser,
 	parse,
@@ -84,16 +85,18 @@ const makeCalloutProps = (
 });
 
 const makeCallout = (
-	heading: string,
 	formId: number,
 	formFields: FormField[],
 	isNonCollapsible: boolean,
 	name: string,
+	prompt: string,
+	heading: string,
 	description?: DocumentFragment,
 	activeUntil?: number,
 	contacts?: Contact[],
 ): Callout => ({
 	kind: ElementKind.Callout,
+	prompt,
 	heading,
 	formId,
 	formFields,
@@ -159,12 +162,13 @@ const contactsParser: Parser<Contact> = map4(makeContacts)(
 	aOrUndefinedParser(fieldParser('guidance', stringParser)),
 );
 
-const calloutParser: Parser<Callout> = map8(makeCallout)(
-	fieldParser('heading', stringParser),
+const calloutParser: Parser<Callout> = map9(makeCallout)(
 	fieldParser('formId', numberParser),
 	fieldParser('formFields', arrayParser(formFieldsParser)),
 	fieldParser('isNonCollapsible', booleanParser),
 	fieldParser('name', stringParser),
+	fieldParser('prompt', stringParser),
+	fieldParser('heading', stringParser),
 	fieldParser('description', documentFragmentParser),
 	aOrUndefinedParser(fieldParser('activeUntil', numberParser)),
 	aOrUndefinedParser(fieldParser('contacts', arrayParser(contactsParser))),

@@ -107,6 +107,18 @@ const verticalStyle = css`
 	transition: 0.3s all ease;
 `;
 
+/**
+ * # Table of Contents Component
+ *
+ * A table of contents, shown at the top of an article
+ * to allow readers to quickly navigate though articles.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page.
+ *
+ */
+
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);
 	const [open, setOpen] = useState(tableOfContents.length < 5);
