@@ -2201,10 +2201,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-4.0.0.tgz#50c1fc076437e594b367f6e8d9469a3d9b97a78e"
   integrity sha512-l6Ot/anisLKyoLZOp8koW7Ia5JFOtmZkB0sfgdWajv5+N0w0UScUVoImEdPlFstM1anSd3FvV8D3UgYkRzAang==
 
-"@guardian/atoms-rendering@^27.0.0":
-  version "27.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-27.0.0.tgz#bd2fa3b369f4dcb1cec277be970b4d1c67b00e20"
-  integrity sha512-0H61KsLuJywNRZAfC2ZcJShOjnB0L1nsc5h4+/1Z9hrm4IsrVxEipsmjUg5JkxQXvMAFRZO0KM2L7gmc2nq30g==
+"@guardian/atoms-rendering@^28.0.0":
+  version "28.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-28.0.0.tgz#9366d327ff681470a67a8cf83e29a1fd4569f2a2"
+  integrity sha512-xCNnAEDNIoRnXNeQtZG70VwXNQheG+/VXPaNiL3F/p4ncAggrLEZdR5TGViIsisLv+LvfMJwl1uBy7/i6yFkIw==
   dependencies:
     is-mobile "3.1.1"
 
@@ -2259,10 +2259,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-4.0.0.tgz#e09bf40ee896ae92c0223fa57399b1b0b5f9bdb2"
   integrity sha512-LDXnDhsNApO9v8LrXPK1AHMZYoa457tYjqjHnXNSxleHHoyeS3ehB4qohdDMpWv76F8DLUVMXBTZ/8EbQce3sA==
 
-"@guardian/discussion-rendering@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-13.0.0.tgz#4dc128b399e6de1c3e6800fc37deb13462f31145"
-  integrity sha512-1cqeBrO9RGhntYJR2kVEOFPjvbo338Yh+xX7ov5Cu+3VDA9KMGG706fOmN359sOLtnIw2BjaadK3fhp+WyAWFg==
+"@guardian/discussion-rendering@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-14.0.0.tgz#2cbfe802a2f81bb8d2ee083a8374fb6bd00dbdcf"
+  integrity sha512-O4XlA1ueL2TX1pWD9jNAPIA8bdaGfZeLzDPVJAgpGIjwlXxQj/xSk/dpJ8jC/V/XBztucM7XtughigvN5fY59w==
 
 "@guardian/eslint-config-typescript@^5.0.0":
   version "5.0.0"
