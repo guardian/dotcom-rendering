@@ -644,6 +644,19 @@ const textCardHeadline = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
 			return pillarPalette[format.theme].dark;
+		case ArticleDesign.Feature:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				default:
+					return BLACK;
+			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -661,18 +674,7 @@ const textCardHeadline = (format: ArticleFormat): string => {
 					return WHITE;
 			}
 		default:
-			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[300];
-				case ArticlePillar.Sport:
-					return sport[300];
-				case ArticlePillar.Culture:
-					return culture[300];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[300];
-				default:
-					return BLACK;
-			}
+			return BLACK;
 	}
 };
 
@@ -686,6 +688,11 @@ const textCardStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
 			return pillarPalette[format.theme].dark;
+		case ArticleDesign.Feature:
+			switch (format.theme) {
+				default:
+					return BLACK;
+			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
