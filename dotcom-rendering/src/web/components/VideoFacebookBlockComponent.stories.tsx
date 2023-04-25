@@ -41,8 +41,8 @@ export const largeAspectRatio = () => {
 		</Wrapper>
 	);
 };
+largeAspectRatio.storyName = 'with large aspect ratio';
 largeAspectRatio.story = {
-	name: 'with large aspect ratio',
 	chromatic: { disable: true },
 };
 
@@ -69,4 +69,4 @@ export const verticalAspectRatio = () => {
 		</Wrapper>
 	);
 };
-verticalAspectRatio.story = { name: 'with vertical aspect ratio' };
+verticalAspectRatio.storyName = 'with vertical aspect ratio';

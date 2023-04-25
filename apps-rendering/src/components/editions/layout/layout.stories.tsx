@@ -7,7 +7,6 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { none, some } from '@guardian/types';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
 	analysis,
@@ -56,26 +55,6 @@ const contributors: Contributor[] = [
 	},
 ];
 
-const hasContributor = (): { contributors: Contributor[] } => {
-	return {
-		contributors: boolean('Contributors', true) ? contributors : [],
-	};
-};
-
-const isImmersive = (): { display: ArticleDisplay } => {
-	return {
-		display: boolean('Immersive', false)
-			? ArticleDisplay.Immersive
-			: ArticleDisplay.Standard,
-	};
-};
-
-const hasShareIcon = (): { webUrl: string } => {
-	return {
-		webUrl: boolean('ShareIcon', true) ? 'www.guardian.com' : '',
-	};
-};
-
 const getTag = (id: string, webTitle: string): Tag => ({
 	id,
 	type: 6,
@@ -92,8 +71,7 @@ const Default = (): ReactElement => (
 	<Layout
 		item={{
 			...article,
-			...isImmersive(),
-			...hasShareIcon(),
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -103,9 +81,7 @@ const Analysis = (): ReactElement => (
 	<Layout
 		item={{
 			...analysis,
-			...isImmersive(),
-			...hasShareIcon(),
-
+			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/analysis', 'View from the Guardian ')],
 			theme: ArticlePillar.Lifestyle,
 		}}
@@ -117,9 +93,7 @@ const Editorial = (): ReactElement => (
 		item={{
 			...editorial,
 			tags: [getTag('tone/editorials', 'View from the Guardian ')],
-			...isImmersive(),
-			...hasShareIcon(),
-
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.Opinion,
 		}}
 	/>
@@ -129,9 +103,7 @@ const Feature = (): ReactElement => (
 	<Layout
 		item={{
 			...feature,
-			...isImmersive(),
-			...hasShareIcon(),
-
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.Sport,
 		}}
 	/>
@@ -141,8 +113,7 @@ const Review = (): ReactElement => (
 	<Layout
 		item={{
 			...review,
-			...hasShareIcon(),
-
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.Culture,
 		}}
 	/>
@@ -152,8 +123,7 @@ const Showcase = (): ReactElement => (
 	<Layout
 		item={{
 			...article,
-			...hasShareIcon(),
-
+			webUrl: 'https://www.theguardian.com',
 			display: ArticleDisplay.Showcase,
 			theme: ArticlePillar.News,
 		}}
@@ -164,9 +134,7 @@ const Interview = (): ReactElement => (
 	<Layout
 		item={{
 			...interview,
-			...hasShareIcon(),
-
-			...isImmersive(),
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.Sport,
 		}}
 	/>
@@ -176,9 +144,8 @@ const Comment = (): ReactElement => (
 	<Layout
 		item={{
 			...comment,
-			...hasShareIcon(),
-			...hasContributor(),
-			...isImmersive(),
+			webUrl: 'https://www.theguardian.com',
+			contributors,
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -188,7 +155,7 @@ const Letter = (): ReactElement => (
 	<Layout
 		item={{
 			...letter,
-			...hasShareIcon(),
+			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/letters', 'Letters ')],
 			theme: ArticlePillar.Opinion,
 		}}
@@ -214,7 +181,7 @@ const MatchReport = (): ReactElement => (
 	<Layout
 		item={{
 			...matchReport,
-			...hasShareIcon(),
+			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('tone/sport', 'Sport ')],
 			theme: ArticlePillar.Sport,
 		}}
@@ -225,7 +192,7 @@ const Cartoon = (): ReactElement => (
 	<Layout
 		item={{
 			...cartoon,
-			...hasShareIcon(),
+			webUrl: 'https://www.theguardian.com',
 			tags: [getTag('type/picture', 'cartoon')],
 		}}
 	/>
@@ -235,7 +202,7 @@ const Gallery = (): ReactElement => (
 	<Layout
 		item={{
 			...media,
-			...hasShareIcon(),
+			webUrl: 'https://www.theguardian.com',
 			theme: ArticlePillar.News,
 		}}
 	/>
@@ -253,7 +220,6 @@ Gallery.parameters = {
 export default {
 	component: Layout,
 	title: 'Editions/Layouts',
-	decorators: [withKnobs],
 	parameters: {
 		layout: 'fullscreen',
 		chromatic: {

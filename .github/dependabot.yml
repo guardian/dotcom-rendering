@@ -1,7 +1,7 @@
 # To get started with Dependabot version updates, you'll need to specify which
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/about-dependabot-version-updates
 
 version: 2
 updates:
@@ -11,6 +11,13 @@ updates:
           interval: 'daily'
       # Set to minimise the number of chromatic runs.
       rebase-strategy: "disabled"
+
+      ignore:
+        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
+        - dependency-name: 'aws-cdk'
+        - dependency-name: 'aws-cdk-lib'
+        - dependency-name: 'constructs'
+      open-pull-requests-limit: 10
     - package-ecosystem: 'npm'
       directory: '/apps-rendering'
       schedule:
@@ -24,14 +31,6 @@ updates:
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
       open-pull-requests-limit: 7
-    - package-ecosystem: "npm"
-      directory: "/dotcom-rendering"
-      schedule:
-        interval: "daily"
-      labels:
-        - "DCR Dependency"
-      open-pull-requests-limit: 10
-      rebase-strategy: "disabled"
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:

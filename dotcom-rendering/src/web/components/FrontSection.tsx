@@ -1,6 +1,7 @@
-import { css, jsx } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral, space } from '@guardian/source-foundations';
+import { css } from '@emotion/react';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
+import { from, neutral, space, until } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -11,44 +12,17 @@ import { Treats } from './Treats';
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
-	/** Allows the colour of the title to be changed */
-	fontColour?: string;
 	/** This text shows below the title */
 	description?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	/** Defaults to `true`. If we should render the left and right borders */
-	showSideBorders?: boolean;
-	centralBorder?: 'partial' | 'full';
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** The html tag used by Section defaults to `section` but can be overridden here */
-	element?:
-		| 'div'
-		| 'article'
-		| 'aside'
-		| 'nav'
-		| 'main'
-		| 'header'
-		| 'section'
-		| 'footer';
-	/** Defaults to `true`. Adds margins to the top and bottom */
-	verticalMargins?: boolean;
-	/** Applies a background colour to the entire width */
-	backgroundColour?: string;
-	/** The colour of borders can be overriden */
-	borderColour?: string;
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
-	/** Defaults to `false`. If true, `children` is rendered all the way right */
-	stretchRight?: boolean;
-	/** Defaults to `compact`. Some page types have a different left column width */
-	leftColSize?: LeftColSize;
-	/** @deprecated no longer used */
-	format?: ArticleFormat;
 	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
 	/** The string used to set the `data-link-name` Ophan attribute */
@@ -66,8 +40,6 @@ type Props = {
 	 * to be collapsed
 	 */
 	toggleable?: boolean;
-	/** Applies a background colour only to the content inside the left and right borders */
-	innerBackgroundColour?: string;
 	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
 	 * shown under the title. Typically only used on Headlines containers on fronts
 	 */
@@ -76,6 +48,7 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
+	badge?: EmotionJSX.Element;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -119,9 +92,9 @@ const containerStyles = css`
 		[viewport-start] 0px
 		[content-start title-start]
 		repeat(3, minmax(0, 1fr))
-		[title-end hide-start]
+		[hide-start]
 		minmax(0, 1fr)
-		[content-end hide-end]
+		[content-end title-end hide-end]
 		0px [viewport-end];
 	column-gap: 10px;
 
@@ -134,9 +107,9 @@ const containerStyles = css`
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
 			repeat(11, 40px)
-			[title-end hide-start]
+			[hide-start]
 			40px
-			[content-end hide-end]
+			[content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -145,9 +118,9 @@ const containerStyles = css`
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
 			repeat(11, 60px)
-			[title-end hide-start]
+			[hide-start]
 			60px
-			[content-end hide-end]
+			[content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -182,35 +155,6 @@ const containerStyles = css`
 
 	${from.leftCol} {
 		grid-template-rows: [content-start] repeat(2, auto);
-	}
-`;
-
-const wideLeftColumn = css`
-	${from.leftCol} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(10, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end] minmax(0, 1fr) [viewport-end];
-	}
-`;
-
-const sectionContentStretchedRight = css`
-	${from.wide} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(12, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end]
-			minmax(0, 1fr) [viewport-end];
 	}
 `;
 
@@ -279,23 +223,6 @@ const sectionContent = css`
 	}
 `;
 
-const sectionContentBorder = css`
-	position: relative;
-
-	${from.leftCol} {
-		::before {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			bottom: 0;
-			left: -10px;
-			position: absolute;
-			background-color: ${neutral[86]};
-		}
-	}
-`;
-
 const sectionContentPadded = css`
 	${from.tablet} {
 		margin-left: -10px;
@@ -345,6 +272,12 @@ const topBorder = css`
 	border-top-style: solid;
 `;
 
+const titleStyle = css`
+	${until.leftCol} {
+		max-width: 74%;
+	}
+`;
+
 /**
  * # Front Container
  *
@@ -361,9 +294,9 @@ const topBorder = css`
  *
  * from `mobile` (320) to `phablet` (660)
  *  1 2 3 4
- * ┌─────┬─┐
- * │Title│X│
- * ├─────┴─┤
+ * ┌───────┐
+ * │Title  │
+ * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
  * └───────┘
@@ -371,10 +304,10 @@ const topBorder = css`
  * from `tablet` (740) to `desktop` (980)
  *
  *  1 2 3 4 5 6 7 8 9 a b c (12)
- * ┌─────────────────────┬─┐
- * │Title                │X│
- * │Date                 │ │
- * ├─────────────────────┴─┤
+ * ┌───────────────────────┐
+ * │Title                  │
+ * │Date                   │
+ * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * └───────────────────────┘
@@ -415,115 +348,74 @@ const topBorder = css`
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * └─────┴─────────────────────────┘
  *
- * on `wide` (1300) with `stretchRight`
- *
- *  1 2 3 4 5 6 7 8 9 a b c d e f g (16)
- * ┌─────┬─────────────────────────┐
- * │Title│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Date │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├─────┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * └─────┴─────────────────────────┘
- *
  */
 export const FrontSection = ({
-	element = 'section',
 	title,
 	children,
-	backgroundColour,
-	borderColour,
-	centralBorder,
 	containerName,
 	containerPalette,
 	description,
 	editionId,
-	fontColour,
-	innerBackgroundColour,
-	leftColSize = 'compact',
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
 	sectionId,
 	showDateHeader = false,
-	showSideBorders = true,
 	showTopBorder = true,
-	stretchRight = false,
 	toggleable = false,
 	treats,
 	url,
-	verticalMargins = true,
+	badge,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const isToggleable = toggleable && !!sectionId;
 
-	const showDecoration =
-		showTopBorder || showSideBorders || !!innerBackgroundColour;
-
 	const childrenContainerStyles = [
 		sectionContent,
 		sectionContentPadded,
-		centralBorder === 'full' && sectionContentBorder,
-		verticalMargins && paddings,
+		paddings,
 	];
 
-	return jsx(
-		element,
-		{
-			/**
-			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-			 * this id pre-existed showMore so is probably also being used for something else.
-			 */
-			id: sectionId,
-			'data-link-name': ophanComponentLink,
-			'data-component': ophanComponentName,
-			'data-container-name': containerName,
-			css: [
+	/**
+	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * this id pre-existed showMore so is probably also being used for something else.
+	 */
+	return (
+		<section
+			id={sectionId}
+			data-link-name={ophanComponentLink}
+			data-component={ophanComponentName}
+			data-container-name={containerName}
+			css={[
 				fallbackStyles,
 				containerStyles,
-				leftColSize === 'wide' && wideLeftColumn,
 				isToggleable && containerStylesToggleable,
-				stretchRight && sectionContentStretchedRight,
 				css`
-					background-color: ${backgroundColour ??
-					overrides?.background.container};
+					background-color: ${overrides?.background.container};
 				`,
-			],
-		},
-		<>
-			{showDecoration && (
-				<div
-					css={[
-						decoration,
-						showSideBorders && sideBorders,
-						showTopBorder && topBorder,
-						innerBackgroundColour &&
-							css`
-								background-color: ${innerBackgroundColour};
-							`,
-					]}
-				/>
-			)}
-			<div
-				css={[
-					headlineContainerStyles,
-					centralBorder === 'partial' && headlineContainerBorders,
-				]}
-			>
-				<ContainerTitle
-					title={title}
-					fontColour={fontColour ?? overrides?.text.container}
-					description={description}
-					url={url}
-					containerPalette={containerPalette}
-					showDateHeader={showDateHeader}
-					editionId={editionId}
-				/>
+			]}
+		>
+			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+
+			<div css={[headlineContainerStyles, headlineContainerBorders]}>
+				<Hide until="leftCol">{badge}</Hide>
+				<div css={titleStyle}>
+					<Hide from="leftCol">{badge}</Hide>
+					<ContainerTitle
+						title={title}
+						fontColour={overrides?.text.container}
+						description={description}
+						url={url}
+						containerPalette={containerPalette}
+						showDateHeader={showDateHeader}
+						editionId={editionId}
+					/>
+				</div>
 				{leftContent}
 			</div>
+
 			{isToggleable ? (
 				<>
 					<div css={sectionShowHide}>
@@ -546,15 +438,13 @@ export const FrontSection = ({
 			)}
 
 			{treats && (
-				<div css={[sectionTreats, verticalMargins && paddings]}>
+				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={
-							borderColour ?? overrides?.border.container
-						}
+						borderColour={overrides?.border.container}
 					/>
 				</div>
 			)}
-		</>,
+		</section>
 	);
 };

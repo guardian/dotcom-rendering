@@ -9,4 +9,4 @@ export const Default = () => {
 	return <NewsletterDetail text="UK Focused" />;
 };
 
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

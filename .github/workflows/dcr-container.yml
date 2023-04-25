@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@3.5.1
@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Container Image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.11
+        uses: redhat-actions/buildah-build@v2.12
         with:
           image: dotcom-rendering
           tags: ${{ github.sha }} ${{ env.GITHUB_REF_SLUG }}
