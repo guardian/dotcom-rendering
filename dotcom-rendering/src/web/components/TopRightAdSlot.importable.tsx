@@ -2,8 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 
-const MOSTVIEWED_STICKY_HEIGHT = 1059;
-
 /**
  * # Top Right Ad Slot
  *
@@ -36,7 +34,7 @@ export const TopRightAdSlot = ({
 			css={[
 				css`
 					position: static;
-					height: ${MOSTVIEWED_STICKY_HEIGHT}px;
+					height: 100%;
 				`,
 				adStyles,
 			]}
