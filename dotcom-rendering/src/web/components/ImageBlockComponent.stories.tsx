@@ -231,8 +231,8 @@ export const InlineTitle = () => {
 		</Wrapper>
 	);
 };
+InlineTitle.storyName = 'with title and role inline';
 InlineTitle.story = {
-	name: 'with title and role inline',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [1300] },
@@ -265,8 +265,8 @@ export const InlineTitleMobile = () => {
 		</Wrapper>
 	);
 };
+InlineTitleMobile.storyName = 'with title and role inline on mobile';
 InlineTitleMobile.story = {
-	name: 'with title and role inline on mobile',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [375] },
@@ -327,8 +327,8 @@ export const ShowcaseTitle = () => {
 		</Wrapper>
 	);
 };
+ShowcaseTitle.storyName = 'with title and role showcase';
 ShowcaseTitle.story = {
-	name: 'with title and role showcase',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [980] },
@@ -395,8 +395,8 @@ export const HalfWidth = () => {
 		</Wrapper>
 	);
 };
+HalfWidth.storyName = 'with role halfWidth on desktop';
 HalfWidth.story = {
-	name: 'with role halfWidth on desktop',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [980] },
@@ -463,8 +463,8 @@ export const HalfWidthMobile = () => {
 		</Wrapper>
 	);
 };
+HalfWidthMobile.storyName = 'with role halfWidth on mobile';
 HalfWidthMobile.story = {
-	name: 'with role halfWidth on mobile',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [375] },
@@ -531,8 +531,8 @@ export const HalfWidthWide = () => {
 		</Wrapper>
 	);
 };
+HalfWidthWide.storyName = 'with role halfWidth';
 HalfWidthWide.story = {
-	name: 'with role halfWidth',
 	parameters: {
 		viewport: { defaultViewport: 'wide' },
 		chromatic: { disable: true },

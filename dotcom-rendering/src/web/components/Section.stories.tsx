@@ -263,8 +263,8 @@ export const MultipleStory = () => {
 		</>
 	);
 };
+MultipleStory.storyName = 'with multiple sections';
 MultipleStory.story = {
-	name: 'with multiple sections',
 	parameters: {
 		chromatic: {
 			viewports: [
