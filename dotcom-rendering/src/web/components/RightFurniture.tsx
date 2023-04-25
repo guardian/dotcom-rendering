@@ -19,14 +19,14 @@ export const RightFurniture = ({
 }: Props) => {
 	return (
 		<>
-			{renderAds && (
+			{renderAds ? (
 				<AdSlot
 					position="right"
 					display={display}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
 					isPaidContent={isPaidContent}
 				/>
-			)}
+			) : null}
 
 			{!isPaidContent ? (
 				<Island clientOnly={true} deferUntil="visible">
