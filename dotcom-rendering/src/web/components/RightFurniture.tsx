@@ -32,9 +32,7 @@ export const RightFurniture = ({
 				<Island clientOnly={true} deferUntil="visible">
 					<MostViewedRightWrapper isAdFreeUser={isAdFreeUser} />
 				</Island>
-			) : (
-				<></>
-			)}
+			) : null}
 		</>
 	);
 };
