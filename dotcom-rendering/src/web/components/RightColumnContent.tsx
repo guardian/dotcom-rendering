@@ -28,8 +28,8 @@ export const RightColumnContent = ({
 			// can measure the height of this component
 			data-component="right-furniture"
 			css={css`
-				// The height can be smaller than the maximum height
-				// For example if the article is very short
+				/* The height can be smaller than the maximum height
+				   For example if the article is very short */
 				height: min(100%, ${MAX_HEIGHT_PX}px);
 				display: flex;
 				flex-direction: column;

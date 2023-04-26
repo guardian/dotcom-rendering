@@ -25,10 +25,13 @@ const headingStyles = css`
 
 interface Props {
 	limitItems?: number;
-	stickToTop: boolean;
+	stickToTop?: boolean;
 }
 
-export const MostViewedRight = ({ limitItems = 5, stickToTop }: Props) => {
+export const MostViewedRight = ({
+	limitItems = 5,
+	stickToTop = false,
+}: Props) => {
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<FETrailTabType>(endpointUrl);

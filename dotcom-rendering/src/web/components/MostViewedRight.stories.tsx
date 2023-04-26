@@ -44,7 +44,7 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padSides={false}
 					>
-						<MostViewedRight stickToTop={false} />
+						<MostViewedRight />
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -81,7 +81,7 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padSides={false}
 					>
-						<MostViewedRight limitItems={3} stickToTop={false} />
+						<MostViewedRight limitItems={3} />
 					</Section>
 				</RightColumn>
 			</Flex>
@@ -98,7 +98,7 @@ export const outsideContextStory = () => {
 
 	return (
 		<Section fullWidth={true}>
-			<MostViewedRight stickToTop={false} />
+			<MostViewedRight />
 		</Section>
 	);
 };
