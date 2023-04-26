@@ -42,8 +42,8 @@ const Deadblogs = (): ReactElement => {
 	);
 };
 
+Deadblogs.storyName = 'Deadblogs comment count below desktop';
 Deadblogs.story = {
-	name: 'Deadblogs comment count below desktop',
 	parameters: {
 		viewport: { defaultViewport: 'tablet' },
 		chromatic: { viewports: [breakpoints.tablet] },
