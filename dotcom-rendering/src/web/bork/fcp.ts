@@ -11,7 +11,7 @@ export const fcp = (): void => {
 				'--bork-fcp-amount',
 				hash.replace(hashKey, '') + 'ms',
 			);
-			document.documentElement.classList.add('bork-fcp');
+			root.classList.add('bork-fcp');
 		}
 	} catch (e) {
 		// do nothing
