@@ -96,7 +96,10 @@ const adStyles = css`
 				align-self: flex-start;
 			}
 
-			/* ensure that the ad slot is centred */
+			/*
+			   Ensure that the ad slot is centred,
+			   the element with this class name is inserted by GAM into the ad slot
+			*/
 			.ad-slot__content {
 				margin-left: auto;
 				margin-right: auto;
