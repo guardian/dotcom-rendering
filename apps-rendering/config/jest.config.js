@@ -19,7 +19,8 @@ const testCoveragePaths = [
 	'components/editions/kickerPicker.ts',
 ].map((path) => `<rootDir>/src/${path}`);
 
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
 	collectCoverage: true,
 	preset: 'ts-jest/presets/js-with-ts',
 	rootDir: '../',
@@ -28,8 +29,7 @@ module.exports = {
 	globals: {
 		'ts-jest': {
 			tsconfig: 'config/tsconfig.test.json',
-		},
-		TextEncoder: require('util').TextEncoder
+		}
 	},
 	coverageThreshold: {
 		global: {
@@ -46,3 +46,4 @@ module.exports = {
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
 	testPathIgnorePatterns: ['node_modules/'],
 };
+module.exports = config;
