@@ -11,8 +11,11 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 };
 
-// TODO - adjust this to be a real number
-const MAX_HEIGHT_PX = 1059 + 482 + 24 + 24;
+/**
+ * The maximum height of the container that may contain
+ * a right ad slot and a most viewed component
+ */
+const MAX_HEIGHT_PX = 1600;
 
 export const RightFurniture = ({
 	display,
@@ -23,9 +26,12 @@ export const RightFurniture = ({
 }: Props) => {
 	return (
 		<div
+			// This attribute is necessary so that most viewed wrapper
+			// can measure the height of this component
+			data-component="right-furniture"
 			css={css`
-				/* TODO remove this */
-				outline: 2px solid red;
+				// The height can be smaller than the maximum height
+				// For example if the article is very short
 				height: min(100%, ${MAX_HEIGHT_PX}px);
 				display: flex;
 				flex-direction: column;

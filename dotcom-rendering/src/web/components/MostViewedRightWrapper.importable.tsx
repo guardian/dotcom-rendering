@@ -1,72 +1,61 @@
 import { css } from '@emotion/react';
-// import type { RefObject } from 'react';
-// import { useEffect, useRef, useState } from 'react';
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { MostViewedRight } from './MostViewedRight';
-
-// Here's my thinking on how this works:
-// 1. The most viewed container renders.
-// 2. render a div that fills the remaining space in the most viewed container
-// 3. the use effect runs. The height is not available, so we measure the div instead
 
 type Props = {
 	limitItems?: number;
 	isAdFreeUser: boolean;
 };
 
-// Minimum height needed to render MostViewedRight is its own outer height.
-// const HEIGHT_REQUIRED = 482 + 24 + 24;
+/**
+ * Assume a typical height for the most viewed component
+ *
+ * The actual height can be vary based on the length of the links,
+ * so could be larger than this
+ */
+const ASSUMED_MOST_VIEWED_HEIGHT = 482 + 24 + 24;
 
-// const SHADY_PIE_HEIGHT = 400;
-// const TOP_RIGHT_AD_HEIGHT = 1059;
+/**
+ * The maximum height that can be occupied by an advert in the right column
+ */
+const MAX_ADVERT_HEIGHT = 600;
 
-// Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
+/**
+ * The minimum space we'd like to require between the ad and the Most Viewed component in order to show Most Viewed
+ */
+const MIN_SPACE_BETWEEN = 200;
+
+/**
+ * The total height required is equal to sum of the three things above:
+ */
+const HEIGHT_REQUIRED =
+	ASSUMED_MOST_VIEWED_HEIGHT + MAX_ADVERT_HEIGHT + MIN_SPACE_BETWEEN;
+
+/**
+ * Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it
+ */
 export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
-	const bodyRef = useRef<HTMLDivElement>(null);
-	// const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
+	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
-	// useEffect(() => {
-	// 	const checkHeight = (ref: RefObject<HTMLDivElement>) => {
-	// 		console.log('bodyref!', ref);
-	// 		if (!heightIsAvailable) {
-	// 			// Don't bother checking if height already available
-	// 			if (ref.current) {
-	// 				const { offsetHeight } = ref.current;
-	// 				setHeightIsAvailable(offsetHeight > HEIGHT_REQUIRED);
-	// 			}
-	// 		}
-	// 	};
+	// We don't always show the most viewed component - it depends on the length of the article
+	// This effect determines whether to show the most viewed, depending on the computed height of the
+	// RightFurniture container
+	useEffect(() => {
+		const rightFurniture = document.querySelector<HTMLDivElement>(
+			'[data-component="right-furniture"]',
+		);
+		const height = rightFurniture?.getBoundingClientRect().height;
+		setHeightIsAvailable(height !== undefined && height >= HEIGHT_REQUIRED);
+	}, []);
 
-	// 	// Check if we have the available height
-	// 	checkHeight(bodyRef);
-
-	// 	// setTimeout here lets us put another check at the end of the
-	// 	// event queue in case any in body elements still need to render
-	// 	// which could push the page down giving us the space we need
-	// 	setTimeout(() => {
-	// 		checkHeight(bodyRef);
-	// 	});
-	// }, [heightIsAvailable]);
-
-	// const rightAdvertHeight = adBlockerDetected
-	// 	? SHADY_PIE_HEIGHT
-	// 	: TOP_RIGHT_AD_HEIGHT;
-
-	// // Styling the data island root so it stretches to cover the full height available in the container.
-	// // Requires us to subtract the height of its sibling in the container (Sticky top right ad slot).
-	// const availableSpaceHeight = css`
-	// 	height: calc(100% - ${rightAdvertHeight}px);
-	// `;
-
-	// if (!heightIsAvailable) {
-	// 	return <div ref={bodyRef} css={availableSpaceHeight} />;
-	// }
+	if (!heightIsAvailable) {
+		return null;
+	}
 
 	return (
 		<div
-			ref={bodyRef}
 			css={css`
 				height: auto;
 			`}
