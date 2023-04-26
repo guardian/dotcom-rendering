@@ -39,20 +39,20 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
 		case 'ginormous':
 			return css`
-				margin-top: -23px;
-				margin-bottom: 2px;
+				margin-top: -7px;
+				margin-bottom: 7px;
 				span {
 					padding: 3px 5px 4px 5px;
 					font-size: 20px;
 					${from.desktop} {
-						font-size: 20px;
+						font-size: 34px;
 					}
 				}
 			`;
 		case 'huge':
 			return css`
-				margin-bottom: 3.5px;
-				margin-top: -2px;
+				margin-bottom: 2.5px;
+				margin-top: -3px;
 				span {
 					font-size: 20px;
 					padding: 2px 5px 3px 5px;
@@ -60,11 +60,11 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'large':
 			return css`
-				margin-bottom: 1px;
-				margin-top: -1px;
+				margin-bottom: 2px;
+				margin-top: -2px;
 				span {
 					font-size: 17px;
-					padding: 2px 5px 2px 5px;
+					padding: 1px 4px 2px 4px;
 				}
 			`;
 		case 'medium':
@@ -78,20 +78,20 @@ const actionKickerFontStyles = (size: SmallHeadlineSize) => {
 			`;
 		case 'small':
 			return css`
-				margin-top: 0;
-				margin-bottom: 2.5px;
+				margin-top: -1px;
+				margin-bottom: 1.5px;
 				span {
 					font-size: 14px;
-					padding: 1px 4px 2px 4px;
+					padding: 0 3px 1px 3px;
 				}
 			`;
 		case 'tiny':
 			return css`
-				margin-top: 2px;
-				margin-bottom: 3px;
+				margin-top: -1px;
+				margin-bottom: 1px;
 				span {
 					font-size: 12px;
-					padding: 2px 4px 2px 4px;
+					padding: 0px 2px 0px 2px;
 				}
 			`;
 	}
@@ -102,23 +102,29 @@ const actionKickerFontStylesOnMobile = (size: SmallHeadlineSize) => {
 		case 'ginormous':
 			return css`
 				${until.mobileLandscape} {
-					margin-top: -7px;
-					margin-bottom: 5px;
+					margin-top: -6px;
+					margin-bottom: 6px;
+					span {
+						font-size: 24px;
+					}
 				}
 				${between.mobileLandscape.and.desktop} {
-					margin-top: -15px;
-					margin-bottom: 3px;
+					margin-top: -6px;
+					margin-bottom: 6px;
+					span {
+						font-size: 28px;
+					}
 				}
 			`;
 		case 'huge':
 			return css`
 				${until.desktop} {
-					margin-bottom: 1.5px;
-					margin-top: -1px;
+					margin-bottom: 2.5px;
+					margin-top: -2px;
 				}
 				span {
 					${until.desktop} {
-						padding: 2px 5px 2px 5px;
+						padding: 1px 4px 2px 4px;
 						font-size: 17px;
 					}
 				}
@@ -139,11 +145,12 @@ const actionKickerFontStylesOnMobile = (size: SmallHeadlineSize) => {
 		case 'medium':
 			return css`
 				${until.desktop} {
-					margin-top: 0px;
-					margin-bottom: 3px;
+					margin-top: -1px;
+					margin-bottom: 1px;
 				}
 				span {
 					${until.desktop} {
+						padding: 0 3px 1px 3px;
 						font-size: 14px;
 					}
 				}
