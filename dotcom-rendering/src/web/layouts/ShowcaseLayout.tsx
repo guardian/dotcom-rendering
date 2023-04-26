@@ -51,7 +51,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { RightFurniture } from '../components/RightFurniture';
+import { RightColumnContent } from '../components/RightColumnContent';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -629,7 +629,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<RightFurniture
+									<RightColumnContent
 										display={format.display}
 										isPaidContent={
 											article.pageType.isPaidContent

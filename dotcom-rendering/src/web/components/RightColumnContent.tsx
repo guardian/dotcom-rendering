@@ -16,7 +16,7 @@ type Props = {
  */
 const MAX_HEIGHT_PX = 1600;
 
-export const RightFurniture = ({
+export const RightColumnContent = ({
 	display,
 	isPaidContent,
 	renderAds,

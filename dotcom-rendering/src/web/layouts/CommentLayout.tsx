@@ -49,7 +49,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { RightFurniture } from '../components/RightFurniture';
+import { RightColumnContent } from '../components/RightColumnContent';
 
 const StandardGrid = ({
 	children,
@@ -681,7 +681,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<RightFurniture
+									<RightColumnContent
 										display={format.display}
 										isPaidContent={
 											article.pageType.isPaidContent

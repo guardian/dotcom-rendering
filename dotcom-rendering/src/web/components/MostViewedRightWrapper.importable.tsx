@@ -16,8 +16,7 @@ export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
 	// We don't always show the most viewed component - it depends on the length of the article
-	// This effect determines whether to show the most viewed, depending on the computed height of the
-	// RightFurniture container
+	// This effect determines whether to show the most viewed, depending on the computed height of the container
 	useEffect(() => {
 		const rightFurniture = document.querySelector<HTMLDivElement>(
 			'[data-component="right-furniture"]',
