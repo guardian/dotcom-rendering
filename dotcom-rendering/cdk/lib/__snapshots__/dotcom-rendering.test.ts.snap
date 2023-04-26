@@ -43,7 +43,9 @@ Object {
     },
   },
   "Metadata": Object {
-    "gu:cdk:constructs": Array [],
+    "gu:cdk:constructs": Array [
+      "GuVpcParameter",
+    ],
     "gu:cdk:version": "TEST",
   },
   "Outputs": Object {
@@ -122,8 +124,9 @@ Object {
       "Type": "String",
     },
     "VpcId": Object {
-      "Description": "The VPC in which rendering instances will run",
-      "Type": "AWS::EC2::VPC::Id",
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
     },
   },
   "Resources": Object {
