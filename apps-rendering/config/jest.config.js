@@ -29,6 +29,7 @@ module.exports = {
 		'ts-jest': {
 			tsconfig: 'config/tsconfig.test.json',
 		},
+		TextEncoder: require('util').TextEncoder
 	},
 	coverageThreshold: {
 		global: {
