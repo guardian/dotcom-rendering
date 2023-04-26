@@ -29,17 +29,15 @@ export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 		return null;
 	}
 
+	const stickToTop = adBlockerDetected || !renderAds;
+
 	return (
 		<div
 			css={css`
 				height: auto;
 			`}
 		>
-			<MostViewedRight
-				limitItems={limitItems}
-				renderAds={renderAds}
-				adBlockerDetected={!!adBlockerDetected}
-			/>
+			<MostViewedRight limitItems={limitItems} stickToTop={stickToTop} />
 		</div>
 	);
 };

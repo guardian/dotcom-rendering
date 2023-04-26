@@ -25,15 +25,10 @@ const headingStyles = css`
 
 interface Props {
 	limitItems?: number;
-	renderAds: boolean;
-	adBlockerDetected: boolean;
+	stickToTop: boolean;
 }
 
-export const MostViewedRight = ({
-	limitItems = 5,
-	renderAds,
-	adBlockerDetected,
-}: Props) => {
+export const MostViewedRight = ({ limitItems = 5, stickToTop }: Props) => {
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<FETrailTabType>(endpointUrl);
@@ -47,7 +42,7 @@ export const MostViewedRight = ({
 		const trails: TrailType[] = data.trails
 			.slice(0, limitItems)
 			.map(decideTrail);
-		const stickToTop = adBlockerDetected || !renderAds;
+
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div
