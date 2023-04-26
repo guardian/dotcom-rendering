@@ -2,6 +2,7 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { fcp } from '../bork/fcp';
 import { fid } from '../bork/fid';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -241,6 +242,10 @@ https://workforus.theguardian.com/careers/product-engineering/
                     window.addEventListener('offline', function incrementOfflineCount () { window.guardian.offlineCount++ });
                 </script>
 
+				<script>
+					(${fcp.toString()})();
+				</script>
+
                 <script>
                     // this is a global that's called at the bottom of the pf.io response,
                     // once the polyfills have run. This may be useful for debugging.
@@ -323,6 +328,21 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+  				<style>
+					@keyframes show-me {
+						to {
+							opacity: 1;
+						}
+					}
+  					html.bork-fcp body {
+						opacity: 0;
+						animation-duration: var(--bork-fcp-amount);
+						animation-name: show-me;
+						animation-timing-function: steps(1);
+						animation-iteration-count: 1;
+						animation-fill-mode: forwards;
+					}
+				</style>
 			</head>
 
 			<body>
