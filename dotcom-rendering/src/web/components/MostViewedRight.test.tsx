@@ -18,7 +18,7 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { asFragment, getAllByText } = render(
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
+			<MostViewedRight renderAds={true} adBlockerDetected={false} />,
 		);
 
 		// Calls api once only
@@ -61,7 +61,7 @@ describe('MostViewedList', () => {
 		const { getAllByText } = render(
 			<MostViewedRight
 				limitItems={3}
-				isAdFreeUser={false}
+				renderAds={true}
 				adBlockerDetected={false}
 			/>,
 		);
@@ -83,7 +83,7 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { getByText } = render(
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
+			<MostViewedRight renderAds={true} adBlockerDetected={false} />,
 		);
 
 		expect(

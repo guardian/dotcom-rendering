@@ -751,7 +751,6 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 								<RightColumn>
 									<RightFurniture
 										display={format.display}
-										isAdFreeUser={article.isAdFreeUser}
 										isPaidContent={
 											article.pageType.isPaidContent
 										}

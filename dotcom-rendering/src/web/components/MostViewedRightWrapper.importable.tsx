@@ -5,7 +5,7 @@ import { MostViewedRight } from './MostViewedRight';
 
 type Props = {
 	limitItems?: number;
-	isAdFreeUser: boolean;
+	renderAds: boolean;
 };
 
 /**
@@ -35,7 +35,7 @@ const HEIGHT_REQUIRED =
 /**
  * Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it
  */
-export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
+export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
@@ -62,7 +62,7 @@ export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 		>
 			<MostViewedRight
 				limitItems={limitItems}
-				isAdFreeUser={isAdFreeUser}
+				renderAds={renderAds}
 				adBlockerDetected={!!adBlockerDetected}
 			/>
 		</div>

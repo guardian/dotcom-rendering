@@ -5,7 +5,6 @@ import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
 
 type Props = {
 	display: ArticleDisplay;
-	isAdFreeUser: boolean;
 	isPaidContent: boolean;
 	renderAds: boolean;
 	shouldHideReaderRevenue: boolean;
@@ -19,7 +18,6 @@ const MAX_HEIGHT_PX = 1600;
 
 export const RightFurniture = ({
 	display,
-	isAdFreeUser,
 	isPaidContent,
 	renderAds,
 	shouldHideReaderRevenue,
@@ -48,7 +46,7 @@ export const RightFurniture = ({
 
 			{!isPaidContent ? (
 				<Island clientOnly={true} deferUntil="visible">
-					<MostViewedRightWrapper isAdFreeUser={isAdFreeUser} />
+					<MostViewedRightWrapper renderAds={renderAds} />
 				</Island>
 			) : null}
 		</div>

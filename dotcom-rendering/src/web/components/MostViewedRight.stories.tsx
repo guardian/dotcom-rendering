@@ -45,7 +45,7 @@ export const defaultStory = () => {
 						padSides={false}
 					>
 						<MostViewedRight
-							isAdFreeUser={false}
+							renderAds={true}
 							adBlockerDetected={false}
 						/>
 					</Section>
@@ -86,7 +86,7 @@ export const limitItemsStory = () => {
 					>
 						<MostViewedRight
 							limitItems={3}
-							isAdFreeUser={false}
+							renderAds={true}
 							adBlockerDetected={false}
 						/>
 					</Section>
@@ -105,7 +105,7 @@ export const outsideContextStory = () => {
 
 	return (
 		<Section fullWidth={true}>
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
+			<MostViewedRight renderAds={true} adBlockerDetected={false} />
 		</Section>
 	);
 };
