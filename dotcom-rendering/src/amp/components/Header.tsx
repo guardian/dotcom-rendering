@@ -11,7 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
-import type { NavType, PillarType } from '../../model/extract-nav';
+import type { NavType, PillarLinkType } from '../../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 
 const headerStyles = css`
@@ -179,7 +179,7 @@ const navRow = css`
 	border-top: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
+const pillarLinks = (pillars: PillarLinkType[], guardianBaseURL: string) => (
 	<nav>
 		<ul css={pillarListStyles}>
 			{pillars.map((p) => (
