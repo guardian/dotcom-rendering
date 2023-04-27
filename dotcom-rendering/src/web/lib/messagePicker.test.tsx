@@ -1,22 +1,16 @@
+import { vi } from 'vitest';
 import { record } from '../browser/ophan/ophan';
 import type { CanShowResult, SlotConfig } from './messagePicker';
 import { pickMessage } from './messagePicker';
 
-jest.mock('../browser/ophan/ophan', () => ({
-	record: jest.fn(),
+vi.mock('../browser/ophan/ophan', () => ({
+	record: vi.fn(),
 }));
 
-jest.useFakeTimers();
+vi.useFakeTimers();
 
-// Wait for all unsettled promises to complete before finishing the test. Not
-// doing this results in a warning from Jest. Note that it's actually expected
-// that there may be outstanding promises when a test completes becuase the the
-// message picker returns when the canShow of a message resolves, even if there
-// are lower priority messages still pending.
-const flushPromises = () => new Promise(setImmediate);
-afterEach(async () => {
-	await flushPromises();
-	jest.clearAllMocks();
+afterEach(() => {
+	vi.clearAllMocks();
 });
 
 describe('pickMessage', () => {
@@ -127,7 +121,7 @@ describe('pickMessage', () => {
 		};
 
 		const messagePromise = pickMessage(config);
-		jest.advanceTimersByTime(260);
+		vi.advanceTimersByTime(260);
 		const got = await messagePromise;
 
 		expect(got()).toEqual(ChosenMockComponent);
@@ -180,7 +174,7 @@ describe('pickMessage', () => {
 		};
 
 		const messagePromise = pickMessage(config);
-		jest.advanceTimersByTime(260);
+		vi.advanceTimersByTime(260);
 		const got = await messagePromise;
 
 		expect(got()).toEqual(null);
@@ -190,7 +184,7 @@ describe('pickMessage', () => {
 	});
 
 	it('passes metadata returned by canShow to show', async () => {
-		const renderComponent = jest.fn(() => () => <div />);
+		const renderComponent = vi.fn(() => () => <div />);
 		const meta = { extra: 'info' };
 		const config: SlotConfig = {
 			name: 'banner',
@@ -244,7 +238,7 @@ describe('pickMessage', () => {
 		};
 
 		const messagePromise = pickMessage(config);
-		jest.advanceTimersByTime(250);
+		vi.advanceTimersByTime(250);
 		const got = await messagePromise;
 
 		expect(got()).toEqual(null);
@@ -303,7 +297,7 @@ describe('pickMessage', () => {
 		};
 
 		const messagePromise = pickMessage(config);
-		jest.advanceTimersByTime(150);
+		vi.advanceTimersByTime(150);
 		await messagePromise;
 
 		expect(record).toHaveBeenCalledWith(

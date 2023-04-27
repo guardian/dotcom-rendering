@@ -1,16 +1,17 @@
 import { render, waitFor } from '@testing-library/react';
-import type { EditionId } from '../lib/edition';
+import { vi } from 'vitest';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
+import type { EditionId } from '../lib/edition';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
 } = shouldHideSupportMessaging_;
 
-jest.mock('../lib/contributions', () => ({
-	shouldHideSupportMessaging: jest.fn(() => true),
+vi.mock('../lib/contributions', () => ({
+	shouldHideSupportMessaging: vi.fn(() => true),
 }));
-jest.mock('@guardian/libs', () => ({
+vi.mock('@guardian/libs', () => ({
 	getLocale: async () => {
 		return 'GB';
 	},

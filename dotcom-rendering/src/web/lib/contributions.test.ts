@@ -1,4 +1,5 @@
 import { setCookie } from '@guardian/libs';
+import { vi } from 'vitest';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
@@ -24,11 +25,14 @@ const userResponse = {
 	},
 };
 
-jest.mock('./getIdapiUserData', () => {
-	const originalModule = jest.requireActual('./getIdapiUserData');
+vi.mock('./getIdapiUserData', async () => {
+	const originalModule = await vi.importActual<
+		// eslint-disable-next-line @typescript-eslint/consistent-type-imports -- we’re mocking
+		typeof import('./getIdapiUserData')
+	>('./getIdapiUserData');
 	return {
 		...originalModule,
-		getIdApiUserData: jest.fn(() => Promise.resolve(userResponse)),
+		getIdApiUserData: vi.fn(() => Promise.resolve(userResponse)),
 	};
 });
 
@@ -107,7 +111,7 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2018-08-07T10:50:34'));
+		global.Date.now = vi.fn(() => Date.parse('2018-08-07T10:50:34'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
@@ -116,7 +120,7 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2018-08-01T13:00:30'));
+		global.Date.now = vi.fn(() => Date.parse('2018-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
@@ -125,7 +129,7 @@ describe('isRecentOneOffContributor', () => {
 			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 			value: '2018-08-01',
 		});
-		global.Date.now = jest.fn(() => Date.parse('2019-08-01T13:00:30'));
+		global.Date.now = vi.fn(() => Date.parse('2019-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(false);
 	});
 });
@@ -144,11 +148,14 @@ describe('lazyFetchEmailWithTimeout', () => {
 describe('getPurchaseInfo', () => {
 	let getPurchaseInfo: () => any;
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		clearAllCookies();
 		// Reset modules to avoid memoized cookies affecting tests
-		jest.resetModules();
-		({ getPurchaseInfo } = jest.requireActual('./contributions'));
+		vi.resetModules();
+		({ getPurchaseInfo } = await vi.importActual<
+			// eslint-disable-next-line @typescript-eslint/consistent-type-imports -- we’re mocking
+			typeof import('./contributions')
+		>('./contributions'));
 	});
 
 	it('returns decoded cookie data', () => {

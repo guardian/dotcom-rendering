@@ -1,7 +1,8 @@
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { vi } from 'vitest';
 import { findPillar } from './find-pillar';
 
-jest.mock('../lib/pillars', () => ({
+vi.mock('../lib/pillars', () => ({
 	pillarNames: ['news', 'opinion', 'sport', 'culture', 'lifestyle', 'labs'],
 }));
 

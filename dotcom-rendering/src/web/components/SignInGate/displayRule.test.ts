@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
 	isIOS9,
@@ -63,11 +64,7 @@ describe('SignInGate - displayRule methods', () => {
 
 	describe('isIOS9', () => {
 		// spy on user agent to mock return value
-		const userAgentGetter = jest.spyOn(
-			window.navigator,
-			'userAgent',
-			'get',
-		);
+		const userAgentGetter = vi.spyOn(window.navigator, 'userAgent', 'get');
 
 		test('iphone ios9 is true', () => {
 			userAgentGetter.mockReturnValueOnce(

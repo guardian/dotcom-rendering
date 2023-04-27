@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { vi } from 'vitest';
 import { useApi as useApi_ } from '../lib/useApi';
 import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
@@ -6,8 +7,8 @@ import { MostViewedRight } from './MostViewedRight';
 const response = { data: mockTab1 };
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../lib/useApi', () => ({
-	useApi: jest.fn(),
+vi.mock('../lib/useApi', () => ({
+	useApi: vi.fn(),
 }));
 
 describe('MostViewedList', () => {

@@ -1,24 +1,26 @@
+import type { SpyInstance } from 'vitest';
+import { vi } from 'vitest';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 
 let mockBrazeUuid: string | null;
-jest.mock('../getBrazeUuid', () => ({
+vi.mock('../getBrazeUuid', () => ({
 	getBrazeUuid: () => {
 		return Promise.resolve(mockBrazeUuid);
 	},
 }));
 
 let mockConsentsPromise: Promise<boolean>;
-jest.mock('./hasRequiredConsents', () => ({
+vi.mock('./hasRequiredConsents', () => ({
 	hasRequiredConsents: () => {
 		return mockConsentsPromise;
 	},
 }));
 
 describe('checkBrazeDependecies', () => {
-	let windowSpy: jest.SpyInstance;
+	let windowSpy: SpyInstance;
 
 	beforeEach(() => {
-		windowSpy = jest.spyOn(window, 'window', 'get');
+		windowSpy = vi.spyOn(window, 'guardian', 'get');
 	});
 
 	afterEach(() => {
@@ -32,20 +34,18 @@ describe('checkBrazeDependecies', () => {
 		return flushPromises;
 	});
 
-	const setWindow = (windowData: { [key: string]: any }) =>
-		windowSpy.mockImplementation(() => windowData);
+	const setWindowGuardian = (data: { [key: string]: unknown }) =>
+		windowSpy.mockImplementation(() => data);
 
 	it('succeeds if all dependencies are fulfilled', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -67,16 +67,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if the switch is disabled', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: false,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: false,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -96,16 +94,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('returns the apiKey if the switch is disabled', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: false,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: false,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -126,16 +122,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if the api key is not set', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: null,
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: null,
+					isPaidContent: false,
 				},
 			},
 		});
@@ -155,16 +149,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if the brazeUuid is not available', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -188,16 +180,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails when the user is not signed in', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -220,16 +210,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if the required consents are not given', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});
@@ -254,16 +242,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if the page is a paid content page', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: true,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: true,
 				},
 			},
 		});
@@ -289,16 +275,14 @@ describe('checkBrazeDependecies', () => {
 	});
 
 	it('fails if any underlying async operation fails', async () => {
-		setWindow({
-			guardian: {
-				config: {
-					switches: {
-						brazeSwitch: true,
-					},
-					page: {
-						brazeApiKey: 'fake-api-key',
-						isPaidContent: false,
-					},
+		setWindowGuardian({
+			config: {
+				switches: {
+					brazeSwitch: true,
+				},
+				page: {
+					brazeApiKey: 'fake-api-key',
+					isPaidContent: false,
 				},
 			},
 		});

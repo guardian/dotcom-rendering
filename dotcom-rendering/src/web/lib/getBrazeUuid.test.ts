@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { getBrazeUuid } from './getBrazeUuid';
 import { getIdapiUserIdentifiers } from './getIdapiUserData';
 
@@ -8,8 +9,8 @@ const userIdentifiers = {
 	googleTagId: 'googleTagIdValue',
 };
 
-jest.mock('./getIdapiUserData', () => ({
-	getIdapiUserIdentifiers: jest.fn(() => Promise.resolve(userIdentifiers)),
+vi.mock('./getIdapiUserData', () => ({
+	getIdapiUserIdentifiers: vi.fn(() => Promise.resolve(userIdentifiers)),
 }));
 
 describe('getBrazeUuid', () => {

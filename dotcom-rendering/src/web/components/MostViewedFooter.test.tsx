@@ -1,13 +1,14 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
+import { vi } from 'vitest';
 import { useApi as useApi_ } from '../lib/useApi';
 import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../lib/useApi', () => ({
-	useApi: jest.fn(),
+vi.mock('../lib/useApi', () => ({
+	useApi: vi.fn(),
 }));
 
 const VISIBLE = 'display: block';

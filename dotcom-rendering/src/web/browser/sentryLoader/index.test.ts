@@ -1,7 +1,8 @@
+import { vi } from 'vitest';
 import { isSentryEnabled } from '.';
 
 // Stubbed to prevent parsing of __webpack_public_path__
-jest.mock('./loadSentry', () => ({ loadSentry: jest.fn() }));
+vi.mock('./loadSentry', () => ({ loadSentry: vi.fn() }));
 
 describe('Enable Sentry when it passes loading conditions', () => {
 	it('does NOT enable Sentry when enableSentryReporting switch is false', () => {

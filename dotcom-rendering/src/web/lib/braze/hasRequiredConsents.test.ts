@@ -1,16 +1,23 @@
+import { vi } from 'vitest';
 import { hasRequiredConsents } from './hasRequiredConsents';
 
 const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 let mockOnConsentChangeResult: any;
-jest.mock('@guardian/consent-management-platform', () => ({
-	onConsentChange: (callback: any) => {
-		callback(mockOnConsentChangeResult);
-	},
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
-		.getConsentFor,
-}));
+vi.mock('@guardian/consent-management-platform', async () => {
+	const { getConsentFor } = await vi.importActual<
+		// eslint-disable-next-line @typescript-eslint/consistent-type-imports -- it’s a mock
+		typeof import('@guardian/consent-management-platform')
+	>('@guardian/consent-management-platform');
+
+	return {
+		onConsentChange: (callback: any) => {
+			callback(mockOnConsentChangeResult);
+		},
+
+		getConsentFor,
+	};
+});
 
 afterEach(() => {
 	mockOnConsentChangeResult = undefined;

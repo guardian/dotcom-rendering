@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
+import { vi } from 'vitest';
 import type {
 	CampaignFieldCheckbox,
 	CampaignFieldFile,
@@ -116,7 +117,7 @@ const selectField: CampaignFieldSelect = {
 
 describe('Callout from', () => {
 	it('should submit text input', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form formFields={[textField]} onSubmit={mockSubmit} />,
 		);
@@ -145,7 +146,7 @@ describe('Callout from', () => {
 	});
 
 	it('should submit textarea input', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form formFields={[textAreaField]} onSubmit={mockSubmit} />,
 		);
@@ -174,7 +175,7 @@ describe('Callout from', () => {
 	});
 
 	it('should submit radio', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form formFields={[radioField]} onSubmit={mockSubmit} />,
 		);
@@ -206,7 +207,7 @@ describe('Callout from', () => {
 	});
 
 	it('should submit checkbox', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form formFields={[checkboxField]} onSubmit={mockSubmit} />,
 		);
@@ -238,7 +239,7 @@ describe('Callout from', () => {
 	});
 	test('should upload the file', () => {
 		const file = new File(['hello'], 'hello.png', { type: 'image/png' });
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { queryByText } = render(
 			<Form formFields={[fileField]} onSubmit={mockSubmit} />,
 		);
@@ -263,7 +264,7 @@ describe('Callout from', () => {
 	});
 
 	it('should submit select', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form formFields={[selectField]} onSubmit={mockSubmit} />,
 		);
@@ -291,7 +292,7 @@ describe('Callout from', () => {
 	});
 
 	it('submit multiple values', () => {
-		const mockSubmit = jest.fn();
+		const mockSubmit = vi.fn();
 		const { getByTestId, queryByText } = render(
 			<Form
 				formFields={[radioField, checkboxField]}

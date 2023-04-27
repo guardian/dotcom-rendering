@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { decidePublicPath } from './decidePublicPath';
 
 const mockHostname = (hostname: string | undefined) => {
@@ -22,7 +23,7 @@ const mockFrontendAssetsFullURL = (frontendAssetsFullURL: string) => {
 
 describe('decidePublicPath', () => {
 	beforeEach(() => {
-		jest.resetModules();
+		vi.resetModules();
 
 		// Ensures we always set a hostname in the test
 		// and the default hostname isn't accidentally used

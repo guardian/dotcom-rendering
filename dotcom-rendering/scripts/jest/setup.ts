@@ -1,6 +1,7 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
 import { TextDecoder, TextEncoder } from 'util';
+import { vi } from 'vitest';
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
@@ -14,8 +15,7 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
-	tests: {
-	}
+	tests: {},
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -59,6 +59,9 @@ const windowGuardian = {
 		showMeTheBanner: () => {},
 		showNextVariant: () => {},
 		showPreviousVariant: () => {},
+	},
+	logger: {
+		log: () => {},
 	},
 };
 
@@ -112,4 +115,4 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
 
 // Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
-jest.mock('@guardian/cdk/lib/constants/tracking-tag');
+vi.mock('@guardian/cdk/lib/constants/tracking-tag');
