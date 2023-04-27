@@ -7,31 +7,31 @@ import { octokit } from './github.ts';
 
 const gu = 'https://www.theguardian.com/';
 
-const fronts = ['uk', 'us', 'international', 'au'] as const;
+const fronts = ['uk', 'uk-news', 'world', 'environment/climate-crisis', 'football', 'world/coronavirus-outbreak', 'politics', 'education', 'society', 'science', 'global-development', 'obituaries', 'index/contributors', 'cartoons/archive', 'tone/letters', 'music', 'books', 'artanddesign', 'stage', 'games', 'fashion', 'food', 'tone/recipes', 'lifeandstyle/health-and-wellbeing','lifeandstyle/women','lifeandstyle/love-and-sex','fashion/beauty','lifeandstyle/home-and-garden','technology/motoring','us','au','international','video','podcasts','inpictures','observer','crosswords','uk/commentisfree','uk/sport','uk/culture','uk/lifeandstyle','uk/business','uk/environment','uk/technology','uk/film','uk/tv-and-radio','uk/travel','uk/money'] as const;
 
 const regex =
 	/(http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
 
-const frontSchema = object({
-	pressedPage: object({
-		collections: array(
-			object({
-				id: string(),
-				collectionType: string(),
-				displayName: string(),
-				curated: array(
-					object({
-						enriched: object({
-							embedHtml: string().optional(),
-							embedCss: string().optional(),
-							embedJs: string().optional(),
+	const frontSchema = object({
+		pressedPage: object({
+			collections: array(
+				object({
+					id: string(),
+					collectionType: string(),
+					displayName: string(),
+					curated: array(
+						object({
+							enriched: object({
+								embedHtml: string().optional(),
+								embedCss: string().optional(),
+								embedJs: string().optional(),
+							}).optional(), // make enriched optional
 						}),
-					}),
-				),
-			}),
-		),
-	}),
-});
+					),
+				}),
+			),
+		}),
+	});
 
 /**
  * We ignore all fonts extensions because browsers will only load
@@ -115,32 +115,37 @@ const getFrontThrashers = async (path: string) => {
 	return Promise.all(thrashersWithResources);
 };
 
+// const getTable = (data: Awaited<ReturnType<typeof getFrontThrashers>>) => {
+// 	const rows = data
+// 		.slice()
+// 		.sort((a, b) => b.totalSize - a.totalSize)
+// 		.map(
+// 			({ displayName, embedSize, resourceSize, totalSize }) =>
+// 				'| ' +
+// 				[
+// 					displayName,
+// 					prettyBytes(totalSize),
+// 					prettyBytes(embedSize),
+// 					[...resourceSize.entries()]
+// 						.sort(([, a], [, b]) => b - a)
+// 						.map(
+// 							([resourceType, size]) =>
+// 								`\`${resourceType}\`: ${prettyBytes(size)}`,
+// 						)
+// 						.join(', '),
+// 				].join(' | ') +
+// 				' |',
+// 		);
+// 	return [
+// 		'| Name | Total size | Embed size | Resources |',
+// 		'| ---- | ---------- | ---------- | --------- |',
+// 		...rows,
+// 	];
+// };
+
 const getTable = (data: Awaited<ReturnType<typeof getFrontThrashers>>) => {
-	const rows = data
-		.slice()
-		.sort((a, b) => b.totalSize - a.totalSize)
-		.map(
-			({ displayName, embedSize, resourceSize, totalSize }) =>
-				'| ' +
-				[
-					displayName,
-					prettyBytes(totalSize),
-					prettyBytes(embedSize),
-					[...resourceSize.entries()]
-						.sort(([, a], [, b]) => b - a)
-						.map(
-							([resourceType, size]) =>
-								`\`${resourceType}\`: ${prettyBytes(size)}`,
-						)
-						.join(', '),
-				].join(' | ') +
-				' |',
-		);
-	return [
-		'| Name | Total size | Embed size | Resources |',
-		'| ---- | ---------- | ---------- | --------- |',
-		...rows,
-	];
+	const names = data.map(({ displayName }) => displayName);
+	return names;
 };
 
 // -- Script -- //
@@ -148,17 +153,18 @@ const getTable = (data: Awaited<ReturnType<typeof getFrontThrashers>>) => {
 const lines = ['# Largest thrashers on network fronts'];
 
 for (const front of fronts) {
-	lines.push(
-		'',
-		'',
-		`## [${front.toUpperCase()} Front](${new URL(front, gu).toString()}) `,
-		'',
-	);
 	const data = await getFrontThrashers(front);
-
-	lines.push(...getTable(data));
+	const tableData = getTable(data);
+	if (tableData.length > 0) {
+		lines.push(
+			'',
+			'',
+			`## [${front.toUpperCase()} Front](${new URL(front, gu).toString()}) `,
+			'',
+			...tableData,
+		);
+	}
 }
-
 const body = lines.join('\n');
 
 if (!octokit) {
