@@ -18,7 +18,7 @@ describe('Consent tests', function () {
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find("[title='Manage or reject cookies']").click();
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
@@ -40,7 +40,7 @@ describe('Consent tests', function () {
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find("[title='Manage or reject cookies']").click();
 		// Reject tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Reject all']").click();

@@ -18,7 +18,7 @@ describe('Paid content tests', function () {
 
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find("[title='Manage or reject cookies']").click();
 
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
@@ -59,7 +59,7 @@ describe('Paid content tests', function () {
 
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find("[title='Manage or reject cookies']").click();
 
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');

@@ -16,7 +16,7 @@ describe('Commercial E2E tests', function () {
 		);
 
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find("[title='Manage or reject cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe()
 			.find("[title='Accept all']", { timeout: 12000 })
