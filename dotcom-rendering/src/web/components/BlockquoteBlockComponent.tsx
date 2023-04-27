@@ -1,10 +1,10 @@
-import { css } from '@emotion/react';
+import { css, jsx as h } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
-import { renderToString } from 'react-dom/server';
-import { unwrapHtml } from '../../model/unwrapHtml';
+import { JSDOM } from 'jsdom';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
-import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -34,52 +34,92 @@ const quotedBlockquoteStyles = (palette: Palette) => css`
 	color: ${palette.text.blockquote};
 `;
 
-export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{ prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
-			{
-				prefix: '<blockquote>',
-				suffix: '</blockquote>',
-				unwrappedElement: 'blockquote',
-			},
-			{
-				prefix: '<blockquote class="quoted">',
-				suffix: '</blockquote>',
-				unwrappedElement: 'div',
-			},
-		],
-		html,
-	});
+const parseHtml = (html: string): DocumentFragment => JSDOM.fragment(html);
 
-	if (quoted) {
-		const htmlWithIcon = unwrappedHtml
-			.trim()
-			.replace(
-				'<p>',
-				`<p>${renderToString(
-					<QuoteIcon colour={palette.fill.blockquoteIcon} />,
-				)}`,
-			);
-		return (
-			<RewrappedComponent
-				isUnwrapped={isUnwrapped}
-				html={htmlWithIcon}
-				tagName="blockquote"
-				elCss={quotedBlockquoteStyles(palette)}
-			/>
+// The nodeType for ELEMENT_NODE has the value 1.
+function isElement(node: Node): node is Element {
+	return node.nodeType === 1;
+}
+
+const getAttrs = (node: Node): NamedNodeMap | undefined =>
+	isElement(node) ? node.attributes : undefined;
+
+const textElement =
+	(isQuoted: boolean, palette: Palette) =>
+	(node: Node, key: number): ReactNode => {
+		const text = node.textContent ?? '';
+		const children = Array.from(node.childNodes).map(
+			textElement(isQuoted, palette),
 		);
-	}
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={unwrappedHtml}
-			elCss={simpleBlockquoteStyles}
-			tagName={unwrappedElement}
-		/>
-	);
+		switch (node.nodeName) {
+			case 'P': {
+				// We want to add the quote icon to the first child (p) of the blockquote element
+				if (isQuoted && node.parentElement?.nodeName === 'BLOCKQUOTE') {
+					return (
+						<p>
+							<QuoteIcon colour={palette.fill.blockquoteIcon} />
+							{children}
+						</p>
+					);
+				}
+				return h('p', { children });
+			}
+			case '#text':
+				return text;
+			case 'SPAN':
+				return text;
+			case 'A':
+				return h('A', {
+					href: getAttrs(node)?.getNamedItem('href'),
+					key,
+					children,
+				});
+			case 'BLOCKQUOTE':
+				return h('blockquote', {
+					key,
+					children,
+					css: isQuoted
+						? quotedBlockquoteStyles(palette)
+						: simpleBlockquoteStyles,
+				});
+			case 'STRONG':
+				return h('strong', {
+					css: { fontWeight: 'bold' },
+					key,
+					children,
+				});
+			case 'B':
+				return h('b', { key, children });
+			case 'EM':
+				return h('em', { key, children });
+			case 'BR':
+				return h('br', { key, children });
+			case 'UL':
+				return h('ul', { key, children });
+			case 'OL':
+				return h('ol', { key, children });
+			case 'LI':
+				return h('li', { key, children });
+			case 'MARK':
+				return h('mark', { key, children });
+			case 'SUB':
+				return h('sub', { key, children });
+			case 'SUP':
+				return h('sup', {
+					key,
+					children,
+				});
+			default:
+				return null;
+		}
+	};
+
+export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
+	const fragment = parseHtml(html);
+
+	return h(Fragment, {
+		children: Array.from(fragment.childNodes).map(
+			textElement(quoted ?? false, palette),
+		),
+	});
 };
