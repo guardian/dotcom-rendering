@@ -1,9 +1,10 @@
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
 import type { FC } from 'react';
+import React from 'react';
 import { highlight } from './styles';
 
-const Highlight: FC = ({ children }) => {
+const Highlight: FC<React.PropsWithChildren> = ({ children }) => {
 	return <span css={highlight}>{children}</span>;
 };
 

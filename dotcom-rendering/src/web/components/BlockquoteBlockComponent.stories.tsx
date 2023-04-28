@@ -9,9 +9,9 @@ import { decidePalette } from '../lib/decidePalette';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =
-	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';
+	'<blockquote class="quoted"> \n <p>We’ve now got evidence</p> \n<p>A second paragraph</p> \n</blockquote>';
 const blockquoteHtml =
-	'<blockquote class="quoted"> \n <p>We’ve now got evidence that under <a href="https://www.theguardian.com/politics/boris-johnson">Boris Johnson</a> the NHS is on the table and will be up for sale. He tried to cover it up in a secret agenda but today it’s been exposed.</p> \n</blockquote>';
+	'<blockquote class="quoted"> \n <p>We’ve now got evidence that under <a href="https://www.theguardian.com/politics/boris-johnson">Boris Johnson</a> the NHS is on the table and will be up for sale. He tried to cover it up in a secret agenda but today it’s been exposed.</p> \n<p>A second paragraph</p> \n</blockquote>';
 
 export default {
 	component: BlockquoteBlockComponent,
