@@ -14,9 +14,8 @@ export class JSDOM {
 
 	static fragment(html) {
 		try {
-			const domParser = new DOMParser();
-			const docNodes = domParser.parseFromString(html, 'text/html').body
-				.childNodes;
+			const docNodes = new DOMParser().parseFromString(html, 'text/html')
+				.body.childNodes;
 
 			const frag = new DocumentFragment();
 			Array.from(docNodes).forEach((node) => frag.appendChild(node));
