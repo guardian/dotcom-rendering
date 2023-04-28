@@ -64,16 +64,6 @@ const textElement =
 				}
 				return h('p', { children });
 			}
-			case '#text':
-				return text;
-			case 'SPAN':
-				return text;
-			case 'A':
-				return h('A', {
-					href: getAttrs(node)?.getNamedItem('href'),
-					key,
-					children,
-				});
 			case 'BLOCKQUOTE':
 				return h('blockquote', {
 					key,
@@ -82,30 +72,31 @@ const textElement =
 						? quotedBlockquoteStyles(palette)
 						: simpleBlockquoteStyles,
 				});
+			case 'A':
+				return h('A', {
+					href: getAttrs(node)?.getNamedItem('href'),
+					key,
+					children,
+				});
 			case 'STRONG':
 				return h('strong', {
 					css: { fontWeight: 'bold' },
 					key,
 					children,
 				});
+			case '#text':
+			case 'SPAN':
+				return text;
 			case 'B':
-				return h('b', { key, children });
 			case 'EM':
-				return h('em', { key, children });
 			case 'BR':
-				return h('br', { key, children });
 			case 'UL':
-				return h('ul', { key, children });
 			case 'OL':
-				return h('ol', { key, children });
 			case 'LI':
-				return h('li', { key, children });
 			case 'MARK':
-				return h('mark', { key, children });
 			case 'SUB':
-				return h('sub', { key, children });
 			case 'SUP':
-				return h('sup', {
+				return h(node.nodeName, {
 					key,
 					children,
 				});
