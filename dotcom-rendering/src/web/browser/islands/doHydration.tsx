@@ -3,7 +3,7 @@ import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { createElement } from 'react';
-import { hydrate, render } from 'react-dom';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { initPerf } from '../initPerf';
 
 /**
@@ -48,18 +48,18 @@ export const doHydration = async (
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				render(
+				const root = createRoot(element);
+				root.render(
 					<CacheProvider value={emotionCache}>
 						{createElement(module[name], data)}
 					</CacheProvider>,
-					element,
 				);
 			} else {
-				hydrate(
+				hydrateRoot(
+					element,
 					<CacheProvider value={emotionCache}>
 						{createElement(module[name], data)}
 					</CacheProvider>,
-					element,
 				);
 			}
 
