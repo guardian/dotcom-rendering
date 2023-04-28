@@ -3,6 +3,7 @@ import { body } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
 
@@ -101,6 +102,16 @@ const textElement =
 					children,
 				});
 			default:
+				logger.warn(
+					'BlockquoteBlockComponent: Unknown element received',
+					{
+						isDev: process.env.NODE_ENV !== 'production',
+						element: {
+							name: node.nodeName,
+							html: isElement(node) ? node.outerHTML : undefined,
+						},
+					},
+				);
 				return null;
 		}
 	};
