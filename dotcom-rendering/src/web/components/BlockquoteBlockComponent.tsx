@@ -103,10 +103,14 @@ const textElement =
 			case '#text':
 			case 'SPAN':
 				return text;
+			case 'BR':
+				// BR cannot accept children as it's a void element
+				return jsx('BR', {
+					key,
+				});
 			case 'H2':
 			case 'B':
 			case 'EM':
-			case 'BR':
 			case 'UL':
 			case 'OL':
 			case 'LI':
