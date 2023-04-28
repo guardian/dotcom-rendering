@@ -121,7 +121,7 @@ export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
 
 	return h(Fragment, {
 		children: Array.from(fragment.childNodes).map(
-			textElement(quoted ?? false, palette),
+			textElement(!!quoted, palette),
 		),
 	});
 };
