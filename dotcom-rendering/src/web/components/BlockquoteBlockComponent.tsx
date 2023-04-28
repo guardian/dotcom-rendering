@@ -45,6 +45,17 @@ function isElement(node: Node): node is Element {
 const getAttrs = (node: Node): NamedNodeMap | undefined =>
 	isElement(node) ? node.attributes : undefined;
 
+/**
+ * Searches through the siblings of an element to determine if it's the first
+ * of the desired node type.
+ */
+const isFirstSiblingOfType = (name: string, node: Node): boolean => {
+	const prevSibling = node.previousSibling;
+	if (!prevSibling) return true;
+	if (prevSibling.nodeName === name) return false;
+	else return isFirstSiblingOfType(name, prevSibling);
+};
+
 const textElement =
 	(isQuoted: boolean, palette: Palette) =>
 	(node: Node, key: number): ReactNode => {
@@ -54,8 +65,12 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
-				// We want to add the quote icon to the first child (p) of the blockquote element
-				if (isQuoted && node.parentElement?.nodeName === 'BLOCKQUOTE') {
+				// We want to add the quote icon to the first "P" node of the blockquote element
+				if (
+					isQuoted &&
+					node.parentElement?.nodeName === 'BLOCKQUOTE' &&
+					isFirstSiblingOfType('P', node)
+				) {
 					return (
 						<p>
 							<QuoteIcon colour={palette.fill.blockquoteIcon} />
