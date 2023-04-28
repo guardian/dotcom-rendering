@@ -1,4 +1,4 @@
-import { css, jsx as h } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
 import type { ReactNode } from 'react';
@@ -63,10 +63,10 @@ const textElement =
 						</p>
 					);
 				}
-				return h('p', { children });
+				return jsx('p', { children });
 			}
 			case 'BLOCKQUOTE':
-				return h('blockquote', {
+				return jsx('blockquote', {
 					key,
 					children,
 					css: isQuoted
@@ -74,13 +74,13 @@ const textElement =
 						: simpleBlockquoteStyles,
 				});
 			case 'A':
-				return h('A', {
+				return jsx('A', {
 					href: getAttrs(node)?.getNamedItem('href'),
 					key,
 					children,
 				});
 			case 'STRONG':
-				return h('strong', {
+				return jsx('strong', {
 					css: { fontWeight: 'bold' },
 					key,
 					children,
@@ -97,7 +97,7 @@ const textElement =
 			case 'MARK':
 			case 'SUB':
 			case 'SUP':
-				return h(node.nodeName, {
+				return jsx(node.nodeName, {
 					key,
 					children,
 				});
@@ -119,7 +119,7 @@ const textElement =
 export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
 	const fragment = parseHtml(html);
 
-	return h(Fragment, {
+	return jsx(Fragment, {
 		children: Array.from(fragment.childNodes).map(
 			textElement(!!quoted, palette),
 		),
