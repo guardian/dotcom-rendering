@@ -103,6 +103,7 @@ const textElement =
 			case '#text':
 			case 'SPAN':
 				return text;
+			case 'H2':
 			case 'B':
 			case 'EM':
 			case 'BR':
@@ -112,6 +113,8 @@ const textElement =
 			case 'MARK':
 			case 'SUB':
 			case 'SUP':
+			case 'S':
+			case 'I':
 				return jsx(node.nodeName, {
 					key,
 					children,
