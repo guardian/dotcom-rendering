@@ -8,7 +8,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { eagerPrebid } from '../experiments/tests/eager-prebid';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -26,7 +25,6 @@ const willRecordCoreWebVitals = Math.random() < sampling;
 const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
-	eagerPrebid,
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
