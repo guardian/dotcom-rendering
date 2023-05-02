@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { MostViewedRight } from './MostViewedRight';
+import { MAX_HEIGHT_PX } from './RightColumnContent';
 
 type Props = {
 	limitItems?: number;
@@ -22,7 +23,7 @@ export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 			'[data-component="right-column-content"]',
 		);
 		const height = rightColumnContent?.getBoundingClientRect().height;
-		setHeightIsAvailable(height !== undefined && height >= 1600);
+		setHeightIsAvailable(height !== undefined && height >= MAX_HEIGHT_PX);
 	}, []);
 
 	if (!heightIsAvailable) {
