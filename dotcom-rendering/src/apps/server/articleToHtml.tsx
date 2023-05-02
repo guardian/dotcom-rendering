@@ -6,8 +6,8 @@ import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
 import { decideFormat } from '../../web/lib/decideFormat';
 import { renderToStringWithEmotion } from '../../web/lib/emotion';
+import { pageTemplate } from '../../web/server/pageTemplate';
 import { ArticlePage } from '../components/ArticlePage';
-import { pageTemplate } from './pageTemplate';
 
 export const articleToHtml = (
 	article: FEArticleType,
@@ -64,6 +64,8 @@ export const articleToHtml = (
 		title: article.webTitle,
 		scriptTags,
 		windowGuardian,
+		renderingTarget: 'Apps',
+		offerHttp3: false,
 	});
 	return {
 		clientScripts,

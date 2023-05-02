@@ -2,32 +2,15 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
-export const pageTemplate = ({
-	css,
-	html,
-	windowGuardian,
-	scriptTags,
-	keywords,
-	offerHttp3,
-	title = 'The Guardian',
-	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
-	linkedData,
-	ampLink,
-	openGraphData,
-	twitterData,
-	initTwitter,
-	recipeMarkup,
-	canonicalUrl,
-}: {
+type BaseProps = {
 	css: string;
 	html: string;
 	windowGuardian: string;
 	scriptTags: string[];
-	keywords: string;
-	offerHttp3: boolean;
 	title?: string;
 	description?: string;
 	linkedData?: { [key: string]: any };
@@ -37,12 +20,20 @@ export const pageTemplate = ({
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
-}): string => {
-	const favicon =
-		process.env.NODE_ENV === 'production'
-			? 'favicon-32x32.ico'
-			: 'favicon-32x32-dev-yellow.ico';
+	renderingTarget: RenderingTarget;
+	offerHttp3: boolean;
+};
 
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	keywords: string;
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
+
+const getFontPreloadTags = (offerHttp3: boolean) => {
 	/**
 	 * Preload the following woff2 font files
 	 * TODO: Identify critical fonts to preload
@@ -52,10 +43,35 @@ export const pageTemplate = ({
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
 	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
-	const fontPreloadTags = fontFiles.map(
+	return fontFiles.map(
 		(fontFile) =>
 			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
 	);
+};
+
+export const pageTemplate = (props: WebProps | AppProps): string => {
+	const {
+		css,
+		html,
+		windowGuardian,
+		scriptTags,
+		title = 'The Guardian',
+		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
+		linkedData,
+		ampLink,
+		openGraphData,
+		twitterData,
+		initTwitter,
+		recipeMarkup,
+		canonicalUrl,
+		renderingTarget,
+		offerHttp3,
+	} = props;
+
+	const favicon =
+		process.env.NODE_ENV === 'production'
+			? 'favicon-32x32.ico'
+			: 'favicon-32x32-dev-yellow.ico';
 
 	const generateMetaTags = (
 		dataObject: { [key: string]: string },
@@ -198,7 +214,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no Amp link -->'
 				}
 
-                ${fontPreloadTags.join('\n')}
+				${
+					renderingTarget === 'Web'
+						? getFontPreloadTags(props.offerHttp3).join('\n')
+						: ''
+				}
 
                 ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
 
@@ -299,7 +319,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 				${initTwitter ?? ''}
 
-
+				${
+					renderingTarget === 'Web'
+						? `
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
@@ -308,14 +330,17 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cv: '2.0',
 							cj: '1',
 							cs_ucfr: '0',
-							comscorekw: keywords,
+							comscorekw: props.keywords,
 						},
 					).toString()}" />
 
 					${islandNoscriptStyles}
                 </noscript>
-                ${scriptTags.join('\n')}
+				`
+						: ''
+				}
                 <style class="webfont">${getFontsCss(offerHttp3)}</style>
+                ${scriptTags.join('\n')}
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">

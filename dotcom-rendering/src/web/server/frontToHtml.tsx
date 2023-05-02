@@ -106,5 +106,6 @@ export const frontToHtml = ({ front }: Props): string => {
 		windowGuardian,
 		keywords,
 		offerHttp3,
+		renderingTarget: 'Web',
 	});
 };
