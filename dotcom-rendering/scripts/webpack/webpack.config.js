@@ -44,6 +44,26 @@ const commonConfigs = ({ platform }) => ({
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
 	},
+	ignoreWarnings: [
+		/**
+		 * Express uses dynamic imports to load template engines. As we're not currently using a template engine in DCR
+		 * we can ignore this error.
+		 */
+		{
+			module: /..\/node_modules\/express\/lib\/view.js/,
+			message:
+				/Critical dependency: the request of a dependency is an expression/,
+		},
+		/**
+		 * Log4js uses dynamic imports to load non-core appenders. We're only using 'console' and 'file' appenders in DCR
+		 * which are specifically imported by log4js without using dynamic imports.
+		 */
+		{
+			module: /..\/node_modules\/log4js\/lib\/appenders\/index.js/,
+			message:
+				/Critical dependency: the request of a dependency is an expression/,
+		},
+	],
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

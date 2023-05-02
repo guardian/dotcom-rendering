@@ -11,6 +11,8 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
+import { Badge } from '../components/Badge';
+import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
@@ -19,13 +21,16 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
-import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { canRenderAds } from '../lib/canRenderAds';
+import {
+	getMerchHighPosition,
+	getMobileAdPositions,
+} from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -56,65 +61,6 @@ const isToggleable = (
 			!isNavList(collection)
 		);
 	} else return index != 0 && !isNavList(collection);
-};
-
-const getMerchHighPosition = (
-	collectionCount: number,
-	isNetworkFront: boolean | undefined,
-) => {
-	if (collectionCount < 4) {
-		return 2;
-	} else if (isNetworkFront) {
-		return 5;
-	} else {
-		return 4;
-	}
-};
-
-/**
- * On mobile, we remove the first container if it is a thrasher
- * and remove a container if it, or the next sibling, is a commercial container
- * we also exclude any containers that are directly before a thrasher
- * then we take every other container, up to a maximum of 10, for targeting MPU insertion
- */
-
-const getMobileAdPositions = (
-	isNetworkFront: boolean | undefined,
-	collections: DCRCollectionType[],
-) => {
-	const merchHighPosition = getMerchHighPosition(
-		collections.length,
-		isNetworkFront,
-	);
-
-	const positions: number[] = collections
-		.map((collection, collectionIndex) => {
-			const isThrasher = collection.collectionType === 'fixed/thrasher';
-			const isFirst = collectionIndex === 0;
-			const isNearMerchandising =
-				collectionIndex === merchHighPosition ||
-				collectionIndex + 1 === merchHighPosition;
-			const isNearThrasher =
-				collections[collectionIndex + 1]?.collectionType ===
-				'fixed/thrasher';
-			if (isFirst && isThrasher) return false;
-			if (isNearMerchandising) return false;
-			if (isNearThrasher) return false;
-			else if (
-				collectionIndex % 2 === 0 &&
-				collectionIndex < collections.length - 1
-			) {
-				return true;
-			}
-			return false;
-		})
-		.map((shouldDisplayAd, collectionIndex) =>
-			shouldDisplayAd ? collectionIndex : undefined,
-		)
-		.filter((index): index is number => typeof index === 'number')
-		// Should insert no more than 10 ads
-		.slice(0, 10);
-	return positions;
 };
 
 const decideAdSlot = (
@@ -152,6 +98,19 @@ const decideAdSlot = (
 	return null;
 };
 
+const showBadge = (displayName: string) => {
+	if (displayName === 'This is Europe')
+		return (
+			<Badge
+				imageUrl={
+					'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg'
+				}
+				seriesTag={'world/series/this-is-europe'}
+			/>
+		);
+	return undefined;
+};
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
@@ -168,7 +127,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	// const contributionsServiceUrl = getContributionsServiceUrl(front);
+	const merchHighPosition = getMerchHighPosition(
+		front.pressedPage.collections.length,
+		front.isNetworkFront,
+	);
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
@@ -176,10 +138,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(
-				front.isNetworkFront,
-				front.pressedPage.collections,
-		  )
+		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
 	return (
@@ -379,8 +338,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								centralBorder="partial"
-								url={collection.href}
+								url={
+									collection.href
+										? `https://www.theguardian.com/${collection.href}`
+										: undefined
+								}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
@@ -390,12 +352,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									front.isNetworkFront,
 								)}
+								leftContent={
+									(front.config.pageId ===
+										'uk/commentisfree' ||
+										front.config.pageId ===
+											'au/commentisfree') &&
+									collection.displayName === 'Opinion' && (
+										<CPScottHeader />
+									)
+								}
+								badge={showBadge(collection.displayName)}
 								sectionId={ophanName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
+								canShowMore={collection.canShowMore}
+								ajaxUrl={front.config.ajaxUrl}
 							>
 								<DecideContainer
 									trails={trails}
@@ -410,26 +386,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									renderAds={renderAds}
 								/>
-								{collection.canShowMore && (
-									<Island deferUntil="interaction">
-										<ShowMore
-											containerTitle={
-												collection.displayName
-											}
-											collectionId={collection.id}
-											containerElementId={ophanName}
-											path={front.pressedPage.id}
-											baseUrl={front.config.ajaxUrl}
-											containerPalette={
-												collection.containerPalette
-											}
-											showAge={
-												collection.displayName ===
-												'Headlines'
-											}
-										/>
-									</Island>
-								)}
 							</FrontSection>
 							{renderAds &&
 								decideAdSlot(

@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { StoryFn } from '@storybook/react';
 import { formatToString } from 'articleFormat';
 import { getAllThemes } from 'fixtures/article';
-import type { ReactElement } from 'react';
 import { Pagination } from '.';
 
 export default {
@@ -19,7 +19,7 @@ const formats = getAllThemes({
 	design: ArticleDesign.Standard,
 });
 
-export const notFirstPage = (): ReactElement => {
+export const notFirstPage: StoryFn<typeof Pagination> = () => {
 	return (
 		<>
 			{formats.map((format) => (
@@ -33,11 +33,9 @@ export const notFirstPage = (): ReactElement => {
 		</>
 	);
 };
-notFirstPage.story = {
-	name: 'Not first page',
-};
+notFirstPage.storyName = 'Not first page';
 
-export const firstPageStory = (): ReactElement => {
+export const firstPageStory: StoryFn<typeof Pagination> = () => {
 	return (
 		<>
 			{formats.map((format) => (
@@ -51,6 +49,4 @@ export const firstPageStory = (): ReactElement => {
 		</>
 	);
 };
-firstPageStory.story = {
-	name: 'First page',
-};
+firstPageStory.storyName = 'First page';

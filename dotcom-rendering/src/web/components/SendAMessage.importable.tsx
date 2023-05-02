@@ -394,6 +394,18 @@ const summaryStyles = css`
 	}
 `;
 
+/**
+ * # Send a Message Component
+ *
+ * A callout for readers to get in touch with a liveblogger directly.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page,
+ * and submitting a form.
+ *
+ */
+
 export const SendAMessage = ({ formFields, formId, format, pageId }: Props) => {
 	return (
 		<details css={detailsStyles}>

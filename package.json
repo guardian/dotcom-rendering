@@ -6,8 +6,7 @@
 	"private": true,
 	"workspaces": {
 		"packages": [
-			"dotcom-rendering",
-			"storybooks"
+			"dotcom-rendering"
 		],
 		"nohoist": [
 			"type-fest",
@@ -19,13 +18,11 @@
 	"scripts": {
 		"postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
 		"storybook": "npm-run-all --parallel storybook:*",
-		"storybook:composed": "sleep 5 && yarn workspace storybooks storybook --quiet",
 		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
 		"storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
 		"build-storybook": "npm-run-all --parallel build-storybook:*",
 		"build-storybook:ar": "cd apps-rendering && yarn build-storybook",
 		"build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
-		"build-storybook:composed": "yarn workspace storybooks build-storybook",
 		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install"

@@ -379,7 +379,7 @@ export const ArticleMeta = ({
 							)}
 							{messageUs &&
 								format.design === ArticleDesign.LiveBlog && (
-									<Island deferUntil="interaction">
+									<Island deferUntil="visible">
 										<SendAMessage
 											formFields={messageUs.formFields}
 											formId={messageUs.formId}

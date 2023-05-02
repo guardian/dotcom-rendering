@@ -54,7 +54,7 @@ export const defaultStory = () => {
 		</Section>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const limitItemsStory = () => {
 	fetchMock.restore().getOnce('*', {
@@ -95,7 +95,7 @@ export const limitItemsStory = () => {
 		</Section>
 	);
 };
-limitItemsStory.story = { name: 'with a limit of 3 items' };
+limitItemsStory.storyName = 'with a limit of 3 items';
 
 export const outsideContextStory = () => {
 	fetchMock.restore().getOnce('*', {
@@ -109,6 +109,4 @@ export const outsideContextStory = () => {
 		</Section>
 	);
 };
-outsideContextStory.story = {
-	name: 'inside responsive wrapper',
-};
+outsideContextStory.storyName = 'inside responsive wrapper';

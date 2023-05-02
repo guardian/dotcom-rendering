@@ -42,4 +42,4 @@ export const documentEmbed = () => {
 		</Wrapper>
 	);
 };
-documentEmbed.story = { name: 'document embed' };
+documentEmbed.storyName = 'document embed';

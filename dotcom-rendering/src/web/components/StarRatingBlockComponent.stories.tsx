@@ -22,4 +22,4 @@ export const AllSizes = () => (
 		<StarRatingBlockComponent rating={3} size="large" />
 	</>
 );
-AllSizes.story = { name: 'All stars sizes' };
+AllSizes.storyName = 'All stars sizes';
