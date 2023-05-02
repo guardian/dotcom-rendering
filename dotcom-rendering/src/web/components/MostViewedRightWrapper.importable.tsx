@@ -18,10 +18,10 @@ export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 	// We don't always show the most viewed component - it depends on the length of the article
 	// This effect determines whether to show the most viewed, depending on the computed height of the container
 	useEffect(() => {
-		const rightFurniture = document.querySelector<HTMLDivElement>(
+		const rightColumnContent = document.querySelector<HTMLDivElement>(
 			'[data-component="right-column-content"]',
 		);
-		const height = rightFurniture?.getBoundingClientRect().height;
+		const height = rightColumnContent?.getBoundingClientRect().height;
 		setHeightIsAvailable(height !== undefined && height >= 1600);
 	}, []);
 
