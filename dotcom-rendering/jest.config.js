@@ -1,6 +1,8 @@
 const swcConfig = require('./scripts/webpack/.swcrc.json');
 
 module.exports = {
+	"verbose": true,
+	"testEnvironmentOptions": { "url": "http://localhost/"},
 	"testEnvironment": "jest-environment-jsdom-sixteen",
 	"moduleDirectories": [
 		"node_modules",
