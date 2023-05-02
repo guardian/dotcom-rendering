@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { MostViewedRight } from './MostViewedRight';
-import { MAX_HEIGHT_PX } from './RightColumnContent';
 
 type Props = {
 	componentDataAttribute: string;
+	maxHeightPx: number;
 	limitItems?: number;
 	renderAds: boolean;
 };
@@ -15,6 +15,7 @@ type Props = {
  */
 export const MostViewedRightWrapper = ({
 	componentDataAttribute,
+	maxHeightPx,
 	limitItems,
 	renderAds,
 }: Props) => {
@@ -28,7 +29,7 @@ export const MostViewedRightWrapper = ({
 			`[data-component="${componentDataAttribute}"]`,
 		);
 		const height = rightColumnContent?.getBoundingClientRect().height;
-		setHeightIsAvailable(height !== undefined && height >= MAX_HEIGHT_PX);
+		setHeightIsAvailable(height !== undefined && height >= maxHeightPx);
 	}, []);
 
 	if (!heightIsAvailable) {

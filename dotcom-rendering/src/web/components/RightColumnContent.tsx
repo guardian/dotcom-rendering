@@ -48,6 +48,7 @@ export const RightColumnContent = ({
 			{!isPaidContent ? (
 				<Island clientOnly={true} deferUntil="visible">
 					<MostViewedRightWrapper
+						maxHeightPx={MAX_HEIGHT_PX}
 						componentDataAttribute={componentDataAttribute}
 						renderAds={renderAds}
 					/>
