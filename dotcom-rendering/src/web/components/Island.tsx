@@ -1,32 +1,48 @@
 import { Placeholder } from './Placeholder';
 
-interface HydrateProps {
-	deferUntil?: 'idle' | 'visible';
-	clientOnly?: false;
-	placeholderHeight?: never;
-	children: JSX.Element;
-}
-
-interface ClientOnlyProps {
-	deferUntil?: 'idle' | 'visible';
+type ClientOnlyProps = {
 	clientOnly: true;
 	placeholderHeight?: number;
-	children: JSX.Element;
-}
+};
 
-interface InteractionProps {
+type NonClientOnlyProps = {
+	clientOnly?: false;
+	placeholderHeight?: never;
+};
+
+type DefaultProps = (ClientOnlyProps | NonClientOnlyProps) & {
+	deferUntil?: never;
+	rootMargin?: never;
+	children: JSX.Element;
+};
+
+type VisibleProps = (ClientOnlyProps | NonClientOnlyProps) & {
+	deferUntil: 'visible';
+	rootMargin?: string;
+	children: JSX.Element;
+};
+
+type IdleProps = (ClientOnlyProps | NonClientOnlyProps) & {
+	deferUntil: 'idle';
+	rootMargin?: never;
+	children: JSX.Element;
+};
+
+type InteractionProps = {
 	deferUntil: 'interaction';
 	clientOnly?: never;
 	placeholderHeight?: never;
+	rootMargin?: never;
 	children: JSX.Element;
-}
+};
 
-interface HashProps {
+type HashProps = {
 	deferUntil: 'hash';
 	clientOnly: true;
 	placeholderHeight?: never;
+	rootMargin?: never;
 	children: JSX.Element;
-}
+};
 
 /**
  * Props
@@ -34,7 +50,12 @@ interface HashProps {
  * We use a union type here to support conditional typing. This means you
  * can only supply placeholderHeight if clientOnly is true.
  */
-type Props = HydrateProps | ClientOnlyProps | InteractionProps | HashProps;
+type Props =
+	| DefaultProps
+	| VisibleProps
+	| IdleProps
+	| InteractionProps
+	| HashProps;
 
 const decideChildren = (
 	children: JSX.Element,
@@ -72,6 +93,7 @@ export const Island = ({
 	deferUntil,
 	clientOnly,
 	placeholderHeight,
+	rootMargin,
 	children,
 }: Props) => (
 	<gu-island
@@ -80,6 +102,7 @@ export const Island = ({
 		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}
 		clientOnly={clientOnly}
+		rootMargin={rootMargin}
 	>
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
