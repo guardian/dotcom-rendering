@@ -413,6 +413,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && !isLabs && (
