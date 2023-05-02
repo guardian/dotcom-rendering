@@ -3,6 +3,7 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { StoryFn } from '@storybook/react';
 import { formatToString } from 'articleFormat';
 import {
 	analysis,
@@ -40,13 +41,6 @@ import LiveLayout from './LiveLayout';
 import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 import StandardLayout from './StandardLayout';
 
-// ----- Types ----- //
-
-/**
- * A storybook story with a name.
- */
-type Story = { (): ReactElement; story: { name: string } };
-
 // ----- Helpers ----- //
 
 /**
@@ -64,9 +58,9 @@ const setSpecialReportAlt = setTheme(ArticleSpecial.SpecialReportAlt);
  */
 const createLayoutStory =
 	<Fixture extends Item>(Layout: FC<{ item: Fixture }>) =>
-	(fixture: Fixture): Story => {
+	(fixture: Fixture): StoryFn<typeof Layout> => {
 		const story = (): ReactElement => <Layout item={fixture} />;
-		story.story = { name: formatToString(fixture) };
+		story.storyName = formatToString(fixture);
 
 		return story;
 	};
@@ -103,7 +97,7 @@ const newsletterSignUpLayoutStory = createLayoutStory(
 );
 const newsletterSignUpFallbackLayoutStory = (
 	fixture: NewsletterSignup,
-): Story => {
+): StoryFn<typeof NewsletterSignUpLayout> => {
 	const story = (): ReactElement => (
 		<>
 			<style>
@@ -114,9 +108,7 @@ const newsletterSignUpFallbackLayoutStory = (
 			<NewsletterSignUpLayout item={fixture} />
 		</>
 	);
-	story.story = {
-		name: `${formatToString(fixture)} (form component not supported)`,
-	};
+	story.storyName = `${formatToString(fixture)} (form component not supported)`;
 
 	return story;
 };

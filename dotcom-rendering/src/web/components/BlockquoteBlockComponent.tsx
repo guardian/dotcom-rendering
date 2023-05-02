@@ -1,10 +1,11 @@
-import { css } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
-import { renderToString } from 'react-dom/server';
-import { unwrapHtml } from '../../model/unwrapHtml';
+import { JSDOM } from 'jsdom';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react';
+import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
-import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -34,52 +35,115 @@ const quotedBlockquoteStyles = (palette: Palette) => css`
 	color: ${palette.text.blockquote};
 `;
 
-export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{ prefix: '<p>', suffix: '</p>', unwrappedElement: 'p' },
-			{
-				prefix: '<blockquote>',
-				suffix: '</blockquote>',
-				unwrappedElement: 'blockquote',
-			},
-			{
-				prefix: '<blockquote class="quoted">',
-				suffix: '</blockquote>',
-				unwrappedElement: 'div',
-			},
-		],
-		html,
-	});
+const parseHtml = (html: string): DocumentFragment => JSDOM.fragment(html);
 
-	if (quoted) {
-		const htmlWithIcon = unwrappedHtml
-			.trim()
-			.replace(
-				'<p>',
-				`<p>${renderToString(
-					<QuoteIcon colour={palette.fill.blockquoteIcon} />,
-				)}`,
-			);
-		return (
-			<RewrappedComponent
-				isUnwrapped={isUnwrapped}
-				html={htmlWithIcon}
-				tagName="blockquote"
-				elCss={quotedBlockquoteStyles(palette)}
-			/>
+// The nodeType for ELEMENT_NODE has the value 1.
+function isElement(node: Node): node is Element {
+	return node.nodeType === 1;
+}
+
+const getAttrs = (node: Node): NamedNodeMap | undefined =>
+	isElement(node) ? node.attributes : undefined;
+
+/**
+ * Searches through the siblings of an element to determine if it's the first
+ * of the desired node type.
+ */
+const isFirstSiblingOfType = (name: string, node: Node): boolean => {
+	const prevSibling = node.previousSibling;
+	if (!prevSibling) return true;
+	if (prevSibling.nodeName === name) return false;
+	else return isFirstSiblingOfType(name, prevSibling);
+};
+
+const textElement =
+	(isQuoted: boolean, palette: Palette) =>
+	(node: Node, key: number): ReactNode => {
+		const text = node.textContent ?? '';
+		const children = Array.from(node.childNodes).map(
+			textElement(isQuoted, palette),
 		);
-	}
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={unwrappedHtml}
-			elCss={simpleBlockquoteStyles}
-			tagName={unwrappedElement}
-		/>
-	);
+		switch (node.nodeName) {
+			case 'P': {
+				// We want to add the quote icon to the first "P" node of the blockquote element
+				if (
+					isQuoted &&
+					node.parentElement?.nodeName === 'BLOCKQUOTE' &&
+					isFirstSiblingOfType('P', node)
+				) {
+					return (
+						<p>
+							<QuoteIcon colour={palette.fill.blockquoteIcon} />
+							{children}
+						</p>
+					);
+				}
+				return jsx('p', { children });
+			}
+			case 'BLOCKQUOTE':
+				return jsx('blockquote', {
+					key,
+					children,
+					css: isQuoted
+						? quotedBlockquoteStyles(palette)
+						: simpleBlockquoteStyles,
+				});
+			case 'A':
+				return jsx('A', {
+					href: getAttrs(node)?.getNamedItem('href'),
+					key,
+					children,
+				});
+			case 'STRONG':
+				return jsx('strong', {
+					css: { fontWeight: 'bold' },
+					key,
+					children,
+				});
+			case '#text':
+			case 'SPAN':
+				return text;
+			case 'BR':
+				// BR cannot accept children as it's a void element
+				return jsx('BR', {
+					key,
+				});
+			case 'H2':
+			case 'B':
+			case 'EM':
+			case 'UL':
+			case 'OL':
+			case 'LI':
+			case 'MARK':
+			case 'SUB':
+			case 'SUP':
+			case 'S':
+			case 'I':
+				return jsx(node.nodeName, {
+					key,
+					children,
+				});
+			default:
+				logger.warn(
+					'BlockquoteBlockComponent: Unknown element received',
+					{
+						isDev: process.env.NODE_ENV !== 'production',
+						element: {
+							name: node.nodeName,
+							html: isElement(node) ? node.outerHTML : undefined,
+						},
+					},
+				);
+				return null;
+		}
+	};
+
+export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => {
+	const fragment = parseHtml(html);
+
+	return jsx(Fragment, {
+		children: Array.from(fragment.childNodes).map(
+			textElement(!!quoted, palette),
+		),
+	});
 };

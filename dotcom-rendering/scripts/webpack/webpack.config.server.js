@@ -39,16 +39,20 @@ module.exports = ({ sessionId }) => ({
 		runtimeChunk: false,
 	},
 	externals: [
-		nodeExternals({
-			allowlist: [/^@guardian/],
-			additionalModuleDirs: [
-				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
-				// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
-				// but also in project root, and any workspaces we link to.
-				// We want to make sure all of these are removed from the server build.
-				'../node_modules',
-			],
-		}),
+		...(DEV
+			? [
+					nodeExternals({
+						allowlist: [/^@guardian/],
+						additionalModuleDirs: [
+							// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
+							// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
+							// but also in project root, and any workspaces we link to.
+							// We want to make sure all of these are removed from the server build.
+							'../node_modules',
+						],
+					}),
+			  ]
+			: []),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
 		({ request }, callback) => {
@@ -83,11 +87,6 @@ module.exports = ({ sessionId }) => ({
 		rules: [
 			{
 				test: /(\.tsx|\.js|\.ts)$/,
-				exclude: {
-					and: [/node_modules/],
-					not: [/@guardian/, /dynamic-import-polyfill/],
-				},
-
 				use: swcLoader,
 			},
 			// TODO: find a way to remove

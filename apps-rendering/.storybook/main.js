@@ -3,9 +3,6 @@ const webpack = require('webpack');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
-	core: {
-		builder: 'webpack5',
-	},
 	stories: ['../src/**/*.stories.@(js|mdx|ts|tsx)'],
 	addons: [
 		'@storybook/addon-essentials',
@@ -53,6 +50,10 @@ module.exports = {
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+	framework: {
+		name: '@storybook/react-webpack5',
+		options: {}
+	}
 };
 
 const webpackConfig = (config) => {

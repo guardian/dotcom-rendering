@@ -12,18 +12,18 @@ const play = ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	userEvent.click(canvas.getByRole('button'));
 };
 
-const containerTitle = 'Opinion';
-const path = 'uk/lifestyle';
+const title = 'Opinion';
+const pageId = 'uk/lifestyle';
 const collectionId = '5011-3940-8793-33a9';
-const baseUrl = 'https://api.nextgen.guardianapps.co.uk';
-const containerElementId = 'container-id';
+const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
+const sectionId = 'container-id';
 
 const defaultProps = {
-	containerTitle,
-	baseUrl,
-	path,
+	title,
+	ajaxUrl,
+	pageId,
 	collectionId,
-	containerElementId,
+	sectionId,
 	showAge: false,
 };
 
@@ -35,7 +35,7 @@ export default {
 export const ShowMoreSuccess = () => {
 	fetchMock
 		.restore()
-		.get(`${baseUrl}/${path}/show-more/${collectionId}.json?dcr=true`, {
+		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`, {
 			status: 200,
 			body: trails.slice(0, 6),
 		});
@@ -49,7 +49,7 @@ ShowMoreSuccess.storyName = 'ShowMore button, success';
 export const ShowMoreError = () => {
 	fetchMock
 		.restore()
-		.get(`${baseUrl}/${path}/show-more/${collectionId}.json?dcr`, {
+		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr`, {
 			status: 404,
 			body: null,
 		});
