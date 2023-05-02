@@ -172,7 +172,7 @@ export const Kicker = ({
 }: Props) => {
 	const palette = decidePalette(format);
 
-	if (isAction) {
+	if (!isAction) {
 		return (
 			<div
 				css={[
