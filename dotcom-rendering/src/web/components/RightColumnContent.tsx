@@ -22,11 +22,12 @@ export const RightColumnContent = ({
 	renderAds,
 	shouldHideReaderRevenue,
 }: Props) => {
+	const componentDataAttribute = 'right-column-content';
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
 			// can measure the height of this component
-			data-component="right-column-content"
+			data-component={componentDataAttribute}
 			css={css`
 				/* The height can be smaller than the maximum height
 				   For example if the article is very short */
@@ -46,7 +47,10 @@ export const RightColumnContent = ({
 
 			{!isPaidContent ? (
 				<Island clientOnly={true} deferUntil="visible">
-					<MostViewedRightWrapper renderAds={renderAds} />
+					<MostViewedRightWrapper
+						componentDataAttribute={componentDataAttribute}
+						renderAds={renderAds}
+					/>
 				</Island>
 			) : null}
 		</div>

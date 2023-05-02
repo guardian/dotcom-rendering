@@ -5,6 +5,7 @@ import { MostViewedRight } from './MostViewedRight';
 import { MAX_HEIGHT_PX } from './RightColumnContent';
 
 type Props = {
+	componentDataAttribute: string;
 	limitItems?: number;
 	renderAds: boolean;
 };
@@ -12,7 +13,11 @@ type Props = {
 /**
  * Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it
  */
-export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
+export const MostViewedRightWrapper = ({
+	componentDataAttribute,
+	limitItems,
+	renderAds,
+}: Props) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
 
@@ -20,7 +25,7 @@ export const MostViewedRightWrapper = ({ limitItems, renderAds }: Props) => {
 	// This effect determines whether to show the most viewed, depending on the computed height of the container
 	useEffect(() => {
 		const rightColumnContent = document.querySelector<HTMLDivElement>(
-			'[data-component="right-column-content"]',
+			`[data-component="${componentDataAttribute}"]`,
 		);
 		const height = rightColumnContent?.getBoundingClientRect().height;
 		setHeightIsAvailable(height !== undefined && height >= MAX_HEIGHT_PX);
