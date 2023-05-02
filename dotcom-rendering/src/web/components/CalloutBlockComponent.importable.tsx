@@ -10,6 +10,19 @@ const collapsibleCalloutStyle = css`
 	background-color: ${palette.neutral[97]};
 `;
 
+/**
+ * # Callout Block Component
+ *
+ * A callout to readers to share their stories.
+ * This is the updated version of the CalloutEmbedBlockComponent.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page,
+ * and submitting a form.
+ *
+ */
+
 export const CalloutBlockComponent = ({
 	callout,
 	pageId,

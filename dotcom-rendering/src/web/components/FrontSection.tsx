@@ -1,54 +1,32 @@
-import { css, jsx } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { css } from '@emotion/react';
+import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { from, neutral, space, until } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { ContainerTitle } from './ContainerTitle';
+import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
+import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
-	/** Allows the colour of the title to be changed */
-	fontColour?: string;
 	/** This text shows below the title */
 	description?: string;
 	/** The title can be made into a link using this property */
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
-	/** Defaults to `true`. If we should render the left and right borders */
-	showSideBorders?: boolean;
-	centralBorder?: 'partial' | 'full';
+	collectionId?: string;
+	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
-	/** The html tag used by Section defaults to `section` but can be overridden here */
-	element?:
-		| 'div'
-		| 'article'
-		| 'aside'
-		| 'nav'
-		| 'main'
-		| 'header'
-		| 'section'
-		| 'footer';
-	/** Defaults to `true`. Adds margins to the top and bottom */
-	verticalMargins?: boolean;
-	/** Applies a background colour to the entire width */
-	backgroundColour?: string;
-	/** The colour of borders can be overriden */
-	borderColour?: string;
 	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
-	/** Defaults to `false`. If true, `children` is rendered all the way right */
-	stretchRight?: boolean;
-	/** Defaults to `compact`. Some page types have a different left column width */
-	leftColSize?: LeftColSize;
-	/** @deprecated no longer used */
-	format?: ArticleFormat;
 	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
 	/** The string used to set the `data-link-name` Ophan attribute */
@@ -66,8 +44,6 @@ type Props = {
 	 * to be collapsed
 	 */
 	toggleable?: boolean;
-	/** Applies a background colour only to the content inside the left and right borders */
-	innerBackgroundColour?: string;
 	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
 	 * shown under the title. Typically only used on Headlines containers on fronts
 	 */
@@ -76,6 +52,10 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
+	badge?: EmotionJSX.Element;
+	/** Enable the "Show More" button on this container to allow readers to load more cards */
+	canShowMore?: boolean;
+	ajaxUrl?: string;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -83,38 +63,41 @@ const width = (columns: number, columnWidth: number, columnGap: number) =>
 
 /** Not all browsers support CSS grid, so we set explicit width as a fallback */
 const fallbackStyles = css`
-	padding: 0 12px;
-	margin: 0 auto;
+	@supports not (display: grid) {
+		padding: 0 12px;
+		margin: 0 auto;
 
-	${from.mobileLandscape} {
-		padding: 0 20px;
-	}
+		${from.mobileLandscape} {
+			padding: 0 20px;
+		}
 
-	${from.tablet} {
-		${width(12, 40, 20)}
-	}
+		${from.tablet} {
+			${width(12, 40, 20)}
+		}
 
-	${from.desktop} {
-		${width(12, 60, 20)}
-	}
+		${from.desktop} {
+			${width(12, 60, 20)}
+		}
 
-	${from.leftCol} {
-		${width(14, 60, 20)}
-	}
+		${from.leftCol} {
+			${width(14, 60, 20)}
+		}
 
-	${from.wide} {
-		${width(16, 60, 20)}
-	}
-
-	@supports (display: grid) {
-		width: 100%;
-		padding: 0;
-		margin: 0;
+		${from.wide} {
+			${width(16, 60, 20)}
+		}
 	}
 `;
 
 const containerStyles = css`
 	display: grid;
+
+	grid-template-rows:
+		[headline-start show-hide-start] auto
+		[show-hide-end headline-end content-toggleable-start content-start] auto
+		[content-end content-toggleable-end show-more-start] auto
+		[show-more-end];
+
 	grid-template-columns:
 		[viewport-start] 0px
 		[content-start title-start]
@@ -123,6 +106,8 @@ const containerStyles = css`
 		minmax(0, 1fr)
 		[content-end title-end hide-end]
 		0px [viewport-end];
+
+	grid-auto-flow: dense;
 	column-gap: 10px;
 
 	${from.mobileLandscape} {
@@ -152,6 +137,13 @@ const containerStyles = css`
 	}
 
 	${from.leftCol} {
+		grid-template-rows:
+			[headline-start show-hide-start content-start] auto
+			[show-hide-end content-toggleable-start] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
+			[show-more-end];
+
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[title-start]
@@ -165,6 +157,13 @@ const containerStyles = css`
 	}
 
 	${from.wide} {
+		grid-template-rows:
+			[headline-start content-start content-toggleable-start show-hide-start] auto
+			[show-hide-end] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
+			[show-more-end];
+
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[title-start]
@@ -176,65 +175,15 @@ const containerStyles = css`
 			[hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
-
-	grid-auto-flow: dense;
-	grid-template-rows: auto [content-start] auto;
-
-	${from.leftCol} {
-		grid-template-rows: [content-start] repeat(2, auto);
-	}
 `;
 
-const wideLeftColumn = css`
-	${from.leftCol} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(10, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end] minmax(0, 1fr) [viewport-end];
-	}
-`;
-
-const sectionContentStretchedRight = css`
-	${from.wide} {
-		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(12, 60px)
-			[hide-start]
-			60px
-			[hide-end content-end]
-			minmax(0, 1fr) [viewport-end];
-	}
-`;
-
-const containerStylesToggleable = css`
-	${from.leftCol} {
-		grid-template-rows: auto [content-start] repeat(2, auto);
-	}
-	${from.wide} {
-		grid-template-rows: [content-start] repeat(3, auto);
-	}
-`;
-
-const headlineContainerStyles = css`
-	grid-row-start: 1;
+const sectionHeadline = css`
+	grid-row: headline;
 	grid-column: title;
-	${from.leftCol} {
-		grid-row-end: span 2;
-	}
 
 	display: flex;
 	flex-direction: column;
-`;
 
-const headlineContainerBorders = css`
 	${from.leftCol} {
 		position: relative;
 		::after {
@@ -252,11 +201,10 @@ const headlineContainerBorders = css`
 
 const paddings = css`
 	padding-top: ${space[2]}px;
-	padding-bottom: ${space[9]}px;
 `;
 
 const sectionShowHide = css`
-	grid-row-start: 1;
+	grid-row: show-hide;
 	grid-column: hide;
 	justify-self: end;
 `;
@@ -269,31 +217,10 @@ const sectionContent = css`
 	}
 
 	grid-column: content;
-
-	grid-row-start: content-start;
-	${from.leftCol} {
-		grid-row-end: span 2;
-	}
-	${from.wide} {
-		grid-row-end: -1;
-	}
 `;
 
-const sectionContentBorder = css`
-	position: relative;
-
-	${from.leftCol} {
-		::before {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			bottom: 0;
-			left: -10px;
-			position: absolute;
-			background-color: ${neutral[86]};
-		}
-	}
+const sectionContentRow = (toggleable: boolean) => css`
+	grid-row: ${toggleable ? 'content-toggleable' : 'content'};
 `;
 
 const sectionContentPadded = css`
@@ -303,13 +230,19 @@ const sectionContentPadded = css`
 	}
 `;
 
+const sectionShowMore = css`
+	grid-row: show-more;
+	grid-column: content;
+`;
+
 const sectionTreats = css`
 	display: none;
 
 	${from.leftCol} {
 		display: block;
 		align-self: end;
-		grid-row-start: -2;
+
+		grid-row: treats;
 		grid-column: title;
 	}
 
@@ -321,8 +254,8 @@ const sectionTreats = css`
 /** element which contains border and inner background colour, if set */
 const decoration = css`
 	grid-row: 1 / -1;
-
 	grid-column: 1 / -1;
+
 	${from.tablet} {
 		grid-column: 2 / -2;
 	}
@@ -343,6 +276,10 @@ const sideBorders = css`
 
 const topBorder = css`
 	border-top-style: solid;
+`;
+
+const bottomPadding = css`
+	padding-bottom: ${space[9]}px;
 `;
 
 const titleStyle = css`
@@ -372,6 +309,9 @@ const titleStyle = css`
  * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
+ * ├───────┤
+ * │Show   │
+ * |More   │
  * └───────┘
  *
  * from `tablet` (740) to `desktop` (980)
@@ -383,6 +323,8 @@ const titleStyle = css`
  * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───────────────────────┤
+ * │Show More              │
  * └───────────────────────┘
  *
  * on `leftCol` (1140) if component is toggleable
@@ -395,6 +337,8 @@ const titleStyle = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───┼─────────────────────┤
+ * │   │Show More            │
  * └───┴─────────────────────┘
  *
  * on `leftCol` (1140) if component is not toggleable
@@ -407,6 +351,8 @@ const titleStyle = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───┼──────────────────────┤
+ * │   │Show More             │
  * └───┴──────────────────────┘
  *
  * on `wide` (1300)
@@ -419,110 +365,72 @@ const titleStyle = css`
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
- * └─────┴─────────────────────────┘
- *
- * on `wide` (1300) with `stretchRight`
- *
- *  1 2 3 4 5 6 7 8 9 a b c d e f g (16)
- * ┌─────┬─────────────────────────┐
- * │Title│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Date │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * ├─────┤▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
- * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├─────┼─────────────────────────┤
+ * │     │Show More                │
  * └─────┴─────────────────────────┘
  *
  */
 export const FrontSection = ({
-	element = 'section',
 	title,
 	children,
-	backgroundColour,
-	borderColour,
-	centralBorder,
 	containerName,
 	containerPalette,
 	description,
 	editionId,
-	fontColour,
-	innerBackgroundColour,
-	leftColSize = 'compact',
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
-	sectionId,
+	sectionId = '',
+	collectionId,
+	pageId,
 	showDateHeader = false,
-	showSideBorders = true,
 	showTopBorder = true,
-	stretchRight = false,
 	toggleable = false,
 	treats,
 	url,
-	verticalMargins = true,
+	badge,
+	canShowMore,
+	ajaxUrl,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const isToggleable = toggleable && !!sectionId;
+	const showMore =
+		canShowMore &&
+		!!title &&
+		!!sectionId &&
+		!!collectionId &&
+		!!pageId &&
+		!!ajaxUrl;
 
-	const showDecoration =
-		showTopBorder || showSideBorders || !!innerBackgroundColour;
-
-	const childrenContainerStyles = [
-		sectionContent,
-		sectionContentPadded,
-		centralBorder === 'full' && sectionContentBorder,
-		verticalMargins && paddings,
-	];
-
-	return jsx(
-		element,
-		{
-			/**
-			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-			 * this id pre-existed showMore so is probably also being used for something else.
-			 */
-			id: sectionId,
-			'data-link-name': ophanComponentLink,
-			'data-component': ophanComponentName,
-			'data-container-name': containerName,
-			css: [
+	/**
+	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * this id pre-existed showMore so is probably also being used for something else.
+	 */
+	return (
+		<section
+			id={sectionId}
+			data-link-name={ophanComponentLink}
+			data-component={ophanComponentName}
+			data-container-name={containerName}
+			css={[
 				fallbackStyles,
 				containerStyles,
-				leftColSize === 'wide' && wideLeftColumn,
-				isToggleable && containerStylesToggleable,
-				stretchRight && sectionContentStretchedRight,
 				css`
-					background-color: ${backgroundColour ??
-					overrides?.background.container};
+					background-color: ${overrides?.background.container};
 				`,
-			],
-		},
-		<>
-			{showDecoration && (
-				<div
-					css={[
-						decoration,
-						showSideBorders && sideBorders,
-						showTopBorder && topBorder,
-						innerBackgroundColour &&
-							css`
-								background-color: ${innerBackgroundColour};
-							`,
-					]}
-				/>
-			)}
-			<div
-				css={[
-					headlineContainerStyles,
-					centralBorder === 'partial' && headlineContainerBorders,
-				]}
-			>
+			]}
+		>
+			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+
+			<div css={[sectionHeadline]}>
+				<Hide until="leftCol">{badge}</Hide>
 				<div css={titleStyle}>
+					<Hide from="leftCol">{badge}</Hide>
 					<ContainerTitle
 						title={title}
-						fontColour={fontColour ?? overrides?.text.container}
+						fontColour={overrides?.text.container}
 						description={description}
 						url={url}
 						containerPalette={containerPalette}
@@ -532,37 +440,54 @@ export const FrontSection = ({
 				</div>
 				{leftContent}
 			</div>
-			{isToggleable ? (
-				<>
-					<div css={sectionShowHide}>
-						<ShowHideButton
-							sectionId={sectionId}
-							overrideContainerToggleColour={
-								overrides?.text.containerToggle
-							}
-						/>
-					</div>
-					<div
-						css={childrenContainerStyles}
-						id={`container-${sectionId}`}
-					>
-						{children}
-					</div>
-				</>
-			) : (
-				<div css={childrenContainerStyles}>{children}</div>
-			)}
 
-			{treats && (
-				<div css={[sectionTreats, verticalMargins && paddings]}>
-					<Treats
-						treats={treats}
-						borderColour={
-							borderColour ?? overrides?.border.container
+			{isToggleable && (
+				<div css={sectionShowHide}>
+					<ShowHideButton
+						sectionId={sectionId}
+						overrideContainerToggleColour={
+							overrides?.text.containerToggle
 						}
 					/>
 				</div>
 			)}
-		</>,
+
+			<div
+				css={[
+					sectionContent,
+					sectionContentPadded,
+					sectionContentRow(toggleable),
+					paddings,
+				]}
+				id={`container-${sectionId}`}
+			>
+				{children}
+			</div>
+
+			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
+				{showMore && (
+					<Island deferUntil="interaction">
+						<ShowMore
+							title={title}
+							sectionId={sectionId}
+							collectionId={collectionId}
+							pageId={pageId}
+							ajaxUrl={ajaxUrl}
+							containerPalette={containerPalette}
+							showAge={title === 'Headlines'}
+						/>
+					</Island>
+				)}
+			</div>
+
+			{treats && (
+				<div css={[sectionTreats, paddings]}>
+					<Treats
+						treats={treats}
+						borderColour={overrides?.border.container}
+					/>
+				</div>
+			)}
+		</section>
 	);
 };

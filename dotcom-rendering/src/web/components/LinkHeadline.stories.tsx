@@ -25,7 +25,7 @@ export const xsmallStory = () => (
 		/>
 	</Section>
 );
-xsmallStory.story = { name: 'Size | large' };
+xsmallStory.storyName = 'Size | large';
 
 export const liveStory = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -40,7 +40,7 @@ export const liveStory = () => (
 		/>
 	</Section>
 );
-liveStory.story = { name: 'With Live kicker' };
+liveStory.storyName = 'With Live kicker';
 
 export const noLinebreak = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -56,7 +56,7 @@ export const noLinebreak = () => (
 		/>
 	</Section>
 );
-noLinebreak.story = { name: 'With Live kicker but no line break' };
+noLinebreak.storyName = 'With Live kicker but no line break';
 
 export const pulsingDot = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -72,7 +72,7 @@ export const pulsingDot = () => (
 		/>
 	</Section>
 );
-pulsingDot.story = { name: 'With pulsing dot' };
+pulsingDot.storyName = 'With pulsing dot';
 
 export const cultureVariant = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -87,7 +87,7 @@ export const cultureVariant = () => (
 		/>
 	</Section>
 );
-cultureVariant.story = { name: 'With a culture kicker' };
+cultureVariant.storyName = 'With a culture kicker';
 
 export const opinionxxxsmall = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -104,7 +104,7 @@ export const opinionxxxsmall = () => (
 		/>
 	</Section>
 );
-opinionxxxsmall.story = { name: 'Quotes | small' };
+opinionxxxsmall.storyName = 'Quotes | small';
 
 export const OpinionKicker = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -120,7 +120,7 @@ export const OpinionKicker = () => (
 		/>
 	</Section>
 );
-OpinionKicker.story = { name: 'With an opinion kicker' };
+OpinionKicker.storyName = 'With an opinion kicker';
 
 export const SpecialReport = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -136,7 +136,7 @@ export const SpecialReport = () => (
 		/>
 	</Section>
 );
-SpecialReport.story = { name: 'when Special Report' };
+SpecialReport.storyName = 'when Special Report';
 
 export const InUnderlinedState = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -156,7 +156,7 @@ export const InUnderlinedState = () => (
 		/>
 	</Section>
 );
-InUnderlinedState.story = { name: 'With showUnderline true' };
+InUnderlinedState.storyName = 'With showUnderline true';
 
 export const linkStory = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -174,7 +174,7 @@ export const linkStory = () => (
 		/>
 	</Section>
 );
-linkStory.story = { name: 'With linkTo provided' };
+linkStory.storyName = 'With linkTo provided';
 
 export const LiveBlogSizes = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -231,7 +231,7 @@ export const LiveBlogSizes = () => (
 		/>
 	</Section>
 );
-LiveBlogSizes.story = { name: 'With various sizes (live)' };
+LiveBlogSizes.storyName = 'With various sizes (live)';
 
 export const DeadBlogSizes = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -288,7 +288,7 @@ export const DeadBlogSizes = () => (
 		/>
 	</Section>
 );
-DeadBlogSizes.story = { name: 'With various sizes (dead)' };
+DeadBlogSizes.storyName = 'With various sizes (dead)';
 
 export const Updated = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -306,4 +306,4 @@ export const Updated = () => (
 		/>
 	</Section>
 );
-Updated.story = { name: 'Last updated' };
+Updated.storyName = 'Last updated';

@@ -18,8 +18,8 @@ export default {
 };
 
 export const Default = () => (
-	<FrontSection title="Fixed Small Slow I" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow I">
 		<FixedSmallSlowI trails={trails} showAge={true} />
 	</FrontSection>
 );
-Default.story = { name: 'FixedSmallSlowI' };
+Default.storyName = 'FixedSmallSlowI';

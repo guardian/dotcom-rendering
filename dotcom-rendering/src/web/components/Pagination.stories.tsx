@@ -30,9 +30,7 @@ export const notFirstPage = () => (
 	</>
 );
 
-notFirstPage.story = {
-	name: 'Not first page',
-};
+notFirstPage.storyName = 'Not first page';
 
 export const firstPageStory = () => (
 	<>
@@ -47,6 +45,4 @@ export const firstPageStory = () => (
 	</>
 );
 
-firstPageStory.story = {
-	name: 'First page',
-};
+firstPageStory.storyName = 'First page';

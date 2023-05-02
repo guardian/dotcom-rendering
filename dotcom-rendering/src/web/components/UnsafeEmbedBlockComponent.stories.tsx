@@ -34,4 +34,4 @@ export const DefaultStory = () => {
 		</div>
 	);
 };
-DefaultStory.story = { name: 'default' };
+DefaultStory.storyName = 'default';

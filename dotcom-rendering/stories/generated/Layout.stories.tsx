@@ -26,6 +26,4 @@ export const StandardStandardNewsPillar = () => {
 		/>
 	);
 };
-StandardStandardNewsPillar.story = {
-	name: 'StandardDisplay StandardDesign NewsPillar'
-};
+StandardStandardNewsPillar.storyName = 'StandardDisplay StandardDesign NewsPillar';

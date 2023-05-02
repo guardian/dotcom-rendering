@@ -2,6 +2,7 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
@@ -150,7 +151,16 @@ export const prodServer = (): void => {
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
-		res.status(500).send(`<pre>${message}</pre>`);
+
+		if (e instanceof TypeError) {
+			res.status(400).send(`<pre>${message}</pre>`);
+		} else if (e instanceof NotRenderableInDCR) {
+			res.status(415).send(`<pre>${message}</pre>`);
+		} else if (e instanceof Error) {
+			res.status(500).send(`<pre>${message}</pre>`);
+		} else {
+			res.status(500).send(`<pre>${message}</pre>`);
+		}
 	};
 
 	app.use(handleError);

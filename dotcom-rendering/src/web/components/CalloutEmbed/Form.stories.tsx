@@ -22,7 +22,7 @@ export const Default = () => {
 		</div>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';
 
 export const WithOnlyTwoRadio = () => {
 	return (
@@ -39,7 +39,7 @@ export const WithOnlyTwoRadio = () => {
 		</div>
 	);
 };
-WithOnlyTwoRadio.story = { name: 'with only two radio' };
+WithOnlyTwoRadio.storyName = 'with only two radio';
 
 export const WithError = () => {
 	return (
@@ -57,4 +57,4 @@ export const WithError = () => {
 		</div>
 	);
 };
-WithError.story = { name: 'with errors' };
+WithError.storyName = 'with errors';

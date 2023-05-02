@@ -77,7 +77,7 @@ export const News = () => {
 		</Wrapper>
 	);
 };
-News.story = { name: 'News' };
+News.storyName = 'News';
 
 export const Sport = () => {
 	return (
@@ -98,7 +98,7 @@ export const Sport = () => {
 		</Wrapper>
 	);
 };
-Sport.story = { name: 'Sport' };
+Sport.storyName = 'Sport';
 
 export const Culture = () => {
 	return (
@@ -119,7 +119,7 @@ export const Culture = () => {
 		</Wrapper>
 	);
 };
-Culture.story = { name: 'Culture' };
+Culture.storyName = 'Culture';
 
 export const Lifestyle = () => {
 	return (
@@ -140,7 +140,7 @@ export const Lifestyle = () => {
 		</Wrapper>
 	);
 };
-Lifestyle.story = { name: 'Lifestyle' };
+Lifestyle.storyName = 'Lifestyle';
 
 export const Opinion = () => {
 	return (
@@ -161,7 +161,7 @@ export const Opinion = () => {
 		</Wrapper>
 	);
 };
-Opinion.story = { name: 'Opinion' };
+Opinion.storyName = 'Opinion';
 
 export const Labs = () => {
 	return (
@@ -182,7 +182,7 @@ export const Labs = () => {
 		</Wrapper>
 	);
 };
-Labs.story = { name: 'Labs' };
+Labs.storyName = 'Labs';
 
 export const SpecialReport = () => {
 	return (
@@ -203,7 +203,7 @@ export const SpecialReport = () => {
 		</Wrapper>
 	);
 };
-SpecialReport.story = { name: 'SpecialReport' };
+SpecialReport.storyName = 'SpecialReport';
 
 export const DeadBlogStory = () => {
 	return (
@@ -228,4 +228,4 @@ export const DeadBlogStory = () => {
 		</>
 	);
 };
-DeadBlogStory.story = { name: 'Deadblog - All pillars' };
+DeadBlogStory.storyName = 'Deadblog - All pillars';

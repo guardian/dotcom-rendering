@@ -41,7 +41,7 @@ export const PartialRightBorder = () => {
 		</Section>
 	);
 };
-PartialRightBorder.story = { name: 'Partial right border' };
+PartialRightBorder.storyName = 'Partial right border';
 
 export const RightBorder = () => {
 	return (
@@ -70,4 +70,4 @@ export const RightBorder = () => {
 		</Section>
 	);
 };
-RightBorder.story = { name: 'Full right border' };
+RightBorder.storyName = 'Full right border';

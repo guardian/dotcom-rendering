@@ -118,9 +118,7 @@ export const ${storyVariableName} = () => {
 		/>
 	);
 };
-${storyVariableName}.story = {
-	name: '${displayName}Display ${designName}Design ${theme}'
-};
+${storyVariableName}.storyName = '${displayName}Display ${designName}Design ${theme}';
 `;
 };
 
@@ -137,9 +135,7 @@ export const ${storyName} = () => {
 		/>
 	);
 };
-${storyName}.story = {
-	name: '${displayName}Display ${designName}Design'
-};
+${storyName}.storyName = '${displayName}Display ${designName}Design';
 `;
 };
 

@@ -7,18 +7,21 @@ import { validateAsArticleType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
 import { isAmpSupported } from '../components/Elements';
 import type { PermutiveModel } from '../components/Permutive';
+import { enhance } from '../lib/enhance';
 import { generatePermutivePayload } from '../lib/permutive';
 import { extractScripts } from '../lib/scripts';
 import { Article } from '../pages/Article';
 import { getAmpExperimentCache } from './ampExperimentCache';
 import { document } from './document';
 
-export const handleAMPArticle: RequestHandler = ({ body }, res) => {
-	try {
+export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
+	(async () => {
 		const article = validateAsArticleType(body);
 		const { linkedData } = article;
 		const { config } = article;
-		const elements = article.blocks.flatMap((block) => block.elements);
+		const elements = await enhance(
+			article.blocks.flatMap((block) => block.elements),
+		);
 
 		if (
 			!isAmpSupported({
@@ -80,18 +83,7 @@ export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 		});
 
 		res.status(200).send(resp);
-	} catch (e) {
-		// a validation error
-		if (e instanceof TypeError) {
-			res.status(400).send(`<pre>${e.message}</pre>`);
-		} else if (e instanceof NotRenderableInDCR) {
-			res.status(415).send(`<pre>${e.message}</pre>`);
-		} else if (e instanceof Error) {
-			res.status(500).send(`<pre>${e.message}</pre>`);
-		} else {
-			res.status(500).send(`<pre>Unknown error</pre>`);
-		}
-	}
+	})().catch(next);
 };
 
 export const handlePerfTest: RequestHandler = (req, res, next) => {
