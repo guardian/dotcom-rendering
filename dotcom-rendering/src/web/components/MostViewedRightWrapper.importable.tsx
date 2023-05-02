@@ -30,7 +30,7 @@ export const MostViewedRightWrapper = ({
 		);
 		const height = rightColumnContent?.getBoundingClientRect().height;
 		setHeightIsAvailable(height !== undefined && height >= maxHeightPx);
-	}, []);
+	}, [componentDataAttribute, maxHeightPx]);
 
 	if (!heightIsAvailable) {
 		return null;
