@@ -21,7 +21,6 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
-import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
@@ -364,11 +363,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								}
 								badge={showBadge(collection.displayName)}
 								sectionId={ophanName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
+								canShowMore={collection.canShowMore}
+								ajaxUrl={front.config.ajaxUrl}
 							>
 								<DecideContainer
 									trails={trails}
@@ -383,26 +386,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									renderAds={renderAds}
 								/>
-								{collection.canShowMore && (
-									<Island deferUntil="interaction">
-										<ShowMore
-											containerTitle={
-												collection.displayName
-											}
-											collectionId={collection.id}
-											containerElementId={ophanName}
-											path={front.pressedPage.id}
-											baseUrl={front.config.ajaxUrl}
-											containerPalette={
-												collection.containerPalette
-											}
-											showAge={
-												collection.displayName ===
-												'Headlines'
-											}
-										/>
-									</Island>
-								)}
 							</FrontSection>
 							{renderAds &&
 								decideAdSlot(
