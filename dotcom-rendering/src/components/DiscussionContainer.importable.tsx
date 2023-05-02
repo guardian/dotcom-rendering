@@ -1,4 +1,5 @@
 import { getCookie } from '@guardian/libs';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
@@ -23,8 +24,11 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  */
 
 export const DiscussionContainer = (props: DiscussionProps) => {
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('discussioncontainer');
+	console.log(isSignedIn);
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
 
 	return <Discussion {...props} />;

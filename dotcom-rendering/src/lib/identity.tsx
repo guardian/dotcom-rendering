@@ -111,7 +111,7 @@ export const CheckUserSignInStatus = (): boolean => {
 		});
 	}, [authState, oktaAuth]);
 
-	console.log('checkSignedIn');
+	console.log('CheckUserSignInStatus');
 	console.log(isSignedIn);
 
 	return isSignedIn ? true : false;

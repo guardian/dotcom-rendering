@@ -5,10 +5,9 @@ import type {
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { ArticleCounts } from '../lib/articleCount';
-import { getArticleCounts } from '../lib/articleCount';
-import type { TagType } from '../types/tag';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
+import { getArticleCounts } from '../lib/articleCount';
+import type { ArticleCounts } from '../lib/articleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
@@ -19,6 +18,7 @@ import { pickMessage } from '../lib/messagePicker';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
+import type { TagType } from '../types/tag';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,

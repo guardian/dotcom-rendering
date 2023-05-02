@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { getCookie } from '@guardian/libs';
+// import { getCookie } from '@guardian/libs';
 import { brand, from, space } from '@guardian/source-foundations';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
@@ -69,9 +70,28 @@ export const HeaderTopBar = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
-	const isServer = typeof window === 'undefined';
-	const isSignedIn =
-		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// const isServer = typeof window === 'undefined';
+	// const isSignedIn =
+	// 	!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
+	// const { oktaAuth, authState } = useOktaAuth();
+	// console.log(authState);
+	// console.log(oktaAuth);
+
+	// const [isSignedIn, setIsSignedIn] = useState(false);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		if (authState) {
+	// 			setIsSignedIn(await isLoggedIn(oktaAuth, authState));
+	// 		}
+	// 	})().catch(() => {
+	// 		console.log('error in oktaAuthState');
+	// 	});
+	// }, [authState, oktaAuth]);
+
+	const isUserSignedIn = CheckUserSignInStatus();
+	console.log('headertopbar');
+	console.log(isUserSignedIn);
 
 	return (
 		<div
@@ -86,7 +106,7 @@ export const HeaderTopBar = ({
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
-					isSignedIn={isSignedIn}
+					isSignedIn={isUserSignedIn}
 				/>
 				<SearchJobs />
 
