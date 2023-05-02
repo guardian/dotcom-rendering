@@ -1,6 +1,6 @@
 import { getCookie } from '@guardian/libs';
-import type { AuthState, OktaAuthOptions } from '@okta/own-lib';
-import { OktaAuth } from '@okta/own-lib';
+import type { AuthState, OktaAuthOptions } from '@okta/okta-auth-js';
+import { OktaAuth } from '@okta/okta-auth-js';
 import React, { useEffect, useState } from 'react';
 
 interface OktaAuthContextType {
