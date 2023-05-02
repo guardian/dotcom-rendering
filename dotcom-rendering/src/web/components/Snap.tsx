@@ -17,14 +17,23 @@ export const Snap = ({ snapData }: Props) => {
 	}
 
 	return (
-		<div
-			css={[
-				snapStyles,
-				css`
-					${snapData.embedCss}
-				`,
-			]}
-			dangerouslySetInnerHTML={{ __html: snapData.embedHtml }}
-		/>
+		<>
+			<div
+				css={[
+					snapStyles,
+					css`
+						${snapData.embedCss}
+					`,
+				]}
+				dangerouslySetInnerHTML={{ __html: snapData.embedHtml }}
+			/>
+			{snapData.embedJs ? (
+				<div>
+					<script
+						dangerouslySetInnerHTML={{ __html: snapData.embedJs }}
+					/>
+				</div>
+			) : undefined}
+		</>
 	);
 };

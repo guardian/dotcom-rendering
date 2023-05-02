@@ -44,8 +44,8 @@ export const Header = () => {
 		</Wrapper>
 	);
 };
+Header.storyName = 'Header - desktop';
 Header.story = {
-	name: 'Header - desktop',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [1300] },
@@ -66,8 +66,8 @@ export const HeaderMobile = () => {
 		</Wrapper>
 	);
 };
+HeaderMobile.storyName = 'Header - mobileMedium';
 HeaderMobile.story = {
-	name: 'Header - mobileMedium',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [380] },
@@ -88,8 +88,8 @@ export const Footer = () => {
 		</Wrapper>
 	);
 };
+Footer.storyName = 'Footer - desktop';
 Footer.story = {
-	name: 'Footer - desktop',
 	parameters: {
 		viewport: { defaultViewport: 'desktop' },
 		chromatic: { viewports: [1300] },
@@ -110,8 +110,8 @@ export const FooterMobile = () => {
 		</Wrapper>
 	);
 };
+FooterMobile.storyName = 'Footer - mobileMedium';
 FooterMobile.story = {
-	name: 'Footer - mobileMedium',
 	parameters: {
 		viewport: { defaultViewport: 'mobileMedium' },
 		chromatic: { viewports: [380] },

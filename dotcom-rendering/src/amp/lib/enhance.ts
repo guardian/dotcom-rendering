@@ -1,4 +1,4 @@
-import { minify } from 'html-minifier';
+import { minify } from 'html-minifier-terser';
 import { sanitiseHTML } from '../../model/sanitise';
 import type { FEElement } from '../../types/content';
 
@@ -21,14 +21,18 @@ const clean = (html: string) => {
 	});
 };
 
-export const enhance = (elements: FEElement[]): FEElement[] => {
-	return elements.map((element) => {
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
-		) {
-			element.html = element.html ? clean(element.html) : element.html;
-		}
-		return element;
-	});
+export const enhance = async (elements: FEElement[]): Promise<FEElement[]> => {
+	return Promise.all(
+		elements.map(async (element) => {
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+			) {
+				element.html = element.html
+					? await clean(element.html)
+					: element.html;
+			}
+			return element;
+		}),
+	);
 };

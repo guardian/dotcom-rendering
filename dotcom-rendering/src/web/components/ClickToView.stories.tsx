@@ -134,7 +134,7 @@ export const InlineStory = () => {
 		</RoleStory>
 	);
 };
-InlineStory.story = { name: "Click to view in 'inline' role" };
+InlineStory.storyName = "Click to view in 'inline' role";
 
 export const SupportingStory = () => {
 	return (
@@ -148,7 +148,7 @@ export const SupportingStory = () => {
 		</RoleStory>
 	);
 };
-SupportingStory.story = { name: "Click to view in 'supporting' role" };
+SupportingStory.storyName = "Click to view in 'supporting' role";
 
 export const ShowcaseStory = () => {
 	return (
@@ -162,7 +162,7 @@ export const ShowcaseStory = () => {
 		</RoleStory>
 	);
 };
-ShowcaseStory.story = { name: "Click to view in 'showcase' role" };
+ShowcaseStory.storyName = "Click to view in 'showcase' role";
 
 export const HalfWidthStory = () => {
 	return (
@@ -176,7 +176,7 @@ export const HalfWidthStory = () => {
 		</RoleStory>
 	);
 };
-HalfWidthStory.story = { name: "Click to view in 'halfWidth' role" };
+HalfWidthStory.storyName = "Click to view in 'halfWidth' role";
 
 export const ThumbnailStory = () => {
 	return (
@@ -190,7 +190,7 @@ export const ThumbnailStory = () => {
 		</RoleStory>
 	);
 };
-ThumbnailStory.story = { name: "Click to view in 'thumbnail' role" };
+ThumbnailStory.storyName = "Click to view in 'thumbnail' role";
 
 const Inline: RoleType = 'inline';
 
@@ -677,9 +677,8 @@ export const EmbedBlockComponentStory = () => {
 		</Section>
 	);
 };
-EmbedBlockComponentStory.story = {
-	name: 'Click to view wrapping EmbedBlockComponent',
-};
+EmbedBlockComponentStory.storyName =
+	'Click to view wrapping EmbedBlockComponent';
 
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
@@ -835,9 +834,8 @@ export const UnsafeEmbedBlockComponentStory = () => {
 		</Section>
 	);
 };
-UnsafeEmbedBlockComponentStory.story = {
-	name: 'Click to view wrapping UnsafeEmbedBlockComponent',
-};
+UnsafeEmbedBlockComponentStory.storyName =
+	'Click to view wrapping UnsafeEmbedBlockComponent';
 
 export const VimeoBlockComponentStory = () => {
 	return (
@@ -898,9 +896,8 @@ export const VimeoBlockComponentStory = () => {
 		</Section>
 	);
 };
-VimeoBlockComponentStory.story = {
-	name: 'Click to view wrapping VimeoBlockComponent',
-};
+VimeoBlockComponentStory.storyName =
+	'Click to view wrapping VimeoBlockComponent';
 
 export const DocumentBlockComponentStory = () => {
 	return (
@@ -955,9 +952,8 @@ export const DocumentBlockComponentStory = () => {
 		</Section>
 	);
 };
-DocumentBlockComponentStory.story = {
-	name: 'Click to view wrapping DocumentBlockComponentStory',
-};
+DocumentBlockComponentStory.storyName =
+	'Click to view wrapping DocumentBlockComponentStory';
 
 export const SoundCloudBlockComponentStory = () => {
 	return (
@@ -1034,9 +1030,8 @@ export const SoundCloudBlockComponentStory = () => {
 		</Section>
 	);
 };
-SoundCloudBlockComponentStory.story = {
-	name: 'Click to view wrapping SoundCloudBlockComponent',
-};
+SoundCloudBlockComponentStory.storyName =
+	'Click to view wrapping SoundCloudBlockComponent';
 
 export const SpotifyBlockComponentStory = () => {
 	return (
@@ -1100,9 +1095,8 @@ export const SpotifyBlockComponentStory = () => {
 	);
 };
 
-SpotifyBlockComponentStory.story = {
-	name: 'Click to view wrapping SpotifyBlockComponent',
-};
+SpotifyBlockComponentStory.storyName =
+	'Click to view wrapping SpotifyBlockComponent';
 
 export const TweetBlockComponentStory = () => {
 	return (
@@ -1150,9 +1144,8 @@ export const TweetBlockComponentStory = () => {
 		</Section>
 	);
 };
-TweetBlockComponentStory.story = {
-	name: 'Click to view wrapping TweetBlockComponent',
-};
+TweetBlockComponentStory.storyName =
+	'Click to view wrapping TweetBlockComponent';
 export const InstagramBlockComponentStory = () => {
 	return (
 		<Section
@@ -1197,9 +1190,8 @@ export const InstagramBlockComponentStory = () => {
 		</Section>
 	);
 };
-InstagramBlockComponentStory.story = {
-	name: 'Click to view wrapping InstagramBlockComponent',
-};
+InstagramBlockComponentStory.storyName =
+	'Click to view wrapping InstagramBlockComponent';
 export const MapBlockComponentStory = () => {
 	return (
 		<Section
@@ -1260,9 +1252,8 @@ export const MapBlockComponentStory = () => {
 		</Section>
 	);
 };
-MapBlockComponentStory.story = {
-	name: 'Click to view wrapping MapEmbedBlockComponent',
-};
+MapBlockComponentStory.storyName =
+	'Click to view wrapping MapEmbedBlockComponent';
 export const VineBlockComponentStory = () => {
 	return (
 		<Section
@@ -1312,6 +1303,4 @@ export const VineBlockComponentStory = () => {
 		</Section>
 	);
 };
-VineBlockComponentStory.story = {
-	name: 'Click to view wrapping VineBlockComponent',
-};
+VineBlockComponentStory.storyName = 'Click to view wrapping VineBlockComponent';

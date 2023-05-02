@@ -2,6 +2,7 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
@@ -9,6 +10,7 @@ import {
 import { handleAppsArticle } from '../apps/server';
 import type { FEArticleType } from '../types/frontend';
 import {
+	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
 	handlePerfTest as handleArticlePerfTest,
@@ -62,6 +64,11 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post(
+		'/EmailNewsletters',
+		logRenderTime,
+		handleAllEditorialNewslettersPage,
+	);
 	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
@@ -91,6 +98,13 @@ export const prodServer = (): void => {
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
+	);
+
+	app.get(
+		'/EmailNewsletters',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAllEditorialNewslettersPage,
 	);
 
 	app.get(
@@ -137,7 +151,16 @@ export const prodServer = (): void => {
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
-		res.status(500).send(`<pre>${message}</pre>`);
+
+		if (e instanceof TypeError) {
+			res.status(400).send(`<pre>${message}</pre>`);
+		} else if (e instanceof NotRenderableInDCR) {
+			res.status(415).send(`<pre>${message}</pre>`);
+		} else if (e instanceof Error) {
+			res.status(500).send(`<pre>${message}</pre>`);
+		} else {
+			res.status(500).send(`<pre>${message}</pre>`);
+		}
 	};
 
 	app.use(handleError);

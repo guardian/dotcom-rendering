@@ -9,4 +9,4 @@ export const Default = () => {
 	return <NewsletterBadge />;
 };
 
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

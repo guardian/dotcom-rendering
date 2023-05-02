@@ -47,7 +47,7 @@ const copyStatic = () => {
 		['**/*'],
 		path.resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(__dirname, '../..', 'src/static'),
+			cwd: path.resolve(__dirname, '../../src/static'),
 			parents: true,
 			nodir: true,
 		},
@@ -67,6 +67,29 @@ const copyDist = () => {
 	);
 };
 
+const copyScripts = () => {
+	log(' - copying scripts');
+	return cpy(['**/*'], path.resolve(target, 'rendering', 'scripts'), {
+		cwd: path.resolve(__dirname, '../../scripts'),
+		parents: true,
+		nodir: true,
+	});
+};
+
+const copyDistServer = () => {
+	log(' - copying server dist');
+	return cpy(['**/*'], path.resolve(target, 'rendering', 'dist'), {
+		cwd: path.resolve(__dirname, '../../dist'),
+		parents: true,
+		nodir: true,
+	});
+};
+
+const copyMakefile = () => {
+	log(' - copying makefile');
+	return cpy(['makefile'], path.resolve(target, 'rendering'));
+};
+
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
 	return cpy(['riff-raff.yaml'], target, { cwd: __dirname });
@@ -74,21 +97,9 @@ const copyRiffRaff = () => {
 
 const zipBundle = () => {
 	log(' - zipping bundle');
-	return execa(
-		'zip',
-		['--recurse-paths', 'rendering.zip', '../', '--exclude', '.git/**\\*'],
-		{
-			shell: true,
-			maxBuffer: 200000000, // increase if you get a maxBuffer exceeded error
-		},
-	).then(() => {
-		cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
+	return execa('zip', ['--move', '--recurse-paths', 'rendering.zip', '.'], {
+		cwd: path.resolve(target, 'rendering'),
 	});
-};
-
-const removeAR = () => {
-	log(' - removing ../apps-rendering');
-	return new Promise((resolve) => rimraf('../apps-rendering', resolve));
 };
 
 const createBuildConfig = () => {
@@ -108,8 +119,15 @@ const createBuildConfig = () => {
 	);
 };
 
-Promise.all([copyCfn(), copyStatic(), copyDist(), copyRiffRaff()])
-	.then(removeAR)
+Promise.all([
+	copyCfn(),
+	copyMakefile(),
+	copyStatic(),
+	copyDist(),
+	copyDistServer(),
+	copyScripts(),
+	copyRiffRaff(),
+])
 	.then(zipBundle)
 	.then(createBuildConfig)
 	.catch((err) => {
