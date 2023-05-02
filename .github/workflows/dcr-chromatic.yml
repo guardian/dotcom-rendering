@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [labeled, synchronize]
+    types: [opened, labeled, synchronize]
 
 jobs:
   chromatic:
@@ -40,9 +40,9 @@ jobs:
         # pushing to `main`. Skip if this is a Dependabot PR as this is handled
         # by the subsequent job.
         if: |
-            (github.event.label.name == 'run_chromatic' ||  github.ref == 'refs/heads/main') &&
-            (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
-            github.event.pull_request.user.login != 'dependabot')
+          (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main') &&
+          (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
+          github.event.pull_request.user.login != 'dependabot')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
