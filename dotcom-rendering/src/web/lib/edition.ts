@@ -10,7 +10,7 @@ export type EditionId = (typeof editionList)[number]['editionId'];
  */
 export const editionList = [
 	{
-		url: '/preference/edition/au',
+		url: '/preference/edition/uk',
 		editionId: 'UK',
 		longTitle: 'UK edition',
 		title: 'UK edition',
