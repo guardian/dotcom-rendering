@@ -1,12 +1,12 @@
 import { jsx } from '@emotion/react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
-import { parseHtml } from '../lib/domUtils';
+import { isElement, parseHtml } from '../lib/domUtils';
 
 type Props = { html: string };
 
 const buildElementTree = (node: Node): ReactNode => {
-	if (node instanceof Element) {
+	if (isElement(node)) {
 		return jsx(node.tagName.toLowerCase(), {
 			id: node.attributes.getNamedItem('id')?.value,
 			children: Array.from(node.childNodes).map(buildElementTree),
