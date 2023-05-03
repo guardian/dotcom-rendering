@@ -1,33 +1,64 @@
 import { Placeholder } from './Placeholder';
 
-type ClientOnlyProps = {
-	clientOnly: true;
-	placeholderHeight?: number;
-};
+/**
+ * An island can be server-side rendered and then hydrated on the client,
+ * or simply rendered on the client (with the server optionally rendering a
+ * placeholder of a specified height).
+ *
+ * This specifies the  of possible props when specifying how the
+ * island should be rendered
+ */
+type ClientOnlyProps =
+	| {
+			clientOnly: true;
+			/**
+			 * Islands that are rendered on the client can optionally specify
+			 * a placeholder height that is server side rendered
+			 */
+			placeholderHeight?: number;
+	  }
+	| {
+			clientOnly?: false;
+			/**
+			 * Islands that are rendered on the server can never specify a
+			 * placeholder height
+			 */
+			placeholderHeight?: never;
+	  };
 
-type NonClientOnlyProps = {
-	clientOnly?: false;
-	placeholderHeight?: never;
-};
-
-type DefaultProps = (ClientOnlyProps | NonClientOnlyProps) & {
+type DefaultProps = ClientOnlyProps & {
 	deferUntil?: never;
 	rootMargin?: never;
 	children: JSX.Element;
 };
 
-type VisibleProps = (ClientOnlyProps | NonClientOnlyProps) & {
+/**
+ * The possible props for an island that should be hydrated/rendered when it
+ * becomes visible
+ */
+type VisibleProps = ClientOnlyProps & {
 	deferUntil: 'visible';
+	/**
+	 * @see https://developer.mozilla.org/en-us/docs/web/api/intersectionobserver/rootmargin
+	 */
 	rootMargin?: string;
 	children: JSX.Element;
 };
 
-type IdleProps = (ClientOnlyProps | NonClientOnlyProps) & {
+/**
+ * The possible props for an island that should be hydrated/rendered when the
+ * browser is idle
+ */
+type IdleProps = ClientOnlyProps & {
 	deferUntil: 'idle';
 	rootMargin?: never;
 	children: JSX.Element;
 };
 
+/**
+ * The possible props for an island that should be hydrated when a user
+ * interacts with the island
+ */
 type InteractionProps = {
 	deferUntil: 'interaction';
 	clientOnly?: never;
@@ -36,6 +67,10 @@ type InteractionProps = {
 	children: JSX.Element;
 };
 
+/**
+ * The possible props for an island that should be rendered when a user adds a
+ * hash fragment to the page URL
+ */
 type HashProps = {
 	deferUntil: 'hash';
 	clientOnly: true;
@@ -47,8 +82,11 @@ type HashProps = {
 /**
  * Props
  *
- * We use a union type here to support conditional typing. This means you
- * can only supply placeholderHeight if clientOnly is true.
+ * We use a union type here to support conditional typing.
+ *
+ * This means you can only supply:
+ * - `placeholderHeight` if `clientOnly` is `true`
+ * - `rootMargin` if `deferUntil` is `visible`
  */
 type Props =
 	| DefaultProps
