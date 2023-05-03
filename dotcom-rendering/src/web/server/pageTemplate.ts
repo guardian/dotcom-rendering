@@ -329,7 +329,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
   				<style>
-					@keyframes show-me {
+					@keyframes bork-fcp-show-me {
 						to {
 							opacity: 1;
 						}
