@@ -242,10 +242,6 @@ https://workforus.theguardian.com/careers/product-engineering/
                     window.addEventListener('offline', function incrementOfflineCount () { window.guardian.offlineCount++ });
                 </script>
 
-				<script>
-					(${fcp.toString()})();
-				</script>
-
                 <script>
                     // this is a global that's called at the bottom of the pf.io response,
                     // once the polyfills have run. This may be useful for debugging.
@@ -305,9 +301,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 				</script>
 
 				${bork ? `<script>(${fid.toString()})()</script>` : ''}
+				${bork ? `<script>(${fcp.toString()})();</script>` : ''}
 
 				${initTwitter ?? ''}
-
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
