@@ -3935,10 +3935,17 @@
     "@storybook/client-logger" "7.0.2"
     "@storybook/preview-api" "7.0.2"
 
-"@storybook/client-logger@7.0.2", "@storybook/client-logger@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+"@storybook/client-logger@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.2.tgz#2701d862236f1b7ae181d9c168abc67cc79ea001"
   integrity sha512-rv7W2BhzIQHbFpUM5/CP/acS6T5lTmaxT0MbZ9n+9h++9QQU/cFOdkZgSUbLVAb1AeUGoLsk0HYzcqPpV35Xsw==
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
+"@storybook/client-logger@7.0.8", "@storybook/client-logger@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.8.tgz#9f5a0fd4fdbb179458c310c84ed4e3d5c5b3c47a"
+  integrity sha512-UuyX57Jzn8L0QOhDPBA/v9UqIGCtFKqtaS23mNNNDoc1X3u+boULNgqWGD84F2U7JWg2xNopIJvjQxhH30/Jhw==
   dependencies:
     "@storybook/global" "^5.0.0"
 
@@ -4328,13 +4335,23 @@
     "@testing-library/user-event" "^13.2.1"
     ts-dedent "^2.2.0"
 
-"@storybook/theming@7.0.2", "@storybook/theming@^7.0.1":
+"@storybook/theming@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.2.tgz#a7df6c6cd5533804a9435c2be2181c7605537285"
   integrity sha512-c9sE+QAZNbopPvLiJ6BMxBERfTaq1ATyIri97FBvTucuSotNXw7X5q+ip5/nrCOPZuvK2f5wF4DRyD2HnB/rIQ==
   dependencies:
     "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
     "@storybook/client-logger" "7.0.2"
+    "@storybook/global" "^5.0.0"
+    memoizerific "^1.11.3"
+
+"@storybook/theming@^7.0.8":
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.8.tgz#7f785473b47743bb74bd0b068acb550f421ab603"
+  integrity sha512-nU4j/QrobGxPgAg34ieIswkDITC/eHFJqzMfnyc3EhA8P60YNFWjzQlDlkDA5jG/6xiakihLWH2pzLhPDdME5g==
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.8"
     "@storybook/global" "^5.0.0"
     memoizerific "^1.11.3"
 
