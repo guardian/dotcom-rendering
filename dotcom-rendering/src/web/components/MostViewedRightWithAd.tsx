@@ -27,7 +27,7 @@ export const MostViewedRightWithAd = ({
 		<div
 			// This attribute is necessary so that most viewed wrapper
 			// can measure the height of this component
-			data-component={componentDataAttribute}
+			data-container={componentDataAttribute}
 			css={css`
 				/* The height can be smaller than the maximum height
 				   For example if the article is very short */

@@ -26,7 +26,7 @@ export const MostViewedRightWrapper = ({
 	// This effect determines whether to show the most viewed, depending on the computed height of the container
 	useEffect(() => {
 		const containingElement = document.querySelector<HTMLDivElement>(
-			`[data-component="${componentDataAttribute}"]`,
+			`[data-container="${componentDataAttribute}"]`,
 		);
 		const height = containingElement?.getBoundingClientRect().height;
 		setHeightIsAvailable(height !== undefined && height >= maxHeightPx);
