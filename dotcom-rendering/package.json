@@ -64,7 +64,7 @@
 		"@guardian/bridget": "^2.3.0",
 		"@guardian/browserslist-config": "^4.0.0",
 		"@guardian/cdk": "^49.5.0",
-		"@guardian/commercial-core": "5.4.3",
+		"@guardian/commercial-core": "7.0.0",
 		"@guardian/consent-management-platform": "11.0.0",
 		"@guardian/core-web-vitals": "^4.0.0",
 		"@guardian/discussion-rendering": "^14.0.0",
