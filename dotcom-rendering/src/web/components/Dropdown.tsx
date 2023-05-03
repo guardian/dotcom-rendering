@@ -77,7 +77,6 @@ const ulStyles = css`
 
 const liStyles = css`
 	position: relative;
-	display: flex;
 `;
 
 const displayBlock = css`
