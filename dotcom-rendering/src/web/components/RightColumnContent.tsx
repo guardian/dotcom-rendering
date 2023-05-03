@@ -14,7 +14,7 @@ type Props = {
  * The maximum height of the container that may contain
  * a right ad slot and a most viewed component
  */
-export const MAX_HEIGHT_PX = 1600;
+const MAX_HEIGHT_PX = 1600;
 
 export const RightColumnContent = ({
 	display,
