@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, labeled, synchronize]
 
 jobs:
   chromatic:
@@ -35,7 +36,13 @@ jobs:
 
       - name: Chromatic - Apps Rendering Non Dependency PR / main
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
+        # Run Chromatic only if `run_chromatic` label has been applied or we're
+        # pushing to `main`. Skip if this is a Dependabot PR as this is handled
+        # by the subsequent job.
+        if: |
+          (github.event.label.name == 'run_chromatic' ||  github.ref == 'refs/heads/main') &&
+          (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
+          github.event.pull_request.user.login != 'dependabot')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}

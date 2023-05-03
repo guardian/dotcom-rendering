@@ -43,3 +43,5 @@ Most commands are run from within each project but the following are managed fro
 Chromatic now runs at project level. `cd` into the project dir and run `yarn chromatic -t [CHROMATIC PROJECT TOKEN]`
 
 You can find the token in the project Chromatic instance.
+
+To run Chromatic in CI on your pr, add the `run_chromatic` label once you're ready to check for visual regressions.
