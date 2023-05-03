@@ -324,8 +324,11 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
-  				<style>
-					@keyframes bork-fcp-show-me {
+				${
+					bork
+						? `
+				<style>
+					@keyframes bork-fcp-paint {
 						to {
 							opacity: 1;
 						}
@@ -333,12 +336,15 @@ https://workforus.theguardian.com/careers/product-engineering/
   					html.bork-fcp body {
 						opacity: 0;
 						animation-duration: var(--bork-fcp-amount);
-						animation-name: show-me;
+						animation-name: bork-fcp-paint;
 						animation-timing-function: steps(1);
 						animation-iteration-count: 1;
 						animation-fill-mode: forwards;
 					}
-				</style>
+				</style>`
+						: ''
+				}
+
 			</head>
 
 			<body>
