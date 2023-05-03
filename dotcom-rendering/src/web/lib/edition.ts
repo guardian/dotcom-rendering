@@ -4,7 +4,7 @@ export type EditionId = (typeof editionList)[number]['editionId'];
 
 /**
  * Warning: This list included the behind a 0% test edition
- * 'Europe', please use 'getEditions()' unless you're certain
+ * 'Europe', please use `getEditions` unless you're certain
  * you won't be accidentally displaying Europe edition to
  * users.
  */
