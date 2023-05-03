@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import type { EditionLinkType } from '../../model/extract-nav';
 import type { EditionId } from '../lib/edition';
+import { getEditionFromId, getEditions } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
@@ -28,59 +30,30 @@ export const HeaderTopBarEditionDropdown = ({
 	dataLinkName,
 	isInEuropeTest,
 }: HeaderTopBarEditionDropdownProps) => {
-	const ukEdition: DropdownLinkType = {
-		id: 'uk',
-		url: '/preference/edition/uk',
-		title: 'UK edition',
-		dataLinkName: 'nav3 : topbar : edition-picker: UK',
-	};
+	const editionToDropdownLink = (edition: EditionLinkType) => ({
+		id: edition.editionId,
+		url: edition.url,
+		title: edition.longTitle,
+		dataLinkName: `nav3 : topbar : edition-picker: ${edition.editionId}`,
+		isActive: editionId === edition.editionId,
+	});
 
-	const links: DropdownLinkType[] = [
-		ukEdition,
-		{
-			id: 'us',
-			url: '/preference/edition/us',
-			title: 'US edition',
-			dataLinkName: 'nav3 : topbar : edition-picker: US',
-		},
-		{
-			id: 'au',
-			url: '/preference/edition/au',
-			title: 'Australia edition',
-			dataLinkName: 'nav3 : topbar : edition-picker: AU',
-		},
-		{
-			id: 'int',
-			url: '/preference/edition/int',
-			title: 'International edition',
-			dataLinkName: 'nav3 : topbar : edition-picker: INT',
-		},
-		...(isInEuropeTest
-			? [
-					{
-						id: 'eur',
-						url: '/preference/edition/eur',
-						title: 'Europe edition',
-						dataLinkName: 'nav3 : topbar : edition-picker: EUR',
-					},
-			  ]
-			: []),
-	].map((link) =>
-		link.id.toUpperCase() === editionId
-			? { ...link, isActive: true }
-			: link,
+	const ukEdition: DropdownLinkType = editionToDropdownLink(
+		getEditionFromId('UK'),
+	);
+
+	const dropdownItems: DropdownLinkType[] = getEditions(isInEuropeTest).map(
+		editionToDropdownLink,
 	);
 
 	// Find active link, default to UK
-	const activeLink = links.find(({ isActive }) => isActive) ?? {
-		...ukEdition,
-		isActive: true,
-	};
+	const activeLink: DropdownLinkType =
+		dropdownItems.find(({ isActive }) => isActive) ?? ukEdition;
 
 	// Remove the active link and add it back to the top of the list
 	const linksToDisplay = [
 		activeLink,
-		...links.filter(({ isActive }) => !isActive),
+		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
 	return (
