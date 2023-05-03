@@ -1,24 +1,14 @@
 import { jsx } from '@emotion/react';
-import { JSDOM } from 'jsdom';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { parseHtml } from '../lib/domUtils';
 
 type Props = { html: string };
 
-const parseHtml = (html: string): DocumentFragment => JSDOM.fragment(html);
-
-function isElement(node: Node): node is Element {
-	return node.nodeType === 1;
-}
-
-const getAttrs = (node: Node): NamedNodeMap | undefined =>
-	isElement(node) ? node.attributes : undefined;
-
 const buildElementTree = (node: Node): ReactNode => {
-	if (node.nodeType === node.ELEMENT_NODE) {
-		const element = node as Element;
-		return jsx(element.tagName.toLowerCase(), {
-			id: getAttrs(node)?.getNamedItem('id')?.value,
+	if (node instanceof Element) {
+		return jsx(node.tagName.toLowerCase(), {
+			id: node.attributes.getNamedItem('id')?.value,
 			children: Array.from(node.childNodes).map(buildElementTree),
 		});
 	} else if (node.nodeType === node.TEXT_NODE) {
