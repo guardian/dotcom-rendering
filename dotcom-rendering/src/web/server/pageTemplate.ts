@@ -301,7 +301,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				</script>
 
 				${bork ? `<script>(${fid.toString()})()</script>` : ''}
-				${bork ? `<script>(${fcp.toString()})();</script>` : ''}
+				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
 
 				${initTwitter ?? ''}
 
