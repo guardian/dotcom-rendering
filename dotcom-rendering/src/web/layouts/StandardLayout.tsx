@@ -41,6 +41,7 @@ import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -57,7 +58,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { RightColumnContent } from '../components/RightColumnContent';
 
 const StandardGrid = ({
 	children,
@@ -749,7 +749,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<RightColumnContent
+									<MostViewedRightWithAd
 										display={format.display}
 										isPaidContent={
 											article.pageType.isPaidContent

@@ -35,6 +35,7 @@ import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -51,7 +52,6 @@ import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
-import { RightColumnContent } from '../components/RightColumnContent';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -629,7 +629,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<RightColumnContent
+									<MostViewedRightWithAd
 										display={format.display}
 										isPaidContent={
 											article.pageType.isPaidContent

@@ -16,13 +16,13 @@ type Props = {
  */
 const MAX_HEIGHT_PX = 1600;
 
-export const RightColumnContent = ({
+export const MostViewedRightWithAd = ({
 	display,
 	isPaidContent,
 	renderAds,
 	shouldHideReaderRevenue,
 }: Props) => {
-	const componentDataAttribute = 'right-column-content';
+	const componentDataAttribute = 'most-viewed-right-with-ad';
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
@@ -51,7 +51,7 @@ export const RightColumnContent = ({
 					deferUntil="visible"
 					// Provide a much higher value for the top margin for the intersection observer
 					// This is because the most viewed would otherwise only be lazy loaded when the
-					// bottom of RightColumnContent intersects with the viewport
+					// bottom of the container intersects with the viewport
 					rootMargin="700px 100px"
 				>
 					<MostViewedRightWrapper
