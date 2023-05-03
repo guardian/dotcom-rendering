@@ -38,28 +38,24 @@ export const HeaderTopBarEditionDropdown = ({
 		isActive: editionId === edition.editionId,
 	});
 
-	const ukEdition: DropdownLinkType = editionToDropdownLink(
-		getEditionFromId('UK'),
+	const activeEdition: DropdownLinkType = editionToDropdownLink(
+		getEditionFromId(editionId),
 	);
 
 	const dropdownItems: DropdownLinkType[] = getEditions(isInEuropeTest).map(
 		editionToDropdownLink,
 	);
 
-	// Find active link, default to UK
-	const activeLink: DropdownLinkType =
-		dropdownItems.find(({ isActive }) => isActive) ?? ukEdition;
-
 	// Remove the active link and add it back to the top of the list
 	const linksToDisplay = [
-		activeLink,
+		activeEdition,
 		...dropdownItems.filter(({ isActive }) => !isActive),
 	];
 
 	return (
 		<div css={editionDropdownStyles}>
 			<Dropdown
-				label={activeLink.title}
+				label={activeEdition.title}
 				links={linksToDisplay}
 				id="edition"
 				dataLinkName={dataLinkName}
