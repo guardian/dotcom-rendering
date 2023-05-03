@@ -5,6 +5,7 @@ import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
@@ -21,6 +22,7 @@ type Props = {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 };
 
 /**
@@ -31,8 +33,14 @@ type Props = {
  * @param {FEArticleType} props.article - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
+ * @param {RenderingTarget} props.renderingTarget - the RenderingTarget for the article
  * */
-export const ArticlePage = ({ article, NAV, format }: Props) => {
+export const ArticlePage = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -49,50 +57,65 @@ export const ArticlePage = ({ article, NAV, format }: Props) => {
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
-			{(format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
-			)}
-			<Island clientOnly={true} deferUntil="idle">
-				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<Metrics
-					commercialMetricsEnabled={
-						!!article.config.switches.commercialMetrics
-					}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={article.config.idApiUrl} />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<ReaderRevenueDev
-					shouldHideReaderRevenue={article.shouldHideReaderRevenue}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FetchCommentCounts repeat={true} />
-			</Island>
-			{format.design === ArticleDesign.LiveBlog && (
-				<Island clientOnly={true} deferUntil="idle">
-					<AnimatePulsingDots />
-				</Island>
-			)}
-			<Island clientOnly={true}>
-				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						article.config.switches,
+			{renderingTarget === 'Web' && (
+				<>
+					{(format.design === ArticleDesign.LiveBlog ||
+						format.design === ArticleDesign.DeadBlog) && (
+						<SkipTo
+							id={'key-events-carousel'}
+							label="Skip to key events"
+						/>
 					)}
-					pageIsSensitive={article.config.isSensitive}
-					isDev={!!article.config.isDev}
-				/>
-			</Island>
-			<DecideLayout article={article} NAV={NAV} format={format} />
+					<SkipTo id="navigation" label="Skip to navigation" />
+
+					<Island clientOnly={true} deferUntil="idle">
+						<AlreadyVisited />
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<FocusStyles />
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<Metrics
+							commercialMetricsEnabled={
+								!!article.config.switches.commercialMetrics
+							}
+						/>
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<ReaderRevenueDev
+							shouldHideReaderRevenue={
+								article.shouldHideReaderRevenue
+							}
+						/>
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<FetchCommentCounts repeat={true} />
+					</Island>
+					{format.design === ArticleDesign.LiveBlog && (
+						<Island clientOnly={true} deferUntil="idle">
+							<AnimatePulsingDots />
+						</Island>
+					)}
+					<Island clientOnly={true}>
+						<SetABTests
+							abTestSwitches={filterABTestSwitches(
+								article.config.switches,
+							)}
+							pageIsSensitive={article.config.isSensitive}
+							isDev={!!article.config.isDev}
+						/>
+					</Island>
+				</>
+			)}
+			<DecideLayout
+				article={article}
+				NAV={NAV}
+				format={format}
+				renderingTarget={renderingTarget}
+			/>
 		</StrictMode>
 	);
 };

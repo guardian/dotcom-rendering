@@ -4,10 +4,10 @@ import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
+import { ArticlePage } from '../../web/components/ArticlePage';
 import { decideFormat } from '../../web/lib/decideFormat';
 import { renderToStringWithEmotion } from '../../web/lib/emotion';
 import { pageTemplate } from '../../web/server/pageTemplate';
-import { ArticlePage } from '../components/ArticlePage';
 
 export const articleToHtml = (
 	article: FEArticleType,
@@ -20,7 +20,12 @@ export const articleToHtml = (
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} article={article} NAV={NAV} />,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Apps"
+		/>,
 	);
 
 	const getScriptArrayFromFile = getScriptsFromManifest({

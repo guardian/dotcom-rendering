@@ -2,6 +2,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
@@ -15,9 +16,15 @@ type Props = {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 };
 
-export const DecideLayout = ({ article, NAV, format }: Props) => {
+export const DecideLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -131,7 +138,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
-							renderingTarget={'Web'}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
