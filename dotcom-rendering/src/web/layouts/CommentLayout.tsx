@@ -34,7 +34,7 @@ import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -681,33 +681,16 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{renderAds && (
-										<AdSlot
-											position="right"
-											display={format.display}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-										/>
-									)}
-
-									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
-											<MostViewedRightWrapper
-												isAdFreeUser={
-													article.isAdFreeUser
-												}
-											/>
-										</Island>
-									) : (
-										<></>
-									)}
+									<MostViewedRightWithAd
+										display={format.display}
+										isPaidContent={
+											article.pageType.isPaidContent
+										}
+										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+									/>
 								</RightColumn>
 							</div>
 						</GridItem>
