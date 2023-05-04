@@ -216,6 +216,7 @@ type Props = {
 	format: ArticleFormat;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
+	isInEuropeTest: boolean;
 };
 
 export const Columns = ({
@@ -223,9 +224,13 @@ export const Columns = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
+	isInEuropeTest,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
-	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	const remainingEditions = getRemainingEditions(
+		activeEdition.editionId,
+		isInEuropeTest,
+	);
 	return (
 		<ul
 			css={columnsStyle(format.display)}

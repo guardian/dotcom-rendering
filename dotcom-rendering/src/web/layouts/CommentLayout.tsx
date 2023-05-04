@@ -379,6 +379,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 

@@ -281,6 +281,9 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const isInEuropeTest =
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
 	the headlines appearing at a consistent height between labs and non labs immersive articles.
@@ -359,6 +362,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>

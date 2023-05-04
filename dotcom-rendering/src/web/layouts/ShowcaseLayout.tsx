@@ -319,6 +319,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
+									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 
@@ -396,6 +397,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
+									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 						</Stuck>

@@ -5,17 +5,18 @@ import { clearFix } from '../../../lib/mixins';
 import type { NavType } from '../../../model/extract-nav';
 import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
+import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
+import { Island } from '../Island';
 import { Pillars } from '../Pillars';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
-import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
-import { Island } from '../Island';
 
 type Props = {
 	format: ArticleFormat;
 	nav: NavType;
 	subscribeUrl: string;
 	editionId: EditionId;
+	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };
 
@@ -56,6 +57,7 @@ export const Nav = ({
 	subscribeUrl,
 	editionId,
 	headerTopBarSwitch,
+	isInEuropeTest,
 }: Props) => {
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
@@ -215,6 +217,7 @@ export const Nav = ({
 					nav={nav}
 					format={format}
 					headerTopBarSwitch={headerTopBarSwitch}
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</div>
 			{displayRoundel && (
