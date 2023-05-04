@@ -2,6 +2,7 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { fid } from '../bork/fid';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
@@ -21,6 +22,7 @@ export const pageTemplate = ({
 	initTwitter,
 	recipeMarkup,
 	canonicalUrl,
+	bork,
 }: {
 	css: string;
 	html: string;
@@ -37,6 +39,7 @@ export const pageTemplate = ({
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
+	bork: boolean;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -296,6 +299,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				${bork ? `<script>(${fid.toString()})()</script>` : ''}
 
 				${initTwitter ?? ''}
 
