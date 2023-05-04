@@ -2,6 +2,7 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { fcp } from '../bork/fcp';
 import { fid } from '../bork/fid';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -300,9 +301,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 				</script>
 
 				${bork ? `<script>(${fid.toString()})()</script>` : ''}
+				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
 
 				${initTwitter ?? ''}
-
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
@@ -323,6 +324,27 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+				${
+					bork
+						? `
+				<style>
+					@keyframes bork-fcp-paint {
+						to {
+							opacity: 1;
+						}
+					}
+  					html.bork-fcp body {
+						opacity: 0;
+						animation-duration: var(--bork-fcp-amount);
+						animation-name: bork-fcp-paint;
+						animation-timing-function: steps(1);
+						animation-iteration-count: 1;
+						animation-fill-mode: forwards;
+					}
+				</style>`
+						: ''
+				}
+
 			</head>
 
 			<body>
