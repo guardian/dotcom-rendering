@@ -12,12 +12,20 @@ import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
-type Props = {
+interface BaseProps {
 	article: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-};
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
+
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	NAV: NavType;
+}
 
 const decideLayoutApps = ({
 	article,
@@ -42,15 +50,14 @@ const decideLayoutApps = ({
 	return <pre>Not supported</pre>;
 };
 
-export const DecideLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const DecideLayout = (props: AppProps | WebProps) => {
+	const { article, format, renderingTarget } = props;
+
 	if (renderingTarget === 'Apps') {
 		return decideLayoutApps({ article, format });
 	}
+
+	const NAV = props.NAV;
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {

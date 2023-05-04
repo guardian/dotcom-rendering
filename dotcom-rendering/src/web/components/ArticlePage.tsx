@@ -18,12 +18,20 @@ import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
-type Props = {
+interface BaseProps {
 	article: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
-};
+}
+
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	NAV: NavType;
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
 
 /**
  * @description
@@ -35,12 +43,8 @@ type Props = {
  * @param {ArticleFormat} props.format - The format model for the article
  * @param {RenderingTarget} props.renderingTarget - the RenderingTarget for the article
  * */
-export const ArticlePage = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+export const ArticlePage = (props: WebProps | AppProps) => {
+	const { article, format, renderingTarget } = props;
 	return (
 		<StrictMode>
 			<Global
@@ -110,12 +114,20 @@ export const ArticlePage = ({
 					</Island>
 				</>
 			)}
-			<DecideLayout
-				article={article}
-				NAV={NAV}
-				format={format}
-				renderingTarget={renderingTarget}
-			/>
+			{renderingTarget === 'Apps' ? (
+				<DecideLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			) : (
+				<DecideLayout
+					article={article}
+					NAV={props.NAV}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</StrictMode>
 	);
 };
