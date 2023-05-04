@@ -345,8 +345,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 				`
 						: ''
 				}
-                <style class="webfont">${getFontsCss(offerHttp3)}</style>
                 ${scriptTags.join('\n')}
+                <style class="webfont">${getFontsCss(offerHttp3)}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
