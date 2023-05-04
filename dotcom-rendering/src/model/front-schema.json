@@ -3095,6 +3095,9 @@
                         },
                         "embedCss": {
                             "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
                         }
                     }
                 },
