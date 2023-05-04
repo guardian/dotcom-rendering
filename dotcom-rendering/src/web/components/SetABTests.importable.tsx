@@ -71,8 +71,3 @@ export const SetABTests = ({
 	// we don’t render anything
 	return null;
 };
-
-export const getTest = (id: string): ABTest | undefined =>
-	typeof window !== 'undefined'
-		? window.guardian.config.clientSideABTests?.[id]
-		: undefined;
