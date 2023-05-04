@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
+import { getAttrs } from '../lib/domUtils';
 
 type Props = {
 	html: string;
@@ -41,9 +42,6 @@ const parseHtml = (html: string): DocumentFragment => JSDOM.fragment(html);
 function isElement(node: Node): node is Element {
 	return node.nodeType === 1;
 }
-
-const getAttrs = (node: Node): NamedNodeMap | undefined =>
-	isElement(node) ? node.attributes : undefined;
 
 /**
  * Searches through the siblings of an element to determine if it's the first
@@ -90,7 +88,7 @@ const textElement =
 				});
 			case 'A':
 				return jsx('A', {
-					href: getAttrs(node)?.getNamedItem('href'),
+					href: getAttrs(node)?.getNamedItem('href')?.value,
 					key,
 					children,
 				});

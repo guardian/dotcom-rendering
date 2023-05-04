@@ -13,8 +13,9 @@ import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
-import { isElement, parseHtml } from '../lib/domUtils';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { DropCap } from './DropCap';
+import { logger } from '../../server/lib/logging';
 
 type Props = {
 	html: string;
@@ -217,12 +218,16 @@ const buildElementTree =
 		isFirstParagraph: boolean,
 		forceDropCap?: boolean,
 	) =>
-	(node: Node): ReactNode => {
+	(node: Node, key: number): ReactNode => {
 		const showDropCaps = shouldShowDropCaps(
 			html,
 			format,
 			isFirstParagraph,
 			forceDropCap,
+		);
+		const text = node.textContent ?? '';
+		const children = Array.from(node.childNodes).map(
+			buildElementTree(html, format, isFirstParagraph, forceDropCap),
 		);
 		if (node.nodeType === node.TEXT_NODE) {
 			if (node.textContent !== null) {
@@ -242,25 +247,59 @@ const buildElementTree =
 			}
 		}
 
-		if (isElement(node)) {
-			if (node.tagName === 'BR') {
-				return jsx(node.tagName.toLowerCase());
-			} else {
-				return jsx(node.tagName.toLowerCase(), {
-					id: node.attributes.getNamedItem('id')?.value,
-					css: styles(format),
-					children: Array.from(node.childNodes).map(
-						buildElementTree(
-							html,
-							format,
-							isFirstParagraph,
-							forceDropCap,
-						),
-					),
-				});
+		switch (node.nodeName) {
+			case 'P': {
+				return jsx('p', { css: styles(format), children });
 			}
-		} else {
-			return null;
+			case 'BLOCKQUOTE':
+				return jsx('blockquote', {
+					key,
+					children,
+				});
+			case 'A':
+				return jsx('A', {
+					href: getAttrs(node)?.getNamedItem('href')?.value,
+					key,
+					children,
+				});
+			case 'STRONG':
+				return jsx('strong', {
+					key,
+					children,
+				});
+			case '#text':
+			case 'SPAN':
+				return text;
+			case 'BR':
+				return jsx('BR', {
+					key,
+				});
+			case 'H2':
+			case 'H3':
+			case 'B':
+			case 'EM':
+			case 'UL':
+			case 'OL':
+			case 'LI':
+			case 'MARK':
+			case 'SUB':
+			case 'SUP':
+			case 'S':
+			case 'I':
+				return jsx(node.nodeName, {
+					css: styles(format),
+					key,
+					children,
+				});
+			default:
+				logger.warn('TextBlockComponent: Unknown element received', {
+					isDev: process.env.NODE_ENV !== 'production',
+					element: {
+						name: node.nodeName,
+						html: isElement(node) ? node.outerHTML : undefined,
+					},
+				});
+				return null;
 		}
 	};
 
