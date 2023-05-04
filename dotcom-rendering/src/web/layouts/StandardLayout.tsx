@@ -288,17 +288,21 @@ const starWrapper = css`
 
 interface Props {
 	article: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
 
-export const StandardLayout = ({
-	article,
-	NAV,
-	format,
-	renderingTarget,
-}: Props) => {
+interface WebProps extends Props {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppProps extends Props {
+	renderingTarget: 'Apps';
+}
+
+export const StandardLayout = (props: WebProps | AppProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -355,7 +359,7 @@ export const StandardLayout = ({
 
 	return (
 		<>
-			{isWeb && (
+			{renderingTarget === 'Web' && (
 				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
 						<Stuck>
@@ -412,7 +416,7 @@ export const StandardLayout = ({
 						element="nav"
 					>
 						<Nav
-							nav={NAV}
+							nav={props.NAV}
 							format={formatForNav}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
@@ -423,7 +427,7 @@ export const StandardLayout = ({
 							}
 						/>
 					</Section>
-					{NAV.subNavSections && !isLabs && (
+					{props.NAV.subNavSections && !isLabs && (
 						<>
 							<Section
 								fullWidth={true}
@@ -433,8 +437,12 @@ export const StandardLayout = ({
 							>
 								<Island deferUntil="idle">
 									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
+										subNavSections={
+											props.NAV.subNavSections
+										}
+										currentNavLink={
+											props.NAV.currentNavLink
+										}
 										format={format}
 									/>
 								</Island>
@@ -925,7 +933,7 @@ export const StandardLayout = ({
 			</main>
 			{isWeb && (
 				<>
-					{NAV.subNavSections && (
+					{props.NAV.subNavSections && (
 						<Section
 							fullWidth={true}
 							data-print-layout="hide"
@@ -934,8 +942,8 @@ export const StandardLayout = ({
 						>
 							<Island deferUntil="visible">
 								<SubNav
-									subNavSections={NAV.subNavSections}
-									currentNavLink={NAV.currentNavLink}
+									subNavSections={props.NAV.subNavSections}
+									currentNavLink={props.NAV.currentNavLink}
 									format={format}
 								/>
 							</Island>
@@ -953,7 +961,7 @@ export const StandardLayout = ({
 						<Footer
 							pageFooter={article.pageFooter}
 							pillar={format.theme}
-							pillars={NAV.pillars}
+							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}
 							contributionsServiceUrl={
