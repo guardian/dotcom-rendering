@@ -112,7 +112,7 @@ const generateLayoutStory = (
 	renderingTarget,
 ) => {
 	const storyVariableName =
-		displayName + designName + theme + renderingTarget;
+		renderingTarget + displayName + designName + theme;
 
 	return `
 export const ${storyVariableName} = () => {
