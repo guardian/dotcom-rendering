@@ -74,7 +74,14 @@ const HydratedLayout = ({
 		doStorybookHydration();
 	}, [serverArticle]);
 
-	return <DecideLayout article={serverArticle} NAV={NAV} format={format} />;
+	return (
+		<DecideLayout
+			article={serverArticle}
+			NAV={NAV}
+			format={format}
+			renderingTarget="Web"
+		/>
+	);
 };
 
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
