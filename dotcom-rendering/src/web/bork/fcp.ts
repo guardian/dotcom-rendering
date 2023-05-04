@@ -1,3 +1,4 @@
+/** synthetically bork FCP https://web.dev/fcp/ */
 export const fcp = (): void => {
 	try {
 		const hashKey = 'bork-fcp-';
