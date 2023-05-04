@@ -19,12 +19,38 @@ type Props = {
 	renderingTarget: RenderingTarget;
 };
 
+const decideLayoutApps = ({
+	article,
+	format,
+}: {
+	article: FEArticleType;
+	format: ArticleFormat;
+}) => {
+	if (
+		format.display === ArticleDisplay.Standard &&
+		format.design === ArticleDesign.Standard
+	) {
+		return (
+			<StandardLayout
+				article={article}
+				format={format}
+				renderingTarget="Apps"
+			/>
+		);
+	}
+
+	return <pre>Not supported</pre>;
+};
+
 export const DecideLayout = ({
 	article,
 	NAV,
 	format,
 	renderingTarget,
 }: Props) => {
+	if (renderingTarget === 'Apps') {
+		return decideLayoutApps({ article, format });
+	}
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
