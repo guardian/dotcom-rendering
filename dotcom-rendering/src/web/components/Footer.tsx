@@ -17,7 +17,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
-import type { PillarType } from '../../model/extract-nav';
+import type { PillarLinkType } from '../../model/extract-nav';
 import type { EditionId } from '../lib/edition';
 import type { FooterType } from '../../types/footer';
 import { BackToTop } from './BackToTop';
@@ -316,7 +316,7 @@ export const Footer = ({
 	editionId,
 	contributionsServiceUrl,
 }: {
-	pillars: PillarType[];
+	pillars: PillarLinkType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;

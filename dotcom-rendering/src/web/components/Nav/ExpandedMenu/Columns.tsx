@@ -238,7 +238,6 @@ export const Columns = ({
 						title: column.title,
 						longTitle: `View all ${column.title}`,
 						url: column.url,
-						pillar: undefined,
 						children: [],
 						mobileOnly: true,
 					}),
@@ -316,7 +315,7 @@ export const Columns = ({
 			</section>
 
 			<MoreColumn
-				column={nav.otherLinks}
+				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
 				key="more"
 			/>

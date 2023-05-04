@@ -3,6 +3,8 @@ import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
 import type { RenderingTarget } from '../../types/renderingTarget';
+import { fcp } from '../bork/fcp';
+import { fid } from '../bork/fid';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
@@ -20,6 +22,7 @@ type BaseProps = {
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
+	bork: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 };
@@ -66,6 +69,7 @@ export const pageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
+		bork,
 	} = props;
 
 	const favicon =
@@ -316,6 +320,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				${bork ? `<script>(${fid.toString()})()</script>` : ''}
+				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
 
 				${initTwitter ?? ''}
 
@@ -344,6 +350,27 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+				${
+					bork
+						? `
+				<style>
+					@keyframes bork-fcp-paint {
+						to {
+							opacity: 1;
+						}
+					}
+  					html.bork-fcp body {
+						opacity: 0;
+						animation-duration: var(--bork-fcp-amount);
+						animation-name: bork-fcp-paint;
+						animation-timing-function: steps(1);
+						animation-iteration-count: 1;
+						animation-fill-mode: forwards;
+					}
+				</style>`
+						: ''
+				}
+
 			</head>
 
 			<body>
