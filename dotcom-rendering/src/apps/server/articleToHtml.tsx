@@ -1,7 +1,6 @@
 import { isString } from '@guardian/libs';
 import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
-import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
 import { ArticlePage } from '../../web/components/ArticlePage';
@@ -15,15 +14,12 @@ export const articleToHtml = (
 	clientScripts: string[];
 	html: string;
 } => {
-	const NAV = extractNAV(article.nav);
-
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<ArticlePage
 			format={format}
 			article={article}
-			NAV={NAV}
 			renderingTarget="Apps"
 		/>,
 	);
