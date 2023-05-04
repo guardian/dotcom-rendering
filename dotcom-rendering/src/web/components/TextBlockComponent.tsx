@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -8,12 +8,13 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-import { unwrapHtml } from '../../model/unwrapHtml';
 import { decidePalette } from '../lib/decidePalette';
+import { isElement, parseHtml } from '../lib/domUtils';
 import { DropCap } from './DropCap';
-import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -209,69 +210,70 @@ const styles = (format: ArticleFormat) => css`
 	}
 `;
 
+const buildElementTree =
+	(
+		html: string,
+		format: ArticleFormat,
+		isFirstParagraph: boolean,
+		forceDropCap?: boolean,
+	) =>
+	(node: Node): ReactNode => {
+		const showDropCaps = shouldShowDropCaps(
+			html,
+			format,
+			isFirstParagraph,
+			forceDropCap,
+		);
+		if (node.nodeType === node.TEXT_NODE) {
+			if (node.textContent !== null) {
+				const dropCappedSentence = showDropCaps
+					? getDropCappedSentence(node.textContent)
+					: undefined;
+				if (dropCappedSentence) {
+					const { dropCap, restOfSentence } = dropCappedSentence;
+					return (
+						<>
+							<DropCap letter={dropCap} format={format} />
+							{restOfSentence}
+						</>
+					);
+				}
+				return node.textContent;
+			}
+		}
+
+		if (isElement(node)) {
+			if (node.tagName === 'BR') {
+				return jsx(node.tagName.toLowerCase());
+			} else {
+				return jsx(node.tagName.toLowerCase(), {
+					id: node.attributes.getNamedItem('id')?.value,
+					css: styles(format),
+					children: Array.from(node.childNodes).map(
+						buildElementTree(
+							html,
+							format,
+							isFirstParagraph,
+							forceDropCap,
+						),
+					),
+				});
+			}
+		} else {
+			return null;
+		}
+	};
+
 export const TextBlockComponent = ({
 	html,
 	format,
 	isFirstParagraph,
 	forceDropCap,
 }: Props) => {
-	const paraStyles = styles(format);
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{
-				unwrappedElement: 'p',
-				prefix: '<p>',
-				suffix: '</p>',
-			},
-			{
-				unwrappedElement: 'ul',
-				prefix: '<ul>',
-				suffix: '</ul>',
-			},
-			{
-				unwrappedElement: 'h3',
-				prefix: '<h3>',
-				suffix: '</h3>',
-			},
-		],
-		html,
+	const fragment = parseHtml(sanitise(html, sanitiserOptions));
+	return jsx(Fragment, {
+		children: Array.from(fragment.childNodes).map(
+			buildElementTree(html, format, isFirstParagraph, forceDropCap),
+		),
 	});
-
-	const showDropCaps = shouldShowDropCaps(
-		html,
-		format,
-		isFirstParagraph,
-		forceDropCap,
-	);
-	const dropCappedSentence = showDropCaps
-		? getDropCappedSentence(unwrappedHtml)
-		: undefined;
-
-	if (dropCappedSentence) {
-		const { dropCap, restOfSentence } = dropCappedSentence;
-		return (
-			<p css={paraStyles}>
-				<DropCap letter={dropCap} format={format} />
-				<RewrappedComponent
-					isUnwrapped={isUnwrapped}
-					html={sanitise(restOfSentence, sanitiserOptions)}
-					elCss={paraStyles}
-					tagName="span"
-				/>
-			</p>
-		);
-	}
-
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles}
-			tagName={unwrappedElement || 'p'}
-		/>
-	);
 };
