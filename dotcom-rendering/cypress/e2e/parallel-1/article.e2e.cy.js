@@ -66,68 +66,6 @@ describe('E2E Page rendering', function () {
 		});
 	});
 
-	// eslint-disable-next-line mocha/no-skipped-tests
-	describe.skip('AB Tests - Can modify page', function () {
-		beforeEach(function () {
-			mockApi();
-		});
-
-		it('should set the correct AB Test Variant', function () {
-			// The A/B test has an audience of 0.001 and test offset of 0
-			// Therefore the test will run from MVTIds 0 - 100
-			// As there are two variants and therefore each variant falls into odd or even numbers
-			// The 'control' will be even numbers, and the 'variant' will be odd
-			// We test 99 here for the MVT cookie (set by Fastly usually) as expecting it to return
-			// the 'variant' of the A/B test
-			// See https://ab-tests.netlify.app/ for help caluclating buckets
-			cy.setCookie('GU_mvt_id', '99', {
-				log: true,
-			});
-
-			cy.visit(
-				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
-			);
-
-			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
-				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
-
-			cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
-				'be.visible',
-			);
-
-			cy.get('[data-cy-ab-runnable-test=variant]').should('be.visible');
-
-			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-				'not.exist',
-			);
-		});
-
-		it('should not edit the page if not in an AB test', function () {
-			// See explanation above
-			// The test runs from 0-100 MVT IDs, so 500 should force user not to be in the test
-			cy.setCookie('GU_mvt_id', '500', {
-				log: true,
-			});
-
-			cy.visit(
-				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
-			);
-
-			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
-				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
-
-			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
-				'be.visible',
-			);
-
-			cy.get('[data-cy-ab-runnable-test=not-runnable]').should(
-				'be.visible',
-			);
-		});
-	});
-
 	describe('for AMP', function () {
 		it(`It should load designType articles under the pillar`, function () {
 			AMPArticles.map((article, index) => {

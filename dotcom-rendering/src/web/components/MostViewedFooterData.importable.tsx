@@ -7,10 +7,8 @@ import type {
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { MostViewedFooter } from './MostViewedFooter.importable';
-import { getTest } from './SetABTests.importable';
 
 interface Props {
 	sectionName?: string;
@@ -54,19 +52,6 @@ export const MostViewedFooterData = ({
 	edition,
 }: Props) => {
 	const palette = decidePalette(format);
-	// Example usage of AB Tests
-	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB()?.api;
-
-	const abTestCypressDataAttr =
-		(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&
-			'ab-test-control') ||
-		(ABTestAPI?.isUserInVariant('AbTestTest', 'variant') &&
-			'ab-test-variant') ||
-		'ab-test-not-in-test';
-	const abTestTest = getTest('AbTestTest');
-	const runnableTest = abTestTest && ABTestAPI?.runnableTest(abTestTest);
-	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
 	const url = buildSectionUrl(ajaxUrl, edition, sectionName);
 	const { data, error } = useApi<
@@ -93,8 +78,6 @@ export const MostViewedFooterData = ({
 						? decideTrail(data.mostShared)
 						: undefined
 				}
-				abTestCypressDataAttr={abTestCypressDataAttr}
-				variantFromRunnable={variantFromRunnable}
 				sectionName={sectionName}
 				selectedColour={palette.background.mostViewedTab}
 			/>

@@ -403,7 +403,6 @@ To decouple the switch state from production, we define the state of the switch 
 ```ts
 ...
 const cypressSwitches = {
-    abAbTestTest: true,
     abSignInGatePatientia: true, // setting the Patientia test to always be true in Cypress regardless of production state
 };
 ...
