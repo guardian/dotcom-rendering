@@ -33,9 +33,7 @@ export const articleToHtml = (
 	});
 
 	const clientScripts = getScriptArrayFromFile('index.js');
-	const scriptTags = generateScriptTags(
-		[...getScriptArrayFromFile('index.js')].filter(isString),
-	);
+	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
