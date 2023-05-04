@@ -23,6 +23,7 @@ import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { embedIframe } from '../browser/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
@@ -60,8 +61,10 @@ mockRESTCalls();
 
 const HydratedLayout = ({
 	serverArticle,
+	renderingTarget,
 }: {
 	serverArticle: FEArticleType;
+	renderingTarget: RenderingTarget;
 }) => {
 	const NAV = extractNAV(serverArticle.nav);
 	const format: ArticleFormat = decideFormat(serverArticle.format);
@@ -79,7 +82,7 @@ const HydratedLayout = ({
 			article={serverArticle}
 			NAV={NAV}
 			format={format}
-			renderingTarget="Web"
+			renderingTarget={renderingTarget}
 		/>
 	);
 };
@@ -91,10 +94,12 @@ export const HydratedLayoutWrapper = ({
 	displayName,
 	designName,
 	theme,
+	renderingTarget,
 }: {
 	displayName: string;
 	designName: string;
 	theme: string;
+	renderingTarget: RenderingTarget;
 }) => {
 	const fixture = Fixtures[designName] ?? Standard;
 
@@ -107,7 +112,12 @@ export const HydratedLayoutWrapper = ({
 		},
 	};
 
-	return <HydratedLayout serverArticle={serverArticle} />;
+	return (
+		<HydratedLayout
+			serverArticle={serverArticle}
+			renderingTarget={renderingTarget}
+		/>
+	);
 };
 
 export default {
@@ -130,6 +140,7 @@ export const Liveblog = () => {
 				...Live,
 				keyEvents: [],
 			}}
+			renderingTarget="Web"
 		/>
 	);
 };

@@ -17,13 +17,26 @@ export default {
 	},
 };
 
-export const StandardStandardNewsPillar = () => {
+export const StandardStandardNewsPillarWeb = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
 			theme="NewsPillar"
+			renderingTarget="Web"
 		/>
 	);
 };
-StandardStandardNewsPillar.storyName = 'StandardDisplay StandardDesign NewsPillar';
+StandardStandardNewsPillarWeb.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
+
+export const StandardStandardNewsPillarApps = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Standard"
+			theme="NewsPillar"
+			renderingTarget="Apps"
+		/>
+	);
+};
+StandardStandardNewsPillarApps.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';

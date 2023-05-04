@@ -105,8 +105,14 @@ const notNumber = (value) => {
 	return Number.isNaN(Number(value));
 };
 
-const generateLayoutStory = (displayName, designName, theme) => {
-	const storyVariableName = displayName + designName + theme;
+const generateLayoutStory = (
+	displayName,
+	designName,
+	theme,
+	renderingTarget,
+) => {
+	const storyVariableName =
+		displayName + designName + theme + renderingTarget;
 
 	return `
 export const ${storyVariableName} = () => {
@@ -115,10 +121,11 @@ export const ${storyVariableName} = () => {
 			displayName="${displayName}"
 			designName="${designName}"
 			theme="${theme}"
+			renderingTarget="${renderingTarget}"
 		/>
 	);
 };
-${storyVariableName}.storyName = '${displayName}Display ${designName}Design ${theme}';
+${storyVariableName}.storyName = '${renderingTarget}: Display: ${displayName}, Design: ${designName}, Theme: ${theme}';
 `;
 };
 
@@ -144,6 +151,13 @@ const testLayoutFormats = [
 		display: 'Standard',
 		design: 'Standard',
 		theme: 'NewsPillar',
+		renderingTarget: 'Web',
+	},
+	{
+		display: 'Standard',
+		design: 'Standard',
+		theme: 'NewsPillar',
+		renderingTarget: 'Apps',
 	},
 ];
 
@@ -152,8 +166,18 @@ const generateLayoutStories = () => {
 	let stories = 0;
 	let template = LAYOUT_TEMPLATE_HEADER;
 
-	for (const { display, design, theme } of testLayoutFormats) {
-		template += generateLayoutStory(display, design, theme);
+	for (const {
+		display,
+		design,
+		theme,
+		renderingTarget,
+	} of testLayoutFormats) {
+		template += generateLayoutStory(
+			display,
+			design,
+			theme,
+			renderingTarget,
+		);
 		stories++;
 	}
 
