@@ -12,10 +12,10 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
+import { logger } from '../../server/lib/logging';
 import { decidePalette } from '../lib/decidePalette';
 import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { DropCap } from './DropCap';
-import { logger } from '../../server/lib/logging';
 
 type Props = {
 	html: string;
@@ -112,7 +112,6 @@ const shouldShowDropCaps = (
 
 	return false;
 };
-
 /**
  * https://www.npmjs.com/package/sanitize-html#default-options
  */
@@ -229,23 +228,6 @@ const buildElementTree =
 		const children = Array.from(node.childNodes).map(
 			buildElementTree(html, format, isFirstParagraph, forceDropCap),
 		);
-		if (node.nodeType === node.TEXT_NODE) {
-			if (node.textContent !== null) {
-				const dropCappedSentence = showDropCaps
-					? getDropCappedSentence(node.textContent)
-					: undefined;
-				if (dropCappedSentence) {
-					const { dropCap, restOfSentence } = dropCappedSentence;
-					return (
-						<>
-							<DropCap letter={dropCap} format={format} />
-							{restOfSentence}
-						</>
-					);
-				}
-				return node.textContent;
-			}
-		}
 
 		switch (node.nodeName) {
 			case 'P': {
@@ -257,7 +239,7 @@ const buildElementTree =
 					children,
 				});
 			case 'A':
-				return jsx('A', {
+				return jsx('a', {
 					href: getAttrs(node)?.getNamedItem('href')?.value,
 					key,
 					children,
@@ -267,11 +249,34 @@ const buildElementTree =
 					key,
 					children,
 				});
-			case '#text':
+			case '#text': {
+				if (node.textContent !== null) {
+					const dropCappedSentence = showDropCaps
+						? getDropCappedSentence(node.textContent)
+						: undefined;
+					if (
+						dropCappedSentence &&
+						node.textContent.startsWith(
+							stripHtmlFromString(html).slice(0, 10),
+						)
+					) {
+						const { dropCap, restOfSentence } = dropCappedSentence;
+						return (
+							<>
+								<DropCap letter={dropCap} format={format} />
+								{restOfSentence}
+							</>
+						);
+					}
+
+					return node.textContent;
+				}
+				return null;
+			}
 			case 'SPAN':
 				return text;
 			case 'BR':
-				return jsx('BR', {
+				return jsx('br', {
 					key,
 				});
 			case 'H2':
@@ -286,7 +291,7 @@ const buildElementTree =
 			case 'SUP':
 			case 'S':
 			case 'I':
-				return jsx(node.nodeName, {
+				return jsx(node.nodeName.toLowerCase(), {
 					css: styles(format),
 					key,
 					children,
@@ -312,7 +317,12 @@ export const TextBlockComponent = ({
 	const fragment = parseHtml(sanitise(html, sanitiserOptions));
 	return jsx(Fragment, {
 		children: Array.from(fragment.childNodes).map(
-			buildElementTree(html, format, isFirstParagraph, forceDropCap),
+			buildElementTree(
+				sanitise(html, sanitiserOptions),
+				format,
+				isFirstParagraph,
+				forceDropCap,
+			),
 		),
 	});
 };

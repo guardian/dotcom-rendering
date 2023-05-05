@@ -87,7 +87,7 @@ const textElement =
 						: simpleBlockquoteStyles,
 				});
 			case 'A':
-				return jsx('A', {
+				return jsx('a', {
 					href: getAttrs(node)?.getNamedItem('href')?.value,
 					key,
 					children,
@@ -103,7 +103,7 @@ const textElement =
 				return text;
 			case 'BR':
 				// BR cannot accept children as it's a void element
-				return jsx('BR', {
+				return jsx('br', {
 					key,
 				});
 			case 'H2':
@@ -117,7 +117,7 @@ const textElement =
 			case 'SUP':
 			case 'S':
 			case 'I':
-				return jsx(node.nodeName, {
+				return jsx(node.nodeName.toLowerCase(), {
 					key,
 					children,
 				});
