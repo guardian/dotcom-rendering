@@ -81,6 +81,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -96,6 +97,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -106,6 +108,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -114,6 +117,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
@@ -127,6 +131,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -145,6 +150,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -155,6 +161,7 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
