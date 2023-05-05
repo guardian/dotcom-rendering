@@ -360,7 +360,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 						}
 					}
   					html.bork-fcp body {
-						opacity: 0;
+						opacity: 0.001;
 						animation-duration: var(--bork-fcp-amount);
 						animation-name: bork-fcp-paint;
 						animation-timing-function: steps(1);
