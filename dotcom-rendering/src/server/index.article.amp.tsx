@@ -11,13 +11,18 @@ import { extractScripts } from '../lib/scripts.amp';
 import { findBySubsection } from '../model/article-sections';
 import { extractNAV } from '../model/extract-nav';
 import { validateAsArticleType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
+import {
+	recordTimeStart,
+	recordTimeStop,
+	recordTypeAndPlatform,
+} from '../server/lib/logging-store';
 import { getAmpExperimentCache } from './AMPExperimentCache.amp';
 import { renderArticle } from './render.article.amp';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
 		recordTypeAndPlatform('article', 'amp');
+		recordTimeStart('enhance');
 		const article = validateAsArticleType(body);
 		const { linkedData } = article;
 		const { config } = article;
@@ -66,7 +71,8 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 			description: article.trailText,
 			canonicalURL: article.webURL,
 		};
-
+		recordTimeStop('enhance');
+		recordTimeStart('render');
 		const resp = renderArticle({
 			linkedData,
 			scripts,
@@ -83,6 +89,7 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 				/>
 			),
 		});
+		recordTimeStop('render');
 
 		res.status(200).send(resp);
 	})().catch(next);

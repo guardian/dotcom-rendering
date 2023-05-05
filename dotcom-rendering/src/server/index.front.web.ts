@@ -10,7 +10,11 @@ import { groupTrailsByDates } from '../model/groupTrailsByDates';
 import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
+import {
+	recordTimeStart,
+	recordTimeStop,
+	recordTypeAndPlatform,
+} from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
 import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
 import { makePrefetchHeader } from './lib/header';
@@ -91,10 +95,14 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
+	recordTimeStart('enhance');
 	const front = enhanceFront(body);
+	recordTimeStop('enhance');
+	recordTimeStart('render');
 	const { html, clientScripts } = renderFront({
 		front,
 	});
+	recordTimeStop('render');
 	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
 };
 
@@ -104,10 +112,14 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 
 export const handleTagFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('tagFront');
+	recordTimeStart('enhance');
 	const tagFront = enhanceTagFront(body);
+	recordTimeStop('enhance');
+	recordTimeStart('render');
 	const { html, clientScripts } = renderTagFront({
 		tagFront,
 	});
+	recordTimeStop('render');
 	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
 };
 

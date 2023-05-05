@@ -8,7 +8,11 @@ import { enhanceCommercialProperties } from '../model/enhanceCommercialPropertie
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
+import {
+	recordTimeStart,
+	recordTimeStop,
+	recordTypeAndPlatform,
+} from '../server/lib/logging-store';
 import type { FEArticleBadgeType } from '../types/badge';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import { makePrefetchHeader } from './lib/header';
@@ -75,17 +79,23 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'web');
+	recordTimeStart('enhance');
 	const article = enhanceArticleType(body);
+	recordTimeStop('enhance');
+	recordTimeStart('render');
 	const { html, clientScripts } = renderHtml({
 		article,
 	});
+	recordTimeStop('render');
 
 	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
 };
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('article', 'json');
+	recordTimeStart('enhance');
 	const article = enhanceArticleType(body);
+	recordTimeStop('enhance');
 	const resp = {
 		data: {
 			// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
@@ -104,10 +114,14 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('interactive', 'web');
+	recordTimeStart('enhance');
 	const article = enhanceArticleType(body);
+	recordTimeStop('enhance');
+	recordTimeStart('render');
 	const { html, clientScripts } = renderHtml({
 		article,
 	});
+	recordTimeStop('render');
 
 	res.status(200).set('Link', makePrefetchHeader(clientScripts)).send(html);
 };
@@ -134,7 +148,10 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		// The content if body is not checked
 		body as FEBlocksRequest;
 
+	recordTimeStart('enhance');
 	const enhancedBlocks = enhanceBlocks(blocks, format);
+	recordTimeStop('enhance');
+	recordTimeStart('render');
 	const html = renderBlocks({
 		blocks: enhancedBlocks,
 		format,
@@ -152,6 +169,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		switches,
 		keywordIds,
 	});
+	recordTimeStop('render');
 
 	res.status(200).send(html);
 };
@@ -164,11 +182,13 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 		// The content if body is not checked
 		body as FEKeyEventsRequest;
 
+	recordTimeStart('render');
 	const html = renderKeyEvents({
 		keyEvents,
 		format,
 		filterKeyEvents,
 	});
+	recordTimeStop('render');
 
 	res.status(200).send(html);
 };

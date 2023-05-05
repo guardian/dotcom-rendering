@@ -1,7 +1,6 @@
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
-import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import {
@@ -26,25 +25,20 @@ import {
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
-import { requestLoggerMiddleware } from './lib/logging-middleware';
+import {
+	loggingStoreMiddleware,
+	requestLoggerMiddleware,
+	timedExpressJsonMiddleware,
+} from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
-
-// Middleware to track route performance using 'response-time' lib
-// Usage: app.post('/Article', logRenderTime, renderArticle);
-const logRenderTime = responseTime(
-	(_1: Request, _2: Response, renderTime: number) => {
-		logger.info('Page render time', {
-			renderTime,
-		});
-	},
-);
 
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();
 
-	app.use(express.json({ limit: '50mb' }));
+	app.use(loggingStoreMiddleware);
+	app.use(timedExpressJsonMiddleware);
 	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
@@ -59,78 +53,48 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	app.post('/Article', logRenderTime, handleArticle);
-	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
-	app.post('/Interactive', logRenderTime, handleInteractive);
-	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
-	app.post('/Blocks', logRenderTime, handleBlocks);
-	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
-	app.post('/Front', logRenderTime, handleFront);
-	app.post('/FrontJSON', logRenderTime, handleFrontJson);
-	app.post('/TagFront', logRenderTime, handleTagFront);
-	app.post('/TagFrontJSON', logRenderTime, handleTagFrontJson);
-	app.post(
-		'/EmailNewsletters',
-		logRenderTime,
-		handleAllEditorialNewslettersPage,
-	);
-	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
+	app.post('/Article', handleArticle);
+	app.post('/AMPArticle', handleAMPArticle);
+	app.post('/Interactive', handleInteractive);
+	app.post('/AMPInteractive', handleAMPArticle);
+	app.post('/Blocks', handleBlocks);
+	app.post('/KeyEvents', handleKeyEvents);
+	app.post('/Front', handleFront);
+	app.post('/FrontJSON', handleFrontJson);
+	app.post('/TagFront', handleTagFront);
+	app.post('/TagFrontJSON', handleTagFrontJson);
+	app.post('/EmailNewsletters', handleAllEditorialNewslettersPage);
+	app.post('/AppsArticle', handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
-	app.get(
-		'/Article/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleArticle,
-	);
+	app.get('/Article/*', getContentFromURLMiddleware, handleArticle);
 	app.use('/ArticleJson/*', handleArticleJson);
 
 	app.get(
 		'/AMPArticle/*',
-		logRenderTime,
+
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
-	app.get(
-		'/Front/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleFront,
-	);
+	app.get('/Front/*', getContentFromURLMiddleware, handleFront);
 	app.get(
 		'/FrontJSON/*',
-		logRenderTime,
+
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
-	app.get(
-		'/TagFront/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagFront,
-	);
-	app.get(
-		'/TagFrontJSON/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleTagFrontJson,
-	);
+	app.get('/TagFront/*', getContentFromURLMiddleware, handleTagFront);
+	app.get('/TagFrontJSON/*', getContentFromURLMiddleware, handleTagFrontJson);
 
 	app.get(
 		'/EmailNewsletters',
-		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAllEditorialNewslettersPage,
 	);
 
-	app.get(
-		'/AppsArticle/*',
-		logRenderTime,
-		getContentFromURLMiddleware,
-		handleAppsArticle,
-	);
+	app.get('/AppsArticle/*', getContentFromURLMiddleware, handleAppsArticle);
 
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);

@@ -19,6 +19,7 @@ type DCRLoggingStore = {
 		type?: string;
 		platform?: string;
 	};
+	timing: { [key: string]: number };
 	error?: {
 		message?: string;
 		stack?: string;
@@ -36,6 +37,32 @@ export const recordTypeAndPlatform = (
 	if (request) {
 		request.type = type;
 		request.platform = platform;
+	}
+};
+
+export const recordPageId = (pageId: string): void => {
+	const { request } = loggingStore.getStore() ?? {};
+
+	if (request) {
+		request.pageId = pageId;
+	}
+};
+
+type RecordablePeriod = 'total' | 'json' | 'enhance' | 'render';
+
+export const recordTimeStart = (metric: RecordablePeriod): void => {
+	const { timing } = loggingStore.getStore() ?? {};
+
+	if (timing) {
+		timing[metric] = Date.now();
+	}
+};
+
+export const recordTimeStop = (metric: RecordablePeriod): void => {
+	const { timing } = loggingStore.getStore() ?? {};
+
+	if (timing) {
+		timing[metric] = timing[metric] ?? 0 - Date.now();
 	}
 };
 
