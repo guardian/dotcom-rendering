@@ -27,7 +27,7 @@ interface WebProps extends BaseProps {
 	NAV: NavType;
 }
 
-const decideLayoutApps = ({
+const DecideLayoutApps = ({
 	article,
 	format,
 }: {
@@ -50,15 +50,12 @@ const decideLayoutApps = ({
 	return <pre>Not supported</pre>;
 };
 
-export const DecideLayout = (props: AppProps | WebProps) => {
-	const { article, format, renderingTarget } = props;
-
-	if (renderingTarget === 'Apps') {
-		return decideLayoutApps({ article, format });
-	}
-
-	const NAV = props.NAV;
-	// TODO we can probably better express this as data
+const DecideLayoutWeb = ({
+	article,
+	format,
+	NAV,
+	renderingTarget,
+}: WebProps) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -183,5 +180,23 @@ export const DecideLayout = (props: AppProps | WebProps) => {
 					);
 			}
 		}
+	}
+};
+
+export const DecideLayout = (props: AppProps | WebProps) => {
+	const { article, format, renderingTarget } = props;
+
+	switch (renderingTarget) {
+		case 'Apps':
+			return <DecideLayoutApps article={article} format={format} />;
+		case 'Web':
+			return (
+				<DecideLayoutWeb
+					NAV={props.NAV}
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 	}
 };
