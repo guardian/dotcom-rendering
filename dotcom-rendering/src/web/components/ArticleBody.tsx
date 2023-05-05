@@ -49,7 +49,7 @@ type Props = {
 	tableOfContents?: TableOfContentsItem[];
 	lang?: string;
 	isRightToLeftLang?: boolean;
-	renderingTarget?: RenderingTarget;
+	renderingTarget: RenderingTarget;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -152,7 +152,7 @@ export const ArticleBody = ({
 	tableOfContents,
 	lang,
 	isRightToLeftLang = false,
-	renderingTarget = 'Web',
+	renderingTarget,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);

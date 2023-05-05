@@ -17,6 +17,7 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -205,9 +206,15 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const InteractiveLayout = ({ article, NAV, format }: Props) => {
+export const InteractiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -533,6 +540,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										renderingTarget={renderingTarget}
 									/>
 								</ArticleContainer>
 							</GridItem>
