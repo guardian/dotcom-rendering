@@ -36,12 +36,6 @@ interface AppProps extends BaseProps {
 /**
  * @description
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
- *
- * @param {Props} props
- * @param {FEArticleType} props.article - The article JSON data
- * @param {NAVType} props.NAV - The article JSON data
- * @param {ArticleFormat} props.format - The format model for the article
- * @param {RenderingTarget} props.renderingTarget - the RenderingTarget for the article
  * */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
