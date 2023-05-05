@@ -55,22 +55,26 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
+			<Island clientOnly={true} deferUntil="idle">
+				<FocusStyles />
+			</Island>
+			{(format.design === ArticleDesign.LiveBlog ||
+				format.design === ArticleDesign.DeadBlog) && (
+				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
+			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<FetchCommentCounts repeat={true} />
+			</Island>
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<AnimatePulsingDots />
+				</Island>
+			)}
 			{renderingTarget === 'Web' && (
 				<>
-					{(format.design === ArticleDesign.LiveBlog ||
-						format.design === ArticleDesign.DeadBlog) && (
-						<SkipTo
-							id={'key-events-carousel'}
-							label="Skip to key events"
-						/>
-					)}
 					<SkipTo id="navigation" label="Skip to navigation" />
-
 					<Island clientOnly={true} deferUntil="idle">
 						<AlreadyVisited />
-					</Island>
-					<Island clientOnly={true} deferUntil="idle">
-						<FocusStyles />
 					</Island>
 					<Island clientOnly={true} deferUntil="idle">
 						<Metrics
@@ -89,14 +93,6 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							}
 						/>
 					</Island>
-					<Island clientOnly={true} deferUntil="idle">
-						<FetchCommentCounts repeat={true} />
-					</Island>
-					{format.design === ArticleDesign.LiveBlog && (
-						<Island clientOnly={true} deferUntil="idle">
-							<AnimatePulsingDots />
-						</Island>
-					)}
 					<Island clientOnly={true}>
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
