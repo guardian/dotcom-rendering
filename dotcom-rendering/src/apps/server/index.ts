@@ -1,4 +1,5 @@
 import { RequestHandler } from 'express';
+import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import { enhanceArticleType } from '../../web/server';
 import { articleToHtml } from './articleToHtml';
 
@@ -18,6 +19,7 @@ const makePrefetchHeader = (scriptPaths: string[]): string =>
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'apps');
 		const article = enhanceArticleType(body);
 		const { html, clientScripts } = articleToHtml(article);
 
