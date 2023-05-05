@@ -17,7 +17,7 @@ export default {
 	},
 };
 
-export const StandardStandardNewsPillarWeb = () => {
+export const WebStandardStandardNewsPillar = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
@@ -27,9 +27,9 @@ export const StandardStandardNewsPillarWeb = () => {
 		/>
 	);
 };
-StandardStandardNewsPillarWeb.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
+WebStandardStandardNewsPillar.storyName = 'Web: Display: Standard, Design: Standard, Theme: NewsPillar';
 
-export const StandardStandardNewsPillarApps = () => {
+export const AppsStandardStandardNewsPillar = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
@@ -39,4 +39,4 @@ export const StandardStandardNewsPillarApps = () => {
 		/>
 	);
 };
-StandardStandardNewsPillarApps.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
+AppsStandardStandardNewsPillar.storyName = 'Apps: Display: Standard, Design: Standard, Theme: NewsPillar';
