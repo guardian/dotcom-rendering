@@ -18,6 +18,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -287,11 +288,21 @@ const starWrapper = css`
 
 interface Props {
 	article: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const StandardLayout = ({ article, NAV, format }: Props) => {
+interface WebProps extends Props {
+	NAV: NavType;
+	renderingTarget: 'Web';
+}
+
+interface AppProps extends Props {
+	renderingTarget: 'Apps';
+}
+
+export const StandardLayout = (props: WebProps | AppProps) => {
+	const { article, format, renderingTarget } = props;
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -341,14 +352,15 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	const renderAds = canRenderAds(article);
-
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const isWeb = renderingTarget === 'Web';
+	const renderAds = isWeb && canRenderAds(article);
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader">
-				<>
+			{renderingTarget === 'Web' && (
+				<div data-print-layout="hide" id="bannerandheader">
 					{renderAds && (
 						<Stuck>
 							<Section
@@ -404,7 +416,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 						element="nav"
 					>
 						<Nav
-							nav={NAV}
+							nav={props.NAV}
 							format={formatForNav}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
@@ -416,7 +428,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
-					{NAV.subNavSections && !isLabs && (
+					{props.NAV.subNavSections && !isLabs && (
 						<>
 							<Section
 								fullWidth={true}
@@ -426,8 +438,12 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							>
 								<Island deferUntil="idle">
 									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
+										subNavSections={
+											props.NAV.subNavSections
+										}
+										currentNavLink={
+											props.NAV.currentNavLink
+										}
 										format={format}
 									/>
 								</Island>
@@ -448,9 +464,8 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 							</Section>
 						</>
 					)}
-				</>
-			</div>
-
+				</div>
+			)}
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<Section
@@ -663,6 +678,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									renderingTarget={renderingTarget}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -799,159 +815,180 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={article.config.ajaxUrl}
-						hasRelated={article.hasRelated}
-						hasStoryPackage={article.hasStoryPackage}
-						isAdFreeUser={article.isAdFreeUser}
-						pageId={article.pageId}
-						isPaidContent={!!article.config.isPaidContent}
-						showRelatedContent={article.config.showRelatedContent}
-						keywordIds={article.config.keywordIds}
-						contentType={article.contentType}
-						tags={article.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={article.editionId}
-						shortUrlId={article.config.shortUrlId}
-					/>
-				</Island>
+				{isWeb && (
+					<>
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={600}
+						>
+							<OnwardsUpper
+								ajaxUrl={article.config.ajaxUrl}
+								hasRelated={article.hasRelated}
+								hasStoryPackage={article.hasStoryPackage}
+								isAdFreeUser={article.isAdFreeUser}
+								pageId={article.pageId}
+								isPaidContent={!!article.config.isPaidContent}
+								showRelatedContent={
+									article.config.showRelatedContent
+								}
+								keywordIds={article.config.keywordIds}
+								contentType={article.contentType}
+								tags={article.tags}
+								format={format}
+								pillar={format.theme}
+								editionId={article.editionId}
+								shortUrlId={article.config.shortUrlId}
+							/>
+						</Island>
 
-				{!isPaidContent && showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						data-print-layout="hide"
-						element="section"
-					>
-						<DiscussionLayout
-							discussionApiUrl={article.config.discussionApiUrl}
-							shortUrlId={article.config.shortUrlId}
-							format={format}
-							discussionD2Uid={article.config.discussionD2Uid}
-							discussionApiClientHeader={
-								article.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								!!article.config.switches.enableDiscussionSwitch
-							}
-							isAdFreeUser={article.isAdFreeUser}
-							shouldHideAds={article.shouldHideAds}
-							idApiUrl={article.config.idApiUrl}
-						/>
-					</Section>
-				)}
-
-				{!isPaidContent && (
-					<Section
-						title="Most viewed"
-						padContent={false}
-						verticalMargins={false}
-						element="aside"
-						data-print-layout="hide"
-						data-link-name="most-popular"
-						data-component="most-popular"
-					>
-						<MostViewedFooterLayout>
-							<Island clientOnly={true} deferUntil="visible">
-								<MostViewedFooterData
-									sectionName={article.sectionName}
+						{!isPaidContent && showComments && (
+							<Section
+								fullWidth={true}
+								sectionId="comments"
+								data-print-layout="hide"
+								element="section"
+							>
+								<DiscussionLayout
+									discussionApiUrl={
+										article.config.discussionApiUrl
+									}
+									shortUrlId={article.config.shortUrlId}
 									format={format}
-									ajaxUrl={article.config.ajaxUrl}
-									edition={article.editionId}
+									discussionD2Uid={
+										article.config.discussionD2Uid
+									}
+									discussionApiClientHeader={
+										article.config.discussionApiClientHeader
+									}
+									enableDiscussionSwitch={
+										!!article.config.switches
+											.enableDiscussionSwitch
+									}
+									isAdFreeUser={article.isAdFreeUser}
+									shouldHideAds={article.shouldHideAds}
+									idApiUrl={article.config.idApiUrl}
+								/>
+							</Section>
+						)}
+
+						{!isPaidContent && (
+							<Section
+								title="Most viewed"
+								padContent={false}
+								verticalMargins={false}
+								element="aside"
+								data-print-layout="hide"
+								data-link-name="most-popular"
+								data-component="most-popular"
+							>
+								<MostViewedFooterLayout>
+									<Island
+										clientOnly={true}
+										deferUntil="visible"
+									>
+										<MostViewedFooterData
+											sectionName={article.sectionName}
+											format={format}
+											ajaxUrl={article.config.ajaxUrl}
+											edition={article.editionId}
+										/>
+									</Island>
+								</MostViewedFooterLayout>
+							</Section>
+						)}
+
+						{renderAds && !isLabs && (
+							<Section
+								fullWidth={true}
+								data-print-layout="hide"
+								padSides={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								backgroundColour={neutral[93]}
+								element="aside"
+							>
+								<AdSlot
+									position="merchandising"
+									display={format.display}
+								/>
+							</Section>
+						)}
+					</>
+				)}
+			</main>
+			{isWeb && (
+				<>
+					{props.NAV.subNavSections && (
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							element="aside"
+						>
+							<Island deferUntil="visible">
+								<SubNav
+									subNavSections={props.NAV.subNavSections}
+									currentNavLink={props.NAV.currentNavLink}
+									format={format}
 								/>
 							</Island>
-						</MostViewedFooterLayout>
-					</Section>
-				)}
-
-				{renderAds && !isLabs && (
+						</Section>
+					)}
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
-						showTopBorder={false}
+						backgroundColour={brandBackground.primary}
+						borderColour={brandBorder.primary}
 						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
+						element="footer"
 					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
+						<Footer
+							pageFooter={article.pageFooter}
+							pillar={format.theme}
+							pillars={props.NAV.pillars}
+							urls={article.nav.readerRevenueLinks.header}
+							editionId={article.editionId}
+							contributionsServiceUrl={
+								article.contributionsServiceUrl
+							}
 						/>
 					</Section>
-				)}
-			</main>
-
-			{NAV.subNavSections && (
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					element="aside"
-				>
-					<Island deferUntil="visible">
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</Island>
-				</Section>
+					<BannerWrapper data-print-layout="hide">
+						<Island deferUntil="idle" clientOnly={true}>
+							<StickyBottomBanner
+								contentType={article.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={article.config.idApiUrl}
+								isMinuteArticle={
+									article.pageType.isMinuteArticle
+								}
+								isPaidContent={article.pageType.isPaidContent}
+								isPreview={!!article.config.isPreview}
+								isSensitive={article.config.isSensitive}
+								keywordIds={article.config.keywordIds}
+								pageId={article.pageId}
+								section={article.config.section}
+								sectionName={article.sectionName}
+								shouldHideReaderRevenue={
+									article.shouldHideReaderRevenue
+								}
+								remoteBannerSwitch={
+									!!article.config.switches.remoteBanner
+								}
+								puzzleBannerSwitch={
+									!!article.config.switches.puzzlesBanner
+								}
+								tags={article.tags}
+							/>
+						</Island>
+					</BannerWrapper>
+					<MobileStickyContainer data-print-layout="hide" />
+				</>
 			)}
-
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				backgroundColour={brandBackground.primary}
-				borderColour={brandBorder.primary}
-				showSideBorders={false}
-				element="footer"
-			>
-				<Footer
-					pageFooter={article.pageFooter}
-					pillar={format.theme}
-					pillars={NAV.pillars}
-					urls={article.nav.readerRevenueLinks.header}
-					editionId={article.editionId}
-					contributionsServiceUrl={article.contributionsServiceUrl}
-				/>
-			</Section>
-
-			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
-					<StickyBottomBanner
-						contentType={article.contentType}
-						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={article.config.idApiUrl}
-						isMinuteArticle={article.pageType.isMinuteArticle}
-						isPaidContent={article.pageType.isPaidContent}
-						isPreview={!!article.config.isPreview}
-						isSensitive={article.config.isSensitive}
-						keywordIds={article.config.keywordIds}
-						pageId={article.pageId}
-						section={article.config.section}
-						sectionName={article.sectionName}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
-						tags={article.tags}
-					/>
-				</Island>
-			</BannerWrapper>
-			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);
 };
