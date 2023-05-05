@@ -296,6 +296,7 @@ export const CardHeadline = ({
 								isAction={isActionCard}
 								format={format}
 								size={size}
+								sizeOnMobile={sizeOnMobile}
 							/>
 						</>
 					)}

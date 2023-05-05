@@ -27,7 +27,7 @@ import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { CardFooter } from './components/CardFooter';
 import { CardLayout } from './components/CardLayout';
-//import { CardLink } from './components/CardLink';
+import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
@@ -359,12 +359,12 @@ export const Card = ({
 			containerType={containerType}
 			isDynamo={isDynamo}
 		>
-			{/* <CardLink
+			<CardLink
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
 				isExternalLink={isExternalLink}
-			/> */}
+			/>
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}

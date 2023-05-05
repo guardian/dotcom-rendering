@@ -230,21 +230,6 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 	return (
 		<>
 			<CardGroup>
-				{/* <CardWrapper>
-					<Card
-						{...basicCardProps}
-						kickerText="Kicker"
-						headlineSize="tiny"
-						headlineText="Heading tiny"
-						isActionCard={true}
-						byline="Byline text"
-						showByline={true}
-						format={newsTheme}
-					/>
-					<br></br>
-					<div>Heading size: 14px</div>
-					<div>Kicker size: 12px</div>
-				</CardWrapper> */}
 				<CardWrapper>
 					<Card
 						{...basicCardProps}
@@ -324,28 +309,6 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 					<div>Heading size: 28px</div>
 					<div>Kicker size: 20px</div>
 				</CardWrapper>
-				{/* <CardWrapper>
-					<Card
-						{...basicCardProps}
-						kickerText="Kicker"
-						headlineSize="ginormous"
-						headlineText="Heading ginormous"
-						isActionCard={true}
-						format={sportTheme}
-					/>
-					<br></br>
-					<div>
-						<strong>Until desktop</strong>
-					</div>
-					<div>Heading size: 42px</div>
-					<div>Kicker size: 20px</div>
-					<br></br>
-					<div>
-						<strong>From desktop</strong>
-					</div>
-					<div>Heading size: 50px</div>
-					<div>Kicker size: 20px</div>
-				</CardWrapper> */}
 			</CardGroup>
 		</>
 	);
@@ -354,21 +317,6 @@ export const WithActionKickerWithDifferentHeadlineSizes = () => {
 export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 	return (
 		<CardGroup>
-			{/* <CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="this is a gggg very long kicker that"
-					headlineSize="tiny"
-					headlineText="tiny"
-					isActionCard={true}
-					byline="Byline text"
-					showByline={true}
-					format={newsTheme}
-				/>
-				<br></br>
-				<div>Heading size: 14px</div>
-				<div>Kicker size: 12px</div>
-			</CardWrapper> */}
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
@@ -448,28 +396,6 @@ export const WithLongActionKickerWithDifferentHeadlineSizes = () => {
 				<div>Heading size: 28px</div>
 				<div>Kicker size: 20px</div>
 			</CardWrapper>
-			{/* <CardWrapper>
-				<Card
-					{...basicCardProps}
-					kickerText="this is a gggg very long kicker that"
-					headlineSize="ginormous"
-					headlineText="ginormous"
-					isActionCard={true}
-					format={sportTheme}
-				/>
-				<br></br>
-				<div>
-					<strong>Until desktop</strong>
-				</div>
-				<div>Heading size: 42px</div>
-				<div>Kicker size: 20px</div>
-				<br></br>
-				<div>
-					<strong>From desktop</strong>
-				</div>
-				<div>Heading size: 50px</div>
-				<div>Kicker size: 20px</div>
-			</CardWrapper> */}
 		</CardGroup>
 	);
 };

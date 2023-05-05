@@ -195,7 +195,7 @@ export const enhanceCards = (
 				: faciaCard.header.url;
 
 		// Action card is a new card type that invites users to take action as opposed to merely
-		// read, view, watch or listen.
+		// read, view, watch or listen
 		const isActionCard =
 			tags.filter((tag) => tag.id === 'tone/callout').length > 0;
 

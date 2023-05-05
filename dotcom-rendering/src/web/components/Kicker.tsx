@@ -10,8 +10,8 @@ type Props = {
 	color: string;
 	showPulsingDot?: boolean;
 	hideLineBreak?: boolean;
-	isAction?: boolean;
 	format: ArticleFormat;
+	isAction?: boolean;
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
 };
@@ -165,14 +165,14 @@ export const Kicker = ({
 	color,
 	showPulsingDot,
 	hideLineBreak,
-	isAction,
 	format,
+	isAction,
 	size = 'medium',
 	sizeOnMobile,
 }: Props) => {
 	const palette = decidePalette(format);
 
-	if (!isAction) {
+	if (isAction) {
 		return (
 			<div
 				css={[
