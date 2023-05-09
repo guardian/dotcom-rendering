@@ -10,6 +10,7 @@ import { setABTests } from '../lib/useAB';
 
 type Props = {
 	abTestSwitches: ABTestSwitches;
+	forcedTestVariants?: CoreAPIConfig['forcedTestVariants'];
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 };
@@ -18,6 +19,7 @@ export const SetABTests = ({
 	isDev,
 	pageIsSensitive,
 	abTestSwitches,
+	forcedTestVariants,
 }: Props) => {
 	const mvtId = Number(
 		(isDev &&
@@ -36,9 +38,10 @@ export const SetABTests = ({
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();
 
-	const allForcedTestVariants = getForcedParticipationsFromUrl(
-		window.location.hash,
-	);
+	const allForcedTestVariants = {
+		...forcedTestVariants,
+		...getForcedParticipationsFromUrl(window.location.hash),
+	};
 
 	const { clientSideABTests } = window.guardian.config;
 	const tests = Object.values(clientSideABTests ?? []) as ABTest[];
