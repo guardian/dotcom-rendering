@@ -25,11 +25,11 @@ export const fid = (): void => {
 					'🍊 Delaying first click by ' + String(delay) + 'ms, sorry',
 				);
 
-				const now = performance.now();
+				const start = performance.now();
 				eventTypes.forEach((eventType) => {
 					removeEventListener(eventType, bork);
 				});
-				while (performance.now() - now < delay) {
+				while (performance.now() - start < delay) {
 					// throttling
 				}
 			};
