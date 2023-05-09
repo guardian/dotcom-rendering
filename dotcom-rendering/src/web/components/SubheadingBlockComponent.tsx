@@ -1,6 +1,7 @@
 import { jsx } from '@emotion/react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { logger } from '../../server/lib/logging';
 import { isElement, parseHtml } from '../lib/domUtils';
 
 type Props = { html: string };
@@ -14,6 +15,13 @@ const buildElementTree = (node: Node): ReactNode => {
 	} else if (node.nodeType === node.TEXT_NODE) {
 		return node.textContent;
 	} else {
+		logger.warn('SubheadingBlockComponent: Unknown element received', {
+			isDev: process.env.NODE_ENV !== 'production',
+			element: {
+				name: node.nodeName,
+				html: isElement(node) ? node.outerHTML : undefined,
+			},
+		});
 		return null;
 	}
 };
