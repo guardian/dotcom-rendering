@@ -418,19 +418,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				{!(isInFrontsBannerTest && front.isNetworkFront) && (
+			{!(isInFrontsBannerTest && front.isNetworkFront) && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
 					<AdSlot position="merchandising" display={format.display} />
-				)}
-			</Section>
+				</Section>
+			)}
 
 			{NAV.subNavSections && (
 				<Section
