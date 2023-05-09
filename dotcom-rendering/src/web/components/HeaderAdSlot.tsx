@@ -31,17 +31,15 @@ const headerAdWrapper = css`
 	top: 0;
 `;
 
+const adSlotContainer = css`
+	&[top-above-nav-ad-rendered] {
+		width: fit-content;
+		margin: auto;
+	}
+`;
+
 export const HeaderAdSlot = ({ display }: Props) => (
 	<div css={headerWrapper}>
-		{/*
-			This is a special type of ad which, when filled, blocks
-			all other ads on the page. This allows us to run "exclusion
-			campaigns" against certain breaking news pages. Exclusion
-			ads are used for consentless advertising only. They are
-			ignored by GAM, which has a different mechanism to achieve
-			the same thing.
-		 */}
-		<AdSlot position="exclusion" />
 		<Global
 			styles={css`
 				/**
@@ -61,7 +59,9 @@ export const HeaderAdSlot = ({ display }: Props) => (
 				css={[headerAdWrapper, labelStyles]}
 				className="top-banner-ad-container"
 			>
-				<AdSlot position="top-above-nav" display={display} />
+				<div css={adSlotContainer} className="ad-slot-container">
+					<AdSlot position="top-above-nav" display={display} />
+				</div>
 			</div>
 		</Hide>
 	</div>

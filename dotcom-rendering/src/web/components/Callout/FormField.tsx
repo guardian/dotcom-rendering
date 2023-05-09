@@ -9,14 +9,19 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import type { CampaignFieldType } from '../../../types/content';
+import { useEffect, useRef } from 'react';
+import type {
+	CampaignFieldType,
+	MessageUsFieldType,
+} from '../../../types/content';
 
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	validationErrors: { [key in string]: string };
-	formField: CampaignFieldType;
+	formField: CampaignFieldType | MessageUsFieldType;
 	formData: FormDataType;
+	pageId: string;
 	setFieldInFormData: (
 		id: string,
 		data: string | string[] | undefined,
@@ -27,6 +32,7 @@ export const FormField = ({
 	formField,
 	formData,
 	setFieldInFormData,
+	pageId,
 	validationErrors,
 }: FormFieldProp) => {
 	const { type, label, hideLabel, description, required, id } = formField;
@@ -36,8 +42,24 @@ export const FormField = ({
 		formField.id in formData ? (formData[formField.id] as string) : '';
 	const fieldError = validationErrors[formField.id];
 
+	const firstUpdate = useRef(true);
+
+	useEffect(() => {
+		if (
+			firstUpdate.current &&
+			formField.hidden &&
+			formField.type === 'text'
+		) {
+			setFieldInFormData(formField.id, pageId);
+			firstUpdate.current = false;
+		}
+	}, [formField, pageId, setFieldInFormData]);
+
 	switch (formField.type) {
+		case 'phone':
+		case 'email':
 		case 'text': {
+			if (formField.hidden) return null;
 			return (
 				<TextInput
 					name={name}
@@ -106,10 +128,10 @@ export const FormField = ({
 						},
 					]
 						.concat(formField.options)
-						.map(({ value, label }) => {
+						.map(({ value, label: formLabel }) => {
 							return (
 								<Option key={value} value={value}>
-									{label}
+									{formLabel}
 								</Option>
 							);
 						})}
@@ -122,6 +144,7 @@ export const FormField = ({
 					label={label}
 					hideLabel={hideLabel}
 					supporting={description}
+					optional={!required}
 					error={fieldError ? fieldError : undefined}
 					data-testid={`form-field-${formField.id}`}
 				>
@@ -171,7 +194,7 @@ export const FormField = ({
 				<RadioGroup
 					label={formField.label}
 					supporting={formField.description}
-					error={validationErrors?.[formField.id]}
+					error={validationErrors[formField.id]}
 					name={formField.name}
 					orientation={
 						formField.options.length > 2 ? 'vertical' : 'horizontal'

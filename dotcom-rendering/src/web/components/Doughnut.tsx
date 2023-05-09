@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline, text, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -32,6 +37,11 @@ const labelStyles = (background: string) => css`
 	${textSans.small()}
 	fill: ${isLight(background) ? text.ctaSecondary : text.ctaPrimary};
 	text-anchor: middle;
+`;
+
+const lineStyles = css`
+	stroke-width: 2;
+	stroke: ${palette.neutral[97]};
 `;
 
 const withoutZeroSections = (sections: SectionType[]) =>
@@ -69,6 +79,12 @@ export const Doughnut = ({
 		value: number;
 	}[] = [];
 
+	/**
+	 * These lines help distinguish segments.
+	 * Only shown for 2 segments or more.
+	 */
+	const separatingLines: { label: string; d: string }[] = [];
+
 	let angleStart = -quarterTurn;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
 		const angleLength = (value / totalValue) * tau;
@@ -103,6 +119,20 @@ export const Doughnut = ({
 			color,
 		});
 
+		const x = Math.cos(angleEnd);
+		const y = Math.sin(angleEnd);
+
+		separatingLines.push({
+			label,
+			d: [
+				`M${center},${center}`,
+				`m${x * innerRadius},${y * innerRadius}`, // start the line from inner radius
+				`l${x * (outerRadius - innerRadius)},${
+					y * (outerRadius - innerRadius)
+				}`, // stop it at the outer radius
+			].join(' '),
+		});
+
 		angleStart = angleEnd;
 	}
 
@@ -132,6 +162,10 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
+			{separatingLines.length >= 2 &&
+				separatingLines.map(({ d, label }) => (
+					<path key={label} css={lineStyles} d={d} />
+				))}
 			<text
 				css={unitStyles}
 				transform={`translate(${center}, ${center})`}

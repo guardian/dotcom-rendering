@@ -14,9 +14,6 @@ module.exports = {
 		// used in composition
 		buildStoriesJson: true,
 	},
-	core: {
-		builder: 'webpack5',
-	},
 	stories: [
 		'../src/**/*.stories.@(tsx)',
 		'../stories/**/*.stories.@(tsx)',
@@ -60,7 +57,6 @@ module.exports = {
 				process: '{}',
 			}),
 		);
-
 		return config;
 	},
 	env: (config) => ({
@@ -69,8 +65,11 @@ module.exports = {
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+	framework: {
+		name: '@storybook/react-webpack5',
+		options: {},
+	},
 };
-
 const webpackConfig = (config) => {
 	const rules = config.module.rules;
 
@@ -87,7 +86,6 @@ const webpackConfig = (config) => {
 	config.resolve.alias[
 		path.resolve(__dirname, '../src/web/components/SecureSignup.tsx')
 	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
-
 	const webpackLoaders = getLoaders('modern');
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
 	if (webpackLoaders[0].loader.startsWith('swc')) {
@@ -98,10 +96,7 @@ const webpackConfig = (config) => {
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: [
-			path.resolve(__dirname, '../'),
-			path.resolve(__dirname, '../../common-rendering'),
-		],
+		include: [path.resolve(__dirname, '../')],
 		exclude: babelExclude,
 		use: webpackLoaders,
 	});
@@ -114,15 +109,11 @@ const webpackConfig = (config) => {
 		test: /\.svg$/,
 		use: ['desvg-loader/react', 'svg-loader'],
 	});
-
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
-		path.resolve(__dirname, '../../common-rendering/src'),
 	];
-
 	config.resolve.alias = {
 		...config.resolve.alias,
 	};
-
 	return config;
 };

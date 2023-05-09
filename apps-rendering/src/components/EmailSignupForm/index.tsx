@@ -2,12 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	fill,
-	hover,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
@@ -27,6 +21,7 @@ import {
 	TextInput,
 	userFeedbackThemeDefault,
 } from '@guardian/source-react-components';
+import { background, fill, hover, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -199,6 +194,7 @@ const EmailSignupForm: FC<Props> = ({
 							<Link
 								href="mailto:customer.help@theguardian.com"
 								target="_blank"
+								rel="noreferrer"
 							>
 								customer.help@theguardian.com
 							</Link>

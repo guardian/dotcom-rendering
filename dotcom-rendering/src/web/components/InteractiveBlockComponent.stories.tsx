@@ -56,7 +56,7 @@ export const Default = () => {
 		</Wrapper>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';
 
 export const InlineMap = () => {
 	return (
@@ -80,7 +80,7 @@ export const InlineMap = () => {
 		</Wrapper>
 	);
 };
-InlineMap.story = { name: 'Inline interactive Map' };
+InlineMap.storyName = 'Inline interactive Map';
 
 export const Showcase = () => {
 	return (
@@ -105,7 +105,7 @@ export const Showcase = () => {
 		</Wrapper>
 	);
 };
-Showcase.story = { name: 'Showcase interactive element' };
+Showcase.storyName = 'Showcase interactive element';
 
 export const WithCaption = () => {
 	return (
@@ -131,7 +131,7 @@ export const WithCaption = () => {
 		</Wrapper>
 	);
 };
-WithCaption.story = { name: 'with caption' };
+WithCaption.storyName = 'with caption';
 
 export const NonBootJs = () => {
 	return (
@@ -156,4 +156,4 @@ export const NonBootJs = () => {
 		</Wrapper>
 	);
 };
-NonBootJs.story = { name: 'Non-boot.js interactive element' };
+NonBootJs.storyName = 'Non-boot.js interactive element';

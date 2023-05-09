@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
-import {
-	background,
-	border,
-} from '@guardian/common-rendering/src/editorialPalette';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
@@ -13,26 +8,26 @@ import {
 	neutral,
 	space,
 } from '@guardian/source-foundations';
+import FirstPublished from 'components/FirstPublished';
 import type { Contributor } from 'contributor';
 import type { Image } from 'image';
 import { Optional } from 'optional';
+import { background, border } from 'palette';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 type Props = {
 	id: string;
 	children: ReactNode;
 	format: ArticleFormat;
 	blockTitle: Optional<string>;
-	blockFirstPublished: number;
-	blockFirstPublishedDisplay: string;
+	blockFirstPublished: Date;
 	blockId: string;
 	isLiveUpdate: boolean;
 	contributors: Contributor[];
 	isPinnedPost: boolean;
-	supportsDarkMode: boolean;
 	isOriginalPinnedPost: boolean;
-	host?: string;
-	pageId?: string;
+	edition: Edition;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -89,6 +84,10 @@ const BlockByline: FC<{
 							height: 2.25rem;
 							width: 2.25rem;
 							background-color: ${background.avatar(format)};
+
+							${darkModeCss`
+								background-color: ${background.avatarDark(format)};
+							`}
 						`}
 					/>
 				</div>
@@ -113,15 +112,12 @@ const LiveBlockContainer: FC<Props> = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
-	blockFirstPublishedDisplay,
 	blockId,
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
-	supportsDarkMode,
-	isOriginalPinnedPost = false,
-	host,
-	pageId,
+	isOriginalPinnedPost,
+	edition,
 }) => {
 	return (
 		<article
@@ -155,7 +151,7 @@ const LiveBlockContainer: FC<Props> = ({
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
 
-				${darkModeCss(supportsDarkMode)`
+				${darkModeCss`
 					border-top: 1px solid ${border.liveBlockDark(format)};
 					background-color: ${neutral[10]};
 					color: ${neutral[100]};
@@ -166,14 +162,11 @@ const LiveBlockContainer: FC<Props> = ({
 			<Header>
 				<FirstPublished
 					firstPublished={blockFirstPublished}
-					firstPublishedDisplay={blockFirstPublishedDisplay}
 					blockId={blockId}
 					isPinnedPost={isPinnedPost}
-					supportsDarkMode={supportsDarkMode}
 					isOriginalPinnedPost={isOriginalPinnedPost}
 					format={format}
-					host={host}
-					pageId={pageId}
+					edition={edition}
 				/>
 				<BlockTitle blockTitle={blockTitle} />
 				{contributors.map((contributor) => (

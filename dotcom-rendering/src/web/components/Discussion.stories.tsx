@@ -35,9 +35,10 @@ export const Basic = () => {
 				enableDiscussionSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
+				idApiUrl="https://idapi.theguardian.com"
 			/>
 		</HydratedLayout>
 	);
 };
 
-Basic.story = { name: 'A discussion with short comments' };
+Basic.storyName = 'A discussion with short comments';

@@ -1,16 +1,16 @@
 name: Percy
-on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+on: workflow_dispatch
+
 jobs:
   percy:
     name: Percy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Node
-        uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering

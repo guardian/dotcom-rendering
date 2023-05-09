@@ -1,6 +1,6 @@
-import { array, object, string } from 'https://deno.land/x/zod@v3.17.3/mod.ts';
+import { array, object, string } from 'npm:zod@3';
 import { fetchJSON } from './json.ts';
-import prettyBytes from 'https://esm.sh/pretty-bytes@6.0.0';
+import prettyBytes from 'npm:pretty-bytes@6';
 import { octokit } from './github.ts';
 
 // -- Constants -- //
@@ -84,7 +84,7 @@ const getFrontThrashers = async (path: string) => {
 		async ({ displayName, curated: [{ enriched }] }) => {
 			const resourceUrls = Object.values(enriched)
 				.flatMap((embed) =>
-					[...embed.matchAll(regex)].map(([url]) => new URL(url)),
+					[...embed.matchAll(regex)].map(([url]) => new URL(url))
 				)
 				.filter(isSupportedResourceType);
 
@@ -104,8 +104,7 @@ const getFrontThrashers = async (path: string) => {
 				resources,
 				embedSize,
 				resourceSize,
-				totalSize:
-					embedSize +
+				totalSize: embedSize +
 					[...resourceSize.values()].reduce(
 						(acc, next) => acc + next,
 						0,

@@ -1,14 +1,12 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement, TextBlockElement } from '../types/content';
+import type { FEElement, TextBlockElement } from '../types/content';
 import { sanitiseHTML } from './sanitise';
 
 /**
  * Checks if this element is a 'false h3' based on the convention: <p><strong>H3 text</strong></p>
  */
 
-const isTextBlockElement = (
-	element: CAPIElement,
-): element is TextBlockElement =>
+const isTextBlockElement = (element: FEElement): element is TextBlockElement =>
 	element._type === 'model.dotcomrendering.pageElements.TextBlockElement';
 
 const isFalseH3 = (element: TextBlockElement): element is FalseH3 => {
@@ -50,7 +48,7 @@ const extractH3 = (element: FalseH3): string => {
  * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
  * instead.
  */
-const enhance = (elements: CAPIElement[]): CAPIElement[] =>
+const enhance = (elements: FEElement[]): FEElement[] =>
 	elements.map((thisElement) => {
 		if (isTextBlockElement(thisElement) && isFalseH3(thisElement)) {
 			const h3Text = extractH3(thisElement);
@@ -64,7 +62,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] =>
 		}
 	});
 
-export const enhanceH3s = (blocks: Block[], format: CAPIFormat): Block[] => {
+export const enhanceH3s = (blocks: Block[], format: FEFormat): Block[] => {
 	const hasChapteredUI =
 		format.display === 'NumberedListDisplay' ||
 		format.design === 'AnalysisDesign' ||

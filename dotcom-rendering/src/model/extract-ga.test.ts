@@ -21,7 +21,7 @@ const base = {
 		"Ticket touts face unlimited fines for using 'bots' to buy in bulk",
 };
 
-const CAPIArticle = {
+const article = {
 	...ExampleArticle,
 	tags: [
 		...ExampleArticle.tags,
@@ -36,6 +36,6 @@ const CAPIArticle = {
 
 describe('Google Analytics extracts and formats CAPIArticle response correctly', () => {
 	it('GA Extract returns correctly formatted GA response', () => {
-		expect(extractGA(CAPIArticle)).toEqual(base);
+		expect(extractGA(article)).toEqual(base);
 	});
 });

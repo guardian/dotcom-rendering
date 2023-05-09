@@ -3,7 +3,7 @@ import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { createElement } from 'react';
-import { hydrate, render } from 'react-dom';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { initPerf } from '../initPerf';
 
 /**
@@ -39,7 +39,9 @@ export const doHydration = async (
 		.then((module) => {
 			/** The duration of importing the module for this island */
 			const importDuration = importEnd();
-			const clientOnly = element.getAttribute('clientOnly') === 'true';
+			const clientOnly =
+				element.hasAttribute('clientonly') &&
+				element.getAttribute('clientonly') !== 'false';
 
 			const { start: islandStart, end: islandEnd } = initPerf(
 				`island-${name}`,
@@ -48,18 +50,18 @@ export const doHydration = async (
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				render(
+				const root = createRoot(element);
+				root.render(
 					<CacheProvider value={emotionCache}>
 						{createElement(module[name], data)}
 					</CacheProvider>,
-					element,
 				);
 			} else {
-				hydrate(
+				hydrateRoot(
+					element,
 					<CacheProvider value={emotionCache}>
 						{createElement(module[name], data)}
 					</CacheProvider>,
-					element,
 				);
 			}
 
@@ -72,11 +74,11 @@ export const doHydration = async (
 		.then(({ clientOnly, importDuration, islandDuration }) => {
 			if (!('getEntriesByType' in window.performance)) return;
 
-			const action = clientOnly ? 'Rendering' : 'Hydrating';
+			const action = clientOnly ? 'Rendered' : 'Hydrated';
 
 			log(
 				'dotcom',
-				`🏝 ${action} island <${name} /> took ${islandDuration}ms (imported in ${importDuration}ms)`,
+				`🏝 ${action} <${name} /> in ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
 		})
 		.catch((error) => {

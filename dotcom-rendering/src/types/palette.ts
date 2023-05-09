@@ -63,6 +63,8 @@ export type Palette = {
 	};
 	background: {
 		article: Colour;
+		analysisContrast: Colour;
+		analysisContrastHover: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;
@@ -94,6 +96,7 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		messageForm: Colour;
 	};
 	fill: {
 		commentCount: Colour;

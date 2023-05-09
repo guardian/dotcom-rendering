@@ -48,8 +48,9 @@ Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subd
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
 $ yarn install
-$ cd dotcom-rendering/dotcom-rendering
+$ cd dotcom-rendering
 $ make dev
 ```
 
@@ -58,7 +59,7 @@ $ make dev
 
 Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
 
-You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
 
 You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to
 
@@ -73,7 +74,6 @@ http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul
 | `GU_STAGE`                    | `PROD` or `DEV`. Typically used to decide if DCR should call Production downstream API's or CODE downstream API's                              |
 | `GU_PUBLIC`                   | Any value, undefined will disable. Toggles serving assets on the `/assets/` endpoint                                                           |
 | `DISABLE_LOGGING_AND_METRICS` | Boolean. Toggle for enabling Log4js                                                                                                            |
-| `SKIP_LEGACY`                 | Boolean. Toggles building Legacy browser bundles                                                                                               |
 
 Most of these variables are set by our make scripts and you don't need to worry about setting them.
 

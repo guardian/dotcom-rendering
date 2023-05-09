@@ -23,7 +23,8 @@ import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { embedIframe } from '../browser/embedIframe/embedIframe';
+import type { RenderingTarget } from '../../types/renderingTarget';
+import { embedIframe } from '../browser/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
@@ -58,9 +59,15 @@ const Fixtures: { [key: string]: FEArticleType } = {
 
 mockRESTCalls();
 
-const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: FEArticleType }) => {
-	const NAV = extractNAV(ServerCAPI.nav);
-	const format: ArticleFormat = decideFormat(ServerCAPI.format);
+const HydratedLayout = ({
+	serverArticle,
+	renderingTarget,
+}: {
+	serverArticle: FEArticleType;
+	renderingTarget: RenderingTarget;
+}) => {
+	const NAV = extractNAV(serverArticle.nav);
+	const format: ArticleFormat = decideFormat(serverArticle.format);
 	useEffect(() => {
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
@@ -68,9 +75,16 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: FEArticleType }) => {
 		// Manually updates the footer DOM because it's not hydrated
 		injectPrivacySettingsLink();
 		doStorybookHydration();
-	}, [ServerCAPI]);
+	}, [serverArticle]);
 
-	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
+	return (
+		<DecideLayout
+			article={serverArticle}
+			NAV={NAV}
+			format={format}
+			renderingTarget={renderingTarget}
+		/>
+	);
 };
 
 // HydratedLayout is used here to simulated the hydration that happens after we init react on
@@ -80,23 +94,30 @@ export const HydratedLayoutWrapper = ({
 	displayName,
 	designName,
 	theme,
+	renderingTarget,
 }: {
 	displayName: string;
 	designName: string;
 	theme: string;
+	renderingTarget: RenderingTarget;
 }) => {
 	const fixture = Fixtures[designName] ?? Standard;
 
-	const serverCAPI = {
+	const serverArticle = {
 		...fixture,
 		format: {
-			display: `${displayName}Display` as CAPIDisplay,
-			design: `${designName}Design` as CAPIDesign,
-			theme: theme as CAPITheme,
+			display: `${displayName}Display` as FEDisplay,
+			design: `${designName}Design` as FEDesign,
+			theme: theme as FETheme,
 		},
 	};
 
-	return <HydratedLayout ServerCAPI={serverCAPI} />;
+	return (
+		<HydratedLayout
+			serverArticle={serverArticle}
+			renderingTarget={renderingTarget}
+		/>
+	);
 };
 
 export default {
@@ -115,10 +136,11 @@ export default {
 export const Liveblog = () => {
 	return (
 		<HydratedLayout
-			ServerCAPI={{
+			serverArticle={{
 				...Live,
 				keyEvents: [],
 			}}
+			renderingTarget="Web"
 		/>
 	);
 };

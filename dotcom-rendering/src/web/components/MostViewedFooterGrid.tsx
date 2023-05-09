@@ -63,8 +63,7 @@ const buttonStyles = (isSelected: boolean) => css`
 	margin: 0;
 	border: 0;
 	background: transparent;
-	padding-right: 6px;
-	padding-top: 6px;
+	padding: 6px 6px 0 10px;
 	text-align: left;
 	text-decoration: none;
 	font-weight: 600;

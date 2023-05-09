@@ -7,8 +7,11 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
+import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
+import { LI } from './components/LI';
+import { UL } from './components/UL';
 
 const basicCardProps: CardProps = {
 	linkTo: '',
@@ -27,6 +30,7 @@ const basicCardProps: CardProps = {
 		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	imagePosition: 'top',
 	showAge: true,
+	isExternalLink: false,
 };
 
 const aBasicLink = {
@@ -207,6 +211,23 @@ export const WithByline = () => {
 					{...basicCardProps}
 					byline="Byline text"
 					showByline={true}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
+export const WithExternalLink = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					kickerText="Instagram"
+					headlineSize="huge"
+					headlineText="Follow The Guardian now"
+					isExternalLink={true}
 				/>
 			</CardWrapper>
 		</CardGroup>
@@ -413,6 +434,22 @@ export const WithQuotes = () => {
 	);
 };
 
+export const CommentThemeWithoutQuotes = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				kickerText="No quotes"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Comment,
+					theme: ArticlePillar.Opinion,
+				}}
+			/>
+		</CardWrapper>
+	);
+};
+
 export const WithQuotesSpecialReportAlt = () => {
 	return (
 		<CardWrapper>
@@ -426,14 +463,6 @@ export const WithQuotesSpecialReportAlt = () => {
 				showQuotedHeadline={true}
 				kickerText="Quotes"
 			/>
-		</CardWrapper>
-	);
-};
-
-export const WithNoSlash = () => {
-	return (
-		<CardWrapper>
-			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
 		</CardWrapper>
 	);
 };
@@ -474,6 +503,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="top"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -509,6 +539,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -527,6 +558,7 @@ export const WhenHorizontalAndOpinion = () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="right"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -559,6 +591,7 @@ export const WhenHorizontalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -578,6 +611,7 @@ export const WhenHorizontalAndOpinion = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -627,6 +661,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="small"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -660,6 +695,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -679,6 +715,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="medium"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -712,6 +749,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -731,6 +769,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="large"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -764,6 +803,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -783,6 +823,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="jumbo"
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 			<CardWrapper>
@@ -816,6 +857,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
@@ -854,12 +896,166 @@ export const WhenOpinionWithImageAtBottom = () => {
 							kickerText: 'Kicker',
 						},
 					]}
+					showQuotedHeadline={true}
 				/>
 			</CardWrapper>
 		</>
 	);
 };
 
+export const WhenVideoWithPlayButton = () => {
+	return (
+		<Section title="Play icons" padContent={false} centralBorder="partial">
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'100%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imageSize="jumbo"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'75%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="right"
+						imageSize="large"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<LI percentage={'25%'} padSides={true} showDivider={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'50%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imageSize="medium"
+						imagePositionOnMobile="bottom"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<UL direction="column" showDivider={true}>
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="left"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="right"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+
+					<LI padSides={true}>
+						<Card
+							{...basicCardProps}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Video,
+								theme: ArticlePillar.News,
+							}}
+							imagePosition="right"
+							mediaDuration={200}
+							mediaType="Video"
+							showMainVideo={true}
+						/>
+					</LI>
+				</UL>
+			</UL>
+			<UL direction="row" padBottom={true}>
+				<LI percentage={'66.666%'} padSides={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="right"
+						imageSize="large"
+						imagePositionOnMobile="top"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Video,
+							theme: ArticlePillar.News,
+						}}
+						imagePosition="top"
+						imagePositionOnMobile="left"
+						imageSize="medium"
+						mediaDuration={200}
+						mediaType="Video"
+						showMainVideo={true}
+					/>
+				</LI>
+			</UL>
+		</Section>
+	);
+};
 export const WithLetterDesign = () => {
 	return (
 		<CardWrapper>
@@ -877,9 +1073,7 @@ export const WithLetterDesign = () => {
 	);
 };
 
-WithLetterDesign.story = {
-	name: 'WithLetterDesign',
-};
+WithLetterDesign.storyName = 'WithLetterDesign';
 
 export const WithLetterDesignAndShowQuotedHeadline = () => {
 	return (
@@ -899,6 +1093,5 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 	);
 };
 
-WithLetterDesignAndShowQuotedHeadline.story = {
-	name: 'WithLetterDesignAndShowQuotedHeadline',
-};
+WithLetterDesignAndShowQuotedHeadline.storyName =
+	'WithLetterDesignAndShowQuotedHeadline';

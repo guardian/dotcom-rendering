@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { ServerSideTests, Switches } from '../../types/config';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 import {
 	adCollapseStyles,
@@ -29,7 +30,7 @@ const adStylesDynamic = css`
 
 type Props = {
 	format: ArticleFormat;
-	elements: CAPIElement[];
+	elements: FEElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
 	pageId: string;
@@ -46,6 +47,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	abTests?: ServerSideTests;
+	renderingTarget: RenderingTarget;
 };
 
 export const ArticleRenderer = ({
@@ -67,6 +69,7 @@ export const ArticleRenderer = ({
 	isSensitive,
 	isDev,
 	abTests,
+	renderingTarget,
 }: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -109,22 +112,24 @@ export const ArticleRenderer = ({
 			].join(' ')}
 			css={[adStylesDynamic, commercialPosition]}
 		>
-			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
-			{withSignInGateSlot({
-				renderedElements,
-				format,
-				contentType,
-				sectionName,
-				tags,
-				isPaidContent,
-				isPreview,
-				host,
-				pageId,
-				idUrl,
-				switches,
-				isSensitive,
-				isDev,
-			})}
+			{renderingTarget === 'Apps'
+				? renderedElements
+				: /* Insert the placeholder for the sign in gate on the 2nd article element */
+				  withSignInGateSlot({
+						renderedElements,
+						format,
+						contentType,
+						sectionName,
+						tags,
+						isPaidContent,
+						isPreview,
+						host,
+						pageId,
+						idUrl,
+						switches,
+						isSensitive,
+						isDev,
+				  })}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

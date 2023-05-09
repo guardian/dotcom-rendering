@@ -63,6 +63,13 @@ export interface CalloutBlockElement {
 	role?: RoleType;
 }
 
+export interface CalloutContactType {
+	name: string;
+	value: string;
+	urlPrefix: string;
+	guidance?: string;
+}
+
 export interface CalloutBlockElementV2 {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElementV2';
 	elementId: string;
@@ -72,12 +79,14 @@ export interface CalloutBlockElementV2 {
 	activeUntil?: number;
 	displayOnSensitive: boolean;
 	formId: number;
+	prompt: string;
 	title: string;
 	description: string;
 	tagName: string;
 	formFields: CampaignFieldType[];
 	role?: RoleType;
 	isNonCollapsible: boolean;
+	contacts?: CalloutContactType[];
 }
 
 interface ChartAtomBlockElement {
@@ -321,7 +330,7 @@ interface NumberedTitleBlockElement {
 	elementId: string;
 	position: number;
 	html: string;
-	format: CAPIFormat;
+	format: FEFormat;
 }
 
 export interface InteractiveContentsBlockElement {
@@ -586,7 +595,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 
-export type CAPIElement =
+export type FEElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement
@@ -728,16 +737,19 @@ interface CampaignField {
 	description?: string;
 	required: boolean;
 	textSize?: number;
-	hideLabel: boolean;
+	hideLabel?: boolean;
+	hidden?: boolean;
 	label: string;
 }
 
 export interface CampaignFieldText extends CampaignField {
-	type: 'text';
+	type: 'text' | 'email' | 'phone';
 }
 
 export interface CampaignFieldTextArea extends CampaignField {
 	type: 'textarea';
+	minlength?: number;
+	maxlength?: number;
 }
 
 export interface CampaignFieldFile extends CampaignField {
@@ -767,6 +779,12 @@ export interface CampaignFieldSelect extends CampaignField {
 		value: string;
 	}[];
 }
+
+// -------------------------------------
+// Message Us
+// -------------------------------------
+
+export type MessageUsFieldType = CampaignFieldText | CampaignFieldTextArea;
 
 // -------------------------------------
 // Quiz

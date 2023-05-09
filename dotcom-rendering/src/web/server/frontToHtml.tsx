@@ -1,14 +1,9 @@
+import { isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import {
-	generateScriptTags,
-	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
-} from '../../lib/assets';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -48,9 +43,10 @@ export const frontToHtml = ({ front }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -59,45 +55,17 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
+	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
-			...getScriptArrayFromFile('islands.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
-
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
-
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -120,22 +88,25 @@ export const frontToHtml = ({ front }: Props): string => {
 				switches: front.config.switches,
 				abTests: front.config.abTests,
 				brazeApiKey: front.config.brazeApiKey,
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
+				unknownConfig: front.config,
 			}),
 		),
 	);
 
-	const keywords = front.config.keywords ?? '';
+	const keywords = front.config.keywords;
 
 	return pageTemplate({
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: front.pressedPage.seoData.description,
 		windowGuardian,
-		gaPath,
 		keywords,
 		offerHttp3,
+		renderingTarget: 'Web',
+		bork: !!front.config.switches.borkWebVitals,
 	});
 };

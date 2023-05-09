@@ -3,11 +3,11 @@ import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
-import type { CAPITrailType, TrailType } from './trails';
+import type { FETrailType, TrailType } from './trails';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
-	nav: CAPINavType;
+	nav: FENavType;
 	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
@@ -19,14 +19,14 @@ export interface FEFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
-	mostViewed: CAPITrailType[];
-	mostCommented?: CAPITrailType;
-	mostShared?: CAPITrailType;
+	mostViewed: FETrailType[];
+	mostCommented?: FETrailType;
+	mostShared?: FETrailType;
 }
 
 export interface DCRFrontType {
 	pressedPage: DCRPressedPageType;
-	nav: CAPINavType;
+	nav: FENavType;
 	editionId: EditionId;
 	webTitle: string;
 	config: FEFrontConfigType;
@@ -36,6 +36,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	trendingTopics?: FETagType[];
 }
 
 interface FEPressedPageType {
@@ -149,7 +150,7 @@ export type FEFrontCard = {
 				webUrl: string;
 				type: string;
 				sectionId?: { value: string };
-				format: CAPIFormat;
+				format: FEFormat;
 			};
 			fields: {
 				main: string;
@@ -229,7 +230,7 @@ export type FEFrontCard = {
 		imageHide: boolean;
 		showLivePlayable: boolean;
 	};
-	format?: CAPIFormat;
+	format?: FEFormat;
 	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
@@ -248,7 +249,10 @@ export type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
+	isBoosted?: boolean;
+	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
@@ -257,6 +261,8 @@ export type DCRFrontCard = {
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo: boolean;
+	isExternalLink: boolean;
 };
 
 export type FESnapType = {
@@ -268,6 +274,7 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+	embedJs?: string;
 };
 
 type FECollectionConfigType = {
@@ -333,11 +340,11 @@ export type DCRCollectionType = {
 };
 
 export type DCRGroupedTrails = {
-	snap: TrailType[];
-	huge: TrailType[];
-	veryBig: TrailType[];
-	big: TrailType[];
-	standard: TrailType[];
+	snap: DCRFrontCard[];
+	huge: DCRFrontCard[];
+	veryBig: DCRFrontCard[];
+	big: DCRFrontCard[];
+	standard: DCRFrontCard[];
 };
 
 type FEFrontConfigType = {
@@ -435,6 +442,7 @@ type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
 	isPaidContent?: boolean;
+	onPageDescription?: string;
 };
 
 export type FESupportingContent = {
@@ -452,7 +460,7 @@ export type FESupportingContent = {
 		headline: string;
 		url: string;
 	};
-	format?: CAPIFormat;
+	format?: FEFormat;
 };
 
 export type DCRSupportingContent = {
@@ -463,7 +471,7 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	links: { text: string; linkTo: string }[];
+	links: { text: string; title?: string; linkTo: string }[];
 	theme?: ArticlePillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;

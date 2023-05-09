@@ -172,6 +172,7 @@ export interface ReaderRevenueDevUtils {
 }
 
 const getForcedVariant = (type: 'epic' | 'banner'): string | null => {
+	// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety in global,
 	if (URLSearchParams) {
 		const params = new URLSearchParams(window.location.search);
 		const value = params.get(`force-${type}`);

@@ -1,7 +1,8 @@
-import { getCookie } from '@guardian/libs';
+import { getCookie, getSwitches } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import type { TagType } from '../../types/tag';
+import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
@@ -15,6 +16,7 @@ import {
 } from './SignInGate/dismissGate';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import type {
+	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
@@ -40,6 +42,8 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
+	checkoutCompleteCookieData?: CheckoutCompleteCookieData;
+	personaliseSignInGateAfterCheckoutSwitch?: boolean;
 }
 
 const dismissGate = (
@@ -62,12 +66,14 @@ const generateSignInUrl = ({
 	idUrl,
 	host,
 	currentTest,
+	componentId,
 }: {
 	pageId: string;
 	pageViewId: string;
 	idUrl: string;
 	host: string;
 	currentTest: CurrentSignInGateABTest;
+	componentId?: string;
 }) => {
 	// url of the article, return user here after sign in/registration
 	const returnUrl = `${host}/${pageId}`;
@@ -75,7 +81,7 @@ const generateSignInUrl = ({
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
 		componentType: 'signingate',
-		componentId: signInGateTestIdToComponentId[currentTest.id],
+		componentId,
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		browserId:
@@ -99,6 +105,8 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
+	checkoutCompleteCookieData,
+	personaliseSignInGateAfterCheckoutSwitch,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -121,6 +129,8 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: componentId,
+			checkoutCompleteCookieData,
+			personaliseSignInGateAfterCheckoutSwitch,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -151,9 +161,33 @@ export const SignInGateSelector = ({
 		CurrentSignInGateABTest | undefined
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
-	const gateSelector = useSignInGateSelector();
 
+	const gateSelector = useSignInGateSelector();
 	const { pageViewId } = window.guardian.config.ophan;
+
+	// START: Checkout Complete Personalisation
+	const [personaliseSwitch, setPersonaliseSwitch] = useState(false);
+	const checkOutCompleteString = getCookie({
+		name: 'GU_CO_COMPLETE',
+		shouldMemoize: true,
+	});
+	const checkoutCompleteCookieData: CheckoutCompleteCookieData | undefined =
+		checkOutCompleteString !== null
+			? parseCheckoutCompleteCookieData(checkOutCompleteString)
+			: undefined;
+
+	const personaliseComponentId = (
+		currentComponentId: string | undefined,
+	): string | undefined => {
+		if (!currentComponentId) return undefined;
+		if (!checkoutCompleteCookieData) return currentComponentId;
+		const { userType, product } = checkoutCompleteCookieData;
+		return `${currentComponentId}_personalised_${userType}_${product}`;
+	};
+	const shouldPersonaliseComponentId = (): boolean => {
+		return personaliseSwitch && !!checkoutCompleteCookieData;
+	};
+	// END: Checkout Complete Personalisation
 
 	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
@@ -177,10 +211,19 @@ export const SignInGateSelector = ({
 		}
 	}, [gateSelector]);
 
+	useOnce(() => {
+		void getSwitches().then((switches) => {
+			if (switches.personaliseSignInGateAfterCheckout) {
+				setPersonaliseSwitch(
+					switches.personaliseSignInGateAfterCheckout,
+				);
+			} else setPersonaliseSwitch(false);
+		});
+	}, []);
+
 	useEffect(() => {
 		if (gateVariant && currentTest) {
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
-			gateVariant
+			void gateVariant
 				.canShow({
 					isSignedIn: !!isSignedIn,
 					currentTest,
@@ -206,14 +249,19 @@ export const SignInGateSelector = ({
 	if (!currentTest || !gateVariant) {
 		return null;
 	}
+	const signInGateComponentId = signInGateTestIdToComponentId[currentTest.id];
 
-	const componentId = signInGateTestIdToComponentId[currentTest.id];
+	const componentId = shouldPersonaliseComponentId()
+		? personaliseComponentId(signInGateComponentId)
+		: signInGateComponentId;
+
 	const signInUrl = generateSignInUrl({
 		pageId,
 		host,
 		pageViewId,
 		idUrl,
 		currentTest,
+		componentId,
 	});
 
 	return (
@@ -224,10 +272,13 @@ export const SignInGateSelector = ({
 					format={format}
 					abTest={currentTest}
 					componentId={componentId}
+					// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- Odd react types, should review
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
+					checkoutCompleteCookieData={checkoutCompleteCookieData}
+					personaliseSignInGateAfterCheckoutSwitch={personaliseSwitch}
 				/>
 			)}
 		</>

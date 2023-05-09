@@ -1,7 +1,7 @@
 import type { CommercialProperties } from '../../types/commercial';
 import type { EditionId } from '../../web/lib/edition';
 import { adJson, stringify } from '../lib/ad-json';
-import type { RTCParameters } from '../lib/real-time-config';
+import type { AdType } from '../lib/real-time-config';
 import { realTimeConfig } from '../lib/real-time-config';
 
 // Largest size first
@@ -44,34 +44,16 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
-const pubmaticRealTimeConfig = (
-	usePrebid: boolean,
-	usePermutive: boolean,
-	useAmazon: boolean,
-	{ profileId, pubId }: RTCParameters,
-): string => {
-	const pubmaticConfig = {
-		openwrap: {
-			PROFILE_ID: profileId,
-			PUB_ID: pubId,
-		},
-	};
-
-	return realTimeConfig({
-		vendors: usePrebid ? pubmaticConfig : {},
-		usePermutive,
-		useAmazon,
-		timeoutMillis: 1000,
-	});
-};
-
 interface CommercialConfig {
-	usePrebid: boolean;
+	usePubmaticPrebid: boolean;
+	useCriteoPrebid: boolean;
+	useOzonePrebid: boolean;
 	usePermutive: boolean;
 	useAmazon: boolean;
 }
 
 export interface BaseAdProps {
+	id: 'ad-sticky' | `ad-${number}`;
 	editionId: EditionId;
 	section: string;
 	contentType: string;
@@ -81,31 +63,39 @@ export interface BaseAdProps {
 }
 
 interface AdProps extends BaseAdProps {
-	isSticky?: boolean;
-	rtcParameters: RTCParameters;
+	adType: AdType;
 }
 
 export const Ad = ({
-	isSticky = false,
+	id,
 	editionId,
 	section,
 	contentType,
 	commercialProperties,
 	adTargeting,
-	config: { useAmazon, usePrebid, usePermutive },
-	rtcParameters,
+	config: {
+		useAmazon,
+		usePubmaticPrebid,
+		useCriteoPrebid,
+		useOzonePrebid,
+		usePermutive,
+	},
+	adType,
 }: AdProps) => {
-	const adSizes = isSticky ? stickySizes : inlineSizes;
+	const adSizes = adType.isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
 	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
-	const rtcConfig = pubmaticRealTimeConfig(
-		usePrebid,
+	const rtcConfig = realTimeConfig(
+		usePubmaticPrebid,
+		useCriteoPrebid,
+		useOzonePrebid,
 		usePermutive,
 		useAmazon,
-		rtcParameters,
+		id,
+		adType,
 	);
 
 	return (

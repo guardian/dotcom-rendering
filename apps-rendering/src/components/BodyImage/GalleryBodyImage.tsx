@@ -1,14 +1,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import FigCaption from 'components/FigCaption';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
 import type { Sizes } from 'image/sizes';
+import { border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getDefaultImgStyles } from './BodyImage.defaults';
@@ -131,7 +131,6 @@ const imgSizes = (image: Image): Sizes => {
 const GalleryBodyImage: FC<BodyImageProps> = ({
 	image,
 	format,
-	supportsDarkMode,
 	lightbox,
 	caption,
 }) => (
@@ -140,9 +139,8 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 			<Img
 				image={image}
 				sizes={imgSizes(image)}
-				className={getDefaultImgStyles(image.role, supportsDarkMode)}
+				className={getDefaultImgStyles(image.role)}
 				format={format}
-				supportsDarkMode={supportsDarkMode}
 				lightbox={lightbox}
 			/>
 		</div>
@@ -150,7 +148,6 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		<FigCaption
 			css={captionStyles(format)}
 			format={format}
-			supportsDarkMode={supportsDarkMode}
 			variant={CaptionIconVariant.Image}
 		>
 			{caption}

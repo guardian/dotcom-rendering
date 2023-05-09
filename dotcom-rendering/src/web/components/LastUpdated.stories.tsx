@@ -14,4 +14,4 @@ export const Default = () => {
 	);
 };
 
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

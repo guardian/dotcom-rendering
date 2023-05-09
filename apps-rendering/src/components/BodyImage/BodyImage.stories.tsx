@@ -6,8 +6,9 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, some } from '@guardian/types';
+import { none } from '@guardian/types';
 import { image } from 'fixtures/image';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import BodyImage from '.';
 
@@ -18,7 +19,7 @@ const format = {
 	display: ArticleDisplay.Standard,
 	theme: ArticlePillar.News,
 };
-const caption = some(
+const caption = Optional.some(
 	'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
 );
 const copy = (
@@ -47,7 +48,6 @@ const Default: FC = () => (
 	<BodyImage
 		image={image}
 		format={format}
-		supportsDarkMode={true}
 		lightbox={none}
 		caption={caption}
 		leftColumnBreakpoint={none}
@@ -58,9 +58,8 @@ const NoCaption: FC = () => (
 	<BodyImage
 		image={image}
 		format={format}
-		supportsDarkMode={true}
 		lightbox={none}
-		caption={none}
+		caption={Optional.none()}
 		leftColumnBreakpoint={none}
 	/>
 );
@@ -73,7 +72,6 @@ const Thumbnail: FC = () => (
 				role: ArticleElementRole.Thumbnail,
 			}}
 			format={format}
-			supportsDarkMode={true}
 			lightbox={none}
 			caption={caption}
 			leftColumnBreakpoint={none}
@@ -90,9 +88,8 @@ const ThumbnailNoCaption: FC = () => (
 				role: ArticleElementRole.Thumbnail,
 			}}
 			format={format}
-			supportsDarkMode={true}
 			lightbox={none}
-			caption={none}
+			caption={Optional.none()}
 			leftColumnBreakpoint={none}
 		/>
 		{copy}

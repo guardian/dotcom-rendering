@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { CAPITrailTabType, TrailType } from '../../types/trails';
+import type { FETrailTabType, TrailType } from '../../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { useApi } from '../lib/useApi';
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -25,18 +25,16 @@ const headingStyles = css`
 
 interface Props {
 	limitItems?: number;
-	isAdFreeUser: boolean;
-	adBlockerDetected: boolean;
+	stickToTop?: boolean;
 }
 
 export const MostViewedRight = ({
 	limitItems = 5,
-	isAdFreeUser,
-	adBlockerDetected,
+	stickToTop = false,
 }: Props) => {
 	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
-	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
+	const { data, error } = useApi<FETrailTabType>(endpointUrl);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'most-viewed-right');
@@ -47,7 +45,7 @@ export const MostViewedRight = ({
 		const trails: TrailType[] = data.trails
 			.slice(0, limitItems)
 			.map(decideTrail);
-		const stickToTop = adBlockerDetected || isAdFreeUser;
+
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
 			<div

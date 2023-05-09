@@ -1,10 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette/background';
-import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
 
@@ -74,6 +73,18 @@ const DesignTag: FC<Props> = ({ format }) => {
 			return (
 				<div css={[designTagWrapper, interviewStyles]}>
 					<span css={designTagStyles(format)}>Interview</span>
+				</div>
+			);
+		case ArticleDesign.Timeline:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Timeline</span>
+				</div>
+			);
+		case ArticleDesign.Profile:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Profile</span>
 				</div>
 			);
 		default:

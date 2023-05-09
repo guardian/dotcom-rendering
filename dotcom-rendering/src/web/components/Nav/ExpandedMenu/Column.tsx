@@ -10,7 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import type {
 	EditionLinkType,
-	PillarType,
+	PillarLinkType,
 } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
@@ -202,7 +202,7 @@ export const Column = ({
 	index,
 	showLineBelow,
 }: {
-	column: PillarType | EditionLinkType;
+	column: PillarLinkType | EditionLinkType;
 	index: number;
 	showLineBelow: boolean;
 }) => {

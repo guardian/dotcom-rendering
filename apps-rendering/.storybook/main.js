@@ -3,14 +3,10 @@ const webpack = require('webpack');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
-	core: {
-		builder: 'webpack5',
-	},
 	stories: ['../src/**/*.stories.@(js|mdx|ts|tsx)'],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
-		'@storybook/addon-knobs',
 		{
 			name: 'storybook-addon-turbo-build',
 			options: {
@@ -54,6 +50,10 @@ module.exports = {
 		// See: https://storybook.js.org/docs/react/configure/environment-variables
 		CI: 'true',
 	}),
+	framework: {
+		name: '@storybook/react-webpack5',
+		options: {}
+	}
 };
 
 const webpackConfig = (config) => {
@@ -61,10 +61,7 @@ const webpackConfig = (config) => {
 
 	rules.push({
 		test: /\.tsx?$/,
-		include: [
-			path.resolve(__dirname, '..'),
-			path.resolve(__dirname, '../../common-rendering'),
-		],
+		include: [path.resolve(__dirname, '..')],
 		use: [
 			{
 				loader: 'babel-loader',
@@ -99,7 +96,6 @@ const webpackConfig = (config) => {
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
 		path.resolve(__dirname, '../src'),
-		path.resolve(__dirname, '../../common-rendering/src'),
 	];
 
 	config.resolve.alias = {

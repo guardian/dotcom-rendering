@@ -1,4 +1,5 @@
 import { css, ThemeProvider } from '@emotion/react';
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
@@ -12,17 +13,20 @@ import { InactiveCallout } from './calloutComponents';
 import { getTheme } from './theme';
 
 export interface CalloutProps {
+	prompt: string;
 	heading: string;
+	description?: DocumentFragment;
 	formId: number;
 	formFields: FormField[];
 	format: ArticleFormat;
-	description?: DocumentFragment;
 	isNonCollapsible: boolean;
 	activeUntil?: number;
 	name: string;
+	contacts?: Contact[];
 }
 
 const Callout: FC<CalloutProps> = ({
+	prompt,
 	heading,
 	description,
 	formId,
@@ -31,6 +35,7 @@ const Callout: FC<CalloutProps> = ({
 	isNonCollapsible,
 	activeUntil,
 	name,
+	contacts,
 }): ReactElement => {
 	const isActive = isCalloutActive(activeUntil);
 
@@ -45,10 +50,13 @@ const Callout: FC<CalloutProps> = ({
 				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
 						formId={formId}
+						prompt={prompt}
 						heading={heading}
+						description={description}
 						formFields={formFields}
 						format={format}
-						description={description}
+						contacts={contacts}
+						isNonCollapsible={isNonCollapsible}
 					/>
 					<span
 						css={css`
@@ -67,13 +75,17 @@ const Callout: FC<CalloutProps> = ({
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
+						collapsedHeight={'160px'}
 					>
 						<CalloutBlock
 							formId={formId}
+							prompt={prompt}
 							heading={heading}
+							description={description}
 							formFields={formFields}
 							format={format}
-							description={description}
+							contacts={contacts}
+							isNonCollapsible={isNonCollapsible}
 						/>
 					</ExpandingWrapper>
 				</ThemeProvider>
@@ -111,7 +123,9 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 		{
 			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
-			id: getCalloutId(calloutProps.heading),
+			id: getCalloutId(
+				calloutProps.heading ? calloutProps.formId.toString() : calloutProps.heading
+			),
 		},
 		Callout({
 			...calloutProps,

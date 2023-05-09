@@ -12,7 +12,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: guardian/actions-setup-node@main
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
       - uses: preactjs/compressed-size-action@v2
         with:
@@ -25,3 +29,7 @@ jobs:
           # https://github.com/preactjs/compressed-size-action#dealing-with-hashed-filenames
           # The default hash digest is set to 20 chars in Webpack
           strip-hash: "\\.(\\w{20})\\.js$"
+
+          # reporting on “legacy” and “variant” bundles muddies the water
+          # https://github.com/preactjs/compressed-size-action#customizing-the-list-of-files
+          pattern: "dotcom-rendering/dist/*.modern.*.js"

@@ -17,8 +17,9 @@ export const enhanceCollections = (
 	collections: FECollectionType[],
 	editionId: EditionId,
 	pageId: string,
+	onPageDescription?: string,
 ): DCRCollectionType[] => {
-	return collections.filter(isSupported).map((collection) => {
+	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const containerPalette = decideContainerPalette(
@@ -27,7 +28,10 @@ export const enhanceCollections = (
 		return {
 			id,
 			displayName,
-			description,
+			description:
+				onPageDescription && index === 0
+					? onPageDescription
+					: description,
 			collectionType,
 			href,
 			containerPalette,

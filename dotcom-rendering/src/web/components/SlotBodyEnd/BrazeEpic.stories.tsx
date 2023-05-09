@@ -11,9 +11,9 @@ export default {
 	title: 'Components/SlotBodyEnd/BrazeEpics',
 };
 
-// Braze Epic
+// Braze Epic - Default
 // ---------------------------------------
-export const BrazeEpicComponent = (
+export const BrazeEpic_Default_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -67,7 +67,7 @@ export const BrazeEpicComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeEpicComponent.args = {
+BrazeEpic_Default_Component.args = {
 	heading: 'Since you’re here...',
 	paragraph1:
 		'... we have a small favour to ask. More people, <a href="https://example.com">like you</a>, are reading and supporting the Guardian’s independent, investigative journalism than ever before. And unlike many news organisations, we made the choice to keep our reporting open for all, regardless of where they live or what they can afford to pay.',
@@ -87,11 +87,11 @@ BrazeEpicComponent.args = {
 	componentName: 'Epic',
 };
 
-BrazeEpicComponent.story = { name: 'Epic' };
+BrazeEpic_Default_Component.storyName = 'Default Epic';
 
 // Braze Epic with Reminder CTA
 // ---------------------------------------
-export const BrazeEpicWithReminderComponent = (
+export const BrazeEpic_DefaultWithReminder_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -146,7 +146,7 @@ export const BrazeEpicWithReminderComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeEpicWithReminderComponent.args = {
+BrazeEpic_DefaultWithReminder_Component.args = {
 	heading: 'Since you’re here...',
 	paragraph1:
 		'... we have a small favour to ask. More people, <a href="https://example.com">like you</a>, are reading and supporting the Guardian’s independent, investigative journalism than ever before. And unlike many news organisations, we made the choice to keep our reporting open for all, regardless of where they live or what they can afford to pay.',
@@ -165,11 +165,12 @@ BrazeEpicWithReminderComponent.args = {
 	remindMeConfirmationHeaderText: 'Thank you! Your reminder is set.',
 };
 
-BrazeEpicWithReminderComponent.story = { name: 'Epic with reminder' };
+BrazeEpic_DefaultWithReminder_Component.storyName =
+	'Default Epic with reminder';
 
 // Braze Epic with special header
 // ---------------------------------------
-export const BrazeEpicSpecialHeaderComponent = (
+export const BrazeEpic_SpecialHeader_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -189,6 +190,12 @@ export const BrazeEpicSpecialHeaderComponent = (
 
 	if (BrazeMessage) {
 		const brazeMessageProps: BrazeMessageProps = {
+			authoredEpicImageUrl: args.authoredEpicImageUrl,
+			authoredEpicImageAltText: args.authoredEpicImageAltText,
+			authoredEpicHeader: args.authoredEpicHeader,
+			authoredEpicBylineName: args.authoredEpicBylineName,
+			authoredEpicBylineCopy1: args.authoredEpicBylineCopy1,
+			authoredEpicBylineCopy2: args.authoredEpicBylineCopy2,
 			paragraph1: args.paragraph1,
 			paragraph2: args.paragraph2,
 			paragraph3: args.paragraph3,
@@ -222,7 +229,14 @@ export const BrazeEpicSpecialHeaderComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeEpicSpecialHeaderComponent.args = {
+BrazeEpic_SpecialHeader_Component.args = {
+	authoredEpicImageUrl:
+		'https://i.guim.co.uk/img/media/cecfef4098a2a8c1e302e3f67b979f11ee529bb6/0_0_470_471/master/470.png?width=300&quality=45&s=d654e72595c07e2095777863f4901863',
+	authoredEpicImageAltText: 'Headshot image of Mark Rice-Oxley',
+	authoredEpicHeader: "You're powering open, independent journalism",
+	authoredEpicBylineName: 'Mark Rice-Oxley',
+	authoredEpicBylineCopy1: 'Executive Editor',
+	authoredEpicBylineCopy2: 'Reader Revenues',
 	paragraph1:
 		'... we have a small favour to ask. More people, <a href="https://example.com">like you</a>, are reading and supporting the Guardian’s independent, investigative journalism than ever before. And unlike many news organisations, we made the choice to keep our reporting open for all, regardless of where they live or what they can afford to pay.',
 	paragraph2:
@@ -241,11 +255,11 @@ BrazeEpicSpecialHeaderComponent.args = {
 	componentName: 'EpicWithSpecialHeader',
 };
 
-BrazeEpicSpecialHeaderComponent.story = { name: 'Epic with special header' };
+BrazeEpic_SpecialHeader_Component.storyName = 'Epic with special header';
 
-// Braze UK Newsletter Epic
+// Braze Newsletter Epic - UK - MorningBriefing
 // ---------------------------------------
-export const BrazeUKNewsletterEpicComponent = (
+export const BrazeNewsletterEpic_UK_MorningBriefing_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -294,7 +308,7 @@ export const BrazeUKNewsletterEpicComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeUKNewsletterEpicComponent.args = {
+BrazeNewsletterEpic_UK_MorningBriefing_Component.args = {
 	slotName: 'EndOfArticle',
 	header: 'The Morning Briefing',
 	frequency: 'Every day',
@@ -306,11 +320,12 @@ BrazeUKNewsletterEpicComponent.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeUKNewsletterEpicComponent.story = { name: 'UK newsletter Epic' };
+BrazeNewsletterEpic_UK_MorningBriefing_Component.storyName =
+	'Newsletter - UK - Morning Briefing';
 
-// Braze US Newsletter Epic
+// Braze Newsletter Epic - US - FirstThing
 // ---------------------------------------
-export const BrazeUSNewsletterEpicComponent = (
+export const BrazeEpicNewsletter_US_FirstThing_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -359,7 +374,7 @@ export const BrazeUSNewsletterEpicComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeUSNewsletterEpicComponent.args = {
+BrazeEpicNewsletter_US_FirstThing_Component.args = {
 	slotName: 'EndOfArticle',
 	header: 'First Thing',
 	frequency: 'Daily',
@@ -371,11 +386,12 @@ BrazeUSNewsletterEpicComponent.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeUSNewsletterEpicComponent.story = { name: 'US newsletter Epic' };
+BrazeEpicNewsletter_US_FirstThing_Component.storyName =
+	'Newsletter - US - First Thing';
 
-// Braze Australia Newsletter Epic
+// Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
-export const BrazeAUNewsletterEpicComponent = (
+export const BrazeEpicNewsletter_AUS_MorningMail_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -424,7 +440,7 @@ export const BrazeAUNewsletterEpicComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeAUNewsletterEpicComponent.args = {
+BrazeEpicNewsletter_AUS_MorningMail_Component.args = {
 	slotName: 'EndOfArticle',
 	header: `Guardian Australia's Morning Mail`,
 	frequency: 'Every weekday',
@@ -436,11 +452,12 @@ BrazeAUNewsletterEpicComponent.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeAUNewsletterEpicComponent.story = { name: 'Australia newsletter Epic' };
+BrazeEpicNewsletter_AUS_MorningMail_Component.storyName =
+	'Newsletter - AUS - Morning Mail';
 
-// Braze DownToEarth Newsletter Epic
+// Braze Newsletter Epic - AUS - MorningMail
 // ---------------------------------------
-export const BrazeDownToEarthNewsletterEpicComponent = (
+export const BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
@@ -489,7 +506,73 @@ export const BrazeDownToEarthNewsletterEpicComponent = (
 	return <div>Loading...</div>;
 };
 
-BrazeDownToEarthNewsletterEpicComponent.args = {
+BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.args = {
+	slotName: 'EndOfArticle',
+	header: `Sign up for Guardian Australia's Afternoon Update`,
+	frequency: 'Every weekday',
+	paragraph1:
+		'Our Australian afternoon update breaks down the key stories of the day, telling you what’s happening and why it matters.',
+	paragraph2:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	componentName: 'EpicNewsletter_AU_AfternoonUpdate',
+	ophanComponentId: 'example_ophan_component_id',
+};
+
+BrazeEpicNewsletter_AUS_AfteernoonUpdate_Component.storyName =
+	'Newsletter - AUS - Morning Mail';
+
+// Braze Newsletter Epic - DownToEarth
+// ---------------------------------------
+export const BrazeEpicNewsletter_DownToEarth_Component = (
+	args: BrazeMessageProps & { componentName: string },
+): ReactElement => {
+	const [BrazeMessage, setBrazeMessage] =
+		useState<typeof BrazeEndOfArticleComponent>();
+
+	useEffect(() => {
+		import('@guardian/braze-components')
+			.then((module) => {
+				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
+			})
+			.catch((e) =>
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
+			);
+	}, []);
+
+	if (BrazeMessage) {
+		const brazeMessageProps: BrazeMessageProps = {
+			header: args.header,
+			frequency: args.frequency,
+			paragraph1: args.paragraph1,
+			paragraph2: args.paragraph2,
+			ophanComponentId: args.ophanComponentId,
+		};
+
+		return (
+			<BrazeMessage
+				componentName={args.componentName}
+				subscribeToNewsletter={() => Promise.resolve()}
+				logButtonClickWithBraze={(internalButtonId) => {
+					console.log(
+						`Button with internal ID ${internalButtonId} clicked`,
+					);
+				}}
+				submitComponentEvent={(componentEvent) => {
+					console.log(
+						'submitComponentEvent called with: ',
+						componentEvent,
+					);
+				}}
+				brazeMessageProps={brazeMessageProps}
+			/>
+		);
+	}
+	return <div>Loading...</div>;
+};
+
+BrazeEpicNewsletter_DownToEarth_Component.args = {
 	slotName: 'EndOfArticle',
 	header: 'Down To Earth',
 	frequency: 'Weekly',
@@ -501,6 +584,70 @@ BrazeDownToEarthNewsletterEpicComponent.args = {
 	ophanComponentId: 'example_ophan_component_id',
 };
 
-BrazeDownToEarthNewsletterEpicComponent.story = {
-	name: 'Down To Earth newsletter Epic',
+BrazeEpicNewsletter_DownToEarth_Component.storyName =
+	'Newsletter - Down To Earth';
+
+// Braze Newsletter Epic - The Guide
+// ---------------------------------------
+export const BrazeEpicNewsletter_TheGuide_Component = (
+	args: BrazeMessageProps & { componentName: string },
+): ReactElement => {
+	const [BrazeMessage, setBrazeMessage] =
+		useState<typeof BrazeEndOfArticleComponent>();
+
+	useEffect(() => {
+		import('@guardian/braze-components')
+			.then((module) => {
+				setBrazeMessage(() => module.BrazeEndOfArticleComponent);
+			})
+			.catch((e) =>
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
+			);
+	}, []);
+
+	if (BrazeMessage) {
+		const brazeMessageProps: BrazeMessageProps = {
+			header: args.header,
+			frequency: args.frequency,
+			paragraph1: args.paragraph1,
+			paragraph2: args.paragraph2,
+			ophanComponentId: args.ophanComponentId,
+		};
+
+		return (
+			<BrazeMessage
+				componentName={args.componentName}
+				subscribeToNewsletter={() => Promise.resolve()}
+				logButtonClickWithBraze={(internalButtonId) => {
+					console.log(
+						`Button with internal ID ${internalButtonId} clicked`,
+					);
+				}}
+				submitComponentEvent={(componentEvent) => {
+					console.log(
+						'submitComponentEvent called with: ',
+						componentEvent,
+					);
+				}}
+				brazeMessageProps={brazeMessageProps}
+			/>
+		);
+	}
+	return <div>Loading...</div>;
 };
+
+BrazeEpicNewsletter_TheGuide_Component.args = {
+	slotName: 'EndOfArticle',
+	header: `Sign up for The Guide`,
+	frequency: 'Weekly',
+	paragraph1:
+		'Get our weekly pop culture email, free in your inbox every Friday.',
+	paragraph2:
+		'We thought you should know this newsletter may contain information about Guardian products and services.',
+	componentName: 'EpicNewsletter_TheGuide',
+	ophanComponentId: 'example_ophan_component_id',
+};
+
+BrazeEpicNewsletter_TheGuide_Component.storyName = 'Newsletter - The Guide';

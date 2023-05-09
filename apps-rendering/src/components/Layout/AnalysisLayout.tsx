@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -21,6 +20,7 @@ import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -73,7 +73,7 @@ const AnalysisLayout: FC<Props> = ({ item }) => {
 							<Byline {...item} />
 							<Standfirst item={item} />
 							<StraightLines
-								cssOverrides={lineStyles}
+								cssOverrides={lineStyles(format)}
 								count={4}
 							/>
 							<Metadata item={item} />

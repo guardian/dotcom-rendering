@@ -539,6 +539,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 		switch (format.theme) {
 			case ArticlePillar.Opinion:
 				return opinion[200];
+			case ArticlePillar.Culture:
 			case ArticlePillar.News:
 				return news[300];
 			default:
@@ -641,8 +642,6 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
-		case ArticleDesign.Interview:
-			return pillarPalette[format.theme].dark;
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -689,6 +688,10 @@ const textCardKicker = (format: ArticleFormat): string => {
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
 					return BLACK;
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
 				default:
 					return neutral[100];
 			}
@@ -697,7 +700,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
-					return news[600];
+					return news[550];
 				case ArticlePillar.Sport:
 					return sport[600];
 				case ArticlePillar.Opinion:
@@ -931,7 +934,10 @@ const backgroundBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundBulletStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.DeadBlog ||
+		format.design === ArticleDesign.Analysis
+	) {
 		return neutral[60];
 	}
 
@@ -1524,11 +1530,10 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const textRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[300];
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return format.design === ArticleDesign.Analysis
-				? news[300]
-				: news[400];
+			return news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1661,6 +1666,7 @@ const borderPagination = () => {
 };
 
 const fillRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return news[400];
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -1693,6 +1699,9 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundAnalysisContrastColour = (): string => '#F2E8E6';
+const backgroundAnalysisContrastHoverColour = (): string => '#e9d9d5';
+
 const backgroundPullQuote = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[800];
@@ -1703,10 +1712,31 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 		case ArticleDesign.Comment:
 			return '#fbe6d5';
 		case ArticleDesign.Analysis:
-			return neutral[100];
+			return backgroundAnalysisContrastColour();
 
 		default:
 			return neutral[97];
+	}
+};
+
+const backgroundMessageForm = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[100];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[100];
+		case ArticlePillar.Culture:
+			return culture[100];
+		case ArticlePillar.Opinion:
+			return opinion[100];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[100];
+		default:
+			return news[100];
 	}
 };
 
@@ -2092,6 +2122,8 @@ export const decidePalette = (
 		},
 		background: {
 			article: backgroundArticle(format),
+			analysisContrast: backgroundAnalysisContrastColour(),
+			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
@@ -2123,6 +2155,7 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
+			messageForm: backgroundMessageForm(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

@@ -1,6 +1,6 @@
-import { minify } from 'html-minifier';
+import { minify } from 'html-minifier-terser';
 import { sanitiseHTML } from '../../model/sanitise';
-import { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 
 // We don't represent lists in InCopy, so things will just come across with bullet characters.
 // These may also be used for emphasis, so bullet characters don't mean list.
@@ -21,14 +21,18 @@ const clean = (html: string) => {
 	});
 };
 
-export const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	return elements.map((element) => {
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
-		) {
-			element.html = element.html ? clean(element.html) : element.html;
-		}
-		return element;
-	});
+export const enhance = async (elements: FEElement[]): Promise<FEElement[]> => {
+	return Promise.all(
+		elements.map(async (element) => {
+			if (
+				element._type ===
+				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
+			) {
+				element.html = element.html
+					? await clean(element.html)
+					: element.html;
+			}
+			return element;
+		}),
+	);
 };

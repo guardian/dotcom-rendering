@@ -7,7 +7,7 @@ import type { EditionId } from '../../web/lib/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
 import { Elements } from './Elements';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 
 const adStyle = css`
 	background: ${neutral[93]};
@@ -70,6 +70,7 @@ type Props = {
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
+	pageId: string;
 };
 
 // TODO ad handling (currently done in elements, which is wrong, so let's lift
@@ -85,6 +86,7 @@ export const Blocks = ({
 	url,
 	shouldHideAds,
 	adTargeting,
+	pageId,
 }: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {
@@ -127,14 +129,18 @@ export const Blocks = ({
 		contentType,
 		commercialProperties,
 		switches: {
-			ampPrebid: !!switches.ampPrebid,
+			ampPrebidPubmatic: !!switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!switches.ampPrebidCriteo,
+			ampPrebidOzone: !!switches.ampPrebidOzone,
 			permutive: !!switches.permutive,
 			ampAmazon: !!switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid: adInfo.switches.ampPrebidOzone,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
@@ -142,15 +148,13 @@ export const Blocks = ({
 		<>
 			{liveBlogBlocks.map((item, i) => {
 				if (slotIndexes.includes(i)) {
+					const adSlotId = `ad-${i + 1}` as const;
 					return (
 						<>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
-								<RegionalAd
+							<div id={adSlotId} data-sort-time="1" css={adStyle}>
+								<InlineAd
+									id={adSlotId}
 									editionId={editionId}
 									section={section ?? ''}
 									contentType={contentType}

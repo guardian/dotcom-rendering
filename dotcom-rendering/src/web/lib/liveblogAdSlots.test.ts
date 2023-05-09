@@ -1,11 +1,11 @@
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
 } from './liveblogAdSlots';
 
 describe('calculateApproximateBlockHeight', () => {
-	const textElementOneLine: CAPIElement[] = [
+	const textElementOneLine: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -13,7 +13,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const textElementTwoLines: CAPIElement[] = [
+	const textElementTwoLines: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -21,7 +21,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const multipleTextElements: CAPIElement[] = [
+	const multipleTextElements: FEElement[] = [
 		{
 			elementId: '1',
 			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
@@ -34,7 +34,7 @@ describe('calculateApproximateBlockHeight', () => {
 		},
 	];
 
-	const youtubeElement: CAPIElement[] = [
+	const youtubeElement: FEElement[] = [
 		{
 			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 			id: '1',
@@ -120,8 +120,8 @@ describe('shouldDisplayAd', () => {
 	});
 
 	describe('inserting the first ad slot', () => {
-		it('should display ad if no ad slots have been inserted and the number of pixels without an ad is more than 500', () => {
-			const block = 5;
+		it('should display ad if this is the first block', () => {
+			const block = 1;
 			const totalBlocks = 10;
 			const numAdsInserted = 0;
 			const numPixelsWithoutAdvert = 550;
@@ -135,30 +135,14 @@ describe('shouldDisplayAd', () => {
 
 			expect(result).toBeTruthy();
 		});
-
-		it('should NOT display ad if number of pixels without an ad is less than 500', () => {
-			const block = 5;
-			const totalBlocks = 10;
-			const numAdsInserted = 0;
-			const numPixelsWithoutAdvert = 450;
-
-			const result = shouldDisplayAd(
-				block,
-				totalBlocks,
-				numAdsInserted,
-				numPixelsWithoutAdvert,
-			);
-
-			expect(result).toBeFalsy();
-		});
 	});
 
 	describe('inserting further ad slots', () => {
-		it('should display ad if number of pixels without an ad is more than 1800', () => {
+		it('should display ad if number of pixels without an ad is more than 1500', () => {
 			const block = 5;
 			const totalBlocks = 10;
 			const numAdsInserted = 1;
-			const numPixelsWithoutAdvert = 1850;
+			const numPixelsWithoutAdvert = 1550;
 
 			const result = shouldDisplayAd(
 				block,
@@ -170,11 +154,11 @@ describe('shouldDisplayAd', () => {
 			expect(result).toBeTruthy();
 		});
 
-		it('should NOT display ad if number of pixels without an ad is less than 1800', () => {
+		it('should NOT display ad if number of pixels without an ad is less than 1500', () => {
 			const block = 5;
 			const totalBlocks = 10;
 			const numAdsInserted = 1;
-			const numPixelsWithoutAdvert = 1750;
+			const numPixelsWithoutAdvert = 1450;
 
 			const result = shouldDisplayAd(
 				block,

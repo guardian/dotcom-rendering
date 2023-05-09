@@ -126,7 +126,7 @@ export const MediaMeta = ({
 				hasKicker={hasKicker}
 			/>
 			&nbsp;
-			{!!mediaDuration && (
+			{mediaDuration !== undefined && mediaDuration > 0 && (
 				<MediaDuration
 					mediaDuration={mediaDuration}
 					palette={palette}

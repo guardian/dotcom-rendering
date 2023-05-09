@@ -18,7 +18,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
-const CAPIArticle = {
+const FEArticle = {
 	tags: [],
 	guardianBaseURL: 'https://theguardian.com',
 	inLeftCol: true,
@@ -26,8 +26,8 @@ const CAPIArticle = {
 	sectionLabel: 'Section label',
 	sectionUrl: '/section_url',
 };
-const brexitCAPI = {
-	...CAPIArticle,
+const FEBrexit = {
+	...FEArticle,
 	...{
 		sectionLabel: 'Brexit',
 		sectionUrl: '/brexit',
@@ -39,8 +39,8 @@ const brexitCAPI = {
 	},
 };
 
-const beyondTheBladeCAPI = {
-	...CAPIArticle,
+const FEBeyondTheBlade = {
+	...FEArticle,
 	...{
 		sectionLabel: 'Beyond the blade',
 		sectionUrl: '/beyond-the-blade',
@@ -61,7 +61,7 @@ export const defaultStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...brexitCAPI}
+				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -71,13 +71,13 @@ export const defaultStory = () => {
 		</Wrapper>
 	);
 };
-defaultStory.story = { name: 'Brexit badge' };
+defaultStory.storyName = 'Brexit badge';
 
 export const beyondTheBlade = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...beyondTheBladeCAPI}
+				{...FEBeyondTheBlade}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -87,7 +87,7 @@ export const beyondTheBlade = () => {
 		</Wrapper>
 	);
 };
-beyondTheBlade.story = { name: 'Beyond the blade badge' };
+beyondTheBlade.storyName = 'Beyond the blade badge';
 
 export const immersiveComment = () => {
 	return (
@@ -98,7 +98,7 @@ export const immersiveComment = () => {
 			`}
 		>
 			<ArticleTitle
-				{...brexitCAPI}
+				{...FEBrexit}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -108,7 +108,7 @@ export const immersiveComment = () => {
 		</div>
 	);
 };
-immersiveComment.story = { name: 'Immersive comment piece' };
+immersiveComment.storyName = 'Immersive comment piece';
 
 export const immersiveCommentTag = () => {
 	return (
@@ -119,7 +119,7 @@ export const immersiveCommentTag = () => {
 			`}
 		>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -136,13 +136,13 @@ export const immersiveCommentTag = () => {
 		</div>
 	);
 };
-immersiveCommentTag.story = { name: 'Immersive comment piece with Blog tag' };
+immersiveCommentTag.storyName = 'Immersive comment piece with Blog tag';
 
 export const ImmersiveSeriesTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -159,13 +159,13 @@ export const ImmersiveSeriesTag = () => {
 		</Wrapper>
 	);
 };
-ImmersiveSeriesTag.story = { name: 'Immersive with a Series tag' };
+ImmersiveSeriesTag.storyName = 'Immersive with a Series tag';
 
 export const ArticleBlogTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -182,7 +182,7 @@ export const ArticleBlogTag = () => {
 		</Wrapper>
 	);
 };
-ArticleBlogTag.story = { name: 'Article with a Blog tag' };
+ArticleBlogTag.storyName = 'Article with a Blog tag';
 
 export const LiveblogTitle = () => {
 	return (
@@ -194,7 +194,7 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					{...CAPIArticle}
+					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
 						theme: ArticlePillar.Sport,
@@ -216,7 +216,7 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					{...CAPIArticle}
+					{...FEArticle}
 					format={{
 						display: ArticleDisplay.Standard,
 						theme: ArticlePillar.Sport,
@@ -235,13 +235,13 @@ export const LiveblogTitle = () => {
 		</Wrapper>
 	);
 };
-LiveblogTitle.story = { name: 'Liveblog title' };
+LiveblogTitle.storyName = 'Liveblog title';
 
 export const ArticleOpinionTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -258,13 +258,13 @@ export const ArticleOpinionTag = () => {
 		</Wrapper>
 	);
 };
-ArticleOpinionTag.story = { name: 'Article with a Opinion tag' };
+ArticleOpinionTag.storyName = 'Article with a Opinion tag';
 
 export const ArticleSeriesTag = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -281,13 +281,13 @@ export const ArticleSeriesTag = () => {
 		</Wrapper>
 	);
 };
-ArticleSeriesTag.story = { name: 'Article with a Series tag' };
+ArticleSeriesTag.storyName = 'Article with a Series tag';
 
 export const SpecialReportTitle = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.SpecialReport,
@@ -304,13 +304,13 @@ export const SpecialReportTitle = () => {
 		</Wrapper>
 	);
 };
-SpecialReportTitle.story = { name: 'Special report' };
+SpecialReportTitle.storyName = 'Special report';
 
 export const SpecialReportAlt = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.SpecialReportAlt,
@@ -327,13 +327,13 @@ export const SpecialReportAlt = () => {
 		</Wrapper>
 	);
 };
-SpecialReportAlt.story = { name: 'Special report Alt' };
+SpecialReportAlt.storyName = 'Special report Alt';
 
 export const ArticleNoTags = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Culture,
@@ -343,13 +343,13 @@ export const ArticleNoTags = () => {
 		</Wrapper>
 	);
 };
-ArticleNoTags.story = { name: 'Article with no tags' };
+ArticleNoTags.storyName = 'Article with no tags';
 
 export const LabsStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.Labs,
@@ -366,13 +366,13 @@ export const LabsStory = () => {
 		</Wrapper>
 	);
 };
-LabsStory.story = { name: 'Labs' };
+LabsStory.storyName = 'Labs';
 
 export const LongStory = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -389,13 +389,13 @@ export const LongStory = () => {
 		</Wrapper>
 	);
 };
-LongStory.story = { name: 'Long title' };
+LongStory.storyName = 'Long title';
 
 export const LongWord = () => {
 	return (
 		<Wrapper>
 			<ArticleTitle
-				{...CAPIArticle}
+				{...FEArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -412,7 +412,7 @@ export const LongWord = () => {
 		</Wrapper>
 	);
 };
-LongWord.story = { name: 'Long word' };
+LongWord.storyName = 'Long word';
 
 export const ArticleDeadBlogTitle = () => {
 	return (
@@ -424,7 +424,7 @@ export const ArticleDeadBlogTitle = () => {
 				<div key={JSON.stringify(format)}>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
-						{...CAPIArticle}
+						{...FEArticle}
 						format={format}
 						tags={[
 							{
@@ -442,4 +442,4 @@ export const ArticleDeadBlogTitle = () => {
 	);
 };
 
-ArticleDeadBlogTitle.story = { name: 'Deadblog - All pillars' };
+ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';

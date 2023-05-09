@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails-nav';
+import { FrontSection } from './FrontSection';
 import { NavList } from './NavList';
-import { Section } from './Section';
 
 export default {
 	component: NavList,
@@ -18,15 +18,15 @@ export default {
 };
 
 export const Default = () => (
-	<Section title="NavList" padContent={false} centralBorder="partial">
+	<FrontSection title="NavList">
 		<NavList trails={trails} showImage={false} />
-	</Section>
+	</FrontSection>
 );
-Default.story = { name: 'NavList' };
+Default.storyName = 'NavList';
 
 export const DefaultWithImages = () => (
-	<Section title="NavMediaList" padContent={false} centralBorder="partial">
+	<FrontSection title="Nav Media List">
 		<NavList trails={trails} showImage={true} />
-	</Section>
+	</FrontSection>
 );
-DefaultWithImages.story = { name: 'NavList with images' };
+DefaultWithImages.storyName = 'NavList with images';

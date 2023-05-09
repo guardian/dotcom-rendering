@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, space } from '@guardian/source-foundations';
+import { brandAltBackground, from, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Branding } from '../../../types/branding';
@@ -55,10 +55,9 @@ export type Props = {
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	/** Sometimes kickers and headlines are separated by a slash */
-	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
@@ -74,21 +73,36 @@ export type Props = {
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	isExternalLink: boolean;
 };
 
-const StarRatingComponent = ({ rating }: { rating: number }) => (
+const StarRatingComponent = ({
+	rating,
+	cardHasImage,
+}: {
+	rating: number;
+	cardHasImage: boolean;
+}) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
-			margin-top: ${space[1]}px;
+			margin-top: ${cardHasImage ? '2' : space[1]}px;
 			display: inline-block;
+
+			${from.tablet} {
+				margin-top: ${space[1]}px;
+			}
 		`}
 	>
 		<Hide when="above" breakpoint="desktop">
-			<StarRating rating={rating} size="small" />
+			<StarRating rating={rating} size="small" breakpoint="mobile" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<StarRating rating={rating} size="medium" />
+			<StarRating
+				rating={rating}
+				size={cardHasImage ? 'medium' : 'small'}
+				breakpoint="wide"
+			/>
 		</Hide>
 	</div>
 );
@@ -227,9 +241,9 @@ export const Card = ({
 	showClock,
 	mediaType,
 	mediaDuration,
+	showMainVideo,
 	kickerText,
 	showPulsingDot,
-	showSlash,
 	starRating,
 	minWidthInPixels,
 	dataLinkName,
@@ -243,6 +257,7 @@ export const Card = ({
 	discussionId,
 	isDynamo,
 	isCrossword,
+	isExternalLink,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -253,8 +268,7 @@ export const Card = ({
 		supportingContentAlignment,
 	);
 
-	const showQuotes =
-		!!showQuotedHeadline || format.design === ArticleDesign.Comment;
+	const showQuotes = !!showQuotedHeadline;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -347,6 +361,7 @@ export const Card = ({
 				linkTo={linkTo}
 				headlineText={headlineText}
 				dataLinkName={dataLinkName}
+				isExternalLink={isExternalLink}
 			/>
 			<CardLayout
 				imagePosition={imagePosition}
@@ -360,6 +375,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
+						showPlayIcon={showMainVideo ?? false}
 					>
 						{image.type === 'avatar' && (
 							<AvatarContainer
@@ -391,7 +407,12 @@ export const Card = ({
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<HeadlineWrapper>
+					<HeadlineWrapper
+						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={imagePosition}
+						imageUrl={imageUrl}
+						hasStarRating={starRating !== undefined}
+					>
 						<CardHeadline
 							headlineText={headlineText}
 							format={format}
@@ -408,16 +429,16 @@ export const Card = ({
 								format.design === ArticleDesign.LiveBlog ||
 								showPulsingDot
 							}
-							showSlash={
-								format.design === ArticleDesign.LiveBlog ||
-								showSlash
-							}
 							byline={byline}
 							showByline={showByline}
 							isDynamo={isDynamo}
+							isExternalLink={isExternalLink}
 						/>
 						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
+							<StarRatingComponent
+								rating={starRating}
+								cardHasImage={imageUrl !== undefined}
+							/>
 						) : null}
 						{(format.design === ArticleDesign.Gallery ||
 							format.design === ArticleDesign.Audio ||

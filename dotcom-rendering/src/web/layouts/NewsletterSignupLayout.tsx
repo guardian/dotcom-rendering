@@ -43,6 +43,7 @@ import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -51,7 +52,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -182,34 +183,32 @@ const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const getMainMediaCaptions = (
-	CAPIArticle: FEArticleType,
-): (string | undefined)[] =>
-	CAPIArticle.mainMediaElements.map((el) =>
+const getMainMediaCaptions = (article: FEArticleType): (string | undefined)[] =>
+	article.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 			? el.data.caption
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
 		config: { host },
-	} = CAPIArticle;
+	} = article;
 
 	const isInEuropeTest =
-		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPIArticle.isAdFreeUser,
-		isSensitive: CAPIArticle.config.isSensitive,
-		videoDuration: CAPIArticle.config.videoDuration,
-		edition: CAPIArticle.config.edition,
-		section: CAPIArticle.config.section,
-		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
-		adUnit: CAPIArticle.config.adUnit,
+		isAdFreeUser: article.isAdFreeUser,
+		isSensitive: article.config.isSensitive,
+		videoDuration: article.config.videoDuration,
+		edition: article.config.edition,
+		section: article.config.section,
+		sharedAdTargeting: article.config.sharedAdTargeting,
+		adUnit: article.config.adUnit,
 	});
-	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
+	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const palette = decidePalette(format);
 
@@ -219,7 +218,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showRegionalFocus = Boolean(regionalFocusText);
 
 	/**	Newsletter preview will be linked if the caption of the main media is a URL */
-	const captions = getMainMediaCaptions(CAPIArticle);
+	const captions = getMainMediaCaptions(article);
 	const newsletterPreviewUrl = captions
 		.filter(Boolean)
 		.find((caption) => !!caption && isValidUrl(caption));
@@ -228,7 +227,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -257,19 +256,17 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					element="header"
 				>
 					<Header
-						editionId={CAPIArticle.editionId}
-						idUrl={CAPIArticle.config.idUrl}
-						mmaUrl={CAPIArticle.config.mmaUrl}
-						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
-						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={
-							!!CAPIArticle.config.switches.remoteHeader
-						}
+						editionId={article.editionId}
+						idUrl={article.config.idUrl}
+						mmaUrl={article.config.mmaUrl}
+						discussionApiUrl={article.config.discussionApiUrl}
+						urls={article.nav.readerRevenueLinks.header}
+						remoteHeader={!!article.config.switches.remoteHeader}
 						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={CAPIArticle.config.idApiUrl}
+						idApiUrl={article.config.idApiUrl}
 						isInEuropeTest={isInEuropeTest}
 						headerTopBarSearchCapiSwitch={
-							!!CAPIArticle.config.switches.headerTopBarSearchCapi
+							!!article.config.switches.headerTopBarSearchCapi
 						}
 					/>
 				</Section>
@@ -286,15 +283,16 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						nav={NAV}
 						format={{
 							...format,
-							theme: getCurrentPillar(CAPIArticle),
+							theme: getCurrentPillar(article),
 						}}
 						subscribeUrl={
-							CAPIArticle.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.subscribe
 						}
-						editionId={CAPIArticle.editionId}
+						editionId={article.editionId}
 						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
+							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -332,7 +330,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 			</div>
 
-			{renderAds && !!CAPIArticle.config.switches.surveys && (
+			{renderAds && !!article.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -395,16 +393,16 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							)}
 							<ArticleHeadline
 								format={format}
-								headlineString={CAPIArticle.headline}
-								tags={CAPIArticle.tags}
-								byline={CAPIArticle.byline}
+								headlineString={article.headline}
+								tags={article.tags}
+								byline={article.byline}
 								webPublicationDateDeprecated={
-									CAPIArticle.webPublicationDateDeprecated
+									article.webPublicationDateDeprecated
 								}
 							/>
 							<Standfirst
 								format={format}
-								standfirst={CAPIArticle.standfirst}
+								standfirst={article.standfirst}
 							/>
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
@@ -413,6 +411,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										iconSide="left"
 										href={newsletterPreviewUrl}
 										target="_blank"
+										rel="noreferrer"
 										priority="tertiary"
 										size="xsmall"
 									>
@@ -426,8 +425,8 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									Tell your friends
 								</span>
 								<ShareIcons
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
 									format={format}
 									displayIcons={[
 										'facebook',
@@ -477,6 +476,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
+											rel="noreferrer"
 										>
 											Click here to see the latest version
 											of this newsletter
@@ -486,15 +486,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 								<MainMedia
 									format={format}
-									elements={CAPIArticle.mainMediaElements}
+									elements={article.mainMediaElements}
 									adTargeting={adTargeting}
 									host={host}
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									switches={CAPIArticle.config.switches}
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									isSensitive={CAPIArticle.config.isSensitive}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
 									hideCaption={true}
 								/>
 							</div>
@@ -508,12 +508,12 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Hide>
 				</Section>
 
-				{CAPIArticle.storyPackage && (
+				{article.storyPackage && (
 					<Section fullWidth={true}>
 						<Island deferUntil="visible">
 							<Carousel
-								heading={CAPIArticle.storyPackage.heading}
-								trails={CAPIArticle.storyPackage.trails.map(
+								heading={article.storyPackage.heading}
+								trails={article.storyPackage.trails.map(
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
@@ -529,24 +529,20 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					placeholderHeight={600}
 				>
 					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent ?? false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
+						ajaxUrl={article.config.ajaxUrl}
+						hasRelated={article.hasRelated}
+						hasStoryPackage={article.hasStoryPackage}
+						isAdFreeUser={article.isAdFreeUser}
+						pageId={article.pageId}
+						isPaidContent={article.config.isPaidContent ?? false}
+						showRelatedContent={article.config.showRelatedContent}
+						keywordIds={article.config.keywordIds}
+						contentType={article.contentType}
+						tags={article.tags}
 						format={format}
 						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
+						editionId={article.editionId}
+						shortUrlId={article.config.shortUrlId}
 					/>
 				</Island>
 			</main>
@@ -562,14 +558,12 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPIArticle.pageFooter}
+					pageFooter={article.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					editionId={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
+					urls={article.nav.readerRevenueLinks.header}
+					editionId={article.editionId}
+					contributionsServiceUrl={article.contributionsServiceUrl}
 				/>
 			</Section>
 

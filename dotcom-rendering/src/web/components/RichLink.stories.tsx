@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -24,6 +25,32 @@ export default {
 	title: 'Components/RichLink',
 };
 
+const mockFormatNews = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+const mockFormatCulture = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Culture,
+};
+const mockFormatSport = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Sport,
+};
+const mockFormatLifestyle = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Lifestyle,
+};
+const mockFormatOpinion = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Opinion,
+};
+
 export const Article = () => {
 	return (
 		<Section
@@ -31,15 +58,7 @@ export const Article = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"
@@ -47,16 +66,8 @@ export const Article = () => {
 					headlineText="Rich link headline"
 					contentType="article"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -72,15 +83,7 @@ export const Network = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="special-report"
@@ -88,16 +91,8 @@ export const Network = () => {
 					headlineText="Rich link headline"
 					contentType="network"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -119,15 +114,7 @@ export const SectionStory = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="live"
@@ -135,16 +122,8 @@ export const SectionStory = () => {
 					headlineText="Rich link headline"
 					contentType="section"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Sport,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Sport,
-					}}
+					linkFormat={mockFormatSport}
+					format={mockFormatSport}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -152,9 +131,7 @@ export const SectionStory = () => {
 		</Section>
 	);
 };
-SectionStory.story = {
-	name: 'Section',
-};
+SectionStory.storyName = 'Section';
 
 export const Inline = () => {
 	return (
@@ -163,15 +140,7 @@ export const Inline = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="inline"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="inline">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -179,16 +148,8 @@ export const Inline = () => {
 					headlineText="Rich link when inline"
 					contentType="section"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Lifestyle,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Lifestyle,
-					}}
+					linkFormat={mockFormatLifestyle}
+					format={mockFormatLifestyle}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -196,9 +157,7 @@ export const Inline = () => {
 		</Section>
 	);
 };
-Inline.story = {
-	name: 'Inline',
-};
+Inline.storyName = 'Inline';
 
 export const ImageContent = () => {
 	return (
@@ -207,15 +166,7 @@ export const ImageContent = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="dead"
@@ -223,16 +174,8 @@ export const ImageContent = () => {
 					headlineText="Rich link headline"
 					contentType="imageContent"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
+					linkFormat={mockFormatNews}
+					format={mockFormatNews}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -254,15 +197,7 @@ export const Interactive = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="feature"
@@ -270,16 +205,8 @@ export const Interactive = () => {
 					headlineText="Rich link headline"
 					contentType="interactive"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Lifestyle,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Lifestyle,
-					}}
+					linkFormat={mockFormatLifestyle}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -300,15 +227,7 @@ export const Gallery = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -347,15 +266,7 @@ export const Video = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -363,16 +274,8 @@ export const Video = () => {
 					headlineText="Rich link headline"
 					contentType="video"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
+					linkFormat={mockFormatNews}
+					format={mockFormatNews}
 					tags={[]}
 					sponsorName=""
 					contributorImage={someContributor}
@@ -395,15 +298,7 @@ export const Audio = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="podcast"
@@ -411,16 +306,8 @@ export const Audio = () => {
 					headlineText="Rich link headline"
 					contentType="audio"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -483,15 +370,7 @@ export const Tag = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="analysis"
@@ -499,16 +378,8 @@ export const Tag = () => {
 					headlineText="Rich link headline"
 					contentType="tag"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -524,15 +395,7 @@ export const Index = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="review"
@@ -540,16 +403,8 @@ export const Index = () => {
 					headlineText="Rich link headline"
 					contentType="index"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}}
+					linkFormat={mockFormatOpinion}
+					format={mockFormatOpinion}
 					tags={[
 						{
 							id: '',
@@ -572,15 +427,7 @@ export const Crossword = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="letters"
@@ -588,16 +435,8 @@ export const Crossword = () => {
 					headlineText="Rich link headline"
 					contentType="crossword"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}}
+					linkFormat={mockFormatOpinion}
+					format={mockFormatOpinion}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -613,15 +452,7 @@ export const Survey = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -629,16 +460,8 @@ export const Survey = () => {
 					headlineText="Rich link headline"
 					contentType="survey"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -654,15 +477,7 @@ export const Signup = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -670,16 +485,8 @@ export const Signup = () => {
 					headlineText="Rich link headline"
 					contentType="signup"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 					contributorImage={someContributor}
@@ -696,15 +503,7 @@ export const Userid = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="editorial"
@@ -712,16 +511,8 @@ export const Userid = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[]}
 					sponsorName=""
 				/>
@@ -737,15 +528,7 @@ export const PaidFor = () => {
 			centralBorder="full"
 			showSideBorders={false}
 		>
-			<Figure
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				isMainMedia={false}
-				role="richLink"
-			>
+			<Figure format={mockFormatNews} isMainMedia={false} role="richLink">
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"
@@ -753,16 +536,8 @@ export const PaidFor = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
-					linkFormat={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Culture,
-					}}
+					linkFormat={mockFormatCulture}
+					format={mockFormatCulture}
 					tags={[
 						{
 							id: 'tone/advertisement-features',
@@ -774,5 +549,55 @@ export const PaidFor = () => {
 				/>
 			</Figure>
 		</Section>
+	);
+};
+
+export const Analysis = () => {
+	return (
+		<div
+			css={css`
+				/* stylelint-disable-next-line color-no-hex */
+				background-color: #fff4f2;
+			`}
+		>
+			Analysis Articles have a different color background, so rich links
+			should too.
+			<Section
+				showTopBorder={false}
+				centralBorder="full"
+				showSideBorders={false}
+			>
+				<Figure
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Analysis,
+						theme: ArticlePillar.News,
+					}}
+					isMainMedia={false}
+					role="richLink"
+				>
+					<RichLink
+						richLinkIndex={1}
+						cardStyle="news"
+						imageData={someImageData}
+						headlineText="Rich link headline"
+						contentType="article"
+						url=""
+						linkFormat={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: ArticlePillar.Culture,
+						}}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: ArticlePillar.Culture,
+						}}
+						tags={[]}
+						sponsorName=""
+					/>
+				</Figure>
+			</Section>
+		</div>
 	);
 };

@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { headline, remSpace, textSans } from '@guardian/source-foundations';
@@ -12,6 +11,7 @@ import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import type { Outline } from 'outline';
+import { border, text } from 'palette';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -29,34 +29,47 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.paragraph(format)};
 	border-bottom: none;
 	display: block;
+	${darkModeCss`
+		color: ${text.paragraphDark(format)};
+	`}
 `;
 
 const listStyles: SerializedStyles = css`
 	> li::before {
 		content: none;
 	}
-
 	margin: 0;
 `;
 
 const defaultListItemStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.paragraph(format)};
 	box-sizing: border-box;
 	border-top: 1px solid ${border.tableOfContents(format)};
 	padding-bottom: ${remSpace[4]};
 	padding-top: ${remSpace[1]};
-	transition: 0.3s all ease;
+	display: flex;
+	position: relative;
 
-	&:hover {
-		padding-top: 1px;
-		border-top: ${remSpace[1]} solid ${border.tableOfContentsHover(format)};
-		cursor: pointer;
+	&::after {
+		content: '';
+		position: absolute;
+		background-color: ${border.tableOfContentsHover(format)};
+		width: 100%;
+		height: 0;
+		transition: height 0.2s ease;
+		top: 0;
+		left: 0;
+	}
+
+	&:hover::after {
+		height: ${remSpace[1]};
 	}
 
 	${darkModeCss`
-		border-color: ${border.tableOfContentsDark(format)};
-		&:hover {
-			border-color: ${border.tableOfContentsHoverDark(format)};
+		&::after {
+			background-color: ${border.tableOfContentsHoverDark(format)};
 		}
+		color: ${text.paragraphDark(format)};
 	`}
 `;
 
@@ -137,6 +150,22 @@ const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const indexStyle = css`
+	margin-right: 18px;
+`;
+
+const verticalLineStyle = (format: ArticleFormat): SerializedStyles => css`
+	position: absolute;
+	left: 1.125rem;
+	border-left: 1px solid ${border.tableOfContents(format)};
+	height: 1.375rem;
+	top: 0;
+	transition: 0.3s all ease;
+	${darkModeCss`
+		border-color: ${border.tableOfContentsDark(format)};
+	`}
+`;
+
 const TocTextElement: React.FC<TextElementProps> = ({
 	node,
 	key,
@@ -207,11 +236,17 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((outlineItem) => (
+				{outline.map((outlineItem, index) => (
 					<ListItem
 						className={listItemStyles(format)}
 						key={outlineItem.id}
 					>
+						{format.display === ArticleDisplay.NumberedList && (
+							<>
+								<span css={indexStyle}>{index + 1}</span>
+								<div css={verticalLineStyle(format)}></div>
+							</>
+						)}
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}

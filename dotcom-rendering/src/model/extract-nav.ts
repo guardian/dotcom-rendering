@@ -1,6 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
-import { EditionId } from '../web/lib/edition';
-
+import type { EditionId } from '../web/lib/edition';
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {
@@ -12,8 +11,6 @@ export interface LinkType extends BaseLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
-	pillar?: ArticleTheme;
-	more?: boolean;
 }
 
 export interface EditionLinkType extends LinkType {
@@ -21,12 +18,8 @@ export interface EditionLinkType extends LinkType {
 	locale: string;
 }
 
-export interface PillarType extends LinkType {
+export interface PillarLinkType extends LinkType {
 	pillar: ArticleTheme;
-}
-
-interface MoreType extends LinkType {
-	more: true;
 }
 
 export interface SubNavType {
@@ -35,7 +28,7 @@ export interface SubNavType {
 }
 
 interface BaseNavType {
-	otherLinks: MoreType;
+	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
@@ -43,22 +36,21 @@ interface BaseNavType {
 }
 
 export interface NavType extends BaseNavType {
-	pillars: PillarType[];
+	pillars: PillarLinkType[];
 }
 
-const getLink = (data: CAPILinkType): LinkType => {
+const getLink = (data: FELinkType): LinkType => {
 	const { title, longTitle = title, url } = data;
 	return {
 		title,
 		longTitle,
 		url,
-		pillar: undefined,
 		children: data.children?.map(getLink) ?? [],
 		mobileOnly: false,
 	};
 };
 
-const getPillar = (data: CAPILinkType): PillarType => ({
+const getPillar = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
 	pillar: findPillar(data.title) ?? ArticlePillar.News,
 });
@@ -79,7 +71,7 @@ const buildRRLinkCategories = (
 
 const buildRRLinkModel = ({
 	readerRevenueLinks,
-}: CAPINavType): ReaderRevenuePositions => ({
+}: FENavType): ReaderRevenuePositions => ({
 	header: buildRRLinkCategories(readerRevenueLinks, 'header'),
 	footer: buildRRLinkCategories(readerRevenueLinks, 'footer'),
 	sideMenu: buildRRLinkCategories(readerRevenueLinks, 'sideMenu'),
@@ -87,7 +79,7 @@ const buildRRLinkModel = ({
 	ampFooter: buildRRLinkCategories(readerRevenueLinks, 'ampFooter'),
 });
 
-export const extractNAV = (data: CAPINavType): NavType => {
+export const extractNAV = (data: FENavType): NavType => {
 	const pillars = data.pillars.map(getPillar);
 
 	const { subNavSections: subnav, currentNavLinkTitle: currentNavLink = '' } =
@@ -95,13 +87,7 @@ export const extractNAV = (data: CAPINavType): NavType => {
 
 	return {
 		pillars,
-		otherLinks: {
-			url: '', // unused
-			title: 'More',
-			longTitle: 'More',
-			more: true,
-			children: data.otherLinks.map(getLink),
-		},
+		otherLinks: data.otherLinks.map(getLink),
 		brandExtensions: data.brandExtensions.map(getLink),
 		currentNavLink,
 		subNavSections: subnav

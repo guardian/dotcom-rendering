@@ -1,4 +1,4 @@
-import { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
 const scriptUrls = [
 	'https://interactive.guim.co.uk/page-enhancers/nav/boot.js',
@@ -8,7 +8,7 @@ const scriptUrls = [
 	'https://uploads.guim.co.uk/2021/10/15/boot.js',
 ];
 
-export const isLegacyTableOfContents = (element: CAPIElement): boolean =>
+export const isLegacyTableOfContents = (element: FEElement): boolean =>
 	element._type ===
 		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 	!!element.scriptUrl &&

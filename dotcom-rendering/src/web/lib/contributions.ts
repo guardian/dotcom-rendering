@@ -133,7 +133,7 @@ const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = (): boolean => {
 	const lastContributionDate = getLastOneOffContributionTimestamp();
-	if (lastContributionDate) {
+	if (lastContributionDate !== undefined) {
 		const now = Date.now();
 		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
 	}
@@ -260,9 +260,8 @@ export const lazyFetchEmailWithTimeout =
 		});
 	};
 
-export const getContributionsServiceUrl = (
-	CAPIArticle: FEArticleType,
-): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
+export const getContributionsServiceUrl = (article: FEArticleType): string =>
+	process.env.SDC_URL ?? article.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = (): PurchaseInfo => {

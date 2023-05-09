@@ -60,11 +60,17 @@ const getManifest = (path: string): AssetHash => {
 };
 
 const getManifestPaths = (
-	manifests: 'control' | 'variant',
-): [ManifestPath, ManifestPath] =>
-	manifests === 'variant'
-		? ['./manifest.variant.json', './manifest.legacy.json']
-		: ['./manifest.modern.json', './manifest.legacy.json'];
+	manifests: 'control' | 'variant' | 'apps',
+): [ManifestPath, ManifestPath] | [ManifestPath] => {
+	switch (manifests) {
+		case 'apps':
+			return ['./manifest.apps.json'];
+		case 'variant':
+			return ['./manifest.variant.json', './manifest.legacy.json'];
+		case 'control':
+			return ['./manifest.modern.json', './manifest.legacy.json'];
+	}
+};
 
 type ManifestPath = `./manifest.${string}.json`;
 
@@ -76,6 +82,9 @@ const getScripts = (
 		throw new Error('Invalid filename: extension must be .js');
 
 	if (isDev) {
+		if (manifestPaths.every((path) => path.includes('.apps.'))) {
+			return [`${ASSET_ORIGIN}assets/${file.replace('.js', '.apps.js')}`];
+		}
 		return [
 			`${ASSET_ORIGIN}assets/${file.replace('.js', '.modern.js')}`,
 			`${ASSET_ORIGIN}assets/${file.replace('.js', '.legacy.js')}`,
@@ -101,12 +110,23 @@ const getScripts = (
  * an array of scripts found in the manifests.
  */
 export const getScriptsFromManifest =
-	(shouldServeVariantBundle: boolean) =>
-	(file: `${string}.js`): ReturnType<typeof getScripts> =>
-		getScripts(
-			getManifestPaths(shouldServeVariantBundle ? 'variant' : 'control'),
-			file,
-		);
+	(
+		opts:
+			| { platform: 'apps' }
+			| { platform: 'web'; shouldServeVariantBundle: boolean },
+	) =>
+	(file: `${string}.js`): ReturnType<typeof getScripts> => {
+		if (opts.platform === 'apps') {
+			return getScripts(getManifestPaths('apps'), file);
+		} else {
+			return getScripts(
+				getManifestPaths(
+					opts.shouldServeVariantBundle ? 'variant' : 'control',
+				),
+				file,
+			);
+		}
+	};
 
 /** To ensure this only applies to guardian scripts,
  * we check that it is served from a asset/ directory
@@ -114,22 +134,26 @@ export const getScriptsFromManifest =
  * with an optional hash for local development
  * and stripped query parameters.
  */
-const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant') =>
+const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant' | 'apps') =>
 	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');
 export const VARIANT_SCRIPT = getScriptRegex('variant');
+export const APPS_SCRIPT = getScriptRegex('apps');
 
-export const generateScriptTags = (scripts: Array<string | false>): string[] =>
+export const generateScriptTags = (
+	scripts: Array<string | undefined>,
+): string[] =>
 	scripts.filter(isString).map((script) => {
 		if (script.match(LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
 		}
-		if (script.match(MODERN_SCRIPT)) {
-			return `<script type="module" src="${script}"></script>`;
-		}
-		if (script.match(VARIANT_SCRIPT)) {
+		if (
+			script.match(MODERN_SCRIPT) ||
+			script.match(VARIANT_SCRIPT) ||
+			script.match(APPS_SCRIPT)
+		) {
 			return `<script type="module" src="${script}"></script>`;
 		}
 

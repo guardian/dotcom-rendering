@@ -1,7 +1,7 @@
-import { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
-const removeTweetClass = (elements: CAPIElement[]): CAPIElement[] => {
-	const enhanced: CAPIElement[] = [];
+const removeTweetClass = (elements: FEElement[]): FEElement[] => {
+	const enhanced: FEElement[] = [];
 	elements.forEach((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.TweetBlockElement':

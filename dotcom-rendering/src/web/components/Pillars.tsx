@@ -8,7 +8,7 @@ import {
 	headline,
 	until,
 } from '@guardian/source-foundations';
-import type { PillarType } from '../../model/extract-nav';
+import type { PillarLinkType } from '../../model/extract-nav';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
@@ -240,7 +240,7 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 type Props = {
 	display: ArticleDisplay;
 	isTopNav?: boolean;
-	pillars: PillarType[];
+	pillars: PillarLinkType[];
 	pillar: ArticleTheme;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;

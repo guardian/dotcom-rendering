@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type {
-	CAPIElement,
+	FEElement,
 	ImageBlockElement,
 	MultiImageBlockElement,
 	SubheadingBlockElement,
@@ -12,7 +12,7 @@ interface HalfWidthImageBlockElement extends ImageBlockElement {
 }
 
 const isHalfWidthImage = (
-	element?: CAPIElement,
+	element?: FEElement,
 ): element is HalfWidthImageBlockElement => {
 	if (!element) return false;
 	return (
@@ -23,7 +23,7 @@ const isHalfWidthImage = (
 };
 
 const isMultiImage = (
-	element?: CAPIElement,
+	element?: FEElement,
 ): element is MultiImageBlockElement => {
 	if (!element) return false;
 	return (
@@ -32,14 +32,14 @@ const isMultiImage = (
 	);
 };
 
-const isImage = (element?: CAPIElement): element is ImageBlockElement => {
+const isImage = (element?: FEElement): element is ImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 	);
 };
 
-const isTitle = (element?: CAPIElement): element is SubheadingBlockElement => {
+const isTitle = (element?: FEElement): element is SubheadingBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
 	if (
@@ -65,7 +65,7 @@ const extractTitle = (element: SubheadingBlockElement): string => {
 	return '';
 };
 
-const isCaption = (element?: CAPIElement): element is TextBlockElement => {
+const isCaption = (element?: FEElement): element is TextBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
 	if (
@@ -120,8 +120,8 @@ const constructMultiImageElement = (
 	};
 };
 
-const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
-	const withMultiImageElements: CAPIElement[] = [];
+const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
+	const withMultiImageElements: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		if (isHalfWidthImage(thisElement) && isHalfWidthImage(nextElement)) {
@@ -139,8 +139,8 @@ const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
 	return withMultiImageElements;
 };
 
-const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
-	const withTitles: CAPIElement[] = [];
+const addTitles = (elements: FEElement[]): FEElement[] => {
+	const withTitles: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -172,8 +172,8 @@ const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
 	return withTitles;
 };
 
-const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
-	const withSpecialCaptions: CAPIElement[] = [];
+const addCaptionsToImages = (elements: FEElement[]): FEElement[] => {
+	const withSpecialCaptions: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -211,8 +211,8 @@ const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
 	return withSpecialCaptions;
 };
 
-const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
-	const withSpecialCaptions: CAPIElement[] = [];
+const addCaptionsToMultis = (elements: FEElement[]): FEElement[] => {
+	const withSpecialCaptions: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -242,9 +242,9 @@ const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
 	return withSpecialCaptions;
 };
 
-const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
+const stripCaptions = (elements: FEElement[]): FEElement[] => {
 	// Remove all captions from all images
-	const withoutCaptions: CAPIElement[] = [];
+	const withoutCaptions: FEElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
@@ -266,9 +266,9 @@ const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
 	return withoutCaptions;
 };
 
-const removeCredit = (elements: CAPIElement[]): CAPIElement[] => {
+const removeCredit = (elements: FEElement[]): FEElement[] => {
 	// Remove credit from all images
-	const withoutCredit: CAPIElement[] = [];
+	const withoutCredit: FEElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
@@ -291,9 +291,9 @@ const removeCredit = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 class Enhancer {
-	elements: CAPIElement[];
+	elements: FEElement[];
 
-	constructor(elements: CAPIElement[]) {
+	constructor(elements: FEElement[]) {
 		this.elements = elements;
 	}
 
@@ -348,10 +348,7 @@ class Enhancer {
 	}
 }
 
-const enhance = (
-	elements: CAPIElement[],
-	isPhotoEssay: boolean,
-): CAPIElement[] => {
+const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
 	if (isPhotoEssay) {
 		return new Enhancer(elements)
 			.stripCaptions()
@@ -372,7 +369,7 @@ const enhance = (
 	);
 };
 
-export const enhanceImages = (blocks: Block[], format: CAPIFormat): Block[] => {
+export const enhanceImages = (blocks: Block[], format: FEFormat): Block[] => {
 	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 
 	return blocks.map((block: Block) => {

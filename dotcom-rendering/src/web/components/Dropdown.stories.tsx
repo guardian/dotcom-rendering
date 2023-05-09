@@ -93,7 +93,7 @@ export const DropdownActive = () => (
 		</Nav>
 	</Header>
 );
-DropdownActive.story = { name: 'Dropdown with first item active' };
+DropdownActive.storyName = 'Dropdown with first item active';
 
 export const DropdownNoActive = () => (
 	<Header>
@@ -107,7 +107,7 @@ export const DropdownNoActive = () => (
 		</Nav>
 	</Header>
 );
-DropdownNoActive.story = { name: 'Dropdown with nothing active' };
+DropdownNoActive.storyName = 'Dropdown with nothing active';
 
 const linksWithNotifications = [
 	{
@@ -145,4 +145,4 @@ export const DropdownWithNotifications = () => (
 	</Header>
 );
 
-DropdownWithNotifications.story = { name: 'Dropdown with notifications' };
+DropdownWithNotifications.storyName = 'Dropdown with notifications';

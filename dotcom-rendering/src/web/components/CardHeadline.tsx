@@ -3,13 +3,14 @@ import { ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import {
 	between,
+	fontWeights,
 	from,
 	headline,
 	space,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
@@ -25,7 +26,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
-	showSlash?: boolean;
+	hideLineBreak?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
 	sizeOnMobile?: SmallHeadlineSize;
@@ -34,6 +35,7 @@ type Props = {
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
+	isExternalLink?: boolean;
 };
 
 const fontStyles = ({
@@ -161,6 +163,7 @@ const sublinkStyles = css`
 	/* stylelint-disable-next-line property-disallowed-list */
 	font-family: inherit;
 	font-size: inherit;
+	font-weight: ${fontWeights.medium};
 	line-height: inherit;
 	/* This css is used to remove any underline from the kicker but still
 	 * have it applied to the headline when the kicker is hovered */
@@ -192,10 +195,9 @@ const lineStyles = (palette: Palette) => css`
 
 const dynamoStyles = css`
 	display: block;
-	font-weight: 800;
+	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
-
 const WithLink = ({
 	linkTo,
 	children,
@@ -230,7 +232,7 @@ export const CardHeadline = ({
 	showQuotes,
 	kickerText,
 	showPulsingDot,
-	showSlash,
+	hideLineBreak,
 	size = 'medium',
 	sizeOnMobile,
 	byline,
@@ -238,6 +240,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 	isDynamo,
+	isExternalLink,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -254,32 +257,28 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles({
 								size,
-								fontWeight:
-									containerPalette &&
-									containerPalette !=
-										'SpecialReportAltPalette'
-										? 'bold'
-										: 'regular',
+								fontWeight: 'medium',
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
 							size: sizeOnMobile ?? size,
-							fontWeight: containerPalette ? 'bold' : 'regular',
+							fontWeight: 'medium',
 						}),
 					showLine && !isDynamo && lineStyles(palette),
 				]}
 			>
 				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
-						<Kicker
-							text={kickerText}
-							color={kickerColour}
-							showPulsingDot={showPulsingDot}
-							showSlash={showSlash}
-						/>
+						<>
+							<Kicker
+								text={kickerText}
+								color={kickerColour}
+								showPulsingDot={showPulsingDot}
+								hideLineBreak={hideLineBreak}
+							/>
+						</>
 					)}
 					{showQuotes && <QuoteIcon colour={kickerColour} />}
-
 					<span
 						css={css`
 							color: ${isDynamo
@@ -289,6 +288,15 @@ export const CardHeadline = ({
 						className="show-underline"
 					>
 						{cleanHeadLineText}
+						{isExternalLink && (
+							<span
+								css={css`
+									stroke: red;
+								`}
+							>
+								<SvgExternal size="xsmall" />
+							</span>
+						)}
 					</span>
 				</WithLink>
 			</h3>

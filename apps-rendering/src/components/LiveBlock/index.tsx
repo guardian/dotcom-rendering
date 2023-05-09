@@ -3,7 +3,7 @@ import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { LastUpdated } from 'components/LastUpdated';
 import LiveBlockContainer from 'components/LiveBlockContainer';
-import { datetimeFormat, timestampFormat } from 'datetime';
+import { datetimeFormat } from 'datetime';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { renderElements } from 'renderer';
@@ -30,16 +30,13 @@ const LiveBlock: FC<LiveBlockProps> = ({
 			id={block.id}
 			format={format}
 			blockTitle={block.title}
-			blockFirstPublished={block.firstPublished.getTime()}
-			blockFirstPublishedDisplay={timestampFormat(edition)(
-				block.firstPublished,
-			)}
+			blockFirstPublished={block.firstPublished}
 			blockId={block.id}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
-			supportsDarkMode={true}
 			contributors={block.contributors}
 			isLiveUpdate={false}
+			edition={edition}
 		>
 			{renderElements(format, block.body)}
 

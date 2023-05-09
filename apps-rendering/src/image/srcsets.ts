@@ -25,9 +25,30 @@ interface Srcsets {
 	dpr2Srcset: string;
 }
 
+type ResizerSource = 'static' | 'uploads' | 'media';
+
 // ----- Functions ----- //
 
-const getSubdomain = (domain: string): string => domain.split('.')[0];
+/**
+ * Get the resizing source for a given CAPI asset
+ *
+ * @param url The asset URL from CAPI
+ * @returns An image resizer source
+ */
+const getSource = (url: URL): ResizerSource => {
+	const subdomain = url.hostname.split('.')[0];
+
+	switch (subdomain) {
+		case 'static':
+		case 'static-secure':
+			return 'static';
+		case 'uploads':
+			return 'uploads';
+		case 'media':
+		default:
+			return 'media';
+	}
+};
 
 const sign = (salt: string, path: string): string =>
 	createHash('md5')
@@ -38,7 +59,7 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
 	return Result.fromUnsafe(() => new URL(input), 'invalid url').either(
 		(_err) => input,
 		(url) => {
-			const service = getSubdomain(url.hostname);
+			const service = getSource(url);
 
 			const params = new URLSearchParams({
 				width: width.toString(),

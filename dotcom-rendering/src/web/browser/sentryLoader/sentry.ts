@@ -14,19 +14,25 @@ const allowUrls: BrowserOptions['allowUrls'] = [
 ];
 
 // Ignore these errors
+// https://docs.sentry.io/platforms/javascript/#decluttering-sentry
 const ignoreErrors = [
-	// https://docs.sentry.io/platforms/javascript/#decluttering-sentry
 	"Can't execute code from a freed script",
 	/InvalidStateError/gi,
+	'This video is no longer available.',
+	'UnknownError',
+	'The quota has been exceeded',
+	// Browsers throw exceptions for cancelled network requests
+	// https://stackoverflow.com/questions/55738408/javascript-typeerror-cancelled-error-when-calling-fetch-on-ios/70452078#70452078
+	// https://request-cancellation-test.vercel.app/
 	/Fetch error:/gi,
 	'Network request failed',
 	'NetworkError',
 	'Failed to fetch',
-	'This video is no longer available.',
-	'UnknownError',
 	'TypeError: Failed to fetch',
 	'TypeError: NetworkError when attempting to fetch resource',
-	'The quota has been exceeded',
+	'TypeError: Load failed',
+	'TypeError: Importing a module script failed',
+	'TypeError: error loading dynamically imported module',
 ];
 
 const { config } = window.guardian;

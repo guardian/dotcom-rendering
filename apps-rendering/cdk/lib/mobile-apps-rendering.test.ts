@@ -1,5 +1,6 @@
 import { App } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
+import { InstanceSize } from 'aws-cdk-lib/aws-ec2';
 import { MobileAppsRendering } from './mobile-apps-rendering';
 
 describe('The MobileAppsRendering stack', () => {
@@ -13,6 +14,7 @@ describe('The MobileAppsRendering stack', () => {
 				minimumInstances: 1,
 				maximumInstances: 2,
 			},
+			instanceSize: InstanceSize.SMALL,
 			appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 			hostedZoneId: 'TEST-HOSTED-ZONE-ID',
 			targetCpuUtilisation: 10,
@@ -36,6 +38,7 @@ describe('The MobileAppsRenderingPreview stack', () => {
 					minimumInstances: 1,
 					maximumInstances: 2,
 				},
+				instanceSize: InstanceSize.MICRO,
 				appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 				hostedZoneId: 'TEST-HOSTED-ZONE-ID',
 				targetCpuUtilisation: 10,

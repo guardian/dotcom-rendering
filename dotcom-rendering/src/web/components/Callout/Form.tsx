@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { brand, palette, space, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette,
+	space,
+	success,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
@@ -9,10 +15,16 @@ import { FormField } from './FormField';
 
 const textStyles = css`
 	${textSans.xsmall()};
+	padding-bottom: 16px;
+`;
+
+const successStyles = css`
+	${textSans.xsmall()};
+	padding-bottom: 44px;
 `;
 
 const tickBoxStyles = css`
-	fill: ${brand[500]};
+	fill: ${success[400]};
 	width: 48px;
 `;
 const errorTextStyles = css`
@@ -27,10 +39,10 @@ const formStyles = css`
 	justify-content: space-between;
 `;
 
-const formFieldWrapperStyles = css`
+const formFieldWrapperStyles = (hidden: boolean) => css`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: ${space[4]}px;
+	margin-bottom: ${hidden ? 0 : space[4]}px;
 `;
 const submitButtonStyles = css`
 	margin: 20px 0px;
@@ -51,9 +63,15 @@ type FormProps = {
 	formFields: CampaignFieldType[];
 	submissionURL: string;
 	formID: string;
+	pageId: string;
 };
 
-export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
+export const Form = ({
+	formFields,
+	submissionURL,
+	formID,
+	pageId,
+}: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -98,7 +116,10 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 					isValid = false;
 				}
 			}
-			if (['number', 'phone'].includes(field.id) && formData[field.id]) {
+			if (
+				['number', 'phone'].includes(field.type) &&
+				formData[field.id]
+			) {
 				const numberRegex = /^[\d ()+-]+$/;
 				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
@@ -116,6 +137,14 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 		return Object.keys(errors).length === 0;
 	};
 
+	const cleanFormData = (data: undefined | string | string[]) => {
+		if (Array.isArray(data)) {
+			return data.join('\n');
+		}
+
+		return data;
+	};
+
 	const submitForm = async (form: FormDataType) => {
 		setNetworkError('');
 
@@ -127,7 +156,7 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
 				...acc,
-				[`field_${cur}`]: form[cur],
+				[`field_${cur}`]: cleanFormData(form[cur]),
 			}),
 			{},
 		);
@@ -170,12 +199,12 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 				</div>
 				<div
 					css={css`
-						${textSans.xsmall({ fontWeight: 'bold' })};
+						${headline.xxsmall({ fontWeight: 'bold' })}
 					`}
 				>
 					Thank you!
 				</div>
-				<div css={textStyles}>
+				<div css={successStyles}>
 					Your story has been submitted successfully. One of our
 					journalists will be in touch if we wish to take your
 					submission further.
@@ -213,22 +242,30 @@ export const Form = ({ formFields, submissionURL, formID }: FormProps) => {
 						context="Please complete all required fields."
 						cssOverrides={css`
 							width: fit-content;
+							width: 100%;
+							margin-bottom: ${space[4]}px;
 						`}
 					/>
 				)}
-				{formFields.map((formField) => (
-					<div css={formFieldWrapperStyles} key={formField.id}>
-						<FormField
-							formField={formField}
-							formData={formData}
-							setFieldInFormData={setFieldInFormData}
-							validationErrors={validationErrors}
-						/>
-					</div>
-				))}
+				{formFields.map((formField) => {
+					return (
+						<div
+							css={formFieldWrapperStyles(!!formField.hidden)}
+							key={formField.id}
+						>
+							<FormField
+								formField={formField}
+								formData={formData}
+								setFieldInFormData={setFieldInFormData}
+								validationErrors={validationErrors}
+								pageId={pageId}
+							/>
+						</div>
+					);
+				})}
 				<div css={textStyles}>
-					One of our journalists will be in contact before we publish
-					your information, so please do leave contact details.
+					By submitting your response, you are agreeing to share your
+					details with us for this feature.
 				</div>
 				{/* this element is a H O N £ Y - P 0 T */}
 				<div

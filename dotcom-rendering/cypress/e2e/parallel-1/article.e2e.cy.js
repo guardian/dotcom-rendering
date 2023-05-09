@@ -18,7 +18,7 @@ describe('E2E Page rendering', function () {
 					'ab-CuratedContainerTest2': 'control',
 				},
 			);
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			const roughLoadPositionOfMostView = 1400;
 			cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
 			cy.contains('Lifestyle');
@@ -85,7 +85,7 @@ describe('E2E Page rendering', function () {
 			});
 
 			cy.visit(
-				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
@@ -111,7 +111,7 @@ describe('E2E Page rendering', function () {
 			});
 
 			cy.visit(
-				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
@@ -136,7 +136,7 @@ describe('E2E Page rendering', function () {
 				// Prevent the Privacy consent banner from obscuring snapshots
 				cy.setCookie('GU_TK', 'true');
 
-				cy.visit(`/AMPArticle?url=${url}`);
+				cy.visit(`/AMPArticle/${url}`);
 				cy.contains('Opinion');
 			});
 		});

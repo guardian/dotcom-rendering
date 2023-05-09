@@ -5,7 +5,7 @@
             "$ref": "#/definitions/FEPressedPageType"
         },
         "nav": {
-            "$ref": "#/definitions/CAPINavType"
+            "$ref": "#/definitions/FENavType"
         },
         "editionId": {
             "$ref": "#/definitions/EditionId"
@@ -379,14 +379,14 @@
         "mostViewed": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPITrailType"
+                "$ref": "#/definitions/FETrailType"
             }
         },
         "mostCommented": {
-            "$ref": "#/definitions/CAPITrailType"
+            "$ref": "#/definitions/FETrailType"
         },
         "mostShared": {
-            "$ref": "#/definitions/CAPITrailType"
+            "$ref": "#/definitions/FETrailType"
         }
     },
     "required": [
@@ -449,6 +449,9 @@
                         },
                         "isPaidContent": {
                             "type": "boolean"
+                        },
+                        "onPageDescription": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -610,13 +613,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1019,13 +1022,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -1104,13 +1107,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -1290,13 +1293,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1699,13 +1702,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -1784,13 +1787,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -1970,13 +1973,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -2379,13 +2382,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -2464,13 +2467,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -2654,7 +2657,7 @@
         "Record<string,unknown>": {
             "type": "object"
         },
-        "CAPIDesign": {
+        "FEDesign": {
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
@@ -2675,14 +2678,16 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
         },
-        "CAPITheme": {
+        "FETheme": {
             "enum": [
                 "CulturePillar",
                 "Labs",
@@ -2695,7 +2700,7 @@
             ],
             "type": "string"
         },
-        "CAPIDisplay": {
+        "FEDisplay": {
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -2770,7 +2775,7 @@
             ],
             "type": "string"
         },
-        "CAPINavType": {
+        "FENavType": {
             "type": "object",
             "properties": {
                 "currentUrl": {
@@ -2779,23 +2784,23 @@
                 "pillars": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "otherLinks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "brandExtensions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "currentNavLink": {
-                    "$ref": "#/definitions/CAPILinkType"
+                    "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
                     "type": "string"
@@ -2807,12 +2812,12 @@
                     "type": "object",
                     "properties": {
                         "parent": {
-                            "$ref": "#/definitions/CAPILinkType"
+                            "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CAPILinkType"
+                                "$ref": "#/definitions/FELinkType"
                             }
                         }
                     },
@@ -2832,7 +2837,7 @@
                 "readerRevenueLinks"
             ]
         },
-        "CAPILinkType": {
+        "FELinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -2850,7 +2855,7 @@
                 "children": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "pillar": {
@@ -2988,20 +2993,20 @@
                 "url"
             ]
         },
-        "CAPITrailType": {
+        "FETrailType": {
             "type": "object",
             "properties": {
                 "format": {
                     "type": "object",
                     "properties": {
                         "design": {
-                            "$ref": "#/definitions/CAPIDesign"
+                            "$ref": "#/definitions/FEDesign"
                         },
                         "theme": {
-                            "$ref": "#/definitions/CAPITheme"
+                            "$ref": "#/definitions/FETheme"
                         },
                         "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
+                            "$ref": "#/definitions/FEDisplay"
                         }
                     },
                     "required": [
@@ -3090,10 +3095,34 @@
                         },
                         "embedCss": {
                             "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
                         }
                     }
                 },
                 "showQuotedHeadline": {
+                    "type": "boolean"
+                },
+                "discussion": {
+                    "type": "object",
+                    "properties": {
+                        "isCommentable": {
+                            "type": "boolean"
+                        },
+                        "isClosedForComments": {
+                            "type": "boolean"
+                        },
+                        "discussionId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "isClosedForComments",
+                        "isCommentable"
+                    ]
+                },
+                "showMainVideo": {
                     "type": "boolean"
                 }
             },

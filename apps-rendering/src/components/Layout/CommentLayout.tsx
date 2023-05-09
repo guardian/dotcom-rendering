@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
 	neutral,
-	opinion,
-	palette,
 	remSpace,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -26,6 +26,7 @@ import Tags from 'components/Tags';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -36,18 +37,15 @@ import {
 
 // ----- Styles ----- //
 
-const Styles = css`
-	background: ${neutral[97]};
-`;
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	background: ${background.articleContent(format)};
 
-const DarkStyles = darkModeCss`
-    background: ${palette.neutral[10]};
+	${darkModeCss`
+		background: ${background.articleContentDark(format)};
+	`}
 `;
 
 const BorderStyles = css`
-	background: ${opinion[800]};
-	${darkModeCss`background: ${palette.neutral[10]};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -78,7 +76,7 @@ interface Props {
 const CommentLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	return (
-		<main css={[Styles, DarkStyles]}>
+		<main css={styles(format)}>
 			<article css={BorderStyles}>
 				<header>
 					<WithAgeWarning
@@ -99,7 +97,10 @@ const CommentLayout: FC<Props> = ({ item }) => {
 						format={item}
 					/>
 					<StraightLines
-						cssOverrides={[commentLineStylePosition, lineStyles]}
+						cssOverrides={[
+							commentLineStylePosition,
+							lineStyles(format),
+						]}
 						count={8}
 					/>
 					<div css={articleWidthStyles}>

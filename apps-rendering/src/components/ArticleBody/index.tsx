@@ -1,8 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { background, neutral, remSpace } from '@guardian/source-foundations';
+import { neutral, remSpace } from '@guardian/source-foundations';
 import type { BodyElement } from 'bodyElement';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -14,7 +15,8 @@ interface ArticleBodyProps {
 	body: BodyElement[];
 }
 
-const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	background: ${background.articleContent(format)};
 	position: relative;
 	clear: both;
 
@@ -29,18 +31,15 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 		clear: both;
 		display: inline-block;
 	}
-`;
-const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
-    background: ${background.inverse};
-    color: ${neutral[86]};
 
-    figcaption {
-        color: ${neutral[60]};
-    }
+	${darkModeCss`
+		background: ${background.articleContentDark(format)};
+		color: ${neutral[86]};
 
-    p:last-child {
-        margin-bottom: 0;
-    }
+		p:last-child {
+			margin-bottom: 0;
+		}
+	`}
 `;
 
 const ArticleBody: FC<ArticleBodyProps> = ({
@@ -51,13 +50,7 @@ const ArticleBody: FC<ArticleBodyProps> = ({
 }) => {
 	const classNames = className ? className : [];
 	return (
-		<div
-			css={[
-				ArticleBodyStyles(format),
-				ArticleBodyDarkStyles,
-				...classNames,
-			]}
-		>
+		<div css={[styles(format), ...classNames]}>
 			{render(shouldHideAdverts, format, body)}
 		</div>
 	);

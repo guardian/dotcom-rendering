@@ -18,7 +18,9 @@ export default (): void => {
 	});
 
 	window.addEventListener('message', (event) => {
-		if (!allowedOrigins.includes(event.origin)) return;
+		if (!allowedOrigins.includes(event.origin)) {
+			return;
+		}
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
@@ -33,8 +35,9 @@ export default (): void => {
 		if (iframes.length !== 0) {
 			try {
 				const message: unknown = JSON.parse(event.data);
-				if (!isObject(message) || typeof message.type !== 'string')
+				if (!isObject(message) || typeof message.type !== 'string') {
 					return;
+				}
 
 				switch (message.type) {
 					case 'set-height': {

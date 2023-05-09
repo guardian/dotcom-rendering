@@ -37,7 +37,7 @@ export const Logos = () => (
 		))}
 	</ul>
 );
-Logos.story = { name: 'Logos for all editions' };
+Logos.storyName = 'Logos for all editions';
 
 export default {
 	component: Logos,

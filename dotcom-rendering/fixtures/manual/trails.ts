@@ -1,24 +1,24 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { TrailType } from '../../src/types/trails';
+import type { DCRFrontCard } from '../../src/types/front';
 
 export const trails: [
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
-	TrailType,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
 ] = [
 	{
 		url: 'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',
@@ -68,6 +68,8 @@ export const trails: [
 				kickerText: 'Kicker',
 			},
 		],
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -85,6 +87,8 @@ export const trails: [
 		mediaDuration: 378,
 		dataLinkName: 'news | group-0 | card-@2',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -101,6 +105,8 @@ export const trails: [
 		kickerText: 'Live',
 		dataLinkName: 'news | group-0 | card-@3',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
@@ -115,7 +121,9 @@ export const trails: [
 			display: ArticleDisplay.Standard,
 		},
 		dataLinkName: 'news | group-0 | card-@4',
-		showQuotedHeadline: false,
+		showQuotedHeadline: true,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
@@ -131,6 +139,8 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@5',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
@@ -147,6 +157,8 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@6',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
@@ -164,6 +176,8 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@7',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
@@ -180,6 +194,8 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@8',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 
 	{
@@ -198,6 +214,8 @@ export const trails: [
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		dataLinkName: 'news | group-0 | card-@9',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -215,6 +233,8 @@ export const trails: [
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		dataLinkName: 'news | group-0 | card-@10',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -232,6 +252,8 @@ export const trails: [
 			'Scottish government inadequately prepared for Covid, says watchdog',
 		dataLinkName: 'news | group-0 | card-@11',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -249,6 +271,8 @@ export const trails: [
 			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
 		dataLinkName: 'news | group-0 | card-@12',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -266,6 +290,8 @@ export const trails: [
 			'Contact tracing alone has little impact on curbing Covid spread, report finds',
 		dataLinkName: 'news | group-0 | card-@1',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -283,6 +309,8 @@ export const trails: [
 			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
 		dataLinkName: 'news | group-0 | card-@13',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -300,6 +328,8 @@ export const trails: [
 			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
 		dataLinkName: 'news | group-0 | card-@14',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
@@ -317,6 +347,8 @@ export const trails: [
 			'QCovid: how improved algorithm can identify more higher-risk adults',
 		dataLinkName: 'news | group-0 | card-@1',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -332,5 +364,7 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@15',
 		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
 	},
 ];

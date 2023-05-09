@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source-foundations';
 import { Doughnut } from './Doughnut';
 
 export default {
@@ -58,6 +59,24 @@ const threeSections = [
 	},
 ];
 
+const identicalColours = [
+	{
+		value: 55,
+		label: 'Orange',
+		color: palette.opinion[400],
+	},
+	{
+		value: 35,
+		label: 'Tangerine',
+		color: palette.opinion[400],
+	},
+	{
+		value: 10,
+		label: 'Mandarin',
+		color: palette.opinion[400],
+	},
+];
+
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -76,7 +95,7 @@ export const NinetyNineToOne = () => {
 		</Wrapper>
 	);
 };
-NinetyNineToOne.story = { name: 'with one section at 99 and the other at 1' };
+NinetyNineToOne.storyName = 'with one section at 99 and the other at 1';
 
 export const One = () => {
 	return (
@@ -85,7 +104,7 @@ export const One = () => {
 		</Wrapper>
 	);
 };
-One.story = { name: 'with one section' };
+One.storyName = 'with one section';
 
 export const Two = () => {
 	return (
@@ -94,7 +113,7 @@ export const Two = () => {
 		</Wrapper>
 	);
 };
-Two.story = { name: 'with two sections' };
+Two.storyName = 'with two sections';
 
 export const Three = () => {
 	return (
@@ -103,7 +122,16 @@ export const Three = () => {
 		</Wrapper>
 	);
 };
-Three.story = { name: 'with three sections' };
+Three.storyName = 'with three sections';
+
+export const Identical = () => {
+	return (
+		<Wrapper>
+			<Doughnut sections={identicalColours} />
+		</Wrapper>
+	);
+};
+Three.storyName = 'with three identical colours';
 
 export const Smaller = () => {
 	return (
@@ -112,4 +140,4 @@ export const Smaller = () => {
 		</Wrapper>
 	);
 };
-Smaller.story = { name: 'with props used to change size' };
+Smaller.storyName = 'with props used to change size';

@@ -1,5 +1,4 @@
-import type { DCRContainerPalette } from '../../types/front';
-import type { TrailType } from '../../types/trails';
+import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
 import {
 	Card25Media25TallNoTrail,
 	Card25Media25TallSmallHeadline,
@@ -9,7 +8,7 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
 type Props = {
-	trails: TrailType[];
+	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -35,11 +34,11 @@ export const FixedMediumSlowVI = ({
 						/>
 					</LI>
 				))}
-				{firstSlice25.map((trail, index) => (
+				{firstSlice25.map((trail) => (
 					<LI
 						key={trail.url}
 						padSides={true}
-						showDivider={index > 0}
+						showDivider={true}
 						containerPalette={containerPalette}
 						percentage={'25%'}
 					>

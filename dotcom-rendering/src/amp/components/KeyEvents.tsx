@@ -70,7 +70,7 @@ type Props = {
 };
 
 export const KeyEvents = ({ events, url }: Props) => {
-	if (!events || events.length < 1) {
+	if (events.length < 1) {
 		return null;
 	}
 

@@ -10,18 +10,30 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
-	SvgShareCallout,
+	SvgShare,
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { Palette } from '../../../types/palette';
+import { decidePalette } from '../../lib/decidePalette';
 
-const descriptionStyles = css`
+/* stylelint-disable-next-line color-no-hex */
+const linkDecorationColour = '#12121240';
+
+export const calloutLinkStyles = css`
 	a {
 		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
 		text-decoration: none;
+		border-bottom: 1px solid ${linkDecorationColour};
 	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
+`;
 
+const descriptionStyles = (useBrandColour: boolean) => css`
+	${!useBrandColour && calloutLinkStyles}
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -32,30 +44,35 @@ const descriptionStyles = css`
 
 export const CalloutDescription = ({
 	description,
+	useBrandColour,
 }: {
 	description: string;
+	useBrandColour: boolean;
 }) => {
-	// this data-ignore attribute ensures correct formatting for links in the description
+	// this data-ignore attribute ensures correct formatting for links when the callout is collapsible
 	const htmlSplit = description.split('href');
 	const withDataIgnore = htmlSplit.join(
 		'data-ignore="global-link-styling" href',
 	);
-
 	return (
-		<div css={descriptionStyles}>
-			<div dangerouslySetInnerHTML={{ __html: withDataIgnore }}></div>
+		<div css={descriptionStyles(useBrandColour)}>
+			<div
+				dangerouslySetInnerHTML={{
+					__html: useBrandColour ? description : withDataIgnore,
+				}}
+			></div>
 			<div>
 				Please share your story if you are 18 or over, anonymously if
 				you wish. For more information please see our{' '}
 				<a
-					data-ignore="global-link-styling"
+					data-ignore={!useBrandColour && 'global-link-styling'}
 					href="https://www.theguardian.com/help/terms-of-service"
 				>
 					terms of service
 				</a>{' '}
 				and{' '}
 				<a
-					data-ignore="global-link-styling"
+					data-ignore={!useBrandColour && 'global-link-styling'}
 					href="https://www.theguardian.com/help/privacy-policy"
 				>
 					privacy policy
@@ -101,42 +118,67 @@ const shareCalloutTextStyles = css`
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = css`
-	color: ${brand[500]};
-	border-bottom: 1px solid ${brand[500]};
+const shareCalloutLinkStyles = (
+	useBrandColour: boolean,
+	brandPalette: Palette,
+) => css`
+	${textSans.xsmall()}
+	color: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	border-bottom: 1px solid ${linkDecorationColour};
 	text-decoration: none;
-	font-weight: normal;
-	margin: 0 ${space[1]}px;
+	transition: none;
+	:hover,
+	:active {
+		border-bottom: 1px solid
+			${useBrandColour
+				? brandPalette.border.articleLinkHover
+				: brand[500]};
+	}
 `;
 
-const tooltipStyles = css`
+const sharePopupStyles = css`
 	${textSans.xsmall()};
 	position: absolute;
 	display: flex;
 	align-items: center;
 	min-width: 180px;
-	bottom: -20px;
+	transform: translate(100%, 0);
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};
 	font-weight: normal;
-	border-radius: 4px;
+	border-radius: ${space[1]}px;
 	z-index: 1;
 	padding: 0 ${space[1]}px 0 0;
-	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 2px ${space[2]}px rgba(0, 0, 0, 0.5);
 
 	> svg {
 		fill: ${success[400]};
 	}
 `;
+const shareIconStyles = (useBrandColour: boolean, brandPalette: Palette) => css`
+	display: inline-flex;
+	margin-right: ${space[2]}px;
+	border-radius: 50%;
+	border: 1px solid
+		${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	box-sizing: border-box;
+	fill: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	padding: 0.5px 0;
+`;
 
 export const CalloutShare = ({
 	title,
 	urlAnchor,
+	useBrandColour,
+	format,
 }: {
-	title: string;
+	title?: string;
 	urlAnchor: string;
+	useBrandColour: boolean;
+	format: ArticleFormat;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
+	const brandPalette = decidePalette(format);
 
 	const onShare = async () => {
 		const url = window.location.href;
@@ -146,7 +188,8 @@ export const CalloutShare = ({
 				navigator.userAgent,
 			)
 		) {
-			const shareTitle = `Share your experience: ${title}`;
+			let shareTitle = `Share your experience`;
+			if (title) shareTitle += `: ${title}`;
 
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}
@@ -158,9 +201,7 @@ export const CalloutShare = ({
 			});
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 3000);
-		}
-
-		if ('clipboard' in navigator) {
+		} else if ('clipboard' in navigator) {
 			await navigator.clipboard.writeText(`${url}#${urlAnchor}`);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 3000);
@@ -173,28 +214,27 @@ export const CalloutShare = ({
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<div
-					css={css`
-						width: 45px;
-					`}
-				>
-					<SvgShareCallout />
-				</div>
+				<span css={shareIconStyles(useBrandColour, brandPalette)}>
+					<SvgShare size="small" />
+				</span>
 				<div css={shareCalloutTextStyles}>
-					Know others who are affected?{'   '}
+					Know others who are affected?{' '}
 					<Button
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles}
+						cssOverrides={shareCalloutLinkStyles(
+							useBrandColour,
+							brandPalette,
+						)}
 					>
 						Please share this callout.
 					</Button>
 					{isCopied && (
-						<div css={tooltipStyles} role="alert">
+						<span css={sharePopupStyles} role="alert">
 							<SvgTickRound size="medium" />
 							Link copied to clipboard
-						</div>
+						</span>
 					)}
 				</div>
 			</div>
@@ -203,11 +243,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	a {
-		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
-	}
+	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;

@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
@@ -19,6 +18,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
 import { MainMediaKind } from 'mainMedia';
+import { text } from 'palette';
 import type { FC } from 'react';
 import Series from '../series';
 import {

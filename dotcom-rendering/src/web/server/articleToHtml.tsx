@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -8,23 +8,19 @@ import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRArticleType } from '../../types/article';
-import type { CAPIElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
-import { extractExpeditedIslands } from '../lib/extractIslands';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
@@ -51,15 +47,17 @@ export const articleToHtml = ({ article }: Props): string => {
 	const format: ArticleFormat = decideFormat(article.frontendData.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Web"
+		/>,
 	);
-
-	// Expedited islands scripts are added to the document head as 'high priority'
-	const expeditedIslands = extractExpeditedIslands(html);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = article.frontendData.blocks
+	const elements: FEElement[] = article.frontendData.blocks
 		.map((block) => block.elements)
 		.flat();
 
@@ -70,7 +68,7 @@ export const articleToHtml = ({ article }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const pageHasNonBootInteractiveElements = CAPIElements.some(
+	const pageHasNonBootInteractiveElements = elements.some(
 		(element) =>
 			element._type ===
 				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
@@ -78,7 +76,7 @@ export const articleToHtml = ({ article }: Props): string => {
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
-	const pageHasTweetElements = CAPIElements.some(
+	const pageHasTweetElements = elements.some(
 		(element) =>
 			element._type ===
 			'model.dotcomrendering.pageElements.TweetBlockElement',
@@ -96,9 +94,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -107,53 +106,19 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
+	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.frontendData.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScriptArrayFromFile('islands.js'),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
-			),
-		].map((script) =>
-			offerHttp3 && script ? getHttp3Url(script) : script,
-		),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
-
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
-
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
-	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
-	};
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -192,6 +157,8 @@ export const articleToHtml = ({ article }: Props): string => {
 					editionId: article.frontendData.editionId,
 					beaconURL: article.frontendData.beaconURL,
 				}),
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.frontendData.config,
 			}),
 		),
@@ -254,14 +221,12 @@ window.twttr = (function(d, s, id) {
 
 	return pageTemplate({
 		linkedData,
-		priorityScriptTags,
-		lowPriorityScriptTags,
+		scriptTags,
 		css: extractedCss,
 		html,
 		title,
 		description: article.frontendData.trailText,
 		windowGuardian,
-		gaPath,
 		ampLink,
 		openGraphData,
 		twitterData,
@@ -273,5 +238,7 @@ window.twttr = (function(d, s, id) {
 		recipeMarkup,
 		offerHttp3,
 		canonicalUrl,
+		renderingTarget: 'Web',
+		bork: !!article.frontendData.config.switches.borkWebVitals,
 	});
 };

@@ -5,34 +5,40 @@ import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRArticleType } from '../../types/article';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
-import { CommercialMetrics } from './CommercialMetrics.importable';
-import { CoreVitals } from './CoreVitals.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
-type Props = {
+interface BaseProps {
 	article: DCRArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
-};
+	renderingTarget: RenderingTarget;
+}
+
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	NAV: NavType;
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
 
 /**
  * @description
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
- *
- * @param {Props} props
- * @param {FEArticleType} props.CAPIArticle - The article JSON data
- * @param {NAVType} props.NAV - The article JSON data
- * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const ArticlePage = ({ article, NAV, format }: Props) => {
+export const ArticlePage = (props: WebProps | AppProps) => {
+	const { article, format, renderingTarget } = props;
 	return (
 		<StrictMode>
 			<Global
@@ -49,52 +55,74 @@ export const ArticlePage = ({ article, NAV, format }: Props) => {
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
-			<SkipTo id="navigation" label="Skip to navigation" />
+			<Island clientOnly={true} deferUntil="idle">
+				<FocusStyles />
+			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
 			)}
 			<Island clientOnly={true} deferUntil="idle">
-				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<CommercialMetrics
-					enabled={
-						!!article.frontendData.config.switches.commercialMetrics
-					}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging
-					idApiUrl={article.frontendData.config.idApiUrl}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<ReaderRevenueDev
-					shouldHideReaderRevenue={
-						article.frontendData.shouldHideReaderRevenue
-					}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
 			</Island>
-			<Island clientOnly={true}>
-				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						article.frontendData.config.switches,
-					)}
-					pageIsSensitive={article.frontendData.config.isSensitive}
-					isDev={!!article.frontendData.config.isDev}
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<AnimatePulsingDots />
+				</Island>
+			)}
+			{renderingTarget === 'Web' && (
+				<>
+					<SkipTo id="navigation" label="Skip to navigation" />
+					<Island clientOnly={true} deferUntil="idle">
+						<AlreadyVisited />
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<Metrics
+							commercialMetricsEnabled={
+								!!article.frontendData.config.switches
+									.commercialMetrics
+							}
+						/>
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<BrazeMessaging
+							idApiUrl={article.frontendData.config.idApiUrl}
+						/>
+					</Island>
+					<Island clientOnly={true} deferUntil="idle">
+						<ReaderRevenueDev
+							shouldHideReaderRevenue={
+								article.frontendData.shouldHideReaderRevenue
+							}
+						/>
+					</Island>
+					<Island clientOnly={true}>
+						<SetABTests
+							abTestSwitches={filterABTestSwitches(
+								article.frontendData.config.switches,
+							)}
+							pageIsSensitive={
+								article.frontendData.config.isSensitive
+							}
+							isDev={!!article.frontendData.config.isDev}
+						/>
+					</Island>
+				</>
+			)}
+			{renderingTarget === 'Apps' ? (
+				<DecideLayout
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
 				/>
-			</Island>
-			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
+			) : (
+				<DecideLayout
+					article={article}
+					NAV={props.NAV}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			)}
 		</StrictMode>
 	);
 };

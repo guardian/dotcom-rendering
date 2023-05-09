@@ -259,13 +259,13 @@
             "type": "object",
             "properties": {
                 "design": {
-                    "$ref": "#/definitions/CAPIDesign"
+                    "$ref": "#/definitions/FEDesign"
                 },
                 "theme": {
-                    "$ref": "#/definitions/CAPITheme"
+                    "$ref": "#/definitions/FETheme"
                 },
                 "display": {
-                    "$ref": "#/definitions/CAPIDisplay"
+                    "$ref": "#/definitions/FEDisplay"
                 }
             },
             "required": [
@@ -295,13 +295,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPILinkType"
+                "$ref": "#/definitions/FELinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPILinkType"
+                "$ref": "#/definitions/FELinkType"
             }
         },
         "shouldHideAds": {
@@ -362,7 +362,7 @@
                 "trails": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPITrailType"
+                        "$ref": "#/definitions/FETrailType"
                     }
                 },
                 "heading": {
@@ -386,7 +386,7 @@
                     "trails": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/definitions/CAPITrailType"
+                            "$ref": "#/definitions/FETrailType"
                         }
                     },
                     "description": {
@@ -402,13 +402,13 @@
                         "type": "object",
                         "properties": {
                             "design": {
-                                "$ref": "#/definitions/CAPIDesign"
+                                "$ref": "#/definitions/FEDesign"
                             },
                             "theme": {
-                                "$ref": "#/definitions/CAPITheme"
+                                "$ref": "#/definitions/FETheme"
                             },
                             "display": {
-                                "$ref": "#/definitions/CAPIDisplay"
+                                "$ref": "#/definitions/FEDisplay"
                             }
                         },
                         "required": [
@@ -448,7 +448,7 @@
             "$ref": "#/definitions/BadgeType"
         },
         "nav": {
-            "$ref": "#/definitions/CAPINavType"
+            "$ref": "#/definitions/FENavType"
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
@@ -524,6 +524,9 @@
                 "$ref": "#/definitions/Topic"
             }
         },
+        "messageUs": {
+            "$ref": "#/definitions/MessageUs"
+        },
         "promotedNewsletter": {
             "type": "object",
             "properties": {
@@ -576,6 +579,12 @@
             "type": "string"
         },
         "showTableOfContents": {
+            "type": "boolean"
+        },
+        "lang": {
+            "type": "string"
+        },
+        "isRightToLeftLang": {
             "type": "boolean"
         }
     },
@@ -902,10 +911,12 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
                     "enum": [
+                        "email",
+                        "phone",
                         "text"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -925,12 +936,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -947,6 +960,12 @@
                         "textarea"
                     ]
                 },
+                "minlength": {
+                    "type": "number"
+                },
+                "maxlength": {
+                    "type": "number"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -965,12 +984,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1005,12 +1026,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1063,12 +1086,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1122,12 +1147,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1181,12 +1208,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1224,6 +1253,9 @@
                 },
                 "formId": {
                     "type": "number"
+                },
+                "prompt": {
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
@@ -1264,6 +1296,12 @@
                 },
                 "isNonCollapsible": {
                     "type": "boolean"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CalloutContactType"
+                    }
                 }
             },
             "required": [
@@ -1277,8 +1315,31 @@
                 "formId",
                 "id",
                 "isNonCollapsible",
+                "prompt",
                 "tagName",
                 "title"
+            ]
+        },
+        "CalloutContactType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "urlPrefix": {
+                    "type": "string"
+                },
+                "guidance": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "urlPrefix",
+                "value"
             ]
         },
         "ChartAtomBlockElement": {
@@ -2470,13 +2531,13 @@
                     "type": "object",
                     "properties": {
                         "design": {
-                            "$ref": "#/definitions/CAPIDesign"
+                            "$ref": "#/definitions/FEDesign"
                         },
                         "theme": {
-                            "$ref": "#/definitions/CAPITheme"
+                            "$ref": "#/definitions/FETheme"
                         },
                         "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
+                            "$ref": "#/definitions/FEDisplay"
                         }
                     },
                     "required": [
@@ -2494,7 +2555,7 @@
                 "position"
             ]
         },
-        "CAPIDesign": {
+        "FEDesign": {
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
@@ -2515,14 +2576,16 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
         },
-        "CAPITheme": {
+        "FETheme": {
             "enum": [
                 "CulturePillar",
                 "Labs",
@@ -2535,7 +2598,7 @@
             ],
             "type": "string"
         },
-        "CAPIDisplay": {
+        "FEDisplay": {
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -4015,7 +4078,7 @@
             ],
             "type": "string"
         },
-        "CAPILinkType": {
+        "FELinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -4033,7 +4096,7 @@
                 "children": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "pillar": {
@@ -4262,20 +4325,20 @@
             ],
             "type": "string"
         },
-        "CAPITrailType": {
+        "FETrailType": {
             "type": "object",
             "properties": {
                 "format": {
                     "type": "object",
                     "properties": {
                         "design": {
-                            "$ref": "#/definitions/CAPIDesign"
+                            "$ref": "#/definitions/FEDesign"
                         },
                         "theme": {
-                            "$ref": "#/definitions/CAPITheme"
+                            "$ref": "#/definitions/FETheme"
                         },
                         "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
+                            "$ref": "#/definitions/FEDisplay"
                         }
                     },
                     "required": [
@@ -4364,10 +4427,34 @@
                         },
                         "embedCss": {
                             "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
                         }
                     }
                 },
                 "showQuotedHeadline": {
+                    "type": "boolean"
+                },
+                "discussion": {
+                    "type": "object",
+                    "properties": {
+                        "isCommentable": {
+                            "type": "boolean"
+                        },
+                        "isClosedForComments": {
+                            "type": "boolean"
+                        },
+                        "discussionId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "isClosedForComments",
+                        "isCommentable"
+                    ]
+                },
+                "showMainVideo": {
                     "type": "boolean"
                 }
             },
@@ -4579,7 +4666,7 @@
                 "seriesTag"
             ]
         },
-        "CAPINavType": {
+        "FENavType": {
             "type": "object",
             "properties": {
                 "currentUrl": {
@@ -4588,23 +4675,23 @@
                 "pillars": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "otherLinks": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "brandExtensions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/CAPILinkType"
+                        "$ref": "#/definitions/FELinkType"
                     }
                 },
                 "currentNavLink": {
-                    "$ref": "#/definitions/CAPILinkType"
+                    "$ref": "#/definitions/FELinkType"
                 },
                 "currentNavLinkTitle": {
                     "type": "string"
@@ -4616,12 +4703,12 @@
                     "type": "object",
                     "properties": {
                         "parent": {
-                            "$ref": "#/definitions/CAPILinkType"
+                            "$ref": "#/definitions/FELinkType"
                         },
                         "links": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/CAPILinkType"
+                                "$ref": "#/definitions/FELinkType"
                             }
                         }
                     },
@@ -4768,6 +4855,31 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "MessageUs": {
+            "type": "object",
+            "properties": {
+                "formId": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "formFields",
+                "formId"
+            ]
         },
         "TableOfContentsItem": {
             "type": "object",

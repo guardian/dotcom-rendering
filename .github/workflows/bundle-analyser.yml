@@ -12,11 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Node
-        uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
 
-      # Cache npm dependencies using https://github.com/bahmutov/npm-install
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --frozen-lockfile
 
       - name: Generate production build
         run: make build
@@ -25,18 +26,24 @@ jobs:
       - name: Archive code coverage results for modern bundle
         uses: actions/upload-artifact@v3
         with:
-          name: bundle-analyser-report-modern
-          path: dotcom-rendering/dist/browser.modern-bundles.html
+          name: bundle-analyser-report
+          path: dotcom-rendering/dist/stats/browser.modern-bundles.html
           if-no-files-found: error
       - name: Archive code coverage results for legacy bundle
         uses: actions/upload-artifact@v3
         with:
-          name: bundle-analyser-report-modern
-          path: dotcom-rendering/dist/browser.legacy-bundles.html
+          name: bundle-analyser-report
+          path: dotcom-rendering/dist/stats/browser.legacy-bundles.html
           if-no-files-found: error
       - name: Archive code coverage results for variant bundle
         uses: actions/upload-artifact@v3
         with:
-          name: bundle-analyser-report-variant
-          path: dotcom-rendering/dist/browser.variant-bundles.html
+          name: bundle-analyser-report
+          path: dotcom-rendering/dist/stats/browser.variant-bundles.html
           if-no-files-found: warn # Variant bundle only exists when an active experiment is going on
+      - name: Archive code coverage results for apps bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: bundle-analyser-report
+          path: dotcom-rendering/dist/stats/browser.apps-bundles.html
+          if-no-files-found: error

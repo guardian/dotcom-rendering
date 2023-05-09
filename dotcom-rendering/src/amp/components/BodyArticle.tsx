@@ -23,7 +23,7 @@ import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
 import { TextBlockComponent } from './elements/TextBlockComponent';
 import { Epic } from './Epic';
-import { RegionalAd } from './RegionalAd';
+import { InlineAd } from './InlineAd';
 import { StickyAd } from './StickyAd';
 import { SubMeta } from './SubMeta';
 import { TopMeta } from './topMeta/TopMeta';
@@ -107,7 +107,7 @@ type Props = {
 };
 
 export const Body = ({ data, config }: Props) => {
-	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
+	const bodyElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
 		isSensitive: config.isSensitive,
@@ -120,12 +120,12 @@ export const Body = ({ data, config }: Props) => {
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
-		capiElements,
+		bodyElements,
 		pillar,
 		data.isImmersive,
 		adTargeting,
 	);
-	const slotIndexes = findAdSlots(capiElements);
+	const slotIndexes = findAdSlots(bodyElements);
 	const adInfo = {
 		adUnit: config.adUnit,
 		section: data.sectionName,
@@ -133,14 +133,18 @@ export const Body = ({ data, config }: Props) => {
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: !!config.switches.ampPrebid,
+			ampPrebidPubmatic: !!config.switches.ampPrebidPubmatic,
+			ampPrebidCriteo: !!config.switches.ampPrebidCriteo,
+			ampPrebidOzone: !!config.switches.ampPrebidOzone,
 			permutive: !!config.switches.permutive,
 			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
-		usePrebid: adInfo.switches.ampPrebid,
+		usePubmaticPrebid: adInfo.switches.ampPrebidPubmatic,
+		useCriteoPrebid: adInfo.switches.ampPrebidCriteo,
+		useOzonePrebid: adInfo.switches.ampPrebidOzone,
 		usePermutive: adInfo.switches.permutive,
 		useAmazon: adInfo.switches.ampAmazon,
 	};
@@ -150,15 +154,13 @@ export const Body = ({ data, config }: Props) => {
 		<>
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
+					const adSlotId = `ad-${i + 1}` as const;
 					return (
 						<React.Fragment key={item.key}>
 							{item}
-							<div
-								id={`ad-${i + 1}`}
-								data-sort-time="1"
-								css={adStyle}
-							>
-								<RegionalAd
+							<div id={adSlotId} data-sort-time="1" css={adStyle}>
+								<InlineAd
+									id={adSlotId}
 									editionId={data.editionId}
 									section={data.sectionName ?? ''}
 									contentType={adInfo.contentType}
@@ -184,9 +186,13 @@ export const Body = ({ data, config }: Props) => {
 		</>
 	);
 
-	const epic = data.shouldHideReaderRevenue ? null : (
-		<Epic webURL={data.webURL} />
-	);
+	const epic =
+		data.shouldHideReaderRevenue ||
+		data.tags.some(
+			(tag) => tag.id === 'us-news/series/cotton-capital',
+		) ? null : (
+			<Epic webURL={data.webURL} />
+		);
 
 	return (
 		<div css={[body(pillar, design), innerContainerStyles]}>
@@ -212,6 +218,7 @@ export const Body = ({ data, config }: Props) => {
 			{epic}
 
 			<StickyAd
+				id="ad-sticky"
 				editionId={data.editionId}
 				section={data.sectionName ?? ''}
 				contentType={adInfo.contentType}

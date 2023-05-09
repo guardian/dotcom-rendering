@@ -1,14 +1,17 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
+import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
-import { CoreVitals } from './CoreVitals.importable';
+import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { Metrics } from './Metrics.importable';
+import { SetABTests } from './SetABTests.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
@@ -47,16 +50,30 @@ export const FrontPage = ({ front, NAV }: Props) => {
 				<AlreadyVisited />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
+				<AnimatePulsingDots />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals />
+				<Metrics
+					commercialMetricsEnabled={
+						!!front.config.switches.commercialMetrics
+					}
+				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
 			</Island>
-			<Island clientOnly={true} expediteLoading={true}>
+			<Island clientOnly={true}>
 				<ShowHideContainers />
+			</Island>
+			<Island clientOnly={true}>
+				<SetABTests
+					abTestSwitches={filterABTestSwitches(front.config.switches)}
+					pageIsSensitive={front.config.isSensitive}
+					isDev={!!front.config.isDev}
+				/>
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
