@@ -22,7 +22,7 @@ export const MostViewedRightWithAd = ({
 	renderAds,
 	shouldHideReaderRevenue,
 }: Props) => {
-	const componentDataAttribute = 'most-viewed-right-with-ad';
+	const componentDataAttribute = 'most-viewed-right-container';
 	return (
 		<div
 			// This attribute is necessary so that most viewed wrapper
