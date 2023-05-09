@@ -30,6 +30,8 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	renderAds: boolean;
+	isNetworkFront: boolean;
+	isInFrontsBannerTest: boolean;
 };
 
 export const DecideContainer = ({
@@ -40,7 +42,11 @@ export const DecideContainer = ({
 	containerPalette,
 	showAge,
 	renderAds,
+	isNetworkFront,
+	isInFrontsBannerTest,
 }: Props) => {
+	const shouldShowMPU =
+		!(isNetworkFront && isInFrontsBannerTest) && renderAds;
 	switch (containerType) {
 		case 'dynamic/fast':
 			return (
@@ -65,7 +71,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
-					renderAds={renderAds}
+					renderAds={shouldShowMPU}
 					trails={trails}
 				/>
 			);
@@ -100,7 +106,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
-					renderAds={renderAds}
+					renderAds={shouldShowMPU}
 				/>
 			);
 		case 'fixed/small/slow-III':
@@ -149,7 +155,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					renderAds={renderAds}
+					renderAds={shouldShowMPU}
 					index={index}
 				/>
 			);

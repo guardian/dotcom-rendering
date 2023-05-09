@@ -394,6 +394,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 									renderAds={renderAds}
+									isNetworkFront={front.isNetworkFront}
+									isInFrontsBannerTest={true}
 								/>
 							</FrontSection>
 							{renderAds &&
