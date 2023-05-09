@@ -85,6 +85,7 @@ type Props = {
 	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
+	isVertical?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -140,6 +141,7 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	abTests,
+	isVertical,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -749,6 +751,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
+						isVertical={isVertical}
 					/>
 				</Island>
 			);
@@ -798,6 +801,7 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	abTests,
+	isVertical,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -818,6 +822,7 @@ export const RenderArticleElement = ({
 		switches,
 		isPinnedPost,
 		abTests,
+		isVertical,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

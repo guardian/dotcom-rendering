@@ -71,6 +71,8 @@ export const ArticleRenderer = ({
 	abTests,
 	renderingTarget,
 }: Props) => {
+	const isVertical = tags.filter((x) => x.title == 'TestTopic').length > 0;
+
 	const renderedElements = elements.map((element, index) => {
 		return (
 			<RenderArticleElement
@@ -89,6 +91,7 @@ export const ArticleRenderer = ({
 				isSensitive={isSensitive}
 				switches={switches}
 				abTests={abTests}
+				isVertical={isVertical}
 			/>
 		);
 	});

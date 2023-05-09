@@ -32,6 +32,7 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
+	isVertical?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -71,6 +72,11 @@ const expiredSVGWrapperStyles = css`
 	}
 `;
 
+const verticalVideoStyles = css`
+	width: 393px;
+	height: 698px;
+`;
+
 export const YoutubeBlockComponent = ({
 	id,
 	elementId,
@@ -90,6 +96,7 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
+	isVertical,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -182,12 +189,16 @@ export const YoutubeBlockComponent = ({
 	};
 
 	return (
-		<div data-chromatic="ignore" data-component="youtube-atom">
+		<div
+			css={verticalVideoStyles}
+			data-chromatic="ignore"
+			data-component="youtube-atom"
+		>
 			<YoutubeAtom
 				elementId={elementId}
 				videoId={assetId}
 				overrideImage={
-					overrideImage
+					overrideImage && !isVertical
 						? [
 								{
 									srcSet: [
@@ -201,7 +212,7 @@ export const YoutubeBlockComponent = ({
 						: undefined
 				}
 				posterImage={
-					posterImage
+					posterImage && !isVertical
 						? [
 								{
 									srcSet: posterImage.map((img) => ({
@@ -216,8 +227,8 @@ export const YoutubeBlockComponent = ({
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}
 				consentState={consentState}
-				height={height}
-				width={width}
+				height={isVertical ? 698 : height}
+				width={isVertical ? 393 : width}
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
