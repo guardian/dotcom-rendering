@@ -212,9 +212,6 @@ gen-fixtures:
 perf-test:
 	@node scripts/perf/perf-test.js
 
-arch-diagram:
-	@npx arkit
-
 # Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
 # Adding - at the beginning of the command ignores the error and we're getting:
 # make: [snyk] Error 1 (ignored)

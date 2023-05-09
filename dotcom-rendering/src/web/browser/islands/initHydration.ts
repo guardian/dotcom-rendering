@@ -37,9 +37,20 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 					break;
 				}
 				case 'visible': {
-					whenVisible(element, () => {
-						void doHydration(name, props, element, emotionCache);
-					});
+					const rootMargin =
+						element.getAttribute('rootmargin') ?? undefined;
+					whenVisible(
+						element,
+						() => {
+							void doHydration(
+								name,
+								props,
+								element,
+								emotionCache,
+							);
+						},
+						{ rootMargin },
+					);
 					break;
 				}
 				case 'interaction': {

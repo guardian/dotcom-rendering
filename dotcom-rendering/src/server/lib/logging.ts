@@ -1,6 +1,7 @@
 import path from 'path';
 import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
+import { loggingStore } from './logging-store';
 
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
@@ -14,6 +15,10 @@ const stage =
 		: 'DEV';
 
 const logFields = (logEvent: LoggingEvent): unknown => {
+	const { request } = loggingStore.getStore() ?? {
+		request: { pageId: 'outside-request-context' },
+	};
+
 	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',
@@ -22,6 +27,7 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		'@version': 1,
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
+		request,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
@@ -59,7 +65,7 @@ const enableLog4j = {
 		fileAppender: {
 			type: 'file',
 			filename: logLocation,
-			maxLogSize: 10000,
+			maxLogSize: '5M',
 			backups: 5,
 			compress: true,
 			layout: { type: 'json', separator: ',' },
