@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
-import { QuoteIcon } from './QuoteIcon';
 import { getAttrs } from '../lib/domUtils';
+import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
 	html: string;

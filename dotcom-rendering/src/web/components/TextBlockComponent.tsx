@@ -271,14 +271,26 @@ const buildElementTree =
 
 					return node.textContent;
 				}
-				return null;
+				return jsx('p', { css: styles(format), children });
 			}
 			case 'SPAN':
-				return text;
+				if (
+					getAttrs(node)?.getNamedItem('data-dcr-style')?.value ===
+					'bullet'
+				) {
+					return jsx('span', {
+						'data-dcr-style': 'bullet',
+						key,
+						children,
+					});
+				}
+				return jsx('p', { css: styles(format), text });
 			case 'BR':
 				return jsx('br', {
 					key,
 				});
+			case 'SUB':
+			case 'SUP':
 			case 'H2':
 			case 'H3':
 			case 'B':
@@ -287,10 +299,9 @@ const buildElementTree =
 			case 'OL':
 			case 'LI':
 			case 'MARK':
-			case 'SUB':
-			case 'SUP':
 			case 'S':
 			case 'I':
+			case 'VAR':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: styles(format),
 					key,
