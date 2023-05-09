@@ -30,6 +30,11 @@ updates:
         - dependency-name: 'aws-cdk'
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
+        # Types should match major and minor versions of the package being used.
+        - dependency-name: "@types/node"
+          update-types:
+            - "version-update:semver-major"
+            - "version-update:semver-minor"
       open-pull-requests-limit: 7
     - package-ecosystem: 'github-actions'
       directory: '/'
