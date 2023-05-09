@@ -9,16 +9,16 @@ export const fid = (): void => {
 			'pointerdown',
 		];
 
-		const key = 'bork-fid-';
-		const hash = window.location.hash.slice(1);
+		/**
+		 * A value in the 0ms - 1000ms range.
+		 * The upper bound of 1s matches our current 99th percentile for FID.
+		 */
+		const delay = Math.floor(Math.random() * 1000);
+
 		if (
-			hash.startsWith(key) &&
 			typeof window.performance === 'object' &&
 			typeof window.performance.now === 'function'
 		) {
-			const delay = parseInt(hash.replace(key, ''), 10);
-			if (isNaN(delay)) return;
-
 			window.guardian.borkWebVitals.fid = String(delay);
 
 			const bork = () => {

@@ -69,7 +69,7 @@ export const pageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
-		borkWebVitals: bork,
+		borkWebVitals,
 	} = props;
 
 	const favicon =
@@ -320,8 +320,18 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				${bork ? `<script>(${fid.toString()})()</script>` : ''}
-				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
+
+				${
+					borkWebVitals
+						? `
+				<!-- Sorry -->
+				<script>
+				(${fid.toString()})();
+				(${fcp.toString()})();
+				</script>`
+						: ''
+				}
+
 
 				${initTwitter ?? ''}
 
@@ -351,7 +361,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 				${
-					bork
+					borkWebVitals
 						? `
 				<style>
 					@keyframes bork-fcp-paint {
