@@ -183,7 +183,9 @@ const generateImageURL = ({
 	// In CODE, we do not generate optimised replacement images
 	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
 
-	const service = url.hostname.split('.')[0] ?? '';
+	const parts = url.hostname.split('.');
+	//should convert static-secure to static
+	const service = parts[0] === 'static-secure' ? 'static' : parts[0] ?? '';
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
