@@ -70,19 +70,22 @@ const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
+	isInFrontsBannerTest: boolean,
 ) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
 		index === getMerchHighPosition(collectionCount, isNetworkFront)
 	) {
-		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				display={format}
-			/>
-		);
+		if (!(isInFrontsBannerTest && isNetworkFront)) {
+			return (
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+					display={format}
+				/>
+			);
+		}
 	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
@@ -118,6 +121,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isInEuropeTest =
 		front.config.abTests.europeNetworkFrontVariant === 'variant';
+
+	const isInFrontsBannerTest =
+		front.config.abTests.frontsBannerAdsVariant === 'variant';
 
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -276,6 +282,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									isInFrontsBannerTest,
 								)}
 							</>
 						);
@@ -327,6 +334,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									isInFrontsBannerTest,
 								)}
 							</>
 						);
@@ -397,6 +405,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									isInFrontsBannerTest,
 								)}
 						</>
 					);
@@ -418,7 +427,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				backgroundColour={neutral[93]}
 				element="aside"
 			>
-				<AdSlot position="merchandising" display={format.display} />
+				{!(isInFrontsBannerTest && front.isNetworkFront) && (
+					<AdSlot position="merchandising" display={format.display} />
+				)}
 			</Section>
 
 			{NAV.subNavSections && (
