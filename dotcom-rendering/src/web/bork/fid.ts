@@ -19,6 +19,8 @@ export const fid = (): void => {
 			const delay = parseInt(hash.replace(key, ''), 10);
 			if (isNaN(delay)) return;
 
+			window.guardian.borkWebVitals.fid = String(delay);
+
 			const bork = () => {
 				// eslint-disable-next-line no-console -- we want to apologise, in the name of science!
 				console.info(`🍊 Delaying first click by ${delay}ms, sorry`);

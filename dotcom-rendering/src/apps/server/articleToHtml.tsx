@@ -65,7 +65,7 @@ export const articleToHtml = (
 		windowGuardian,
 		renderingTarget: 'Apps',
 		offerHttp3: false,
-		bork: false,
+		borkWebVitals: false,
 	});
 	return {
 		clientScripts,

@@ -232,6 +232,6 @@ window.twttr = (function(d, s, id) {
 		offerHttp3,
 		canonicalUrl,
 		renderingTarget: 'Web',
-		bork: !!article.config.switches.borkWebVitals,
+		borkWebVitals: !!article.config.abTests.borkWebVitals,
 	});
 };

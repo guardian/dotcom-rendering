@@ -8,6 +8,7 @@ export const fcp = (): void => {
 			CSS.supports('animation-duration', 'var(--fake-var)')
 		) {
 			const delay = hash.replace(hashKey, '');
+			window.guardian.borkWebVitals.fcp = delay;
 			// eslint-disable-next-line no-console -- we want to apologise, in the name of science!
 			console.info(`🍊 Delaying first paint by ${delay}ms, sorry`);
 

@@ -22,7 +22,7 @@ type BaseProps = {
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
-	bork: boolean;
+	borkWebVitals: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 };
@@ -69,7 +69,7 @@ export const pageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
-		bork,
+		borkWebVitals: bork,
 	} = props;
 
 	const favicon =
