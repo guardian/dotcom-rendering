@@ -17,7 +17,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { DCRArticleType } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -287,7 +287,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	article: FEArticleType;
+	article: DCRArticleType;
 	format: ArticleFormat;
 	renderingTarget: RenderingTarget;
 }
@@ -329,14 +329,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType'
-			? article.matchUrl
+		article.frontendData.matchType === 'FootballMatchType'
+			? article.frontendData.matchUrl
 			: undefined;
 
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const showComments = article.isCommentable;
+	const showComments = article.frontendData.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
 
@@ -347,7 +347,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 			? format
 			: {
 					...format,
-					theme: getCurrentPillar(article),
+					theme: getCurrentPillar(article.frontendData),
 			  };
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
@@ -508,10 +508,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										<GetMatchNav
 											matchUrl={footballMatchUrl}
 											format={format}
-											headlineString={article.headline}
-											tags={article.tags}
+											headlineString={
+												article.frontendData.headline
+											}
+											tags={article.frontendData.tags}
 											webPublicationDateDeprecated={
-												article.webPublicationDateDeprecated
+												article.frontendData
+													.webPublicationDateDeprecated
 											}
 										/>
 									</Island>
@@ -537,11 +540,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<MainMedia
 									format={format}
-									elements={article.mainMediaElements}
+									elements={
+										article.frontendData.mainMediaElements
+									}
 									adTargeting={adTargeting}
 									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
+									pageId={article.frontendData.pageId}
+									webTitle={article.frontendData.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
 									switches={article.config.switches}
 									isAdFreeUser={article.isAdFreeUser}
@@ -552,11 +557,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
-								tags={article.tags}
-								sectionLabel={article.sectionLabel}
-								sectionUrl={article.sectionUrl}
-								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								tags={article.frontendData.tags}
+								sectionLabel={article.frontendData.sectionLabel}
+								sectionUrl={article.frontendData.sectionUrl}
+								guardianBaseURL={
+									article.frontendData.guardianBaseURL
+								}
+								badge={article.frontendData.badge}
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
@@ -571,23 +578,27 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<div css={maxWidth}>
 								<ArticleHeadline
 									format={format}
-									headlineString={article.headline}
-									tags={article.tags}
-									byline={article.byline}
+									headlineString={
+										article.frontendData.headline
+									}
+									tags={article.frontendData.tags}
+									byline={article.frontendData.byline}
 									webPublicationDateDeprecated={
-										article.webPublicationDateDeprecated
+										article.frontendData
+											.webPublicationDateDeprecated
 									}
 									hasStarRating={
-										typeof article.starRating === 'number'
+										typeof article.frontendData
+											.starRating === 'number'
 									}
 								/>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
-							{article.starRating !== undefined ? (
+							{article.frontendData.starRating !== undefined ? (
 								<div css={starWrapper}>
 									<StarRating
-										rating={article.starRating}
+										rating={article.frontendData.starRating}
 										size="large"
 									/>
 								</div>
@@ -596,7 +607,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							)}
 							<Standfirst
 								format={format}
-								standfirst={article.standfirst}
+								standfirst={article.frontendData.standfirst}
 							/>
 						</GridItem>
 						<GridItem area="lines">
@@ -618,17 +629,21 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									byline={article.byline}
-									tags={article.tags}
+									pageId={article.frontendData.pageId}
+									webTitle={article.frontendData.webTitle}
+									byline={article.frontendData.byline}
+									tags={article.frontendData.tags}
 									primaryDateline={
-										article.webPublicationDateDisplay
+										article.frontendData
+											.webPublicationDateDisplay
 									}
 									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
+										article.frontendData
+											.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={article.isCommentable}
+									isCommentable={
+										article.frontendData.isCommentable
+									}
 									discussionApiUrl={
 										article.config.discussionApiUrl
 									}
@@ -645,38 +660,45 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									blocks={article.blocks}
-									pinnedPost={article.pinnedPost}
+									blocks={article.frontendData.blocks}
+									pinnedPost={article.frontendData.pinnedPost}
 									adTargeting={adTargeting}
 									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
+									pageId={article.frontendData.pageId}
+									webTitle={article.frontendData.webTitle}
 									ajaxUrl={article.config.ajaxUrl}
 									switches={article.config.switches}
 									isSensitive={article.config.isSensitive}
 									isAdFreeUser={article.isAdFreeUser}
 									section={article.config.section}
 									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
+										article.frontendData
+											.shouldHideReaderRevenue
 									}
-									tags={article.tags}
+									tags={article.frontendData.tags}
 									isPaidContent={
 										!!article.config.isPaidContent
 									}
 									contributionsServiceUrl={
 										contributionsServiceUrl
 									}
-									contentType={article.contentType}
-									sectionName={article.sectionName ?? ''}
+									contentType={
+										article.frontendData.contentType
+									}
+									sectionName={
+										article.frontendData.sectionName ?? ''
+									}
 									isPreview={article.config.isPreview}
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
 									keywordIds={article.config.keywordIds}
 									abTests={article.config.abTests}
-									tableOfContents={article.tableOfContents}
-									lang={article.lang}
+									tableOfContents={
+										article.frontendData.tableOfContents
+									}
+									lang={article.frontendData.lang}
 									isRightToLeftLang={
-										article.isRightToLeftLang
+										article.frontendData.isRightToLeftLang
 									}
 									renderingTarget={renderingTarget}
 								/>
@@ -697,28 +719,41 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											contentType={article.contentType}
+											contentType={
+												article.frontendData.contentType
+											}
 											contributionsServiceUrl={
 												contributionsServiceUrl
 											}
 											idApiUrl={article.config.idApiUrl}
 											isMinuteArticle={
-												article.pageType.isMinuteArticle
+												article.frontendData.pageType
+													.isMinuteArticle
 											}
 											isPaidContent={
-												article.pageType.isPaidContent
+												article.frontendData.pageType
+													.isPaidContent
 											}
 											keywordIds={
 												article.config.keywordIds
 											}
-											pageId={article.pageId}
-											sectionId={article.config.section}
-											sectionName={article.sectionName}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
+											pageId={article.frontendData.pageId}
+											sectionId={
+												article.frontendData.config
+													.section
 											}
-											stage={article.config.stage}
-											tags={article.tags}
+											sectionName={
+												article.frontendData.sectionName
+											}
+											shouldHideReaderRevenue={
+												article.frontendData
+													.shouldHideReaderRevenue
+											}
+											stage={
+												article.frontendData.config
+													.stage
+											}
+											tags={article.frontendData.tags}
 										/>
 									</Island>
 								)}
@@ -733,18 +768,19 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
-										article.subMetaKeywordLinks
+										article.frontendData.subMetaKeywordLinks
 									}
 									subMetaSectionLinks={
-										article.subMetaSectionLinks
+										article.frontendData.subMetaSectionLinks
 									}
-									pageId={article.pageId}
-									webUrl={article.webURL}
-									webTitle={article.webTitle}
+									pageId={article.frontendData.pageId}
+									webUrl={article.webUrl}
+									webTitle={article.frontendData.webTitle}
 									showBottomSocialButtons={
-										article.showBottomSocialButtons
+										article.frontendData
+											.showBottomSocialButtons
 									}
-									badge={article.badge}
+									badge={article.frontendData.badge}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -769,11 +805,13 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									<MostViewedRightWithAd
 										display={format.display}
 										isPaidContent={
-											article.pageType.isPaidContent
+											article.frontendData.pageType
+												.isPaidContent
 										}
 										renderAds={renderAds}
 										shouldHideReaderRevenue={
-											article.shouldHideReaderRevenue
+											article.frontendData
+												.shouldHideReaderRevenue
 										}
 									/>
 								</RightColumn>
@@ -800,12 +838,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</Section>
 				)}
 
-				{article.storyPackage && (
+				{article.frontendData.storyPackage && (
 					<Section fullWidth={true}>
 						<Island deferUntil="visible">
 							<Carousel
-								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
+								heading={
+									article.frontendData.storyPackage.heading
+								}
+								trails={article.frontendData.storyPackage.trails.map(
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
@@ -824,17 +864,19 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						>
 							<OnwardsUpper
 								ajaxUrl={article.config.ajaxUrl}
-								hasRelated={article.hasRelated}
-								hasStoryPackage={article.hasStoryPackage}
+								hasRelated={article.frontendData.hasRelated}
+								hasStoryPackage={
+									article.frontendData.hasStoryPackage
+								}
 								isAdFreeUser={article.isAdFreeUser}
-								pageId={article.pageId}
+								pageId={article.frontendData.pageId}
 								isPaidContent={!!article.config.isPaidContent}
 								showRelatedContent={
 									article.config.showRelatedContent
 								}
 								keywordIds={article.config.keywordIds}
-								contentType={article.contentType}
-								tags={article.tags}
+								contentType={article.frontendData.contentType}
+								tags={article.frontendData.tags}
 								format={format}
 								pillar={format.theme}
 								editionId={article.editionId}
@@ -866,7 +908,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											.enableDiscussionSwitch
 									}
 									isAdFreeUser={article.isAdFreeUser}
-									shouldHideAds={article.shouldHideAds}
+									shouldHideAds={
+										article.frontendData.shouldHideAds
+									}
 									idApiUrl={article.config.idApiUrl}
 								/>
 							</Section>
@@ -888,7 +932,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										deferUntil="visible"
 									>
 										<MostViewedFooterData
-											sectionName={article.sectionName}
+											sectionName={
+												article.frontendData.sectionName
+											}
 											format={format}
 											ajaxUrl={article.config.ajaxUrl}
 											edition={article.editionId}
@@ -958,23 +1004,26 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					<BannerWrapper data-print-layout="hide">
 						<Island deferUntil="idle" clientOnly={true}>
 							<StickyBottomBanner
-								contentType={article.contentType}
+								contentType={article.frontendData.contentType}
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
 								idApiUrl={article.config.idApiUrl}
 								isMinuteArticle={
-									article.pageType.isMinuteArticle
+									article.frontendData.pageType
+										.isMinuteArticle
 								}
-								isPaidContent={article.pageType.isPaidContent}
+								isPaidContent={
+									article.frontendData.pageType.isPaidContent
+								}
 								isPreview={!!article.config.isPreview}
 								isSensitive={article.config.isSensitive}
 								keywordIds={article.config.keywordIds}
-								pageId={article.pageId}
+								pageId={article.frontendData.pageId}
 								section={article.config.section}
-								sectionName={article.sectionName}
+								sectionName={article.frontendData.sectionName}
 								shouldHideReaderRevenue={
-									article.shouldHideReaderRevenue
+									article.frontendData.shouldHideReaderRevenue
 								}
 								remoteBannerSwitch={
 									!!article.config.switches.remoteBanner
@@ -982,7 +1031,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								puzzleBannerSwitch={
 									!!article.config.switches.puzzlesBanner
 								}
-								tags={article.tags}
+								tags={article.frontendData.tags}
 							/>
 						</Island>
 					</BannerWrapper>

@@ -63,7 +63,7 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = article.frontendData.config.switches;
+	const { offerHttp3 = false } = article.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -84,8 +84,7 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		article.frontendData.config.abTests[dcrJavascriptBundle('Variant')] ===
-			'variant',
+		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
 	/**
@@ -112,7 +111,7 @@ export const articleToHtml = ({ article }: Props): string => {
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.frontendData.config.commercialBundleUrl,
+				article.config.commercialBundleUrl,
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 		]
@@ -128,21 +127,19 @@ export const articleToHtml = ({ article }: Props): string => {
 		JSON.stringify(
 			makeWindowGuardian({
 				editionId: article.frontendData.editionId,
-				stage: article.frontendData.config.stage,
-				frontendAssetsFullURL:
-					article.frontendData.config.frontendAssetsFullURL,
-				revisionNumber: article.frontendData.config.revisionNumber,
-				sentryPublicApiKey:
-					article.frontendData.config.sentryPublicApiKey,
-				sentryHost: article.frontendData.config.sentryHost,
-				keywordIds: article.frontendData.config.keywordIds,
-				dfpAccountId: article.frontendData.config.dfpAccountId,
-				adUnit: article.frontendData.config.adUnit,
-				ajaxUrl: article.frontendData.config.ajaxUrl,
-				googletagUrl: article.frontendData.config.googletagUrl,
-				switches: article.frontendData.config.switches,
-				abTests: article.frontendData.config.abTests,
-				brazeApiKey: article.frontendData.config.brazeApiKey,
+				stage: article.config.stage,
+				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
+				revisionNumber: article.config.revisionNumber,
+				sentryPublicApiKey: article.config.sentryPublicApiKey,
+				sentryHost: article.config.sentryHost,
+				keywordIds: article.config.keywordIds,
+				dfpAccountId: article.config.dfpAccountId,
+				adUnit: article.config.adUnit,
+				ajaxUrl: article.config.ajaxUrl,
+				googletagUrl: article.config.googletagUrl,
+				switches: article.config.switches,
+				abTests: article.config.abTests,
+				brazeApiKey: article.config.brazeApiKey,
 				isPaidContent: article.frontendData.pageType.isPaidContent,
 				contentType: article.frontendData.contentType,
 				shouldHideReaderRevenue:
@@ -159,7 +156,7 @@ export const articleToHtml = ({ article }: Props): string => {
 				}),
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: article.frontendData.config,
+				unknownConfig: article.config,
 			}),
 		),
 	);
@@ -172,7 +169,7 @@ export const articleToHtml = ({ article }: Props): string => {
 				elements: article.frontendData.blocks.flatMap(
 					(block) => block.elements,
 				),
-				switches: article.frontendData.config.switches,
+				switches: article.config.switches,
 				main: article.frontendData.main,
 			})
 		) {
@@ -188,10 +185,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	const { openGraphData } = article.frontendData;
 	const { twitterData } = article.frontendData;
 	const keywords =
-		typeof article.frontendData.config.keywords === 'undefined' ||
-		article.frontendData.config.keywords === 'Network Front'
+		typeof article.config.keywords === 'undefined' ||
+		article.config.keywords === 'Network Front'
 			? ''
-			: article.frontendData.config.keywords;
+			: article.config.keywords;
 
 	const initTwitter = `
 <script>
@@ -239,6 +236,6 @@ window.twttr = (function(d, s, id) {
 		offerHttp3,
 		canonicalUrl,
 		renderingTarget: 'Web',
-		bork: !!article.frontendData.config.switches.borkWebVitals,
+		bork: !!article.config.switches.borkWebVitals,
 	});
 };

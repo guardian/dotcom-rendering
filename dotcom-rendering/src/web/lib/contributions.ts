@@ -2,7 +2,7 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
-import type { FEArticleType } from '../../types/frontend';
+import type { DCRArticleType } from '../../types/article';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 import { useOnce } from './useOnce';
@@ -260,7 +260,7 @@ export const lazyFetchEmailWithTimeout =
 		});
 	};
 
-export const getContributionsServiceUrl = (article: FEArticleType): string =>
+export const getContributionsServiceUrl = (article: DCRArticleType): string =>
 	process.env.SDC_URL ?? article.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];

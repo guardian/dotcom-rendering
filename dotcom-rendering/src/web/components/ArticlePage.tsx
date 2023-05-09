@@ -79,15 +79,12 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island clientOnly={true} deferUntil="idle">
 						<Metrics
 							commercialMetricsEnabled={
-								!!article.frontendData.config.switches
-									.commercialMetrics
+								!!article.config.switches.commercialMetrics
 							}
 						/>
 					</Island>
 					<Island clientOnly={true} deferUntil="idle">
-						<BrazeMessaging
-							idApiUrl={article.frontendData.config.idApiUrl}
-						/>
+						<BrazeMessaging idApiUrl={article.config.idApiUrl} />
 					</Island>
 					<Island clientOnly={true} deferUntil="idle">
 						<ReaderRevenueDev
@@ -99,12 +96,10 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 					<Island clientOnly={true}>
 						<SetABTests
 							abTestSwitches={filterABTestSwitches(
-								article.frontendData.config.switches,
+								article.config.switches,
 							)}
-							pageIsSensitive={
-								article.frontendData.config.isSensitive
-							}
-							isDev={!!article.frontendData.config.isDev}
+							pageIsSensitive={article.config.isSensitive}
+							isDev={!!article.config.isDev}
 						/>
 					</Island>
 				</>

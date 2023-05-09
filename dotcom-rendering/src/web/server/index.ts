@@ -59,7 +59,13 @@ const parseArticleData = (body: unknown): DCRArticleType => {
 		/* Frontend provided data */
 		contributionsServiceUrl: frontendData.contributionsServiceUrl,
 		pageFooter: frontendData.pageFooter,
+		nav: frontendData.nav,
 		linkedData: frontendData.linkedData,
+		config: frontendData.config,
+		isAdFreeUser: frontendData.isAdFreeUser,
+		slotMachineFlags: frontendData.slotMachineFlags,
+		commercialProperties: frontendData.commercialProperties,
+		editionId: frontendData.editionId,
 		/* 'Parsed' CAPI data */
 		webUrl: frontendData.capiContent.webUrl,
 	};

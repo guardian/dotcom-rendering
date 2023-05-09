@@ -1,12 +1,12 @@
+import type { DCRArticleType } from '../../types/article';
 import type { DCRFrontType } from '../../types/front';
-import type { FEArticleType } from '../../types/frontend';
 
 /**
  * Checks the page for a number of conditions that should
  * prevent ads from being displayed.
  */
 export const canRenderAds = (
-	pageData: FEArticleType | DCRFrontType,
+	pageData: DCRArticleType | DCRFrontType,
 ): boolean => {
 	if (pageData.isAdFreeUser) {
 		return false;
