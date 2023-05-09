@@ -21,9 +21,7 @@ export const fid = (): void => {
 
 			const bork = () => {
 				// eslint-disable-next-line no-console -- we want to apologise, in the name of science!
-				console.info(
-					'🍊 Delaying first click by ' + String(delay) + 'ms, sorry',
-				);
+				console.info(`🍊 Delaying first click by ${delay}ms, sorry`);
 
 				const start = performance.now();
 				eventTypes.forEach((eventType) => {
