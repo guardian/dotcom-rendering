@@ -196,7 +196,7 @@ export const YoutubeBlockComponent = ({
 
 	return (
 		<div
-			css={verticalVideoStyles}
+			css={isVertical && verticalVideoStyles}
 			data-chromatic="ignore"
 			data-component="youtube-atom"
 		>
