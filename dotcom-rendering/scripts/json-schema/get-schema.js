@@ -38,4 +38,12 @@ module.exports = {
 			4,
 		);
 	},
+
+	getBlockSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'Block', settings),
+			null,
+			4,
+		);
+	},
 };
