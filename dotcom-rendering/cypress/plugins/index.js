@@ -9,7 +9,7 @@
 // ***********************************************************
 import path from 'path';
 
-const webpackPreprocessor = require('cypress-webpack-preprocessor-v5');
+const webpackPreprocessor = require('@cypress/webpack-preprocessor');
 
 module.exports = (on, config) => {
 	config.env = { ...config.env, ...process.env };
