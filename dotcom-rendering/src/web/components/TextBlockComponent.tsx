@@ -224,7 +224,6 @@ const buildElementTree =
 			isFirstParagraph,
 			forceDropCap,
 		);
-		const text = node.textContent ?? '';
 		const children = Array.from(node.childNodes).map(
 			buildElementTree(html, format, isFirstParagraph, forceDropCap),
 		);
@@ -284,7 +283,7 @@ const buildElementTree =
 						children,
 					});
 				}
-				return jsx('p', { css: styles(format), text });
+				return jsx('p', { css: styles(format), children });
 			case 'BR':
 				return jsx('br', {
 					key,
