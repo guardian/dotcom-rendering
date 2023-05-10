@@ -75,6 +75,8 @@ const expiredSVGWrapperStyles = css`
 const verticalVideoStyles = css`
 	width: 393px;
 	height: 698px;
+	float: left;
+	margin-right: 13px;
 `;
 
 export const YoutubeBlockComponent = ({

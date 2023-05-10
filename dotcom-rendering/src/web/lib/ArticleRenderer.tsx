@@ -71,7 +71,8 @@ export const ArticleRenderer = ({
 	abTests,
 	renderingTarget,
 }: Props) => {
-	const isVertical = tags.filter((x) => x.title == 'TestTopic').length > 0;
+	const isVertical =
+		tags.filter((x) => x.title == 'vertical-video').length > 0;
 
 	const renderedElements = elements.map((element, index) => {
 		return (
