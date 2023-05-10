@@ -169,8 +169,8 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 
 const Layout: FC<Props> = ({ item }) => {
 	if (
+		item.design === ArticleDesign.Profile ||
 		item.design === ArticleDesign.Explainer ||
-		item.design === ArticleDesign.Analysis ||
 		item.design === ArticleDesign.Standard ||
 		item.design === ArticleDesign.Comment ||
 		item.design === ArticleDesign.Review ||
