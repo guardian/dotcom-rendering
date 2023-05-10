@@ -35,6 +35,9 @@ type Props = {
 	isVertical?: boolean;
 };
 
+const VERTICAL_WIDTH = 393;
+const VERTICAL_HEIGHT = 698;
+
 const expiredOverlayStyles = (overrideImage?: string) =>
 	overrideImage
 		? css`
@@ -73,10 +76,11 @@ const expiredSVGWrapperStyles = css`
 `;
 
 const verticalVideoStyles = css`
-	width: 393px;
-	height: 698px;
+	width: ${VERTICAL_WIDTH}px;
+	height: ${VERTICAL_HEIGHT}px;
 	float: left;
 	margin-right: 13px;
+	margin-bottom: 30px;
 `;
 
 export const YoutubeBlockComponent = ({
@@ -229,8 +233,8 @@ export const YoutubeBlockComponent = ({
 				alt={altText ?? mediaTitle ?? ''}
 				adTargeting={adTargeting}
 				consentState={consentState}
-				height={isVertical ? 698 : height}
-				width={isVertical ? 393 : width}
+				height={isVertical ? VERTICAL_HEIGHT : height}
+				width={isVertical ? VERTICAL_WIDTH : width}
 				title={mediaTitle}
 				duration={duration}
 				eventEmitters={[ophanTracking, gaTracking]}
