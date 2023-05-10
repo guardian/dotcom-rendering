@@ -30,4 +30,4 @@ for (const [name, version] of mismatches) {
 	warn(`You must fix: ${name}@${String(version)}`);
 }
 
-if (mismatches.length !== 0) process.exit(mismatches.length);
+process.exit(mismatches.length === 0 ? 0 : 1);
