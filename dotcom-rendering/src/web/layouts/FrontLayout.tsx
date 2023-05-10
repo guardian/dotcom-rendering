@@ -87,16 +87,18 @@ const decideAdSlot = (
 			);
 		}
 	} else if (mobileAdPositions.includes(index)) {
-		return (
-			<Hide from="tablet">
-				<AdSlot
-					index={index}
-					data-print-layout="hide"
-					position="mobile-front"
-					display={format}
-				/>
-			</Hide>
-		);
+		if (!(isInFrontsBannerTest && isNetworkFront)) {
+			return (
+				<Hide from="tablet">
+					<AdSlot
+						index={index}
+						data-print-layout="hide"
+						position="mobile-front"
+						display={format}
+					/>
+				</Hide>
+			);
+		}
 	}
 	return null;
 };
