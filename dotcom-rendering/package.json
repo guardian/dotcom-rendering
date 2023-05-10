@@ -54,6 +54,7 @@
 		"@braze/web-sdk-core": "3.5.1",
 		"@creditkarma/thrift-server-core": "1.0.4",
 		"@cypress/skip-test": "2.6.1",
+		"@cypress/webpack-preprocessor": "5.17.1",
 		"@emotion/babel-plugin": "11.10.5",
 		"@emotion/cache": "11.10.5",
 		"@emotion/react": "11.10.5",
