@@ -35,8 +35,8 @@ type Props = {
 	isVertical?: boolean;
 };
 
-const VERTICAL_WIDTH = 393;
-const VERTICAL_HEIGHT = 698;
+const VERTICAL_WIDTH = 306;
+const VERTICAL_HEIGHT = 544;
 
 const expiredOverlayStyles = (overrideImage?: string) =>
 	overrideImage
