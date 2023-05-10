@@ -395,7 +395,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									renderAds={renderAds}
 									isNetworkFront={front.isNetworkFront}
-									isInFrontsBannerTest={true}
+									isInFrontsBannerTest={isInFrontsBannerTest}
 								/>
 							</FrontSection>
 							{renderAds &&
