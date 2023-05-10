@@ -6716,7 +6716,7 @@ bluebird@3.7.1:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.1.tgz#df70e302b471d7473489acf26a93d63b53f874de"
   integrity sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
 
-bluebird@3.7.2, bluebird@^3.7.1, bluebird@^3.7.2:
+bluebird@3.7.2, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
   integrity sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==
@@ -7809,15 +7809,6 @@ cypress-wait-until@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/cypress-wait-until/-/cypress-wait-until-1.7.2.tgz#7f534dd5a11c89b65359e7a0210f20d3dfc22107"
   integrity sha512-uZ+M8/MqRcpf+FII/UZrU7g1qYZ4aVlHcgyVopnladyoBrpoaMJ4PKZDrdOJ05H5RHbr7s9Tid635X3E+ZLU/Q==
-
-cypress-webpack-preprocessor-v5@5.0.0-alpha.1:
-  version "5.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/cypress-webpack-preprocessor-v5/-/cypress-webpack-preprocessor-v5-5.0.0-alpha.1.tgz#381cac58c5ff4035c9b0de89379d5e80ee1c16e4"
-  integrity sha512-U5tb21Yxj3j8hofGz/g83NU+dIDNF+yO7DPwrgS5+5TZltc2OOnOpAApiyE23J6dvZyymkUx3bRGyR//Zwrx+A==
-  dependencies:
-    bluebird "^3.7.1"
-    debug "^4.1.1"
-    lodash "^4.17.20"
 
 cypress@12.12.0:
   version "12.12.0"

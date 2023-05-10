@@ -170,7 +170,6 @@
 		"cypress": "12.12.0",
 		"cypress-plugin-tab": "1.0.5",
 		"cypress-wait-until": "1.7.2",
-		"cypress-webpack-preprocessor-v5": "5.0.0-alpha.1",
 		"desvg-loader": "0.1.0",
 		"doctoc": "2.2.1",
 		"dompurify": "3.0.3",
