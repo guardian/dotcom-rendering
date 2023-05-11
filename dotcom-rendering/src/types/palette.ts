@@ -150,7 +150,7 @@ type LightPaletteColours = {
 	};
 };
 
-type DarkPaletteColours = {
+export type DarkPaletteColours = {
 	text: {
 		headline: Colour;
 	};

@@ -23,7 +23,7 @@ import {
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 import type { DCRContainerPalette } from '../../types/front';
-import type { Palette } from '../../types/palette';
+import type { DarkPaletteColours, Palette } from '../../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
@@ -2053,6 +2053,14 @@ const hoverPagination = (format: ArticleFormat) => {
 	}
 };
 
+const decidePaletteDark = (format: ArticleFormat): DarkPaletteColours => {
+	return {
+		text: {
+			headline: textHeadlineDark(format),
+		},
+	};
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2060,11 +2068,7 @@ export const decidePalette = (
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
-		dark: {
-			text: {
-				headline: textHeadlineDark(format),
-			},
-		},
+		dark: decidePaletteDark(format),
 		text: {
 			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
