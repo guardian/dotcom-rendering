@@ -105,6 +105,7 @@ export const allEditorialNewslettersPageToHtml = ({
 		windowGuardian,
 		keywords: '',
 		offerHttp3,
+		renderingTarget: 'Web',
 		bork: !!newslettersPage.config.switches.borkWebVitals,
 	});
 };

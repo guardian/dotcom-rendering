@@ -11,6 +11,7 @@ import {
 	validateAsArticleType,
 	validateAsFrontType,
 } from '../../model/validate';
+import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
@@ -31,7 +32,6 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
 	});
-
 	return {
 		...data,
 		blocks: enhancedBlocks,
@@ -76,6 +76,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'web');
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
@@ -89,6 +90,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'json');
 		const article = enhanceArticleType(body);
 		const resp = {
 			data: {
@@ -111,6 +113,7 @@ export const handlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('interactive', 'web');
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
@@ -123,6 +126,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('blocks');
 	try {
 		const {
 			blocks,
@@ -170,6 +174,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 };
 
 export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('keyEvents');
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
@@ -188,6 +193,7 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('front');
 	try {
 		const front = enhanceFront(body);
 		const html = frontToHtml({

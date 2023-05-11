@@ -16,6 +16,7 @@ describe('Nav', () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
+				isInEuropeTest={true}
 			/>,
 		);
 		const list = within(getByTestId('pillar-list'));
@@ -38,6 +39,7 @@ describe('Nav', () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
+				isInEuropeTest={true}
 			/>,
 		);
 

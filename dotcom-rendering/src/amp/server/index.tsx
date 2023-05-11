@@ -1,4 +1,5 @@
 import type { RequestHandler } from 'express';
+import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
@@ -16,6 +17,7 @@ import { document } from './document';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
+		recordTypeAndPlatform('article', 'amp');
 		const article = validateAsArticleType(body);
 		const { linkedData } = article;
 		const { config } = article;
