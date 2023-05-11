@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
@@ -18,6 +19,27 @@ import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
 
+const darkModeCss =
+	(supportsDarkMode: boolean) =>
+	(styles: TemplateStringsArray, ...placeholders: string[]) => {
+		if (supportsDarkMode) {
+			const darkStyles = styles
+				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+				.map(
+					(style, i) =>
+						`${style}${placeholders[i] ? placeholders[i] : ''}`,
+				)
+				.join('');
+			return css`
+				@media (prefers-color-scheme: dark) {
+					${darkStyles}
+				}
+			`;
+		} else {
+			return '';
+		}
+	};
+
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
@@ -27,6 +49,7 @@ type Props = {
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
+	supportsDarkMode: boolean;
 };
 
 const curly = (x: any) => x;
@@ -342,6 +365,7 @@ export const ArticleHeadline = ({
 	hasStarRating,
 	hasAvatar,
 	isMatch,
+	supportsDarkMode = false,
 }: Props) => {
 	const palette = decidePalette(format);
 	switch (format.display) {
@@ -439,6 +463,9 @@ export const ArticleHeadline = ({
 									darkBackground(palette),
 									css`
 										color: ${palette.text.headline};
+										@media (prefers-color-scheme: dark) {@media (prefers-color-scheme: dark) {
+											color: ${palette.dark.text.headline};
+										}
 									`,
 								]}
 							>
@@ -808,6 +835,10 @@ export const ArticleHeadline = ({
 										topPadding,
 										css`
 											color: ${palette.text.headline};
+
+											${darkModeCss(supportsDarkMode)`
+												color: ${palette.dark.text.headline};
+											`}
 										`,
 									]}
 								>

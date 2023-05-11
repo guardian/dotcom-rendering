@@ -1,6 +1,6 @@
 export type Colour = string;
 
-export type Palette = {
+type LightPaletteColours = {
 	text: {
 		headline: Colour;
 		headlineWhenMatch: Colour;
@@ -149,6 +149,16 @@ export type Palette = {
 		pagination: Colour;
 	};
 };
+
+type DarkPaletteColours = {
+	text: {
+		headline: Colour;
+	};
+};
+
+export interface Palette extends LightPaletteColours {
+	dark: DarkPaletteColours;
+}
 
 export type ContainerOverrides = {
 	text: {

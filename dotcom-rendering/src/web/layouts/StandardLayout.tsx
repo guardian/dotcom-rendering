@@ -580,6 +580,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									hasStarRating={
 										typeof article.starRating === 'number'
 									}
+									supportsDarkMode={
+										renderingTarget === 'Apps'
+									}
 								/>
 							</div>
 						</GridItem>

@@ -51,6 +51,10 @@ const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	}
 };
 
+const textHeadlineDark = (_format: ArticleFormat): string => {
+	return 'orangered';
+};
+
 const textHeadline = (format: ArticleFormat): string => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -2056,6 +2060,11 @@ export const decidePalette = (
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 	return {
+		dark: {
+			text: {
+				headline: textHeadlineDark(format),
+			},
+		},
 		text: {
 			headline: textHeadline(format),
 			headlineWhenMatch: textHeadlineWhenMatch(format),
