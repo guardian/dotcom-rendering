@@ -83,7 +83,7 @@ const textElement =
 				});
 			case 'A':
 				return jsx('A', {
-					href: getAttrs(node)?.getNamedItem('href'),
+					href: getAttrs(node)?.getNamedItem('href')?.value,
 					key,
 					children,
 				});
