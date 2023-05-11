@@ -51,29 +51,15 @@ start-ci: install
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/frontend.server.js
-	@echo '' # just a spacer
-	$(call log, "PROD server is running")
-	@NODE_ENV=production pm2 logs
+	NODE_ENV=production forever start dist/frontend.server.js
 
-# Used in cloudformation.yml which specifically:
-# - Launches pm2 from /usr/local/node rather than /node_modules
-# - Does not run 'install' task as its not needed & adds time to startup
+# Used in cloudformation.yml
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	NODE_ENV=production /usr/local/node/forever start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
-
-stop:
-	@pm2 kill
-
-monitor:
-	@pm2 monit
-
-logs:
-	@pm2 logs
 
 run: stop build start
 

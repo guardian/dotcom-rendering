@@ -78,7 +78,6 @@ const enableLog4j = {
 		production: { appenders: ['fileAppender'], level: 'info' },
 		development: { appenders: ['console'], level: 'info' },
 	},
-	pm2: true,
 };
 
 if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
