@@ -22,6 +22,7 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
+import { SnapWrapper } from '../components/SnapWrapper';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -252,22 +253,48 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const COTTON_CAPITAL_THRASHERS = [
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/default-fronts-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/david-olusoga-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/cassandra-gooptar-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/gary-younge-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/deneen-l-brown-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/the-enslaved-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/olivette-otele-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/interactives-front--globe',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/michael-taylor-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/lanre-bakare-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/hidden-figures-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/johny-pitts-photo-essay-front-default',
+					];
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<>
-								<Section
-									fullWidth={true}
-									padSides={false}
-									padBottom={true}
-									showTopBorder={false}
-									showSideBorders={true}
-									ophanComponentLink={ophanComponentLink}
-									ophanComponentName={ophanName}
-									containerName={collection.collectionType}
-								>
+								{!!trail.embedUri &&
+								COTTON_CAPITAL_THRASHERS.includes(
+									trail.embedUri,
+								) ? (
 									<Snap snapData={trail.snapData} />
-								</Section>
+								) : (
+									<SnapWrapper snapData={trail.snapData}>
+										<Section
+											fullWidth={true}
+											padSides={false}
+											showTopBorder={false}
+											showSideBorders={true}
+											ophanComponentLink={
+												ophanComponentLink
+											}
+											ophanComponentName={ophanName}
+											containerName={
+												collection.collectionType
+											}
+										>
+											<Snap snapData={trail.snapData} />
+										</Section>
+									</SnapWrapper>
+								)}
 								{decideAdSlot(
 									index,
 									front.isNetworkFront,

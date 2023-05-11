@@ -178,6 +178,7 @@ export type FEFrontCard = {
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
 		href?: string;
+		embedUri?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -263,6 +264,7 @@ export type DCRFrontCard = {
 	mediaDuration?: number;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
+	embedUri?: string;
 };
 
 export type FESnapType = {

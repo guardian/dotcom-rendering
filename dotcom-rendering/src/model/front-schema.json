@@ -806,6 +806,9 @@
                                                 },
                                                 "href": {
                                                     "type": "string"
+                                                },
+                                                "embedUri": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1486,6 +1489,9 @@
                                                 },
                                                 "href": {
                                                     "type": "string"
+                                                },
+                                                "embedUri": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -2165,6 +2171,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
