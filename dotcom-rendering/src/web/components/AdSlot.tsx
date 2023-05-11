@@ -6,7 +6,11 @@ import { from, palette, space, textSans } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
-type InlinePosition = 'inline' | 'liveblog-inline' | 'mobile-front';
+type InlinePosition =
+	| 'inline'
+	| 'liveblog-inline'
+	| 'mobile-front'
+	| 'fronts-banner';
 
 type InlineProps = {
 	display?: ArticleDisplay;
@@ -102,6 +106,33 @@ export const adCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
 	}
+`;
+
+const topAboveNavStyles = css`
+	position: relative;
+	margin: 0 auto;
+	min-height: ${adSizes.leaderboard.height}px;
+	min-width: ${adSizes.leaderboard.width}px;
+	text-align: left;
+	display: block;
+`;
+
+const bannerAdStyles = css`
+	position: relative;
+	margin: auto;
+	min-height: ${adSizes.leaderboard.height + labelHeight}px;
+	width: fit-content;
+`;
+
+const bannerPaddingBottom = space[4];
+const bannerAdContainerStyles = css`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: ${palette.neutral[97]};
+	min-height: ${250 + labelHeight + bannerPaddingBottom}px;
+	padding-bottom: ${bannerPaddingBottom}px;
 `;
 
 const merchandisingAdStyles = css`
@@ -298,14 +329,6 @@ export const AdSlot = ({
 			);
 		}
 		case 'top-above-nav': {
-			const adSlotAboveNav = css`
-				position: relative;
-				margin: 0 auto;
-				min-height: ${adSizes.leaderboard.height}px;
-				text-align: left;
-				display: block;
-				min-width: 728px;
-			`;
 			return (
 				<div
 					id="dfp-ad--top-above-nav"
@@ -316,11 +339,35 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					css={[adStyles, fluidFullWidthAdStyles, topAboveNavStyles]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
 				></div>
+			);
+		}
+		case 'fronts-banner': {
+			const advertId = `fronts-banner-${index}`;
+			return (
+				<div
+					className="ad-slot-container"
+					css={[adStyles, bannerAdContainerStyles]}
+				>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--fronts-banner',
+							`ad-slot--${advertId}`,
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[adStyles, fluidFullWidthAdStyles, bannerAdStyles]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name="fronts-banner"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'mostpop': {
