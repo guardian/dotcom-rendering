@@ -24,9 +24,9 @@ const darkModeCss =
 	(styles: TemplateStringsArray, ...placeholders: string[]) => {
 		if (supportsDarkMode) {
 			const darkStyles = styles
-				// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 				.map(
 					(style, i) =>
+						// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 						`${style}${placeholders[i] ? placeholders[i] : ''}`,
 				)
 				.join('');
@@ -463,9 +463,6 @@ export const ArticleHeadline = ({
 									darkBackground(palette),
 									css`
 										color: ${palette.text.headline};
-										@media (prefers-color-scheme: dark) {@media (prefers-color-scheme: dark) {
-											color: ${palette.dark.text.headline};
-										}
 									`,
 								]}
 							>
