@@ -1,11 +1,10 @@
 import { css, jsx } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
-import { JSDOM } from 'jsdom';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
-import { getAttrs } from '../lib/domUtils';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
@@ -35,13 +34,6 @@ const quotedBlockquoteStyles = (palette: Palette) => css`
 	${baseBlockquoteStyles}
 	color: ${palette.text.blockquote};
 `;
-
-const parseHtml = (html: string): DocumentFragment => JSDOM.fragment(html);
-
-// The nodeType for ELEMENT_NODE has the value 1.
-function isElement(node: Node): node is Element {
-	return node.nodeType === 1;
-}
 
 /**
  * Searches through the siblings of an element to determine if it's the first
