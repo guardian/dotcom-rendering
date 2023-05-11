@@ -2,14 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
-import {
-	border,
-	from,
-	neutral,
-	space,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, palette, space, textSans } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -44,10 +37,10 @@ export const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
-	background-color: ${neutral[97]};
-	padding: 0 8px;
-	border-top: 1px solid ${border.secondary};
-	color: ${text.supporting};
+	background-color: ${palette.neutral[97]};
+	padding: 0 ${space[2]}px 1px;
+	border-top: 1px solid ${palette.neutral[86]};
+	color: ${palette.neutral[46]};
 	text-align: left;
 	box-sizing: border-box;
 `;
@@ -87,8 +80,9 @@ export const labelStyles = css`
 
 	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
 		content: attr(ad-label-text);
-		display: block;
 		position: relative;
+		display: flex;
+		align-items: center;
 		${individualLabelCSS}
 	}
 
@@ -209,8 +203,8 @@ const mobileStickyAdStyles = css`
 	.ad-slot__close-button svg {
 		height: 0.75rem;
 		width: 0.75rem;
-		stroke: ${neutral[7]};
-		fill: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
+		fill: ${palette.neutral[7]};
 		stroke-linecap: round;
 		stroke-width: 0;
 		text-align: center;
@@ -219,7 +213,7 @@ const mobileStickyAdStyles = css`
 		display: block;
 	}
 	.ad-slot__close-button__x {
-		stroke: ${neutral[7]};
+		stroke: ${palette.neutral[7]};
 		fill: transparent;
 		stroke-linecap: round;
 		stroke-width: 2;
@@ -276,10 +270,7 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<TopRightAdSlot
-							isPaidContent={isPaidContent}
-							adStyles={adStyles}
-						/>
+						<TopRightAdSlot isPaidContent={isPaidContent} adStyles={adStyles} />
 					);
 				}
 				default:
@@ -371,11 +362,7 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[
-							merchandisingAdStyles,
-							adStyles,
-							fluidFullWidthAdStyles,
-						]}
+						css={[merchandisingAdStyles, adStyles, fluidFullWidthAdStyles]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						aria-hidden="true"
@@ -397,16 +384,10 @@ export const AdSlot = ({
 				>
 					<div
 						id="dfp-ad--merchandising"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--merchandising',
-						].join(' ')}
-						css={[
-							merchandisingAdStyles,
-							adStyles,
-							fluidFullWidthAdStyles,
-						]}
+						className={['js-ad-slot', 'ad-slot', 'ad-slot--merchandising'].join(
+							' ',
+						)}
+						css={[merchandisingAdStyles, adStyles, fluidFullWidthAdStyles]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						aria-hidden="true"
@@ -418,11 +399,7 @@ export const AdSlot = ({
 			return (
 				<div
 					id="dfp-ad--survey"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--survey',
-					].join(' ')}
+					className={['js-ad-slot', 'ad-slot', 'ad-slot--survey'].join(' ')}
 					css={outOfPageStyles}
 					data-link-name="ad slot survey"
 					data-name="survey"
@@ -523,7 +500,5 @@ export const AdSlot = ({
 };
 
 export const MobileStickyContainer = () => {
-	return (
-		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
-	);
+	return <div className="mobilesticky-container" css={mobileStickyAdStyles} />;
 };
