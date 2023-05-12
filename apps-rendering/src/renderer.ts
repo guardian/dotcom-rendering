@@ -211,7 +211,7 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
  * for better performance.
  */
 const dropCapRegex =
-	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{3,}/;
+	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{2,}/;
 
 const shouldShowDropCap = (
 	text: string,
