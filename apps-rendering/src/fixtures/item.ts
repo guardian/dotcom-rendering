@@ -101,8 +101,8 @@ const docFixture = (): Node => {
 
 	const el = document.createElement('p');
 
-	el.innerText =
-		'Readers of Prospect magazine recently voted him the world’s fourth-best thinker. And right now he is thinking about 3 November, and whether the United States will reject or endorse Donald Trump. No one knows what will happen; not even West, not least because in the US he sees contradictions that even he can’t fully explain.';
+	el.innerHTML =
+		'Readers of Prospect magazine recently voted him the world’s fourth-best thinker. And right now he is <a href="https://www.theguardian.com">thinking</a> about 3 November, and whether the United States will reject or endorse Donald Trump. No one knows what will happen; not even West, not least because in the US he sees contradictions that even he can’t fully explain.';
 
 	doc.appendChild(el);
 
@@ -230,6 +230,9 @@ const body: Body = [
 		},
 		role: ArticleElementRole.Standard,
 		imageSubtype: Optional.some(ImageSubtype.Jpeg),
+	},
+	{
+		kind: ElementKind.SpecialReportAltAtom,
 	},
 	{
 		kind: ElementKind.Text,
@@ -429,7 +432,6 @@ const fields = {
 		sponsorName: 'Judith Nielson Institute',
 		sponsorUri: 'https://jninstitute.org/',
 	}),
-	internalShortId: none,
 	commentCount: none,
 	relatedContent: relatedContent,
 	footballContent: none,
@@ -571,6 +573,13 @@ const standardImmersive: Standard = {
 	outline: fromBodyElements(fields.body),
 };
 
+const commentImmersive: Comment = {
+	design: ArticleDesign.Comment,
+	...fields,
+	display: ArticleDisplay.Immersive,
+	theme: ArticlePillar.Opinion,
+};
+
 const gallery: Gallery = {
 	design: ArticleDesign.Gallery,
 	...fields,
@@ -602,6 +611,7 @@ export {
 	explainer,
 	newsletterSignUp,
 	standardImmersive,
+	commentImmersive,
 	gallery,
 	parseHtml,
 	setTheme,

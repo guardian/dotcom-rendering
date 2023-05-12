@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { TopicFilterBank } from './TopicFilterBank.importable';
+import { TopicFilterBank } from './TopicFilterBank';
 
 const availableTopics: Topic[] = [
 	{ type: 'GPE', value: 'London', count: 16 },
@@ -77,9 +77,7 @@ export const topicBank = () => {
 		</Wrapper>
 	);
 };
-topicBank.story = {
-	name: 'topicBank',
-};
+topicBank.storyName = 'topicBank';
 
 export const topicBankSelectedIsNotInTop5 = () => {
 	return (
@@ -101,9 +99,7 @@ export const topicBankSelectedIsNotInTop5 = () => {
 		</Wrapper>
 	);
 };
-topicBankSelectedIsNotInTop5.story = {
-	name: 'topicBankSelectedIsNotInTop5',
-};
+topicBankSelectedIsNotInTop5.storyName = 'topicBankSelectedIsNotInTop5';
 
 export const notShowingTopicsWithLowerCounts = () => {
 	return (
@@ -125,9 +121,7 @@ export const notShowingTopicsWithLowerCounts = () => {
 		</Wrapper>
 	);
 };
-notShowingTopicsWithLowerCounts.story = {
-	name: 'notShowingTopicsWithLowerCounts',
-};
+notShowingTopicsWithLowerCounts.storyName = 'notShowingTopicsWithLowerCounts';
 
 export const doesNotRenderWhenNoKeyEventsOrRelevantTopics = () => {
 	return (
@@ -143,6 +137,5 @@ export const doesNotRenderWhenNoKeyEventsOrRelevantTopics = () => {
 		</Wrapper>
 	);
 };
-doesNotRenderWhenNoKeyEventsOrRelevantTopics.story = {
-	name: 'doesNotRenderWhenNoKeyEventsOrRelevantTopics',
-};
+doesNotRenderWhenNoKeyEventsOrRelevantTopics.storyName =
+	'doesNotRenderWhenNoKeyEventsOrRelevantTopics';

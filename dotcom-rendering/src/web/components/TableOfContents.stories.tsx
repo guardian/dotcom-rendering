@@ -66,7 +66,7 @@ export const defaultStory = () => {
 	);
 };
 
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const immersive = () => {
 	return (
@@ -79,7 +79,7 @@ export const immersive = () => {
 	);
 };
 
-immersive.story = { name: 'immersive' };
+immersive.storyName = 'immersive';
 
 export const numberedList = () => {
 	return (
@@ -92,4 +92,4 @@ export const numberedList = () => {
 	);
 };
 
-numberedList.story = { name: 'numberedList' };
+numberedList.storyName = 'numberedList';

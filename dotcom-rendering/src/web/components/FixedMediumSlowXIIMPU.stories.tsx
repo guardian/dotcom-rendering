@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
 
 export default {
 	component: FixedMediumSlowXIIMPU,
@@ -18,136 +18,121 @@ export default {
 };
 
 export const OneTrail = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-OneTrail.story = { name: 'with one trail' };
+OneTrail.storyName = 'with one trail';
 
 export const TwoTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-TwoTrails.story = { name: 'with two trails' };
+TwoTrails.storyName = 'with two trails';
 
 export const ThreeTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-ThreeTrails.story = { name: 'with three trails' };
+ThreeTrails.storyName = 'with three trails';
 
 export const FourTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-FourTrails.story = { name: 'with four trails' };
+FourTrails.storyName = 'with four trails';
 
 export const FiveTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-FiveTrails.story = { name: 'with five trails' };
+FiveTrails.storyName = 'with five trails';
 
 export const SixTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-SixTrails.story = { name: 'with six trails' };
+SixTrails.storyName = 'with six trails';
 
 export const SevenTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-SevenTrails.story = { name: 'with seven trails' };
+SevenTrails.storyName = 'with seven trails';
 
 export const EightTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-EightTrails.story = { name: 'with eight trails' };
+EightTrails.storyName = 'with eight trails';
 
 export const NineTrails = () => (
-	<Section
-		title="FixedMediumSlowXIIMPU"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}
 			showAge={true}
 			index={1}
+			renderAds={true}
 		/>
-	</Section>
+	</FrontSection>
 );
-NineTrails.story = { name: 'with nine trails' };
+NineTrails.storyName = 'with nine trails';
+
+export const EightTrailsNoAds = () => (
+	<FrontSection title="Fixed Medium Slow XII MPU">
+		<FixedMediumSlowXIIMPU
+			trails={trails.slice(0, 8)}
+			showAge={true}
+			index={1}
+			renderAds={false}
+		/>
+	</FrontSection>
+);
+EightTrailsNoAds.storyName = 'with eight trails and no ad slot';

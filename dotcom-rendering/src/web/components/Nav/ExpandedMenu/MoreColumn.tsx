@@ -5,7 +5,6 @@ import {
 	brandText,
 	from,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import type { LinkType } from '../../../../model/extract-nav';
 import FacebookIcon from '../../../../static/icons/facebook.svg';
@@ -16,12 +15,6 @@ const pillarHeight = 42;
 const hideDesktop = css`
 	${from.desktop} {
 		display: none;
-	}
-`;
-
-const pillarColumnLinks = css`
-	${until.tablet} {
-		background: ${brand[300]};
 	}
 `;
 
@@ -190,38 +183,29 @@ const shareIconStyles = css`
 `;
 
 type Props = {
-	column: LinkType;
+	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
 };
 
-export const MoreColumn = ({ column, brandExtensions }: Props) => {
-	const subNavId = `${column.title.toLowerCase()}Links`;
-	// Add the brand extensions to 'more' on mobile.
-	const moreColumn = {
-		...column,
-		children: [
-			...brandExtensions.map((brandExtension) => ({
-				...brandExtension,
-				mobileOnly: true,
-			})),
-			...(column.children ?? []),
-		],
-	};
+export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
+	const subNavId = 'moreLinks';
+
+	const links = [
+		...brandExtensions.map((brandExtension) => ({
+			...brandExtension,
+			mobileOnly: true,
+		})),
+		...otherLinks,
+	];
+
 	return (
 		<>
 			<li
 				css={[columnStyle, pillarDivider, pillarDividerExtended]}
 				role="none"
 			>
-				<ul
-					css={[
-						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
-					]}
-					role="menu"
-					id={subNavId}
-				>
-					{(moreColumn.children || []).map((link) => (
+				<ul css={[columnLinks]} role="menu" id={subNavId}>
+					{links.map((link) => (
 						<li
 							key={link.title.toLowerCase()}
 							css={[
@@ -246,13 +230,7 @@ export const MoreColumn = ({ column, brandExtensions }: Props) => {
 				</ul>
 			</li>
 			<li css={columnStyle} role="none">
-				<ul
-					css={[
-						columnLinks,
-						!!moreColumn.pillar && pillarColumnLinks,
-					]}
-					role="menu"
-				>
+				<ul css={[columnLinks]} role="menu">
 					<li
 						key="facebook"
 						css={[mainMenuLinkStyle, hideDesktop]}

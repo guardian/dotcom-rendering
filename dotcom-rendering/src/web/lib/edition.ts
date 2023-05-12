@@ -2,9 +2,15 @@ import type { EditionLinkType } from '../../model/extract-nav';
 
 export type EditionId = (typeof editionList)[number]['editionId'];
 
+/**
+ * Warning: This list included the behind a 0% test edition
+ * 'Europe', please use `getEditions` unless you're certain
+ * you won't be accidentally displaying Europe edition to
+ * users.
+ */
 export const editionList = [
 	{
-		url: '/preference/edition/au',
+		url: '/preference/edition/uk',
 		editionId: 'UK',
 		longTitle: 'UK edition',
 		title: 'UK edition',
@@ -40,8 +46,20 @@ export const editionList = [
 	},
 ] as const;
 
+/**
+ * Gets all the editions, factoring in whether or not the user is in the europe test group or not.
+ * Use over 'editionList' in any case where you're listing available editions to the user.
+ *
+ * @param isInEuropeTest Whether or not the user is in the europe edition test group
+ * @returns All editions, optionally excluding Europe edition
+ */
+export const getEditions = (isInEuropeTest: boolean): EditionLinkType[] =>
+	editionList.filter((e) => (e.editionId === 'EUR' ? isInEuropeTest : true));
+
 export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
 	return (
+		// We can use just 'editionList' here as we can safely assume if the user
+		// is in the europe edition, they're also in the test group
 		editionList.find((edition) => edition.editionId === editionId) ??
 		editionList[0]
 	);
@@ -49,8 +67,11 @@ export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
 
 export const getRemainingEditions = (
 	editionId: EditionId,
+	isInEuropeTest: boolean,
 ): EditionLinkType[] => {
-	return editionList.filter((edition) => edition.editionId !== editionId);
+	return getEditions(isInEuropeTest).filter(
+		(edition) => edition.editionId !== editionId,
+	);
 };
 
 /**

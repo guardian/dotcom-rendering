@@ -2,32 +2,17 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import type { RenderingTarget } from '../../types/renderingTarget';
+import { fcp } from '../bork/fcp';
+import { fid } from '../bork/fid';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
-export const pageTemplate = ({
-	css,
-	html,
-	windowGuardian,
-	scriptTags,
-	keywords,
-	offerHttp3,
-	title = 'The Guardian',
-	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
-	linkedData,
-	ampLink,
-	openGraphData,
-	twitterData,
-	initTwitter,
-	recipeMarkup,
-	canonicalUrl,
-}: {
+type BaseProps = {
 	css: string;
 	html: string;
 	windowGuardian: string;
 	scriptTags: string[];
-	keywords: string;
-	offerHttp3: boolean;
 	title?: string;
 	description?: string;
 	linkedData?: { [key: string]: any };
@@ -37,12 +22,21 @@ export const pageTemplate = ({
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
-}): string => {
-	const favicon =
-		process.env.NODE_ENV === 'production'
-			? 'favicon-32x32.ico'
-			: 'favicon-32x32-dev-yellow.ico';
+	bork: boolean;
+	renderingTarget: RenderingTarget;
+	offerHttp3: boolean;
+};
 
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	keywords: string;
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
+
+const getFontPreloadTags = (offerHttp3: boolean) => {
 	/**
 	 * Preload the following woff2 font files
 	 * TODO: Identify critical fonts to preload
@@ -52,25 +46,47 @@ export const pageTemplate = ({
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
 	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
-	const fontPreloadTags = fontFiles.map(
+	return fontFiles.map(
 		(fontFile) =>
 			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
 	);
+};
+
+export const pageTemplate = (props: WebProps | AppProps): string => {
+	const {
+		css,
+		html,
+		windowGuardian,
+		scriptTags,
+		title = 'The Guardian',
+		description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
+		linkedData,
+		ampLink,
+		openGraphData,
+		twitterData,
+		initTwitter,
+		recipeMarkup,
+		canonicalUrl,
+		renderingTarget,
+		offerHttp3,
+		bork,
+	} = props;
+
+	const favicon =
+		process.env.NODE_ENV === 'production'
+			? 'favicon-32x32.ico'
+			: 'favicon-32x32-dev-yellow.ico';
 
 	const generateMetaTags = (
 		dataObject: { [key: string]: string },
 		attributeName: 'name' | 'property',
-	) => {
-		if (dataObject) {
-			return Object.entries(dataObject)
-				.map(
-					([id, value]) =>
-						`<meta ${attributeName}="${id}" content="${value}"/>`,
-				)
-				.join('\n');
-		}
-		return '';
-	};
+	) =>
+		Object.entries(dataObject)
+			.map(
+				([id, value]) =>
+					`<meta ${attributeName}="${id}" content="${value}"/>`,
+			)
+			.join('\n');
 
 	const openGraphMetaTags =
 		openGraphData && generateMetaTags(openGraphData, 'property');
@@ -202,7 +218,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 						: '<!-- no Amp link -->'
 				}
 
-                ${fontPreloadTags.join('\n')}
+				${
+					renderingTarget === 'Web'
+						? getFontPreloadTags(props.offerHttp3).join('\n')
+						: ''
+				}
 
                 ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
 
@@ -234,6 +254,12 @@ https://workforus.theguardian.com/careers/product-engineering/
                         window.performance.mark = function(){};
                         window.performance.measure = function(){};
                     }
+                </script>
+
+                <script>
+                    // record the number of times the browser goes offline during a pageview
+                    window.guardian.offlineCount = 0;
+                    window.addEventListener('offline', function incrementOfflineCount () { window.guardian.offlineCount++ });
                 </script>
 
                 <script>
@@ -294,10 +320,14 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				${bork ? `<script>(${fid.toString()})()</script>` : ''}
+				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
 
 				${initTwitter ?? ''}
 
-
+				${
+					renderingTarget === 'Web'
+						? `
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
 						{
@@ -306,17 +336,41 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cv: '2.0',
 							cj: '1',
 							cs_ucfr: '0',
-							comscorekw: keywords,
+							comscorekw: props.keywords,
 						},
 					).toString()}" />
 
 					${islandNoscriptStyles}
                 </noscript>
+				`
+						: ''
+				}
                 ${scriptTags.join('\n')}
                 <style class="webfont">${getFontsCss(offerHttp3)}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
+				${
+					bork
+						? `
+				<style>
+					@keyframes bork-fcp-paint {
+						to {
+							opacity: 1;
+						}
+					}
+  					html.bork-fcp body {
+						opacity: 0.001;
+						animation-duration: var(--bork-fcp-amount);
+						animation-name: bork-fcp-paint;
+						animation-timing-function: steps(1);
+						animation-iteration-count: 1;
+						animation-fill-mode: forwards;
+					}
+				</style>`
+						: ''
+				}
+
 			</head>
 
 			<body>

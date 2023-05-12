@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -46,7 +46,12 @@ export const articleToHtml = ({ article }: Props): string => {
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} article={article} NAV={NAV} />,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Web"
+		/>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -87,9 +92,10 @@ export const articleToHtml = ({ article }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -107,9 +113,9 @@ export const articleToHtml = ({ article }: Props): string => {
 				article.config.commercialBundleUrl,
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		].map((script) =>
-			offerHttp3 && script ? getHttp3Url(script) : script,
-		),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -146,6 +152,8 @@ export const articleToHtml = ({ article }: Props): string => {
 					editionId: article.editionId,
 					beaconURL: article.beaconURL,
 				}),
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
 			}),
 		),
@@ -223,5 +231,7 @@ window.twttr = (function(d, s, id) {
 		recipeMarkup,
 		offerHttp3,
 		canonicalUrl,
+		renderingTarget: 'Web',
+		bork: !!article.config.switches.borkWebVitals,
 	});
 };

@@ -1,13 +1,13 @@
 import type { DCRContainerPalette, DCRFrontCard } from '../../types/front';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 import {
 	Card25Media25,
 	Card25Media25SmallHeadline,
 	Card75Media50Right,
+	CardDefault,
 } from '../lib/cardWrappers';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -92,13 +92,10 @@ export const FixedLargeSlowXIV = ({
 							)}
 							key={card.url}
 						>
-							<FrontCard
+							<CardDefault
 								trail={card}
-								starRating={card.starRating}
-								containerPalette={containerPalette}
 								showAge={showAge}
-								headlineSize="small"
-								imageUrl={undefined}
+								containerPalette={containerPalette}
 							/>
 						</LI>
 					);

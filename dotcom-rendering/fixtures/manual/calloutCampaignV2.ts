@@ -11,11 +11,22 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 	activeUntil: 1672669481,
 	displayOnSensitive: false,
 	formId: 3860296,
+	prompt: 'Share your experience',
 	title: 'Are you affected by the issues in this article?',
 	isNonCollapsible: true,
 	description:
 		'<p>We’d like to hear how people are being affected, whether they’re applying for a mortgage or refixing an existing one. Are you on a variable rate mortgage, or a fixed rate that is about to expire? How will it impact you financially? </p> <p> We’re also interested in how people, particularly first-time buyers, have been affected by disappearing mortgage deals. </p> ',
 	formFields: [
+		{
+			name: 'referrer',
+			description: 'This field is hidden and is not rendered',
+			hideLabel: false,
+			label: 'referrer',
+			id: 'referrer',
+			type: 'text',
+			required: true,
+			hidden: true,
+		},
 		{
 			name: 'your_name',
 			description: 'How should we refer to you?',
@@ -24,6 +35,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'name',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'where_do_you_live',
@@ -33,6 +45,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'live',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'tell_us_a_bit_about_yourself',
@@ -42,6 +55,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'about',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'share_your_experiences',
@@ -51,6 +65,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'experience',
 			type: 'textarea',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'what_events_did_you_attend',
@@ -60,6 +75,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'events',
 			type: 'checkbox',
 			required: false,
+			hidden: false,
 			options: [
 				{
 					label: '1st Dec',
@@ -84,6 +100,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'upload',
 			type: 'file',
 			required: false,
+			hidden: false,
 		},
 		{
 			name: 'can_we_publish_your_response',
@@ -110,6 +127,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'permissions',
 			type: 'select',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'your_phone_number',
@@ -120,6 +138,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'phone',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'your_email_address',
@@ -130,6 +149,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'email',
 			type: 'text',
 			required: true,
+			hidden: false,
 		},
 		{
 			name: 'additional_information',
@@ -139,6 +159,28 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			id: 'additional',
 			type: 'textarea',
 			required: false,
+			hidden: false,
+		},
+	],
+	contacts: [
+		{
+			name: 'whatsapp',
+			value: '+447766780300',
+			urlPrefix: 'https://wa.me/',
+			guidance:
+				'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian',
+		},
+		{
+			name: 'signal',
+			value: '+447766780300',
+			urlPrefix: 'https://signal.me/#p/',
+		},
+		{
+			name: 'telegram',
+			value: '+1234',
+			urlPrefix: 'https://telegram.me/',
+			guidance:
+				'https://www.theguardian.com/info/2022/mar/15/telegram-sharing-stories-with-the-guardian',
 		},
 	],
 };

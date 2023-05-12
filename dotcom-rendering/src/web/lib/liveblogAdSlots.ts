@@ -15,15 +15,9 @@ import type {
 const MAX_INLINE_ADS = 8;
 
 /**
- * Minimum amount of space in pixels between the top of
- * the liveblog container and the highest inline ad.
- */
-const MIN_SPACE_BEFORE_FIRST_AD = 500;
-
-/**
  * Minimum amount of space in pixels between any pair of inline ads.
  */
-const MIN_SPACE_BETWEEN_ADS = 1_800;
+const MIN_SPACE_BETWEEN_ADS = 1_500;
 
 /**
  * Estimated margin associated with an element.
@@ -55,7 +49,7 @@ type BlockElementHeightData = { heightExcludingText: number } & (
 /**
  * All known element types that are used in a liveblog block. There are other elements that
  * it is possible to use (see FEElement type), but these other elements have not been
- * sighted in a liveblog page, so are not considered.
+ * sighted in a liveblog page (and there's lots of them), so they are not considered for now.
  */
 type KnownBlockElementType =
 	| 'model.dotcomrendering.pageElements.BlockquoteBlockElement'
@@ -207,7 +201,7 @@ const calculateApproximateBlockHeight = (elements: FEElement[]): number => {
 };
 
 /**
- * Determines whether an ad should be inserted after the next content block
+ * Determines whether an ad should be inserted AFTER the next content block
  */
 const shouldDisplayAd = (
 	block: number,
@@ -220,13 +214,13 @@ const shouldDisplayAd = (
 		return false;
 	}
 
-	const isFirstAd = numAdsInserted === 0;
+	// Always show an advert after the first content block
+	const isFirstAd = block === 1;
+	if (isFirstAd) {
+		return true;
+	}
 
-	const minSpaceToShowAd = isFirstAd
-		? MIN_SPACE_BEFORE_FIRST_AD
-		: MIN_SPACE_BETWEEN_ADS;
-
-	return numPixelsWithoutAdvert > minSpaceToShowAd;
+	return numPixelsWithoutAdvert > MIN_SPACE_BETWEEN_ADS;
 };
 
 export { calculateApproximateBlockHeight, shouldDisplayAd };

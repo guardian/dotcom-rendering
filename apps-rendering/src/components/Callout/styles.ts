@@ -29,11 +29,22 @@ export const calloutContainer = css`
 export const calloutLinkContainer = css`
 	a {
 		color: ${brand[500]};
+		text-decoration: none;
+		border-bottom: 1px solid #12121240;
+	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
 	}
 
 	${darkModeCss`
 		a {
 			color: ${neutral[86]};
+			border-bottom: 1px solid ${neutral[60]};
+		}
+		a:hover,
+		a:active {
+			border-bottom: 1px solid ${neutral[86]};
 		}
 	`}
 `;
@@ -85,6 +96,20 @@ export const calloutPrimaryButton = css`
 	`}
 `;
 
+// Callout tabs
+export const tabTitle = css`
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const tabIcons = css`
+	padding-left: ${remSpace[1]};
+	display: flex;
+	align-items: center;
+`;
+
 // Callout success Styles
 export const successMessage = css`
 	${textSans.small()};
@@ -119,9 +144,19 @@ export const calloutShare = css`
 export const calloutSharelink = css`
 	${textSans.xsmall()}
 	color: ${brand[500]};
+	text-decoration: none;
+	border-bottom: 1px solid #12121240;
+	:hover, :active {
+		border-bottom: 1px solid ${brand[500]};
+	}
 	${darkModeCss`
 		color: ${neutral[86]};
+		border-bottom: 1px solid ${neutral[60]};
+		:hover, :active {
+			border-bottom: 1px solid ${neutral[86]};
+		}
 	`}
+
 `;
 
 export const shareIcon = css`
@@ -131,6 +166,7 @@ export const shareIcon = css`
 	border: 1px solid ${brand[500]};
 	box-sizing: border-box;
 	fill: ${brand[500]};
+	padding: 0.5px 0;
 
 	${darkModeCss`
 		fill: ${neutral[86]};

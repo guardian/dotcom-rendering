@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import type { ArticleFormat } from '@guardian/libs';
-import { withKnobs } from '@storybook/addon-knobs';
 import { article } from 'fixtures/item';
 import Tags from './';
 
@@ -14,7 +13,6 @@ const Default = (format: ArticleFormat): JSX.Element => <Tags item={article} />;
 export default {
 	component: Tags,
 	title: 'AR/Tags',
-	decorators: [withKnobs],
 };
 
 export { Default };

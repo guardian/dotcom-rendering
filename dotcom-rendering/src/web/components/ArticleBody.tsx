@@ -5,9 +5,11 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import type { ServerSideTests, Switches } from '../../types/config';
 import type { TableOfContentsItem } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
@@ -45,6 +47,9 @@ type Props = {
 	isInLiveblogAdSlotTest?: boolean;
 	abTests?: ServerSideTests;
 	tableOfContents?: TableOfContentsItem[];
+	lang?: string;
+	isRightToLeftLang?: boolean;
+	renderingTarget: RenderingTarget;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -145,9 +150,14 @@ export const ArticleBody = ({
 	isInLiveblogAdSlotTest = false,
 	abTests,
 	tableOfContents,
+	lang,
+	isRightToLeftLang = false,
+	renderingTarget,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
+	const language = decideLanguage(lang);
+	const languageDirection = decideLanguageDirection(isRightToLeftLang);
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -218,6 +228,8 @@ export const ArticleBody = ({
 					globalStrongStyles,
 					globalLinkStyles(palette),
 				]}
+				lang={language}
+				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
 					<Island deferUntil="hash" clientOnly={true}>
@@ -243,6 +255,7 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					abTests={abTests}
+					renderingTarget={renderingTarget}
 				/>
 			</div>
 		</>

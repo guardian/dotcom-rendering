@@ -75,6 +75,18 @@ const DesignTag: FC<Props> = ({ format }) => {
 					<span css={designTagStyles(format)}>Interview</span>
 				</div>
 			);
+		case ArticleDesign.Timeline:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Timeline</span>
+				</div>
+			);
+		case ArticleDesign.Profile:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Profile</span>
+				</div>
+			);
 		default:
 			return null;
 	}

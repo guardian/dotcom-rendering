@@ -201,11 +201,12 @@ export const enhanceCards = (
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
-			webPublicationDate: faciaCard.card.webPublicationDateOption
-				? new Date(
-						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
-				: undefined,
+			webPublicationDate:
+				faciaCard.card.webPublicationDateOption !== undefined
+					? new Date(
+							faciaCard.card.webPublicationDateOption,
+					  ).toISOString()
+					: undefined,
 			image: decideImage(faciaCard),
 			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent
@@ -240,5 +241,6 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
+			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 		};
 	});

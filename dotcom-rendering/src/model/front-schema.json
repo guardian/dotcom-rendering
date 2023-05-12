@@ -2678,9 +2678,11 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
@@ -3092,6 +3094,9 @@
                             "type": "string"
                         },
                         "embedCss": {
+                            "type": "string"
+                        },
+                        "embedJs": {
                             "type": "string"
                         }
                     }

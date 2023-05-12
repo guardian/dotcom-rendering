@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link
+			rel="icon"
+			href="https://static.guim.co.uk/images/favicon-32x32-dev-yellow.ico"
+		/>
+		<title>DCR Development Server</title>
 		<style>
 			html {
 				font-family: Arial, Helvetica, sans-serif;
@@ -32,36 +37,46 @@
 		<ul id="default-endpoints">
 			<li>
 				<a
-					href="/Article?url=https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+					href="/Article/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
 					>Article</a
 				>
 			</li>
 			<li>
 				<a
-					href="/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance"
+					href="/AMPArticle/https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance"
 					>⚡️Article</a
 				>
 			</li>
 			<li>
 				<a
-					href="/Interactive?url=theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
+					href="/Interactive/www.theguardian.com/global-development/ng-interactive/2022/jun/09/the-black-sea-blockade-mapping-the-impact-of-war-in-ukraine-on-the-worlds-food-supply-interactive"
 					>Interactive</a
 				>
 			</li>
 			<li>
 				<a
-					href="/AMPInteractive?url=https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
+					href="/AMPInteractive/https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
 					>⚡️Interactive</a
 				>
 			</li>
 			<li>
-				<a href="/Front?url=https://www.theguardian.com/international"
+				<a href="/Front/https://www.theguardian.com/international"
 					>International Front</a
 				>
 				(<a
-					href="/FrontJSON?url=https://www.theguardian.com/international"
+					href="/FrontJSON/https://www.theguardian.com/international"
 					>Enhanced JSON</a
 				>)
+			</li>
+			<li>
+				<a href="/AppsArticle/https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+					>📱 Apps Article</a
+				>
+			</li>
+			<li>
+				<a href="/EmailNewsletters/https://api.nextgen.guardianapps.co.uk/email-newsletters"
+					>📧 All Newsletters page</a
+				>
 			</li>
 		</ul>
 
@@ -375,7 +390,7 @@
 
 						const pageType = getPageType(text);
 
-						a.setAttribute('href', `/${pageType}?url=${text}`);
+						a.setAttribute('href', `/${pageType}/${text}`);
 						a.innerText = `📋 ${pageType} from clipboard: /${slug}…`;
 
 						li.appendChild(a);
@@ -384,7 +399,7 @@
 							const aJSON = document.createElement('a');
 							aJSON.setAttribute(
 								'href',
-								`/${pageType}JSON?url=${text}`,
+								`/${pageType}JSON/${text}`,
 							);
 							aJSON.innerHTML = 'Enhanced JSON';
 							li.append(' (', aJSON, ')');
@@ -406,8 +421,8 @@
 			const makeTestArticle = (a) => `
 			             <div class="test-article">
 			                 <span>${a.name}</span>
-			                 <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
-			                 <span><a href="/AMPArticle?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
+			                 <span><a href="/Article/https://www.theguardian.com${a.article}">🔗</a> <a href="/Article/http://localhost:9000${a.article}">🔗(local FE)</a></span>
+			                 <span><a href="/AMPArticle/https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle/http://localhost:9000${a.article}">🔗(local FE)</a></span>
 			                 <span><a href="https://www.theguardian.com${a.article}">example</a></span>
 			                 <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
 			             </div>

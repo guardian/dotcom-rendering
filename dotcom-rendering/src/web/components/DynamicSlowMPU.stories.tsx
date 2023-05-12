@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
 
 export default {
 	component: DynamicSlowMPU,
@@ -21,7 +21,7 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -32,13 +32,15 @@ export const NoBigs = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-NoBigs.story = { name: 'with no big cards, only standard' };
+NoBigs.storyName = 'with no big cards, only standard';
 
 export const OneBig = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -49,13 +51,15 @@ export const OneBig = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-OneBig.story = { name: 'with just one big' };
+OneBig.storyName = 'with just one big';
 
 export const TwoBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -66,13 +70,15 @@ export const TwoBigs = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-TwoBigs.story = { name: 'with two bigs' };
+TwoBigs.storyName = 'with two bigs';
 
 export const FirstBigBoosted = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -87,13 +93,15 @@ export const FirstBigBoosted = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
+FirstBigBoosted.storyName = 'with the first of two bigs boosted';
 
 export const SecondBigBoosted = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -108,13 +116,15 @@ export const SecondBigBoosted = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-SecondBigBoosted.story = { name: 'with the second of two bigs boosted' };
+SecondBigBoosted.storyName = 'with the second of two bigs boosted';
 
 export const ThreeBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -125,13 +135,15 @@ export const ThreeBigs = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-ThreeBigs.story = { name: 'with three bigs' };
+ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -142,7 +154,28 @@ export const AllBigs = () => (
 			}}
 			showAge={true}
 			index={1}
+			renderAds={true}
+			trails={trails}
 		/>
-	</Section>
+	</FrontSection>
 );
-AllBigs.story = { name: 'with lots of bigs and no standards' };
+AllBigs.storyName = 'with lots of bigs and no standards';
+
+export const AdfreeDynamicSlowMPU = () => (
+	<FrontSection title="DynamicSlowMPU">
+		<DynamicSlowMPU
+			groupedTrails={{
+				snap: [],
+				huge: [],
+				veryBig: [],
+				big: standards,
+				standard: [],
+			}}
+			showAge={true}
+			index={1}
+			renderAds={false}
+			trails={trails}
+		/>
+	</FrontSection>
+);
+AdfreeDynamicSlowMPU.storyName = 'Ad-free dynamic slow MPU';

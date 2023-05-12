@@ -9,4 +9,4 @@ export const Default = () => {
 	return <NewsletterFrequency frequency="Weekly" />;
 };
 
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

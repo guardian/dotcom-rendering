@@ -35,17 +35,22 @@ const listItemStyles = (format: ArticleFormat, palette: Palette) => {
 		border-top: 1px solid ${neutral[86]};
 		padding-bottom: ${space[4]}px;
 		padding-top: ${space[1]}px;
-		transition: 0.3s all ease;
 		display: flex;
 		position: relative;
 
-		&:hover {
-			padding-top: 1px;
-			border-top: ${space[1]}px solid ${palette.text.tableOfContents};
-			cursor: pointer;
-			div {
-				height: 19px;
-			}
+		&::before {
+			content: '';
+			position: absolute;
+			background-color: ${palette.text.tableOfContents};
+			width: 100%;
+			height: 0;
+			transition: height 0.2s ease;
+			top: 0;
+			left: 0;
+		}
+
+		&:hover::before {
+			height: ${space[1]}px;
 		}
 	`;
 };
@@ -101,6 +106,18 @@ const verticalStyle = css`
 	top: 0;
 	transition: 0.3s all ease;
 `;
+
+/**
+ * # Table of Contents Component
+ *
+ * A table of contents, shown at the top of an article
+ * to allow readers to quickly navigate though articles.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We are responding to user interactions on the page.
+ *
+ */
 
 export const TableOfContents = ({ tableOfContents, format }: Props) => {
 	const palette = decidePalette(format);

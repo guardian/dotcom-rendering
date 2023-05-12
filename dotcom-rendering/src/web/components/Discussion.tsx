@@ -108,7 +108,7 @@ export const Discussion = ({
 	// If so, make a call to get the context of this comment so we know what page it is
 	// on.
 	useEffect(() => {
-		if (hashCommentId) {
+		if (hashCommentId !== undefined) {
 			getCommentContext(discussionApiUrl, hashCommentId)
 				.then((context) => {
 					setCommentPage(context.page);

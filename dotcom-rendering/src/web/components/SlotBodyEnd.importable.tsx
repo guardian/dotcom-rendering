@@ -62,6 +62,7 @@ const buildBrazeEpicConfig = (
 	idApiUrl: string,
 	contentType: string,
 	brazeArticleContext: BrazeArticleContext,
+	tags: TagType[],
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
@@ -71,6 +72,7 @@ const buildBrazeEpicConfig = (
 					brazeMessages,
 					brazeArticleContext,
 					contentType,
+					tags,
 				),
 			show: (meta: any) => () =>
 				(
@@ -158,6 +160,7 @@ export const SlotBodyEnd = ({
 			idApiUrl,
 			contentType,
 			brazeArticleContext,
+			tags,
 		);
 		const epicConfig: SlotConfig = {
 			candidates: [brazeEpic, readerRevenueEpic],
@@ -171,7 +174,7 @@ export const SlotBodyEnd = ({
 			);
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
-	if (SelectedEpic) {
+	if (SelectedEpic !== null) {
 		return (
 			<div id="slot-body-end">
 				<SelectedEpic />

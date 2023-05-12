@@ -26,6 +26,10 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		})}
 	}
 	padding-bottom: ${remSpace[6]};
+
+	${darkModeCss`
+		color: ${text.bylineDark(format)};
+	`}
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`

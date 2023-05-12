@@ -90,7 +90,7 @@ function revealPendingBlocks() {
 		block.classList.remove('pending');
 	});
 
-	if (pendingBlocks?.length)
+	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
 		// Notify commercial that new blocks are available and they can re-run spacefinder
 		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }
@@ -138,6 +138,17 @@ function getKey(
 	}
 }
 
+/**
+ * # Liveness
+ *
+ * Allow new blocks on live blogs to be added without page reload.
+ * Polls the content API inserts news blocks if the user
+ * is at the top of the article.
+ * If they have scrolled down, show them a toast to scroll back up.
+ *
+ * This component insert HTML directly, which is generated from @see LiveBlock
+ * and received from the `blocksToHtml` handler.
+ */
 export const Liveness = ({
 	pageId,
 	webTitle,
@@ -226,7 +237,7 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return () => {};
+		if (!topOfBlog) return;
 
 		const observer = new window.IntersectionObserver(([entry]) => {
 			if (!entry) return;

@@ -8,8 +8,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
-import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -29,13 +27,6 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	integrateIma,
 ];
 
-const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
-	/* linter, please keep this array multi-line */
-	dcrJavascriptBundle('Variant'),
-	dcrJavascriptBundle('Control'),
-	'dcrFrontsVariant',
-];
-
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
@@ -49,14 +40,12 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
 
-	const userInServerSideTestToForceMetrics =
-		serverSideTestsToForceMetrics.some((test) =>
-			Object.keys(window.guardian.config.tests).includes(test),
-		);
+	const userInServerSideTest =
+		Object.keys(window.guardian.config.tests).length > 0;
 
 	const shouldBypassSampling = (api: ABTestAPI) =>
 		willRecordCoreWebVitals ||
-		userInServerSideTestToForceMetrics ||
+		userInServerSideTest ||
 		clientSideTestsToForceMetrics.some((test) => api.runnableTest(test));
 
 	useOnce(
@@ -66,11 +55,17 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 				? shouldBypassSampling(abTestApi)
 				: false;
 
+			/**
+			 * We rely on `bypassSampling` rather than the built-in sampling,
+			 * but set the value to greater than 0 to avoid console warnings.
+			 */
+			const nearZeroSampling = Number.MIN_VALUE;
+
 			void initCoreWebVitals({
 				browserId,
 				pageViewId,
 				isDev,
-				sampling: 0, // we rely on `bypassSampling` instead
+				sampling: nearZeroSampling,
 				team: 'dotcom',
 			});
 

@@ -72,6 +72,14 @@ const linkStyles = css`
 	}
 `;
 
+/**
+ * # CommentCount
+ *
+ * Shows the number of comments at the top of an article.
+ * Fetches the count from the discussion API.
+ *
+ * [Storybook `Count`](https://637e40d1bc73bf3f604394b9-rzazjyrwhc.chromatic.com/?path=/story/components-counts)
+ */
 export const CommentCount = ({
 	format,
 	discussionApiUrl,
@@ -81,7 +89,8 @@ export const CommentCount = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	if (!commentCount && commentCount !== 0) return null;
+	// If the comment count is 0 we still want to display it
+	if (commentCount === undefined) return null;
 
 	const { short, long } = formatCount(commentCount);
 	const palette = decidePalette(format);

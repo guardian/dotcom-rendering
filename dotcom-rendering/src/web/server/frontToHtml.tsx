@@ -1,3 +1,4 @@
+import { isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -42,9 +43,10 @@ export const frontToHtml = ({ front }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
 		shouldServeVariantBundle,
-	);
+	});
 
 	/**
 	 * The highest priority scripts.
@@ -60,7 +62,9 @@ export const frontToHtml = ({ front }: Props): string => {
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -84,11 +88,14 @@ export const frontToHtml = ({ front }: Props): string => {
 				switches: front.config.switches,
 				abTests: front.config.abTests,
 				brazeApiKey: front.config.brazeApiKey,
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
+				unknownConfig: front.config,
 			}),
 		),
 	);
 
-	const keywords = front.config.keywords ?? '';
+	const keywords = front.config.keywords;
 
 	return pageTemplate({
 		scriptTags,
@@ -99,5 +106,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		windowGuardian,
 		keywords,
 		offerHttp3,
+		renderingTarget: 'Web',
+		bork: !!front.config.switches.borkWebVitals,
 	});
 };

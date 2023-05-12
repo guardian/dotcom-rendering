@@ -259,7 +259,6 @@ const fields = {
 		sponsorName: 'Judith Nielson Institute',
 		sponsorUri: 'https://jninstitute.org/',
 	}),
-	internalShortId: none,
 	commentCount: some(1223),
 	relatedContent: none,
 	footballContent: none,

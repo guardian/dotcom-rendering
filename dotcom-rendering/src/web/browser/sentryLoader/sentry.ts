@@ -31,6 +31,8 @@ const ignoreErrors = [
 	'TypeError: Failed to fetch',
 	'TypeError: NetworkError when attempting to fetch resource',
 	'TypeError: Load failed',
+	'TypeError: Importing a module script failed',
+	'TypeError: error loading dynamically imported module',
 ];
 
 const { config } = window.guardian;

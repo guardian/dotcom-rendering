@@ -18,6 +18,7 @@ import { FixedSmallFastVIII } from '../components/FixedSmallFastVIII';
 import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
+import { FixedSmallSlowVHalf } from '../components/FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 import { NavList } from '../components/NavList';
@@ -29,6 +30,7 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	renderAds: boolean;
 };
 
 export const DecideContainer = ({
@@ -38,6 +40,7 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
+	renderAds,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -63,6 +66,8 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					renderAds={renderAds}
+					trails={trails}
 				/>
 			);
 		case 'dynamic/package':
@@ -96,6 +101,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					renderAds={renderAds}
 				/>
 			);
 		case 'fixed/small/slow-III':
@@ -117,6 +123,14 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-V-third':
 			return (
 				<FixedSmallSlowVThird
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-V-half':
+			return (
+				<FixedSmallSlowVHalf
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -144,6 +158,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					renderAds={renderAds}
 					index={index}
 				/>
 			);

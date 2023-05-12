@@ -187,7 +187,7 @@ export const ReaderRevenueEpic = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	if (Epic) {
+	if (Epic !== undefined) {
 		return (
 			<div css={wrapperMargins}>
 				{}

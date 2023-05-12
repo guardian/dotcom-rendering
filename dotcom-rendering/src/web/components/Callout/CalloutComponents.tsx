@@ -14,14 +14,26 @@ import {
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { Palette } from '../../../types/palette';
+import { decidePalette } from '../../lib/decidePalette';
 
-const descriptionStyles = css`
+/* stylelint-disable-next-line color-no-hex */
+const linkDecorationColour = '#12121240';
+
+export const calloutLinkStyles = css`
 	a {
 		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
 		text-decoration: none;
+		border-bottom: 1px solid ${linkDecorationColour};
 	}
+	a:hover,
+	a:active {
+		border-bottom: 1px solid ${brand[500]};
+	}
+`;
 
+const descriptionStyles = (useBrandColour: boolean) => css`
+	${!useBrandColour && calloutLinkStyles}
 	padding-bottom: ${space[4]}px;
 	${body.medium()}
 
@@ -32,30 +44,35 @@ const descriptionStyles = css`
 
 export const CalloutDescription = ({
 	description,
+	useBrandColour,
 }: {
 	description: string;
+	useBrandColour: boolean;
 }) => {
-	// this data-ignore attribute ensures correct formatting for links in the description
+	// this data-ignore attribute ensures correct formatting for links when the callout is collapsible
 	const htmlSplit = description.split('href');
 	const withDataIgnore = htmlSplit.join(
 		'data-ignore="global-link-styling" href',
 	);
-
 	return (
-		<div css={descriptionStyles}>
-			<div dangerouslySetInnerHTML={{ __html: withDataIgnore }}></div>
+		<div css={descriptionStyles(useBrandColour)}>
+			<div
+				dangerouslySetInnerHTML={{
+					__html: useBrandColour ? description : withDataIgnore,
+				}}
+			></div>
 			<div>
 				Please share your story if you are 18 or over, anonymously if
 				you wish. For more information please see our{' '}
 				<a
-					data-ignore="global-link-styling"
+					data-ignore={!useBrandColour && 'global-link-styling'}
 					href="https://www.theguardian.com/help/terms-of-service"
 				>
 					terms of service
 				</a>{' '}
 				and{' '}
 				<a
-					data-ignore="global-link-styling"
+					data-ignore={!useBrandColour && 'global-link-styling'}
 					href="https://www.theguardian.com/help/privacy-policy"
 				>
 					privacy policy
@@ -101,10 +118,22 @@ const shareCalloutTextStyles = css`
 	${textSans.xsmall()}
 `;
 
-const shareCalloutLinkStyles = css`
-	color: ${brand[500]};
-	font-weight: normal;
+const shareCalloutLinkStyles = (
+	useBrandColour: boolean,
+	brandPalette: Palette,
+) => css`
 	${textSans.xsmall()}
+	color: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	border-bottom: 1px solid ${linkDecorationColour};
+	text-decoration: none;
+	transition: none;
+	:hover,
+	:active {
+		border-bottom: 1px solid
+			${useBrandColour
+				? brandPalette.border.articleLinkHover
+				: brand[500]};
+	}
 `;
 
 const sharePopupStyles = css`
@@ -126,23 +155,30 @@ const sharePopupStyles = css`
 		fill: ${success[400]};
 	}
 `;
-const shareIconStyles = css`
+const shareIconStyles = (useBrandColour: boolean, brandPalette: Palette) => css`
 	display: inline-flex;
 	margin-right: ${space[2]}px;
 	border-radius: 50%;
-	border: 1px solid ${brand[500]};
+	border: 1px solid
+		${useBrandColour ? brandPalette.text.articleLink : brand[500]};
 	box-sizing: border-box;
-	fill: ${brand[500]};
+	fill: ${useBrandColour ? brandPalette.text.articleLink : brand[500]};
+	padding: 0.5px 0;
 `;
 
 export const CalloutShare = ({
 	title,
 	urlAnchor,
+	useBrandColour,
+	format,
 }: {
-	title: string;
+	title?: string;
 	urlAnchor: string;
+	useBrandColour: boolean;
+	format: ArticleFormat;
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
+	const brandPalette = decidePalette(format);
 
 	const onShare = async () => {
 		const url = window.location.href;
@@ -152,7 +188,8 @@ export const CalloutShare = ({
 				navigator.userAgent,
 			)
 		) {
-			const shareTitle = `Share your experience: ${title}`;
+			let shareTitle = `Share your experience`;
+			if (title) shareTitle += `: ${title}`;
 
 			const shareText = `
 			I saw this callout in an article: ${url}#${urlAnchor}
@@ -177,7 +214,7 @@ export const CalloutShare = ({
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<span css={shareIconStyles}>
+				<span css={shareIconStyles(useBrandColour, brandPalette)}>
 					<SvgShare size="small" />
 				</span>
 				<div css={shareCalloutTextStyles}>
@@ -186,7 +223,10 @@ export const CalloutShare = ({
 						size="xsmall"
 						priority="subdued"
 						onClick={onShare}
-						css={shareCalloutLinkStyles}
+						cssOverrides={shareCalloutLinkStyles(
+							useBrandColour,
+							brandPalette,
+						)}
 					>
 						Please share this callout.
 					</Button>
@@ -203,11 +243,7 @@ export const CalloutShare = ({
 };
 
 const termsAndConditionsStyles = css`
-	a {
-		color: ${brand[500]};
-		border-bottom: 1px solid ${brand[500]};
-		text-decoration: none;
-	}
+	${calloutLinkStyles}
 	${textSans.small()}
 	padding-bottom: ${space[4]}px;
 `;

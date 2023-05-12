@@ -1,7 +1,11 @@
 import { Section } from '../Section';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
+import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
+import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
+import type { CheckoutCompleteCookieData } from './types';
+import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
 
 export default {
 	component: SignInGateSelector,
@@ -23,21 +27,7 @@ export const mainStandalone = () => {
 		</Section>
 	);
 };
-mainStandalone.story = { name: 'main_standalone' };
-
-export const mainStandaloneComment = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateMain
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-			/>
-		</Section>
-	);
-};
-mainStandaloneComment.story = { name: 'main_standalone_comment' };
+mainStandalone.storyName = 'main_standalone';
 
 export const mainStandaloneMandatory = () => {
 	return (
@@ -52,24 +42,7 @@ export const mainStandaloneMandatory = () => {
 		</Section>
 	);
 };
-mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
-
-export const mainStandaloneMandatoryComment = () => {
-	return (
-		<Section fullWidth={true}>
-			<SignInGateMain
-				guUrl="https://theguardian.com"
-				signInUrl="https://profile.theguardian.com/"
-				dismissGate={() => {}}
-				ophanComponentId="test"
-				isMandatory={true}
-			/>
-		</Section>
-	);
-};
-mainStandaloneMandatoryComment.story = {
-	name: 'main_standalone_mandatory_comment',
-};
+mainStandaloneMandatory.storyName = 'main_standalone_mandatory';
 
 export const fakeSocialStandalone = () => {
 	return (
@@ -83,7 +56,7 @@ export const fakeSocialStandalone = () => {
 		</Section>
 	);
 };
-fakeSocialStandalone.story = { name: 'fake_social_standalone' };
+fakeSocialStandalone.storyName = 'fake_social_standalone';
 
 export const fakeSocialStandaloneVertical = () => {
 	return (
@@ -102,6 +75,61 @@ export const fakeSocialStandaloneVertical = () => {
 		</Section>
 	);
 };
-fakeSocialStandaloneVertical.story = {
-	name: 'fake_social_standalone_vertical',
+fakeSocialStandaloneVertical.storyName = 'fake_social_standalone_vertical';
+
+export const signInGateCopyTest = () => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateCopyTestJan2023
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				abTest={{
+					id: 'sign-in-gate-copy-test-jan-2023',
+					name: 'sign-in-gate-copy-test-jan-2023',
+					variant: 'quick-and-easy',
+				}}
+			/>
+		</Section>
+	);
+};
+signInGateCopyTest.storyName = 'sign_in_gate_copy_test';
+
+export const signInGateMainCheckoutCompletePersonalisedCopy = (
+	args: CheckoutCompleteCookieData,
+) => {
+	return (
+		<Section fullWidth={true}>
+			<SignInGateMainCheckoutComplete
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/signin?" // this is personalised
+				dismissGate={() => {}}
+				ophanComponentId="test"
+				checkoutCompleteCookieData={args}
+				personaliseSignInGateAfterCheckoutSwitch={true}
+			/>
+		</Section>
+	);
+};
+signInGateMainCheckoutCompletePersonalisedCopy.storyName =
+	'main_checkout_complete_personalised';
+
+const defaultCheckoutCompleteCookieData: CheckoutCompleteCookieData = {
+	userType: 'new',
+	product: 'SupporterPlus',
+};
+
+signInGateMainCheckoutCompletePersonalisedCopy.args =
+	defaultCheckoutCompleteCookieData;
+
+signInGateMainCheckoutCompletePersonalisedCopy.argTypes = {
+	userType: {
+		options: ALL_USER_TYPES,
+		control: { type: 'radio' },
+	},
+	product: {
+		options: ALL_PRODUCTS,
+		control: { type: 'radio' },
+	},
 };

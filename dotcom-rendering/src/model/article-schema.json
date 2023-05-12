@@ -521,6 +521,9 @@
                 "$ref": "#/definitions/Topic"
             }
         },
+        "messageUs": {
+            "$ref": "#/definitions/MessageUs"
+        },
         "promotedNewsletter": {
             "type": "object",
             "properties": {
@@ -573,6 +576,12 @@
             "type": "string"
         },
         "showTableOfContents": {
+            "type": "boolean"
+        },
+        "lang": {
+            "type": "string"
+        },
+        "isRightToLeftLang": {
             "type": "boolean"
         }
     },
@@ -850,10 +859,12 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
                     "enum": [
+                        "email",
+                        "phone",
                         "text"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -873,12 +884,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -895,6 +908,12 @@
                         "textarea"
                     ]
                 },
+                "minlength": {
+                    "type": "number"
+                },
+                "maxlength": {
+                    "type": "number"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -913,12 +932,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -953,12 +974,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1011,12 +1034,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1070,12 +1095,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1129,12 +1156,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1172,6 +1201,9 @@
                 },
                 "formId": {
                     "type": "number"
+                },
+                "prompt": {
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
@@ -1212,6 +1244,12 @@
                 },
                 "isNonCollapsible": {
                     "type": "boolean"
+                },
+                "contacts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CalloutContactType"
+                    }
                 }
             },
             "required": [
@@ -1225,8 +1263,31 @@
                 "formId",
                 "id",
                 "isNonCollapsible",
+                "prompt",
                 "tagName",
                 "title"
+            ]
+        },
+        "CalloutContactType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "urlPrefix": {
+                    "type": "string"
+                },
+                "guidance": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "urlPrefix",
+                "value"
             ]
         },
         "ChartAtomBlockElement": {
@@ -2463,9 +2524,11 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
@@ -4312,6 +4375,9 @@
                         },
                         "embedCss": {
                             "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
                         }
                     }
                 },
@@ -4737,6 +4803,31 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "MessageUs": {
+            "type": "object",
+            "properties": {
+                "formId": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "formFields",
+                "formId"
+            ]
         },
         "TableOfContentsItem": {
             "type": "object",

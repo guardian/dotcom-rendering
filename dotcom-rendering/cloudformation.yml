@@ -1,3 +1,7 @@
+# yaml-language-server: $schema=./cloudformation.yml
+# ^ this setting effectively prevents the redhat.vscode-yaml extension from
+# trying (and failing) to validate this against the Cloudformation YAML schema
+# @see: https://github.com/redhat-developer/vscode-yaml/issues/245#issuecomment-885803310
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Frontend rendering service
 Parameters:
@@ -243,12 +247,12 @@ Resources:
           usermod -a -G frontend aws-kinesis-agent-user
           cd /home/dotcom-rendering
 
-          aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
+          aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/${App}.zip ./
           unzip -q ${App}.zip -d ${App}
 
           chown -R dotcom-rendering:frontend ${App}
 
-          cd ${App}/dotcom-rendering
+          cd ${App}
 
           export TERM=xterm-256color
           export NODE_ENV=production

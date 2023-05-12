@@ -11,8 +11,17 @@
 export class JSDOM {
 	constructor() {}
 	window = window;
-}
 
-// Attaches static 'fragment' method for calling 'JSDOM.fragment(...)' (curently untested)
-const fragment = (...params) => new window.DocumentFragment(...params);
-Object.assign(JSDOM, fragment);
+	static fragment(html) {
+		try {
+			const docNodes = new DOMParser().parseFromString(html, 'text/html')
+				.body.childNodes;
+
+			const frag = new DocumentFragment();
+			Array.from(docNodes).forEach((node) => frag.appendChild(node));
+			return frag;
+		} catch (e) {
+			console.error(e);
+		}
+	}
+}

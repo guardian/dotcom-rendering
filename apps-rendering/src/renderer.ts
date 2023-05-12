@@ -68,7 +68,9 @@ import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
 import RichLink from 'components/RichLink';
+import SpecialReportAltAtom from 'components/SpecialReportAltAtom';
 import { isElement, pipe } from 'lib';
+import { Optional } from 'optional';
 import { border, text } from 'palette';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
@@ -193,26 +195,6 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-/**
- * This regular expression checks that a string begins with a word that is at least
- * three characters long, ignoring the initial quotation mark.
- *
- *  The regex can be broken down as follows:
- *
- * - `["'\u2018\u201c]?` matches an optional quotation mark, apostrophe, open single quote
- * or open double quote.
- *
- * - `(?!I)` is a negative lookahead checking that the first letter is not "I".
- *
- * - The rest of the expression matches 3 or more characters in the Latin-1 Unicode block,
- * which includes diacritics (e.g. å, č, Ë, etc.).
- *
- * The regex sits outside the rendering function so it is only compiled once
- * for better performance.
- */
-const dropCapRegex =
-	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{2,}/;
-
 const shouldShowDropCap = (
 	text: string,
 	format: ArticleFormat,
@@ -221,9 +203,7 @@ const shouldShowDropCap = (
 	if (isEditions) {
 		return false;
 	}
-	return (
-		allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text)
-	);
+	return allowsDropCaps(format) && text.length >= 200;
 };
 
 const textElement =
@@ -442,13 +422,13 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 
-	const maybeCaption =
+	const maybeCaption: Optional<ReactNode> =
 		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
-			? some([
+			? Optional.some([
 					h(Caption, { format, caption }),
 					h(Credit, { credit, format, key }),
 			  ])
-			: none;
+			: Optional.none();
 
 	return h(BodyImage, {
 		caption: maybeCaption,
@@ -610,7 +590,7 @@ const mediaAtomRenderer = (
 	};
 	const figcaption = h(FigCaption, {
 		format: format,
-		children: some(h(Caption, { caption, format })),
+		children: Optional.some(h(Caption, { caption, format })),
 		variant: CaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
@@ -728,7 +708,14 @@ const renderElement =
 				return h(Quiz, { format, element });
 
 			case ElementKind.NewsletterSignUp:
-				return h(NewsletterSignup, { format, element });
+				return h(NewsletterSignup, {
+					format,
+					element,
+					skipLinkIdSuffix: key.toString(),
+				});
+
+			case ElementKind.SpecialReportAltAtom:
+				return h(SpecialReportAltAtom, { format });
 		}
 	};
 

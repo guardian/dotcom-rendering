@@ -67,6 +67,11 @@ const footerStyles = (format: ArticleFormat): SerializedStyles => css`
 		${grid.between('centre-column-start', 'right-column-end')}
 	}
 
+	${from.wide} {
+		margin: 0;
+		width: unset;
+	}
+
 	${darkModeCss`
 		background-color: ${background.articleContentDark(format)};
 		color: ${text.galleryDark(format)};

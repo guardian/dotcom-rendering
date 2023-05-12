@@ -15,6 +15,7 @@ import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -34,7 +35,7 @@ import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -44,6 +45,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -262,9 +264,15 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const CommentLayout = ({ article, NAV, format }: Props) => {
+export const CommentLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -303,10 +311,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	return (
 		<>
@@ -381,6 +386,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 
@@ -426,6 +432,35 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 					element="article"
 				>
 					<StandardGrid display={format.display}>
+						<GridItem area="media">
+							<div
+								css={
+									format.display === ArticleDisplay.Showcase
+										? mainMediaWrapper
+										: maxWidth
+								}
+							>
+								<MainMedia
+									format={format}
+									elements={article.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										article.starRating !== undefined
+											? article.starRating
+											: undefined
+									}
+									host={host}
+									pageId={article.pageId}
+									webTitle={article.webTitle}
+									ajaxUrl={article.config.ajaxUrl}
+									switches={article.config.switches}
+									isAdFreeUser={article.isAdFreeUser}
+									isSensitive={article.config.isSensitive}
+								/>
+							</div>
+						</GridItem>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -504,35 +539,6 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								standfirst={article.standfirst}
 							/>
 						</GridItem>
-						<GridItem area="media">
-							<div
-								css={
-									format.display === ArticleDisplay.Showcase
-										? mainMediaWrapper
-										: maxWidth
-								}
-							>
-								<MainMedia
-									format={format}
-									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										article.starRating
-											? article.starRating
-											: undefined
-									}
-									host={host}
-									pageId={article.pageId}
-									webTitle={article.webTitle}
-									ajaxUrl={article.config.ajaxUrl}
-									switches={article.config.switches}
-									isAdFreeUser={article.isAdFreeUser}
-									isSensitive={article.config.isSensitive}
-								/>
-							</div>
-						</GridItem>
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
@@ -596,6 +602,11 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 										tableOfContents={
 											article.tableOfContents
 										}
+										lang={article.lang}
+										isRightToLeftLang={
+											article.isRightToLeftLang
+										}
+										renderingTarget={renderingTarget}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -679,33 +690,16 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{!article.shouldHideAds && (
-										<AdSlot
-											position="right"
-											display={format.display}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-										/>
-									)}
-
-									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
-											<MostViewedRightWrapper
-												isAdFreeUser={
-													article.isAdFreeUser
-												}
-											/>
-										</Island>
-									) : (
-										<></>
-									)}
+									<MostViewedRightWithAd
+										display={format.display}
+										isPaidContent={
+											article.pageType.isPaidContent
+										}
+										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+									/>
 								</RightColumn>
 							</div>
 						</GridItem>
@@ -806,6 +800,7 @@ export const CommentLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>

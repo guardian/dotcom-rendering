@@ -28,11 +28,12 @@ export const StandardStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
+				isInEuropeTest={true}
 			/>
 		</Section>
 	);
 };
-StandardStory.story = { name: 'News Highlighted' };
+StandardStory.storyName = 'News Highlighted';
 
 export const StandardStoryTopBarHeader = () => {
 	return (
@@ -53,11 +54,12 @@ export const StandardStoryTopBarHeader = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={true}
+				isInEuropeTest={true}
 			/>
 		</Section>
 	);
 };
-StandardStoryTopBarHeader.story = { name: 'News Highlighted' };
+StandardStoryTopBarHeader.storyName = 'News Highlighted';
 
 export const OpinionStory = () => {
 	return (
@@ -78,11 +80,12 @@ export const OpinionStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
+				isInEuropeTest={true}
 			/>
 		</Section>
 	);
 };
-OpinionStory.story = { name: 'Opinion Highlighted' };
+OpinionStory.storyName = 'Opinion Highlighted';
 
 export const ImmersiveStory = () => {
 	return (
@@ -104,8 +107,9 @@ export const ImmersiveStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
+				isInEuropeTest={true}
 			/>
 		</Section>
 	);
 };
-ImmersiveStory.story = { name: 'Immersive' };
+ImmersiveStory.storyName = 'Immersive';

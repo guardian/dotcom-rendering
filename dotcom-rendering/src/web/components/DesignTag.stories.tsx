@@ -23,7 +23,7 @@ export const Analysis = () => {
 		/>
 	);
 };
-Analysis.story = { name: 'with design Analysis' };
+Analysis.storyName = 'with design Analysis';
 
 export const Interview = () => {
 	return (
@@ -42,7 +42,7 @@ export const Interview = () => {
 		</div>
 	);
 };
-Interview.story = { name: 'with design Interview' };
+Interview.storyName = 'with design Interview';
 
 export const Explainer = () => {
 	return (
@@ -61,7 +61,7 @@ export const Explainer = () => {
 		</div>
 	);
 };
-Explainer.story = { name: 'with design Explainer' };
+Explainer.storyName = 'with design Explainer';
 
 export const Letter = () => {
 	return (
@@ -80,7 +80,7 @@ export const Letter = () => {
 		</div>
 	);
 };
-Letter.story = { name: 'with design Letter' };
+Letter.storyName = 'with design Letter';
 
 export const SpecialReport = () => {
 	return (
@@ -93,4 +93,42 @@ export const SpecialReport = () => {
 		/>
 	);
 };
-SpecialReport.story = { name: 'with design Analysis and theme SpecialReport' };
+SpecialReport.storyName = 'with design Analysis and theme SpecialReport';
+
+export const Timeline = () => {
+	return (
+		<div
+			css={css`
+				max-width: 400px;
+			`}
+		>
+			<DesignTag
+				format={{
+					design: ArticleDesign.Timeline,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</div>
+	);
+};
+Timeline.storyName = 'with design Timeline';
+
+export const Profile = () => {
+	return (
+		<div
+			css={css`
+				max-width: 400px;
+			`}
+		>
+			<DesignTag
+				format={{
+					design: ArticleDesign.Profile,
+					display: ArticleDisplay.Standard,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</div>
+	);
+};
+Profile.storyName = 'with design Profile';

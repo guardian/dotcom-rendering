@@ -79,7 +79,7 @@ const LabsLayout: FC<Props> = ({ item }) => {
 							<Standfirst item={item} />
 						</div>
 					</div>
-					<DottedLines count={1} cssOverrides={lineStyles} />
+					<DottedLines count={1} cssOverrides={lineStyles(format)} />
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						{pipe(

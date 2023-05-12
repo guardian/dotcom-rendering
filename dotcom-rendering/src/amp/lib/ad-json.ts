@@ -9,6 +9,7 @@ interface AdJson {
 }
 
 export const adJson = (targeting: AdTargetParam[]): AdJson => {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- We should investigate if its possible for this to be undefined
 	if (!targeting) {
 		return { targeting: [] };
 	}

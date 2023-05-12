@@ -9,6 +9,7 @@ import {
 	neutral,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
@@ -273,6 +274,22 @@ const tableOfContentsHoverDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
+const specialReportAltAtom = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const specialReportAltAtomDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const specialReportAltButton = (_format: ArticleFormat): string => {
+	return palette.specialReportAlt[200];
+};
+
+const specialReportAltButtonDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const border = {
@@ -308,6 +325,10 @@ const border = {
 	tableOfContentsHover,
 	tableOfContentsDark,
 	tableOfContentsHoverDark,
+	specialReportAltAtom,
+	specialReportAltAtomDark,
+	specialReportAltButton,
+	specialReportAltButtonDark,
 };
 
 // ----- Exports ----- //

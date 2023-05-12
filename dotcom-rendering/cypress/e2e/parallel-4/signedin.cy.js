@@ -36,7 +36,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.wait('@profileMe');
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
@@ -56,7 +56,7 @@ describe('Signed in readers', function () {
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
 		).as('profileMe');
-		cy.visit(`Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.wait('@profileMe');
 
 		cy.get('a[data-link-name="nav3 : topbar : printsubs"]')
@@ -66,7 +66,7 @@ describe('Signed in readers', function () {
 		cy.get('a[data-link-name="nav3 : job-cta"]').should(
 			'have.attr',
 			'href',
-			'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader',
+			'https://jobs.theguardian.com',
 		);
 		cy.get('button[data-link-name="nav3 : topbar: my account"]');
 		cy.get('a[data-link-name="nav3 : search"]').should(
@@ -77,7 +77,7 @@ describe('Signed in readers', function () {
 	});
 
 	it('should not display signed in texts when users are not signed in', function () {
-		cy.visit(`Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.scrollTo('bottom', { duration: 300 });
 		// We need this second call to fix flakiness where content loads in pushing the page
 		// down and preventing the scroll request to actually reach the bottom. We will fix

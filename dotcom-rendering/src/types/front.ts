@@ -36,6 +36,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	trendingTopics?: FETagType[];
 }
 
 interface FEPressedPageType {
@@ -261,6 +262,7 @@ export type DCRFrontCard = {
 	mediaType?: MediaType;
 	mediaDuration?: number;
 	showMainVideo: boolean;
+	isExternalLink: boolean;
 };
 
 export type FESnapType = {
@@ -272,6 +274,7 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+	embedJs?: string;
 };
 
 type FECollectionConfigType = {
@@ -468,7 +471,7 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	links: { text: string; linkTo: string }[];
+	links: { text: string; title?: string; linkTo: string }[];
 	theme?: ArticlePillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;

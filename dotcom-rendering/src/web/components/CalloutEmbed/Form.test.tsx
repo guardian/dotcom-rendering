@@ -18,6 +18,7 @@ const textField: CampaignFieldText = {
 	id: '91884886',
 	type: 'text',
 	required: true,
+	hidden: false,
 };
 
 const textAreaField: CampaignFieldTextArea = {
@@ -28,6 +29,7 @@ const textAreaField: CampaignFieldTextArea = {
 	id: '91884874',
 	type: 'textarea',
 	required: true,
+	hidden: false,
 };
 
 const fileField: CampaignFieldFile = {
@@ -37,6 +39,7 @@ const fileField: CampaignFieldFile = {
 	id: '91884877',
 	type: 'file',
 	required: false,
+	hidden: false,
 };
 
 const firstRadioOption = {
@@ -62,6 +65,7 @@ const radioField: CampaignFieldRadio = {
 	id: '91884878',
 	type: 'radio',
 	required: true,
+	hidden: false,
 };
 
 const firstCheckboxOption = {
@@ -87,6 +91,7 @@ const checkboxField: CampaignFieldCheckbox = {
 	id: '91884871',
 	type: 'checkbox',
 	required: true,
+	hidden: false,
 };
 
 const selectField: CampaignFieldSelect = {
@@ -106,9 +111,10 @@ const selectField: CampaignFieldSelect = {
 		},
 	],
 	required: false,
+	hidden: false,
 };
 
-describe('Callout from', () => {
+describe('Callout form', () => {
 	it('should submit text input', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
@@ -230,7 +236,7 @@ describe('Callout from', () => {
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
 	});
-	test('should upload the file', () => {
+	test('should upload the file', async () => {
 		const file = new File(['hello'], 'hello.png', { type: 'image/png' });
 		const mockSubmit = jest.fn();
 		const { queryByText } = render(
@@ -240,7 +246,8 @@ describe('Callout from', () => {
 		const input = screen.getByTestId<HTMLInputElement>(
 			`form-field-${fileField.id}`,
 		);
-		user.upload(input, file);
+
+		await user.upload(input, file);
 
 		const inputFiles = input.files ? input.files : [];
 
