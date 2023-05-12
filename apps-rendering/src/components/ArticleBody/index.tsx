@@ -41,7 +41,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		}
 
 		p:last-child {
-			margin-bottom: 0;
+			margin-bottom: 16px;
 		}
 	`}
 `;
