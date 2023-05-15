@@ -1,13 +1,6 @@
 import type { EditionId } from '../web/lib/edition';
-import { findPillar } from './find-pillar';
 
-export type Pillar =
-	| 'news'
-	| 'opinion'
-	| 'sport'
-	| 'culture'
-	| 'lifestyle'
-	| 'labs';
+export type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
 
 export interface BaseLinkType {
 	url: string;
@@ -47,6 +40,27 @@ export interface NavType extends BaseNavType {
 	selectedPillar: Pillar;
 }
 
+export const getPillar: (name: string) => Pillar | undefined = (name) => {
+	const pillar: string = name.toLowerCase();
+
+	switch (pillar) {
+		// The pillar name is "arts" in CAPI, but "culture" everywhere else
+		case 'arts':
+		case 'culture':
+			return 'culture';
+		case 'opinion':
+			return 'opinion';
+		case 'news':
+			return 'news';
+		case 'sport':
+			return 'sport';
+		case 'lifestyle':
+			return 'lifestyle';
+		default:
+			return undefined;
+	}
+};
+
 const getLink = (data: FELinkType): LinkType => {
 	const { title, longTitle = title, url } = data;
 	return {
@@ -58,9 +72,9 @@ const getLink = (data: FELinkType): LinkType => {
 	};
 };
 
-const getPillar = (data: FELinkType): PillarLinkType => ({
+const getPillarLink = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
-	pillar: findPillar(data.title) ?? 'news',
+	pillar: getPillar(data.title) ?? 'news',
 });
 
 const buildRRLinkCategories = (
@@ -88,7 +102,7 @@ const buildRRLinkModel = ({
 });
 
 export const extractNAV = (data: FENavType): NavType => {
-	const pillars = data.pillars.map(getPillar);
+	const pillars = data.pillars.map(getPillarLink);
 
 	const { subNavSections: subnav, currentNavLinkTitle: currentNavLink = '' } =
 		data;
