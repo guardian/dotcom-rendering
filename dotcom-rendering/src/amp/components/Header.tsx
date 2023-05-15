@@ -92,8 +92,6 @@ const pillarColour = (pillar: Pillar) => {
 			return palette.culture[500];
 		case 'lifestyle':
 			return palette.lifestyle[500];
-		case 'labs':
-			return palette.news[500];
 	}
 };
 
