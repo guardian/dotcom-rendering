@@ -107,6 +107,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkWebVitals: !!front.config.abTests.borkWebVitals,
+		borkFCP: !!front.config.abTests.borkFcp,
+		borkFID: !!front.config.abTests.borkFid,
 	});
 };

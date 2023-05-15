@@ -106,6 +106,7 @@ export const allEditorialNewslettersPageToHtml = ({
 		keywords: '',
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkWebVitals: !!newslettersPage.config.abTests.borkWebVitals,
+		borkFCP: !!newslettersPage.config.abTests.borkFcp,
+		borkFID: !!newslettersPage.config.abTests.borkFid,
 	});
 };
