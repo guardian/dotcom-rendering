@@ -198,9 +198,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={front.editionId}
-							headerTopBarSwitch={
-								!!front.config.switches.headerTopNav
-							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>

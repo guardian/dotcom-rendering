@@ -322,9 +322,6 @@ export const InteractiveLayout = ({
 							article.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>

@@ -215,17 +215,10 @@ type Props = {
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
 	isInEuropeTest: boolean;
 };
 
-export const Columns = ({
-	format,
-	nav,
-	editionId,
-	headerTopBarSwitch,
-	isInEuropeTest,
-}: Props) => {
+export const Columns = ({ format, nav, editionId, isInEuropeTest }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(
 		activeEdition.editionId,
@@ -303,7 +296,6 @@ export const Columns = ({
 			<ReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
-				headerTopBarSwitch={headerTopBarSwitch}
 			/>
 
 			{/* This is where the edition dropdown is inserted					 */}

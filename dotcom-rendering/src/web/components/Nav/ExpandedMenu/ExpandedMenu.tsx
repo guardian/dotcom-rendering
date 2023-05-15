@@ -108,7 +108,6 @@ type Props = {
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
 	isInEuropeTest: boolean;
 };
 
@@ -116,7 +115,6 @@ export const ExpandedMenu = ({
 	format,
 	nav,
 	editionId,
-	headerTopBarSwitch,
 	isInEuropeTest,
 }: Props) => {
 	return (
@@ -133,7 +131,6 @@ export const ExpandedMenu = ({
 						editionId={editionId}
 						format={format}
 						nav={nav}
-						headerTopBarSwitch={headerTopBarSwitch}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</div>

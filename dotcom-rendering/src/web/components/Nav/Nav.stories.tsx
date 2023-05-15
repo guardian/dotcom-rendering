@@ -27,7 +27,6 @@ export const StandardStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				isInEuropeTest={true}
 			/>
 		</Section>
@@ -53,7 +52,6 @@ export const StandardStoryTopBarHeader = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={true}
 				isInEuropeTest={true}
 			/>
 		</Section>
@@ -79,7 +77,6 @@ export const OpinionStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				isInEuropeTest={true}
 			/>
 		</Section>
@@ -106,7 +103,6 @@ export const ImmersiveStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				isInEuropeTest={true}
 			/>
 		</Section>

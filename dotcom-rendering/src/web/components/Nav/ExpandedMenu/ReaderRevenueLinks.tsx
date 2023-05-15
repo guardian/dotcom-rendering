@@ -72,13 +72,11 @@ const mainMenuLinkStyle = css`
 type Props = {
 	readerRevenueLinks: ReaderRevenuePositions;
 	editionId: EditionId;
-	headerTopBarSwitch: boolean;
 };
 
 export const ReaderRevenueLinks = ({
 	readerRevenueLinks,
 	editionId,
-	headerTopBarSwitch,
 }: Props) => {
 	const [pageViewId, setPageViewId] = useState('');
 	const [referrerUrl, setReferrerUrl] = useState('');
@@ -97,35 +95,20 @@ export const ReaderRevenueLinks = ({
 		referrerUrl,
 	});
 
-	const links: LinkType[] = headerTopBarSwitch
-		? [
-				{
-					longTitle: 'Support us',
-					title: 'Support us',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.support,
-				},
-				{
-					longTitle: 'Print subscriptions',
-					title: 'Print subscriptions',
-					mobileOnly: true,
-					url: printSubUrl,
-				},
-		  ]
-		: [
-				{
-					longTitle: 'Make a contribution',
-					title: 'Make a contribution',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.contribute,
-				},
-				{
-					longTitle: 'Subscribe',
-					title: 'Subscribe',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.subscribe,
-				},
-		  ];
+	const links: LinkType[] = [
+		{
+			longTitle: 'Support us',
+			title: 'Support us',
+			mobileOnly: true,
+			url: readerRevenueLinks.sideMenu.support,
+		},
+		{
+			longTitle: 'Print subscriptions',
+			title: 'Print subscriptions',
+			mobileOnly: true,
+			url: printSubUrl,
+		},
+	];
 
 	return (
 		<ul css={hideDesktop} role="menu">

@@ -289,9 +289,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							article.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>

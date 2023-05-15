@@ -17,7 +17,6 @@ type Props = {
 	subscribeUrl: string;
 	editionId: EditionId;
 	isInEuropeTest: boolean;
-	headerTopBarSwitch: boolean;
 };
 
 const clearFixStyle = css`
@@ -56,7 +55,6 @@ export const Nav = ({
 	nav,
 	subscribeUrl,
 	editionId,
-	headerTopBarSwitch,
 	isInEuropeTest,
 }: Props) => {
 	const displayRoundel =
@@ -216,7 +214,6 @@ export const Nav = ({
 					editionId={editionId}
 					nav={nav}
 					format={format}
-					headerTopBarSwitch={headerTopBarSwitch}
 					isInEuropeTest={isInEuropeTest}
 				/>
 			</div>

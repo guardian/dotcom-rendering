@@ -15,7 +15,6 @@ describe('Nav', () => {
 				}}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				isInEuropeTest={true}
 			/>,
 		);
@@ -38,7 +37,6 @@ describe('Nav', () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 				isInEuropeTest={true}
 			/>,
 		);

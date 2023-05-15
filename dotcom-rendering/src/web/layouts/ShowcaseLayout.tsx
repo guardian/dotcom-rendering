@@ -323,9 +323,6 @@ export const ShowcaseLayout = ({
 											.subscribe
 									}
 									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
 									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
@@ -401,9 +398,6 @@ export const ShowcaseLayout = ({
 											.subscribe
 									}
 									editionId={article.editionId}
-									headerTopBarSwitch={
-										!!article.config.switches.headerTopNav
-									}
 									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>

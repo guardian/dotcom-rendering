@@ -366,9 +366,6 @@ export const ImmersiveLayout = ({
 							article.nav.readerRevenueLinks.header.contribute
 						}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
