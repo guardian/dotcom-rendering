@@ -223,9 +223,9 @@ const pillarColour = (pillar: Pillar) => {
 	}
 };
 
-const pillarUnderline = (borderColour: string) => css`
+const pillarUnderline = (pillar: Pillar) => css`
 	:after {
-		border-top: 4px solid ${borderColour};
+		border-top: 4px solid ${pillarColour(pillar)};
 		left: 0;
 		right: 1px;
 		top: -4px;
@@ -282,7 +282,7 @@ export const Pillars = ({
 					<a
 						css={[
 							linkStyle(display),
-							pillarUnderline(pillarColour(selectedPillar)),
+							pillarUnderline(selectedPillar),
 							isTopNav && showMenuUnderlineStyles,
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
