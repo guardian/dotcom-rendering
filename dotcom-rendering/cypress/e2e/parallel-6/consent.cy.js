@@ -45,10 +45,10 @@ describe('Consent tests', function () {
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Reject all']").click();
 		// We force window.ga to be null upon consent rejection to prevent subsequent requests
-		cy.window().its('ga').should('equal', null);
+		cy.window().its('ga').should('be.null');
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
 		// to see if the ga property remains correctly unset
 		cy.reload();
-		cy.window().its('ga').should('equal', null);
+		cy.window().its('ga').should('be.null');
 	});
 });

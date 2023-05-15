@@ -109,6 +109,7 @@ export const AllEditorialNewslettersPageLayout = ({
 							format={articleFormat}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (

@@ -19,6 +19,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -186,6 +187,7 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 const decideCaption = (mainMedia: FEElement | undefined): string => {
@@ -244,7 +246,12 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
+export const ImmersiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -280,6 +287,9 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const isInEuropeTest =
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
@@ -359,6 +369,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -648,6 +659,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

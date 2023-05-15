@@ -175,6 +175,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -259,6 +260,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					editionId={article.editionId}
 					headerTopBarSwitch={!!article.config.switches.headerTopNav}
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</Section>
 

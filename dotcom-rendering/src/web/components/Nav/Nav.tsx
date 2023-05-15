@@ -16,6 +16,7 @@ type Props = {
 	nav: NavType;
 	subscribeUrl: string;
 	editionId: EditionId;
+	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };
 
@@ -56,6 +57,7 @@ export const Nav = ({
 	subscribeUrl,
 	editionId,
 	headerTopBarSwitch,
+	isInEuropeTest,
 }: Props) => {
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
@@ -215,6 +217,7 @@ export const Nav = ({
 					nav={nav}
 					format={format}
 					headerTopBarSwitch={headerTopBarSwitch}
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</div>
 			{displayRoundel && (

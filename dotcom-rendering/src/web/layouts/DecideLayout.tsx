@@ -2,6 +2,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
@@ -11,14 +12,50 @@ import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
-type Props = {
+interface BaseProps {
 	article: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
+}
+
+interface AppProps extends BaseProps {
+	renderingTarget: 'Apps';
+}
+
+interface WebProps extends BaseProps {
+	renderingTarget: 'Web';
+	NAV: NavType;
+}
+
+const DecideLayoutApps = ({
+	article,
+	format,
+}: {
+	article: FEArticleType;
+	format: ArticleFormat;
+}) => {
+	if (
+		format.display === ArticleDisplay.Standard &&
+		format.design === ArticleDesign.Standard
+	) {
+		return (
+			<StandardLayout
+				article={article}
+				format={format}
+				renderingTarget="Apps"
+			/>
+		);
+	}
+
+	return <pre>Not supported</pre>;
 };
 
-export const DecideLayout = ({ article, NAV, format }: Props) => {
-	// TODO we can probably better express this as data
+const DecideLayoutWeb = ({
+	article,
+	format,
+	NAV,
+	renderingTarget,
+}: WebProps) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -41,6 +78,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				}
@@ -56,6 +94,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -66,6 +105,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				default:
@@ -74,6 +114,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
@@ -87,6 +128,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -105,6 +147,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -115,6 +158,7 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
@@ -131,9 +175,28 @@ export const DecideLayout = ({ article, NAV, format }: Props) => {
 							article={article}
 							NAV={NAV}
 							format={format}
+							renderingTarget={renderingTarget}
 						/>
 					);
 			}
 		}
+	}
+};
+
+export const DecideLayout = (props: AppProps | WebProps) => {
+	const { article, format, renderingTarget } = props;
+
+	switch (renderingTarget) {
+		case 'Apps':
+			return <DecideLayoutApps article={article} format={format} />;
+		case 'Web':
+			return (
+				<DecideLayoutWeb
+					NAV={props.NAV}
+					article={article}
+					format={format}
+					renderingTarget={renderingTarget}
+				/>
+			);
 	}
 };

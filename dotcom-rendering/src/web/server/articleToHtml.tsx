@@ -73,7 +73,12 @@ export const articleToHtml = ({ article }: Props): string => {
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} article={article} NAV={NAV} />,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Web"
+		/>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -253,5 +258,8 @@ window.twttr = (function(d, s, id) {
 		recipeMarkup,
 		offerHttp3,
 		canonicalUrl,
+		renderingTarget: 'Web',
+		borkFCP: !!article.config.abTests.borkFcp,
+		borkFID: !!article.config.abTests.borkFid,
 	});
 };

@@ -152,5 +152,8 @@ export const frontToHtml = ({ front }: Props): string => {
 		windowGuardian,
 		keywords,
 		offerHttp3,
+		renderingTarget: 'Web',
+		borkFCP: !!front.config.abTests.borkFcp,
+		borkFID: !!front.config.abTests.borkFid,
 	});
 };

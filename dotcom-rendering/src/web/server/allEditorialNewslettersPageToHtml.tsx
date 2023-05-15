@@ -118,5 +118,8 @@ export const allEditorialNewslettersPageToHtml = ({
 		windowGuardian,
 		keywords: '',
 		offerHttp3,
+		renderingTarget: 'Web',
+		borkFCP: !!newslettersPage.config.abTests.borkFcp,
+		borkFID: !!newslettersPage.config.abTests.borkFid,
 	});
 };
