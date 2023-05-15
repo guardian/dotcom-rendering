@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	brand,
 	brandAlt,
 	brandText,
 	from,
 	headline,
+	palette,
 	until,
 } from '@guardian/source-foundations';
-import type { PillarLinkType } from '../../model/extract-nav';
-import type { Palette } from '../../types/palette';
-import { decidePalette } from '../lib/decidePalette';
+import type { Pillar, PillarLinkType } from '../../model/extract-nav';
 import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
@@ -206,9 +205,27 @@ const linkStyle = (display: ArticleDisplay) => css`
 		transform: translateY(4px);
 	}
 `;
-const pillarUnderline = (palette: Palette) => css`
+
+const pillarColour = (pillar: Pillar) => {
+	switch (pillar) {
+		case 'news':
+			return palette.news[500];
+		case 'opinion':
+			return palette.opinion[500];
+		case 'sport':
+			return palette.sport[500];
+		case 'culture':
+			return palette.culture[500];
+		case 'lifestyle':
+			return palette.lifestyle[500];
+		case 'labs':
+			return palette.news[500];
+	}
+};
+
+const pillarUnderline = (borderColour: string) => css`
 	:after {
-		border-top: 4px solid ${palette.border.navPillar};
+		border-top: 4px solid ${borderColour};
 		left: 0;
 		right: 1px;
 		top: -4px;
@@ -241,7 +258,7 @@ type Props = {
 	display: ArticleDisplay;
 	isTopNav?: boolean;
 	pillars: PillarLinkType[];
-	pillar: ArticleTheme;
+	selectedPillar: Pillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
 };
@@ -250,27 +267,22 @@ export const Pillars = ({
 	display,
 	isTopNav,
 	pillars,
-	pillar,
+	selectedPillar,
 	showLastPillarDivider = true,
 	dataLinkName,
 }: Props) => (
 	<ul data-testid="pillar-list" css={pillarsStyles(display)}>
 		{pillars.map((p, i) => {
-			const isSelected = p.pillar === pillar;
+			const isSelected = p.pillar === selectedPillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
+
 			return (
 				<li key={p.title} css={pillarStyle}>
 					<a
 						css={[
 							linkStyle(display),
-							pillarUnderline(
-								decidePalette({
-									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Feature,
-									theme: p.pillar,
-								}),
-							),
+							pillarUnderline(pillarColour(selectedPillar)),
 							isTopNav && showMenuUnderlineStyles,
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,

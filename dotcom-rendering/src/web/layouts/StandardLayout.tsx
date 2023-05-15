@@ -931,7 +931,7 @@ export const StandardLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

@@ -5,11 +5,11 @@ import { clearFix } from '../../../lib/mixins';
 import type { NavType } from '../../../model/extract-nav';
 import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
+import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
+import { Island } from '../Island';
 import { Pillars } from '../Pillars';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
-import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
-import { Island } from '../Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -206,7 +206,7 @@ export const Nav = ({
 				<Pillars
 					display={format.display}
 					pillars={nav.pillars}
-					pillar={format.theme}
+					selectedPillar={nav.selectedPillar}
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>

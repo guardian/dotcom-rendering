@@ -17,9 +17,9 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
-import type { PillarLinkType } from '../../model/extract-nav';
-import type { EditionId } from '../lib/edition';
+import type { Pillar, PillarLinkType } from '../../model/extract-nav';
 import type { FooterType } from '../../types/footer';
+import type { EditionId } from '../lib/edition';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
@@ -310,14 +310,14 @@ const decideSignupNewsletterName = (edition: EditionId): string => {
 
 export const Footer = ({
 	pillars,
-	pillar,
+	selectedPillar,
 	pageFooter,
 	urls,
 	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	pillar: ArticleTheme;
+	selectedPillar: Pillar;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
@@ -333,7 +333,7 @@ export const Footer = ({
 			<Pillars
 				display={ArticleDisplay.Standard}
 				pillars={pillars}
-				pillar={pillar}
+				selectedPillar={selectedPillar}
 				showLastPillarDivider={false}
 				dataLinkName="footer"
 			/>

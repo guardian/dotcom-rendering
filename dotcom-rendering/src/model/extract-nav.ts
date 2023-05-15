@@ -1,6 +1,13 @@
-import { ArticlePillar } from '@guardian/libs';
 import type { EditionId } from '../web/lib/edition';
 import { findPillar } from './find-pillar';
+
+export type Pillar =
+	| 'news'
+	| 'opinion'
+	| 'sport'
+	| 'culture'
+	| 'lifestyle'
+	| 'labs';
 
 export interface BaseLinkType {
 	url: string;
@@ -19,7 +26,7 @@ export interface EditionLinkType extends LinkType {
 }
 
 export interface PillarLinkType extends LinkType {
-	pillar: ArticleTheme;
+	pillar: Pillar;
 }
 
 export interface SubNavType {
@@ -37,6 +44,7 @@ interface BaseNavType {
 
 export interface NavType extends BaseNavType {
 	pillars: PillarLinkType[];
+	selectedPillar: Pillar;
 }
 
 const getLink = (data: FELinkType): LinkType => {
@@ -52,7 +60,7 @@ const getLink = (data: FELinkType): LinkType => {
 
 const getPillar = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
-	pillar: findPillar(data.title) ?? ArticlePillar.News,
+	pillar: findPillar(data.title) ?? 'news',
 });
 
 const buildRRLinkCategories = (
@@ -97,5 +105,6 @@ export const extractNAV = (data: FENavType): NavType => {
 			  }
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
+		selectedPillar: 'news',
 	};
 };

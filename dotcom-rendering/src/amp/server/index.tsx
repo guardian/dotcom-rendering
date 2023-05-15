@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
-import { extractNAV } from '../../model/extract-nav';
+import { extractArticleNav } from '../../web/server/articleToHtml';
 import { validateAsArticleType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
 import { isAmpSupported } from '../components/Elements';
@@ -74,7 +74,7 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 				<Article
 					experimentsData={getAmpExperimentCache()}
 					articleData={article}
-					nav={extractNAV(article.nav)}
+					nav={extractArticleNav(article)}
 					analytics={analytics}
 					permutive={permutive}
 					config={config}

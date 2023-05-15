@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -36,7 +36,6 @@ import { Stuck } from './lib/stickiness';
 interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
-	format: ArticleFormat;
 }
 
 const spaces = / /g;
@@ -112,13 +111,19 @@ const showBadge = (displayName: string) => {
 	return undefined;
 };
 
-export const FrontLayout = ({ front, NAV, format }: Props) => {
+export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
 	} = front;
 
 	const isInEuropeTest =
 		front.config.abTests.europeNetworkFrontVariant === 'variant';
+
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
 
 	const palette = decidePalette(format);
 
@@ -445,7 +450,7 @@ export const FrontLayout = ({ front, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}

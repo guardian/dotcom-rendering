@@ -1,17 +1,10 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	isString,
-} from '@guardian/libs';
-import { findPillar } from '../..//model/find-pillar';
+import { isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
 import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
-import type { NavType } from '../../model/extract-nav';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
@@ -24,23 +17,36 @@ interface Props {
 	front: DCRFrontType;
 }
 
-const decideFormat = (NAV: NavType) => {
-	// We decide the `theme` of the format based on the `currentNavLink` as this is used in
-	// <Nav /> to decide which pillar should be selected
+const extractFrontNav = (front: DCRFrontType) => {
+	const NAV = extractNAV(front.nav);
 	const { currentNavLink } = NAV;
 
 	// Is the `currentNavLink` a pillar?
-	const themeFromCurrentLink = findPillar(currentNavLink);
+	const pillarFromCurrentLink = (() => {
+		switch (currentNavLink) {
+			// The pillar name is "arts" in CAPI, but "culture" everywhere else
+			case 'Arts':
+			case 'Culture':
+				return 'culture';
+			case 'Opinion':
+				return 'opinion';
+			case 'News':
+				return 'news';
+			case 'Sport':
+				return 'sport';
+			case 'Lifestyle':
+				return 'lifestyle';
+			default:
+				return undefined;
+		}
+	})();
 
 	// Is the `currentNavLink` in one of the children of the pillar?
-	const themeFromSubNav = NAV.pillars.find((pillar) => {
+	const pillarFromSubNav = NAV.pillars.find((pillar) => {
 		// Annoyingly "Football" appears in "News" and "Sport" pillars, so we exclude this case in "News"
 		// As "Football" is always "Sport". You can see the corresponding `frontend` code here:
 		// https://github.com/guardian/frontend/blob/main/common/app/navigation/Navigation.scala#L141-L143
-		if (
-			pillar.pillar === ArticlePillar.News &&
-			currentNavLink === 'Football'
-		) {
+		if (pillar.pillar === 'news' && currentNavLink === 'Football') {
 			return false;
 		}
 
@@ -49,22 +55,20 @@ const decideFormat = (NAV: NavType) => {
 		});
 	})?.pillar;
 
-	const theme = themeFromCurrentLink ?? themeFromSubNav ?? ArticlePillar.News;
+	const selectedPillar = pillarFromCurrentLink ?? pillarFromSubNav ?? 'news';
 
 	return {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme,
+		...NAV,
+		selectedPillar,
 	};
 };
 
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
-	const NAV = extractNAV(front.nav);
-	const format = decideFormat(NAV);
+	const NAV = extractFrontNav(front);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<FrontPage front={front} NAV={NAV} format={format} />,
+		<FrontPage front={front} NAV={NAV} />,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2

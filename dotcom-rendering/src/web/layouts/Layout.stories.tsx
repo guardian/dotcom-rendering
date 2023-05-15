@@ -21,8 +21,8 @@ import { Review } from '../../../fixtures/generated/articles/Review';
 import { SpecialReport } from '../../../fixtures/generated/articles/SpecialReport';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
-import { extractNAV } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { extractArticleNav } from '../../web/server/articleToHtml';
 import { embedIframe } from '../browser/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
@@ -63,7 +63,7 @@ const HydratedLayout = ({
 }: {
 	serverArticle: FEArticleType;
 }) => {
-	const NAV = extractNAV(serverArticle.nav);
+	const NAV = extractArticleNav(serverArticle);
 	const format: ArticleFormat = decideFormat(serverArticle.format);
 	useEffect(() => {
 		embedIframe().catch((e) =>

@@ -6,12 +6,12 @@ import {
 	from,
 	headline,
 	neutral,
+	palette,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
-import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
-import type { NavType, PillarLinkType } from '../../model/extract-nav';
+import type { NavType, Pillar, PillarLinkType } from '../../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 
 const headerStyles = css`
@@ -80,7 +80,24 @@ const pillarListItemStyle = css`
 	}
 `;
 
-const pillarLinkStyle = (pillar: ArticleTheme) => css`
+const pillarColour = (pillar: Pillar) => {
+	switch (pillar) {
+		case 'news':
+			return palette.news[500];
+		case 'opinion':
+			return palette.opinion[500];
+		case 'sport':
+			return palette.sport[500];
+		case 'culture':
+			return palette.culture[500];
+		case 'lifestyle':
+			return palette.lifestyle[500];
+		case 'labs':
+			return palette.news[500];
+	}
+};
+
+const pillarLinkStyle = (pillar: Pillar) => css`
 	text-decoration: none;
 	cursor: pointer;
 	display: block;
@@ -121,7 +138,7 @@ const pillarLinkStyle = (pillar: ArticleTheme) => css`
 		left: 0;
 		right: 0;
 		position: absolute;
-		border-top: 4px solid ${pillarPalette_DO_NOT_USE[pillar].bright};
+		border-top: 4px solid ${pillarColour(pillar)};
 		transition: transform 0.3s ease-in-out;
 	}
 `;

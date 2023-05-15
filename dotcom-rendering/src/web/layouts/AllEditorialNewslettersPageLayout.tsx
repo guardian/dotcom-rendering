@@ -166,8 +166,8 @@ export const AllEditorialNewslettersPageLayout = ({
 			>
 				<Footer
 					pageFooter={pageFooter}
-					pillar={articleFormat.theme}
 					pillars={NAV.pillars}
+					selectedPillar={NAV.selectedPillar}
 					urls={NAV.readerRevenueLinks.header}
 					editionId={editionId}
 					contributionsServiceUrl={contributionsServiceUrl}

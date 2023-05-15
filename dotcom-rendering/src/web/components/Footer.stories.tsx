@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
 import {
 	brand,
 	breakpoints,
@@ -8,7 +7,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
-import { extractNAV } from '../../model/extract-nav';
+import { extractArticleNav } from '../../web/server/articleToHtml';
 import { editionList } from '../lib/edition';
 import { Footer } from './Footer';
 import { Section } from './Section';
@@ -47,8 +46,8 @@ export const Footers = () => (
 				<Wrapper>
 					<Footer
 						pageFooter={Standard.pageFooter}
-						pillar={ArticlePillar.News}
-						pillars={extractNAV(Standard.nav).pillars}
+						selectedPillar={'news'}
+						pillars={extractArticleNav(Standard).pillars}
 						urls={Standard.nav.readerRevenueLinks.header}
 						editionId={editionId}
 						contributionsServiceUrl={

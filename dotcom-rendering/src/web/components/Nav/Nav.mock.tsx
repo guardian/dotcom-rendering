@@ -1,13 +1,13 @@
-import { ArticlePillar } from '@guardian/libs';
 import type { NavType } from '../../../model/extract-nav';
 
 export const nav: NavType = {
+	selectedPillar: 'news',
 	pillars: [
 		{
 			title: 'News',
 			longTitle: 'Headlines',
 			url: '/',
-			pillar: ArticlePillar.News,
+			pillar: 'news',
 			children: [
 				{
 					title: 'UK',
@@ -444,7 +444,7 @@ export const nav: NavType = {
 			title: 'Opinion',
 			longTitle: 'Opinion home',
 			url: '/commentisfree',
-			pillar: ArticlePillar.Opinion,
+			pillar: 'opinion',
 			children: [
 				{
 					title: 'The Guardian view',
@@ -488,7 +488,7 @@ export const nav: NavType = {
 			title: 'Sport',
 			longTitle: 'Sport home',
 			url: '/sport',
-			pillar: ArticlePillar.Sport,
+			pillar: 'sport',
 			children: [
 				{
 					title: 'Football',
@@ -617,7 +617,7 @@ export const nav: NavType = {
 			title: 'Culture',
 			longTitle: 'Culture home',
 			url: '/culture',
-			pillar: ArticlePillar.Culture,
+			pillar: 'culture',
 			children: [
 				{
 					title: 'Film',
@@ -682,7 +682,7 @@ export const nav: NavType = {
 			title: 'Lifestyle',
 			longTitle: 'Lifestyle home',
 			url: '/lifeandstyle',
-			pillar: ArticlePillar.Lifestyle,
+			pillar: 'lifestyle',
 			children: [
 				{
 					title: 'Fashion',

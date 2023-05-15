@@ -11,7 +11,7 @@ import {
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
-import { extractNAV } from '../../model/extract-nav';
+import { extractNAV, type NavType } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
@@ -38,8 +38,35 @@ const decideTitle = (article: FEArticleType): string => {
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
 };
 
+export const extractArticleNav = (article: FEArticleType): NavType => {
+	const nav = extractNAV(article.nav);
+	const selectedPillar = (() => {
+		switch (article.format.theme) {
+			case 'NewsPillar':
+				return 'news';
+			case 'OpinionPillar':
+				return 'opinion';
+			case 'SportPillar':
+				return 'sport';
+			case 'CulturePillar':
+				return 'culture';
+			case 'LifestylePillar':
+				return 'lifestyle';
+			case 'SpecialReportTheme':
+			case 'SpecialReportAltTheme':
+			case 'Labs':
+				return 'news';
+		}
+	})();
+
+	return {
+		...nav,
+		selectedPillar,
+	};
+};
+
 export const articleToHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
+	const NAV = extractArticleNav(article);
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 

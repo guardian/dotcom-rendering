@@ -4,9 +4,13 @@ import {
 } from '../../../scripts/webpack/bundles';
 import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import type { NavType } from '../../model/extract-nav';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
-import type { DCRNewslettersPageType } from '../../types/newslettersPage';
+import type {
+	DCRNewslettersPageType,
+	FENewslettersPageType,
+} from '../../types/newslettersPage';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -16,11 +20,20 @@ interface Props {
 	newslettersPage: DCRNewslettersPageType;
 }
 
+export const extractNewslettersPageNav = (
+	page: FENewslettersPageType,
+): NavType => {
+	return {
+		...extractNAV(page.nav),
+		selectedPillar: 'news',
+	};
+};
+
 export const allEditorialNewslettersPageToHtml = ({
 	newslettersPage,
 }: Props): string => {
 	const title = newslettersPage.webTitle;
-	const NAV = extractNAV(newslettersPage.nav);
+	const NAV = extractNewslettersPageNav(newslettersPage);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<AllEditorialNewslettersPage
