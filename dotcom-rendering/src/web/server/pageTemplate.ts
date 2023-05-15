@@ -22,7 +22,8 @@ type BaseProps = {
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
-	bork: boolean;
+	borkFCP: boolean;
+	borkFID: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 };
@@ -69,7 +70,8 @@ export const pageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
-		bork,
+		borkFCP,
+		borkFID,
 	} = props;
 
 	const favicon =
@@ -320,8 +322,18 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				${bork ? `<script>(${fid.toString()})()</script>` : ''}
-				${bork ? `<script>(${fcp.toString()})()</script>` : ''}
+				${
+					borkFID || borkFCP
+						? `
+				<script>
+				// sorry
+				${borkFID ? `(${fid.toString()})();` : ''}
+				${borkFCP ? `(${fcp.toString()})();` : ''}
+				</script>
+				`
+						: ''
+				}
+
 
 				${initTwitter ?? ''}
 
@@ -351,7 +363,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 				${
-					bork
+					borkFCP
 						? `
 				<style>
 					@keyframes bork-fcp-paint {
