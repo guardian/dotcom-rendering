@@ -232,7 +232,7 @@ window.twttr = (function(d, s, id) {
 		offerHttp3,
 		canonicalUrl,
 		renderingTarget: 'Web',
-		borkFCP: !!article.config.abTests.borkFcp,
-		borkFID: !!article.config.abTests.borkFid,
+		borkFCP: article.config.abTests.borkFcpVariant === 'variant',
+		borkFID: article.config.abTests.borkFidVariant === 'variant',
 	});
 };
