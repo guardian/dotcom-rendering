@@ -119,7 +119,7 @@ export const allEditorialNewslettersPageToHtml = ({
 		keywords: '',
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: !!newslettersPage.config.abTests.borkFcp,
-		borkFID: !!newslettersPage.config.abTests.borkFid,
+		borkFCP: newslettersPage.config.abTests.borkFcpVariant === 'variant',
+		borkFID: newslettersPage.config.abTests.borkFidVariant === 'variant',
 	});
 };
