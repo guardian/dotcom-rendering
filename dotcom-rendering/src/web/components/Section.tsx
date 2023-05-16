@@ -2,11 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
-import type {
-	DCRContainerPalette,
-	DCRSnapType,
-	TreatType,
-} from '../../types/front';
+import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
@@ -108,8 +104,6 @@ type Props = {
 	 * Legacy className prop only used for supporting old interactives
 	 */
 	className?: string;
-
-	snapData?: DCRSnapType;
 };
 
 const containerStyles = css`
