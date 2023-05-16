@@ -1,6 +1,6 @@
 import validator from 'amphtml-validator';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
-import { extractArticleNav } from '../../web/server/articleToHtml';
+import { extractNAV } from '../../model/extract-nav';
 import type { AnalyticsModel } from '../components/Analytics';
 import type { PermutiveModel } from '../components/Permutive';
 import { Article } from '../pages/Article';
@@ -28,7 +28,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 test('produces valid AMP doc', async () => {
 	const v = await validator.getInstance();
 	const { config } = ExampleArticle;
-	const nav = extractArticleNav(ExampleArticle);
+	const nav = extractNAV(ExampleArticle.nav);
 	const { linkedData } = ExampleArticle;
 
 	const metadata = {
