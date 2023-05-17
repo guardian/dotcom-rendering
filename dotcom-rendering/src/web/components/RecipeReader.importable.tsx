@@ -6,6 +6,13 @@ import { useState } from 'react';
 
 declare const SpeechRecognition: any;
 
+// ***** TO DO ******
+// 1. Use the json from scraped recipe rather than hardcoded steps
+// 2. Add a button to close the dialog
+// 3. Add the ingredients to the dialog
+// 4. Improve CSS  - should be same size model, buttons should be better, branding etc
+// 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
+
 const steps = [
 	'Quarter each cabbage into four fat wedges, keeping the core intact to keep it together on the grill.',
 	'In a large bowl, drizzle the cabbages with enough olive oil to lightly coat, season generously, and gently toss to combine.',
