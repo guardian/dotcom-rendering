@@ -23,7 +23,7 @@ interface RecipeReaderProps {
 }
 interface ModalHeaderProps {
 	title: string;
-	handleCloseDialog: () => void;
+	onClose: () => void;
 }
 
 const findValidRecipe = (pageId: string) => {
@@ -31,7 +31,7 @@ const findValidRecipe = (pageId: string) => {
 	return data?.Items.find((item: any) => item.path === pageId);
 };
 
-const ModalHeader = ({ title, handleCloseDialog }: ModalHeaderProps) => {
+const ModalHeader = ({ title, onClose }: ModalHeaderProps) => {
 	return (
 		<div css={modalHeaderStyles}>
 			<h2>{title}</h2>
@@ -42,7 +42,7 @@ const ModalHeader = ({ title, handleCloseDialog }: ModalHeaderProps) => {
 				iconSide="left"
 				priority="tertiary"
 				size="small"
-				onClick={handleCloseDialog}
+				onClick={onClose}
 			/>
 		</div>
 	);
