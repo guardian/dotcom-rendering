@@ -20,6 +20,10 @@ export type FETagType = {
 		url?: string;
 		webUrl?: string;
 	};
+	pagination?: {
+		currentPage: number;
+		lastPage: number;
+	};
 };
 
 export type TagType = {

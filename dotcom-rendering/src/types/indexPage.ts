@@ -7,6 +7,10 @@ import type { FETagType } from './tag';
 export interface FEIndexPageType {
 	contents: FEFrontCard[];
 	nav: FENavType;
+	tags: {
+		// TODO: Why does Frontend do this?
+		tags: FETagType[];
+	};
 	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
@@ -22,6 +26,7 @@ export interface FEIndexPageType {
 export interface DCRIndexPageType {
 	groupedTrails: GroupedTrails[];
 	nav: FENavType;
+	tags: FETagType[];
 	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;

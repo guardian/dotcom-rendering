@@ -90,6 +90,7 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 	const enhancedCards = enhanceCards(data.contents);
 	return {
 		...data,
+		tags: data.tags.tags,
 		groupedTrails: groupTrailsByDate(enhancedCards),
 		trendingTopics: extractTrendingTopics(data.contents),
 	};
