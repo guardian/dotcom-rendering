@@ -9,6 +9,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 	SvgCross,
+	SvgDocument,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { recipeData } from './recipes_table_export';
@@ -25,6 +26,7 @@ interface RecipeReaderProps {
 interface ModalHeaderProps {
 	title: string;
 	onClose: () => void;
+	toggleShowIngredients: () => void;
 }
 interface ModalBodyProps {
 	children: React.ReactNode;
@@ -35,19 +37,37 @@ const findValidRecipe = (pageId: string) => {
 	return data?.Items.find((item: any) => item.path === pageId);
 };
 
-const ModalHeader = ({ title, onClose }: ModalHeaderProps) => {
+const ModalHeader = ({
+	title,
+	onClose,
+	toggleShowIngredients,
+}: ModalHeaderProps) => {
 	return (
 		<div css={modalHeaderStyles}>
 			<h2>{title}</h2>
-
-			<Button
-				icon={<SvgCross />}
-				hideLabel={true}
-				priority="subdued"
-				size="small"
-				onClick={() => onClose()}
-				css={{ color: '#fff' }}
-			/>
+			<div>
+				<Button
+					icon={
+						<SvgDocument
+							isAnnouncedByScreenReader={true}
+							size="small"
+						/>
+					}
+					hideLabel={true}
+					priority="subdued"
+					size="small"
+					onClick={toggleShowIngredients}
+					css={{ color: '#fff' }}
+				/>
+				<Button
+					icon={<SvgCross />}
+					hideLabel={true}
+					priority="subdued"
+					size="small"
+					onClick={() => onClose()}
+					css={{ color: '#fff' }}
+				/>
+			</div>
 		</div>
 	);
 };
@@ -59,9 +79,30 @@ const ModalBody = ({ children }: ModalBodyProps) => {
 const ModalFooter = ({ children }: ModalBodyProps) => {
 	return <div css={modalFooterStyles}>{children}</div>;
 };
+
+interface Ingredient {
+	text: string;
+}
+interface RecipeIngredientsProps {
+	ingredients: Ingredient[];
+}
+export const Ingredients = ({ ingredients }: RecipeIngredientsProps) => {
+	return (
+		<div>
+			<h2>Ingredients</h2>
+			<ul>
+				{ingredients.map((ingredient, index) => (
+					<li key={`${index}-ingredient`}>{ingredient.text}</li>
+				))}
+			</ul>
+		</div>
+	);
+};
+
 export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	const [showReader, setShowReader] = useState(false);
 	const [activeStep, setActiveStep] = useState(0);
+	const [showIngredients, setShowIngredients] = useState(false);
 	const recipe = findValidRecipe(`/${pageId}`);
 	const steps = recipe?.steps;
 
@@ -76,6 +117,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		return null;
 	}
 
+	const ingredients = recipe?.ingredients_lists[0].ingredients;
 	const handleNext = () => {
 		if (!isLastStep()) {
 			setActiveStep((prevStep) => prevStep + 1);
@@ -128,6 +170,12 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				transcript.includes('finish')
 			) {
 				handleCloseDialog();
+			}
+			if (transcript.includes('show')) {
+				setShowIngredients(true);
+			}
+			if (transcript.includes('hide')) {
+				setShowIngredients(false);
 			}
 		};
 
@@ -195,9 +243,17 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 						<ModalHeader
 							title={`Step ${activeStep + 1} of ${steps.length}`}
 							onClose={handleCloseDialog}
+							toggleShowIngredients={() =>
+								setShowIngredients(!showIngredients)
+							}
 						/>
 
 						<ModalBody>
+							{showIngredients && ingredients && (
+								<div style={{ maxWidth: '40%' }}>
+									<Ingredients ingredients={ingredients} />
+								</div>
+							)}
 							<p>{steps[activeStep]}</p>
 						</ModalBody>
 
@@ -268,6 +324,7 @@ const modalHeaderStyles = css`
 	padding: 8px;
 	align-items: center;
 	justify-content: space-between;
+	flex-direction: row;
 `;
 
 const modalBodyStyles = css`
