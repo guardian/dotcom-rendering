@@ -21,6 +21,7 @@ declare const SpeechRecognition: any;
 
 // ***** TO DO ******
 // 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
+// 6. Use a feature specific flag (or no flag because this is a hack)
 
 interface RecipeReaderProps {
 	pageId: string;
