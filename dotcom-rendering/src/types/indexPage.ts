@@ -21,6 +21,7 @@ export interface FEIndexPageType {
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	forceDay: boolean;
 }
 
 export interface DCRIndexPageType {

@@ -89,12 +89,16 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 	const data: FEIndexPageType = validateAsIndexPageType(body);
 
 	const enhancedCards = enhanceCards(data.contents);
+	const speed = getSpeedFromTrails(data.contents);
 	return {
 		...data,
 		tags: data.tags.tags,
-		groupedTrails: groupTrailsByDate(enhancedCards),
+		groupedTrails: groupTrailsByDate(
+			enhancedCards,
+			speed === 'slow' || data.forceDay,
+		),
 		trendingTopics: extractTrendingTopics(data.contents),
-		speed: getSpeedFromTrails(data.contents),
+		speed,
 	};
 };
 

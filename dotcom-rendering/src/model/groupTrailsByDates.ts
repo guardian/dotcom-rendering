@@ -23,7 +23,10 @@ const getMeanDayFrequency = (
 	return totalTrails / days.length;
 };
 
-export const groupTrailsByDate = (trails: DCRFrontCard[]): GroupedTrails[] => {
+export const groupTrailsByDate = (
+	trails: DCRFrontCard[],
+	forceDay = false,
+): GroupedTrails[] => {
 	const trailsAndDates = trails.map((trail) => ({
 		trail,
 		date: trail.webPublicationDate
@@ -100,7 +103,7 @@ export const groupTrailsByDate = (trails: DCRFrontCard[]): GroupedTrails[] => {
 				})),
 			);
 
-			if (meanDayFrequency > MinimumPerDayPopOutFrequency) {
+			if (forceDay || meanDayFrequency > MinimumPerDayPopOutFrequency) {
 				groupings.push(
 					...trailsByDay.map((trailByDay) => ({
 						day: trailByDay.day,
