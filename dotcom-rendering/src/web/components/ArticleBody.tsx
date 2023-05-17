@@ -13,7 +13,7 @@ import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
-import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { RecipeReader } from './RecipeReader.importable';
 import { TableOfContents } from './TableOfContents.importable';
 
 type Props = {
@@ -232,8 +232,8 @@ export const ArticleBody = ({
 				dir={languageDirection}
 			>
 				{isRecipe(tags) && (
-					<Island deferUntil="hash" clientOnly={true}>
-						<RecipeMultiplier />
+					<Island deferUntil="visible" clientOnly={true}>
+						<RecipeReader />
 					</Island>
 				)}
 				<ArticleRenderer

@@ -67,6 +67,8 @@ declare global {
 		 */
 		guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
 		Cypress: any; // for checking if running within cypress
+		SpeechRecognition: any,
+		webkitSpeechRecognition: any,
 		guCmpHotFix: {
 			initialised?: boolean;
 			cmp: CMP;
