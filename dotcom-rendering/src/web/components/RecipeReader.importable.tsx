@@ -42,7 +42,7 @@ const ModalHeader = ({ title, onClose }: ModalHeaderProps) => {
 				iconSide="left"
 				priority="tertiary"
 				size="small"
-				onClick={() => onClose}
+				onClick={() => onClose()}
 			/>
 		</div>
 	);
