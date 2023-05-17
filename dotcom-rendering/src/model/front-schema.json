@@ -797,6 +797,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -1480,6 +1483,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -2163,6 +2169,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -2729,6 +2738,103 @@
             ],
             "type": "string"
         },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "brandingType": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
+            ]
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
@@ -3141,103 +3247,6 @@
                 "Video"
             ],
             "type": "string"
-        },
-        "Branding": {
-            "type": "object",
-            "properties": {
-                "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                "sponsorName": {
-                    "type": "string"
-                },
-                "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                },
-                "aboutThisLink": {
-                    "type": "string"
-                },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                }
-            },
-            "required": [
-                "aboutThisLink",
-                "logo",
-                "sponsorName"
-            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
