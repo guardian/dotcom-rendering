@@ -4,7 +4,6 @@ import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRIndexPageType } from '../../types/indexPage';
-import { FrontLayout } from '../layouts/FrontLayout';
 import { IndexPageLayout } from '../layouts/IndexPageLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AnimatePulsingDots } from './AnimatePulsingDots.importable';

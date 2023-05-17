@@ -6,18 +6,13 @@ import {
 	brandLine,
 	neutral,
 } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
-import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import type { DCRIndexPageType } from '../../types/indexPage';
 import { AdSlot } from '../components/AdSlot';
-import { Badge } from '../components/Badge';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
-import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
-import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -30,10 +25,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { CardDefault } from '../lib/cardWrappers';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
-import {
-	getMerchHighPosition,
-	getMobileAdPositions,
-} from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
