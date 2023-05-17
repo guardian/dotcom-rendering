@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 
-// declare const window.SpeechRecognition: any;
+declare const SpeechRecognition: any;
 
 const steps = [
 	'Quarter each cabbage into four fat wedges, keeping the core intact to keep it together on the grill.',
