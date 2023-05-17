@@ -233,7 +233,7 @@ export const ArticleBody = ({
 			>
 				{isRecipe(tags) && (
 					<Island deferUntil="visible" clientOnly={true}>
-						<RecipeReader />
+						<RecipeReader pageId={pageId} />
 					</Island>
 				)}
 				<ArticleRenderer

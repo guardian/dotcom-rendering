@@ -3,6 +3,7 @@
 // import { css } from '@emotion/react';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { recipeData } from './recipes_table_export';
 
 declare const SpeechRecognition: any;
 
@@ -13,25 +14,22 @@ declare const SpeechRecognition: any;
 // 4. Improve CSS  - should be same size model, buttons should be better, branding etc
 // 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
 // 6. Use a feature specific flag (or no flag because this is a hack)
+// 7. Add a model overlay
 
-const steps = [
-	'Quarter each cabbage into four fat wedges, keeping the core intact to keep it together on the grill.',
-	'In a large bowl, drizzle the cabbages with enough olive oil to lightly coat, season generously, and gently toss to combine.',
-	'Prepare a charcoal grill or barbecue for two-zone cooking and build a medium-high flame, or heat a gas grill to high.',
-	'Carefully wipe the heated grates with a lightly oiled paper towel.',
-	'Using a grill brush, scrape the grill grates clean, then carefully wipe with a lightly oiled towel again.',
-	'Grill the cabbage wedges over a direct heat until charred on all sides – four to six minutes.',
-	'Transfer to a cooler portion of the grill and cook until the interior has softened but still has a bit of crunch – five to six minutes more.',
-	'Use a paring knife to test doneness.',
-	'When cooked, transfer to a plate and leave to cool while you make the dressing.',
-	'In a bowl, whisk together the vinegar, dijon, honey, a half-teaspoon of salt and plenty of pepper.',
-	'Whisk in 150ml olive oil until the mixture has emulsified, then stir in the blue cheese.',
-	'Drizzle the dressing over the cabbage wedges and top with the cherry tomatoes, bacon, radishes and chives.',
-];
+interface RecipeReaderProps {
+	pageId: string;
+}
 
-export const RecipeReader = () => {
+const findValidRecipe = (pageId: string) => {
+	const data = recipeData as any;
+	return data?.Items.find((item: any) => item.path === pageId);
+};
+
+export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	const [showReader, setShowReader] = useState(false);
 	const [activeStep, setActiveStep] = useState(0);
+	const recipe = findValidRecipe(`/${pageId}`);
+	const steps = recipe?.steps;
 
 	const handleNext = () => {
 		setActiveStep((prevStep) => prevStep + 1);
@@ -48,8 +46,6 @@ export const RecipeReader = () => {
 
 	const handleCloseDialog = () => {
 		setShowReader(false);
-		window.SpeechRecognition =
-			window.SpeechRecognition || window.webkitSpeechRecognition;
 	};
 
 	const startSpeechRecognition = () => {
@@ -67,7 +63,6 @@ export const RecipeReader = () => {
 					event.results.length - 1
 				][0].transcript.toLowerCase();
 
-			// Check if the keyword 'next' is detected
 			if (transcript.includes('next')) {
 				handleNext();
 			}
