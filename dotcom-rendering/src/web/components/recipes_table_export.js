@@ -5496,17 +5496,6 @@ export const recipeData = {
 					title: '',
 					ingredients: [
 						{
-							item: 'binding',
-							unit: '',
-							comment: 'The',
-							text: 'The binding',
-							quantity: {
-								absolute: '',
-								from: '',
-								to: '',
-							},
-						},
-						{
 							item: 'floury potatoes',
 							unit: 'g',
 							comment: 'eg Maris Pipers',
@@ -5613,39 +5602,6 @@ export const recipeData = {
 							text: '1 tbsp vegetable oil',
 							quantity: {
 								absolute: '1',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '1',
-							quantity: {
-								absolute: '1',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '2',
-							quantity: {
-								absolute: '2',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '3',
-							quantity: {
-								absolute: '3',
 								from: '',
 								to: '',
 							},
