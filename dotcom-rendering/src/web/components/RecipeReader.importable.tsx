@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 // import { css } from '@emotion/react';
-import { Button } from '@guardian/source-react-components';
+import { Button, SvgCross } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { recipeData } from './recipes_table_export';
 
@@ -99,6 +99,21 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 					{/* <div className="overlay" onClick={handleCloseDialog}></div> */}
 					<div className="dialog">
 						<div style={{ padding: '16px' }}>
+							<div
+								style={{
+									display: 'flex',
+									justifyContent: 'right',
+								}}
+							>
+								<Button
+									icon={<SvgCross />}
+									hideLabel={true}
+									iconSide="left"
+									priority="tertiary"
+									size="small"
+									onClick={handleCloseDialog}
+								/>
+							</div>
 							<h2>
 								Step {activeStep + 1} of {steps.length}
 							</h2>
