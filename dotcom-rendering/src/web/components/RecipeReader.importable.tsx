@@ -9,11 +9,9 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 	SvgCross,
-	SvgDocument,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { recipeData } from './recipes_table_export';
-import { log } from 'console';
 
 declare const SpeechRecognition: any;
 
@@ -172,8 +170,8 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	}
 
 	const ingredients = recipe?.ingredients_lists[0].ingredients;
-	const handleNext = (step: number = activeStep) => {
-		const update = step + 1;
+	const handleNext = () => {
+		const update = activeStep + 1;
 		if (!isLastStep()) {
 			setActiveStep(update);
 		}
