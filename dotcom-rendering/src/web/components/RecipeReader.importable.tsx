@@ -158,44 +158,6 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		}
 	};
 
-	useEffect(() => {
-		window.addEventListener('keydown', onKeyDown);
-		return () => {
-			window.removeEventListener('keydown', onKeyDown);
-		};
-	});
-
-	if (!recipe || !steps?.length) {
-		return null;
-	}
-
-	const ingredients = recipe?.ingredients_lists[0].ingredients;
-	const handleNext = () => {
-		const update = activeStep + 1;
-		if (!isLastStep()) {
-			setActiveStep(update);
-		}
-	};
-
-	const handleBack = () => {
-		const isFirst = isFirstStep();
-		console.log('*** isFirst', isFirst);
-		console.log('*** activeStep', activeStep);
-		if (activeStep !== 0) {
-			console.log('*** setting active step to', activeStep - 1);
-			setActiveStep(activeStep - 1);
-		}
-	};
-
-	const handleButtonClick = () => {
-		setShowReader(true);
-		startSpeechRecognition();
-	};
-
-	const handleCloseDialog = () => {
-		setShowReader(false);
-	};
-
 	const startSpeechRecognition = () => {
 		window.SpeechRecognition =
 			window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -242,6 +204,46 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 
 		// Start speech recognition
 		recognition.start();
+	};
+
+	useEffect(() => {
+		window.addEventListener('keydown', onKeyDown);
+		if (showReader) {
+			startSpeechRecognition();
+		}
+		return () => {
+			window.removeEventListener('keydown', onKeyDown);
+		};
+	});
+
+	if (!recipe || !steps?.length) {
+		return null;
+	}
+
+	const ingredients = recipe?.ingredients_lists[0].ingredients;
+	const handleNext = () => {
+		const update = activeStep + 1;
+		if (!isLastStep()) {
+			setActiveStep(update);
+		}
+	};
+
+	const handleBack = () => {
+		const isFirst = isFirstStep();
+		console.log('*** isFirst', isFirst);
+		console.log('*** activeStep', activeStep);
+		if (activeStep !== 0) {
+			console.log('*** setting active step to', activeStep - 1);
+			setActiveStep(activeStep - 1);
+		}
+	};
+
+	const handleButtonClick = () => {
+		setShowReader(true);
+	};
+
+	const handleCloseDialog = () => {
+		setShowReader(false);
 	};
 
 	const isFirstStep = () => activeStep === 0;
