@@ -2,13 +2,12 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
 import { handleAppsArticle } from '../apps/server';
-import { requestLoggerMiddleware } from './lib/logging-middleware';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAllEditorialNewslettersPage,
 	handleArticle,
@@ -17,12 +16,15 @@ import {
 	handleBlocks,
 	handleFront,
 	handleFrontJson,
+	handleIndexPage,
+	handleIndexPageJson,
 	handleInteractive,
 	handleKeyEvents,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
 // Middleware to track route performance using 'response-time' lib
@@ -63,6 +65,8 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post('/IndexPage', logRenderTime, handleIndexPage);
+	app.post('/IndexPageJSON', logRenderTime, handleIndexPageJson);
 	app.post(
 		'/EmailNewsletters',
 		logRenderTime,
@@ -97,6 +101,19 @@ export const prodServer = (): void => {
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
+	);
+
+	app.get(
+		'/IndexPage/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleIndexPage,
+	);
+	app.get(
+		'/IndexPageJSON/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleIndexPageJson,
 	);
 
 	app.get(

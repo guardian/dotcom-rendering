@@ -10,17 +10,20 @@ import {
 	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
 	validateAsFrontType,
+	validateAsIndexPageType,
 } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
+import type { DCRIndexPageType, FEIndexPageType } from '../../types/indexPage';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { decideTrail } from '../lib/decideTrail';
+import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
+import { indexPageToHtml } from './indexPageToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
 
 function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -71,6 +74,14 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
+	};
+};
+
+const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
+	const data: FEIndexPageType = validateAsIndexPageType(body);
+
+	return {
+		...data,
 	};
 };
 
@@ -207,6 +218,23 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
+};
+
+export const handleIndexPage: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('indexPAge');
+	try {
+		const indexPage = enhanceIndexPage(body);
+		const html = indexPageToHtml({
+			indexPage,
+		});
+		res.status(200).send(html);
+	} catch (e) {
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
+	}
+};
+
+export const handleIndexPageJson: RequestHandler = ({ body }, res) => {
+	res.json(enhanceIndexPage(body));
 };
 
 const enhanceAllEditorialNewslettersPage = (

@@ -7,6 +7,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/types/indexPage.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 	],
 	{
@@ -27,6 +28,13 @@ module.exports = {
 	getFrontSchema: () => {
 		return JSON.stringify(
 			TJS.generateSchema(program, 'FEFrontType', settings),
+			null,
+			4,
+		);
+	},
+	getIndexPageSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'FEIndexPageType', settings),
 			null,
 			4,
 		);

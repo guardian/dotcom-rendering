@@ -8,6 +8,8 @@ import {
 	handleBlocks,
 	handleFront,
 	handleFrontJson,
+	handleIndexPage,
+	handleIndexPageJson,
 	handleInteractive,
 	handleKeyEvents,
 } from '../web/server';
@@ -50,6 +52,10 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
+			case 'IndexPage':
+				return handleIndexPage(req, res, next);
+			case 'IndexPageJSON':
+				return handleIndexPageJson(req, res, next);
 			case 'EmailNewsletters':
 				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':

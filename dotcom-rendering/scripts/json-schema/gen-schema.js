@@ -1,15 +1,18 @@
-const path = require('path');
-
-const root = path.resolve(__dirname, '..', '..');
+/* eslint-disable no-console -- Logs are useful for scripts */
 const fs = require('fs');
+const path = require('path');
 const {
 	getArticleSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
+	getIndexPageSchema,
 } = require('./get-schema');
+
+const root = path.resolve(__dirname, '..', '..');
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
+const indexPageSchema = getIndexPageSchema();
 const newsletterPageSchema = getNewsletterPageSchema();
 
 fs.writeFile(
@@ -18,7 +21,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},
@@ -30,7 +32,17 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
+			console.log(err);
+		}
+	},
+);
+
+fs.writeFile(
+	`${root}/src/model/index-page-schema.json`,
+	indexPageSchema,
+	'utf8',
+	(err) => {
+		if (err) {
 			console.log(err);
 		}
 	},
@@ -42,7 +54,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},
