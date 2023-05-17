@@ -225,6 +225,21 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 						groupedTrails.day ?? 1,
 					);
 
+					const url =
+						groupedTrails.day !== undefined
+							? `/${indexPage.pageId}/${groupedTrails.year}/${date
+									.toLocaleDateString(locale, {
+										month: 'long',
+									})
+									.slice(0, 3)
+									.toLowerCase()}/${date.toLocaleDateString(
+									locale,
+									{
+										day: '2-digit',
+									},
+							  )}/all`
+							: undefined;
+
 					return (
 						<FrontSection
 							key={index}
@@ -233,6 +248,7 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 								month: 'long',
 								year: 'numeric',
 							})}
+							url={url}
 							showTopBorder={true}
 							// TODO: Review these props & provide the correct values
 							ophanComponentName={'test'}
