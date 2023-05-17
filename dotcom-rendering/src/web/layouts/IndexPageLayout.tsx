@@ -244,7 +244,10 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 						<FrontSection
 							key={index}
 							title={date.toLocaleDateString(locale, {
-								day: 'numeric',
+								day:
+									groupedTrails.day !== undefined
+										? 'numeric'
+										: undefined,
 								month: 'long',
 								year: 'numeric',
 							})}
