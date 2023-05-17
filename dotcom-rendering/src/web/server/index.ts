@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
+import { enhanceCards } from '../../model/enhanceCards';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
@@ -9,6 +10,7 @@ import {
 	extractTrendingTopics,
 	extractTrendingTopicsFomFront,
 } from '../../model/extractTrendingTopics';
+import { groupTrailsByDate } from '../../model/groupTrailsByDates';
 import {
 	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
@@ -85,8 +87,10 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 	const data: FEIndexPageType = validateAsIndexPageType(body);
 
+	const enhancedCards = enhanceCards(data.contents);
 	return {
 		...data,
+		groupedTrails: groupTrailsByDate(enhancedCards),
 		trendingTopics: extractTrendingTopics(data.contents),
 	};
 };

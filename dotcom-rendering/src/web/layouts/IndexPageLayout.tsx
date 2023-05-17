@@ -13,6 +13,8 @@ import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import type { DCRIndexPageType } from '../../types/indexPage';
 import { AdSlot } from '../components/AdSlot';
 import { Badge } from '../components/Badge';
+import { LI } from '../components/Card/components/LI';
+import { UL } from '../components/Card/components/UL';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -25,7 +27,9 @@ import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
+import { CardDefault } from '../lib/cardWrappers';
 import { decidePalette } from '../lib/decidePalette';
+import { getEditionFromId } from '../lib/edition';
 import {
 	getMerchHighPosition,
 	getMobileAdPositions,
@@ -210,6 +214,46 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="FrontLayout" id="maincontent">
+				{indexPage.groupedTrails.map((groupedTrails, index) => {
+					const locale = getEditionFromId(indexPage.editionId).locale;
+					const date = new Date(
+						groupedTrails.year,
+						groupedTrails.month,
+						groupedTrails.day ?? 1,
+					);
+
+					return (
+						<FrontSection
+							key={index}
+							title={date.toLocaleDateString(locale, {
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							})}
+							showTopBorder={index > 0}
+							ophanComponentName={'test'}
+							containerName={'test'}
+							toggleable={false}
+							sectionId={'test'}
+							pageId={indexPage.pageId}
+							editionId={indexPage.editionId}
+							canShowMore={false}
+							ajaxUrl={indexPage.config.ajaxUrl}
+						>
+							<UL wrapCards={true} direction="row">
+								{groupedTrails.trails.map((trail) => (
+									<LI
+										key={trail.url}
+										percentage="25%"
+										padSides={true}
+									>
+										<CardDefault trail={trail} />
+									</LI>
+								))}
+							</UL>
+						</FrontSection>
+					);
+				})}
 				{/* {indexPage.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(

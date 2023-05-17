@@ -1,3 +1,4 @@
+import type { GroupedTrails } from '../model/groupTrailsByDates';
 import type { EditionId } from '../web/lib/edition';
 import type { FooterType } from './footer';
 import type { FEFrontCard, FEFrontConfigType } from './front';
@@ -19,7 +20,7 @@ export interface FEIndexPageType {
 }
 
 export interface DCRIndexPageType {
-	contents: FEFrontCard[];
+	groupedTrails: GroupedTrails[];
 	nav: FENavType;
 	editionId: EditionId;
 	editionLongForm: string;
