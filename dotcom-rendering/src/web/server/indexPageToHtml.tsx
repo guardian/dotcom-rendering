@@ -8,6 +8,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRIndexPageType } from '../../types/indexPage';
+import { IndexPagePage } from '../components/IndexPagePage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
@@ -21,7 +22,7 @@ export const indexPageToHtml = ({ indexPage }: Props): string => {
 	const NAV = extractNAV(indexPage.nav);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<p>index page!</p>,
+		<IndexPagePage indexPage={indexPage} NAV={NAV} />,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2

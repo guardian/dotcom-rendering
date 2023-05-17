@@ -5,7 +5,10 @@ import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
-import { extractTrendingTopics } from '../../model/extractTrendingTopics';
+import {
+	extractTrendingTopics,
+	extractTrendingTopicsFomFront,
+} from '../../model/extractTrendingTopics';
 import {
 	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
@@ -73,7 +76,9 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			? decideTrail(data.mostCommented)
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
-		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
+		trendingTopics: extractTrendingTopicsFomFront(
+			data.pressedPage.collections,
+		),
 	};
 };
 
@@ -82,6 +87,7 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 
 	return {
 		...data,
+		trendingTopics: extractTrendingTopics(data.contents),
 	};
 };
 

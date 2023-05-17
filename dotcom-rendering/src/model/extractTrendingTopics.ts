@@ -51,23 +51,23 @@ const dedupeTags = (tag: FETagType[]): FETagType[] =>
 		.map((id) => tag.find((item) => item.properties.id === id))
 		.filter(notUndefined);
 
-export const extractTrendingTopics = (
+export const extractTrendingTopicsFomFront = (
 	collections: FECollectionType[],
 ): FETagType[] => {
 	// Get a single array of all trails in the collections
+
 	const allTrails = collections.flatMap((collection) => [
 		...collection.curated,
 		...collection.backfill,
 	]);
 
+	return extractTrendingTopics(allTrails);
+};
+export const extractTrendingTopics = (trails: FEFrontCard[]): FETagType[] => {
 	// Remove any duplicated trails
-	const dedupeTrails = (trails: FEFrontCard[]): FEFrontCard[] =>
-		trails.filter((trailOne) =>
-			trails.findIndex(
-				(trailTwo) => trailOne.card.id === trailTwo.card.id,
-			),
-		);
-	const dedupedTrails = dedupeTrails(allTrails);
+	const dedupedTrails = trails.filter((trailOne) =>
+		trails.findIndex((trailTwo) => trailOne.card.id === trailTwo.card.id),
+	);
 
 	const allTags = getTags(dedupedTrails);
 	// We do not wish to include section tags that follow the pattern "UK/UK"

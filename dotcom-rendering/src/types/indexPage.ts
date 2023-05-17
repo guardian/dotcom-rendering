@@ -1,6 +1,7 @@
 import type { EditionId } from '../web/lib/edition';
 import type { FooterType } from './footer';
 import type { FEFrontCard, FEFrontConfigType } from './front';
+import type { FETagType } from './tag';
 
 export interface FEIndexPageType {
 	contents: FEFrontCard[];
@@ -30,4 +31,5 @@ export interface DCRIndexPageType {
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	trendingTopics?: FETagType[];
 }
