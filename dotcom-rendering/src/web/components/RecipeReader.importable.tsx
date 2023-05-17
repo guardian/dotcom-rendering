@@ -12,6 +12,7 @@ declare const SpeechRecognition: any;
 // 3. Add the ingredients to the dialog
 // 4. Improve CSS  - should be same size model, buttons should be better, branding etc
 // 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
+// 6. Use a feature specific flag (or no flag because this is a hack)
 
 const steps = [
 	'Quarter each cabbage into four fat wedges, keeping the core intact to keep it together on the grill.',
