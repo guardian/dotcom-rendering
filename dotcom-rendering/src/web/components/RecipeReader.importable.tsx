@@ -126,6 +126,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 					<div className="dialog" css={dialogStyles}>
 						<ModalHeader
 							title={`Step ${activeStep + 1} of ${steps.length}`}
+							onClose={handleCloseDialog}
 						/>
 						<p>{steps[activeStep]}</p>
 
