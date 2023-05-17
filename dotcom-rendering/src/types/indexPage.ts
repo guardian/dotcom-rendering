@@ -38,4 +38,5 @@ export interface DCRIndexPageType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	trendingTopics?: FETagType[];
+	speed: 'slow' | 'fast';
 }

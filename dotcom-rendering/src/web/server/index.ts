@@ -11,6 +11,7 @@ import {
 	extractTrendingTopicsFomFront,
 } from '../../model/extractTrendingTopics';
 import { groupTrailsByDate } from '../../model/groupTrailsByDates';
+import { getSpeedFromTrails } from '../../model/slowOrFastByTrails';
 import {
 	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
@@ -93,6 +94,7 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 		tags: data.tags.tags,
 		groupedTrails: groupTrailsByDate(enhancedCards),
 		trendingTopics: extractTrendingTopics(data.contents),
+		speed: getSpeedFromTrails(data.contents),
 	};
 };
 
