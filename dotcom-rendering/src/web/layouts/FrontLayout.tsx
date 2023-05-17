@@ -22,7 +22,7 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
-import { SnapWrapper } from '../components/SnapWrapper';
+import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
@@ -277,7 +277,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								) ? (
 									<Snap snapData={trail.snapData} />
 								) : (
-									<SnapWrapper snapData={trail.snapData}>
+									<SnapCssSandbox snapData={trail.snapData}>
 										<Section
 											fullWidth={true}
 											padSides={false}
@@ -293,7 +293,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										>
 											<Snap snapData={trail.snapData} />
 										</Section>
-									</SnapWrapper>
+									</SnapCssSandbox>
 								)}
 								{decideAdSlot(
 									index,

@@ -6,7 +6,7 @@ type Props = {
 	children?: React.ReactNode;
 };
 
-export const SnapWrapper = ({ snapData, children }: Props) => {
+export const SnapCssSandbox = ({ snapData, children }: Props) => {
 	if (snapData?.embedHtml === undefined) {
 		return <></>;
 	}
