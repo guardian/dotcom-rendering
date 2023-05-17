@@ -473,6 +473,7 @@ export const FrontSection = ({
 							collectionId={collectionId}
 							pageId={pageId}
 							ajaxUrl={ajaxUrl}
+							editionId={editionId}
 							containerPalette={containerPalette}
 							showAge={title === 'Headlines'}
 						/>

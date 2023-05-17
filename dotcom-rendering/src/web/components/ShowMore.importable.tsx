@@ -20,6 +20,7 @@ import { useOnce } from '../lib/useOnce';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
+import { EditionId } from '../lib/edition';
 
 const decideButtonText = ({
 	isOpen,
@@ -67,6 +68,7 @@ type Props = {
 	sectionId: string;
 	showAge: boolean;
 	ajaxUrl: string;
+	editionId?: EditionId;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -77,6 +79,7 @@ export const ShowMore = ({
 	collectionId,
 	showAge,
 	ajaxUrl,
+	editionId,
 	containerPalette,
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
@@ -110,7 +113,7 @@ export const ShowMore = ({
 
 	const cards =
 		data &&
-		enhanceCards(data).filter(
+		enhanceCards(data, editionId).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
 

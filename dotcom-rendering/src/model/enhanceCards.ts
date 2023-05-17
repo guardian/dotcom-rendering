@@ -11,6 +11,7 @@ import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
+import { EditionId } from '../web/lib/edition';
 
 /**
  *
@@ -163,6 +164,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 
 export const enhanceCards = (
 	collections: FEFrontCard[],
+	editionId?: EditionId,
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -195,7 +197,7 @@ export const enhanceCards = (
 				: faciaCard.header.url;
 
 		const branding = faciaCard.properties.editionBrandings.find(
-			(edBranding) => edBranding.edition.id === 'UK',
+			(editionBranding) => editionBranding.edition.id === editionId,
 		)?.branding;
 
 		return {
