@@ -65,12 +65,27 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	const recipe = findValidRecipe(`/${pageId}`);
 	const steps = recipe?.steps;
 
+	useEffect(() => {
+		window.addEventListener('keydown', onKeyDown);
+		return () => {
+			window.removeEventListener('keydown', onKeyDown);
+		};
+	});
+
+	if (!recipe || !steps?.length) {
+		return null;
+	}
+
 	const handleNext = () => {
-		setActiveStep((prevStep) => prevStep + 1);
+		if (!isLastStep()) {
+			setActiveStep((prevStep) => prevStep + 1);
+		}
 	};
 
 	const handleBack = () => {
-		setActiveStep((prevStep) => prevStep - 1);
+		if (!isFirstStep()) {
+			setActiveStep((prevStep) => prevStep - 1);
+		}
 	};
 
 	const handleButtonClick = () => {
@@ -124,28 +139,49 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		recognition.start();
 	};
 
+	const isFirstStep = () => activeStep === 0;
+	const isLastStep = () => activeStep === steps.length - 1;
+
 	const onKeyDown = (event: KeyboardEvent) => {
 		if (showReader) {
 			if (event.key === 'ArrowRight') {
-				setActiveStep(activeStep + 1);
+				handleNext();
 			} else if (event.key === 'ArrowLeft') {
-				setActiveStep(activeStep - 1);
+				handleBack();
 			} else if (event.key === 'Escape') {
 				handleCloseDialog();
 			}
 		}
 	};
 
-	useEffect(() => {
-		window.addEventListener('keydown', onKeyDown);
-		return () => {
-			window.removeEventListener('keydown', onKeyDown);
-		};
-	});
-
 	return (
 		<div css={containerStyles}>
-			<Button onClick={handleButtonClick}>Open recipe reader</Button>
+			<Button
+				priority="tertiary"
+				onClick={handleButtonClick}
+				size="small"
+				css={{ marginLeft: 'auto', display: 'block' }}
+			>
+				<span css={{ marginTop: '5px', display: 'flex' }}>
+					Chef mode
+					<span css={{ marginLeft: '4px' }}>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fill="none"
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-width="1.5"
+								d="M10.334 4.78C9.914 3.151 8.668 1.977 7.214 2c-1.773.027-3.182 1.817-3.148 4l-.032 3.34c-.007.757-.01 1.135-.144 1.47c-.134.337-.43.659-1.02 1.301c-.58.63-.87 1.098-.87 1.634c0 .818.673 1.476 2.019 2.792l3.569 3.49C8.933 21.341 9.606 22 10.443 22c.836 0 1.509-.658 2.855-1.974l6.78-6.63a6.314 6.314 0 0 0 0-9.072c-2.562-2.505-6.716-2.505-9.278 0l-.466.455Zm0 0l-.962.94M10.8 17.584l-4.283-4.188"
+							/>
+						</svg>
+					</span>
+				</span>
+			</Button>
 
 			{showReader && (
 				<div>
@@ -166,7 +202,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 						</ModalBody>
 
 						<ModalFooter>
-							{activeStep !== 0 && (
+							{!isFirstStep() && (
 								<Button
 									onClick={handleBack}
 									priority="tertiary"
@@ -178,7 +214,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 									Back
 								</Button>
 							)}
-							{activeStep !== steps.length - 1 && (
+							{!isLastStep() && (
 								<Button
 									onClick={handleNext}
 									priority="tertiary"
