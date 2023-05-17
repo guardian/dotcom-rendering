@@ -97,8 +97,6 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	const pageTitle = indexPage.tags[0]?.properties.webTitle;
-
 	// const merchHighPosition = getMerchHighPosition(
 	// 	indexPage.pressedPage.collections.length,
 	// 	indexPage.isNetworkFront,
@@ -216,8 +214,8 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="FrontLayout" id="maincontent">
-				{pageTitle ? (
-					<FrontSection title={pageTitle}></FrontSection>
+				{indexPage.webTitle ? (
+					<FrontSection title={indexPage.webTitle}></FrontSection>
 				) : undefined}
 				{indexPage.groupedTrails.map((groupedTrails, index) => {
 					const locale = getEditionFromId(indexPage.editionId).locale;
@@ -235,7 +233,8 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 								month: 'long',
 								year: 'numeric',
 							})}
-							showTopBorder={pageTitle ? true : index > 0}
+							showTopBorder={true}
+							// TODO: Review these props & provide the correct values
 							ophanComponentName={'test'}
 							containerName={'test'}
 							toggleable={false}
