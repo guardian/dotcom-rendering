@@ -1,20 +1,23 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { css } from '@emotion/react';
-import { Button, SvgCross } from '@guardian/source-react-components';
-import { useState } from 'react';
+import {
+	Button,
+	SvgChevronLeftSingle,
+	SvgChevronRightSingle,
+	SvgCross,
+} from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
 import { recipeData } from './recipes_table_export';
 
 declare const SpeechRecognition: any;
 
 // ***** TO DO ******
-// 2. Add a button to close the dialog
 // 3. Add the ingredients to the dialog
 // 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
-// 6. Use a feature specific flag (or no flag because this is a hack)
-// 8. Keyboard listen for the arrow keys for navigating the steps
 
 interface RecipeReaderProps {
 	pageId: string;
@@ -121,6 +124,25 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		recognition.start();
 	};
 
+	const onKeyDown = (event: KeyboardEvent) => {
+		if (showReader) {
+			if (event.key === 'ArrowRight') {
+				setActiveStep(activeStep + 1);
+			} else if (event.key === 'ArrowLeft') {
+				setActiveStep(activeStep - 1);
+			} else if (event.key === 'Escape') {
+				handleCloseDialog();
+			}
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('keydown', onKeyDown);
+		return () => {
+			window.removeEventListener('keydown', onKeyDown);
+		};
+	});
+
 	return (
 		<div css={containerStyles}>
 			<Button onClick={handleButtonClick}>Open recipe reader</Button>
@@ -149,6 +171,9 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 									onClick={handleBack}
 									priority="tertiary"
 									css={{ marginRight: 'auto' }}
+									icon={<SvgChevronLeftSingle />}
+									iconSide="left"
+									size="small"
 								>
 									Back
 								</Button>
@@ -158,6 +183,9 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 									onClick={handleNext}
 									priority="tertiary"
 									css={{ marginLeft: 'auto' }}
+									icon={<SvgChevronRightSingle />}
+									iconSide="right"
+									size="small"
 								>
 									Next
 								</Button>
@@ -180,7 +208,8 @@ const overlayStyles = css`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 1;
 `;
 
 const dialogStyles = css`
