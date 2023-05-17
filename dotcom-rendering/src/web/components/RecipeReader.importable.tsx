@@ -12,10 +12,8 @@ declare const SpeechRecognition: any;
 // ***** TO DO ******
 // 2. Add a button to close the dialog
 // 3. Add the ingredients to the dialog
-// 4. Improve CSS  - should be same size model, buttons should be better, branding etc
 // 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
 // 6. Use a feature specific flag (or no flag because this is a hack)
-// 7. Add a model overlay
 // 8. Keyboard listen for the arrow keys for navigating the steps
 
 interface RecipeReaderProps {
@@ -24,6 +22,9 @@ interface RecipeReaderProps {
 interface ModalHeaderProps {
 	title: string;
 	onClose: () => void;
+}
+interface ModalBodyProps {
+	children: React.ReactNode;
 }
 
 const findValidRecipe = (pageId: string) => {
@@ -39,13 +40,21 @@ const ModalHeader = ({ title, onClose }: ModalHeaderProps) => {
 			<Button
 				icon={<SvgCross />}
 				hideLabel={true}
-				iconSide="left"
-				priority="tertiary"
+				priority="subdued"
 				size="small"
 				onClick={() => onClose()}
+				css={{ color: '#fff' }}
 			/>
 		</div>
 	);
+};
+
+const ModalBody = ({ children }: ModalBodyProps) => {
+	return <div css={modalBodyStyles}>{children}</div>;
+};
+
+const ModalFooter = ({ children }: ModalBodyProps) => {
+	return <div css={modalFooterStyles}>{children}</div>;
 };
 export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	const [showReader, setShowReader] = useState(false);
@@ -123,33 +132,37 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 						css={overlayStyles}
 						onClick={handleCloseDialog}
 					></div>
+
 					<div className="dialog" css={dialogStyles}>
 						<ModalHeader
 							title={`Step ${activeStep + 1} of ${steps.length}`}
 							onClose={handleCloseDialog}
 						/>
-						<p>{steps[activeStep]}</p>
 
-						<div style={{ marginTop: '16px' }}>
+						<ModalBody>
+							<p>{steps[activeStep]}</p>
+						</ModalBody>
+
+						<ModalFooter>
 							{activeStep !== 0 && (
 								<Button
 									onClick={handleBack}
-									priority="secondary"
+									priority="tertiary"
+									css={{ marginRight: 'auto' }}
 								>
 									Back
 								</Button>
 							)}
 							{activeStep !== steps.length - 1 && (
 								<Button
-									// disabled={activeStep === steps.length - 1}
 									onClick={handleNext}
-									style={{ marginLeft: '8px' }}
-									priority="secondary"
+									priority="tertiary"
+									css={{ marginLeft: 'auto' }}
 								>
 									Next
 								</Button>
 							)}
-						</div>
+						</ModalFooter>
 					</div>
 				</div>
 			)}
@@ -157,7 +170,10 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	);
 };
 
-const containerStyles = css``;
+const containerStyles = css`
+	font-family: 'GuardianTextSans';
+`;
+
 const overlayStyles = css`
 	position: fixed;
 	top: 0;
@@ -173,15 +189,30 @@ const dialogStyles = css`
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
-	/* padding: 20px; */
 	z-index: 10;
-	height: 30vh;
-	width: 75vw;
+	min-height: 40vh;
+	width: 50vw;
+	display: flex;
+	flex-direction: column;
 `;
 
 const modalHeaderStyles = css`
 	display: flex;
 	background-color: #052962;
-	font-family: 'GuardianTextSans';
-	color: 'white';
+	color: #fff;
+	padding: 8px;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+const modalBodyStyles = css`
+	display: flex;
+	padding: 32px 16px;
+`;
+
+const modalFooterStyles = css`
+	display: flex;
+	justify-content: space-between;
+	padding: 0 16px 16px 16px;
+	margin-top: auto;
 `;
