@@ -215,7 +215,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				console.log('***IN TRANSCRIPT activeStep', activeStep);
 				// This active step is always 0, the initial active step. Something about setting onresult
 				//
-				handleNext(activeStep);
+				handleNext();
 			} else if (
 				transcript.includes('back') ||
 				transcript.includes('last') ||
