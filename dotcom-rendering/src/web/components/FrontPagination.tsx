@@ -116,6 +116,7 @@ export const FrontPagination = ({
 	currentPage,
 	lastPage,
 }: Props) => {
+	// TODO: ?page=1 should just have no page parameter
 	const pageRange = getPageRange(currentPage, lastPage);
 
 	return (

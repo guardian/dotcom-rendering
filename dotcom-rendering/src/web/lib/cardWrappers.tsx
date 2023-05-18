@@ -27,6 +27,53 @@ type TrailProps = {
 
 /**
  * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃                  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃                  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃                  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ * Card designed to take up 100% of the container, with media that takes up 75%
+ *
+ * Options:
+ *  - Huge headline (large on mobile)
+ *  - Jumbo image on the right (top on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 4 supporting content items, 1-3 aligned vertical, 4 aligned horizontal
+ */
+export const Card100Media50 = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			headlineSize="huge"
+			headlineSizeOnMobile="medium"
+			imageUrl={trail.image}
+			imageSize="medium"
+			imagePosition="right"
+			imagePositionOnMobile="top"
+			trailText={
+				// Only show trail text if there is no supportContent
+				trail.supportingContent === undefined ||
+				trail.supportingContent.length !== 3
+					? trail.trailText
+					: undefined
+			}
+			supportingContent={trail.supportingContent?.slice(0, 4)}
+			supportingContentAlignment={
+				trail.supportingContent && trail.supportingContent.length > 3
+					? 'horizontal'
+					: 'vertical'
+			}
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃

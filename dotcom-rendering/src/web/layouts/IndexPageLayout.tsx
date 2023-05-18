@@ -12,6 +12,7 @@ import type { DCRIndexPageType } from '../../types/indexPage';
 import { AdSlot } from '../components/AdSlot';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
+import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
@@ -259,17 +260,10 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 									: undefined
 							}
 						>
-							<UL wrapCards={true} direction="row">
-								{groupedTrails.trails.map((trail) => (
-									<LI
-										key={trail.url}
-										percentage="25%"
-										padSides={true}
-									>
-										<CardDefault trail={trail} />
-									</LI>
-								))}
-							</UL>
+							<DecideContainerByTrails
+								trails={groupedTrails.trails}
+								speed={indexPage.speed}
+							/>
 						</FrontSection>
 					);
 				})}
