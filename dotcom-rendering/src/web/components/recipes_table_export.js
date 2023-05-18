@@ -5496,18 +5496,7 @@ export const recipeData = {
 					title: '',
 					ingredients: [
 						{
-							item: 'binding',
-							unit: '',
-							comment: 'The',
-							text: 'The binding',
-							quantity: {
-								absolute: '',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: 'floury potatoes',
+							item: 'potatoes',
 							unit: 'g',
 							comment: 'eg Maris Pipers',
 							text: '400g floury potatoes, eg Maris Pipers',
@@ -5518,7 +5507,7 @@ export const recipeData = {
 							},
 						},
 						{
-							item: 'salmon',
+							item: 'fish',
 							unit: 'g',
 							comment:
 								'fish I like a mix of  firm white fish and smoked haddock',
@@ -5530,7 +5519,7 @@ export const recipeData = {
 							},
 						},
 						{
-							item: 'chopped chives',
+							item: 'chives',
 							unit: 'tbsp',
 							comment: '',
 							text: '1 tbsp chopped chives',
@@ -5552,7 +5541,7 @@ export const recipeData = {
 							},
 						},
 						{
-							item: 'anchovy fillets',
+							item: 'anchovies',
 							unit: '',
 							comment: 'in oil drained and finely chopped',
 							text: '2 anchovy fillets in oil, drained and finely chopped',
@@ -5585,7 +5574,7 @@ export const recipeData = {
 							},
 						},
 						{
-							item: 'fresh white breadcrumbs',
+							item: 'breadcrumbs',
 							unit: 'g',
 							comment: '',
 							text: '50g fresh white breadcrumbs',
@@ -5607,45 +5596,12 @@ export const recipeData = {
 							},
 						},
 						{
-							item: 'vegetable oil',
+							item: 'oil',
 							unit: 'tbsp',
 							comment: '',
 							text: '1 tbsp vegetable oil',
 							quantity: {
 								absolute: '1',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '1',
-							quantity: {
-								absolute: '1',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '2',
-							quantity: {
-								absolute: '2',
-								from: '',
-								to: '',
-							},
-						},
-						{
-							item: '',
-							unit: '',
-							comment: '',
-							text: '3',
-							quantity: {
-								absolute: '3',
 								from: '',
 								to: '',
 							},

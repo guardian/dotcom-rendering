@@ -171,11 +171,45 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		};
 	});
 
+	const ingredients = recipe?.ingredients_lists[0].ingredients;
+	const ingredientKeywords = ingredients.map((ingredient) => ingredient.item);
+
+	useEffect(() => {
+		if (showReader) {
+			const originalMethodDiv = document.getElementById(
+				'original-method-step',
+			);
+			const methodDiv = document.getElementById('method-step');
+
+			if (showIngredients) {
+				// Highlight the keywords
+				let methodText = originalMethodDiv?.innerHTML ?? '';
+				for (let i = 0; i < ingredientKeywords.length; i++) {
+					const keywordRegex = new RegExp(
+						ingredientKeywords[i],
+						'gi',
+					);
+					methodText = methodText.replace(
+						keywordRegex,
+						`<span class="highlighted">$&</span>`,
+					);
+				}
+				if (methodDiv) {
+					methodDiv.innerHTML = methodText;
+				}
+			} else {
+				// Remove the highlight
+				if (methodDiv)
+					methodDiv.innerHTML = originalMethodDiv?.innerHTML ?? '';
+			}
+			//   }
+		}
+	}, [showReader, showIngredients, ingredientKeywords]);
+
 	if (!recipe || !steps?.length) {
 		return null;
 	}
 
-	const ingredients = recipe?.ingredients_lists[0].ingredients;
 	const handleNext = () => {
 		const update = activeStep + 1;
 		if (!isLastStep()) {
@@ -198,6 +232,13 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		setShowReader(false);
 	};
 
+	const handleShowIngredients = () => {
+		setShowIngredients(true);
+	};
+	const handleHideIngredients = () => {
+		setShowIngredients(false);
+	};
+
 	const startSpeechRecognition = () => {
 		window.SpeechRecognition =
 			window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -214,16 +255,12 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				][0].transcript.toLowerCase();
 
 			if (transcript.includes('next')) {
-				console.log('***IN TRANSCRIPT activeStep', activeStep);
-				// This active step is always 0, the initial active step. Something about setting onresult
-				//
 				handleNext();
 			} else if (
 				transcript.includes('back') ||
 				transcript.includes('last') ||
 				transcript.includes('previous')
 			) {
-				console.log('*** going back');
 				handleBack();
 			} else if (
 				transcript.includes('close') ||
@@ -232,9 +269,9 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 			) {
 				handleCloseDialog();
 			} else if (transcript.includes('show')) {
-				setShowIngredients(true);
+				handleShowIngredients();
 			} else if (transcript.includes('hide')) {
-				setShowIngredients(false);
+				handleHideIngredients();
 			}
 		};
 
@@ -248,8 +285,6 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 
 	const isFirstStep = () => activeStep === 0;
 	const isLastStep = () => activeStep === steps.length - 1;
-
-	console.log('*** activeStep', activeStep);
 
 	return (
 		<div css={containerStyles}>
@@ -298,9 +333,11 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 									  }`
 							}
 							onClose={handleCloseDialog}
-							toggleShowIngredients={() =>
-								setShowIngredients(!showIngredients)
-							}
+							toggleShowIngredients={() => {
+								showIngredients
+									? handleHideIngredients()
+									: handleShowIngredients();
+							}}
 							showingIngredients={showIngredients}
 						/>
 
@@ -314,7 +351,13 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 										Step {activeStep + 1} of {steps.length}
 									</h2>
 								)}
-								<p>{steps[activeStep]}</p>
+								<div
+									id="original-method-step"
+									style="display: none;"
+								>
+									{steps[activeStep]}
+								</div>
+								<div id="method-step"></div>
 							</div>
 						</ModalBody>
 
@@ -409,6 +452,10 @@ const ingredientsStyles = css`
 const methodStyles = (showIngredients: boolean) => css`
 	width: ${showIngredients ? '60%' : '100%'};
 	line-height: 20px;
+
+	.highlighted {
+		background-color: #ffe500;
+	}
 `;
 
 const sectionHeadingStyle = css`
