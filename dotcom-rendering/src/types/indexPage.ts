@@ -40,4 +40,12 @@ export interface DCRIndexPageType {
 	isAdFreeUser: boolean;
 	trendingTopics?: FETagType[];
 	speed: 'slow' | 'fast';
+	pagination?: DCRFrontPagination;
+}
+
+export interface DCRFrontPagination {
+	sectionName: string;
+	currentPage: number;
+	lastPage: number;
+	totalContent: number;
 }

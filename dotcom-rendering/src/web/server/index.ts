@@ -90,6 +90,7 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 
 	const enhancedCards = enhanceCards(data.contents);
 	const speed = getSpeedFromTrails(data.contents);
+
 	return {
 		...data,
 		tags: data.tags.tags,
@@ -97,8 +98,12 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 			enhancedCards,
 			speed === 'slow' || data.forceDay,
 		),
-		trendingTopics: extractTrendingTopics(data.contents),
 		speed,
+		// Pagination information comes from the first tag
+		pagination: data.tags.tags[0]?.pagination
+			? { ...data.tags.tags[0]?.pagination, sectionName: data.webTitle }
+			: undefined,
+		trendingTopics: extractTrendingTopics(data.contents),
 	};
 };
 

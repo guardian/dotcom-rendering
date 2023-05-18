@@ -23,6 +23,7 @@ export type FETagType = {
 	pagination?: {
 		currentPage: number;
 		lastPage: number;
+		totalContent: number;
 	};
 };
 

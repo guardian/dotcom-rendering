@@ -253,6 +253,11 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 							editionId={indexPage.editionId}
 							canShowMore={false}
 							ajaxUrl={indexPage.config.ajaxUrl}
+							pagination={
+								index === indexPage.groupedTrails.length - 1
+									? indexPage.pagination
+									: undefined
+							}
 						>
 							<UL wrapCards={true} direction="row">
 								{groupedTrails.trails.map((trail) => (

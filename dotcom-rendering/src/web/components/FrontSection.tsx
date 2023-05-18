@@ -3,9 +3,11 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
+import type { DCRFrontPagination } from '../../types/indexPage';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { ContainerTitle } from './ContainerTitle';
+import { FrontPagination } from './FrontPagination';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
@@ -56,6 +58,9 @@ type Props = {
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
+	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
+	 * usually used on the last container on a page */
+	pagination?: DCRFrontPagination;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -391,6 +396,7 @@ export const FrontSection = ({
 	badge,
 	canShowMore,
 	ajaxUrl,
+	pagination,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -464,6 +470,7 @@ export const FrontSection = ({
 				{children}
 			</div>
 
+			{/* TODO: Rename from 'sectionShowMore' to 'sectionBottomContent' */}
 			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
 				{showMore && (
 					<Island deferUntil="interaction">
@@ -477,6 +484,14 @@ export const FrontSection = ({
 							showAge={title === 'Headlines'}
 						/>
 					</Island>
+				)}
+				{pagination && (
+					<FrontPagination
+						sectionName={pagination.sectionName}
+						totalContent={pagination.totalContent}
+						currentPage={pagination.currentPage}
+						lastPage={pagination.lastPage}
+					/>
 				)}
 			</div>
 
