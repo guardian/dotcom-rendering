@@ -11,7 +11,9 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { recipeData } from './recipes_table_export';
+// import { recipeData } from './recipes_table_export';
+
+const recipeData = {};
 
 declare const SpeechRecognition: any;
 
