@@ -1,6 +1,6 @@
 # this file helps speed up local builds https://www.typescriptlang.org/tsconfig#incremental
 tsconfig.tsbuildinfo
-
+dotcom-rendering/src/web/components/recipes_table_export.js
 # CDK asset staging directory
 .cdk.staging
 cdk.out

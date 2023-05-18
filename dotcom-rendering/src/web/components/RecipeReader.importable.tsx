@@ -11,9 +11,9 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-// import { recipeData } from './recipes_table_export';
+import { recipeData } from './recipes_table_export';
 
-const recipeData = {};
+// const recipeData = {};
 
 declare const SpeechRecognition: any;
 
@@ -184,11 +184,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	};
 
 	const handleBack = () => {
-		const isFirst = isFirstStep();
-		console.log('*** isFirst', isFirst);
-		console.log('*** activeStep', activeStep);
 		if (activeStep !== 0) {
-			console.log('*** setting active step to', activeStep - 1);
 			setActiveStep(activeStep - 1);
 		}
 	};
