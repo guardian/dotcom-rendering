@@ -172,7 +172,9 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	});
 
 	const ingredients = recipe?.ingredients_lists[0].ingredients;
-	const ingredientKeywords = ingredients.map((ingredient) => ingredient.item);
+	const ingredientKeywords = ingredients.map(
+		(ingredient: any) => ingredient.item,
+	);
 
 	useEffect(() => {
 		if (showReader) {
@@ -187,7 +189,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				for (let i = 0; i < ingredientKeywords.length; i++) {
 					const keywordRegex = new RegExp(
 						ingredientKeywords[i],
-						'gi',
+						'/gi',
 					);
 					methodText = methodText.replace(
 						keywordRegex,
@@ -353,7 +355,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 								)}
 								<div
 									id="original-method-step"
-									style="display: none;"
+									style={{ display: 'none' }}
 								>
 									{steps[activeStep]}
 								</div>
