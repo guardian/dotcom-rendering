@@ -163,6 +163,9 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 
 	useEffect(() => {
 		window.addEventListener('keydown', onKeyDown);
+		if (showReader) {
+			startSpeechRecognition();
+		}
 		return () => {
 			window.removeEventListener('keydown', onKeyDown);
 		};
