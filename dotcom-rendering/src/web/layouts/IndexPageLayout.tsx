@@ -10,8 +10,6 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRIndexPageType } from '../../types/indexPage';
 import { AdSlot } from '../components/AdSlot';
-import { LI } from '../components/Card/components/LI';
-import { UL } from '../components/Card/components/UL';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
 import { FrontSection } from '../components/FrontSection';
@@ -23,7 +21,6 @@ import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { CardDefault } from '../lib/cardWrappers';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import { Stuck } from './lib/stickiness';
@@ -33,10 +30,10 @@ interface Props {
 	NAV: NavType;
 }
 
-const spaces = / /g;
+// const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
-const ophanComponentId = (name: string) =>
-	name.toLowerCase().replace(spaces, '-');
+// const ophanComponentId = (name: string) =>
+// 	name.toLowerCase().replace(spaces, '-');
 
 // const decideAdSlot = (
 // 	index: number,
@@ -74,9 +71,9 @@ const ophanComponentId = (name: string) =>
 // };
 
 export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
-	const {
-		config: { isPaidContent },
-	} = indexPage;
+	// const {
+	// 	config: { isPaidContent },
+	// } = indexPage;
 
 	const isInEuropeTest =
 		indexPage.config.abTests.europeNetworkFrontVariant === 'variant';
