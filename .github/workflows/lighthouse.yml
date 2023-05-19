@@ -43,7 +43,7 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_URL: ${{ matrix.group }}
         run: |
-          npm install -g @lhci/cli@0.11.0
+          npm install -g @lhci/cli@0.12.0
           lhci autorun
 
       # https://github.com/denoland/setup-deno#latest-stable-for-a-major
