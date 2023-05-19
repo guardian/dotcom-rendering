@@ -7,7 +7,9 @@ deployments:
   frontend-cfn:
     type: cloud-formation
     parameters:
-      templatePath: cloudformation.yml
+      templateStagePaths:
+        CODE: DotcomRendering-CODE.template.json
+        PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       templateStageParameters:

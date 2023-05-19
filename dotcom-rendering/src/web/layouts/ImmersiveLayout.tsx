@@ -16,9 +16,10 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { ImageBlockElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -186,18 +187,23 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-const decideCaption = (mainMedia: ImageBlockElement | undefined): string => {
+const decideCaption = (mainMedia: FEElement | undefined): string => {
 	const caption = [];
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
-	if (mainMedia?.data?.caption) {
-		caption.push(mainMedia.data.caption);
-	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
-	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
-		caption.push(mainMedia.data.credit);
+	if (
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	) {
+		if (mainMedia.data.caption) {
+			caption.push(mainMedia.data.caption);
+		}
+
+		if (mainMedia.displayCredit && mainMedia.data.credit) {
+			caption.push(mainMedia.data.credit);
+		}
 	}
 
 	return caption.join(' ');
@@ -240,7 +246,12 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
+export const ImmersiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -265,12 +276,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const showComments = article.isCommentable;
 
-	const mainMedia =
-		article.mainMediaElements[0] &&
-		article.mainMediaElements[0]._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-			? article.mainMediaElements[0]
-			: undefined;
+	const mainMedia = article.mainMediaElements[0];
 
 	const captionText = decideCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
@@ -281,6 +287,9 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const isInEuropeTest =
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
@@ -360,6 +369,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -649,6 +659,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

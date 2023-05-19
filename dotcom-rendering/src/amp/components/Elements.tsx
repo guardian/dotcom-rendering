@@ -2,7 +2,6 @@ import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../../types/config';
 import type { FEElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
-import { enhance } from '../lib/enhance';
 import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from './elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from './elements/ContentAtomBlockComponent';
@@ -109,8 +108,7 @@ export const Elements = (
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 ): JSX.Element[] => {
-	const cleanedElements = enhance(elements);
-	const output = cleanedElements.map((element) => {
+	const output = elements.map((element) => {
 		/**
 		 * Addding something to this list?
 		 *

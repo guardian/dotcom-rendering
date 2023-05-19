@@ -21,7 +21,6 @@ import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { canRenderAds } from '../lib/canRenderAds';
 import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
@@ -47,7 +46,12 @@ export const articleToHtml = ({ article }: Props): string => {
 	const format: ArticleFormat = decideFormat(article.format);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<ArticlePage format={format} article={article} NAV={NAV} />,
+		<ArticlePage
+			format={format}
+			article={article}
+			NAV={NAV}
+			renderingTarget="Web"
+		/>,
 	);
 
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -100,15 +104,13 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const loadCommercial = canRenderAds(article);
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
-			loadCommercial &&
-				(process.env.COMMERCIAL_BUNDLE_URL ??
-					article.config.commercialBundleUrl),
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				article.config.commercialBundleUrl,
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 		]
@@ -229,5 +231,8 @@ window.twttr = (function(d, s, id) {
 		recipeMarkup,
 		offerHttp3,
 		canonicalUrl,
+		renderingTarget: 'Web',
+		borkFCP: article.config.abTests.borkFcpVariant === 'variant',
+		borkFID: article.config.abTests.borkFidVariant === 'variant',
 	});
 };

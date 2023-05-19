@@ -7,6 +7,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   scheduled:
     runs-on: ubuntu-20.04

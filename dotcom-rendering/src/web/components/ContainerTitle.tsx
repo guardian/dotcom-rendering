@@ -91,9 +91,8 @@ export const ContainerTitle = ({
 
 	const now = new Date();
 	const locale = editionId && getEditionFromId(editionId).locale;
-
 	return (
-		<div css={[marginStyles]}>
+		<div css={marginStyles}>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>

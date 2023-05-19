@@ -20,6 +20,4 @@ sudo gor --input-raw :80 --output-http http://apiv2.code.co.uk
 		</Section>
 	);
 };
-CodeStory.story = {
-	name: 'default',
-};
+CodeStory.storyName = 'default';

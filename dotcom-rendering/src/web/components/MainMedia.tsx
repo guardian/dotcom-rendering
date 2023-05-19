@@ -8,13 +8,6 @@ import { RenderArticleElement } from '../lib/renderElement';
 
 const mainMedia = css`
 	height: 100%;
-	min-height: 1px;
-	/*
-    Thank you IE11, broken in stasis for all eternity.
-
-    https://github.com/philipwalton/flexbugs/issues/75#issuecomment-161800607
-    */
-
 	${until.tablet} {
 		margin: 0;
 		order: 2;

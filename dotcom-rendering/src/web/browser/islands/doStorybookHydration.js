@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createElement } from 'react';
+import { createRoot } from 'react-dom/client';
 import { getName } from './getName';
 import { getProps } from './getProps';
 
@@ -24,18 +24,25 @@ export const doStorybookHydration = () => {
 			if (!name) return;
 			if (element.getAttribute('deferuntil') === 'hash') return;
 
-			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			import(
 				/* webpackInclude: /\.importable\.tsx$/ */
 				/* webpackChunkName: "[request]" */
 				`../../components/${name}.importable`
-			).then((module) => {
-				element.querySelector('[data-name="placeholder"]')?.remove();
-				ReactDOM.render(
-					React.createElement(module[name], props),
-					element,
+			)
+				.then((module) => {
+					element
+						.querySelector('[data-name="placeholder"]')
+						?.remove();
+					const root = createRoot(element);
+					root.render(createElement(module[name], props));
+				})
+				.catch((e) =>
+					// eslint-disable-next-line no-console -- We want to log here
+					console.error(
+						'Failed hydration for storybook environment',
+						e,
+					),
 				);
-			});
 		}
 	});
 };

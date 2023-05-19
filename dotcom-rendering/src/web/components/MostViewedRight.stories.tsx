@@ -44,17 +44,14 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padSides={false}
 					>
-						<MostViewedRight
-							isAdFreeUser={false}
-							adBlockerDetected={false}
-						/>
+						<MostViewedRight />
 					</Section>
 				</RightColumn>
 			</Flex>
 		</Section>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const limitItemsStory = () => {
 	fetchMock.restore().getOnce('*', {
@@ -84,18 +81,14 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padSides={false}
 					>
-						<MostViewedRight
-							limitItems={3}
-							isAdFreeUser={false}
-							adBlockerDetected={false}
-						/>
+						<MostViewedRight limitItems={3} />
 					</Section>
 				</RightColumn>
 			</Flex>
 		</Section>
 	);
 };
-limitItemsStory.story = { name: 'with a limit of 3 items' };
+limitItemsStory.storyName = 'with a limit of 3 items';
 
 export const outsideContextStory = () => {
 	fetchMock.restore().getOnce('*', {
@@ -105,10 +98,8 @@ export const outsideContextStory = () => {
 
 	return (
 		<Section fullWidth={true}>
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
+			<MostViewedRight />
 		</Section>
 	);
 };
-outsideContextStory.story = {
-	name: 'inside responsive wrapper',
-};
+outsideContextStory.storyName = 'inside responsive wrapper';

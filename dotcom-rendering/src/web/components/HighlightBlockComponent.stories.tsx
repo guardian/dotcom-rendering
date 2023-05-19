@@ -24,7 +24,7 @@ export const defaultStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
 
 export const blockquoteStory = () => {
 	return (
@@ -33,4 +33,4 @@ export const blockquoteStory = () => {
 		</div>
 	);
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';

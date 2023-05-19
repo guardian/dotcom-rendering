@@ -10,13 +10,16 @@ import {
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useRef } from 'react';
-import type { CampaignFieldType } from '../../../types/content';
+import type {
+	CampaignFieldType,
+	MessageUsFieldType,
+} from '../../../types/content';
 
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	validationErrors: { [key in string]: string };
-	formField: CampaignFieldType;
+	formField: CampaignFieldType | MessageUsFieldType;
 	formData: FormDataType;
 	pageId: string;
 	setFieldInFormData: (
@@ -125,10 +128,10 @@ export const FormField = ({
 						},
 					]
 						.concat(formField.options)
-						.map(({ value, label }) => {
+						.map(({ value, label: formLabel }) => {
 							return (
 								<Option key={value} value={value}>
-									{label}
+									{formLabel}
 								</Option>
 							);
 						})}

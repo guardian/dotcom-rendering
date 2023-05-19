@@ -178,6 +178,7 @@ export type FEFrontCard = {
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
 		href?: string;
+		embedUri?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -263,6 +264,7 @@ export type DCRFrontCard = {
 	mediaDuration?: number;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
+	embedUri?: string;
 };
 
 export type FESnapType = {
@@ -274,6 +276,7 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+	embedJs?: string;
 };
 
 type FECollectionConfigType = {
@@ -470,7 +473,7 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	links: { text: string; linkTo: string }[];
+	links: { text: string; title?: string; linkTo: string }[];
 	theme?: ArticlePillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;

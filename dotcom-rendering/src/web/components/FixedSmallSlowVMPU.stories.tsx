@@ -18,7 +18,7 @@ export default {
 };
 
 export const FourCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow V MPU">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
@@ -28,10 +28,10 @@ export const FourCards = () => (
 	</FrontSection>
 );
 
-FourCards.story = { name: 'With 4 cards' };
+FourCards.storyName = 'With 4 cards';
 
 export const ThreeCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow V MPU">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
@@ -41,10 +41,10 @@ export const ThreeCards = () => (
 	</FrontSection>
 );
 
-ThreeCards.story = { name: 'With 3 cards' };
+ThreeCards.storyName = 'With 3 cards';
 
 export const TwoCards = () => (
-	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow V MPU">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
@@ -54,10 +54,10 @@ export const TwoCards = () => (
 	</FrontSection>
 );
 
-TwoCards.story = { name: 'With 2 cards' };
+TwoCards.storyName = 'With 2 cards';
 
 export const OneCard = () => (
-	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow V MPU">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
@@ -67,10 +67,10 @@ export const OneCard = () => (
 	</FrontSection>
 );
 
-OneCard.story = { name: 'With 1 card' };
+OneCard.storyName = 'With 1 card';
 
 export const AdfreeFixedSmallSlowVMPU = () => (
-	<FrontSection title="Fixed Small Slow V MPU" centralBorder="partial">
+	<FrontSection title="Fixed Small Slow V MPU">
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
@@ -80,4 +80,4 @@ export const AdfreeFixedSmallSlowVMPU = () => (
 	</FrontSection>
 );
 
-AdfreeFixedSmallSlowVMPU.story = { name: 'Ad-free Fixed Small Slow V MPU' };
+AdfreeFixedSmallSlowVMPU.storyName = 'Ad-free Fixed Small Slow V MPU';

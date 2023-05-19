@@ -8,8 +8,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
-import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -29,15 +27,6 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	integrateIma,
 ];
 
-const serverSideTestsToForceMetrics: ServerSideTestNames[] = [
-	/* linter, please keep this array multi-line */
-	dcrJavascriptBundle('Variant'),
-	dcrJavascriptBundle('Control'),
-	'dcrFrontsVariant',
-	'serverSideLiveblogInlineAdsVariant',
-	'serverSideLiveblogInlineAdsControl',
-];
-
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 	const abTestApi = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
@@ -51,14 +40,12 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
 
-	const userInServerSideTestToForceMetrics =
-		serverSideTestsToForceMetrics.some((test) =>
-			Object.keys(window.guardian.config.tests).includes(test),
-		);
+	const userInServerSideTest =
+		Object.keys(window.guardian.config.tests).length > 0;
 
 	const shouldBypassSampling = (api: ABTestAPI) =>
 		willRecordCoreWebVitals ||
-		userInServerSideTestToForceMetrics ||
+		userInServerSideTest ||
 		clientSideTestsToForceMetrics.some((test) => api.runnableTest(test));
 
 	useOnce(

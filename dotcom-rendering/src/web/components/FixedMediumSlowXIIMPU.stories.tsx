@@ -18,7 +18,7 @@ export default {
 };
 
 export const OneTrail = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
@@ -27,10 +27,10 @@ export const OneTrail = () => (
 		/>
 	</FrontSection>
 );
-OneTrail.story = { name: 'with one trail' };
+OneTrail.storyName = 'with one trail';
 
 export const TwoTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
@@ -39,10 +39,10 @@ export const TwoTrails = () => (
 		/>
 	</FrontSection>
 );
-TwoTrails.story = { name: 'with two trails' };
+TwoTrails.storyName = 'with two trails';
 
 export const ThreeTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
@@ -51,10 +51,10 @@ export const ThreeTrails = () => (
 		/>
 	</FrontSection>
 );
-ThreeTrails.story = { name: 'with three trails' };
+ThreeTrails.storyName = 'with three trails';
 
 export const FourTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
@@ -63,10 +63,10 @@ export const FourTrails = () => (
 		/>
 	</FrontSection>
 );
-FourTrails.story = { name: 'with four trails' };
+FourTrails.storyName = 'with four trails';
 
 export const FiveTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
 			showAge={true}
@@ -75,10 +75,10 @@ export const FiveTrails = () => (
 		/>
 	</FrontSection>
 );
-FiveTrails.story = { name: 'with five trails' };
+FiveTrails.storyName = 'with five trails';
 
 export const SixTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
 			showAge={true}
@@ -87,10 +87,10 @@ export const SixTrails = () => (
 		/>
 	</FrontSection>
 );
-SixTrails.story = { name: 'with six trails' };
+SixTrails.storyName = 'with six trails';
 
 export const SevenTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
 			showAge={true}
@@ -99,10 +99,10 @@ export const SevenTrails = () => (
 		/>
 	</FrontSection>
 );
-SevenTrails.story = { name: 'with seven trails' };
+SevenTrails.storyName = 'with seven trails';
 
 export const EightTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
@@ -111,10 +111,10 @@ export const EightTrails = () => (
 		/>
 	</FrontSection>
 );
-EightTrails.story = { name: 'with eight trails' };
+EightTrails.storyName = 'with eight trails';
 
 export const NineTrails = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}
 			showAge={true}
@@ -123,10 +123,10 @@ export const NineTrails = () => (
 		/>
 	</FrontSection>
 );
-NineTrails.story = { name: 'with nine trails' };
+NineTrails.storyName = 'with nine trails';
 
 export const EightTrailsNoAds = () => (
-	<FrontSection title="Fixed Medium Slow XII MPU" centralBorder="partial">
+	<FrontSection title="Fixed Medium Slow XII MPU">
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
@@ -135,4 +135,4 @@ export const EightTrailsNoAds = () => (
 		/>
 	</FrontSection>
 );
-EightTrailsNoAds.story = { name: 'with eight trails and no ad slot' };
+EightTrailsNoAds.storyName = 'with eight trails and no ad slot';

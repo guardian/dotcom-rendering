@@ -66,6 +66,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Analysis:
 			return <AnalysisStandfirst item={item} />;
 		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Profile:
 			return <ExplainerStandfirst item={item} />;
 		case ArticleDesign.NewsletterSignup:
 			return <NewsletterSignupStandfirst item={item} />;

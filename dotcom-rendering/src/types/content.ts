@@ -79,6 +79,7 @@ export interface CalloutBlockElementV2 {
 	activeUntil?: number;
 	displayOnSensitive: boolean;
 	formId: number;
+	prompt: string;
 	title: string;
 	description: string;
 	tagName: string;
@@ -736,8 +737,8 @@ interface CampaignField {
 	description?: string;
 	required: boolean;
 	textSize?: number;
-	hideLabel: boolean;
-	hidden: boolean;
+	hideLabel?: boolean;
+	hidden?: boolean;
 	label: string;
 }
 
@@ -747,6 +748,8 @@ export interface CampaignFieldText extends CampaignField {
 
 export interface CampaignFieldTextArea extends CampaignField {
 	type: 'textarea';
+	minlength?: number;
+	maxlength?: number;
 }
 
 export interface CampaignFieldFile extends CampaignField {
@@ -776,6 +779,12 @@ export interface CampaignFieldSelect extends CampaignField {
 		value: string;
 	}[];
 }
+
+// -------------------------------------
+// Message Us
+// -------------------------------------
+
+export type MessageUsFieldType = CampaignFieldText | CampaignFieldTextArea;
 
 // -------------------------------------
 // Quiz

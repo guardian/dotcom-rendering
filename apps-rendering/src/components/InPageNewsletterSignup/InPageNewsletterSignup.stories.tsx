@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-import { selectDesign, selectPillar } from 'storybookHelpers';
 import InPageNewsletterSignup from '.';
 
 // ---- Constants ---- //
@@ -27,9 +26,9 @@ const Default: FC = () => (
 		<InPageNewsletterSignup
 			newsletter={TEST_NEWSLETTER}
 			format={{
-				design: selectDesign(ArticleDesign.NewsletterSignup),
+				design: ArticleDesign.NewsletterSignup,
 				display: ArticleDisplay.Standard,
-				theme: selectPillar(ArticlePillar.News),
+				theme: ArticlePillar.News,
 			}}
 		/>
 	</>
@@ -45,9 +44,9 @@ const Unsupported: FC = () => (
 		<InPageNewsletterSignup
 			newsletter={TEST_NEWSLETTER}
 			format={{
-				design: selectDesign(ArticleDesign.NewsletterSignup),
+				design: ArticleDesign.NewsletterSignup,
 				display: ArticleDisplay.Standard,
-				theme: selectPillar(ArticlePillar.News),
+				theme: ArticlePillar.News,
 			}}
 		/>
 	</>

@@ -19,7 +19,7 @@ export const BothURLs = () => {
 		/>
 	);
 };
-BothURLs.story = { name: 'Both URLs' };
+BothURLs.storyName = 'Both URLs';
 
 export const OnReportPage = () => {
 	return (
@@ -34,7 +34,7 @@ export const OnReportPage = () => {
 		/>
 	);
 };
-OnReportPage.story = { name: 'On Report Page' };
+OnReportPage.storyName = 'On Report Page';
 
 export const OnBlogPage = () => {
 	return (
@@ -49,4 +49,4 @@ export const OnBlogPage = () => {
 		/>
 	);
 };
-OnBlogPage.story = { name: 'On Blog Page' };
+OnBlogPage.storyName = 'On Blog Page';

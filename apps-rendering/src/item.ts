@@ -214,6 +214,16 @@ interface FullPageInteractive extends Fields {
 	body: BodyElement[];
 }
 
+interface Timeline extends Fields {
+	design: ArticleDesign.Timeline;
+	body: BodyElement[];
+}
+
+interface Profile extends Fields {
+	design: ArticleDesign.Profile;
+	body: BodyElement[];
+}
+
 type Item =
 	| LiveBlog
 	| DeadBlog
@@ -238,7 +248,9 @@ type Item =
 	| NewsletterSignup
 	| PhotoEssay
 	| PrintShop
-	| FullPageInteractive;
+	| FullPageInteractive
+	| Timeline
+	| Profile;
 
 // ----- Convenience Types ----- //
 
@@ -428,6 +440,10 @@ const isLabs = hasTag('tone/advertisement-features');
 
 const isMatchReport = hasTag('tone/matchreports');
 
+const isTimeline = hasTag('tone/timelines');
+
+const isProfile = hasTag('tone/profiles');
+
 const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
 const isPicture = hasTag('type/picture');
@@ -598,6 +614,18 @@ const fromCapi =
 				body,
 				...itemFields,
 			};
+		} else if (isTimeline(tags)) {
+			return {
+				design: ArticleDesign.Timeline,
+				body,
+				...itemFields,
+			};
+		} else if (isProfile(tags)) {
+			return {
+				design: ArticleDesign.Profile,
+				body,
+				...itemFields,
+			};
 		}
 
 		return {
@@ -635,6 +663,8 @@ export {
 	NewsletterSignup,
 	Obituary,
 	Correction,
+	Timeline,
+	Profile,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
@@ -649,4 +679,6 @@ export {
 	isObituary,
 	isReview,
 	isNews,
+	isTimeline,
+	isProfile,
 };

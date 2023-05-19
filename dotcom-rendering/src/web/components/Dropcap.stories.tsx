@@ -47,7 +47,7 @@ export const Article = () => {
 		</Wrapper>
 	);
 };
-Article.story = { name: 'Article | news' };
+Article.storyName = 'Article | news';
 
 export const OpinionArticle = () => {
 	return (
@@ -77,7 +77,7 @@ export const OpinionArticle = () => {
 		</Wrapper>
 	);
 };
-OpinionArticle.story = { name: 'Article | opinion' };
+OpinionArticle.storyName = 'Article | opinion';
 
 export const Feature = () => {
 	return (
@@ -107,7 +107,7 @@ export const Feature = () => {
 		</Wrapper>
 	);
 };
-Feature.story = { name: 'Feature | culture' };
+Feature.storyName = 'Feature | culture';
 
 export const PhotoEssay = () => {
 	return (
@@ -137,7 +137,7 @@ export const PhotoEssay = () => {
 		</Wrapper>
 	);
 };
-PhotoEssay.story = { name: 'PhotoEssay | sport' };
+PhotoEssay.storyName = 'PhotoEssay | sport';
 
 export const Interview = () => {
 	return (
@@ -167,7 +167,7 @@ export const Interview = () => {
 		</Wrapper>
 	);
 };
-Interview.story = { name: 'Interview | lifestyle' };
+Interview.storyName = 'Interview | lifestyle';
 
 export const Comment = () => {
 	return (
@@ -197,7 +197,7 @@ export const Comment = () => {
 		</Wrapper>
 	);
 };
-Comment.story = { name: 'Comment | opinion' };
+Comment.storyName = 'Comment | opinion';
 
 export const CommentSport = () => {
 	return (
@@ -227,7 +227,7 @@ export const CommentSport = () => {
 		</Wrapper>
 	);
 };
-CommentSport.story = { name: 'Comment | sport' };
+CommentSport.storyName = 'Comment | sport';
 
 export const CommentCulture = () => {
 	return (
@@ -257,4 +257,4 @@ export const CommentCulture = () => {
 		</Wrapper>
 	);
 };
-CommentCulture.story = { name: 'Comment | culture' };
+CommentCulture.storyName = 'Comment | culture';

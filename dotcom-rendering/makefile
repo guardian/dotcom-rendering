@@ -17,7 +17,10 @@ endef
 
 # deployment #########################################
 
-riffraff-bundle: clean-dist build
+cdk-synth:
+	@yarn cdk:synth
+
+riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
 	@node ./scripts/deploy/build-riffraff-bundle.js
 
@@ -100,7 +103,7 @@ dev-debug: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting frontend PROD server and opening Cypress")
@@ -146,13 +149,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-bundlesize: clear clean-dist install build
-	@bundlesize
-
 validate: clean-dist install tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: install tsc lint stylelint test-ci bundlesize
+validate-ci: install tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
@@ -211,9 +211,6 @@ gen-fixtures:
 
 perf-test:
 	@node scripts/perf/perf-test.js
-
-arch-diagram:
-	@npx arkit
 
 # Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
 # Adding - at the beginning of the command ignores the error and we're getting:

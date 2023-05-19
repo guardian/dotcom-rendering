@@ -31,7 +31,7 @@ export const footerLinks: Link[][] = [
 			url: 'https://www.theguardian.com/info/complaints-and-corrections',
 		},
 		{
-			title: 'Securedrop',
+			title: 'SecureDrop',
 			url: 'https://www.theguardian.com/securedrop',
 		},
 		{
@@ -92,7 +92,7 @@ export const footerLinks: Link[][] = [
 		},
 		{
 			title: 'Search jobs',
-			url: 'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+			url: 'https://jobs.theguardian.com',
 		},
 		{
 			title: 'Patrons',

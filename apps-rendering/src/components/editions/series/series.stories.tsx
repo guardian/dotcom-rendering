@@ -2,11 +2,9 @@
 
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { withKnobs } from '@storybook/addon-knobs';
 import Series from 'components/Series';
 import { article, interview } from 'fixtures/item';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Headline from '.';
 
 // ----- Setup ------ //
@@ -30,7 +28,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			tags: getTags('lifeandstyle/running', 'Running'),
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -40,7 +38,7 @@ const Interview = (): ReactElement => (
 		item={{
 			...interview,
 			tags: getTags('tone/interview', 'Interview'),
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -51,7 +49,7 @@ const Immersive = (): ReactElement => (
 			...article,
 			tags: getTags('news/series/the-long-read', 'The long read'),
 			display: ArticleDisplay.Immersive,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -61,7 +59,6 @@ const Immersive = (): ReactElement => (
 export default {
 	component: Series,
 	title: 'AR/Editions/Series',
-	decorators: [withKnobs],
 };
 
 export { Default, Interview, Immersive };

@@ -1,9 +1,12 @@
-import { getScriptsFromManifest } from '../../lib/assets';
+import { isString } from '@guardian/libs';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
+import { ArticlePage } from '../../web/components/ArticlePage';
+import { decideFormat } from '../../web/lib/decideFormat';
 import { renderToStringWithEmotion } from '../../web/lib/emotion';
-import { pageTemplate } from './pageTemplate';
+import { pageTemplate } from '../../web/server/pageTemplate';
 
 export const articleToHtml = (
 	article: FEArticleType,
@@ -11,13 +14,22 @@ export const articleToHtml = (
 	clientScripts: string[];
 	html: string;
 } => {
-	const { html, extractedCss } = renderToStringWithEmotion(<></>);
+	const format: ArticleFormat = decideFormat(article.format);
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<ArticlePage
+			format={format}
+			article={article}
+			renderingTarget="Apps"
+		/>,
+	);
 
 	const getScriptArrayFromFile = getScriptsFromManifest({
 		platform: 'apps',
 	});
 
 	const clientScripts = getScriptArrayFromFile('index.js');
+	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data
@@ -49,8 +61,12 @@ export const articleToHtml = (
 		css: extractedCss,
 		html,
 		title: article.webTitle,
-		clientScripts,
+		scriptTags,
 		windowGuardian,
+		renderingTarget: 'Apps',
+		offerHttp3: false,
+		borkFCP: false,
+		borkFID: false,
 	});
 	return {
 		clientScripts,

@@ -216,6 +216,7 @@ type Props = {
 	format: ArticleFormat;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
+	isInEuropeTest: boolean;
 };
 
 export const Columns = ({
@@ -223,9 +224,13 @@ export const Columns = ({
 	nav,
 	editionId,
 	headerTopBarSwitch,
+	isInEuropeTest,
 }: Props) => {
 	const activeEdition = getEditionFromId(editionId);
-	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	const remainingEditions = getRemainingEditions(
+		activeEdition.editionId,
+		isInEuropeTest,
+	);
 	return (
 		<ul
 			css={columnsStyle(format.display)}
@@ -238,7 +243,6 @@ export const Columns = ({
 						title: column.title,
 						longTitle: `View all ${column.title}`,
 						url: column.url,
-						pillar: undefined,
 						children: [],
 						mobileOnly: true,
 					}),
@@ -316,7 +320,7 @@ export const Columns = ({
 			</section>
 
 			<MoreColumn
-				column={nav.otherLinks}
+				otherLinks={nav.otherLinks}
 				brandExtensions={nav.brandExtensions}
 				key="more"
 			/>

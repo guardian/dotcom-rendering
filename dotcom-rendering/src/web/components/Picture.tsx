@@ -162,6 +162,12 @@ const decideImageWidths = ({
 	}
 };
 
+const getServiceFromUrl = (url: URL): string => {
+	const serviceName = url.hostname.split('.')[0] ?? '';
+	if (serviceName === 'static-secure') return 'static';
+	else return serviceName;
+};
+
 /**
  * Generates a URL for calling the Fastly Image Optimiser.
  *
@@ -183,8 +189,6 @@ const generateImageURL = ({
 	// In CODE, we do not generate optimised replacement images
 	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
 
-	const service = url.hostname.split('.')[0] ?? '';
-
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
 		// Why 45 and 85?
@@ -197,7 +201,7 @@ const generateImageURL = ({
 		s: 'none',
 	});
 
-	return `https://i.guim.co.uk/img/${service}${
+	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
 };

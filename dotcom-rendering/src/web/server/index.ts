@@ -7,16 +7,20 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { extractTrendingTopics } from '../../model/extractTrendingTopics';
 import {
+	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
 	validateAsFrontType,
 } from '../../model/validate';
+import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
+import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
 
 function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -28,7 +32,6 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
 	});
-
 	return {
 		...data,
 		blocks: enhancedBlocks,
@@ -73,6 +76,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'web');
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
@@ -86,6 +90,7 @@ export const handleArticle: RequestHandler = ({ body }, res) => {
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('article', 'json');
 		const article = enhanceArticleType(body);
 		const resp = {
 			data: {
@@ -108,6 +113,7 @@ export const handlePerfTest: RequestHandler = (req, res, next) => {
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
+		recordTypeAndPlatform('interactive', 'web');
 		const article = enhanceArticleType(body);
 		const resp = articleToHtml({
 			article,
@@ -120,6 +126,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('blocks');
 	try {
 		const {
 			blocks,
@@ -167,6 +174,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 };
 
 export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('keyEvents');
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
@@ -185,6 +193,7 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 };
 
 export const handleFront: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('front');
 	try {
 		const front = enhanceFront(body);
 		const html = frontToHtml({
@@ -198,4 +207,26 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
+};
+
+const enhanceAllEditorialNewslettersPage = (
+	body: unknown,
+): DCRNewslettersPageType => {
+	const newsletterData = validateAsAllEditorialNewslettersPageType(body);
+	return {
+		...newsletterData,
+	};
+};
+
+export const handleAllEditorialNewslettersPage: RequestHandler = (
+	{ body },
+	res,
+) => {
+	try {
+		const newslettersPage = enhanceAllEditorialNewslettersPage(body);
+		const html = allEditorialNewslettersPageToHtml({ newslettersPage });
+		res.status(200).send(html);
+	} catch (e) {
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
+	}
 };

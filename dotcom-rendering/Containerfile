@@ -1,0 +1,13 @@
+# This container is used in our CICD pipelines for running E2E and regression tests.
+FROM node:16.19.0-alpine
+
+WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
+
+COPY ./dotcom-rendering/dist /opt/app/dotcom-rendering/dotcom-rendering/dist
+
+EXPOSE 9000
+
+ENV DISABLE_LOGGING_AND_METRICS=true
+ENV NODE_ENV=production
+
+ENTRYPOINT ["node", "dist/frontend.server.js"]

@@ -83,7 +83,7 @@ export const Both = () => {
 		</Wrapper>
 	);
 };
-Both.story = { name: 'with both results' };
+Both.storyName = 'with both results';
 
 export const Themes = () => {
 	fetchMock
@@ -239,7 +239,7 @@ export const Themes = () => {
 		</Wrapper>
 	);
 };
-Themes.story = { name: 'with different themes' };
+Themes.storyName = 'with different themes';
 
 export const CommentOnly = () => {
 	fetchMock
@@ -293,7 +293,7 @@ export const CommentOnly = () => {
 		</Wrapper>
 	);
 };
-CommentOnly.story = { name: 'with zero shares' };
+CommentOnly.storyName = 'with zero shares';
 
 export const ZeroComments = () => {
 	fetchMock
@@ -347,7 +347,7 @@ export const ZeroComments = () => {
 		</Wrapper>
 	);
 };
-ZeroComments.story = { name: 'with zero comments' };
+ZeroComments.storyName = 'with zero comments';
 
 export const BigNumbers = () => {
 	fetchMock
@@ -401,7 +401,7 @@ export const BigNumbers = () => {
 		</Wrapper>
 	);
 };
-BigNumbers.story = { name: 'with long numbers' };
+BigNumbers.storyName = 'with long numbers';
 
 export const CommentsOff = () => {
 	fetchMock
@@ -436,4 +436,4 @@ export const CommentsOff = () => {
 		</Wrapper>
 	);
 };
-CommentsOff.story = { name: 'with commentting off' };
+CommentsOff.storyName = 'with commentting off';

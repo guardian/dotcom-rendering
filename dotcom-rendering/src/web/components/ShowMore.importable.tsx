@@ -21,23 +21,36 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
-function decideButtonText({
+const decideButtonText = ({
 	isOpen,
 	loading,
-	containerTitle,
+	title,
 }: {
 	isOpen: boolean;
 	loading: boolean;
-	containerTitle: string;
-}) {
-	if (isOpen && loading) return 'Loading';
-	if (isOpen) return `Less ${containerTitle}`;
-	return `More ${containerTitle}`;
-}
+	title: string;
+}) => {
+	if (isOpen && loading) return <>Loading</>;
+	if (isOpen)
+		return (
+			<>
+				Less{' '}
+				<span
+					css={css`
+						${visuallyHidden}
+					`}
+				>
+					{/* The context of what we're hiding is likely more useful for screen-reader users */}
+					{title}
+				</span>
+			</>
+		);
+	return <>More {title}</>;
+};
 
 type Props = {
-	containerTitle: string;
-	path: string;
+	title: string;
+	pageId: string;
 	/**
 	 * `collectionId` is the id of the collection as it figures in the fronts
 	 * config. It is used to generate the URL for the show-more API endpoint.
@@ -51,19 +64,19 @@ type Props = {
 	 * in the main container. (This can happen due to a lag between when the page is SSRd
 	 * and when the user clicks the 'show more' button.)
 	 */
-	containerElementId: string;
+	sectionId: string;
 	showAge: boolean;
-	baseUrl: string;
+	ajaxUrl: string;
 	containerPalette?: DCRContainerPalette;
 };
 
 export const ShowMore = ({
-	containerTitle,
-	path,
+	title,
+	pageId,
+	sectionId,
 	collectionId,
-	containerElementId,
 	showAge,
-	baseUrl,
+	ajaxUrl,
 	containerPalette,
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
@@ -75,7 +88,7 @@ export const ShowMore = ({
 	 * 'show-more' endpoint.
 	 */
 	useOnce(() => {
-		const container = document.getElementById(containerElementId);
+		const container = document.getElementById(`container-${sectionId}`);
 		const containerLinks = Array.from(
 			container?.querySelectorAll('a') ?? [],
 		)
@@ -91,17 +104,17 @@ export const ShowMore = ({
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
 	 */
 	const url = isOpen
-		? `${baseUrl}/${path}/show-more/${collectionId}.json?dcr=true`
+		? `${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`
 		: undefined;
 	const { data, error, loading } = useApi<FEFrontCard[]>(url);
 
-	const filteredData =
+	const cards =
 		data &&
 		enhanceCards(data).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
 
-	const showMoreContainerId = `show-more-${containerElementId}`;
+	const showMoreContainerId = `show-more-${collectionId}`;
 
 	useEffect(() => {
 		/**
@@ -110,7 +123,7 @@ export const ShowMore = ({
 		 * `false` then `filteredData` will be `undefined`.
 		 * */
 
-		const [card] = filteredData ?? [];
+		const [card] = cards ?? [];
 		if (card) {
 			const maybeFirstCard = document.querySelector(
 				`#${showMoreContainerId} [data-link-name="${card.dataLinkName}"]`,
@@ -119,34 +132,31 @@ export const ShowMore = ({
 				maybeFirstCard.focus();
 			}
 		}
-	}, [filteredData, showMoreContainerId]);
+	}, [cards, showMoreContainerId]);
 
 	return (
 		<>
 			<div id={showMoreContainerId} aria-live="polite">
-				{filteredData && (
-					<>
-						<div
-							css={css`
-								height: ${space[3]}px;
-							`}
-						/>
+				{cards && (
+					<div
+						css={css`
+							padding-top: ${space[2]}px;
+						`}
+					>
 						<UL direction="row" wrapCards={true}>
-							{filteredData.map((card, cardIndex) => {
+							{cards.map((card, cardIndex) => {
 								const columns = 3;
 								return (
 									<LI
 										key={card.url}
 										percentage="33.333%"
-										stretch={
-											filteredData.length % columns !== 1
-										}
+										stretch={cards.length % columns !== 1}
 										padSides={true}
 										showDivider={cardIndex % columns !== 0}
 										offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 											cardIndex,
-											filteredData.length -
-												(filteredData.length % columns),
+											cards.length -
+												(cards.length % columns),
 											columns,
 										)}
 									>
@@ -162,13 +172,15 @@ export const ShowMore = ({
 								);
 							})}
 						</UL>
-					</>
+					</div>
 				)}
 			</div>
 			<div
-				css={css`
-					display: flex;
-				`}
+				css={[
+					css`
+						display: flex;
+					`,
+				]}
 			>
 				<Button
 					size="xsmall"
@@ -192,16 +204,16 @@ export const ShowMore = ({
 					`}
 					aria-controls={showMoreContainerId}
 					aria-expanded={isOpen && !loading}
-					aria-describedby={`show-more-button-${containerElementId}-description`}
+					aria-describedby={`show-more-button-${collectionId}-description`}
 				>
 					{decideButtonText({
 						isOpen,
 						loading,
-						containerTitle,
+						title,
 					})}
 				</Button>
 				<span
-					id={`show-more-button-${containerElementId}-description`}
+					id={`show-more-button-${collectionId}-description`}
 					css={css`
 						${visuallyHidden}
 					`}

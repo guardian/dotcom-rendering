@@ -420,6 +420,11 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
+interface MessageUs {
+	formId: string;
+	formFields: import('./src/types/content').MessageUsFieldType[];
+}
+
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -558,6 +563,7 @@ declare namespace JSX {
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
+			rootMargin?: string;
 			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;

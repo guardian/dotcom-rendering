@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand, space, textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import {
 	LinkButton,
 	SvgSignalBrand,
@@ -8,6 +8,7 @@ import {
 } from '@guardian/source-react-components';
 import type { FC, ReactElement } from 'react';
 import type { CalloutContactType } from '../../../types/content';
+import { calloutLinkStyles } from './CalloutComponents';
 
 const calloutPrimaryButtonStyles = css`
 	width: 100%;
@@ -20,9 +21,7 @@ const calloutPrimaryButtonStyles = css`
 `;
 
 const infoStyles = css`
-	a {
-		color: ${brand[500]};
-	}
+	${calloutLinkStyles}
 	margin-bottom: ${space[2]}px;
 	${textSans.xsmall()};
 `;

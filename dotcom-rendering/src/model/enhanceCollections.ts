@@ -9,6 +9,7 @@ const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
 	'culture-treat',
 	'newsletter treat',
+	'Palette styles',
 ];
 const isSupported = (collection: FECollectionType): boolean =>
 	!FORBIDDEN_CONTAINERS.includes(collection.displayName);

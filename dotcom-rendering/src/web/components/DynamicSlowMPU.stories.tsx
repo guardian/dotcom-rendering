@@ -21,7 +21,7 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -37,10 +37,10 @@ export const NoBigs = () => (
 		/>
 	</FrontSection>
 );
-NoBigs.story = { name: 'with no big cards, only standard' };
+NoBigs.storyName = 'with no big cards, only standard';
 
 export const OneBig = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -56,10 +56,10 @@ export const OneBig = () => (
 		/>
 	</FrontSection>
 );
-OneBig.story = { name: 'with just one big' };
+OneBig.storyName = 'with just one big';
 
 export const TwoBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -75,10 +75,10 @@ export const TwoBigs = () => (
 		/>
 	</FrontSection>
 );
-TwoBigs.story = { name: 'with two bigs' };
+TwoBigs.storyName = 'with two bigs';
 
 export const FirstBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -98,10 +98,10 @@ export const FirstBigBoosted = () => (
 		/>
 	</FrontSection>
 );
-FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
+FirstBigBoosted.storyName = 'with the first of two bigs boosted';
 
 export const SecondBigBoosted = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -121,10 +121,10 @@ export const SecondBigBoosted = () => (
 		/>
 	</FrontSection>
 );
-SecondBigBoosted.story = { name: 'with the second of two bigs boosted' };
+SecondBigBoosted.storyName = 'with the second of two bigs boosted';
 
 export const ThreeBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -140,10 +140,10 @@ export const ThreeBigs = () => (
 		/>
 	</FrontSection>
 );
-ThreeBigs.story = { name: 'with three bigs' };
+ThreeBigs.storyName = 'with three bigs';
 
 export const AllBigs = () => (
-	<FrontSection title="Dynamic Slow MPU" centralBorder="partial">
+	<FrontSection title="Dynamic Slow MPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -159,10 +159,10 @@ export const AllBigs = () => (
 		/>
 	</FrontSection>
 );
-AllBigs.story = { name: 'with lots of bigs and no standards' };
+AllBigs.storyName = 'with lots of bigs and no standards';
 
 export const AdfreeDynamicSlowMPU = () => (
-	<FrontSection title="DynamicSlowMPU" centralBorder="partial">
+	<FrontSection title="DynamicSlowMPU">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -178,4 +178,4 @@ export const AdfreeDynamicSlowMPU = () => (
 		/>
 	</FrontSection>
 );
-AdfreeDynamicSlowMPU.story = { name: 'Ad-free dynamic slow MPU' };
+AdfreeDynamicSlowMPU.storyName = 'Ad-free dynamic slow MPU';

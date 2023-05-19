@@ -13,4 +13,4 @@ export const defaultStory = () => {
 	return <Search href="" dataLinkName="" />;
 };
 
-defaultStory.story = { name: 'Header top bar search' };
+defaultStory.storyName = 'Header top bar search';

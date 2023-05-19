@@ -4,10 +4,6 @@ import { billboardsInMerch } from './tests/billboards-in-merch';
 import { consentlessAds } from './tests/consentless-ads';
 import { elementsManager } from './tests/elements-manager';
 import { integrateIma } from './tests/integrate-ima';
-import {
-	newsletterMerchUnitLighthouseControl,
-	newsletterMerchUnitLighthouseVariants,
-} from './tests/newsletter-merch-unit-test';
 import { signInGateCopyTestJan2023 } from './tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
@@ -19,8 +15,6 @@ export const tests: ABTest[] = [
 	signInGateMainVariant,
 	signInGateMainControl,
 	signInGateCopyTestJan2023,
-	newsletterMerchUnitLighthouseControl,
-	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIma,
 	billboardsInMerch,

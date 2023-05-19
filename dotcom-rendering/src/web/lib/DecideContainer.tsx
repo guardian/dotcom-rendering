@@ -18,6 +18,7 @@ import { FixedSmallFastVIII } from '../components/FixedSmallFastVIII';
 import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
+import { FixedSmallSlowVHalf } from '../components/FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 import { NavList } from '../components/NavList';
@@ -122,6 +123,14 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-V-third':
 			return (
 				<FixedSmallSlowVThird
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-V-half':
+			return (
+				<FixedSmallSlowVHalf
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
