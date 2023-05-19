@@ -40,10 +40,19 @@ export const enhanceCollections = (
 				collectionType,
 				collection.curated,
 				collection.backfill,
+				editionId,
 				containerPalette,
 			),
-			curated: enhanceCards(collection.curated, containerPalette),
-			backfill: enhanceCards(collection.backfill, containerPalette),
+			curated: enhanceCards(
+				collection.curated,
+				editionId,
+				containerPalette,
+			),
+			backfill: enhanceCards(
+				collection.backfill,
+				editionId,
+				containerPalette,
+			),
 			treats: enhanceTreats(
 				collection.treats,
 				displayName,

@@ -5,6 +5,7 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { enhanceCards } from './enhanceCards';
+import { EditionId } from '../web/lib/edition';
 
 /**
  * Groups cards based on their group specified in fronts tool
@@ -27,6 +28,7 @@ export const groupCards = (
 	container: DCRContainerType,
 	curated: FEFrontCard[],
 	backfill: FEFrontCard[],
+	editionId: EditionId,
 	containerPalette?: DCRContainerPalette,
 ): DCRGroupedTrails => {
 	switch (container) {
@@ -38,6 +40,7 @@ export const groupCards = (
 				veryBig: [],
 				big: enhanceCards(
 					curated.filter(({ card }) => card.group === '1'),
+					editionId,
 					containerPalette,
 				),
 				standard: enhanceCards(
@@ -45,6 +48,7 @@ export const groupCards = (
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
+					editionId,
 					containerPalette,
 				),
 			};
@@ -55,14 +59,17 @@ export const groupCards = (
 				snap: [],
 				huge: enhanceCards(
 					curated.filter(({ card }) => card.group === '3'),
+					editionId,
 					containerPalette,
 				),
 				veryBig: enhanceCards(
 					curated.filter(({ card }) => card.group === '2'),
+					editionId,
 					containerPalette,
 				),
 				big: enhanceCards(
 					curated.filter(({ card }) => card.group === '1'),
+					editionId,
 					containerPalette,
 				),
 				standard: enhanceCards(
@@ -70,6 +77,7 @@ export const groupCards = (
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
+					editionId,
 					containerPalette,
 				),
 			};
@@ -81,6 +89,7 @@ export const groupCards = (
 				// Only 'snap' and 'standard' are supported by dynamic/package
 				snap: enhanceCards(
 					curated.filter(({ card }) => card.group === '1'),
+					editionId,
 					containerPalette,
 				),
 				standard: enhanceCards(
@@ -88,6 +97,7 @@ export const groupCards = (
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
+					editionId,
 					containerPalette,
 				),
 			};

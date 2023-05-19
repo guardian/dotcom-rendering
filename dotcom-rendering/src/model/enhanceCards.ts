@@ -11,6 +11,7 @@ import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
+import { EditionId } from '../web/lib/edition';
 
 /**
  *
@@ -163,6 +164,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 
 export const enhanceCards = (
 	collections: FEFrontCard[],
+	editionId?: EditionId,
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -193,6 +195,10 @@ export const enhanceCards = (
 			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href
 				: faciaCard.header.url;
+
+		const branding = faciaCard.properties.editionBrandings.find(
+			(editionBranding) => editionBranding.edition.id === editionId,
+		)?.branding;
 
 		return {
 			format,
@@ -243,5 +249,6 @@ export const enhanceCards = (
 			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
+			branding,
 		};
 	});
