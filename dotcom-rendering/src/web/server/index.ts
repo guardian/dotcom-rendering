@@ -10,7 +10,7 @@ import {
 	extractTrendingTopics,
 	extractTrendingTopicsFomFront,
 } from '../../model/extractTrendingTopics';
-import { groupTrailsByDate } from '../../model/groupTrailsByDates';
+import { groupTrailsByDates } from '../../model/groupTrailsByDates';
 import { getSpeedFromTrails } from '../../model/slowOrFastByTrails';
 import {
 	validateAsAllEditorialNewslettersPageType,
@@ -94,7 +94,7 @@ const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
 	return {
 		...data,
 		tags: data.tags.tags,
-		groupedTrails: groupTrailsByDate(
+		groupedTrails: groupTrailsByDates(
 			enhancedCards,
 			speed === 'slow' || data.forceDay,
 		),
