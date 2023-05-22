@@ -28,7 +28,7 @@ export const decideBadge = (
 		return {
 			imageSrc:
 				'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg',
-			href: 'world/series/this-is-europe',
+			href: '/world/series/this-is-europe',
 		};
 	}
 
