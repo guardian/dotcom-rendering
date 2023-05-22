@@ -124,17 +124,40 @@ const ModalFooter = ({ children }: ModalBodyProps) => {
 
 interface Ingredient {
 	text: string;
+	item: string;
 }
 interface RecipeIngredientsProps {
 	ingredients: Ingredient[];
+	step: string;
 }
-export const Ingredients = ({ ingredients }: RecipeIngredientsProps) => {
+
+const getIngredientClass = (step: string, ingredient: string) => {
+	const keywordRegex = new RegExp(`\\b${ingredient}\\b`, 'g');
+
+	const contains = keywordRegex.test(step);
+	if (contains) {
+		return 'highlighted';
+	} else return undefined;
+};
+
+export const Ingredients = ({ ingredients, step }: RecipeIngredientsProps) => {
 	return (
 		<div css={ingredientsStyles}>
 			<h2 css={sectionHeadingStyle}>Ingredients</h2>
 			<ul>
 				{ingredients.map((ingredient, index) => (
-					<li key={`${index}-ingredient`}>{ingredient.text}</li>
+					<>
+						<li
+							key={`${index}-ingredient`}
+							id="ingredient"
+							className={getIngredientClass(
+								step,
+								ingredient.item,
+							)}
+						>
+							{ingredient.text}
+						</li>
+					</>
 				))}
 			</ul>
 		</div>
@@ -188,8 +211,8 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				let methodText = originalMethodDiv?.innerHTML ?? '';
 				for (let i = 0; i < ingredientKeywords.length; i++) {
 					const keywordRegex = new RegExp(
-						ingredientKeywords[i],
-						'/gi',
+						`\\b${ingredientKeywords[i]}\\b`,
+						'g',
 					);
 					methodText = methodText.replace(
 						keywordRegex,
@@ -204,7 +227,6 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 				if (methodDiv)
 					methodDiv.innerHTML = originalMethodDiv?.innerHTML ?? '';
 			}
-			//   }
 		}
 	}, [showReader, showIngredients, ingredientKeywords]);
 
@@ -345,7 +367,10 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 
 						<ModalBody>
 							{showIngredients && ingredients && (
-								<Ingredients ingredients={ingredients} />
+								<Ingredients
+									ingredients={ingredients}
+									step={steps[activeStep]}
+								/>
 							)}
 							<div css={methodStyles(showIngredients)}>
 								{showIngredients && (
@@ -416,7 +441,7 @@ const dialogStyles = css`
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
-	z-index: 10;
+	z-index: 100;
 	min-height: 60vh;
 	min-width: 50vw;
 	display: flex;
@@ -449,6 +474,12 @@ const ingredientsStyles = css`
 	width: 40%;
 	margin-right: 16px;
 	line-height: 27.5px;
+
+	.highlighted {
+		background-color: #ffe500;
+		border: 1px solid white;
+		box-sizing: border-box;
+	}
 `;
 
 const methodStyles = (showIngredients: boolean) => css`
