@@ -106,8 +106,7 @@ export type DCRContainerPalette =
 	| 'LongRunningPalette'
 	| 'SombrePalette'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette'
-	| 'Branded';
+	| 'SpecialReportAltPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
