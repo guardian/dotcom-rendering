@@ -684,12 +684,6 @@ const textCardKicker = (format: ArticleFormat): string => {
 
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 
-	if (
-		format.theme === ArticleSpecial.Labs &&
-		format.design === ArticleDesign.Standard
-	)
-		return labs[200];
-
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -720,7 +714,12 @@ const textCardKicker = (format: ArticleFormat): string => {
 					return labs[400];
 			}
 		default:
-			return pillarPalette[format.theme].main;
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return labs[200];
+				default:
+					return pillarPalette[format.theme].main;
+			}
 	}
 };
 
