@@ -3,22 +3,17 @@ import {
 	body,
 	headline,
 	palette,
-	space,
 	textSans,
 	titlepiece,
-	until,
 } from '@guardian/source-foundations';
 import {
 	Button,
 	SvgAudio,
-	SvgBookMark,
 	SvgCheckmark,
 	SvgChevronDownSingle,
-	SvgChevronLeftSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import { useEffect, useRef, useState } from 'react';
-import { Island } from './Island';
+import { useState } from 'react';
 
 const SvgFood = () => (
 	<svg
@@ -652,7 +647,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 
 	function renderSteps() {
 		return recipeInfo?.steps.map((step, index) => (
-			// eslint-disable-next-line react/jsx-key
+			// eslint-disable-next-line react/jsx-key, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
 			<div
 				onClick={() => markStepDone(index)}
 				css={css`
@@ -702,9 +697,10 @@ export const RecipeRender = (props: { recipeId: number }) => {
 	}
 
 	function renderIngredients() {
-		return recipeInfo.ingredients_lists
+		return recipeInfo?.ingredients_lists
 			.flatMap((i) => i.ingredients)
 			.map((item, index) => (
+				// eslint-disable-next-line react/jsx-key
 				<div
 					css={css`
 						background: #f6f6f6;
@@ -737,7 +733,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 			<>
 				<div
 					css={css`
-						background-image: url(${recipeInfo.image});
+						background-image: url(${recipeInfo?.image});
 						background-size: cover;
 						/* background-size: 280px 739px; */
 						background-repeat: no-repeat;
@@ -849,7 +845,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 								margin-top: 1rem;
 							`}
 						>
-							{recipeInfo.recipes_title}
+							{recipeInfo?.recipes_title}
 						</h2>
 						<br />
 						<div
@@ -861,7 +857,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 							<img
 								width="342px"
 								height="228"
-								src={recipeInfo.image}
+								src={recipeInfo?.image}
 								alt="test"
 								css={css`
 									border-radius: 16px;
@@ -891,7 +887,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 									${headline.xxsmall()};
 								`}
 							>
-								{recipeInfo.serves}
+								{recipeInfo?.serves}
 							</span>
 							<span
 								css={css`
@@ -911,7 +907,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 									${headline.xxsmall()};
 								`}
 							>
-								{recipeInfo.preptime} mins
+								{recipeInfo?.preptime} mins
 							</span>
 							<span
 								css={css`
@@ -933,7 +929,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 									${headline.xxsmall()};
 								`}
 							>
-								{recipeInfo.cookingtime} mins
+								{recipeInfo?.cookingtime} mins
 							</span>
 							<span
 								css={css`
@@ -953,7 +949,7 @@ export const RecipeRender = (props: { recipeId: number }) => {
 						`}
 						id="blurb"
 					>
-						<p>{recipeInfo.blurb}</p>
+						<p>{recipeInfo?.blurb}</p>
 					</div>
 
 					<button
