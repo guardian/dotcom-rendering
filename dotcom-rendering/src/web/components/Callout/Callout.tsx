@@ -69,7 +69,7 @@ export const CalloutBlock = ({
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
-	const shouldShowHeading = !!heading && !isNonCollapsible;
+	const shouldShowHeading = !!heading;
 	const tabsContent = [
 		{
 			id: 'form',

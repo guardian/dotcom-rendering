@@ -49,7 +49,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	const id = getCalloutId(heading === "" ? formId.toString() : heading);
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
-	const shouldShowHeading = !!heading && !isNonCollapsible;
+	const shouldShowHeading = !!heading;
 	const tabsContent = [
 		{
 			id: 'form',
