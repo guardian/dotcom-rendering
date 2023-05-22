@@ -20,7 +20,7 @@ const linkStyles = css`
 `;
 
 const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
-	${containerOverrides && `color: ${containerOverrides.text.cardHeadline}`}
+	${containerOverrides && `color: ${containerOverrides.text?.cardHeadline}`}
 `;
 
 type Props = {
