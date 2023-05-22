@@ -70,7 +70,7 @@ export const ArticleTitle = ({
 	<div css={[sectionStyles, badge && badgeContainer]}>
 		{badge && format.display !== ArticleDisplay.Immersive && (
 			<div css={titleBadgeWrapper}>
-				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
+				<Badge imageSrc={badge.imageSrc} href={badge.href} />
 			</div>
 		)}
 		<div

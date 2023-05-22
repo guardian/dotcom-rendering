@@ -4,6 +4,7 @@ import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
+import { decideBadge } from './decideBadge';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
@@ -26,6 +27,7 @@ export const enhanceCollections = (
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
 		);
+		const isLabs = false; // TODO contains branded tag in metadata
 		return {
 			id,
 			displayName,
@@ -36,6 +38,14 @@ export const enhanceCollections = (
 			collectionType,
 			href,
 			containerPalette,
+			isLabs,
+			badge: decideBadge(
+				displayName,
+				collection.curated,
+				collection.backfill,
+				isLabs,
+				editionId,
+			),
 			grouped: groupCards(
 				collectionType,
 				collection.curated,

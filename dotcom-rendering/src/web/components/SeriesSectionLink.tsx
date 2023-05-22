@@ -323,8 +323,8 @@ export const SeriesSectionLink = ({
 										]}
 									>
 										<Badge
-											imageUrl={badge.imageUrl}
-											seriesTag={badge.seriesTag}
+											imageSrc={badge.imageSrc}
+											href={badge.href}
 										/>
 									</div>
 								)}
