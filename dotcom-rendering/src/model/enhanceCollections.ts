@@ -68,7 +68,7 @@ export const enhanceCollections = (
 			badge: decideBadge(
 				displayName,
 				// allCardsHaveBranding is ensuring the correct type here
-				// @ts-ignore
+				// @ts-expect-error
 				allCardsHaveBranding ? allBranding : [],
 			),
 			grouped: groupCards(
