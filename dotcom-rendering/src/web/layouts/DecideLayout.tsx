@@ -9,6 +9,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { RecipeLayout } from './RecipeLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
@@ -45,8 +46,15 @@ const DecideLayoutApps = ({
 				renderingTarget="Apps"
 			/>
 		);
+	} else if (format.display === ArticleDisplay.Showcase) {
+		return (
+			<RecipeLayout
+				article={article}
+				format={format}
+				renderingTarget="Apps"
+			/>
+		);
 	}
-
 	return <pre>Not supported</pre>;
 };
 
