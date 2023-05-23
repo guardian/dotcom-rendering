@@ -26,7 +26,7 @@ jobs:
         working-directory: dotcom-rendering
 
       - name: Cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v4
         with:
           start: make start-ci
           working-directory: dotcom-rendering

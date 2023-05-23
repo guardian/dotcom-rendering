@@ -136,7 +136,7 @@ describe('E2E Page rendering', function () {
 				// Prevent the Privacy consent banner from obscuring snapshots
 				cy.setCookie('GU_TK', 'true');
 
-				cy.visit(`/AMPArticle/${url}`).debug();
+				cy.visit(`/AMPArticle/${url}`);
 				cy.contains('Opinion');
 			});
 		});
