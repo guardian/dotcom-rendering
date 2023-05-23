@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, from, remSpace } from '@guardian/source-foundations';
+import { between, from, palette, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
@@ -55,6 +55,10 @@ const bodyStyles = css`
 	${from.leftCol} {
 		grid-row: 1 / 6;
 	}
+
+	${darkModeCss`
+		color: ${palette.neutral[86]};
+	`}
 `;
 
 const linesStyles = (format: ArticleFormat): SerializedStyles => css`
