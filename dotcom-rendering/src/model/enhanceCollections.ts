@@ -9,6 +9,7 @@ const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
 	'culture-treat',
 	'newsletter treat',
+	'Palette styles',
 ];
 const isSupported = (collection: FECollectionType): boolean =>
 	!FORBIDDEN_CONTAINERS.includes(collection.displayName);
@@ -39,10 +40,19 @@ export const enhanceCollections = (
 				collectionType,
 				collection.curated,
 				collection.backfill,
+				editionId,
 				containerPalette,
 			),
-			curated: enhanceCards(collection.curated, containerPalette),
-			backfill: enhanceCards(collection.backfill, containerPalette),
+			curated: enhanceCards(
+				collection.curated,
+				editionId,
+				containerPalette,
+			),
+			backfill: enhanceCards(
+				collection.backfill,
+				editionId,
+				containerPalette,
+			),
 			treats: enhanceTreats(
 				collection.treats,
 				displayName,

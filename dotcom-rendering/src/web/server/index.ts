@@ -51,6 +51,7 @@ const getStack = (e: unknown): string =>
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
+
 	return {
 		...data,
 		webTitle: `${
