@@ -24,6 +24,7 @@ export interface WindowGuardianConfig {
 		brazeApiKey?: string;
 		isPaidContent?: boolean;
 		isDev?: boolean;
+		hasInlineMerchandise?: boolean;
 	};
 	libs: {
 		googletag: string;
