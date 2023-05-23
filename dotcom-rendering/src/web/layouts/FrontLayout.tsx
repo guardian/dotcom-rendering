@@ -32,6 +32,9 @@ import {
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
+import { DCRFrontCard } from '../../types/front';
+import { BadgeType } from '../../types/badge';
+import { LabsSection } from '../components/LabsSection';
 
 interface Props {
 	front: DCRFrontType;
@@ -332,6 +335,72 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										isNetworkFront={front.isNetworkFront}
 									/>
 								</Section>
+								{decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
+							</>
+						);
+					}
+
+					if (collection.isLabs) {
+						const getGuardianLabsTrails = (
+							trails: DCRFrontCard[],
+							badge?: BadgeType,
+						): DCRFrontCard[] => {
+							if (!!badge) {
+								trails.forEach(
+									(trail) => delete trail.branding,
+								);
+							}
+							return trails;
+						};
+
+						return (
+							<>
+								<LabsSection
+									title={collection.displayName}
+									innerBackgroundColour={neutral[93]}
+									showTopBorder={false}
+									padSides={false}
+									padContent={false}
+									url={collection.href}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									containerName={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									sectionId={ophanName}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									treats={collection.treats}
+									data-print-layout="hide"
+									badge={collection.badge}
+								>
+									<DecideContainer
+										trails={getGuardianLabsTrails(
+											trails,
+											collection.badge,
+										)}
+										index={index}
+										groupedTrails={collection.grouped}
+										containerType={
+											collection.collectionType
+										}
+										containerPalette={
+											collection.containerPalette
+										}
+										renderAds={false}
+									/>
+								</LabsSection>
 								{decideAdSlot(
 									index,
 									front.isNetworkFront,

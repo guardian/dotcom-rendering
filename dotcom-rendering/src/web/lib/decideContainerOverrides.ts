@@ -170,7 +170,7 @@ const textDynamoKicker = (
 };
 
 const textDynamoSublinkKicker = (
-	containerPalette: DCRContainerPalette,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -190,8 +190,6 @@ const textDynamoSublinkKicker = (
 		case 'EventAltPalette':
 			return news[400];
 		case 'SpecialReportAltPalette':
-			return neutral[7];
-		case 'Branded':
 			return neutral[7];
 	}
 };
@@ -221,9 +219,7 @@ const textDynamoMeta = (
 	}
 };
 
-const textContainer = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
-): string => {
+const textContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -243,6 +239,8 @@ const textContainer = (
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[100];
 	}
 };
 
@@ -271,9 +269,7 @@ const textContainerToggle = (
 	}
 };
 
-const borderContainer = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
-): string => {
+const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return transparentColour(neutral[60], 0.4);
@@ -293,12 +289,16 @@ const borderContainer = (
 			return neutral[86];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[60], 0.3);
+		case 'Branded':
+			return neutral[86];
 	}
 };
 
 const borderLines = textCardHeadline;
 
-const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
+const backgroundContainer = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return specialReport[700];
@@ -318,8 +318,6 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return culture[800];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[800];
-		case 'Branded':
-			return neutral[93];
 	}
 };
 
@@ -363,8 +361,11 @@ export const decideContainerOverrides = (
 ): ContainerOverrides => {
 	if (containerPalette === 'Branded') {
 		return {
-			background: {
-				container: backgroundContainer(containerPalette),
+			text: {
+				container: textContainer(containerPalette),
+			},
+			border: {
+				container: borderContainer(containerPalette),
 			},
 		};
 	}

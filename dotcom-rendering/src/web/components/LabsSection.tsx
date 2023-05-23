@@ -1,18 +1,41 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
+import {
+	between,
+	body,
+	from,
+	headline,
+	labs,
+	neutral,
+	news,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
-import { ContainerTitle } from './ContainerTitle';
-import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
 import { ShowHideButton } from './ShowHideButton';
 import { Treats } from './Treats';
+import { Badge } from './Badge';
+import { BadgeType } from '../../types/badge';
+import {
+	Link,
+	LinkButton,
+	SvgArrowRightStraight,
+} from '@guardian/source-react-components';
+import LabsLogo from '../../static/logos/the-guardian-labs.svg';
+import { Dropdown } from './Dropdown';
+import { center } from '../lib/center';
+import { css as emoCss } from '@emotion/react';
+// @ts-expect-error
+import { jsx as _jsx } from 'react/jsx-runtime';
+import { getEditionFromId } from '../lib/edition';
+import { Colour } from '../../types/palette';
 
 /**
  * ----- First time here? -----
@@ -38,9 +61,8 @@ type Props = {
 	/** Defaults to `true`. If we should add padding around the outer left and right edges */
 	padSides?: boolean;
 	/** Defaults to `true`. If we should add padding around the outer left and right edges */
-	padBottom?: boolean;
-	/** Defaults to `false`. If we should add padding to the bottom of `children` */
 	padContent?: boolean;
+
 	/** The html tag used by Section defaults to `section` but can be overridden here */
 	element?:
 		| 'div'
@@ -98,6 +120,7 @@ type Props = {
 	 * without a left column
 	 */
 	fullWidth?: boolean;
+	badge?: BadgeType;
 	/**
 	 * @deprecated Do not use
 	 *
@@ -105,6 +128,27 @@ type Props = {
 	 */
 	className?: string;
 };
+
+const sidePadding = emoCss`
+	padding-left: 10px;
+	padding-right: 10px;
+
+	${from.mobileLandscape} {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+`;
+
+const sideBorderStyles = (colour: string) => emoCss`
+	${from.tablet} {
+		border-left: 1px solid ${colour};
+		border-right: 1px solid ${colour};
+	}
+`;
+
+const setBackgroundColour = (colour: string) => emoCss`
+	background-color: ${colour};
+`;
 
 const containerStyles = css`
 	display: flex;
@@ -133,8 +177,24 @@ const margins = css`
 
 const rightMargin = css`
 	${from.wide} {
-		margin-right: 68px;
+		margin-right: 90px;
 	}
+`;
+
+const sponsorBadgeStyles = css`
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial,
+		'Lucida Grande', sans-serif;
+	color: #707070;
+	font-weight: bold;
+	margin-top: 0.375rem;
+	padding-right: 0.625rem;
+	padding-bottom: 0.625rem;
+	text-align: right;
 `;
 
 const padding = (format?: ArticleFormat) => {
@@ -153,6 +213,183 @@ const padding = (format?: ArticleFormat) => {
 				padding: 0 10px;
 			`;
 	}
+};
+
+const guardianLabsLogoStyles = css`
+	display: flex;
+	justify-content: flex-end;
+`;
+
+const guardianLabsDropdownStyles = css`
+	color: ${neutral[0]};
+	${textSans.xsmall()};
+	padding: 4px;
+	margin: 0px;
+	:hover {
+		color: ${neutral[0]};
+	}
+`;
+
+const leftWidth = (size: LeftColSize, isLabs: boolean) => {
+	switch (size) {
+		case 'wide': {
+			return css`
+				padding-right: 10px;
+				${until.leftCol} {
+					/* below 1140 */
+					display: none;
+				}
+
+				${from.leftCol} {
+					/* above 1140 */
+					flex-basis: 230px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+			`;
+		}
+		case 'compact':
+		default: {
+			return css`
+				padding-right: ${isLabs ? 0 : 10}px;
+				${until.leftCol} {
+					/* below 1140 */
+					display: none;
+				}
+
+				${between.leftCol.and.wide} {
+					/* above 1140, below 1300 */
+					flex-basis: 151px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+
+				${from.wide} {
+					/* above 1300 */
+					flex-basis: ${isLabs ? 250 : 230}px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+			`;
+		}
+	}
+};
+
+const positionRelative = css`
+	position: relative;
+`;
+
+const linkStyles = css`
+	text-decoration: none;
+	color: ${neutral[100]};
+
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
+const headerStyles = (fontColour?: string) => css`
+	${headline.xxsmall({ fontWeight: 'bold' })};
+	font-family: Guardian Text Sans Web;
+	line-height: 30px;
+	color: ${fontColour ?? neutral[7]};
+	padding-top: 6px;
+	padding-bottom: ${space[1]}px;
+	padding-left: 20px;
+	padding-right: ${space[1]}px;
+	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
+
+const descriptionStyles = (fontColour?: string) => css`
+	${body.xsmall({ fontWeight: 'medium' })};
+	color: ${fontColour ?? neutral[46]};
+	p {
+		/* Handle paragraphs in the description */
+		margin-bottom: ${space[3]}px;
+	}
+	a {
+		color: ${neutral[7]};
+		text-decoration: none;
+	}
+`;
+
+const bottomMargin = css`
+	margin-bottom: ${space[2]}px;
+`;
+
+const marginStyles = css`
+	margin-left: 0;
+`;
+
+const dateTextStyles = (color: Colour) => css`
+	${headline.xxxsmall({ fontWeight: 'bold' })};
+	color: ${color};
+	${until.tablet} {
+		display: none;
+	}
+`;
+
+const GuardianLabsTitle = ({
+	title,
+	fontColour,
+	description,
+	url,
+	containerPalette,
+	showDateHeader,
+	editionId,
+}: Props) => {
+	if (!title) return null;
+
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
+	const now = new Date();
+	const locale = editionId && getEditionFromId(editionId).locale;
+	return (
+		<div css={marginStyles}>
+			{url ? (
+				<a css={[linkStyles, bottomMargin]} href={url}>
+					<h2 css={headerStyles(fontColour)}>{title}</h2>
+				</a>
+			) : (
+				<h2 css={headerStyles(fontColour)}>{title}</h2>
+			)}
+			{!!description && (
+				<div
+					css={[descriptionStyles(fontColour), bottomMargin]}
+					dangerouslySetInnerHTML={{ __html: description }}
+				/>
+			)}
+			{showDateHeader && editionId && (
+				<>
+					<span
+						css={dateTextStyles(
+							overrides?.text?.containerDate ?? neutral[0],
+						)}
+					>
+						{now.toLocaleDateString(locale, { weekday: 'long' })}
+					</span>
+					<span
+						css={[
+							css`
+								display: block;
+							`,
+							dateTextStyles(
+								overrides?.text?.containerDate ?? news[400],
+							),
+							bottomMargin,
+						]}
+					>
+						{now.toLocaleDateString(locale, {
+							day: 'numeric',
+							month: 'long',
+							year: 'numeric',
+						})}
+					</span>
+				</>
+			)}
+		</div>
+	);
 };
 
 const Content = ({
@@ -180,6 +417,36 @@ const Content = ({
 	</div>
 );
 
+const PaidContent = () => (
+	<div
+		css={css`
+			${textSans.xsmall({ fontWeight: 'bold' })};
+			padding: 4px;
+		`}
+	>
+		Paid content
+	</div>
+);
+
+const About = () => (
+	<div>
+		<p>
+			Paid content is paid for and controlled by an advertiser and
+			produced by the Guardian Labs team.
+		</p>
+		<br />
+		<LinkButton
+			iconSide="right"
+			size="xsmall"
+			priority="subdued"
+			icon={<SvgArrowRightStraight />}
+			href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+		>
+			Learn more
+		</LinkButton>
+	</div>
+);
+
 /**
  *
  * A Section component represents a horizontal slice of a page. It defaults to
@@ -192,25 +459,19 @@ const Content = ({
  * page - but if `fullWidth={true}` is passed then both the leftCol and right spacing
  * are omitted
  */
-export const Section = ({
+export const LabsSection = ({
 	title,
 	fontColour,
 	description,
 	url,
 	sectionId,
-	showSideBorders = true,
-	centralBorder,
-	showTopBorder = true,
 	padSides = true,
-	padBottom = false,
 	padContent = true,
 	verticalMargins = true,
 	borderColour,
 	backgroundColour,
 	children,
-	leftContent,
 	stretchRight = false,
-	leftColSize,
 	format,
 	ophanComponentLink,
 	ophanComponentName,
@@ -221,72 +482,71 @@ export const Section = ({
 	editionId,
 	containerName,
 	treats,
-	fullWidth = false,
+	badge,
 	element = 'section',
-	shouldCenter,
-	className,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
-	if (fullWidth) {
-		return (
-			<ElementContainer
-				sectionId={sectionId}
-				showSideBorders={showSideBorders}
-				showTopBorder={showTopBorder}
-				padSides={padSides}
-				padBottom={padBottom}
-				borderColour={borderColour ?? overrides?.border.container}
-				backgroundColour={
-					backgroundColour ?? overrides?.background?.container
-				}
-				ophanComponentLink={ophanComponentLink}
-				ophanComponentName={ophanComponentName}
-				containerName={containerName}
-				innerBackgroundColour={innerBackgroundColour}
-				className={className}
-				element={element}
-				shouldCenter={shouldCenter}
-			>
-				{children}
-			</ElementContainer>
-		);
-	}
-
 	return (
-		<ElementContainer
-			sectionId={sectionId}
-			showSideBorders={showSideBorders}
-			showTopBorder={showTopBorder}
-			padSides={padSides}
-			borderColour={borderColour ?? overrides?.border.container}
-			backgroundColour={
-				backgroundColour ?? overrides?.background?.container
-			}
-			element="section"
-			ophanComponentLink={ophanComponentLink}
-			ophanComponentName={ophanComponentName}
-			containerName={containerName}
-			innerBackgroundColour={innerBackgroundColour}
+		<div
+			/**
+			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+			 * this id pre-existed showMore so is probably also being used for something else.
+			 */
+			id={sectionId}
+			css={[
+				center,
+				borderColour && sideBorderStyles(borderColour),
+				innerBackgroundColour &&
+					setBackgroundColour(innerBackgroundColour),
+				padSides && sidePadding,
+			]}
 		>
 			<Flex>
-				<LeftColumn
-					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border.container}
-					size={leftColSize}
-					verticalMargins={verticalMargins}
+				<section
+					css={[
+						positionRelative,
+						leftWidth('compact', true),
+						verticalMargins &&
+							css`
+								padding-bottom: 0px;
+							`,
+					]}
 				>
 					<div
-						css={css`
-							display: flex;
-							height: 100%;
-							flex-direction: column;
-							justify-content: space-between;
-						`}
+						css={[
+							css`
+								height: 100%;
+							`,
+						]}
 					>
-						<div>
-							<ContainerTitle
+						<div
+							css={css`
+								display: flex;
+								height: 100%;
+								flex-direction: column;
+								justify-content: space-between;
+								background-color: ${labs[400]};
+							`}
+						>
+							<div
+								css={css`
+									display: flex;
+								`}
+							>
+								<PaidContent />
+								<Dropdown
+									label="About"
+									links={[]}
+									id="paidfor"
+									cssOverrides={guardianLabsDropdownStyles}
+									dataLinkName="guardian-labs-container-about"
+								>
+									<About />
+								</Dropdown>
+							</div>
+							<GuardianLabsTitle
 								title={title}
 								fontColour={
 									fontColour ?? overrides?.text?.container
@@ -297,18 +557,24 @@ export const Section = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
-							{leftContent}
+							<div css={[guardianLabsLogoStyles]}>
+								<Link href="https://www.theguardian.com/guardian-labs">
+									<LabsLogo />
+								</Link>
+							</div>
+							{treats && (
+								<Treats
+									treats={treats}
+									borderColour={
+										borderColour ??
+										overrides?.border.container
+									}
+								/>
+							)}
 						</div>
-						{treats && (
-							<Treats
-								treats={treats}
-								borderColour={
-									borderColour ?? overrides?.border.container
-								}
-							/>
-						)}
 					</div>
-				</LeftColumn>
+				</section>
+
 				<Content
 					padded={padContent}
 					verticalMargins={verticalMargins}
@@ -317,7 +583,7 @@ export const Section = ({
 				>
 					<div css={headlineContainerStyles}>
 						<Hide when="above" breakpoint="leftCol">
-							<ContainerTitle
+							<GuardianLabsTitle
 								title={title}
 								fontColour={
 									fontColour ?? overrides?.text?.container
@@ -345,8 +611,19 @@ export const Section = ({
 					) : (
 						children
 					)}
+					{badge && (
+						<div css={sponsorBadgeStyles}>
+							<div>Paid for by</div>
+							<div>
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+								/>
+							</div>
+						</div>
+					)}
 				</Content>
 			</Flex>
-		</ElementContainer>
+		</div>
 	);
 };

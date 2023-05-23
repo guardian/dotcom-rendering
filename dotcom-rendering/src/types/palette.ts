@@ -151,28 +151,28 @@ export type Palette = {
 };
 
 export type ContainerOverrides = {
-	text?: {
-		cardHeadline: Colour;
-		cardStandfirst: Colour;
-		cardKicker: Colour;
-		cardByline: Colour;
-		cardFooter: Colour;
-		cardCommentCount: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoSublinkKicker: Colour;
-		dynamoMeta: Colour;
+	text: {
+		cardHeadline?: Colour;
+		cardStandfirst?: Colour;
+		cardKicker?: Colour;
+		cardByline?: Colour;
+		cardFooter?: Colour;
+		cardCommentCount?: Colour;
+		dynamoHeadline?: Colour;
+		dynamoKicker?: Colour;
+		dynamoSublinkKicker?: Colour;
+		dynamoMeta?: Colour;
 		container: Colour;
-		containerToggle: Colour;
-		containerDate: Colour;
+		containerToggle?: Colour;
+		containerDate?: Colour;
 	};
-	border?: {
+	border: {
 		container: Colour;
-		lines: Colour;
+		lines?: Colour;
 	};
-	background: {
+	background?: {
 		container: Colour;
-		card?: Colour;
+		card: Colour;
 	};
 	topBar?: {
 		card: Colour;
