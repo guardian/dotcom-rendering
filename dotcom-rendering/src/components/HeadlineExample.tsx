@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { palette } from '../../../src/palette';
 import { headline } from '@guardian/source-foundations';
+import { palette } from '../palette';
 
 // ----- Component ----- //
 

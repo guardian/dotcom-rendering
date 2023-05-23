@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { Meta, StoryObj, Decorator } from '@storybook/react';
 import { HeadlineExample } from './HeadlineExample';
-import { paletteDeclarations } from '../../../src/palette';
+import { paletteDeclarations } from '../palette';
 
 // ----- Meta ----- //
 
@@ -26,7 +26,8 @@ export default meta;
  * palette colours as CSS custom properties.
  */
 const colourSchemeDecorator =
-	(colourScheme: 'light' | 'dark'): Decorator =>
+	(colourScheme: 'light' | 'dark') =>
+	(format: ArticleFormat): Decorator =>
 	(Story) =>
 		(
 			<div css={css(paletteDeclarations(format, colourScheme))}>
@@ -34,11 +35,14 @@ const colourSchemeDecorator =
 			</div>
 		);
 
+const lightMode = colourSchemeDecorator('light');
+const darkMode = colourSchemeDecorator('dark');
+
 // ----- Stories ----- //
 
 type Story = StoryObj<typeof HeadlineExample>;
 
-const format: ArticleFormat = {
+const articleFormat: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 	theme: ArticlePillar.News,
@@ -48,10 +52,10 @@ export const LightHeadline: Story = {
 	args: {
 		text: 'A short example headline',
 	},
-	decorators: [colourSchemeDecorator('light')],
+	decorators: [lightMode(articleFormat)],
 };
 
 export const DarkHeadline: Story = {
 	args: LightHeadline.args,
-	decorators: [colourSchemeDecorator('dark')],
+	decorators: [darkMode(articleFormat)],
 };
