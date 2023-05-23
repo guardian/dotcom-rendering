@@ -6,40 +6,40 @@ import { palette as sourcePalette } from '@guardian/source-foundations';
 // ----- Palette Functions ----- //
 
 const headlineColourLight = ({ design }: ArticleFormat): string => {
-    switch (design) {
-        case ArticleDesign.Feature:
-            return sourcePalette.news[300];    
-        default:
-            return sourcePalette.neutral[10];
-    }
-}
+	switch (design) {
+		case ArticleDesign.Feature:
+			return sourcePalette.news[300];
+		default:
+			return sourcePalette.neutral[10];
+	}
+};
 
 const headlineColourDark = ({ design }: ArticleFormat): string => {
-    switch (design) {
-        case ArticleDesign.Feature:
-            return sourcePalette.news[600];    
-        default:
-            return sourcePalette.neutral[97];
-    }
-}
+	switch (design) {
+		case ArticleDesign.Feature:
+			return sourcePalette.news[600];
+		default:
+			return sourcePalette.neutral[97];
+	}
+};
 
 const headlineBackgroundColourLight = ({ design }: ArticleFormat): string => {
-    switch (design) {
-        case ArticleDesign.LiveBlog:
-            return sourcePalette.news[400];
-        default:
-            return sourcePalette.neutral[100];
-    }
-}
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.news[400];
+		default:
+			return sourcePalette.neutral[100];
+	}
+};
 
 const headlineBackgroundColourDark = ({ design }: ArticleFormat): string => {
-    switch (design) {
-        case ArticleDesign.LiveBlog:
-            return sourcePalette.news[200];
-        default:
-            return sourcePalette.neutral[7];
-    }
-}
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return sourcePalette.news[200];
+		default:
+			return sourcePalette.neutral[7];
+	}
+};
 
 // ----- Palette ----- //
 
@@ -57,28 +57,31 @@ type PaletteFunction = (f: ArticleFormat) => string;
  * Used to validate that the palette object always has the correct shape,
  * without changing its type.
  */
-type PaletteColours = Record<CSSCustomProperty, {
-    light: PaletteFunction,
-    dark: PaletteFunction,
-}>;
+type PaletteColours = Record<
+	CSSCustomProperty,
+	{
+		light: PaletteFunction;
+		dark: PaletteFunction;
+	}
+>;
 
 /**
  * Maps palette colour names (which are also CSS custom property names) to
  * a pair of palette functions, which can be used to derive both light and dark
  * mode colours from an {@linkcode ArticleFormat}.
- * 
+ *
  * This is not accessed directly in components; the {@linkcode palette} function
  * is used instead.
  */
 const paletteColours = {
-    '--headline-colour': {
-        light: headlineColourLight,
-        dark: headlineColourDark,
-    },
-    '--headline-background-colour': {
-        light: headlineBackgroundColourLight,
-        dark: headlineBackgroundColourDark,
-    },
+	'--headline-colour': {
+		light: headlineColourLight,
+		dark: headlineColourDark,
+	},
+	'--headline-background-colour': {
+		light: headlineBackgroundColourLight,
+		dark: headlineBackgroundColourDark,
+	},
 } satisfies PaletteColours;
 
 /**
@@ -91,7 +94,7 @@ type ColourName = keyof typeof paletteColours;
  * Looks up a palette colour by name. Retrieves a CSS value for the specified
  * colour, for use in CSS declarations. See the examples for how this is
  * commonly used with our Emotion-based styles.
- * 
+ *
  * @param a The name of a palette colour; for example `--headline-colour`.
  * @returns A CSS `var` function call; for example `var(--headline-colour)`.
  * @example
@@ -107,7 +110,7 @@ const palette = (colour: ColourName): string => `var(${colour})`;
  * can be used to set up the palette on any element, and then retrieved to apply
  * styles via the {@linkcode palette} function. See the examples for ways the
  * palette could be set up.
- * 
+ *
  * @param format The `ArticleFormat` of the current article.
  * @param colourScheme Get declarations for either `light` or `dark` mode.
  * @returns A set of CSS custom property declarations for palette colours,
@@ -121,7 +124,7 @@ const palette = (colour: ColourName): string => `var(${colour})`;
  *   :root {
  *     ${paletteDeclarations(format, 'light').join('\n')}
  *   }
- * 
+ *
  *   (@)media (prefers-color-scheme: dark) {
  *     :root {
  *       ${paletteDeclarations(format, 'dark').join('\n')}
@@ -142,7 +145,7 @@ const palette = (colour: ColourName): string => `var(${colour})`;
  *     ${paletteDeclarations(format, 'dark').join('\n')}
  *   }
  * `;
- * 
+ *
  * const stylesheets = (
  *   <>
  *     <link
@@ -158,14 +161,15 @@ const palette = (colour: ColourName): string => `var(${colour})`;
  *   </>
  * );
  */
-const paletteDeclarations = (format: ArticleFormat, colourScheme: 'light' | 'dark'): string[] =>
-    Object.entries(paletteColours).map(([colourName, colour]) =>
-        `${colourName}: ${colour[colourScheme](format)};`,
-    );
+const paletteDeclarations = (
+	format: ArticleFormat,
+	colourScheme: 'light' | 'dark',
+): string[] =>
+	Object.entries(paletteColours).map(
+		([colourName, colour]) =>
+			`${colourName}: ${colour[colourScheme](format)};`,
+	);
 
 // ----- Exports ----- //
 
-export {
-    palette,
-    paletteDeclarations,
-}
+export { palette, paletteDeclarations };
