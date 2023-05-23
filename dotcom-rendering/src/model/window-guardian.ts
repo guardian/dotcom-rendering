@@ -60,6 +60,7 @@ export const makeWindowGuardian = ({
 	contentType,
 	brazeApiKey,
 	GAData,
+	hasInlineMerchandise,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -80,6 +81,7 @@ export const makeWindowGuardian = ({
 	contentType?: string;
 	brazeApiKey?: string;
 	GAData?: GADataType;
+	hasInlineMerchandise?: boolean;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -130,6 +132,7 @@ export const makeWindowGuardian = ({
 				shouldHideReaderRevenue: !!shouldHideReaderRevenue,
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
+				hasInlineMerchandise,
 			}),
 			libs: {
 				googletag: googletagUrl,
