@@ -42,18 +42,10 @@ const topicStyles = css`
 `;
 
 const getTopicLink = (isActive: boolean, topics: string, id: Props['id']) => {
-	const urlParams = isActive
-		? // if active, the button links to the the page without the params
-		  ''
-		: // we only add the link if the topic is *inactive*
-		  '?' +
-		  new URLSearchParams({
-				topics,
-		  }).toString();
-
-	return `${urlParams}#${id}`;
+	// If active, remove the search params
+	const urlParams = new URLSearchParams(isActive ? {} : { topics });
+	return `?${urlParams.toString()}#${id}`;
 };
-
 const getKeyEventLink = (filterKeyEvents: boolean, id: Props['id']) => {
 	const urlParams = new URLSearchParams({
 		filterKeyEvents: filterKeyEvents ? 'false' : 'true',
