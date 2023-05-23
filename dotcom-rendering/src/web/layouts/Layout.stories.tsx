@@ -23,12 +23,12 @@ import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import type { FEArticleType } from '../../types/frontend';
 import type { RenderingTarget } from '../../types/renderingTarget';
-import { extractArticleNav } from '../../web/server/articleToHtml';
 import { embedIframe } from '../browser/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
+import { extractArticleNav } from '../server/articleToHtml';
 import { DecideLayout } from './DecideLayout';
 
 const Fixtures: { [key: string]: FEArticleType } = {

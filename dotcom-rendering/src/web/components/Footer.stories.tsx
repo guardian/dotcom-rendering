@@ -7,8 +7,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
-import { extractArticleNav } from '../../web/server/articleToHtml';
 import { editionList } from '../lib/edition';
+import { extractArticleNav } from '../server/articleToHtml';
 import { Footer } from './Footer';
 import { Section } from './Section';
 
