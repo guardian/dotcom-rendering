@@ -26,7 +26,6 @@ import type { FEElement } from '../types/content';
 import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
-import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
 	article: FEArticleType;
@@ -204,10 +203,7 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const { webURL, canonicalUrl } = article;
-
-	const recipeMarkup =
-		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
+	const { canonicalUrl } = article;
 
 	return htmlPageTemplate({
 		linkedData,
@@ -225,7 +221,6 @@ window.twttr = (function(d, s, id) {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
-		recipeMarkup,
 		offerHttp3,
 		canonicalUrl,
 		renderingTarget: 'Web',
