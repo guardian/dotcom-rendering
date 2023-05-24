@@ -20,8 +20,7 @@ const linkStyles = css`
 `;
 
 const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
-	${containerOverrides &&
-	containerOverrides.text &&
+	${containerOverrides?.text &&
 	`color: ${containerOverrides.text.cardHeadline}`}
 `;
 
