@@ -42,7 +42,7 @@ const topicStyles = css`
 `;
 
 const getTopicLink = (isActive: boolean, topics: string, id: Props['id']) => {
-	// If active, remove the search params
+	// If active, remove the search params. Otherwise use them.
 	const urlParams = new URLSearchParams(isActive ? {} : { topics });
 	return `?${urlParams.toString()}#${id}`;
 };
