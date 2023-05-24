@@ -16,6 +16,8 @@ jobs:
     services:
       DCR:
         image: ${{ inputs.container-image }}
+        ports:
+          - 9000:9000
     steps:
       - name: Checkout
         uses: actions/checkout@v3
