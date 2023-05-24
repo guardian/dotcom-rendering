@@ -161,7 +161,7 @@
 		"babel-plugin-transform-runtime": "6.23.0",
 		"body-parser": "1.20.1",
 		"browserslist": "4.21.5",
-		"chalk": "4.1.2",
+		"chalk": "5.2.0",
 		"compression": "1.7.4",
 		"constructs": "10.1.246",
 		"cpy": "8.1.2",
