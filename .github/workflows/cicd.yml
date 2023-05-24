@@ -8,6 +8,8 @@ on:
 
 jobs:
   container:
+    permissions:
+      packages: write
     uses: ./.github/workflows/container.yml
 
   cypress:
