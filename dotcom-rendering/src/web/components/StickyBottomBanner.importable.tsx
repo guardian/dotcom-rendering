@@ -3,10 +3,10 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../../lib/articleCount';
 import { getArticleCounts } from '../../lib/articleCount';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import type { TagType } from '../../types/tag';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getLocaleCode } from '../lib/getCountryCode';
@@ -229,7 +229,9 @@ export const StickyBottomBanner = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const asyncCountryCode = getLocaleCode();
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('Stickybottombanner - isSignedIn:');
+	console.log(isSignedIn);
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();

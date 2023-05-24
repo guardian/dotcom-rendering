@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
-import { getCookie } from '@guardian/libs';
+// import { getCookie } from '@guardian/libs';
 import { brand, from, space } from '@guardian/source-foundations';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
@@ -69,10 +70,12 @@ export const HeaderTopBar = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
-	const isServer = typeof window === 'undefined';
-	const isSignedIn =
-		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
+	// const isServer = typeof window === 'undefined';
+	// const isSignedIn =
+	// 	!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('headertopbar');
+	console.log(isSignedIn);
 	return (
 		<div
 			css={css`

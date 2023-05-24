@@ -6,6 +6,7 @@ import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../../lib/articleCount';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import type { TagType } from '../../types/tag';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {
@@ -104,7 +105,9 @@ export const SlotBodyEnd = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('slotbodyend -  - isSignedIn:');
+	console.log(isSignedIn);
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,

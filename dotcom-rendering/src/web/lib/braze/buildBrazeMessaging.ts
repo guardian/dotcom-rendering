@@ -9,7 +9,8 @@ import {
 	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { getCookie, log, storage } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
+import { CheckUserSignInStatus } from '../../../lib/identity';
 import { initPerf } from '../../browser/initPerf';
 import { record } from '../../browser/ophan/ophan';
 import {
@@ -64,7 +65,10 @@ export const buildBrazeMessaging = async (
 		};
 	}
 
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('liveblog');
+	console.log(isSignedIn);
 
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,

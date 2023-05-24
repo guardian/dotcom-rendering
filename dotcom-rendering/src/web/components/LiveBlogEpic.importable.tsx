@@ -7,6 +7,7 @@ import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotco
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useArticleCounts } from '../../lib/articleCount';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import type { TagType } from '../../types/tag';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import {
@@ -104,7 +105,10 @@ const usePayload = ({
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = CheckUserSignInStatus();
+	console.log('liveblog');
+	console.log(isSignedIn);
 
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;

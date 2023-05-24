@@ -18,6 +18,7 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
+import { CheckUserSignInStatus } from '../../lib/identity';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
 import type { OphanRecordFunction } from '../browser/ophan/ophan';
 import {
@@ -176,7 +177,10 @@ const ReaderRevenueLinksRemote = ({
 	useOnce((): void => {
 		setAutomat();
 
-		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+		// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+		const isSignedIn = CheckUserSignInStatus();
+		console.log('supporttheg');
+		console.log(isSignedIn);
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
