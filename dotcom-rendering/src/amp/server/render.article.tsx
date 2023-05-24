@@ -19,7 +19,7 @@ interface Metadata {
 	canonicalURL: string;
 }
 
-export const document = ({
+export const renderArticle = ({
 	linkedData,
 	title,
 	body,
