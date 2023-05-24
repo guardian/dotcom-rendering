@@ -103,6 +103,44 @@ export const FiveCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
+export const SixCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
+	if (
+		!trails[0] ||
+		!trails[1] ||
+		!trails[2] ||
+		!trails[3] ||
+		!trails[4] ||
+		!trails[5]
+	)
+		return <></>;
+
+	return (
+		<>
+			<UL direction="row" padBottom={true}>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[0]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[1]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[2]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[3]} showAge={true} />
+				</LI>
+			</UL>
+			<UL direction="row">
+				<LI percentage="50%" padSides={true}>
+					<CardDefault trail={trails[4]} showAge={true} />
+				</LI>
+				<LI percentage="50%" padSides={true}>
+					<CardDefault trail={trails[5]} showAge={true} />
+				</LI>
+			</UL>
+		</>
+	);
+};
 export const SevenCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	if (
 		!trails[0] ||
@@ -209,7 +247,8 @@ export const DecideContainerByTrails = ({ trails }: Props) => {
 			return <FourCardFast trails={trails} />;
 		case 5:
 			return <FiveCardFast trails={trails} />;
-		// TODO: 6
+		case 6:
+			return <SixCardFast trails={trails} />;
 		case 7:
 			return <SevenCardFast trails={trails} />;
 		case 8:
