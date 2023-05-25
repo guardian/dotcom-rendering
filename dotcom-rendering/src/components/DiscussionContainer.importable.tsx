@@ -23,11 +23,7 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  */
 
 export const DiscussionContainer = (props: DiscussionProps) => {
-	// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
 	const isSignedIn = CheckUserSignInStatus();
-	console.log('discussioncontainer');
-	console.log(isSignedIn);
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
 
 	return <Discussion {...props} />;

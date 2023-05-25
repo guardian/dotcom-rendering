@@ -65,10 +65,7 @@ export const buildBrazeMessaging = async (
 		};
 	}
 
-	// const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const isSignedIn = CheckUserSignInStatus();
-	console.log('liveblog');
-	console.log(isSignedIn);
 
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,

@@ -24,7 +24,7 @@ const config: OktaAuthOptions = {
 
 const oktaAuthInit = new OktaAuth(config);
 
-async function isLoggedIn(oktaAuth: OktaAuth, authState: AuthState) {
+async function getSignedInStatus(oktaAuth: OktaAuth, authState: AuthState) {
 	console.log('using isLoggedIn function');
 	if (ifSignedOutClearTokens(oktaAuth)) {
 		console.log('signed out and cleared tokens');
@@ -89,7 +89,7 @@ const useOktaAuth = (): OktaAuthContextType => {
 			};
 		}
 		oktaAuthState().catch(() => {
-			console.log('error in oktaAuthState');
+			console.error('error in oktaAuthState');
 		});
 	}, [oktaAuth, authState]);
 	return { oktaAuth, authState };
@@ -104,15 +104,15 @@ export const CheckUserSignInStatus = (): boolean => {
 	useEffect(() => {
 		(async () => {
 			if (authState) {
-				setIsSignedIn(await isLoggedIn(oktaAuth, authState));
+				setIsSignedIn(await getSignedInStatus(oktaAuth, authState));
 			}
 		})().catch(() => {
-			console.log('error in oktaAuthState');
+			console.error('error in oktaAuthState');
 		});
 	}, [authState, oktaAuth]);
 
 	console.log('CheckUserSignInStatus');
 	console.log(isSignedIn);
 
-	return isSignedIn ? true : false;
+	return isSignedIn;
 };
