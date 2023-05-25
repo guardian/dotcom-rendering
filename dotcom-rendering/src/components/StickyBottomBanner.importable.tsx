@@ -3,7 +3,6 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getArticleCounts } from '../lib/articleCount';

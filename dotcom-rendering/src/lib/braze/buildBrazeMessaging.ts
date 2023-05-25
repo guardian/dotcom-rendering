@@ -9,7 +9,7 @@ import {
 	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { getCookie, log, storage } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import { CheckUserSignInStatus } from '../../../lib/identity';
 import { initPerf } from '../../client/initPerf';
 import { record } from '../../client/ophan/ophan';

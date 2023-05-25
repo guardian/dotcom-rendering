@@ -1,4 +1,3 @@
-import { getCookie } from '@guardian/libs';
 import { CheckUserSignInStatus } from '../../lib/identity';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
