@@ -10,7 +10,6 @@
 	"scripts": {
 		"upload": "node-riffraff-artifact",
 		"copy-manifest": "cp dist/assets/manifest.json dist/server/manifest.json",
-		"copy-fonts": "cp -R assets/fonts dist/assets/fonts",
 		"test": "jest --config config/jest.config.js --verbose",
 		"test:coverage": "yarn test; open coverage/index.html",
 		"test:watch": "jest --config config/jest.config.js --watch",

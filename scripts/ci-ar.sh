@@ -40,7 +40,6 @@ else
     yarn build:client:prod
     yarn build:server:prod
     yarn copy-manifest
-    yarn copy-fonts
 	yarn synth
     yarn upload
 fi
