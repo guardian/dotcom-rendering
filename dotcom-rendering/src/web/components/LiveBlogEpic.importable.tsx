@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useArticleCounts } from '../../lib/articleCount';
 import type { TagType } from '../../types/tag';
-import { submitComponentEvent } from '../browser/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
