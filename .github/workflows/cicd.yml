@@ -15,6 +15,9 @@ jobs:
   prettier:
     uses: ./.github/workflows/prettier.yml
 
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   cypress:
     needs: [container]
     uses: ./.github/workflows/cypress.yml
