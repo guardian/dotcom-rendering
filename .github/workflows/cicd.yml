@@ -32,3 +32,9 @@ jobs:
     uses: ./.github/workflows/amp.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
+
+  publish:
+    needs: [container, prettier, jest, lint, cypress, amp]
+    uses: ./.github/workflows/publish.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
