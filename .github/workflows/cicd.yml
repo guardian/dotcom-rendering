@@ -12,6 +12,9 @@ jobs:
       packages: write
     uses: ./.github/workflows/container.yml
 
+  jest:
+    uses: ./.github/workflows/jest.yml
+
   lint:
     uses: ./.github/workflows/lint.yml
 
