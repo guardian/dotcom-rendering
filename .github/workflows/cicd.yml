@@ -17,3 +17,9 @@ jobs:
     uses: ./.github/workflows/cypress.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
+
+  amp:
+    needs: [container]
+    uses: ./.github/workflows/amp.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
