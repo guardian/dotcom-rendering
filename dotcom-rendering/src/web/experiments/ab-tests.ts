@@ -5,6 +5,7 @@ import { consentlessAds } from './tests/consentless-ads';
 import { elementsManager } from './tests/elements-manager';
 import { integrateIma } from './tests/integrate-ima';
 import { limitInlineMerch } from './tests/limit-inline-merch';
+import { removeBusinessLiveblogEpics } from './tests/remove-business-liveblog-epics';
 import { signInGateCopyTestJan2023 } from './tests/sign-in-gate-copy-test-variants';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	billboardsInMerch,
 	elementsManager,
 	limitInlineMerch,
+	removeBusinessLiveblogEpics,
 ];
