@@ -15,11 +15,20 @@ jobs:
   prettier:
     uses: ./.github/workflows/prettier.yml
 
+  jest:
+    uses: ./.github/workflows/jest.yml
+
   lint:
     uses: ./.github/workflows/lint.yml
 
   cypress:
     needs: [container]
     uses: ./.github/workflows/cypress.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+
+  amp:
+    needs: [container]
+    uses: ./.github/workflows/amp.yml
     with:
       container-image: ${{ needs.container.outputs.container-image }}
