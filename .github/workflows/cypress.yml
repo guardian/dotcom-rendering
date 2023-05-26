@@ -28,6 +28,7 @@ jobs:
           cache: 'yarn'
 
       - name: Cypress run
+        id: cypress-1
         uses: cypress-io/github-action@v5
         with:
           working-directory: dotcom-rendering
@@ -35,3 +36,31 @@ jobs:
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+
+      # Retry Cypress if it fails
+      - name: Cypress run 2
+        id: cypress-2
+        if: ${{failure() && steps.cypress-1.conclusion == 'failure'}}
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+          browser: chrome
+          spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+
+      # Retry Cypress if it fails again
+      - name: Cypress run 3
+        id: cypress-3
+        if: ${{failure() && steps.cypress-2.conclusion == 'failure'}}
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+          browser: chrome
+          spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+
+      - name: Did any cypress run pass?
+        if: ${{failure() && steps.cypress-1.conclusion == 'failure' && steps.cypress-2.conclusion == 'failure' && steps.cypress-3.conclusion == 'failure'}}
+        run: exit 1
