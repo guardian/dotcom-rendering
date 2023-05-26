@@ -15,6 +15,9 @@ jobs:
   jest:
     uses: ./.github/workflows/jest.yml
 
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   cypress:
     needs: [container]
     uses: ./.github/workflows/cypress.yml
