@@ -3,6 +3,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import 'regenerator-runtime/runtime';
+
 import { css } from '@emotion/react';
 import {
 	Button,
@@ -10,12 +12,14 @@ import {
 	SvgChevronRightSingle,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import SpeechRecognition, {
+	useSpeechRecognition,
+} from 'react-speech-recognition';
 import { recipeData } from './recipes_table_export';
 
 // const recipeData = {};
-
-declare const SpeechRecognition: any;
 
 // This doesn't work in anything other than chrome
 
@@ -172,27 +176,80 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 	const steps = recipe?.steps;
 	const recipeTitle = recipe?.recipes_title;
 
-	const onKeyDown = (event: KeyboardEvent) => {
-		if (showReader) {
-			if (event.key === 'ArrowRight') {
-				handleNext();
-			} else if (event.key === 'ArrowLeft') {
-				handleBack();
-			} else if (event.key === 'Escape') {
-				handleCloseDialog();
-			}
+	const commands = [
+		{
+			command: ['next step', 'forward'],
+			callback: () => stepForward(),
+			isFuzzyMatch: true,
+		},
+		{
+			command: ['previous step', 'step back', 'back', 'go back'],
+			callback: () => stepBackward(),
+			isFuzzyMatch: true,
+		},
+		{
+			command: ['show ingredients', 'show recipe', 'open recipe'],
+			callback: () => setShowIngredients(true),
+			isFuzzyMatch: true,
+		},
+		{
+			command: ['hide ingredients', 'hide recipe', 'close recipe'],
+			callback: () => setShowIngredients(false),
+			isFuzzyMatch: true,
+		},
+		{
+			command: [
+				'close',
+				'close recipe',
+				'close reader',
+				'exit',
+				'finish',
+			],
+			callback: () => handleCloseDialog(),
+			isFuzzyMatch: true,
+		},
+	];
+
+	const { browserSupportsSpeechRecognition, transcript } =
+		useSpeechRecognition({ commands });
+	const stepForward = () => {
+		if (!isLastStep()) {
+			setActiveStep((prev) => prev + 1);
 		}
 	};
 
+	const stepBackward = () => {
+		setActiveStep((prev) => (prev > 0 ? prev - 1 : 0));
+	};
+
+	const keyPressHandler = useCallback(({ key }: KeyboardEvent) => {
+		switch (key) {
+			case 'ArrowUp':
+			case 'ArrowRight':
+				stepForward();
+				break;
+			case 'ArrowDown':
+			case 'ArrowLeft':
+				stepBackward();
+				break;
+			case 'Escape':
+				setShowReader(false);
+				break;
+			default:
+				break;
+		}
+	}, []);
+
 	useEffect(() => {
-		window.addEventListener('keydown', onKeyDown);
 		if (showReader) {
-			startSpeechRecognition();
+			SpeechRecognition.startListening({ continuous: true });
+			window.addEventListener('keydown', keyPressHandler);
 		}
 		return () => {
-			window.removeEventListener('keydown', onKeyDown);
+			SpeechRecognition.stopListening();
+			window.removeEventListener('keydown', keyPressHandler);
 		};
-	});
+	}, [keyPressHandler, showReader]);
 
 	const ingredients = recipe?.ingredients_lists[0].ingredients;
 	const ingredientKeywords = ingredients.map(
@@ -234,26 +291,13 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		return null;
 	}
 
-	const handleNext = () => {
-		const update = activeStep + 1;
-		if (!isLastStep()) {
-			setActiveStep(update);
-		}
-	};
-
-	const handleBack = () => {
-		if (activeStep !== 0) {
-			setActiveStep(activeStep - 1);
-		}
-	};
-
 	const handleButtonClick = () => {
 		setShowReader(true);
-		startSpeechRecognition();
 	};
 
 	const handleCloseDialog = () => {
 		setShowReader(false);
+		SpeechRecognition.stopListening();
 	};
 
 	const handleShowIngredients = () => {
@@ -263,53 +307,13 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 		setShowIngredients(false);
 	};
 
-	const startSpeechRecognition = () => {
-		window.SpeechRecognition =
-			window.SpeechRecognition || window.webkitSpeechRecognition;
-		// Creating new instance
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		const recognition = new SpeechRecognition();
-		recognition.lang = 'en-GB';
-		recognition.continuous = true;
-
-		recognition.onresult = (event: any) => {
-			const transcript =
-				event.results[
-					event.results.length - 1
-				][0].transcript.toLowerCase();
-
-			if (transcript.includes('next')) {
-				handleNext();
-			} else if (
-				transcript.includes('back') ||
-				transcript.includes('last') ||
-				transcript.includes('previous')
-			) {
-				handleBack();
-			} else if (
-				transcript.includes('close') ||
-				transcript.includes('exit') ||
-				transcript.includes('finish')
-			) {
-				handleCloseDialog();
-			} else if (transcript.includes('show')) {
-				handleShowIngredients();
-			} else if (transcript.includes('hide')) {
-				handleHideIngredients();
-			}
-		};
-
-		recognition.onerror = (event: any) => {
-			console.error('Speech recognition error:', event);
-		};
-
-		// Start speech recognition
-		recognition.start();
-	};
-
 	const isFirstStep = () => activeStep === 0;
 	const isLastStep = () => activeStep === steps.length - 1;
 
+	if (!browserSupportsSpeechRecognition) {
+		return <span>Browser doesn't support speech recognition.</span>;
+	}
+	console.log('transcript', transcript);
 	return (
 		<div css={containerStyles}>
 			<Button
@@ -391,7 +395,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 						<ModalFooter>
 							{!isFirstStep() && (
 								<Button
-									onClick={handleBack}
+									onClick={stepBackward}
 									priority="tertiary"
 									css={{ marginRight: 'auto' }}
 									icon={<SvgChevronLeftSingle />}
@@ -403,7 +407,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 							)}
 							{!isLastStep() && (
 								<Button
-									onClick={handleNext}
+									onClick={stepForward}
 									priority="tertiary"
 									css={{ marginLeft: 'auto' }}
 									icon={<SvgChevronRightSingle />}
