@@ -12,6 +12,9 @@ jobs:
       packages: write
     uses: ./.github/workflows/container.yml
 
+  lint:
+    uses: ./.github/workflows/lint.yml
+
   cypress:
     needs: [container]
     uses: ./.github/workflows/cypress.yml
