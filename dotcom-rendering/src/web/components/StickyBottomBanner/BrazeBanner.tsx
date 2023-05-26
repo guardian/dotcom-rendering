@@ -6,7 +6,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { useEffect, useState } from 'react';
 import type { TagType } from '../../../types/tag';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { getZIndex } from '../../lib/getZIndex';

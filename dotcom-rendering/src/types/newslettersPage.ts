@@ -11,7 +11,7 @@ type FENewslettersConfigType = {
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
-	dcrSentryDsn: string; // used in dotcom-rendering/src/web/browser/sentryLoader/sentry.ts
+	dcrSentryDsn: string; // used in dotcom-rendering/src/web/client/sentryLoader/sentry.ts
 	switches: Switches;
 	abTests: ServerSideTests;
 	dfpAccountId: string;
