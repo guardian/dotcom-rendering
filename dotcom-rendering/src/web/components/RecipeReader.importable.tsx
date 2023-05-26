@@ -24,13 +24,13 @@ import {
 } from './ChefModeElements';
 import { recipeData } from './recipes_table_export';
 
-// const recipeData = {};
+// This doesn't work in anything other than chrome - transcription working in Safari but not commands
 
-// This doesn't work in anything other than chrome
-
-// ***** TO DO ******
-// 5. Add a button to start voice recognition instead of doing it on dialog open - more transparent
-// 6. Use a feature specific flag (or no flag because this is a hack)
+// TODO
+// 1. Add a button to start voice recognition instead of doing it on dialog open - more transparent
+// 2. Use a feature specific flag (or no flag because this is a hack)
+// 3. Add support for multiple recipes on a page
+// 3. Extract speech recognition into a module, so we can swap out the implementation without changing the component
 
 interface RecipeReaderProps {
 	pageId: string;
@@ -207,7 +207,7 @@ export const RecipeReader = ({ pageId }: RecipeReaderProps) => {
 			default:
 				break;
 		}
-	}, []); //todo - WTAF is this
+	}, []); //todo - WTAF is going on here
 
 	useEffect(() => {
 		if (showReader) {
