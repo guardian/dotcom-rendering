@@ -4,11 +4,11 @@ FROM node:18.17.0-alpine
 
 WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
 
-COPY ./dotcom-rendering/dist /opt/app/dotcom-rendering/dotcom-rendering/dist
+COPY ./dotcom-rendering/target /opt/app/dotcom-rendering/dotcom-rendering
 
 EXPOSE 9000
 
 ENV DISABLE_LOGGING_AND_METRICS=true
 ENV NODE_ENV=production
 
-ENTRYPOINT ["node", "dist/server.js"]
+ENTRYPOINT ["node", "rendering/dist/server.js"]

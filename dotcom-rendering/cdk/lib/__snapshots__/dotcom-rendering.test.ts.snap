@@ -1102,8 +1102,8 @@ groupadd frontend
 useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
 usermod -a -G frontend aws-kinesis-agent-user
 cd /home/dotcom-rendering
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.zip ./
-unzip -q rendering.zip -d rendering
+aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.tar.gz ./
+tar -zxf rendering.tar.gz rendering
 chown -R dotcom-rendering:frontend rendering
 cd rendering
 export TERM=xterm-256color

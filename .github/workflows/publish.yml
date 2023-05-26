@@ -1,0 +1,53 @@
+on:
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
+
+permissions:
+  # Allow GitHub to request an OIDC JWT ID token, for exchange with `aws-actions/configure-aws-credentials`
+  # See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#updating-your-github-actions-workflow
+  id-token: write
+
+jobs:
+  riffraff:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.container-image }}
+
+    steps:
+      # for some reason the ${{ github.workspace }} does not point to the correct workspace folder,
+      # we hardcode the /__w/dotcom-rendering/dotcom-rendering path to fix that.
+      - name: Move container files into GHA Workspace
+        run: mkdir -p ${{ github.workspace }} && mv /opt/app/dotcom-rendering/dotcom-rendering/*  /__w/dotcom-rendering/dotcom-rendering
+      # We want to avoid uploading the uncompressed files to our riffraff bucket
+      # so we create our tarball outside the rendering/ folder, then delete the contents of rendering/
+      # and finally move the tarball into rendering
+      - name: Compress DCR server files
+        run: tar -zcf rendering.tar.gz rendering
+      - name: Remove uncompressed DCR server files from rendering/
+        run: rm -r rendering/*
+      - name: Move compressed DCR server files to rendering/
+        run: mv rendering.tar.gz rendering/
+
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
+
+      # Absolutely do not uncomment until TC has been disabled - we don't want conflicting build numbers!
+      # - uses: guardian/actions-riff-raff@v2
+      #   with:
+      #     projectName: dotcom:rendering
+      #     configPath: riff-raff.yaml
+      #     buildNumberOffset: TODO - Last TC build number here!
+      #     contentDirectories: |
+      #       frontend-cfn:
+      #         - frontend-cfn
+      #       rendering:
+      #         - rendering
+      #       frontend-static:
+      #         - frontend-static
+
