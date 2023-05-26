@@ -46,6 +46,7 @@ const marginTop = css`
 
 const immersiveMargins = css`
 	max-width: 400px;
+	min-width: 100px;
 	margin-bottom: 4px;
 	/*
         Make sure we vertically align the title font with the body font
