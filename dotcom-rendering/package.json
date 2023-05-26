@@ -218,7 +218,7 @@
 		"ophan-tracker-js": "1.4.0",
 		"parse5": "7.1.2",
 		"pm2": "5.0.0",
-		"preact": "10.13.2",
+		"preact": "10.15.0",
 		"preact-render-to-string": "6.0.2",
 		"prettier-eslint": "15.0.1",
 		"pretty-bytes": "6.1.0",
