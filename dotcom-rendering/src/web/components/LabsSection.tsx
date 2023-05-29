@@ -286,7 +286,6 @@ export const LabsSection = ({
 	children,
 }: Props) => {
 	const overrides = decideContainerOverrides(containerPalette);
-	console.log({ overrides });
 
 	return (
 		<Section
