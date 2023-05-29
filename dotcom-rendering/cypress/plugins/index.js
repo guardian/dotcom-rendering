@@ -20,7 +20,7 @@ module.exports = (on, config) => {
 	};
 	const rules = webpackConfig.webpackOptions.module.rules;
 	rules[0].exclude =
-		require('../../scripts/webpack/webpack.config.browser').babelExclude;
+		require('../../scripts/webpack/webpack.config.client').babelExclude;
 
 	// Adding this here so that we can import the fixture in the sign-in-gate.cy.js file
 	rules.push({

@@ -109,9 +109,9 @@ cypress-open: clear clean-dist install build
 	$(call log, "starting frontend PROD server and opening Cypress")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --e2e --browser electron'
 
-ampValidation: clean-dist install build
-	$(call log, "starting frontend PROD server for AMP Validation")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+ampValidation: clean-dist install
+	$(call log, "starting AMP Validation test")
+	@node scripts/test/amp-validation.js
 
 buildCheck:
 	$(call log, "checking build files")
@@ -125,7 +125,7 @@ tsc: clean-dist install
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
-	@yarn lint --fix
+	@yarn lint:fix
 	@yarn prettier:fix
 
 snapshot: clear clean-dist install

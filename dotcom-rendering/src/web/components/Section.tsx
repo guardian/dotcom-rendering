@@ -75,7 +75,7 @@ type Props = {
 	 * 🛠️ DEBUG ONLY 🛠️
 	 * Used to highlight the name of a container when DCR debug mode is enabled
 	 *
-	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md
+	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/client/debug/README.md
 	 */
 	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */

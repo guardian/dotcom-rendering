@@ -1,14 +1,19 @@
-name: DCR AMP Validation
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-            - "dotcom-rendering/docs/**"
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
 
 jobs:
-    amp_validation:
-        name: DCR AMP Validation
+    validate:
         runs-on: ubuntu-latest
+        services:
+          DCR:
+            image: ${{ inputs.container-image }}
+            ports:
+              - 9000:9000
         steps:
             - name: Checkout code
               uses: actions/checkout@v3

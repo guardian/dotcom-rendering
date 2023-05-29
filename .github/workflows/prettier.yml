@@ -1,12 +1,8 @@
-name: DCR prettier 💅
 on:
-  push:
-    paths-ignore:
-      - 'apps-rendering/**'
+  workflow_call:
 
 jobs:
-  lint:
-    name: DCR Prettier
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
