@@ -31,10 +31,10 @@ const Position = ({
 			css={css`
 				/* Decide where the content revealed by details appears */
 				position: absolute;
-				top: ${top != null && `${top}px`};
-				left: ${left != null && `${left}px`};
-				right: ${right != null && `${right}px`};
-				bottom: ${bottom != null && `${bottom}px`};
+				${top != undefined && `top: ${top}px`};
+				${left != undefined && `left: ${left}px`};
+				${right != undefined && `right: ${right}px`};
+				${bottom != undefined && `bottom: ${bottom}px`};
 				${getZIndex('summaryDetails')}
 			`}
 		>
@@ -53,32 +53,33 @@ const Position = ({
  */
 export const Details = ({
 	label,
-	children,
 	colour,
 	top,
 	right,
 	bottom,
 	left,
+	children,
 }: {
 	label: string;
-	children: React.ReactNode;
 	colour?: string;
 	top?: number;
 	right?: number;
 	bottom?: number;
 	left?: number;
+	children: React.ReactNode;
 }) => (
 	<details
 		css={css`
 			/* Hide up icon when the disclosure is closed */
-			[data-icon='chevronDown'] {
-				display: inline;
-			}
 			[data-icon='chevronUp'] {
 				display: none;
 			}
+			[data-icon='chevronDown'] {
+				display: inline;
+			}
+
+			/* Hide down icon when the disclosure is open */
 			:is([open]) {
-				/* Hide down icon when the disclosure is open */
 				[data-icon='chevronDown'] {
 					display: none;
 				}
@@ -93,7 +94,7 @@ export const Details = ({
 		<summary
 			css={[
 				css`
-					/* Don't show the default summary triangle */
+					/* Hide the default summary triangle */
 					list-style: none;
 					::-webkit-details-marker {
 						display: none;
