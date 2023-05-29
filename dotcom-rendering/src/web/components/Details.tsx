@@ -94,7 +94,10 @@ export const Details = ({
 		<summary
 			css={[
 				css`
-					/* Hide the default summary triangle */
+					/**
+					 * Hide the default summary triangle.
+					 * See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary#default_style
+					 */
 					list-style: none;
 					::-webkit-details-marker {
 						display: none;
