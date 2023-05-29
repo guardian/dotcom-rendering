@@ -348,7 +348,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.isLabs) {
+					if (
+						collection.containerPalette === 'Branded' &&
+						renderAds
+					) {
 						const getGuardianLabsTrails = (
 							trails: DCRFrontCard[],
 							badge?: BadgeType,
@@ -362,55 +365,35 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						};
 
 						return (
-							<>
-								<LabsSection
-									title={collection.displayName}
-									innerBackgroundColour={neutral[93]}
-									showTopBorder={false}
-									padSides={false}
-									padContent={false}
-									url={collection.href}
-									ophanComponentLink={ophanComponentLink}
-									ophanComponentName={ophanName}
-									containerName={collection.collectionType}
+							<LabsSection
+								title={collection.displayName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
+								ajaxUrl={front.config.ajaxUrl}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								containerPalette={collection.containerPalette}
+								canShowMore={collection.canShowMore}
+								url={collection.href}
+								badge={collection.badge}
+								data-print-layout="hide"
+							>
+								<DecideContainer
+									trails={getGuardianLabsTrails(
+										trails,
+										collection.badge,
+									)}
+									index={index}
+									groupedTrails={collection.grouped}
+									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
 									}
-									sectionId={ophanName}
-									showDateHeader={
-										collection.config.showDateHeader
-									}
-									editionId={front.editionId}
-									treats={collection.treats}
-									data-print-layout="hide"
-									badge={collection.badge}
-								>
-									<DecideContainer
-										trails={getGuardianLabsTrails(
-											trails,
-											collection.badge,
-										)}
-										index={index}
-										groupedTrails={collection.grouped}
-										containerType={
-											collection.collectionType
-										}
-										containerPalette={
-											collection.containerPalette
-										}
-										renderAds={false}
-									/>
-								</LabsSection>
-								{decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
-							</>
+									renderAds={false}
+								/>
+							</LabsSection>
 						);
 					}
 

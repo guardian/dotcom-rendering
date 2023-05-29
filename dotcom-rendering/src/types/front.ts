@@ -343,13 +343,6 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	/** Indicates whether we should render a Guardian Labs collection.
-	 *
-	 *  This overrides collectionType because we must take into account all the cards in a collection
-	 *  before deciding if we can render a Guardian Labs container.
-	 *
-	 * */
-	isLabs?: boolean;
 	badge?: BadgeType;
 };
 

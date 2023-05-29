@@ -45,15 +45,16 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const containerPalette = decideContainerPalette(
-			collection.config.metadata?.map((meta) => meta.type),
-		);
 		const allBranding = getBrandingFromCards(
-			[...collection.curated, ...collection.curated],
+			[...collection.curated, ...collection.backfill],
 			editionId,
 		);
 		const allCardsHaveBranding = allCardsHaveSponsors(allBranding);
-		const isLabs = containerPalette === 'Branded' && allCardsHaveBranding;
+		const containerPalette = decideContainerPalette(
+			collection.config.metadata?.map((meta) => meta.type),
+			allCardsHaveBranding,
+		);
+
 		return {
 			id,
 			displayName,
@@ -64,7 +65,6 @@ export const enhanceCollections = (
 			collectionType,
 			href,
 			containerPalette,
-			isLabs,
 			badge: decideBadge(
 				displayName,
 				// allCardsHaveBranding is ensuring the correct type here

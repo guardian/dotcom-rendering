@@ -12,6 +12,7 @@ const {
 	specialReport,
 	specialReportAlt,
 	sport,
+	labs,
 } = palette;
 
 const textCardHeadline = (
@@ -41,6 +42,24 @@ const textCardHeadline = (
 
 const textCardStandfirst = textCardHeadline;
 const textCardFooter = textCardHeadline;
+
+const textContainerFooter = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[46];
+	}
+};
+
+const backgroundContainerLeftColumn = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[400];
+	}
+};
 
 const textCardKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
@@ -269,7 +288,9 @@ const textContainerToggle = (
 	}
 };
 
-const borderContainer = (containerPalette: DCRContainerPalette): string => {
+const borderContainer = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return transparentColour(neutral[60], 0.4);
@@ -289,16 +310,12 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[86];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[60], 0.3);
-		case 'Branded':
-			return neutral[86];
 	}
 };
 
 const borderLines = textCardHeadline;
 
-const backgroundContainer = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
-): string => {
+const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return specialReport[700];
@@ -318,6 +335,8 @@ const backgroundContainer = (
 			return culture[800];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[800];
+		case 'Branded':
+			return neutral[93];
 	}
 };
 
@@ -363,9 +382,12 @@ export const decideContainerOverrides = (
 		return {
 			text: {
 				container: textContainer(containerPalette),
+				containerFooter: textContainerFooter(containerPalette),
 			},
-			border: {
-				container: borderContainer(containerPalette),
+			background: {
+				container: backgroundContainer(containerPalette),
+				containerLeftColumn:
+					backgroundContainerLeftColumn(containerPalette),
 			},
 		};
 	}

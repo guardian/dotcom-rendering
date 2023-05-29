@@ -151,7 +151,7 @@ export type Palette = {
 };
 
 export type ContainerOverrides = {
-	text: {
+	text?: {
 		cardHeadline?: Colour;
 		cardStandfirst?: Colour;
 		cardKicker?: Colour;
@@ -162,19 +162,21 @@ export type ContainerOverrides = {
 		dynamoKicker?: Colour;
 		dynamoSublinkKicker?: Colour;
 		dynamoMeta?: Colour;
-		container: Colour;
+		container?: Colour;
+		containerFooter?: Colour;
 		containerToggle?: Colour;
 		containerDate?: Colour;
 	};
-	border: {
-		container: Colour;
+	border?: {
+		container?: Colour;
 		lines?: Colour;
 	};
 	background?: {
-		container: Colour;
-		card: Colour;
+		container?: Colour;
+		containerLeftColumn?: Colour;
+		card?: Colour;
 	};
 	topBar?: {
-		card: Colour;
+		card?: Colour;
 	};
 };
