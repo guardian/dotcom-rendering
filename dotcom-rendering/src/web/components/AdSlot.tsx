@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial-core';
-import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial';
+import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
