@@ -14,7 +14,7 @@ type Props = {
 
 const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
 	column-rule: 1px solid
-		${containerOverrides?.border.container ?? border.secondary};
+		${containerOverrides?.border?.container ?? border.secondary};
 `;
 
 const topBorderColour = (containerOverrides?: ContainerOverrides) => css`

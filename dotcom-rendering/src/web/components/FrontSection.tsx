@@ -497,7 +497,7 @@ export const FrontSection = ({
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={overrides?.border.container}
+						borderColour={overrides?.border?.container}
 					/>
 				</div>
 			)}

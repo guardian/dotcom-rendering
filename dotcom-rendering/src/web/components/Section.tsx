@@ -237,7 +237,7 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				borderColour={borderColour ?? overrides?.border.container}
+				borderColour={borderColour ?? overrides?.border?.container}
 				backgroundColour={
 					backgroundColour ?? overrides?.background?.container
 				}
@@ -260,7 +260,7 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			borderColour={borderColour ?? overrides?.border.container}
+			borderColour={borderColour ?? overrides?.border?.container}
 			backgroundColour={
 				backgroundColour ?? overrides?.background?.container
 			}
@@ -273,7 +273,7 @@ export const Section = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border.container}
+					borderColour={borderColour ?? overrides?.border?.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
 				>
@@ -303,7 +303,7 @@ export const Section = ({
 							<Treats
 								treats={treats}
 								borderColour={
-									borderColour ?? overrides?.border.container
+									borderColour ?? overrides?.border?.container
 								}
 							/>
 						)}

@@ -68,7 +68,7 @@ const leftColumnBackground = (backgroundColour?: string) => css`
 	background-color: ${backgroundColour};
 `;
 
-const contentBackground = (backgroundColour: string) => css`
+const contentBackground = (backgroundColour?: string) => css`
 	background-color: ${backgroundColour};
 `;
 
@@ -151,7 +151,7 @@ const contentSidePadding = css`
 	}
 `;
 
-const linkStyles = (textColour: string) => css`
+const linkStyles = (textColour?: string) => css`
 	text-decoration: none;
 	color: ${textColour};
 
@@ -192,8 +192,8 @@ const GuardianLabsTitle = ({
 	url,
 }: {
 	title: string;
-	textColour: string;
 	url?: string;
+	textColour?: string;
 }) => {
 	if (!!url) {
 		return (
@@ -231,7 +231,7 @@ const Content = ({
 	backgroundColour,
 }: {
 	children: React.ReactNode;
-	backgroundColour: string;
+	backgroundColour?: string;
 }) => (
 	<div
 		css={[
@@ -300,7 +300,7 @@ export const LabsSection = ({
 		>
 			<Container>
 				<LeftColumn
-					backgroundColour={overrides.background.containerLeftColumn}
+					backgroundColour={overrides.background?.containerLeftColumn}
 				>
 					<div>
 						<div>
@@ -309,7 +309,7 @@ export const LabsSection = ({
 						</div>
 						<GuardianLabsTitle
 							title={title}
-							textColour={overrides.text.container}
+							textColour={overrides.text?.container}
 							url={url}
 						/>
 					</div>
@@ -323,7 +323,7 @@ export const LabsSection = ({
 						<LabsLogo />
 					</Link>
 				</LeftColumn>
-				<Content backgroundColour={overrides.background.container}>
+				<Content backgroundColour={overrides.background?.container}>
 					{children}
 					{canShowMore && (
 						<Island deferUntil="interaction">
@@ -342,7 +342,7 @@ export const LabsSection = ({
 						<div css={badgeStyles}>
 							<div
 								css={paidForByStyles(
-									overrides.text.containerFooter,
+									overrides.text?.containerFooter,
 								)}
 							>
 								Paid for by
