@@ -56,6 +56,9 @@ export const WithoutBadgeStory = () => {
 			sectionId={''}
 			collectionId={''}
 			pageId={''}
+			ophanComponentName={''}
+			ophanComponentLink={''}
+			containerPalette={'EventPalette'}
 		>
 			<Placeholder />
 		</LabsSection>
