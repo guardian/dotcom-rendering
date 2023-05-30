@@ -1,9 +1,35 @@
+import { css } from '@emotion/react';
+import {
+	headlineObjectStyles,
+	palette,
+	space,
+} from '@guardian/source-foundations';
 import type { GroupedNewsletters } from '../../types/newslettersPage';
+import { NewsletterDetail } from './NewsletterDetail';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
 	groupedNewsletters: GroupedNewsletters;
 }
+
+const groupContainerStyle = css`
+	display: flex;
+	flex-wrap: wrap;
+`;
+
+const groupItemStyle = css`
+	flex-basis: ${200}px;
+	margin-right: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
+	padding: ${space[1] / 2}px;
+	min-height: ${215}px;
+	background-color: ${palette.neutral[97]};
+
+	h3 {
+		${headlineObjectStyles.xxxsmall()};
+		margin-bottom: ${space[3]}px;
+	}
+`;
 
 export const GroupedNewslettersList = ({
 	groupedNewsletters,
@@ -12,19 +38,19 @@ export const GroupedNewslettersList = ({
 		<>
 			{groupedNewsletters.groups.map((group) => (
 				<Section title={group.title} padBottom={true} key={group.title}>
-					<table>
-						<tbody>
-							{group.newsletters.map((newsletter) => {
-								return (
-									<tr key={newsletter.name}>
-										<td>{newsletter.name}</td>
-										<td>{newsletter.regionFocus}</td>
-										<td>{newsletter.frequency}</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
+					<div css={groupContainerStyle}>
+						{group.newsletters.map((newsletter) => {
+							return (
+								<div key={newsletter.name} css={groupItemStyle}>
+									<NewsletterDetail
+										text={newsletter.frequency}
+									/>
+									<h3>{newsletter.name}</h3>
+									<p>{newsletter.description}</p>
+								</div>
+							);
+						})}
+					</div>
 				</Section>
 			))}
 		</>
