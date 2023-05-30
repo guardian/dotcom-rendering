@@ -47,6 +47,11 @@ const lineStyles = css`
 const withoutZeroSections = (sections: SectionType[]) =>
 	sections.filter((section) => section.value !== 0);
 
+const polarToCartesian = (angle: number, radius: number) =>
+	[Math.cos(angle) * radius, Math.sin(angle) * radius]
+		.map((n) => n.toFixed(PRECISION))
+		.join(',');
+
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
@@ -107,15 +112,11 @@ export const Doughnut = ({
 			) : (
 				<path
 					d={[
-						'M',
-						(Math.cos(angleStart) * radius).toFixed(PRECISION),
-						(Math.sin(angleStart) * radius).toFixed(PRECISION),
+						`M${polarToCartesian(angleStart, radius)}`,
 						`A${radius},${radius} 0 ${
 							// large-arc-flag, depends on segment being smaller or larger than one half
 							angleLength < tau / 2 ? 0 : 1
-						} 1`,
-						(Math.cos(angleEnd) * radius).toFixed(PRECISION),
-						(Math.sin(angleEnd) * radius).toFixed(PRECISION),
+						} 1 ${polarToCartesian(angleEnd, radius)}`,
 					].join(' ')}
 					fill="none"
 					stroke={color}
@@ -126,26 +127,15 @@ export const Doughnut = ({
 			element,
 			label,
 			value,
-			transform: [
-				'translate(',
-				(Math.cos(angleMid) * radius).toFixed(PRECISION),
-				', ',
-				(Math.sin(angleMid) * radius).toFixed(PRECISION),
-				')',
-			].join(''),
+			transform: `translate(${polarToCartesian(angleMid, radius)})`,
 			color,
 		});
-
-		const x = Math.cos(angleEnd);
-		const y = Math.sin(angleEnd);
 
 		separatingLines.push({
 			label,
 			d: [
-				`M${x * innerRadius},${y * innerRadius}`, // start the line from inner radius
-				`l${x * (outerRadius - innerRadius)},${
-					y * (outerRadius - innerRadius)
-				}`, // stop it at the outer radius
+				`M${polarToCartesian(angleEnd, innerRadius)}`,
+				`L${polarToCartesian(angleEnd, outerRadius)}`,
 			].join(' '),
 		});
 
