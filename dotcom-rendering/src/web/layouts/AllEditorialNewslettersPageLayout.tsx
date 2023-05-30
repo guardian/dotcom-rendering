@@ -9,6 +9,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
 import { Footer } from '../components/Footer';
+import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -152,6 +153,9 @@ export const AllEditorialNewslettersPageLayout = ({
 					mmaUrl={newslettersPage.config.mmaUrl}
 					editionId={newslettersPage.editionId}
 					headingText={newslettersPage.webTitle}
+				/>
+				<GroupedNewslettersList
+					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
 				<NewslettersList newsletters={newslettersPage.newsletters} />
 			</main>
