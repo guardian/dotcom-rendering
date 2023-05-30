@@ -13,13 +13,6 @@ export const GroupedNewslettersList = ({
 			{groupedNewsletters.groups.map((group) => (
 				<Section title={group.title} padBottom={true} key={group.title}>
 					<table>
-						<thead>
-							<tr>
-								<th>name</th>
-								<th>region</th>
-								<th>frequency</th>
-							</tr>
-						</thead>
 						<tbody>
 							{group.newsletters.map((newsletter) => {
 								return (
