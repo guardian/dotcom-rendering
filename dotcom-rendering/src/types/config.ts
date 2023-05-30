@@ -13,6 +13,7 @@ export interface CommercialConfigType {
 	toneIds?: string;
 	contentType: string;
 	ampIframeUrl: string;
+	hasInlineMerchandise?: boolean;
 }
 
 /**
