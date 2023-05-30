@@ -9,6 +9,7 @@ const pubData = {
 	page_view_id: 'PAGE_VIEW_ID',
 	page_view_id_64: 'PAGE_VIEW_ID_64',
 	platform: 'amp',
+	source_url: 'SOURCE_URL',
 };
 
 const queryParams = new URLSearchParams(pubData).toString();
@@ -88,7 +89,7 @@ export const AdConsent = () => {
 						consentRequired: 'remote',
 						consentInstanceId: 'sourcepoint',
 						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2`,
-						promptUISrc: `https://${sourcepointDomain}/amp/index.html?${queryParams}`,
+						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
 						clientConfig,
 						geoOverride: {
 							tcfv2: {
