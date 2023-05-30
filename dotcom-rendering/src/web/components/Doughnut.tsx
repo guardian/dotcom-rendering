@@ -20,7 +20,7 @@ type SectionType = {
 };
 
 /** set decimal places */
-const PRECISION = 6;
+const PRECISION = 2;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -58,6 +58,7 @@ export const Doughnut = ({
 	const outerRadius = size / 2;
 	const innerRadius = outerRadius * (percentCutout / 100);
 	const radius = (innerRadius + outerRadius) / 2;
+	const strokeWidth = outerRadius - innerRadius;
 
 	const totalValue = sections
 		.map((section) => section.value)
@@ -67,12 +68,11 @@ export const Doughnut = ({
 	const tau = Math.PI * 2;
 	const quarterTurn = Math.PI / 2;
 
-	const center = size / 2;
+	const halfSize = size / 2;
 
 	// Segments
 	const segments: {
-		dasharray: string;
-		dashoffset: string;
+		element: JSX.Element;
 		color: string;
 		transform: string;
 		label: string;
@@ -92,28 +92,45 @@ export const Doughnut = ({
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
-		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
-			.map((dash) => dash.toFixed(PRECISION))
-			.join(',');
 		/**
-		 * The offset is turned one quarter and rotated
-		 * with a transform to keep the top join as crisp
-		 * as possible.
+		 * Either a circle, for a single segment, or an arc for multiple segments.
+		 * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
 		 */
-		const dashoffset = (-(quarterTurn + angleStart) * radius).toFixed(
-			PRECISION,
-		);
-
+		const element =
+			angleLength === tau ? (
+				<circle
+					r={radius}
+					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+			) : (
+				<path
+					d={[
+						'M',
+						(Math.cos(angleStart) * radius).toFixed(PRECISION),
+						(Math.sin(angleStart) * radius).toFixed(PRECISION),
+						`A${radius},${radius} 0 ${
+							// large-arc-flag, depends on segment being smaller or larger than one half
+							angleLength < tau / 2 ? 0 : 1
+						} 1`,
+						(Math.cos(angleEnd) * radius).toFixed(PRECISION),
+						(Math.sin(angleEnd) * radius).toFixed(PRECISION),
+					].join(' ')}
+					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+			);
 		segments.push({
-			dasharray,
-			dashoffset,
+			element,
 			label,
 			value,
 			transform: [
 				'translate(',
-				(Math.cos(angleMid) * radius + center).toFixed(PRECISION),
+				(Math.cos(angleMid) * radius).toFixed(PRECISION),
 				', ',
-				(Math.sin(angleMid) * radius + center).toFixed(PRECISION),
+				(Math.sin(angleMid) * radius).toFixed(PRECISION),
 				')',
 			].join(''),
 			color,
@@ -125,8 +142,7 @@ export const Doughnut = ({
 		separatingLines.push({
 			label,
 			d: [
-				`M${center},${center}`,
-				`m${x * innerRadius},${y * innerRadius}`, // start the line from inner radius
+				`M${x * innerRadius},${y * innerRadius}`, // start the line from inner radius
 				`l${x * (outerRadius - innerRadius)},${
 					y * (outerRadius - innerRadius)
 				}`, // stop it at the outer radius
@@ -137,21 +153,14 @@ export const Doughnut = ({
 	}
 
 	return (
-		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+		<svg
+			width={size}
+			height={size}
+			viewBox={`${-halfSize} ${-halfSize} ${size} ${size}`}
+		>
 			{segments.map((segment) => (
 				<g key={segment.label + segment.color}>
-					<circle
-						cx={center}
-						cy={center}
-						r={radius}
-						fill="none"
-						stroke={segment.color}
-						strokeWidth={outerRadius - innerRadius}
-						strokeDasharray={segment.dasharray}
-						strokeDashoffset={segment.dashoffset}
-						// rotate back a quarter turn
-						transform={`rotate(-90 ${center} ${center})`}
-					/>
+					{segment.element}
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
@@ -166,11 +175,7 @@ export const Doughnut = ({
 				separatingLines.map(({ d, label }) => (
 					<path key={label} css={lineStyles} d={d} />
 				))}
-			<text
-				css={unitStyles}
-				transform={`translate(${center}, ${center})`}
-				dy="0.4em"
-			>
+			<text css={unitStyles} dy="0.4em">
 				%
 			</text>
 		</svg>
