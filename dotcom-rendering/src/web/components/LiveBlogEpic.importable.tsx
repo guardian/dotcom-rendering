@@ -242,19 +242,14 @@ export const LiveBlogEpic = ({
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
-	const [removeEpic, setRemoveEpic] = useState(false);
-
 	const ABTestAPI = useAB()?.api;
 	const userIsInRemoveLiveblogEpicTest = ABTestAPI?.isUserInVariant(
 		'RemoveBusinessLiveblogEpics',
 		'variant',
 	);
 
-	useEffect(() => {
-		setRemoveEpic(
-			!!userIsInRemoveLiveblogEpicTest && section == 'business',
-		);
-	}, [userIsInRemoveLiveblogEpicTest, section]);
+	const removeEpic =
+		!!userIsInRemoveLiveblogEpicTest && section == 'business';
 
 	// First construct the payload
 	const payload = usePayload({
