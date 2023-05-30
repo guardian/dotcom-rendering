@@ -155,6 +155,7 @@ export const renderHtml = ({ article }: Props): string => {
 					editionId: article.editionId,
 					beaconURL: article.beaconURL,
 				}),
+				hasInlineMerchandise: article.config.hasInlineMerchandise,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
