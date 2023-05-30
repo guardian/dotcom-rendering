@@ -241,6 +241,7 @@
 		"rimraf": "3.0.2",
 		"sanitize-html": "2.9.0",
 		"scheduler": "0.23.0",
+		"screenfull": "6.0.2",
 		"serve-static": "1.15.0",
 		"simple-progress-webpack-plugin": "2.0.0",
 		"snyk": "1.1103.0",
