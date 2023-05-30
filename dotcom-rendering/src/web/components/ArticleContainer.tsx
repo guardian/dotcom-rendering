@@ -95,6 +95,15 @@ const adStyles = css`
 				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
 				align-self: flex-start;
 			}
+
+			/*
+			   Ensure that the ad slot is centred,
+			   the element with this class name is inserted by GAM into the ad slot
+			*/
+			.ad-slot__content {
+				margin-left: auto;
+				margin-right: auto;
+			}
 		}
 
 		.ad-slot--interscroller {
