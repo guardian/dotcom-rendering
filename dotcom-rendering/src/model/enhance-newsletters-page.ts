@@ -70,9 +70,15 @@ const getGroups = (
 ): GroupedNewsletters => {
 	const { newsletters, editionId } = newsletterData;
 
-	if (editionId === 'US') {
+	if (editionId === 'UK') {
 		return mapStaticGroups(
 			STATIC_GROUP_DATA.UK,
+			newsletterData.newsletters,
+		);
+	}
+	if (editionId === 'US') {
+		return mapStaticGroups(
+			STATIC_GROUP_DATA.US,
 			newsletterData.newsletters,
 		);
 	}

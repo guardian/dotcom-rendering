@@ -77,10 +77,98 @@
 		{
 			"title": "International correspondents",
 			"newsletters": [
-				"first-fhing",
+				"first-thing",
 				"morning-mail",
 				"afternoon-update",
 				"patriarchy",
+				"first-dog",
+				"the-rural-network",
+				"australian-politics"
+			]
+		}
+	],
+	"US": [
+		{
+			"title": "Get started",
+			"newsletters": [
+				"first-thing",
+				"today-us",
+				"green-light",
+				"best-of-opinion-us",
+				"patriarchy",
+				"bookmarks"
+			]
+		},
+		{
+			"title": "From our correspondents",
+			"newsletters": [
+				"this-is-europe",
+				"whats-on",
+				"cotton-capital",
+				"tech-scape",
+				"fashion-statement",
+				"pushing-buttons"
+			]
+
+		},
+		{
+			"title": "Culture Picks",
+			"newsletters": [
+				"film-today",
+				"sleeve-notes",
+				"hear-here",
+				"art-weekly",
+				"design-review",
+				"the-guide-staying-in",
+				"word-of-mouth"
+			]
+		},
+		{
+			"title": "Weekend reads",
+			"newsletters": [
+				"inside-saturday",
+				"house-to-home",
+				"save-for-later",
+				"The-Upside",
+				"the-long-read"
+			]
+		},
+		{
+			"title": "Go deeper",
+			"newsletters": [
+				"global-dispatch",
+				"guardian-traveller",
+				"business-today",
+				"documentaries",
+				"her-stage"
+			]
+		},
+		{
+			"title": "Sport",
+			"newsletters": [
+				"football-daily",
+				"moving-the-goalposts",
+				"the-spin",
+				"the-breakdown",
+				"the-recap",
+				"sports-au"
+			]
+		},
+		{
+			"title": "In brief",
+			"newsletters": [
+				"today-uk",
+				"today-au",
+				"best-of-opinion",
+				"best-of-opinion-au"
+			]
+		},
+		{
+			"title": "International correspondents",
+			"newsletters": [
+				"morning-briefing",
+				"morning-mail",
+				"afternoon-update",
 				"first-dog",
 				"the-rural-network",
 				"australian-politics"
