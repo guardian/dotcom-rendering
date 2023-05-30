@@ -249,7 +249,7 @@ export const LiveBlogEpic = ({
 	);
 
 	const removeEpic =
-		!!userIsInRemoveLiveblogEpicTest && section == 'business';
+		(userIsInRemoveLiveblogEpicTest ?? false) && section == 'business';
 
 	// First construct the payload
 	const payload = usePayload({
