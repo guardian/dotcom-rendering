@@ -329,6 +329,8 @@ export const ImageComponent = ({
 					picture {
 						height: 100%;
 					}
+					/* We need position relative here to contain the absolute positioned ClickOverlay added by LightboxButton */
+					position: relative;
 				`}
 			>
 				<Picture
