@@ -5,6 +5,7 @@ import {
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
+import { SerializedStyles } from '@emotion/serialize';
 
 const colourStyles = (colour: string) => css`
 	color: ${colour};
@@ -15,27 +16,18 @@ const colourStyles = (colour: string) => css`
 
 const Position = ({
 	children,
-	top,
-	left,
-	right,
-	bottom,
+	positionStyles,
 }: {
 	children: React.ReactNode;
-	top?: number;
-	left?: number;
-	right?: number;
-	bottom?: number;
+	positionStyles?: SerializedStyles;
 }) => {
 	return (
 		<div
 			css={css`
 				/* Decide where the content revealed by details appears */
 				position: absolute;
-				${top != undefined && `top: ${top}px`};
-				${left != undefined && `left: ${left}px`};
-				${right != undefined && `right: ${right}px`};
-				${bottom != undefined && `bottom: ${bottom}px`};
 				${getZIndex('summaryDetails')}
+				${positionStyles}
 			`}
 		>
 			{children}
@@ -54,18 +46,12 @@ const Position = ({
 export const Details = ({
 	label,
 	colour,
-	top,
-	right,
-	bottom,
-	left,
+	positionStyles,
 	children,
 }: {
 	label: string;
 	colour?: string;
-	top?: number;
-	right?: number;
-	bottom?: number;
-	left?: number;
+	positionStyles?: SerializedStyles;
 	children: React.ReactNode;
 }) => (
 	<details
@@ -117,8 +103,6 @@ export const Details = ({
 				<SvgChevronUpSingle size="xsmall" />
 			</span>
 		</summary>
-		<Position top={top} left={left} bottom={bottom} right={right}>
-			{children}
-		</Position>
+		<Position positionStyles={positionStyles}>{children}</Position>
 	</details>
 );

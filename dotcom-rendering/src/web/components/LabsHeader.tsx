@@ -142,7 +142,21 @@ export const LabsHeader = () => (
 				<Title />
 			</HeaderSection>
 			<HeaderSection>
-				<Details label={'About'} top={40} left={-128}>
+				<Details
+					label={'About'}
+					positionStyles={css`
+						top: 40px;
+						left: -75px;
+
+						${from.mobile} {
+							left: -108px;
+						}
+
+						${from.mobileLandscape} {
+							left: -128px;
+						}
+					`}
+				>
 					<About />
 				</Details>
 			</HeaderSection>
