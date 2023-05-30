@@ -55,7 +55,6 @@ const clientConfigAus = {
 		framework: 'aus',
 	},
 };
-
 export const AdConsent = () => {
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
@@ -88,7 +87,7 @@ export const AdConsent = () => {
 					o={{
 						consentRequired: 'remote',
 						consentInstanceId: 'sourcepoint',
-						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2`,
+						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2?authId=${pubData.authId}`,
 						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
 						clientConfig,
 						geoOverride: {
@@ -96,7 +95,7 @@ export const AdConsent = () => {
 								clientConfig: clientConfigTcfv2,
 							},
 							ccpa: {
-								checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
 								clientConfig: clientConfigCcpa,
 							},
 							aus: {
