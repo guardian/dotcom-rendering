@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { palette, remSpace } from '@guardian/source-foundations';
 import type { BodyElement } from 'bodyElement';
 import { background } from 'palette';
 import type { FC } from 'react';
@@ -34,11 +34,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	${darkModeCss`
 		background: ${background.articleContentDark(format)};
-		color: ${neutral[86]};
-
-		figcaption {
-			color: ${neutral[60]};
-		}
+		color: ${palette.neutral[86]};
 
 		p:last-child {
 			margin-bottom: 0;

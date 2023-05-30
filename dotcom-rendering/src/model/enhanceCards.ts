@@ -11,6 +11,7 @@ import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
+import { EditionId } from '../web/lib/edition';
 
 /**
  *
@@ -163,6 +164,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 
 export const enhanceCards = (
 	collections: FEFrontCard[],
+	editionId?: EditionId,
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -194,6 +196,10 @@ export const enhanceCards = (
 				? faciaCard.properties.href
 				: faciaCard.header.url;
 
+		const branding = faciaCard.properties.editionBrandings.find(
+			(editionBranding) => editionBranding.edition.id === editionId,
+		)?.branding;
+
 		return {
 			format,
 			dataLinkName,
@@ -201,11 +207,12 @@ export const enhanceCards = (
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
-			webPublicationDate: faciaCard.card.webPublicationDateOption
-				? new Date(
-						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
-				: undefined,
+			webPublicationDate:
+				faciaCard.card.webPublicationDateOption !== undefined
+					? new Date(
+							faciaCard.card.webPublicationDateOption,
+					  ).toISOString()
+					: undefined,
 			image: decideImage(faciaCard),
 			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent
@@ -240,5 +247,8 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
+			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
+			embedUri: faciaCard.properties.embedUri ?? undefined,
+			branding,
 		};
 	});

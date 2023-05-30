@@ -15,8 +15,8 @@ import {
 	map,
 	map2,
 	map4,
-	map7,
 	map8,
+	map9,
 	maybe,
 	numberParser,
 	parse,
@@ -51,6 +51,7 @@ const makeFormFields = (
 	type: string,
 	mandatory: boolean,
 	options: FormOption[],
+	hidden: boolean,
 	description?: string,
 ): FormField => ({
 	id,
@@ -60,6 +61,7 @@ const makeFormFields = (
 	mandatory,
 	options,
 	description,
+	hidden,
 });
 
 const makeContacts = (
@@ -83,16 +85,18 @@ const makeCalloutProps = (
 });
 
 const makeCallout = (
-	heading: string,
 	formId: number,
 	formFields: FormField[],
 	isNonCollapsible: boolean,
 	name: string,
+	prompt: string,
+	heading: string,
 	description?: DocumentFragment,
 	activeUntil?: number,
 	contacts?: Contact[],
 ): Callout => ({
 	kind: ElementKind.Callout,
+	prompt,
 	heading,
 	formId,
 	formFields,
@@ -140,13 +144,14 @@ const optionParser: Parser<FormOption> = map2(makeFormOption)(
 	fieldParser('value', stringParser),
 );
 
-const formFieldsParser: Parser<FormField> = map7(makeFormFields)(
+const formFieldsParser: Parser<FormField> = map8(makeFormFields)(
 	fieldParser('id', stringParser),
 	fieldParser('label', stringParser),
 	fieldParser('name', stringParser),
 	fieldParser('type', stringParser),
 	fieldParser('mandatory', booleanParser),
 	fieldParser('options', arrayParser(optionParser)),
+	fieldParser('hidden', booleanParser),
 	aOrUndefinedParser(fieldParser('description', stringParser)),
 );
 
@@ -157,12 +162,13 @@ const contactsParser: Parser<Contact> = map4(makeContacts)(
 	aOrUndefinedParser(fieldParser('guidance', stringParser)),
 );
 
-const calloutParser: Parser<Callout> = map8(makeCallout)(
-	fieldParser('heading', stringParser),
+const calloutParser: Parser<Callout> = map9(makeCallout)(
 	fieldParser('formId', numberParser),
 	fieldParser('formFields', arrayParser(formFieldsParser)),
 	fieldParser('isNonCollapsible', booleanParser),
 	fieldParser('name', stringParser),
+	fieldParser('prompt', stringParser),
+	fieldParser('heading', stringParser),
 	fieldParser('description', documentFragmentParser),
 	aOrUndefinedParser(fieldParser('activeUntil', numberParser)),
 	aOrUndefinedParser(fieldParser('contacts', arrayParser(contactsParser))),

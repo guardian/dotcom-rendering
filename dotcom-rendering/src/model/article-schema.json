@@ -521,6 +521,9 @@
                 "$ref": "#/definitions/Topic"
             }
         },
+        "messageUs": {
+            "$ref": "#/definitions/MessageUs"
+        },
         "promotedNewsletter": {
             "type": "object",
             "properties": {
@@ -579,6 +582,12 @@
             }
 		},
         "showTableOfContents": {
+            "type": "boolean"
+        },
+        "lang": {
+            "type": "string"
+        },
+        "isRightToLeftLang": {
             "type": "boolean"
         }
     },
@@ -856,10 +865,12 @@
             "type": "object",
             "properties": {
                 "type": {
-                    "type": "string",
                     "enum": [
+                        "email",
+                        "phone",
                         "text"
-                    ]
+                    ],
+                    "type": "string"
                 },
                 "id": {
                     "type": "string"
@@ -879,12 +890,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -901,6 +914,12 @@
                         "textarea"
                     ]
                 },
+                "minlength": {
+                    "type": "number"
+                },
+                "maxlength": {
+                    "type": "number"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -919,12 +938,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -959,12 +980,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1017,12 +1040,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1076,12 +1101,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1135,12 +1162,14 @@
                 "hideLabel": {
                     "type": "boolean"
                 },
+                "hidden": {
+                    "type": "boolean"
+                },
                 "label": {
                     "type": "string"
                 }
             },
             "required": [
-                "hideLabel",
                 "id",
                 "label",
                 "name",
@@ -1178,6 +1207,9 @@
                 },
                 "formId": {
                     "type": "number"
+                },
+                "prompt": {
+                    "type": "string"
                 },
                 "title": {
                     "type": "string"
@@ -1237,6 +1269,7 @@
                 "formId",
                 "id",
                 "isNonCollapsible",
+                "prompt",
                 "tagName",
                 "title"
             ]
@@ -2497,9 +2530,11 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
@@ -4059,15 +4094,8 @@
                     "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
-                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object",
-                    "additionalProperties": {
-                        "enum": [
-                            "control",
-                            "variant"
-                        ],
-                        "type": "string"
-                    }
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -4198,6 +4226,9 @@
                 },
                 "ampIframeUrl": {
                     "type": "string"
+                },
+                "hasInlineMerchandise": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -4345,6 +4376,9 @@
                             "type": "string"
                         },
                         "embedCss": {
+                            "type": "string"
+                        },
+                        "embedJs": {
                             "type": "string"
                         }
                     }
@@ -4771,6 +4805,31 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "MessageUs": {
+            "type": "object",
+            "properties": {
+                "formId": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "formFields",
+                "formId"
+            ]
         },
         "TableOfContentsItem": {
             "type": "object",

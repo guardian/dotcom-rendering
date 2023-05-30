@@ -16,11 +16,7 @@ type LegalLinkProps = { href: PolicyUrl; children: string };
 
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
 const LegalLink = ({ href, children }: LegalLinkProps) => (
-	<Link
-		data-ignore="global-link-styling"
-		href={href}
-		rel="noopener noreferrer"
-	>
+	<Link data-ignore="global-link-styling" href={href} rel="noreferrer">
 		{children}
 	</Link>
 );

@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
-import { Section } from './Section';
+import { FrontSection } from './FrontSection';
 
 export default {
 	title: 'Layouts/Palettes',
@@ -23,10 +23,8 @@ const groupedTrails = {
 };
 
 export const EventPalette = () => (
-	<Section
-		title="EventPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Event Palette"
 		containerPalette="EventPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -36,7 +34,7 @@ export const EventPalette = () => (
 			containerPalette="EventPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 EventPalette.story = {
 	parameters: {
@@ -51,10 +49,8 @@ EventPalette.story = {
 };
 
 export const EventAltPalette = () => (
-	<Section
-		title="EventAltPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Event Alt Palette"
 		containerPalette="EventAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -64,14 +60,12 @@ export const EventAltPalette = () => (
 			containerPalette="EventAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SombrePalette = () => (
-	<Section
-		title="SombrePalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Sombre Palette"
 		containerPalette="SombrePalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -81,14 +75,12 @@ export const SombrePalette = () => (
 			containerPalette="SombrePalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SombreAltPalette = () => (
-	<Section
-		title="SombreAltPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Sombre Alt Palette"
 		containerPalette="SombreAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -98,14 +90,12 @@ export const SombreAltPalette = () => (
 			containerPalette="SombreAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const BreakingPalette = () => (
-	<Section
-		title="BreakingPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Breaking Palette"
 		containerPalette="BreakingPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -115,14 +105,12 @@ export const BreakingPalette = () => (
 			containerPalette="BreakingPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const LongRunningPalette = () => (
-	<Section
-		title="LongRunningPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Long Running Palette"
 		containerPalette="LongRunningPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -132,14 +120,12 @@ export const LongRunningPalette = () => (
 			containerPalette="LongRunningPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const LongRunningAltPalette = () => (
-	<Section
-		title="LongRunningAltPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Long Running Alt Palette"
 		containerPalette="LongRunningAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -149,14 +135,12 @@ export const LongRunningAltPalette = () => (
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const InvestigationPalette = () => (
-	<Section
-		title="InvestigationPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Investigation Palette"
 		containerPalette="InvestigationPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -166,14 +150,12 @@ export const InvestigationPalette = () => (
 			containerPalette="InvestigationPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );
 
 export const SpecialReportAltPalette = () => (
-	<Section
-		title="SpecialReportAltPalette"
-		padContent={false}
-		centralBorder="partial"
+	<FrontSection
+		title="Special Report Alt Palette"
 		containerPalette="SpecialReportAltPalette"
 		showDateHeader={true}
 		editionId={'UK'}
@@ -183,5 +165,5 @@ export const SpecialReportAltPalette = () => (
 			containerPalette="SpecialReportAltPalette"
 			showAge={true}
 		/>
-	</Section>
+	</FrontSection>
 );

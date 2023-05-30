@@ -31,6 +31,7 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
 					adTagParameters: {
 						iu: `${adTargeting.adUnit || ''}`,
 						cust_params: encodeURIComponent(
+							// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- We should investigate if its possible for this to be undefined
 							constructQuery(adTargeting.customParams || {}),
 						),
 					},

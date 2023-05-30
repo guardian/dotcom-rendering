@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { trails } from '../../../fixtures/manual/trails';
-import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
+import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { Section } from './Section';
@@ -36,7 +36,7 @@ export const withTwoTabs = () => {
 		</Hydrated>
 	);
 };
-withTwoTabs.story = { name: 'with two tabs' };
+withTwoTabs.storyName = 'with two tabs';
 
 export const withOneTabs = () => {
 	return (
@@ -56,4 +56,4 @@ export const withOneTabs = () => {
 		</Hydrated>
 	);
 };
-withOneTabs.story = { name: 'with one tab' };
+withOneTabs.storyName = 'with one tab';

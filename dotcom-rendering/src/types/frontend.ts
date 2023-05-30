@@ -112,12 +112,15 @@ export interface FEArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	messageUs?: MessageUs;
 
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
 	imagesForLightbox?: EnhancedImageForLightbox[];
 	showTableOfContents: boolean;
+	lang?: string;
+	isRightToLeftLang?: boolean;
 }
 
 export interface TableOfContents {

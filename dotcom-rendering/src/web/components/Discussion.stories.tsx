@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { useEffect } from 'react';
-import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
+import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { DiscussionLayout } from './DiscussionLayout';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
@@ -41,4 +41,4 @@ export const Basic = () => {
 	);
 };
 
-Basic.story = { name: 'A discussion with short comments' };
+Basic.storyName = 'A discussion with short comments';

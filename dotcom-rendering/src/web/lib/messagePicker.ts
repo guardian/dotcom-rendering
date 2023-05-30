@@ -1,5 +1,5 @@
-import { initPerf } from '../browser/initPerf';
-import { record } from '../browser/ophan/ophan';
+import { initPerf } from '../client/initPerf';
+import { record } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
@@ -52,7 +52,7 @@ const timeoutify = <T>(
 			const canShowTiming = initPerf(perfName);
 			canShowTiming.start();
 
-			if (candidateConfig.timeoutMillis) {
+			if (candidateConfig.timeoutMillis !== null) {
 				timer = window.setTimeout(() => {
 					recordMessageTimeoutInOphan(
 						candidateConfig.candidate.id,
@@ -81,7 +81,7 @@ const timeoutify = <T>(
 				);
 		});
 
-	const cancelTimeout = () => timer && clearTimeout(timer);
+	const cancelTimeout = () => timer !== undefined && clearTimeout(timer);
 
 	return {
 		...candidateConfig,

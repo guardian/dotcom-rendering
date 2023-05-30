@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { initHydration } from '../browser/islands/initHydration';
-import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { initHydration } from '../client/islands/initHydration';
+import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -90,7 +90,7 @@ function revealPendingBlocks() {
 		block.classList.remove('pending');
 	});
 
-	if (pendingBlocks?.length)
+	if (pendingBlocks !== undefined && pendingBlocks.length > 0)
 		// Notify commercial that new blocks are available and they can re-run spacefinder
 		document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }
@@ -237,7 +237,7 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (!topOfBlog) return () => {};
+		if (!topOfBlog) return;
 
 		const observer = new window.IntersectionObserver(([entry]) => {
 			if (!entry) return;

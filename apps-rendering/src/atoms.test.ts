@@ -157,6 +157,21 @@ describe('parseAtom', () => {
 				}),
 			);
 		});
+
+		it('returns SpecialReportAltAtom element if atom has correct id', () => {
+			const element = {
+				type: ElementType.CONTENTATOM,
+				assets: [],
+				contentAtomTypeData: {
+					atomId: 'interactives/2022/10/tr/default-about-the-series',
+					atomType: 'interactive',
+				},
+			};
+
+			expect(parseAtom(element, atoms, docParser)).toEqual(
+				Result.ok({ kind: ElementKind.SpecialReportAltAtom }),
+			);
+		});
 	});
 
 	describe('guide', () => {

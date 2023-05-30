@@ -166,7 +166,7 @@ export const LiveBlockContainer = ({
 			`}
 		>
 			<Header>
-				{!!blockFirstPublished && (
+				{blockFirstPublished !== undefined && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						firstPublishedDisplay={blockFirstPublishedDisplay}

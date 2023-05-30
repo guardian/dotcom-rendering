@@ -16,7 +16,7 @@ export const generatePermutivePayload = (
 	rawConfig: CommercialConfigType,
 ): PermutivePayload => {
 	const publishedAt =
-		rawConfig.webPublicationDate &&
+		rawConfig.webPublicationDate !== undefined &&
 		typeof rawConfig.webPublicationDate === 'number'
 			? new Date(rawConfig.webPublicationDate).toISOString()
 			: null;

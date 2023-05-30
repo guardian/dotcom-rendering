@@ -64,7 +64,7 @@ export const Default = () => {
 		</Wrapper>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';
 
 export const Vertical = () => {
 	return (
@@ -100,7 +100,7 @@ export const Vertical = () => {
 		</Wrapper>
 	);
 };
-Vertical.story = { name: 'with height and width set' };
+Vertical.storyName = 'with height and width set';
 
 export const Expired = () => {
 	return (
@@ -137,7 +137,7 @@ export const Expired = () => {
 		</Wrapper>
 	);
 };
-Expired.story = { name: 'expired video' };
+Expired.storyName = 'expired video';
 
 export const WithOverlayImage = () => {
 	return (
@@ -175,7 +175,7 @@ export const WithOverlayImage = () => {
 		</Wrapper>
 	);
 };
-WithOverlayImage.story = { name: 'with overlay image' };
+WithOverlayImage.storyName = 'with overlay image';
 
 export const WithPosterImage = () => {
 	return (
@@ -234,7 +234,7 @@ export const WithPosterImage = () => {
 		</Wrapper>
 	);
 };
-WithPosterImage.story = { name: 'with poster image' };
+WithPosterImage.storyName = 'with poster image';
 
 export const WithPosterAndOverlayImage = () => {
 	return (
@@ -294,4 +294,4 @@ export const WithPosterAndOverlayImage = () => {
 		</Wrapper>
 	);
 };
-WithPosterAndOverlayImage.story = { name: 'with poster and overlay image' };
+WithPosterAndOverlayImage.storyName = 'with poster and overlay image';

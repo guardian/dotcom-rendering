@@ -1,0 +1,34 @@
+name: DCR CICD
+
+on:
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
+      - "dotcom-rendering/docs/**"
+
+jobs:
+  container:
+    permissions:
+      packages: write
+    uses: ./.github/workflows/container.yml
+
+  prettier:
+    uses: ./.github/workflows/prettier.yml
+
+  jest:
+    uses: ./.github/workflows/jest.yml
+
+  lint:
+    uses: ./.github/workflows/lint.yml
+
+  cypress:
+    needs: [container]
+    uses: ./.github/workflows/cypress.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}
+
+  amp:
+    needs: [container]
+    uses: ./.github/workflows/amp.yml
+    with:
+      container-image: ${{ needs.container.outputs.container-image }}

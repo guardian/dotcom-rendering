@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import { ButtonLink } from '@guardian/source-react-components';
 
 type Props = {
@@ -18,14 +18,7 @@ const showHideButtonCss = (
 	margin-bottom: ${space[2]}px;
 	position: relative;
 	align-items: bottom;
-
 	text-decoration: none;
-
-	${from.wide} {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
 `;
 
 /**
@@ -42,7 +35,7 @@ export const ShowHideButton = ({
 			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}
-			aria-controls={`container-${sectionId}`}
+			aria-controls={sectionId}
 			aria-expanded={true}
 		>
 			Hide

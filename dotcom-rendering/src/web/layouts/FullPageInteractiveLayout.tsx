@@ -29,8 +29,10 @@ import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -138,7 +140,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = !article.isAdFreeUser && !article.shouldHideAds;
+	const renderAds = canRenderAds(article);
 
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
@@ -173,6 +175,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -257,6 +260,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					editionId={article.editionId}
 					headerTopBarSwitch={!!article.config.switches.headerTopNav}
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</Section>
 
@@ -326,7 +330,11 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article id="maincontent">
+				<article
+					id="maincontent"
+					lang={decideLanguage(article.lang)}
+					dir={decideLanguageDirection(article.isRightToLeftLang)}
+				>
 					<Renderer
 						format={format}
 						elements={

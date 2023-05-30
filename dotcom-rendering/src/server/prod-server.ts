@@ -5,30 +5,31 @@ import responseTime from 'response-time';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../amp/server';
-import type { FEArticleType } from '../types/frontend';
+} from '../amp/server/index.article';
+import { handleAppsArticle } from '../apps/server/index.article';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage';
 import {
 	handleArticle,
 	handleArticleJson,
-	handlePerfTest as handleArticlePerfTest,
+	handleArticlePerfTest,
 	handleBlocks,
-	handleFront,
-	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server';
+} from '../web/server/index.article';
+import { handleFront, handleFrontJson } from '../web/server/index.front';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
+import { recordError } from './lib/logging-store';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
-	({ body }: Request, _: Response, time: number) => {
-		const { pageId = 'no-page-id-found' } = body as FEArticleType;
+	(_1: Request, _2: Response, renderTime: number) => {
 		logger.info('Page render time', {
-			pageId,
-			renderTime: time,
+			renderTime,
 		});
 	},
 );
@@ -39,6 +40,7 @@ export const prodServer = (): void => {
 	const app = express();
 
 	app.use(express.json({ limit: '50mb' }));
+	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
@@ -60,60 +62,77 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post(
+		'/EmailNewsletters',
+		logRenderTime,
+		handleAllEditorialNewslettersPage,
+	);
+	app.post('/AppsArticle', logRenderTime, handleAppsArticle);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
-		'/Article',
+		'/Article/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleArticle,
 	);
-	app.use('/ArticleJson', handleArticleJson);
+	app.use('/ArticleJson/*', handleArticleJson);
 
 	app.get(
-		'/AMPArticle',
+		'/AMPArticle/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleAMPArticle,
 	);
 
-	app.get('/Front', logRenderTime, getContentFromURLMiddleware, handleFront);
 	app.get(
-		'/FrontJSON',
+		'/Front/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleFront,
+	);
+	app.get(
+		'/FrontJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
 	);
 
-	app.use('/ArticlePerfTest', handleArticlePerfTest);
-	app.use('/AMPArticlePerfTest', handleAMPArticlePerfTest);
+	app.get(
+		'/EmailNewsletters',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAllEditorialNewslettersPage,
+	);
+
+	app.get(
+		'/AppsArticle/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAppsArticle,
+	);
+
+	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
+	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
-		try {
-			res.send(`
-                <!DOCTYPE html>
-                <html>
-                <body>
-                    <ul>
-                        <li><a href="/Article">Article</a></li>
-                        <li><a href="/AMPArticle">⚡️Article</a></li>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-                    </ul>
-                </body>
-                </html>
-            `);
-		} catch (e) {
-			const message =
-				e instanceof Error
-					? e.stack ?? 'Unknown stack'
-					: 'Unknown error';
-			res.status(500).send(`<pre>${message}</pre>`);
-		}
+		res.send(`
+			<!DOCTYPE html>
+			<html>
+			<body>
+				<ul>
+					<li><a href="/Article">Article</a></li>
+					<li><a href="/AMPArticle">⚡️Article</a></li>
+					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+				</ul>
+				<ul>
+					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+				</ul>
+			</body>
+			</html>
+		`);
 	});
 
 	// All params to error handlers must be declared for express to identify them as error middleware
@@ -122,7 +141,18 @@ export const prodServer = (): void => {
 	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
-		res.status(500).send(`<pre>${message}</pre>`);
+
+		if (e instanceof TypeError) {
+			res.status(400).send(`<pre>${message}</pre>`);
+		} else if (e instanceof NotRenderableInDCR) {
+			res.status(415).send(`<pre>${message}</pre>`);
+		} else if (e instanceof Error) {
+			res.status(500).send(`<pre>${message}</pre>`);
+		} else {
+			res.status(500).send(`<pre>${message}</pre>`);
+		}
+
+		recordError(e);
 	};
 
 	app.use(handleError);

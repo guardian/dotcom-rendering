@@ -130,6 +130,7 @@ interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 type Callout = {
 	kind: ElementKind.Callout;
 	isNonCollapsible: boolean;
+	prompt: string;
 	heading: string;
 	formId: number;
 	formFields: FormField[];
@@ -138,6 +139,10 @@ type Callout = {
 	activeUntil?: number;
 	contacts?: Contact[];
 };
+
+type SpecialReportAltAtom = {
+	kind: ElementKind.SpecialReportAltAtom;
+}
 
 type BodyElement =
 	| Text
@@ -184,7 +189,8 @@ type BodyElement =
 	| AudioAtom
 	| KnowledgeQuizAtom
 	| PersonalityQuizAtom
-	| NewsletterSignUp;
+	| NewsletterSignUp
+	| SpecialReportAltAtom;
 
 type Elements = BlockElement[] | undefined;
 
@@ -349,6 +355,9 @@ const parse =
 				const {
 					campaignId: campaignId,
 					isNonCollapsible: isNonCollapsible,
+					overridePrompt,
+					overrideTitle,
+					overrideDescription,
 				} = element.calloutTypeData ?? {};
 				if (
 					campaignId === undefined ||
@@ -360,17 +369,17 @@ const parse =
 					);
 				}
 
+
 				return getCallout(campaignId, campaigns)
 					.map(({ callout, name, activeUntil }) =>
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							heading: callout.callout,
+							prompt: overridePrompt === undefined ? "Share your experience" : overridePrompt,
+							heading: overrideTitle === undefined ? callout.callout : overrideTitle,
+							description: context.docParser(overrideDescription === undefined ? callout.description ?? '' : overrideDescription),
 							formFields: callout.formFields,
 							formId: callout.formId,
-							description: context.docParser(
-								callout.description ?? '',
-							),
 							name: name,
 							activeUntil: activeUntil,
 							contacts: callout.contacts,

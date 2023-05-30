@@ -13,16 +13,16 @@ import {
 } from './styles';
 
 export const ShareLink: FC<{
-	title: string;
+	title?: string;
 	urlAnchor: string;
 }> = ({ title, urlAnchor }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
 		const url = window.location.href;
-		const shareTitle = `
-Share your experience: ${title}
-`;
+		let shareTitle = `Share your experience`;
+		if (title) shareTitle += `: ${title}`;
+
 		const shareText = `
 I saw this callout in an article: ${url}#${urlAnchor}
 You can share your story by using the form on this article, or by contacting the Guardian on WhatsApp, Signal or Telegram.
@@ -46,8 +46,9 @@ You can share your story by using the form on this article, or by contacting the
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
-	if (typeof window === 'undefined' || typeof navigator === 'undefined')
+	if (typeof window === 'undefined' || typeof navigator === 'undefined') {
 		return <></>;
+	}
 
 	return (
 		<div css={calloutShare}>

@@ -289,10 +289,11 @@ export const ImageComponent = ({
 		getMaster(element.media.allImages) ??
 		getLargest(element.media.allImages);
 
-	const isSupported = (imageUrl: string) => {
+	const isSupported = (imageUrl: string): boolean => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
-		const extension = imageUrl.split('.').slice(-1)[0];
-		return extension && supportedImages.includes(extension.toLowerCase());
+		return supportedImages.some((extension) =>
+			imageUrl.endsWith(`.${extension}`),
+		);
 	};
 	if (!image || !isSupported(image)) {
 		// We should only try to render images that are supported by Fastly

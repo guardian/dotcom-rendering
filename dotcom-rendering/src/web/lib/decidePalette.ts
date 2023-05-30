@@ -642,8 +642,6 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
-		case ArticleDesign.Interview:
-			return pillarPalette[format.theme].dark;
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -685,6 +683,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
 
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
+
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -715,7 +714,12 @@ const textCardKicker = (format: ArticleFormat): string => {
 					return labs[400];
 			}
 		default:
-			return pillarPalette[format.theme].main;
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+					return labs[200];
+				default:
+					return pillarPalette[format.theme].main;
+			}
 	}
 };
 
@@ -1723,6 +1727,27 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundMessageForm = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[100];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[100];
+		case ArticlePillar.Culture:
+			return culture[100];
+		case ArticlePillar.Opinion:
+			return opinion[100];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[100];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[100];
+		default:
+			return news[100];
+	}
+};
+
 const textPullQuoteAttribution = (format: ArticleFormat): string =>
 	fillQuoteIcon(format);
 
@@ -2139,6 +2164,7 @@ export const decidePalette = (
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
+			messageForm: backgroundMessageForm(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

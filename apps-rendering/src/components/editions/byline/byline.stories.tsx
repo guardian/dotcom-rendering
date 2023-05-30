@@ -2,8 +2,6 @@
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { none, some } from '@guardian/types';
-import type { Option } from '@guardian/types';
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
 import {
@@ -17,7 +15,6 @@ import {
 import type { Image } from 'image';
 import { Optional } from 'optional';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Byline from './index';
 
 // ----- Setup ----- //
@@ -51,25 +48,13 @@ const contributors: Contributor[] = [
 const parser = new DOMParser();
 const parseByline = parse(parser);
 
-const profileLink = (): string =>
-	text('Profile Link', 'https://theguardian.com');
+const profileLink = 'https://theguardian.com';
+const byline = 'Jane Smith';
+const job = 'Editor of things';
 
-const byline = (): string => text('Byline', 'Jane Smith');
-
-const job = (): string => text('Job Title', 'Editor of things');
-
-const mockBylineHtml = (): Option<DocumentFragment> =>
-	parseByline(
-		`<a href="${profileLink()}">${byline()}</a> ${job()}`,
-	).toOption();
-
-const isImmersive = (): { display: ArticleDisplay } => {
-	return {
-		display: boolean('Immersive', false)
-			? ArticleDisplay.Immersive
-			: ArticleDisplay.Standard,
-	};
-};
+const mockBylineHtml = parseByline(
+	`<a href="${profileLink}">${byline}</a> ${job}`,
+).toOption();
 
 // ----- Stories ----- //
 
@@ -78,8 +63,8 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			display: ArticleDisplay.Standard,
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -88,9 +73,8 @@ const Analysis = (): ReactElement => (
 	<Byline
 		item={{
 			...analysis,
-			...isImmersive(),
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -99,9 +83,8 @@ const Feature = (): ReactElement => (
 	<Byline
 		item={{
 			...feature,
-			...isImmersive(),
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -110,8 +93,8 @@ const Review = (): ReactElement => (
 	<Byline
 		item={{
 			...review,
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -121,8 +104,8 @@ const Showcase = (): ReactElement => (
 		item={{
 			...article,
 			display: ArticleDisplay.Showcase,
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -131,9 +114,8 @@ const Interview = (): ReactElement => (
 	<Byline
 		item={{
 			...interview,
-			...isImmersive(),
-			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(ArticlePillar.News),
+			bylineHtml: mockBylineHtml,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -147,9 +129,8 @@ const Comment = (): ReactElement => (
 		<Byline
 			item={{
 				...comment,
-				...isImmersive(),
-				bylineHtml: mockBylineHtml(),
-				theme: selectPillar(ArticlePillar.News),
+				bylineHtml: mockBylineHtml,
+				theme: ArticlePillar.News,
 				contributors: contributors,
 			}}
 		/>
@@ -161,7 +142,6 @@ const Comment = (): ReactElement => (
 export default {
 	component: Byline,
 	title: 'AR/Editions/Byline',
-	decorators: [withKnobs],
 };
 
 export { Default, Analysis, Feature, Review, Showcase, Interview, Comment };

@@ -1,5 +1,5 @@
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
-import { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../web/lib/edition';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
@@ -24,6 +24,7 @@ export interface WindowGuardianConfig {
 		brazeApiKey?: string;
 		isPaidContent?: boolean;
 		isDev?: boolean;
+		hasInlineMerchandise?: boolean;
 	};
 	libs: {
 		googletag: string;
@@ -59,6 +60,7 @@ export const makeWindowGuardian = ({
 	contentType,
 	brazeApiKey,
 	GAData,
+	hasInlineMerchandise,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -79,6 +81,7 @@ export const makeWindowGuardian = ({
 	contentType?: string;
 	brazeApiKey?: string;
 	GAData?: GADataType;
+	hasInlineMerchandise?: boolean;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -103,6 +106,7 @@ export const makeWindowGuardian = ({
 		};
 	};
 	GAData?: GADataType;
+	borkWebVitals: typeof window.guardian.borkWebVitals;
 } => {
 	return {
 		config: {
@@ -125,9 +129,10 @@ export const makeWindowGuardian = ({
 				adUnit,
 				showRelatedContent: true,
 				ajaxUrl,
-				shouldHideReaderRevenue: shouldHideReaderRevenue ?? false,
-				isPaidContent: isPaidContent ?? false,
+				shouldHideReaderRevenue: !!shouldHideReaderRevenue,
+				isPaidContent: !!isPaidContent,
 				brazeApiKey,
+				hasInlineMerchandise,
 			}),
 			libs: {
 				googletag: googletagUrl,
@@ -150,5 +155,6 @@ export const makeWindowGuardian = ({
 			},
 		},
 		GAData,
+		borkWebVitals: {},
 	};
 };

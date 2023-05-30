@@ -16,9 +16,10 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { ImageBlockElement } from '../../types/content';
+import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { Palette } from '../../types/palette';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -49,6 +50,7 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -185,18 +187,23 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-const decideCaption = (mainMedia: ImageBlockElement): string => {
+const decideCaption = (mainMedia: FEElement | undefined): string => {
 	const caption = [];
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
-	if (mainMedia?.data?.caption) {
-		caption.push(mainMedia.data.caption);
-	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
-	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
-		caption.push(mainMedia.data.credit);
+	if (
+		mainMedia?._type ===
+		'model.dotcomrendering.pageElements.ImageBlockElement'
+	) {
+		if (mainMedia.data.caption) {
+			caption.push(mainMedia.data.caption);
+		}
+
+		if (mainMedia.displayCredit && mainMedia.data.credit) {
+			caption.push(mainMedia.data.credit);
+		}
 	}
 
 	return caption.join(' ');
@@ -239,7 +246,12 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
+export const ImmersiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -264,7 +276,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 
 	const showComments = article.isCommentable;
 
-	const mainMedia = article.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia = article.mainMediaElements[0];
+
 	const captionText = decideCaption(mainMedia);
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } = article.commercialProperties[article.editionId];
@@ -274,6 +287,9 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 	const palette = decidePalette(format);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const isInEuropeTest =
+		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	/**
 	We need change the height values depending on whether the labs header is there or not to keep
@@ -322,6 +338,8 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 		</div>
 	);
 
+	const renderAds = canRenderAds(article);
+
 	return (
 		<>
 			<div
@@ -345,12 +363,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						}}
 						nav={NAV}
 						subscribeUrl={
-							article.nav.readerRevenueLinks.header.subscribe
+							article.nav.readerRevenueLinks.header.contribute
 						}
 						editionId={article.editionId}
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -391,7 +410,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							article.starRating
+							article.starRating !== undefined
 								? article.starRating
 								: undefined
 						}
@@ -453,8 +472,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 											article.webPublicationDateDeprecated
 										}
 										hasStarRating={
-											!!article.starRating ||
-											article.starRating === 0
+											article.starRating !== undefined
 										}
 									/>
 								</Section>
@@ -637,6 +655,11 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									isDev={!!article.config.isDev}
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
+									lang={article.lang}
+									isRightToLeftLang={
+										article.isRightToLeftLang
+									}
+									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -709,13 +732,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 							>
 								<RightColumn>
 									<>
-										{mainMedia && (
+										{mainMedia && renderAds && (
 											<div
 												css={css`
 													margin-top: ${space[4]}px;
 												`}
 											>
-												{!article.shouldHideAds && (
+												{
 													<AdSlot
 														position="right"
 														display={format.display}
@@ -727,7 +750,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 																.isPaidContent
 														}
 													/>
-												)}
+												}
 											</div>
 										)}
 									</>
@@ -736,7 +759,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -829,12 +852,13 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 									sectionName={article.sectionName}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
+									edition={article.editionId}
 								/>
 							</Island>
 						</MostViewedFooterLayout>
 					</Section>
 				)}
-				{!isLabs && (
+				{!isLabs && renderAds && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -908,7 +932,7 @@ export const ImmersiveLayout = ({ article, NAV, format }: Props) => {
 					/>
 				</Island>
 			</BannerWrapper>
-			<MobileStickyContainer />
+			{renderAds && <MobileStickyContainer />}
 		</>
 	);
 };

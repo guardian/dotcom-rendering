@@ -187,7 +187,11 @@ export const renderElement = ({
 			if (switches.callouts) {
 				return (
 					<Island deferUntil="visible">
-						<CalloutBlockComponent callout={element} />
+						<CalloutBlockComponent
+							callout={element}
+							pageId={pageId}
+							format={format}
+						/>
 					</Island>
 				);
 			}

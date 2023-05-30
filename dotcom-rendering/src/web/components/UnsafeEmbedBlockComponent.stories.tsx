@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import { embedIframe } from '../browser/embedIframe';
+import { embedIframe } from '../client/embedIframe';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
 
 export default {
@@ -34,4 +34,4 @@ export const DefaultStory = () => {
 		</div>
 	);
 };
-DefaultStory.story = { name: 'default' };
+DefaultStory.storyName = 'default';

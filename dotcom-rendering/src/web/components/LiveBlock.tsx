@@ -41,8 +41,8 @@ export const LiveBlock = ({
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
 		!!block.blockLastUpdatedDisplay &&
-		!!block.blockFirstPublished &&
-		!!block.blockLastUpdated &&
+		block.blockFirstPublished !== undefined &&
+		block.blockLastUpdated !== undefined &&
 		block.blockLastUpdated > block.blockFirstPublished;
 
 	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
@@ -97,7 +97,7 @@ export const LiveBlock = ({
 					context="LiveBlock"
 				/>
 				{showLastUpdated &&
-					!!block.blockLastUpdated &&
+					block.blockLastUpdated !== undefined &&
 					!!block.blockLastUpdatedDisplay && (
 						<LastUpdated
 							lastUpdated={block.blockLastUpdated}

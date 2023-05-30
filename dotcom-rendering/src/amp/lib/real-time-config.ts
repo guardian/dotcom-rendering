@@ -19,6 +19,14 @@ type PubmaticRTCParameters = {
 
 type CriteoRTCParameters = { ZONE_ID: string };
 
+type OzoneRTCParameters = {
+	PUBLISHER_ID: string;
+	SITE_ID: string;
+	TAG_ID: string;
+	PLACEMENT_ID: string;
+	AD_UNIT_CODE: string;
+};
+
 /**
  * Determine the pub id and profile id required by Pubmatic to construct an RTC vendor
  *
@@ -75,6 +83,27 @@ export const criteoRTCParamters = (adType: AdType): CriteoRTCParameters => {
 	}
 };
 
+export const ozoneRTCParameters = (
+	adType: AdType,
+	id: string,
+): OzoneRTCParameters => {
+	const rowPlacementId = '1500000083';
+	const ukPlacementId = '0420420507';
+
+	const placementId =
+		adType.isSticky || adType.adRegion === 'UK'
+			? ukPlacementId
+			: rowPlacementId;
+
+	return {
+		PUBLISHER_ID: 'OZONEGMG0001',
+		SITE_ID: '4204204209',
+		TAG_ID: '1000000000',
+		PLACEMENT_ID: placementId,
+		AD_UNIT_CODE: id,
+	};
+};
+
 const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';
 
 const amazonConfig = {
@@ -88,8 +117,10 @@ const amazonConfig = {
 export const realTimeConfig = (
 	usePubmaticPrebid: boolean,
 	useCriteoPrebid: boolean,
+	useOzonePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
+	id: string,
 	adType: AdType,
 ): string => {
 	const pubmaticConfig = {
@@ -100,11 +131,16 @@ export const realTimeConfig = (
 		criteo: criteoRTCParamters(adType),
 	};
 
+	const ozoneConfig = {
+		ozone: ozoneRTCParameters(adType, id),
+	};
+
 	const data = {
 		urls: usePermutive ? [permutiveURL] : [],
 		vendors: {
 			...(usePubmaticPrebid ? pubmaticConfig : {}),
 			...(useCriteoPrebid ? criteoConfig : {}),
+			...(useOzonePrebid ? ozoneConfig : {}),
 			...(useAmazon ? amazonConfig : {}),
 		},
 		timeoutMillis: 1000,

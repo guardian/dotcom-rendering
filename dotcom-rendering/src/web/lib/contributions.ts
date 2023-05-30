@@ -133,7 +133,7 @@ const AskPauseDays = 90;
 
 export const isRecentOneOffContributor = (): boolean => {
 	const lastContributionDate = getLastOneOffContributionTimestamp();
-	if (lastContributionDate) {
+	if (lastContributionDate !== undefined) {
 		const now = Date.now();
 		return dateDiffDays(lastContributionDate, now) <= AskPauseDays;
 	}

@@ -1,5 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
-import { DCRFrontCard } from '../../types/front';
+import type { DCRFrontCard } from '../../types/front';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 
@@ -46,6 +46,8 @@ export const FrontCard = (props: Props) => {
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
 		showMainVideo: trail.showMainVideo,
+		isExternalLink: trail.isExternalLink,
+		branding: trail.branding,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { headline, text, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -15,7 +20,7 @@ type SectionType = {
 };
 
 /** set decimal places */
-const PRECISION = 6;
+const PRECISION = 2;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -34,8 +39,18 @@ const labelStyles = (background: string) => css`
 	text-anchor: middle;
 `;
 
+const lineStyles = css`
+	stroke-width: 2;
+	stroke: ${palette.neutral[97]};
+`;
+
 const withoutZeroSections = (sections: SectionType[]) =>
 	sections.filter((section) => section.value !== 0);
+
+const polarToCartesian = (angle: number, radius: number) =>
+	[Math.cos(angle) * radius, Math.sin(angle) * radius]
+		.map((n) => n.toFixed(PRECISION))
+		.join(',');
 
 export const Doughnut = ({
 	sections,
@@ -48,6 +63,7 @@ export const Doughnut = ({
 	const outerRadius = size / 2;
 	const innerRadius = outerRadius * (percentCutout / 100);
 	const radius = (innerRadius + outerRadius) / 2;
+	const strokeWidth = outerRadius - innerRadius;
 
 	const totalValue = sections
 		.map((section) => section.value)
@@ -57,17 +73,22 @@ export const Doughnut = ({
 	const tau = Math.PI * 2;
 	const quarterTurn = Math.PI / 2;
 
-	const center = size / 2;
+	const halfSize = size / 2;
 
 	// Segments
 	const segments: {
-		dasharray: string;
-		dashoffset: string;
+		element: JSX.Element;
 		color: string;
 		transform: string;
 		label: string;
 		value: number;
 	}[] = [];
+
+	/**
+	 * These lines help distinguish segments.
+	 * Only shown for 2 segments or more.
+	 */
+	const separatingLines: { label: string; d: string }[] = [];
 
 	let angleStart = -quarterTurn;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
@@ -76,52 +97,60 @@ export const Doughnut = ({
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
-		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
-			.map((dash) => dash.toFixed(PRECISION))
-			.join(',');
 		/**
-		 * The offset is turned one quarter and rotated
-		 * with a transform to keep the top join as crisp
-		 * as possible.
+		 * Either a circle, for a single segment, or an arc for multiple segments.
+		 * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
 		 */
-		const dashoffset = (-(quarterTurn + angleStart) * radius).toFixed(
-			PRECISION,
-		);
-
+		const element =
+			angleLength === tau ? (
+				<circle
+					r={radius}
+					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+			) : (
+				<path
+					d={[
+						`M${polarToCartesian(angleStart, radius)}`,
+						`A${radius},${radius} 0 ${
+							// large-arc-flag, depends on segment being smaller or larger than one half
+							angleLength < tau / 2 ? 0 : 1
+						} 1 ${polarToCartesian(angleEnd, radius)}`,
+					].join(' ')}
+					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+			);
 		segments.push({
-			dasharray,
-			dashoffset,
+			element,
 			label,
 			value,
-			transform: [
-				'translate(',
-				(Math.cos(angleMid) * radius + center).toFixed(PRECISION),
-				', ',
-				(Math.sin(angleMid) * radius + center).toFixed(PRECISION),
-				')',
-			].join(''),
+			transform: `translate(${polarToCartesian(angleMid, radius)})`,
 			color,
+		});
+
+		separatingLines.push({
+			label,
+			d: [
+				`M${polarToCartesian(angleEnd, innerRadius)}`,
+				`L${polarToCartesian(angleEnd, outerRadius)}`,
+			].join(' '),
 		});
 
 		angleStart = angleEnd;
 	}
 
 	return (
-		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+		<svg
+			width={size}
+			height={size}
+			viewBox={`${-halfSize} ${-halfSize} ${size} ${size}`}
+		>
 			{segments.map((segment) => (
 				<g key={segment.label + segment.color}>
-					<circle
-						cx={center}
-						cy={center}
-						r={radius}
-						fill="none"
-						stroke={segment.color}
-						strokeWidth={outerRadius - innerRadius}
-						strokeDasharray={segment.dasharray}
-						strokeDashoffset={segment.dashoffset}
-						// rotate back a quarter turn
-						transform={`rotate(-90 ${center} ${center})`}
-					/>
+					{segment.element}
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
@@ -132,11 +161,11 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
-			<text
-				css={unitStyles}
-				transform={`translate(${center}, ${center})`}
-				dy="0.4em"
-			>
+			{separatingLines.length >= 2 &&
+				separatingLines.map(({ d, label }) => (
+					<path key={label} css={lineStyles} d={d} />
+				))}
+			<text css={unitStyles} dy="0.4em">
 				%
 			</text>
 		</svg>

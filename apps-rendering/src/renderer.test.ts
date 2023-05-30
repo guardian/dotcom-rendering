@@ -598,14 +598,8 @@ describe('Shows drop caps', () => {
 		design: ArticleDesign.Interview,
 	};
 
-	test('Shows drop cap if the paragraph is at least 200 characters long, the first word is longer than three chars, and the article has the correct design', () => {
+	test('Shows drop cap if the paragraph is at least 200 characters long, and the article has the correct design', () => {
 		const showDropCap = shouldShowDropCap(paragraph, format, !isEditions);
-		expect(showDropCap).toBe(true);
-	});
-
-	test('Shows drop cap if the first word is at least three characters long', () => {
-		const threeChars = `One ${paragraph}`;
-		const showDropCap = shouldShowDropCap(threeChars, format, !isEditions);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -617,28 +611,6 @@ describe('Shows drop caps', () => {
 			!isEditions,
 		);
 		expect(showDropCap).toBe(true);
-	});
-
-	test('Does not show drop cap if the paragraph starts with an "I", despite being at least 200 characters long', () => {
-		const startsWithI = `Inevitably, ${paragraph}`;
-		const showDropCap = shouldShowDropCap(startsWithI, format, !isEditions);
-		expect(showDropCap).toBe(false);
-	});
-
-	test('Does not show drop cap if the first word is shorter than three characters', () => {
-		const twoChars = `On ${paragraph}`;
-		const showDropCap = shouldShowDropCap(twoChars, format, !isEditions);
-		expect(showDropCap).toBe(false);
-	});
-
-	test('Does not show drop cap if the first word is shorter than three characters (ignoring quotation mark)', () => {
-		const twoCharsWithQuotationMark = `“On ${paragraph}`;
-		const showDropCap = shouldShowDropCap(
-			twoCharsWithQuotationMark,
-			format,
-			!isEditions,
-		);
-		expect(showDropCap).toBe(false);
 	});
 
 	test('Does not show drop cap if the paragraph is shorter than 200 characters', () => {

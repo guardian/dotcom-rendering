@@ -3,9 +3,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { withKnobs } from '@storybook/addon-knobs';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Pullquote from './index';
 
 // ----- Setup ------ //
@@ -22,7 +20,7 @@ const getInputProps = (): Props => ({
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Analysis,
-		theme: selectPillar(ArticlePillar.News),
+		theme: ArticlePillar.News,
 	},
 });
 
@@ -35,7 +33,6 @@ const Default = (): ReactElement => <Pullquote {...getInputProps()} />;
 export default {
 	component: Pullquote,
 	title: 'AR/Editions/PullQuote',
-	decorators: [withKnobs],
 };
 
 export { Default };

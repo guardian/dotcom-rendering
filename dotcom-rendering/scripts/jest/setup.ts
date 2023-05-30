@@ -110,3 +110,6 @@ Object.defineProperty(window, 'localStorage', {
  */
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
+
+// Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
+jest.mock('@guardian/cdk/lib/constants/tracking-tag');

@@ -24,6 +24,7 @@ const enum ElementKind {
 	NewsletterSignUp,
 	HeadingTwo,
 	HeadingThree,
+	SpecialReportAltAtom,
 }
 
 // ----- Exports ----- //

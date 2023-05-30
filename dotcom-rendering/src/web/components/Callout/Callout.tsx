@@ -10,18 +10,17 @@ import { CalloutDescription, CalloutShare } from './CalloutComponents';
 import { Form } from './Form';
 import { conditionallyRenderContactIcon, MessageUs } from './MessageUs';
 
-const wrapperStyles = css`
-	background-color: ${neutral[97]};
-`;
-
-const summaryContentWrapper = css`
+const summaryContentWrapper = (isNonCollapsible: boolean) => css`
 	visibility: visible;
-	padding: 2px ${space[2]}px ${space[6]}px ${space[2]}px;
+	padding-top: 2px;
+	padding-bottom: ${space[6]}px;
+	padding-left: ${isNonCollapsible ? 0 : space[2]}px;
+	padding-right: ${isNonCollapsible ? 0 : space[2]}px;
 `;
 
-const titleStyles = css`
+const promptStyles = (isNonCollapsible: boolean) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })};
-	color: ${brand[500]};
+	color: ${isNonCollapsible ? neutral[7] : brand[500]};
 `;
 
 const subtitleTextHeaderStyles = css`
@@ -34,15 +33,16 @@ const tabTitle = css`
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	margin-left: ${space[2]}px;
 `;
 
 const tabIcons = css`
+	padding-left: ${space[1]}px;
 	display: flex;
 	align-items: center;
 `;
 
 export interface CalloutBlockProps {
+	prompt: string;
 	heading: string;
 	description: string;
 	formFields: CampaignFieldType[];
@@ -51,9 +51,12 @@ export interface CalloutBlockProps {
 	isExpired: boolean;
 	isNonCollapsible: boolean;
 	contacts?: CalloutContactType[];
+	pageId: string;
+	format: ArticleFormat;
 }
 
 export const CalloutBlock = ({
+	prompt,
 	heading,
 	description,
 	formFields,
@@ -61,10 +64,12 @@ export const CalloutBlock = ({
 	submissionURL,
 	isNonCollapsible,
 	contacts,
+	pageId,
+	format,
 }: CalloutBlockProps) => {
 	const [selectedTab, setSelectedTab] = useState('form');
 	const shouldShowContacts = contacts && contacts.length > 0;
-
+	const shouldShowHeading = !!heading && !isNonCollapsible;
 	const tabsContent = [
 		{
 			id: 'form',
@@ -74,6 +79,7 @@ export const CalloutBlock = ({
 					formFields={formFields}
 					submissionURL={submissionURL}
 					formID={formId}
+					pageId={pageId}
 				/>
 			),
 		},
@@ -98,14 +104,26 @@ export const CalloutBlock = ({
 	}
 
 	return (
-		<div id={formId} css={wrapperStyles}>
-			<div css={summaryContentWrapper}>
-				<div css={titleStyles}>Share your experience</div>
-				{!isNonCollapsible && (
+		<div id={formId}>
+			<div css={summaryContentWrapper(isNonCollapsible)}>
+				{!!prompt && (
+					<div css={promptStyles(isNonCollapsible)}>{prompt}</div>
+				)}
+				{shouldShowHeading && (
 					<h4 css={subtitleTextHeaderStyles}>{heading}</h4>
 				)}
-				<CalloutDescription description={description} />
-				<CalloutShare title={heading} urlAnchor={formId} />
+				{!!description && (
+					<CalloutDescription
+						description={description}
+						useBrandColour={isNonCollapsible}
+					/>
+				)}
+				<CalloutShare
+					title={heading}
+					urlAnchor={formId}
+					useBrandColour={isNonCollapsible}
+					format={format}
+				/>
 			</div>
 			<Tabs
 				tabsLabel="Tell us via online form or message us using your phone"

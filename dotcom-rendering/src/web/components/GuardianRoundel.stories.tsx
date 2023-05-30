@@ -8,4 +8,4 @@ export default {
 export const defaultStory = () => {
 	return <GuardianRoundel />;
 };
-defaultStory.story = { name: 'default' };
+defaultStory.storyName = 'default';
