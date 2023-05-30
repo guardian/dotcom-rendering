@@ -1,5 +1,5 @@
-import { initPerf } from '../browser/initPerf';
-import { record } from '../browser/ophan/ophan';
+import { initPerf } from '../client/initPerf';
+import { record } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;

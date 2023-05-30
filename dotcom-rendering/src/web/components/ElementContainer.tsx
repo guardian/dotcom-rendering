@@ -110,6 +110,7 @@ export const ElementContainer = ({
 				'data-link-name': ophanComponentLink,
 				'data-component': ophanComponentName,
 				'data-container-name': containerName,
+				id: ophanComponentName,
 				className: className ? `${style} ${className}` : style,
 				children: child,
 			});

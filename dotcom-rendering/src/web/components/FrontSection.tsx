@@ -6,7 +6,9 @@ import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { ContainerTitle } from './ContainerTitle';
+import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
+import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
 
 type Props = {
@@ -18,6 +20,8 @@ type Props = {
 	url?: string;
 	/** The html `id` property of the element */
 	sectionId?: string;
+	collectionId?: string;
+	pageId?: string;
 	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
 	/** A React component can be passed to be inserted inside the left column */
@@ -31,7 +35,7 @@ type Props = {
 	 * 🛠️ DEBUG ONLY 🛠️
 	 * Used to highlight the name of a container when DCR debug mode is enabled
 	 *
-	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md
+	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/client/debug/README.md
 	 */
 	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */
@@ -49,6 +53,9 @@ type Props = {
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
 	badge?: EmotionJSX.Element;
+	/** Enable the "Show More" button on this container to allow readers to load more cards */
+	canShowMore?: boolean;
+	ajaxUrl?: string;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -56,38 +63,41 @@ const width = (columns: number, columnWidth: number, columnGap: number) =>
 
 /** Not all browsers support CSS grid, so we set explicit width as a fallback */
 const fallbackStyles = css`
-	padding: 0 12px;
-	margin: 0 auto;
+	@supports not (display: grid) {
+		padding: 0 12px;
+		margin: 0 auto;
 
-	${from.mobileLandscape} {
-		padding: 0 20px;
-	}
+		${from.mobileLandscape} {
+			padding: 0 20px;
+		}
 
-	${from.tablet} {
-		${width(12, 40, 20)}
-	}
+		${from.tablet} {
+			${width(12, 40, 20)}
+		}
 
-	${from.desktop} {
-		${width(12, 60, 20)}
-	}
+		${from.desktop} {
+			${width(12, 60, 20)}
+		}
 
-	${from.leftCol} {
-		${width(14, 60, 20)}
-	}
+		${from.leftCol} {
+			${width(14, 60, 20)}
+		}
 
-	${from.wide} {
-		${width(16, 60, 20)}
-	}
-
-	@supports (display: grid) {
-		width: 100%;
-		padding: 0;
-		margin: 0;
+		${from.wide} {
+			${width(16, 60, 20)}
+		}
 	}
 `;
 
 const containerStyles = css`
 	display: grid;
+
+	grid-template-rows:
+		[headline-start show-hide-start] auto
+		[show-hide-end headline-end content-toggleable-start content-start] auto
+		[content-end content-toggleable-end show-more-start] auto
+		[show-more-end];
+
 	grid-template-columns:
 		[viewport-start] 0px
 		[content-start title-start]
@@ -96,6 +106,8 @@ const containerStyles = css`
 		minmax(0, 1fr)
 		[content-end title-end hide-end]
 		0px [viewport-end];
+
+	grid-auto-flow: dense;
 	column-gap: 10px;
 
 	${from.mobileLandscape} {
@@ -125,6 +137,13 @@ const containerStyles = css`
 	}
 
 	${from.leftCol} {
+		grid-template-rows:
+			[headline-start show-hide-start content-start] auto
+			[show-hide-end content-toggleable-start] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
+			[show-more-end];
+
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[title-start]
@@ -138,6 +157,13 @@ const containerStyles = css`
 	}
 
 	${from.wide} {
+		grid-template-rows:
+			[headline-start content-start content-toggleable-start show-hide-start] auto
+			[show-hide-end] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
+			[show-more-end];
+
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[title-start]
@@ -149,36 +175,15 @@ const containerStyles = css`
 			[hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
-
-	grid-auto-flow: dense;
-	grid-template-rows: auto [content-start] auto;
-
-	${from.leftCol} {
-		grid-template-rows: [content-start] repeat(2, auto);
-	}
 `;
 
-const containerStylesToggleable = css`
-	${from.leftCol} {
-		grid-template-rows: auto [content-start] repeat(2, auto);
-	}
-	${from.wide} {
-		grid-template-rows: [content-start] repeat(3, auto);
-	}
-`;
-
-const headlineContainerStyles = css`
-	grid-row-start: 1;
+const sectionHeadline = css`
+	grid-row: headline;
 	grid-column: title;
-	${from.leftCol} {
-		grid-row-end: span 2;
-	}
 
 	display: flex;
 	flex-direction: column;
-`;
 
-const headlineContainerBorders = css`
 	${from.leftCol} {
 		position: relative;
 		::after {
@@ -196,11 +201,10 @@ const headlineContainerBorders = css`
 
 const paddings = css`
 	padding-top: ${space[2]}px;
-	padding-bottom: ${space[9]}px;
 `;
 
 const sectionShowHide = css`
-	grid-row-start: 1;
+	grid-row: show-hide;
 	grid-column: hide;
 	justify-self: end;
 `;
@@ -213,14 +217,10 @@ const sectionContent = css`
 	}
 
 	grid-column: content;
+`;
 
-	grid-row-start: content-start;
-	${from.leftCol} {
-		grid-row-end: span 2;
-	}
-	${from.wide} {
-		grid-row-end: -1;
-	}
+const sectionContentRow = (toggleable: boolean) => css`
+	grid-row: ${toggleable ? 'content-toggleable' : 'content'};
 `;
 
 const sectionContentPadded = css`
@@ -230,13 +230,19 @@ const sectionContentPadded = css`
 	}
 `;
 
+const sectionShowMore = css`
+	grid-row: show-more;
+	grid-column: content;
+`;
+
 const sectionTreats = css`
 	display: none;
 
 	${from.leftCol} {
 		display: block;
 		align-self: end;
-		grid-row-start: -2;
+
+		grid-row: treats;
 		grid-column: title;
 	}
 
@@ -248,8 +254,8 @@ const sectionTreats = css`
 /** element which contains border and inner background colour, if set */
 const decoration = css`
 	grid-row: 1 / -1;
-
 	grid-column: 1 / -1;
+
 	${from.tablet} {
 		grid-column: 2 / -2;
 	}
@@ -270,6 +276,10 @@ const sideBorders = css`
 
 const topBorder = css`
 	border-top-style: solid;
+`;
+
+const bottomPadding = css`
+	padding-bottom: ${space[9]}px;
 `;
 
 const titleStyle = css`
@@ -299,6 +309,9 @@ const titleStyle = css`
  * ├───────┤
  * │▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒│
+ * ├───────┤
+ * │Show   │
+ * |More   │
  * └───────┘
  *
  * from `tablet` (740) to `desktop` (980)
@@ -310,6 +323,8 @@ const titleStyle = css`
  * ├───────────────────────┤
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───────────────────────┤
+ * │Show More              │
  * └───────────────────────┘
  *
  * on `leftCol` (1140) if component is toggleable
@@ -322,6 +337,8 @@ const titleStyle = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───┼─────────────────────┤
+ * │   │Show More            │
  * └───┴─────────────────────┘
  *
  * on `leftCol` (1140) if component is not toggleable
@@ -334,6 +351,8 @@ const titleStyle = css`
  * │   │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │Tre│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
  * │ats│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+ * ├───┼──────────────────────┤
+ * │   │Show More             │
  * └───┴──────────────────────┘
  *
  * on `wide` (1300)
@@ -346,6 +365,8 @@ const titleStyle = css`
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │     │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
  * │Treat│▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  │
+ * ├─────┼─────────────────────────┤
+ * │     │Show More                │
  * └─────┴─────────────────────────┘
  *
  */
@@ -359,24 +380,29 @@ export const FrontSection = ({
 	leftContent,
 	ophanComponentLink,
 	ophanComponentName,
-	sectionId,
+	sectionId = '',
+	collectionId,
+	pageId,
 	showDateHeader = false,
 	showTopBorder = true,
 	toggleable = false,
 	treats,
 	url,
 	badge,
+	canShowMore,
+	ajaxUrl,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const isToggleable = toggleable && !!sectionId;
-
-	const childrenContainerStyles = [
-		sectionContent,
-		sectionContentPadded,
-		paddings,
-	];
+	const showMore =
+		canShowMore &&
+		!!title &&
+		!!sectionId &&
+		!!collectionId &&
+		!!pageId &&
+		!!ajaxUrl;
 
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
@@ -391,7 +417,6 @@ export const FrontSection = ({
 			css={[
 				fallbackStyles,
 				containerStyles,
-				isToggleable && containerStylesToggleable,
 				css`
 					background-color: ${overrides?.background.container};
 				`,
@@ -399,7 +424,7 @@ export const FrontSection = ({
 		>
 			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
 
-			<div css={[headlineContainerStyles, headlineContainerBorders]}>
+			<div css={[sectionHeadline]}>
 				<Hide until="leftCol">{badge}</Hide>
 				<div css={titleStyle}>
 					<Hide from="leftCol">{badge}</Hide>
@@ -416,26 +441,45 @@ export const FrontSection = ({
 				{leftContent}
 			</div>
 
-			{isToggleable ? (
-				<>
-					<div css={sectionShowHide}>
-						<ShowHideButton
-							sectionId={sectionId}
-							overrideContainerToggleColour={
-								overrides?.text.containerToggle
-							}
-						/>
-					</div>
-					<div
-						css={childrenContainerStyles}
-						id={`container-${sectionId}`}
-					>
-						{children}
-					</div>
-				</>
-			) : (
-				<div css={childrenContainerStyles}>{children}</div>
+			{isToggleable && (
+				<div css={sectionShowHide}>
+					<ShowHideButton
+						sectionId={sectionId}
+						overrideContainerToggleColour={
+							overrides?.text.containerToggle
+						}
+					/>
+				</div>
 			)}
+
+			<div
+				css={[
+					sectionContent,
+					sectionContentPadded,
+					sectionContentRow(toggleable),
+					paddings,
+				]}
+				id={`container-${sectionId}`}
+			>
+				{children}
+			</div>
+
+			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
+				{showMore && (
+					<Island deferUntil="interaction">
+						<ShowMore
+							title={title}
+							sectionId={sectionId}
+							collectionId={collectionId}
+							pageId={pageId}
+							ajaxUrl={ajaxUrl}
+							editionId={editionId}
+							containerPalette={containerPalette}
+							showAge={title === 'Headlines'}
+						/>
+					</Island>
+				)}
+			</div>
 
 			{treats && (
 				<div css={[sectionTreats, paddings]}>

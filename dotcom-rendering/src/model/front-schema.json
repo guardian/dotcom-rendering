@@ -66,15 +66,8 @@
                     "type": "string"
                 },
                 "abTests": {
-                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object",
-                    "additionalProperties": {
-                        "enum": [
-                            "control",
-                            "variant"
-                        ],
-                        "type": "string"
-                    }
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
                 },
                 "pbIndexSites": {
                     "type": "array",
@@ -804,6 +797,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -812,6 +808,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -1484,6 +1483,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -1492,6 +1494,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -2164,6 +2169,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -2172,6 +2180,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -2727,6 +2738,103 @@
             ],
             "type": "string"
         },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "brandingType": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
+            ]
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
@@ -3095,6 +3203,9 @@
                         },
                         "embedCss": {
                             "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
                         }
                     }
                 },
@@ -3136,103 +3247,6 @@
                 "Video"
             ],
             "type": "string"
-        },
-        "Branding": {
-            "type": "object",
-            "properties": {
-                "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                "sponsorName": {
-                    "type": "string"
-                },
-                "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                },
-                "aboutThisLink": {
-                    "type": "string"
-                },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                }
-            },
-            "required": [
-                "aboutThisLink",
-                "logo",
-                "sponsorName"
-            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

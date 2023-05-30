@@ -63,6 +63,7 @@ const buildBrazeEpicConfig = (
 	contentType: string,
 	brazeArticleContext: BrazeArticleContext,
 	tags: TagType[],
+	shouldHideReaderRevenue: boolean,
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
@@ -73,6 +74,7 @@ const buildBrazeEpicConfig = (
 					brazeArticleContext,
 					contentType,
 					tags,
+					shouldHideReaderRevenue,
 				),
 			show: (meta: any) => () =>
 				(
@@ -161,6 +163,7 @@ export const SlotBodyEnd = ({
 			contentType,
 			brazeArticleContext,
 			tags,
+			shouldHideReaderRevenue,
 		);
 		const epicConfig: SlotConfig = {
 			candidates: [brazeEpic, readerRevenueEpic],

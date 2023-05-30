@@ -4,6 +4,7 @@ import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
 import type { FETrailType, TrailType } from './trails';
+import { Branding } from './branding';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
@@ -176,8 +177,9 @@ export type FEFrontCard = {
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId } }[];
+		editionBrandings: { edition: { id: EditionId }; branding?: Branding }[];
 		href?: string;
+		embedUri?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -263,6 +265,8 @@ export type DCRFrontCard = {
 	mediaDuration?: number;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
+	embedUri?: string;
+	branding?: Branding;
 };
 
 export type FESnapType = {
@@ -274,6 +278,7 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+	embedJs?: string;
 };
 
 type FECollectionConfigType = {
