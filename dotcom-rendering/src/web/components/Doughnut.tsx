@@ -49,6 +49,16 @@ const polarToCartesian = (angle: number, radius: number) =>
 
 const halfGap = (radius: number) => Math.asin(SEGMENT_GAP / 2 / radius);
 
+/** @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#elliptical_arc_curve */
+const arc = (start: number, end: number, radius: number) =>
+	[
+		`A${radius},${radius}`,
+		0, // rotation
+		Math.abs(end - start) <= TAU / 2 ? 0 : 1, // 1 - large / 0 small arc
+		end < start ? 0 : 1, // sweep flag (clockwise / )
+		polarToCartesian(end, radius),
+	].join(' ');
+
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
@@ -84,12 +94,8 @@ export const Doughnut = ({
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
-		/** depends on segment being smaller or larger than one half */
-		const largeArcFlag = angleLength < TAU / 2 ? 0 : 1;
-
 		/**
 		 * Either a circle, for a single segment, or an arc for multiple segments.
-		 * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
 		 */
 		const element =
 			angleLength === TAU ? (
@@ -106,18 +112,20 @@ export const Doughnut = ({
 							angleStart + halfGap(outerRadius),
 							outerRadius,
 						)}`,
-						`A${outerRadius},${outerRadius} 0 ${largeArcFlag} 1 ${polarToCartesian(
+						arc(
+							angleStart + halfGap(outerRadius),
 							angleEnd - halfGap(outerRadius),
 							outerRadius,
-						)}`,
+						),
 						`L${polarToCartesian(
 							angleEnd - halfGap(innerRadius),
 							innerRadius,
 						)}`,
-						`A${innerRadius},${innerRadius} 0 ${largeArcFlag} 0 ${polarToCartesian(
+						arc(
+							angleEnd - halfGap(innerRadius),
 							angleStart + halfGap(innerRadius),
 							innerRadius,
-						)}`,
+						),
 						'Z',
 					].join(' ')}
 					fill={color}
