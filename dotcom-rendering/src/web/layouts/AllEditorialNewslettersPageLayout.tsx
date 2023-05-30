@@ -14,7 +14,6 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
-import { NewslettersList } from '../components/NewsletterList';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
@@ -157,7 +156,6 @@ export const AllEditorialNewslettersPageLayout = ({
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
-				<NewslettersList newsletters={newslettersPage.newsletters} />
 			</main>
 
 			<Section
