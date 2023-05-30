@@ -40,33 +40,44 @@ const mapStaticGroups = (
 	};
 };
 
+const reduceToDefaultGrouping = (
+	newsletters: Newsletter[],
+): GroupedNewsletters => {
+	const grouping: GroupedNewsletters = {
+		groups: [],
+	};
+
+	newsletters.forEach((newsletter) => {
+		const { group: groupName } = newsletter;
+		const exstingGroup = grouping.groups.find(
+			(group) => group.title === groupName,
+		);
+		if (exstingGroup) {
+			exstingGroup.newsletters.push(newsletter);
+		} else {
+			grouping.groups.push({
+				title: groupName,
+				newsletters: [newsletter],
+			});
+		}
+	});
+
+	return grouping;
+};
+
 const getGroups = (
 	newsletterData: FENewslettersPageType,
 ): GroupedNewsletters => {
 	const { newsletters, editionId } = newsletterData;
 
-	if (editionId === 'UK') {
+	if (editionId === 'US') {
 		return mapStaticGroups(
 			STATIC_GROUP_DATA.UK,
 			newsletterData.newsletters,
 		);
 	}
 
-	const allGroupNames = newsletters.reduce<string[]>((list, newsletter) => {
-		if (!list.includes(newsletter.group)) {
-			list.push(newsletter.group);
-		}
-		return list;
-	}, []);
-
-	return {
-		groups: allGroupNames.map((groupName) => ({
-			title: groupName,
-			newsletters: newsletters.filter(
-				(newsletter) => newsletter.group === groupName,
-			),
-		})),
-	};
+	return reduceToDefaultGrouping(newsletters);
 };
 
 export const enhanceNewslettersPage = (
