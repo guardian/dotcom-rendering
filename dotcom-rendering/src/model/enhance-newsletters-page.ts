@@ -70,20 +70,17 @@ const getGroups = (
 ): GroupedNewsletters => {
 	const { newsletters, editionId } = newsletterData;
 
-	if (editionId === 'UK') {
-		return mapStaticGroups(
-			STATIC_GROUP_DATA.UK,
-			newsletterData.newsletters,
-		);
+	switch (editionId) {
+		case 'UK':
+			return mapStaticGroups(STATIC_GROUP_DATA.UK, newsletters);
+		case 'US':
+			return mapStaticGroups(STATIC_GROUP_DATA.US, newsletters);
+		case 'AU':
+			return mapStaticGroups(STATIC_GROUP_DATA.AU, newsletters);
+		case 'INT':
+		case 'EUR':
+			return reduceToDefaultGrouping(newsletters);
 	}
-	if (editionId === 'US') {
-		return mapStaticGroups(
-			STATIC_GROUP_DATA.US,
-			newsletterData.newsletters,
-		);
-	}
-
-	return reduceToDefaultGrouping(newsletters);
 };
 
 export const enhanceNewslettersPage = (
