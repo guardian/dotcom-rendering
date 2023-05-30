@@ -39,7 +39,7 @@
 				"house-to-home",
 				"save-for-later",
 				"five-great-reads",
-				"The-Upside"
+				"the-upside"
 			]
 		},
 		{
@@ -129,7 +129,7 @@
 				"inside-saturday",
 				"house-to-home",
 				"save-for-later",
-				"The-Upside",
+				"the-upside",
 				"the-long-read"
 			]
 		},
@@ -172,6 +172,92 @@
 				"first-dog",
 				"the-rural-network",
 				"australian-politics"
+			]
+		}
+	],
+	"AU": [
+		{
+			"title": "Get started",
+			"newsletters": [
+				"morning-mail",
+				"afternoon-update",
+				"first-dog",
+				"the-rural-network"
+			]
+		},
+		{
+			"title": "From our correspondents",
+			"newsletters": [
+				"green-light",
+				"global-dispatch",
+				"tech-scape",
+				"pushing-buttons",
+				"fashion-statement"
+			]
+		},
+		{
+			"title": "Culture Picks",
+			"newsletters": [
+				"save-for-later",
+				"hear-here",
+				"sleeve-notes",
+				"design-review",
+				"bookmarks",
+				"film-today",
+				"art-weekly"
+			]
+		},
+		{
+			"title": "Weekend reads",
+			"newsletters": [
+				"five-great-reads",
+				"The-upside",
+				"the-long-read"
+			]
+		},
+		{
+			"title": "Go deeper",
+			"newsletters": [
+				"cotton-capital",
+				"documentaries",
+				"patriarchy",
+				"her-stage"
+			]
+		},
+		{
+			"title": "Sport",
+			"newsletters": [
+				"sports-au",
+				"football-daily",
+				"moving-the-goalposts",
+				"the-spin",
+				"the-recap",
+				"the-breakdown"
+			]
+		},
+		{
+			"title": "In brief",
+			"newsletters": [
+				"today-au",
+				"australian-politics",
+				"best-of-opinion-au",
+				"today-uk",
+				"today-us",
+				"best-of-opinion",
+				"best-of-opinion-us"
+			]
+		},
+		{
+			"title": "International correspondents",
+			"newsletters": [
+				"morning-briefing",
+				"first-thing",
+				"this-is-europe",
+				"business-today",
+				"word-of-mouth",
+				"guardian-traveller",
+				"inside-saturday",
+				"house-to-home"
 			]
 		}
 	]
