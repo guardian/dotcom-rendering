@@ -1,11 +1,10 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { SerializedStyles } from '@emotion/serialize';
 
 const colourStyles = (colour: string) => css`
 	color: ${colour};
