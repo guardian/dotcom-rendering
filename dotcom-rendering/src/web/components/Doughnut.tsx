@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	palette,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, text, textSans } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -21,6 +16,9 @@ type SectionType = {
 
 /** set decimal places */
 const PRECISION = 2;
+
+/** gap between segments in pixels */
+const SEGMENT_GAP = 2;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -39,11 +37,6 @@ const labelStyles = (background: string) => css`
 	text-anchor: middle;
 `;
 
-const lineStyles = css`
-	stroke-width: 2;
-	stroke: ${palette.neutral[97]};
-`;
-
 const withoutZeroSections = (sections: SectionType[]) =>
 	sections.filter((section) => section.value !== 0);
 
@@ -51,6 +44,8 @@ const polarToCartesian = (angle: number, radius: number) =>
 	[Math.cos(angle) * radius, Math.sin(angle) * radius]
 		.map((n) => n.toFixed(PRECISION))
 		.join(',');
+
+const halfGap = (radius: number) => Math.asin(SEGMENT_GAP / 2 / radius);
 
 export const Doughnut = ({
 	sections,
@@ -84,18 +79,15 @@ export const Doughnut = ({
 		value: number;
 	}[] = [];
 
-	/**
-	 * These lines help distinguish segments.
-	 * Only shown for 2 segments or more.
-	 */
-	const separatingLines: { label: string; d: string }[] = [];
-
 	let angleStart = -quarterTurn;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
 		const angleLength = (value / totalValue) * tau;
 
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
+
+		/** depends on segment being smaller or larger than one half */
+		const largeArcFlag = angleLength < tau / 2 ? 0 : 1;
 
 		/**
 		 * Either a circle, for a single segment, or an arc for multiple segments.
@@ -112,15 +104,25 @@ export const Doughnut = ({
 			) : (
 				<path
 					d={[
-						`M${polarToCartesian(angleStart, radius)}`,
-						`A${radius},${radius} 0 ${
-							// large-arc-flag, depends on segment being smaller or larger than one half
-							angleLength < tau / 2 ? 0 : 1
-						} 1 ${polarToCartesian(angleEnd, radius)}`,
+						`M${polarToCartesian(
+							angleStart + halfGap(outerRadius),
+							outerRadius,
+						)}`,
+						`A${outerRadius},${outerRadius} 0 ${largeArcFlag} 1 ${polarToCartesian(
+							angleEnd - halfGap(outerRadius),
+							outerRadius,
+						)}`,
+						`L${polarToCartesian(
+							angleEnd - halfGap(innerRadius),
+							innerRadius,
+						)}`,
+						`A${innerRadius},${innerRadius} 0 ${largeArcFlag} 0 ${polarToCartesian(
+							angleStart + halfGap(innerRadius),
+							innerRadius,
+						)}`,
+						'Z',
 					].join(' ')}
-					fill="none"
-					stroke={color}
-					strokeWidth={strokeWidth}
+					fill={color}
 				/>
 			);
 		segments.push({
@@ -129,14 +131,6 @@ export const Doughnut = ({
 			value,
 			transform: `translate(${polarToCartesian(angleMid, radius)})`,
 			color,
-		});
-
-		separatingLines.push({
-			label,
-			d: [
-				`M${polarToCartesian(angleEnd, innerRadius)}`,
-				`L${polarToCartesian(angleEnd, outerRadius)}`,
-			].join(' '),
 		});
 
 		angleStart = angleEnd;
@@ -161,10 +155,6 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
-			{separatingLines.length >= 2 &&
-				separatingLines.map(({ d, label }) => (
-					<path key={label} css={lineStyles} d={d} />
-				))}
 			<text css={unitStyles} dy="0.4em">
 				%
 			</text>
