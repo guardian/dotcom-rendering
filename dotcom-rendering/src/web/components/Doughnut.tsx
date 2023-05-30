@@ -16,9 +16,11 @@ type SectionType = {
 
 /** set decimal places */
 const PRECISION = 2;
-
 /** gap between segments in pixels */
 const SEGMENT_GAP = 2;
+/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
+const TAU = Math.PI * 2;
+const QUARTER_TURN = TAU / 4;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -64,10 +66,6 @@ export const Doughnut = ({
 		.map((section) => section.value)
 		.reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
-	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
-	const tau = Math.PI * 2;
-	const quarterTurn = Math.PI / 2;
-
 	const halfSize = size / 2;
 
 	// Segments
@@ -79,22 +77,22 @@ export const Doughnut = ({
 		value: number;
 	}[] = [];
 
-	let angleStart = -quarterTurn;
+	let angleStart = -QUARTER_TURN;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
-		const angleLength = (value / totalValue) * tau;
+		const angleLength = (value / totalValue) * TAU;
 
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
 		/** depends on segment being smaller or larger than one half */
-		const largeArcFlag = angleLength < tau / 2 ? 0 : 1;
+		const largeArcFlag = angleLength < TAU / 2 ? 0 : 1;
 
 		/**
 		 * Either a circle, for a single segment, or an arc for multiple segments.
 		 * @see https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
 		 */
 		const element =
-			angleLength === tau ? (
+			angleLength === TAU ? (
 				<circle
 					r={radius}
 					fill="none"
