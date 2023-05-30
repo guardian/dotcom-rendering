@@ -4,6 +4,7 @@ import {
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
 import { isAmpSupported } from '../../amp/components/Elements';
+import { buildAdTargeting } from '../../lib/ad-targeting';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -17,11 +18,13 @@ import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
+import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { pageTemplate } from './pageTemplate';
+import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import { htmlPageTemplate } from './htmlPageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
@@ -38,7 +41,7 @@ const decideTitle = (article: FEArticleType): string => {
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
 };
 
-export const articleToHtml = ({ article }: Props): string => {
+export const renderHtml = ({ article }: Props): string => {
 	const NAV = extractNAV(article.nav);
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
@@ -212,7 +215,7 @@ window.twttr = (function(d, s, id) {
 	const recipeMarkup =
 		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
 
-	return pageTemplate({
+	return htmlPageTemplate({
 		linkedData,
 		scriptTags,
 		css: extractedCss,
@@ -235,4 +238,87 @@ window.twttr = (function(d, s, id) {
 		borkFCP: article.config.abTests.borkFcpVariant === 'variant',
 		borkFID: article.config.abTests.borkFidVariant === 'variant',
 	});
+};
+
+/**
+ * blocksToHtml is used by the /Blocks endpoint as part of keeping liveblogs live
+ * It takes an array of json blocks and returns the resulting html string
+ *
+ * @returns string (the html)
+ */
+export const renderBlocks = ({
+	blocks,
+	format: FEFormat,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	videoDuration,
+	edition,
+	section,
+	sharedAdTargeting,
+	adUnit,
+	switches,
+	keywordIds,
+}: FEBlocksRequest): string => {
+	const format: ArticleFormat = decideFormat(FEFormat);
+
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser,
+		isSensitive,
+		videoDuration,
+		edition,
+		section,
+		sharedAdTargeting,
+		adUnit,
+	});
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<LiveBlogRenderer
+			blocks={blocks}
+			format={format}
+			adTargeting={adTargeting}
+			host={host}
+			pageId={pageId}
+			webTitle={webTitle}
+			ajaxUrl={ajaxUrl}
+			isSensitive={isSensitive}
+			isAdFreeUser={isAdFreeUser}
+			switches={switches}
+			isLiveUpdate={true}
+			section={section}
+			// The props below are never used because isLiveUpdate is true but, typescript...
+			shouldHideReaderRevenue={false}
+			tags={[]}
+			isPaidContent={false}
+			contributionsServiceUrl=""
+			keywordIds={keywordIds}
+		/>,
+	);
+
+	return `${extractedCss}${html}`;
+};
+
+/**
+ * keyEventsToHtml is used by the /KeyEvents endpoint as part of keeping liveblogs live
+ * It takes an array of json key-event blocks and returns the resulting html string
+ *
+ * @returns string (the html)
+ */
+export const renderKeyEvents = ({
+	keyEvents,
+	format: FEFormat,
+	filterKeyEvents,
+}: FEKeyEventsRequest): string => {
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<KeyEventsContainer
+			keyEvents={keyEvents}
+			format={decideFormat(FEFormat)}
+			filterKeyEvents={filterKeyEvents}
+		/>,
+	);
+
+	return `${extractedCss}${html}`;
 };

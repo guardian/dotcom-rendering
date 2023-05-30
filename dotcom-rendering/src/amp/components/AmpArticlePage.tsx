@@ -2,23 +2,23 @@ import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
 import type { ConfigType } from '../../types/config';
-import { AdConsent } from '../components/AdConsent';
-import { AmpExperimentComponent } from '../components/AmpExperiment';
-import type { AnalyticsModel } from '../components/Analytics';
-import { Analytics } from '../components/Analytics';
-import { AnalyticsIframe } from '../components/AnalyticsIframe';
-import { Body as BodyArticle } from '../components/BodyArticle';
-import { Body as BodyLiveblog } from '../components/BodyLiveblog';
-import { ContentABTestProvider } from '../components/ContentABTest';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { Onward } from '../components/Onward';
-import type { PermutiveModel } from '../components/Permutive';
-import { Permutive } from '../components/Permutive';
-import { Sidebar } from '../components/Sidebar';
 import { filterForTagsOfType } from '../lib/tag-utils';
 import type { AmpExperiments } from '../server/ampExperimentCache';
 import type { ArticleModel } from '../types/ArticleModel';
+import { AdConsent } from './AdConsent';
+import { AmpExperimentComponent } from './AmpExperiment';
+import type { AnalyticsModel } from './Analytics';
+import { Analytics } from './Analytics';
+import { AnalyticsIframe } from './AnalyticsIframe';
+import { Body as BodyArticle } from './BodyArticle';
+import { Body as BodyLiveblog } from './BodyLiveblog';
+import { ContentABTestProvider } from './ContentABTest';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { Onward } from './Onward';
+import type { PermutiveModel } from './Permutive';
+import { Permutive } from './Permutive';
+import { Sidebar } from './Sidebar';
 
 const containerStyles = css`
 	margin: auto;
@@ -55,7 +55,7 @@ type ArticleProps = {
 	permutive: PermutiveModel;
 };
 
-export const Article = ({
+export const AmpArticlePage = ({
 	nav,
 	articleData,
 	config,

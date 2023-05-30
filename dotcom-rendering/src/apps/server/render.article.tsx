@@ -6,9 +6,9 @@ import type { FEArticleType } from '../../types/frontend';
 import { ArticlePage } from '../../web/components/ArticlePage';
 import { decideFormat } from '../../web/lib/decideFormat';
 import { renderToStringWithEmotion } from '../../web/lib/emotion';
-import { pageTemplate } from '../../web/server/pageTemplate';
+import { htmlPageTemplate } from '../../web/server/htmlPageTemplate';
 
-export const articleToHtml = (
+export const renderArticle = (
 	article: FEArticleType,
 ): {
 	clientScripts: string[];
@@ -57,7 +57,7 @@ export const articleToHtml = (
 			}),
 		),
 	);
-	const renderedPage = pageTemplate({
+	const renderedPage = htmlPageTemplate({
 		css: extractedCss,
 		html,
 		title: article.webTitle,
@@ -68,6 +68,7 @@ export const articleToHtml = (
 		borkFCP: false,
 		borkFID: false,
 	});
+
 	return {
 		clientScripts,
 		html: renderedPage,

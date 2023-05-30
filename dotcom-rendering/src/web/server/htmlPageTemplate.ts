@@ -53,7 +53,7 @@ const getFontPreloadTags = (offerHttp3: boolean) => {
 	);
 };
 
-export const pageTemplate = (props: WebProps | AppProps): string => {
+export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 	const {
 		css,
 		html,
