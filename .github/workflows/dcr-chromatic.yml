@@ -42,7 +42,7 @@ jobs:
         if: |
           (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main') &&
           (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
-          github.event.pull_request.user.login != 'dependabot')
+          github.event.pull_request.user.login != 'dependabot[bot]')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -53,7 +53,7 @@ jobs:
 
       - name: Chromatic - DCR Dependency PR
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
+        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot[bot]') }}
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
