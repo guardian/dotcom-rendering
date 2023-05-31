@@ -9,6 +9,7 @@ const pubData = {
 	page_view_id: 'PAGE_VIEW_ID',
 	page_view_id_64: 'PAGE_VIEW_ID_64',
 	platform: 'amp',
+	source_url: 'SOURCE_URL',
 };
 
 const queryParams = new URLSearchParams(pubData).toString();
@@ -54,7 +55,6 @@ const clientConfigAus = {
 		framework: 'aus',
 	},
 };
-
 export const AdConsent = () => {
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
@@ -87,19 +87,19 @@ export const AdConsent = () => {
 					o={{
 						consentRequired: 'remote',
 						consentInstanceId: 'sourcepoint',
-						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2`,
-						promptUISrc: `https://${sourcepointDomain}/amp/index.html?${queryParams}`,
+						checkConsentHref: `https://${sourcepointDomain}/wrapper/tcfv2/v1/amp-v2?authId=${pubData.authId}`,
+						promptUISrc: `https://${sourcepointDomain}/amp/unified/index.html?${queryParams}`,
 						clientConfig,
 						geoOverride: {
 							tcfv2: {
 								clientConfig: clientConfigTcfv2,
 							},
 							ccpa: {
-								checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
 								clientConfig: clientConfigCcpa,
 							},
 							aus: {
-								checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
 								clientConfig: clientConfigAus,
 							},
 						},
