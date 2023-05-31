@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	from,
 	headline,
-	neutral,
+	palette,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
@@ -15,34 +15,47 @@ const gridContainer = css`
 
 	/* One column view */
 	grid-template-columns: 1fr;
-	grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+	grid-template-rows: repeat(22, auto);
 
 	/* Two column view */
 	${from.tablet} {
 		grid-template-columns: 1fr 1fr;
-		grid-template-rows: auto auto auto auto auto;
+		grid-template-rows: repeat(11, auto);
+	}
+
+	${until.leftCol} {
+		margin-top: 9px;
 	}
 
 	/* We set left border on the grid container, and then right border on
     the gridItems to prevent borders doubling up */
-	border-left: 1px solid ${border.secondary};
+	border-left: 1px solid ${palette.neutral[86]};
 `;
 
 const titleContainer = css`
-	border-right: 1px solid #dcdcdc;
-	border-bottom: 1px solid #dcdcdc;
+	border-right: 1px solid ${palette.neutral[86]};
+	${from.leftCol} {
+		/* Below leftCol always set top border */
+		border-bottom: 1px solid ${palette.neutral[86]};
+	}
+
+	${until.leftCol} {
+		/* Below leftCol always set top border */
+		border-top: 1px solid ${palette.neutral[86]};
+	}
+
 	padding: 7px 11px 18px;
 `;
 
 const title = css`
 	${headline.xxxsmall({ fontWeight: 'bold' })};
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 	overflow-wrap: break-word;
 `;
 
 const description = css`
 	${textSans.xsmall()};
-	color: ${neutral[46]};
+	color: ${palette.neutral[46]};
 	overflow-wrap: break-word;
 `;
 
@@ -50,10 +63,21 @@ const displayContent = css`
 	display: contents;
 `;
 
-const itemOverridesStyle = (index: number) => {
+const mostViewedOverridesStyle = (index: number) => {
 	return css`
 		grid-row: ${index + 2} / ${index + 3};
-		border-top: ${index + 1 == 6 && `1px solid ${border.secondary}`};
+		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
+	`;
+};
+
+const deeplyOverridesStyle = (index: number) => {
+	return css`
+		grid-row: ${index + 2} / ${index + 3};
+		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
+
+		${until.tablet} {
+			grid-row: ${index + 13} / ${index + 14};
+		}
 	`;
 };
 
@@ -88,7 +112,7 @@ export const MostPopularFooterGrid = ({
 							format={trail.format}
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
-							cssOverrides={itemOverridesStyle(j)}
+							cssOverrides={mostViewedOverridesStyle(j)}
 						/>
 					))}
 				</ol>
@@ -113,7 +137,7 @@ export const MostPopularFooterGrid = ({
 							format={trail.format}
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
-							cssOverrides={itemOverridesStyle(j)}
+							cssOverrides={deeplyOverridesStyle(j)}
 						/>
 					))}
 				</ol>
