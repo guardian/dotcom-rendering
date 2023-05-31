@@ -3,10 +3,10 @@ import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
-import { ArticlePage } from '../../web/components/ArticlePage';
-import { decideFormat } from '../../web/lib/decideFormat';
-import { renderToStringWithEmotion } from '../../web/lib/emotion';
-import { htmlPageTemplate } from '../../web/server/htmlPageTemplate';
+import { ArticlePage } from '../components/ArticlePage';
+import { decideFormat } from '../lib/decideFormat';
+import { renderToStringWithEmotion } from '../lib/emotion';
+import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
 	article: FEArticleType,

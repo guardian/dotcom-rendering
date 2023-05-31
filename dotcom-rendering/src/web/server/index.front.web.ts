@@ -5,7 +5,7 @@ import { validateAsFrontType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { decideTrail } from '../lib/decideTrail';
-import { renderFront } from './render.front';
+import { renderFront } from './render.front.web';
 
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';

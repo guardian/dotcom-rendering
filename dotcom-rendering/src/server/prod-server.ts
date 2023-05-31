@@ -6,9 +6,9 @@ import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server/index.article';
-import { handleAppsArticle } from '../apps/server/index.article';
+import { handleAppsArticle } from '../web/server/index.article.apps';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage';
+import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -16,8 +16,8 @@ import {
 	handleBlocks,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server/index.article';
-import { handleFront, handleFrontJson } from '../web/server/index.front';
+} from '../web/server/index.article.web';
+import { handleFront, handleFrontJson } from '../web/server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';

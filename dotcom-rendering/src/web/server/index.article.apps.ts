@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
+import { renderArticle } from './render.article.apps';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
-import { enhanceArticleType } from '../../web/server/index.article';
-import { renderArticle } from './render.article';
+import { enhanceArticleType } from './index.article.web';
 
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
