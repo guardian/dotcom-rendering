@@ -34,7 +34,7 @@ jobs:
       # Root yarn installs all workspaces (root, dotcom)
       - run: yarn install --frozen-lockfile
 
-      - name: Chromatic - Apps Rendering Non Dependency PR / main
+      - name: Chromatic - Apps Rendering
         uses: chromaui/action@v1
         # Run Chromatic only if `run_chromatic` label has been applied or we're
         # pushing to `main`.
