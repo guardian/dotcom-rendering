@@ -7,7 +7,11 @@ import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { FEArticleType } from '../../types/frontend';
-import { renderBlocks, renderHtml, renderKeyEvents } from './render.article';
+import {
+	renderBlocks,
+	renderHtml,
+	renderKeyEvents,
+} from './render.article.web';
 
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
