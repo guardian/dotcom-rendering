@@ -22,7 +22,7 @@ const isSupported = (collection: FECollectionType): boolean =>
 
 function getBrandingFromCards(
 	allCards: FEFrontCard[],
-	editionId: 'UK' | 'US' | 'AU' | 'INT' | 'EUR',
+	editionId: EditionId,
 ): (Branding | undefined)[] {
 	return allCards.map(
 		(card) =>
