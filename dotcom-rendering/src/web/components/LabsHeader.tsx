@@ -3,7 +3,6 @@ import {
 	border,
 	from,
 	labs,
-	neutral,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -14,7 +13,7 @@ import {
 } from '@guardian/source-react-components';
 import LabsLogo from '../../static/logos/the-guardian-labs.svg';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { Dropdown } from './Dropdown';
+import { Details } from './Details';
 
 const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -87,30 +86,10 @@ const Title = () => (
 	</div>
 );
 
-const AboutDropdown = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			color: black;
-			> button {
-				${textSans.small()};
-				color: black;
-				:hover {
-					color: black;
-				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
 const About = () => (
 	<div
 		css={css`
 			${textSans.small()};
-			position: absolute;
-			top: 55px;
-			left: 0;
 			background-color: ${labs[400]};
 			border-top: 1px solid ${border.primary};
 
@@ -163,19 +142,23 @@ export const LabsHeader = () => (
 				<Title />
 			</HeaderSection>
 			<HeaderSection>
-				<AboutDropdown>
-					<Dropdown
-						label="About"
-						links={[]}
-						id="paidfor"
-						cssOverrides={css`
-							color: ${neutral[0]};
-						`}
-						dataLinkName=""
-					>
-						<About />
-					</Dropdown>
-				</AboutDropdown>
+				<Details
+					label={'About'}
+					positionStyles={css`
+						top: 40px;
+						left: -75px;
+
+						${from.mobile} {
+							left: -108px;
+						}
+
+						${from.mobileLandscape} {
+							left: -128px;
+						}
+					`}
+				>
+					<About />
+				</Details>
 			</HeaderSection>
 		</Left>
 		<Right>
