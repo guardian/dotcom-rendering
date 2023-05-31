@@ -207,7 +207,7 @@ export const MostViewedFooterGrid = ({
 							${visuallyHidden}
 						`}
 					>
-						Most popular {tab.heading}
+						Most viewed {tab.heading}
 					</h3>
 					<ol
 						css={gridContainer}

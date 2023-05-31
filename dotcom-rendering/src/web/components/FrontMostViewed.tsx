@@ -1,6 +1,7 @@
 import type { DCRFrontCard } from '../../types/front';
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { Island } from './Island';
+import { MostPopularFooterGrid } from './MostPopularFooterGrid';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 
@@ -40,12 +41,16 @@ export const FrontMostViewed = ({
 		});
 	}
 
-	const deeplyReadType: TrailTabType | undefined = deeplyRead
-		? {
-				heading: 'Deeply read',
-				trails: deeplyRead,
-		  }
-		: undefined;
+	const deeplyReadType: TrailTabType | undefined =
+		isNetworkFront && deeplyRead
+			? {
+					heading: 'Deeply read',
+					trails: deeplyRead,
+			  }
+			: undefined;
+
+	const mostViewedItems = tabs.length > 0 ? tabs[0] : undefined;
+	const showMostPopular = !!deeplyReadType && !!mostViewedItems;
 
 	return (
 		<MostViewedFooterLayout>
@@ -59,13 +64,17 @@ export const FrontMostViewed = ({
 						mostShared={mostShared}
 					/>
 				</Island>
+			) : showMostPopular ? (
+				<MostPopularFooterGrid
+					data={mostViewedItems}
+					deeplyRead={deeplyReadType}
+				/>
 			) : (
 				<MostViewedFooter
 					tabs={tabs}
 					sectionName="Most viewed"
 					mostCommented={mostCommented}
 					mostShared={mostShared}
-					deeplyRead={deeplyReadType}
 				/>
 			)}
 		</MostViewedFooterLayout>

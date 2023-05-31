@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
 import type { TrailTabType, TrailType } from '../../types/trails';
-import { MostPopularFooterGrid } from './MostPopularFooterGrid';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
@@ -14,7 +13,6 @@ type Props = {
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionName?: string;
-	deeplyRead?: TrailTabType;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -50,15 +48,7 @@ export const MostViewedFooter = ({
 	variantFromRunnable,
 	sectionName,
 	selectedColour,
-	deeplyRead,
 }: Props) => {
-	const mostViewed = tabs.length > 0 ? tabs[0] : undefined;
-	const showMostPopular =
-		deeplyRead &&
-		mostViewed &&
-		deeplyRead.trails.length > 0 &&
-		mostViewed.trails.length > 0;
-
 	return (
 		<div
 			css={css`
@@ -68,36 +58,26 @@ export const MostViewedFooter = ({
 			data-cy-ab-user-in-variant={abTestCypressDataAttr}
 			data-cy-ab-runnable-test={variantFromRunnable}
 		>
-			{showMostPopular ? (
-				<MostPopularFooterGrid
-					data={mostViewed}
-					sectionName={sectionName}
-					deeplyRead={deeplyRead}
-				/>
-			) : (
-				<MostViewedFooterGrid
-					data={tabs}
-					sectionName={sectionName}
-					selectedColour={selectedColour}
-				/>
-			)}
-			{!showMostPopular && (
-				<div css={[stackBelow('tablet'), secondTierStyles]}>
-					{mostCommented && (
-						<MostViewedFooterSecondTierItem
-							trail={mostCommented}
-							title="Most commented"
-							showRightBorder={true}
-						/>
-					)}
-					{mostShared && (
-						<MostViewedFooterSecondTierItem
-							trail={mostShared}
-							title="Most shared"
-						/>
-					)}
-				</div>
-			)}
+			<MostViewedFooterGrid
+				data={tabs}
+				sectionName={sectionName}
+				selectedColour={selectedColour}
+			/>
+			<div css={[stackBelow('tablet'), secondTierStyles]}>
+				{mostCommented && (
+					<MostViewedFooterSecondTierItem
+						trail={mostCommented}
+						title="Most commented"
+						showRightBorder={true}
+					/>
+				)}
+				{mostShared && (
+					<MostViewedFooterSecondTierItem
+						trail={mostShared}
+						title="Most shared"
+					/>
+				)}
+			</div>
 		</div>
 	);
 };
