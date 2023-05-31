@@ -45,8 +45,6 @@ type LabsPalette = {
 	faded: ColourType;
 	300: ColourType;
 	400: ColourType;
-	500: ColourType;
-	800: ColourType;
 };
 
 type SpecialAltPalette = {
@@ -131,12 +129,10 @@ export const pillarPalette_DO_NOT_USE: Record<
 	[ArticleSpecial.Labs]: {
 		dark: labs[300],
 		main: labs[400],
-		bright: '#69d1ca', // bright teal
-		faded: '#65a897', // dark teal
+		bright: labs[400], // bright teal
+		faded: labs[300], // dark teal
 		300: labs[300],
 		400: labs[400],
-		500: '#69d1ca', // bright teal
-		800: '#65a897', // dark teal
 	},
 	[ArticleSpecial.SpecialReport]: {
 		dark: specialReport[300],

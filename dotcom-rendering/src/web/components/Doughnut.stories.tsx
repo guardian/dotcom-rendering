@@ -61,12 +61,12 @@ const threeSections = [
 
 const identicalColours = [
 	{
-		value: 55,
+		value: 50,
 		label: 'Orange',
 		color: palette.opinion[400],
 	},
 	{
-		value: 35,
+		value: 40,
 		label: 'Tangerine',
 		color: palette.opinion[400],
 	},

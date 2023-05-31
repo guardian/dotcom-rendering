@@ -20,8 +20,9 @@ import { useOnce } from '../lib/useOnce';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
+import { EditionId } from '../lib/edition';
 
-function decideButtonText({
+const decideButtonText = ({
 	isOpen,
 	loading,
 	title,
@@ -29,11 +30,24 @@ function decideButtonText({
 	isOpen: boolean;
 	loading: boolean;
 	title: string;
-}) {
-	if (isOpen && loading) return 'Loading';
-	if (isOpen) return `Less ${title}`;
-	return `More ${title}`;
-}
+}) => {
+	if (isOpen && loading) return <>Loading</>;
+	if (isOpen)
+		return (
+			<>
+				Less{' '}
+				<span
+					css={css`
+						${visuallyHidden}
+					`}
+				>
+					{/* The context of what we're hiding is likely more useful for screen-reader users */}
+					{title}
+				</span>
+			</>
+		);
+	return <>More {title}</>;
+};
 
 type Props = {
 	title: string;
@@ -54,6 +68,7 @@ type Props = {
 	sectionId: string;
 	showAge: boolean;
 	ajaxUrl: string;
+	editionId?: EditionId;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -64,6 +79,7 @@ export const ShowMore = ({
 	collectionId,
 	showAge,
 	ajaxUrl,
+	editionId,
 	containerPalette,
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
@@ -97,7 +113,7 @@ export const ShowMore = ({
 
 	const cards =
 		data &&
-		enhanceCards(data).filter(
+		enhanceCards(data, editionId).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
 

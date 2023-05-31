@@ -24,17 +24,17 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
+import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
-import { canRenderAds } from '../lib/canRenderAds';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -175,6 +175,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 			</div>
@@ -259,6 +260,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					}
 					editionId={article.editionId}
 					headerTopBarSwitch={!!article.config.switches.headerTopNav}
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</Section>
 
@@ -311,9 +313,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<Island deferUntil="idle">
-								<LabsHeader />
-							</Island>
+							<LabsHeader />
 						</Section>
 					</Stuck>
 				)}

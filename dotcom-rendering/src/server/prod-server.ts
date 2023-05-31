@@ -2,36 +2,33 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../amp/server';
-import { handleAppsArticle } from '../apps/server';
-import type { FEArticleType } from '../types/frontend';
+} from '../amp/server/index.article';
+import { handleAppsArticle } from '../apps/server/index.article';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage';
 import {
-	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
-	handlePerfTest as handleArticlePerfTest,
+	handleArticlePerfTest,
 	handleBlocks,
-	handleFront,
-	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server';
+} from '../web/server/index.article';
+import { handleFront, handleFrontJson } from '../web/server/index.front';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
+import { recordError } from './lib/logging-store';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
-	({ body, path }: Request, _: Response, renderTime: number) => {
-		const { pageId = 'no-page-id-found' } = body as FEArticleType;
+	(_1: Request, _2: Response, renderTime: number) => {
 		logger.info('Page render time', {
-			path,
-			pageId,
 			renderTime,
 		});
 	},
@@ -43,6 +40,7 @@ export const prodServer = (): void => {
 	const app = express();
 
 	app.use(express.json({ limit: '50mb' }));
+	app.use(requestLoggerMiddleware);
 	app.use(compression());
 
 	app.get('/_healthcheck', (req: Request, res: Response) => {
@@ -118,31 +116,23 @@ export const prodServer = (): void => {
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
 	app.get('/', (req, res) => {
-		try {
-			res.send(`
-                <!DOCTYPE html>
-                <html>
-                <body>
-                    <ul>
-                        <li><a href="/Article">Article</a></li>
-                        <li><a href="/AMPArticle">⚡️Article</a></li>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
-                        <li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
-                    </ul>
-                </body>
-                </html>
-            `);
-		} catch (e) {
-			const message =
-				e instanceof Error
-					? e.stack ?? 'Unknown stack'
-					: 'Unknown error';
-			res.status(500).send(`<pre>${message}</pre>`);
-		}
+		res.send(`
+			<!DOCTYPE html>
+			<html>
+			<body>
+				<ul>
+					<li><a href="/Article">Article</a></li>
+					<li><a href="/AMPArticle">⚡️Article</a></li>
+					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+				</ul>
+				<ul>
+					<li><a href="/ArticlePerfTest">⚡Article (perf test example)</a></li>
+					<li><a href="/AMPArticlePerfTest">⚡️Article (perf test example)</a></li>
+				</ul>
+			</body>
+			</html>
+		`);
 	});
 
 	// All params to error handlers must be declared for express to identify them as error middleware
@@ -161,6 +151,8 @@ export const prodServer = (): void => {
 		} else {
 			res.status(500).send(`<pre>${message}</pre>`);
 		}
+
+		recordError(e);
 	};
 
 	app.use(handleError);

@@ -40,7 +40,7 @@ jobs:
         # pushing to `main`. Skip if this is a Dependabot PR as this is handled
         # by the subsequent job.
         if: |
-          (github.event.label.name == 'run_chromatic' ||  github.ref == 'refs/heads/main') &&
+          (contains(github.event.pull_request.labels.*.name, 'run_chromatic') ||  github.ref == 'refs/heads/main') &&
           (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
           github.event.pull_request.user.login != 'dependabot[bot]')
         with:
