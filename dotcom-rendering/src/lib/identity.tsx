@@ -12,8 +12,14 @@ const CLIENT_ID = '0oa53x6k5wGYXOGzm0x7';
 const ISSUER =
 	'https://profile.code.dev-theguardian.com/oauth2/aus3v9gla95Toj0EE0x7';
 // BASENAME includes trailing slash
-const REDIRECT_URI = `http://localhost:3030/`;
+const REDIRECT_URI = `http://localhost:3030/`; // m.code.dev;
 
+/* PROD values
+
+client_id: 0oa79m1fmgzrtaHc1417
+issuer: https://profile.theguardian.com/oauth2/aus3xgj525jYQRowl417 
+redirect_uri: https://www.theguardian.com/ 
+*/
 const config: OktaAuthOptions = {
 	clientId: CLIENT_ID,
 	issuer: ISSUER,
@@ -95,9 +101,12 @@ const useOktaAuth = (): OktaAuthContextType => {
 	return { oktaAuth, authState };
 };
 
-export const CheckUserSignInStatus = (): boolean => {
+function useOktaForSignInCheck() {
+	console.info('using okta for sign in check');
 	const { oktaAuth, authState } = useOktaAuth();
+	console.log(`authState in useOktaForSignInCheck is`);
 	console.log(authState);
+	console.log('oktaAuth in useOktaForSignInCheck is');
 	console.log(oktaAuth);
 
 	const [isSignedIn, setIsSignedIn] = useState(false);
@@ -115,4 +124,32 @@ export const CheckUserSignInStatus = (): boolean => {
 	console.log(isSignedIn);
 
 	return isSignedIn;
-};
+}
+
+function useOldIdentitySignInCheck() {
+	console.info('using old identity check');
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	return isSignedIn;
+}
+
+export function CheckUserSignInStatus() {
+	const isInOktaExperiment = window.guardian.config.switches.okta == true;
+	const isSignedIn = isInOktaExperiment
+		? useOktaForSignInCheck()
+		: useOldIdentitySignInCheck();
+	return isSignedIn;
+}
+
+// export const CheckUserSignInStatus = (): boolean => {
+// 	const isSignedIn = useOktaForSignInCheck();
+// 	return isSignedIn;
+// };
+
+//
+//  const [isInOktaExperiment, setIsInOktaExperiment] = useState(false);
+// 	useEffect(() => {if (window.guardian.config.switches.okta) {setIsInOktaExperiment(true)}
+// 	const isSignedIn = isInOktaExperiment
+// 	? useOktaForSignInCheck()
+// 	: useOldIdentitySignInCheck();
+// 	return ;
+// }, [isInOktaExperiment]);
