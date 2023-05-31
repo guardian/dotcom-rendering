@@ -11,6 +11,7 @@ type Props = {
 	mostShared?: TrailType;
 	displayName: string;
 	isNetworkFront: boolean;
+	deeplyRead?: TrailType[];
 };
 
 export const FrontMostViewed = ({
@@ -20,6 +21,7 @@ export const FrontMostViewed = ({
 	mostShared,
 	displayName,
 	isNetworkFront,
+	deeplyRead,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
@@ -37,6 +39,13 @@ export const FrontMostViewed = ({
 			trails: mostViewed,
 		});
 	}
+
+	const deeplyReadType: TrailTabType | undefined = deeplyRead
+		? {
+				heading: 'Deeply read',
+				trails: deeplyRead,
+		  }
+		: undefined;
 
 	return (
 		<MostViewedFooterLayout>
@@ -56,6 +65,7 @@ export const FrontMostViewed = ({
 					sectionName="Most viewed"
 					mostCommented={mostCommented}
 					mostShared={mostShared}
+					deeplyRead={deeplyReadType}
 				/>
 			)}
 		</MostViewedFooterLayout>

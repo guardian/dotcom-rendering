@@ -128,6 +128,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
+	const showDeeplyRead =
+		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -304,7 +307,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<>
 								<Section
 									key={ophanName}
-									title="Most viewed"
+									title={
+										showDeeplyRead
+											? 'Most popular'
+											: 'Most viewed'
+									}
 									showTopBorder={index > 0}
 									padContent={false}
 									verticalMargins={false}
@@ -331,6 +338,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
+										deeplyRead={front.deeplyRead}
 									/>
 								</Section>
 								{decideAdSlot(

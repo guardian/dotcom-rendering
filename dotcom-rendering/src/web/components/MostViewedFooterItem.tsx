@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -72,6 +73,7 @@ type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	ageWarning?: string;
+	cssOverrides?: SerializedStyles | SerializedStyles[];
 };
 
 export const MostViewedFooterItem = ({
@@ -80,8 +82,12 @@ export const MostViewedFooterItem = ({
 	format,
 	headlineText,
 	ageWarning,
+	cssOverrides,
 }: Props) => (
-	<li css={gridItem(position)} data-link-name={`${position} | text`}>
+	<li
+		css={[gridItem(position), cssOverrides]}
+		data-link-name={`${position} | text`}
+	>
 		<a css={headlineLink} href={url} data-link-name="article">
 			<span css={bigNumber}>
 				<BigNumber index={position} />
