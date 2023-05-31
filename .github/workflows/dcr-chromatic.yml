@@ -34,7 +34,7 @@ jobs:
       # Root yarn installs all workspaces (root, dotcom)
       - run: yarn install --frozen-lockfile
 
-      - name: Chromatic - DCR Non Dependency PR / main
+      - name: Chromatic - DCR
         uses: chromaui/action@v1
         # Run Chromatic only if `run_chromatic` label has been applied or we're
         # pushing to `main`.
