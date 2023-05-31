@@ -126,30 +126,7 @@ function useOktaForSignInCheck() {
 	return isSignedIn;
 }
 
-function useOldIdentitySignInCheck() {
-	console.info('using old identity check');
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+export const CheckUserSignInStatus = (): boolean => {
+	const isSignedIn = useOktaForSignInCheck();
 	return isSignedIn;
-}
-
-export function CheckUserSignInStatus() {
-	const isInOktaExperiment = window.guardian.config.switches.okta == true;
-	const isSignedIn = isInOktaExperiment
-		? useOktaForSignInCheck()
-		: useOldIdentitySignInCheck();
-	return isSignedIn;
-}
-
-// export const CheckUserSignInStatus = (): boolean => {
-// 	const isSignedIn = useOktaForSignInCheck();
-// 	return isSignedIn;
-// };
-
-//
-//  const [isInOktaExperiment, setIsInOktaExperiment] = useState(false);
-// 	useEffect(() => {if (window.guardian.config.switches.okta) {setIsInOktaExperiment(true)}
-// 	const isSignedIn = isInOktaExperiment
-// 	? useOktaForSignInCheck()
-// 	: useOldIdentitySignInCheck();
-// 	return ;
-// }, [isInOktaExperiment]);
+};
