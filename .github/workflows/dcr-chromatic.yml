@@ -34,28 +34,15 @@ jobs:
       # Root yarn installs all workspaces (root, dotcom)
       - run: yarn install --frozen-lockfile
 
-      - name: Chromatic - DCR Non Dependency PR / main
+      - name: Chromatic - DCR
         uses: chromaui/action@v1
         # Run Chromatic only if `run_chromatic` label has been applied or we're
-        # pushing to `main`. Skip if this is a Dependabot PR as this is handled
-        # by the subsequent job.
-        if: |
-          (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main') &&
-          (!contains(github.event.pull_request.labels.*.name, 'dependencies') &&
-          github.event.pull_request.user.login != 'dependabot')
+        # pushing to `main`.
+        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic')  ||  github.ref == 'refs/heads/main')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
           untraced: '**/(package**.json|yarn.lock|preview.js)'
-          workingDir: dotcom-rendering
-
-      - name: Chromatic - DCR Dependency PR
-        uses: chromaui/action@v1
-        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          autoAcceptChanges: main
           workingDir: dotcom-rendering

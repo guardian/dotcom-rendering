@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
 import { validateAsAllEditorialNewslettersPageType } from '../../model/validate';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { renderEditorialNewslettersPage } from './render.allEditorialNewslettersPage';
+import { renderEditorialNewslettersPage } from './render.allEditorialNewslettersPage.web';
 
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
