@@ -135,9 +135,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront,
 	);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
