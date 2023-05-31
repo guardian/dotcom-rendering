@@ -19,12 +19,11 @@ const deeplyRead = {
 };
 
 export const SingleImageWithCaption = () => {
-	console.log(`trails length: ${trails.length}`);
 	return (
 		<Section>
 			<MostViewedFooterLayout>
 				<MostPopularFooterGrid
-					data={mostViewed}
+					mostViewed={mostViewed}
 					deeplyRead={deeplyRead}
 				/>
 			</MostViewedFooterLayout>

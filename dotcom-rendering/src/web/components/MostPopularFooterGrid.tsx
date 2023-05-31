@@ -9,7 +9,7 @@ import {
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
-const gridContainer = css`
+const gridContainerStyle = css`
 	display: grid;
 	grid-auto-flow: 1fr;
 
@@ -32,7 +32,7 @@ const gridContainer = css`
 	border-left: 1px solid ${palette.neutral[86]};
 `;
 
-const titleContainer = css`
+const titleContainerStyle = css`
 	border-right: 1px solid ${palette.neutral[86]};
 	${from.leftCol} {
 		/* Below leftCol always set top border */
@@ -47,13 +47,13 @@ const titleContainer = css`
 	padding: 7px 11px 18px;
 `;
 
-const title = css`
+const titleStyle = css`
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 	color: ${palette.neutral[7]};
 	overflow-wrap: break-word;
 `;
 
-const description = css`
+const descriptionStyle = css`
 	${textSans.xsmall()};
 	color: ${palette.neutral[46]};
 	overflow-wrap: break-word;
@@ -66,45 +66,54 @@ const displayContent = css`
 const mostViewedOverridesStyle = (index: number) => {
 	return css`
 		grid-row: ${index + 2} / ${index + 3};
+		grid-column: 1/2;
 		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
 	`;
 };
 
-const deeplyOverridesStyle = (index: number) => {
+const deeplyOverridesStyle = (index: number, mostViewedLength: number) => {
 	return css`
 		grid-row: ${index + 2} / ${index + 3};
+		grid-column: 2/3;
 		border-top: ${index + 1 == 6 && `1px solid ${palette.neutral[86]}`};
 
 		${until.tablet} {
-			grid-row: ${index + 13} / ${index + 14};
+			grid-row: ${index + mostViewedLength + 3} /
+				${index + mostViewedLength + 4};
+			grid-column: 1/2;
 		}
 	`;
 };
 
 type Props = {
-	data: TrailTabType;
+	mostViewed: TrailTabType;
 	sectionName?: string;
 	deeplyRead: TrailTabType;
 };
 
 export const MostPopularFooterGrid = ({
-	data,
-	sectionName = '',
+	mostViewed,
 	deeplyRead,
+	sectionName = '',
 }: Props) => {
+	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
+	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
+
 	return (
-		<div css={gridContainer}>
+		<div css={gridContainerStyle}>
 			<section css={displayContent}>
-				<div css={titleContainer}>
-					<h3 css={title}>Most viewed</h3>
-					<div css={description}>What readers are clicking on</div>
+				<div css={titleContainerStyle}>
+					<h3 css={titleStyle}>Most viewed</h3>
+					<div css={descriptionStyle}>
+						What readers are clicking on
+					</div>
 				</div>
 				<ol
-					data-link-name={data.heading}
+					data-link-name={mostViewed.heading}
 					data-link-context={`most-popular/${sectionName}`}
 					css={displayContent}
 				>
-					{data.trails.map((trail: TrailType, j: number) => (
+					{shortenedMostViewed.map((trail: TrailType, j: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
 							position={j + 1}
@@ -118,9 +127,9 @@ export const MostPopularFooterGrid = ({
 				</ol>
 			</section>
 			<section css={displayContent}>
-				<div css={titleContainer}>
-					<h3 css={title}>Deeply read</h3>
-					<div css={description}>
+				<div css={titleContainerStyle}>
+					<h3 css={titleStyle}>Deeply read</h3>
+					<div css={descriptionStyle}>
 						What readers are spending time with
 					</div>
 				</div>
@@ -129,7 +138,7 @@ export const MostPopularFooterGrid = ({
 					data-link-context={`most-popular/${sectionName}`}
 					css={displayContent}
 				>
-					{deeplyRead.trails.map((trail: TrailType, j: number) => (
+					{shortenedDeeplyRead.map((trail: TrailType, j: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
 							position={j + 1}
@@ -137,7 +146,10 @@ export const MostPopularFooterGrid = ({
 							format={trail.format}
 							headlineText={trail.headline}
 							ageWarning={trail.ageWarning}
-							cssOverrides={deeplyOverridesStyle(j)}
+							cssOverrides={deeplyOverridesStyle(
+								j,
+								shortenedMostViewed.length,
+							)}
 						/>
 					))}
 				</ol>

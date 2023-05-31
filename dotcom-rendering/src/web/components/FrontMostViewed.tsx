@@ -66,8 +66,9 @@ export const FrontMostViewed = ({
 				</Island>
 			) : showMostPopular ? (
 				<MostPopularFooterGrid
-					data={mostViewedItems}
+					mostViewed={mostViewedItems}
 					deeplyRead={deeplyReadType}
+					sectionName="Most popular"
 				/>
 			) : (
 				<MostViewedFooter
