@@ -4,11 +4,10 @@ import type { FooterType } from './footer';
 import type { FEFrontCard, FEFrontConfigType } from './front';
 import type { FETagType } from './tag';
 
-export interface FEIndexPageType {
+export interface FETagFrontType {
 	contents: FEFrontCard[];
 	nav: FENavType;
 	tags: {
-		// TODO: Why does Frontend do this?
 		tags: FETagType[];
 	};
 	editionId: EditionId;
@@ -24,7 +23,7 @@ export interface FEIndexPageType {
 	forceDay: boolean;
 }
 
-export interface DCRIndexPageType {
+export interface DCRTagFrontType {
 	groupedTrails: GroupedTrails[];
 	nav: FENavType;
 	tags: FETagType[];

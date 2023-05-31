@@ -8,10 +8,10 @@ import {
 	handleBlocks,
 	handleFront,
 	handleFrontJson,
-	handleIndexPage,
-	handleIndexPageJson,
 	handleInteractive,
 	handleKeyEvents,
+	handleTagFront,
+	handleTagPageJson,
 } from '../web/server';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
@@ -52,10 +52,10 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
-			case 'IndexPage':
-				return handleIndexPage(req, res, next);
-			case 'IndexPageJSON':
-				return handleIndexPageJson(req, res, next);
+			case 'TagFront':
+				return handleTagFront(req, res, next);
+			case 'TagFrontJSON':
+				return handleTagPageJson(req, res, next);
 			case 'EmailNewsletters':
 				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':

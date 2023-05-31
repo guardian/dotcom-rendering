@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
-import type { DCRIndexPageType } from '../../types/indexPage';
+import type { DCRTagFrontType } from '../../types/tagFront';
 import { AdSlot } from '../components/AdSlot';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -26,7 +26,7 @@ import { getEditionFromId } from '../lib/edition';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
-	indexPage: DCRIndexPageType;
+	tagFront: DCRTagFrontType;
 	NAV: NavType;
 }
 
@@ -70,13 +70,13 @@ interface Props {
 // 	return null;
 // };
 
-export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
+export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	// const {
 	// 	config: { isPaidContent },
-	// } = indexPage;
+	// } = tagFront;
 
 	const isInEuropeTest =
-		indexPage.config.abTests.europeNetworkFrontVariant === 'variant';
+		tagFront.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -87,17 +87,17 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 	const palette = decidePalette(format);
 
 	// const merchHighPosition = getMerchHighPosition(
-	// 	indexPage.pressedPage.collections.length,
-	// 	indexPage.isNetworkFront,
+	// 	tagFront.pressedPage.collections.length,
+	// 	tagFront.isNetworkFront,
 	// );
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
-	const renderAds = canRenderAds(indexPage);
+	const renderAds = canRenderAds(tagFront);
 
 	// const mobileAdPositions = renderAds
-	// 	? getMobileAdPositions(indexPage.pressedPage.collections, merchHighPosition)
+	// 	? getMobileAdPositions(tagFront.pressedPage.collections, merchHighPosition)
 	// 	: [];
 
 	return (
@@ -128,19 +128,19 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							editionId={indexPage.editionId}
-							idUrl={indexPage.config.idUrl}
-							mmaUrl={indexPage.config.mmaUrl}
-							discussionApiUrl={indexPage.config.discussionApiUrl}
-							urls={indexPage.nav.readerRevenueLinks.header}
+							editionId={tagFront.editionId}
+							idUrl={tagFront.config.idUrl}
+							mmaUrl={tagFront.config.mmaUrl}
+							discussionApiUrl={tagFront.config.discussionApiUrl}
+							urls={tagFront.nav.readerRevenueLinks.header}
 							remoteHeader={
-								!!indexPage.config.switches.remoteHeader
+								!!tagFront.config.switches.remoteHeader
 							}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
-								!!indexPage.config.switches
+								!!tagFront.config.switches
 									.headerTopBarSearchCapi
 							}
 						/>
@@ -157,12 +157,11 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 							nav={NAV}
 							format={format}
 							subscribeUrl={
-								indexPage.nav.readerRevenueLinks.header
-									.subscribe
+								tagFront.nav.readerRevenueLinks.header.subscribe
 							}
-							editionId={indexPage.editionId}
+							editionId={tagFront.editionId}
 							headerTopBarSwitch={
-								!!indexPage.config.switches.headerTopNav
+								!!tagFront.config.switches.headerTopNav
 							}
 							isInEuropeTest={isInEuropeTest}
 						/>
@@ -203,11 +202,11 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 			</div>
 
 			<main data-layout="FrontLayout" id="maincontent">
-				{indexPage.webTitle ? (
-					<FrontSection title={indexPage.webTitle}></FrontSection>
+				{tagFront.webTitle ? (
+					<FrontSection title={tagFront.webTitle}></FrontSection>
 				) : undefined}
-				{indexPage.groupedTrails.map((groupedTrails, index) => {
-					const locale = getEditionFromId(indexPage.editionId).locale;
+				{tagFront.groupedTrails.map((groupedTrails, index) => {
+					const locale = getEditionFromId(tagFront.editionId).locale;
 					const date = new Date(
 						groupedTrails.year,
 						groupedTrails.month,
@@ -216,7 +215,7 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 
 					const url =
 						groupedTrails.day !== undefined
-							? `/${indexPage.pageId}/${groupedTrails.year}/${date
+							? `/${tagFront.pageId}/${groupedTrails.year}/${date
 									.toLocaleDateString(locale, {
 										month: 'long',
 									})
@@ -247,19 +246,19 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 							containerName={'test'}
 							toggleable={false}
 							sectionId={'test'}
-							pageId={indexPage.pageId}
-							editionId={indexPage.editionId}
+							pageId={tagFront.pageId}
+							editionId={tagFront.editionId}
 							canShowMore={false}
-							ajaxUrl={indexPage.config.ajaxUrl}
+							ajaxUrl={tagFront.config.ajaxUrl}
 							pagination={
-								index === indexPage.groupedTrails.length - 1
-									? indexPage.pagination
+								index === tagFront.groupedTrails.length - 1
+									? tagFront.pagination
 									: undefined
 							}
 						>
 							<DecideContainerByTrails
 								trails={groupedTrails.trails}
-								speed={indexPage.speed}
+								speed={tagFront.speed}
 							/>
 						</FrontSection>
 					);
@@ -270,7 +269,7 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 				showTopBorder={false}
 				data-component="trending-topics"
 			>
-				<TrendingTopics trendingTopics={indexPage.trendingTopics} />
+				<TrendingTopics trendingTopics={tagFront.trendingTopics} />
 			</Section>
 			<Section
 				fullWidth={true}
@@ -313,11 +312,11 @@ export const IndexPageLayout = ({ indexPage, NAV }: Props) => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={indexPage.pageFooter}
+					pageFooter={tagFront.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={indexPage.nav.readerRevenueLinks.header}
-					editionId={indexPage.editionId}
+					urls={tagFront.nav.readerRevenueLinks.header}
+					editionId={tagFront.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</Section>

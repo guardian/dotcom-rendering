@@ -16,20 +16,20 @@ import {
 	validateAsAllEditorialNewslettersPageType,
 	validateAsArticleType,
 	validateAsFrontType,
-	validateAsIndexPageType,
+	validateAsTagFrontType,
 } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
-import type { DCRIndexPageType, FEIndexPageType } from '../../types/indexPage';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
+import type { DCRTagFrontType, FETagFrontType } from '../../types/tagFront';
 import { decideTrail } from '../lib/decideTrail';
 import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
-import { indexPageToHtml } from './indexPageToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { tagFrontToHtml } from './tagFrontToHtml';
 
 function enhancePinnedPost(format: FEFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -85,8 +85,8 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	};
 };
 
-const enhanceIndexPage = (body: unknown): DCRIndexPageType => {
-	const data: FEIndexPageType = validateAsIndexPageType(body);
+const enhanceTagFront = (body: unknown): DCRTagFrontType => {
+	const data: FETagFrontType = validateAsTagFrontType(body);
 
 	const enhancedCards = enhanceCards(data.contents);
 	const speed = getSpeedFromTrails(data.contents);
@@ -242,12 +242,12 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
-export const handleIndexPage: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('indexPAge');
+export const handleTagFront: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('tagFront');
 	try {
-		const indexPage = enhanceIndexPage(body);
-		const html = indexPageToHtml({
-			indexPage,
+		const tagFront = enhanceTagFront(body);
+		const html = tagFrontToHtml({
+			tagFront,
 		});
 		res.status(200).send(html);
 	} catch (e) {
@@ -255,8 +255,8 @@ export const handleIndexPage: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handleIndexPageJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceIndexPage(body));
+export const handleTagPageJson: RequestHandler = ({ body }, res) => {
+	res.json(enhanceTagFront(body));
 };
 
 const enhanceAllEditorialNewslettersPage = (

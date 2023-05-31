@@ -3,8 +3,8 @@ import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
-import type { DCRIndexPageType } from '../../types/indexPage';
-import { IndexPageLayout } from '../layouts/IndexPageLayout';
+import type { DCRTagFrontType } from '../../types/tagFront';
+import { TagFrontLayout } from '../layouts/TagFrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
@@ -16,7 +16,7 @@ import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	indexPage: DCRIndexPageType;
+	tagFront: DCRTagFrontType;
 	NAV: NavType;
 };
 
@@ -28,7 +28,7 @@ type Props = {
  * @param {DCRFrontType} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * */
-export const IndexPagePage = ({ indexPage, NAV }: Props) => {
+export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -58,7 +58,7 @@ export const IndexPagePage = ({ indexPage, NAV }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<Metrics
 					commercialMetricsEnabled={
-						!!indexPage.config.switches.commercialMetrics
+						!!tagFront.config.switches.commercialMetrics
 					}
 				/>
 			</Island>
@@ -71,13 +71,13 @@ export const IndexPagePage = ({ indexPage, NAV }: Props) => {
 			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
-						indexPage.config.switches,
+						tagFront.config.switches,
 					)}
-					pageIsSensitive={indexPage.config.isSensitive}
-					isDev={!!indexPage.config.isDev}
+					pageIsSensitive={tagFront.config.isSensitive}
+					isDev={!!tagFront.config.isDev}
 				/>
 			</Island>
-			<IndexPageLayout indexPage={indexPage} NAV={NAV} />
+			<TagFrontLayout tagFront={tagFront} NAV={NAV} />
 		</StrictMode>
 	);
 };

@@ -255,6 +255,25 @@
                                                                 "tagType",
                                                                 "webTitle"
                                                             ]
+                                                        },
+                                                        "pagination": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "currentPage": {
+                                                                    "type": "number"
+                                                                },
+                                                                "lastPage": {
+                                                                    "type": "number"
+                                                                },
+                                                                "totalContent": {
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "currentPage",
+                                                                "lastPage",
+                                                                "totalContent"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -684,6 +703,94 @@
         "nav": {
             "$ref": "#/definitions/FENavType"
         },
+        "tags": {
+            "type": "object",
+            "properties": {
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "description": "This type comes from `frontend`, hence the FE prefix.",
+                        "type": "object",
+                        "properties": {
+                            "properties": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "tagType": {
+                                        "type": "string"
+                                    },
+                                    "webTitle": {
+                                        "type": "string"
+                                    },
+                                    "bio": {
+                                        "type": "string"
+                                    },
+                                    "bylineImageUrl": {
+                                        "type": "string"
+                                    },
+                                    "bylineLargeImageUrl": {
+                                        "type": "string"
+                                    },
+                                    "contributorLargeImagePath": {
+                                        "type": "string"
+                                    },
+                                    "paidContentType": {
+                                        "type": "string"
+                                    },
+                                    "sectionId": {
+                                        "type": "string"
+                                    },
+                                    "sectionName": {
+                                        "type": "string"
+                                    },
+                                    "twitterHandle": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "webUrl": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "tagType",
+                                    "webTitle"
+                                ]
+                            },
+                            "pagination": {
+                                "type": "object",
+                                "properties": {
+                                    "currentPage": {
+                                        "type": "number"
+                                    },
+                                    "lastPage": {
+                                        "type": "number"
+                                    },
+                                    "totalContent": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "currentPage",
+                                    "lastPage",
+                                    "totalContent"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "properties"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "tags"
+            ]
+        },
         "editionId": {
             "$ref": "#/definitions/EditionId"
         },
@@ -1042,6 +1149,9 @@
         },
         "isAdFreeUser": {
             "type": "boolean"
+        },
+        "forceDay": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -1050,11 +1160,13 @@
         "contents",
         "editionId",
         "editionLongForm",
+        "forceDay",
         "guardianBaseURL",
         "isAdFreeUser",
         "nav",
         "pageFooter",
         "pageId",
+        "tags",
         "webTitle",
         "webURL"
     ],

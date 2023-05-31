@@ -5,7 +5,7 @@ const {
 	getArticleSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
-	getIndexPageSchema,
+	getTagFrontSchema,
 } = require('./get-schema');
 
 const root = path.resolve(__dirname, '..', '..');
@@ -18,7 +18,7 @@ const existingFrontSchema = fs.readFileSync(
 	`${root}/src/model/front-schema.json`,
 	{ encoding: 'utf-8' },
 );
-const existingIndexPageSchema = fs.readFileSync(
+const existingTagFrontSchema = fs.readFileSync(
 	`${root}/src/model/front-schema.json`,
 	{ encoding: 'utf-8' },
 );
@@ -29,13 +29,13 @@ const existingNewsletterSchema = fs.readFileSync(
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
-const indexPageSchema = getIndexPageSchema();
+const tagFrontSchema = getTagFrontSchema();
 const newsletterSchema = getNewsletterPageSchema();
 
 if (
 	existingArticleSchema !== articleSchema ||
 	existingFrontSchema !== frontSchema ||
-	existingIndexPageSchema !== indexPageSchema ||
+	existingTagFrontSchema !== tagFrontSchema ||
 	existingNewsletterSchema !== newsletterSchema
 ) {
 	throw new Error('Schemas do not match ... please run "make gen-schema"');

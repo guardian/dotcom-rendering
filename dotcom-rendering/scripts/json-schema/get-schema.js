@@ -7,7 +7,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
-		path.resolve(`${root}/src/types/indexPage.ts`),
+		path.resolve(`${root}/src/types/tagFront.ts`),
 		path.resolve(`${root}/src/types/newslettersPage.ts`),
 	],
 	{
@@ -32,9 +32,9 @@ module.exports = {
 			4,
 		);
 	},
-	getIndexPageSchema: () => {
+	getTagFrontSchema: () => {
 		return JSON.stringify(
-			TJS.generateSchema(program, 'FEIndexPageType', settings),
+			TJS.generateSchema(program, 'FETagFrontType', settings),
 			null,
 			4,
 		);

@@ -7,34 +7,34 @@ import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
-import type { DCRIndexPageType } from '../../types/indexPage';
-import { IndexPagePage } from '../components/IndexPagePage';
+import type { DCRTagFrontType } from '../../types/tagFront';
+import { TagFrontPage } from '../components/TagFrontPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { pageTemplate } from './pageTemplate';
 
 interface Props {
-	indexPage: DCRIndexPageType;
+	tagFront: DCRTagFrontType;
 }
 
-export const indexPageToHtml = ({ indexPage }: Props): string => {
-	const title = indexPage.webTitle;
-	const NAV = extractNAV(indexPage.nav);
+export const tagFrontToHtml = ({ tagFront }: Props): string => {
+	const title = tagFront.webTitle;
+	const NAV = extractNAV(tagFront.nav);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<IndexPagePage indexPage={indexPage} NAV={NAV} />,
+		<TagFrontPage tagFront={tagFront} NAV={NAV} />,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = indexPage.config.switches;
+	const { offerHttp3 = false } = tagFront.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		indexPage.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
 	/**
@@ -61,7 +61,7 @@ export const indexPageToHtml = ({ indexPage }: Props): string => {
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
-				indexPage.config.commercialBundleUrl,
+				tagFront.config.commercialBundleUrl,
 		]
 			.filter(isString)
 			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
@@ -74,28 +74,28 @@ export const indexPageToHtml = ({ indexPage }: Props): string => {
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({
-				editionId: indexPage.editionId,
-				stage: indexPage.config.stage,
-				frontendAssetsFullURL: indexPage.config.frontendAssetsFullURL,
-				revisionNumber: indexPage.config.revisionNumber,
-				sentryPublicApiKey: indexPage.config.sentryPublicApiKey,
-				sentryHost: indexPage.config.sentryHost,
-				keywordIds: indexPage.config.keywordIds,
-				dfpAccountId: indexPage.config.dfpAccountId,
-				adUnit: indexPage.config.adUnit,
-				ajaxUrl: indexPage.config.ajaxUrl,
-				googletagUrl: indexPage.config.googletagUrl,
-				switches: indexPage.config.switches,
-				abTests: indexPage.config.abTests,
-				brazeApiKey: indexPage.config.brazeApiKey,
+				editionId: tagFront.editionId,
+				stage: tagFront.config.stage,
+				frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
+				revisionNumber: tagFront.config.revisionNumber,
+				sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
+				sentryHost: tagFront.config.sentryHost,
+				keywordIds: tagFront.config.keywordIds,
+				dfpAccountId: tagFront.config.dfpAccountId,
+				adUnit: tagFront.config.adUnit,
+				ajaxUrl: tagFront.config.ajaxUrl,
+				googletagUrl: tagFront.config.googletagUrl,
+				switches: tagFront.config.switches,
+				abTests: tagFront.config.abTests,
+				brazeApiKey: tagFront.config.brazeApiKey,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
-				unknownConfig: indexPage.config,
+				unknownConfig: tagFront.config,
 			}),
 		),
 	);
 
-	const keywords = indexPage.config.keywords;
+	const keywords = tagFront.config.keywords;
 
 	return pageTemplate({
 		scriptTags,
@@ -107,7 +107,7 @@ export const indexPageToHtml = ({ indexPage }: Props): string => {
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: indexPage.config.abTests.borkFcpVariant === 'variant',
-		borkFID: indexPage.config.abTests.borkFidVariant === 'variant',
+		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
+		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
 	});
 };

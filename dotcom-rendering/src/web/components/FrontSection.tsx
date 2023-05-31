@@ -3,7 +3,7 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
-import type { DCRFrontPagination } from '../../types/indexPage';
+import type { DCRFrontPagination } from '../../types/tagFront';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { ContainerTitle } from './ContainerTitle';
