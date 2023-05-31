@@ -282,7 +282,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											fullWidth={true}
 											padSides={false}
 											showTopBorder={false}
-											showSideBorders={true}
+											showSideBorders={false}
 											ophanComponentLink={
 												ophanComponentLink
 											}
