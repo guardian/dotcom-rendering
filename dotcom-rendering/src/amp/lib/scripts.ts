@@ -1,6 +1,6 @@
+import { isNonNullable } from '@guardian/libs';
 import type { FEElement } from '../../types/content';
 
-const notEmpty = (value: string | null): value is string => value !== null;
 const unique = (value: string | null, index: number, self: (string | null)[]) =>
 	value && self.indexOf(value) === index;
 
@@ -31,7 +31,7 @@ export const extractScripts: (
 					return null;
 			}
 		})
-		.filter((scriptEl) => notEmpty(scriptEl))
+		.filter(isNonNullable)
 		.filter((scriptEl, index, self) =>
 			unique(scriptEl, index, self),
 		) as string[];

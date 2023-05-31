@@ -1,4 +1,4 @@
-import { isUndefined } from '@guardian/libs';
+import { isNonNullable } from '@guardian/libs';
 import type { ImageSource, SrcSetItem } from '../../types/content';
 import { bestFitImage } from './image-fit';
 
@@ -31,16 +31,12 @@ const removeDuplicateWidth = (items: SrcSetItem[]): SrcSetItem[] => {
 	return packet.items;
 };
 
-const isSrcSet = (
-	item: SrcSetItem | undefined,
-): item is NonNullable<SrcSetItem> => !isUndefined(item);
-
 export const scrsetStringFromImagesSources = (
 	imageSources: ImageSource[],
 ): string => {
 	const srcSetItems1 = containerWidths
 		.map((width) => bestFitImage(imageSources, width))
-		.filter(isSrcSet);
+		.filter(isNonNullable);
 	// We now need to make sure that we do not have multiple images with the same width
 	const srcSetItems2 = removeDuplicateWidth(srcSetItems1);
 	return srcSetItems2.map((item) => `${item.src} ${item.width}w`).join(', ');
