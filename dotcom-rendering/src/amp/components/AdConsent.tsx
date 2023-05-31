@@ -99,7 +99,7 @@ export const AdConsent = () => {
 								clientConfig: clientConfigCcpa,
 							},
 							aus: {
-								checkConsentHref: `https://${sourcepointDomain}/ccpa/consent/amp`,
+								checkConsentHref: `https://${sourcepointDomain}/wrapper/ccpa/amp-v2?authId=${pubData.authId}`,
 								clientConfig: clientConfigAus,
 							},
 						},
