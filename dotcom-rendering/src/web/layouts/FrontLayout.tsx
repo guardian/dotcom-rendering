@@ -65,6 +65,7 @@ const isToggleable = (
 };
 
 const decideAdSlot = (
+	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
@@ -72,6 +73,7 @@ const decideAdSlot = (
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 ) => {
+	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
@@ -296,6 +298,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</SnapCssSandbox>
 								)}
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -347,6 +350,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									/>
 								</Section>
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -415,16 +419,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={renderAds}
 								/>
 							</FrontSection>
-							{renderAds &&
-								decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+							{decideAdSlot(
+								renderAds,
+								index,
+								front.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+								format.display,
+								mobileAdPositions,
+							)}
 						</>
 					);
 				})}
