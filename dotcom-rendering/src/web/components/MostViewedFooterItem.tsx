@@ -67,6 +67,16 @@ const ageWarningStyles = css`
 	margin-bottom: 16px;
 `;
 
+const imageStyles = css`
+	position: absolute;
+	left: 59px;
+	top: 6px;
+`;
+
+const textPaddingWithImage = css`
+	padding-left: 123px;
+`;
+
 type Props = {
 	position: number;
 	url: string;
@@ -74,6 +84,7 @@ type Props = {
 	headlineText: string;
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
+	image?: string;
 };
 
 export const MostViewedFooterItem = ({
@@ -83,6 +94,7 @@ export const MostViewedFooterItem = ({
 	headlineText,
 	ageWarning,
 	cssOverrides,
+	image,
 }: Props) => (
 	<li
 		css={[gridItem(position), cssOverrides]}
@@ -92,7 +104,16 @@ export const MostViewedFooterItem = ({
 			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			<div css={headlineHeader}>
+			{!!image && (
+				<img
+					css={imageStyles}
+					src={image}
+					alt={''}
+					width={53}
+					height={53}
+				/>
+			)}
+			<div css={[headlineHeader, !!image && textPaddingWithImage]}>
 				{format.design === ArticleDesign.LiveBlog ? (
 					<LinkHeadline
 						headlineText={headlineText}
