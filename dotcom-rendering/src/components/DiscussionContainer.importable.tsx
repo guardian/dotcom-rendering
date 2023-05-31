@@ -1,4 +1,4 @@
-import { CheckUserSignInStatus } from '../../lib/identity';
+import { checkIfInOktaTestToCheckSignInStatus } from '../../lib/checkIfInOktaTestToCheckSignInStatus';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
@@ -23,7 +23,7 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  */
 
 export const DiscussionContainer = (props: DiscussionProps) => {
-	const isSignedIn = CheckUserSignInStatus();
+	const isSignedIn = checkIfInOktaTestToCheckSignInStatus();
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
 
 	return <Discussion {...props} />;

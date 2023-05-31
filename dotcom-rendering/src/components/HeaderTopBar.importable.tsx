@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
-import { CheckUserSignInStatus } from '../../lib/identity';
+import { checkIfInOktaTestToCheckSignInStatus } from '../../lib/checkIfInOktaTestToCheckSignInStatus';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
@@ -69,7 +69,7 @@ export const HeaderTopBar = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
-	const isUserSignedIn = CheckUserSignInStatus();
+	const isUserSignedIn = checkIfInOktaTestToCheckSignInStatus();
 	return (
 		<div
 			css={css`

@@ -10,7 +10,7 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { log, storage } from '@guardian/libs';
-import { CheckUserSignInStatus } from '../../../lib/identity';
+import { checkIfInOktaTestToCheckSignInStatus } from '../../../lib/checkIfInOktaTestToCheckSignInStatus';
 import { initPerf } from '../../client/initPerf';
 import { record } from '../../client/ophan/ophan';
 import {
@@ -65,7 +65,7 @@ export const buildBrazeMessaging = async (
 		};
 	}
 
-	const isSignedIn = CheckUserSignInStatus();
+	const isSignedIn = checkIfInOktaTestToCheckSignInStatus();
 
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,
