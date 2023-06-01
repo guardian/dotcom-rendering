@@ -77,6 +77,7 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
+	z-index: 1;
 
 	right: 5px;
 	bottom: 58px;
