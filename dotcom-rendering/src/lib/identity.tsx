@@ -8,8 +8,14 @@ interface OktaAuthContextType {
 	authState: AuthState | null;
 }
 
-const stage =
-	typeof process != 'undefined' ? (process.env.GU_STAGE as StageType) : 'DEV';
+function getStage() {
+	if (typeof window !== 'undefined' && !window.guardian.config.isDev) {
+		return window.guardian.config.stage;
+	} else return 'DEV';
+}
+
+const stage = getStage();
+
 console.log('stage', stage);
 
 const CLIENT_ID =
