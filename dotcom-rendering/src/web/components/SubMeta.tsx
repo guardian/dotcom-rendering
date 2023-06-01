@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../../model/extract-nav';
-import type { BadgeType } from '../../types/badge';
+import type { DCRBadgeType } from '../../types/badge';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
@@ -130,7 +130,7 @@ type Props = {
 	webUrl: string;
 	webTitle: string;
 	showBottomSocialButtons: boolean;
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 };
 
 const syndicationButtonOverrides = (palette: Palette) => css`
