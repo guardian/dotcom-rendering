@@ -40,6 +40,11 @@ export interface DCRTagFrontType {
 	trendingTopics?: FETagType[];
 	speed: 'slow' | 'fast';
 	pagination?: DCRFrontPagination;
+	header: {
+		title: string;
+		description?: string;
+		image?: string;
+	};
 }
 
 export interface DCRFrontPagination {

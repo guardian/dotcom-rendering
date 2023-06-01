@@ -202,9 +202,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			</div>
 
 			<main data-layout="FrontLayout" id="maincontent">
-				{tagFront.webTitle ? (
-					<FrontSection title={tagFront.webTitle}></FrontSection>
-				) : undefined}
+				<FrontSection
+					title={tagFront.header.title}
+					description={tagFront.header.description}
+				></FrontSection>
 				{tagFront.groupedTrails.map((groupedTrails, index) => {
 					const locale = getEditionFromId(tagFront.editionId).locale;
 					const date = new Date(

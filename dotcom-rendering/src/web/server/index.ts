@@ -104,6 +104,11 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 			? { ...data.tags.tags[0]?.pagination, sectionName: data.webTitle }
 			: undefined,
 		trendingTopics: extractTrendingTopics(data.contents),
+		header: {
+			title: data.webTitle,
+			description: data.tags.tags[0]?.properties.bio,
+			image: data.tags.tags[0]?.properties.bylineImageUrl,
+		},
 	};
 };
 
