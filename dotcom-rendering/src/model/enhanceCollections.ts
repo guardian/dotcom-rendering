@@ -36,13 +36,6 @@ function getBrandingFromCards(
 		.filter(isNonNullable);
 }
 
-function allCardsHaveSponsors(
-	allCards: FEFrontCard[],
-	allBranding: Branding[],
-): boolean {
-	return allCards.length === allBranding.length;
-}
-
 export const enhanceCollections = (
 	collections: FECollectionType[],
 	editionId: EditionId,
@@ -57,10 +50,7 @@ export const enhanceCollections = (
 		);
 		const allCards = [...collection.curated, ...collection.curated];
 		const allBranding = getBrandingFromCards(allCards, editionId);
-		const allCardsHaveBranding = allCardsHaveSponsors(
-			allCards,
-			allBranding,
-		);
+		const allCardsHaveBranding = allCards.length === allBranding.length;
 		const isLabs = containerPalette === 'Branded' && allCardsHaveBranding;
 		return {
 			id,
