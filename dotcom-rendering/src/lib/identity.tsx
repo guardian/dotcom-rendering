@@ -8,7 +8,8 @@ interface OktaAuthContextType {
 	authState: AuthState | null;
 }
 
-const stage = process.env.GU_STAGE as StageType;
+const stage = typeof process != 'undefined' ? process.env.GU_STAGE : 'DEV';
+console.log('stage', stage);
 
 const CLIENT_ID =
 	stage === 'PROD' ? '0oa79m1fmgzrtaHc1417' : '0oa53x6k5wGYXOGzm0x7';
@@ -26,12 +27,11 @@ function determineREDIRECT_URI() {
 			return 'https://m.code.dev-theguardian.com/';
 		case 'DEV':
 			return 'http://localhost:3030/';
-		case undefined:
-			return undefined;
 	}
 }
 
 const REDIRECT_URI = determineREDIRECT_URI();
+console.log('REDIRECT_URI', REDIRECT_URI);
 
 const config: OktaAuthOptions = {
 	clientId: CLIENT_ID,
@@ -135,7 +135,6 @@ function useOktaForSignInCheck() {
 
 	console.log('CheckUserSignInStatus');
 	console.log(isSignedIn);
-
 	return isSignedIn;
 }
 
