@@ -45,12 +45,13 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const containerPalette = decideContainerPalette(
-			collection.config.metadata?.map((meta) => meta.type),
-		);
 		const allCards = [...collection.curated, ...collection.curated];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
+		const containerPalette = decideContainerPalette(
+			collection.config.metadata?.map((meta) => meta.type),
+			allCardsHaveBranding,
+		);
 		return {
 			id,
 			displayName,

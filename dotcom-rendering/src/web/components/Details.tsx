@@ -1,5 +1,4 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
@@ -47,8 +46,10 @@ export const Details = ({
 	colour,
 	positionStyles,
 	children,
+	labelSize,
 }: {
 	label: string;
+	labelSize: string;
 	colour?: string;
 	positionStyles?: SerializedStyles;
 	children: React.ReactNode;
@@ -72,7 +73,7 @@ export const Details = ({
 					display: inline;
 				}
 			}
-			${textSans.small()}
+			${labelSize}
 			position: relative;
 		`}
 	>

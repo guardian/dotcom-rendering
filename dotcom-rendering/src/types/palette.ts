@@ -166,6 +166,7 @@ export type ContainerOverrides = {
 		containerFooter?: Colour;
 		containerToggle?: Colour;
 		containerDate?: Colour;
+		containerSummary?: Colour;
 	};
 	border?: {
 		container?: Colour;
@@ -174,6 +175,7 @@ export type ContainerOverrides = {
 	background?: {
 		container?: Colour;
 		containerLeftColumn?: Colour;
+		containerSummary?: Colour;
 		card?: Colour;
 	};
 	topBar?: {

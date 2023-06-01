@@ -144,6 +144,7 @@ export const LabsHeader = () => (
 			<HeaderSection>
 				<Details
 					label={'About'}
+					labelSize={textSans.small()}
 					positionStyles={css`
 						top: 40px;
 						left: -75px;

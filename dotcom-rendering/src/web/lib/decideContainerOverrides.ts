@@ -52,12 +52,30 @@ const textContainerFooter = (
 	}
 };
 
+const textContainerSummary = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[400];
+	}
+};
+
 const backgroundContainerLeftColumn = (
 	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
 		case 'Branded':
 			return labs[400];
+	}
+};
+
+const backgroundContainerSummary = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[0];
 	}
 };
 
@@ -383,11 +401,13 @@ export const decideContainerOverrides = (
 			text: {
 				container: textContainer(containerPalette),
 				containerFooter: textContainerFooter(containerPalette),
+				containerSummary: textContainerSummary(containerPalette),
 			},
 			background: {
 				container: backgroundContainer(containerPalette),
 				containerLeftColumn:
 					backgroundContainerLeftColumn(containerPalette),
+				containerSummary: backgroundContainerSummary(containerPalette),
 			},
 		};
 	}

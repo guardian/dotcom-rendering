@@ -8,13 +8,18 @@ import {
 } from '@guardian/source-foundations';
 import { Badge } from './Badge';
 import { BadgeType } from '../../types/badge';
-import { Link } from '@guardian/source-react-components';
+import {
+	Link,
+	LinkButton,
+	SvgArrowRightStraight,
+} from '@guardian/source-react-components';
 import LabsLogo from '../../static/logos/the-guardian-labs.svg';
 import { Section } from './Section';
 import { Island } from './Island';
 import { ShowMore } from './ShowMore.importable';
 import { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { Details } from './Details';
 
 /**
  * ----- First time here? -----
@@ -176,7 +181,7 @@ const badgeStyles = css`
 	display: flex;
 	flex-direction: column;
 	align-items: end;
-	padding-right: 10px;
+	padding: ${space[2]}px 10px;
 `;
 
 const paidForByStyles = (textColour?: string) => css`
@@ -261,6 +266,70 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const LabsContainerHeader = ({
+	summaryBackgroundColour,
+	summaryTextColour,
+	summaryTextSecondaryColour,
+}: {
+	summaryBackgroundColour?: string;
+	summaryTextColour?: string;
+	summaryTextSecondaryColour?: string;
+}) => (
+	<div
+		css={css`
+			display: flex;
+			${from.wide} {
+				padding-top: ${space[2]}px;
+			}
+		`}
+	>
+		<div
+			css={css`
+				${textSans.xsmall({ fontWeight: 'bold' })};
+				padding-right: 16px;
+			`}
+		>
+			Paid content
+		</div>
+		<Details
+			label={'About'}
+			labelSize={textSans.xsmall()}
+			positionStyles={css`
+				${until.mobileLandscape} {
+					left: -107px;
+				}
+			`}
+		>
+			<div
+				css={css`
+					background-color: ${summaryBackgroundColour};
+					color: ${summaryTextColour};
+					padding: 20px;
+				`}
+			>
+				<p>
+					Paid content is paid for and controlled by an advertiser and
+					produced by the Guardian Labs team.
+				</p>
+				<br />
+				<LinkButton
+					iconSide="right"
+					size="xsmall"
+					priority="subdued"
+					icon={<SvgArrowRightStraight />}
+					href="https://www.theguardian.com/info/2016/jan/25/content-funding"
+					cssOverrides={css`
+						color: ${summaryTextSecondaryColour};
+						${textSans.xsmall({ fontWeight: 'regular' })};
+					`}
+				>
+					Learn more about Guardian Labs content
+				</LinkButton>
+			</div>
+		</Details>
+	</div>
+);
+
 /**
  *
  * A LabsSection component represents a horizontal slice of a page. It renders as
@@ -302,10 +371,15 @@ export const LabsSection = ({
 					backgroundColour={overrides.background?.containerLeftColumn}
 				>
 					<div>
-						<div>
-							<span>PaidContent</span>
-							<span>About</span>
-						</div>
+						<LabsContainerHeader
+							summaryBackgroundColour={
+								overrides.background?.containerSummary
+							}
+							summaryTextColour={overrides.text?.container}
+							summaryTextSecondaryColour={
+								overrides.text?.containerSummary
+							}
+						/>
 						<GuardianLabsTitle
 							title={title}
 							textColour={overrides.text?.container}
