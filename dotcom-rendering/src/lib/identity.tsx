@@ -8,7 +8,8 @@ interface OktaAuthContextType {
 	authState: AuthState | null;
 }
 
-const stage = typeof process != 'undefined' ? process.env.GU_STAGE : 'DEV';
+const stage =
+	typeof process != 'undefined' ? (process.env.GU_STAGE as StageType) : 'DEV';
 console.log('stage', stage);
 
 const CLIENT_ID =
