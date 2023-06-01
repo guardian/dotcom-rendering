@@ -1,5 +1,5 @@
-import { BadgeType } from '../types/badge';
-import { Branding } from '../types/branding';
+import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 
 /**
  * Construct a badge based on the collection displayName or card branding
@@ -7,7 +7,7 @@ import { Branding } from '../types/branding';
 export const decideBadge = (
 	displayName: string,
 	allBranding: Branding[],
-): BadgeType | undefined => {
+): DCRBadgeType | undefined => {
 	if (displayName === 'This is Europe') {
 		return {
 			imageSrc:

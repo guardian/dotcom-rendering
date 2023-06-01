@@ -1,5 +1,5 @@
 /** synthetically bork FID https://web.dev/fid/ */
-export const fid = (): void => {
+export const fid = (delay: number): void => {
 	try {
 		/** @see https://github.com/GoogleChrome/web-vitals/blob/v3.1.1/src/lib/polyfills/firstInputPolyfill.ts#L172 */
 		const eventTypes = [
@@ -8,12 +8,6 @@ export const fid = (): void => {
 			'touchstart',
 			'pointerdown',
 		];
-
-		/**
-		 * A value in the 0ms - 1000ms range.
-		 * The upper bound of 1s matches our current 99th percentile for FID.
-		 */
-		const delay = Math.floor(Math.random() * 1000);
 
 		if (
 			typeof window.performance === 'object' &&

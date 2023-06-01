@@ -67,6 +67,7 @@ const isToggleable = (
 };
 
 const decideAdSlot = (
+	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
@@ -74,6 +75,7 @@ const decideAdSlot = (
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 ) => {
+	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
@@ -122,9 +124,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront,
 	);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
@@ -285,6 +284,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</SnapCssSandbox>
 								)}
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -336,6 +336,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									/>
 								</Section>
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -453,16 +454,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={renderAds}
 								/>
 							</FrontSection>
-							{renderAds &&
-								decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+							{decideAdSlot(
+								renderAds,
+								index,
+								front.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+								format.display,
+								mobileAdPositions,
+							)}
 						</>
 					);
 				})}
@@ -474,17 +474,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
+			)}
 
 			{NAV.subNavSections && (
 				<Section

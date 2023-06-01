@@ -57,7 +57,7 @@ const isEvenIndex = (_collection: unknown, index: number) => index % 2 === 0;
 /**
  * We do not insert mobile ads:
  * a. after the first container if it is a thrasher
- * b. after a commercial container (e.g. merchandise high)
+ * b. after a commercial container (e.g. merchandising-high)
  * c. between a regular container and a thrasher
  * d. after the Most Viewed container.
  * After we've filtered out the containers next to which we can insert an ad,

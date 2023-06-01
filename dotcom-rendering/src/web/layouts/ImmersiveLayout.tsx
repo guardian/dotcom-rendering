@@ -450,7 +450,7 @@ export const ImmersiveLayout = ({
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</Section>
 							<Box palette={palette}>
@@ -528,7 +528,7 @@ export const ImmersiveLayout = ({
 											guardianBaseURL={
 												article.guardianBaseURL
 											}
-											badge={article.badge}
+											badge={article.badge?.enhanced}
 										/>
 									</div>
 								)}
@@ -707,7 +707,7 @@ export const ImmersiveLayout = ({
 									showBottomSocialButtons={
 										article.showBottomSocialButtons
 									}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
