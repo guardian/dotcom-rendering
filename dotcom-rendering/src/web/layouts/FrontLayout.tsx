@@ -33,7 +33,6 @@ import {
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 import { DCRFrontCard } from '../../types/front';
-import { DCRBadgeType } from '../../types/badge';
 import { LabsSection } from '../components/LabsSection';
 
 interface Props {
@@ -353,13 +352,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const getGuardianLabsTrails = (
-							trails: DCRFrontCard[],
-							badge?: DCRBadgeType,
-						): DCRFrontCard[] => {
-							if (!!badge) {
+						const getGuardianLabsTrails = (): DCRFrontCard[] => {
+							if (collection.badge) {
 								trails.forEach(
-									(trail) => delete trail.branding,
+									(labsTrail) => delete labsTrail.branding,
 								);
 							}
 							return trails;
@@ -367,6 +363,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 						return (
 							<LabsSection
+								key={ophanName}
 								title={collection.displayName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -382,10 +379,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								data-print-layout="hide"
 							>
 								<DecideContainer
-									trails={getGuardianLabsTrails(
-										trails,
-										collection.badge,
-									)}
+									trails={getGuardianLabsTrails()}
 									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}

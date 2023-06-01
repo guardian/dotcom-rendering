@@ -200,7 +200,7 @@ const GuardianLabsTitle = ({
 	url?: string;
 	textColour?: string;
 }) => {
-	if (!!url) {
+	if (url) {
 		return (
 			<a css={linkStyles(textColour)} href={url}>
 				<h2 css={headerStyles()}>{title}</h2>
