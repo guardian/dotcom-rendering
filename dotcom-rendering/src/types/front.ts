@@ -5,6 +5,7 @@ import type { FooterType } from './footer';
 import type { FETagType } from './tag';
 import type { FETrailType, TrailType } from './trails';
 import { Branding } from './branding';
+import { BadgeType } from './badge';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
@@ -105,7 +106,8 @@ export type DCRContainerPalette =
 	| 'LongRunningPalette'
 	| 'SombrePalette'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Branded';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -341,6 +343,14 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
+	/** Indicates whether we should render a Guardian Labs collection.
+	 *
+	 *  This overrides collectionType because we must take into account all the cards in a collection
+	 *  before deciding if we can render a Guardian Labs container.
+	 *
+	 * */
+	isLabs?: boolean;
+	badge?: BadgeType;
 };
 
 export type DCRGroupedTrails = {

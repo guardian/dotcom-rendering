@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
@@ -10,6 +9,8 @@ import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
+import { BadgeType } from '../../types/badge';
+import { Badge } from './Badge';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -52,7 +53,7 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	badge?: EmotionJSX.Element;
+	badge?: BadgeType;
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
@@ -418,19 +419,30 @@ export const FrontSection = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background.container};
+					background-color: ${overrides?.background?.container};
 				`,
 			]}
 		>
 			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
 
 			<div css={[sectionHeadline]}>
-				<Hide until="leftCol">{badge}</Hide>
+				<Hide until="leftCol">
+					{badge && (
+						<Badge imageSrc={badge?.imageSrc} href={badge?.href} />
+					)}
+				</Hide>
 				<div css={titleStyle}>
-					<Hide from="leftCol">{badge}</Hide>
+					<Hide from="leftCol">
+						{badge && (
+							<Badge
+								imageSrc={badge?.imageSrc}
+								href={badge?.href}
+							/>
+						)}
+					</Hide>
 					<ContainerTitle
 						title={title}
-						fontColour={overrides?.text.container}
+						fontColour={overrides?.text?.container}
 						description={description}
 						url={url}
 						containerPalette={containerPalette}
@@ -446,7 +458,7 @@ export const FrontSection = ({
 					<ShowHideButton
 						sectionId={sectionId}
 						overrideContainerToggleColour={
-							overrides?.text.containerToggle
+							overrides?.text?.containerToggle
 						}
 					/>
 				</div>
@@ -485,7 +497,7 @@ export const FrontSection = ({
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={overrides?.border.container}
+						borderColour={overrides?.border?.container}
 					/>
 				</div>
 			)}

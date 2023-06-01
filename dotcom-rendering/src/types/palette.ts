@@ -151,7 +151,7 @@ export type Palette = {
 };
 
 export type ContainerOverrides = {
-	text: {
+	text?: {
 		cardHeadline: Colour;
 		cardStandfirst: Colour;
 		cardKicker: Colour;
@@ -166,15 +166,15 @@ export type ContainerOverrides = {
 		containerToggle: Colour;
 		containerDate: Colour;
 	};
-	border: {
+	border?: {
 		container: Colour;
 		lines: Colour;
 	};
 	background: {
 		container: Colour;
-		card: Colour;
+		card?: Colour;
 	};
-	topBar: {
+	topBar?: {
 		card: Colour;
 	};
 };

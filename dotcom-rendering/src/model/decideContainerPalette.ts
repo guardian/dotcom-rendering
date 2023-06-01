@@ -20,5 +20,6 @@ export const decideContainerPalette = (
 	if (palettes?.includes('BreakingPalette')) return 'BreakingPalette';
 	if (palettes?.includes('SpecialReportAltPalette'))
 		return 'SpecialReportAltPalette';
+	if (palettes?.includes('Branded')) return 'Branded';
 	return undefined;
 };

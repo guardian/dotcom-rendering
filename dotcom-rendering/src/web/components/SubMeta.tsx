@@ -165,10 +165,7 @@ export const SubMeta = ({
 		>
 			{badge && (
 				<div css={badgeWrapper}>
-					<Badge
-						imageUrl={badge.imageUrl}
-						seriesTag={badge.seriesTag}
-					/>
+					<Badge imageSrc={badge.imageSrc} href={badge.href} />
 				</div>
 			)}
 			{(hasSectionLinks || hasKeywordLinks) && (

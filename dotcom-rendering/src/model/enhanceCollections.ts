@@ -1,9 +1,16 @@
-import type { DCRCollectionType, FECollectionType } from '../types/front';
+import type {
+	DCRCollectionType,
+	FECollectionType,
+	FEFrontCard,
+} from '../types/front';
 import type { EditionId } from '../web/lib/edition';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
+import { decideBadge } from './decideBadge';
+import { isNonNullable } from '@guardian/libs';
+import { Branding } from '../types/branding';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
@@ -13,6 +20,21 @@ const FORBIDDEN_CONTAINERS = [
 ];
 const isSupported = (collection: FECollectionType): boolean =>
 	!FORBIDDEN_CONTAINERS.includes(collection.displayName);
+
+function getBrandingFromCards(
+	allCards: FEFrontCard[],
+	editionId: EditionId,
+): Branding[] {
+	return allCards
+		.map(
+			(card) =>
+				card.properties.editionBrandings.find(
+					(editionBranding) =>
+						editionBranding.edition.id === editionId,
+				)?.branding,
+		)
+		.filter(isNonNullable);
+}
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
@@ -26,6 +48,10 @@ export const enhanceCollections = (
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
 		);
+		const allCards = [...collection.curated, ...collection.curated];
+		const allBranding = getBrandingFromCards(allCards, editionId);
+		const allCardsHaveBranding = allCards.length === allBranding.length;
+		const isLabs = containerPalette === 'Branded' && allCardsHaveBranding;
 		return {
 			id,
 			displayName,
@@ -36,6 +62,11 @@ export const enhanceCollections = (
 			collectionType,
 			href,
 			containerPalette,
+			isLabs,
+			badge: decideBadge(
+				displayName,
+				allCardsHaveBranding ? allBranding : [],
+			),
 			grouped: groupCards(
 				collectionType,
 				collection.curated,

@@ -4598,16 +4598,16 @@
         "BadgeType": {
             "type": "object",
             "properties": {
-                "seriesTag": {
+                "imageSrc": {
                     "type": "string"
                 },
-                "imageUrl": {
+                "href": {
                     "type": "string"
                 }
             },
             "required": [
-                "imageUrl",
-                "seriesTag"
+                "href",
+                "imageSrc"
             ]
         },
         "FENavType": {

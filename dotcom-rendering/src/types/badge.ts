@@ -1,4 +1,4 @@
 export interface BadgeType {
-	seriesTag: string;
-	imageUrl: string;
+	imageSrc: string;
+	href: string;
 }
