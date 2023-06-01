@@ -3,7 +3,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import { isAmpSupported } from '../../amp/components/Elements';
+import { isAmpSupported } from '../../amp/components/Elements.amp';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import {
 	ASSET_ORIGIN,

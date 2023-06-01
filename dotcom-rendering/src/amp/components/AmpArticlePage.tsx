@@ -2,23 +2,23 @@ import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
 import type { ConfigType } from '../../types/config';
-import { filterForTagsOfType } from '../lib/tag-utils';
-import type { AmpExperiments } from '../server/ampExperimentCache';
-import type { ArticleModel } from '../types/ArticleModel';
-import { AdConsent } from './AdConsent';
-import { AmpExperimentComponent } from './AmpExperiment';
-import type { AnalyticsModel } from './Analytics';
-import { Analytics } from './Analytics';
-import { AnalyticsIframe } from './AnalyticsIframe';
-import { Body as BodyArticle } from './BodyArticle';
-import { Body as BodyLiveblog } from './BodyLiveblog';
-import { ContentABTestProvider } from './ContentABTest';
-import { Footer } from './Footer';
-import { Header } from './Header';
-import { Onward } from './Onward';
-import type { PermutiveModel } from './Permutive';
-import { Permutive } from './Permutive';
-import { Sidebar } from './Sidebar';
+import { filterForTagsOfType } from '../lib/amp-tag-utils';
+import type { AmpExperiments } from '../server/AMPExperimentCache';
+import type { AMPArticleModel } from '../types/AMPArticleModel';
+import { AdConsent } from './AdConsent.amp';
+import { AmpExperimentComponent } from './AmpExperiment.amp';
+import type { AnalyticsModel } from './Analytics.amp';
+import { Analytics } from './Analytics.amp';
+import { AnalyticsIframe } from './AnalyticsIframe.amp';
+import { Body as BodyArticle } from './BodyArticle.amp';
+import { Body as BodyLiveblog } from './BodyLiveblog.amp';
+import { ContentABTestProvider } from './ContentABTest.amp';
+import { Footer } from './Footer.amp';
+import { Header } from './Header.amp';
+import { Onward } from './Onward.amp';
+import type { PermutiveModel } from './Permutive.amp';
+import { Permutive } from './Permutive.amp';
+import { Sidebar } from './Sidebar.amp';
 
 const containerStyles = css`
 	margin: auto;
@@ -30,7 +30,7 @@ const backgroundColour = css`
 `;
 
 type BodyProps = {
-	data: ArticleModel;
+	data: AMPArticleModel;
 	config: ConfigType;
 };
 
@@ -49,7 +49,7 @@ const Body = ({ data, config }: BodyProps) => {
 type ArticleProps = {
 	experimentsData?: AmpExperiments;
 	nav: NavType;
-	articleData: ArticleModel;
+	articleData: AMPArticleModel;
 	config: ConfigType;
 	analytics: AnalyticsModel;
 	permutive: PermutiveModel;
