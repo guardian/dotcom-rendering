@@ -3,7 +3,10 @@ import { CheckUserSignInStatus } from './identity';
 
 export function checkIfInOktaTestToCheckSignInStatus() {
 	if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-		const isInOktaExperiment = window.guardian.config.switches.okta == true;
+		const isInOktaExperiment = getCookie({
+			name: 'X-GU-Experiment-0perc-E=true',
+			shouldMemoize: true,
+		});
 		const isSignedIn = isInOktaExperiment
 			? CheckUserSignInStatus()
 			: !!getCookie({ name: 'GU_U', shouldMemoize: true });
