@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Badge } from './Badge';
-import { BadgeType } from '../../types/badge';
+import { DCRBadgeType } from '../../types/badge';
 import {
 	Link,
 	LinkButton,
@@ -63,7 +63,7 @@ type Props = {
 	url?: string;
 
 	/** A sponsor badge can be displayed under the content cards */
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;

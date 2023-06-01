@@ -33,7 +33,7 @@ import {
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 import { DCRFrontCard } from '../../types/front';
-import { BadgeType } from '../../types/badge';
+import { DCRBadgeType } from '../../types/badge';
 import { LabsSection } from '../components/LabsSection';
 
 interface Props {
@@ -355,7 +355,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					) {
 						const getGuardianLabsTrails = (
 							trails: DCRFrontCard[],
-							badge?: BadgeType,
+							badge?: DCRBadgeType,
 						): DCRFrontCard[] => {
 							if (!!badge) {
 								trails.forEach(
