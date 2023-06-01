@@ -100,13 +100,14 @@ const containerStyles = css`
 		[show-more-end];
 
 	grid-template-columns:
-		[viewport-start] 0px
+		[decoration-start]
+		0px
 		[content-start title-start]
 		repeat(3, minmax(0, 1fr))
 		[hide-start]
 		minmax(0, 1fr)
 		[content-end title-end hide-end]
-		0px [viewport-end];
+		0px [decoration-end];
 
 	grid-auto-flow: dense;
 	column-gap: 10px;
@@ -117,23 +118,23 @@ const containerStyles = css`
 
 	${from.tablet} {
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[content-start title-start]
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
 			repeat(11, 40px)
 			[hide-start]
 			40px
-			[content-end title-end hide-end]
-			minmax(0, 1fr) [viewport-end];
+			[decoration-end content-end title-end hide-end]
+			minmax(0, 1fr);
 	}
 
 	${from.desktop} {
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[content-start title-start]
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
 			repeat(11, 60px)
 			[hide-start]
 			60px
-			[content-end title-end hide-end]
+			[decoration-end content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -146,14 +147,14 @@ const containerStyles = css`
 			[show-more-end];
 
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
+			minmax(0, 1fr)
+			[decoration-start title-start]
 			repeat(2, 60px)
 			[title-end content-start]
 			repeat(11, 60px)
 			[hide-start]
 			60px
-			[hide-end content-end]
+			[decoration-end hide-end content-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -166,15 +167,15 @@ const containerStyles = css`
 			[show-more-end];
 
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
+			minmax(0, 1fr)
+			[decoration-start title-start]
 			repeat(3, 60px)
 			[title-end content-start]
 			repeat(12, 60px)
 			[content-end hide-start]
 			60px
-			[hide-end]
-			minmax(0, 1fr) [viewport-end];
+			[decoration-end hide-end]
+			minmax(0, 1fr);
 	}
 `;
 
@@ -255,11 +256,7 @@ const sectionTreats = css`
 /** element which contains border and inner background colour, if set */
 const decoration = css`
 	grid-row: 1 / -1;
-	grid-column: 1 / -1;
-
-	${from.tablet} {
-		grid-column: 2 / -2;
-	}
+	grid-column: decoration;
 
 	border-width: 1px;
 	border-color: ${neutral[86]};
