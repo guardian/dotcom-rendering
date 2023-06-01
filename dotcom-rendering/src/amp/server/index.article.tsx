@@ -1,19 +1,19 @@
 import type { RequestHandler } from 'express';
-import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsArticleType } from '../../model/validate';
+import { recordTypeAndPlatform } from '../../server/lib/logging-store';
+import { AmpArticlePage } from '../components/AmpArticlePage';
 import type { AnalyticsModel } from '../components/Analytics';
 import { isAmpSupported } from '../components/Elements';
 import type { PermutiveModel } from '../components/Permutive';
 import { enhance } from '../lib/enhance';
 import { generatePermutivePayload } from '../lib/permutive';
 import { extractScripts } from '../lib/scripts';
-import { Article } from '../pages/Article';
 import { getAmpExperimentCache } from './ampExperimentCache';
-import { document } from './document';
+import { renderArticle } from './render.article';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {
@@ -67,13 +67,13 @@ export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 			canonicalURL: article.webURL,
 		};
 
-		const resp = document({
+		const resp = renderArticle({
 			linkedData,
 			scripts,
 			metadata,
 			title: `${article.headline} | ${article.sectionLabel} | The Guardian`,
 			body: (
-				<Article
+				<AmpArticlePage
 					experimentsData={getAmpExperimentCache()}
 					articleData={article}
 					nav={extractNAV(article.nav)}

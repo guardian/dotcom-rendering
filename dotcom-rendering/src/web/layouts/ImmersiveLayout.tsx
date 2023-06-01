@@ -37,7 +37,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -383,9 +383,7 @@ export const ImmersiveLayout = ({
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<Island deferUntil="idle">
-							<LabsHeader />
-						</Island>
+						<LabsHeader />
 					</Section>
 				</Stuck>
 			)}

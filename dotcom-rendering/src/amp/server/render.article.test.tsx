@@ -1,17 +1,17 @@
 import validator from 'amphtml-validator';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
+import { AmpArticlePage } from '../components/AmpArticlePage';
 import type { AnalyticsModel } from '../components/Analytics';
 import type { PermutiveModel } from '../components/Permutive';
-import { Article } from '../pages/Article';
-import { document } from './document';
+import { renderArticle } from './render.article';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
 	const v = await validator.getInstance();
 	const linkedData = [{}];
 	const metadata = { description: '', canonicalURL: '' };
 	const result = v.validateString(
-		document({
+		renderArticle({
 			linkedData,
 			metadata,
 			title: 'foo',
@@ -57,7 +57,7 @@ test('produces valid AMP doc', async () => {
 	};
 
 	const body = (
-		<Article
+		<AmpArticlePage
 			experimentsData={{}}
 			nav={nav}
 			articleData={{ ...ExampleArticle, shouldHideReaderRevenue: false }}
@@ -68,7 +68,7 @@ test('produces valid AMP doc', async () => {
 	);
 
 	const result = v.validateString(
-		document({
+		renderArticle({
 			body,
 			linkedData,
 			metadata,

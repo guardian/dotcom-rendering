@@ -10,6 +10,7 @@ import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 import { decideBadge } from './decideBadge';
 import { Branding } from '../types/branding';
+import { isNonNullable } from '@guardian/libs';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
@@ -22,18 +23,17 @@ const isSupported = (collection: FECollectionType): boolean =>
 
 function getBrandingFromCards(
 	allCards: FEFrontCard[],
-	editionId: 'UK' | 'US' | 'AU' | 'INT' | 'EUR',
-): (Branding | undefined)[] {
-	return allCards.map(
-		(card) =>
-			card.properties.editionBrandings.find(
-				(editionBranding) => editionBranding.edition.id === editionId,
-			)?.branding,
-	);
-}
-
-function allCardsHaveSponsors(allBranding: (Branding | undefined)[]): boolean {
-	return allBranding.every((brand) => brand !== undefined);
+	editionId: EditionId,
+): Branding[] {
+	return allCards
+		.map(
+			(card) =>
+				card.properties.editionBrandings.find(
+					(editionBranding) =>
+						editionBranding.edition.id === editionId,
+				)?.branding,
+		)
+		.filter(isNonNullable);
 }
 
 export const enhanceCollections = (
@@ -45,16 +45,12 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const allBranding = getBrandingFromCards(
-			[...collection.curated, ...collection.backfill],
-			editionId,
-		);
-		const allCardsHaveBranding = allCardsHaveSponsors(allBranding);
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
-			allCardsHaveBranding,
 		);
-
+		const allCards = [...collection.curated, ...collection.curated];
+		const allBranding = getBrandingFromCards(allCards, editionId);
+		const allCardsHaveBranding = allCards.length === allBranding.length;
 		return {
 			id,
 			displayName,
@@ -67,8 +63,6 @@ export const enhanceCollections = (
 			containerPalette,
 			badge: decideBadge(
 				displayName,
-				// allCardsHaveBranding is ensuring the correct type here
-				// @ts-expect-error
 				allCardsHaveBranding ? allBranding : [],
 			),
 			grouped: groupCards(

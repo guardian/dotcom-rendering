@@ -1,7 +1,7 @@
-import { RequestHandler } from 'express';
+import type { RequestHandler } from 'express';
+import { renderArticle } from './render.article.apps';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
-import { enhanceArticleType } from '../../web/server';
-import { articleToHtml } from './articleToHtml';
+import { enhanceArticleType } from './index.article.web';
 
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
@@ -21,7 +21,7 @@ export const handleAppsArticle: RequestHandler = ({ body }, res) => {
 	try {
 		recordTypeAndPlatform('article', 'apps');
 		const article = enhanceArticleType(body);
-		const { html, clientScripts } = articleToHtml(article);
+		const { html, clientScripts } = renderArticle(article);
 
 		// The Android app will cache these assets to enable offline reading
 		res.set('Link', makePrefetchHeader(clientScripts)).send(html);

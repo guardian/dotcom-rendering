@@ -2,27 +2,26 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../amp/server';
-import { handleAppsArticle } from '../apps/server';
-import { requestLoggerMiddleware } from './lib/logging-middleware';
+} from '../amp/server/index.article';
+import { handleAppsArticle } from '../web/server/index.article.apps';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';
 import {
-	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
-	handlePerfTest as handleArticlePerfTest,
+	handleArticlePerfTest,
 	handleBlocks,
-	handleFront,
-	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server';
+} from '../web/server/index.article.web';
+import { handleFront, handleFrontJson } from '../web/server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
+import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';
 
 // Middleware to track route performance using 'response-time' lib

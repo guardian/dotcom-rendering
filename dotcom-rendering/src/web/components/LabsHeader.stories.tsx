@@ -1,5 +1,5 @@
 import { border, labs } from '@guardian/source-foundations';
-import { LabsHeader } from './LabsHeader.importable';
+import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';
 
 export default {

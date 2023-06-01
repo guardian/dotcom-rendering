@@ -1,30 +1,24 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
-import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
-import { extractTrendingTopics } from '../../model/extractTrendingTopics';
-import {
-	validateAsAllEditorialNewslettersPageType,
-	validateAsArticleType,
-	validateAsFrontType,
-} from '../../model/validate';
+import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
-import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
-import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { decideTrail } from '../lib/decideTrail';
-import { articleToHtml } from './articleToHtml';
-import { blocksToHtml } from './blocksToHtml';
-import { frontToHtml } from './frontToHtml';
-import { keyEventsToHtml } from './keyEventsToHtml';
-import { allEditorialNewslettersPageToHtml } from './allEditorialNewslettersPageToHtml';
+import {
+	renderBlocks,
+	renderHtml,
+	renderKeyEvents,
+} from './render.article.web';
 
-function enhancePinnedPost(format: FEFormat, block?: Block) {
+const getStack = (e: unknown): string =>
+	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
+
+const enhancePinnedPost = (format: FEFormat, block?: Block) => {
 	return block ? enhanceBlocks([block], format)[0] : block;
-}
+};
 
 export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const data = validateAsArticleType(body);
@@ -46,40 +40,11 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	};
 };
 
-const getStack = (e: unknown): string =>
-	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
-
-const enhanceFront = (body: unknown): DCRFrontType => {
-	const data: FEFrontType = validateAsFrontType(body);
-
-	return {
-		...data,
-		webTitle: `${
-			data.pressedPage.seoData.title ?? data.pressedPage.seoData.webTitle
-		} | The Guardian`,
-		pressedPage: {
-			...data.pressedPage,
-			collections: enhanceCollections(
-				data.pressedPage.collections,
-				data.editionId,
-				data.pageId,
-				data.pressedPage.frontProperties.onPageDescription,
-			),
-		},
-		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
-		mostCommented: data.mostCommented
-			? decideTrail(data.mostCommented)
-			: undefined,
-		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
-		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
-	};
-};
-
 export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
 		recordTypeAndPlatform('article', 'web');
 		const article = enhanceArticleType(body);
-		const resp = articleToHtml({
+		const resp = renderHtml({
 			article,
 		});
 
@@ -107,7 +72,7 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	}
 };
 
-export const handlePerfTest: RequestHandler = (req, res, next) => {
+export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
 	handleArticle(req, res, next);
 };
@@ -116,7 +81,7 @@ export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
 		recordTypeAndPlatform('interactive', 'web');
 		const article = enhanceArticleType(body);
-		const resp = articleToHtml({
+		const resp = renderHtml({
 			article,
 		});
 
@@ -150,7 +115,7 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 			body as FEBlocksRequest;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
-		const html = blocksToHtml({
+		const html = renderBlocks({
 			blocks: enhancedBlocks,
 			format,
 			host,
@@ -175,57 +140,20 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 };
 
 export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+	// TODO: This endpoint is unused - we should consider removing it, talk to Olly 24/05/2023
+
 	recordTypeAndPlatform('keyEvents');
 	try {
 		const { keyEvents, format, filterKeyEvents } =
 			// The content if body is not checked
 			body as FEKeyEventsRequest;
 
-		const html = keyEventsToHtml({
+		const html = renderKeyEvents({
 			keyEvents,
 			format,
 			filterKeyEvents,
 		});
 
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
-};
-
-export const handleFront: RequestHandler = ({ body }, res) => {
-	recordTypeAndPlatform('front');
-	try {
-		const front = enhanceFront(body);
-		const html = frontToHtml({
-			front,
-		});
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
-};
-
-export const handleFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceFront(body));
-};
-
-const enhanceAllEditorialNewslettersPage = (
-	body: unknown,
-): DCRNewslettersPageType => {
-	const newsletterData = validateAsAllEditorialNewslettersPageType(body);
-	return {
-		...newsletterData,
-	};
-};
-
-export const handleAllEditorialNewslettersPage: RequestHandler = (
-	{ body },
-	res,
-) => {
-	try {
-		const newslettersPage = enhanceAllEditorialNewslettersPage(body);
-		const html = allEditorialNewslettersPageToHtml({ newslettersPage });
 		res.status(200).send(html);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);

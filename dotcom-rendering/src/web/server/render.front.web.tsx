@@ -1,3 +1,4 @@
+import { isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -6,40 +7,34 @@ import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
-import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
+import type { DCRFrontType } from '../../types/front';
+import { FrontPage } from '../components/FrontPage';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { pageTemplate } from './pageTemplate';
+import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
-	newslettersPage: DCRNewslettersPageType;
+	front: DCRFrontType;
 }
 
-export const allEditorialNewslettersPageToHtml = ({
-	newslettersPage,
-}: Props): string => {
-	const title = newslettersPage.webTitle;
-	const NAV = extractNAV(newslettersPage.nav);
+export const renderFront = ({ front }: Props): string => {
+	const title = front.webTitle;
+	const NAV = extractNAV(front.nav);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
-		<AllEditorialNewslettersPage
-			newslettersPage={newslettersPage}
-			NAV={NAV}
-		/>,
+		<FrontPage front={front} NAV={NAV} />,
 	);
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = newslettersPage.config.switches;
+	const { offerHttp3 = false } = front.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		newslettersPage.config.abTests[dcrJavascriptBundle('Variant')] ===
-			'variant',
+		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
 	/**
@@ -66,8 +61,10 @@ export const allEditorialNewslettersPageToHtml = ({
 			...getScriptArrayFromFile('frameworks.js'),
 			...getScriptArrayFromFile('index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
-				newslettersPage.config.commercialBundleUrl,
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+				front.config.commercialBundleUrl,
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -77,36 +74,40 @@ export const allEditorialNewslettersPageToHtml = ({
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({
-				editionId: newslettersPage.editionId,
-				stage: newslettersPage.config.stage,
-				frontendAssetsFullURL:
-					newslettersPage.config.frontendAssetsFullURL,
-				revisionNumber: newslettersPage.config.revisionNumber,
-				sentryPublicApiKey: newslettersPage.config.sentryPublicApiKey,
-				sentryHost: newslettersPage.config.sentryHost,
-				keywordIds: '',
-				dfpAccountId: newslettersPage.config.dfpAccountId,
-				adUnit: newslettersPage.config.adUnit,
-				ajaxUrl: newslettersPage.config.ajaxUrl,
-				googletagUrl: newslettersPage.config.googletagUrl,
-				switches: newslettersPage.config.switches,
-				abTests: newslettersPage.config.abTests,
-				brazeApiKey: newslettersPage.config.brazeApiKey,
+				editionId: front.editionId,
+				stage: front.config.stage,
+				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+				revisionNumber: front.config.revisionNumber,
+				sentryPublicApiKey: front.config.sentryPublicApiKey,
+				sentryHost: front.config.sentryHost,
+				keywordIds: front.config.keywordIds,
+				dfpAccountId: front.config.dfpAccountId,
+				adUnit: front.config.adUnit,
+				ajaxUrl: front.config.ajaxUrl,
+				googletagUrl: front.config.googletagUrl,
+				switches: front.config.switches,
+				abTests: front.config.abTests,
+				brazeApiKey: front.config.brazeApiKey,
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
+				unknownConfig: front.config,
 			}),
 		),
 	);
 
-	return pageTemplate({
+	const keywords = front.config.keywords;
+
+	return htmlPageTemplate({
 		scriptTags,
 		css: extractedCss,
 		html,
 		title,
-		description: newslettersPage.description,
+		description: front.pressedPage.seoData.description,
 		windowGuardian,
-		keywords: '',
+		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: newslettersPage.config.abTests.borkFcpVariant === 'variant',
-		borkFID: newslettersPage.config.abTests.borkFidVariant === 'variant',
+		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
+		borkFID: front.config.abTests.borkFidVariant === 'variant',
 	});
 };

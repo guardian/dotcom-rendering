@@ -3,12 +3,12 @@ import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
-import { ArticlePage } from '../../web/components/ArticlePage';
-import { decideFormat } from '../../web/lib/decideFormat';
-import { renderToStringWithEmotion } from '../../web/lib/emotion';
-import { pageTemplate } from '../../web/server/pageTemplate';
+import { ArticlePage } from '../components/ArticlePage';
+import { decideFormat } from '../lib/decideFormat';
+import { renderToStringWithEmotion } from '../lib/emotion';
+import { htmlPageTemplate } from './htmlPageTemplate';
 
-export const articleToHtml = (
+export const renderArticle = (
 	article: FEArticleType,
 ): {
 	clientScripts: string[];
@@ -57,7 +57,7 @@ export const articleToHtml = (
 			}),
 		),
 	);
-	const renderedPage = pageTemplate({
+	const renderedPage = htmlPageTemplate({
 		css: extractedCss,
 		html,
 		title: article.webTitle,
@@ -68,6 +68,7 @@ export const articleToHtml = (
 		borkFCP: false,
 		borkFID: false,
 	});
+
 	return {
 		clientScripts,
 		html: renderedPage,
