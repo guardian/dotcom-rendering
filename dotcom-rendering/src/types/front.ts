@@ -1,11 +1,11 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { EditionId } from '../web/lib/edition';
+import type { DCRBadgeType } from './badge';
+import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
 import type { FETrailType, TrailType } from './trails';
-import { Branding } from './branding';
-import { BadgeType } from './badge';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
@@ -350,7 +350,7 @@ export type DCRCollectionType = {
 	 *
 	 * */
 	isLabs?: boolean;
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 };
 
 export type DCRGroupedTrails = {

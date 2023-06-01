@@ -466,7 +466,7 @@ export const ShowcaseLayout = ({
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -615,7 +615,7 @@ export const ShowcaseLayout = ({
 									showBottomSocialButtons={
 										article.showBottomSocialButtons
 									}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>

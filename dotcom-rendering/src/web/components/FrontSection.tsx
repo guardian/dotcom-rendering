@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import type { DCRBadgeType } from '../../types/badge';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
+import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
 import { Treats } from './Treats';
-import { BadgeType } from '../../types/badge';
-import { Badge } from './Badge';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
@@ -53,7 +53,7 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
@@ -419,7 +419,7 @@ export const FrontSection = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${overrides?.background.container};
 				`,
 			]}
 		>
@@ -428,15 +428,15 @@ export const FrontSection = ({
 			<div css={[sectionHeadline]}>
 				<Hide until="leftCol">
 					{badge && (
-						<Badge imageSrc={badge?.imageSrc} href={badge?.href} />
+						<Badge imageSrc={badge.imageSrc} href={badge.href} />
 					)}
 				</Hide>
 				<div css={titleStyle}>
 					<Hide from="leftCol">
 						{badge && (
 							<Badge
-								imageSrc={badge?.imageSrc}
-								href={badge?.href}
+								imageSrc={badge.imageSrc}
+								href={badge.href}
 							/>
 						)}
 					</Hide>

@@ -1585,8 +1585,8 @@ export const SpecialReport: FEArticleType = {
 		},
 	],
 	badge: {
-		href: '/environment/series/the-polluters',
-		imageSrc:
+		seriesTag: 'environment/series/the-polluters',
+		imageUrl:
 			'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
 	},
 	pillar: 'news',
