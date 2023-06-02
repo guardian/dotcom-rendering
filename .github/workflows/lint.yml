@@ -1,7 +1,6 @@
 on:
   workflow_call:
 
-
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -19,3 +18,15 @@ jobs:
       - name: Stylelint
         run: make stylelint
         working-directory: dotcom-rendering
+
+  filenames:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - run: deno run --allow-read scripts/deno/filenames.ts
