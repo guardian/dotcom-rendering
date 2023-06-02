@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	brandAlt,
 	from,
 	neutral,
@@ -77,9 +78,15 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
+	z-index: 1;
 
 	right: 5px;
 	bottom: 58px;
+
+	${between.mobileMedium.and.tablet} {
+		${getZIndex('burger')}
+	}
+
 	${from.mobileMedium} {
 		bottom: ${display === ArticleDisplay.Immersive ? '3px' : '-3px'};
 		right: 5px;
