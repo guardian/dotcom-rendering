@@ -2,7 +2,7 @@ const supportedFrequencyValues = ['daily', 'weekly', 'monthly', 'fortnightly'];
 const specialCasedValues: Record<string, string> = {
 	'every weekday': 'daily',
 };
-export const buildDetailText = (input: string) => {
+export const buildDetailText = (input: string): string => {
 	const normalisedInput = input.toLowerCase().trim();
 	const specialCasedValue = specialCasedValues[normalisedInput];
 

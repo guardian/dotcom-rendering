@@ -11,7 +11,7 @@ import {
 } from '../components/AdSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { RenderArticleElement } from './renderElement';
-import { withSignInGateSlot } from './withSignInGateSlot';
+import { WithSignInGateSlot } from './withSignInGateSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -115,7 +115,7 @@ export const ArticleRenderer = ({
 			{renderingTarget === 'Apps'
 				? renderedElements
 				: /* Insert the placeholder for the sign in gate on the 2nd article element */
-				  withSignInGateSlot({
+				  WithSignInGateSlot({
 						renderedElements,
 						format,
 						contentType,

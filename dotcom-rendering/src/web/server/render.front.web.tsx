@@ -9,7 +9,7 @@ import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
-import { renderToStringWithEmotion } from '../lib/emotion';
+import { renderToStringWithEmotion } from '../lib/Emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { htmlPageTemplate } from './htmlPageTemplate';
 

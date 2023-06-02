@@ -21,7 +21,7 @@ import { ArticlePage } from '../components/ArticlePage';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
-import { renderToStringWithEmotion } from '../lib/emotion';
+import { renderToStringWithEmotion } from '../lib/Emotion';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { htmlPageTemplate } from './htmlPageTemplate';

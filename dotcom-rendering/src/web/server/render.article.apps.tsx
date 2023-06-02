@@ -5,7 +5,7 @@ import { makeWindowGuardian } from '../../model/window-guardian';
 import type { FEArticleType } from '../../types/frontend';
 import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
-import { renderToStringWithEmotion } from '../lib/emotion';
+import { renderToStringWithEmotion } from '../lib/Emotion';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 export const renderArticle = (
