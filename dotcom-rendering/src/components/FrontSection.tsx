@@ -590,7 +590,7 @@ export const FrontSection = ({
 				) : null}
 			</div>
 
-			{treats && (
+			{treats && !hasPageSkin && (
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
