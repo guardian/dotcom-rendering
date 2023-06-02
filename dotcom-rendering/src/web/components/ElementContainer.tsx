@@ -2,6 +2,7 @@ import { ClassNames, css as emoCss } from '@emotion/react';
 import { border, from, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 
 const sidePadding = emoCss`
@@ -57,6 +58,7 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerName?: string;
+	hasPageSkin?: boolean;
 };
 
 /**
@@ -78,6 +80,7 @@ export const ElementContainer = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
+	hasPageSkin = false,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -96,6 +99,7 @@ export const ElementContainer = ({
 							setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
 						padBottom && bottomPadding,
+						hasPageSkin && pageSkinContainer,
 					]}
 				>
 					{children}

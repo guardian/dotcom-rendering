@@ -160,6 +160,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="header"
+						hasPageSkin={true}
 					>
 						<Header
 							editionId={front.editionId}
@@ -183,6 +184,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
+						hasPageSkin={true}
 					>
 						<Nav
 							nav={NAV}
@@ -205,6 +207,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
+								hasPageSkin={true}
 							>
 								<Island deferUntil="idle">
 									<SubNav
@@ -219,6 +222,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								hasPageSkin={true}
 							>
 								<StraightLines
 									cssOverrides={css`
@@ -283,6 +287,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											containerName={
 												collection.collectionType
 											}
+											hasPageSkin={true}
 										>
 											<Snap snapData={trail.snapData} />
 										</Section>
@@ -341,6 +346,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									element="aside"
+									hasPageSkin={true}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -450,7 +456,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
-								hasPageSkin={hasPageSkin}
+								hasPageSkin={true}
 							>
 								<DecideContainer
 									trails={trails}
