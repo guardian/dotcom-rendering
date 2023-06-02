@@ -86,6 +86,8 @@ const deeplyOverridesStyle = (index: number, mostViewedLength: number) => {
 	`;
 };
 
+const ophanLinkName = (name: string) => name.toLowerCase().replace(/ /g, '-');
+
 type Props = {
 	mostViewed: TrailTabType;
 	sectionName?: string;
@@ -101,7 +103,10 @@ export const MostPopularFooterGrid = ({
 	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
 
 	return (
-		<div css={gridContainerStyle}>
+		<div
+			data-component={ophanLinkName(sectionName)}
+			css={gridContainerStyle}
+		>
 			<section css={displayContent}>
 				<div css={titleContainerStyle}>
 					<h3 css={titleStyle}>Most viewed</h3>
@@ -110,8 +115,7 @@ export const MostPopularFooterGrid = ({
 					</div>
 				</div>
 				<ol
-					data-link-name={mostViewed.heading}
-					data-link-context={`most-popular/${sectionName}`}
+					data-link-name={ophanLinkName(mostViewed.heading)}
 					css={displayContent}
 				>
 					{shortenedMostViewed.map((trail: TrailType, j: number) => (
@@ -130,14 +134,13 @@ export const MostPopularFooterGrid = ({
 			</section>
 			<section css={displayContent}>
 				<div css={titleContainerStyle}>
-					<h3 css={titleStyle}>Deeply read</h3>
+					<h3 css={titleStyle}>{deeplyRead.heading}</h3>
 					<div css={descriptionStyle}>
 						What readers are spending time with
 					</div>
 				</div>
 				<ol
-					data-link-name={deeplyRead.heading}
-					data-link-context={`most-popular/${sectionName}`}
+					data-link-name={ophanLinkName(deeplyRead.heading)}
 					css={displayContent}
 				>
 					{shortenedDeeplyRead.map((trail: TrailType, j: number) => (
