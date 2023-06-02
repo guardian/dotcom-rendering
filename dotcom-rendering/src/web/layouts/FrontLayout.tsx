@@ -103,7 +103,7 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent },
+		config: { isPaidContent, hasPageSkin },
 	} = front;
 
 	const isInEuropeTest =
@@ -450,6 +450,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
+								hasPageSkin={hasPageSkin}
 							>
 								<DecideContainer
 									trails={trails}
