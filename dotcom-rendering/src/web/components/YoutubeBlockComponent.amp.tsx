@@ -1,6 +1,6 @@
-import { constructQuery } from '../../../lib/querystring';
-import type { YoutubeBlockElement } from '../../../types/content';
-import { Caption } from '../../../amp/components/Caption.amp';
+import { constructQuery } from '../../lib/querystring';
+import type { YoutubeBlockElement } from '../../types/content';
+import { Caption } from './Caption.amp';
 
 type EmbedConfig = {
 	adsConfig:

@@ -4,10 +4,10 @@ import {
 	neutralBorder,
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
-} from '../../../lib/pillars';
-import ClockIcon from '../../../static/icons/clock.svg';
-import TwitterIcon from '../../../static/icons/twitter.svg';
-import { ShareIcons } from '../../../amp/components/ShareIcons.amp';
+} from '../../lib/pillars';
+import ClockIcon from '../../static/icons/clock.svg';
+import TwitterIcon from '../../static/icons/twitter.svg';
+import { ShareIcons } from './ShareIcons.amp';
 
 const pillarColours = pillarMap(
 	(pillar) =>

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, news, textSans } from '@guardian/source-foundations';
-import type { CommentBlockElement } from '../../../types/content';
+import type { CommentBlockElement } from '../../types/content';
 
 const wrapper = css`
 	overflow: hidden;

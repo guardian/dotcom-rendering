@@ -1,12 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
-import { body, neutral, textSans } from '@guardian/source-foundations';
-import sanitise from 'sanitize-html';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-
-// Note, this should only apply basic text styling. It is a case where we want
-// to re-use styling, but generally we should avoid this as it couples
-// components.
+import { body, neutral } from '@guardian/source-foundations';
+import { JSDOM } from 'jsdom';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import type { TweetBlockElement } from '../../types/content';
 
 const ListStyle = (iconColour: string) => css`
 	li {
@@ -63,27 +59,38 @@ const TextStyle = (pillar: ArticleTheme) => css`
 	${ListStyle(neutralBorder(pillar))};
 `;
 
-// Labs paid content only
-const textStyleLabs = css`
-	p {
-		${textSans.large()}
-	}
-`;
+const makeFallback = (html: string): string | null => {
+	const { window } = new JSDOM(html);
+	const blockquotes = window.document.getElementsByTagName('blockquote');
+
+	if (!blockquotes[0] || blockquotes.length === 0) return null;
+
+	return blockquotes[0].innerHTML;
+};
 
 type Props = {
-	html: string;
+	element: TweetBlockElement;
 	pillar: ArticleTheme;
 };
 
-export const TextBlockComponent = ({ html, pillar }: Props) => (
-	<span
-		css={
-			pillar === ArticleSpecial.Labs
-				? [TextStyle(pillar), textStyleLabs]
-				: TextStyle(pillar)
-		}
-		dangerouslySetInnerHTML={{
-			__html: sanitise(html),
-		}}
-	/>
-);
+export const TwitterBlockComponent = ({ element, pillar }: Props) => {
+	const fallbackHTML = makeFallback(element.html);
+
+	return (
+		<amp-twitter
+			width="2"
+			height={element.hasMedia ? 2 : 1}
+			layout="responsive"
+			data-tweetid={element.id}
+			data-dnt="true"
+		>
+			{!!fallbackHTML && (
+				<div placeholder="" css={TextStyle(pillar)}>
+					<blockquote
+						dangerouslySetInnerHTML={{ __html: fallbackHTML }}
+					/>
+				</div>
+			)}
+		</amp-twitter>
+	);
+};

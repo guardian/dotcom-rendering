@@ -5,8 +5,8 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import type { RichLinkBlockElement } from '../../../types/content';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import type { RichLinkBlockElement } from '../../types/content';
 
 const richLinkContainer = css`
 	float: left;

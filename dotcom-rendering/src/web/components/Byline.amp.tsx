@@ -1,6 +1,6 @@
-import { getBylineComponentsFromTokens } from '../../../lib/byline';
-import type { TagType } from '../../../types/tag';
-import { bylineTokens } from '../../lib/byline-tokens.amp';
+import { getBylineComponentsFromTokens } from '../../lib/byline';
+import type { TagType } from '../../types/tag';
+import { bylineTokens } from '../lib/byline-tokens.amp';
 
 type Props = {
 	byline?: string;

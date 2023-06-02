@@ -17,8 +17,6 @@ import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { AMPArticleModel } from '../../types/ampArticleModel';
 import type { ConfigType } from '../../types/config';
-import { TextBlockComponent } from '../../web/components/AMPElements/TextBlockComponent.amp';
-import { TopMeta } from '../../web/components/topMeta/TopMeta.amp';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots.amp';
@@ -27,6 +25,8 @@ import { Epic } from './Epic.amp';
 import { InlineAd } from './InlineAd.amp';
 import { StickyAd } from './StickyAd.amp';
 import { SubMeta } from './SubMeta.amp';
+import { TextBlockComponent } from './TextBlockComponent.amp';
+import { TopMeta } from './TopMeta.amp';
 
 const getNewsletterSignupDefaultHTML = (webURL: string): string =>
 	`<p><strong>No sign-up button?</strong> Users viewing this page via Google Amp may experience a technical fault. <a href="${webURL}">Please click here to reload the page on theguardian.com</a> which should correct the problem.</p>`;

@@ -6,9 +6,9 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
-import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import ArrowRightIcon from '../../static/icons/arrow-right.svg';
+import LabsLogo from '../../static/logos/the-guardian-labs.svg';
 
 const headerStyle = css`
 	display: flex;

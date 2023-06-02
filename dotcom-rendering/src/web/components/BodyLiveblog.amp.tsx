@@ -8,14 +8,14 @@ import {
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import RefreshIcon from '../../static/icons/refresh.svg';
-import type { ConfigType } from '../../types/config';
-import { TopMetaLiveblog } from '../../web/components/topMeta/TopMetaLiveblog.amp';
-import { decideTheme } from '../../web/lib/decideTheme';
 import type { AMPArticleModel } from '../../types/ampArticleModel';
+import type { ConfigType } from '../../types/config';
+import { decideTheme } from '../../web/lib/decideTheme';
 import { Blocks } from './Blocks.amp';
 import { KeyEvents } from './KeyEvents.amp';
 import { Pagination } from './Pagination.amp';
 import { SubMeta } from './SubMeta.amp';
+import { TopMetaLiveblog } from './TopMetaLiveblog.amp';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is

@@ -8,7 +8,7 @@ import InfoIcon from '../../static/icons/info.svg';
 import type { FEElement, ImageBlockElement } from '../../types/content';
 import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp';
-import { YoutubeBlockComponent } from '../../web/components/AMPElements/YoutubeBlockComponent.amp';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp';
 
 const figureStyle = css`
 	margin: 0 0;

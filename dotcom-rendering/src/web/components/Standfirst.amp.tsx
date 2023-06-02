@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, neutral, textSans } from '@guardian/source-foundations';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`
 	li {

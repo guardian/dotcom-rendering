@@ -1,17 +1,17 @@
 import { css } from '@emotion/react';
-import { headline, neutral, until } from '@guardian/source-foundations';
+import { headline, neutral } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
-import type { AMPArticleModel } from '../../../../types/ampArticleModel';
-import { MainMedia } from '../../../amp/components/MainMedia.amp';
-import { StarRating } from '../../../amp/components/StarRating.amp';
-import { getAgeWarning } from '../../../lib/age-warning';
-import { getSoleContributor } from '../../../lib/byline';
-import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import { getSharingUrls } from '../../../lib/sharing-urls';
+import { getAgeWarning } from '../../lib/age-warning';
+import { getSoleContributor } from '../../lib/byline';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import type { AMPArticleModel } from '../../types/ampArticleModel';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
+import { MainMedia } from './MainMedia.amp';
 import { SeriesLink } from './SeriesLink.amp';
 import { Standfirst } from './Standfirst.amp';
+import { StarRating } from './StarRating.amp';
 import { TopMetaExtras } from './TopMetaExtras.amp';
 
 const headerStyle = css`
@@ -21,32 +21,6 @@ const headerStyle = css`
 	padding-top: 3px;
 	color: ${neutral[7]};
 `;
-
-const underlinedStyles = css`
-	background-image: repeating-linear-gradient(
-		to bottom,
-		transparent,
-		transparent 47px,
-		rgba(171, 6, 19, 0.5)
-	);
-	line-height: 48px;
-	background-size: 1rem 48px;
-	${until.tablet} {
-		background-image: repeating-linear-gradient(
-			to bottom,
-			transparent,
-			transparent 39px,
-			rgba(171, 6, 19, 0.5)
-		);
-		line-height: 40px;
-		background-size: 1px 40px;
-	}
-
-	background-position: top left;
-	background-clip: content-box;
-	background-origin: content-box;
-`;
-
 const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
@@ -73,7 +47,7 @@ type HeadlineProps = {
 const Headline = ({ headlineText, starRating }: HeadlineProps) => {
 	return (
 		<div>
-			<h1 css={[headerStyle, underlinedStyles]}>{curly(headlineText)}</h1>
+			<h1 css={headerStyle}>{curly(headlineText)}</h1>
 
 			{starRating !== undefined && (
 				<div css={starRatingWrapper}>
@@ -84,17 +58,17 @@ const Headline = ({ headlineText, starRating }: HeadlineProps) => {
 	);
 };
 
-type Props = {
+type TopMetaNewsProps = {
 	articleData: AMPArticleModel;
 	adTargeting?: AdTargeting;
 	pillar: ArticleTheme;
 };
 
-export const TopMetaAnalysis = ({
+export const TopMetaNews = ({
 	articleData,
 	adTargeting,
 	pillar,
-}: Props) => {
+}: TopMetaNewsProps) => {
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (

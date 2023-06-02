@@ -5,7 +5,7 @@ import responseTime from 'response-time';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../amp/server/index.article.amp';
+} from '../web/server/index.article.amp';
 import { handleAppsArticle } from '../web/server/index.article.apps';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';

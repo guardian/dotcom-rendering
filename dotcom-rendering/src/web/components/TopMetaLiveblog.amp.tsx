@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { headline, neutral } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
-import type { AMPArticleModel } from '../../../../types/ampArticleModel';
-import { MainMedia } from '../../../amp/components/MainMedia.amp';
-import { getAgeWarning } from '../../../lib/age-warning';
-import { getSoleContributor } from '../../../lib/byline';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import { getSharingUrls } from '../../../lib/sharing-urls';
+import { getAgeWarning } from '../../lib/age-warning';
+import { getSoleContributor } from '../../lib/byline';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import type { AMPArticleModel } from '../../types/ampArticleModel';
 import { Byline } from './Byline.amp';
+import { MainMedia } from './MainMedia.amp';
 import { TopMetaExtras } from './TopMetaExtras.amp';
 
 const ListStyle = (iconColour: string) => css`

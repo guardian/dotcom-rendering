@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`
 	${textSans.small()};
