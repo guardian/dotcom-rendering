@@ -98,6 +98,7 @@ type Props = {
 	 * without a left column
 	 */
 	fullWidth?: boolean;
+	hasPageSkin?: boolean;
 	/**
 	 * @deprecated Do not use
 	 *
@@ -224,6 +225,7 @@ export const Section = ({
 	fullWidth = false,
 	element = 'section',
 	shouldCenter,
+	hasPageSkin = false,
 	className,
 }: Props) => {
 	const overrides =
@@ -248,6 +250,7 @@ export const Section = ({
 				className={className}
 				element={element}
 				shouldCenter={shouldCenter}
+				hasPageSkin={hasPageSkin}
 			>
 				{children}
 			</ElementContainer>
@@ -269,6 +272,7 @@ export const Section = ({
 			ophanComponentName={ophanComponentName}
 			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
+			hasPageSkin={hasPageSkin}
 		>
 			<Flex>
 				<LeftColumn

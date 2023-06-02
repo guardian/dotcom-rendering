@@ -174,6 +174,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
+							hasPageSkin={true}
 						>
 							<Header
 								editionId={front.editionId}
@@ -181,15 +182,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mmaUrl={front.config.mmaUrl}
 								discussionApiUrl={front.config.discussionApiUrl}
 								urls={front.nav.readerRevenueLinks.header}
-								remoteHeader={
-									!!front.config.switches.remoteHeader
-								}
+								remoteHeader={!!front.config.switches.remoteHeader}
 								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
-									!!front.config.switches
-										.headerTopBarSearchCapi
+									!!front.config.switches.headerTopBarSearchCapi
 								}
 							/>
 						</Section>
@@ -202,6 +200,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
+						hasPageSkin={true}
 					>
 						<Nav
 							nav={NAV}
@@ -224,6 +223,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
+								hasPageSkin={true}
 							>
 								<Island deferUntil="idle">
 									<SubNav
@@ -238,6 +238,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								hasPageSkin={true}
 							>
 								<StraightLines
 									cssOverrides={css`
@@ -310,6 +311,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											containerName={
 												collection.collectionType
 											}
+											hasPageSkin={true}
 										>
 											<Snap
 												snapData={trail.snapData}
@@ -373,6 +375,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									element="aside"
+									hasPageSkin={true}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -476,7 +479,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isOnPaidContentFront={isPaidContent}
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
-								hasPageSkin={hasPageSkin}
+								hasPageSkin={true}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
