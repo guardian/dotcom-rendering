@@ -1,37 +1,36 @@
+/* eslint-disable react-hooks/rules-of-hooks -- temporary to just see impact of logic in code*/
 import { getCookie } from '@guardian/libs';
-// import { useEffect, useState } from 'react';
-import { CheckUserSignInStatus } from './identity';
+import { useEffect, useState } from 'react';
+// import { CheckUserSignInStatus } from './identity';
 
 function doOktaMethodForSignIn() {
 	console.log('doOktaMethodForSignIn called');
-	// const [signInStatus, setSignInStatus] = useState(false);
+	const [signInStatus, setSignInStatus] = useState(false);
 
-	// // // console.log('signInStatus', signInStatus);
-	// const doOkta = async () => {
-	// 	// await import('./identity');
-	// 	console.log('doOkta called');
+	const doOkta = async () => {
+		console.log('doOkta called');
 
-	// 	// const { CheckUserSignInStatus } = await import('./identity');
-	// 	return CheckUserSignInStatus();
-	// };
+		const { CheckUserSignInStatus } = await import('./identity');
+		return CheckUserSignInStatus();
+	};
 
-	// useEffect(() => {
-	// 	doOkta()
-	// 		.then((result) => {
-	// 			setSignInStatus(result);
-	// 			console.log('result', result);
-	// 			console.log(
-	// 				'signInStatus after setting the result',
-	// 				signInStatus,
-	// 			);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error('error', error);
-	// 		});
-	// });
+	useEffect(() => {
+		doOkta()
+			.then((result) => {
+				setSignInStatus(result);
+				console.log('result', result);
+				console.log(
+					'signInStatus after setting the result',
+					signInStatus,
+				);
+			})
+			.catch((error) => {
+				console.error('error', error);
+			});
+	});
 
-	// const isSignedIn = signInStatus;
-	const isSignedIn = CheckUserSignInStatus();
+	const isSignedIn = signInStatus;
+	// const isSignedIn = CheckUserSignInStatus();
 	console.log('isSignedIn at the end of useOktaForSignIn', isSignedIn);
 	return isSignedIn;
 }
@@ -43,7 +42,6 @@ function doCookieMethodForSignIn() {
 }
 
 export function checkIfInOktaTestToCheckSignInStatus() {
-	// const isSignedIn = useOktaForSignIn();
 	console.log('checkIfInOktaTestToCheckSignInStatus called');
 
 	if (typeof window !== 'undefined' && typeof document !== 'undefined') {
