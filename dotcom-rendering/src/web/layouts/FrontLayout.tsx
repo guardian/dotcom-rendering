@@ -32,7 +32,6 @@ import {
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
-import { DCRFrontCard } from '../../types/front';
 import { LabsSection } from '../components/LabsSection';
 
 interface Props {
@@ -352,14 +351,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const getGuardianLabsTrails = (): DCRFrontCard[] => {
-							if (collection.badge) {
-								trails.forEach(
-									(labsTrail) => delete labsTrail.branding,
-								);
-							}
-							return trails;
-						};
+						const trailsWithoutBranding = collection.badge
+							? trails.map((labTrail) => {
+									return {
+										...labTrail,
+										branding: undefined,
+									};
+							  })
+							: trails;
 
 						return (
 							<LabsSection
@@ -372,14 +371,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								ophanComponentLink={ophanComponentLink}
 								containerName={collection.collectionType}
-								containerPalette={collection.containerPalette}
 								canShowMore={collection.canShowMore}
 								url={collection.href}
 								badge={collection.badge}
 								data-print-layout="hide"
 							>
 								<DecideContainer
-									trails={getGuardianLabsTrails()}
+									trails={trailsWithoutBranding}
 									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}

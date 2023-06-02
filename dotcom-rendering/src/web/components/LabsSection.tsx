@@ -17,15 +17,9 @@ import LabsLogo from '../../static/logos/the-guardian-labs.svg';
 import { Section } from './Section';
 import { Island } from './Island';
 import { ShowMore } from './ShowMore.importable';
-import { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { Details } from './Details';
 
-/**
- * ----- First time here? -----
- * If you're unsure how to use this component, check out `LabsSection.stories.tsx` and
- * try running it in storybook to get an idea of how this component is used!
- */
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title: string;
@@ -52,9 +46,6 @@ type Props = {
 
 	/** The string used to set the `data-container-name` Ophan attribute */
 	containerName?: string;
-
-	/** Labs containers can have their styling overridden using a `containerPalette` */
-	containerPalette: DCRContainerPalette;
 
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
@@ -243,6 +234,9 @@ const Content = ({
 			contentSidePadding,
 			contentMargins,
 			contentBackground(backgroundColour),
+			css`
+				width: 100%;
+			`,
 		]}
 	>
 		{children}
@@ -293,7 +287,7 @@ const LabsContainerHeader = ({
 		</div>
 		<Details
 			label={'About'}
-			labelSize={textSans.xsmall()}
+			labelSize="xsmall"
 			positionStyles={css`
 				${until.mobileLandscape} {
 					left: -107px;
@@ -348,13 +342,12 @@ export const LabsSection = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
-	containerPalette,
 	canShowMore,
 	url,
 	badge,
 	children,
 }: Props) => {
-	const overrides = decideContainerOverrides(containerPalette);
+	const overrides = decideContainerOverrides('Branded');
 
 	return (
 		<Section
@@ -406,7 +399,7 @@ export const LabsSection = ({
 								collectionId={collectionId}
 								pageId={pageId}
 								ajaxUrl={ajaxUrl}
-								containerPalette={containerPalette}
+								containerPalette={'Branded'}
 								showAge={false}
 							/>
 						</Island>

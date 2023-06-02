@@ -30,7 +30,7 @@ const Placeholder = ({
 	heightInPixels?: number;
 	text?: string;
 }) => (
-	<LI padSides={true}>
+	<LI padSides={true} stretch={true}>
 		<div
 			css={css`
 				background-color: lightgrey;
