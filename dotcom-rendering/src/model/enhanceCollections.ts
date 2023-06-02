@@ -7,9 +7,10 @@ import { groupCards } from './groupCards';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
+	'Palette styles',
 	'culture-treat',
 	'newsletter treat',
-	'Palette styles',
+	'qatar treat',
 ];
 const isSupported = (collection: FECollectionType): boolean =>
 	!FORBIDDEN_CONTAINERS.includes(collection.displayName);
