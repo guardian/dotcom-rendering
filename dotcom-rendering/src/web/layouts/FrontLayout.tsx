@@ -489,6 +489,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				fullWidth={true}
 				showTopBorder={false}
 				data-component="trending-topics"
+				hasPageSkin={true}
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
@@ -501,6 +502,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
+					hasPageSkin={true}
 				>
 					<AdSlot position="merchandising" display={format.display} />
 				</Section>
