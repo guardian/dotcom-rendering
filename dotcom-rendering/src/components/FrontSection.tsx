@@ -73,6 +73,7 @@ type Props = {
 	index?: number;
 	/** Indicates if the container is targetted to a specific territory */
 	targetedTerritory?: Territory;
+	hasPageSkin: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -106,94 +107,104 @@ const fallbackStyles = css`
 	}
 `;
 
-const containerStyles = css`
-	display: grid;
+const containerStyles = (hasPageSkin: boolean) => {
+	const untilLeftCol = css`
+		display: grid;
 
-	grid-template-rows:
-		[headline-start show-hide-start] auto
-		[show-hide-end headline-end content-toggleable-start content-start] auto
-		[content-end content-toggleable-end show-more-start] auto
-		[show-more-end];
-
-	grid-template-columns:
-		[decoration-start]
-		0px
-		[content-start title-start]
-		repeat(3, minmax(0, 1fr))
-		[hide-start]
-		minmax(0, 1fr)
-		[content-end title-end hide-end]
-		0px [decoration-end];
-
-	grid-auto-flow: dense;
-	column-gap: 10px;
-
-	${from.mobileLandscape} {
-		column-gap: 20px;
-	}
-
-	${from.tablet} {
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start content-start title-start]
-			repeat(11, 40px)
-			[hide-start]
-			40px
-			[decoration-end content-end title-end hide-end]
-			minmax(0, 1fr);
-	}
-
-	${from.desktop} {
-		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start content-start title-start]
-			repeat(11, 60px)
-			[hide-start]
-			60px
-			[decoration-end content-end title-end hide-end]
-			minmax(0, 1fr);
-	}
-
-	${from.leftCol} {
 		grid-template-rows:
-			[headline-start show-hide-start content-start] auto
-			[show-hide-end content-toggleable-start] auto
-			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
+			[headline-start show-hide-start] auto
+			[show-hide-end headline-end content-toggleable-start content-start] auto
+			[content-end content-toggleable-end show-more-start] auto
 			[show-more-end];
 
 		grid-template-columns:
-			minmax(0, 1fr)
-			[decoration-start title-start]
-			repeat(2, 60px)
-			[title-end content-start]
-			repeat(11, 60px)
+			[decoration-start]
+			0px
+			[content-start title-start]
+			repeat(3, minmax(0, 1fr))
 			[hide-start]
-			60px
-			[decoration-end hide-end content-end]
-			minmax(0, 1fr);
-	}
-
-	${from.wide} {
-		grid-template-rows:
-			[headline-start content-start content-toggleable-start show-hide-start] auto
-			[show-hide-end] auto
-			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
-			[show-more-end];
-
-		grid-template-columns:
 			minmax(0, 1fr)
-			[decoration-start title-start]
-			repeat(3, 60px)
-			[title-end content-start]
-			repeat(12, 60px)
-			[content-end hide-start]
-			60px
-			[decoration-end hide-end]
-			minmax(0, 1fr);
+			[content-end title-end hide-end]
+			0px [decoration-end];
+
+		grid-auto-flow: dense;
+		column-gap: 10px;
+
+		${from.mobileLandscape} {
+			column-gap: 20px;
+		}
+
+		${from.tablet} {
+			grid-template-columns:
+				minmax(0, 1fr)
+				[decoration-start content-start title-start]
+				repeat(11, 40px)
+				[hide-start]
+				40px
+				[decoration-end content-end title-end hide-end]
+				minmax(0, 1fr);
+		}
+
+		${from.desktop} {
+			grid-template-columns:
+				minmax(0, 1fr)
+				[decoration-start content-start title-start]
+				repeat(11, 60px)
+				[hide-start]
+				60px
+				[decoration-end content-end title-end hide-end]
+				minmax(0, 1fr);
+		}
+	`;
+
+	if (hasPageSkin) {
+		return untilLeftCol;
 	}
-`;
+
+	return css`
+		${untilLeftCol}
+
+		${from.leftCol} {
+			grid-template-rows:
+				[headline-start show-hide-start content-start] auto
+				[show-hide-end content-toggleable-start] auto
+				[headline-end treats-start] auto
+				[content-end content-toggleable-end treats-end show-more-start] auto
+				[show-more-end];
+
+			grid-template-columns:
+				minmax(0, 1fr)
+				[decoration-start title-start]
+				repeat(2, 60px)
+				[title-end content-start]
+				repeat(11, 60px)
+				[hide-start]
+				60px
+				[decoration-end hide-end content-end]
+				minmax(0, 1fr);
+		}
+
+		${from.wide} {
+			grid-template-rows:
+				[headline-start content-start content-toggleable-start show-hide-start] auto
+				[show-hide-end] auto
+				[headline-end treats-start] auto
+				[content-end content-toggleable-end treats-end show-more-start] auto
+				[show-more-end];
+
+			grid-template-columns:
+				minmax(0, 1fr)
+				[decoration-start title-start]
+				repeat(3, 60px)
+				[title-end content-start]
+				repeat(12, 60px)
+				[content-end hide-start]
+				60px
+				[decoration-end hide-end]
+				minmax(0, 1fr);
+		}
+	`;
+};
 
 const sectionHeadline = (borderColour: string) => css`
 	grid-row: headline;
@@ -410,6 +421,7 @@ export const FrontSection = ({
 	isOnPaidContentFront,
 	index,
 	targetedTerritory,
+	hasPageSkin,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -435,7 +447,7 @@ export const FrontSection = ({
 			data-container-name={containerName}
 			css={[
 				fallbackStyles,
-				containerStyles,
+				containerStyles(hasPageSkin),
 				css`
 					background-color: ${overrides?.background?.container};
 				`,
