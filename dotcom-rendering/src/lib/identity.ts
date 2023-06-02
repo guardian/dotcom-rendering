@@ -1,7 +1,25 @@
 import { getCookie } from '@guardian/libs';
-import type { AuthState, OktaAuthOptions } from '@okta/okta-auth-js';
 import { OktaAuth } from '@okta/okta-auth-js';
+import type { AuthState, OktaAuthOptions } from '@okta/okta-auth-js';
+// import { OktaAuth } from '@okta/okta-auth-js';
 import React, { useEffect, useState } from 'react';
+
+console.log('identity loaded');
+
+// let OktaAuthImport = if (oktaexperimentcookiesareset) {new Promise((resolve, reject) => {
+// 	import('@okta/okta-auth-js');
+
+//   });}
+
+// const OktaAuth = () => {
+// const [OktaAuthFromLib, setOktaAuth] = useState<unknown>();
+// // const [typing, setTyping] = useState()
+// const oktaLibrary = async () => await import('@okta/okta-auth-js');
+// oktaLibrary().then((result) => {
+// 	// const bar = typeof result.OktaAuth; setTyping(bar);
+// 	 const foo = result.OktaAuth; setOktaAuth(foo)}).catch((error) => {console.log(error)})
+// return OktaAuthFromLib as OktaAuth
+// }
 
 interface OktaAuthContextType {
 	oktaAuth: OktaAuth;
@@ -90,11 +108,14 @@ async function checkIfSignedIn(authState: AuthState, oktaAuth: OktaAuth) {
 }
 
 const useOktaAuth = (): OktaAuthContextType => {
+	console.log('useOktaAuth called');
 	const oktaAuth = oktaAuthInit;
+	console.log('oktaAuth in useOktaAuth is', oktaAuth);
 	const [authState, setAuthState] = React.useState<AuthState | null>(() => {
 		return oktaAuth.authStateManager.getAuthState();
 	});
-
+	console.log('authState in useOktaAuth is', authState);
+	console.log('HERE ');
 	React.useEffect(() => {
 		async function oktaAuthState() {
 			// Update Security provider with latest authState
@@ -121,9 +142,10 @@ const useOktaAuth = (): OktaAuthContextType => {
 	return { oktaAuth, authState };
 };
 
-function useOktaForSignInCheck() {
+function OktaForSignInCheck() {
 	console.info('using okta for sign in check');
 	const { oktaAuth, authState } = useOktaAuth();
+	console.log('HERE');
 	console.log(`authState in useOktaForSignInCheck is`);
 	console.log(authState);
 	console.log('oktaAuth in useOktaForSignInCheck is');
@@ -146,6 +168,6 @@ function useOktaForSignInCheck() {
 }
 
 export const CheckUserSignInStatus = (): boolean => {
-	const isSignedIn = useOktaForSignInCheck();
+	const isSignedIn = OktaForSignInCheck();
 	return isSignedIn;
 };
