@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	border,
+	breakpoints,
 	headline,
 	neutral,
 	text,
@@ -11,6 +12,7 @@ import {
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
+import { generateSources } from './Picture';
 
 const gridItem = (position: number) => css`
 	position: relative;
@@ -68,13 +70,16 @@ const ageWarningStyles = css`
 `;
 
 const imageStyles = css`
+	width: 53px;
+	height: 53px;
+	object-fit: cover;
 	position: absolute;
 	left: 59px;
 	top: 6px;
 `;
 
 const textPaddingWithImage = css`
-	padding-left: 123px;
+	padding-left: 122px;
 `;
 
 type Props = {
@@ -85,6 +90,25 @@ type Props = {
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
 	image?: string;
+};
+
+type MiniImageProps = {
+	image: string;
+	alt: string;
+};
+
+const MiniImage = ({ image, alt }: MiniImageProps) => {
+	// We need to have a square image with 53px width and height
+	// We first get a source for a landscape image with height 53
+	// (requesting a width of 89px from grid)
+	// we then crop the image to give it a width of 53px using css
+	const [source] = generateSources(image, [
+		{ breakpoint: breakpoints.desktop, width: 89 },
+	]);
+
+	if (!source) throw new Error(`Missing source for ${image}`);
+
+	return <img alt={alt} src={source.lowResUrl} css={imageStyles} />;
 };
 
 export const MostViewedFooterItem = ({
@@ -104,15 +128,7 @@ export const MostViewedFooterItem = ({
 			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			{!!image && (
-				<img
-					css={imageStyles}
-					src={image}
-					alt={''}
-					width={53}
-					height={53}
-				/>
-			)}
+			{!!image && <MiniImage image={image} alt={headlineText} />}
 			<div css={[headlineHeader, !!image && textPaddingWithImage]}>
 				{format.design === ArticleDesign.LiveBlog ? (
 					<LinkHeadline

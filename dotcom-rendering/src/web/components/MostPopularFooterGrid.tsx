@@ -44,7 +44,7 @@ const titleContainerStyle = css`
 		border-top: 1px solid ${palette.neutral[86]};
 	}
 
-	padding: 7px 11px 18px;
+	padding: 7px 10px 18px;
 `;
 
 const titleStyle = css`
@@ -55,6 +55,7 @@ const titleStyle = css`
 
 const descriptionStyle = css`
 	${textSans.xsmall()};
+	line-height: 125%;
 	color: ${palette.neutral[46]};
 	overflow-wrap: break-word;
 `;
