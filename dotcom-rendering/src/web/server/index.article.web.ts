@@ -8,6 +8,7 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
+import type { FEArticleBadgeType } from '../../types/badge';
 import type { FEArticleType } from '../../types/frontend';
 import {
 	renderBlocks,
@@ -21,6 +22,17 @@ const getStack = (e: unknown): string =>
 const enhancePinnedPost = (format: FEFormat, block?: Block) => {
 	return block ? enhanceBlocks([block], format)[0] : block;
 };
+
+const enhanceBadge = (badge?: FEArticleBadgeType) =>
+	badge
+		? {
+				...badge,
+				enhanced: {
+					href: `/${badge.seriesTag}`,
+					imageSrc: badge.imageUrl,
+				},
+		  }
+		: undefined;
 
 export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const validated = validateAsArticleType(body);
@@ -47,6 +59,7 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 			enhancedBlocks,
 			data.mainMediaElements,
 		),
+		badge: enhanceBadge(data.badge),
 	};
 };
 

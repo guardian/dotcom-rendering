@@ -32,8 +32,8 @@ const FEBrexit = {
 		sectionLabel: 'Brexit',
 		sectionUrl: '/brexit',
 		badge: {
-			seriesTag: 'politics/series/brexit-how-it-came-to-this',
-			imageUrl:
+			href: '/politics/series/brexit-how-it-came-to-this',
+			imageSrc:
 				'https://assets.guim.co.uk/images/badges/05c6ace4e60dd0209a3f80eb03e16524/EUReferendumBadge.svg',
 		},
 	},
@@ -45,8 +45,8 @@ const FEBeyondTheBlade = {
 		sectionLabel: 'Beyond the blade',
 		sectionUrl: '/beyond-the-blade',
 		badge: {
-			seriesTag: 'membership/series/beyond-the-blade',
-			imageUrl:
+			href: '/membership/series/beyond-the-blade',
+			imageSrc:
 				'https://assets.guim.co.uk/images/badges/bfc00bc58eb966845ccf1200fd8c54e0/beyondthebladebadge.svg',
 		},
 	},
