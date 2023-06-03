@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
-import type { BadgeType } from '../../types/badge';
+import type { DCRBadgeType } from '../../types/badge';
 import type { TagType } from '../../types/tag';
 import { Badge } from './Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
@@ -12,7 +12,7 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 	isMatch?: boolean;
 };
 
@@ -71,7 +71,7 @@ export const ArticleTitle = ({
 	<div css={[sectionStyles, badge && badgeContainer]}>
 		{badge && format.display !== ArticleDisplay.Immersive && (
 			<div css={titleBadgeWrapper}>
-				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
+				<Badge imageSrc={badge.imageSrc} href={badge.href} />
 			</div>
 		)}
 		<div

@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import type { DCRBadgeType } from '../../types/badge';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
+import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
@@ -52,7 +53,7 @@ type Props = {
 	editionId?: EditionId;
 	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
-	badge?: EmotionJSX.Element;
+	badge?: DCRBadgeType;
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
@@ -99,13 +100,14 @@ const containerStyles = css`
 		[show-more-end];
 
 	grid-template-columns:
-		[viewport-start] 0px
+		[decoration-start]
+		0px
 		[content-start title-start]
 		repeat(3, minmax(0, 1fr))
 		[hide-start]
 		minmax(0, 1fr)
 		[content-end title-end hide-end]
-		0px [viewport-end];
+		0px [decoration-end];
 
 	grid-auto-flow: dense;
 	column-gap: 10px;
@@ -116,23 +118,23 @@ const containerStyles = css`
 
 	${from.tablet} {
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[content-start title-start]
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
 			repeat(11, 40px)
 			[hide-start]
 			40px
-			[content-end title-end hide-end]
-			minmax(0, 1fr) [viewport-end];
+			[decoration-end content-end title-end hide-end]
+			minmax(0, 1fr);
 	}
 
 	${from.desktop} {
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[content-start title-start]
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
 			repeat(11, 60px)
 			[hide-start]
 			60px
-			[content-end title-end hide-end]
+			[decoration-end content-end title-end hide-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -145,14 +147,14 @@ const containerStyles = css`
 			[show-more-end];
 
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
+			minmax(0, 1fr)
+			[decoration-start title-start]
 			repeat(2, 60px)
 			[title-end content-start]
 			repeat(11, 60px)
 			[hide-start]
 			60px
-			[hide-end content-end]
+			[decoration-end hide-end content-end]
 			minmax(0, 1fr) [viewport-end];
 	}
 
@@ -165,15 +167,15 @@ const containerStyles = css`
 			[show-more-end];
 
 		grid-template-columns:
-			[viewport-start] minmax(0, 1fr)
-			[title-start]
+			minmax(0, 1fr)
+			[decoration-start title-start]
 			repeat(3, 60px)
 			[title-end content-start]
 			repeat(12, 60px)
 			[content-end hide-start]
 			60px
-			[hide-end]
-			minmax(0, 1fr) [viewport-end];
+			[decoration-end hide-end]
+			minmax(0, 1fr);
 	}
 `;
 
@@ -254,11 +256,7 @@ const sectionTreats = css`
 /** element which contains border and inner background colour, if set */
 const decoration = css`
 	grid-row: 1 / -1;
-	grid-column: 1 / -1;
-
-	${from.tablet} {
-		grid-column: 2 / -2;
-	}
+	grid-column: decoration;
 
 	border-width: 1px;
 	border-color: ${neutral[86]};
@@ -425,12 +423,23 @@ export const FrontSection = ({
 			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
 
 			<div css={[sectionHeadline]}>
-				<Hide until="leftCol">{badge}</Hide>
+				<Hide until="leftCol">
+					{badge && (
+						<Badge imageSrc={badge.imageSrc} href={badge.href} />
+					)}
+				</Hide>
 				<div css={titleStyle}>
-					<Hide from="leftCol">{badge}</Hide>
+					<Hide from="leftCol">
+						{badge && (
+							<Badge
+								imageSrc={badge.imageSrc}
+								href={badge.href}
+							/>
+						)}
+					</Hide>
 					<ContainerTitle
 						title={title}
-						fontColour={overrides?.text.container}
+						fontColour={overrides?.text?.container}
 						description={description}
 						url={url}
 						containerPalette={containerPalette}
@@ -446,7 +455,7 @@ export const FrontSection = ({
 					<ShowHideButton
 						sectionId={sectionId}
 						overrideContainerToggleColour={
-							overrides?.text.containerToggle
+							overrides?.text?.containerToggle
 						}
 					/>
 				</div>
@@ -485,7 +494,7 @@ export const FrontSection = ({
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={overrides?.border.container}
+						borderColour={overrides?.border?.container}
 					/>
 				</div>
 			)}

@@ -7,7 +7,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import type { BadgeType } from '../../types/badge';
+import type { DCRBadgeType } from '../../types/badge';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -22,7 +22,7 @@ type Props = {
 	sectionLabel: string;
 	sectionUrl: string;
 	guardianBaseURL: string;
-	badge?: BadgeType;
+	badge?: DCRBadgeType;
 	isMatch?: boolean;
 };
 
@@ -323,8 +323,8 @@ export const SeriesSectionLink = ({
 										]}
 									>
 										<Badge
-											imageUrl={badge.imageUrl}
-											seriesTag={badge.seriesTag}
+											imageSrc={badge.imageSrc}
+											href={badge.href}
 										/>
 									</div>
 								)}

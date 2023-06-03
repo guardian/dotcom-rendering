@@ -14,7 +14,9 @@ const {
 	sport,
 } = palette;
 
-const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
+const textCardHeadline = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return neutral[100];
@@ -40,7 +42,9 @@ const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 const textCardStandfirst = textCardHeadline;
 const textCardFooter = textCardHeadline;
 
-const textCardKicker = (containerPalette: DCRContainerPalette): string => {
+const textCardKicker = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return news[550];
@@ -65,7 +69,9 @@ const textCardKicker = (containerPalette: DCRContainerPalette): string => {
 
 const textCardByline = textCardKicker;
 
-const textContainerDate = (containerPalette: DCRContainerPalette): string => {
+const textContainerDate = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return news[400];
@@ -89,7 +95,7 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 };
 
 const textCardCommentCount = (
-	containerPalette: DCRContainerPalette,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -113,7 +119,9 @@ const textCardCommentCount = (
 	}
 };
 
-const textDynamoHeadline = (containerPalette: DCRContainerPalette): string => {
+const textDynamoHeadline = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -136,7 +144,9 @@ const textDynamoHeadline = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const textDynamoKicker = (containerPalette: DCRContainerPalette): string => {
+const textDynamoKicker = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return news[400];
@@ -181,10 +191,14 @@ const textDynamoSublinkKicker = (
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return neutral[7];
+		case 'Branded':
+			return neutral[7];
 	}
 };
 
-const textDynamoMeta = (containerPalette: DCRContainerPalette): string => {
+const textDynamoMeta = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -207,7 +221,9 @@ const textDynamoMeta = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const textContainer = (containerPalette: DCRContainerPalette): string => {
+const textContainer = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -230,7 +246,9 @@ const textContainer = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
+const textContainerToggle = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return neutral[20];
@@ -253,7 +271,9 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const borderContainer = (containerPalette: DCRContainerPalette): string => {
+const borderContainer = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return transparentColour(neutral[60], 0.4);
@@ -298,10 +318,14 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return culture[800];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[800];
+		case 'Branded':
+			return neutral[93];
 	}
 };
 
-const backgroundCard = (containerPalette: DCRContainerPalette): string => {
+const backgroundCard = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -337,6 +361,13 @@ const topBarCard = textCardKicker;
 export const decideContainerOverrides = (
 	containerPalette: DCRContainerPalette,
 ): ContainerOverrides => {
+	if (containerPalette === 'Branded') {
+		return {
+			background: {
+				container: backgroundContainer(containerPalette),
+			},
+		};
+	}
 	return {
 		text: {
 			cardHeadline: textCardHeadline(containerPalette),

@@ -1,3 +1,4 @@
+import { isNonNullable } from '@guardian/libs';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import type { Switches } from '../../types/config';
 import type { FEElement } from '../../types/content';
@@ -349,7 +350,5 @@ export const Elements = (
 		}
 	});
 
-	return output.filter(
-		(el: JSX.Element | null): el is JSX.Element => el !== null,
-	);
+	return output.filter(isNonNullable);
 };

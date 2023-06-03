@@ -422,7 +422,7 @@ export const InteractiveLayout = ({
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										badge={article.badge}
+										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</GridItem>
@@ -614,7 +614,7 @@ export const InteractiveLayout = ({
 						showBottomSocialButtons={
 							article.showBottomSocialButtons
 						}
-						badge={article.badge}
+						badge={article.badge?.enhanced}
 					/>
 				</Section>
 				{renderAds && (

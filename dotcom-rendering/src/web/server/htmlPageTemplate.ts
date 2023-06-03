@@ -5,6 +5,7 @@ import { getFontsCss } from '../../lib/fonts-css';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { fcp } from '../bork/fcp';
 import { fid } from '../bork/fid';
+import { remap } from '../bork/remap';
 import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
@@ -326,12 +327,41 @@ https://workforus.theguardian.com/careers/product-engineering/
 					borkFID || borkFCP
 						? `
 				<script>
-				// sorry
-				${borkFID ? `(${fid.toString()})();` : ''}
-				${borkFCP ? `(${fcp.toString()})();` : ''}
+				try {
+					function getCookieValue(name) {
+						var nameEq = name + "=",
+							cookies = document.cookie.split(';'),
+							value = null;
+						cookies.forEach(function (cookie) {
+							while (cookie.charAt(0) === ' ') {
+								cookie = cookie.substring(1, cookie.length);
+							}
+							if (cookie.indexOf(nameEq) === 0) {
+								value = cookie.substring(nameEq.length, cookie.length);
+							}
+						});
+						return value;
+					}
+
+					// sorry
+					${
+						borkFID
+							? `var fidDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 1000);
+							(${fid.toString()})(fidDelay);`
+							: ''
+					}
+					${
+						borkFCP
+							? `var fcpDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 4000);
+							(${fcp.toString()})(fcpDelay);`
+							: ''
+					}
+				} catch (e) {
+					// do nothing (not sorry)
+				}
 				</script>
 				`
-						: ''
+						: '<!-- no borking -->'
 				}
 
 
