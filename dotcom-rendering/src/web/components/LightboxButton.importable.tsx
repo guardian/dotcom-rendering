@@ -124,7 +124,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		return;
 	}
 
-	function select(position: number): void {
+	function onSelect(position: number): void {
 		if (positionDisplay) {
 			positionDisplay.innerHTML = position.toString();
 		}
@@ -209,7 +209,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		if (previousButton) pulseButton(previousButton);
 		const positionNow = getPosition();
 		const newPosition = getPreviousPosition(positionNow);
-		select(newPosition);
+		onSelect(newPosition);
 		scrollTo(newPosition);
 		loadAdjacentImages(newPosition);
 	}
@@ -218,7 +218,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		if (nextButton) pulseButton(nextButton);
 		const positionNow = getPosition();
 		const newPosition = getNextPosition(positionNow);
-		select(newPosition);
+		onSelect(newPosition);
 		scrollTo(newPosition);
 		loadAdjacentImages(newPosition);
 	}
@@ -310,7 +310,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 		// Now we have the index of the image that was clicked, show it
 		// in the lightbox
-		select(position);
+		onSelect(position);
 		scrollTo(position);
 		loadAdjacentImages(position);
 		// We only want this listener active while the lightbox is open
@@ -406,7 +406,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		'scroll',
 		libDebounce(() => {
 			const currentPosition = getPosition();
-			select(currentPosition);
+			onSelect(currentPosition);
 			loadAdjacentImages(currentPosition);
 		}, 300),
 	);
