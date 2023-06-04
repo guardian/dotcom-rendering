@@ -119,14 +119,6 @@ const decideImage = (trail: FEFrontCard) => {
 		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
 	}
 
-	if (
-		trail.properties.image?.type === 'ImageSlideshow' &&
-		trail.properties.image.item.assets &&
-		trail.properties.image.item.assets[0]?.imageSrc
-	) {
-		return trail.properties.image.item.assets[0]?.imageSrc;
-	}
-
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
