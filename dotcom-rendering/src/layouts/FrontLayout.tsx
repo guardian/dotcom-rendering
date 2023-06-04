@@ -82,6 +82,7 @@ const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
+	hasPageSkin: boolean,
 ) => {
 	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
@@ -94,6 +95,7 @@ const decideAdSlot = (
 				data-print-layout="hide"
 				position="merchandising-high"
 				display={format}
+				hasPageskin={hasPageSkin}
 			/>
 		);
 	} else if (mobileAdPositions.includes(index)) {
@@ -333,6 +335,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									hasPageSkin,
 								)}
 							</Fragment>
 						);
@@ -399,6 +402,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									hasPageSkin,
 								)}
 							</>
 						);
@@ -505,6 +509,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								format.display,
 								mobileAdPositions,
+								hasPageSkin,
 							)}
 						</Fragment>
 					);

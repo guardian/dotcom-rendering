@@ -4,6 +4,7 @@ import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
+	breakpoints,
 	from,
 	neutral,
 	space,
@@ -29,6 +30,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	hasPageskin?: boolean;
 };
 
 /**
@@ -265,6 +267,7 @@ export const AdSlot = ({
 	display,
 	isPaidContent = false,
 	index,
+	hasPageskin = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -378,6 +381,10 @@ export const AdSlot = ({
 						css`
 							display: flex;
 							justify-content: center;
+							width: ${hasPageskin
+								? `${breakpoints.desktop}px`
+								: 'auto'};
+							margin: auto;
 						`,
 						adStyles,
 					]}
