@@ -145,7 +145,9 @@ const decideSlideshowImages = (
 	trail: FEFrontCard,
 ): DCRSlideshowImage[] | undefined => {
 	const assets = trail.properties.image?.item.assets;
-	const shouldShowSlideshow = trail.properties.imageSlideshowReplace;
+	const shouldShowSlideshow =
+		trail.properties.image?.type === 'ImageSlideshow' &&
+		trail.properties.imageSlideshowReplace;
 	if (shouldShowSlideshow && assets && assets.length > 0) {
 		return assets;
 	}
