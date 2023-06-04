@@ -60,7 +60,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	const infoButton = lightbox.querySelector<HTMLButtonElement>('button.info');
 	const closeButton =
 		lightbox.querySelector<HTMLButtonElement>('button.close');
-	const positionDisplay =
+	const positionIndicator =
 		lightbox.querySelector<HTMLElement>('nav .selected');
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
 	const pictures = lightbox.querySelectorAll('li picture');
@@ -125,8 +125,8 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	function onSelect(position: number): void {
-		if (positionDisplay) {
-			positionDisplay.innerHTML = position.toString();
+		if (positionIndicator) {
+			positionIndicator.innerHTML = position.toString();
 		}
 		if (window.location.hash !== `#img-${position}`) {
 			// Update the url based on the fact we've selected (navigated
