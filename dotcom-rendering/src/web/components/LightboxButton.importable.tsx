@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay, log, storage } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, log, storage } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -19,27 +19,38 @@ type Props = {
 	isMainMedia?: boolean;
 };
 
-function decideSize(role: RoleType) {
-	switch (role) {
-		case 'halfWidth':
-		case 'supporting': {
+function decideSize(role: RoleType, format: ArticleFormat) {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
 			return css`
 				height: 32px;
 				width: 32px;
 			`;
 		}
-		case 'inline':
-		case 'showcase':
-		case 'immersive':
 		default: {
-			return css`
-				height: 32px;
-				width: 32px;
-				${from.tablet} {
-					height: 44px;
-					width: 44px;
+			switch (role) {
+				case 'halfWidth':
+				case 'supporting': {
+					return css`
+						height: 32px;
+						width: 32px;
+					`;
 				}
-			`;
+				case 'inline':
+				case 'showcase':
+				case 'immersive':
+				default: {
+					return css`
+						height: 32px;
+						width: 32px;
+						${from.tablet} {
+							height: 44px;
+							width: 44px;
+						}
+					`;
+				}
+			}
 		}
 	}
 }
@@ -629,7 +640,7 @@ export const LightboxButton = ({
 							opacity: 0.8;
 						}
 					`,
-					decideSize(role),
+					decideSize(role, format),
 					isMainMedia &&
 						format.display === ArticleDisplay.Immersive &&
 						visuallyHidden,
