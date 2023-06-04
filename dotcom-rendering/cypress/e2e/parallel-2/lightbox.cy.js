@@ -17,7 +17,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should open the lightbox when an expand button is clicked', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
 		cy.get('button.open-lightbox').eq(1).realClick();
@@ -29,7 +29,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should open the lightbox when an image is clicked', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using fifth image on the page
 		cy.get('article img').eq(3).realClick();
@@ -39,7 +39,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should trap focus', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('article img').first().realClick();
 		cy.get('#gu-lightbox').should('be.visible');
 		cy.realPress('Tab');
@@ -69,7 +69,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should respond to keyboard shortcuts and image clicks', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
 		cy.get('button.open-lightbox').eq(1).realClick();
@@ -131,7 +131,7 @@ describe('Lightbox', function () {
 		function image(position) {
 			return cy.get(`li[data-index="${position}"] img`);
 		}
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		// eq(6) here means the 7th button is clicked (base zero you
 		// see)
 		cy.get('button.open-lightbox').eq(6).click();
@@ -160,7 +160,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should remember my preference for showing the caption', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		// The info aside is visible by default
 		cy.get('li[data-index="2"] aside').should('be.visible');
@@ -176,20 +176,20 @@ describe('Lightbox', function () {
 		cy.realPress('Escape');
 		// Reload the page to see if my preference for having the caption hidden
 		// has been preserved
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('#gu-lightbox').should('be.visible');
 		cy.get('li[data-index="2"] aside').should('not.be.visible');
 		// Turn the info aside back on and then reload once more to check the
 		// caption is again showing by default
 		cy.realPress('i');
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] aside').should('be.visible');
 	});
 
 	it('should be possible to navigate by scrolling', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] img').should('be.visible');
 		cy.get('li[data-index="5"]').scrollIntoView();
@@ -202,7 +202,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should navigate to the original block when clicking links in captions', function () {
-		cy.visit(`/Article?url=${liveblogUrl}`);
+		cy.visit(`/Article/${liveblogUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		// The info aside is visible by default
 		cy.get('li[data-index="2"] aside').should('be.visible');
@@ -215,7 +215,7 @@ describe('Lightbox', function () {
 	});
 
 	it('should use the url to maintain lightbox state', function () {
-		cy.visit(`/Article?url=${articleUrl}`);
+		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
 		cy.url().should('contain', '#img-2');
