@@ -71,305 +71,302 @@ function showInfo() {
 	lightbox?.classList.remove('hide-info');
 }
 
-export const Default = () => {
+function hideInfo() {
+	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
+	lightbox?.classList.add('hide-info');
+}
+
+export const Initialise = ({
+	children,
+	shouldShowInfo = true,
+}: {
+	children: React.ReactNode;
+	shouldShowInfo?: boolean;
+}) => {
 	useEffect(() => {
 		showLightbox();
-		showInfo();
-	});
+		if (shouldShowInfo) {
+			showInfo();
+		} else {
+			hideInfo();
+		}
+	}, [shouldShowInfo]);
+
+	return <div style={{ height: '100vh' }}>{children}</div>;
+};
+
+export const Default = () => {
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[{ ...testImage }]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[{ ...testImage }]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithTitle = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[{ ...testImage, title: 'Title' }]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[{ ...testImage, title: 'Title' }]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithCredit = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[{ ...testImage, displayCredit: true }]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[{ ...testImage, displayCredit: true }]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithRating = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[{ ...testImage, starRating: 3 }]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[{ ...testImage, starRating: 3 }]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WhenLiveBlog = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-					firstPublished: 1643816168535,
-					blockId: 'mockId',
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticlePillar.News,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+						firstPublished: 1643816168535,
+						blockId: 'mockId',
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithEverything = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithoutCaption = () => {
-	useEffect(() => {
-		showLightbox();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			images={[{ ...testImage }]}
-		/>
+		<Initialise shouldShowInfo={false}>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				images={[{ ...testImage }]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithSport = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Sport,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithCulture = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Culture,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithLifestyle = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Lifestyle,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Lifestyle,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithOpinion = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Opinion,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithSpecialReport = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReport,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithSpecialReportAlt = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReportAlt,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
 export const WithLabs = () => {
-	useEffect(() => {
-		showLightbox();
-		showInfo();
-	});
 	return (
-		<Lightbox
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.Labs,
-			}}
-			images={[
-				{
-					...testImage,
-					starRating: 3,
-					title: 'Title',
-					displayCredit: true,
-				},
-			]}
-		/>
+		<Initialise>
+			<Lightbox
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
+				}}
+				images={[
+					{
+						...testImage,
+						starRating: 3,
+						title: 'Title',
+						displayCredit: true,
+					},
+				]}
+			/>
+		</Initialise>
 	);
 };
 
