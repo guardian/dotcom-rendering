@@ -206,27 +206,37 @@ const containerStyles = (hasPageSkin: boolean) => {
 	`;
 };
 
-const sectionHeadline = (borderColour: string) => css`
-	grid-row: headline;
-	grid-column: title;
 
-	display: flex;
-	flex-direction: column;
-
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${borderColour};
+const sectionHeadline = (borderColour: string, hasPageSkin: boolean) => {
+	const baseSectionHeadline = css`
+		grid-row: headline;
+		grid-column: title;
+		display: flex;
+		flex-direction: column;
+	`;
+	const fromLeftCol = css`
+		${from.leftCol} {
+			position: relative;
+			::after {
+				content: '';
+				display: block;
+				width: 1px;
+				top: 0;
+				height: 1.875rem;
+				right: -10px;
+				position: absolute;
+				background-color: ${borderColour};
+			}
 		}
+	`;
+	if (hasPageSkin) {
+		return baseSectionHeadline;
 	}
-`;
+	return css`
+		${baseSectionHeadline}
+		${fromLeftCol}
+	`;
+};
 
 const paddings = css`
 	padding-top: ${space[2]}px;
@@ -465,6 +475,7 @@ export const FrontSection = ({
 				css={[
 					sectionHeadline(
 						overrides?.border?.container ?? neutral[86],
+						hasPageSkin,
 					),
 				]}
 			>
