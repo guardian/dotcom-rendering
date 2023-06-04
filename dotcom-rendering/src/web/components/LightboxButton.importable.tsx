@@ -451,11 +451,15 @@ function initialiseLightbox(lightbox: HTMLElement) {
 
 	imageList?.addEventListener(
 		'scroll',
-		libDebounce(() => {
-			const currentPosition = getPosition();
-			onSelect(currentPosition);
-			loadAdjacentImages(currentPosition);
-		}, 100),
+		libDebounce(
+			() => {
+				const currentPosition = getPosition();
+				onSelect(currentPosition);
+				loadAdjacentImages(currentPosition);
+			},
+			300,
+			{ leading: true },
+		),
 	);
 
 	closeButton?.addEventListener('click', close);
