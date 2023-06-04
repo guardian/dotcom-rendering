@@ -2,8 +2,8 @@ import { ClassNames, css as emoCss } from '@emotion/react';
 import { border, from, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { center } from '../lib/center';
+import { pageSkinContainer } from '../../layouts/lib/pageSkin';
+import { center } from '../../lib/center';
 
 const sidePadding = emoCss`
 	padding-left: 10px;

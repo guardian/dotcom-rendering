@@ -113,8 +113,10 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent, hasPageSkin, abTests },
+		config: { isPaidContent, abTests },
 	} = front;
+
+	const hasPageSkin = true;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 
@@ -174,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
-							hasPageSkin={true}
+							hasPageSkin={hasPageSkin}
 						>
 							<Header
 								editionId={front.editionId}
@@ -200,7 +202,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
-						hasPageSkin={true}
+						hasPageSkin={hasPageSkin}
 					>
 						<Nav
 							nav={NAV}
@@ -223,7 +225,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
-								hasPageSkin={true}
+								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil="idle">
 									<SubNav
@@ -238,7 +240,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
-								hasPageSkin={true}
+								hasPageSkin={hasPageSkin}
 							>
 								<StraightLines
 									cssOverrides={css`
@@ -311,7 +313,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											containerName={
 												collection.collectionType
 											}
-											hasPageSkin={true}
+											hasPageSkin={hasPageSkin}
 										>
 											<Snap
 												snapData={trail.snapData}
@@ -375,7 +377,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									element="aside"
-									hasPageSkin={true}
+									hasPageSkin={hasPageSkin}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -479,7 +481,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isOnPaidContentFront={isPaidContent}
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
-								hasPageSkin={true}
+								hasPageSkin={hasPageSkin}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -512,7 +514,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				fullWidth={true}
 				showTopBorder={false}
 				ophanComponentName="trending-topics"
-				hasPageSkin={true}
+				data-component="trending-topics"
+				hasPageSkin={hasPageSkin}
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
@@ -525,7 +528,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
-					hasPageSkin={true}
+					hasPageSkin={hasPageSkin}
 				>
 					<AdSlot position="merchandising" display={format.display} />
 				</Section>
