@@ -136,7 +136,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	function requestFullscreen() {
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
 		if (screenfull.isEnabled) {
 			return screenfull.request(lightbox);
 		}
@@ -144,7 +143,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	function exitFullscreen() {
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
 		if (screenfull.isEnabled && screenfull.isFullscreen) {
 			return screenfull.exit();
 		}
@@ -476,7 +474,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * close function in response to the reader closing fullscreen mode. Like
 	 * this there's no need to press escape twice to exit the lightbox
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it is needed
+
 	if (screenfull.isEnabled) {
 		screenfull.on('change', () => {
 			if (screenfull.isFullscreen) {
