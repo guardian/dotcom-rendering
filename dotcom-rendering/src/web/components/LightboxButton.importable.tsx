@@ -133,7 +133,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			// to) a new image
 			window.history.replaceState({}, '', `#img-${position}`);
 		}
-		// Ensure the close button is always visible on the last slide
+		// Ensure the close button is always visible on the last slide on mobile
 		if (position === images.length) {
 			closeButton?.classList.add('reveal');
 		} else {
@@ -292,11 +292,11 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		log('dotcom', '💡 Opening lightbox.');
 		// Remember where we were so we can restore focus
 		if (document.activeElement) previouslyFocused = document.activeElement;
-		// We use this class to prevent the main page from scrolling
+		// We use this class to prevent the main page from scrolling in the background while lightbox is open
 		document.documentElement.classList.add('lightbox-open');
 		// Show lightbox
 		lightbox.removeAttribute('hidden');
-		// // Try to open the lightbox in fullscreen mode. This may fail
+		// Try to open the lightbox in fullscreen mode. This may fail
 		try {
 			await requestFullscreen();
 		} catch {
