@@ -4,13 +4,13 @@ import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
-	breakpoints,
 	from,
 	neutral,
 	space,
 	text,
 	textSans,
 } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -22,6 +22,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	hasPageskin?: boolean;
 };
 
 type NonInlineProps = {
@@ -381,11 +382,8 @@ export const AdSlot = ({
 						css`
 							display: flex;
 							justify-content: center;
-							width: ${hasPageskin
-								? `${breakpoints.desktop}px`
-								: 'auto'};
-							margin: auto;
 						`,
+						hasPageskin && pageSkinContainer,
 						adStyles,
 					]}
 				>
