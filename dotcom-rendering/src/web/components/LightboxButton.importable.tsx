@@ -261,8 +261,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const positionNow = getPosition();
 		const newPosition = getPreviousPosition(positionNow);
 		scrollTo(newPosition);
-		onSelect(newPosition);
-		loadAdjacentImages(newPosition);
 	}
 
 	function goForward(): void {
@@ -270,8 +268,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const positionNow = getPosition();
 		const newPosition = getNextPosition(positionNow);
 		scrollTo(newPosition);
-		onSelect(newPosition);
-		loadAdjacentImages(newPosition);
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -362,8 +358,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		// Now we have the index of the image that was clicked, show it
 		// in the lightbox
 		scrollTo(position);
-		onSelect(position);
-		loadAdjacentImages(position);
 		// We only want this listener active while the lightbox is open
 		window.addEventListener('keydown', handleKeydown);
 	}
@@ -461,7 +455,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			const currentPosition = getPosition();
 			onSelect(currentPosition);
 			loadAdjacentImages(currentPosition);
-		}, 300),
+		}, 100),
 	);
 
 	closeButton?.addEventListener('click', close);
