@@ -470,6 +470,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			}
 		}
 	});
+
+	// Mark the lightbox as ready so that we don't try to re-initialise it on subsequent button clicks
+	lightbox.setAttribute('data-gu-ready', 'true');
 }
 
 /**
@@ -541,22 +544,19 @@ export const LightboxButton = ({
 }: Props) => {
 	useEffect(() => {
 		/**
-		 * We only want to run this code once so we first check if there are any other
-		 * islands on the page that have already been hydrated (marked with gu-ready)
+		 * We only want to initialise the lightbox once (because there's only one lightbox and we
+		 * only need to initialise it one time). So before we run the initialiseLightbox function
+		 * below as part of this button click we first check to see if it is already marked as ready
 		 */
-		const allIslands = document.querySelectorAll<HTMLElement>(
-			'gu-island[name="LightboxButton"]',
-		);
-		const alreadyHydrated = Array.from(allIslands).find((island) => {
-			// The island we're clicking on has already been marked as ready
-			const isIslandClickedOn =
-				island.querySelector('button')?.dataset.elementId === elementId;
-			return !isIslandClickedOn && island.dataset.guReady;
-		});
-		if (alreadyHydrated) return;
-
 		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 		if (!lightbox) return;
+		if (lightbox.dataset.guReady) {
+			log(
+				'dotcom',
+				'💡 Lightbox already initialised, skipping initialisation',
+			);
+			return;
+		}
 		initialiseLightbox(lightbox);
 	}, [elementId]);
 
