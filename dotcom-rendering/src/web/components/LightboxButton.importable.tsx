@@ -151,7 +151,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 
 	function scrollTo(position: number): void {
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (!imageList || !liWidth) return;
+		if (!imageList || liWidth == null) return;
 		switch (position) {
 			case 0:
 			case 1: {
@@ -167,7 +167,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	function getPosition(): number {
 		const scrollPosition = imageList?.scrollLeft;
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (liWidth && scrollPosition) {
+		if (liWidth != null && scrollPosition != null) {
 			return Math.round(scrollPosition / liWidth) + 1;
 		}
 		return 1;
