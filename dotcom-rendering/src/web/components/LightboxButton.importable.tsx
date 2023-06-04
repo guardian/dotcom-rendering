@@ -44,12 +44,31 @@ function decideSize(role: RoleType) {
 	}
 }
 
+/**
+ * All lightbox logic is here
+ *
+ * This function takes the lightbox element as creates a series of javascript functions
+ * and listeners used to control the lightbox.
+ *
+ */
 function initialiseLightbox(lightbox: HTMLElement) {
 	log('dotcom', '💡 Initialising lightbox');
-	// Document selectors
+
+	// --------------------------------------------------------------------------------
+	// SELECTORS
+	//
+	// We start by definings some variables that reference parts of the dom. These page
+	// parts are either on the docuement or in the lightbox element itself
+	// --------------------------------------------------------------------------------
+	/**
+	 * Each image has a lightbox button that is used to trigger the lightbox
+	 */
 	const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
 		'button.open-lightbox',
 	);
+	/**
+	 * Each image also has an overlay that captures click events on the image itself
+	 */
 	const overlays =
 		document.querySelectorAll<HTMLElement>('div.open-lightbox');
 
@@ -61,12 +80,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	const closeButton =
 		lightbox.querySelector<HTMLButtonElement>('button.close');
 	const positionIndicator =
-		lightbox.querySelector<HTMLElement>('nav .selected');
+		lightbox.querySelector<HTMLElement>('nav .selected'); // Eg. 2/4, as in image 2 of 4
+	/**
+	 * imageList is the horizontal list of all images. We use it to scroll left and right
+	 * effectively navigating the lightbox
+	 */
 	const imageList = lightbox.querySelector<HTMLElement>('ul');
 	const pictures = lightbox.querySelectorAll('li picture');
 	const images = lightbox.querySelectorAll('li img');
 	const captionLinks = lightbox.querySelectorAll('li aside a');
 
+	// Remember a user's preference for the caption info
 	try {
 		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
 			hideInfo();
@@ -77,9 +101,12 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		// Do nothing. Errors accessing local storage are common
 	}
 
-	// Functions
-
+	// --------------------------------------------------------------------------------
+	// FUNCTIONS
+	// --------------------------------------------------------------------------------
 	/**
+	 * **getTabableElements**
+	 *
 	 * Returns a list of all the html elements on the *active* page that can be tabbed to
 	 *
 	 * Any elements that are off screen, such as caption links for images that are not
@@ -124,6 +151,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		return;
 	}
 
+	/**
+	 * Each time a new image is selected, this function is called so we can update
+	 * the state of the page/lightbox to reflect the new image
+	 */
 	function onSelect(position: number): void {
 		if (positionIndicator) {
 			positionIndicator.innerHTML = position.toString();
@@ -149,7 +180,12 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}, 75);
 	}
 
+	/**
+	 * Images are 'selected' simply by being scrolled to. You can even select an image
+	 * by swipping left and right. Because of this, scrollTo is how we navigate the lightbox
+	 */
 	function scrollTo(position: number): void {
+		// liWidth is the actual dom width in pixels of the containing li element for each image
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
 		if (!imageList || liWidth == null) return;
 		switch (position) {
@@ -164,6 +200,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
+	/**
+	 * Translate the pixel (scrollLeft) document value into a numeric
+	 * position value
+	 */
 	function getPosition(): number {
 		const scrollPosition = imageList?.scrollLeft;
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
@@ -191,6 +231,8 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
+	// We eager load adjacent images by adding the loading=eager attribute
+	// to their img tag
 	function loadAdjacentImages(currentPosition: number): void {
 		function eagerLoad(position: number) {
 			const allImages =
@@ -370,7 +412,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
-	// Event listeners
+	// --------------------------------------------------------------------------------
+	// EVENT LISTENERS
+	// --------------------------------------------------------------------------------
 	lightboxButtons.forEach((button) => {
 		button.addEventListener('click', () => {
 			// Extract the element id for this image out of the button that was clicked on
