@@ -3,15 +3,16 @@ import { getSoleContributor } from '../lib/byline';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
+	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
 } from '../types/front';
 import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
+import type { EditionId } from '../web/lib/edition';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
-import { EditionId } from '../web/lib/edition';
 
 /**
  *
@@ -118,6 +119,14 @@ const decideImage = (trail: FEFrontCard) => {
 		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
 	}
 
+	if (
+		trail.properties.image?.type === 'ImageSlideshow' &&
+		trail.properties.image.item.assets &&
+		trail.properties.image.item.assets[0]?.imageSrc
+	) {
+		return trail.properties.image.item.assets[0]?.imageSrc;
+	}
+
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
@@ -138,6 +147,17 @@ const decideKicker = (trail: FEFrontCard) => {
 	return trail.properties.isBreaking
 		? 'Breaking news'
 		: trail.header.kicker?.item?.properties.kickerText;
+};
+
+const decideSlideshowImages = (
+	trail: FEFrontCard,
+): DCRSlideshowImage[] | undefined => {
+	const assets = trail.properties.image?.item.assets;
+	const shouldShowSlideshow = trail.properties.imageSlideshowReplace;
+	if (shouldShowSlideshow && assets && assets.length > 0) {
+		return assets;
+	}
+	return undefined;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {
@@ -250,5 +270,6 @@ export const enhanceCards = (
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
+			slideshowImages: decideSlideshowImages(faciaCard),
 		};
 	});

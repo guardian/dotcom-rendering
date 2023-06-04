@@ -764,6 +764,32 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcWidth": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcHeight": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc",
+                                                                            "imageSrcHeight",
+                                                                            "imageSrcWidth"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -1450,6 +1476,32 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcWidth": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcHeight": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc",
+                                                                            "imageSrcHeight",
+                                                                            "imageSrcWidth"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2136,6 +2188,32 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcWidth": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageSrcHeight": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc",
+                                                                            "imageSrcHeight",
+                                                                            "imageSrcWidth"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }

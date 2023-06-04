@@ -174,6 +174,10 @@ export type FEFrontCard = {
 			type: string;
 			item: {
 				imageSrc?: string;
+				assets?: {
+					imageSrc: string;
+					imageCaption: string;
+				}[];
 			};
 		};
 		webTitle: string;
@@ -269,6 +273,12 @@ export type DCRFrontCard = {
 	isExternalLink: boolean;
 	embedUri?: string;
 	branding?: Branding;
+	slideshowImages?: DCRSlideshowImage[];
+};
+
+export type DCRSlideshowImage = {
+	imageSrc: string;
+	imageCaption: string;
 };
 
 export type FESnapType = {

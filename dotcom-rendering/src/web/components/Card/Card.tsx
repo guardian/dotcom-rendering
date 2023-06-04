@@ -7,6 +7,7 @@ import type { Branding } from '../../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
+	DCRSlideshowImage,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../../types/front';
@@ -18,6 +19,7 @@ import { CardHeadline } from '../CardHeadline';
 import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
+import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
@@ -74,6 +76,7 @@ export type Props = {
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
 	isExternalLink: boolean;
+	slideshowImages?: DCRSlideshowImage[];
 };
 
 const StarRatingComponent = ({
@@ -195,11 +198,20 @@ const getImage = ({
 	imageUrl,
 	avatarUrl,
 	isCrossword,
+	slideshowImages,
 }: {
 	imageUrl?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
-}): { type: CardImageType; src: string } | undefined => {
+	slideshowImages?: DCRSlideshowImage[];
+}):
+	| {
+			type: CardImageType;
+			src: string;
+			slideshowImages?: DCRSlideshowImage[];
+	  }
+	| undefined => {
+	if (slideshowImages) return { type: 'slideshow', src: '', slideshowImages };
 	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'mainMedia';
@@ -258,6 +270,7 @@ export const Card = ({
 	isDynamo,
 	isCrossword,
 	isExternalLink,
+	slideshowImages,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -348,6 +361,7 @@ export const Card = ({
 		imageUrl,
 		avatarUrl,
 		isCrossword,
+		slideshowImages,
 	});
 
 	return (
@@ -377,6 +391,13 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={showMainVideo ?? false}
 					>
+						{image.type === 'slideshow' &&
+							image.slideshowImages && (
+								<Slideshow
+									images={image.slideshowImages}
+									imageSize={imageSize}
+								/>
+							)}
 						{image.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}

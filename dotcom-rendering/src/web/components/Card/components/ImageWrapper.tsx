@@ -63,6 +63,11 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
+				imageType === 'slideshow' &&
+					isHorizontal &&
+					flexBasisStyles({
+						imageSize,
+					}),
 				imageType === 'mainMedia' &&
 					isHorizontal &&
 					flexBasisStyles({
@@ -114,7 +119,9 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{imageType === 'mainMedia' && <div className="image-overlay" />}
+				{(imageType === 'mainMedia' || imageType === 'slideshow') && (
+					<div className="image-overlay" />
+				)}
 				{imageType === 'mainMedia' && showPlayIcon && (
 					<PlayIcon
 						imageSize={imageSize}
