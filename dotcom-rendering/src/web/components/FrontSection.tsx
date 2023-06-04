@@ -190,27 +190,40 @@ const containerStyles = (hasPageSkin: boolean) => {
 	`;
 };
 
-const sectionHeadline = css`
-	grid-row: headline;
-	grid-column: title;
+const sectionHeadline = (hasPageSkin: boolean) => {
+	const baseSectionHeadline = css`
+		grid-row: headline;
+		grid-column: title;
 
-	display: flex;
-	flex-direction: column;
+		display: flex;
+		flex-direction: column;
+	`;
 
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${neutral[86]};
+	const fromLeftCol = css`
+		${from.leftCol} {
+			position: relative;
+			::after {
+				content: '';
+				display: block;
+				width: 1px;
+				top: 0;
+				height: 1.875rem;
+				right: -10px;
+				position: absolute;
+				background-color: ${neutral[86]};
+			}
 		}
+	`;
+
+	if (hasPageSkin) {
+		return baseSectionHeadline;
 	}
-`;
+
+	return css`
+		${baseSectionHeadline}
+		${fromLeftCol}
+	`;
+};
 
 const paddings = css`
 	padding-top: ${space[2]}px;
@@ -434,7 +447,7 @@ export const FrontSection = ({
 		>
 			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
 
-			<div css={[sectionHeadline]}>
+			<div css={sectionHeadline(hasPageSkin)}>
 				<Hide until="leftCol">
 					{badge && (
 						<Badge imageSrc={badge.imageSrc} href={badge.href} />
