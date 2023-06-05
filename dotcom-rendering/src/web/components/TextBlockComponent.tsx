@@ -211,21 +211,10 @@ const styles = (format: ArticleFormat) => css`
 `;
 
 const buildElementTree =
-	(
-		html: string,
-		format: ArticleFormat,
-		isFirstParagraph: boolean,
-		forceDropCap?: boolean,
-	) =>
+	(html: string, format: ArticleFormat, showDropCaps: boolean) =>
 	(node: Node, key: number): ReactNode => {
-		const showDropCaps = shouldShowDropCaps(
-			html,
-			format,
-			isFirstParagraph,
-			forceDropCap,
-		);
 		const children = Array.from(node.childNodes).map(
-			buildElementTree(html, format, isFirstParagraph, forceDropCap),
+			buildElementTree(html, format, showDropCaps),
 		);
 
 		switch (node.nodeName) {
@@ -324,14 +313,19 @@ export const TextBlockComponent = ({
 	isFirstParagraph,
 	forceDropCap,
 }: Props) => {
+	const showDropCaps = shouldShowDropCaps(
+		html,
+		format,
+		isFirstParagraph,
+		forceDropCap,
+	);
 	const fragment = parseHtml(sanitise(html, sanitiserOptions));
 	return jsx(Fragment, {
 		children: Array.from(fragment.childNodes).map(
 			buildElementTree(
 				sanitise(html, sanitiserOptions),
 				format,
-				isFirstParagraph,
-				forceDropCap,
+				showDropCaps,
 			),
 		),
 	});
