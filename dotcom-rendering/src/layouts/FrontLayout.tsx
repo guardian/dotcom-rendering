@@ -391,6 +391,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}
+										hasPageSkin={hasPageSkin}
 									/>
 								</Section>
 								{decideAdSlot(

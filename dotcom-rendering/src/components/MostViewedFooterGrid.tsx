@@ -17,18 +17,24 @@ const hidePanel = css`
 	display: none;
 `;
 
-const tabsContainer = css`
-	display: flex;
-	position: relative;
-	border-left: ${thinGreySolid};
-	border-right: ${thinGreySolid};
-	border-bottom: ${thinGreySolid};
-
-	${until.leftCol} {
-		border-top: ${thinGreySolid};
-		border-bottom: 0;
-	}
-`;
+const tabsContainer = (hasPageSkin: boolean) => {
+	const borderOverride = hasPageSkin
+		? css`
+				border-top: ${thinGreySolid};
+		  `
+		: css`${until.leftCol} {
+			border-top: ${thinGreySolid}
+			border-bottom: 0;
+		  `;
+	return css`
+		display: flex;
+		position: relative;
+		border-left: ${thinGreySolid};
+		border-right: ${thinGreySolid};
+		border-bottom: ${thinGreySolid};
+		${borderOverride}
+	`;
+};
 
 const listTab = css`
 	font-weight: 700;
@@ -99,6 +105,7 @@ type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
 	selectedColour?: string;
+	hasPageSkin?: boolean;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -125,6 +132,7 @@ export const MostViewedFooterGrid = ({
 	data,
 	sectionName = '',
 	selectedColour = neutral[0],
+	hasPageSkin = false,
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	/**
@@ -145,7 +153,7 @@ export const MostViewedFooterGrid = ({
 				It only generates tabs if there is more than one panel of content.
 			*/}
 			{renderAsTabs && (
-				<ul css={tabsContainer} role="tablist">
+				<ul css={tabsContainer(hasPageSkin)} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
@@ -223,6 +231,7 @@ export const MostViewedFooterGrid = ({
 								format={trail.format}
 								headlineText={trail.headline}
 								ageWarning={trail.ageWarning}
+								hasPageSkin={hasPageSkin}
 							/>
 						))}
 					</ol>

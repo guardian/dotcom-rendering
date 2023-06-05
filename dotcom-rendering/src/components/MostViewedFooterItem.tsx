@@ -4,42 +4,56 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	border,
 	breakpoints,
+	from,
 	headline,
 	neutral,
 	text,
-	until,
 } from '@guardian/source-foundations';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
 
-const gridItem = (position: number, isWithImage: boolean) => css`
-	position: relative;
+const gridItem = (
+	position: number,
+	isWithImage: boolean,
+	hasPageSkin: boolean,
+) => {
+	const borderTop = hasPageSkin
+		? css`
+				border-top: 1px solid ${border.secondary};
+		  `
+		: css`
+				${from.leftCol} {
+					/* Below leftCol always set top border */
+					border-top: 1px solid ${border.secondary};
+				}
+		  `;
+	return css`
+		position: relative;
 
-	${until.leftCol} {
-		/* Below leftCol always set top border */
-		border-top: 1px solid ${border.secondary};
-	}
-	/* Above leftCol, don't apply a top border on the 1st and 6th
-       items to prevent double borders */
-	border-top: ${position !== 1 &&
-	position !== 6 &&
-	`1px solid ${border.secondary}`};
+		${borderTop}
 
-	/* The left border is set on the container */
-	border-right: 1px solid ${border.secondary};
-	min-height: ${isWithImage ? '4rem' : '3.25rem'};
+		/* Above leftCol, don't apply a top border on the 1st and 6th
+		items to prevent double borders */
+		border-top: ${position !== 1 &&
+		position !== 6 &&
+		`1px solid ${border.secondary}`};
 
-	&:hover {
-		cursor: pointer;
-	}
+		/* The left border is set on the container */
+		border-right: 1px solid ${border.secondary};
+		min-height: ${isWithImage ? '4rem' : '3.25rem'};
 
-	&:hover,
-	:focus {
-		background: ${neutral[97]};
-	}
-`;
+		&:hover {
+			cursor: pointer;
+		}
+
+		&:hover,
+		:focus {
+			background: ${neutral[97]};
+		}
+	`;
+};
 
 const bigNumber = css`
 	position: absolute;
@@ -90,6 +104,7 @@ type Props = {
 	ageWarning?: string;
 	cssOverrides?: SerializedStyles | SerializedStyles[];
 	image?: string;
+	hasPageSkin?: boolean;
 };
 
 type MiniImageProps = {
@@ -131,9 +146,10 @@ export const MostViewedFooterItem = ({
 	ageWarning,
 	cssOverrides,
 	image,
+	hasPageSkin = false,
 }: Props) => (
 	<li
-		css={[gridItem(position, !!image), cssOverrides]}
+		css={[gridItem(position, !!image, hasPageSkin), cssOverrides]}
 		data-link-name={`${position} | text`}
 	>
 		<a css={headlineLink} href={url} data-link-name="article">

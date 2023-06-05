@@ -2,10 +2,11 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
+import type { DCRContainerPalette, TreatType } from '../../src/types/front';
+import type { ContainerOverrides } from '../../src/types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
-import type { DCRContainerPalette, TreatType } from '../types/front';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -114,15 +115,6 @@ const containerStyles = css`
 	width: 100%;
 `;
 
-const headlineContainerStyles = css`
-	display: flex;
-	justify-content: flex-end;
-
-	${until.leftCol} {
-		justify-content: space-between;
-	}
-`;
-
 const margins = css`
 	margin-top: ${space[2]}px;
 	/*
@@ -180,6 +172,48 @@ const Content = ({
 		{children}
 	</div>
 );
+
+const ContainerTitleWithHide = ({
+	title,
+	fontColour,
+	description,
+	url,
+	containerPalette,
+	showDateHeader,
+	editionId,
+	overrides,
+	hasPageSkin,
+}: {
+	title?: string;
+	fontColour?: string;
+	description?: string;
+	url?: string;
+	containerPalette?: DCRContainerPalette;
+	showDateHeader?: boolean;
+	editionId?: EditionId;
+	overrides?: ContainerOverrides | undefined;
+	hasPageSkin?: boolean;
+}) => {
+	const containerTitle = (
+		<ContainerTitle
+			title={title}
+			fontColour={fontColour ?? overrides?.text?.container}
+			description={description}
+			url={url}
+			containerPalette={containerPalette}
+			showDateHeader={showDateHeader}
+			editionId={editionId}
+		/>
+	);
+	if (hasPageSkin) {
+		return containerTitle;
+	}
+	return (
+		<Hide when="above" breakpoint="leftCol">
+			{containerTitle}
+		</Hide>
+	);
+};
 
 /**
  *
@@ -280,6 +314,7 @@ export const Section = ({
 					borderColour={borderColour ?? overrides?.border?.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
+					hasPageSkin={hasPageSkin}
 				>
 					<div
 						css={css`
@@ -322,20 +357,19 @@ export const Section = ({
 					stretchRight={stretchRight}
 					format={format}
 				>
-					<div css={headlineContainerStyles}>
-						<Hide when="above" breakpoint="leftCol">
-							<ContainerTitle
-								title={title}
-								fontColour={
-									fontColour ?? overrides?.text?.container
-								}
-								description={description}
-								url={url}
-								containerPalette={containerPalette}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-							/>
-						</Hide>
+					<div>
+						<ContainerTitleWithHide
+							title={title}
+							fontColour={
+								fontColour ?? overrides?.text?.container
+							}
+							description={description}
+							url={url}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
+							hasPageSkin={hasPageSkin}
+						/>
 						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
