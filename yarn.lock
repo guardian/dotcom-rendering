@@ -3173,10 +3173,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@7.1.1-beta.1":
-  version "7.1.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-7.1.1-beta.1.tgz#b16d7f2c6fe122fc02ab8ca9c2276d3ae30997e5"
-  integrity sha512-KzYBLeGCMSM9CUHMbtSrOVo8sKPE66yXJcWOnD2kHkO38IqitGj2gXzfmcpGwCAOMNwHHxPCqqmpHKuXJ6JyVg==
+"@guardian/commercial@8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-8.0.1.tgz#d6ce1886c6f12901b5260006e8e8d5e257d8813f"
+  integrity sha512-5admQMBOxue5L2vuxYWFugP4QyXpHbfCT+6fRuqaZY3oR/KMLxWUJ5YkvU0qVoKhabIjexutTDDk96A4NvIX7Q==
   dependencies:
     "@guardian/ab-core" "^4.0.0"
     "@guardian/consent-management-platform" "^13.0.2"
