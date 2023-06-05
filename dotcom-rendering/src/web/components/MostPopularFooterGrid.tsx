@@ -107,17 +107,14 @@ export const MostPopularFooterGrid = ({
 			data-component={ophanLinkName(sectionName)}
 			css={gridContainerStyle}
 		>
-			<section css={displayContent}>
+			<section data-link-name="most-viewed" css={displayContent}>
 				<div css={titleContainerStyle}>
 					<h3 css={titleStyle}>Most viewed</h3>
 					<div css={descriptionStyle}>
 						What readers are clicking on
 					</div>
 				</div>
-				<ol
-					data-link-name={ophanLinkName(mostViewed.heading)}
-					css={displayContent}
-				>
+				<ol css={displayContent}>
 					{shortenedMostViewed.map((trail: TrailType, j: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
@@ -132,17 +129,14 @@ export const MostPopularFooterGrid = ({
 					))}
 				</ol>
 			</section>
-			<section css={displayContent}>
+			<section data-link-name="deeply-read" css={displayContent}>
 				<div css={titleContainerStyle}>
 					<h3 css={titleStyle}>{deeplyRead.heading}</h3>
 					<div css={descriptionStyle}>
 						What readers are spending time with
 					</div>
 				</div>
-				<ol
-					data-link-name={ophanLinkName(deeplyRead.heading)}
-					css={displayContent}
-				>
+				<ol css={displayContent}>
 					{shortenedDeeplyRead.map((trail: TrailType, j: number) => (
 						<MostViewedFooterItem
 							key={trail.url}

@@ -128,7 +128,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
-	const showDeeplyRead =
+	const showMostPopular =
 		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
 
 	return (
@@ -242,6 +242,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const mostPopularTitle = 'Most popular';
 					const COTTON_CAPITAL_THRASHERS = [
 						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/default-fronts-default',
 						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/david-olusoga-front-default',
@@ -308,8 +309,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								<Section
 									key={ophanName}
 									title={
-										showDeeplyRead
-											? 'Most popular'
+										showMostPopular
+											? mostPopularTitle
 											: 'Most viewed'
 									}
 									showTopBorder={index > 0}
@@ -317,7 +318,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
-									ophanComponentName={ophanName}
+									ophanComponentName={
+										showMostPopular
+											? ophanComponentId(mostPopularTitle)
+											: ophanName
+									}
 									containerName={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
