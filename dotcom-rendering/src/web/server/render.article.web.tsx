@@ -69,7 +69,7 @@ export const extractArticleNav = (article: FEArticleType): NavType => {
 };
 
 export const renderHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
+	const NAV = extractArticleNav(article);
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 
