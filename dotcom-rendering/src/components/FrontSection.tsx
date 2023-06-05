@@ -195,7 +195,7 @@ const containerStyles = (hasPageSkin: boolean) => {
 			grid-template-columns:
 				minmax(0, 1fr)
 				[decoration-start title-start]
-				repeat(3, 60px)::
+				repeat(3, 60px)
 				[title-end content-start]
 				repeat(12, 60px)
 				[content-end hide-start]

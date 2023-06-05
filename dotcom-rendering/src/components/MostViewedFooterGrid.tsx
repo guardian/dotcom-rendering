@@ -22,9 +22,11 @@ const tabsContainer = (hasPageSkin: boolean) => {
 		? css`
 				border-top: ${thinGreySolid};
 		  `
-		: css`${until.leftCol} {
-			border-top: ${thinGreySolid}
-			border-bottom: 0;
+		: css`
+				${until.leftCol} {
+					border-top: ${thinGreySolid};
+					border-bottom: 0;
+				}
 		  `;
 	return css`
 		display: flex;
