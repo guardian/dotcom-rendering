@@ -73,7 +73,7 @@ type Props = {
 	index?: number;
 	/** Indicates if the container is targetted to a specific territory */
 	targetedTerritory?: Territory;
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -431,7 +431,7 @@ export const FrontSection = ({
 	isOnPaidContentFront,
 	index,
 	targetedTerritory,
-	hasPageSkin,
+	hasPageSkin = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
