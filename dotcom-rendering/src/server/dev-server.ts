@@ -1,15 +1,15 @@
 import type { Handler } from 'express';
-import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';
-import { handleAMPArticle } from '../web/server/index.article.amp';
-import { handleAppsArticle } from '../web/server/index.article.apps';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
+import { handleAMPArticle } from '../server/index.article.amp';
+import { handleAppsArticle } from '../server/index.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server/index.article.web';
-import { handleFront, handleFrontJson } from '../web/server/index.front.web';
+} from '../server/index.article.web';
+import { handleFront, handleFrontJson } from '../server/index.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;

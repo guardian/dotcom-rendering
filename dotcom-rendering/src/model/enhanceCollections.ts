@@ -1,16 +1,16 @@
+import { isNonNullable } from '@guardian/libs';
+import type { EditionId } from '../lib/edition';
+import type { Branding } from '../types/branding';
 import type {
 	DCRCollectionType,
 	FECollectionType,
 	FEFrontCard,
 } from '../types/front';
-import type { EditionId } from '../web/lib/edition';
+import { decideBadge } from './decideBadge';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
-import { decideBadge } from './decideBadge';
-import { isNonNullable } from '@guardian/libs';
-import { Branding } from '../types/branding';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',

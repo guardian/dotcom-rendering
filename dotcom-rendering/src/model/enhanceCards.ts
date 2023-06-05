@@ -1,5 +1,8 @@
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
+import { decideFormat } from '../lib/decideFormat';
+import type { EditionId } from '../lib/edition';
+import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -8,10 +11,7 @@ import type {
 	FESupportingContent,
 } from '../types/front';
 import type { FETagType, TagType } from '../types/tag';
-import { decideFormat } from '../web/lib/decideFormat';
-import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
-import { EditionId } from '../web/lib/edition';
 
 /**
  *

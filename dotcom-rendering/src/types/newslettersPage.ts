@@ -1,4 +1,4 @@
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
 import type { FooterType } from './footer';
@@ -11,7 +11,7 @@ type FENewslettersConfigType = {
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
-	dcrSentryDsn: string; // used in dotcom-rendering/src/web/client/sentryLoader/sentry.ts
+	dcrSentryDsn: string; // used in dotcom-rendering/src/client/sentryLoader/sentry.ts
 	switches: Switches;
 	abTests: ServerSideTests;
 	dfpAccountId: string;
