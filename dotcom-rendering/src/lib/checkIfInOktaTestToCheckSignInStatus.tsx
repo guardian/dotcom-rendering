@@ -1,33 +1,29 @@
 /* eslint-disable react-hooks/rules-of-hooks -- temporary to just see impact of logic in code*/
 import { getCookie } from '@guardian/libs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 // import { CheckUserSignInStatus } from './identity';
 
 function doOktaMethodForSignIn() {
 	console.log('doOktaMethodForSignIn called');
 	const [signInStatus, setSignInStatus] = useState(false);
 
-	const doOkta = async () => {
+	const loadOktaForSignInCheck = async () => {
 		console.log('doOkta called');
+		// await import('./identity');
 
 		const { CheckUserSignInStatus } = await import('./identity');
 		return CheckUserSignInStatus();
 	};
 
-	useEffect(() => {
-		doOkta()
-			.then((result) => {
-				setSignInStatus(result);
-				console.log('result', result);
-				console.log(
-					'signInStatus after setting the result',
-					signInStatus,
-				);
-			})
-			.catch((error) => {
-				console.error('error', error);
-			});
-	});
+	loadOktaForSignInCheck()
+		.then((result) => {
+			setSignInStatus(result);
+			console.log('result', result);
+			console.log('signInStatus after setting the result', signInStatus);
+		})
+		.catch((error) => {
+			console.error('error', error);
+		});
 
 	const isSignedIn = signInStatus;
 	// const isSignedIn = CheckUserSignInStatus();
@@ -35,11 +31,12 @@ function doOktaMethodForSignIn() {
 	return isSignedIn;
 }
 
-function doCookieMethodForSignIn() {
-	console.log('doCookieMethodForSignIn called');
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	return isSignedIn;
-}
+//Commented out for testing
+// function doCookieMethodForSignIn() {
+// 	console.log('doCookieMethodForSignIn called');
+// 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+// 	return isSignedIn;
+// }
 
 export function checkIfInOktaTestToCheckSignInStatus() {
 	console.log('checkIfInOktaTestToCheckSignInStatus called');
@@ -53,7 +50,8 @@ export function checkIfInOktaTestToCheckSignInStatus() {
 		console.log('isInOktaExperiment', isInOktaExperiment);
 		const isSignedIn = isInOktaExperiment
 			? doOktaMethodForSignIn()
-			: doCookieMethodForSignIn();
+			: // : doCookieMethodForSignIn(); //commented out to make it easier to test
+			  doOktaMethodForSignIn();
 		return isSignedIn;
 	} else {
 		console.log(
