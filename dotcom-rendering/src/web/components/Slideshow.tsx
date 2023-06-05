@@ -174,7 +174,6 @@ export const Slideshow = ({
 			{images.map((slideshowImage, index) => {
 				return (
 					<figure
-						data-slideshow="true"
 						key={slideshowImage.imageSrc}
 						css={[
 							index !== 0 && overlayImage,

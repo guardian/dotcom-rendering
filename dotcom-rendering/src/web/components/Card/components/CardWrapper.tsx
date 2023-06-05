@@ -43,12 +43,6 @@ const cardStyles = (
 			opacity: 0.1;
 		}
 
-		:hover {
-			figure[data-slideshow='true'] {
-				animation-play-state: paused;
-			}
-		}
-
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
