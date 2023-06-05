@@ -41,8 +41,10 @@ export const FrontMostViewed = ({
 		});
 	}
 
+	// Only render most popular if it's a network front
+	// and if deeply read trail list is not empty
 	const deeplyReadType: TrailTabType | undefined =
-		isNetworkFront && deeplyRead
+		isNetworkFront && deeplyRead && deeplyRead.length > 0
 			? {
 					heading: 'Deeply read',
 					trails: deeplyRead,
