@@ -8,7 +8,7 @@ import {
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import RefreshIcon from '../../static/icons/refresh.svg';
-import type { AMPArticleModel } from '../../types/ampArticleModel';
+import type { AMPArticleModel } from '../../types/article.amp';
 import type { ConfigType } from '../../types/config';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { Blocks } from './Blocks.amp';

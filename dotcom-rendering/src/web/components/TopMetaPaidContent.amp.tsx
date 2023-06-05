@@ -3,7 +3,7 @@ import { body, neutral, text, textSans } from '@guardian/source-foundations';
 import { getAgeWarning } from '../../lib/age-warning';
 import { getSoleContributor } from '../../lib/byline';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { AMPArticleModel } from '../../types/ampArticleModel';
+import type { AMPArticleModel } from '../../types/article.amp';
 import type { Branding } from '../../types/branding';
 import { BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';

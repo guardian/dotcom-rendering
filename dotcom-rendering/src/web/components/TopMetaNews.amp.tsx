@@ -5,7 +5,7 @@ import { getAgeWarning } from '../../lib/age-warning';
 import { getSoleContributor } from '../../lib/byline';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { AMPArticleModel } from '../../types/ampArticleModel';
+import type { AMPArticleModel } from '../../types/article.amp';
 import { Branding, BrandingRegionContainer } from './Branding.amp';
 import { Byline } from './Byline.amp';
 import { MainMedia } from './MainMedia.amp';

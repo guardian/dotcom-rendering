@@ -1,7 +1,7 @@
 import validator from 'amphtml-validator';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
-import { AmpArticlePage } from '../components/AmpArticlePage';
+import { AmpArticlePage } from '../components/ArticlePage.amp';
 import type { AnalyticsModel } from '../components/Analytics.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';
 import { renderArticle } from './render.article.amp';

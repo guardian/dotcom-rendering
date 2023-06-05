@@ -1,4 +1,4 @@
-import type { AmpExperiments } from '../../web/server/AMPExperimentCache';
+import type { AmpExperiments } from '../server/AMPExperimentCache.amp';
 
 type Props = {
 	experimentsData?: AmpExperiments;

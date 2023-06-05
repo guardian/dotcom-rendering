@@ -5,14 +5,14 @@ import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
-import { AmpArticlePage } from '../components/AmpArticlePage';
 import type { AnalyticsModel } from '../components/Analytics.amp';
+import { AmpArticlePage } from '../components/ArticlePage.amp';
 import { isAmpSupported } from '../components/Elements.amp';
 import type { PermutiveModel } from '../components/Permutive.amp';
 import { enhance } from '../lib/enhance.amp';
 import { generatePermutivePayload } from '../lib/permutive.amp';
 import { extractScripts } from '../lib/scripts.amp';
-import { getAmpExperimentCache } from './AMPExperimentCache';
+import { getAmpExperimentCache } from './AMPExperimentCache.amp';
 import { renderArticle } from './render.article.amp';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {

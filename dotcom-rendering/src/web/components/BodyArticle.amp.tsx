@@ -15,7 +15,7 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { AMPArticleModel } from '../../types/ampArticleModel';
+import type { AMPArticleModel } from '../../types/article.amp';
 import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';

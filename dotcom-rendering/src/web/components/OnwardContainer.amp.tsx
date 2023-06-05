@@ -10,7 +10,7 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 	MoustacheVariable,
-} from './moustache.amp';
+} from './Moustache.amp';
 import { ShowMoreButton } from './ShowMoreButton.amp';
 
 const inner = css`
