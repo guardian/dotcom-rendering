@@ -57,7 +57,7 @@ type Props = {
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
-	hasPageSkin: boolean;
+	hasPageSkin?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -413,7 +413,7 @@ export const FrontSection = ({
 	badge,
 	canShowMore,
 	ajaxUrl,
-	hasPageSkin,
+	hasPageSkin = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
