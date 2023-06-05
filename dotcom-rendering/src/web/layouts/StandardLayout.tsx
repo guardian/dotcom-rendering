@@ -38,7 +38,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -476,9 +476,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<Island deferUntil="idle">
-							<LabsHeader />
-						</Island>
+						<LabsHeader />
 					</Section>
 				</Stuck>
 			)}
@@ -556,7 +554,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
@@ -744,7 +742,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									showBottomSocialButtons={
 										article.showBottomSocialButtons
 									}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>

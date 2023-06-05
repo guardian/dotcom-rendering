@@ -8,10 +8,24 @@ type Props = { html: string };
 
 const buildElementTree = (node: Node): ReactNode => {
 	if (isElement(node)) {
-		return jsx(node.tagName.toLowerCase(), {
-			id: node.attributes.getNamedItem('id')?.value,
-			children: Array.from(node.childNodes).map(buildElementTree),
-		});
+		switch (node.nodeName) {
+			case 'A':
+				return jsx('a', {
+					href: node.attributes.getNamedItem('href')?.value,
+					target: node.attributes.getNamedItem('target')?.value,
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
+
+			case 'H2':
+				return jsx('h2', {
+					id: node.attributes.getNamedItem('id')?.value,
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
+			default:
+				return jsx(node.tagName.toLowerCase(), {
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
+		}
 	} else if (node.nodeType === node.TEXT_NODE) {
 		return node.textContent;
 	} else {

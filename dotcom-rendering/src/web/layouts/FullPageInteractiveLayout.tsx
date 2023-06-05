@@ -24,7 +24,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -313,9 +313,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<Island deferUntil="idle">
-								<LabsHeader />
-							</Island>
+							<LabsHeader />
 						</Section>
 					</Stuck>
 				)}

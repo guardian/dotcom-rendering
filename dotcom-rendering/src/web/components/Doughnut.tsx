@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	headline,
-	palette,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { headline, text, textSans } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
@@ -20,7 +15,12 @@ type SectionType = {
 };
 
 /** set decimal places */
-const PRECISION = 6;
+const PRECISION = 2;
+/** gap between segments in pixels */
+const SEGMENT_GAP = 2;
+/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
+const TAU = Math.PI * 2;
+const QUARTER_TURN = TAU / 4;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -39,13 +39,25 @@ const labelStyles = (background: string) => css`
 	text-anchor: middle;
 `;
 
-const lineStyles = css`
-	stroke-width: 2;
-	stroke: ${palette.neutral[97]};
-`;
-
 const withoutZeroSections = (sections: SectionType[]) =>
 	sections.filter((section) => section.value !== 0);
+
+const polarToCartesian = (angle: number, radius: number) =>
+	[Math.cos(angle) * radius, Math.sin(angle) * radius]
+		.map((n) => n.toFixed(PRECISION))
+		.join(',');
+
+const halfGap = (radius: number) => Math.asin(SEGMENT_GAP / 2 / radius);
+
+/** @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#elliptical_arc_curve */
+const arc = (start: number, end: number, radius: number) =>
+	[
+		`A${radius},${radius}`,
+		0, // rotation
+		Math.abs(end - start) <= TAU / 2 ? 0 : 1, // 1 - large / 0 small arc
+		end < start ? 0 : 1, // sweep flag (clockwise / )
+		polarToCartesian(end, radius),
+	].join(' ');
 
 export const Doughnut = ({
 	sections,
@@ -58,100 +70,87 @@ export const Doughnut = ({
 	const outerRadius = size / 2;
 	const innerRadius = outerRadius * (percentCutout / 100);
 	const radius = (innerRadius + outerRadius) / 2;
+	const strokeWidth = outerRadius - innerRadius;
 
 	const totalValue = sections
 		.map((section) => section.value)
 		.reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
-	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
-	const tau = Math.PI * 2;
-	const quarterTurn = Math.PI / 2;
-
-	const center = size / 2;
+	const halfSize = size / 2;
 
 	// Segments
 	const segments: {
-		dasharray: string;
-		dashoffset: string;
+		element: JSX.Element;
 		color: string;
 		transform: string;
 		label: string;
 		value: number;
 	}[] = [];
 
-	/**
-	 * These lines help distinguish segments.
-	 * Only shown for 2 segments or more.
-	 */
-	const separatingLines: { label: string; d: string }[] = [];
-
-	let angleStart = -quarterTurn;
+	let angleStart = -QUARTER_TURN;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
-		const angleLength = (value / totalValue) * tau;
+		const angleLength = (value / totalValue) * TAU;
 
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
-		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
-			.map((dash) => dash.toFixed(PRECISION))
-			.join(',');
 		/**
-		 * The offset is turned one quarter and rotated
-		 * with a transform to keep the top join as crisp
-		 * as possible.
+		 * Either a circle, for a single segment, or an arc for multiple segments.
 		 */
-		const dashoffset = (-(quarterTurn + angleStart) * radius).toFixed(
-			PRECISION,
-		);
-
+		const element =
+			angleLength === TAU ? (
+				<circle
+					r={radius}
+					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+			) : (
+				<path
+					d={[
+						`M${polarToCartesian(
+							angleStart + halfGap(outerRadius),
+							outerRadius,
+						)}`,
+						arc(
+							angleStart + halfGap(outerRadius),
+							angleEnd - halfGap(outerRadius),
+							outerRadius,
+						),
+						`L${polarToCartesian(
+							angleEnd - halfGap(innerRadius),
+							innerRadius,
+						)}`,
+						arc(
+							angleEnd - halfGap(innerRadius),
+							angleStart + halfGap(innerRadius),
+							innerRadius,
+						),
+						'Z',
+					].join(' ')}
+					fill={color}
+				/>
+			);
 		segments.push({
-			dasharray,
-			dashoffset,
+			element,
 			label,
 			value,
-			transform: [
-				'translate(',
-				(Math.cos(angleMid) * radius + center).toFixed(PRECISION),
-				', ',
-				(Math.sin(angleMid) * radius + center).toFixed(PRECISION),
-				')',
-			].join(''),
+			transform: `translate(${polarToCartesian(angleMid, radius)})`,
 			color,
-		});
-
-		const x = Math.cos(angleEnd);
-		const y = Math.sin(angleEnd);
-
-		separatingLines.push({
-			label,
-			d: [
-				`M${center},${center}`,
-				`m${x * innerRadius},${y * innerRadius}`, // start the line from inner radius
-				`l${x * (outerRadius - innerRadius)},${
-					y * (outerRadius - innerRadius)
-				}`, // stop it at the outer radius
-			].join(' '),
 		});
 
 		angleStart = angleEnd;
 	}
 
 	return (
-		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+		<svg
+			width={size}
+			height={size}
+			viewBox={`${-halfSize} ${-halfSize} ${size} ${size}`}
+		>
 			{segments.map((segment) => (
 				<g key={segment.label + segment.color}>
-					<circle
-						cx={center}
-						cy={center}
-						r={radius}
-						fill="none"
-						stroke={segment.color}
-						strokeWidth={outerRadius - innerRadius}
-						strokeDasharray={segment.dasharray}
-						strokeDashoffset={segment.dashoffset}
-						// rotate back a quarter turn
-						transform={`rotate(-90 ${center} ${center})`}
-					/>
+					{segment.element}
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
@@ -162,15 +161,7 @@ export const Doughnut = ({
 					</text>
 				</g>
 			))}
-			{separatingLines.length >= 2 &&
-				separatingLines.map(({ d, label }) => (
-					<path key={label} css={lineStyles} d={d} />
-				))}
-			<text
-				css={unitStyles}
-				transform={`translate(${center}, ${center})`}
-				dy="0.4em"
-			>
+			<text css={unitStyles} dy="0.4em">
 				%
 			</text>
 		</svg>

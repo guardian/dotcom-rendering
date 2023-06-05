@@ -11,7 +11,6 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { Badge } from '../components/Badge';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
@@ -65,6 +64,7 @@ const isToggleable = (
 };
 
 const decideAdSlot = (
+	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
@@ -72,6 +72,7 @@ const decideAdSlot = (
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 ) => {
+	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
@@ -99,19 +100,6 @@ const decideAdSlot = (
 	return null;
 };
 
-const showBadge = (displayName: string) => {
-	if (displayName === 'This is Europe')
-		return (
-			<Badge
-				imageUrl={
-					'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg'
-				}
-				seriesTag={'world/series/this-is-europe'}
-			/>
-		);
-	return undefined;
-};
-
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
@@ -133,9 +121,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront,
 	);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
@@ -282,7 +267,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											fullWidth={true}
 											padSides={false}
 											showTopBorder={false}
-											showSideBorders={true}
+											showSideBorders={false}
 											ophanComponentLink={
 												ophanComponentLink
 											}
@@ -296,6 +281,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									</SnapCssSandbox>
 								)}
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -347,6 +333,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									/>
 								</Section>
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -389,7 +376,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										<CPScottHeader />
 									)
 								}
-								badge={showBadge(collection.displayName)}
+								badge={collection.badge}
 								sectionId={ophanName}
 								collectionId={collection.id}
 								pageId={front.pressedPage.id}
@@ -415,16 +402,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={renderAds}
 								/>
 							</FrontSection>
-							{renderAds &&
-								decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+							{decideAdSlot(
+								renderAds,
+								index,
+								front.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+								format.display,
+								mobileAdPositions,
+							)}
 						</>
 					);
 				})}
@@ -436,17 +422,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
+			)}
 
 			{NAV.subNavSections && (
 				<Section

@@ -44,6 +44,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// The content displayed by the Details component
+	'summaryDetails',
+
 	// Liveblog toast
 	'toast',
 

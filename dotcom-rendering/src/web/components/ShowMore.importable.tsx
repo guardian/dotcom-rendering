@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isNonNullable } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -96,8 +97,7 @@ export const ShowMore = ({
 			container?.querySelectorAll('a') ?? [],
 		)
 			.map((element) => element.attributes.getNamedItem('href')?.value)
-			// Remove values that are not strings and coerce the type to a string[]
-			.filter((item): item is string => !!item);
+			.filter(isNonNullable);
 
 		setExistingCardLinks(containerLinks);
 	}, []);

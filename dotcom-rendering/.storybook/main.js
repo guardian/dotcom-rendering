@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const {
 	babelExclude,
 	getLoaders,
-} = require('../scripts/webpack/webpack.config.browser');
+} = require('../scripts/webpack/webpack.config.client');
 
 // Generate dynamic Card and Layout stories
 require('../scripts/gen-stories/gen-stories');

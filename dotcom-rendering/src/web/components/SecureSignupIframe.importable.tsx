@@ -15,7 +15,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
-} from '../browser/ophan/ophan';
+} from '../client/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 

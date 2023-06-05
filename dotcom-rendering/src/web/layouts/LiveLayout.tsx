@@ -424,7 +424,7 @@ export const LiveLayout = ({
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 								isMatch={true}
 							/>
 						}
@@ -439,7 +439,7 @@ export const LiveLayout = ({
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 								isMatch={true}
 							/>
 						</Hide>
@@ -475,7 +475,7 @@ export const LiveLayout = ({
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -946,7 +946,9 @@ export const LiveLayout = ({
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</div>
@@ -1103,7 +1105,9 @@ export const LiveLayout = ({
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</Accordion>

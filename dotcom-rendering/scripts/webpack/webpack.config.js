@@ -21,7 +21,7 @@ const sessionId = uuidv4();
 let builds = 0;
 
 /**
- * @param {{ platform: 'server' | 'browser.legacy' | 'browser.modern' | 'browser.variant' | 'browser.apps'}} options
+ * @param {{ platform: 'server' | 'client.legacy' | 'client.modern' | 'client.variant' | 'client.apps'}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -141,18 +141,18 @@ module.exports = [
 	),
 	merge(
 		commonConfigs({
-			platform: 'browser.modern',
+			platform: 'client.modern',
 		}),
-		require(`./webpack.config.browser`)({
+		require(`./webpack.config.client`)({
 			bundle: 'modern',
 			sessionId,
 		}),
 	),
 	merge(
 		commonConfigs({
-			platform: 'browser.apps',
+			platform: 'client.apps',
 		}),
-		require(`./webpack.config.browser`)({
+		require(`./webpack.config.client`)({
 			bundle: 'apps',
 			sessionId,
 		}),
@@ -161,9 +161,9 @@ module.exports = [
 		? [
 				merge(
 					commonConfigs({
-						platform: 'browser.variant',
+						platform: 'client.variant',
 					}),
-					require(`./webpack.config.browser`)({
+					require(`./webpack.config.client`)({
 						bundle: 'variant',
 						sessionId,
 					}),
@@ -175,9 +175,9 @@ module.exports = [
 		? [
 				merge(
 					commonConfigs({
-						platform: 'browser.legacy',
+						platform: 'client.legacy',
 					}),
-					require(`./webpack.config.browser`)({
+					require(`./webpack.config.client`)({
 						bundle: 'legacy',
 						sessionId,
 					}),

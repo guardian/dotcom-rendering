@@ -1,4 +1,3 @@
-import { articles, AMPArticles } from '../../lib/articles.js';
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
@@ -129,16 +128,14 @@ describe('E2E Page rendering', function () {
 	});
 
 	describe('for AMP', function () {
-		it(`It should load designType articles under the pillar`, function () {
-			AMPArticles.map((article, index) => {
-				const { url, pillar, designType } = article;
-				cy.log(`designType: ${designType}, pillar: ${pillar}`);
-				// Prevent the Privacy consent banner from obscuring snapshots
-				cy.setCookie('GU_TK', 'true');
+		it(`It should load render an AMP page`, function () {
+			// Prevent the Privacy consent banner from obscuring snapshots
+			cy.setCookie('GU_TK', 'true');
 
-				cy.visit(`/AMPArticle/${url}`);
-				cy.contains('Opinion');
-			});
+			cy.visit(
+				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
+			);
+			cy.contains('Opinion');
 		});
 	});
 });

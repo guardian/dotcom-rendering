@@ -105,7 +105,7 @@
 		"@types/amphtml-validator": "1.0.1",
 		"@types/body-parser": "1.19.2",
 		"@types/clean-css": "4.2.6",
-		"@types/compression": "0.0.36",
+		"@types/compression": "1.7.2",
 		"@types/connect": "3.4.35",
 		"@types/crypto-js": "4.1.1",
 		"@types/dompurify": "3.0.2",
@@ -146,7 +146,7 @@
 		"@types/youtube": "0.0.46",
 		"@typescript-eslint/eslint-plugin": "5.52.0",
 		"@typescript-eslint/eslint-plugin-tslint": "5.52.0",
-		"@typescript-eslint/parser": "5.52.0",
+		"@typescript-eslint/parser": "5.59.7",
 		"@yarnpkg/lockfile": "1.1.0",
 		"ajv": "8.12.0",
 		"ajv-formats": "2.1.1",
@@ -218,7 +218,7 @@
 		"ophan-tracker-js": "1.4.0",
 		"parse5": "7.1.2",
 		"pm2": "5.0.0",
-		"preact": "10.13.2",
+		"preact": "10.15.1",
 		"preact-render-to-string": "6.0.2",
 		"prettier-eslint": "15.0.1",
 		"pretty-bytes": "6.1.0",
@@ -258,7 +258,7 @@
 		"to-string-loader": "1.2.0",
 		"tough-cookie": "4.1.2",
 		"trusted-types": "2.0.0",
-		"ts-loader": "9.4.2",
+		"ts-loader": "9.4.3",
 		"ts-unused-exports": "8.0.5",
 		"tslib": "2.5.0",
 		"typescript-json-schema": "0.54.0",
@@ -279,6 +279,6 @@
 		"webpack-messages": "2.0.4",
 		"webpack-node-externals": "3.0.0",
 		"webpack-sources": "3.2.3",
-		"zod": "3.20.6"
+		"zod": "3.21.4"
 	}
 }

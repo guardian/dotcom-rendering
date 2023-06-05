@@ -1,4 +1,9 @@
 name: DCR Compressed Size
+
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   pull_request:
     paths-ignore:
