@@ -229,6 +229,7 @@ const buildElementTree =
 			case 'A':
 				return jsx('a', {
 					href: getAttrs(node)?.getNamedItem('href')?.value,
+					target: getAttrs(node)?.getNamedItem('target')?.value,
 					key,
 					children,
 				});
