@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
-import { extractArticleNav } from '../../web/server/articleToHtml';
+import { extractArticleNav } from '../../web/server/render.article.web';
 import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { AnalyticsModel } from '../components/Analytics.amp';

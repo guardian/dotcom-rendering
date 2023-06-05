@@ -28,7 +28,7 @@ import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
-import { extractArticleNav } from '../server/articleToHtml';
+import { extractArticleNav } from '../server/render.article.web';
 import { DecideLayout } from './DecideLayout';
 
 const Fixtures: { [key: string]: FEArticleType } = {

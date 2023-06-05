@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { editionList } from '../lib/edition';
-import { extractArticleNav } from '../server/articleToHtml';
+import { extractArticleNav } from '../server/render.article.web';
 import { Footer } from './Footer';
 import { Section } from './Section';
 
