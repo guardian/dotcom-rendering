@@ -11,7 +11,7 @@ export const removeBusinessLiveblogEpics: ABTest = {
 	audienceOffset: 20 / 100,
 	audienceCriteria: 'Business liveblogs',
 	successMeasure: 'Ad revenue increases on business liveblogs',
-	canRun: () => !!(window.guardian.config.page.contentType === 'LiveBlog'),
+	canRun: () => window.guardian.config.page.contentType === 'LiveBlog',
 	variants: [
 		{
 			id: 'control',
