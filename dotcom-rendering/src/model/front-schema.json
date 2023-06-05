@@ -773,21 +773,13 @@
                                                                             "imageSrc": {
                                                                                 "type": "string"
                                                                             },
-                                                                            "imageSrcWidth": {
-                                                                                "type": "string"
-                                                                            },
-                                                                            "imageSrcHeight": {
-                                                                                "type": "string"
-                                                                            },
                                                                             "imageCaption": {
                                                                                 "type": "string"
                                                                             }
                                                                         },
                                                                         "required": [
                                                                             "imageCaption",
-                                                                            "imageSrc",
-                                                                            "imageSrcHeight",
-                                                                            "imageSrcWidth"
+                                                                            "imageSrc"
                                                                         ]
                                                                     }
                                                                 }
@@ -1485,21 +1477,13 @@
                                                                             "imageSrc": {
                                                                                 "type": "string"
                                                                             },
-                                                                            "imageSrcWidth": {
-                                                                                "type": "string"
-                                                                            },
-                                                                            "imageSrcHeight": {
-                                                                                "type": "string"
-                                                                            },
                                                                             "imageCaption": {
                                                                                 "type": "string"
                                                                             }
                                                                         },
                                                                         "required": [
                                                                             "imageCaption",
-                                                                            "imageSrc",
-                                                                            "imageSrcHeight",
-                                                                            "imageSrcWidth"
+                                                                            "imageSrc"
                                                                         ]
                                                                     }
                                                                 }
@@ -2197,21 +2181,13 @@
                                                                             "imageSrc": {
                                                                                 "type": "string"
                                                                             },
-                                                                            "imageSrcWidth": {
-                                                                                "type": "string"
-                                                                            },
-                                                                            "imageSrcHeight": {
-                                                                                "type": "string"
-                                                                            },
                                                                             "imageCaption": {
                                                                                 "type": "string"
                                                                             }
                                                                         },
                                                                         "required": [
                                                                             "imageCaption",
-                                                                            "imageSrc",
-                                                                            "imageSrcHeight",
-                                                                            "imageSrcWidth"
+                                                                            "imageSrc"
                                                                         ]
                                                                     }
                                                                 }
