@@ -1,7 +1,7 @@
 import type { Handler } from 'express';
-import { handleAMPArticle } from '../amp/server/index.article';
-import { handleAppsArticle } from '../web/server/index.article.apps';
 import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';
+import { handleAMPArticle } from '../web/server/index.article.amp';
+import { handleAppsArticle } from '../web/server/index.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
