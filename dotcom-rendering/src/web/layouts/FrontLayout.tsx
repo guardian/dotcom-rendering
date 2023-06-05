@@ -18,6 +18,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsSection } from '../components/LabsSection';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -32,7 +33,6 @@ import {
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
-import { LabsSection } from '../components/LabsSection';
 
 interface Props {
 	front: DCRFrontType;
@@ -361,6 +361,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
+										hasPageSkin={hasPageSkin}
 									/>
 								</Section>
 								{decideAdSlot(

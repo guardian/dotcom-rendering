@@ -7,7 +7,13 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-const leftWidth = (size: LeftColSize) => {
+const leftWidth = (size: LeftColSize, hasPageSkin: boolean) => {
+	if (hasPageSkin) {
+		return css`
+			padding-right: 10px;
+			display: none;
+		`;
+	}
 	switch (size) {
 		case 'wide': {
 			return css`
@@ -79,6 +85,7 @@ type Props = {
 	borderColour?: string;
 	size?: LeftColSize;
 	verticalMargins?: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const LeftColumn = ({
@@ -87,12 +94,13 @@ export const LeftColumn = ({
 	borderColour = border.secondary,
 	size = 'compact',
 	verticalMargins = true,
+	hasPageSkin = false,
 }: Props) => {
 	return (
 		<section
 			css={[
 				positionRelative,
-				leftWidth(size),
+				leftWidth(size, hasPageSkin),
 				borderType === 'full' && fullRightBorder(borderColour),
 				verticalMargins &&
 					css`
