@@ -129,7 +129,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.isNetworkFront && front.deeplyRead && front.deeplyRead.length > 0;
+		front.config.switches.deeplyReadSwitch &&
+		front.isNetworkFront &&
+		front.deeplyRead &&
+		front.deeplyRead.length > 0;
 
 	return (
 		<>
@@ -304,8 +307,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						!isPaidContent &&
 						front.config.switches.mostViewedFronts
 					) {
-						const deeplyReadData = front.config.switches
-							.deeplyReadSwitch
+						const deeplyReadData = showMostPopular
 							? front.deeplyRead
 							: undefined;
 						return (
