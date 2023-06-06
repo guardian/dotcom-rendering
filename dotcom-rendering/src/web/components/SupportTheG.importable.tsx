@@ -49,6 +49,7 @@ type Props = {
 		support: string;
 		contribute: string;
 	};
+	hasPageSkin?: boolean;
 };
 
 const headerStyles = css`
@@ -76,22 +77,27 @@ const headerStyles = css`
 	}
 `;
 
-const messageStyles = (isThankYouMessage: boolean) => css`
-	color: ${brandAlt[400]};
-	${headline.xxsmall({ fontWeight: 'bold' })}
-	padding-top: 3px;
-	margin-bottom: 3px;
-
-	${from.desktop} {
-		${headline.xsmall({ fontWeight: 'bold' })}
+const messageStyles = (isThankYouMessage: boolean, hasPageSkin: boolean) => {
+	const untilLeftCol = css`
+		color: ${brandAlt[400]};
+		${headline.xxsmall({ fontWeight: 'bold' })}
+		padding-top: 3px;
+		margin-bottom: 3px;
+		${from.desktop} {
+			${headline.xsmall({ fontWeight: 'bold' })}
+		}
+	`;
+	if (hasPageSkin) {
+		return untilLeftCol;
 	}
-
-	${from.leftCol} {
-		${isThankYouMessage
-			? headline.small({ fontWeight: 'bold' })
-			: headline.medium({ fontWeight: 'bold' })}
-	}
-`;
+	return css`
+		${from.leftCol} {
+			${isThankYouMessage
+				? headline.small({ fontWeight: 'bold' })
+				: headline.medium({ fontWeight: 'bold' })}
+		}
+	`;
+};
 
 const linkStyles = css`
 	background: ${brandAlt[400]};
@@ -256,6 +262,7 @@ type ReaderRevenueLinksNativeProps = {
 	};
 	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
+	hasPageSkin: boolean;
 };
 
 const ReaderRevenueLinksNative = ({
@@ -265,6 +272,7 @@ const ReaderRevenueLinksNative = ({
 	urls,
 	ophanRecord,
 	pageViewId,
+	hasPageSkin,
 }: ReaderRevenueLinksNativeProps) => {
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
@@ -319,7 +327,10 @@ const ReaderRevenueLinksNative = ({
 		return (
 			<div css={inHeader && headerStyles}>
 				<div css={inHeader && hiddenUntilTablet}>
-					<div css={messageStyles(true)}> Thank you </div>
+					<div css={messageStyles(true, hasPageSkin)}>
+						{' '}
+						Thank you{' '}
+					</div>
 					<div css={subMessageStyles}>
 						Your support powers our independent journalism
 					</div>
@@ -354,7 +365,7 @@ const ReaderRevenueLinksNative = ({
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
 			<div css={inHeader && hiddenUntilTablet}>
-				<div css={messageStyles(false)}>
+				<div css={messageStyles(false, hasPageSkin)}>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
 				<div css={subMessageStyles}>
@@ -378,6 +389,7 @@ export const SupportTheG = ({
 	remoteHeader,
 	urls,
 	contributionsServiceUrl,
+	hasPageSkin = false,
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
 	const pageViewId = window.guardian.config.ophan.pageViewId;
@@ -415,6 +427,7 @@ export const SupportTheG = ({
 				urls={urls}
 				ophanRecord={ophanRecord}
 				pageViewId={pageViewId}
+				hasPageSkin={hasPageSkin}
 			/>
 		);
 	}

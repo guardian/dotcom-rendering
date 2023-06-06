@@ -23,6 +23,7 @@ type Props = {
 	idApiUrl: string;
 	isInEuropeTest: boolean;
 	headerTopBarSearchCapiSwitch: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const Header = ({
@@ -36,6 +37,7 @@ export const Header = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
+	hasPageSkin = false,
 }: Props) => (
 	<div css={headerStyles}>
 		<Island>
@@ -48,6 +50,7 @@ export const Header = ({
 				idApiUrl={idApiUrl}
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 				isInEuropeTest={isInEuropeTest}
+				hasPageSkin={hasPageSkin}
 			/>
 		</Island>
 		<div
@@ -61,7 +64,7 @@ export const Header = ({
 			<Island deferUntil="hash" clientOnly={true}>
 				<Snow />
 			</Island>
-			<Logo editionId={editionId} />
+			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG
 					urls={urls}
@@ -70,6 +73,7 @@ export const Header = ({
 					inHeader={true}
 					remoteHeader={remoteHeader}
 					contributionsServiceUrl={contributionsServiceUrl}
+					hasPageSkin={hasPageSkin}
 				/>
 			</Island>
 		</div>
