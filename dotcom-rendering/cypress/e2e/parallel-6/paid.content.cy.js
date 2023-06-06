@@ -55,7 +55,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=guardian%20jobs');
+			expect(requestURL).to.include('el=westfield');
 		});
 	});
 
@@ -96,7 +96,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=guardian%20jobs');
+			expect(requestURL).to.include('el=westfield');
 		});
 	});
 });
