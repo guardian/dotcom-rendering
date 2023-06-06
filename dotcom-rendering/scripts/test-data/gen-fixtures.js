@@ -22,6 +22,8 @@ const root = resolve(__dirname, '..', '..');
  * Edit the articles array below to add or amend the urls that we use. The script will fetch
  * ${article.url}.json?dcr and save the response in ${article.name}.ts in the fixtures folder
  *
+ * You need to be running the dev server for this script to complete
+ *
  * Usage
  * $ node scripts/test-data/gen-fixtures.js
  */
@@ -139,36 +141,40 @@ const HEADER = `/**
 try {
 	// Article fixtures
 	const requests = articles.map((article) => {
-		return fetch(`${article.url}.json?dcr`)
+		return fetch(`http://localhost:3030/ArticleJson/${article.url}`)
 			.then((res) => res.json())
 			.then((json) => {
+				const articleData = json.data.CAPIArticle;
+
 				// Override config
-				json.config = { ...config, ...configOverrides };
+				articleData.config = { ...config, ...configOverrides };
 				// Override switches
-				json.config.switches = {
-					...json.config.switches,
+				articleData.config.switches = {
+					...articleData.config.switches,
 					...switchOverrides,
 				};
 
-				// Override this config property but only for Labs articles
-				// TODO: Remove this once we are fully typing the config property
-				// and no longer need to use a fixed `config.js` object to replace
-				// the live one
-				if (json.format.theme === 'Labs') {
-					json.config.isPaidContent = true;
-				}
-
-				// Manual hack for LiveBlog vs DeadBlog
-				if (article.name === 'Live') {
-					json.format.design = 'LiveBlogDesign';
-				}
+				// Override frontendData config
+				articleData.frontendData.config = {
+					...config,
+					...configOverrides,
+				};
+				// Override frontendData switches
+				articleData.frontendData.config.switches = {
+					...articleData.frontendData.config.switches,
+					...switchOverrides,
+				};
 
 				// Write the new fixture data
 				const contents = `${HEADER}
 
-				import type { FEArticleType } from '../../../src/types/frontend';
+				import type { DCRArticleType } from '../../../src/types/article';
 
-				export const ${article.name}: FEArticleType = ${JSON.stringify(json, null, 4)}`;
+				export const ${article.name}: DCRArticleType = ${JSON.stringify(
+					articleData,
+					null,
+					4,
+				)}`;
 				fs.writeFileSync(
 					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,

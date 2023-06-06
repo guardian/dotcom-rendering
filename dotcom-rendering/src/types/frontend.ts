@@ -17,7 +17,7 @@ import type { FETrailType } from './trails';
  * schema definition.
  */
 export interface FEArticleType {
-	capiContent: CAPIContent;
+	capiContent?: CAPIContent;
 	headline: string;
 	standfirst: string;
 	webTitle: string;

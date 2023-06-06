@@ -8,7 +8,7 @@ import { validateAsArticleType } from '../../model/validate';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import type { DCRArticleType } from '../../types/article';
 import type { FEArticleBadgeType } from '../../types/badge';
-import type { FEArticleType, FEArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import {
 	renderBlocks,
 	renderHtml,
@@ -74,7 +74,7 @@ const parseArticleData = (body: unknown): DCRArticleType => {
 		commercialProperties: frontendData.commercialProperties,
 		editionId: frontendData.editionId,
 		/* 'Parsed' CAPI data */
-		webUrl: frontendData.capiContent.webUrl,
+		webUrl: frontendData.capiContent?.webUrl ?? frontendData.webURL,
 	};
 };
 

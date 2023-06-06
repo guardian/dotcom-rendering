@@ -22,7 +22,7 @@ import { SpecialReport } from '../../../fixtures/generated/articles/SpecialRepor
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { DCRArticleType } from '../../types/article';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import { embedIframe } from '../client/embedIframe';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
@@ -31,7 +31,7 @@ import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { DecideLayout } from './DecideLayout';
 
-const Fixtures: { [key: string]: FEArticleType } = {
+const Fixtures: { [key: string]: DCRArticleType } = {
 	Standard,
 	Gallery,
 	Audio,
@@ -63,11 +63,13 @@ const HydratedLayout = ({
 	serverArticle,
 	renderingTarget,
 }: {
-	serverArticle: FEArticleType;
+	serverArticle: DCRArticleType;
 	renderingTarget: RenderingTarget;
 }) => {
 	const NAV = extractNAV(serverArticle.nav);
-	const format: ArticleFormat = decideFormat(serverArticle.format);
+	const format: ArticleFormat = decideFormat(
+		serverArticle.frontendData.format,
+	);
 	useEffect(() => {
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
@@ -138,7 +140,10 @@ export const Liveblog = () => {
 		<HydratedLayout
 			serverArticle={{
 				...Live,
-				keyEvents: [],
+				frontendData: {
+					...Live.frontendData,
+					keyEvents: [],
+				},
 			}}
 			renderingTarget="Web"
 		/>

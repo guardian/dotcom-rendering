@@ -11,318 +11,3118 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { DCRArticleType } from '../../../src/types/article';
 
-export const Labs: FEArticleType = {
-	slotMachineFlags: '',
-	main: '<figure class="element element-image" data-media-id="8b723eb4d94368efc040dc26313a01cec69b588a"> <img src="https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/1000.jpg" alt="Are you royal?" width="1000" height="600" class="gu-image" /> </figure>',
-	subMetaSectionLinks: [],
-	commercialProperties: {
-		US: {
-			branding: {
-				brandingType: {
-					name: 'paid-content',
-				},
-				sponsorName: 'Amazon',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
-					dimensions: {
-						width: 140,
-						height: 90,
+export const Labs: DCRArticleType = {
+	frontendData: {
+		slotMachineFlags: '',
+		main: '<figure class="element element-image" data-media-id="8b723eb4d94368efc040dc26313a01cec69b588a"> <img src="https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/1000.jpg" alt="Are you royal?" width="1000" height="600" class="gu-image" /> </figure>',
+		subMetaSectionLinks: [],
+		commercialProperties: {
+			UK: {
+				branding: {
+					brandingType: {
+						name: 'paid-content',
 					},
-					link: 'https://www.amazon.com/dp/B07FV6K8HF',
-					label: 'Paid for by',
+					sponsorName: 'Amazon',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: 'https://www.amazon.com/dp/B07FV6K8HF',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/info/2016/jan/25/content-funding',
 				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+				adTargeting: [
+					{
+						name: 'k',
+						value: ['whats-in-your-blood-'],
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'br',
+						value: 'p',
+					},
+					{
+						name: 'edition',
+						value: 'uk',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/9djqm',
+					},
+					{
+						name: 'tn',
+						value: ['advertisement-features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
 			},
-			adTargeting: [
+			US: {
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'Amazon',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: 'https://www.amazon.com/dp/B07FV6K8HF',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/info/2016/jan/25/content-funding',
+				},
+				adTargeting: [
+					{
+						name: 'k',
+						value: ['whats-in-your-blood-'],
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'br',
+						value: 'p',
+					},
+					{
+						name: 'edition',
+						value: 'us',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/9djqm',
+					},
+					{
+						name: 'tn',
+						value: ['advertisement-features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			AU: {
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'Amazon',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: 'https://www.amazon.com/dp/B07FV6K8HF',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/info/2016/jan/25/content-funding',
+				},
+				adTargeting: [
+					{
+						name: 'k',
+						value: ['whats-in-your-blood-'],
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'br',
+						value: 'p',
+					},
+					{
+						name: 'edition',
+						value: 'au',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/9djqm',
+					},
+					{
+						name: 'tn',
+						value: ['advertisement-features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			INT: {
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'Amazon',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: 'https://www.amazon.com/dp/B07FV6K8HF',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/info/2016/jan/25/content-funding',
+				},
+				adTargeting: [
+					{
+						name: 'k',
+						value: ['whats-in-your-blood-'],
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'br',
+						value: 'p',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/9djqm',
+					},
+					{
+						name: 'tn',
+						value: ['advertisement-features'],
+					},
+					{
+						name: 'edition',
+						value: 'int',
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+				],
+			},
+			EUR: {
+				branding: {
+					brandingType: {
+						name: 'paid-content',
+					},
+					sponsorName: 'Amazon',
+					logo: {
+						src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+						dimensions: {
+							width: 140,
+							height: 90,
+						},
+						link: 'https://www.amazon.com/dp/B07FV6K8HF',
+						label: 'Paid for by',
+					},
+					aboutThisLink:
+						'https://www.theguardian.com/info/2016/jan/25/content-funding',
+				},
+				adTargeting: [
+					{
+						name: 'k',
+						value: ['whats-in-your-blood-'],
+					},
+					{
+						name: 'su',
+						value: ['0'],
+					},
+					{
+						name: 'br',
+						value: 'p',
+					},
+					{
+						name: 'ct',
+						value: 'article',
+					},
+					{
+						name: 'url',
+						value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					},
+					{
+						name: 'tn',
+						value: ['advertisement-features'],
+					},
+					{
+						name: 'p',
+						value: 'ng',
+					},
+					{
+						name: 'sh',
+						value: 'https://www.theguardian.com/p/9djqm',
+					},
+					{
+						name: 'edition',
+						value: 'eur',
+					},
+				],
+			},
+		},
+		beaconURL: '//phar.gu-web.net',
+		hasRelated: true,
+		webPublicationSecondaryDateDisplay:
+			'Last modified on Tue 17 Aug 2021 16.00 BST',
+		editionLongForm: 'UK edition',
+		publication: 'theguardian.com',
+		trailText: 'Experts weigh in',
+		subMetaKeywordLinks: [
+			{
+				url: '/whats-in-your-blood-/whats-in-your-blood-',
+				title: "What's in your blood?",
+			},
+			{
+				url: '/tone/advertisement-features',
+				title: 'advertisement features',
+			},
+		],
+		contentType: 'Article',
+		isRightToLeftLang: false,
+		nav: {
+			currentUrl: '/whats-in-your-blood-',
+			pillars: [
 				{
-					name: 'k',
-					value: ['whats-in-your-blood-'],
+					title: 'News',
+					url: '/',
+					longTitle: 'Headlines',
+					iconName: 'home',
+					children: [
+						{
+							title: 'UK',
+							url: '/uk-news',
+							longTitle: 'UK news',
+							children: [
+								{
+									title: 'UK politics',
+									url: '/politics',
+								},
+								{
+									title: 'Education',
+									url: '/education',
+									children: [
+										{
+											title: 'Schools',
+											url: '/education/schools',
+										},
+										{
+											title: 'Teachers',
+											url: '/teacher-network',
+										},
+										{
+											title: 'Universities',
+											url: '/education/universities',
+										},
+										{
+											title: 'Students',
+											url: '/education/students',
+										},
+									],
+								},
+								{
+									title: 'Media',
+									url: '/media',
+								},
+								{
+									title: 'Society',
+									url: '/society',
+								},
+								{
+									title: 'Law',
+									url: '/law',
+								},
+								{
+									title: 'Scotland',
+									url: '/uk/scotland',
+								},
+								{
+									title: 'Wales',
+									url: '/uk/wales',
+								},
+								{
+									title: 'Northern Ireland',
+									url: '/uk/northernireland',
+								},
+							],
+						},
+						{
+							title: 'World',
+							url: '/world',
+							longTitle: 'World news',
+							children: [
+								{
+									title: 'Europe',
+									url: '/world/europe-news',
+								},
+								{
+									title: 'US',
+									url: '/us-news',
+									longTitle: 'US news',
+								},
+								{
+									title: 'Americas',
+									url: '/world/americas',
+								},
+								{
+									title: 'Asia',
+									url: '/world/asia',
+								},
+								{
+									title: 'Australia',
+									url: '/australia-news',
+									longTitle: 'Australia news',
+								},
+								{
+									title: 'Middle East',
+									url: '/world/middleeast',
+								},
+								{
+									title: 'Africa',
+									url: '/world/africa',
+								},
+								{
+									title: 'Inequality',
+									url: '/inequality',
+								},
+								{
+									title: 'Global development',
+									url: '/global-development',
+								},
+							],
+						},
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Newsletters',
+							url: '/email-newsletters',
+						},
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Coronavirus',
+							url: '/world/coronavirus-outbreak',
+							longTitle: 'Coronavirus',
+						},
+						{
+							title: 'Business',
+							url: '/business',
+							children: [
+								{
+									title: 'Economics',
+									url: '/business/economics',
+								},
+								{
+									title: 'Banking',
+									url: '/business/banking',
+								},
+								{
+									title: 'Money',
+									url: '/money',
+									children: [
+										{
+											title: 'Property',
+											url: '/money/property',
+										},
+										{
+											title: 'Pensions',
+											url: '/money/pensions',
+										},
+										{
+											title: 'Savings',
+											url: '/money/savings',
+										},
+										{
+											title: 'Borrowing',
+											url: '/money/debt',
+										},
+										{
+											title: 'Careers',
+											url: '/money/work-and-careers',
+										},
+									],
+								},
+								{
+									title: 'Markets',
+									url: '/business/stock-markets',
+								},
+								{
+									title: 'Project Syndicate',
+									url: '/business/series/project-syndicate-economists',
+								},
+								{
+									title: 'B2B',
+									url: '/business-to-business',
+								},
+								{
+									title: 'Retail',
+									url: '/business/retail',
+								},
+							],
+						},
+						{
+							title: 'Environment',
+							url: '/environment',
+							children: [
+								{
+									title: 'Climate crisis',
+									url: '/environment/climate-crisis',
+								},
+								{
+									title: 'Wildlife',
+									url: '/environment/wildlife',
+								},
+								{
+									title: 'Energy',
+									url: '/environment/energy',
+								},
+								{
+									title: 'Pollution',
+									url: '/environment/pollution',
+								},
+							],
+						},
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Science',
+							url: '/science',
+						},
+						{
+							title: 'Tech',
+							url: '/technology',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+					],
 				},
 				{
-					name: 'su',
-					value: ['0'],
+					title: 'Opinion',
+					url: '/commentisfree',
+					longTitle: 'Opinion home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'The Guardian view',
+							url: '/profile/editorial',
+						},
+						{
+							title: 'Columnists',
+							url: '/index/contributors',
+						},
+						{
+							title: 'Cartoons',
+							url: '/cartoons/archive',
+						},
+						{
+							title: 'Opinion videos',
+							url: '/type/video+tone/comment',
+						},
+						{
+							title: 'Letters',
+							url: '/tone/letters',
+						},
+					],
 				},
 				{
-					name: 'br',
-					value: 'p',
+					title: 'Sport',
+					url: '/sport',
+					longTitle: 'Sport home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Football',
+							url: '/football',
+							children: [
+								{
+									title: 'Live scores',
+									url: '/football/live',
+									longTitle: 'football/live',
+								},
+								{
+									title: 'Tables',
+									url: '/football/tables',
+									longTitle: 'football/tables',
+								},
+								{
+									title: 'Fixtures',
+									url: '/football/fixtures',
+									longTitle: 'football/fixtures',
+								},
+								{
+									title: 'Results',
+									url: '/football/results',
+									longTitle: 'football/results',
+								},
+								{
+									title: 'Competitions',
+									url: '/football/competitions',
+									longTitle: 'football/competitions',
+								},
+								{
+									title: 'Clubs',
+									url: '/football/teams',
+									longTitle: 'football/teams',
+								},
+							],
+						},
+						{
+							title: 'Cricket',
+							url: '/sport/cricket',
+						},
+						{
+							title: 'Rugby union',
+							url: '/sport/rugby-union',
+						},
+						{
+							title: 'Tennis',
+							url: '/sport/tennis',
+						},
+						{
+							title: 'Cycling',
+							url: '/sport/cycling',
+						},
+						{
+							title: 'F1',
+							url: '/sport/formulaone',
+						},
+						{
+							title: 'Golf',
+							url: '/sport/golf',
+						},
+						{
+							title: 'Boxing',
+							url: '/sport/boxing',
+						},
+						{
+							title: 'Rugby league',
+							url: '/sport/rugbyleague',
+						},
+						{
+							title: 'Racing',
+							url: '/sport/horse-racing',
+						},
+						{
+							title: 'US sports',
+							url: '/sport/us-sport',
+						},
+					],
 				},
 				{
-					name: 'edition',
-					value: 'us',
+					title: 'Culture',
+					url: '/culture',
+					longTitle: 'Culture home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Film',
+							url: '/film',
+						},
+						{
+							title: 'Music',
+							url: '/music',
+						},
+						{
+							title: 'TV & radio',
+							url: '/tv-and-radio',
+						},
+						{
+							title: 'Books',
+							url: '/books',
+						},
+						{
+							title: 'Art & design',
+							url: '/artanddesign',
+						},
+						{
+							title: 'Stage',
+							url: '/stage',
+						},
+						{
+							title: 'Games',
+							url: '/games',
+						},
+						{
+							title: 'Classical',
+							url: '/music/classicalmusicandopera',
+						},
+					],
 				},
 				{
-					name: 'ct',
-					value: 'article',
+					title: 'Lifestyle',
+					url: '/lifeandstyle',
+					longTitle: 'Lifestyle home',
+					iconName: 'home',
+					children: [
+						{
+							title: 'Fashion',
+							url: '/fashion',
+						},
+						{
+							title: 'Food',
+							url: '/food',
+						},
+						{
+							title: 'Recipes',
+							url: '/tone/recipes',
+						},
+						{
+							title: 'Travel',
+							url: '/travel',
+							children: [
+								{
+									title: 'UK',
+									url: '/travel/uk',
+								},
+								{
+									title: 'Europe',
+									url: '/travel/europe',
+								},
+								{
+									title: 'US',
+									url: '/travel/usa',
+								},
+							],
+						},
+						{
+							title: 'Health & fitness',
+							url: '/lifeandstyle/health-and-wellbeing',
+						},
+						{
+							title: 'Women',
+							url: '/lifeandstyle/women',
+						},
+						{
+							title: 'Men',
+							url: '/lifeandstyle/men',
+						},
+						{
+							title: 'Love & sex',
+							url: '/lifeandstyle/love-and-sex',
+						},
+						{
+							title: 'Beauty',
+							url: '/fashion/beauty',
+						},
+						{
+							title: 'Home & garden',
+							url: '/lifeandstyle/home-and-garden',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Cars',
+							url: '/technology/motoring',
+						},
+					],
+				},
+			],
+			otherLinks: [
+				{
+					title: 'The Guardian app',
+					url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 				},
 				{
-					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+					title: 'Video',
+					url: '/video',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/9djqm',
+					title: 'Podcasts',
+					url: '/podcasts',
 				},
 				{
-					name: 'tn',
-					value: ['advertisement-features'],
+					title: 'Pictures',
+					url: '/inpictures',
 				},
 				{
-					name: 'p',
-					value: 'ng',
+					title: 'Newsletters',
+					url: '/email-newsletters',
 				},
+				{
+					title: "Today's paper",
+					url: '/theguardian',
+					children: [
+						{
+							title: 'Obituaries',
+							url: '/obituaries',
+						},
+						{
+							title: 'G2',
+							url: '/theguardian/g2',
+						},
+						{
+							title: 'Journal',
+							url: '/theguardian/journal',
+						},
+						{
+							title: 'Saturday',
+							url: '/theguardian/saturday',
+						},
+					],
+				},
+				{
+					title: 'Inside the Guardian',
+					url: 'https://www.theguardian.com/membership',
+				},
+				{
+					title: 'The Observer',
+					url: '/observer',
+					children: [
+						{
+							title: 'Comment',
+							url: '/theobserver/news/comment',
+						},
+						{
+							title: 'The New Review',
+							url: '/theobserver/new-review',
+						},
+						{
+							title: 'Observer Magazine',
+							url: '/theobserver/magazine',
+						},
+						{
+							title: 'Observer Food Monthly',
+							url: '/theobserver/foodmonthly',
+						},
+					],
+				},
+				{
+					title: 'Guardian Weekly',
+					url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				},
+				{
+					title: 'Crosswords',
+					url: '/crosswords',
+					children: [
+						{
+							title: 'Blog',
+							url: '/crosswords/crossword-blog',
+						},
+						{
+							title: 'Quick',
+							url: '/crosswords/series/quick',
+						},
+						{
+							title: 'Cryptic',
+							url: '/crosswords/series/cryptic',
+						},
+						{
+							title: 'Prize',
+							url: '/crosswords/series/prize',
+						},
+						{
+							title: 'Weekend',
+							url: '/crosswords/series/weekend-crossword',
+						},
+						{
+							title: 'Quiptic',
+							url: '/crosswords/series/quiptic',
+						},
+						{
+							title: 'Genius',
+							url: '/crosswords/series/genius',
+						},
+						{
+							title: 'Speedy',
+							url: '/crosswords/series/speedy',
+						},
+						{
+							title: 'Everyman',
+							url: '/crosswords/series/everyman',
+						},
+						{
+							title: 'Azed',
+							url: '/crosswords/series/azed',
+						},
+					],
+				},
+				{
+					title: 'Wordiply',
+					url: 'https://www.wordiply.com',
+				},
+				{
+					title: 'Corrections',
+					url: '/theguardian/series/corrections-and-clarifications',
+				},
+			],
+			brandExtensions: [
+				{
+					title: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+				},
+				{
+					title: 'Hire with Guardian Jobs',
+					url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				},
+				{
+					title: 'Holidays',
+					url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				},
+				{
+					title: 'Live events',
+					url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				},
+				{
+					title: 'Masterclasses',
+					url: '/guardian-masterclasses',
+				},
+				{
+					title: 'Digital Archive',
+					url: 'https://theguardian.newspapers.com',
+				},
+				{
+					title: 'Guardian Print Shop',
+					url: '/artanddesign/series/gnm-print-sales',
+				},
+				{
+					title: 'Patrons',
+					url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+				},
+				{
+					title: 'Guardian Puzzles app',
+					url: 'https://puzzles.theguardian.com/download',
+				},
+				{
+					title: 'Guardian Licensing',
+					url: 'https://licensing.theguardian.com/',
+				},
+			],
+			readerRevenueLinks: {
+				header: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+				},
+				footer: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
+				},
+				sideMenu: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=mobilenav_print_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22mobilenav_print_cta%22%7D',
+				},
+				ampHeader: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+				},
+				ampFooter: {
+					contribute:
+						'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+					subscribe:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+					support:
+						'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+					supporter:
+						'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
+				},
+			},
+		},
+		author: {
+			byline: '',
+		},
+		designType: 'AdvertisementFeature',
+		editionId: 'UK',
+		format: {
+			design: 'PhotoEssayDesign',
+			theme: 'Labs',
+			display: 'ImmersiveDisplay',
+		},
+		openGraphData: {
+			'og:url':
+				'http://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+			'article:author': '',
+			'og:image:width': '700',
+			'og:image':
+				'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=700&quality=85&auto=format&fit=max&s=1f7f8ebaf0733e0cdf90469cb1b8c138',
+			'al:ios:url':
+				'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=applinks',
+			'article:publisher': 'https://www.facebook.com/theguardian',
+			'og:title':
+				'Are you descended from royalty? Six things to consider',
+			'fb:app_id': '180444840287',
+			'article:modified_time': '2021-08-17T15:00:52.000Z',
+			'og:image:height': '420',
+			'og:description': 'Experts weigh in',
+			'og:type': 'article',
+			'al:ios:app_store_id': '409128287',
+			'article:section': "What's in your blood?",
+			'article:published_time': '2018-10-11T13:30:08.000Z',
+			'article:tag': "What's in your blood?",
+			'al:ios:app_name': 'The Guardian',
+			'og:site_name': 'the Guardian',
+		},
+		standfirst: '',
+		sectionUrl: 'whats-in-your-blood-',
+		pageId: 'whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+		version: 3,
+		tags: [
+			{
+				id: 'whats-in-your-blood-/whats-in-your-blood-',
+				type: 'PaidContent',
+				title: "What's in your blood?",
+			},
+			{
+				id: 'type/article',
+				type: 'Type',
+				title: 'Article',
+			},
+			{
+				id: 'tone/advertisement-features',
+				type: 'Tone',
+				title: 'Advertisement features',
+			},
+		],
+		pillar: 'news',
+		webURL: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+		showBottomSocialButtons: true,
+		isImmersive: true,
+		sectionLabel: "What's in your blood?",
+		shouldHideReaderRevenue: true,
+		isAdFreeUser: false,
+		pageFooter: {
+			footerLinks: [
+				[
+					{
+						text: 'About us',
+						url: '/about',
+						dataLinkName: 'uk : footer : about us',
+						extraClasses: '',
+					},
+					{
+						text: 'Help',
+						url: '/help',
+						dataLinkName: 'uk : footer : tech feedback',
+						extraClasses: 'js-tech-feedback-report',
+					},
+					{
+						text: 'Complaints & corrections',
+						url: '/info/complaints-and-corrections',
+						dataLinkName: 'complaints',
+						extraClasses: '',
+					},
+					{
+						text: 'SecureDrop',
+						url: 'https://www.theguardian.com/securedrop',
+						dataLinkName: 'securedrop',
+						extraClasses: '',
+					},
+					{
+						text: 'Work for us',
+						url: 'https://workforus.theguardian.com',
+						dataLinkName: 'uk : footer : work for us',
+						extraClasses: '',
+					},
+					{
+						text: 'Privacy policy',
+						url: '/info/privacy',
+						dataLinkName: 'privacy',
+						extraClasses: '',
+					},
+					{
+						text: 'Cookie policy',
+						url: '/info/cookies',
+						dataLinkName: 'cookie',
+						extraClasses: '',
+					},
+					{
+						text: 'Terms & conditions',
+						url: '/help/terms-of-service',
+						dataLinkName: 'terms',
+						extraClasses: '',
+					},
+					{
+						text: 'Contact us',
+						url: '/help/contact-us',
+						dataLinkName: 'uk : footer : contact us',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'All topics',
+						url: '/index/subjects/a',
+						dataLinkName: 'uk : footer : all topics',
+						extraClasses: '',
+					},
+					{
+						text: 'All writers',
+						url: '/index/contributors',
+						dataLinkName: 'uk : footer : all contributors',
+						extraClasses: '',
+					},
+					{
+						text: 'Modern Slavery Act',
+						url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+						dataLinkName:
+							'uk : footer : modern slavery act statement',
+						extraClasses: '',
+					},
+					{
+						text: 'Digital newspaper archive',
+						url: 'https://theguardian.newspapers.com',
+						dataLinkName: 'digital newspaper archive',
+						extraClasses: '',
+					},
+					{
+						text: 'Facebook',
+						url: 'https://www.facebook.com/theguardian',
+						dataLinkName: 'uk : footer : facebook',
+						extraClasses: '',
+					},
+					{
+						text: 'YouTube',
+						url: 'https://www.youtube.com/user/TheGuardian',
+						dataLinkName: 'uk : footer : youtube',
+						extraClasses: '',
+					},
+					{
+						text: 'Instagram',
+						url: 'https://www.instagram.com/guardian',
+						dataLinkName: 'uk : footer : instagram',
+						extraClasses: '',
+					},
+					{
+						text: 'LinkedIn',
+						url: 'https://www.linkedin.com/company/theguardian',
+						dataLinkName: 'uk : footer : linkedin',
+						extraClasses: '',
+					},
+					{
+						text: 'Twitter',
+						url: 'https://twitter.com/guardian',
+						dataLinkName: 'uk: footer : twitter',
+						extraClasses: '',
+					},
+					{
+						text: 'Newsletters',
+						url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+						dataLinkName: 'uk : footer : newsletters',
+						extraClasses: '',
+					},
+				],
+				[
+					{
+						text: 'Advertise with us',
+						url: 'https://advertising.theguardian.com',
+						dataLinkName: 'uk : footer : advertise with us',
+						extraClasses: '',
+					},
+					{
+						text: 'Guardian Labs',
+						url: '/guardian-labs',
+						dataLinkName: 'uk : footer : guardian labs',
+						extraClasses: '',
+					},
+					{
+						text: 'Search jobs',
+						url: 'https://jobs.theguardian.com',
+						dataLinkName: 'uk : footer : jobs',
+						extraClasses: '',
+					},
+					{
+						text: 'Patrons',
+						url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+						dataLinkName: 'uk : footer : patrons',
+						extraClasses: '',
+					},
+				],
 			],
 		},
-		AU: {
-			branding: {
-				brandingType: {
-					name: 'paid-content',
-				},
-				sponsorName: 'Amazon',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
-					dimensions: {
-						width: 140,
-						height: 90,
-					},
-					link: 'https://www.amazon.com/dp/B07FV6K8HF',
-					label: 'Paid for by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
-			adTargeting: [
-				{
-					name: 'k',
-					value: ['whats-in-your-blood-'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'br',
-					value: 'p',
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/9djqm',
-				},
-				{
-					name: 'tn',
-					value: ['advertisement-features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
+		twitterData: {
+			'twitter:app:id:iphone': '409128287',
+			'twitter:app:name:googleplay': 'The Guardian',
+			'twitter:app:name:ipad': 'The Guardian',
+			'twitter:card': 'summary_large_image',
+			'twitter:app:name:iphone': 'The Guardian',
+			'twitter:app:id:ipad': '409128287',
+			'twitter:app:id:googleplay': 'com.guardian',
+			'twitter:app:url:googleplay':
+				'guardian://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+			'twitter:app:url:iphone':
+				'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=twitter',
+			'twitter:image':
+				'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=700&quality=85&auto=format&fit=max&s=1f7f8ebaf0733e0cdf90469cb1b8c138',
+			'twitter:site': '@guardian',
+			'twitter:app:url:ipad':
+				'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=twitter',
 		},
-		UK: {
-			branding: {
-				brandingType: {
-					name: 'paid-content',
-				},
-				sponsorName: 'Amazon',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
-					dimensions: {
-						width: 140,
-						height: 90,
-					},
-					link: 'https://www.amazon.com/dp/B07FV6K8HF',
-					label: 'Paid for by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
-			adTargeting: [
-				{
-					name: 'k',
-					value: ['whats-in-your-blood-'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'br',
-					value: 'p',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/9djqm',
-				},
-				{
-					name: 'tn',
-					value: ['advertisement-features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
+		sectionName: 'whats-in-your-blood-',
+		webPublicationDateDeprecated: '2018-10-11T13:30:08.000Z',
+		pageType: {
+			hasShowcaseMainElement: false,
+			isFront: false,
+			isLiveblog: false,
+			isMinuteArticle: false,
+			isPaidContent: true,
+			isPreview: false,
+			isSensitive: false,
 		},
-		INT: {
-			branding: {
-				brandingType: {
-					name: 'paid-content',
+		hasStoryPackage: false,
+		contributionsServiceUrl: 'https://contributions.guardianapis.com',
+		showTableOfContents: false,
+		lang: 'en',
+		byline: '',
+		headline: 'Are you descended from royalty? Six things to consider',
+		guardianBaseURL: 'https://www.theguardian.com',
+		isLegacyInteractive: false,
+		webPublicationDate: '2018-10-11T13:30:08.000Z',
+		mainMediaElements: [
+			{
+				_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+				media: {
+					allImages: [
+						{
+							index: 0,
+							fields: {
+								height: '1200',
+								width: '2000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/2000.jpg',
+						},
+						{
+							index: 1,
+							fields: {
+								height: '600',
+								width: '1000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/1000.jpg',
+						},
+						{
+							index: 2,
+							fields: {
+								height: '300',
+								width: '500',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/500.jpg',
+						},
+						{
+							index: 3,
+							fields: {
+								height: '84',
+								width: '140',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/140.jpg',
+						},
+						{
+							index: 4,
+							fields: {
+								height: '1800',
+								width: '3000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/3000.jpg',
+						},
+						{
+							index: 5,
+							fields: {
+								isMaster: 'true',
+								height: '1800',
+								width: '3000',
+							},
+							mediaType: 'Image',
+							mimeType: 'image/jpeg',
+							url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg',
+						},
+					],
 				},
-				sponsorName: 'Amazon',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
-					dimensions: {
-						width: 140,
-						height: 90,
+				data: {
+					alt: 'Are you royal?',
+					credit: 'Illustration: Peter Horvath',
+				},
+				displayCredit: true,
+				role: 'immersive',
+				imageSources: [
+					{
+						weighting: 'inline',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=290494798682957dfa496e07a5b3d9e4',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51d0aa3ef9a55650dd4239e3bc4478f9',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=290494798682957dfa496e07a5b3d9e4',
+								width: 620,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51d0aa3ef9a55650dd4239e3bc4478f9',
+								width: 1240,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=58bd40ac3f0f3666e0247a25e2bbc104',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7416e6e379917abdf770e23faa44b030',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=c51f1b53a8f12b45b26ff8e29d654bac',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2dc69400c3f47f6ab8380c59b37007e',
+								width: 930,
+							},
+						],
 					},
-					link: 'https://www.amazon.com/dp/B07FV6K8HF',
-					label: 'Paid for by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+					{
+						weighting: 'thumbnail',
+						srcSet: [],
+					},
+					{
+						weighting: 'supporting',
+						srcSet: [],
+					},
+					{
+						weighting: 'showcase',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=9e4f8bb5b8372cb1612bb77312c754f1',
+								width: 1020,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=18b0909bf17ed8b132b8e4880d6bd85f',
+								width: 2040,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=1d7dc587eb0a2b15caccd7a646da19a2',
+								width: 940,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=e2d1f4374257d6f011883895546ecd62',
+								width: 1880,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
+								width: 700,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
+								width: 1400,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=ed7f1bee8eab75aa4632c8d4be81868a',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=842fcc0cdc18a9973d4230f59562495f',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=58bd40ac3f0f3666e0247a25e2bbc104',
+								width: 645,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7416e6e379917abdf770e23faa44b030',
+								width: 1290,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=c51f1b53a8f12b45b26ff8e29d654bac',
+								width: 465,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2dc69400c3f47f6ab8380c59b37007e',
+								width: 930,
+							},
+						],
+					},
+					{
+						weighting: 'halfwidth',
+						srcSet: [],
+					},
+					{
+						weighting: 'immersive',
+						srcSet: [
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1900&quality=85&auto=format&fit=max&s=b91f835117be9ee867ddf939ca13ea4d',
+								width: 1900,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=7eb811f7d0226d1d7de7e58e20180bd4',
+								width: 3800,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=5ce957f651cf90330ba5b2eee24b1ec3',
+								width: 1300,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=9b24d47c9a80605bf84b6b5b397a579a',
+								width: 2600,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=8c93f5aec37f8d3c0d4fd0b6b0fa1dca',
+								width: 1140,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=90f2bc4e69bcce87637dda59637c1084',
+								width: 2280,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=980&quality=85&auto=format&fit=max&s=ae248b9b962042d5596d446ae8b13a94',
+								width: 980,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=1af7a5e70637f793673edf78cc49f02a',
+								width: 1960,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=740&quality=85&auto=format&fit=max&s=96a83f57131fe295442668bf92422a1c',
+								width: 740,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=cdbd2a97f9d5d19b66cc627100502a75',
+								width: 1480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=ed7f1bee8eab75aa4632c8d4be81868a',
+								width: 660,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=842fcc0cdc18a9973d4230f59562495f',
+								width: 1320,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=480&quality=85&auto=format&fit=max&s=b4645a6c1f05f9841d07e432d7aa1289',
+								width: 480,
+							},
+							{
+								src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=89c596a0381199bd41d6b61d19d29032',
+								width: 960,
+							},
+						],
+					},
+				],
+				elementId: '0653dd1b-6b3f-4d40-bb28-8547e9dd18cb',
 			},
-			adTargeting: [
-				{
-					name: 'k',
-					value: ['whats-in-your-blood-'],
+		],
+		canonicalUrl:
+			'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+		blocks: [
+			{
+				id: '5ba15482e4b0f675819f3d0d',
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>What are the odds that you have royal blood? It’s a question more and more of us are asking these days. As genetic testing gets faster, cheaper and more accurate, the age-old fantasy of suddenly learning you’re descended from a king or a queen – the premise of countless movies, books and daydreams – is inching closer to reality.</p>',
+						elementId: 'd6a97e16-154f-45bb-8616-b40c953d59ea',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>But we’re not there just yet. While a genetic test can tell us a lot – 23andme can even pinpoint how much Neanderthal we have in us – there’s still no single test for royal blood.</p>',
+						elementId: 'd4d5698e-6fdc-48cc-b016-0d2f79700bd1',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“DNA testing only reveals a general ethnic breakdown that changes over time, as the science becomes further refined,” says<a href="https://www.djoshuataylor.com/" rel="nofollow"> Joshua Taylor</a>, president of the New York Genealogical &amp; Biographical Society. It “might identify that two individuals share a common ancestor within a certain number of generations, but research is still needed to identify <em>who</em> that common ancestor might be.”</p>',
+						elementId: '5a0fd402-d31c-4234-8465-f117117a80de',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>And ancestral math is messy. The number of ancestors we have increases exponentially, not linearly — more like a meshed web than a branched family tree, says the geneticist<a href="http://adamrutherford.com/" rel="nofollow"> Adam Rutherford</a>. If we went back a thousand years, each of us would have over a trillion direct ancestors, which is more than all the humans who have ever lived. This paradox exists because, as Rutherford writes: “Pedigrees begin to fold in on themselves a few generations back.” Meaning “you can be, and in fact are, descended from the same individual many times over”.</p>',
+						elementId: 'c32f2f34-1d88-4ac7-8c9c-67e1490707d6',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Throw in other factors that enlarge and complicate lineage – invasions and migrations, wars and revolutions – and you can see that humanity is indeed a web of overlapping and enmeshed networks of descent.</p>',
+						elementId: '60449da3-51c4-4d82-932e-9d3d23078408',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Genealogists say that the work of identifying royal lineage – whether to establish “direct descent” (a key to inheritance and social status) or simply to satisfy curiosity – is helped and hindered by a number of factors. If you’re thinking of climbing your family tree in search of royal fruit, here are a few things to consider.</p>',
+						elementId: '4a89aa34-04dd-4ddf-baab-6a5d44e6683a',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='1-if-youre-european-or-even-descended-from-europeans-youre-probably-related-to-royalty'><strong>1. If you’re European – or even descended from Europeans – you’re probably related to royalty</strong></h2>",
+						elementId: '51ae9e3b-ad85-45ba-a835-f23bd8cf5337',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '657',
+										width: '1500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/1500.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '657',
+										width: '1500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '438',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/1000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '219',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/500.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '61',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/140.jpg',
+								},
+							],
+						},
+						data: {
+							alt: 'Map of Europe',
+							credit: '',
+							caption:
+								'<ul>\n <li><p>Credit: The Guardian Labs</p></li>\n</ul>',
+						},
+						displayCredit: true,
+						role: 'showcase',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=140&quality=85&auto=format&fit=max&s=9e247bce25b8d304d877dc48a33a08c7',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b1545926cc578a0337ec0add2251b9f0',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=120&quality=85&auto=format&fit=max&s=fd29e0283c06286e224914953af48846',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0c9e9c4874913b74f2b2a082cc06c0aa',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=380&quality=85&auto=format&fit=max&s=3fe8973ec4a6fe31f0f5629e988b1778',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3361d25cf49c461bc8e061f55e940b8a',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=300&quality=85&auto=format&fit=max&s=b3cfaf8118347a683f6a4ee5ff9e3207',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=b5465bc78adabf7cda24fd874e94205f',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=880&quality=85&auto=format&fit=max&s=b455973ae192a7cc6c3c6f2c9cbe03ef',
+										width: 880,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=012b8d0e42b174bf29b5a65b4b9c2cf2',
+										width: 1760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=800&quality=85&auto=format&fit=max&s=6a33e86ca5a59efd3a6faee4cfe29b8b',
+										width: 800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=876547115a268ad3d6a92b5c3f3c394c',
+										width: 1600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=640&quality=85&auto=format&fit=max&s=6ab912e3f8145e49623901f97e7df334',
+										width: 640,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=8cc3028101b8121eea01d5aad08850ad',
+										width: 1280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1300&quality=85&auto=format&fit=max&s=3c486f029e96e05e24d2866b996e96d4',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0b3a8b12aae8440be9d52671f38f0c34',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1140&quality=85&auto=format&fit=max&s=cd3abfe76454b92b0719f98cb939499d',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=0fe1547167f8aa557ce75e827e9ef4d9',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1125&quality=85&auto=format&fit=max&s=99779d337ad59f7156a5320cf28ae0e3',
+										width: 1125,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7d200a6c9ec5cf005d1a7455e0548db0',
+										width: 2250,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=965&quality=85&auto=format&fit=max&s=ba399819be212af77aaf5f02eb76a410',
+										width: 965,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=aa71743b606e98b3eea9cb2bad72cfe9',
+										width: 1930,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=725&quality=85&auto=format&fit=max&s=012b295bea467cca70fe229199dcee62',
+										width: 725,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=cc08ac088133767e20a7e2a308047eb8',
+										width: 1450,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=645&quality=85&auto=format&fit=max&s=0b0b6859b7606e0d045af7ddb78b4919',
+										width: 645,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7fe58c503a5df4ebe5c84cd3336b76ac',
+										width: 1290,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=465&quality=85&auto=format&fit=max&s=753f6d2a2fb81211fbd710fd833d2f92',
+										width: 465,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=a3bca3395f868b3040ac1955fff331f3',
+										width: 930,
+									},
+								],
+							},
+						],
+						elementId: '77ca6201-74fa-4d88-bc94-585d8a8001ac',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In 1999, the <a href="http://www.stat.yale.edu/~jtc5/papers/CommonAncestors/AAP_99_CommonAncestors_paper.pdf" rel="nofollow">Yale statistician Joseph Chang</a> showed that if you go back far enough – say, 32 generations, or 900 years – you’d find that everyone alive today shares a common ancestor. In Europe, where lineages have been closely studied, that ancestor was someone who lived just 600 years ago.</p>',
+						elementId: 'ac789007-d6a9-4a28-8aa8-e0eb9829ed1b',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>A <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001555" rel="nofollow">2013 study from Peter Ralph and Graham Coop</a> built on Chang’s research, proving that all Europeans come from the same people. More recently, Rutherford has demonstrated that virtually everyone in Europe is indeed descended from royalty – specifically from Charlemagne, who ruled western Europe from 768 to 814.</p>',
+						elementId: '0bf093e4-3558-40b6-a611-7dd80771595a',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>A <a href="https://www.theatlantic.com/magazine/archive/2002/05/the-royal-we/302497/" rel="nofollow">2002 article</a> offers more clarifying examples: “Almost everyone in the New World [aka the Americas, including Bermuda and the Caribbean] must be descended from English royalty – even people of predominantly African or Native American ancestry, because of the long history of intermarriage in the Americas. Similarly, everyone of European ancestry must descend from Muhammad.” Meanwhile, “Confucius, Nefertiti, and just about any other ancient historical figure who was even moderately prolific must today be counted among everyone’s ancestors”.</p>',
+						elementId: '7f8c1e24-ee29-431b-a4de-d3601d5395b3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In other words, mathematically speaking, we’re all related to royalty.</p>',
+						elementId: '5531ae53-05bf-4a32-a058-0ff36335edea',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='2-royal-commoner-intermarriage-higher-odds-of-regal-descent'><strong>2. Royal + commoner + intermarriage = higher odds of regal descent</strong></h2>",
+						elementId: 'd817f53b-22fc-4191-8888-6d50ee202d50',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>As Chang acknowledged in his study, most mating isn’t random – it’s assortative. That means that people tend to mate with those who are most like themselves in terms of geography, language and socioeconomic status. A wealthy Scandinavian man is far more likely to marry a well-to-do woman from Sweden or Norway than a poor one from Saskatchewan.</p>',
+						elementId: '350631de-2b30-4c1d-b207-7a0902cf858e',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>“In most cases,” says Taylor, “royal families work to marry within the same social circle.” <a href="http://faculty.econ.ucdavis.edu/faculty/gclark/" rel="nofollow">Gregory Clark</a>, an economics professor at UC Davis who studies the genealogy of social mobility, says that means “the likelihood that you are related to royalty, if you went back as far as 1300 or 1066, depends on how closed a class nobles were”.</p>',
+						elementId: '2b522012-a4c6-4b69-9284-b4e39bc43b32',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In some countries, that class door is firmly shut. But in England, says Clark, the “noble classes have always been fairly open to incorporating wealthy commoners … So a large share of the modern English will be related to someone in the past who was part of the nobility.”</p>',
+						elementId: '31412ca8-5c75-4f39-992b-2592fd451d28',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Translation: if your ancestors hailed from a country or region where royals and commoners intermarried, you have a better chance of being descended from royalty.</p>',
+						elementId: 'eedc3784-e74f-43e0-9ca1-19c99cb097a4',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='3-you-dont-need-to-be-fully-or-even-legitimately-royal-to-have-royal-blood'><strong>3. You don’t need to be fully – or even legitimately – royal to have royal blood</strong></h2>",
+						elementId: '8a521cf0-de81-4ff1-9721-4fb78df77423',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '1218',
+										width: '974',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/974.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '1218',
+										width: '974',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '1000',
+										width: '800',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/800.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '500',
+										width: '400',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/400.jpg',
+								},
+							],
+						},
+						data: {
+							alt: 'Statue of Queen Elizabeth II',
+							credit: '',
+							caption: '',
+						},
+						displayCredit: true,
+						role: 'supporting',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=140&quality=85&auto=format&fit=max&s=170ead967912967c4e2421c41402b6e8',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=108b5962b43f4095f291f79cbed9781d',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=120&quality=85&auto=format&fit=max&s=d616f4b0bf984f4a31385cecc3036dd3',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=98e8db4432b7484d119cff88eb728697',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=380&quality=85&auto=format&fit=max&s=d8157b498a8189b5f05b588cd217d3fd',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=540c2624badeec900c291a10fb79cf42',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=300&quality=85&auto=format&fit=max&s=3fdd8ddff9bb4d14907d082609950ac3',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=ea9323cebbb9b7aaab9cb3e43655c31e',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=880&quality=85&auto=format&fit=max&s=657b7bf905a93ed3e0e3b9b9c3a3a7e7',
+										width: 880,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=9a507e34ca2e0da84b79b6ac5e422711',
+										width: 1760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=800&quality=85&auto=format&fit=max&s=cc0fc680a991915cc2607fb62ac43155',
+										width: 800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=e29da27703280084ac8772ed1c90f435',
+										width: 1600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=640&quality=85&auto=format&fit=max&s=9e1514f3318b11c8ed60c7e03e1cc582',
+										width: 640,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=865bf46a5d5a8d70db4fad6f8599e02f',
+										width: 1280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1300&quality=85&auto=format&fit=max&s=1be5d29f7485a5142bbe4dedb219eb8d',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b856f51757b5bae5333c930313dd6864',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1140&quality=85&auto=format&fit=max&s=861b19ae219cebf4a01c869d89a23a66',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=b13c14e537fc0dc7c96e6a5a1aa5fe09',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1125&quality=85&auto=format&fit=max&s=027d34b4df8da06fcb644114e1a45531',
+										width: 1125,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=8cdedc170fa6c12074f0149d34fdb244',
+										width: 2250,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=965&quality=85&auto=format&fit=max&s=a7c776c58fdc1d700524f4a586977f63',
+										width: 965,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=941932598e198506d019be44afbec723',
+										width: 1930,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=725&quality=85&auto=format&fit=max&s=7815ccae2fce6fa235cb3e9c67e547b3',
+										width: 725,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=fa84384bfac75884b463c0f50af0adf6',
+										width: 1450,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=645&quality=85&auto=format&fit=max&s=31707891fec5a085e370ffaee8dec6fb',
+										width: 645,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=cd7f69972b4d85bcd1470354adefdf96',
+										width: 1290,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=465&quality=85&auto=format&fit=max&s=c16ccb1422dfe17fac72efbd17b1d28d',
+										width: 465,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a486e6a0af1c08f0f433233b7943f1d',
+										width: 930,
+									},
+								],
+							},
+						],
+						elementId: '667447f4-2c21-4962-bb34-b6e6b19e78b0',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Here’s another way to look at it: if you’re descended from royalty, it might be via a prince, a princess – or a pauper. In recent years morganatic marriages – aka when a royal marries someone of lesser status, à la Prince William and Kate Middleton – have become more and more common around the world, increasing the number of people with a royal claim.</p>',
+						elementId: '4bbcec8b-9f4a-4d6d-9555-3cf4cda317c3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p><a href="https://twitter.com/rusgenproject?lang=en" rel="nofollow">Kirill Chashchin</a>, a Russian genealogical researcher, says that “almost royals” – illegitimate children and those (like Princess Diana) who show <em>some</em> royal connections but not a clear lineage – have muddied the waters. <a href="https://www.cgr2018.com/" rel="nofollow">Dale Myers</a>, founder of the Colorado Genealogical Research Company, agrees. “Kings tended to have a wife and many consorts or mistresses,” he says. “As a result, King Richard I … may not [have been] related to King Edward after all.”</p>',
+						elementId: '2c1a025f-0971-423b-8e88-a5c077ac1201',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Plus, royalty isn’t necessarily static. “In the US,” Taylor says, “millions can trace their ancestry back to European royalty through ‘gateway ancestors’ — early colonial Americans with documented lineage to royal lines.” Today, “these ancestors often have millions of living descendants who can claim royal descent. The odds are increased the longer a family has been in a country or region.”</p>',
+						elementId: 'b1989690-e43e-4751-a94d-fb8bb7e3fd61',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The bottom line: if someone in your family mated with a royal, or was born to one, it may be enough to link you to a throne.</p>',
+						elementId: '828e514b-351e-490f-9836-d7eb7f966876',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='4-can-you-find-your-familys-name-in-a-historical-record-it-could-be-the-link-to-a-royal-ancestry'><strong>4. Can you find your family’s name in a historical record? It could be the link to a royal ancestry</strong></h2>",
+						elementId: 'af196b2a-5b59-45e9-a5df-9c4272c53ee5',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In many places a dearth of historical records makes it tricky to track royal lines. “If you consider that those of noble birth or wealth were often the only individuals that had written records that were created (and have survived),” says Taylor, “it makes a lot of sense as to why those royal lines are some of the earliest lineages an individual can connect to. While church records might take a family back to the 1600s, landownership and other materials can trace a family back centuries before that date.”</p>',
+						elementId: '659f9e8d-f94c-4672-b582-db961a6a5291',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In non-European cultures, he says, “accessible records to connect living individuals to those lines differ … Some areas of the world where oral histories and traditions are prevalent make it even more difficult, as the lineage itself might only exist in the memories of elders.”</p>',
+						elementId: 'bdb71ff1-5298-4a78-9f77-42ba52428780',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p><a href="http://www.doorstothepast.com/" rel="nofollow">Nydia Hanna</a>, who runs the genealogical research firm Doors to the Past, says: “Connecting genealogies in the New World to the Old World may be difficult for several reasons.” Central America and the Caribbean, for instance, have been afflicted by “many wars and changeovers as far as governing bodies. Although documents and vital records were kept in the Old World, some of those documents were not kept in the New World unless for tax purposes. This meant that only the upper class have records, in most cases.”</p>',
+						elementId: 'dbd3447b-6754-4948-b0a9-20079bfc77b3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Think of it this way: if you’re able to find a paper trail, you might want to see where it leads.</p>',
+						elementId: '50fb4933-9931-4d3e-806d-131c331802d4',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='5-europe-doesnt-have-a-monopoly-on-royalty'><strong>5. Europe doesn’t have a monopoly on royalty</strong></h2>",
+						elementId: 'f3d2d3bd-59ad-42ab-879b-b1fc60b5e7b7',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+						media: {
+							allImages: [
+								{
+									index: 0,
+									fields: {
+										height: '840',
+										width: '1400',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/1400.jpg',
+								},
+								{
+									index: 1,
+									fields: {
+										isMaster: 'true',
+										height: '840',
+										width: '1400',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg',
+								},
+								{
+									index: 2,
+									fields: {
+										height: '600',
+										width: '1000',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/1000.jpg',
+								},
+								{
+									index: 3,
+									fields: {
+										height: '300',
+										width: '500',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/500.jpg',
+								},
+								{
+									index: 4,
+									fields: {
+										height: '84',
+										width: '140',
+									},
+									mediaType: 'Image',
+									mimeType: 'image/jpeg',
+									url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/140.jpg',
+								},
+							],
+						},
+						data: {
+							alt: 'Genghis Khan statue',
+							credit: '',
+							caption:
+								'<ul>\n <li><p>Credit: The Guardian Labs</p></li>\n</ul>',
+						},
+						displayCredit: true,
+						role: 'inline',
+						imageSources: [
+							{
+								weighting: 'inline',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'thumbnail',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=140&quality=85&auto=format&fit=max&s=8970357e2b9184384b04f3ae107d9d1c',
+										width: 140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1ea157632b54a2d680d3ad2a25fa548d',
+										width: 280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=120&quality=85&auto=format&fit=max&s=a07623ac07b8f588a989146d18e434df',
+										width: 120,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cc580ccfdd2d748e77901a33cbeb9eda',
+										width: 240,
+									},
+								],
+							},
+							{
+								weighting: 'supporting',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=380&quality=85&auto=format&fit=max&s=8d6a5caef099741b6625806194bfa32a',
+										width: 380,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ae58ccb841a62c736ea86db0f58dc596',
+										width: 760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=300&quality=85&auto=format&fit=max&s=3553b96d6e88c7d1a033aca0dae98b3c',
+										width: 300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=496e02158f476d1a77bdd22134517d5e',
+										width: 600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'showcase',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=880&quality=85&auto=format&fit=max&s=0e2cd6939e3149fdfcea066d171df414',
+										width: 880,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=1565b08903797bda8fc1ee57fe43934f',
+										width: 1760,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=800&quality=85&auto=format&fit=max&s=ba79328068f852ddf76763f7e68fd0a0',
+										width: 800,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=90312890bd26a04c451525cd3c8b9c8e',
+										width: 1600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=640&quality=85&auto=format&fit=max&s=2189b7aaa00dd858ec42ac7a9e39207b',
+										width: 640,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=213cefcca6fc092968227b83ad793082',
+										width: 1280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'halfwidth',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
+										width: 620,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
+										width: 1240,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
+										width: 605,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
+										width: 1210,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
+										width: 445,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
+										width: 890,
+									},
+								],
+							},
+							{
+								weighting: 'immersive',
+								srcSet: [
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1300&quality=85&auto=format&fit=max&s=b2392c1b3db72c9deffa4c31e9d374b0',
+										width: 1300,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=dfeeb1980102a077a62d332df7f9eb86',
+										width: 2600,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1140&quality=85&auto=format&fit=max&s=ba6a639d94c080e110c831ac68a9fb62',
+										width: 1140,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e3b06030d9a69d00ce26cbf4f88780d3',
+										width: 2280,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1125&quality=85&auto=format&fit=max&s=aded998598302d0d68ad1a1270302970',
+										width: 1125,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e2a81387e03cfc7a80da89f0e246a8a1',
+										width: 2250,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=965&quality=85&auto=format&fit=max&s=80da2ea888e2b141521212bbb44cc19f',
+										width: 965,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f2b4717525a16e400837b2690638e2c9',
+										width: 1930,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=725&quality=85&auto=format&fit=max&s=f47ae3a28b40646d8b82e21f32a25c83',
+										width: 725,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=d59fa23c991763d4f3bb51529deb0481',
+										width: 1450,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=645&quality=85&auto=format&fit=max&s=8b5fdefd60d091457f2144da6ab66ddb',
+										width: 645,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=aa61f26970c73f31daeb7b0f2aba748a',
+										width: 1290,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=465&quality=85&auto=format&fit=max&s=5f076cb40eb67668fc1a208a021a7a3d',
+										width: 465,
+									},
+									{
+										src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=114763bc5c98666a2f45c737c16e7a2c',
+										width: 930,
+									},
+								],
+							},
+						],
+						elementId: 'b953bb34-decd-4ebe-990d-bb3eba1d9342',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Of course, not all royal roots reach back to Europe. It may be where many records have survived, and the subject of much genealogical research. But if your family origins can be traced elsewhere, you may still be in luck – here are a few notable findings.</p>',
+						elementId: '969bddbf-1165-4290-97c7-e60a8139c290',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In 2003, a<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1180246/" rel="nofollow"> groundbreaking study</a> showed that one in every 200 men worldwide (and 16 million in central Asia) are direct-line descendants of the 12th-century Mongolian emperor Genghis Khan. Yet Khan’s not the only Asian ruler responsible for millions of Y-chromosome lineages. According to an<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1285168/" rel="nofollow"> international study in 2005</a>, 10 other men living in Asia and the Middle East between 2100 BC and 700 AD left behind prolific royal lines. One of them was a 16th-century Qing dynasty ruler named Giocangga, whose descendants include 1.5 million men in modern northern China.</p>',
+						elementId: 'b79e0207-ef9c-48e6-8600-8c945cb08925',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Over in South America, <a href="https://link.springer.com/article/10.1007/s00438-018-1427-4" rel="nofollow">genetic and historical research</a> has found noble bloodlines directly connecting Atahualpa, the last Incan emperor (who died 1533), to some of modern Peru’s humblest families.</p>',
+						elementId: '8c93bd60-0dfd-458c-9085-68497a57f360',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>And don’t forget about the Egyptian pharaoh Tutankhamun, aka King Tut. Half of all men living in western Europe are related to him, <a href="https://uk.reuters.com/article/oukoe-uk-britain-tutankhamun-dna/half-of-european-men-share-king-tuts-dna-idUKTRE7704OR20110801" rel="nofollow">geneticists in Switzerland say</a>, including up to 70% of men in Great Britain.</p>',
+						elementId: 'b9baa588-2571-4a50-94be-6471ceb9df69',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						html: "<h2 id='6-a-royal-lineage-may-be-the-culprit-for-spreading-certain-undesirable-traits'><strong>6. A royal lineage may be the culprit for spreading certain undesirable traits</strong></h2>",
+						elementId: '4bee120f-5c81-4668-9b13-6da173a77168',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>King Tut left something else behind as well: a legacy of inbreeding, genetic deformities and recessive ailments.</p>',
+						elementId: 'd7266d8d-a6b7-4cb7-9701-9847f421f217',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In royal families in ancient Egypt – and in many dynasties around the world, for much of human history – brothers and sisters were expected to marry, to keep the bloodline pure. This led to homozygosity — two identical forms of a gene, one inherited from each parent — which can cause a host of genetic woes: hemophilia, cystic fibrosis, Habsburg jaw, facial asymmetry, suppressed immune systems and certain kinds of cancer.</p>',
+						elementId: 'c722497b-7493-43a6-98b2-2a0793da5db3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>King Tut himself is an example. Born to parents who were brother and sister, he had a club foot, a cleft palate, scoliosis and missing bones in his feet. Geneticists think that when he died, around 1324 BC, sickle-cell disease – an inherited blood disorder – was the culprit. (Cleopatra, the last pharaoh, was married to her own brother, too.)</p>',
+						elementId: 'f33ca13a-f8db-4305-b75c-245ca957be0d',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>The jutting Habsburg jaw is another well-known woe. The first royal to have one was the Roman Emperor Maximilian I, who ruled from 1486 to 1519. But soon it turned up all over medieval Europe. Switzerland’s House of Habsburg got stuck with the name because so many of its members had the condition. (Spain’s current ruler, King Juan Carlos I, a distant descendant of the House of Hapsburg, has a correspondingly mild case of Habsburg Jaw.)</p>',
+						elementId: 'c0fe50f1-9785-480a-a26f-9c4502b7cd86',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>Then there’s hemophilia. While it’s not necessarily the direct product of inbreeding, it does stem from a gene carried by the incestuous monarchies of Europe, who spread the disease far and wide. Queen Victoria, “the grandmother of modern Europe” who ruled England from 1837 to 1901, is said to have inherited the gene from her father, Prince Edward. She in turn passed it along to her son, Leopold, and to some of her daughters, who then passed it on as well — sometimes beyond continental Europe.<strong> </strong>Tsarevich Alexei Nikolaevich, the heir apparent to the Russian Empire, inherited hemophilia from his mother, the Empress Alexandra Feodorovna (a granddaughter of Queen Victoria).</p>',
+						elementId: '6dabc687-6274-40e5-ae8e-c3f5be32cfcb',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>So what does all this mean for today’s royal descendants? “Traits like the Hapsburg jaw, hemophilia, etc, <em>are</em> certainly seen in individuals today,” says Taylor. But while these ailments have spread, at least in part, via royalty, they’re not definite indicators of monarchic ties today.</p>',
+						elementId: 'd67e87e8-d7f8-487c-b182-3df3754d27f3',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						html: '<p>In other words, when it comes to royal descent, not every past is prologue.</p>',
+						elementId: 'f5ee82c7-90fe-4f86-98de-ed7b59e2cec4',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
+						alt: 'action button emebed',
+						scriptUrl:
+							'https://labs.theguardian.com/2021/test/action_buttons/v2/boot.js',
+						elementId: '6db3a7a9-58c8-4452-9e52-81c84370f395',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+						html: '<iframe class="iframe" src="https://www.youtube-nocookie.com/embed/Y2qWLttWvYI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="Watch The Romanoffs trailer"></iframe>',
+						safe: false,
+						alt: 'Watch The Romanoffs trailer',
+						isMandatory: false,
+						isThirdPartyTracking: false,
+						source: 'Youtube',
+						sourceDomain: 'youtube-nocookie.com',
+						elementId: '1ce98821-5dc4-4916-a5c4-59ef1ea4719b',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
+						alt: 'Amazon The Romanoffs footer',
+						scriptUrl:
+							'https://labs.theguardian.com/2018/amazon_romanoffs/footer/boot.js',
+						elementId: '8d444e5d-5cae-4fd2-991d-19afb1ad1bac',
+					},
+				],
+				attributes: {
+					pinned: false,
+					keyEvent: false,
+					summary: false,
 				},
-				{
-					name: 'su',
-					value: ['0'],
+				blockCreatedOn: 1539264608000,
+				blockCreatedOnDisplay: '14.30 BST',
+				blockLastUpdated: 1629212452000,
+				blockLastUpdatedDisplay: '16.00 BST',
+				blockFirstPublished: 1539264608000,
+				blockFirstPublishedDisplay: '14.30 BST',
+				blockFirstPublishedDisplayNoTimezone: '14.30',
+				contributors: [],
+				primaryDateLine: 'Thu 11 Oct 2018 14.30 BST',
+				secondaryDateLine: 'Last modified on Tue 17 Aug 2021 16.00 BST',
+			},
+		],
+		linkedData: [
+			{
+				'@type': 'NewsArticle',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				publisher: {
+					'@type': 'Organization',
+					'@context': 'https://schema.org',
+					'@id': 'https://www.theguardian.com#publisher',
+					name: 'The Guardian',
+					url: 'https://www.theguardian.com/',
+					logo: {
+						'@type': 'ImageObject',
+						url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+						width: 190,
+						height: 60,
+					},
+					sameAs: [
+						'https://www.facebook.com/theguardian',
+						'https://twitter.com/guardian',
+						'https://www.youtube.com/user/TheGuardian',
+					],
 				},
-				{
-					name: 'br',
-					value: 'p',
+				isAccessibleForFree: true,
+				isPartOf: {
+					'@type': ['CreativeWork', 'Product'],
+					name: 'The Guardian',
+					productID: 'theguardian.com:basic',
 				},
-				{
-					name: 'ct',
-					value: 'article',
+				image: [
+					'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=700&quality=85&auto=format&fit=max&s=1f7f8ebaf0733e0cdf90469cb1b8c138',
+					'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=497acd731a399c860cee859c6ec9e2bf',
+					'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=337c505c63e1490056701d3e1643e035',
+					'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=1200&quality=85&auto=format&fit=max&s=d3eb8f7722147a81600f3163372d2752',
+				],
+				author: [
+					{
+						'@type': 'Person',
+						name: 'Guardian staff reporter',
+					},
+				],
+				datePublished: '2018-10-11T13:30:08.000Z',
+				headline:
+					'Are you descended from royalty? Six things to consider',
+				dateModified: '2021-08-17T15:00:52.000Z',
+				mainEntityOfPage:
+					'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+			},
+			{
+				'@type': 'WebPage',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				potentialAction: {
+					'@type': 'ViewAction',
+					target: 'android-app://com.guardian/https/www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 				},
+			},
+		],
+		webPublicationDateDisplay: 'Thu 11 Oct 2018 14.30 BST',
+		shouldHideAds: false,
+		webTitle: 'Are you descended from royalty? Six things to consider',
+		isSpecialReport: false,
+		isCommentable: false,
+		keyEvents: [],
+		filterKeyEvents: false,
+		config: {
+			references: [
 				{
-					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/9djqm',
-				},
-				{
-					name: 'tn',
-					value: ['advertisement-features'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'p',
-					value: 'ng',
+					'rich-link':
+						'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
 				},
 			],
-		},
-		EUR: {
-			branding: {
-				brandingType: {
-					name: 'paid-content',
-				},
-				sponsorName: 'Amazon',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
-					dimensions: {
-						width: 140,
-						height: 90,
-					},
-					link: 'https://www.amazon.com/dp/B07FV6K8HF',
-					label: 'Paid for by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			shortUrlId: '/p/d8ex5',
+			switches: {
+				prebidAppnexusUkRow: true,
+				clickToView: true,
+				abPuzzlesBanner: true,
+				prebidTrustx: true,
+				scAdFreeBanner: false,
+				compareVariantDecision: false,
+				enableSentryReporting: true,
+				lazyLoadContainers: true,
+				adFreeStrictExpiryEnforcement: false,
+				liveblogRendering: true,
+				remarketing: true,
+				registerWithPhone: false,
+				targeting: true,
+				extendedMostPopularFronts: true,
+				slotBodyEnd: true,
+				emailInlineInFooter: true,
+				facebookTrackingPixel: true,
+				serviceWorkerEnabled: false,
+				iasAdTargeting: true,
+				extendedMostPopular: true,
+				prebidAnalytics: true,
+				imrWorldwide: true,
+				acast: true,
+				twitterUwt: true,
+				prebidAppnexusInvcode: true,
+				prebidAppnexus: true,
+				enableDiscussionSwitch: true,
+				prebidXaxis: true,
+				interactiveFullHeaderSwitch: false,
+				discussionAllPageSize: true,
+				prebidUserSync: true,
+				audioOnwardJourneySwitch: true,
+				mobileStickyPrebid: true,
+				breakingNews: true,
+				externalVideoEmbeds: true,
+				simpleReach: true,
+				carrotTrafficDriver: true,
+				geoMostPopular: true,
+				weAreHiring: true,
+				relatedContent: true,
+				thirdPartyEmbedTracking: true,
+				prebidOzone: true,
+				prebidAdYouLike: true,
+				mostViewedFronts: true,
+				abSignInGateMainControl: true,
+				ampPrebid: true,
+				googleSearch: true,
+				brazeSwitch: true,
+				consentManagement: true,
+				commercial: true,
+				redplanetForAus: true,
+				prebidSonobi: true,
+				idProfileNavigation: true,
+				confiantAdVerification: true,
+				discussionAllowAnonymousRecommendsSwitch: false,
+				scrollDepth: true,
+				permutive: true,
+				comscore: true,
+				webFonts: true,
+				prebidImproveDigital: true,
+				ophan: true,
+				crosswordSvgThumbnails: true,
+				prebidTriplelift: true,
+				weather: true,
+				commercialOutbrainNewids: true,
+				dotcomRendering: true,
+				abSignInGateMainVariant: true,
+				hostedVideoAutoplay: true,
+				abAdblockAsk: true,
+				prebidPubmatic: true,
+				serverShareCounts: true,
+				autoRefresh: true,
+				enhanceTweets: true,
+				prebidIndexExchange: true,
+				prebidOpenx: true,
+				idCookieRefresh: true,
+				sharingComments: true,
+				abSignInGateMandatory: true,
+				discussionPageSize: true,
+				smartAppBanner: false,
+				boostGaUserTimingFidelity: false,
+				historyTags: true,
+				mobileStickyLeaderboard: true,
+				abDeeplyReadTest: false,
+				surveys: true,
+				remoteBanner: true,
+				inizio: true,
+				prebidHeaderBidding: true,
+				a9HeaderBidding: true,
 			},
-			adTargeting: [
-				{
-					name: 'k',
-					value: ['whats-in-your-blood-'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'br',
-					value: 'p',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-				},
-				{
-					name: 'tn',
-					value: ['advertisement-features'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/9djqm',
-				},
-				{
-					name: 'edition',
-					value: 'eur',
-				},
-			],
+			keywordIds:
+				'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+			sharedAdTargeting: {
+				ct: 'article',
+				co: ['jennifer-rankin'],
+				url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				su: ['0'],
+				edition: 'uk',
+				tn: ['news'],
+				p: 'ng',
+				k: [
+					'eu',
+					'flooding',
+					'world',
+					'europe-news',
+					'natural-disasters',
+					'science',
+					'environment',
+					'climate-change',
+					'wildfires',
+					'scienceofclimatechange',
+				],
+				sh: 'https://www.theguardian.com/p/d8ex5',
+			},
+			toneIds: 'tone/news',
+			dcrSentryDsn:
+				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+			discussionApiUrl:
+				'https://discussion.theguardian.com/discussion-api',
+			sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+			commercialBundleUrl:
+				'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+			discussionApiClientHeader: 'nextgen',
+			shouldHideReaderRevenue: false,
+			sentryHost: 'app.getsentry.com/35463',
+			isPaidContent: false,
+			headline: 'Headline string',
+			idApiUrl: 'https://idapi.theguardian.com',
+			showRelatedContent: true,
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			videoDuration: 0,
+			stage: 'PROD',
+			isSensitive: false,
+			isDev: false,
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+			keywords:
+				'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			revisionNumber: 'DEV',
+			section: 'environment',
+			isPhotoEssay: false,
+			ampIframeUrl:
+				'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+			isLive: false,
+			host: 'https://www.theguardian.com',
+			brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+			contentType: 'Article',
+			idUrl: 'https://profile.theguardian.com',
+			author: 'Jennifer Rankin',
+			dfpAccountId: '59666047',
+			pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+			mmaUrl: 'https://manage.theguardian.com',
+			abTests: {},
+			edition: 'UK',
+			ipsosTag: 'environment',
+			isLiveBlog: false,
+			frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+			webPublicationDate: 1581314427000,
+			discussionD2Uid: 'zHoBy6HNKsk',
 		},
 	},
-	beaconURL: '//phar.gu-web.net',
-	hasRelated: true,
-	webPublicationSecondaryDateDisplay:
-		'Last modified on Tue 17 Aug 2021 16.00 BST',
-	editionLongForm: 'UK edition',
-	publication: 'theguardian.com',
-	trailText: 'Experts weigh in',
-	subMetaKeywordLinks: [
-		{
-			url: '/whats-in-your-blood-/whats-in-your-blood-',
-			title: "What's in your blood?",
-		},
-		{
-			url: '/tone/advertisement-features',
-			title: 'advertisement features',
-		},
-	],
-	contentType: 'Article',
-	isRightToLeftLang: false,
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	pageFooter: {
+		footerLinks: [
+			[
+				{
+					text: 'About us',
+					url: '/about',
+					dataLinkName: 'uk : footer : about us',
+					extraClasses: '',
+				},
+				{
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
+				},
+				{
+					text: 'Complaints & corrections',
+					url: '/info/complaints-and-corrections',
+					dataLinkName: 'complaints',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
+					extraClasses: '',
+				},
+				{
+					text: 'Work for us',
+					url: 'https://workforus.theguardian.com',
+					dataLinkName: 'uk : footer : work for us',
+					extraClasses: '',
+				},
+				{
+					text: 'Privacy policy',
+					url: '/info/privacy',
+					dataLinkName: 'privacy',
+					extraClasses: '',
+				},
+				{
+					text: 'Cookie policy',
+					url: '/info/cookies',
+					dataLinkName: 'cookie',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
+					extraClasses: '',
+				},
+				{
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
+				},
+			],
+			[
+				{
+					text: 'All topics',
+					url: '/index/subjects/a',
+					dataLinkName: 'uk : footer : all topics',
+					extraClasses: '',
+				},
+				{
+					text: 'All writers',
+					url: '/index/contributors',
+					dataLinkName: 'uk : footer : all contributors',
+					extraClasses: '',
+				},
+				{
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Digital newspaper archive',
+					url: 'https://theguardian.newspapers.com',
+					dataLinkName: 'digital newspaper archive',
+					extraClasses: '',
+				},
+				{
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : facebook',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : youtube',
+					extraClasses: '',
+				},
+				{
+					text: 'Instagram',
+					url: 'https://www.instagram.com/guardian',
+					dataLinkName: 'uk : footer : instagram',
+					extraClasses: '',
+				},
+				{
+					text: 'LinkedIn',
+					url: 'https://www.linkedin.com/company/theguardian',
+					dataLinkName: 'uk : footer : linkedin',
+					extraClasses: '',
+				},
+				{
+					text: 'Twitter',
+					url: 'https://twitter.com/guardian',
+					dataLinkName: 'uk: footer : twitter',
+					extraClasses: '',
+				},
+				{
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
+					extraClasses: '',
+				},
+			],
+			[
+				{
+					text: 'Advertise with us',
+					url: 'https://advertising.theguardian.com',
+					dataLinkName: 'uk : footer : advertise with us',
+					extraClasses: '',
+				},
+				{
+					text: 'Guardian Labs',
+					url: '/guardian-labs',
+					dataLinkName: 'uk : footer : guardian labs',
+					extraClasses: '',
+				},
+				{
+					text: 'Search jobs',
+					url: 'https://jobs.theguardian.com',
+					dataLinkName: 'uk : footer : jobs',
+					extraClasses: '',
+				},
+				{
+					text: 'Patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+			],
+		],
+	},
 	nav: {
 		currentUrl: '/whats-in-your-blood-',
 		pillars: [
@@ -1077,1670 +3877,6 @@ export const Labs: FEArticleType = {
 			},
 		},
 	},
-	author: {
-		byline: '',
-	},
-	designType: 'AdvertisementFeature',
-	editionId: 'UK',
-	format: {
-		design: 'PhotoEssayDesign',
-		theme: 'Labs',
-		display: 'ImmersiveDisplay',
-	},
-	openGraphData: {
-		'og:url':
-			'http://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-		'article:author': '',
-		'og:image:width': '700',
-		'og:image':
-			'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=700&quality=85&auto=format&fit=max&s=1f7f8ebaf0733e0cdf90469cb1b8c138',
-		'al:ios:url':
-			'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=applinks',
-		'article:publisher': 'https://www.facebook.com/theguardian',
-		'og:title': 'Are you descended from royalty? Six things to consider',
-		'fb:app_id': '180444840287',
-		'article:modified_time': '2021-08-17T15:00:52.000Z',
-		'og:image:height': '420',
-		'og:description': 'Experts weigh in',
-		'og:type': 'article',
-		'al:ios:app_store_id': '409128287',
-		'article:section': "What's in your blood?",
-		'article:published_time': '2018-10-11T13:30:08.000Z',
-		'article:tag': "What's in your blood?",
-		'al:ios:app_name': 'The Guardian',
-		'og:site_name': 'the Guardian',
-	},
-	standfirst: '',
-	sectionUrl: 'whats-in-your-blood-',
-	pageId: 'whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-	version: 3,
-	tags: [
-		{
-			id: 'whats-in-your-blood-/whats-in-your-blood-',
-			type: 'PaidContent',
-			title: "What's in your blood?",
-		},
-		{
-			id: 'type/article',
-			type: 'Type',
-			title: 'Article',
-		},
-		{
-			id: 'tone/advertisement-features',
-			type: 'Tone',
-			title: 'Advertisement features',
-		},
-	],
-	pillar: 'news',
-	webURL: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-	showBottomSocialButtons: true,
-	isImmersive: true,
-	sectionLabel: "What's in your blood?",
-	shouldHideReaderRevenue: true,
-	isAdFreeUser: false,
-	pageFooter: {
-		footerLinks: [
-			[
-				{
-					text: 'About us',
-					url: '/about',
-					dataLinkName: 'uk : footer : about us',
-					extraClasses: '',
-				},
-				{
-					text: 'Help',
-					url: '/help',
-					dataLinkName: 'uk : footer : tech feedback',
-					extraClasses: 'js-tech-feedback-report',
-				},
-				{
-					text: 'Complaints & corrections',
-					url: '/info/complaints-and-corrections',
-					dataLinkName: 'complaints',
-					extraClasses: '',
-				},
-				{
-					text: 'SecureDrop',
-					url: 'https://www.theguardian.com/securedrop',
-					dataLinkName: 'securedrop',
-					extraClasses: '',
-				},
-				{
-					text: 'Work for us',
-					url: 'https://workforus.theguardian.com',
-					dataLinkName: 'uk : footer : work for us',
-					extraClasses: '',
-				},
-				{
-					text: 'Privacy policy',
-					url: '/info/privacy',
-					dataLinkName: 'privacy',
-					extraClasses: '',
-				},
-				{
-					text: 'Cookie policy',
-					url: '/info/cookies',
-					dataLinkName: 'cookie',
-					extraClasses: '',
-				},
-				{
-					text: 'Terms & conditions',
-					url: '/help/terms-of-service',
-					dataLinkName: 'terms',
-					extraClasses: '',
-				},
-				{
-					text: 'Contact us',
-					url: '/help/contact-us',
-					dataLinkName: 'uk : footer : contact us',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'All topics',
-					url: '/index/subjects/a',
-					dataLinkName: 'uk : footer : all topics',
-					extraClasses: '',
-				},
-				{
-					text: 'All writers',
-					url: '/index/contributors',
-					dataLinkName: 'uk : footer : all contributors',
-					extraClasses: '',
-				},
-				{
-					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
-					dataLinkName: 'uk : footer : modern slavery act statement',
-					extraClasses: '',
-				},
-				{
-					text: 'Digital newspaper archive',
-					url: 'https://theguardian.newspapers.com',
-					dataLinkName: 'digital newspaper archive',
-					extraClasses: '',
-				},
-				{
-					text: 'Facebook',
-					url: 'https://www.facebook.com/theguardian',
-					dataLinkName: 'uk : footer : facebook',
-					extraClasses: '',
-				},
-				{
-					text: 'YouTube',
-					url: 'https://www.youtube.com/user/TheGuardian',
-					dataLinkName: 'uk : footer : youtube',
-					extraClasses: '',
-				},
-				{
-					text: 'Instagram',
-					url: 'https://www.instagram.com/guardian',
-					dataLinkName: 'uk : footer : instagram',
-					extraClasses: '',
-				},
-				{
-					text: 'LinkedIn',
-					url: 'https://www.linkedin.com/company/theguardian',
-					dataLinkName: 'uk : footer : linkedin',
-					extraClasses: '',
-				},
-				{
-					text: 'Twitter',
-					url: 'https://twitter.com/guardian',
-					dataLinkName: 'uk: footer : twitter',
-					extraClasses: '',
-				},
-				{
-					text: 'Newsletters',
-					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
-					dataLinkName: 'uk : footer : newsletters',
-					extraClasses: '',
-				},
-			],
-			[
-				{
-					text: 'Advertise with us',
-					url: 'https://advertising.theguardian.com',
-					dataLinkName: 'uk : footer : advertise with us',
-					extraClasses: '',
-				},
-				{
-					text: 'Guardian Labs',
-					url: '/guardian-labs',
-					dataLinkName: 'uk : footer : guardian labs',
-					extraClasses: '',
-				},
-				{
-					text: 'Search jobs',
-					url: 'https://jobs.theguardian.com',
-					dataLinkName: 'uk : footer : jobs',
-					extraClasses: '',
-				},
-				{
-					text: 'Patrons',
-					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
-					dataLinkName: 'uk : footer : patrons',
-					extraClasses: '',
-				},
-			],
-		],
-	},
-	twitterData: {
-		'twitter:app:id:iphone': '409128287',
-		'twitter:app:name:googleplay': 'The Guardian',
-		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:card': 'summary_large_image',
-		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:app:id:ipad': '409128287',
-		'twitter:app:id:googleplay': 'com.guardian',
-		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-		'twitter:app:url:iphone':
-			'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=twitter',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/7e4efe1f4747b71e5b104e258d07ca1d377adff0/0_0_995_597/master/995.jpg?width=700&quality=85&auto=format&fit=max&s=1f7f8ebaf0733e0cdf90469cb1b8c138',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider?contenttype=Article&source=twitter',
-	},
-	sectionName: 'whats-in-your-blood-',
-	webPublicationDateDeprecated: '2018-10-11T13:30:08.000Z',
-	pageType: {
-		hasShowcaseMainElement: false,
-		isFront: false,
-		isLiveblog: false,
-		isMinuteArticle: false,
-		isPaidContent: true,
-		isPreview: false,
-		isSensitive: false,
-	},
-	hasStoryPackage: false,
-	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	showTableOfContents: false,
-	lang: 'en',
-	byline: '',
-	headline: 'Are you descended from royalty? Six things to consider',
-	guardianBaseURL: 'https://www.theguardian.com',
-	isLegacyInteractive: false,
-	webPublicationDate: '2018-10-11T13:30:08.000Z',
-	mainMediaElements: [
-		{
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			media: {
-				allImages: [
-					{
-						index: 0,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1800',
-							width: '3000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/3000.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1800',
-							width: '3000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg',
-					},
-				],
-			},
-			data: {
-				alt: 'Are you royal?',
-				credit: 'Illustration: Peter Horvath',
-			},
-			displayCredit: true,
-			role: 'immersive',
-			imageSources: [
-				{
-					weighting: 'inline',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=290494798682957dfa496e07a5b3d9e4',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51d0aa3ef9a55650dd4239e3bc4478f9',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=290494798682957dfa496e07a5b3d9e4',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51d0aa3ef9a55650dd4239e3bc4478f9',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=58bd40ac3f0f3666e0247a25e2bbc104',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7416e6e379917abdf770e23faa44b030',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=c51f1b53a8f12b45b26ff8e29d654bac',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2dc69400c3f47f6ab8380c59b37007e',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [],
-				},
-				{
-					weighting: 'showcase',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=9e4f8bb5b8372cb1612bb77312c754f1',
-							width: 1020,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=18b0909bf17ed8b132b8e4880d6bd85f',
-							width: 2040,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=1d7dc587eb0a2b15caccd7a646da19a2',
-							width: 940,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=e2d1f4374257d6f011883895546ecd62',
-							width: 1880,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=63aa1989a0d59ed1dba806fd34683964',
-							width: 700,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=db6e7b3f2797c8329e44b9ecb06deca0',
-							width: 1400,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=ed7f1bee8eab75aa4632c8d4be81868a',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=842fcc0cdc18a9973d4230f59562495f',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=58bd40ac3f0f3666e0247a25e2bbc104',
-							width: 645,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7416e6e379917abdf770e23faa44b030',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=c51f1b53a8f12b45b26ff8e29d654bac',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2dc69400c3f47f6ab8380c59b37007e',
-							width: 930,
-						},
-					],
-				},
-				{
-					weighting: 'halfwidth',
-					srcSet: [],
-				},
-				{
-					weighting: 'immersive',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1900&quality=85&auto=format&fit=max&s=b91f835117be9ee867ddf939ca13ea4d',
-							width: 1900,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=7eb811f7d0226d1d7de7e58e20180bd4',
-							width: 3800,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=5ce957f651cf90330ba5b2eee24b1ec3',
-							width: 1300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=9b24d47c9a80605bf84b6b5b397a579a',
-							width: 2600,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=8c93f5aec37f8d3c0d4fd0b6b0fa1dca',
-							width: 1140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=90f2bc4e69bcce87637dda59637c1084',
-							width: 2280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=980&quality=85&auto=format&fit=max&s=ae248b9b962042d5596d446ae8b13a94',
-							width: 980,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=1af7a5e70637f793673edf78cc49f02a',
-							width: 1960,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=740&quality=85&auto=format&fit=max&s=96a83f57131fe295442668bf92422a1c',
-							width: 740,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=cdbd2a97f9d5d19b66cc627100502a75',
-							width: 1480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=ed7f1bee8eab75aa4632c8d4be81868a',
-							width: 660,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=842fcc0cdc18a9973d4230f59562495f',
-							width: 1320,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=480&quality=85&auto=format&fit=max&s=b4645a6c1f05f9841d07e432d7aa1289',
-							width: 480,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/8b723eb4d94368efc040dc26313a01cec69b588a/0_0_3000_1800/master/3000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=89c596a0381199bd41d6b61d19d29032',
-							width: 960,
-						},
-					],
-				},
-			],
-			elementId: 'eef5c486-72e4-43cb-92ed-1cd576670b2d',
-		},
-	],
-	canonicalUrl:
-		'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
-	blocks: [
-		{
-			id: '5ba15482e4b0f675819f3d0d',
-			elements: [
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>What are the odds that you have royal blood? It’s a question more and more of us are asking these days. As genetic testing gets faster, cheaper and more accurate, the age-old fantasy of suddenly learning you’re descended from a king or a queen – the premise of countless movies, books and daydreams – is inching closer to reality.</p>',
-					elementId: '0eb7fbbb-4df2-495d-9c11-61efca401173',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>But we’re not there just yet. While a genetic test can tell us a lot – 23andme can even pinpoint how much Neanderthal we have in us – there’s still no single test for royal blood.</p>',
-					elementId: '26005111-fd58-4e4a-8907-352ab42af09d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“DNA testing only reveals a general ethnic breakdown that changes over time, as the science becomes further refined,” says<a href="https://www.djoshuataylor.com/" rel="nofollow"> Joshua Taylor</a>, president of the New York Genealogical &amp; Biographical Society. It “might identify that two individuals share a common ancestor within a certain number of generations, but research is still needed to identify <em>who</em> that common ancestor might be.”</p>',
-					elementId: 'a928a547-2615-495f-9f2c-a4c11d8be0a4',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>And ancestral math is messy. The number of ancestors we have increases exponentially, not linearly — more like a meshed web than a branched family tree, says the geneticist<a href="http://adamrutherford.com/" rel="nofollow"> Adam Rutherford</a>. If we went back a thousand years, each of us would have over a trillion direct ancestors, which is more than all the humans who have ever lived. This paradox exists because, as Rutherford writes: “Pedigrees begin to fold in on themselves a few generations back.” Meaning “you can be, and in fact are, descended from the same individual many times over”.</p>',
-					elementId: '84f0b0e2-e4b3-43a9-bbee-e2f5a705e8b5',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Throw in other factors that enlarge and complicate lineage – invasions and migrations, wars and revolutions – and you can see that humanity is indeed a web of overlapping and enmeshed networks of descent.</p>',
-					elementId: '3081c699-2332-4dc7-9d45-197c1df739d6',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Genealogists say that the work of identifying royal lineage – whether to establish “direct descent” (a key to inheritance and social status) or simply to satisfy curiosity – is helped and hindered by a number of factors. If you’re thinking of climbing your family tree in search of royal fruit, here are a few things to consider.</p>',
-					elementId: '1424ae4d-3e6a-4673-8081-8110d0ba0929',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>1. If you’re European – or even descended from Europeans – you’re probably related to royalty</strong></h2>',
-					elementId: '3bb23988-22d2-490f-8932-adea1397f0ae',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '657',
-									width: '1500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/1500.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '657',
-									width: '1500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '438',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '219',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '61',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/140.jpg',
-							},
-						],
-					},
-					data: {
-						alt: 'Map of Europe',
-						credit: 'Composite: Kim Cortes and teekid/Getty images',
-					},
-					displayCredit: true,
-					role: 'showcase',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=140&quality=85&auto=format&fit=max&s=9e247bce25b8d304d877dc48a33a08c7',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b1545926cc578a0337ec0add2251b9f0',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=120&quality=85&auto=format&fit=max&s=fd29e0283c06286e224914953af48846',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0c9e9c4874913b74f2b2a082cc06c0aa',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=380&quality=85&auto=format&fit=max&s=3fe8973ec4a6fe31f0f5629e988b1778',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3361d25cf49c461bc8e061f55e940b8a',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=300&quality=85&auto=format&fit=max&s=b3cfaf8118347a683f6a4ee5ff9e3207',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=b5465bc78adabf7cda24fd874e94205f',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=880&quality=85&auto=format&fit=max&s=b455973ae192a7cc6c3c6f2c9cbe03ef',
-									width: 880,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=012b8d0e42b174bf29b5a65b4b9c2cf2',
-									width: 1760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=800&quality=85&auto=format&fit=max&s=6a33e86ca5a59efd3a6faee4cfe29b8b',
-									width: 800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=876547115a268ad3d6a92b5c3f3c394c',
-									width: 1600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=640&quality=85&auto=format&fit=max&s=6ab912e3f8145e49623901f97e7df334',
-									width: 640,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=8cc3028101b8121eea01d5aad08850ad',
-									width: 1280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=85&auto=format&fit=max&s=63a4c9568894900b01ca7236f62450b4',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0337f89f910ba5797d5957cb9dbea73c',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=85&auto=format&fit=max&s=572f98bdbfa7d1747843bb7df643c611',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=dc80a024fff8efd9ecfaf6fbfee46dc9',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=85&auto=format&fit=max&s=45296c29941f0d73262d02e4699ecfb2',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4b90696cba7467d00e7d1fca12f51f77',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1300&quality=85&auto=format&fit=max&s=3c486f029e96e05e24d2866b996e96d4',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0b3a8b12aae8440be9d52671f38f0c34',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1140&quality=85&auto=format&fit=max&s=cd3abfe76454b92b0719f98cb939499d',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=0fe1547167f8aa557ce75e827e9ef4d9',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1125&quality=85&auto=format&fit=max&s=99779d337ad59f7156a5320cf28ae0e3',
-									width: 1125,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7d200a6c9ec5cf005d1a7455e0548db0',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=965&quality=85&auto=format&fit=max&s=ba399819be212af77aaf5f02eb76a410',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=aa71743b606e98b3eea9cb2bad72cfe9',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=725&quality=85&auto=format&fit=max&s=012b295bea467cca70fe229199dcee62',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=cc08ac088133767e20a7e2a308047eb8',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=645&quality=85&auto=format&fit=max&s=0b0b6859b7606e0d045af7ddb78b4919',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=7fe58c503a5df4ebe5c84cd3336b76ac',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=465&quality=85&auto=format&fit=max&s=753f6d2a2fb81211fbd710fd833d2f92',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/ba19243a7a7a5d553ea028d05ecbfe1bd048e469/0_0_1500_657/master/1500.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=a3bca3395f868b3040ac1955fff331f3',
-									width: 930,
-								},
-							],
-						},
-					],
-					elementId: '4c0faead-e4b5-4912-8d47-f7b9c3c6b574',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li><p>Credit: The Guardian Labs</p></li>\n</ul>',
-					elementId: '4a27f80e-34b6-4347-8468-0abf1e7f8582',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In 1999, the <a href="http://www.stat.yale.edu/~jtc5/papers/CommonAncestors/AAP_99_CommonAncestors_paper.pdf" rel="nofollow">Yale statistician Joseph Chang</a> showed that if you go back far enough – say, 32 generations, or 900 years – you’d find that everyone alive today shares a common ancestor. In Europe, where lineages have been closely studied, that ancestor was someone who lived just 600 years ago.</p>',
-					elementId: '22137ebf-6f9c-4f8f-87cd-8764191d754a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>A <a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001555" rel="nofollow">2013 study from Peter Ralph and Graham Coop</a> built on Chang’s research, proving that all Europeans come from the same people. More recently, Rutherford has demonstrated that virtually everyone in Europe is indeed descended from royalty – specifically from Charlemagne, who ruled western Europe from 768 to 814.</p>',
-					elementId: '46b40eb6-2f7c-4ca3-9134-619037466034',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>A <a href="https://www.theatlantic.com/magazine/archive/2002/05/the-royal-we/302497/" rel="nofollow">2002 article</a> offers more clarifying examples: “Almost everyone in the New World [aka the Americas, including Bermuda and the Caribbean] must be descended from English royalty – even people of predominantly African or Native American ancestry, because of the long history of intermarriage in the Americas. Similarly, everyone of European ancestry must descend from Muhammad.” Meanwhile, “Confucius, Nefertiti, and just about any other ancient historical figure who was even moderately prolific must today be counted among everyone’s ancestors”.</p>',
-					elementId: '1ea4771d-9723-49b1-b74f-3a684fcc1c51',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In other words, mathematically speaking, we’re all related to royalty.</p>',
-					elementId: '7721a479-b6c0-40e3-83bf-f209f86b3319',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>2. Royal + commoner + intermarriage = higher odds of regal descent</strong></h2>',
-					elementId: 'f1868a48-9260-4e1b-b14e-fad57d29a949',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>As Chang acknowledged in his study, most mating isn’t random – it’s assortative. That means that people tend to mate with those who are most like themselves in terms of geography, language and socioeconomic status. A wealthy Scandinavian man is far more likely to marry a well-to-do woman from Sweden or Norway than a poor one from Saskatchewan.</p>',
-					elementId: '56e821da-eb0f-4460-80ba-42511302991a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“In most cases,” says Taylor, “royal families work to marry within the same social circle.” <a href="http://faculty.econ.ucdavis.edu/faculty/gclark/" rel="nofollow">Gregory Clark</a>, an economics professor at UC Davis who studies the genealogy of social mobility, says that means “the likelihood that you are related to royalty, if you went back as far as 1300 or 1066, depends on how closed a class nobles were”.</p>',
-					elementId: 'd278e937-4a0b-4473-8089-91e4967abec9',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In some countries, that class door is firmly shut. But in England, says Clark, the “noble classes have always been fairly open to incorporating wealthy commoners … So a large share of the modern English will be related to someone in the past who was part of the nobility.”</p>',
-					elementId: '0b0e53b4-72cf-4c1b-b20d-94d8705ff819',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Translation: if your ancestors hailed from a country or region where royals and commoners intermarried, you have a better chance of being descended from royalty.</p>',
-					elementId: '5f205bed-69c0-486a-981a-57fdf009b0c4',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>3. You don’t need to be fully – or even legitimately – royal to have royal blood</strong></h2>',
-					elementId: '9feea063-ee45-4124-acba-46d142cc941c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '1218',
-									width: '974',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/974.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '1218',
-									width: '974',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '1000',
-									width: '800',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/800.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '500',
-									width: '400',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/400.jpg',
-							},
-						],
-					},
-					data: {
-						alt: 'Statue of Queen Elizabeth II',
-						credit: 'Composite: Kim Cortes and Vicente Méndez/Getty images',
-					},
-					displayCredit: true,
-					role: 'supporting',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=140&quality=85&auto=format&fit=max&s=170ead967912967c4e2421c41402b6e8',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=108b5962b43f4095f291f79cbed9781d',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=120&quality=85&auto=format&fit=max&s=d616f4b0bf984f4a31385cecc3036dd3',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=98e8db4432b7484d119cff88eb728697',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=380&quality=85&auto=format&fit=max&s=d8157b498a8189b5f05b588cd217d3fd',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=540c2624badeec900c291a10fb79cf42',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=300&quality=85&auto=format&fit=max&s=3fdd8ddff9bb4d14907d082609950ac3',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=ea9323cebbb9b7aaab9cb3e43655c31e',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=880&quality=85&auto=format&fit=max&s=657b7bf905a93ed3e0e3b9b9c3a3a7e7',
-									width: 880,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=9a507e34ca2e0da84b79b6ac5e422711',
-									width: 1760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=800&quality=85&auto=format&fit=max&s=cc0fc680a991915cc2607fb62ac43155',
-									width: 800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=e29da27703280084ac8772ed1c90f435',
-									width: 1600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=640&quality=85&auto=format&fit=max&s=9e1514f3318b11c8ed60c7e03e1cc582',
-									width: 640,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=865bf46a5d5a8d70db4fad6f8599e02f',
-									width: 1280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=85&auto=format&fit=max&s=5b86fc7c3a334be969d62ccb7cb694c6',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=25d0f02ae8f5b470bfc8be3ad5849af3',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=85&auto=format&fit=max&s=9e7d882ed1378f3080901a806e44ec85',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b1af1ce0c71fc9e950d059140c61bfe4',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=85&auto=format&fit=max&s=a237c7418bcbb71006cfef73f99bc2c0',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=1bf6950112a59f143e38182d89094589',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1300&quality=85&auto=format&fit=max&s=1be5d29f7485a5142bbe4dedb219eb8d',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b856f51757b5bae5333c930313dd6864',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1140&quality=85&auto=format&fit=max&s=861b19ae219cebf4a01c869d89a23a66',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=b13c14e537fc0dc7c96e6a5a1aa5fe09',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1125&quality=85&auto=format&fit=max&s=027d34b4df8da06fcb644114e1a45531',
-									width: 1125,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=8cdedc170fa6c12074f0149d34fdb244',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=965&quality=85&auto=format&fit=max&s=a7c776c58fdc1d700524f4a586977f63',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=941932598e198506d019be44afbec723',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=725&quality=85&auto=format&fit=max&s=7815ccae2fce6fa235cb3e9c67e547b3',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=fa84384bfac75884b463c0f50af0adf6',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=645&quality=85&auto=format&fit=max&s=31707891fec5a085e370ffaee8dec6fb',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=cd7f69972b4d85bcd1470354adefdf96',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=465&quality=85&auto=format&fit=max&s=c16ccb1422dfe17fac72efbd17b1d28d',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24e0b48cbf28de8e14c6a7cb813308f005e912ac/24_0_974_1218/master/974.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a486e6a0af1c08f0f433233b7943f1d',
-									width: 930,
-								},
-							],
-						},
-					],
-					elementId: 'd22b7cc7-9021-494b-b3b6-537f603e2a02',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Here’s another way to look at it: if you’re descended from royalty, it might be via a prince, a princess – or a pauper. In recent years morganatic marriages – aka when a royal marries someone of lesser status, à la Prince William and Kate Middleton – have become more and more common around the world, increasing the number of people with a royal claim.</p>',
-					elementId: 'fd1ed01a-ad1b-444a-86fc-a88141306edd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><a href="https://twitter.com/rusgenproject?lang=en" rel="nofollow">Kirill Chashchin</a>, a Russian genealogical researcher, says that “almost royals” – illegitimate children and those (like Princess Diana) who show <em>some</em> royal connections but not a clear lineage – have muddied the waters. <a href="https://www.cgr2018.com/" rel="nofollow">Dale Myers</a>, founder of the Colorado Genealogical Research Company, agrees. “Kings tended to have a wife and many consorts or mistresses,” he says. “As a result, King Richard I … may not [have been] related to King Edward after all.”</p>',
-					elementId: '0268be07-7313-4283-b3a7-91ce69dc9a66',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Plus, royalty isn’t necessarily static. “In the US,” Taylor says, “millions can trace their ancestry back to European royalty through ‘gateway ancestors’ — early colonial Americans with documented lineage to royal lines.” Today, “these ancestors often have millions of living descendants who can claim royal descent. The odds are increased the longer a family has been in a country or region.”</p>',
-					elementId: '4972a707-c9d7-4522-8e0a-b24eb1fb613f',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The bottom line: if someone in your family mated with a royal, or was born to one, it may be enough to link you to a throne.</p>',
-					elementId: '29f260ee-6d03-4e09-a4a7-37a6b781c0b7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>4. Can you find your family’s name in a historical record? It could be the link to a royal ancestry</strong></h2>',
-					elementId: '391b95c8-d123-4090-906e-6c8dbbe089a7',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In many places a dearth of historical records makes it tricky to track royal lines. “If you consider that those of noble birth or wealth were often the only individuals that had written records that were created (and have survived),” says Taylor, “it makes a lot of sense as to why those royal lines are some of the earliest lineages an individual can connect to. While church records might take a family back to the 1600s, landownership and other materials can trace a family back centuries before that date.”</p>',
-					elementId: '09e24e0c-9fed-41c8-8b9c-ec094868cc9e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In non-European cultures, he says, “accessible records to connect living individuals to those lines differ … Some areas of the world where oral histories and traditions are prevalent make it even more difficult, as the lineage itself might only exist in the memories of elders.”</p>',
-					elementId: '245a0621-4f12-4f59-a3de-ee21230df131',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><a href="http://www.doorstothepast.com/" rel="nofollow">Nydia Hanna</a>, who runs the genealogical research firm Doors to the Past, says: “Connecting genealogies in the New World to the Old World may be difficult for several reasons.” Central America and the Caribbean, for instance, have been afflicted by “many wars and changeovers as far as governing bodies. Although documents and vital records were kept in the Old World, some of those documents were not kept in the New World unless for tax purposes. This meant that only the upper class have records, in most cases.”</p>',
-					elementId: '166c3e29-3112-493f-a8a7-cd4545ccb906',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Think of it this way: if you’re able to find a paper trail, you might want to see where it leads.</p>',
-					elementId: '7caaa282-727f-4b84-bfc5-bd6a84746a7d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>5. Europe doesn’t have a monopoly on royalty</strong></h2>',
-					elementId: '7b6c7db2-21de-4870-8ee1-e4edd12b2de2',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '840',
-									width: '1400',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/1400.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '840',
-									width: '1400',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '600',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '300',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '84',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/140.jpg',
-							},
-						],
-					},
-					data: {
-						alt: 'Genghis Khan statue',
-						credit: 'Composite: Kim Cortes and gionnixxx/Getty images',
-					},
-					displayCredit: true,
-					role: 'inline',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=140&quality=85&auto=format&fit=max&s=8970357e2b9184384b04f3ae107d9d1c',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1ea157632b54a2d680d3ad2a25fa548d',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=120&quality=85&auto=format&fit=max&s=a07623ac07b8f588a989146d18e434df',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cc580ccfdd2d748e77901a33cbeb9eda',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=380&quality=85&auto=format&fit=max&s=8d6a5caef099741b6625806194bfa32a',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ae58ccb841a62c736ea86db0f58dc596',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=300&quality=85&auto=format&fit=max&s=3553b96d6e88c7d1a033aca0dae98b3c',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=496e02158f476d1a77bdd22134517d5e',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=880&quality=85&auto=format&fit=max&s=0e2cd6939e3149fdfcea066d171df414',
-									width: 880,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=1565b08903797bda8fc1ee57fe43934f',
-									width: 1760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=800&quality=85&auto=format&fit=max&s=ba79328068f852ddf76763f7e68fd0a0',
-									width: 800,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=90312890bd26a04c451525cd3c8b9c8e',
-									width: 1600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=640&quality=85&auto=format&fit=max&s=2189b7aaa00dd858ec42ac7a9e39207b',
-									width: 640,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=213cefcca6fc092968227b83ad793082',
-									width: 1280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=85&auto=format&fit=max&s=dc532801545cbea6597bd5773bd7ee24',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c74d4029051df6a93451c9c4ac48064b',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=85&auto=format&fit=max&s=1d6d229d8710268a092edb5b3eb4b8cf',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=7051908d18a4bb1f750018a8212baca8',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=85&auto=format&fit=max&s=1aa5b454356659f34e1a06b60a140c02',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=565ae14083a3b0c04188bbccebb9ca45',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1300&quality=85&auto=format&fit=max&s=b2392c1b3db72c9deffa4c31e9d374b0',
-									width: 1300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=dfeeb1980102a077a62d332df7f9eb86',
-									width: 2600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1140&quality=85&auto=format&fit=max&s=ba6a639d94c080e110c831ac68a9fb62',
-									width: 1140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e3b06030d9a69d00ce26cbf4f88780d3',
-									width: 2280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1125&quality=85&auto=format&fit=max&s=aded998598302d0d68ad1a1270302970',
-									width: 1125,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e2a81387e03cfc7a80da89f0e246a8a1',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=965&quality=85&auto=format&fit=max&s=80da2ea888e2b141521212bbb44cc19f',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f2b4717525a16e400837b2690638e2c9',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=725&quality=85&auto=format&fit=max&s=f47ae3a28b40646d8b82e21f32a25c83',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=d59fa23c991763d4f3bb51529deb0481',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=645&quality=85&auto=format&fit=max&s=8b5fdefd60d091457f2144da6ab66ddb',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=aa61f26970c73f31daeb7b0f2aba748a',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=465&quality=85&auto=format&fit=max&s=5f076cb40eb67668fc1a208a021a7a3d',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/32a9b70de14a268de050269b1d4986d918906eb0/0_1_1400_840/master/1400.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=114763bc5c98666a2f45c737c16e7a2c',
-									width: 930,
-								},
-							],
-						},
-					],
-					elementId: 'cdf0292d-a9cb-4a67-8801-c6765c222ec1',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<ul>\n <li><p>Credit: The Guardian Labs</p></li>\n</ul>',
-					elementId: 'a093c1ea-f11b-477a-ade9-6d8ba6c2078d',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Of course, not all royal roots reach back to Europe. It may be where many records have survived, and the subject of much genealogical research. But if your family origins can be traced elsewhere, you may still be in luck – here are a few notable findings.</p>',
-					elementId: 'ea5e4c49-bb12-456c-a02c-550dc1950c97',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In 2003, a<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1180246/" rel="nofollow"> groundbreaking study</a> showed that one in every 200 men worldwide (and 16 million in central Asia) are direct-line descendants of the 12th-century Mongolian emperor Genghis Khan. Yet Khan’s not the only Asian ruler responsible for millions of Y-chromosome lineages. According to an<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1285168/" rel="nofollow"> international study in 2005</a>, 10 other men living in Asia and the Middle East between 2100 BC and 700 AD left behind prolific royal lines. One of them was a 16th-century Qing dynasty ruler named Giocangga, whose descendants include 1.5 million men in modern northern China.</p>',
-					elementId: 'dd197739-e2ca-4d6c-96e2-c7cad2157cda',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Over in South America, <a href="https://link.springer.com/article/10.1007/s00438-018-1427-4" rel="nofollow">genetic and historical research</a> has found noble bloodlines directly connecting Atahualpa, the last Incan emperor (who died 1533), to some of modern Peru’s humblest families.</p>',
-					elementId: '938fb6ab-a982-4243-a060-ebafa140038e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>And don’t forget about the Egyptian pharaoh Tutankhamun, aka King Tut. Half of all men living in western Europe are related to him, <a href="https://uk.reuters.com/article/oukoe-uk-britain-tutankhamun-dna/half-of-european-men-share-king-tuts-dna-idUKTRE7704OR20110801" rel="nofollow">geneticists in Switzerland say</a>, including up to 70% of men in Great Britain.</p>',
-					elementId: 'c2b2e6bc-bb05-4e38-9405-d1a11ad80881',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2><strong>6. A royal lineage may be the culprit for spreading certain undesirable traits</strong></h2>',
-					elementId: 'ccf80597-805b-4cb8-bf6b-7dbd0997f843',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>King Tut left something else behind as well: a legacy of inbreeding, genetic deformities and recessive ailments.</p>',
-					elementId: 'd4824fe8-bd9c-48ac-96d9-374c40772014',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In royal families in ancient Egypt – and in many dynasties around the world, for much of human history – brothers and sisters were expected to marry, to keep the bloodline pure. This led to homozygosity — two identical forms of a gene, one inherited from each parent — which can cause a host of genetic woes: hemophilia, cystic fibrosis, Habsburg jaw, facial asymmetry, suppressed immune systems and certain kinds of cancer.</p>',
-					elementId: '505feb45-5f2f-45c3-b2df-e98251c94508',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>King Tut himself is an example. Born to parents who were brother and sister, he had a club foot, a cleft palate, scoliosis and missing bones in his feet. Geneticists think that when he died, around 1324 BC, sickle-cell disease – an inherited blood disorder – was the culprit. (Cleopatra, the last pharaoh, was married to her own brother, too.)</p>',
-					elementId: 'b27607ca-20e7-4e25-9809-18117262d32a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The jutting Habsburg jaw is another well-known woe. The first royal to have one was the Roman Emperor Maximilian I, who ruled from 1486 to 1519. But soon it turned up all over medieval Europe. Switzerland’s House of Habsburg got stuck with the name because so many of its members had the condition. (Spain’s current ruler, King Juan Carlos I, a distant descendant of the House of Hapsburg, has a correspondingly mild case of Habsburg Jaw.)</p>',
-					elementId: '218fde69-bea6-4967-9cb7-3a979fe4096a',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Then there’s hemophilia. While it’s not necessarily the direct product of inbreeding, it does stem from a gene carried by the incestuous monarchies of Europe, who spread the disease far and wide. Queen Victoria, “the grandmother of modern Europe” who ruled England from 1837 to 1901, is said to have inherited the gene from her father, Prince Edward. She in turn passed it along to her son, Leopold, and to some of her daughters, who then passed it on as well — sometimes beyond continental Europe.<strong> </strong>Tsarevich Alexei Nikolaevich, the heir apparent to the Russian Empire, inherited hemophilia from his mother, the Empress Alexandra Feodorovna (a granddaughter of Queen Victoria).</p>',
-					elementId: 'ab83a38f-52fc-47c2-b1d8-929df5c32c5b',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>So what does all this mean for today’s royal descendants? “Traits like the Hapsburg jaw, hemophilia, etc, <em>are</em> certainly seen in individuals today,” says Taylor. But while these ailments have spread, at least in part, via royalty, they’re not definite indicators of monarchic ties today.</p>',
-					elementId: '8e2dc5bd-1d23-4255-8143-a6807987ef1e',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In other words, when it comes to royal descent, not every past is prologue.</p>',
-					elementId: 'f3dbbe4a-c4af-4f42-affb-6a1bc8d18d91',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
-					alt: 'action button emebed',
-					scriptUrl:
-						'https://labs.theguardian.com/2021/test/action_buttons/v2/boot.js',
-					elementId: '246ddea3-897c-47fb-9013-cfaeadd24786',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-					html: '<style>\n\t.wrapper {\n\t\tbackground: #f1f1f1;\n\t\tpadding: 6px 10px;\n\t}\n\t.video {\n\t\tposition: relative;\n\t\theight: 0;\n\t\tpadding-top: 56.25%;\n\t}\n\n\t.iframe {\n\t\tposition: absolute;\n\t\tmargin: auto;\n\t\theight: 100%;\n\t\twidth: 100%;\n\t\ttop: 0;\n\t\tbottom: 0;\n\t\tleft: 0;\n\t\tright: 0;\n\t}\n</style> \n<div class="wrapper"> \n <h3 class="title">What’s in your blood? Watch The Romanoffs Fridays starting October 12 only on Amazon Prime Video</h3> \n <div class="video"> <iframe class="iframe" src="https://www.youtube-nocookie.com/embed/Y2qWLttWvYI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> \n </div> \n</div>',
-					safe: false,
-					alt: 'Watch The Romanoffs trailer',
-					isMandatory: false,
-					isThirdPartyTracking: false,
-					source: 'Youtube',
-					sourceDomain: 'youtube-nocookie.com',
-					elementId: 'ae2e96f0-97bd-4d09-aba4-6fe693495f4c',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
-					alt: 'Amazon The Romanoffs footer',
-					scriptUrl:
-						'https://labs.theguardian.com/2018/amazon_romanoffs/footer/boot.js',
-					elementId: 'a9033940-d46e-46bb-8140-b72689860028',
-				},
-			],
-			attributes: {
-				pinned: false,
-				keyEvent: false,
-				summary: false,
-			},
-			blockCreatedOn: 1539264608000,
-			blockCreatedOnDisplay: '14.30 BST',
-			blockLastUpdated: 1629212452000,
-			blockLastUpdatedDisplay: '16.00 BST',
-			blockFirstPublished: 1539264608000,
-			blockFirstPublishedDisplay: '14.30 BST',
-			blockFirstPublishedDisplayNoTimezone: '14.30',
-			contributors: [],
-			primaryDateLine: 'Thu 11 Oct 2018 14.30 BST',
-			secondaryDateLine: 'Last modified on Tue 17 Aug 2021 16.00 BST',
-		},
-	],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
@@ -2798,13 +3934,6 @@ export const Labs: FEArticleType = {
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Thu 11 Oct 2018 14.30 BST',
-	shouldHideAds: false,
-	webTitle: 'Are you descended from royalty? Six things to consider',
-	isSpecialReport: false,
-	isCommentable: false,
-	keyEvents: [],
-	filterKeyEvents: false,
 	config: {
 		references: [
 			{
@@ -2938,7 +4067,7 @@ export const Labs: FEArticleType = {
 		discussionApiClientHeader: 'nextgen',
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
-		isPaidContent: true,
+		isPaidContent: false,
 		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
@@ -2973,4 +4102,295 @@ export const Labs: FEArticleType = {
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
 	},
+	isAdFreeUser: false,
+	slotMachineFlags: '',
+	commercialProperties: {
+		US: {
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Amazon',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.amazon.com/dp/B07FV6K8HF',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			adTargeting: [
+				{
+					name: 'k',
+					value: ['whats-in-your-blood-'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'edition',
+					value: 'us',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/9djqm',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		AU: {
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Amazon',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.amazon.com/dp/B07FV6K8HF',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			adTargeting: [
+				{
+					name: 'k',
+					value: ['whats-in-your-blood-'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'edition',
+					value: 'au',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/9djqm',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		UK: {
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Amazon',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.amazon.com/dp/B07FV6K8HF',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			adTargeting: [
+				{
+					name: 'k',
+					value: ['whats-in-your-blood-'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/9djqm',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		INT: {
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Amazon',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.amazon.com/dp/B07FV6K8HF',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			adTargeting: [
+				{
+					name: 'k',
+					value: ['whats-in-your-blood-'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/9djqm',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		EUR: {
+			branding: {
+				brandingType: {
+					name: 'paid-content',
+				},
+				sponsorName: 'Amazon',
+				logo: {
+					src: 'https://static.theguardian.com/commercial/sponsor/04/Oct/2018/6b15ba78-da66-415d-8540-a34cc4d3156b-romanoffs_TT_PO-center.png',
+					dimensions: {
+						width: 140,
+						height: 90,
+					},
+					link: 'https://www.amazon.com/dp/B07FV6K8HF',
+					label: 'Paid for by',
+				},
+				aboutThisLink:
+					'https://www.theguardian.com/info/2016/jan/25/content-funding',
+			},
+			adTargeting: [
+				{
+					name: 'k',
+					value: ['whats-in-your-blood-'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'br',
+					value: 'p',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+				},
+				{
+					name: 'tn',
+					value: ['advertisement-features'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/9djqm',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+			],
+		},
+	},
+	editionId: 'UK',
+	webUrl: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 };
