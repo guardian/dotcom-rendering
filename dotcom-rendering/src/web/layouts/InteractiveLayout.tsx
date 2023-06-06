@@ -33,7 +33,7 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -372,9 +372,7 @@ export const InteractiveLayout = ({
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<Island deferUntil="idle">
-							<LabsHeader />
-						</Island>
+						<LabsHeader />
 					</Section>
 				</Stuck>
 			)}
@@ -424,7 +422,7 @@ export const InteractiveLayout = ({
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										badge={article.badge}
+										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</GridItem>
@@ -616,7 +614,7 @@ export const InteractiveLayout = ({
 						showBottomSocialButtons={
 							article.showBottomSocialButtons
 						}
-						badge={article.badge}
+						badge={article.badge?.enhanced}
 					/>
 				</Section>
 				{renderAds && (

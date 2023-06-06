@@ -1,5 +1,5 @@
 import type { EditionId } from '../web/lib/edition';
-import type { BadgeType } from './badge';
+import type { FEArticleBadgeType } from './badge';
 import type { CAPIContent } from './capi';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
@@ -85,7 +85,7 @@ export interface FEArticleType {
 	commercialProperties: CommercialProperties;
 	starRating?: number;
 	trailText: string;
-	badge?: BadgeType;
+	badge?: FEArticleBadgeType;
 
 	nav: FENavType; // TODO move this out as most code uses a different internal NAV model.
 

@@ -1,5 +1,5 @@
 /** synthetically bork FID https://web.dev/fid/ */
-export const fid = (): void => {
+export const fid = (delay: number): void => {
 	try {
 		/** @see https://github.com/GoogleChrome/web-vitals/blob/v3.1.1/src/lib/polyfills/firstInputPolyfill.ts#L172 */
 		const eventTypes = [
@@ -9,27 +9,21 @@ export const fid = (): void => {
 			'pointerdown',
 		];
 
-		const key = 'bork-fid-';
-		const hash = window.location.hash.slice(1);
 		if (
-			hash.startsWith(key) &&
 			typeof window.performance === 'object' &&
 			typeof window.performance.now === 'function'
 		) {
-			const delay = parseInt(hash.replace(key, ''), 10);
-			if (isNaN(delay)) return;
+			window.guardian.borkWebVitals.fid = String(delay);
 
 			const bork = () => {
 				// eslint-disable-next-line no-console -- we want to apologise, in the name of science!
-				console.info(
-					'🍊 Delaying first click by ' + String(delay) + 'ms, sorry',
-				);
+				console.info(`🍊 Delaying first click by ${delay}ms, sorry`);
 
-				const now = performance.now();
+				const start = performance.now();
 				eventTypes.forEach((eventType) => {
 					removeEventListener(eventType, bork);
 				});
-				while (performance.now() - now < delay) {
+				while (performance.now() - start < delay) {
 					// throttling
 				}
 			};

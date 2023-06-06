@@ -7,7 +7,7 @@ import type {
 } from '@guardian/consent-management-platform/dist/types';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { WindowGuardianConfig } from './src/model/window-guardian';
-import type { OphanRecordFunction } from './src/web/browser/ophan/ophan';
+import type { OphanRecordFunction } from './src/web/client/ophan/ophan';
 import type { DailyArticleHistory } from './src/web/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 
@@ -52,6 +52,11 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;
+			borkWebVitals: {
+				cls?: string;
+				fcp?: string;
+				fid?: string;
+			};
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

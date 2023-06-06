@@ -86,8 +86,8 @@ const interceptYouTubeEmbed = ({
 /**
  * Mutes the YouTube player at the given iframe
  *
- * YouTube will mute all players on the page so it is sufficient to
- * mute for one video on a page with multiple videos.
+ * Muting one player will mute all other players so it is sufficient to
+ * mute one video on a page with multiple videos.
  *
  * @param {string} iframeSelector
  */
@@ -318,9 +318,22 @@ describe('YouTube Atom', function () {
 	});
 
 	it('plays the video if the reader rejects consent', function () {
+		// Ignore uncaught error coming from consentless advertising provider opt-out
+		// TODO 15/05/2023 raise with opt-out and remove once fixed
+		cy.on('uncaught:exception', (err) => {
+			if (
+				err.message.includes(
+					"Cannot read properties of undefined (reading 'Config')",
+				)
+			) {
+				return false;
+			}
+		});
+
 		cy.visit(
 			'/Article/https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
 		);
+
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find('button.sp_choice_type_12').click();
 		privacySettingsIframe().contains('Privacy settings');
