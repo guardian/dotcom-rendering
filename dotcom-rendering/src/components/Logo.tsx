@@ -12,46 +12,54 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
-const linkStyles = css`
-	float: right;
-	margin-top: 6px;
-	margin-right: 54px;
-	margin-bottom: 10px;
-	width: 146px;
+const linkStyles = (hasPageSkin: boolean) => {
+	const untilLeftCol = css`
+		float: right;
+		margin-top: 6px;
+		margin-right: 54px;
+		margin-bottom: 10px;
+		width: 146px;
 
-	${from.mobileMedium} {
-		margin-right: 10px;
-		width: 195px;
+		${from.mobileMedium} {
+			margin-right: 10px;
+			width: 195px;
+		}
+		${from.mobileLandscape} {
+			margin-right: 20px;
+		}
+		${from.tablet} {
+			width: 224px;
+		}
+		${from.desktop} {
+			margin-top: 5px;
+			margin-bottom: ${space[3]}px;
+			position: relative;
+			width: 295px;
+		}
+		${getZIndex('TheGuardian')}
+	`;
+	if (hasPageSkin) {
+		return untilLeftCol;
 	}
-	${from.mobileLandscape} {
-		margin-right: 20px;
-	}
-	${from.tablet} {
-		width: 224px;
-	}
-	${from.desktop} {
-		margin-top: 5px;
-		margin-bottom: ${space[3]}px;
-		position: relative;
-		width: 295px;
-	}
-	${from.wide} {
-		margin-right: 96px;
-	}
-
-	${getZIndex('TheGuardian')}
-`;
+	return css`
+		${untilLeftCol}
+		${from.wide} {
+			margin-right: 96px;
+		}
+	`;
+};
 
 type Props = {
 	editionId: EditionId;
+	hasPageSkin?: boolean;
 };
 
-export const Logo = ({ editionId }: Props) => {
+export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 	switch (editionId) {
 		case 'UK':
 			return (
 				<a
-					css={linkStyles}
+					css={linkStyles(hasPageSkin)}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>
@@ -68,7 +76,7 @@ export const Logo = ({ editionId }: Props) => {
 		case 'AU':
 			return (
 				<a
-					css={linkStyles}
+					css={linkStyles(hasPageSkin)}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>
@@ -86,7 +94,7 @@ export const Logo = ({ editionId }: Props) => {
 		default:
 			return (
 				<a
-					css={linkStyles}
+					css={linkStyles(hasPageSkin)}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>

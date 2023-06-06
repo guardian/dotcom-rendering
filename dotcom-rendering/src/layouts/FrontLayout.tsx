@@ -194,6 +194,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								headerTopBarSearchCapiSwitch={
 									!!front.config.switches.headerTopBarSearchCapi
 								}
+								hasPageSkin={hasPageSkin}
 							/>
 						</Section>
 					)}
