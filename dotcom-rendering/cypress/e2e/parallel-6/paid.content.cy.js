@@ -11,6 +11,8 @@ const paidContentPage =
  * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
  * If this happens you'll need to find a new labs article with a brand badge, you can often find these here:
  * https://www.theguardian.com/tone/advertisement-features
+ * You need to edit the link as well as the expected requestURL to include the new brand in the code below, where it states `expect(requestURL).to.include('el=<logo goes here>');`.
+ * You can grab the required info in the dev tools network tab on the page itself.
  */
 describe('Paid content tests', function () {
 	beforeEach(function () {
