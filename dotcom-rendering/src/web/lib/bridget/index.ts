@@ -9,7 +9,7 @@ import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
-import { createAppClient } from './thrift/nativeConnection';
+import { createAppClient } from './nativeConnection';
 
 const environmentClient: Environment.Client<void> = createAppClient<
 	Environment.Client<void>

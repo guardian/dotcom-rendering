@@ -27,7 +27,7 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';

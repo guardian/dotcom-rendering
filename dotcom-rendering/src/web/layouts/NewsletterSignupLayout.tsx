@@ -27,7 +27,7 @@ import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';

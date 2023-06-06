@@ -10,7 +10,7 @@ import {
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
 import { editionList } from '../lib/edition';
-import { Footer } from './Footer';
+import { Footer } from './Footer.web';
 import { Section } from './Section';
 
 const Wrapper = ({ children }: { children: JSX.Element }) => (
@@ -71,5 +71,5 @@ Footers.story = {
 
 export default {
 	component: Footers,
-	title: 'Components/Footer',
+	title: 'Components/Footer/Web',
 };

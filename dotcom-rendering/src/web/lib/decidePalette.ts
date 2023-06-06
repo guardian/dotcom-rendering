@@ -2055,6 +2055,8 @@ const hoverPagination = (format: ArticleFormat) => {
 	}
 };
 
+const textFooter = (_format: ArticleFormat): string => palette.neutral[100];
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2125,6 +2127,7 @@ export const decidePalette = (
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
 			tableOfContents: textTableOfContents(),
+			footer: textFooter(format),
 		},
 		background: {
 			article: backgroundArticle(format),

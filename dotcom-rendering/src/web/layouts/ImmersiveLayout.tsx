@@ -31,7 +31,7 @@ import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';

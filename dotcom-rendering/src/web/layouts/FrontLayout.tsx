@@ -12,7 +12,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { CPScottHeader } from '../components/CPScottHeader';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';

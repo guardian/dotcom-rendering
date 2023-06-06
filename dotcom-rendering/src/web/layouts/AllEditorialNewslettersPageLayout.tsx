@@ -8,7 +8,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRNewslettersPageType } from '../../types/newslettersPage';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';

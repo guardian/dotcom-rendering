@@ -60,6 +60,7 @@ export type Palette = {
 		designTag: Colour;
 		dateLine: Colour;
 		tableOfContents: Colour;
+		footer: Colour;
 	};
 	background: {
 		article: Colour;

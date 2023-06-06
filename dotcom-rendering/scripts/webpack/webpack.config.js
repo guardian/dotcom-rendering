@@ -78,6 +78,9 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
+		// ...(platform !== 'client.apps' ? [new webpack.IgnorePlugin({
+		// 	resourceRegExp: /bridget\/index$/,
+		// })] : []),
 		...(DEV
 			? // DEV plugins
 			  [

@@ -29,7 +29,8 @@ import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Footer } from '../components/Footer';
+import { Footer as WebFooter } from '../components/Footer.web';
+import { Footer as AppsFooter } from '../components/Footer.importable';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
@@ -355,6 +356,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const isWeb = renderingTarget === 'Web';
+	const isApps = renderingTarget === 'Apps';
 	const renderAds = isWeb && canRenderAds(article);
 
 	return (
@@ -942,7 +944,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						showSideBorders={false}
 						element="footer"
 					>
-						<Footer
+						<WebFooter
 							pageFooter={article.pageFooter}
 							pillar={format.theme}
 							pillars={props.NAV.pillars}
@@ -986,6 +988,20 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					</BannerWrapper>
 					<MobileStickyContainer data-print-layout="hide" />
 				</>
+			)}
+			{isApps && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					backgroundColour={brandBackground.primary}
+					borderColour={brandBorder.primary}
+					showSideBorders={false}
+					element="footer"
+				>
+					<Island deferUntil="idle">
+						<AppsFooter year={(new Date()).getFullYear()} palette={palette} />
+					</Island>
+				</Section>
 			)}
 		</>
 	);

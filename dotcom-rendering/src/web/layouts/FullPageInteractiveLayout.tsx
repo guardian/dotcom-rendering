@@ -20,7 +20,7 @@ import {
 	labelStyles as adLabelStyles,
 	MobileStickyContainer,
 } from '../components/AdSlot';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';

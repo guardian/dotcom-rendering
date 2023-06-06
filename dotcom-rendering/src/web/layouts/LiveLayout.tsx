@@ -29,7 +29,7 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Footer } from '../components/Footer';
+import { Footer } from '../components/Footer.web';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
