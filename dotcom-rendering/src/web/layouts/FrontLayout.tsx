@@ -32,6 +32,7 @@ import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { pageSkinContainer } from './lib/pageSkin';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -272,42 +273,48 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<>
-								{!!trail.embedUri &&
-								COTTON_CAPITAL_THRASHERS.includes(
-									trail.embedUri,
-								) ? (
-									<Snap snapData={trail.snapData} />
-								) : (
-									<SnapCssSandbox snapData={trail.snapData}>
-										<Section
-											fullWidth={true}
-											padSides={false}
-											showTopBorder={false}
-											showSideBorders={false}
-											ophanComponentLink={
-												ophanComponentLink
-											}
-											ophanComponentName={ophanName}
-											containerName={
-												collection.collectionType
-											}
-											hasPageSkin={hasPageSkin}
+								<div css={[hasPageSkin && pageSkinContainer]}>
+									{!!trail.embedUri &&
+									COTTON_CAPITAL_THRASHERS.includes(
+										trail.embedUri,
+									) ? (
+										<Snap snapData={trail.snapData} />
+									) : (
+										<SnapCssSandbox
+											snapData={trail.snapData}
 										>
-											<Snap snapData={trail.snapData} />
-										</Section>
-									</SnapCssSandbox>
-								)}
-								{decideAdSlot(
-									renderAds,
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-									hasPageSkin,
-								)}
+											<Section
+												fullWidth={true}
+												padSides={false}
+												showTopBorder={false}
+												showSideBorders={false}
+												ophanComponentLink={
+													ophanComponentLink
+												}
+												ophanComponentName={ophanName}
+												containerName={
+													collection.collectionType
+												}
+												hasPageSkin={hasPageSkin}
+											>
+												<Snap
+													snapData={trail.snapData}
+												/>
+											</Section>
+										</SnapCssSandbox>
+									)}
+									{decideAdSlot(
+										renderAds,
+										index,
+										front.isNetworkFront,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										format.display,
+										mobileAdPositions,
+										hasPageSkin,
+									)}
+								</div>
 							</>
 						);
 					}
