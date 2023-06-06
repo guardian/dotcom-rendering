@@ -21,13 +21,9 @@ const measure = (name: string, task: () => Promise<void>): void => {
 		});
 };
 
-export const startup = <A>(
-	name: string,
-	helpers: A,
-	task: (helpers: A) => Promise<void>,
-): void => {
+export const startup = (name: string, task: () => Promise<void>): void => {
 	const measureMe = () => {
-		measure(name, task.bind(null, helpers));
+		measure(name, task.bind(null));
 	};
 	if (window.guardian.mustardCut || window.guardian.polyfilled) {
 		measureMe();
