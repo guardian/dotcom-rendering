@@ -5,7 +5,7 @@ import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
 const paidContentPage =
-	'https://www.theguardian.com/social-work-looking-to-the-future/2023/mar/13/social-work-in-2023-the-needs-the-challenges-and-reasons-to-be-optimistic';
+	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
 
 describe('Paid content tests', function () {
 	beforeEach(function () {
