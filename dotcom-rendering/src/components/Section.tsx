@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette, TreatType } from '../../src/types/front';
-import type { ContainerOverrides } from '../../src/types/palette';
+import { background, from, space } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
+import type { DCRContainerPalette, TreatType } from '../types/front';
+import type { ContainerOverrides } from '../types/palette';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -215,6 +215,24 @@ const ContainerTitleWithHide = ({
 	);
 };
 
+const decideBackgroundColour = (
+	backgroundColour: string | undefined,
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (backgroundColour) {
+		return backgroundColour;
+	}
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
+
 /**
  *
  * A Section component represents a horizontal slice of a page. It defaults to
@@ -274,9 +292,11 @@ export const Section = ({
 				padSides={padSides}
 				padBottom={padBottom}
 				borderColour={borderColour ?? overrides?.border?.container}
-				backgroundColour={
-					backgroundColour ?? overrides?.background?.container
-				}
+				backgroundColour={decideBackgroundColour(
+					backgroundColour,
+					overrides?.border?.container,
+					hasPageSkin,
+				)}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				containerName={containerName}
@@ -298,9 +318,11 @@ export const Section = ({
 			showTopBorder={showTopBorder}
 			padSides={padSides}
 			borderColour={borderColour ?? overrides?.border?.container}
-			backgroundColour={
-				backgroundColour ?? overrides?.background?.container
-			}
+			backgroundColour={decideBackgroundColour(
+				backgroundColour,
+				overrides?.border?.container,
+				hasPageSkin,
+			)}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}

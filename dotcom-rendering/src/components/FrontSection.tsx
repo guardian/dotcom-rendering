@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
+	background,
 	from,
 	neutral,
 	palette,
@@ -326,6 +327,20 @@ const titleStyle = css`
 	}
 `;
 
+const decideBackgroundColour = (
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
+
 /**
  * # Front Container
  *
@@ -461,7 +476,10 @@ export const FrontSection = ({
 				containerStyles(hasPageSkin),
 				hasPageSkin && pageSkinContainer,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${decideBackgroundColour(
+						overrides?.background?.container,
+						hasPageSkin,
+					)};
 				`,
 			]}
 		>

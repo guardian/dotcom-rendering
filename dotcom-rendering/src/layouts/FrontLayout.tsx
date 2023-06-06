@@ -536,9 +536,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
+					backgroundColour={neutral[93]}
 					element="aside"
 					hasPageSkin={hasPageSkin}
-					{...(!hasPageSkin ? { backgroundColour: neutral[93] } : {})}
 				>
 					<AdSlot position="merchandising" display={format.display} />
 				</Section>

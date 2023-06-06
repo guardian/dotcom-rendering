@@ -107,6 +107,7 @@ export const ElementContainer = ({
 			);
 			const style = css`
 				${backgroundColour && setBackgroundColour(backgroundColour)};
+				${hasPageSkin && pageSkinContainer}
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>
