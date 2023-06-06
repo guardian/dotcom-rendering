@@ -25,7 +25,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { DecideContainer } from '../lib/DecideContainer';
+import { DecideContainer } from '../components/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import {
 	getMerchHighPosition,

@@ -1,21 +1,21 @@
-import { DynamicFast } from '../components/DynamicFast';
-import { DynamicPackage } from '../components/DynamicPackage';
-import { DynamicSlow } from '../components/DynamicSlow';
-import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
-import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
-import { FixedMediumFastXI } from '../components/FixedMediumFastXI';
-import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
-import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
-import { FixedMediumSlowVII } from '../components/FixedMediumSlowVII';
-import { FixedMediumSlowXIIMPU } from '../components/FixedMediumSlowXIIMPU';
-import { FixedSmallFastVIII } from '../components/FixedSmallFastVIII';
-import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
-import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
-import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
-import { FixedSmallSlowVHalf } from '../components/FixedSmallSlowVHalf';
-import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
-import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
-import { NavList } from '../components/NavList';
+import { DynamicFast } from './DynamicFast';
+import { DynamicPackage } from './DynamicPackage';
+import { DynamicSlow } from './DynamicSlow';
+import { DynamicSlowMPU } from './DynamicSlowMPU';
+import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
+import { FixedMediumFastXI } from './FixedMediumFastXI';
+import { FixedMediumFastXII } from './FixedMediumFastXII';
+import { FixedMediumSlowVI } from './FixedMediumSlowVI';
+import { FixedMediumSlowVII } from './FixedMediumSlowVII';
+import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
+import { FixedSmallFastVIII } from './FixedSmallFastVIII';
+import { FixedSmallSlowI } from './FixedSmallSlowI';
+import { FixedSmallSlowIII } from './FixedSmallSlowIII';
+import { FixedSmallSlowIV } from './FixedSmallSlowIV';
+import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
+import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
+import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
+import { NavList } from './NavList';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
