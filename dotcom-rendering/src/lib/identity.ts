@@ -1,7 +1,6 @@
 import { getCookie } from '@guardian/libs';
 import type { AuthState, OktaAuthOptions } from '@okta/okta-auth-js';
 import { OktaAuth } from '@okta/okta-auth-js';
-import React, { useEffect, useState } from 'react';
 
 console.log('identity loaded');
 

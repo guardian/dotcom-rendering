@@ -63,11 +63,12 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 			shouldMemoize: true,
 		}) !== null;
 
-	return isSignedIn;
-	// &&
-	// (isRecurringContributorFromAttrs ||
-	// 	hasMonthlyContributionCookie ||
-	// 	hasAnnualContributionCookie)
+	return (
+		isSignedIn &&
+		(isRecurringContributorFromAttrs ||
+			hasMonthlyContributionCookie ||
+			hasAnnualContributionCookie)
+	);
 };
 
 // looks at attribute and support cookies
