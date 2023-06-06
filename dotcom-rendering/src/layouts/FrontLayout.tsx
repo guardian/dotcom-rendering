@@ -42,6 +42,7 @@ import {
 } from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
+import { pageSkinContainer } from './lib/pageSkin';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -301,42 +302,44 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
-								{!!trail.embedUri && (
-									<SnapCssSandbox snapData={trail.snapData}>
-										<Section
-											fullWidth={true}
-											padSides={false}
-											showTopBorder={false}
-											showSideBorders={false}
-											ophanComponentLink={
-												ophanComponentLink
-											}
-											ophanComponentName={ophanName}
-											containerName={
-												collection.collectionType
-											}
-											hasPageSkin={hasPageSkin}
-										>
-											<Snap
-												snapData={trail.snapData}
-												dataLinkName={
-													trail.dataLinkName
+								<div css={[hasPageSkin && pageSkinContainer]}>
+									{!!trail.embedUri && (
+										<SnapCssSandbox snapData={trail.snapData}>
+											<Section
+												fullWidth={true}
+												padSides={false}
+												showTopBorder={false}
+												showSideBorders={false}
+												ophanComponentLink={
+													ophanComponentLink
 												}
-											/>
-										</Section>
-									</SnapCssSandbox>
-								)}
-								{decideAdSlot(
-									renderAds,
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-									hasPageSkin,
-								)}
+												ophanComponentName={ophanName}
+												containerName={
+													collection.collectionType
+												}
+												hasPageSkin={hasPageSkin}
+											>
+												<Snap
+													snapData={trail.snapData}
+													dataLinkName={
+														trail.dataLinkName
+													}
+												/>
+											</Section>
+										</SnapCssSandbox>
+									)}
+									{decideAdSlot(
+										renderAds,
+										index,
+										front.isNetworkFront,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										format.display,
+										mobileAdPositions,
+										hasPageSkin,
+									)}
+								</div>
 							</Fragment>
 						);
 					}
