@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands -- We don't have types here */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment -- We don't have types here */
+/* eslint-disable @typescript-eslint/restrict-template-expressions -- We don't have types here */
 /*
 
 Use: node dotcom-rendering/scripts/gen-stories/gen-stories.js
@@ -11,12 +14,6 @@ It should be run whenever any of the Display, Design, or Theme `format` properti
 
 const { writeFileSync, readFileSync, mkdirSync } = require('fs');
 const path = require('path');
-const {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} = require('@guardian/libs');
 const { log, success, warn } = require('../env/log');
 
 const STORIES_PATH = path.resolve(
@@ -40,7 +37,7 @@ const CARD_TEMPLATE_HEADER = `
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { CardsWithDifferentThemes } from '../../src/components/Card/Card.stories';
 
-// eslint-disable-next-line import/no-default-export
+// eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Card/Format Variations',
 	component: CardsWithDifferentThemes,
@@ -58,7 +55,7 @@ const LAYOUT_TEMPLATE_HEADER = `
  */
 import { HydratedLayoutWrapper } from '../../src/layouts/Layout.stories';
 
-// eslint-disable-next-line import/no-default-export
+// eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Layout/Format Variations',
 	component: HydratedLayoutWrapper,
@@ -100,10 +97,6 @@ export default {
 
 export const Readme = () => <ReadMe />;
 `;
-
-const notNumber = (value) => {
-	return Number.isNaN(Number(value));
-};
 
 const generateLayoutStory = (
 	displayName,
