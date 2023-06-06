@@ -51,7 +51,6 @@ const config: OktaAuthOptions = {
 };
 
 const oktaAuthInit = new OktaAuth(config);
-// const oktaStart = () => oktaAuthInit.start().catch((err) => {console.log(err)});
 
 async function getSignedInStatus(oktaAuth: OktaAuth, authState: AuthState) {
 	console.log('using isLoggedIn function');
@@ -92,66 +91,59 @@ async function checkIfSignedIn(authState: AuthState, oktaAuth: OktaAuth) {
 	return false;
 }
 
-const useOktaAuth = (): OktaAuthContextType => {
+const initOktaAuth = async (): Promise<OktaAuth> => {
 	console.log('useOktaAuth called');
 	const oktaAuth = oktaAuthInit;
+	await oktaAuth.start();
+	return oktaAuth;
 
-	const [authState, setAuthState] = React.useState<AuthState | null>(() => {
-		return oktaAuth.authStateManager.getAuthState();
-	});
-	React.useEffect(() => {
-		async function oktaAuthState() {
-			// Update Security provider with latest authState
-			const currentAuthState = oktaAuth.authStateManager.getAuthState();
-			if (currentAuthState !== authState) {
-				setAuthState(currentAuthState);
-			}
-			const handler = (newAuthState: AuthState) => {
-				setAuthState(newAuthState);
-			};
-			oktaAuth.authStateManager.subscribe(handler);
+	// const [authState, setAuthState] = React.useState<AuthState | null>(() => {
+	// 	return oktaAuth.authStateManager.getAuthState();
+	// });
+	// React.useEffect(() => {
+	// 	async function oktaAuthState() {
+	// 		// Update Security provider with latest authState
+	// 		const currentAuthState = oktaAuth.authStateManager.getAuthState();
+	// 		if (currentAuthState !== authState) {
+	// 			setAuthState(currentAuthState);
+	// 		}
+	// 		const handler = (newAuthState: AuthState) => {
+	// 			setAuthState(newAuthState);
+	// 		};
+	// 		oktaAuth.authStateManager.subscribe(handler);
 
-			// Trigger an initial change event to make sure authState is latest
-			await oktaAuth.start();
+	// 		// Trigger an initial change event to make sure authState is latest
+	// 		await oktaAuth.start();
 
-			return () => {
-				oktaAuth.authStateManager.unsubscribe(handler);
-			};
-		}
-		oktaAuthState().catch(() => {
-			console.error('error in oktaAuthState');
-		});
-	}, [oktaAuth, authState]);
-	return { oktaAuth, authState };
+	// 		return () => {
+	// 			oktaAuth.authStateManager.unsubscribe(handler);
+	// 		};
+	// 	}
+	// 	oktaAuthState().catch(() => {
+	// 		console.error('error in oktaAuthState');
+	// 	});
+	// }, [oktaAuth, authState]);
+	// return { oktaAuth, authState };
 };
 
-function OktaForSignInCheck() {
+export async function isSignedInWithOkta(): Promise<boolean> {
 	console.info('using okta for sign in check');
-	const { oktaAuth, authState } = useOktaAuth();
-	console.log('HERE');
-	console.log(`authState in useOktaForSignInCheck is`);
-	console.log(authState);
-	console.log('oktaAuth in useOktaForSignInCheck is');
-	console.log(oktaAuth);
+	const oktaAuth = await initOktaAuth();
+	const authState = oktaAuth.authStateManager.getAuthState();
+	return authState ? getSignedInStatus(oktaAuth, authState) : false;
 
-	const [isSignedIn, setIsSignedIn] = useState(false);
-	useEffect(() => {
-		(async () => {
-			if (authState) {
-				setIsSignedIn(await getSignedInStatus(oktaAuth, authState));
-			}
-		})().catch(() => {
-			console.error('error in oktaAuthState');
-		});
-	}, [authState, oktaAuth]);
+	// const [isSignedIn, setIsSignedIn] = useState(false);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		if (authState) {
+	// 			setIsSignedIn(await getSignedInStatus(oktaAuth, authState));
+	// 		}
+	// 	})().catch(() => {
+	// 		console.error('error in oktaAuthState');
+	// 	});
+	// }, [authState, oktaAuth]);
 
-	console.log('CheckUserSignInStatus');
-	console.log(isSignedIn);
-	return isSignedIn;
+	// console.log('CheckUserSignInStatus');
+	// console.log(isSignedIn);
+	// return isSignedIn;
 }
-
-export const CheckUserSignInStatus = (): boolean => {
-	const isSignedIn = OktaForSignInCheck();
-
-	return isSignedIn;
-};

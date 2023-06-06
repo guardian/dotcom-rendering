@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
-import { checkIfInOktaTestToCheckSignInStatus } from '../../lib/checkIfInOktaTestToCheckSignInStatus';
+import { useIsSignedIn } from '../../lib/useIsSignedIn';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
@@ -69,7 +69,8 @@ export const HeaderTopBar = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
-	const isUserSignedIn = checkIfInOktaTestToCheckSignInStatus();
+	const isUserSignedIn = useIsSignedIn();
+	console.log('top bar isSignedIn', isUserSignedIn);
 	return (
 		<div
 			css={css`
@@ -83,7 +84,7 @@ export const HeaderTopBar = ({
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
-					isSignedIn={isUserSignedIn}
+					isSignedIn={true}
 				/>
 				<SearchJobs />
 
