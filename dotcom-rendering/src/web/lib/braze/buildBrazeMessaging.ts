@@ -10,8 +10,8 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { getCookie, log, storage } from '@guardian/libs';
-import { initPerf } from '../../browser/initPerf';
-import { record } from '../../browser/ophan/ophan';
+import { initPerf } from '../../client/initPerf';
+import { record } from '../../client/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,

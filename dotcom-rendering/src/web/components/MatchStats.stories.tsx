@@ -25,7 +25,7 @@ export const Default = () => {
 		/>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';
 
 export const InContext = () => {
 	return (
@@ -58,7 +58,7 @@ export const InContext = () => {
 		</Section>
 	);
 };
-InContext.story = { name: 'when placed in article context' };
+InContext.storyName = 'when placed in article context';
 
 const DefaultInLiveblog = () => {
 	return (
@@ -73,4 +73,4 @@ const DefaultInLiveblog = () => {
 		/>
 	);
 };
-DefaultInLiveblog.story = { name: 'when placed in a liveblog' };
+DefaultInLiveblog.storyName = 'when placed in a liveblog';

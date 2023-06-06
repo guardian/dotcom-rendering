@@ -17,6 +17,7 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -32,7 +33,7 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -205,9 +206,15 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const InteractiveLayout = ({ article, NAV, format }: Props) => {
+export const InteractiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -318,6 +325,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSwitch={
 							!!article.config.switches.headerTopNav
 						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -364,9 +372,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<Island deferUntil="idle">
-							<LabsHeader />
-						</Island>
+						<LabsHeader />
 					</Section>
 				</Stuck>
 			)}
@@ -416,7 +422,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										guardianBaseURL={
 											article.guardianBaseURL
 										}
-										badge={article.badge}
+										badge={article.badge?.enhanced}
 									/>
 								</div>
 							</GridItem>
@@ -533,6 +539,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 										isRightToLeftLang={
 											article.isRightToLeftLang
 										}
+										renderingTarget={renderingTarget}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -607,7 +614,7 @@ export const InteractiveLayout = ({ article, NAV, format }: Props) => {
 						showBottomSocialButtons={
 							article.showBottomSocialButtons
 						}
-						badge={article.badge}
+						badge={article.badge?.enhanced}
 					/>
 				</Section>
 				{renderAds && (

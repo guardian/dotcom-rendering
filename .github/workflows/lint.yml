@@ -1,12 +1,9 @@
-name: DCR lint 🔎
 on:
-  push:
-    paths-ignore:
-      - 'apps-rendering/**'
+  workflow_call:
+
 
 jobs:
-  lint:
-    name: DCR Lint
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

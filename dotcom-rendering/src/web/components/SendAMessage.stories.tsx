@@ -69,4 +69,4 @@ export const SubmissionFailure = () => {
 		</Section>
 	);
 };
-Default.story = { name: 'default' };
+Default.storyName = 'default';

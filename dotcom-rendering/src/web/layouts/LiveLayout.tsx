@@ -16,6 +16,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { Accordion } from '../components/Accordion';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -236,6 +237,7 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
 const paddingBody = css`
@@ -248,7 +250,12 @@ const paddingBody = css`
 	}
 `;
 
-export const LiveLayout = ({ article, NAV, format }: Props) => {
+export const LiveLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -365,6 +372,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 							headerTopBarSwitch={
 								!!article.config.switches.headerTopNav
 							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 
@@ -416,7 +424,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 								isMatch={true}
 							/>
 						}
@@ -431,7 +439,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 								isMatch={true}
 							/>
 						</Hide>
@@ -467,7 +475,7 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 									sectionLabel={article.sectionLabel}
 									sectionUrl={article.sectionUrl}
 									guardianBaseURL={article.guardianBaseURL}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -894,6 +902,9 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 															.serverSideLiveblogInlineAdsVariant ===
 														'variant'
 													}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -935,7 +946,9 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</div>
@@ -1048,6 +1061,9 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 													isRightToLeftLang={
 														article.isRightToLeftLang
 													}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1089,7 +1105,9 @@ export const LiveLayout = ({ article, NAV, format }: Props) => {
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</Accordion>

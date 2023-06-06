@@ -34,7 +34,7 @@ export const Article = () => (
 		/>
 	</Section>
 );
-Article.story = { name: 'Article' };
+Article.storyName = 'Article';
 
 export const Analysis = () => (
 	<>
@@ -120,7 +120,7 @@ export const Analysis = () => (
 		</Section>
 	</>
 );
-Analysis.story = { name: 'Analysis' };
+Analysis.storyName = 'Analysis';
 
 export const Feature = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -134,7 +134,7 @@ export const Feature = () => (
 		/>
 	</Section>
 );
-Feature.story = { name: 'Feature' };
+Feature.storyName = 'Feature';
 
 export const Size = () => (
 	<>
@@ -160,7 +160,7 @@ export const Size = () => (
 		))}
 	</>
 );
-Size.story = { name: 'Size' };
+Size.storyName = 'Size';
 
 export const MobileSize = () => (
 	<>
@@ -187,8 +187,8 @@ export const MobileSize = () => (
 		))}
 	</>
 );
+MobileSize.storyName = 'MobileSize';
 MobileSize.story = {
-	name: 'MobileSize',
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile],
@@ -209,7 +209,7 @@ export const liveStory = () => (
 		/>
 	</Section>
 );
-liveStory.story = { name: 'With Live kicker' };
+liveStory.storyName = 'With Live kicker';
 
 export const noLineBreak = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -225,7 +225,7 @@ export const noLineBreak = () => (
 		/>
 	</Section>
 );
-noLineBreak.story = { name: 'With Live kicker but no line break' };
+noLineBreak.storyName = 'With Live kicker but no line break';
 
 export const pulsingDot = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -241,7 +241,7 @@ export const pulsingDot = () => (
 		/>
 	</Section>
 );
-pulsingDot.story = { name: 'With pulsing dot' };
+pulsingDot.storyName = 'With pulsing dot';
 
 export const cultureVariant = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -256,7 +256,7 @@ export const cultureVariant = () => (
 		/>
 	</Section>
 );
-cultureVariant.story = { name: 'With a culture kicker' };
+cultureVariant.storyName = 'With a culture kicker';
 
 export const Opinion = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -272,7 +272,7 @@ export const Opinion = () => (
 		/>
 	</Section>
 );
-Opinion.story = { name: 'Opinion (Quotes)' };
+Opinion.storyName = 'Opinion (Quotes)';
 
 export const OpinionKicker = () => (
 	<>
@@ -300,7 +300,7 @@ export const OpinionKicker = () => (
 		))}
 	</>
 );
-OpinionKicker.story = { name: 'With an opinion kicker' };
+OpinionKicker.storyName = 'With an opinion kicker';
 
 export const SpecialReport = () => (
 	<Section
@@ -321,7 +321,7 @@ export const SpecialReport = () => (
 		/>
 	</Section>
 );
-SpecialReport.story = { name: 'With theme SpecialReport' };
+SpecialReport.storyName = 'With theme SpecialReport';
 
 export const Busy = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
@@ -337,7 +337,7 @@ export const Busy = () => (
 		/>
 	</Section>
 );
-Busy.story = { name: 'Lifestyle opinion' };
+Busy.storyName = 'Lifestyle opinion';
 
 export const Byline = () => (
 	<>
@@ -437,4 +437,4 @@ export const Byline = () => (
 		</Section>
 	</>
 );
-Byline.story = { name: 'With byline' };
+Byline.storyName = 'With byline';

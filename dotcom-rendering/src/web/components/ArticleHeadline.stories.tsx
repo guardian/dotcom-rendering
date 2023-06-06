@@ -44,7 +44,7 @@ export const ArticleStory = () => {
 		</Section>
 	);
 };
-ArticleStory.story = { name: 'Article' };
+ArticleStory.storyName = 'Article';
 
 export const Feature = () => {
 	const format = {
@@ -70,7 +70,7 @@ export const Feature = () => {
 		</Section>
 	);
 };
-Feature.story = { name: 'Feature' };
+Feature.storyName = 'Feature';
 
 export const ShowcaseInterview = () => {
 	const format = {
@@ -114,7 +114,7 @@ export const ShowcaseInterview = () => {
 		</Section>
 	);
 };
-ShowcaseInterview.story = { name: 'Interview (with showcase)' };
+ShowcaseInterview.storyName = 'Interview (with showcase)';
 
 export const ShowcaseInterviewNobyline = () => {
 	const format = {
@@ -158,9 +158,7 @@ export const ShowcaseInterviewNobyline = () => {
 		</Section>
 	);
 };
-ShowcaseInterviewNobyline.story = {
-	name: 'Interview (with showcase and NO BYLINE)',
-};
+ShowcaseInterviewNobyline.storyName = 'Interview (with showcase and NO BYLINE)';
 
 export const Interview = () => {
 	const format = {
@@ -202,7 +200,7 @@ export const Interview = () => {
 		</Section>
 	);
 };
-Interview.story = { name: 'Interview (without showcase)' };
+Interview.storyName = 'Interview (without showcase)';
 
 export const InterviewSpecialReport = () => {
 	const format = {
@@ -244,9 +242,8 @@ export const InterviewSpecialReport = () => {
 		</Section>
 	);
 };
-InterviewSpecialReport.story = {
-	name: 'Interview Special Report (without showcase)',
-};
+InterviewSpecialReport.storyName =
+	'Interview Special Report (without showcase)';
 
 export const InterviewNoByline = () => {
 	const format = {
@@ -288,9 +285,7 @@ export const InterviewNoByline = () => {
 		</Section>
 	);
 };
-InterviewNoByline.story = {
-	name: 'Interview (without showcase with NO BYLINE)',
-};
+InterviewNoByline.storyName = 'Interview (without showcase with NO BYLINE)';
 
 export const Comment = () => {
 	const format = {
@@ -316,7 +311,7 @@ export const Comment = () => {
 		</Section>
 	);
 };
-Comment.story = { name: 'Comment' };
+Comment.storyName = 'Comment';
 
 export const Analysis = () => {
 	const themes: [string, ArticleTheme][] = [
@@ -357,7 +352,7 @@ export const Analysis = () => {
 		</>
 	);
 };
-Analysis.story = { name: 'Analysis' };
+Analysis.storyName = 'Analysis';
 
 export const Gallery = () => {
 	const format = {
@@ -383,7 +378,7 @@ export const Gallery = () => {
 		</Section>
 	);
 };
-Gallery.story = { name: 'Gallery' };
+Gallery.storyName = 'Gallery';
 
 export const Review = () => {
 	const format = {
@@ -409,7 +404,7 @@ export const Review = () => {
 		</Section>
 	);
 };
-Review.story = { name: 'Review' };
+Review.storyName = 'Review';
 
 export const PhotoEssay = () => {
 	const format = {
@@ -435,7 +430,7 @@ export const PhotoEssay = () => {
 		</Section>
 	);
 };
-PhotoEssay.story = { name: 'PhotoEssay' };
+PhotoEssay.storyName = 'PhotoEssay';
 
 export const Explainer = () => {
 	const format = {
@@ -461,7 +456,7 @@ export const Explainer = () => {
 		</Section>
 	);
 };
-Review.story = { name: 'Review' };
+Review.storyName = 'Review';
 
 export const Quiz = () => {
 	const format = {
@@ -487,7 +482,7 @@ export const Quiz = () => {
 		</Section>
 	);
 };
-Quiz.story = { name: 'Quiz' };
+Quiz.storyName = 'Quiz';
 
 export const Recipe = () => {
 	const format = {
@@ -513,7 +508,7 @@ export const Recipe = () => {
 		</Section>
 	);
 };
-Recipe.story = { name: 'Recipe' };
+Recipe.storyName = 'Recipe';
 
 export const Immersive = () => {
 	const format = {
@@ -539,7 +534,7 @@ export const Immersive = () => {
 		</Section>
 	);
 };
-Immersive.story = { name: 'Immersive' };
+Immersive.storyName = 'Immersive';
 
 export const ImmersiveNoMainMedia = () => {
 	const format = {
@@ -565,7 +560,7 @@ export const ImmersiveNoMainMedia = () => {
 		</Section>
 	);
 };
-ImmersiveNoMainMedia.story = { name: 'Printshop (with no main media)' };
+ImmersiveNoMainMedia.storyName = 'Printshop (with no main media)';
 
 export const ImmersiveComment = () => {
 	const format = {
@@ -596,7 +591,7 @@ export const ImmersiveComment = () => {
 		</Section>
 	);
 };
-ImmersiveComment.story = { name: 'Immersive opinion piece' };
+ImmersiveComment.storyName = 'Immersive opinion piece';
 
 export const Editorial = () => {
 	const format = {
@@ -622,7 +617,7 @@ export const Editorial = () => {
 		</Section>
 	);
 };
-Editorial.story = { name: 'Editorial' };
+Editorial.storyName = 'Editorial';
 
 export const MatchReport = () => {
 	const format = {
@@ -648,7 +643,7 @@ export const MatchReport = () => {
 		</Section>
 	);
 };
-MatchReport.story = { name: 'MatchReport' };
+MatchReport.storyName = 'MatchReport';
 
 export const SpecialReport = () => {
 	const format = {
@@ -674,7 +669,7 @@ export const SpecialReport = () => {
 		</Section>
 	);
 };
-SpecialReport.story = { name: 'SpecialReport' };
+SpecialReport.storyName = 'SpecialReport';
 
 export const SpecialReportAlt = () => {
 	const format = {
@@ -700,7 +695,7 @@ export const SpecialReportAlt = () => {
 		</Section>
 	);
 };
-SpecialReportAlt.story = { name: 'SpecialReportAlt' };
+SpecialReportAlt.storyName = 'SpecialReportAlt';
 
 export const LiveBlog = () => {
 	const format = {
@@ -726,8 +721,8 @@ export const LiveBlog = () => {
 		</Section>
 	);
 };
+LiveBlog.storyName = 'LiveBlog';
 LiveBlog.story = {
-	name: 'LiveBlog',
 	parameters: {
 		backgrounds: {
 			default: 'red',
@@ -765,7 +760,7 @@ export const DeadBlog = () => {
 		</Section>
 	);
 };
-DeadBlog.story = { name: 'DeadBlog' };
+DeadBlog.storyName = 'DeadBlog';
 
 export const ReviewWithoutStars = () => {
 	const format = {
@@ -796,7 +791,7 @@ export const ReviewWithoutStars = () => {
 		</Section>
 	);
 };
-ReviewWithoutStars.story = { name: 'Review without stars' };
+ReviewWithoutStars.storyName = 'Review without stars';
 
 export const AgeWarning = () => {
 	const designs: [string, ArticleDesign][] = [
@@ -846,4 +841,4 @@ export const AgeWarning = () => {
 		</>
 	);
 };
-AgeWarning.story = { name: 'with age warning' };
+AgeWarning.storyName = 'with age warning';

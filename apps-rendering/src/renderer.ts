@@ -422,7 +422,7 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 
-	const maybeCaption =
+	const maybeCaption: Optional<ReactNode> =
 		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
 			? Optional.some([
 					h(Caption, { format, caption }),

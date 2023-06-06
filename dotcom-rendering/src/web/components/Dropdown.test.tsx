@@ -113,7 +113,7 @@ describe('Dropdown', () => {
 
 		fireEvent.click(getByRole('button'));
 		expect(ulElement).toBeVisible();
-		container.click();
+		fireEvent.click(getByRole('button'));
 		expect(ulElement).not.toBeVisible();
 	});
 

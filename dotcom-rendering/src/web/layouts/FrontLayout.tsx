@@ -20,13 +20,17 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
-import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
+import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import {
+	getMerchHighPosition,
+	getMobileAdPositions,
+} from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -59,66 +63,8 @@ const isToggleable = (
 	} else return index != 0 && !isNavList(collection);
 };
 
-const getMerchHighPosition = (
-	collectionCount: number,
-	isNetworkFront: boolean | undefined,
-) => {
-	if (collectionCount < 4) {
-		return 2;
-	} else if (isNetworkFront) {
-		return 5;
-	} else {
-		return 4;
-	}
-};
-
-/**
- * On mobile, we remove the first container if it is a thrasher
- * and remove a container if it, or the next sibling, is a commercial container
- * we also exclude any containers that are directly before a thrasher
- * then we take every other container, up to a maximum of 10, for targeting MPU insertion
- */
-
-const getMobileAdPositions = (
-	isNetworkFront: boolean | undefined,
-	collections: DCRCollectionType[],
-) => {
-	const merchHighPosition = getMerchHighPosition(
-		collections.length,
-		isNetworkFront,
-	);
-
-	const positions: number[] = collections
-		.map((collection, collectionIndex) => {
-			const isThrasher = collection.collectionType === 'fixed/thrasher';
-			const isFirst = collectionIndex === 0;
-			const isNearMerchandising =
-				collectionIndex === merchHighPosition ||
-				collectionIndex + 1 === merchHighPosition;
-			const isNearThrasher =
-				collections[collectionIndex + 1]?.collectionType ===
-				'fixed/thrasher';
-			if (isFirst && isThrasher) return false;
-			if (isNearMerchandising) return false;
-			if (isNearThrasher) return false;
-			else if (
-				collectionIndex % 2 === 0 &&
-				collectionIndex < collections.length - 1
-			) {
-				return true;
-			}
-			return false;
-		})
-		.map((shouldDisplayAd, collectionIndex) =>
-			shouldDisplayAd ? collectionIndex : undefined,
-		)
-		.filter((index): index is number => typeof index === 'number')
-		// Should insert no more than 10 ads
-		.slice(0, 10);
-	return positions;
-};
-
 const decideAdSlot = (
+	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
@@ -126,6 +72,7 @@ const decideAdSlot = (
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 ) => {
+	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
@@ -169,18 +116,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	// const contributionsServiceUrl = getContributionsServiceUrl(front);
+	const merchHighPosition = getMerchHighPosition(
+		front.pressedPage.collections.length,
+		front.isNetworkFront,
+	);
 
-	/**
-	 * This property currently only applies to the header and merchandising slots
-	 */
 	const renderAds = canRenderAds(front);
 
 	const mobileAdPositions = renderAds
-		? getMobileAdPositions(
-				front.isNetworkFront,
-				front.pressedPage.collections,
-		  )
+		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
 	return (
@@ -243,6 +187,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
 							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -293,23 +238,50 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const COTTON_CAPITAL_THRASHERS = [
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/default-fronts-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/david-olusoga-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/cassandra-gooptar-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/gary-younge-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/deneen-l-brown-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/the-enslaved-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/olivette-otele-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/interactives-front--globe',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/michael-taylor-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/lanre-bakare-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/hidden-figures-front-default',
+						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/johny-pitts-photo-essay-front-default',
+					];
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<>
-								<Section
-									fullWidth={true}
-									padSides={false}
-									padBottom={true}
-									showTopBorder={false}
-									showSideBorders={true}
-									ophanComponentLink={ophanComponentLink}
-									ophanComponentName={ophanName}
-									containerName={collection.collectionType}
-								>
+								{!!trail.embedUri &&
+								COTTON_CAPITAL_THRASHERS.includes(
+									trail.embedUri,
+								) ? (
 									<Snap snapData={trail.snapData} />
-								</Section>
+								) : (
+									<SnapCssSandbox snapData={trail.snapData}>
+										<Section
+											fullWidth={true}
+											padSides={false}
+											showTopBorder={false}
+											showSideBorders={false}
+											ophanComponentLink={
+												ophanComponentLink
+											}
+											ophanComponentName={ophanName}
+											containerName={
+												collection.collectionType
+											}
+										>
+											<Snap snapData={trail.snapData} />
+										</Section>
+									</SnapCssSandbox>
+								)}
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -364,6 +336,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									/>
 								</FrontSection>
 								{decideAdSlot(
+									renderAds,
 									index,
 									front.isNetworkFront,
 									front.pressedPage.collections.length,
@@ -383,8 +356,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
-								centralBorder="partial"
-								url={collection.href}
+								url={
+									collection.href
+										? `https://www.theguardian.com/${collection.href}`
+										: undefined
+								}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
@@ -403,12 +379,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										<CPScottHeader />
 									)
 								}
+								badge={collection.badge}
 								sectionId={ophanName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								treats={collection.treats}
+								canShowMore={collection.canShowMore}
+								ajaxUrl={front.config.ajaxUrl}
 							>
 								<DecideContainer
 									trails={trails}
@@ -423,37 +404,16 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 									renderAds={renderAds}
 								/>
-								{collection.canShowMore && (
-									<Island deferUntil="interaction">
-										<ShowMore
-											containerTitle={
-												collection.displayName
-											}
-											collectionId={collection.id}
-											containerElementId={ophanName}
-											path={front.pressedPage.id}
-											baseUrl={front.config.ajaxUrl}
-											containerPalette={
-												collection.containerPalette
-											}
-											showAge={
-												collection.displayName ===
-												'Headlines'
-											}
-										/>
-									</Island>
-								)}
 							</FrontSection>
-							{renderAds &&
-								decideAdSlot(
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
+							{decideAdSlot(
+								renderAds,
+								index,
+								front.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+								format.display,
+								mobileAdPositions,
+							)}
 						</>
 					);
 				})}
@@ -465,17 +425,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
-			<Section
-				fullWidth={true}
-				data-print-layout="hide"
-				padSides={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</Section>
+			{renderAds && (
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
+			)}
 
 			{NAV.subNavSections && (
 				<Section

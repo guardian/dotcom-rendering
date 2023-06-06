@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { InstagramBlockElement } from '../../types/content';
-import { updateIframeHeight } from '../browser/updateIframeHeight';
+import { updateIframeHeight } from '../client/updateIframeHeight';
 import { ClickToView } from './ClickToView';
 
 const fullWidthStyles = css`
@@ -10,7 +10,7 @@ const fullWidthStyles = css`
 /**
  * Note the iframe created in this component is dependent on the embedIFrame function being
  * called to be size correctly.
- * src/web/browser/embedIframe/embedIframe.ts
+ * src/web/client/embedIframe/embedIframe.ts
  */
 type Props = {
 	element: InstagramBlockElement;

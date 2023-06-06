@@ -32,7 +32,7 @@ export const CommentCountStory = () => {
 		</Wrapper>
 	);
 };
-CommentCountStory.story = { name: 'default' };
+CommentCountStory.storyName = 'default';
 
 export const GalleryStory = () => {
 	return (
@@ -49,4 +49,4 @@ export const GalleryStory = () => {
 		</Wrapper>
 	);
 };
-GalleryStory.story = { name: 'Gallery' };
+GalleryStory.storyName = 'Gallery';

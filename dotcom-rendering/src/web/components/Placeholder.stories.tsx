@@ -46,7 +46,7 @@ export const Basic = () => {
 		</Wrapper>
 	);
 };
-Basic.story = { name: 'with 200px height' };
+Basic.storyName = 'with 200px height';
 
 export const Square = () => {
 	return (
@@ -55,7 +55,7 @@ export const Square = () => {
 		</Wrapper>
 	);
 };
-Square.story = { name: 'with equal height and width' };
+Square.storyName = 'with equal height and width';
 
 export const InARow = () => {
 	return (
@@ -68,7 +68,7 @@ export const InARow = () => {
 		</Wrapper>
 	);
 };
-InARow.story = { name: 'with elements in a row' };
+InARow.storyName = 'with elements in a row';
 
 export const Stacked = () => {
 	return (
@@ -81,7 +81,7 @@ export const Stacked = () => {
 		</Wrapper>
 	);
 };
-Stacked.story = { name: 'with elements stacked' };
+Stacked.storyName = 'with elements stacked';
 
 export const Root = () => {
 	return (
@@ -90,7 +90,7 @@ export const Root = () => {
 		</Wrapper>
 	);
 };
-Root.story = { name: 'with rootId set' };
+Root.storyName = 'with rootId set';
 
 export const NoShimmer = () => {
 	return (
@@ -99,7 +99,7 @@ export const NoShimmer = () => {
 		</Wrapper>
 	);
 };
-NoShimmer.story = { name: 'without shimmer' };
+NoShimmer.storyName = 'without shimmer';
 
 export const Background = () => {
 	return (
@@ -112,4 +112,4 @@ export const Background = () => {
 		</Wrapper>
 	);
 };
-Background.story = { name: 'with backgroundColor set' };
+Background.storyName = 'with backgroundColor set';

@@ -42,18 +42,10 @@ const topicStyles = css`
 `;
 
 const getTopicLink = (isActive: boolean, topics: string, id: Props['id']) => {
-	const urlParams = isActive
-		? // if active, the button links to the the page without the params
-		  ''
-		: // we only add the link if the topic is *inactive*
-		  '?' +
-		  new URLSearchParams({
-				topics,
-		  }).toString();
-
-	return `${urlParams}#${id}`;
+	// If active, remove the search params. Otherwise use them.
+	const urlParams = new URLSearchParams(isActive ? {} : { topics });
+	return `?${urlParams.toString()}#${id}`;
 };
-
 const getKeyEventLink = (filterKeyEvents: boolean, id: Props['id']) => {
 	const urlParams = new URLSearchParams({
 		filterKeyEvents: filterKeyEvents ? 'false' : 'true',
@@ -66,13 +58,40 @@ const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
 	availableTopic.type === selectedTopic.type &&
 	availableTopic.value === selectedTopic.value;
 
-const getTopFiveTopics = (availableTopics: Topic[]) =>
-	availableTopics
+// get top 5 only if they occur in more than 2 blocks
+const getTopFiveTopics = (availableTopics: Topic[]) => {
+	return availableTopics
 		.slice(0, 5)
 		.filter((topic) => topic.count !== undefined && topic.count > 2);
+};
 
 export const hasRelevantTopics = (availableTopics?: Topic[]) => {
 	return !!(availableTopics && getTopFiveTopics(availableTopics).length);
+};
+
+export const getTopFiveIncludingSelected = (
+	selectedTopic: Topic | undefined,
+	availableTopics: Topic[],
+) => {
+	const topFiveTopics = getTopFiveTopics(availableTopics);
+
+	const selectedIndex = selectedTopic
+		? availableTopics.findIndex((availableTopic) =>
+				isEqual(selectedTopic, availableTopic),
+		  )
+		: -1;
+
+	// if selected topic is not within the top 5,
+	// replacing the last topic of top 5 with the selected topic
+	if (selectedIndex > 4) {
+		const remaining = topFiveTopics.slice(0, topFiveTopics.length - 1);
+
+		const selected = availableTopics[selectedIndex];
+
+		if (selected) return remaining.concat([selected]);
+	}
+
+	return topFiveTopics;
 };
 
 /**
@@ -97,18 +116,10 @@ export const TopicFilterBank = ({
 	if (!hasRelevantTopics(availableTopics) && !hasKeyEvents) return null;
 	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
-	const topFiveTopics = getTopFiveTopics(availableTopics);
-
-	if (selectedTopic) {
-		const selectedIndex = availableTopics.findIndex((availableTopic) =>
-			isEqual(selectedTopic, availableTopic),
-		);
-
-		const topicAtIndex = availableTopics[selectedIndex];
-		if (selectedIndex > 4 && topicAtIndex) {
-			topFiveTopics.splice(4, 1, topicAtIndex);
-		}
-	}
+	const topFiveTopics = getTopFiveIncludingSelected(
+		selectedTopic,
+		availableTopics,
+	);
 
 	return (
 		<div css={containerStyles}>

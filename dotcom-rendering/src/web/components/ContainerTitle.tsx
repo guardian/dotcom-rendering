@@ -91,7 +91,6 @@ export const ContainerTitle = ({
 
 	const now = new Date();
 	const locale = editionId && getEditionFromId(editionId).locale;
-
 	return (
 		<div css={marginStyles}>
 			{url ? (
@@ -111,7 +110,7 @@ export const ContainerTitle = ({
 				<>
 					<span
 						css={dateTextStyles(
-							overrides?.text.containerDate ?? neutral[0],
+							overrides?.text?.containerDate ?? neutral[0],
 						)}
 					>
 						{now.toLocaleDateString(locale, { weekday: 'long' })}
@@ -122,7 +121,7 @@ export const ContainerTitle = ({
 								display: block;
 							`,
 							dateTextStyles(
-								overrides?.text.containerDate ?? news[400],
+								overrides?.text?.containerDate ?? news[400],
 							),
 							bottomMargin,
 						]}

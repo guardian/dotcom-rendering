@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { initPerf } from '../../../browser/initPerf';
+import { initPerf } from '../../../client/initPerf';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGateMandatory } from '../displayRule';
 import type { SignInGateComponent } from '../types';

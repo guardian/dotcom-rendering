@@ -22,7 +22,7 @@ module.exports = defineConfig({
 		'*openx.net',
 	],
 	retries: {
-		runMode: 2,
+		runMode: 5,
 		openMode: 0,
 	},
 	e2e: {

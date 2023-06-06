@@ -23,7 +23,7 @@ export const verticalDivider = (
 				height: 100%;
 				border-left: 1px solid
 					${containerOverrides
-						? containerOverrides.border.container
+						? containerOverrides.border?.container
 						: border.secondary};
 			}
 		}

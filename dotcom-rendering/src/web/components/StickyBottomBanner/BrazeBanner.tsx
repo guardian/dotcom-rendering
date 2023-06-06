@@ -5,12 +5,12 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
+import type { TagType } from '../../../types/tag';
+import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
+import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
-import { TagType } from '../../../types/tag';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };
@@ -45,6 +45,7 @@ export const canShowBrazeBanner = async (
 	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 	tags: TagType[],
+	shouldHideReaderRevenue: boolean,
 ): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
@@ -52,6 +53,10 @@ export const canShowBrazeBanner = async (
 			show: true,
 			meta: forcedBrazeMeta,
 		};
+	}
+
+	if (shouldHideReaderRevenue) {
+		return { show: false };
 	}
 
 	if (suppressForTaylorReport(tags)) {

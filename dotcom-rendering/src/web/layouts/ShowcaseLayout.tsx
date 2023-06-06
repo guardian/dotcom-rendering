@@ -16,6 +16,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import type { RenderingTarget } from '../../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -31,11 +32,11 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader.importable';
+import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { MostViewedRightWithAd } from '../components/MostViewedRightWithAd';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -207,9 +208,15 @@ interface Props {
 	article: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
+	renderingTarget: RenderingTarget;
 }
 
-export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
+export const ShowcaseLayout = ({
+	article,
+	NAV,
+	format,
+	renderingTarget,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = article;
@@ -319,6 +326,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
+									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 
@@ -396,6 +404,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									headerTopBarSwitch={
 										!!article.config.switches.headerTopNav
 									}
+									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
 						</Stuck>
@@ -408,9 +417,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<Island deferUntil="idle">
-								<LabsHeader />
-							</Island>
+							<LabsHeader />
 						</Section>
 					</Stuck>
 				</>
@@ -459,7 +466,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								sectionLabel={article.sectionLabel}
 								sectionUrl={article.sectionUrl}
 								guardianBaseURL={article.guardianBaseURL}
-								badge={article.badge}
+								badge={article.badge?.enhanced}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -558,6 +565,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									isRightToLeftLang={
 										article.isRightToLeftLang
 									}
+									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -607,7 +615,7 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 									showBottomSocialButtons={
 										article.showBottomSocialButtons
 									}
-									badge={article.badge}
+									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -629,33 +637,16 @@ export const ShowcaseLayout = ({ article, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									{renderAds && (
-										<AdSlot
-											position="right"
-											display={format.display}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-										/>
-									)}
-
-									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
-											<MostViewedRightWrapper
-												isAdFreeUser={
-													article.isAdFreeUser
-												}
-											/>
-										</Island>
-									) : (
-										<></>
-									)}
+									<MostViewedRightWithAd
+										display={format.display}
+										isPaidContent={
+											article.pageType.isPaidContent
+										}
+										renderAds={renderAds}
+										shouldHideReaderRevenue={
+											article.shouldHideReaderRevenue
+										}
+									/>
 								</RightColumn>
 							</div>
 						</GridItem>

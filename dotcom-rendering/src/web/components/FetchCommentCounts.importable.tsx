@@ -1,8 +1,8 @@
 import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import type { DCRContainerPalette } from '../../types/front';
-import { getEmotionCache } from '../browser/islands/emotion';
+import { getEmotionCache } from '../client/islands/emotion';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
 import { CardCommentCount } from './CardCommentCount';
@@ -117,7 +117,8 @@ function renderCounts(counts: EnhancedCountType[]) {
 		);
 
 		if (container) {
-			render(
+			const root = createRoot(container);
+			root.render(
 				<CacheProvider value={getEmotionCache()}>
 					<CardCommentCount
 						format={count.format}
@@ -127,7 +128,6 @@ function renderCounts(counts: EnhancedCountType[]) {
 						containerPalette={count.containerPalette}
 					/>
 				</CacheProvider>,
-				container,
 			);
 
 			container.setAttribute('aria-label', `${count.short} Comments`);

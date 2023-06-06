@@ -17,9 +17,7 @@ describe('MostViewedList', () => {
 	it('should call the api and render the response as expected', () => {
 		useApi.mockReturnValue(response);
 
-		const { asFragment, getAllByText } = render(
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
-		);
+		const { asFragment, getAllByText } = render(<MostViewedRight />);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -58,13 +56,7 @@ describe('MostViewedList', () => {
 	it('should implement a limit on the number of items', () => {
 		useApi.mockReturnValue(response);
 
-		const { getAllByText } = render(
-			<MostViewedRight
-				limitItems={3}
-				isAdFreeUser={false}
-				adBlockerDetected={false}
-			/>,
-		);
+		const { getAllByText } = render(<MostViewedRight limitItems={3} />);
 
 		// Calls api once only
 		expect(useApi).toHaveBeenCalledTimes(1);
@@ -82,9 +74,7 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(
-			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
-		);
+		const { getByText } = render(<MostViewedRight />);
 
 		expect(
 			getByText('Jennifer Rankin and Daniel Boffey'),

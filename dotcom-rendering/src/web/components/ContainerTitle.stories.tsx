@@ -14,14 +14,14 @@ export default {
 export const DefaultStory = () => {
 	return <ContainerTitle title="Title text" />;
 };
-DefaultStory.story = { name: 'with defaults' };
+DefaultStory.storyName = 'with defaults';
 
 export const DescriptionStory = () => {
 	return (
 		<ContainerTitle title="Title text" description="About this content" />
 	);
 };
-DescriptionStory.story = { name: 'with description' };
+DescriptionStory.storyName = 'with description';
 
 export const ColouredStory = () => {
 	return (
@@ -32,7 +32,7 @@ export const ColouredStory = () => {
 		/>
 	);
 };
-ColouredStory.story = { name: 'with colour' };
+ColouredStory.storyName = 'with colour';
 
 export const LinkStory = () => {
 	return (
@@ -43,4 +43,4 @@ export const LinkStory = () => {
 		/>
 	);
 };
-LinkStory.story = { name: 'with a link' };
+LinkStory.storyName = 'with a link';

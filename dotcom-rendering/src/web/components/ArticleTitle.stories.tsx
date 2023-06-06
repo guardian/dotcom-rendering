@@ -32,8 +32,8 @@ const FEBrexit = {
 		sectionLabel: 'Brexit',
 		sectionUrl: '/brexit',
 		badge: {
-			seriesTag: 'politics/series/brexit-how-it-came-to-this',
-			imageUrl:
+			href: '/politics/series/brexit-how-it-came-to-this',
+			imageSrc:
 				'https://assets.guim.co.uk/images/badges/05c6ace4e60dd0209a3f80eb03e16524/EUReferendumBadge.svg',
 		},
 	},
@@ -45,8 +45,8 @@ const FEBeyondTheBlade = {
 		sectionLabel: 'Beyond the blade',
 		sectionUrl: '/beyond-the-blade',
 		badge: {
-			seriesTag: 'membership/series/beyond-the-blade',
-			imageUrl:
+			href: '/membership/series/beyond-the-blade',
+			imageSrc:
 				'https://assets.guim.co.uk/images/badges/bfc00bc58eb966845ccf1200fd8c54e0/beyondthebladebadge.svg',
 		},
 	},
@@ -71,7 +71,7 @@ export const defaultStory = () => {
 		</Wrapper>
 	);
 };
-defaultStory.story = { name: 'Brexit badge' };
+defaultStory.storyName = 'Brexit badge';
 
 export const beyondTheBlade = () => {
 	return (
@@ -87,7 +87,7 @@ export const beyondTheBlade = () => {
 		</Wrapper>
 	);
 };
-beyondTheBlade.story = { name: 'Beyond the blade badge' };
+beyondTheBlade.storyName = 'Beyond the blade badge';
 
 export const immersiveComment = () => {
 	return (
@@ -108,7 +108,7 @@ export const immersiveComment = () => {
 		</div>
 	);
 };
-immersiveComment.story = { name: 'Immersive comment piece' };
+immersiveComment.storyName = 'Immersive comment piece';
 
 export const immersiveCommentTag = () => {
 	return (
@@ -136,7 +136,7 @@ export const immersiveCommentTag = () => {
 		</div>
 	);
 };
-immersiveCommentTag.story = { name: 'Immersive comment piece with Blog tag' };
+immersiveCommentTag.storyName = 'Immersive comment piece with Blog tag';
 
 export const ImmersiveSeriesTag = () => {
 	return (
@@ -159,7 +159,7 @@ export const ImmersiveSeriesTag = () => {
 		</Wrapper>
 	);
 };
-ImmersiveSeriesTag.story = { name: 'Immersive with a Series tag' };
+ImmersiveSeriesTag.storyName = 'Immersive with a Series tag';
 
 export const ArticleBlogTag = () => {
 	return (
@@ -182,7 +182,7 @@ export const ArticleBlogTag = () => {
 		</Wrapper>
 	);
 };
-ArticleBlogTag.story = { name: 'Article with a Blog tag' };
+ArticleBlogTag.storyName = 'Article with a Blog tag';
 
 export const LiveblogTitle = () => {
 	return (
@@ -235,7 +235,7 @@ export const LiveblogTitle = () => {
 		</Wrapper>
 	);
 };
-LiveblogTitle.story = { name: 'Liveblog title' };
+LiveblogTitle.storyName = 'Liveblog title';
 
 export const ArticleOpinionTag = () => {
 	return (
@@ -258,7 +258,7 @@ export const ArticleOpinionTag = () => {
 		</Wrapper>
 	);
 };
-ArticleOpinionTag.story = { name: 'Article with a Opinion tag' };
+ArticleOpinionTag.storyName = 'Article with a Opinion tag';
 
 export const ArticleSeriesTag = () => {
 	return (
@@ -281,7 +281,7 @@ export const ArticleSeriesTag = () => {
 		</Wrapper>
 	);
 };
-ArticleSeriesTag.story = { name: 'Article with a Series tag' };
+ArticleSeriesTag.storyName = 'Article with a Series tag';
 
 export const SpecialReportTitle = () => {
 	return (
@@ -304,7 +304,7 @@ export const SpecialReportTitle = () => {
 		</Wrapper>
 	);
 };
-SpecialReportTitle.story = { name: 'Special report' };
+SpecialReportTitle.storyName = 'Special report';
 
 export const SpecialReportAlt = () => {
 	return (
@@ -327,7 +327,7 @@ export const SpecialReportAlt = () => {
 		</Wrapper>
 	);
 };
-SpecialReportAlt.story = { name: 'Special report Alt' };
+SpecialReportAlt.storyName = 'Special report Alt';
 
 export const ArticleNoTags = () => {
 	return (
@@ -343,7 +343,7 @@ export const ArticleNoTags = () => {
 		</Wrapper>
 	);
 };
-ArticleNoTags.story = { name: 'Article with no tags' };
+ArticleNoTags.storyName = 'Article with no tags';
 
 export const LabsStory = () => {
 	return (
@@ -366,7 +366,7 @@ export const LabsStory = () => {
 		</Wrapper>
 	);
 };
-LabsStory.story = { name: 'Labs' };
+LabsStory.storyName = 'Labs';
 
 export const LongStory = () => {
 	return (
@@ -389,7 +389,7 @@ export const LongStory = () => {
 		</Wrapper>
 	);
 };
-LongStory.story = { name: 'Long title' };
+LongStory.storyName = 'Long title';
 
 export const LongWord = () => {
 	return (
@@ -412,7 +412,7 @@ export const LongWord = () => {
 		</Wrapper>
 	);
 };
-LongWord.story = { name: 'Long word' };
+LongWord.storyName = 'Long word';
 
 export const ArticleDeadBlogTitle = () => {
 	return (
@@ -442,4 +442,4 @@ export const ArticleDeadBlogTitle = () => {
 	);
 };
 
-ArticleDeadBlogTitle.story = { name: 'Deadblog - All pillars' };
+ArticleDeadBlogTitle.storyName = 'Deadblog - All pillars';

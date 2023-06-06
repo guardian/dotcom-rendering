@@ -75,7 +75,7 @@ type Props = {
 	 * 🛠️ DEBUG ONLY 🛠️
 	 * Used to highlight the name of a container when DCR debug mode is enabled
 	 *
-	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md
+	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/client/debug/README.md
 	 */
 	containerName?: string;
 	/** Fronts containers can have their styling overridden using a `containerPalette` */
@@ -237,9 +237,9 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				borderColour={borderColour ?? overrides?.border.container}
+				borderColour={borderColour ?? overrides?.border?.container}
 				backgroundColour={
-					backgroundColour ?? overrides?.background.container
+					backgroundColour ?? overrides?.background?.container
 				}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
@@ -260,9 +260,9 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			borderColour={borderColour ?? overrides?.border.container}
+			borderColour={borderColour ?? overrides?.border?.container}
 			backgroundColour={
-				backgroundColour ?? overrides?.background.container
+				backgroundColour ?? overrides?.background?.container
 			}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
@@ -273,7 +273,7 @@ export const Section = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border.container}
+					borderColour={borderColour ?? overrides?.border?.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
 				>
@@ -289,7 +289,7 @@ export const Section = ({
 							<ContainerTitle
 								title={title}
 								fontColour={
-									fontColour ?? overrides?.text.container
+									fontColour ?? overrides?.text?.container
 								}
 								description={description}
 								url={url}
@@ -303,7 +303,7 @@ export const Section = ({
 							<Treats
 								treats={treats}
 								borderColour={
-									borderColour ?? overrides?.border.container
+									borderColour ?? overrides?.border?.container
 								}
 							/>
 						)}
@@ -320,7 +320,7 @@ export const Section = ({
 							<ContainerTitle
 								title={title}
 								fontColour={
-									fontColour ?? overrides?.text.container
+									fontColour ?? overrides?.text?.container
 								}
 								description={description}
 								url={url}
@@ -333,7 +333,7 @@ export const Section = ({
 							<ShowHideButton
 								sectionId={sectionId}
 								overrideContainerToggleColour={
-									overrides?.text.containerToggle
+									overrides?.text?.containerToggle
 								}
 							/>
 						)}

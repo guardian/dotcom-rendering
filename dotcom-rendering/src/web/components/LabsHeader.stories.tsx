@@ -1,5 +1,5 @@
 import { border, labs } from '@guardian/source-foundations';
-import { LabsHeader } from './LabsHeader.importable';
+import { LabsHeader } from './LabsHeader';
 import { Section } from './Section';
 
 export default {
@@ -19,4 +19,4 @@ export const Default = () => {
 		</Section>
 	);
 };
-Default.story = { name: 'Default' };
+Default.storyName = 'Default';

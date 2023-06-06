@@ -442,7 +442,7 @@
             "type": "string"
         },
         "badge": {
-            "$ref": "#/definitions/BadgeType"
+            "$ref": "#/definitions/FEArticleBadgeType"
         },
         "nav": {
             "$ref": "#/definitions/FENavType"
@@ -4088,15 +4088,8 @@
                     "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
-                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object",
-                    "additionalProperties": {
-                        "enum": [
-                            "control",
-                            "variant"
-                        ],
-                        "type": "string"
-                    }
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -4227,6 +4220,9 @@
                 },
                 "ampIframeUrl": {
                     "type": "string"
+                },
+                "hasInlineMerchandise": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -4374,6 +4370,9 @@
                             "type": "string"
                         },
                         "embedCss": {
+                            "type": "string"
+                        },
+                        "embedJs": {
                             "type": "string"
                         }
                     }
@@ -4596,7 +4595,7 @@
                 "value"
             ]
         },
-        "BadgeType": {
+        "FEArticleBadgeType": {
             "type": "object",
             "properties": {
                 "seriesTag": {
@@ -4604,11 +4603,29 @@
                 },
                 "imageUrl": {
                     "type": "string"
+                },
+                "enhanced": {
+                    "$ref": "#/definitions/DCRBadgeType"
                 }
             },
             "required": [
                 "imageUrl",
                 "seriesTag"
+            ]
+        },
+        "DCRBadgeType": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "href",
+                "imageSrc"
             ]
         },
         "FENavType": {

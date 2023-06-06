@@ -60,8 +60,8 @@ export const Footers = () => (
 		))}
 	</ul>
 );
+Footers.storyName = 'Footer for all editions';
 Footers.story = {
-	name: 'Footer for all editions',
 	parameters: {
 		chromatic: {
 			viewports: Object.values(breakpoints),

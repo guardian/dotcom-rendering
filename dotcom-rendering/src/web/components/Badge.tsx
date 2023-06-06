@@ -24,16 +24,15 @@ const badgeLink = css`
 `;
 
 type Props = {
-	imageUrl: string;
-	seriesTag: string;
+	imageSrc: string;
+	href: string;
 };
 
-export const Badge = ({ imageUrl, seriesTag }: Props) => {
-	const urlPath = `/${seriesTag}`;
+export const Badge = ({ imageSrc, href }: Props) => {
 	return (
 		<div css={badgeWrapper}>
-			<a href={urlPath} css={badgeLink} role="button">
-				<img css={imageStyles} src={imageUrl} alt="" />
+			<a href={href} css={badgeLink} role="button">
+				<img css={imageStyles} src={imageSrc} alt="" />
 			</a>
 		</div>
 	);
