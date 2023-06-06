@@ -304,6 +304,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						!isPaidContent &&
 						front.config.switches.mostViewedFronts
 					) {
+						const deeplyReadData = front.config.switches
+							.deeplyReadSwitch
+							? front.deeplyRead
+							: undefined;
 						return (
 							<>
 								<Section
@@ -343,7 +347,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
-										deeplyRead={front.deeplyRead}
+										deeplyRead={deeplyReadData}
 									/>
 								</Section>
 								{decideAdSlot(
