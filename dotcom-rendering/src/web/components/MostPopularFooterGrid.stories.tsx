@@ -10,11 +10,11 @@ export default {
 };
 
 const mostViewed = {
-	heading: 'Tab 1',
+	heading: 'Most viewed',
 	trails: trails.slice(0, 10),
 };
 const deeplyRead = {
-	heading: 'Tab 1',
+	heading: 'Deeply read',
 	trails: trails.slice(10, 20),
 };
 
