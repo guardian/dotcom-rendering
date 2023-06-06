@@ -10,7 +10,7 @@ const paidContentPage =
 /**
  * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
  * If this happens you'll need to find a new labs article with a brand badge, you can often find these here:
- * https://www.theguardian.com/tone/advertisement-features"
+ * https://www.theguardian.com/tone/advertisement-features
  */
 describe('Paid content tests', function () {
 	beforeEach(function () {
