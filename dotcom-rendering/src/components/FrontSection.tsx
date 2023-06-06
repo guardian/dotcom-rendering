@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
@@ -458,6 +459,7 @@ export const FrontSection = ({
 			css={[
 				fallbackStyles,
 				containerStyles(hasPageSkin),
+				hasPageSkin && pageSkinContainer,
 				css`
 					background-color: ${overrides?.background?.container};
 				`,
