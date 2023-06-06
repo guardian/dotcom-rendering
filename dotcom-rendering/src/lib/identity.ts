@@ -4,10 +4,10 @@ import { OktaAuth } from '@okta/okta-auth-js';
 
 console.log('identity loaded');
 
-interface OktaAuthContextType {
-	oktaAuth: OktaAuth;
-	authState: AuthState | null;
-}
+// interface OktaAuthContextType {
+// 	oktaAuth: OktaAuth;
+// 	authState: AuthState | null;
+// }
 
 function getStage() {
 	if (typeof window !== 'undefined' && !window.guardian.config.isDev) {
