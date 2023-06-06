@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import {
+	background,
+	from,
+	neutral,
+	space,
+	until,
+} from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import type { DCRBadgeType } from '../../types/badge';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
@@ -311,6 +317,20 @@ const titleStyle = css`
 	}
 `;
 
+const decideBackgroundColour = (
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
+
 /**
  * # Front Container
  *
@@ -443,7 +463,10 @@ export const FrontSection = ({
 				containerStyles(hasPageSkin),
 				hasPageSkin && pageSkinContainer,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${decideBackgroundColour(
+						overrides?.background?.container,
+						hasPageSkin,
+					)};
 				`,
 			]}
 		>
