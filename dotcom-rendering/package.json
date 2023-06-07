@@ -74,7 +74,7 @@
 		"@guardian/eslint-config": "3.0.0",
 		"@guardian/eslint-config-typescript": "5.0.0",
 		"@guardian/eslint-plugin-source-react-components": "14.0.0",
-		"@guardian/libs": "14.0.0",
+		"@guardian/libs": "14.1.0",
 		"@guardian/prettier": "3.0.0",
 		"@guardian/shimport": "1.0.2",
 		"@guardian/source-foundations": "10.0.1",
