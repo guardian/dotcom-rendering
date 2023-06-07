@@ -14,6 +14,7 @@ import { enhanceNumberedLists } from './enhance-numbered-lists';
 // import { enhanceRecipes } from './enhance-recipes';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+import { validateAsBlock } from './validate';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -104,6 +105,7 @@ export const enhanceBlocks = (
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};
 
+	blocks.forEach((block) => validateAsBlock(block));
 	return new BlockEnhancer(blocks, format, { promotedNewsletter })
 		.enhanceDividers()
 		.enhanceH3s()
