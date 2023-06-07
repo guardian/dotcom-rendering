@@ -11,42 +11,37 @@ import { getZIndex } from '../lib/getZIndex';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
-const linkStyles = (hasPageSkin: boolean) => {
-	const untilLeftCol = css`
-		float: right;
-		margin-top: 6px;
-		margin-right: 54px;
-		margin-bottom: 10px;
-		width: 146px;
+const linkStylesUntilLeftCol = css`
+	float: right;
+	margin-top: 6px;
+	margin-right: 54px;
+	margin-bottom: 10px;
+	width: 146px;
 
-		${from.mobileMedium} {
-			margin-right: 10px;
-			width: 195px;
-		}
-		${from.mobileLandscape} {
-			margin-right: 20px;
-		}
-		${from.tablet} {
-			width: 224px;
-		}
-		${from.desktop} {
-			margin-top: 5px;
-			margin-bottom: ${space[3]}px;
-			position: relative;
-			width: 295px;
-		}
-		${getZIndex('TheGuardian')}
-	`;
-	if (hasPageSkin) {
-		return untilLeftCol;
+	${from.mobileMedium} {
+		margin-right: 10px;
+		width: 195px;
 	}
-	return css`
-		${untilLeftCol}
-		${from.wide} {
-			margin-right: 96px;
-		}
-	`;
-};
+	${from.mobileLandscape} {
+		margin-right: 20px;
+	}
+	${from.tablet} {
+		width: 224px;
+	}
+	${from.desktop} {
+		margin-top: 5px;
+		margin-bottom: ${space[3]}px;
+		position: relative;
+		width: 295px;
+	}
+	${getZIndex('TheGuardian')}
+`;
+
+const linkStylesFromLeftCol = css`
+	${from.wide} {
+		margin-right: 96px;
+	}
+`;
 
 type Props = {
 	editionId: EditionId;
@@ -58,7 +53,10 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 		case 'UK':
 			return (
 				<a
-					css={linkStyles(hasPageSkin)}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name="nav3 : logo"
 				>
@@ -75,7 +73,10 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 		case 'AU':
 			return (
 				<a
-					css={linkStyles(hasPageSkin)}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name="nav3 : logo"
 				>
@@ -93,7 +94,10 @@ export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 		default:
 			return (
 				<a
-					css={linkStyles(hasPageSkin)}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name="nav3 : logo"
 				>

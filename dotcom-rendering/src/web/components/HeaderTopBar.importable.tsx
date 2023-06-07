@@ -23,35 +23,30 @@ interface HeaderTopBarProps {
 	hasPageSkin?: boolean;
 }
 
-const topBarStyles = (hasPageSkin: boolean) => {
-	const untilLeftCol = css`
-		display: flex;
-		height: 30px;
-		background-color: ${brand[300]};
-		box-sizing: border-box;
-		padding-left: 10px;
-		${from.mobileLandscape} {
-			padding-left: ${space[5]}px;
-		}
-		${from.tablet} {
-			padding-left: 15px;
-		}
-		${from.desktop} {
-			height: 35px;
-			justify-content: flex-end;
-			padding-right: ${space[5]}px;
-		}
-	`;
-	if (hasPageSkin) {
-		return untilLeftCol;
+const topBarStylesUntilLeftCol = css`
+	display: flex;
+	height: 30px;
+	background-color: ${brand[300]};
+	box-sizing: border-box;
+	padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: ${space[5]}px;
 	}
-	return css`
-		${untilLeftCol}
-		${from.wide} {
-			padding-right: 96px;
-		}
-	`;
-};
+	${from.tablet} {
+		padding-left: 15px;
+	}
+	${from.desktop} {
+		height: 35px;
+		justify-content: flex-end;
+		padding-right: ${space[5]}px;
+	}
+`;
+
+const topBarStylesFromLeftCol = css`
+	${from.wide} {
+		padding-right: 96px;
+	}
+`;
 
 /**
  * # Header Top Bar
@@ -89,7 +84,13 @@ export const HeaderTopBar = ({
 				background-color: ${brand[300]};
 			`}
 		>
-			<div css={[topBarStyles(hasPageSkin), center]}>
+			<div
+				css={[
+					topBarStylesUntilLeftCol,
+					!hasPageSkin && topBarStylesFromLeftCol,
+					center,
+				]}
+			>
 				<HeaderTopBarPrintSubscriptions editionId={editionId} />
 				<MyAccount
 					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}

@@ -98,139 +98,117 @@ const fallbackStyles = css`
 	}
 `;
 
-const containerStyles = (hasPageSkin: boolean) => {
-	const untilLeftCol = css`
-		display: grid;
+const containerStylesUntilLeftCol = css`
+	display: grid;
 
+	grid-template-rows:
+		[headline-start show-hide-start] auto
+		[show-hide-end headline-end content-toggleable-start content-start] auto
+		[content-end content-toggleable-end show-more-start] auto
+		[show-more-end];
+
+	grid-template-columns:
+		[decoration-start]
+		0px
+		[content-start title-start]
+		repeat(3, minmax(0, 1fr))
+		[hide-start]
+		minmax(0, 1fr)
+		[content-end title-end hide-end]
+		0px [decoration-end];
+
+	grid-auto-flow: dense;
+	column-gap: 10px;
+
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+
+	${from.tablet} {
+		grid-template-columns:
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
+			repeat(11, 40px)
+			[hide-start]
+			40px
+			[decoration-end content-end title-end hide-end]
+			minmax(0, 1fr);
+	}
+
+	${from.desktop} {
+		grid-template-columns:
+			minmax(0, 1fr)
+			[decoration-start content-start title-start]
+			repeat(11, 60px)
+			[hide-start]
+			60px
+			[decoration-end content-end title-end hide-end]
+			minmax(0, 1fr);
+	}
+`;
+
+const containerStylesFromLeftCol = css`
+	${from.leftCol} {
 		grid-template-rows:
-			[headline-start show-hide-start] auto
-			[show-hide-end headline-end content-toggleable-start content-start] auto
-			[content-end content-toggleable-end show-more-start] auto
+			[headline-start show-hide-start content-start] auto
+			[show-hide-end content-toggleable-start] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
 			[show-more-end];
 
 		grid-template-columns:
-			[decoration-start]
-			0px
-			[content-start title-start]
-			repeat(3, minmax(0, 1fr))
-			[hide-start]
 			minmax(0, 1fr)
-			[content-end title-end hide-end]
-			0px [decoration-end];
-
-		grid-auto-flow: dense;
-		column-gap: 10px;
-
-		${from.mobileLandscape} {
-			column-gap: 20px;
-		}
-
-		${from.tablet} {
-			grid-template-columns:
-				minmax(0, 1fr)
-				[decoration-start content-start title-start]
-				repeat(11, 40px)
-				[hide-start]
-				40px
-				[decoration-end content-end title-end hide-end]
-				minmax(0, 1fr);
-		}
-
-		${from.desktop} {
-			grid-template-columns:
-				minmax(0, 1fr)
-				[decoration-start content-start title-start]
-				repeat(11, 60px)
-				[hide-start]
-				60px
-				[decoration-end content-end title-end hide-end]
-				minmax(0, 1fr);
-		}
-	`;
-
-	if (hasPageSkin) {
-		return untilLeftCol;
+			[decoration-start title-start]
+			repeat(2, 60px)
+			[title-end content-start]
+			repeat(11, 60px)
+			[hide-start]
+			60px
+			[decoration-end hide-end content-end]
+			minmax(0, 1fr);
 	}
 
-	return css`
-		${untilLeftCol}
+	${from.wide} {
+		grid-template-rows:
+			[headline-start content-start content-toggleable-start show-hide-start] auto
+			[show-hide-end] auto
+			[headline-end treats-start] auto
+			[content-end content-toggleable-end treats-end show-more-start] auto
+			[show-more-end];
 
-		${from.leftCol} {
-			grid-template-rows:
-				[headline-start show-hide-start content-start] auto
-				[show-hide-end content-toggleable-start] auto
-				[headline-end treats-start] auto
-				[content-end content-toggleable-end treats-end show-more-start] auto
-				[show-more-end];
-
-			grid-template-columns:
-				minmax(0, 1fr)
-				[decoration-start title-start]
-				repeat(2, 60px)
-				[title-end content-start]
-				repeat(11, 60px)
-				[hide-start]
-				60px
-				[decoration-end hide-end content-end]
-				minmax(0, 1fr);
-		}
-
-		${from.wide} {
-			grid-template-rows:
-				[headline-start content-start content-toggleable-start show-hide-start] auto
-				[show-hide-end] auto
-				[headline-end treats-start] auto
-				[content-end content-toggleable-end treats-end show-more-start] auto
-				[show-more-end];
-
-			grid-template-columns:
-				minmax(0, 1fr)
-				[decoration-start title-start]
-				repeat(3, 60px)
-				[title-end content-start]
-				repeat(12, 60px)
-				[content-end hide-start]
-				60px
-				[decoration-end hide-end]
-				minmax(0, 1fr);
-		}
-	`;
-};
-
-const sectionHeadline = (hasPageSkin: boolean) => {
-	const baseSectionHeadline = css`
-		grid-row: headline;
-		grid-column: title;
-
-		display: flex;
-		flex-direction: column;
-	`;
-
-	const fromLeftCol = css`
-		${from.leftCol} {
-			position: relative;
-			::after {
-				content: '';
-				display: block;
-				width: 1px;
-				top: 0;
-				height: 1.875rem;
-				right: -10px;
-				position: absolute;
-				background-color: ${neutral[86]};
-			}
-		}
-	`;
-
-	if (hasPageSkin) {
-		return baseSectionHeadline;
+		grid-template-columns:
+			minmax(0, 1fr)
+			[decoration-start title-start]
+			repeat(3, 60px)
+			[title-end content-start]
+			repeat(12, 60px)
+			[content-end hide-start]
+			60px
+			[decoration-end hide-end]
+			minmax(0, 1fr);
 	}
+`;
 
-	return css`
-		${baseSectionHeadline}
-		${fromLeftCol}
-	`;
-};
+const sectionHeadlineUntilLeftCol = css`
+	grid-row: headline;
+	grid-column: title;
+	display: flex;
+	flex-direction: column;
+`;
+
+const sectionHeadlineFromLeftCol = css`
+	position: relative;
+	::after {
+		content: '';
+		display: block;
+		width: 1px;
+		top: 0;
+		height: 1.875rem;
+		right: -10px;
+		position: absolute;
+		background-color: ${neutral[86]};
+	}
+`;
 
 const paddings = css`
 	padding-top: ${space[2]}px;
@@ -460,7 +438,8 @@ export const FrontSection = ({
 			data-container-name={containerName}
 			css={[
 				fallbackStyles,
-				containerStyles(hasPageSkin),
+				containerStylesUntilLeftCol,
+				!hasPageSkin && containerStylesFromLeftCol,
 				hasPageSkin && pageSkinContainer,
 				css`
 					background-color: ${decideBackgroundColour(
@@ -472,7 +451,12 @@ export const FrontSection = ({
 		>
 			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
 
-			<div css={sectionHeadline(hasPageSkin)}>
+			<div
+				css={[
+					sectionHeadlineUntilLeftCol,
+					!hasPageSkin && sectionHeadlineFromLeftCol,
+				]}
+			>
 				<Hide until="leftCol">
 					{badge && (
 						<Badge imageSrc={badge.imageSrc} href={badge.href} />

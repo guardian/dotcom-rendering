@@ -17,26 +17,24 @@ const hidePanel = css`
 	display: none;
 `;
 
-const tabsContainer = (hasPageSkin: boolean) => {
-	const borderOverride = hasPageSkin
-		? css`
-				border-top: ${thinGreySolid};
-		  `
-		: css`
-				${until.leftCol} {
-					border-top: ${thinGreySolid};
-					border-bottom: 0;
-				}
-		  `;
-	return css`
-		display: flex;
-		position: relative;
-		border-left: ${thinGreySolid};
-		border-right: ${thinGreySolid};
-		border-bottom: ${thinGreySolid};
-		${borderOverride}
-	`;
-};
+const tabsContainer = css`
+	display: flex;
+	position: relative;
+	border-left: ${thinGreySolid};
+	border-right: ${thinGreySolid};
+	border-bottom: ${thinGreySolid};
+`;
+
+const tabsContainerBorder = css`
+	${until.leftCol} {
+		border-top: ${thinGreySolid};
+		border-bottom: 0;
+	}
+`;
+
+const tabsContainerBorderPageSkin = css`
+	border-top: ${thinGreySolid};
+`;
 
 const listTab = css`
 	font-weight: 700;
@@ -155,7 +153,15 @@ export const MostViewedFooterGrid = ({
 				It only generates tabs if there is more than one panel of content.
 			*/}
 			{renderAsTabs && (
-				<ul css={tabsContainer(hasPageSkin)} role="tablist">
+				<ul
+					css={[
+						tabsContainer,
+						hasPageSkin
+							? tabsContainerBorderPageSkin
+							: tabsContainerBorder,
+					]}
+					role="tablist"
+				>
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;

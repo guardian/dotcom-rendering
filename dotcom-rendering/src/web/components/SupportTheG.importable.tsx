@@ -77,27 +77,23 @@ const headerStyles = css`
 	}
 `;
 
-const messageStyles = (isThankYouMessage: boolean, hasPageSkin: boolean) => {
-	const untilLeftCol = css`
-		color: ${brandAlt[400]};
-		${headline.xxsmall({ fontWeight: 'bold' })}
-		padding-top: 3px;
-		margin-bottom: 3px;
-		${from.desktop} {
-			${headline.xsmall({ fontWeight: 'bold' })}
-		}
-	`;
-	if (hasPageSkin) {
-		return untilLeftCol;
+const messageStylesUntilLeftCol = css`
+	color: ${brandAlt[400]};
+	${headline.xxsmall({ fontWeight: 'bold' })}
+	padding-top: 3px;
+	margin-bottom: 3px;
+	${from.desktop} {
+		${headline.xsmall({ fontWeight: 'bold' })}
 	}
-	return css`
-		${from.leftCol} {
-			${isThankYouMessage
-				? headline.small({ fontWeight: 'bold' })
-				: headline.medium({ fontWeight: 'bold' })}
-		}
-	`;
-};
+`;
+
+const messageStylesFromLeftCol = (isThankYouMessage: boolean) => css`
+	${from.leftCol} {
+		${isThankYouMessage
+			? headline.small({ fontWeight: 'bold' })
+			: headline.medium({ fontWeight: 'bold' })}
+	}
+`;
 
 const linkStyles = css`
 	background: ${brandAlt[400]};
@@ -327,7 +323,12 @@ const ReaderRevenueLinksNative = ({
 		return (
 			<div css={inHeader && headerStyles}>
 				<div css={inHeader && hiddenUntilTablet}>
-					<div css={messageStyles(true, hasPageSkin)}>
+					<div
+						css={[
+							messageStylesUntilLeftCol,
+							!hasPageSkin && messageStylesFromLeftCol(true),
+						]}
+					>
 						{' '}
 						Thank you{' '}
 					</div>
@@ -365,7 +366,12 @@ const ReaderRevenueLinksNative = ({
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
 			<div css={inHeader && hiddenUntilTablet}>
-				<div css={messageStyles(false, hasPageSkin)}>
+				<div
+					css={[
+						messageStylesUntilLeftCol,
+						!hasPageSkin && messageStylesFromLeftCol(false),
+					]}
+				>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
 				<div css={subMessageStyles}>
