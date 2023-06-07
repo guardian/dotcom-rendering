@@ -107,10 +107,8 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent },
+		config: { isPaidContent, hasPageSkin },
 	} = front;
-
-	const hasPageSkin = true;
 
 	const isInEuropeTest =
 		front.config.abTests.europeNetworkFrontVariant === 'variant';
