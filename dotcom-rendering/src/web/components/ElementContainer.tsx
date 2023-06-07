@@ -59,6 +59,7 @@ type Props = {
 	ophanComponentLink?: string;
 	containerName?: string;
 	hasPageSkin?: boolean;
+	hasPageSkinConstrainInnerContainer?: boolean;
 };
 
 /**
@@ -81,6 +82,7 @@ export const ElementContainer = ({
 	ophanComponentLink,
 	containerName,
 	hasPageSkin = false,
+	hasPageSkinConstrainInnerContainer = false,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -99,7 +101,9 @@ export const ElementContainer = ({
 							setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
 						padBottom && bottomPadding,
-						hasPageSkin && pageSkinContainer,
+						hasPageSkin &&
+							hasPageSkinConstrainInnerContainer &&
+							pageSkinContainer,
 					]}
 				>
 					{children}
@@ -107,7 +111,9 @@ export const ElementContainer = ({
 			);
 			const style = css`
 				${backgroundColour && setBackgroundColour(backgroundColour)};
-				${hasPageSkin && pageSkinContainer}
+				${hasPageSkin &&
+				!hasPageSkinConstrainInnerContainer &&
+				pageSkinContainer}
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>
