@@ -25,9 +25,12 @@ type InlineProps = {
 	hasPageskin?: boolean;
 };
 
+// TODO move to commercial
+type SlotNamesWithPageSkin = SlotName | 'pageskin';
+
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Exclude<SlotName, InlinePosition>;
+	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -536,6 +539,29 @@ export const AdSlot = ({
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'pageskin': {
+			return (
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id="dfp-ad--pageskin-inread"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--pageskin',
+							'ad-slot--pageskin-inread',
+						].join(' ')}
+						css={outOfPageStyles}
+						data-link-name="ad slot pageskin-inread"
+						data-name="pageskin-inread"
+						data-label="false"
+						data-refresh="false"
+						data-out-of-page="true"
+						data-wide="1,1"
 						aria-hidden="true"
 					/>
 				</div>

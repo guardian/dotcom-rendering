@@ -158,6 +158,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</Stuck>
 					)}
 
+					{hasPageSkin && (
+						<AdSlot
+							data-print-layout="hide"
+							position="pageskin"
+							display={ArticleDisplay.Standard}
+							hasPageskin={hasPageSkin}
+						/>
+					)}
+
 					<Section
 						fullWidth={true}
 						shouldCenter={false}
