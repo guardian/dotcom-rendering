@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
+	background,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -527,10 +528,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={false}
+					showTopBorder={hasPageSkin ? true : false}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
+					backgroundColour={
+						hasPageSkin ? background.primary : undefined
+					}
 				>
 					<Island deferUntil="visible">
 						<SubNav
