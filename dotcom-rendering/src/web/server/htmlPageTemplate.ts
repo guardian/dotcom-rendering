@@ -27,6 +27,7 @@ type BaseProps = {
 	borkFID: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
+	hasPageSkin?: boolean;
 };
 
 interface WebProps extends BaseProps {
@@ -71,6 +72,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
+		hasPageSkin = false,
 		borkFCP,
 		borkFID,
 	} = props;
@@ -415,7 +417,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 			</head>
 
-			<body>
+			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
                 ${html}
 				${
 					recipeMarkup !== undefined
