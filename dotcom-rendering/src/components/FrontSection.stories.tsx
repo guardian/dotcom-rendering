@@ -236,3 +236,23 @@ export const MultipleOnAPaidFront = () => {
 	);
 };
 MultipleOnAPaidFront.storyName = 'two sections on a paid front';
+export const PageSkinStory = () => {
+	return (
+		<FrontSection title="Page Skin" hasPageSkin={true}>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+
+PageSkinStory.storyName = 'with page skin';
+PageSkinStory.story = {
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};
