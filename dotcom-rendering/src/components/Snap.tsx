@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { DCRSnapType } from '../types/front';
 
 const snapStyles = css`
-	overflow-y: hidden;
+	overflow: hidden;
 	position: relative;
 	display: flex;
 `;
