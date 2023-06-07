@@ -310,3 +310,23 @@ export const TreatsStory = () => {
 	);
 };
 TreatsStory.storyName = 'with treats and date header';
+
+export const PageSkinStory = () => {
+	return (
+		<Section title="Page Skin" hasPageSkin={true}>
+			<Grey />
+		</Section>
+	);
+};
+PageSkinStory.storyName = 'with page skin';
+PageSkinStory.story = {
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};
