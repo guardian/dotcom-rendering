@@ -100,7 +100,7 @@ type Props = {
 	 */
 	fullWidth?: boolean;
 	hasPageSkin?: boolean;
-	hasPageSkinConstrainInnerContainer?: boolean;
+	hasPageSkinContentSelfConstrain?: boolean;
 	/**
 	 * @deprecated Do not use
 	 *
@@ -279,7 +279,7 @@ export const Section = ({
 	element = 'section',
 	shouldCenter,
 	hasPageSkin = false,
-	hasPageSkinConstrainInnerContainer = false,
+	hasPageSkinContentSelfConstrain = false,
 	className,
 }: Props) => {
 	const overrides =
@@ -307,8 +307,8 @@ export const Section = ({
 				element={element}
 				shouldCenter={shouldCenter}
 				hasPageSkin={hasPageSkin}
-				hasPageSkinConstrainInnerContainer={
-					hasPageSkinConstrainInnerContainer
+				hasPageSkinContentSelfConstrain={
+					hasPageSkinContentSelfConstrain
 				}
 			>
 				{children}
@@ -334,9 +334,7 @@ export const Section = ({
 			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
 			hasPageSkin={hasPageSkin}
-			hasPageSkinConstrainInnerContainer={
-				hasPageSkinConstrainInnerContainer
-			}
+			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
 			<Flex>
 				<LeftColumn
