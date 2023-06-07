@@ -117,10 +117,8 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent, abTests },
+		config: { abTests, isPaidContent, hasPageSkin },
 	} = front;
-
-	const hasPageSkin = true;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 
@@ -198,12 +196,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								mmaUrl={front.config.mmaUrl}
 								discussionApiUrl={front.config.discussionApiUrl}
 								urls={front.nav.readerRevenueLinks.header}
-								remoteHeader={!!front.config.switches.remoteHeader}
+								remoteHeader={
+									!!front.config.switches.remoteHeader
+								}
 								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
-									!!front.config.switches.headerTopBarSearchCapi
+									!!front.config.switches
+										.headerTopBarSearchCapi
 								}
 								hasPageSkin={hasPageSkin}
 							/>
@@ -316,7 +317,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Fragment key={ophanName}>
 								<div css={[hasPageSkin && pageSkinContainer]}>
 									{!!trail.embedUri && (
-										<SnapCssSandbox snapData={trail.snapData}>
+										<SnapCssSandbox
+											snapData={trail.snapData}
+										>
 											<Section
 												fullWidth={true}
 												padSides={false}
