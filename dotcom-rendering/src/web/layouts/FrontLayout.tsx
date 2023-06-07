@@ -39,14 +39,6 @@ interface Props {
 	NAV: NavType;
 }
 
-const adStyles = css`
-	.ad-slot {
-		&.ad-slot--collapse {
-			display: none;
-		}
-	}
-`;
-
 const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
@@ -138,7 +130,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	return (
 		<>
-			<div data-print-layout="hide" id="bannerandheader" css={adStyles}>
+			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					{renderAds && (
 						<Stuck>
@@ -234,7 +226,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout" id="maincontent" css={adStyles}>
+			<main data-layout="FrontLayout" id="maincontent">
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(

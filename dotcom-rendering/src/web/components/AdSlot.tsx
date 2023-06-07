@@ -252,7 +252,7 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-const adStyles = [labelStyles, fluidAdStyles];
+const adStyles = [labelStyles, fluidAdStyles, adCollapseStyles];
 
 export const AdSlot = ({
 	position,
