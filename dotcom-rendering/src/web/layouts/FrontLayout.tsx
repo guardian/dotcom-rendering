@@ -176,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						backgroundColour={brandBackground.primary}
 						element="header"
 						hasPageSkin={hasPageSkin}
-						hasPageSkinConstrainInnerContainer={true}
+						hasPageSkinContentSelfConstrain={true}
 					>
 						<Header
 							editionId={front.editionId}

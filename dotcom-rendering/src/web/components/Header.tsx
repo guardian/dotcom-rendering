@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBar } from './HeaderTopBar.importable';
@@ -55,7 +56,7 @@ export const Header = ({
 		</Island>
 		<div
 			css={[
-				center,
+				hasPageSkin ? pageSkinContainer : center,
 				css`
 					overflow: hidden;
 				`,

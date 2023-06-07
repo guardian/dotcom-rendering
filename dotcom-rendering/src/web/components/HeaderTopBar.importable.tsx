@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
 import { brand, from, space } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
@@ -88,7 +89,7 @@ export const HeaderTopBar = ({
 				css={[
 					topBarStylesUntilLeftCol,
 					!hasPageSkin && topBarStylesFromLeftCol,
-					center,
+					hasPageSkin ? pageSkinContainer : center,
 				]}
 			>
 				<HeaderTopBarPrintSubscriptions editionId={editionId} />
