@@ -14,7 +14,7 @@ import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
 
-const gridItem = (position: number) => css`
+const gridItem = (position: number, isWithImage: boolean) => css`
 	position: relative;
 
 	${until.leftCol} {
@@ -29,7 +29,7 @@ const gridItem = (position: number) => css`
 
 	/* The left border is set on the container */
 	border-right: 1px solid ${border.secondary};
-	min-height: 3.25rem;
+	min-height: ${isWithImage ? '4rem' : '3.25rem'};
 
 	&:hover {
 		cursor: pointer;
@@ -121,7 +121,7 @@ export const MostViewedFooterItem = ({
 	image,
 }: Props) => (
 	<li
-		css={[gridItem(position), cssOverrides]}
+		css={[gridItem(position, !!image), cssOverrides]}
 		data-link-name={`${position} | text`}
 	>
 		<a css={headlineLink} href={url} data-link-name="article">
