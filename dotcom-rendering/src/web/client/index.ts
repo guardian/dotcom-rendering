@@ -9,28 +9,26 @@ import { ophan } from './ophan';
 import { sentryLoader } from './sentryLoader';
 import { startup } from './startup';
 
-startup('bootCmp', bootCmp);
-startup('ophan', ophan);
-startup('ga', ga);
-startup('sentryLoader', sentryLoader);
-startup('dynamicImport', dynamicImport);
-startup('islands', islands);
+startup(bootCmp);
+startup(ophan);
+startup(ga);
+startup(sentryLoader);
+startup(dynamicImport);
+startup(islands);
 
 // these modules are loaded as separate chunks, so that they can be lazy-loaded
 void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(
-	({ atomIframe }) => startup('atomIframe', atomIframe),
+	({ atomIframe }) => startup(atomIframe),
 );
 void import(/* webpackChunkName: 'embedIframe' */ './embedIframe').then(
-	({ embedIframe }) => startup('embedIframe', embedIframe),
+	({ embedIframe }) => startup(embedIframe),
 );
 void import(
 	/* webpackChunkName: 'newsletterEmbedIframe' */ './newsletterEmbedIframe'
-).then(({ newsletterEmbedIframe }) =>
-	startup('newsletterEmbedIframe', newsletterEmbedIframe),
-);
+).then(({ newsletterEmbedIframe }) => startup(newsletterEmbedIframe));
 void import(/* webpackChunkName: 'relativeTime' */ './relativeTime').then(
-	({ relativeTime }) => startup('relativeTime', relativeTime),
+	({ relativeTime }) => startup(relativeTime),
 );
 void import(/* webpackChunkName: 'discussion' */ './discussion').then(
-	({ discussion }) => startup('initDiscussion', discussion),
+	({ discussion }) => startup(discussion),
 );
