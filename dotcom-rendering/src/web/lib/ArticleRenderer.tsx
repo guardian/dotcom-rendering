@@ -6,7 +6,7 @@ import type { FEElement } from '../../types/content';
 import type { RenderingTarget } from '../../types/renderingTarget';
 import type { TagType } from '../../types/tag';
 import {
-	adCollapseStyles,
+	adContainerCollapseStyles,
 	labelStyles as adLabelStyles,
 } from '../components/AdSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -25,7 +25,7 @@ const commercialPosition = css`
 // hence we scope the styles at the same level
 const adStylesDynamic = css`
 	${adLabelStyles}
-	${adCollapseStyles}
+	${adContainerCollapseStyles}
 `;
 
 type Props = {

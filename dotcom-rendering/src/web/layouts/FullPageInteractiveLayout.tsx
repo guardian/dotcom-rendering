@@ -16,7 +16,7 @@ import type { Switches } from '../../types/config';
 import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import {
-	adCollapseStyles,
+	adContainerCollapseStyles,
 	labelStyles as adLabelStyles,
 	MobileStickyContainer,
 } from '../components/AdSlot';
@@ -113,7 +113,7 @@ const Renderer = ({
 
 	const adStyles = css`
 		${adLabelStyles}
-		${adCollapseStyles}
+		${adContainerCollapseStyles}
 
 		${from.tablet} {
 			.mobile-only .ad-slot {
