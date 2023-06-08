@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import { logger } from '../../server/lib/logging';
 import type { Palette } from '../../types/palette';
-import { isElement, parseHtml } from '../lib/domUtils';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
@@ -34,9 +34,6 @@ const quotedBlockquoteStyles = (palette: Palette) => css`
 	${baseBlockquoteStyles}
 	color: ${palette.text.blockquote};
 `;
-
-const getAttrs = (node: Node): NamedNodeMap | undefined =>
-	isElement(node) ? node.attributes : undefined;
 
 /**
  * Searches through the siblings of an element to determine if it's the first
@@ -82,7 +79,7 @@ const textElement =
 						: simpleBlockquoteStyles,
 				});
 			case 'A':
-				return jsx('A', {
+				return jsx('a', {
 					href: getAttrs(node)?.getNamedItem('href')?.value,
 					key,
 					children,
@@ -98,7 +95,7 @@ const textElement =
 				return text;
 			case 'BR':
 				// BR cannot accept children as it's a void element
-				return jsx('BR', {
+				return jsx('br', {
 					key,
 				});
 			case 'H2':
@@ -112,7 +109,7 @@ const textElement =
 			case 'SUP':
 			case 'S':
 			case 'I':
-				return jsx(node.nodeName, {
+				return jsx(node.nodeName.toLowerCase(), {
 					key,
 					children,
 				});
