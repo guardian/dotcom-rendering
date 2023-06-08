@@ -764,6 +764,24 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -1450,6 +1468,24 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2136,6 +2172,24 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageCaption",
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
