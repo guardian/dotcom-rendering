@@ -3,7 +3,6 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import { isAmpSupported } from '../../amp/components/Elements';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import {
 	ASSET_ORIGIN,
@@ -18,6 +17,7 @@ import type { FEElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
+import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
@@ -156,6 +156,7 @@ export const renderHtml = ({ article }: Props): string => {
 					beaconURL: article.beaconURL,
 				}),
 				hasInlineMerchandise: article.config.hasInlineMerchandise,
+				section: article.config.section,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,

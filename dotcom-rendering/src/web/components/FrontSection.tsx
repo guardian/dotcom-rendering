@@ -135,7 +135,7 @@ const containerStyles = css`
 			[hide-start]
 			60px
 			[decoration-end content-end title-end hide-end]
-			minmax(0, 1fr) [viewport-end];
+			minmax(0, 1fr);
 	}
 
 	${from.leftCol} {
@@ -155,7 +155,7 @@ const containerStyles = css`
 			[hide-start]
 			60px
 			[decoration-end hide-end content-end]
-			minmax(0, 1fr) [viewport-end];
+			minmax(0, 1fr);
 	}
 
 	${from.wide} {
@@ -416,7 +416,7 @@ export const FrontSection = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background.container};
+					background-color: ${overrides?.background?.container};
 				`,
 			]}
 		>

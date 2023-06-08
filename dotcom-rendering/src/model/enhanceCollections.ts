@@ -9,8 +9,8 @@ import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 import { decideBadge } from './decideBadge';
-import { isNonNullable } from '@guardian/libs';
 import { Branding } from '../types/branding';
+import { isNonNullable } from '@guardian/libs';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
@@ -46,13 +46,13 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const containerPalette = decideContainerPalette(
-			collection.config.metadata?.map((meta) => meta.type),
-		);
 		const allCards = [...collection.curated, ...collection.curated];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
-		const isLabs = containerPalette === 'Branded' && allCardsHaveBranding;
+		const containerPalette = decideContainerPalette(
+			collection.config.metadata?.map((meta) => meta.type),
+			allCardsHaveBranding,
+		);
 		return {
 			id,
 			displayName,
@@ -63,7 +63,6 @@ export const enhanceCollections = (
 			collectionType,
 			href,
 			containerPalette,
-			isLabs,
 			badge: decideBadge(
 				displayName,
 				allCardsHaveBranding ? allBranding : [],
