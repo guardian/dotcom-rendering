@@ -331,7 +331,30 @@ const borderContainer = (
 	}
 };
 
-const borderLines = textCardHeadline;
+const borderLines = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return neutral[100];
+		case 'LongRunningAltPalette':
+			return neutral[7];
+		case 'SombrePalette':
+			return neutral[100];
+		case 'SombreAltPalette':
+			return neutral[100];
+		case 'InvestigationPalette':
+			return neutral[100];
+		case 'BreakingPalette':
+			return neutral[100];
+		case 'EventPalette':
+			return brand[300];
+		case 'EventAltPalette':
+			return brand[300];
+		case 'SpecialReportAltPalette':
+			return transparentColour(neutral[46], 0.3);
+	}
+};
 
 const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
