@@ -778,7 +778,6 @@
                                                                             }
                                                                         },
                                                                         "required": [
-                                                                            "imageCaption",
                                                                             "imageSrc"
                                                                         ]
                                                                     }
@@ -1482,7 +1481,6 @@
                                                                             }
                                                                         },
                                                                         "required": [
-                                                                            "imageCaption",
                                                                             "imageSrc"
                                                                         ]
                                                                     }
@@ -2186,7 +2184,6 @@
                                                                             }
                                                                         },
                                                                         "required": [
-                                                                            "imageCaption",
                                                                             "imageSrc"
                                                                         ]
                                                                     }

@@ -7,7 +7,7 @@ import { generateSources, getFallbackSource } from './Picture';
 type Props = {
 	imageSize: ImageSizeType;
 	master: string;
-	alt: string;
+	alt?: string;
 };
 
 /**
