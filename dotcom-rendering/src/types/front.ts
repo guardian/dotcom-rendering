@@ -176,7 +176,7 @@ export type FEFrontCard = {
 				imageSrc?: string;
 				assets?: {
 					imageSrc: string;
-					imageCaption: string;
+					imageCaption?: string;
 				}[];
 			};
 		};
@@ -278,7 +278,7 @@ export type DCRFrontCard = {
 
 export type DCRSlideshowImage = {
 	imageSrc: string;
-	imageCaption: string;
+	imageCaption?: string;
 };
 
 export type FESnapType = {
