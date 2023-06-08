@@ -446,6 +446,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								url={collection.href}
 								badge={collection.badge}
 								data-print-layout="hide"
+								hasPageSkin={hasPageSkin}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
