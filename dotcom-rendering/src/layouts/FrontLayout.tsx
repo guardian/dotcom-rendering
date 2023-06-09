@@ -8,16 +8,16 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../model/extract-nav';
-import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { CPScottHeader } from '../components/CPScottHeader';
+import { DecideContainer } from '../components/DecideContainer';
 import { Footer } from '../components/Footer';
 import { FrontMostViewed } from '../components/FrontMostViewed';
 import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsSection } from '../components/LabsSection';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -25,12 +25,13 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { DecideContainer } from '../components/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import type { NavType } from '../model/extract-nav';
+import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -343,6 +344,49 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 								)}
 							</>
+						);
+					}
+
+					if (
+						collection.containerPalette === 'Branded' &&
+						renderAds
+					) {
+						const trailsWithoutBranding = collection.badge
+							? trails.map((labTrail) => {
+									return {
+										...labTrail,
+										branding: undefined,
+									};
+							  })
+							: trails;
+
+						return (
+							<LabsSection
+								key={ophanName}
+								title={collection.displayName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
+								ajaxUrl={front.config.ajaxUrl}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								canShowMore={collection.canShowMore}
+								url={collection.href}
+								badge={collection.badge}
+								data-print-layout="hide"
+							>
+								<DecideContainer
+									trails={trailsWithoutBranding}
+									index={index}
+									groupedTrails={collection.grouped}
+									containerType={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									renderAds={false}
+								/>
+							</LabsSection>
 						);
 					}
 

@@ -416,7 +416,7 @@ export const FrontSection = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background.container};
+					background-color: ${overrides?.background?.container};
 				`,
 			]}
 		>

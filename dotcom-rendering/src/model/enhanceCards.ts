@@ -6,6 +6,7 @@ import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
+	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
@@ -140,6 +141,19 @@ const decideKicker = (trail: FEFrontCard) => {
 		: trail.header.kicker?.item?.properties.kickerText;
 };
 
+const decideSlideshowImages = (
+	trail: FEFrontCard,
+): DCRSlideshowImage[] | undefined => {
+	const assets = trail.properties.image?.item.assets;
+	const shouldShowSlideshow =
+		trail.properties.image?.type === 'ImageSlideshow' &&
+		trail.properties.imageSlideshowReplace;
+	if (shouldShowSlideshow && assets && assets.length > 0) {
+		return assets;
+	}
+	return undefined;
+};
+
 const enhanceTags = (tags: FETagType[]): TagType[] => {
 	return tags.map(({ properties }) => {
 		const {
@@ -250,5 +264,6 @@ export const enhanceCards = (
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
+			slideshowImages: decideSlideshowImages(faciaCard),
 		};
 	});

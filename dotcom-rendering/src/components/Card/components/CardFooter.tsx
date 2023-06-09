@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRContainerPalette } from '../../../types/front';
 import { decidePalette } from '../../../lib/decidePalette';
+import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 
 type Props = {
 	format: ArticleFormat;
@@ -41,6 +42,9 @@ export const CardFooter = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={margins}>{cardBranding}</footer>;
 	}
@@ -62,7 +66,9 @@ export const CardFooter = ({
 								flex: 1;
 								align-self: flex-end;
 							`}
-							color={palette.border.lines}
+							color={
+								overrides?.border?.lines ?? palette.border.lines
+							}
 							count={4}
 						/>
 					)}

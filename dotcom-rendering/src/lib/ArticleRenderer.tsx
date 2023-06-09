@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
-	adCollapseStyles,
+	adContainerCollapseStyles,
 	labelStyles as adLabelStyles,
 } from '../components/AdSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -25,7 +25,7 @@ const commercialPosition = css`
 // hence we scope the styles at the same level
 const adStylesDynamic = css`
 	${adLabelStyles}
-	${adCollapseStyles}
+	${adContainerCollapseStyles}
 `;
 
 type Props = {

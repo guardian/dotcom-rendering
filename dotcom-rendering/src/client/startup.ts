@@ -1,8 +1,8 @@
 import { log } from '@guardian/libs';
 import { initPerf } from './initPerf';
 
-const measure = (name: string, task: () => Promise<void>): void => {
-	const { start, end } = initPerf(name);
+const measure = (task: () => Promise<void>): void => {
+	const { start, end } = initPerf(task.name);
 
 	start();
 
@@ -13,21 +13,17 @@ const measure = (name: string, task: () => Promise<void>): void => {
 		// See: https://github.com/cypress-io/cypress/issues/2651#issuecomment-432698837
 		.then(() => {
 			end();
-			log('dotcom', `🥾 Booted ${name} in ${end()}ms`);
+			log('dotcom', `🥾 Booted ${task.name} in ${end()}ms`);
 		})
 		.catch(() => {
 			end();
-			log('dotcom', `🤒 Failed to boot ${name} in ${end()}ms`);
+			log('dotcom', `🤒 Failed to boot ${task.name} in ${end()}ms`);
 		});
 };
 
-export const startup = <A>(
-	name: string,
-	helpers: A,
-	task: (helpers: A) => Promise<void>,
-): void => {
+export const startup = (task: () => Promise<void>): void => {
 	const measureMe = () => {
-		measure(name, task.bind(null, helpers));
+		measure(task);
 	};
 	if (window.guardian.mustardCut || window.guardian.polyfilled) {
 		measureMe();

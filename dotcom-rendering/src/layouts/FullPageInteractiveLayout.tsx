@@ -12,7 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import {
-	adCollapseStyles,
+	adContainerCollapseStyles,
 	labelStyles as adLabelStyles,
 	MobileStickyContainer,
 } from '../components/AdSlot';
@@ -113,7 +113,7 @@ const Renderer = ({
 
 	const adStyles = css`
 		${adLabelStyles}
-		${adCollapseStyles}
+		${adContainerCollapseStyles}
 
 		${from.tablet} {
 			.mobile-only .ad-slot {

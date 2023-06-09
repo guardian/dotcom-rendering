@@ -1,10 +1,20 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
+import { textSans } from '@guardian/source-foundations';
+
+type LabelSize = 'xsmall' | 'small';
+
+type Props = {
+	label: string;
+	labelSize: LabelSize;
+	colour?: string;
+	positionStyles?: SerializedStyles;
+	children: React.ReactNode;
+};
 
 const colourStyles = (colour: string) => css`
 	color: ${colour};
@@ -34,6 +44,16 @@ const Position = ({
 	);
 };
 
+function decideFont(labelSize: LabelSize) {
+	switch (labelSize) {
+		case 'xsmall':
+			return textSans.xsmall();
+		case 'small':
+		default:
+			return textSans.small();
+	}
+}
+
 /**
  * **Details**
  *
@@ -47,34 +67,32 @@ export const Details = ({
 	colour,
 	positionStyles,
 	children,
-}: {
-	label: string;
-	colour?: string;
-	positionStyles?: SerializedStyles;
-	children: React.ReactNode;
-}) => (
+	labelSize,
+}: Props) => (
 	<details
-		css={css`
-			/* Hide up icon when the disclosure is closed */
-			[data-icon='chevronUp'] {
-				display: none;
-			}
-			[data-icon='chevronDown'] {
-				display: inline;
-			}
-
-			/* Hide down icon when the disclosure is open */
-			:is([open]) {
-				[data-icon='chevronDown'] {
+		css={[
+			css`
+				/* Hide up icon when the disclosure is closed */
+				[data-icon='chevronUp'] {
 					display: none;
 				}
-				[data-icon='chevronUp'] {
+				[data-icon='chevronDown'] {
 					display: inline;
 				}
-			}
-			${textSans.small()}
-			position: relative;
-		`}
+
+				/* Hide down icon when the disclosure is open */
+				:is([open]) {
+					[data-icon='chevronDown'] {
+						display: none;
+					}
+					[data-icon='chevronUp'] {
+						display: inline;
+					}
+				}
+				position: relative;
+			`,
+			decideFont(labelSize),
+		]}
 	>
 		<summary
 			css={[

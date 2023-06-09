@@ -14,9 +14,6 @@ import {
 	renderKeyEvents,
 } from './render.article.web';
 
-const getStack = (e: unknown): string =>
-	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
-
 const enhancePinnedPost = (format: FEFormat, block?: Block) => {
 	return block ? enhanceBlocks([block], format)[0] : block;
 };
@@ -54,35 +51,27 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 };
 
 export const handleArticle: RequestHandler = ({ body }, res) => {
-	try {
-		recordTypeAndPlatform('article', 'web');
-		const article = enhanceArticleType(body);
-		const resp = renderHtml({
-			article,
-		});
+	recordTypeAndPlatform('article', 'web');
+	const article = enhanceArticleType(body);
+	const resp = renderHtml({
+		article,
+	});
 
-		res.status(200).send(resp);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	res.status(200).send(resp);
 };
 
 export const handleArticleJson: RequestHandler = ({ body }, res) => {
-	try {
-		recordTypeAndPlatform('article', 'json');
-		const article = enhanceArticleType(body);
-		const resp = {
-			data: {
-				// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
-				// where/if this is used.
-				CAPIArticle: article,
-			},
-		};
+	recordTypeAndPlatform('article', 'json');
+	const article = enhanceArticleType(body);
+	const resp = {
+		data: {
+			// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
+			// where/if this is used.
+			CAPIArticle: article,
+		},
+	};
 
-		res.status(200).send(resp);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	res.status(200).send(resp);
 };
 
 export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
@@ -91,84 +80,72 @@ export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
 };
 
 export const handleInteractive: RequestHandler = ({ body }, res) => {
-	try {
-		recordTypeAndPlatform('interactive', 'web');
-		const article = enhanceArticleType(body);
-		const resp = renderHtml({
-			article,
-		});
+	recordTypeAndPlatform('interactive', 'web');
+	const article = enhanceArticleType(body);
+	const resp = renderHtml({
+		article,
+	});
 
-		res.status(200).send(resp);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	res.status(200).send(resp);
 };
 
 export const handleBlocks: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('blocks');
-	try {
-		const {
-			blocks,
-			format,
-			host,
-			pageId,
-			webTitle,
-			ajaxUrl,
-			isAdFreeUser,
-			isSensitive,
-			videoDuration,
-			edition,
-			section,
-			sharedAdTargeting,
-			adUnit,
-			switches,
-			keywordIds,
-		} =
-			// The content if body is not checked
-			body as FEBlocksRequest;
+	const {
+		blocks,
+		format,
+		host,
+		pageId,
+		webTitle,
+		ajaxUrl,
+		isAdFreeUser,
+		isSensitive,
+		videoDuration,
+		edition,
+		section,
+		sharedAdTargeting,
+		adUnit,
+		switches,
+		keywordIds,
+	} =
+		// The content if body is not checked
+		body as FEBlocksRequest;
 
-		const enhancedBlocks = enhanceBlocks(blocks, format);
-		const html = renderBlocks({
-			blocks: enhancedBlocks,
-			format,
-			host,
-			pageId,
-			webTitle,
-			ajaxUrl,
-			isAdFreeUser,
-			isSensitive,
-			videoDuration,
-			edition,
-			section,
-			sharedAdTargeting,
-			adUnit,
-			switches,
-			keywordIds,
-		});
+	const enhancedBlocks = enhanceBlocks(blocks, format);
+	const html = renderBlocks({
+		blocks: enhancedBlocks,
+		format,
+		host,
+		pageId,
+		webTitle,
+		ajaxUrl,
+		isAdFreeUser,
+		isSensitive,
+		videoDuration,
+		edition,
+		section,
+		sharedAdTargeting,
+		adUnit,
+		switches,
+		keywordIds,
+	});
 
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	res.status(200).send(html);
 };
 
 export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 	// TODO: This endpoint is unused - we should consider removing it, talk to Olly 24/05/2023
 
 	recordTypeAndPlatform('keyEvents');
-	try {
-		const { keyEvents, format, filterKeyEvents } =
-			// The content if body is not checked
-			body as FEKeyEventsRequest;
+	const { keyEvents, format, filterKeyEvents } =
+		// The content if body is not checked
+		body as FEKeyEventsRequest;
 
-		const html = renderKeyEvents({
-			keyEvents,
-			format,
-			filterKeyEvents,
-		});
+	const html = renderKeyEvents({
+		keyEvents,
+		format,
+		filterKeyEvents,
+	});
 
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	res.status(200).send(html);
 };

@@ -12,6 +12,7 @@ const {
 	specialReport,
 	specialReportAlt,
 	sport,
+	labs,
 } = palette;
 
 const textCardHeadline = (
@@ -41,6 +42,42 @@ const textCardHeadline = (
 
 const textCardStandfirst = textCardHeadline;
 const textCardFooter = textCardHeadline;
+
+const textContainerFooter = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[46];
+	}
+};
+
+const textContainerSummary = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[400];
+	}
+};
+
+const backgroundContainerLeftColumn = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return labs[400];
+	}
+};
+
+const backgroundContainerSummary = (
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'Branded':
+			return neutral[0];
+	}
+};
 
 const textCardKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
@@ -170,7 +207,7 @@ const textDynamoKicker = (
 };
 
 const textDynamoSublinkKicker = (
-	containerPalette: DCRContainerPalette,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -190,8 +227,6 @@ const textDynamoSublinkKicker = (
 		case 'EventAltPalette':
 			return news[400];
 		case 'SpecialReportAltPalette':
-			return neutral[7];
-		case 'Branded':
 			return neutral[7];
 	}
 };
@@ -221,9 +256,7 @@ const textDynamoMeta = (
 	}
 };
 
-const textContainer = (
-	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
-): string => {
+const textContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return brand[400];
@@ -243,6 +276,8 @@ const textContainer = (
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'Branded':
+			return neutral[100];
 	}
 };
 
@@ -296,7 +331,30 @@ const borderContainer = (
 	}
 };
 
-const borderLines = textCardHeadline;
+const borderLines = (
+	containerPalette: Exclude<DCRContainerPalette, 'Branded'>,
+): string => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return neutral[100];
+		case 'LongRunningAltPalette':
+			return neutral[7];
+		case 'SombrePalette':
+			return neutral[100];
+		case 'SombreAltPalette':
+			return neutral[100];
+		case 'InvestigationPalette':
+			return neutral[100];
+		case 'BreakingPalette':
+			return neutral[100];
+		case 'EventPalette':
+			return brand[300];
+		case 'EventAltPalette':
+			return brand[300];
+		case 'SpecialReportAltPalette':
+			return transparentColour(neutral[46], 0.3);
+	}
+};
 
 const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
@@ -363,8 +421,16 @@ export const decideContainerOverrides = (
 ): ContainerOverrides => {
 	if (containerPalette === 'Branded') {
 		return {
+			text: {
+				container: textContainer(containerPalette),
+				containerFooter: textContainerFooter(containerPalette),
+				containerSummary: textContainerSummary(containerPalette),
+			},
 			background: {
 				container: backgroundContainer(containerPalette),
+				containerLeftColumn:
+					backgroundContainerLeftColumn(containerPalette),
+				containerSummary: backgroundContainerSummary(containerPalette),
 			},
 		};
 	}

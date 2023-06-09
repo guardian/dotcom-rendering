@@ -107,10 +107,10 @@ export const ElementContainer = ({
 			// Create a react element from the tagName passed in OR
 			// default to <div>
 			return _jsx(`${element}`, {
+				id: ophanComponentName,
 				'data-link-name': ophanComponentLink,
 				'data-component': ophanComponentName,
 				'data-container-name': containerName,
-				id: ophanComponentName,
 				className: className ? `${style} ${className}` : style,
 				children: child,
 			});

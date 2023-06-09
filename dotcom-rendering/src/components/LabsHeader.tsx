@@ -143,7 +143,8 @@ export const LabsHeader = () => (
 			</HeaderSection>
 			<HeaderSection>
 				<Details
-					label={'About'}
+					label="About"
+					labelSize="small"
 					positionStyles={css`
 						top: 40px;
 						left: -75px;

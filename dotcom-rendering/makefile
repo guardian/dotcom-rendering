@@ -195,6 +195,7 @@ gen-schema:
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
+	@git add src/model/block-schema.json
 
 check-stories:
 	$(call log, "Checking Storybook stories")
