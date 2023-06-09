@@ -173,8 +173,13 @@ const requests = articles.map((article) => {
 				contents,
 				'utf8',
 			);
-		}).then(() => `${article.name}.ts`)
-		.catch((err) => { throw new Error(`Failed to create ${article.name}.ts`, { cause: err }) });
+		})
+		.then(() => `${article.name}.ts`)
+		.catch((err) => {
+			throw new Error(`Failed to create ${article.name}.ts`, {
+				cause: err,
+			});
+		});
 });
 
 // Images fixture
@@ -191,9 +196,7 @@ requests.push(
 			);
 
 			const type = Array.isArray(images)
-				? '[' +
-					images.map(() => 'ImageBlockElement').join(',') +
-					']'
+				? '[' + images.map(() => 'ImageBlockElement').join(',') + ']'
 				: 'unknown';
 
 			// Write the new fixture data
@@ -206,8 +209,11 @@ requests.push(
 				contents,
 				'utf8',
 			);
-		}).then(() => 'images.ts')
-		.catch((err) => { throw new Error('Failed to create images.ts', { cause: err }) }),
+		})
+		.then(() => 'images.ts')
+		.catch((err) => {
+			throw new Error('Failed to create images.ts', { cause: err });
+		}),
 );
 
 // MatchReport fixtures
@@ -228,8 +234,11 @@ requests.push(
 				contents,
 				'utf8',
 			);
-		}).then(() => 'match-report.ts')
-		.catch((err) => { throw new Error('Failed to create match-report.ts', { cause: err }) }),
+		})
+		.then(() => 'match-report.ts')
+		.catch((err) => {
+			throw new Error('Failed to create match-report.ts', { cause: err });
+		}),
 );
 
 // Series
@@ -250,8 +259,11 @@ requests.push(
 				contents,
 				'utf8',
 			);
-		}).then(() => 'series.ts')
-		.catch((err) => { throw new Error('Failed to create series.ts', { cause: err }) }),
+		})
+		.then(() => 'series.ts')
+		.catch((err) => {
+			throw new Error('Failed to create series.ts', { cause: err });
+		}),
 );
 
 // Story package
@@ -272,43 +284,49 @@ requests.push(
 				contents,
 				'utf8',
 			);
-		}).then(() => 'story-package.ts')
-		.catch((err) => { throw new Error('Failed to create story-package.ts', { cause: err }) }),
+		})
+		.then(() => 'story-package.ts')
+		.catch((err) => {
+			throw new Error('Failed to create story-package.ts', {
+				cause: err,
+			});
+		}),
 );
 
-Promise.allSettled(requests).then((results) => {
-	const successful = results.filter(({ status }) => status === 'fulfilled');
-	const failed = results.filter(({ status }) => status === 'rejected');
-
-	if (successful.length > 0) {
-		console.log(
-			`\n✅ Successfully created ${successful.length} / ${requests.length} fixtures:\n`,
-			...successful.map(({ value }) => `${value}\n`),
+Promise.allSettled(requests)
+	.then((results) => {
+		const successful = results.filter(
+			({ status }) => status === 'fulfilled',
 		);
-	}
+		const failed = results.filter(({ status }) => status === 'rejected');
 
-	if (failed.length > 0) {
-		console.error(
-			`❌ Failed to create ${failed.length} / ${requests.length} fixtures, with errors:\n`,
-			...failed.flatMap(({ reason }) => [reason, `\n`]),
-		);
+		if (successful.length > 0) {
+			console.log(
+				`\n✅ Successfully created ${successful.length} / ${requests.length} fixtures:\n`,
+				...successful.map(({ value }) => `${value}\n`),
+			);
+		}
 
-		process.exitCode = 1;
-	}
+		if (failed.length > 0) {
+			console.error(
+				`❌ Failed to create ${failed.length} / ${requests.length} fixtures, with errors:\n`,
+				...failed.flatMap(({ reason }) => [reason, `\n`]),
+			);
 
-	console.log('Generation complete, formatting successful fixtures...');
-	execa('prettier', [
-		'./fixtures/**/*',
-		'--write',
-		'--loglevel',
-		'error',
-	]).then(() => {
-		console.log('✅ Formatting complete.');
-	}).catch((err) => {
-		console.error('\n❌ Failed to format fixtures:\n', err);
+			process.exitCode = 1;
+		}
+
+		console.log('Generation complete, formatting successful fixtures...');
+		execa('prettier', ['./fixtures/**/*', '--write', '--loglevel', 'error'])
+			.then(() => {
+				console.log('✅ Formatting complete.');
+			})
+			.catch((err) => {
+				console.error('\n❌ Failed to format fixtures:\n', err);
+				process.exitCode = 1;
+			});
+	})
+	.catch((err) => {
+		console.error('❌ Unexpected error occurred:\n', err);
 		process.exitCode = 1;
 	});
-}).catch((err) => {
-	console.error('❌ Unexpected error occurred:\n', err);
-	process.exitCode = 1;
-});
