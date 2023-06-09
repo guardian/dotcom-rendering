@@ -380,6 +380,12 @@
         },
         "mostShared": {
             "$ref": "#/definitions/FETrailType"
+        },
+        "deeplyRead": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/FETrailType"
+            }
         }
     },
     "required": [

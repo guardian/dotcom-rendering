@@ -128,6 +128,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
 		: [];
 
+	const showMostPopular =
+		front.config.switches.deeplyReadSwitch &&
+		front.isNetworkFront &&
+		front.deeplyRead &&
+		front.deeplyRead.length > 0;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -239,6 +245,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const mostPopularTitle = 'Most popular';
 					const COTTON_CAPITAL_THRASHERS = [
 						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/default-fronts-default',
 						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/david-olusoga-front-default',
@@ -300,17 +307,28 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						!isPaidContent &&
 						front.config.switches.mostViewedFronts
 					) {
+						const deeplyReadData = showMostPopular
+							? front.deeplyRead
+							: undefined;
 						return (
 							<>
 								<Section
 									key={ophanName}
-									title="Most viewed"
+									title={
+										showMostPopular
+											? mostPopularTitle
+											: 'Most viewed'
+									}
 									showTopBorder={index > 0}
 									padContent={false}
 									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
-									ophanComponentName={ophanName}
+									ophanComponentName={
+										showMostPopular
+											? ophanComponentId(mostPopularTitle)
+											: ophanName
+									}
 									containerName={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
@@ -331,6 +349,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
+										deeplyRead={deeplyReadData}
 									/>
 								</Section>
 								{decideAdSlot(
