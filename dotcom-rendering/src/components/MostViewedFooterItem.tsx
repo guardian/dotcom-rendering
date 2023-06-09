@@ -4,10 +4,10 @@ import { ArticleDesign } from '@guardian/libs';
 import {
 	border,
 	breakpoints,
-	from,
 	headline,
 	neutral,
 	text,
+	until,
 } from '@guardian/source-foundations';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
@@ -24,8 +24,8 @@ const gridItem = (
 				border-top: 1px solid ${border.secondary};
 		  `
 		: css`
-				${from.leftCol} {
-					/* Below leftCol always set top border */
+				/* Below leftCol always set top border */
+				${until.leftCol} {
 					border-top: 1px solid ${border.secondary};
 				}
 		  `;
