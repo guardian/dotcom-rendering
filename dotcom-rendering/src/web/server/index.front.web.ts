@@ -7,9 +7,6 @@ import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { decideTrail } from '../lib/decideTrail';
 import { renderFront } from './render.front.web';
 
-const getStack = (e: unknown): string =>
-	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
-
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 
@@ -38,15 +35,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 
 export const handleFront: RequestHandler = ({ body }, res) => {
 	recordTypeAndPlatform('front');
-	try {
-		const front = enhanceFront(body);
-		const html = renderFront({
-			front,
-		});
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
+	const front = enhanceFront(body);
+	const html = renderFront({
+		front,
+	});
+	res.status(200).send(html);
 };
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
