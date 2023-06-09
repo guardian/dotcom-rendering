@@ -30,6 +30,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
+		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 	};
 };
 

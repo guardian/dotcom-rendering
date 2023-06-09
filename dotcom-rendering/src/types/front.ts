@@ -24,6 +24,7 @@ export interface FEFrontType {
 	mostViewed: FETrailType[];
 	mostCommented?: FETrailType;
 	mostShared?: FETrailType;
+	deeplyRead?: FETrailType[];
 }
 
 export interface DCRFrontType {
@@ -38,6 +39,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 }
 
