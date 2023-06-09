@@ -1,8 +1,20 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../lib/byline';
-import { TagType } from '../types/tag';
-import { bylineAsTokens, BylineLink } from './BylineLink';
+import type { TagType } from '../types/tag';
+import {
+	bylineAsTokens,
+	BylineLink,
+	SPECIAL_REGEX_CHARACTERS,
+} from './BylineLink';
+
+describe('SPECIAL_REGEX_CHARACTERS', () => {
+	it('Correctly match all special regex characters', () => {
+		expect(
+			'.*+?^${}()|[]'.replaceAll(SPECIAL_REGEX_CHARACTERS, ''),
+		).toEqual('');
+	});
+});
 
 describe('bylineAsTokens', () => {
 	it('Correctly performs the standard one contributor case', () => {
