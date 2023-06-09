@@ -108,7 +108,19 @@ const MiniImage = ({ image, alt }: MiniImageProps) => {
 
 	if (!source) throw new Error(`Missing source for ${image}`);
 
-	return <img alt={alt} src={source.lowResUrl} css={imageStyles} />;
+	return (
+		<picture>
+			{/* High resolution (HDPI) sources*/}
+			<source
+				srcSet={source.hiResUrl}
+				media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
+			/>
+			{/* Low resolution (MDPI) source*/}
+			<source srcSet={source.lowResUrl} />
+
+			<img alt={alt} src={source.lowResUrl} css={imageStyles} />
+		</picture>
+	);
 };
 
 export const MostViewedFooterItem = ({
