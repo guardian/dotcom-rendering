@@ -19,12 +19,7 @@ export const Snap = ({ snapData }: Props) => {
 	return (
 		<>
 			<div
-				css={[
-					snapStyles,
-					css`
-						${snapData.embedCss}
-					`,
-				]}
+				css={[snapStyles]}
 				dangerouslySetInnerHTML={{ __html: snapData.embedHtml }}
 			/>
 			{snapData.embedJs ? (
