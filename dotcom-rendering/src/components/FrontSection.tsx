@@ -208,16 +208,18 @@ const sectionHeadlineUntilLeftCol = css`
 `;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`
-	position: relative;
-	::after {
-		content: '';
-		display: block;
-		width: 1px;
-		top: 0;
-		height: 1.875rem;
-		right: -10px;
-		position: absolute;
-		background-color: ${borderColour};
+	${from.leftCol} {
+		position: relative;
+		::after {
+			content: '';
+			display: block;
+			width: 1px;
+			top: 0;
+			height: 1.875rem;
+			right: -10px;
+			position: absolute;
+			background-color: ${borderColour};
+		}
 	}
 `;
 
