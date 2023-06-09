@@ -1,10 +1,7 @@
 import type { RequestHandler } from 'express';
-import { renderArticle } from './render.article.apps';
 import { recordTypeAndPlatform } from '../../server/lib/logging-store';
 import { enhanceArticleType } from './index.article.web';
-
-const getStack = (e: unknown): string =>
-	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
+import { renderArticle } from './render.article.apps';
 
 /**
  * Formats script paths as a Link header
@@ -18,14 +15,10 @@ const makePrefetchHeader = (scriptPaths: string[]): string =>
 	);
 
 export const handleAppsArticle: RequestHandler = ({ body }, res) => {
-	try {
-		recordTypeAndPlatform('article', 'apps');
-		const article = enhanceArticleType(body);
-		const { html, clientScripts } = renderArticle(article);
+	recordTypeAndPlatform('article', 'apps');
+	const article = enhanceArticleType(body);
+	const { html, clientScripts } = renderArticle(article);
 
-		// The Android app will cache these assets to enable offline reading
-		res.set('Link', makePrefetchHeader(clientScripts)).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}`);
-	}
+	// The Android app will cache these assets to enable offline reading
+	res.set('Link', makePrefetchHeader(clientScripts)).send(html);
 };
