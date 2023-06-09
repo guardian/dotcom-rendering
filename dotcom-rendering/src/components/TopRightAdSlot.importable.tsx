@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { useAB } from '../lib/useAB';
 
 /**
  * # Top Right Ad Slot
@@ -27,6 +28,13 @@ export const TopRightAdSlot = ({
 	adStyles: SerializedStyles[];
 	isPaidContent: boolean;
 }) => {
+	const ABTestAPI = useAB()?.api;
+	const shouldRestrictRightAdStickyHeight =
+		ABTestAPI?.isUserInVariant(
+			'LiveblogRightColumnAds',
+			'minimum-stickiness',
+		) ?? false;
+
 	return (
 		<div
 			id="top-right-ad-slot"
@@ -35,6 +43,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
+					max-height: ${shouldRestrictRightAdStickyHeight ? '1059px' : '100%'};
 				`,
 				adStyles,
 			]}
