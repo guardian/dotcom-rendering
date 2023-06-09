@@ -361,12 +361,12 @@ export const LabsSection = ({
 		>
 			<Container>
 				<LeftColumn
-					backgroundColour={overrides.background.containerLeftColumn}
+					backgroundColour={overrides.background?.containerLeftColumn}
 				>
 					<div>
 						<LabsContainerHeader
 							summaryBackgroundColour={
-								overrides.background.containerSummary
+								overrides.background?.containerSummary
 							}
 							summaryTextColour={overrides.text?.container}
 							summaryTextSecondaryColour={
@@ -389,7 +389,7 @@ export const LabsSection = ({
 						<LabsLogo />
 					</Link>
 				</LeftColumn>
-				<Content backgroundColour={overrides.background.container}>
+				<Content backgroundColour={overrides.background?.container}>
 					{children}
 					{canShowMore && (
 						<Island deferUntil="interaction">
