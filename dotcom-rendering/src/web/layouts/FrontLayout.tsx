@@ -32,6 +32,7 @@ import {
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
+import { LabsSection } from '../components/LabsSection';
 
 interface Props {
 	front: DCRFrontType;
@@ -343,6 +344,49 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 								)}
 							</>
+						);
+					}
+
+					if (
+						collection.containerPalette === 'Branded' &&
+						renderAds
+					) {
+						const trailsWithoutBranding = collection.badge
+							? trails.map((labTrail) => {
+									return {
+										...labTrail,
+										branding: undefined,
+									};
+							  })
+							: trails;
+
+						return (
+							<LabsSection
+								key={ophanName}
+								title={collection.displayName}
+								collectionId={collection.id}
+								pageId={front.pressedPage.id}
+								ajaxUrl={front.config.ajaxUrl}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								canShowMore={collection.canShowMore}
+								url={collection.href}
+								badge={collection.badge}
+								data-print-layout="hide"
+							>
+								<DecideContainer
+									trails={trailsWithoutBranding}
+									index={index}
+									groupedTrails={collection.grouped}
+									containerType={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									renderAds={false}
+								/>
+							</LabsSection>
 						);
 					}
 

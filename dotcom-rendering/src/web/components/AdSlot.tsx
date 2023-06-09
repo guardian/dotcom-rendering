@@ -116,8 +116,14 @@ export const labelStyles = css`
 	}
 `;
 
-export const adCollapseStyles = css`
+export const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+`;
+
+export const adSlotCollapseStyles = css`
+	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
 `;
@@ -252,7 +258,7 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-const adStyles = [labelStyles, fluidAdStyles];
+const adStyles = [labelStyles, fluidAdStyles, adContainerCollapseStyles];
 
 export const AdSlot = ({
 	position,
@@ -435,7 +441,7 @@ export const AdSlot = ({
 						'ad-slot',
 						'ad-slot--survey',
 					].join(' ')}
-					css={outOfPageStyles}
+					css={[outOfPageStyles, adSlotCollapseStyles]}
 					data-link-name="ad slot survey"
 					data-name="survey"
 					data-label="false"
@@ -489,6 +495,7 @@ export const AdSlot = ({
 								position: relative;
 							`,
 							adStyles,
+							adSlotCollapseStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}

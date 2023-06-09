@@ -174,6 +174,10 @@ export type FEFrontCard = {
 			type: string;
 			item: {
 				imageSrc?: string;
+				assets?: {
+					imageSrc: string;
+					imageCaption?: string;
+				}[];
 			};
 		};
 		webTitle: string;
@@ -269,6 +273,12 @@ export type DCRFrontCard = {
 	isExternalLink: boolean;
 	embedUri?: string;
 	branding?: Branding;
+	slideshowImages?: DCRSlideshowImage[];
+};
+
+export type DCRSlideshowImage = {
+	imageSrc: string;
+	imageCaption?: string;
 };
 
 export type FESnapType = {
@@ -343,13 +353,6 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
-	/** Indicates whether we should render a Guardian Labs collection.
-	 *
-	 *  This overrides collectionType because we must take into account all the cards in a collection
-	 *  before deciding if we can render a Guardian Labs container.
-	 *
-	 * */
-	isLabs?: boolean;
 	badge?: DCRBadgeType;
 };
 
