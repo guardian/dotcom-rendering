@@ -1,6 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
-import { pageSkinContainer } from 'src/layouts/lib/pageSkin';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 
 const sidePadding = css`
