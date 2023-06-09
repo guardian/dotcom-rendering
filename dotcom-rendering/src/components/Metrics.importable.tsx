@@ -2,7 +2,7 @@ import type { ABTest, ABTestAPI } from '@guardian/ab-core';
 import {
 	bypassCommercialMetricsSampling,
 	initCommercialMetrics,
-} from '@guardian/commercial-core';
+} from '@guardian/commercial';
 import {
 	bypassCoreWebVitalsSampling,
 	initCoreWebVitals,

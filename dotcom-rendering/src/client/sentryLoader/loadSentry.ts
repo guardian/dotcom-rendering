@@ -1,5 +1,5 @@
 import '../webpackPublicPath';
-import { isAdBlockInUse } from '@guardian/commercial-core';
+import { isAdBlockInUse } from '@guardian/commercial';
 
 const loadSentry = (): void => {
 	try {
