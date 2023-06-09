@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { background, from, space } from '@guardian/source-foundations';
+import { background, from, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import type { ContainerOverrides } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -116,6 +116,15 @@ const containerStyles = css`
 	width: 100%;
 `;
 
+const headlineContainerStyles = css`
+	display: flex;
+	justify-content: flex-end;
+
+	${until.leftCol} {
+		justify-content: space-between;
+	}
+`;
+
 const margins = css`
 	margin-top: ${space[2]}px;
 	/*
@@ -210,9 +219,11 @@ const ContainerTitleWithHide = ({
 		return containerTitle;
 	}
 	return (
-		<Hide when="above" breakpoint="leftCol">
-			{containerTitle}
-		</Hide>
+		<div css={headlineContainerStyles}>
+			<Hide when="above" breakpoint="leftCol">
+				{containerTitle}
+			</Hide>
+		</div>
 	);
 };
 
@@ -382,28 +393,24 @@ export const Section = ({
 					stretchRight={stretchRight}
 					format={format}
 				>
-					<div>
-						<ContainerTitleWithHide
-							title={title}
-							fontColour={
-								fontColour ?? overrides?.text?.container
+					<ContainerTitleWithHide
+						title={title}
+						fontColour={fontColour ?? overrides?.text?.container}
+						description={description}
+						url={url}
+						containerPalette={containerPalette}
+						showDateHeader={showDateHeader}
+						editionId={editionId}
+						hasPageSkin={hasPageSkin}
+					/>
+					{toggleable && !!sectionId && (
+						<ShowHideButton
+							sectionId={sectionId}
+							overrideContainerToggleColour={
+								overrides?.text?.containerToggle
 							}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-							hasPageSkin={hasPageSkin}
 						/>
-						{toggleable && !!sectionId && (
-							<ShowHideButton
-								sectionId={sectionId}
-								overrideContainerToggleColour={
-									overrides?.text?.containerToggle
-								}
-							/>
-						)}
-					</div>
+					)}
 					{toggleable && sectionId ? (
 						<div css={hiddenStyles} id={`container-${sectionId}`}>
 							{children}
