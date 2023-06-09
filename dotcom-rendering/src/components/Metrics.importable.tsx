@@ -11,6 +11,7 @@ import { getCookie } from '@guardian/libs';
 import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { limitInlineMerch } from '../experiments/tests/limit-inline-merch';
+import { liveblogRightColumnAds } from '../experiments/tests/liveblog-right-column-ads';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -29,6 +30,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	integrateIma,
 	limitInlineMerch,
 	billboardsInMerchHigh,
+	liveblogRightColumnAds,
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {
@@ -101,9 +103,7 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 					}
 				})
 				.catch((e) =>
-					console.error(
-						`Error initialising commercial metrics: ${String(e)}`,
-					),
+					console.error(`Error initialising commercial metrics: ${String(e)}`),
 				);
 		},
 		[abTestApi, adBlockerInUse, commercialMetricsEnabled],
