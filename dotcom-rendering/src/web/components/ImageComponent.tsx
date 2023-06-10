@@ -350,14 +350,16 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				<Island deferUntil="interaction">
-					<LightboxButton
-						role={role}
-						format={format}
-						elementId={element.elementId}
-						isMainMedia={isMainMedia}
-					/>
-				</Island>
+				{parseInt(dimensions.width) > 620 && (
+					<Island deferUntil="interaction">
+						<LightboxButton
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				)}
 			</div>
 		);
 	}
@@ -397,14 +399,16 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				<Island deferUntil="interaction">
-					<LightboxButton
-						role={role}
-						format={format}
-						elementId={element.elementId}
-						isMainMedia={isMainMedia}
-					/>
-				</Island>
+				{parseInt(dimensions.width) > 620 && (
+					<Island deferUntil="interaction">
+						<LightboxButton
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				)}
 			</div>
 		);
 	}
@@ -482,14 +486,17 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				<Island deferUntil="interaction">
-					<LightboxButton
-						role={role}
-						format={format}
-						elementId={element.elementId}
-						isMainMedia={isMainMedia}
-					/>
-				</Island>
+
+				{parseInt(dimensions.width) > 620 && (
+					<Island deferUntil="interaction">
+						<LightboxButton
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+						/>
+					</Island>
+				)}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
