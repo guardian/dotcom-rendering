@@ -165,7 +165,7 @@ const dotActiveStyle = (palette: Palette) => css`
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.background.carouselDotFocus};
+		background-color: ${palette.background.carouselDot};
 	}
 `;
 
