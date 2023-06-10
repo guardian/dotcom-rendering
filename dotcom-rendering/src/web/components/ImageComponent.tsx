@@ -365,7 +365,11 @@ export const ImageComponent = ({
 	if (hideCaption) {
 		return (
 			<div
-				id={element.position ? `img-${element.position}` : ''}
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					position: relative;
 
@@ -408,7 +412,11 @@ export const ImageComponent = ({
 	return (
 		<>
 			<div
-				id={element.position ? `img-${element.position}` : ''}
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					position: relative;
 
