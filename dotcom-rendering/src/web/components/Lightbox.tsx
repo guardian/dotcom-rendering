@@ -349,7 +349,7 @@ const Selection = ({
 };
 
 export const Lightbox = ({ format, images }: Props) => {
-	if (!images?.length) return null;
+	if (images?.length == null || images.length === 0) return null;
 
 	return (
 		<>
@@ -481,7 +481,8 @@ export const Lightbox = ({ format, images }: Props) => {
 												}
 											/>
 											{!!image.blockId &&
-												!!image.firstPublished && (
+												image.firstPublished !==
+													undefined && (
 													<Link
 														href={`?page=with:block-${image.blockId}#block-${image.blockId}`}
 														priority="secondary"
