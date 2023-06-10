@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -32,6 +31,7 @@ import {
 } from '../lib/getAdPositions';
 import { Stuck } from './lib/stickiness';
 import { LabsSection } from '../components/LabsSection';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 interface Props {
 	front: DCRFrontType;
@@ -69,7 +69,6 @@ const decideAdSlot = (
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
-	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 ) => {
 	if (!renderAds) return null;
@@ -79,11 +78,7 @@ const decideAdSlot = (
 		index === getMerchHighPosition(collectionCount, isNetworkFront)
 	) {
 		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				display={format}
-			/>
+			<AdSlot data-print-layout="hide" position="merchandising-high" />
 		);
 	} else if (mobileAdPositions.includes(index)) {
 		return (
@@ -92,7 +87,6 @@ const decideAdSlot = (
 					index={index}
 					data-print-layout="hide"
 					position="mobile-front"
-					display={format}
 				/>
 			</Hide>
 		);
@@ -144,7 +138,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -290,7 +284,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-									format.display,
 									mobileAdPositions,
 								)}
 							</>
@@ -354,7 +347,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-									format.display,
 									mobileAdPositions,
 								)}
 							</>
@@ -466,7 +458,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
 								mobileAdPositions,
 							)}
 						</>
@@ -490,7 +481,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot position="merchandising" />
 				</Section>
 			)}
 
