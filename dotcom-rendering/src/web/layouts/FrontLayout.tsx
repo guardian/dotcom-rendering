@@ -177,7 +177,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={format}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticlePillar.News,
+							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
