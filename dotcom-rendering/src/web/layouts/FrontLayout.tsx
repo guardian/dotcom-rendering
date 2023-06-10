@@ -26,7 +26,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { DecideContainer } from '../lib/DecideContainer';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getMerchHighPosition,
 	getMobileAdPositions,
@@ -115,8 +114,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		theme: ArticlePillar.News,
 	};
 
-	const palette = decidePalette(format);
-
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
 		front.isNetworkFront,
@@ -202,7 +199,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
 							>
@@ -216,7 +212,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
 							>
