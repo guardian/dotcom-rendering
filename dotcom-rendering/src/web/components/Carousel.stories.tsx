@@ -205,6 +205,7 @@ export const Headlines = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
+				leftColSize={'compact'}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -217,6 +218,7 @@ export const Headlines = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -236,6 +238,7 @@ export const SingleItemCarousel = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -255,6 +258,7 @@ export const Immersive = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
+				leftColSize={'compact'}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -267,6 +271,7 @@ export const Immersive = () => (
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -298,6 +303,7 @@ export const SpecialReportAlt = () => {
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
 					}}
+					leftColSize={'compact'}
 				/>
 			</Section>
 		</>

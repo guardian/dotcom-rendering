@@ -646,6 +646,7 @@ export const InteractiveLayout = ({
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>

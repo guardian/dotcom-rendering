@@ -521,6 +521,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>

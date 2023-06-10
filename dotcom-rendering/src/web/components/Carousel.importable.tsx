@@ -32,6 +32,7 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
+	leftColSize: LeftColSize;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -442,7 +443,13 @@ const HeaderAndNav = ({
  *
  * [`Carousel` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-carousel)
  */
-export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
+export const Carousel = ({
+	heading,
+	trails,
+	onwardsSource,
+	format,
+	leftColSize,
+}: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -556,15 +563,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 			data-link-name={formatAttrString(heading)}
 		>
 			<FetchCommentCounts />
-			<LeftColumn
-				borderType="partial"
-				size={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-			>
+			<LeftColumn borderType="partial" size={leftColSize}>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}

@@ -1185,6 +1185,7 @@ export const LiveLayout = ({
 									)}
 									onwardsSource="more-on-this-story"
 									format={format}
+									leftColSize={'wide'}
 								/>
 							</Island>
 						</Section>

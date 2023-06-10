@@ -7,6 +7,7 @@ import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
+import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	url: string;
@@ -80,6 +81,12 @@ export const FetchOnwardsData = ({
 						description={data.description}
 						onwardsSource={onwardsSource}
 						format={format}
+						leftColSize={
+							format.design === ArticleDesign.LiveBlog ||
+							format.design === ArticleDesign.DeadBlog
+								? 'wide'
+								: 'compact'
+						}
 					/>
 				</div>
 			</div>

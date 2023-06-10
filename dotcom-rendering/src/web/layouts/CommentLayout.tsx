@@ -735,6 +735,7 @@ export const CommentLayout = ({
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>

@@ -783,6 +783,7 @@ export const ImmersiveLayout = ({
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>

@@ -811,6 +811,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								)}
 								onwardsSource="more-on-this-story"
 								format={format}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>
