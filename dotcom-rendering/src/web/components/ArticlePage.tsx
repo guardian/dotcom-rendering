@@ -58,10 +58,17 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Lightbox format={format} images={article.imagesForLightbox} />
-			<Island clientOnly={true}>
-				<LightboxHash />
-			</Island>
+			{article.imagesForLightbox && (
+				<>
+					<Lightbox
+						format={format}
+						images={article.imagesForLightbox}
+					/>
+					<Island clientOnly={true}>
+						<LightboxHash />
+					</Island>
+				</>
+			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
