@@ -579,6 +579,9 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 				width: 100%;
 				height: 100%;
 				cursor: pointer;
+				:hover > button.open-lightbox {
+					opacity: 0.7;
+				}
 			`}
 			className="open-lightbox"
 		>
@@ -631,13 +634,21 @@ export const LightboxButton = ({
 						border: none;
 						cursor: pointer;
 						background-color: ${neutral[46]};
-						/* Don't show the button over thumbnails; they're too small */
-						opacity: ${role === 'thumbnail' ? '0' : '0.7'};
+						/* We start with zero and then hovering the ClickOverlay increases opacity  */
+						opacity: 0;
 						:hover {
 							filter: brightness(85%);
 							opacity: 0.8;
 						}
+						:focus {
+							opacity: 0.7;
+						}
 					`,
+					/* Don't show the button over thumbnails; they're too small */
+					role === 'thumbnail' &&
+						css`
+							display: none;
+						`,
 					decideSize(role, format),
 					isMainMedia &&
 						format.display === ArticleDisplay.Immersive &&
