@@ -62,7 +62,7 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={articleFormat.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -124,7 +124,10 @@ export const AllEditorialNewslettersPageLayout = ({
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={articleFormat}
+										linkHoverColour={
+											'palette.text.articleLinkHover'
+										}
+										borderColour={'palette.border.subNav'}
 									/>
 								</Island>
 							</Section>

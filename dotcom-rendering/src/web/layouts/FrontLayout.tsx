@@ -32,6 +32,7 @@ import {
 import { Stuck } from './lib/stickiness';
 import { LabsSection } from '../components/LabsSection';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { news } from '@guardian/source-foundations/cjs/colour/palette';
 
 interface Props {
 	front: DCRFrontType;
@@ -204,7 +205,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={format}
+										linkHoverColour={news[400]}
+										borderColour={neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -501,7 +503,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={news[400]}
+							borderColour={neutral[46]}
 						/>
 					</Island>
 				</Section>

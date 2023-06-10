@@ -319,7 +319,7 @@ export const LiveLayout = ({
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot display={format.display} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -388,7 +388,10 @@ export const LiveLayout = ({
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									format={format}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
 								/>
 							</Island>
 						</Section>
@@ -1295,7 +1298,8 @@ export const LiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

@@ -325,7 +325,7 @@ export const CommentLayout = ({
 							padSides={false}
 							shouldCenter={false}
 						>
-							<HeaderAdSlot display={format.display} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -401,7 +401,10 @@ export const CommentLayout = ({
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									format={format}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
 								/>
 							</Island>
 						</Section>
@@ -830,7 +833,8 @@ export const CommentLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

@@ -262,7 +262,7 @@ export const InteractiveLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</div>
 					</Stuck>
@@ -340,7 +340,8 @@ export const InteractiveLayout = ({
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								format={format}
+								linkHoverColour={palette.text.articleLinkHover}
+								borderColour={palette.border.subNav}
 							/>
 						</Island>
 					</Section>
@@ -750,7 +751,8 @@ export const InteractiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

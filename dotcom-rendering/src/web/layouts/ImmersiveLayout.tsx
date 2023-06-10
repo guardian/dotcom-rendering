@@ -879,7 +879,8 @@ export const ImmersiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>
