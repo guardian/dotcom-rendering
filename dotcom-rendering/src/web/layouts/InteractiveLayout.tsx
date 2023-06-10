@@ -645,7 +645,10 @@ export const InteractiveLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
 								leftColSize={'compact'}
 							/>
 						</Island>

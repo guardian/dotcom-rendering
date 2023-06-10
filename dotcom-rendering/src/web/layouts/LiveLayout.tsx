@@ -1184,7 +1184,12 @@ export const LiveLayout = ({
 										decideTrail,
 									)}
 									onwardsSource="more-on-this-story"
-									format={format}
+									titleHighlightColour={
+										palette.text.carouselTitle
+									}
+									activeDotColour={
+										palette.background.carouselDot
+									}
 									leftColSize={'wide'}
 								/>
 							</Island>

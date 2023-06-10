@@ -520,7 +520,10 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
 								leftColSize={'compact'}
 							/>
 						</Island>

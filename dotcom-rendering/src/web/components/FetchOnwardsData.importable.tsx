@@ -8,6 +8,7 @@ import { useApi } from '../lib/useApi';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
 import { ArticleDesign } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	url: string;
@@ -34,6 +35,7 @@ export const FetchOnwardsData = ({
 	format,
 }: Props) => {
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
+	const palette = decidePalette(format);
 
 	const buildTrails = (
 		trails: FETrailType[],
@@ -80,7 +82,8 @@ export const FetchOnwardsData = ({
 						trails={buildTrails(data.trails, limit)}
 						description={data.description}
 						onwardsSource={onwardsSource}
-						format={format}
+						titleHighlightColour={palette.text.carouselTitle}
+						activeDotColour={palette.background.carouselDot}
 						leftColSize={
 							format.design === ArticleDesign.LiveBlog ||
 							format.design === ArticleDesign.DeadBlog
