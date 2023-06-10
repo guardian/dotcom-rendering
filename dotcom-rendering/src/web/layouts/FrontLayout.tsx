@@ -103,12 +103,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const isInEuropeTest =
 		front.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	};
-
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
 		front.isNetworkFront,
@@ -522,7 +516,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={format.theme}
+					pillar={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
