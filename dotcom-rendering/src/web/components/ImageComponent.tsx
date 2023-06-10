@@ -307,7 +307,11 @@ export const ImageComponent = ({
 	) {
 		return (
 			<div
-				id={element.position ? `img-${element.position}` : ''}
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					/* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
