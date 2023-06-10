@@ -216,13 +216,13 @@ const CaptionToggle = () => (
 );
 
 export const getMaster = (images: Image[]) => {
-	return images.find((image) => image.fields.isMaster)?.url;
+	return images.find((image) => image.fields.isMaster);
 };
 export const getLargest = (images: Image[]) => {
 	const descendingByWidth = (a: Image, b: Image) => {
 		return parseInt(b.fields.width) - parseInt(a.fields.width);
 	};
-	return images.slice().sort(descendingByWidth)[0]?.url;
+	return images.slice().sort(descendingByWidth)[0];
 };
 
 /**
@@ -286,8 +286,8 @@ export const ImageComponent = ({
 
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =
-		getMaster(element.media.allImages) ??
-		getLargest(element.media.allImages);
+		getMaster(element.media.allImages)?.url ??
+		getLargest(element.media.allImages)?.url;
 
 	const isSupported = (imageUrl: string): boolean => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];

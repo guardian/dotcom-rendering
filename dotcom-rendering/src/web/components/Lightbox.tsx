@@ -381,8 +381,8 @@ export const Lightbox = ({ format, images }: Props) => {
 						{images.map((image, index) => {
 							// Legacy images do not have a master so we fallback to the largest available
 							const master: string | undefined =
-								getMaster(image.media.allImages) ??
-								getLargest(image.media.allImages);
+								getMaster(image.media.allImages)?.url ??
+								getLargest(image.media.allImages)?.url;
 
 							if (!master) return null;
 

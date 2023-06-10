@@ -1,4 +1,5 @@
 import type { EnhancedImageForLightbox, FEElement } from '../types/content';
+import { getLargest, getMaster } from '../web/components/ImageComponent';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
@@ -9,7 +10,9 @@ import type { EnhancedImageForLightbox, FEElement } from '../types/content';
  *
  */
 const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
-	const fields = image.media.allImages[0]?.fields;
+	const masterImage =
+		getMaster(image.media.allImages) ?? getLargest(image.media.allImages);
+	const fields = masterImage?.fields;
 	if (!fields) return false; // Unlikely
 	const { width, height } = fields;
 	const orientation =
