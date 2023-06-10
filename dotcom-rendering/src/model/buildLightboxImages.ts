@@ -58,7 +58,7 @@ export const buildLightboxImages = (
 			let imageElement: EnhancedImageForLightbox;
 			switch (element._type) {
 				case 'model.dotcomrendering.pageElements.ImageBlockElement': {
-					imageElement = element;
+					imageElement = { ...element };
 					if (
 						format.design === 'LiveBlogDesign' ||
 						format.design === 'DeadBlogDesign'
@@ -71,7 +71,7 @@ export const buildLightboxImages = (
 				}
 				case 'model.dotcomrendering.pageElements.MultiImageBlockElement': {
 					element.images.forEach((multiImage) => {
-						imageElement = multiImage;
+						imageElement = { ...multiImage };
 						if (
 							format.design === 'LiveBlogDesign' ||
 							format.design === 'DeadBlogDesign'
