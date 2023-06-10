@@ -4,6 +4,7 @@ import {
 	brandBorder,
 	brandLine,
 	neutral,
+	news,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -32,7 +33,7 @@ import {
 import { Stuck } from './lib/stickiness';
 import { LabsSection } from '../components/LabsSection';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { news } from '@guardian/source-foundations/cjs/colour/palette';
+import { Carousel } from '../components/Carousel.importable';
 
 interface Props {
 	front: DCRFrontType;
@@ -393,6 +394,41 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={false}
 								/>
 							</LabsSection>
+						);
+					}
+
+					if (collection.collectionType === 'fixed/video') {
+						return (
+							<Section
+								key={ophanName}
+								title={collection.displayName}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								fullWidth={true}
+								padBottom={true}
+								showSideBorders={true}
+								showTopBorder={index > 0}
+								padContent={false}
+								url={collection.href}
+								containerPalette={collection.containerPalette}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+							>
+								<Island deferUntil={'visible'}>
+									<Carousel
+										heading={collection.displayName}
+										trails={trails}
+										onwardsSource={'unknown-source'}
+										titleHighlightColour={neutral[7]}
+										activeDotColour={neutral[7]}
+										leftColSize={'compact'}
+									/>
+								</Island>
+							</Section>
 						);
 					}
 
