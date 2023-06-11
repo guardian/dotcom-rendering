@@ -8,6 +8,8 @@ import type { RoleType } from '../../types/content';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
+type Orientation = 'portrait' | 'landscape';
+
 type Props = {
 	role: RoleType;
 	format: ArticleFormat;
@@ -18,6 +20,7 @@ type Props = {
 	isMainMedia?: boolean;
 	isLazy?: boolean;
 	isLightbox?: boolean;
+	orientation?: Orientation;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -41,22 +44,39 @@ const decideImageWidths = ({
 	isMainMedia,
 	format,
 	isLightbox,
+	orientation,
 }: {
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
 	isLightbox: boolean;
+	orientation: Orientation;
 }): [ImageWidthType, ...ImageWidthType[]] => {
 	if (isLightbox) {
-		return [
-			{ breakpoint: breakpoints.mobile, width: 480 },
-			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-			{ breakpoint: breakpoints.phablet, width: 740 },
-			{ breakpoint: breakpoints.tablet, width: 980 },
-			{ breakpoint: breakpoints.desktop, width: 1140 },
-			{ breakpoint: breakpoints.leftCol, width: 1300 },
-			{ breakpoint: breakpoints.wide, width: 1900 },
-		];
+		switch (orientation) {
+			case 'portrait':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 480 },
+					{ breakpoint: breakpoints.mobileLandscape, width: 480 },
+					{ breakpoint: breakpoints.phablet, width: 480 },
+					{ breakpoint: breakpoints.tablet, width: 660 },
+					{ breakpoint: breakpoints.desktop, width: 740 },
+					{ breakpoint: breakpoints.leftCol, width: 980 },
+					{ breakpoint: breakpoints.wide, width: 1140 },
+				];
+
+			case 'landscape':
+			default:
+				return [
+					{ breakpoint: breakpoints.mobile, width: 480 },
+					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+					{ breakpoint: breakpoints.phablet, width: 740 },
+					{ breakpoint: breakpoints.tablet, width: 980 },
+					{ breakpoint: breakpoints.desktop, width: 1140 },
+					{ breakpoint: breakpoints.leftCol, width: 1300 },
+					{ breakpoint: breakpoints.wide, width: 1900 },
+				];
+		}
 	}
 	if (isMainMedia) {
 		switch (format.display) {
@@ -297,10 +317,17 @@ export const Picture = ({
 	isMainMedia = false,
 	isLazy = true,
 	isLightbox = false,
+	orientation = 'landscape',
 }: Props) => {
 	const sources = generateSources(
 		master,
-		decideImageWidths({ role, format, isMainMedia, isLightbox }),
+		decideImageWidths({
+			role,
+			format,
+			isMainMedia,
+			isLightbox,
+			orientation,
+		}),
 	);
 
 	const ratio = parseInt(height, 10) / parseInt(width, 10);

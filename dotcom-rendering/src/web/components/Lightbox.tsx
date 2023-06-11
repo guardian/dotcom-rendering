@@ -123,7 +123,7 @@ const liStyles = css`
 	scroll-snap-align: start;
 `;
 
-const imageStyles = (orientation: 'horizontal' | 'portrait') => {
+const imageStyles = (orientation: 'landscape' | 'portrait') => {
 	switch (orientation) {
 		case 'portrait': {
 			return css`
@@ -159,7 +159,7 @@ const imageStyles = (orientation: 'horizontal' | 'portrait') => {
 				}
 			`;
 		}
-		case 'horizontal':
+		case 'landscape':
 		default: {
 			return css`
 				img {
@@ -392,7 +392,7 @@ export const Lightbox = ({ format, images }: Props) => {
 
 							const orientation =
 								parseInt(width) > parseInt(height)
-									? 'horizontal'
+									? 'landscape'
 									: 'portrait';
 
 							return (
@@ -418,6 +418,7 @@ export const Lightbox = ({ format, images }: Props) => {
 											master={master}
 											format={format}
 											isLightbox={true}
+											orientation={orientation}
 										/>
 										<aside css={asideStyles}>
 											{!!image.title && (
