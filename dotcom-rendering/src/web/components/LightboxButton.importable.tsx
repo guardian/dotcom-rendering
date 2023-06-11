@@ -20,33 +20,42 @@ type Props = {
 };
 
 function decideSize(role: RoleType, format: ArticleFormat) {
+	const smallStyles = css`
+		height: 32px;
+		width: 32px;
+		svg {
+			height: 22px;
+			width: 22px;
+		}
+	`;
+	const largeStyles = css`
+		height: 44px;
+		width: 44px;
+		svg {
+			height: 32px;
+			width: 32px;
+		}
+	`;
+
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
-			return css`
-				height: 32px;
-				width: 32px;
-			`;
+			return smallStyles;
 		}
 		default: {
 			switch (role) {
 				case 'halfWidth':
 				case 'supporting': {
-					return css`
-						height: 32px;
-						width: 32px;
-					`;
+					return smallStyles;
 				}
 				case 'inline':
 				case 'showcase':
 				case 'immersive':
 				default: {
 					return css`
-						height: 32px;
-						width: 32px;
+						${smallStyles}
 						${from.tablet} {
-							height: 44px;
-							width: 44px;
+							${largeStyles}
 						}
 					`;
 				}

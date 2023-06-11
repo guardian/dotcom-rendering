@@ -271,8 +271,14 @@ const closeButtonStyles = css`
 
 const arrowButtonStyles = css`
 	svg {
-		height: 32px;
-		width: 32px;
+		height: 24px;
+		width: 24px;
+	}
+	${from.tablet} {
+		svg {
+			height: 32px;
+			width: 32px;
+		}
 	}
 `;
 
