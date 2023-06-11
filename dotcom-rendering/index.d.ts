@@ -323,8 +323,6 @@ type SmallHeadlineSize =
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
-type LineEffectType = 'labs' | 'dotted' | 'straight';
-
 type LeftColSize = 'compact' | 'wide';
 
 type CardPercentageType =

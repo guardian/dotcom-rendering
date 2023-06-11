@@ -1,16 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { border, from } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../types/front';
-import { decideContainerOverrides } from './decideContainerOverrides';
 
 export function verticalDividerWithBottomOffset(
 	bottomPaddingSize: string,
-	containerPalette?: DCRContainerPalette,
+	verticalDividerColour?: string,
 ): SerializedStyles {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	return css`
 		${from.tablet} {
 			:before {
@@ -25,9 +20,7 @@ export function verticalDividerWithBottomOffset(
 				height: 100%;
 				height: calc(100% + ${bottomPaddingSize});
 				border-left: 1px solid
-					${containerOverrides
-						? containerOverrides.border?.container
-						: border.secondary};
+					${verticalDividerColour || border.secondary};
 			}
 		}
 	`;

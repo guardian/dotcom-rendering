@@ -1,15 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { border, from } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../types/front';
-import { decideContainerOverrides } from './decideContainerOverrides';
 
 export const verticalDivider = (
-	containerPalette?: DCRContainerPalette,
+	verticalDividerColour?: string,
 ): SerializedStyles => {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	return css`
 		${from.tablet} {
 			:before {
@@ -22,8 +17,8 @@ export const verticalDivider = (
 				width: 1px;
 				height: 100%;
 				border-left: 1px solid
-					${containerOverrides
-						? containerOverrides.border?.container
+					${verticalDividerColour
+						? verticalDividerColour
 						: border.secondary};
 			}
 		}

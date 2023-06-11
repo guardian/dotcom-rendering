@@ -34,6 +34,7 @@ import { Stuck } from './lib/stickiness';
 import { LabsSection } from '../components/LabsSection';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { Carousel } from '../components/Carousel.importable';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 
 interface Props {
 	front: DCRFrontType;
@@ -355,7 +356,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (
-						collection.containerPalette === 'Branded' &&
+						collection.containerPalette === 'BrandedPalette' &&
 						renderAds
 					) {
 						const trailsWithoutBranding = collection.badge
@@ -398,6 +399,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (collection.collectionType === 'fixed/video') {
+						const mediaPalette =
+							decideContainerOverrides('MediaPalette');
 						return (
 							<Section
 								key={ophanName}
@@ -412,19 +415,32 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
-								containerPalette={collection.containerPalette}
+								containerPalette={'MediaPalette'}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
+								backgroundColour={
+									mediaPalette.background?.container
+								}
 							>
 								<Island deferUntil={'visible'}>
 									<Carousel
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										titleHighlightColour={neutral[7]}
-										activeDotColour={neutral[7]}
+										titleColour={
+											mediaPalette.text?.container
+										}
+										titleHighlightColour={
+											mediaPalette.text.container
+										}
+										activeDotColour={
+											mediaPalette.background?.carouselDot
+										}
+										verticalDividerColour={
+											mediaPalette.border?.lines
+										}
 										leftColSize={'compact'}
 									/>
 								</Island>

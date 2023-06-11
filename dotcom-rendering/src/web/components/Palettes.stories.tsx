@@ -2,6 +2,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
+import { LabsSection } from './LabsSection';
 
 export default {
 	title: 'Layouts/Palettes',
@@ -166,4 +167,57 @@ export const SpecialReportAltPalette = () => (
 			showAge={true}
 		/>
 	</FrontSection>
+);
+
+export const BrandedPalette = () => (
+	<LabsSection
+		title="Branded Palette"
+		collectionId={''}
+		pageId={''}
+		ajaxUrl={''}
+		sectionId={'branded-palette'}
+		ophanComponentName={'branded-palette'}
+		ophanComponentLink={'branded-palette'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="BrandedPalette"
+			showAge={true}
+		/>
+	</LabsSection>
+);
+
+export const MediaPalette = () => (
+	<FrontSection
+		title="Media Palette"
+		containerPalette="MediaPalette"
+		showDateHeader={true}
+		editionId={'UK'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="MediaPalette"
+			showAge={true}
+		/>
+	</FrontSection>
+	// <Section
+	// 	title={'Media Palette'}
+	// 	sectionId={'container-media-palette'}
+	// 	fullWidth={true}
+	// 	padBottom={true}
+	// 	showSideBorders={true}
+	// 	padContent={false}
+	// 	containerPalette={'MediaPalette'}
+	// 	showDateHeader={true}
+	// >
+	// 	<Carousel
+	// 		heading={"Media Palette"}
+	// 		trails={trails}
+	// 		onwardsSource={'unknown-source'}
+	// 		titleColour={brandAlt[400]}
+	// 		titleHighlightColour={brandAlt[400]}
+	// 		activeDotColour={brandAlt[400]}
+	// 		leftColSize={'compact'}
+	// 	/>
+	// </Section>
 );

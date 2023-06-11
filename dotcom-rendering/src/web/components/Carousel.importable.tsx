@@ -30,8 +30,10 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
-	activeDotColour: string;
+	activeDotColour?: string;
+	titleColour?: string;
 	titleHighlightColour: string;
+	verticalDividerColour?: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -159,7 +161,7 @@ const dotStyle = css`
 	}
 `;
 
-const activeDotStyles = (activeDotColour: string) => css`
+const activeDotStyles = (activeDotColour?: string) => css`
 	background-color: ${activeDotColour};
 
 	&:hover,
@@ -310,24 +312,35 @@ const headerStyles = css`
 `;
 
 const titleStyle = (
-	titleHighlightColour: string,
+	titleColour?: string,
+	titleHighlightColour?: string,
 	isCuratedContent?: boolean,
 ) => css`
-	color: ${isCuratedContent ? titleHighlightColour : text.primary};
+	color: ${isCuratedContent
+		? titleHighlightColour
+		: titleColour || text.primary};
 `;
 
 const Title = ({
 	title,
+	titleColour,
 	titleHighlightColour,
 	isCuratedContent,
 }: {
 	title: string;
-	titleHighlightColour: string;
+	titleColour?: string;
+	titleHighlightColour?: string;
 	isCuratedContent?: boolean;
 }) => (
 	<h2 css={headerStyles}>
 		{isCuratedContent ? 'More from ' : ''}
-		<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
+		<span
+			css={titleStyle(
+				titleColour,
+				titleHighlightColour,
+				isCuratedContent,
+			)}
+		>
 			{title}
 		</span>
 	</h2>
@@ -345,6 +358,9 @@ type CarouselCardProps = {
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
+	showMainVideo?: boolean;
+	mediaDuration?: number;
+	verticalDividerColour?: string;
 };
 
 const CarouselCard = ({
@@ -358,6 +374,9 @@ const CarouselCard = ({
 	dataLinkName,
 	discussionId,
 	branding,
+	showMainVideo,
+	mediaDuration,
+	verticalDividerColour,
 }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
@@ -365,6 +384,7 @@ const CarouselCard = ({
 		padSides={true}
 		padSidesOnMobile={true}
 		snapAlignStart={true}
+		verticalDividerColour={verticalDividerColour}
 	>
 		<Card
 			linkTo={linkTo}
@@ -373,7 +393,7 @@ const CarouselCard = ({
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText}
 			imageUrl={imageUrl}
-			imageSize={imageUrl ? 'carousel' : undefined}
+			imageSize={'small'}
 			showClock={true}
 			showAge={true}
 			imagePositionOnMobile="top"
@@ -383,6 +403,8 @@ const CarouselCard = ({
 			discussionId={discussionId}
 			branding={branding}
 			isExternalLink={false}
+			showMainVideo={showMainVideo}
+			mediaDuration={mediaDuration}
 		/>
 	</LI>
 );
@@ -390,8 +412,9 @@ const CarouselCard = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
-	titleHighlightColour: string;
-	activeDotColour: string;
+	titleColour?: string;
+	titleHighlightColour?: string;
+	activeDotColour?: string;
 	index: number;
 	isCuratedContent?: boolean;
 	goToIndex: (newIndex: number) => void;
@@ -400,6 +423,7 @@ type HeaderAndNavProps = {
 const HeaderAndNav = ({
 	heading,
 	trails,
+	titleColour,
 	titleHighlightColour,
 	activeDotColour,
 	index,
@@ -409,6 +433,7 @@ const HeaderAndNav = ({
 	<div>
 		<Title
 			title={heading}
+			titleColour={titleColour}
 			titleHighlightColour={titleHighlightColour}
 			isCuratedContent={isCuratedContent}
 		/>
@@ -453,7 +478,9 @@ export const Carousel = ({
 	onwardsSource,
 	leftColSize,
 	activeDotColour,
+	titleColour,
 	titleHighlightColour,
+	verticalDividerColour,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -567,11 +594,16 @@ export const Carousel = ({
 			data-link-name={formatAttrString(heading)}
 		>
 			<FetchCommentCounts />
-			<LeftColumn borderType="partial" size={leftColSize}>
+			<LeftColumn
+				borderType="partial"
+				size={leftColSize}
+				borderColour={verticalDividerColour}
+			>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
 					activeDotColour={activeDotColour}
+					titleColour={titleColour}
 					titleHighlightColour={titleHighlightColour}
 					index={index}
 					isCuratedContent={isCuratedContent}
@@ -688,6 +720,9 @@ export const Carousel = ({
 										: undefined
 								}
 								branding={branding}
+								showMainVideo={trail.showMainVideo}
+								mediaDuration={12}
+								verticalDividerColour={verticalDividerColour}
 							/>
 						);
 					})}

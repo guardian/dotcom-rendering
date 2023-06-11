@@ -347,7 +347,7 @@ export const LabsSection = ({
 	badge,
 	children,
 }: Props) => {
-	const overrides = decideContainerOverrides('Branded');
+	const overrides = decideContainerOverrides('BrandedPalette');
 
 	return (
 		<Section
@@ -399,7 +399,7 @@ export const LabsSection = ({
 								collectionId={collectionId}
 								pageId={pageId}
 								ajaxUrl={ajaxUrl}
-								containerPalette={'Branded'}
+								containerPalette={'BrandedPalette'}
 								showAge={false}
 							/>
 						</Island>
