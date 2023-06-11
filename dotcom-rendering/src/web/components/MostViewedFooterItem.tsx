@@ -14,7 +14,11 @@ import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
 import { generateSources } from './Picture';
 
-const gridItem = (position: number, isWithImage: boolean, hasPageSkin: boolean) => {
+const gridItem = (
+	position: number,
+	isWithImage: boolean,
+	hasPageSkin: boolean,
+) => {
 	const borderTop = hasPageSkin
 		? css`
 				border-top: 1px solid ${border.secondary};
