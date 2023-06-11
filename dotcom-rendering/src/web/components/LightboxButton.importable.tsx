@@ -320,7 +320,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				toggleInfo();
 				break;
 			case 'KeyQ':
-				void close();
+				close();
 				break;
 			case 'ArrowUp':
 				showInfo();
@@ -329,7 +329,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				hideInfo();
 				break;
 			case 'Escape':
-				void close();
+				close();
 				break;
 		}
 	}
@@ -362,7 +362,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		window.addEventListener('keydown', handleKeydown);
 	}
 
-	async function close(): Promise<void> {
+	async function onClose(): Promise<void> {
 		log('dotcom', '💡 Closing lightbox.');
 		// Re-enable scrolling
 		document.documentElement.classList.remove('lightbox-open');
@@ -375,16 +375,30 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		(previouslyFocused as HTMLButtonElement).focus();
 		// Hide lightbox
 		lightbox.setAttribute('hidden', 'true');
-		// When the lightbox is closed, remove any img hash has from the url
-		if (window.location.hash.startsWith('#img-')) {
-			history.replaceState(
-				{},
-				'',
-				window.location.pathname + window.location.search,
-			);
-		}
 		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
+	}
+
+	/**
+	 * Close the lightbox
+	 *
+	 * How does navigating back close the lightbox?
+	 * --------------------------------------------
+	 * The history back call being made here triggers a popstate event and it is inside the listener
+	 * for this event that the actual calls are made to remove the lightbox from the dom and tidy
+	 * up.
+	 *
+	 * Why are we use History push state as the source of truth?
+	 * ---------------------------------------------------------
+	 * Like this, browser based navigation actions will also close and hide the lightbox without
+	 * the need for complex imperative logic
+	 *
+	 * Frontend does [a similar thing](https://github.com/guardian/frontend/blob/main/static/src/javascripts/projects/common/modules/gallery/lightbox.js#L387)
+	 *
+	 */
+	function close(): void {
+		// By navigating back the lightbox is closed
+		history.back();
 	}
 
 	function showInfo(): void {
@@ -462,7 +476,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		),
 	);
 
-	closeButton?.addEventListener('click', close);
+	closeButton?.addEventListener('click', () => {
+		close();
+	});
 	previousButton?.addEventListener('click', goBack);
 	nextButton?.addEventListener('click', goForward);
 	infoButton?.addEventListener('click', toggleInfo);
@@ -493,7 +509,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				if (!lightbox.hasAttribute('hidden')) {
 					// If lightbox is still showing then the escape key was probably pressed
 					// which closes fullscreen mode but not the lightbox, so let's close it
-					void close();
+					close();
 				}
 			}
 		});
@@ -506,19 +522,18 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * If this happens, and if the url has no img- hash, we close the lightbox.
 	 * This means you can open the lightbox, navigate back, and the lightbox will
 	 * be closed.
+	 *
+	 * LightboxHash contains the other side of this logic where we are checking
+	 * for when a user navigates *to* a url that contains an img hash and we want
+	 * to open the lightbox
+	 *
+	 * @see {@link ../src/web/components/LightboxHash.importable.tsx}
 	 */
 	window.addEventListener('popstate', () => {
 		const hash = window.location.hash;
 		if (!hash.startsWith('#img-')) {
 			// There's no img hash so close the lightbox
-			void close();
-		} else {
-			// The reader navigated to a url that does contain an img hash. If
-			// the lightbox isn't already open, open it at that hash position.
-			if (!lightbox.hasAttribute('open')) {
-				const position = hash.substring(5);
-				void open(parseInt(position));
-			}
+			void onClose();
 		}
 	});
 
