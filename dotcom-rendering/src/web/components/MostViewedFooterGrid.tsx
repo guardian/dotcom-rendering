@@ -34,6 +34,7 @@ const tabsContainerBorder = css`
 
 const tabsContainerBorderPageSkin = css`
 	border-top: ${thinGreySolid};
+	border-bottom: 0;
 `;
 
 const listTab = css`
