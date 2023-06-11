@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import type { DCRContainerPalette } from '../../../../types/front';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 
@@ -60,11 +61,16 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
+	containerPalette?: DCRContainerPalette,
 	verticalDividerColour?: string,
 ) =>
 	offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(paddingSize, verticalDividerColour)
-		: verticalDivider(verticalDividerColour);
+		? verticalDividerWithBottomOffset(
+				paddingSize,
+				containerPalette,
+				verticalDividerColour,
+		  )
+		: verticalDivider(containerPalette, verticalDividerColour);
 
 type Props = {
 	children: React.ReactNode;
@@ -84,6 +90,7 @@ type Props = {
 	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
 
+	containerPalette?: DCRContainerPalette;
 	verticalDividerColour?: string;
 };
 
@@ -96,6 +103,7 @@ export const LI = ({
 	padSidesOnMobile = false,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
+	containerPalette,
 	verticalDividerColour,
 }: Props) => {
 	// Decide sizing
@@ -110,6 +118,7 @@ export const LI = ({
 					decideDivider(
 						offsetBottomPaddingOnDivider,
 						GAP_SIZE,
+						containerPalette,
 						verticalDividerColour,
 					),
 				padSides && sidePaddingStyles(padSidesOnMobile),

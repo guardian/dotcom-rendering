@@ -267,7 +267,6 @@ export const Card = ({
 	trailText,
 	avatarUrl,
 	showClock,
-	mediaType,
 	mediaDuration,
 	showMainVideo,
 	kickerText,
