@@ -670,7 +670,7 @@ export const LightboxButton = ({
 						visuallyHidden,
 				]}
 			>
-				<SvgArrowExpand />
+				<SvgArrowExpand isAnnouncedByScreenReader={false} />
 				<span
 					css={css`
 						${visuallyHidden}

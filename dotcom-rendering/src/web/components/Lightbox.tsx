@@ -528,7 +528,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							className="close"
 							title="Close [ESC or Q]"
 						>
-							<SvgCross />
+							<SvgCross isAnnouncedByScreenReader={false} />
 							<span
 								css={css`
 									${visuallyHidden}
@@ -546,7 +546,9 @@ export const Lightbox = ({ format, images }: Props) => {
 							className="previous"
 							title="Previous image [←]"
 						>
-							<SvgArrowLeftStraight />
+							<SvgArrowLeftStraight
+								isAnnouncedByScreenReader={false}
+							/>
 							<span
 								css={css`
 									${visuallyHidden}
@@ -561,7 +563,9 @@ export const Lightbox = ({ format, images }: Props) => {
 							className="next"
 							title="Next image [→]"
 						>
-							<SvgArrowRightStraight />
+							<SvgArrowRightStraight
+								isAnnouncedByScreenReader={false}
+							/>
 							<span
 								css={css`
 									${visuallyHidden}
