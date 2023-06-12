@@ -23,7 +23,7 @@ const measure = (name: string, task: () => Promise<void>): void => {
 
 export const startup = (name: string, task: () => Promise<void>): void => {
 	const measureMe = () => {
-		measure(name, task.bind(null));
+		measure(name, task);
 	};
 	if (window.guardian.mustardCut || window.guardian.polyfilled) {
 		measureMe();
