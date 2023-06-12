@@ -95,6 +95,18 @@ export const isAmpSupported = ({
 		return false;
 	}
 
+	// <amp-youtube> does not support rendering Playlists, only normal videos.
+	if (
+		elements.find(
+			(element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.VideoYoutubeBlockElement' &&
+				(element.originalUrl || element.url).includes('/playlist'),
+		)
+	) {
+		return false;
+	}
+
 	return elements.every((element) => {
 		if ((element as { isMandatory?: boolean }).isMandatory) {
 			return AMP_SUPPORTED_ELEMENTS.includes(element._type);
