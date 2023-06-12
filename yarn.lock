@@ -3485,10 +3485,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-4.0.0.tgz#50c1fc076437e594b367f6e8d9469a3d9b97a78e"
   integrity sha512-l6Ot/anisLKyoLZOp8koW7Ia5JFOtmZkB0sfgdWajv5+N0w0UScUVoImEdPlFstM1anSd3FvV8D3UgYkRzAang==
 
-"@guardian/atoms-rendering@29.1.2":
-  version "29.1.2"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-29.1.2.tgz#206dae51326c587f3e379c5fcc8b75041cd9c21a"
-  integrity sha512-un0qqb47QXOqOPG7WSGHkni3I2VC4+39aragpRD4dexoMdP04NwdQqNAFyUb9iU7C3VZOmKDI+pWbjLPLLWshA==
+"@guardian/atoms-rendering@31.0.0":
+  version "31.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-31.0.0.tgz#31e0f727b574e3385ef6688767a507ea18c3a9b6"
+  integrity sha512-dWhTI/djARS0qhtvMmpa91Rcyz/O82KHFWNCXsQLOg74Na96p+ibl6mDUOW5M/xBiL5TbF5Ac/ZbWdspWsiwWA==
   dependencies:
     is-mobile "3.1.1"
 
