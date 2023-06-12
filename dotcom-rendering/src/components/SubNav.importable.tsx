@@ -145,9 +145,6 @@ const listItemStyles = (palette: Palette) => css`
 	}
 `;
 
-const trimLeadingSlash = (url: string): string =>
-	url.startsWith('/') ? url.slice(1) : url;
-
 export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -221,7 +218,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 							data-link-name={nestedOphanComponents(
 								'nav2',
 								'subnav',
-								trimLeadingSlash(link.url),
+								link.longTitle,
 							)}
 						>
 							{link.title === currentNavLink ? (

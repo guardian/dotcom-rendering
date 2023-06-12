@@ -125,7 +125,7 @@ export const VeggieBurgerMenu = ({ display }: Props) => {
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
 			data-link-name={nestedOphanComponents(
-				'nav2',
+				'nav3',
 				'veggie-burger',
 				'show',
 			)}

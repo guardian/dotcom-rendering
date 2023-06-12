@@ -209,7 +209,7 @@ export const Nav = ({
 					display={format.display}
 					pillars={nav.pillars}
 					pillar={format.theme}
-					dataLinkName="nav2"
+					dataLinkName="nav3"
 					isTopNav={true}
 				/>
 				<ExpandedMenu
