@@ -179,29 +179,27 @@ const containerStyles = css`
 	}
 `;
 
-const sectionHeadline = (borderColour: string) => {
-	return css`
-		grid-row: headline;
-		grid-column: title;
+const sectionHeadline = (borderColour: string) => css`
+	grid-row: headline;
+	grid-column: title;
 
-		display: flex;
-		flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-		${from.leftCol} {
-			position: relative;
-			::after {
-				content: '';
-				display: block;
-				width: 1px;
-				top: 0;
-				height: 1.875rem;
-				right: -10px;
-				position: absolute;
-				background-color: ${borderColour};
-			}
+	${from.leftCol} {
+		position: relative;
+		::after {
+			content: '';
+			display: block;
+			width: 1px;
+			top: 0;
+			height: 1.875rem;
+			right: -10px;
+			position: absolute;
+			background-color: ${borderColour};
 		}
-	`;
-};
+	}
+`;
 
 const paddings = css`
 	padding-top: ${space[2]}px;
