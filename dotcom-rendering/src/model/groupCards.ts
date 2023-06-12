@@ -1,3 +1,4 @@
+import type { EditionId } from '../lib/edition';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -5,7 +6,6 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { enhanceCards } from './enhanceCards';
-import { EditionId } from '../web/lib/edition';
 
 /**
  * Groups cards based on their group specified in fronts tool

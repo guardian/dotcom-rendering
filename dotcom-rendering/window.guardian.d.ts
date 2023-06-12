@@ -6,10 +6,10 @@ import type {
 	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { OphanRecordFunction } from './src/client/ophan/ophan';
+import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
+import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { WindowGuardianConfig } from './src/model/window-guardian';
-import type { OphanRecordFunction } from './src/web/client/ophan/ophan';
-import type { DailyArticleHistory } from './src/web/lib/dailyArticleCount';
-import type { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment

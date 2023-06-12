@@ -12,7 +12,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Environment Variables](#environment-variables)
   - [Detailed Setup](#detailed-setup)
   - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
   - [UI Design System](#ui-design-system)
   - [Concepts](#concepts)
   - [Visual Debugging](#visual-debugging)
@@ -95,10 +94,6 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
 | <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
-
-### Architecture Diagram
-
-You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
 ### UI Design System
 

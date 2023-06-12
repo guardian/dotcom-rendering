@@ -1,5 +1,5 @@
+import type { EditionId } from '../lib/edition';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
-import type { EditionId } from '../web/lib/edition';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
@@ -25,6 +25,7 @@ export interface WindowGuardianConfig {
 		isPaidContent?: boolean;
 		isDev?: boolean;
 		hasInlineMerchandise?: boolean;
+		section?: string;
 	};
 	libs: {
 		googletag: string;
@@ -61,6 +62,7 @@ export const makeWindowGuardian = ({
 	brazeApiKey,
 	GAData,
 	hasInlineMerchandise,
+	section,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -82,6 +84,7 @@ export const makeWindowGuardian = ({
 	brazeApiKey?: string;
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
+	section?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -133,6 +136,7 @@ export const makeWindowGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				hasInlineMerchandise,
+				section,
 			}),
 			libs: {
 				googletag: googletagUrl,
