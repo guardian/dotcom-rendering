@@ -18,8 +18,8 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
-import type { EnhancedImageForLightbox } from '../../types/content';
 import { getZIndex } from '../lib/getZIndex';
+import type { EnhancedImageForLightbox } from '../types/content';
 import { Caption } from './Caption';
 import { getImageDimensions, getLargest, getMaster } from './ImageComponent';
 import { Picture } from './Picture';

@@ -1,5 +1,7 @@
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { addImageIDs } from '../model/addImageIDs';
+import { buildLightboxImages } from '../model/buildLightboxImages';
 import { enhanceBlocks } from '../model/enhanceBlocks';
 import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../model/enhanceStandfirst';
@@ -30,7 +32,10 @@ const enhanceBadge = (badge?: FEArticleBadgeType) =>
 		: undefined;
 
 export const enhanceArticleType = (body: unknown): FEArticleType => {
-	const data = validateAsArticleType(body);
+	const validated = validateAsArticleType(body);
+	// addImageIDs needs to take account of both main media elements
+	// and block elements, so it needs to be executed here
+	const data = addImageIDs(validated);
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,
@@ -46,6 +51,11 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 		tableOfContents: data.showTableOfContents
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
+		imagesForLightbox: buildLightboxImages(
+			data.format,
+			enhancedBlocks,
+			data.mainMediaElements,
+		),
 		badge: enhanceBadge(data.badge),
 	};
 };

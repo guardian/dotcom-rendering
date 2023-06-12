@@ -1,5 +1,5 @@
+import { getLargest, getMaster } from '../components/ImageComponent';
 import type { EnhancedImageForLightbox, FEElement } from '../types/content';
-import { getLargest, getMaster } from '../web/components/ImageComponent';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater

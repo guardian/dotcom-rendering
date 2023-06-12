@@ -6,7 +6,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { useEffect } from 'react';
-import type { ImageBlockElement } from '../../types/content';
+import type { ImageBlockElement } from '../types/content';
 import { Lightbox } from './Lightbox';
 
 const testImage: ImageBlockElement = {

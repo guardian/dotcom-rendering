@@ -10,7 +10,7 @@ import { SvgArrowExpand } from '@guardian/source-react-components';
 import libDebounce from 'lodash.debounce';
 import React, { useEffect } from 'react';
 import screenfull from 'screenfull';
-import type { RoleType } from '../../types/content';
+import type { RoleType } from '../types/content';
 
 type Props = {
 	elementId: string;
