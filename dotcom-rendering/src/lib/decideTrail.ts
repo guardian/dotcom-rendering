@@ -8,6 +8,6 @@ export const decideTrail = (trail: FETrailType, index = 0): TrailType => {
 	return {
 		...trail,
 		format,
-		dataLinkName: getDataLinkNameCard(format, '0', index + 1),
+		dataLinkName: getDataLinkNameCard(format, '0', index),
 	};
 };
