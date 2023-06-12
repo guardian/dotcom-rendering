@@ -4,6 +4,7 @@ import {
 	palette,
 	space,
 } from '@guardian/source-foundations';
+import { Button } from '@guardian/source-react-components';
 import type { GroupedNewsletters } from '../types/newslettersPage';
 import { NewsletterDetail } from './NewsletterDetail';
 import { Section } from './Section';
@@ -47,6 +48,15 @@ export const GroupedNewslettersList = ({
 									/>
 									<h3>{newsletter.name}</h3>
 									<p>{newsletter.description}</p>
+									<Button
+										data-newsletter-id={
+											newsletter.identityName
+										}
+										data-role="GroupedNewslettersList-sign-up-button"
+										size="small"
+									>
+										sign-up
+									</Button>
 								</div>
 							);
 						})}
