@@ -20,6 +20,7 @@ import {
 } from '@guardian/source-react-components';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { NavType } from '../../../model/extract-nav';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
@@ -265,7 +266,7 @@ export const Columns = ({
 						cssOverrides={searchInput}
 						name="q" // query param sent to google
 						placeholder="Search"
-						data-link-name="nav2 : search"
+						data-link-name={nestedOphanComponents('nav2', 'search')}
 						className="selectableMenuItem"
 						tabIndex={-1}
 					/>
@@ -287,7 +288,11 @@ export const Columns = ({
 						}
 						aria-label="Search with Google"
 						cssOverrides={searchSubmit}
-						data-link-name="nav2 : search : submit"
+						data-link-name={nestedOphanComponents(
+							'nav2',
+							'search',
+							'submit',
+						)}
 						type="submit"
 						tabIndex={-1}
 					></Button>
@@ -337,7 +342,11 @@ export const Columns = ({
 								href={brandExtension.url}
 								key={brandExtension.title}
 								role="menuitem"
-								data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+								data-link-name={nestedOphanComponents(
+									'nav2',
+									'brand extension',
+									brandExtension.longTitle,
+								)}
 								tabIndex={-1}
 							>
 								{brandExtension.longTitle}

@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { Palette } from '../types/palette';
 import { navInputCheckboxId } from './Nav/config';
@@ -277,7 +278,11 @@ export const Pillars = ({
 						]}
 						id={isTopNav && i === 0 ? 'navigation' : undefined}
 						href={p.url}
-						data-link-name={`${dataLinkName} : primary : ${p.title}`}
+						data-link-name={nestedOphanComponents(
+							dataLinkName,
+							'primary',
+							p.title,
+						)}
 					>
 						{p.title}
 					</a>

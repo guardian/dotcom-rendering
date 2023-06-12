@@ -7,6 +7,7 @@ import {
 } from '@guardian/source-react-components';
 import { shouldHideSupportMessaging } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { Hide } from './Hide';
 
 type InteractiveSupportButtonProps = {
@@ -41,7 +42,10 @@ export const InteractiveSupportButton = ({
 							size="small"
 							iconSide="right"
 							icon={<SvgArrowRightStraight />}
-							data-link-name="nav2 : support-cta"
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'support-cta',
+							)}
 							data-edition={editionId}
 							href={subscribeUrl}
 						>

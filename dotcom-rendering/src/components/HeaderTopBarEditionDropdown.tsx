@@ -3,6 +3,7 @@ import { brand } from '@guardian/source-foundations';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId, getEditions } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { EditionLinkType } from '../model/extract-nav';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
@@ -34,7 +35,11 @@ export const HeaderTopBarEditionDropdown = ({
 		id: edition.editionId,
 		url: edition.url,
 		title: edition.longTitle,
-		dataLinkName: `nav3 : topbar : edition-picker: ${edition.editionId}`,
+		dataLinkName: nestedOphanComponents(
+			'nav3',
+			'topbar',
+			`edition-picker: ${edition.editionId}`,
+		),
 		isActive: editionId === edition.editionId,
 	});
 

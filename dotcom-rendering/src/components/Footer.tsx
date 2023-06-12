@@ -18,6 +18,7 @@ import {
 } from '@guardian/source-react-components';
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
@@ -347,9 +348,10 @@ export const Footer = ({
 				<LinkButton
 					size="small"
 					href={decideSignupLink(editionId)}
-					data-link-name={`footer : ${decideSignupNewsletterName(
-						editionId,
-					)}`}
+					data-link-name={nestedOphanComponents(
+						'footer',
+						decideSignupNewsletterName(editionId),
+					)}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"

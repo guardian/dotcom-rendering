@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import SearchIcon from '../static/icons/search.svg';
@@ -122,7 +123,7 @@ export const HeaderTopBarSearchCapi = () => {
 					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 					type="button"
 					css={searchLinkStyles}
-					data-link-name="nav3 : search"
+					data-link-name={nestedOphanComponents('nav3', 'search')}
 					onClick={(event) => {
 						event.preventDefault();
 
