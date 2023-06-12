@@ -29,8 +29,6 @@ type Props = {
 	isMatch?: boolean;
 };
 
-const curly = (x: any) => x;
-
 const topPadding = css`
 	${from.leftCol} {
 		padding-top: ${space[1]}px;
@@ -375,7 +373,7 @@ export const ArticleHeadline = ({
 										reducedBottomPadding,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
@@ -409,7 +407,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
@@ -453,7 +451,7 @@ export const ArticleHeadline = ({
 										displayBlock,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</span>
 							</h1>
 						</WithAgeWarning>
@@ -488,7 +486,7 @@ export const ArticleHeadline = ({
 								`,
 							]}
 						>
-							{curly(headlineString)}
+							{headlineString}
 						</h1>
 					</WithAgeWarning>
 				</div>
@@ -530,7 +528,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
@@ -564,7 +562,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
@@ -605,7 +603,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
@@ -653,7 +651,7 @@ export const ArticleHeadline = ({
 											displayInline,
 										]}
 									>
-										{curly(headlineString)}
+										{headlineString}
 									</span>
 								</h1>
 							</WithAgeWarning>
@@ -694,7 +692,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
@@ -737,7 +735,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
@@ -778,7 +776,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
@@ -811,7 +809,7 @@ export const ArticleHeadline = ({
 										`,
 									]}
 								>
-									{curly(headlineString)}
+									{headlineString}
 								</h1>
 							</WithAgeWarning>
 						</div>
