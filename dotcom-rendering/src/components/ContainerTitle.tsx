@@ -23,9 +23,9 @@ type Props = {
 	editionId?: EditionId;
 };
 
-const linkStyles = css`
+const linkStyles = (fontColour?: string) => css`
 	text-decoration: none;
-	color: ${neutral[7]};
+	color: ${fontColour ?? neutral[7]};
 
 	:hover {
 		text-decoration: underline;
@@ -94,7 +94,7 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a css={[linkStyles, bottomMargin]} href={url}>
+				<a css={[linkStyles(fontColour), bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
