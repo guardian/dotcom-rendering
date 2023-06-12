@@ -179,27 +179,29 @@ const containerStyles = css`
 	}
 `;
 
-const sectionHeadline = css`
-	grid-row: headline;
-	grid-column: title;
+const sectionHeadline = (borderColour: string) => {
+	return css`
+		grid-row: headline;
+		grid-column: title;
 
-	display: flex;
-	flex-direction: column;
+		display: flex;
+		flex-direction: column;
 
-	${from.leftCol} {
-		position: relative;
-		::after {
-			content: '';
-			display: block;
-			width: 1px;
-			top: 0;
-			height: 1.875rem;
-			right: -10px;
-			position: absolute;
-			background-color: ${neutral[86]};
+		${from.leftCol} {
+			position: relative;
+			::after {
+				content: '';
+				display: block;
+				width: 1px;
+				top: 0;
+				height: 1.875rem;
+				right: -10px;
+				position: absolute;
+				background-color: ${borderColour};
+			}
 		}
-	}
-`;
+	`;
+};
 
 const paddings = css`
 	padding-top: ${space[2]}px;
@@ -253,15 +255,17 @@ const sectionTreats = css`
 	}
 `;
 
-/** element which contains border and inner background colour, if set */
-const decoration = css`
-	grid-row: 1 / -1;
-	grid-column: decoration;
+const decoration = (borderColour: string) => {
+	/** element which contains border and inner background colour, if set */
+	return css`
+		grid-row: 1 / -1;
+		grid-column: decoration;
 
-	border-width: 1px;
-	border-color: ${neutral[86]};
-	border-style: none;
-`;
+		border-width: 1px;
+		border-color: ${borderColour};
+		border-style: none;
+	`;
+};
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -420,9 +424,21 @@ export const FrontSection = ({
 				`,
 			]}
 		>
-			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+			<div
+				css={[
+					decoration(overrides?.border?.container ?? neutral[86]),
+					sideBorders,
+					showTopBorder && topBorder,
+				]}
+			/>
 
-			<div css={[sectionHeadline]}>
+			<div
+				css={[
+					sectionHeadline(
+						overrides?.border?.container ?? neutral[86],
+					),
+				]}
+			>
 				<Hide until="leftCol">
 					{badge && (
 						<Badge imageSrc={badge.imageSrc} href={badge.href} />
