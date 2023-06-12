@@ -442,7 +442,7 @@
             "type": "string"
         },
         "badge": {
-            "$ref": "#/definitions/BadgeType"
+            "$ref": "#/definitions/FEArticleBadgeType"
         },
         "nav": {
             "$ref": "#/definitions/FENavType"
@@ -4595,7 +4595,7 @@
                 "value"
             ]
         },
-        "BadgeType": {
+        "FEArticleBadgeType": {
             "type": "object",
             "properties": {
                 "seriesTag": {
@@ -4603,11 +4603,29 @@
                 },
                 "imageUrl": {
                     "type": "string"
+                },
+                "enhanced": {
+                    "$ref": "#/definitions/DCRBadgeType"
                 }
             },
             "required": [
                 "imageUrl",
                 "seriesTag"
+            ]
+        },
+        "DCRBadgeType": {
+            "type": "object",
+            "properties": {
+                "imageSrc": {
+                    "type": "string"
+                },
+                "href": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "href",
+                "imageSrc"
             ]
         },
         "FENavType": {
