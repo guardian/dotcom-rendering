@@ -509,7 +509,7 @@ export const FrontSection = ({
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border?.container}
-						textColour={overrides?.text?.container ?? neutral[7]}
+						fontColour={overrides?.text?.container ?? neutral[7]}
 					/>
 				</div>
 			)}

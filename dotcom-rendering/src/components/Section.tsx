@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
@@ -305,8 +305,8 @@ export const Section = ({
 								borderColour={
 									borderColour ?? overrides?.border?.container
 								}
-								textColour={
-									overrides?.text?.container ?? neutral[7]
+								fontColour={
+									fontColour ?? overrides?.text?.container
 								}
 							/>
 						)}

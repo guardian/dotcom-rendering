@@ -4,13 +4,14 @@ import {
 	from,
 	headline,
 	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { Fragment } from 'react';
-import type { TreatType } from '../types/front';
 import { decidePalette } from '../lib/decidePalette';
+import type { TreatType } from '../types/front';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
 
@@ -18,12 +19,12 @@ const TextTreat = ({
 	text,
 	linkTo,
 	borderColour,
-	textColour,
+	fontColour,
 }: {
 	text: string;
 	linkTo: string;
 	borderColour?: string;
-	textColour?: string;
+	fontColour?: string;
 }) => (
 	<li
 		css={css`
@@ -40,7 +41,7 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans.xxsmall()}
 				text-decoration: none;
-				color: ${textColour};
+				color: ${fontColour ?? sourcePalette.neutral[7]};
 			`}
 			href={linkTo}
 		>
@@ -165,11 +166,11 @@ const ImageTreat = ({
 export const Treats = ({
 	treats,
 	borderColour,
-	textColour,
+	fontColour,
 }: {
 	treats: TreatType[];
 	borderColour?: string;
-	textColour?: string;
+	fontColour?: string;
 }) => {
 	if (treats.length === 0) return null;
 	return (
@@ -198,7 +199,7 @@ export const Treats = ({
 									text={text}
 									linkTo={linkTo}
 									borderColour={borderColour}
-									textColour={textColour}
+									fontColour={fontColour}
 								/>
 							))}
 						</Fragment>
@@ -234,7 +235,7 @@ export const Treats = ({
 								text={text}
 								linkTo={linkTo}
 								borderColour={borderColour}
-								textColour={textColour}
+								fontColour={fontColour}
 							/>
 						))}
 					</>
