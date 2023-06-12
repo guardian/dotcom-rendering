@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../../types/front';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
+import type { DCRContainerPalette } from '../../../types/front';
 
 /**
  * This value needs to match the one set
@@ -20,10 +20,13 @@ const liStyles = css`
 
 const sidePaddingStyles = (padSidesOnMobile: boolean) => css`
 	/* Set spacing on the li element */
-	${padSidesOnMobile && until.tablet} {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
+	${padSidesOnMobile &&
+	css`
+		${until.tablet} {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+	`}
 
 	${from.tablet} {
 		padding-left: 10px;
