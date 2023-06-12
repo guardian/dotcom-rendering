@@ -18,10 +18,12 @@ const TextTreat = ({
 	text,
 	linkTo,
 	borderColour,
+	textColour,
 }: {
 	text: string;
 	linkTo: string;
 	borderColour?: string;
+	textColour?: string;
 }) => (
 	<li
 		css={css`
@@ -38,6 +40,7 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans.xxsmall()}
 				text-decoration: none;
+				color: ${textColour};
 			`}
 			href={linkTo}
 		>
@@ -162,9 +165,11 @@ const ImageTreat = ({
 export const Treats = ({
 	treats,
 	borderColour,
+	textColour,
 }: {
 	treats: TreatType[];
 	borderColour?: string;
+	textColour?: string;
 }) => {
 	if (treats.length === 0) return null;
 	return (
@@ -193,6 +198,7 @@ export const Treats = ({
 									text={text}
 									linkTo={linkTo}
 									borderColour={borderColour}
+									textColour={textColour}
 								/>
 							))}
 						</Fragment>
@@ -228,6 +234,7 @@ export const Treats = ({
 								text={text}
 								linkTo={linkTo}
 								borderColour={borderColour}
+								textColour={textColour}
 							/>
 						))}
 					</>
