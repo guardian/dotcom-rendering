@@ -23,13 +23,8 @@ type Props = {
 	editionId?: EditionId;
 };
 
-const linkStyles = (fontColour?: string) => css`
+const linkStyles = css`
 	text-decoration: none;
-	color: ${fontColour ?? neutral[7]};
-
-	:hover {
-		text-decoration: underline;
-	}
 `;
 
 const headerStyles = (fontColour?: string) => css`
@@ -38,6 +33,10 @@ const headerStyles = (fontColour?: string) => css`
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+
+	:hover {
+		text-decoration: underline;
+	}
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
@@ -94,7 +93,7 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a css={[linkStyles(fontColour), bottomMargin]} href={url}>
+				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
