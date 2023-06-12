@@ -7,9 +7,9 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
+import { decidePalette } from '../lib/decidePalette';
 import type { SubNavType } from '../model/extract-nav';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;
@@ -232,6 +232,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			</ul>
 			{showMore && (
 				<button
+					type="button"
 					onClick={() => setIsExpanded(!isExpanded)}
 					css={showMoreStyle}
 					data-link-name="nav2 : subnav-toggle"

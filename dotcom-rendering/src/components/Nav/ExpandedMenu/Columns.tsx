@@ -18,9 +18,9 @@ import {
 	SvgMagnifyingGlass,
 	TextInput,
 } from '@guardian/source-react-components';
-import type { NavType } from '../../../model/extract-nav';
 import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
+import type { NavType } from '../../../model/extract-nav';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';

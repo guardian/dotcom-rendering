@@ -8,9 +8,9 @@ import {
 	headline,
 	until,
 } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars

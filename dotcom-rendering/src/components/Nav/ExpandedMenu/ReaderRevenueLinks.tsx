@@ -7,9 +7,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { LinkType } from '../../../model/extract-nav';
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
 import type { EditionId } from '../../../lib/edition';
+import type { LinkType } from '../../../model/extract-nav';
 
 const hideDesktop = css`
 	${from.desktop} {

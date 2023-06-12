@@ -1,9 +1,9 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
+import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
 import type { NavType } from '../../model/extract-nav';
-import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
 import { Island } from '../Island';

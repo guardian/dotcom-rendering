@@ -16,9 +16,9 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import type { PillarLinkType } from '../model/extract-nav';
-import type { EditionId } from '../lib/edition';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';

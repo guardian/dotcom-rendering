@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionLinkType } from '../model/extract-nav';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId, getEditions } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
+import type { EditionLinkType } from '../model/extract-nav';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 import { dropDownOverrides } from './HeaderTopBarMyAccount';
