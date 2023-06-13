@@ -1,9 +1,16 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import {
+	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
+	labs,
 	neutral,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -17,6 +24,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
@@ -153,30 +161,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</Stuck>
 					)}
 
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="header"
-					>
-						<Header
-							editionId={front.editionId}
-							idUrl={front.config.idUrl}
-							mmaUrl={front.config.mmaUrl}
-							discussionApiUrl={front.config.discussionApiUrl}
-							urls={front.nav.readerRevenueLinks.header}
-							remoteHeader={!!front.config.switches.remoteHeader}
-							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							isInEuropeTest={isInEuropeTest}
-							headerTopBarSearchCapiSwitch={
-								!!front.config.switches.headerTopBarSearchCapi
-							}
-						/>
-					</Section>
+					{!isPaidContent && (
+						<Section
+							fullWidth={true}
+							shouldCenter={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							backgroundColour={brandBackground.primary}
+							element="header"
+						>
+							<Header
+								editionId={front.editionId}
+								idUrl={front.config.idUrl}
+								mmaUrl={front.config.mmaUrl}
+								discussionApiUrl={front.config.discussionApiUrl}
+								urls={front.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!front.config.switches.remoteHeader
+								}
+								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+								isInEuropeTest={isInEuropeTest}
+								headerTopBarSearchCapiSwitch={
+									!!front.config.switches
+										.headerTopBarSearchCapi
+								}
+							/>
+						</Section>
+					)}
+
 					<Section
 						fullWidth={true}
 						borderColour={brandLine.primary}
@@ -229,6 +243,18 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								/>
 							</Section>
 						</>
+					)}
+
+					{isPaidContent && (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={labs[400]}
+							borderColour={border.primary}
+							sectionId="labs-header"
+						>
+							<LabsHeader />
+						</Section>
 					)}
 				</>
 			</div>
