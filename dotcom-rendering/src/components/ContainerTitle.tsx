@@ -25,11 +25,6 @@ type Props = {
 
 const linkStyles = css`
 	text-decoration: none;
-	color: ${neutral[7]};
-
-	:hover {
-		text-decoration: underline;
-	}
 `;
 
 const headerStyles = (fontColour?: string) => css`
@@ -38,6 +33,10 @@ const headerStyles = (fontColour?: string) => css`
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+
+	:hover {
+		text-decoration: underline;
+	}
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
