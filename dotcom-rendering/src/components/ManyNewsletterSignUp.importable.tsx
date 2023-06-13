@@ -3,6 +3,7 @@ import { palette, space } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
+	SvgCross,
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
@@ -15,8 +16,14 @@ interface Props {
 	label: string;
 }
 
-const sectionStyle = (hide: boolean) => css`
+const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'unset'};
+
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
 `;
 
 const formFrameStyle = css`
@@ -69,6 +76,20 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 		[newslettersToSignUpFor, status],
 	);
 
+	const removeAll = useCallback(() => {
+		if (status !== FormState.NotSent) {
+			return;
+		}
+		const signUpButtons = [
+			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
+		];
+		signUpButtons.forEach((button) => {
+			button.classList.remove(BUTTON_SELECTED_CLASS);
+		});
+
+		setNewslettersToSignUpFor([]);
+	}, [status]);
+
 	useEffect(() => {
 		const signUpButtons = [
 			...document.querySelectorAll(`[data-role=${BUTTON_ROLE}]`),
@@ -95,54 +116,77 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 	};
 
 	return (
-		<div css={sectionStyle(newslettersToSignUpFor.length === 0)}>
+		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
 				title={`${newslettersToSignUpFor.length} selected`}
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
 			>
-				<div css={formFrameStyle}>
-					{(status === FormState.NotSent ||
-						status === FormState.Loading) && (
-						<div
-							css={css`
-								display: flex;
-								flex-shrink: 0;
-								align-items: flex-end;
-							`}
-						>
-							<span
+				<div
+					css={css`
+						display: flex;
+						justify-content: space-between;
+						align-items: flex-start;
+					`}
+				>
+					<div css={formFrameStyle}>
+						{(status === FormState.NotSent ||
+							status === FormState.Loading) && (
+							<div
 								css={css`
-									margin-right: ${space[2]}px;
+									display: flex;
+									flex-shrink: 0;
+									align-items: flex-end;
 								`}
 							>
-								<TextInput label="email" />
-							</span>
-							<Button
-								icon={
-									status === FormState.Loading ? (
-										<SvgSpinner />
-									) : undefined
-								}
-								disabled={status === FormState.Loading}
-								iconSide="right"
-								onClick={handleSubmitButton}
-								size="small"
-							>
-								{label}
-							</Button>
-						</div>
-					)}
+								<span
+									css={css`
+										margin-right: ${space[2]}px;
+									`}
+								>
+									<TextInput label="email" />
+								</span>
+								<Button
+									icon={
+										status === FormState.Loading ? (
+											<SvgSpinner />
+										) : undefined
+									}
+									disabled={status === FormState.Loading}
+									iconSide="right"
+									onClick={handleSubmitButton}
+									size="small"
+								>
+									{label}
+								</Button>
+							</div>
+						)}
 
-					{status === FormState.Failed && (
-						<InlineError>Sign up failed.</InlineError>
-					)}
+						{status === FormState.Failed && (
+							<InlineError>Sign up failed.</InlineError>
+						)}
+						<div
+							css={css`
+								flex-basis: 400px;
+							`}
+						>
+							<NewsletterPrivacyMessage />
+						</div>
+					</div>
 					<div
 						css={css`
-							flex-basis: 400px;
+							padding: ${space[1]}px;
 						`}
 					>
-						<NewsletterPrivacyMessage />
+						<Button
+							color={palette.neutral[0]}
+							onClick={removeAll}
+							hideLabel={true}
+							priority="tertiary"
+							icon={<SvgCross />}
+						>
+							cancel sign up
+						</Button>
 					</div>
 				</div>
 			</Section>
