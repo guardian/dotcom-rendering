@@ -28,6 +28,7 @@ enum FormState {
 const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'unset'};
 	position: fixed;
+	position: sticky;
 	bottom: 0;
 	left: 0;
 	width: 100%;
