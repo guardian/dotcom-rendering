@@ -14,6 +14,12 @@ const html = await Promise.all(
 	),
 );
 
+/** for things we know will never match */
+const known_errors = new Set([
+	// it only appears in DCR after hydration if signed in
+	'nav3 : topbar : my account',
+]);
+
 const getOphanComponents = (
 	html: string,
 	attribute: OphanAttribute,
@@ -51,18 +57,14 @@ const updateIssue = async (attribute: OphanAttribute) => {
 		const matches = dcr.filter(
 			(element) => element.getAttribute(attribute) === name,
 		);
-		if (matches.some(({ tagName }) => tagName === tag)) {
-			return { name, element, matches, existsOnDcr: 'identical' };
-		} else if (matches.length > 0) {
-			return {
-				name,
-				element,
-				matches,
-				existsOnDcr: 'tag-mismatch',
-			};
-		}
 
-		return { name, element, matches: [], existsOnDcr: 'missing' };
+		const existsOnDcr = matches.some(({ tagName }) => tagName === tag)
+			? 'identical'
+			: matches.length > 0
+			? 'tag-mismatch'
+			: 'missing';
+
+		return { name, element, matches, existsOnDcr };
 	});
 
 	const isIssueType =
@@ -89,7 +91,9 @@ ${
 		? missing
 				.map(
 					({ name, element: { tagName } }) =>
-						`- [ ] **\`${name}\`** &rarr; \`<${tagName}/>\``,
+						`- [${
+							known_errors.has(name) ? 'X' : ' '
+						}] **\`${name}\`** &rarr; \`<${tagName}/>\``,
 				)
 				.join('\n')
 		: 'No missing component in DCR 🎉'
