@@ -1,22 +1,19 @@
 import { octokit } from './github.ts';
 
 const peers = async (cwd: string) => {
-	const process = Deno.run({
+	const process = new Deno.Command('yarn', {
 		cwd,
-		cmd: ['yarn', '--force'],
+		args: ['--force'],
 		stdout: 'null',
 		stderr: 'piped',
 	});
 
-	const [{ code }, rawOutput] = await Promise.all([
-		process.status(),
-		process.stderrOutput(),
-	]);
+	const { code, stderr } = await process.output();
 
 	if (code !== 0) Deno.exit(code);
 
 	const deps = new TextDecoder()
-		.decode(rawOutput)
+		.decode(stderr)
 		.split('\n')
 		// keep only incorrect peer dependencies warnings
 		.filter((line) => line.includes('has incorrect peer dependency'))
