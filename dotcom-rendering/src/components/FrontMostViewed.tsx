@@ -1,6 +1,8 @@
+import type { EditionId } from '../lib/edition';
 import type { DCRFrontCard } from '../types/front';
 import type { TrailTabType, TrailType } from '../types/trails';
 import { Island } from './Island';
+import { localisedTitle } from './Localisation';
 import { MostPopularFooterGrid } from './MostPopularFooterGrid';
 import { MostViewedFooter } from './MostViewedFooter.importable';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
@@ -13,6 +15,7 @@ type Props = {
 	displayName: string;
 	isNetworkFront: boolean;
 	deeplyRead?: TrailType[];
+	editionId?: EditionId;
 };
 
 export const FrontMostViewed = ({
@@ -23,13 +26,14 @@ export const FrontMostViewed = ({
 	displayName,
 	isNetworkFront,
 	deeplyRead,
+	editionId,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
 
 	const tabs: TrailTabType[] = [
 		{
-			heading: sectionName,
+			heading: localisedTitle(sectionName, editionId),
 			trails: trails.slice(0, 10),
 		},
 	];

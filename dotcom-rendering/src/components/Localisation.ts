@@ -10,6 +10,8 @@ export const localisedTitles: LocalisedTitles = {
 	US: {
 		Film: 'Movies',
 		Football: 'Soccer',
+		'in football': 'in soccer',
+		'in film': 'in movies',
 	},
 };
 
