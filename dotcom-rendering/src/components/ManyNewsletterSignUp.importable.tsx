@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { palette, space } from '@guardian/source-foundations';
+import {
+	headlineObjectStyles,
+	palette,
+	space,
+} from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -12,10 +16,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
-
-interface Props {
-	label: string;
-}
 
 enum FormState {
 	NotSent,
@@ -43,7 +43,89 @@ const formFrameStyle = css`
 	justify-content: space-between;
 `;
 
-export const ManyNewsletterSignUp = ({ label }: Props) => {
+interface FormProps {
+	status: FormState;
+	email: string;
+	handleTextInput: ChangeEventHandler<HTMLInputElement>;
+	handleSubmitButton: { (): void };
+}
+const Form = ({
+	status,
+	email,
+	handleTextInput,
+	handleSubmitButton,
+}: FormProps) => {
+	return (
+		<form
+			css={formFrameStyle}
+			onSubmit={(submitEvent) => {
+				submitEvent.preventDefault();
+			}}
+		>
+			{(status === FormState.NotSent || status === FormState.Loading) && (
+				<div
+					css={css`
+						display: flex;
+						flex-shrink: 0;
+						align-items: flex-end;
+					`}
+				>
+					<span
+						css={css`
+							margin-right: ${space[2]}px;
+						`}
+					>
+						<TextInput
+							label="Enter your email"
+							value={email}
+							onChange={handleTextInput}
+						/>
+					</span>
+					<Button
+						icon={
+							status === FormState.Loading ? (
+								<SvgSpinner />
+							) : undefined
+						}
+						disabled={status === FormState.Loading}
+						iconSide="right"
+						onClick={handleSubmitButton}
+						size="small"
+					>
+						Sign up
+					</Button>
+				</div>
+			)}
+
+			{status === FormState.Failed && (
+				<InlineError>Sign up failed.</InlineError>
+			)}
+
+			{status === FormState.Success && (
+				<p
+					css={css`
+						${headlineObjectStyles.xsmall({
+							lineHeight: 'tight',
+							fontWeight: 'bold',
+						})}
+					`}
+				>
+					You are now a subscriber! Thank you for signing up
+				</p>
+			)}
+
+			<aside
+				css={css`
+					flex-basis: 400px;
+				`}
+			>
+				<NewsletterPrivacyMessage />
+			</aside>
+		</form>
+	);
+};
+
+export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
@@ -115,7 +197,9 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 		console.log(email, newslettersToSignUpFor);
 
 		setTimeout(() => {
-			setStatus(FormState.Failed);
+			setStatus(
+				email.includes('@') ? FormState.Success : FormState.Failed,
+			);
 		}, 2000);
 	};
 
@@ -140,54 +224,14 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 						align-items: flex-start;
 					`}
 				>
-					<div css={formFrameStyle}>
-						{(status === FormState.NotSent ||
-							status === FormState.Loading) && (
-							<div
-								css={css`
-									display: flex;
-									flex-shrink: 0;
-									align-items: flex-end;
-								`}
-							>
-								<span
-									css={css`
-										margin-right: ${space[2]}px;
-									`}
-								>
-									<TextInput
-										label="Enter your email"
-										value={email}
-										onChange={handleTextInput}
-									/>
-								</span>
-								<Button
-									icon={
-										status === FormState.Loading ? (
-											<SvgSpinner />
-										) : undefined
-									}
-									disabled={status === FormState.Loading}
-									iconSide="right"
-									onClick={handleSubmitButton}
-									size="small"
-								>
-									{label}
-								</Button>
-							</div>
-						)}
-
-						{status === FormState.Failed && (
-							<InlineError>Sign up failed.</InlineError>
-						)}
-						<aside
-							css={css`
-								flex-basis: 400px;
-							`}
-						>
-							<NewsletterPrivacyMessage />
-						</aside>
-					</div>
+					<Form
+						{...{
+							email,
+							handleSubmitButton,
+							handleTextInput,
+							status,
+						}}
+					/>
 					<div
 						css={css`
 							padding: ${space[1]}px;
