@@ -70,7 +70,7 @@ export const HeaderTopBar = ({
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
 	const isUserSignedIn = useIsSignedIn();
-	console.log('top bar isSignedIn', isUserSignedIn);
+
 	return (
 		<div
 			css={css`
@@ -84,7 +84,7 @@ export const HeaderTopBar = ({
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
-					isSignedIn={true}
+					isSignedIn={isUserSignedIn}
 				/>
 				<SearchJobs />
 
