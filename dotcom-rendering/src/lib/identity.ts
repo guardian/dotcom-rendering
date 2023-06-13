@@ -43,7 +43,5 @@ function getIdentityAuth() {
 }
 
 export async function isSignedInWithOkta(): Promise<boolean> {
-	const isLoggedIn = await getIdentityAuth().isSignedIn();
-
-	return isLoggedIn;
+	return getIdentityAuth().isSignedIn();
 }
