@@ -49,8 +49,8 @@ export const performanceMonitoring = (): Promise<void> => {
 			};
 			logPerformanceInfo('navigation', info);
 			const ttfb = nav.responseStart - nav.startTime;
-			if (ttfb > 2400) {
-				recordPoorDeviceConnectivity('TTFB over 2.4s');
+			if (ttfb > 1200) {
+				recordPoorDeviceConnectivity('TTFB over 1.2s');
 			}
 		}
 
