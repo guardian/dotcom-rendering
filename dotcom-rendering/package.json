@@ -38,7 +38,7 @@
 		"*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,html,md,mdx}": "prettier --write"
 	},
 	"dependencies": {
-		"@aws-sdk/client-cloudwatch": "3.279.0",
+		"@aws-sdk/client-cloudwatch": "3.350.0",
 		"@babel/core": "7.20.12",
 		"@babel/helper-compilation-targets": "7.20.0",
 		"@babel/helper-create-regexp-features-plugin": "7.20.5",
