@@ -1,8 +1,7 @@
 import { Button } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
+import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { Section } from './Section';
-
-const BUTTON_ROLE = 'GroupedNewslettersList-sign-up-button';
 
 interface Props {
 	label: string;
@@ -26,13 +25,13 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 			const index = newslettersToSignUpFor.indexOf(id);
 			if (index === -1) {
 				setNewslettersToSignUpFor([...newslettersToSignUpFor, id]);
-				button.style.backgroundColor = 'red';
+				button.classList.add(BUTTON_SELECTED_CLASS);
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
 					...newslettersToSignUpFor.slice(index + 1),
 				]);
-				button.style.backgroundColor = '';
+				button.classList.remove(BUTTON_SELECTED_CLASS);
 			}
 		},
 		[newslettersToSignUpFor],
