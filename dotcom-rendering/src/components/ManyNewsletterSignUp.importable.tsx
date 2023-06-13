@@ -7,6 +7,7 @@ import {
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
+import type { ChangeEventHandler } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -14,6 +15,13 @@ import { Section } from './Section';
 
 interface Props {
 	label: string;
+}
+
+enum FormState {
+	NotSent,
+	Loading,
+	Success,
+	Failed,
 }
 
 const sectionWrapperStyle = (hide: boolean) => css`
@@ -35,18 +43,12 @@ const formFrameStyle = css`
 	justify-content: space-between;
 `;
 
-enum FormState {
-	NotSent,
-	Loading,
-	Success,
-	Failed,
-}
-
 export const ManyNewsletterSignUp = ({ label }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
 	const [status, setStatus] = useState(FormState.NotSent);
+	const [email, setEmail] = useState('');
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
@@ -110,9 +112,18 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 		}
 		setStatus(FormState.Loading);
 
+		console.log(email, newslettersToSignUpFor);
+
 		setTimeout(() => {
 			setStatus(FormState.Failed);
 		}, 2000);
+	};
+
+	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
+		if (status !== FormState.NotSent) {
+			return;
+		}
+		setEmail(ev.target.value);
 	};
 
 	return (
@@ -144,7 +155,11 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 										margin-right: ${space[2]}px;
 									`}
 								>
-									<TextInput label="email" />
+									<TextInput
+										label="Enter your email"
+										value={email}
+										onChange={handleTextInput}
+									/>
 								</span>
 								<Button
 									icon={
@@ -165,13 +180,13 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 						{status === FormState.Failed && (
 							<InlineError>Sign up failed.</InlineError>
 						)}
-						<div
+						<aside
 							css={css`
 								flex-basis: 400px;
 							`}
 						>
 							<NewsletterPrivacyMessage />
-						</div>
+						</aside>
 					</div>
 					<div
 						css={css`
