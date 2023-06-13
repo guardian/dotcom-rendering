@@ -12,7 +12,6 @@ import {
 import { log, storage } from '@guardian/libs';
 import { initPerf } from '../../client/initPerf';
 import { record } from '../../client/ophan/ophan';
-import { useIsSignedIn } from '../../lib/useIsSignedIn';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
@@ -52,6 +51,7 @@ const maybeWipeUserData = async (
 
 export const buildBrazeMessaging = async (
 	idApiUrl: string,
+	isSignedIn: boolean,
 ): Promise<{
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
@@ -64,8 +64,6 @@ export const buildBrazeMessaging = async (
 			brazeCards: new NullBrazeCards(),
 		};
 	}
-
-	const isSignedIn = useIsSignedIn();
 
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,

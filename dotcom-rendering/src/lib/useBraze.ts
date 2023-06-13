@@ -8,6 +8,7 @@ import {
 } from '@guardian/braze-components/logic';
 import useSWRImmutable from 'swr/immutable';
 import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
+import { useIsSignedIn } from './useIsSignedIn';
 
 /**
  * Returns brazeMessaging as BrazeMessagesInterface and BrazeCardsInterface
@@ -24,8 +25,10 @@ export const useBraze = (
 	brazeMessages: BrazeMessagesInterface | undefined;
 	brazeCards: BrazeCardsInterface | undefined;
 } => {
+	const isSignedIn = useIsSignedIn();
+
 	const { data, error } = useSWRImmutable('braze-message', () =>
-		buildBrazeMessaging(idApiUrl),
+		buildBrazeMessaging(idApiUrl, isSignedIn),
 	);
 
 	if (error) {
