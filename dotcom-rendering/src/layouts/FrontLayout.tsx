@@ -103,16 +103,17 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent },
+		config: { isPaidContent, abTests },
 	} = front;
 
-	const isInEuropeTest =
-		front.config.abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
+
+	const theme = isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News;
 
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme,
 	};
 
 	const palette = decidePalette(format);
