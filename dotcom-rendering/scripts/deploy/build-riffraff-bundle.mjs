@@ -1,11 +1,10 @@
-const { promisify } = require('util');
-const writeFile = promisify(require('fs').writeFile);
-const cpy = require('cpy');
-const execa = require('execa');
-const rimraf = require('rimraf');
-const path = require('path');
-const { warn, log } = require('../env/log');
+import { writeFile } from 'fs/promises';
+import path from 'path';
+import cpy from 'cpy';
+import execa from 'execa';
+import { log, warn } from '../env/log.js';
 
+/** @todo - Fix this "ReferenceError: __dirname is not defined in ES module scope"  */
 const target = path.resolve(__dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
