@@ -4,13 +4,8 @@ import type {
 	FENewslettersPageType,
 	GroupedNewsletters,
 } from '../types/newslettersPage';
-import STATIC_GROUP_DATA from './newsletter-grouping.json';
-
-type StaticGroups = {
-	title: string;
-	subtitle?: string;
-	newsletters: string[];
-}[];
+import type { StaticGroups } from './newsletter-grouping';
+import { groups } from './newsletter-grouping';
 
 const mapStaticGroups = (
 	staticGroups: StaticGroups,
@@ -66,21 +61,14 @@ const reduceToDefaultGrouping = (
 };
 
 const getGroups = (
-	newsletterData: FENewslettersPageType,
+	newsletterPageData: FENewslettersPageType,
 ): GroupedNewsletters => {
-	const { newsletters, editionId } = newsletterData;
+	const { newsletters, editionId } = newsletterPageData;
+	const staticGroup = groups[editionId];
 
-	switch (editionId) {
-		case 'UK':
-			return mapStaticGroups(STATIC_GROUP_DATA.UK, newsletters);
-		case 'US':
-			return mapStaticGroups(STATIC_GROUP_DATA.US, newsletters);
-		case 'AU':
-			return mapStaticGroups(STATIC_GROUP_DATA.AU, newsletters);
-		case 'INT':
-		case 'EUR':
-			return reduceToDefaultGrouping(newsletters);
-	}
+	return staticGroup
+		? mapStaticGroups(staticGroup, newsletters)
+		: reduceToDefaultGrouping(newsletters);
 };
 
 export const enhanceNewslettersPage = (
