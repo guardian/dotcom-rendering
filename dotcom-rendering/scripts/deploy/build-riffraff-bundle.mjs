@@ -1,11 +1,12 @@
 import { writeFile } from 'fs/promises';
 import path from 'path';
+import * as url from 'url';
 import cpy from 'cpy';
 import execa from 'execa';
 import { log, warn } from '../env/log.js';
 
-/** @todo - Fix this "ReferenceError: __dirname is not defined in ES module scope"  */
-const target = path.resolve(__dirname, '../..', 'target');
+const dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const target = path.resolve(dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -46,8 +47,7 @@ const copyStatic = () => {
 		['**/*'],
 		path.resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(__dirname, '../../src/static'),
-			parents: true,
+			cwd: path.resolve(dirname, '../../src/static'),
 			nodir: true,
 		},
 	);
@@ -59,8 +59,7 @@ const copyDist = () => {
 		['**/*.!(html|json)', 'stats/*'],
 		path.resolve(target, 'frontend-static', 'assets'),
 		{
-			cwd: path.resolve(__dirname, '../../dist'),
-			parents: true,
+			cwd: path.resolve(dirname, '../../dist'),
 			nodir: true,
 		},
 	);
@@ -69,8 +68,7 @@ const copyDist = () => {
 const copyScripts = () => {
 	log(' - copying scripts');
 	return cpy(['**/*'], path.resolve(target, 'rendering', 'scripts'), {
-		cwd: path.resolve(__dirname, '../../scripts'),
-		parents: true,
+		cwd: path.resolve(dirname, '../../scripts'),
 		nodir: true,
 	});
 };
@@ -78,8 +76,7 @@ const copyScripts = () => {
 const copyDistServer = () => {
 	log(' - copying server dist');
 	return cpy(['**/*'], path.resolve(target, 'rendering', 'dist'), {
-		cwd: path.resolve(__dirname, '../../dist'),
-		parents: true,
+		cwd: path.resolve(dirname, '../../dist'),
 		nodir: true,
 	});
 };
@@ -91,7 +88,7 @@ const copyMakefile = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff.yaml'], target, { cwd: __dirname });
+	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
 };
 
 const zipBundle = () => {
