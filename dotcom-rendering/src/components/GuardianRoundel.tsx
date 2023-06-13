@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, neutral } from '@guardian/source-foundations';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 const title = 'Back to homepage';
 
@@ -13,7 +14,7 @@ export const GuardianRoundel = () => {
 		>
 			<a
 				href="https://www.theguardian.com"
-				data-link-name="nav2 : logo"
+				data-link-name={nestedOphanComponents('nav2', 'logo')}
 				aria-label={title}
 			>
 				<svg viewBox="0 0 56 56">

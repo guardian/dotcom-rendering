@@ -1,9 +1,9 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
+import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
 import type { NavType } from '../../model/extract-nav';
-import type { EditionId } from '../../lib/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
 import { Island } from '../Island';
@@ -118,15 +118,15 @@ export const Nav = ({
 
                           if(!navInputCheckbox.checked) {
 							firstColLabel.setAttribute('aria-expanded', 'false')
-                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
+                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger : show')
+                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger : show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
                           } else {
 							firstColLabel.setAttribute('aria-expanded', 'true')
-                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
-                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
+                            showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger : hide')
+                            veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger : hide')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','0')
                             })
@@ -209,7 +209,7 @@ export const Nav = ({
 					display={format.display}
 					pillars={nav.pillars}
 					pillar={format.theme}
-					dataLinkName="nav2"
+					dataLinkName="nav3"
 					isTopNav={true}
 				/>
 				<ExpandedMenu

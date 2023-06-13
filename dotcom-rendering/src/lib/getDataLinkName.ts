@@ -36,6 +36,8 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
 	}
 };
 
+export type Group = `${number}` | `${number}+`;
+
 /**
  * Get the `data-link-name` attribute for a card.
  * Used by Ophan for understanding reader journeys. E.g:
@@ -46,7 +48,11 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
  */
 export const getDataLinkNameCard = (
 	format: ArticleFormat,
-	group: string | number,
+	group: Group,
 	index: number,
 ): string =>
-	[getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');
+	[
+		getLinkType(format),
+		`group-${group}`,
+		`card-@${Math.max(index + 1, 1)}`,
+	].join(' | ');

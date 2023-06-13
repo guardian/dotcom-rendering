@@ -8,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../../../lib/getZIndex';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
@@ -123,7 +124,11 @@ export const VeggieBurgerMenu = ({ display }: Props) => {
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
-			data-link-name="nav2 : veggie-burger: show"
+			data-link-name={nestedOphanComponents(
+				'nav3',
+				'veggie-burger',
+				'show',
+			)}
 			tabIndex={0}
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"

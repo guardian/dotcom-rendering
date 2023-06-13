@@ -74,16 +74,14 @@ export const enhanceCollections = (
 				editionId,
 				containerPalette,
 			),
-			curated: enhanceCards(
-				collection.curated,
+			curated: enhanceCards(collection.curated, {
 				editionId,
 				containerPalette,
-			),
-			backfill: enhanceCards(
-				collection.backfill,
+			}),
+			backfill: enhanceCards(collection.backfill, {
 				editionId,
 				containerPalette,
-			),
+			}),
 			treats: enhanceTreats(
 				collection.treats,
 				displayName,

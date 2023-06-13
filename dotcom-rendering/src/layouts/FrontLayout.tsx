@@ -244,7 +244,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (!trail) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const ophanComponentLink = `container-${
+						index + 1
+					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
 					if (collection.collectionType === 'fixed/thrasher') {

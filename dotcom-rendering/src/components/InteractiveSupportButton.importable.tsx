@@ -1,13 +1,14 @@
-import { Hide } from './Hide';
 import { css, ThemeProvider } from '@emotion/react';
-import { buttonThemeReaderRevenue } from '@guardian/source-react-components';
+import { space } from '@guardian/source-foundations';
 import {
+	buttonThemeReaderRevenue,
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { space } from '@guardian/source-foundations';
 import { shouldHideSupportMessaging } from '../lib/contributions';
-import { EditionId } from '../lib/edition';
+import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { Hide } from './Hide';
 
 type InteractiveSupportButtonProps = {
 	editionId: EditionId;
@@ -41,7 +42,10 @@ export const InteractiveSupportButton = ({
 							size="small"
 							iconSide="right"
 							icon={<SvgArrowRightStraight />}
-							data-link-name="nav2 : support-cta"
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'support-cta',
+							)}
 							data-edition={editionId}
 							href={subscribeUrl}
 						>
