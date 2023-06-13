@@ -1,10 +1,7 @@
 import { IdentityAuth } from '@guardian/identity-auth';
 
-console.log('identity loaded');
-
 function getStage() {
 	if (!window.guardian.config.isDev) {
-		console.log('here');
 		return window.guardian.config.stage;
 	} else return 'DEV';
 }
@@ -13,6 +10,7 @@ const determineISSUER = (stage: StageType) =>
 	stage === 'PROD'
 		? 'https://profile.theguardian.com/oauth2/aus3xgj525jYQRowl417'
 		: 'https://profile.code.dev-theguardian.com/oauth2/aus3v9gla95Toj0EE0x7';
+
 const determineCLIENT_ID = (stage: StageType) =>
 	stage === 'PROD' ? '0oa79m1fmgzrtaHc1417' : '0oa53x6k5wGYXOGzm0x7';
 
@@ -33,7 +31,6 @@ let identityAuth: IdentityAuth | undefined = undefined;
 function getIdentityAuth() {
 	if (identityAuth === undefined) {
 		const stage = getStage();
-		console.log('stage', stage);
 
 		identityAuth = new IdentityAuth({
 			issuer: determineISSUER(stage),
@@ -49,5 +46,6 @@ export async function isSignedInWithOkta(): Promise<boolean> {
 	console.info('using okta for sign in check');
 
 	const isLoggedIn = await getIdentityAuth().isSignedIn();
+	console.log('isLoggedIn returns', isLoggedIn);
 	return isLoggedIn;
 }
