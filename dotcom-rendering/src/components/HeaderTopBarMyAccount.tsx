@@ -89,63 +89,57 @@ export const buildIdentityLinks = (
 			id: 'account_overview',
 			url: `${mmaUrl}/`,
 			title: 'Account overview',
-			dataLinkName: nestedOphanComponents(
-				'nav3',
-				'topbar',
-				'account overview',
-			),
+		},
+		{
+			id: 'billing',
+			url: `${mmaUrl}/billing`,
+			title: 'Billing',
 		},
 		{
 			id: 'edit_profile',
 			url: `${mmaUrl}/public-settings`,
 			title: 'Profile',
-			dataLinkName: nestedOphanComponents(
-				'nav3',
-				'topbar',
-				'edit profile',
-			),
 		},
 		{
 			id: 'email_prefs',
 			url: `${mmaUrl}/email-prefs`,
 			title: 'Emails & marketing',
-			dataLinkName: nestedOphanComponents(
-				'nav3',
-				'topbar',
-				'email prefs',
-			),
+		},
+		{
+			id: 'data_privacy',
+			url: `${mmaUrl}/data-privacy`,
+			title: 'Data privacy',
 		},
 		{
 			id: 'settings',
 			url: `${mmaUrl}/account-settings`,
 			title: 'Settings',
-			dataLinkName: nestedOphanComponents('nav3', 'topbar', 'settings'),
 		},
 		{
 			id: 'help',
 			url: `${mmaUrl}/help`,
 			title: 'Help',
-			dataLinkName: nestedOphanComponents('nav3', 'topbar', 'help'),
 		},
 		{
 			id: 'comment_activity',
 			url: `${idUrl}/user/id/${userId}`,
 			title: 'Comments & replies',
-			dataLinkName: nestedOphanComponents(
-				'nav3',
-				'topbar',
-				'comment activity',
-			),
 		},
 		{
 			id: 'sign_out',
 			url: `${idUrl}/signout`,
 			title: 'Sign out',
-			dataLinkName: nestedOphanComponents('nav3', 'topbar', 'sign out'),
 		},
-	];
+	] as const;
 
-	return links;
+	return links.map((link) => ({
+		...link,
+		dataLinkName: nestedOphanComponents(
+			'nav3',
+			'topbar',
+			link.id.replaceAll('_', ' '),
+		),
+	}));
 };
 
 const SignIn = ({ idUrl }: { idUrl: string }) => (
