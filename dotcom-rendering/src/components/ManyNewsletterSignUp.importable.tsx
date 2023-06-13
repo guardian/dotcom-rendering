@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	from,
 	headlineObjectStyles,
 	palette,
 	space,
@@ -26,7 +27,6 @@ enum FormState {
 
 const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'unset'};
-
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -38,9 +38,44 @@ const formFrameStyle = css`
 	border: ${palette.neutral[0]} 3px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
+
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: column;
+
+	${from.desktop} {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+`;
+
+const formFieldsStyle = css`
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	padding-bottom: ${space[1]}px;
+
+	${from.desktop} {
+		flex: 1;
+		flex-direction: row;
+		flex-shrink: 0;
+		align-items: flex-end;
+	}
+`;
+
+const inputWrapperStyle = css`
+	margin-bottom: ${space[2]}px;
+	${from.desktop} {
+		margin-bottom: 0;
+		margin-right: ${space[2]}px;
+		flex-basis: 280px;
+	}
+`;
+
+const formAsideStyle = css`
+	${from.desktop} {
+		flex-basis: 400px;
+	}
 `;
 
 interface FormProps {
@@ -63,18 +98,8 @@ const Form = ({
 			}}
 		>
 			{(status === FormState.NotSent || status === FormState.Loading) && (
-				<div
-					css={css`
-						display: flex;
-						flex-shrink: 0;
-						align-items: flex-end;
-					`}
-				>
-					<span
-						css={css`
-							margin-right: ${space[2]}px;
-						`}
-					>
+				<div css={formFieldsStyle}>
+					<span css={inputWrapperStyle}>
 						<TextInput
 							label="Enter your email"
 							value={email}
@@ -91,6 +116,9 @@ const Form = ({
 						iconSide="right"
 						onClick={handleSubmitButton}
 						size="small"
+						cssOverrides={css`
+							justify-content: center;
+						`}
 					>
 						Sign up
 					</Button>
@@ -114,11 +142,7 @@ const Form = ({
 				</p>
 			)}
 
-			<aside
-				css={css`
-					flex-basis: 400px;
-				`}
-			>
+			<aside css={formAsideStyle}>
 				<NewsletterPrivacyMessage />
 			</aside>
 		</form>
