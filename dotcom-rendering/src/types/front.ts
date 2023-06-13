@@ -1,5 +1,5 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
 import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
@@ -24,6 +24,7 @@ export interface FEFrontType {
 	mostViewed: FETrailType[];
 	mostCommented?: FETrailType;
 	mostShared?: FETrailType;
+	deeplyRead?: FETrailType[];
 }
 
 export interface DCRFrontType {
@@ -38,6 +39,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 }
 

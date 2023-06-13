@@ -1643,7 +1643,7 @@ export const Quiz: FEArticleType = {
 					],
 				},
 			],
-			elementId: '256d9075-29bf-4eee-a9f8-f4c9ceeb9f83',
+			elementId: '8d0f357d-5cdf-4e60-8730-d331ca43ced3',
 		},
 	],
 	canonicalUrl:
@@ -2259,7 +2259,7 @@ export const Quiz: FEArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '54681ac4-6822-4b82-89c1-1999a53afe19',
+					elementId: '6322cf66-48a5-40ae-b2b8-08792aa498d6',
 				},
 			],
 			attributes: {

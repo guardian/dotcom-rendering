@@ -1,4 +1,4 @@
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import type { Branding } from './branding';
 
 export interface EditionCommercialProperties {

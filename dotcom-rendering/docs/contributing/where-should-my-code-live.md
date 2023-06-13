@@ -4,75 +4,100 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Scripts](#scripts)
-  - [Low priority scripts](#low-priority-scripts)
-  - [High priority scripts](#high-priority-scripts)
-- [Data extraction](#data-extraction)
-  - [Axiom 1](#axiom-1)
-  - [Axiom 2](#axiom-2)
-  - [Axiom 3](#axiom-3)
-  - [Architecture Decision Records](#architecture-decision-records)
-- [Components](#components)
+-   [Where should my code live?](#where-should-my-code-live)
+    -   [File locations](#file-locations)
+    -   [File naming schemes](#file-naming-schemes)
+    -   [Scripts](#scripts)
+    -   [Data Sources \& Extraction](#data-sources--extraction)
+        -   [Articles](#articles)
+        -   [Fronts](#fronts)
+        -   [Other](#other)
+        -   [Considerations](#considerations)
+            -   [Favour computation on the rendering server over computation on the client](#favour-computation-on-the-rendering-server-over-computation-on-the-client)
+            -   [Minimize data over the wire](#minimize-data-over-the-wire)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## File locations
+
+Code for DCR lives in the `src` directory. Inside this directory we have a series of key sub-directories:
+
+-   `server` - Home for server code related the request flow outside of the (p)react content, e.g handlers, html templates, data construction.
+-   `client` - Home for client code outside of (p)react context, e.g islands setup, ophan, sentry, etc.
+-   `components` - The home of all\* (P)react components, both server & client rendered
+-   `lib` - Home for most helper code, anything shared, etc (Note: there is some TSX code in here, but mostly it's just typescript)
+-   `layouts` - Home for 'layouts' of full pages including articles & fronts, along with code for deciding which are picked
+-   `model` - Home of all 'transformation' code - anything that's taking one type and turning it into another, or 'enhancing' a type, generally called from the server directory.
+-   `types` - Home of most type definitions, generally used for types that exist outside the context of any one file or piece of logic
+-   `static` - Home for static content which is uploaded directly to S3 in the build process
+-   `experiments` - Lib to store code directly related to experiments & a/b tests which are running
+
+\*Excluding layouts & some libs
+
+## File naming schemes
+
+In DCR, we use file suffixes to help provide some context & information around files, this can generally be broken down into two categories:
+
+**Rendering Target**
+
+DCR supports rendering for different targets - web, apps & amp.
+To mark code which is only to be used for specific rendering target, this should be added to the suffix of the file, e.g `MyComponent.apps.tsx`, `MyLib.amp.ts` or `MyLayout.web.tsx`.
+
+These files all still live in the directories, and the suffixes are used to determine which target that code is for.
+In the case that there's no suffix, it can generally be assumed this code can be shared across targets.
+
+> Note: When this was set up, most web code stayed without suffixes, which means there's a chance it's not compatible with other targets, so be vigilant when using shared code on a new target for the first time.
+
+> Note: Some un-suffixed code might be shared across apps & web, but not AMP, or some other combination, so keep an eye out to see if there's a platform specific version of the file you're working on!
+
+**Islands / Client side (P)react**
+
+We use Islands when we want to load (P)react code on the client:
+
+```tsx
+<Island ... >
+	<MyComponent  someProp={...} />
+</Island>
+```
+
+To support this in the build system, we require that the files for components which are used in an island are suffixed with `.importable.tsx`.
+e.g `MyComponent.importable.tsx`. They also must always live in the `src/components` directory.
+
+When we have different islands depending on the rendering target, the `.importable` should always come last, e.g `MyComponent.apps.importable.ts`.
 
 ## Scripts
 
 Externally hosted third party scripts should always be loaded asynchronously. If possible, they should be loaded conditionally using JavaScript by injecting a script element into the head of the document.
 
-If a third party script needs to be loaded on every page, there are two ways it could be categorised: **low priority** or **high priority**.
+When adding 3rd party that need to be on every page, you can do so by adding to the `generateScriptTags` call made in each `render.<type>.<target>.tsx` file.
 
-### Low priority scripts
+If you need to add first party code, this can be done by setting up a new dynamically loaded entry in `src/client/index.ts`. This will then be loaded on every page.
 
-In the first instance, consider adding the script as a low priority script. These scripts are added to the bottom of the document `<body>` and loaded asynchronously. They will probably run after the main application JavaScript bundle, _but this is not guaranteed._
+## Data Sources & Extraction
 
-An example is the [Google Analytics tracking script](https://developers.google.com/analytics/devguides/collection/analyticsjs/).
+### Articles
 
-They can be added to the `lowPriorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/main/src/web/document.tsx) module.
+Data for Articles originates from CAPI, it's then transformed by Frontend via the via the [`DotcomponentsDataModel`](https://github.com/guardian/frontend/blob/main/article/app/model/dotcomponents/DotcomponentsDataModel.scala).
 
-### High priority scripts
+Once the data reaches DCR it's then 'enhanced' with steps that keep the existing types, but will break out some elements & expand the model. This code lives in the `src/,model` directory. In the past this enhancing was done in DCR for expediency, but more recently we've been looking to keep data-transformation in DCR in order to reduce dependency on Frontend's data-models, which are often based around old rendering code.
 
-High priority scripts are injected by JavaScript running in the `<head>` of the document. They are loaded asynchronously and executed in the order they are requested.
+### Fronts
 
-Examples include the [polyfill.io](https://polyfill.io) response and the main application JavaScript bundles.
+Data for Fronts is an amalgamation of mostly CAPI & Fronts API data in the format of a `PressedPage`, which originates from Frontend.
+This data is then transformed in DCR in order get it to a rendering-friendly format. This is done in the `src/model` directory.
 
-⚠️ **High priority scripts have a considerable impact on site performance and should be added sparingly. Please get approval from at least 2 members of the dotcom platform team before adding a new script here.**
+### Other
 
-They can be added to the `priorityScripts` array in the [`src/web/document.tsx`](https://github.com/guardian/dotcom-rendering/blob/main/src/web/document.tsx) module.
+DCR also renders a few other smaller content types, as a general rule the 'enhance' or transformation function will be defined in the `index.<type>.<target>.ts` located in `src/server`, and any code related to the transformation lives in the `src/model` directory.
 
-## Data extraction
+### Considerations
 
-`dotcom-rendering` receives most of its data from CAPI, via the [`DotcomponentsDataModel`](https://github.com/guardian/frontend/blob/main/article/app/model/dotcomponents/DotcomponentsDataModel.scala) in `frontend`.
+#### Favour computation on the rendering server over computation on the client
 
-The data received from CAPI is probably not in an immediately useful form, and some data extraction or parsing logic is needed. When contemplating where to put this logic, consider the following axioms, in order of importance.
-
-### Axiom 1
-
-**If CAPI data needs to be parsed or extracted for presentation, this logic should live in `frontend`**
-
-Since `dotcom-rendering` shares content data with `frontend`, it makes sense for `frontend` to be the source of truth for content data. The parsed data should be added to the `DotcomponentsDataModel` and sent to `dotcom-rendering`.
-
-### Axiom 2
-
-**Favour computation on the rendering server over computation on the client**
-
-Sometimes data extraction logic does not need to be shared between `frontend` and `dotcom-rendering`. If logic needs to be executed in `dotcom-rendering`, it is preferable to execute this on the server, in `src/model`. Logic on the server is heavily cached by Fastly, reducing the burden on the client.
+When data is transformed in DCR, it should always be done on the server where possible, avoiding having to burden the client with the resource use. Generally we want the client to receive as little data and have to do as little work as possible.
 
 **Note:** Not all logic can be cached on the server, for instance logic involving geolocation or user data. Take care not to split the cache without due consideration.
 
-### Axiom 3
+#### Minimize data over the wire
 
-**Minimise data over the wire**
-
-Data is passed between `frontend` and `dotcom-rendering` via a network request, adding latency to the application. It follows that reducing data reduces latency. If executing some data extraction logic on `frontend` significantly increases the amount of data sent over the wire, consider sending the unprocessed data and moving the logic to `dotcom-rendering`.
-
-### Architecture Decision Records
-
--   [New elements models in frontend](../architecture/013-new-elements-models-in-frontend.md)
--   [Client side computation](../architecture/016-client-side-computation.md)
-
-## Components
-
-Frontend-specific components live in `src`.
-
-Note that [Frontend Web](../../src/web) and [Frontend AMP](../../src/amp) are separate applications that do not share code, including components. If you build a new component for the web, consider whether you need to build an analogous component for AMP too.
+We should be considerate that DCR is rendered by a network request, meaning that all data sent to DCR by Frontend must be parsed, sent by a network request & re-parsed by DCR, all of which can have an impact on performance.
