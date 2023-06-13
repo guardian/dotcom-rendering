@@ -23,8 +23,9 @@ export const ga = (): Promise<void> => {
 					sendPageView();
 				})
 				.catch((e) => {
+					const message = e instanceof Error ? e.message : String(e);
 					// We don't need to log script loading errors (these will mostly be adblock, etc),
-					if (!String(e).includes('Error loading script')) {
+					if (!message.includes('Error loading script')) {
 						// This is primarily for logging errors with our GA code.
 						window.guardian.modules.sentry.reportError(
 							e instanceof Error ? e : new Error(e),
