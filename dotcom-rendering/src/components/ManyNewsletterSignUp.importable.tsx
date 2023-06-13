@@ -79,6 +79,27 @@ const formAsideStyle = css`
 	}
 `;
 
+const desktopClearButtonWrapper = css`
+	position: absolute;
+	z-index: 101;
+	top: 0;
+	right: 0;
+
+	padding-right: ${space[6]}px;
+
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const mobileClearButtonWrapper = css`
+	display: none;
+	padding: ${space[1]}px;
+	${from.desktop} {
+		display: block;
+	}
+`;
+
 interface FormProps {
 	status: FormState;
 	email: string;
@@ -150,6 +171,21 @@ const Form = ({
 	);
 };
 
+interface ClearButtonProps {
+	removeAll: { (): void };
+}
+const ClearButton = ({ removeAll }: ClearButtonProps) => (
+	<Button
+		color={palette.neutral[0]}
+		onClick={removeAll}
+		hideLabel={true}
+		priority="tertiary"
+		icon={<SvgCross />}
+	>
+		cancel sign up
+	</Button>
+);
+
 export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
@@ -218,9 +254,6 @@ export const ManyNewsletterSignUp = () => {
 			return;
 		}
 		setStatus(FormState.Loading);
-
-		console.log(email, newslettersToSignUpFor);
-
 		setTimeout(() => {
 			setStatus(
 				email.includes('@') ? FormState.Success : FormState.Failed,
@@ -241,6 +274,8 @@ export const ManyNewsletterSignUp = () => {
 				title={`${newslettersToSignUpFor.length} selected`}
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
+				stretchRight={true}
+				padSides={false}
 			>
 				<div
 					css={css`
@@ -257,23 +292,14 @@ export const ManyNewsletterSignUp = () => {
 							status,
 						}}
 					/>
-					<div
-						css={css`
-							padding: ${space[1]}px;
-						`}
-					>
-						<Button
-							color={palette.neutral[0]}
-							onClick={removeAll}
-							hideLabel={true}
-							priority="tertiary"
-							icon={<SvgCross />}
-						>
-							cancel sign up
-						</Button>
+					<div css={mobileClearButtonWrapper}>
+						<ClearButton removeAll={removeAll} />
 					</div>
 				</div>
 			</Section>
+			<div css={desktopClearButtonWrapper}>
+				<ClearButton removeAll={removeAll} />
+			</div>
 		</div>
 	);
 };
