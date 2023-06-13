@@ -18,15 +18,13 @@ const liStyles = css`
 	row-gap: ${GAP_SIZE};
 `;
 
-const sidePaddingStylesMobile = (padSidesOnMobile: boolean) =>
+const sidePaddingStylesMobile = css`
 	/* Set spacing on the li element */
-	padSidesOnMobile &&
-	css`
-		${until.tablet} {
-			padding-left: 10px;
-			padding-right: 10px;
-		}
-	`;
+	${until.tablet} {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+`;
 
 const sidePaddingStyles = css`
 	${from.tablet} {
@@ -117,8 +115,8 @@ export const LI = ({
 						GAP_SIZE,
 						containerPalette,
 					),
-				sidePaddingStyles,
-				padSides && sidePaddingStylesMobile(padSidesOnMobile),
+				padSides && sidePaddingStyles,
+				padSidesOnMobile && sidePaddingStylesMobile,
 				snapAlignStart && snapAlignStartStyles,
 			]}
 		>
