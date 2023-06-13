@@ -29,10 +29,13 @@ const groupContainerStyle = css`
 `;
 
 const groupItemStyle = css`
+	display: flex;
+	flex-direction: column;
 	flex-basis: ${200}px;
 	margin-right: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
-	padding: ${space[1] / 2}px;
+	padding: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 	min-height: ${215}px;
 	background-color: ${palette.neutral[97]};
 
@@ -40,6 +43,10 @@ const groupItemStyle = css`
 		${headlineObjectStyles.xxxsmall()};
 		margin-bottom: ${space[3]}px;
 	}
+`;
+
+const buttonHolderStyle = css`
+	margin-top: auto;
 `;
 
 const buttonStyle = css`
@@ -88,32 +95,39 @@ export const GroupedNewslettersList = ({
 									/>
 									<h3>{newsletter.name}</h3>
 									<p>{newsletter.description}</p>
-									<Button
-										priority="tertiary"
-										size="xsmall"
-										iconSide="left"
-										icon={
-											<>
-												<span
-													className={ICON_PLUS_CLASS}
-												>
-													<SvgPlus />
-												</span>
-												<span
-													className={ICON_TICK_CLASS}
-												>
-													<SvgCheckmark />
-												</span>
-											</>
-										}
-										cssOverrides={buttonStyle}
-										data-newsletter-id={
-											newsletter.identityName
-										}
-										data-role={BUTTON_ROLE}
-									>
-										Sign up
-									</Button>
+
+									<div css={buttonHolderStyle}>
+										<Button
+											priority="tertiary"
+											size="xsmall"
+											iconSide="left"
+											icon={
+												<>
+													<span
+														className={
+															ICON_PLUS_CLASS
+														}
+													>
+														<SvgPlus />
+													</span>
+													<span
+														className={
+															ICON_TICK_CLASS
+														}
+													>
+														<SvgCheckmark />
+													</span>
+												</>
+											}
+											cssOverrides={buttonStyle}
+											data-newsletter-id={
+												newsletter.identityName
+											}
+											data-role={BUTTON_ROLE}
+										>
+											Sign up
+										</Button>
+									</div>
 								</div>
 							);
 						})}
