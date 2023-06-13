@@ -1,19 +1,51 @@
-import { Button } from '@guardian/source-react-components';
+import { css } from '@emotion/react';
+import { palette, space } from '@guardian/source-foundations';
+import {
+	Button,
+	InlineError,
+	SvgSpinner,
+	TextInput,
+} from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
 
 interface Props {
 	label: string;
 }
 
+const sectionStyle = (hide: boolean) => css`
+	display: ${hide ? 'none' : 'unset'};
+`;
+
+const formFrameStyle = css`
+	border: ${palette.neutral[0]} 3px dashed;
+	border-radius: 12px;
+	padding: ${space[2]}px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+enum FormState {
+	NotSent,
+	Loading,
+	Success,
+	Failed,
+}
+
 export const ManyNewsletterSignUp = ({ label }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
+	const [status, setStatus] = useState(FormState.NotSent);
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
+			if (status !== FormState.NotSent) {
+				return;
+			}
 			const { target: button } = event;
 			if (!(button instanceof HTMLElement)) {
 				return;
@@ -34,7 +66,7 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 				button.classList.remove(BUTTON_SELECTED_CLASS);
 			}
 		},
-		[newslettersToSignUpFor],
+		[newslettersToSignUpFor, status],
 	);
 
 	useEffect(() => {
@@ -51,15 +83,69 @@ export const ManyNewsletterSignUp = ({ label }: Props) => {
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
+	const handleSubmitButton = () => {
+		if (status !== FormState.NotSent) {
+			return;
+		}
+		setStatus(FormState.Loading);
+
+		setTimeout(() => {
+			setStatus(FormState.Failed);
+		}, 2000);
+	};
+
 	return (
-		<Section title={`${newslettersToSignUpFor.length} selected`}>
-			<Button
-				onClick={() => {
-					console.log(newslettersToSignUpFor);
-				}}
+		<div css={sectionStyle(newslettersToSignUpFor.length === 0)}>
+			<Section
+				title={`${newslettersToSignUpFor.length} selected`}
+				backgroundColour={palette.brand[800]}
+				showSideBorders={false}
 			>
-				click {label}
-			</Button>
-		</Section>
+				<div css={formFrameStyle}>
+					{(status === FormState.NotSent ||
+						status === FormState.Loading) && (
+						<div
+							css={css`
+								display: flex;
+								flex-shrink: 0;
+								align-items: flex-end;
+							`}
+						>
+							<span
+								css={css`
+									margin-right: ${space[2]}px;
+								`}
+							>
+								<TextInput label="email" />
+							</span>
+							<Button
+								icon={
+									status === FormState.Loading ? (
+										<SvgSpinner />
+									) : undefined
+								}
+								disabled={status === FormState.Loading}
+								iconSide="right"
+								onClick={handleSubmitButton}
+								size="small"
+							>
+								{label}
+							</Button>
+						</div>
+					)}
+
+					{status === FormState.Failed && (
+						<InlineError>Sign up failed.</InlineError>
+					)}
+					<div
+						css={css`
+							flex-basis: 400px;
+						`}
+					>
+						<NewsletterPrivacyMessage />
+					</div>
+				</div>
+			</Section>
+		</div>
 	);
 };

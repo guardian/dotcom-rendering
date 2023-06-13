@@ -159,7 +159,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				/>
 
 				<Island deferUntil="idle">
-					<ManyNewsletterSignUp label="here" />
+					<ManyNewsletterSignUp label="Test submit" />
 				</Island>
 			</main>
 
