@@ -14,7 +14,9 @@ import {
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
+import type { ContainerOverrides } from '../types/palette';
 import { Badge } from './Badge';
+import { ContainerTitle } from './ContainerTitle';
 import { Details } from './Details';
 import { Island } from './Island';
 import { Section } from './Section';
@@ -58,6 +60,9 @@ type Props = {
 
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;
+
+	/** TODO */
+	isPaidContent?: boolean;
 };
 
 const leftColumnBackground = (backgroundColour?: string) => css`
@@ -324,6 +329,24 @@ const LabsContainerHeader = ({
 	</div>
 );
 
+/** TODO */
+const LabsSectionBadge = ({
+	overrides,
+	badge,
+}: {
+	overrides: ContainerOverrides;
+	badge: DCRBadgeType;
+}) => {
+	return (
+		<div css={badgeStyles}>
+			<div css={paidForByStyles(overrides.text?.containerFooter)}>
+				Paid for by
+			</div>
+			<Badge imageSrc={badge.imageSrc} href={badge.href} />
+		</div>
+	);
+};
+
 /**
  *
  * A LabsSection component represents a horizontal slice of a page. It renders as
@@ -345,6 +368,7 @@ export const LabsSection = ({
 	canShowMore,
 	url,
 	badge,
+	isPaidContent = false,
 	children,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
@@ -360,35 +384,49 @@ export const LabsSection = ({
 			ophanComponentName={ophanComponentName}
 		>
 			<Container>
-				<LeftColumn
-					backgroundColour={overrides.background?.containerLeftColumn}
-				>
-					<div>
-						<LabsContainerHeader
-							summaryBackgroundColour={
-								overrides.background?.containerSummary
-							}
-							summaryTextColour={overrides.text?.container}
-							summaryTextSecondaryColour={
-								overrides.text?.containerSummary
-							}
-						/>
-						<GuardianLabsTitle
-							title={title}
-							textColour={overrides.text?.container}
-							url={url}
-						/>
-					</div>
-
-					<Link
-						href="https://www.theguardian.com/guardian-labs"
-						cssOverrides={css`
-							text-align: right;
-						`}
+				{isPaidContent ? (
+					<LeftColumn>
+						<ContainerTitle title={title} url={url} />
+						{badge && (
+							<LabsSectionBadge
+								overrides={overrides}
+								badge={badge}
+							/>
+						)}
+					</LeftColumn>
+				) : (
+					<LeftColumn
+						backgroundColour={
+							overrides.background?.containerLeftColumn
+						}
 					>
-						<LabsLogo />
-					</Link>
-				</LeftColumn>
+						<div>
+							<LabsContainerHeader
+								summaryBackgroundColour={
+									overrides.background?.containerSummary
+								}
+								summaryTextColour={overrides.text?.container}
+								summaryTextSecondaryColour={
+									overrides.text?.containerSummary
+								}
+							/>
+							<GuardianLabsTitle
+								title={title}
+								textColour={overrides.text?.container}
+								url={url}
+							/>
+						</div>
+
+						<Link
+							href="https://www.theguardian.com/guardian-labs"
+							cssOverrides={css`
+								text-align: right;
+							`}
+						>
+							<LabsLogo />
+						</Link>
+					</LeftColumn>
+				)}
 				<Content backgroundColour={overrides.background?.container}>
 					{children}
 					{canShowMore && (
@@ -404,20 +442,8 @@ export const LabsSection = ({
 							/>
 						</Island>
 					)}
-					{badge && (
-						<div css={badgeStyles}>
-							<div
-								css={paidForByStyles(
-									overrides.text?.containerFooter,
-								)}
-							>
-								Paid for by
-							</div>
-							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
-							/>
-						</div>
+					{!isPaidContent && badge && (
+						<LabsSectionBadge overrides={overrides} badge={badge} />
 					)}
 				</Content>
 			</Container>

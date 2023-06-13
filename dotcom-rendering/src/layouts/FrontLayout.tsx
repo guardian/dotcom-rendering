@@ -401,6 +401,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								canShowMore={collection.canShowMore}
 								url={collection.href}
 								badge={collection.badge}
+								isPaidContent={isPaidContent}
 								data-print-layout="hide"
 							>
 								<DecideContainer
