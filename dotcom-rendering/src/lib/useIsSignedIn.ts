@@ -1,14 +1,12 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
-async function doOktaMethodForSignIn() {
-	const identityModule = await import('./identity');
-	return identityModule.isSignedInWithOkta();
+async function getIsSignedInStatusWithOkta() {
+	return (await import('./identity')).isSignedInWithOkta();
 }
 
-function doCookieMethodForSignIn() {
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	return isSignedIn;
+function getIsSignedInStatusWithCookie() {
+	return !!getCookie({ name: 'GU_U', shouldMemoize: true });
 }
 
 export const useIsSignedIn = (): boolean => {
@@ -19,7 +17,7 @@ export const useIsSignedIn = (): boolean => {
 			window.guardian.config.tests.oktaVariant == 'variant';
 
 		if (isInOktaExperiment) {
-			doOktaMethodForSignIn()
+			getIsSignedInStatusWithOkta()
 				.then((result) => {
 					setIsSignedIn(result);
 				})
@@ -27,7 +25,7 @@ export const useIsSignedIn = (): boolean => {
 					console.error(error);
 				});
 		} else {
-			setIsSignedIn(doCookieMethodForSignIn());
+			setIsSignedIn(getIsSignedInStatusWithCookie());
 		}
 	}, []);
 
