@@ -35,6 +35,7 @@ import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
+import { useIsSignedIn } from '../lib/useIsSignedIn';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
@@ -178,11 +179,11 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<SupportHeaderType | null>(null);
+	const isSignedIn = useIsSignedIn();
 
 	useOnce((): void => {
 		setAutomat();
 
-		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,

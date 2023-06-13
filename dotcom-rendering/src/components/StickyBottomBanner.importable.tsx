@@ -15,6 +15,7 @@ import type {
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBraze } from '../lib/useBraze';
+import { useIsSignedIn } from '../lib/useIsSignedIn';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
@@ -234,7 +235,7 @@ export const StickyBottomBanner = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const asyncCountryCode = getLocaleCode();
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = useIsSignedIn();
 	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();

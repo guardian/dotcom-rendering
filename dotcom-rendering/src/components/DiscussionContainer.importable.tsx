@@ -1,4 +1,4 @@
-import { useIsSignedIn } from '../../lib/useIsSignedIn';
+import { useIsSignedIn } from '../lib/useIsSignedIn';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
-import { useIsSignedIn } from '../../lib/useIsSignedIn';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
+import { useIsSignedIn } from '../lib/useIsSignedIn';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';

@@ -10,9 +10,9 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { log, storage } from '@guardian/libs';
-import { useIsSignedIn } from '../../../lib/useIsSignedIn';
 import { initPerf } from '../../client/initPerf';
 import { record } from '../../client/ophan/ophan';
+import { useIsSignedIn } from '../../lib/useIsSignedIn';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,

@@ -15,10 +15,8 @@ export const useIsSignedIn = (): boolean => {
 	const [isSignedIn, setIsSignedIn] = useState(false);
 
 	useEffect(() => {
-		const isInOktaExperiment = !!getCookie({
-			name: 'X-GU-Experiment-0perc-E',
-			shouldMemoize: true,
-		});
+		const isInOktaExperiment =
+			window.guardian.config.tests.oktaVariant == 'variant';
 
 		if (isInOktaExperiment) {
 			doOktaMethodForSignIn()

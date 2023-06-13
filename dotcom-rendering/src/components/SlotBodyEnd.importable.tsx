@@ -14,6 +14,7 @@ import type {
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBraze } from '../lib/useBraze';
+import { useIsSignedIn } from '../lib/useIsSignedIn';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
@@ -106,7 +107,7 @@ export const SlotBodyEnd = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = useIsSignedIn();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,

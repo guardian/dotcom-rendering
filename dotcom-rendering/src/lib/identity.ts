@@ -43,9 +43,7 @@ function getIdentityAuth() {
 }
 
 export async function isSignedInWithOkta(): Promise<boolean> {
-	console.info('using okta for sign in check');
-
 	const isLoggedIn = await getIdentityAuth().isSignedIn();
-	console.log('isLoggedIn returns', isLoggedIn);
+
 	return isLoggedIn;
 }
