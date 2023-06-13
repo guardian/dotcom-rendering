@@ -8,7 +8,7 @@ import type { GroupedNewsletters } from '../types/newslettersPage';
 import { NewsletterDetail } from './NewsletterDetail';
 import { Section } from './Section';
 
-export interface NewslettersListProps {
+interface Props {
 	groupedNewsletters: GroupedNewsletters;
 }
 
@@ -18,11 +18,11 @@ const groupContainerStyle = css`
 `;
 
 const groupItemStyle = css`
-	flex-basis: ${200}px;
+	flex-basis: 200px;
 	margin-right: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[1] / 2}px;
-	min-height: ${215}px;
+	min-height: 215px;
 	background-color: ${palette.neutral[97]};
 
 	h3 {
@@ -31,9 +31,7 @@ const groupItemStyle = css`
 	}
 `;
 
-export const GroupedNewslettersList = ({
-	groupedNewsletters,
-}: NewslettersListProps) => {
+export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 	return (
 		<>
 			{groupedNewsletters.groups.map((group) => (
