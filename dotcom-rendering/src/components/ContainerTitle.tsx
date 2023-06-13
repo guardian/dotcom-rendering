@@ -23,6 +23,12 @@ type Props = {
 	editionId?: EditionId;
 };
 
+type LocalisedTitles = {
+	[edition in EditionId]?: {
+		[title: string]: string;
+	};
+};
+
 const linkStyles = css`
 	text-decoration: none;
 `;
@@ -85,6 +91,20 @@ export const ContainerTitle = ({
 }: Props) => {
 	if (!title) return null;
 
+	const localisedTitles: LocalisedTitles = {
+		US: {
+			Film: 'Movies',
+			Football: 'Soccer',
+		},
+	};
+
+	const localisedTitle = (inputTitle: string, editionID?: EditionId) => {
+		if (editionID === undefined) {
+			return inputTitle;
+		}
+		return localisedTitles[editionID]?.[inputTitle] ?? inputTitle;
+	};
+
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
@@ -94,10 +114,14 @@ export const ContainerTitle = ({
 		<div css={marginStyles}>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
-					<h2 css={headerStyles(fontColour)}>{title}</h2>
+					<h2 css={headerStyles(fontColour)}>
+						{localisedTitle(title, editionId)}
+					</h2>
 				</a>
 			) : (
-				<h2 css={headerStyles(fontColour)}>{title}</h2>
+				<h2 css={headerStyles(fontColour)}>
+					{localisedTitle(title, editionId)}
+				</h2>
 			)}
 			{!!description && (
 				<div
