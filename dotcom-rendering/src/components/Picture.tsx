@@ -247,14 +247,26 @@ const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 };
 
 /**
- * Used on `picture` and `img` to prevent having a line-height,
- * as these elements are which are `inline` by default.
+ * Used on `picture` and `img` to prevent them having a line-height,
+ * as these are `inline` by default and only inline elements can have
+ * line-height.
+ *
+ * We use flex for lightbox images because this ensures space is
+ * reserved for the image as it loads
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
  */
-const block = css`
-	display: block;
-`;
+const displayStyle = (isLightbox: boolean) => {
+	if (isLightbox) {
+		return css`
+			display: flex;
+		`;
+	} else {
+		return css`
+			display: block;
+		`;
+	}
+};
 
 type ImageSource = {
 	breakpoint: number;
@@ -335,7 +347,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={block}>
+		<picture css={displayStyle(isLightbox)}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -399,7 +411,7 @@ export const Picture = ({
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
-				css={block}
+				css={displayStyle(isLightbox)}
 			/>
 		</picture>
 	);
