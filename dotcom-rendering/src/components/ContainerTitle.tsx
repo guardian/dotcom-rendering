@@ -12,6 +12,7 @@ import type { Colour } from '../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
+import { localisedTitle } from './Localisation';
 
 type Props = {
 	title?: string;
@@ -21,12 +22,6 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
-};
-
-type LocalisedTitles = {
-	[edition in EditionId]?: {
-		[title: string]: string;
-	};
 };
 
 const linkStyles = css`
@@ -90,20 +85,6 @@ export const ContainerTitle = ({
 	editionId,
 }: Props) => {
 	if (!title) return null;
-
-	const localisedTitles: LocalisedTitles = {
-		US: {
-			Film: 'Movies',
-			Football: 'Soccer',
-		},
-	};
-
-	const localisedTitle = (inputTitle: string, editionID?: EditionId) => {
-		if (editionID === undefined) {
-			return inputTitle;
-		}
-		return localisedTitles[editionID]?.[inputTitle] ?? inputTitle;
-	};
 
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
