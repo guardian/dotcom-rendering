@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	palette,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -59,6 +66,8 @@ type Props = {
 	ajaxUrl?: string;
 	/** Does this front section reside on a "paid for" content front */
 	isOnPaidContentFront?: boolean;
+	/** INDEX TODO */
+	index?: number;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -394,6 +403,7 @@ export const FrontSection = ({
 	canShowMore,
 	ajaxUrl,
 	isOnPaidContentFront,
+	index,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -440,30 +450,77 @@ export const FrontSection = ({
 					),
 				]}
 			>
-				<Hide until="leftCol">
-					{badge && (
-						<Badge imageSrc={badge.imageSrc} href={badge.href} />
-					)}
-				</Hide>
-				<div css={titleStyle}>
-					<Hide from="leftCol">
+				{isOnPaidContentFront && index === 0 ? (
+					<div css={titleStyle}>
+						<ContainerTitle
+							title={title}
+							fontColour={overrides?.text?.container}
+							description={description}
+							// On paid fronts the title is not treated as a link
+							// So explicitly mark it as undefined here
+							url={undefined}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
+						/>
 						{badge && (
-							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
-							/>
+							<div
+								css={css`
+									display: inline-block;
+									border-top: 1px dotted
+										${palette.neutral[86]};
+									${textSans.xxsmall()}
+									color: ${palette.neutral[46]};
+									font-weight: bold;
+
+									${from.leftCol} {
+										width: 100%;
+									}
+								`}
+							>
+								Paid for by
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+								/>
+							</div>
 						)}
-					</Hide>
-					<ContainerTitle
-						title={title}
-						fontColour={overrides?.text?.container}
-						description={description}
-						url={url}
-						containerPalette={containerPalette}
-						showDateHeader={showDateHeader}
-						editionId={editionId}
-					/>
-				</div>
+					</div>
+				) : (
+					<>
+						{!isOnPaidContentFront && (
+							<Hide until="leftCol">
+								{badge && (
+									<Badge
+										imageSrc={badge.imageSrc}
+										href={badge.href}
+									/>
+								)}
+							</Hide>
+						)}
+						<div css={titleStyle}>
+							{!isOnPaidContentFront && (
+								<Hide from="leftCol">
+									{badge && (
+										<Badge
+											imageSrc={badge.imageSrc}
+											href={badge.href}
+										/>
+									)}
+								</Hide>
+							)}
+							<ContainerTitle
+								title={title}
+								fontColour={overrides?.text?.container}
+								description={description}
+								url={url}
+								containerPalette={containerPalette}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
+						</div>
+					</>
+				)}
 				{leftContent}
 			</div>
 
