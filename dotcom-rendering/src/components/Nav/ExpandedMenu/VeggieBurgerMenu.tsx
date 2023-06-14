@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	brandAlt,
 	from,
 	neutral,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../../../lib/getZIndex';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`
@@ -77,9 +79,15 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	position: absolute;
 	border: 0;
 	border-radius: 50%;
+	z-index: 1;
 
 	right: 5px;
 	bottom: 58px;
+
+	${between.mobileMedium.and.tablet} {
+		${getZIndex('burger')}
+	}
+
 	${from.mobileMedium} {
 		bottom: ${display === ArticleDisplay.Immersive ? '3px' : '-3px'};
 		right: 5px;
@@ -116,7 +124,11 @@ export const VeggieBurgerMenu = ({ display }: Props) => {
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
-			data-link-name="nav2 : veggie-burger: show"
+			data-link-name={nestedOphanComponents(
+				'nav3',
+				'veggie-burger',
+				'show',
+			)}
 			tabIndex={0}
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"

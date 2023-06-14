@@ -33,6 +33,7 @@ import {
 } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
@@ -332,7 +333,10 @@ const ReaderRevenueLinksNative = ({
 		<a
 			css={linkStyles}
 			href={getUrl('contribute')}
-			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+			data-link-name={nestedOphanComponents(
+				dataLinkNamePrefix,
+				'contribute-cta',
+			)}
 		>
 			Contribute <ArrowRightIcon />
 		</a>
@@ -341,7 +345,10 @@ const ReaderRevenueLinksNative = ({
 		<a
 			css={linkStyles}
 			href={getUrl('subscribe')}
-			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+			data-link-name={nestedOphanComponents(
+				dataLinkNamePrefix,
+				'subscribe-cta',
+			)}
 		>
 			Subscribe <ArrowRightIcon />
 		</a>

@@ -3,6 +3,7 @@ import { brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import NewspaperIcon from '../static/icons/newspaper.svg';
 
 interface PrintSubscriptionsProps {
@@ -72,7 +73,11 @@ export const HeaderTopBarPrintSubscriptions = ({
 			<a
 				href={href}
 				css={linkStyles}
-				data-link-name="nav3 : topbar : printsubs"
+				data-link-name={nestedOphanComponents(
+					'nav3',
+					'topbar',
+					'printsubs',
+				)}
 			>
 				<NewspaperIcon />
 				<>Print subscriptions</>

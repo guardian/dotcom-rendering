@@ -13,15 +13,15 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { enhanceCards } from '../model/enhanceCards';
-import type { DCRContainerPalette, FEFrontCard } from '../types/front';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
 import { useOnce } from '../lib/useOnce';
+import { enhanceCards } from '../model/enhanceCards';
+import type { DCRContainerPalette, FEFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
-import { EditionId } from '../lib/edition';
 
 const decideButtonText = ({
 	isOpen,
@@ -113,7 +113,7 @@ export const ShowMore = ({
 
 	const cards =
 		data &&
-		enhanceCards(data, editionId).filter(
+		enhanceCards(data, { editionId }).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
 

@@ -9,6 +9,7 @@ import {
 	mapBrazeCardsToNotifications,
 } from '../lib/notification';
 import type { Notification } from '../lib/notification';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
@@ -88,47 +89,57 @@ export const buildIdentityLinks = (
 			id: 'account_overview',
 			url: `${mmaUrl}/`,
 			title: 'Account overview',
-			dataLinkName: 'nav3 : topbar : account overview',
+		},
+		{
+			id: 'billing',
+			url: `${mmaUrl}/billing`,
+			title: 'Billing',
 		},
 		{
 			id: 'edit_profile',
 			url: `${mmaUrl}/public-settings`,
 			title: 'Profile',
-			dataLinkName: 'nav3 : topbar : edit profile',
 		},
 		{
 			id: 'email_prefs',
 			url: `${mmaUrl}/email-prefs`,
 			title: 'Emails & marketing',
-			dataLinkName: 'nav3 : topbar : email prefs',
+		},
+		{
+			id: 'data_privacy',
+			url: `${mmaUrl}/data-privacy`,
+			title: 'Data privacy',
 		},
 		{
 			id: 'settings',
 			url: `${mmaUrl}/account-settings`,
 			title: 'Settings',
-			dataLinkName: 'nav3 : topbar : settings',
 		},
 		{
 			id: 'help',
 			url: `${mmaUrl}/help`,
 			title: 'Help',
-			dataLinkName: 'nav3 : topbar : help',
 		},
 		{
 			id: 'comment_activity',
 			url: `${idUrl}/user/id/${userId}`,
 			title: 'Comments & replies',
-			dataLinkName: 'nav3 : topbar : comment activity',
 		},
 		{
 			id: 'sign_out',
 			url: `${idUrl}/signout`,
 			title: 'Sign out',
-			dataLinkName: 'nav3 : topbar : sign out',
 		},
-	];
+	] as const;
 
-	return links;
+	return links.map((link) => ({
+		...link,
+		dataLinkName: nestedOphanComponents(
+			'nav3',
+			'topbar',
+			link.id.replaceAll('_', ' '),
+		),
+	}));
 };
 
 const SignIn = ({ idUrl }: { idUrl: string }) => (
@@ -137,7 +148,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		data-link-name="nav3 : topbar : signin"
+		data-link-name={nestedOphanComponents('nav3', 'topbar', 'signin')}
 	>
 		<ProfileIcon /> Sign in
 	</a>
@@ -208,7 +219,11 @@ const SignedInWithNotifications = ({
 				label="My account"
 				links={identityLinksWithNotifications}
 				id="my-account"
-				dataLinkName="nav3 : topbar: my account"
+				dataLinkName={nestedOphanComponents(
+					'nav3',
+					'topbar',
+					'my account',
+				)}
 				cssOverrides={dropDownOverrides}
 			/>
 		</div>

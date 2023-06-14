@@ -8,6 +8,7 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type {
 	EditionLinkType,
 	PillarLinkType,
@@ -290,7 +291,11 @@ export const Column = ({
 							css={columnLinkTitle}
 							href={link.url}
 							role="menuitem"
-							data-link-name={`nav2 : secondary : ${link.longTitle}`}
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'secondary',
+								link.longTitle,
+							)}
 							data-cy={`column-collapse-sublink-${link.title}`}
 							tabIndex={-1}
 						>

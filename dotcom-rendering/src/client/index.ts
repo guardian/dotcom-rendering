@@ -6,6 +6,7 @@ import { dynamicImport } from './dynamicImport';
 import { ga } from './ga';
 import { islands } from './islands';
 import { ophan } from './ophan';
+import { performanceMonitoring } from './performanceMonitoring';
 import { sentryLoader } from './sentryLoader';
 import { startup } from './startup';
 
@@ -15,6 +16,7 @@ startup('ga', ga);
 startup('sentryLoader', sentryLoader);
 startup('dynamicImport', dynamicImport);
 startup('islands', islands);
+startup('performanceMonitoring', performanceMonitoring);
 
 // these modules are loaded as separate chunks, so that they can be lazy-loaded
 void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(

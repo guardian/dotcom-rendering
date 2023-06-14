@@ -1,5 +1,5 @@
+import { Card25Media25 } from '../lib/cardWrappers';
 import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
-import { Card25Media25Tall } from '../lib/cardWrappers';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -29,7 +29,7 @@ export const FixedSmallSlowVThird = ({
 						containerPalette={containerPalette}
 						percentage="25%"
 					>
-						<Card25Media25Tall
+						<Card25Media25
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
