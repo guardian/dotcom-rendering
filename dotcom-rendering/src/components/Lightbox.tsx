@@ -276,16 +276,6 @@ const infoButtonStyles = css`
 	}
 `;
 
-const lowlightStyles = css`
-	${textSans.xsmall()};
-	color: ${neutral[86]};
-`;
-
-const highlightedStyles = css`
-	${textSans.xsmall()};
-	color: ${neutral[97]};
-`;
-
 const SvgInfo = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -325,9 +315,7 @@ const Selection = ({
 			aria-hidden="true"
 			data-cy="lightbox-selected"
 		>
-			<span css={highlightedStyles} className="selected">
-				{initialPosition}
-			</span>
+			<span className="selected">{initialPosition}</span>
 			<span
 				css={css`
 					margin-left: 1px;
@@ -336,7 +324,13 @@ const Selection = ({
 			>
 				/
 			</span>
-			<span css={lowlightStyles}>{countOfImages}</span>
+			<span
+				css={css`
+					color: ${neutral[97]};
+				`}
+			>
+				{countOfImages}
+			</span>
 		</span>
 	);
 };
