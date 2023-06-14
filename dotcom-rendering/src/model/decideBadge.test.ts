@@ -83,7 +83,7 @@ describe('Decide badge', () => {
 
 	it('returns undefined if not using displayName or branding', () => {
 		const expectedResult = undefined;
-		const result = decideBadge('NOT This is Europe', []);
+		const result = decideBadge('displayName', []);
 		expect(result).toEqual(expectedResult);
 	});
 });
