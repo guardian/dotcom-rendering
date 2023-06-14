@@ -5,18 +5,12 @@ import {
 	palette,
 	space,
 } from '@guardian/source-foundations';
-import {
-	Button,
-	InlineError,
-	SvgCross,
-	SvgSpinner,
-	TextInput,
-} from '@guardian/source-react-components';
+import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { Flex } from './Flex';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { Section } from './Section';
 
 interface Props {
@@ -26,12 +20,7 @@ interface Props {
 	apiEndpoint: string;
 }
 
-enum FormState {
-	NotSent,
-	Loading,
-	Success,
-	Failed,
-}
+type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
 
 const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'unset'};
@@ -41,76 +30,6 @@ const sectionWrapperStyle = (hide: boolean) => css`
 	left: 0;
 	width: 100%;
 	z-index: 100;
-`;
-
-const formFrameStyle = css`
-	border: ${palette.neutral[0]} 3px dashed;
-	border-radius: 12px;
-	padding: ${space[2]}px;
-
-	display: flex;
-	flex-direction: column;
-
-	${from.desktop} {
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-	}
-`;
-
-const formFieldsStyle = css`
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	padding-bottom: ${space[1]}px;
-
-	${from.desktop} {
-		flex: 1;
-		flex-direction: row;
-		flex-shrink: 0;
-		align-items: flex-end;
-	}
-`;
-
-const inputWrapperStyle = css`
-	margin-bottom: ${space[2]}px;
-	${from.desktop} {
-		margin-bottom: 0;
-		margin-right: ${space[2]}px;
-		flex-basis: 280px;
-	}
-`;
-
-const formAsideStyle = css`
-	${from.desktop} {
-		flex-basis: 400px;
-	}
-`;
-
-const signUpButtonStyle = css`
-	justify-content: center;
-	background-color: ${palette.neutral[0]};
-	border-color: ${palette.neutral[0]};
-
-	${from.desktop} {
-		flex-basis: 110px;
-	}
-
-	&:hover {
-		background-color: ${palette.neutral[46]};
-		border-color: ${palette.neutral[46]};
-	}
-`;
-
-const successMessageStyle = css`
-	${headlineObjectStyles.xsmall({
-		lineHeight: 'tight',
-		fontWeight: 'bold',
-	})}
-
-	${from.desktop} {
-		flex-basis: 340px;
-	}
 `;
 
 const desktopClearButtonWrapperStyle = css`
@@ -130,64 +49,6 @@ const mobileCaptionAndClearButtonWrapperStyle = css`
 		display: none;
 	}
 `;
-
-interface FormProps {
-	status: FormState;
-	email: string;
-	handleTextInput: ChangeEventHandler<HTMLInputElement>;
-	handleSubmitButton: { (): Promise<void> };
-}
-const Form = ({
-	status,
-	email,
-	handleTextInput,
-	handleSubmitButton,
-}: FormProps) => {
-	return (
-		<form
-			css={formFrameStyle}
-			onSubmit={(submitEvent) => {
-				submitEvent.preventDefault();
-			}}
-		>
-			{(status === FormState.NotSent || status === FormState.Loading) && (
-				<div css={formFieldsStyle}>
-					<span css={inputWrapperStyle}>
-						<TextInput
-							label="Enter your email"
-							value={email}
-							onChange={handleTextInput}
-						/>
-					</span>
-					<Button
-						isLoading={status === FormState.Loading}
-						iconSide="right"
-						onClick={() => {
-							void handleSubmitButton();
-						}}
-						cssOverrides={signUpButtonStyle}
-					>
-						Sign up
-					</Button>
-				</div>
-			)}
-
-			{status === FormState.Failed && (
-				<InlineError>Sign up failed.</InlineError>
-			)}
-
-			{status === FormState.Success && (
-				<p css={successMessageStyle}>
-					You are now a subscriber! Thank you for signing up
-				</p>
-			)}
-
-			<aside css={formAsideStyle}>
-				<NewsletterPrivacyMessage />
-			</aside>
-		</form>
-	);
-};
 
 interface ClearButtonProps {
 	removeAll: { (): void };
@@ -272,12 +133,12 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
-	const [status, setStatus] = useState(FormState.NotSent);
+	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (status !== FormState.NotSent) {
+			if (status !== 'NotSent') {
 				return;
 			}
 			const { target: button } = event;
@@ -304,7 +165,7 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 	);
 
 	const removeAll = useCallback(() => {
-		if (status !== FormState.NotSent) {
+		if (status !== 'NotSent') {
 			return;
 		}
 		const signUpButtons = [
@@ -332,10 +193,10 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const handleSubmitButton = async () => {
-		if (status !== FormState.NotSent) {
+		if (status !== 'NotSent') {
 			return;
 		}
-		setStatus(FormState.Loading);
+		setStatus('Loading');
 
 		const result = await sendSignUpRequest(
 			email,
@@ -347,11 +208,11 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 			console.log(result.message);
 		}
 
-		setStatus(result.ok ? FormState.Success : FormState.Failed);
+		setStatus(result.ok ? 'Success' : 'Failed');
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
-		if (status !== FormState.NotSent) {
+		if (status !== 'NotSent') {
 			return;
 		}
 		setEmail(ev.target.value);
@@ -376,7 +237,7 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 				</div>
 
 				<Flex>
-					<Form
+					<ManyNewslettersForm
 						{...{
 							email,
 							handleSubmitButton,
