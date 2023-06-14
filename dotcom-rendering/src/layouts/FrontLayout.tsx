@@ -116,12 +116,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 
-	const theme = isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News;
-
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme,
+		theme: isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News,
 	};
 
 	const palette = decidePalette(format);
