@@ -57,6 +57,8 @@ type Props = {
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
+	/** Does this front section reside on a "paid for" content front */
+	isOnPaidContentFront?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -391,6 +393,7 @@ export const FrontSection = ({
 	badge,
 	canShowMore,
 	ajaxUrl,
+	isOnPaidContentFront,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
