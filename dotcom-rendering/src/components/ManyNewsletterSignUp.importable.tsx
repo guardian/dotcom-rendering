@@ -95,6 +95,21 @@ const desktopClearButtonWrapperStyle = css`
 	}
 `;
 
+const signUpButtonStyle = css`
+	justify-content: center;
+	background-color: ${palette.neutral[0]};
+	border-color: ${palette.neutral[0]};
+
+	${from.desktop} {
+		flex-basis: 110px;
+	}
+
+	&:hover {
+		background-color: ${palette.neutral[46]};
+		border-color: ${palette.neutral[46]};
+	}
+`;
+
 const mobileCaptionAndClearButtonWrapperStyle = css`
 	display: flex;
 	justify-content: space-between;
@@ -134,18 +149,12 @@ const Form = ({
 						/>
 					</span>
 					<Button
-						icon={
-							status === FormState.Loading ? (
-								<SvgSpinner />
-							) : undefined
-						}
-						disabled={status === FormState.Loading}
+						isLoading={status === FormState.Loading}
 						iconSide="right"
-						onClick={void handleSubmitButton}
-						size="small"
-						cssOverrides={css`
-							justify-content: center;
-						`}
+						onClick={() => {
+							void handleSubmitButton();
+						}}
+						cssOverrides={signUpButtonStyle}
 					>
 						Sign up
 					</Button>
