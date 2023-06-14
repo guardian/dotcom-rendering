@@ -79,6 +79,12 @@ const buttonStyle = css`
 	}
 `;
 
+const getButtonInitialAriaAttribute = (newsletterName: string) => ({
+	'aria-label': `add ${newsletterName} to subscribe list`,
+	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
+	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
+});
+
 export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 	return (
 		<>
@@ -87,7 +93,11 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 					<div css={groupContainerStyle}>
 						{group.newsletters.map((newsletter) => {
 							return (
-								<div key={newsletter.name} css={groupItemStyle}>
+								<article
+									key={newsletter.name}
+									css={groupItemStyle}
+									aria-label={newsletter.name}
+								>
 									<NewsletterDetail
 										text={newsletter.frequency}
 									/>
@@ -96,6 +106,9 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 
 									<div css={buttonHolderStyle}>
 										<Button
+											{...getButtonInitialAriaAttribute(
+												newsletter.name,
+											)}
 											priority="tertiary"
 											size="xsmall"
 											iconSide="left"
@@ -126,7 +139,7 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 											Sign up
 										</Button>
 									</div>
-								</div>
+								</article>
 							);
 						})}
 					</div>
