@@ -94,7 +94,11 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a css={[linkStyles, bottomMargin]} href={url}>
+				<a
+					css={[linkStyles, bottomMargin]}
+					href={url}
+					data-link-name="section heading"
+				>
 					<h2 css={headerStyles(fontColour)}>
 						{localisedTitle(title, editionId)}
 					</h2>
