@@ -137,13 +137,9 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					max-width: 100%;
 					margin-left: auto;
 					margin-right: auto;
+					height: calc(100vh - 90px);
 					${from.tablet} {
 						margin-top: ${space[3]}px;
-					}
-					${until.tablet} {
-						height: calc(100vh - 90px);
-					}
-					${from.tablet} {
 						height: calc(100vh - 24px);
 					}
 				}
@@ -159,9 +155,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					margin-left: auto;
 					margin-right: auto;
 					margin-top: ${space[3]}px;
-					${until.tablet} {
-						max-height: calc(100vh - 90px);
-					}
+					max-height: calc(100vh - 90px);
 					${from.tablet} {
 						max-height: calc(100vh - 24px);
 					}
