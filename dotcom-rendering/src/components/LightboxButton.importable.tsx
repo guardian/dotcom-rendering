@@ -200,7 +200,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 
 	/**
 	 * Images are 'selected' simply by being scrolled to. You can even select an image
-	 * by swipping left and right. Because of this, scrollTo is how we navigate the lightbox
+	 * by swiping left and right. Because of this, scrollTo is how we navigate the lightbox
 	 */
 	function scrollTo(position: number): void {
 		// liWidth is the actual dom width in pixels of the containing li element for each image
