@@ -86,23 +86,20 @@ const formAsideStyle = css`
 	}
 `;
 
-const desktopClearButtonWrapper = css`
+const desktopClearButtonWrapperStyle = css`
 	display: none;
 	padding: ${space[1]}px;
-	${from.desktop} {
+	${from.leftCol} {
 		display: block;
 	}
 `;
 
-const mobileClearButtonWrapper = css`
-	position: absolute;
-	z-index: 101;
-	top: 0;
-	right: 0;
-
-	padding-right: ${space[6]}px;
-
-	${from.desktop} {
+const mobileCaptionAndClearButtonWrapperStyle = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding-bottom: ${space[2]}px;
+	${from.leftCol} {
 		display: none;
 	}
 `;
@@ -192,6 +189,38 @@ const ClearButton = ({ removeAll }: ClearButtonProps) => (
 		cancel sign up
 	</Button>
 );
+
+interface CaptionProps {
+	count: number;
+	forDesktop?: boolean;
+}
+const Caption = ({ count, forDesktop = false }: CaptionProps) => {
+	const typography = forDesktop
+		? headlineObjectStyles.xsmall({
+				fontWeight: 'regular',
+		  })
+		: headlineObjectStyles.xxsmall({
+				fontWeight: 'bold',
+		  });
+
+	return (
+		<div
+			css={css`
+				padding-top: ${space[2]}px;
+				${typography}
+			`}
+		>
+			<span
+				css={css`
+					font-weight: bold;
+				`}
+			>
+				{count}
+			</span>{' '}
+			{count === 1 ? 'newsletter' : 'newsletters'} selected
+		</div>
+	);
+};
 
 /**
  * Placeholder function to represent API call.
@@ -317,12 +346,20 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 	return (
 		<div css={sectionWrapperStyle(newslettersToSignUpFor.length === 0)}>
 			<Section
-				title={`${newslettersToSignUpFor.length} selected`}
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
 				stretchRight={true}
-				padSides={false}
+				leftContent={
+					<Caption
+						count={newslettersToSignUpFor.length}
+						forDesktop={true}
+					/>
+				}
 			>
+				<div css={mobileCaptionAndClearButtonWrapperStyle}>
+					<Caption count={newslettersToSignUpFor.length} />
+					<ClearButton removeAll={removeAll} />
+				</div>
 				<div
 					css={css`
 						display: flex;
@@ -338,14 +375,11 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 							status,
 						}}
 					/>
-					<div css={desktopClearButtonWrapper}>
+					<div css={desktopClearButtonWrapperStyle}>
 						<ClearButton removeAll={removeAll} />
 					</div>
 				</div>
 			</Section>
-			<div css={mobileClearButtonWrapper}>
-				<ClearButton removeAll={removeAll} />
-			</div>
 		</div>
 	);
 };
