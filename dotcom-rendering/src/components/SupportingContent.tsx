@@ -124,6 +124,7 @@ export const SupportingContent = ({
 							shouldPadLeft && leftMargin,
 							isLast && bottomMargin,
 						]}
+						data-link-name={`sublinks | ${index + 1}`}
 					>
 						<CardHeadline
 							format={subLink.format}
