@@ -26,7 +26,7 @@ import { Picture } from './Picture';
 
 type Props = {
 	format: ArticleFormat;
-	images?: EnhancedImageForLightbox[];
+	images: EnhancedImageForLightbox[];
 };
 
 const lightboxStyles = css`
@@ -355,7 +355,7 @@ const Selection = ({
 };
 
 export const Lightbox = ({ format, images }: Props) => {
-	if (images?.length == null || images.length === 0) return null;
+	if (images.length == null || images.length === 0) return null;
 
 	return (
 		<>
