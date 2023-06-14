@@ -41,7 +41,6 @@ export const Default = () => {
 		</>
 	);
 };
-Default.storyName = 'ManyNewsletterSignUp - one example';
 
 export default {
 	component: Default,
