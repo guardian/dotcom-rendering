@@ -1,6 +1,11 @@
 import type { DCRBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
 
+export const BADGE_THIS_IS_EUROPE = {
+	imageSrc:
+		'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg',
+	href: '/world/series/this-is-europe',
+};
 /**
  * Construct a badge based on the collection displayName or card branding
  */
@@ -9,11 +14,7 @@ export const decideBadge = (
 	allBranding: Branding[],
 ): DCRBadgeType | undefined => {
 	if (displayName === 'This is Europe') {
-		return {
-			imageSrc:
-				'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg',
-			href: '/world/series/this-is-europe',
-		};
+		return BADGE_THIS_IS_EUROPE;
 	}
 
 	if (allBranding[0] !== undefined) {
