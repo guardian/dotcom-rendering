@@ -87,6 +87,14 @@ const formAsideStyle = css`
 `;
 
 const desktopClearButtonWrapper = css`
+	display: none;
+	padding: ${space[1]}px;
+	${from.desktop} {
+		display: block;
+	}
+`;
+
+const mobileClearButtonWrapper = css`
 	position: absolute;
 	z-index: 101;
 	top: 0;
@@ -96,14 +104,6 @@ const desktopClearButtonWrapper = css`
 
 	${from.desktop} {
 		display: none;
-	}
-`;
-
-const mobileClearButtonWrapper = css`
-	display: none;
-	padding: ${space[1]}px;
-	${from.desktop} {
-		display: block;
 	}
 `;
 
@@ -143,7 +143,7 @@ const Form = ({
 						}
 						disabled={status === FormState.Loading}
 						iconSide="right"
-						onClick={handleSubmitButton}
+						onClick={void handleSubmitButton}
 						size="small"
 						cssOverrides={css`
 							justify-content: center;
@@ -338,12 +338,12 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 							status,
 						}}
 					/>
-					<div css={mobileClearButtonWrapper}>
+					<div css={desktopClearButtonWrapper}>
 						<ClearButton removeAll={removeAll} />
 					</div>
 				</div>
 			</Section>
-			<div css={desktopClearButtonWrapper}>
+			<div css={mobileClearButtonWrapper}>
 				<ClearButton removeAll={removeAll} />
 			</div>
 		</div>
