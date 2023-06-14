@@ -16,17 +16,17 @@ const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
 	if (!fields) return false; // Unlikely
 	const { width, height } = fields;
 	const orientation =
-		parseInt(width) > parseInt(height) ? 'horizontal' : 'portrait';
+		parseInt(width, 10) > parseInt(height, 10) ? 'horizontal' : 'portrait';
 	switch (orientation) {
 		case 'horizontal':
 			// If any width is above 620 we allow this image in lightbox
 			return image.media.allImages.some(
-				(mediaImg) => parseInt(mediaImg.fields.width) > 620,
+				(mediaImg) => parseInt(mediaImg.fields.width, 10) > 620,
 			);
 		case 'portrait':
 			// If any height is above 620 we allow this image in lightbox
 			return image.media.allImages.some(
-				(mediaImg) => parseInt(mediaImg.fields.height) > 620,
+				(mediaImg) => parseInt(mediaImg.fields.height, 10) > 620,
 			);
 	}
 };
