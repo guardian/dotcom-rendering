@@ -14,6 +14,7 @@ import {
 } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useCallback, useEffect, useState } from 'react';
+import { Flex } from './Flex';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
@@ -360,13 +361,8 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 					<Caption count={newslettersToSignUpFor.length} />
 					<ClearButton removeAll={removeAll} />
 				</div>
-				<div
-					css={css`
-						display: flex;
-						justify-content: space-between;
-						align-items: flex-start;
-					`}
-				>
+
+				<Flex>
 					<Form
 						{...{
 							email,
@@ -378,7 +374,7 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 					<div css={desktopClearButtonWrapperStyle}>
 						<ClearButton removeAll={removeAll} />
 					</div>
-				</div>
+				</Flex>
 			</Section>
 		</div>
 	);
