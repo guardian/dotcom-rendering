@@ -87,14 +87,6 @@ const formAsideStyle = css`
 	}
 `;
 
-const desktopClearButtonWrapperStyle = css`
-	display: none;
-	padding: ${space[1]}px;
-	${from.leftCol} {
-		display: block;
-	}
-`;
-
 const signUpButtonStyle = css`
 	justify-content: center;
 	background-color: ${palette.neutral[0]};
@@ -107,6 +99,25 @@ const signUpButtonStyle = css`
 	&:hover {
 		background-color: ${palette.neutral[46]};
 		border-color: ${palette.neutral[46]};
+	}
+`;
+
+const successMessageStyle = css`
+	${headlineObjectStyles.xsmall({
+		lineHeight: 'tight',
+		fontWeight: 'bold',
+	})}
+
+	${from.desktop} {
+		flex-basis: 340px;
+	}
+`;
+
+const desktopClearButtonWrapperStyle = css`
+	display: none;
+	padding: ${space[1]}px;
+	${from.leftCol} {
+		display: block;
 	}
 `;
 
@@ -166,14 +177,7 @@ const Form = ({
 			)}
 
 			{status === FormState.Success && (
-				<p
-					css={css`
-						${headlineObjectStyles.xsmall({
-							lineHeight: 'tight',
-							fontWeight: 'bold',
-						})}
-					`}
-				>
+				<p css={successMessageStyle}>
 					You are now a subscriber! Thank you for signing up
 				</p>
 			)}
