@@ -8,11 +8,6 @@ const badgeSizingStyles = css`
 	}
 `;
 
-const badgeWrapper = css`
-	float: left;
-	${badgeSizingStyles}
-`;
-
 const imageStyles = css`
 	display: block;
 	width: auto;
@@ -30,7 +25,7 @@ type Props = {
 
 export const Badge = ({ imageSrc, href }: Props) => {
 	return (
-		<div css={badgeWrapper}>
+		<div css={badgeSizingStyles}>
 			<a href={href} css={badgeLink} role="button">
 				<img css={imageStyles} src={imageSrc} alt="" />
 			</a>
