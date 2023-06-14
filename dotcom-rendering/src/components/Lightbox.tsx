@@ -147,16 +147,6 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 						height: calc(100vh - 24px);
 					}
 				}
-				picture {
-					${until.tablet} {
-						display: flex;
-						align-items: center;
-					}
-					flex-grow: 1;
-					${from.tablet} {
-						margin-right: ${space[5]}px;
-					}
-				}
 			`;
 		}
 		case 'landscape':
@@ -176,20 +166,23 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 						max-height: calc(100vh - 24px);
 					}
 				}
-				picture {
-					${until.tablet} {
-						display: flex;
-						align-items: center;
-					}
-					flex-grow: 1;
-					${from.tablet} {
-						margin-right: ${space[5]}px;
-					}
-				}
 			`;
 		}
 	}
 };
+
+const pictureStyles = css`
+	picture {
+		${until.tablet} {
+			display: flex;
+			align-items: center;
+		}
+		flex-grow: 1;
+		${from.tablet} {
+			margin-right: ${space[5]}px;
+		}
+	}
+`;
 
 const asideStyles = css`
 	${until.tablet} {
@@ -407,7 +400,11 @@ export const Lightbox = ({ format, images }: Props) => {
 									key={`${master}-${index}`}
 									data-index={index + 1}
 									data-element-id={image.elementId}
-									css={[liStyles, imageStyles(orientation)]}
+									css={[
+										liStyles,
+										imageStyles(orientation),
+										pictureStyles,
+									]}
 								>
 									<figure css={figureStyles}>
 										<Picture
