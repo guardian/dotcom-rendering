@@ -173,7 +173,7 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = useIsSignedIn();
+	const isSignedIn: SignedInStatus = useIsSignedIn();
 
 	useOnce((): void => {
 		setAutomat();

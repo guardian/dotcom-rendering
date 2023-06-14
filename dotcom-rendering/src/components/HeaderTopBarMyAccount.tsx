@@ -216,7 +216,7 @@ const SignedInWithNotifications = ({
 };
 
 const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
-	const { brazeCards } = useBraze(idApiUrl);
+	const { brazeCards } = useBraze(idApiUrl, true);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
 	>([]);

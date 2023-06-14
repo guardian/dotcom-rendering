@@ -107,7 +107,7 @@ export const SlotBodyEnd = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
-	const isSignedIn = useIsSignedIn();
+	const signedInStatus = useIsSignedIn();
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,
@@ -138,7 +138,7 @@ export const SlotBodyEnd = ({
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
-			isSignedIn,
+			signedInStatus === 'SignedIn',
 			countryCode,
 			contentType,
 			sectionId,
@@ -176,7 +176,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
-	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
+	}, [signedInStatus, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic !== null) {
 		return (

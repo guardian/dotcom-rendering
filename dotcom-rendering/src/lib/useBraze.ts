@@ -6,6 +6,8 @@ import {
 	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
 import { useIsSignedIn } from './useIsSignedIn';
@@ -21,15 +23,23 @@ import { useIsSignedIn } from './useIsSignedIn';
  */
 export const useBraze = (
 	idApiUrl: string,
+	log?: boolean | undefined,
 ): {
 	brazeMessages: BrazeMessagesInterface | undefined;
 	brazeCards: BrazeCardsInterface | undefined;
 } => {
-	const isSignedIn = useIsSignedIn();
 
-	const { data, error } = useSWRImmutable('braze-message', () =>
-		buildBrazeMessaging(idApiUrl, isSignedIn),
+	const isSignedIn = useIsSignedIn()
+
+	if (log) {console.log("use braze is signed in", isSignedIn)}
+
+
+	const { data, error } = useSWRImmutable(isSignedIn !== 'Pending' ? 'braze-message' : null, () => 
+		buildBrazeMessaging(idApiUrl, isSignedIn === 'SignedIn'),
 	);
+	if (log) 
+		{console.log("data from swrimmutable is ", data)
+		console.log("error from swrimmutable is ", error)}
 
 	if (error) {
 		return {
@@ -38,8 +48,10 @@ export const useBraze = (
 		};
 	}
 
-	return {
-		brazeMessages: data?.brazeMessages,
-		brazeCards: data?.brazeCards,
-	};
+return {
+	brazeMessages: data?.brazeMessages,
+	brazeCards: data?.brazeCards,}
+
 };
+
+

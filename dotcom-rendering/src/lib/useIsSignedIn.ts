@@ -1,16 +1,24 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
-async function getIsSignedInStatusWithOkta() {
-	return (await import('./identity')).isSignedInWithOkta();
+
+export type SignedInStatus = 'Pending' | 'SignedOut' | 'SignedIn'
+
+async function getIsSignedInStatusWithOkta(): Promise<'SignedOut' | 'SignedIn'> {
+	const {isSignedInWithOkta} = await import('./identity')
+	const isSignedIn = await isSignedInWithOkta()
+	return isSignedIn ? 'SignedIn' : 'SignedOut';
 }
 
-function getIsSignedInStatusWithCookie() {
-	return !!getCookie({ name: 'GU_U', shouldMemoize: true });
+function getIsSignedInStatusWithCookie(): 'SignedOut' | 'SignedIn' {
+	const GU_UCookie = getCookie({ name: 'GU_U', shouldMemoize: true })
+	return GU_UCookie === null || GU_UCookie === "" ? 'SignedOut' : 'SignedIn'
 }
 
-export const useIsSignedIn = (): boolean => {
-	const [isSignedIn, setIsSignedIn] = useState(false);
+//rename to useSignInStatus
+export const useIsSignedIn = (): SignedInStatus => {
+	const [isSignedIn, setIsSignedIn] = useState<SignedInStatus>('Pending');
+	console.log("isSignedIn at first", isSignedIn)
 
 	useEffect(() => {
 		const isInOktaExperiment =
@@ -28,6 +36,7 @@ export const useIsSignedIn = (): boolean => {
 			setIsSignedIn(getIsSignedInStatusWithCookie());
 		}
 	}, []);
+	console.log("is signed in after useeffect", isSignedIn)
 
 	return isSignedIn;
 };
