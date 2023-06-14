@@ -26,7 +26,7 @@ export const Default = () => {
 									identityName: 'test-2',
 									name: 'test newsletter 2',
 									description:
-										'Select at least one newsletter to make the ManyNewsletterSignUp appear',
+										'Including the word "example" in the email before submitting will display the forms fail state.',
 									frequency: 'monthly',
 									theme: 'news',
 									group: '',
@@ -37,7 +37,7 @@ export const Default = () => {
 					],
 				}}
 			/>
-			<ManyNewsletterSignUp />
+			<ManyNewsletterSignUp apiEndpoint="" />
 		</>
 	);
 };

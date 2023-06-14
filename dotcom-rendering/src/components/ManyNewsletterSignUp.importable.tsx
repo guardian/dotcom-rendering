@@ -18,6 +18,13 @@ import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { Section } from './Section';
 
+interface Props {
+	/** The endpoint to send the sign-up request to. An empty string will
+	 * make the component use test results instead of making an actual request.
+	 */
+	apiEndpoint: string;
+}
+
 enum FormState {
 	NotSent,
 	Loading,
@@ -104,7 +111,7 @@ interface FormProps {
 	status: FormState;
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
-	handleSubmitButton: { (): void };
+	handleSubmitButton: { (): Promise<void> };
 }
 const Form = ({
 	status,
@@ -186,7 +193,39 @@ const ClearButton = ({ removeAll }: ClearButtonProps) => (
 	</Button>
 );
 
-export const ManyNewsletterSignUp = () => {
+/**
+ * Placeholder function to represent API call.
+ */
+const sendSignUpRequest = async (
+	emailAddress: string,
+	newsletterIds: string[],
+	apiEndpoint: string,
+): Promise<{ ok: boolean; message?: string }> => {
+	if (apiEndpoint === '') {
+		await new Promise((resolve) => {
+			setTimeout(resolve, 2000);
+		});
+
+		if (emailAddress.includes('example')) {
+			return {
+				ok: false,
+				message: `Simulated failed sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
+			};
+		}
+
+		return {
+			ok: true,
+			message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
+		};
+	}
+
+	return {
+		ok: false,
+		message: `A non-empty endpoint was provided, but actual API calls are not implemented.`,
+	};
+};
+
+export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
@@ -249,16 +288,23 @@ export const ManyNewsletterSignUp = () => {
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
-	const handleSubmitButton = () => {
+	const handleSubmitButton = async () => {
 		if (status !== FormState.NotSent) {
 			return;
 		}
 		setStatus(FormState.Loading);
-		setTimeout(() => {
-			setStatus(
-				email.includes('@') ? FormState.Success : FormState.Failed,
-			);
-		}, 2000);
+
+		const result = await sendSignUpRequest(
+			email,
+			newslettersToSignUpFor,
+			apiEndpoint,
+		);
+
+		if (result.message) {
+			console.log(result.message);
+		}
+
+		setStatus(result.ok ? FormState.Success : FormState.Failed);
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {

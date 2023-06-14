@@ -159,7 +159,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				/>
 
 				<Island deferUntil="idle">
-					<ManyNewsletterSignUp />
+					<ManyNewsletterSignUp apiEndpoint="" />
 				</Island>
 			</main>
 
