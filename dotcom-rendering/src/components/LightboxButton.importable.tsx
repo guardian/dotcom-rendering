@@ -77,8 +77,8 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 	// SELECTORS
 	//
-	// We start by definings some variables that reference parts of the dom. These page
-	// parts are either on the docuement or in the lightbox element itself
+	// We start by defining some variables that reference parts of the dom. These page
+	// parts are either on the document or in the lightbox element itself
 	// --------------------------------------------------------------------------------
 	/**
 	 * Each image has a lightbox button that is used to trigger the lightbox
