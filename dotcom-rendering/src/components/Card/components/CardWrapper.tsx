@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
+import { decidePalette } from '../../../lib/decidePalette';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
 } from '../../../types/front';
 import type { Palette } from '../../../types/palette';
-import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	children: React.ReactNode;

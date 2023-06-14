@@ -256,6 +256,7 @@ export const enhanceCards = (
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'

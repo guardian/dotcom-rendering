@@ -198,7 +198,8 @@ const dynamoStyles = css`
 	font-weight: ${fontWeights.medium};
 	padding: 5px;
 `;
-const WithLink = ({
+
+export const WithLink = ({
 	linkTo,
 	children,
 	isDynamo,
