@@ -1,10 +1,8 @@
-import { ClassNames, css as emoCss } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { border, from, space } from '@guardian/source-foundations';
-// @ts-expect-error
-import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 
-const sidePadding = emoCss`
+const sidePadding = css`
 	padding-left: 10px;
 	padding-right: 10px;
 
@@ -14,22 +12,22 @@ const sidePadding = emoCss`
 	}
 `;
 
-const bottomPadding = emoCss`
+const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-const sideBorderStyles = (colour: string) => emoCss`
+const sideBorderStyles = (colour: string) => css`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
 `;
 
-const topBorderStyles = (colour: string) => emoCss`
+const topBorderStyles = (colour: string) => css`
 	border-top: 1px solid ${colour};
 `;
 
-const setBackgroundColour = (colour: string) => emoCss`
+const setBackgroundColour = (colour: string) => css`
 	background-color: ${colour};
 `;
 
@@ -78,42 +76,37 @@ export const ElementContainer = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
-}: Props) => (
-	<ClassNames>
-		{({ css }) => {
-			const child = (
-				<div
-					/**
-					 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-					 * this id pre-existed showMore so is probably also being used for something else.
-					 */
-					id={sectionId}
-					css={[
-						shouldCenter && center,
-						showSideBorders && sideBorderStyles(borderColour),
-						showTopBorder && topBorderStyles(borderColour),
-						innerBackgroundColour &&
-							setBackgroundColour(innerBackgroundColour),
-						padSides && sidePadding,
-						padBottom && bottomPadding,
-					]}
-				>
-					{children}
-				</div>
-			);
-			const style = css`
-				${backgroundColour && setBackgroundColour(backgroundColour)};
-			`;
-			// Create a react element from the tagName passed in OR
-			// default to <div>
-			return _jsx(`${element}`, {
-				id: ophanComponentName,
-				'data-link-name': ophanComponentLink,
-				'data-component': ophanComponentName,
-				'data-container-name': containerName,
-				className: className ? `${style} ${className}` : style,
-				children: child,
-			});
-		}}
-	</ClassNames>
-);
+}: Props) => {
+	const child = (
+		<div
+			/**
+			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+			 * this id pre-existed showMore so is probably also being used for something else.
+			 */
+			id={sectionId}
+			css={[
+				shouldCenter && center,
+				showSideBorders && sideBorderStyles(borderColour),
+				showTopBorder && topBorderStyles(borderColour),
+				innerBackgroundColour &&
+					setBackgroundColour(innerBackgroundColour),
+				padSides && sidePadding,
+				padBottom && bottomPadding,
+			]}
+		>
+			{children}
+		</div>
+	);
+
+	// Create a react element from the tagName passed in OR
+	// default to <div>
+	return jsx(element, {
+		id: ophanComponentName,
+		'data-link-name': ophanComponentLink,
+		'data-component': ophanComponentName,
+		'data-container-name': containerName,
+		css: [backgroundColour && setBackgroundColour(backgroundColour)],
+		className,
+		children: child,
+	});
+};
