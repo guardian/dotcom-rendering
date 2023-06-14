@@ -8,9 +8,9 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
 import { Island } from './Island';
@@ -225,36 +225,6 @@ export const getLargest = (images: Image[]) => {
 	return images.slice().sort(descendingByWidth)[0];
 };
 
-/**
- * We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
- * because the image sources and CSS deal with the sizing. What the height and width gives us is a true
- * ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
- *
- * The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
- */
-export const getImageDimensions = (
-	element: ImageBlockElement,
-): {
-	width: string;
-	height: string;
-} => {
-	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
-	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
-	// ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
-	//
-	// The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
-	const width =
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
-		element.media?.allImages[0]?.fields.width ?? '620';
-	const height =
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
-		element.media?.allImages[0]?.fields.height ?? '372';
-	return {
-		width,
-		height,
-	};
-};
-
 export const ImageComponent = ({
 	element,
 	format,
@@ -278,16 +248,10 @@ export const ImageComponent = ({
 		format.design !== ArticleDesign.Comment &&
 		format.design !== ArticleDesign.Editorial;
 
-	const dimensions = getImageDimensions(element);
-	const imageWidth = dimensions.width;
-	const imageHeight = dimensions.height;
-
-	const palette = decidePalette(format);
-
 	// Legacy images do not have a master so we fallback to the largest available
-	const image =
-		getMaster(element.media.allImages)?.url ??
-		getLargest(element.media.allImages)?.url;
+	const master =
+		getMaster(element.media.allImages) ??
+		getLargest(element.media.allImages);
 
 	const isSupported = (imageUrl: string): boolean => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
@@ -295,10 +259,26 @@ export const ImageComponent = ({
 			imageUrl.endsWith(`.${extension}`),
 		);
 	};
-	if (!image || !isSupported(image)) {
+
+	if (!master?.url || !isSupported(master.url)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
+
+	/**
+	 * We use height and width for two things.
+	 *
+	 * 1) To decide if an image is large enough to be used in lightbox (>620) and
+	 * 2) To get a true ratio value to apply to the image in the page, so the browser's pre-parser can reserve the space
+	 *
+	 * On the second point, see this PR for more detail
+	 * https://github.com/guardian/dotcom-rendering/pull/1879
+	 *
+	 */
+	const imageWidth = master.fields.width;
+	const imageHeight = master.fields.width;
+
+	const palette = decidePalette(format);
 
 	if (
 		isMainMedia &&
@@ -340,7 +320,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -350,7 +330,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(dimensions.width) >= 620 && (
+				{parseInt(imageWidth) >= 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}
@@ -386,7 +366,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -399,7 +379,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(dimensions.width) >= 620 && (
+				{parseInt(imageWidth) >= 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}
@@ -435,7 +415,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -487,7 +467,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{parseInt(dimensions.width) >= 620 && (
+				{parseInt(imageWidth) >= 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}

@@ -21,7 +21,7 @@ import { StarRating } from '@guardian/source-react-components-development-kitche
 import { getZIndex } from '../lib/getZIndex';
 import type { EnhancedImageForLightbox } from '../types/content';
 import { Caption } from './Caption';
-import { getImageDimensions, getLargest, getMaster } from './ImageComponent';
+import { getLargest, getMaster } from './ImageComponent';
 import { Picture } from './Picture';
 
 type Props = {
@@ -367,15 +367,14 @@ export const Lightbox = ({ format, images }: Props) => {
 					>
 						{images.map((image, index) => {
 							// Legacy images do not have a master so we fallback to the largest available
-							const master: string | undefined =
-								getMaster(image.media.allImages)?.url ??
-								getLargest(image.media.allImages)?.url;
+							const master =
+								getMaster(image.media.allImages) ??
+								getLargest(image.media.allImages);
 
 							if (!master) return null;
 
-							const dimensions = getImageDimensions(image);
-							const width = dimensions.width;
-							const height = dimensions.height;
+							const width = master.fields.width;
+							const height = master.fields.height;
 
 							const orientation =
 								parseInt(width) > parseInt(height)
@@ -385,7 +384,7 @@ export const Lightbox = ({ format, images }: Props) => {
 							return (
 								<li
 									// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
-									key={`${master}-${index}`}
+									key={`${master.url}-${index}`}
 									data-index={index + 1}
 									data-element-id={image.elementId}
 									css={[
@@ -406,7 +405,7 @@ export const Lightbox = ({ format, images }: Props) => {
 											// viewport
 											height={height}
 											width={width}
-											master={master}
+											master={master.url}
 											format={format}
 											isLightbox={true}
 											orientation={orientation}
