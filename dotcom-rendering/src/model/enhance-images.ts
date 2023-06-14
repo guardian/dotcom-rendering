@@ -120,7 +120,7 @@ const constructMultiImageElement = (
 	};
 };
 
-const addLightboxData = (elements: FEElement[]): FEElement[] => {
+export const addLightboxData = (elements: FEElement[]): FEElement[] => {
 	const withLightboxData: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		if (isImage(thisElement)) {
