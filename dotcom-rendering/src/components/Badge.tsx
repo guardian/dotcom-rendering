@@ -11,6 +11,8 @@ const badgeSizingStyles = css`
 const imageStyles = css`
 	display: block;
 	width: auto;
+	max-width: 100%;
+	object-fit: contain;
 	${badgeSizingStyles}
 `;
 
