@@ -61,7 +61,7 @@ const ClearButton = ({ removeAll }: ClearButtonProps) => (
 		priority="tertiary"
 		icon={<SvgCross />}
 	>
-		cancel sign up
+		remove all newsletters from sign up list
 	</Button>
 );
 
@@ -256,6 +256,7 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 							handleTextInput,
 							status,
 						}}
+						newsletterCount={newslettersToSignUpFor.length}
 					/>
 					<div css={desktopClearButtonWrapperStyle}>
 						<ClearButton removeAll={removeAll} />

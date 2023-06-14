@@ -11,6 +11,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
+import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 interface FormProps {
@@ -18,6 +19,7 @@ interface FormProps {
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> };
+	newsletterCount: number;
 }
 
 export const formFrameStyle = css`
@@ -26,10 +28,10 @@ export const formFrameStyle = css`
 	padding: ${space[2]}px;
 
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 
 	${from.desktop} {
-		flex-direction: row;
+		flex-direction: row-reverse;
 		align-items: center;
 		justify-content: space-between;
 	}
@@ -95,14 +97,31 @@ export const ManyNewslettersForm = ({
 	email,
 	handleTextInput,
 	handleSubmitButton,
+	newsletterCount,
 }: FormProps) => {
+	const ariaLabel =
+		newsletterCount === 1
+			? 'Sign up for the newsletter you selected'
+			: `Sign up for the ${newsletterCount} newsletters you selected`;
+
 	return (
 		<form
+			aria-label="sign-up confirmation form"
+			aria-live="polite"
 			css={formFrameStyle}
 			onSubmit={(submitEvent) => {
 				submitEvent.preventDefault();
 			}}
 		>
+			<aside css={formAsideStyle}>
+				<InlineSkipToWrapper
+					id={'man-newsletter-form-inline-skip-to-wrapper'}
+					blockDescription="Privacy Notice"
+				>
+					<NewsletterPrivacyMessage />
+				</InlineSkipToWrapper>
+			</aside>
+
 			{(status === 'NotSent' || status === 'Loading') && (
 				<div css={formFieldsStyle}>
 					<span css={inputWrapperStyle}>
@@ -113,6 +132,7 @@ export const ManyNewslettersForm = ({
 						/>
 					</span>
 					<Button
+						aria-label={ariaLabel}
 						isLoading={status === 'Loading'}
 						iconSide="right"
 						onClick={() => {
@@ -132,10 +152,6 @@ export const ManyNewslettersForm = ({
 					You are now a subscriber! Thank you for signing up
 				</p>
 			)}
-
-			<aside css={formAsideStyle}>
-				<NewsletterPrivacyMessage />
-			</aside>
 		</form>
 	);
 };
