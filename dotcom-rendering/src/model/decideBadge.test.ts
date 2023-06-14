@@ -80,4 +80,10 @@ describe('Decide badge', () => {
 			expect(result).toEqual(expectedResult);
 		});
 	});
+
+	it('returns undefined if not using displayName or branding', () => {
+		const expectedResult = undefined;
+		const result = decideBadge('NOT This is Europe', []);
+		expect(result).toEqual(expectedResult);
+	});
 });
