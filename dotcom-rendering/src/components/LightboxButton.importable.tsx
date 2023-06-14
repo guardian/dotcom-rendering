@@ -588,7 +588,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
  * What about accessibility?
  * -------------------------
  * The child button element is still the primary method for opening
- * the lightbox and this is the element that we want assitive technologies like
+ * the lightbox and this is the element that we want assistive technologies like
  * screen readers to interact with. This overlay is intentionally hidden from
  * keyboards and screen readers and can be thought of as progressive enhancement
  * for mouse and touch users.
