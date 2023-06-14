@@ -16,7 +16,7 @@ const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
 	if (!fields) return false; // Unlikely
 	const { width, height } = fields;
 	const orientation =
-		parseInt(width, 10) > parseInt(height, 10) ? 'horizontal' : 'portrait';
+		parseInt(width, 10) >= parseInt(height, 10) ? 'horizontal' : 'portrait';
 	switch (orientation) {
 		case 'horizontal':
 			// If any width is above 620 we allow this image in lightbox
