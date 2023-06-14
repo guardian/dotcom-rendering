@@ -256,17 +256,12 @@ const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
  */
-const displayStyle = (isLightbox: boolean) => {
-	if (isLightbox) {
-		return css`
-			display: flex;
-		`;
-	} else {
-		return css`
-			display: block;
-		`;
-	}
-};
+const block = css`
+	display: block;
+`;
+const flex = css`
+	display: flex;
+`;
 
 type ImageSource = {
 	breakpoint: number;
@@ -347,7 +342,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={displayStyle(isLightbox)}>
+		<picture css={isLightbox ? flex : block}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -411,7 +406,7 @@ export const Picture = ({
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
-				css={displayStyle(isLightbox)}
+				css={isLightbox ? flex : block}
 			/>
 		</picture>
 	);
