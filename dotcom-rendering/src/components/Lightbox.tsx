@@ -108,7 +108,7 @@ const ulStyles = css`
 	 * Hide scrollbars
 	 * See: https://stackoverflow.com/a/38994837
 	 *
-	 * Removing the scrollbars here is okay because we offer mutiple other methods for
+	 * Removing the scrollbars here is okay because we offer multiple other methods for
 	 * navigation which are obvious and accessible to readers
 	 */
 	::-webkit-scrollbar {
