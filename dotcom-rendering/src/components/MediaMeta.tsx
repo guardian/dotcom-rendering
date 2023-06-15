@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import {
-	SvgAudio,
-	SvgCamera,
-	SvgVideo,
-} from '@guardian/source-react-components';
+import { SvgAudio, SvgCamera } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
@@ -76,7 +72,7 @@ const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 		case 'Gallery':
 			return <SvgCamera />;
 		case 'Video':
-			return <SvgVideo />;
+			return null;
 		case 'Audio':
 			return <SvgAudio />;
 	}
@@ -90,11 +86,14 @@ const MediaIcon = ({
 	mediaType: MediaType;
 	palette: Palette;
 	hasKicker: boolean;
-}) => (
-	<span css={iconWrapperStyles(palette, hasKicker)}>
-		<Icon mediaType={mediaType} />
-	</span>
-);
+}) => {
+	if (mediaType == 'Video') return null;
+	return (
+		<span css={iconWrapperStyles(palette, hasKicker)}>
+			<Icon mediaType={mediaType} />
+		</span>
+	);
+};
 
 const MediaDuration = ({
 	mediaDuration,
