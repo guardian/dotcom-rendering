@@ -8,16 +8,20 @@ import {
 import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useCallback, useEffect, useState } from 'react';
+import { requestMultipleSignUps } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { Section } from './Section';
 
 interface Props {
-	/** The endpoint to send the sign-up request to. An empty string will
-	 * make the component use test results instead of making an actual request.
+	/**
+	 * Whether to use the mocked request function.
+	 *
+	 * This option is to allow a functional Story to be published for the component.
+	 * TO DO - find a better way to do that!
 	 */
-	apiEndpoint: string;
+	useMockedRequestFunction: boolean;
 }
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
@@ -98,38 +102,29 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 };
 
 /**
- * Placeholder function to represent API call.
+ * Placeholder function to represent API call in the story.
  */
-const sendSignUpRequest = async (
+const mockSignUpRequest = async (
 	emailAddress: string,
 	newsletterIds: string[],
-	apiEndpoint: string,
-): Promise<{ ok: boolean; message?: string }> => {
-	if (apiEndpoint === '') {
-		await new Promise((resolve) => {
-			setTimeout(resolve, 2000);
-		});
+	recaptchaToken: string,
+): Promise<Response> => {
+	await new Promise((resolve) => {
+		setTimeout(resolve, 2000);
+	});
 
-		if (emailAddress.includes('example')) {
-			return {
-				ok: false,
-				message: `Simulated failed sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
-			};
-		}
-
-		return {
-			ok: true,
-			message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
-		};
-	}
+	const fail = emailAddress.includes('example');
 
 	return {
-		ok: false,
-		message: `A non-empty endpoint was provided, but actual API calls are not implemented.`,
-	};
+		ok: !fail,
+		status: fail ? 400 : 200,
+		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. recaptchaToken ${
+			recaptchaToken ? 'present' : 'absent'
+		} `,
+	} as unknown as Response;
 };
 
-export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
+export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
@@ -210,17 +205,11 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 		}
 		setStatus('Loading');
 
-		const result = await sendSignUpRequest(
-			email,
-			newslettersToSignUpFor,
-			apiEndpoint,
-		);
+		const response = useMockedRequestFunction
+			? await mockSignUpRequest(email, newslettersToSignUpFor, '')
+			: await requestMultipleSignUps(email, newslettersToSignUpFor, '');
 
-		if (result.message) {
-			console.log(result.message);
-		}
-
-		setStatus(result.ok ? 'Success' : 'Failed');
+		setStatus(response.ok ? 'Success' : 'Failed');
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {

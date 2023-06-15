@@ -37,7 +37,7 @@ export const Default = () => {
 					],
 				}}
 			/>
-			<ManyNewsletterSignUp apiEndpoint="" />
+			<ManyNewsletterSignUp useMockedRequestFunction={true} />
 		</>
 	);
 };
