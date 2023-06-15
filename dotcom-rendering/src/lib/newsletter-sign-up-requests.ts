@@ -90,3 +90,23 @@ export const requestSingleSignUp = async (
 		data,
 	);
 };
+
+export const mockRequestMultipleSignUps = async (
+	emailAddress: string,
+	newsletterIds: string[],
+	recaptchaToken: string,
+): Promise<Response> => {
+	await new Promise((resolve) => {
+		setTimeout(resolve, 2000);
+	});
+
+	const fail = emailAddress.includes('example');
+
+	return {
+		ok: !fail,
+		status: fail ? 400 : 200,
+		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. reCaptchaToken is ${
+			recaptchaToken.length
+		} characters.`,
+	} as unknown as Response;
+};

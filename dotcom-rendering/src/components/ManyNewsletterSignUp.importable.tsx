@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	getCaptchaSiteKey,
+	mockRequestMultipleSignUps,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
@@ -105,29 +106,6 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
-/**
- * Placeholder function to represent API call in the story.
- */
-const mockSignUpRequest = async (
-	emailAddress: string,
-	newsletterIds: string[],
-	recaptchaToken: string,
-): Promise<Response> => {
-	await new Promise((resolve) => {
-		setTimeout(resolve, 2000);
-	});
-
-	const fail = emailAddress.includes('example');
-
-	return {
-		ok: !fail,
-		status: fail ? 400 : 200,
-		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. reCaptchaToken is ${
-			recaptchaToken.length
-		} characters.`,
-	} as unknown as Response;
-};
-
 export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
@@ -207,7 +185,7 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
 		const functionToUse = useMockedRequestFunction
-			? mockSignUpRequest
+			? mockRequestMultipleSignUps
 			: requestMultipleSignUps;
 		const response = await functionToUse(
 			email,
