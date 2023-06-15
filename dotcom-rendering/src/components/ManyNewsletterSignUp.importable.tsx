@@ -6,9 +6,13 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
-import type { ChangeEventHandler } from 'react';
-import { useCallback, useEffect, useState } from 'react';
-import { requestMultipleSignUps } from '../lib/newsletter-sign-up-requests';
+import type { ChangeEventHandler, ReactEventHandler } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import {
+	getCaptchaSiteKey,
+	requestMultipleSignUps,
+} from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
@@ -21,7 +25,7 @@ interface Props {
 	 * This option is to allow a functional Story to be published for the component.
 	 * TO DO - find a better way to do that!
 	 */
-	useMockedRequestFunction: boolean;
+	useMockedRequestFunction?: boolean;
 }
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
@@ -118,9 +122,9 @@ const mockSignUpRequest = async (
 	return {
 		ok: !fail,
 		status: fail ? 400 : 200,
-		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. recaptchaToken ${
-			recaptchaToken ? 'present' : 'absent'
-		} `,
+		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. reCaptchaToken is ${
+			recaptchaToken.length
+		} characters.`,
 	} as unknown as Response;
 };
 
@@ -130,6 +134,8 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
+	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const captchaSiteKey = getCaptchaSiteKey();
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
@@ -199,17 +205,36 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
-	const handleSubmitButton = async () => {
+	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
+		const functionToUse = useMockedRequestFunction
+			? mockSignUpRequest
+			: requestMultipleSignUps;
+		const response = await functionToUse(
+			email,
+			newslettersToSignUpFor,
+			reCaptchaToken,
+		);
+		setStatus(response.ok ? 'Success' : 'Failed');
+	};
+
+	// TO DO - support an boolean prop to submit without the captcha
+	// would need this for the story to work
+	const handleSubmitButton = () => {
 		if (status !== 'NotSent') {
 			return;
 		}
+		if (!reCaptchaRef.current) {
+			console.warn('NO reCAPTCHA');
+			return;
+		}
 		setStatus('Loading');
+		reCaptchaRef.current.execute();
+		// successfull execution triggers a call to sendRequest
+	};
 
-		const response = useMockedRequestFunction
-			? await mockSignUpRequest(email, newslettersToSignUpFor, '')
-			: await requestMultipleSignUps(email, newslettersToSignUpFor, '');
-
-		setStatus(response.ok ? 'Success' : 'Failed');
+	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
+		console.warn(`reCAPTCHA failed to load.`);
+		reCaptchaRef.current?.reset();
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -250,6 +275,33 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 					<div css={desktopClearButtonWrapperStyle}>
 						<ClearButton removeAll={removeAll} />
 					</div>
+
+					{!!captchaSiteKey && (
+						<div
+							css={css`
+								.grecaptcha-badge {
+									visibility: hidden;
+								}
+							`}
+						>
+							<ReCAPTCHA
+								sitekey={captchaSiteKey}
+								ref={reCaptchaRef}
+								onChange={(token) => {
+									if (token) {
+										void sendRequest(token);
+									}
+								}}
+								onError={handleCaptchaLoadError}
+								size="invisible"
+								// Note - the component supports an onExpired callback
+								// (for when the user completed a challenge, but did
+								// not submit the form before the token expired.
+								// We don't need that here as completing the captcha
+								// (onChange callback) triggers the submission
+							/>
+						</div>
+					)}
 				</Flex>
 			</Section>
 		</div>

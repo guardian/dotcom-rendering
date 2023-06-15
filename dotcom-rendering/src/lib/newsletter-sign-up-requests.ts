@@ -1,3 +1,8 @@
+const isServer = typeof window === 'undefined';
+
+export const getCaptchaSiteKey = (): string | undefined =>
+	isServer ? undefined : window.guardian.config.page.googleRecaptchaSiteKey;
+
 const buildNewsletterSignUpFormData = (
 	emailAddress: string,
 	newsletterIdOrList: string | string[],
