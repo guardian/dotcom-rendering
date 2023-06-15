@@ -12,6 +12,7 @@ import type { Colour } from '../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
+import { localisedTitle } from './Localisation';
 
 type Props = {
 	title?: string;
@@ -94,10 +95,14 @@ export const ContainerTitle = ({
 		<div css={marginStyles}>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
-					<h2 css={headerStyles(fontColour)}>{title}</h2>
+					<h2 css={headerStyles(fontColour)}>
+						{localisedTitle(title, editionId)}
+					</h2>
 				</a>
 			) : (
-				<h2 css={headerStyles(fontColour)}>{title}</h2>
+				<h2 css={headerStyles(fontColour)}>
+					{localisedTitle(title, editionId)}
+				</h2>
 			)}
 			{!!description && (
 				<div
