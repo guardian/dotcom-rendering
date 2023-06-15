@@ -44,9 +44,9 @@ describe('Lightbox', function () {
 		cy.get('#gu-lightbox').should('be.visible');
 		cy.realPress('Tab');
 		cy.get('button.close').should('have.focus');
-		cy.get('button.previous').should('not.have.focus');
+		cy.get('button.next').should('not.have.focus');
 		cy.realPress('Tab');
-		cy.get('button.previous').should('have.focus');
+		cy.get('button.next').should('have.focus');
 		cy.realPress('Tab');
 		cy.realPress('Tab');
 		cy.get('button.info').should('have.focus');
@@ -55,17 +55,17 @@ describe('Lightbox', function () {
 		cy.get('button.info').should('not.have.focus');
 		cy.get('button.close').should('have.focus');
 		cy.realPress('Tab');
-		cy.get('button.previous').should('have.focus');
-		cy.realPress('Tab');
 		cy.get('button.next').should('have.focus');
+		cy.realPress('Tab');
+		cy.get('button.previous').should('have.focus');
 		cy.realPress('Tab');
 		cy.get('button.info').should('have.focus');
 		cy.realPress('Tab');
 		cy.get('button.close').should('have.focus');
 		cy.realPress('Tab');
-		cy.get('button.previous').should('have.focus');
-		cy.realPress('Tab');
 		cy.get('button.next').should('have.focus');
+		cy.realPress('Tab');
+		cy.get('button.previous').should('have.focus');
 	});
 
 	it('should respond to keyboard shortcuts and image clicks', function () {

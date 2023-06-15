@@ -532,24 +532,16 @@ export const Lightbox = ({ format, images }: Props) => {
 						</Hide>
 						<button
 							type="button"
-							css={[buttonStyles, arrowButtonStyles]}
-							className="previous"
-							title="Previous image [←]"
-						>
-							<SvgArrowLeftStraight
-								isAnnouncedByScreenReader={false}
-							/>
-							<span
-								css={css`
-									${visuallyHidden}
-								`}
-							>
-								Previous image
-							</span>
-						</button>
-						<button
-							type="button"
-							css={[buttonStyles, arrowButtonStyles]}
+							css={[
+								buttonStyles,
+								arrowButtonStyles,
+								css`
+									order: 1;
+									${until.tablet} {
+										order: 2;
+									}
+								`,
+							]}
 							className="next"
 							title="Next image [→]"
 						>
@@ -566,7 +558,39 @@ export const Lightbox = ({ format, images }: Props) => {
 						</button>
 						<button
 							type="button"
-							css={[buttonStyles, infoButtonStyles]}
+							css={[
+								buttonStyles,
+								arrowButtonStyles,
+								css`
+									order: 2;
+									${until.tablet} {
+										order: 1;
+									}
+								`,
+							]}
+							className="previous"
+							title="Previous image [←]"
+						>
+							<SvgArrowLeftStraight
+								isAnnouncedByScreenReader={false}
+							/>
+							<span
+								css={css`
+									${visuallyHidden}
+								`}
+							>
+								Previous image
+							</span>
+						</button>
+						<button
+							type="button"
+							css={[
+								buttonStyles,
+								infoButtonStyles,
+								css`
+									order: 3;
+								`,
+							]}
 							className="info"
 							title="Toggle caption [i]"
 						>
