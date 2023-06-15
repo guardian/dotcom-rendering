@@ -42,6 +42,7 @@ import type {
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
+import { MediaDuration } from '../MediaDuration';
 
 export type Props = {
 	linkTo: string;
@@ -412,6 +413,10 @@ export const Card = ({
 						)}
 						{image.type === 'crossword' && (
 							<img src={image.src} alt="" />
+						)}
+
+						{mediaDuration !== undefined && mediaDuration > 0 && (
+							<MediaDuration mediaDuration={mediaDuration} />
 						)}
 					</ImageWrapper>
 				)}
