@@ -6,8 +6,6 @@ import {
 	palette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../model/extract-nav';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Footer } from '../components/Footer';
 import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';
@@ -17,7 +15,10 @@ import { Nav } from '../components/Nav/Nav';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
+import { TestManyNewslettersButton } from '../components/TestManyNewslettersButton.importable';
 import { decideFormat } from '../lib/decideFormat';
+import type { NavType } from '../model/extract-nav';
+import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Stuck } from './lib/stickiness';
 
 type Props = {
@@ -153,6 +154,10 @@ export const AllEditorialNewslettersPageLayout = ({
 					editionId={newslettersPage.editionId}
 					headingText={newslettersPage.webTitle}
 				/>
+				{/* TO DO - remove test component */}
+				<Island deferUntil="idle">
+					<TestManyNewslettersButton />
+				</Island>
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
