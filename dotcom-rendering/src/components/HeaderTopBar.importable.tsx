@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
-import { useIsSignedInStatus } from '../lib/useIsSignedInStatus';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
@@ -69,7 +69,7 @@ export const HeaderTopBar = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: HeaderTopBarProps) => {
-	const isSignedIn = useIsSignedInStatus() === 'SignedIn';
+	const isSignedIn = useSignedInStatus() === 'SignedIn';
 
 	return (
 		<div

@@ -17,8 +17,8 @@ import {
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAB } from '../lib/useAB';
-import { useIsSignedInStatus } from '../lib/useIsSignedInStatus';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -106,7 +106,7 @@ const usePayload = ({
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
-	const isSignedIn = useIsSignedInStatus() === 'SignedIn';
+	const isSignedIn = useSignedInStatus() === 'SignedIn';
 
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;

@@ -35,8 +35,9 @@ import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
-import { useIsSignedInStatus } from '../lib/useIsSignedInStatus';
 import { useOnce } from '../lib/useOnce';
+import type { SignedInStatus } from '../lib/useSignedInStatus';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -163,6 +164,17 @@ type ReaderRevenueLinksRemoteProps = {
 	ophanRecord: OphanRecordFunction;
 };
 
+function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
+	switch (signedInStatus) {
+		case 'Pending':
+			return undefined;
+		case 'SignedIn':
+			return true;
+		case 'NotSignedIn':
+			return false;
+	}
+}
+
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
@@ -173,7 +185,7 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = useIsSignedInStatus() === 'SignedIn';
+	const isSignedIn = getIsSignedIn(useSignedInStatus());
 
 	useOnce((): void => {
 		setAutomat();
@@ -194,7 +206,7 @@ const ReaderRevenueLinksRemote = ({
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
-				isSignedIn,
+				isSignedIn: isSignedIn === true,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
