@@ -11,6 +11,7 @@ import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
 import { Nav } from '../components/Nav/Nav';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
@@ -161,6 +162,10 @@ export const AllEditorialNewslettersPageLayout = ({
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
 				/>
+
+				<Island deferUntil="idle">
+					<ManyNewsletterSignUp apiEndpoint="" />
+				</Island>
 			</main>
 
 			<Section
