@@ -3566,7 +3566,12 @@
     web-vitals "^2.1.2"
     wolfy87-eventemitter "^5.2.9"
 
-"@guardian/consent-management-platform@13.2.0", "@guardian/consent-management-platform@^13.2.0":
+"@guardian/consent-management-platform@13.3.1":
+  version "13.3.1"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.3.1.tgz#66c5366f8d5210e50ca6fb63599f924cda4c3143"
+  integrity sha512-hQZgpax8s5xNhq46bsAbIYXoiv4T+52RM0FgphSRWiyj3jrsm2DxEu0R2x4Epg8EGFHmNQDj7GfXvJ5j89ihkQ==
+
+"@guardian/consent-management-platform@^13.2.0":
   version "13.2.0"
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.2.0.tgz#089dcd6b3b7883e281d8764ac7557d1a3a627ae5"
   integrity sha512-1ggVotJaJad2k7w1QAKffnxSRigEiU1ztWNxu0SncNvnsF90BJ8wMCTECsyp/xMhJFIm1DSVJyIucBzzc7VYRg==
@@ -3609,7 +3614,7 @@
     "@typescript-eslint/eslint-plugin" "5.46.1"
     "@typescript-eslint/parser" "5.46.1"
 
-"@guardian/libs@14.1.0":
+"@guardian/libs@14.1.0", "@guardian/libs@^14.0.0":
   version "14.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-14.1.0.tgz#feac9cc5636639e45ab2a6e2fd4a3f29f7af9a70"
   integrity sha512-V/6ROWh0s8A6tJVFBMP9h9sb4L2SN98zSp84aLhBac4Ir1XJjG3kljAyB4uV1+341Amd+44QJGhB/D7roVsSfQ==
@@ -3618,11 +3623,6 @@
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-10.1.1.tgz#7048c365a68dda068f707d46c78979f430221963"
   integrity sha512-OdWReBHRWhdbErVmS15hihVzlkdU8DkKrjDsUIN0P8QZiF4twuzcU3qsPwto2UfibAwPkWqKkNwH1k8b6xNclA==
-
-"@guardian/libs@^14.0.0":
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-14.1.0.tgz#feac9cc5636639e45ab2a6e2fd4a3f29f7af9a70"
-  integrity sha512-V/6ROWh0s8A6tJVFBMP9h9sb4L2SN98zSp84aLhBac4Ir1XJjG3kljAyB4uV1+341Amd+44QJGhB/D7roVsSfQ==
 
 "@guardian/prettier@3.0.0":
   version "3.0.0"
