@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandAlt, from } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
@@ -23,7 +23,7 @@ const iconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
 ) => css`
-	background-color: ${brandAlt[400]};
+	background-color: rgba(18, 18, 18, 0.6);
 	border-radius: 50%;
 	width: ${sizes[sizeOnMobile].button}px;
 	height: ${sizes[sizeOnMobile].button}px;
@@ -38,6 +38,7 @@ const iconStyles = (
 
 	svg {
 		/* Visual centering */
+		fill: ${palette.neutral[100]};
 		transform: translateX(1px);
 		width: ${sizes[sizeOnMobile].icon}px;
 		height: ${sizes[sizeOnMobile].icon}px;
