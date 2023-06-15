@@ -15,8 +15,9 @@ const sizes = {
 const iconWrapperStyles = css`
 	display: flex; /* Fixes the div mis-sizing itself */
 	position: absolute;
-	bottom: 4px;
-	left: 4px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;
 
 const iconStyles = (
