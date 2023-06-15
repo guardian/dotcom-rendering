@@ -14,7 +14,7 @@ import type {
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
 import { useBraze } from '../lib/useBraze';
-import { useIsSignedIn } from '../lib/useIsSignedIn';
+import { useIsSignedInStatus } from '../lib/useIsSignedInStatus';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
@@ -107,7 +107,7 @@ export const SlotBodyEnd = ({
 	const { brazeMessages } = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
-	const signedInStatus = useIsSignedIn();
+	const isSignedIn = useIsSignedInStatus() === 'SignedIn';
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,
@@ -138,7 +138,7 @@ export const SlotBodyEnd = ({
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
-			signedInStatus === 'SignedIn',
+			isSignedIn,
 			countryCode,
 			contentType,
 			sectionId,
@@ -176,7 +176,7 @@ export const SlotBodyEnd = ({
 			.catch((e) =>
 				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
-	}, [signedInStatus, countryCode, brazeMessages, asyncArticleCount]);
+	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic !== null) {
 		return (

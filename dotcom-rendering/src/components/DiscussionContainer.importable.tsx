@@ -1,4 +1,4 @@
-import { useIsSignedIn } from '../lib/useIsSignedIn';
+import { useIsSignedInStatus } from '../lib/useIsSignedInStatus';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
@@ -23,7 +23,7 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  */
 
 export const DiscussionContainer = (props: DiscussionProps) => {
-	const isSignedIn = useIsSignedIn();
+	const isSignedIn = useIsSignedInStatus() === 'SignedIn';
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
 
 	return <Discussion {...props} />;

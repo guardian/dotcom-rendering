@@ -56,7 +56,6 @@ export const buildBrazeMessaging = async (
 	brazeMessages: BrazeMessagesInterface;
 	brazeCards: BrazeCardsInterface;
 }> => {
-	console.log("buildbrazemessaging's is signed in value ", isSignedIn)
 	if (!storage.local.isAvailable()) {
 		// we require local storage for using any message channel so that we know
 		// when to clear up user data from the device on logout
@@ -70,7 +69,7 @@ export const buildBrazeMessaging = async (
 		isSignedIn,
 		idApiUrl,
 	);
- 
+
 	if (!dependenciesResult.isSuccessful) {
 		const { failure, data } = dependenciesResult;
 
