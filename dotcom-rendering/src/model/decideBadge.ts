@@ -6,6 +6,32 @@ export const BADGE_THIS_IS_EUROPE = {
 		'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg',
 	href: '/world/series/this-is-europe',
 };
+
+/**
+ * Fetches the badge properties only if ALL branding has the same sponsor.
+ */
+export const getBadgeFromBranding = (
+	branding: Branding[],
+): DCRBadgeType | undefined => {
+	// Early return if there are no branding elements
+	if (!branding.length) return;
+
+	const [firstBrand] = branding;
+	// Early return if the first brand is falsy
+	if (!firstBrand) return;
+
+	const allBrandingHasSameSponsor = branding.every(
+		({ sponsorName }) => sponsorName === firstBrand.sponsorName,
+	);
+
+	return allBrandingHasSameSponsor
+		? {
+				imageSrc: firstBrand.logo.src,
+				href: firstBrand.logo.link,
+		  }
+		: undefined;
+};
+
 /**
  * Construct a badge based on the collection displayName or card branding
  */
@@ -17,20 +43,5 @@ export const decideBadge = (
 		return BADGE_THIS_IS_EUROPE;
 	}
 
-	if (allBranding[0] !== undefined) {
-		const theFirstBrand = allBranding[0];
-		const theFirstName = theFirstBrand.sponsorName;
-		const allSponsorNames = allBranding.map((brand) => brand.sponsorName);
-		const allCardsHaveTheSameSponsor = allSponsorNames.every(
-			(sponsorName) => sponsorName === theFirstName,
-		);
-		const imageSrc = theFirstBrand.logo.src;
-		const href = theFirstBrand.logo.link;
-
-		if (allCardsHaveTheSameSponsor) {
-			return { imageSrc, href };
-		}
-	}
-
-	return undefined;
+	return getBadgeFromBranding(allBranding);
 };
