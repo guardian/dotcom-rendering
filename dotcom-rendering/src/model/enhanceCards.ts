@@ -11,6 +11,7 @@ import type {
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
+	MediaCategory,
 } from '../types/front';
 import type { FETagType, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -134,6 +135,17 @@ const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
 		default:
 			return undefined;
 	}
+};
+
+const decideMediaCategory = (
+	trail: FEFrontCard,
+	tags: TagType[] = [],
+): MediaCategory | undefined => {
+	if (trail.card.isLive) return 'live';
+	if (tags.some(({ id }) => id === 'tone/explainers')) return 'explainer';
+	if (tags.some(({ id }) => id === 'tone/documentaries'))
+		return 'documentary';
+	return;
 };
 
 const decideKicker = (
@@ -288,6 +300,7 @@ export const enhanceCards = (
 			mediaDuration:
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
 					?.duration,
+			mediaCategory: decideMediaCategory(faciaCard, tags),
 			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,

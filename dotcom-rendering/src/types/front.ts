@@ -269,6 +269,8 @@ export type FEFrontCard = {
 	type: string;
 };
 
+export type MediaCategory = 'live' | 'documentary' | 'explainer';
+
 export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
@@ -291,6 +293,7 @@ export type DCRFrontCard = {
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	mediaCategory?: MediaCategory;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
 	embedUri?: string;

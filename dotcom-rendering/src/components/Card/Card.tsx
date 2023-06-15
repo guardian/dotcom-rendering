@@ -12,6 +12,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSnapType,
 	DCRSupportingContent,
+	MediaCategory,
 } from '../../types/front';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
@@ -65,6 +66,7 @@ export type Props = {
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
+	mediaCategory?: MediaCategory;
 	showMainVideo?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
@@ -273,6 +275,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mediaDuration,
+	mediaCategory,
 	showMainVideo,
 	kickerText,
 	showPulsingDot,
