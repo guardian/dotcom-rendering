@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
-import { headline, text, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	palette as sourcePalette,
+	textSans,
+} from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { isLight } from '../lib/isLight';
+import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	left: SectionType;
@@ -27,6 +32,45 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const offTargetSharedStyles = css`
+	position: relative;
+	${headline.medium({ fontWeight: 'bold' })}
+	flex-basis: 50%;
+	line-height: 0.8;
+
+	background-repeat: repeat;
+	background-size: 3px 3px;
+	background-position: center;
+
+	height: 132px;
+
+	padding-top: 1px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 9px;
+`;
+
+const offTargetStyles = (teamColour: string, position: 'left' | 'right') => css`
+	color: ${isLight(teamColour)
+		? sourcePalette.brand[400]
+		: sourcePalette.neutral[100]};
+	background-color: ${teamColour};
+
+	background-image: radial-gradient(
+		circle,
+		${transparentColour(
+				isLight(teamColour)
+					? sourcePalette.brand[800]
+					: sourcePalette.neutral[100],
+				0.4,
+			)}
+			1px,
+		transparent 1px
+	);
+
+	text-align: ${position};
+`;
+
 const Side = ({
 	offTarget,
 	onTarget,
@@ -41,36 +85,13 @@ const Side = ({
 	format: ArticleFormat;
 }) => {
 	const palette = decidePalette(format);
+
 	return (
 		<div
-			css={css`
-				position: relative;
-				${headline.medium({ fontWeight: 'bold' })}
-				color: ${isLight(teamColours)
-					? text.ctaSecondary
-					: text.ctaPrimary};
-				background: ${teamColours};
-				flex-basis: 50%;
-				line-height: 0.8;
-
-				height: 132px;
-
-				background-image: radial-gradient(
-					circle,
-					rgba(255, 255, 255, 0.3) 1px,
-					transparent 1px
-				);
-				background-repeat: repeat;
-				background-size: 3px 3px;
-				background-position-x: 0;
-
-				padding-top: 1px;
-				padding-left: 6px;
-				padding-right: 6px;
-				padding-bottom: 9px;
-
-				text-align: ${position === 'left' ? 'left' : 'right'};
-			`}
+			css={[
+				offTargetSharedStyles,
+				offTargetStyles(teamColours, position),
+			]}
 		>
 			{offTarget}
 			<div

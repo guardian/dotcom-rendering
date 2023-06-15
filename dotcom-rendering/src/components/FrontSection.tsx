@@ -179,7 +179,7 @@ const containerStyles = css`
 	}
 `;
 
-const sectionHeadline = css`
+const sectionHeadline = (borderColour: string) => css`
 	grid-row: headline;
 	grid-column: title;
 
@@ -196,7 +196,7 @@ const sectionHeadline = css`
 			height: 1.875rem;
 			right: -10px;
 			position: absolute;
-			background-color: ${neutral[86]};
+			background-color: ${borderColour};
 		}
 	}
 `;
@@ -253,15 +253,17 @@ const sectionTreats = css`
 	}
 `;
 
-/** element which contains border and inner background colour, if set */
-const decoration = css`
-	grid-row: 1 / -1;
-	grid-column: decoration;
+const decoration = (borderColour: string) => {
+	/** element which contains border and inner background colour, if set */
+	return css`
+		grid-row: 1 / -1;
+		grid-column: decoration;
 
-	border-width: 1px;
-	border-color: ${neutral[86]};
-	border-style: none;
-`;
+		border-width: 1px;
+		border-color: ${borderColour};
+		border-style: none;
+	`;
+};
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -420,9 +422,21 @@ export const FrontSection = ({
 				`,
 			]}
 		>
-			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+			<div
+				css={[
+					decoration(overrides?.border?.container ?? neutral[86]),
+					sideBorders,
+					showTopBorder && topBorder,
+				]}
+			/>
 
-			<div css={[sectionHeadline]}>
+			<div
+				css={[
+					sectionHeadline(
+						overrides?.border?.container ?? neutral[86],
+					),
+				]}
+			>
 				<Hide until="leftCol">
 					{badge && (
 						<Badge imageSrc={badge.imageSrc} href={badge.href} />
@@ -495,6 +509,7 @@ export const FrontSection = ({
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border?.container}
+						fontColour={overrides?.text?.container ?? neutral[7]}
 					/>
 				</div>
 			)}

@@ -9,7 +9,7 @@ import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
 
 export type OphanRecordFunction = (
-	event: { [key: string]: any },
+	event: { [key: string]: unknown },
 	callback?: () => void,
 ) => void;
 
@@ -18,8 +18,11 @@ export const getOphanRecordFunction = (): OphanRecordFunction => {
 
 	if (record) return record;
 
+	// eslint-disable-next-line no-console -- worth informing all users
 	console.warn('window.guardian.ophan.record is not available');
-	return () => {};
+	return () => {
+		/* do nothing */
+	};
 };
 
 export const record: OphanRecordFunction = (event) => {

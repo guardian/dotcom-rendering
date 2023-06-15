@@ -7,9 +7,10 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
+import { decidePalette } from '../lib/decidePalette';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;
@@ -144,9 +145,6 @@ const listItemStyles = (palette: Palette) => css`
 	}
 `;
 
-const trimLeadingSlash = (url: string): string =>
-	url.startsWith('/') ? url.slice(1) : url;
-
 export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -217,9 +215,11 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 							css={linkStyle(palette)}
 							data-src-focus-disabled={true}
 							href={link.url}
-							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
-								link.url,
-							)}`}
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'subnav',
+								link.longTitle,
+							)}
 						>
 							{link.title === currentNavLink ? (
 								<span css={selected}>{link.title}</span>
@@ -232,9 +232,13 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			</ul>
 			{showMore && (
 				<button
+					type="button"
 					onClick={() => setIsExpanded(!isExpanded)}
 					css={showMoreStyle}
-					data-link-name="nav2 : subnav-toggle"
+					data-link-name={nestedOphanComponents(
+						'nav2',
+						'subnav-toggle',
+					)}
 					data-cy="subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}

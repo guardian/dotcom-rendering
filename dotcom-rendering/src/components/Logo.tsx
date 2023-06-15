@@ -8,6 +8,7 @@ import {
 import { SvgGuardianLogo } from '@guardian/source-react-components';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
@@ -49,7 +50,11 @@ export const Logo = ({ editionId }: Props) => {
 	switch (editionId) {
 		case 'UK':
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
+				<a
+					css={linkStyles}
+					href="/"
+					data-link-name={nestedOphanComponents('nav3', 'logo')}
+				>
 					<span
 						css={css`
 							${visuallyHidden};
@@ -62,7 +67,11 @@ export const Logo = ({ editionId }: Props) => {
 			);
 		case 'AU':
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
+				<a
+					css={linkStyles}
+					href="/"
+					data-link-name={nestedOphanComponents('nav3', 'logo')}
+				>
 					<span
 						css={css`
 							${visuallyHidden};
@@ -76,7 +85,11 @@ export const Logo = ({ editionId }: Props) => {
 
 		default:
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
+				<a
+					css={linkStyles}
+					href="/"
+					data-link-name={nestedOphanComponents('nav3', 'logo')}
+				>
 					<span
 						css={css`
 							${visuallyHidden};
