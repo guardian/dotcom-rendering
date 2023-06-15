@@ -66,7 +66,7 @@ type Props = {
 	ajaxUrl?: string;
 	/** Does this front section reside on a "paid for" content front */
 	isOnPaidContentFront?: boolean;
-	/** INDEX TODO */
+	/** Denotes the position of this section on the front */
 	index?: number;
 };
 
@@ -450,6 +450,7 @@ export const FrontSection = ({
 					),
 				]}
 			>
+				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
 				{isOnPaidContentFront && index === 0 ? (
 					<div css={titleStyle}>
 						<ContainerTitle
@@ -457,7 +458,7 @@ export const FrontSection = ({
 							fontColour={overrides?.text?.container}
 							description={description}
 							// On paid fronts the title is not treated as a link
-							// So explicitly mark it as undefined here
+							// Be explicit and pass in undefined
 							url={undefined}
 							containerPalette={containerPalette}
 							showDateHeader={showDateHeader}
