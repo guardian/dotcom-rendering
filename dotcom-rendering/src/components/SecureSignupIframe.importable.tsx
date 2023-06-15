@@ -16,6 +16,7 @@ import {
 	getOphanRecordFunction,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
+import { requestSingleSignUp } from '../lib/newsletter-sign-up-requests';
 
 const isServer = typeof window === 'undefined';
 
@@ -63,52 +64,6 @@ const SuccessMessage = ({ text }: { text?: string }) => (
 		</span>
 	</InlineSuccess>
 );
-
-const buildFormData = (
-	emailAddress: string,
-	newsletterId: string,
-	token: string,
-): FormData => {
-	const pageRef = window.location.origin + window.location.pathname;
-	const refViewId = window.guardian.ophan?.pageViewId ?? '';
-
-	const formData = new FormData();
-	formData.append('email', emailAddress);
-	formData.append('csrfToken', ''); // TO DO - PR on form handlers in frontend/identity to see how/if this is needed
-	formData.append('listName', newsletterId);
-	formData.append('ref', pageRef);
-	formData.append('refViewId', refViewId);
-	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
-	}
-
-	return formData;
-};
-
-const postFormData = async (
-	endpoint: string,
-	formData: FormData,
-): Promise<Response> => {
-	const requestBodyStrings: string[] = [];
-
-	formData.forEach((value, key) => {
-		requestBodyStrings.push(
-			`${encodeURIComponent(key)}=${encodeURIComponent(
-				value.toString(),
-			)}`,
-		);
-	});
-
-	return fetch(endpoint, {
-		method: 'POST',
-		body: requestBodyStrings.join('&'),
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	});
-};
 
 type EventDescription =
 	| 'click-button'
@@ -219,9 +174,10 @@ export const SecureSignupIframe = ({
 		const emailAddress: string = input?.value ?? '';
 
 		sendTracking(newsletterId, 'form-submission');
-		const response = await postFormData(
-			window.guardian.config.page.ajaxUrl + '/email',
-			buildFormData(emailAddress, newsletterId, token),
+		const response = await requestSingleSignUp(
+			emailAddress,
+			newsletterId,
+			token,
 		);
 
 		// The response body could be accessed with await response.text()
