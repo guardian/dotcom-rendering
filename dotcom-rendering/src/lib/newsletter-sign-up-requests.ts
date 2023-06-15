@@ -1,7 +1,7 @@
-export const buildNewsletterSignUpFormData = (
+const buildNewsletterSignUpFormData = (
 	emailAddress: string,
 	newsletterIdOrList: string | string[],
-	token: string,
+	recaptchaToken: string,
 ): FormData => {
 	const pageRef = window.location.origin + window.location.pathname;
 	const refViewId = window.guardian.ophan?.pageViewId ?? '';
@@ -22,13 +22,13 @@ export const buildNewsletterSignUpFormData = (
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
 	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
+		formData.append('g-recaptcha-response', recaptchaToken);
 	}
 
 	return formData;
 };
 
-export const postFormData = async (
+const postFormData = async (
 	endpoint: string,
 	formData: FormData,
 ): Promise<Response> => {
@@ -50,4 +50,38 @@ export const postFormData = async (
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	});
+};
+
+export const requestMultipleSignUps = async (
+	emailAddress: string,
+	newsletterIds: string[],
+	recaptchaToken: string,
+): Promise<Response> => {
+	const data = buildNewsletterSignUpFormData(
+		emailAddress,
+		newsletterIds,
+		recaptchaToken,
+	);
+
+	return await postFormData(
+		window.guardian.config.page.ajaxUrl + '/email/many',
+		data,
+	);
+};
+
+export const requestSingleSignUp = async (
+	emailAddress: string,
+	newsletterId: string,
+	recaptchaToken: string,
+): Promise<Response> => {
+	const data = buildNewsletterSignUpFormData(
+		emailAddress,
+		newsletterId,
+		recaptchaToken,
+	);
+
+	return await postFormData(
+		window.guardian.config.page.ajaxUrl + '/email',
+		data,
+	);
 };
