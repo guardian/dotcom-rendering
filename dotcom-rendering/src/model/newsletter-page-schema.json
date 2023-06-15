@@ -136,6 +136,9 @@
                 },
                 "ipsosTag": {
                     "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
                 }
             },
             "required": [

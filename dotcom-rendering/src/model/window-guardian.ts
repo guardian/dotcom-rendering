@@ -63,6 +63,7 @@ export const makeWindowGuardian = ({
 	GAData,
 	hasInlineMerchandise,
 	section,
+	googleRecaptchaSiteKey,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -85,6 +86,7 @@ export const makeWindowGuardian = ({
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
 	section?: string;
+	googleRecaptchaSiteKey?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -137,6 +139,7 @@ export const makeWindowGuardian = ({
 				brazeApiKey,
 				hasInlineMerchandise,
 				section,
+				googleRecaptchaSiteKey,
 			}),
 			libs: {
 				googletag: googletagUrl,
