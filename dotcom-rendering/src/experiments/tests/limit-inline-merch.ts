@@ -7,7 +7,7 @@ export const limitInlineMerch: ABTest = {
 	author: '@chrislomaxjones',
 	description:
 		'Test the impact of limiting the eligibility of inline merchandising ad slots',
-	audience: 10 / 100,
+	audience: 20 / 100,
 	audienceOffset: 40 / 100,
 	audienceCriteria:
 		'Article pages eligible for rendering an inline merchandising ad slot',
