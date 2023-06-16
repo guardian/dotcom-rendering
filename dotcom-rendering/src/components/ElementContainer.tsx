@@ -58,6 +58,9 @@ type Props = {
 };
 
 /**
+ * Create a react element from the tagName passed in OR
+ * default to <div>
+ *
  * @deprecated please use Section fullWidth={true}  instead
  */
 export const ElementContainer = ({
@@ -76,37 +79,32 @@ export const ElementContainer = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
-}: Props) => {
-	const child = (
-		<div
-			/**
-			 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-			 * this id pre-existed showMore so is probably also being used for something else.
-			 */
-			id={sectionId}
-			css={[
-				shouldCenter && center,
-				showSideBorders && sideBorderStyles(borderColour),
-				showTopBorder && topBorderStyles(borderColour),
-				innerBackgroundColour &&
-					setBackgroundColour(innerBackgroundColour),
-				padSides && sidePadding,
-				padBottom && bottomPadding,
-			]}
-		>
-			{children}
-		</div>
-	);
-
-	// Create a react element from the tagName passed in OR
-	// default to <div>
-	return jsx(element, {
+}: Props) =>
+	jsx(element, {
 		id: ophanComponentName,
 		'data-link-name': ophanComponentLink,
 		'data-component': ophanComponentName,
 		'data-container-name': containerName,
 		css: [backgroundColour && setBackgroundColour(backgroundColour)],
 		className,
-		children: child,
+		children: (
+			<div
+				/**
+				 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+				 * this id pre-existed showMore so is probably also being used for something else.
+				 */
+				id={sectionId}
+				css={[
+					shouldCenter && center,
+					showSideBorders && sideBorderStyles(borderColour),
+					showTopBorder && topBorderStyles(borderColour),
+					innerBackgroundColour &&
+						setBackgroundColour(innerBackgroundColour),
+					padSides && sidePadding,
+					padBottom && bottomPadding,
+				]}
+			>
+				{children}
+			</div>
+		),
 	});
-};
