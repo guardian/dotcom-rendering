@@ -27,6 +27,8 @@ interface Props {
 	 * TO DO - find a better way to do that!
 	 */
 	useMockedRequestFunction?: boolean;
+
+	useReCaptcha: boolean;
 }
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
@@ -106,14 +108,17 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
-export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
+export const ManyNewsletterSignUp = ({
+	useMockedRequestFunction,
+	useReCaptcha,
+}: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReCAPTCHA>(null);
-	const captchaSiteKey = getCaptchaSiteKey();
+	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
@@ -192,6 +197,8 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 			newslettersToSignUpFor,
 			reCaptchaToken,
 		);
+
+		console.log(functionToUse.name, response);
 		setStatus(response.ok ? 'Success' : 'Failed');
 	};
 
@@ -201,18 +208,29 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 		if (status !== 'NotSent') {
 			return;
 		}
+
+		if (!useReCaptcha) {
+			setStatus('Loading');
+			void sendRequest('');
+			return;
+		}
+
 		if (!reCaptchaRef.current) {
 			console.warn('NO reCAPTCHA');
 			return;
 		}
 		setStatus('Loading');
-		reCaptchaRef.current.execute();
 		// successfull execution triggers a call to sendRequest
+		reCaptchaRef.current.execute();
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
 		console.warn(`reCAPTCHA failed to load.`);
 		reCaptchaRef.current?.reset();
+	};
+
+	const handleCaptchaNullChange = () => {
+		console.warn(`reCAPTCHA value changed to null`);
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -254,7 +272,7 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 						<ClearButton removeAll={removeAll} />
 					</div>
 
-					{!!captchaSiteKey && (
+					{useReCaptcha && !!captchaSiteKey && (
 						<div
 							css={css`
 								.grecaptcha-badge {
@@ -266,9 +284,11 @@ export const ManyNewsletterSignUp = ({ useMockedRequestFunction }: Props) => {
 								sitekey={captchaSiteKey}
 								ref={reCaptchaRef}
 								onChange={(token) => {
-									if (token) {
-										void sendRequest(token);
+									if (token === null) {
+										handleCaptchaNullChange();
+										return;
 									}
+									void sendRequest(token);
 								}}
 								onError={handleCaptchaLoadError}
 								size="invisible"

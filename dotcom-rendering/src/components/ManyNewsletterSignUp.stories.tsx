@@ -37,7 +37,10 @@ export const Default = () => {
 					],
 				}}
 			/>
-			<ManyNewsletterSignUp useMockedRequestFunction={true} />
+			<ManyNewsletterSignUp
+				useMockedRequestFunction={true}
+				useReCaptcha={false}
+			/>
 		</>
 	);
 };
