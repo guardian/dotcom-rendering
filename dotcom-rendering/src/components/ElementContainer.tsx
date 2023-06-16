@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/react';
-import { border, from, space } from '@guardian/source-foundations';
+import { from, palette, space } from '@guardian/source-foundations';
 import { center } from '../lib/center';
 
 const sidePadding = css`
@@ -69,7 +69,7 @@ export const ElementContainer = ({
 	showTopBorder = true,
 	padSides = true,
 	padBottom = false,
-	borderColour = border.secondary,
+	borderColour = palette.neutral[86],
 	backgroundColour,
 	innerBackgroundColour,
 	shouldCenter = true,
