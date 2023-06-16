@@ -313,6 +313,10 @@ const headerStyles = css`
 
 const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
 	color: ${isCuratedContent ? palette.text.carouselTitle : text.primary};
+	display: inline-block;
+	&::first-letter {
+		text-transform: capitalize;
+	}
 `;
 
 const Title = ({
