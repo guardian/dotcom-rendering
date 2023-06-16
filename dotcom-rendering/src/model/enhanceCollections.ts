@@ -64,7 +64,7 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				displayName,
+				pageId /** @todo @cemms1 check this  */,
 				allCardsHaveBranding ? allBranding : [],
 			),
 			grouped: groupCards(
