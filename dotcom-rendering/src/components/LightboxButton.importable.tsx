@@ -225,10 +225,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	function getPosition(): number {
 		const scrollPosition = imageList?.scrollLeft;
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (liWidth != null && scrollPosition != null) {
-			return Math.round(scrollPosition / liWidth) + 1;
-		}
-		return 1;
+		if (scrollPosition === 0 || liWidth === 0) return 1;
+		if (scrollPosition == undefined || liWidth == undefined) return 1;
+		if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return 1;
+		return Math.round(scrollPosition / liWidth) + 1;
 	}
 
 	function getPreviousPosition(positionNow: number): number {
