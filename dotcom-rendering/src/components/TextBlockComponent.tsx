@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -8,12 +8,14 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
-import { unwrapHtml } from '../model/unwrapHtml';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
+import { logger } from '../server/lib/logging';
 import { DropCap } from './DropCap';
-import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -110,7 +112,6 @@ const shouldShowDropCaps = (
 
 	return false;
 };
-
 /**
  * https://www.npmjs.com/package/sanitize-html#default-options
  */
@@ -142,6 +143,10 @@ const styles = (format: ArticleFormat) => css`
 	margin-bottom: 16px;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
+
+	strong em {
+		font-weight: bold;
+	}
 
 	ul {
 		margin-bottom: 12px;
@@ -209,69 +214,125 @@ const styles = (format: ArticleFormat) => css`
 	}
 `;
 
+const buildElementTree =
+	(html: string, format: ArticleFormat, showDropCaps: boolean) =>
+	(node: Node, key: number): ReactNode => {
+		const children = Array.from(node.childNodes).map(
+			buildElementTree(html, format, showDropCaps),
+		);
+
+		switch (node.nodeName) {
+			case 'P': {
+				return jsx('p', { css: styles(format), children });
+			}
+			case 'BLOCKQUOTE':
+				return jsx('blockquote', {
+					key,
+					children,
+				});
+			case 'A':
+				return jsx('a', {
+					href: getAttrs(node)?.getNamedItem('href')?.value,
+					target: getAttrs(node)?.getNamedItem('target')?.value,
+					key,
+					children,
+				});
+			case 'STRONG':
+				return jsx('strong', {
+					key,
+					children,
+				});
+			case '#text': {
+				if (node.textContent !== null) {
+					const dropCappedSentence = showDropCaps
+						? getDropCappedSentence(node.textContent)
+						: undefined;
+					if (
+						dropCappedSentence &&
+						node.textContent.startsWith(
+							stripHtmlFromString(html).slice(0, 10),
+						)
+					) {
+						const { dropCap, restOfSentence } = dropCappedSentence;
+						return (
+							<>
+								<DropCap letter={dropCap} format={format} />
+								{restOfSentence}
+							</>
+						);
+					}
+
+					return node.textContent;
+				}
+				return jsx('p', { css: styles(format), children });
+			}
+			case 'SPAN':
+				if (
+					getAttrs(node)?.getNamedItem('data-dcr-style')?.value ===
+					'bullet'
+				) {
+					return jsx('span', {
+						'data-dcr-style': 'bullet',
+						key,
+						children,
+					});
+				}
+				return jsx('p', { css: styles(format), children });
+			case 'BR':
+				return jsx('br', {
+					key,
+				});
+			case 'FOOTER':
+			case 'SUB':
+			case 'SUP':
+			case 'H2':
+			case 'H3':
+			case 'B':
+			case 'EM':
+			case 'UL':
+			case 'OL':
+			case 'LI':
+			case 'MARK':
+			case 'S':
+			case 'I':
+			case 'VAR':
+				return jsx(node.nodeName.toLowerCase(), {
+					css: styles(format),
+					key,
+					children,
+				});
+			default:
+				logger.warn('TextBlockComponent: Unknown element received', {
+					isDev: process.env.NODE_ENV !== 'production',
+					element: {
+						name: node.nodeName,
+						html: isElement(node) ? node.outerHTML : undefined,
+					},
+				});
+				return null;
+		}
+	};
+
 export const TextBlockComponent = ({
 	html,
 	format,
 	isFirstParagraph,
 	forceDropCap,
 }: Props) => {
-	const paraStyles = styles(format);
-	const {
-		willUnwrap: isUnwrapped,
-		unwrappedHtml,
-		unwrappedElement,
-	} = unwrapHtml({
-		fixes: [
-			{
-				unwrappedElement: 'p',
-				prefix: '<p>',
-				suffix: '</p>',
-			},
-			{
-				unwrappedElement: 'ul',
-				prefix: '<ul>',
-				suffix: '</ul>',
-			},
-			{
-				unwrappedElement: 'h3',
-				prefix: '<h3>',
-				suffix: '</h3>',
-			},
-		],
-		html,
-	});
-
 	const showDropCaps = shouldShowDropCaps(
 		html,
 		format,
 		isFirstParagraph,
 		forceDropCap,
 	);
-	const dropCappedSentence = showDropCaps
-		? getDropCappedSentence(unwrappedHtml)
-		: undefined;
-
-	if (dropCappedSentence) {
-		const { dropCap, restOfSentence } = dropCappedSentence;
-		return (
-			<p css={paraStyles}>
-				<DropCap letter={dropCap} format={format} />
-				<RewrappedComponent
-					isUnwrapped={isUnwrapped}
-					html={sanitise(restOfSentence, sanitiserOptions)}
-					elCss={paraStyles}
-					tagName="span"
-				/>
-			</p>
-		);
-	}
-
-	return (
-		<RewrappedComponent
-			isUnwrapped={isUnwrapped}
-			html={sanitise(unwrappedHtml, sanitiserOptions)}
-			elCss={paraStyles}
-			tagName={unwrappedElement || 'p'}
-		/>
-	);
+	const fragment = parseHtml(sanitise(html, sanitiserOptions));
+	return jsx(Fragment, {
+		children: Array.from(fragment.childNodes).map(
+			buildElementTree(
+				sanitise(html, sanitiserOptions),
+				format,
+				showDropCaps,
+			),
+		),
+	});
 };
