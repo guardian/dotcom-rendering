@@ -9,8 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
-import type { SubheadingBlockElement } from '../types/content';
 import { getZIndex } from '../lib/getZIndex';
+import type { SubheadingBlockElement } from '../types/content';
 
 const liStyles = css`
 	border-top: 1px solid ${neutral[86]};

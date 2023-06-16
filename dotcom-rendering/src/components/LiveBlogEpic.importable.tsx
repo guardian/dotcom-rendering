@@ -6,9 +6,8 @@ import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useArticleCounts } from '../lib/articleCount';
-import type { TagType } from '../types/tag';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { useArticleCounts } from '../lib/articleCount';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
@@ -19,6 +18,7 @@ import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useAB } from '../lib/useAB';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
+import type { TagType } from '../types/tag';
 
 type Props = {
 	section: string;

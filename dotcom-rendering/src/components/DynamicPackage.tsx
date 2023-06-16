@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';

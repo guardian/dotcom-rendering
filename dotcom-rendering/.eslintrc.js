@@ -43,8 +43,6 @@ const rulesToReview = {
 
 	// More rules
 	'eslint-comments/require-description': 'warn',
-	'import/order': 'warn',
-	'sort-imports': 'warn',
 	'eslint-comments/no-unused-disable': 'warn',
 	'eslint-comments/disable-enable-pair': 'warn',
 	'@typescript-eslint/naming-convention': 'warn',

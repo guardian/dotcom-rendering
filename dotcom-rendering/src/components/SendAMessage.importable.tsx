@@ -19,8 +19,8 @@ import {
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { MessageUsFieldType } from '../types/content';
 import { decidePalette } from '../lib/decidePalette';
+import type { MessageUsFieldType } from '../types/content';
 import { FormField } from './Callout/FormField';
 
 const CALLOUT_URL =

@@ -12,10 +12,10 @@ import {
 } from '@guardian/source-foundations';
 import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import type { DCRContainerPalette } from '../types/front';
+import type { Palette } from '../types/palette';
 import { Byline } from './Byline';
 import { Kicker } from './Kicker';
 import { QuoteIcon } from './QuoteIcon';

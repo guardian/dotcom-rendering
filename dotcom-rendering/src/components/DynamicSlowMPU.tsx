@@ -1,9 +1,4 @@
 import { Hide } from '@guardian/source-react-components';
-import type {
-	DCRContainerPalette,
-	DCRFrontCard,
-	DCRGroupedTrails,
-} from '../types/front';
 import {
 	Card25Media25SmallHeadline,
 	Card33Media33,
@@ -16,6 +11,11 @@ import {
 	Card50_Card50,
 	Card75_Card25,
 } from '../lib/dynamicSlices';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

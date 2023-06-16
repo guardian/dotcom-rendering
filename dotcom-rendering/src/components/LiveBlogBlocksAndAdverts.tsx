@@ -1,8 +1,8 @@
-import type { Switches } from '../types/config';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
 } from '../lib/liveblogAdSlots';
+import type { Switches } from '../types/config';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
 

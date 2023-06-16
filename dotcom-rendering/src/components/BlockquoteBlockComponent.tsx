@@ -2,9 +2,9 @@ import { css, jsx } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
+import { isElement, parseHtml } from '../lib/domUtils';
 import { logger } from '../server/lib/logging';
 import type { Palette } from '../types/palette';
-import { isElement, parseHtml } from '../lib/domUtils';
 import { QuoteIcon } from './QuoteIcon';
 
 type Props = {

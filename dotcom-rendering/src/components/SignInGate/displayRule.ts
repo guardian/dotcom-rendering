@@ -1,9 +1,9 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import type { TagType } from '../../types/tag';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
+import type { TagType } from '../../types/tag';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
 import type { CanShowGateProps } from './types';
 

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
-import type { Palette } from '../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import type { Palette } from '../types/palette';
 import { PulsingDot } from './PulsingDot';
 
 const lastUpdatedStyles = (palette: Palette) => css`

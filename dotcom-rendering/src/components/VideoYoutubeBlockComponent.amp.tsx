@@ -1,5 +1,5 @@
-import type { VideoYoutubeBlockElement } from '../types/content';
 import { getIdFromUrl } from '../lib/get-video-id.amp';
+import type { VideoYoutubeBlockElement } from '../types/content';
 import { Caption } from './Caption.amp';
 
 type Props = {

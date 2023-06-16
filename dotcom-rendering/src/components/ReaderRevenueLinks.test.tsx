@@ -1,6 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
-import type { EditionId } from '../lib/edition';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
+import type { EditionId } from '../lib/edition';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {

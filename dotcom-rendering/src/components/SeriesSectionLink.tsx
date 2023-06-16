@@ -7,11 +7,11 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 import type { DCRBadgeType } from '../types/badge';
 import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
 import { Hide } from './Hide';
 import { PulsingDot } from './PulsingDot';
