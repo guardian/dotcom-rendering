@@ -1,4 +1,4 @@
-import { BADGE_THIS_IS_EUROPE, decideBadge } from './decideBadge';
+import { decideBadge } from './decideBadge';
 
 const brandingAmazon = {
 	brandingType: {
@@ -46,10 +46,14 @@ const brandingGuardianOrg = {
 };
 
 describe('Decide badge', () => {
-	describe('Using displayName', () => {
+	describe('Using series tag', () => {
 		it('returns correct badge for this is Europe', () => {
-			const expectedResult = BADGE_THIS_IS_EUROPE;
-			const result = decideBadge('This is Europe', []);
+			const tagId = 'politics/series/road-to-the-vote';
+			const expectedResult = {
+				href: `/${tagId}`,
+				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+			};
+			const result = decideBadge(tagId, []);
 			expect(result).toMatchObject(expectedResult);
 		});
 	});
