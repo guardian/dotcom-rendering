@@ -18,11 +18,13 @@ import { SvgCrossword } from './SvgCrossword';
 const TextTreat = ({
 	text,
 	linkTo,
+	index,
 	borderColour,
 	fontColour,
 }: {
 	text: string;
 	linkTo: string;
+	index: number;
 	borderColour?: string;
 	fontColour?: string;
 }) => (
@@ -44,6 +46,7 @@ const TextTreat = ({
 				color: ${fontColour ?? sourcePalette.neutral[7]};
 			`}
 			href={linkTo}
+			data-link-name={`treat | ${index + 1} | ${text}`}
 		>
 			{text}
 		</Link>
@@ -180,7 +183,7 @@ export const Treats = ({
 				flex-direction: column;
 			`}
 		>
-			{treats.map((treat) => {
+			{treats.map((treat, index) => {
 				const [link] = treat.links;
 				if (link?.linkTo === '/crosswords' && link.text) {
 					// Treats that link to /crosswords are special. If any
@@ -198,6 +201,7 @@ export const Treats = ({
 									key={linkTo}
 									text={text}
 									linkTo={linkTo}
+									index={index}
 									borderColour={borderColour}
 									fontColour={fontColour}
 								/>
@@ -234,6 +238,7 @@ export const Treats = ({
 								key={linkTo}
 								text={text}
 								linkTo={linkTo}
+								index={index}
 								borderColour={borderColour}
 								fontColour={fontColour}
 							/>
