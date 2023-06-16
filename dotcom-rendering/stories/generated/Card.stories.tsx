@@ -5,9 +5,9 @@
  */
 
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
-import { CardsWithDifferentThemes } from '../../src/web/components/Card/Card.stories';
+import { CardsWithDifferentThemes } from '../../src/components/Card/Card.stories';
 
-// eslint-disable-next-line import/no-default-export
+// eslint-disable-next-line import/no-default-export -- we need a default here
 export default {
 	title: 'Components/Card/Format Variations',
 	component: CardsWithDifferentThemes,

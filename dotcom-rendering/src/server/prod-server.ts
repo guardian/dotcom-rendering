@@ -5,10 +5,10 @@ import responseTime from 'response-time';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../web/server/index.article.amp';
-import { handleAppsArticle } from '../web/server/index.article.apps';
+} from '../server/index.article.amp';
+import { handleAppsArticle } from '../server/index.article.apps';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { handleAllEditorialNewslettersPage } from '../web/server/index.allEditorialNewslettersPage.web';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -16,8 +16,8 @@ import {
 	handleBlocks,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server/index.article.web';
-import { handleFront, handleFrontJson } from '../web/server/index.front.web';
+} from '../server/index.article.web';
+import { handleFront, handleFrontJson } from '../server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';

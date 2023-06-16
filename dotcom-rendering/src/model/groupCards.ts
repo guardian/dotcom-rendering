@@ -1,3 +1,4 @@
+import type { EditionId } from '../lib/edition';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
@@ -5,7 +6,6 @@ import type {
 	FEFrontCard,
 } from '../types/front';
 import { enhanceCards } from './enhanceCards';
-import { EditionId } from '../web/lib/edition';
 
 /**
  * Groups cards based on their group specified in fronts tool
@@ -32,75 +32,72 @@ export const groupCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRGroupedTrails => {
 	switch (container) {
-		case 'dynamic/slow-mpu':
+		case 'dynamic/slow-mpu': {
+			const big = curated.filter(({ card }) => card.group === '1');
 			return {
 				// Only big and standard cards are supported on dynamic/slow-mpu
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: enhanceCards(
-					curated.filter(({ card }) => card.group === '1'),
-					editionId,
-					containerPalette,
-				),
+				big: enhanceCards(big, { editionId, containerPalette }),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
-					editionId,
-					containerPalette,
+					{ offset: big.length, editionId, containerPalette },
 				),
 			};
+		}
 		case 'dynamic/fast':
-		case 'dynamic/slow':
+		case 'dynamic/slow': {
+			const huge = curated.filter(({ card }) => card.group === '3');
+			const veryBig = curated.filter(({ card }) => card.group === '2');
+			const big = curated.filter(({ card }) => card.group === '1');
 			return {
 				// Snap is not supported on these container types
 				snap: [],
-				huge: enhanceCards(
-					curated.filter(({ card }) => card.group === '3'),
+				huge: enhanceCards(huge, { editionId, containerPalette }),
+				veryBig: enhanceCards(veryBig, {
+					offset: huge.length,
 					editionId,
 					containerPalette,
-				),
-				veryBig: enhanceCards(
-					curated.filter(({ card }) => card.group === '2'),
+				}),
+				big: enhanceCards(big, {
+					offset: huge.length + veryBig.length,
 					editionId,
 					containerPalette,
-				),
-				big: enhanceCards(
-					curated.filter(({ card }) => card.group === '1'),
-					editionId,
-					containerPalette,
-				),
+				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
-					editionId,
-					containerPalette,
+					{
+						offset: huge.length + veryBig.length + big.length,
+						editionId,
+						containerPalette,
+					},
 				),
 			};
-		case 'dynamic/package':
+		}
+		case 'dynamic/package': {
+			const snap = curated.filter(({ card }) => card.group === '1');
 			return {
 				huge: [],
 				veryBig: [],
 				big: [],
 				// Only 'snap' and 'standard' are supported by dynamic/package
-				snap: enhanceCards(
-					curated.filter(({ card }) => card.group === '1'),
-					editionId,
-					containerPalette,
-				),
+				snap: enhanceCards(snap, { editionId, containerPalette }),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
-					editionId,
-					containerPalette,
+					{ offset: snap.length, editionId, containerPalette },
 				),
 			};
+		}
 		default:
 			// All other container types do not support grouping
 			return {

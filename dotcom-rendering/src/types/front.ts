@@ -1,5 +1,5 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
 import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';

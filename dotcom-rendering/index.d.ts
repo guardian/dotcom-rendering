@@ -607,7 +607,7 @@ declare namespace JSX {
 		 * Elements with this attribute will fetch their comment count on
 		 * the client-side.
 		 *
-		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
+		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
 		 */
 		'data-discussion-id'?: string;
 	}
