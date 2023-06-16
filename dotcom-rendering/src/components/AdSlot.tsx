@@ -505,7 +505,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div
