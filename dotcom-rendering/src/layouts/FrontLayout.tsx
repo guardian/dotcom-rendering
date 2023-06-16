@@ -327,9 +327,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								<FrontSection
 									key={ophanName}
 									title="Most viewed"
-									centralBorder="partial"
 									showTopBorder={index > 0}
-									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={
