@@ -150,6 +150,10 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 			return css`
 				img {
 					object-fit: contain;
+					object-position: top;
+					${until.tablet} {
+						object-position: center;
+					}
 					width: 100%;
 					height: auto;
 					margin-left: auto;
