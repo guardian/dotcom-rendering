@@ -142,7 +142,7 @@
 		"@types/webpack-bundle-analyzer": "4.6.0",
 		"@types/webpack-env": "1.18.0",
 		"@types/webpack-node-externals": "2.5.3",
-		"@types/yarnpkg__lockfile": "1.1.5",
+		"@types/yarnpkg__lockfile": "1.1.6",
 		"@types/youtube": "0.0.46",
 		"@typescript-eslint/eslint-plugin": "5.52.0",
 		"@typescript-eslint/eslint-plugin-tslint": "5.52.0",
