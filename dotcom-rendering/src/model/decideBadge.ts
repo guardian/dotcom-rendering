@@ -3,13 +3,6 @@ import type { DCRBadgeType, FESpecialBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
 import { FRONTEND_BADGES, FRONTEND_SPECIAL_BADGES } from './badges';
 
-/** @todo @cemms1 check if can remove this badge */
-// export const BADGE_THIS_IS_EUROPE: DCRBadgeType = {
-// 	imageSrc:
-// 		'https://assets.guim.co.uk/images/badges/768d8d7999510d6d05aa2d865640803c/this-is-europe.svg',
-// 	href: '/world/series/this-is-europe',
-// };
-
 /**
  * Fetches the badge properties only if ALL branding has the same sponsor.
  */
@@ -62,7 +55,10 @@ export const getBadgeFromSeriesTag = (
 		};
 };
 
-export const findSpecialBadgeBySeriesTag = (
+/**
+ * Fetches special badge if the seriesTag matches the hashed series tag
+ */
+const findSpecialBadgeBySeriesTag = (
 	seriesTag: string,
 ): FESpecialBadgeType | undefined =>
 	FRONTEND_SPECIAL_BADGES.find((b) => {

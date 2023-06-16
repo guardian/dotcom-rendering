@@ -1,8 +1,8 @@
 import type { FEBadgeType, FESpecialBadgeType } from '../types/badge';
 
 /**
- * Another "temporary" fix - this list of badges was migrated from frontend
- * @todo This isn't an ideal way to do this, but will do for now...
+ * Badges migrated from [frontend implementation](https://github.com/guardian/frontend/blob/c52cc1d35cec5a0ec95075f5e2079595d26dc35f/common/app/model/Badges.scala)
+ * @todo There are much nicer ways to store this kind of data
  */
 export const FRONTEND_BADGES: FEBadgeType[] = [
 	{
