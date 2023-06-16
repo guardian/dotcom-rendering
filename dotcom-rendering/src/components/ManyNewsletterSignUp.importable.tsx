@@ -12,6 +12,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	getCaptchaSiteKey,
 	mockRequestMultipleSignUps,
+	reportCaptchaEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
@@ -27,7 +28,6 @@ interface Props {
 	 * TO DO - find a better way to do that!
 	 */
 	useMockedRequestFunction?: boolean;
-
 	useReCaptcha: boolean;
 }
 
@@ -198,12 +198,9 @@ export const ManyNewsletterSignUp = ({
 			reCaptchaToken,
 		);
 
-		console.log(functionToUse.name, response);
 		setStatus(response.ok ? 'Success' : 'Failed');
 	};
 
-	// TO DO - support an boolean prop to submit without the captcha
-	// would need this for the story to work
 	const handleSubmitButton = () => {
 		if (status !== 'NotSent') {
 			return;
@@ -216,21 +213,40 @@ export const ManyNewsletterSignUp = ({
 		}
 
 		if (!reCaptchaRef.current) {
-			console.warn('NO reCAPTCHA');
+			reportCaptchaEvent(
+				'ManyNewsletterSignUp',
+				'Submit button pressed, but NO reCAPTCHA element loaded',
+			);
 			return;
 		}
 		setStatus('Loading');
-		// successfull execution triggers a call to sendRequest
+		// successful execution triggers a call to sendRequest
+		// with the onChange prop on the captcha Component
+		reportCaptchaEvent('ManyNewsletterSignUp', 'executing reCAPTCHA');
 		reCaptchaRef.current.execute();
 	};
 
-	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		console.warn(`reCAPTCHA failed to load.`);
+	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = (
+		event,
+	) => {
+		reportCaptchaEvent(
+			'ManyNewsletterSignUp',
+			`reCAPTCHA load error -event type ${event.type}`,
+		);
 		reCaptchaRef.current?.reset();
 	};
 
+	// The token will revert to null when it expires, triggering the
+	// onChange event on the captcha Component. This will happen
+	// some time after a successful captcha execution and form submission
+	// so does not necessarily indicate a problem.
+	// May need further logic to make this report useful, depending on
+	// data design requirements.
 	const handleCaptchaNullChange = () => {
-		console.warn(`reCAPTCHA value changed to null`);
+		reportCaptchaEvent(
+			'ManyNewsletterSignUp',
+			`reCAPTCHA value changed to null, when form staus was "${status}".`,
+		);
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -288,6 +304,10 @@ export const ManyNewsletterSignUp = ({
 										handleCaptchaNullChange();
 										return;
 									}
+									reportCaptchaEvent(
+										'ManyNewsletterSignUp',
+										'reCAPTCHA token successfully set.',
+									);
 									void sendRequest(token);
 								}}
 								onError={handleCaptchaLoadError}
@@ -295,8 +315,8 @@ export const ManyNewsletterSignUp = ({
 								// Note - the component supports an onExpired callback
 								// (for when the user completed a challenge, but did
 								// not submit the form before the token expired.
-								// We don't need that here as completing the captcha
-								// (onChange callback) triggers the submission
+								// We don't need that here as setting the token
+								// triggers the submission (onChange callback)
 							/>
 						</div>
 					)}

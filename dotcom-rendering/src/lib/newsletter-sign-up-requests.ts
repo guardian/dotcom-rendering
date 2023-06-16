@@ -110,3 +110,19 @@ export const mockRequestMultipleSignUps = async (
 		} characters.`,
 	} as unknown as Response;
 };
+
+/**
+ * PLACEHOLDER - will just log a message to the console
+ *
+ * TO DO - post formatted component event via Ophan.
+ * Will need to get requirements from data design on what
+ * events should be recorded for the function and how
+ * the payloads should be structured.
+ */
+export const reportCaptchaEvent = (
+	componentName: string,
+	message: string,
+): void => {
+	// eslint-disable-next-line no-console -- placeholder function
+	console.warn(`captcha event in ${componentName}`, message);
+};
