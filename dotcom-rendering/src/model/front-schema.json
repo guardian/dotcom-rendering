@@ -955,7 +955,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1154,7 +1154,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1162,7 +1162,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/FEFrontCardType"
                                         }
                                     },
                                     "required": [
@@ -1658,7 +1658,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1857,7 +1857,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1865,7 +1865,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/FEFrontCardType"
                                         }
                                     },
                                     "required": [
@@ -2361,7 +2361,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -2560,7 +2560,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2568,7 +2568,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "type": "string"
+                                            "$ref": "#/definitions/FEFrontCardType"
                                         }
                                     },
                                     "required": [
@@ -2891,6 +2891,33 @@
                 "logo",
                 "sponsorName"
             ]
+        },
+        "FEFrontCardStyle": {
+            "enum": [
+                "Analysis",
+                "Comment",
+                "DeadBlog",
+                "DefaultCardstyle",
+                "Editorial",
+                "ExternalLink",
+                "Feature",
+                "Letters",
+                "LiveBlog",
+                "Media",
+                "Review",
+                "SpecialReport",
+                "SpecialReportAlt"
+            ],
+            "type": "string"
+        },
+        "FEFrontCardType": {
+            "enum": [
+                "CuratedContent",
+                "LatestSnap",
+                "LinkSnap",
+                "SupportingCuratedContent"
+            ],
+            "type": "string"
         },
         "FEContainerType": {
             "enum": [
