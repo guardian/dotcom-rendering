@@ -25,8 +25,6 @@ import { NewsletterCard } from './NewsletterCard';
 type Props = {
 	heading: string;
 	newsletters: Newsletter[];
-	description?: string;
-	url?: string;
 	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 };
