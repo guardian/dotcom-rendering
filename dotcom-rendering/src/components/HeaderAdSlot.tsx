@@ -1,6 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
-import type { ArticleDisplay } from '@guardian/libs';
+import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial/dist/esm/core/constants';
 import { border, neutral, space } from '@guardian/source-foundations';
 import {
 	adContainerCollapseStyles,

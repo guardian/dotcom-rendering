@@ -11,9 +11,9 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import type { Branding } from '../../types/branding';
-import type { OnwardsSource } from '../../types/onwards';
-import type { TrailType } from '../../types/trails';
+import type { Branding } from '../types/branding';
+import type { OnwardsSource } from '../types/onwards';
+import type { TrailType } from '../types/trails';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';

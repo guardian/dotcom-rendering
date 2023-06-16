@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -34,8 +29,6 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { DecideContainer } from '../lib/DecideContainer';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getMerchHighPosition,
 	getMobileAdPositions,
@@ -43,8 +36,6 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { Stuck } from './lib/stickiness';
-import { LabsSection } from '../components/LabsSection';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { Carousel } from '../components/Carousel.importable';
 
 interface Props {
@@ -114,14 +105,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
-
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News,
-	};
-
-	const palette = decidePalette(format);
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
