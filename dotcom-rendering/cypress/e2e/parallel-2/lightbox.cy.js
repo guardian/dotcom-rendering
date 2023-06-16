@@ -214,18 +214,12 @@ describe('Lightbox', function () {
 		);
 	});
 
-	it('should use the url to maintain lightbox state', function () {
+	it('should use the url to maintain lightbox position', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
 		cy.url().should('contain', '#img-2');
 		cy.realPress('ArrowRight');
-		cy.url().should('contain', '#img-3');
-		cy.go('back');
-		cy.get('#gu-lightbox').should('not.be.visible');
-		cy.url().should('not.contain', '#img-');
-		cy.go('forward');
-		cy.get('#gu-lightbox').should('be.visible');
 		cy.url().should('contain', '#img-3');
 		cy.realPress('ArrowRight');
 		cy.realPress('ArrowRight');
@@ -235,5 +229,18 @@ describe('Lightbox', function () {
 		cy.reload();
 		cy.get('#gu-lightbox').should('be.visible');
 		cy.get('nav [data-cy="lightbox-selected"]').contains('6/22');
+	});
+
+	it('should trigger the lightbox to close or open if the user navigates back and forward', function () {
+		cy.visit(`/Article/${articleUrl}`);
+		cy.get('button.open-lightbox').eq(1).realClick();
+		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
+		cy.url().should('contain', '#img-2');
+		cy.go('back');
+		cy.get('#gu-lightbox').should('not.be.visible');
+		cy.url().should('not.contain', '#img-');
+		cy.go('forward');
+		cy.get('#gu-lightbox').should('be.visible');
+		cy.url().should('contain', '#img-2');
 	});
 });
