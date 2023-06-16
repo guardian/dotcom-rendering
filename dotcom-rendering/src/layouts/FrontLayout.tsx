@@ -347,7 +347,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={front.editionId}
 									treats={collection.treats}
 									data-print-layout="hide"
-									element="aside"
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
