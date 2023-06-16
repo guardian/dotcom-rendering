@@ -490,7 +490,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
-				data-component="trending-topics"
+				ophanComponentName="trending-topics"
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
