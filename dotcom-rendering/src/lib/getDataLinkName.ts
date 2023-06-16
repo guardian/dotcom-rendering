@@ -1,9 +1,17 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FEFrontCardStyle, FEFrontCardType } from '../types/front';
 
 /**
- * TODO: missing "podcast" and "external"
+ * TODO: missing "podcast"
  */
-const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
+const getLinkType = (
+	{ theme, design }: ArticleFormat,
+	cardType?: FEFrontCardType,
+	cardStyle?: FEFrontCardStyle,
+): RichLinkCardType => {
+	if (cardType === 'LinkSnap' && cardStyle === 'ExternalLink')
+		return 'external';
+
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
 			return 'special-report';
@@ -50,9 +58,11 @@ export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: Group,
 	index: number,
+	cardType?: FEFrontCardType,
+	cardStyle?: FEFrontCardStyle,
 ): string =>
 	[
-		getLinkType(format),
+		getLinkType(format, cardType, cardStyle),
 		`group-${group}`,
 		`card-@${Math.max(index + 1, 1)}`,
 	].join(' | ');

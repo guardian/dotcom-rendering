@@ -297,7 +297,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType
 											}
 										>
-											<Snap snapData={trail.snapData} />
+											<Snap
+												snapData={trail.snapData}
+												dataLinkName={
+													trail.dataLinkName
+												}
+											/>
 										</Section>
 									</SnapCssSandbox>
 								)}
