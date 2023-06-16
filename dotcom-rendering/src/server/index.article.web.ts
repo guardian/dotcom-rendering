@@ -36,7 +36,12 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	const validated = validateAsArticleType(body);
 	// addImageIDs needs to take account of both main media elements
 	// and block elements, so it needs to be executed here
-	const data = addImageIDs(validated);
+	const { mainMediaElements, blocks } = addImageIDs(validated);
+	const data = {
+		...validated,
+		mainMediaElements,
+		blocks,
+	};
 
 	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
 		promotedNewsletter: data.promotedNewsletter,

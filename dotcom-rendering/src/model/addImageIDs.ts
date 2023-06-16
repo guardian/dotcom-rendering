@@ -12,7 +12,9 @@ import type { FEArticleType } from '../types/frontend';
  * with an image hash present on the url
  *
  */
-export const addImageIDs = (data: FEArticleType): FEArticleType => {
+export const addImageIDs = (
+	data: FEArticleType,
+): { mainMediaElements: FEElement[]; blocks: Block[] } => {
 	// position needs to be defined outside the addPosition function otherwise
 	// it will get reset to 1 each time
 	let position = 1;
@@ -36,7 +38,6 @@ export const addImageIDs = (data: FEArticleType): FEArticleType => {
 	};
 
 	return {
-		...data,
 		mainMediaElements: addPosition(data.mainMediaElements),
 		blocks: data.blocks.map((block: Block) => {
 			return {
