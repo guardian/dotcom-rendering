@@ -3,8 +3,8 @@ name: DCR CICD
 on:
   push:
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 
 jobs:
   container:
@@ -20,6 +20,15 @@ jobs:
 
   lint:
     uses: ./.github/workflows/lint.yml
+
+  node:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - run: deno run -A scripts/deno/node.ts
 
   cypress:
     needs: [container]
