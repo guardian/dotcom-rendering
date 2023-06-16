@@ -1,4 +1,3 @@
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import {
 	Card25Media25,
 	Card25Media25SmallHeadline,
@@ -6,6 +5,7 @@ import {
 	CardDefault,
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 

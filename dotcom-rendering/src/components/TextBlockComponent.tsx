@@ -10,8 +10,8 @@ import {
 } from '@guardian/source-foundations';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-import { unwrapHtml } from '../model/unwrapHtml';
 import { decidePalette } from '../lib/decidePalette';
+import { unwrapHtml } from '../model/unwrapHtml';
 import { DropCap } from './DropCap';
 import { RewrappedComponent } from './RewrappedComponent';
 

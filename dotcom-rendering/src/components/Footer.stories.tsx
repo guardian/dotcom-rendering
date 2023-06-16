@@ -8,8 +8,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Standard } from '../../fixtures/generated/articles/Standard';
-import { extractNAV } from '../model/extract-nav';
 import { editionList } from '../lib/edition';
+import { extractNAV } from '../model/extract-nav';
 import { Footer } from './Footer';
 import { Section } from './Section';
 

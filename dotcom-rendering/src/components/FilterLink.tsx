@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { space, textSans } from '@guardian/source-foundations';
 import { LinkButton, SvgCross } from '@guardian/source-react-components';
-import type { Palette } from '../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import type { Palette } from '../types/palette';
 
 interface LabelProps {
 	value: string;

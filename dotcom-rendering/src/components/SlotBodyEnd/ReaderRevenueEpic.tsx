@@ -12,7 +12,6 @@ import type {
 import { useEffect, useState } from 'react';
 import { initPerf } from '../../client/initPerf';
 import { submitComponentEvent } from '../../client/ophan/ophan';
-import type { TagType } from '../../types/tag';
 import {
 	getLastOneOffContributionTimestamp,
 	hasCmpConsentForArticleCount,
@@ -25,6 +24,7 @@ import {
 } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import type { TagType } from '../../types/tag';
 
 export type EpicConfig = {
 	module: ModuleData;

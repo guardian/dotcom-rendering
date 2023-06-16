@@ -7,11 +7,11 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../types/front';
-import type { Colour } from '../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
+import type { DCRContainerPalette } from '../types/front';
+import type { Colour } from '../types/palette';
 import { localisedTitle } from './Localisation';
 
 type Props = {

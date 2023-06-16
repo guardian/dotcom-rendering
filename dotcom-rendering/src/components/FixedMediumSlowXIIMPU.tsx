@@ -1,11 +1,11 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import {
 	Card33Media33MobileTopTall,
 	Card33Media33Tall,
 	CardDefault,
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

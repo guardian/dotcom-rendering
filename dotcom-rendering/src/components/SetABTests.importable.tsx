@@ -1,13 +1,13 @@
 import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
-import type { ABTestSwitches } from '../model/enhance-switches';
 import { getOphanRecordFunction } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
+import type { ABTestSwitches } from '../model/enhance-switches';
 
 type Props = {
 	abTestSwitches: ABTestSwitches;

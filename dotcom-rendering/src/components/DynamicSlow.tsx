@@ -1,8 +1,3 @@
-import type {
-	DCRContainerPalette,
-	DCRFrontCard,
-	DCRGroupedTrails,
-} from '../types/front';
 import {
 	Card25Media25Tall,
 	Card50Media50,
@@ -18,6 +13,11 @@ import {
 	filterGroupedTrails,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
