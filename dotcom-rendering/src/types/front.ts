@@ -276,6 +276,7 @@ export type DCRFrontCard = {
 	embedUri?: string;
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
+	showLivePlayable: boolean;
 };
 
 export type DCRSlideshowImage = {

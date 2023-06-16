@@ -46,6 +46,7 @@ const Snap100 = ({
 					imagePositionOnMobile="left"
 					imageSize="medium"
 					trailText={snaps[0].trailText}
+					supportingContentAlignment="horizontal"
 				/>
 			</LI>
 		</UL>
@@ -76,6 +77,7 @@ const Card100 = ({
 					imageSize="large"
 					isDynamo={true}
 					supportingContent={cards[0].supportingContent}
+					supportingContentAlignment="horizontal"
 				/>
 			</LI>
 		</UL>

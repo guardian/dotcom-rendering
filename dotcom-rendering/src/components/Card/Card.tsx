@@ -18,6 +18,8 @@ import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
 import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
+import { Island } from '../Island';
+import { LatestLinks } from '../LatestLinks.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
@@ -77,6 +79,7 @@ export type Props = {
 	isDynamo?: true;
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
+	showLivePlayable?: boolean;
 };
 
 const StarRatingComponent = ({
@@ -117,14 +120,17 @@ const StarRatingComponent = ({
  *
  */
 const decideIfAgeShouldShow = ({
+	showLivePlayable,
 	containerPalette,
 	format,
 	showAge,
 }: {
+	showLivePlayable: boolean;
 	containerPalette?: DCRContainerPalette;
 	format: ArticleFormat;
 	showAge: boolean;
 }): boolean => {
+	if (showLivePlayable) return false;
 	// Some containers force all cards to show age. E.g., The articles in the headlines
 	// container are typically very recent so we want to display age there
 	if (showAge) return true;
@@ -271,6 +277,7 @@ export const Card = ({
 	isCrossword,
 	isExternalLink,
 	slideshowImages,
+	showLivePlayable = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -295,6 +302,7 @@ export const Card = ({
 		displayAge?: boolean;
 		displayLines?: boolean;
 	}) => {
+		if (showLivePlayable) return <></>;
 		return (
 			<CardFooter
 				format={format}
@@ -348,6 +356,7 @@ export const Card = ({
 	};
 
 	const displayAge = decideIfAgeShouldShow({
+		showLivePlayable,
 		containerPalette,
 		format,
 		showAge,
@@ -490,6 +499,17 @@ export const Card = ({
 									}}
 								/>
 							</TrailTextWrapper>
+						)}
+						{showLivePlayable && (
+							<Island>
+								<LatestLinks
+									id={linkTo}
+									format={format}
+									isDynamo={isDynamo}
+									direction={supportingContentAlignment}
+									containerPalette={containerPalette}
+								></LatestLinks>
+							</Island>
 						)}
 						<DecideFooter
 							isOpinion={isOpinion}
