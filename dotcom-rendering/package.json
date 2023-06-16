@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-cloudwatch": "3.350.0",
-		"@babel/core": "7.20.12",
+		"@babel/core": "7.22.5",
 		"@babel/helper-compilation-targets": "7.20.0",
 		"@babel/helper-create-regexp-features-plugin": "7.20.5",
 		"@babel/plugin-proposal-class-properties": "7.18.6",
