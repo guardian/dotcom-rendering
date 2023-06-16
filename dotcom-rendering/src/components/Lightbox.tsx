@@ -124,22 +124,25 @@ const liStyles = css`
 `;
 
 const imageStyles = (orientation: 'landscape' | 'portrait') => {
+	const baseImgStyles = css`
+		object-fit: contain;
+		object-position: top;
+		${until.tablet} {
+			object-position: center;
+		}
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: ${space[3]}px;
+	`;
 	switch (orientation) {
 		case 'portrait': {
 			return css`
 				img {
-					object-fit: contain;
-					object-position: top;
-					${until.tablet} {
-						object-position: center;
-					}
+					${baseImgStyles}
 					width: auto;
 					max-width: 100%;
-					margin-left: auto;
-					margin-right: auto;
 					height: calc(100vh - 90px);
 					${from.tablet} {
-						margin-top: ${space[3]}px;
 						height: calc(100vh - 24px);
 					}
 				}
@@ -149,16 +152,9 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 		default: {
 			return css`
 				img {
-					object-fit: contain;
-					object-position: top;
-					${until.tablet} {
-						object-position: center;
-					}
+					${baseImgStyles}
 					width: 100%;
 					height: auto;
-					margin-left: auto;
-					margin-right: auto;
-					margin-top: ${space[3]}px;
 					max-height: calc(100vh - 90px);
 					${from.tablet} {
 						max-height: calc(100vh - 24px);
