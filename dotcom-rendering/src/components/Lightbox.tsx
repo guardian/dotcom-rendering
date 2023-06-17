@@ -155,10 +155,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					${baseImgStyles}
 					width: 100%;
 					height: auto;
-					max-height: calc(100vh - 90px);
-					${from.tablet} {
-						max-height: calc(100vh - 24px);
-					}
+					max-height: calc(100vh - 24px);
 				}
 			`;
 		}
