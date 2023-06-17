@@ -356,7 +356,7 @@ const ReaderRevenueLinksNative = ({
 		<a
 			css={linkStyles}
 			href={getUrl('contribute')}
-			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 		>
 			Support us <ArrowRightIcon />
 		</a>

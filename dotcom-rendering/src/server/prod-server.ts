@@ -2,13 +2,13 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
 } from '../server/index.article.amp';
 import { handleAppsArticle } from '../server/index.article.apps';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import {
 	handleArticle,
 	handleArticleJson,

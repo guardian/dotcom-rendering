@@ -242,7 +242,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout" id="maincontent">
+			<main
+				data-layout="FrontLayout"
+				data-link-name={`Front | /${front.pressedPage.id}`}
+				id="maincontent"
+			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -477,6 +481,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
+								isOnPaidContentFront={isPaidContent}
+								index={index}
 							>
 								<DecideContainer
 									trails={trails}
@@ -507,7 +513,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
-				data-component="trending-topics"
+				ophanComponentName="trending-topics"
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>

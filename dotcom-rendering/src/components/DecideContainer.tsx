@@ -1,3 +1,9 @@
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRFrontCard,
+	DCRGroupedTrails,
+} from '../types/front';
 import { DynamicFast } from './DynamicFast';
 import { DynamicPackage } from './DynamicPackage';
 import { DynamicSlow } from './DynamicSlow';
@@ -16,12 +22,6 @@ import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
 import { NavList } from './NavList';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRFrontCard,
-	DCRGroupedTrails,
-} from '../types/front';
 
 type Props = {
 	trails: DCRFrontCard[];

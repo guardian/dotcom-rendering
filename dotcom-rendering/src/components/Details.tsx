@@ -1,10 +1,10 @@
 import { css, SerializedStyles } from '@emotion/react';
+import { textSans } from '@guardian/source-foundations';
 import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import { textSans } from '@guardian/source-foundations';
 
 type LabelSize = 'xsmall' | 'small';
 

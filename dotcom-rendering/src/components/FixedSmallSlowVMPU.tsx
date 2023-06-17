@@ -1,10 +1,10 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import {
 	Card25Media25SmallHeadline,
 	Card33Media33Tall,
 	CardDefault,
 } from '../lib/cardWrappers';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

@@ -7,11 +7,11 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../types/front';
-import type { Colour } from '../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { getEditionFromId } from '../lib/edition';
+import type { DCRContainerPalette } from '../types/front';
+import type { Colour } from '../types/palette';
 import { localisedTitle } from './Localisation';
 
 type Props = {
@@ -94,7 +94,11 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a css={[linkStyles, bottomMargin]} href={url}>
+				<a
+					css={[linkStyles, bottomMargin]}
+					href={url}
+					data-link-name="section heading"
+				>
 					<h2 css={headerStyles(fontColour)}>
 						{localisedTitle(title, editionId)}
 					</h2>

@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
-import type { TagType } from '../../types/tag';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
+import type { TagType } from '../../types/tag';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };

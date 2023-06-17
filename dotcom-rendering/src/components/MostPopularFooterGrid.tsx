@@ -105,6 +105,7 @@ export const MostPopularFooterGrid = ({
 	return (
 		<div
 			data-component={ophanLinkName(sectionName)}
+			data-link-name={ophanLinkName(sectionName)}
 			css={gridContainerStyle}
 		>
 			<section data-link-name="most-viewed" css={displayContent}>

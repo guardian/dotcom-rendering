@@ -14,8 +14,8 @@ import {
 	SvgTickRound,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { Palette } from '../../types/palette';
 import { decidePalette } from '../../lib/decidePalette';
+import type { Palette } from '../../types/palette';
 
 /* stylelint-disable-next-line color-no-hex */
 const linkDecorationColour = '#12121240';
