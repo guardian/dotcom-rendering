@@ -330,7 +330,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth, 10) >= 620 && (
+				{parseInt(imageWidth, 10) > 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}
@@ -379,7 +379,7 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth) >= 620 && (
+				{parseInt(imageWidth) > 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}
@@ -467,7 +467,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{parseInt(imageWidth) >= 620 && (
+				{parseInt(imageWidth) > 620 && (
 					<Island deferUntil="interaction">
 						<LightboxButton
 							role={role}
