@@ -1,5 +1,7 @@
+import { ArticleDesign } from '@guardian/libs';
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
+import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -7,8 +9,6 @@ import type { OnwardsSource } from '../types/onwards';
 import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
-import { ArticleDesign } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	url: string;

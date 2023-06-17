@@ -5,10 +5,10 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import type { TrailType } from '../types/trails';
+import { decidePalette } from '../lib/decidePalette';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
-import { decidePalette } from '../lib/decidePalette';
+import type { TrailType } from '../types/trails';
 
 export default {
 	component: Carousel,

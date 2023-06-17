@@ -12,6 +12,7 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot } from '../components/AdSlot';
+import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { Footer } from '../components/Footer';
@@ -36,7 +37,6 @@ import {
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { Stuck } from './lib/stickiness';
-import { Carousel } from '../components/Carousel.importable';
 
 interface Props {
 	front: DCRFrontType;
