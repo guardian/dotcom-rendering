@@ -1,5 +1,5 @@
-import { NewsletterPrivacyMessage } from '../src/web/components/NewsletterPrivacyMessage';
-import { NewsletterSignupForm } from '../src/web/components/NewsletterSignupForm';
+import { NewsletterPrivacyMessage } from '../src/components/NewsletterPrivacyMessage';
+import { NewsletterSignupForm } from '../src/components/NewsletterSignupForm';
 
 type Props = {
 	newsletterId: string;

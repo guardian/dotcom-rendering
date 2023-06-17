@@ -1,16 +1,16 @@
+import { isNonNullable } from '@guardian/libs';
+import type { EditionId } from '../lib/edition';
+import type { Branding } from '../types/branding';
 import type {
 	DCRCollectionType,
 	FECollectionType,
 	FEFrontCard,
 } from '../types/front';
-import type { EditionId } from '../web/lib/edition';
+import { decideBadge } from './decideBadge';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
-import { decideBadge } from './decideBadge';
-import { Branding } from '../types/branding';
-import { isNonNullable } from '@guardian/libs';
 
 const FORBIDDEN_CONTAINERS = [
 	'Palette styles new do not delete',
@@ -46,7 +46,7 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const allCards = [...collection.curated, ...collection.curated];
+		const allCards = [...collection.curated, ...collection.backfill];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
 		const containerPalette = decideContainerPalette(
@@ -74,16 +74,14 @@ export const enhanceCollections = (
 				editionId,
 				containerPalette,
 			),
-			curated: enhanceCards(
-				collection.curated,
+			curated: enhanceCards(collection.curated, {
 				editionId,
 				containerPalette,
-			),
-			backfill: enhanceCards(
-				collection.backfill,
+			}),
+			backfill: enhanceCards(collection.backfill, {
 				editionId,
 				containerPalette,
-			),
+			}),
 			treats: enhanceTreats(
 				collection.treats,
 				displayName,

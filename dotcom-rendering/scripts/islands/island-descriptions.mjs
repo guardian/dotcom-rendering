@@ -30,7 +30,7 @@ const getRegExForIsland = (name) =>
 
 const componentsDirectory = resolve(
 	fileURLToPath(import.meta.url),
-	'../../../src/web/components',
+	'../../../src/components',
 );
 
 const chunk = zod.object({
@@ -144,7 +144,7 @@ const getIslands = async (report) => {
     </main>
 
     <footer>
-    See <a href="https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/components/${filename}${lines}">…/components/${filename}${lines}</a> online
+    See <a href="https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/components/${filename}${lines}">…/components/${filename}${lines}</a> online
     </footer>
     </li>`;
 		});

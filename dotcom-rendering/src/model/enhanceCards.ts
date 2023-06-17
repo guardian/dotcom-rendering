@@ -1,5 +1,9 @@
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
+import { decideFormat } from '../lib/decideFormat';
+import type { EditionId } from '../lib/edition';
+import type { Group } from '../lib/getDataLinkName';
+import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -9,9 +13,6 @@ import type {
 	FESupportingContent,
 } from '../types/front';
 import type { FETagType, TagType } from '../types/tag';
-import { decideFormat } from '../web/lib/decideFormat';
-import type { EditionId } from '../web/lib/edition';
-import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
 
 /**
@@ -178,8 +179,15 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 
 export const enhanceCards = (
 	collections: FEFrontCard[],
-	editionId?: EditionId,
-	containerPalette?: DCRContainerPalette,
+	{
+		offset = 0,
+		editionId,
+		containerPalette,
+	}: {
+		offset?: number;
+		editionId?: EditionId;
+		containerPalette?: DCRContainerPalette;
+	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
@@ -190,10 +198,10 @@ export const enhanceCards = (
 				display: 'StandardDisplay',
 			},
 		);
-		const group = `${faciaCard.card.group}${
+		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+		const dataLinkName = getDataLinkNameCard(format, group, offset + index);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
@@ -248,6 +256,7 @@ export const enhanceCards = (
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'
