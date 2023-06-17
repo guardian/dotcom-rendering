@@ -6,9 +6,9 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
-import type { TrailType } from '../types/trails';
 
 export default {
 	component: Carousel,

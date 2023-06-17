@@ -1,5 +1,5 @@
-import { ArticleDesign } from '@guardian/libs';
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { useEffect } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
