@@ -25,26 +25,16 @@ function checkUrlForHash() {
  * This snippet of javascript checks if the url contains an image hash, such as
  * '#img-12'. If it does, it triggers a synthetic click event on the lightbox
  * button for that image. This click event hydrates and opens the lightbox, displaying
- * the image referenced by the hash
+ * the image referenced by the hash.
  *
- * This code is run:
+ * This code is run at page load
  *
- * 1) At page load, checking if a user copied a url with #img-12 at the end and
- * 2) Each time the `popstate` is fired, checking if a user is navigating back
- *    and forth through the browser history
  */
 export const LightboxHash = () => {
 	useEffect(() => {
 		// Run once at page load
 		checkUrlForHash();
-		// Set a listener for page navigation
-		window.addEventListener('popstate', checkUrlForHash);
-
-		return () => {
-			window.removeEventListener('popstate', checkUrlForHash);
-		};
 	}, []);
-
 	// Nothing is rendered by this component
 	return null;
 };
