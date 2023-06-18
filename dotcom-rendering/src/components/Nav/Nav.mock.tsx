@@ -1574,4 +1574,5 @@ export const nav: NavType = {
 				'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_supporter_cta&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_supporter_cta"%7D',
 		},
 	},
+	selectedPillar: ArticlePillar.News,
 };

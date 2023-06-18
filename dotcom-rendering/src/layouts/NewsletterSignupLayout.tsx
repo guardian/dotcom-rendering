@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	brandAlt,
 	brandBackground,
@@ -281,10 +281,14 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				>
 					<Nav
 						nav={NAV}
-						format={{
-							...format,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={getCurrentPillar(article)}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -559,7 +563,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					theme={format.theme}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
 import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
@@ -12,10 +12,12 @@ import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
 type Props = {
-	format: ArticleFormat;
 	nav: NavType;
 	subscribeUrl: string;
 	editionId: EditionId;
+	displayRoundel?: boolean;
+	isImmersive?: boolean;
+	selectedPillar: ArticlePillar;
 	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };
@@ -52,17 +54,15 @@ const PositionRoundel = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const Nav = ({
-	format,
 	nav,
 	subscribeUrl,
 	editionId,
+	displayRoundel,
+	isImmersive,
+	selectedPillar,
 	headerTopBarSwitch,
 	isInEuropeTest,
 }: Props) => {
-	const displayRoundel =
-		format.display === ArticleDisplay.Immersive ||
-		format.theme === ArticleSpecial.Labs;
-
 	return (
 		<div css={rowStyles}>
 			<Global
@@ -170,14 +170,10 @@ export const Nav = ({
 				}}
 			/>
 			<div
-				css={[
-					clearFixStyle,
-					rowStyles,
-					format.display === ArticleDisplay.Immersive && minNavHeight,
-				]}
+				css={[clearFixStyle, rowStyles, isImmersive && minNavHeight]}
 				data-component="nav2"
 			>
-				{format.display === ArticleDisplay.Immersive && (
+				{isImmersive && (
 					<Island deferUntil="visible" clientOnly={true}>
 						<InteractiveSupportButton
 							editionId={editionId}
@@ -206,16 +202,16 @@ export const Nav = ({
 					aria-haspopup="true"
 				/>
 				<Pillars
-					display={format.display}
+					isImmersive={isImmersive}
 					pillars={nav.pillars}
-					pillar={format.theme}
+					selectedPillar={selectedPillar}
 					dataLinkName="nav3"
 					isTopNav={true}
 				/>
 				<ExpandedMenu
 					editionId={editionId}
 					nav={nav}
-					format={format}
+					isImmersive={isImmersive}
 					headerTopBarSwitch={headerTopBarSwitch}
 					isInEuropeTest={isInEuropeTest}
 				/>

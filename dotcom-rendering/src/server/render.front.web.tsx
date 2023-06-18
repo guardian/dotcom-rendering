@@ -1,4 +1,4 @@
-import { isString } from '@guardian/libs';
+import { ArticlePillar, isString } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -8,7 +8,8 @@ import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { extractNAV } from '../model/extract-nav';
+import { themeToPillar } from '../lib/themeToPillar';
+import { extractNAV, NavType } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRFrontType } from '../types/front';
 import { htmlPageTemplate } from './htmlPageTemplate';
@@ -17,9 +18,61 @@ interface Props {
 	front: DCRFrontType;
 }
 
+const extractFrontNav = (front: DCRFrontType): NavType => {
+	const NAV = extractNAV(front.nav);
+	const { currentNavLink } = NAV;
+
+	// Is the `currentNavLink` a pillar?
+	const pillarFromCurrentLink = (() => {
+		switch (currentNavLink) {
+			// The pillar name is "arts" in CAPI, but "culture" everywhere else
+			case 'Arts':
+			case 'Culture':
+				return ArticlePillar.Culture;
+			case 'Opinion':
+				return ArticlePillar.Opinion;
+			case 'News':
+				return ArticlePillar.News;
+			case 'Sport':
+				return ArticlePillar.Sport;
+			case 'Lifestyle':
+				return ArticlePillar.Lifestyle;
+			default:
+				return undefined;
+		}
+	})();
+
+	// Is the `currentNavLink` in one of the children of the pillar?
+	const themeFromSubNav = NAV.pillars.find((pillar) => {
+		// Annoyingly "Football" appears in "News" and "Sport" pillars, so we exclude this case in "News"
+		// As "Football" is always "Sport". You can see the corresponding `frontend` code here:
+		// https://github.com/guardian/frontend/blob/main/common/app/navigation/Navigation.scala#L141-L143
+		if (
+			pillar.pillar === ArticlePillar.News &&
+			currentNavLink === 'Football'
+		) {
+			return false;
+		}
+
+		return pillar.children?.some((child) => {
+			return child.title === currentNavLink;
+		});
+	})?.pillar;
+
+	const pillarFromSubNav = themeToPillar(themeFromSubNav);
+
+	const selectedPillar =
+		pillarFromCurrentLink ?? pillarFromSubNav ?? ArticlePillar.News;
+
+	return {
+		...NAV,
+		selectedPillar,
+	};
+};
+
 export const renderFront = ({ front }: Props): string => {
 	const title = front.webTitle;
-	const NAV = extractNAV(front.nav);
+	const NAV = extractFrontNav(front);
 
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<FrontPage front={front} NAV={NAV} />,

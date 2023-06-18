@@ -375,10 +375,14 @@ export const CommentLayout = ({
 					>
 						<Nav
 							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(article),
-							}}
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={getCurrentPillar(article)}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -846,7 +850,7 @@ export const CommentLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					theme={format.theme}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

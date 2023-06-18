@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticlePillar } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -107,7 +108,7 @@ export const AllEditorialNewslettersPageLayout = ({
 						<Nav
 							headerTopBarSwitch={false}
 							nav={NAV}
-							format={articleFormat}
+							selectedPillar={ArticlePillar.News}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}
 							isInEuropeTest={isInEuropeTest}
@@ -174,7 +175,7 @@ export const AllEditorialNewslettersPageLayout = ({
 			>
 				<Footer
 					pageFooter={pageFooter}
-					pillar={articleFormat.theme}
+					theme={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={NAV.readerRevenueLinks.header}
 					editionId={editionId}

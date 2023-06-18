@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -19,6 +18,7 @@ import {
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { themeToPillar } from '../lib/themeToPillar';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
@@ -311,14 +311,14 @@ const decideSignupNewsletterName = (edition: EditionId): string => {
 
 export const Footer = ({
 	pillars,
-	pillar,
+	theme,
 	pageFooter,
 	urls,
 	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	pillar: ArticleTheme;
+	theme: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
@@ -332,9 +332,8 @@ export const Footer = ({
 	>
 		<div css={pillarWrap}>
 			<Pillars
-				display={ArticleDisplay.Standard}
 				pillars={pillars}
-				pillar={pillar}
+				selectedPillar={themeToPillar(theme)}
 				showLastPillarDivider={false}
 				dataLinkName="footer"
 			/>

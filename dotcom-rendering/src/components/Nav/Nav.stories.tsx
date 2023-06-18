@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
 import { Section } from '../Section';
 import { Nav } from './Nav';
@@ -19,11 +19,7 @@ export const StandardStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -45,11 +41,7 @@ export const StandardStoryTopBarHeader = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -71,11 +63,7 @@ export const OpinionStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.Opinion}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -98,11 +86,7 @@ export const ImmersiveStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"

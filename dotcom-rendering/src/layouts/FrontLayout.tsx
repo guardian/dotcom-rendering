@@ -199,10 +199,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={format}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
@@ -544,7 +544,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={format.theme}
+					theme={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
