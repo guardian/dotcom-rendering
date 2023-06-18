@@ -141,6 +141,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			);
 		}
 		const currentPosition = getPosition();
+		if (currentPosition == null) return [];
 		const currentPage = lightbox.querySelector<HTMLElement>(
 			`li[data-index="${currentPosition}"]`,
 		);
@@ -222,13 +223,14 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * Translate the pixel (scrollLeft) document value into a numeric
 	 * position value
 	 */
-	function getPosition(): number {
+	function getPosition(): number | null {
 		const scrollPosition = imageList?.scrollLeft;
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (scrollPosition === 0 || liWidth === 0) return 1;
-		if (scrollPosition == undefined || liWidth == undefined) return 1;
-		if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return 1;
-		return Math.round(scrollPosition / liWidth) + 1;
+		if (scrollPosition === 0) return 1;
+		if (scrollPosition == undefined || liWidth == undefined) return null;
+		if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return null;
+		const position = Math.round(scrollPosition / liWidth) + 1;
+		return position;
 	}
 
 	function getPreviousPosition(positionNow: number): number {
@@ -268,15 +270,19 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	function goBack(): void {
 		if (previousButton) pulseButton(previousButton);
 		const positionNow = getPosition();
-		const newPosition = getPreviousPosition(positionNow);
-		scrollTo(newPosition);
+		if (positionNow != null) {
+			const newPosition = getPreviousPosition(positionNow);
+			scrollTo(newPosition);
+		}
 	}
 
 	function goForward(): void {
 		if (nextButton) pulseButton(nextButton);
 		const positionNow = getPosition();
-		const newPosition = getNextPosition(positionNow);
-		scrollTo(newPosition);
+		if (positionNow != null) {
+			const newPosition = getNextPosition(positionNow);
+			scrollTo(newPosition);
+		}
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
@@ -477,8 +483,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		libDebounce(
 			() => {
 				const currentPosition = getPosition();
-				onSelect(currentPosition);
-				loadAdjacentImages(currentPosition);
+				if (currentPosition != null) {
+					onSelect(currentPosition);
+					loadAdjacentImages(currentPosition);
+				}
 			},
 			300,
 			{ leading: true },
