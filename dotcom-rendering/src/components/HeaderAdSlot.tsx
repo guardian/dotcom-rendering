@@ -11,7 +11,7 @@ import {
 import { Hide } from './Hide';
 
 type Props = {
-	display?: ArticleDisplay;
+	display: ArticleDisplay;
 };
 
 const headerWrapper = css`
