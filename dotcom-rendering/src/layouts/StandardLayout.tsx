@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandAltBackground,
@@ -342,14 +342,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 
 	const palette = decidePalette(format);
 
-	const formatForNav =
-		format.theme === ArticleSpecial.Labs
-			? format
-			: {
-					...format,
-					theme: getCurrentPillar(article),
-			  };
-
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
@@ -417,7 +409,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Nav
 							nav={props.NAV}
-							format={formatForNav}
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={getCurrentPillar(article)}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -954,7 +953,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Footer
 							pageFooter={article.pageFooter}
-							pillar={format.theme}
+							theme={format.theme}
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}

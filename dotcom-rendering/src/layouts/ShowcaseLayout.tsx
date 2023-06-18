@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
@@ -314,10 +314,16 @@ export const ShowcaseLayout = ({
 							>
 								<Nav
 									nav={NAV}
-									format={{
-										...format,
-										theme: getCurrentPillar(article),
-									}}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={getCurrentPillar(article)}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -395,10 +401,16 @@ export const ShowcaseLayout = ({
 							>
 								<Nav
 									nav={NAV}
-									format={{
-										...format,
-										theme: getCurrentPillar(article),
-									}}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={getCurrentPillar(article)}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -801,7 +813,7 @@ export const ShowcaseLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					theme={format.theme}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

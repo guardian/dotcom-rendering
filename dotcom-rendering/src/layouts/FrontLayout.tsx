@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import {
 	border,
 	brandBackground,
@@ -182,14 +182,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: ArticlePillar.News,
-							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
@@ -578,7 +574,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={ArticlePillar.News}
+					theme={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}

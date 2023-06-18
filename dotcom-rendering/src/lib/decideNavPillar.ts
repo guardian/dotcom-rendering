@@ -1,6 +1,6 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 
-export const decideNavTheme = (pillar: LegacyPillar): ArticleTheme => {
+export const decideNavPillar = (pillar: LegacyPillar): ArticlePillar => {
 	switch (pillar) {
 		case 'news':
 			return ArticlePillar.News;
@@ -12,8 +12,6 @@ export const decideNavTheme = (pillar: LegacyPillar): ArticleTheme => {
 			return ArticlePillar.Culture;
 		case 'lifestyle':
 			return ArticlePillar.Lifestyle;
-		case 'labs':
-			return ArticleSpecial.Labs;
 		default:
 			return ArticlePillar.News;
 	}

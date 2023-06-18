@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { render, within } from '@testing-library/react';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
@@ -8,11 +8,7 @@ describe('Nav', () => {
 		const { getByTestId } = render(
 			<Nav
 				nav={nav}
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				subscribeUrl=""
 				editionId="UK"
 				headerTopBarSwitch={false}
@@ -30,11 +26,7 @@ describe('Nav', () => {
 	it('should render the correct number of pillar items', () => {
 		const { getByTestId } = render(
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"

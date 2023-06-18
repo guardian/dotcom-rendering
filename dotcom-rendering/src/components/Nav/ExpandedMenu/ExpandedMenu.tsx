@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandBackground,
 	from,
@@ -106,14 +105,14 @@ const mainMenuStyles = css`
 
 type Props = {
 	editionId: EditionId;
-	format: ArticleFormat;
+	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
 	isInEuropeTest: boolean;
 };
 
 export const ExpandedMenu = ({
-	format,
+	isImmersive,
 	nav,
 	editionId,
 	headerTopBarSwitch,
@@ -121,8 +120,8 @@ export const ExpandedMenu = ({
 }: Props) => {
 	return (
 		<div id="expanded-menu-root">
-			<ShowMoreMenu display={format.display} />
-			<VeggieBurgerMenu display={format.display} />
+			<ShowMoreMenu isImmersive={isImmersive} />
+			<VeggieBurgerMenu isImmersive={isImmersive} />
 			<div id="expanded-menu" css={wrapperMainMenuStyles}>
 				<div
 					css={mainMenuStyles}
@@ -131,7 +130,7 @@ export const ExpandedMenu = ({
 				>
 					<Columns
 						editionId={editionId}
-						format={format}
+						isImmersive={isImmersive}
 						nav={nav}
 						headerTopBarSwitch={headerTopBarSwitch}
 						isInEuropeTest={isInEuropeTest}

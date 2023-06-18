@@ -164,11 +164,14 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					element="nav"
 				>
 					<Nav
-						format={{
-							display: format.display,
-							design: format.design,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={getCurrentPillar(article)}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
@@ -251,11 +254,12 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 				element="nav"
 			>
 				<Nav
-					format={{
-						display: ArticleDisplay.Standard,
-						design: format.design,
-						theme: getCurrentPillar(article),
-					}}
+					isImmersive={format.display === ArticleDisplay.Immersive}
+					displayRoundel={
+						format.display === ArticleDisplay.Immersive ||
+						format.theme === ArticleSpecial.Labs
+					}
+					selectedPillar={getCurrentPillar(article)}
 					nav={NAV}
 					subscribeUrl={
 						article.nav.readerRevenueLinks.header.subscribe
@@ -380,7 +384,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					theme={format.theme}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
