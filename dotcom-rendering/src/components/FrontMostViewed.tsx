@@ -18,6 +18,7 @@ type Props = {
 	editionId?: EditionId;
 	hasPageSkin?: boolean;
 	isFront?: boolean;
+	renderAds?: boolean;
 };
 
 export const FrontMostViewed = ({
@@ -31,6 +32,7 @@ export const FrontMostViewed = ({
 	editionId,
 	hasPageSkin,
 	isFront,
+	renderAds,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('Most viewed ', '');
@@ -63,7 +65,11 @@ export const FrontMostViewed = ({
 	const showMostPopular = !!deeplyReadType && !!mostViewedItems;
 
 	return (
-		<MostViewedFooterLayout hasPageSkin={hasPageSkin} isFront={isFront}>
+		<MostViewedFooterLayout
+			hasPageSkin={hasPageSkin}
+			isFront={isFront}
+			renderAds={renderAds}
+		>
 			{/* We only need hydration if there are multiple tabs */}
 			{showMostViewedTab ? (
 				<Island deferUntil="visible">

@@ -5,6 +5,7 @@ import { AdSlot } from './AdSlot';
 
 type Props = {
 	isFront?: boolean;
+	renderAds?: boolean;
 	children: React.ReactNode;
 	hasPageSkin?: boolean;
 };
@@ -52,15 +53,24 @@ const frontStyles = css`
 		margin-top: -7px;
 	}
 	${between.leftCol.and.wide} {
-		width: 75%;
 		margin-top: -42px;
 	}
 `;
 
+const adFreeStyles = css`
+	${from.wide} {
+		width: 75%;
+	}
+	${between.leftCol.and.wide} {
+		width: 76%;
+	}
+`;
+
 export const MostViewedFooterLayout = ({
-	children,
-	hasPageSkin = false,
 	isFront,
+	children,
+	renderAds,
+	hasPageSkin = false,
 }: Props) => {
 	return (
 		<div
@@ -72,12 +82,13 @@ export const MostViewedFooterLayout = ({
 				css={[
 					hasPageSkin ? fixedWidthsPageSkin : fixedWidths,
 					isFront && frontStyles,
+					!renderAds && adFreeStyles,
 				]}
 			>
 				{children}
 			</div>
 			<div css={hasPageSkin ? mostPopMarginWithPageSkin : mostPopMargin}>
-				<AdSlot position="mostpop" />
+				{renderAds && <AdSlot position="mostpop" />}
 			</div>
 		</div>
 	);

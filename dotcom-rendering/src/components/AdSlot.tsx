@@ -147,7 +147,7 @@ const mostPopAdStyles = css`
 	margin: 12px auto;
 	text-align: center;
 	${from.desktop} {
-		margin: 25px 0 0 0;
+		margin: 0;
 		width: auto;
 	}
 `;

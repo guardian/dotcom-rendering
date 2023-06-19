@@ -409,6 +409,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										editionId={front.editionId}
 										hasPageSkin={hasPageSkin}
 										isFront={true}
+										renderAds={false}
 									/>
 								</FrontSection>
 								{decideAdSlot(
