@@ -49,7 +49,7 @@ const mostPopMarginWithPageSkin = css`
 
 const frontStyles = css`
 	${from.wide} {
-		margin-top: -6px;
+		margin-top: -7px;
 	}
 	${between.leftCol.and.wide} {
 		width: 75%;
