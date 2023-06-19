@@ -369,7 +369,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 						return (
 							<>
-								<Section
+								<FrontSection
+									toggleable={true}
 									key={ophanName}
 									title={
 										showMostPopular
@@ -377,8 +378,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											: 'Most viewed'
 									}
 									showTopBorder={index > 0}
-									padContent={false}
-									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={
@@ -397,7 +396,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={front.editionId}
 									treats={collection.treats}
 									data-print-layout="hide"
-									element="aside"
 									hasPageSkin={hasPageSkin}
 								>
 									<FrontMostViewed
@@ -410,8 +408,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}
 										hasPageSkin={hasPageSkin}
+										isFront={true}
 									/>
-								</Section>
+								</FrontSection>
 								{decideAdSlot(
 									renderAds,
 									index,

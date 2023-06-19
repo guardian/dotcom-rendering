@@ -4,6 +4,7 @@ import { between, from } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
 
 type Props = {
+	isFront?: boolean;
 	children: React.ReactNode;
 	hasPageSkin?: boolean;
 };
@@ -19,6 +20,7 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 
 const fixedWidths = css`
 	width: 100%;
+	margin-left: -1px;
 	${between.desktop.and.wide} {
 		min-width: 627px;
 	}
@@ -45,9 +47,20 @@ const mostPopMarginWithPageSkin = css`
 	margin: 9px 0 0 10px;
 `;
 
+const frontStyles = css`
+	${from.wide} {
+		margin-top: -6px;
+	}
+	${between.leftCol.and.wide} {
+		width: 75%;
+		margin-top: -42px;
+	}
+`;
+
 export const MostViewedFooterLayout = ({
 	children,
 	hasPageSkin = false,
+	isFront,
 }: Props) => {
 	return (
 		<div
@@ -55,7 +68,12 @@ export const MostViewedFooterLayout = ({
 			className="content-footer"
 			css={stackBelow('desktop')}
 		>
-			<div css={hasPageSkin ? fixedWidthsPageSkin : fixedWidths}>
+			<div
+				css={[
+					hasPageSkin ? fixedWidthsPageSkin : fixedWidths,
+					isFront && frontStyles,
+				]}
+			>
 				{children}
 			</div>
 			<div css={hasPageSkin ? mostPopMarginWithPageSkin : mostPopMargin}>
