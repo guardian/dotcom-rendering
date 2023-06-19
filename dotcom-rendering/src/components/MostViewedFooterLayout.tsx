@@ -4,6 +4,7 @@ import { between, from } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
 
 type Props = {
+	isFront?: boolean;
 	children: React.ReactNode;
 };
 
@@ -18,6 +19,7 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 
 const fixedWidths = css`
 	width: 100%;
+	margin-left: -1px;
 	${between.desktop.and.wide} {
 		min-width: 627px;
 	}
@@ -26,14 +28,23 @@ const fixedWidths = css`
 	}
 `;
 
-export const MostViewedFooterLayout = ({ children }: Props) => {
+const frontStyles = css`
+	${from.wide} {
+		margin-top: -6px;
+	}
+	${between.leftCol.and.wide} {
+		width: 75%;
+		margin-top: -42px;
+	}
+`;
+export const MostViewedFooterLayout = ({ isFront, children }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
 			className="content-footer"
 			css={stackBelow('desktop')}
 		>
-			<div css={fixedWidths}>{children}</div>
+			<div css={[fixedWidths, isFront && frontStyles]}>{children}</div>
 			<div
 				css={css`
 					margin: 6px 0 0 10px;
