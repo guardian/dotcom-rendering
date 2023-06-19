@@ -87,6 +87,7 @@ export const ImmersiveStory = () => {
 		>
 			<Nav
 				selectedPillar={ArticlePillar.News}
+				displayRoundel={true}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
