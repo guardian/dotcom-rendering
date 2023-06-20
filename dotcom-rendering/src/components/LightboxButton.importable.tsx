@@ -382,6 +382,33 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		document.documentElement.classList.remove('lightbox-open');
 		// The lightbox was closed by clicking the close button so we need
 		// to exit fullscreen
+		if (document.webkitExitFullscreen) {
+			/**
+			 * Oh hi.
+			 *
+			 * So yeah, for people using Safari 16.3 we enqueue a second request here
+			 * because the first one will, sometimes, fail. Specifically, everything
+			 * works the first time you open any image and browse. But if you then
+			 * close lightbox and again open it (using a *different* image), then in
+			 * this case when you try to close the lightbox your first attempt will
+			 * fail and you'll need to click again to close it.
+			 *
+			 * It's super edge casey but this (blatant) hack solves the problem. We
+			 * know the second attempt will work, we know it doesn't have any side
+			 * effects to call exit again, so just make another.
+			 *
+			 * Why does Safari fail like this? I wish I had a firm response but I
+			 * can tell you it relates to the fact we're deferring execution of the
+			 * island code using promises and at some point along that chain Safari
+			 * is losing the thread. It's a known issue that Safari 16.3 doesn't
+			 * support promises with FullscreenAPI
+			 *
+			 * https://caniuse.com/?search=requestFullscreen%3A%20Returns%20a%20Promise
+			 */
+			setTimeout(() => {
+				void exitFullscreen();
+			});
+		}
 		await exitFullscreen();
 		// Restore focus
 		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
