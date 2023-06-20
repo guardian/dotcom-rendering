@@ -167,7 +167,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		if (screenfull.isEnabled && screenfull.isFullscreen) {
 			return screenfull.exit();
 		}
-		return;
+		return Promise.resolve();
 	}
 
 	/**
