@@ -5,8 +5,15 @@ import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
 const paidContentPage =
-	'https://www.theguardian.com/social-work-looking-to-the-future/2023/mar/13/social-work-in-2023-the-needs-the-challenges-and-reasons-to-be-optimistic';
+	'https://www.theguardian.com/the-future-of-sustainable-entrepreneurship/2023/jun/01/take-your-sustainable-business-to-the-next-level-win-your-own-retail-space-at-one-of-londons-westfield-centres';
 
+/**
+ * This test relies on labs campaigns, where the content is often taken down one the campaign is complete.
+ * If this happens you'll need to find a new labs article with a brand badge, you can often find these here:
+ * https://www.theguardian.com/tone/advertisement-features
+ * You need to edit the link as well as the expected requestURL to include the new brand in the code below, where it states `expect(requestURL).to.include('el=<logo goes here>');`.
+ * You can grab the required info in the dev tools network tab on the page itself.
+ */
 describe('Paid content tests', function () {
 	beforeEach(function () {
 		setLocalBaseUrl();
@@ -18,7 +25,7 @@ describe('Paid content tests', function () {
 
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find('button.sp_choice_type_12').click();
 
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
@@ -50,7 +57,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=guardian%20jobs');
+			expect(requestURL).to.include('el=westfield');
 		});
 	});
 
@@ -59,7 +66,7 @@ describe('Paid content tests', function () {
 
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find('button.sp_choice_type_12').click();
 
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
@@ -91,7 +98,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=guardian%20jobs');
+			expect(requestURL).to.include('el=westfield');
 		});
 	});
 });

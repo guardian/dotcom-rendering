@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, labeled, synchronize]
 
 jobs:
   chromatic:
@@ -33,22 +34,15 @@ jobs:
       # Root yarn installs all workspaces (root, dotcom)
       - run: yarn install --frozen-lockfile
 
-      - name: Chromatic - Apps Rendering Non Dependency PR / main
+      - name: Chromatic - Apps Rendering
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
+        # Run Chromatic only if `run_chromatic` label has been applied or we're
+        # pushing to `main`.
+        if: (contains(github.event.pull_request.labels.*.name, 'run_chromatic') ||  github.ref == 'refs/heads/main')
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           untraced: '**/(package**.json|yarn.lock)'
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
-          workingDir: apps-rendering
-
-      - name: Chromatic - Apps Rendering Dependency PR
-        uses: chromaui/action@v1
-        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          autoAcceptChanges: main
           workingDir: apps-rendering

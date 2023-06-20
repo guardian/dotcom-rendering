@@ -19,6 +19,9 @@ export const trails: [
 	DCRFrontCard,
 	DCRFrontCard,
 	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
+	DCRFrontCard,
 ] = [
 	{
 		url: 'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',
@@ -70,6 +73,7 @@ export const trails: [
 		],
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -89,6 +93,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -107,6 +112,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/nov/27/climate-emergency-world-may-have-crossed-tipping-points',
@@ -124,6 +130,7 @@ export const trails: [
 		showQuotedHeadline: true,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/26/european-parliament-split-on-declaring-climate-emergency',
@@ -141,6 +148,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/23/north-pole-explorers-on-thin-ice-as-climate-change-hits-expedition',
@@ -159,6 +167,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/oct/25/scientists-glacial-rivers-absorb-carbon-faster-rainforests',
@@ -178,6 +187,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/business/2019/oct/20/uk-urges-world-bank-to-channel-more-money-into-tackling-climate-crisis',
@@ -196,6 +206,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 
 	{
@@ -216,6 +227,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -235,6 +247,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -254,6 +267,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -273,6 +287,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -292,6 +307,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -311,6 +327,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -330,6 +347,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
@@ -349,6 +367,7 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2019/nov/28/eu-parliament-declares-climate-emergency',
@@ -366,5 +385,63 @@ export const trails: [
 		showQuotedHeadline: false,
 		showMainVideo: false,
 		isExternalLink: false,
+		showLivePlayable: false,
+	},
+	{
+		url: 'https://www.theguardian.com/society/2023/may/30/trans-activists-disrupt-kathleen-stock-speech-at-oxford-union',
+		headline:
+			'Gender-critical feminist’s speech temporarily stopped after protester glues themself to floor',
+		showByline: false,
+		byline: 'Matthew Weaver',
+		image: 'https://media.guim.co.uk/981abafa6ed4eaabdf7e743e6786aea3d9b7dbb2/0_417_901_540/500.jpg',
+		webPublicationDate: '2023-05-30T09:45:30.000Z',
+		format: {
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'news | group-0 | card-@16',
+		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+	{
+		url: 'https://www.theguardian.com/commentisfree/2023/may/31/price-controls-rishi-sunak-thatcher-prime-minister',
+		headline:
+			'The prime minister is stubbornly attached to an outdated ideology, but has no plan for adapting to volatile times, says Guardian columnist Rafael Behr',
+		showByline: false,
+		byline: 'Rafael Behr',
+		image: 'https://media.guim.co.uk/c6f821af41bd2d0c7125b9bf335545db1c122a84/0_184_6984_4190/500.jpg',
+		webPublicationDate: '2023-05-30T09:45:30.000Z',
+		format: {
+			theme: ArticlePillar.Opinion,
+			design: ArticleDesign.Comment,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'news | group-0 | card-@17',
+		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
+		showLivePlayable: false,
+	},
+	{
+		url: 'https://www.theguardian.com/tv-and-radio/2023/may/30/a-revelation-succession-matthew-macfadyen-has-been-a-consummate-shapeshifter',
+		headline:
+			'From HBO’s hit series to Shakespeare, the stage to Spooks, the actor’s global star status has been sealed',
+		showByline: false,
+		byline: 'Caroline Davies',
+		image: 'https://media.guim.co.uk/5efb440557a0237d92cc5e8c7553106a2826d545/781_288_1137_682/500.jpg',
+		webPublicationDate: '2023-05-30T09:45:30.000Z',
+		format: {
+			theme: ArticlePillar.Culture,
+			design: ArticleDesign.Feature,
+			display: ArticleDisplay.Standard,
+		},
+		dataLinkName: 'news | group-0 | card-@18',
+		showQuotedHeadline: false,
+		showMainVideo: false,
+		isExternalLink: false,
+		showLivePlayable: false,
 	},
 ];

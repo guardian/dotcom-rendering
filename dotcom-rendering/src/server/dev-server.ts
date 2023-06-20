@@ -1,15 +1,15 @@
 import type { Handler } from 'express';
-import { handleAMPArticle } from '../amp/server';
-import { handleAppsArticle } from '../apps/server';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
+import { handleAMPArticle } from '../server/index.article.amp';
+import { handleAppsArticle } from '../server/index.article.apps';
 import {
 	handleArticle,
 	handleArticleJson,
 	handleBlocks,
-	handleFront,
-	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-} from '../web/server';
+} from '../server/index.article.web';
+import { handleFront, handleFrontJson } from '../server/index.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
@@ -49,6 +49,8 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
+			case 'EmailNewsletters':
+				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
 				return handleAppsArticle(req, res, next);
 			default: {

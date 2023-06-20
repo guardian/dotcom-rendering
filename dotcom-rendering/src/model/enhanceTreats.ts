@@ -1,6 +1,6 @@
 import { ArticlePillar } from '@guardian/libs';
+import type { EditionId } from '../lib/edition';
 import type { FEFrontCard, TreatType } from '../types/front';
-import type { EditionId } from '../web/lib/edition';
 
 /**
  * PLATFORM_TREATS
@@ -20,7 +20,8 @@ const PLATFORM_TREATS: TreatType[] = [
 		links: [
 			{
 				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
-				text: 'Guardian Today US: Get the headlines & more in a daily email',
+				title: 'Guardian Today US: ',
+				text: 'Get the headlines & more in a daily email',
 			},
 		],
 		theme: ArticlePillar.News,
@@ -30,6 +31,35 @@ const PLATFORM_TREATS: TreatType[] = [
 			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
 		altText: 'The White House',
 		pageId: 'us',
+	},
+	{
+		links: [
+			{
+				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
+				title: 'Guardian Today US: ',
+				text: 'Get the headlines & more in a daily email',
+			},
+		],
+		theme: ArticlePillar.News,
+		containerTitle: 'US headlines',
+		imageUrl:
+			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
+		altText: 'The White House',
+		pageId: 'us-news',
+	},
+	{
+		links: [
+			{
+				linkTo: '/news/series/qatar-beyond-the-football',
+				text: 'Qatar: beyond the football',
+			},
+		],
+		theme: ArticlePillar.News,
+		containerTitle: 'Qatar: beyond the football',
+		imageUrl:
+			'https://uploads.guim.co.uk/2023/06/02/BALL-nugget-grass_5.png',
+		altText: 'Image of football covered in bank notes',
+		pageId: 'football/world-cup-2022',
 	},
 ];
 

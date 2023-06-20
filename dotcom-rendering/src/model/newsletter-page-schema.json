@@ -1,0 +1,431 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "newsletters": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "listId": {
+                        "type": "number"
+                    },
+                    "identityName": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "frequency": {
+                        "type": "string"
+                    },
+                    "successDescription": {
+                        "type": "string"
+                    },
+                    "theme": {
+                        "type": "string"
+                    },
+                    "group": {
+                        "type": "string"
+                    },
+                    "regionFocus": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "description",
+                    "frequency",
+                    "group",
+                    "identityName",
+                    "listId",
+                    "name",
+                    "successDescription",
+                    "theme"
+                ]
+            }
+        },
+        "editionId": {
+            "$ref": "#/definitions/EditionId"
+        },
+        "subscribeUrl": {
+            "type": "string"
+        },
+        "contributionsServiceUrl": {
+            "type": "string"
+        },
+        "beaconURL": {
+            "type": "string"
+        },
+        "webTitle": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "properties": {
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "abTests": {
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "revisionNumber": {
+                    "type": "string"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "adUnit": {
+                    "type": "string"
+                },
+                "edition": {
+                    "$ref": "#/definitions/EditionId"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "abTests",
+                "adUnit",
+                "ajaxUrl",
+                "commercialBundleUrl",
+                "dcrSentryDsn",
+                "dfpAccountId",
+                "discussionApiUrl",
+                "edition",
+                "frontendAssetsFullURL",
+                "googletagUrl",
+                "idApiUrl",
+                "revisionNumber",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "stage",
+                "switches"
+            ]
+        },
+        "twitterData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "openGraphData": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "nav": {
+            "$ref": "#/definitions/FENavType"
+        },
+        "pageFooter": {
+            "$ref": "#/definitions/FooterType"
+        },
+        "canonicalUrl": {
+            "type": "string"
+        },
+        "isAdFreeUser": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "beaconURL",
+        "canonicalUrl",
+        "config",
+        "contributionsServiceUrl",
+        "description",
+        "editionId",
+        "id",
+        "isAdFreeUser",
+        "nav",
+        "newsletters",
+        "pageFooter",
+        "subscribeUrl",
+        "webTitle"
+    ],
+    "definitions": {
+        "EditionId": {
+            "enum": [
+                "AU",
+                "EUR",
+                "INT",
+                "UK",
+                "US"
+            ],
+            "type": "string"
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "FENavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/FELinkType"
+                },
+                "currentNavLinkTitle": {
+                    "type": "string"
+                },
+                "currentPillarTitle": {
+                    "type": "string"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/FELinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FELinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "FELinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "url"
+            ]
+        },
+        "LegacyPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "supporter": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "subscribe",
+                "support",
+                "supporter"
+            ]
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

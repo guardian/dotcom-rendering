@@ -311,7 +311,7 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
-type CardImageType = 'mainMedia' | 'avatar' | 'crossword';
+type CardImageType = 'mainMedia' | 'avatar' | 'crossword' | 'slideshow';
 
 type SmallHeadlineSize =
 	| 'tiny'
@@ -563,6 +563,7 @@ declare namespace JSX {
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
+			rootMargin?: string;
 			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
@@ -606,7 +607,7 @@ declare namespace JSX {
 		 * Elements with this attribute will fetch their comment count on
 		 * the client-side.
 		 *
-		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
+		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
 		 */
 		'data-discussion-id'?: string;
 	}

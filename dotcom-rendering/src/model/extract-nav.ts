@@ -1,5 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {
@@ -11,8 +11,6 @@ export interface LinkType extends BaseLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
-	pillar?: ArticleTheme;
-	more?: boolean;
 }
 
 export interface EditionLinkType extends LinkType {
@@ -20,12 +18,8 @@ export interface EditionLinkType extends LinkType {
 	locale: string;
 }
 
-export interface PillarType extends LinkType {
+export interface PillarLinkType extends LinkType {
 	pillar: ArticleTheme;
-}
-
-interface MoreType extends LinkType {
-	more: true;
 }
 
 export interface SubNavType {
@@ -34,7 +28,7 @@ export interface SubNavType {
 }
 
 interface BaseNavType {
-	otherLinks: MoreType;
+	otherLinks: LinkType[];
 	brandExtensions: LinkType[];
 	currentNavLink: string;
 	subNavSections?: SubNavType;
@@ -42,7 +36,7 @@ interface BaseNavType {
 }
 
 export interface NavType extends BaseNavType {
-	pillars: PillarType[];
+	pillars: PillarLinkType[];
 }
 
 const getLink = (data: FELinkType): LinkType => {
@@ -51,13 +45,12 @@ const getLink = (data: FELinkType): LinkType => {
 		title,
 		longTitle,
 		url,
-		pillar: undefined,
 		children: data.children?.map(getLink) ?? [],
 		mobileOnly: false,
 	};
 };
 
-const getPillar = (data: FELinkType): PillarType => ({
+const getPillar = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
 	pillar: findPillar(data.title) ?? ArticlePillar.News,
 });
@@ -94,13 +87,7 @@ export const extractNAV = (data: FENavType): NavType => {
 
 	return {
 		pillars,
-		otherLinks: {
-			url: '', // unused
-			title: 'More',
-			longTitle: 'More',
-			more: true,
-			children: data.otherLinks.map(getLink),
-		},
+		otherLinks: data.otherLinks.map(getLink),
 		brandExtensions: data.brandExtensions.map(getLink),
 		currentNavLink,
 		subNavSections: subnav

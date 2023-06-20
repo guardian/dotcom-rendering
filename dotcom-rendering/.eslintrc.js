@@ -43,8 +43,6 @@ const rulesToReview = {
 
 	// More rules
 	'eslint-comments/require-description': 'warn',
-	'import/order': 'warn',
-	'sort-imports': 'warn',
 	'eslint-comments/no-unused-disable': 'warn',
 	'eslint-comments/disable-enable-pair': 'warn',
 	'@typescript-eslint/naming-convention': 'warn',
@@ -85,6 +83,7 @@ module.exports = {
 		'import',
 		'jsx-a11y',
 		'jsx-expressions',
+		'custom-elements',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -125,6 +124,7 @@ module.exports = {
 		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
+		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
 

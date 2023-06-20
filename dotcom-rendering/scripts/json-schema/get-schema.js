@@ -7,6 +7,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
+		path.resolve(`${root}/src/types/newslettersPage.ts`),
 	],
 	{
 		skipLibCheck: true,
@@ -26,6 +27,20 @@ module.exports = {
 	getFrontSchema: () => {
 		return JSON.stringify(
 			TJS.generateSchema(program, 'FEFrontType', settings),
+			null,
+			4,
+		);
+	},
+	getNewsletterPageSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'FENewslettersPageType', settings),
+			null,
+			4,
+		);
+	},
+	getBlockSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'Block', settings),
 			null,
 			4,
 		);

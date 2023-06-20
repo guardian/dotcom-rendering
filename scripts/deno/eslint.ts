@@ -3,18 +3,19 @@ const path = '.eslint/dotcom-rendering-report.json';
 const shouldLint = Deno.args.includes('--lint');
 
 const lint = () => {
-	const process = Deno.run({
-		cwd: './dotcom-rendering/',
-		cmd: [
-			'../node_modules/.bin/eslint',
-			'.',
-			...['--ext', '.ts,.tsx'],
-			...['--format', 'json'],
-			...['--output-file', '../' + path],
-		],
-	});
+	const command = new Deno.Command(
+		new URL(import.meta.resolve('../../node_modules/.bin/eslint')),
+		{
+			args: [
+				'.',
+				...['--ext', '.ts,.tsx'],
+				...['--format', 'json'],
+				...['--output-file', '../' + path],
+			],
+		},
+	);
 
-	return process.status();
+	return command.output();
 };
 
 if (shouldLint) await lint();

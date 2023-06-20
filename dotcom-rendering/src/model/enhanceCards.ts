@@ -1,15 +1,18 @@
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
+import { decideFormat } from '../lib/decideFormat';
+import type { EditionId } from '../lib/edition';
+import type { Group } from '../lib/getDataLinkName';
+import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
+	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
 } from '../types/front';
 import type { FETagType, TagType } from '../types/tag';
-import { decideFormat } from '../web/lib/decideFormat';
-import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
 
 /**
@@ -139,6 +142,19 @@ const decideKicker = (trail: FEFrontCard) => {
 		: trail.header.kicker?.item?.properties.kickerText;
 };
 
+const decideSlideshowImages = (
+	trail: FEFrontCard,
+): DCRSlideshowImage[] | undefined => {
+	const assets = trail.properties.image?.item.assets;
+	const shouldShowSlideshow =
+		trail.properties.image?.type === 'ImageSlideshow' &&
+		trail.properties.imageSlideshowReplace;
+	if (shouldShowSlideshow && assets && assets.length > 0) {
+		return assets;
+	}
+	return undefined;
+};
+
 const enhanceTags = (tags: FETagType[]): TagType[] => {
 	return tags.map(({ properties }) => {
 		const {
@@ -163,7 +179,15 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 
 export const enhanceCards = (
 	collections: FEFrontCard[],
-	containerPalette?: DCRContainerPalette,
+	{
+		offset = 0,
+		editionId,
+		containerPalette,
+	}: {
+		offset?: number;
+		editionId?: EditionId;
+		containerPalette?: DCRContainerPalette;
+	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
@@ -174,10 +198,10 @@ export const enhanceCards = (
 				display: 'StandardDisplay',
 			},
 		);
-		const group = `${faciaCard.card.group}${
+		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+		const dataLinkName = getDataLinkNameCard(format, group, offset + index);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
@@ -193,6 +217,10 @@ export const enhanceCards = (
 			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href
 				: faciaCard.header.url;
+
+		const branding = faciaCard.properties.editionBrandings.find(
+			(editionBranding) => editionBranding.edition.id === editionId,
+		)?.branding;
 
 		return {
 			format,
@@ -228,6 +256,7 @@ export const enhanceCards = (
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'
@@ -242,5 +271,8 @@ export const enhanceCards = (
 					?.duration,
 			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
+			embedUri: faciaCard.properties.embedUri ?? undefined,
+			branding,
+			slideshowImages: decideSlideshowImages(faciaCard),
 		};
 	});

@@ -11,6 +11,13 @@ updates:
           interval: 'daily'
       # Set to minimise the number of chromatic runs.
       rebase-strategy: "disabled"
+
+      ignore:
+        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
+        - dependency-name: 'aws-cdk'
+        - dependency-name: 'aws-cdk-lib'
+        - dependency-name: 'constructs'
+      open-pull-requests-limit: 10
     - package-ecosystem: 'npm'
       directory: '/apps-rendering'
       schedule:
@@ -23,15 +30,12 @@ updates:
         - dependency-name: 'aws-cdk'
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
+        # Types should match major and minor versions of the package being used.
+        - dependency-name: "@types/node"
+          update-types:
+            - "version-update:semver-major"
+            - "version-update:semver-minor"
       open-pull-requests-limit: 7
-    - package-ecosystem: "npm"
-      directory: "/dotcom-rendering"
-      schedule:
-        interval: "daily"
-      labels:
-        - "DCR Dependency"
-      open-pull-requests-limit: 10
-      rebase-strategy: "disabled"
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:
