@@ -294,9 +294,32 @@ const bottomPadding = css`
 `;
 
 const titleStyle = css`
+	display: flex;
+	margin-top: ${space[2]}px;
+
 	${until.leftCol} {
 		max-width: 74%;
 	}
+`;
+
+const paidForBadgeStyles = css`
+	display: inline-block;
+	border-top: 1px dotted ${palette.neutral[86]};
+	${textSans.xxsmall()}
+	color: ${palette.neutral[46]};
+	font-weight: bold;
+
+	${from.leftCol} {
+		width: 100%;
+	}
+`;
+
+const badgeStylesMobile = css`
+	padding-right: ${space[2]}px;
+`;
+
+const badgeStylesDesktop = css`
+	padding-top: ${space[2]}px;
 `;
 
 /**
@@ -465,20 +488,7 @@ export const FrontSection = ({
 							editionId={editionId}
 						/>
 						{badge && (
-							<div
-								css={css`
-									display: inline-block;
-									border-top: 1px dotted
-										${palette.neutral[86]};
-									${textSans.xxsmall()}
-									color: ${palette.neutral[46]};
-									font-weight: bold;
-
-									${from.leftCol} {
-										width: 100%;
-									}
-								`}
-							>
+							<div css={paidForBadgeStyles}>
 								Paid for by
 								<Badge
 									imageSrc={badge.imageSrc}
@@ -489,24 +499,30 @@ export const FrontSection = ({
 					</div>
 				) : (
 					<>
-						{!isOnPaidContentFront && (
+						{/* Only show badge on the first container of the front */}
+						{!isOnPaidContentFront && index === 0 && (
 							<Hide until="leftCol">
 								{badge && (
-									<Badge
-										imageSrc={badge.imageSrc}
-										href={badge.href}
-									/>
-								)}
-							</Hide>
-						)}
-						<div css={titleStyle}>
-							{!isOnPaidContentFront && (
-								<Hide from="leftCol">
-									{badge && (
+									<div css={badgeStylesDesktop}>
 										<Badge
 											imageSrc={badge.imageSrc}
 											href={badge.href}
 										/>
+									</div>
+								)}
+							</Hide>
+						)}
+						<div css={titleStyle}>
+							{/* Only show badge on the first container of the front */}
+							{!isOnPaidContentFront && index === 0 && (
+								<Hide from="leftCol">
+									{badge && (
+										<div css={badgeStylesMobile}>
+											<Badge
+												imageSrc={badge.imageSrc}
+												href={badge.href}
+											/>
+										</div>
 									)}
 								</Hide>
 							)}
