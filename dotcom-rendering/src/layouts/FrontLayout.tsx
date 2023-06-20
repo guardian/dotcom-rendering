@@ -15,6 +15,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -280,7 +281,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<>
+							<Fragment key={ophanName}>
 								{!!trail.embedUri && (
 									<SnapCssSandbox snapData={trail.snapData}>
 										<Section
@@ -310,7 +311,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									format.display,
 									mobileAdPositions,
 								)}
-							</>
+							</Fragment>
 						);
 					}
 
@@ -423,9 +424,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					return (
-						<>
+						<Fragment key={ophanName}>
 							<FrontSection
-								key={ophanName}
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
@@ -489,7 +489,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								format.display,
 								mobileAdPositions,
 							)}
-						</>
+						</Fragment>
 					);
 				})}
 			</main>
