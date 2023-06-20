@@ -99,12 +99,6 @@ export type FEContainerPalette =
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette';
 
-export type FEFrontCardType =
-	| 'LinkSnap'
-	| 'LatestSnap'
-	| 'CuratedContent'
-	| 'SupportingCuratedContent';
-
 export type FEFrontCardStyle =
 	| 'SpecialReport'
 	| 'SpecialReportAlt'
@@ -267,7 +261,7 @@ export type FEFrontCard = {
 	cardStyle?: {
 		type: FEFrontCardStyle;
 	};
-	type: FEFrontCardType;
+	type: string;
 };
 
 export type DCRFrontCard = {

@@ -206,7 +206,6 @@ export const enhanceCards = (
 			format,
 			group,
 			offset + index,
-			faciaCard.type,
 			faciaCard.card.cardStyle.type,
 		);
 

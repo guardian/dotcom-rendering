@@ -1162,7 +1162,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "$ref": "#/definitions/FEFrontCardType"
+                                            "type": "string"
                                         }
                                     },
                                     "required": [
@@ -1865,7 +1865,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "$ref": "#/definitions/FEFrontCardType"
+                                            "type": "string"
                                         }
                                     },
                                     "required": [
@@ -2568,7 +2568,7 @@
                                             ]
                                         },
                                         "type": {
-                                            "$ref": "#/definitions/FEFrontCardType"
+                                            "type": "string"
                                         }
                                     },
                                     "required": [
@@ -2907,15 +2907,6 @@
                 "Review",
                 "SpecialReport",
                 "SpecialReportAlt"
-            ],
-            "type": "string"
-        },
-        "FEFrontCardType": {
-            "enum": [
-                "CuratedContent",
-                "LatestSnap",
-                "LinkSnap",
-                "SupportingCuratedContent"
             ],
             "type": "string"
         },
