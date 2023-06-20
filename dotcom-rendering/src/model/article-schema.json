@@ -4620,6 +4620,7 @@
                     "type": "string"
                 },
                 "href": {
+                    "description": "Href can be an internal path including a series tag or a link to an external sponsor page",
                     "type": "string"
                 }
             },
