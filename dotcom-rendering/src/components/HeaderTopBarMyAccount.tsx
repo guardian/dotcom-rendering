@@ -189,6 +189,7 @@ const SignedInWithNotifications = ({
 	discussionApiUrl,
 	notifications,
 }: SignedInWithNotificationsProps) => {
+	// TODO OKTA: get user id from id token
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},

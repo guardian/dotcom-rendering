@@ -5,6 +5,8 @@ import { Discussion } from './Discussion';
 
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 	const { discussionApiUrl } = props;
+
+	// TODO OKTA: Discussion API call to migrate to use access token
 	const { data } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},

@@ -131,6 +131,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 				submitComponentEvent={submitComponentEvent}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
+				// TODO Okta: Migrate to use access tokens
 				subscribeToNewsletter={async (newsletterId: string) => {
 					await fetch(`${idApiUrl}/users/me/newsletters`, {
 						method: 'PATCH',

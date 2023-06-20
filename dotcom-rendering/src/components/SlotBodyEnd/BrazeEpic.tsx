@@ -140,6 +140,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					componentName={componentName}
 					brazeMessageProps={meta.dataFromBraze}
 					subscribeToNewsletter={async (newsletterId) => {
+						// TODO Okta: migrate to use access tokens
 						await fetch(`${idApiUrl}/users/me/newsletters`, {
 							method: 'PATCH',
 							body: JSON.stringify({

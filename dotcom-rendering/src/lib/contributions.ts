@@ -236,6 +236,7 @@ export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
 
 const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
+	// TODO Okta: This is just getting the email, use ID token instead
 	return getIdApiUserData(ajaxUrl)
 		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
 		.catch((error) => {

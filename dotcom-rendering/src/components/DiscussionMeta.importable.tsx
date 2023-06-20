@@ -21,6 +21,7 @@ export const DiscussionMeta = ({
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
+	// TODO Okta: getting user, migrate to access tokens
 	const { data } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},
