@@ -42,14 +42,14 @@ export const getBadgeFromSeriesTag = (
 		const specialBadge = findSpecialBadgeBySeriesTag(seriesTag);
 		if (specialBadge)
 			return {
-				imageSrc: `${ASSET_ORIGIN}/static/frontend/${specialBadge.imageSrc}`,
+				imageSrc: `${ASSET_ORIGIN}static/frontend/${specialBadge.imageSrc}`,
 				href: `/${seriesTag}`,
 			};
 		// Return undefined if no badge & no special badge found
 		else return undefined;
 	} else
 		return {
-			imageSrc: `${ASSET_ORIGIN}/static/frontend/${badge.imageSrc}`,
+			imageSrc: `${ASSET_ORIGIN}static/frontend/${badge.imageSrc}`,
 			href: `/${seriesTag}`,
 		};
 };
