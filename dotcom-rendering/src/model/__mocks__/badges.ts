@@ -1,9 +1,9 @@
-import type { FEBadgeType, FESpecialBadgeType } from '../../types/badge';
+import type { BadgeType, SpecialBadgeType } from '../../types/badge';
 
 // NB this is a MOCK file, don't accidentally import!
 
-/** Mocked version of FRONTEND_BADGES for testing */
-export const FRONTEND_BADGES: FEBadgeType[] = [
+/** Mocked version of BADGES for testing */
+export const BADGES: BadgeType[] = [
 	{
 		seriesTag: 'world/series/the-new-arrivals',
 		imageSrc: 'badges/new-arrivals.png',
@@ -14,8 +14,8 @@ export const FRONTEND_BADGES: FEBadgeType[] = [
 	},
 ];
 
-/** Mocked version of FRONTEND_SPECIAL_BADGES for testing */
-export const FRONTEND_SPECIAL_BADGES: FESpecialBadgeType[] = [
+/** Mocked version of SPECIAL_BADGES for testing */
+export const SPECIAL_BADGES: SpecialBadgeType[] = [
 	{
 		salt: 'bgxx248cpdecau4434hd',
 		hashedTag: '618e8af611c0f8430ffb330a1f3c344f',

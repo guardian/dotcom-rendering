@@ -1,8 +1,8 @@
 import { createHash } from 'crypto';
 import { ASSET_ORIGIN } from '../lib/assets';
-import type { DCRBadgeType, FESpecialBadgeType } from '../types/badge';
+import type { DCRBadgeType, SpecialBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
-import { FRONTEND_BADGES, FRONTEND_SPECIAL_BADGES } from './badges';
+import { BADGES, SPECIAL_BADGES } from './badges';
 
 /**
  * Fetches the badge properties only if ALL branding has the same sponsor.
@@ -36,7 +36,8 @@ export const getBadgeFromSeriesTag = (
 	seriesTag: string,
 ): DCRBadgeType | undefined => {
 	// First check the list of standard badges against seriesTags
-	const badge = FRONTEND_BADGES.find((b) => b.seriesTag === seriesTag);
+	const badge = BADGES.find((b) => b.seriesTag === seriesTag);
+
 	// If no badge found (result is falsy) check the list of special badges for a match against the md5 hash
 	if (!badge) {
 		const specialBadge = findSpecialBadgeBySeriesTag(seriesTag);
@@ -59,8 +60,8 @@ export const getBadgeFromSeriesTag = (
  */
 const findSpecialBadgeBySeriesTag = (
 	seriesTag: string,
-): FESpecialBadgeType | undefined =>
-	FRONTEND_SPECIAL_BADGES.find((b) => {
+): SpecialBadgeType | undefined =>
+	SPECIAL_BADGES.find((b) => {
 		const badgeHash = createHash('md5')
 			.update(b.salt + seriesTag)
 			.digest('hex');

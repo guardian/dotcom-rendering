@@ -4,12 +4,12 @@ export interface DCRBadgeType {
 	href: string;
 }
 
-export interface FEBadgeType {
+export interface BadgeType {
 	seriesTag: string;
 	imageSrc: string;
 }
 
-export interface FESpecialBadgeType {
+export interface SpecialBadgeType {
 	salt: string;
 	hashedTag: string;
 	imageSrc: string;
