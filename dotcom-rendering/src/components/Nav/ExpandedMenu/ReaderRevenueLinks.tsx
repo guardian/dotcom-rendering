@@ -7,9 +7,10 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { LinkType } from '../../../model/extract-nav';
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
 import type { EditionId } from '../../../lib/edition';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import type { LinkType } from '../../../model/extract-nav';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -140,7 +141,11 @@ export const ReaderRevenueLinks = ({
 						css={columnLinkTitle}
 						href={link.url}
 						role="menuitem"
-						data-link-name={`nav2 : secondary : ${link.longTitle}`}
+						data-link-name={nestedOphanComponents(
+							'nav2',
+							'secondary',
+							link.longTitle,
+						)}
 						data-cy={`column-collapse-sublink-${link.title}`}
 						tabIndex={-1}
 					>

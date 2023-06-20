@@ -1,6 +1,6 @@
+import { Section } from './Section';
 import { Snap } from './Snap';
 import { SnapCssSandbox } from './SnapCssSandbox';
-import { Section } from './Section';
 
 export default {
 	component: Snap,

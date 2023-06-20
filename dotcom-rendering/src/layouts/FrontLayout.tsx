@@ -1,9 +1,16 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import {
+	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
+	labs,
 	neutral,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
@@ -17,6 +24,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
@@ -103,16 +111,15 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent },
+		config: { isPaidContent, abTests },
 	} = front;
 
-	const isInEuropeTest =
-		front.config.abTests.europeNetworkFrontVariant === 'variant';
+	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News,
 	};
 
 	const palette = decidePalette(format);
@@ -152,30 +159,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</Stuck>
 					)}
 
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="header"
-					>
-						<Header
-							editionId={front.editionId}
-							idUrl={front.config.idUrl}
-							mmaUrl={front.config.mmaUrl}
-							discussionApiUrl={front.config.discussionApiUrl}
-							urls={front.nav.readerRevenueLinks.header}
-							remoteHeader={!!front.config.switches.remoteHeader}
-							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							isInEuropeTest={isInEuropeTest}
-							headerTopBarSearchCapiSwitch={
-								!!front.config.switches.headerTopBarSearchCapi
-							}
-						/>
-					</Section>
+					{!isPaidContent && (
+						<Section
+							fullWidth={true}
+							shouldCenter={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							backgroundColour={brandBackground.primary}
+							element="header"
+						>
+							<Header
+								editionId={front.editionId}
+								idUrl={front.config.idUrl}
+								mmaUrl={front.config.mmaUrl}
+								discussionApiUrl={front.config.discussionApiUrl}
+								urls={front.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!front.config.switches.remoteHeader
+								}
+								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+								isInEuropeTest={isInEuropeTest}
+								headerTopBarSearchCapiSwitch={
+									!!front.config.switches
+										.headerTopBarSearchCapi
+								}
+							/>
+						</Section>
+					)}
+
 					<Section
 						fullWidth={true}
 						borderColour={brandLine.primary}
@@ -229,10 +242,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 						</>
 					)}
+
+					{isPaidContent && (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={labs[400]}
+							borderColour={border.primary}
+							sectionId="labs-header"
+						>
+							<LabsHeader />
+						</Section>
+					)}
 				</>
 			</div>
 
-			<main data-layout="FrontLayout" id="maincontent">
+			<main
+				data-layout="FrontLayout"
+				data-link-name={`Front | /${front.pressedPage.id}`}
+				id="maincontent"
+			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -244,7 +273,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (!trail) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const ophanComponentLink = `container-${
+						index + 1
+					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
 					if (collection.collectionType === 'fixed/thrasher') {
@@ -331,6 +362,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
+										editionId={front.editionId}
 									/>
 								</Section>
 								{decideAdSlot(
@@ -431,6 +463,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
+								isOnPaidContentFront={isPaidContent}
+								index={index}
 							>
 								<DecideContainer
 									trails={trails}
@@ -462,7 +496,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
-				data-component="trending-topics"
+				ophanComponentName="trending-topics"
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>

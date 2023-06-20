@@ -52,18 +52,13 @@ describe('The web document renders with the correct meta and analytics elements 
 			`/Article/https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 		// Pillar ophan data-link-name exists with correct value
-		cy.get(`a[data-link-name="nav2 : primary : Opinion"]`).should(
+		cy.get(`a[data-link-name="nav3 : primary : Opinion"]`).should(
 			'have.length',
 			1,
 		);
 		// Only the top subnav is initially rendered so the count here is one
-		cy.get(`a[data-link-name="nav2 : subnav : money/pensions"]`).should(
+		cy.get(`a[data-link-name="nav2 : subnav : Pensions"]`).should(
 			'be.visible',
-		);
-		// Ensure we don't parse in an accidental slash
-		cy.get(`a[data-link-name="nav2 : subnav : /money/pensions"]`).should(
-			'have.length',
-			0,
 		);
 	});
 

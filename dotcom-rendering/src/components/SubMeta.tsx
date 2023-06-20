@@ -8,10 +8,10 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
+import { decidePalette } from '../lib/decidePalette';
 import type { BaseLinkType } from '../model/extract-nav';
 import type { DCRBadgeType } from '../types/badge';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
 import { ShareIcons } from './ShareIcons';
 

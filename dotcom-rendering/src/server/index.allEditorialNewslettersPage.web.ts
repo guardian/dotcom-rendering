@@ -1,24 +1,16 @@
 import type { RequestHandler } from 'express';
+import { enhanceNewslettersPage } from '../model/enhance-newsletters-page';
 import { validateAsAllEditorialNewslettersPageType } from '../model/validate';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { recordTypeAndPlatform } from './lib/logging-store';
 import { renderEditorialNewslettersPage } from './render.allEditorialNewslettersPage.web';
-
-const enhanceAllEditorialNewslettersPage = (
-	body: unknown,
-): DCRNewslettersPageType => {
-	const newsletterData = validateAsAllEditorialNewslettersPageType(body);
-	return {
-		...newsletterData,
-	};
-};
 
 export const handleAllEditorialNewslettersPage: RequestHandler = (
 	{ body },
 	res,
 ) => {
 	recordTypeAndPlatform('newsletters');
-	const newslettersPage = enhanceAllEditorialNewslettersPage(body);
+	const feNewslettersData = validateAsAllEditorialNewslettersPageType(body);
+	const newslettersPage = enhanceNewslettersPage(feNewslettersData);
 	const html = renderEditorialNewslettersPage({ newslettersPage });
 	res.status(200).send(html);
 };

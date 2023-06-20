@@ -65,7 +65,14 @@ export interface FENewslettersPageType {
 	isAdFreeUser: boolean;
 }
 
-// Types are currently equivalent, but will need to
-// add properties to DCRNewslettersPageType created in
-// the enhanceAllEditorialNewslettersPage function
-export type DCRNewslettersPageType = FENewslettersPageType;
+export type GroupedNewsletters = {
+	groups: {
+		title: string;
+		subtitle?: string;
+		newsletters: Newsletter[];
+	}[];
+};
+
+export type DCRNewslettersPageType = FENewslettersPageType & {
+	groupedNewsletters: GroupedNewsletters;
+};

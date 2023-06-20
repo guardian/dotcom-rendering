@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
@@ -37,11 +38,15 @@ export const Header = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: Props) => (
-	<div css={headerStyles}>
+	<div css={headerStyles} data-component="nav3">
 		<Island>
 			<HeaderTopBar
 				editionId={editionId}
-				dataLinkName="nav3 : topbar : edition-picker: toggle"
+				dataLinkName={nestedOphanComponents(
+					'nav3',
+					'topbar',
+					'edition-picker: toggle',
+				)}
 				idUrl={idUrl}
 				mmaUrl={mmaUrl}
 				discussionApiUrl={discussionApiUrl}
@@ -67,7 +72,7 @@ export const Header = ({
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}
-					dataLinkNamePrefix="nav3 : "
+					dataLinkNamePrefix="nav3"
 					inHeader={true}
 					remoteHeader={remoteHeader}
 					contributionsServiceUrl={contributionsServiceUrl}

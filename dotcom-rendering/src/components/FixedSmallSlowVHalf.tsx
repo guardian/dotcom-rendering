@@ -1,5 +1,5 @@
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { Card50Media50, CardDefaultMediaMobile } from '../lib/cardWrappers';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 

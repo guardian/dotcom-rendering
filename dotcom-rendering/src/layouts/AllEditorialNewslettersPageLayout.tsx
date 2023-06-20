@@ -6,18 +6,19 @@ import {
 	palette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../model/extract-nav';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Footer } from '../components/Footer';
+import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
 import { Nav } from '../components/Nav/Nav';
-import { NewslettersList } from '../components/NewsletterList';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { decideFormat } from '../lib/decideFormat';
+import type { NavType } from '../model/extract-nav';
+import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Stuck } from './lib/stickiness';
 
 type Props = {
@@ -153,7 +154,13 @@ export const AllEditorialNewslettersPageLayout = ({
 					editionId={newslettersPage.editionId}
 					headingText={newslettersPage.webTitle}
 				/>
-				<NewslettersList newsletters={newslettersPage.newsletters} />
+				<GroupedNewslettersList
+					groupedNewsletters={newslettersPage.groupedNewsletters}
+				/>
+
+				<Island deferUntil="idle">
+					<ManyNewsletterSignUp apiEndpoint="" />
+				</Island>
 			</main>
 
 			<Section

@@ -21,9 +21,6 @@ import {
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { buildAdTargeting } from '../lib/ad-targeting';
-import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -43,12 +40,15 @@ import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import type { NavType } from '../model/extract-nav';
+import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {

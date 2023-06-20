@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { RichLinkBlockElement } from '../types/content';
-import type { TagType } from '../types/tag';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
+import type { RichLinkBlockElement } from '../types/content';
+import type { TagType } from '../types/tag';
 import type { RichLinkImageData } from './RichLink';
 import { RichLink } from './RichLink';
 
