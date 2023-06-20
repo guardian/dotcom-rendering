@@ -1,5 +1,5 @@
 import type { DCRCollectionType } from '../types/front';
-import { getMobileAdPositions } from './getAdPositions';
+import { getMobileAdPositions, getMPUAdsPositions } from './getAdPositions';
 
 const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 	...Array<number>(12),
@@ -209,5 +209,30 @@ describe('Mobile Ads', () => {
 		);
 
 		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
+	});
+});
+
+describe('MPU Ads', () => {
+	it('should return a list of the MPU ads/containers positions', () => {
+		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
+			{ collectionType: 'fixed/small/slow-IV' },
+			{ collectionType: 'fixed/medium/slow-VI' },
+			{ collectionType: 'fixed/small/slow-V-third' },
+			{ collectionType: 'fixed/medium/slow-XII-mpu' },
+			{ collectionType: 'fixed/medium/fast-XII' },
+			{ collectionType: 'fixed/small/slow-V-third' },
+			{ collectionType: 'dynamic/slow-mpu' },
+			{ collectionType: 'fixed/medium/fast-XI' },
+			{ collectionType: 'fixed/small/slow-III' },
+			{ collectionType: 'fixed/small/slow-V-mpu' },
+			{ collectionType: 'fixed/small/slow-V-half' },
+			{ collectionType: 'fixed/medium/slow-XII-mpu' },
+			{ collectionType: 'fixed/small/fast-VIII' },
+			{ collectionType: 'news/most-popular' },
+		];
+
+		const MPUAdsPositions = getMPUAdsPositions(testCollections);
+
+		expect(MPUAdsPositions).toEqual([3, 6, 9, 11]);
 	});
 });

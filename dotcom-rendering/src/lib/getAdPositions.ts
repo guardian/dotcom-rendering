@@ -73,3 +73,13 @@ export const getMobileAdPositions = (
 		.map((collection: AdCandidate) => collections.indexOf(collection))
 		// Should insert no more than 10 ads
 		.slice(0, 10);
+
+export const getMPUAdsPositions = (
+	collections: Pick<DCRCollectionType, 'collectionType'>[],
+): number[] => {
+	return collections
+		.map((collection, index) =>
+			collection.collectionType.includes('mpu') ? index : 0,
+		)
+		.filter((index) => index != 0);
+};

@@ -30,6 +30,7 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	renderAds: boolean;
 };
 
@@ -41,6 +42,7 @@ export const DecideContainer = ({
 	containerPalette,
 	showAge,
 	renderAds,
+	MPUIndex,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -68,6 +70,7 @@ export const DecideContainer = ({
 					index={index}
 					renderAds={renderAds}
 					trails={trails}
+					MPUIndex={MPUIndex}
 				/>
 			);
 		case 'dynamic/package':
@@ -102,6 +105,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					index={index}
 					renderAds={renderAds}
+					MPUIndex={MPUIndex}
 				/>
 			);
 		case 'fixed/small/slow-III':
@@ -160,6 +164,7 @@ export const DecideContainer = ({
 					showAge={showAge}
 					renderAds={renderAds}
 					index={index}
+					MPUIndex={MPUIndex}
 				/>
 			);
 		case 'fixed/medium/fast-XII':

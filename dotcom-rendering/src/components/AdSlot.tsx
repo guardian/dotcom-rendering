@@ -21,6 +21,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	MPUIndex?: number;
 };
 
 type NonInlineProps = {
@@ -29,6 +30,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	MPUIndex?: number;
 };
 
 /**
@@ -265,6 +267,7 @@ export const AdSlot = ({
 	display,
 	isPaidContent = false,
 	index,
+	MPUIndex,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -452,7 +455,9 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${
+				MPUIndex != undefined ? MPUIndex : index
+			}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div

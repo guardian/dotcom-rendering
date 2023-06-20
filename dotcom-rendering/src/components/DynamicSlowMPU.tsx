@@ -24,6 +24,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 	renderAds: boolean;
 	trails: DCRFrontCard[];
@@ -38,11 +39,13 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	cards,
 	containerPalette,
 	showAge,
+	MPUIndex,
 	index,
 }: {
 	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 }) => {
 	const card33 = cards.slice(0, 1);
@@ -79,7 +82,11 @@ const Card33_ColumnOfThree33_Ad33 = ({
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
-					<AdSlot position="inline" index={index} />
+					<AdSlot
+						position="inline"
+						index={index}
+						MPUIndex={MPUIndex}
+					/>
 				</Hide>
 			</LI>
 		</UL>
@@ -95,11 +102,13 @@ const ColumnOfThree50_Ad50 = ({
 	cards,
 	containerPalette,
 	showAge,
+	MPUIndex,
 	index,
 }: {
 	cards: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 }) => {
 	const cards50 = cards.slice(0, 3);
@@ -121,7 +130,11 @@ const ColumnOfThree50_Ad50 = ({
 			</LI>
 			<LI percentage="50%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
-					<AdSlot position="inline" index={index} />
+					<AdSlot
+						position="inline"
+						index={index}
+						MPUIndex={MPUIndex}
+					/>
 				</Hide>
 			</LI>
 		</UL>
@@ -132,6 +145,7 @@ type MPUProps = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 };
 
@@ -140,6 +154,7 @@ const MPUSlice = ({
 	containerPalette,
 	showAge,
 	index,
+	MPUIndex,
 }: MPUProps) => {
 	let layout:
 		| 'noBigs'
@@ -200,6 +215,7 @@ const MPUSlice = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					MPUIndex={MPUIndex}
 				/>
 			);
 		}
@@ -216,6 +232,7 @@ const MPUSlice = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						index={index}
+						MPUIndex={MPUIndex}
 					/>
 				</>
 			);
@@ -233,6 +250,7 @@ const MPUSlice = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						index={index}
+						MPUIndex={MPUIndex}
 					/>
 				</>
 			);
@@ -250,6 +268,7 @@ const MPUSlice = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						index={index}
+						MPUIndex={MPUIndex}
 					/>
 				</>
 			);
@@ -267,6 +286,7 @@ const MPUSlice = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						index={index}
+						MPUIndex={MPUIndex}
 					/>
 				</>
 			);
@@ -325,6 +345,7 @@ export const DynamicSlowMPU = ({
 	index,
 	renderAds,
 	trails,
+	MPUIndex,
 }: Props) => {
 	return renderAds ? (
 		<MPUSlice
@@ -332,6 +353,7 @@ export const DynamicSlowMPU = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			index={index}
+			MPUIndex={MPUIndex}
 		/>
 	) : (
 		<NonMPUSlice

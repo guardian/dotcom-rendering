@@ -14,6 +14,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 	renderAds: boolean;
 };
@@ -22,6 +23,7 @@ type MPUSliceProps = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	MPUIndex?: number;
 	index: number;
 };
 
@@ -88,6 +90,7 @@ const ThreeColumnSliceWithAdSlot = ({
 	trails,
 	containerPalette,
 	showAge,
+	MPUIndex,
 	index,
 }: MPUSliceProps) => {
 	return (
@@ -131,7 +134,11 @@ const ThreeColumnSliceWithAdSlot = ({
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
-					<AdSlot position="inline" index={index} />
+					<AdSlot
+						position="inline"
+						index={index}
+						MPUIndex={MPUIndex}
+					/>
 				</Hide>
 			</LI>
 		</UL>
@@ -146,6 +153,7 @@ export const FixedMediumSlowXIIMPU = ({
 	trails,
 	containerPalette,
 	showAge,
+	MPUIndex,
 	index,
 	renderAds,
 }: Props) => {
@@ -165,6 +173,7 @@ export const FixedMediumSlowXIIMPU = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+					MPUIndex={MPUIndex}
 				/>
 			) : (
 				/**

@@ -37,6 +37,7 @@ import { decidePalette } from '../lib/decidePalette';
 import {
 	getMerchHighPosition,
 	getMobileAdPositions,
+	getMPUAdsPositions,
 } from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
@@ -422,6 +423,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
+					const MPUAdsPositions = getMPUAdsPositions(
+						front.pressedPage.collections,
+					);
+
 					return (
 						<>
 							<FrontSection
@@ -478,6 +483,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 									renderAds={renderAds}
+									MPUIndex={
+										MPUAdsPositions.indexOf(index) + 1
+									}
 								/>
 							</FrontSection>
 							{decideAdSlot(
