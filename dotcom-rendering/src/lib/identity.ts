@@ -17,7 +17,7 @@ const getClientId = (stage: StageType) =>
 const getRedirectUri = (stage: StageType) => {
 	switch (stage) {
 		case 'PROD':
-			return 'https://www.theguardian.com/ ';
+			return 'https://www.theguardian.com/';
 		case 'CODE':
 			return 'https://m.code.dev-theguardian.com/';
 		case 'DEV':
