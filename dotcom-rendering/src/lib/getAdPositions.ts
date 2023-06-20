@@ -73,3 +73,18 @@ export const getMobileAdPositions = (
 		.map((collection: AdCandidate) => collections.indexOf(collection))
 		// Should insert no more than 10 ads
 		.slice(0, 10);
+
+const hasDesktopAd = (collection: DCRCollectionType) => {
+	return (
+		collection.collectionType == 'dynamic/slow-mpu' ||
+		collection.collectionType == 'fixed/small/slow-V-mpu' ||
+		collection.collectionType == 'fixed/medium/slow-XII-mpu'
+	);
+};
+
+export const getDesktopAdPositions = (
+	collections: DCRCollectionType[],
+): number[] =>
+	collections
+		.filter(hasDesktopAd)
+		.map((collection) => collections.indexOf(collection));
