@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+import { ASSET_ORIGIN } from '../lib/assets';
 import type { DCRBadgeType, FESpecialBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
 import { FRONTEND_BADGES, FRONTEND_SPECIAL_BADGES } from './badges';
@@ -41,16 +42,14 @@ export const getBadgeFromSeriesTag = (
 		const specialBadge = findSpecialBadgeBySeriesTag(seriesTag);
 		if (specialBadge)
 			return {
-				/** @todo @cemms1 check this prefix */
-				imageSrc: `/static/frontend/${specialBadge.imageSrc}`,
+				imageSrc: `${ASSET_ORIGIN}/static/frontend/${specialBadge.imageSrc}`,
 				href: `/${seriesTag}`,
 			};
 		// Return undefined if no badge & no special badge found
 		else return undefined;
 	} else
 		return {
-			/** @todo @cemms1 check this prefix */
-			imageSrc: `/static/frontend/${badge.imageSrc}`,
+			imageSrc: `${ASSET_ORIGIN}/static/frontend/${badge.imageSrc}`,
 			href: `/${seriesTag}`,
 		};
 };

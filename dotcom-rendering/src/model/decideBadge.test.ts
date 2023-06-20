@@ -4,7 +4,12 @@ import {
 	getBadgeFromSeriesTag,
 } from './decideBadge';
 
-jest.mock('./badges.ts');
+jest.mock('./badges');
+
+jest.mock('../lib/assets', () => {
+	/* eslint-disable-next-line -- allow modifying ../lib/assets file without type checking */
+	return { ...jest.requireActual('../lib/assets'), ASSET_ORIGIN: 'TEST' };
+});
 
 const brandingAmazon = {
 	brandingType: {
@@ -57,7 +62,7 @@ describe('Decide badge', () => {
 			const tagId = 'uk-news/series/the-brexit-gamble';
 			const expectedResult = {
 				href: `/${tagId}`,
-				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+				imageSrc: `TEST/static/frontend/badges/EUReferendumBadge.svg`,
 			};
 			const result = getBadgeFromSeriesTag(tagId);
 			expect(result).toMatchObject(expectedResult);
@@ -67,7 +72,7 @@ describe('Decide badge', () => {
 			const tagId = 'tone/newsletter-tone';
 			const expectedResult = {
 				href: `/${tagId}`,
-				imageSrc: `/static/frontend/badges/newsletter-badge.svg`,
+				imageSrc: `TEST/static/frontend/badges/newsletter-badge.svg`,
 			};
 			const result = getBadgeFromSeriesTag(tagId);
 			expect(result).toMatchObject(expectedResult);
@@ -114,7 +119,7 @@ describe('Decide badge', () => {
 			const tagId = 'uk-news/series/the-brexit-gamble';
 			const expectedResult = {
 				href: `/${tagId}`,
-				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+				imageSrc: `TEST/static/frontend/badges/EUReferendumBadge.svg`,
 			};
 			const result = decideBadge(tagId, branding);
 			expect(result).toMatchObject(expectedResult);
