@@ -475,6 +475,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								index={index}
+								targetedTerritory={collection.targetedTerritory}
 							>
 								<DecideContainer
 									trails={trails}

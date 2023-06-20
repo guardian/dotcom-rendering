@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isString } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -12,6 +13,8 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
 import type { DCRContainerPalette, TreatType } from '../types/front';
+import { isAustralianTerritory, type Territory } from '../types/territory';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { Island } from './Island';
@@ -68,6 +71,8 @@ type Props = {
 	isOnPaidContentFront?: boolean;
 	/** Denotes the position of this section on the front */
 	index?: number;
+	/** Indicates if the container is targetted to a specific territory */
+	targetedTerritory?: Territory;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -404,6 +409,7 @@ export const FrontSection = ({
 	ajaxUrl,
 	isOnPaidContentFront,
 	index,
+	targetedTerritory,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -549,7 +555,14 @@ export const FrontSection = ({
 			</div>
 
 			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
-				{showMore && (
+				{isString(targetedTerritory) &&
+				isAustralianTerritory(targetedTerritory) ? (
+					<Island deferUntil="interaction">
+						<AustralianTerritorySwitcher
+							targetedTerritory={targetedTerritory}
+						/>
+					</Island>
+				) : showMore ? (
 					<Island deferUntil="interaction">
 						<ShowMore
 							title={title}
@@ -562,7 +575,7 @@ export const FrontSection = ({
 							showAge={title === 'Headlines'}
 						/>
 					</Island>
-				)}
+				) : null}
 			</div>
 
 			{treats && (
