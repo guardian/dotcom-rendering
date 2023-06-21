@@ -116,7 +116,7 @@ describe('Decide badge', () => {
 				href: `/${tagId}`,
 				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
 			};
-			const result = decideBadge(tagId, branding);
+			const result = decideBadge(branding, tagId);
 			expect(result).toMatchObject(expectedResult);
 		});
 
@@ -127,13 +127,13 @@ describe('Decide badge', () => {
 				imageSrc: brandingAmazon.logo.src,
 				href: brandingAmazon.logo.link,
 			};
-			const result = decideBadge('seriesTag', branding);
+			const result = decideBadge(branding, 'seriesTag');
 			expect(result).toEqual(expectedResult);
 		});
 
 		it('returns undefined if no match by seriesTag or branding', () => {
 			const expectedResult = undefined;
-			const result = decideBadge('seriesTag', []);
+			const result = decideBadge([], 'seriesTag');
 			expect(result).toEqual(expectedResult);
 		});
 	});
