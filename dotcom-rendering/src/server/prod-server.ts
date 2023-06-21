@@ -2,25 +2,27 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../amp/server';
-import { handleAppsArticle } from '../apps/server';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
+} from '../server/index.article.amp';
+import { handleAppsArticle } from '../server/index.article.apps';
 import {
-	handleAllEditorialNewslettersPage,
 	handleArticle,
 	handleArticleJson,
-	handlePerfTest as handleArticlePerfTest,
+	handleArticlePerfTest,
 	handleBlocks,
-	handleFront,
-	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
+} from '../server/index.article.web';
+import {
+	handleFront,
+	handleFrontJson,
 	handleTagFront,
-	handleTagPageJson,
-} from '../web/server';
+	handleTagFrontJson,
+} from '../server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
@@ -66,7 +68,7 @@ export const prodServer = (): void => {
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 	app.post('/TagFront', logRenderTime, handleTagFront);
-	app.post('/TagFrontJSON', logRenderTime, handleTagPageJson);
+	app.post('/TagFrontJSON', logRenderTime, handleTagFrontJson);
 	app.post(
 		'/EmailNewsletters',
 		logRenderTime,
@@ -113,7 +115,7 @@ export const prodServer = (): void => {
 		'/TagFrontJSON/*',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		handleTagPageJson,
+		handleTagFrontJson,
 	);
 
 	app.get(

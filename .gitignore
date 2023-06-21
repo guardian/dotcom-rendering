@@ -51,3 +51,4 @@ webArchitecture.svg
 
 # ESLint reports
 .eslint/
+.eslintcache

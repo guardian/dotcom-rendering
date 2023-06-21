@@ -1,4 +1,4 @@
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
 import type { FooterType } from './footer';
@@ -11,7 +11,7 @@ type FENewslettersConfigType = {
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
-	dcrSentryDsn: string; // used in dotcom-rendering/src/web/browser/sentryLoader/sentry.ts
+	dcrSentryDsn: string; // used in dotcom-rendering/src/client/sentryLoader/sentry.ts
 	switches: Switches;
 	abTests: ServerSideTests;
 	dfpAccountId: string;
@@ -65,7 +65,14 @@ export interface FENewslettersPageType {
 	isAdFreeUser: boolean;
 }
 
-// Types are currently equivalent, but will need to
-// add properties to DCRNewslettersPageType created in
-// the enhanceAllEditorialNewslettersPage function
-export type DCRNewslettersPageType = FENewslettersPageType;
+export type GroupedNewsletters = {
+	groups: {
+		title: string;
+		subtitle?: string;
+		newsletters: Newsletter[];
+	}[];
+};
+
+export type DCRNewslettersPageType = FENewslettersPageType & {
+	groupedNewsletters: GroupedNewsletters;
+};

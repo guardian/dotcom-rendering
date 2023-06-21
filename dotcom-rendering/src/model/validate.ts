@@ -7,6 +7,7 @@ import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
 import type { FETagFrontType } from '../types/tagFront';
 import articleSchema from './article-schema.json';
+import blockSchema from './block-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
 import tagFrontSchema from './tag-front-schema.json';
@@ -27,6 +28,7 @@ const validateTagFront = ajv.compile<FETagFrontType>(tagFrontSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
+const validateBlock = ajv.compile<Block[]>(blockSchema);
 
 export const validateAsArticleType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
@@ -71,5 +73,13 @@ export const validateAsAllEditorialNewslettersPageType = (
 	throw new TypeError(
 		`Unable to validate request body for newsletters page.\n
 		${JSON.stringify(validateAllEditorialNewslettersPage.errors, null, 2)}`,
+	);
+};
+
+export const validateAsBlock = (data: unknown): Block[] => {
+	if (validateBlock(data)) return data;
+	throw new TypeError(
+		`Unable to validate request body for block.\n
+            ${JSON.stringify(validateBlock.errors, null, 2)}`,
 	);
 };

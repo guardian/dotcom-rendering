@@ -1,5 +1,5 @@
+import type { EditionId } from '../lib/edition';
 import type { GroupedTrails } from '../model/groupTrailsByDates';
-import type { EditionId } from '../web/lib/edition';
 import type { FooterType } from './footer';
 import type { FEFrontCard, FEFrontConfigType } from './front';
 import type { FETagType } from './tag';

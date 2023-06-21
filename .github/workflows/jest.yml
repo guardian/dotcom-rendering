@@ -1,13 +1,8 @@
-name: DCR jest 🤔
 on:
-  push:
-    paths-ignore:
-      - 'apps-rendering/**'
-      - 'dotcom-rendering/docs/**'
+  workflow_call:
 
 jobs:
   jest:
-    name: DCR Jest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

@@ -380,6 +380,12 @@
         },
         "mostShared": {
             "$ref": "#/definitions/FETrailType"
+        },
+        "deeplyRead": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/FETrailType"
+            }
         }
     },
     "required": [
@@ -783,6 +789,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -816,6 +839,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -824,6 +850,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -945,7 +974,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1144,7 +1173,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1482,6 +1511,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -1515,6 +1561,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -1523,6 +1572,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -1644,7 +1696,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1843,7 +1895,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2181,6 +2233,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2214,6 +2283,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -2222,6 +2294,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -2343,7 +2418,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -2542,7 +2617,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2774,6 +2849,121 @@
                 "INT",
                 "UK",
                 "US"
+            ],
+            "type": "string"
+        },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "brandingType": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
+            ]
+        },
+        "FEFrontCardStyle": {
+            "enum": [
+                "Analysis",
+                "Comment",
+                "DeadBlog",
+                "DefaultCardstyle",
+                "Editorial",
+                "ExternalLink",
+                "Feature",
+                "Letters",
+                "LiveBlog",
+                "Media",
+                "Review",
+                "SpecialReport",
+                "SpecialReportAlt"
             ],
             "type": "string"
         },
@@ -3189,103 +3379,6 @@
                 "Video"
             ],
             "type": "string"
-        },
-        "Branding": {
-            "type": "object",
-            "properties": {
-                "brandingType": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "name"
-                    ]
-                },
-                "sponsorName": {
-                    "type": "string"
-                },
-                "logo": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                },
-                "aboutThisLink": {
-                    "type": "string"
-                },
-                "logoForDarkBackground": {
-                    "type": "object",
-                    "properties": {
-                        "src": {
-                            "type": "string"
-                        },
-                        "link": {
-                            "type": "string"
-                        },
-                        "label": {
-                            "type": "string"
-                        },
-                        "dimensions": {
-                            "type": "object",
-                            "properties": {
-                                "width": {
-                                    "type": "number"
-                                },
-                                "height": {
-                                    "type": "number"
-                                }
-                            },
-                            "required": [
-                                "height",
-                                "width"
-                            ]
-                        }
-                    },
-                    "required": [
-                        "dimensions",
-                        "label",
-                        "link",
-                        "src"
-                    ]
-                }
-            },
-            "required": [
-                "aboutThisLink",
-                "logo",
-                "sponsorName"
-            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

@@ -1,9 +1,7 @@
+import { isNonNullable } from '@guardian/libs';
 import type { FECollectionType, FEFrontCard } from '../types/front';
 import type { FETagType } from '../types/tag';
 
-//type guard function that checks if a value is defined
-const notUndefined = (value: FETagType | undefined): value is FETagType =>
-	value !== undefined;
 /**
  * Gets all relevant tags filtered by properties
  * @param tags - The deduplicated trails
@@ -12,7 +10,7 @@ const notUndefined = (value: FETagType | undefined): value is FETagType =>
 const getTags = (trails: FEFrontCard[]): FETagType[] =>
 	trails
 		.flatMap((trail) => trail.properties.maybeContent?.tags.tags)
-		.filter(notUndefined)
+		.filter(isNonNullable)
 		.filter((tag) => {
 			return (
 				tag.properties.paidContentType?.includes('Keyword') ??
@@ -49,7 +47,7 @@ const filterTopFive = (tag: FETagType[]): FETagType[] => {
 const dedupeTags = (tag: FETagType[]): FETagType[] =>
 	[...new Set(tag.map((item) => item.properties.id))]
 		.map((id) => tag.find((item) => item.properties.id === id))
-		.filter(notUndefined);
+		.filter(isNonNullable);
 
 export const extractTrendingTopicsFomFront = (
 	collections: FECollectionType[],

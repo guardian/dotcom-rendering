@@ -1832,10 +1832,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/atoms-rendering@^28.0.0":
-  version "28.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-28.0.0.tgz#9366d327ff681470a67a8cf83e29a1fd4569f2a2"
-  integrity sha512-xCNnAEDNIoRnXNeQtZG70VwXNQheG+/VXPaNiL3F/p4ncAggrLEZdR5TGViIsisLv+LvfMJwl1uBy7/i6yFkIw==
+"@guardian/atoms-rendering@^31.0.0":
+  version "31.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-31.0.0.tgz#31e0f727b574e3385ef6688767a507ea18c3a9b6"
+  integrity sha512-dWhTI/djARS0qhtvMmpa91Rcyz/O82KHFWNCXsQLOg74Na96p+ibl6mDUOW5M/xBiL5TbF5Ac/ZbWdspWsiwWA==
   dependencies:
     is-mobile "3.1.1"
 
@@ -3597,10 +3597,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.18.tgz#8dfb97f0da23c2293e554c5a50d61ef134d7697f"
   integrity sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==
 
-"@types/node@^14.17.19":
-  version "14.17.19"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.19.tgz#7341e9ac1b5d748d7a3ddc04336ed536a6f91c31"
-  integrity sha512-jjYI6NkyfXykucU6ELEoT64QyKOdvaA6enOqKtP4xUsGY0X0ZUZz29fUmrTRo+7v7c6TgDu82q3GHHaCEkqZwA==
+"@types/node@18.16.0":
+  version "18.16.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.0.tgz#4668bc392bb6938637b47e98b1f2ed5426f33316"
+  integrity sha512-BsAaKhB+7X+H4GnSjGhJG9Qi8Tw+inU9nJDwmD5CgOmBLEI6ArdhikpLX7DjbjDRDTbqZzU2LSQNZg8WGPiSZQ==
 
 "@types/node@^16.0.0":
   version "16.18.24"

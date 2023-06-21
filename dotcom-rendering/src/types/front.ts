@@ -1,5 +1,7 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from '../lib/edition';
+import type { DCRBadgeType } from './badge';
+import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
@@ -22,6 +24,7 @@ export interface FEFrontType {
 	mostViewed: FETrailType[];
 	mostCommented?: FETrailType;
 	mostShared?: FETrailType;
+	deeplyRead?: FETrailType[];
 }
 
 export interface DCRFrontType {
@@ -36,6 +39,7 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
 }
 
@@ -95,6 +99,21 @@ export type FEContainerPalette =
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette';
 
+export type FEFrontCardStyle =
+	| 'SpecialReport'
+	| 'SpecialReportAlt'
+	| 'LiveBlog'
+	| 'DeadBlog'
+	| 'Feature'
+	| 'Editorial'
+	| 'Comment'
+	| 'Media'
+	| 'Analysis'
+	| 'Review'
+	| 'Letters'
+	| 'ExternalLink'
+	| 'DefaultCardstyle';
+
 export type DCRContainerPalette =
 	| 'EventPalette'
 	| 'SombreAltPalette'
@@ -104,7 +123,8 @@ export type DCRContainerPalette =
 	| 'LongRunningPalette'
 	| 'SombrePalette'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Branded';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -171,13 +191,18 @@ export type FEFrontCard = {
 			type: string;
 			item: {
 				imageSrc?: string;
+				assets?: {
+					imageSrc: string;
+					imageCaption?: string;
+				}[];
 			};
 		};
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId } }[];
+		editionBrandings: { edition: { id: EditionId }; branding?: Branding }[];
 		href?: string;
+		embedUri?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -207,7 +232,7 @@ export type FEFrontCard = {
 	card: {
 		id: string;
 		cardStyle: {
-			type: string;
+			type: FEFrontCardStyle;
 		};
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
@@ -234,7 +259,7 @@ export type FEFrontCard = {
 	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
-		type: string;
+		type: FEFrontCardStyle;
 	};
 	type: string;
 };
@@ -263,6 +288,15 @@ export type DCRFrontCard = {
 	mediaDuration?: number;
 	showMainVideo: boolean;
 	isExternalLink: boolean;
+	embedUri?: string;
+	branding?: Branding;
+	slideshowImages?: DCRSlideshowImage[];
+	showLivePlayable: boolean;
+};
+
+export type DCRSlideshowImage = {
+	imageSrc: string;
+	imageCaption?: string;
 };
 
 export type FESnapType = {
@@ -337,6 +371,7 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
+	badge?: DCRBadgeType;
 };
 
 export type DCRGroupedTrails = {

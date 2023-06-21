@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const {
 	babelExclude,
 	getLoaders,
-} = require('../scripts/webpack/webpack.config.browser');
+} = require('../scripts/webpack/webpack.config.client');
 
 // Generate dynamic Card and Layout stories
 require('../scripts/gen-stories/gen-stories');
@@ -84,7 +84,7 @@ const webpackConfig = (config) => {
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
-		path.resolve(__dirname, '../src/web/components/SecureSignup.tsx')
+		path.resolve(__dirname, '../src/components/SecureSignup.tsx')
 	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
 	const webpackLoaders = getLoaders('modern');
 	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
