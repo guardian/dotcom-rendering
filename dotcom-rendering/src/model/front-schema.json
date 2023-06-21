@@ -2694,6 +2694,9 @@
                             },
                             "hasMore": {
                                 "type": "boolean"
+                            },
+                            "targetedTerritory": {
+                                "$ref": "#/definitions/Territory"
                             }
                         },
                         "required": [
@@ -2955,6 +2958,20 @@
                 "SombrePalette",
                 "Special",
                 "SpecialReportAltPalette"
+            ],
+            "type": "string"
+        },
+        "Territory": {
+            "description": "List of territories that can be targetted against.",
+            "enum": [
+                "AU-NSW",
+                "AU-QLD",
+                "AU-VIC",
+                "EU-27",
+                "NZ",
+                "US-East-Coast",
+                "US-West-Coast",
+                "XX"
             ],
             "type": "string"
         },

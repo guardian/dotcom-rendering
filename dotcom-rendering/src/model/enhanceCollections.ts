@@ -92,6 +92,7 @@ export const enhanceCollections = (
 				showDateHeader: collection.config.showDateHeader,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
+			targetedTerritory: collection.targetedTerritory,
 		};
 	});
 };
