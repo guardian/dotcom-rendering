@@ -4,17 +4,14 @@ import {
 	LinkButton,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { Flex } from './Flex';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
-	headingText: string;
 	mmaUrl?: string;
 	newsletterCount: number;
 }
 
 export const NewslettersPageHeading = ({
-	headingText,
 	mmaUrl,
 	newsletterCount,
 }: NewslettersListProps) => {
@@ -26,13 +23,27 @@ export const NewslettersPageHeading = ({
 			padSides={false}
 			stretchRight={true}
 		>
-			<h1
-				css={css`
-					${headline.medium()}
-				`}
-			>
-				{headingText}
-			</h1>
+			<div>
+				<div
+					css={css`
+						display: inline-flex;
+						flex-direction: row;
+						justify-content: flex-start;
+						align-items: center;
+						padding: 1px ${space[1]}px;
+						border: 1px dashed ${palette.neutral[7]};
+						margin-bottom: ${space[2]}px;
+					`}
+				>
+					<h1
+						css={css`
+							${headline.medium()}
+						`}
+					>
+						Newsletters
+					</h1>
+				</div>
+			</div>
 			<div
 				css={css`
 					${headline.xxsmall()}

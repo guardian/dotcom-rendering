@@ -157,7 +157,6 @@ export const AllEditorialNewslettersPageLayout = ({
 			<main data-layout="NewsletterPageLayout" id="maincontent">
 				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
-					headingText={newslettersPage.webTitle}
 					newsletterCount={displayedNewslettersCount}
 				/>
 				<GroupedNewslettersList
