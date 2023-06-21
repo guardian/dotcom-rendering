@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import type { OnwardsSource } from '../types/onwards';
-import type { FETrailType, TrailType } from '../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import type { OnwardsSource } from '../types/onwards';
+import type { FETrailType, TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
 

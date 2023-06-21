@@ -53,43 +53,6 @@ export const performanceMonitoring = (): Promise<void> => {
 				recordPoorDeviceConnectivity('TTFB over 1.2s');
 			}
 		}
-
-		// If Ophan takes a long time to load, we take it as an indicator
-		// of very slow connection or very little processing power
-		new PerformanceObserver((entries, observer) => {
-			for (const { name, duration, startTime } of entries.getEntries()) {
-				switch (name) {
-					case 'ophan': {
-						logPerformanceInfo(name, { startTime, duration });
-						if (startTime > 5000 || duration > 20) {
-							recordPoorDeviceConnectivity(
-								'Ophan took over 5s to boot or 20ms to execute',
-							);
-							observer.disconnect();
-						}
-					}
-				}
-			}
-		}).observe({
-			type: 'measure',
-			buffered: true,
-		});
-
-		// Long tasks are only supported in Chromium, but can be a good indicator
-		// of poor performance
-		let longTasks = 0;
-		new PerformanceObserver((entries, observer) => {
-			for (const { name, duration, startTime } of entries.getEntries()) {
-				longTasks += duration;
-				logPerformanceInfo('longtask:' + name, { startTime, duration });
-				if (longTasks >= 120) {
-					recordPoorDeviceConnectivity(
-						'Long tasks total duration above 120ms',
-					);
-					observer.disconnect();
-				}
-			}
-		}).observe({ type: 'longtask', buffered: true });
 	} catch (error) {
 		// do nothing if the performance API is not available
 	}

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial-core';
-import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial';
+import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
@@ -452,7 +452,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div
@@ -505,7 +505,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div

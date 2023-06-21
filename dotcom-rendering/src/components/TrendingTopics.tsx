@@ -52,12 +52,7 @@ export const TrendingTopics = ({ trendingTopics }: Props) => {
 						key={tag.properties.webTitle}
 						href={tag.properties.webUrl}
 						css={linkStyle}
-						data-link-name={
-							'keyword: ' +
-							(tag.properties.url === undefined
-								? tag.properties.webTitle
-								: tag.properties.url)
-						}
+						data-link-name={`keyword: ${tag.properties.id}`}
 					>
 						{tag.properties.webTitle}
 					</a>

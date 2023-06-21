@@ -208,6 +208,7 @@ export const ShowMore = ({
 					aria-controls={showMoreContainerId}
 					aria-expanded={isOpen && !loading}
 					aria-describedby={`show-more-button-${collectionId}-description`}
+					data-link-name="more"
 				>
 					{decideButtonText({
 						isOpen,

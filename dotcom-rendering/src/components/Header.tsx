@@ -38,7 +38,7 @@ export const Header = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 }: Props) => (
-	<div css={headerStyles}>
+	<div css={headerStyles} data-component="nav3">
 		<Island>
 			<HeaderTopBar
 				editionId={editionId}
@@ -55,6 +55,7 @@ export const Header = ({
 				isInEuropeTest={isInEuropeTest}
 			/>
 		</Island>
+
 		<div
 			css={[
 				center,

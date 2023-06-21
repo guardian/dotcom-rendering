@@ -1,10 +1,10 @@
 import { Hide } from '@guardian/source-react-components';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import {
 	Card25Media25SmallHeadline,
 	Card33Media33Tall,
 	CardDefault,
 } from '../lib/cardWrappers';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -13,7 +13,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	index: number;
+	adIndex: number;
 	renderAds: boolean;
 };
 
@@ -21,7 +21,7 @@ export const FixedSmallSlowVMPU = ({
 	trails,
 	containerPalette,
 	showAge,
-	index,
+	adIndex,
 	renderAds,
 }: Props) => {
 	const firstSlice33 = trails.slice(0, 1);
@@ -63,7 +63,7 @@ export const FixedSmallSlowVMPU = ({
 					containerPalette={containerPalette}
 				>
 					<Hide until="tablet">
-						<AdSlot position="inline" index={index} />
+						<AdSlot position="inline" index={adIndex} />
 					</Hide>
 				</LI>
 			</UL>

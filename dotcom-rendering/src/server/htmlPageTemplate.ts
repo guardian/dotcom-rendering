@@ -1,13 +1,13 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { ASSET_ORIGIN } from '../lib/assets';
-import { getFontsCss } from '../lib/fonts-css';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { fcp } from '../bork/fcp';
 import { fid } from '../bork/fid';
 import { remap } from '../bork/remap';
 import { islandNoscriptStyles } from '../components/Island';
+import { ASSET_ORIGIN } from '../lib/assets';
+import { getFontsCss } from '../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import type { RenderingTarget } from '../types/renderingTarget';
 
 type BaseProps = {
 	css: string;

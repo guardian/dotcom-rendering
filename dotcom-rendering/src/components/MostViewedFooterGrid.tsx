@@ -164,7 +164,7 @@ export const MostViewedFooterGrid = ({
 								id={`tabs-popular-${i}-tab`}
 								data-cy={`tab-heading-${i}`}
 								key={`tabs-popular-${tab.heading}-tab`}
-								data-link-name={tab.heading}
+								data-link-name={`tab ${i + 1} ${tab.heading}`}
 								data-chromatic="ignore"
 							>
 								<a

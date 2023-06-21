@@ -9,8 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { Palette } from '../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import type { Palette } from '../types/palette';
 
 type Props = {
 	format: ArticleFormat;
