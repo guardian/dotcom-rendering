@@ -68,41 +68,25 @@ const getLoaders = (bundle) => {
 module.exports = ({ bundle, sessionId }) => ({
 	entry: {
 		// index: './src/web/components/marketing/index.ts',
-		index: './src/web/components/marketing/ContributionsEpic.tsx',
+		ContributionsEpic:
+			'./src/web/components/marketing/ContributionsEpic.tsx',
 	},
 	optimization: {
 		runtimeChunk: true,
-		// 		splitChunks: {
-		// 			cacheGroups: {
-		// 				// our own chunk, which is shared between all bundles
-		// 				frameworks: {
-		// 					test: /[\\/]node_modules[\\/](preact|react-is|hoist-non-react-statistics|swr|@emotion|stylis)[\\/]/,
-		// 					chunks: 'all',
-		// 					name: 'frameworks',
-		// 					enforce: true,
-		// 				},
-		// 				// defining our own chunk above overrides the webpack defaults,
-		// 				// so now we restore them
-		// 				// https://webpack.js.org/plugins/split-chunks-plugin/#optimizationsplitchunks
-		// 				defaultVendors: {
-		// 					test: /[\\/]node_modules[\\/]/,
-		// 					priority: -10,
-		// 					reuseExistingChunk: true,
-		// 				},
-		// 				default: {
-		// 					minChunks: 2,
-		// 					priority: -20,
-		// 					reuseExistingChunk: true,
-		// 				},
-		// 			},
-		// 		},
+	},
+	experiments: {
+		// Necessary for `libraryTarget: 'module'`
+		outputModule: true,
 	},
 	output: {
 		filename: (data) => {
 			return `marketing/[name].js`;
 		},
-		// chunkFilename: generateName(bundle),
 		publicPath: '',
+		library: {
+			type: 'module',
+		},
+		// module: true
 	},
 	plugins: [
 		// new WebpackManifestPlugin({
