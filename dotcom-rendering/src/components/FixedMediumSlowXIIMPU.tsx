@@ -14,7 +14,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	index: number;
+	adIndex: number;
 	renderAds: boolean;
 };
 
@@ -22,7 +22,7 @@ type MPUSliceProps = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	index: number;
+	adIndex: number;
 };
 
 /* .___________.___________.___________.
@@ -88,7 +88,7 @@ const ThreeColumnSliceWithAdSlot = ({
 	trails,
 	containerPalette,
 	showAge,
-	index,
+	adIndex,
 }: MPUSliceProps) => {
 	return (
 		<UL direction="row">
@@ -106,15 +106,15 @@ const ThreeColumnSliceWithAdSlot = ({
 				 * |_______________________|
 				 */}
 				<UL direction="row" wrapCards={true}>
-					{trails.map((trail, trailIndex, { length }) => (
+					{trails.map((trail, trailadIndex, { length }) => (
 						<LI
 							padSides={true}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-								trailIndex,
+								trailadIndex,
 								length - (length % 2),
 								2,
 							)}
-							showDivider={trailIndex % 2 !== 0}
+							showDivider={trailadIndex % 2 !== 0}
 							containerPalette={containerPalette}
 							percentage="50%"
 							stretch={true}
@@ -131,7 +131,7 @@ const ThreeColumnSliceWithAdSlot = ({
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
-					<AdSlot position="inline" index={index} />
+					<AdSlot position="inline" index={adIndex} />
 				</Hide>
 			</LI>
 		</UL>
@@ -146,7 +146,7 @@ export const FixedMediumSlowXIIMPU = ({
 	trails,
 	containerPalette,
 	showAge,
-	index,
+	adIndex,
 	renderAds,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
@@ -164,7 +164,7 @@ export const FixedMediumSlowXIIMPU = ({
 					trails={remaining}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					index={index}
+					adIndex={adIndex}
 				/>
 			) : (
 				/**
@@ -172,15 +172,15 @@ export const FixedMediumSlowXIIMPU = ({
 				 * wrapping three-column layout instead.
 				 */
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((trail, trailIndex) => (
+					{remaining.map((trail, trailadIndex) => (
 						<LI
 							padSides={true}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-								trailIndex,
+								trailadIndex,
 								remaining.length - (remaining.length % 3),
 								3,
 							)}
-							showDivider={trailIndex % 3 !== 0}
+							showDivider={trailadIndex % 3 !== 0}
 							containerPalette={containerPalette}
 							percentage="33.333%"
 							stretch={true}

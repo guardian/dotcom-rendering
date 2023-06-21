@@ -452,7 +452,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div

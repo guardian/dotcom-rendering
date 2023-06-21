@@ -17,6 +17,7 @@ const linkStyles = css`
 	font-weight: bold;
 	display: flex;
 	align-items: flex-start;
+	text-decoration: none;
 `;
 
 const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
@@ -73,7 +74,6 @@ export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 		<Link
 			href={trail.url}
 			priority="secondary"
-			subdued={true}
 			cssOverrides={[linkStyles, linkOverrideStyles(containerOverrides)]}
 		>
 			{showImage && !!trail.image && (
