@@ -35,10 +35,14 @@ const fixedWidthsPageSkin = css`
 `;
 
 const mostPopMargin = css`
-	margin: 8px 0 0 10px;
+	margin: 9px 0 0 10px;
 	${from.leftCol} {
 		margin: 6px 0 0 10px;
 	}
+`;
+
+const mostPopMarginWithPageSkin = css`
+	margin: 9px 0 0 10px;
 `;
 
 export const MostViewedFooterLayout = ({
@@ -54,7 +58,7 @@ export const MostViewedFooterLayout = ({
 			<div css={hasPageSkin ? fixedWidthsPageSkin : fixedWidths}>
 				{children}
 			</div>
-			<div css={mostPopMargin}>
+			<div css={hasPageSkin ? mostPopMarginWithPageSkin : mostPopMargin}>
 				<AdSlot position="mostpop" />
 			</div>
 		</div>
