@@ -7,8 +7,6 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../../model/extract-nav';
-import type { DCRTagFrontType } from '../../types/tagFront';
 import { AdSlot } from '../components/AdSlot';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -24,6 +22,8 @@ import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
+import type { NavType } from '../model/extract-nav';
+import type { DCRTagFrontType } from '../types/tagFront';
 import { Stuck } from './lib/stickiness';
 
 interface Props {

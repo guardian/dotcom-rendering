@@ -1,10 +1,10 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
-import { filterABTestSwitches } from '../../model/enhance-switches';
-import type { NavType } from '../../model/extract-nav';
-import type { DCRTagFrontType } from '../../types/tagFront';
 import { TagFrontLayout } from '../layouts/TagFrontLayout';
+import { filterABTestSwitches } from '../model/enhance-switches';
+import type { NavType } from '../model/extract-nav';
+import type { DCRTagFrontType } from '../types/tagFront';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';

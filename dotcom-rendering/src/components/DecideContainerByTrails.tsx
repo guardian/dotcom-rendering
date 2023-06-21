@@ -1,4 +1,3 @@
-import type { DCRFrontCard } from '../../types/front';
 import {
 	Card100Media50,
 	Card25Media25,
@@ -6,6 +5,7 @@ import {
 	Card50Media50,
 	CardDefault,
 } from '../lib/cardWrappers';
+import type { DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
