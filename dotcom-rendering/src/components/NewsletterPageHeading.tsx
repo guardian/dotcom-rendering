@@ -22,6 +22,7 @@ export const NewslettersPageHeading = ({
 			padBottom={false}
 			padSides={false}
 			stretchRight={true}
+			verticalMargins={false}
 		>
 			<div>
 				<div
@@ -33,6 +34,7 @@ export const NewslettersPageHeading = ({
 						padding: 1px ${space[1]}px;
 						border: 1px dashed ${palette.neutral[7]};
 						margin-bottom: ${space[2]}px;
+						margin-top: ${space[2]}px;
 					`}
 				>
 					<h1
@@ -57,8 +59,10 @@ export const NewslettersPageHeading = ({
 					css={css`
 						display: flex;
 						justify-content: flex-start;
+						margin-top: ${space[1]}px;
 
 						${from.leftCol} {
+							margin-top: 0;
 							justify-content: flex-end;
 						}
 					`}
