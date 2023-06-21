@@ -270,9 +270,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
-					const trails = collection.curated.concat(
+					const curatedAndBackfill = collection.curated.concat(
 						collection.backfill,
 					);
+
+					const trails = collection.badge
+						? curatedAndBackfill.map((labTrail) => {
+								return {
+									...labTrail,
+									branding: undefined,
+								};
+						  })
+						: curatedAndBackfill;
+
 					const [trail] = trails;
 
 					// There are some containers that have zero trails. We don't want to render these
@@ -394,15 +404,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const trailsWithoutBranding = collection.badge
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
-
 						return (
 							<LabsSection
 								key={ophanName}
@@ -420,7 +421,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								data-print-layout="hide"
 							>
 								<DecideContainer
-									trails={trailsWithoutBranding}
+									trails={trails}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
