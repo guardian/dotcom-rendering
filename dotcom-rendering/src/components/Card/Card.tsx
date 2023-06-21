@@ -363,7 +363,7 @@ export const Card = ({
 	});
 
 	if (snapData?.embedHtml) {
-		return <Snap snapData={snapData} />;
+		return <Snap snapData={snapData} dataLinkName={dataLinkName} />;
 	}
 
 	const image = getImage({

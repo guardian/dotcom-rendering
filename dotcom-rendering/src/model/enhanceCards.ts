@@ -201,7 +201,13 @@ export const enhanceCards = (
 		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, offset + index);
+
+		const dataLinkName = getDataLinkNameCard(
+			format,
+			group,
+			offset + index,
+			faciaCard.card.cardStyle.type,
+		);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
