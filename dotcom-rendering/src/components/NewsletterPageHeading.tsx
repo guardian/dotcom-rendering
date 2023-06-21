@@ -11,6 +11,38 @@ export interface NewslettersListProps {
 	newsletterCount: number;
 }
 
+const headlineStyle = css`
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1px ${space[1]}px;
+	border: 1px dashed ${palette.neutral[7]};
+	margin-bottom: ${space[2]}px;
+	margin-top: ${space[2]}px;
+	${headline.medium()}
+`;
+
+const subtitleStyle = css`
+	${headline.xxsmall()}
+`;
+
+const manageLinkContainer = css`
+	display: flex;
+	justify-content: flex-start;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+
+	${from.leftCol} {
+		margin-top: 0;
+		justify-content: flex-end;
+	}
+`;
+
+const linkStyle = css`
+	color: ${palette.brand[500]};
+`;
+
 export const NewslettersPageHeading = ({
 	mmaUrl,
 	newsletterCount,
@@ -25,58 +57,23 @@ export const NewslettersPageHeading = ({
 			verticalMargins={false}
 		>
 			<div>
-				<div
-					css={css`
-						display: inline-flex;
-						flex-direction: row;
-						justify-content: flex-start;
-						align-items: center;
-						padding: 1px ${space[1]}px;
-						border: 1px dashed ${palette.neutral[7]};
-						margin-bottom: ${space[2]}px;
-						margin-top: ${space[2]}px;
-					`}
-				>
-					<h1
-						css={css`
-							${headline.medium()}
-						`}
-					>
-						Newsletters
-					</h1>
-				</div>
+				<h1 css={headlineStyle}>
+					<span>Newsletters</span>
+				</h1>
 			</div>
-			<div
-				css={css`
-					${headline.xxsmall()}
-				`}
-			>
+			<p css={subtitleStyle}>
 				Choose from {newsletterCount} available newsletters
-			</div>
+			</p>
 
 			{!!mmaUrl && (
-				<div
-					css={css`
-						display: flex;
-						justify-content: flex-start;
-						margin-top: ${space[1]}px;
-
-						${from.leftCol} {
-							margin-top: 0;
-							justify-content: flex-end;
-						}
-					`}
-				>
+				<div css={manageLinkContainer}>
 					<LinkButton
 						href={`${mmaUrl}/email-prefs`}
 						size={'xsmall'}
 						priority="subdued"
 						icon={<SvgChevronRightSingle size="small" />}
 						iconSide="right"
-						cssOverrides={css`
-							margin-bottom: ${space[2]}px;
-							color: ${palette.brand[500]};
-						`}
+						cssOverrides={linkStyle}
 					>
 						Manage my newsletters
 					</LinkButton>
