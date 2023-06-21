@@ -253,10 +253,7 @@ export const enhanceCards = (
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,
-			// nb. there is a distinct 'byline' property on FEFrontCard, at
-			// card.properties.byline
-			byline:
-				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
