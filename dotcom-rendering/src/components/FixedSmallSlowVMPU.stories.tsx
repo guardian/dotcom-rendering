@@ -22,7 +22,7 @@ export const FourCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -35,7 +35,7 @@ export const ThreeCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -48,7 +48,7 @@ export const TwoCards = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -61,7 +61,7 @@ export const OneCard = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -74,7 +74,7 @@ export const AdfreeFixedSmallSlowVMPU = () => (
 		<FixedSmallSlowVMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={false}
 		/>
 	</FrontSection>

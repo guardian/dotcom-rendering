@@ -22,7 +22,7 @@ export const OneTrail = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 1)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -34,7 +34,7 @@ export const TwoTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 2)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -46,7 +46,7 @@ export const ThreeTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 3)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -58,7 +58,7 @@ export const FourTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 4)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -70,7 +70,7 @@ export const FiveTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 5)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -82,7 +82,7 @@ export const SixTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 6)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -94,7 +94,7 @@ export const SevenTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 7)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -106,7 +106,7 @@ export const EightTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -118,7 +118,7 @@ export const NineTrails = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 9)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 		/>
 	</FrontSection>
@@ -130,7 +130,7 @@ export const EightTrailsNoAds = () => (
 		<FixedMediumSlowXIIMPU
 			trails={trails.slice(0, 8)}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={false}
 		/>
 	</FrontSection>

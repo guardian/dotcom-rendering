@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -31,6 +32,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import {
+	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
@@ -89,7 +91,7 @@ const decideAdSlot = (
 		return (
 			<Hide from="tablet">
 				<AdSlot
-					index={index}
+					index={mobileAdPositions.indexOf(index)}
 					data-print-layout="hide"
 					position="mobile-front"
 				/>
@@ -115,6 +117,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
+		: [];
+
+	const desktopAdPositions = renderAds
+		? getDesktopAdPositions(front.pressedPage.collections)
 		: [];
 
 	const showMostPopular =
@@ -265,7 +271,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<>
+							<Fragment key={ophanName}>
 								{!!trail.embedUri && (
 									<SnapCssSandbox snapData={trail.snapData}>
 										<Section
@@ -281,7 +287,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType
 											}
 										>
-											<Snap snapData={trail.snapData} />
+											<Snap
+												snapData={trail.snapData}
+												dataLinkName={
+													trail.dataLinkName
+												}
+											/>
 										</Section>
 									</SnapCssSandbox>
 								)}
@@ -294,7 +305,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									mobileAdPositions,
 								)}
-							</>
+							</Fragment>
 						);
 					}
 
@@ -393,12 +404,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={false}
 								/>
 							</LabsSection>
@@ -441,9 +452,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					return (
-						<>
+						<Fragment key={ophanName}>
 							<FrontSection
-								key={ophanName}
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
@@ -486,7 +496,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							>
 								<DecideContainer
 									trails={trails}
-									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
@@ -495,6 +504,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
 								/>
 							</FrontSection>
@@ -506,7 +516,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								mobileAdPositions,
 							)}
-						</>
+						</Fragment>
 					);
 				})}
 			</main>

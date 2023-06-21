@@ -99,6 +99,21 @@ export type FEContainerPalette =
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette';
 
+export type FEFrontCardStyle =
+	| 'SpecialReport'
+	| 'SpecialReportAlt'
+	| 'LiveBlog'
+	| 'DeadBlog'
+	| 'Feature'
+	| 'Editorial'
+	| 'Comment'
+	| 'Media'
+	| 'Analysis'
+	| 'Review'
+	| 'Letters'
+	| 'ExternalLink'
+	| 'DefaultCardstyle';
+
 export type DCRContainerPalette =
 	| 'EventPalette'
 	| 'SombreAltPalette'
@@ -217,7 +232,7 @@ export type FEFrontCard = {
 	card: {
 		id: string;
 		cardStyle: {
-			type: string;
+			type: FEFrontCardStyle;
 		};
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
@@ -244,7 +259,7 @@ export type FEFrontCard = {
 	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
-		type: string;
+		type: FEFrontCardStyle;
 	};
 	type: string;
 };

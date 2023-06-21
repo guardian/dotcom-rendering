@@ -31,7 +31,7 @@ export const NoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -50,7 +50,7 @@ export const OneBig = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -69,7 +69,7 @@ export const TwoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -92,7 +92,7 @@ export const FirstBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -115,7 +115,7 @@ export const SecondBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -134,7 +134,7 @@ export const ThreeBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -153,7 +153,7 @@ export const AllBigs = () => (
 				standard: [],
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={true}
 			trails={trails}
 		/>
@@ -172,7 +172,7 @@ export const AdfreeDynamicSlowMPU = () => (
 				standard: [],
 			}}
 			showAge={true}
-			index={1}
+			adIndex={1}
 			renderAds={false}
 			trails={trails}
 		/>

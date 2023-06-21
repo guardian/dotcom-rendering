@@ -15,6 +15,8 @@ import type {
 import { pickMessage } from '../lib/messagePicker';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
+import type { SignedInStatus } from '../lib/useSignedInStatus';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
@@ -89,6 +91,17 @@ const buildBrazeEpicConfig = (
 	};
 };
 
+function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
+	switch (signedInStatus) {
+		case 'Pending':
+			return undefined;
+		case 'SignedIn':
+			return true;
+		case 'NotSignedIn':
+			return false;
+	}
+}
+
 export const SlotBodyEnd = ({
 	contentType,
 	sectionName,
@@ -104,9 +117,8 @@ export const SlotBodyEnd = ({
 	keywordIds,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
-
 	const [countryCode, setCountryCode] = useState<string>();
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = getIsSignedIn(useSignedInStatus());
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,
