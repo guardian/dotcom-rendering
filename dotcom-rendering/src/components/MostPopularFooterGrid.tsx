@@ -34,10 +34,6 @@ const gridContainerStyle = css`
 
 const titleContainerStyle = css`
 	border-right: 1px solid ${palette.neutral[86]};
-	${from.leftCol} {
-		/* Below leftCol always set top border */
-		border-bottom: 1px solid ${palette.neutral[86]};
-	}
 
 	${until.leftCol} {
 		/* Below leftCol always set top border */
@@ -45,6 +41,13 @@ const titleContainerStyle = css`
 	}
 
 	padding: 7px 10px 18px;
+`;
+
+const titleContainerStyleFromLeftCol = css`
+	${from.leftCol} {
+		/* Below leftCol always set top border */
+		border-bottom: 1px solid ${palette.neutral[86]};
+	}
 `;
 
 const titleStyle = css`
@@ -92,12 +95,14 @@ type Props = {
 	mostViewed: TrailTabType;
 	sectionName?: string;
 	deeplyRead: TrailTabType;
+	hasPageSkin?: boolean;
 };
 
 export const MostPopularFooterGrid = ({
 	mostViewed,
 	deeplyRead,
 	sectionName = '',
+	hasPageSkin = false,
 }: Props) => {
 	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
 	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
@@ -109,7 +114,12 @@ export const MostPopularFooterGrid = ({
 			css={gridContainerStyle}
 		>
 			<section data-link-name="most-viewed" css={displayContent}>
-				<div css={titleContainerStyle}>
+				<div
+					css={[
+						titleContainerStyle,
+						!hasPageSkin && titleContainerStyleFromLeftCol,
+					]}
+				>
 					<h3 css={titleStyle}>Most viewed</h3>
 					<div css={descriptionStyle}>
 						What readers are clicking on
@@ -126,6 +136,7 @@ export const MostPopularFooterGrid = ({
 							ageWarning={trail.ageWarning}
 							cssOverrides={mostViewedOverridesStyle(j)}
 							image={trail.image}
+							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>
@@ -151,6 +162,7 @@ export const MostPopularFooterGrid = ({
 								shortenedMostViewed.length,
 							)}
 							image={trail.image}
+							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>
