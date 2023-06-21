@@ -33,7 +33,7 @@ export const getBadgeFromBranding = (
  * Fetches the corresponding badge using the series tag, if there's a match in the lookup.
  */
 export const getBadgeFromSeriesTag = (
-	seriesTag: string,
+	seriesTag: string | undefined,
 ): DCRBadgeType | undefined => {
 	// First check the list of standard badges against seriesTags
 	const badge = BADGES.find((b) => b.seriesTag === seriesTag);
@@ -59,7 +59,7 @@ export const getBadgeFromSeriesTag = (
  * Fetches special badge if the seriesTag matches the hashed series tag
  */
 const findSpecialBadgeBySeriesTag = (
-	seriesTag: string,
+	seriesTag: string | undefined,
 ): SpecialBadgeType | undefined =>
 	SPECIAL_BADGES.find((b) => {
 		const badgeHash = createHash('md5')
@@ -76,9 +76,5 @@ export const decideBadge = (
 	allBranding: Branding[],
 	tagId?: string,
 ): DCRBadgeType | undefined => {
-	if (tagId) {
-		return getBadgeFromSeriesTag(tagId);
-	} else {
-		return getBadgeFromBranding(allBranding);
-	}
+	return getBadgeFromSeriesTag(tagId) ?? getBadgeFromBranding(allBranding);
 };
