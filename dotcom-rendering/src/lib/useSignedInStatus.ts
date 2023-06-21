@@ -1,15 +1,8 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
+import { useSignedInAuthState } from './useSignedInAuthState';
 
 export type SignedInStatus = 'Pending' | 'NotSignedIn' | 'SignedIn';
-
-async function getSignedInStatusWithOkta(): Promise<
-	'NotSignedIn' | 'SignedIn'
-> {
-	const { isSignedInWithOkta } = await import('./identity');
-	const isSignedIn = await isSignedInWithOkta();
-	return isSignedIn ? 'SignedIn' : 'NotSignedIn';
-}
 
 function getSignedInStatusWithCookie(): 'NotSignedIn' | 'SignedIn' {
 	const GU_UCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
@@ -21,23 +14,19 @@ function getSignedInStatusWithCookie(): 'NotSignedIn' | 'SignedIn' {
 export const useSignedInStatus = (): SignedInStatus => {
 	const [signedInStatus, setSignedInStatus] =
 		useState<SignedInStatus>('Pending');
+	const [authStateStatus, authState] = useSignedInAuthState();
 
 	useEffect(() => {
-		const isInOktaExperiment =
-			window.guardian.config.tests.oktaVariant === 'variant';
+		if (authStateStatus === 'Ready') {
+			setSignedInStatus(
+				authState.isAuthenticated ? 'SignedIn' : 'NotSignedIn',
+			);
+		}
 
-		if (isInOktaExperiment) {
-			getSignedInStatusWithOkta()
-				.then((result) => {
-					setSignedInStatus(result);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		} else {
+		if (authStateStatus === 'NotInTest') {
 			setSignedInStatus(getSignedInStatusWithCookie());
 		}
-	}, []);
+	}, [authState.isAuthenticated, authStateStatus]);
 
 	return signedInStatus;
 };

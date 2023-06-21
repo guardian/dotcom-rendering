@@ -12,6 +12,7 @@ import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
 import { useBraze } from '../lib/useBraze';
+import { useSignedInAuthState } from '../lib/useSignedInAuthState';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
@@ -189,24 +190,35 @@ const SignedInWithNotifications = ({
 	discussionApiUrl,
 	notifications,
 }: SignedInWithNotificationsProps) => {
-	// TODO OKTA: get user id from id token
+	const [status, authState] = useSignedInAuthState();
+
+	let userId: string | undefined;
+
+	// TODO Okta: Remove this when at 100% in Okta oktaVariant
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
-		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		status === 'NotInTest'
+			? joinUrl(
+					discussionApiUrl,
+					'profile/me?strict_sanctions_check=false',
+			  )
+			: undefined,
+
 		{},
 		{
 			credentials: 'include',
 		},
 	);
+	if (status === 'NotInTest' && data) {
+		userId = data.userProfile.userId;
+	}
 
-	// If we encounter an error or don't have user data display sign in to the user.
-	// SWR will retry in the background if the request failed
-	if (error || !data?.userProfile.userId) return <SignIn idUrl={idUrl} />;
+	if (status === 'Ready') {
+		userId = authState.idToken?.claims.legacy_identity_id;
+	}
 
-	const identityLinks = buildIdentityLinks(
-		mmaUrl,
-		idUrl,
-		data.userProfile.userId,
-	);
+	if (!userId || error) return <SignIn idUrl={idUrl} />;
+
+	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
 
 	const identityLinksWithNotifications = addNotificationsToDropdownLinks(
 		identityLinks,

@@ -1,7 +1,9 @@
-import type { CustomClaims } from '@guardian/identity-auth';
+import type { CustomClaims, IdentityAuthState } from '@guardian/identity-auth';
 import { IdentityAuth } from '@guardian/identity-auth';
 
-type CustomIdTokenClaims = CustomClaims & {
+// the `id_token.profile.theguardian` scope is used to get custom claims
+export type CustomIdTokenClaims = CustomClaims & {
+	email: string;
 	braze_uuid: string;
 };
 
@@ -58,6 +60,8 @@ function getIdentityAuth() {
 	return identityAuth;
 }
 
-export async function isSignedInWithOkta(): Promise<boolean> {
-	return getIdentityAuth().isSignedIn();
+export async function isSignInWithOktaAuthState(): Promise<
+	IdentityAuthState<never, CustomIdTokenClaims>
+> {
+	return getIdentityAuth().isSignedInWithAuthState();
 }
