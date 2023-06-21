@@ -1,4 +1,9 @@
+import type { CustomClaims } from '@guardian/identity-auth';
 import { IdentityAuth } from '@guardian/identity-auth';
+
+type CustomIdTokenClaims = CustomClaims & {
+	braze_uuid: string;
+};
 
 function getStage() {
 	if (!window.guardian.config.isDev) {
@@ -26,13 +31,14 @@ const getRedirectUri = (stage: StageType) => {
 	}
 };
 
-let identityAuth: IdentityAuth | undefined = undefined;
+let identityAuth: IdentityAuth<never, CustomIdTokenClaims> | undefined =
+	undefined;
 
 function getIdentityAuth() {
 	if (identityAuth === undefined) {
 		const stage = getStage();
 
-		identityAuth = new IdentityAuth({
+		identityAuth = new IdentityAuth<never, CustomIdTokenClaims>({
 			issuer: getIssuer(stage),
 			clientId: getClientId(stage),
 			redirectUri: getRedirectUri(stage),
