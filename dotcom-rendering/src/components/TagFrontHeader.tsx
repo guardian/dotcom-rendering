@@ -251,7 +251,7 @@ export const TagFrontHeader = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background.container};
+					background-color: ${overrides?.background?.container};
 				`,
 			]}
 		>
@@ -260,7 +260,7 @@ export const TagFrontHeader = ({
 			<div css={[sectionHeadline, titleStyle, paddings]}>
 				<ContainerTitle
 					title={title}
-					fontColour={overrides?.text.container}
+					fontColour={overrides?.text?.container}
 					containerPalette={containerPalette}
 				/>
 			</div>
