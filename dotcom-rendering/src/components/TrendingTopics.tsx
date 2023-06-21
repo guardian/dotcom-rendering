@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { palette, textSans } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FETagType } from '../types/tag';
 
@@ -12,11 +12,11 @@ const linkStyle = css`
 	${textSans.xsmall({ lineHeight: 'loose' })}
 	text-decoration: none;
 	top: 0;
-	color: ${neutral[7]};
+	color: ${palette.neutral[7]};
 
 	/** All but first items */
 	&:nth-of-type(n + 2):before {
-		color: ${neutral[86]};
+		color: ${palette.neutral[86]};
 		pointer-events: none;
 		margin: 2.56px;
 		content: '/';
@@ -25,7 +25,7 @@ const linkStyle = css`
 
 const topicLabel = css`
 	${textSans.xxsmall({ lineHeight: 'regular' })}
-	color: ${neutral[60]};
+	color: ${palette.neutral[60]};
 `;
 
 const trendingTopicContainer = css`
