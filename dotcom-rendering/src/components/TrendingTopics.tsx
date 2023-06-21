@@ -13,16 +13,13 @@ const linkStyle = css`
 	text-decoration: none;
 	top: 0;
 	color: ${neutral[7]};
-	&:after {
+
+	/** All but first items */
+	&:nth-of-type(n + 2):before {
 		color: ${neutral[86]};
 		pointer-events: none;
 		margin: 2.56px;
 		content: '/';
-	}
-	&:last-of-type {
-		&:after {
-			content: '';
-		}
 	}
 `;
 
