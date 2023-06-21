@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { removeCookie, setCookie } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
 	ChoiceCard,
@@ -23,6 +23,19 @@ const territories = {
 } as const satisfies Record<AustralianTerritory, string>;
 
 const controls = 'change-territory';
+const controlsStyles = css`
+	max-width: 700px;
+`;
+
+const labelStyles = css`
+	${textSans.medium()}
+	padding-bottom: ${space[3]}px;
+	display: block;
+
+	strong {
+		${textSans.medium({ fontWeight: 'bold' })}
+	}
+`;
 
 type Props = {
 	targetedTerritory: AustralianTerritory;
@@ -48,36 +61,46 @@ export const AustralianTerritorySwitcher = ({ targetedTerritory }: Props) => {
 			</Button>
 
 			{expanded && (
-				<ChoiceCardGroup
-					id={controls}
-					name="territory"
-					label="The articles above have been curated for you based on the state you are in."
-					supporting="If we have your location wrong or you want to see coverage of a different state, please select from the links below. We hope to expand this service to other states in the future."
-					onChange={({ target }) => {
-						if ('value' in target && isString(target.value)) {
-							const value = target.value;
+				<div id={controls} css={controlsStyles}>
+					<label htmlFor="territory" css={labelStyles}>
+						<strong>
+							The articles above have been curated for you based
+							on the state you are in.
+						</strong>{' '}
+						If we have your location wrong or you want to see
+						coverage of a different state, please select from the
+						links below. We hope to expand this service to other
+						states in the future.
+					</label>
 
-							removeCookie({ name: 'GU_territory' });
-							setCookie({
-								name: 'GU_territory',
-								value,
-							});
-							window.location.reload();
-						}
-					}}
-				>
-					<>
-						{Object.entries(territories).map(([id, label]) => (
-							<ChoiceCard
-								key={id}
-								id={id}
-								value={id}
-								label={label}
-								checked={id === targetedTerritory}
-							/>
-						))}
-					</>
-				</ChoiceCardGroup>
+					<ChoiceCardGroup
+						name="territory"
+						onChange={({ target }) => {
+							if ('value' in target && isString(target.value)) {
+								const value = target.value;
+
+								removeCookie({ name: 'GU_territory' });
+								setCookie({
+									name: 'GU_territory',
+									value,
+								});
+								window.location.reload();
+							}
+						}}
+					>
+						<>
+							{Object.entries(territories).map(([id, label]) => (
+								<ChoiceCard
+									key={id}
+									id={id}
+									value={id}
+									label={label}
+									checked={id === targetedTerritory}
+								/>
+							))}
+						</>
+					</ChoiceCardGroup>
+				</div>
 			)}
 		</div>
 	);
