@@ -1,25 +1,31 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/source-foundations';
-import { LinkButton } from '@guardian/source-react-components';
-import type { EditionId } from '../lib/edition';
-import { getEditionFromId } from '../lib/edition';
+import { from, headline, palette, space } from '@guardian/source-foundations';
+import {
+	LinkButton,
+	SvgChevronRightSingle,
+} from '@guardian/source-react-components';
+import { Flex } from './Flex';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
 	headingText: string;
 	mmaUrl?: string;
-	editionId: EditionId;
+	newsletterCount: number;
 }
 
 export const NewslettersPageHeading = ({
 	headingText,
 	mmaUrl,
-	editionId,
+	newsletterCount,
 }: NewslettersListProps) => {
-	const edition = getEditionFromId(editionId);
-
 	return (
-		<Section fullWidth={true} element="header" padBottom={true}>
+		<Section
+			element="header"
+			fullWidth={false}
+			padBottom={false}
+			padSides={false}
+			stretchRight={true}
+		>
 			<h1
 				css={css`
 					${headline.medium()}
@@ -32,13 +38,34 @@ export const NewslettersPageHeading = ({
 					${headline.xxsmall()}
 				`}
 			>
-				{edition.longTitle}
+				Choose from {newsletterCount} available newsletters
 			</div>
 
 			{!!mmaUrl && (
-				<LinkButton href={`${mmaUrl}/email-prefs`} size={'small'}>
-					Manage my newsletters
-				</LinkButton>
+				<div
+					css={css`
+						display: flex;
+						justify-content: flex-start;
+
+						${from.leftCol} {
+							justify-content: flex-end;
+						}
+					`}
+				>
+					<LinkButton
+						href={`${mmaUrl}/email-prefs`}
+						size={'xsmall'}
+						priority="subdued"
+						icon={<SvgChevronRightSingle size="small" />}
+						iconSide="right"
+						cssOverrides={css`
+							margin-bottom: ${space[2]}px;
+							color: ${palette.brand[500]};
+						`}
+					>
+						Manage my newsletters
+					</LinkButton>
+				</div>
 			)}
 		</Section>
 	);

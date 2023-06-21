@@ -50,6 +50,12 @@ export const AllEditorialNewslettersPageLayout = ({
 	const contributionsServiceUrl =
 		process.env.SDC_URL ?? pageContributionsServiceUrl;
 
+	const displayedNewslettersCount =
+		newslettersPage.groupedNewsletters.groups.reduce<number>(
+			(count, group) => count + group.newsletters.length,
+			0,
+		);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -151,8 +157,8 @@ export const AllEditorialNewslettersPageLayout = ({
 			<main data-layout="NewsletterPageLayout" id="maincontent">
 				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
-					editionId={newslettersPage.editionId}
 					headingText={newslettersPage.webTitle}
+					newsletterCount={displayedNewslettersCount}
 				/>
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
