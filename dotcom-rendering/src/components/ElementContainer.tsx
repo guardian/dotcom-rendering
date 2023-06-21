@@ -57,6 +57,7 @@ type Props = {
 	ophanComponentLink?: string;
 	containerName?: string;
 	hasPageSkin?: boolean;
+	hasPageSkinContentSelfConstrain?: boolean;
 };
 
 /**
@@ -82,13 +83,19 @@ export const ElementContainer = ({
 	ophanComponentLink,
 	containerName,
 	hasPageSkin = false,
+	hasPageSkinContentSelfConstrain = false,
 }: Props) =>
 	jsx(element, {
 		id: ophanComponentName,
 		'data-link-name': ophanComponentLink,
 		'data-component': ophanComponentName,
 		'data-container-name': containerName,
-		css: [backgroundColour && setBackgroundColour(backgroundColour)],
+		css: [
+			backgroundColour && setBackgroundColour(backgroundColour),
+			hasPageSkin &&
+				!hasPageSkinContentSelfConstrain &&
+				pageSkinContainer,
+		],
 		className,
 		children: (
 			<div
