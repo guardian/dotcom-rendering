@@ -57,7 +57,7 @@ export const Analytics = ({
                }
                </script>
             </amp-analytics>`,
-		`<amp-analytics data-block-on-consent id="comscore" type="comscore">
+		`<amp-analytics data-block-on-consent="_till_responded" id="comscore" type="comscore">
             <script type="application/json">
                 {
                     "vars": {"c2": "${comscoreID}"},
@@ -65,7 +65,7 @@ export const Analytics = ({
                 }
             </script>
         </amp-analytics>`,
-		`<amp-analytics type="nielsen">
+		`<amp-analytics data-block-on-consent="_till_responded" type="nielsen">
              <script type="application/json">
                 {
                     "vars": {
