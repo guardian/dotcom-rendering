@@ -8,6 +8,7 @@ type Props = {
 };
 
 const linkStyle = css`
+	display: inline-block;
 	${textSans.xsmall({ lineHeight: 'loose' })}
 	text-decoration: none;
 	top: 0;
