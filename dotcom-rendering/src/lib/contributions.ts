@@ -6,6 +6,7 @@ import type { FEArticleType } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 import { useOnce } from './useOnce';
+import { eitherSignedInWithOktaOrElse } from './useSignedInAuthState';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -235,15 +236,21 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
 
-const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
-	// TODO Okta: This is just getting the email, use ID token instead
-	return getIdApiUserData(ajaxUrl)
-		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
-		.catch((error) => {
-			window.guardian.modules.sentry.reportError(error, 'getEmail');
-			return undefined;
-		});
-};
+const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
+	// TODO Okta: Remove either when at 100& in oktaVariant test
+	eitherSignedInWithOktaOrElse(
+		(authState) => authState.idToken?.claims.email,
+		() =>
+			getIdApiUserData(ajaxUrl)
+				.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
+				.catch((error) => {
+					window.guardian.modules.sentry.reportError(
+						error,
+						'getEmail',
+					);
+					return undefined;
+				}),
+	);
 
 export const lazyFetchEmailWithTimeout =
 	(idapiUrl: string): (() => Promise<string | null>) =>

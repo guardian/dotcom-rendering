@@ -1,39 +1,55 @@
 import type { IdentityAuthState } from '@guardian/identity-auth';
 import { useEffect, useState } from 'react';
+import type { CustomIdTokenClaims } from './identity';
 
 export type AuthStateStatus = 'Pending' | 'NotInTest' | 'Ready';
 
-async function getAuthState(): Promise<IdentityAuthState> {
+export async function getAuthState(): Promise<
+	IdentityAuthState<never, CustomIdTokenClaims>
+> {
 	const { isSignInWithOktaAuthState } = await import('./identity');
 	const authState = await isSignInWithOktaAuthState();
 	return authState;
 }
 
+export async function eitherSignedInWithOktaOrElse<A, B>(
+	inOktaTestFunction: (
+		authState: IdentityAuthState<never, CustomIdTokenClaims>,
+	) => A,
+	notInOktaTestFunction: () => B,
+): Promise<A | B> {
+	const isInOktaExperiment =
+		window.guardian.config.tests.oktaVariant === 'variant';
+
+	if (isInOktaExperiment) {
+		const authState = await getAuthState();
+		return inOktaTestFunction(authState);
+	} else {
+		return notInOktaTestFunction();
+	}
+}
+
 export const useSignedInAuthState = (): [
 	AuthStateStatus,
-	IdentityAuthState,
+	IdentityAuthState<never, CustomIdTokenClaims>,
 ] => {
 	const [status, setStatus] = useState<AuthStateStatus>('Pending');
-	const [authState, setAuthState] = useState<IdentityAuthState>({
+	const [authState, setAuthState] = useState<
+		IdentityAuthState<never, CustomIdTokenClaims>
+	>({
 		isAuthenticated: false,
 	});
 
 	useEffect(() => {
-		const isInOktaExperiment =
-			window.guardian.config.tests.oktaVariant === 'variant';
-
-		if (isInOktaExperiment) {
-			getAuthState()
-				.then((result) => {
-					setAuthState(result);
-					setStatus('Ready');
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		} else {
-			setStatus('NotInTest');
-		}
+		eitherSignedInWithOktaOrElse(
+			(state) => {
+				setAuthState(state);
+				setStatus('Ready');
+			},
+			() => setStatus('NotInTest'),
+		).catch((error) => {
+			console.error(error);
+		});
 	}, []);
 
 	return [status, authState];
