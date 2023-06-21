@@ -342,6 +342,7 @@ export const Card = ({
 								font-size: inherit;
 								line-height: inherit;
 								text-decoration: none;
+								min-height: 10px;
 							`}
 						/>
 					) : undefined
