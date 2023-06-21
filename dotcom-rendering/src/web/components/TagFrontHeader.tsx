@@ -1,0 +1,279 @@
+import { css } from '@emotion/react';
+import {
+	breakpoints,
+	from,
+	headline,
+	neutral,
+	space,
+	until,
+} from '@guardian/source-foundations';
+import type { DCRContainerPalette } from '../../types/front';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { ContainerTitle } from './ContainerTitle';
+import { generateSources } from './Picture';
+
+type Props = {
+	title: string;
+	description?: string;
+	image?: string;
+	containerPalette?: DCRContainerPalette;
+};
+
+const width = (columns: number, columnWidth: number, columnGap: number) =>
+	`width: ${columns * columnWidth + (columns - 1) * columnGap}px;`;
+
+/** Not all browsers support CSS grid, so we set explicit width as a fallback */
+const fallbackStyles = css`
+	@supports not (display: grid) {
+		padding: 0 12px;
+		margin: 0 auto;
+
+		${from.mobileLandscape} {
+			padding: 0 20px;
+		}
+
+		${from.tablet} {
+			${width(12, 40, 20)}
+		}
+
+		${from.desktop} {
+			${width(12, 60, 20)}
+		}
+
+		${from.leftCol} {
+			${width(14, 60, 20)}
+		}
+
+		${from.wide} {
+			${width(16, 60, 20)}
+		}
+	}
+`;
+
+const containerStyles = css`
+	display: grid;
+
+	grid-template-rows:
+		[headline-start image-start] auto
+		[headline-end content-start] auto
+		[content-end image-end] auto;
+
+	grid-template-columns:
+		[viewport-start] 0px
+		[content-start title-start]
+		repeat(3, minmax(0, 1fr))
+		[content-end title-end image-start]
+		minmax(0, 1fr)
+		[image-end]
+		0px [viewport-end];
+
+	grid-auto-flow: dense;
+	column-gap: 10px;
+
+	${from.mobileLandscape} {
+		column-gap: 20px;
+	}
+
+	${from.tablet} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[content-start title-start]
+			repeat(10, 40px)
+			[content-end title-end image-start]
+			repeat(2, 40px)
+			[image-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.desktop} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[content-start title-start]
+			repeat(10, 60px)
+			[content-end title-end image-start]
+			repeat(2, 60px)
+			[image-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.leftCol} {
+		grid-template-rows:
+			[headline-start content-start image-start] auto
+			[headline-end content-end image-end] auto;
+
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(2, 60px)
+			[title-end content-start]
+			repeat(10, 60px)
+			[content-end image-start]
+			repeat(2, 60px)
+			[image-end]
+			minmax(0, 1fr) [viewport-end];
+	}
+
+	${from.wide} {
+		grid-template-columns:
+			[viewport-start] minmax(0, 1fr)
+			[title-start]
+			repeat(3, 60px)
+			[title-end content-start]
+			repeat(10, 60px)
+			[content-end image-start]
+			repeat(2, 60px)
+			[image-end]
+			repeat(1, 60px)
+			minmax(0, 1fr) [viewport-end];
+	}
+`;
+
+const sectionHeadline = css`
+	grid-row: headline;
+	grid-column: title;
+
+	display: flex;
+	flex-direction: column;
+
+	${from.leftCol} {
+		position: relative;
+		::after {
+			content: '';
+			display: block;
+			width: 1px;
+			top: 0;
+			height: 1.875rem;
+			right: -10px;
+			position: absolute;
+			background-color: ${neutral[86]};
+		}
+	}
+`;
+
+const paddings = css`
+	padding-top: ${space[2]}px;
+`;
+
+const sectionImage = css`
+	grid-row: image;
+	grid-column: image;
+	justify-self: end;
+`;
+
+const sectionContent = css`
+	margin: 0;
+
+	grid-column: content;
+	grid-row: content;
+`;
+
+/** element which contains border and inner background colour, if set */
+const decoration = css`
+	grid-row: 1 / -1;
+	grid-column: 1 / -1;
+
+	${from.tablet} {
+		grid-column: 2 / -2;
+	}
+
+	border-width: 1px;
+	border-color: ${neutral[86]};
+	border-style: none;
+`;
+
+/** only visible once content stops sticking to left and right edges */
+const sideBorders = css`
+	${from.tablet} {
+		margin: 0 -20px;
+		border-left-style: solid;
+		border-right-style: solid;
+	}
+`;
+
+const titleStyle = css`
+	${until.leftCol} {
+		max-width: 74%;
+	}
+`;
+
+const paragraphStyle = css`
+	${headline.xxxsmall()}
+	color: ${neutral[46]};
+`;
+
+const imageStyle = css`
+	width: 100px;
+	border-radius: 50px;
+	padding-bottom: ${space[2]}px;
+`;
+
+const Picture = ({ image }: { image: string }) => {
+	// Having sizes smaller than 120px is getting to the point of diminishing returns when resizing.
+	// Since this image will always be in a 120px wide container theres also not much reason to have sizes larger than 120px
+	// The different DPI sources generated are still useful to us however.
+	const [source] = generateSources(image, [
+		{ breakpoint: breakpoints.desktop, width: 100 },
+	]);
+
+	if (!source) throw new Error('Missing source');
+
+	return (
+		<picture>
+			{/* High resolution (HDPI) sources*/}
+			<source
+				srcSet={source.hiResUrl}
+				media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
+			/>
+			{/* Low resolution (MDPI) source*/}
+			<source srcSet={source.lowResUrl} />
+
+			<img alt="" src={source.lowResUrl} css={imageStyle} />
+		</picture>
+	);
+};
+
+export const TagFrontHeader = ({
+	title,
+	containerPalette,
+	description,
+	image,
+}: Props) => {
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
+	/**
+	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
+	 * this id pre-existed showMore so is probably also being used for something else.
+	 */
+	return (
+		<section
+			css={[
+				fallbackStyles,
+				containerStyles,
+				css`
+					background-color: ${overrides?.background.container};
+				`,
+			]}
+		>
+			<div css={[decoration, sideBorders]} />
+
+			<div css={[sectionHeadline, titleStyle, paddings]}>
+				<ContainerTitle
+					title={title}
+					fontColour={overrides?.text.container}
+					containerPalette={containerPalette}
+				/>
+			</div>
+
+			{!!image && (
+				<div css={[sectionImage, paddings]}>
+					<Picture image={image}></Picture>
+				</div>
+			)}
+
+			<div css={[sectionContent, paddings]}>
+				<p css={paragraphStyle}>{description}</p>
+			</div>
+		</section>
+	);
+};

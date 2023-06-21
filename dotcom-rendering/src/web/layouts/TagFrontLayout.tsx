@@ -19,6 +19,7 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
+import { TagFrontHeader } from '../components/TagFrontHeader';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
@@ -202,10 +203,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			</div>
 
 			<main data-layout="FrontLayout" id="maincontent">
-				<FrontSection
+				<TagFrontHeader
 					title={tagFront.header.title}
 					description={tagFront.header.description}
-				></FrontSection>
+					image={tagFront.header.image}
+				/>
 				{tagFront.groupedTrails.map((groupedTrails, index) => {
 					const locale = getEditionFromId(tagFront.editionId).locale;
 					const date = new Date(
