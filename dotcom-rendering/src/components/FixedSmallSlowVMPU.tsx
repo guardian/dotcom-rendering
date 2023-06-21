@@ -13,7 +13,7 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	index: number;
+	adIndex: number;
 	renderAds: boolean;
 };
 
@@ -21,7 +21,7 @@ export const FixedSmallSlowVMPU = ({
 	trails,
 	containerPalette,
 	showAge,
-	index,
+	adIndex,
 	renderAds,
 }: Props) => {
 	const firstSlice33 = trails.slice(0, 1);
@@ -63,7 +63,7 @@ export const FixedSmallSlowVMPU = ({
 					containerPalette={containerPalette}
 				>
 					<Hide until="tablet">
-						<AdSlot position="inline" index={index} />
+						<AdSlot position="inline" index={adIndex} />
 					</Hide>
 				</LI>
 			</UL>

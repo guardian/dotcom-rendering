@@ -25,7 +25,7 @@ import { NavList } from './NavList';
 
 type Props = {
 	trails: DCRFrontCard[];
-	index: number;
+	adIndex: number;
 	groupedTrails: DCRGroupedTrails;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
@@ -35,13 +35,14 @@ type Props = {
 
 export const DecideContainer = ({
 	trails,
-	index,
+	adIndex,
 	groupedTrails,
 	containerType,
 	containerPalette,
 	showAge,
 	renderAds,
 }: Props) => {
+	// If you add a new container type which contains an MPU, you must also add it to
 	switch (containerType) {
 		case 'dynamic/fast':
 			return (
@@ -65,7 +66,7 @@ export const DecideContainer = ({
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					index={index}
+					adIndex={adIndex}
 					renderAds={renderAds}
 					trails={trails}
 				/>
@@ -100,7 +101,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					index={index}
+					adIndex={adIndex}
 					renderAds={renderAds}
 				/>
 			);
@@ -159,7 +160,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					renderAds={renderAds}
-					index={index}
+					adIndex={adIndex}
 				/>
 			);
 		case 'fixed/medium/fast-XII':
