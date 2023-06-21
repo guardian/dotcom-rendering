@@ -650,8 +650,17 @@ export const LightboxButton = ({
 		if (lightbox.dataset.guReady) {
 			log(
 				'dotcom',
-				'💡 Lightbox already initialised, skipping initialisation',
+				'💡 Lightbox already initialised, updating all remaining buttons and skipping initialisation',
 			);
+			const lightboxButtons =
+				document.querySelectorAll<HTMLButtonElement>(
+					'button.open-lightbox',
+				);
+			lightboxButtons.forEach((button) => {
+				button
+					.closest('gu-island')
+					?.setAttribute('data-gu-ready', 'true');
+			});
 			return;
 		}
 		initialiseLightbox(lightbox);

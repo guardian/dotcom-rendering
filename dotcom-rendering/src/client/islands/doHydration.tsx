@@ -23,15 +23,15 @@ export const doHydration = async (
 	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
 	emotionCache: EmotionCache,
-): Promise<void> => {
+): Promise<boolean> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;
-	if (alreadyHydrated) return;
+	if (alreadyHydrated) return Promise.resolve(false);
 
 	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
 	importStart();
-	await import(
+	import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
@@ -72,7 +72,7 @@ export const doHydration = async (
 			return { clientOnly, importDuration, islandDuration };
 		})
 		.then(({ clientOnly, importDuration, islandDuration }) => {
-			if (!('getEntriesByType' in window.performance)) return;
+			if (!('getEntriesByType' in window.performance)) return true;
 
 			const action = clientOnly ? 'Rendered' : 'Hydrated';
 
@@ -80,6 +80,7 @@ export const doHydration = async (
 				'dotcom',
 				`🏝 ${action} <${name} /> in ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
+			return true;
 		})
 		.catch((error) => {
 			if (name && error.message.includes(name)) {
@@ -89,4 +90,5 @@ export const doHydration = async (
 			}
 			throw error;
 		});
+	return Promise.resolve(true);
 };
