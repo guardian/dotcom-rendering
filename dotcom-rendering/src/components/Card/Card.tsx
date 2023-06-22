@@ -416,7 +416,10 @@ export const Card = ({
 						)}
 
 						{mediaDuration !== undefined && mediaDuration > 0 && (
-							<MediaDuration mediaDuration={mediaDuration} />
+							<MediaDuration
+								mediaDuration={mediaDuration}
+								imagePositionOnMobile={imagePositionOnMobile}
+							/>
 						)}
 					</ImageWrapper>
 				)}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { palette, space, textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 
 const durationStyles = css`
 	position: absolute;
@@ -9,7 +10,7 @@ const durationStyles = css`
 	width: fit-content;
 	padding: ${space[1]}px ${space[3]}px;
 	border-radius: ${space[3]}px;
-	color: ${palette.neutral[100]};
+	color: white;
 	${textSans.xxsmall({ fontWeight: `bold` })}
 `;
 
@@ -35,8 +36,25 @@ export function secondsToDuration(secs?: number): string {
 	return duration.join(':');
 }
 
-export const MediaDuration = ({ mediaDuration }: { mediaDuration: number }) => (
-	<div css={durationStyles}>
-		<p>{secondsToDuration(mediaDuration)}</p>
-	</div>
-);
+export const MediaDuration = ({
+	mediaDuration,
+	imagePositionOnMobile,
+}: {
+	mediaDuration: number;
+	imagePositionOnMobile?: ImagePositionType;
+}) => {
+	if (imagePositionOnMobile === 'left')
+		return (
+			<Hide until="tablet">
+				<div css={durationStyles}>
+					<p>{secondsToDuration(mediaDuration)}</p>
+				</div>
+			</Hide>
+		);
+
+	return (
+		<div css={durationStyles}>
+			<p>{secondsToDuration(mediaDuration)}</p>
+		</div>
+	);
+};
