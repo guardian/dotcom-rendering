@@ -48,6 +48,7 @@ export interface DCRTagFrontType {
 }
 
 export interface DCRFrontPagination {
+	pageId: string;
 	sectionName: string;
 	currentPage: number;
 	lastPage: number;

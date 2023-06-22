@@ -7,6 +7,7 @@ import {
 import { Fragment } from 'react';
 
 type Props = {
+	pageId: string;
 	sectionName: string;
 	totalContent: number;
 	currentPage: number;
@@ -110,13 +111,18 @@ const getPageRange = (currentPage: number, lastPage: number) => {
 	return pageRange;
 };
 
+const getLink = (pageId: string, pageNo: number) => {
+	if (pageNo === 1) return `/${pageId}`;
+	return `/${pageId}?page=${pageNo}`;
+};
+
 export const FrontPagination = ({
+	pageId,
 	totalContent,
 	sectionName,
 	currentPage,
 	lastPage,
 }: Props) => {
-	// TODO: ?page=1 should just have no page parameter
 	const pageRange = getPageRange(currentPage, lastPage);
 
 	return (
@@ -127,7 +133,7 @@ export const FrontPagination = ({
 			<div css={paginationItemContainerCss}>
 				{currentPage > 1 && (
 					<a
-						href={`?page=${currentPage - 1}`}
+						href={getLink(pageId, currentPage - 1)}
 						css={paginationArrowsCss}
 					>
 						<SvgChevronLeftSingle />
@@ -163,7 +169,7 @@ export const FrontPagination = ({
 									css={[paginationItemCss]}
 									href={
 										page !== currentPage
-											? `?page=${page}`
+											? getLink(pageId, page)
 											: undefined
 									}
 								>
@@ -178,7 +184,7 @@ export const FrontPagination = ({
 				})}
 				{currentPage < lastPage && (
 					<a
-						href={`?page=${currentPage + 1}`}
+						href={getLink(pageId, currentPage + 1)}
 						css={paginationArrowsCss}
 					>
 						<SvgChevronRightSingle />

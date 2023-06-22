@@ -576,6 +576,7 @@ export const FrontSection = ({
 						totalContent={pagination.totalContent}
 						currentPage={pagination.currentPage}
 						lastPage={pagination.lastPage}
+						pageId={pagination.pageId}
 					/>
 				)}
 			</div>
