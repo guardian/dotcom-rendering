@@ -284,6 +284,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
+					const trailsWithoutBranding = collection.badge
+						? trails.map((labTrail) => {
+								return {
+									...labTrail,
+									branding: undefined,
+								};
+						  })
+						: trails;
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -394,15 +403,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const trailsWithoutBranding = collection.badge
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
-
 						return (
 							<LabsSection
 								key={ophanName}
@@ -478,7 +478,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								targetedTerritory={collection.targetedTerritory}
 							>
 								<DecideContainer
-									trails={trails}
+									trails={trailsWithoutBranding}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
