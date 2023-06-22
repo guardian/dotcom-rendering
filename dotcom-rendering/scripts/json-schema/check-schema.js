@@ -43,7 +43,6 @@ if (
 	existingFrontSchema !== frontSchema ||
 	existingTagFrontSchema !== tagFrontSchema ||
 	existingNewsletterSchema !== newsletterSchema ||
-	existingNewsletterSchema !== newsletterSchema ||
 	existingBlockSchema !== blockSchema
 ) {
 	throw new Error('Schemas do not match ... please run "make gen-schema"');
