@@ -3,7 +3,7 @@ import {
 	breakpoints,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -148,7 +148,7 @@ const sectionHeadline = css`
 			height: 1.875rem;
 			right: -10px;
 			position: absolute;
-			background-color: ${neutral[86]};
+			background-color: ${palette.neutral[86]};
 		}
 	}
 `;
@@ -181,7 +181,7 @@ const decoration = css`
 	}
 
 	border-width: 1px;
-	border-color: ${neutral[86]};
+	border-color: ${palette.neutral[86]};
 	border-style: none;
 `;
 
@@ -202,7 +202,7 @@ const titleStyle = css`
 
 const paragraphStyle = css`
 	${headline.xxxsmall()}
-	color: ${neutral[46]};
+	color: ${palette.neutral[46]};
 `;
 
 const imageStyle = css`

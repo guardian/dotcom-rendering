@@ -58,7 +58,7 @@ const paginationItemCss = css`
 `;
 
 const activePaginationItemCss = css`
-	color: #ffffff;
+	color: ${palette.neutral[100]};
 	background-color: ${palette.neutral[46]};
 
 	&:hover {
