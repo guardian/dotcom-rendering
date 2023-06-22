@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import {
 	breakpoints,
 	from,
@@ -7,7 +7,10 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
+import { Fragment, type ReactNode } from 'react';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { isElement, parseHtml } from '../lib/domUtils';
+import { logger } from '../server/lib/logging';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerTitle } from './ContainerTitle';
 import { generateSources } from './Picture';
@@ -152,6 +155,7 @@ const sectionHeadline = css`
 
 const paddings = css`
 	padding-top: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
 `;
 
 const sectionImage = css`
@@ -204,8 +208,35 @@ const paragraphStyle = css`
 const imageStyle = css`
 	width: 100px;
 	border-radius: 50px;
-	padding-bottom: ${space[2]}px;
 `;
+
+const buildElementTree = (node: Node): ReactNode => {
+	if (isElement(node)) {
+		switch (node.nodeName) {
+			case 'A':
+				return jsx('a', {
+					href: node.attributes.getNamedItem('href')?.value,
+					target: node.attributes.getNamedItem('target')?.value,
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
+			default:
+				return jsx(node.tagName.toLowerCase(), {
+					children: Array.from(node.childNodes).map(buildElementTree),
+				});
+		}
+	} else if (node.nodeType === node.TEXT_NODE) {
+		return node.textContent;
+	} else {
+		logger.warn('TagFrontHeader: Unknown element received', {
+			isDev: process.env.NODE_ENV !== 'production',
+			element: {
+				name: node.nodeName,
+				html: isElement(node) ? node.outerHTML : undefined,
+			},
+		});
+		return null;
+	}
+};
 
 const Picture = ({ image }: { image: string }) => {
 	// Having sizes smaller than 120px is getting to the point of diminishing returns when resizing.
@@ -241,6 +272,10 @@ export const TagFrontHeader = ({
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
+	const descriptionFragment = description
+		? parseHtml(description)
+		: undefined;
+
 	/**
 	 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
 	 * this id pre-existed showMore so is probably also being used for something else.
@@ -265,15 +300,21 @@ export const TagFrontHeader = ({
 				/>
 			</div>
 
-			{!!image && (
+			{image !== undefined && (
 				<div css={[sectionImage, paddings]}>
-					<Picture image={image}></Picture>
+					<Picture image={image} />
 				</div>
 			)}
 
-			<div css={[sectionContent, paddings]}>
-				<p css={paragraphStyle}>{description}</p>
-			</div>
+			{descriptionFragment ? (
+				<div css={[sectionContent, paddings, paragraphStyle]}>
+					{jsx(Fragment, {
+						children: Array.from(
+							descriptionFragment.childNodes,
+						).map(buildElementTree),
+					})}
+				</div>
+			) : null}
 		</section>
 	);
 };
