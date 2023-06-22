@@ -224,7 +224,7 @@
 		"prettier-eslint": "15.0.1",
 		"pretty-bytes": "6.1.0",
 		"prop-types": "15.8.1",
-		"qs": "6.11.0",
+		"qs": "6.11.2",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"react-google-recaptcha": "2.1.0",
