@@ -3826,6 +3826,11 @@
     "@typescript-eslint/eslint-plugin" "5.46.1"
     "@typescript-eslint/parser" "5.59.9"
 
+"@guardian/identity-auth@0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.1.2.tgz#ce357767c0228d7792158770e94173ad6723b7be"
+  integrity sha512-vInqAay30pyRS3EHoQwFYW1Fr6t3lD2zvpnnbPOzqqg/5eAoxNFloVkdmnffdB6XguSd9JUmVYS1XLtpZZswTQ==
+
 "@guardian/libs@15.1.0", "@guardian/libs@^15.0.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
