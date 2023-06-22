@@ -3,14 +3,46 @@ import type { FECollectionType, FEFrontCard } from '../types/front';
 import type { FETagType } from '../types/tag';
 
 /**
+ * Extracts sectionId from a given tag if its a section tag
+ * @param tag
+ * @returns a section ID or undefined
+ */
+const extractTagSectionId = (tag: FETagType): string | undefined => {
+	if (tag.properties.id === 'uk/uk') {
+		return 'uk-news';
+	}
+
+	const split = tag.properties.id.split('/');
+
+	return split[0] === split[1] ? split[0] : undefined;
+};
+
+/**
+ * Checks if a given tag is a section ID tag
+ * @param tag
+ * @returns a section ID or undefined
+ */
+const isNotSectionTag = (tag: FETagType): boolean => {
+	const sectionId = extractTagSectionId(tag);
+
+	return !(
+		sectionId !== undefined &&
+		tag.properties.sectionId !== undefined &&
+		sectionId.includes(tag.properties.sectionId)
+	);
+};
+
+/**
  * Gets all relevant tags filtered by properties
  * @param tags - The deduplicated trails
  * @returns An array of relevant tags
  */
-const getTags = (trails: FEFrontCard[]): FETagType[] =>
+const getTags = (trails: FEFrontCard[], pageId: string): FETagType[] =>
 	trails
 		.flatMap((trail) => trail.properties.maybeContent?.tags.tags)
 		.filter(isNonNullable)
+		.filter(isNotSectionTag)
+		.filter((tag) => tag.properties.id !== pageId)
 		.filter((tag) => {
 			return (
 				tag.properties.paidContentType?.includes('Keyword') ??
@@ -20,61 +52,50 @@ const getTags = (trails: FEFrontCard[]): FETagType[] =>
 		});
 
 /**
- * Gets tags which have the 5 most used IDs from the provided tags
+ * Sort tags by frequency
  * @param tags - Tags which you want to have filtered
- * @returns An array of tags which has been filtered to only include those with the most popular tag IDs
+ * @returns An array of tags which has been sorted by frequency
  */
-const filterTopFive = (tag: FETagType[]): FETagType[] => {
-	const idCounts: { [key: string]: number } = {};
+const sortTags = (tag: FETagType[]): FETagType[] => {
+	const counter: { [key: string]: [FETagType, number] } = {};
 
 	tag.forEach((x) => {
 		const id = x.properties.id;
-		if (idCounts[id] !== undefined) {
-			idCounts[id]++;
-		} else {
-			idCounts[id] = 1;
-		}
+		const count = counter[id]?.[1] ?? 0;
+
+		counter[id] = [x, count + 1];
 	});
 
-	const topFiveIds = Object.entries(idCounts)
-		.sort((a, b) => b[1] - a[1])
-		.slice(0, 5)
-		.map((entry) => entry[0]);
+	const sortedTags = Object.entries(counter).sort(
+		(a, b) => b[1][1] - a[1][1],
+	);
 
-	return tag.filter((x) => topFiveIds.includes(x.properties.id));
+	return sortedTags.map((x) => x[1][0]);
 };
 
-const dedupeTags = (tag: FETagType[]): FETagType[] =>
-	[...new Set(tag.map((item) => item.properties.id))]
-		.map((id) => tag.find((item) => item.properties.id === id))
-		.filter(isNonNullable);
 
 export const extractTrendingTopicsFomFront = (
 	collections: FECollectionType[],
+	pageId: string,
 ): FETagType[] => {
 	// Get a single array of all trails in the collections
+	const trails = new Map<string, FEFrontCard>();
 
-	const allTrails = collections.flatMap((collection) => [
-		...collection.curated,
-		...collection.backfill,
-	]);
+	collections
+		.flatMap((collection) => [
+			...collection.curated,
+			...collection.backfill,
+		])
+		.forEach((card) =>
+			trails.set(card.properties.maybeContentId ?? card.card.id, card),
+		);
 
-	return extractTrendingTopics(allTrails);
+	return extractTrendingTopics([...trails.values()], pageId);
 };
-export const extractTrendingTopics = (trails: FEFrontCard[]): FETagType[] => {
-	// Remove any duplicated trails
-	const dedupedTrails = trails.filter((trailOne) =>
-		trails.findIndex((trailTwo) => trailOne.card.id === trailTwo.card.id),
-	);
 
-	const allTags = getTags(dedupedTrails);
-	// We do not wish to include section tags that follow the pattern "UK/UK"
-	const filteredTags = allTags.filter(
-		(x) => new Set(x.properties.id.split('/')).size === 2,
-	);
+export const extractTrendingTopics = (trails: FEFrontCard[], pageId: string): FETagType[] => {
+	const allTags = getTags(trails, pageId);
+	const tags = sortTags(allTags).slice(0, 20);
 
-	// Get tags with the top 5 most used IDs
-	const tags = filterTopFive(filteredTags);
-
-	return dedupeTags(tags);
+	return tags;
 };
