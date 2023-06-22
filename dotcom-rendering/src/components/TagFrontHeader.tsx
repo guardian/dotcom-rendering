@@ -13,7 +13,7 @@ import { isElement, parseHtml } from '../lib/domUtils';
 import { logger } from '../server/lib/logging';
 import type { DCRContainerPalette } from '../types/front';
 import { ContainerTitle } from './ContainerTitle';
-import { generateSources } from './Picture';
+import { generateSources, Sources } from './Picture';
 
 type Props = {
 	title: string;
@@ -81,8 +81,9 @@ const containerStyles = css`
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
-			repeat(10, 40px)
-			[content-end title-end image-start]
+			repeat(6, 40px) [content-end title-end]
+			repeat(4, 40px)
+			[image-start]
 			repeat(2, 40px)
 			[image-end]
 			minmax(0, 1fr) [viewport-end];
@@ -92,8 +93,9 @@ const containerStyles = css`
 		grid-template-columns:
 			[viewport-start] minmax(0, 1fr)
 			[content-start title-start]
-			repeat(10, 60px)
-			[content-end title-end image-start]
+			repeat(6, 60px) [content-end]
+			repeat(4, 60px)
+			[title-end image-start]
 			repeat(2, 60px)
 			[image-end]
 			minmax(0, 1fr) [viewport-end];
@@ -109,8 +111,9 @@ const containerStyles = css`
 			[title-start]
 			repeat(2, 60px)
 			[title-end content-start]
-			repeat(10, 60px)
-			[content-end image-start]
+			repeat(7, 60px) [content-end]
+			repeat(3, 60px)
+			[image-start]
 			repeat(2, 60px)
 			[image-end]
 			minmax(0, 1fr) [viewport-end];
@@ -122,8 +125,9 @@ const containerStyles = css`
 			[title-start]
 			repeat(3, 60px)
 			[title-end content-start]
-			repeat(10, 60px)
-			[content-end image-start]
+			repeat(8, 60px) [content-end]
+			repeat(2, 60px)
+			[ image-start]
 			repeat(2, 60px)
 			[image-end]
 			repeat(1, 60px)
@@ -205,11 +209,6 @@ const paragraphStyle = css`
 	color: ${palette.neutral[46]};
 `;
 
-const imageStyle = css`
-	width: 100px;
-	border-radius: 50px;
-`;
-
 const buildElementTree = (node: Node): ReactNode => {
 	if (isElement(node)) {
 		switch (node.nodeName) {
@@ -238,27 +237,30 @@ const buildElementTree = (node: Node): ReactNode => {
 	}
 };
 
+const imageStyle = css`
+	width: 80px;
+	border-radius: 40px;
+
+	${from.desktop} {
+		width: 100px;
+		border-radius: 50px;
+	}
+`;
+
 const Picture = ({ image }: { image: string }) => {
-	// Having sizes smaller than 120px is getting to the point of diminishing returns when resizing.
-	// Since this image will always be in a 120px wide container theres also not much reason to have sizes larger than 120px
-	// The different DPI sources generated are still useful to us however.
-	const [source] = generateSources(image, [
+	const sources = generateSources(image, [
+		{ breakpoint: breakpoints.mobile, width: 80 },
 		{ breakpoint: breakpoints.desktop, width: 100 },
 	]);
 
-	if (!source) throw new Error('Missing source');
+	const fallback = sources[0]?.lowResUrl;
+
+	if (!fallback) throw new Error('Missing source');
 
 	return (
 		<picture>
-			{/* High resolution (HDPI) sources*/}
-			<source
-				srcSet={source.hiResUrl}
-				media={`(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)`}
-			/>
-			{/* Low resolution (MDPI) source*/}
-			<source srcSet={source.lowResUrl} />
-
-			<img alt="" src={source.lowResUrl} css={imageStyle} />
+			<Sources sources={sources} />
+			<img alt="" src={fallback} css={imageStyle} />
 		</picture>
 	);
 };
