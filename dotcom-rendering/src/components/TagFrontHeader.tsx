@@ -218,6 +218,8 @@ const buildElementTree = (node: Node): ReactNode => {
 					target: node.attributes.getNamedItem('target')?.value,
 					children: Array.from(node.childNodes).map(buildElementTree),
 				});
+			case 'BR':
+				return jsx('br');
 			default:
 				return jsx(node.tagName.toLowerCase(), {
 					children: Array.from(node.childNodes).map(buildElementTree),
