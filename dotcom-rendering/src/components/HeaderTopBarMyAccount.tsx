@@ -194,7 +194,7 @@ const SignedInWithNotifications = ({
 
 	let userId: string | undefined;
 
-	// TODO Okta: Remove this when at 100% in Okta oktaVariant
+	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
 		status === 'NotInTest'
 			? joinUrl(

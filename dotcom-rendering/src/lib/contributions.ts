@@ -237,7 +237,7 @@ export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
 
 const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
-	// TODO Okta: Remove either when at 100& in oktaVariant test
+	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
 	eitherSignedInWithOktaOrElse(
 		(authState) => authState.idToken?.claims.email,
 		() =>

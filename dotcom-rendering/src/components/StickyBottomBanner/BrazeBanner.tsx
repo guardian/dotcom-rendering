@@ -10,6 +10,10 @@ import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
+import {
+	getOptionsHeadersWithOkta,
+	useSignedInAuthState,
+} from '../../lib/useSignedInAuthState';
 import type { TagType } from '../../types/tag';
 
 type Meta = {
@@ -104,6 +108,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	meta,
 	idApiUrl,
 }: InnerProps) => {
+	const [authStatus, authState] = useSignedInAuthState();
+
 	useEffect(() => {
 		// Log the impression with Braze
 		meta.logImpressionWithBraze();
@@ -124,6 +130,21 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	const componentName = meta.dataFromBraze.componentName;
 	if (!componentName) return null;
 
+	const subscribeToNewsletter = async (newsletterId: string) => {
+		if (authStatus !== 'Pending') {
+			const options = getOptionsHeadersWithOkta(authStatus, authState);
+
+			await fetch(`${idApiUrl}/users/me/newsletters`, {
+				method: 'PATCH',
+				body: JSON.stringify({
+					id: newsletterId,
+					subscribed: true,
+				}),
+				...options,
+			});
+		}
+	};
+
 	return (
 		<div css={containerStyles}>
 			<BrazeComponent
@@ -131,17 +152,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 				submitComponentEvent={submitComponentEvent}
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
-				// TODO Okta: Migrate to use access tokens
-				subscribeToNewsletter={async (newsletterId: string) => {
-					await fetch(`${idApiUrl}/users/me/newsletters`, {
-						method: 'PATCH',
-						body: JSON.stringify({
-							id: newsletterId,
-							subscribed: true,
-						}),
-						credentials: 'include',
-					});
-				}}
+				subscribeToNewsletter={subscribeToNewsletter}
 			/>
 		</div>
 	);
