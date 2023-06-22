@@ -45,13 +45,13 @@ const groupByYear = (trails: TrailAndDate[]) => {
 
 	trails.forEach(({ trail, date }) => {
 		const existingYear = trailsByYear.find(
-			({ year }) => year === date.getFullYear(),
+			({ year }) => year === date.getUTCFullYear(),
 		);
 		if (existingYear) {
 			existingYear.trails.push({ trail, date });
 		} else {
 			trailsByYear.push({
-				year: date.getFullYear(),
+				year: date.getUTCFullYear(),
 				trails: [{ trail, date }],
 			});
 		}
@@ -72,14 +72,14 @@ const groupTrailsByMonth = (trails: TrailAndDate[], year: number) => {
 
 	trails.forEach(({ trail, date }) => {
 		const existingMonth = trailsByMonth.find(
-			({ month }) => month === date.getMonth(),
+			({ month }) => month === date.getUTCMonth(),
 		);
 		if (existingMonth) {
 			existingMonth.trails.push({ trail, date });
 		} else {
 			trailsByMonth.push({
 				year,
-				month: date.getMonth(),
+				month: date.getUTCMonth(),
 				trails: [{ trail, date }],
 			});
 		}
