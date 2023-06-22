@@ -28,8 +28,8 @@ export const getOptionsHeadersWithOkta = (
 export async function getAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
-	const { isSignInWithOktaAuthState } = await import('./identity');
-	const authState = await isSignInWithOktaAuthState();
+	const { isSignedInWithOktaAuthState } = await import('./identity');
+	const authState = await isSignedInWithOktaAuthState();
 	return authState;
 }
 
@@ -54,7 +54,8 @@ export const useSignedInAuthState = (): [
 	AuthStateStatus,
 	IdentityAuthState<never, CustomIdTokenClaims>,
 ] => {
-	const [status, setStatus] = useState<AuthStateStatus>('Pending');
+	const [authStateStatus, setAuthStateStatus] =
+		useState<AuthStateStatus>('Pending');
 	const [authState, setAuthState] = useState<
 		IdentityAuthState<never, CustomIdTokenClaims>
 	>({
@@ -65,13 +66,13 @@ export const useSignedInAuthState = (): [
 		eitherSignedInWithOktaOrElse(
 			(state) => {
 				setAuthState(state);
-				setStatus('Ready');
+				setAuthStateStatus('Ready');
 			},
-			() => setStatus('NotInTest'),
+			() => setAuthStateStatus('NotInTest'),
 		).catch((error) => {
 			console.error(error);
 		});
 	}, []);
 
-	return [status, authState];
+	return [authStateStatus, authState];
 };

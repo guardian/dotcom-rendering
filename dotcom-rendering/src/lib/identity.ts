@@ -60,7 +60,7 @@ function getIdentityAuth() {
 	return identityAuth;
 }
 
-export async function isSignInWithOktaAuthState(): Promise<
+export async function isSignedInWithOktaAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
 	return getIdentityAuth().isSignedInWithAuthState();
