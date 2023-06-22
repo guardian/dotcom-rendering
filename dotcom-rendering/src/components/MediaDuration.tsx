@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 
 const durationStyles = css`
 	position: absolute;
-	top: 8px;
-	right: 8px;
+	top: ${space[2]}px;
+	right: ${space[2]}px;
 	background-color: rgba(0, 0, 0, 0.7);
 	width: fit-content;
-	padding: 6px 12px;
-	border-radius: 18px;
-	color: white;
+	padding: ${space[1]}px ${space[3]}px;
+	border-radius: ${space[3]}px;
+	color: ${palette.neutral[100]};
 	${textSans.xxsmall({ fontWeight: `bold` })}
 `;
 
