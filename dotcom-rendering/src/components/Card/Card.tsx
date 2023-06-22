@@ -20,6 +20,7 @@ import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
@@ -42,7 +43,6 @@ import type {
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { MediaDuration } from '../MediaDuration';
 
 export type Props = {
 	linkTo: string;
