@@ -195,6 +195,8 @@ const SignedInWithNotifications = ({
 	let userId: string | undefined;
 
 	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
+	// If we encounter an error or don't have user data display sign in to the user.
+	// SWR will retry in the background if the request failed
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
 		authStatus.kind === 'NotInTest'
 			? joinUrl(
