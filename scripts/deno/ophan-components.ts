@@ -38,7 +38,15 @@ const known_errors = new Set([
 	'7 | text',
 	'8 | text',
 	'9 | text',
-	'10 | text'
+	'10 | text',
+	'most-viewed',
+	'tab 1 Most viewed',
+	'tab 2 Across the guardian',
+	'Most viewed',
+	'Across the guardian',
+
+	// Not visible when JS is disabled
+	'nav2 : overlay',
 ]);
 
 const getOphanComponents = (
