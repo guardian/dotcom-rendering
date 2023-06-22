@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
+	background,
 	from,
 	neutral,
 	palette,
@@ -9,6 +10,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
@@ -73,6 +75,14 @@ type Props = {
 	index?: number;
 	/** Indicates if the container is targetted to a specific territory */
 	targetedTerritory?: Territory;
+	/** Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 * - if no background colour is specified use the default body background colour to prevent
+	 *   the page skin background showing through the containers
+	 */
+	hasPageSkin?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -106,7 +116,7 @@ const fallbackStyles = css`
 	}
 `;
 
-const containerStyles = css`
+const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
@@ -153,7 +163,9 @@ const containerStyles = css`
 			[decoration-end content-end title-end hide-end]
 			minmax(0, 1fr);
 	}
+`;
 
+const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
 			[headline-start show-hide-start content-start] auto
@@ -195,13 +207,14 @@ const containerStyles = css`
 	}
 `;
 
-const sectionHeadline = (borderColour: string) => css`
+const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
-
 	display: flex;
 	flex-direction: column;
+`;
 
+const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	${from.leftCol} {
 		position: relative;
 		::after {
@@ -303,6 +316,20 @@ const titleStyle = css`
 		max-width: 74%;
 	}
 `;
+
+const decideBackgroundColour = (
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
 
 /**
  * # Front Container
@@ -410,6 +437,7 @@ export const FrontSection = ({
 	isOnPaidContentFront,
 	index,
 	targetedTerritory,
+	hasPageSkin = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -435,9 +463,14 @@ export const FrontSection = ({
 			data-container-name={containerName}
 			css={[
 				fallbackStyles,
-				containerStyles,
+				containerStylesUntilLeftCol,
+				!hasPageSkin && containerStylesFromLeftCol,
+				hasPageSkin && pageSkinContainer,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${decideBackgroundColour(
+						overrides?.background?.container,
+						hasPageSkin,
+					)};
 				`,
 			]}
 		>
@@ -451,9 +484,11 @@ export const FrontSection = ({
 
 			<div
 				css={[
-					sectionHeadline(
-						overrides?.border?.container ?? neutral[86],
-					),
+					sectionHeadlineUntilLeftCol,
+					!hasPageSkin &&
+						sectionHeadlineFromLeftCol(
+							overrides?.border?.container ?? neutral[86],
+						),
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
@@ -578,7 +613,7 @@ export const FrontSection = ({
 				) : null}
 			</div>
 
-			{treats && (
+			{treats && !hasPageSkin && (
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -24,6 +25,7 @@ type Props = {
 	idApiUrl: string;
 	isInEuropeTest: boolean;
 	headerTopBarSearchCapiSwitch: boolean;
+	hasPageSkin?: boolean;
 };
 
 export const Header = ({
@@ -37,6 +39,7 @@ export const Header = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
+	hasPageSkin = false,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
 		<Island>
@@ -53,12 +56,13 @@ export const Header = ({
 				idApiUrl={idApiUrl}
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 				isInEuropeTest={isInEuropeTest}
+				hasPageSkin={hasPageSkin}
 			/>
 		</Island>
 
 		<div
 			css={[
-				center,
+				hasPageSkin ? pageSkinContainer : center,
 				css`
 					overflow: hidden;
 				`,
@@ -67,7 +71,7 @@ export const Header = ({
 			<Island deferUntil="hash" clientOnly={true}>
 				<Snow />
 			</Island>
-			<Logo editionId={editionId} />
+			<Logo editionId={editionId} hasPageSkin={hasPageSkin} />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG
 					urls={urls}
@@ -76,6 +80,7 @@ export const Header = ({
 					inHeader={true}
 					remoteHeader={remoteHeader}
 					contributionsServiceUrl={contributionsServiceUrl}
+					hasPageSkin={hasPageSkin}
 				/>
 			</Island>
 		</div>
