@@ -20,6 +20,8 @@ import {
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+/;
+/** This is imperfect, but covers *some* cases of tag fronts, consider expanding in the future */
+const TAG_FRONT_URL = /^\/(tone|series)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
 
@@ -73,6 +75,15 @@ export const devServer = (): Handler => {
 					).toString();
 					console.info('redirecting to Article:', url);
 					return res.redirect(`/Article/${url}`);
+				}
+
+				if (req.url.match(TAG_FRONT_URL)) {
+					const url = new URL(
+						req.url,
+						'https://www.theguardian.com/',
+					).toString();
+					console.info('redirecting to Tag front:', url);
+					return res.redirect(`/TagFront/${url}`);
 				}
 
 				if (req.url.match(FRONT_URL)) {
