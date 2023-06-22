@@ -8,13 +8,13 @@ import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
-	const [status, authState] = useSignedInAuthState();
+	const authStatus = useSignedInAuthState();
 	const { discussionApiUrl } = props;
 
-	const options = getOptionsHeadersWithOkta(status, authState);
+	const options = getOptionsHeadersWithOkta(authStatus);
 
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		status !== 'Pending'
+		authStatus.kind !== 'Pending'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',

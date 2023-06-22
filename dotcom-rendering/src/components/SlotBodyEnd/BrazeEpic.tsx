@@ -101,7 +101,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	countryCode,
 	idApiUrl,
 }: InnerProps) => {
-	const [authStatus, authState] = useSignedInAuthState();
+	const authStatus = useSignedInAuthState();
 	const [hasBeenSeen, setNode] = useIsInView({
 		rootMargin: '-18px',
 		threshold: 0,
@@ -139,8 +139,8 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus !== 'Pending') {
-			const options = getOptionsHeadersWithOkta(authStatus, authState);
+		if (authStatus.kind !== 'Pending') {
+			const options = getOptionsHeadersWithOkta(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {
 				method: 'PATCH',

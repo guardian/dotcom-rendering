@@ -21,16 +21,16 @@ export const DiscussionMeta = ({
 	shortUrlId,
 	enableDiscussionSwitch,
 }: Props) => {
-	const [status, authState] = useSignedInAuthState();
+	const authStatus = useSignedInAuthState();
 
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	const options = getOptionsHeadersWithOkta(status, authState);
+	const options = getOptionsHeadersWithOkta(authStatus);
 
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		status !== 'Pending'
+		authStatus.kind !== 'Pending'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',

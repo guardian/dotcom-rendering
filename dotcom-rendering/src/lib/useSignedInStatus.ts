@@ -14,19 +14,21 @@ function getSignedInStatusWithCookie(): 'NotSignedIn' | 'SignedIn' {
 export const useSignedInStatus = (): SignedInStatus => {
 	const [signedInStatus, setSignedInStatus] =
 		useState<SignedInStatus>('Pending');
-	const [authStateStatus, authState] = useSignedInAuthState();
+	const authStateStatus = useSignedInAuthState();
 
 	useEffect(() => {
-		if (authStateStatus === 'Ready') {
+		if (authStateStatus.kind === 'Ready') {
 			setSignedInStatus(
-				authState.isAuthenticated ? 'SignedIn' : 'NotSignedIn',
+				authStateStatus.authState.isAuthenticated
+					? 'SignedIn'
+					: 'NotSignedIn',
 			);
 		}
 
-		if (authStateStatus === 'NotInTest') {
+		if (authStateStatus.kind === 'NotInTest') {
 			setSignedInStatus(getSignedInStatusWithCookie());
 		}
-	}, [authState.isAuthenticated, authStateStatus]);
+	}, [authStateStatus]);
 
 	return signedInStatus;
 };

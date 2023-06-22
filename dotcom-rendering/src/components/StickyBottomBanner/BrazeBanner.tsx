@@ -108,7 +108,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	meta,
 	idApiUrl,
 }: InnerProps) => {
-	const [authStatus, authState] = useSignedInAuthState();
+	const authStatus = useSignedInAuthState();
 
 	useEffect(() => {
 		// Log the impression with Braze
@@ -131,8 +131,8 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus !== 'Pending') {
-			const options = getOptionsHeadersWithOkta(authStatus, authState);
+		if (authStatus.kind !== 'Pending') {
+			const options = getOptionsHeadersWithOkta(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {
 				method: 'PATCH',

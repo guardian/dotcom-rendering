@@ -190,13 +190,13 @@ const SignedInWithNotifications = ({
 	discussionApiUrl,
 	notifications,
 }: SignedInWithNotificationsProps) => {
-	const [status, authState] = useSignedInAuthState();
+	const authStatus = useSignedInAuthState();
 
 	let userId: string | undefined;
 
 	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
-		status === 'NotInTest'
+		authStatus.kind === 'NotInTest'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
@@ -208,12 +208,12 @@ const SignedInWithNotifications = ({
 			credentials: 'include',
 		},
 	);
-	if (status === 'NotInTest' && data) {
+	if (authStatus.kind === 'NotInTest' && data) {
 		userId = data.userProfile.userId;
 	}
 
-	if (status === 'Ready') {
-		userId = authState.idToken?.claims.legacy_identity_id;
+	if (authStatus.kind === 'Ready') {
+		userId = authStatus.authState.idToken?.claims.legacy_identity_id;
 	}
 
 	if (!userId || error) return <SignIn idUrl={idUrl} />;

@@ -2,22 +2,30 @@ import type { IdentityAuthState } from '@guardian/identity-auth';
 import { useEffect, useState } from 'react';
 import type { CustomIdTokenClaims } from './identity';
 
-export type AuthStateStatus = 'Pending' | 'NotInTest' | 'Ready';
+type AuthStatus =
+	| { kind: 'Pending' }
+	| { kind: 'NotInTest' }
+	| {
+			kind: 'Ready';
+			authState: IdentityAuthState<never, CustomIdTokenClaims>;
+	  };
 
 export const getOptionsHeadersWithOkta = (
-	status: AuthStateStatus,
-	state: IdentityAuthState,
+	authStatus: AuthStatus,
 ): RequestInit => {
-	if (status === 'NotInTest') {
+	if (authStatus.kind === 'NotInTest') {
 		return {
 			credentials: 'include',
 		};
 	}
 
-	if (status === 'Ready' && state.accessToken?.accessToken) {
+	if (
+		authStatus.kind === 'Ready' &&
+		authStatus.authState.accessToken?.accessToken
+	) {
 		return {
 			headers: {
-				Authorization: `Bearer ${state.accessToken.accessToken}`,
+				Authorization: `Bearer ${authStatus.authState.accessToken.accessToken}`,
 			},
 		};
 	}
@@ -50,29 +58,24 @@ export async function eitherSignedInWithOktaOrElse<A, B>(
 	}
 }
 
-export const useSignedInAuthState = (): [
-	AuthStateStatus,
-	IdentityAuthState<never, CustomIdTokenClaims>,
-] => {
-	const [authStateStatus, setAuthStateStatus] =
-		useState<AuthStateStatus>('Pending');
-	const [authState, setAuthState] = useState<
-		IdentityAuthState<never, CustomIdTokenClaims>
-	>({
-		isAuthenticated: false,
+export const useSignedInAuthState = (): AuthStatus => {
+	const [authStateStatus, setAuthStateStatus] = useState<AuthStatus>({
+		kind: 'Pending',
 	});
 
 	useEffect(() => {
 		eitherSignedInWithOktaOrElse(
 			(state) => {
-				setAuthState(state);
-				setAuthStateStatus('Ready');
+				setAuthStateStatus({
+					kind: 'Ready',
+					authState: state,
+				});
 			},
-			() => setAuthStateStatus('NotInTest'),
+			() => setAuthStateStatus({ kind: 'NotInTest' }),
 		).catch((error) => {
 			console.error(error);
 		});
 	}, []);
 
-	return [authStateStatus, authState];
+	return authStateStatus;
 };
