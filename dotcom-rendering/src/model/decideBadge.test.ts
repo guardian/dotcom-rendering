@@ -1,4 +1,10 @@
-import { BADGE_THIS_IS_EUROPE, decideBadge } from './decideBadge';
+import {
+	decideBadge,
+	getBadgeFromBranding,
+	getBadgeFromSeriesTag,
+} from './decideBadge';
+
+jest.mock('./badges');
 
 const brandingAmazon = {
 	brandingType: {
@@ -46,15 +52,36 @@ const brandingGuardianOrg = {
 };
 
 describe('Decide badge', () => {
-	describe('Using displayName', () => {
-		it('returns correct badge for this is Europe', () => {
-			const expectedResult = BADGE_THIS_IS_EUROPE;
-			const result = decideBadge('This is Europe', []);
+	describe('getBadgeFromSeriesTag', () => {
+		it('returns correct standard badge', () => {
+			const tagId = 'uk-news/series/the-brexit-gamble';
+			const expectedResult = {
+				href: `/${tagId}`,
+				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+			};
+			const result = getBadgeFromSeriesTag(tagId);
 			expect(result).toMatchObject(expectedResult);
+		});
+
+		it('returns correct special badge', () => {
+			const tagId = 'tone/newsletter-tone';
+			const expectedResult = {
+				href: `/${tagId}`,
+				imageSrc: `/static/frontend/badges/newsletter-badge.svg`,
+			};
+			const result = getBadgeFromSeriesTag(tagId);
+			expect(result).toMatchObject(expectedResult);
+		});
+
+		it('returns undefined if no standard or special badge match found for series tag', () => {
+			const tagId = 'lifeandstyle/home-and-garden';
+			const expectedResult = undefined;
+			const result = getBadgeFromSeriesTag(tagId);
+			expect(result).toEqual(expectedResult);
 		});
 	});
 
-	describe('Using branding', () => {
+	describe('getBadgeFromBranding function', () => {
 		it('returns properties of the first badge if all cards have the same sponsor', () => {
 			const branding = [brandingAmazon, brandingAmazon];
 
@@ -62,7 +89,7 @@ describe('Decide badge', () => {
 				imageSrc: brandingAmazon.logo.src,
 				href: brandingAmazon.logo.link,
 			};
-			const result = decideBadge('displayName', branding);
+			const result = getBadgeFromBranding(branding);
 			expect(result).toEqual(expectedResult);
 		});
 
@@ -70,20 +97,44 @@ describe('Decide badge', () => {
 			const branding = [brandingAmazon, brandingGuardianOrg];
 
 			const expectedResult = undefined;
-			const result = decideBadge('displayName', branding);
+			const result = getBadgeFromBranding(branding);
 			expect(result).toEqual(expectedResult);
 		});
 
 		it('returns undefined if no branding supplied', () => {
 			const expectedResult = undefined;
-			const result = decideBadge('displayName', []);
+			const result = getBadgeFromBranding([]);
 			expect(result).toEqual(expectedResult);
 		});
 	});
 
-	it('returns undefined if not using displayName or branding', () => {
-		const expectedResult = undefined;
-		const result = decideBadge('displayName', []);
-		expect(result).toEqual(expectedResult);
+	describe('decideBadge function', () => {
+		it('return series tag match if both seriesTag and branding provided', () => {
+			const branding = [brandingAmazon, brandingAmazon];
+			const tagId = 'uk-news/series/the-brexit-gamble';
+			const expectedResult = {
+				href: `/${tagId}`,
+				imageSrc: `/static/frontend/badges/EUReferendumBadge.svg`,
+			};
+			const result = decideBadge(branding, tagId);
+			expect(result).toMatchObject(expectedResult);
+		});
+
+		it('returns branding sponsor if branding but no series tag match', () => {
+			const branding = [brandingAmazon, brandingAmazon];
+
+			const expectedResult = {
+				imageSrc: brandingAmazon.logo.src,
+				href: brandingAmazon.logo.link,
+			};
+			const result = decideBadge(branding, 'seriesTag');
+			expect(result).toEqual(expectedResult);
+		});
+
+		it('returns undefined if no match by seriesTag or branding', () => {
+			const expectedResult = undefined;
+			const result = decideBadge([], 'seriesTag');
+			expect(result).toEqual(expectedResult);
+		});
 	});
 });

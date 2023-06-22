@@ -64,8 +64,8 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				displayName,
 				allCardsHaveBranding ? allBranding : [],
+				collection.config.href,
 			),
 			grouped: groupCards(
 				collectionType,
