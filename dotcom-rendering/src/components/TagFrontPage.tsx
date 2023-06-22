@@ -66,9 +66,6 @@ export const TagFrontPage = ({ tagFront, NAV }: Props) => {
 				<FetchCommentCounts repeat={true} />
 			</Island>
 			<Island clientOnly={true}>
-				<ShowHideContainers />
-			</Island>
-			<Island clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
 						tagFront.config.switches,

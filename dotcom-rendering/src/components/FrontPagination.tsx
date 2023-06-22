@@ -87,7 +87,10 @@ const paginationArrowsCss = css`
 	}
 `;
 
-const formatNumber = (number: number): string =>
+/**
+ * Adds commas to the number e.g 100000 to 1,000,000
+ */
+const formatNumberWithCommas = (number: number): string =>
 	number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 const getPageRange = (currentPage: number, lastPage: number) => {
@@ -128,7 +131,8 @@ export const FrontPagination = ({
 	return (
 		<div css={paginationWrapperCss}>
 			<span css={paginationLegendCss}>
-				About {formatNumber(totalContent)} results for {sectionName}
+				About {formatNumberWithCommas(totalContent)} results for{' '}
+				{sectionName}
 			</span>
 			<div css={paginationItemContainerCss}>
 				{currentPage > 1 && (
@@ -158,7 +162,6 @@ export const FrontPagination = ({
 								<span
 									css={[
 										paginationItemCss,
-
 										activePaginationItemCss,
 									]}
 								>
@@ -166,7 +169,7 @@ export const FrontPagination = ({
 								</span>
 							) : (
 								<a
-									css={[paginationItemCss]}
+									css={paginationItemCss}
 									href={
 										page !== currentPage
 											? getLink(pageId, page)

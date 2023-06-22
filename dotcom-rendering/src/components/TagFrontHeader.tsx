@@ -127,7 +127,7 @@ const containerStyles = css`
 			[title-end content-start]
 			repeat(8, 60px) [content-end]
 			repeat(2, 60px)
-			[ image-start]
+			[image-start]
 			repeat(2, 60px)
 			[image-end]
 			repeat(1, 60px)
