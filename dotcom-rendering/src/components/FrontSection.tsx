@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isString } from '@guardian/libs';
 import {
 	from,
 	neutral,
@@ -13,6 +14,8 @@ import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagFront';
+import { isAustralianTerritory, type Territory } from '../types/territory';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { FrontPagination } from './FrontPagination';
@@ -73,6 +76,8 @@ type Props = {
 	isOnPaidContentFront?: boolean;
 	/** Denotes the position of this section on the front */
 	index?: number;
+	/** Indicates if the container is targetted to a specific territory */
+	targetedTerritory?: Territory;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -112,8 +117,8 @@ const containerStyles = css`
 	grid-template-rows:
 		[headline-start show-hide-start] auto
 		[show-hide-end headline-end content-toggleable-start content-start] auto
-		[content-end content-toggleable-end show-more-start] auto
-		[show-more-end];
+		[content-end content-toggleable-end bottom-content-start] auto
+		[bottom-content-end];
 
 	grid-template-columns:
 		[decoration-start]
@@ -159,8 +164,8 @@ const containerStyles = css`
 			[headline-start show-hide-start content-start] auto
 			[show-hide-end content-toggleable-start] auto
 			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
-			[show-more-end];
+			[content-end content-toggleable-end treats-end bottom-content-start] auto
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -179,8 +184,8 @@ const containerStyles = css`
 			[headline-start content-start content-toggleable-start show-hide-start] auto
 			[show-hide-end] auto
 			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
-			[show-more-end];
+			[content-end content-toggleable-end treats-end bottom-content-start] auto
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -248,8 +253,8 @@ const sectionContentPadded = css`
 	}
 `;
 
-const sectionShowMore = css`
-	grid-row: show-more;
+const sectionBottomContent = css`
+	grid-row: bottom-content;
 	grid-column: content;
 `;
 
@@ -410,6 +415,7 @@ export const FrontSection = ({
 	pagination,
 	isOnPaidContentFront,
 	index,
+	targetedTerritory,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -554,9 +560,21 @@ export const FrontSection = ({
 				{children}
 			</div>
 
-			{/* TODO: Rename from 'sectionShowMore' to 'sectionBottomContent' */}
-			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
-				{showMore && (
+			<div
+				css={[
+					sectionContentPadded,
+					sectionBottomContent,
+					bottomPadding,
+				]}
+			>
+				{isString(targetedTerritory) &&
+				isAustralianTerritory(targetedTerritory) ? (
+					<Island deferUntil="interaction">
+						<AustralianTerritorySwitcher
+							targetedTerritory={targetedTerritory}
+						/>
+					</Island>
+				) : showMore ? (
 					<Island deferUntil="interaction">
 						<ShowMore
 							title={title}
@@ -569,7 +587,7 @@ export const FrontSection = ({
 							showAge={title === 'Headlines'}
 						/>
 					</Island>
-				)}
+				) : null}
 				{pagination && (
 					<FrontPagination
 						sectionName={pagination.sectionName}

@@ -5,6 +5,7 @@ import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
+import type { Territory } from './territory';
 import type { FETrailType, TrailType } from './trails';
 
 export interface FEFrontType {
@@ -348,6 +349,7 @@ export type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: FECollectionConfigType;
 	hasMore: boolean;
+	targetedTerritory?: Territory;
 };
 
 export type DCRCollectionType = {
@@ -372,6 +374,7 @@ export type DCRCollectionType = {
 	 **/
 	canShowMore?: boolean;
 	badge?: DCRBadgeType;
+	targetedTerritory?: Territory;
 };
 
 export type DCRGroupedTrails = {

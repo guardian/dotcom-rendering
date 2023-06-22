@@ -24,7 +24,11 @@ async function getContentFromURL(url, _headers) {
 	/** @type {HeadersInit} */
 	const headers = Object.fromEntries(
 		Object.entries(_headers)
-			.filter(([key]) => key.toLowerCase().startsWith('x-gu-'))
+			.filter(
+				([key]) =>
+					key.toLowerCase() === 'cookie' ||
+					key.toLowerCase().startsWith('x-gu-'),
+			)
 			.filter(isStringTuple),
 	);
 

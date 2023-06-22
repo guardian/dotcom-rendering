@@ -102,10 +102,7 @@ export const CollapseColumnButton = ({
 		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-cy={`column-collapse-${title}`}
-		data-link-name={nestedOphanComponents(
-			'nav2',
-			`column-toggle-${title}: show`,
-		)}
+		data-link-name={nestedOphanComponents('nav2', `secondary`, title)}
 	>
 		{title}
 	</label>
