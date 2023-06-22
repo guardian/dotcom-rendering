@@ -125,6 +125,11 @@ const headlineContainerStyles = css`
 	}
 `;
 
+const headlineContainerStylesWithPageSkin = css`
+	display: flex;
+	justify-content: space-between;
+`;
+
 const margins = css`
 	margin-top: ${space[2]}px;
 	/*
@@ -219,11 +224,9 @@ const ContainerTitleWithHide = ({
 		return containerTitle;
 	}
 	return (
-		<div css={headlineContainerStyles}>
-			<Hide when="above" breakpoint="leftCol">
-				{containerTitle}
-			</Hide>
-		</div>
+		<Hide when="above" breakpoint="leftCol">
+			{containerTitle}
+		</Hide>
 	);
 };
 
@@ -396,24 +399,34 @@ export const Section = ({
 					stretchRight={stretchRight}
 					format={format}
 				>
-					<ContainerTitleWithHide
-						title={title}
-						fontColour={fontColour ?? overrides?.text?.container}
-						description={description}
-						url={url}
-						containerPalette={containerPalette}
-						showDateHeader={showDateHeader}
-						editionId={editionId}
-						hasPageSkin={hasPageSkin}
-					/>
-					{toggleable && !!sectionId && (
-						<ShowHideButton
-							sectionId={sectionId}
-							overrideContainerToggleColour={
-								overrides?.text?.containerToggle
+					<div
+						css={
+							hasPageSkin
+								? headlineContainerStylesWithPageSkin
+								: headlineContainerStyles
+						}
+					>
+						<ContainerTitleWithHide
+							title={title}
+							fontColour={
+								fontColour ?? overrides?.text?.container
 							}
+							description={description}
+							url={url}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
+							hasPageSkin={hasPageSkin}
 						/>
-					)}
+						{toggleable && !!sectionId && (
+							<ShowHideButton
+								sectionId={sectionId}
+								overrideContainerToggleColour={
+									overrides?.text?.containerToggle
+								}
+							/>
+						)}
+					</div>
 					{toggleable && sectionId ? (
 						<div css={hiddenStyles} id={`container-${sectionId}`}>
 							{children}
