@@ -2,6 +2,10 @@ import { joinUrl } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { useApi } from '../lib/useApi';
 import { useDiscussion } from '../lib/useDiscussion';
+import {
+	getOptionsHeadersWithOkta,
+	useSignedInAuthState,
+} from '../lib/useSignedInAuthState';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
@@ -17,17 +21,23 @@ export const DiscussionMeta = ({
 	shortUrlId,
 	enableDiscussionSwitch,
 }: Props) => {
+	const [status, authState] = useSignedInAuthState();
+
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	// TODO Okta: getting user, migrate to access tokens
+	const options = getOptionsHeadersWithOkta(status, authState);
+
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		status !== 'Pending'
+			? joinUrl(
+					discussionApiUrl,
+					'profile/me?strict_sanctions_check=false',
+			  )
+			: undefined,
 		{},
-		{
-			credentials: 'include',
-		},
+		options,
 	);
 
 	const palette = decidePalette(format);

@@ -4,6 +4,27 @@ import type { CustomIdTokenClaims } from './identity';
 
 export type AuthStateStatus = 'Pending' | 'NotInTest' | 'Ready';
 
+export const getOptionsHeadersWithOkta = (
+	status: AuthStateStatus,
+	state: IdentityAuthState,
+): RequestInit => {
+	if (status === 'NotInTest') {
+		return {
+			credentials: 'include',
+		};
+	}
+
+	if (status === 'Ready' && state.accessToken?.accessToken) {
+		return {
+			headers: {
+				Authorization: `Bearer ${state.accessToken.accessToken}`,
+			},
+		};
+	}
+
+	return {};
+};
+
 export async function getAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {

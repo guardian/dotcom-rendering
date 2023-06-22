@@ -1,18 +1,27 @@
 import { joinUrl } from '@guardian/libs';
 import { useApi } from '../lib/useApi';
+import {
+	getOptionsHeadersWithOkta,
+	useSignedInAuthState,
+} from '../lib/useSignedInAuthState';
 import type { Props as DiscussionProps } from './Discussion';
 import { Discussion } from './Discussion';
 
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
+	const [status, authState] = useSignedInAuthState();
 	const { discussionApiUrl } = props;
 
-	// TODO OKTA: Discussion API call to migrate to use access token
+	const options = getOptionsHeadersWithOkta(status, authState);
+
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		status !== 'Pending'
+			? joinUrl(
+					discussionApiUrl,
+					'profile/me?strict_sanctions_check=false',
+			  )
+			: undefined,
 		{},
-		{
-			credentials: 'include',
-		},
+		options,
 	);
 	if (!data) return null;
 
