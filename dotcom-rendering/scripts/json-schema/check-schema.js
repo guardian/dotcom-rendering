@@ -20,7 +20,7 @@ const existingFrontSchema = fs.readFileSync(
 	{ encoding: 'utf-8' },
 );
 const existingTagFrontSchema = fs.readFileSync(
-	`${root}/src/model/front-schema.json`,
+	`${root}/src/model/tag-front-schema.json`,
 	{ encoding: 'utf-8' },
 );
 const existingNewsletterSchema = fs.readFileSync(
