@@ -56,7 +56,7 @@ const getOphanComponents = (
 	const doc = new DOMParser().parseFromString(html, 'text/html');
 	if (!doc) throw new Error('Unable to parse DOM');
 
-	return [...doc.querySelectorAll(`[${attribute}]`)].filter(
+	return [...doc.querySelectorAll(`[${attribute}]:not(.is-hidden,.is-hidden *)`)].filter(
 		(node): node is Element => node instanceof Element,
 	);
 };
