@@ -4702,6 +4702,11 @@
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-7.0.2.tgz#2eb124d14fff50d4686888dca88f130c5aee358d"
   integrity sha512-qkI8mFy9c8mxN2f01etayKhCaauL6RAsxRzbX1/pKj6UqhHWqqUbtHwymrv4hG5qDYjV1e9pd7ae5eNF8Kui0g==
 
+"@storybook/channels@7.0.23":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-7.0.23.tgz#4c57f5f43289ca21b6a713ff9c399c8abb6c868a"
+  integrity sha512-cCxR3Z84YQjsVMPgFTI+kDVNOlgXSDakwjkNFBznU+s2qhGW5eZt2g9YRDeVDQ6AjR4j4RrGhwddRq4lQZF2pg==
+
 "@storybook/cli@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/cli/-/cli-7.0.2.tgz#f96c42e7660b8f8f14595483036b3b5ef6724dc9"
@@ -4754,7 +4759,7 @@
     "@storybook/client-logger" "7.0.2"
     "@storybook/preview-api" "7.0.2"
 
-"@storybook/client-logger@7.0.10", "@storybook/client-logger@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+"@storybook/client-logger@7.0.10":
   version "7.0.10"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.10.tgz#941f6cf54638a422732b40ec31b2414872cdf4a8"
   integrity sha512-hb8tO+w28ErzjEw69ERMtZT81Xyg835FQjH6Y42ejoGcBA9Z0W6RZmx4RgkcIUOlYXkU6lSnNVne9gXodV4/Hw==
@@ -4765,6 +4770,13 @@
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.2.tgz#2701d862236f1b7ae181d9c168abc67cc79ea001"
   integrity sha512-rv7W2BhzIQHbFpUM5/CP/acS6T5lTmaxT0MbZ9n+9h++9QQU/cFOdkZgSUbLVAb1AeUGoLsk0HYzcqPpV35Xsw==
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
+"@storybook/client-logger@7.0.23", "@storybook/client-logger@^7.0.0-beta.0 || ^7.0.0-rc.0 || ^7.0.0":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.23.tgz#5db5d144d1948fd8c856195ee6a699c002046557"
+  integrity sha512-L287SRO8EaYOxTpryV7N/1WCL5I1IFs5Naiq3FpybhguUP7F3Si7KWvVdFmSW06K9jNj2IEQ/8zBRM8ra4ttyg==
   dependencies:
     "@storybook/global" "^5.0.0"
 
@@ -4797,6 +4809,20 @@
     "@storybook/global" "^5.0.0"
     "@storybook/theming" "7.0.2"
     "@storybook/types" "7.0.2"
+    memoizerific "^1.11.3"
+    use-resize-observer "^9.1.0"
+    util-deprecate "^1.0.2"
+
+"@storybook/components@7.0.23":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-7.0.23.tgz#0a8e17d76b4b6e67b6eea0747f567e5788b3e7c5"
+  integrity sha512-nEMWjqL34uDzQsHM/MJQt6IoeVzbyONeS14UsS/WKTVpnQvxYLeZAg/kyMwZsl28U25na3d+EhZKv/0mWXw5Nw==
+  dependencies:
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/csf" "^0.1.0"
+    "@storybook/global" "^5.0.0"
+    "@storybook/theming" "7.0.23"
+    "@storybook/types" "7.0.23"
     memoizerific "^1.11.3"
     use-resize-observer "^9.1.0"
     util-deprecate "^1.0.2"
@@ -5174,12 +5200,32 @@
     "@storybook/global" "^5.0.0"
     memoizerific "^1.11.3"
 
+"@storybook/theming@7.0.23":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.23.tgz#302158b05a771852ab98d10df2c40be358b9b887"
+  integrity sha512-hKmpjFS24YK0vl69KhqNauARTgxQu5mvlifHmu7xO80bigXi6NzA5VyyCMHO1SKVFJwPBVHHfauQCenSRm2PDQ==
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.23"
+    "@storybook/global" "^5.0.0"
+    memoizerific "^1.11.3"
+
 "@storybook/types@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/types/-/types-7.0.2.tgz#32ae7b9521d42617bd8fb87f3b85b0f77d2739f5"
   integrity sha512-0OCt/kAexa8MCcljxA+yZxGMn0n2U2Ync0KxotItqNbKBKVkaLQUls0+IXTWSCpC/QJvNZ049jxUHHanNi/96w==
   dependencies:
     "@storybook/channels" "7.0.2"
+    "@types/babel__core" "^7.0.0"
+    "@types/express" "^4.7.0"
+    file-system-cache "^2.0.0"
+
+"@storybook/types@7.0.23":
+  version "7.0.23"
+  resolved "https://registry.yarnpkg.com/@storybook/types/-/types-7.0.23.tgz#08ae3223e97ed1baa9aa715745a05ae83311425c"
+  integrity sha512-ziszL3OfhTT5PHE7kiQjWWx3Lw3qro8eLX+56dXDNgmft5LS66yEANcaA7OzxLnEgdyWSxJqgrVo6r0JwHp2Eg==
+  dependencies:
+    "@storybook/channels" "7.0.23"
     "@types/babel__core" "^7.0.0"
     "@types/express" "^4.7.0"
     file-system-cache "^2.0.0"
