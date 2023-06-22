@@ -23,7 +23,7 @@ const slowTags = [
 	'type/picture',
 	'lifeandstyle/series/last-bites',
 	'artanddesign/photography',
-];
+] as const;
 
 const frequencyThreshold = 0.8;
 
