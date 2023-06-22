@@ -75,6 +75,13 @@ type Props = {
 	index?: number;
 	/** Indicates if the container is targetted to a specific territory */
 	targetedTerritory?: Territory;
+	/** Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 * - if no background colour is specified use the default body background colour to prevent
+	 *   the page skin background showing through the containers
+	 */
 	hasPageSkin?: boolean;
 };
 

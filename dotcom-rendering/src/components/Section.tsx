@@ -99,7 +99,16 @@ type Props = {
 	 * without a left column
 	 */
 	fullWidth?: boolean;
+	/** Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 * - if no background colour is specified use the default body background colour to prevent
+	 *   the page skin background showing through the containers
+	 */
 	hasPageSkin?: boolean;
+	/** When there is a page skin in some special cases we still want the container to take full
+	 * width but the content to constrain itself e.g. Header */
 	hasPageSkinContentSelfConstrain?: boolean;
 	/**
 	 * @deprecated Do not use
