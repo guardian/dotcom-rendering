@@ -5,6 +5,7 @@ import { between, from } from '@guardian/source-foundations';
 const sizingStyles = css`
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 	justify-content: space-between;
 `;
 
@@ -72,18 +73,11 @@ export const ContentWrapper = ({
 	imagePosition,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
-	const isVertical = imagePosition === 'top' || imagePosition === 'bottom';
 	return (
 		<div
 			css={[
 				sizingStyles,
 				isHorizontal && flexBasisStyles({ imageSize, imageType }),
-				/* If the image is top or bottom positioned then it takes 100% of the width and
-				   we want the content to grow into the remaining vertical space */
-				isVertical &&
-					css`
-						flex-grow: 1;
-					`,
 			]}
 		>
 			{children}

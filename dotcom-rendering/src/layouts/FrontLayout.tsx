@@ -36,6 +36,7 @@ import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import {
+	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
@@ -99,7 +100,7 @@ const decideAdSlot = (
 		return (
 			<Hide from="tablet">
 				<AdSlot
-					index={index}
+					index={mobileAdPositions.indexOf(index)}
 					data-print-layout="hide"
 					position="mobile-front"
 					display={format}
@@ -134,6 +135,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
+		: [];
+
+	const desktopAdPositions = renderAds
+		? getDesktopAdPositions(front.pressedPage.collections)
 		: [];
 
 	const showMostPopular =
@@ -279,6 +284,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
 
+					const trailsWithoutBranding = collection.badge
+						? trails.map((labTrail) => {
+								return {
+									...labTrail,
+									branding: undefined,
+								};
+						  })
+						: trails;
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -297,7 +311,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType
 											}
 										>
-											<Snap snapData={trail.snapData} />
+											<Snap
+												snapData={trail.snapData}
+												dataLinkName={
+													trail.dataLinkName
+												}
+											/>
 										</Section>
 									</SnapCssSandbox>
 								)}
@@ -384,15 +403,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const trailsWithoutBranding = collection.badge
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
-
 						return (
 							<LabsSection
 								key={ophanName}
@@ -411,12 +421,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={false}
 								/>
 							</LabsSection>
@@ -465,10 +475,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ajaxUrl={front.config.ajaxUrl}
 								isOnPaidContentFront={isPaidContent}
 								index={index}
+								targetedTerritory={collection.targetedTerritory}
 							>
 								<DecideContainer
-									trails={trails}
-									index={index}
+									trails={trailsWithoutBranding}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
@@ -477,6 +487,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
 								/>
 							</FrontSection>

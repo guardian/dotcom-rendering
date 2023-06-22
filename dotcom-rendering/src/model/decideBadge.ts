@@ -73,11 +73,14 @@ const findSpecialBadgeBySeriesTag = (
  * Construct a badge based on the series tag or container branding
  */
 export const decideBadge = (
-	tagId: string,
 	allBranding: Branding[],
+	tagId?: string,
 ): DCRBadgeType | undefined => {
-	const result =
-		getBadgeFromSeriesTag(tagId) ?? getBadgeFromBranding(allBranding);
-
-	return result;
+	if (tagId) {
+		return (
+			getBadgeFromSeriesTag(tagId) ?? getBadgeFromBranding(allBranding)
+		);
+	} else {
+		return getBadgeFromBranding(allBranding);
+	}
 };
