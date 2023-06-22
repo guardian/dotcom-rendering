@@ -50,8 +50,6 @@ export const NewslettersPageHeading = ({
 	return (
 		<Section
 			element="header"
-			fullWidth={false}
-			padBottom={false}
 			padSides={false}
 			stretchRight={true}
 			verticalMargins={false}
