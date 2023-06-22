@@ -6,10 +6,10 @@ import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 type PlayButtonSize = keyof typeof sizes;
 
 const sizes = {
-	small: { button: 28, icon: 26 },
-	medium: { button: 44, icon: 36 },
-	large: { button: 48, icon: 40 },
-	xlarge: { button: 60, icon: 54 },
+	small: { button: 40, icon: 32 },
+	medium: { button: 80, icon: 72 },
+	large: { button: 80, icon: 72 },
+	xlarge: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconWrapperStyles = css`
