@@ -82,7 +82,6 @@ export const AdConsent = () => {
 				layout="nodisplay"
 				id="consent"
 				style={{ background: 'none' }}
-				data-block-on-consent="_till_responded"
 			>
 				<JsonScript
 					o={{
