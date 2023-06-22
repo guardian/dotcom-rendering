@@ -58,13 +58,15 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 		),
 		speed,
 		// Pagination information comes from the first tag
-		pagination: data.tags.tags[0]?.pagination
-			? {
-					...data.tags.tags[0]?.pagination,
-					sectionName: data.webTitle,
-					pageId: data.pageId,
-			  }
-			: undefined,
+		pagination:
+			data.tags.tags[0]?.pagination &&
+			data.tags.tags[0].pagination.lastPage > 1
+				? {
+						...data.tags.tags[0]?.pagination,
+						sectionName: data.webTitle,
+						pageId: data.pageId,
+				  }
+				: undefined,
 		trendingTopics: extractTrendingTopics(data.contents),
 		header: {
 			title: data.webTitle,
