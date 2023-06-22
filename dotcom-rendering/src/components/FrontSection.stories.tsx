@@ -236,10 +236,11 @@ export const MultipleOnAPaidFront = () => {
 	);
 };
 MultipleOnAPaidFront.storyName = 'two sections on a paid front';
+
 export const PageSkinStory = () => {
 	return (
 		<FrontSection title="Page Skin" hasPageSkin={true}>
-			<Placeholder />
+			<Placeholder text="Page skins constrain my layout to desktop" />
 		</FrontSection>
 	);
 };

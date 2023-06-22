@@ -18,7 +18,13 @@ export default {
 	},
 };
 
-const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
+const Grey = ({
+	heightInPixels = 400,
+	text = 'Insert content here',
+}: {
+	heightInPixels?: number;
+	text?: string;
+}) => (
 	<div
 		css={css`
 			background-color: lightgrey;
@@ -31,7 +37,7 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 			font-weight: 200;
 		`}
 	>
-		Insert content here
+		{text}
 	</div>
 );
 
@@ -314,7 +320,7 @@ TreatsStory.storyName = 'with treats and date header';
 export const PageSkinStory = () => {
 	return (
 		<Section title="Page Skin" hasPageSkin={true}>
-			<Grey />
+			<Grey text="Page skins constrain my layout to desktop" />
 		</Section>
 	);
 };
