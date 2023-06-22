@@ -45,8 +45,8 @@ const getTags = (trails: FEFrontCard[], pageId: string): FETagType[] =>
 		.filter((tag) => tag.properties.id !== pageId)
 		.filter((tag) => {
 			return (
-				tag.properties.paidContentType?.includes('Keyword') ??
-				tag.properties.paidContentType?.includes('Topic') ??
+				!!tag.properties.paidContentType?.includes('Keyword') ||
+				!!tag.properties.paidContentType?.includes('Topic') ||
 				tag.properties.tagType === 'Keyword'
 			);
 		});
