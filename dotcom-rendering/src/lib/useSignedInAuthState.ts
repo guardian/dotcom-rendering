@@ -26,6 +26,7 @@ export const getOptionsHeadersWithOkta = (
 		return {
 			headers: {
 				Authorization: `Bearer ${authStatus.authState.accessToken.accessToken}`,
+				'X-GU-IS-OAUTH': 'true',
 			},
 		};
 	}
