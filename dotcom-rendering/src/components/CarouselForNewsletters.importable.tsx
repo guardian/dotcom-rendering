@@ -28,12 +28,8 @@ type Props = {
 	titleHighlightColour: string;
 };
 
-// TO DO - this file was copied from the Caroursel component and duplicates much of the code
-// the styling and sub components could all be move to a shared file. (subject to next point)
-
-// TO DO - the component uses data-component and data-link attributes to send tracking to Ophan
-// would data design want that for the newsletters page? will we need extra props so they know which
-// carousel the user interacted with?
+// TO DO - this file was adapted from the Caroursel component and duplicates much of the code
+// the styling and sub components could all be move to a shared file.
 
 // Carousel icons - need replicating from source for centring
 
@@ -503,7 +499,7 @@ export const CarouselForNewsletters = ({
 			css={wrapperStyle(newsletters.length)}
 			data-link-name={formatAttrString(heading)}
 		>
-			<LeftColumn borderType="partial" size={'wide'}>
+			<LeftColumn borderType="partial" size={leftColSize}>
 				<HeaderAndNav
 					heading={heading}
 					newsletters={newsletters}
