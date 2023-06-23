@@ -457,8 +457,7 @@ export const Lightbox = ({ format, images }: Props) => {
 												format={format}
 												isLightbox={true}
 												captionText={
-													image.lightbox?.caption ??
-													image.data.alt
+													image.lightbox?.caption
 												}
 												credit={image.lightbox?.credit}
 												displayCredit={
