@@ -21,7 +21,7 @@ const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+/;
 /** This is imperfect, but covers *some* cases of tag fronts, consider expanding in the future */
-const TAG_FRONT_URL = /^\/(tone|series)\/[a-z-]+/;
+const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
 
