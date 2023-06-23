@@ -5,6 +5,7 @@ import { AdSlot } from './AdSlot';
 
 type Props = {
 	children: React.ReactNode;
+	hasPageSkin?: boolean;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -26,19 +27,38 @@ const fixedWidths = css`
 	}
 `;
 
-export const MostViewedFooterLayout = ({ children }: Props) => {
+const fixedWidthsPageSkin = css`
+	width: 100%;
+	${from.desktop} {
+		min-width: 627px;
+	}
+`;
+
+const mostPopMargin = css`
+	margin: 9px 0 0 10px;
+	${from.leftCol} {
+		margin: 6px 0 0 10px;
+	}
+`;
+
+const mostPopMarginWithPageSkin = css`
+	margin: 9px 0 0 10px;
+`;
+
+export const MostViewedFooterLayout = ({
+	children,
+	hasPageSkin = false,
+}: Props) => {
 	return (
 		<div
 			data-print-layout="hide"
 			className="content-footer"
 			css={stackBelow('desktop')}
 		>
-			<div css={fixedWidths}>{children}</div>
-			<div
-				css={css`
-					margin: 6px 0 0 10px;
-				`}
-			>
+			<div css={hasPageSkin ? fixedWidthsPageSkin : fixedWidths}>
+				{children}
+			</div>
+			<div css={hasPageSkin ? mostPopMarginWithPageSkin : mostPopMargin}>
 				<AdSlot position="mostpop" />
 			</div>
 		</div>

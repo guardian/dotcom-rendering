@@ -23,6 +23,7 @@ import { LatestLinks } from '../LatestLinks.importable';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
+import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
@@ -357,6 +358,7 @@ export const Card = ({
 								font-size: inherit;
 								line-height: inherit;
 								text-decoration: none;
+								min-height: 10px;
 							`}
 						/>
 					) : undefined
@@ -378,7 +380,11 @@ export const Card = ({
 	});
 
 	if (snapData?.embedHtml) {
-		return <Snap snapData={snapData} />;
+		return (
+			<SnapCssSandbox snapData={snapData}>
+				<Snap snapData={snapData} dataLinkName={dataLinkName} />
+			</SnapCssSandbox>
+		);
 	}
 
 	const image = getImage({

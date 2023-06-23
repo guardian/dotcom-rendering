@@ -19,7 +19,7 @@ deployments:
           InstanceType: t4g.small
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering-ARM-node16
+          Recipe: dotcom-rendering-ARM-jammy-node-18
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:

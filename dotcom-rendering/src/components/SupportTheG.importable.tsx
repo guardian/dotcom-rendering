@@ -37,6 +37,8 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import type { SignedInStatus } from '../lib/useSignedInStatus';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -50,6 +52,7 @@ type Props = {
 		support: string;
 		contribute: string;
 	};
+	hasPageSkin?: boolean;
 };
 
 const headerStyles = css`
@@ -77,16 +80,17 @@ const headerStyles = css`
 	}
 `;
 
-const messageStyles = (isThankYouMessage: boolean) => css`
+const messageStylesUntilLeftCol = css`
 	color: ${brandAlt[400]};
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	padding-top: 3px;
 	margin-bottom: 3px;
-
 	${from.desktop} {
 		${headline.xsmall({ fontWeight: 'bold' })}
 	}
+`;
 
+const messageStylesFromLeftCol = (isThankYouMessage: boolean) => css`
 	${from.leftCol} {
 		${isThankYouMessage
 			? headline.small({ fontWeight: 'bold' })
@@ -163,6 +167,17 @@ type ReaderRevenueLinksRemoteProps = {
 	ophanRecord: OphanRecordFunction;
 };
 
+function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
+	switch (signedInStatus) {
+		case 'Pending':
+			return undefined;
+		case 'SignedIn':
+			return true;
+		case 'NotSignedIn':
+			return false;
+	}
+}
+
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
@@ -173,11 +188,11 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
+	const isSignedIn = getIsSignedIn(useSignedInStatus());
 
 	useOnce((): void => {
 		setAutomat();
 
-		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
@@ -194,7 +209,7 @@ const ReaderRevenueLinksRemote = ({
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				purchaseInfo: getPurchaseInfo(),
-				isSignedIn,
+				isSignedIn: isSignedIn === true,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
@@ -257,6 +272,7 @@ type ReaderRevenueLinksNativeProps = {
 	};
 	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
+	hasPageSkin: boolean;
 };
 
 const ReaderRevenueLinksNative = ({
@@ -266,6 +282,7 @@ const ReaderRevenueLinksNative = ({
 	urls,
 	ophanRecord,
 	pageViewId,
+	hasPageSkin,
 }: ReaderRevenueLinksNativeProps) => {
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
@@ -320,7 +337,15 @@ const ReaderRevenueLinksNative = ({
 		return (
 			<div css={inHeader && headerStyles}>
 				<div css={inHeader && hiddenUntilTablet}>
-					<div css={messageStyles(true)}> Thank you </div>
+					<div
+						css={[
+							messageStylesUntilLeftCol,
+							!hasPageSkin && messageStylesFromLeftCol(true),
+						]}
+					>
+						{' '}
+						Thank you{' '}
+					</div>
 					<div css={subMessageStyles}>
 						Your support powers our independent journalism
 					</div>
@@ -361,7 +386,12 @@ const ReaderRevenueLinksNative = ({
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
 			<div css={inHeader && hiddenUntilTablet}>
-				<div css={messageStyles(false)}>
+				<div
+					css={[
+						messageStylesUntilLeftCol,
+						!hasPageSkin && messageStylesFromLeftCol(false),
+					]}
+				>
 					<span>Support the&nbsp;Guardian</span>
 				</div>
 				<div css={subMessageStyles}>
@@ -385,6 +415,7 @@ export const SupportTheG = ({
 	remoteHeader,
 	urls,
 	contributionsServiceUrl,
+	hasPageSkin = false,
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
 	const pageViewId = window.guardian.config.ophan.pageViewId;
@@ -422,6 +453,7 @@ export const SupportTheG = ({
 				urls={urls}
 				ophanRecord={ophanRecord}
 				pageViewId={pageViewId}
+				hasPageSkin={hasPageSkin}
 			/>
 		);
 	}

@@ -6,6 +6,7 @@ import type { DCRContainerPalette } from '../../../types/front';
 type Direction = 'row' | 'column' | 'row-reverse';
 
 const ulStyles = (direction: Direction) => css`
+	width: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: ${direction};

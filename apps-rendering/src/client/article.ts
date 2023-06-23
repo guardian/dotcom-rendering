@@ -2,7 +2,6 @@
 
 import './liveblog';
 
-import { AudioAtom } from '@guardian/atoms-rendering';
 import { Topic } from '@guardian/bridget/Topic';
 import {
 	ads,
@@ -29,7 +28,6 @@ import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
-import { hydrate as hydrateAtoms } from './atoms';
 import { callouts } from './callouts';
 import { initSignupForms } from './newsletterSignupForm';
 
@@ -187,24 +185,6 @@ function hasSeenCards(): void {
 	});
 }
 
-function initAudioAtoms(): void {
-	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
-		const id = atom.getAttribute('id');
-		const trackUrl = atom.getAttribute('trackurl');
-		const kicker = atom.getAttribute('kicker');
-		const title = atom.getAttribute('title');
-		const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
-		// Work required to provide the audio atom duration server side.
-		const duration = parseInt(atom.getAttribute('duration') ?? '0');
-		if (id && trackUrl && kicker && title && pillar) {
-			ReactDOM.hydrate(
-				h(AudioAtom, { id, trackUrl, pillar, kicker, title, duration }),
-				atom,
-			);
-		}
-	});
-}
-
 function richLinks(): void {
 	document
 		.querySelectorAll('.js-rich-link[data-article-id]')
@@ -292,8 +272,6 @@ footerInit();
 insertEpic();
 callouts();
 hasSeenCards();
-initAudioAtoms();
-hydrateAtoms();
 richLinks();
 hydrateClickToView();
 void initSignupForms();

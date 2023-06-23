@@ -5,6 +5,7 @@ import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
+import type { Territory } from './territory';
 import type { FETrailType, TrailType } from './trails';
 
 export interface FEFrontType {
@@ -98,6 +99,21 @@ export type FEContainerPalette =
 	| 'Branded'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette';
+
+export type FEFrontCardStyle =
+	| 'SpecialReport'
+	| 'SpecialReportAlt'
+	| 'LiveBlog'
+	| 'DeadBlog'
+	| 'Feature'
+	| 'Editorial'
+	| 'Comment'
+	| 'Media'
+	| 'Analysis'
+	| 'Review'
+	| 'Letters'
+	| 'ExternalLink'
+	| 'DefaultCardstyle';
 
 export type DCRContainerPalette =
 	| 'EventPalette'
@@ -218,7 +234,7 @@ export type FEFrontCard = {
 	card: {
 		id: string;
 		cardStyle: {
-			type: string;
+			type: FEFrontCardStyle;
 		};
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
@@ -245,7 +261,7 @@ export type FEFrontCard = {
 	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
-		type: string;
+		type: FEFrontCardStyle;
 	};
 	type: string;
 };
@@ -334,6 +350,7 @@ export type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: FECollectionConfigType;
 	hasMore: boolean;
+	targetedTerritory?: Territory;
 };
 
 export type DCRCollectionType = {
@@ -358,6 +375,7 @@ export type DCRCollectionType = {
 	 **/
 	canShowMore?: boolean;
 	badge?: DCRBadgeType;
+	targetedTerritory?: Territory;
 };
 
 export type DCRGroupedTrails = {
