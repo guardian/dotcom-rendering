@@ -468,6 +468,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
+								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
 									<Carousel
