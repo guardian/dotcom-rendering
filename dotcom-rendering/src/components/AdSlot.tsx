@@ -46,7 +46,7 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-export const individualLabelCSS = css`
+const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
@@ -120,15 +120,26 @@ export const labelStyles = css`
 		padding: 0;
 		border: 0;
 	}
+
+	.ad-slot--interscroller[data-label-show='true']::before {
+		content: 'Advertisement';
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		border: 0;
+		display: block;
+		${individualLabelCSS}
+	}
 `;
 
-export const adContainerCollapseStyles = css`
+const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
 	}
 `;
 
-export const adSlotCollapseStyles = css`
+const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}

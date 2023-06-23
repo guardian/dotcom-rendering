@@ -1,12 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial/dist/esm/core/constants';
 import { border, neutral, space } from '@guardian/source-foundations';
-import {
-	adContainerCollapseStyles,
-	AdSlot,
-	labelHeight,
-	labelStyles,
-} from './AdSlot';
+import { adContainerStyles, AdSlot, labelHeight } from './AdSlot';
 import { Hide } from './Hide';
 
 const headerWrapper = css`
@@ -54,12 +49,9 @@ export const HeaderAdSlot = () => (
 			`}
 		/>
 		<Hide when="below" breakpoint="tablet">
-			<div
-				css={[headerAdWrapper, labelStyles]}
-				className="top-banner-ad-container"
-			>
+			<div css={[headerAdWrapper]} className="top-banner-ad-container">
 				<div
-					css={[adSlotContainer, adContainerCollapseStyles]}
+					css={[adSlotContainer, adContainerStyles]}
 					className="ad-slot-container"
 				>
 					<AdSlot position="top-above-nav" />
