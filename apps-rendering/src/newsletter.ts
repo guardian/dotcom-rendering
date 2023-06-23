@@ -166,12 +166,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 		possibleElementsToPlaceBefore.length - 1,
 	);
 
-	return insertPosition.either(
-		(err) => Result.err(err),
-		(categoryAndIndex) => {
-			return Result.ok(categoryAndIndex.index);
-		},
-	);
+	return insertPosition.map((categoryAndIndex) => categoryAndIndex.index);
 }
 
 // ----- Procedures ----- //

@@ -1,15 +1,6 @@
 // ----- Imports ----- //
 
 import { css, jsx as styledH } from '@emotion/react';
-import {
-	AudioAtom,
-	ChartAtom,
-	ExplainerAtom,
-	GuideAtom,
-	ProfileAtom,
-	QandaAtom,
-	TimelineAtom,
-} from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
@@ -25,22 +16,14 @@ import {
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
-import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
-	AudioAtom as AudioAtomElement,
 	BodyElement,
-	GuideAtom as GuideAtomElement,
 	Image,
-	InteractiveAtom as InteractiveAtomElement,
 	MediaAtom as MediaAtomElement,
-	ProfileAtom as ProfileAtomElement,
-	QandaAtom as QandaAtomElement,
 	Text,
-	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/Anchor';
-import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
 import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
@@ -56,10 +39,6 @@ import FigCaption from 'components/FigCaption';
 import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
-import InteractiveAtom, {
-	atomCss,
-	atomScript,
-} from 'components/InteractiveAtom';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
@@ -455,109 +434,6 @@ const textRenderer = (
 		: renderText(element.doc, format, isEditions);
 };
 
-const guideAtomRenderer = (
-	format: ArticleFormat,
-	element: GuideAtomElement,
-): ReactNode => {
-	return h(GuideAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const qandaAtomRenderer = (
-	format: ArticleFormat,
-	element: QandaAtomElement,
-): ReactNode => {
-	return h(QandaAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const profileAtomRenderer = (
-	format: ArticleFormat,
-	element: ProfileAtomElement,
-): ReactNode => {
-	return h(ProfileAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const timelineAtomRenderer = (
-	format: ArticleFormat,
-	element: TimelineAtomElement,
-): ReactNode => {
-	return h(TimelineAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const interactiveAtomRenderer = (
-	format: ArticleFormat,
-	element: InteractiveAtomElement,
-): ReactNode => {
-	const { html, css: styles, js } = element;
-	if (format.design !== ArticleDesign.Interactive) {
-		const fenced = `
-			<html>
-				<head>
-					<meta charset="utf-8">
-					<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-					<style>${styles}</style>
-					<style>${atomCss}</style>
-				</head>
-				<body>
-					${html}
-					<script>${withDefault('')(js)}</script>
-					<script>${atomScript}</script>
-				</body>
-			</html>
-		`;
-		return h('iframe', { srcdoc: fenced });
-	} else {
-		return h(InteractiveAtom, { html, styles, js, format });
-	}
-};
-
 const mediaAtomRenderer = (
 	format: ArticleFormat,
 	element: MediaAtomElement,
@@ -602,28 +478,6 @@ const mediaAtomRenderer = (
 			: styledH('div', attributes),
 		figcaption,
 	]);
-};
-
-const audioAtomRenderer = (
-	format: ArticleFormat,
-	element: AudioAtomElement,
-): ReactNode => {
-	const pillar = themeToPillar(format.theme);
-	const audioAtomStyles = css`
-		figure {
-			margin: 0;
-		}
-	`;
-	return styledH(
-		'div',
-		{
-			...element,
-			pillar,
-			className: 'js-audio-atom',
-			css: audioAtomStyles,
-		},
-		h(AudioAtom, { ...element, pillar, duration: 0 }),
-	);
 };
 
 const renderElement =
@@ -674,38 +528,21 @@ const renderElement =
 					editions: false,
 				});
 
-			case ElementKind.ExplainerAtom: {
-				return h(ExplainerAtom, { ...element });
-			}
-
+			// These atoms are not supported in AR.
+			case ElementKind.ExplainerAtom:
 			case ElementKind.GuideAtom:
-				return guideAtomRenderer(format, element);
-
 			case ElementKind.QandaAtom:
-				return qandaAtomRenderer(format, element);
-
 			case ElementKind.ProfileAtom:
-				return profileAtomRenderer(format, element);
-
 			case ElementKind.TimelineAtom:
-				return timelineAtomRenderer(format, element);
-
-			case ElementKind.ChartAtom: {
-				return h(ChartAtom, { ...element });
-			}
-
+			case ElementKind.ChartAtom:
 			case ElementKind.InteractiveAtom:
-				return interactiveAtomRenderer(format, element);
+			case ElementKind.AudioAtom:
+			case ElementKind.KnowledgeQuizAtom:
+			case ElementKind.PersonalityQuizAtom:
+				return null;
 
 			case ElementKind.MediaAtom:
 				return mediaAtomRenderer(format, element, false);
-
-			case ElementKind.AudioAtom:
-				return audioAtomRenderer(format, element);
-
-			case ElementKind.KnowledgeQuizAtom:
-			case ElementKind.PersonalityQuizAtom:
-				return h(Quiz, { format, element });
 
 			case ElementKind.NewsletterSignUp:
 				return h(NewsletterSignup, {
