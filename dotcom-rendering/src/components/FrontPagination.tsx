@@ -89,24 +89,18 @@ const paginationArrowsCss = css`
 `;
 
 const getPageRange = (currentPage: number, lastPage: number) => {
-	const pageRange: number[] = [];
-
 	// Safety function to check we're within bounds
-	const pushIfValid = (...items: number[]) => {
-		items.forEach((item) => {
-			if (item > 0 && item <= lastPage) pageRange.push(item);
-		});
-	};
+	const isValid = (item: number) => item > 0 && item <= lastPage;
 
 	if (currentPage === 1 || currentPage === 2 || currentPage === 3) {
-		pushIfValid(1, 2, 3, 4);
+		return [1, 2, 3, 4].filter(isValid);
 	} else if (currentPage + 2 >= lastPage) {
-		pushIfValid(1, lastPage - 2, lastPage - 1, lastPage);
+		return [1, lastPage - 2, lastPage - 1, lastPage].filter(isValid);
 	} else {
-		pushIfValid(1, currentPage - 1, currentPage, currentPage + 1);
+		return [1, currentPage - 1, currentPage, currentPage + 1].filter(
+			isValid,
+		);
 	}
-
-	return pageRange;
 };
 
 const getLink = (pageId: string, pageNo: number) => {
@@ -144,7 +138,6 @@ export const FrontPagination = ({
 
 					// If this is the last item and we're not at the last page yet
 					const shouldSuffixDots =
-						/* pageRange[index + 1] !== page + 1 || */
 						index === pageRange.length - 1 && page !== lastPage;
 
 					return (
