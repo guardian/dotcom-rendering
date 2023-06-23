@@ -64,8 +64,8 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				displayName,
 				allCardsHaveBranding ? allBranding : [],
+				collection.config.href,
 			),
 			grouped: groupCards(
 				collectionType,
@@ -92,6 +92,7 @@ export const enhanceCollections = (
 				showDateHeader: collection.config.showDateHeader,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
+			targetedTerritory: collection.targetedTerritory,
 		};
 	});
 };

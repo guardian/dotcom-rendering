@@ -13,6 +13,7 @@ type Props = {
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionName?: string;
+	hasPageSkin?: boolean;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -48,6 +49,7 @@ export const MostViewedFooter = ({
 	variantFromRunnable,
 	sectionName,
 	selectedColour,
+	hasPageSkin = false,
 }: Props) => {
 	return (
 		<div
@@ -62,6 +64,7 @@ export const MostViewedFooter = ({
 				data={tabs}
 				sectionName={sectionName}
 				selectedColour={selectedColour}
+				hasPageSkin={hasPageSkin}
 			/>
 			<div css={[stackBelow('tablet'), secondTierStyles]}>
 				{mostCommented && (

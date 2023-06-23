@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
 import { useSignedInStatus } from '../lib/useSignedInStatus';
@@ -20,9 +21,10 @@ interface HeaderTopBarProps {
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
 	isInEuropeTest: boolean;
+	hasPageSkin?: boolean;
 }
 
-const topBarStyles = css`
+const topBarStylesUntilLeftCol = css`
 	display: flex;
 	height: 30px;
 	background-color: ${brand[300]};
@@ -39,6 +41,9 @@ const topBarStyles = css`
 		justify-content: flex-end;
 		padding-right: ${space[5]}px;
 	}
+`;
+
+const topBarStylesFromLeftCol = css`
 	${from.wide} {
 		padding-right: 96px;
 	}
@@ -68,6 +73,7 @@ export const HeaderTopBar = ({
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
+	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const isSignedIn = useSignedInStatus() === 'SignedIn';
 
@@ -77,7 +83,13 @@ export const HeaderTopBar = ({
 				background-color: ${brand[300]};
 			`}
 		>
-			<div css={[topBarStyles, center]}>
+			<div
+				css={[
+					topBarStylesUntilLeftCol,
+					!hasPageSkin && topBarStylesFromLeftCol,
+					hasPageSkin ? pageSkinContainer : center,
+				]}
+			>
 				<HeaderTopBarPrintSubscriptions editionId={editionId} />
 				<MyAccount
 					mmaUrl={mmaUrl ?? 'https://manage.theguardian.com'}

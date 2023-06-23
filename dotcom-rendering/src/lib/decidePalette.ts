@@ -205,6 +205,14 @@ const textByline = (format: ArticleFormat): string => {
 							return pillarPalette[format.theme].main;
 					}
 				}
+				case ArticleDesign.Gallery: {
+					switch (format.theme) {
+						case ArticlePillar.Culture:
+							return pillarPalette[format.theme].bright;
+						default:
+							return pillarPalette[format.theme].main;
+					}
+				}
 				case ArticleDesign.Interview:
 					return BLACK;
 				default:
