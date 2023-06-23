@@ -264,8 +264,6 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-const adStyles = [labelStyles, fluidAdStyles, adContainerCollapseStyles];
-
 export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
 
 export const AdSlot = ({
@@ -296,7 +294,6 @@ export const AdSlot = ({
 									'ad-slot--rendered',
 									'js-sticky-mpu',
 								].join(' ')}
-								css={adStyles}
 								data-link-name="ad slot right"
 								data-name="right"
 								aria-hidden="true"
@@ -308,7 +305,7 @@ export const AdSlot = ({
 					return (
 						<TopRightAdSlot
 							isPaidContent={isPaidContent}
-							adStyles={adStyles}
+							adStyles={[labelStyles]}
 						/>
 					);
 				}
@@ -328,7 +325,6 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 							'js-sticky-mpu',
 						].join(' ')}
-						css={[adStyles]}
 						data-link-name="ad slot comments"
 						data-name="comments"
 						aria-hidden="true"
@@ -355,7 +351,11 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					css={[
+						fluidAdStyles,
+						fluidFullWidthAdStyles,
+						adSlotAboveNav,
+					]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
@@ -374,7 +374,7 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[adStyles, mostPopAdStyles]}
+						css={[mostPopAdStyles]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"
@@ -404,7 +404,7 @@ export const AdSlot = ({
 						].join(' ')}
 						css={[
 							merchandisingAdStyles,
-							adStyles,
+							fluidAdStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
@@ -435,7 +435,7 @@ export const AdSlot = ({
 						].join(' ')}
 						css={[
 							merchandisingAdStyles,
-							adStyles,
+							fluidAdStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name="ad slot merchandising"
@@ -481,7 +481,6 @@ export const AdSlot = ({
 							css`
 								position: relative;
 							`,
-							adStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
@@ -507,8 +506,6 @@ export const AdSlot = ({
 							css`
 								position: relative;
 							`,
-							adStyles,
-							adSlotCollapseStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
@@ -540,7 +537,6 @@ export const AdSlot = ({
 								width: 300px;
 								margin: 12px auto;
 							`,
-							adStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
