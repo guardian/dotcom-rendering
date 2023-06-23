@@ -62,16 +62,19 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 							emotionCache,
 						).then((hydrationHappened) => {
 							// Sometimes an element will already have been hydrated in which case
-							// hydrationHappend is false
+							// hydrationHappend is false and we can skip this
 							if (hydrationHappened) {
 								/**
 								 * The doHydration function starts the hydration process but it
 								 * only waits for the import to complete, not for the evaluation or
 								 * execution of any island javascript. The mouse event fired here is,
 								 * probably, dependent on that javascript setting up listeners, so
-								 * we have a race condition. By waiting 150ms we are likely to win
-								 * the race in most cases but if we don't, a second click attempt
-								 * will be needed
+								 * we have a race condition.
+								 *
+								 * We can dispatch this click below but the the code that listens for
+								 * it might not be ready. By waiting 150ms before trying we workaround
+								 * this race condition. In the event that the listener still isn't
+								 * ready even after 150ms then the user will have to click again.
 								 */
 								setTimeout(() => {
 									targetElement.dispatchEvent(
