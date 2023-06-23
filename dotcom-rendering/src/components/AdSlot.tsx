@@ -266,6 +266,8 @@ const mobileStickyAdStyles = css`
 
 const adStyles = [labelStyles, fluidAdStyles, adContainerCollapseStyles];
 
+export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
+
 export const AdSlot = ({
 	position,
 	display,
@@ -280,7 +282,10 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div className="ad-slot-container" css={[adStyles]}>
+						<div
+							className="ad-slot-container"
+							css={[adContainerStyles]}
+						>
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -312,7 +317,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -359,7 +364,7 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -387,7 +392,7 @@ export const AdSlot = ({
 							justify-content: center;
 						`,
 						hasPageskin && pageSkinContainer,
-						adStyles,
+						adContainerStyles,
 					]}
 				>
 					<div
@@ -418,7 +423,7 @@ export const AdSlot = ({
 							display: flex;
 							justify-content: center;
 						`,
-						adStyles,
+						adContainerStyles,
 					]}
 				>
 					<div
@@ -462,7 +467,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -488,7 +493,7 @@ export const AdSlot = ({
 		case 'liveblog-inline': {
 			const advertId = `inline${index}`;
 			return (
-				<div className="ad-slot-container">
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -515,7 +520,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -547,7 +552,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[
