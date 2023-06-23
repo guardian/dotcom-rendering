@@ -536,6 +536,7 @@ export const AdSlot = ({
 								margin: 12px auto;
 							`,
 							adStyles,
+							fluidFullWidthAdStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
