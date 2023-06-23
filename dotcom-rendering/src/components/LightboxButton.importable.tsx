@@ -163,13 +163,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		return;
 	}
 
-	function exitFullscreen() {
-		if (screenfull.isEnabled && screenfull.isFullscreen) {
-			return screenfull.exit();
-		}
-		return Promise.resolve();
-	}
-
 	/**
 	 * Each time a new image is selected, this function is called so we can update
 	 * the state of the page/lightbox to reflect the new image
@@ -178,11 +171,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		if (positionIndicator) {
 			positionIndicator.innerHTML = position.toString();
 		}
-		if (window.location.hash !== `#img-${position}`) {
-			// Update the url based on the fact we've selected (navigated
-			// to) a new image
-			window.history.replaceState({}, '', `#img-${position}`);
-		}
+		// Update the url based on the fact we've selected (navigated
+		// to) a new image
+		window.history.replaceState({}, '', `#img-${position}`);
 		// Ensure the close button is always visible on the last slide on mobile
 		if (position === images.length) {
 			closeButton?.classList.add('reveal');
@@ -226,9 +217,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	function getPosition(): number | null {
 		const scrollPosition = imageList?.scrollLeft;
 		const liWidth = lightbox.querySelector('li')?.clientWidth;
-		if (scrollPosition === 0) return 1;
+		if (scrollPosition === 0 && liWidth === 0) return null;
 		if (scrollPosition == undefined || liWidth == undefined) return null;
 		if (Number.isNaN(liWidth) || Number.isNaN(scrollPosition)) return null;
+		if (scrollPosition === 0) return 1;
 		return Math.round(scrollPosition / liWidth) + 1;
 	}
 
@@ -357,17 +349,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		document.documentElement.classList.add('lightbox-open');
 		// Show lightbox
 		lightbox.removeAttribute('hidden');
-		// Try to open the lightbox in fullscreen mode. This may fail
-		try {
-			await requestFullscreen();
-		} catch {
-			// Do nothing, requests to open fullscreen are just requests and can fail
-		}
 		// When opening the lightbox, if one doesn't exist already, add a history state referencing
 		// the currently selected image. Doing this means the back action will take the reader back
 		// to the article
 		if (!window.location.hash.startsWith('#img-')) {
 			window.history.pushState({}, '', `#img-${position}`);
+		}
+		// Try to open the lightbox in fullscreen mode. This may fail
+		try {
+			await requestFullscreen();
+		} catch {
+			// Do nothing, requests to open fullscreen are just requests and can fail
 		}
 		// Now we have the index of the image that was clicked, show it
 		// in the lightbox
@@ -376,54 +368,30 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		window.addEventListener('keydown', handleKeydown);
 	}
 
-	async function close(): Promise<void> {
+	function exitFullscreen() {
+		if (screenfull.isEnabled && screenfull.isFullscreen) {
+			return screenfull.exit();
+		}
+		return Promise.resolve();
+	}
+
+	async function close() {
+		log('dotcom', '💡 Closing lightbox.');
+		await exitFullscreen();
+		closeLightbox();
+		history.back();
+	}
+
+	function closeLightbox() {
 		log('dotcom', '💡 Closing lightbox.');
 		// Re-enable scrolling
 		document.documentElement.classList.remove('lightbox-open');
-		// The lightbox was closed by clicking the close button so we need
-		// to exit fullscreen
-		if (document.webkitExitFullscreen) {
-			/**
-			 * Oh hi.
-			 *
-			 * So yeah, for people using Safari 16.3 we enqueue a second request here
-			 * because the first one will, sometimes, fail. Specifically, everything
-			 * works the first time you open any image and browse. But if you then
-			 * close lightbox and again open it (using a *different* image), then in
-			 * this case when you try to close the lightbox your first attempt will
-			 * fail and you'll need to click again to close it.
-			 *
-			 * It's super edge casey but this (blatant) hack solves the problem. We
-			 * know the second attempt will work, we know it doesn't have any side
-			 * effects to call exit again, so just make another.
-			 *
-			 * Why does Safari fail like this? I wish I had a firm response but I
-			 * can tell you it relates to the fact we're deferring execution of the
-			 * island code using promises and at some point along that chain Safari
-			 * is losing the thread. It's a known issue that Safari 16.3 doesn't
-			 * support promises with FullscreenAPI
-			 *
-			 * https://caniuse.com/?search=requestFullscreen%3A%20Returns%20a%20Promise
-			 */
-			setTimeout(() => {
-				void exitFullscreen();
-			});
-		}
-		await exitFullscreen();
 		// Restore focus
 		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
 		// focusable because it came from activeElement
 		(previouslyFocused as HTMLButtonElement).focus();
 		// Hide lightbox
 		lightbox.setAttribute('hidden', 'true');
-		// When the lightbox is closed, remove any img hash has from the url
-		if (window.location.hash.startsWith('#img-')) {
-			history.replaceState(
-				{},
-				'',
-				window.location.pathname + window.location.search,
-			);
-		}
 		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
 	}
@@ -505,7 +473,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		),
 	);
 
-	closeButton?.addEventListener('click', close);
+	closeButton?.addEventListener('click', () => {
+		void close();
+	});
 	previousButton?.addEventListener('click', goBack);
 	nextButton?.addEventListener('click', goForward);
 	infoButton?.addEventListener('click', toggleInfo);
@@ -533,11 +503,14 @@ function initialiseLightbox(lightbox: HTMLElement) {
 				log('dotcom', `💡 entered fullscreen mode.`);
 			} else {
 				log('dotcom', `💡 leaving fullscreen mode.`);
+				// setTimeout(() => {
 				if (!lightbox.hasAttribute('hidden')) {
 					// If lightbox is still showing then the escape key was probably pressed
 					// which closes fullscreen mode but not the lightbox, so let's close it
-					void close();
+					closeLightbox();
+					history.back();
 				}
+				// });
 			}
 		});
 	}
@@ -548,20 +521,14 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 *
 	 * If this happens, and if the url has no img- hash, we close the lightbox.
 	 * This means you can open the lightbox, navigate back, and the lightbox will
-	 * be closed.
+	 * close.
 	 */
 	window.addEventListener('popstate', () => {
 		const hash = window.location.hash;
 		if (!hash.startsWith('#img-')) {
 			// There's no img hash so close the lightbox
-			void close();
-		} else {
-			// The reader navigated to a url that does contain an img hash. If
-			// the lightbox isn't already open, open it at that hash position.
-			if (!lightbox.hasAttribute('open')) {
-				const position = hash.substring(5);
-				void open(parseInt(position));
-			}
+			void exitFullscreen();
+			closeLightbox();
 		}
 	});
 
@@ -648,22 +615,19 @@ export const LightboxButton = ({
 		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 		if (!lightbox) return;
 		if (lightbox.dataset.guReady) {
-			log(
-				'dotcom',
-				'💡 Lightbox already initialised, updating all remaining buttons and skipping initialisation',
-			);
-			const lightboxButtons =
-				document.querySelectorAll<HTMLButtonElement>(
-					'button.open-lightbox',
-				);
-			lightboxButtons.forEach((button) => {
+			log('dotcom', '💡 Lightbox already initialised, skipping');
+			return;
+		}
+		initialiseLightbox(lightbox);
+		// Now that the lightbox is initialised, mark all buttons as gu-ready so that they won't
+		// be hydrated
+		document
+			.querySelectorAll<HTMLButtonElement>('button.open-lightbox')
+			.forEach((button) => {
 				button
 					.closest('gu-island')
 					?.setAttribute('data-gu-ready', 'true');
 			});
-			return;
-		}
-		initialiseLightbox(lightbox);
 	}, [elementId]);
 
 	return (
