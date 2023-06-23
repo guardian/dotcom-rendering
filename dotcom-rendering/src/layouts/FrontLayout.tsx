@@ -474,6 +474,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								backgroundColour={
 									mediaPalette.background?.container
 								}
+								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
 									<Carousel
