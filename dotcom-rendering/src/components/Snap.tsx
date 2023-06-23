@@ -2,16 +2,17 @@ import { css } from '@emotion/react';
 import type { DCRSnapType } from '../types/front';
 
 const snapStyles = css`
-	overflow-y: hidden;
+	overflow: hidden;
 	position: relative;
 	display: flex;
 `;
 
 type Props = {
 	snapData?: DCRSnapType;
+	dataLinkName?: string;
 };
 
-export const Snap = ({ snapData }: Props) => {
+export const Snap = ({ snapData, dataLinkName }: Props) => {
 	if (snapData?.embedHtml === undefined) {
 		return <></>;
 	}
@@ -19,13 +20,9 @@ export const Snap = ({ snapData }: Props) => {
 	return (
 		<>
 			<div
-				css={[
-					snapStyles,
-					css`
-						${snapData.embedCss}
-					`,
-				]}
+				css={[snapStyles]}
 				dangerouslySetInnerHTML={{ __html: snapData.embedHtml }}
+				data-link-name={dataLinkName}
 			/>
 			{snapData.embedJs ? (
 				<div>

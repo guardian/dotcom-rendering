@@ -19,7 +19,7 @@ jobs:
       - name: Format
         run: deno fmt scripts/deno
 
-      - name: Format
+      - name: Lint
         run: deno lint scripts/deno
 
       - name: Type-check

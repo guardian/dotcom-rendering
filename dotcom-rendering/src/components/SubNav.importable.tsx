@@ -7,14 +7,14 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { SubNavType } from '../model/extract-nav';
-import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;
 	currentNavLink: string;
-	format: ArticleFormat;
+	borderColour: string;
+	linkHoverColour: string;
 };
 
 const wrapperCollapsedStyles = css`
@@ -75,13 +75,13 @@ const fontStyle = css`
 	}
 `;
 
-const linkStyle = (palette: Palette) => css`
+const linkStyle = (linkHoverColour: string) => css`
 	${fontStyle};
 	float: left;
 	text-decoration: none;
 
 	:hover {
-		color: ${palette.text.articleLinkHover};
+		color: ${linkHoverColour};
 	}
 
 	:focus {
@@ -125,7 +125,7 @@ const showMoreStyle = css`
 	}
 `;
 
-const listItemStyles = (palette: Palette) => css`
+const listItemStyles = (borderColour: string) => css`
 	:after {
 		content: '';
 		display: inline-block;
@@ -136,7 +136,7 @@ const listItemStyles = (palette: Palette) => css`
 		border-left: 10px solid ${neutral[7]};
 		margin-top: 12px;
 		margin-left: 2px;
-		border-left-color: ${palette.border.subNav};
+		border-left-color: ${borderColour};
 
 		${from.tablet} {
 			margin-top: 16px;
@@ -144,14 +144,15 @@ const listItemStyles = (palette: Palette) => css`
 	}
 `;
 
-const trimLeadingSlash = (url: string): string =>
-	url.startsWith('/') ? url.slice(1) : url;
-
-export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
+export const SubNav = ({
+	subNavSections,
+	currentNavLink,
+	borderColour,
+	linkHoverColour,
+}: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
-	const palette = decidePalette(format);
 
 	useEffect(() => {
 		const ulEl = ulRef.current;
@@ -189,11 +190,11 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}
-						css={listItemStyles(palette)}
+						css={listItemStyles(borderColour)}
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={linkStyle(palette)}
+							css={linkStyle(linkHoverColour)}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -214,12 +215,14 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 						}
 					>
 						<a
-							css={linkStyle(palette)}
+							css={linkStyle(linkHoverColour)}
 							data-src-focus-disabled={true}
 							href={link.url}
-							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
-								link.url,
-							)}`}
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'subnav',
+								link.longTitle,
+							)}
 						>
 							{link.title === currentNavLink ? (
 								<span css={selected}>{link.title}</span>
@@ -232,9 +235,13 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			</ul>
 			{showMore && (
 				<button
+					type="button"
 					onClick={() => setIsExpanded(!isExpanded)}
 					css={showMoreStyle}
-					data-link-name="nav2 : subnav-toggle"
+					data-link-name={nestedOphanComponents(
+						'nav2',
+						'subnav-toggle',
+					)}
 					data-cy="subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}

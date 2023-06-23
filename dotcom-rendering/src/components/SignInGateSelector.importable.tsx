@@ -1,10 +1,11 @@
 import { getCookie, getSwitches } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { constructQuery } from '../lib/querystring';
-import type { TagType } from '../types/tag';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
+import { constructQuery } from '../lib/querystring';
 import { useOnce } from '../lib/useOnce';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
+import type { TagType } from '../types/tag';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
 	submitViewEventTracking,
@@ -150,7 +151,7 @@ export const SignInGateSelector = ({
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
 }: Props) => {
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = useSignedInStatus() === 'SignedIn';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);

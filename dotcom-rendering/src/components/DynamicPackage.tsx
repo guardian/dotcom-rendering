@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
 } from '../types/front';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -46,6 +45,7 @@ const Snap100 = ({
 					imagePositionOnMobile="left"
 					imageSize="medium"
 					trailText={snaps[0].trailText}
+					supportingContentAlignment="horizontal"
 				/>
 			</LI>
 		</UL>
@@ -74,8 +74,9 @@ const Card100 = ({
 					imagePosition="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
-					isDynamo={true}
+					isDynamo={containerPalette && true}
 					supportingContent={cards[0].supportingContent}
+					supportingContentAlignment="horizontal"
 				/>
 			</LI>
 		</UL>

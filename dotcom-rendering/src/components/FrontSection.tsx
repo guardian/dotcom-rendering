@@ -1,10 +1,22 @@
 import { css } from '@emotion/react';
-import { from, neutral, space, until } from '@guardian/source-foundations';
+import { isString } from '@guardian/libs';
+import {
+	background,
+	from,
+	neutral,
+	palette,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
 import type { DCRContainerPalette, TreatType } from '../types/front';
+import { isAustralianTerritory, type Territory } from '../types/territory';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
 import { Island } from './Island';
@@ -57,6 +69,20 @@ type Props = {
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
+	/** Does this front section reside on a "paid for" content front */
+	isOnPaidContentFront?: boolean;
+	/** Denotes the position of this section on the front */
+	index?: number;
+	/** Indicates if the container is targetted to a specific territory */
+	targetedTerritory?: Territory;
+	/** Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 * - if no background colour is specified use the default body background colour to prevent
+	 *   the page skin background showing through the containers
+	 */
+	hasPageSkin?: boolean;
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -90,7 +116,7 @@ const fallbackStyles = css`
 	}
 `;
 
-const containerStyles = css`
+const containerStylesUntilLeftCol = css`
 	display: grid;
 
 	grid-template-rows:
@@ -137,7 +163,9 @@ const containerStyles = css`
 			[decoration-end content-end title-end hide-end]
 			minmax(0, 1fr);
 	}
+`;
 
+const containerStylesFromLeftCol = css`
 	${from.leftCol} {
 		grid-template-rows:
 			[headline-start show-hide-start content-start] auto
@@ -179,13 +207,14 @@ const containerStyles = css`
 	}
 `;
 
-const sectionHeadline = css`
+const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
-
 	display: flex;
 	flex-direction: column;
+`;
 
+const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	${from.leftCol} {
 		position: relative;
 		::after {
@@ -196,7 +225,7 @@ const sectionHeadline = css`
 			height: 1.875rem;
 			right: -10px;
 			position: absolute;
-			background-color: ${neutral[86]};
+			background-color: ${borderColour};
 		}
 	}
 `;
@@ -253,15 +282,17 @@ const sectionTreats = css`
 	}
 `;
 
-/** element which contains border and inner background colour, if set */
-const decoration = css`
-	grid-row: 1 / -1;
-	grid-column: decoration;
+const decoration = (borderColour: string) => {
+	/** element which contains border and inner background colour, if set */
+	return css`
+		grid-row: 1 / -1;
+		grid-column: decoration;
 
-	border-width: 1px;
-	border-color: ${neutral[86]};
-	border-style: none;
-`;
+		border-width: 1px;
+		border-color: ${borderColour};
+		border-style: none;
+	`;
+};
 
 /** only visible once content stops sticking to left and right edges */
 const sideBorders = css`
@@ -285,6 +316,20 @@ const titleStyle = css`
 		max-width: 74%;
 	}
 `;
+
+const decideBackgroundColour = (
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
 
 /**
  * # Front Container
@@ -389,6 +434,10 @@ export const FrontSection = ({
 	badge,
 	canShowMore,
 	ajaxUrl,
+	isOnPaidContentFront,
+	index,
+	targetedTerritory,
+	hasPageSkin = false,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -414,39 +463,106 @@ export const FrontSection = ({
 			data-container-name={containerName}
 			css={[
 				fallbackStyles,
-				containerStyles,
+				containerStylesUntilLeftCol,
+				!hasPageSkin && containerStylesFromLeftCol,
+				hasPageSkin && pageSkinContainer,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${decideBackgroundColour(
+						overrides?.background?.container,
+						hasPageSkin,
+					)};
 				`,
 			]}
 		>
-			<div css={[decoration, sideBorders, showTopBorder && topBorder]} />
+			<div
+				css={[
+					decoration(overrides?.border?.container ?? neutral[86]),
+					sideBorders,
+					showTopBorder && topBorder,
+				]}
+			/>
 
-			<div css={[sectionHeadline]}>
-				<Hide until="leftCol">
-					{badge && (
-						<Badge imageSrc={badge.imageSrc} href={badge.href} />
-					)}
-				</Hide>
-				<div css={titleStyle}>
-					<Hide from="leftCol">
+			<div
+				css={[
+					sectionHeadlineUntilLeftCol,
+					!hasPageSkin &&
+						sectionHeadlineFromLeftCol(
+							overrides?.border?.container ?? neutral[86],
+						),
+				]}
+			>
+				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
+				{isOnPaidContentFront && index === 0 ? (
+					<div css={titleStyle}>
+						<ContainerTitle
+							title={title}
+							fontColour={overrides?.text?.container}
+							description={description}
+							// On paid fronts the title is not treated as a link
+							// Be explicit and pass in undefined
+							url={undefined}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
+						/>
 						{badge && (
-							<Badge
-								imageSrc={badge.imageSrc}
-								href={badge.href}
-							/>
+							<div
+								css={css`
+									display: inline-block;
+									border-top: 1px dotted
+										${palette.neutral[86]};
+									${textSans.xxsmall()}
+									color: ${palette.neutral[46]};
+									font-weight: bold;
+
+									${from.leftCol} {
+										width: 100%;
+									}
+								`}
+							>
+								Paid for by
+								<Badge
+									imageSrc={badge.imageSrc}
+									href={badge.href}
+								/>
+							</div>
 						)}
-					</Hide>
-					<ContainerTitle
-						title={title}
-						fontColour={overrides?.text?.container}
-						description={description}
-						url={url}
-						containerPalette={containerPalette}
-						showDateHeader={showDateHeader}
-						editionId={editionId}
-					/>
-				</div>
+					</div>
+				) : (
+					<>
+						{!isOnPaidContentFront && (
+							<Hide until="leftCol">
+								{badge && (
+									<Badge
+										imageSrc={badge.imageSrc}
+										href={badge.href}
+									/>
+								)}
+							</Hide>
+						)}
+						<div css={titleStyle}>
+							{!isOnPaidContentFront && (
+								<Hide from="leftCol">
+									{badge && (
+										<Badge
+											imageSrc={badge.imageSrc}
+											href={badge.href}
+										/>
+									)}
+								</Hide>
+							)}
+							<ContainerTitle
+								title={title}
+								fontColour={overrides?.text?.container}
+								description={description}
+								url={url}
+								containerPalette={containerPalette}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
+						</div>
+					</>
+				)}
 				{leftContent}
 			</div>
 
@@ -474,7 +590,14 @@ export const FrontSection = ({
 			</div>
 
 			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
-				{showMore && (
+				{isString(targetedTerritory) &&
+				isAustralianTerritory(targetedTerritory) ? (
+					<Island deferUntil="interaction">
+						<AustralianTerritorySwitcher
+							targetedTerritory={targetedTerritory}
+						/>
+					</Island>
+				) : showMore ? (
 					<Island deferUntil="interaction">
 						<ShowMore
 							title={title}
@@ -487,14 +610,15 @@ export const FrontSection = ({
 							showAge={title === 'Headlines'}
 						/>
 					</Island>
-				)}
+				) : null}
 			</div>
 
-			{treats && (
+			{treats && !hasPageSkin && (
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
 						borderColour={overrides?.border?.container}
+						fontColour={overrides?.text?.container ?? neutral[7]}
 					/>
 				</div>
 			)}

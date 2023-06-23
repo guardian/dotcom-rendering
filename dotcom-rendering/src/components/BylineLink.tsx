@@ -49,6 +49,14 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 };
 
 /**
+ * Bylines can contain special characters reserved by RegEx.
+ * Since we're concatenating titles together to form a RegEx
+ * its important to escape any characters that RegEx might consider
+ * special.
+ */
+export const SPECIAL_REGEX_CHARACTERS = new RegExp(/[.+*?^$(){}|[\]]/g);
+
+/**
  * This crazy function aims to split bylines such as
  * 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
  * Or
@@ -56,7 +64,11 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
  * It does this so we can have separate links to both contributors
  */
 export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
-	const titles = tags.filter(isContributor).map((c) => c.title);
+	// Replace special regex characters with their escaped version.
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement
+	const titles = tags
+		.filter(isContributor)
+		.map((c) => c.title.replaceAll(SPECIAL_REGEX_CHARACTERS, `\\$&`));
 	// The contributor tag title should exist inside the byline for the regex
 	// below to work. If it doesn't, we return the whole byline to prevent the
 	// regex splitting the string into an array of single charaters

@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space, until } from '@guardian/source-foundations';
+import { background, from, space, until } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import type { DCRContainerPalette, TreatType } from '../types/front';
+import type { ContainerOverrides } from '../types/palette';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
@@ -98,6 +99,17 @@ type Props = {
 	 * without a left column
 	 */
 	fullWidth?: boolean;
+	/** Indicates if the page has a page skin advert
+	 * When a page skin advert is active:
+	 * - containers are constrained to a max width of 'desktop'
+	 * - media queries above desktop are not applied
+	 * - if no background colour is specified use the default body background colour to prevent
+	 *   the page skin background showing through the containers
+	 */
+	hasPageSkin?: boolean;
+	/** When there is a page skin in some special cases we still want the container to take full
+	 * width but the content to constrain itself e.g. Header */
+	hasPageSkinContentSelfConstrain?: boolean;
 	/**
 	 * @deprecated Do not use
 	 *
@@ -120,6 +132,11 @@ const headlineContainerStyles = css`
 	${until.leftCol} {
 		justify-content: space-between;
 	}
+`;
+
+const headlineContainerStylesWithPageSkin = css`
+	display: flex;
+	justify-content: space-between;
 `;
 
 const margins = css`
@@ -180,6 +197,66 @@ const Content = ({
 	</div>
 );
 
+const ContainerTitleWithHide = ({
+	title,
+	fontColour,
+	description,
+	url,
+	containerPalette,
+	showDateHeader,
+	editionId,
+	overrides,
+	hasPageSkin,
+}: {
+	title?: string;
+	fontColour?: string;
+	description?: string;
+	url?: string;
+	containerPalette?: DCRContainerPalette;
+	showDateHeader?: boolean;
+	editionId?: EditionId;
+	overrides?: ContainerOverrides | undefined;
+	hasPageSkin?: boolean;
+}) => {
+	const containerTitle = (
+		<ContainerTitle
+			title={title}
+			fontColour={fontColour ?? overrides?.text?.container}
+			description={description}
+			url={url}
+			containerPalette={containerPalette}
+			showDateHeader={showDateHeader}
+			editionId={editionId}
+		/>
+	);
+	if (hasPageSkin) {
+		return containerTitle;
+	}
+	return (
+		<Hide when="above" breakpoint="leftCol">
+			{containerTitle}
+		</Hide>
+	);
+};
+
+const decideBackgroundColour = (
+	backgroundColour: string | undefined,
+	overrideBackgroundColour: string | undefined,
+	hasPageSkin: boolean,
+) => {
+	if (backgroundColour) {
+		return backgroundColour;
+	}
+	if (overrideBackgroundColour) {
+		return overrideBackgroundColour;
+	}
+	if (hasPageSkin) {
+		// TODO check this is the right background colour to use
+		return background.primary;
+	}
+	return undefined;
+};
+
 /**
  *
  * A Section component represents a horizontal slice of a page. It defaults to
@@ -224,6 +301,8 @@ export const Section = ({
 	fullWidth = false,
 	element = 'section',
 	shouldCenter,
+	hasPageSkin = false,
+	hasPageSkinContentSelfConstrain = false,
 	className,
 }: Props) => {
 	const overrides =
@@ -238,9 +317,11 @@ export const Section = ({
 				padSides={padSides}
 				padBottom={padBottom}
 				borderColour={borderColour ?? overrides?.border?.container}
-				backgroundColour={
-					backgroundColour ?? overrides?.background?.container
-				}
+				backgroundColour={decideBackgroundColour(
+					backgroundColour,
+					overrides?.border?.container,
+					hasPageSkin,
+				)}
 				ophanComponentLink={ophanComponentLink}
 				ophanComponentName={ophanComponentName}
 				containerName={containerName}
@@ -248,6 +329,10 @@ export const Section = ({
 				className={className}
 				element={element}
 				shouldCenter={shouldCenter}
+				hasPageSkin={hasPageSkin}
+				hasPageSkinContentSelfConstrain={
+					hasPageSkinContentSelfConstrain
+				}
 			>
 				{children}
 			</ElementContainer>
@@ -261,14 +346,18 @@ export const Section = ({
 			showTopBorder={showTopBorder}
 			padSides={padSides}
 			borderColour={borderColour ?? overrides?.border?.container}
-			backgroundColour={
-				backgroundColour ?? overrides?.background?.container
-			}
+			backgroundColour={decideBackgroundColour(
+				backgroundColour,
+				overrides?.border?.container,
+				hasPageSkin,
+			)}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
 			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
+			hasPageSkin={hasPageSkin}
+			hasPageSkinContentSelfConstrain={hasPageSkinContentSelfConstrain}
 		>
 			<Flex>
 				<LeftColumn
@@ -276,6 +365,7 @@ export const Section = ({
 					borderColour={borderColour ?? overrides?.border?.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
+					hasPageSkin={hasPageSkin}
 				>
 					<div
 						css={css`
@@ -305,6 +395,9 @@ export const Section = ({
 								borderColour={
 									borderColour ?? overrides?.border?.container
 								}
+								fontColour={
+									fontColour ?? overrides?.text?.container
+								}
 							/>
 						)}
 					</div>
@@ -315,20 +408,25 @@ export const Section = ({
 					stretchRight={stretchRight}
 					format={format}
 				>
-					<div css={headlineContainerStyles}>
-						<Hide when="above" breakpoint="leftCol">
-							<ContainerTitle
-								title={title}
-								fontColour={
-									fontColour ?? overrides?.text?.container
-								}
-								description={description}
-								url={url}
-								containerPalette={containerPalette}
-								showDateHeader={showDateHeader}
-								editionId={editionId}
-							/>
-						</Hide>
+					<div
+						css={
+							hasPageSkin
+								? headlineContainerStylesWithPageSkin
+								: headlineContainerStyles
+						}
+					>
+						<ContainerTitleWithHide
+							title={title}
+							fontColour={
+								fontColour ?? overrides?.text?.container
+							}
+							description={description}
+							url={url}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
+							hasPageSkin={hasPageSkin}
+						/>
 						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}

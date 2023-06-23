@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { Switches } from '../types/config';
 import { RenderArticleElement } from '../lib/renderElement';
+import type { Switches } from '../types/config';
 import { LastUpdated } from './LastUpdated';
 import { LiveBlockContainer } from './LiveBlockContainer';
 import { ShareIcons } from './ShareIcons';

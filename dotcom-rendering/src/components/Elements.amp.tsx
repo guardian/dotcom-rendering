@@ -83,7 +83,14 @@ export const isAmpSupported = ({
 	if (tags.some((tag) => tag.id === 'type/article')) {
 		const isSwitchedOn = switches.ampArticleSwitch;
 		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');
-		if (!isSwitchedOn || hasQuizTag || elements.length == 0) return false;
+		// Some Labs pages have quiz atoms but are not tagged as quizzes
+		const hasQuizAtoms = elements.find(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+		);
+		if (!isSwitchedOn || hasQuizTag || hasQuizAtoms || elements.length == 0)
+			return false;
 	}
 
 	if (format.design === 'LiveBlogDesign') {
@@ -92,6 +99,18 @@ export const isAmpSupported = ({
 	}
 
 	if (main.includes('guardiannewsandmedia.formstack.com')) {
+		return false;
+	}
+
+	// <amp-youtube> does not support rendering Playlists, only normal videos.
+	if (
+		elements.find(
+			(element) =>
+				element._type ===
+					'model.dotcomrendering.pageElements.VideoYoutubeBlockElement' &&
+				(element.originalUrl || element.url).includes('/playlist'),
+		)
+	) {
 		return false;
 	}
 

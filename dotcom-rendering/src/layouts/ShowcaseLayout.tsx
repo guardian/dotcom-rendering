@@ -12,11 +12,6 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { buildAdTargeting } from '../lib/ad-targeting';
-import { parse } from '../lib/slot-machine-flags';
-import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -46,12 +41,17 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { parse } from '../lib/slot-machine-flags';
+import type { NavType } from '../model/extract-nav';
+import type { FEArticleType } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
@@ -268,7 +268,7 @@ export const ShowcaseLayout = ({
 									padSides={false}
 									shouldCenter={false}
 								>
-									<HeaderAdSlot display={format.display} />
+									<HeaderAdSlot />
 								</Section>
 							</Stuck>
 						)}
@@ -343,7 +343,10 @@ export const ShowcaseLayout = ({
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
-											format={format}
+											linkHoverColour={
+												palette.text.articleLinkHover
+											}
+											borderColour={palette.border.subNav}
 										/>
 									</Island>
 								</Section>
@@ -377,7 +380,7 @@ export const ShowcaseLayout = ({
 									showSideBorders={false}
 									padSides={false}
 								>
-									<HeaderAdSlot display={format.display} />
+									<HeaderAdSlot />
 								</Section>
 							</Stuck>
 						)}
@@ -678,7 +681,11 @@ export const ShowcaseLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>
@@ -777,7 +784,8 @@ export const ShowcaseLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

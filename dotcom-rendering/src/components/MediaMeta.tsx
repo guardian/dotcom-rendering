@@ -5,9 +5,9 @@ import {
 	SvgCamera,
 	SvgVideo,
 } from '@guardian/source-react-components';
+import { decidePalette } from '../lib/decidePalette';
 import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	mediaType: MediaType;

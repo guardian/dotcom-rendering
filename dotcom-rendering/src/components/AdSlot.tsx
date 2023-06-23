@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial-core';
-import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial';
+import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
@@ -10,6 +10,7 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -21,14 +22,19 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	hasPageskin?: boolean;
 };
+
+// TODO move to commercial
+type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Exclude<SlotName, InlinePosition>;
+	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	hasPageskin?: boolean;
 };
 
 /**
@@ -265,6 +271,7 @@ export const AdSlot = ({
 	display,
 	isPaidContent = false,
 	index,
+	hasPageskin = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -379,6 +386,7 @@ export const AdSlot = ({
 							display: flex;
 							justify-content: center;
 						`,
+						hasPageskin && pageSkinContainer,
 						adStyles,
 					]}
 				>
@@ -452,7 +460,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			const advertId = `inline${index}`;
+			const advertId = `inline${index + 1}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div
@@ -505,7 +513,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
-			const advertId = `inline${index}`;
+			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
 				<div className="ad-slot-container" css={[adStyles]}>
 					<div
@@ -528,9 +536,33 @@ export const AdSlot = ({
 								margin: 12px auto;
 							`,
 							adStyles,
+							fluidFullWidthAdStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
+		case 'pageskin': {
+			return (
+				<div className="ad-slot-container" css={[adStyles]}>
+					<div
+						id="dfp-ad--pageskin-inread"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--pageskin',
+							'ad-slot--pageskin-inread',
+						].join(' ')}
+						css={outOfPageStyles}
+						data-link-name="ad slot pageskin-inread"
+						data-name="pageskin-inread"
+						data-label="false"
+						data-refresh="false"
+						data-out-of-page="true"
+						data-wide="1,1"
 						aria-hidden="true"
 					/>
 				</div>

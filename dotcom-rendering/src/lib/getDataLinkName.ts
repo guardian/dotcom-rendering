@@ -1,9 +1,15 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FEFrontCardStyle } from '../types/front';
 
 /**
- * TODO: missing "podcast" and "external"
+ * TODO: missing "podcast"
  */
-const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
+const getLinkType = (
+	{ theme, design }: ArticleFormat,
+	cardStyle?: FEFrontCardStyle,
+): RichLinkCardType => {
+	if (cardStyle === 'ExternalLink') return 'external';
+
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
 			return 'special-report';
@@ -36,6 +42,8 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
 	}
 };
 
+export type Group = `${number}` | `${number}+`;
+
 /**
  * Get the `data-link-name` attribute for a card.
  * Used by Ophan for understanding reader journeys. E.g:
@@ -46,7 +54,12 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
  */
 export const getDataLinkNameCard = (
 	format: ArticleFormat,
-	group: string | number,
+	group: Group,
 	index: number,
+	cardStyle?: FEFrontCardStyle,
 ): string =>
-	[getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');
+	[
+		getLinkType(format, cardStyle),
+		`group-${group}`,
+		`card-@${Math.max(index + 1, 1)}`,
+	].join(' | ');

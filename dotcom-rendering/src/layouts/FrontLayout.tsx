@@ -1,14 +1,20 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
+	background,
+	border,
 	brandBackground,
 	brandBorder,
 	brandLine,
+	labs,
 	neutral,
+	news,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
+import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { Footer } from '../components/Footer';
@@ -17,6 +23,7 @@ import { FrontSection } from '../components/FrontSection';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader';
 import { LabsSection } from '../components/LabsSection';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
@@ -25,13 +32,14 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import {
+	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
+import { pageSkinContainer } from './lib/pageSkin';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -70,8 +78,8 @@ const decideAdSlot = (
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
-	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
+	hasPageSkin: boolean,
 ) => {
 	if (!renderAds) return null;
 	const minContainers = isPaidContent ? 1 : 2;
@@ -83,17 +91,16 @@ const decideAdSlot = (
 			<AdSlot
 				data-print-layout="hide"
 				position="merchandising-high"
-				display={format}
+				hasPageskin={hasPageSkin}
 			/>
 		);
 	} else if (mobileAdPositions.includes(index)) {
 		return (
 			<Hide from="tablet">
 				<AdSlot
-					index={index}
+					index={mobileAdPositions.indexOf(index)}
 					data-print-layout="hide"
 					position="mobile-front"
-					display={format}
 				/>
 			</Hide>
 		);
@@ -103,19 +110,10 @@ const decideAdSlot = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { isPaidContent },
+		config: { abTests, isPaidContent, hasPageSkin },
 	} = front;
 
-	const isInEuropeTest =
-		front.config.abTests.europeNetworkFrontVariant === 'variant';
-
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	};
-
-	const palette = decidePalette(format);
+	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -126,6 +124,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
+		: [];
+
+	const desktopAdPositions = renderAds
+		? getDesktopAdPositions(front.pressedPage.collections)
 		: [];
 
 	const showMostPopular =
@@ -147,35 +149,53 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
 
-					<Section
-						fullWidth={true}
-						shouldCenter={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						backgroundColour={brandBackground.primary}
-						element="header"
-					>
-						<Header
-							editionId={front.editionId}
-							idUrl={front.config.idUrl}
-							mmaUrl={front.config.mmaUrl}
-							discussionApiUrl={front.config.discussionApiUrl}
-							urls={front.nav.readerRevenueLinks.header}
-							remoteHeader={!!front.config.switches.remoteHeader}
-							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							isInEuropeTest={isInEuropeTest}
-							headerTopBarSearchCapiSwitch={
-								!!front.config.switches.headerTopBarSearchCapi
-							}
+					{hasPageSkin && (
+						<AdSlot
+							data-print-layout="hide"
+							position="pageskin"
+							display={ArticleDisplay.Standard}
+							hasPageskin={hasPageSkin}
 						/>
-					</Section>
+					)}
+
+					{!isPaidContent && (
+						<Section
+							fullWidth={true}
+							shouldCenter={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							backgroundColour={brandBackground.primary}
+							element="header"
+							hasPageSkin={hasPageSkin}
+							hasPageSkinContentSelfConstrain={true}
+						>
+							<Header
+								editionId={front.editionId}
+								idUrl={front.config.idUrl}
+								mmaUrl={front.config.mmaUrl}
+								discussionApiUrl={front.config.discussionApiUrl}
+								urls={front.nav.readerRevenueLinks.header}
+								remoteHeader={
+									!!front.config.switches.remoteHeader
+								}
+								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+								isInEuropeTest={isInEuropeTest}
+								headerTopBarSearchCapiSwitch={
+									!!front.config.switches
+										.headerTopBarSearchCapi
+								}
+								hasPageSkin={hasPageSkin}
+							/>
+						</Section>
+					)}
+
 					<Section
 						fullWidth={true}
 						borderColour={brandLine.primary}
@@ -183,10 +203,15 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
+						hasPageSkin={hasPageSkin}
 					>
 						<Nav
 							nav={NAV}
-							format={format}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticlePillar.News,
+							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
@@ -202,23 +227,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
+								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil="idle">
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={format}
+										linkHoverColour={news[400]}
+										borderColour={neutral[46]}
 									/>
 								</Island>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								hasPageSkin={hasPageSkin}
 							>
 								<StraightLines
 									cssOverrides={css`
@@ -229,10 +255,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 						</>
 					)}
+
+					{isPaidContent && (
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							backgroundColour={labs[400]}
+							borderColour={border.primary}
+							sectionId="labs-header"
+						>
+							<LabsHeader />
+						</Section>
+					)}
 				</>
 			</div>
 
-			<main data-layout="FrontLayout" id="maincontent">
+			<main
+				data-layout="FrontLayout"
+				data-link-name={`Front | /${front.pressedPage.id}`}
+				id="maincontent"
+			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -244,61 +286,63 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (!trail) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${index} | ${ophanName}`;
+					const ophanComponentLink = `container-${
+						index + 1
+					} | ${ophanName}`;
 					const mostPopularTitle = 'Most popular';
-					const COTTON_CAPITAL_THRASHERS = [
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/default-fronts-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/david-olusoga-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/cassandra-gooptar-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/gary-younge-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/deneen-l-brown-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/the-enslaved-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/olivette-otele-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/interactives-front--globe',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/michael-taylor-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/lanre-bakare-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/hidden-figures-front-default',
-						'https://content.guardianapis.com/atom/interactive/interactives/2022/10/tr/johny-pitts-photo-essay-front-default',
-					];
+
+					const trailsWithoutBranding = collection.badge
+						? trails.map((labTrail) => {
+								return {
+									...labTrail,
+									branding: undefined,
+								};
+						  })
+						: trails;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<>
-								{!!trail.embedUri &&
-								COTTON_CAPITAL_THRASHERS.includes(
-									trail.embedUri,
-								) ? (
-									<Snap snapData={trail.snapData} />
-								) : (
-									<SnapCssSandbox snapData={trail.snapData}>
-										<Section
-											fullWidth={true}
-											padSides={false}
-											showTopBorder={false}
-											showSideBorders={false}
-											ophanComponentLink={
-												ophanComponentLink
-											}
-											ophanComponentName={ophanName}
-											containerName={
-												collection.collectionType
-											}
+							<Fragment key={ophanName}>
+								<div css={[hasPageSkin && pageSkinContainer]}>
+									{!!trail.embedUri && (
+										<SnapCssSandbox
+											snapData={trail.snapData}
 										>
-											<Snap snapData={trail.snapData} />
-										</Section>
-									</SnapCssSandbox>
-								)}
-								{decideAdSlot(
-									renderAds,
-									index,
-									front.isNetworkFront,
-									front.pressedPage.collections.length,
-									front.pressedPage.frontProperties
-										.isPaidContent,
-									format.display,
-									mobileAdPositions,
-								)}
-							</>
+											<Section
+												fullWidth={true}
+												padSides={false}
+												showTopBorder={false}
+												showSideBorders={false}
+												ophanComponentLink={
+													ophanComponentLink
+												}
+												ophanComponentName={ophanName}
+												containerName={
+													collection.collectionType
+												}
+												hasPageSkin={hasPageSkin}
+											>
+												<Snap
+													snapData={trail.snapData}
+													dataLinkName={
+														trail.dataLinkName
+													}
+												/>
+											</Section>
+										</SnapCssSandbox>
+									)}
+									{decideAdSlot(
+										renderAds,
+										index,
+										front.isNetworkFront,
+										front.pressedPage.collections.length,
+										front.pressedPage.frontProperties
+											.isPaidContent,
+										mobileAdPositions,
+										hasPageSkin,
+									)}
+								</div>
+							</Fragment>
 						);
 					}
 
@@ -341,6 +385,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									treats={collection.treats}
 									data-print-layout="hide"
 									element="aside"
+									hasPageSkin={hasPageSkin}
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
@@ -350,6 +395,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostShared={front.mostShared}
 										isNetworkFront={front.isNetworkFront}
 										deeplyRead={deeplyReadData}
+										editionId={front.editionId}
+										hasPageSkin={hasPageSkin}
 									/>
 								</Section>
 								{decideAdSlot(
@@ -359,8 +406,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-									format.display,
 									mobileAdPositions,
+									hasPageSkin,
 								)}
 							</>
 						);
@@ -370,15 +417,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
-						const trailsWithoutBranding = collection.badge
-							? trails.map((labTrail) => {
-									return {
-										...labTrail,
-										branding: undefined,
-									};
-							  })
-							: trails;
-
 						return (
 							<LabsSection
 								key={ophanName}
@@ -394,25 +432,61 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								url={collection.href}
 								badge={collection.badge}
 								data-print-layout="hide"
+								hasPageSkin={hasPageSkin}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
-									index={index}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
 										collection.containerPalette
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={false}
 								/>
 							</LabsSection>
 						);
 					}
 
-					return (
-						<>
-							<FrontSection
+					if (collection.collectionType === 'fixed/video') {
+						return (
+							<Section
 								key={ophanName}
+								title={collection.displayName}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								fullWidth={true}
+								padBottom={true}
+								showSideBorders={true}
+								showTopBorder={index > 0}
+								padContent={false}
+								url={collection.href}
+								containerPalette={collection.containerPalette}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								hasPageSkin={hasPageSkin}
+							>
+								<Island deferUntil={'visible'}>
+									<Carousel
+										heading={collection.displayName}
+										trails={trails}
+										onwardsSource={'unknown-source'}
+										titleHighlightColour={neutral[7]}
+										activeDotColour={neutral[7]}
+										leftColSize={'compact'}
+									/>
+								</Island>
+							</Section>
+						);
+					}
+
+					return (
+						<Fragment key={ophanName}>
+							<FrontSection
 								title={collection.displayName}
 								description={collection.description}
 								showTopBorder={index > 0}
@@ -450,10 +524,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								treats={collection.treats}
 								canShowMore={collection.canShowMore}
 								ajaxUrl={front.config.ajaxUrl}
+								isOnPaidContentFront={isPaidContent}
+								index={index}
+								targetedTerritory={collection.targetedTerritory}
+								hasPageSkin={hasPageSkin}
 							>
 								<DecideContainer
-									trails={trails}
-									index={index}
+									trails={trailsWithoutBranding}
 									groupedTrails={collection.grouped}
 									containerType={collection.collectionType}
 									containerPalette={
@@ -462,6 +539,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									showAge={
 										collection.displayName === 'Headlines'
 									}
+									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
 								/>
 							</FrontSection>
@@ -471,17 +549,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
 								mobileAdPositions,
+								hasPageSkin,
 							)}
-						</>
+						</Fragment>
 					);
 				})}
 			</main>
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
+				ophanComponentName="trending-topics"
 				data-component="trending-topics"
+				hasPageSkin={hasPageSkin}
 			>
 				<TrendingTopics trendingTopics={front.trendingTopics} />
 			</Section>
@@ -494,24 +574,29 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
+					hasPageSkin={hasPageSkin}
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot position="merchandising" />
 				</Section>
 			)}
 
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={false}
+					showTopBorder={hasPageSkin ? true : false}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
+					backgroundColour={
+						hasPageSkin ? background.primary : undefined
+					}
 				>
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={news[400]}
+							borderColour={neutral[46]}
 						/>
 					</Island>
 				</Section>
@@ -529,7 +614,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={format.theme}
+					pillar={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}

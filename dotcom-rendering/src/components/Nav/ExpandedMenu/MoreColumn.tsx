@@ -6,6 +6,7 @@ import {
 	from,
 	textSans,
 } from '@guardian/source-foundations';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { LinkType } from '../../../model/extract-nav';
 import FacebookIcon from '../../../static/icons/facebook.svg';
 import TwitterIconPadded from '../../../static/icons/twitter-padded.svg';
@@ -219,7 +220,11 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 								css={columnLinkTitle}
 								href={link.url}
 								role="menuitem"
-								data-link-name={`nav2 : secondary : ${link.longTitle}`}
+								data-link-name={nestedOphanComponents(
+									'nav2',
+									'secondary',
+									link.longTitle,
+								)}
 								data-cy={`column-collapse-sublink-${link.title}`}
 								tabIndex={-1}
 							>
@@ -239,7 +244,11 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 						<a
 							className="selectableMenuItem"
 							css={columnLinkTitle}
-							data-link-name="nav2 : secondary : facebook"
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'secondary',
+								'facebook',
+							)}
 							href="https://www.facebook.com/theguardian"
 							role="menuitem"
 							tabIndex={-1}
@@ -257,7 +266,11 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 						<a
 							className="selectableMenuItem"
 							css={columnLinkTitle}
-							data-link-name="nav2 : secondary : twitter"
+							data-link-name={nestedOphanComponents(
+								'nav2',
+								'secondary',
+								'twitter',
+							)}
 							href="https://twitter.com/guardian"
 							role="menuitem"
 							tabIndex={-1}

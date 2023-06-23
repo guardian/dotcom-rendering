@@ -1,5 +1,3 @@
-import { integerCommas } from '../lib/formatters';
-
 export const formatCount = (
 	count?: number,
 ): { short: string; long: string } => {
@@ -7,7 +5,7 @@ export const formatCount = (
 	if (count === 0) return { short: '0', long: '0' };
 
 	const countAsInteger = parseInt(count.toFixed(0), 10);
-	const displayCountLong = integerCommas(countAsInteger);
+	const displayCountLong = Intl.NumberFormat('en-GB').format(countAsInteger);
 	const displayCountShort =
 		countAsInteger > 10000
 			? `${Math.round(countAsInteger / 1000)}k`

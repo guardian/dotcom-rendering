@@ -205,6 +205,14 @@ const textByline = (format: ArticleFormat): string => {
 							return pillarPalette[format.theme].main;
 					}
 				}
+				case ArticleDesign.Gallery: {
+					switch (format.theme) {
+						case ArticlePillar.Culture:
+							return pillarPalette[format.theme].bright;
+						default:
+							return pillarPalette[format.theme].main;
+					}
+				}
 				case ArticleDesign.Interview:
 					return BLACK;
 				default:
@@ -1874,18 +1882,6 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundCarouselDotFocus = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
-		}
-	}
-	return pillarPalette[format.theme].main;
-};
-
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
@@ -2147,7 +2143,6 @@ export const decidePalette = (
 			lightboxDivider: backgroundLightboxDivider(format),
 			speechBubble: backgroundSpeechBubble(format),
 			carouselDot: backgroundCarouselDot(format),
-			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),

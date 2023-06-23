@@ -6,18 +6,19 @@ import {
 	palette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../model/extract-nav';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Footer } from '../components/Footer';
+import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
 import { Nav } from '../components/Nav/Nav';
-import { NewslettersList } from '../components/NewsletterList';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
 import { decideFormat } from '../lib/decideFormat';
+import type { NavType } from '../model/extract-nav';
+import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Stuck } from './lib/stickiness';
 
 type Props = {
@@ -49,6 +50,12 @@ export const AllEditorialNewslettersPageLayout = ({
 	const contributionsServiceUrl =
 		process.env.SDC_URL ?? pageContributionsServiceUrl;
 
+	const displayedNewslettersCount =
+		newslettersPage.groupedNewsletters.groups.reduce<number>(
+			(count, group) => count + group.newsletters.length,
+			0,
+		);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -62,7 +69,7 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={articleFormat.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -124,7 +131,10 @@ export const AllEditorialNewslettersPageLayout = ({
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={articleFormat}
+										linkHoverColour={
+											'palette.text.articleLinkHover'
+										}
+										borderColour={'palette.border.subNav'}
 									/>
 								</Island>
 							</Section>
@@ -150,10 +160,15 @@ export const AllEditorialNewslettersPageLayout = ({
 			<main data-layout="NewsletterPageLayout" id="maincontent">
 				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
-					editionId={newslettersPage.editionId}
-					headingText={newslettersPage.webTitle}
+					newsletterCount={displayedNewslettersCount}
 				/>
-				<NewslettersList newsletters={newslettersPage.newsletters} />
+				<GroupedNewslettersList
+					groupedNewsletters={newslettersPage.groupedNewsletters}
+				/>
+
+				<Island deferUntil="idle">
+					<ManyNewsletterSignUp apiEndpoint="" />
+				</Island>
 			</main>
 
 			<Section

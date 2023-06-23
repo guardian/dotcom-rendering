@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
+import type { DCRContainerPalette } from '../types/front';
+import type { Palette } from '../types/palette';
 import { generateSources, getFallbackSource } from './Picture';
 
 const picture = css`

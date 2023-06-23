@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
+import { nestedOphanComponents } from '../lib/ophan-helpers';
 
 const searchLinkStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })};
@@ -40,7 +41,7 @@ export const SearchJobs = () => {
 			<a
 				href="https://jobs.theguardian.com"
 				css={searchLinkStyles}
-				data-link-name="nav3 : job-cta"
+				data-link-name={nestedOphanComponents('nav3', 'job-cta')}
 			>
 				Search jobs
 			</a>

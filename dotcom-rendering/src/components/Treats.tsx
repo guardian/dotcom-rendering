@@ -4,24 +4,29 @@ import {
 	from,
 	headline,
 	neutral,
+	palette as sourcePalette,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { Fragment } from 'react';
-import type { TreatType } from '../types/front';
 import { decidePalette } from '../lib/decidePalette';
+import type { TreatType } from '../types/front';
 import { generateSources, getFallbackSource } from './Picture';
 import { SvgCrossword } from './SvgCrossword';
 
 const TextTreat = ({
 	text,
 	linkTo,
+	index,
 	borderColour,
+	fontColour,
 }: {
 	text: string;
 	linkTo: string;
+	index: number;
 	borderColour?: string;
+	fontColour?: string;
 }) => (
 	<li
 		css={css`
@@ -38,8 +43,10 @@ const TextTreat = ({
 			cssOverrides={css`
 				${textSans.xxsmall()}
 				text-decoration: none;
+				color: ${fontColour ?? sourcePalette.neutral[7]};
 			`}
 			href={linkTo}
+			data-link-name={`treat | ${index + 1} | ${text}`}
 		>
 			{text}
 		</Link>
@@ -162,9 +169,11 @@ const ImageTreat = ({
 export const Treats = ({
 	treats,
 	borderColour,
+	fontColour,
 }: {
 	treats: TreatType[];
 	borderColour?: string;
+	fontColour?: string;
 }) => {
 	if (treats.length === 0) return null;
 	return (
@@ -174,7 +183,7 @@ export const Treats = ({
 				flex-direction: column;
 			`}
 		>
-			{treats.map((treat) => {
+			{treats.map((treat, index) => {
 				const [link] = treat.links;
 				if (link?.linkTo === '/crosswords' && link.text) {
 					// Treats that link to /crosswords are special. If any
@@ -192,7 +201,9 @@ export const Treats = ({
 									key={linkTo}
 									text={text}
 									linkTo={linkTo}
+									index={index}
 									borderColour={borderColour}
+									fontColour={fontColour}
 								/>
 							))}
 						</Fragment>
@@ -227,7 +238,9 @@ export const Treats = ({
 								key={linkTo}
 								text={text}
 								linkTo={linkTo}
+								index={index}
 								borderColour={borderColour}
+								fontColour={fontColour}
 							/>
 						))}
 					</>

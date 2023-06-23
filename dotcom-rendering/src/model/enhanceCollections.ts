@@ -46,7 +46,7 @@ export const enhanceCollections = (
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
-		const allCards = [...collection.curated, ...collection.curated];
+		const allCards = [...collection.curated, ...collection.backfill];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
 		const containerPalette = decideContainerPalette(
@@ -64,8 +64,8 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				displayName,
 				allCardsHaveBranding ? allBranding : [],
+				collection.config.href,
 			),
 			grouped: groupCards(
 				collectionType,
@@ -74,16 +74,14 @@ export const enhanceCollections = (
 				editionId,
 				containerPalette,
 			),
-			curated: enhanceCards(
-				collection.curated,
+			curated: enhanceCards(collection.curated, {
 				editionId,
 				containerPalette,
-			),
-			backfill: enhanceCards(
-				collection.backfill,
+			}),
+			backfill: enhanceCards(collection.backfill, {
 				editionId,
 				containerPalette,
-			),
+			}),
 			treats: enhanceTreats(
 				collection.treats,
 				displayName,
@@ -94,6 +92,7 @@ export const enhanceCollections = (
 				showDateHeader: collection.config.showDateHeader,
 			},
 			canShowMore: hasMore && !collection.config.hideShowMore,
+			targetedTerritory: collection.targetedTerritory,
 		};
 	});
 };

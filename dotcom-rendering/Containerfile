@@ -1,5 +1,5 @@
 # This container is used in our CICD pipelines for running E2E and regression tests.
-FROM node:16.19.0-alpine
+FROM node:18.16.1-alpine
 
 WORKDIR /opt/app/dotcom-rendering/dotcom-rendering
 
