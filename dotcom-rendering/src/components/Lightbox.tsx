@@ -20,8 +20,8 @@ import {
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
 import { getZIndex } from '../lib/getZIndex';
 import type { EnhancedImageForLightbox } from '../types/content';
-import { Caption } from './Caption';
 import { getLargest, getMaster } from './ImageComponent';
+import { LightboxCaption } from './LightboxCaption';
 import { Picture } from './Picture';
 
 type Props = {
@@ -453,12 +453,11 @@ export const Lightbox = ({ format, images }: Props) => {
 													initialPosition={index + 1}
 												/>
 											</Hide>
-											<Caption
-												format={format}
-												isLightbox={true}
+											<LightboxCaption
 												captionText={
 													image.lightbox?.caption
 												}
+												format={format}
 												credit={image.lightbox?.credit}
 												displayCredit={
 													image.displayCredit

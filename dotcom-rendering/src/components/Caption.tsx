@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
-	neutral,
 	space,
 	textSans,
 	until,
@@ -23,11 +22,6 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlaid?: boolean;
 	isLeftCol?: boolean;
-	/**
-	 * Caption can also be rendered inside Lightbox. In this context we style it
-	 * differently
-	 */
-	isLightbox?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
 };
@@ -238,7 +232,6 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlaid,
 	isLeftCol,
-	isLightbox,
 	mediaType = 'Gallery',
 	isMainMedia = false,
 }: Props) => {
@@ -283,50 +276,6 @@ export const Caption = ({
 			{!!credit && displayCredit && ` ${credit}`}
 		</figcaption>
 	);
-
-	if (isLightbox) {
-		return (
-			<figcaption
-				css={css`
-					${textSans.xsmall()};
-					line-height: 135%;
-					word-wrap: break4all;
-					padding-top: ${space[2]}px;
-					padding-bottom: ${space[2]}px;
-					border-top: 3px solid ${palette.background.lightboxDivider};
-				`}
-			>
-				{!!captionText && (
-					<span
-						css={[
-							css`
-								color: ${neutral[97]};
-								a {
-									color: inherit;
-								}
-								strong {
-									font-weight: bold;
-								}
-							`,
-						]}
-						dangerouslySetInnerHTML={{
-							__html: captionText || '',
-						}}
-						key="caption"
-					/>
-				)}
-				{!!credit && displayCredit && (
-					<div
-						css={css`
-							color: ${neutral[60]};
-						`}
-					>
-						{credit}
-					</div>
-				)}
-			</figcaption>
-		);
-	}
 
 	switch (format.design) {
 		case ArticleDesign.PhotoEssay:
