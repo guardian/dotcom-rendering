@@ -505,11 +505,20 @@ export const FrontSection = ({
 					</div>
 				) : (
 					<>
-						{/* Only show badge on the first container of the front */}
-						{!isOnPaidContentFront && index === 0 && (
-							<Hide until="leftCol">
+						<Hide until="leftCol">
+							{badge && (
+								<div css={badgeStylesDesktop}>
+									<Badge
+										imageSrc={badge.imageSrc}
+										href={badge.href}
+									/>
+								</div>
+							)}
+						</Hide>
+						<div css={titleStyle}>
+							<Hide from="leftCol">
 								{badge && (
-									<div css={badgeStylesDesktop}>
+									<div css={badgeStylesMobile}>
 										<Badge
 											imageSrc={badge.imageSrc}
 											href={badge.href}
@@ -517,21 +526,6 @@ export const FrontSection = ({
 									</div>
 								)}
 							</Hide>
-						)}
-						<div css={titleStyle}>
-							{/* Only show badge on the first container of the front */}
-							{!isOnPaidContentFront && index === 0 && (
-								<Hide from="leftCol">
-									{badge && (
-										<div css={badgeStylesMobile}>
-											<Badge
-												imageSrc={badge.imageSrc}
-												href={badge.href}
-											/>
-										</div>
-									)}
-								</Hide>
-							)}
 							<ContainerTitle
 								title={title}
 								fontColour={overrides?.text?.container}
