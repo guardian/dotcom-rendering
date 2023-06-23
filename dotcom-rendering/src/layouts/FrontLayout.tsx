@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -13,11 +8,13 @@ import {
 	brandLine,
 	labs,
 	neutral,
+	news,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
+import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
 import { Footer } from '../components/Footer';
@@ -35,7 +32,6 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -82,7 +78,6 @@ const decideAdSlot = (
 	isNetworkFront: boolean | undefined,
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
-	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
 	hasPageSkin: boolean,
 ) => {
@@ -96,7 +91,6 @@ const decideAdSlot = (
 			<AdSlot
 				data-print-layout="hide"
 				position="merchandising-high"
-				display={format}
 				hasPageskin={hasPageSkin}
 			/>
 		);
@@ -107,7 +101,6 @@ const decideAdSlot = (
 					index={mobileAdPositions.indexOf(index)}
 					data-print-layout="hide"
 					position="mobile-front"
-					display={format}
 				/>
 			</Hide>
 		);
@@ -121,14 +114,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
-
-	const format = {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: isPaidContent ? ArticleSpecial.Labs : ArticlePillar.News,
-	};
-
-	const palette = decidePalette(format);
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
@@ -164,7 +149,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -222,7 +207,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={format}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticlePillar.News,
+							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
@@ -238,7 +227,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								showTopBorder={false}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
@@ -247,13 +235,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={format}
+										linkHoverColour={news[400]}
+										borderColour={neutral[46]}
 									/>
 								</Island>
 							</Section>
 							<Section
 								fullWidth={true}
-								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
 								hasPageSkin={hasPageSkin}
@@ -350,7 +338,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										front.pressedPage.collections.length,
 										front.pressedPage.frontProperties
 											.isPaidContent,
-										format.display,
 										mobileAdPositions,
 										hasPageSkin,
 									)}
@@ -419,7 +406,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-									format.display,
 									mobileAdPositions,
 									hasPageSkin,
 								)}
@@ -459,6 +445,41 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									renderAds={false}
 								/>
 							</LabsSection>
+						);
+					}
+
+					if (collection.collectionType === 'fixed/video') {
+						return (
+							<Section
+								key={ophanName}
+								title={collection.displayName}
+								sectionId={`container-${ophanName}`}
+								ophanComponentName={ophanName}
+								ophanComponentLink={ophanComponentLink}
+								containerName={collection.collectionType}
+								fullWidth={true}
+								padBottom={true}
+								showSideBorders={true}
+								showTopBorder={index > 0}
+								padContent={false}
+								url={collection.href}
+								containerPalette={collection.containerPalette}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+							>
+								<Island deferUntil={'visible'}>
+									<Carousel
+										heading={collection.displayName}
+										trails={trails}
+										onwardsSource={'unknown-source'}
+										titleHighlightColour={neutral[7]}
+										activeDotColour={neutral[7]}
+										leftColSize={'compact'}
+									/>
+								</Island>
+							</Section>
 						);
 					}
 
@@ -527,7 +548,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
-								format.display,
 								mobileAdPositions,
 								hasPageSkin,
 							)}
@@ -555,7 +575,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					element="aside"
 					hasPageSkin={hasPageSkin}
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot position="merchandising" />
 				</Section>
 			)}
 
@@ -574,7 +594,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={news[400]}
+							borderColour={neutral[46]}
 						/>
 					</Island>
 				</Section>
@@ -592,7 +613,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={format.theme}
+					pillar={ArticlePillar.News}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
