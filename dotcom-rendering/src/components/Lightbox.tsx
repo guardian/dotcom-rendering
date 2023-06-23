@@ -132,7 +132,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 		}
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: ${space[3]}px;
+		margin-top: 1vh;
 	`;
 	switch (orientation) {
 		case 'portrait': {
@@ -141,10 +141,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					${baseImgStyles}
 					width: auto;
 					max-width: 100%;
-					height: calc(100vh - 90px);
-					${from.tablet} {
-						height: calc(100vh - 24px);
-					}
+					height: 98vh;
 				}
 			`;
 		}
@@ -155,7 +152,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					${baseImgStyles}
 					width: 100%;
 					height: auto;
-					max-height: calc(100vh - 24px);
+					max-height: 98vh;
 				}
 			`;
 		}
