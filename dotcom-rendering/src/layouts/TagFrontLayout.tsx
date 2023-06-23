@@ -31,51 +31,29 @@ interface Props {
 	NAV: NavType;
 }
 
-// const spaces = / /g;
-/** TODO: Confirm with is a valid way to generate component IDs. */
-// const ophanComponentId = (name: string) =>
-// 	name.toLowerCase().replace(spaces, '-');
-
-// const decideAdSlot = (
-// 	index: number,
-// 	isNetworkFront: boolean | undefined,
-// 	collectionCount: number,
-// 	isPaidContent: boolean | undefined,
-// 	format: ArticleDisplay,
-// 	mobileAdPositions: (number | undefined)[],
-// ) => {
-// 	const minContainers = isPaidContent ? 1 : 2;
-// 	if (
-// 		collectionCount > minContainers &&
-// 		index === getMerchHighPosition(collectionCount, isNetworkFront)
-// 	) {
-// 		return (
-// 			<AdSlot
-// 				data-print-layout="hide"
-// 				position="merchandising-high"
-// 				display={format}
-// 			/>
-// 		);
-// 	} else if (mobileAdPositions.includes(index)) {
-// 		return (
-// 			<Hide from="tablet">
-// 				<AdSlot
-// 					index={index}
-// 					data-print-layout="hide"
-// 					position="mobile-front"
-// 					display={format}
-// 				/>
-// 			</Hide>
-// 		);
-// 	}
-// 	return null;
-// };
+const getContainerId = (date: Date, locale: string, hasDay: boolean) => {
+	if (hasDay) {
+		return `${date.toLocaleDateString(locale, {
+			day: 'numeric',
+		})}-${date
+			.toLocaleDateString(locale, {
+				month: 'long',
+			})
+			.toLowerCase()}-${date.toLocaleDateString(locale, {
+			year: 'numeric',
+		})}`;
+	} else {
+		return `${date
+			.toLocaleDateString(locale, {
+				month: 'long',
+			})
+			.toLowerCase()}-${date.toLocaleDateString(locale, {
+			year: 'numeric',
+		})}`;
+	}
+};
 
 export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
-	// const {
-	// 	config: { isPaidContent },
-	// } = tagFront;
-
 	const isInEuropeTest =
 		tagFront.config.abTests.europeNetworkFrontVariant === 'variant';
 
@@ -87,19 +65,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	// const merchHighPosition = getMerchHighPosition(
-	// 	tagFront.pressedPage.collections.length,
-	// 	tagFront.isNetworkFront,
-	// );
-
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(tagFront);
-
-	// const mobileAdPositions = renderAds
-	// 	? getMobileAdPositions(tagFront.pressedPage.collections, merchHighPosition)
-	// 	: [];
 
 	return (
 		<>
@@ -215,6 +184,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.month,
 						groupedTrails.day ?? 1,
 					);
+					const containedId = getContainerId(
+						date,
+						locale,
+						groupedTrails.day !== undefined,
+					);
 
 					const url =
 						groupedTrails.day !== undefined
@@ -244,11 +218,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							})}
 							url={url}
 							showTopBorder={true}
-							// TODO: Review these props & provide the correct values
-							ophanComponentName={'test'}
-							containerName={'test'}
+							ophanComponentLink={`container-${index} | ${containedId}`}
+							ophanComponentName={containedId}
+							sectionId={containedId}
 							toggleable={false}
-							sectionId={'test'}
 							pageId={tagFront.pageId}
 							editionId={tagFront.editionId}
 							canShowMore={false}
