@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
@@ -11,12 +10,10 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';
 import type { Newsletter } from '../types/content';
 import type { OnwardsSource } from '../types/onwards';
-import type { Palette } from '../types/palette';
 import { LI } from './Card/components/LI';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
@@ -26,7 +23,9 @@ type Props = {
 	heading: string;
 	newsletters: Newsletter[];
 	onwardsSource: OnwardsSource;
-	format: ArticleFormat;
+	leftColSize: LeftColSize;
+	activeDotColour: string;
+	titleHighlightColour: string;
 };
 
 // TO DO - this file was copied from the Caroursel component and duplicates much of the code
@@ -161,12 +160,12 @@ const dotStyle = css`
 	}
 `;
 
-const dotActiveStyle = (palette: Palette) => css`
-	background-color: ${palette.background.carouselDot};
+const activeDotStyles = (activeDotColour: string) => css`
+	background-color: ${activeDotColour};
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.background.carouselDotFocus};
+		background-color: ${activeDotColour};
 	}
 `;
 
@@ -200,17 +199,15 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
+const prevButtonContainerStyle = (leftColSize: LeftColSize) => {
+	switch (leftColSize) {
+		case 'wide':
 			return css`
 				${from.leftCol} {
 					left: 205px;
 				}
 			`;
-		}
-		default: {
+		case 'compact': {
 			return css`
 				${from.leftCol} {
 					left: 120px;
@@ -313,8 +310,11 @@ const headerStyles = css`
 	margin-left: 0;
 `;
 
-const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
-	color: ${isCuratedContent ? palette.text.carouselTitle : text.primary};
+const titleStyle = (
+	titleHighlightColour: string,
+	isCuratedContent?: boolean,
+) => css`
+	color: ${isCuratedContent ? titleHighlightColour : text.primary};
 	display: inline-block;
 	&::first-letter {
 		text-transform: capitalize;
@@ -323,23 +323,26 @@ const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
 
 const Title = ({
 	title,
-	palette,
+	titleHighlightColour,
 	isCuratedContent,
 }: {
 	title: string;
-	palette: Palette;
+	titleHighlightColour: string;
 	isCuratedContent?: boolean;
 }) => (
 	<h2 css={headerStyles}>
 		{isCuratedContent ? 'More from ' : ''}
-		<span css={titleStyle(palette, isCuratedContent)}>{title}</span>
+		<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
+			{title}
+		</span>
 	</h2>
 );
 
 type HeaderAndNavProps = {
 	heading: string;
 	newsletters: Newsletter[];
-	palette: Palette;
+	titleHighlightColour: string;
+	activeDotColour: string;
 	index: number;
 	isCuratedContent?: boolean;
 	goToIndex: (newIndex: number) => void;
@@ -348,7 +351,8 @@ type HeaderAndNavProps = {
 const HeaderAndNav = ({
 	heading,
 	newsletters,
-	palette,
+	titleHighlightColour,
+	activeDotColour,
 	index,
 	isCuratedContent,
 	goToIndex,
@@ -356,7 +360,7 @@ const HeaderAndNav = ({
 	<div>
 		<Title
 			title={heading}
-			palette={palette}
+			titleHighlightColour={titleHighlightColour}
 			isCuratedContent={isCuratedContent}
 		/>
 		<div css={dotsStyle}>
@@ -370,7 +374,7 @@ const HeaderAndNav = ({
 					key={`dot-${i}`}
 					css={[
 						dotStyle,
-						i === index && dotActiveStyle(palette),
+						i === index && activeDotStyles(activeDotColour),
 						adjustNumberOfDotsStyle(i, newsletters.length),
 					]}
 					data-link-name={`carousel-small-nav-dot-${i}`}
@@ -384,9 +388,10 @@ export const CarouselForNewsletters = ({
 	heading,
 	newsletters,
 	onwardsSource,
-	format,
+	leftColSize,
+	activeDotColour,
+	titleHighlightColour,
 }: Props) => {
-	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -502,13 +507,19 @@ export const CarouselForNewsletters = ({
 				<HeaderAndNav
 					heading={heading}
 					newsletters={newsletters}
-					palette={palette}
+					activeDotColour={activeDotColour}
+					titleHighlightColour={titleHighlightColour}
 					index={index}
-					isCuratedContent={false}
+					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
+			<div
+				css={[
+					buttonContainerStyle,
+					prevButtonContainerStyle(leftColSize),
+				]}
+			>
 				<button
 					type="button"
 					onClick={prev}
@@ -544,7 +555,8 @@ export const CarouselForNewsletters = ({
 						<HeaderAndNav
 							heading={heading}
 							newsletters={newsletters}
-							palette={palette}
+							titleHighlightColour={titleHighlightColour}
+							activeDotColour={activeDotColour}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							goToIndex={goToIndex}

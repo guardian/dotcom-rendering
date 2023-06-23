@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { palette } from '@guardian/source-foundations';
 import type { GroupedNewsletters } from '../types/newslettersPage';
 import { CarouselForNewsletters } from './CarouselForNewsletters.importable';
 import { Island } from './Island';
@@ -18,11 +18,9 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 							heading={group.title}
 							onwardsSource="unknown-source"
 							newsletters={group.newsletters}
-							format={{
-								design: ArticleDesign.Standard,
-								theme: ArticlePillar.News,
-								display: ArticleDisplay.Standard,
-							}}
+							leftColSize="wide"
+							activeDotColour={palette.brand[400]}
+							titleHighlightColour={palette.neutral[7]}
 						/>
 					</Island>
 				</Section>
