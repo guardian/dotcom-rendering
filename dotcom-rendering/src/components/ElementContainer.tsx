@@ -1,5 +1,6 @@
 import { css, jsx } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
+import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 
 const sidePadding = css`
@@ -55,6 +56,8 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerName?: string;
+	hasPageSkin?: boolean;
+	hasPageSkinContentSelfConstrain?: boolean;
 };
 
 /**
@@ -79,13 +82,20 @@ export const ElementContainer = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
+	hasPageSkin = false,
+	hasPageSkinContentSelfConstrain = false,
 }: Props) =>
 	jsx(element, {
 		id: ophanComponentName,
 		'data-link-name': ophanComponentLink,
 		'data-component': ophanComponentName,
 		'data-container-name': containerName,
-		css: [backgroundColour && setBackgroundColour(backgroundColour)],
+		css: [
+			backgroundColour && setBackgroundColour(backgroundColour),
+			hasPageSkin &&
+				!hasPageSkinContentSelfConstrain &&
+				pageSkinContainer,
+		],
 		className,
 		children: (
 			<div
@@ -102,6 +112,7 @@ export const ElementContainer = ({
 						setBackgroundColour(innerBackgroundColour),
 					padSides && sidePadding,
 					padBottom && bottomPadding,
+					hasPageSkin && pageSkinContainer,
 				]}
 			>
 				{children}

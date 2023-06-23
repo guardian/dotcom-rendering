@@ -36,6 +36,7 @@ import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -178,11 +179,11 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<SupportHeaderType | null>(null);
+	const isSignedIn = useSignedInStatus() === 'SignedIn';
 
 	useOnce((): void => {
 		setAutomat();
 
-		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
@@ -356,7 +357,7 @@ const ReaderRevenueLinksNative = ({
 		<a
 			css={linkStyles}
 			href={getUrl('contribute')}
-			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
 		>
 			Support us <ArrowRightIcon />
 		</a>

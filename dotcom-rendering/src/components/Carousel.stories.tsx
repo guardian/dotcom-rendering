@@ -5,6 +5,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 import type { TrailType } from '../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
@@ -193,6 +194,36 @@ const trails: TrailType[] = [
 
 const immersiveTrails = convertToImmersive(trails);
 
+const paletteNewsStandard = decidePalette({
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+});
+
+const paletteSportStandard = decidePalette({
+	theme: ArticlePillar.Sport,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+});
+
+const paletteNewsImmersive = decidePalette({
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Immersive,
+});
+
+const paletteSportImmersive = decidePalette({
+	theme: ArticlePillar.Sport,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Immersive,
+});
+
+const paletteSpecialAltStandard = decidePalette({
+	theme: ArticleSpecial.SpecialReportAlt,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+});
+
 export const Headlines = () => (
 	<>
 		<Section fullWidth={true}>
@@ -200,11 +231,11 @@ export const Headlines = () => (
 				heading="More on this story"
 				trails={trails}
 				onwardsSource="more-on-this-story"
-				format={{
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				titleHighlightColour={
+					paletteNewsStandard.background.carouselDot
+				}
+				activeDotColour={paletteNewsStandard.background.carouselDot}
+				leftColSize={'compact'}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -212,11 +243,11 @@ export const Headlines = () => (
 				heading="Sport"
 				trails={trails}
 				onwardsSource="curated-content"
-				format={{
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				titleHighlightColour={
+					paletteSportStandard.background.carouselDot
+				}
+				activeDotColour={paletteSportStandard.background.carouselDot}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -231,11 +262,11 @@ export const SingleItemCarousel = () => (
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
 				onwardsSource="more-on-this-story"
-				format={{
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Standard,
-				}}
+				titleHighlightColour={
+					paletteNewsStandard.background.carouselDot
+				}
+				activeDotColour={paletteNewsStandard.background.carouselDot}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -250,11 +281,11 @@ export const Immersive = () => (
 				heading="More on this story"
 				trails={immersiveTrails}
 				onwardsSource="more-on-this-story"
-				format={{
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Immersive,
-				}}
+				titleHighlightColour={
+					paletteNewsImmersive.background.carouselDot
+				}
+				activeDotColour={paletteNewsImmersive.background.carouselDot}
+				leftColSize={'compact'}
 			/>
 		</Section>
 		<Section fullWidth={true}>
@@ -262,11 +293,11 @@ export const Immersive = () => (
 				heading="Sport"
 				trails={immersiveTrails}
 				onwardsSource="curated-content"
-				format={{
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-					display: ArticleDisplay.Immersive,
-				}}
+				titleHighlightColour={
+					paletteSportImmersive.background.carouselDot
+				}
+				activeDotColour={paletteSportImmersive.background.carouselDot}
+				leftColSize={'compact'}
 			/>
 		</Section>
 	</>
@@ -293,11 +324,13 @@ export const SpecialReportAlt = () => {
 					heading="SpecialReportAlt"
 					trails={specialReportTrails}
 					onwardsSource="curated-content"
-					format={{
-						theme: ArticleSpecial.SpecialReportAlt,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
+					titleHighlightColour={
+						paletteSpecialAltStandard.text.carouselTitle
+					}
+					activeDotColour={
+						paletteSpecialAltStandard.background.carouselDot
+					}
+					leftColSize={'compact'}
 				/>
 			</Section>
 		</>

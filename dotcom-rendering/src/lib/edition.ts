@@ -1,4 +1,5 @@
 import type { EditionLinkType } from '../model/extract-nav';
+import { guard } from './guard';
 
 export type EditionId = (typeof editionList)[number]['editionId'];
 
@@ -79,5 +80,4 @@ export const getRemainingEditions = (
  *
  * @param s The string to test
  */
-export const isEditionId = (s: string): s is EditionId =>
-	editionList.map(({ editionId }) => String(editionId)).includes(s);
+export const isEditionId = guard(editionList.map(({ editionId }) => editionId));

@@ -57,7 +57,7 @@ const textStyles = css`
 `;
 
 export const BackToTop = () => (
-	<a css={link} href="#top">
+	<a css={link} href="#top" data-link-name="back to top">
 		<span css={textStyles}>Back to top</span>
 		<span css={iconContainer} className="icon-container">
 			<i css={icon} />

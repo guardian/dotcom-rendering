@@ -34,7 +34,9 @@ const headerStyles = (fontColour?: string) => css`
 	padding-bottom: ${space[1]}px;
 	padding-top: 6px;
 	overflow-wrap: break-word; /*if a single word is too long, this will break the word up rather than have the display be affected*/
+`;
 
+const headerStylesWithUrl = css`
 	:hover {
 		text-decoration: underline;
 	}
@@ -94,8 +96,12 @@ export const ContainerTitle = ({
 	return (
 		<div css={marginStyles}>
 			{url ? (
-				<a css={[linkStyles, bottomMargin]} href={url}>
-					<h2 css={headerStyles(fontColour)}>
+				<a
+					css={[linkStyles, bottomMargin]}
+					href={url}
+					data-link-name="section heading"
+				>
+					<h2 css={[headerStylesWithUrl, headerStyles(fontColour)]}>
 						{localisedTitle(title, editionId)}
 					</h2>
 				</a>

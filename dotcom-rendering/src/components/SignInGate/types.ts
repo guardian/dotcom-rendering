@@ -1,4 +1,6 @@
-import { isObject } from '@guardian/libs';
+import { isObject, isString } from '@guardian/libs';
+import type { Guard } from '../../lib/guard';
+import { guard } from '../../lib/guard';
 import type { TagType } from '../../types/tag';
 
 export type CanShowGateProps = {
@@ -20,11 +22,9 @@ export type SignInGateComponent = {
 };
 
 export const ALL_USER_TYPES = ['new', 'guest', 'current'] as const;
-type UserTypeTuple = typeof ALL_USER_TYPES;
-export type UserType = UserTypeTuple[number];
+export type UserType = Guard<typeof ALL_USER_TYPES>;
 
-export const isUserType = (value: unknown): value is UserType =>
-	ALL_USER_TYPES.includes(value as UserType);
+export const isUserType = guard(ALL_USER_TYPES);
 
 export const ALL_PRODUCTS = [
 	'Contribution',
@@ -32,11 +32,9 @@ export const ALL_PRODUCTS = [
 	'Paper',
 	'GuardianWeekly',
 ] as const;
-type ProductTuple = typeof ALL_PRODUCTS;
-export type Product = ProductTuple[number];
+export type Product = Guard<typeof ALL_PRODUCTS>;
 
-export const isProduct = (value: unknown): value is Product =>
-	ALL_PRODUCTS.includes(value as Product);
+export const isProduct = guard(ALL_PRODUCTS);
 export interface CheckoutCompleteCookieData {
 	userType: UserType;
 	product: Product;
@@ -45,7 +43,13 @@ export interface CheckoutCompleteCookieData {
 export function isCheckoutCompleteCookieData(
 	obj: unknown,
 ): obj is CheckoutCompleteCookieData {
-	return isObject(obj) && isUserType(obj.userType) && isProduct(obj.product);
+	return (
+		isObject(obj) &&
+		isString(obj.userType) &&
+		isUserType(obj.userType) &&
+		isString(obj.product) &&
+		isProduct(obj.product)
+	);
 }
 export type SignInGateProps = {
 	signInUrl: string;

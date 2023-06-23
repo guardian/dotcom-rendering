@@ -201,7 +201,13 @@ export const enhanceCards = (
 		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, offset + index);
+
+		const dataLinkName = getDataLinkNameCard(
+			format,
+			group,
+			offset + index,
+			faciaCard.card.cardStyle.type,
+		);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
@@ -247,10 +253,7 @@ export const enhanceCards = (
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,
-			// nb. there is a distinct 'byline' property on FEFrontCard, at
-			// card.properties.byline
-			byline:
-				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
