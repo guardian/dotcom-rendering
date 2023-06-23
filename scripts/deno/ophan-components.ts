@@ -38,7 +38,15 @@ const known_errors = new Set([
 	'7 | text',
 	'8 | text',
 	'9 | text',
-	'10 | text'
+	'10 | text',
+	'most-viewed',
+	'tab 1 Most viewed',
+	'tab 2 Across the guardian',
+	'Most viewed',
+	'Across the guardian',
+
+	// Not visible when JS is disabled
+	'nav2 : overlay',
 ]);
 
 const getOphanComponents = (
@@ -48,7 +56,7 @@ const getOphanComponents = (
 	const doc = new DOMParser().parseFromString(html, 'text/html');
 	if (!doc) throw new Error('Unable to parse DOM');
 
-	return [...doc.querySelectorAll(`[${attribute}]`)].filter(
+	return [...doc.querySelectorAll(`[${attribute}]:not(.is-hidden,.is-hidden *)`)].filter(
 		(node): node is Element => node instanceof Element,
 	);
 };
