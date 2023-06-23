@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
-import { between, from } from '@guardian/source-foundations';
+import { between, from, space } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
 
 type Props = {
@@ -50,10 +50,10 @@ const mostPopMarginWithPageSkin = css`
 
 const frontStyles = css`
 	${from.wide} {
-		margin-top: -7px;
+		margin-top: -${space[2]}px;
 	}
 	${between.leftCol.and.wide} {
-		margin-top: -42px;
+		margin-top: -${space[12] - 6}px;
 	}
 `;
 

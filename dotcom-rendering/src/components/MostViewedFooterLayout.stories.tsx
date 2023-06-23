@@ -24,7 +24,7 @@ export const withTwoTabs = () => {
 	return (
 		<Hydrated>
 			<Section>
-				<MostViewedFooterLayout renderAds={true}>
+				<MostViewedFooterLayout renderAds={false}>
 					<MostViewedFooter
 						tabs={[
 							{ heading: 'Tab 1', trails: trails.slice(0, 10) },
@@ -42,7 +42,7 @@ export const withOneTabs = () => {
 	return (
 		<Hydrated>
 			<Section>
-				<MostViewedFooterLayout renderAds={true}>
+				<MostViewedFooterLayout renderAds={false}>
 					<MostViewedFooter
 						tabs={[
 							{

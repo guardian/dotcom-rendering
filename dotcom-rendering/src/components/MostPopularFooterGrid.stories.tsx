@@ -21,7 +21,7 @@ const deeplyRead = {
 export const SingleImageWithCaption = () => {
 	return (
 		<Section>
-			<MostViewedFooterLayout renderAds={true}>
+			<MostViewedFooterLayout renderAds={false}>
 				<MostPopularFooterGrid
 					mostViewed={mostViewed}
 					deeplyRead={deeplyRead}
