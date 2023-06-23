@@ -5,6 +5,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { Fragment } from 'react';
+import { formatCount } from '../lib/formatCount';
 
 type Props = {
 	pageId: string;
@@ -87,12 +88,6 @@ const paginationArrowsCss = css`
 	}
 `;
 
-/**
- * Adds commas to the number e.g 100000 to 1,000,000
- */
-const formatNumberWithCommas = (number: number): string =>
-	number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
 const getPageRange = (currentPage: number, lastPage: number) => {
 	const pageRange: number[] = [];
 
@@ -131,8 +126,7 @@ export const FrontPagination = ({
 	return (
 		<div css={paginationWrapperCss}>
 			<span css={paginationLegendCss}>
-				About {formatNumberWithCommas(totalContent)} results for{' '}
-				{sectionName}
+				About {formatCount(totalContent).long} results for {sectionName}
 			</span>
 			<div css={paginationItemContainerCss}>
 				{currentPage > 1 && (
