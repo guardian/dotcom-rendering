@@ -16,7 +16,7 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 					<Island deferUntil="idle">
 						<CarouselForNewsletters
 							heading={group.title}
-							onwardsSource="unknown-source"
+							onwardsSource="newsletters-page"
 							newsletters={group.newsletters}
 							leftColSize="wide"
 							activeDotColour={palette.brand[400]}
