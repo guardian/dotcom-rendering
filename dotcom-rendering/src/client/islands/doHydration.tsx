@@ -31,7 +31,7 @@ export const doHydration = async (
 
 	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
 	importStart();
-	import(
+	return import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
@@ -90,5 +90,4 @@ export const doHydration = async (
 			}
 			throw error;
 		});
-	return Promise.resolve(true);
 };
