@@ -150,6 +150,9 @@ const mostPopAdStyles = css`
 		margin: 0;
 		width: auto;
 	}
+	${from.wide} {
+		padding-top: 25px;
+	}
 `;
 
 /**
