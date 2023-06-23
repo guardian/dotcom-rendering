@@ -6,6 +6,10 @@ type Props = {
 	children?: React.ReactNode;
 };
 
+const snapCssSandboxStyles = css`
+	width: 100%;
+`;
+
 export const SnapCssSandbox = ({ snapData, children }: Props) => {
 	if (snapData?.embedHtml === undefined) {
 		return <></>;
@@ -13,13 +17,7 @@ export const SnapCssSandbox = ({ snapData, children }: Props) => {
 
 	return (
 		<>
-			<div
-				css={[
-					css`
-						${snapData.embedCss};
-					`,
-				]}
-			>
+			<div css={[snapCssSandboxStyles, css(snapData.embedCss)]}>
 				{children}
 			</div>
 		</>
