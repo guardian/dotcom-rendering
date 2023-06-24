@@ -599,8 +599,10 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 				width: 100%;
 				height: 100%;
 				cursor: pointer;
-				:hover > button.open-lightbox {
-					opacity: 0.7;
+				${from.tablet} {
+					:hover > button.open-lightbox {
+						opacity: 0.7;
+					}
 				}
 			`}
 			className="open-lightbox"
@@ -666,14 +668,20 @@ export const LightboxButton = ({
 						border: none;
 						cursor: pointer;
 						background: rgba(18, 18, 18, 0.8);
-						/* We start with zero and then hovering the ClickOverlay increases opacity  */
-						opacity: 0;
-						:hover {
-							filter: brightness(85%);
-							opacity: 0.8;
-						}
-						:focus {
-							opacity: 0.7;
+						opacity: 0.7;
+						${from.tablet} {
+							/**
+							 * On desktop we start with zero and then hovering or focussing the
+							 * ClickOverlay increases opacity
+							 */
+							opacity: 0;
+							:hover {
+								filter: brightness(85%);
+								opacity: 0.8;
+							}
+							:focus {
+								opacity: 0.7;
+							}
 						}
 					`,
 					/* Don't show the button over thumbnails; they're too small */
