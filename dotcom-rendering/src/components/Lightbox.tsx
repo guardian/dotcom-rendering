@@ -344,6 +344,11 @@ export const Lightbox = ({ format, images }: Props) => {
 							position: fixed;
 							${getZIndex('lightbox')};
 						}
+
+						body {
+							/* This ensures the menu and sidebars on iPhones have the same background as lightbox */
+							background-color: ${neutral[20]};
+						}
 					}
 				`}
 			/>
