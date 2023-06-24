@@ -54,7 +54,7 @@ function decideSize(role: RoleType, format: ArticleFormat) {
 				default: {
 					return css`
 						${smallStyles}
-						${from.tablet} {
+						${from.mobileLandscape} {
 							${largeStyles}
 						}
 					`;
@@ -599,7 +599,7 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 				width: 100%;
 				height: 100%;
 				cursor: pointer;
-				${from.tablet} {
+				${from.mobileLandscape} {
 					:hover > button.open-lightbox {
 						opacity: 0.7;
 					}
@@ -661,7 +661,7 @@ export const LightboxButton = ({
 							fill: ${neutral[100]};
 						}
 						margin: 6px;
-						${until.tablet} {
+						${until.mobileLandscape} {
 							padding: 0;
 						}
 						border-radius: 50%;
@@ -669,7 +669,7 @@ export const LightboxButton = ({
 						cursor: pointer;
 						background: rgba(18, 18, 18, 0.8);
 						opacity: 0.7;
-						${from.tablet} {
+						${from.mobileLandscape} {
 							/**
 							 * On desktop we start with zero and then hovering or focussing the
 							 * ClickOverlay increases opacity
