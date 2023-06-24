@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleDisplay, log, storage } from '@guardian/libs';
 import {
 	from,
 	neutral,
-	space,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
