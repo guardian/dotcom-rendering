@@ -24,8 +24,8 @@ function decideSize(role: RoleType, format: ArticleFormat) {
 		height: 32px;
 		width: 32px;
 		svg {
-			height: 22px;
-			width: 22px;
+			height: 20px;
+			width: 20px;
 		}
 	`;
 	const largeStyles = css`
@@ -642,7 +642,7 @@ export const LightboxButton = ({
 						position: absolute;
 						right: 0;
 						svg {
-							margin-top: 4px;
+							margin-top: 3px;
 							fill: ${neutral[100]};
 						}
 						margin: ${space[2]}px;
