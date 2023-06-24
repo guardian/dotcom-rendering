@@ -355,17 +355,17 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		if (!window.location.hash.startsWith('#img-')) {
 			window.history.pushState({}, '', `#img-${position}`);
 		}
+		// Now we have the index of the image that was clicked, show it
+		// in the lightbox
+		scrollTo(position);
+		// We only want this listener active while the lightbox is open
+		window.addEventListener('keydown', handleKeydown);
 		// Try to open the lightbox in fullscreen mode. This may fail
 		try {
 			await requestFullscreen();
 		} catch {
 			// Do nothing, requests to open fullscreen are just requests and can fail
 		}
-		// Now we have the index of the image that was clicked, show it
-		// in the lightbox
-		scrollTo(position);
-		// We only want this listener active while the lightbox is open
-		window.addEventListener('keydown', handleKeydown);
 	}
 
 	function exitFullscreen() {
