@@ -449,9 +449,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.collectionType === 'fixed/video') {
-						const mediaPalette =
-							decideContainerOverrides('MediaPalette');
+					if (
+						collection.collectionType === 'fixed/video' ||
+						collection.containerPalette === 'PodcastPalette'
+					) {
+						const containerPalette =
+							collection.containerPalette ?? 'MediaPalette';
+						const containerOverrides =
+							decideContainerOverrides(containerPalette);
 						return (
 							<Section
 								key={ophanName}
@@ -466,13 +471,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
-								containerPalette={'MediaPalette'}
+								containerPalette={containerPalette}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
 								backgroundColour={
-									mediaPalette.background?.container
+									containerOverrides.background.container
 								}
 								hasPageSkin={hasPageSkin}
 							>
@@ -481,7 +486,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										palette={'MediaPalette'}
+										palette={containerPalette}
 										leftColSize={'compact'}
 									/>
 								</Island>
