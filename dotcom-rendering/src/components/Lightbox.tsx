@@ -97,6 +97,7 @@ const navStyles = css`
 const ulStyles = css`
 	display: flex;
 	height: 100%;
+	width: 100%;
 	scroll-snap-type: x mandatory;
 	overflow-x: scroll;
 	scroll-behavior: auto;
