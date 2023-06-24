@@ -582,6 +582,16 @@ function initialiseLightbox(lightbox: HTMLElement) {
  */
 const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 	return (
+		/**
+		 * Why does this div have an onClick event?
+		 *
+		 * Because Mobile safari does not support click event delgation. The workaround for
+		 * this is to add an empty click handler
+		 *
+		 * @see {@link https://www.quirksmode.org/blog/archives/2010/09/click_event_del.html}
+		 *
+		 */
+		// eslint-disable-next-line, jsx-a11y/no-static-element-interactions -- see above
 		<div
 			css={css`
 				position: absolute;
@@ -594,6 +604,9 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 				}
 			`}
 			className="open-lightbox"
+			aria-hidden="true"
+			// eslint-disable-next-line @typescript-eslint/no-empty-function -- see above
+			onClick={() => {}}
 		>
 			{children}
 		</div>
