@@ -4,6 +4,7 @@ import {
 	from,
 	neutral,
 	space,
+	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgArrowExpand } from '@guardian/source-react-components';
@@ -659,6 +660,9 @@ export const LightboxButton = ({
 							fill: ${neutral[100]};
 						}
 						margin: ${space[2]}px;
+						${until.tablet} {
+							padding: 0;
+						}
 						border-radius: 50%;
 						border: none;
 						cursor: pointer;
