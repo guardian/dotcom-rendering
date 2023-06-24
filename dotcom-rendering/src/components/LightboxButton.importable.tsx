@@ -659,14 +659,14 @@ export const LightboxButton = ({
 							margin-top: 3px;
 							fill: ${neutral[100]};
 						}
-						margin: ${space[2]}px;
+						margin: 6px;
 						${until.tablet} {
 							padding: 0;
 						}
 						border-radius: 50%;
 						border: none;
 						cursor: pointer;
-						background-color: ${neutral[46]};
+						background: rgba(18, 18, 18, 0.8);
 						/* We start with zero and then hovering the ClickOverlay increases opacity  */
 						opacity: 0;
 						:hover {
