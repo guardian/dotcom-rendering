@@ -347,7 +347,7 @@ export const Lightbox = ({ format, images }: Props) => {
 
 						body {
 							/* This ensures the menu and sidebars on iPhones have the same background as lightbox */
-							background-color: ${neutral[20]};
+							background-color: ${neutral[10]};
 						}
 					}
 				`}
