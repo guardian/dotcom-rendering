@@ -32,6 +32,31 @@ const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
 };
 
 /**
+ * Older legacy images use a different url format so we need to use a different
+ * approach when extracting the id of the image
+ */
+const decideImageId = (image: EnhancedImageForLightbox): string | undefined => {
+	const firstImageUrl = image.media.allImages[0]?.url;
+	if (!firstImageUrl) return;
+	const url = new URL(firstImageUrl);
+	switch (url.hostname) {
+		case 'media.guim.co.uk': {
+			// E.g.
+			// https://media.guim.co.uk/be634f340e477a975c7352f289c4353105ba9e67/288_121_3702_2221/140.jpg
+			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+			return url.pathname.split('/')[1];
+		}
+		case 'static.guim.co.uk':
+		// E.g.
+		// https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/5/26/1432666797165/59de49e2-553f-4b52-b7ac-09bda7f63e4b-220x132.jpeg
+		// This bit                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+		default: {
+			return url.pathname.split('/').reverse()[0];
+		}
+	}
+};
+
+/**
  * Generates a new array of lightbox images. Does not mutate.
  *
  * We decide this array, prior to rendering, because we create and
@@ -92,19 +117,27 @@ export const buildLightboxImages = (
 			}
 		});
 	});
-	// On some articles the main media is repeated as an element in the article body so
+	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
 	const alreadySeen: string[] = [];
-	const uniqueImages: EnhancedImageForLightbox[] = [];
+	let uniqueImages: EnhancedImageForLightbox[] = [];
 	images.forEach((image) => {
-		const imageId = image.media.allImages[0]?.url.split('/')[3];
+		const imageId = decideImageId(image);
 		if (!imageId) {
 			// It's unlikely that we would not have an imageId here but if we do we fail
 			// open, passing the image through
 			uniqueImages.push(image);
 			return;
 		}
-		if (!alreadySeen.includes(imageId)) {
+		if (alreadySeen.includes(imageId)) {
+			// Replace the element with the duplicated one. We do this because we want to favour
+			// the higher quality body images you get with galleries.
+			uniqueImages = uniqueImages.filter(
+				(thisImage) => decideImageId(thisImage) !== imageId,
+			);
+			uniqueImages.push(image);
+		} else {
+			// This image is not duplicated so we pass it through
 			uniqueImages.push(image);
 			alreadySeen.push(imageId);
 		}
