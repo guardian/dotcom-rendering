@@ -17,7 +17,7 @@ type Props = {
 	editionId: EditionId;
 	displayRoundel?: boolean;
 	isImmersive?: boolean;
-	selectedPillar: ArticlePillar;
+	selectedPillar?: ArticlePillar;
 	isInEuropeTest: boolean;
 	headerTopBarSwitch: boolean;
 };

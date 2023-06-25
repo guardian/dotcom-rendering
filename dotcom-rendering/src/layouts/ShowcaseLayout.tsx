@@ -254,6 +254,8 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			{!isLabs ? (
@@ -323,7 +325,7 @@ export const ShowcaseLayout = ({
 											ArticleDisplay.Immersive ||
 										format.theme === ArticleSpecial.Labs
 									}
-									selectedPillar={getCurrentPillar(article)}
+									selectedPillar={selectedPillar}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -410,7 +412,7 @@ export const ShowcaseLayout = ({
 											ArticleDisplay.Immersive ||
 										format.theme === ArticleSpecial.Labs
 									}
-									selectedPillar={getCurrentPillar(article)}
+									selectedPillar={selectedPillar}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -813,7 +815,7 @@ export const ShowcaseLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

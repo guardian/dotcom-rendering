@@ -240,7 +240,7 @@ type Props = {
 	isImmersive?: boolean;
 	isTopNav?: boolean;
 	pillars: PillarLinkType[];
-	selectedPillar: ArticlePillar;
+	selectedPillar?: ArticlePillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
 };

@@ -349,6 +349,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const renderAds = isWeb && canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			{renderingTarget === 'Web' && (
@@ -416,7 +418,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								format.display === ArticleDisplay.Immersive ||
 								format.theme === ArticleSpecial.Labs
 							}
-							selectedPillar={getCurrentPillar(article)}
+							selectedPillar={selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -953,7 +955,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Footer
 							pageFooter={article.pageFooter}
-							theme={format.theme}
+							selectedPillar={selectedPillar}
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}

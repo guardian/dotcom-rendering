@@ -313,6 +313,8 @@ export const CommentLayout = ({
 
 	const renderAds = canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			<div id="bannerandheader">
@@ -382,7 +384,7 @@ export const CommentLayout = ({
 								format.display === ArticleDisplay.Immersive ||
 								format.theme === ArticleSpecial.Labs
 							}
-							selectedPillar={getCurrentPillar(article)}
+							selectedPillar={selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -858,7 +860,7 @@ export const CommentLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

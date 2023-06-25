@@ -1,6 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
 
-export const decideNavPillar = (pillar: LegacyPillar): ArticlePillar => {
+export const decideNavPillar = (
+	pillar: LegacyPillar,
+): ArticlePillar | undefined => {
 	switch (pillar) {
 		case 'news':
 			return ArticlePillar.News;
@@ -13,6 +15,6 @@ export const decideNavPillar = (pillar: LegacyPillar): ArticlePillar => {
 		case 'lifestyle':
 			return ArticlePillar.Lifestyle;
 		default:
-			return ArticlePillar.News;
+			return undefined;
 	}
 };

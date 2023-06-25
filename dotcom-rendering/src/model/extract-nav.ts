@@ -37,7 +37,7 @@ interface BaseNavType {
 
 export interface NavType extends BaseNavType {
 	pillars: PillarLinkType[];
-	selectedPillar: ArticlePillar;
+	selectedPillar?: ArticlePillar;
 }
 
 const getLink = (data: FELinkType): LinkType => {
@@ -98,6 +98,5 @@ export const extractNAV = (data: FENavType): NavType => {
 			  }
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
-		selectedPillar: ArticlePillar.News,
 	};
 };

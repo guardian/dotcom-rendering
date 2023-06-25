@@ -229,6 +229,8 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -288,7 +290,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={getCurrentPillar(article)}
+						selectedPillar={selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -570,7 +572,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

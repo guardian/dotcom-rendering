@@ -144,6 +144,8 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
@@ -171,7 +173,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={getCurrentPillar(article)}
+						selectedPillar={selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
@@ -259,7 +261,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						format.display === ArticleDisplay.Immersive ||
 						format.theme === ArticleSpecial.Labs
 					}
-					selectedPillar={getCurrentPillar(article)}
+					selectedPillar={selectedPillar}
 					nav={NAV}
 					subscribeUrl={
 						article.nav.readerRevenueLinks.header.subscribe
@@ -384,7 +386,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={getCurrentPillar(article)}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

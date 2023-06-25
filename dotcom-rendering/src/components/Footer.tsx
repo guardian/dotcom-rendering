@@ -18,13 +18,13 @@ import {
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { themeToPillar } from '../lib/themeToPillar';
 import type { PillarLinkType } from '../model/extract-nav';
 import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { ArticlePillar } from '@guardian/libs';
 
 // CSS vars
 const footerBorders = `1px solid ${brand[600]}`;
@@ -311,14 +311,14 @@ const decideSignupNewsletterName = (edition: EditionId): string => {
 
 export const Footer = ({
 	pillars,
-	theme,
+	selectedPillar,
 	pageFooter,
 	urls,
 	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	theme: ArticleTheme;
+	selectedPillar?: ArticlePillar;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
@@ -333,7 +333,7 @@ export const Footer = ({
 		<div css={pillarWrap}>
 			<Pillars
 				pillars={pillars}
-				selectedPillar={themeToPillar(theme)}
+				selectedPillar={selectedPillar}
 				showLastPillarDivider={false}
 				dataLinkName="footer"
 			/>

@@ -47,7 +47,7 @@ export const Footers = () => (
 				<Wrapper>
 					<Footer
 						pageFooter={Standard.pageFooter}
-						theme={ArticlePillar.News}
+						selectedPillar={ArticlePillar.News}
 						pillars={extractNAV(Standard.nav).pillars}
 						urls={Standard.nav.readerRevenueLinks.header}
 						editionId={editionId}

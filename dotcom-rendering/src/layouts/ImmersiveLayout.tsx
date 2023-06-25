@@ -340,6 +340,8 @@ export const ImmersiveLayout = ({
 
 	const renderAds = canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			<div
@@ -364,7 +366,7 @@ export const ImmersiveLayout = ({
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={getCurrentPillar(article)}
+						selectedPillar={selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.contribute
@@ -904,7 +906,7 @@ export const ImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

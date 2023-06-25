@@ -245,6 +245,8 @@ export const InteractiveLayout = ({
 	 */
 	const renderAds = canRenderAds(article);
 
+	const selectedPillar = getCurrentPillar(article);
+
 	return (
 		<>
 			{article.isLegacyInteractive && (
@@ -321,7 +323,7 @@ export const InteractiveLayout = ({
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={getCurrentPillar(article)}
+						selectedPillar={selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -777,7 +779,7 @@ export const InteractiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					theme={format.theme}
+					selectedPillar={selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
