@@ -388,6 +388,10 @@ export const LabsSection = ({
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
 			hasPageSkin={hasPageSkin}
+			/**
+			 * This is the secret word that will fool the ad blockers but allow commercial code to track Labs Containers
+			 */
+			className={'dumathoin'}
 		>
 			<Container hasPageSkin={hasPageSkin}>
 				<LeftColumn
