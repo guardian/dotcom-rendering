@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticlePillar } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -24,7 +25,6 @@ import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { ArticlePillar } from '@guardian/libs';
 
 // CSS vars
 const footerBorders = `1px solid ${brand[600]}`;
