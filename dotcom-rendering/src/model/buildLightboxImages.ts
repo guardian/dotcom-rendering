@@ -46,13 +46,16 @@ const decideImageId = (image: EnhancedImageForLightbox): string | undefined => {
 			// This bit                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 			return url.pathname.split('/')[1];
 		}
+		case 'i.guim.co.uk':
+		case 'uploads.guim.co.uk':
+		case 'static-secure.guim.co.uk':
 		case 'static.guim.co.uk':
-		// E.g.
-		// https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/5/26/1432666797165/59de49e2-553f-4b52-b7ac-09bda7f63e4b-220x132.jpeg
-		// This bit                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		default: {
+			// E.g.
+			// https://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2015/5/26/1432666797165/59de49e2-553f-4b52-b7ac-09bda7f63e4b-220x132.jpeg
+			// This bit                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 			return url.pathname.split('/').reverse()[0];
-		}
+		default:
+			return;
 	}
 };
 
