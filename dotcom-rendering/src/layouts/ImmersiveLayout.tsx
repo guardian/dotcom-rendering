@@ -786,7 +786,11 @@ export const ImmersiveLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>
@@ -883,7 +887,8 @@ export const ImmersiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

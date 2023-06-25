@@ -362,7 +362,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -443,7 +443,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 										currentNavLink={
 											props.NAV.currentNavLink
 										}
-										format={format}
+										linkHoverColour={
+											palette.text.articleLinkHover
+										}
+										borderColour={palette.border.subNav}
 									/>
 								</Island>
 							</Section>
@@ -806,7 +809,11 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>
@@ -927,7 +934,10 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<SubNav
 									subNavSections={props.NAV.subNavSections}
 									currentNavLink={props.NAV.currentNavLink}
-									format={format}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
 								/>
 							</Island>
 						</Section>

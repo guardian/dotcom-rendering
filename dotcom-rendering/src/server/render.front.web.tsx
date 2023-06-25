@@ -160,6 +160,7 @@ export const renderFront = ({ front }: Props): string => {
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
+		hasPageSkin: front.config.hasPageSkin,
 		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
 		borkFID: front.config.abTests.borkFidVariant === 'variant',
 	});

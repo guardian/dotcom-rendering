@@ -9,9 +9,10 @@ const snapStyles = css`
 
 type Props = {
 	snapData?: DCRSnapType;
+	dataLinkName?: string;
 };
 
-export const Snap = ({ snapData }: Props) => {
+export const Snap = ({ snapData, dataLinkName }: Props) => {
 	if (snapData?.embedHtml === undefined) {
 		return <></>;
 	}
@@ -21,6 +22,7 @@ export const Snap = ({ snapData }: Props) => {
 			<div
 				css={[snapStyles]}
 				dangerouslySetInnerHTML={{ __html: snapData.embedHtml }}
+				data-link-name={dataLinkName}
 			/>
 			{snapData.embedJs ? (
 				<div>

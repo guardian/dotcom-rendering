@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
@@ -333,3 +334,42 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 );
 ThreeSnapTwoStandard2ndBoosted.storyName =
 	'With three snaps (2nd boosted) - two standard cards';
+
+export const SpecialReportWithoutPalette = () => (
+	<FrontSection title="Dynamic Package" showTopBorder={true}>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: trails.slice(0, 1),
+				standard: [
+					{
+						format: {
+							display: ArticleDisplay.Immersive,
+							theme: ArticleSpecial.SpecialReport,
+							design: ArticleDesign.Standard,
+						},
+						url: '/news/2016/apr/08/mossack-fonseca-law-firm-hide-money-panama-papers',
+						kickerText: 'Mossack Fonseca',
+						headline:
+							'inside the firm that helps the super-rich hide their money',
+						showQuotedHeadline: false,
+						dataLinkName: 'news | group-0 | card-@1',
+						showMainVideo: false,
+						showLivePlayable: false,
+						isExternalLink: false,
+						webPublicationDate: '2016-04-08T12:15:09.000Z',
+						image: 'https://media.guim.co.uk/bc9acaefba82b18506aa4e60801d0a6af7176a44/0_106_3000_1800/3000.jpg',
+						isBoosted: false,
+						trailText:
+							'As Panama Papers shine light on offshore world, Luke Harding takes a closer look at company exploiting tropical tax havens',
+						supportingContent: [],
+						byline: 'Luke Harding',
+						snapData: {},
+						isCrossword: false,
+					},
+				],
+			}}
+		/>
+	</FrontSection>
+);
+One.storyName = 'With one standard card';

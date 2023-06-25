@@ -137,6 +137,8 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !article.config.switches.interactiveFullHeaderSwitch;
 
+	const palette = decidePalette(format);
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
@@ -204,7 +206,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot display={format.display} />
+							<HeaderAdSlot />
 						</Section>
 					</div>
 				</Stuck>
@@ -279,7 +281,8 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>
@@ -364,7 +367,8 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

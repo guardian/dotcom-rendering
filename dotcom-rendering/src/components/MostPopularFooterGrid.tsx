@@ -32,18 +32,42 @@ const gridContainerStyle = css`
 	border-left: 1px solid ${palette.neutral[86]};
 `;
 
-const titleContainerStyle = css`
-	border-right: 1px solid ${palette.neutral[86]};
-	${from.leftCol} {
-		/* Below leftCol always set top border */
-		border-bottom: 1px solid ${palette.neutral[86]};
+const gridContainerStyleWithPageSkin = css`
+	display: grid;
+	grid-auto-flow: 1fr;
+
+	/* One column view */
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(22, auto);
+
+	/* Two column view */
+	${from.tablet} {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: repeat(11, auto);
 	}
 
+	margin-top: 9px;
+
+	/* We set left border on the grid container, and then right border on
+    the gridItems to prevent borders doubling up */
+	border-left: 1px solid ${palette.neutral[86]};
+`;
+
+const titleContainerStyle = css`
+	border-right: 1px solid ${palette.neutral[86]};
 	${until.leftCol} {
 		/* Below leftCol always set top border */
 		border-top: 1px solid ${palette.neutral[86]};
 	}
+	${from.leftCol} {
+		border-bottom: 1px solid ${palette.neutral[86]};
+	}
+	padding: 7px 10px 18px;
+`;
 
+const titleContainerStyleWithPageSkin = css`
+	border-right: 1px solid ${palette.neutral[86]};
+	border-top: 1px solid ${palette.neutral[86]};
 	padding: 7px 10px 18px;
 `;
 
@@ -92,12 +116,14 @@ type Props = {
 	mostViewed: TrailTabType;
 	sectionName?: string;
 	deeplyRead: TrailTabType;
+	hasPageSkin?: boolean;
 };
 
 export const MostPopularFooterGrid = ({
 	mostViewed,
 	deeplyRead,
 	sectionName = '',
+	hasPageSkin = false,
 }: Props) => {
 	const shortenedMostViewed = mostViewed.trails.slice(0, 5);
 	const shortenedDeeplyRead = deeplyRead.trails.slice(0, 5);
@@ -106,10 +132,20 @@ export const MostPopularFooterGrid = ({
 		<div
 			data-component={ophanLinkName(sectionName)}
 			data-link-name={ophanLinkName(sectionName)}
-			css={gridContainerStyle}
+			css={
+				hasPageSkin
+					? gridContainerStyleWithPageSkin
+					: gridContainerStyle
+			}
 		>
 			<section data-link-name="most-viewed" css={displayContent}>
-				<div css={titleContainerStyle}>
+				<div
+					css={[
+						hasPageSkin
+							? titleContainerStyleWithPageSkin
+							: titleContainerStyle,
+					]}
+				>
 					<h3 css={titleStyle}>Most viewed</h3>
 					<div css={descriptionStyle}>
 						What readers are clicking on
@@ -126,12 +162,19 @@ export const MostPopularFooterGrid = ({
 							ageWarning={trail.ageWarning}
 							cssOverrides={mostViewedOverridesStyle(j)}
 							image={trail.image}
+							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>
 			</section>
 			<section data-link-name="deeply-read" css={displayContent}>
-				<div css={titleContainerStyle}>
+				<div
+					css={[
+						hasPageSkin
+							? titleContainerStyleWithPageSkin
+							: titleContainerStyle,
+					]}
+				>
 					<h3 css={titleStyle}>{deeplyRead.heading}</h3>
 					<div css={descriptionStyle}>
 						What readers are spending time with
@@ -151,6 +194,7 @@ export const MostPopularFooterGrid = ({
 								shortenedMostViewed.length,
 							)}
 							image={trail.image}
+							hasPageSkin={hasPageSkin}
 						/>
 					))}
 				</ol>

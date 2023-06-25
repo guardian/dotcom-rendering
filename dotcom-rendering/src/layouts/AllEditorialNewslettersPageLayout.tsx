@@ -51,6 +51,12 @@ export const AllEditorialNewslettersPageLayout = ({
 	const contributionsServiceUrl =
 		process.env.SDC_URL ?? pageContributionsServiceUrl;
 
+	const displayedNewslettersCount =
+		newslettersPage.groupedNewsletters.groups.reduce<number>(
+			(count, group) => count + group.newsletters.length,
+			0,
+		);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -64,7 +70,7 @@ export const AllEditorialNewslettersPageLayout = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={articleFormat.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -126,7 +132,10 @@ export const AllEditorialNewslettersPageLayout = ({
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={articleFormat}
+										linkHoverColour={
+											'palette.text.articleLinkHover'
+										}
+										borderColour={'palette.border.subNav'}
 									/>
 								</Island>
 							</Section>
@@ -152,8 +161,7 @@ export const AllEditorialNewslettersPageLayout = ({
 			<main data-layout="NewsletterPageLayout" id="maincontent">
 				<NewslettersPageHeading
 					mmaUrl={newslettersPage.config.mmaUrl}
-					editionId={newslettersPage.editionId}
-					headingText={newslettersPage.webTitle}
+					newsletterCount={displayedNewslettersCount}
 				/>
 				<GroupedNewslettersList
 					groupedNewsletters={newslettersPage.groupedNewsletters}
