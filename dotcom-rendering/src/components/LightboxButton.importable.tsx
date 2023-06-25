@@ -52,9 +52,7 @@ function decideSize(role: RoleType, format: ArticleFormat) {
 				case 'showcase':
 				case 'immersive':
 				default: {
-					return css`
-						${largeStyles}
-					`;
+					return largeStyles;
 				}
 			}
 		}
