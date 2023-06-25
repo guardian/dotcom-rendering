@@ -53,10 +53,7 @@ function decideSize(role: RoleType, format: ArticleFormat) {
 				case 'immersive':
 				default: {
 					return css`
-						${smallStyles}
-						${from.mobileLandscape} {
-							${largeStyles}
-						}
+						${largeStyles}
 					`;
 				}
 			}
@@ -599,7 +596,7 @@ const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
 				width: 100%;
 				height: 100%;
 				cursor: pointer;
-				${from.mobileLandscape} {
+				${from.tablet} {
 					:hover > button.open-lightbox {
 						opacity: 0.7;
 					}
@@ -661,20 +658,15 @@ export const LightboxButton = ({
 							fill: ${neutral[100]};
 						}
 						margin: 6px;
-						${until.mobileLandscape} {
+						${until.tablet} {
 							padding: 0;
 						}
 						border-radius: 50%;
 						border: none;
 						cursor: pointer;
 						background: rgba(18, 18, 18, 0.8);
-						opacity: 0.7;
-						${from.mobileLandscape} {
-							/**
-							 * On desktop we start with zero and then hovering or focussing the
-							 * ClickOverlay increases opacity
-							 */
-							opacity: 0;
+						opacity: 0;
+						${from.tablet} {
 							:hover {
 								filter: brightness(85%);
 								opacity: 0.8;
