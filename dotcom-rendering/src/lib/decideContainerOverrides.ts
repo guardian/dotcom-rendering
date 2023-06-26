@@ -490,10 +490,13 @@ export const decideContainerOverrides = (
 			border: {
 				container: borderContainer(containerPalette),
 				lines: borderLines(containerPalette),
+				carouselArrow: neutral[7],
 			},
 			background: {
 				container: backgroundContainer(containerPalette),
 				carouselDot: brandAlt[400],
+				carouselArrow: brandAlt[400],
+				carouselArrowHover: brandAlt[200],
 			},
 		};
 	}

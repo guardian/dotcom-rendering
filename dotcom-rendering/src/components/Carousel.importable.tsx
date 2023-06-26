@@ -34,6 +34,9 @@ type Props = {
 	titleColour?: string;
 	titleHighlightColour: string;
 	verticalDividerColour?: string;
+	arrowColour?: string;
+	arrowBackgroundColour?: string;
+	arrowBackgroundHoverColour?: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -226,7 +229,11 @@ const nextButtonContainerStyle = css`
 	right: 10px;
 `;
 
-const buttonStyle = css`
+const buttonStyle = (
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
 	border: 0 none;
 	border-radius: 100%;
 	height: 34px;
@@ -234,12 +241,12 @@ const buttonStyle = css`
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${neutral[0]};
+	background-color: ${arrowBackgroundColour ?? neutral[0]};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${brandAlt[400]};
+		background-color: ${arrowBackgroundHoverColour ?? brandAlt[400]};
 		svg {
 			fill: ${neutral[7]};
 		}
@@ -250,41 +257,56 @@ const buttonStyle = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${arrowColour ?? neutral[100]};
 		height: 34px;
 	}
 `;
 
-const prevButtonStyle = (index: number) => css`
-	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
+const prevButtonStyle = (
+	index: number,
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
+	background-color: ${index !== 0
+		? arrowBackgroundColour ?? neutral[0]
+		: neutral[46]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
+		background-color: ${index !== 0
+			? arrowBackgroundHoverColour ?? brandAlt[400]
+			: neutral[46]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${arrowColour ?? neutral[100]};
 		}
 	}
 `;
 
-const nextButtonStyle = (index: number, totalStories: number) => css`
+const nextButtonStyle = (
+	index: number,
+	totalStories: number,
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? neutral[0]
-		: neutral[60]};
+		? arrowBackgroundColour ?? neutral[0]
+		: neutral[46]};
 	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${!isLastCardShowing(index, totalStories)
-			? brandAlt[400]
-			: neutral[60]};
+			? arrowBackgroundHoverColour ?? brandAlt[400]
+			: neutral[46]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${arrowColour ?? neutral[100]};
 		}
 	}
 `;
@@ -483,6 +505,9 @@ export const Carousel = ({
 	titleColour = neutral[7],
 	titleHighlightColour,
 	verticalDividerColour,
+	arrowColour,
+	arrowBackgroundColour,
+	arrowBackgroundHoverColour,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -622,7 +647,19 @@ export const Carousel = ({
 					type="button"
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					css={[buttonStyle, prevButtonStyle(index)]}
+					css={[
+						buttonStyle(
+							arrowColour,
+							arrowBackgroundColour,
+							arrowBackgroundHoverColour,
+						),
+						prevButtonStyle(
+							index,
+							arrowColour,
+							arrowBackgroundColour,
+							arrowBackgroundHoverColour,
+						),
+					]}
 					data-link-name={`${arrowName}-prev`}
 				>
 					<SvgChevronLeftSingle />
@@ -634,7 +671,20 @@ export const Carousel = ({
 					type="button"
 					onClick={next}
 					aria-label="Move carousel forwards"
-					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
+					css={[
+						buttonStyle(
+							arrowColour,
+							arrowBackgroundColour,
+							arrowBackgroundHoverColour,
+						),
+						nextButtonStyle(
+							index,
+							trails.length,
+							arrowColour,
+							arrowBackgroundColour,
+							arrowBackgroundHoverColour,
+						),
+					]}
 					data-link-name={`${arrowName}-next`}
 				>
 					<SvgChevronRightSingle />
@@ -662,7 +712,19 @@ export const Carousel = ({
 								type="button"
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								css={[buttonStyle, prevButtonStyle(index)]}
+								css={[
+									buttonStyle(
+										arrowColour,
+										arrowBackgroundColour,
+										arrowBackgroundHoverColour,
+									),
+									prevButtonStyle(
+										index,
+										arrowColour,
+										arrowBackgroundColour,
+										arrowBackgroundHoverColour,
+									),
+								]}
 								data-link-name={`${arrowName}-prev`}
 							>
 								<SvgChevronLeftSingle />
@@ -672,8 +734,18 @@ export const Carousel = ({
 								onClick={next}
 								aria-label="Move carousel forwards"
 								css={[
-									buttonStyle,
-									nextButtonStyle(index, trails.length),
+									buttonStyle(
+										arrowColour,
+										arrowBackgroundColour,
+										arrowBackgroundHoverColour,
+									),
+									nextButtonStyle(
+										index,
+										trails.length,
+										arrowColour,
+										arrowBackgroundColour,
+										arrowBackgroundHoverColour,
+									),
 								]}
 								data-link-name={`${arrowName}-next`}
 							>

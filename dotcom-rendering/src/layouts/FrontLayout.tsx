@@ -493,6 +493,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										verticalDividerColour={
 											mediaPalette.border.lines
 										}
+										arrowColour={
+											mediaPalette.border.carouselArrow
+										}
+										arrowBackgroundColour={
+											mediaPalette.background
+												.carouselArrow
+										}
+										arrowBackgroundHoverColour={
+											mediaPalette.background
+												.carouselArrowHover
+										}
 										leftColSize={'compact'}
 									/>
 								</Island>
