@@ -1,4 +1,4 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 
 export const themeToPillar = (
 	theme?: ArticleTheme,
