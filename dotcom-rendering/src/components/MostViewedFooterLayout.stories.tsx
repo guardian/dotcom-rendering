@@ -20,11 +20,49 @@ export default {
 	},
 };
 
-export const withTwoTabs = () => {
+export const withTwoTabsAdFree = () => {
 	return (
 		<Hydrated>
 			<Section>
 				<MostViewedFooterLayout renderAds={false}>
+					<MostViewedFooter
+						tabs={[
+							{ heading: 'Tab 1', trails: trails.slice(0, 10) },
+							{ heading: 'Tab 2', trails: trails.slice(5, 15) },
+						]}
+					/>
+				</MostViewedFooterLayout>
+			</Section>
+		</Hydrated>
+	);
+};
+withTwoTabsAdFree.storyName = 'with two tabs ad free';
+
+export const withOneTabsAdFree = () => {
+	return (
+		<Hydrated>
+			<Section>
+				<MostViewedFooterLayout renderAds={false}>
+					<MostViewedFooter
+						tabs={[
+							{
+								heading: 'in the UK',
+								trails: trails.slice(0, 10),
+							},
+						]}
+					/>
+				</MostViewedFooterLayout>
+			</Section>
+		</Hydrated>
+	);
+};
+withOneTabsAdFree.storyName = 'with one tab ad free';
+
+export const withTwoTabs = () => {
+	return (
+		<Hydrated>
+			<Section>
+				<MostViewedFooterLayout renderAds={true}>
 					<MostViewedFooter
 						tabs={[
 							{ heading: 'Tab 1', trails: trails.slice(0, 10) },
@@ -42,7 +80,7 @@ export const withOneTabs = () => {
 	return (
 		<Hydrated>
 			<Section>
-				<MostViewedFooterLayout renderAds={false}>
+				<MostViewedFooterLayout renderAds={true}>
 					<MostViewedFooter
 						tabs={[
 							{
