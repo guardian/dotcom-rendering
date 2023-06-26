@@ -18,10 +18,24 @@ const deeplyRead = {
 	trails: trails.slice(10, 20),
 };
 
+export const SingleImageWithCaptionAdFree = () => {
+	return (
+		<Section>
+			<MostViewedFooterLayout renderAds={false}>
+				<MostPopularFooterGrid
+					mostViewed={mostViewed}
+					deeplyRead={deeplyRead}
+				/>
+			</MostViewedFooterLayout>
+		</Section>
+	);
+};
+SingleImageWithCaptionAdFree.storyName = 'most popular ad free';
+
 export const SingleImageWithCaption = () => {
 	return (
 		<Section>
-			<MostViewedFooterLayout>
+			<MostViewedFooterLayout renderAds={true}>
 				<MostPopularFooterGrid
 					mostViewed={mostViewed}
 					deeplyRead={deeplyRead}
