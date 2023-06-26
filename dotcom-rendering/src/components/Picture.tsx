@@ -273,6 +273,29 @@ export const getFallbackSource = (sources: ImageSource[]): ImageSource => {
 	return fallback;
 };
 
+export const Sources = ({ sources }: { sources: ImageSource[] }) => {
+	return (
+		<>
+			{sources.map((source) => {
+				return (
+					<React.Fragment key={source.breakpoint}>
+						{/* High resolution (HDPI) sources*/}
+						<source
+							srcSet={source.hiResUrl}
+							media={`(min-width: ${source.breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.breakpoint}px) and (min-resolution: 120dpi)`}
+						/>
+						{/* Low resolution (MDPI) source*/}
+						<source
+							srcSet={source.lowResUrl}
+							media={`(min-width: ${source.breakpoint}px)`}
+						/>
+					</React.Fragment>
+				);
+			})}
+		</>
+	);
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -332,23 +355,7 @@ export const Picture = ({
 					/>
 				</>
 			)}
-			{sources.map((source) => {
-				return (
-					<React.Fragment key={source.breakpoint}>
-						{/* High resolution (HDPI) sources*/}
-						<source
-							srcSet={source.hiResUrl}
-							media={`(min-width: ${source.breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.breakpoint}px) and (min-resolution: 120dpi)`}
-						/>
-						{/* Low resolution (MDPI) source*/}
-						<source
-							srcSet={source.lowResUrl}
-							media={`(min-width: ${source.breakpoint}px)`}
-						/>
-					</React.Fragment>
-				);
-			})}
-
+			<Sources sources={sources} />
 			<img
 				alt={alt}
 				src={fallbackSource.lowResUrl}

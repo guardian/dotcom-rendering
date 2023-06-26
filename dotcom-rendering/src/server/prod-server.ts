@@ -17,7 +17,12 @@ import {
 	handleInteractive,
 	handleKeyEvents,
 } from '../server/index.article.web';
-import { handleFront, handleFrontJson } from '../server/index.front.web';
+import {
+	handleFront,
+	handleFrontJson,
+	handleTagFront,
+	handleTagFrontJson,
+} from '../server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
@@ -62,6 +67,8 @@ export const prodServer = (): void => {
 	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
 	app.post('/Front', logRenderTime, handleFront);
 	app.post('/FrontJSON', logRenderTime, handleFrontJson);
+	app.post('/TagFront', logRenderTime, handleTagFront);
+	app.post('/TagFrontJSON', logRenderTime, handleTagFrontJson);
 	app.post(
 		'/EmailNewsletters',
 		logRenderTime,
@@ -96,6 +103,19 @@ export const prodServer = (): void => {
 		logRenderTime,
 		getContentFromURLMiddleware,
 		handleFrontJson,
+	);
+
+	app.get(
+		'/TagFront/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleTagFront,
+	);
+	app.get(
+		'/TagFrontJSON/*',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleTagFrontJson,
 	);
 
 	app.get(
