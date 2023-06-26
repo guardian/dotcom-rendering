@@ -26,7 +26,7 @@ const headerAdWrapper = css`
 	top: 0;
 `;
 
-const adSlotContainer = css`
+const topAboveNavContainer = css`
 	&[top-above-nav-ad-rendered] {
 		width: fit-content;
 		margin: auto;
@@ -51,7 +51,7 @@ export const HeaderAdSlot = () => (
 		<Hide when="below" breakpoint="tablet">
 			<div css={[headerAdWrapper]} className="top-banner-ad-container">
 				<div
-					css={[adSlotContainer, adContainerStyles]}
+					css={[adContainerStyles, topAboveNavContainer]}
 					className="ad-slot-container"
 				>
 					<AdSlot position="top-above-nav" />
