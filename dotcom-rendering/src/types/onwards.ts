@@ -21,4 +21,5 @@ export type OnwardsSource =
 	| 'more-media-in-section'
 	| 'more-galleries'
 	| 'curated-content'
+	| 'newsletters-page'
 	| 'unknown-source'; // We should never see this in the analytics data!
