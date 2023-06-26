@@ -57,9 +57,6 @@ const frontStyles = css`
 `;
 
 const adFreeStyles = css`
-	${from.wide} {
-		width: 75%;
-	}
 	${between.leftCol.and.wide} {
 		width: 76%;
 	}
