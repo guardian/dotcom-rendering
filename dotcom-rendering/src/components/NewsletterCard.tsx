@@ -20,7 +20,8 @@ export const ICON_PLUS_CLASS =
 export const ICON_TICK_CLASS =
 	'js-GroupedNewslettersList-sign-up-button__tick-icon';
 
-export const groupItemStyle = css`
+const groupItemStyle = css`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex-basis: 200px;
@@ -37,11 +38,11 @@ export const groupItemStyle = css`
 	}
 `;
 
-export const buttonHolderStyle = css`
+const buttonHolderStyle = css`
 	margin-top: auto;
 `;
 
-export const buttonStyle = css`
+const buttonStyle = css`
 	background-color: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
 	border-color: ${palette.neutral[7]};
@@ -71,7 +72,7 @@ export const buttonStyle = css`
 	}
 `;
 
-export const getButtonInitialAriaAttribute = (newsletterName: string) => ({
+const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
