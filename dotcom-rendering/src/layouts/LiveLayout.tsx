@@ -319,7 +319,7 @@ export const LiveLayout = ({
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot display={format.display} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -388,7 +388,10 @@ export const LiveLayout = ({
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									format={format}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
 								/>
 							</Island>
 						</Section>
@@ -1181,7 +1184,13 @@ export const LiveLayout = ({
 										decideTrail,
 									)}
 									onwardsSource="more-on-this-story"
-									format={format}
+									titleHighlightColour={
+										palette.text.carouselTitle
+									}
+									activeDotColour={
+										palette.background.carouselDot
+									}
+									leftColSize={'wide'}
 								/>
 							</Island>
 						</Section>
@@ -1252,7 +1261,7 @@ export const LiveLayout = ({
 							data-component="most-popular"
 							leftColSize="wide"
 						>
-							<MostViewedFooterLayout>
+							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
 										sectionName={article.sectionName}
@@ -1295,7 +1304,8 @@ export const LiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

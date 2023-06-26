@@ -16,8 +16,6 @@ import { BodyElement, ElementKind } from 'bodyElement';
 import { none, some } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { act } from 'react-dom/test-utils';
-import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
@@ -378,107 +376,56 @@ describe('Renders different types of elements', () => {
 	test('ElementKind.InteractiveAtom', () => {
 		const nodes = mockRenderElement(atomElement());
 		const atom = nodes.flat()[0];
-		expect(getHtml(atom)).toContain('main { background: yellow; }');
-		expect(getHtml(atom)).toContain('console.log(&#x27;init&#x27;)');
-		expect(getHtml(atom)).toContain('Some content');
+		expect(atom).toBeNull();
 	});
 
 	test('ElementKind.ExplainerAtom', () => {
 		const nodes = mockRenderElement(explainerElement());
 		const explainer = nodes.flat()[0];
-		expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
+		expect(explainer).toBeNull();
 	});
 
 	test('ElementKind.GuideAtom', () => {
 		const nodes = mockRenderElement(guideElement());
 		const guide = nodes.flat()[0];
-		expect(getHtml(guide)).toContain('<main>Guide content</main>');
-		testHandlers(guide);
+		expect(guide).toBeNull();
 	});
 
 	test('ElementKind.QandaAtom', () => {
 		const nodes = mockRenderElement(qandaElement());
 		const qanda = nodes.flat()[0];
-		expect(getHtml(qanda)).toContain('<main>QandA content</main>');
-		testHandlers(qanda);
+		expect(qanda).toBeNull();
 	});
 
 	test('ElementKind.ProfileAtom', () => {
 		const nodes = mockRenderElement(profileElement());
 		const profile = nodes.flat()[0];
-		expect(getHtml(profile)).toContain('<main>Profile content</main>');
-		testHandlers(profile);
+		expect(profile).toBeNull();
 	});
 
 	test('ElementKind.TimelineAtom', () => {
 		const nodes = mockRenderElement(timelineElement());
 		const timeline = nodes.flat()[0];
-		expect(getHtml(timeline)).toContain(
-			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
-		);
-		testHandlers(timeline);
+		expect(timeline).toBeNull();
 	});
 
 	test('ElementKind.ChartAtom', () => {
 		const nodes = mockRenderElement(chartElement());
 		const chart = nodes.flat()[0];
-		expect(getHtml(chart)).toContain(
-			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
-		);
+		expect(chart).toBeNull();
 	});
 
 	test('ElementKind.KnowledgeQuizAtom', () => {
 		const nodes = mockRenderElement(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
-		const html = getHtml(quiz);
-		expect(html).toContain('<div class="js-quiz">');
-		expect(html).toContain(
-			'<script class="js-quiz-params" type="application/json">',
-		);
+		expect(quiz).toBeNull();
 	});
 
 	test('ElementKind.AudioAtom', () => {
 		const nodes = mockRenderElement(audioAtom());
 		const audio = nodes.flat()[0];
-		const html = getHtml(audio);
-		expect(html).toContain(
-			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
-		);
+		expect(audio).toBeNull();
 	});
-
-	function testHandlers(node: ReactNode): void {
-		if (isValidElement(node)) {
-			const container = document.createElement('div');
-			document.body.appendChild(container);
-			act(() => {
-				renderDom(node, container);
-			});
-
-			const likeButton = container.querySelector('[data-testid="like"]');
-			const dislikeButton = container.querySelector(
-				'[data-testid="dislike"]',
-			);
-			const feedback = container.querySelector(
-				'[data-testid="feedback"]',
-			);
-			expect(feedback?.getAttribute('hidden')).toBe('');
-
-			act(() => {
-				dislikeButton!.dispatchEvent(
-					new MouseEvent('click', { bubbles: true }),
-				);
-			});
-			act(() => {
-				likeButton!.dispatchEvent(
-					new MouseEvent('click', { bubbles: true }),
-				);
-			});
-
-			expect(feedback?.getAttribute('hidden')).toBeNull();
-			unmountComponentAtNode(container);
-			container.remove();
-		}
-	}
 });
 
 describe('Renders different types of Editions elements', () => {

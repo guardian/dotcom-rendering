@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import type {
 	DCRContainerPalette,
@@ -75,7 +74,7 @@ const Card100 = ({
 					imagePosition="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
-					isDynamo={true}
+					isDynamo={containerPalette && true}
 					supportingContent={cards[0].supportingContent}
 					supportingContentAlignment="horizontal"
 				/>

@@ -268,7 +268,7 @@ export const ShowcaseLayout = ({
 									padSides={false}
 									shouldCenter={false}
 								>
-									<HeaderAdSlot display={format.display} />
+									<HeaderAdSlot />
 								</Section>
 							</Stuck>
 						)}
@@ -343,7 +343,10 @@ export const ShowcaseLayout = ({
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
-											format={format}
+											linkHoverColour={
+												palette.text.articleLinkHover
+											}
+											borderColour={palette.border.subNav}
 										/>
 									</Island>
 								</Section>
@@ -377,7 +380,7 @@ export const ShowcaseLayout = ({
 									showSideBorders={false}
 									padSides={false}
 								>
-									<HeaderAdSlot display={format.display} />
+									<HeaderAdSlot />
 								</Section>
 							</Stuck>
 						)}
@@ -678,7 +681,11 @@ export const ShowcaseLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								format={format}
+								titleHighlightColour={
+									palette.text.carouselTitle
+								}
+								activeDotColour={palette.background.carouselDot}
+								leftColSize={'compact'}
 							/>
 						</Island>
 					</Section>
@@ -741,7 +748,7 @@ export const ShowcaseLayout = ({
 						data-link-name="most-popular"
 						data-component="most-popular"
 					>
-						<MostViewedFooterLayout>
+						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionName={article.sectionName}
@@ -777,7 +784,8 @@ export const ShowcaseLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>

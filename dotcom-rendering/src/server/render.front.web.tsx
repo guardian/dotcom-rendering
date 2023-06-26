@@ -4,6 +4,7 @@ import {
 	dcrJavascriptBundle,
 } from '../../scripts/webpack/bundles';
 import { FrontPage } from '../components/FrontPage';
+import { TagFrontPage } from '../components/TagFrontPage';
 import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
@@ -11,6 +12,7 @@ import { getHttp3Url } from '../lib/getHttp3Url';
 import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRFrontType } from '../types/front';
+import type { DCRTagFrontType } from '../types/tagFront';
 import { htmlPageTemplate } from './htmlPageTemplate';
 
 interface Props {
@@ -107,7 +109,107 @@ export const renderFront = ({ front }: Props): string => {
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
+		hasPageSkin: front.config.hasPageSkin,
 		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
 		borkFID: front.config.abTests.borkFidVariant === 'variant',
+	});
+};
+
+export const renderTagFront = ({
+	tagFront,
+}: {
+	tagFront: DCRTagFrontType;
+}): string => {
+	const title = tagFront.webTitle;
+	const NAV = extractNAV(tagFront.nav);
+
+	const { html, extractedCss } = renderToStringWithEmotion(
+		<TagFrontPage tagFront={tagFront} NAV={NAV} />,
+	);
+
+	// Evaluating the performance of HTTP3 over HTTP2
+	// See: https://github.com/guardian/dotcom-rendering/pull/5394
+	const { offerHttp3 = false } = tagFront.config.switches;
+
+	const polyfillIO =
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+	].every(Boolean);
+
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptArrayFromFile = getScriptsFromManifest({
+		platform: 'web',
+		shouldServeVariantBundle,
+	});
+
+	/**
+	 * The highest priority scripts.
+	 * These scripts have a considerable impact on site performance.
+	 * Only scripts critical to application execution may go in here.
+	 * Please talk to the dotcom platform team before adding more.
+	 * Scripts will be executed in the order they appear in this array
+	 */
+	const scriptTags = generateScriptTags(
+		[
+			polyfillIO,
+			...getScriptArrayFromFile('frameworks.js'),
+			...getScriptArrayFromFile('index.js'),
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				tagFront.config.commercialBundleUrl,
+		]
+			.filter(isString)
+			.map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+	);
+
+	/**
+	 * We escape windowGuardian here to prevent errors when the data
+	 * is placed in a script tag on the page
+	 */
+	const windowGuardian = escapeData(
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: tagFront.editionId,
+				stage: tagFront.config.stage,
+				frontendAssetsFullURL: tagFront.config.frontendAssetsFullURL,
+				revisionNumber: tagFront.config.revisionNumber,
+				sentryPublicApiKey: tagFront.config.sentryPublicApiKey,
+				sentryHost: tagFront.config.sentryHost,
+				keywordIds: tagFront.config.keywordIds,
+				dfpAccountId: tagFront.config.dfpAccountId,
+				adUnit: tagFront.config.adUnit,
+				ajaxUrl: tagFront.config.ajaxUrl,
+				googletagUrl: tagFront.config.googletagUrl,
+				switches: tagFront.config.switches,
+				abTests: tagFront.config.abTests,
+				brazeApiKey: tagFront.config.brazeApiKey,
+				// Until we understand exactly what config we need to make available client-side,
+				// add everything we haven't explicitly typed as unknown config
+				unknownConfig: tagFront.config,
+			}),
+		),
+	);
+
+	const keywords = tagFront.config.keywords;
+
+	return htmlPageTemplate({
+		scriptTags,
+		css: extractedCss,
+		html,
+		title,
+		description: tagFront.header.description,
+		windowGuardian,
+		keywords,
+		offerHttp3,
+		renderingTarget: 'Web',
+		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
+		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
 	});
 };

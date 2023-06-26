@@ -2,6 +2,10 @@ import { joinUrl } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { useApi } from '../lib/useApi';
 import { useDiscussion } from '../lib/useDiscussion';
+import {
+	getOptionsHeadersWithOkta,
+	useSignedInAuthState,
+} from '../lib/useSignedInAuthState';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
@@ -17,16 +21,23 @@ export const DiscussionMeta = ({
 	shortUrlId,
 	enableDiscussionSwitch,
 }: Props) => {
+	const authStatus = useSignedInAuthState();
+
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
+	const options = getOptionsHeadersWithOkta(authStatus);
+
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		authStatus.kind !== 'Pending'
+			? joinUrl(
+					discussionApiUrl,
+					'profile/me?strict_sanctions_check=false',
+			  )
+			: undefined,
 		{},
-		{
-			credentials: 'include',
-		},
+		options,
 	);
 
 	const palette = decidePalette(format);

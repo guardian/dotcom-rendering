@@ -16,7 +16,6 @@ import {
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
-import { useAB } from '../lib/useAB';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
 import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
@@ -243,15 +242,6 @@ export const LiveBlogEpic = ({
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
-	const ABTestAPI = useAB()?.api;
-	const userIsInRemoveLiveblogEpicTest = ABTestAPI?.isUserInVariant(
-		'RemoveBusinessLiveblogEpics',
-		'variant',
-	);
-
-	const removeEpic =
-		(userIsInRemoveLiveblogEpicTest ?? false) && section == 'business';
-
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
@@ -262,7 +252,6 @@ export const LiveBlogEpic = ({
 		keywordIds,
 	});
 	if (!payload) return null;
-	if (removeEpic) return null;
 
 	/**
 	 * Here we decide where to insert the epic.

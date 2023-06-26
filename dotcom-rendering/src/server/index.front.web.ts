@@ -1,11 +1,18 @@
 import type { RequestHandler } from 'express';
 import { decideTrail } from '../lib/decideTrail';
+import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
-import { extractTrendingTopics } from '../model/extractTrendingTopics';
-import { validateAsFrontType } from '../model/validate';
+import {
+	extractTrendingTopics,
+	extractTrendingTopicsFomFront,
+} from '../model/extractTrendingTopics';
+import { groupTrailsByDates } from '../model/groupTrailsByDates';
+import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
+import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { DCRFrontType, FEFrontType } from '../types/front';
-import { renderFront } from './render.front.web';
+import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
+import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -22,6 +29,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.editionId,
 				data.pageId,
 				data.pressedPage.frontProperties.onPageDescription,
+				data.config.isPaidContent,
 			),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
@@ -29,8 +37,43 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 			? decideTrail(data.mostCommented)
 			: undefined,
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
-		trendingTopics: extractTrendingTopics(data.pressedPage.collections),
+		trendingTopics: extractTrendingTopicsFomFront(
+			data.pressedPage.collections,
+		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
+	};
+};
+
+const enhanceTagFront = (body: unknown): DCRTagFrontType => {
+	const data: FETagFrontType = validateAsTagFrontType(body);
+
+	const enhancedCards = enhanceCards(data.contents, {});
+	const speed = getSpeedFromTrails(data.contents);
+
+	return {
+		...data,
+		tags: data.tags.tags,
+		groupedTrails: groupTrailsByDates(
+			enhancedCards,
+			speed === 'slow' || data.forceDay,
+		),
+		speed,
+		// Pagination information comes from the first tag
+		pagination:
+			data.tags.tags[0]?.pagination &&
+			data.tags.tags[0].pagination.lastPage > 1
+				? {
+						...data.tags.tags[0]?.pagination,
+						sectionName: data.webTitle,
+						pageId: data.pageId,
+				  }
+				: undefined,
+		trendingTopics: extractTrendingTopics(data.contents),
+		header: {
+			title: data.webTitle,
+			description: data.tags.tags[0]?.properties.bio,
+			image: data.tags.tags[0]?.properties.bylineImageUrl,
+		},
 	};
 };
 
@@ -45,4 +88,17 @@ export const handleFront: RequestHandler = ({ body }, res) => {
 
 export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
+};
+
+export const handleTagFront: RequestHandler = ({ body }, res) => {
+	recordTypeAndPlatform('tagFront');
+	const tagFront = enhanceTagFront(body);
+	const html = renderTagFront({
+		tagFront,
+	});
+	res.status(200).send(html);
+};
+
+export const handleTagFrontJson: RequestHandler = ({ body }, res) => {
+	res.json(enhanceTagFront(body));
 };

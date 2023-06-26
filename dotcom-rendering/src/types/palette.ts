@@ -79,7 +79,6 @@ export type Palette = {
 		imageTitle: Colour;
 		speechBubble: Colour;
 		carouselDot: Colour;
-		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;

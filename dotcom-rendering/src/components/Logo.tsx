@@ -12,7 +12,7 @@ import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
 import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
 
-const linkStyles = css`
+const linkStylesUntilLeftCol = css`
 	float: right;
 	margin-top: 6px;
 	margin-right: 54px;
@@ -35,23 +35,29 @@ const linkStyles = css`
 		position: relative;
 		width: 295px;
 	}
+	${getZIndex('TheGuardian')}
+`;
+
+const linkStylesFromLeftCol = css`
 	${from.wide} {
 		margin-right: 96px;
 	}
-
-	${getZIndex('TheGuardian')}
 `;
 
 type Props = {
 	editionId: EditionId;
+	hasPageSkin?: boolean;
 };
 
-export const Logo = ({ editionId }: Props) => {
+export const Logo = ({ editionId, hasPageSkin = false }: Props) => {
 	switch (editionId) {
 		case 'UK':
 			return (
 				<a
-					css={linkStyles}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>
@@ -68,7 +74,10 @@ export const Logo = ({ editionId }: Props) => {
 		case 'AU':
 			return (
 				<a
-					css={linkStyles}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>
@@ -86,7 +95,10 @@ export const Logo = ({ editionId }: Props) => {
 		default:
 			return (
 				<a
-					css={linkStyles}
+					css={[
+						linkStylesUntilLeftCol,
+						!hasPageSkin && linkStylesFromLeftCol,
+					]}
 					href="/"
 					data-link-name={nestedOphanComponents('nav3', 'logo')}
 				>
