@@ -133,7 +133,9 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 		}
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 1vh;
+		${from.tablet} {
+			margin-top: 1vh;
+		}
 	`;
 	switch (orientation) {
 		case 'portrait': {
@@ -142,7 +144,10 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					${baseImgStyles}
 					width: auto;
 					max-width: 100%;
-					height: 98vh;
+					height: 100vh;
+					${from.tablet} {
+						height: 98vh;
+					}
 				}
 			`;
 		}
@@ -153,7 +158,10 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 					${baseImgStyles}
 					width: 100%;
 					height: auto;
-					max-height: 98vh;
+					max-height: 100vh;
+					${from.tablet} {
+						max-height: 98vh;
+					}
 				}
 			`;
 		}
