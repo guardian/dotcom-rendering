@@ -9,8 +9,17 @@ import {
 	SvgCheckmark,
 	SvgPlus,
 } from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
+import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { NewsletterDetail } from './NewsletterDetail';
+
+interface Props {
+	newsletter: Newsletter;
+	cardPosition: number;
+	carouselPosition?: number;
+	groupTitle: string;
+}
 
 export const BUTTON_ROLE = 'GroupedNewslettersList-sign-up-button';
 export const BUTTON_SELECTED_CLASS =
@@ -72,13 +81,47 @@ const buttonStyle = css`
 	}
 `;
 
+const haveSeenMaker = css`
+	position: absolute;
+	bottom: 30;
+	right: 0;
+`;
+
 const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
 });
 
-export const NewsletterCard = ({ newsletter }: { newsletter: Newsletter }) => {
+export const NewsletterCard = ({
+	newsletter,
+	groupTitle,
+	cardPosition,
+	carouselPosition,
+}: Props) => {
+	const [hasBeenSeen, setRefForHaveSeenMarker] = useIsInView({});
+	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
+
+	useEffect(() => {
+		if (hasBeenSeen && !haveReportedBeingSeen) {
+			console.log({
+				id: newsletter.identityName,
+				carousel: groupTitle,
+				cardPosition,
+				carouselPosition,
+			});
+			setHaveReportedBeingSeen(true);
+		}
+	}, [
+		hasBeenSeen,
+		haveReportedBeingSeen,
+		setHaveReportedBeingSeen,
+		newsletter.identityName,
+		groupTitle,
+		cardPosition,
+		carouselPosition,
+	]);
+
 	return (
 		<article
 			key={newsletter.name}
@@ -88,7 +131,6 @@ export const NewsletterCard = ({ newsletter }: { newsletter: Newsletter }) => {
 			<NewsletterDetail text={newsletter.frequency} />
 			<h3>{newsletter.name}</h3>
 			<p>{newsletter.description}</p>
-
 			<div css={buttonHolderStyle}>
 				<Button
 					{...getButtonInitialAriaAttribute(newsletter.name)}
@@ -112,6 +154,7 @@ export const NewsletterCard = ({ newsletter }: { newsletter: Newsletter }) => {
 					Sign up
 				</Button>
 			</div>
+			<span ref={setRefForHaveSeenMarker} css={haveSeenMaker}></span>
 		</article>
 	);
 };
