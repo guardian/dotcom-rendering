@@ -5,6 +5,7 @@ import {
 	brandBorder,
 	brandLine,
 	neutral,
+	news,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { AdSlot } from '../components/AdSlot';
@@ -83,7 +84,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={format.display} />
+								<HeaderAdSlot />
 							</Section>
 						</Stuck>
 					)}
@@ -149,7 +150,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										format={format}
+										linkHoverColour={news[400]}
+										borderColour={neutral[46]}
 									/>
 								</Island>
 							</Section>
@@ -271,7 +273,8 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={news[400]}
+							borderColour={neutral[46]}
 						/>
 					</Island>
 				</Section>
