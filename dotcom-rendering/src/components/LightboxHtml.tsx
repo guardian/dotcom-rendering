@@ -43,7 +43,7 @@ const lightboxStyles = css`
 		aside {
 			display: none;
 		}
-		${until.mobileLandscape} {
+		${until.tablet} {
 			/* Also hide the nav controls when on mobile */
 			nav {
 				visibility: hidden;
@@ -64,7 +64,7 @@ const containerStyles = css`
 	display: flex;
 	height: 100%;
 	flex-direction: row;
-	${until.mobileLandscape} {
+	${until.tablet} {
 		flex-direction: column;
 	}
 `;
@@ -72,23 +72,23 @@ const containerStyles = css`
 const navStyles = css`
 	display: flex;
 	flex-direction: column;
-	${until.mobileLandscape} {
+	${until.tablet} {
 		flex-direction: row;
 		position: absolute;
 		z-index: 1;
 		width: 100%;
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		padding-top: ${space[1]}px;
 		padding-left: ${space[4]}px;
 		padding-right: ${space[4]}px;
 		height: 100vh;
 	}
 	color: white;
-	${until.mobileLandscape} {
+	${until.tablet} {
 		border-bottom: 1px solid ${neutral[20]};
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		border-left: 1px solid ${neutral[20]};
 	}
 	background-color: ${neutral[7]};
@@ -102,7 +102,7 @@ const ulStyles = css`
 	overflow-x: scroll;
 	scroll-behavior: auto;
 	overscroll-behavior: contain;
-	${from.mobileLandscape} {
+	${from.tablet} {
 		margin-left: ${space[5]}px;
 	}
 	/**
@@ -128,7 +128,7 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 	const baseImgStyles = css`
 		object-fit: contain;
 		object-position: top;
-		${until.mobileLandscape} {
+		${until.tablet} {
 			object-position: center;
 		}
 		margin-left: auto;
@@ -170,33 +170,33 @@ const imageStyles = (orientation: 'landscape' | 'portrait') => {
 
 const pictureStyles = css`
 	picture {
-		${until.mobileLandscape} {
+		${until.tablet} {
 			display: flex;
 			align-items: center;
 		}
 		flex-grow: 1;
-		${from.mobileLandscape} {
+		${from.tablet} {
 			margin-right: ${space[5]}px;
 		}
 	}
 `;
 
 const asideStyles = css`
-	${until.mobileLandscape} {
+	${until.tablet} {
 		width: 100%;
 		margin-top: ${space[3]}px;
 		position: absolute;
 		bottom: 0;
 		left: 0;
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		min-width: 300px;
 		max-width: 300px;
 	}
-	${until.mobileLandscape} {
+	${until.tablet} {
 		border-top: 1px solid ${neutral[20]};
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		border-left: 1px solid ${neutral[20]};
 	}
 	background-color: ${neutral[7]};
@@ -206,7 +206,7 @@ const asideStyles = css`
 	padding-top: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 
-	${from.mobileLandscape} {
+	${from.tablet} {
 		padding-left: ${space[5]}px;
 		padding-right: ${space[5]}px;
 	}
@@ -218,10 +218,10 @@ const figureStyles = css`
 	height: 100%;
 	justify-content: space-between;
 
-	${until.mobileLandscape} {
+	${until.tablet} {
 		flex-direction: column;
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		flex-direction: row;
 	}
 `;
@@ -233,7 +233,7 @@ const buttonStyles = css`
 	}
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[2]}px;
-	${until.mobileLandscape} {
+	${until.tablet} {
 		margin-left: ${space[2]}px;
 	}
 	border-radius: 50%;
@@ -249,7 +249,7 @@ const buttonStyles = css`
 `;
 
 const closeButtonStyles = css`
-	${until.mobileLandscape} {
+	${until.tablet} {
 		position: absolute;
 		right: ${space[2]}px;
 	}
@@ -264,7 +264,7 @@ const arrowButtonStyles = css`
 		height: 24px;
 		width: 24px;
 	}
-	${from.mobileLandscape} {
+	${from.tablet} {
 		svg {
 			height: 32px;
 			width: 32px;
@@ -304,14 +304,14 @@ const Selection = ({
 		<span
 			css={css`
 				display: block;
-				${from.mobileLandscape} {
+				${from.tablet} {
 					text-align: center;
 					padding-top: 2.25rem;
 					margin-bottom: ${space[1]}px;
 				}
 				${textSans.xsmall()};
 				color: ${neutral[86]};
-				${until.mobileLandscape} {
+				${until.tablet} {
 					margin-bottom: ${space[2]}px;
 				}
 			`}
@@ -428,7 +428,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 														})}
 														color: ${neutral[100]};
 														margin-bottom: ${space[1]}px;
-														${from.mobileLandscape} {
+														${from.tablet} {
 															margin-bottom: ${space[2]}px;
 														}
 													`}
@@ -443,7 +443,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 														display: inline-block;
 														background-color: ${brandAltBackground.primary};
 														margin-bottom: ${space[2]}px;
-														${from.mobileLandscape} {
+														${from.tablet} {
 															margin-bottom: ${space[3]}px;
 														}
 														figcaption {
@@ -459,7 +459,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 													/>
 												</div>
 											)}
-											<Hide from="mobileLandscape">
+											<Hide from="tablet">
 												<Selection
 													countOfImages={
 														images.length
@@ -533,7 +533,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 								Close dialogue
 							</span>
 						</button>
-						<Hide until="mobileLandscape">
+						<Hide until="tablet">
 							<Selection countOfImages={images.length} />
 						</Hide>
 						<button
@@ -543,7 +543,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 								arrowButtonStyles,
 								css`
 									order: 1;
-									${until.mobileLandscape} {
+									${until.tablet} {
 										order: 2;
 									}
 								`,
@@ -569,7 +569,7 @@ export const LightboxHtml = ({ format, images }: Props) => {
 								arrowButtonStyles,
 								css`
 									order: 2;
-									${until.mobileLandscape} {
+									${until.tablet} {
 										order: 1;
 									}
 								`,
