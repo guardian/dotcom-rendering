@@ -42,6 +42,7 @@ export const enhanceCollections = (
 	editionId: EditionId,
 	pageId: string,
 	onPageDescription?: string,
+	isPaidContent?: boolean,
 ): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection, index) => {
 		const { id, displayName, collectionType, hasMore, href, description } =
@@ -49,9 +50,16 @@ export const enhanceCollections = (
 		const allCards = [...collection.curated, ...collection.backfill];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
+
+		/**
+		 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
+		 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
+		 * */
+		const canBeBranded = !isPaidContent && allCardsHaveBranding;
+
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
-			allCardsHaveBranding,
+			canBeBranded,
 		);
 		return {
 			id,

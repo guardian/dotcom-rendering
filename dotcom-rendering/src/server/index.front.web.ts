@@ -29,6 +29,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.editionId,
 				data.pageId,
 				data.pressedPage.frontProperties.onPageDescription,
+				data.config.isPaidContent,
 			),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
