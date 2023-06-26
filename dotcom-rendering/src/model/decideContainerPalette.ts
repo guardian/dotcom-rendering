@@ -7,7 +7,7 @@ import type { DCRContainerPalette, FEContainerPalette } from '../types/front';
 
 export const decideContainerPalette = (
 	palettes?: FEContainerPalette[],
-	allCardsHaveBranding?: boolean,
+	canBeBranded?: boolean,
 ): DCRContainerPalette | undefined => {
 	if (palettes?.includes('EventPalette')) return 'EventPalette';
 	if (palettes?.includes('SombreAltPalette')) return 'SombreAltPalette';
@@ -21,7 +21,6 @@ export const decideContainerPalette = (
 	if (palettes?.includes('BreakingPalette')) return 'BreakingPalette';
 	if (palettes?.includes('SpecialReportAltPalette'))
 		return 'SpecialReportAltPalette';
-	if (palettes?.includes('Branded') && allCardsHaveBranding)
-		return 'BrandedPalette';
+	if (palettes?.includes('Branded') && canBeBranded) return 'BrandedPalette';
 	return undefined;
 };

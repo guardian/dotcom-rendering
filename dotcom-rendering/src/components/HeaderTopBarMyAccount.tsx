@@ -12,6 +12,7 @@ import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
 import { useBraze } from '../lib/useBraze';
+import { useSignedInAuthState } from '../lib/useSignedInAuthState';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
@@ -189,23 +190,37 @@ const SignedInWithNotifications = ({
 	discussionApiUrl,
 	notifications,
 }: SignedInWithNotificationsProps) => {
+	const authStatus = useSignedInAuthState();
+
+	let userId: string | undefined;
+
+	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
+	// If we encounter an error or don't have user data display sign in to the user.
+	// SWR will retry in the background if the request failed
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
-		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		authStatus.kind === 'NotInTest'
+			? joinUrl(
+					discussionApiUrl,
+					'profile/me?strict_sanctions_check=false',
+			  )
+			: undefined,
+
 		{},
 		{
 			credentials: 'include',
 		},
 	);
+	if (authStatus.kind === 'NotInTest' && data) {
+		userId = data.userProfile.userId;
+	}
 
-	// If we encounter an error or don't have user data display sign in to the user.
-	// SWR will retry in the background if the request failed
-	if (error || !data?.userProfile.userId) return <SignIn idUrl={idUrl} />;
+	if (authStatus.kind === 'Ready') {
+		userId = authStatus.authState.idToken?.claims.legacy_identity_id;
+	}
 
-	const identityLinks = buildIdentityLinks(
-		mmaUrl,
-		idUrl,
-		data.userProfile.userId,
-	);
+	if (!userId || error) return <SignIn idUrl={idUrl} />;
+
+	const identityLinks = buildIdentityLinks(mmaUrl, idUrl, userId);
 
 	const identityLinksWithNotifications = addNotificationsToDropdownLinks(
 		identityLinks,

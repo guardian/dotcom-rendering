@@ -386,7 +386,7 @@ export type DCRGroupedTrails = {
 	standard: DCRFrontCard[];
 };
 
-type FEFrontConfigType = {
+export type FEFrontConfigType = {
 	avatarApiUrl: string;
 	externalEmbedHost: string;
 	ajaxUrl: string;
