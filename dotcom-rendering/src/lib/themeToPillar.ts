@@ -4,8 +4,6 @@ export const themeToPillar = (
 	theme?: ArticleTheme,
 ): ArticlePillar | undefined => {
 	switch (theme) {
-		case ArticleSpecial.SpecialReport:
-		case ArticleSpecial.SpecialReportAlt:
 		case ArticlePillar.News:
 			return ArticlePillar.News;
 		case ArticlePillar.Sport:
