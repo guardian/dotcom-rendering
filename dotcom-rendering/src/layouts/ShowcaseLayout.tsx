@@ -762,7 +762,7 @@ export const ShowcaseLayout = ({
 						data-link-name="most-popular"
 						data-component="most-popular"
 					>
-						<MostViewedFooterLayout>
+						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionName={article.sectionName}

@@ -1260,7 +1260,7 @@ export const LiveLayout = ({
 							data-component="most-popular"
 							leftColSize="wide"
 						>
-							<MostViewedFooterLayout>
+							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
 										sectionName={article.sectionName}

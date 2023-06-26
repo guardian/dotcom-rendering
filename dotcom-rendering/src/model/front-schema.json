@@ -726,6 +726,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -1429,6 +1448,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -2131,6 +2169,25 @@
                                                                                     "id",
                                                                                     "tagType",
                                                                                     "webTitle"
+                                                                                ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
                                                                                 ]
                                                                             }
                                                                         },

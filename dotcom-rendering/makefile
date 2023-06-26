@@ -136,6 +136,10 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
 
+lint-project:
+	$(call log, "linting project")
+	@node ../scripts/check-node-versions.mjs
+
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
 	@stylelint "src/**/*.ts{,x}"
@@ -149,10 +153,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-validate: clean-dist install tsc lint stylelint test validate-build
+validate: clean-dist install lint-project tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: install tsc lint stylelint test-ci
+validate-ci: install lint-project tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
