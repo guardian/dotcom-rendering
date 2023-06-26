@@ -77,10 +77,7 @@ describe('Lightbox', function () {
 		// Close lightbox using q key
 		cy.realPress('q');
 		cy.get('#gu-lightbox').should('not.be.visible');
-		// Pressing enter reopens the lightbox because focus was
-		// restored to the open lightbox button
-		cy.realPress('Enter');
-		cy.get('#gu-lightbox').should('be.visible');
+		cy.get('button.open-lightbox').eq(1).realClick();
 		// We should be able to navigate using arrow keys
 		cy.get('li[data-index="3"]').should('not.be.visible');
 		cy.realPress('ArrowRight');

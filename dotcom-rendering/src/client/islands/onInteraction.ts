@@ -7,12 +7,12 @@
  */
 export const onInteraction = (
 	element: HTMLElement,
-	callback: (target: Element) => void,
+	callback: (e: HTMLElement) => void,
 ): void => {
 	element.addEventListener(
 		'click',
 		(e) => {
-			if (e.target instanceof Element) {
+			if (e.target instanceof HTMLElement) {
 				callback(e.target);
 			}
 		},

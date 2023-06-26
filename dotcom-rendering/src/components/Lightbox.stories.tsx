@@ -7,7 +7,7 @@ import {
 import { breakpoints } from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import type { ImageBlockElement } from '../types/content';
-import { Lightbox } from './Lightbox';
+import { LightboxHtml } from './LightboxHtml';
 
 const testImage: ImageBlockElement = {
 	role: 'immersive',
@@ -48,8 +48,8 @@ const testImage: ImageBlockElement = {
 };
 
 export default {
-	component: Lightbox,
-	title: 'Components/Lightbox',
+	component: LightboxHtml,
+	title: 'Components/LightboxHtml',
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.desktop],
@@ -76,7 +76,7 @@ function hideInfo() {
 	lightbox?.classList.add('hide-info');
 }
 
-export const Initialise = ({
+const Initialise = ({
 	children,
 	shouldShowInfo = true,
 }: {
@@ -98,7 +98,7 @@ export const Initialise = ({
 export const Default = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -113,7 +113,7 @@ export const Default = () => {
 export const WithTitle = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -128,7 +128,7 @@ export const WithTitle = () => {
 export const WithCredit = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -143,7 +143,7 @@ export const WithCredit = () => {
 export const WithRating = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -158,7 +158,7 @@ export const WithRating = () => {
 export const WhenLiveBlog = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
@@ -182,7 +182,7 @@ export const WhenLiveBlog = () => {
 export const WithEverything = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -204,7 +204,7 @@ export const WithEverything = () => {
 export const WithoutCaption = () => {
 	return (
 		<Initialise shouldShowInfo={false}>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -219,7 +219,7 @@ export const WithoutCaption = () => {
 export const WithSport = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -241,7 +241,7 @@ export const WithSport = () => {
 export const WithCulture = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -263,7 +263,7 @@ export const WithCulture = () => {
 export const WithLifestyle = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -285,7 +285,7 @@ export const WithLifestyle = () => {
 export const WithOpinion = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -307,7 +307,7 @@ export const WithOpinion = () => {
 export const WithSpecialReport = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -329,7 +329,7 @@ export const WithSpecialReport = () => {
 export const WithSpecialReportAlt = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -351,7 +351,7 @@ export const WithSpecialReportAlt = () => {
 export const WithLabs = () => {
 	return (
 		<Initialise>
-			<Lightbox
+			<LightboxHtml
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,

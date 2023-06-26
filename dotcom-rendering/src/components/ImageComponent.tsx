@@ -13,8 +13,7 @@ import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
-import { Island } from './Island';
-import { LightboxButton } from './LightboxButton.importable';
+import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -313,7 +312,7 @@ export const ImageComponent = ({
 					picture {
 						height: 100%;
 					}
-					/* We need position relative here to contain the absolute positioned ClickOverlay added by LightboxButton */
+					/* We need position relative here to contain the absolute positioned ClickOverlay added by LightboxLink */
 					position: relative;
 				`}
 			>
@@ -330,16 +329,16 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth, 10) > 620 && (
-					<Island deferUntil="interaction">
-						<LightboxButton
+				{parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
 							role={role}
 							format={format}
 							elementId={element.elementId}
 							isMainMedia={isMainMedia}
+							position={element.position}
 						/>
-					</Island>
-				)}
+					)}
 			</div>
 		);
 	}
@@ -379,16 +378,16 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth) > 620 && (
-					<Island deferUntil="interaction">
-						<LightboxButton
+				{parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
 							role={role}
 							format={format}
 							elementId={element.elementId}
 							isMainMedia={isMainMedia}
+							position={element.position}
 						/>
-					</Island>
-				)}
+					)}
 			</div>
 		);
 	}
@@ -467,16 +466,16 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{parseInt(imageWidth) > 620 && (
-					<Island deferUntil="interaction">
-						<LightboxButton
+				{parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
 							role={role}
 							format={format}
 							elementId={element.elementId}
 							isMainMedia={isMainMedia}
+							position={element.position}
 						/>
-					</Island>
-				)}
+					)}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

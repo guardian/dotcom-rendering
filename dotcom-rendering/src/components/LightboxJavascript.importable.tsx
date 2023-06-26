@@ -1,71 +1,26 @@
-import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, log, storage } from '@guardian/libs';
-import {
-	from,
-	neutral,
-	until,
-	visuallyHidden,
-} from '@guardian/source-foundations';
-import { SvgArrowExpand } from '@guardian/source-react-components';
+import { log, storage } from '@guardian/libs';
 import libDebounce from 'lodash.debounce';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import screenfull from 'screenfull';
-import type { RoleType } from '../types/content';
-
-type Props = {
-	elementId: string;
-	role: RoleType;
-	format: ArticleFormat;
-	isMainMedia?: boolean;
-};
-
-function decideSize(role: RoleType, format: ArticleFormat) {
-	const smallStyles = css`
-		height: 32px;
-		width: 32px;
-		svg {
-			height: 20px;
-			width: 20px;
-		}
-	`;
-	const largeStyles = css`
-		height: 44px;
-		width: 44px;
-		svg {
-			height: 32px;
-			width: 32px;
-		}
-	`;
-
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
-			return smallStyles;
-		}
-		default: {
-			switch (role) {
-				case 'halfWidth':
-				case 'supporting': {
-					return smallStyles;
-				}
-				case 'inline':
-				case 'showcase':
-				case 'immersive':
-				default: {
-					return largeStyles;
-				}
-			}
-		}
-	}
-}
 
 /**
- * All lightbox logic is here
+ * 💡 Lightbox
  *
- * This function takes the lightbox element as creates a series of javascript functions
- * and listeners used to control the lightbox.
+ * This file contains the core javascript used to control the DCR lightbox.
+ *
+ * The lightbox works by keeping state in the url. When the url has an image hash in the form
+ * `img-12` then the lightbox will open. As soon as it no longer has an img- hash, the lightbox
+ * will close. This reactivity is achieved using event listeners.
+ *
+ * Like this, opening the lightbox is as simple as navigating to a url with a hash. To close
+ * the lightbox you use history.back()
+ *
+ * Each image that has a lightboxable image is overlayed with a transparent <a> tag. This a tag
+ * points to the hash value for the image, e.g. `href="#img-2"`. Clicking the image, mutates the
+ * url and thus opens the lightbox.
  *
  */
+
 function initialiseLightbox(lightbox: HTMLElement) {
 	log('dotcom', '💡 Initialising lightbox');
 
@@ -75,18 +30,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// We start by defining some variables that reference parts of the dom. These page
 	// parts are either on the document or in the lightbox element itself
 	// --------------------------------------------------------------------------------
-	/**
-	 * Each image has a lightbox button that is used to trigger the lightbox
-	 */
-	const lightboxButtons = document.querySelectorAll<HTMLButtonElement>(
-		'button.open-lightbox',
-	);
-	/**
-	 * Each image also has an overlay that captures click events on the image itself
-	 */
-	const overlays =
-		document.querySelectorAll<HTMLElement>('div.open-lightbox');
-
 	// Lightbox selectors
 	const nextButton = lightbox.querySelector<HTMLButtonElement>('button.next');
 	const previousButton =
@@ -107,10 +50,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 
 	// Remember a user's preference for the caption info
 	try {
-		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
-			hideInfo();
-		} else {
+		if (storage.local.get('gu.prefs.lightbox-hideinfo') === false) {
 			showInfo();
+		} else {
+			hideInfo();
 		}
 	} catch (error) {
 		// Do nothing. Errors accessing local storage are common
@@ -175,14 +118,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		} else {
 			closeButton?.classList.remove('reveal');
 		}
-	}
-
-	function pulseButton(button: HTMLButtonElement): void {
-		button.classList.add('active');
-
-		window.setTimeout(() => {
-			button.classList.remove('active');
-		}, 75);
 	}
 
 	/**
@@ -344,12 +279,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		document.documentElement.classList.add('lightbox-open');
 		// Show lightbox
 		lightbox.removeAttribute('hidden');
-		// When opening the lightbox, if one doesn't exist already, add a history state referencing
-		// the currently selected image. Doing this means the back action will take the reader back
-		// to the article
-		if (!window.location.hash.startsWith('#img-')) {
-			window.history.pushState({}, '', `#img-${position}`);
-		}
 		// Now we have the index of the image that was clicked, show it
 		// in the lightbox
 		scrollTo(position);
@@ -375,20 +304,32 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		await exitFullscreen();
 		closeLightbox();
 		history.back();
+		restoreFocus();
 	}
 
 	function closeLightbox() {
 		log('dotcom', '💡 Closing lightbox.');
 		// Re-enable scrolling
 		document.documentElement.classList.remove('lightbox-open');
-		// Restore focus
-		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
-		// focusable because it came from activeElement
-		(previouslyFocused as HTMLButtonElement).focus();
 		// Hide lightbox
 		lightbox.setAttribute('hidden', 'true');
 		// Stop listening for keyboard shortcuts
 		window.removeEventListener('keydown', handleKeydown);
+	}
+
+	function restoreFocus() {
+		// Restore focus
+		// Okay, sure, it 👋 might not 👋 be an HTMLButtonElement but it *will* be
+		// focusable because it came from activeElement
+		(previouslyFocused as HTMLButtonElement).focus();
+	}
+
+	function pulseButton(button: HTMLButtonElement): void {
+		button.classList.add('active');
+
+		window.setTimeout(() => {
+			button.classList.remove('active');
+		}, 75);
 	}
 
 	function showInfo(): void {
@@ -422,28 +363,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
-	lightboxButtons.forEach((button) => {
-		button.addEventListener('click', () => {
-			// Extract the element id for this image out of the button that was clicked on
-			const elementId = button.dataset.elementId;
-			// Find the image inside the lightbox and get its index
-			const imageWrapper: HTMLLIElement | null = elementId
-				? lightbox.querySelector(`li[data-element-id="${elementId}"]`)
-				: null;
-			const stringIndex: string = imageWrapper?.dataset.index ?? '1';
-			const indexOfImageClicked = parseInt(stringIndex);
-			void open(indexOfImageClicked);
-		});
-	});
-
-	overlays.forEach((overlay) => {
-		overlay.addEventListener('click', (event) => {
-			(event.target as HTMLElement)
-				.querySelector('button')
-				?.dispatchEvent(new MouseEvent('click'));
-		});
-	});
-
 	pictures.forEach((picture) => {
 		picture.addEventListener('mousedown', (event) => {
 			toggleInfo();
@@ -463,7 +382,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 					loadAdjacentImages(currentPosition);
 				}
 			},
-			300,
+			150,
 			{ leading: true },
 		),
 	);
@@ -491,21 +410,19 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * close function in response to the reader closing fullscreen mode. Like
 	 * this there's no need to press escape twice to exit the lightbox
 	 */
-
 	if (screenfull.isEnabled) {
 		screenfull.on('change', () => {
 			if (screenfull.isFullscreen) {
 				log('dotcom', `💡 entered fullscreen mode.`);
 			} else {
 				log('dotcom', `💡 leaving fullscreen mode.`);
-				// setTimeout(() => {
 				if (!lightbox.hasAttribute('hidden')) {
 					// If lightbox is still showing then the escape key was probably pressed
 					// which closes fullscreen mode but not the lightbox, so let's close it
 					closeLightbox();
 					history.back();
+					restoreFocus();
 				}
-				// });
 			}
 		});
 	}
@@ -514,113 +431,40 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * popstate is fired when a user goes back or forward, either using buttons
 	 * or the keyboard or via history.back() or history.forward()
 	 *
-	 * If this happens, and if the url has no img- hash, we close the lightbox.
-	 * This means you can open the lightbox, navigate back, and the lightbox will
-	 * close.
+	 * We use the url as the source of truth so we open and close the lightbox
+	 * here depending on if we have an img hash or not.
 	 */
 	window.addEventListener('popstate', () => {
 		const hash = window.location.hash;
-		if (!hash.startsWith('#img-')) {
+		if (hash.startsWith('#img-') && !lightbox.hasAttribute('open')) {
+			const position = hash.substring(5);
+			void open(parseInt(position, 10));
+		} else {
 			// There's no img hash so close the lightbox
 			void exitFullscreen();
 			closeLightbox();
+			restoreFocus();
 		}
 	});
 
-	// Mark the lightbox as ready so that we don't try to re-initialise it on subsequent button clicks
+	/**
+	 * If this code is running, it means this file is being hydrated because the url contains an img- hash
+	 * and so we should open the lightbox at that position.
+	 */
+	const hash = window.location.hash;
+	if (hash.startsWith('#img-')) {
+		const position = hash.substring(5);
+		void open(parseInt(position, 10));
+	}
+
+	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-gu-ready', 'true');
 }
 
-/**
- * This overlay makes it possible to click anywhere on an image and the lightbox
- * will hydrate/appear.
- *
- * How?
- * ----
- * ```html
- * <gu-island deferUntil="onInteraction">
- *   <ClickOverlay>
- *     <button>Open lightbox</button>
- *   </ClickOverlay>
- * </gu-island>
- * ```
- *
- * Both gu-island and ClickOverlay have click event listeners that will replay any
- * click event to their children using synthetic events. The gu-island listener is
- * set on page load which in turn triggers hydration for this file, adding event
- * listeners to the ClickOverlay and button.
- *
- * The flow is:
- *
- * 1) Page loads, gu-island has a click event listener set
- * 2) User clicks on the island (which wraps both button and overlay)
- * 3) This file is hydrated, setting listeners on both the ClickOverlay and the button
- * 4) gu-island fires a synthetic click event to the element originally clicked
- * 5) If that was ClickOverlay, another synthetic event is sent to the button
- * 6) If it was the button then the lightbox is opened
- *
- * Why?
- * ----
- * This approach means that it is possible for images to be clickable without the
- * requirement to hydrate images - we never want to serialize images into the page! It
- * also means we keep the feature where the lightbox code is only downloaded on
- * interaction.
- *
- * What about accessibility?
- * -------------------------
- * The child button element is still the primary method for opening
- * the lightbox and this is the element that we want assistive technologies like
- * screen readers to interact with. This overlay is intentionally hidden from
- * keyboards and screen readers and can be thought of as progressive enhancement
- * for mouse and touch users.
- *
- */
-const ClickOverlay = ({ children }: { children: React.ReactNode }) => {
-	return (
-		/**
-		 * Why does this div have an onClick event?
-		 *
-		 * Because Mobile safari does not support click event delgation. The workaround for
-		 * this is to add an empty click handler
-		 *
-		 * @see {@link https://www.quirksmode.org/blog/archives/2010/09/click_event_del.html}
-		 *
-		 */
-		// eslint-disable-next-line, jsx-a11y/no-static-element-interactions -- see above
-		<div
-			css={css`
-				position: absolute;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				cursor: pointer;
-				${from.tablet} {
-					:hover > button.open-lightbox {
-						opacity: 0.7;
-					}
-				}
-			`}
-			className="open-lightbox"
-			aria-hidden="true"
-			// eslint-disable-next-line @typescript-eslint/no-empty-function -- see above
-			onClick={() => {}}
-		>
-			{children}
-		</div>
-	);
-};
-
-export const LightboxButton = ({
-	elementId,
-	role,
-	format,
-	isMainMedia,
-}: Props) => {
+export const LightboxJavascript = () => {
 	useEffect(() => {
 		/**
-		 * We only want to initialise the lightbox once (because there's only one lightbox and we
-		 * only need to initialise it one time). So before we run the initialiseLightbox function
-		 * below as part of this button click we first check to see if it is already marked as ready
+		 * We only want to initialise the lightbox once so we check to see if it is already marked as ready
 		 */
 		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 		if (!lightbox) return;
@@ -629,71 +473,7 @@ export const LightboxButton = ({
 			return;
 		}
 		initialiseLightbox(lightbox);
-		// Now that the lightbox is initialised, mark all buttons as gu-ready so that they won't
-		// be hydrated
-		document
-			.querySelectorAll<HTMLButtonElement>('button.open-lightbox')
-			.forEach((button) => {
-				button
-					.closest('gu-island')
-					?.setAttribute('data-gu-ready', 'true');
-			});
-	}, [elementId]);
+	}, []);
 
-	return (
-		<ClickOverlay>
-			<button
-				data-element-id={elementId}
-				type="button"
-				className="open-lightbox"
-				aria-haspopup="dialog"
-				css={[
-					css`
-						position: absolute;
-						right: 0;
-						svg {
-							margin-top: 3px;
-							fill: ${neutral[100]};
-						}
-						margin: 6px;
-						${until.tablet} {
-							padding: 0;
-						}
-						border-radius: 50%;
-						border: none;
-						cursor: pointer;
-						background: rgba(18, 18, 18, 0.8);
-						opacity: 0;
-						${from.tablet} {
-							:hover {
-								filter: brightness(85%);
-								opacity: 0.8;
-							}
-							:focus {
-								opacity: 0.7;
-							}
-						}
-					`,
-					/* Don't show the button over thumbnails; they're too small */
-					role === 'thumbnail' &&
-						css`
-							display: none;
-						`,
-					decideSize(role, format),
-					isMainMedia &&
-						format.display === ArticleDisplay.Immersive &&
-						visuallyHidden,
-				]}
-			>
-				<SvgArrowExpand isAnnouncedByScreenReader={false} />
-				<span
-					css={css`
-						${visuallyHidden}
-					`}
-				>
-					View in fullscreen
-				</span>
-			</button>
-		</ClickOverlay>
-	);
+	return null;
 };

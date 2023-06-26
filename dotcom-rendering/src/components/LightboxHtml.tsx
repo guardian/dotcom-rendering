@@ -330,7 +330,7 @@ const Selection = ({
 	);
 };
 
-export const Lightbox = ({ format, images }: Props) => {
+export const LightboxHtml = ({ format, images }: Props) => {
 	if (images.length == null || images.length === 0) return null;
 
 	return (

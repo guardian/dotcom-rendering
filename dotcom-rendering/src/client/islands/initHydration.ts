@@ -3,8 +3,21 @@ import { getEmotionCache } from './emotion';
 import { getName } from './getName';
 import { getProps } from './getProps';
 import { onInteraction } from './onInteraction';
+import { onNavigation } from './onNavigation';
 import { whenIdle } from './whenIdle';
 import { whenVisible } from './whenVisible';
+
+/**
+ * The hash values that we want to use to trigger hydration are different
+ * for lightbox. Instead of using the name of the component, we look for
+ * the img- text at the start.
+ */
+function hasLightboxHash(name: string) {
+	return (
+		name === 'LightboxJavascript' &&
+		window.location.hash.startsWith('#img-')
+	);
+}
 
 export const initHydration = (elements: NodeListOf<Element>): void => {
 	// Get the emotion cache which is shared between islands
@@ -60,37 +73,37 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 							props,
 							element,
 							emotionCache,
-						).then((hydrationHappened) => {
-							// Sometimes an element will already have been hydrated in which case
-							// hydrationHappend is false and we can skip this
-							if (hydrationHappened) {
-								/**
-								 * The doHydration function starts the hydration process but it
-								 * only waits for the import to complete, not for the evaluation or
-								 * execution of any island javascript. The mouse event fired here is,
-								 * probably, dependent on that javascript setting up listeners, so
-								 * we have a race condition.
-								 *
-								 * We can dispatch this click below but the the code that listens for
-								 * it might not be ready. By waiting 150ms before trying we workaround
-								 * this race condition. In the event that the listener still isn't
-								 * ready even after 150ms then the user will have to click again.
-								 */
-								setTimeout(() => {
-									targetElement.dispatchEvent(
-										new MouseEvent('click', {
-											bubbles: true,
-										}),
-									);
-								}, 150);
-							}
+						).then(() => {
+							targetElement.dispatchEvent(
+								new MouseEvent('click'),
+							);
 						});
 					});
 					break;
 				}
 				case 'hash': {
-					if (window.location.hash.includes(name)) {
+					if (
+						window.location.hash.includes(name) ||
+						hasLightboxHash(name)
+					) {
 						void doHydration(name, props, element, emotionCache);
+					} else {
+						// If we didn't find a matching hash on page load, set a
+						// listener so that we check again each time the reader
+						// navigates within the page (changes the hash on the url)
+						onNavigation(() => {
+							if (
+								window.location.hash.includes(name) ||
+								hasLightboxHash(name)
+							) {
+								void doHydration(
+									name,
+									props,
+									element,
+									emotionCache,
+								);
+							}
+						});
 					}
 					break;
 				}
