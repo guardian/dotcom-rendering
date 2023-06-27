@@ -1,8 +1,10 @@
-export const joinUrl = (parts: string[]) => {
+import { isNonNullable } from '@guardian/libs';
+
+export const joinUrl = (parts: string[]): string => {
 	// Remove any leading or trailing slashes from all parts and then join cleanly on
 	// a single slash - prevents malformed urls
 	const trimmed = parts
-		.filter((part) => part) // Filter any falsey parts
+		.filter(isNonNullable) // Filter any falsey parts
 		.map((part) => {
 			// Trim left
 			if (part.substr(0, 1) === '/') return part.slice(1);
