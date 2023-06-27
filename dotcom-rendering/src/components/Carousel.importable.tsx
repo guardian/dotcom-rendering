@@ -22,6 +22,9 @@ import { LI } from './Card/components/LI';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
+import { DCRContainerPalette } from '../types/front';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	heading: string;
@@ -30,13 +33,14 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
-	activeDotColour?: string;
-	titleColour?: string;
-	titleHighlightColour: string;
-	verticalDividerColour?: string;
-	arrowColour?: string;
-	arrowBackgroundColour?: string;
-	arrowBackgroundHoverColour?: string;
+};
+
+type ArticleProps = Props & {
+	format: ArticleFormat;
+};
+
+type FrontProps = Props & {
+	palette: DCRContainerPalette;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -482,6 +486,43 @@ const HeaderAndNav = ({
 	</div>
 );
 
+const decideCarouselColours = (
+	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
+): {
+	titleColour: string;
+	titleHighlightColour: string;
+	borderColour: string;
+	activeDotColour: string;
+	arrowColour: string;
+	arrowBackgroundColour: string;
+	arrowBackgroundHoverColour: string;
+} => {
+	if ('palette' in props) {
+		const containerOverrides = decideContainerOverrides(props.palette);
+		return {
+			titleColour: containerOverrides.text.container,
+			titleHighlightColour: containerOverrides.text.container,
+			borderColour: containerOverrides.border.lines,
+			activeDotColour: containerOverrides.background.carouselDot,
+			arrowColour: containerOverrides.border.carouselArrow,
+			arrowBackgroundColour: containerOverrides.background.carouselArrow,
+			arrowBackgroundHoverColour:
+				containerOverrides.background.carouselArrowHover,
+		};
+	} else {
+		const palette = decidePalette(props.format);
+		return {
+			titleColour: neutral[7],
+			titleHighlightColour: palette.text.carouselTitle,
+			borderColour: neutral[7],
+			activeDotColour: palette.background.carouselDot,
+			arrowColour: neutral[100],
+			arrowBackgroundColour: neutral[0],
+			arrowBackgroundHoverColour: brandAlt[400],
+		};
+	}
+};
+
 /**
  * # Carousel
  *
@@ -501,14 +542,10 @@ export const Carousel = ({
 	trails,
 	onwardsSource,
 	leftColSize,
-	activeDotColour = neutral[7],
-	titleColour = neutral[7],
-	titleHighlightColour,
-	verticalDividerColour,
-	arrowColour,
-	arrowBackgroundColour,
-	arrowBackgroundHoverColour,
-}: Props) => {
+	...props
+}: ArticleProps | FrontProps) => {
+	const carouselColours = decideCarouselColours(props);
+
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -624,14 +661,14 @@ export const Carousel = ({
 			<LeftColumn
 				borderType="partial"
 				size={leftColSize}
-				borderColour={verticalDividerColour}
+				borderColour={carouselColours.borderColour}
 			>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
-					activeDotColour={activeDotColour}
-					titleColour={titleColour}
-					titleHighlightColour={titleHighlightColour}
+					activeDotColour={carouselColours.activeDotColour}
+					titleColour={carouselColours.titleColour}
+					titleHighlightColour={carouselColours.titleHighlightColour}
 					index={index}
 					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
@@ -649,15 +686,15 @@ export const Carousel = ({
 					aria-label="Move carousel backwards"
 					css={[
 						buttonStyle(
-							arrowColour,
-							arrowBackgroundColour,
-							arrowBackgroundHoverColour,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
 						),
 						prevButtonStyle(
 							index,
-							arrowColour,
-							arrowBackgroundColour,
-							arrowBackgroundHoverColour,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
 						),
 					]}
 					data-link-name={`${arrowName}-prev`}
@@ -673,16 +710,16 @@ export const Carousel = ({
 					aria-label="Move carousel forwards"
 					css={[
 						buttonStyle(
-							arrowColour,
-							arrowBackgroundColour,
-							arrowBackgroundHoverColour,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
 						),
 						nextButtonStyle(
 							index,
 							trails.length,
-							arrowColour,
-							arrowBackgroundColour,
-							arrowBackgroundHoverColour,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
 						),
 					]}
 					data-link-name={`${arrowName}-next`}
@@ -700,9 +737,11 @@ export const Carousel = ({
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
-							titleHighlightColour={titleHighlightColour}
-							titleColour={titleColour}
-							activeDotColour={activeDotColour}
+							titleHighlightColour={
+								carouselColours.titleHighlightColour
+							}
+							titleColour={carouselColours.titleColour}
+							activeDotColour={carouselColours.activeDotColour}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							goToIndex={goToIndex}
@@ -714,15 +753,15 @@ export const Carousel = ({
 								aria-label="Move carousel backwards"
 								css={[
 									buttonStyle(
-										arrowColour,
-										arrowBackgroundColour,
-										arrowBackgroundHoverColour,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
 									),
 									prevButtonStyle(
 										index,
-										arrowColour,
-										arrowBackgroundColour,
-										arrowBackgroundHoverColour,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
 									),
 								]}
 								data-link-name={`${arrowName}-prev`}
@@ -735,16 +774,16 @@ export const Carousel = ({
 								aria-label="Move carousel forwards"
 								css={[
 									buttonStyle(
-										arrowColour,
-										arrowBackgroundColour,
-										arrowBackgroundHoverColour,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
 									),
 									nextButtonStyle(
 										index,
 										trails.length,
-										arrowColour,
-										arrowBackgroundColour,
-										arrowBackgroundHoverColour,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
 									),
 								]}
 								data-link-name={`${arrowName}-next`}
@@ -797,7 +836,9 @@ export const Carousel = ({
 								branding={branding}
 								showMainVideo={trail.showMainVideo}
 								mediaDuration={trail.mediaDuration}
-								verticalDividerColour={verticalDividerColour}
+								verticalDividerColour={
+									carouselColours.borderColour
+								}
 							/>
 						);
 					})}

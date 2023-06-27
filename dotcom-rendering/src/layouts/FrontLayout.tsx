@@ -481,29 +481,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										titleColour={
-											mediaPalette.text.container
-										}
-										titleHighlightColour={
-											mediaPalette.text.container
-										}
-										activeDotColour={
-											mediaPalette.background.carouselDot
-										}
-										verticalDividerColour={
-											mediaPalette.border.lines
-										}
-										arrowColour={
-											mediaPalette.border.carouselArrow
-										}
-										arrowBackgroundColour={
-											mediaPalette.background
-												.carouselArrow
-										}
-										arrowBackgroundHoverColour={
-											mediaPalette.background
-												.carouselArrowHover
-										}
+										palette={'MediaPalette'}
 										leftColSize={'compact'}
 									/>
 								</Island>

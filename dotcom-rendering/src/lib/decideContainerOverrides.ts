@@ -81,6 +81,40 @@ const backgroundContainerSummary = (
 	}
 };
 
+const borderCarouselArrow = (containerPalette: DCRContainerPalette): string => {
+	switch (containerPalette) {
+		default:
+			return neutral[7];
+	}
+};
+
+const backgroundCarouselDot = (
+	containerPalette: DCRContainerPalette,
+): string => {
+	switch (containerPalette) {
+		default:
+			return brandAlt[400];
+	}
+};
+
+const backgroundCarouselArrow = (
+	containerPalette: DCRContainerPalette,
+): string => {
+	switch (containerPalette) {
+		default:
+			return brandAlt[400];
+	}
+};
+
+const backgroundCarouselArrowHover = (
+	containerPalette: DCRContainerPalette,
+): string => {
+	switch (containerPalette) {
+		default:
+			return brandAlt[200];
+	}
+};
+
 const textCardKicker = (
 	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
@@ -445,12 +479,17 @@ export const decideContainerOverrides = (
 			border: {
 				container: borderContainer(containerPalette),
 				lines: borderLines(containerPalette),
+				carouselArrow: borderCarouselArrow(containerPalette),
 			},
 			background: {
 				container: backgroundContainer(containerPalette),
 				containerLeftColumn:
 					backgroundContainerLeftColumn(containerPalette),
 				containerSummary: backgroundContainerSummary(containerPalette),
+				carouselDot: backgroundCarouselDot(containerPalette),
+				carouselArrow: backgroundCarouselArrow(containerPalette),
+				carouselArrowHover:
+					backgroundCarouselArrowHover(containerPalette),
 			},
 		};
 	}
@@ -466,13 +505,14 @@ export const decideContainerOverrides = (
 			border: {
 				container: borderContainer(containerPalette),
 				lines: borderLines(containerPalette),
-				carouselArrow: neutral[7],
+				carouselArrow: borderCarouselArrow(containerPalette),
 			},
 			background: {
 				container: backgroundContainer(containerPalette),
-				carouselDot: brandAlt[400],
-				carouselArrow: brandAlt[400],
-				carouselArrowHover: brandAlt[200],
+				carouselDot: backgroundCarouselDot(containerPalette),
+				carouselArrow: backgroundCarouselArrow(containerPalette),
+				carouselArrowHover:
+					backgroundCarouselArrowHover(containerPalette),
 			},
 		};
 	}
@@ -497,10 +537,14 @@ export const decideContainerOverrides = (
 		border: {
 			container: borderContainer(containerPalette),
 			lines: borderLines(containerPalette),
+			carouselArrow: borderCarouselArrow(containerPalette),
 		},
 		background: {
 			container: backgroundContainer(containerPalette),
 			card: backgroundCard(containerPalette),
+			carouselDot: backgroundCarouselDot(containerPalette),
+			carouselArrow: backgroundCarouselArrow(containerPalette),
+			carouselArrowHover: backgroundCarouselArrowHover(containerPalette),
 		},
 		topBar: {
 			card: topBarCard(containerPalette),
