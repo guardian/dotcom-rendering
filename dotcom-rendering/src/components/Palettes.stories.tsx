@@ -2,6 +2,7 @@ import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { FrontSection } from './FrontSection';
+import { LabsSection } from './LabsSection';
 
 export default {
 	title: 'Layouts/Palettes',
@@ -163,6 +164,39 @@ export const SpecialReportAltPalette = () => (
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="SpecialReportAltPalette"
+			showAge={true}
+		/>
+	</FrontSection>
+);
+
+export const BrandedPalette = () => (
+	<LabsSection
+		title="Branded Palette"
+		collectionId={''}
+		pageId={''}
+		ajaxUrl={''}
+		sectionId={'branded-palette'}
+		ophanComponentName={'branded-palette'}
+		ophanComponentLink={'branded-palette'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="Branded"
+			showAge={true}
+		/>
+	</LabsSection>
+);
+
+export const MediaPalette = () => (
+	<FrontSection
+		title="Media Palette"
+		containerPalette="MediaPalette"
+		showDateHeader={true}
+		editionId={'UK'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="MediaPalette"
 			showAge={true}
 		/>
 	</FrontSection>

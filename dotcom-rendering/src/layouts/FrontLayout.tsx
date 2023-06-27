@@ -32,6 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -449,6 +450,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (collection.collectionType === 'fixed/video') {
+						const mediaPalette =
+							decideContainerOverrides('MediaPalette');
 						return (
 							<Section
 								key={ophanName}
@@ -463,11 +466,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
-								containerPalette={collection.containerPalette}
+								containerPalette={'MediaPalette'}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
+								backgroundColour={
+									mediaPalette.background?.container
+								}
 								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
@@ -475,8 +481,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										titleHighlightColour={neutral[7]}
-										activeDotColour={neutral[7]}
+										palette={'MediaPalette'}
 										leftColSize={'compact'}
 									/>
 								</Island>

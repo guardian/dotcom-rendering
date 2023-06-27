@@ -810,10 +810,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>

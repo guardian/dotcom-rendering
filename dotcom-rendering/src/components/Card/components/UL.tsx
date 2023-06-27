@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import type { DCRContainerPalette } from '../../../types/front';
 
@@ -48,11 +49,16 @@ export const UL = ({
 	wrapCards = false,
 	containerPalette,
 }: Props) => {
+	const borderColour =
+		(containerPalette &&
+			decideContainerOverrides(containerPalette).border.container) ??
+		neutral[86];
+
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(containerPalette),
+				showDivider && verticalDivider(borderColour),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}
