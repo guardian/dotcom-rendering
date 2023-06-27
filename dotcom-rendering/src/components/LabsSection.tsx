@@ -376,7 +376,7 @@ export const LabsSection = ({
 	children,
 	hasPageSkin = false,
 }: Props) => {
-	const overrides = decideContainerOverrides('BrandedPalette');
+	const overrides = decideContainerOverrides('Branded');
 
 	return (
 		<Section
@@ -434,7 +434,7 @@ export const LabsSection = ({
 								collectionId={collectionId}
 								pageId={pageId}
 								ajaxUrl={ajaxUrl}
-								containerPalette={'BrandedPalette'}
+								containerPalette={'Branded'}
 								showAge={false}
 							/>
 						</Island>

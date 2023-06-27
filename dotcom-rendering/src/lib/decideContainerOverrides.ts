@@ -16,10 +16,7 @@ const {
 } = palette;
 
 const textCardHeadline = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -48,7 +45,7 @@ const textCardFooter = textCardHeadline;
 
 const textContainerFooter = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[46];
 		default:
 			return neutral[46];
@@ -59,7 +56,7 @@ const textContainerSummary = (
 	containerPalette: DCRContainerPalette,
 ): string => {
 	switch (containerPalette) {
-		case 'BrandedPalette':
+		case 'Branded':
 			return labs[400];
 		default:
 			return neutral[46];
@@ -67,28 +64,25 @@ const textContainerSummary = (
 };
 
 const backgroundContainerLeftColumn = (
-	containerPalette: Extract<DCRContainerPalette, 'BrandedPalette'>,
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
-		case 'BrandedPalette':
+		case 'Branded':
 			return labs[400];
 	}
 };
 
 const backgroundContainerSummary = (
-	containerPalette: Extract<DCRContainerPalette, 'BrandedPalette'>,
+	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
 ): string => {
 	switch (containerPalette) {
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[0];
 	}
 };
 
 const textCardKicker = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -134,7 +128,7 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[100];
 		case 'MediaPalette':
 			return neutral[100];
@@ -142,10 +136,7 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 };
 
 const textCardCommentCount = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -170,10 +161,7 @@ const textCardCommentCount = (
 };
 
 const textDynamoHeadline = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -198,10 +186,7 @@ const textDynamoHeadline = (
 };
 
 const textDynamoKicker = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -226,10 +211,7 @@ const textDynamoKicker = (
 };
 
 const textDynamoSublinkKicker = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -254,10 +236,7 @@ const textDynamoSublinkKicker = (
 };
 
 const textDynamoMeta = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -301,7 +280,7 @@ const textContainer = (containerPalette: DCRContainerPalette): string => {
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[100];
 		case 'MediaPalette':
 			return neutral[100];
@@ -328,7 +307,7 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 			return neutral[46];
 		case 'SpecialReportAltPalette':
 			return neutral[60];
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
@@ -355,7 +334,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[86];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[60], 0.3);
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
@@ -382,7 +361,7 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[46], 0.3);
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
@@ -409,7 +388,7 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return culture[800];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[800];
-		case 'BrandedPalette':
+		case 'Branded':
 			return neutral[93];
 		case 'MediaPalette':
 			return neutral[0];
@@ -417,10 +396,7 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 };
 
 const backgroundCard = (
-	containerPalette: Exclude<
-		DCRContainerPalette,
-		'BrandedPalette' | 'MediaPalette'
-	>,
+	containerPalette: Exclude<DCRContainerPalette, 'Branded' | 'MediaPalette'>,
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
@@ -457,7 +433,7 @@ const topBarCard = textCardKicker;
 export const decideContainerOverrides = (
 	containerPalette: DCRContainerPalette,
 ): ContainerOverrides => {
-	if (containerPalette === 'BrandedPalette') {
+	if (containerPalette === 'Branded') {
 		return {
 			text: {
 				container: textContainer(containerPalette),

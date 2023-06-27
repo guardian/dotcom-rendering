@@ -415,7 +415,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					if (
-						collection.containerPalette === 'BrandedPalette' &&
+						collection.containerPalette === 'Branded' &&
 						renderAds
 					) {
 						return (

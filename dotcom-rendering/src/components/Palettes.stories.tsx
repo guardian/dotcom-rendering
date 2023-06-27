@@ -181,7 +181,7 @@ export const BrandedPalette = () => (
 	>
 		<DynamicFast
 			groupedTrails={groupedTrails}
-			containerPalette="BrandedPalette"
+			containerPalette="Branded"
 			showAge={true}
 		/>
 	</LabsSection>
