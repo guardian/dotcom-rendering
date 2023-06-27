@@ -227,7 +227,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<>
 							<Section
 								fullWidth={true}
-								showTopBorder={false}
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
