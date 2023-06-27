@@ -7,10 +7,16 @@ import {
 	from,
 	headline,
 	space,
+	palette as srcPallet,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Link, SvgExternal } from '@guardian/source-react-components';
+import {
+	Button,
+	Link,
+	SvgArrowRightStraight,
+	SvgExternal,
+} from '@guardian/source-react-components';
 import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -36,6 +42,7 @@ type Props = {
 	linkTo?: string; // If provided, the headline is wrapped in a link
 	isDynamo?: true;
 	isExternalLink?: boolean;
+	isActionCard?: boolean;
 };
 
 const fontStyles = ({
@@ -199,6 +206,16 @@ const dynamoStyles = css`
 	padding: 5px;
 `;
 
+const tellUsButtonStyles = css`
+	margin: 8px 0px;
+	display: flex;
+	color: ${srcPallet.neutral[7]};
+	border-color: ${srcPallet.neutral[0]};
+	svg {
+		color: ${srcPallet.neutral[0]};
+	}
+`;
+
 export const WithLink = ({
 	linkTo,
 	children,
@@ -242,6 +259,7 @@ export const CardHeadline = ({
 	linkTo,
 	isDynamo,
 	isExternalLink,
+	isActionCard,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	const kickerColour = isDynamo
@@ -309,6 +327,19 @@ export const CardHeadline = ({
 					size={size}
 					isCard={true}
 				/>
+			)}
+			{isActionCard ? (
+				<Button
+					priority="tertiary"
+					size="xsmall"
+					icon={<SvgArrowRightStraight />}
+					iconSide="right"
+					cssOverrides={tellUsButtonStyles}
+				>
+					Tell us
+				</Button>
+			) : (
+				<></>
 			)}
 		</>
 	);

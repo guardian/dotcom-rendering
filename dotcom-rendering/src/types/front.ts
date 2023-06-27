@@ -293,6 +293,7 @@ export type DCRFrontCard = {
 	branding?: Branding;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable: boolean;
+	isActionCard?: boolean;
 };
 
 export type DCRSlideshowImage = {

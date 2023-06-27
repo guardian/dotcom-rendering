@@ -903,6 +903,22 @@ export const WhenOpinionWithImageAtBottom = () => {
 	);
 };
 
+export const ActionCard = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					kickerText="Kicker"
+					headlineSize="small"
+					headlineText="Heading small"
+					isActionCard={true}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WhenVideoWithPlayButton = () => {
 	return (
 		<Section title="Play icons" padContent={false} centralBorder="partial">

@@ -81,6 +81,7 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
+	isActionCard?: boolean;
 };
 
 const StarRatingComponent = ({
@@ -279,6 +280,7 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	isActionCard,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -469,6 +471,7 @@ export const Card = ({
 							showByline={showByline}
 							isDynamo={isDynamo}
 							isExternalLink={isExternalLink}
+							isActionCard={isActionCard}
 						/>
 						{starRating !== undefined ? (
 							<StarRatingComponent
