@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import { Breakpoint } from '@guardian/source-foundations';
 import { Star } from '../../static/icons/Star';
 import type { RatingSizeType } from '../../types/content';
-import { Breakpoint } from '@guardian/source-foundations';
 
 const starWrapper = css`
 	display: inline-block;

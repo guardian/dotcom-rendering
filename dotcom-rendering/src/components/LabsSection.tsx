@@ -58,6 +58,8 @@ type Props = {
 
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;
+
+	hasPageSkin?: boolean;
 };
 
 const leftColumnBackground = (backgroundColour?: string) => css`
@@ -68,7 +70,7 @@ const contentBackground = (backgroundColour?: string) => css`
 	background-color: ${backgroundColour};
 `;
 
-const leftColumnWidth = css`
+const leftColumnWidthFromLeftCol = css`
 	${between.leftCol.and.wide} {
 		/* above 1140, below 1300 */
 		width: 170px;
@@ -116,16 +118,18 @@ const leftColumnPadding = css`
 	padding-bottom: ${space[2]}px;
 `;
 
-const leftColumnSpaceBetween = css`
+const leftColumnFlex = css`
 	display: flex;
 	justify-content: space-between;
+`;
 
+const leftColumnFlexFromLeftCol = css`
 	${from.leftCol} {
 		flex-direction: column;
 	}
 `;
 
-const contentSidePadding = css`
+const contentSidePaddingUntilLeftCol = css`
 	${until.mobileLandscape} {
 		padding-left: 10px;
 		padding-right: 10px;
@@ -138,7 +142,9 @@ const contentSidePadding = css`
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+`;
 
+const contentSidePaddingFromLeftCol = css`
 	${between.leftCol.and.wide} {
 		padding-right: 10px;
 	}
@@ -205,17 +211,20 @@ const GuardianLabsTitle = ({
 const LeftColumn = ({
 	children,
 	backgroundColour,
+	hasPageSkin,
 }: {
 	children: React.ReactNode;
 	backgroundColour?: string;
+	hasPageSkin: boolean;
 }) => (
 	<div
 		css={[
-			leftColumnWidth,
+			!hasPageSkin && leftColumnWidthFromLeftCol,
 			leftColumnBackground(backgroundColour),
-			leftColumnMargins,
+			!hasPageSkin && leftColumnMargins,
 			leftColumnPadding,
-			leftColumnSpaceBetween,
+			leftColumnFlex,
+			!hasPageSkin && leftColumnFlexFromLeftCol,
 		]}
 	>
 		{children}
@@ -225,13 +234,16 @@ const LeftColumn = ({
 const Content = ({
 	children,
 	backgroundColour,
+	hasPageSkin,
 }: {
 	children: React.ReactNode;
 	backgroundColour?: string;
+	hasPageSkin: boolean;
 }) => (
 	<div
 		css={[
-			contentSidePadding,
+			contentSidePaddingUntilLeftCol,
+			!hasPageSkin && contentSidePaddingFromLeftCol,
 			contentMargins,
 			contentBackground(backgroundColour),
 			css`
@@ -243,16 +255,25 @@ const Content = ({
 	</div>
 );
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Container = ({
+	children,
+	hasPageSkin,
+}: {
+	children: React.ReactNode;
+	hasPageSkin: boolean;
+}) => (
 	<div
 		css={[
 			css`
 				display: flex;
 				flex-direction: column;
-				${from.leftCol} {
-					flex-direction: row;
-				}
 			`,
+			!hasPageSkin &&
+				css`
+					${from.leftCol} {
+						flex-direction: row;
+					}
+				`,
 			containerMargins,
 		]}
 	>
@@ -264,18 +285,25 @@ const LabsContainerHeader = ({
 	summaryBackgroundColour,
 	summaryTextColour,
 	summaryTextSecondaryColour,
+	hasPageSkin,
 }: {
 	summaryBackgroundColour?: string;
 	summaryTextColour?: string;
 	summaryTextSecondaryColour?: string;
+	hasPageSkin: boolean;
 }) => (
 	<div
-		css={css`
-			display: flex;
-			${from.wide} {
-				padding-top: ${space[2]}px;
-			}
-		`}
+		css={[
+			css`
+				display: flex;
+			`,
+			!hasPageSkin &&
+				css`
+					${from.wide} {
+						padding-top: ${space[2]}px;
+					}
+				`,
+		]}
 	>
 		<div
 			css={css`
@@ -346,6 +374,7 @@ export const LabsSection = ({
 	url,
 	badge,
 	children,
+	hasPageSkin = false,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
 
@@ -358,10 +387,12 @@ export const LabsSection = ({
 			containerName={containerName}
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
+			hasPageSkin={hasPageSkin}
 		>
-			<Container>
+			<Container hasPageSkin={hasPageSkin}>
 				<LeftColumn
 					backgroundColour={overrides.background?.containerLeftColumn}
+					hasPageSkin={hasPageSkin}
 				>
 					<div>
 						<LabsContainerHeader
@@ -372,6 +403,7 @@ export const LabsSection = ({
 							summaryTextSecondaryColour={
 								overrides.text?.containerSummary
 							}
+							hasPageSkin={hasPageSkin}
 						/>
 						<GuardianLabsTitle
 							title={title}
@@ -389,7 +421,10 @@ export const LabsSection = ({
 						<LabsLogo />
 					</Link>
 				</LeftColumn>
-				<Content backgroundColour={overrides.background?.container}>
+				<Content
+					backgroundColour={overrides.background?.container}
+					hasPageSkin={hasPageSkin}
+				>
 					{children}
 					{canShowMore && (
 						<Island deferUntil="interaction">

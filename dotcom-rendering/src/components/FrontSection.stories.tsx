@@ -201,3 +201,59 @@ export const TreatsStory = () => {
 	);
 };
 TreatsStory.storyName = 'with treats and date header';
+
+/**
+ * Note only the first container should show a badge
+ */
+export const MultipleOnAPaidFront = () => {
+	return (
+		<>
+			<FrontSection
+				title="Section one"
+				isOnPaidContentFront={true}
+				index={0}
+				badge={{
+					imageSrc:
+						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+					href: '/',
+				}}
+			>
+				<Placeholder />
+			</FrontSection>
+			<FrontSection
+				title="Section two"
+				isOnPaidContentFront={true}
+				index={1}
+				badge={{
+					imageSrc:
+						'https://static.theguardian.com/commercial/sponsor/28/Oct/2020/daa941da-14fd-46cc-85cb-731ce59050ee-Grounded_badging-280x180.png',
+					href: '/',
+				}}
+			>
+				<Placeholder />
+			</FrontSection>
+		</>
+	);
+};
+MultipleOnAPaidFront.storyName = 'two sections on a paid front';
+
+export const PageSkinStory = () => {
+	return (
+		<FrontSection title="Page Skin" hasPageSkin={true}>
+			<Placeholder text="Page skins constrain my layout to desktop" />
+		</FrontSection>
+	);
+};
+
+PageSkinStory.storyName = 'with page skin';
+PageSkinStory.story = {
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};

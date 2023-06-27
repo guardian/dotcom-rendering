@@ -18,6 +18,35 @@ const html = await Promise.all(
 const known_errors = new Set([
 	// it only appears in DCR after hydration if signed in
 	'nav3 : topbar : my account',
+	'nav3 : topbar : account overview',
+	'nav3 : topbar : billing',
+	'nav3 : topbar : profile',
+	'nav3 : topbar : email prefs',
+	'nav3 : topbar : data privacy',
+	'nav3 : topbar : settings',
+	'nav3 : topbar : help',
+	'nav3 : topbar : comment activity',
+	'nav3 : topbar : sign out',
+
+	// Palette thrasher related
+	'container-0 | palette-styles-new-do-not-delete',
+	'palette-styles-new-do-not-delete',
+	'external | group-0 | card-@1',
+
+	// These elements don't exist anymore in the DOM after Deeply Read component was added
+	'6 | text',
+	'7 | text',
+	'8 | text',
+	'9 | text',
+	'10 | text',
+	'most-viewed',
+	'tab 1 Most viewed',
+	'tab 2 Across the guardian',
+	'Most viewed',
+	'Across the guardian',
+
+	// Not visible when JS is disabled
+	'nav2 : overlay',
 ]);
 
 const getOphanComponents = (
@@ -27,7 +56,7 @@ const getOphanComponents = (
 	const doc = new DOMParser().parseFromString(html, 'text/html');
 	if (!doc) throw new Error('Unable to parse DOM');
 
-	return [...doc.querySelectorAll(`[${attribute}]`)].filter(
+	return [...doc.querySelectorAll(`[${attribute}]:not(.is-hidden,.is-hidden *)`)].filter(
 		(node): node is Element => node instanceof Element,
 	);
 };

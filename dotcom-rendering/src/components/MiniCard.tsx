@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { body, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';
 import type { TrailType } from '../types/trails';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { generateSources } from './Picture';
 
 const imageStyles = css`
@@ -17,6 +17,7 @@ const linkStyles = css`
 	font-weight: bold;
 	display: flex;
 	align-items: flex-start;
+	text-decoration: none;
 `;
 
 const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
@@ -73,7 +74,6 @@ export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 		<Link
 			href={trail.url}
 			priority="secondary"
-			subdued={true}
 			cssOverrides={[linkStyles, linkOverrideStyles(containerOverrides)]}
 		>
 			{showImage && !!trail.image && (

@@ -726,6 +726,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -955,7 +974,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1154,7 +1173,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1429,6 +1448,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -1658,7 +1696,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1857,7 +1895,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2132,6 +2170,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -2361,7 +2418,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -2560,7 +2617,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2694,6 +2751,9 @@
                             },
                             "hasMore": {
                                 "type": "boolean"
+                            },
+                            "targetedTerritory": {
+                                "$ref": "#/definitions/Territory"
                             }
                         },
                         "required": [
@@ -2892,6 +2952,24 @@
                 "sponsorName"
             ]
         },
+        "FEFrontCardStyle": {
+            "enum": [
+                "Analysis",
+                "Comment",
+                "DeadBlog",
+                "DefaultCardstyle",
+                "Editorial",
+                "ExternalLink",
+                "Feature",
+                "Letters",
+                "LiveBlog",
+                "Media",
+                "Review",
+                "SpecialReport",
+                "SpecialReportAlt"
+            ],
+            "type": "string"
+        },
         "FEContainerType": {
             "enum": [
                 "dynamic/fast",
@@ -2937,6 +3015,20 @@
                 "SombrePalette",
                 "Special",
                 "SpecialReportAltPalette"
+            ],
+            "type": "string"
+        },
+        "Territory": {
+            "description": "List of territories that can be targetted against.",
+            "enum": [
+                "AU-NSW",
+                "AU-QLD",
+                "AU-VIC",
+                "EU-27",
+                "NZ",
+                "US-East-Coast",
+                "US-West-Coast",
+                "XX"
             ],
             "type": "string"
         },

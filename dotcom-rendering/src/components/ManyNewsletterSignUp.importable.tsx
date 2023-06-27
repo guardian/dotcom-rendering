@@ -16,8 +16,8 @@ import {
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
-import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
+import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
 interface Props {

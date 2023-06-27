@@ -11,7 +11,8 @@ templates:
       amiParameter: AMIMobileappsrendering
       amiEncrypted: true
       amiTags:
-        Recipe: focal-mobile-node16-ARM
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: jammy-mobile-node18.16.1-ARM
         AmigoStage: PROD
 deployments:
   mobile-apps-rendering-cfn:

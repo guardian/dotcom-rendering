@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
+import { filterForTagsOfType } from '../lib/tag-utils.amp';
 import type { NavType } from '../model/extract-nav';
+import type { AmpExperiments } from '../server/AMPExperimentCache.amp';
 import type { AMPArticleModel } from '../types/article.amp';
 import type { ConfigType } from '../types/config';
-import { filterForTagsOfType } from '../lib/tag-utils.amp';
-import type { AmpExperiments } from '../server/AMPExperimentCache.amp';
 import { AdConsent } from './AdConsent.amp';
 import { AmpExperimentComponent } from './AmpExperiment.amp';
 import type { AnalyticsModel } from './Analytics.amp';

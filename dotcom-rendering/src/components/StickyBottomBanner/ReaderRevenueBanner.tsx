@@ -13,7 +13,6 @@ import { useState } from 'react';
 import { trackNonClickInteraction } from '../../client/ga/ga';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import type { ArticleCounts } from '../../lib/articleCount';
-import type { TagType } from '../../types/tag';
 import {
 	getLastOneOffContributionDate,
 	getPurchaseInfo,
@@ -31,6 +30,7 @@ import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
+import type { TagType } from '../../types/tag';
 
 type BaseProps = {
 	isSignedIn: boolean;

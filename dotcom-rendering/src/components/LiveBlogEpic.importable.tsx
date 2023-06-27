@@ -6,9 +6,8 @@ import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useArticleCounts } from '../lib/articleCount';
-import type { TagType } from '../types/tag';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { useArticleCounts } from '../lib/articleCount';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
@@ -17,8 +16,9 @@ import {
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
-import { useAB } from '../lib/useAB';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
+import { useSignedInStatus } from '../lib/useSignedInStatus';
+import type { TagType } from '../types/tag';
 
 type Props = {
 	section: string;
@@ -105,7 +105,7 @@ const usePayload = ({
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = useSignedInStatus() === 'SignedIn';
 
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;
@@ -242,15 +242,6 @@ export const LiveBlogEpic = ({
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 
-	const ABTestAPI = useAB()?.api;
-	const userIsInRemoveLiveblogEpicTest = ABTestAPI?.isUserInVariant(
-		'RemoveBusinessLiveblogEpics',
-		'variant',
-	);
-
-	const removeEpic =
-		(userIsInRemoveLiveblogEpicTest ?? false) && section == 'business';
-
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
@@ -261,7 +252,6 @@ export const LiveBlogEpic = ({
 		keywordIds,
 	});
 	if (!payload) return null;
-	if (removeEpic) return null;
 
 	/**
 	 * Here we decide where to insert the epic.

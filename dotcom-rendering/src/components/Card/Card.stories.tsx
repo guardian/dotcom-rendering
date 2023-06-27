@@ -973,52 +973,55 @@ export const WhenVideoWithPlayButton = () => {
 						showMainVideo={true}
 					/>
 				</LI>
-				<UL direction="column" showDivider={true}>
-					<LI padSides={true}>
-						<Card
-							{...basicCardProps}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Video,
-								theme: ArticlePillar.News,
-							}}
-							imagePosition="left"
-							mediaDuration={200}
-							mediaType="Video"
-							showMainVideo={true}
-						/>
-					</LI>
-					<LI padSides={true}>
-						<Card
-							{...basicCardProps}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Video,
-								theme: ArticlePillar.News,
-							}}
-							imagePosition="right"
-							mediaDuration={200}
-							mediaType="Video"
-							showMainVideo={true}
-						/>
-					</LI>
+				<LI percentage="50%">
+					<UL direction="column" showDivider={true}>
+						<LI padSides={true}>
+							<Card
+								{...basicCardProps}
+								format={{
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Video,
+									theme: ArticlePillar.News,
+								}}
+								imagePosition="left"
+								mediaDuration={200}
+								mediaType="Video"
+								showMainVideo={true}
+							/>
+						</LI>
+						<LI padSides={true}>
+							<Card
+								{...basicCardProps}
+								format={{
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Video,
+									theme: ArticlePillar.News,
+								}}
+								imagePosition="right"
+								mediaDuration={200}
+								mediaType="Video"
+								showMainVideo={true}
+							/>
+						</LI>
 
-					<LI padSides={true}>
-						<Card
-							{...basicCardProps}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Video,
-								theme: ArticlePillar.News,
-							}}
-							imagePosition="right"
-							mediaDuration={200}
-							mediaType="Video"
-							showMainVideo={true}
-						/>
-					</LI>
-				</UL>
+						<LI padSides={true}>
+							<Card
+								{...basicCardProps}
+								format={{
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Video,
+									theme: ArticlePillar.News,
+								}}
+								imagePosition="right"
+								mediaDuration={200}
+								mediaType="Video"
+								showMainVideo={true}
+							/>
+						</LI>
+					</UL>
+				</LI>
 			</UL>
+
 			<UL direction="row" padBottom={true}>
 				<LI percentage={'66.666%'} padSides={true}>
 					<Card

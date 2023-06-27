@@ -8,12 +8,12 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { getAgeWarning } from '../lib/age-warning';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { getAgeWarning } from '../lib/age-warning';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import type { Palette } from '../types/palette';
+import type { TagType } from '../types/tag';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';

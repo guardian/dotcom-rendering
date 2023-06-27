@@ -11,14 +11,12 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import type { Branding } from '../types/branding';
-import type { OnwardsSource } from '../types/onwards';
-import type { Palette } from '../types/palette';
-import type { TrailType } from '../types/trails';
-import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
+import type { Branding } from '../types/branding';
+import type { OnwardsSource } from '../types/onwards';
+import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
@@ -31,7 +29,9 @@ type Props = {
 	description?: string;
 	url?: string;
 	onwardsSource: OnwardsSource;
-	format: ArticleFormat;
+	leftColSize: LeftColSize;
+	activeDotColour: string;
+	titleHighlightColour: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -159,12 +159,12 @@ const dotStyle = css`
 	}
 `;
 
-const dotActiveStyle = (palette: Palette) => css`
-	background-color: ${palette.background.carouselDot};
+const activeDotStyles = (activeDotColour: string) => css`
+	background-color: ${activeDotColour};
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.background.carouselDotFocus};
+		background-color: ${activeDotColour};
 	}
 `;
 
@@ -198,17 +198,15 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
+const prevButtonContainerStyle = (leftColSize: LeftColSize) => {
+	switch (leftColSize) {
+		case 'wide':
 			return css`
 				${from.leftCol} {
 					left: 205px;
 				}
 			`;
-		}
-		default: {
+		case 'compact': {
 			return css`
 				${from.leftCol} {
 					left: 120px;
@@ -311,8 +309,11 @@ const headerStyles = css`
 	margin-left: 0;
 `;
 
-const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
-	color: ${isCuratedContent ? palette.text.carouselTitle : text.primary};
+const titleStyle = (
+	titleHighlightColour: string,
+	isCuratedContent?: boolean,
+) => css`
+	color: ${isCuratedContent ? titleHighlightColour : text.primary};
 	display: inline-block;
 	&::first-letter {
 		text-transform: capitalize;
@@ -321,16 +322,18 @@ const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
 
 const Title = ({
 	title,
-	palette,
+	titleHighlightColour,
 	isCuratedContent,
 }: {
 	title: string;
-	palette: Palette;
+	titleHighlightColour: string;
 	isCuratedContent?: boolean;
 }) => (
 	<h2 css={headerStyles}>
 		{isCuratedContent ? 'More from ' : ''}
-		<span css={titleStyle(palette, isCuratedContent)}>{title}</span>
+		<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
+			{title}
+		</span>
 	</h2>
 );
 
@@ -391,7 +394,8 @@ const CarouselCard = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
-	palette: Palette;
+	titleHighlightColour: string;
+	activeDotColour: string;
 	index: number;
 	isCuratedContent?: boolean;
 	goToIndex: (newIndex: number) => void;
@@ -400,7 +404,8 @@ type HeaderAndNavProps = {
 const HeaderAndNav = ({
 	heading,
 	trails,
-	palette,
+	titleHighlightColour,
+	activeDotColour,
 	index,
 	isCuratedContent,
 	goToIndex,
@@ -408,7 +413,7 @@ const HeaderAndNav = ({
 	<div>
 		<Title
 			title={heading}
-			palette={palette}
+			titleHighlightColour={titleHighlightColour}
 			isCuratedContent={isCuratedContent}
 		/>
 		<div css={dotsStyle}>
@@ -422,7 +427,7 @@ const HeaderAndNav = ({
 					key={`dot-${i}`}
 					css={[
 						dotStyle,
-						i === index && dotActiveStyle(palette),
+						i === index && activeDotStyles(activeDotColour),
 						adjustNumberOfDotsStyle(i, trails.length),
 					]}
 					data-link-name={`carousel-small-nav-dot-${i}`}
@@ -446,8 +451,14 @@ const HeaderAndNav = ({
  *
  * [`Carousel` on Chromatic](https://www.chromatic.com/component?appId=63e251470cfbe61776b0ef19&csfId=components-carousel)
  */
-export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
-	const palette = decidePalette(format);
+export const Carousel = ({
+	heading,
+	trails,
+	onwardsSource,
+	leftColSize,
+	activeDotColour,
+	titleHighlightColour,
+}: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -560,25 +571,23 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 			data-link-name={formatAttrString(heading)}
 		>
 			<FetchCommentCounts />
-			<LeftColumn
-				borderType="partial"
-				size={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
-			>
+			<LeftColumn borderType="partial" size={leftColSize}>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
-					palette={palette}
+					activeDotColour={activeDotColour}
+					titleHighlightColour={titleHighlightColour}
 					index={index}
 					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
+			<div
+				css={[
+					buttonContainerStyle,
+					prevButtonContainerStyle(leftColSize),
+				]}
+			>
 				<button
 					type="button"
 					onClick={prev}
@@ -611,7 +620,8 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
-							palette={palette}
+							titleHighlightColour={titleHighlightColour}
+							activeDotColour={activeDotColour}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							goToIndex={goToIndex}

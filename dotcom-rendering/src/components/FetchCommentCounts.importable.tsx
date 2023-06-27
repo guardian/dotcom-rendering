@@ -1,10 +1,10 @@
 import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import type { DCRContainerPalette } from '../types/front';
 import { getEmotionCache } from '../client/islands/emotion';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
+import type { DCRContainerPalette } from '../types/front';
 import { CardCommentCount } from './CardCommentCount';
 
 type Props = {

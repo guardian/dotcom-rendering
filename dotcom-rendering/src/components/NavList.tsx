@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { border, from, palette, space } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { DCRContainerPalette } from '../types/front';
 import type { ContainerOverrides } from '../types/palette';
 import type { TrailType } from '../types/trails';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { MiniCard } from './MiniCard';
 
 type Props = {

@@ -137,9 +137,14 @@ const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
 };
 
 const decideKicker = (trail: FEFrontCard) => {
-	return trail.properties.isBreaking
-		? 'Breaking news'
-		: trail.header.kicker?.item?.properties.kickerText;
+	if (trail.properties.isBreaking) {
+		return 'Breaking news';
+	}
+
+	return (
+		trail.header.kicker?.item?.properties.kickerText ??
+		trail.header.seriesOrBlogKicker?.name
+	);
 };
 
 const decideSlideshowImages = (
@@ -201,7 +206,13 @@ export const enhanceCards = (
 		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, offset + index);
+
+		const dataLinkName = getDataLinkNameCard(
+			format,
+			group,
+			offset + index,
+			faciaCard.card.cardStyle.type,
+		);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
@@ -247,15 +258,13 @@ export const enhanceCards = (
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,
-			// nb. there is a distinct 'byline' property on FEFrontCard, at
-			// card.properties.byline
-			byline:
-				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'

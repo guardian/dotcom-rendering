@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, neutral, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
+import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
 import { CardHeadline } from './CardHeadline';
 
 export type Alignment = 'vertical' | 'horizontal';
@@ -124,6 +124,7 @@ export const SupportingContent = ({
 							shouldPadLeft && leftMargin,
 							isLast && bottomMargin,
 						]}
+						data-link-name={`sublinks | ${index + 1}`}
 					>
 						<CardHeadline
 							format={subLink.format}

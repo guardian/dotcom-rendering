@@ -4519,6 +4519,7 @@
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
+                "newsletters-page",
                 "related-content",
                 "related-stories",
                 "series",
@@ -4620,6 +4621,7 @@
                     "type": "string"
                 },
                 "href": {
+                    "description": "Href can be an internal path including a series tag or a link to an external sponsor page",
                     "type": "string"
                 }
             },

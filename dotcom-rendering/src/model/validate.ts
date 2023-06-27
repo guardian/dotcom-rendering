@@ -5,10 +5,12 @@ import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
 import type { FEArticleType } from '../types/frontend';
 import type { FENewslettersPageType } from '../types/newslettersPage';
+import type { FETagFrontType } from '../types/tagFront';
 import articleSchema from './article-schema.json';
 import blockSchema from './block-schema.json';
 import frontSchema from './front-schema.json';
 import newslettersPageSchema from './newsletter-page-schema.json';
+import tagFrontSchema from './tag-front-schema.json';
 
 const options: Options = {
 	verbose: false,
@@ -22,6 +24,7 @@ addFormats(ajv);
 
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
+const validateTagFront = ajv.compile<FETagFrontType>(tagFrontSchema);
 const validateAllEditorialNewslettersPage = ajv.compile<FENewslettersPageType>(
 	newslettersPageSchema,
 );
@@ -48,6 +51,18 @@ export const validateAsFrontType = (data: unknown): FEFrontType => {
 	throw new TypeError(
 		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFront.errors, null, 2)}`,
+	);
+};
+
+export const validateAsTagFrontType = (data: unknown): FETagFrontType => {
+	if (validateTagFront(data)) return data;
+
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateTagFront.errors, null, 2)}`,
 	);
 };
 

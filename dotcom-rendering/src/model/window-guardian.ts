@@ -25,7 +25,6 @@ export interface WindowGuardianConfig {
 		isPaidContent?: boolean;
 		isDev?: boolean;
 		hasInlineMerchandise?: boolean;
-		section?: string;
 	};
 	libs: {
 		googletag: string;
@@ -62,7 +61,6 @@ export const makeWindowGuardian = ({
 	brazeApiKey,
 	GAData,
 	hasInlineMerchandise,
-	section,
 	googleRecaptchaSiteKey,
 	unknownConfig = {},
 }: {
@@ -85,7 +83,6 @@ export const makeWindowGuardian = ({
 	brazeApiKey?: string;
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
-	section?: string;
 	googleRecaptchaSiteKey?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
@@ -138,7 +135,6 @@ export const makeWindowGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				hasInlineMerchandise,
-				section,
 				googleRecaptchaSiteKey,
 			}),
 			libs: {

@@ -13,10 +13,6 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { buildAdTargeting } from '../lib/ad-targeting';
-import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
 import { Accordion } from '../components/Accordion';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -57,12 +53,16 @@ import {
 	hasRelevantTopics,
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import type { NavType } from '../model/extract-nav';
+import type { FEArticleType } from '../types/frontend';
+import type { RenderingTarget } from '../types/renderingTarget';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -319,7 +319,7 @@ export const LiveLayout = ({
 							shouldCenter={false}
 							element="aside"
 						>
-							<HeaderAdSlot display={format.display} />
+							<HeaderAdSlot />
 						</Section>
 					</Stuck>
 				)}
@@ -388,7 +388,10 @@ export const LiveLayout = ({
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									format={format}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
+									borderColour={palette.border.subNav}
 								/>
 							</Island>
 						</Section>
@@ -1181,7 +1184,13 @@ export const LiveLayout = ({
 										decideTrail,
 									)}
 									onwardsSource="more-on-this-story"
-									format={format}
+									titleHighlightColour={
+										palette.text.carouselTitle
+									}
+									activeDotColour={
+										palette.background.carouselDot
+									}
+									leftColSize={'wide'}
 								/>
 							</Island>
 						</Section>
@@ -1252,7 +1261,7 @@ export const LiveLayout = ({
 							data-component="most-popular"
 							leftColSize="wide"
 						>
-							<MostViewedFooterLayout>
+							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
 										sectionName={article.sectionName}
@@ -1295,7 +1304,8 @@ export const LiveLayout = ({
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							format={format}
+							linkHoverColour={palette.text.articleLinkHover}
+							borderColour={palette.border.subNav}
 						/>
 					</Island>
 				</Section>
