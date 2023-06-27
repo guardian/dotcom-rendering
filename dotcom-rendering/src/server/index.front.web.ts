@@ -50,16 +50,17 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const enhancedCards = enhanceCards(data.contents, {});
 	const speed = getSpeedFromTrails(data.contents);
 
+	const groupedTrails = groupTrailsByDates(
+		enhancedCards,
+		speed === 'slow' || data.forceDay,
+	);
+
 	return {
 		...data,
 		tags: data.tags.tags,
-		groupedTrails: injectMpuIntoGroupedTrails(
-			groupTrailsByDates(
-				enhancedCards,
-				speed === 'slow' || data.forceDay,
-			),
-			speed,
-		),
+		groupedTrails: data.isAdFreeUser
+			? groupedTrails
+			: injectMpuIntoGroupedTrails(groupedTrails, speed),
 		speed,
 		// Pagination information comes from the first tag
 		pagination:
