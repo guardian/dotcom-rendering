@@ -556,7 +556,7 @@ const decideCarouselColours = (
 		return {
 			titleColour: neutral[7],
 			titleHighlightColour: palette.text.carouselTitle,
-			borderColour: neutral[7],
+			borderColour: neutral[86],
 			activeDotColour: palette.background.carouselDot,
 			arrowColour: neutral[100],
 			arrowBackgroundColour: neutral[0],
