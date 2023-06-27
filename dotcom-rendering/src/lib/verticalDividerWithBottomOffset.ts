@@ -1,17 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, neutral } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../types/front';
-import { decideContainerOverrides } from './decideContainerOverrides';
+import { from } from '@guardian/source-foundations';
 
 export function verticalDividerWithBottomOffset(
 	bottomPaddingSize: string,
-	containerPalette?: DCRContainerPalette,
-	verticalDividerColour?: string,
+	verticalDividerColour: string,
 ): SerializedStyles {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
-
 	return css`
 		${from.tablet} {
 			:before {
@@ -25,11 +19,7 @@ export function verticalDividerWithBottomOffset(
 				/* 100% is a reasonable fallback for browsers which don't support calc() */
 				height: 100%;
 				height: calc(100% + ${bottomPaddingSize});
-				border-left: 1px solid
-					${verticalDividerColour ??
-					(containerOverrides
-						? containerOverrides.border?.container
-						: neutral[86])};
+				border-left: 1px solid ${verticalDividerColour};
 			}
 		}
 	`;

@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 import type { DCRContainerPalette } from '../../../types/front';
+import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 
 /**
  * This value needs to match the one set
@@ -65,14 +66,17 @@ const decideDivider = (
 	paddingSize: string,
 	containerPalette?: DCRContainerPalette,
 	verticalDividerColour?: string,
-) =>
-	offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(
-				paddingSize,
-				containerPalette,
-				verticalDividerColour,
-		  )
-		: verticalDivider(containerPalette, verticalDividerColour);
+) => {
+	const borderColour =
+		verticalDividerColour ??
+		(containerPalette &&
+			decideContainerOverrides(containerPalette).border.container) ??
+		neutral[86];
+
+	return offsetBottomPaddingOnDivider
+		? verticalDividerWithBottomOffset(paddingSize, borderColour)
+		: verticalDivider(borderColour);
+};
 
 type Props = {
 	children: React.ReactNode;
