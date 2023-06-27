@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	border,
 	brand,
@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { CommentType, UserProfile } from '../../discussionTypes';
+import type { CommentType, UserProfile } from '../../discussionTypes';
 import { pickComment, unPickComment } from '../../lib/api';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette } from '../../lib/palette';

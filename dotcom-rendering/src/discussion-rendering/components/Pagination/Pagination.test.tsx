@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { FilterOptions } from '../../discussionTypes';
+import type { FilterOptions } from '../../discussionTypes';
 import { Pagination } from './Pagination';
 
 const DEFAULT_FILTERS: FilterOptions = {
