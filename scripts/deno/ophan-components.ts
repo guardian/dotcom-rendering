@@ -47,6 +47,14 @@ const known_errors = new Set([
 
 	// Not visible when JS is disabled
 	'nav2 : overlay',
+	'nav3 : edition picker',
+
+	// In frontend there is <input> and <label>. In DCR it's a <button>
+	'nav3 : topbar : edition-picker: toggle',
+
+	// It's an island with deferUntil="visible"
+	'footer : contribute-cta'
+
 ]);
 
 const getOphanComponents = (

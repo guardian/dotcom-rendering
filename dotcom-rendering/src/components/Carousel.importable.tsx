@@ -266,6 +266,16 @@ const buttonStyle = (
 	}
 `;
 
+const linkStyles = css`
+	text-decoration: none;
+`;
+
+const headerStylesWithUrl = css`
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
 const prevButtonStyle = (
 	index: number,
 	arrowColour?: string,
@@ -349,6 +359,16 @@ const titleStyle = (
 	}
 `;
 
+const getDataLinkNameCarouselButton = (
+	heading: string,
+	direction: string,
+	arrowName: string,
+): string => {
+	return `${
+		heading.toLowerCase() === 'videos' ? 'video-container' : arrowName
+	}-${direction}`;
+};
+
 const Title = ({
 	title,
 	titleColour,
@@ -359,20 +379,36 @@ const Title = ({
 	titleColour: string;
 	titleHighlightColour: string;
 	isCuratedContent?: boolean;
-}) => (
-	<h2 css={headerStyles}>
-		{isCuratedContent ? 'More from ' : ''}
-		<span
-			css={titleStyle(
-				titleColour,
-				titleHighlightColour,
-				isCuratedContent,
-			)}
+}) =>
+	title === 'Videos' ? (
+		<a
+			css={[linkStyles]}
+			href="https://www.theguardian.com/video"
+			data-link-name="video-container-title Videos"
 		>
-			{title}
-		</span>
-	</h2>
-);
+			<h2 css={headerStyles}>
+				<span
+					css={[
+						headerStylesWithUrl,
+						titleStyle(
+							titleColour,
+							titleHighlightColour,
+							isCuratedContent,
+						),
+					]}
+				>
+					{title}
+				</span>
+			</h2>
+		</a>
+	) : (
+		<h2 css={headerStyles}>
+			{isCuratedContent ? 'More from ' : ''}
+			<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
+				{title}
+			</span>
+		</h2>
+	);
 
 type CarouselCardProps = {
 	isFirst: boolean;
@@ -656,6 +692,11 @@ export const Carousel = ({
 		<div
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
+			data-component={
+				heading.toLowerCase() === 'videos'
+					? 'video-playlist'
+					: undefined
+			}
 		>
 			<FetchCommentCounts />
 			<LeftColumn
@@ -697,7 +738,11 @@ export const Carousel = ({
 							carouselColours.arrowBackgroundHoverColour,
 						),
 					]}
-					data-link-name={`${arrowName}-prev`}
+					data-link-name={getDataLinkNameCarouselButton(
+						heading,
+						'prev',
+						arrowName,
+					)}
 				>
 					<SvgChevronLeftSingle />
 				</button>
@@ -722,7 +767,11 @@ export const Carousel = ({
 							carouselColours.arrowBackgroundHoverColour,
 						),
 					]}
-					data-link-name={`${arrowName}-next`}
+					data-link-name={getDataLinkNameCarouselButton(
+						heading,
+						'next',
+						arrowName,
+					)}
 				>
 					<SvgChevronRightSingle />
 				</button>
@@ -764,7 +813,11 @@ export const Carousel = ({
 										carouselColours.arrowBackgroundHoverColour,
 									),
 								]}
-								data-link-name={`${arrowName}-prev`}
+								data-link-name={getDataLinkNameCarouselButton(
+									heading,
+									'prev',
+									arrowName,
+								)}
 							>
 								<SvgChevronLeftSingle />
 							</button>
@@ -786,7 +839,11 @@ export const Carousel = ({
 										carouselColours.arrowBackgroundHoverColour,
 									),
 								]}
-								data-link-name={`${arrowName}-next`}
+								data-link-name={getDataLinkNameCarouselButton(
+									heading,
+									'next',
+									arrowName,
+								)}
 							>
 								<SvgChevronRightSingle />
 							</button>
