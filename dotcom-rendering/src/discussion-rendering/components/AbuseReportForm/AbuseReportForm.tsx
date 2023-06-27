@@ -192,11 +192,10 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								categoryId: Number(e.target.value),
-							})
-						}
+							})}
 						value={formVariables.categoryId}
-						// TODO: use ref once forwardRef is implemented @guardian/src-button
-						// ref={firstElement}
+					// TODO: use ref once forwardRef is implemented @guardian/src-button
+					// ref={firstElement}
 					>
 						<option value="0">Please select</option>
 						<option value="1">Personal abuse</option>
@@ -229,8 +228,7 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								reason: e.target.value,
-							})
-						}
+							})}
 						value={formVariables.reason}
 					></textarea>
 					{!!errors.reason && (
@@ -250,8 +248,7 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								email: e.target.value,
-							})
-						}
+							})}
 						value={formVariables.email}
 					></input>
 					{!!errors.email && (
