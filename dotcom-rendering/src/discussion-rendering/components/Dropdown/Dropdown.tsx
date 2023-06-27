@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -10,7 +10,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { DropdownOptionType } from '../../discussionTypes';
+import type { DropdownOptionType } from '../../discussionTypes';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
 
@@ -199,6 +199,7 @@ export const Dropdown = ({ id, label, options, pillar, onSelect }: Props) => {
 					css={[buttonStyles, isExpanded && expandedStyles]}
 					aria-controls={dropdownID}
 					aria-expanded={isExpanded ? 'true' : 'false'}
+					type="button"
 				>
 					{activeLink ? activeLink.title : 'Please select'}
 				</button>
@@ -213,7 +214,8 @@ export const Dropdown = ({ id, label, options, pillar, onSelect }: Props) => {
 								option.isActive && activeStyles(pillar),
 								index === 0 && firstStyles,
 							]}
-							disabled={option.isActive || option.disabled}
+							disabled={option.isActive ?? option.disabled}
+							type="button"
 						>
 							{option.title}
 						</button>

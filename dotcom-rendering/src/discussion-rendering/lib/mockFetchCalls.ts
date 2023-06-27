@@ -9,7 +9,7 @@ import { topPicks } from '../fixtures/topPicks';
 
 export const mockedMessageID = '123456';
 
-export const mockFetchCalls = () => {
+export const mockFetchCalls = (): typeof fetchMock => {
 	fetchMock
 		.restore()
 		// Comment count

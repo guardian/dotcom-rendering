@@ -56,14 +56,16 @@ export const RecommendationCount = ({
 		const newCount = count + 1;
 		setCount(newCount);
 		setRecommended(true);
-		const recommend = onRecommend || recommendDefault;
+		const recommend = onRecommend ?? recommendDefault;
 
-		recommend(commentId).then((accepted) => {
-			if (!accepted) {
-				setCount(newCount - 1);
-				setRecommended(alreadyRecommended);
-			}
-		});
+		recommend(commentId)
+			.then((accepted) => {
+				if (!accepted) {
+					setCount(newCount - 1);
+					setRecommended(alreadyRecommended);
+				}
+			})
+			.catch((e) => {});
 	};
 
 	return (
@@ -75,6 +77,7 @@ export const RecommendationCount = ({
 				disabled={recommended || !isSignedIn || userMadeComment}
 				data-link-name="Recommend comment"
 				aria-label="Recommend comment"
+				type="button"
 			>
 				<div css={arrowStyles(recommended)}>
 					<SvgArrowUpStraight />

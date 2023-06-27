@@ -51,7 +51,11 @@ const IndexPageWrapper = () => {
 			</p>
 
 			<div className="options">
-				<button name="expanded" onClick={() => setExpanded(!expanded)}>
+				<button
+					name="expanded"
+					onClick={() => setExpanded(!expanded)}
+					type="button"
+				>
 					{expanded ? 'collapse' : 'expand'}
 				</button>
 
@@ -59,7 +63,11 @@ const IndexPageWrapper = () => {
 					<label htmlFor="closed">
 						{closed ? 'Closed' : 'Open'} for comment
 					</label>
-					<button name="closed" onClick={() => setClosed(!closed)}>
+					<button
+						name="closed"
+						onClick={() => setClosed(!closed)}
+						type="button"
+					>
 						click to {closed ? 'open' : 'close'}
 					</button>
 				</div>
@@ -74,14 +82,16 @@ const IndexPageWrapper = () => {
 					name="pillar"
 					value={pillar}
 					onChange={(e) => {
-						const pillar = e.target.value;
-						const validPillar = isPillar(pillar) ? pillar : 'news';
+						const selectedPillar = e.target.value;
+						const validPillar = isPillar(selectedPillar)
+							? selectedPillar
+							: 'news';
 						setPillar(validPillar);
 					}}
 				>
-					{pillars.map((pillar) => (
-						<option key={pillar} value={pillar}>
-							{pillar}
+					{pillars.map((aPillar) => (
+						<option key={aPillar} value={aPillar}>
+							{aPillar}
 						</option>
 					))}
 				</select>
@@ -103,6 +113,7 @@ const IndexPageWrapper = () => {
 					apiKey="discussion-rendering"
 					initialPage={1}
 					idApiUrl="https://idapi.theguardian.com"
+					test=""
 					// page={page}
 					// onPageChange={setPage}
 				/>
