@@ -193,7 +193,7 @@ export const CommentForm = ({
 				endString: string;
 		  }
 		| undefined => {
-		if (!textAreaRef || !textAreaRef.current) return;
+		if (!textAreaRef.current) return;
 		const selectionStart = textAreaRef.current.selectionStart;
 		const selectionEnd = textAreaRef.current.selectionEnd;
 		const value = textAreaRef.current.value;
@@ -233,7 +233,7 @@ export const CommentForm = ({
 		if (!body) return;
 
 		try {
-			const preview = onPreview || defaultPreview;
+			const preview = onPreview ?? defaultPreview;
 			const response = await preview(body);
 			setPreviewBody(response);
 			setShowPreview(true);
@@ -250,7 +250,9 @@ export const CommentForm = ({
 		setBody('');
 		setShowPreview(false);
 		setIsActive(false);
-		setCommentBeingRepliedTo && setCommentBeingRepliedTo();
+		if (setCommentBeingRepliedTo) {
+			setCommentBeingRepliedTo();
+		}
 	};
 
 	const submitForm = async () => {
@@ -258,8 +260,8 @@ export const CommentForm = ({
 		setInfo('');
 
 		if (body) {
-			const comment = onComment || defaultComment;
-			const reply = onReply || defaultReply;
+			const comment = onComment ?? defaultComment;
+			const reply = onReply ?? defaultReply;
 			const response: CommentResponse = commentBeingRepliedTo
 				? await reply(shortUrl, body, commentBeingRepliedTo.id)
 				: await comment(shortUrl, body);
@@ -356,7 +358,7 @@ export const CommentForm = ({
 		const response = await addUserName(userName);
 		if (response.status === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
-			submitForm();
+			void submitForm();
 			setUserNameMissing(false);
 		} else {
 			response.errors &&
@@ -383,7 +385,7 @@ export const CommentForm = ({
 				css={formWrapper}
 				onSubmit={(e) => {
 					e.preventDefault();
-					submitForm();
+					void submitForm();
 				}}
 			>
 				{!!error && (
@@ -409,21 +411,20 @@ export const CommentForm = ({
 							.
 						</p>
 
-						{user.privateFields &&
-							user.privateFields.isPremoderated && (
-								<p css={[errorTextStyles, linkStyles]}>
-									Your comments are currently being
-									pre-moderated (
-									<a
-										href="/community-faqs#311"
-										target="_blank"
-										rel="nofollow"
-									>
-										why?
-									</a>
-									)
-								</p>
-							)}
+						{user.privateFields?.isPremoderated && (
+							<p css={[errorTextStyles, linkStyles]}>
+								Your comments are currently being pre-moderated
+								(
+								<a
+									href="/community-faqs#311"
+									target="_blank"
+									rel="nofollow"
+								>
+									why?
+								</a>
+								)
+							</p>
+						)}
 					</div>
 				)}
 				<textarea
@@ -493,6 +494,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-bold"
+								type="button"
 							>
 								B
 							</button>
@@ -503,6 +505,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-italic"
+								type="button"
 							>
 								i
 							</button>
@@ -513,6 +516,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-strikethrough"
+								type="button"
 							>
 								{`S̶`}
 							</button>
@@ -523,6 +527,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-code"
+								type="button"
 							>
 								{`<>`}
 							</button>
@@ -533,6 +538,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-quote"
+								type="button"
 							>
 								"
 							</button>
@@ -543,6 +549,7 @@ export const CommentForm = ({
 								}}
 								css={commentAddOns}
 								data-link-name="formatting-controls-link"
+								type="button"
 							>
 								Link
 							</button>
