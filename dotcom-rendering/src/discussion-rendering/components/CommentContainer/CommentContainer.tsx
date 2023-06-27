@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import { border, neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import {
+import type {
 	CommentResponse,
 	CommentType,
 	ThreadsType,
@@ -91,22 +91,22 @@ export const CommentContainer = ({
 }: Props) => {
 	// Filter logic
 	const [expanded, setExpanded] = useState<boolean>(threads === 'expanded');
-	const [responses, setResponses] = useState(comment.responses || []);
+	const [responses, setResponses] = useState(comment.responses ?? []);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const showResponses = threads !== 'unthreaded';
 
-	const decideShowMoreText = () => {
-		const remainingResponses =
-			comment.metaData &&
-			comment.metaData.responseCount &&
-			comment.metaData.responseCount - 3;
+	/**
+	 * @param responseCount a number > 3
+	 */
+	const decideShowMoreText = (responseCount: number) => {
+		const remainingResponses = responseCount - 3;
 		if (remainingResponses === 1) return `Show 1 more reply`;
 		return `Show ${remainingResponses} more replies`;
 	};
 
 	useEffect(() => {
-		setResponses(comment.responses || []);
+		setResponses(comment.responses ?? []);
 	}, [comment]);
 
 	const expand = (commentId: number) => {
@@ -114,7 +114,7 @@ export const CommentContainer = ({
 		getMoreResponses(commentId)
 			.then((json) => {
 				setExpanded(true);
-				setResponses(json.comment.responses || []);
+				setResponses(json.comment.responses ?? []);
 			})
 			.finally(() => {
 				setLoading(false);
@@ -137,7 +137,7 @@ export const CommentContainer = ({
 			/>
 
 			<>
-				{showResponses && responses && (
+				{showResponses && responses.length > 0 && (
 					<div css={nestingStyles}>
 						<ul css={[commentContainerStyles, removeMargin]}>
 							{responses.map((responseComment) => (
@@ -190,7 +190,10 @@ export const CommentContainer = ({
 									>
 										{loading
 											? 'loading...'
-											: decideShowMoreText()}
+											: decideShowMoreText(
+													comment.metaData
+														.responseCount,
+											  )}
 									</PillarButton>
 								</div>
 							)}
