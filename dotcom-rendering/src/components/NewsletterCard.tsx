@@ -9,7 +9,11 @@ import {
 	SvgCheckmark,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import {
+	getOphanRecordFunction,
+	submitComponentEvent,
+} from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { NewsletterDetail } from './NewsletterDetail';
@@ -102,24 +106,38 @@ export const NewsletterCard = ({
 	const [hasBeenSeen, setRefForHaveSeenMarker] = useIsInView({});
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
 
+	const reportSeen = useCallback(() => {
+		const record = getOphanRecordFunction();
+		const valueData = {
+			id: newsletter.identityName,
+			carousel: groupTitle,
+			cardPosition,
+			carouselPosition,
+		};
+
+		submitComponentEvent(
+			{
+				component: {
+					componentType: 'NEWSLETTER_SUBSCRIPTION',
+					id: `DCR NewsletterCard ${newsletter.identityName}`,
+				},
+				action: 'VIEW',
+				value: JSON.stringify(valueData),
+			},
+			record,
+		);
+	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
+
 	useEffect(() => {
 		if (hasBeenSeen && !haveReportedBeingSeen) {
-			console.log({
-				id: newsletter.identityName,
-				carousel: groupTitle,
-				cardPosition,
-				carouselPosition,
-			});
+			reportSeen();
 			setHaveReportedBeingSeen(true);
 		}
 	}, [
 		hasBeenSeen,
 		haveReportedBeingSeen,
 		setHaveReportedBeingSeen,
-		newsletter.identityName,
-		groupTitle,
-		cardPosition,
-		carouselPosition,
+		reportSeen,
 	]);
 
 	return (
