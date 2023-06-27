@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticlePillar, ArticleSpecial, ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { palette } from '../../lib/palette';
@@ -7,7 +8,7 @@ import { pillarToString } from '../../lib/pillarToString';
 
 type Props = {
 	pillar: ArticleTheme;
-	onClick?: () => void;
+	onClick?: () => void | Promise<void>;
 	children: string;
 	type?: 'submit';
 	priority?: 'primary' | 'secondary' | 'subdued';
