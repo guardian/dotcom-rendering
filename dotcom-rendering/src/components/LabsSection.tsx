@@ -389,7 +389,9 @@ export const LabsSection = ({
 			ophanComponentName={ophanComponentName}
 			hasPageSkin={hasPageSkin}
 			/**
-			 * This is the secret word that will fool the ad blockers but allow commercial code to track Labs Containers
+			 * dumathoin?
+			 * https://github.com/guardian/frontend/pull/17625
+			 * https://forgottenrealms.fandom.com/wiki/Dumathoin
 			 */
 			className={'dumathoin'}
 		>
