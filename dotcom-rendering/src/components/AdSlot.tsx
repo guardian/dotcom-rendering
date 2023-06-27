@@ -46,7 +46,7 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-export const individualLabelCSS = css`
+const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
@@ -120,15 +120,26 @@ export const labelStyles = css`
 		padding: 0;
 		border: 0;
 	}
+
+	.ad-slot--interscroller[data-label-show='true']::before {
+		content: 'Advertisement';
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		border: 0;
+		display: block;
+		${individualLabelCSS}
+	}
 `;
 
-export const adContainerCollapseStyles = css`
+const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
 	}
 `;
 
-export const adSlotCollapseStyles = css`
+const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
 	}
@@ -267,7 +278,7 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-const adStyles = [labelStyles, fluidAdStyles, adContainerCollapseStyles];
+export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
 
 export const AdSlot = ({
 	position,
@@ -283,7 +294,10 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div className="ad-slot-container" css={[adStyles]}>
+						<div
+							className="ad-slot-container"
+							css={[adContainerStyles]}
+						>
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -294,7 +308,6 @@ export const AdSlot = ({
 									'ad-slot--rendered',
 									'js-sticky-mpu',
 								].join(' ')}
-								css={adStyles}
 								data-link-name="ad slot right"
 								data-name="right"
 								aria-hidden="true"
@@ -306,7 +319,7 @@ export const AdSlot = ({
 					return (
 						<TopRightAdSlot
 							isPaidContent={isPaidContent}
-							adStyles={adStyles}
+							adStyles={[labelStyles]}
 						/>
 					);
 				}
@@ -315,7 +328,7 @@ export const AdSlot = ({
 			}
 		case 'comments': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--comments"
 						className={[
@@ -326,7 +339,6 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 							'js-sticky-mpu',
 						].join(' ')}
-						css={[adStyles]}
 						data-link-name="ad slot comments"
 						data-name="comments"
 						aria-hidden="true"
@@ -353,7 +365,11 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					css={[
+						fluidAdStyles,
+						fluidFullWidthAdStyles,
+						adSlotAboveNav,
+					]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
@@ -362,7 +378,7 @@ export const AdSlot = ({
 		}
 		case 'mostpop': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--mostpop"
 						className={[
@@ -372,7 +388,7 @@ export const AdSlot = ({
 							'ad-slot--mpu-banner-ad',
 							'ad-slot--rendered',
 						].join(' ')}
-						css={[adStyles, mostPopAdStyles]}
+						css={[mostPopAdStyles]}
 						data-link-name="ad slot mostpop"
 						data-name="mostpop"
 						aria-hidden="true"
@@ -390,7 +406,7 @@ export const AdSlot = ({
 							justify-content: center;
 						`,
 						hasPageskin && pageSkinContainer,
-						adStyles,
+						adContainerStyles,
 					]}
 				>
 					<div
@@ -402,7 +418,7 @@ export const AdSlot = ({
 						].join(' ')}
 						css={[
 							merchandisingAdStyles,
-							adStyles,
+							fluidAdStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name="ad slot merchandising-high"
@@ -421,7 +437,7 @@ export const AdSlot = ({
 							display: flex;
 							justify-content: center;
 						`,
-						adStyles,
+						adContainerStyles,
 					]}
 				>
 					<div
@@ -433,7 +449,7 @@ export const AdSlot = ({
 						].join(' ')}
 						css={[
 							merchandisingAdStyles,
-							adStyles,
+							fluidAdStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name="ad slot merchandising"
@@ -465,7 +481,7 @@ export const AdSlot = ({
 		case 'inline': {
 			const advertId = `inline${index + 1}`;
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -479,7 +495,6 @@ export const AdSlot = ({
 							css`
 								position: relative;
 							`,
-							adStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
@@ -491,7 +506,7 @@ export const AdSlot = ({
 		case 'liveblog-inline': {
 			const advertId = `inline${index}`;
 			return (
-				<div className="ad-slot-container">
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}`}
 						className={[
@@ -505,8 +520,6 @@ export const AdSlot = ({
 							css`
 								position: relative;
 							`,
-							adStyles,
-							adSlotCollapseStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
 						data-name={advertId}
@@ -518,7 +531,7 @@ export const AdSlot = ({
 		case 'mobile-front': {
 			const advertId = index === 0 ? 'top-above-nav' : `inline${index}`;
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id={`dfp-ad--${advertId}--mobile`}
 						className={[
@@ -538,7 +551,6 @@ export const AdSlot = ({
 								width: 300px;
 								margin: 12px auto;
 							`,
-							adStyles,
 							fluidFullWidthAdStyles,
 						]}
 						data-link-name={`ad slot ${advertId}`}
@@ -550,7 +562,7 @@ export const AdSlot = ({
 		}
 		case 'pageskin': {
 			return (
-				<div className="ad-slot-container" css={[adStyles]}>
+				<div className="ad-slot-container" css={[adContainerStyles]}>
 					<div
 						id="dfp-ad--pageskin-inread"
 						className={[

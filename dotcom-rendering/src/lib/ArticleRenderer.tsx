@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	adContainerCollapseStyles,
-	labelStyles as adLabelStyles,
-} from '../components/AdSlot';
+import { adContainerStyles } from '../components/AdSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement } from '../types/content';
@@ -24,8 +21,7 @@ const commercialPosition = css`
 // spacefinder is scoped to placing elements in spaces within the .article-body-commercial-selector
 // hence we scope the styles at the same level
 const adStylesDynamic = css`
-	${adLabelStyles}
-	${adContainerCollapseStyles}
+	${adContainerStyles}
 `;
 
 type Props = {
