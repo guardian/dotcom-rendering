@@ -1,20 +1,14 @@
 import '@testing-library/jest-dom/extend-expect';
 import { ArticlePillar } from '@guardian/libs';
-import {
-	render,
-	fireEvent,
-	// @ts-expect-error : https://github.com/testing-library/react-testing-library/issues/610
-	waitFor,
-} from '@testing-library/react';
-import { vi } from 'vitest';
-import { CommentType } from '../../discussionTypes';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import type { CommentType } from '../../discussionTypes';
 import { comment } from '../../fixtures/comment';
 import { mockedMessageID, mockFetchCalls } from '../../lib/mockFetchCalls';
 import { CommentContainer } from './CommentContainer';
 
 mockFetchCalls();
 
-// @ts-expect-error
+// @ts-expect-error -- We know this is not `undefined`
 const firstCommentResponse: CommentType = comment.responses[0];
 
 const commentWithReply: CommentType = {
@@ -49,7 +43,7 @@ describe('CommentContainer', () => {
 		// a workaround to emulating hooks outside of render
 		let commentBeingRepliedTo: CommentType | undefined =
 			commentWithoutReply;
-		const mockSetCommentBeingRepliedTo = vi.fn(
+		const mockSetCommentBeingRepliedTo = jest.fn(
 			(newCommentBeingRepliedTo?: CommentType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
@@ -124,7 +118,7 @@ describe('CommentContainer', () => {
 		// a workaround to emulating hooks outside of render
 		let commentBeingRepliedTo: CommentType | undefined =
 			firstCommentResponse;
-		const mockSetCommentBeingRepliedTo = vi.fn(
+		const mockSetCommentBeingRepliedTo = jest.fn(
 			(newCommentBeingRepliedTo?: CommentType) => {
 				commentBeingRepliedTo = newCommentBeingRepliedTo;
 			},
