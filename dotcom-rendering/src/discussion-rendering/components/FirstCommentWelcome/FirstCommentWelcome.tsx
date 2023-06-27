@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	headline,
 	neutral,
@@ -16,7 +16,7 @@ type Props = {
 	body: string;
 	pillar: ArticleTheme;
 	error?: string;
-	submitForm: (userName: string) => void;
+	submitForm: (userName: string) => Promise<void>;
 	cancelSubmit: () => void;
 	onPreview?: (body: string) => Promise<string>;
 };
@@ -58,14 +58,14 @@ export const FirstCommentWelcome = ({
 	useEffect(() => {
 		const fetchShowPreview = async () => {
 			try {
-				const preview = onPreview || defaultPreview;
+				const preview = onPreview ?? defaultPreview;
 				const response = await preview(body);
 				setPreviewBody(response);
 			} catch (e) {
 				setPreviewBody('');
 			}
 		};
-		fetchShowPreview();
+		void fetchShowPreview();
 	}, [body, onPreview]);
 
 	return (
@@ -77,7 +77,7 @@ export const FirstCommentWelcome = ({
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
-					submitForm(userName);
+					void submitForm(userName);
 				}}
 			>
 				<h3
@@ -134,7 +134,7 @@ export const FirstCommentWelcome = ({
 				<Row>
 					<PillarButton
 						pillar={pillar}
-						onClick={() => submitForm(userName)}
+						onClick={() => void submitForm(userName)}
 						linkName="post comment"
 						size="small"
 					>
