@@ -1,5 +1,4 @@
 import { isNonNullable } from '@guardian/libs';
-import type { FECollectionType, FEFrontCard } from '../types/front';
 import type { FETagType } from '../types/tag';
 
 /**
@@ -75,21 +74,20 @@ const getTags = (trails: NarrowedFEFrontCard[], pageId: string): FETagType[] =>
  * @param tags - Tags which you want to have filtered
  * @returns An array of tags which has been sorted by frequency
  */
-const sortTags = (tag: FETagType[]): FETagType[] => {
-	const counter: { [key: string]: [FETagType, number] } = {};
+const sortTags = (tags: readonly FETagType[]): FETagType[] => {
+	const map = new Map<string, { count: number; tag: FETagType }>();
 
-	tag.forEach((x) => {
-		const id = x.properties.id;
-		const count = counter[id]?.[1] ?? 0;
+	for (const tag of tags) {
+		const {
+			properties: { id },
+		} = tag;
 
-		counter[id] = [x, count + 1];
-	});
+		map.set(id, { count: (map.get(id)?.count ?? 0) + 1, tag });
+	}
 
-	const sortedTags = Object.entries(counter).sort(
-		(a, b) => b[1][1] - a[1][1],
-	);
-
-	return sortedTags.map((x) => x[1][0]);
+	return [...map.values()]
+		.sort(({ count: a }, { count: b }) => b - a)
+		.map(({ tag }) => tag);
 };
 
 export const extractTrendingTopicsFomFront = (
