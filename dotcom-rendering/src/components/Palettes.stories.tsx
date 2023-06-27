@@ -201,3 +201,21 @@ export const MediaPalette = () => (
 		/>
 	</FrontSection>
 );
+
+export const PodcastPalette = () => (
+	<FrontSection
+		title="Podcast Palette"
+		collectionId={''}
+		pageId={''}
+		ajaxUrl={''}
+		sectionId={'podcast-palette'}
+		ophanComponentName={'podcast-palette'}
+		ophanComponentLink={'podcast-palette'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="PodcastPalette"
+			showAge={true}
+		/>
+	</FrontSection>
+);

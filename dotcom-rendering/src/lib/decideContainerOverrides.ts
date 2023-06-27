@@ -37,6 +37,8 @@ const textCardHeadline = (
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return neutral[100];
 	}
 };
 
@@ -83,6 +85,8 @@ const backgroundContainerSummary = (
 
 const borderCarouselArrow = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
+		case 'PodcastPalette':
+			return neutral[100];
 		default:
 			return neutral[7];
 	}
@@ -92,6 +96,8 @@ const backgroundCarouselDot = (
 	containerPalette: DCRContainerPalette,
 ): string => {
 	switch (containerPalette) {
+		case 'PodcastPalette':
+			return neutral[7];
 		default:
 			return brandAlt[400];
 	}
@@ -101,6 +107,8 @@ const backgroundCarouselArrow = (
 	containerPalette: DCRContainerPalette,
 ): string => {
 	switch (containerPalette) {
+		case 'PodcastPalette':
+			return neutral[7];
 		default:
 			return brandAlt[400];
 	}
@@ -110,6 +118,8 @@ const backgroundCarouselArrowHover = (
 	containerPalette: DCRContainerPalette,
 ): string => {
 	switch (containerPalette) {
+		case 'PodcastPalette':
+			return brandAlt[400];
 		default:
 			return brandAlt[200];
 	}
@@ -137,6 +147,8 @@ const textCardKicker = (
 			return '#e2352d';
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return news[600];
 	}
 };
 
@@ -166,6 +178,8 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 			return neutral[100];
 		case 'MediaPalette':
 			return neutral[100];
+		case 'PodcastPalette':
+			return neutral[100];
 	}
 };
 
@@ -191,6 +205,8 @@ const textCardCommentCount = (
 			return neutral[20];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return neutral[86];
 	}
 };
 
@@ -216,6 +232,8 @@ const textDynamoHeadline = (
 			return brand[300];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[100];
+		case 'PodcastPalette':
+			return neutral[100];
 	}
 };
 
@@ -241,6 +259,8 @@ const textDynamoKicker = (
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return neutral[7];
+		case 'PodcastPalette':
+			return news[600];
 	}
 };
 
@@ -266,6 +286,8 @@ const textDynamoSublinkKicker = (
 			return news[400];
 		case 'SpecialReportAltPalette':
 			return neutral[7];
+		case 'PodcastPalette':
+			return news[600];
 	}
 };
 
@@ -291,6 +313,8 @@ const textDynamoMeta = (
 			return neutral[93];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[800];
+		case 'PodcastPalette':
+			return neutral[93];
 	}
 };
 
@@ -318,6 +342,8 @@ const textContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[100];
 		case 'MediaPalette':
 			return neutral[100];
+		case 'PodcastPalette':
+			return neutral[7];
 	}
 };
 
@@ -345,6 +371,8 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[86];
 	}
 };
 
@@ -372,6 +400,8 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[86];
 	}
 };
 
@@ -399,6 +429,8 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 			return neutral[46];
 		case 'MediaPalette':
 			return neutral[46];
+		case 'PodcastPalette':
+			return neutral[100];
 	}
 };
 
@@ -426,6 +458,8 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[93];
 		case 'MediaPalette':
 			return neutral[0];
+		case 'PodcastPalette':
+			return neutral[100];
 	}
 };
 
@@ -451,6 +485,8 @@ const backgroundCard = (
 			return culture[700];
 		case 'SpecialReportAltPalette':
 			return specialReportAlt[700];
+		case 'PodcastPalette':
+			return neutral[20];
 	}
 };
 

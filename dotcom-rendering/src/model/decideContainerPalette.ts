@@ -22,5 +22,6 @@ export const decideContainerPalette = (
 	if (palettes?.includes('SpecialReportAltPalette'))
 		return 'SpecialReportAltPalette';
 	if (palettes?.includes('Branded') && canBeBranded) return 'Branded';
+	if (palettes?.includes('Podcast')) return 'PodcastPalette';
 	return undefined;
 };

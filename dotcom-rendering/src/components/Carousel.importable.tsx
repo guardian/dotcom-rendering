@@ -17,7 +17,7 @@ import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
-import { DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette } from '../types/front';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
