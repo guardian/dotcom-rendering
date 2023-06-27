@@ -178,6 +178,7 @@ const columnStyle = css`
 		width: 134px;
 		float: left;
 		position: relative;
+		border-right: 1px solid ${brand[600]};
 
 		:after {
 			height: 100%;
