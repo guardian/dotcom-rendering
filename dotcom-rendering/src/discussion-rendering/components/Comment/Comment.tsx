@@ -693,10 +693,9 @@ export const Comment = ({
 									)}
 									<Space amount={4} />
 									{/* Only staff can pick, and they cannot pick thier own comment */}
-									{user &&
-										user.badge.some(
-											(e) => e.name === 'Staff',
-										) &&
+									{user?.badge.some(
+										(e) => e.name === 'Staff',
+									) &&
 										user.userId !==
 											comment.userProfile.userId && (
 											<div
@@ -736,9 +735,8 @@ export const Comment = ({
 								</Row>
 								<Row>
 									{/* You can't mute unless logged in and you can't yourself */}
-									{user &&
-									comment.userProfile.userId !==
-										user.userId ? (
+									{comment.userProfile.userId !==
+									user?.userId ? (
 										<div
 											css={[
 												buttonLinkBaseStyles,

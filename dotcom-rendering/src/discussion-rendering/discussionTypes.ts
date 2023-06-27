@@ -125,7 +125,7 @@ export interface UserProfile {
 	apiUrl: string;
 	avatar: string;
 	secureAvatarUrl: string;
-	badge: any[];
+	badge: { name: string }[];
 
 	// only included from /profile/me endpoint
 	privateFields?: {
