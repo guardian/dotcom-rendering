@@ -137,9 +137,14 @@ const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
 };
 
 const decideKicker = (trail: FEFrontCard) => {
-	return trail.properties.isBreaking
-		? 'Breaking news'
-		: trail.header.kicker?.item?.properties.kickerText;
+	if (trail.properties.isBreaking) {
+		return 'Breaking news';
+	}
+
+	return (
+		trail.header.kicker?.item?.properties.kickerText ??
+		trail.header.seriesOrBlogKicker?.name
+	);
 };
 
 const decideSlideshowImages = (
