@@ -200,24 +200,4 @@ export const MediaPalette = () => (
 			showAge={true}
 		/>
 	</FrontSection>
-	// <Section
-	// 	title={'Media Palette'}
-	// 	sectionId={'container-media-palette'}
-	// 	fullWidth={true}
-	// 	padBottom={true}
-	// 	showSideBorders={true}
-	// 	padContent={false}
-	// 	containerPalette={'MediaPalette'}
-	// 	showDateHeader={true}
-	// >
-	// 	<Carousel
-	// 		heading={"Media Palette"}
-	// 		trails={trails}
-	// 		onwardsSource={'unknown-source'}
-	// 		titleColour={brandAlt[400]}
-	// 		titleHighlightColour={brandAlt[400]}
-	// 		activeDotColour={brandAlt[400]}
-	// 		leftColSize={'compact'}
-	// 	/>
-	// </Section>
 );
