@@ -109,10 +109,12 @@ export const NewsletterCard = ({
 	const reportSeen = useCallback(() => {
 		const record = getOphanRecordFunction();
 		const valueData = {
-			id: newsletter.identityName,
+			eventDescription: 'card-viewed',
+			newsletterId: newsletter.identityName,
 			carousel: groupTitle,
 			cardPosition,
 			carouselPosition,
+			timestamp: Date.now(),
 		};
 
 		submitComponentEvent(
