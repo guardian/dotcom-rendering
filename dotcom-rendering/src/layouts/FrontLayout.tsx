@@ -483,6 +483,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										onwardsSource={'unknown-source'}
 										palette={'MediaPalette'}
 										leftColSize={'compact'}
+										collectionType={
+											collection.collectionType
+										}
 									/>
 								</Island>
 							</Section>

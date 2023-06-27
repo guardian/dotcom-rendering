@@ -41,6 +41,7 @@ type ArticleProps = Props & {
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
+	collectionType?: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -360,12 +361,14 @@ const titleStyle = (
 `;
 
 const getDataLinkNameCarouselButton = (
-	heading: string,
 	direction: string,
 	arrowName: string,
+	collectionType?: string,
 ): string => {
 	return `${
-		heading.toLowerCase() === 'videos' ? 'video-container' : arrowName
+		collectionType && collectionType === 'fixed/video'
+			? 'video-container'
+			: arrowName
 	}-${direction}`;
 };
 
@@ -699,7 +702,8 @@ export const Carousel = ({
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
 			data-component={
-				heading.toLowerCase() === 'videos'
+				'collectionType' in props &&
+				props.collectionType === 'fixed/video'
 					? 'video-playlist'
 					: undefined
 			}
