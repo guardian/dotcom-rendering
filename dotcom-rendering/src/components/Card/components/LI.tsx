@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { from, neutral, space, until } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 import type { DCRContainerPalette } from '../../../types/front';
-import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 
 /**
  * This value needs to match the one set

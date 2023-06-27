@@ -11,10 +11,13 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
+import { DCRContainerPalette } from '../types/front';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -22,9 +25,6 @@ import { LI } from './Card/components/LI';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
-import { DCRContainerPalette } from '../types/front';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	heading: string;
@@ -404,7 +404,13 @@ const Title = ({
 	) : (
 		<h2 css={headerStyles}>
 			{isCuratedContent ? 'More from ' : ''}
-			<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
+			<span
+				css={titleStyle(
+					titleColour,
+					titleHighlightColour,
+					isCuratedContent,
+				)}
+			>
 				{title}
 			</span>
 		</h2>
