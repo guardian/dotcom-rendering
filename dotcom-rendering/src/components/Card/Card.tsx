@@ -84,10 +84,7 @@ export type Props = {
 };
 
 const getMediaType = (
-	design: Extract<
-		ArticleDesign,
-		ArticleDesign.Gallery | ArticleDesign.Audio | ArticleDesign.Video
-	>,
+	design: ArticleDesign.Gallery | ArticleDesign.Audio | ArticleDesign.Video,
 ) => {
 	switch (design) {
 		case ArticleDesign.Gallery:
