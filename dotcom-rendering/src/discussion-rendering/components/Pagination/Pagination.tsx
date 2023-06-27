@@ -16,7 +16,7 @@ import type { FilterOptions } from '../../discussionTypes';
 type Props = {
 	totalPages: number;
 	currentPage: number;
-	setCurrentPage: Function;
+	setCurrentPage: (currentPage: number) => void;
 	commentCount: number;
 	filters: FilterOptions;
 };
@@ -130,7 +130,7 @@ const Forward = ({
 	setCurrentPage,
 }: {
 	currentPage: number;
-	setCurrentPage: Function;
+	setCurrentPage: Props['setCurrentPage'];
 }) => (
 	<div css={[chevronButtonStyles({ isSelected: false }), shiftRight]}>
 		<Button
@@ -150,7 +150,7 @@ const Back = ({
 	setCurrentPage,
 }: {
 	currentPage: number;
-	setCurrentPage: Function;
+	setCurrentPage: Props['setCurrentPage'];
 }) => {
 	const newPage = Math.max(0, currentPage - 1);
 
@@ -175,7 +175,7 @@ const PageButton = ({
 	isSelected,
 }: {
 	currentPage: number;
-	setCurrentPage: Function;
+	setCurrentPage: Props['setCurrentPage'];
 	isSelected: boolean;
 }) => (
 	<button
@@ -183,6 +183,7 @@ const PageButton = ({
 		css={pageButtonStyles(isSelected)}
 		onClick={() => setCurrentPage(currentPage)}
 		data-link-name={`Pagination view page ${currentPage}`}
+		type="button"
 	>
 		{currentPage}
 	</button>
