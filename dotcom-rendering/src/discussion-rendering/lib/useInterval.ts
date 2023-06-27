@@ -1,9 +1,14 @@
 import { useEffect, useRef } from 'react';
 
+type CallbackFunction = () => void;
+
 // Why do we have this custom hook?
 // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-export const useInterval = (callback: any, delay: number) => {
-	const savedCallback = useRef();
+export const useInterval = (
+	callback: CallbackFunction,
+	delay: number,
+): void => {
+	const savedCallback = useRef<CallbackFunction>();
 
 	// Remember the latest callback.
 	useEffect(() => {
@@ -13,12 +18,12 @@ export const useInterval = (callback: any, delay: number) => {
 	// Set up the interval.
 	useEffect(() => {
 		function tick() {
-			const currentCallback: any = savedCallback.current;
-			currentCallback();
+			const currentCallback = savedCallback.current;
+			if (currentCallback) {
+				currentCallback();
+			}
 		}
-		if (delay !== null) {
-			const id = setInterval(tick, delay);
-			return () => clearInterval(id);
-		} else return;
+		const id = setInterval(tick, delay);
+		return () => clearInterval(id);
 	}, [delay]);
 };
