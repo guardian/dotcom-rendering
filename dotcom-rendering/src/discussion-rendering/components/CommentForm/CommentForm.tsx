@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
-import {
+import type {
 	CommentResponse,
 	CommentType,
 	UserProfile,
@@ -35,11 +35,11 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 };
 
-const boldString = (text: string) => `<b>${text}</b>`;
-const italicsString = (text: string) => `<i>${text}</i>`;
-const strikethroughString = (text: string) => `<del>${text}</del>`;
-const codeString = (text: string) => `<code>${text}</code>`;
-const quoteString = (text: string) => `<blockquote>${text}</blockquote>`;
+const boldString = (str: string) => `<b>${str}</b>`;
+const italicsString = (str: string) => `<i>${str}</i>`;
+const strikethroughString = (str: string) => `<del>${str}</del>`;
+const codeString = (str: string) => `<code>${str}</code>`;
+const quoteString = (str: string) => `<blockquote>${str}</blockquote>`;
 const linkStringFunc = (url: string, highlightedText?: string) =>
 	`<a href="${url}" rel="nofollow">${
 		highlightedText ? highlightedText : url
