@@ -247,7 +247,9 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			image: decideImage(faciaCard),
-			kickerText: decideKicker(faciaCard),
+			kickerText: faciaCard.properties.showKickerTag
+				? decideKicker(faciaCard)
+				: undefined,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,
