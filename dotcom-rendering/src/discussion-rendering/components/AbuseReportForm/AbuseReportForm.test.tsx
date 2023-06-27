@@ -1,12 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
-
 import { ArticlePillar } from '@guardian/libs';
-import {
-	render,
-	fireEvent,
-	// @ts-expect-error : https://github.com/testing-library/react-testing-library/issues/610
-	waitFor,
-} from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { mockFetchCalls } from '../../lib/mockFetchCalls';
 import { AbuseReportForm } from './AbuseReportForm';
 
@@ -43,7 +38,8 @@ describe('Dropdown', () => {
 	});
 
 	it('Should show the success message category is selected', async () => {
-		const { getByText, getByLabelText, queryByText } = render(
+		const user = userEvent.setup();
+		const { getByText, getByLabelText, getByRole } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => {}}
 				pillar={ArticlePillar.Sport}
@@ -51,17 +47,8 @@ describe('Dropdown', () => {
 			/>,
 		);
 
-		fireEvent.change(getByLabelText('Category'), { target: { value: 3 } });
-
-		fireEvent.click(getByText('Report'));
-
-		const options: any = getByLabelText('Category');
-		expect(options[1].selected).toBeFalsy();
-		expect(options[3].selected).toBeTruthy();
-
-		expect(
-			queryByText('You must select a category before submitting'),
-		).not.toBeInTheDocument();
+		await user.selectOptions(getByLabelText('Category'), 'Legal issue');
+		await user.click(getByRole('button', { name: 'Report' }));
 
 		await waitFor(() => {
 			expect(fetchMock.called(/reportAbuse/)).toBeTruthy();
