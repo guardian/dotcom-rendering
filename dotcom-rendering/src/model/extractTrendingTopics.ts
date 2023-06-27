@@ -32,12 +32,31 @@ const isNotSectionTag = (tag: FETagType): boolean => {
 	);
 };
 
+export type NarrowedFEFrontCard = {
+	card: {
+		id: string;
+	};
+	properties: {
+		maybeContent?: {
+			tags: {
+				tags: FETagType[];
+			};
+		};
+		maybeContentId?: string;
+	};
+};
+
+export type NarrowedFECollectionType = {
+	curated: NarrowedFEFrontCard[];
+	backfill: NarrowedFEFrontCard[];
+};
+
 /**
  * Gets all relevant tags filtered by properties
  * @param tags - The deduplicated trails
  * @returns An array of relevant tags
  */
-const getTags = (trails: FEFrontCard[], pageId: string): FETagType[] =>
+const getTags = (trails: NarrowedFEFrontCard[], pageId: string): FETagType[] =>
 	trails
 		.flatMap((trail) => trail.properties.maybeContent?.tags.tags)
 		.filter(isNonNullable)
@@ -73,14 +92,12 @@ const sortTags = (tag: FETagType[]): FETagType[] => {
 	return sortedTags.map((x) => x[1][0]);
 };
 
-
 export const extractTrendingTopicsFomFront = (
-	collections: FECollectionType[],
+	collections: NarrowedFECollectionType[],
 	pageId: string,
 ): FETagType[] => {
 	// Get a single array of all trails in the collections
-	const trails = new Map<string, FEFrontCard>();
-
+	const trails = new Map<string, NarrowedFEFrontCard>();
 	collections
 		.flatMap((collection) => [
 			...collection.curated,
@@ -93,7 +110,7 @@ export const extractTrendingTopicsFomFront = (
 	return extractTrendingTopics([...trails.values()], pageId);
 };
 
-export const extractTrendingTopics = (trails: FEFrontCard[], pageId: string): FETagType[] => {
+export const extractTrendingTopics = (trails: NarrowedFEFrontCard[], pageId: string): FETagType[] => {
 	const allTags = getTags(trails, pageId);
 	const tags = sortTags(allTags).slice(0, 20);
 
