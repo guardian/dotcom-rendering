@@ -257,7 +257,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							: undefined;
 
 					return (
-						<Fragment key={index}>
+						<Fragment key={containedId}>
 							<FrontSection
 								title={date.toLocaleDateString(locale, {
 									day:
