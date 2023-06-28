@@ -102,7 +102,7 @@ const commentCss = css`
 	}
 
 	code {
-		/* stylelint-disable-next-line property-disallowed-list */
+		/* stylelint-disable-next-line property-disallowed-list -- we do not have a monospace Source font */
 		font-family: monospace;
 		font-size: 1em;
 	}
