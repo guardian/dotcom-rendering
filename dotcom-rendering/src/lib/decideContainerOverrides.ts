@@ -408,7 +408,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
-			return neutral[86];
+			return neutral[100];
 		case 'PodcastPalette':
 			return neutral[86];
 	}
@@ -439,7 +439,7 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
-			return neutral[100];
+			return neutral[86];
 	}
 };
 
