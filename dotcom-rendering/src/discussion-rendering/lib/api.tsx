@@ -1,3 +1,4 @@
+import { joinUrl } from '@guardian/libs';
 import type {
 	AdditionalHeadersType,
 	CommentResponse,
@@ -9,7 +10,6 @@ import type {
 	UserNameResponse,
 	UserProfile,
 } from '../discussionTypes';
-import { joinUrl } from './joinUrl';
 
 const options = {
 	// Defaults
