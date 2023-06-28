@@ -65,7 +65,8 @@ export const RecommendationCount = ({
 					setRecommended(alreadyRecommended);
 				}
 			})
-			.catch((e) => {});
+			// TODO: do some error handling
+			.catch(() => undefined);
 	};
 
 	return (
