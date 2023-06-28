@@ -13,6 +13,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
@@ -28,6 +29,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
@@ -43,6 +45,11 @@ import type {
 } from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
+
+/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size */
+export type VideoSize =
+	| 'large enough to play: at least 480px'
+	| 'too small to play: 479px or less';
 
 export type Props = {
 	linkTo: string;
@@ -63,9 +70,8 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
-	mediaType?: MediaType;
-	mediaDuration?: number;
-	showMainVideo?: boolean;
+	mainMedia?: MainMedia;
+	videoSize: VideoSize;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: number;
@@ -185,16 +191,27 @@ const getMedia = ({
 	avatarUrl,
 	isCrossword,
 	slideshowImages,
+	mainMedia,
+	videoSize,
 }: {
 	imageUrl?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
+	mainMedia?: MainMedia;
+	videoSize: VideoSize;
 }) => {
+	if (
+		mainMedia &&
+		mainMedia.type === 'Video' &&
+		videoSize === 'large enough to play: at least 480px'
+	) {
+		return { type: 'video', mainMedia } as const;
+	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (imageUrl) {
-		const type = isCrossword ? 'crossword' : 'mainMedia';
+		const type = isCrossword ? 'crossword' : 'picture';
 		return { type, imageUrl } as const;
 	}
 	return undefined;
@@ -239,9 +256,8 @@ export const Card = ({
 	trailText,
 	avatarUrl,
 	showClock,
-	mediaType,
-	mediaDuration,
-	showMainVideo,
+	mainMedia,
+	videoSize,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -342,13 +358,17 @@ export const Card = ({
 		);
 	}
 
-	const isPlayableMainMedia = !!showMainVideo || mediaType === 'Video';
+	const showPlayIcon =
+		mainMedia?.type === 'Video' &&
+		videoSize === 'too small to play: 479px or less';
 
 	const media = getMedia({
 		imageUrl,
 		avatarUrl,
 		isCrossword,
 		slideshowImages,
+		mainMedia,
+		videoSize,
 	});
 	return (
 		<CardWrapper
@@ -375,7 +395,7 @@ export const Card = ({
 						imageType={media.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={isPlayableMainMedia}
+						showPlayIcon={showPlayIcon}
 					>
 						{media.type === 'slideshow' && (
 							<Slideshow
@@ -396,28 +416,58 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						)}
-						{media.type === 'mainMedia' && (
-							<CardPicture
-								master={media.imageUrl}
-								imageSize={imageSize}
-								alt=""
-							/>
+						{media.type === 'video' && (
+							<div
+								data-chromatic="ignore"
+								data-component="youtube-atom"
+								css={css`
+									display: block;
+									position: relative;
+									${getZIndex('card-nested-link')}
+								`}
+							>
+								<Island>
+									<YoutubeBlockComponent
+										id={media.mainMedia.elementId}
+										elementId={media.mainMedia.elementId}
+										assetId={media.mainMedia.videoId}
+										duration={media.mainMedia.duration}
+										posterImage={media.mainMedia.images}
+										width={media.mainMedia.width}
+										height={media.mainMedia.height}
+										origin={media.mainMedia.origin}
+										mediaTitle={media.mainMedia.title}
+										expired={media.mainMedia.expired}
+										format={format}
+										isMainMedia={true}
+										hideCaption={true}
+										role="inline"
+										stickyVideos={false}
+									/>
+								</Island>
+							</div>
+						)}
+						{media.type === 'picture' && (
+							<>
+								<CardPicture
+									master={media.imageUrl}
+									imageSize={imageSize}
+									alt=""
+								/>
+								{showPlayIcon && (
+									<MediaDuration
+										mediaDuration={mainMedia.duration}
+										imagePosition={imagePosition}
+										imagePositionOnMobile={
+											imagePositionOnMobile
+										}
+									/>
+								)}
+							</>
 						)}
 						{media.type === 'crossword' && (
 							<img src={media.imageUrl} alt="" />
 						)}
-
-						{isPlayableMainMedia &&
-							mediaDuration !== undefined &&
-							mediaDuration > 0 && (
-								<MediaDuration
-									mediaDuration={mediaDuration}
-									imagePosition={imagePosition}
-									imagePositionOnMobile={
-										imagePositionOnMobile
-									}
-								/>
-							)}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
@@ -459,12 +509,16 @@ export const Card = ({
 								cardHasImage={imageUrl !== undefined}
 							/>
 						) : null}
-						{mediaType && mediaType !== 'Video' && (
+						{!!mainMedia && mainMedia.type !== 'Video' && (
 							<MediaMeta
 								containerPalette={containerPalette}
 								format={format}
-								mediaType={mediaType}
-								mediaDuration={mediaDuration}
+								mediaType={mainMedia.type}
+								mediaDuration={
+									mainMedia.type === 'Audio'
+										? mainMedia.duration
+										: undefined
+								}
 								hasKicker={!!kickerText}
 							/>
 						)}

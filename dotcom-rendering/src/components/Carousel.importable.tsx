@@ -18,6 +18,7 @@ import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
+import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -427,8 +428,7 @@ type CarouselCardProps = {
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
-	showMainVideo?: boolean;
-	mediaDuration?: number;
+	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
 };
 
@@ -443,8 +443,7 @@ const CarouselCard = ({
 	dataLinkName,
 	discussionId,
 	branding,
-	showMainVideo,
-	mediaDuration,
+	mainMedia,
 	verticalDividerColour,
 }: CarouselCardProps) => (
 	<LI
@@ -472,8 +471,8 @@ const CarouselCard = ({
 			discussionId={discussionId}
 			branding={branding}
 			isExternalLink={false}
-			showMainVideo={showMainVideo}
-			mediaDuration={mediaDuration}
+			mainMedia={mainMedia}
+			videoSize="too small to play: 479px or less"
 		/>
 	</LI>
 );
@@ -870,6 +869,7 @@ export const Carousel = ({
 							kickerText,
 							branding,
 							discussion,
+							mainMedia,
 						} = trail;
 
 						// Don't try to render cards that have no publication date. This property is technically optional
@@ -895,8 +895,7 @@ export const Carousel = ({
 										: undefined
 								}
 								branding={branding}
-								showMainVideo={trail.showMainVideo}
-								mediaDuration={trail.mediaDuration}
+								mainMedia={mainMedia}
 								verticalDividerColour={
 									carouselColours.borderColour
 								}

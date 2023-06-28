@@ -1246,10 +1246,120 @@
         "FEMediaAtoms": {
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MediaAsset"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
                 "duration": {
                     "type": "number"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "posterImage": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "activeVersion": {
+                    "type": "number"
                 }
-            }
+            },
+            "required": [
+                "assets",
+                "id",
+                "title"
+            ]
+        },
+        "MediaAsset": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "number"
+                },
+                "platform": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "platform",
+                "version"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
+                "mimeType",
+                "url"
+            ]
         },
         "EditionId": {
             "enum": [

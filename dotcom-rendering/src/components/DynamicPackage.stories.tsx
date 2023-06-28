@@ -354,7 +354,7 @@ export const SpecialReportWithoutPalette = () => (
 							'inside the firm that helps the super-rich hide their money',
 						showQuotedHeadline: false,
 						dataLinkName: 'news | group-0 | card-@1',
-						showMainVideo: false,
+						mainMedia: undefined,
 						showLivePlayable: false,
 						isExternalLink: false,
 						webPublicationDate: '2016-04-08T12:15:09.000Z',
