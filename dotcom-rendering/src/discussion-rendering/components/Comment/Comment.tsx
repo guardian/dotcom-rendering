@@ -340,7 +340,7 @@ export const Comment = ({
 		}
 	};
 
-	const showStaffBadge = comment.userProfile.badge.find(
+	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
 	);
 
@@ -350,7 +350,7 @@ export const Comment = ({
 	// In frontend we check/display the Staff badge else we check/display the
 	// Contributor - we shouldn't see both Staff & Contributor badges.
 	// https://github.com/guardian/frontend/blob/main/discussion/app/views/fragments/commentBadges.scala.html#L8
-	const showContributorBadge = comment.userProfile.badge.find(
+	const showContributorBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Contributor',
 	);
 
@@ -597,7 +597,8 @@ export const Comment = ({
 										onClick={() =>
 											toggleMuteStatus(
 												comment.userProfile.userId,
-											)}
+											)
+										}
 										data-link-name="unmute-user"
 									>
 										Unmute?
@@ -654,7 +655,8 @@ export const Comment = ({
 														onClick={() =>
 															setCommentBeingRepliedTo(
 																comment,
-															)}
+															)
+														}
 														icon={<SvgIndent />}
 														iconSide="left"
 														data-link-name="reply to comment"
@@ -739,29 +741,30 @@ export const Comment = ({
 									{user &&
 									comment.userProfile.userId !==
 										user.userId ? (
-											<div
-												css={[
-													buttonLinkBaseStyles,
-													css`
-														button {
-															${textSans.xxsmall()}
-														}
-													`,
-												]}
+										<div
+											css={[
+												buttonLinkBaseStyles,
+												css`
+													button {
+														${textSans.xxsmall()}
+													}
+												`,
+											]}
+										>
+											<Button
+												priority="subdued"
+												size="small"
+												onClick={() =>
+													toggleMuteStatus(
+														comment.userProfile
+															.userId,
+													)
+												}
+												data-link-name="mute-user"
 											>
-												<Button
-													priority="subdued"
-													size="small"
-													onClick={() =>
-														toggleMuteStatus(
-															comment.userProfile
-																.userId,
-														)}
-													data-link-name="mute-user"
-												>
-													Mute
-												</Button>
-											</div>
+												Mute
+											</Button>
+										</div>
 									) : (
 										<></>
 									)}
