@@ -85,7 +85,6 @@ const buttonStyle = css`
 	}
 `;
 
-
 const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
@@ -98,7 +97,7 @@ export const NewsletterCard = ({
 	cardPosition,
 	carouselPosition,
 }: Props) => {
-	const [hasBeenSeen, setIsInViewRef] = useIsInView({threshold:.9});
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
 
 	const reportSeen = useCallback(() => {
@@ -138,7 +137,8 @@ export const NewsletterCard = ({
 	]);
 
 	return (
-		<article ref={setIsInViewRef}
+		<article
+			ref={setIsInViewRef}
 			key={newsletter.name}
 			css={groupItemStyle}
 			aria-label={newsletter.name}
