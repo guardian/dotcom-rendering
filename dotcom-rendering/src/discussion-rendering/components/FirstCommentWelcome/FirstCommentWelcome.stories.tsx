@@ -8,7 +8,7 @@ export const defaultStory = () => (
 		body="My first message ever!!"
 		pillar={ArticlePillar.Lifestyle}
 		submitForm={() => Promise.resolve()}
-		cancelSubmit={() => {}}
+		cancelSubmit={() => undefined}
 	/>
 );
 defaultStory.storyName = 'Welcome message';
@@ -19,7 +19,7 @@ export const CommentWithError = () => (
 		pillar={ArticlePillar.News}
 		error="This is a custom user name error message"
 		submitForm={() => Promise.resolve()}
-		cancelSubmit={() => {}}
+		cancelSubmit={() => undefined}
 	/>
 );
 CommentWithError.storyName = 'Welcome message with error';
