@@ -388,6 +388,12 @@ export const LabsSection = ({
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
 			hasPageSkin={hasPageSkin}
+			/**
+			 * dumathoin?
+			 * https://github.com/guardian/frontend/pull/17625
+			 * https://forgottenrealms.fandom.com/wiki/Dumathoin
+			 */
+			className={'dumathoin'}
 		>
 			<Container hasPageSkin={hasPageSkin}>
 				<LeftColumn

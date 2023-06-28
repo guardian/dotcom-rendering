@@ -32,6 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -226,7 +227,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<>
 							<Section
 								fullWidth={true}
-								showTopBorder={false}
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
@@ -448,7 +448,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.collectionType === 'fixed/video') {
+					if (
+						collection.collectionType === 'fixed/video' ||
+						collection.containerPalette === 'PodcastPalette'
+					) {
+						const containerPalette =
+							collection.containerPalette ?? 'MediaPalette';
+						const containerOverrides =
+							decideContainerOverrides(containerPalette);
 						return (
 							<Section
 								key={ophanName}
@@ -463,11 +470,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
-								containerPalette={collection.containerPalette}
+								containerPalette={containerPalette}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
+								backgroundColour={
+									containerOverrides.background.container
+								}
 								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
@@ -475,9 +485,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										titleHighlightColour={neutral[7]}
-										activeDotColour={neutral[7]}
+										palette={containerPalette}
 										leftColSize={'compact'}
+										collectionType={
+											collection.collectionType
+										}
 									/>
 								</Island>
 							</Section>

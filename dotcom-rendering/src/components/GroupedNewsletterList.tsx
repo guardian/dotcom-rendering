@@ -11,7 +11,7 @@ interface Props {
 export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 	return (
 		<>
-			{groupedNewsletters.groups.map((group) => (
+			{groupedNewsletters.groups.map((group, index) => (
 				<Section fullWidth={true} key={group.title}>
 					<Island deferUntil="idle">
 						<CarouselForNewsletters
@@ -21,6 +21,7 @@ export const GroupedNewslettersList = ({ groupedNewsletters }: Props) => {
 							leftColSize="wide"
 							activeDotColour={palette.brand[400]}
 							titleHighlightColour={palette.neutral[7]}
+							carouselPosition={index}
 						/>
 					</Island>
 				</Section>

@@ -9,8 +9,21 @@ import {
 	SvgCheckmark,
 	SvgPlus,
 } from '@guardian/source-react-components';
+import { useCallback, useEffect, useState } from 'react';
+import {
+	getOphanRecordFunction,
+	submitComponentEvent,
+} from '../client/ophan/ophan';
+import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { NewsletterDetail } from './NewsletterDetail';
+
+interface Props {
+	newsletter: Newsletter;
+	cardPosition: number;
+	carouselPosition?: number;
+	groupTitle: string;
+}
 
 export const BUTTON_ROLE = 'GroupedNewslettersList-sign-up-button';
 export const BUTTON_SELECTED_CLASS =
@@ -20,7 +33,8 @@ export const ICON_PLUS_CLASS =
 export const ICON_TICK_CLASS =
 	'js-GroupedNewslettersList-sign-up-button__tick-icon';
 
-export const groupItemStyle = css`
+const groupItemStyle = css`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex-basis: 200px;
@@ -37,11 +51,11 @@ export const groupItemStyle = css`
 	}
 `;
 
-export const buttonHolderStyle = css`
+const buttonHolderStyle = css`
 	margin-top: auto;
 `;
 
-export const buttonStyle = css`
+const buttonStyle = css`
 	background-color: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
 	border-color: ${palette.neutral[7]};
@@ -71,15 +85,60 @@ export const buttonStyle = css`
 	}
 `;
 
-export const getButtonInitialAriaAttribute = (newsletterName: string) => ({
+const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
 });
 
-export const NewsletterCard = ({ newsletter }: { newsletter: Newsletter }) => {
+export const NewsletterCard = ({
+	newsletter,
+	groupTitle,
+	cardPosition,
+	carouselPosition,
+}: Props) => {
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
+	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
+
+	const reportSeen = useCallback(() => {
+		const record = getOphanRecordFunction();
+		const valueData = {
+			eventDescription: 'card-viewed',
+			newsletterId: newsletter.identityName,
+			carousel: groupTitle,
+			cardPosition,
+			carouselPosition,
+			timestamp: Date.now(),
+		};
+
+		submitComponentEvent(
+			{
+				component: {
+					componentType: 'NEWSLETTER_SUBSCRIPTION',
+					id: `DCR NewsletterCard ${newsletter.identityName}`,
+				},
+				action: 'VIEW',
+				value: JSON.stringify(valueData),
+			},
+			record,
+		);
+	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
+
+	useEffect(() => {
+		if (hasBeenSeen && !haveReportedBeingSeen) {
+			reportSeen();
+			setHaveReportedBeingSeen(true);
+		}
+	}, [
+		hasBeenSeen,
+		haveReportedBeingSeen,
+		setHaveReportedBeingSeen,
+		reportSeen,
+	]);
+
 	return (
 		<article
+			ref={setIsInViewRef}
 			key={newsletter.name}
 			css={groupItemStyle}
 			aria-label={newsletter.name}
@@ -87,7 +146,6 @@ export const NewsletterCard = ({ newsletter }: { newsletter: Newsletter }) => {
 			<NewsletterDetail text={newsletter.frequency} />
 			<h3>{newsletter.name}</h3>
 			<p>{newsletter.description}</p>
-
 			<div css={buttonHolderStyle}>
 				<Button
 					{...getButtonInitialAriaAttribute(newsletter.name)}
