@@ -34,7 +34,7 @@ export const initialiseApi = ({
 	idApiUrl: string;
 }) => {
 	options.baseUrl = baseUrl || options.baseUrl;
-	options.headers = additionalHeaders || options.headers;
+	options.headers = additionalHeaders;
 	options.apiKey = apiKey || options.apiKey;
 	options.idApiUrl = idApiUrl || options.idApiUrl;
 
@@ -94,6 +94,7 @@ export const getDiscussion = (
 		.then((resp) => resp.json())
 		.then((json) => {
 			if (
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 				json.errorCode === 'DISCUSSION_ONLY_AVAILABLE_IN_LINEAR_FORMAT'
 			) {
 				// We need force a refetch with unthreaded set, as we don't know
@@ -117,17 +118,20 @@ export const preview = (body: string): Promise<string> => {
 	const data = new URLSearchParams();
 	data.append('body', body);
 
-	return fetch(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-		},
-	})
-		.then((resp) => resp.json())
-		.then((json) => json.commentBody)
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	return (
+		fetch(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+			},
+		})
+			.then((resp) => resp.json())
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			.then((json) => json.commentBody)
+			.catch((error) => console.error(`Error fetching ${url}`, error))
+	);
 };
 
 export const getProfile = (): Promise<UserProfile> => {
@@ -205,14 +209,17 @@ export const getPicks = (
 		'?' +
 		makeParams().toString();
 
-	return fetch(url, {
-		headers: {
-			...options.headers,
-		},
-	})
-		.then((resp) => resp.json())
-		.then((json) => json.discussion.comments)
-		.catch((error) => console.error(`Error fetching ${url}`, error));
+	return (
+		fetch(url, {
+			headers: {
+				...options.headers,
+			},
+		})
+			.then((resp) => resp.json())
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			.then((json) => json.discussion.comments)
+			.catch((error) => console.error(`Error fetching ${url}`, error))
+	);
 };
 
 export const reportAbuse = ({
