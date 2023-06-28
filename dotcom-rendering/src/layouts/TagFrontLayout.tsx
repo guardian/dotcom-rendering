@@ -126,7 +126,9 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={format}
+							isImmersive={false}
+							displayRoundel={false}
+							selectedPillar={NAV.selectedPillar}
 							subscribeUrl={
 								tagFront.nav.readerRevenueLinks.header.subscribe
 							}
@@ -292,7 +294,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={tagFront.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={tagFront.nav.readerRevenueLinks.header}
 					editionId={tagFront.editionId}
