@@ -52,13 +52,6 @@ const columnStyle = css`
 			width: 123px;
 		}
 	}
-	${from.leftCol} {
-		width: 160px;
-
-		:first-of-type {
-			width: 150px;
-		}
-	}
 `;
 
 const pillarDivider = css`
@@ -82,20 +75,6 @@ const pillarDividerExtended = css`
 	${from.desktop} {
 		:before {
 			top: -${pillarHeight}px;
-		}
-
-		:after {
-			content: '';
-			display: block;
-			position: absolute;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			width: 1px;
-			height: auto;
-			background-color: ${brand[600]};
-			z-index: 1;
 		}
 	}
 `;
