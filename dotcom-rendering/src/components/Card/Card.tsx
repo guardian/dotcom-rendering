@@ -418,6 +418,7 @@ export const Card = ({
 						{mediaDuration !== undefined && mediaDuration > 0 && (
 							<MediaDuration
 								mediaDuration={mediaDuration}
+								imagePosition={imagePosition}
 								imagePositionOnMobile={imagePositionOnMobile}
 							/>
 						)}

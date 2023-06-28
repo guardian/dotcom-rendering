@@ -38,11 +38,16 @@ export function secondsToDuration(secs?: number): string {
 
 export const MediaDuration = ({
 	mediaDuration,
+	imagePosition,
 	imagePositionOnMobile,
 }: {
 	mediaDuration: number;
+	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 }) => {
+	if (imagePosition === 'left') {
+		return null;
+	}
 	if (imagePositionOnMobile === 'left')
 		return (
 			<Hide until="tablet">
