@@ -214,7 +214,7 @@ export const Dropdown = ({ id, label, options, pillar, onSelect }: Props) => {
 								option.isActive && activeStyles(pillar),
 								index === 0 && firstStyles,
 							]}
-							disabled={option.isActive ?? option.disabled}
+							disabled={!!option.isActive || !!option.disabled}
 							type="button"
 						>
 							{option.title}
