@@ -39,6 +39,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 		trendingTopics: extractTrendingTopicsFomFront(
 			data.pressedPage.collections,
+			data.pageId,
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 	};
@@ -68,7 +69,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 						pageId: data.pageId,
 				  }
 				: undefined,
-		trendingTopics: extractTrendingTopics(data.contents),
+		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {
 			title: data.webTitle,
 			description: data.tags.tags[0]?.properties.bio,

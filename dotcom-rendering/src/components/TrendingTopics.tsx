@@ -44,7 +44,15 @@ export const TrendingTopics = ({ trendingTopics }: Props) => {
 			/>
 			<div css={topicLabel}>Topics</div>
 			{/* TODO: Add allpath link */}
-			{trendingTopics?.map((tag) => {
+			{trendingTopics?.slice(0, 5).map((tag) => {
+				const section = trendingTopics
+					.filter((existingTag) => existingTag !== tag)
+					.find(
+						(existingTag) =>
+							existingTag.properties.webTitle ===
+							tag.properties.webTitle,
+					)?.properties.sectionName;
+
 				return (
 					<a
 						key={tag.properties.webTitle}
@@ -53,6 +61,7 @@ export const TrendingTopics = ({ trendingTopics }: Props) => {
 						data-link-name={`keyword: ${tag.properties.id}`}
 					>
 						{tag.properties.webTitle}
+						{!!section && ` (${section})`}
 					</a>
 				);
 			})}
