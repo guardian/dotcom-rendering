@@ -597,8 +597,7 @@ export const Comment = ({
 										onClick={() =>
 											toggleMuteStatus(
 												comment.userProfile.userId,
-											)
-										}
+											)}
 										data-link-name="unmute-user"
 									>
 										Unmute?
@@ -655,8 +654,7 @@ export const Comment = ({
 														onClick={() =>
 															setCommentBeingRepliedTo(
 																comment,
-															)
-														}
+															)}
 														icon={<SvgIndent />}
 														iconSide="left"
 														data-link-name="reply to comment"
@@ -741,30 +739,29 @@ export const Comment = ({
 									{user &&
 									comment.userProfile.userId !==
 										user.userId ? (
-										<div
-											css={[
-												buttonLinkBaseStyles,
-												css`
-													button {
-														${textSans.xxsmall()}
-													}
-												`,
-											]}
-										>
-											<Button
-												priority="subdued"
-												size="small"
-												onClick={() =>
-													toggleMuteStatus(
-														comment.userProfile
-															.userId,
-													)
-												}
-												data-link-name="mute-user"
+											<div
+												css={[
+													buttonLinkBaseStyles,
+													css`
+														button {
+															${textSans.xxsmall()}
+														}
+													`,
+												]}
 											>
-												Mute
-											</Button>
-										</div>
+												<Button
+													priority="subdued"
+													size="small"
+													onClick={() =>
+														toggleMuteStatus(
+															comment.userProfile
+																.userId,
+														)}
+													data-link-name="mute-user"
+												>
+													Mute
+												</Button>
+											</div>
 									) : (
 										<></>
 									)}
