@@ -11,7 +11,7 @@ describe('Dropdown', () => {
 	it('Should show the expected label names', () => {
 		const { getByText } = render(
 			<AbuseReportForm
-				toggleSetShowForm={() => {}}
+				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
 			/>,
@@ -25,7 +25,7 @@ describe('Dropdown', () => {
 	it('Should show the category error message if not chosen on submit', () => {
 		const { getByText } = render(
 			<AbuseReportForm
-				toggleSetShowForm={() => {}}
+				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
 			/>,
@@ -41,7 +41,7 @@ describe('Dropdown', () => {
 		const user = userEvent.setup();
 		const { getByText, getByLabelText, getByRole } = render(
 			<AbuseReportForm
-				toggleSetShowForm={() => {}}
+				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
 			/>,
