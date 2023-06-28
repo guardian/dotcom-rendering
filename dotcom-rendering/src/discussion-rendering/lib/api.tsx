@@ -79,7 +79,7 @@ export const getDiscussion = (
 	};
 	const params = objAsParams(apiOpts);
 
-	const url = joinUrl([options.baseUrl, 'discussion', shortUrl]) + params;
+	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
 	return fetch(url, {
 		headers: {
@@ -106,7 +106,7 @@ export const getDiscussion = (
 
 export const preview = (body: string): Promise<string> => {
 	const url =
-		joinUrl([options.baseUrl, 'comment/preview']) +
+		joinUrl(options.baseUrl, 'comment/preview') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
@@ -126,7 +126,7 @@ export const preview = (body: string): Promise<string> => {
 
 export const getProfile = (): Promise<UserProfile> => {
 	const url =
-		joinUrl([options.baseUrl, 'profile/me']) + objAsParams(defaultParams);
+		joinUrl(options.baseUrl, 'profile/me') + objAsParams(defaultParams);
 
 	return fetch(url, {
 		credentials: 'include',
@@ -143,7 +143,7 @@ export const comment = (
 	body: string,
 ): Promise<CommentResponse> => {
 	const url =
-		joinUrl([options.baseUrl, 'discussion', shortUrl, 'comment']) +
+		joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
 		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
@@ -165,14 +165,14 @@ export const reply = (
 	parentCommentId: number,
 ): Promise<CommentResponse> => {
 	const url =
-		joinUrl([
+		joinUrl(
 			options.baseUrl,
 			'discussion',
 			shortUrl,
 			'comment',
 			parentCommentId.toString(),
 			'reply',
-		]) + objAsParams(defaultParams);
+		) + objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
@@ -192,7 +192,7 @@ export const getPicks = (
 	shortUrl: string,
 ): Promise<CommentType[] | undefined> => {
 	const url =
-		joinUrl([options.baseUrl, 'discussion', shortUrl, 'topcomments']) +
+		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
 		objAsParams(defaultParams);
 
 	return fetch(url, {
@@ -217,12 +217,12 @@ export const reportAbuse = ({
 	email?: string;
 }): Promise<CommentResponse> => {
 	const url =
-		joinUrl([
+		joinUrl(
 			options.baseUrl,
 			'comment',
 			commentId.toString(),
 			'reportAbuse',
-		]) + objAsParams(defaultParams);
+		) + objAsParams(defaultParams);
 
 	const data = new URLSearchParams();
 	data.append('categoryId', categoryId.toString());
@@ -241,12 +241,8 @@ export const reportAbuse = ({
 
 export const recommend = (commentId: number): Promise<boolean> => {
 	const url =
-		joinUrl([
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'recommend',
-		]) + objAsParams(defaultParams);
+		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'recommend') +
+		objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -279,12 +275,8 @@ export const addUserName = (userName: string): Promise<UserNameResponse> => {
 
 export const pickComment = (commentId: number): Promise<CommentResponse> => {
 	const url =
-		joinUrl([
-			options.baseUrl,
-			'comment',
-			commentId.toString(),
-			'highlight',
-		]) + objAsParams(defaultParams);
+		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
+		objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -300,12 +292,12 @@ export const pickComment = (commentId: number): Promise<CommentResponse> => {
 
 export const unPickComment = (commentId: number): Promise<CommentResponse> => {
 	const url =
-		joinUrl([
+		joinUrl(
 			options.baseUrl,
 			'comment',
 			commentId.toString(),
 			'unhighlight',
-		]) + objAsParams(defaultParams);
+		) + objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -326,7 +318,7 @@ export const getMoreResponses = (
 	comment: CommentType;
 }> => {
 	const url =
-		joinUrl([options.baseUrl, 'comment', commentId.toString()]) +
+		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
 		objAsParams({
 			...defaultParams,
 			...{
