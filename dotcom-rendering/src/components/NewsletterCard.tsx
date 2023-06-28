@@ -85,11 +85,6 @@ const buttonStyle = css`
 	}
 `;
 
-const haveSeenMaker = css`
-	position: absolute;
-	bottom: 30;
-	right: 0;
-`;
 
 const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
@@ -103,7 +98,7 @@ export const NewsletterCard = ({
 	cardPosition,
 	carouselPosition,
 }: Props) => {
-	const [hasBeenSeen, setRefForHaveSeenMarker] = useIsInView({});
+	const [hasBeenSeen, setIsInViewRef] = useIsInView({threshold:.9});
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
 
 	const reportSeen = useCallback(() => {
@@ -143,7 +138,7 @@ export const NewsletterCard = ({
 	]);
 
 	return (
-		<article
+		<article ref={setIsInViewRef}
 			key={newsletter.name}
 			css={groupItemStyle}
 			aria-label={newsletter.name}
@@ -174,7 +169,6 @@ export const NewsletterCard = ({
 					Sign up
 				</Button>
 			</div>
-			<span ref={setRefForHaveSeenMarker} css={haveSeenMaker}></span>
 		</article>
 	);
 };
