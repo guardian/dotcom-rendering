@@ -41,7 +41,6 @@ const columnsStyle = (display: ArticleDisplay) => css`
 		border-right: ${display === ArticleDisplay.Immersive
 			? 'none'
 			: `1px solid ${brand[600]}`};
-		border-top: 1px solid ${brand[600]};
 	}
 	${from.leftCol} {
 		max-width: 1140px;

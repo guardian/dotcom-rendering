@@ -135,6 +135,7 @@ const pillarDivider = css`
 		bottom: 0;
 		width: 1px;
 		background-color: ${brand[600]};
+		transform: translateX(-1px);
 
 		${from.tablet} {
 			bottom: 17px;
