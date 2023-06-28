@@ -47,11 +47,13 @@ describe('Dropdown', () => {
 			/>,
 		);
 
-		await user.selectOptions(getByLabelText('Category'), 'Legal issue');
+		await user.selectOptions(getByLabelText('Category'), 'Trolling');
 		await user.click(getByRole('button', { name: 'Report' }));
 
 		await waitFor(() => {
-			expect(fetchMock.called(/reportAbuse/)).toBeTruthy();
+			expect(fetchMock.lastOptions(/reportAbuse/)?.body).toBe(
+				'categoryId=4',
+			);
 		});
 
 		await waitFor(() => {
