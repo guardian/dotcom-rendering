@@ -408,7 +408,7 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 		case 'Branded':
 			return neutral[46];
 		case 'MediaPalette':
-			return neutral[100];
+			return neutral[46];
 		case 'PodcastPalette':
 			return neutral[86];
 	}
