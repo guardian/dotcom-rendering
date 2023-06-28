@@ -78,14 +78,14 @@ export const FiveCard = ({
 }) => {
 	return (
 		<>
-			<UL direction="row">
+			<UL direction="row" padBottom={true}>
 				<LI percentage="33.333%" padSides={true}>
 					<Card33Media33 trail={trails[0]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[1]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[2]} showAge={true} />
 				</LI>
 			</UL>
@@ -115,22 +115,22 @@ export const SevenCards = ({
 }) => {
 	return (
 		<>
-			<UL direction="row">
+			<UL direction="row" padBottom={true}>
 				<LI percentage="50%" padSides={true}>
 					<Card50Media50 trail={trails[0]} showAge={true} />
 				</LI>
-				<LI percentage="50%" padSides={true}>
+				<LI percentage="50%" padSides={true} showDivider={true}>
 					<Card50Media50 trail={trails[1]} showAge={true} />
 				</LI>
 			</UL>
-			<UL direction="row">
+			<UL direction="row" padBottom={true}>
 				<LI percentage="33.333%" padSides={true}>
 					<Card33Media33 trail={trails[2]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[3]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[4]} showAge={true} />
 				</LI>
 			</UL>

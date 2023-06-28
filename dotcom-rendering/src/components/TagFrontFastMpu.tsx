@@ -79,7 +79,7 @@ export const SixCard = ({
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%">
-				<UL direction="column" showDivider={true}>
+				<UL direction="column">
 					<LI padSides={true}>
 						<CardDefault trail={trails[0]} showAge={true} />
 					</LI>
@@ -122,20 +122,20 @@ export const NineCard = ({
 }) => {
 	return (
 		<>
-			<UL direction="row">
+			<UL direction="row" padBottom={true}>
 				<LI percentage="33.333%" padSides={true}>
 					<Card33Media33 trail={trails[0]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[1]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<Card33Media33 trail={trails[2]} showAge={true} />
 				</LI>
 			</UL>
 			<UL direction="row">
 				<LI percentage="33.333%">
-					<UL direction="column" showDivider={true}>
+					<UL direction="column">
 						<LI padSides={true}>
 							<CardDefault trail={trails[3]} showAge={true} />
 						</LI>
