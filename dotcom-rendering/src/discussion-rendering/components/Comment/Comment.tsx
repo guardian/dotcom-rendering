@@ -737,9 +737,10 @@ export const Comment = ({
 										)}
 								</Row>
 								<Row>
-									{/* You can't mute unless logged in and you can't yourself */}
-									{comment.userProfile.userId !==
-									user?.userId ? (
+									{/* You can't mute unless logged in and you can't mute yourself */}
+									{user &&
+									comment.userProfile.userId !==
+										user.userId ? (
 										<div
 											css={[
 												buttonLinkBaseStyles,
