@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import {
 	brand,
 	from,
@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
 import { Avatar } from '../Avatar/Avatar';
@@ -98,11 +98,7 @@ const wrapStyles = css`
 	word-break: break-word;
 `;
 
-const PickBubble = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const PickBubble = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -138,15 +134,15 @@ const PickBubble = ({
 	</div>
 );
 
-const Top = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Top = ({ children }: { children: React.ReactNode }) => (
 	<div>{children}</div>
 );
 
-const Bottom = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Bottom = ({ children }: { children: React.ReactNode }) => (
 	<div>{children}</div>
 );
 
-const PickMeta = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const PickMeta = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
@@ -172,11 +168,11 @@ export const TopPick = ({
 	onPermalinkClick,
 	onRecommend,
 }: Props) => {
-	const showStaffBadge = comment.userProfile.badge.find(
+	const showStaffBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Staff',
 	);
 
-	const showContributorBadge = comment.userProfile.badge.find(
+	const showContributorBadge = comment.userProfile.badge.some(
 		(obj) => obj['name'] === 'Contributor',
 	);
 

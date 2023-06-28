@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-type Props = { children: JSX.Element | JSX.Element[] };
+type Props = { children: React.ReactNode };
 
 export const Column = ({ children }: Props) => (
 	<div

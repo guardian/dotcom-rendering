@@ -7,7 +7,7 @@ export const defaultStory = () => (
 	<FirstCommentWelcome
 		body="My first message ever!!"
 		pillar={ArticlePillar.Lifestyle}
-		submitForm={() => {}}
+		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => {}}
 	/>
 );
@@ -18,7 +18,7 @@ export const CommentWithError = () => (
 		body="My first message ever!!"
 		pillar={ArticlePillar.News}
 		error="This is a custom user name error message"
-		submitForm={() => {}}
+		submitForm={() => Promise.resolve()}
 		cancelSubmit={() => {}}
 	/>
 );

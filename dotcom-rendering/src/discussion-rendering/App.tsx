@@ -44,7 +44,7 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	onExpand?: () => void;
 	idApiUrl: string;
-	test: string;
+	test?: string;
 };
 
 const footerStyles = css`

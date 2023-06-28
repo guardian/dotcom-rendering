@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { App } from './App';
-import { UserProfile } from './discussionTypes';
+import type { UserProfile } from './discussionTypes';
 
 export default { component: App, title: 'App' };
 
