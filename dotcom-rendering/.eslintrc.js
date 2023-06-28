@@ -66,9 +66,10 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
-		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
+		// prettier needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
+		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
