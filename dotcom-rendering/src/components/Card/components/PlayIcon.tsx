@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { brandAlt, from } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
+import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type PlayButtonSize = keyof typeof sizes;
 
