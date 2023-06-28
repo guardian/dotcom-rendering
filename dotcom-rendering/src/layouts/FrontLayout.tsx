@@ -466,7 +466,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerName={collection.collectionType}
 								fullWidth={true}
 								padBottom={true}
-								showSideBorders={true}
+								showSideBorders={
+									collection.collectionType !== 'fixed/video'
+								}
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
@@ -476,7 +478,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								}
 								editionId={front.editionId}
 								backgroundColour={
+									containerOverrides.background.containerOuter
+								}
+								innerBackgroundColour={
 									containerOverrides.background.container
+								}
+								borderColour={
+									containerOverrides.border.container
 								}
 								hasPageSkin={hasPageSkin}
 							>
