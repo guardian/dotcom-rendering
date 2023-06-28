@@ -86,7 +86,9 @@ const Grey = ({
 	<div
 		css={css`
 			height: ${height}px;
-			width: ${width !== undefined ? `${width}px` : '100%'};
+			width: ${width !== undefined && !isNaN(width) && width !== 0
+				? `${width}px`
+				: '100%'};
 			margin-bottom: ${spaceBelow && space[spaceBelow]}px;
 			margin-left: ${spaceLeft && space[spaceLeft]}px;
 			background-color: ${BACKGROUND_COLOUR};
