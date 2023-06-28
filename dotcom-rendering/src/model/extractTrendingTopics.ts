@@ -108,7 +108,10 @@ export const extractTrendingTopicsFomFront = (
 	return extractTrendingTopics([...trails.values()], pageId);
 };
 
-export const extractTrendingTopics = (trails: NarrowedFEFrontCard[], pageId: string): FETagType[] => {
+export const extractTrendingTopics = (
+	trails: NarrowedFEFrontCard[],
+	pageId: string,
+): FETagType[] => {
 	const allTags = getTags(trails, pageId);
 	const tags = sortTags(allTags).slice(0, 20);
 
