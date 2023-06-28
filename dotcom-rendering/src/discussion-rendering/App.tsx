@@ -44,7 +44,6 @@ type Props = {
 	onPreview?: (body: string) => Promise<string>;
 	onExpand?: () => void;
 	idApiUrl: string;
-	test?: string;
 };
 
 const footerStyles = css`
@@ -234,7 +233,6 @@ export const App = ({
 	onPreview,
 	onExpand,
 	idApiUrl,
-	test,
 }: Props) => {
 	const [filters, setFilters] = useState<FilterOptions>(
 		initialiseFilters({
@@ -497,7 +495,6 @@ export const App = ({
 
 	return (
 		<>
-			<div>{test}</div>
 			<div data-component="discussion" css={commentColumnWrapperStyles}>
 				{user && !isClosedForComments && (
 					<CommentForm

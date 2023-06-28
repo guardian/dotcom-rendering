@@ -145,7 +145,6 @@ export const Discussion = ({
 		}
 	}, [commentCount]);
 
-	const test = 'foo';
 	return (
 		<>
 			<div
@@ -192,7 +191,6 @@ export const Discussion = ({
 							setIsExpanded(true);
 						}}
 						idApiUrl={idApiUrl}
-						test={test}
 					/>
 					{!isExpanded && (
 						<div id="discussion-overlay" css={overlayStyles} />

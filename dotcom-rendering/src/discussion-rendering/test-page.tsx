@@ -113,7 +113,6 @@ const IndexPageWrapper = () => {
 					apiKey="discussion-rendering"
 					initialPage={1}
 					idApiUrl="https://idapi.theguardian.com"
-					test=""
 					// page={page}
 					// onPageChange={setPage}
 				/>
