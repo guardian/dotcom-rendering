@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
 import { Row } from '../Row/Row';
@@ -24,6 +24,7 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 const indentStyles = css`
 	width: 18px;
 	svg {
+		/* stylelint-disable-next-line declaration-no-important */
 		fill: ${neutral[46]} !important;
 	}
 `;

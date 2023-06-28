@@ -102,6 +102,7 @@ const commentCss = css`
 	}
 
 	code {
+		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: monospace;
 		font-size: 1em;
 	}
@@ -168,8 +169,10 @@ const regularFont = css`
 	}
 `;
 
+// TODO: fix using !important
 const svgReplyArrow = css`
 	svg {
+		/* stylelint-disable-next-line declaration-no-important */
 		fill: ${neutral[46]} !important;
 	}
 `;

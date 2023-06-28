@@ -32,6 +32,7 @@ const previewStyle = css`
 	}
 
 	code {
+		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: monospace;
 		font-size: 1em;
 	}

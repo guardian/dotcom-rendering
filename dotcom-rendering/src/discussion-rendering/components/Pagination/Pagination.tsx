@@ -75,6 +75,7 @@ const chevronButtonStyles = ({ isSelected }: { isSelected: boolean }) => css`
 
 	& svg {
 		/* Make the chevrons grey */
+		/* stylelint-disable-next-line declaration-no-important */
 		fill: ${neutral[46]} !important;
 		/* Set the dimensions */
 		width: 22px;

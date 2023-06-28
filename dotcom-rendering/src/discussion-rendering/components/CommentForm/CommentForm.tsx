@@ -129,7 +129,6 @@ const commentAddOns = css`
 	margin-left: 4px;
 	padding: 2px 5px 0px 5px;
 	min-width: 11px;
-	line-height: 17px;
 	list-style-type: none;
 `;
 
