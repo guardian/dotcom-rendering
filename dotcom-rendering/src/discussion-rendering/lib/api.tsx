@@ -3,6 +3,7 @@ import type {
 	AdditionalHeadersType,
 	CommentResponse,
 	CommentType,
+	DiscussionOptions,
 	DiscussionResponse,
 	OrderByType,
 	ThreadsType,
@@ -41,18 +42,14 @@ export const initialiseApi = ({
 	defaultParams['api-key'] = options.apiKey;
 };
 
-const makeParams = (params?: {
-	[key: string]: string | boolean | number;
-}): URLSearchParams => {
-	const paramsWithDefault = Object.assign({ ...defaultParams }, params);
-	const thing: Record<string, string> = Object.fromEntries(
-		Object.entries(paramsWithDefault).map(
-			([k, v]: [string, string | boolean | number]) => {
-				return [k, v.toString()];
-			},
-		),
-	);
-	return new URLSearchParams(thing);
+const objAsParams = (obj: any): string => {
+	const params = Object.keys(obj)
+		.map((key) => {
+			return `${key}=${obj[key]}`; // type issues here cannot be avoided
+		})
+		.join('&');
+
+	return '?' + params;
 };
 
 //todo: figure out the different return types and consider error handling
@@ -65,10 +62,10 @@ export const getDiscussion = (
 		page: number;
 	},
 ): Promise<DiscussionResponse | undefined> => {
-	const apiOpts = {
+	const apiOpts: DiscussionOptions = {
 		...defaultParams,
 		...{
-			// Frontend uses the 'recommendations' key to store these options but the api expects
+			// Frontend uses the 'recommendations' key to store this options but the api expects
 			// 'mostRecommended' so we have to map here to support both
 			orderBy:
 				opts.orderBy === 'recommendations'
@@ -80,11 +77,9 @@ export const getDiscussion = (
 			page: opts.page,
 		},
 	};
-	const params = makeParams(apiOpts);
-	const url =
-		joinUrl(options.baseUrl, 'discussion', shortUrl) +
-		'?' +
-		params.toString();
+	const params = objAsParams(apiOpts);
+
+	const url = joinUrl(options.baseUrl, 'discussion', shortUrl) + params;
 
 	return fetch(url, {
 		headers: {
@@ -113,8 +108,7 @@ export const getDiscussion = (
 export const preview = (body: string): Promise<string> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment/preview') +
-		'?' +
-		makeParams().toString();
+		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
@@ -136,7 +130,7 @@ export const preview = (body: string): Promise<string> => {
 
 export const getProfile = (): Promise<UserProfile> => {
 	const url =
-		joinUrl(options.baseUrl, 'profile/me') + '?' + makeParams().toString();
+		joinUrl(options.baseUrl, 'profile/me') + objAsParams(defaultParams);
 
 	return fetch(url, {
 		credentials: 'include',
@@ -154,8 +148,7 @@ export const comment = (
 ): Promise<CommentResponse> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
-		'?' +
-		makeParams().toString();
+		objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
@@ -183,9 +176,7 @@ export const reply = (
 			'comment',
 			parentCommentId.toString(),
 			'reply',
-		) +
-		'?' +
-		makeParams().toString();
+		) + objAsParams(defaultParams);
 	const data = new URLSearchParams();
 	data.append('body', body);
 
@@ -206,8 +197,7 @@ export const getPicks = (
 ): Promise<CommentType[] | undefined> => {
 	const url =
 		joinUrl(options.baseUrl, 'discussion', shortUrl, 'topcomments') +
-		'?' +
-		makeParams().toString();
+		objAsParams(defaultParams);
 
 	return (
 		fetch(url, {
@@ -239,9 +229,7 @@ export const reportAbuse = ({
 			'comment',
 			commentId.toString(),
 			'reportAbuse',
-		) +
-		'?' +
-		makeParams().toString();
+		) + objAsParams(defaultParams);
 
 	const data = new URLSearchParams();
 	data.append('categoryId', categoryId.toString());
@@ -261,8 +249,7 @@ export const reportAbuse = ({
 export const recommend = (commentId: number): Promise<boolean> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'recommend') +
-		'?' +
-		makeParams().toString();
+		objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -274,7 +261,7 @@ export const recommend = (commentId: number): Promise<boolean> => {
 };
 
 export const addUserName = (userName: string): Promise<UserNameResponse> => {
-	const url = options.idApiUrl + `/user/me` + '?' + makeParams().toString();
+	const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -296,8 +283,7 @@ export const addUserName = (userName: string): Promise<UserNameResponse> => {
 export const pickComment = (commentId: number): Promise<CommentResponse> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
-		'?' +
-		makeParams().toString();
+		objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -318,9 +304,7 @@ export const unPickComment = (commentId: number): Promise<CommentResponse> => {
 			'comment',
 			commentId.toString(),
 			'unhighlight',
-		) +
-		'?' +
-		makeParams().toString();
+		) + objAsParams(defaultParams);
 
 	return fetch(url, {
 		method: 'POST',
@@ -342,11 +326,13 @@ export const getMoreResponses = (
 }> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString()) +
-		'?' +
-		makeParams({
-			displayThreaded: true,
-			displayResponses: true,
-		}).toString();
+		objAsParams({
+			...defaultParams,
+			...{
+				displayThreaded: true,
+				displayResponses: true,
+			},
+		});
 
 	return fetch(url, {
 		headers: {
