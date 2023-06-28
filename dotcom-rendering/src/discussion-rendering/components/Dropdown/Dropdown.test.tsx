@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
-
 import { ArticlePillar } from '@guardian/libs';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
-import { DropdownOptionType } from '../../discussionTypes';
+import type { DropdownOptionType } from '../../discussionTypes';
 import { Dropdown } from './Dropdown';
 
 const threadOptions: [
@@ -133,7 +131,7 @@ describe('Dropdown', () => {
 });
 
 it('should trigger the correct onSelect callbacks when an option is clicked', () => {
-	const mockCallback = vi.fn();
+	const mockCallback = jest.fn();
 	render(
 		<Dropdown
 			id="abc"
@@ -147,9 +145,11 @@ it('should trigger the correct onSelect callbacks when an option is clicked', (
 	fireEvent.click(screen.getByRole('button'));
 	fireEvent.click(screen.getByText(threadOptions[2].title));
 	expect(mockCallback).toHaveBeenCalled();
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- the element exists
 	expect(mockCallback.mock.calls[0][0]).toBe('unthreaded');
 	fireEvent.click(screen.getByRole('button'));
 	fireEvent.click(screen.getByText(threadOptions[1].title));
 	expect(mockCallback).toHaveBeenCalled();
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- the element exists
 	expect(mockCallback.mock.calls[1][0]).toBe('expanded');
 });
