@@ -483,9 +483,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								innerBackgroundColour={
 									containerOverrides.background.container
 								}
-								borderColour={
-									containerOverrides.border.container
-								}
 								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
