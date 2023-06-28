@@ -136,15 +136,22 @@ const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
 	}
 };
 
-const decideKicker = (trail: FEFrontCard) => {
+const decideKicker = (
+	trail: FEFrontCard,
+	cardInTagFront: boolean,
+	pageId?: string,
+) => {
 	if (trail.properties.isBreaking) {
 		return 'Breaking news';
 	}
 
-	return (
-		trail.header.kicker?.item?.properties.kickerText ??
-		trail.header.seriesOrBlogKicker?.name
-	);
+	if (cardInTagFront) {
+		return pageId && !pageId.includes('/series')
+			? trail.header.seriesOrBlogKicker?.name
+			: undefined;
+	}
+
+	return trail.header.kicker?.item?.properties.kickerText;
 };
 
 const decideSlideshowImages = (
@@ -193,6 +200,8 @@ export const enhanceCards = (
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
 	},
+	cardInTagFront: boolean,
+	pageId?: string,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
@@ -247,7 +256,7 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			image: decideImage(faciaCard),
-			kickerText: decideKicker(faciaCard),
+			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,

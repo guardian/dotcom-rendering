@@ -113,7 +113,7 @@ export const ShowMore = ({
 
 	const cards =
 		data &&
-		enhanceCards(data, { editionId }).filter(
+		enhanceCards(data, { editionId }, false).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
 

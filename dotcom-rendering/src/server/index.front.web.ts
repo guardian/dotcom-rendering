@@ -47,7 +47,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const data: FETagFrontType = validateAsTagFrontType(body);
 
-	const enhancedCards = enhanceCards(data.contents, {});
+	const enhancedCards = enhanceCards(data.contents, {}, true, data.pageId);
 	const speed = getSpeedFromTrails(data.contents);
 
 	return {
