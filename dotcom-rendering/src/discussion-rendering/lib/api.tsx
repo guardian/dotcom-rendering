@@ -45,7 +45,9 @@ export const initialiseApi = ({
 const objAsParams = (obj: any): string => {
 	const params = Object.keys(obj)
 		.map((key) => {
-			return `${key}=${obj[key]}`; // type issues here cannot be avoided
+			// TODO: Refactor this for better typesafety. See https://github.com/guardian/dotcom-rendering/pull/8057/commits/da4667399d4a7726589f1944ac60380f1f3f36e1
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/restrict-template-expressions -- type issues here cannot be avoided with this implementation
+			return `${key}=${obj[key]}`;
 		})
 		.join('&');
 
