@@ -73,11 +73,11 @@ export const AbuseReportForm = ({
 	let lastElement: HTMLButtonElement | null = null;
 	useEffect(() => {
 		if (!modalRef.current) return;
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- https://github.com/guardian/discussion-rendering/pull/56 for where this was first introduced
 		firstElement = modalRef.current.querySelector(
 			'select[name="category"]',
 		);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- https://github.com/guardian/discussion-rendering/pull/56 for where this was first introduced
 		lastElement = modalRef.current.querySelector(
 			'button[custom-guardian="close-modal"]',
 		);
@@ -192,10 +192,11 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								categoryId: Number(e.target.value),
-							})}
+							})
+						}
 						value={formVariables.categoryId}
-					// TODO: use ref once forwardRef is implemented @guardian/src-button
-					// ref={firstElement}
+						// TODO: use ref once forwardRef is implemented @guardian/src-button
+						// ref={firstElement}
 					>
 						<option value="0">Please select</option>
 						<option value="1">Personal abuse</option>
@@ -228,7 +229,8 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								reason: e.target.value,
-							})}
+							})
+						}
 						value={formVariables.reason}
 					></textarea>
 					{!!errors.reason && (
@@ -248,7 +250,8 @@ export const AbuseReportForm = ({
 							setFormVariables({
 								...formVariables,
 								email: e.target.value,
-							})}
+							})
+						}
 						value={formVariables.email}
 					></input>
 					{!!errors.email && (

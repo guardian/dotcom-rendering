@@ -191,9 +191,9 @@ export const CommentContainer = ({
 										{loading
 											? 'loading...'
 											: decideShowMoreText(
-												comment.metaData
-													.responseCount,
-											)}
+													comment.metaData
+														.responseCount,
+											  )}
 									</PillarButton>
 								</div>
 							)}
@@ -218,7 +218,8 @@ export const CommentContainer = ({
 								shortUrl={shortUrl}
 								pillar={pillar}
 								onAddComment={(response) =>
-									setResponses([...responses, response])}
+									setResponses([...responses, response])
+								}
 								user={user}
 								setCommentBeingRepliedTo={
 									setCommentBeingRepliedTo
