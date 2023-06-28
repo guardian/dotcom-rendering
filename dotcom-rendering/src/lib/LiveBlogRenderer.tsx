@@ -68,30 +68,36 @@ export const LiveBlogRenderer = ({
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
 
+	const lastBlockIsPinnedPost = pinnedPost?.id === blocks[0]?.id;
+
 	return (
 		<>
-			{pinnedPost && onFirstPage && !filtered && (
-				<>
-					<Island clientOnly={true} deferUntil="idle">
-						<EnhancePinnedPost />
-					</Island>
-					<PinnedPost pinnedPost={pinnedPost} format={format}>
-						<LiveBlock
-							format={format}
-							block={pinnedPost}
-							pageId={pageId}
-							webTitle={webTitle}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={true}
-						/>
-					</PinnedPost>
-				</>
-			)}
+			{pinnedPost &&
+				onFirstPage &&
+				!lastBlockIsPinnedPost &&
+				!filtered && (
+					<>
+						<Island clientOnly={true} deferUntil="idle">
+							<EnhancePinnedPost />
+						</Island>
+						<PinnedPost pinnedPost={pinnedPost} format={format}>
+							<LiveBlock
+								format={format}
+								block={pinnedPost}
+								pageId={pageId}
+								webTitle={webTitle}
+								adTargeting={adTargeting}
+								host={host}
+								ajaxUrl={ajaxUrl}
+								isLiveUpdate={isLiveUpdate}
+								switches={switches}
+								isAdFreeUser={isAdFreeUser}
+								isSensitive={isSensitive}
+								isPinnedPost={true}
+							/>
+						</PinnedPost>
+					</>
+				)}
 			{keyEvents !== undefined && keyEvents.length > 0 ? (
 				<Hide from="desktop">
 					<Island deferUntil="visible">
