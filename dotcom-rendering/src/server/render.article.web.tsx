@@ -26,6 +26,7 @@ import type { FEArticleType } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 
 interface Props {
 	article: FEArticleType;
@@ -42,7 +43,11 @@ const decideTitle = (article: FEArticleType): string => {
 };
 
 export const renderHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
+	const NAV = {
+		...extractNAV(article.nav),
+		selectedPillar: getCurrentPillar(article),
+	};
+
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 

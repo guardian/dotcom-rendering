@@ -46,7 +46,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -229,8 +228,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
-	const selectedPillar = getCurrentPillar(article);
-
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -290,7 +287,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={selectedPillar}
+						selectedPillar={NAV.selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -572,7 +569,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={selectedPillar}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

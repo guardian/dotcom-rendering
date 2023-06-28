@@ -50,7 +50,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
@@ -340,8 +339,6 @@ export const ImmersiveLayout = ({
 
 	const renderAds = canRenderAds(article);
 
-	const selectedPillar = getCurrentPillar(article);
-
 	return (
 		<>
 			<div
@@ -366,7 +363,7 @@ export const ImmersiveLayout = ({
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={selectedPillar}
+						selectedPillar={NAV.selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.contribute
@@ -906,7 +903,7 @@ export const ImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={selectedPillar}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

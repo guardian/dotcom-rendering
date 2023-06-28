@@ -59,7 +59,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -306,8 +305,6 @@ export const LiveLayout = ({
 
 	const renderAds = canRenderAds(article);
 
-	const selectedPillar = getCurrentPillar(article);
-
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -363,7 +360,7 @@ export const LiveLayout = ({
 					>
 						<Nav
 							nav={NAV}
-							selectedPillar={selectedPillar}
+							selectedPillar={NAV.selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -1321,7 +1318,7 @@ export const LiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={selectedPillar}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

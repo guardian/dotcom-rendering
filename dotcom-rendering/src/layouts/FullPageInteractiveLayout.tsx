@@ -29,7 +29,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
@@ -144,8 +143,6 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 	 */
 	const renderAds = canRenderAds(article);
 
-	const selectedPillar = getCurrentPillar(article);
-
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
@@ -173,7 +170,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
-						selectedPillar={selectedPillar}
+						selectedPillar={NAV.selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
@@ -261,7 +258,7 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 						format.display === ArticleDisplay.Immersive ||
 						format.theme === ArticleSpecial.Labs
 					}
-					selectedPillar={selectedPillar}
+					selectedPillar={NAV.selectedPillar}
 					nav={NAV}
 					subscribeUrl={
 						article.nav.readerRevenueLinks.header.subscribe
@@ -386,7 +383,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					selectedPillar={getCurrentPillar(article)}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

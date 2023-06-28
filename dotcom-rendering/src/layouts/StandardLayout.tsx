@@ -53,7 +53,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
@@ -349,8 +348,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isWeb = renderingTarget === 'Web';
 	const renderAds = isWeb && canRenderAds(article);
 
-	const selectedPillar = getCurrentPillar(article);
-
 	return (
 		<>
 			{renderingTarget === 'Web' && (
@@ -418,7 +415,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								format.display === ArticleDisplay.Immersive ||
 								format.theme === ArticleSpecial.Labs
 							}
-							selectedPillar={selectedPillar}
+							selectedPillar={props.NAV.selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -955,7 +952,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Footer
 							pageFooter={article.pageFooter}
-							selectedPillar={selectedPillar}
+							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}
