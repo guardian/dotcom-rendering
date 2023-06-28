@@ -60,11 +60,7 @@ const pickBoxStyles = css`
 	${shimmerStyles}
 `;
 
-const FullWidthColumn = ({
-	children,
-}: {
-	children: JSX.Element | JSX.Element[];
-}) => (
+const FullWidthColumn = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;

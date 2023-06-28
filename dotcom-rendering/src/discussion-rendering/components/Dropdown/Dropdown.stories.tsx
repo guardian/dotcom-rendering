@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { useState } from 'react';
-import { DropdownOptionType } from '../../discussionTypes';
+import type { DropdownOptionType } from '../../discussionTypes';
 import { Dropdown } from './Dropdown';
 
-const Container = ({ children }: { children: JSX.Element | JSX.Element[] }) => (
+const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			padding: 10px;

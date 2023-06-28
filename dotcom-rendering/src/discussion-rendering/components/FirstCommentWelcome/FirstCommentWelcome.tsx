@@ -38,11 +38,9 @@ const textStyling = css`
 	${textSans.small()};
 `;
 
-const Text = ({
-	children,
-}: {
-	children: string | JSX.Element | JSX.Element[];
-}) => <p css={textStyling}>{children}</p>;
+const Text = ({ children }: { children: React.ReactNode }) => (
+	<p css={textStyling}>{children}</p>
+);
 
 export const FirstCommentWelcome = ({
 	body,
