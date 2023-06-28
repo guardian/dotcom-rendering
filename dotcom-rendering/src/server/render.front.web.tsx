@@ -63,8 +63,7 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 
 	const pillarFromSubNav = themeToPillar(themeFromSubNav);
 
-	const selectedPillar =
-		pillarFromCurrentLink ?? pillarFromSubNav ?? ArticlePillar.News;
+	const selectedPillar = pillarFromCurrentLink ?? pillarFromSubNav;
 
 	return {
 		...NAV,
