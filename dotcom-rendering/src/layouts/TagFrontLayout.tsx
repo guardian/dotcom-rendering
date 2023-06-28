@@ -28,7 +28,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
 import {
 	getMerchHighPosition,
-	getMobileAdPositions,
+	getTagFrontMobileAdPositions,
 } from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
@@ -74,19 +74,22 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	// const merchHighPosition = getMerchHighPosition(
-	// 	tagFront.groupedTrails.length,
-	// 	false,
-	// );
+	const merchHighPosition = getMerchHighPosition(
+		tagFront.groupedTrails.length,
+		false,
+	);
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(tagFront);
 
-	// const mobileAdPositions = renderAds
-	// 	? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
-	// 	: [];
+	const mobileAdPositions = renderAds
+		? getTagFrontMobileAdPositions(
+				tagFront.groupedTrails,
+				merchHighPosition,
+		  )
+		: [];
 
 	return (
 		<>
@@ -282,15 +285,15 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							>
 								<ContainerComponent />
 							</FrontSection>
-							{/* {decideAdSlot(
+							{decideAdSlot(
 								renderAds,
 								index,
 								false,
 								tagFront.groupedTrails.length,
 								tagFront.config.isPaidContent,
 								mobileAdPositions,
-								hasPageSkin,
-							)} */}
+								tagFront.config.hasPageSkin,
+							)}
 						</Fragment>
 					);
 				})}

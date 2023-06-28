@@ -1,4 +1,5 @@
 import type { DCRCollectionType } from '../types/front';
+import type { GroupedTrailsBase } from '../types/tagFront';
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 
@@ -71,6 +72,34 @@ export const getMobileAdPositions = (
 		.filter(shouldInsertAd(merchHighPosition))
 		.filter(isEvenIndex)
 		.map((collection: AdCandidate) => collections.indexOf(collection))
+		// Should insert no more than 10 ads
+		.slice(0, 10);
+
+/**
+ * Uses a very similar approach to pressed fronts, except we
+ * - Don't need to consider thrashers
+ * - Don't need to consider the 'most viewed' container
+ *
+ * The types are also slightly different, as we
+ */
+export const getTagFrontMobileAdPositions = (
+	collections: Array<GroupedTrailsBase>,
+	merchHighPosition: number,
+): number[] =>
+	collections
+		.filter(
+			(_, index) =>
+				!hasAdjacentCommercialContainer(index, merchHighPosition),
+		)
+		.filter(isEvenIndex)
+		.map((collection) =>
+			collections.findIndex(
+				(c) =>
+					c.day === collection.day &&
+					c.month === collection.month &&
+					c.year === collection.year,
+			),
+		)
 		// Should insert no more than 10 ads
 		.slice(0, 10);
 
