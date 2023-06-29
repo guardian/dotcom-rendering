@@ -1,3 +1,4 @@
+import type { NewsletterIlustrations } from 'src/model/newsletterIllustrations';
 import type { EditionId } from '../lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { Newsletter } from './content';
@@ -75,4 +76,5 @@ export type GroupedNewsletters = {
 
 export type DCRNewslettersPageType = FENewslettersPageType & {
 	groupedNewsletters: GroupedNewsletters;
+	illustrationUrls: NewsletterIlustrations;
 };

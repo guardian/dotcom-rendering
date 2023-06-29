@@ -6,6 +6,7 @@ import type {
 } from '../types/newslettersPage';
 import type { StaticGroups } from './newsletter-grouping';
 import { groups } from './newsletter-grouping';
+import { newsletterIllustrations } from './newsletterIllustrations';
 
 const mapStaticGroups = (
 	staticGroups: StaticGroups,
@@ -77,5 +78,6 @@ export const enhanceNewslettersPage = (
 	return {
 		...newsletterData,
 		groupedNewsletters: getGroups(newsletterData),
+		illustrationUrls: newsletterIllustrations,
 	};
 };
