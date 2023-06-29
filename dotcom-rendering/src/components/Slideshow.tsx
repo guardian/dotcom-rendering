@@ -1,6 +1,7 @@
 import { css, keyframes } from '@emotion/react';
 import { from, neutral, textSans, until } from '@guardian/source-foundations';
 import type { DCRSlideshowImage } from '../types/front';
+import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
 
 /**

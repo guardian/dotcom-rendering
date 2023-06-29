@@ -3,6 +3,10 @@ import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source-foundations';
 import { PlayIcon } from './PlayIcon';
 
+export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+
+export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
+
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
