@@ -1,4 +1,3 @@
-import type { StoryFn } from '@storybook/react';
 import type { WeatherWidgetProps } from './WeatherWidget';
 import { WeatherWidget } from './WeatherWidget';
 
@@ -88,60 +87,88 @@ export default {
 	},
 };
 
-const Template: StoryFn<WeatherWidgetProps> = (args: WeatherWidgetProps) => (
-	<WeatherWidget {...args} />
+export const Mobile = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '320px', padding: '0 10px' }}>
+		<WeatherWidget {...args} />
+	</div>
 );
-
-export const Mobile = Template.bind({});
 Mobile.parameters = {
 	viewport: {
 		defaultViewport: 'mobile',
 	},
 };
 
-export const MobileMedium = Template.bind({});
+export const MobileMedium = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '375px', padding: '0 10px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 MobileMedium.parameters = {
 	viewport: {
 		defaultViewport: 'mobileMedium',
 	},
 };
 
-export const MobileLandscape = Template.bind({});
+export const MobileLandscape = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '480px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 MobileLandscape.parameters = {
 	viewport: {
 		defaultViewport: 'mobileLandscape',
 	},
 };
 
-export const Phablet = Template.bind({});
+export const Phablet = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '680px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 Phablet.parameters = {
 	viewport: {
 		defaultViewport: 'phablet',
 	},
 };
 
-export const Tablet = Template.bind({});
+export const Tablet = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '552px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 Tablet.parameters = {
 	viewport: {
 		defaultViewport: 'tablet',
 	},
 };
 
-export const Desktop = Template.bind({});
+export const Desktop = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '792px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 Desktop.parameters = {
 	viewport: {
 		defaultViewport: 'desktop',
 	},
 };
 
-export const LeftCol = Template.bind({});
+export const LeftCol = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '180px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 LeftCol.parameters = {
 	viewport: {
 		defaultViewport: 'leftCol',
 	},
 };
 
-export const Wide = Template.bind({});
+export const Wide = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '260px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 Wide.parameters = {
 	viewport: {
 		defaultViewport: 'wide',
@@ -149,7 +176,11 @@ Wide.parameters = {
 };
 
 // just checks US special case
-export const US = Template.bind({});
+export const US = (args: WeatherWidgetProps) => (
+	<div style={{ maxWidth: '340px', padding: '0 20px' }}>
+		<WeatherWidget {...args} />
+	</div>
+);
 US.args = {
 	edition: 'US',
 };
