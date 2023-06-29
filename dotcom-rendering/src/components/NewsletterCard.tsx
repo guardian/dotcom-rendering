@@ -107,6 +107,49 @@ const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
 });
 
+const IllustrationPlaceholder = (props: {
+	theme?: string;
+	aspectWidth: number;
+	aspectHeight: number;
+	altText?: string;
+}) => {
+	const getBackground = (theme?: string): string => {
+		switch (theme) {
+			case 'culture':
+			case 'news':
+			case 'sport':
+			case 'lifestyle':
+			case 'opinion':
+				return palette[theme][400];
+			default:
+				return palette.brand[400];
+		}
+	};
+
+	return (
+		<figure
+			role="img"
+			css={[
+				illustrationStyle,
+				css`
+					position: relative;
+				`,
+			]}
+		>
+			<img
+				css={css`
+					background-color: ${getBackground(props.theme)};
+					width: 100%;
+					height: auto;
+				`}
+				width={props.aspectWidth}
+				height={props.aspectHeight}
+				alt={props.altText ?? ''}
+			/>
+		</figure>
+	);
+};
+
 export const NewsletterCard = ({
 	newsletter,
 	groupTitle,
@@ -165,6 +208,13 @@ export const NewsletterCard = ({
 					css={illustrationStyle}
 					alt=""
 					role="img"
+				/>
+			)}
+			{!newsletter.illustrationUrl && (
+				<IllustrationPlaceholder
+					theme={newsletter.theme}
+					aspectHeight={300}
+					aspectWidth={500}
 				/>
 			)}
 			<div css={contentWrapperStyle}>
