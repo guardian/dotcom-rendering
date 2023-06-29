@@ -220,3 +220,96 @@ BrazeNewsletterBannerComponent.args = {
 };
 
 BrazeNewsletterBannerComponent.storyName = 'BannerNewsletter';
+
+// Braze Styleable Banner story
+// ---------------------------------------
+export const BrazeStyleableBannerComponent = (
+	args: BrazeMessageProps & { componentName: string },
+): ReactElement => {
+	const [BrazeMessage, setBrazeMessage] =
+		useState<typeof BrazeBannerComponentType>();
+
+	useEffect(() => {
+		import('@guardian/braze-components')
+			.then((module) => {
+				console.log(module);
+				setBrazeMessage(() => module.BrazeStyleableBannerComponent);
+			})
+			.catch((e) =>
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
+			);
+	}, []);
+
+	if (BrazeMessage) {
+		const brazeMessageProps: BrazeMessageProps = {
+			styleBackground: args.styleBackground,
+			header: args.header,
+			styleHeader: args.styleHeader,
+			body: args.body,
+			styleBody: args.styleBody,
+			highlight: args.highlight,
+			styleHighlight: args.styleHighlight,
+			styleHighlightBackground: args.styleHighlightBackground,
+			buttonText: args.buttonText,
+			buttonUrl: args.buttonUrl,
+			styleButton: args.styleButton,
+			styleButtonBackground: args.styleButtonBackground,
+			styleButtonHover: args.styleButtonHover,
+			imageUrl: args.imageUrl,
+			imageAltText: args.imageAltText,
+			imagePosition: args.imagePosition,
+			styleCloseButton: args.styleCloseButton,
+			ophanComponentId: args.ophanComponentId,
+		};
+
+		return (
+			<BrazeMessage
+				componentName={args.componentName}
+				logButtonClickWithBraze={(internalButtonId) => {
+					console.log(
+						`Button with internal ID ${internalButtonId} clicked`,
+					);
+				}}
+				submitComponentEvent={(componentEvent) => {
+					console.log(
+						'submitComponentEvent called with: ',
+						componentEvent,
+					);
+				}}
+				brazeMessageProps={brazeMessageProps}
+				subscribeToNewsletter={subscribeToNewsletter}
+			/>
+		);
+	}
+	return <div>Loading...</div>;
+};
+
+BrazeStyleableBannerComponent.args = {
+	slotName: 'Banner',
+	styleBackground: 'rgb(237, 237, 237)',
+	header: 'The Guardian’s impact in 2021',
+	styleHeader: 'rgb(51, 51, 51)',
+	body: 'Thanks to your generous support in this extraordinary year, our open, independent journalism was read by millions. From the pandemic to our urgent coverage of the climate crisis, our reporting had a powerful impact.',
+	styleBody: 'rgb(51, 51, 51)',
+	highlight:
+		'Read our look-back to see how Guardian journalism made a difference.',
+	styleHighlight: 'rgb(51, 51, 51)',
+	styleHighlightBackground: 'rgb(237, 237, 237)',
+	buttonText: 'Take a look back',
+	buttonUrl:
+		'https://www.theguardian.com/info/ng-interactive/2020/dec/21/the-guardian-in-2020?INTCMP=gdnwb_mrtn_banner_edtrl_MK_SU_WorkingReport2020Canvas',
+	styleButton: 'rgb(255, 255, 255)',
+	styleButtonBackground: 'rgb(5, 41, 98)',
+	styleButtonHover: 'rgb(35, 75, 138)',
+	imageAltText: 'Accessible image description',
+	imagePosition: 'bottom',
+	styleCloseButton: 'rgb(5, 41, 98)',
+	componentName: 'StyleableBannerWithLink',
+	ophanComponentId: 'change_me_ophan_component_id',
+	imageUrl:
+		'https://i.guim.co.uk/img/media/35d403182e4b262d37385281b19b763ee6b32f6a/58_0_1743_1046/master/1743.png?width=930&quality=45&auto=format&s=9ecd82413fef9883c1e7a0df2bf6abb1',
+};
+
+BrazeStyleableBannerComponent.storyName = 'StyleableBannerWithLink';
