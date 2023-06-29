@@ -169,7 +169,7 @@ type ForecastProps = {
 		metric: TemperatureProps;
 		imperial: TemperatureProps;
 	};
-	time?: string;
+	dateTime?: string;
 };
 
 export interface WeatherWidgetProps {

@@ -113,7 +113,7 @@ export type WeatherWidgetSlotProps = {
 		metric: TemperatureProps;
 		imperial: TemperatureProps;
 	};
-	time?: string;
+	dateTime?: string;
 	isUS: boolean;
 	css?: SerializedStyles;
 };
@@ -121,12 +121,12 @@ export type WeatherWidgetSlotProps = {
 export const WeatherWidgetSlot = ({
 	icon,
 	temperature,
-	time,
+	dateTime,
 	description,
 	isUS,
 	...props
 }: WeatherWidgetSlotProps) => {
-	const isNow = isUndefined(time);
+	const isNow = isUndefined(dateTime);
 
 	const Icon = lazy(() =>
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
@@ -154,8 +154,8 @@ export const WeatherWidgetSlot = ({
 					Now
 				</span>
 			) : (
-				<time css={timeCSS} dateTime={time}>
-					{formatTime(time, isUS)}
+				<time css={timeCSS} dateTime={dateTime}>
+					{formatTime(dateTime, isUS)}
 				</time>
 			)}
 			<span css={visuallyHiddenCSS}>is</span>

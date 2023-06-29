@@ -49,7 +49,7 @@ export default {
 						unit: 'F',
 					},
 				},
-				time: '2023-06-27T00:00:00.000Z',
+				dateTime: '2023-06-27T00:00:00.000Z',
 			},
 			{
 				icon: 25,
@@ -64,7 +64,7 @@ export default {
 						unit: 'F',
 					},
 				},
-				time: '2023-06-27T04:00:00.000Z',
+				dateTime: '2023-06-27T04:00:00.000Z',
 			},
 			{
 				icon: 32,
@@ -79,7 +79,7 @@ export default {
 						unit: 'F',
 					},
 				},
-				time: '2023-06-27T08:00:00.000Z',
+				dateTime: '2023-06-27T08:00:00.000Z',
 			},
 			{
 				icon: 44,
@@ -94,7 +94,7 @@ export default {
 						unit: 'F',
 					},
 				},
-				time: '2023-06-27T12:00:00.000Z',
+				dateTime: '2023-06-27T12:00:00.000Z',
 			},
 		],
 	},
