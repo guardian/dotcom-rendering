@@ -12,8 +12,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	getCaptchaSiteKey,
 	mockRequestMultipleSignUps,
-	reportCaptchaEvent,
-	reportFormEvent,
+	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
@@ -142,7 +141,7 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-checked') ??
 					'remove from list';
 				button.setAttribute('aria-label', ariaLabelText);
-				reportFormEvent('ManyNewsletterSignUp', 'add-newsletter', {
+				reportTrackingEvent('ManyNewsletterSignUp', 'add-newsletter', {
 					newsletterId: id,
 				});
 			} else {
@@ -155,7 +154,7 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-unchecked') ??
 					'add to list';
 				button.setAttribute('aria-label', ariaLabelText);
-				reportFormEvent('ManyNewsletterSignUp', 'remove-newsletter', {
+				reportTrackingEvent('ManyNewsletterSignUp', 'remove-newsletter', {
 					newsletterId: id,
 				});
 			}
@@ -179,7 +178,7 @@ export const ManyNewsletterSignUp = ({
 		});
 
 		setNewslettersToSignUpFor([]);
-		reportFormEvent('ManyNewsletterSignUp', 'remove-all-newsletters');
+		reportTrackingEvent('ManyNewsletterSignUp', 'remove-all-newsletters');
 	}, [status]);
 
 	useEffect(() => {
@@ -197,7 +196,7 @@ export const ManyNewsletterSignUp = ({
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
-		reportFormEvent('ManyNewsletterSignUp', 'form-submit', {
+		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
 			newsletterIds: newslettersToSignUpFor,
 		});
 
@@ -212,7 +211,7 @@ export const ManyNewsletterSignUp = ({
 
 		if (!response.ok) {
 			const responseText = await response.text();
-			reportFormEvent('ManyNewsletterSignUp', 'failure-response', {
+			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
 				newsletterIds: newslettersToSignUpFor,
 				responseText,
 			});
@@ -220,7 +219,7 @@ export const ManyNewsletterSignUp = ({
 			return setStatus('Failed');
 		}
 
-		reportFormEvent('ManyNewsletterSignUp', 'success-response', {
+		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
 			newsletterIds: newslettersToSignUpFor,
 		});
 		setStatus('Success');
@@ -238,7 +237,7 @@ export const ManyNewsletterSignUp = ({
 		}
 
 		if (!reCaptchaRef.current) {
-			reportCaptchaEvent(
+			reportTrackingEvent(
 				'ManyNewsletterSignUp',
 				'captcha-not-loaded-when-needed',
 			);
@@ -247,21 +246,21 @@ export const ManyNewsletterSignUp = ({
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-execute');
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
 		const result = await reCaptchaRef.current.executeAsync();
 
 		if (typeof result !== 'string') {
-			reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-failure');
+			reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
 			setStatus('Failed');
 			return;
 		}
 
-		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-success');
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
 		return sendRequest(result);
 	};
 
 	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-error', {
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
 			eventType: event.type,
 			status,
 		});
