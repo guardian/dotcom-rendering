@@ -106,15 +106,15 @@ const ThreeColumnSliceWithAdSlot = ({
 				 * |_______________________|
 				 */}
 				<UL direction="row" wrapCards={true}>
-					{trails.map((trail, trailadIndex, { length }) => (
+					{trails.map((trail, trailIndex, { length }) => (
 						<LI
 							padSides={true}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-								trailadIndex,
+								trailIndex,
 								length - (length % 2),
 								2,
 							)}
-							showDivider={trailadIndex % 2 !== 0}
+							showDivider={trailIndex % 2 !== 0}
 							containerPalette={containerPalette}
 							percentage="50%"
 							stretch={true}
@@ -172,15 +172,15 @@ export const FixedMediumSlowXIIMPU = ({
 				 * wrapping three-column layout instead.
 				 */
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((trail, trailadIndex) => (
+					{remaining.map((trail, trailIndex) => (
 						<LI
 							padSides={true}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-								trailadIndex,
+								trailIndex,
 								remaining.length - (remaining.length % 3),
 								3,
 							)}
-							showDivider={trailadIndex % 3 !== 0}
+							showDivider={trailIndex % 3 !== 0}
 							containerPalette={containerPalette}
 							percentage="33.333%"
 							stretch={true}

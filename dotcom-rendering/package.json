@@ -171,7 +171,7 @@
 		"css-loader": "6.7.3",
 		"csstype": "3.1.1",
 		"curlyquotes": "1.5.5",
-		"cypress": "12.12.0",
+		"cypress": "12.16.0",
 		"cypress-plugin-tab": "1.0.5",
 		"cypress-wait-until": "1.7.2",
 		"desvg-loader": "0.1.0",
