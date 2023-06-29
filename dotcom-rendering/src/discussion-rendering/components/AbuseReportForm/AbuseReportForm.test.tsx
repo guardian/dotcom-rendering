@@ -2,10 +2,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { ArticlePillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { mockFetchCalls } from '../../lib/mockFetchCalls';
+import { mockRESTCalls } from '../../../lib/mockRESTCalls';
 import { AbuseReportForm } from './AbuseReportForm';
 
-const fetchMock = mockFetchCalls();
+const fetchMock = mockRESTCalls();
 
 describe('Dropdown', () => {
 	it('Should show the expected label names', () => {

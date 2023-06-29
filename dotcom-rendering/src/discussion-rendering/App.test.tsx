@@ -5,10 +5,10 @@ import {
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
+import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { App } from './App';
-import { mockFetchCalls } from './lib/mockFetchCalls';
 
-mockFetchCalls();
+mockRESTCalls();
 
 describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {

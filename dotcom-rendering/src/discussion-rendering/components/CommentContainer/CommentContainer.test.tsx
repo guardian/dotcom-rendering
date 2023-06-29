@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom/extend-expect';
 import { ArticlePillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import { comment } from '../../../../fixtures/manual/comment';
+import { mockedMessageID, mockRESTCalls } from '../../../lib/mockRESTCalls';
 import type { CommentType } from '../../discussionTypes';
-import { comment } from '../../fixtures/comment';
-import { mockedMessageID, mockFetchCalls } from '../../lib/mockFetchCalls';
 import { CommentContainer } from './CommentContainer';
 
-mockFetchCalls();
+mockRESTCalls();
 
 // @ts-expect-error -- We know this is not `undefined`
 const firstCommentResponse: CommentType = comment.responses[0];
