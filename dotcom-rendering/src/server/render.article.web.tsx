@@ -23,7 +23,7 @@ import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';

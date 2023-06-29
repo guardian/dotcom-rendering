@@ -59,8 +59,7 @@
                     "type": "string"
                 },
                 "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
+                    "$ref": "#/definitions/SharedAdTargeting"
                 },
                 "buildNumber": {
                     "type": "string"
@@ -3203,6 +3202,9 @@
             "additionalProperties": {
                 "type": "boolean"
             }
+        },
+        "SharedAdTargeting": {
+            "type": "object"
         },
         "StageType": {
             "enum": [

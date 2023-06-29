@@ -1,4 +1,5 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
 import type { Branding } from './branding';
@@ -399,7 +400,7 @@ export type FEFrontConfigType = {
 	section: string;
 	keywordIds: string;
 	locationapiurl: string;
-	sharedAdTargeting: { [key: string]: unknown };
+	sharedAdTargeting: SharedAdTargeting;
 	buildNumber: string;
 	abTests: ServerSideTests;
 	pbIndexSites: { [key: string]: unknown }[];
