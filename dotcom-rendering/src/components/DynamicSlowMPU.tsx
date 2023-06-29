@@ -161,7 +161,7 @@ const ColumnOfThree50_Ad50 = ({
  *
  * This container only allows big and standard cards (from groupedTrails)
  *
- * Layout is dynamic deopending on the number of big cards. You're only
+ * Layout is dynamic depending on the number of big cards. You're only
  * allowed to have 2 or 3 big cards. If you pass 1 a standard card will
  * get promoted to make two bigs. If you pass more than 3 bigs then the
  * extras will get demoted to standard.
