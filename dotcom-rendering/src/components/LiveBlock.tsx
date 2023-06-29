@@ -10,7 +10,6 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	adTargeting: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
@@ -26,7 +25,6 @@ export const LiveBlock = ({
 	block,
 	pageId,
 	webTitle,
-	adTargeting,
 	host = 'https://www.theguardian.com',
 	ajaxUrl,
 	isAdFreeUser,
@@ -68,7 +66,6 @@ export const LiveBlock = ({
 					key={index}
 					format={format}
 					element={element}
-					adTargeting={adTargeting}
 					ajaxUrl={ajaxUrl}
 					host={host}
 					index={index}

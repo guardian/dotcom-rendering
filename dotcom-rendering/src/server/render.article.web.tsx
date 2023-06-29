@@ -6,7 +6,6 @@ import {
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -261,31 +260,16 @@ export const renderBlocks = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	videoDuration,
-	edition,
 	section,
-	sharedAdTargeting,
-	adUnit,
 	switches,
 	keywordIds,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser,
-		isSensitive,
-		videoDuration,
-		edition,
-		section,
-		sharedAdTargeting,
-		adUnit,
-	});
-
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<LiveBlogRenderer
 			blocks={blocks}
 			format={format}
-			adTargeting={adTargeting}
 			host={host}
 			pageId={pageId}
 			webTitle={webTitle}
