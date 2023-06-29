@@ -17,6 +17,7 @@ import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
@@ -42,7 +43,11 @@ const decideTitle = (article: FEArticleType): string => {
 };
 
 export const renderHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
+	const NAV = {
+		...extractNAV(article.nav),
+		selectedPillar: getCurrentPillar(article),
+	};
+
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -208,14 +208,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: ArticlePillar.News,
-							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
@@ -227,7 +223,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<>
 							<Section
 								fullWidth={true}
-								showTopBorder={false}
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
@@ -488,6 +483,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										onwardsSource={'unknown-source'}
 										palette={containerPalette}
 										leftColSize={'compact'}
+										collectionType={
+											collection.collectionType
+										}
 									/>
 								</Island>
 							</Section>
@@ -593,7 +591,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={hasPageSkin ? true : false}
+					showTopBorder={hasPageSkin}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -624,7 +622,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={ArticlePillar.News}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}

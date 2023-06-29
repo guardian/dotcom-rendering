@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	between,
 	brandAlt,
@@ -70,7 +69,7 @@ const veggieBurgerIconStyles = css`
 	}
 `;
 
-const veggieBurgerStyles = (display: ArticleDisplay) => css`
+const veggieBurgerStyles = (isImmersive: boolean) => css`
 	background-color: ${brandAlt[400]};
 	color: ${neutral[7]};
 	cursor: pointer;
@@ -89,7 +88,7 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	}
 
 	${from.mobileMedium} {
-		bottom: ${display === ArticleDisplay.Immersive ? '3px' : '-3px'};
+		bottom: ${isImmersive ? '3px' : '-3px'};
 		right: 5px;
 	}
 	${from.mobileLandscape} {
@@ -113,14 +112,14 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 `;
 
 type Props = {
-	display: ArticleDisplay;
+	isImmersive?: boolean;
 };
 
-export const VeggieBurgerMenu = ({ display }: Props) => {
+export const VeggieBurgerMenu = ({ isImmersive = false }: Props) => {
 	return (
 		<label
 			id={veggieBurgerId}
-			css={veggieBurgerStyles(display)}
+			css={veggieBurgerStyles(isImmersive)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}

@@ -1,10 +1,13 @@
+import { ArticlePillar } from '@guardian/libs';
 import type { FEArticleType } from '../types/frontend';
-import { decideNavTheme } from './decideNavTheme';
+import { decideNavPillar } from './decideNavPillar';
 
-export const getCurrentPillar = (article: FEArticleType): ArticleTheme => {
+export const getCurrentPillar = (
+	article: FEArticleType,
+): ArticlePillar | undefined => {
 	const currentPillar =
 		(article.nav.currentPillarTitle &&
 			(article.nav.currentPillarTitle.toLowerCase() as LegacyPillar)) ||
 		article.pillar;
-	return decideNavTheme(currentPillar);
+	return decideNavPillar(currentPillar);
 };

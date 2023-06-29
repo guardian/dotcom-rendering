@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
@@ -47,7 +47,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
@@ -314,10 +313,16 @@ export const ShowcaseLayout = ({
 							>
 								<Nav
 									nav={NAV}
-									format={{
-										...format,
-										theme: getCurrentPillar(article),
-									}}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={NAV.selectedPillar}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -395,10 +400,16 @@ export const ShowcaseLayout = ({
 							>
 								<Nav
 									nav={NAV}
-									format={{
-										...format,
-										theme: getCurrentPillar(article),
-									}}
+									isImmersive={
+										format.display ===
+										ArticleDisplay.Immersive
+									}
+									displayRoundel={
+										format.display ===
+											ArticleDisplay.Immersive ||
+										format.theme === ArticleSpecial.Labs
+									}
+									selectedPillar={NAV.selectedPillar}
 									subscribeUrl={
 										article.nav.readerRevenueLinks.header
 											.subscribe
@@ -798,7 +809,7 @@ export const ShowcaseLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

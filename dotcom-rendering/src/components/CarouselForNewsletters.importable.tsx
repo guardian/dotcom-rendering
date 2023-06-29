@@ -26,6 +26,7 @@ type Props = {
 	leftColSize: LeftColSize;
 	activeDotColour: string;
 	titleHighlightColour: string;
+	carouselPosition?: number;
 };
 
 // TO DO - this file was adapted from the Caroursel component and duplicates much of the code
@@ -387,6 +388,7 @@ export const CarouselForNewsletters = ({
 	leftColSize,
 	activeDotColour,
 	titleHighlightColour,
+	carouselPosition,
 }: Props) => {
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -607,7 +609,12 @@ export const CarouselForNewsletters = ({
 										min-width: 220px;
 									`}
 								>
-									<NewsletterCard newsletter={newsletter} />
+									<NewsletterCard
+										newsletter={newsletter}
+										cardPosition={i}
+										groupTitle={heading}
+										carouselPosition={carouselPosition}
+									/>
 								</div>
 							</LI>
 						);
