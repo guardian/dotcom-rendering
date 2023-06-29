@@ -17,6 +17,7 @@ import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
@@ -26,7 +27,6 @@ import type { FEArticleType } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 
 interface Props {
 	article: FEArticleType;
