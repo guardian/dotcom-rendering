@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	bodyObjectStyles,
 	headlineObjectStyles,
 	palette,
 	space,
@@ -35,19 +36,29 @@ export const ICON_TICK_CLASS =
 
 const groupItemStyle = css`
 	position: relative;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
-	flex-basis: 200px;
 	margin-right: ${space[3]}px;
 	margin-bottom: ${space[3]}px;
-	padding: ${space[1]}px;
-	padding-bottom: ${space[2]}px;
 	min-height: 215px;
 	background-color: ${palette.neutral[97]};
+`;
+
+const contentWrapperStyle = css`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 
 	h3 {
 		${headlineObjectStyles.xxxsmall()};
 		margin-bottom: ${space[3]}px;
+	}
+
+	p {
+		${bodyObjectStyles.xsmall({})};
 	}
 `;
 
@@ -83,6 +94,11 @@ const buttonStyle = css`
 		background-color: ${palette.neutral[46]};
 		border-color: ${palette.neutral[46]};
 	}
+`;
+
+const illustrationStyle = css`
+	width: 100%;
+	margin-bottom: ${space[1]}px;
 `;
 
 const getButtonInitialAriaAttribute = (newsletterName: string) => ({
@@ -143,31 +159,41 @@ export const NewsletterCard = ({
 			css={groupItemStyle}
 			aria-label={newsletter.name}
 		>
-			<NewsletterDetail text={newsletter.frequency} />
-			<h3>{newsletter.name}</h3>
-			<p>{newsletter.description}</p>
-			<div css={buttonHolderStyle}>
-				<Button
-					{...getButtonInitialAriaAttribute(newsletter.name)}
-					priority="tertiary"
-					size="xsmall"
-					iconSide="left"
-					icon={
-						<>
-							<span className={ICON_PLUS_CLASS}>
-								<SvgPlus />
-							</span>
-							<span className={ICON_TICK_CLASS}>
-								<SvgCheckmark />
-							</span>
-						</>
-					}
-					cssOverrides={buttonStyle}
-					data-newsletter-id={newsletter.identityName}
-					data-role={BUTTON_ROLE}
-				>
-					Sign up
-				</Button>
+			{!!newsletter.illustrationUrl && (
+				<img
+					src={newsletter.illustrationUrl}
+					css={illustrationStyle}
+					alt=""
+					role="img"
+				/>
+			)}
+			<div css={contentWrapperStyle}>
+				<NewsletterDetail text={newsletter.frequency} />
+				<h3>{newsletter.name}</h3>
+				<p>{newsletter.description}</p>
+				<div css={buttonHolderStyle}>
+					<Button
+						{...getButtonInitialAriaAttribute(newsletter.name)}
+						priority="tertiary"
+						size="xsmall"
+						iconSide="left"
+						icon={
+							<>
+								<span className={ICON_PLUS_CLASS}>
+									<SvgPlus />
+								</span>
+								<span className={ICON_TICK_CLASS}>
+									<SvgCheckmark />
+								</span>
+							</>
+						}
+						cssOverrides={buttonStyle}
+						data-newsletter-id={newsletter.identityName}
+						data-role={BUTTON_ROLE}
+					>
+						Sign up
+					</Button>
+				</div>
 			</div>
 		</article>
 	);

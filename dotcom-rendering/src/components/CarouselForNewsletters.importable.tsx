@@ -607,6 +607,9 @@ export const CarouselForNewsletters = ({
 									role="presentation"
 									css={css`
 										min-width: 220px;
+										min-height: 380px;
+										display: flex;
+										flex-direction: column;
 									`}
 								>
 									<NewsletterCard
