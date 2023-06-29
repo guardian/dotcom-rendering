@@ -21,8 +21,8 @@ import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
+import { MediaPill } from '../MediaPill';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
 import { SnapCssSandbox } from '../SnapCssSandbox';
@@ -446,17 +446,14 @@ export const Card = ({
 							<img src={image.src} alt="" />
 						)}
 
-						{isPlayableMainMedia &&
-							mediaDuration !== undefined &&
-							mediaDuration > 0 && (
-								<MediaDuration
-									mediaDuration={mediaDuration}
-									imagePosition={imagePosition}
-									imagePositionOnMobile={
-										imagePositionOnMobile
-									}
-								/>
-							)}
+						{isPlayableMainMedia && (
+							<MediaPill
+								mediaDuration={mediaDuration}
+								imagePosition={imagePosition}
+								imagePositionOnMobile={imagePositionOnMobile}
+								mediaCategory={mediaCategory}
+							/>
+						)}
 					</ImageWrapper>
 				)}
 				<ContentWrapper

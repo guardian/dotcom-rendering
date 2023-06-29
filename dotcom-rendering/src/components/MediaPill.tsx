@@ -65,7 +65,7 @@ export function secondsToDuration(secs?: number): string {
 	return duration.join(':');
 }
 
-export const MediaDuration = ({
+export const MediaPill = ({
 	mediaDuration,
 	imagePosition,
 	imagePositionOnMobile,
