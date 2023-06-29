@@ -96,4 +96,6 @@ export const newsletterIllustrations: NewsletterIlustrations = {
 		'https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/500.png',
 	'sports-au':
 		'https://media.guim.co.uk/adb3492ff7dd7779fb26b493870aec13c2a702e7/0_0_5000_3000/500.jpg',
+	'cotton-capital':
+		'https://i.guim.co.uk/img/media/c44095c1ce6f2c420a9bbdb5c3dafb5323e1189f/0_0_2560_1536/master/2560.jpg?width=250&quality=45&dpr=2&s=none&s=9b9ef968114be19c21986fac71c61bc2'
 };
