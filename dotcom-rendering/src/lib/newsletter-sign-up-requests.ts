@@ -118,25 +118,25 @@ export const mockRequestMultipleSignUps = async (
 };
 
 type CaptchaEventDescription =
-	| 'reCAPTCHA token successfully set.'
-	| 'reCAPTCHA value changed to null'
-	| 'reCAPTCHA load error'
-	| 'executing reCAPTCHA'
-	| 'Submit button pressed, but NO reCAPTCHA element loaded';
+	| 'captcha-success'
+	| 'captcha-failure'
+	| 'captcha-error'
+	| 'captcha-execute'
+	| 'captcha-not-loaded-when-needed';
 
 const captchaEventDescriptionToOphanAction = (
 	description: CaptchaEventDescription,
 ): OphanAction => {
 	switch (description) {
-		case 'reCAPTCHA token successfully set.':
+		case 'captcha-success':
 			return 'ANSWER';
-		case 'reCAPTCHA value changed to null':
+		case 'captcha-failure':
+			return 'ANSWER';
+		case 'captcha-error':
 			return 'CLOSE';
-		case 'reCAPTCHA load error':
-			return 'CLOSE';
-		case 'executing reCAPTCHA':
+		case 'captcha-execute':
 			return 'EXPAND';
-		case 'Submit button pressed, but NO reCAPTCHA element loaded':
+		case 'captcha-not-loaded-when-needed':
 			return 'CLOSE';
 	}
 };

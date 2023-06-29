@@ -198,10 +198,13 @@ export const ManyNewsletterSignUp = ({
 			reCaptchaToken,
 		);
 
+		const body = await response.text();
+		console.log(response, body);
+
 		setStatus(response.ok ? 'Success' : 'Failed');
 	};
 
-	const handleSubmitButton = () => {
+	const handleSubmitButton = async () => {
 		if (status !== 'NotSent') {
 			return;
 		}
@@ -215,42 +218,32 @@ export const ManyNewsletterSignUp = ({
 		if (!reCaptchaRef.current) {
 			reportCaptchaEvent(
 				'ManyNewsletterSignUp',
-				'Submit button pressed, but NO reCAPTCHA element loaded',
+				'captcha-not-loaded-when-needed',
 			);
 			return;
 		}
 		setStatus('Loading');
 		// successful execution triggers a call to sendRequest
 		// with the onChange prop on the captcha Component
-		reportCaptchaEvent('ManyNewsletterSignUp', 'executing reCAPTCHA');
-		reCaptchaRef.current.execute();
-	};
+		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-execute');
+		const result = await reCaptchaRef.current.executeAsync();
 
-	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		reportCaptchaEvent('ManyNewsletterSignUp', 'reCAPTCHA load error', {
-			eventType: event.type,
-		});
-		reCaptchaRef.current?.reset();
-	};
-
-	// The token will revert to null when it expires, triggering the
-	// onChange event on the captcha Component. This will happen
-	// some time after a successful captcha execution and form submission
-	// so does not necessarily indicate a problem.
-	// May need further logic to make this report useful, depending on
-	// data design requirements.
-	const handleCaptchaNullChange = () => {
-		if (status === 'Success') {
-			// token has reverted to null after a succesfull submission
-			// no action needed
+		if (typeof result !== 'string') {
+			reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-failure');
+			setStatus('Failed');
 			return;
 		}
 
-		reportCaptchaEvent(
-			'ManyNewsletterSignUp',
-			`reCAPTCHA value changed to null`,
-			{ formStatus: status },
-		);
+		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-success');
+		return sendRequest(result);
+	};
+
+	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
+		reportCaptchaEvent('ManyNewsletterSignUp', 'captcha-error', {
+			eventType: event.type,
+			status,
+		});
+		reCaptchaRef.current?.reset();
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -303,17 +296,6 @@ export const ManyNewsletterSignUp = ({
 							<ReCAPTCHA
 								sitekey={captchaSiteKey}
 								ref={reCaptchaRef}
-								onChange={(token) => {
-									if (token === null) {
-										handleCaptchaNullChange();
-										return;
-									}
-									reportCaptchaEvent(
-										'ManyNewsletterSignUp',
-										'reCAPTCHA token successfully set.',
-									);
-									void sendRequest(token);
-								}}
 								onError={handleCaptchaError}
 								size="invisible"
 								// Note - the component supports an onExpired callback
