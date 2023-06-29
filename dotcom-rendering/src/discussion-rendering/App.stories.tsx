@@ -176,7 +176,7 @@ export const LoggedInShortDiscussion = () => (
 		/>
 	</div>
 );
-LoggedInShortDiscussion.storyName = 'when logged in but only wo comments made';
+LoggedInShortDiscussion.storyName = 'when logged in but only two comments made';
 
 export const LoggedOutHiddenNoPicks = () => (
 	<div

@@ -5,9 +5,9 @@ export const discussion = {
 	pageSize: 50,
 	orderBy: 'oldest',
 	discussion: {
-		key: '/p/ddp96',
+		key: '/p/4k83z',
 		webUrl: 'https://www.theguardian.com/commentisfree/2020/mar/09/coronavirus-outbreak-nhs-staff-shortages',
-		apiUrl: 'https://discussion.guardianapis.com/discussion-api/discussion/p/ddp96',
+		apiUrl: 'https://discussion.guardianapis.com/discussion-api/discussion/p/4k83z',
 		commentCount: 782,
 		topLevelCommentCount: 198,
 		isClosedForComments: true,
