@@ -544,9 +544,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
-									showAge={
-										collection.displayName === 'Headlines'
-									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
 								/>
