@@ -927,9 +927,7 @@
                 },
                 "isFront": {
                     "type": "boolean",
-                    "enum": [
-                        true
-                    ]
+                    "const": true
                 },
                 "idWebAppUrl": {
                     "type": "string"
