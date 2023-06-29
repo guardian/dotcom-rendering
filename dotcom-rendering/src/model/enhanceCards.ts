@@ -192,16 +192,18 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	{
+		cardInTagFront,
 		offset = 0,
 		editionId,
 		containerPalette,
+		pageId,
 	}: {
+		cardInTagFront: boolean;
 		offset?: number;
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
+		pageId?: string;
 	},
-	cardInTagFront: boolean,
-	pageId?: string,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
