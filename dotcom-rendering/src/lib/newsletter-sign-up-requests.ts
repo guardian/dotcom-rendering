@@ -144,7 +144,7 @@ const captchaEventDescriptionToOphanAction = (
 export const reportCaptchaEvent = (
 	componentName: string,
 	eventDescription: CaptchaEventDescription,
-	extraDetails?: Partial<Record<string, string>>,
+	extraDetails?: Partial<Record<string, string | string[]>>,
 ): void => {
 	const record = getOphanRecordFunction();
 
@@ -164,6 +164,42 @@ export const reportCaptchaEvent = (
 				id: componentName,
 			},
 			action: captchaEventDescriptionToOphanAction(eventDescription),
+			value: JSON.stringify(payload),
+		},
+		record,
+	);
+};
+
+type FormEventDescription =
+	| 'form-submit'
+	| 'add-newsletter'
+	| 'remove-newsletter'
+	| 'remove-all-newsletters'
+	| 'failure-response'
+	| 'success-response';
+
+export const reportFormEvent = (
+	componentName: string,
+	eventDescription: FormEventDescription,
+	extraDetails?: Partial<Record<string, string | string[]>>,
+): void => {
+	const record = getOphanRecordFunction();
+
+	const payload = {
+		...extraDetails,
+		message: eventDescription,
+		timestamp: Date.now(),
+	};
+
+	// eslint-disable-next-line no-console -- debugging
+	console.warn(`captcha event`, payload);
+	submitComponentEvent(
+		{
+			component: {
+				componentType: 'NEWSLETTER_SUBSCRIPTION',
+				id: componentName,
+			},
+			action: 'CLICK',
 			value: JSON.stringify(payload),
 		},
 		record,

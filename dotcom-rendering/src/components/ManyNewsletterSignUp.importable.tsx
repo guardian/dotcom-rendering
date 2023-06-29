@@ -13,6 +13,7 @@ import {
 	getCaptchaSiteKey,
 	mockRequestMultipleSignUps,
 	reportCaptchaEvent,
+	reportFormEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
@@ -141,6 +142,9 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-checked') ??
 					'remove from list';
 				button.setAttribute('aria-label', ariaLabelText);
+				reportFormEvent('ManyNewsletterSignUp', 'add-newsletter', {
+					newsletterId: id,
+				});
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
@@ -151,6 +155,9 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-unchecked') ??
 					'add to list';
 				button.setAttribute('aria-label', ariaLabelText);
+				reportFormEvent('ManyNewsletterSignUp', 'remove-newsletter', {
+					newsletterId: id,
+				});
 			}
 		},
 		[newslettersToSignUpFor, status],
@@ -172,6 +179,7 @@ export const ManyNewsletterSignUp = ({
 		});
 
 		setNewslettersToSignUpFor([]);
+		reportFormEvent('ManyNewsletterSignUp', 'remove-all-newsletters');
 	}, [status]);
 
 	useEffect(() => {
@@ -189,6 +197,10 @@ export const ManyNewsletterSignUp = ({
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
 	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
+		reportFormEvent('ManyNewsletterSignUp', 'form-submit', {
+			newsletterIds: newslettersToSignUpFor,
+		});
+
 		const functionToUse = useMockedRequestFunction
 			? mockRequestMultipleSignUps
 			: requestMultipleSignUps;
@@ -198,10 +210,20 @@ export const ManyNewsletterSignUp = ({
 			reCaptchaToken,
 		);
 
-		const body = await response.text();
-		console.log(response, body);
+		if (!response.ok) {
+			const responseText = await response.text();
+			reportFormEvent('ManyNewsletterSignUp', 'failure-response', {
+				newsletterIds: newslettersToSignUpFor,
+				responseText,
+			});
 
-		setStatus(response.ok ? 'Success' : 'Failed');
+			return setStatus('Failed');
+		}
+
+		reportFormEvent('ManyNewsletterSignUp', 'success-response', {
+			newsletterIds: newslettersToSignUpFor,
+		});
+		setStatus('Success');
 	};
 
 	const handleSubmitButton = async () => {
