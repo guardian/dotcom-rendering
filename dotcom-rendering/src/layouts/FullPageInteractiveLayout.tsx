@@ -25,7 +25,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import type { NavType } from '../model/extract-nav';
 import type { Switches } from '../types/config';
@@ -159,11 +158,14 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 					element="nav"
 				>
 					<Nav
-						format={{
-							display: format.display,
-							design: format.design,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={NAV.selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
@@ -246,11 +248,12 @@ const NavHeader = ({ article, NAV, format }: Props) => {
 				element="nav"
 			>
 				<Nav
-					format={{
-						display: ArticleDisplay.Standard,
-						design: format.design,
-						theme: getCurrentPillar(article),
-					}}
+					isImmersive={format.display === ArticleDisplay.Immersive}
+					displayRoundel={
+						format.display === ArticleDisplay.Immersive ||
+						format.theme === ArticleSpecial.Labs
+					}
+					selectedPillar={NAV.selectedPillar}
 					nav={NAV}
 					subscribeUrl={
 						article.nav.readerRevenueLinks.header.subscribe
@@ -375,7 +378,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}
