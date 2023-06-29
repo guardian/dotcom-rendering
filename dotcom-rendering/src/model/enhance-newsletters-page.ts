@@ -72,22 +72,17 @@ const getGroups = (
 		: reduceToDefaultGrouping(newsletters);
 };
 
+const addIllustrations = (newsletter: Newsletter) => ({
+	...newsletter,
+	illustrationUrl: newsletterIllustrations[newsletter.identityName],
+});
+
 export const enhanceNewslettersPage = (
 	newsletterData: FENewslettersPageType,
 ): DCRNewslettersPageType => {
-	const newslettersWithIllustrations = newsletterData.newsletters.map(
-		(newsletter) => {
-			return {
-				...newsletter,
-				illustrationUrl:
-					newsletterIllustrations[newsletter.identityName],
-			};
-		},
-	);
-
 	const newsletterDataWithIllustrations = {
 		...newsletterData,
-		newsletters: newslettersWithIllustrations,
+		newsletters: newsletterData.newsletters.map(addIllustrations),
 	};
 
 	return {
