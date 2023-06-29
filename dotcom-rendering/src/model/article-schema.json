@@ -553,6 +553,9 @@
                 },
                 "regionFocus": {
                     "type": "string"
+                },
+                "illustrationUrl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2434,6 +2437,9 @@
                             "type": "string"
                         },
                         "regionFocus": {
+                            "type": "string"
+                        },
+                        "illustrationUrl": {
                             "type": "string"
                         }
                     },

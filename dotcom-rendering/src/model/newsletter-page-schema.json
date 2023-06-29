@@ -35,6 +35,9 @@
                     },
                     "regionFocus": {
                         "type": "string"
+                    },
+                    "illustrationUrl": {
+                        "type": "string"
                     }
                 },
                 "required": [
