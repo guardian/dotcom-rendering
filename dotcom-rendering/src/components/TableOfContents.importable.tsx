@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO */
+/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {

@@ -39,6 +39,7 @@ module.exports = ({ sessionId }) => ({
 		runtimeChunk: false,
 	},
 	externals: [
+		// @ts-expect-error - webpack-node-externals types are incorrect
 		...(DEV
 			? [
 					nodeExternals({
@@ -55,17 +56,20 @@ module.exports = ({ sessionId }) => ({
 			: []),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
+		// @ts-expect-error - webpack-node-externals types are incorrect
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
 				request?.startsWith('@aws-sdk')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
+		// @ts-expect-error - webpack-node-externals types are incorrect
 		({ request }, callback) => {
 			return request?.endsWith('manifest.json')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
+		// @ts-expect-error - webpack-node-externals types are incorrect
 		({ request }, callback) => {
 			return request?.endsWith('manifest.legacy.json')
 				? callback(undefined, `commonjs ${request}`)

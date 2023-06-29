@@ -121,7 +121,7 @@ const themeToPillar = (theme: ArticleTheme): ArticlePillar => {
  * @param design An {@linkcode ArticleDesign}
  * @returns A string representation of `ArticleDesign`
  */
-const designToString = (design: ArticleDesign): string => {
+const designToString = (design: ArticleDesign): string | undefined => {
 	switch (design) {
 		case ArticleDesign.Standard:
 			return 'Standard';
