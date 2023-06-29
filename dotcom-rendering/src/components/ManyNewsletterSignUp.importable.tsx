@@ -226,13 +226,10 @@ export const ManyNewsletterSignUp = ({
 		reCaptchaRef.current.execute();
 	};
 
-	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = (
-		event,
-	) => {
-		reportCaptchaEvent(
-			'ManyNewsletterSignUp',
-			`reCAPTCHA load error -event type ${event.type}`,
-		);
+	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
+		reportCaptchaEvent('ManyNewsletterSignUp', 'reCAPTCHA load error', {
+			eventType: event.type,
+		});
 		reCaptchaRef.current?.reset();
 	};
 
@@ -243,9 +240,16 @@ export const ManyNewsletterSignUp = ({
 	// May need further logic to make this report useful, depending on
 	// data design requirements.
 	const handleCaptchaNullChange = () => {
+		if (status === 'Success') {
+			// token has reverted to null after a succesfull submission
+			// no action needed
+			return;
+		}
+
 		reportCaptchaEvent(
 			'ManyNewsletterSignUp',
-			`reCAPTCHA value changed to null, when form staus was "${status}".`,
+			`reCAPTCHA value changed to null`,
+			{ formStatus: status },
 		);
 	};
 
@@ -310,7 +314,7 @@ export const ManyNewsletterSignUp = ({
 									);
 									void sendRequest(token);
 								}}
-								onError={handleCaptchaLoadError}
+								onError={handleCaptchaError}
 								size="invisible"
 								// Note - the component supports an onExpired callback
 								// (for when the user completed a challenge, but did

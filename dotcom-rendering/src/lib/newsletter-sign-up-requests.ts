@@ -1,3 +1,9 @@
+import type { OphanAction } from '@guardian/libs';
+import {
+	getOphanRecordFunction,
+	submitComponentEvent,
+} from '../client/ophan/ophan';
+
 const isServer = typeof window === 'undefined';
 
 export const getCaptchaSiteKey = (): string | undefined =>
@@ -111,18 +117,55 @@ export const mockRequestMultipleSignUps = async (
 	} as unknown as Response;
 };
 
-/**
- * PLACEHOLDER - will just log a message to the console
- *
- * TO DO - post formatted component event via Ophan.
- * Will need to get requirements from data design on what
- * events should be recorded for the function and how
- * the payloads should be structured.
- */
+type CaptchaEventDescription =
+	| 'reCAPTCHA token successfully set.'
+	| 'reCAPTCHA value changed to null'
+	| 'reCAPTCHA load error'
+	| 'executing reCAPTCHA'
+	| 'Submit button pressed, but NO reCAPTCHA element loaded';
+
+const captchaEventDescriptionToOphanAction = (
+	description: CaptchaEventDescription,
+): OphanAction => {
+	switch (description) {
+		case 'reCAPTCHA token successfully set.':
+			return 'ANSWER';
+		case 'reCAPTCHA value changed to null':
+			return 'CLOSE';
+		case 'reCAPTCHA load error':
+			return 'CLOSE';
+		case 'executing reCAPTCHA':
+			return 'EXPAND';
+		case 'Submit button pressed, but NO reCAPTCHA element loaded':
+			return 'CLOSE';
+	}
+};
+
 export const reportCaptchaEvent = (
 	componentName: string,
-	message: string,
+	eventDescription: CaptchaEventDescription,
+	extraDetails?: Partial<Record<string, string>>,
 ): void => {
-	// eslint-disable-next-line no-console -- placeholder function
-	console.warn(`captcha event in ${componentName}`, message);
+	const record = getOphanRecordFunction();
+
+	const payload = {
+		...extraDetails,
+		message: eventDescription,
+		timestamp: Date.now(),
+	};
+
+	// eslint-disable-next-line no-console -- debugging
+	console.warn(`captcha event`, payload);
+
+	submitComponentEvent(
+		{
+			component: {
+				componentType: 'NEWSLETTER_SUBSCRIPTION',
+				id: componentName,
+			},
+			action: captchaEventDescriptionToOphanAction(eventDescription),
+			value: JSON.stringify(payload),
+		},
+		record,
+	);
 };
