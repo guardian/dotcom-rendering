@@ -6,7 +6,20 @@ export default {
 	title: 'Components/WeatherWidget',
 	args: {
 		edition: 'UK',
-		location: 'Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch',
+		location: {
+			key: '328819',
+			localizedName:
+				'Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch',
+			country: {
+				id: 'GB',
+				localizedName: 'United Kingdom',
+			},
+			administrativeArea: {
+				id: 'GWN',
+				localizedName: 'Gwynedd',
+			},
+			type: 'city',
+		},
 		now: {
 			icon: 1,
 			description: 'Sunny',

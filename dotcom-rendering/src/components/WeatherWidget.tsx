@@ -173,7 +173,19 @@ type ForecastProps = {
 };
 
 export interface WeatherWidgetProps {
-	location: string;
+	location: {
+		key: string;
+		localizedName: string;
+		country: {
+			id: string;
+			localizedName: string;
+		};
+		administrativeArea: {
+			id: string;
+			localizedName: string;
+		};
+		type: string;
+	};
 	now: ForecastProps;
 	forecast: [ForecastProps, ForecastProps, ForecastProps, ForecastProps];
 	edition: FEFrontConfigType['edition'];
@@ -188,9 +200,11 @@ export const WeatherWidget = ({
 	const isUS = edition === 'US';
 	return (
 		<aside css={widgetCSS}>
-			<div css={locationCSS}>{location}</div>
+			<div css={locationCSS}>{location.localizedName}</div>
 
-			<p css={visuallyHiddenCSS}>Today’s weather for {location}:</p>
+			<p css={visuallyHiddenCSS}>
+				Today’s weather for {location.localizedName}:
+			</p>
 
 			{/* Current weather */}
 			<div css={[nowCSS, slotCSS]} className="now">
