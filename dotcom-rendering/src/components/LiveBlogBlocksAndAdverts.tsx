@@ -38,23 +38,30 @@ export const LiveBlogBlocksAndAdverts = ({
 	if (!isInLiveblogAdSlotTest) {
 		return (
 			<>
-				{blocks.map((block) => (
-					<LiveBlock
-						key={block.id}
-						format={format}
-						block={block}
-						pageId={pageId}
-						webTitle={webTitle}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isPinnedPost={false}
-						pinnedPostId={pinnedPost?.id}
-					/>
-				))}
+				{blocks.map((block, i) => {
+					const lastBlockIsPinned =
+						i === 0 && pinnedPost?.id === block.id;
+
+					return (
+						<LiveBlock
+							key={block.id}
+							format={format}
+							block={block}
+							pageId={pageId}
+							webTitle={webTitle}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+							switches={switches}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							isPinnedPost={false}
+							pinnedPostId={
+								lastBlockIsPinned ? undefined : pinnedPost?.id
+							}
+						/>
+					);
+				})}
 			</>
 		);
 	}
@@ -82,6 +89,9 @@ export const LiveBlogBlocksAndAdverts = ({
 					numPixelsOfContentWithoutAdvert = 0;
 				}
 
+				const lastBlockIsPinned =
+					i === 0 && pinnedPost?.id === block.id;
+
 				return (
 					<>
 						<LiveBlock
@@ -97,7 +107,9 @@ export const LiveBlogBlocksAndAdverts = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
+							pinnedPostId={
+								lastBlockIsPinned ? undefined : pinnedPost?.id
+							}
 						/>
 						{willDisplayAdAfterBlock && (
 							<AdSlot

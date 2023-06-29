@@ -86,7 +86,6 @@ export const LiveBlogRenderer = ({
 								block={pinnedPost}
 								pageId={pageId}
 								webTitle={webTitle}
-								adTargeting={adTargeting}
 								host={host}
 								ajaxUrl={ajaxUrl}
 								isLiveUpdate={isLiveUpdate}
