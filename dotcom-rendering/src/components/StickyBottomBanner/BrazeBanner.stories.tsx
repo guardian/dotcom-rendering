@@ -71,6 +71,7 @@ export const BrazeBannerComponent = (
 
 BrazeBannerComponent.args = {
 	slotName: 'Banner',
+	componentName: 'BannerWithLink',
 	header: 'The Guardian’s impact in 2021',
 	body: 'Thanks to your generous support in this extraordinary year, our open, independent journalism was read by millions. From the pandemic to our urgent coverage of the climate crisis, our reporting had a powerful impact.',
 	imageUrl:
@@ -80,7 +81,6 @@ BrazeBannerComponent.args = {
 		'https://www.theguardian.com/info/ng-interactive/2020/dec/21/the-guardian-in-2020?INTCMP=gdnwb_mrtn_banner_edtrl_MK_SU_WorkingReport2020Canvas',
 	boldText:
 		'Read our look-back to see how Guardian journalism made a difference.',
-	componentName: 'BannerWithLink',
 	ophanComponentId: 'change_me_ophan_component_id',
 };
 
@@ -139,9 +139,9 @@ export const BrazeAppBannerComponent = (
 
 BrazeAppBannerComponent.args = {
 	slotName: 'Banner',
+	componentName: 'AppBanner',
 	header: 'A note to our digital subscribers',
 	body: 'Hi John, did you know that as a Guardian digital subscriber you can enjoy an enhanced experience of our quality, independent journalism on all your devices, including The Guardian Live app.',
-	componentName: 'AppBanner',
 	cta: 'Search for "Guardian live news"',
 	imageUrl:
 		'https://i.guim.co.uk/img/media/de6813b4dd9b9805a2d14dd6af14ae2b48e2e19e/0_0_930_520/master/930.png?quality=45&width=930&s=0beb53509265d32e3d201aa3981323bb',
@@ -233,7 +233,7 @@ export const BrazeStyleableBannerComponent = (
 		import('@guardian/braze-components')
 			.then((module) => {
 				console.log(module);
-				setBrazeMessage(() => module.BrazeStyleableBannerComponent);
+				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
 				console.error(
@@ -288,6 +288,8 @@ export const BrazeStyleableBannerComponent = (
 
 BrazeStyleableBannerComponent.args = {
 	slotName: 'Banner',
+	componentName: 'StyleableBannerWithLink',
+	ophanComponentId: 'change_me_ophan_component_id',
 	styleBackground: 'rgb(237, 237, 237)',
 	header: 'The Guardian’s impact in 2021',
 	styleHeader: 'rgb(51, 51, 51)',
@@ -306,8 +308,6 @@ BrazeStyleableBannerComponent.args = {
 	imageAltText: 'Accessible image description',
 	imagePosition: 'bottom',
 	styleCloseButton: 'rgb(5, 41, 98)',
-	componentName: 'StyleableBannerWithLink',
-	ophanComponentId: 'change_me_ophan_component_id',
 	imageUrl:
 		'https://i.guim.co.uk/img/media/35d403182e4b262d37385281b19b763ee6b32f6a/58_0_1743_1046/master/1743.png?width=930&quality=45&auto=format&s=9ecd82413fef9883c1e7a0df2bf6abb1',
 };
