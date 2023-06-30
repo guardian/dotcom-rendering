@@ -270,6 +270,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
 				id="maincontent"
+				css={hasPageSkin && pageSkinContainer}
 			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
