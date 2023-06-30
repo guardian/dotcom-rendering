@@ -80,7 +80,7 @@ export const YoutubeBlockComponent = ({
 	format,
 	hideCaption,
 	overrideImage,
-	posterImage,
+	posterImage = [],
 	expired,
 	role,
 	isMainMedia,
@@ -202,7 +202,7 @@ export const YoutubeBlockComponent = ({
 						: undefined
 				}
 				posterImage={
-					posterImage
+					posterImage.length > 0
 						? [
 								{
 									srcSet: posterImage.map((img) => ({
