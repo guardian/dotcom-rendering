@@ -40,24 +40,17 @@ const columnStyle = css`
 	}
 
 	${from.desktop} {
-		width: 134px;
+		width: 135px;
 		float: left;
 		position: relative;
 
 		:after {
 			content: none;
 		}
-
-		:first-of-type {
-			width: 123px;
-		}
 	}
-	${from.leftCol} {
-		width: 160px;
 
-		:first-of-type {
-			width: 150px;
-		}
+	${from.leftCol} {
+		width: 145px;
 	}
 `;
 
