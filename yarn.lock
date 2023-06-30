@@ -3638,10 +3638,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-foundations@10.0.1":
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-10.0.1.tgz#fe9d5d1bee9dd1b0d3d579d21a99f6051aa47649"
-  integrity sha512-q7FHvQO2JN463SHRjLNKeywW8KUfjoao6oiULoyHssI07saol2rE0W8BdPCeD9337FNztiOxMGOmXWSBUIdYJw==
+"@guardian/source-foundations@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-11.0.0.tgz#4becebdccc209798baa82feedf6ed6de29b21e26"
+  integrity sha512-/893dgVhsWV6Tfe23sgk/e8x9B1EoyvcOIjx0ZWE6toU4fjS6IpkBg2eBWYWhZQvWpCX7sj+967wslXCl3/MMg==
   dependencies:
     mini-svg-data-uri "1.4.4"
 
@@ -3657,10 +3657,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-11.0.0.tgz#6fe57d6f5fda751e311df70ed0e7735cd8342316"
   integrity sha512-KNC+IZfufZI0L6sBEvsdzYa1HLkuV3stZ8Ty+wSHKjN22nxON2Yzvrkf9gw4LKNCAWuaLVkSPzritfs87zdWuQ==
 
-"@guardian/source-react-components@13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-13.0.0.tgz#11157b8b7615b371a6f6ab96d2efdfe5a20c6ea2"
-  integrity sha512-mhWHSUSCr8PjkajzsQs0yMFch1h9BONTlgV96T+niPkrtqn+xWvkQJeaBsN/X/QLSqweBLCjo6yvPdGxgJgaWw==
+"@guardian/source-react-components@14.0.2":
+  version "14.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-14.0.2.tgz#00656908aadf8b2d2b01328f5c01753271693fbe"
+  integrity sha512-rWAyOwyCwdNhJdjOMZzw5hgDGtxC6xO+0fo6+r2k8ZhAgYAR+7YkSS26QF68SRLU3CN4YsJ2pDZAmJiJrBPAnw==
 
 "@guardian/support-dotcom-components@1.0.7", "@guardian/support-dotcom-components@^1.0.7":
   version "1.0.7"
