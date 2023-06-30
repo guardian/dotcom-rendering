@@ -88,19 +88,6 @@ export type Props = {
 	showLivePlayable?: boolean;
 };
 
-const getMediaType = (
-	design: ArticleDesign.Gallery | ArticleDesign.Audio | ArticleDesign.Video,
-) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-			return 'Gallery';
-		case ArticleDesign.Audio:
-			return 'Audio';
-		case ArticleDesign.Video:
-			return 'Video';
-	}
-};
-
 const StarRatingComponent = ({
 	rating,
 	cardHasImage,
@@ -241,20 +228,6 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
-/**
- * This function contains the business logic that determines whether the article contains a
- * playable main media. It is used to determine which iconography should be displayed on the card.
- *
- */
-const decidePlayableMainMedia = (
-	showMainVideo: boolean | undefined,
-	design: ArticleDesign,
-) => {
-	if (showMainVideo) return true;
-	if (design === ArticleDesign.Video) return true;
-	return false;
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -272,6 +245,7 @@ export const Card = ({
 	trailText,
 	avatarUrl,
 	showClock,
+	mediaType,
 	mediaDuration,
 	showMainVideo,
 	kickerText,
@@ -374,10 +348,7 @@ export const Card = ({
 		);
 	}
 
-	const isPlayableMainMedia = decidePlayableMainMedia(
-		showMainVideo,
-		format.design,
-	);
+	const isPlayableMainMedia = !!showMainVideo || mediaType === 'Video';
 
 	const image = getImage({
 		imageUrl,
@@ -495,16 +466,15 @@ export const Card = ({
 								cardHasImage={imageUrl !== undefined}
 							/>
 						) : null}
-						{format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ? (
+						{mediaType && mediaType !== 'Video' && (
 							<MediaMeta
 								containerPalette={containerPalette}
 								format={format}
-								mediaType={getMediaType(format.design)}
+								mediaType={mediaType}
 								mediaDuration={mediaDuration}
 								hasKicker={!!kickerText}
 							/>
-						) : undefined}
+						)}
 					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
