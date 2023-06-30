@@ -6,7 +6,7 @@ export default { component: Timestamp, title: 'Timestamp' };
 
 export const TwoMonths = () => (
 	<Timestamp
-		isoDateTime={'2020-01-26T14:22:39Z'}
+		isoDateTime={'2021-10-31T14:22:39Z'}
 		webUrl=""
 		commentId={123}
 		onPermalinkClick={() => {}}
@@ -16,7 +16,7 @@ TwoMonths.storyName = 'Two months';
 
 export const OneHour = () => (
 	<Timestamp
-		isoDateTime={'2020-03-27T11:00:00Z'}
+		isoDateTime={'2022-01-01T11:00:00Z'}
 		webUrl=""
 		commentId={123}
 		onPermalinkClick={() => {}}
@@ -26,7 +26,7 @@ OneHour.storyName = 'One Hour';
 
 export const TwentyThreeHours = () => (
 	<Timestamp
-		isoDateTime={'2020-03-26T13:00:00Z'}
+		isoDateTime={'2021-12-31T13:00:00Z'}
 		webUrl=""
 		commentId={123}
 		onPermalinkClick={() => {}}
@@ -36,7 +36,7 @@ TwentyThreeHours.storyName = 'Twenty three hours';
 
 export const TwentyFiveHours = () => (
 	<Timestamp
-		isoDateTime={'2020-03-26T11:00:00Z'}
+		isoDateTime={'2021-12-31T11:00:00Z'}
 		webUrl=""
 		commentId={123}
 		onPermalinkClick={() => {}}
