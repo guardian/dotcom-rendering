@@ -180,7 +180,7 @@ const CommentFooter = ({
 	);
 };
 
-const getImage = ({
+const getMedia = ({
 	imageUrl,
 	avatarUrl,
 	isCrossword,
@@ -190,18 +190,12 @@ const getImage = ({
 	avatarUrl?: string;
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
-}):
-	| {
-			type: CardImageType;
-			src: string;
-			slideshowImages?: DCRSlideshowImage[];
-	  }
-	| undefined => {
-	if (slideshowImages) return { type: 'slideshow', src: '', slideshowImages };
-	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
+}) => {
+	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
+	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'mainMedia';
-		return { type, src: imageUrl };
+		return { type, imageUrl } as const;
 	}
 	return undefined;
 };
@@ -350,7 +344,7 @@ export const Card = ({
 
 	const isPlayableMainMedia = !!showMainVideo || mediaType === 'Video';
 
-	const image = getImage({
+	const media = getMedia({
 		imageUrl,
 		avatarUrl,
 		isCrossword,
@@ -373,45 +367,44 @@ export const Card = ({
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				imageType={image?.type}
+				imageType={media?.type}
 			>
-				{image && (
+				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
-						imageType={image.type}
+						imageType={media.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 						showPlayIcon={isPlayableMainMedia}
 					>
-						{image.type === 'slideshow' &&
-							image.slideshowImages && (
-								<Slideshow
-									images={image.slideshowImages}
-									imageSize={imageSize}
-								/>
-							)}
-						{image.type === 'avatar' && (
+						{media.type === 'slideshow' && (
+							<Slideshow
+								images={media.slideshowImages}
+								imageSize={imageSize}
+							/>
+						)}
+						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePosition={imagePosition}
 							>
 								<Avatar
-									src={image.src}
+									src={media.avatarUrl}
 									alt={byline ?? ''}
 									containerPalette={containerPalette}
 									format={format}
 								/>
 							</AvatarContainer>
 						)}
-						{image.type === 'mainMedia' && (
+						{media.type === 'mainMedia' && (
 							<CardPicture
-								master={image.src}
+								master={media.imageUrl}
 								imageSize={imageSize}
 								alt=""
 							/>
 						)}
-						{image.type === 'crossword' && (
-							<img src={image.src} alt="" />
+						{media.type === 'crossword' && (
+							<img src={media.imageUrl} alt="" />
 						)}
 
 						{isPlayableMainMedia &&
@@ -428,7 +421,7 @@ export const Card = ({
 					</ImageWrapper>
 				)}
 				<ContentWrapper
-					imageType={image?.type}
+					imageType={media?.type}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
@@ -484,7 +477,7 @@ export const Card = ({
 								format={format}
 								imagePosition={imagePosition}
 								imageSize={imageSize}
-								imageType={image?.type}
+								imageType={media?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
