@@ -14,8 +14,8 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { LightboxHash } from './LightboxHash.importable';
-import { LightboxHtml } from './LightboxHtml';
 import { LightboxJavascript } from './LightboxJavascript.importable';
+import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -61,15 +61,15 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{article.imagesForLightbox && (
 				<>
-					<LightboxHtml
-						format={format}
-						images={article.imagesForLightbox}
-					/>
+					<LightboxLayout images={article.imagesForLightbox} />
 					<Island clientOnly={true}>
 						<LightboxHash />
 					</Island>
 					<Island clientOnly={true} deferUntil="hash">
-						<LightboxJavascript />
+						<LightboxJavascript
+							format={format}
+							images={article.imagesForLightbox}
+						/>
 					</Island>
 				</>
 			)}

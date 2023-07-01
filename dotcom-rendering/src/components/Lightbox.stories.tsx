@@ -6,8 +6,13 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { useEffect } from 'react';
-import type { ImageBlockElement } from '../types/content';
-import { LightboxHtml } from './LightboxHtml';
+import ReactDOM from 'react-dom';
+import type {
+	EnhancedImageForLightbox,
+	ImageBlockElement,
+} from '../types/content';
+import { LightboxImages } from './LightboxImages';
+import { LightboxLayout } from './LightboxLayout';
 
 const testImage: ImageBlockElement = {
 	role: 'immersive',
@@ -48,8 +53,8 @@ const testImage: ImageBlockElement = {
 };
 
 export default {
-	component: LightboxHtml,
-	title: 'Components/LightboxHtml',
+	component: LightboxLayout,
+	title: 'Components/LightboxLayout',
 	parameters: {
 		chromatic: {
 			viewports: [breakpoints.mobile, breakpoints.desktop],
@@ -79,9 +84,13 @@ function hideInfo() {
 const Initialise = ({
 	children,
 	shouldShowInfo = true,
+	format,
+	images,
 }: {
 	children: React.ReactNode;
 	shouldShowInfo?: boolean;
+	format: ArticleFormat;
+	images: EnhancedImageForLightbox[];
 }) => {
 	useEffect(() => {
 		showLightbox();
@@ -90,282 +99,274 @@ const Initialise = ({
 		} else {
 			hideInfo();
 		}
-	}, [shouldShowInfo]);
+		const imageRoot = document.querySelector('ul#lightbox-images');
+		if (!imageRoot) return;
+		ReactDOM.render(
+			<LightboxImages format={format} images={images} />,
+			imageRoot,
+		);
+	}, [format, images, shouldShowInfo]);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
 };
 
 export const Default = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [{ ...testImage }];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[{ ...testImage }]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithTitle = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [{ ...testImage, title: 'Title' }];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[{ ...testImage, title: 'Title' }]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithCredit = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [{ ...testImage, displayCredit: true }];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[{ ...testImage, displayCredit: true }]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithRating = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [{ ...testImage, starRating: 3 }];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[{ ...testImage, starRating: 3 }]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WhenLiveBlog = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.LiveBlog,
+		theme: ArticlePillar.News,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+			firstPublished: 1643816168535,
+			blockId: 'mockId',
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.LiveBlog,
-					theme: ArticlePillar.News,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-						firstPublished: 1643816168535,
-						blockId: 'mockId',
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithEverything = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithoutCaption = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	};
+	const images = [{ ...testImage }];
 	return (
-		<Initialise shouldShowInfo={false}>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				images={[{ ...testImage }]}
-			/>
+		<Initialise shouldShowInfo={false} format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithSport = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.Sport,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Sport,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithCulture = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.Culture,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Culture,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithLifestyle = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.Lifestyle,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Lifestyle,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithOpinion = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.Opinion,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Opinion,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithSpecialReport = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReport,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.SpecialReport,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithSpecialReportAlt = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.SpecialReportAlt,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };
 
 export const WithLabs = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.Labs,
+	};
+	const images = [
+		{
+			...testImage,
+			starRating: 3,
+			title: 'Title',
+			displayCredit: true,
+		},
+	];
 	return (
-		<Initialise>
-			<LightboxHtml
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.Labs,
-				}}
-				images={[
-					{
-						...testImage,
-						starRating: 3,
-						title: 'Title',
-						displayCredit: true,
-					},
-				]}
-			/>
+		<Initialise format={format} images={images}>
+			<LightboxLayout images={images} />
 		</Initialise>
 	);
 };

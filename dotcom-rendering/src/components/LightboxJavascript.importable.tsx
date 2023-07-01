@@ -1,7 +1,10 @@
 import { log, storage } from '@guardian/libs';
 import libDebounce from 'lodash.debounce';
 import { useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import screenfull from 'screenfull';
+import type { EnhancedImageForLightbox } from '../types/content';
+import { LightboxImages } from './LightboxImages';
 
 /**
  * 💡 Lightbox
@@ -461,19 +464,30 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	lightbox.setAttribute('data-gu-ready', 'true');
 }
 
-export const LightboxJavascript = () => {
+export const LightboxJavascript = ({
+	format,
+	images,
+}: {
+	format: ArticleFormat;
+	images: EnhancedImageForLightbox[];
+}) => {
+	const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 	useEffect(() => {
 		/**
 		 * We only want to initialise the lightbox once so we check to see if it is already marked as ready
 		 */
-		const lightbox = document.querySelector<HTMLElement>('#gu-lightbox');
 		if (!lightbox) return;
 		if (lightbox.dataset.guReady) {
 			log('dotcom', '💡 Lightbox already initialised, skipping');
 			return;
 		}
 		initialiseLightbox(lightbox);
-	}, []);
+	}, [lightbox]);
 
-	return null;
+	const imageRoot = lightbox?.querySelector('ul#lightbox-images');
+	if (!imageRoot) return null;
+	return ReactDOM.createPortal(
+		<LightboxImages format={format} images={images} />,
+		imageRoot,
+	);
 };
