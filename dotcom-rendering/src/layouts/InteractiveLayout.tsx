@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
@@ -47,7 +47,6 @@ import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -314,10 +313,14 @@ export const InteractiveLayout = ({
 				>
 					<Nav
 						nav={NAV}
-						format={{
-							...format,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={NAV.selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -645,10 +648,7 @@ export const InteractiveLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>
@@ -713,7 +713,7 @@ export const InteractiveLayout = ({
 						data-link-name="most-popular"
 						data-component="most-popular"
 					>
-						<MostViewedFooterLayout>
+						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionName={article.sectionName}
@@ -773,7 +773,7 @@ export const InteractiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

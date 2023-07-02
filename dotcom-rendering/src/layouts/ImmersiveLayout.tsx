@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
@@ -50,7 +50,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEElement } from '../types/content';
@@ -357,10 +356,14 @@ export const ImmersiveLayout = ({
 					element="nav"
 				>
 					<Nav
-						format={{
-							...format,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={NAV.selectedPillar}
 						nav={NAV}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.contribute
@@ -782,10 +785,7 @@ export const ImmersiveLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>
@@ -848,7 +848,7 @@ export const ImmersiveLayout = ({
 						data-link-name="most-popular"
 						data-component="most-popular"
 					>
-						<MostViewedFooterLayout>
+						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionName={article.sectionName}
@@ -900,7 +900,7 @@ export const ImmersiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

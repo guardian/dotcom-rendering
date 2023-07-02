@@ -19,7 +19,8 @@ deployments:
           InstanceType: t4g.small
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering-ARM-jammy-node-18
+          # Keep the Node version in sync with `.nvmrc`
+          Recipe: dotcom-rendering-ARM-jammy-node-18.16.1
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:

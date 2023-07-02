@@ -599,10 +599,10 @@ interface WitnessTypeDataText extends WitnessTypeDataBase {
 
 export interface WitnessAssetType {
 	type: 'Image';
-	mimeType: 'image/jpeg';
-	file: string;
-	typeData: {
-		name: string;
+	mimeType?: string;
+	file?: string;
+	typeData?: {
+		name?: string;
 	};
 }
 interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {

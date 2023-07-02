@@ -136,10 +136,22 @@ const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
 	}
 };
 
-const decideKicker = (trail: FEFrontCard) => {
-	return trail.properties.isBreaking
-		? 'Breaking news'
-		: trail.header.kicker?.item?.properties.kickerText;
+const decideKicker = (
+	trail: FEFrontCard,
+	cardInTagFront: boolean,
+	pageId?: string,
+) => {
+	if (trail.properties.isBreaking) {
+		return 'Breaking news';
+	}
+
+	if (cardInTagFront) {
+		return pageId && !pageId.includes('/series')
+			? trail.header.seriesOrBlogKicker?.name
+			: undefined;
+	}
+
+	return trail.header.kicker?.item?.properties.kickerText;
 };
 
 const decideSlideshowImages = (
@@ -180,13 +192,17 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	{
+		cardInTagFront,
 		offset = 0,
 		editionId,
 		containerPalette,
+		pageId,
 	}: {
+		cardInTagFront: boolean;
 		offset?: number;
 		editionId?: EditionId;
 		containerPalette?: DCRContainerPalette;
+		pageId?: string;
 	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
@@ -242,7 +258,7 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			image: decideImage(faciaCard),
-			kickerText: decideKicker(faciaCard),
+			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,

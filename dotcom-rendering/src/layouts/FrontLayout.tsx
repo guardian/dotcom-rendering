@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -32,6 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
@@ -207,14 +208,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					>
 						<Nav
 							nav={NAV}
-							format={{
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-								theme: ArticlePillar.News,
-							}}
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
+							selectedPillar={NAV.selectedPillar}
 							editionId={front.editionId}
 							headerTopBarSwitch={
 								!!front.config.switches.headerTopNav
@@ -226,7 +223,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<>
 							<Section
 								fullWidth={true}
-								showTopBorder={false}
 								padSides={false}
 								element="aside"
 								hasPageSkin={hasPageSkin}
@@ -274,6 +270,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
 				id="maincontent"
+				css={hasPageSkin && pageSkinContainer}
 			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -356,7 +353,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							: undefined;
 						return (
 							<>
-								<Section
+								<FrontSection
+									toggleable={true}
 									key={ophanName}
 									title={
 										showMostPopular
@@ -364,8 +362,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											: 'Most viewed'
 									}
 									showTopBorder={index > 0}
-									padContent={false}
-									verticalMargins={false}
 									url={collection.href}
 									ophanComponentLink={ophanComponentLink}
 									ophanComponentName={
@@ -384,7 +380,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									editionId={front.editionId}
 									treats={collection.treats}
 									data-print-layout="hide"
-									element="aside"
 									hasPageSkin={hasPageSkin}
 								>
 									<FrontMostViewed
@@ -397,8 +392,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										deeplyRead={deeplyReadData}
 										editionId={front.editionId}
 										hasPageSkin={hasPageSkin}
+										isFront={true}
+										renderAds={renderAds}
 									/>
-								</Section>
+								</FrontSection>
 								{decideAdSlot(
 									renderAds,
 									index,
@@ -448,7 +445,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					if (collection.collectionType === 'fixed/video') {
+					if (
+						collection.collectionType === 'fixed/video' ||
+						collection.containerPalette === 'PodcastPalette'
+					) {
+						const containerPalette =
+							collection.containerPalette ?? 'MediaPalette';
+						const containerOverrides =
+							decideContainerOverrides(containerPalette);
 						return (
 							<Section
 								key={ophanName}
@@ -459,15 +463,23 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerName={collection.collectionType}
 								fullWidth={true}
 								padBottom={true}
-								showSideBorders={true}
+								showSideBorders={
+									collection.collectionType !== 'fixed/video'
+								}
 								showTopBorder={index > 0}
 								padContent={false}
 								url={collection.href}
-								containerPalette={collection.containerPalette}
+								containerPalette={containerPalette}
 								showDateHeader={
 									collection.config.showDateHeader
 								}
 								editionId={front.editionId}
+								backgroundColour={
+									containerOverrides.background.containerOuter
+								}
+								innerBackgroundColour={
+									containerOverrides.background.container
+								}
 								hasPageSkin={hasPageSkin}
 							>
 								<Island deferUntil={'visible'}>
@@ -475,9 +487,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										heading={collection.displayName}
 										trails={trails}
 										onwardsSource={'unknown-source'}
-										titleHighlightColour={neutral[7]}
-										activeDotColour={neutral[7]}
+										palette={containerPalette}
 										leftColSize={'compact'}
+										collectionType={
+											collection.collectionType
+										}
 									/>
 								</Island>
 							</Section>
@@ -583,7 +597,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
-					showTopBorder={hasPageSkin ? true : false}
+					showTopBorder={hasPageSkin}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -614,7 +628,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			>
 				<Footer
 					pageFooter={front.pageFooter}
-					pillar={ArticlePillar.News}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}

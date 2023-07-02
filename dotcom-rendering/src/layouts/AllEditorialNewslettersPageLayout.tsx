@@ -16,7 +16,6 @@ import { Nav } from '../components/Nav/Nav';
 import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
-import { decideFormat } from '../lib/decideFormat';
 import type { NavType } from '../model/extract-nav';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
 import { Stuck } from './lib/stickiness';
@@ -38,9 +37,6 @@ export const AllEditorialNewslettersPageLayout = ({
 		config,
 		isAdFreeUser,
 	} = newslettersPage;
-
-	// TO DO - there should not be a format for this page - not an article
-	const articleFormat: ArticleFormat = decideFormat({});
 
 	const renderAds = !isAdFreeUser;
 
@@ -113,7 +109,6 @@ export const AllEditorialNewslettersPageLayout = ({
 						<Nav
 							headerTopBarSwitch={false}
 							nav={NAV}
-							format={articleFormat}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}
 							isInEuropeTest={isInEuropeTest}
@@ -182,7 +177,6 @@ export const AllEditorialNewslettersPageLayout = ({
 			>
 				<Footer
 					pageFooter={pageFooter}
-					pillar={articleFormat.theme}
 					pillars={NAV.pillars}
 					urls={NAV.readerRevenueLinks.header}
 					editionId={editionId}

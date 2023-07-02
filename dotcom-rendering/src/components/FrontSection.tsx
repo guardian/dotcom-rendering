@@ -15,10 +15,12 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from '../types/badge';
 import type { DCRContainerPalette, TreatType } from '../types/front';
+import type { DCRFrontPagination } from '../types/tagFront';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
 import { Badge } from './Badge';
 import { ContainerTitle } from './ContainerTitle';
+import { FrontPagination } from './FrontPagination';
 import { Island } from './Island';
 import { ShowHideButton } from './ShowHideButton';
 import { ShowMore } from './ShowMore.importable';
@@ -69,6 +71,9 @@ type Props = {
 	/** Enable the "Show More" button on this container to allow readers to load more cards */
 	canShowMore?: boolean;
 	ajaxUrl?: string;
+	/** Puts pagination at the bottom of the container allowing the user to navigate to other pages,
+	 * usually used on the last container on a page */
+	pagination?: DCRFrontPagination;
 	/** Does this front section reside on a "paid for" content front */
 	isOnPaidContentFront?: boolean;
 	/** Denotes the position of this section on the front */
@@ -122,8 +127,8 @@ const containerStylesUntilLeftCol = css`
 	grid-template-rows:
 		[headline-start show-hide-start] auto
 		[show-hide-end headline-end content-toggleable-start content-start] auto
-		[content-end content-toggleable-end show-more-start] auto
-		[show-more-end];
+		[content-end content-toggleable-end bottom-content-start] auto
+		[bottom-content-end];
 
 	grid-template-columns:
 		[decoration-start]
@@ -171,8 +176,8 @@ const containerStylesFromLeftCol = css`
 			[headline-start show-hide-start content-start] auto
 			[show-hide-end content-toggleable-start] auto
 			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
-			[show-more-end];
+			[content-end content-toggleable-end treats-end bottom-content-start] auto
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -191,8 +196,8 @@ const containerStylesFromLeftCol = css`
 			[headline-start content-start content-toggleable-start show-hide-start] auto
 			[show-hide-end] auto
 			[headline-end treats-start] auto
-			[content-end content-toggleable-end treats-end show-more-start] auto
-			[show-more-end];
+			[content-end content-toggleable-end treats-end bottom-content-start] auto
+			[bottom-content-end];
 
 		grid-template-columns:
 			minmax(0, 1fr)
@@ -261,8 +266,8 @@ const sectionContentPadded = css`
 	}
 `;
 
-const sectionShowMore = css`
-	grid-row: show-more;
+const sectionBottomContent = css`
+	grid-row: bottom-content;
 	grid-column: content;
 `;
 
@@ -434,6 +439,7 @@ export const FrontSection = ({
 	badge,
 	canShowMore,
 	ajaxUrl,
+	pagination,
 	isOnPaidContentFront,
 	index,
 	targetedTerritory,
@@ -589,7 +595,13 @@ export const FrontSection = ({
 				{children}
 			</div>
 
-			<div css={[sectionContentPadded, sectionShowMore, bottomPadding]}>
+			<div
+				css={[
+					sectionContentPadded,
+					sectionBottomContent,
+					bottomPadding,
+				]}
+			>
 				{isString(targetedTerritory) &&
 				isAustralianTerritory(targetedTerritory) ? (
 					<Island deferUntil="interaction">
@@ -611,6 +623,15 @@ export const FrontSection = ({
 						/>
 					</Island>
 				) : null}
+				{pagination && (
+					<FrontPagination
+						sectionName={pagination.sectionName}
+						totalContent={pagination.totalContent}
+						currentPage={pagination.currentPage}
+						lastPage={pagination.lastPage}
+						pageId={pagination.pageId}
+					/>
+				)}
 			</div>
 
 			{treats && !hasPageSkin && (

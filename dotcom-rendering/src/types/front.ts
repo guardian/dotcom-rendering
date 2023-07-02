@@ -78,6 +78,7 @@ type FEContainerType =
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'fixed/video'
+	| 'fixed/video/vertical'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular';
@@ -125,7 +126,9 @@ export type DCRContainerPalette =
 	| 'SombrePalette'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| 'Branded';
+	| 'Branded'
+	| 'MediaPalette'
+	| 'PodcastPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -385,7 +388,7 @@ export type DCRGroupedTrails = {
 	standard: DCRFrontCard[];
 };
 
-type FEFrontConfigType = {
+export type FEFrontConfigType = {
 	avatarApiUrl: string;
 	externalEmbedHost: string;
 	ajaxUrl: string;

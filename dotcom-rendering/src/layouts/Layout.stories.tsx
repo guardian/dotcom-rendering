@@ -25,6 +25,7 @@ import { embedIframe } from '../client/embedIframe';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { extractNAV } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
@@ -66,7 +67,10 @@ const HydratedLayout = ({
 	serverArticle: FEArticleType;
 	renderingTarget: RenderingTarget;
 }) => {
-	const NAV = extractNAV(serverArticle.nav);
+	const NAV = {
+		...extractNAV(serverArticle.nav),
+		selectedPillar: getCurrentPillar(serverArticle),
+	};
 	const format: ArticleFormat = decideFormat(serverArticle.format);
 	useEffect(() => {
 		embedIframe().catch((e) =>

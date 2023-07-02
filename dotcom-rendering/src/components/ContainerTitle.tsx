@@ -43,7 +43,7 @@ const headerStylesWithUrl = css`
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
-	${body.xsmall({ fontWeight: 'medium' })};
+	${body.medium({ fontWeight: 'medium', lineHeight: 'tight' })};
 	color: ${fontColour ?? neutral[46]};
 	p {
 		/* Handle paragraphs in the description */

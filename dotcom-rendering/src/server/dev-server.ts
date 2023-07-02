@@ -9,12 +9,19 @@ import {
 	handleInteractive,
 	handleKeyEvents,
 } from '../server/index.article.web';
-import { handleFront, handleFrontJson } from '../server/index.front.web';
+import {
+	handleFront,
+	handleFrontJson,
+	handleTagFront,
+	handleTagFrontJson,
+} from '../server/index.front.web';
 
 /** article URLs contain a part that looks like “2022/nov/25” */
 const ARTICLE_URL = /\/\d{4}\/[a-z]{3}\/\d{2}\//;
 /** fronts are a series of lowercase strings, dashes and forward slashes */
 const FRONT_URL = /^\/[a-z-/]+/;
+/** This is imperfect, but covers *some* cases of tag fronts, consider expanding in the future */
+const TAG_FRONT_URL = /^\/(tone|series|profile)\/[a-z-]+/;
 /** assets are paths like /assets/index.xxx.js */
 const ASSETS_URL = /^assets\/.+\.js/;
 
@@ -49,6 +56,10 @@ export const devServer = (): Handler => {
 				return handleFront(req, res, next);
 			case 'FrontJSON':
 				return handleFrontJson(req, res, next);
+			case 'TagFront':
+				return handleTagFront(req, res, next);
+			case 'TagFrontJSON':
+				return handleTagFrontJson(req, res, next);
 			case 'EmailNewsletters':
 				return handleAllEditorialNewslettersPage(req, res, next);
 			case 'AppsArticle':
@@ -64,6 +75,15 @@ export const devServer = (): Handler => {
 					).toString();
 					console.info('redirecting to Article:', url);
 					return res.redirect(`/Article/${url}`);
+				}
+
+				if (req.url.match(TAG_FRONT_URL)) {
+					const url = new URL(
+						req.url,
+						'https://www.theguardian.com/',
+					).toString();
+					console.info('redirecting to Tag front:', url);
+					return res.redirect(`/TagFront/${url}`);
 				}
 
 				if (req.url.match(FRONT_URL)) {

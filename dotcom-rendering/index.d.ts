@@ -307,10 +307,6 @@ interface FEKeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
-
 type CardImageType = 'mainMedia' | 'avatar' | 'crossword' | 'slideshow';
 
 type SmallHeadlineSize =
@@ -322,8 +318,6 @@ type SmallHeadlineSize =
 	| 'ginormous';
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
-
-type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 

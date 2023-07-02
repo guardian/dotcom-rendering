@@ -314,6 +314,29 @@ export const getFallbackSource = (sources: ImageSource[]): ImageSource => {
 	return fallback;
 };
 
+export const Sources = ({ sources }: { sources: ImageSource[] }) => {
+	return (
+		<>
+			{sources.map((source) => {
+				return (
+					<React.Fragment key={source.breakpoint}>
+						{/* High resolution (HDPI) sources*/}
+						<source
+							srcSet={source.hiResUrl}
+							media={`(min-width: ${source.breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.breakpoint}px) and (min-resolution: 120dpi)`}
+						/>
+						{/* Low resolution (MDPI) source*/}
+						<source
+							srcSet={source.lowResUrl}
+							media={`(min-width: ${source.breakpoint}px)`}
+						/>
+					</React.Fragment>
+				);
+			})}
+		</>
+	);
+};
+
 export const Picture = ({
 	role,
 	format,
@@ -337,7 +360,25 @@ export const Picture = ({
 		}),
 	);
 
+	/** portrait if higher than 1 or landscape if lower than 1 */
 	const ratio = parseInt(height, 10) / parseInt(width, 10);
+
+	/**
+	 * Immersive MainMedia elements fill the height of the viewport, meaning on mobile
+	 * devices even though the viewport width is small, we'll need a larger image to
+	 * maintain quality. To solve this problem we're using the viewport height (vh) to
+	 * calculate width on portrait devices.
+
+	 * If either of these media queries match then the browser will choose an image from the
+	 * list of sources in srcset based on the viewport list. If the media query doesn't match
+	 * it continues checking using the standard sources underneath
+	 */
+	const sizes =
+		ratio >= 1
+			? // portrait or square
+			  '100vw'
+			: // landscape
+			  `${Math.round(100 / ratio)}vh`;
 
 	const fallbackSource = getFallbackSource(sources);
 
@@ -346,21 +387,10 @@ export const Picture = ({
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
-					{/*
-						Immersive MainMedia elements fill the height of the viewport, meaning on mobile
-						devices even though the viewport width is small, we'll need a larger image to
-						maintain quality. To solve this problem we're using the viewport height (vh) to
-						calculate width. The value of 167vh relates to an assumed image ratio of 5:3
-						which is equal to 167 (viewport height) : 100 (viewport width)
-
-						If either of these media queries match then the browser will choose an image from the
-						list of sources in srcset based on the viewport list. If the media query doesn't match
-						it continues checking using the standard sources underneath
-					*/}
 					{/* High resolution (HDPI) portrait sources*/}
 					<source
 						media="(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)"
-						sizes="167vh"
+						sizes={sizes}
 						srcSet={sources
 							.map(
 								(source) =>
@@ -371,7 +401,7 @@ export const Picture = ({
 					{/* Low resolution (MDPI) portrait sources*/}
 					<source
 						media="(orientation: portrait)"
-						sizes="167vh"
+						sizes={sizes}
 						srcSet={sources
 							.map(
 								(source) =>
@@ -381,23 +411,7 @@ export const Picture = ({
 					/>
 				</>
 			)}
-			{sources.map((source) => {
-				return (
-					<React.Fragment key={source.breakpoint}>
-						{/* High resolution (HDPI) sources*/}
-						<source
-							srcSet={source.hiResUrl}
-							media={`(min-width: ${source.breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${source.breakpoint}px) and (min-resolution: 120dpi)`}
-						/>
-						{/* Low resolution (MDPI) source*/}
-						<source
-							srcSet={source.lowResUrl}
-							media={`(min-width: ${source.breakpoint}px)`}
-						/>
-					</React.Fragment>
-				);
-			})}
-
+			<Sources sources={sources} />
 			<img
 				alt={alt}
 				src={fallbackSource.lowResUrl}

@@ -1,13 +1,15 @@
+/* eslint-disable no-console -- logs are useful in scripts */
 const fs = require('fs');
 const path = require('path');
-
-const root = path.resolve(__dirname, '..', '..');
 const {
 	getArticleSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
+	getTagFrontSchema,
 	getBlockSchema,
 } = require('./get-schema');
+
+const root = path.resolve(__dirname, '..', '..');
 
 const existingArticleSchema = fs.readFileSync(
 	`${root}/src/model/article-schema.json`,
@@ -15,6 +17,10 @@ const existingArticleSchema = fs.readFileSync(
 );
 const existingFrontSchema = fs.readFileSync(
 	`${root}/src/model/front-schema.json`,
+	{ encoding: 'utf-8' },
+);
+const existingTagFrontSchema = fs.readFileSync(
+	`${root}/src/model/tag-front-schema.json`,
 	{ encoding: 'utf-8' },
 );
 const existingNewsletterSchema = fs.readFileSync(
@@ -28,12 +34,14 @@ const existingBlockSchema = fs.readFileSync(
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
+const tagFrontSchema = getTagFrontSchema();
 const newsletterSchema = getNewsletterPageSchema();
 const blockSchema = getBlockSchema();
 
 if (
 	existingArticleSchema !== articleSchema ||
 	existingFrontSchema !== frontSchema ||
+	existingTagFrontSchema !== tagFrontSchema ||
 	existingNewsletterSchema !== newsletterSchema ||
 	existingBlockSchema !== blockSchema
 ) {

@@ -11,10 +11,13 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
+import type { DCRContainerPalette } from '../types/front';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -30,8 +33,15 @@ type Props = {
 	url?: string;
 	onwardsSource: OnwardsSource;
 	leftColSize: LeftColSize;
-	activeDotColour: string;
-	titleHighlightColour: string;
+};
+
+type ArticleProps = Props & {
+	format: ArticleFormat;
+};
+
+type FrontProps = Props & {
+	palette: DCRContainerPalette;
+	collectionType?: string;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -224,7 +234,11 @@ const nextButtonContainerStyle = css`
 	right: 10px;
 `;
 
-const buttonStyle = css`
+const buttonStyle = (
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
 	border: 0 none;
 	border-radius: 100%;
 	height: 34px;
@@ -232,12 +246,12 @@ const buttonStyle = css`
 	cursor: pointer;
 	margin-top: 10px;
 	padding: 0;
-	background-color: ${neutral[0]};
+	background-color: ${arrowBackgroundColour ?? neutral[0]};
 
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${brandAlt[400]};
+		background-color: ${arrowBackgroundHoverColour ?? brandAlt[400]};
 		svg {
 			fill: ${neutral[7]};
 		}
@@ -248,41 +262,66 @@ const buttonStyle = css`
 	}
 
 	svg {
-		fill: ${neutral[100]};
+		fill: ${arrowColour ?? neutral[100]};
 		height: 34px;
 	}
 `;
 
-const prevButtonStyle = (index: number) => css`
-	background-color: ${index !== 0 ? neutral[0] : neutral[60]};
+const linkStyles = css`
+	text-decoration: none;
+`;
+
+const headerStylesWithUrl = css`
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
+const prevButtonStyle = (
+	index: number,
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
+	background-color: ${index !== 0
+		? arrowBackgroundColour ?? neutral[0]
+		: neutral[46]};
 	cursor: ${index !== 0 ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${index !== 0 ? brandAlt[400] : neutral[60]};
+		background-color: ${index !== 0
+			? arrowBackgroundHoverColour ?? brandAlt[400]
+			: neutral[46]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${arrowColour ?? neutral[100]};
 		}
 	}
 `;
 
-const nextButtonStyle = (index: number, totalStories: number) => css`
+const nextButtonStyle = (
+	index: number,
+	totalStories: number,
+	arrowColour?: string,
+	arrowBackgroundColour?: string,
+	arrowBackgroundHoverColour?: string,
+) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
 	background-color: ${!isLastCardShowing(index, totalStories)
-		? neutral[0]
-		: neutral[60]};
+		? arrowBackgroundColour ?? neutral[0]
+		: neutral[46]};
 	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
 
 	&:hover,
 	&:focus {
 		background-color: ${!isLastCardShowing(index, totalStories)
-			? brandAlt[400]
-			: neutral[60]};
+			? arrowBackgroundHoverColour ?? brandAlt[400]
+			: neutral[46]};
 
 		svg {
-			fill: ${neutral[100]};
+			fill: ${arrowColour ?? neutral[100]};
 		}
 	}
 `;
@@ -310,32 +349,75 @@ const headerStyles = css`
 `;
 
 const titleStyle = (
+	titleColour: string,
 	titleHighlightColour: string,
 	isCuratedContent?: boolean,
 ) => css`
-	color: ${isCuratedContent ? titleHighlightColour : text.primary};
+	color: ${isCuratedContent ? titleHighlightColour : titleColour};
 	display: inline-block;
 	&::first-letter {
 		text-transform: capitalize;
 	}
 `;
 
+const getDataLinkNameCarouselButton = (
+	direction: string,
+	arrowName: string,
+	collectionType?: string,
+): string => {
+	return `${
+		collectionType && collectionType === 'fixed/video'
+			? 'video-container'
+			: arrowName
+	}-${direction}`;
+};
+
 const Title = ({
 	title,
+	titleColour,
 	titleHighlightColour,
 	isCuratedContent,
 }: {
 	title: string;
+	titleColour: string;
 	titleHighlightColour: string;
 	isCuratedContent?: boolean;
-}) => (
-	<h2 css={headerStyles}>
-		{isCuratedContent ? 'More from ' : ''}
-		<span css={titleStyle(titleHighlightColour, isCuratedContent)}>
-			{title}
-		</span>
-	</h2>
-);
+}) =>
+	title === 'Videos' ? (
+		<a
+			css={[linkStyles]}
+			href="https://www.theguardian.com/video"
+			data-link-name="video-container-title Videos"
+		>
+			<h2 css={headerStyles}>
+				<span
+					css={[
+						headerStylesWithUrl,
+						titleStyle(
+							titleColour,
+							titleHighlightColour,
+							isCuratedContent,
+						),
+					]}
+				>
+					{title}
+				</span>
+			</h2>
+		</a>
+	) : (
+		<h2 css={headerStyles}>
+			{isCuratedContent ? 'More from ' : ''}
+			<span
+				css={titleStyle(
+					titleColour,
+					titleHighlightColour,
+					isCuratedContent,
+				)}
+			>
+				{title}
+			</span>
+		</h2>
+	);
 
 type CarouselCardProps = {
 	isFirst: boolean;
@@ -349,6 +431,9 @@ type CarouselCardProps = {
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
+	showMainVideo?: boolean;
+	mediaDuration?: number;
+	verticalDividerColour?: string;
 };
 
 const CarouselCard = ({
@@ -362,6 +447,9 @@ const CarouselCard = ({
 	dataLinkName,
 	discussionId,
 	branding,
+	showMainVideo,
+	mediaDuration,
+	verticalDividerColour,
 }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
@@ -369,6 +457,7 @@ const CarouselCard = ({
 		padSides={true}
 		padSidesOnMobile={true}
 		snapAlignStart={true}
+		verticalDividerColour={verticalDividerColour}
 	>
 		<Card
 			linkTo={linkTo}
@@ -377,7 +466,7 @@ const CarouselCard = ({
 			webPublicationDate={webPublicationDate}
 			kickerText={kickerText}
 			imageUrl={imageUrl}
-			imageSize={imageUrl ? 'carousel' : undefined}
+			imageSize={'small'}
 			showClock={true}
 			showAge={true}
 			imagePositionOnMobile="top"
@@ -387,6 +476,8 @@ const CarouselCard = ({
 			discussionId={discussionId}
 			branding={branding}
 			isExternalLink={false}
+			showMainVideo={showMainVideo}
+			mediaDuration={mediaDuration}
 		/>
 	</LI>
 );
@@ -394,25 +485,28 @@ const CarouselCard = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
+	titleColour: string;
 	titleHighlightColour: string;
 	activeDotColour: string;
 	index: number;
-	isCuratedContent?: boolean;
 	goToIndex: (newIndex: number) => void;
+	isCuratedContent?: boolean;
 };
 
 const HeaderAndNav = ({
 	heading,
 	trails,
+	titleColour,
 	titleHighlightColour,
 	activeDotColour,
 	index,
-	isCuratedContent,
 	goToIndex,
+	isCuratedContent,
 }: HeaderAndNavProps) => (
 	<div>
 		<Title
 			title={heading}
+			titleColour={titleColour}
 			titleHighlightColour={titleHighlightColour}
 			isCuratedContent={isCuratedContent}
 		/>
@@ -437,6 +531,43 @@ const HeaderAndNav = ({
 	</div>
 );
 
+const decideCarouselColours = (
+	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
+): {
+	titleColour: string;
+	titleHighlightColour: string;
+	borderColour: string;
+	activeDotColour: string;
+	arrowColour: string;
+	arrowBackgroundColour: string;
+	arrowBackgroundHoverColour: string;
+} => {
+	if ('palette' in props) {
+		const containerOverrides = decideContainerOverrides(props.palette);
+		return {
+			titleColour: containerOverrides.text.container,
+			titleHighlightColour: containerOverrides.text.container,
+			borderColour: containerOverrides.border.lines,
+			activeDotColour: containerOverrides.background.carouselDot,
+			arrowColour: containerOverrides.border.carouselArrow,
+			arrowBackgroundColour: containerOverrides.background.carouselArrow,
+			arrowBackgroundHoverColour:
+				containerOverrides.background.carouselArrowHover,
+		};
+	} else {
+		const palette = decidePalette(props.format);
+		return {
+			titleColour: neutral[7],
+			titleHighlightColour: palette.text.carouselTitle,
+			borderColour: neutral[86],
+			activeDotColour: palette.background.carouselDot,
+			arrowColour: neutral[100],
+			arrowBackgroundColour: neutral[0],
+			arrowBackgroundHoverColour: brandAlt[400],
+		};
+	}
+};
+
 /**
  * # Carousel
  *
@@ -456,9 +587,10 @@ export const Carousel = ({
 	trails,
 	onwardsSource,
 	leftColSize,
-	activeDotColour,
-	titleHighlightColour,
-}: Props) => {
+	...props
+}: ArticleProps | FrontProps) => {
+	const carouselColours = decideCarouselColours(props);
+
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -569,14 +701,25 @@ export const Carousel = ({
 		<div
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
+			data-component={
+				'collectionType' in props &&
+				props.collectionType === 'fixed/video'
+					? 'video-playlist'
+					: undefined
+			}
 		>
 			<FetchCommentCounts />
-			<LeftColumn borderType="partial" size={leftColSize}>
+			<LeftColumn
+				borderType="partial"
+				size={leftColSize}
+				borderColour={carouselColours.borderColour}
+			>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
-					activeDotColour={activeDotColour}
-					titleHighlightColour={titleHighlightColour}
+					activeDotColour={carouselColours.activeDotColour}
+					titleColour={carouselColours.titleColour}
+					titleHighlightColour={carouselColours.titleHighlightColour}
 					index={index}
 					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
@@ -592,8 +735,24 @@ export const Carousel = ({
 					type="button"
 					onClick={prev}
 					aria-label="Move carousel backwards"
-					css={[buttonStyle, prevButtonStyle(index)]}
-					data-link-name={`${arrowName}-prev`}
+					css={[
+						buttonStyle(
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+						prevButtonStyle(
+							index,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+					]}
+					data-link-name={getDataLinkNameCarouselButton(
+						heading,
+						'prev',
+						arrowName,
+					)}
 				>
 					<SvgChevronLeftSingle />
 				</button>
@@ -604,8 +763,25 @@ export const Carousel = ({
 					type="button"
 					onClick={next}
 					aria-label="Move carousel forwards"
-					css={[buttonStyle, nextButtonStyle(index, trails.length)]}
-					data-link-name={`${arrowName}-next`}
+					css={[
+						buttonStyle(
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+						nextButtonStyle(
+							index,
+							trails.length,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+					]}
+					data-link-name={getDataLinkNameCarouselButton(
+						heading,
+						'next',
+						arrowName,
+					)}
 				>
 					<SvgChevronRightSingle />
 				</button>
@@ -620,8 +796,11 @@ export const Carousel = ({
 						<HeaderAndNav
 							heading={heading}
 							trails={trails}
-							titleHighlightColour={titleHighlightColour}
-							activeDotColour={activeDotColour}
+							titleHighlightColour={
+								carouselColours.titleHighlightColour
+							}
+							titleColour={carouselColours.titleColour}
+							activeDotColour={carouselColours.activeDotColour}
 							index={index}
 							isCuratedContent={isCuratedContent}
 							goToIndex={goToIndex}
@@ -631,8 +810,24 @@ export const Carousel = ({
 								type="button"
 								onClick={prev}
 								aria-label="Move carousel backwards"
-								css={[buttonStyle, prevButtonStyle(index)]}
-								data-link-name={`${arrowName}-prev`}
+								css={[
+									buttonStyle(
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
+									),
+									prevButtonStyle(
+										index,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
+									),
+								]}
+								data-link-name={getDataLinkNameCarouselButton(
+									heading,
+									'prev',
+									arrowName,
+								)}
 							>
 								<SvgChevronLeftSingle />
 							</button>
@@ -641,10 +836,24 @@ export const Carousel = ({
 								onClick={next}
 								aria-label="Move carousel forwards"
 								css={[
-									buttonStyle,
-									nextButtonStyle(index, trails.length),
+									buttonStyle(
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
+									),
+									nextButtonStyle(
+										index,
+										trails.length,
+										carouselColours.arrowColour,
+										carouselColours.arrowBackgroundColour,
+										carouselColours.arrowBackgroundHoverColour,
+									),
 								]}
-								data-link-name={`${arrowName}-next`}
+								data-link-name={getDataLinkNameCarouselButton(
+									heading,
+									'next',
+									arrowName,
+								)}
 							>
 								<SvgChevronRightSingle />
 							</button>
@@ -692,6 +901,11 @@ export const Carousel = ({
 										: undefined
 								}
 								branding={branding}
+								showMainVideo={trail.showMainVideo}
+								mediaDuration={trail.mediaDuration}
+								verticalDividerColour={
+									carouselColours.borderColour
+								}
 							/>
 						);
 					})}

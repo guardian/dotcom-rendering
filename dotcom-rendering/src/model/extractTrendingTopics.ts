@@ -1,80 +1,119 @@
 import { isNonNullable } from '@guardian/libs';
-import type { FECollectionType, FEFrontCard } from '../types/front';
 import type { FETagType } from '../types/tag';
+
+/**
+ * Extracts sectionId from a given tag if its a section tag
+ * @param tag
+ * @returns a section ID or undefined
+ */
+const extractTagSectionId = (tag: FETagType): string | undefined => {
+	if (tag.properties.id === 'uk/uk') {
+		return 'uk-news';
+	}
+
+	const split = tag.properties.id.split('/');
+
+	return split[0] === split[1] ? split[0] : undefined;
+};
+
+/**
+ * Checks if a given tag is a section ID tag
+ * @param tag
+ * @returns a section ID or undefined
+ */
+const isNotSectionTag = (tag: FETagType): boolean => {
+	const sectionId = extractTagSectionId(tag);
+
+	return !(
+		sectionId !== undefined &&
+		tag.properties.sectionId !== undefined &&
+		sectionId.includes(tag.properties.sectionId)
+	);
+};
+
+export type NarrowedFEFrontCard = {
+	card: {
+		id: string;
+	};
+	properties: {
+		maybeContent?: {
+			tags: {
+				tags: FETagType[];
+			};
+		};
+		maybeContentId?: string;
+	};
+};
+
+export type NarrowedFECollectionType = {
+	curated: NarrowedFEFrontCard[];
+	backfill: NarrowedFEFrontCard[];
+};
 
 /**
  * Gets all relevant tags filtered by properties
  * @param tags - The deduplicated trails
  * @returns An array of relevant tags
  */
-const getTags = (trails: FEFrontCard[]): FETagType[] =>
+const getTags = (trails: NarrowedFEFrontCard[], pageId: string): FETagType[] =>
 	trails
 		.flatMap((trail) => trail.properties.maybeContent?.tags.tags)
 		.filter(isNonNullable)
+		.filter(isNotSectionTag)
+		.filter((tag) => tag.properties.id !== pageId)
 		.filter((tag) => {
 			return (
-				tag.properties.paidContentType?.includes('Keyword') ??
-				tag.properties.paidContentType?.includes('Topic') ??
+				!!tag.properties.paidContentType?.includes('Keyword') ||
+				!!tag.properties.paidContentType?.includes('Topic') ||
 				tag.properties.tagType === 'Keyword'
 			);
 		});
 
 /**
- * Gets tags which have the 5 most used IDs from the provided tags
+ * Sort tags by frequency
  * @param tags - Tags which you want to have filtered
- * @returns An array of tags which has been filtered to only include those with the most popular tag IDs
+ * @returns An array of tags which has been sorted by frequency
  */
-const filterTopFive = (tag: FETagType[]): FETagType[] => {
-	const idCounts: { [key: string]: number } = {};
+const sortTags = (tags: readonly FETagType[]): FETagType[] => {
+	const map = new Map<string, { count: number; tag: FETagType }>();
 
-	tag.forEach((x) => {
-		const id = x.properties.id;
-		if (idCounts[id] !== undefined) {
-			idCounts[id]++;
-		} else {
-			idCounts[id] = 1;
-		}
-	});
+	for (const tag of tags) {
+		const {
+			properties: { id },
+		} = tag;
 
-	const topFiveIds = Object.entries(idCounts)
-		.sort((a, b) => b[1] - a[1])
-		.slice(0, 5)
-		.map((entry) => entry[0]);
+		map.set(id, { count: (map.get(id)?.count ?? 0) + 1, tag });
+	}
 
-	return tag.filter((x) => topFiveIds.includes(x.properties.id));
+	return [...map.values()]
+		.sort(({ count: a }, { count: b }) => b - a)
+		.map(({ tag }) => tag);
 };
 
-const dedupeTags = (tag: FETagType[]): FETagType[] =>
-	[...new Set(tag.map((item) => item.properties.id))]
-		.map((id) => tag.find((item) => item.properties.id === id))
-		.filter(isNonNullable);
-
-export const extractTrendingTopics = (
-	collections: FECollectionType[],
+export const extractTrendingTopicsFomFront = (
+	collections: NarrowedFECollectionType[],
+	pageId: string,
 ): FETagType[] => {
 	// Get a single array of all trails in the collections
-	const allTrails = collections.flatMap((collection) => [
-		...collection.curated,
-		...collection.backfill,
-	]);
-
-	// Remove any duplicated trails
-	const dedupeTrails = (trails: FEFrontCard[]): FEFrontCard[] =>
-		trails.filter((trailOne) =>
-			trails.findIndex(
-				(trailTwo) => trailOne.card.id === trailTwo.card.id,
-			),
+	const trails = new Map<string, NarrowedFEFrontCard>();
+	collections
+		.flatMap((collection) => [
+			...collection.curated,
+			...collection.backfill,
+		])
+		.forEach((card) =>
+			trails.set(card.properties.maybeContentId ?? card.card.id, card),
 		);
-	const dedupedTrails = dedupeTrails(allTrails);
 
-	const allTags = getTags(dedupedTrails);
-	// We do not wish to include section tags that follow the pattern "UK/UK"
-	const filteredTags = allTags.filter(
-		(x) => new Set(x.properties.id.split('/')).size === 2,
-	);
+	return extractTrendingTopics([...trails.values()], pageId);
+};
 
-	// Get tags with the top 5 most used IDs
-	const tags = filterTopFive(filteredTags);
+export const extractTrendingTopics = (
+	trails: NarrowedFEFrontCard[],
+	pageId: string,
+): FETagType[] => {
+	const allTags = getTags(trails, pageId);
+	const tags = sortTags(allTags).slice(0, 20);
 
-	return dedupeTags(tags);
+	return tags;
 };

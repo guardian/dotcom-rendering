@@ -3467,10 +3467,7 @@
                     ]
                 },
                 "mimeType": {
-                    "type": "string",
-                    "enum": [
-                        "image/jpeg"
-                    ]
+                    "type": "string"
                 },
                 "file": {
                     "type": "string"
@@ -3481,17 +3478,11 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                    }
                 }
             },
             "required": [
-                "file",
-                "mimeType",
-                "type",
-                "typeData"
+                "type"
             ]
         },
         "WitnessTypeDataImage": {
@@ -4558,6 +4549,7 @@
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
+                "newsletters-page",
                 "related-content",
                 "related-stories",
                 "series",

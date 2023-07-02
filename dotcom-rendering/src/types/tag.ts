@@ -20,6 +20,11 @@ export type FETagType = {
 		url?: string;
 		webUrl?: string;
 	};
+	pagination?: {
+		currentPage: number;
+		lastPage: number;
+		totalContent: number;
+	};
 };
 
 export type TagType = {
