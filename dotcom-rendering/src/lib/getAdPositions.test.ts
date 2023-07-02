@@ -116,6 +116,40 @@ describe('Mobile Ads', () => {
 		expect(mobileAdPositions).toEqual([0, 2, 6, 9, 12, 16, 18, 20, 22]);
 	});
 
+	// We used https://www.theguardian.com/international as a blueprint
+	it('International Network Front, with more than 4 collections, with thrashers at various places', () => {
+		const merchHighPosition = 3;
+		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
+			{ collectionType: 'dynamic/fast' }, // 0 headlines (top-above-nav)
+			{ collectionType: 'fixed/small/slow-IV' }, // 1 ukraine
+			{ collectionType: 'dynamic/slow' }, // 2 spotlight (m1)
+			{ collectionType: 'dynamic/slow-mpu' }, // 3 opinion (merch-high)
+			{ collectionType: 'dynamic/slow' }, // 4 sport
+			{ collectionType: 'fixed/thrasher' }, // 5 wordiply
+			{ collectionType: 'fixed/small/slow-IV' }, // 6 europe (mobile-2)
+			{ collectionType: 'dynamic/fast' }, // 7 world
+			{ collectionType: 'fixed/small/slow-IV' }, // 8 climate
+			{ collectionType: 'fixed/thrasher' }, // 9 tip us off (mobile-3)
+			{ collectionType: 'dynamic/slow-mpu' }, // 10 culture
+			{ collectionType: 'fixed/thrasher' }, // 11 cotton capital
+			{ collectionType: 'dynamic/slow-mpu' }, // 12 lifestyle
+			{ collectionType: 'fixed/thrasher' }, // 13 documentaries (mobile-4)
+			{ collectionType: 'dynamic/slow-mpu' }, // 14 explore
+			{ collectionType: 'fixed/small/slow-IV' }, // 15 take part (mobile-5)
+			{ collectionType: 'fixed/small/slow-IV' }, // 16 podcasts
+			{ collectionType: 'fixed/video' }, // 17 videos (mobile-6)
+			{ collectionType: 'fixed/medium/slow-VI' }, // 18 in pictures
+			{ collectionType: 'news/most-popular' }, // 19 most popular
+		];
+
+		const mobileAdPositions = getMobileAdPositions(
+			testCollections,
+			merchHighPosition,
+		);
+
+		expect(mobileAdPositions).toEqual([0, 2, 6, 9, 13, 15, 17]);
+	});
+
 	// We used https://www.theguardian.com/us as a blueprint
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
 		const merchHighPosition = 3;
