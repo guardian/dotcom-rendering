@@ -1,5 +1,11 @@
 import { getLargest, getMaster } from '../components/ImageComponent';
-import type { EnhancedImageForLightbox, FEElement } from '../types/content';
+import type {
+	FEElement,
+	ImageBlockElement,
+	ImageForLightbox,
+} from '../types/content';
+
+type Orientation = 'horizontal' | 'portrait';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
@@ -9,23 +15,19 @@ import type { EnhancedImageForLightbox, FEElement } from '../types/content';
  * https://github.com/guardian/frontend/blob/126dfcbc1aa961650b7f7ff41ee50a12782bb62e/common/app/model/content.scala#L549
  *
  */
-const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
-	const masterImage =
-		getMaster(image.media.allImages) ?? getLargest(image.media.allImages);
-	const fields = masterImage?.fields;
-	if (!fields) return false; // Unlikely
-	const { width, height } = fields;
-	const orientation =
-		parseInt(width, 10) >= parseInt(height, 10) ? 'horizontal' : 'portrait';
+const isLightboxable = (
+	element: ImageBlockElement,
+	orientation: Orientation,
+): boolean => {
 	switch (orientation) {
 		case 'horizontal':
 			// If any width is above 620 we allow this image in lightbox
-			return image.media.allImages.some(
+			return element.media.allImages.some(
 				(mediaImg) => parseInt(mediaImg.fields.width, 10) > 620,
 			);
 		case 'portrait':
 			// If any height is above 620 we allow this image in lightbox
-			return image.media.allImages.some(
+			return element.media.allImages.some(
 				(mediaImg) => parseInt(mediaImg.fields.height, 10) > 620,
 			);
 	}
@@ -35,10 +37,8 @@ const isLightboxable = (image: EnhancedImageForLightbox): boolean => {
  * Older legacy images use a different url format so we need to use a different
  * approach when extracting the id of the image
  */
-const decideImageId = (image: EnhancedImageForLightbox): string | undefined => {
-	const firstImageUrl = image.media.allImages[0]?.url;
-	if (!firstImageUrl) return;
-	const url = new URL(firstImageUrl);
+const decideImageId = (image: ImageForLightbox): string | undefined => {
+	const url = new URL(image.masterUrl);
 	switch (url.hostname) {
 		case 'media.guim.co.uk': {
 			// E.g.
@@ -59,59 +59,97 @@ const decideImageId = (image: EnhancedImageForLightbox): string | undefined => {
 	}
 };
 
+const buildLightboxImage = (
+	element: ImageBlockElement,
+): ImageForLightbox | undefined => {
+	const masterImage =
+		getMaster(element.media.allImages) ??
+		getLargest(element.media.allImages);
+
+	// Rare, but legacy content might not have a url that we can use with Fastly
+	// so we can't include them in lightbox
+	if (!masterImage) return;
+
+	const width = parseInt(masterImage.fields.width, 10);
+	const height = parseInt(masterImage.fields.height, 10);
+
+	const orientation = width >= height ? 'horizontal' : 'portrait';
+	if (!isLightboxable(element, orientation)) return;
+
+	return {
+		masterUrl: masterImage.url,
+		position: element.position,
+		width,
+		height,
+		elementId: element.elementId,
+		alt: element.data.alt,
+		credit: element.data.credit,
+		caption: element.data.caption,
+		displayCredit: element.displayCredit,
+		title: element.title,
+		starRating: element.starRating,
+	};
+};
+
 /**
- * Generates a new array of lightbox images. Does not mutate.
+ * Reads the elements array and returns a new array of data based on the
+ * ImageBlockElement elements that it finds. It does not mutate. This new
+ * array only contain the information that lightbox needs and is a lot
+ * smaller.
  *
- * We decide this array, prior to rendering, because we create and
- * insert the lightbox html in the dom at page load and to do this
- * we need to know which images we want the lightbox to contain.
+ * Takes ImageBlockElement (enormous)
+ * Returns ImageForLightbox (small)
  *
- * This enhancer needs to run at a higher level to most other enhancers
- * because it need both mainMediaElements and blocks in scope. Most other
- * enhancers just have blocks in scope.
+ * Smaller is good here because the result of this function is being passed
+ * to an island which means it gets serialized to the DOM and adds to page
+ * weight. By passing the data through this transformer we take a 90Kb
+ * object and return a 3Kb one!
  */
 export const buildLightboxImages = (
 	format: FEFormat,
 	blocks: Block[],
 	mainMediaElements: FEElement[],
-): EnhancedImageForLightbox[] => {
-	const images: EnhancedImageForLightbox[] = [];
+): ImageForLightbox[] => {
+	const lightboxImages: ImageForLightbox[] = [];
 	mainMediaElements.forEach((element) => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement'
 		) {
-			images.push(element);
+			const lightboxImage = buildLightboxImage(element);
+			if (lightboxImage) lightboxImages.push(lightboxImage);
 		}
 	});
 	blocks.forEach((block) => {
 		block.elements.forEach((element) => {
-			let imageElement: EnhancedImageForLightbox;
 			switch (element._type) {
 				case 'model.dotcomrendering.pageElements.ImageBlockElement': {
-					imageElement = { ...element };
+					const lightboxImage = buildLightboxImage(element);
+					if (lightboxImage === undefined) break;
 					if (
 						format.design === 'LiveBlogDesign' ||
 						format.design === 'DeadBlogDesign'
 					) {
-						imageElement.blockId = block.id;
-						imageElement.firstPublished = block.blockFirstPublished;
+						lightboxImage.blockId = block.id;
+						lightboxImage.firstPublished =
+							block.blockFirstPublished;
 					}
-					images.push(imageElement);
+					lightboxImages.push(lightboxImage);
 					break;
 				}
 				case 'model.dotcomrendering.pageElements.MultiImageBlockElement': {
 					element.images.forEach((multiImage) => {
-						imageElement = { ...multiImage };
+						const lightboxImage = buildLightboxImage(multiImage);
+						if (lightboxImage === undefined) return;
 						if (
 							format.design === 'LiveBlogDesign' ||
 							format.design === 'DeadBlogDesign'
 						) {
-							imageElement.blockId = block.id;
-							imageElement.firstPublished =
+							lightboxImage.blockId = block.id;
+							lightboxImage.firstPublished =
 								block.blockFirstPublished;
 						}
-						images.push(imageElement);
+						lightboxImages.push(lightboxImage);
 					});
 					break;
 				}
@@ -123,8 +161,8 @@ export const buildLightboxImages = (
 	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
 	const alreadySeen: string[] = [];
-	let uniqueImages: EnhancedImageForLightbox[] = [];
-	images.forEach((image) => {
+	let uniqueImages: ImageForLightbox[] = [];
+	lightboxImages.forEach((image) => {
 		const imageId = decideImageId(image);
 		if (!imageId) {
 			// It's unlikely that we would not have an imageId here but if we do we fail
@@ -145,5 +183,5 @@ export const buildLightboxImages = (
 			alreadySeen.push(imageId);
 		}
 	});
-	return uniqueImages.filter(isLightboxable);
+	return uniqueImages;
 };

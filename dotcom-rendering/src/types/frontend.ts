@@ -2,11 +2,7 @@ import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
-import type {
-	EnhancedImageForLightbox,
-	FEElement,
-	Newsletter,
-} from './content';
+import type { FEElement, ImageForLightbox, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
 import type { TagType } from './tag';
@@ -117,7 +113,7 @@ export interface FEArticleType {
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
-	imagesForLightbox?: EnhancedImageForLightbox[];
+	imagesForLightbox?: ImageForLightbox[];
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;

@@ -14,10 +14,10 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import type { EnhancedImageForLightbox } from '../types/content';
+import type { ImageForLightbox } from '../types/content';
 
 type Props = {
-	images: EnhancedImageForLightbox[];
+	images: ImageForLightbox[];
 };
 
 const lightboxStyles = css`

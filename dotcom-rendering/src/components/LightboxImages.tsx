@@ -12,14 +12,14 @@ import {
 } from '@guardian/source-foundations';
 import { Hide, Link } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
-import type { EnhancedImageForLightbox } from '../types/content';
-import { getLargest, getMaster } from './ImageComponent';
+import type { ImageForLightbox } from '../types/content';
 import { LightboxCaption } from './LightboxCaption';
+import { LightboxLoader } from './LightboxLoader';
 import { Picture } from './Picture';
 
 type Props = {
 	format: ArticleFormat;
-	images: EnhancedImageForLightbox[];
+	images: ImageForLightbox[];
 };
 
 const liStyles = css`
@@ -118,7 +118,6 @@ const asideStyles = css`
 
 const figureStyles = css`
 	display: flex;
-	position: relative;
 	height: 100%;
 	justify-content: space-between;
 
@@ -179,25 +178,13 @@ export const LightboxImages = ({ format, images }: Props) => {
 	return (
 		<>
 			{images.map((image, index) => {
-				// Legacy images do not have a master so we fallback to the largest available
-				const master =
-					getMaster(image.media.allImages) ??
-					getLargest(image.media.allImages);
-
-				if (!master) return null;
-
-				const width = master.fields.width;
-				const height = master.fields.height;
-
 				const orientation =
-					parseInt(width) > parseInt(height)
-						? 'landscape'
-						: 'portrait';
+					image.width > image.height ? 'landscape' : 'portrait';
 
 				return (
 					<li
 						// eslint-disable-next-line react/no-array-index-key -- because we know this key is unique
-						key={`${master.url}-${index}`}
+						key={`${image.masterUrl}-${index}`}
 						data-index={index + 1}
 						data-element-id={image.elementId}
 						css={[
@@ -207,22 +194,30 @@ export const LightboxImages = ({ format, images }: Props) => {
 						]}
 					>
 						<figure css={figureStyles}>
-							<Picture
-								// Using the role of immersive here indicates the intentions for lightbox
-								// images but it's moot because the `isLightbox` prop overrides the decision
-								// around what size sources to use
-								role="immersive"
-								alt={image.data.alt ?? ''}
-								// Height and width are only used here so the browser has a ratio to work with
-								// when laying out the page. The actual size of the image is based on the
-								// viewport
-								height={height}
-								width={width}
-								master={master.url}
-								format={format}
-								isLightbox={true}
-								orientation={orientation}
-							/>
+							<div
+								css={css`
+									position: relative;
+									width: 100%;
+								`}
+							>
+								<LightboxLoader position={index + 1} />
+								<Picture
+									// Using the role of immersive here indicates the intentions for lightbox
+									// images but it's moot because the `isLightbox` prop overrides the decision
+									// around what size sources to use
+									role="immersive"
+									alt={image.alt ?? ''}
+									// Height and width are only used here so the browser has a ratio to work with
+									// when laying out the page. The actual size of the image is based on the
+									// viewport
+									height={image.height.toString()}
+									width={image.width.toString()}
+									master={image.masterUrl}
+									format={format}
+									isLightbox={true}
+									orientation={orientation}
+								/>
+							</div>
 							<aside css={asideStyles}>
 								{!!image.title && (
 									<h2
@@ -268,9 +263,9 @@ export const LightboxImages = ({ format, images }: Props) => {
 									/>
 								</Hide>
 								<LightboxCaption
-									captionText={image.lightbox?.caption}
+									captionText={image.caption}
 									format={format}
-									credit={image.lightbox?.credit}
+									credit={image.credit}
 									displayCredit={image.displayCredit}
 								/>
 								{!!image.blockId &&

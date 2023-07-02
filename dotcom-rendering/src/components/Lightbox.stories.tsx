@@ -5,50 +5,22 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import type {
-	EnhancedImageForLightbox,
-	ImageBlockElement,
-} from '../types/content';
+import type { ImageForLightbox } from '../types/content';
 import { LightboxImages } from './LightboxImages';
 import { LightboxLayout } from './LightboxLayout';
 
-const testImage: ImageBlockElement = {
-	role: 'immersive',
+const testImage: ImageForLightbox = {
 	elementId: 'mockId',
-	data: {
-		alt: '26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',
-		caption:
-			'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic',
-		credit: 'Photograph: Christopher Thomond/The Guardian',
-	},
-	imageSources: [
-		{
-			weighting: 'immersive',
-			srcSet: [
-				{
-					src: 'https://i.guim.co.uk/img/media/56b42eef576bc04c820da710459acd91082bb37b/0_0_6720_4480/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=4a0b1263ca8554c4e22671fd1a75ac64',
-					width: 2600,
-				},
-			],
-		},
-	],
-	_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-	media: {
-		allImages: [
-			{
-				index: 0,
-				fields: {
-					height: '4480',
-					width: '6720',
-				},
-				mediaType: 'Image',
-				mimeType: 'image/jpeg',
-				url: 'https://media.guim.co.uk/56b42eef576bc04c820da710459acd91082bb37b/0_0_6720_4480/6720.jpg',
-			},
-		],
-	},
+	width: 1200,
+	height: 800,
+	alt: '26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic.',
+	caption:
+		'26 March – Residents in Manchester, England, taking part in the Clap For Our Carers campaign, people across the UK applauding NHS workers from the doorsteps, balconies or windows of their homes, in order to say thank you for all of their hard work dealing with the Covid-19 coronavirus pandemic',
+	credit: 'Photograph: Christopher Thomond/The Guardian',
+	masterUrl:
+		'https://media.guim.co.uk/56b42eef576bc04c820da710459acd91082bb37b/0_0_6720_4480/6720.jpg',
 	displayCredit: false,
 };
 
@@ -66,19 +38,16 @@ export default {
 	},
 };
 
-function showLightbox() {
-	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
-	if (lightbox) lightbox.removeAttribute('hidden');
+function showLightbox(lightbox: HTMLElement) {
+	lightbox.removeAttribute('hidden');
 }
 
-function showInfo() {
-	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
-	lightbox?.classList.remove('hide-info');
+function showInfo(lightbox: HTMLElement) {
+	lightbox.classList.remove('hide-info');
 }
 
-function hideInfo() {
-	const lightbox = document.querySelector<HTMLDialogElement>('#gu-lightbox');
-	lightbox?.classList.add('hide-info');
+function hideInfo(lightbox: HTMLElement) {
+	lightbox.classList.add('hide-info');
 }
 
 const Initialise = ({
@@ -90,14 +59,18 @@ const Initialise = ({
 	children: React.ReactNode;
 	shouldShowInfo?: boolean;
 	format: ArticleFormat;
-	images: EnhancedImageForLightbox[];
+	images: ImageForLightbox[];
 }) => {
+	const [isReady, setIsReady] = useState(false);
 	useEffect(() => {
-		showLightbox();
+		const lightbox =
+			document.querySelector<HTMLDialogElement>('#gu-lightbox');
+		if (!lightbox) return;
+		showLightbox(lightbox);
 		if (shouldShowInfo) {
-			showInfo();
+			showInfo(lightbox);
 		} else {
-			hideInfo();
+			hideInfo(lightbox);
 		}
 		const imageRoot = document.querySelector('ul#lightbox-images');
 		if (!imageRoot) return;
@@ -105,7 +78,16 @@ const Initialise = ({
 			<LightboxImages format={format} images={images} />,
 			imageRoot,
 		);
+		setIsReady(true);
 	}, [format, images, shouldShowInfo]);
+
+	useEffect(() => {
+		const lightbox =
+			document.querySelector<HTMLDialogElement>('#gu-lightbox');
+		if (lightbox && isReady) {
+			lightbox.querySelector('#lightbox-loader-1')?.remove();
+		}
+	}, [isReady]);
 
 	return <div style={{ height: '100vh' }}>{children}</div>;
 };

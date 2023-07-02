@@ -740,7 +740,18 @@ interface TimelineEvent {
 
 export type RatingSizeType = 'large' | 'medium' | 'small';
 
-export type EnhancedImageForLightbox = ImageBlockElement & {
+export type ImageForLightbox = {
+	masterUrl: string;
+	elementId: string;
+	width: number;
+	height: number;
+	position?: number;
+	alt?: string;
+	credit?: string;
+	caption?: string;
+	displayCredit?: boolean;
+	title?: string;
+	starRating?: number;
 	/**
 	 * Used for liveblog images to generate a link back to the
 	 * original post where the image was used
