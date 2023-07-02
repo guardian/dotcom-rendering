@@ -59,6 +59,10 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 		tableOfContents: data.showTableOfContents
 			? enhanceTableOfContents(data.format, enhancedBlocks)
 			: undefined,
+		/**
+		 * This function needs to run at a higher level to most other enhancers
+		 * because it needs both mainMediaElements and blocks in scope
+		 */
 		imagesForLightbox: buildLightboxImages(
 			data.format,
 			enhancedBlocks,

@@ -2,7 +2,7 @@ import { log } from '@guardian/libs';
 import { useEffect } from 'react';
 
 /**
- * This small snippet of javascript is executed at page load. It checks once to
+ * This small snippet of javascript is executed at page load. It checks to
  * see if the url that was initially loaded contains a hash matching the `#img-`
  * pattern.
  *
