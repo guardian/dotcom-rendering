@@ -116,7 +116,7 @@ const asideStyles = css`
 	}
 `;
 
-const figureStyles = css`
+const imageAreaStyles = css`
 	display: flex;
 	height: 100%;
 	justify-content: space-between;
@@ -193,8 +193,8 @@ export const LightboxImages = ({ format, images }: Props) => {
 							pictureStyles,
 						]}
 					>
-						<figure css={figureStyles}>
-							<div
+						<div css={imageAreaStyles}>
+							<figure
 								css={css`
 									position: relative;
 									width: 100%;
@@ -217,7 +217,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 									isLightbox={true}
 									orientation={orientation}
 								/>
-							</div>
+							</figure>
 							<aside css={asideStyles}>
 								{!!image.title && (
 									<h2
@@ -299,7 +299,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 										</Link>
 									)}
 							</aside>
-						</figure>
+						</div>
 					</li>
 				);
 			})}

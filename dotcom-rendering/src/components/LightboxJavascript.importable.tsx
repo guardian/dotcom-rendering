@@ -47,10 +47,11 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * imageList is the horizontal list of all images. We use it to scroll left and right
 	 * effectively navigating the lightbox
 	 */
-	const imageList = lightbox.querySelector<HTMLElement>('ul');
-	const pictures = lightbox.querySelectorAll('li picture');
-	const images = lightbox.querySelectorAll('li img');
-	const captionLinks = lightbox.querySelectorAll('li aside a');
+	const imageList = lightbox.querySelector<HTMLUListElement>('ul');
+	const figures = lightbox.querySelectorAll<HTMLElement>('li figure');
+	const images = lightbox.querySelectorAll<HTMLImageElement>('li img');
+	const captionLinks =
+		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
 
 	// Remember a user's preference for the caption info
 	try {
@@ -371,19 +372,19 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
-	pictures.forEach((picture) => {
+	figures.forEach((figure) => {
 		// Clicking on the image toggles the caption
-		picture.addEventListener('mousedown', (event) => {
+		figure.addEventListener('mousedown', (event) => {
 			toggleInfo();
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
 			event.stopPropagation();
 		});
 		// Remove the loader once the image has been downloaded
-		const index = picture.closest('li')?.dataset.index;
+		const index = figure.closest('li')?.dataset.index;
 		if (index === undefined) return;
 		const position = parseInt(index, 10);
-		const image = picture.querySelector('img');
+		const image = figure.querySelector('img');
 		if (image?.complete) {
 			removeLoader(position);
 		} else {
