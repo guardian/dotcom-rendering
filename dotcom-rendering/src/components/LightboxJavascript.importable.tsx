@@ -54,10 +54,10 @@ function initialiseLightbox(lightbox: HTMLElement) {
 
 	// Remember a user's preference for the caption info
 	try {
-		if (storage.local.get('gu.prefs.lightbox-hideinfo') === false) {
-			showInfo();
-		} else {
+		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
 			hideInfo();
+		} else {
+			showInfo();
 		}
 	} catch (error) {
 		// Do nothing. Errors accessing local storage are common
