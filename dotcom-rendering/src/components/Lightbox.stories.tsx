@@ -101,7 +101,7 @@ export const Default = () => {
 	const images = [{ ...testImage }];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -115,7 +115,7 @@ export const WithTitle = () => {
 	const images = [{ ...testImage, title: 'Title' }];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -129,7 +129,7 @@ export const WithCredit = () => {
 	const images = [{ ...testImage, displayCredit: true }];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -143,7 +143,7 @@ export const WithRating = () => {
 	const images = [{ ...testImage, starRating: 3 }];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -166,7 +166,7 @@ export const WhenLiveBlog = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -187,7 +187,7 @@ export const WithEverything = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -201,7 +201,7 @@ export const WithoutCaption = () => {
 	const images = [{ ...testImage }];
 	return (
 		<Initialise shouldShowInfo={false} format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -222,7 +222,7 @@ export const WithSport = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -243,7 +243,7 @@ export const WithCulture = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -264,7 +264,7 @@ export const WithLifestyle = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -285,7 +285,7 @@ export const WithOpinion = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -306,7 +306,7 @@ export const WithSpecialReport = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -327,7 +327,7 @@ export const WithSpecialReportAlt = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };
@@ -348,7 +348,7 @@ export const WithLabs = () => {
 	];
 	return (
 		<Initialise format={format} images={images}>
-			<LightboxLayout images={images} />
+			<LightboxLayout imageCount={images.length} />
 		</Initialise>
 	);
 };

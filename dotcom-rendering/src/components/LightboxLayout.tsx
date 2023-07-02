@@ -14,10 +14,9 @@ import {
 	SvgCross,
 } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
-import type { ImageForLightbox } from '../types/content';
 
 type Props = {
-	images: ImageForLightbox[];
+	imageCount: number;
 };
 
 const lightboxStyles = css`
@@ -221,9 +220,7 @@ const Selection = ({
 	);
 };
 
-export const LightboxLayout = ({ images }: Props) => {
-	if (images.length == null || images.length === 0) return null;
-
+export const LightboxLayout = ({ imageCount }: Props) => {
 	return (
 		<>
 			<Global
@@ -273,7 +270,7 @@ export const LightboxLayout = ({ images }: Props) => {
 							</span>
 						</button>
 						<Hide until="tablet">
-							<Selection countOfImages={images.length} />
+							<Selection countOfImages={imageCount} />
 						</Hide>
 						<button
 							type="button"
