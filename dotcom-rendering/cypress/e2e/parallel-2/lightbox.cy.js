@@ -103,21 +103,21 @@ describe('Lightbox', function () {
 		cy.realPress('ArrowRight');
 		cy.get('li[data-index="1"]').should('be.visible');
 		// Showing and hiding the info caption using 'i'
-		cy.get('li[data-index="1"] aside').should('be.visible');
-		cy.realPress('i');
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		cy.realPress('i');
 		cy.get('li[data-index="1"] aside').should('be.visible');
+		cy.realPress('i');
+		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		// Showing and hiding the caption by clicking
 		cy.get('li[data-index="1"] picture').click();
-		cy.get('li[data-index="1"] aside').should('not.be.visible');
-		cy.get('li[data-index="1"] picture').click();
 		cy.get('li[data-index="1"] aside').should('be.visible');
-		// Showing and hiding using arrow keys
-		cy.realPress('ArrowDown');
+		cy.get('li[data-index="1"] picture').click();
 		cy.get('li[data-index="1"] aside').should('not.be.visible');
+		// Showing and hiding using arrow keys
 		cy.realPress('ArrowUp');
 		cy.get('li[data-index="1"] aside').should('be.visible');
+		cy.realPress('ArrowDown');
+		cy.get('li[data-index="1"] aside').should('not.be.visible');
 		// Closing the lightbox using escape
 		cy.realPress('Escape');
 		cy.get('#gu-lightbox').should('not.be.visible');
@@ -159,16 +159,16 @@ describe('Lightbox', function () {
 	it('should remember my preference for showing the caption', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		// The info aside is visible by default
-		cy.get('li[data-index="2"] aside').should('be.visible');
+		// The info aside is not visible by default
+		cy.get('li[data-index="2"] aside').should('not.be.visible');
 		// Clicking an image toggles the caption
 		cy.get('li[data-index="2"] img').click();
-		cy.get('li[data-index="2"] aside').should('not.be.visible');
+		cy.get('li[data-index="2"] aside').should('be.visible');
 		// Close lightbox
 		cy.realPress('Escape');
-		// Re-open lightbox to see if the info aside element is open by default
-		cy.get('button.open-lightbox').eq(1).realPress('Space');
-		cy.get('li[data-index="2"] aside').should('not.be.visible');
+		// Re-open lightbox to see if the info aside element is now open
+		cy.get('button.open-lightbox').eq(1).realClick();
+		cy.get('li[data-index="2"] aside').should('be.visible');
 		// Close lightbox
 		cy.realPress('Escape');
 		// Reload the page to see if my preference for having the caption hidden
@@ -176,13 +176,13 @@ describe('Lightbox', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('#gu-lightbox').should('be.visible');
-		cy.get('li[data-index="2"] aside').should('not.be.visible');
-		// Turn the info aside back on and then reload once more to check the
+		cy.get('li[data-index="2"] aside').should('be.visible');
+		// Turn the info aside back off and then reload once more to check the
 		// caption is again showing by default
 		cy.realPress('i');
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		cy.get('li[data-index="2"] aside').should('be.visible');
+		cy.get('li[data-index="2"] aside').should('not.be.visible');
 	});
 
 	it('should be possible to navigate by scrolling', function () {
@@ -201,7 +201,9 @@ describe('Lightbox', function () {
 	it('should navigate to the original block when clicking links in captions', function () {
 		cy.visit(`/Article/${liveblogUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
-		// The info aside is visible by default
+		cy.get('#gu-lightbox').should('be.visible');
+		// The info aside is not visible by default so show it
+		cy.realPress('i');
 		cy.get('li[data-index="2"] aside').should('be.visible');
 		// Click the caption link
 		cy.get('li[data-index="2"] aside a').click();
