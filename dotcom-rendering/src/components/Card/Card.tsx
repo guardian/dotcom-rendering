@@ -463,8 +463,7 @@ export const Card = ({
 							/>
 						) : null}
 						{format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ||
-						format.design === ArticleDesign.Video ? (
+						format.design === ArticleDesign.Audio ? (
 							<MediaMeta
 								containerPalette={containerPalette}
 								format={format}

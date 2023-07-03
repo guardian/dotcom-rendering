@@ -59,7 +59,6 @@ const MediaIcon = ({
 	palette: Palette;
 	hasKicker: boolean;
 }) => {
-	if (mediaType == 'Video') return null;
 	return (
 		<span css={iconWrapperStyles(palette, hasKicker)}>
 			<Icon mediaType={mediaType} />
