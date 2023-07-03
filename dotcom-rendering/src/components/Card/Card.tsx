@@ -382,7 +382,11 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showMainVideo ?? false}
+						showPlayIcon={
+							(showMainVideo ||
+								format.design === ArticleDesign.Video) ??
+							false
+						}
 					>
 						{image.type === 'slideshow' &&
 							image.slideshowImages && (
