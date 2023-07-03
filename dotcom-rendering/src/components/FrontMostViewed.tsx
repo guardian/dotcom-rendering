@@ -79,6 +79,7 @@ export const FrontMostViewed = ({
 						mostCommented={mostCommented}
 						mostShared={mostShared}
 						hasPageSkin={hasPageSkin}
+						renderAds={renderAds}
 					/>
 				</Island>
 			) : showMostPopular ? (
@@ -95,6 +96,7 @@ export const FrontMostViewed = ({
 					mostCommented={mostCommented}
 					mostShared={mostShared}
 					hasPageSkin={hasPageSkin}
+					renderAds={renderAds}
 				/>
 			)}
 		</MostViewedFooterLayout>

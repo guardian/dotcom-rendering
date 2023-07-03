@@ -14,6 +14,7 @@ type Props = {
 	variantFromRunnable?: string;
 	sectionName?: string;
 	hasPageSkin?: boolean;
+	renderAds?: boolean;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -34,6 +35,13 @@ const secondTierStyles = css`
 	}
 `;
 
+const mostViewedFooterWidth = css`
+	width: 100%;
+	${from.desktop} {
+		width: 101%;
+	}
+`;
+
 /**
  * # Most Viewed Footer
  *
@@ -50,12 +58,11 @@ export const MostViewedFooter = ({
 	sectionName,
 	selectedColour,
 	hasPageSkin = false,
+	renderAds,
 }: Props) => {
 	return (
 		<div
-			css={css`
-				width: 100%;
-			`}
+			css={!renderAds && mostViewedFooterWidth}
 			data-cy="mostviewed-footer"
 			data-cy-ab-user-in-variant={abTestCypressDataAttr}
 			data-cy-ab-runnable-test={variantFromRunnable}
