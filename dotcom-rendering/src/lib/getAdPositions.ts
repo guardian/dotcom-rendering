@@ -8,9 +8,9 @@ export const getMerchHighPosition = (
 ): number => {
 	if (collectionCount >= 4) {
 		if (isNetworkFront === true) {
-			return 3;
-		} else {
 			return 2;
+		} else {
+			return 1;
 		}
 	} else {
 		return 0;
