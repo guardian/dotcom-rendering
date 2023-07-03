@@ -4937,6 +4937,11 @@
   resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-7.0.2.tgz#2eb124d14fff50d4686888dca88f130c5aee358d"
   integrity sha512-qkI8mFy9c8mxN2f01etayKhCaauL6RAsxRzbX1/pKj6UqhHWqqUbtHwymrv4hG5qDYjV1e9pd7ae5eNF8Kui0g==
 
+"@storybook/channels@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/channels/-/channels-7.0.25.tgz#558395bc17d17424171d8815900feb0d7d048c11"
+  integrity sha512-FLuXysj0uHBQNHpfiggtyaV0EFCMVWgEQjJLeBysqB/+sBCtpjrD7kUKrgJFF+N/IEhJq/dlWt7jOpxT2bffQA==
+
 "@storybook/cli@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/cli/-/cli-7.0.2.tgz#f96c42e7660b8f8f14595483036b3b5ef6724dc9"
@@ -5003,6 +5008,13 @@
   dependencies:
     "@storybook/global" "^5.0.0"
 
+"@storybook/client-logger@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-7.0.25.tgz#34df06c52a79a71192f1cbab3b342ad5e123142f"
+  integrity sha512-jPUH38qA+FFiEkeA6vzo2Uq2tbgJolII2nKcKw6K6KMSv+/lJNElQ4extEvXHjmPe7TqPIZVDlh8QMh5DlZO5Q==
+  dependencies:
+    "@storybook/global" "^5.0.0"
+
 "@storybook/codemod@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-7.0.2.tgz#a1735d8b6448569b36d7787b08ba0c5dcc6ad952"
@@ -5032,6 +5044,20 @@
     "@storybook/global" "^5.0.0"
     "@storybook/theming" "7.0.2"
     "@storybook/types" "7.0.2"
+    memoizerific "^1.11.3"
+    use-resize-observer "^9.1.0"
+    util-deprecate "^1.0.2"
+
+"@storybook/components@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/components/-/components-7.0.25.tgz#636462d538b0bfa1eb902df2aafc55b29635addf"
+  integrity sha512-eY6R8P7HRisamVed/HwsgLerhDvL3UKdg9KsgBMoGLc7//lC2Zf9qYnDSMWutCdXJh0Te+gJS/i4Jv63YP3mDQ==
+  dependencies:
+    "@storybook/client-logger" "7.0.25"
+    "@storybook/csf" "^0.1.0"
+    "@storybook/global" "^5.0.0"
+    "@storybook/theming" "7.0.25"
+    "@storybook/types" "7.0.25"
     memoizerific "^1.11.3"
     use-resize-observer "^9.1.0"
     util-deprecate "^1.0.2"
@@ -5396,6 +5422,16 @@
     "@storybook/global" "^5.0.0"
     memoizerific "^1.11.3"
 
+"@storybook/theming@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-7.0.25.tgz#44ff687601a2bdbd7aafb350b144405ea56d5280"
+  integrity sha512-OaLtP4jjN6NGvdZpfQq3FO2IE/uZDxcXJdEXCf8azzAyhwvFU5kMA8huCE1KvOGJfAR5lPfDMQDKMXTlkV7frg==
+  dependencies:
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.0"
+    "@storybook/client-logger" "7.0.25"
+    "@storybook/global" "^5.0.0"
+    memoizerific "^1.11.3"
+
 "@storybook/types@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/types/-/types-7.0.2.tgz#32ae7b9521d42617bd8fb87f3b85b0f77d2739f5"
@@ -5405,6 +5441,16 @@
     "@types/babel__core" "^7.0.0"
     "@types/express" "^4.7.0"
     file-system-cache "^2.0.0"
+
+"@storybook/types@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/types/-/types-7.0.25.tgz#3edf034c484e143bddf6805f97c57fdc3dd57128"
+  integrity sha512-18Mn8IRbgsR+QXRa25wbNRJiKapKvODVx6rbBIH9Kim30gbTCgukYKJQlus27IODMMzMr86LiXKgnGpFv6NQ5w==
+  dependencies:
+    "@storybook/channels" "7.0.25"
+    "@types/babel__core" "^7.0.0"
+    "@types/express" "^4.7.0"
+    file-system-cache "2.3.0"
 
 "@swc/cli@0.1.62":
   version "0.1.62"
@@ -10531,6 +10577,14 @@ file-entry-cache@^6.0.1:
   dependencies:
     flat-cache "^3.0.4"
 
+file-system-cache@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/file-system-cache/-/file-system-cache-2.3.0.tgz#201feaf4c8cd97b9d0d608e96861bb6005f46fe6"
+  integrity sha512-l4DMNdsIPsVnKrgEXbJwDJsA5mB8rGwHYERMgqQx/xAUtChPJMre1bXBzDEqqVbWv9AIbFezXMxeEkZDSrXUOQ==
+  dependencies:
+    fs-extra "11.1.1"
+    ramda "0.29.0"
+
 file-system-cache@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/file-system-cache/-/file-system-cache-2.0.2.tgz#6b51d58c5786302146fa883529e0d7f88896e948"
@@ -10805,19 +10859,19 @@ fs-constants@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
 
-fs-extra@^10.0.0, fs-extra@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
-  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
+fs-extra@11.1.1, fs-extra@^11.1.0:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.1.tgz#da69f7c39f3b002378b0954bb6ae7efdc0876e2d"
+  integrity sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fs-extra@^11.1.0:
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.1.tgz#da69f7c39f3b002378b0954bb6ae7efdc0876e2d"
-  integrity sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==
+fs-extra@^10.0.0, fs-extra@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -16005,6 +16059,11 @@ rambda@^7.1.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/rambda/-/rambda-7.4.0.tgz#61ec9de31d3dd6affe804de3bae04a5b818781e5"
   integrity sha512-A9hihu7dUTLOUCM+I8E61V4kRXnN4DwYeK0DwCBydC1MqNI1PidyAtbtpsJlBBzK4icSctEcCQ1bGcLpBuETUQ==
+
+ramda@0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.29.0.tgz#fbbb67a740a754c8a4cbb41e2a6e0eb8507f55fb"
+  integrity sha512-BBea6L67bYLtdbOqfp8f58fPMqEwx0doL+pAi8TZyp2YWz8R9G8z9x75CZI8W+ftqhFHCpEX2cRnUUXK130iKA==
 
 ramda@^0.28.0:
   version "0.28.0"
