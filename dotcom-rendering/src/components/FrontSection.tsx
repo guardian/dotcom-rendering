@@ -474,7 +474,7 @@ export const FrontSection = ({
 				hasPageSkin && pageSkinContainer,
 				css`
 					background-color: ${decideBackgroundColour(
-						overrides?.background?.container,
+						overrides?.background.container,
 						hasPageSkin,
 					)};
 				`,
@@ -482,7 +482,7 @@ export const FrontSection = ({
 		>
 			<div
 				css={[
-					decoration(overrides?.border?.container ?? neutral[86]),
+					decoration(overrides?.border.container ?? neutral[86]),
 					sideBorders,
 					showTopBorder && topBorder,
 				]}
@@ -493,7 +493,7 @@ export const FrontSection = ({
 					sectionHeadlineUntilLeftCol,
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
-							overrides?.border?.container ?? neutral[86],
+							overrides?.border.container ?? neutral[86],
 						),
 				]}
 			>
@@ -502,7 +502,7 @@ export const FrontSection = ({
 					<div css={titleStyle}>
 						<ContainerTitle
 							title={title}
-							fontColour={overrides?.text?.container}
+							fontColour={overrides?.text.container}
 							description={description}
 							// On paid fronts the title is not treated as a link
 							// Be explicit and pass in undefined
@@ -559,7 +559,7 @@ export const FrontSection = ({
 							)}
 							<ContainerTitle
 								title={title}
-								fontColour={overrides?.text?.container}
+								fontColour={overrides?.text.container}
 								description={description}
 								url={url}
 								containerPalette={containerPalette}
@@ -577,7 +577,7 @@ export const FrontSection = ({
 					<ShowHideButton
 						sectionId={sectionId}
 						overrideContainerToggleColour={
-							overrides?.text?.containerToggle
+							overrides?.text.containerToggle
 						}
 					/>
 				</div>
@@ -619,7 +619,7 @@ export const FrontSection = ({
 							ajaxUrl={ajaxUrl}
 							editionId={editionId}
 							containerPalette={containerPalette}
-							showAge={title === 'Headlines'}
+							showAge={title !== 'Newsletters'}
 						/>
 					</Island>
 				) : null}
@@ -638,8 +638,8 @@ export const FrontSection = ({
 				<div css={[sectionTreats, paddings]}>
 					<Treats
 						treats={treats}
-						borderColour={overrides?.border?.container}
-						fontColour={overrides?.text?.container ?? neutral[7]}
+						borderColour={overrides?.border.container}
+						fontColour={overrides?.text.container ?? neutral[7]}
 					/>
 				</div>
 			)}
