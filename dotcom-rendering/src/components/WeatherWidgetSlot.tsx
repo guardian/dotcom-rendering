@@ -3,6 +3,7 @@ import { css, keyframes } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	from,
+	palette,
 	textSans,
 	until,
 	visuallyHidden,
@@ -100,7 +101,7 @@ const LoadingIcon = () => (
 		css={css`
 			height: 32px;
 			width: 32px;
-			background-color: #f5f5f5;
+			background-color: ${palette.neutral[97]};
 		`}
 	></span>
 );
