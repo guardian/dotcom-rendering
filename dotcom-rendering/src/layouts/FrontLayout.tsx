@@ -454,47 +454,60 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						const containerOverrides =
 							decideContainerOverrides(containerPalette);
 						return (
-							<Section
-								key={ophanName}
-								title={collection.displayName}
-								sectionId={`container-${ophanName}`}
-								ophanComponentName={ophanName}
-								ophanComponentLink={ophanComponentLink}
-								containerName={collection.collectionType}
-								fullWidth={true}
-								padBottom={true}
-								showSideBorders={
-									collection.collectionType !== 'fixed/video'
-								}
-								showTopBorder={index > 0}
-								padContent={false}
-								url={collection.href}
-								containerPalette={containerPalette}
-								showDateHeader={
-									collection.config.showDateHeader
-								}
-								editionId={front.editionId}
-								backgroundColour={
-									containerOverrides.background.containerOuter
-								}
-								innerBackgroundColour={
-									containerOverrides.background.container
-								}
-								hasPageSkin={hasPageSkin}
-							>
-								<Island deferUntil={'visible'}>
-									<Carousel
-										heading={collection.displayName}
-										trails={trails}
-										onwardsSource={'unknown-source'}
-										palette={containerPalette}
-										leftColSize={'compact'}
-										collectionType={
-											collection.collectionType
-										}
-									/>
-								</Island>
-							</Section>
+							<Fragment key={ophanName}>
+								<Section
+									title={collection.displayName}
+									sectionId={`container-${ophanName}`}
+									ophanComponentName={ophanName}
+									ophanComponentLink={ophanComponentLink}
+									containerName={collection.collectionType}
+									fullWidth={true}
+									padBottom={true}
+									showSideBorders={
+										collection.collectionType !==
+										'fixed/video'
+									}
+									showTopBorder={index > 0}
+									padContent={false}
+									url={collection.href}
+									containerPalette={containerPalette}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									backgroundColour={
+										containerOverrides.background
+											.containerOuter
+									}
+									innerBackgroundColour={
+										containerOverrides.background.container
+									}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island deferUntil={'visible'}>
+										<Carousel
+											heading={collection.displayName}
+											trails={trails}
+											onwardsSource={'unknown-source'}
+											palette={containerPalette}
+											leftColSize={'compact'}
+											collectionType={
+												collection.collectionType
+											}
+										/>
+									</Island>
+								</Section>
+								{decideAdSlot(
+									renderAds,
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									mobileAdPositions,
+									hasPageSkin,
+								)}
+							</Fragment>
 						);
 					}
 
