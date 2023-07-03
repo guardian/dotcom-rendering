@@ -109,6 +109,13 @@ const decideAdSlot = (
 	return null;
 };
 
+export const dontShowAge = [
+	'Newsletters',
+	'Showcase',
+	'How to listen to Podcasts',
+	'Get in touch',
+];
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { abTests, isPaidContent, hasPageSkin },
@@ -545,7 +552,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.containerPalette
 									}
 									showAge={
-										collection.displayName !== 'Newsletters'
+										!dontShowAge.includes(
+											collection.displayName,
+										)
 									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
