@@ -1,5 +1,9 @@
 import type { DCRCollectionType } from '../types/front';
-import { getDesktopAdPositions, getMobileAdPositions } from './getAdPositions';
+import {
+	getDesktopAdPositions,
+	getMerchHighPosition,
+	getMobileAdPositions,
+} from './getAdPositions';
 
 const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 	...Array<number>(12),
@@ -25,7 +29,7 @@ describe('Mobile Ads', () => {
 	// 3: when it's a network front and collections are equal or more than 4
 	// 2: when collections are equal or more than 4 and is not a network front
 	// 0: when collections are less than 4
-	it.each([3, 2, 0])(
+	it.each([2, 1, 0])(
 		`should not insert ad when merchandise high is in position %i`,
 		(merchHighPosition) => {
 			const mobileAdPositions = getMobileAdPositions(
@@ -37,7 +41,10 @@ describe('Mobile Ads', () => {
 	);
 
 	it('Should not insert ad after a thrasher container', () => {
-		const merchHighPosition = 2;
+		const merchHighPosition = getMerchHighPosition(
+			defaultTestCollections.length,
+			false,
+		);
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
 		testCollections.splice(9, 0, { collectionType: 'fixed/thrasher' });
@@ -53,7 +60,6 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk/commentisfree as a blueprint
 	it('Non-network front, with more than 4 collections, without thrashers', () => {
-		const merchHighPosition = 2;
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'fixed/large/slow-XIV' },
 			{ collectionType: 'fixed/medium/slow-VI' },
@@ -70,6 +76,11 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
+		const merchHighPosition = getMerchHighPosition(
+			testCollections.length,
+			false,
+		);
+
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
@@ -80,7 +91,6 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/uk as a blueprint
 	it('UK Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const merchHighPosition = 3;
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'dynamic/fast' },
 			{ collectionType: 'fixed/small/slow-IV' },
@@ -108,12 +118,17 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
+		const merchHighPosition = getMerchHighPosition(
+			testCollections.length,
+			true,
+		);
+
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([0, 2, 6, 9, 12, 16, 18, 20, 22]);
+		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 16, 18, 20, 22]);
 	});
 
 	// We used https://www.theguardian.com/international as a blueprint
@@ -152,7 +167,6 @@ describe('Mobile Ads', () => {
 
 	// We used https://www.theguardian.com/us as a blueprint
 	it('US Network Front, with more than 4 collections, with thrashers at various places', () => {
-		const merchHighPosition = 3;
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'dynamic/fast' },
 			{ collectionType: 'fixed/small/slow-IV' },
@@ -177,18 +191,21 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
+		const merchHighPosition = getMerchHighPosition(
+			testCollections.length,
+			true,
+		);
+
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([0, 2, 5, 9, 12, 14, 16, 19]);
+		expect(mobileAdPositions).toEqual([0, 4, 7, 10, 13, 15, 17]);
 	});
 
 	// We used https://www.theguardian.com/uk/lifeandstyle as a blueprint
 	it('Lifeandstyle front, with more than 4 collections, with thrashers at various places', () => {
-		const merchHighPosition = 2;
-
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'dynamic/slow' },
 			{ collectionType: 'fixed/medium/slow-VI' },
@@ -208,18 +225,21 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
+		const merchHighPosition = getMerchHighPosition(
+			testCollections.length,
+			false,
+		);
+
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([0, 4, 8, 10, 13]);
+		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 14]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
 	it('Recipes front, with more than 4 collections, with thrasher at the first position', () => {
-		const merchHighPosition = 2;
-
 		const testCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 			{ collectionType: 'fixed/thrasher' },
 			{ collectionType: 'fixed/medium/slow-VI' },
@@ -237,12 +257,17 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
+		const merchHighPosition = getMerchHighPosition(
+			testCollections.length,
+			false,
+		);
+
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
+		expect(mobileAdPositions).toEqual([2, 4, 6, 8, 10, 12]);
 	});
 });
 
