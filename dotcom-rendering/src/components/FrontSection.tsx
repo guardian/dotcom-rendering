@@ -10,10 +10,10 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { hideAge } from '../layouts/FrontLayout';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
+import { hideAge } from '../lib/hideAge';
 import type { DCRBadgeType } from '../types/badge';
 import type { DCRContainerPalette, TreatType } from '../types/front';
 import type { DCRFrontPagination } from '../types/tagFront';

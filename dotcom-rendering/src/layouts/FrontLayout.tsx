@@ -38,6 +38,7 @@ import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -108,13 +109,6 @@ const decideAdSlot = (
 	}
 	return null;
 };
-
-export const hideAge = [
-	'Newsletters',
-	'Showcase',
-	'How to listen to Podcasts',
-	'Get in touch',
-];
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
