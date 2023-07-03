@@ -5074,6 +5074,11 @@
   resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-7.0.2.tgz#5038aa5ea1e035099ed1dc48aa233e232ff882e7"
   integrity sha512-1DCHCwHRL3+rlvnVVc/BCfReP31XaT2WYgcLeGTmkX1E43Po1MkgcM7PnJPSaa9POvSqZ+6YLZv5Bs1SXbufow==
 
+"@storybook/core-events@7.0.25":
+  version "7.0.25"
+  resolved "https://registry.yarnpkg.com/@storybook/core-events/-/core-events-7.0.25.tgz#a2754a8af5de78a47a0bc2193f3baf80e302ad7b"
+  integrity sha512-abM0M+H19eZu0dRK+/2PB0W9b7xXFhiPddXpFCjIfJQFGPIwGBWVAFot1bKR5Mu4IB9OftkJYMRtYEEBrNep3A==
+
 "@storybook/core-server@7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@storybook/core-server/-/core-server-7.0.2.tgz#23f14803c8d141f6af2cffdb240831c6f69ee7e3"
