@@ -9,7 +9,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { lazy, Suspense } from 'react';
-import type { TemperatureProps } from './WeatherWidget';
+import type { TemperatureProps } from './Weather';
 
 const formatTemperature = ({ value, unit }: TemperatureProps) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
@@ -106,7 +106,7 @@ const LoadingIcon = () => (
 	></span>
 );
 
-export type WeatherWidgetSlotProps = {
+export type WeatherSlotProps = {
 	icon: number;
 	description: string;
 	link: string;
@@ -119,14 +119,14 @@ export type WeatherWidgetSlotProps = {
 	css?: SerializedStyles;
 };
 
-export const WeatherWidgetSlot = ({
+export const WeatherSlot = ({
 	icon,
 	temperature,
 	dateTime,
 	description,
 	isUS,
 	...props
-}: WeatherWidgetSlotProps) => {
+}: WeatherSlotProps) => {
 	const isNow = isUndefined(dateTime);
 
 	const Icon = lazy(() =>
