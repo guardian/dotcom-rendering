@@ -116,6 +116,9 @@ const shouldShowDropCaps = (
  * https://www.npmjs.com/package/sanitize-html#default-options
  */
 const sanitiserOptions: IOptions = {
+	// We allow all tags, which includes script & style which are potentially vulnerable
+	// `allowVulnerableTags: true` suppresses this warning
+	allowVulnerableTags: true,
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
