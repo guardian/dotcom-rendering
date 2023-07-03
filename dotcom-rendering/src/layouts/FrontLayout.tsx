@@ -544,6 +544,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									containerPalette={
 										collection.containerPalette
 									}
+									showAge={
+										collection.displayName !== 'Newsletters'
+									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
 								/>
