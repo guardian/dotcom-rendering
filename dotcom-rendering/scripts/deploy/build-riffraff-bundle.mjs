@@ -44,10 +44,9 @@ const copyCfn = () => {
 const copyStatic = () => {
 	log(' - copying static');
 	return cpy(
-		['**/*'],
+		path.resolve(dirname, '../../src/static/**'),
 		path.resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(dirname, '../../src/static'),
 			nodir: true,
 		},
 	);
@@ -55,28 +54,36 @@ const copyStatic = () => {
 
 const copyDist = () => {
 	log(' - copying dist');
-	return cpy(
-		['**/*.!(html|json)', 'stats/*'],
-		path.resolve(target, 'frontend-static', 'assets'),
-		{
-			cwd: path.resolve(dirname, '../../dist'),
-			nodir: true,
-		},
-	);
+	const source = path.resolve(dirname, '../../dist');
+	const dest = path.resolve(target, 'frontend-static', 'assets');
+	return Promise.all([
+		cpy(
+			path.resolve(source, '**/*.!(html|json)'),
+			dest,
+			{
+				nodir: true,
+			},
+		),
+		cpy(
+			path.resolve(source, 'stats'),
+			path.resolve(dest, 'stats'),
+			{
+				nodir: true,
+			},
+		),
+	]);
 };
 
 const copyScripts = () => {
 	log(' - copying scripts');
-	return cpy(['**/*'], path.resolve(target, 'rendering', 'scripts'), {
-		cwd: path.resolve(dirname, '../../scripts'),
+	return cpy(path.resolve(dirname, '../../scripts/**'), path.resolve(target, 'rendering', 'scripts'), {
 		nodir: true,
 	});
 };
 
 const copyDistServer = () => {
 	log(' - copying server dist');
-	return cpy(['**/*'], path.resolve(target, 'rendering', 'dist'), {
-		cwd: path.resolve(dirname, '../../dist'),
+	return cpy(path.resolve(dirname, '../../dist/**'), path.resolve(target, 'rendering', 'dist'), {
 		nodir: true,
 	});
 };
