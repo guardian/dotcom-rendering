@@ -10,7 +10,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { dontShowAge } from '../layouts/FrontLayout';
+import { hideAge } from '../layouts/FrontLayout';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
@@ -620,7 +620,7 @@ export const FrontSection = ({
 							ajaxUrl={ajaxUrl}
 							editionId={editionId}
 							containerPalette={containerPalette}
-							showAge={!dontShowAge.includes(title)}
+							showAge={!hideAge.includes(title)}
 						/>
 					</Island>
 				) : null}

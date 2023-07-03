@@ -109,7 +109,7 @@ const decideAdSlot = (
 	return null;
 };
 
-export const dontShowAge = [
+export const hideAge = [
 	'Newsletters',
 	'Showcase',
 	'How to listen to Podcasts',
@@ -552,7 +552,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.containerPalette
 									}
 									showAge={
-										!dontShowAge.includes(
+										!hideAge.includes(
 											collection.displayName,
 										)
 									}
