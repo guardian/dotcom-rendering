@@ -1,37 +1,40 @@
-import type { IdentityAuthState } from '@guardian/identity-auth';
+import type {
+	AccessToken,
+	IdentityAuthState,
+	IDToken,
+} from '@guardian/identity-auth';
 import { useEffect, useState } from 'react';
 import type { CustomIdTokenClaims } from './identity';
 
+type SignedInWithCookies = { kind: 'SignedInWithCookies' };
+type SignedInWithOkta = {
+	kind: 'SignedInWithOkta';
+	accessToken: AccessToken<never>;
+	idToken: IDToken<CustomIdTokenClaims>;
+};
+
 type AuthStatus =
 	| { kind: 'Pending' }
-	| { kind: 'NotInTest' }
-	| {
-			kind: 'Ready';
-			authState: IdentityAuthState<never, CustomIdTokenClaims>;
-	  };
+	| { kind: 'SignedOutWithCookies' }
+	| SignedInWithCookies
+	| { kind: 'SignedOutWithOkta' }
+	| SignedInWithOkta;
 
 export const getOptionsHeadersWithOkta = (
-	authStatus: AuthStatus,
+	authStatus: SignedInWithCookies | SignedInWithOkta,
 ): RequestInit => {
-	if (authStatus.kind === 'NotInTest') {
+	if (authStatus.kind === 'SignedInWithCookies') {
 		return {
 			credentials: 'include',
 		};
 	}
 
-	if (
-		authStatus.kind === 'Ready' &&
-		authStatus.authState.accessToken?.accessToken
-	) {
-		return {
-			headers: {
-				Authorization: `Bearer ${authStatus.authState.accessToken.accessToken}`,
-				'X-GU-IS-OAUTH': 'true',
-			},
-		};
-	}
-
-	return {};
+	return {
+		headers: {
+			Authorization: `Bearer ${authStatus.accessToken.accessToken}`,
+			'X-GU-IS-OAUTH': 'true',
+		},
+	};
 };
 
 export async function getAuthState(): Promise<
