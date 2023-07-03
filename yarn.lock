@@ -3568,11 +3568,6 @@
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.0.0.tgz#ab74da6001427f3414a84d15f57bac1a888a140a"
   integrity sha512-Mq3v8Y/YJGs7p/8NWmYHFKdVqRThjDJSfpoo1zSb6DgpQ1Ko8RjvOa2Q9P9ABWfKJCaDp0kcGK3dk0AjDSi/Qw==
 
-"@guardian/discussion-rendering@14.0.0":
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-14.0.0.tgz#2cbfe802a2f81bb8d2ee083a8374fb6bd00dbdcf"
-  integrity sha512-O4XlA1ueL2TX1pWD9jNAPIA8bdaGfZeLzDPVJAgpGIjwlXxQj/xSk/dpJ8jC/V/XBztucM7XtughigvN5fY59w==
-
 "@guardian/eslint-config-typescript@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/eslint-config-typescript/-/eslint-config-typescript-5.0.0.tgz#5bfcc8d9655f5f978474347f7cdefdb08706a805"

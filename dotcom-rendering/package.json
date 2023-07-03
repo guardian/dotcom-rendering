@@ -70,7 +70,6 @@
 		"@guardian/commercial": "10.1.0",
 		"@guardian/consent-management-platform": "13.5.0",
 		"@guardian/core-web-vitals": "4.0.0",
-		"@guardian/discussion-rendering": "14.0.0",
 		"@guardian/eslint-config": "3.0.0",
 		"@guardian/eslint-config-typescript": "5.0.0",
 		"@guardian/eslint-plugin-source-react-components": "14.0.0",
