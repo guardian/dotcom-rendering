@@ -1,5 +1,6 @@
 import { ArticlePillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
+import { userEvent, within } from '@storybook/testing-library';
 import { Section } from '../Section';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
@@ -99,3 +100,40 @@ export const ImmersiveStory = () => {
 	);
 };
 ImmersiveStory.storyName = 'Immersive';
+
+export const ExpandedMenuStory = () => {
+	return (
+		<Section
+			fullWidth={true}
+			showSideBorders={false}
+			borderColour={brandBorder.primary}
+			showTopBorder={false}
+			padSides={false}
+			backgroundColour={brandBackground.primary}
+		>
+			<Nav
+				selectedPillar={ArticlePillar.News}
+				displayRoundel={true}
+				isImmersive={true}
+				nav={nav}
+				subscribeUrl=""
+				editionId="UK"
+				headerTopBarSwitch={false}
+				isInEuropeTest={true}
+			/>
+		</Section>
+	);
+};
+
+/**
+ * Clicks the “More" button so that Chromatic can capture the component in its `expanded` state.
+ */
+ExpandedMenuStory.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	await userEvent.click(canvas.getByLabelText(/More/));
+};
+ExpandedMenuStory.storyName = 'ExpandedMenu';
