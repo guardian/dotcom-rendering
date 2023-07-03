@@ -16,6 +16,7 @@ import { css, keyframes } from '@emotion/react';
 import {
 	between,
 	from,
+	palette,
 	textSans,
 	until,
 	visuallyHidden,
@@ -30,7 +31,7 @@ const visuallyHiddenCSS = css`
 
 const widgetCSS = css`
 	animation: ${keyframes`from {	opacity: 0;	} to {	opacity: 1;	}`} 250ms;
-	--border: 1px solid #dcdcdc;
+	--border: 1px solid ${palette.neutral[86]};
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -126,7 +127,7 @@ const slotCSS = css`
 const linkCSS = css`
 	a {
 		${textSans.small()};
-		color: #121212;
+		color: ${palette.neutral[7]};
 		text-decoration: none;
 		display: block;
 		display: flex;
