@@ -454,9 +454,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						const containerOverrides =
 							decideContainerOverrides(containerPalette);
 						return (
-							<>
+							<Fragment key={ophanName}>
 								<Section
-									key={ophanName}
 									title={collection.displayName}
 									sectionId={`container-${ophanName}`}
 									ophanComponentName={ophanName}
@@ -508,7 +507,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									mobileAdPositions,
 									hasPageSkin,
 								)}
-							</>
+							</Fragment>
 						);
 					}
 
