@@ -63,9 +63,8 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
  */
 const enhance = (elements: FEElement[]): FEElement[] => {
 	const slugifiedIds: string[] = [];
-	const enhanced: FEElement[] = [];
 	const shouldUseElementId = shouldUseLegacyIDs(elements);
-	elements.forEach((element) => {
+	return elements.map<FEElement>((element) => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
@@ -79,16 +78,15 @@ const enhance = (elements: FEElement[]): FEElement[] => {
 				// add ID to H2 element
 				`<h2 id='${id}'>`,
 			);
-			enhanced.push({
+			return {
 				...element,
 				html: withId,
-			});
+			};
 		} else {
 			// Otherwise, do nothing
-			enhanced.push(element);
+			return element;
 		}
 	});
-	return enhanced;
 };
 
 export const enhanceH2s = (blocks: Block[]): Block[] => {

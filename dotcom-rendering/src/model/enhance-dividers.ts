@@ -21,23 +21,22 @@ const isDinkus = (element: FEElement): boolean => {
 	);
 };
 
-const checkForDividers = (elements: FEElement[]): FEElement[] => {
+const checkForDividers = (elements: FEElement[]): FEElement[] =>
 	// checkForDividers loops the array of article elements looking for star flags and
 	// enhancing the data accordingly. In short, if a h2 tag is equal to * * * then we
 	// insert a divider and any the text element immediately afterwards should have dropCap
 	// set to true
-	const enhanced: FEElement[] = [];
-	elements.forEach((element, i) => {
+	elements.map<FEElement>((element, i) => {
 		const previous = elements[i - 1];
 
 		if (i === 0) {
 			// Always pass first element through
-			enhanced.push(element);
+			return element;
 		} else if (isDinkus(element)) {
 			// If this element is a dinkus, replace it with a divider
-			enhanced.push({
+			return {
 				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-			});
+			};
 		} else if (
 			previous &&
 			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
@@ -45,17 +44,15 @@ const checkForDividers = (elements: FEElement[]): FEElement[] => {
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement'
 		) {
-			enhanced.push({
+			return {
 				...element,
 				dropCap: true,
-			});
+			};
 		} else {
 			// Otherwise, do nothing
-			enhanced.push(element);
+			return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceDividers = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {

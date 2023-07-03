@@ -1,10 +1,9 @@
 import type { FEElement } from '../types/content';
 
-const removeTweetClass = (elements: FEElement[]): FEElement[] => {
-	const enhanced: FEElement[] = [];
-	elements.forEach((element) => {
+const removeTweetClass = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((element) => {
 		switch (element._type) {
-			case 'model.dotcomrendering.pageElements.TweetBlockElement':
+			case 'model.dotcomrendering.pageElements.TweetBlockElement': {
 				// Parse the embed block element, find the iframe and add
 				// the alt text as a title attribute if it exists
 				// https://dequeuniversity.com/tips/provide-iframe-titles
@@ -12,17 +11,16 @@ const removeTweetClass = (elements: FEElement[]): FEElement[] => {
 					'twitter-tweet',
 					'nojs-tweet',
 				);
-				enhanced.push({
+				return {
 					...element,
 					html: withoutTweetClass,
-				});
-				break;
+				};
+			}
+
 			default:
-				enhanced.push(element);
+				return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceTweets = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {

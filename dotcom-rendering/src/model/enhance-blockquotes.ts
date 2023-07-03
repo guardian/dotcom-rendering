@@ -7,40 +7,37 @@ const isQuoted = (element: BlockquoteBlockElement): boolean => {
 	return !!frag.querySelector('.quoted');
 };
 
-const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
+const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] =>
 	// Loops the array of article elements looking for BlockquoteBlockElements to enhance
-	const enhanced: FEElement[] = [];
-	elements.forEach((element) => {
+	elements.map<FEElement>((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 				if (isQuoted(element)) {
 					// When blockquotes have the `quoted` class we represent this using
 					// the quoted prop
-					enhanced.push({
+					return {
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 						elementId: element.elementId,
 						html: element.html,
 						quoted: true,
-					});
+					};
 				} else if (isPhotoEssay) {
 					// If a blockquote is not queoted it is a Simple Blockquote and for
 					// photo essays we transform these into HighlightBlockElements
-					enhanced.push({
+					return {
 						_type: 'model.dotcomrendering.pageElements.HighlightBlockElement',
 						elementId: element.elementId,
 						html: element.html,
-					});
+					};
 				} else {
 					// Otherwise we don't transform anything and pass the element through
-					enhanced.push(element);
+					return element;
 				}
 				break;
 			default:
-				enhanced.push(element);
+				return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceBlockquotes = (
 	blocks: Block[],
