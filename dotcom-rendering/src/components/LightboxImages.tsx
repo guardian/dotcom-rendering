@@ -116,8 +116,10 @@ const asideStyles = css`
 	}
 `;
 
-const imageAreaStyles = css`
+const figureStyles = css`
 	display: flex;
+	position: relative;
+	width: 100%;
 	height: 100%;
 	justify-content: space-between;
 
@@ -193,31 +195,24 @@ export const LightboxImages = ({ format, images }: Props) => {
 							pictureStyles,
 						]}
 					>
-						<div css={imageAreaStyles}>
-							<figure
-								css={css`
-									position: relative;
-									width: 100%;
-								`}
-							>
-								<LightboxLoader position={index + 1} />
-								<Picture
-									// Using the role of immersive here indicates the intentions for lightbox
-									// images but it's moot because the `isLightbox` prop overrides the decision
-									// around what size sources to use
-									role="immersive"
-									alt={image.alt ?? ''}
-									// Height and width are only used here so the browser has a ratio to work with
-									// when laying out the page. The actual size of the image is based on the
-									// viewport
-									height={image.height.toString()}
-									width={image.width.toString()}
-									master={image.masterUrl}
-									format={format}
-									isLightbox={true}
-									orientation={orientation}
-								/>
-							</figure>
+						<figure css={figureStyles}>
+							<LightboxLoader position={index + 1} />
+							<Picture
+								// Using the role of immersive here indicates the intentions for lightbox
+								// images but it's moot because the `isLightbox` prop overrides the decision
+								// around what size sources to use
+								role="immersive"
+								alt={image.alt ?? ''}
+								// Height and width are only used here so the browser has a ratio to work with
+								// when laying out the page. The actual size of the image is based on the
+								// viewport
+								height={image.height.toString()}
+								width={image.width.toString()}
+								master={image.masterUrl}
+								format={format}
+								isLightbox={true}
+								orientation={orientation}
+							/>
 							<aside css={asideStyles}>
 								{!!image.title && (
 									<h2
@@ -299,7 +294,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 										</Link>
 									)}
 							</aside>
-						</div>
+						</figure>
 					</li>
 				);
 			})}
