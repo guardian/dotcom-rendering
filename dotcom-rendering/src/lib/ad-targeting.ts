@@ -1,5 +1,7 @@
 import { isString } from '@guardian/libs';
 
+export type SharedAdTargeting = Record<string, unknown>;
+
 // TODO: this function already exists in commercial-core, consider exporting it to avoid duplication
 const getUrlKeywords = (url: string): string[] => {
 	const lastSegment = url
@@ -23,7 +25,7 @@ export const buildAdTargeting = ({
 	isSensitive: boolean;
 	edition: string;
 	section: string;
-	sharedAdTargeting: Record<string, unknown>;
+	sharedAdTargeting: SharedAdTargeting;
 	adUnit: string;
 	videoDuration?: number;
 }): AdTargeting => {

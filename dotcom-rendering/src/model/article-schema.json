@@ -4122,8 +4122,7 @@
                     "type": "string"
                 },
                 "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
+                    "$ref": "#/definitions/SharedAdTargeting"
                 },
                 "isPaidContent": {
                     "type": "boolean"
@@ -4259,6 +4258,9 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "SharedAdTargeting": {
+            "type": "object"
         },
         "FETrailType": {
             "type": "object",

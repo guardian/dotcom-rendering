@@ -53,7 +53,6 @@ import {
 	hasRelevantTopics,
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -261,16 +260,6 @@ export const LiveLayout = ({
 
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
-
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -694,7 +683,6 @@ export const LiveLayout = ({
 									<MainMedia
 										format={format}
 										elements={article.mainMediaElements}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -828,7 +816,6 @@ export const LiveLayout = ({
 													pinnedPost={
 														article.pinnedPost
 													}
-													adTargeting={adTargeting}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}
@@ -983,7 +970,6 @@ export const LiveLayout = ({
 													pinnedPost={
 														article.pinnedPost
 													}
-													adTargeting={adTargeting}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}

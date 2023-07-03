@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandAlt,
 	brandBackground,
@@ -40,7 +41,6 @@ import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -198,15 +198,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const palette = decidePalette(format);
@@ -493,7 +484,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}

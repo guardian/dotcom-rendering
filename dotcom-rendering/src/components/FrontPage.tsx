@@ -2,6 +2,7 @@ import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { FrontLayout } from '../layouts/FrontLayout';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { DCRFrontType } from '../types/front';
@@ -12,6 +13,7 @@ import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
@@ -29,6 +31,15 @@ type Props = {
  * @param {NAVType} props.NAV - The article JSON data
  * */
 export const FrontPage = ({ front, NAV }: Props) => {
+	const adTargeting = buildAdTargeting({
+		isAdFreeUser: front.isAdFreeUser,
+		isSensitive: front.config.isSensitive,
+		edition: front.config.edition,
+		section: front.config.section,
+		sharedAdTargeting: front.config.sharedAdTargeting,
+		adUnit: front.config.adUnit,
+	});
+
 	return (
 		<StrictMode>
 			<Global
@@ -74,6 +85,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 					pageIsSensitive={front.config.isSensitive}
 					isDev={!!front.config.isDev}
 				/>
+			</Island>
+			<Island clientOnly={true}>
+				<SetAdTargeting adTargeting={adTargeting} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
