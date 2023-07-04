@@ -233,13 +233,10 @@ const decideSublinkPosition = (
 };
 
 const isWithinTwelveHours = (webPublicationDate: string): boolean => {
-	const publicationDate = new Date(webPublicationDate);
-	const currentDateTime = new Date();
-	// Calculate the difference in milliseconds
-	const timeDiffMs = currentDateTime.getTime() - publicationDate.getTime();
-	// Calculate the difference in hours
-	const timeDiffHours = Math.abs(timeDiffMs / (1000 * 60 * 60));
-	// Check if the difference is less than or equal to 12 hours
+	const timeDiffMs = Math.abs(
+		new Date().getTime() - new Date(webPublicationDate).getTime(),
+	);
+	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
 	return timeDiffHours <= 12;
 };
 
