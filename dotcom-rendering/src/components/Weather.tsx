@@ -183,20 +183,6 @@ export interface WeatherProps {
 	edition: FEFrontConfigType['edition'];
 }
 
-const getForecastForHourOffset = (
-	forecast: WeatherForecast,
-	offsetHours: 3 | 6 | 9 | 12,
-) => {
-	const dateTime = new Date(Date.now());
-	dateTime.setHours(dateTime.getHours() + offsetHours);
-	dateTime.setMinutes(0);
-
-	return {
-		...forecast[offsetHours],
-		dateTime,
-	};
-};
-
 export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const isUS = edition === 'US';
 	return (
@@ -212,28 +198,16 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 
 			{/* Forecast slots */}
 			<div css={slotCSS} className="forecast-1">
-				<WeatherSlot
-					isUS={isUS}
-					{...getForecastForHourOffset(forecast, 3)}
-				/>
+				<WeatherSlot isUS={isUS} {...forecast[3]} />
 			</div>
 			<div css={slotCSS} className="forecast-2">
-				<WeatherSlot
-					isUS={isUS}
-					{...getForecastForHourOffset(forecast, 6)}
-				/>
+				<WeatherSlot isUS={isUS} {...forecast[6]} />
 			</div>
 			<div css={slotCSS} className="forecast-3">
-				<WeatherSlot
-					isUS={isUS}
-					{...getForecastForHourOffset(forecast, 9)}
-				/>
+				<WeatherSlot isUS={isUS} {...forecast[9]} />
 			</div>
 			<div css={slotCSS} className="forecast-4">
-				<WeatherSlot
-					isUS={isUS}
-					{...getForecastForHourOffset(forecast, 12)}
-				/>
+				<WeatherSlot isUS={isUS} {...forecast[12]} />
 			</div>
 			<div css={linkCSS}>
 				<a href={now.link}>

@@ -37,6 +37,7 @@ export type WeatherData = {
 	description: string;
 	icon: number;
 	link?: string;
+	dateTime?: string;
 	temperature: {
 		metric: number;
 		imperial: number;

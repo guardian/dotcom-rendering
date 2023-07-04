@@ -8,18 +8,19 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
 import type { WeatherData } from './WeatherData.importable';
 
 const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
 
-const formatTime = (dateTime: Date, isUS: boolean) =>
+const formatTime = (dateTime: string, isUS: boolean) =>
 	isUS
-		? dateTime.toLocaleTimeString('en-US', {
+		? new Date(dateTime).toLocaleTimeString('en-US', {
 				hour: 'numeric',
 		  })
-		: dateTime.toLocaleTimeString(undefined, {
+		: new Date(dateTime).toLocaleTimeString(undefined, {
 				hour: '2-digit',
 				minute: '2-digit',
 		  });
@@ -109,7 +110,7 @@ const LoadingIcon = () => (
 export type WeatherSlotProps = WeatherData & {
 	isUS: boolean;
 	css?: SerializedStyles;
-	dateTime?: Date;
+	dateTime?: string;
 };
 
 export const WeatherSlot = ({
@@ -120,7 +121,7 @@ export const WeatherSlot = ({
 	isUS,
 	...props
 }: WeatherSlotProps) => {
-	const isNow = isUndefined(dateTime);
+	const isNow = isUndefined(dateTime) || isNull(dateTime);
 
 	const Icon = lazy(() =>
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
@@ -148,7 +149,7 @@ export const WeatherSlot = ({
 					Now
 				</span>
 			) : (
-				<time css={timeCSS} dateTime={dateTime.toDateString()}>
+				<time css={timeCSS} dateTime={dateTime}>
 					{formatTime(dateTime, isUS)}
 				</time>
 			)}
