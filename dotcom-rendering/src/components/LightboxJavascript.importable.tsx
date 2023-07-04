@@ -54,17 +54,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
 
-	// Remember a user's preference for the caption info
-	try {
-		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
-			hideInfo();
-		} else {
-			showInfo();
-		}
-	} catch (error) {
-		// Do nothing. Errors accessing local storage are common
-	}
-
 	// --------------------------------------------------------------------------------
 	// FUNCTIONS
 	// --------------------------------------------------------------------------------
@@ -105,6 +94,13 @@ function initialiseLightbox(lightbox: HTMLElement) {
 			return screenfull.request(lightbox);
 		}
 		return;
+	}
+
+	function exitFullscreen() {
+		if (screenfull.isEnabled && screenfull.isFullscreen) {
+			return screenfull.exit();
+		}
+		return Promise.resolve();
 	}
 
 	/**
@@ -298,13 +294,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	}
 
-	function exitFullscreen() {
-		if (screenfull.isEnabled && screenfull.isFullscreen) {
-			return screenfull.exit();
-		}
-		return Promise.resolve();
-	}
-
 	async function close() {
 		log('dotcom', '💡 Closing lightbox.');
 		await exitFullscreen();
@@ -486,10 +475,23 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 */
 	window.addEventListener('resize', libDebounce(setLightboxHeight, 150));
 
-	/**
-	 * If this code is running, it means this file is being hydrated because the url contains an img- hash
-	 * and so we should open the lightbox at that position.
-	 */
+	// --------------------------------------------------------------------------------
+	// STARTUP
+	// This code is run once when the lightbox first opens
+	// --------------------------------------------------------------------------------
+
+	// Check the user's preferences to decide if we show the caption or not
+	try {
+		if (storage.local.get('gu.prefs.lightbox-hideinfo') === true) {
+			hideInfo();
+		} else {
+			showInfo(); // Default
+		}
+	} catch (error) {
+		// Do nothing. Errors accessing local storage are common
+	}
+
+	// Open the lightbox at the position given in the url hash
 	const hash = window.location.hash;
 	if (hash.startsWith('#img-')) {
 		const position = hash.substring(5);
