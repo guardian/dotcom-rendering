@@ -11,7 +11,7 @@ type Props = GroupedTrailsFastMpu & {
 	adIndex: number;
 };
 
-export const TwoCard = ({
+const TwoCard = ({
 	trails,
 	adIndex,
 }: {
@@ -35,7 +35,7 @@ export const TwoCard = ({
 	);
 };
 
-export const FourCard = ({
+const FourCard = ({
 	trails,
 	adIndex,
 }: {
@@ -69,7 +69,7 @@ export const FourCard = ({
 	);
 };
 
-export const SixCard = ({
+const SixCard = ({
 	trails,
 	adIndex,
 }: {
@@ -113,7 +113,7 @@ export const SixCard = ({
 	);
 };
 
-export const NineCard = ({
+const NineCard = ({
 	trails,
 	adIndex,
 }: {
