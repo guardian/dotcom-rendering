@@ -38,6 +38,7 @@ import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -564,7 +565,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.containerPalette
 									}
 									showAge={
-										collection.displayName === 'Headlines'
+										!hideAge.includes(
+											collection.displayName,
+										)
 									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}
