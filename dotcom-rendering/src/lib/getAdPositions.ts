@@ -77,8 +77,8 @@ export const getMobileAdPositions = (
 
 /**
  * Uses a very similar approach to pressed fronts, except we
- * - Don't need to consider thrashers
- * - Don't need to consider the 'most viewed' container
+ * - Do not need to consider thrashers
+ * - Do not need to consider the 'most viewed' container
  *
  * The types are also slightly different, as we
  */
