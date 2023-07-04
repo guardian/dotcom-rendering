@@ -1,6 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import { Card33Media33, Card50Media50, CardDefault } from '../lib/cardWrappers';
-import { isTuple, type Tuple } from '../lib/tuple';
+import { type Tuple } from '../lib/tuple';
 import type { DCRFrontCard } from '../types/front';
 import type { GroupedTrailsSlowMpu } from '../types/tagFront';
 import { AdSlot } from './AdSlot';
