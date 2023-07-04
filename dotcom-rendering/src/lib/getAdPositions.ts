@@ -94,10 +94,10 @@ export const getTagFrontMobileAdPositions = (
 		.filter(isEvenIndex)
 		.map((collection) =>
 			collections.findIndex(
-				(c) =>
-					c.day === collection.day &&
-					c.month === collection.month &&
-					c.year === collection.year,
+				({ day, month, year }) =>
+					day === collection.day &&
+					month === collection.month &&
+					year === collection.year,
 			),
 		)
 		// Should insert no more than 10 ads
