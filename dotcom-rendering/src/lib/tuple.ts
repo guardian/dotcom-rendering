@@ -54,3 +54,49 @@ export const isTupleOrGreater = <T, N extends number>(
 	arr: Array<T> | ReadonlyArray<T>,
 	count: N,
 ): arr is [...Tuple<T, N>, ...Array<T>] => arr.length >= count;
+
+/** Type where a tuple can have any 'n' number of items or less  */
+type TupleOrLess<
+	T,
+	N extends 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+> = N extends 12
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12>
+	: N extends 11
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11>
+	: N extends 10
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10>
+	: N extends 9
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>
+	: N extends 8
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>
+	: N extends 7
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7>
+	: N extends 6
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5 | 6>
+	: N extends 5
+	? Tuple<T, 0 | 1 | 2 | 3 | 4 | 5>
+	: N extends 4
+	? Tuple<T, 0 | 1 | 2 | 3 | 4>
+	: N extends 3
+	? Tuple<T, 0 | 1 | 2 | 3>
+	: N extends 2
+	? Tuple<T, 0 | 1 | 2>
+	: N extends 1
+	? Tuple<T, 0 | 1>
+	: undefined;
+
+/**
+ * Takes the first 'n' number of items in an array
+ *
+ * By returning `TupleOrLess` you receive a type-safe response
+ * that can be checked exhaustively.
+ */
+export const takeFirst = <
+	T,
+	N extends 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+>(
+	array: Array<T> | ReadonlyArray<T>,
+	count: N,
+): TupleOrLess<T, N> =>
+	//@ts-expect-error – we’ve tested this manually and it’s a very helpful method
+	array.slice(0, count);
