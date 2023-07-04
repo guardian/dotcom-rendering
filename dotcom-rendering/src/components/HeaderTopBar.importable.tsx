@@ -3,7 +3,7 @@ import { brand, from, space } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
@@ -75,7 +75,10 @@ export const HeaderTopBar = ({
 	isInEuropeTest,
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 
 	return (
 		<div

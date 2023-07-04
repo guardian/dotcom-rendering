@@ -11,8 +11,8 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
-import { useSignedInAuthState } from '../lib/useSignedInAuthState';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
@@ -190,7 +190,7 @@ const SignedInWithNotifications = ({
 	discussionApiUrl,
 	notifications,
 }: SignedInWithNotificationsProps) => {
-	const authStatus = useSignedInAuthState();
+	const authStatus = useAuthStatus();
 
 	let userId: string | undefined;
 
@@ -214,8 +214,8 @@ const SignedInWithNotifications = ({
 		userId = data.userProfile.userId;
 	}
 
-	if (authStatus.kind === 'Ready') {
-		userId = authStatus.authState.idToken?.claims.legacy_identity_id;
+	if (authStatus.kind === 'SignedInWithOkta') {
+		userId = authStatus.idToken.claims.legacy_identity_id;
 	}
 
 	if (!userId || error) return <SignIn idUrl={idUrl} />;

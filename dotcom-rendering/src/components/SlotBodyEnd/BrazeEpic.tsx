@@ -9,12 +9,12 @@ import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
 import {
 	getOptionsHeadersWithOkta,
-	useSignedInAuthState,
-} from '../../lib/useSignedInAuthState';
+	useAuthStatus,
+} from '../../lib/useAuthStatus';
+import { useIsInView } from '../../lib/useIsInView';
+import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
 
 const wrapperMargins = css`
@@ -101,7 +101,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	countryCode,
 	idApiUrl,
 }: InnerProps) => {
-	const authStatus = useSignedInAuthState();
+	const authStatus = useAuthStatus();
 	const [hasBeenSeen, setNode] = useIsInView({
 		rootMargin: '-18px',
 		threshold: 0,
@@ -139,7 +139,10 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus.kind !== 'Pending') {
+		if (
+			authStatus.kind == 'SignedInWithCookies' ||
+			authStatus.kind == 'SignedInWithOkta'
+		) {
 			const options = getOptionsHeadersWithOkta(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {

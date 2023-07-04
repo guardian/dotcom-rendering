@@ -1,11 +1,8 @@
 import { joinUrl } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { useApi } from '../lib/useApi';
+import { getOptionsHeadersWithOkta, useAuthStatus } from '../lib/useAuthStatus';
 import { useDiscussion } from '../lib/useDiscussion';
-import {
-	getOptionsHeadersWithOkta,
-	useSignedInAuthState,
-} from '../lib/useSignedInAuthState';
 import { SignedInAs } from './SignedInAs';
 
 type Props = {
@@ -21,23 +18,25 @@ export const DiscussionMeta = ({
 	shortUrlId,
 	enableDiscussionSwitch,
 }: Props) => {
-	const authStatus = useSignedInAuthState();
+	const authStatus = useAuthStatus();
 
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
-	const options = getOptionsHeadersWithOkta(authStatus);
-
 	const { data } = useApi<{ userProfile: UserProfile }>(
-		authStatus.kind !== 'Pending'
+		authStatus.kind === 'SignedInWithOkta' ||
+			authStatus.kind === 'SignedInWithCookies'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
 			  )
 			: undefined,
 		{},
-		options,
+		authStatus.kind === 'SignedInWithOkta' ||
+			authStatus.kind === 'SignedInWithCookies'
+			? getOptionsHeadersWithOkta(authStatus)
+			: undefined,
 	);
 
 	const palette = decidePalette(format);

@@ -12,8 +12,8 @@ import { getZIndex } from '../../lib/getZIndex';
 import type { CanShowResult } from '../../lib/messagePicker';
 import {
 	getOptionsHeadersWithOkta,
-	useSignedInAuthState,
-} from '../../lib/useSignedInAuthState';
+	useAuthStatus,
+} from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
 
 type Meta = {
@@ -108,7 +108,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	meta,
 	idApiUrl,
 }: InnerProps) => {
-	const authStatus = useSignedInAuthState();
+	const authStatus = useAuthStatus();
 
 	useEffect(() => {
 		// Log the impression with Braze
@@ -131,7 +131,10 @@ const BrazeBannerWithSatisfiedDependencies = ({
 	if (!componentName) return null;
 
 	const subscribeToNewsletter = async (newsletterId: string) => {
-		if (authStatus.kind !== 'Pending') {
+		if (
+			authStatus.kind == 'SignedInWithCookies' ||
+			authStatus.kind == 'SignedInWithOkta'
+		) {
 			const options = getOptionsHeadersWithOkta(authStatus);
 
 			await fetch(`${idApiUrl}/users/me/newsletters`, {

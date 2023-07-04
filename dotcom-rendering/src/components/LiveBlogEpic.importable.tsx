@@ -17,7 +17,7 @@ import {
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import type { TagType } from '../types/tag';
 
 type Props = {
@@ -105,7 +105,10 @@ const usePayload = ({
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;

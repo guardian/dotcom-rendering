@@ -5,8 +5,8 @@ import { useState } from 'react';
 import type { FEArticleType } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
+import { eitherSignedInWithOktaOrElse } from './useAuthStatus';
 import { useOnce } from './useOnce';
-import { eitherSignedInWithOktaOrElse } from './useSignedInAuthState';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';

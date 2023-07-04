@@ -2,8 +2,8 @@ import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
@@ -153,7 +153,10 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	switches,
 }: Props) => {
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
