@@ -1,29 +1,30 @@
 import { css } from '@emotion/react';
-import { brandAlt, from } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 type PlayButtonSize = keyof typeof sizes;
 
 const sizes = {
-	small: { button: 28, icon: 26 },
-	medium: { button: 44, icon: 36 },
-	large: { button: 48, icon: 40 },
-	xlarge: { button: 60, icon: 54 },
+	small: { button: 40, icon: 32 },
+	medium: { button: 80, icon: 72 },
+	large: { button: 80, icon: 72 },
+	xlarge: { button: 80, icon: 72 },
 } as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconWrapperStyles = css`
 	display: flex; /* Fixes the div mis-sizing itself */
 	position: absolute;
-	bottom: 4px;
-	left: 4px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;
 
 const iconStyles = (
 	size: PlayButtonSize,
 	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
 ) => css`
-	background-color: ${brandAlt[400]};
+	background-color: rgba(18, 18, 18, 0.6);
 	border-radius: 50%;
 	width: ${sizes[sizeOnMobile].button}px;
 	height: ${sizes[sizeOnMobile].button}px;
@@ -38,6 +39,7 @@ const iconStyles = (
 
 	svg {
 		/* Visual centering */
+		fill: ${palette.neutral[100]};
 		transform: translateX(1px);
 		width: ${sizes[sizeOnMobile].icon}px;
 		height: ${sizes[sizeOnMobile].icon}px;
