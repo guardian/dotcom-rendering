@@ -9,7 +9,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { lazy, Suspense } from 'react';
-import type { WeatherData } from '../lib/useWeather';
+import type { WeatherData } from './WeatherData.importable';
 
 const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;

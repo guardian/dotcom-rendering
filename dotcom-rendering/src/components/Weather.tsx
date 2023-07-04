@@ -22,8 +22,8 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgExternal } from '@guardian/source-react-components';
-import type { WeatherData, WeatherForecast } from '../lib/useWeather';
 import type { FEFrontConfigType } from '../types/front';
+import type { WeatherData, WeatherForecast } from './WeatherData.importable';
 import { WeatherSlot } from './WeatherSlot';
 
 const visuallyHiddenCSS = css`
