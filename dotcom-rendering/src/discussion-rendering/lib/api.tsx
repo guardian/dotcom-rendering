@@ -241,6 +241,7 @@ export const reportAbuse = ({
 	return fetch(url, {
 		method: 'POST',
 		body: data.toString(),
+		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
