@@ -298,7 +298,7 @@ export const EightOrMoreFast = ({
 					<Card25Media25 trail={trails[3]} showAge={true} />
 				</LI>
 			</UL>
-			<UL direction="row">
+			<UL direction="row" padBottom={afterEight.length > 0}>
 				<LI percentage="25%" padSides={true}>
 					<CardDefault trail={trails[4]} showAge={true} />
 				</LI>
@@ -312,18 +312,22 @@ export const EightOrMoreFast = ({
 					<CardDefault trail={trails[6]} showAge={true} />
 				</LI>
 			</UL>
-			<UL wrapCards={true} direction="row">
-				{afterEight.map((trail, index) => (
-					<LI
-						key={trail.url}
-						percentage="33.333%"
-						padSides={true}
-						showDivider={index % 3 !== 0}
-					>
-						<CardDefault trail={trail} showAge={true} />
-					</LI>
-				))}
-			</UL>
+			{afterEight.length > 0 ? (
+				<UL wrapCards={true} direction="row">
+					{afterEight.map((trail, index) => (
+						<LI
+							key={trail.url}
+							percentage="33.333%"
+							padSides={true}
+							showDivider={index % 3 !== 0}
+						>
+							<CardDefault trail={trail} showAge={true} />
+						</LI>
+					))}
+				</UL>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };
@@ -351,7 +355,7 @@ export const EightOrMoreSlow = ({
 					<Card25Media25 trail={trails[3]} showAge={true} />
 				</LI>
 			</UL>
-			<UL direction="row">
+			<UL direction="row" padBottom={afterEight.length > 0}>
 				<LI percentage="33.333%" padSides={true}>
 					<Card25Media25 trail={trails[4]} showAge={true} />
 				</LI>
@@ -365,18 +369,22 @@ export const EightOrMoreSlow = ({
 					<Card25Media25 trail={trails[7]} showAge={true} />
 				</LI>
 			</UL>
-			<UL wrapCards={true} direction="row">
-				{afterEight.map((trail, index) => (
-					<LI
-						key={trail.url}
-						percentage="25%"
-						padSides={true}
-						showDivider={index % 4 !== 0}
-					>
-						<Card25Media25 trail={trail} showAge={true} />
-					</LI>
-				))}
-			</UL>
+			{afterEight.length > 0 ? (
+				<UL wrapCards={true} direction="row">
+					{afterEight.map((trail, index) => (
+						<LI
+							key={trail.url}
+							percentage="25%"
+							padSides={true}
+							showDivider={index % 4 !== 0}
+						>
+							<Card25Media25 trail={trail} showAge={true} />
+						</LI>
+					))}
+				</UL>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };
