@@ -7,7 +7,7 @@ import {
 	CardDefault,
 } from '../lib/cardWrappers';
 import type { Tuple } from '../lib/tuple';
-import { isTuple, isTupleOrGreater } from '../lib/tuple';
+import { takeFirst } from '../lib/tuple';
 import type { DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -275,11 +275,13 @@ export const SevenCardSlow = ({
 	);
 };
 
-export const EightCardFast = ({
+export const EightOrMoreFast = ({
 	trails,
 }: {
-	trails: Tuple<DCRFrontCard, 8>;
+	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
 }) => {
+	const afterEight = trails.slice(8);
+
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -310,15 +312,29 @@ export const EightCardFast = ({
 					<CardDefault trail={trails[6]} showAge={true} />
 				</LI>
 			</UL>
+			<UL wrapCards={true} direction="row">
+				{afterEight.map((trail, index) => (
+					<LI
+						key={trail.url}
+						percentage="33.333%"
+						padSides={true}
+						showDivider={index % 3 !== 0}
+					>
+						<CardDefault trail={trail} showAge={true} />
+					</LI>
+				))}
+			</UL>
 		</>
 	);
 };
 
-export const EightCardSlow = ({
+export const EightOrMoreSlow = ({
 	trails,
 }: {
-	trails: Tuple<DCRFrontCard, 8>;
+	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
 }) => {
+	const afterEight = trails.slice(8);
+
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -349,48 +365,6 @@ export const EightCardSlow = ({
 					<Card25Media25 trail={trails[7]} showAge={true} />
 				</LI>
 			</UL>
-		</>
-	);
-};
-
-export const BeyondEightFast = ({
-	trails,
-}: {
-	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
-}) => {
-	const firstEight = trails.slice(0, 8) as Tuple<DCRFrontCard, 8>;
-	const afterEight = trails.slice(8);
-
-	return (
-		<>
-			<EightCardFast trails={firstEight} />;
-			<UL wrapCards={true} direction="row">
-				{afterEight.map((trail, index) => (
-					<LI
-						key={trail.url}
-						percentage="33.333%"
-						padSides={true}
-						showDivider={index % 3 !== 0}
-					>
-						<CardDefault trail={trail} showAge={true} />
-					</LI>
-				))}
-			</UL>
-		</>
-	);
-};
-
-export const BeyondEightSlow = ({
-	trails,
-}: {
-	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
-}) => {
-	const firstEight = trails.slice(0, 8) as Tuple<DCRFrontCard, 8>;
-	const afterEight = trails.slice(8);
-
-	return (
-		<>
-			<EightCardSlow trails={firstEight} />;
 			<UL wrapCards={true} direction="row">
 				{afterEight.map((trail, index) => (
 					<LI
@@ -408,49 +382,57 @@ export const BeyondEightSlow = ({
 };
 
 export const DecideContainerByTrails = ({ trails, speed }: Props) => {
+	const initialTrails = takeFirst(trails, 8);
+
 	if (speed === 'fast') {
-		if (isTuple(trails, 1)) {
-			return <OneCardFast trail={trails[0]} />;
-		} else if (isTuple(trails, 2)) {
-			return <TwoCard trails={trails} />;
-		} else if (isTuple(trails, 3)) {
-			return <ThreeCard trails={trails} />;
-		} else if (isTuple(trails, 4)) {
-			return <FourCard trails={trails} />;
-		} else if (isTuple(trails, 5)) {
-			return <FiveCardFast trails={trails} />;
-		} else if (isTuple(trails, 6)) {
-			return <SixCardFast trails={trails} />;
-		} else if (isTuple(trails, 7)) {
-			return <SevenCardFast trails={trails} />;
-		} else if (isTuple(trails, 8)) {
-			return <EightCardFast trails={trails} />;
-		} else if (isTupleOrGreater(trails, 9)) {
-			return <BeyondEightFast trails={trails} />;
-		} else {
-			return <></>;
+		switch (initialTrails.length) {
+			case 0:
+				return <></>;
+			case 1:
+				return <OneCardFast trail={initialTrails[0]} />;
+			case 2:
+				return <TwoCard trails={initialTrails} />;
+			case 3:
+				return <ThreeCard trails={initialTrails} />;
+			case 4:
+				return <FourCard trails={initialTrails} />;
+			case 5:
+				return <FiveCardFast trails={initialTrails} />;
+			case 6:
+				return <SixCardFast trails={initialTrails} />;
+			case 7:
+				return <SevenCardFast trails={initialTrails} />;
+			case 8:
+				return (
+					<EightOrMoreFast
+						trails={[...initialTrails, ...trails.slice(8)]}
+					/>
+				);
 		}
 	} else {
-		if (isTuple(trails, 1)) {
-			return <OneCardSlow trail={trails[0]} />;
-		} else if (isTuple(trails, 2)) {
-			return <TwoCard trails={trails} />;
-		} else if (isTuple(trails, 3)) {
-			return <ThreeCard trails={trails} />;
-		} else if (isTuple(trails, 4)) {
-			return <FourCard trails={trails} />;
-		} else if (isTuple(trails, 5)) {
-			return <FiveCardSlow trails={trails} />;
-		} else if (isTuple(trails, 6)) {
-			return <SixCardSlow trails={trails} />;
-		} else if (isTuple(trails, 7)) {
-			return <SevenCardSlow trails={trails} />;
-		} else if (isTuple(trails, 8)) {
-			return <EightCardSlow trails={trails} />;
-		} else if (isTupleOrGreater(trails, 9)) {
-			return <BeyondEightSlow trails={trails} />;
-		} else {
-			return <></>;
+		switch (initialTrails.length) {
+			case 0:
+				return <></>;
+			case 1:
+				return <OneCardSlow trail={initialTrails[0]} />;
+			case 2:
+				return <TwoCard trails={initialTrails} />;
+			case 3:
+				return <ThreeCard trails={initialTrails} />;
+			case 4:
+				return <FourCard trails={initialTrails} />;
+			case 5:
+				return <FiveCardSlow trails={initialTrails} />;
+			case 6:
+				return <SixCardSlow trails={initialTrails} />;
+			case 7:
+				return <SevenCardSlow trails={initialTrails} />;
+			case 8:
+				return (
+					<EightOrMoreSlow
+						trails={[...initialTrails, ...trails.slice(8)]}
+					/>
+				);
 		}
 	}
 };
