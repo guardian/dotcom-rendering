@@ -183,14 +183,17 @@ export interface WeatherWidgetProps {
 	edition: FEFrontConfigType['edition'];
 }
 
-const ONE_HOUR_IN_MILLIS = 60 * 60 * 1000;
-const getForecastForHour = (
+const getForecastForHourOffset = (
 	forecast: WeatherForecast,
 	offsetHours: 3 | 6 | 9 | 12,
 ) => {
+	const dateTime = new Date(Date.now());
+	dateTime.setHours(dateTime.getHours() + offsetHours);
+	dateTime.setMinutes(0);
+
 	return {
 		...forecast[offsetHours],
-		dateTime: new Date(Date.now() + ONE_HOUR_IN_MILLIS * offsetHours),
+		dateTime,
 	};
 };
 
@@ -214,18 +217,27 @@ export const WeatherWidget = ({
 
 			{/* Forecast slots */}
 			<div css={slotCSS} className="forecast-1">
-				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 3)} />
+				<WeatherSlot
+					isUS={isUS}
+					{...getForecastForHourOffset(forecast, 3)}
+				/>
 			</div>
 			<div css={slotCSS} className="forecast-2">
-				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 6)} />
+				<WeatherSlot
+					isUS={isUS}
+					{...getForecastForHourOffset(forecast, 6)}
+				/>
 			</div>
 			<div css={slotCSS} className="forecast-3">
-				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 9)} />
+				<WeatherSlot
+					isUS={isUS}
+					{...getForecastForHourOffset(forecast, 9)}
+				/>
 			</div>
 			<div css={slotCSS} className="forecast-4">
 				<WeatherSlot
 					isUS={isUS}
-					{...getForecastForHour(forecast, 12)}
+					{...getForecastForHourOffset(forecast, 12)}
 				/>
 			</div>
 			<div css={linkCSS}>
