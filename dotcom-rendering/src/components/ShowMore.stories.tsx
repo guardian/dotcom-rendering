@@ -7,9 +7,9 @@ import { ShowMore } from './ShowMore.importable';
  * Clicks the 'show more' button so that Chromatic can capture it the component
  * in its 'open' state.
  */
-const play = ({ canvasElement }: { canvasElement: HTMLElement }) => {
+const play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	const canvas = within(canvasElement);
-	userEvent.click(canvas.getByRole('button'));
+	await userEvent.click(canvas.getByRole('button'));
 };
 
 const title = 'Opinion';

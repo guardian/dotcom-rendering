@@ -1,22 +1,37 @@
+/**
+ *  "WEATHER"
+ *
+ *  Whether the weather be fine,
+ *  Or whether the weather be not,
+ *  Whether the weather be cold,
+ *  Or whether the weather be hot,
+ *  We'll weather the weather
+ *  Whatever the weather,
+ *  Whether we like it or not!
+ *
+ *  Author: Anonymous British
+ */
+
 import { css, keyframes } from '@emotion/react';
 import {
 	between,
 	from,
+	palette,
 	textSans,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgExternal } from '@guardian/source-react-components';
 import type { FEFrontConfigType } from '../types/front';
-import { WeatherWidgetSlot } from './WeatherWidgetSlot';
+import { WeatherSlot } from './WeatherSlot';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
 `;
 
-const widgetCSS = css`
+const weatherCSS = css`
 	animation: ${keyframes`from {	opacity: 0;	} to {	opacity: 1;	}`} 250ms;
-	--border: 1px solid #dcdcdc;
+	--border: 1px solid ${palette.neutral[86]};
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -112,7 +127,7 @@ const slotCSS = css`
 const linkCSS = css`
 	a {
 		${textSans.small()};
-		color: #121212;
+		color: ${palette.neutral[7]};
 		text-decoration: none;
 		display: block;
 		display: flex;
@@ -169,46 +184,55 @@ type ForecastProps = {
 		metric: TemperatureProps;
 		imperial: TemperatureProps;
 	};
-	time?: string;
+	dateTime?: string;
 };
 
-export interface WeatherWidgetProps {
-	location: string;
+export interface WeatherProps {
+	location: {
+		key: string;
+		localizedName: string;
+		country: {
+			id: string;
+			localizedName: string;
+		};
+		administrativeArea: {
+			id: string;
+			localizedName: string;
+		};
+		type: string;
+	};
 	now: ForecastProps;
 	forecast: [ForecastProps, ForecastProps, ForecastProps, ForecastProps];
 	edition: FEFrontConfigType['edition'];
 }
 
-export const WeatherWidget = ({
-	location,
-	now,
-	forecast,
-	edition,
-}: WeatherWidgetProps) => {
+export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const isUS = edition === 'US';
 	return (
-		<aside css={widgetCSS}>
-			<div css={locationCSS}>{location}</div>
+		<aside css={weatherCSS}>
+			<div css={locationCSS}>{location.localizedName}</div>
 
-			<p css={visuallyHiddenCSS}>Today’s weather for {location}:</p>
+			<p css={visuallyHiddenCSS}>
+				Today’s weather for {location.localizedName}:
+			</p>
 
 			{/* Current weather */}
 			<div css={[nowCSS, slotCSS]} className="now">
-				<WeatherWidgetSlot {...now} isUS={isUS} />
+				<WeatherSlot {...now} isUS={isUS} />
 			</div>
 
 			{/* Forecast slots */}
 			<div css={slotCSS} className="forecast-1">
-				<WeatherWidgetSlot isUS={isUS} {...forecast[0]} />
+				<WeatherSlot isUS={isUS} {...forecast[0]} />
 			</div>
 			<div css={slotCSS} className="forecast-2">
-				<WeatherWidgetSlot isUS={isUS} {...forecast[1]} />
+				<WeatherSlot isUS={isUS} {...forecast[1]} />
 			</div>
 			<div css={slotCSS} className="forecast-3">
-				<WeatherWidgetSlot isUS={isUS} {...forecast[2]} />
+				<WeatherSlot isUS={isUS} {...forecast[2]} />
 			</div>
 			<div css={slotCSS} className="forecast-4">
-				<WeatherWidgetSlot isUS={isUS} {...forecast[3]} />
+				<WeatherSlot isUS={isUS} {...forecast[3]} />
 			</div>
 			<div css={linkCSS}>
 				<a href={now.link}>

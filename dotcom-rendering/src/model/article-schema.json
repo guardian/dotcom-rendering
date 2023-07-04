@@ -3428,10 +3428,7 @@
                     ]
                 },
                 "mimeType": {
-                    "type": "string",
-                    "enum": [
-                        "image/jpeg"
-                    ]
+                    "type": "string"
                 },
                 "file": {
                     "type": "string"
@@ -3442,17 +3439,11 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "required": [
-                        "name"
-                    ]
+                    }
                 }
             },
             "required": [
-                "file",
-                "mimeType",
-                "type",
-                "typeData"
+                "type"
             ]
         },
         "WitnessTypeDataImage": {
@@ -4131,8 +4122,7 @@
                     "type": "string"
                 },
                 "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
+                    "$ref": "#/definitions/SharedAdTargeting"
                 },
                 "isPaidContent": {
                     "type": "boolean"
@@ -4268,6 +4258,9 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "SharedAdTargeting": {
+            "type": "object"
         },
         "FETrailType": {
             "type": "object",

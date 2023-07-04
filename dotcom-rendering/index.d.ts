@@ -278,27 +278,6 @@ interface FENavType {
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 /**
- * BlocksRequest is the expected body format for POST requests made to /Blocks
- */
-interface FEBlocksRequest {
-	blocks: Block[];
-	format: FEFormat;
-	host?: string;
-	pageId: string;
-	webTitle: string;
-	ajaxUrl: string;
-	isAdFreeUser: boolean;
-	isSensitive: boolean;
-	edition: string;
-	section: string;
-	sharedAdTargeting: Record<string, unknown>;
-	adUnit: string;
-	videoDuration?: number;
-	switches: { [key: string]: boolean };
-	keywordIds: string;
-}
-
-/**
  * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
  */
 interface FEKeyEventsRequest {
@@ -306,10 +285,6 @@ interface FEKeyEventsRequest {
 	format: FEFormat;
 	filterKeyEvents: boolean;
 }
-
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
 type CardImageType = 'mainMedia' | 'avatar' | 'crossword' | 'slideshow';
 

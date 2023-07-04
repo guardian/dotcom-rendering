@@ -3,9 +3,9 @@
 // import { useEffect, useState } from 'react';
 
 // using test data from the storybook for now
+import type { WeatherProps as WeatherWidgetProps } from './Weather';
+import { Weather as WeatherWidget } from './Weather';
 import storybookData from './Weather.stories';
-import type { WeatherWidgetProps } from './WeatherWidget';
-import { WeatherWidget } from './WeatherWidget';
 
 // interface APILocation {
 // 	city: string;

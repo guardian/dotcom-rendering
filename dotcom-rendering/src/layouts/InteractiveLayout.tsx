@@ -42,7 +42,6 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -221,16 +220,6 @@ export const InteractiveLayout = ({
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showComments = article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -403,7 +392,6 @@ export const InteractiveLayout = ({
 									<MainMedia
 										format={format}
 										elements={article.mainMediaElements}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -511,7 +499,6 @@ export const InteractiveLayout = ({
 									<ArticleBody
 										format={format}
 										blocks={article.blocks}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}

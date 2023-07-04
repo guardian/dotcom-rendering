@@ -1,3 +1,4 @@
+import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 
 export interface CommercialConfigType {
@@ -61,7 +62,7 @@ export interface ConfigType extends CommercialConfigType {
 	edition: EditionId;
 	section: string;
 
-	sharedAdTargeting: { [key: string]: any };
+	sharedAdTargeting: SharedAdTargeting;
 	isPaidContent?: boolean;
 	keywordIds: string;
 	showRelatedContent: boolean;

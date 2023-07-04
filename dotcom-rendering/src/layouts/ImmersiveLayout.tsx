@@ -43,7 +43,6 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -255,16 +254,6 @@ export const ImmersiveLayout = ({
 		config: { isPaidContent, host },
 	} = article;
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -408,7 +397,6 @@ export const ImmersiveLayout = ({
 					<MainMedia
 						format={format}
 						elements={article.mainMediaElements}
-						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
 							article.starRating !== undefined
@@ -629,7 +617,6 @@ export const ImmersiveLayout = ({
 								<ArticleBody
 									format={format}
 									blocks={article.blocks}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}

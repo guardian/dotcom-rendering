@@ -74,10 +74,6 @@ export const Sport = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -123,10 +119,6 @@ export const News = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -172,10 +164,6 @@ export const Culture = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -221,10 +209,6 @@ export const Lifestyle = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -270,10 +254,6 @@ export const Opinion = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -319,10 +299,6 @@ export const SpecialReport = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""
@@ -368,10 +344,6 @@ export const Labs = () => {
 		<Wrapper>
 			<PinnedPost pinnedPost={block} format={format}>
 				<LiveBlock
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
 					format={format}
 					block={block}
 					pageId=""

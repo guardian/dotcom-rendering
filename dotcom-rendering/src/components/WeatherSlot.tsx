@@ -3,12 +3,13 @@ import { css, keyframes } from '@emotion/react';
 import { isUndefined } from '@guardian/libs';
 import {
 	from,
+	palette,
 	textSans,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { lazy, Suspense } from 'react';
-import type { TemperatureProps } from './WeatherWidget';
+import type { TemperatureProps } from './Weather';
 
 const formatTemperature = ({ value, unit }: TemperatureProps) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
@@ -100,12 +101,12 @@ const LoadingIcon = () => (
 		css={css`
 			height: 32px;
 			width: 32px;
-			background-color: #f5f5f5;
+			background-color: ${palette.neutral[97]};
 		`}
 	></span>
 );
 
-export type WeatherWidgetSlotProps = {
+export type WeatherSlotProps = {
 	icon: number;
 	description: string;
 	link: string;
@@ -113,20 +114,20 @@ export type WeatherWidgetSlotProps = {
 		metric: TemperatureProps;
 		imperial: TemperatureProps;
 	};
-	time?: string;
+	dateTime?: string;
 	isUS: boolean;
 	css?: SerializedStyles;
 };
 
-export const WeatherWidgetSlot = ({
+export const WeatherSlot = ({
 	icon,
 	temperature,
-	time,
+	dateTime,
 	description,
 	isUS,
 	...props
-}: WeatherWidgetSlotProps) => {
-	const isNow = isUndefined(time);
+}: WeatherSlotProps) => {
+	const isNow = isUndefined(dateTime);
 
 	const Icon = lazy(() =>
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
@@ -154,8 +155,8 @@ export const WeatherWidgetSlot = ({
 					Now
 				</span>
 			) : (
-				<time css={timeCSS} dateTime={time}>
-					{formatTime(time, isUS)}
+				<time css={timeCSS} dateTime={dateTime}>
+					{formatTime(dateTime, isUS)}
 				</time>
 			)}
 			<span css={visuallyHiddenCSS}>is</span>
