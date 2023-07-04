@@ -41,20 +41,14 @@ export interface GroupedTrailsFastMpu extends GroupedTrailsBase {
 	speed: 'fast';
 	// Trails must either be length of 2, 4, 6 or >= 9
 	trails:
-		| Tuple<DCRFrontCard, 2>
-		| Tuple<DCRFrontCard, 4>
-		| Tuple<DCRFrontCard, 6>
+		| Tuple<DCRFrontCard, 2 | 4 | 6>
 		| [...Tuple<DCRFrontCard, 9>, ...DCRFrontCard[]];
 }
 export interface GroupedTrailsSlowMpu extends GroupedTrailsBase {
 	injected: true;
 	speed: 'slow';
 	// Trails must either be length of 2, 4, 5, 7
-	trails:
-		| Tuple<DCRFrontCard, 2>
-		| Tuple<DCRFrontCard, 4>
-		| Tuple<DCRFrontCard, 5>
-		| Tuple<DCRFrontCard, 7>;
+	trails: Tuple<DCRFrontCard, 2 | 4 | 5 | 7>;
 }
 
 export interface DCRTagFrontType {
