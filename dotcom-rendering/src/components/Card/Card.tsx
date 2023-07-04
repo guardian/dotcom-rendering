@@ -232,6 +232,17 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
+const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+	const publicationDate = new Date(webPublicationDate);
+	const currentDateTime = new Date();
+	// Calculate the difference in milliseconds
+	const timeDiffMs = currentDateTime.getTime() - publicationDate.getTime();
+	// Calculate the difference in hours
+	const timeDiffHours = Math.abs(timeDiffMs / (1000 * 60 * 60));
+	// Check if the difference is less than or equal to 12 hours
+	return timeDiffHours <= 12;
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -294,7 +305,9 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					showAge && webPublicationDate ? (
+					showAge &&
+					webPublicationDate &&
+					isWithinTwelveHours(webPublicationDate) ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
