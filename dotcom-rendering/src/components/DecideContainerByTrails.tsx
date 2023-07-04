@@ -258,16 +258,16 @@ export const SevenCardSlow = ({
 				</LI>
 			</UL>
 			<UL direction="row">
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="25%" padSides={true}>
 					<Card25Media25 trail={trails[3]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[4]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[5]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[6]} showAge={true} />
 				</LI>
 			</UL>
@@ -356,16 +356,16 @@ export const EightOrMoreSlow = ({
 				</LI>
 			</UL>
 			<UL direction="row" padBottom={afterEight.length > 0}>
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="25%" padSides={true}>
 					<Card25Media25 trail={trails[4]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[5]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[6]} showAge={true} />
 				</LI>
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI percentage="25%" padSides={true} showDivider={true}>
 					<Card25Media25 trail={trails[7]} showAge={true} />
 				</LI>
 			</UL>
