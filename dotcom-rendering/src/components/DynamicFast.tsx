@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import {
 	Card25Media25,
 	Card50Media50Tall,
@@ -7,6 +6,7 @@ import {
 import {
 	Card100PictureRight,
 	Card100PictureTop,
+	Card25_Card25_Card25_Card25,
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
@@ -419,42 +419,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 					})}
 				</UL>
 			</LI>
-		</UL>
-	);
-};
-
-const Card25_Card25_Card25_Card25 = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: DCRFrontCard[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (cards.length < 4) return null;
-
-	const bigs = cards.slice(0, 4);
-
-	return (
-		<UL direction="row" wrapCards={true}>
-			{bigs.map((card, cardIndex) => {
-				return (
-					<LI
-						key={card.url}
-						percentage={`25%`}
-						padSides={true}
-						showDivider={cardIndex !== 0}
-						containerPalette={containerPalette}
-					>
-						<Card25Media25
-							trail={card}
-							containerPalette={containerPalette}
-							showAge={showAge}
-						/>
-					</LI>
-				);
-			})}
 		</UL>
 	);
 };
