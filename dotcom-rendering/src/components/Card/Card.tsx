@@ -233,6 +233,20 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
+/**
+ * This function contains the business logic that determines whether the article contains a
+ * playable main media. It is used to determine which iconography should be displayed on the card.
+ *
+ */
+const decidePlayableMainMedia = (
+	showMainVideo: boolean | undefined,
+	design: ArticleDesign,
+) => {
+	if (!!showMainVideo) return true;
+	if (design === ArticleDesign.Video) return true;
+	return false;
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -350,13 +364,17 @@ export const Card = ({
 		);
 	}
 
+	const isPlayableMainMedia = decidePlayableMainMedia(
+		showMainVideo,
+		format.design,
+	);
+
 	const image = getImage({
 		imageUrl,
 		avatarUrl,
 		isCrossword,
 		slideshowImages,
 	});
-
 	return (
 		<CardWrapper
 			format={format}
@@ -382,11 +400,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={
-							(showMainVideo ||
-								format.design === ArticleDesign.Video) ??
-							false
-						}
+						showPlayIcon={isPlayableMainMedia}
 					>
 						{image.type === 'slideshow' &&
 							image.slideshowImages && (
@@ -419,13 +433,17 @@ export const Card = ({
 							<img src={image.src} alt="" />
 						)}
 
-						{mediaDuration !== undefined && mediaDuration > 0 && (
-							<MediaDuration
-								mediaDuration={mediaDuration}
-								imagePosition={imagePosition}
-								imagePositionOnMobile={imagePositionOnMobile}
-							/>
-						)}
+						{isPlayableMainMedia &&
+							mediaDuration !== undefined &&
+							mediaDuration > 0 && (
+								<MediaDuration
+									mediaDuration={mediaDuration}
+									imagePosition={imagePosition}
+									imagePositionOnMobile={
+										imagePositionOnMobile
+									}
+								/>
+							)}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
