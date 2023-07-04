@@ -1,4 +1,4 @@
-import { isTuple, isTupleOrGreater } from '../lib/tuple';
+import { isTuple } from '../lib/tuple';
 import type {
 	GroupedTrails,
 	GroupedTrailsFastMpu,
@@ -28,18 +28,23 @@ export const injectMpuIntoGroupedTrails = (
 		}
 
 		if (speed === 'fast') {
+			// When we have a container with > 9 trails for fast,
+			// we 'cap' the number of trails at 9 in order to fit an MPU in.
+			// Containers that don't get an MPU injected will of course still be
+			// able to show more than 9 trails.
+			const fastTrails = grouped.trails.slice(0, 9);
 			if (
-				isTuple(grouped.trails, 2) ||
-				isTuple(grouped.trails, 4) ||
-				isTuple(grouped.trails, 6) ||
-				isTupleOrGreater(grouped.trails, 9)
+				isTuple(fastTrails, 2) ||
+				isTuple(fastTrails, 4) ||
+				isTuple(fastTrails, 6) ||
+				isTuple(fastTrails, 9)
 			) {
 				injected = true;
 				result.push({
 					day: grouped.day,
 					month: grouped.month,
 					year: grouped.year,
-					trails: grouped.trails,
+					trails: fastTrails,
 					injected: true,
 					speed: 'fast',
 				});
