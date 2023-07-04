@@ -98,5 +98,5 @@ export const takeFirst = <
 	array: Array<T> | ReadonlyArray<T>,
 	count: N,
 ): TupleOrLess<T, N> =>
-	//@ts-expect-error – we’ve tested this manually and it’s a very helpful method
+	//@ts-expect-error – this output is tested by jest and it’s a very helpful method
 	array.slice(0, count);
