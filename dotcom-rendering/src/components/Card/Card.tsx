@@ -466,7 +466,7 @@ export const Card = ({
 							showQuotes={showQuotes}
 							kickerText={
 								format.design === ArticleDesign.LiveBlog
-									? 'Live'
+									? kickerText ?? 'Live'
 									: kickerText
 							}
 							showPulsingDot={
