@@ -70,29 +70,13 @@ const pillarDivider = css`
 			z-index: 1;
 		}
 	}
-
-	/** @todo - finish this part */
-	${from.wide} {
-		:before {
-			content: '';
-			display: block;
-			position: absolute;
-			right: 0;
-			top: -20px;
-			bottom: 0;
-			width: 1px;
-			height: auto;
-			background-color: ${brand[600]};
-			z-index: 1;
-		}
-	}
 `;
 
 const pillarDividerExtended = css`
 	${from.desktop} {
-		/* :before {
+		:before {
 			top: -${pillarHeight}px;
-		} */
+		}
 
 		:after {
 			content: '';
