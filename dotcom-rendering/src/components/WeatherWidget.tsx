@@ -22,6 +22,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgExternal } from '@guardian/source-react-components';
+import type { WeatherData } from '../lib/useWeather';
 import type { FEFrontConfigType } from '../types/front';
 import { WeatherSlot } from './WeatherSlot';
 
@@ -171,35 +172,23 @@ const ExternalLinkIcon = () => (
 	</div>
 );
 
-export type TemperatureProps = {
-	value: number;
-	unit: 'C' | 'F';
-};
-
-export type ForecastProps = {
-	weatherText: string;
-	weatherIcon: number;
-	weatherLink?: string;
-	temperature: {
-		metric: number;
-		imperial: number;
-	};
-	dateTime?: string;
-	link?: string;
-};
-
-export interface WeatherProps {
+export interface WeatherWidgetProps {
 	location: {
 		id: string;
 		city: string;
 		country: string;
 	};
-	now: ForecastProps;
-	forecast: [ForecastProps, ForecastProps, ForecastProps, ForecastProps];
+	now: WeatherData;
+	forecast: [WeatherData, WeatherData, WeatherData, WeatherData];
 	edition: FEFrontConfigType['edition'];
 }
 
-export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
+export const WeatherWidget = ({
+	location,
+	now,
+	forecast,
+	edition,
+}: WeatherWidgetProps) => {
 	const isUS = edition === 'US';
 	return (
 		<aside css={weatherCSS}>

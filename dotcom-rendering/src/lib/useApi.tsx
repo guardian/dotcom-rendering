@@ -16,7 +16,7 @@ const fetcher = (init?: RequestInit) => (url: string) =>
 		.then(checkForErrors)
 		.then((res) => res.json());
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
 	loading: boolean;
 	data?: T;
 	error?: Error;

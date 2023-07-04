@@ -1,37 +1,21 @@
-import { useApi } from '../lib/useApi';
+import { useWeather } from '../lib/useWeather';
 import type { FEFrontConfigType } from '../types/front';
-import { Weather } from './Weather';
+import { WeatherWidget } from './WeatherWidget';
 
-type WeatherData = {
-	weatherText: string;
-	weatherIcon: number;
-	weatherLink?: string;
-	temperature: {
-		metric: number;
-		imperial: number;
-	};
-	link?: string;
+type Props = {
+	ajaxUrl: string;
+	edition: FEFrontConfigType['edition'];
 };
 
-type WeatherApiData = {
-	location: {
-		id: string;
-		city: string;
-		country: string;
-	};
-	weather: WeatherData;
-	forecast: [WeatherData, WeatherData, WeatherData, WeatherData];
-};
+export const Weather = ({ ajaxUrl, edition }: Props) => {
+	const { data, error } = useWeather(ajaxUrl, edition);
 
-type Props = { edition: FEFrontConfigType['edition'] };
-
-export const WeatherImportable = ({ edition }: Props) => {
-	const { /*loading,*/ data /*error*/ } = useApi<WeatherApiData>(
-		'http://api.nextgen.guardianapps.co.uk/weather',
-	);
+	if (error) {
+		window.guardian.modules.sentry.reportError(error, 'weather');
+	}
 
 	return !data ? null : (
-		<Weather
+		<WeatherWidget
 			location={data.location}
 			now={data.weather}
 			forecast={data.forecast}

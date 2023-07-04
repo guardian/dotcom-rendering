@@ -9,9 +9,9 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { lazy, Suspense } from 'react';
-import type { ForecastProps, TemperatureProps } from './Weather';
+import type { WeatherData } from '../lib/useWeather';
 
-const formatTemperature = ({ value, unit }: TemperatureProps) =>
+const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
 
 const formatTime = (time: string, isUS: boolean) =>
@@ -106,23 +106,24 @@ const LoadingIcon = () => (
 	></span>
 );
 
-export type WeatherSlotProps = ForecastProps & {
+export type WeatherSlotProps = WeatherData & {
 	isUS: boolean;
 	css?: SerializedStyles;
+	dateTime?: string;
 };
 
 export const WeatherSlot = ({
-	weatherIcon,
+	icon,
 	temperature,
 	dateTime,
-	weatherText,
+	description,
 	isUS,
 	...props
 }: WeatherSlotProps) => {
 	const isNow = isUndefined(dateTime);
 
 	const Icon = lazy(() =>
-		import(`../static/icons/weather/weather-${weatherIcon}.svg`).then(
+		import(`../static/icons/weather/weather-${icon}.svg`).then(
 			({ default: Component }) => {
 				return {
 					default: () => (
@@ -153,12 +154,12 @@ export const WeatherSlot = ({
 			)}
 			<span css={visuallyHiddenCSS}>is</span>
 			<span css={tempCSS(isNow)} className="temp">
-				{formatTemperature({
-					value: isUS ? temperature.imperial : temperature.metric,
-					unit: isUS ? 'F' : 'C',
-				})}
+				{formatTemperature(
+					isUS ? temperature.imperial : temperature.metric,
+					isUS ? 'F' : 'C',
+				)}
 			</span>
-			<span css={visuallyHiddenCSS}>, {weatherText.toLowerCase()}.</span>
+			<span css={visuallyHiddenCSS}>, {description.toLowerCase()}.</span>
 			<Suspense fallback={<LoadingIcon />}>
 				<Icon />
 			</Suspense>
