@@ -1,4 +1,4 @@
-import { isTuple } from '../lib/tuple';
+import { takeFirst } from '../lib/tuple';
 import type {
 	GroupedTrails,
 	GroupedTrailsFastMpu,
@@ -32,39 +32,47 @@ export const injectMpuIntoGroupedTrails = (
 			// we 'cap' the number of trails at 9 in order to fit an MPU in.
 			// Containers that don't get an MPU injected will of course still be
 			// able to show more than 9 trails.
-			const fastTrails = grouped.trails.slice(0, 9);
-			if (
-				isTuple(fastTrails, 2) ||
-				isTuple(fastTrails, 4) ||
-				isTuple(fastTrails, 6) ||
-				isTuple(fastTrails, 9)
-			) {
-				injected = true;
-				result.push({
-					day: grouped.day,
-					month: grouped.month,
-					year: grouped.year,
-					trails: fastTrails,
-					injected: true,
-					speed: 'fast',
-				});
+			const fastTrails = takeFirst(grouped.trails, 9);
+			switch (fastTrails.length) {
+				case 2:
+				case 4:
+				case 6:
+				case 9:
+					injected = true;
+					result.push({
+						day: grouped.day,
+						month: grouped.month,
+						year: grouped.year,
+						trails: fastTrails,
+						injected: true,
+						speed: 'fast',
+					});
+					break;
+				default:
+					break;
 			}
 		} else {
-			if (
-				isTuple(grouped.trails, 2) ||
-				isTuple(grouped.trails, 4) ||
-				isTuple(grouped.trails, 5) ||
-				isTuple(grouped.trails, 7)
-			) {
-				injected = true;
-				result.push({
-					day: grouped.day,
-					month: grouped.month,
-					year: grouped.year,
-					trails: grouped.trails,
-					injected: true,
-					speed: 'slow',
-				});
+			// By taking the first 12, we get the benefit of being able to use
+			// a switch statement here, without 'capping' the number of trails in the
+			// same way we do when 'fast'
+			const slowTrails = takeFirst(grouped.trails, 12);
+			switch (slowTrails.length) {
+				case 2:
+				case 4:
+				case 5:
+				case 7:
+					injected = true;
+					result.push({
+						day: grouped.day,
+						month: grouped.month,
+						year: grouped.year,
+						trails: slowTrails,
+						injected: true,
+						speed: 'slow',
+					});
+					break;
+				default:
+					break;
 			}
 		}
 	});
