@@ -128,7 +128,11 @@ export const ExpandedMenuStory = () => {
 /**
  * Clicks the “More" button so that Chromatic can capture the component in its `expanded` state.
  */
-ExpandedMenuStory.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+ExpandedMenuStory.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
 	const canvas = within(canvasElement);
 	await userEvent.click(canvas.getByLabelText(/More/));
 };
