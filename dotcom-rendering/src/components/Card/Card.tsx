@@ -242,7 +242,7 @@ const decidePlayableMainMedia = (
 	showMainVideo: boolean | undefined,
 	design: ArticleDesign,
 ) => {
-	if (!!showMainVideo) return true;
+	if (showMainVideo) return true;
 	if (design === ArticleDesign.Video) return true;
 	return false;
 };
