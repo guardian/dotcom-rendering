@@ -369,6 +369,19 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		lightbox.querySelector(`#lightbox-loader-${position}`)?.remove();
 	}
 
+	/**
+	 * By using javascript to calculate the window height we avoid the 100vh issue in mobile
+	 * Safari
+	 *
+	 * @see {@link https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9}
+	 */
+	function setLightboxHeight() {
+		document.documentElement.style.setProperty(
+			'--lightbox-height',
+			`${window.innerHeight}px`,
+		);
+	}
+
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
@@ -468,6 +481,11 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	});
 
 	/**
+	 * If the window is resized (or if orientation changes) then we recalculate lightbox height
+	 */
+	window.addEventListener('resize', libDebounce(setLightboxHeight, 150));
+
+	/**
 	 * If this code is running, it means this file is being hydrated because the url contains an img- hash
 	 * and so we should open the lightbox at that position.
 	 */
@@ -476,6 +494,9 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const position = hash.substring(5);
 		void open(parseInt(position, 10));
 	}
+
+	// Calculate window height
+	setLightboxHeight();
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-gu-ready', 'true');

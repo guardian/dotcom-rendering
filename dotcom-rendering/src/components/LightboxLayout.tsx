@@ -21,10 +21,10 @@ type Props = {
 
 const lightboxStyles = css`
 	width: 100vw;
-	height: 100%;
+	height: 100vh;
+	height: var(--lightbox-height);
 	border: none;
 	max-width: 100vw;
-	max-height: 100vh;
 	padding: 0;
 	background-color: ${neutral[10]};
 

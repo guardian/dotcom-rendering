@@ -115,6 +115,9 @@ The next and previous actions trigger the `scroll` event.
 `keypress`
 We capture a series of key presses and use them as shortcuts for other actions within the lightbox. These are better documented in the code.
 
+`resize`
+We use this to capture when device orientation changes so that we can use javascript to calculate the window height. Using javascript is preferable to css for deciding height to workaround an issue on mobile Safari where 100vh does not take account of the navigation controls, causing content to be hidden.
+
 ### `LightboxLoader`
 
 Returns a div that shows an animated loader above each lightbox image. This loader is removed if the `img.complete` state is true or when the `load` event is fired for an image.
