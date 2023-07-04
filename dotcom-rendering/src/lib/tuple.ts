@@ -45,16 +45,6 @@ export const isTuple = <T, N extends number>(
 	count: N,
 ): arr is Tuple<T, N> => arr.length === count;
 
-/**
- * Type-guard for whether an array is at least a certain number of elements
- *
- * Can only guarantee up to 12 elements
- */
-export const isTupleOrGreater = <T, N extends number>(
-	arr: Array<T> | ReadonlyArray<T>,
-	count: N,
-): arr is [...Tuple<T, N>, ...Array<T>] => arr.length >= count;
-
 /** Type where a tuple can have any 'n' number of items or less  */
 type TupleOrLess<
 	T,
