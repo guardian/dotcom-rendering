@@ -1,13 +1,13 @@
 import { useWeather } from '../lib/useWeather';
 import type { FEFrontConfigType } from '../types/front';
-import { WeatherWidget } from './WeatherWidget';
+import { Weather } from './Weather';
 
 type Props = {
 	ajaxUrl: string;
 	edition: FEFrontConfigType['edition'];
 };
 
-export const Weather = ({ ajaxUrl, edition }: Props) => {
+export const WeatherData = ({ ajaxUrl, edition }: Props) => {
 	const { data, error } = useWeather(ajaxUrl);
 
 	if (error) {
@@ -15,7 +15,7 @@ export const Weather = ({ ajaxUrl, edition }: Props) => {
 	}
 
 	return !data ? null : (
-		<WeatherWidget
+		<Weather
 			location={data.location}
 			now={data.weather}
 			forecast={data.forecast}

@@ -1,9 +1,9 @@
-import type { WeatherWidgetProps } from './WeatherWidget';
-import { WeatherWidget } from './WeatherWidget';
+import type { WeatherProps } from './Weather';
+import { Weather } from './Weather';
 
 export default {
-	component: WeatherWidget,
-	title: 'Components/WeatherWidget',
+	component: Weather,
+	title: 'Components/Weather',
 	args: {
 		edition: 'UK',
 		location: {
@@ -100,9 +100,9 @@ export default {
 	},
 };
 
-export const Mobile = (args: WeatherWidgetProps) => (
+export const Mobile = (args: WeatherProps) => (
 	<div style={{ maxWidth: '320px', padding: '0 10px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 Mobile.parameters = {
@@ -111,9 +111,9 @@ Mobile.parameters = {
 	},
 };
 
-export const MobileMedium = (args: WeatherWidgetProps) => (
+export const MobileMedium = (args: WeatherProps) => (
 	<div style={{ maxWidth: '375px', padding: '0 10px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 MobileMedium.parameters = {
@@ -122,9 +122,9 @@ MobileMedium.parameters = {
 	},
 };
 
-export const MobileLandscape = (args: WeatherWidgetProps) => (
+export const MobileLandscape = (args: WeatherProps) => (
 	<div style={{ maxWidth: '480px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 MobileLandscape.parameters = {
@@ -133,9 +133,9 @@ MobileLandscape.parameters = {
 	},
 };
 
-export const Phablet = (args: WeatherWidgetProps) => (
+export const Phablet = (args: WeatherProps) => (
 	<div style={{ maxWidth: '680px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 Phablet.parameters = {
@@ -144,9 +144,9 @@ Phablet.parameters = {
 	},
 };
 
-export const Tablet = (args: WeatherWidgetProps) => (
+export const Tablet = (args: WeatherProps) => (
 	<div style={{ maxWidth: '552px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 Tablet.parameters = {
@@ -155,9 +155,9 @@ Tablet.parameters = {
 	},
 };
 
-export const Desktop = (args: WeatherWidgetProps) => (
+export const Desktop = (args: WeatherProps) => (
 	<div style={{ maxWidth: '792px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 Desktop.parameters = {
@@ -166,9 +166,9 @@ Desktop.parameters = {
 	},
 };
 
-export const LeftCol = (args: WeatherWidgetProps) => (
+export const LeftCol = (args: WeatherProps) => (
 	<div style={{ maxWidth: '180px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 LeftCol.parameters = {
@@ -177,9 +177,9 @@ LeftCol.parameters = {
 	},
 };
 
-export const Wide = (args: WeatherWidgetProps) => (
+export const Wide = (args: WeatherProps) => (
 	<div style={{ maxWidth: '260px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 Wide.parameters = {
@@ -189,9 +189,9 @@ Wide.parameters = {
 };
 
 // just checks US special case
-export const US = (args: WeatherWidgetProps) => (
+export const US = (args: WeatherProps) => (
 	<div style={{ maxWidth: '340px', padding: '0 20px' }}>
-		<WeatherWidget {...args} />
+		<Weather {...args} />
 	</div>
 );
 US.args = {

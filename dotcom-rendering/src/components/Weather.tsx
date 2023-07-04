@@ -172,7 +172,7 @@ const ExternalLinkIcon = () => (
 	</div>
 );
 
-export interface WeatherWidgetProps {
+export interface WeatherProps {
 	location: {
 		id: string;
 		city: string;
@@ -197,12 +197,7 @@ const getForecastForHourOffset = (
 	};
 };
 
-export const WeatherWidget = ({
-	location,
-	now,
-	forecast,
-	edition,
-}: WeatherWidgetProps) => {
+export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const isUS = edition === 'US';
 	return (
 		<aside css={weatherCSS}>
