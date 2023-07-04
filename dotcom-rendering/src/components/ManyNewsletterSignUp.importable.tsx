@@ -9,8 +9,8 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { Flex } from './Flex';
-import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './GroupedNewsletterList';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
+import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
 interface Props {

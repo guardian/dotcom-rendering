@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { useEffect } from 'react';
-import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -35,7 +34,6 @@ export const FetchOnwardsData = ({
 	format,
 }: Props) => {
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
-	const palette = decidePalette(format);
 
 	const buildTrails = (
 		trails: FETrailType[],
@@ -82,8 +80,7 @@ export const FetchOnwardsData = ({
 						trails={buildTrails(data.trails, limit)}
 						description={data.description}
 						onwardsSource={onwardsSource}
-						titleHighlightColour={palette.text.carouselTitle}
-						activeDotColour={palette.background.carouselDot}
+						format={format}
 						leftColSize={
 							format.design === ArticleDesign.LiveBlog ||
 							format.design === ArticleDesign.DeadBlog

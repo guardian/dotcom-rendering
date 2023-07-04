@@ -6,7 +6,6 @@ import {
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -17,12 +16,13 @@ import { decideTheme } from '../lib/decideTheme';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { extractGA } from '../model/extract-ga';
 import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import type { TagType } from '../types/tag';
 import { htmlPageTemplate } from './htmlPageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
@@ -42,7 +42,11 @@ const decideTitle = (article: FEArticleType): string => {
 };
 
 export const renderHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
+	const NAV = {
+		...extractNAV(article.nav),
+		selectedPillar: getCurrentPillar(article),
+	};
+
 	const title = decideTitle(article);
 	const linkedData = article.linkedData;
 
@@ -156,7 +160,6 @@ export const renderHtml = ({ article }: Props): string => {
 					beaconURL: article.beaconURL,
 				}),
 				hasInlineMerchandise: article.config.hasInlineMerchandise,
-				section: article.config.section,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: article.config,
@@ -257,31 +260,16 @@ export const renderBlocks = ({
 	ajaxUrl,
 	isAdFreeUser,
 	isSensitive,
-	videoDuration,
-	edition,
 	section,
-	sharedAdTargeting,
-	adUnit,
 	switches,
 	keywordIds,
 }: FEBlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(FEFormat);
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser,
-		isSensitive,
-		videoDuration,
-		edition,
-		section,
-		sharedAdTargeting,
-		adUnit,
-	});
-
 	const { html, extractedCss } = renderToStringWithEmotion(
 		<LiveBlogRenderer
 			blocks={blocks}
 			format={format}
-			adTargeting={adTargeting}
 			host={host}
 			pageId={pageId}
 			webTitle={webTitle}

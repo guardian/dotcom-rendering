@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { from, space, until } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../../../lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 import type { DCRContainerPalette } from '../../../types/front';
@@ -64,10 +65,18 @@ const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
 	containerPalette?: DCRContainerPalette,
-) =>
-	offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(paddingSize, containerPalette)
-		: verticalDivider(containerPalette);
+	verticalDividerColour?: string,
+) => {
+	const borderColour =
+		verticalDividerColour ??
+		(containerPalette &&
+			decideContainerOverrides(containerPalette).border.container) ??
+		neutral[86];
+
+	return offsetBottomPaddingOnDivider
+		? verticalDividerWithBottomOffset(paddingSize, borderColour)
+		: verticalDivider(borderColour);
+};
 
 type Props = {
 	children: React.ReactNode;
@@ -88,6 +97,7 @@ type Props = {
 	offsetBottomPaddingOnDivider?: boolean;
 
 	containerPalette?: DCRContainerPalette;
+	verticalDividerColour?: string;
 };
 
 export const LI = ({
@@ -100,6 +110,7 @@ export const LI = ({
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 	containerPalette,
+	verticalDividerColour,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -114,6 +125,7 @@ export const LI = ({
 						offsetBottomPaddingOnDivider,
 						GAP_SIZE,
 						containerPalette,
+						verticalDividerColour,
 					),
 				padSides && sidePaddingStyles,
 				padSidesOnMobile && sidePaddingStylesMobile,

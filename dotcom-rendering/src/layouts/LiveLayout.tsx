@@ -53,13 +53,11 @@ import {
 	hasRelevantTopics,
 	TopicFilterBank,
 } from '../components/TopicFilterBank';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -263,16 +261,6 @@ export const LiveLayout = ({
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `article.config.shouldHideReaderRevenue` equals false.
@@ -361,10 +349,7 @@ export const LiveLayout = ({
 					>
 						<Nav
 							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(article),
-							}}
+							selectedPillar={NAV.selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -698,7 +683,6 @@ export const LiveLayout = ({
 									<MainMedia
 										format={format}
 										elements={article.mainMediaElements}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -832,7 +816,6 @@ export const LiveLayout = ({
 													pinnedPost={
 														article.pinnedPost
 													}
-													adTargeting={adTargeting}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}
@@ -987,7 +970,6 @@ export const LiveLayout = ({
 													pinnedPost={
 														article.pinnedPost
 													}
-													adTargeting={adTargeting}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}
@@ -1184,12 +1166,7 @@ export const LiveLayout = ({
 										decideTrail,
 									)}
 									onwardsSource="more-on-this-story"
-									titleHighlightColour={
-										palette.text.carouselTitle
-									}
-									activeDotColour={
-										palette.background.carouselDot
-									}
+									format={format}
 									leftColSize={'wide'}
 								/>
 							</Island>
@@ -1261,7 +1238,7 @@ export const LiveLayout = ({
 							data-component="most-popular"
 							leftColSize="wide"
 						>
-							<MostViewedFooterLayout>
+							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
 										sectionName={article.sectionName}
@@ -1322,7 +1299,7 @@ export const LiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

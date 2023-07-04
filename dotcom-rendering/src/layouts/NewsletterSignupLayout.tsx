@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandAlt,
 	brandBackground,
@@ -40,13 +41,11 @@ import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import { BannerWrapper, Stuck } from './lib/stickiness';
@@ -199,15 +198,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
 	const palette = decidePalette(format);
@@ -281,10 +271,14 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 				>
 					<Nav
 						nav={NAV}
-						format={{
-							...format,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={NAV.selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -490,7 +484,6 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -520,10 +513,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>
@@ -566,7 +556,7 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

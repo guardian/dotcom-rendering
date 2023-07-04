@@ -36,6 +36,10 @@ import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
 
@@ -83,6 +87,19 @@ export type Props = {
 	showLivePlayable?: boolean;
 };
 
+const getMediaType = (
+	design: ArticleDesign.Gallery | ArticleDesign.Audio | ArticleDesign.Video,
+) => {
+	switch (design) {
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		case ArticleDesign.Video:
+			return 'Video';
+	}
+};
+
 const StarRatingComponent = ({
 	rating,
 	cardHasImage,
@@ -120,46 +137,22 @@ const StarRatingComponent = ({
  * about the container where the card sits.
  *
  */
-const decideIfAgeShouldShow = ({
-	showLivePlayable,
-	containerPalette,
-	format,
-	showAge,
-}: {
-	showLivePlayable: boolean;
-	containerPalette?: DCRContainerPalette;
-	format: ArticleFormat;
-	showAge: boolean;
-}): boolean => {
-	if (showLivePlayable) return false;
-	// Some containers force all cards to show age. E.g., The articles in the headlines
-	// container are typically very recent so we want to display age there
-	if (showAge) return true;
-	// Palettes are time sensitive so show age if one is being used
-	if (containerPalette) return true;
-	// Liveblogs are evidently time sensitive
-	if (format.design === ArticleDesign.LiveBlog) return true;
-	// Otherwise, do not show the article age on the Card
-	return false;
-};
 
 type RenderFooter = ({
-	displayAge,
 	displayLines,
 }: {
-	displayAge: boolean;
 	displayLines: boolean;
 }) => JSX.Element;
 
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
-	displayAge,
+
 	renderFooter,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
-	displayAge: boolean;
+
 	renderFooter: RenderFooter;
 }) => {
 	if (isOpinion && !hasSublinks) {
@@ -170,7 +163,6 @@ const DecideFooter = ({
 	// For all other cases (including opinion cards that *do* have sublinks) we
 	// render a version of the footer without lines here
 	return renderFooter({
-		displayAge,
 		displayLines: false,
 	});
 	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
@@ -179,12 +171,12 @@ const DecideFooter = ({
 const CommentFooter = ({
 	hasSublinks,
 	palette,
-	displayAge,
+
 	renderFooter,
 }: {
 	hasSublinks?: boolean;
 	palette: Palette;
-	displayAge: boolean;
+
 	renderFooter: RenderFooter;
 }) => {
 	return hasSublinks ? (
@@ -195,7 +187,6 @@ const CommentFooter = ({
 		// When an opinion card has no sublinks we show the entire footer, including lines
 		// outside, along the entire bottom of the card
 		renderFooter({
-			displayAge,
 			displayLines: true,
 		})
 	);
@@ -258,7 +249,6 @@ export const Card = ({
 	trailText,
 	avatarUrl,
 	showClock,
-	mediaType,
 	mediaDuration,
 	showMainVideo,
 	kickerText,
@@ -272,7 +262,7 @@ export const Card = ({
 	snapData,
 	containerPalette,
 	containerType,
-	showAge = false,
+	showAge = true,
 	discussionId,
 	isDynamo,
 	isCrossword,
@@ -296,13 +286,7 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
-	const renderFooter = ({
-		displayAge,
-		displayLines,
-	}: {
-		displayAge?: boolean;
-		displayLines?: boolean;
-	}) => {
+	const renderFooter = ({ displayLines }: { displayLines?: boolean }) => {
 		if (showLivePlayable) return <></>;
 		return (
 			<CardFooter
@@ -310,7 +294,7 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					displayAge && webPublicationDate ? (
+					showAge && webPublicationDate ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
@@ -356,13 +340,6 @@ export const Card = ({
 			/>
 		);
 	};
-
-	const displayAge = decideIfAgeShouldShow({
-		showLivePlayable,
-		containerPalette,
-		format,
-		showAge,
-	});
 
 	if (snapData?.embedHtml) {
 		return (
@@ -476,14 +453,13 @@ export const Card = ({
 								cardHasImage={imageUrl !== undefined}
 							/>
 						) : null}
-						{(format.design === ArticleDesign.Gallery ||
-							format.design === ArticleDesign.Audio ||
-							format.design === ArticleDesign.Video) &&
-						mediaType ? (
+						{format.design === ArticleDesign.Gallery ||
+						format.design === ArticleDesign.Audio ||
+						format.design === ArticleDesign.Video ? (
 							<MediaMeta
 								containerPalette={containerPalette}
 								format={format}
-								mediaType={mediaType}
+								mediaType={getMediaType(format.design)}
 								mediaDuration={mediaDuration}
 								hasKicker={!!kickerText}
 							/>
@@ -520,7 +496,6 @@ export const Card = ({
 						<DecideFooter
 							isOpinion={isOpinion}
 							hasSublinks={hasSublinks}
-							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
 						{hasSublinks && sublinkPosition === 'inner' ? (
@@ -552,7 +527,6 @@ export const Card = ({
 			{isOpinion && !isDynamo && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
-					displayAge={displayAge}
 					palette={palette}
 					renderFooter={renderFooter}
 				/>

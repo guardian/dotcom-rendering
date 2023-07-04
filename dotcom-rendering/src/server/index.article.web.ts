@@ -7,7 +7,7 @@ import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
 import { validateAsArticleType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
 import type { FEArticleBadgeType } from '../types/badge';
-import type { FEArticleType } from '../types/frontend';
+import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
 import {
 	renderBlocks,
 	renderHtml,

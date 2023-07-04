@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
@@ -42,12 +42,10 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
@@ -222,16 +220,6 @@ export const InteractiveLayout = ({
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showComments = article.isCommentable;
 
 	const { branding } = article.commercialProperties[article.editionId];
@@ -314,10 +302,14 @@ export const InteractiveLayout = ({
 				>
 					<Nav
 						nav={NAV}
-						format={{
-							...format,
-							theme: getCurrentPillar(article),
-						}}
+						isImmersive={
+							format.display === ArticleDisplay.Immersive
+						}
+						displayRoundel={
+							format.display === ArticleDisplay.Immersive ||
+							format.theme === ArticleSpecial.Labs
+						}
+						selectedPillar={NAV.selectedPillar}
 						subscribeUrl={
 							article.nav.readerRevenueLinks.header.subscribe
 						}
@@ -400,7 +392,6 @@ export const InteractiveLayout = ({
 									<MainMedia
 										format={format}
 										elements={article.mainMediaElements}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -508,7 +499,6 @@ export const InteractiveLayout = ({
 									<ArticleBody
 										format={format}
 										blocks={article.blocks}
-										adTargeting={adTargeting}
 										host={host}
 										pageId={article.pageId}
 										webTitle={article.webTitle}
@@ -645,10 +635,7 @@ export const InteractiveLayout = ({
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>
@@ -713,7 +700,7 @@ export const InteractiveLayout = ({
 						data-link-name="most-popular"
 						data-component="most-popular"
 					>
-						<MostViewedFooterLayout>
+						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
 									sectionName={article.sectionName}
@@ -773,7 +760,7 @@ export const InteractiveLayout = ({
 			>
 				<Footer
 					pageFooter={article.pageFooter}
-					pillar={format.theme}
+					selectedPillar={NAV.selectedPillar}
 					pillars={NAV.pillars}
 					urls={article.nav.readerRevenueLinks.header}
 					editionId={article.editionId}

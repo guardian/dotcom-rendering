@@ -388,26 +388,32 @@ export const LabsSection = ({
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
 			hasPageSkin={hasPageSkin}
+			/**
+			 * dumathoin?
+			 * https://github.com/guardian/frontend/pull/17625
+			 * https://forgottenrealms.fandom.com/wiki/Dumathoin
+			 */
+			className={'dumathoin'}
 		>
 			<Container hasPageSkin={hasPageSkin}>
 				<LeftColumn
-					backgroundColour={overrides.background?.containerLeftColumn}
+					backgroundColour={overrides.background.containerLeftColumn}
 					hasPageSkin={hasPageSkin}
 				>
 					<div>
 						<LabsContainerHeader
 							summaryBackgroundColour={
-								overrides.background?.containerSummary
+								overrides.background.containerSummary
 							}
-							summaryTextColour={overrides.text?.container}
+							summaryTextColour={overrides.text.container}
 							summaryTextSecondaryColour={
-								overrides.text?.containerSummary
+								overrides.text.containerSummary
 							}
 							hasPageSkin={hasPageSkin}
 						/>
 						<GuardianLabsTitle
 							title={title}
-							textColour={overrides.text?.container}
+							textColour={overrides.text.container}
 							url={url}
 						/>
 					</div>
@@ -422,7 +428,7 @@ export const LabsSection = ({
 					</Link>
 				</LeftColumn>
 				<Content
-					backgroundColour={overrides.background?.container}
+					backgroundColour={overrides.background.container}
 					hasPageSkin={hasPageSkin}
 				>
 					{children}
@@ -435,7 +441,7 @@ export const LabsSection = ({
 								pageId={pageId}
 								ajaxUrl={ajaxUrl}
 								containerPalette={'Branded'}
-								showAge={false}
+								showAge={true}
 							/>
 						</Island>
 					)}
@@ -443,7 +449,7 @@ export const LabsSection = ({
 						<div css={badgeStyles}>
 							<div
 								css={paidForByStyles(
-									overrides.text?.containerFooter,
+									overrides.text.containerFooter,
 								)}
 							>
 								Paid for by

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	border,
 	brandAltBackground,
@@ -48,12 +48,10 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { getCurrentPillar } from '../lib/layoutHelpers';
 import { parse } from '../lib/slot-machine-flags';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
@@ -310,16 +308,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -341,14 +329,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const { branding } = article.commercialProperties[article.editionId];
 
 	const palette = decidePalette(format);
-
-	const formatForNav =
-		format.theme === ArticleSpecial.Labs
-			? format
-			: {
-					...format,
-					theme: getCurrentPillar(article),
-			  };
 
 	const contributionsServiceUrl = getContributionsServiceUrl(article);
 
@@ -417,7 +397,14 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Nav
 							nav={props.NAV}
-							format={formatForNav}
+							isImmersive={
+								format.display === ArticleDisplay.Immersive
+							}
+							displayRoundel={
+								format.display === ArticleDisplay.Immersive ||
+								format.theme === ArticleSpecial.Labs
+							}
+							selectedPillar={props.NAV.selectedPillar}
 							subscribeUrl={
 								article.nav.readerRevenueLinks.header.subscribe
 							}
@@ -539,7 +526,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -648,7 +634,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									format={format}
 									blocks={article.blocks}
 									pinnedPost={article.pinnedPost}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -810,10 +795,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									decideTrail,
 								)}
 								onwardsSource="more-on-this-story"
-								titleHighlightColour={
-									palette.text.carouselTitle
-								}
-								activeDotColour={palette.background.carouselDot}
+								format={format}
 								leftColSize={'compact'}
 							/>
 						</Island>
@@ -887,7 +869,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								data-link-name="most-popular"
 								data-component="most-popular"
 							>
-								<MostViewedFooterLayout>
+								<MostViewedFooterLayout renderAds={renderAds}>
 									<Island
 										clientOnly={true}
 										deferUntil="visible"
@@ -954,7 +936,7 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 					>
 						<Footer
 							pageFooter={article.pageFooter}
-							pillar={format.theme}
+							selectedPillar={props.NAV.selectedPillar}
 							pillars={props.NAV.pillars}
 							urls={article.nav.readerRevenueLinks.header}
 							editionId={article.editionId}

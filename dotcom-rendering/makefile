@@ -99,6 +99,12 @@ dev-debug: clear clean-dist install
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
 	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
 
+# storybook #########################################
+
+storybook-dev: clear clean-dist install
+	$(call log, "starting Storybook DEV server")
+	yarn storybook
+
 # tests #####################################
 
 cypress: clear clean-dist install build
@@ -136,6 +142,10 @@ lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
 
+lint-project:
+	$(call log, "linting project")
+	@node ../scripts/check-node-versions.mjs
+
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
 	@stylelint "src/**/*.ts{,x}"
@@ -149,10 +159,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-validate: clean-dist install tsc lint stylelint test validate-build
+validate: clean-dist install lint-project tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-ci: install tsc lint stylelint test-ci
+validate-ci: install lint-project tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################

@@ -1,4 +1,5 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
 import type { Branding } from './branding';
@@ -78,6 +79,7 @@ type FEContainerType =
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'fixed/video'
+	| 'fixed/video/vertical'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular';
@@ -125,7 +127,9 @@ export type DCRContainerPalette =
 	| 'SombrePalette'
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette'
-	| 'Branded';
+	| 'Branded'
+	| 'MediaPalette'
+	| 'PodcastPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -396,7 +400,7 @@ export type FEFrontConfigType = {
 	section: string;
 	keywordIds: string;
 	locationapiurl: string;
-	sharedAdTargeting: { [key: string]: unknown };
+	sharedAdTargeting: SharedAdTargeting;
 	buildNumber: string;
 	abTests: ServerSideTests;
 	pbIndexSites: { [key: string]: unknown }[];

@@ -30,6 +30,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.editionId,
 				data.pageId,
 				data.pressedPage.frontProperties.onPageDescription,
+				data.config.isPaidContent,
 			),
 		},
 		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
@@ -39,6 +40,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 		trendingTopics: extractTrendingTopicsFomFront(
 			data.pressedPage.collections,
+			data.pageId,
 		),
 		deeplyRead: data.deeplyRead?.map((trail) => decideTrail(trail)),
 	};
@@ -47,7 +49,10 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	const data: FETagFrontType = validateAsTagFrontType(body);
 
-	const enhancedCards = enhanceCards(data.contents, {});
+	const enhancedCards = enhanceCards(data.contents, {
+		cardInTagFront: true,
+		pageId: data.pageId,
+	});
 	const speed = getSpeedFromTrails(data.contents);
 
 	const groupedTrails = groupTrailsByDates(
@@ -72,7 +77,7 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 						pageId: data.pageId,
 				  }
 				: undefined,
-		trendingTopics: extractTrendingTopics(data.contents),
+		trendingTopics: extractTrendingTopics(data.contents, data.pageId),
 		header: {
 			title: data.webTitle,
 			description: data.tags.tags[0]?.properties.bio,

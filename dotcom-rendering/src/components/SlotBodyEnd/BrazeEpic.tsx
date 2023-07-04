@@ -11,6 +11,10 @@ import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
+import {
+	getOptionsHeadersWithOkta,
+	useSignedInAuthState,
+} from '../../lib/useSignedInAuthState';
 import type { TagType } from '../../types/tag';
 
 const wrapperMargins = css`
@@ -97,6 +101,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	countryCode,
 	idApiUrl,
 }: InnerProps) => {
+	const authStatus = useSignedInAuthState();
 	const [hasBeenSeen, setNode] = useIsInView({
 		rootMargin: '-18px',
 		threshold: 0,
@@ -133,22 +138,28 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	const componentName = meta.dataFromBraze.componentName;
 	if (!componentName) return null;
 
+	const subscribeToNewsletter = async (newsletterId: string) => {
+		if (authStatus.kind !== 'Pending') {
+			const options = getOptionsHeadersWithOkta(authStatus);
+
+			await fetch(`${idApiUrl}/users/me/newsletters`, {
+				method: 'PATCH',
+				body: JSON.stringify({
+					id: newsletterId,
+					subscribed: true,
+				}),
+				...options,
+			});
+		}
+	};
+
 	return (
 		<div ref={setNode} css={wrapperMargins}>
 			<div ref={epicRef}>
 				<BrazeComponent
 					componentName={componentName}
 					brazeMessageProps={meta.dataFromBraze}
-					subscribeToNewsletter={async (newsletterId) => {
-						await fetch(`${idApiUrl}/users/me/newsletters`, {
-							method: 'PATCH',
-							body: JSON.stringify({
-								id: newsletterId,
-								subscribed: true,
-							}),
-							credentials: 'include',
-						});
-					}}
+					subscribeToNewsletter={subscribeToNewsletter}
 					countryCode={countryCode}
 					logButtonClickWithBraze={meta.logButtonClickWithBraze}
 					submitComponentEvent={submitComponentEvent}

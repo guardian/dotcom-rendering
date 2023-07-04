@@ -1,5 +1,6 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
+import { userEvent, within } from '@storybook/testing-library';
 import { Section } from '../Section';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
@@ -19,11 +20,7 @@ export const StandardStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -45,11 +42,7 @@ export const StandardStoryTopBarHeader = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -71,11 +64,7 @@ export const OpinionStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.Opinion}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -98,11 +87,9 @@ export const ImmersiveStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-				}}
+				selectedPillar={ArticlePillar.News}
+				displayRoundel={true}
+				isImmersive={true}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -113,3 +100,40 @@ export const ImmersiveStory = () => {
 	);
 };
 ImmersiveStory.storyName = 'Immersive';
+
+export const ExpandedMenuStory = () => {
+	return (
+		<Section
+			fullWidth={true}
+			showSideBorders={false}
+			borderColour={brandBorder.primary}
+			showTopBorder={false}
+			padSides={false}
+			backgroundColour={brandBackground.primary}
+		>
+			<Nav
+				selectedPillar={ArticlePillar.News}
+				displayRoundel={true}
+				isImmersive={true}
+				nav={nav}
+				subscribeUrl=""
+				editionId="UK"
+				headerTopBarSwitch={false}
+				isInEuropeTest={true}
+			/>
+		</Section>
+	);
+};
+
+/**
+ * Clicks the “More" button so that Chromatic can capture the component in its `expanded` state.
+ */
+ExpandedMenuStory.play = async ({
+	canvasElement,
+}: {
+	canvasElement: HTMLElement;
+}) => {
+	const canvas = within(canvasElement);
+	await userEvent.click(canvas.getByLabelText(/More/));
+};
+ExpandedMenuStory.storyName = 'ExpandedMenu';

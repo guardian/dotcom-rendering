@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { between, from } from '@guardian/source-foundations';
+import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
 const sizingStyles = css`
 	display: flex;
