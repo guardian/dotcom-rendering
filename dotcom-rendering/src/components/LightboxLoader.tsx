@@ -3,16 +3,16 @@ import { neutral } from '@guardian/source-foundations';
 
 const flash = keyframes`
 	0% {
-		background-color: #fff2;
-		box-shadow: 26px 0 #fff2, -26px 0 #fff;
+		background-color: ${neutral[46]};
+		box-shadow: 26px 0 ${neutral[46]}, -26px 0 ${neutral[100]};
 	}
 	50% {
-		background-color: #fff;
-		box-shadow: 26px 0 #fff2, -26px 0 #fff2;
+		background-color: ${neutral[100]};
+		box-shadow: 26px 0 ${neutral[46]}, -26px 0 ${neutral[46]};
 	}
 	100% {
-		background-color: #fff2;
-		box-shadow: 26px 0 #fff, -26px 0 #fff2;
+		background-color: ${neutral[46]};
+		box-shadow: 26px 0 ${neutral[100]}, -26px 0 ${neutral[46]};
 	}
 `;
 
@@ -45,8 +45,8 @@ export const LightboxLoader = ({ position }: { position: number }) => {
 					width: 12px;
 					height: 12px;
 					border-radius: 50%;
-					background-color: #fff;
-					box-shadow: 26px 0 #fff, -26px 0 #fff;
+					background-color: ${neutral[100]};
+					box-shadow: 26px 0 ${neutral[100]}, -26px 0 ${neutral[100]};
 					position: relative;
 					animation: ${flash} 0.5s ease-out infinite alternate;
 					@media (prefers-reduced-motion) {
