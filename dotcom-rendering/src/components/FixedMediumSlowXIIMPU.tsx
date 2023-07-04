@@ -1,7 +1,9 @@
 import { Hide } from '@guardian/source-react-components';
 import {
+	Card100Media100Tall,
 	Card33Media33MobileTopTall,
 	Card33Media33Tall,
+	Card50Media50TallMPU,
 	CardDefault,
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
@@ -63,6 +65,42 @@ const Card33_Card33_Card33 = ({
 					key={trail.url}
 				>
 					<Card33Media33Tall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* .___________.___________.
+ * |###########|###########|
+ * |           |           |
+ * |___________|___________|
+ */
+const Card50_Card50 = ({
+	trails,
+	containerPalette,
+	showAge,
+	padBottom,
+}: {
+	trails: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	padBottom?: boolean;
+}) => {
+	return (
+		<UL direction="row" padBottom={padBottom}>
+			{trails.map((trail, index) => (
+				<LI
+					percentage="50%"
+					padSides={true}
+					key={trail.url}
+					showDivider={index > 0}
+				>
+					<Card50Media50TallMPU
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -153,12 +191,29 @@ export const FixedMediumSlowXIIMPU = ({
 	const remaining = trails.slice(3, 9);
 	return (
 		<>
-			<Card33_Card33_Card33
-				trails={firstSlice}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				padBottom={true}
-			/>
+			{trails.length === 1 ? (
+				trails.map((trail) => (
+					<Card100Media100Tall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						key={trail.url}
+					/>
+				))
+			) : trails.length === 2 ? (
+				<Card50_Card50
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			) : (
+				<Card33_Card33_Card33
+					trails={firstSlice}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					padBottom={true}
+				/>
+			)}
 			{renderAds && remaining.length > 0 ? (
 				<ThreeColumnSliceWithAdSlot
 					trails={remaining}
