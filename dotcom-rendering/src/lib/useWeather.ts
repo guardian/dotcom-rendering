@@ -1,7 +1,10 @@
 import type { ApiResponse } from './useApi';
 import { useApi } from './useApi';
 
-// We get 24 forecasts from the API, each one 1hr offset from the last one
+/**
+ * Our weather API returns 24 forecast.
+ * Each forecast is 1 hour offset from the previous forecast, and the first forecast is 1 hour offset from Now.
+ */
 export type WeatherForecast = [
 	WeatherData,
 	WeatherData,
@@ -50,15 +53,8 @@ export type WeatherApiData = {
 };
 
 /**
- * Ensures that the given task is only run once and only after all items in waitFor are defined
- * @param {Function} task - The task to execute once
- * @param {Array} waitFor - An array of variables that must be defined before the task is executed
- * */
-export const useWeather = (
-	ajaxUrl: string,
-	edition: string,
-): ApiResponse<WeatherApiData> => {
-	return useApi<WeatherApiData>(
-		`${ajaxUrl}/weather.json?_edition=${edition}`,
-	);
-};
+ * Wrapper around useApi to fetch weather data
+ * @param {Function} ajaxUrl - base API url to fetch weather data from
+ **/
+export const useWeather = (ajaxUrl: string): ApiResponse<WeatherApiData> =>
+	useApi<WeatherApiData>(`${ajaxUrl}/weather.json`);

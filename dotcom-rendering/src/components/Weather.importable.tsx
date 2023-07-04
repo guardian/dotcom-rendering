@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const Weather = ({ ajaxUrl, edition }: Props) => {
-	const { data, error } = useWeather(ajaxUrl, edition);
+	const { data, error } = useWeather(ajaxUrl);
 
 	if (error) {
 		window.guardian.modules.sentry.reportError(error, 'weather');
