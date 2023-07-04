@@ -36,24 +36,24 @@ const getLoaders = (bundle) => {
 	switch (bundle) {
 		case 'legacy':
 			return [
-				// {
-				// 	loader: 'babel-loader',
-				// 	options: {
-				// 		presets: [
-				// 			'@babel/preset-react',
-				// 			[
-				// 				'@babel/preset-env',
-				// 				{
-				// 					targets: {
-				// 						ie: '11',
-				// 					},
-				// 					modules: false,
-				// 				},
-				// 			],
-				// 		],
-				// 		compact: true,
-				// 	},
-				// },
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										ie: '11',
+									},
+									modules: false,
+								},
+							],
+						],
+						compact: true,
+					},
+				},
 				{
 					loader: 'ts-loader',
 					options: {
