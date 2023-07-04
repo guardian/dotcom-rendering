@@ -176,30 +176,23 @@ export type TemperatureProps = {
 	unit: 'C' | 'F';
 };
 
-type ForecastProps = {
-	icon: number;
-	description: string;
-	link: string;
+export type ForecastProps = {
+	weatherText: string;
+	weatherIcon: number;
+	weatherLink?: string;
 	temperature: {
-		metric: TemperatureProps;
-		imperial: TemperatureProps;
+		metric: number;
+		imperial: number;
 	};
 	dateTime?: string;
+	link?: string;
 };
 
 export interface WeatherProps {
 	location: {
-		key: string;
-		localizedName: string;
-		country: {
-			id: string;
-			localizedName: string;
-		};
-		administrativeArea: {
-			id: string;
-			localizedName: string;
-		};
-		type: string;
+		id: string;
+		city: string;
+		country: string;
 	};
 	now: ForecastProps;
 	forecast: [ForecastProps, ForecastProps, ForecastProps, ForecastProps];
@@ -210,11 +203,9 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const isUS = edition === 'US';
 	return (
 		<aside css={weatherCSS}>
-			<div css={locationCSS}>{location.localizedName}</div>
+			<div css={locationCSS}>{location.city}</div>
 
-			<p css={visuallyHiddenCSS}>
-				Today’s weather for {location.localizedName}:
-			</p>
+			<p css={visuallyHiddenCSS}>Today’s weather for {location.city}:</p>
 
 			{/* Current weather */}
 			<div css={[nowCSS, slotCSS]} className="now">
