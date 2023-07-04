@@ -363,13 +363,9 @@ const titleStyle = (
 const getDataLinkNameCarouselButton = (
 	direction: string,
 	arrowName: string,
-	collectionType?: string,
+	isVideoContainer: boolean,
 ): string => {
-	return `${
-		collectionType && collectionType === 'fixed/video'
-			? 'video-container'
-			: arrowName
-	}-${direction}`;
+	return `${isVideoContainer ? 'video-container' : arrowName}-${direction}`;
 };
 
 const Title = ({
@@ -600,6 +596,9 @@ export const Carousel = ({
 
 	const isCuratedContent = onwardsSource === 'curated-content';
 
+	const isVideoContainer =
+		'collectionType' in props && props.collectionType === 'fixed/video';
+
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
 
@@ -701,12 +700,7 @@ export const Carousel = ({
 		<div
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
-			data-component={
-				'collectionType' in props &&
-				props.collectionType === 'fixed/video'
-					? 'video-playlist'
-					: undefined
-			}
+			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
 			<FetchCommentCounts />
 			<LeftColumn
@@ -749,9 +743,9 @@ export const Carousel = ({
 						),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
-						heading,
 						'prev',
 						arrowName,
+						isVideoContainer,
 					)}
 				>
 					<SvgChevronLeftSingle />
@@ -778,9 +772,9 @@ export const Carousel = ({
 						),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
-						heading,
 						'next',
 						arrowName,
+						isVideoContainer,
 					)}
 				>
 					<SvgChevronRightSingle />
@@ -824,9 +818,9 @@ export const Carousel = ({
 									),
 								]}
 								data-link-name={getDataLinkNameCarouselButton(
-									heading,
 									'prev',
 									arrowName,
+									isVideoContainer,
 								)}
 							>
 								<SvgChevronLeftSingle />
@@ -850,9 +844,9 @@ export const Carousel = ({
 									),
 								]}
 								data-link-name={getDataLinkNameCarouselButton(
-									heading,
 									'next',
 									arrowName,
+									isVideoContainer,
 								)}
 							>
 								<SvgChevronRightSingle />

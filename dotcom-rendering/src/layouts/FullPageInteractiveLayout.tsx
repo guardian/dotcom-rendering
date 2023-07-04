@@ -72,7 +72,6 @@ const Renderer = ({
 			format,
 
 			element,
-			adTargeting: undefined,
 			host,
 			index,
 			isMainMedia: false,

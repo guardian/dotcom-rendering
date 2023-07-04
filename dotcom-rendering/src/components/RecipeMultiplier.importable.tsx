@@ -4,6 +4,7 @@ import { lifestyle, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useState } from 'react';
+import { isServer } from '../lib/isServer';
 import { useOnce } from '../lib/useOnce';
 
 const colours = `
@@ -33,8 +34,6 @@ const units = ['g', 'l'] as const;
 const isUnit = (unit: string): unit is (typeof units)[number] =>
 	//@ts-expect-error -- custom type guard
 	units.includes(unit);
-
-const isServer = typeof document === 'undefined';
 
 /** These values should not update based on servings  */
 const constants = [
@@ -156,7 +155,7 @@ export const RecipeMultiplier = () => {
 				if (!(node instanceof Text)) continue;
 
 				const match =
-					node.nodeValue?.match(RECIPE_ELEMENTS) ?? undefined;
+					node.nodeValue.match(RECIPE_ELEMENTS) ?? undefined;
 
 				if (!match) continue;
 

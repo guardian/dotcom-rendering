@@ -83,10 +83,12 @@ export const enhanceCollections = (
 				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
+				cardInTagFront: false,
 				editionId,
 				containerPalette,
 			}),
 			backfill: enhanceCards(collection.backfill, {
+				cardInTagFront: false,
 				editionId,
 				containerPalette,
 			}),

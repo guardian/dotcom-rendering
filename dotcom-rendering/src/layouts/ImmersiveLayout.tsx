@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -34,7 +33,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeight, Nav } from '../components/Nav/Nav';
+import { minNavHeightPx, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -43,7 +42,6 @@ import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -255,16 +253,6 @@ export const ImmersiveLayout = ({
 		config: { isPaidContent, host },
 	} = article;
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -296,13 +284,11 @@ export const ImmersiveLayout = ({
 	*/
 
 	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const navHeightCSS: SerializedStyles = minNavHeight;
-	const navHeight = parseInt(navHeightCSS.styles.slice(11, -2));
-	const combinedHeight = (navHeight + labsHeaderHeight).toString();
+	const combinedHeight = (minNavHeightPx + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
-		: `${navHeight}px`;
+		: `${minNavHeightPx}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -408,7 +394,6 @@ export const ImmersiveLayout = ({
 					<MainMedia
 						format={format}
 						elements={article.mainMediaElements}
-						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
 							article.starRating !== undefined
@@ -629,7 +614,6 @@ export const ImmersiveLayout = ({
 								<ArticleBody
 									format={format}
 									blocks={article.blocks}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}

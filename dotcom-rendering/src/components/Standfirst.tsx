@@ -222,6 +222,9 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 				}
 				dangerouslySetInnerHTML={{
 					__html: sanitise(standfirst, {
+						// We allow all tags, which includes script & style which are potentially vulnerable
+						// `allowVulnerableTags: true` suppresses this warning
+						allowVulnerableTags: true,
 						allowedTags: false, // Leave tags from CAPI alone
 						allowedAttributes: false, // Leave attributes from CAPI alone
 						transformTags: {

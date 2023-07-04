@@ -175,6 +175,7 @@ export type ContainerOverrides = {
 	background: {
 		container: Colour;
 		containerLeftColumn?: Colour;
+		containerOuter?: Colour;
 		containerSummary?: Colour;
 		card?: Colour;
 		carouselDot: Colour;

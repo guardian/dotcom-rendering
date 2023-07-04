@@ -1,10 +1,15 @@
 import { css } from '@emotion/react';
 import type { DCRSnapType } from '../types/front';
 
+// Some thrashers don't have "width: 100%" applied to their first element which causes them to not correctly take up their space
 const snapStyles = css`
 	overflow: hidden;
 	position: relative;
 	display: flex;
+
+	> * {
+		width: 100%;
+	}
 `;
 
 type Props = {

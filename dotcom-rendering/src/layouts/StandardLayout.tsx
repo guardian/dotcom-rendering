@@ -48,7 +48,6 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { buildAdTargeting } from '../lib/ad-targeting';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -309,16 +308,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 	const isInEuropeTest =
 		article.config.abTests.europeNetworkFrontVariant === 'variant';
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: article.isAdFreeUser,
-		isSensitive: article.config.isSensitive,
-		videoDuration: article.config.videoDuration,
-		edition: article.config.edition,
-		section: article.config.section,
-		sharedAdTargeting: article.config.sharedAdTargeting,
-		adUnit: article.config.adUnit,
-	});
-
 	const showBodyEndSlot =
 		parse(article.slotMachineFlags ?? '').showBodyEnd ||
 		article.config.switches.slotBodyEnd;
@@ -537,7 +526,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 								<MainMedia
 									format={format}
 									elements={article.mainMediaElements}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}
@@ -646,7 +634,6 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 									format={format}
 									blocks={article.blocks}
 									pinnedPost={article.pinnedPost}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={article.pageId}
 									webTitle={article.webTitle}

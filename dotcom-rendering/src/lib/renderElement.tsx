@@ -71,7 +71,6 @@ import { decidePalette } from './decidePalette';
 type Props = {
 	format: ArticleFormat;
 	element: FEElement;
-	adTargeting?: AdTargeting;
 	host?: string;
 	index: number;
 	isMainMedia: boolean;
@@ -126,7 +125,6 @@ const updateRole = (el: FEElement, format: ArticleFormat): FEElement => {
 export const renderElement = ({
 	format,
 	element,
-	adTargeting,
 	host,
 	index,
 	hideCaption,
@@ -736,7 +734,6 @@ export const renderElement = ({
 						key={index}
 						hideCaption={hideCaption}
 						role="inline"
-						adTargeting={adTargeting}
 						isMainMedia={isMainMedia}
 						id={element.id}
 						elementId={element.elementId}
@@ -784,7 +781,6 @@ const bareElements = new Set<FEElement['_type']>([
 export const RenderArticleElement = ({
 	format,
 	element,
-	adTargeting,
 	ajaxUrl,
 	host,
 	index,
@@ -804,7 +800,6 @@ export const RenderArticleElement = ({
 	const el = renderElement({
 		format,
 		element: withUpdatedRole,
-		adTargeting,
 		ajaxUrl,
 		host,
 		index,

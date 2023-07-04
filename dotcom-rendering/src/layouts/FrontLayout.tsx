@@ -38,6 +38,7 @@ import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -270,6 +271,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
 				id="maincontent"
+				css={hasPageSkin && pageSkinContainer}
 			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -453,42 +455,60 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						const containerOverrides =
 							decideContainerOverrides(containerPalette);
 						return (
-							<Section
-								key={ophanName}
-								title={collection.displayName}
-								sectionId={`container-${ophanName}`}
-								ophanComponentName={ophanName}
-								ophanComponentLink={ophanComponentLink}
-								containerName={collection.collectionType}
-								fullWidth={true}
-								padBottom={true}
-								showSideBorders={true}
-								showTopBorder={index > 0}
-								padContent={false}
-								url={collection.href}
-								containerPalette={containerPalette}
-								showDateHeader={
-									collection.config.showDateHeader
-								}
-								editionId={front.editionId}
-								backgroundColour={
-									containerOverrides.background.container
-								}
-								hasPageSkin={hasPageSkin}
-							>
-								<Island deferUntil={'visible'}>
-									<Carousel
-										heading={collection.displayName}
-										trails={trails}
-										onwardsSource={'unknown-source'}
-										palette={containerPalette}
-										leftColSize={'compact'}
-										collectionType={
-											collection.collectionType
-										}
-									/>
-								</Island>
-							</Section>
+							<Fragment key={ophanName}>
+								<Section
+									title={collection.displayName}
+									sectionId={`container-${ophanName}`}
+									ophanComponentName={ophanName}
+									ophanComponentLink={ophanComponentLink}
+									containerName={collection.collectionType}
+									fullWidth={true}
+									padBottom={true}
+									showSideBorders={
+										collection.collectionType !==
+										'fixed/video'
+									}
+									showTopBorder={index > 0}
+									padContent={false}
+									url={collection.href}
+									containerPalette={containerPalette}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									backgroundColour={
+										containerOverrides.background
+											.containerOuter
+									}
+									innerBackgroundColour={
+										containerOverrides.background.container
+									}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island deferUntil={'visible'}>
+										<Carousel
+											heading={collection.displayName}
+											trails={trails}
+											onwardsSource={'unknown-source'}
+											palette={containerPalette}
+											leftColSize={'compact'}
+											collectionType={
+												collection.collectionType
+											}
+										/>
+									</Island>
+								</Section>
+								{decideAdSlot(
+									renderAds,
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									mobileAdPositions,
+									hasPageSkin,
+								)}
+							</Fragment>
 						);
 					}
 
@@ -545,7 +565,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.containerPalette
 									}
 									showAge={
-										collection.displayName === 'Headlines'
+										!hideAge.includes(
+											collection.displayName,
+										)
 									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}

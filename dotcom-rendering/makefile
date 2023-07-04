@@ -99,6 +99,12 @@ dev-debug: clear clean-dist install
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
 	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
 
+# storybook #########################################
+
+storybook-dev: clear clean-dist install
+	$(call log, "starting Storybook DEV server")
+	yarn storybook
+
 # tests #####################################
 
 cypress: clear clean-dist install build
