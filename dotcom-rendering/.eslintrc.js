@@ -171,9 +171,7 @@ module.exports = {
 		...rulesToOverrideGuardianConfig,
 	},
 	settings: {
-		'import/resolver': {
-			'babel-module': { extensions: ['.ts', '.tsx', '.js'] },
-		},
+		'import/resolver': 'typescript'
 	},
 	overrides: [
 		{
