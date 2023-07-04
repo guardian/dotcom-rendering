@@ -48,7 +48,8 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	 * effectively navigating the lightbox
 	 */
 	const imageList = lightbox.querySelector<HTMLUListElement>('ul');
-	const figures = lightbox.querySelectorAll<HTMLElement>('li figure');
+	const pictures =
+		lightbox.querySelectorAll<HTMLPictureElement>('li picture');
 	const images = lightbox.querySelectorAll<HTMLImageElement>('li img');
 	const captionLinks =
 		lightbox.querySelectorAll<HTMLAnchorElement>('li aside a');
@@ -385,19 +386,19 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
-	figures.forEach((figure) => {
+	pictures.forEach((picture) => {
 		// Clicking on the image toggles the caption
-		figure.addEventListener('mousedown', (event) => {
+		picture.addEventListener('mousedown', (event) => {
 			toggleInfo();
 			// We want to maintain focus so halt all further actions
 			event.preventDefault();
 			event.stopPropagation();
 		});
 		// Remove the loader once the image has been downloaded
-		const index = figure.closest('li')?.dataset.index;
+		const index = picture.closest('li')?.dataset.index;
 		if (index === undefined) return;
 		const position = parseInt(index, 10);
-		const image = figure.querySelector('img');
+		const image = picture.querySelector('img');
 		if (image?.complete) {
 			removeLoader(position);
 		} else {
