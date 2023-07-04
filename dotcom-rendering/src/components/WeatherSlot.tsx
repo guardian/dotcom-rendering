@@ -14,12 +14,12 @@ import type { WeatherData } from '../lib/useWeather';
 const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
 
-const formatTime = (time: string, isUS: boolean) =>
+const formatTime = (dateTime: Date, isUS: boolean) =>
 	isUS
-		? new Date(time).toLocaleTimeString('en-US', {
+		? dateTime.toLocaleTimeString('en-US', {
 				hour: 'numeric',
 		  })
-		: new Date(time).toLocaleTimeString(undefined, {
+		: dateTime.toLocaleTimeString(undefined, {
 				hour: '2-digit',
 				minute: '2-digit',
 		  });
@@ -109,7 +109,7 @@ const LoadingIcon = () => (
 export type WeatherSlotProps = WeatherData & {
 	isUS: boolean;
 	css?: SerializedStyles;
-	dateTime?: string;
+	dateTime?: Date;
 };
 
 export const WeatherSlot = ({
@@ -148,7 +148,7 @@ export const WeatherSlot = ({
 					Now
 				</span>
 			) : (
-				<time css={timeCSS} dateTime={dateTime}>
+				<time css={timeCSS} dateTime={dateTime.toDateString()}>
 					{formatTime(dateTime, isUS)}
 				</time>
 			)}

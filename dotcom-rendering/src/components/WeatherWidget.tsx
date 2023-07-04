@@ -22,7 +22,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgExternal } from '@guardian/source-react-components';
-import type { WeatherData } from '../lib/useWeather';
+import type { WeatherData, WeatherForecast } from '../lib/useWeather';
 import type { FEFrontConfigType } from '../types/front';
 import { WeatherSlot } from './WeatherSlot';
 
@@ -183,13 +183,14 @@ export interface WeatherWidgetProps {
 	edition: FEFrontConfigType['edition'];
 }
 
+const ONE_HOUR_IN_MILLIS = 60 * 60 * 1000;
 const getForecastForHour = (
 	forecast: WeatherForecast,
 	offsetHours: 3 | 6 | 9 | 12,
 ) => {
 	return {
 		...forecast[offsetHours],
-		dateTime: new Date(),
+		dateTime: new Date(Date.now() + ONE_HOUR_IN_MILLIS * offsetHours),
 	};
 };
 
