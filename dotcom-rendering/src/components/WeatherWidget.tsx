@@ -179,9 +179,19 @@ export interface WeatherWidgetProps {
 		country: string;
 	};
 	now: WeatherData;
-	forecast: [WeatherData, WeatherData, WeatherData, WeatherData];
+	forecast: WeatherForecast;
 	edition: FEFrontConfigType['edition'];
 }
+
+const getForecastForHour = (
+	forecast: WeatherForecast,
+	offsetHours: 3 | 6 | 9 | 12,
+) => {
+	return {
+		...forecast[offsetHours],
+		dateTime: new Date(),
+	};
+};
 
 export const WeatherWidget = ({
 	location,
@@ -203,16 +213,19 @@ export const WeatherWidget = ({
 
 			{/* Forecast slots */}
 			<div css={slotCSS} className="forecast-1">
-				<WeatherSlot isUS={isUS} {...forecast[0]} />
+				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 3)} />
 			</div>
 			<div css={slotCSS} className="forecast-2">
-				<WeatherSlot isUS={isUS} {...forecast[1]} />
+				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 6)} />
 			</div>
 			<div css={slotCSS} className="forecast-3">
-				<WeatherSlot isUS={isUS} {...forecast[2]} />
+				<WeatherSlot isUS={isUS} {...getForecastForHour(forecast, 9)} />
 			</div>
 			<div css={slotCSS} className="forecast-4">
-				<WeatherSlot isUS={isUS} {...forecast[3]} />
+				<WeatherSlot
+					isUS={isUS}
+					{...getForecastForHour(forecast, 12)}
+				/>
 			</div>
 			<div css={linkCSS}>
 				<a href={now.link}>

@@ -1,6 +1,34 @@
 import type { ApiResponse } from './useApi';
 import { useApi } from './useApi';
 
+// We get 24 forecasts from the API, each one 1hr offset from the last one
+export type WeatherForecast = [
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+	WeatherData,
+];
+
 export type WeatherData = {
 	description: string;
 	icon: number;
@@ -18,7 +46,7 @@ export type WeatherApiData = {
 		country: string;
 	};
 	weather: WeatherData;
-	forecast: [WeatherData, WeatherData, WeatherData, WeatherData];
+	forecast: WeatherForecast;
 };
 
 /**
