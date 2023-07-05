@@ -49,7 +49,6 @@ const lightboxStyles = css`
 
 const containerStyles = css`
 	display: flex;
-	height: 100%;
 	flex-direction: row;
 	${until.tablet} {
 		flex-direction: column;
