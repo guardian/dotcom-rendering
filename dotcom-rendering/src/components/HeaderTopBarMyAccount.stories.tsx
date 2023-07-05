@@ -1,3 +1,4 @@
+import type { AuthStatus } from '../lib/useAuthStatus';
 import { MyAccount } from './HeaderTopBarMyAccount';
 
 export default {
@@ -9,13 +10,16 @@ export default {
 	},
 };
 
+//will need to adjust this with okta?
 export const defaultStory = () => {
+	const authStatus: AuthStatus = { kind: 'SignedInWithCookies' };
 	return (
 		<MyAccount
 			mmaUrl="mmaUrl"
 			idApiUrl="idApiUrl"
 			idUrl="idUrl"
 			discussionApiUrl="discussionApiUrl"
+			authStatus={authStatus}
 		/>
 	);
 };
@@ -23,6 +27,7 @@ export const defaultStory = () => {
 defaultStory.storyName = 'not signed in';
 
 export const signedInStory = () => {
+	const authStatus: AuthStatus = { kind: 'SignedInWithCookies' };
 	return (
 		<MyAccount
 			mmaUrl="mmaUrl"
@@ -30,6 +35,7 @@ export const signedInStory = () => {
 			idUrl="idUrl"
 			discussionApiUrl="discussionApiUrl"
 			isSignedIn={true}
+			authStatus={authStatus}
 		/>
 	);
 };

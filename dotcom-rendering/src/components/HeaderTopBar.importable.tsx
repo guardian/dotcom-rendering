@@ -100,6 +100,7 @@ export const HeaderTopBar = ({
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
 					isSignedIn={isSignedIn}
+					authStatus={authStatus}
 				/>
 				<SearchJobs />
 

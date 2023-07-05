@@ -11,7 +11,7 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
-import { useAuthStatus } from '../lib/useAuthStatus';
+import type { AuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
@@ -23,6 +23,7 @@ interface MyAccountProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	isSignedIn?: boolean;
+	authStatus: AuthStatus;
 }
 
 const myAccountStyles = css`
@@ -182,6 +183,7 @@ interface SignedInWithNotificationsProps {
 	idUrl: string;
 	discussionApiUrl: string;
 	notifications: Notification[];
+	authStatus: AuthStatus;
 }
 
 const SignedInWithNotifications = ({
@@ -189,16 +191,15 @@ const SignedInWithNotifications = ({
 	idUrl,
 	discussionApiUrl,
 	notifications,
+	authStatus,
 }: SignedInWithNotificationsProps) => {
-	const authStatus = useAuthStatus();
-
 	let userId: string | undefined;
 
 	// TODO Okta: Remove the useApi and status === 'NotInTest' when at 100% in Okta oktaVariant
 	// If we encounter an error or don't have user data display sign in to the user.
 	// SWR will retry in the background if the request failed
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
-		authStatus.kind === 'NotInTest'
+		authStatus.kind === 'SignedInWithCookies'
 			? joinUrl(
 					discussionApiUrl,
 					'profile/me?strict_sanctions_check=false',
@@ -210,7 +211,7 @@ const SignedInWithNotifications = ({
 			credentials: 'include',
 		},
 	);
-	if (authStatus.kind === 'NotInTest' && data) {
+	if (authStatus.kind === 'SignedInWithCookies' && data) {
 		userId = data.userProfile.userId;
 	}
 
@@ -245,7 +246,7 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
+const SignedIn = ({ idApiUrl, authStatus, ...props }: MyAccountProps) => {
 	const { brazeCards } = useBraze(idApiUrl);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
@@ -265,6 +266,7 @@ const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
 		<SignedInWithNotifications
 			{...props}
 			notifications={brazeNotifications}
+			authStatus={authStatus}
 		/>
 	);
 };
@@ -275,6 +277,7 @@ export const MyAccount = ({
 	discussionApiUrl,
 	idApiUrl,
 	isSignedIn,
+	authStatus,
 }: MyAccountProps) => (
 	<div css={myAccountStyles}>
 		{isSignedIn ? (
@@ -283,6 +286,7 @@ export const MyAccount = ({
 				idUrl={idUrl}
 				discussionApiUrl={discussionApiUrl}
 				idApiUrl={idApiUrl}
+				authStatus={authStatus}
 			/>
 		) : (
 			<SignIn idUrl={idUrl} />
