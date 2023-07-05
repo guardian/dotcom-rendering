@@ -3,7 +3,6 @@ import {
 	Card100Media100Tall,
 	Card33Media33MobileTopTall,
 	Card33Media33Tall,
-	Card50Media50TallMPU,
 	CardDefault,
 } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
@@ -18,6 +17,7 @@ type Props = {
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
+	padBottom?: boolean;
 };
 
 type MPUSliceProps = {
@@ -91,16 +91,27 @@ const Card50_Card50 = ({
 	showAge?: boolean;
 	padBottom?: boolean;
 }) => {
+	const card50 = trails.slice(0, 1);
+	const cards50 = trails.slice(1);
 	return (
 		<UL direction="row" padBottom={padBottom}>
-			{trails.map((trail, index) => (
+			{card50.map((trail) => (
+				<LI percentage="50%" padSides={true} key={trail.url}>
+					<Card33Media33MobileTopTall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+			{cards50.map((trail) => (
 				<LI
 					percentage="50%"
 					padSides={true}
+					showDivider={true}
 					key={trail.url}
-					showDivider={index > 0}
 				>
-					<Card50Media50TallMPU
+					<Card33Media33Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -186,20 +197,25 @@ export const FixedMediumSlowXIIMPU = ({
 	showAge,
 	adIndex,
 	renderAds,
+	padBottom,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 9);
 	return (
 		<>
 			{trails.length === 1 ? (
-				trails.map((trail) => (
-					<Card100Media100Tall
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						key={trail.url}
-					/>
-				))
+				<UL>
+					<LI padSides={true} percentage="100%">
+						{trails.map((trail) => (
+							<Card100Media100Tall
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								key={trail.url}
+							/>
+						))}
+					</LI>
+				</UL>
 			) : trails.length === 2 ? (
 				<Card50_Card50
 					trails={trails}
