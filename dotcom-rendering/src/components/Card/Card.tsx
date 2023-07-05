@@ -233,13 +233,13 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
-
 const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	const timeDiffMs = Math.abs(
 		new Date().getTime() - new Date(webPublicationDate).getTime(),
 	);
 	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
 	return timeDiffHours <= 12;
+};
 
 /**
  * This function contains the business logic that determines whether the article contains a
