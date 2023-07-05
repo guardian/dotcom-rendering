@@ -359,15 +359,24 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	/**
-	 * Hide the address bar using the slight scroll trick
+	 * By using javascript to calculate the window height we avoid the 100vh issue in mobile
+	 * Safari
+	 *
+	 * @see {@link https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9}
 	 */
-	function hideAddressBar() {
+	function onResize() {
+		document.documentElement.style.setProperty(
+			'--lightbox-height',
+			`${window.innerHeight}px`,
+		);
 		// Enable scrolling
 		document.documentElement.style.setProperty('overflow', 'initial');
 		// Scroll the page slightly to remove address bar
-		window.scrollTo(0, 1);
+		setTimeout(() => {
+			window.scrollTo(0, 1);
+		});
 		// Prevent scrolling again
-		document.documentElement.style.setProperty('overflow', 'hidden');
+		// document.documentElement.style.setProperty('overflow', 'hidden');
 	}
 
 	// --------------------------------------------------------------------------------
@@ -471,7 +480,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	/**
 	 * If the window is resized (or if orientation changes) then we recalculate lightbox height
 	 */
-	window.addEventListener('resize', libDebounce(hideAddressBar, 150));
+	window.addEventListener('resize', libDebounce(onResize, 150));
 
 	// --------------------------------------------------------------------------------
 	// STARTUP
@@ -497,7 +506,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	// Calculate window height
-	hideAddressBar();
+	onResize();
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-gu-ready', 'true');
