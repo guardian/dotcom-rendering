@@ -191,13 +191,7 @@ const generateImageURL = ({
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
-		// Why 45 and 85?
-		// This numbers have been picked in 2018 as the right
-		// balance between image fidelity and file size
-		// https://github.com/guardian/fastly-image-service/pull/35
-		...(resolution === 'high'
-			? { quality: '45', dpr: '2' }
-			: { quality: '85', dpr: '1' }),
+		dpr: String(resolution === 'high' ? 2 : 1),
 		s: 'none',
 	});
 
