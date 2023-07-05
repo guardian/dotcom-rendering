@@ -233,6 +233,14 @@ const decideSublinkPosition = (
 	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
+const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+	const timeDiffMs = Math.abs(
+		new Date().getTime() - new Date(webPublicationDate).getTime(),
+	);
+	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
+	return timeDiffHours <= 12;
+};
+
 /**
  * This function contains the business logic that determines whether the article contains a
  * playable main media. It is used to determine which iconography should be displayed on the card.
@@ -309,7 +317,9 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					showAge && webPublicationDate ? (
+					showAge &&
+					webPublicationDate &&
+					isWithinTwelveHours(webPublicationDate) ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
