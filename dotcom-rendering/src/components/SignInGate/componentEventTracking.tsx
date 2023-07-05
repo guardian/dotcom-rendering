@@ -9,7 +9,6 @@ export type ComponentEventParams = {
 	abTestVariant: string;
 	viewId?: string;
 	browserId?: string;
-	visitId?: string;
 };
 
 const ophan = isServer ? undefined : window.guardian.ophan;

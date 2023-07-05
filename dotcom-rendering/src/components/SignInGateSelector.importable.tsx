@@ -87,7 +87,6 @@ const generateSignInUrl = ({
 		abTestVariant: currentTest.variant,
 		browserId:
 			getCookie({ name: 'bwid', shouldMemoize: true }) ?? undefined,
-		visitId: getCookie({ name: 'vsid' }) ?? undefined,
 		viewId: pageViewId,
 	};
 
