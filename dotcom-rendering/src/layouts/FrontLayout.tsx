@@ -31,6 +31,7 @@ import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { WeatherData } from '../components/WeatherData.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
@@ -107,6 +108,41 @@ const decideAdSlot = (
 			</Hide>
 		);
 	}
+	return null;
+};
+
+const decideLeftContent = (
+	front: DCRFrontType,
+	collection: DCRCollectionType,
+) => {
+	// show CPScott?
+	if (
+		collection.displayName === 'Opinion' &&
+		['uk/commentisfree', 'au/commentisfree'].includes(front.config.pageId)
+	) {
+		return <CPScottHeader />;
+	}
+
+	// show weather?
+	if (
+		front.config.switches['weather'] &&
+		['uk', 'us', 'au', 'international', 'europe'].includes(
+			front.config.pageId,
+		) &&
+		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
+		collection.displayName.toLowerCase() === 'headlines'
+	) {
+		return (
+			<Island clientOnly={true} deferUntil={'idle'}>
+				<WeatherData
+					ajaxUrl={front.config.ajaxUrl}
+					edition={front.config.edition}
+				/>
+			</Island>
+		);
+	}
+
+	// show nothing!
 	return null;
 };
 
@@ -532,15 +568,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									front.isNetworkFront,
 								)}
-								leftContent={
-									(front.config.pageId ===
-										'uk/commentisfree' ||
-										front.config.pageId ===
-											'au/commentisfree') &&
-									collection.displayName === 'Opinion' && (
-										<CPScottHeader />
-									)
-								}
+								leftContent={decideLeftContent(
+									front,
+									collection,
+								)}
 								badge={collection.badge}
 								sectionId={ophanName}
 								collectionId={collection.id}

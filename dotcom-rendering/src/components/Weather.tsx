@@ -23,6 +23,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgExternal } from '@guardian/source-react-components';
 import type { FEFrontConfigType } from '../types/front';
+import type { WeatherData, WeatherForecast } from './WeatherData.importable';
 import { WeatherSlot } from './WeatherSlot';
 
 const visuallyHiddenCSS = css`
@@ -171,38 +172,14 @@ const ExternalLinkIcon = () => (
 	</div>
 );
 
-export type TemperatureProps = {
-	value: number;
-	unit: 'C' | 'F';
-};
-
-type ForecastProps = {
-	icon: number;
-	description: string;
-	link: string;
-	temperature: {
-		metric: TemperatureProps;
-		imperial: TemperatureProps;
-	};
-	dateTime?: string;
-};
-
 export interface WeatherProps {
 	location: {
-		key: string;
-		localizedName: string;
-		country: {
-			id: string;
-			localizedName: string;
-		};
-		administrativeArea: {
-			id: string;
-			localizedName: string;
-		};
-		type: string;
+		id: string;
+		city: string;
+		country: string;
 	};
-	now: ForecastProps;
-	forecast: [ForecastProps, ForecastProps, ForecastProps, ForecastProps];
+	now: WeatherData;
+	forecast: WeatherForecast;
 	edition: FEFrontConfigType['edition'];
 }
 
@@ -210,11 +187,9 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const isUS = edition === 'US';
 	return (
 		<aside css={weatherCSS}>
-			<div css={locationCSS}>{location.localizedName}</div>
+			<div css={locationCSS}>{location.city}</div>
 
-			<p css={visuallyHiddenCSS}>
-				Today’s weather for {location.localizedName}:
-			</p>
+			<p css={visuallyHiddenCSS}>Today’s weather for {location.city}:</p>
 
 			{/* Current weather */}
 			<div css={[nowCSS, slotCSS]} className="now">
@@ -223,16 +198,16 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 
 			{/* Forecast slots */}
 			<div css={slotCSS} className="forecast-1">
-				<WeatherSlot isUS={isUS} {...forecast[0]} />
+				<WeatherSlot isUS={isUS} {...forecast[3]} />
 			</div>
 			<div css={slotCSS} className="forecast-2">
-				<WeatherSlot isUS={isUS} {...forecast[1]} />
+				<WeatherSlot isUS={isUS} {...forecast[6]} />
 			</div>
 			<div css={slotCSS} className="forecast-3">
-				<WeatherSlot isUS={isUS} {...forecast[2]} />
+				<WeatherSlot isUS={isUS} {...forecast[9]} />
 			</div>
 			<div css={slotCSS} className="forecast-4">
-				<WeatherSlot isUS={isUS} {...forecast[3]} />
+				<WeatherSlot isUS={isUS} {...forecast[12]} />
 			</div>
 			<div css={linkCSS}>
 				<a href={now.link}>
