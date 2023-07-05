@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO */
-/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO */
+/* eslint-disable jsx-a11y/no-static-element-interactions -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
+/* eslint-disable jsx-a11y/click-events-have-key-events -- TODO https://github.com/guardian/dotcom-rendering/issues/8161 */
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import {

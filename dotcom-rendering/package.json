@@ -142,7 +142,7 @@
 		"@types/uuid": "8.3.4",
 		"@types/webpack-bundle-analyzer": "4.6.0",
 		"@types/webpack-env": "1.18.0",
-		"@types/webpack-node-externals": "2.5.3",
+		"@types/webpack-node-externals": "3.0.0",
 		"@types/yarnpkg__lockfile": "1.1.5",
 		"@types/youtube": "0.0.46",
 		"@typescript-eslint/eslint-plugin": "5.52.0",
