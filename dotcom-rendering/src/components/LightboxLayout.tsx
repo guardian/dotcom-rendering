@@ -22,7 +22,6 @@ type Props = {
 const lightboxStyles = css`
 	width: 100%;
 	height: 100%;
-	height: var(--lightbox-height);
 	background-color: ${neutral[10]};
 
 	&.hide-info {
@@ -224,8 +223,6 @@ export const LightboxLayout = ({ imageCount }: Props) => {
 			<Global
 				styles={css`
 					html.lightbox-open {
-						overflow: hidden;
-
 						#gu-lightbox {
 							position: fixed;
 							${getZIndex('lightbox')};

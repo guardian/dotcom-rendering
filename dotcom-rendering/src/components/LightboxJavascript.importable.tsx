@@ -358,27 +358,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		lightbox.querySelector(`#lightbox-loader-${position}`)?.remove();
 	}
 
-	/**
-	 * By using javascript to calculate the window height we avoid the 100vh issue in mobile
-	 * Safari
-	 *
-	 * @see {@link https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9}
-	 */
-	function onResize() {
-		document.documentElement.style.setProperty(
-			'--lightbox-height',
-			`${window.innerHeight}px`,
-		);
-		// Enable scrolling
-		document.documentElement.style.setProperty('overflow', 'initial');
-		// Scroll the page slightly to remove address bar
-		setTimeout(() => {
-			window.scrollTo(0, 1);
-		});
-		// Prevent scrolling again
-		// document.documentElement.style.setProperty('overflow', 'hidden');
-	}
-
 	// --------------------------------------------------------------------------------
 	// EVENT LISTENERS
 	// --------------------------------------------------------------------------------
@@ -477,11 +456,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		}
 	});
 
-	/**
-	 * If the window is resized (or if orientation changes) then we recalculate lightbox height
-	 */
-	window.addEventListener('resize', libDebounce(onResize, 150));
-
 	// --------------------------------------------------------------------------------
 	// STARTUP
 	// This code is run once when the lightbox first opens
@@ -504,9 +478,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 		const position = hash.substring(5);
 		void open(parseInt(position, 10));
 	}
-
-	// Calculate window height
-	onResize();
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
 	lightbox.setAttribute('data-gu-ready', 'true');
