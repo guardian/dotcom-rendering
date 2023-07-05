@@ -5,7 +5,7 @@ import { useState } from 'react';
 import type { FEArticleType } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
-import { eitherSignedInWithOktaOrElse } from './useAuthStatus';
+import { eitherInOktaTestOrElse } from './useAuthStatus';
 import { useOnce } from './useOnce';
 
 // User Atributes API cookies (dropped on sign-in)
@@ -238,7 +238,7 @@ export const setLocalNoBannerCachePeriod = (): void =>
 
 const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
-	eitherSignedInWithOktaOrElse(
+	eitherInOktaTestOrElse(
 		(authState) => authState.idToken?.claims.email,
 		() =>
 			getIdApiUserData(ajaxUrl)

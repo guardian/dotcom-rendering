@@ -10,9 +10,8 @@ export default {
 	},
 };
 
-//will need to adjust this with okta?
 export const defaultStory = () => {
-	const authStatus: AuthStatus = { kind: 'SignedInWithCookies' };
+	const authStatus: AuthStatus = { kind: 'SignedOutWithCookies' };
 	return (
 		<MyAccount
 			mmaUrl="mmaUrl"
@@ -26,6 +25,7 @@ export const defaultStory = () => {
 
 defaultStory.storyName = 'not signed in';
 
+//may want to adjust these for the okta case
 export const signedInStory = () => {
 	const authStatus: AuthStatus = { kind: 'SignedInWithCookies' };
 	return (
@@ -34,7 +34,6 @@ export const signedInStory = () => {
 			idApiUrl="idApiUrl"
 			idUrl="idUrl"
 			discussionApiUrl="discussionApiUrl"
-			isSignedIn={true}
 			authStatus={authStatus}
 		/>
 	);

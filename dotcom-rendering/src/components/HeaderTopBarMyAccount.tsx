@@ -11,7 +11,11 @@ import {
 import type { Notification } from '../lib/notification';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { useApi } from '../lib/useApi';
-import type { AuthStatus } from '../lib/useAuthStatus';
+import type {
+	AuthStatus,
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import ProfileIcon from '../static/icons/profile.svg';
 import type { DropdownLinkType } from './Dropdown';
@@ -22,9 +26,13 @@ interface MyAccountProps {
 	idUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
-	isSignedIn?: boolean;
 	authStatus: AuthStatus;
 }
+
+//when SignedIn, authStatus can only be one of the two SignedIn states
+type SignedInProps = MyAccountProps & {
+	authStatus: SignedInWithCookies | SignedInWithOkta;
+};
 
 const myAccountStyles = css`
 	display: flex;
@@ -183,7 +191,7 @@ interface SignedInWithNotificationsProps {
 	idUrl: string;
 	discussionApiUrl: string;
 	notifications: Notification[];
-	authStatus: AuthStatus;
+	authStatus: SignedInWithCookies | SignedInWithOkta;
 }
 
 const SignedInWithNotifications = ({
@@ -246,7 +254,7 @@ const SignedInWithNotifications = ({
 	);
 };
 
-const SignedIn = ({ idApiUrl, authStatus, ...props }: MyAccountProps) => {
+const SignedIn = ({ idApiUrl, authStatus, ...props }: SignedInProps) => {
 	const { brazeCards } = useBraze(idApiUrl);
 	const [brazeNotifications, setBrazeNotifications] = useState<
 		Notification[]
@@ -276,11 +284,11 @@ export const MyAccount = ({
 	idUrl,
 	discussionApiUrl,
 	idApiUrl,
-	isSignedIn,
 	authStatus,
 }: MyAccountProps) => (
 	<div css={myAccountStyles}>
-		{isSignedIn ? (
+		{authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies' ? (
 			<SignedIn
 				mmaUrl={mmaUrl}
 				idUrl={idUrl}

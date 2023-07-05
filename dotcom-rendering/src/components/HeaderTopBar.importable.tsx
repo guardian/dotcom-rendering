@@ -76,9 +76,6 @@ export const HeaderTopBar = ({
 	hasPageSkin = false,
 }: HeaderTopBarProps) => {
 	const authStatus = useAuthStatus();
-	const isSignedIn =
-		authStatus.kind === 'SignedInWithOkta' ||
-		authStatus.kind === 'SignedInWithCookies';
 
 	return (
 		<div
@@ -99,7 +96,6 @@ export const HeaderTopBar = ({
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
-					isSignedIn={isSignedIn}
 					authStatus={authStatus}
 				/>
 				<SearchJobs />
