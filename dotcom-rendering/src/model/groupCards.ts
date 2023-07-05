@@ -39,13 +39,22 @@ export const groupCards = (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: enhanceCards(big, { editionId, containerPalette }),
+				big: enhanceCards(big, {
+					cardInTagFront: false,
+					editionId,
+					containerPalette,
+				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
-					{ offset: big.length, editionId, containerPalette },
+					{
+						cardInTagFront: false,
+						offset: big.length,
+						editionId,
+						containerPalette,
+					},
 				),
 			};
 		}
@@ -57,13 +66,19 @@ export const groupCards = (
 			return {
 				// Snap is not supported on these container types
 				snap: [],
-				huge: enhanceCards(huge, { editionId, containerPalette }),
+				huge: enhanceCards(huge, {
+					cardInTagFront: false,
+					editionId,
+					containerPalette,
+				}),
 				veryBig: enhanceCards(veryBig, {
+					cardInTagFront: false,
 					offset: huge.length,
 					editionId,
 					containerPalette,
 				}),
 				big: enhanceCards(big, {
+					cardInTagFront: false,
 					offset: huge.length + veryBig.length,
 					editionId,
 					containerPalette,
@@ -74,6 +89,7 @@ export const groupCards = (
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					{
+						cardInTagFront: false,
 						offset: huge.length + veryBig.length + big.length,
 						editionId,
 						containerPalette,
@@ -88,13 +104,22 @@ export const groupCards = (
 				veryBig: [],
 				big: [],
 				// Only 'snap' and 'standard' are supported by dynamic/package
-				snap: enhanceCards(snap, { editionId, containerPalette }),
+				snap: enhanceCards(snap, {
+					cardInTagFront: false,
+					editionId,
+					containerPalette,
+				}),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
 						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
-					{ offset: snap.length, editionId, containerPalette },
+					{
+						cardInTagFront: false,
+						offset: snap.length,
+						editionId,
+						containerPalette,
+					},
 				),
 			};
 		}

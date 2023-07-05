@@ -35,7 +35,6 @@ const columnsStyle = (isImmersive: boolean) => css`
 		display: flex;
 		border-left: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
 		border-right: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
-		border-top: 1px solid ${brand[600]};
 	}
 	${from.leftCol} {
 		max-width: 1140px;

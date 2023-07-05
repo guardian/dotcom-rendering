@@ -1,5 +1,4 @@
 import {
-	Card25Media25Tall,
 	Card50Media50,
 	CardDefaultMedia,
 	CardDefaultMediaMobile,
@@ -10,6 +9,7 @@ import {
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
+	ColumnOfCards50_Card25_Card25,
 	filterGroupedTrails,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
@@ -66,60 +66,6 @@ const ColumnOfCards50_Card50 = ({
 								padSides={true}
 							>
 								<CardDefaultMediaMobile
-									trail={card}
-									containerPalette={containerPalette}
-									showAge={showAge}
-								/>
-							</LI>
-						);
-					})}
-				</UL>
-			</LI>
-		</UL>
-	);
-};
-
-const ColumnOfCards50_Card25_Card25 = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: DCRFrontCard[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	const bigs = cards.slice(0, 2).reverse();
-	const remaining = cards.slice(2);
-
-	return (
-		<UL direction="row-reverse">
-			{bigs.map((big) => {
-				return (
-					<LI
-						percentage="25%"
-						padSides={true}
-						showDivider={true}
-						containerPalette={containerPalette}
-						key={big.url}
-					>
-						<Card25Media25Tall
-							trail={big}
-							showAge={showAge}
-							containerPalette={containerPalette}
-						/>
-					</LI>
-				);
-			})}
-			<LI percentage="50%">
-				<UL direction="row" wrapCards={true}>
-					{remaining.map((card) => {
-						return (
-							<LI
-								percentage="100%"
-								key={card.url}
-								padSides={true}
-							>
-								<CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}

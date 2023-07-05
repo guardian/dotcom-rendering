@@ -18,8 +18,8 @@ export const Queensland = () => (
  * Clicks the “Not in Queensland” button so that Chromatic can capture
  * it the component in its `expanded` state.
  */
-Queensland.play = ({ canvasElement }: { canvasElement: HTMLElement }) => {
+Queensland.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
 	const canvas = within(canvasElement);
-	userEvent.click(canvas.getByRole('button'));
+	await userEvent.click(canvas.getByRole('button'));
 };
 Queensland.storyName = 'Queensland (expanded)';

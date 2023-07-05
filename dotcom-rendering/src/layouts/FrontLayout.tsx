@@ -31,6 +31,7 @@ import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
+import { WeatherData } from '../components/WeatherData.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
@@ -38,6 +39,7 @@ import {
 	getMerchHighPosition,
 	getMobileAdPositions,
 } from '../lib/getAdPositions';
+import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
@@ -73,7 +75,7 @@ const isToggleable = (
 	} else return index != 0 && !isNavList(collection);
 };
 
-const decideAdSlot = (
+export const decideAdSlot = (
 	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,
@@ -106,6 +108,41 @@ const decideAdSlot = (
 			</Hide>
 		);
 	}
+	return null;
+};
+
+const decideLeftContent = (
+	front: DCRFrontType,
+	collection: DCRCollectionType,
+) => {
+	// show CPScott?
+	if (
+		collection.displayName === 'Opinion' &&
+		['uk/commentisfree', 'au/commentisfree'].includes(front.config.pageId)
+	) {
+		return <CPScottHeader />;
+	}
+
+	// show weather?
+	if (
+		front.config.switches['weather'] &&
+		['uk', 'us', 'au', 'international', 'europe'].includes(
+			front.config.pageId,
+		) &&
+		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
+		collection.displayName.toLowerCase() === 'headlines'
+	) {
+		return (
+			<Island clientOnly={true} deferUntil={'idle'}>
+				<WeatherData
+					ajaxUrl={front.config.ajaxUrl}
+					edition={front.config.edition}
+				/>
+			</Island>
+		);
+	}
+
+	// show nothing!
 	return null;
 };
 
@@ -270,6 +307,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				data-layout="FrontLayout"
 				data-link-name={`Front | /${front.pressedPage.id}`}
 				id="maincontent"
+				css={hasPageSkin && pageSkinContainer}
 			>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
@@ -453,42 +491,60 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						const containerOverrides =
 							decideContainerOverrides(containerPalette);
 						return (
-							<Section
-								key={ophanName}
-								title={collection.displayName}
-								sectionId={`container-${ophanName}`}
-								ophanComponentName={ophanName}
-								ophanComponentLink={ophanComponentLink}
-								containerName={collection.collectionType}
-								fullWidth={true}
-								padBottom={true}
-								showSideBorders={true}
-								showTopBorder={index > 0}
-								padContent={false}
-								url={collection.href}
-								containerPalette={containerPalette}
-								showDateHeader={
-									collection.config.showDateHeader
-								}
-								editionId={front.editionId}
-								backgroundColour={
-									containerOverrides.background.container
-								}
-								hasPageSkin={hasPageSkin}
-							>
-								<Island deferUntil={'visible'}>
-									<Carousel
-										heading={collection.displayName}
-										trails={trails}
-										onwardsSource={'unknown-source'}
-										palette={containerPalette}
-										leftColSize={'compact'}
-										collectionType={
-											collection.collectionType
-										}
-									/>
-								</Island>
-							</Section>
+							<Fragment key={ophanName}>
+								<Section
+									title={collection.displayName}
+									sectionId={`container-${ophanName}`}
+									ophanComponentName={ophanName}
+									ophanComponentLink={ophanComponentLink}
+									containerName={collection.collectionType}
+									fullWidth={true}
+									padBottom={true}
+									showSideBorders={
+										collection.collectionType !==
+										'fixed/video'
+									}
+									showTopBorder={index > 0}
+									padContent={false}
+									url={collection.href}
+									containerPalette={containerPalette}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									backgroundColour={
+										containerOverrides.background
+											.containerOuter
+									}
+									innerBackgroundColour={
+										containerOverrides.background.container
+									}
+									hasPageSkin={hasPageSkin}
+								>
+									<Island deferUntil={'visible'}>
+										<Carousel
+											heading={collection.displayName}
+											trails={trails}
+											onwardsSource={'unknown-source'}
+											palette={containerPalette}
+											leftColSize={'compact'}
+											collectionType={
+												collection.collectionType
+											}
+										/>
+									</Island>
+								</Section>
+								{decideAdSlot(
+									renderAds,
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									mobileAdPositions,
+									hasPageSkin,
+								)}
+							</Fragment>
 						);
 					}
 
@@ -512,15 +568,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									collection,
 									front.isNetworkFront,
 								)}
-								leftContent={
-									(front.config.pageId ===
-										'uk/commentisfree' ||
-										front.config.pageId ===
-											'au/commentisfree') &&
-									collection.displayName === 'Opinion' && (
-										<CPScottHeader />
-									)
-								}
+								leftContent={decideLeftContent(
+									front,
+									collection,
+								)}
 								badge={collection.badge}
 								sectionId={ophanName}
 								collectionId={collection.id}
@@ -545,7 +596,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.containerPalette
 									}
 									showAge={
-										collection.displayName === 'Headlines'
+										!hideAge.includes(
+											collection.displayName,
+										)
 									}
 									adIndex={desktopAdPositions.indexOf(index)}
 									renderAds={renderAds}

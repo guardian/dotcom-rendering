@@ -68,7 +68,6 @@ export const DecideContainer = ({
 					showAge={showAge}
 					adIndex={adIndex}
 					renderAds={renderAds}
-					trails={trails}
 				/>
 			);
 		case 'dynamic/package':

@@ -59,8 +59,7 @@
                     "type": "string"
                 },
                 "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
+                    "$ref": "#/definitions/SharedAdTargeting"
                 },
                 "buildNumber": {
                     "type": "string"
@@ -120,7 +119,9 @@
                 },
                 "isFront": {
                     "type": "boolean",
-                    "const": true
+                    "enum": [
+                        true
+                    ]
                 },
                 "idWebAppUrl": {
                     "type": "string"
@@ -2989,6 +2990,7 @@
                 "fixed/small/slow-V-third",
                 "fixed/thrasher",
                 "fixed/video",
+                "fixed/video/vertical",
                 "nav/list",
                 "nav/media-list",
                 "news/most-popular"
@@ -3200,6 +3202,9 @@
             "additionalProperties": {
                 "type": "boolean"
             }
+        },
+        "SharedAdTargeting": {
+            "type": "object"
         },
         "StageType": {
             "enum": [
