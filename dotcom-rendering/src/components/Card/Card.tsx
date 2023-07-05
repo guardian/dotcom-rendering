@@ -465,7 +465,8 @@ export const Card = ({
 							sizeOnMobile={headlineSizeOnMobile}
 							showQuotes={showQuotes}
 							kickerText={
-								format.design === ArticleDesign.LiveBlog
+								format.design === ArticleDesign.LiveBlog &&
+								!kickerText
 									? 'Live'
 									: kickerText
 							}

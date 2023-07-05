@@ -416,7 +416,6 @@ export const WithPulsingDotSpecialReportAlt = () => {
 					theme: ArticleSpecial.SpecialReportAlt,
 				}}
 				showPulsingDot={true}
-				kickerText="Pulsing Dot"
 			/>
 		</CardWrapper>
 	);
