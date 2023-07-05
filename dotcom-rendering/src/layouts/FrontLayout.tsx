@@ -75,7 +75,7 @@ const isToggleable = (
 	} else return index != 0 && !isNavList(collection);
 };
 
-const decideAdSlot = (
+export const decideAdSlot = (
 	renderAds: boolean,
 	index: number,
 	isNetworkFront: boolean | undefined,

@@ -8,6 +8,7 @@ import {
 	news,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
 import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
 import { Footer } from '../components/Footer';
@@ -18,13 +19,20 @@ import { Island } from '../components/Island';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { SubNav } from '../components/SubNav.importable';
+import { TagFrontFastMpu } from '../components/TagFrontFastMpu';
 import { TagFrontHeader } from '../components/TagFrontHeader';
+import { TagFrontSlowMpu } from '../components/TagFrontSlowMpu';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { canRenderAds } from '../lib/canRenderAds';
 import { decidePalette } from '../lib/decidePalette';
 import { getEditionFromId } from '../lib/edition';
+import {
+	getMerchHighPosition,
+	getTagFrontMobileAdPositions,
+} from '../lib/getAdPositions';
 import type { NavType } from '../model/extract-nav';
 import type { DCRTagFrontType } from '../types/tagFront';
+import { decideAdSlot } from './FrontLayout';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -66,10 +74,22 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
+	const merchHighPosition = getMerchHighPosition(
+		tagFront.groupedTrails.length,
+		false,
+	);
+
 	/**
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = canRenderAds(tagFront);
+
+	const mobileAdPositions = renderAds
+		? getTagFrontMobileAdPositions(
+				tagFront.groupedTrails,
+				merchHighPosition,
+		  )
+		: [];
 
 	return (
 		<>
@@ -194,6 +214,35 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
+					const ContainerComponent = () => {
+						if (
+							'injected' in groupedTrails &&
+							'speed' in groupedTrails
+						) {
+							if (groupedTrails.speed === 'fast') {
+								return (
+									<TagFrontFastMpu
+										{...groupedTrails}
+										adIndex={1} // There is only ever 1 inline ad in a tag front
+									/>
+								);
+							} else {
+								return (
+									<TagFrontSlowMpu
+										{...groupedTrails}
+										adIndex={1} // There is only ever 1 inline ad in a tag front
+									/>
+								);
+							}
+						}
+						return (
+							<DecideContainerByTrails
+								trails={groupedTrails.trails}
+								speed={tagFront.speed}
+							/>
+						);
+					};
+
 					const url =
 						groupedTrails.day !== undefined
 							? `/${tagFront.pageId}/${groupedTrails.year}/${date
@@ -210,37 +259,44 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 							: undefined;
 
 					return (
-						<FrontSection
-							key={index}
-							title={date.toLocaleDateString(locale, {
-								day:
-									groupedTrails.day !== undefined
-										? 'numeric'
-										: undefined,
-								month: 'long',
-								year: 'numeric',
-							})}
-							url={url}
-							showTopBorder={true}
-							ophanComponentLink={`container-${index} | ${containedId}`}
-							ophanComponentName={containedId}
-							sectionId={containedId}
-							toggleable={false}
-							pageId={tagFront.pageId}
-							editionId={tagFront.editionId}
-							canShowMore={false}
-							ajaxUrl={tagFront.config.ajaxUrl}
-							pagination={
-								index === tagFront.groupedTrails.length - 1
-									? tagFront.pagination
-									: undefined
-							}
-						>
-							<DecideContainerByTrails
-								trails={groupedTrails.trails}
-								speed={tagFront.speed}
-							/>
-						</FrontSection>
+						<Fragment key={containedId}>
+							<FrontSection
+								title={date.toLocaleDateString(locale, {
+									day:
+										groupedTrails.day !== undefined
+											? 'numeric'
+											: undefined,
+									month: 'long',
+									year: 'numeric',
+								})}
+								url={url}
+								showTopBorder={true}
+								ophanComponentLink={`container-${index} | ${containedId}`}
+								ophanComponentName={containedId}
+								sectionId={containedId}
+								toggleable={false}
+								pageId={tagFront.pageId}
+								editionId={tagFront.editionId}
+								canShowMore={false}
+								ajaxUrl={tagFront.config.ajaxUrl}
+								pagination={
+									index === tagFront.groupedTrails.length - 1
+										? tagFront.pagination
+										: undefined
+								}
+							>
+								<ContainerComponent />
+							</FrontSection>
+							{decideAdSlot(
+								renderAds,
+								index,
+								false,
+								tagFront.groupedTrails.length,
+								tagFront.config.isPaidContent,
+								mobileAdPositions,
+								tagFront.config.hasPageSkin,
+							)}
+						</Fragment>
 					);
 				})}
 			</main>
