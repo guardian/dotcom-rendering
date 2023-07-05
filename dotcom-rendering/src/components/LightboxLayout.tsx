@@ -86,6 +86,7 @@ const ulStyles = css`
 	width: 100%;
 	scroll-snap-type: x mandatory;
 	overflow-x: scroll;
+	overflow-y: hidden;
 	scroll-behavior: auto;
 	overscroll-behavior: contain;
 	${from.tablet} {
