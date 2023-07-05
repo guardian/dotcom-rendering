@@ -233,7 +233,7 @@ const ReaderRevenueLinksRemote = ({
 					'rr-header-links',
 				);
 			});
-	}, [countryCode]);
+	}, [countryCode, isSignedIn]);
 
 	if (SupportHeader !== null && supportHeaderResponse) {
 		return (
