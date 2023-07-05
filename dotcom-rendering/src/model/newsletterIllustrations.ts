@@ -1,6 +1,4 @@
-export type NewsletterIlustrations = Partial<Record<string, string>>;
-
-export const newsletterIllustrations: NewsletterIlustrations = {
+export const newsletterIllustrations: Record<string, string> = {
 	'morning-briefing':
 		'https://i.guim.co.uk/img/media/77074f52e5e6f22a6636ed10d65a421426490c9e/22_0_4747_2849/500.png?width=250&quality=45&s=4013e217a49beab11919de5b9e07a4a5',
 	'us-morning-newsletter':
