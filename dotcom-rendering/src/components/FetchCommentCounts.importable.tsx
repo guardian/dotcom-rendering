@@ -37,30 +37,28 @@ type EnhancedCountType = {
  * Reads the dom looking for markers that contain the information needed to render the
  * count
  */
-function extractMarkers() {
-	const markers: MarkerType[] = [];
-	document
-		.querySelectorAll('[data-discussion-id]')
-		.forEach((element: Element) => {
+const extractMarkers = () =>
+	Array.from(document.querySelectorAll('[data-discussion-id]'))
+		.map<MarkerType | undefined>((element: Element) => {
 			if (element instanceof HTMLElement) {
 				try {
 					const { discussionId, format, isDynamo, containerPalette } =
 						element.dataset;
 					if (discussionId && format) {
-						markers.push({
+						return {
 							discussionId,
 							format: JSON.parse(format),
 							isDynamo: isDynamo ? true : undefined,
 							containerPalette,
-						});
+						};
 					}
 				} catch (e) {
 					// Do nothing
 				}
 			}
-		});
-	return markers;
-}
+			return undefined;
+		})
+		.filter(isNonNullable);
 
 /**
  * @description
