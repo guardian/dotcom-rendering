@@ -30,12 +30,12 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 		}
 	});
 
-	iframes.forEach((iframe) => {
+	for (const iframe of iframes) {
 		const src = (iframe.getAttribute('srcdoc') ?? '')
 			.replace(/<gu-script>/g, '<script>')
 
 			.replace(/<\/gu-script>/g, '<' + '/script>');
 		iframe.setAttribute('srcdoc', src);
-	});
+	}
 	return Promise.resolve();
 };

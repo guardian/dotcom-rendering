@@ -228,24 +228,24 @@ export const RecipeMultiplier = () => {
 	}, [servings]);
 
 	useEffect(() => {
-		document
-			.querySelectorAll<HTMLElement>('gu-recipe')
-			.forEach((element) => {
-				const { value, separator, unit } = element.dataset;
+		for (const element of document.querySelectorAll<HTMLElement>(
+			'gu-recipe',
+		)) {
+			const { value, separator, unit } = element.dataset;
 
-				if (isUndefined(value) || isUndefined(separator)) return;
+			if (isUndefined(value) || isUndefined(separator)) continue;
 
-				if (isUndefined(unit)) return;
+			if (isUndefined(unit)) continue;
 
-				element.innerText = transform({
-					value: value
-						.split('-')
-						.map(parseFloat)
-						.map((v) => v * multiplier),
-					separator,
-					unit,
-				});
+			element.innerText = transform({
+				value: value
+					.split('-')
+					.map(parseFloat)
+					.map((v) => v * multiplier),
+				separator,
+				unit,
 			});
+		}
 	}, [multiplier]);
 
 	const handleChange: ChangeEventHandler<HTMLInputElement> = ({

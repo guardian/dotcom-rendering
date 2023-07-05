@@ -7,12 +7,12 @@ const animatePulsingDots = () => {
 		`[data-flashing-dot-hydrated="false"]`,
 	);
 
-	elements.forEach((element) => {
+	for (const element of elements) {
 		element.setAttribute('data-flashing-dot-hydrated', 'true');
 		// In PulsingDot.tsx, we set the animation only to run
 		// if this data attribute is set
 		element.setAttribute('data-animate', 'true');
-	});
+	}
 };
 
 /**

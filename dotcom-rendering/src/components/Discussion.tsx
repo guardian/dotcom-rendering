@@ -133,10 +133,10 @@ export const Discussion = ({
 		const pendingElements = document.querySelectorAll<HTMLElement>(
 			'.discussion > .pending',
 		);
-		pendingElements.forEach((element) => {
+		for (const element of pendingElements) {
 			element.classList.add('reveal');
 			element.classList.remove('pending');
-		});
+		}
 	}, []);
 
 	useEffect(() => {

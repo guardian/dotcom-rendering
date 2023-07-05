@@ -21,10 +21,10 @@ export const injectMpuIntoGroupedTrails = (
 		GroupedTrails | GroupedTrailsFastMpu | GroupedTrailsSlowMpu
 	> = [];
 
-	groupedTrails.forEach((grouped) => {
+	for (const grouped of groupedTrails) {
 		if (injected) {
 			result.push(grouped);
-			return;
+			continue;
 		}
 
 		if (speed === 'fast') {
@@ -75,7 +75,7 @@ export const injectMpuIntoGroupedTrails = (
 					break;
 			}
 		}
-	});
+	}
 
 	return result;
 };

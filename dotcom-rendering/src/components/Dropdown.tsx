@@ -302,9 +302,9 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 
 			// For each notification for this link, log the impression back to
 			// Braze separately
-			link.notifications.forEach((notification) => {
+			for (const notification of link.notifications) {
 				notification.logImpression?.();
-			});
+			}
 
 			submitComponentEvent({
 				component: ophanComponent,

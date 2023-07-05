@@ -1,4 +1,5 @@
 import { CacheProvider } from '@emotion/react';
+import { isNonNullable } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { getEmotionCache } from '../client/islands/emotion';
@@ -109,7 +110,7 @@ function enhanceCounts(
  * Takes the long and short version of each count and renders onto the page with react
  */
 function renderCounts(counts: EnhancedCountType[]) {
-	counts.forEach((count) => {
+	for (const count of counts) {
 		const container = document.querySelector(
 			`[data-discussion-id="${count.id}"]`,
 		);
@@ -130,7 +131,7 @@ function renderCounts(counts: EnhancedCountType[]) {
 
 			container.setAttribute('aria-label', `${count.short} Comments`);
 		}
-	});
+	}
 }
 
 /**

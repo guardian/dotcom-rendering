@@ -123,16 +123,16 @@ export const Snow = () => {
 					previousFlakes[flakeName] = updatedFlake;
 				}
 
-				document
-					.querySelectorAll<HTMLElement>('.snowflake')
-					.forEach((flake) => {
-						const previousFlake = flake.dataset.name
-							? previousFlakes[flake.dataset.name]
-							: undefined;
-						if (previousFlake !== undefined) {
-							flake.style.transform = `translate3d(${previousFlake.x}vw, ${previousFlake.y}px, 0.0)`;
-						}
-					});
+				for (const flake of document.querySelectorAll<HTMLElement>(
+					'.snowflake',
+				)) {
+					const previousFlake = flake.dataset.name
+						? previousFlakes[flake.dataset.name]
+						: undefined;
+					if (previousFlake !== undefined) {
+						flake.style.transform = `translate3d(${previousFlake.x}vw, ${previousFlake.y}px, 0.0)`;
+					}
+				}
 
 				return previousFlakes;
 			});
