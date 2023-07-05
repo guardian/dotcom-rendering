@@ -5,5 +5,4 @@ jest.mock('@guardian/cdk/lib/constants/tracking-tag');
  * available globally, and so we need to enable it here.
  * See https://github.com/jestjs/jest/issues/9983
  */
-global.TextEncoder = require('util').TextEncoder;
-global.TextDecoder = require('util').TextDecoder;
+global.TextEncoder = require('util').TextEncoder

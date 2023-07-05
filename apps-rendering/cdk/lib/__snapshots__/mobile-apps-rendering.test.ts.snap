@@ -1,16 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
-{
-  "Metadata": {
-    "gu:cdk:constructs": [
+Object {
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
       "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
-      "GuSubnetListParameter",
-      "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
       "GuLogShippingPolicy",
@@ -19,8 +18,8 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       "GuParameterStoreReadPolicy",
       "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
-      "GuWazuhAccess",
       "GuAutoScalingGroup",
+      "GuWazuhAccess",
       "GuApplicationLoadBalancer",
       "GuApplicationTargetGroup",
       "GuHttpsApplicationListener",
@@ -28,123 +27,204 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
     ],
     "gu:cdk:version": "TEST",
   },
-  "Outputs": {
-    "LoadBalancerMobileappsrenderingDnsName": {
+  "Outputs": Object {
+    "LoadBalancerMobileappsrenderingDnsName": Object {
       "Description": "DNS entry for LoadBalancerMobileappsrendering",
-      "Value": {
-        "Fn::GetAtt": [
+      "Value": Object {
+        "Fn::GetAtt": Array [
           "LoadBalancerMobileappsrenderingB8B00ACB",
           "DNSName",
         ],
       },
     },
   },
-  "Parameters": {
-    "AMIMobileappsrendering": {
+  "Parameters": Object {
+    "AMIMobileappsrendering": Object {
       "Description": "Amazon Machine Image ID for the app mobile-apps-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
     },
-    "DistributionBucketName": {
+    "DistributionBucketName": Object {
       "Default": "/account/services/artifact.bucket",
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "LoggingStreamName": {
+    "LoggingStreamName": Object {
       "Default": "/account/services/logging.stream.name",
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": {
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
       "Default": "/account/services/artifact.bucket",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "VpcId": {
+    "VpcId": Object {
       "Default": "/account/vpc/primary/id",
       "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
       "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
     },
-    "mobileappsrenderingPrivateSubnets": {
+    "mobileappsrenderingPrivateSubnets": Object {
       "Default": "/account/vpc/primary/subnets/private",
       "Description": "A list of private subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
-    "mobileappsrenderingPublicSubnets": {
-      "Default": "/account/vpc/primary/subnets/public",
-      "Description": "A list of public subnets",
-      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
-    },
   },
-  "Resources": {
-    "AutoScalingGroupMobileappsrenderingASG42891F00": {
-      "Properties": {
+  "Resources": Object {
+    "AutoScalingGroupMobileappsrenderingASG42891F00": Object {
+      "Properties": Object {
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
-        "LaunchTemplate": {
-          "LaunchTemplateId": {
-            "Ref": "mobileTESTmobileappsrenderingAD91FF83",
-          },
-          "Version": {
-            "Fn::GetAtt": [
-              "mobileTESTmobileappsrenderingAD91FF83",
-              "LatestVersionNumber",
-            ],
-          },
+        "LaunchConfigurationName": Object {
+          "Ref": "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9",
         },
         "MaxSize": "2",
         "MinSize": "1",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "PropagateAtLaunch": true,
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
+            "Key": "gu:cdk:pattern-name",
+            "PropagateAtLaunch": true,
+            "Value": "GuEc2App",
+          },
+          Object {
             "Key": "gu:cdk:version",
             "PropagateAtLaunch": true,
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "PropagateAtLaunch": true,
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "LogKinesisStreamName",
             "PropagateAtLaunch": true,
-            "Value": {
+            "Value": Object {
               "Ref": "LoggingStreamName",
             },
           },
-          {
+          Object {
+            "Key": "Name",
+            "PropagateAtLaunch": true,
+            "Value": "MobileAppsRendering/AutoScalingGroupMobileappsrendering",
+          },
+          Object {
             "Key": "Stack",
             "PropagateAtLaunch": true,
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "PropagateAtLaunch": true,
             "Value": "TEST",
           },
         ],
-        "TargetGroupARNs": [
-          {
+        "TargetGroupARNs": Array [
+          Object {
             "Ref": "TargetGroupMobileappsrendering29320E35",
           },
         ],
-        "VPCZoneIdentifier": {
+        "VPCZoneIdentifier": Object {
           "Ref": "mobileappsrenderingPrivateSubnets",
         },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "AutoScalingGroupMobileappsrenderingScalingPolicyCpuScalingPolicy25F424F1": {
-      "Properties": {
-        "AutoScalingGroupName": {
+    "AutoScalingGroupMobileappsrenderingInstanceProfile2F77976E": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9": Object {
+      "DependsOn": Array [
+        "InstanceRoleMobileappsrenderingEC64402A",
+      ],
+      "Properties": Object {
+        "IamInstanceProfile": Object {
+          "Ref": "AutoScalingGroupMobileappsrenderingInstanceProfile2F77976E",
+        },
+        "ImageId": Object {
+          "Ref": "AMIMobileappsrendering",
+        },
+        "InstanceType": "t4g.small",
+        "MetadataOptions": Object {
+          "HttpTokens": "required",
+        },
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
+              "GroupId",
+            ],
+          },
+          Object {
+            "Fn::GetAtt": Array [
+              "WazuhSecurityGroup",
+              "GroupId",
+            ],
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "#!/bin/bash -ev
+groupadd mapi
+useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
+
+export App=mobile-apps-rendering
+export Stack=mobile
+export Stage=TEST
+export NODE_ENV=production
+
+aws s3 cp s3://",
+                Object {
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
+                },
+                "/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+mkdir -p /opt/mobile-apps-rendering
+unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
+
+mkdir -p /usr/share/mobile-apps-rendering/logs
+chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
+ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
+
+export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
+export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
+
+/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
+/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
+              ],
+            ],
+          },
+        },
+      },
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
+    },
+    "AutoScalingGroupMobileappsrenderingScalingPolicyCpuScalingPolicy25F424F1": Object {
+      "Properties": Object {
+        "AutoScalingGroupName": Object {
           "Ref": "AutoScalingGroupMobileappsrenderingASG42891F00",
         },
         "PolicyType": "TargetTrackingScaling",
-        "TargetTrackingConfiguration": {
-          "PredefinedMetricSpecification": {
+        "TargetTrackingConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
             "PredefinedMetricType": "ASGAverageCPUUtilization",
           },
           "TargetValue": 10,
@@ -152,38 +232,34 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
-    "CertificateMobileappsrendering85649D08": {
+    "CertificateMobileappsrendering85649D08": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
+      "Properties": Object {
         "DomainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
-        "DomainValidationOptions": [
-          {
+        "DomainValidationOptions": Array [
+          Object {
             "DomainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
             "HostedZoneId": "TEST-HOSTED-ZONE-ID",
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
-            "Key": "Name",
-            "Value": "MobileAppsRendering/CertificateMobileappsrendering",
-          },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -193,12 +269,12 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       "Type": "AWS::CertificateManager::Certificate",
       "UpdateReplacePolicy": "Retain",
     },
-    "DescribeEC2PolicyFF5F9295": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "DescribeEC2PolicyFF5F9295": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "autoscaling:DescribeAutoScalingInstances",
                 "autoscaling:DescribeAutoScalingGroups",
                 "ec2:DescribeTags",
@@ -211,21 +287,21 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "describe-ec2-policy",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "DnsRecord": {
-      "Properties": {
+    "DnsRecord": Object {
+      "Properties": Object {
         "HostedZoneId": "TEST-HOSTED-ZONE-ID",
         "Name": "mobile-rendering.mobile-aws.code.dev-guardianapis.com.",
-        "ResourceRecords": [
-          {
-            "Fn::GetAtt": [
+        "ResourceRecords": Array [
+          Object {
+            "Fn::GetAtt": Array [
               "LoadBalancerMobileappsrenderingB8B00ACB",
               "DNSName",
             ],
@@ -236,19 +312,19 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "GetDistributablePolicyMobileappsrendering8E649036": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "GetDistributablePolicyMobileappsrendering8E649036": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:s3:::",
-                    {
+                    Object {
                       "Ref": "DistributionBucketName",
                     },
                     "/mobile/TEST/mobile-apps-rendering/*",
@@ -260,19 +336,19 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GetDistributablePolicyMobileappsrendering8E649036",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetParametersByPath37B32C62": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "GetParametersByPath37B32C62": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "ssm:GetParametersByPath",
               "Effect": "Allow",
               "Resource": "*",
@@ -281,19 +357,19 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GetParametersByPath37B32C62",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrendering089F1660": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrendering089F1660": Object {
+      "Properties": Object {
         "GroupDescription": "Allow all outbound HTTPS traffic",
-        "SecurityGroupEgress": [
-          {
+        "SecurityGroupEgress": Array [
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound HTTPS traffic",
             "FromPort": 443,
@@ -301,47 +377,47 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             "ToPort": 443,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingInternalIngressSecurityGroupMobileappsrenderingB407C3A230407E6A596B": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingInternalIngressSecurityGroupMobileappsrenderingB407C3A230407E6A596B": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "InternalIngressSecurityGroupMobileappsrendering486B411A",
             "GroupId",
           ],
@@ -350,19 +426,19 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingLoadBalancerMobileappsrenderingSecurityGroupE0CCF7183040505B735B": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingLoadBalancerMobileappsrenderingSecurityGroupE0CCF7183040505B735B": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
             "GroupId",
           ],
@@ -371,30 +447,30 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuLogShippingPolicy981BFE5A": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "GuLogShippingPolicy981BFE5A": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "kinesis:Describe*",
                 "kinesis:Put*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:kinesis:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":stream/",
-                    {
+                    Object {
                       "Ref": "LoggingStreamName",
                     },
                   ],
@@ -405,61 +481,57 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GuLogShippingPolicy981BFE5A",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "InstanceRoleMobileappsrenderingEC64402A": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "InstanceRoleMobileappsrenderingEC64402A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
-                "Service": "ec2.amazonaws.com",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "ec2.",
+                      Object {
+                        "Ref": "AWS::URLSuffix",
+                      },
+                    ],
+                  ],
+                },
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
-              ],
-            ],
-          },
-        ],
         "Path": "/",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -467,11 +539,11 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "InternalIngressSecurityGroupMobileappsrendering486B411A": {
-      "Properties": {
+    "InternalIngressSecurityGroupMobileappsrendering486B411A": Object {
+      "Properties": Object {
         "GroupDescription": "Allow restricted ingress from CIDR ranges",
-        "SecurityGroupIngress": [
-          {
+        "SecurityGroupIngress": Array [
+          Object {
             "CidrIp": "10.0.0.0/8",
             "Description": "Allow access on port 443 from 10.0.0.0/8",
             "FromPort": 443,
@@ -479,46 +551,46 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             "ToPort": 443,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingGuHttpsEgressSecurityGroupMobileappsrenderingC4F35269304093993953": {
-      "Properties": {
+    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingGuHttpsEgressSecurityGroupMobileappsrenderingC4F35269304093993953": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "InternalIngressSecurityGroupMobileappsrendering486B411A",
             "GroupId",
           ],
@@ -528,45 +600,24 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingWazuhSecurityGroupB96243E1304031807BEA": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "ListenerMobileappsrendering47F84352": {
-      "Properties": {
-        "Certificates": [
-          {
-            "CertificateArn": {
+    "ListenerMobileappsrendering47F84352": Object {
+      "Properties": Object {
+        "Certificates": Array [
+          Object {
+            "CertificateArn": Object {
               "Ref": "CertificateMobileappsrendering85649D08",
             },
           },
         ],
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
               "Ref": "TargetGroupMobileappsrendering29320E35",
             },
             "Type": "forward",
           },
         ],
-        "LoadBalancerArn": {
+        "LoadBalancerArn": Object {
           "Ref": "LoadBalancerMobileappsrenderingB8B00ACB",
         },
         "Port": 443,
@@ -574,50 +625,50 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
-    "LoadBalancerMobileappsrenderingB8B00ACB": {
-      "Properties": {
-        "LoadBalancerAttributes": [
-          {
+    "LoadBalancerMobileappsrenderingB8B00ACB": Object {
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [
+          Object {
             "Key": "deletion_protection.enabled",
             "Value": "true",
           },
         ],
         "Scheme": "internal",
-        "SecurityGroups": [
-          {
-            "Fn::GetAtt": [
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
               "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
               "GroupId",
             ],
           },
-          {
-            "Fn::GetAtt": [
+          Object {
+            "Fn::GetAtt": Array [
               "InternalIngressSecurityGroupMobileappsrendering486B411A",
               "GroupId",
             ],
           },
         ],
-        "Subnets": {
+        "Subnets": Object {
           "Ref": "mobileappsrenderingPrivateSubnets",
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -626,49 +677,49 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
     },
-    "LoadBalancerMobileappsrenderingSecurityGroup86D57550": {
-      "Properties": {
+    "LoadBalancerMobileappsrenderingSecurityGroup86D57550": Object {
+      "Properties": Object {
         "GroupDescription": "Automatically created Security Group for ELB MobileAppsRenderingLoadBalancerMobileappsrendering801C2FFB",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingGuHttpsEgressSecurityGroupMobileappsrenderingC4F35269304019F57E42": {
-      "Properties": {
+    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingGuHttpsEgressSecurityGroupMobileappsrenderingC4F35269304019F57E42": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
             "GroupId",
           ],
@@ -678,44 +729,23 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingWazuhSecurityGroupB96243E130401C238DEC": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "ParameterStoreReadMobileappsrenderingA4006661": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "ParameterStoreReadMobileappsrenderingA4006661": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "ssm:GetParametersByPath",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:ssm:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":parameter/TEST/mobile/mobile-apps-rendering",
@@ -723,22 +753,22 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "ssm:GetParameters",
                 "ssm:GetParameter",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:ssm:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":parameter/TEST/mobile/mobile-apps-rendering/*",
@@ -750,16 +780,52 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "parameter-store-read-policy",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TargetGroupMobileappsrendering29320E35": {
-      "Properties": {
+    "SSMRunCommandPolicy244E1613": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-run-command-policy",
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TargetGroupMobileappsrendering29320E35": Object {
+      "Properties": Object {
         "HealthCheckIntervalSeconds": 10,
         "HealthCheckPath": "/healthcheck",
         "HealthCheckProtocol": "HTTP",
@@ -767,58 +833,58 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
         "HealthyThresholdCount": 5,
         "Port": 3040,
         "Protocol": "HTTP",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "TargetGroupAttributes": [
-          {
+        "TargetGroupAttributes": Array [
+          Object {
             "Key": "deregistration_delay.timeout_seconds",
             "Value": "30",
           },
-          {
+          Object {
             "Key": "stickiness.enabled",
             "Value": "false",
           },
         ],
         "TargetType": "instance",
         "UnhealthyThresholdCount": 2,
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
-    "WazuhSecurityGroup": {
-      "Properties": {
+    "WazuhSecurityGroup": Object {
+      "Properties": Object {
         "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
-        "SecurityGroupEgress": [
-          {
+        "SecurityGroupEgress": Array [
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Wazuh event logging",
             "FromPort": 1514,
             "IpProtocol": "tcp",
             "ToPort": 1514,
           },
-          {
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Wazuh agent registration",
             "FromPort": 1515,
@@ -826,175 +892,225 @@ exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
             "ToPort": 1515,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WazuhSecurityGroupfromMobileAppsRenderingInternalIngressSecurityGroupMobileappsrenderingB407C3A23040A9B30033": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
+  },
+}
+`;
+
+exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
+Object {
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuWazuhAccess",
+      "GuApplicationLoadBalancer",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+    ],
+    "gu:cdk:version": "TEST",
+  },
+  "Outputs": Object {
+    "LoadBalancerMobileappsrenderingDnsName": Object {
+      "Description": "DNS entry for LoadBalancerMobileappsrendering",
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "LoadBalancerMobileappsrenderingB8B00ACB",
+          "DNSName",
+        ],
       },
-      "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "WazuhSecurityGroupfromMobileAppsRenderingLoadBalancerMobileappsrenderingSecurityGroupE0CCF718304012C66B0D": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
+  },
+  "Parameters": Object {
+    "AMIMobileappsrendering": Object {
+      "Description": "Amazon Machine Image ID for the app mobile-apps-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
+      "Type": "AWS::EC2::Image::Id",
+    },
+    "DistributionBucketName": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "LoggingStreamName": Object {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "VpcId": Object {
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
+    },
+    "mobileappsrenderingPrivateSubnets": Object {
+      "Default": "/account/vpc/primary/subnets/private",
+      "Description": "A list of private subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
+  },
+  "Resources": Object {
+    "AutoScalingGroupMobileappsrenderingASG42891F00": Object {
+      "Properties": Object {
+        "HealthCheckGracePeriod": 120,
+        "HealthCheckType": "ELB",
+        "LaunchConfigurationName": Object {
+          "Ref": "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9",
         },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
+        "MaxSize": "2",
+        "MinSize": "1",
+        "Tags": Array [
+          Object {
+            "Key": "App",
+            "PropagateAtLaunch": true,
+            "Value": "mobile-apps-rendering",
+          },
+          Object {
+            "Key": "gu:cdk:pattern-name",
+            "PropagateAtLaunch": true,
+            "Value": "GuEc2App",
+          },
+          Object {
+            "Key": "gu:cdk:version",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+          Object {
+            "Key": "gu:repo",
+            "PropagateAtLaunch": true,
+            "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": Object {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          Object {
+            "Key": "Name",
+            "PropagateAtLaunch": true,
+            "Value": "MobileAppsRenderingPreview/AutoScalingGroupMobileappsrendering",
+          },
+          Object {
+            "Key": "Stack",
+            "PropagateAtLaunch": true,
+            "Value": "mobile-preview",
+          },
+          Object {
+            "Key": "Stage",
+            "PropagateAtLaunch": true,
+            "Value": "TEST",
+          },
+        ],
+        "TargetGroupARNs": Array [
+          Object {
+            "Ref": "TargetGroupMobileappsrendering29320E35",
+          },
+        ],
+        "VPCZoneIdentifier": Object {
+          "Ref": "mobileappsrenderingPrivateSubnets",
         },
-        "ToPort": 3040,
       },
-      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
-    "mobileTESTmobileappsrenderingAD91FF83": {
-      "Properties": {
-        "LaunchTemplateData": {
-          "IamInstanceProfile": {
-            "Arn": {
-              "Fn::GetAtt": [
-                "mobileTESTmobileappsrenderingProfileA8EFA7CB",
-                "Arn",
-              ],
-            },
+    "AutoScalingGroupMobileappsrenderingInstanceProfile2F77976E": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
-          "ImageId": {
-            "Ref": "AMIMobileappsrendering",
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9": Object {
+      "DependsOn": Array [
+        "InstanceRoleMobileappsrenderingEC64402A",
+      ],
+      "Properties": Object {
+        "IamInstanceProfile": Object {
+          "Ref": "AutoScalingGroupMobileappsrenderingInstanceProfile2F77976E",
+        },
+        "ImageId": Object {
+          "Ref": "AMIMobileappsrendering",
+        },
+        "InstanceType": "t4g.micro",
+        "MetadataOptions": Object {
+          "HttpTokens": "required",
+        },
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
+              "GroupId",
+            ],
           },
-          "InstanceType": "t4g.small",
-          "MetadataOptions": {
-            "HttpTokens": "required",
+          Object {
+            "Fn::GetAtt": Array [
+              "WazuhSecurityGroup",
+              "GroupId",
+            ],
           },
-          "SecurityGroupIds": [
-            {
-              "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-                "GroupId",
-              ],
-            },
-            {
-              "Fn::GetAtt": [
-                "WazuhSecurityGroup",
-                "GroupId",
-              ],
-            },
-          ],
-          "TagSpecifications": [
-            {
-              "ResourceType": "instance",
-              "Tags": [
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "MobileAppsRendering/mobile-TEST-mobile-apps-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "mobile",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "TEST",
-                },
-              ],
-            },
-            {
-              "ResourceType": "volume",
-              "Tags": [
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "MobileAppsRendering/mobile-TEST-mobile-apps-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "mobile",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "TEST",
-                },
-              ],
-            },
-          ],
-          "UserData": {
-            "Fn::Base64": {
-              "Fn::Join": [
-                "",
-                [
-                  "#!/bin/bash -ev
+        ],
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "#!/bin/bash -ev
 groupadd mapi
 useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 
 export App=mobile-apps-rendering
-export Stack=mobile
+export Stack=mobile-preview
 export Stage=TEST
 export NODE_ENV=production
 
 aws s3 cp s3://",
-                  {
-                    "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
-                  },
-                  "/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+                Object {
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
+                },
+                "/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
@@ -1004,210 +1120,31 @@ chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
 ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
 
-export PM2_HOME="/usr/share/mobile-apps-rendering"
-export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
+export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
+export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
 
 /usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
-                  {
-                    "Ref": "AWS::Region",
-                  },
-                  " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
 /usr/local/node/pm2 logrotate -u mobile-apps-rendering",
-                ],
               ],
-            },
-          },
-        },
-        "TagSpecifications": [
-          {
-            "ResourceType": "launch-template",
-            "Tags": [
-              {
-                "Key": "gu:cdk:version",
-                "Value": "TEST",
-              },
-              {
-                "Key": "gu:repo",
-                "Value": "guardian/dotcom-rendering",
-              },
-              {
-                "Key": "Name",
-                "Value": "MobileAppsRendering/mobile-TEST-mobile-apps-rendering",
-              },
-              {
-                "Key": "Stack",
-                "Value": "mobile",
-              },
-              {
-                "Key": "Stage",
-                "Value": "TEST",
-              },
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::EC2::LaunchTemplate",
-    },
-    "mobileTESTmobileappsrenderingProfileA8EFA7CB": {
-      "Properties": {
-        "Roles": [
-          {
-            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
-    },
-  },
-}
-`;
-
-exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
-{
-  "Metadata": {
-    "gu:cdk:constructs": [
-      "GuAllowPolicy",
-      "GuVpcParameter",
-      "GuSubnetListParameter",
-      "GuSubnetListParameter",
-      "GuEc2App",
-      "GuCertificate",
-      "GuInstanceRole",
-      "GuDescribeEC2Policy",
-      "GuLoggingStreamNameParameter",
-      "GuLogShippingPolicy",
-      "GuDistributionBucketParameter",
-      "GuGetDistributablePolicy",
-      "GuParameterStoreReadPolicy",
-      "GuAmiParameter",
-      "GuHttpsEgressSecurityGroup",
-      "GuWazuhAccess",
-      "GuAutoScalingGroup",
-      "GuApplicationLoadBalancer",
-      "GuApplicationTargetGroup",
-      "GuHttpsApplicationListener",
-      "GuSecurityGroup",
-    ],
-    "gu:cdk:version": "TEST",
-  },
-  "Outputs": {
-    "LoadBalancerMobileappsrenderingDnsName": {
-      "Description": "DNS entry for LoadBalancerMobileappsrendering",
-      "Value": {
-        "Fn::GetAtt": [
-          "LoadBalancerMobileappsrenderingB8B00ACB",
-          "DNSName",
-        ],
-      },
-    },
-  },
-  "Parameters": {
-    "AMIMobileappsrendering": {
-      "Description": "Amazon Machine Image ID for the app mobile-apps-rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
-      "Type": "AWS::EC2::Image::Id",
-    },
-    "DistributionBucketName": {
-      "Default": "/account/services/artifact.bucket",
-      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "LoggingStreamName": {
-      "Default": "/account/services/logging.stream.name",
-      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": {
-      "Default": "/account/services/artifact.bucket",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "VpcId": {
-      "Default": "/account/vpc/primary/id",
-      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
-      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
-    },
-    "mobileappsrenderingPrivateSubnets": {
-      "Default": "/account/vpc/primary/subnets/private",
-      "Description": "A list of private subnets",
-      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
-    },
-    "mobileappsrenderingPublicSubnets": {
-      "Default": "/account/vpc/primary/subnets/public",
-      "Description": "A list of public subnets",
-      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
-    },
-  },
-  "Resources": {
-    "AutoScalingGroupMobileappsrenderingASG42891F00": {
-      "Properties": {
-        "HealthCheckGracePeriod": 120,
-        "HealthCheckType": "ELB",
-        "LaunchTemplate": {
-          "LaunchTemplateId": {
-            "Ref": "mobilepreviewTESTmobileappsrenderingFF204ED7",
-          },
-          "Version": {
-            "Fn::GetAtt": [
-              "mobilepreviewTESTmobileappsrenderingFF204ED7",
-              "LatestVersionNumber",
             ],
           },
         },
-        "MaxSize": "2",
-        "MinSize": "1",
-        "Tags": [
-          {
-            "Key": "App",
-            "PropagateAtLaunch": true,
-            "Value": "mobile-apps-rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "PropagateAtLaunch": true,
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "PropagateAtLaunch": true,
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "LogKinesisStreamName",
-            "PropagateAtLaunch": true,
-            "Value": {
-              "Ref": "LoggingStreamName",
-            },
-          },
-          {
-            "Key": "Stack",
-            "PropagateAtLaunch": true,
-            "Value": "mobile-preview",
-          },
-          {
-            "Key": "Stage",
-            "PropagateAtLaunch": true,
-            "Value": "TEST",
-          },
-        ],
-        "TargetGroupARNs": [
-          {
-            "Ref": "TargetGroupMobileappsrendering29320E35",
-          },
-        ],
-        "VPCZoneIdentifier": {
-          "Ref": "mobileappsrenderingPrivateSubnets",
-        },
       },
-      "Type": "AWS::AutoScaling::AutoScalingGroup",
+      "Type": "AWS::AutoScaling::LaunchConfiguration",
     },
-    "AutoScalingGroupMobileappsrenderingScalingPolicyCpuScalingPolicy25F424F1": {
-      "Properties": {
-        "AutoScalingGroupName": {
+    "AutoScalingGroupMobileappsrenderingScalingPolicyCpuScalingPolicy25F424F1": Object {
+      "Properties": Object {
+        "AutoScalingGroupName": Object {
           "Ref": "AutoScalingGroupMobileappsrenderingASG42891F00",
         },
         "PolicyType": "TargetTrackingScaling",
-        "TargetTrackingConfiguration": {
-          "PredefinedMetricSpecification": {
+        "TargetTrackingConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
             "PredefinedMetricType": "ASGAverageCPUUtilization",
           },
           "TargetValue": 10,
@@ -1215,38 +1152,34 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
-    "CertificateMobileappsrendering85649D08": {
+    "CertificateMobileappsrendering85649D08": Object {
       "DeletionPolicy": "Retain",
-      "Properties": {
+      "Properties": Object {
         "DomainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
-        "DomainValidationOptions": [
-          {
+        "DomainValidationOptions": Array [
+          Object {
             "DomainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
             "HostedZoneId": "TEST-HOSTED-ZONE-ID",
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
-            "Key": "Name",
-            "Value": "MobileAppsRenderingPreview/CertificateMobileappsrendering",
-          },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -1256,12 +1189,12 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       "Type": "AWS::CertificateManager::Certificate",
       "UpdateReplacePolicy": "Retain",
     },
-    "DescribeEC2PolicyFF5F9295": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "DescribeEC2PolicyFF5F9295": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "autoscaling:DescribeAutoScalingInstances",
                 "autoscaling:DescribeAutoScalingGroups",
                 "ec2:DescribeTags",
@@ -1274,21 +1207,21 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "describe-ec2-policy",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "DnsRecord": {
-      "Properties": {
+    "DnsRecord": Object {
+      "Properties": Object {
         "HostedZoneId": "TEST-HOSTED-ZONE-ID",
         "Name": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com.",
-        "ResourceRecords": [
-          {
-            "Fn::GetAtt": [
+        "ResourceRecords": Array [
+          Object {
+            "Fn::GetAtt": Array [
               "LoadBalancerMobileappsrenderingB8B00ACB",
               "DNSName",
             ],
@@ -1299,19 +1232,19 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "GetDistributablePolicyMobileappsrendering8E649036": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "GetDistributablePolicyMobileappsrendering8E649036": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:s3:::",
-                    {
+                    Object {
                       "Ref": "DistributionBucketName",
                     },
                     "/mobile-preview/TEST/mobile-apps-rendering/*",
@@ -1323,19 +1256,19 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GetDistributablePolicyMobileappsrendering8E649036",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GetParametersByPath37B32C62": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "GetParametersByPath37B32C62": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "ssm:GetParametersByPath",
               "Effect": "Allow",
               "Resource": "*",
@@ -1344,19 +1277,19 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GetParametersByPath37B32C62",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrendering089F1660": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrendering089F1660": Object {
+      "Properties": Object {
         "GroupDescription": "Allow all outbound HTTPS traffic",
-        "SecurityGroupEgress": [
-          {
+        "SecurityGroupEgress": Array [
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound HTTPS traffic",
             "FromPort": 443,
@@ -1364,47 +1297,47 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             "ToPort": 443,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingPreviewInternalIngressSecurityGroupMobileappsrendering981D8A7F30401C964232": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingPreviewInternalIngressSecurityGroupMobileappsrendering981D8A7F30401C964232": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "InternalIngressSecurityGroupMobileappsrendering486B411A",
             "GroupId",
           ],
@@ -1413,19 +1346,19 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingPreviewLoadBalancerMobileappsrenderingSecurityGroupA08E152F304032151D11": {
-      "Properties": {
+    "GuHttpsEgressSecurityGroupMobileappsrenderingfromMobileAppsRenderingPreviewLoadBalancerMobileappsrenderingSecurityGroupA08E152F304032151D11": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
             "GroupId",
           ],
@@ -1434,30 +1367,30 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "GuLogShippingPolicy981BFE5A": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
+    "GuLogShippingPolicy981BFE5A": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
                 "kinesis:Describe*",
                 "kinesis:Put*",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:kinesis:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":stream/",
-                    {
+                    Object {
                       "Ref": "LoggingStreamName",
                     },
                   ],
@@ -1468,61 +1401,57 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "GuLogShippingPolicy981BFE5A",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "InstanceRoleMobileappsrenderingEC64402A": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
+    "InstanceRoleMobileappsrenderingEC64402A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": {
-                "Service": "ec2.amazonaws.com",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "ec2.",
+                      Object {
+                        "Ref": "AWS::URLSuffix",
+                      },
+                    ],
+                  ],
+                },
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": [
-          {
-            "Fn::Join": [
-              "",
-              [
-                "arn:",
-                {
-                  "Ref": "AWS::Partition",
-                },
-                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
-              ],
-            ],
-          },
-        ],
         "Path": "/",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -1530,11 +1459,11 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "InternalIngressSecurityGroupMobileappsrendering486B411A": {
-      "Properties": {
+    "InternalIngressSecurityGroupMobileappsrendering486B411A": Object {
+      "Properties": Object {
         "GroupDescription": "Allow restricted ingress from CIDR ranges",
-        "SecurityGroupIngress": [
-          {
+        "SecurityGroupIngress": Array [
+          Object {
             "CidrIp": "10.0.0.0/8",
             "Description": "Allow access on port 443 from 10.0.0.0/8",
             "FromPort": 443,
@@ -1542,46 +1471,46 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             "ToPort": 443,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingPreviewGuHttpsEgressSecurityGroupMobileappsrendering86AAA55B30406414828D": {
-      "Properties": {
+    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingPreviewGuHttpsEgressSecurityGroupMobileappsrendering86AAA55B30406414828D": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "InternalIngressSecurityGroupMobileappsrendering486B411A",
             "GroupId",
           ],
@@ -1591,45 +1520,24 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "InternalIngressSecurityGroupMobileappsrenderingtoMobileAppsRenderingPreviewWazuhSecurityGroupBFDBFD7E3040AC7A9AEE": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "ListenerMobileappsrendering47F84352": {
-      "Properties": {
-        "Certificates": [
-          {
-            "CertificateArn": {
+    "ListenerMobileappsrendering47F84352": Object {
+      "Properties": Object {
+        "Certificates": Array [
+          Object {
+            "CertificateArn": Object {
               "Ref": "CertificateMobileappsrendering85649D08",
             },
           },
         ],
-        "DefaultActions": [
-          {
-            "TargetGroupArn": {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
               "Ref": "TargetGroupMobileappsrendering29320E35",
             },
             "Type": "forward",
           },
         ],
-        "LoadBalancerArn": {
+        "LoadBalancerArn": Object {
           "Ref": "LoadBalancerMobileappsrenderingB8B00ACB",
         },
         "Port": 443,
@@ -1637,50 +1545,50 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancingV2::Listener",
     },
-    "LoadBalancerMobileappsrenderingB8B00ACB": {
-      "Properties": {
-        "LoadBalancerAttributes": [
-          {
+    "LoadBalancerMobileappsrenderingB8B00ACB": Object {
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [
+          Object {
             "Key": "deletion_protection.enabled",
             "Value": "true",
           },
         ],
         "Scheme": "internal",
-        "SecurityGroups": [
-          {
-            "Fn::GetAtt": [
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
               "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
               "GroupId",
             ],
           },
-          {
-            "Fn::GetAtt": [
+          Object {
+            "Fn::GetAtt": Array [
               "InternalIngressSecurityGroupMobileappsrendering486B411A",
               "GroupId",
             ],
           },
         ],
-        "Subnets": {
+        "Subnets": Object {
           "Ref": "mobileappsrenderingPrivateSubnets",
         },
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
@@ -1689,49 +1597,49 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
     },
-    "LoadBalancerMobileappsrenderingSecurityGroup86D57550": {
-      "Properties": {
+    "LoadBalancerMobileappsrenderingSecurityGroup86D57550": Object {
+      "Properties": Object {
         "GroupDescription": "Automatically created Security Group for ELB MobileAppsRenderingPreviewLoadBalancerMobileappsrenderingA476639F",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingPreviewGuHttpsEgressSecurityGroupMobileappsrendering86AAA55B3040C6508311": {
-      "Properties": {
+    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingPreviewGuHttpsEgressSecurityGroupMobileappsrendering86AAA55B3040C6508311": Object {
+      "Properties": Object {
         "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
             "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
             "GroupId",
           ],
         },
         "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
             "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
             "GroupId",
           ],
@@ -1741,44 +1649,23 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "LoadBalancerMobileappsrenderingSecurityGrouptoMobileAppsRenderingPreviewWazuhSecurityGroupBFDBFD7E304032ED6346": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
-    "ParameterStoreReadMobileappsrenderingA4006661": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
+    "ParameterStoreReadMobileappsrenderingA4006661": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
               "Action": "ssm:GetParametersByPath",
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:ssm:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":parameter/TEST/mobile-preview/mobile-apps-rendering",
@@ -1786,22 +1673,22 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
                 ],
               },
             },
-            {
-              "Action": [
+            Object {
+              "Action": Array [
                 "ssm:GetParameters",
                 "ssm:GetParameter",
               ],
               "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
+              "Resource": Object {
+                "Fn::Join": Array [
                   "",
-                  [
+                  Array [
                     "arn:aws:ssm:",
-                    {
+                    Object {
                       "Ref": "AWS::Region",
                     },
                     ":",
-                    {
+                    Object {
                       "Ref": "AWS::AccountId",
                     },
                     ":parameter/TEST/mobile-preview/mobile-apps-rendering/*",
@@ -1813,16 +1700,52 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
           "Version": "2012-10-17",
         },
         "PolicyName": "parameter-store-read-policy",
-        "Roles": [
-          {
+        "Roles": Array [
+          Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TargetGroupMobileappsrendering29320E35": {
-      "Properties": {
+    "SSMRunCommandPolicy244E1613": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ec2messages:AcknowledgeMessage",
+                "ec2messages:DeleteMessage",
+                "ec2messages:FailMessage",
+                "ec2messages:GetEndpoint",
+                "ec2messages:GetMessages",
+                "ec2messages:SendReply",
+                "ssm:UpdateInstanceInformation",
+                "ssm:ListInstanceAssociations",
+                "ssm:DescribeInstanceProperties",
+                "ssm:DescribeDocumentParameters",
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ssm-run-command-policy",
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TargetGroupMobileappsrendering29320E35": Object {
+      "Properties": Object {
         "HealthCheckIntervalSeconds": 10,
         "HealthCheckPath": "/healthcheck",
         "HealthCheckProtocol": "HTTP",
@@ -1830,58 +1753,58 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
         "HealthyThresholdCount": 5,
         "Port": 3040,
         "Protocol": "HTTP",
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "App",
             "Value": "mobile-apps-rendering",
           },
-          {
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "TargetGroupAttributes": [
-          {
+        "TargetGroupAttributes": Array [
+          Object {
             "Key": "deregistration_delay.timeout_seconds",
             "Value": "30",
           },
-          {
+          Object {
             "Key": "stickiness.enabled",
             "Value": "false",
           },
         ],
         "TargetType": "instance",
         "UnhealthyThresholdCount": 2,
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
     },
-    "WazuhSecurityGroup": {
-      "Properties": {
+    "WazuhSecurityGroup": Object {
+      "Properties": Object {
         "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
-        "SecurityGroupEgress": [
-          {
+        "SecurityGroupEgress": Array [
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Wazuh event logging",
             "FromPort": 1514,
             "IpProtocol": "tcp",
             "ToPort": 1514,
           },
-          {
+          Object {
             "CidrIp": "0.0.0.0/0",
             "Description": "Wazuh agent registration",
             "FromPort": 1515,
@@ -1889,238 +1812,29 @@ exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
             "ToPort": 1515,
           },
         ],
-        "Tags": [
-          {
+        "Tags": Array [
+          Object {
             "Key": "gu:cdk:version",
             "Value": "TEST",
           },
-          {
+          Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
           },
-          {
+          Object {
             "Key": "Stack",
             "Value": "mobile-preview",
           },
-          {
+          Object {
             "Key": "Stage",
             "Value": "TEST",
           },
         ],
-        "VpcId": {
+        "VpcId": Object {
           "Ref": "VpcId",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
-    },
-    "WazuhSecurityGroupfromMobileAppsRenderingPreviewInternalIngressSecurityGroupMobileappsrendering981D8A7F30409D4BEBFF": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "InternalIngressSecurityGroupMobileappsrendering486B411A",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "WazuhSecurityGroupfromMobileAppsRenderingPreviewLoadBalancerMobileappsrenderingSecurityGroupA08E152F3040CC90354B": {
-      "Properties": {
-        "Description": "Load balancer to target",
-        "FromPort": 3040,
-        "GroupId": {
-          "Fn::GetAtt": [
-            "WazuhSecurityGroup",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": {
-          "Fn::GetAtt": [
-            "LoadBalancerMobileappsrenderingSecurityGroup86D57550",
-            "GroupId",
-          ],
-        },
-        "ToPort": 3040,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
-    "mobilepreviewTESTmobileappsrenderingFF204ED7": {
-      "Properties": {
-        "LaunchTemplateData": {
-          "IamInstanceProfile": {
-            "Arn": {
-              "Fn::GetAtt": [
-                "mobilepreviewTESTmobileappsrenderingProfile72DADF5F",
-                "Arn",
-              ],
-            },
-          },
-          "ImageId": {
-            "Ref": "AMIMobileappsrendering",
-          },
-          "InstanceType": "t4g.micro",
-          "MetadataOptions": {
-            "HttpTokens": "required",
-          },
-          "SecurityGroupIds": [
-            {
-              "Fn::GetAtt": [
-                "GuHttpsEgressSecurityGroupMobileappsrendering089F1660",
-                "GroupId",
-              ],
-            },
-            {
-              "Fn::GetAtt": [
-                "WazuhSecurityGroup",
-                "GroupId",
-              ],
-            },
-          ],
-          "TagSpecifications": [
-            {
-              "ResourceType": "instance",
-              "Tags": [
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "MobileAppsRenderingPreview/mobile-preview-TEST-mobile-apps-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "mobile-preview",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "TEST",
-                },
-              ],
-            },
-            {
-              "ResourceType": "volume",
-              "Tags": [
-                {
-                  "Key": "gu:cdk:version",
-                  "Value": "TEST",
-                },
-                {
-                  "Key": "gu:repo",
-                  "Value": "guardian/dotcom-rendering",
-                },
-                {
-                  "Key": "Name",
-                  "Value": "MobileAppsRenderingPreview/mobile-preview-TEST-mobile-apps-rendering",
-                },
-                {
-                  "Key": "Stack",
-                  "Value": "mobile-preview",
-                },
-                {
-                  "Key": "Stage",
-                  "Value": "TEST",
-                },
-              ],
-            },
-          ],
-          "UserData": {
-            "Fn::Base64": {
-              "Fn::Join": [
-                "",
-                [
-                  "#!/bin/bash -ev
-groupadd mapi
-useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
-
-export App=mobile-apps-rendering
-export Stack=mobile-preview
-export Stage=TEST
-export NODE_ENV=production
-
-aws s3 cp s3://",
-                  {
-                    "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
-                  },
-                  "/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
-mkdir -p /opt/mobile-apps-rendering
-unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
-chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
-
-mkdir -p /usr/share/mobile-apps-rendering/logs
-chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
-ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
-chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
-
-export PM2_HOME="/usr/share/mobile-apps-rendering"
-export ASSETS_MANIFEST="/opt/mobile-apps-rendering/manifest.json"
-
-/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
-                  {
-                    "Ref": "AWS::Region",
-                  },
-                  " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
-/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
-                ],
-              ],
-            },
-          },
-        },
-        "TagSpecifications": [
-          {
-            "ResourceType": "launch-template",
-            "Tags": [
-              {
-                "Key": "gu:cdk:version",
-                "Value": "TEST",
-              },
-              {
-                "Key": "gu:repo",
-                "Value": "guardian/dotcom-rendering",
-              },
-              {
-                "Key": "Name",
-                "Value": "MobileAppsRenderingPreview/mobile-preview-TEST-mobile-apps-rendering",
-              },
-              {
-                "Key": "Stack",
-                "Value": "mobile-preview",
-              },
-              {
-                "Key": "Stage",
-                "Value": "TEST",
-              },
-            ],
-          },
-        ],
-      },
-      "Type": "AWS::EC2::LaunchTemplate",
-    },
-    "mobilepreviewTESTmobileappsrenderingProfile72DADF5F": {
-      "Properties": {
-        "Roles": [
-          {
-            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::InstanceProfile",
     },
   },
 }
