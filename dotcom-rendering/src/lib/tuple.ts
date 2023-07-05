@@ -1,11 +1,3 @@
-/**
- * Type-guard that check whether an array contains at least a single item.
- *
- * If `true`, the type is narrowed from T[] to the [T, ...T[]] tuple,
- * which safely allows accessing the first item.
- */
-export const nonEmpty = <T>(arr: T[]): arr is [T, ...T[]] => arr.length >= 1;
-
 /** A tuple of up to 12 items. Larger tuples will not be narrowed */
 export type Tuple<T, N extends number> = N extends 12
 	? [T, T, T, T, T, T, T, T, T, T, T, T]
@@ -46,7 +38,7 @@ export const isTuple = <T, N extends number>(
 ): arr is Tuple<T, N> => arr.length === count;
 
 /** Type where a tuple can have any 'n' number of items or less  */
-type TupleOrLess<
+type SlicedTuple<
 	T,
 	N extends 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
 > = N extends 12
@@ -78,7 +70,7 @@ type TupleOrLess<
 /**
  * Takes the first 'n' number of items in an array
  *
- * By returning `TupleOrLess` you receive a type-safe response
+ * By returning `SlicedTuple` you receive a type-safe response
  * that can be checked exhaustively.
  */
 export const takeFirst = <
@@ -87,6 +79,6 @@ export const takeFirst = <
 >(
 	array: Array<T> | ReadonlyArray<T>,
 	count: N,
-): TupleOrLess<T, N> =>
+): SlicedTuple<T, N> =>
 	//@ts-expect-error – this output is tested by jest and it’s a very helpful method
 	array.slice(0, count);

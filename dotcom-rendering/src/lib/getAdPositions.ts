@@ -80,7 +80,8 @@ export const getMobileAdPositions = (
  * - Do not need to consider thrashers
  * - Do not need to consider the 'most viewed' container
  *
- * The types are also slightly different, as we
+ * The types are also slightly different, as we no longer have
+ * specific container IDs, so we use the date which is unique
  */
 export const getTagFrontMobileAdPositions = (
 	collections: Array<GroupedTrailsBase>,

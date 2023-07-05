@@ -7,10 +7,6 @@ import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
-type Props = GroupedTrailsFastMpu & {
-	adIndex: number;
-};
-
 const TwoCard = ({
 	trails,
 	adIndex,
@@ -168,6 +164,10 @@ const NineCard = ({
 			</UL>
 		</>
 	);
+};
+
+type Props = GroupedTrailsFastMpu & {
+	adIndex: number;
 };
 
 export const TagFrontFastMpu = ({ trails, adIndex }: Props) => {

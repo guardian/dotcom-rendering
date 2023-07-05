@@ -7,10 +7,6 @@ import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
-type Props = GroupedTrailsSlowMpu & {
-	adIndex: number;
-};
-
 const TwoCard = ({
 	trails,
 	adIndex,
@@ -110,7 +106,7 @@ const SevenCards = ({
 	trails,
 	adIndex,
 }: {
-	trails: [...Tuple<DCRFrontCard, 7>, ...DCRFrontCard[]];
+	trails: Tuple<DCRFrontCard, 7>;
 	adIndex: number;
 }) => {
 	return (
@@ -149,6 +145,10 @@ const SevenCards = ({
 			</UL>
 		</>
 	);
+};
+
+type Props = GroupedTrailsSlowMpu & {
+	adIndex: number;
 };
 
 export const TagFrontSlowMpu = ({ trails, adIndex }: Props) => {
