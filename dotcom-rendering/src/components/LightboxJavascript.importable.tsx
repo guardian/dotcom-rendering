@@ -303,7 +303,6 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	function closeLightbox() {
-		log('dotcom', '💡 Closing lightbox.');
 		// Re-enable scrolling
 		document.documentElement.classList.remove('lightbox-open');
 		// Hide lightbox
