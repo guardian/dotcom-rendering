@@ -39,6 +39,10 @@ const weatherCSS = css`
 	flex-wrap: wrap;
 	align-items: center;
 	letter-spacing: -0.56px;
+
+	${until.desktop} {
+		display: none;
+	}
 `;
 
 const locationCSS = css`
