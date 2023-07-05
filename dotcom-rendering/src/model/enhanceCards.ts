@@ -87,13 +87,14 @@ const enhanceSupportingContent = (
 		const supportingContentIsLive =
 			subLink.format?.design === 'LiveBlogDesign';
 
+		const kickerText = subLink.header?.kicker?.item?.properties.kickerText;
+
 		return {
 			format: presentationFormat,
 			headline: subLink.header?.headline ?? '',
 			url: subLink.properties.href ?? subLink.header?.url,
-			kickerText: supportingContentIsLive
-				? 'Live'
-				: subLink.header?.kicker?.item?.properties.kickerText,
+			kickerText:
+				supportingContentIsLive && !kickerText ? 'Live' : kickerText,
 		};
 	});
 };
