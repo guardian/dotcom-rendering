@@ -26,8 +26,8 @@ describe('Mobile Ads', () => {
 	});
 
 	// MerchandiseHigh is in position:
-	// 3: when it's a network front and collections are equal or more than 4
-	// 2: when collections are equal or more than 4 and is not a network front
+	// 2: when it's a network front and collections are equal or more than 4
+	// 1: when collections are equal or more than 4 and is not a network front
 	// 0: when collections are less than 4
 	it.each([2, 1, 0])(
 		`should not insert ad when merchandise high is in position %i`,
