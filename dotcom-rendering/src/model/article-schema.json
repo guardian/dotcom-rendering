@@ -4029,9 +4029,6 @@
                 "avatarUrl": {
                     "type": "string"
                 },
-                "mediaType": {
-                    "$ref": "#/definitions/MediaType"
-                },
                 "mediaDuration": {
                     "type": "number"
                 },
@@ -4103,8 +4100,8 @@
                         "isCommentable"
                     ]
                 },
-                "showMainVideo": {
-                    "type": "boolean"
+                "mainMedia": {
+                    "$ref": "#/definitions/MainMedia"
                 }
             },
             "required": [
@@ -4112,14 +4109,6 @@
                 "headline",
                 "url"
             ]
-        },
-        "MediaType": {
-            "enum": [
-                "Audio",
-                "Gallery",
-                "Video"
-            ],
-            "type": "string"
         },
         "Branding": {
             "type": "object",
@@ -4216,6 +4205,172 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "MainMedia": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Video",
+                    "description": "For displaying embedded, playable videos directly in cards"
+                },
+                {
+                    "$ref": "#/definitions/Audio"
+                },
+                {
+                    "$ref": "#/definitions/Gallery"
+                }
+            ]
+        },
+        "Video": {
+            "description": "For displaying embedded, playable videos directly in cards",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Video"
+                        },
+                        "elementId": {
+                            "type": "string"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "origin": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "expired": {
+                            "type": "boolean"
+                        },
+                        "images": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "url",
+                                    "width"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "elementId",
+                        "expired",
+                        "height",
+                        "images",
+                        "origin",
+                        "title",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "Audio": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Audio"
+                        },
+                        "duration": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Gallery": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Gallery"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
             ]
         },
         "OnwardsSource": {

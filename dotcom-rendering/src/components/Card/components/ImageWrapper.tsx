@@ -72,7 +72,7 @@ export const ImageWrapper = ({
 					flexBasisStyles({
 						imageSize,
 					}),
-				imageType === 'mainMedia' &&
+				(imageType === 'picture' || imageType === 'video') &&
 					isHorizontal &&
 					flexBasisStyles({
 						imageSize,
@@ -123,10 +123,10 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'mainMedia' || imageType === 'slideshow') && (
+				{(imageType === 'picture' || imageType === 'slideshow') && (
 					<div className="image-overlay" />
 				)}
-				{imageType === 'mainMedia' && showPlayIcon && (
+				{imageType === 'picture' && showPlayIcon && (
 					<PlayIcon
 						imageSize={imageSize}
 						imagePositionOnMobile={imagePositionOnMobile}
