@@ -24,14 +24,8 @@ export default {
 			icon: 1,
 			description: 'Sunny',
 			temperature: {
-				metric: {
-					value: 10,
-					unit: 'C',
-				},
-				imperial: {
-					value: 50,
-					unit: 'F',
-				},
+				metric: 10,
+				imperial: 50,
 			},
 			link: 'https://www.accuweather.com/en/gb/llanfair-pwllgwyngyll/ll61-5/current-weather/328819?lang=en-us&partner=web_guardian_adc',
 		},
@@ -40,61 +34,145 @@ export default {
 				icon: 19,
 				description: 'Sleet',
 				temperature: {
-					metric: {
-						value: 20,
-						unit: 'C',
-					},
-					imperial: {
-						value: 68,
-						unit: 'F',
-					},
+					metric: 20,
+					imperial: 68,
 				},
 				dateTime: '2023-06-27T00:00:00.000Z',
+			},
+			{
+				icon: 19,
+				description: 'Sleet',
+				temperature: {
+					metric: 20,
+					imperial: 68,
+				},
+				dateTime: '2023-06-27T01:00:00.000Z',
+			},
+			{
+				icon: 19,
+				description: 'Sleet',
+				temperature: {
+					metric: 20,
+					imperial: 68,
+				},
+				dateTime: '2023-06-27T02:00:00.000Z',
+			},
+			{
+				icon: 19,
+				description: 'Sleet',
+				temperature: {
+					metric: 20,
+					imperial: 68,
+				},
+				dateTime: '2023-06-27T03:00:00.000Z',
 			},
 			{
 				icon: 25,
 				description: 'Hail',
 				temperature: {
-					metric: {
-						value: 25,
-						unit: 'C',
-					},
-					imperial: {
-						value: 77,
-						unit: 'F',
-					},
+					metric: 25,
+					imperial: 77,
 				},
 				dateTime: '2023-06-27T04:00:00.000Z',
+			},
+			{
+				icon: 25,
+				description: 'Hail',
+				temperature: {
+					metric: 25,
+					imperial: 77,
+				},
+				dateTime: '2023-06-27T05:00:00.000Z',
+			},
+			{
+				icon: 25,
+				description: 'Hail',
+				temperature: {
+					metric: 25,
+					imperial: 77,
+				},
+				dateTime: '2023-06-27T06:00:00.000Z',
+			},
+			{
+				icon: 25,
+				description: 'Hail',
+				temperature: {
+					metric: 25,
+					imperial: 77,
+				},
+				dateTime: '2023-06-27T07:00:00.000Z',
 			},
 			{
 				icon: 32,
 				description: 'Wind',
 				temperature: {
-					metric: {
-						value: 30,
-						unit: 'C',
-					},
-					imperial: {
-						value: 89,
-						unit: 'F',
-					},
+					metric: 30,
+					imperial: 89,
 				},
 				dateTime: '2023-06-27T08:00:00.000Z',
+			},
+			{
+				icon: 32,
+				description: 'Wind',
+				temperature: {
+					metric: 30,
+					imperial: 89,
+				},
+				dateTime: '2023-06-27T09:00:00.000Z',
+			},
+			{
+				icon: 32,
+				description: 'Wind',
+				temperature: {
+					metric: 30,
+					imperial: 89,
+				},
+				dateTime: '2023-06-27T10:00:00.000Z',
+			},
+			{
+				icon: 32,
+				description: 'Wind',
+				temperature: {
+					metric: 30,
+					imperial: 89,
+				},
+				dateTime: '2023-06-27T11:00:00.000Z',
 			},
 			{
 				icon: 44,
 				description: 'Night snow',
 				temperature: {
-					metric: {
-						value: 40,
-						unit: 'C',
-					},
-					imperial: {
-						value: 104,
-						unit: 'F',
-					},
+					metric: 40,
+					imperial: 104,
 				},
 				dateTime: '2023-06-27T12:00:00.000Z',
+			},
+			{
+				icon: 44,
+				description: 'Night snow',
+				temperature: {
+					metric: 40,
+					imperial: 104,
+				},
+				dateTime: '2023-06-27T13:00:00.000Z',
+			},
+			{
+				icon: 44,
+				description: 'Night snow',
+				temperature: {
+					metric: 40,
+					imperial: 104,
+				},
+				dateTime: '2023-06-27T14:00:00.000Z',
+			},
+			{
+				icon: 44,
+				description: 'Night snow',
+				temperature: {
+					metric: 40,
+					imperial: 104,
+				},
+				dateTime: '2023-06-27T15:00:00.000Z',
 			},
 		],
 	},
