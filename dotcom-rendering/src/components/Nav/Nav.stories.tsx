@@ -105,7 +105,7 @@ export const ExpandedMenuStory = () => {
 	return (
 		<Section
 			fullWidth={true}
-			showSideBorders={false}
+			showSideBorders={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
 			padSides={false}
@@ -113,8 +113,8 @@ export const ExpandedMenuStory = () => {
 		>
 			<Nav
 				selectedPillar={ArticlePillar.News}
-				displayRoundel={true}
-				isImmersive={true}
+				displayRoundel={false}
+				isImmersive={false}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"

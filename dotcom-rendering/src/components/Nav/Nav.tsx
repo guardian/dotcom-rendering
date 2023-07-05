@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import type { ArticlePillar } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
 import type { EditionId } from '../../lib/edition';
 import { clearFix } from '../../lib/mixins';
@@ -32,8 +32,9 @@ const rowStyles = css`
 	justify-content: space-between;
 `;
 
+export const minNavHeightPx = 48;
 export const minNavHeight = css`
-	min-height: 48px;
+	min-height: ${minNavHeightPx}px;
 `;
 
 const PositionRoundel = ({ children }: { children: React.ReactNode }) => (

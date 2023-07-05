@@ -178,6 +178,7 @@ const columnStyle = css`
 		width: 134px;
 		float: left;
 		position: relative;
+		border-left: 1px solid ${brand[600]};
 
 		:after {
 			height: 100%;
@@ -186,6 +187,7 @@ const columnStyle = css`
 		}
 
 		:first-of-type {
+			border-left: none;
 			width: 123px;
 		}
 	}

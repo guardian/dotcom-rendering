@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -34,7 +33,7 @@ import { LabsHeader } from '../components/LabsHeader';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { minNavHeight, Nav } from '../components/Nav/Nav';
+import { minNavHeightPx, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -285,13 +284,11 @@ export const ImmersiveLayout = ({
 	*/
 
 	const labsHeaderHeight = LABS_HEADER_HEIGHT;
-	const navHeightCSS: SerializedStyles = minNavHeight;
-	const navHeight = parseInt(navHeightCSS.styles.slice(11, -2));
-	const combinedHeight = (navHeight + labsHeaderHeight).toString();
+	const combinedHeight = (minNavHeightPx + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
 		? `${combinedHeight}px`
-		: `${navHeight}px`;
+		: `${minNavHeightPx}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
