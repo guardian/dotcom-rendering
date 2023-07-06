@@ -1,6 +1,6 @@
-import { writeFile } from 'fs/promises';
-import path from 'path';
-import * as url from 'url';
+import { writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import * as url from 'node:url';
 import cpy from 'cpy';
 import execa from 'execa';
 import { log, warn } from '../env/log.js';
@@ -57,35 +57,35 @@ const copyDist = () => {
 	const source = path.resolve(dirname, '../../dist');
 	const dest = path.resolve(target, 'frontend-static', 'assets');
 	return Promise.all([
-		cpy(
-			path.resolve(source, '**/*.!(html|json)'),
-			dest,
-			{
-				nodir: true,
-			},
-		),
-		cpy(
-			path.resolve(source, 'stats'),
-			path.resolve(dest, 'stats'),
-			{
-				nodir: true,
-			},
-		),
+		cpy(path.resolve(source, '**/*.!(html|json)'), dest, {
+			nodir: true,
+		}),
+		cpy(path.resolve(source, 'stats'), path.resolve(dest, 'stats'), {
+			nodir: true,
+		}),
 	]);
 };
 
 const copyScripts = () => {
 	log(' - copying scripts');
-	return cpy(path.resolve(dirname, '../../scripts/**'), path.resolve(target, 'rendering', 'scripts'), {
-		nodir: true,
-	});
+	return cpy(
+		path.resolve(dirname, '../../scripts/**'),
+		path.resolve(target, 'rendering', 'scripts'),
+		{
+			nodir: true,
+		},
+	);
 };
 
 const copyDistServer = () => {
 	log(' - copying server dist');
-	return cpy(path.resolve(dirname, '../../dist/**'), path.resolve(target, 'rendering', 'dist'), {
-		nodir: true,
-	});
+	return cpy(
+		path.resolve(dirname, '../../dist/**'),
+		path.resolve(target, 'rendering', 'dist'),
+		{
+			nodir: true,
+		},
+	);
 };
 
 const copyMakefile = () => {
