@@ -17,6 +17,7 @@ import {
 } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
+import { CardPicture } from './CardPicture';
 import { NewsletterDetail } from './NewsletterDetail';
 
 interface Props {
@@ -203,12 +204,13 @@ export const NewsletterCard = ({
 			aria-label={newsletter.name}
 		>
 			{!!newsletter.illustrationCard && (
-				<img
-					src={newsletter.illustrationCard}
-					css={illustrationStyle}
-					alt=""
-					role="img"
-				/>
+				<div css={illustrationStyle}>
+					<CardPicture
+						imageSize="carousel"
+						alt=""
+						master={newsletter.illustrationCard}
+					/>
+				</div>
 			)}
 			{!newsletter.illustrationCard && (
 				<IllustrationPlaceholder
