@@ -59,7 +59,7 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{article.imagesForLightbox && (
+			{article.config.switches.lightbox && article.imagesForLightbox && (
 				<>
 					<LightboxLayout
 						imageCount={article.imagesForLightbox.length}

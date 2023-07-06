@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import type { Switches } from '../types/config';
 import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
 import { Caption } from './Caption';
@@ -26,6 +27,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	switches?: Switches;
 };
 
 const starsWrapper = css`
@@ -233,6 +235,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
+	switches,
 }: Props) => {
 	// Its possible the tools wont send us any images urls
 	// if so, don't try to render
@@ -329,7 +332,8 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth, 10) > 620 &&
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -378,7 +382,8 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
-				{parseInt(imageWidth, 10) > 620 &&
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -466,7 +471,8 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 
-				{parseInt(imageWidth, 10) > 620 &&
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
