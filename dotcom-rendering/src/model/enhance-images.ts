@@ -242,53 +242,47 @@ const addCaptionsToMultis = (elements: FEElement[]): FEElement[] => {
 	return withSpecialCaptions;
 };
 
-const stripCaptions = (elements: FEElement[]): FEElement[] => {
+const stripCaptions = (elements: FEElement[]): FEElement[] =>
 	// Remove all captions from all images
-	const withoutCaptions: FEElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement'
 		) {
 			// Remove the caption from this image
-			withoutCaptions.push({
+			return {
 				...thisElement,
 				data: {
 					...thisElement.data,
 					caption: '',
 				},
-			});
+			};
 		} else {
 			// Pass through
-			withoutCaptions.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withoutCaptions;
-};
 
-const removeCredit = (elements: FEElement[]): FEElement[] => {
+const removeCredit = (elements: FEElement[]): FEElement[] =>
 	// Remove credit from all images
-	const withoutCredit: FEElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement'
 		) {
 			// Remove the credit from this image
-			withoutCredit.push({
+			return {
 				...thisElement,
 				data: {
 					...thisElement.data,
 					credit: '',
 				},
-			});
+			};
 		} else {
 			// Pass through
-			withoutCredit.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withoutCredit;
-};
 
 class Enhancer {
 	elements: FEElement[];

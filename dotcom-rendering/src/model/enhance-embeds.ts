@@ -1,9 +1,8 @@
 import { JSDOM } from 'jsdom';
 import type { FEElement } from '../types/content';
 
-const addTitleToIframe = (elements: FEElement[]): FEElement[] => {
-	const enhanced: FEElement[] = [];
-	elements.forEach((element) => {
+const addTitleToIframe = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 				// Parse the embed block element, find the iframe and add
@@ -13,22 +12,20 @@ const addTitleToIframe = (elements: FEElement[]): FEElement[] => {
 				const iframe = dom.querySelector('iframe');
 				if (iframe && element.alt) {
 					iframe.setAttribute('title', element.alt);
-					enhanced.push({
+					return {
 						...element,
 						...{
 							html: iframe.outerHTML,
 						},
-					});
+					};
 				} else {
-					enhanced.push(element);
+					return element;
 				}
 				break;
 			default:
-				enhanced.push(element);
+				return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceEmbeds = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {
