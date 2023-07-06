@@ -89,6 +89,7 @@ const ClickOverlay = ({
 					}
 				}
 			`}
+			data-ignore="global-link-styling"
 			className="open-lightbox"
 			aria-hidden="true"
 			tabIndex={-1}
