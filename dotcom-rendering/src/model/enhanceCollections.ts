@@ -72,7 +72,8 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				allCardsHaveBranding ? allBranding : [],
+				// We only try to use branded badge for paid content containers
+				isPaidContent && allCardsHaveBranding ? allBranding : [],
 				collection.config.href,
 			),
 			grouped: groupCards(
@@ -83,10 +84,12 @@ export const enhanceCollections = (
 				containerPalette,
 			),
 			curated: enhanceCards(collection.curated, {
+				cardInTagFront: false,
 				editionId,
 				containerPalette,
 			}),
 			backfill: enhanceCards(collection.backfill, {
+				cardInTagFront: false,
 				editionId,
 				containerPalette,
 			}),

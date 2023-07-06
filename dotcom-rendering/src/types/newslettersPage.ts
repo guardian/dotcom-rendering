@@ -26,7 +26,7 @@ type FENewslettersConfigType = {
 	// videoDuration?: number;
 	edition: EditionId;
 	// section: string;
-	// sharedAdTargeting: { [key: string]: any };
+	// sharedAdTargeting: SharedAdTargeting;
 	idApiUrl: string;
 	discussionApiUrl: string;
 	// discussionD2Uid: string;

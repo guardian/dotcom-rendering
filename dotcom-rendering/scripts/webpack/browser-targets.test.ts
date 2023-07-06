@@ -7,24 +7,24 @@ import {
 describe('Browser targets are as expected', () => {
 	test('raw targets from browserslist', () => {
 		expect(rawTargets).toEqual({
-			chrome: '67.0.0',
+			chrome: '70.0.0',
 			edge: '99.0.0',
 			firefox: '78.0.0',
 			ios: '10.3.0',
-			opera: '91.0.0',
-			safari: '10.1.0',
-			samsung: '11.1.0',
+			opera: '73.0.0',
+			safari: '11.1.0',
+			samsung: '16.0.0',
 		});
 	});
 	test('upgrade targets from browserslist', () => {
 		expect(getBrowserTargets()).toEqual({
-			chrome: '67.0.0',
+			chrome: '70.0.0',
 			edge: '99.0.0',
 			firefox: '78.0.0',
 			ios: '11', // upgraded
-			opera: '91.0.0',
+			opera: '73.0.0',
 			safari: '11.1.0', // upgraded
-			samsung: '11.1.0',
+			samsung: '16.0.0',
 		});
 	});
 });

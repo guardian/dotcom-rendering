@@ -1,7 +1,6 @@
 import type { Branding } from './branding';
 import type { DCRSnapType, DCRSupportingContent } from './front';
-
-type MediaType = 'Video' | 'Audio' | 'Gallery';
+import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {
 	url: string;
@@ -9,7 +8,6 @@ interface BaseTrailType {
 	webPublicationDate?: string;
 	image?: string;
 	avatarUrl?: string;
-	mediaType?: MediaType;
 	mediaDuration?: number;
 	ageWarning?: string;
 	byline?: string;
@@ -29,7 +27,7 @@ interface BaseTrailType {
 		isClosedForComments: boolean;
 		discussionId?: string;
 	};
-	showMainVideo?: boolean;
+	mainMedia?: MainMedia;
 }
 
 export interface TrailType extends BaseTrailType {

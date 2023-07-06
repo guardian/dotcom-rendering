@@ -17,7 +17,6 @@ import type { TagType } from '../types/tag';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
-	adTargeting: AdTargeting;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -45,7 +44,6 @@ export const LiveBlogRenderer = ({
 	format,
 	blocks,
 	pinnedPost,
-	adTargeting,
 	host,
 	pageId,
 	webTitle,
@@ -83,7 +81,6 @@ export const LiveBlogRenderer = ({
 							block={pinnedPost}
 							pageId={pageId}
 							webTitle={webTitle}
-							adTargeting={adTargeting}
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}
@@ -137,7 +134,6 @@ export const LiveBlogRenderer = ({
 				format={format}
 				pageId={pageId}
 				webTitle={webTitle}
-				adTargeting={adTargeting}
 				host={host}
 				ajaxUrl={ajaxUrl}
 				isLiveUpdate={isLiveUpdate}

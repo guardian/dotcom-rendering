@@ -9,10 +9,12 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import type { Switches } from '../types/config';
 import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
+import { LightboxLink } from './LightboxLink';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -25,6 +27,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	switches?: Switches;
 };
 
 const starsWrapper = css`
@@ -213,6 +216,16 @@ const CaptionToggle = () => (
 	</>
 );
 
+export const getMaster = (images: Image[]) => {
+	return images.find((image) => image.fields.isMaster);
+};
+export const getLargest = (images: Image[]) => {
+	const descendingByWidth = (a: Image, b: Image) => {
+		return parseInt(b.fields.width) - parseInt(a.fields.width);
+	};
+	return images.slice().sort(descendingByWidth)[0];
+};
+
 export const ImageComponent = ({
 	element,
 	format,
@@ -222,6 +235,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
+	switches,
 }: Props) => {
 	// Its possible the tools wont send us any images urls
 	// if so, don't try to render
@@ -236,32 +250,8 @@ export const ImageComponent = ({
 		format.design !== ArticleDesign.Comment &&
 		format.design !== ArticleDesign.Editorial;
 
-	// We get the first 'media' height and width. This doesn't match the actual image height and width but that's ok
-	// because the image sources and CSS deal with the sizing. What the height and width gives us is a true
-	// ratio to apply to the image in the page, so the browser's pre-parser can reserve the space.
-	//
-	// The default is the 5:3 standard that The Grid suggests, at our wide breakpoint width.
-	const imageWidth =
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
-		element.media?.allImages[0]?.fields.width ?? '620';
-	const imageHeight =
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- could it be undefined?
-		element.media?.allImages[0]?.fields.height ?? '372';
-
-	const palette = decidePalette(format);
-
-	const getMaster = (images: Image[]) => {
-		return images.find((image) => image.fields.isMaster)?.url;
-	};
-	const getLargest = (images: Image[]) => {
-		const descendingByWidth = (a: Image, b: Image) => {
-			return parseInt(b.fields.width) - parseInt(a.fields.width);
-		};
-		return images.slice().sort(descendingByWidth)[0]?.url;
-	};
-
 	// Legacy images do not have a master so we fallback to the largest available
-	const image =
+	const master =
 		getMaster(element.media.allImages) ??
 		getLargest(element.media.allImages);
 
@@ -271,10 +261,26 @@ export const ImageComponent = ({
 			imageUrl.endsWith(`.${extension}`),
 		);
 	};
-	if (!image || !isSupported(image)) {
+
+	if (!master?.url || !isSupported(master.url)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
+
+	/**
+	 * We use height and width for two things.
+	 *
+	 * 1) To decide if an image is large enough to be used in lightbox (>620) and
+	 * 2) To get a true ratio value to apply to the image in the page, so the browser's pre-parser can reserve the space
+	 *
+	 * On the second point, see this PR for more detail
+	 * https://github.com/guardian/dotcom-rendering/pull/1879
+	 *
+	 */
+	const imageWidth = master.fields.width;
+	const imageHeight = master.fields.width;
+
+	const palette = decidePalette(format);
 
 	if (
 		isMainMedia &&
@@ -283,6 +289,11 @@ export const ImageComponent = ({
 	) {
 		return (
 			<div
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					/* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
@@ -304,12 +315,14 @@ export const ImageComponent = ({
 					picture {
 						height: 100%;
 					}
+					/* We need position relative here to contain the absolute positioned ClickOverlay added by LightboxLink */
+					position: relative;
 				`}
 			>
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -319,6 +332,17 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
 			</div>
 		);
 	}
@@ -326,6 +350,11 @@ export const ImageComponent = ({
 	if (hideCaption) {
 		return (
 			<div
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					position: relative;
 
@@ -340,7 +369,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -353,6 +382,17 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
 			</div>
 		);
 	}
@@ -360,6 +400,11 @@ export const ImageComponent = ({
 	return (
 		<>
 			<div
+				id={
+					element.position !== undefined
+						? `img-${element.position}`
+						: ''
+				}
 				css={css`
 					position: relative;
 
@@ -374,7 +419,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					master={master.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -425,6 +470,18 @@ export const ImageComponent = ({
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
+
+				{switches?.lightbox === true &&
+					parseInt(imageWidth, 10) > 620 &&
+					element.position !== undefined && (
+						<LightboxLink
+							role={role}
+							format={format}
+							elementId={element.elementId}
+							isMainMedia={isMainMedia}
+							position={element.position}
+						/>
+					)}
 			</div>
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">

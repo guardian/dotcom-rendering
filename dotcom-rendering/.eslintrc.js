@@ -41,6 +41,10 @@ const rulesToReview = {
 	'@typescript-eslint/default-param-last': 'warn',
 	'@typescript-eslint/no-misused-promises': 'warn',
 
+	// We use prettier to format code. Some eslint rules conflict with prettier
+	'react/jsx-indent-props': 'off',
+	'react/jsx-indent': 'off',
+
 	// More rules
 	'eslint-comments/require-description': 'warn',
 	'eslint-comments/no-unused-disable': 'warn',
@@ -66,9 +70,10 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
-		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
+		// prettier needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
+		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -90,8 +95,6 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
 		'react/jsx-boolean-value': [2, 'always'],
-		'react/jsx-indent-props': [2, 'tab'],
-		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
@@ -168,9 +171,7 @@ module.exports = {
 		...rulesToOverrideGuardianConfig,
 	},
 	settings: {
-		'import/resolver': {
-			'babel-module': { extensions: ['.ts', '.tsx', '.js'] },
-		},
+		'import/resolver': 'typescript'
 	},
 	overrides: [
 		{

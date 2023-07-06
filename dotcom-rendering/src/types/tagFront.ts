@@ -1,7 +1,7 @@
 import type { EditionId } from '../lib/edition';
-import type { GroupedTrails } from '../model/groupTrailsByDates';
+import type { Tuple } from '../lib/tuple';
 import type { FooterType } from './footer';
-import type { FEFrontCard, FEFrontConfigType } from './front';
+import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
 import type { FETagType } from './tag';
 
 export interface FETagFrontType {
@@ -23,8 +23,36 @@ export interface FETagFrontType {
 	forceDay: boolean;
 }
 
+/**
+ * Represents a set of trails grouped by their year, month & optionally day of publication.
+ */
+export interface GroupedTrailsBase {
+	year: number;
+	month: number;
+	day: number | undefined;
+}
+
+export interface GroupedTrails extends GroupedTrailsBase {
+	trails: DCRFrontCard[];
+}
+
+export interface GroupedTrailsFastMpu extends GroupedTrailsBase {
+	injected: true;
+	speed: 'fast';
+	// Trails must either be length of 2, 4, 6, 9
+	trails: Tuple<DCRFrontCard, 2 | 4 | 6 | 9>;
+}
+export interface GroupedTrailsSlowMpu extends GroupedTrailsBase {
+	injected: true;
+	speed: 'slow';
+	// Trails must either be length of 2, 4, 5, 7
+	trails: Tuple<DCRFrontCard, 2 | 4 | 5 | 7>;
+}
+
 export interface DCRTagFrontType {
-	groupedTrails: GroupedTrails[];
+	groupedTrails: Array<
+		GroupedTrails | GroupedTrailsFastMpu | GroupedTrailsSlowMpu
+	>;
 	nav: FENavType;
 	tags: FETagType[];
 	editionId: EditionId;

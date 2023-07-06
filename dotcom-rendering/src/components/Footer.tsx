@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -311,14 +311,14 @@ const decideSignupNewsletterName = (edition: EditionId): string => {
 
 export const Footer = ({
 	pillars,
-	pillar,
+	selectedPillar,
 	pageFooter,
 	urls,
 	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	pillar: ArticleTheme;
+	selectedPillar?: ArticlePillar;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;
@@ -332,9 +332,8 @@ export const Footer = ({
 	>
 		<div css={pillarWrap}>
 			<Pillars
-				display={ArticleDisplay.Standard}
 				pillars={pillars}
-				pillar={pillar}
+				selectedPillar={selectedPillar}
 				showLastPillarDivider={false}
 				dataLinkName="footer"
 			/>

@@ -18,6 +18,7 @@ import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
 import type { DCRContainerPalette } from '../types/front';
+import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
@@ -363,13 +364,9 @@ const titleStyle = (
 const getDataLinkNameCarouselButton = (
 	direction: string,
 	arrowName: string,
-	collectionType?: string,
+	isVideoContainer: boolean,
 ): string => {
-	return `${
-		collectionType && collectionType === 'fixed/video'
-			? 'video-container'
-			: arrowName
-	}-${direction}`;
+	return `${isVideoContainer ? 'video-container' : arrowName}-${direction}`;
 };
 
 const Title = ({
@@ -431,8 +428,7 @@ type CarouselCardProps = {
 	discussionId?: string;
 	/** Only used on Labs cards */
 	branding?: Branding;
-	showMainVideo?: boolean;
-	mediaDuration?: number;
+	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
 };
 
@@ -447,8 +443,7 @@ const CarouselCard = ({
 	dataLinkName,
 	discussionId,
 	branding,
-	showMainVideo,
-	mediaDuration,
+	mainMedia,
 	verticalDividerColour,
 }: CarouselCardProps) => (
 	<LI
@@ -476,8 +471,8 @@ const CarouselCard = ({
 			discussionId={discussionId}
 			branding={branding}
 			isExternalLink={false}
-			showMainVideo={showMainVideo}
-			mediaDuration={mediaDuration}
+			mainMedia={mainMedia}
+			videoSize="too small to play: 479px or less"
 		/>
 	</LI>
 );
@@ -600,6 +595,9 @@ export const Carousel = ({
 
 	const isCuratedContent = onwardsSource === 'curated-content';
 
+	const isVideoContainer =
+		'collectionType' in props && props.collectionType === 'fixed/video';
+
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
 
@@ -701,12 +699,7 @@ export const Carousel = ({
 		<div
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
-			data-component={
-				'collectionType' in props &&
-				props.collectionType === 'fixed/video'
-					? 'video-playlist'
-					: undefined
-			}
+			data-component={isVideoContainer ? 'video-playlist' : undefined}
 		>
 			<FetchCommentCounts />
 			<LeftColumn
@@ -749,9 +742,9 @@ export const Carousel = ({
 						),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
-						heading,
 						'prev',
 						arrowName,
+						isVideoContainer,
 					)}
 				>
 					<SvgChevronLeftSingle />
@@ -778,9 +771,9 @@ export const Carousel = ({
 						),
 					]}
 					data-link-name={getDataLinkNameCarouselButton(
-						heading,
 						'next',
 						arrowName,
+						isVideoContainer,
 					)}
 				>
 					<SvgChevronRightSingle />
@@ -824,9 +817,9 @@ export const Carousel = ({
 									),
 								]}
 								data-link-name={getDataLinkNameCarouselButton(
-									heading,
 									'prev',
 									arrowName,
+									isVideoContainer,
 								)}
 							>
 								<SvgChevronLeftSingle />
@@ -850,9 +843,9 @@ export const Carousel = ({
 									),
 								]}
 								data-link-name={getDataLinkNameCarouselButton(
-									heading,
 									'next',
 									arrowName,
+									isVideoContainer,
 								)}
 							>
 								<SvgChevronRightSingle />
@@ -876,6 +869,7 @@ export const Carousel = ({
 							kickerText,
 							branding,
 							discussion,
+							mainMedia,
 						} = trail;
 
 						// Don't try to render cards that have no publication date. This property is technically optional
@@ -901,8 +895,7 @@ export const Carousel = ({
 										: undefined
 								}
 								branding={branding}
-								showMainVideo={trail.showMainVideo}
-								mediaDuration={trail.mediaDuration}
+								mainMedia={mainMedia}
 								verticalDividerColour={
 									carouselColours.borderColour
 								}

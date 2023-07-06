@@ -59,6 +59,7 @@ export const MostViewedFooter = ({
 			data-cy="mostviewed-footer"
 			data-cy-ab-user-in-variant={abTestCypressDataAttr}
 			data-cy-ab-runnable-test={variantFromRunnable}
+			data-link-name="most popular"
 		>
 			<MostViewedFooterGrid
 				data={tabs}
