@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Preview } from './Preview';
 
-export default { component: Preview, title: 'Preview' };
+export default { component: Preview, title: 'Discussion/Preview' };
 
 export const PreviewStory = () => (
 	<div

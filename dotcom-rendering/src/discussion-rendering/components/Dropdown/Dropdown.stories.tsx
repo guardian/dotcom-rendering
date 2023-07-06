@@ -79,7 +79,7 @@ const optionsWithNoneActive = [
 /* tslint:disable */
 export default {
 	component: Dropdown,
-	title: 'Dropdown',
+	title: 'Discussion/Dropdown',
 };
 /* tslint:enable */
 

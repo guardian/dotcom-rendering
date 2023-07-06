@@ -1,6 +1,6 @@
 import { Avatar } from './Avatar';
 
-export default { component: Avatar, title: 'Avatar' };
+export default { component: Avatar, title: 'Discussion/Avatar' };
 
 export const Sizes = () => {
 	return (

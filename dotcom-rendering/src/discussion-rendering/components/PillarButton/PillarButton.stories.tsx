@@ -13,7 +13,7 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	/>
 );
 
-export default { component: PillarButton, title: 'PillarButton' };
+export default { component: PillarButton, title: 'Discussion/PillarButton' };
 
 export const EachPillar = () => (
 	<Row>

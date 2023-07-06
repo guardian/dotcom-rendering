@@ -1,8 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
-import { CommentType, UserProfile } from '../../discussionTypes';
+import type { CommentType, UserProfile } from '../../discussionTypes';
 import { Comment } from './Comment';
 
-export default { title: 'Comment' };
+export default { title: 'Discussion/Comment' };
 
 const commentData: CommentType = {
 	id: 25487686,

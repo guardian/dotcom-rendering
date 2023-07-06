@@ -3,7 +3,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { App } from './App';
 import type { UserProfile } from './discussionTypes';
 
-export default { component: App, title: 'App' };
+export default { component: App, title: 'Discussion/App' };
 
 const aUser: UserProfile = {
 	userId: 'abc123',
