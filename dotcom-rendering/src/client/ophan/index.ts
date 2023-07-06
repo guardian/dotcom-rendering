@@ -20,7 +20,6 @@ export const ophan = (): Promise<void> => {
 				complete: false,
 			};
 		});
-		console.log('🍊', abTestRegister);
 		record({ abTestRegister });
 	}
 

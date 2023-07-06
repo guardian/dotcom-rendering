@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { initPerf } from '../client/initPerf';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
-
-const isServer = typeof window === 'undefined';
 
 const pinnedPost: HTMLElement | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')

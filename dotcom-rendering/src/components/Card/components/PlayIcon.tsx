@@ -1,50 +1,36 @@
 import { css } from '@emotion/react';
-import { brandAlt, from } from '@guardian/source-foundations';
+import { from, palette } from '@guardian/source-foundations';
 import { SvgMediaControlsPlay } from '@guardian/source-react-components';
+import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
 
-type PlayButtonSize = 'small' | 'medium' | 'large' | 'xlarge';
+type PlayButtonSize = keyof typeof sizes;
 
-const buttonSize = (size: PlayButtonSize) => {
-	switch (size) {
-		case 'small':
-			return 28;
-		case 'medium':
-			return 44;
-		case 'large':
-			return 48;
-		case 'xlarge':
-			return 60;
-	}
-};
-
-const iconSize = (size: PlayButtonSize) => {
-	switch (size) {
-		case 'small':
-			return 26;
-		case 'medium':
-			return 36;
-		case 'large':
-			return 40;
-		case 'xlarge':
-			return 54;
-	}
-};
+const sizes = {
+	small: { button: 40, icon: 32 },
+	medium: { button: 80, icon: 72 },
+	large: { button: 80, icon: 72 },
+	xlarge: { button: 80, icon: 72 },
+} as const satisfies Record<string, { button: number; icon: number }>;
 
 const iconWrapperStyles = css`
 	display: flex; /* Fixes the div mis-sizing itself */
 	position: absolute;
-	bottom: 4px;
-	left: 4px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;
 
-const iconStyles = (size: PlayButtonSize, sizeOnMobile: PlayButtonSize) => css`
-	background-color: ${brandAlt[400]};
+const iconStyles = (
+	size: PlayButtonSize,
+	sizeOnMobile: Extract<PlayButtonSize, 'small' | 'large'>,
+) => css`
+	background-color: rgba(18, 18, 18, 0.6);
 	border-radius: 50%;
-	width: ${buttonSize(sizeOnMobile)}px;
-	height: ${buttonSize(sizeOnMobile)}px;
+	width: ${sizes[sizeOnMobile].button}px;
+	height: ${sizes[sizeOnMobile].button}px;
 	${from.tablet} {
-		width: ${buttonSize(size)}px;
-		height: ${buttonSize(size)}px;
+		width: ${sizes[size].button}px;
+		height: ${sizes[size].button}px;
 	}
 
 	display: flex;
@@ -53,27 +39,31 @@ const iconStyles = (size: PlayButtonSize, sizeOnMobile: PlayButtonSize) => css`
 
 	svg {
 		/* Visual centering */
+		fill: ${palette.neutral[100]};
 		transform: translateX(1px);
-		width: ${iconSize(sizeOnMobile)}px;
-		height: ${iconSize(sizeOnMobile)}px;
+		width: ${sizes[sizeOnMobile].icon}px;
+		height: ${sizes[sizeOnMobile].icon}px;
 		${from.tablet} {
-			width: ${iconSize(size)}px;
-			height: ${iconSize(size)}px;
+			width: ${sizes[size].icon}px;
+			height: ${sizes[size].icon}px;
 		}
 	}
 `;
 
-const getIconSizeOnDesktop = (imageSize: ImageSizeType): PlayButtonSize => {
-	if (imageSize === 'jumbo') return 'xlarge';
-	else if (imageSize === 'large') return 'large';
-	else if (imageSize === 'medium') return 'medium';
-	else if (imageSize === 'small') return 'small';
-	else return 'large';
+const getIconSizeOnDesktop = (imageSize: ImageSizeType) => {
+	switch (imageSize) {
+		case 'jumbo':
+			return 'xlarge';
+		case 'large':
+		case 'carousel':
+			return 'large';
+		case 'medium':
+		case 'small':
+			return imageSize;
+	}
 };
 
-const getIconSizeOnMobile = (
-	imagePositionOnMobile: ImagePositionType,
-): PlayButtonSize =>
+const getIconSizeOnMobile = (imagePositionOnMobile: ImagePositionType) =>
 	imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right'
 		? 'small'
 		: 'large';

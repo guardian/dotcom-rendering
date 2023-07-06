@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	brand,
 	brandAlt,
@@ -26,7 +24,7 @@ import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
-const columnsStyle = (display: ArticleDisplay) => css`
+const columnsStyle = (isImmersive: boolean) => css`
 	box-sizing: border-box;
 	max-width: none;
 	${from.desktop} {
@@ -35,13 +33,8 @@ const columnsStyle = (display: ArticleDisplay) => css`
 		position: relative;
 		margin: 0 auto;
 		display: flex;
-		border-left: ${display === ArticleDisplay.Immersive
-			? 'none'
-			: `1px solid ${brand[600]}`};
-		border-right: ${display === ArticleDisplay.Immersive
-			? 'none'
-			: `1px solid ${brand[600]}`};
-		border-top: 1px solid ${brand[600]};
+		border-left: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
+		border-right: ${isImmersive ? 'none' : `1px solid ${brand[600]}`};
 	}
 	${from.leftCol} {
 		max-width: 1140px;
@@ -214,14 +207,14 @@ const editionsSwitch = css`
 
 type Props = {
 	editionId: EditionId;
-	format: ArticleFormat;
+	isImmersive?: boolean;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
 	isInEuropeTest: boolean;
 };
 
 export const Columns = ({
-	format,
+	isImmersive = false,
 	nav,
 	editionId,
 	headerTopBarSwitch,
@@ -234,7 +227,7 @@ export const Columns = ({
 	);
 	return (
 		<ul
-			css={columnsStyle(format.display)}
+			css={columnsStyle(isImmersive)}
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>

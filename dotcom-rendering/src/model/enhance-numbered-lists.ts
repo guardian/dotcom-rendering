@@ -1,9 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type {
-	FEElement,
-	ImageBlockElement,
-	TextBlockElement,
-} from '../types/content';
+import type { FEElement, TextBlockElement } from '../types/content';
 
 const isFalseH3 = (element: FEElement): boolean => {
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
@@ -134,9 +130,8 @@ const starifyImages = (elements: FEElement[]): FEElement[] => {
 	return starified;
 };
 
-const inlineStarRatings = (elements: FEElement[]): FEElement[] => {
-	const withStars: FEElement[] = [];
-	elements.forEach((thisElement) => {
+const inlineStarRatings = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -144,40 +139,35 @@ const inlineStarRatings = (elements: FEElement[]): FEElement[] => {
 		) {
 			const rating = extractStarCount(thisElement);
 			// Inline this image
-			withStars.push({
+			return {
 				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
-			});
+			};
 		} else {
 			// Pass through
-			withStars.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withStars;
-};
 
-const makeThumbnailsRound = (elements: FEElement[]): FEElement[] => {
-	const inlined: FEElement[] = [];
-	elements.forEach((thisElement) => {
+const makeThumbnailsRound = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			thisElement.role === 'thumbnail'
 		) {
 			// Make this image round
-			inlined.push({
+			return {
 				...thisElement,
 				isAvatar: true,
-			} as ImageBlockElement);
+			};
 		} else {
 			// Pass through
-			inlined.push(thisElement);
+			return thisElement;
 		}
 	});
-	return inlined;
-};
 
 const isItemLink = (element: FEElement): boolean => {
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
@@ -197,7 +187,7 @@ const isItemLink = (element: FEElement): boolean => {
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
-const removeGlobalH2Styles = (elements: FEElement[]): FEElement[] => {
+const removeGlobalH2Styles = (elements: FEElement[]): FEElement[] =>
 	/**
 	 * Article pages come with some global style rules, one of which affects h2
 	 * tags. But for numbered lists we don't want these styles because we use
@@ -205,29 +195,26 @@ const removeGlobalH2Styles = (elements: FEElement[]): FEElement[] => {
 	 * css war, this enhancer uses the `data-ignore` attribute which is a contract
 	 * established to allow global styles to be ignored.
 	 *
-	 * All h2 tags inside an article of Design: NumberedList have this attirbute
+	 * All h2 tags inside an article of Design: NumberedList have this attribute
 	 * set.
 	 */
-	const withH2StylesIgnored: FEElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
-			withH2StylesIgnored.push({
+			return {
 				...thisElement,
 				html: thisElement.html.replace(
 					'<h2>',
 					'<h2 data-ignore="global-h2-styling">',
 				),
-			});
+			};
 		} else {
 			// Pass through
-			withH2StylesIgnored.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withH2StylesIgnored;
-};
 
 const addH3s = (elements: FEElement[]): FEElement[] => {
 	/**

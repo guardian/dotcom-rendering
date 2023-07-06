@@ -13,6 +13,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
@@ -20,6 +21,7 @@ import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
+import { MediaDuration } from '../MediaDuration';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
@@ -27,6 +29,7 @@ import { SnapCssSandbox } from '../SnapCssSandbox';
 import { StarRating } from '../StarRating/StarRating';
 import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
+import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
@@ -36,8 +39,17 @@ import { CardLink } from './components/CardLink';
 import { CardWrapper } from './components/CardWrapper';
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
+import type {
+	ImagePositionType,
+	ImageSizeType,
+} from './components/ImageWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
+
+/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size */
+export type VideoSize =
+	| 'large enough to play: at least 480px'
+	| 'too small to play: 479px or less';
 
 export type Props = {
 	linkTo: string;
@@ -58,9 +70,8 @@ export type Props = {
 	trailText?: string;
 	avatarUrl?: string;
 	showClock?: boolean;
-	mediaType?: MediaType;
-	mediaDuration?: number;
-	showMainVideo?: boolean;
+	mainMedia?: MainMedia;
+	videoSize: VideoSize;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: number;
@@ -81,19 +92,6 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
-};
-
-const getMediaType = (
-	design: ArticleDesign.Gallery | ArticleDesign.Audio | ArticleDesign.Video,
-) => {
-	switch (design) {
-		case ArticleDesign.Gallery:
-			return 'Gallery';
-		case ArticleDesign.Audio:
-			return 'Audio';
-		case ArticleDesign.Video:
-			return 'Video';
-	}
 };
 
 const StarRatingComponent = ({
@@ -133,46 +131,22 @@ const StarRatingComponent = ({
  * about the container where the card sits.
  *
  */
-const decideIfAgeShouldShow = ({
-	showLivePlayable,
-	containerPalette,
-	format,
-	showAge,
-}: {
-	showLivePlayable: boolean;
-	containerPalette?: DCRContainerPalette;
-	format: ArticleFormat;
-	showAge: boolean;
-}): boolean => {
-	if (showLivePlayable) return false;
-	// Some containers force all cards to show age. E.g., The articles in the headlines
-	// container are typically very recent so we want to display age there
-	if (showAge) return true;
-	// Palettes are time sensitive so show age if one is being used
-	if (containerPalette) return true;
-	// Liveblogs are evidently time sensitive
-	if (format.design === ArticleDesign.LiveBlog) return true;
-	// Otherwise, do not show the article age on the Card
-	return false;
-};
 
 type RenderFooter = ({
-	displayAge,
 	displayLines,
 }: {
-	displayAge: boolean;
 	displayLines: boolean;
 }) => JSX.Element;
 
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
-	displayAge,
+
 	renderFooter,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
-	displayAge: boolean;
+
 	renderFooter: RenderFooter;
 }) => {
 	if (isOpinion && !hasSublinks) {
@@ -183,7 +157,6 @@ const DecideFooter = ({
 	// For all other cases (including opinion cards that *do* have sublinks) we
 	// render a version of the footer without lines here
 	return renderFooter({
-		displayAge,
 		displayLines: false,
 	});
 	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
@@ -192,12 +165,12 @@ const DecideFooter = ({
 const CommentFooter = ({
 	hasSublinks,
 	palette,
-	displayAge,
+
 	renderFooter,
 }: {
 	hasSublinks?: boolean;
 	palette: Palette;
-	displayAge: boolean;
+
 	renderFooter: RenderFooter;
 }) => {
 	return hasSublinks ? (
@@ -208,34 +181,38 @@ const CommentFooter = ({
 		// When an opinion card has no sublinks we show the entire footer, including lines
 		// outside, along the entire bottom of the card
 		renderFooter({
-			displayAge,
 			displayLines: true,
 		})
 	);
 };
 
-const getImage = ({
+const getMedia = ({
 	imageUrl,
 	avatarUrl,
 	isCrossword,
 	slideshowImages,
+	mainMedia,
+	videoSize,
 }: {
 	imageUrl?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
-}):
-	| {
-			type: CardImageType;
-			src: string;
-			slideshowImages?: DCRSlideshowImage[];
-	  }
-	| undefined => {
-	if (slideshowImages) return { type: 'slideshow', src: '', slideshowImages };
-	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
+	mainMedia?: MainMedia;
+	videoSize: VideoSize;
+}) => {
+	if (
+		mainMedia &&
+		mainMedia.type === 'Video' &&
+		videoSize === 'large enough to play: at least 480px'
+	) {
+		return { type: 'video', mainMedia } as const;
+	}
+	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
+	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (imageUrl) {
-		const type = isCrossword ? 'crossword' : 'mainMedia';
-		return { type, src: imageUrl };
+		const type = isCrossword ? 'crossword' : 'picture';
+		return { type, imageUrl } as const;
 	}
 	return undefined;
 };
@@ -252,6 +229,14 @@ const decideSublinkPosition = (
 		return 'outer';
 	}
 	return alignment === 'vertical' ? 'inner' : 'outer';
+};
+
+const isWithinTwelveHours = (webPublicationDate: string): boolean => {
+	const timeDiffMs = Math.abs(
+		new Date().getTime() - new Date(webPublicationDate).getTime(),
+	);
+	const timeDiffHours = timeDiffMs / (1000 * 60 * 60);
+	return timeDiffHours <= 12;
 };
 
 export const Card = ({
@@ -271,8 +256,8 @@ export const Card = ({
 	trailText,
 	avatarUrl,
 	showClock,
-	mediaDuration,
-	showMainVideo,
+	mainMedia,
+	videoSize,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -284,7 +269,7 @@ export const Card = ({
 	snapData,
 	containerPalette,
 	containerType,
-	showAge = false,
+	showAge = true,
 	discussionId,
 	isDynamo,
 	isCrossword,
@@ -308,13 +293,7 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
-	const renderFooter = ({
-		displayAge,
-		displayLines,
-	}: {
-		displayAge?: boolean;
-		displayLines?: boolean;
-	}) => {
+	const renderFooter = ({ displayLines }: { displayLines?: boolean }) => {
 		if (showLivePlayable) return <></>;
 		return (
 			<CardFooter
@@ -322,7 +301,9 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					displayAge && webPublicationDate ? (
+					showAge &&
+					webPublicationDate &&
+					isWithinTwelveHours(webPublicationDate) ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
@@ -369,13 +350,6 @@ export const Card = ({
 		);
 	};
 
-	const displayAge = decideIfAgeShouldShow({
-		showLivePlayable,
-		containerPalette,
-		format,
-		showAge,
-	});
-
 	if (snapData?.embedHtml) {
 		return (
 			<SnapCssSandbox snapData={snapData}>
@@ -384,13 +358,18 @@ export const Card = ({
 		);
 	}
 
-	const image = getImage({
+	const showPlayIcon =
+		mainMedia?.type === 'Video' &&
+		videoSize === 'too small to play: 479px or less';
+
+	const media = getMedia({
 		imageUrl,
 		avatarUrl,
 		isCrossword,
 		slideshowImages,
+		mainMedia,
+		videoSize,
 	});
-
 	return (
 		<CardWrapper
 			format={format}
@@ -408,50 +387,91 @@ export const Card = ({
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				imageType={image?.type}
+				imageType={media?.type}
 			>
-				{image && (
+				{media && (
 					<ImageWrapper
 						imageSize={imageSize}
-						imageType={image.type}
+						imageType={media.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
-						showPlayIcon={showMainVideo ?? false}
+						showPlayIcon={showPlayIcon}
 					>
-						{image.type === 'slideshow' &&
-							image.slideshowImages && (
-								<Slideshow
-									images={image.slideshowImages}
-									imageSize={imageSize}
-								/>
-							)}
-						{image.type === 'avatar' && (
+						{media.type === 'slideshow' && (
+							<Slideshow
+								images={media.slideshowImages}
+								imageSize={imageSize}
+							/>
+						)}
+						{media.type === 'avatar' && (
 							<AvatarContainer
 								imageSize={imageSize}
 								imagePosition={imagePosition}
 							>
 								<Avatar
-									src={image.src}
+									src={media.avatarUrl}
 									alt={byline ?? ''}
 									containerPalette={containerPalette}
 									format={format}
 								/>
 							</AvatarContainer>
 						)}
-						{image.type === 'mainMedia' && (
-							<CardPicture
-								master={image.src}
-								imageSize={imageSize}
-								alt=""
-							/>
+						{media.type === 'video' && (
+							<div
+								data-chromatic="ignore"
+								data-component="youtube-atom"
+								css={css`
+									display: block;
+									position: relative;
+									${getZIndex('card-nested-link')}
+								`}
+							>
+								<Island>
+									<YoutubeBlockComponent
+										id={media.mainMedia.elementId}
+										elementId={media.mainMedia.elementId}
+										assetId={media.mainMedia.videoId}
+										duration={media.mainMedia.duration}
+										posterImage={media.mainMedia.images}
+										width={media.mainMedia.width}
+										height={media.mainMedia.height}
+										origin={media.mainMedia.origin}
+										mediaTitle={media.mainMedia.title}
+										expired={media.mainMedia.expired}
+										format={format}
+										isMainMedia={true}
+										hideCaption={true}
+										role="inline"
+										stickyVideos={false}
+									/>
+								</Island>
+							</div>
 						)}
-						{image.type === 'crossword' && (
-							<img src={image.src} alt="" />
+						{media.type === 'picture' && (
+							<>
+								<CardPicture
+									master={media.imageUrl}
+									imageSize={imageSize}
+									alt=""
+								/>
+								{showPlayIcon && (
+									<MediaDuration
+										mediaDuration={mainMedia.duration}
+										imagePosition={imagePosition}
+										imagePositionOnMobile={
+											imagePositionOnMobile
+										}
+									/>
+								)}
+							</>
+						)}
+						{media.type === 'crossword' && (
+							<img src={media.imageUrl} alt="" />
 						)}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
-					imageType={image?.type}
+					imageType={media?.type}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
@@ -469,7 +489,8 @@ export const Card = ({
 							sizeOnMobile={headlineSizeOnMobile}
 							showQuotes={showQuotes}
 							kickerText={
-								format.design === ArticleDesign.LiveBlog
+								format.design === ArticleDesign.LiveBlog &&
+								!kickerText
 									? 'Live'
 									: kickerText
 							}
@@ -488,17 +509,19 @@ export const Card = ({
 								cardHasImage={imageUrl !== undefined}
 							/>
 						) : null}
-						{format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ||
-						format.design === ArticleDesign.Video ? (
+						{!!mainMedia && mainMedia.type !== 'Video' && (
 							<MediaMeta
 								containerPalette={containerPalette}
 								format={format}
-								mediaType={getMediaType(format.design)}
-								mediaDuration={mediaDuration}
+								mediaType={mainMedia.type}
+								mediaDuration={
+									mainMedia.type === 'Audio'
+										? mainMedia.duration
+										: undefined
+								}
 								hasKicker={!!kickerText}
 							/>
-						) : undefined}
+						)}
 					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
@@ -508,7 +531,7 @@ export const Card = ({
 								format={format}
 								imagePosition={imagePosition}
 								imageSize={imageSize}
-								imageType={image?.type}
+								imageType={media?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
@@ -531,7 +554,6 @@ export const Card = ({
 						<DecideFooter
 							isOpinion={isOpinion}
 							hasSublinks={hasSublinks}
-							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
 						{hasSublinks && sublinkPosition === 'inner' ? (
@@ -563,7 +585,6 @@ export const Card = ({
 			{isOpinion && !isDynamo && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
-					displayAge={displayAge}
 					palette={palette}
 					renderFooter={renderFooter}
 				/>

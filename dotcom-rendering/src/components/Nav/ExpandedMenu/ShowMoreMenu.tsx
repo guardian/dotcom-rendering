@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	brandAlt,
 	brandText,
@@ -41,7 +40,7 @@ const showMoreTextStyles = css`
 	}
 `;
 
-const openExpandedMenuStyles = (display: ArticleDisplay) => css`
+const openExpandedMenuStyles = (isImmersive: boolean) => css`
 	${headline.xsmall()};
 	font-weight: 300;
 	color: ${brandText.primary};
@@ -56,7 +55,7 @@ const openExpandedMenuStyles = (display: ArticleDisplay) => css`
 	padding-right: 20px;
 	${from.desktop} {
 		display: block;
-		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '5px'};
+		padding-top: ${isImmersive ? '9px' : '5px'};
 		height: 42px;
 	}
 
@@ -69,11 +68,15 @@ const openExpandedMenuStyles = (display: ArticleDisplay) => css`
 	}
 `;
 
-export const ShowMoreMenu = ({ display }: { display: ArticleDisplay }) => (
+export const ShowMoreMenu = ({
+	isImmersive = false,
+}: {
+	isImmersive?: boolean;
+}) => (
 	<>
 		<label
 			id={showMoreButtonId}
-			css={openExpandedMenuStyles(display)}
+			css={openExpandedMenuStyles(isImmersive)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}

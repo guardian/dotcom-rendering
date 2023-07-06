@@ -1,15 +1,17 @@
 import { Hide } from '@guardian/source-react-components';
 import {
-	Card25Media25SmallHeadline,
 	Card33Media33,
 	CardDefault,
 	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
 import {
+	Card25_Card25_Card25_Card25,
 	Card25_Card75,
 	Card50_Card25_Card25,
 	Card50_Card50,
 	Card75_Card25,
+	ColumnOfCards50_Card25_Card25,
+	filterGroupedTrails,
 } from '../lib/dynamicSlices';
 import type {
 	DCRContainerPalette,
@@ -26,7 +28,6 @@ type Props = {
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
-	trails: DCRFrontCard[];
 };
 
 /* .___________.___________.___________.
@@ -86,6 +87,33 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	);
 };
 
+/* .___________.___________.___________.
+ * |___________|___________|___________|
+ */
+const Card33_Card33_Card33 = ({
+	cards,
+	containerPalette,
+	showAge,
+}: {
+	cards: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+}) => {
+	return (
+		<UL direction="row">
+			{cards.slice(0, 3).map((card) => (
+				<LI padSides={true} key={card.url} percentage="33.333%">
+					<CardDefault
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
 /* ._________________._________________.
  * |_###_____________|                 |
  * |_###_____________|       MPU       |
@@ -128,188 +156,12 @@ const ColumnOfThree50_Ad50 = ({
 	);
 };
 
-type MPUProps = {
-	groupedTrails: DCRGroupedTrails;
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	adIndex: number;
-};
-
-const MPUSlice = ({
-	groupedTrails,
-	containerPalette,
-	showAge,
-	adIndex,
-}: MPUProps) => {
-	let layout:
-		| 'noBigs'
-		| 'twoBigs'
-		| 'twoBigsFirstBoosted'
-		| 'twoBigsSecondBoosted'
-		| 'threeBigs';
-	let bigCards: DCRFrontCard[] = [];
-	let standardCards: DCRFrontCard[] = [];
-	switch (groupedTrails.big.length) {
-		case 0: {
-			standardCards = groupedTrails.standard;
-			layout = 'noBigs';
-			break;
-		}
-		case 1: {
-			// If there is only one big item a standard item is promoted such that
-			// there is always at least two
-			const promoted = groupedTrails.standard.slice(0, 1);
-			bigCards = [...groupedTrails.big, ...promoted];
-			standardCards = groupedTrails.standard.slice(1);
-			layout = 'twoBigs';
-			break;
-		}
-		case 2: {
-			bigCards = groupedTrails.big;
-			standardCards = groupedTrails.standard;
-			if (groupedTrails.big[0]?.isBoosted) {
-				layout = 'twoBigsFirstBoosted';
-			} else if (groupedTrails.big[1]?.isBoosted) {
-				layout = 'twoBigsSecondBoosted';
-			} else {
-				layout = 'twoBigs';
-			}
-			break;
-		}
-		case 3: {
-			bigCards = groupedTrails.big;
-			standardCards = groupedTrails.standard;
-			layout = 'threeBigs';
-			break;
-		}
-		default: {
-			// If there are more than three big cards, these extra bigs are demoted to
-			// standard.
-			const demoted = groupedTrails.big.slice(3);
-			standardCards = [...demoted, ...groupedTrails.standard];
-			bigCards = groupedTrails.big.slice(0, 3);
-			layout = 'threeBigs';
-		}
-	}
-
-	switch (layout) {
-		case 'noBigs': {
-			return (
-				<Card33_ColumnOfThree33_Ad33
-					cards={standardCards}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					adIndex={adIndex}
-				/>
-			);
-		}
-		case 'twoBigs': {
-			return (
-				<>
-					<Card50_Card50
-						cards={bigCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-					<ColumnOfThree50_Ad50
-						cards={standardCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-					/>
-				</>
-			);
-		}
-		case 'twoBigsFirstBoosted': {
-			return (
-				<>
-					<Card75_Card25
-						cards={bigCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-					<ColumnOfThree50_Ad50
-						cards={standardCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-					/>
-				</>
-			);
-		}
-		case 'twoBigsSecondBoosted': {
-			return (
-				<>
-					<Card25_Card75
-						cards={bigCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-					<ColumnOfThree50_Ad50
-						cards={standardCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-					/>
-				</>
-			);
-		}
-		case 'threeBigs': {
-			return (
-				<>
-					<Card50_Card25_Card25
-						cards={bigCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-					<ColumnOfThree50_Ad50
-						cards={standardCards}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						adIndex={adIndex}
-					/>
-				</>
-			);
-		}
-	}
-};
-
-type NonMPUProps = {
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	trails: DCRFrontCard[];
-};
-
-const NonMPUSlice = ({ trails, containerPalette, showAge }: NonMPUProps) => {
-	return (
-		<UL direction="row" padBottom={true}>
-			{trails.slice(0, 4).map((card, cardIndex) => {
-				return (
-					<LI
-						padSides={true}
-						percentage="25%"
-						showDivider={cardIndex > 0}
-						containerPalette={containerPalette}
-						key={card.url}
-					>
-						<Card25Media25SmallHeadline
-							trail={card}
-							containerPalette={containerPalette}
-							showAge={showAge}
-						/>
-					</LI>
-				);
-			})}
-		</UL>
-	);
-};
-
 /**
  * DynamicSlowMPU
  *
  * This container only allows big and standard cards (from groupedTrails)
  *
- * Layout is dynamic deopending on the number of big cards. You're only
+ * Layout is dynamic depending on the number of big cards. You're only
  * allowed to have 2 or 3 big cards. If you pass 1 a standard card will
  * get promoted to make two bigs. If you pass more than 3 bigs then the
  * extras will get demoted to standard.
@@ -324,20 +176,186 @@ export const DynamicSlowMPU = ({
 	showAge,
 	adIndex,
 	renderAds,
-	trails,
 }: Props) => {
-	return renderAds ? (
-		<MPUSlice
-			groupedTrails={groupedTrails}
-			containerPalette={containerPalette}
-			showAge={showAge}
-			adIndex={adIndex}
-		/>
-	) : (
-		<NonMPUSlice
-			trails={trails}
-			containerPalette={containerPalette}
-			showAge={showAge}
-		/>
+	let firstSliceLayout:
+		| undefined
+		| 'twoBigs'
+		| 'twoBigsFirstBoosted'
+		| 'twoBigsSecondBoosted'
+		| 'threeBigs';
+	let firstSliceCards: DCRFrontCard[] = [];
+	if (groupedTrails.big.length === 1) {
+		// If there is only one big item a standard item is promoted such that
+		// there is always at least two
+		const promoted = groupedTrails.standard.slice(0, 1);
+		firstSliceCards = [...groupedTrails.big, ...promoted];
+		firstSliceLayout = 'twoBigs';
+	} else if (groupedTrails.big.length === 2) {
+		firstSliceCards = groupedTrails.big.slice(0, 2);
+		if (groupedTrails.big[0]?.isBoosted) {
+			firstSliceLayout = 'twoBigsFirstBoosted';
+		} else if (groupedTrails.big[1]?.isBoosted) {
+			firstSliceLayout = 'twoBigsSecondBoosted';
+		} else {
+			firstSliceLayout = 'twoBigs';
+		}
+	} else if (groupedTrails.big.length > 2) {
+		firstSliceCards = groupedTrails.big.slice(0, 3);
+		firstSliceLayout = 'threeBigs';
+	}
+
+	// Create our object of grouped trails that doesn't include any
+	// cards used by the first slice
+	const secondSliceGroupedTrails = filterGroupedTrails({
+		groupedTrails,
+		filter: firstSliceCards,
+	});
+
+	let secondSliceLayout:
+		| 'noFirstSlice'
+		| 'standard'
+		| 'noFirstSliceNoMPU'
+		| 'noFirstSliceNoMPUThreeOrMore'
+		| 'standardNoMPU'
+		| 'standardNoMPUFourOrMore';
+
+	let secondSliceCards: DCRFrontCard[] = [];
+	const standards = [
+		// Demote any left over 'big' grouped cards
+		...secondSliceGroupedTrails.big,
+		...secondSliceGroupedTrails.standard,
+	];
+
+	if (firstSliceCards.length === 0) {
+		if (renderAds) {
+			secondSliceCards = standards;
+			secondSliceLayout = 'noFirstSlice';
+		} else {
+			if (standards.length > 2) {
+				secondSliceCards = standards.slice(0, 4);
+				secondSliceLayout = 'noFirstSliceNoMPUThreeOrMore';
+			} else {
+				secondSliceCards = standards.slice(0, 2);
+				secondSliceLayout = 'noFirstSliceNoMPU';
+			}
+		}
+	} else {
+		if (renderAds) {
+			secondSliceCards = standards;
+			secondSliceLayout = 'standard';
+		} else {
+			if (standards.length > 3) {
+				secondSliceCards = standards.slice(0, 5);
+				secondSliceLayout = 'standardNoMPUFourOrMore';
+			} else {
+				secondSliceCards = standards.slice(0, 3);
+				secondSliceLayout = 'standardNoMPU';
+			}
+		}
+	}
+
+	const FirstSlice = () => {
+		switch (firstSliceLayout) {
+			case 'twoBigs':
+				return (
+					<Card50_Card50
+						cards={firstSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+			case 'twoBigsFirstBoosted':
+				return (
+					<Card75_Card25
+						cards={firstSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+			case 'twoBigsSecondBoosted':
+				return (
+					<Card25_Card75
+						cards={firstSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+			case 'threeBigs':
+				return (
+					<Card50_Card25_Card25
+						cards={firstSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+			default:
+				return <></>;
+		}
+	};
+
+	const SecondSlice = () => {
+		switch (secondSliceLayout) {
+			// With MPU
+			case 'standard':
+				return (
+					<ColumnOfThree50_Ad50
+						cards={secondSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						adIndex={adIndex}
+					/>
+				);
+			case 'noFirstSlice':
+				return (
+					<Card33_ColumnOfThree33_Ad33
+						cards={secondSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						adIndex={adIndex}
+					/>
+				);
+			// Without MPU
+			case 'standardNoMPU':
+				return (
+					<Card33_Card33_Card33
+						cards={secondSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+
+			case 'standardNoMPUFourOrMore':
+				return (
+					<ColumnOfCards50_Card25_Card25
+						cards={secondSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+
+			case 'noFirstSliceNoMPU':
+				return (
+					<Card50_Card50
+						cards={secondSliceCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				);
+			case 'noFirstSliceNoMPUThreeOrMore':
+				return (
+					<Card25_Card25_Card25_Card25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+		}
+	};
+
+	return (
+		<>
+			<FirstSlice />
+			<SecondSlice />
+		</>
 	);
 };

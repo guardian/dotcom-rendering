@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import type { Switches } from '../types/config';
 import type { ImageBlockElement } from '../types/content';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';
@@ -9,6 +10,7 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
+	switches?: Switches;
 };
 
 const ieFallback = css`
@@ -102,10 +104,12 @@ const OneImage = ({
 	images,
 	format,
 	caption,
+	switches,
 }: {
 	images: [ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
+	switches?: Switches;
 }) => (
 	<div css={wrapper}>
 		<ImageComponent
@@ -113,6 +117,7 @@ const OneImage = ({
 			element={images[0]}
 			hideCaption={true}
 			role={images[0].role}
+			switches={switches}
 		/>
 		{!!caption && (
 			<Caption
@@ -128,10 +133,12 @@ const TwoImage = ({
 	images,
 	format,
 	caption,
+	switches,
 }: {
 	images: [ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
+	switches?: Switches;
 }) => (
 	<div css={wrapper}>
 		<SideBySideGrid>
@@ -141,6 +148,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -149,6 +157,7 @@ const TwoImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
+					switches={switches}
 				/>
 			</GridItem>
 		</SideBySideGrid>
@@ -166,10 +175,12 @@ const ThreeImage = ({
 	images,
 	format,
 	caption,
+	switches,
 }: {
 	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
 	format: ArticleFormat;
 	caption?: string;
+	switches?: Switches;
 }) => (
 	<div css={wrapper}>
 		<OneAboveTwoGrid>
@@ -179,6 +190,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -187,6 +199,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -195,6 +208,7 @@ const ThreeImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
+					switches={switches}
 				/>
 			</GridItem>
 		</OneAboveTwoGrid>
@@ -212,6 +226,7 @@ const FourImage = ({
 	images,
 	format,
 	caption,
+	switches,
 }: {
 	images: [
 		ImageBlockElement,
@@ -221,6 +236,7 @@ const FourImage = ({
 	];
 	format: ArticleFormat;
 	caption?: string;
+	switches?: Switches;
 }) => (
 	<div css={wrapper}>
 		<GridOfFour>
@@ -230,6 +246,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[0].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="second">
@@ -238,6 +255,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[1].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="third">
@@ -246,6 +264,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[2].role}
+					switches={switches}
 				/>
 			</GridItem>
 			<GridItem area="forth">
@@ -254,6 +273,7 @@ const FourImage = ({
 					format={format}
 					hideCaption={true}
 					role={images[3].role}
+					switches={switches}
 				/>
 			</GridItem>
 		</GridOfFour>
@@ -271,6 +291,7 @@ export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
+	switches,
 }: Props) => {
 	const [one, two, three, four] = images;
 
@@ -280,6 +301,7 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three, four]}
 				format={format}
 				caption={caption}
+				switches={switches}
 			/>
 		);
 	}
@@ -290,18 +312,31 @@ export const MultiImageBlockComponent = ({
 				images={[one, two, three]}
 				format={format}
 				caption={caption}
+				switches={switches}
 			/>
 		);
 	}
 
 	if (one && two) {
 		return (
-			<TwoImage images={[one, two]} format={format} caption={caption} />
+			<TwoImage
+				images={[one, two]}
+				format={format}
+				caption={caption}
+				switches={switches}
+			/>
 		);
 	}
 
 	if (one) {
-		return <OneImage images={[one]} format={format} caption={caption} />;
+		return (
+			<OneImage
+				images={[one]}
+				format={format}
+				caption={caption}
+				switches={switches}
+			/>
+		);
 	}
 
 	return null;

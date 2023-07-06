@@ -74,6 +74,15 @@ const backgroundContainerLeftColumn = (
 	}
 };
 
+const backgroundContainerOuter = (
+	containerPalette: Extract<DCRContainerPalette, 'MediaPalette'>,
+): string => {
+	switch (containerPalette) {
+		case 'MediaPalette':
+			return neutral[100];
+	}
+};
+
 const backgroundContainerSummary = (
 	containerPalette: Extract<DCRContainerPalette, 'Branded'>,
 ): string => {
@@ -430,7 +439,7 @@ const borderLines = (containerPalette: DCRContainerPalette): string => {
 		case 'MediaPalette':
 			return neutral[46];
 		case 'PodcastPalette':
-			return neutral[100];
+			return neutral[86];
 	}
 };
 
@@ -545,6 +554,7 @@ export const decideContainerOverrides = (
 			},
 			background: {
 				container: backgroundContainer(containerPalette),
+				containerOuter: backgroundContainerOuter(containerPalette),
 				carouselDot: backgroundCarouselDot(containerPalette),
 				carouselArrow: backgroundCarouselArrow(containerPalette),
 				carouselArrowHover:

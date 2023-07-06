@@ -1,7 +1,6 @@
 import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
+import { isServer } from '../../lib/isServer';
 import type { CurrentSignInGateABTest } from './types';
-
-const isServer = typeof window === 'undefined';
 
 export type ComponentEventParams = {
 	componentType: string;
@@ -10,7 +9,6 @@ export type ComponentEventParams = {
 	abTestVariant: string;
 	viewId?: string;
 	browserId?: string;
-	visitId?: string;
 };
 
 const ophan = isServer ? undefined : window.guardian.ophan;

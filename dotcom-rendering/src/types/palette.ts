@@ -95,6 +95,7 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		lightboxDivider: Colour;
 		messageForm: Colour;
 	};
 	fill: {
@@ -175,6 +176,7 @@ export type ContainerOverrides = {
 	background: {
 		container: Colour;
 		containerLeftColumn?: Colour;
+		containerOuter?: Colour;
 		containerSummary?: Colour;
 		card?: Colour;
 		carouselDot: Colour;

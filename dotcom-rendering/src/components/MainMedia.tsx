@@ -65,7 +65,6 @@ type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
 	hideCaption?: boolean;
-	adTargeting?: AdTargeting;
 	starRating?: number;
 	host?: string;
 	pageId: string;
@@ -80,7 +79,6 @@ export const MainMedia = ({
 	elements,
 	format,
 	hideCaption,
-	adTargeting,
 	starRating,
 	host,
 	pageId,
@@ -98,7 +96,6 @@ export const MainMedia = ({
 					key={index}
 					format={format}
 					element={element}
-					adTargeting={adTargeting}
 					ajaxUrl={ajaxUrl}
 					host={host}
 					index={index}

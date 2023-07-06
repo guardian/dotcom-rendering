@@ -64,10 +64,6 @@ export const VideoAsSecond = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -113,10 +109,6 @@ export const Title = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -183,10 +175,6 @@ export const Video = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -228,10 +216,6 @@ export const RichLink = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -264,10 +248,6 @@ export const FirstImage = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -326,10 +306,6 @@ export const ImageRoles = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -377,10 +353,6 @@ export const Thumbnail = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -414,10 +386,6 @@ export const ImageAndTitle = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -447,10 +415,6 @@ export const Updated = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -484,10 +448,6 @@ export const Contributor = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -519,10 +479,6 @@ export const NoAvatar = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.Opinion,
 					design: ArticleDesign.LiveBlog,
@@ -557,10 +513,6 @@ export const TitleAndContributor = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{
-					customParams: { sens: 'f', urlkw: [] },
-					adUnit: '',
-				}}
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.LiveBlog,

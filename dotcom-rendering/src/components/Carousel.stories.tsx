@@ -49,7 +49,7 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.LiveBlog,
 		},
-		webPublicationDate: '2021-02-17T12:45:05.000Z',
+		webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 		headline:
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		shortUrl: 'https://gu.com/p/gekj6',
@@ -68,7 +68,7 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		webPublicationDate: '2021-02-17T10:03:02.000Z',
+		webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 		headline:
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		shortUrl: 'https://gu.com/p/gey5n',

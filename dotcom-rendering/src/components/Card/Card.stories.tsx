@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
+import type { MainMedia } from '../../types/mainMedia';
 import { Section } from '../Section';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -25,12 +26,13 @@ const basicCardProps: CardProps = {
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	headlineSize: 'medium',
 	kickerText: '',
-	webPublicationDate: '2019-11-11T09:45:30.000Z',
+	webPublicationDate: new Date(Date.now() - 60 * 60 * 1000).toString(),
 	imageUrl:
 		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	imagePosition: 'top',
 	showAge: true,
 	isExternalLink: false,
+	videoSize: 'large enough to play: at least 480px',
 };
 
 const aBasicLink = {
@@ -41,6 +43,31 @@ const aBasicLink = {
 		design: ArticleDesign.Standard,
 		theme: ArticlePillar.News,
 	},
+};
+
+const mainVideo: MainMedia = {
+	type: 'Video',
+	elementId: '1234-abcdef-09876-xyz',
+	videoId: '8M_yH-e9cq8',
+	title: '’I care, but I don’t care’: Life after the Queen’s death | Anywhere but Westminster',
+	expired: false,
+	duration: 200,
+	images: [480, 640, 960, 1024, 1200].map((width) => ({
+		url: `https://i.guim.co.uk/img/media/2eb01d138eb8fba6e59ce7589a60e3ff984f6a7a/0_0_1920_1080/1920.jpg?width=${width}&quality=45&dpr=2&s=none`,
+		width,
+	})),
+	width: 480,
+	height: 288,
+	origin: 'The Guardian',
+};
+
+const mainAudio: MainMedia = {
+	type: 'Audio',
+	duration: 24,
+};
+
+const mainGallery: MainMedia = {
+	type: 'Gallery',
 };
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -245,8 +272,7 @@ export const WithMediaType = () => {
 						design: ArticleDesign.Video,
 						theme: ArticlePillar.Sport,
 					}}
-					mediaType="Video"
-					mediaDuration={30}
+					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -258,8 +284,7 @@ export const WithMediaType = () => {
 						design: ArticleDesign.Audio,
 						theme: ArticlePillar.Sport,
 					}}
-					mediaType="Audio"
-					mediaDuration={90}
+					mainMedia={mainAudio}
 					headlineText="Audio"
 				/>
 			</CardWrapper>
@@ -271,7 +296,7 @@ export const WithMediaType = () => {
 						design: ArticleDesign.Gallery,
 						theme: ArticlePillar.Sport,
 					}}
-					mediaType="Gallery"
+					mainMedia={mainGallery}
 					headlineText="Gallery"
 				/>
 			</CardWrapper>
@@ -290,8 +315,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Video,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mediaType="Video"
-					mediaDuration={30}
+					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
 				/>
 			</CardWrapper>
@@ -303,8 +327,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Audio,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mediaType="Audio"
-					mediaDuration={90}
+					mainMedia={{ ...mainAudio, duration: 90 }}
 					headlineText="Audio"
 				/>
 			</CardWrapper>
@@ -316,7 +339,7 @@ export const WithMediaTypeSpecialReportAlt = () => {
 						design: ArticleDesign.Gallery,
 						theme: ArticleSpecial.SpecialReportAlt,
 					}}
-					mediaType="Gallery"
+					mainMedia={mainGallery}
 					headlineText="Gallery"
 				/>
 			</CardWrapper>
@@ -416,7 +439,6 @@ export const WithPulsingDotSpecialReportAlt = () => {
 					theme: ArticleSpecial.SpecialReportAlt,
 				}}
 				showPulsingDot={true}
-				kickerText="Pulsing Dot"
 			/>
 		</CardWrapper>
 	);
@@ -918,9 +940,7 @@ export const WhenVideoWithPlayButton = () => {
 						imagePosition="top"
 						imageSize="jumbo"
 						imagePositionOnMobile="top"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
 					/>
 				</LI>
 			</UL>
@@ -936,9 +956,7 @@ export const WhenVideoWithPlayButton = () => {
 						imagePosition="right"
 						imageSize="large"
 						imagePositionOnMobile="top"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
 					/>
 				</LI>
 				<LI percentage={'25%'} padSides={true} showDivider={true}>
@@ -950,9 +968,8 @@ export const WhenVideoWithPlayButton = () => {
 							theme: ArticlePillar.News,
 						}}
 						imagePosition="top"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
+						videoSize="too small to play: 479px or less"
 					/>
 				</LI>
 			</UL>
@@ -968,9 +985,7 @@ export const WhenVideoWithPlayButton = () => {
 						imagePosition="top"
 						imageSize="medium"
 						imagePositionOnMobile="bottom"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
 					/>
 				</LI>
 				<LI percentage="50%">
@@ -984,9 +999,8 @@ export const WhenVideoWithPlayButton = () => {
 									theme: ArticlePillar.News,
 								}}
 								imagePosition="left"
-								mediaDuration={200}
-								mediaType="Video"
-								showMainVideo={true}
+								mainMedia={mainVideo}
+								videoSize="too small to play: 479px or less"
 							/>
 						</LI>
 						<LI padSides={true}>
@@ -998,9 +1012,8 @@ export const WhenVideoWithPlayButton = () => {
 									theme: ArticlePillar.News,
 								}}
 								imagePosition="right"
-								mediaDuration={200}
-								mediaType="Video"
-								showMainVideo={true}
+								mainMedia={mainVideo}
+								videoSize="too small to play: 479px or less"
 							/>
 						</LI>
 
@@ -1013,9 +1026,8 @@ export const WhenVideoWithPlayButton = () => {
 									theme: ArticlePillar.News,
 								}}
 								imagePosition="right"
-								mediaDuration={200}
-								mediaType="Video"
-								showMainVideo={true}
+								mainMedia={mainVideo}
+								videoSize="too small to play: 479px or less"
 							/>
 						</LI>
 					</UL>
@@ -1034,9 +1046,7 @@ export const WhenVideoWithPlayButton = () => {
 						imagePosition="right"
 						imageSize="large"
 						imagePositionOnMobile="top"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
 					/>
 				</LI>
 				<LI percentage={'33.333%'} padSides={true} showDivider={true}>
@@ -1050,9 +1060,7 @@ export const WhenVideoWithPlayButton = () => {
 						imagePosition="top"
 						imagePositionOnMobile="left"
 						imageSize="medium"
-						mediaDuration={200}
-						mediaType="Video"
-						showMainVideo={true}
+						mainMedia={mainVideo}
 					/>
 				</LI>
 			</UL>
