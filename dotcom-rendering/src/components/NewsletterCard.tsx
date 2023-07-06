@@ -114,7 +114,7 @@ export const NewsletterCard = ({
 		submitComponentEvent(
 			{
 				component: {
-					componentType: 'NEWSLETTER_SUBSCRIPTION',
+					componentType: 'CONTAINER_CARD',
 					id: `DCR NewsletterCard ${newsletter.identityName}`,
 				},
 				action: 'VIEW',
