@@ -1,9 +1,9 @@
 import { ArticlePillar } from '@guardian/libs';
 import { useState } from 'react';
-import { FilterOptions } from '../../discussionTypes';
+import type { FilterOptions } from '../../discussionTypes';
 import { Filters } from './Filters';
 
-export default { title: 'Filters' };
+export default { title: 'Discussion/Filters' };
 
 export const Default = () => {
 	const [filters, setFilters] = useState<FilterOptions>({

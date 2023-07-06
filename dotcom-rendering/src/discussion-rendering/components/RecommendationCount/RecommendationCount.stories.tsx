@@ -1,6 +1,6 @@
 import { RecommendationCount } from './RecommendationCount';
 
-export default { title: 'RecommendationCount' };
+export default { title: 'Discussion/RecommendationCount' };
 
 export const NeverRecomended = () => (
 	<RecommendationCount

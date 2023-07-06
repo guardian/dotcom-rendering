@@ -8,7 +8,6 @@ import type {
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
-	UserProfile,
 } from '../discussionTypes';
 
 const options = {
@@ -128,20 +127,6 @@ export const preview = (body: string): Promise<string> => {
 			.then((json) => json.commentBody)
 			.catch((error) => console.error(`Error fetching ${url}`, error))
 	);
-};
-
-export const getProfile = (): Promise<UserProfile> => {
-	const url =
-		joinUrl(options.baseUrl, 'profile/me') + objAsParams(defaultParams);
-
-	return fetch(url, {
-		credentials: 'include',
-		headers: {
-			...options.headers,
-		},
-	})
-		.then((resp) => resp.json())
-		.catch((error) => console.error(`Error fetching ${url}`, error));
 };
 
 export const comment = (
