@@ -141,9 +141,6 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-checked') ??
 					'remove from list';
 				button.setAttribute('aria-label', ariaLabelText);
-				reportTrackingEvent('ManyNewsletterSignUp', 'add-newsletter', {
-					newsletterId: id,
-				});
 			} else {
 				setNewslettersToSignUpFor([
 					...newslettersToSignUpFor.slice(0, index),
@@ -154,9 +151,6 @@ export const ManyNewsletterSignUp = ({
 					button.getAttribute('data-aria-label-when-unchecked') ??
 					'add to list';
 				button.setAttribute('aria-label', ariaLabelText);
-				reportTrackingEvent('ManyNewsletterSignUp', 'remove-newsletter', {
-					newsletterId: id,
-				});
 			}
 		},
 		[newslettersToSignUpFor, status],
@@ -178,7 +172,6 @@ export const ManyNewsletterSignUp = ({
 		});
 
 		setNewslettersToSignUpFor([]);
-		reportTrackingEvent('ManyNewsletterSignUp', 'remove-all-newsletters');
 	}, [status]);
 
 	useEffect(() => {
