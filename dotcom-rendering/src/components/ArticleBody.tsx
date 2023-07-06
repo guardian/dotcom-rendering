@@ -20,7 +20,6 @@ type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
 	pinnedPost?: Block;
-	adTargeting: AdTargeting;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -123,7 +122,6 @@ export const ArticleBody = ({
 	format,
 	blocks,
 	pinnedPost,
-	adTargeting,
 	host,
 	pageId,
 	webTitle,
@@ -183,7 +181,6 @@ export const ArticleBody = ({
 					format={format}
 					blocks={blocks}
 					pinnedPost={pinnedPost}
-					adTargeting={adTargeting}
 					host={host}
 					pageId={pageId}
 					webTitle={webTitle}
@@ -239,7 +236,6 @@ export const ArticleBody = ({
 				<ArticleRenderer
 					format={format}
 					elements={blocks[0] ? blocks[0].elements : []}
-					adTargeting={adTargeting}
 					host={host}
 					pageId={pageId}
 					webTitle={webTitle}

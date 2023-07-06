@@ -1,4 +1,5 @@
 import type { DCRFrontCard } from '../types/front';
+import type { GroupedTrails } from '../types/tagFront';
 
 /**
  * The number of trails per day required (on average) for trails to be
@@ -13,16 +14,6 @@ const MinimumPerDayPopOutFrequency = 2;
 interface TrailAndDate {
 	trail: DCRFrontCard;
 	date: Date;
-}
-
-/**
- * Represents a set of trails grouped by their year, month & optionally day of publication.
- */
-export interface GroupedTrails {
-	year: number;
-	month: number;
-	day: number | undefined;
-	trails: DCRFrontCard[];
 }
 
 /**

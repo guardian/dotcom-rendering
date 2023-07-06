@@ -10,8 +10,10 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
+	FEMediaAtoms,
 	FESupportingContent,
 } from '../types/front';
+import type { MainMedia } from '../types/mainMedia';
 import type { FETagType, TagType } from '../types/tag';
 import { enhanceSnaps } from './enhanceSnaps';
 
@@ -87,13 +89,14 @@ const enhanceSupportingContent = (
 		const supportingContentIsLive =
 			subLink.format?.design === 'LiveBlogDesign';
 
+		const kickerText = subLink.header?.kicker?.item?.properties.kickerText;
+
 		return {
 			format: presentationFormat,
 			headline: subLink.header?.headline ?? '',
 			url: subLink.properties.href ?? subLink.header?.url,
-			kickerText: supportingContentIsLive
-				? 'Live'
-				: subLink.header?.kicker?.item?.properties.kickerText,
+			kickerText:
+				supportingContentIsLive && !kickerText ? 'Live' : kickerText,
 		};
 	});
 };
@@ -121,19 +124,6 @@ const decideImage = (trail: FEFrontCard) => {
 	}
 
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
-};
-
-const decideMediaType = (format: ArticleFormat): MediaType | undefined => {
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-			return 'Gallery';
-		case ArticleDesign.Video:
-			return 'Video';
-		case ArticleDesign.Audio:
-			return 'Audio';
-		default:
-			return undefined;
-	}
 };
 
 const decideKicker = (
@@ -187,6 +177,60 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 			bylineLargeImageUrl: contributorLargeImagePath,
 		};
 	});
+};
+
+/**
+ * While the first Media Atom is *not* guaranteed to be the main media,
+ * it *happens to be* correct in the majority of cases.
+ * @see https://github.com/guardian/frontend/pull/26247 for inspiration
+ */
+const decideMedia = (
+	format: ArticleFormat,
+	mediaAtom?: FEMediaAtoms,
+): MainMedia | undefined => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return { type: 'Gallery' };
+
+		case ArticleDesign.Audio:
+			return {
+				type: 'Audio',
+				duration: mediaAtom?.duration ?? 0,
+			};
+
+		case ArticleDesign.Video: {
+			if (mediaAtom) {
+				const asset = mediaAtom.assets.find(
+					({ version }) => version === mediaAtom.activeVersion,
+				);
+				if (asset?.platform === 'Youtube') {
+					return {
+						type: 'Video',
+						elementId: mediaAtom.id,
+						videoId: asset.id,
+						duration: mediaAtom.duration ?? 0,
+						title: mediaAtom.title,
+						// Size fixed to a 5:3 ratio
+						width: 500,
+						height: 300,
+						origin: mediaAtom.source ?? 'Unknown origin',
+						expired: !!mediaAtom.expired,
+						images:
+							mediaAtom.posterImage?.allImages.map(
+								({ url, fields: { width } }) => ({
+									url,
+									width: Number(width),
+								}),
+							) ?? [],
+					};
+				}
+			}
+			return undefined;
+		}
+
+		default:
+			return undefined;
+	}
 };
 
 export const enhanceCards = (
@@ -284,11 +328,10 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
-			mediaType: decideMediaType(format),
-			mediaDuration:
-				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
-					?.duration,
-			showMainVideo: faciaCard.properties.showMainVideo,
+			mainMedia: decideMedia(
+				format,
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
+			),
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,

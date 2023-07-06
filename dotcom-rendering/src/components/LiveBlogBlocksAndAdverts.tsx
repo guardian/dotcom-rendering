@@ -9,7 +9,6 @@ import { LiveBlock } from './LiveBlock';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
-	adTargeting: AdTargeting;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -26,7 +25,6 @@ export const LiveBlogBlocksAndAdverts = ({
 	format,
 	blocks,
 	pinnedPost,
-	adTargeting,
 	host,
 	pageId,
 	webTitle,
@@ -47,7 +45,6 @@ export const LiveBlogBlocksAndAdverts = ({
 						block={block}
 						pageId={pageId}
 						webTitle={webTitle}
-						adTargeting={adTargeting}
 						host={host}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={isLiveUpdate}
@@ -93,7 +90,6 @@ export const LiveBlogBlocksAndAdverts = ({
 							block={block}
 							pageId={pageId}
 							webTitle={webTitle}
-							adTargeting={adTargeting}
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}

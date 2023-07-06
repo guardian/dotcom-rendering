@@ -27,7 +27,6 @@ const adStylesDynamic = css`
 type Props = {
 	format: ArticleFormat;
 	elements: FEElement[];
-	adTargeting?: AdTargeting;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -49,7 +48,6 @@ type Props = {
 export const ArticleRenderer = ({
 	format,
 	elements,
-	adTargeting,
 	host,
 	pageId,
 	webTitle,
@@ -74,7 +72,6 @@ export const ArticleRenderer = ({
 				key={index}
 				format={format}
 				element={element}
-				adTargeting={adTargeting}
 				ajaxUrl={ajaxUrl}
 				host={host}
 				index={index}

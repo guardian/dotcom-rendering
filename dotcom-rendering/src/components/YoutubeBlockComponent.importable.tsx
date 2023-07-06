@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../client/ga/ga';
 import { record } from '../client/ophan/ophan';
 import { useAB } from '../lib/useAB';
+import { useAdTargeting } from '../lib/useAdTargeting';
 import type { RoleType } from '../types/content';
 import { Caption } from './Caption';
 
@@ -25,7 +26,6 @@ type Props = {
 		url: string;
 		width: number;
 	}[];
-	adTargeting?: AdTargeting;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -80,10 +80,9 @@ export const YoutubeBlockComponent = ({
 	format,
 	hideCaption,
 	overrideImage,
-	posterImage,
+	posterImage = [],
 	expired,
 	role,
-	adTargeting,
 	isMainMedia,
 	height = 259,
 	width = 460,
@@ -94,6 +93,8 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
+	const adTargeting = useAdTargeting(duration);
 
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
@@ -201,7 +202,7 @@ export const YoutubeBlockComponent = ({
 						: undefined
 				}
 				posterImage={
-					posterImage
+					posterImage.length > 0
 						? [
 								{
 									srcSet: posterImage.map((img) => ({

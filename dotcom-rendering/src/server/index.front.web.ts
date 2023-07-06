@@ -7,6 +7,7 @@ import {
 	extractTrendingTopicsFomFront,
 } from '../model/extractTrendingTopics';
 import { groupTrailsByDates } from '../model/groupTrailsByDates';
+import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails';
 import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
 import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
 import { recordTypeAndPlatform } from '../server/lib/logging-store';
@@ -54,13 +55,17 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	});
 	const speed = getSpeedFromTrails(data.contents);
 
+	const groupedTrails = groupTrailsByDates(
+		enhancedCards,
+		speed === 'slow' || data.forceDay,
+	);
+
 	return {
 		...data,
 		tags: data.tags.tags,
-		groupedTrails: groupTrailsByDates(
-			enhancedCards,
-			speed === 'slow' || data.forceDay,
-		),
+		groupedTrails: data.isAdFreeUser
+			? groupedTrails
+			: injectMpuIntoGroupedTrails(groupedTrails, speed),
 		speed,
 		// Pagination information comes from the first tag
 		pagination:

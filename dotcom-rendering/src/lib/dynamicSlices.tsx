@@ -15,6 +15,7 @@ import {
 	Card50Media50Tall,
 	Card75Media50Left,
 	Card75Media50Right,
+	CardDefaultMedia,
 } from './cardWrappers';
 
 /**
@@ -232,6 +233,96 @@ export const Card100PictureTop = ({
 					/>
 				</LI>
 			))}
+		</UL>
+	);
+};
+
+export const Card25_Card25_Card25_Card25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: DCRFrontCard[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (cards.length < 4) return null;
+
+	const bigs = cards.slice(0, 4);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			{bigs.map((card, cardIndex) => {
+				return (
+					<LI
+						key={card.url}
+						percentage={`25%`}
+						padSides={true}
+						showDivider={cardIndex !== 0}
+						containerPalette={containerPalette}
+					>
+						<Card25Media25
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+						/>
+					</LI>
+				);
+			})}
+		</UL>
+	);
+};
+
+export const ColumnOfCards50_Card25_Card25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: DCRFrontCard[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	const bigs = cards.slice(0, 2).reverse();
+	const remaining = cards.slice(2);
+
+	return (
+		<UL direction="row-reverse">
+			{bigs.map((big) => {
+				return (
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						containerPalette={containerPalette}
+						key={big.url}
+					>
+						<Card25Media25Tall
+							trail={big}
+							showAge={showAge}
+							containerPalette={containerPalette}
+						/>
+					</LI>
+				);
+			})}
+			<LI percentage="50%">
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((card) => {
+						return (
+							<LI
+								percentage="100%"
+								key={card.url}
+								padSides={true}
+							>
+								<CardDefaultMedia
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
 		</UL>
 	);
 };

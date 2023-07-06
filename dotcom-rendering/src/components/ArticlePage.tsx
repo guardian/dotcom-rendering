@@ -3,6 +3,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { DecideLayout } from '../layouts/DecideLayout';
+import { buildAdTargeting } from '../lib/ad-targeting';
 import { filterABTestSwitches } from '../model/enhance-switches';
 import type { NavType } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
@@ -19,6 +20,7 @@ import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SetAdTargeting } from './SetAdTargeting.importable';
 import { SkipTo } from './SkipTo';
 
 interface BaseProps {
@@ -42,6 +44,16 @@ interface AppProps extends BaseProps {
  * */
 export const ArticlePage = (props: WebProps | AppProps) => {
 	const { article, format, renderingTarget } = props;
+
+	const adTargeting = buildAdTargeting({
+		isAdFreeUser: article.isAdFreeUser,
+		isSensitive: article.config.isSensitive,
+		edition: article.config.edition,
+		section: article.config.section,
+		sharedAdTargeting: article.config.sharedAdTargeting,
+		adUnit: article.config.adUnit,
+	});
+
 	return (
 		<StrictMode>
 			<Global
@@ -121,6 +133,9 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 							pageIsSensitive={article.config.isSensitive}
 							isDev={!!article.config.isDev}
 						/>
+					</Island>
+					<Island clientOnly={true}>
+						<SetAdTargeting adTargeting={adTargeting} />
 					</Island>
 				</>
 			)}

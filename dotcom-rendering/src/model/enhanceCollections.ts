@@ -72,7 +72,8 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				allCardsHaveBranding ? allBranding : [],
+				// We only try to use branded badge for paid content containers
+				isPaidContent && allCardsHaveBranding ? allBranding : [],
 				collection.config.href,
 			),
 			grouped: groupCards(

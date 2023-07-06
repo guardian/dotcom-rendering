@@ -9,6 +9,7 @@ const getLinkType = (
 	cardStyle?: FEFrontCardStyle,
 ): RichLinkCardType => {
 	if (cardStyle === 'ExternalLink') return 'external';
+	if (cardStyle === 'Feature') return 'feature';
 
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
