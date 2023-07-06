@@ -345,6 +345,7 @@ export const renderElement = ({
 					starRating={starRating ?? element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
+					switches={switches}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -446,6 +447,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+					switches={switches}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':

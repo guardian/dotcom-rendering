@@ -8,6 +8,8 @@ import type { RoleType } from '../types/content';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
+type Orientation = 'portrait' | 'landscape';
+
 type Props = {
 	role: RoleType;
 	format: ArticleFormat;
@@ -17,6 +19,8 @@ type Props = {
 	width: string;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
+	isLightbox?: boolean;
+	orientation?: Orientation;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -25,9 +29,9 @@ export type ImageWidthType = { breakpoint: number; width: number };
  * All business logic for image sizing is contained in this one function. This
  * is the source of truth.
  *
- * Based on image role, if it's main media or not and the format of the article
- * it is in, this function decides the width the image should have at different
- * breakpoints.
+ * Based on image role, if it's main media or not, if we're in a lightbox or not
+ * and the format of the article it is in, this function decides the width the
+ * image should have at different breakpoints.
  *
  * Previously, this logic was set [in this Frontend file](https://github.com/guardian/frontend/blob/oliver/immersives-for-all/common/app/layout/ContentWidths.scala)
  *
@@ -39,11 +43,41 @@ const decideImageWidths = ({
 	role,
 	isMainMedia,
 	format,
+	isLightbox,
+	orientation,
 }: {
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
+	isLightbox: boolean;
+	orientation: Orientation;
 }): [ImageWidthType, ...ImageWidthType[]] => {
+	if (isLightbox) {
+		switch (orientation) {
+			case 'portrait':
+				return [
+					{ breakpoint: breakpoints.mobile, width: 480 },
+					{ breakpoint: breakpoints.mobileLandscape, width: 480 },
+					{ breakpoint: breakpoints.phablet, width: 480 },
+					{ breakpoint: breakpoints.tablet, width: 660 },
+					{ breakpoint: breakpoints.desktop, width: 740 },
+					{ breakpoint: breakpoints.leftCol, width: 980 },
+					{ breakpoint: breakpoints.wide, width: 1140 },
+				];
+
+			case 'landscape':
+			default:
+				return [
+					{ breakpoint: breakpoints.mobile, width: 480 },
+					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+					{ breakpoint: breakpoints.phablet, width: 740 },
+					{ breakpoint: breakpoints.tablet, width: 980 },
+					{ breakpoint: breakpoints.desktop, width: 1140 },
+					{ breakpoint: breakpoints.leftCol, width: 1300 },
+					{ breakpoint: breakpoints.wide, width: 1900 },
+				];
+		}
+	}
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
@@ -207,13 +241,20 @@ const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 };
 
 /**
- * Used on `picture` and `img` to prevent having a line-height,
- * as these elements are which are `inline` by default.
+ * Used on `picture` and `img` to prevent them having a line-height,
+ * as these are `inline` by default and only inline elements can have
+ * line-height.
+ *
+ * We use flex for lightbox images because this ensures space is
+ * reserved for the image as it loads
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
  */
 const block = css`
 	display: block;
+`;
+const flex = css`
+	display: flex;
 `;
 
 type ImageSource = {
@@ -299,10 +340,18 @@ export const Picture = ({
 	width,
 	isMainMedia = false,
 	isLazy = true,
+	isLightbox = false,
+	orientation = 'landscape',
 }: Props) => {
 	const sources = generateSources(
 		master,
-		decideImageWidths({ role, format, isMainMedia }),
+		decideImageWidths({
+			role,
+			format,
+			isMainMedia,
+			isLightbox,
+			orientation,
+		}),
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
@@ -328,7 +377,7 @@ export const Picture = ({
 	const fallbackSource = getFallbackSource(sources);
 
 	return (
-		<picture css={block}>
+		<picture css={isLightbox ? flex : block}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -365,7 +414,7 @@ export const Picture = ({
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
-				css={block}
+				css={isLightbox ? flex : block}
 			/>
 		</picture>
 	);

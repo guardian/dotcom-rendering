@@ -120,6 +120,26 @@ const constructMultiImageElement = (
 	};
 };
 
+export const addLightboxData = (elements: FEElement[]): FEElement[] => {
+	const withLightboxData: FEElement[] = [];
+	elements.forEach((thisElement, i) => {
+		if (isImage(thisElement)) {
+			// Copy caption and credit
+			withLightboxData.push({
+				...thisElement,
+				lightbox: {
+					caption: thisElement.data.caption,
+					credit: thisElement.data.credit,
+				},
+			});
+		} else {
+			// Pass through
+			withLightboxData.push(thisElement);
+		}
+	});
+	return withLightboxData;
+};
+
 const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
 	const withMultiImageElements: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
@@ -292,6 +312,20 @@ class Enhancer {
 	}
 
 	/**
+	 * To support photo essays and multi image elements, some images have their captions
+	 * and credit values remmoved. For example, when we might have two iamges side by side
+	 * we want to display a single caption for both so we remove each images own caption
+	 * and use the ul/li trick to render a new, special caption. (See `stripCaption`)
+	 *
+	 * But for lightbox we still want to show the original caption so we copy it into a new
+	 * property here to preserve it.
+	 */
+	addLightboxData() {
+		this.elements = addLightboxData(this.elements);
+		return this;
+	}
+
+	/**
 	 * Photo essays by convention have all image captions removed and rely completely on
 	 * special captions set using the `ul`/`li` trick
 	 */
@@ -345,6 +379,7 @@ class Enhancer {
 const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
 	if (isPhotoEssay) {
 		return new Enhancer(elements)
+			.addLightboxData()
 			.stripCaptions()
 			.removeCredit()
 			.addMultiImageElements()
@@ -355,6 +390,7 @@ const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
 
 	return (
 		new Enhancer(elements)
+			.addLightboxData()
 			// Replace pairs of halfWidth images with MultiImageBlockElements
 			.addMultiImageElements()
 			// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption

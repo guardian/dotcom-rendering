@@ -95,6 +95,7 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		lightboxDivider: Colour;
 		messageForm: Colour;
 	};
 	fill: {

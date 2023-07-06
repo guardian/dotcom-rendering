@@ -14,6 +14,9 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { LightboxHash } from './LightboxHash.importable';
+import { LightboxJavascript } from './LightboxJavascript.importable';
+import { LightboxLayout } from './LightboxLayout';
 import { Metrics } from './Metrics.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
@@ -67,6 +70,23 @@ export const ArticlePage = (props: WebProps | AppProps) => {
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
+			<SkipTo id="navigation" label="Skip to navigation" />
+			{article.config.switches.lightbox && article.imagesForLightbox && (
+				<>
+					<LightboxLayout
+						imageCount={article.imagesForLightbox.length}
+					/>
+					<Island clientOnly={true}>
+						<LightboxHash />
+					</Island>
+					<Island clientOnly={true} deferUntil="hash">
+						<LightboxJavascript
+							format={format}
+							images={article.imagesForLightbox}
+						/>
+					</Island>
+				</>
+			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
