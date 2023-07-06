@@ -114,6 +114,7 @@ export const decideAdSlot = (
 const decideLeftContent = (
 	front: DCRFrontType,
 	collection: DCRCollectionType,
+	hasPageSkin: boolean,
 ) => {
 	// show CPScott?
 	if (
@@ -130,7 +131,8 @@ const decideLeftContent = (
 			front.config.pageId,
 		) &&
 		// based on https://github.com/guardian/frontend/blob/473aafd168fec7f2a578a52c8e84982e3ec10fea/common/app/views/support/GetClasses.scala#L107
-		collection.displayName.toLowerCase() === 'headlines'
+		collection.displayName.toLowerCase() === 'headlines' &&
+		!hasPageSkin
 	) {
 		return (
 			<Island clientOnly={true} deferUntil={'idle'}>
@@ -571,6 +573,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								leftContent={decideLeftContent(
 									front,
 									collection,
+									hasPageSkin,
 								)}
 								badge={collection.badge}
 								sectionId={ophanName}
