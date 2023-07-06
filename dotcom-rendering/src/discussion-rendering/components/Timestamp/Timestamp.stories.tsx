@@ -1,6 +1,6 @@
 import { Timestamp } from './Timestamp';
 
-export default { component: Timestamp, title: 'Timestamp' };
+export default { component: Timestamp, title: 'Discussion/Timestamp' };
 
 // Date is mocked to "Fri March 27 2020 12:00:00 GMT+0000 (Greenwich Mean Time)" in config
 

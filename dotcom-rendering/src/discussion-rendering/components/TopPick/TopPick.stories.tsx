@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { TopPick } from './TopPick';
 
-export default { component: TopPick, title: 'TopPick' };
+export default { component: TopPick, title: 'Discussion/TopPick' };
 
 const comment: CommentType = {
 	id: 25488498,

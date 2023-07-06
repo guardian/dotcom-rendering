@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { AbuseReportForm } from './AbuseReportForm';
 
-export default { title: 'Abuse Report Form' };
+export default { title: 'Discussion/Abuse Report Form' };
 
 const wrapperStyles = css`
 	padding: 20px;
