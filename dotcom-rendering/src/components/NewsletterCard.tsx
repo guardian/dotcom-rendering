@@ -40,8 +40,6 @@ const groupItemStyle = css`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	margin-right: ${space[3]}px;
-	margin-bottom: ${space[3]}px;
 	min-height: 215px;
 	background-color: ${palette.neutral[97]};
 `;
