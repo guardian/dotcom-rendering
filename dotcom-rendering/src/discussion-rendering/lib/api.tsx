@@ -1,5 +1,10 @@
 import { joinUrl } from '@guardian/libs';
 import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../lib/useAuthStatus';
+import { getOptionsHeadersWithOkta } from '../../lib/useAuthStatus';
+import type {
 	AdditionalHeadersType,
 	CommentResponse,
 	CommentType,
@@ -129,54 +134,64 @@ export const preview = (body: string): Promise<string> => {
 	);
 };
 
-export const comment = (
-	shortUrl: string,
-	body: string,
-): Promise<CommentResponse> => {
-	const url =
-		joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
-		objAsParams(defaultParams);
-	const data = new URLSearchParams();
-	data.append('body', body);
+export const comment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(shortUrl: string, body: string): Promise<CommentResponse> => {
+		const url =
+			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
+			objAsParams(defaultParams);
+		const data = new URLSearchParams();
+		data.append('body', body);
 
-	return fetch(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-		},
-		credentials: 'include',
-	}).then((resp) => resp.json());
-};
+		const requestOptions = getOptionsHeadersWithOkta(authStatus);
 
-export const reply = (
-	shortUrl: string,
-	body: string,
-	parentCommentId: number,
-): Promise<CommentResponse> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'discussion',
-			shortUrl,
-			'comment',
-			parentCommentId.toString(),
-			'reply',
-		) + objAsParams(defaultParams);
-	const data = new URLSearchParams();
-	data.append('body', body);
+		return fetch(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...(requestOptions.headers !== undefined
+					? requestOptions.headers
+					: {}),
+			},
+			credentials: requestOptions.credentials,
+		}).then((resp) => resp.json());
+	};
 
-	return fetch(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-		},
-		credentials: 'include',
-	}).then((resp) => resp.json());
-};
+export const reply =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(
+		shortUrl: string,
+		body: string,
+		parentCommentId: number,
+	): Promise<CommentResponse> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'discussion',
+				shortUrl,
+				'comment',
+				parentCommentId.toString(),
+				'reply',
+			) + objAsParams(defaultParams);
+		const data = new URLSearchParams();
+		data.append('body', body);
+		const requestOptions = getOptionsHeadersWithOkta(authStatus);
+
+		return fetch(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...(requestOptions.headers !== undefined
+					? requestOptions.headers
+					: {}),
+			},
+			credentials: requestOptions.credentials,
+		}).then((resp) => resp.json());
+	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
 export const getPicks = (
@@ -235,19 +250,30 @@ export const reportAbuse = ({
 	}).then((resp) => resp.json());
 };
 
-export const recommend = (commentId: number): Promise<boolean> => {
-	const url =
-		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'recommend') +
-		objAsParams(defaultParams);
+export const recommend =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(commentId: number): Promise<boolean> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'recommend',
+			) + objAsParams(defaultParams);
 
-	return fetch(url, {
-		method: 'POST',
-		credentials: 'include',
-		headers: {
-			...options.headers,
-		},
-	}).then((resp) => resp.ok);
-};
+		const requestOptions = getOptionsHeadersWithOkta(authStatus);
+
+		return fetch(url, {
+			method: 'POST',
+			headers: {
+				...options.headers,
+				...(requestOptions.headers !== undefined
+					? requestOptions.headers
+					: {}),
+			},
+			credentials: requestOptions.credentials,
+		}).then((resp) => resp.ok);
+	};
 
 //todo: adjust this when the endpoint is ready
 export const addUserName = (userName: string): Promise<UserNameResponse> => {

@@ -1,3 +1,8 @@
+import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../lib/useAuthStatus';
+
 export type CAPIPillar =
 	| 'news'
 	| 'sport'
@@ -117,6 +122,11 @@ export interface FilterOptions {
 	pageSize: PageSizeType;
 	threads: ThreadsType;
 }
+
+export type SignedInUser = {
+	profile: UserProfile;
+	authStatus: SignedInWithCookies | SignedInWithOkta;
+};
 
 export interface UserProfile {
 	userId: string;

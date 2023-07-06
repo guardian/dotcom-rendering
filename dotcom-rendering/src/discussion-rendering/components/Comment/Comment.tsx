@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, UserProfile } from '../../discussionTypes';
+import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { pickComment, unPickComment } from '../../lib/api';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import { palette } from '../../lib/palette';
@@ -30,7 +30,7 @@ import { Row } from '../Row/Row';
 import { Timestamp } from '../Timestamp/Timestamp';
 
 type Props = {
-	user?: UserProfile;
+	user?: SignedInUser;
 	comment: CommentType;
 	pillar: ArticleTheme;
 	isClosedForComments: boolean;
@@ -535,11 +535,12 @@ export const Comment = ({
 								commentId={comment.id}
 								initialCount={comment.numRecommends}
 								alreadyRecommended={false}
-								isSignedIn={!!user}
+								authStatus={user?.authStatus}
 								onRecommend={onRecommend}
 								userMadeComment={
 									!!user &&
-									user.userId === comment.userProfile.userId
+									user.profile.userId ===
+										comment.userProfile.userId
 								}
 							/>
 						)}
@@ -696,10 +697,10 @@ export const Comment = ({
 									)}
 									<Space amount={4} />
 									{/* Only staff can pick, and they cannot pick thier own comment */}
-									{user?.badge.some(
+									{user?.profile.badge.some(
 										(e) => e.name === 'Staff',
 									) &&
-										user.userId !==
+										user.profile.userId !==
 											comment.userProfile.userId && (
 											<div
 												css={[
@@ -740,7 +741,7 @@ export const Comment = ({
 									{/* You can't mute unless logged in and you can't mute yourself */}
 									{user &&
 									comment.userProfile.userId !==
-										user.userId ? (
+										user.profile.userId ? (
 										<div
 											css={[
 												buttonLinkBaseStyles,

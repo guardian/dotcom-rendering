@@ -5,6 +5,7 @@ import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
 import { App as Comments } from '../discussion-rendering/App';
+import type { SignedInUser } from '../discussion-rendering/discussionTypes';
 import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
@@ -19,7 +20,7 @@ export type Props = {
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
-	user?: UserProfile;
+	user?: SignedInUser;
 	idApiUrl: string;
 };
 
@@ -162,7 +163,7 @@ export const Discussion = ({
 							<SignedInAs
 								palette={palette}
 								enableDiscussionSwitch={enableDiscussionSwitch}
-								user={user}
+								user={user?.profile}
 								commentCount={commentCount}
 								isClosedForComments={isClosedForComments}
 							/>
