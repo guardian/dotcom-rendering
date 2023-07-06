@@ -8,7 +8,6 @@ import type {
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
-	UserProfile,
 } from '../discussionTypes';
 
 const options = {
