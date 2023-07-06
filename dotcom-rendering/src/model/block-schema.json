@@ -2025,7 +2025,7 @@
                         "regionFocus": {
                             "type": "string"
                         },
-                        "illustrationUrl": {
+                        "illustrationCard": {
                             "type": "string"
                         }
                     },

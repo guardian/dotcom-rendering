@@ -202,15 +202,15 @@ export const NewsletterCard = ({
 			css={groupItemStyle}
 			aria-label={newsletter.name}
 		>
-			{!!newsletter.illustrationUrl && (
+			{!!newsletter.illustrationCard && (
 				<img
-					src={newsletter.illustrationUrl}
+					src={newsletter.illustrationCard}
 					css={illustrationStyle}
 					alt=""
 					role="img"
 				/>
 			)}
-			{!newsletter.illustrationUrl && (
+			{!newsletter.illustrationCard && (
 				<IllustrationPlaceholder
 					theme={newsletter.theme}
 					aspectHeight={300}

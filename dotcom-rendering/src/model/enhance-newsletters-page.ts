@@ -6,7 +6,7 @@ import type {
 } from '../types/newslettersPage';
 import type { StaticGroups } from './newsletter-grouping';
 import { groups } from './newsletter-grouping';
-import { newsletterIllustrations } from './newsletterIllustrations';
+// import { newsletterIllustrations } from './newsletterIllustrations';
 
 const mapStaticGroups = (
 	staticGroups: StaticGroups,
@@ -72,21 +72,21 @@ const getGroups = (
 		: reduceToDefaultGrouping(newsletters);
 };
 
-const addIllustrations = (newsletter: Newsletter) => ({
-	...newsletter,
-	illustrationUrl: newsletterIllustrations[newsletter.identityName],
-});
+// const addIllustrations = (newsletter: Newsletter) => ({
+// 	...newsletter,
+// 	illustrationCard: newsletterIllustrations[newsletter.identityName],
+// });
 
 export const enhanceNewslettersPage = (
 	newsletterData: FENewslettersPageType,
 ): DCRNewslettersPageType => {
-	const newsletterDataWithIllustrations = {
-		...newsletterData,
-		newsletters: newsletterData.newsletters.map(addIllustrations),
-	};
+	// const newsletterDataWithIllustrations = {
+	// 	...newsletterData,
+	// 	newsletters: newsletterData.newsletters.map(addIllustrations),
+	// };
 
 	return {
-		...newsletterDataWithIllustrations,
-		groupedNewsletters: getGroups(newsletterDataWithIllustrations),
+		...newsletterData,
+		groupedNewsletters: getGroups(newsletterData),
 	};
 };

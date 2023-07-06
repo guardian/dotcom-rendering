@@ -554,7 +554,7 @@
                 "regionFocus": {
                     "type": "string"
                 },
-                "illustrationUrl": {
+                "illustrationCard": {
                     "type": "string"
                 }
             },
@@ -2439,7 +2439,7 @@
                         "regionFocus": {
                             "type": "string"
                         },
-                        "illustrationUrl": {
+                        "illustrationCard": {
                             "type": "string"
                         }
                     },
