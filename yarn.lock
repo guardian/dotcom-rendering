@@ -3205,10 +3205,10 @@
   dependencies:
     is-mobile "3.1.1"
 
-"@guardian/braze-components@13.3.0":
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-13.3.0.tgz#a3233d8a4f4e43fe32a5a98fbbc81703a8b6bfec"
-  integrity sha512-rmQG/sUGxTGlZw4qKciyhyS3CNgblzVisa6+aM8ZijG0lm7pWD/+w3KmPHPF/XZN3VS5iCGvPCTxiU+okc+MzQ==
+"@guardian/braze-components@14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.0.0.tgz#3deef75d97549af7cad6046bed2fc282d4e2f78b"
+  integrity sha512-rrYQT+41/m9tK3tRU6oiThylqp8M4IUsOrpG5cHJONp2u+uQzJGVTBG/nlEVB4Ds0gTQ18jfwLsHzztG3ILTcA==
 
 "@guardian/bridget@2.3.0":
   version "2.3.0"
