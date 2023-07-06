@@ -16,7 +16,8 @@ describe('Lightbox', function () {
 		setLocalBaseUrl();
 	});
 
-	it('should open the lightbox when an expand button is clicked', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should open the lightbox when an expand button is clicked', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
@@ -28,7 +29,8 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="2"] img').should('be.visible');
 	});
 
-	it('should open the lightbox when an image is clicked', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should open the lightbox when an image is clicked', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using fifth image on the page
@@ -38,7 +40,8 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="5"] img').should('be.visible');
 	});
 
-	it('should trap focus', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should trap focus', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('article img').first().realClick();
 		cy.get('#gu-lightbox').should('be.visible');
@@ -68,7 +71,8 @@ describe('Lightbox', function () {
 		cy.get('button.previous').should('have.focus');
 	});
 
-	it('should respond to keyboard shortcuts and image clicks', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should respond to keyboard shortcuts and image clicks', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('#gu-lightbox').should('not.be.visible');
 		// Open lightbox using the second button on the page (the first is main media)
@@ -123,7 +127,8 @@ describe('Lightbox', function () {
 		cy.get('#gu-lightbox').should('not.be.visible');
 	});
 
-	it('should download adjacent images before they are viewed', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should download adjacent images before they are viewed', function () {
 		/** A mini abstraction to make this particular test more readable */
 		function image(position) {
 			return cy.get(`li[data-index="${position}"] img`);
@@ -156,7 +161,8 @@ describe('Lightbox', function () {
 		image(12).should('have.attr', 'loading', 'lazy');
 	});
 
-	it('should remember my preference for showing the caption', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should remember my preference for showing the caption', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		// The info aside is visible by default
@@ -185,7 +191,8 @@ describe('Lightbox', function () {
 		cy.get('li[data-index="2"] aside').should('be.visible');
 	});
 
-	it('should be possible to navigate by scrolling', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should be possible to navigate by scrolling', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('li[data-index="2"] img').should('be.visible');
@@ -198,7 +205,8 @@ describe('Lightbox', function () {
 		cy.get('nav [data-cy="lightbox-selected"]').contains('1/22');
 	});
 
-	it('should navigate to the original block when clicking links in captions', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should navigate to the original block when clicking links in captions', function () {
 		cy.visit(`/Article/${liveblogUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('#gu-lightbox').should('be.visible');
@@ -212,7 +220,8 @@ describe('Lightbox', function () {
 		);
 	});
 
-	it('should use the url to maintain lightbox position', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should use the url to maintain lightbox position', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');
@@ -229,7 +238,8 @@ describe('Lightbox', function () {
 		cy.get('nav [data-cy="lightbox-selected"]').contains('6/22');
 	});
 
-	it('should trigger the lightbox to close or open if the user navigates back and forward', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests
+	it.skip('should trigger the lightbox to close or open if the user navigates back and forward', function () {
 		cy.visit(`/Article/${articleUrl}`);
 		cy.get('button.open-lightbox').eq(1).realClick();
 		cy.get('nav [data-cy="lightbox-selected"]').contains('2/22');

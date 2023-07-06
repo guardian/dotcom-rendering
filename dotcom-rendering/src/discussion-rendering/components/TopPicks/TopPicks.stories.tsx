@@ -1,8 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { TopPicks } from './TopPicks';
 
-export default { component: TopPicks, title: 'TopPicks' };
+export default { component: TopPicks, title: 'Discussion/TopPicks' };
 
 const comment: CommentType = {
 	id: 25488498,

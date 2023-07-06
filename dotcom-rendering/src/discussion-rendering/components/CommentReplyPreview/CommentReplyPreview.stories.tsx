@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { CommentReplyPreview, Preview } from './CommentReplyPreview';
 
-export default { title: 'CommentReplyPreview' };
+export default { title: 'Discussion/CommentReplyPreview' };
 
 const singleLineParagraph =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>';

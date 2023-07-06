@@ -1,7 +1,7 @@
 import { ArticlePillar } from '@guardian/libs';
 import { FirstCommentWelcome } from './FirstCommentWelcome';
 
-export default { title: 'FirstCommentWelcome' };
+export default { title: 'Discussion/FirstCommentWelcome' };
 
 export const defaultStory = () => (
 	<FirstCommentWelcome

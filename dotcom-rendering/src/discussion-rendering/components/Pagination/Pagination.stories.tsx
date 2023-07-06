@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { FilterOptions } from '../../discussionTypes';
+import type { FilterOptions } from '../../discussionTypes';
 import { Pagination } from './Pagination';
 
-export default { component: Pagination, title: 'Pagination' };
+export default { component: Pagination, title: 'Discussion/Pagination' };
 
 const DEFAULT_FILTERS: FilterOptions = {
 	orderBy: 'newest',

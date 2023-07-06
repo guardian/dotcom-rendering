@@ -1,8 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
-import { CommentType } from '../../discussionTypes';
+import type { CommentType } from '../../discussionTypes';
 import { CommentForm } from './CommentForm';
 
-export default { component: CommentForm, title: 'CommentForm' };
+export default { component: CommentForm, title: 'Discussion/CommentForm' };
 
 const shortUrl = '/p/39f5z';
 
