@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import { getLargest, getMaster } from '../components/ImageComponent';
 import type {
 	FEElement,
@@ -160,28 +161,12 @@ export const buildLightboxImages = (
 	});
 	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
-	const alreadySeen: string[] = [];
-	let uniqueImages: ImageForLightbox[] = [];
-	lightboxImages.forEach((image) => {
-		const imageId = decideImageId(image);
-		if (!imageId) {
-			// It's unlikely that we would not have an imageId here but if we do we fail
-			// open, passing the image through
-			uniqueImages.push(image);
-			return;
-		}
-		if (alreadySeen.includes(imageId)) {
-			// Replace the element with the duplicated one. We do this because we want to favour
-			// the higher quality body images you get with galleries.
-			uniqueImages = uniqueImages.filter(
-				(thisImage) => decideImageId(thisImage) !== imageId,
-			);
-			uniqueImages.push(image);
-		} else {
-			// This image is not duplicated so we pass it through
-			uniqueImages.push(image);
-			alreadySeen.push(imageId);
-		}
-	});
-	return uniqueImages;
+	return [
+		...new Map(
+			lightboxImages.map<[string, ImageForLightbox]>((image) => [
+				decideImageId(image) ?? randomUUID(),
+				image,
+			]),
+		).values(),
+	];
 };
