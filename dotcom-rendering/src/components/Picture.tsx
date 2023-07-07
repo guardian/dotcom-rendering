@@ -8,7 +8,7 @@ import type { RoleType } from '../types/content';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
-type Orientation = 'portrait' | 'landscape';
+export type Orientation = 'portrait' | 'landscape';
 
 type Props = {
 	role: RoleType;

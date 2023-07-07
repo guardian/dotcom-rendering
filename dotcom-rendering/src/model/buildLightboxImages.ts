@@ -1,11 +1,12 @@
+import { randomUUID } from 'node:crypto';
 import { getLargest, getMaster } from '../components/ImageComponent';
+import type { Orientation } from '../components/Picture';
 import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
-
-type Orientation = 'horizontal' | 'portrait';
+import { isImage } from './enhance-images';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
@@ -20,7 +21,7 @@ const isLightboxable = (
 	orientation: Orientation,
 ): boolean => {
 	switch (orientation) {
-		case 'horizontal':
+		case 'landscape':
 			// If any width is above 620 we allow this image in lightbox
 			return element.media.allImages.some(
 				(mediaImg) => parseInt(mediaImg.fields.width, 10) > 620,
@@ -73,7 +74,7 @@ const buildLightboxImage = (
 	const width = parseInt(masterImage.fields.width, 10);
 	const height = parseInt(masterImage.fields.height, 10);
 
-	const orientation = width >= height ? 'horizontal' : 'portrait';
+	const orientation = width >= height ? 'landscape' : 'portrait';
 	if (!isLightboxable(element, orientation)) return;
 
 	return {
@@ -89,6 +90,20 @@ const buildLightboxImage = (
 		title: element.title,
 		starRating: element.starRating,
 	};
+};
+
+const isBlog = (design: FEFormat['design']) =>
+	design === 'LiveBlogDesign' || design === 'DeadBlogDesign';
+
+const getImages = (element: FEElement): ImageBlockElement[] => {
+	switch (element._type) {
+		case 'model.dotcomrendering.pageElements.ImageBlockElement':
+			return [element];
+		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
+			return element.images;
+		default:
+			return [];
+	}
 };
 
 /**
@@ -110,78 +125,41 @@ export const buildLightboxImages = (
 	blocks: Block[],
 	mainMediaElements: FEElement[],
 ): ImageForLightbox[] => {
-	const lightboxImages: ImageForLightbox[] = [];
-	mainMediaElements.forEach((element) => {
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-		) {
-			const lightboxImage = buildLightboxImage(element);
-			if (lightboxImage) lightboxImages.push(lightboxImage);
-		}
-	});
-	blocks.forEach((block) => {
-		block.elements.forEach((element) => {
-			switch (element._type) {
-				case 'model.dotcomrendering.pageElements.ImageBlockElement': {
-					const lightboxImage = buildLightboxImage(element);
-					if (lightboxImage === undefined) break;
-					if (
-						format.design === 'LiveBlogDesign' ||
-						format.design === 'DeadBlogDesign'
-					) {
-						lightboxImage.blockId = block.id;
-						lightboxImage.firstPublished =
-							block.blockFirstPublished;
-					}
-					lightboxImages.push(lightboxImage);
-					break;
-				}
-				case 'model.dotcomrendering.pageElements.MultiImageBlockElement': {
-					element.images.forEach((multiImage) => {
-						const lightboxImage = buildLightboxImage(multiImage);
-						if (lightboxImage === undefined) return;
-						if (
-							format.design === 'LiveBlogDesign' ||
-							format.design === 'DeadBlogDesign'
-						) {
-							lightboxImage.blockId = block.id;
-							lightboxImage.firstPublished =
-								block.blockFirstPublished;
-						}
-						lightboxImages.push(lightboxImage);
-					});
-					break;
-				}
-				default:
-					break;
-			}
-		});
-	});
+	const lightboxImages = mainMediaElements
+		.flatMap<ImageForLightbox>((element) => {
+			if (isImage(element)) return buildLightboxImage(element) ?? [];
+			return [];
+		})
+		.concat(
+			blocks.flatMap<ImageForLightbox>((block) =>
+				block.elements.flatMap<ImageForLightbox>((element) =>
+					getImages(element).flatMap<ImageForLightbox>(
+						(multiImage) => {
+							const lightboxImage =
+								buildLightboxImage(multiImage);
+							if (lightboxImage === undefined) return [];
+							return isBlog(format.design)
+								? {
+										...lightboxImage,
+										blockId: block.id,
+										firstPublished:
+											block.blockFirstPublished,
+								  }
+								: lightboxImage;
+						},
+					),
+				),
+			),
+		);
+
 	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
-	const alreadySeen: string[] = [];
-	let uniqueImages: ImageForLightbox[] = [];
-	lightboxImages.forEach((image) => {
-		const imageId = decideImageId(image);
-		if (!imageId) {
-			// It's unlikely that we would not have an imageId here but if we do we fail
-			// open, passing the image through
-			uniqueImages.push(image);
-			return;
-		}
-		if (alreadySeen.includes(imageId)) {
-			// Replace the element with the duplicated one. We do this because we want to favour
-			// the higher quality body images you get with galleries.
-			uniqueImages = uniqueImages.filter(
-				(thisImage) => decideImageId(thisImage) !== imageId,
-			);
-			uniqueImages.push(image);
-		} else {
-			// This image is not duplicated so we pass it through
-			uniqueImages.push(image);
-			alreadySeen.push(imageId);
-		}
-	});
-	return uniqueImages;
+	return [
+		...new Map(
+			lightboxImages.map<[string, ImageForLightbox]>((image) => [
+				decideImageId(image) ?? randomUUID(),
+				image,
+			]),
+		).values(),
+	];
 };
