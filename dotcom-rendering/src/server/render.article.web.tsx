@@ -242,6 +242,7 @@ window.twttr = (function(d, s, id) {
 		renderingTarget: 'Web',
 		borkFCP: article.config.abTests.borkFcpVariant === 'variant',
 		borkFID: article.config.abTests.borkFidVariant === 'variant',
+		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 };
 

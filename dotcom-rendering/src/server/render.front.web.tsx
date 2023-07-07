@@ -164,6 +164,7 @@ export const renderFront = ({ front }: Props): string => {
 		hasPageSkin: front.config.hasPageSkin,
 		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
 		borkFID: front.config.abTests.borkFidVariant === 'variant',
+		weAreHiring: !!front.config.switches.weAreHiring,
 	});
 };
 
@@ -263,5 +264,6 @@ export const renderTagFront = ({
 		renderingTarget: 'Web',
 		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
 		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
+		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});
 };

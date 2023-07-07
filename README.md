@@ -1,8 +1,3 @@
-## We're hiring!
-
-Ever thought about joining us?
-[https://workforus.theguardian.com/careers/product-engineering/](https://workforus.theguardian.com/careers/product-engineering/)
-
 # Dotcom/Apps Rendering
 
 This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 2 projects, `apps-rendering` and `dotcom-rendering`.
