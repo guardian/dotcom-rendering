@@ -156,6 +156,44 @@ export const Card100Media100 = ({
 };
 
 /**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃                                     ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ * Card designed to take up 100% of the container, with media that takes up 75%
+ *
+ * Options:
+ *  - Medium headline (large on mobile)
+ *  - Jumbo image on the top (top on mobile)
+ *  - Trail text
+ *  - Up to 2 supporting content items, always aligned vertically
+ */
+
+export const Card100Media100Tall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			headlineSize="medium"
+			headlineSizeOnMobile="large"
+			imageUrl={trail.image}
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+			trailText={trail.trailText}
+		/>
+	);
+};
+
+/**
  * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┐
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃   25%   ┊
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃Remaining┊
