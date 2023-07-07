@@ -225,7 +225,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									!!front.config.switches.remoteHeader
 								}
 								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+								idApiUrl={front.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!front.config.switches

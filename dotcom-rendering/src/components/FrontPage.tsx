@@ -8,6 +8,7 @@ import type { NavType } from '../model/extract-nav';
 import type { DCRFrontType } from '../types/front';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { AnimatePulsingDots } from './AnimatePulsingDots.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
@@ -88,6 +89,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true}>
 				<SetAdTargeting adTargeting={adTargeting} />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
