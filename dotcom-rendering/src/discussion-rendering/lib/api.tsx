@@ -276,12 +276,18 @@ export const recommend =
 	};
 
 //todo: adjust this when the endpoint is ready
-export const addUserName = (userName: string): Promise<UserNameResponse> => {
-	const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
+//is it just adding /username to the /user/me path? https://github.com/guardian/identity/pull/2418
+export const addUserName = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	userName: string,
+): Promise<UserNameResponse> => {
+	// const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
+	const url =
+		options.idApiUrl + `/user/me/username` + objAsParams(defaultParams);
+	const requestOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
-		credentials: 'include',
 		body: JSON.stringify({
 			publicFields: {
 				username: userName,
@@ -290,30 +296,44 @@ export const addUserName = (userName: string): Promise<UserNameResponse> => {
 		}),
 		headers: {
 			'Content-Type': 'application/json',
+			...(requestOptions.headers !== undefined
+				? requestOptions.headers
+				: {}),
 		},
+		credentials: requestOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
 };
 
-export const pickComment = (commentId: number): Promise<CommentResponse> => {
+export const pickComment = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	commentId: number,
+): Promise<CommentResponse> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
 		objAsParams(defaultParams);
 
+	const requestOptions = getOptionsHeadersWithOkta(authStatus);
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(requestOptions.headers !== undefined
+				? requestOptions.headers
+				: {}),
 		},
-		credentials: 'include',
+		credentials: requestOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
 };
 
-export const unPickComment = (commentId: number): Promise<CommentResponse> => {
+export const unPickComment = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	commentId: number,
+): Promise<CommentResponse> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -321,14 +341,18 @@ export const unPickComment = (commentId: number): Promise<CommentResponse> => {
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
+	const requestOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(requestOptions.headers !== undefined
+				? requestOptions.headers
+				: {}),
 		},
-		credentials: 'include',
+		credentials: requestOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));

@@ -354,7 +354,7 @@ export const CommentForm = ({
 			return;
 		}
 
-		const response = await addUserName(userName);
+		const response = await addUserName(user.authStatus, userName);
 		if (response.status === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();

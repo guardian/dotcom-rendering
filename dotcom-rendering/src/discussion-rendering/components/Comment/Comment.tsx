@@ -320,9 +320,10 @@ export const Comment = ({
 	const [showAbuseReportForm, setAbuseReportForm] = useState(false);
 	const toggleSetShowForm = () => setAbuseReportForm(!showAbuseReportForm);
 
-	const pick = async () => {
+	const pick = async (staffUser: SignedInUser) => {
 		setError('');
-		const response = await pickComment(comment.id);
+
+		const response = await pickComment(staffUser.authStatus, comment.id);
 		if (response.status === 'error') {
 			setError(response.message);
 		} else {
@@ -330,9 +331,9 @@ export const Comment = ({
 		}
 	};
 
-	const unPick = async () => {
+	const unPick = async (staffUser: SignedInUser) => {
 		setError('');
-		const response = await unPickComment(comment.id);
+		const response = await unPickComment(staffUser.authStatus, comment.id);
 		if (response.status === 'error') {
 			setError(response.message);
 		} else {
@@ -721,8 +722,8 @@ export const Comment = ({
 													priority="subdued"
 													onClick={
 														isHighlighted
-															? unPick
-															: pick
+															? () => unPick(user)
+															: () => pick(user)
 													}
 													data-link-name={
 														isHighlighted
