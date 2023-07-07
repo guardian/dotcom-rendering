@@ -120,25 +120,19 @@ const constructMultiImageElement = (
 	};
 };
 
-export const addLightboxData = (elements: FEElement[]): FEElement[] => {
-	const withLightboxData: FEElement[] = [];
-	elements.forEach((thisElement, i) => {
-		if (isImage(thisElement)) {
-			// Copy caption and credit
-			withLightboxData.push({
-				...thisElement,
-				lightbox: {
-					caption: thisElement.data.caption,
-					credit: thisElement.data.credit,
-				},
-			});
-		} else {
-			// Pass through
-			withLightboxData.push(thisElement);
-		}
-	});
-	return withLightboxData;
-};
+export const addLightboxData = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) =>
+		isImage(thisElement)
+			? {
+					...thisElement,
+					// Copy caption and credit
+					lightbox: {
+						caption: thisElement.data.caption,
+						credit: thisElement.data.credit,
+					},
+			  }
+			: thisElement,
+	);
 
 const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
 	const withMultiImageElements: FEElement[] = [];
