@@ -14,7 +14,6 @@ import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
 import { AdSlot } from '../components/AdSlot';
-import { BrazeMessaging } from '../components/BrazeMessaging.importable';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
 import { DecideContainer } from '../components/DecideContainer';
@@ -686,10 +685,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</Section>
-
-			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
-			</Island>
 		</>
 	);
 };
