@@ -1,5 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
-import type { CommentType } from '../../discussionTypes';
+import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { CommentContainer } from './CommentContainer';
 
 export default { title: 'Discussion/CommentContainer' };
@@ -132,19 +132,22 @@ const commentDataWithLongThread: CommentType = {
 	},
 };
 
-const aUser = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
-	apiUrl: '',
-	avatar: '',
-	secureAvatarUrl: '',
-	badge: [],
-	privateFields: {
-		canPostComment: true,
-		isPremoderated: false,
-		hasCommented: true,
+const aUser: SignedInUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
 	},
+	authStatus: { kind: 'SignedInWithCookies' },
 };
 
 const commentDataThreaded: CommentType = {

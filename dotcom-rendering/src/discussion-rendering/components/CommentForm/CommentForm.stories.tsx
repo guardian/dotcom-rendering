@@ -1,24 +1,27 @@
 import { ArticlePillar } from '@guardian/libs';
-import type { CommentType } from '../../discussionTypes';
+import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
 
 const shortUrl = '/p/39f5z';
 
-const aUser = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
-	apiUrl: '',
-	avatar: '',
-	secureAvatarUrl: '',
-	badge: [],
-	privateFields: {
-		canPostComment: true,
-		isPremoderated: false,
-		hasCommented: true,
+const aUser: SignedInUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
 	},
+	authStatus: { kind: 'SignedInWithCookies' },
 };
 
 const aComment: CommentType = {
@@ -88,9 +91,13 @@ export const Premoderated = () => (
 		pillar={ArticlePillar.Opinion}
 		user={{
 			...aUser,
-			privateFields: {
-				...aUser.privateFields,
-				isPremoderated: true,
+			profile: {
+				...aUser.profile,
+				privateFields: {
+					canPostComment: true,
+					isPremoderated: true,
+					hasCommented: true,
+				},
 			},
 		}}
 		onAddComment={(comment) => {}}

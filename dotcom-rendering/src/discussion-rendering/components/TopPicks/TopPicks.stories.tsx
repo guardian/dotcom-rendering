@@ -1,4 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
 import type { CommentType } from '../../discussionTypes';
 import { TopPicks } from './TopPicks';
 
@@ -48,12 +49,13 @@ const commentWithShortBody: CommentType = {
 	...comment,
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 };
+const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const SingleComment = () => (
 	<TopPicks
 		pillar={ArticlePillar.News}
 		comments={[commentWithShortBody]}
-		isSignedIn={true}
+		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
 	/>
 );
@@ -68,7 +70,7 @@ export const MulitColumn = () => (
 			commentWithShortBody,
 			commentWithShortBody,
 		]}
-		isSignedIn={true}
+		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
 	/>
 );
@@ -83,7 +85,7 @@ export const SingleColumn = () => (
 			commentWithShortBody,
 			commentWithShortBody,
 		]}
-		isSignedIn={true}
+		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
 	/>
 );
