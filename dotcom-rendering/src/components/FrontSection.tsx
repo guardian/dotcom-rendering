@@ -217,7 +217,6 @@ const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
-	flex-direction: column;
 `;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`
