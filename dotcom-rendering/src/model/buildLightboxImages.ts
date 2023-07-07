@@ -1,13 +1,12 @@
 import { randomUUID } from 'node:crypto';
 import { getLargest, getMaster } from '../components/ImageComponent';
+import type { Orientation } from '../components/Picture';
 import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
 import { isImage } from './enhance-images';
-
-type Orientation = 'horizontal' | 'portrait';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
@@ -22,7 +21,7 @@ const isLightboxable = (
 	orientation: Orientation,
 ): boolean => {
 	switch (orientation) {
-		case 'horizontal':
+		case 'landscape':
 			// If any width is above 620 we allow this image in lightbox
 			return element.media.allImages.some(
 				(mediaImg) => parseInt(mediaImg.fields.width, 10) > 620,
@@ -75,7 +74,7 @@ const buildLightboxImage = (
 	const width = parseInt(masterImage.fields.width, 10);
 	const height = parseInt(masterImage.fields.height, 10);
 
-	const orientation = width >= height ? 'horizontal' : 'portrait';
+	const orientation = width >= height ? 'landscape' : 'portrait';
 	if (!isLightboxable(element, orientation)) return;
 
 	return {
