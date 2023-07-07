@@ -32,7 +32,7 @@ const isMultiImage = (
 	);
 };
 
-const isImage = (element?: FEElement): element is ImageBlockElement => {
+export const isImage = (element?: FEElement): element is ImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'

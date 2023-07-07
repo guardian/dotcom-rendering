@@ -5,6 +5,7 @@ import type {
 	ImageBlockElement,
 	ImageForLightbox,
 } from '../types/content';
+import { isImage } from './enhance-images';
 
 type Orientation = 'horizontal' | 'portrait';
 
@@ -92,6 +93,20 @@ const buildLightboxImage = (
 	};
 };
 
+const isBlog = (design: FEFormat['design']) =>
+	design === 'LiveBlogDesign' || design === 'DeadBlogDesign';
+
+const getImages = (element: FEElement): ImageBlockElement[] => {
+	switch (element._type) {
+		case 'model.dotcomrendering.pageElements.ImageBlockElement':
+			return [element];
+		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
+			return element.images;
+		default:
+			return [];
+	}
+};
+
 /**
  * Reads the elements array and returns a new array of data based on the
  * ImageBlockElement elements that it finds. It does not mutate. This new
@@ -111,54 +126,33 @@ export const buildLightboxImages = (
 	blocks: Block[],
 	mainMediaElements: FEElement[],
 ): ImageForLightbox[] => {
-	const lightboxImages: ImageForLightbox[] = [];
-	mainMediaElements.forEach((element) => {
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement'
-		) {
-			const lightboxImage = buildLightboxImage(element);
-			if (lightboxImage) lightboxImages.push(lightboxImage);
-		}
-	});
-	blocks.forEach((block) => {
-		block.elements.forEach((element) => {
-			switch (element._type) {
-				case 'model.dotcomrendering.pageElements.ImageBlockElement': {
-					const lightboxImage = buildLightboxImage(element);
-					if (lightboxImage === undefined) break;
-					if (
-						format.design === 'LiveBlogDesign' ||
-						format.design === 'DeadBlogDesign'
-					) {
-						lightboxImage.blockId = block.id;
-						lightboxImage.firstPublished =
-							block.blockFirstPublished;
-					}
-					lightboxImages.push(lightboxImage);
-					break;
-				}
-				case 'model.dotcomrendering.pageElements.MultiImageBlockElement': {
-					element.images.forEach((multiImage) => {
-						const lightboxImage = buildLightboxImage(multiImage);
-						if (lightboxImage === undefined) return;
-						if (
-							format.design === 'LiveBlogDesign' ||
-							format.design === 'DeadBlogDesign'
-						) {
-							lightboxImage.blockId = block.id;
-							lightboxImage.firstPublished =
-								block.blockFirstPublished;
-						}
-						lightboxImages.push(lightboxImage);
-					});
-					break;
-				}
-				default:
-					break;
-			}
-		});
-	});
+	const lightboxImages = mainMediaElements
+		.flatMap<ImageForLightbox>((element) => {
+			if (isImage(element)) return buildLightboxImage(element) ?? [];
+			return [];
+		})
+		.concat(
+			blocks.flatMap<ImageForLightbox>((block) =>
+				block.elements.flatMap<ImageForLightbox>((element) =>
+					getImages(element).flatMap<ImageForLightbox>(
+						(multiImage) => {
+							const lightboxImage =
+								buildLightboxImage(multiImage);
+							if (lightboxImage === undefined) return [];
+							return isBlog(format.design)
+								? {
+										...lightboxImage,
+										blockId: block.id,
+										firstPublished:
+											block.blockFirstPublished,
+								  }
+								: lightboxImage;
+						},
+					),
+				),
+			),
+		);
+
 	// On gallery articles the main media is often repeated as an element in the article body so
 	// we deduplicate the array here
 	return [
