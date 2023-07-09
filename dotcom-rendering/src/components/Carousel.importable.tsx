@@ -531,16 +531,6 @@ const HeaderAndNav = ({
 	</div>
 );
 
-type CarouselColours = {
-	titleColour: string;
-	titleHighlightColour: string;
-	borderColour: string;
-	activeDotColour: string;
-	arrowColour: string;
-	arrowBackgroundColour: string;
-	arrowBackgroundHoverColour: string;
-};
-
 const Header = ({
 	heading,
 	trails,
@@ -738,6 +728,16 @@ const InlineChevrons = ({
 		</div>
 	</>
 );
+
+type CarouselColours = {
+	titleColour: string;
+	titleHighlightColour: string;
+	borderColour: string;
+	activeDotColour: string;
+	arrowColour: string;
+	arrowBackgroundColour: string;
+	arrowBackgroundHoverColour: string;
+};
 
 const decideCarouselColours = (
 	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
