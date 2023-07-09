@@ -541,7 +541,7 @@ type CarouselColours = {
 	arrowBackgroundHoverColour: string;
 };
 
-const HeaderChevrons = ({
+const HeaderAndChevrons = ({
 	heading,
 	trails,
 	carouselColours,
@@ -932,7 +932,7 @@ export const Carousel = ({
 				data-link={formatAttrString(heading)}
 			>
 				{hasPageSkin ? (
-					<HeaderChevrons
+					<HeaderAndChevrons
 						heading={heading}
 						trails={trails}
 						carouselColours={carouselColours}
@@ -946,7 +946,7 @@ export const Carousel = ({
 					/>
 				) : (
 					<Hide when="above" breakpoint="leftCol">
-						<HeaderChevrons
+						<HeaderAndChevrons
 							heading={heading}
 							trails={trails}
 							carouselColours={carouselColours}
