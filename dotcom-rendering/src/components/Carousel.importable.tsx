@@ -43,6 +43,7 @@ type ArticleProps = Props & {
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
 	collectionType?: string;
+	hasPageSkin?: boolean;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -108,7 +109,9 @@ const containerMargins = css`
 		margin-left: -10px;
 		margin-right: -10px;
 	}
+`;
 
+const containerMarginsFromLeftCol = css`
 	${from.leftCol} {
 		margin-left: -1px;
 		margin-right: -10px;
@@ -209,6 +212,11 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
+
+const buttonContainerStyleWithPageSkin = css`
+	display: none;
+`;
+
 const prevButtonContainerStyle = (leftColSize: LeftColSize) => {
 	switch (leftColSize) {
 		case 'wide':
@@ -333,9 +341,6 @@ const headerRowStyles = css`
 	justify-content: space-between;
 	${from.tablet} {
 		padding-right: 10px;
-	}
-
-	${from.tablet} {
 		margin-left: 10px;
 	}
 `;
@@ -526,9 +531,7 @@ const HeaderAndNav = ({
 	</div>
 );
 
-const decideCarouselColours = (
-	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
-): {
+type CarouselColours = {
 	titleColour: string;
 	titleHighlightColour: string;
 	borderColour: string;
@@ -536,7 +539,101 @@ const decideCarouselColours = (
 	arrowColour: string;
 	arrowBackgroundColour: string;
 	arrowBackgroundHoverColour: string;
-} => {
+};
+
+const HeaderChevrons = ({
+	heading,
+	trails,
+	carouselColours,
+	index,
+	goToIndex,
+	prev,
+	next,
+	arrowName,
+	isCuratedContent,
+	isVideoContainer,
+}: {
+	heading: string;
+	trails: TrailType[];
+	carouselColours: CarouselColours;
+	index: number;
+	goToIndex: (newIndex: number) => void;
+	prev: () => void;
+	next: () => void;
+	arrowName: string;
+	isCuratedContent: boolean;
+	isVideoContainer: boolean;
+}) => (
+	<div css={headerRowStyles}>
+		<HeaderAndNav
+			heading={heading}
+			trails={trails}
+			titleHighlightColour={carouselColours.titleHighlightColour}
+			titleColour={carouselColours.titleColour}
+			activeDotColour={carouselColours.activeDotColour}
+			index={index}
+			isCuratedContent={isCuratedContent}
+			goToIndex={goToIndex}
+		/>
+		<Hide when="below" breakpoint="desktop">
+			<button
+				type="button"
+				onClick={prev}
+				aria-label="Move carousel backwards"
+				css={[
+					buttonStyle(
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+					prevButtonStyle(
+						index,
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+				]}
+				data-link-name={getDataLinkNameCarouselButton(
+					'prev',
+					arrowName,
+					isVideoContainer,
+				)}
+			>
+				<SvgChevronLeftSingle />
+			</button>
+			<button
+				type="button"
+				onClick={next}
+				aria-label="Move carousel forwards"
+				css={[
+					buttonStyle(
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+					nextButtonStyle(
+						index,
+						trails.length,
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+				]}
+				data-link-name={getDataLinkNameCarouselButton(
+					'next',
+					arrowName,
+					isVideoContainer,
+				)}
+			>
+				<SvgChevronRightSingle />
+			</button>
+		</Hide>
+	</div>
+);
+
+const decideCarouselColours = (
+	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
+): CarouselColours => {
 	if ('palette' in props) {
 		const containerOverrides = decideContainerOverrides(props.palette);
 		return {
@@ -597,6 +694,8 @@ export const Carousel = ({
 
 	const isVideoContainer =
 		'collectionType' in props && props.collectionType === 'fixed/video';
+
+	const hasPageSkin = 'hasPageSkin' in props && props.hasPageSkin;
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -706,6 +805,7 @@ export const Carousel = ({
 				borderType="partial"
 				size={leftColSize}
 				borderColour={carouselColours.borderColour}
+				hasPageSkin={hasPageSkin}
 			>
 				<HeaderAndNav
 					heading={heading}
@@ -721,7 +821,8 @@ export const Carousel = ({
 			<div
 				css={[
 					buttonContainerStyle,
-					prevButtonContainerStyle(leftColSize),
+					hasPageSkin && buttonContainerStyleWithPageSkin,
+					!hasPageSkin && prevButtonContainerStyle(leftColSize),
 				]}
 			>
 				<button
@@ -751,7 +852,13 @@ export const Carousel = ({
 				</button>
 			</div>
 
-			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
+			<div
+				css={[
+					buttonContainerStyle,
+					hasPageSkin && buttonContainerStyleWithPageSkin,
+					nextButtonContainerStyle,
+				]}
+			>
 				<button
 					type="button"
 					onClick={next}
@@ -780,80 +887,43 @@ export const Carousel = ({
 				</button>
 			</div>
 			<div
-				css={[containerStyles, containerMargins]}
+				css={[
+					containerStyles,
+					containerMargins,
+					!hasPageSkin && containerMarginsFromLeftCol,
+				]}
 				data-component={onwardsSource}
 				data-link={formatAttrString(heading)}
 			>
-				<Hide when="above" breakpoint="leftCol">
-					<div css={headerRowStyles}>
-						<HeaderAndNav
+				{hasPageSkin ? (
+					<HeaderChevrons
+						heading={heading}
+						trails={trails}
+						carouselColours={carouselColours}
+						index={index}
+						goToIndex={goToIndex}
+						prev={prev}
+						next={next}
+						arrowName={arrowName}
+						isCuratedContent={isCuratedContent}
+						isVideoContainer={isVideoContainer}
+					/>
+				) : (
+					<Hide when="above" breakpoint="leftCol">
+						<HeaderChevrons
 							heading={heading}
 							trails={trails}
-							titleHighlightColour={
-								carouselColours.titleHighlightColour
-							}
-							titleColour={carouselColours.titleColour}
-							activeDotColour={carouselColours.activeDotColour}
+							carouselColours={carouselColours}
 							index={index}
-							isCuratedContent={isCuratedContent}
 							goToIndex={goToIndex}
+							prev={prev}
+							next={next}
+							arrowName={arrowName}
+							isCuratedContent={isCuratedContent}
+							isVideoContainer={isVideoContainer}
 						/>
-						<Hide when="below" breakpoint="desktop">
-							<button
-								type="button"
-								onClick={prev}
-								aria-label="Move carousel backwards"
-								css={[
-									buttonStyle(
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-									prevButtonStyle(
-										index,
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-								]}
-								data-link-name={getDataLinkNameCarouselButton(
-									'prev',
-									arrowName,
-									isVideoContainer,
-								)}
-							>
-								<SvgChevronLeftSingle />
-							</button>
-							<button
-								type="button"
-								onClick={next}
-								aria-label="Move carousel forwards"
-								css={[
-									buttonStyle(
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-									nextButtonStyle(
-										index,
-										trails.length,
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-								]}
-								data-link-name={getDataLinkNameCarouselButton(
-									'next',
-									arrowName,
-									isVideoContainer,
-								)}
-							>
-								<SvgChevronRightSingle />
-							</button>
-						</Hide>
-					</div>
-				</Hide>
-
+					</Hide>
+				)}
 				<ul
 					css={carouselStyle}
 					ref={carouselRef}
