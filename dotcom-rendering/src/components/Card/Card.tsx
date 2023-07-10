@@ -92,6 +92,7 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
+	onwardsSource?: string;
 };
 
 const StarRatingComponent = ({
@@ -276,6 +277,7 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	onwardsSource,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -301,9 +303,10 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					showAge &&
-					webPublicationDate &&
-					isWithinTwelveHours(webPublicationDate) ? (
+					(!!onwardsSource && webPublicationDate) ||
+					(showAge &&
+						webPublicationDate &&
+						isWithinTwelveHours(webPublicationDate)) ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
