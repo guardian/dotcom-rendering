@@ -67,7 +67,10 @@ module.exports = {
 	}),
 	framework: {
 		name: '@storybook/react-webpack5',
-		options: {},
+		options: { fastRefresh: true },
+	},
+	docs: {
+		autodocs: true,
 	},
 };
 const webpackConfig = (config) => {
