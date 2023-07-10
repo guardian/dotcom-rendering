@@ -156,6 +156,44 @@ export const Card100Media100 = ({
 };
 
 /**
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃
+ * ┃                                     ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ * Card designed to take up 100% of the container, with media that takes up 75%
+ *
+ * Options:
+ *  - Medium headline (large on mobile)
+ *  - Jumbo image on the top (top on mobile)
+ *  - Trail text
+ *  - Up to 2 supporting content items, always aligned vertically
+ */
+
+export const Card100Media100Tall = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			headlineSize="medium"
+			headlineSizeOnMobile="large"
+			imageUrl={trail.image}
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+			trailText={trail.trailText}
+		/>
+	);
+};
+
+/**
  * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┐
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃   25%   ┊
  * ┃         ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒┃Remaining┊
@@ -266,6 +304,7 @@ export const Card25Media25 = ({
 			imageSize="small"
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -301,6 +340,7 @@ export const Card25Media25SmallHeadline = ({
 			imageSize="small"
 			headlineSize="small"
 			headlineSizeOnMobile="medium"
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -343,6 +383,7 @@ export const Card25Media25Tall = ({
 					: undefined
 			}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -377,6 +418,7 @@ export const Card25Media25TallNoTrail = ({
 			headlineSize="medium"
 			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -411,6 +453,7 @@ export const Card25Media25TallSmallHeadline = ({
 			headlineSize="small"
 			headlineSizeOnMobile="medium"
 			supportingContent={trail.supportingContent?.slice(0, 2)}
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -651,6 +694,7 @@ export const CardDefault = ({
 			avatarUrl={undefined}
 			headlineSize="small"
 			headlineSizeOnMobile="small"
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -682,6 +726,7 @@ export const CardDefaultMedia = ({
 			imagePositionOnMobile="none"
 			headlineSize="small"
 			headlineSizeOnMobile="small"
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };
@@ -713,6 +758,7 @@ export const CardDefaultMediaMobile = ({
 			imagePositionOnMobile="left"
 			headlineSize="small"
 			headlineSizeOnMobile="small"
+			videoSize="too small to play: 479px or less"
 		/>
 	);
 };

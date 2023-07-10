@@ -22,7 +22,7 @@ cdk-synth:
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
-	@node ./scripts/deploy/build-riffraff-bundle.js
+	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
@@ -98,6 +98,12 @@ dev-debug: clear clean-dist install
 	$(call log, "starting DEV server and debugger")
 	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
 	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+
+# storybook #########################################
+
+storybook-dev: clear clean-dist install
+	$(call log, "starting Storybook DEV server")
+	yarn storybook
 
 # tests #####################################
 
@@ -200,6 +206,7 @@ gen-schema:
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
 	@git add src/model/block-schema.json
+	@git add src/model/tag-front-schema.json
 
 check-stories:
 	$(call log, "Checking Storybook stories")

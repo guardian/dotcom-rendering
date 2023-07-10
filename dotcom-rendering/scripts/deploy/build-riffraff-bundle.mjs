@@ -1,12 +1,12 @@
-const { promisify } = require('util');
-const writeFile = promisify(require('fs').writeFile);
-const cpy = require('cpy');
-const execa = require('execa');
-const rimraf = require('rimraf');
-const path = require('path');
-const { warn, log } = require('../env/log');
+import { writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import * as url from 'node:url';
+import cpy from 'cpy';
+import execa from 'execa';
+import { log, warn } from '../env/log.js';
 
-const target = path.resolve(__dirname, '../..', 'target');
+const dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const target = path.resolve(dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -44,11 +44,9 @@ const copyCfn = () => {
 const copyStatic = () => {
 	log(' - copying static');
 	return cpy(
-		['**/*'],
+		path.resolve(dirname, '../../src/static/**'),
 		path.resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(__dirname, '../../src/static'),
-			parents: true,
 			nodir: true,
 		},
 	);
@@ -56,33 +54,38 @@ const copyStatic = () => {
 
 const copyDist = () => {
 	log(' - copying dist');
+	const source = path.resolve(dirname, '../../dist');
+	const dest = path.resolve(target, 'frontend-static', 'assets');
+	return Promise.all([
+		cpy(path.resolve(source, '**/*.!(html|json)'), dest, {
+			nodir: true,
+		}),
+		cpy(path.resolve(source, 'stats'), path.resolve(dest, 'stats'), {
+			nodir: true,
+		}),
+	]);
+};
+
+const copyScripts = () => {
+	log(' - copying scripts');
 	return cpy(
-		['**/*.!(html|json)', 'stats/*'],
-		path.resolve(target, 'frontend-static', 'assets'),
+		path.resolve(dirname, '../../scripts/**'),
+		path.resolve(target, 'rendering', 'scripts'),
 		{
-			cwd: path.resolve(__dirname, '../../dist'),
-			parents: true,
 			nodir: true,
 		},
 	);
 };
 
-const copyScripts = () => {
-	log(' - copying scripts');
-	return cpy(['**/*'], path.resolve(target, 'rendering', 'scripts'), {
-		cwd: path.resolve(__dirname, '../../scripts'),
-		parents: true,
-		nodir: true,
-	});
-};
-
 const copyDistServer = () => {
 	log(' - copying server dist');
-	return cpy(['**/*'], path.resolve(target, 'rendering', 'dist'), {
-		cwd: path.resolve(__dirname, '../../dist'),
-		parents: true,
-		nodir: true,
-	});
+	return cpy(
+		path.resolve(dirname, '../../dist/**'),
+		path.resolve(target, 'rendering', 'dist'),
+		{
+			nodir: true,
+		},
+	);
 };
 
 const copyMakefile = () => {
@@ -92,7 +95,7 @@ const copyMakefile = () => {
 
 const copyRiffRaff = () => {
 	log(' - copying riffraff yaml');
-	return cpy(['riff-raff.yaml'], target, { cwd: __dirname });
+	return cpy(['riff-raff.yaml'], target, { cwd: dirname });
 };
 
 const zipBundle = () => {

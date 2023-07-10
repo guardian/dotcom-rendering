@@ -221,7 +221,7 @@ const ContainerTitleWithHide = ({
 	const containerTitle = (
 		<ContainerTitle
 			title={title}
-			fontColour={fontColour ?? overrides?.text?.container}
+			fontColour={fontColour ?? overrides?.text.container}
 			description={description}
 			url={url}
 			containerPalette={containerPalette}
@@ -316,10 +316,10 @@ export const Section = ({
 				showTopBorder={showTopBorder}
 				padSides={padSides}
 				padBottom={padBottom}
-				borderColour={borderColour ?? overrides?.border?.container}
+				borderColour={borderColour ?? overrides?.border.container}
 				backgroundColour={decideBackgroundColour(
 					backgroundColour,
-					overrides?.border?.container,
+					overrides?.background.container,
 					hasPageSkin,
 				)}
 				ophanComponentLink={ophanComponentLink}
@@ -345,10 +345,10 @@ export const Section = ({
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padSides={padSides}
-			borderColour={borderColour ?? overrides?.border?.container}
+			borderColour={borderColour ?? overrides?.border.container}
 			backgroundColour={decideBackgroundColour(
 				backgroundColour,
-				overrides?.border?.container,
+				overrides?.background.container,
 				hasPageSkin,
 			)}
 			element="section"
@@ -362,7 +362,7 @@ export const Section = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour ?? overrides?.border?.container}
+					borderColour={borderColour ?? overrides?.border.container}
 					size={leftColSize}
 					verticalMargins={verticalMargins}
 					hasPageSkin={hasPageSkin}
@@ -379,7 +379,7 @@ export const Section = ({
 							<ContainerTitle
 								title={title}
 								fontColour={
-									fontColour ?? overrides?.text?.container
+									fontColour ?? overrides?.text.container
 								}
 								description={description}
 								url={url}
@@ -393,10 +393,10 @@ export const Section = ({
 							<Treats
 								treats={treats}
 								borderColour={
-									borderColour ?? overrides?.border?.container
+									borderColour ?? overrides?.border.container
 								}
 								fontColour={
-									fontColour ?? overrides?.text?.container
+									fontColour ?? overrides?.text.container
 								}
 							/>
 						)}
@@ -417,9 +417,7 @@ export const Section = ({
 					>
 						<ContainerTitleWithHide
 							title={title}
-							fontColour={
-								fontColour ?? overrides?.text?.container
-							}
+							fontColour={fontColour ?? overrides?.text.container}
 							description={description}
 							url={url}
 							containerPalette={containerPalette}
@@ -431,7 +429,7 @@ export const Section = ({
 							<ShowHideButton
 								sectionId={sectionId}
 								overrideContainerToggleColour={
-									overrides?.text?.containerToggle
+									overrides?.text.containerToggle
 								}
 							/>
 						)}

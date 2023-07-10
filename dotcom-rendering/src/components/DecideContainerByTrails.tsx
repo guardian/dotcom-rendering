@@ -1,10 +1,13 @@
 import {
 	Card100Media50,
+	Card100Media75,
 	Card25Media25,
 	Card33Media33,
 	Card50Media50,
 	CardDefault,
 } from '../lib/cardWrappers';
+import type { Tuple } from '../lib/tuple';
+import { takeFirst } from '../lib/tuple';
 import type { DCRFrontCard } from '../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -24,8 +27,17 @@ export const OneCardFast = ({ trail }: { trail: DCRFrontCard }) => {
 	);
 };
 
-export const TwoCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (!trails[0] || !trails[1]) return <></>;
+export const OneCardSlow = ({ trail }: { trail: DCRFrontCard }) => {
+	return (
+		<UL direction="row">
+			<LI percentage="100%" padSides={true}>
+				<Card100Media75 trail={trail} showAge={true} />
+			</LI>
+		</UL>
+	);
+};
+
+export const TwoCard = ({ trails }: { trails: Tuple<DCRFrontCard, 2> }) => {
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
@@ -38,8 +50,7 @@ export const TwoCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
-export const ThreeCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (!trails[0] || !trails[1] || !trails[2]) return <></>;
+export const ThreeCard = ({ trails }: { trails: Tuple<DCRFrontCard, 3> }) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
@@ -55,8 +66,7 @@ export const ThreeCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
-export const FourCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (!trails[0] || !trails[1] || !trails[2] || !trails[3]) return <></>;
+export const FourCard = ({ trails }: { trails: Tuple<DCRFrontCard, 4> }) => {
 	return (
 		<UL direction="row">
 			<LI percentage="25%" padSides={true}>
@@ -75,9 +85,11 @@ export const FourCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
-export const FiveCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (!trails[0] || !trails[1] || !trails[2] || !trails[3] || !trails[4])
-		return <></>;
+export const FiveCardFast = ({
+	trails,
+}: {
+	trails: Tuple<DCRFrontCard, 5>;
+}) => {
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true}>
@@ -103,17 +115,37 @@ export const FiveCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
-export const SixCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (
-		!trails[0] ||
-		!trails[1] ||
-		!trails[2] ||
-		!trails[3] ||
-		!trails[4] ||
-		!trails[5]
-	)
-		return <></>;
+export const FiveCardSlow = ({
+	trails,
+}: {
+	trails: Tuple<DCRFrontCard, 5>;
+}) => {
+	return (
+		<>
+			<UL direction="row" padBottom={true}>
+				<LI percentage="50%" padSides={true}>
+					<Card33Media33 trail={trails[0]} showAge={true} />
+				</LI>
+				<LI percentage="50%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[1]} showAge={true} />
+				</LI>
+			</UL>
+			<UL direction="row">
+				<LI percentage="33.333%" padSides={true}>
+					<Card33Media33 trail={trails[2]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[3]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[4]} showAge={true} />
+				</LI>
+			</UL>
+		</>
+	);
+};
 
+export const SixCardFast = ({ trails }: { trails: Tuple<DCRFrontCard, 6> }) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -141,18 +173,41 @@ export const SixCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 		</>
 	);
 };
-export const SevenCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (
-		!trails[0] ||
-		!trails[1] ||
-		!trails[2] ||
-		!trails[3] ||
-		!trails[4] ||
-		!trails[5] ||
-		!trails[6]
-	)
-		return <></>;
 
+export const SixCardSlow = ({ trails }: { trails: Tuple<DCRFrontCard, 6> }) => {
+	return (
+		<>
+			<UL direction="row" padBottom={true}>
+				<LI percentage="33.333%" padSides={true}>
+					<Card33Media33 trail={trails[0]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[1]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[2]} showAge={true} />
+				</LI>
+			</UL>
+			<UL direction="row">
+				<LI percentage="33.333%" padSides={true}>
+					<Card33Media33 trail={trails[3]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[4]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[5]} showAge={true} />
+				</LI>
+			</UL>
+		</>
+	);
+};
+
+export const SevenCardFast = ({
+	trails,
+}: {
+	trails: Tuple<DCRFrontCard, 7>;
+}) => {
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
@@ -184,18 +239,48 @@ export const SevenCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 	);
 };
 
-export const EightCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
-	if (
-		!trails[0] ||
-		!trails[1] ||
-		!trails[2] ||
-		!trails[3] ||
-		!trails[4] ||
-		!trails[5] ||
-		!trails[6] ||
-		!trails[7]
-	)
-		return <></>;
+export const SevenCardSlow = ({
+	trails,
+}: {
+	trails: Tuple<DCRFrontCard, 7>;
+}) => {
+	return (
+		<>
+			<UL direction="row" padBottom={true}>
+				<LI percentage="33.333%" padSides={true}>
+					<Card33Media33 trail={trails[0]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[1]} showAge={true} />
+				</LI>
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33 trail={trails[2]} showAge={true} />
+				</LI>
+			</UL>
+			<UL direction="row">
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[3]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[4]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[5]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[6]} showAge={true} />
+				</LI>
+			</UL>
+		</>
+	);
+};
+
+export const EightOrMoreFast = ({
+	trails,
+}: {
+	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
+}) => {
+	const afterEight = trails.slice(8);
 
 	return (
 		<>
@@ -213,7 +298,7 @@ export const EightCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 					<Card25Media25 trail={trails[3]} showAge={true} />
 				</LI>
 			</UL>
-			<UL direction="row">
+			<UL direction="row" padBottom={afterEight.length > 0}>
 				<LI percentage="25%" padSides={true}>
 					<CardDefault trail={trails[4]} showAge={true} />
 				</LI>
@@ -227,55 +312,135 @@ export const EightCardFast = ({ trails }: { trails: DCRFrontCard[] }) => {
 					<CardDefault trail={trails[6]} showAge={true} />
 				</LI>
 			</UL>
+			{afterEight.length > 0 ? (
+				<UL wrapCards={true} direction="row">
+					{afterEight.map((trail, index) => (
+						<LI
+							key={trail.url}
+							percentage="33.333%"
+							padSides={true}
+							showDivider={index % 3 !== 0}
+						>
+							<CardDefault trail={trail} showAge={true} />
+						</LI>
+					))}
+				</UL>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };
 
-export const BeyondEight = ({ trails }: { trails: DCRFrontCard[] }) => {
+export const EightOrMoreSlow = ({
+	trails,
+}: {
+	trails: [...Tuple<DCRFrontCard, 8>, ...DCRFrontCard[]];
+}) => {
 	const afterEight = trails.slice(8);
 
 	return (
 		<>
-			<EightCardFast trails={trails} />;
-			<UL wrapCards={true} direction="row">
-				{afterEight.map((trail, index) => (
-					<LI
-						key={trail.url}
-						percentage="33.333%"
-						padSides={true}
-						showDivider={index % 3 !== 0}
-					>
-						<CardDefault trail={trail} showAge={true} />
-					</LI>
-				))}
+			<UL direction="row" padBottom={true}>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[0]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[1]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[2]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[3]} showAge={true} />
+				</LI>
 			</UL>
+			<UL direction="row" padBottom={afterEight.length > 0}>
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25 trail={trails[4]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[5]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[6]} showAge={true} />
+				</LI>
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25 trail={trails[7]} showAge={true} />
+				</LI>
+			</UL>
+			{afterEight.length > 0 ? (
+				<UL wrapCards={true} direction="row">
+					{afterEight.map((trail, index) => (
+						<LI
+							key={trail.url}
+							percentage="25%"
+							padSides={true}
+							showDivider={index % 4 !== 0}
+						>
+							<Card25Media25 trail={trail} showAge={true} />
+						</LI>
+					))}
+				</UL>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };
 
-export const DecideContainerByTrails = ({ trails }: Props) => {
-	// TODO: Respect 'speed'
+export const DecideContainerByTrails = ({ trails, speed }: Props) => {
+	const initialTrails = takeFirst(trails, 8);
 
-	switch (trails.length) {
-		case 1:
-			return trails[0] !== undefined ? (
-				<OneCardFast trail={trails[0]} />
-			) : null;
-		case 2:
-			return <TwoCardFast trails={trails} />;
-		case 3:
-			return <ThreeCardFast trails={trails} />;
-		case 4:
-			return <FourCardFast trails={trails} />;
-		case 5:
-			return <FiveCardFast trails={trails} />;
-		case 6:
-			return <SixCardFast trails={trails} />;
-		case 7:
-			return <SevenCardFast trails={trails} />;
-		case 8:
-			return <EightCardFast trails={trails} />;
-		default:
-			return <BeyondEight trails={trails} />;
+	if (speed === 'fast') {
+		switch (initialTrails.length) {
+			case 0:
+				return <></>;
+			case 1:
+				return <OneCardFast trail={initialTrails[0]} />;
+			case 2:
+				return <TwoCard trails={initialTrails} />;
+			case 3:
+				return <ThreeCard trails={initialTrails} />;
+			case 4:
+				return <FourCard trails={initialTrails} />;
+			case 5:
+				return <FiveCardFast trails={initialTrails} />;
+			case 6:
+				return <SixCardFast trails={initialTrails} />;
+			case 7:
+				return <SevenCardFast trails={initialTrails} />;
+			case 8:
+				return (
+					<EightOrMoreFast
+						trails={[...initialTrails, ...trails.slice(8)]}
+					/>
+				);
+		}
+	} else {
+		switch (initialTrails.length) {
+			case 0:
+				return <></>;
+			case 1:
+				return <OneCardSlow trail={initialTrails[0]} />;
+			case 2:
+				return <TwoCard trails={initialTrails} />;
+			case 3:
+				return <ThreeCard trails={initialTrails} />;
+			case 4:
+				return <FourCard trails={initialTrails} />;
+			case 5:
+				return <FiveCardSlow trails={initialTrails} />;
+			case 6:
+				return <SixCardSlow trails={initialTrails} />;
+			case 7:
+				return <SevenCardSlow trails={initialTrails} />;
+			case 8:
+				return (
+					<EightOrMoreSlow
+						trails={[...initialTrails, ...trails.slice(8)]}
+					/>
+				);
+		}
 	}
 };

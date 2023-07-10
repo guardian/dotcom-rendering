@@ -6,6 +6,7 @@ import {
 	from,
 	textSans,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { nestedOphanComponents } from '../../../lib/ophan-helpers';
 import type { LinkType } from '../../../model/extract-nav';
 import FacebookIcon from '../../../static/icons/facebook.svg';
@@ -40,24 +41,17 @@ const columnStyle = css`
 	}
 
 	${from.desktop} {
-		width: 134px;
+		width: 140px;
 		float: left;
 		position: relative;
 
 		:after {
 			content: none;
 		}
-
-		:first-of-type {
-			width: 123px;
-		}
 	}
+
 	${from.leftCol} {
 		width: 160px;
-
-		:first-of-type {
-			width: 150px;
-		}
 	}
 `;
 
@@ -234,53 +228,56 @@ export const MoreColumn = ({ otherLinks, brandExtensions }: Props) => {
 					))}
 				</ul>
 			</li>
-			<li css={columnStyle} role="none">
-				<ul css={[columnLinks]} role="menu">
-					<li
-						key="facebook"
-						css={[mainMenuLinkStyle, hideDesktop]}
-						role="none"
-					>
-						<a
-							className="selectableMenuItem"
-							css={columnLinkTitle}
-							data-link-name={nestedOphanComponents(
-								'nav2',
-								'secondary',
-								'facebook',
-							)}
-							href="https://www.facebook.com/theguardian"
-							role="menuitem"
-							tabIndex={-1}
+			{/** Social buttons hidden from menus from desktop */}
+			<Hide from="desktop">
+				<li css={columnStyle} role="none">
+					<ul css={[columnLinks]} role="menu">
+						<li
+							key="facebook"
+							css={[mainMenuLinkStyle, hideDesktop]}
+							role="none"
 						>
-							<FacebookIcon css={shareIconStyles} />
-							Facebook
-						</a>
-					</li>
+							<a
+								className="selectableMenuItem"
+								css={columnLinkTitle}
+								data-link-name={nestedOphanComponents(
+									'nav2',
+									'secondary',
+									'facebook',
+								)}
+								href="https://www.facebook.com/theguardian"
+								role="menuitem"
+								tabIndex={-1}
+							>
+								<FacebookIcon css={shareIconStyles} />
+								Facebook
+							</a>
+						</li>
 
-					<li
-						key="twitter"
-						css={[mainMenuLinkStyle, hideDesktop]}
-						role="none"
-					>
-						<a
-							className="selectableMenuItem"
-							css={columnLinkTitle}
-							data-link-name={nestedOphanComponents(
-								'nav2',
-								'secondary',
-								'twitter',
-							)}
-							href="https://twitter.com/guardian"
-							role="menuitem"
-							tabIndex={-1}
+						<li
+							key="twitter"
+							css={[mainMenuLinkStyle, hideDesktop]}
+							role="none"
 						>
-							<TwitterIconPadded css={shareIconStyles} />
-							Twitter
-						</a>
-					</li>
-				</ul>
-			</li>
+							<a
+								className="selectableMenuItem"
+								css={columnLinkTitle}
+								data-link-name={nestedOphanComponents(
+									'nav2',
+									'secondary',
+									'twitter',
+								)}
+								href="https://twitter.com/guardian"
+								role="menuitem"
+								tabIndex={-1}
+							>
+								<TwitterIconPadded css={shareIconStyles} />
+								Twitter
+							</a>
+						</li>
+					</ul>
+				</li>
+			</Hide>
 		</>
 	);
 };

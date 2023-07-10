@@ -1,8 +1,9 @@
+import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { FEArticleBadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
-import type { FEElement, Newsletter } from './content';
+import type { FEElement, ImageForLightbox, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { FEOnwards } from './onwards';
 import type { TagType } from './tag';
@@ -113,6 +114,7 @@ export interface FEArticleType {
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
+	imagesForLightbox?: ImageForLightbox[];
 	showTableOfContents: boolean;
 	lang?: string;
 	isRightToLeftLang?: boolean;
@@ -125,4 +127,25 @@ export interface TableOfContents {
 export interface TableOfContentsItem {
 	id: string;
 	title: string;
+}
+
+/**
+ * BlocksRequest is the expected body format for POST requests made to /Blocks
+ */
+export interface FEBlocksRequest {
+	blocks: Block[];
+	format: FEFormat;
+	host?: string;
+	pageId: string;
+	webTitle: string;
+	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	edition: string;
+	section: string;
+	sharedAdTargeting: SharedAdTargeting;
+	adUnit: string;
+	videoDuration?: number;
+	switches: { [key: string]: boolean };
+	keywordIds: string;
 }

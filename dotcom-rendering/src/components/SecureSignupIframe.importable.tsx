@@ -16,8 +16,7 @@ import {
 	getOphanRecordFunction,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
-
-const isServer = typeof window === 'undefined';
+import { isServer } from '../lib/isServer';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the

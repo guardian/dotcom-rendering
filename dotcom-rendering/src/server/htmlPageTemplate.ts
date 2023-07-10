@@ -28,6 +28,7 @@ type BaseProps = {
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 	hasPageSkin?: boolean;
+	weAreHiring: boolean;
 };
 
 interface WebProps extends BaseProps {
@@ -75,6 +76,7 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		hasPageSkin = false,
 		borkFCP,
 		borkFID,
+		weAreHiring,
 	} = props;
 
 	const favicon =
@@ -191,7 +193,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 	return `<!doctype html>
         <html lang="en">
             <head>
-			    ${weAreHiringMessage}
+			    ${
+					weAreHiring
+						? weAreHiringMessage
+						: '<!-- Hello there, HTML enthusiast! -->'
+				}
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
 				${

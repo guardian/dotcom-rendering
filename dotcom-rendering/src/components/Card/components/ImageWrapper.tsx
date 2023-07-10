@@ -3,6 +3,10 @@ import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/source-foundations';
 import { PlayIcon } from './PlayIcon';
 
+export type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+
+export type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
+
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
@@ -68,7 +72,7 @@ export const ImageWrapper = ({
 					flexBasisStyles({
 						imageSize,
 					}),
-				imageType === 'mainMedia' &&
+				(imageType === 'picture' || imageType === 'video') &&
 					isHorizontal &&
 					flexBasisStyles({
 						imageSize,
@@ -119,10 +123,10 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{(imageType === 'mainMedia' || imageType === 'slideshow') && (
+				{(imageType === 'picture' || imageType === 'slideshow') && (
 					<div className="image-overlay" />
 				)}
-				{imageType === 'mainMedia' && showPlayIcon && (
+				{imageType === 'picture' && showPlayIcon && (
 					<PlayIcon
 						imageSize={imageSize}
 						imagePositionOnMobile={imagePositionOnMobile}

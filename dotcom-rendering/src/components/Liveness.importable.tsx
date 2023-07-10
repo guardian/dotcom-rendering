@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { initHydration } from '../client/islands/initHydration';
 import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
+import { isServer } from '../lib/isServer';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -18,8 +19,6 @@ type Props = {
 	hasPinnedPost: boolean;
 	selectedTopics?: Topic[];
 };
-
-const isServer = typeof window === 'undefined';
 
 const topOfBlog: Element | null = !isServer
 	? window.document.getElementById('top-of-blog')
