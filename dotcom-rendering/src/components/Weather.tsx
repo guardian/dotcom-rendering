@@ -209,6 +209,10 @@ const collapsibleStyles = css`
 			display: inherit;
 		}
 
+		.checkbox:not(:checked) ~ .now {
+			border-bottom: none;
+		}
+
 		.checkbox:not(:checked) ~ .now > .checkbox-label {
 			svg:first-child {
 				display: none;
