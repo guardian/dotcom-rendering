@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
 	background,
+	between,
 	from,
 	neutral,
 	palette,
@@ -218,15 +219,16 @@ const sectionHeadlineUntilLeftCol = css`
 	grid-column: title;
 	display: flex;
 	flex-direction: column;
-	${until.leftCol} {
+	${between.tablet.and.leftCol} {
 		flex-direction: row;
 		justify-content: space-between;
 	}
 `;
 
 const opinionStyles = css`
-	${until.mobileLandscape} {
-		flex-direction: column;
+	${from.mobileLandscape} {
+		flex-direction: row;
+		justify-content: space-between;
 	}
 `;
 
