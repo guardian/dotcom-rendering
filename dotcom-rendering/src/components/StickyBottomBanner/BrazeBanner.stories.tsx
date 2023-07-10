@@ -260,7 +260,9 @@ export const BrazeStyleableBannerComponent = (
 			imageUrl: args.imageUrl,
 			imageAltText: args.imageAltText,
 			imagePosition: args.imagePosition,
-			styleCloseButton: args.styleCloseButton,
+			styleClose: args.styleClose,
+			styleCloseBackground: args.styleCloseBackground,
+			styleCloseHover: args.styleCloseHover,
 			ophanComponentId: args.ophanComponentId,
 		};
 
@@ -288,28 +290,28 @@ export const BrazeStyleableBannerComponent = (
 
 BrazeStyleableBannerComponent.args = {
 	slotName: 'Banner',
-	componentName: 'StyleableBannerWithLink',
-	ophanComponentId: 'change_me_ophan_component_id',
-	styleBackground: 'rgb(237, 237, 237)',
+	styleBackground: '#ededed',
 	header: 'The Guardian’s impact in 2021',
-	styleHeader: 'rgb(51, 51, 51)',
+	styleHeader: '#333333',
 	body: 'Thanks to your generous support in this extraordinary year, our open, independent journalism was read by millions. From the pandemic to our urgent coverage of the climate crisis, our reporting had a powerful impact.',
-	styleBody: 'rgb(51, 51, 51)',
+	styleBody: '#333333',
 	highlight:
 		'Read our look-back to see how Guardian journalism made a difference.',
-	styleHighlight: 'rgb(51, 51, 51)',
-	styleHighlightBackground: 'rgb(237, 237, 237)',
+	styleHighlight: '#333333',
+	styleHighlightBackground: '#ededed',
 	buttonText: 'Take a look back',
 	buttonUrl:
 		'https://www.theguardian.com/info/ng-interactive/2020/dec/21/the-guardian-in-2020?INTCMP=gdnwb_mrtn_banner_edtrl_MK_SU_WorkingReport2020Canvas',
-	styleButton: 'rgb(255, 255, 255)',
-	styleButtonBackground: 'rgb(5, 41, 98)',
-	styleButtonHover: 'rgb(35, 75, 138)',
+	styleButton: '#ffffff',
+	styleButtonBackground: '#052962',
+	styleButtonHover: '#234b8a',
 	imageAltText: 'Accessible image description',
 	imagePosition: 'bottom',
-	styleCloseButton: 'rgb(5, 41, 98)',
-	imageUrl:
-		'https://i.guim.co.uk/img/media/35d403182e4b262d37385281b19b763ee6b32f6a/58_0_1743_1046/master/1743.png?width=930&quality=45&auto=format&s=9ecd82413fef9883c1e7a0df2bf6abb1',
+	styleClose: '#052962',
+	styleCloseBackground: '#ededed',
+	styleCloseHover: '#e5e5e5',
+	componentName: 'StyleableBannerWithLink',
+	ophanComponentId: 'change_me_ophan_component_id',
 };
 
 BrazeStyleableBannerComponent.storyName = 'StyleableBannerWithLink';
