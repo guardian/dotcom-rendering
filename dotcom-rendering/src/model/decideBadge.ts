@@ -8,9 +8,10 @@ import { BADGES, SPECIAL_BADGES } from './badges';
  * Fetches the badge properties only if ALL branding has the same sponsor.
  */
 export const getBadgeFromBranding = (
-	branding: Branding[],
+	branding?: Branding[],
 ): DCRBadgeType | undefined => {
 	// Early return if there are no branding elements
+	if (!branding) return;
 	if (!branding.length) return;
 
 	const [firstBrand] = branding;
@@ -65,11 +66,12 @@ export const getBadgeFromSeriesTag = (
  * Return a badge based on the series tag or container branding
  *
  * Try to fetch badge using series tag first
- * Otherwise fetch badge using branding elements
+ * Otherwise try to fetch badge using branding elements
+ * Returns undefined as default / if no matches found
  */
 export const decideBadge = (
-	allBranding: Branding[],
 	seriesTag?: string,
+	allBranding?: Branding[],
 ): DCRBadgeType | undefined => {
 	return (
 		getBadgeFromSeriesTag(seriesTag) ?? getBadgeFromBranding(allBranding)
