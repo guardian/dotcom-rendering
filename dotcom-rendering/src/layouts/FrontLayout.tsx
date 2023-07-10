@@ -230,7 +230,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								remoteHeader={
 									!!front.config.switches.remoteHeader
 								}
-								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 								idApiUrl={front.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
@@ -689,7 +691,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
-					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 
