@@ -108,7 +108,7 @@ const slotCSS = css`
 
 	${between.tablet.and.desktop} {
 		padding-left: 4px;
-
+		padding-right: 4px;
 		&.forecast-3,
 		&.forecast-4 {
 			display: none;
@@ -116,6 +116,7 @@ const slotCSS = css`
 	}
 
 	${between.desktop.and.wide} {
+		padding-right: 4px;
 		&.forecast-4 {
 			display: none;
 		}
