@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { getLargest, getMaster } from '../components/ImageComponent';
 import type { Orientation } from '../components/Picture';
+import { isHighEnough, isWideEnough } from '../lib/lightbox';
 import type {
 	FEElement,
 	ImageBlockElement,
@@ -10,7 +11,7 @@ import { isImage } from './enhance-images';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater
- * than 620 pixels.
+ * than a threshold.
  *
  * Frontend has similar logic here:
  * https://github.com/guardian/frontend/blob/126dfcbc1aa961650b7f7ff41ee50a12782bb62e/common/app/model/content.scala#L549
@@ -22,15 +23,9 @@ const isLightboxable = (
 ): boolean => {
 	switch (orientation) {
 		case 'landscape':
-			// If any width is above 620 we allow this image in lightbox
-			return element.media.allImages.some(
-				(mediaImg) => parseInt(mediaImg.fields.width, 10) > 620,
-			);
+			return element.media.allImages.some(isWideEnough);
 		case 'portrait':
-			// If any height is above 620 we allow this image in lightbox
-			return element.media.allImages.some(
-				(mediaImg) => parseInt(mediaImg.fields.height, 10) > 620,
-			);
+			return element.media.allImages.some(isHighEnough);
 	}
 };
 
