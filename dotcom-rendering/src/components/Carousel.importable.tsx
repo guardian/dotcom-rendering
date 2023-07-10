@@ -43,6 +43,7 @@ type ArticleProps = Props & {
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
 	collectionType?: string;
+	hasPageSkin?: boolean;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -108,7 +109,9 @@ const containerMargins = css`
 		margin-left: -10px;
 		margin-right: -10px;
 	}
+`;
 
+const containerMarginsFromLeftCol = css`
 	${from.leftCol} {
 		margin-left: -1px;
 		margin-right: -10px;
@@ -209,6 +212,11 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
+
+const buttonContainerStyleWithPageSkin = css`
+	display: none;
+`;
+
 const prevButtonContainerStyle = (leftColSize: LeftColSize) => {
 	switch (leftColSize) {
 		case 'wide':
@@ -333,9 +341,6 @@ const headerRowStyles = css`
 	justify-content: space-between;
 	${from.tablet} {
 		padding-right: 10px;
-	}
-
-	${from.tablet} {
 		margin-left: 10px;
 	}
 `;
@@ -526,9 +531,205 @@ const HeaderAndNav = ({
 	</div>
 );
 
-const decideCarouselColours = (
-	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
-): {
+const Header = ({
+	heading,
+	trails,
+	carouselColours,
+	index,
+	goToIndex,
+	prev,
+	next,
+	arrowName,
+	isCuratedContent,
+	isVideoContainer,
+	hasPageSkin,
+}: {
+	heading: string;
+	trails: TrailType[];
+	carouselColours: CarouselColours;
+	index: number;
+	goToIndex: (newIndex: number) => void;
+	prev: () => void;
+	next: () => void;
+	arrowName: string;
+	isCuratedContent: boolean;
+	isVideoContainer: boolean;
+	hasPageSkin: boolean;
+}) => {
+	const header = (
+		<div css={headerRowStyles}>
+			<HeaderAndNav
+				heading={heading}
+				trails={trails}
+				titleHighlightColour={carouselColours.titleHighlightColour}
+				titleColour={carouselColours.titleColour}
+				activeDotColour={carouselColours.activeDotColour}
+				index={index}
+				isCuratedContent={isCuratedContent}
+				goToIndex={goToIndex}
+			/>
+			<Hide when="below" breakpoint="desktop">
+				<button
+					type="button"
+					onClick={prev}
+					aria-label="Move carousel backwards"
+					css={[
+						buttonStyle(
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+						prevButtonStyle(
+							index,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+					]}
+					data-link-name={getDataLinkNameCarouselButton(
+						'prev',
+						arrowName,
+						isVideoContainer,
+					)}
+				>
+					<SvgChevronLeftSingle />
+				</button>
+				<button
+					type="button"
+					onClick={next}
+					aria-label="Move carousel forwards"
+					css={[
+						buttonStyle(
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+						nextButtonStyle(
+							index,
+							trails.length,
+							carouselColours.arrowColour,
+							carouselColours.arrowBackgroundColour,
+							carouselColours.arrowBackgroundHoverColour,
+						),
+					]}
+					data-link-name={getDataLinkNameCarouselButton(
+						'next',
+						arrowName,
+						isVideoContainer,
+					)}
+				>
+					<SvgChevronRightSingle />
+				</button>
+			</Hide>
+		</div>
+	);
+	/**
+	 * When there is a page skin we constrain to a desktop layout
+	 * So don't hide the header past leftcol as normal
+	 */
+	if (hasPageSkin) {
+		return header;
+	}
+	return (
+		<Hide when="above" breakpoint="leftCol">
+			{header}
+		</Hide>
+	);
+};
+
+const InlineChevrons = ({
+	trails,
+	carouselColours,
+	index,
+	prev,
+	next,
+	arrowName,
+	isVideoContainer,
+	leftColSize,
+	hasPageSkin,
+}: {
+	trails: TrailType[];
+	carouselColours: CarouselColours;
+	index: number;
+	prev: () => void;
+	next: () => void;
+	arrowName: string;
+	isVideoContainer: boolean;
+	leftColSize: LeftColSize;
+	hasPageSkin: boolean;
+}) => (
+	<>
+		<div
+			css={[
+				buttonContainerStyle,
+				hasPageSkin && buttonContainerStyleWithPageSkin,
+				!hasPageSkin && prevButtonContainerStyle(leftColSize),
+			]}
+		>
+			<button
+				type="button"
+				onClick={prev}
+				aria-label="Move carousel backwards"
+				css={[
+					buttonStyle(
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+					prevButtonStyle(
+						index,
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+				]}
+				data-link-name={getDataLinkNameCarouselButton(
+					'prev',
+					arrowName,
+					isVideoContainer,
+				)}
+			>
+				<SvgChevronLeftSingle />
+			</button>
+		</div>
+		<div
+			css={[
+				buttonContainerStyle,
+				hasPageSkin && buttonContainerStyleWithPageSkin,
+				nextButtonContainerStyle,
+			]}
+		>
+			<button
+				type="button"
+				onClick={next}
+				aria-label="Move carousel forwards"
+				css={[
+					buttonStyle(
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+					nextButtonStyle(
+						index,
+						trails.length,
+						carouselColours.arrowColour,
+						carouselColours.arrowBackgroundColour,
+						carouselColours.arrowBackgroundHoverColour,
+					),
+				]}
+				data-link-name={getDataLinkNameCarouselButton(
+					'next',
+					arrowName,
+					isVideoContainer,
+				)}
+			>
+				<SvgChevronRightSingle />
+			</button>
+		</div>
+	</>
+);
+
+type CarouselColours = {
 	titleColour: string;
 	titleHighlightColour: string;
 	borderColour: string;
@@ -536,7 +737,11 @@ const decideCarouselColours = (
 	arrowColour: string;
 	arrowBackgroundColour: string;
 	arrowBackgroundHoverColour: string;
-} => {
+};
+
+const decideCarouselColours = (
+	props: { format: ArticleFormat } | { palette: DCRContainerPalette },
+): CarouselColours => {
 	if ('palette' in props) {
 		const containerOverrides = decideContainerOverrides(props.palette);
 		return {
@@ -597,6 +802,8 @@ export const Carousel = ({
 
 	const isVideoContainer =
 		'collectionType' in props && props.collectionType === 'fixed/video';
+
+	const hasPageSkin = 'hasPageSkin' in props && (props.hasPageSkin ?? false);
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -706,6 +913,7 @@ export const Carousel = ({
 				borderType="partial"
 				size={leftColSize}
 				borderColour={carouselColours.borderColour}
+				hasPageSkin={hasPageSkin}
 			>
 				<HeaderAndNav
 					heading={heading}
@@ -718,142 +926,39 @@ export const Carousel = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
+			<InlineChevrons
+				trails={trails}
+				carouselColours={carouselColours}
+				index={index}
+				prev={prev}
+				next={next}
+				arrowName={arrowName}
+				isVideoContainer={isVideoContainer}
+				leftColSize={leftColSize}
+				hasPageSkin={hasPageSkin}
+			/>
 			<div
 				css={[
-					buttonContainerStyle,
-					prevButtonContainerStyle(leftColSize),
+					containerStyles,
+					containerMargins,
+					!hasPageSkin && containerMarginsFromLeftCol,
 				]}
-			>
-				<button
-					type="button"
-					onClick={prev}
-					aria-label="Move carousel backwards"
-					css={[
-						buttonStyle(
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-						prevButtonStyle(
-							index,
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-					]}
-					data-link-name={getDataLinkNameCarouselButton(
-						'prev',
-						arrowName,
-						isVideoContainer,
-					)}
-				>
-					<SvgChevronLeftSingle />
-				</button>
-			</div>
-
-			<div css={[buttonContainerStyle, nextButtonContainerStyle]}>
-				<button
-					type="button"
-					onClick={next}
-					aria-label="Move carousel forwards"
-					css={[
-						buttonStyle(
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-						nextButtonStyle(
-							index,
-							trails.length,
-							carouselColours.arrowColour,
-							carouselColours.arrowBackgroundColour,
-							carouselColours.arrowBackgroundHoverColour,
-						),
-					]}
-					data-link-name={getDataLinkNameCarouselButton(
-						'next',
-						arrowName,
-						isVideoContainer,
-					)}
-				>
-					<SvgChevronRightSingle />
-				</button>
-			</div>
-			<div
-				css={[containerStyles, containerMargins]}
 				data-component={onwardsSource}
 				data-link={formatAttrString(heading)}
 			>
-				<Hide when="above" breakpoint="leftCol">
-					<div css={headerRowStyles}>
-						<HeaderAndNav
-							heading={heading}
-							trails={trails}
-							titleHighlightColour={
-								carouselColours.titleHighlightColour
-							}
-							titleColour={carouselColours.titleColour}
-							activeDotColour={carouselColours.activeDotColour}
-							index={index}
-							isCuratedContent={isCuratedContent}
-							goToIndex={goToIndex}
-						/>
-						<Hide when="below" breakpoint="desktop">
-							<button
-								type="button"
-								onClick={prev}
-								aria-label="Move carousel backwards"
-								css={[
-									buttonStyle(
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-									prevButtonStyle(
-										index,
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-								]}
-								data-link-name={getDataLinkNameCarouselButton(
-									'prev',
-									arrowName,
-									isVideoContainer,
-								)}
-							>
-								<SvgChevronLeftSingle />
-							</button>
-							<button
-								type="button"
-								onClick={next}
-								aria-label="Move carousel forwards"
-								css={[
-									buttonStyle(
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-									nextButtonStyle(
-										index,
-										trails.length,
-										carouselColours.arrowColour,
-										carouselColours.arrowBackgroundColour,
-										carouselColours.arrowBackgroundHoverColour,
-									),
-								]}
-								data-link-name={getDataLinkNameCarouselButton(
-									'next',
-									arrowName,
-									isVideoContainer,
-								)}
-							>
-								<SvgChevronRightSingle />
-							</button>
-						</Hide>
-					</div>
-				</Hide>
-
+				<Header
+					heading={heading}
+					trails={trails}
+					carouselColours={carouselColours}
+					index={index}
+					goToIndex={goToIndex}
+					prev={prev}
+					next={next}
+					arrowName={arrowName}
+					isCuratedContent={isCuratedContent}
+					isVideoContainer={isVideoContainer}
+					hasPageSkin={hasPageSkin}
+				/>
 				<ul
 					css={carouselStyle}
 					ref={carouselRef}

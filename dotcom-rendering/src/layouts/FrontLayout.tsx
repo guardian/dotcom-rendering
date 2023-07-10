@@ -533,6 +533,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collectionType={
 												collection.collectionType
 											}
+											hasPageSkin={hasPageSkin}
 										/>
 									</Island>
 								</Section>
