@@ -151,6 +151,6 @@ export const Island = ({
  */
 export const islandNoscriptStyles = `
 <style>
-	gu-island[clientOnly=true] { display: none; }
+	gu-island[clientOnly] { display: none; }
 </style>
 `;
