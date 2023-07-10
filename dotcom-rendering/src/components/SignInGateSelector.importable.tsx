@@ -1,10 +1,11 @@
-import { getCookie, getSwitches } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
 import { useOnce } from '../lib/useOnce';
 import { useSignedInStatus } from '../lib/useSignedInStatus';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
+import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
@@ -32,6 +33,7 @@ type Props = {
 	host?: string;
 	pageId: string;
 	idUrl?: string;
+	switches: Switches;
 };
 
 // interface for the component which shows the sign in gate
@@ -149,6 +151,7 @@ export const SignInGateSelector = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
+	switches,
 }: Props) => {
 	const isSignedIn = useSignedInStatus() === 'SignedIn';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
@@ -212,13 +215,9 @@ export const SignInGateSelector = ({
 	}, [gateSelector]);
 
 	useOnce(() => {
-		void getSwitches().then((switches) => {
-			if (switches.personaliseSignInGateAfterCheckout) {
-				setPersonaliseSwitch(
-					switches.personaliseSignInGateAfterCheckout,
-				);
-			} else setPersonaliseSwitch(false);
-		});
+		if (switches.personaliseSignInGateAfterCheckout) {
+			setPersonaliseSwitch(switches.personaliseSignInGateAfterCheckout);
+		} else setPersonaliseSwitch(false);
 	}, []);
 
 	useEffect(() => {
