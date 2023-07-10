@@ -22,7 +22,7 @@ cdk-synth:
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
-	@node ./scripts/deploy/build-riffraff-bundle.js
+	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
