@@ -206,8 +206,8 @@ export const LightboxImages = ({ format, images }: Props) => {
 								// Height and width are only used here so the browser has a ratio to work with
 								// when laying out the page. The actual size of the image is based on the
 								// viewport
-								height={image.height.toString()}
-								width={image.width.toString()}
+								height={image.height}
+								width={image.width}
 								master={image.masterUrl}
 								format={format}
 								isLightbox={true}

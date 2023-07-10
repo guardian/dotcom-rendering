@@ -279,8 +279,8 @@ export const ImageComponent = ({
 	 * https://github.com/guardian/dotcom-rendering/pull/1879
 	 *
 	 */
-	const imageWidth = master.fields.width;
-	const imageHeight = master.fields.width;
+	const imageWidth = parseInt(master.fields.width, 10);
+	const imageHeight = parseInt(master.fields.height, 10);
 
 	const palette = decidePalette(format);
 
@@ -335,7 +335,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					imageWidth > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -385,7 +385,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					imageWidth > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -474,7 +474,7 @@ export const ImageComponent = ({
 				)}
 
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					imageWidth > 620 &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
