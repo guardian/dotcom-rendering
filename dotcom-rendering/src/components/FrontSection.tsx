@@ -218,6 +218,16 @@ const sectionHeadlineUntilLeftCol = css`
 	grid-column: title;
 	display: flex;
 	flex-direction: column;
+	${until.leftCol} {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+`;
+
+const opinionStyles = css`
+	${until.mobileLandscape} {
+		flex-direction: column;
+	}
 `;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`
@@ -495,6 +505,7 @@ export const FrontSection = ({
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
 						),
+					title === 'Opinion' && opinionStyles,
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
