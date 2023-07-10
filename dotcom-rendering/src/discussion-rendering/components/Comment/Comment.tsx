@@ -802,6 +802,7 @@ export const Comment = ({
 												}
 												pillar={pillar}
 												commentId={comment.id}
+												authStatus={user?.authStatus}
 											/>
 										</div>
 									)}

@@ -143,7 +143,7 @@ export const comment =
 		const data = new URLSearchParams();
 		data.append('body', body);
 
-		const requestOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 		return fetch(url, {
 			method: 'POST',
@@ -151,11 +151,11 @@ export const comment =
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(requestOptions.headers !== undefined
-					? requestOptions.headers
+				...(authOptions.headers !== undefined
+					? authOptions.headers
 					: {}),
 			},
-			credentials: requestOptions.credentials,
+			credentials: authOptions.credentials,
 		}).then((resp) => resp.json());
 	};
 
@@ -177,7 +177,7 @@ export const reply =
 			) + objAsParams(defaultParams);
 		const data = new URLSearchParams();
 		data.append('body', body);
-		const requestOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 		return fetch(url, {
 			method: 'POST',
@@ -185,11 +185,11 @@ export const reply =
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				...options.headers,
-				...(requestOptions.headers !== undefined
-					? requestOptions.headers
+				...(authOptions.headers !== undefined
+					? authOptions.headers
 					: {}),
 			},
-			credentials: requestOptions.credentials,
+			credentials: authOptions.credentials,
 		}).then((resp) => resp.json());
 	};
 
@@ -214,17 +214,18 @@ export const getPicks = (
 	);
 };
 
-//todo - at some point in the future: would be nice to have a signed in with user, signed in anonymous and signed out options
 export const reportAbuse = ({
 	commentId,
 	categoryId,
 	email,
 	reason,
+	authStatus,
 }: {
 	commentId: number;
 	categoryId: number;
 	reason?: string;
 	email?: string;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 }): Promise<CommentResponse> => {
 	const url =
 		joinUrl(
@@ -239,14 +240,19 @@ export const reportAbuse = ({
 	email && data.append('email', email.toString());
 	reason && data.append('reason', reason);
 
+	const authOptions = authStatus
+		? getOptionsHeadersWithOkta(authStatus)
+		: undefined;
+
 	return fetch(url, {
 		method: 'POST',
 		body: data.toString(),
-		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(authOptions?.headers !== undefined ? authOptions.headers : {}),
 		},
+		credentials: authOptions?.credentials,
 	}).then((resp) => resp.json());
 };
 
@@ -261,17 +267,17 @@ export const recommend =
 				'recommend',
 			) + objAsParams(defaultParams);
 
-		const requestOptions = getOptionsHeadersWithOkta(authStatus);
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 		return fetch(url, {
 			method: 'POST',
 			headers: {
 				...options.headers,
-				...(requestOptions.headers !== undefined
-					? requestOptions.headers
+				...(authOptions.headers !== undefined
+					? authOptions.headers
 					: {}),
 			},
-			credentials: requestOptions.credentials,
+			credentials: authOptions.credentials,
 		}).then((resp) => resp.ok);
 	};
 
@@ -284,7 +290,7 @@ export const addUserName = (
 	// const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
 	const url =
 		options.idApiUrl + `/user/me/username` + objAsParams(defaultParams);
-	const requestOptions = getOptionsHeadersWithOkta(authStatus);
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
@@ -296,11 +302,9 @@ export const addUserName = (
 		}),
 		headers: {
 			'Content-Type': 'application/json',
-			...(requestOptions.headers !== undefined
-				? requestOptions.headers
-				: {}),
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
-		credentials: requestOptions.credentials,
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
@@ -314,17 +318,15 @@ export const pickComment = (
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
 		objAsParams(defaultParams);
 
-	const requestOptions = getOptionsHeadersWithOkta(authStatus);
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(requestOptions.headers !== undefined
-				? requestOptions.headers
-				: {}),
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
-		credentials: requestOptions.credentials,
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
@@ -341,18 +343,16 @@ export const unPickComment = (
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
-	const requestOptions = getOptionsHeadersWithOkta(authStatus);
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
-			...(requestOptions.headers !== undefined
-				? requestOptions.headers
-				: {}),
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
-		credentials: requestOptions.credentials,
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));

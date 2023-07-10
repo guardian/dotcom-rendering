@@ -7,6 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 import { reportAbuse } from '../../lib/api';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
+import {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../../lib/useAuthStatus';
 
 type FormData = {
 	categoryId: number;
@@ -59,12 +63,14 @@ type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
 	pillar: ArticleTheme;
+	authStatus: SignedInWithCookies | SignedInWithOkta | undefined;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
 	pillar,
+	authStatus,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
 	// TODO: use ref once forwardRef is implemented @guardian/src-button
@@ -163,6 +169,7 @@ export const AbuseReportForm = ({
 			reason,
 			email,
 			commentId,
+			authStatus,
 		})
 			.then((response) => {
 				if (response.status !== 'ok') {

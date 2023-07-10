@@ -213,6 +213,7 @@ const writeMutes = (mutes: string[]) => {
 	}
 };
 
+//todo: should probably rename this to Comments?
 export const App = ({
 	baseUrl,
 	shortUrl,
