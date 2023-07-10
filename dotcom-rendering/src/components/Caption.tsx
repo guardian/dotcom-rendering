@@ -35,7 +35,7 @@ const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	line-height: 135%;
 	padding-top: 6px;
-	word-wrap: break-all;
+	overflow-wrap: break-all;
 	color: ${palette.text.caption};
 `;
 
