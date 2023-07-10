@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 import { ASSET_ORIGIN } from '../lib/assets';
-import type { DCRBadgeType, SpecialBadgeType } from '../types/badge';
+import type { DCRBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';
 import { BADGES, SPECIAL_BADGES } from './badges';
 
@@ -35,52 +35,43 @@ export const getBadgeFromBranding = (
 export const getBadgeFromSeriesTag = (
 	seriesTag: string,
 ): DCRBadgeType | undefined => {
-	// First check the list of standard badges against seriesTags
 	const badge = BADGES.find((b) => b.seriesTag === seriesTag);
-
-	// If no badge found (result is falsy) check the list of special badges for a match against the md5 hash
-	if (!badge) {
-		const specialBadge = findSpecialBadgeBySeriesTag(seriesTag);
-		if (specialBadge)
-			return {
-				imageSrc: `${ASSET_ORIGIN}static/frontend/${specialBadge.imageSrc}`,
-				href: `/${seriesTag}`,
-			};
-		// Return undefined if no badge & no special badge found
-		else return undefined;
-	} else
+	if (badge) {
 		return {
 			imageSrc: `${ASSET_ORIGIN}static/frontend/${badge.imageSrc}`,
 			href: `/${seriesTag}`,
 		};
+	} else {
+		// "Special" hidden badges have their series tags hashed
+		const specialBadge = SPECIAL_BADGES.find((b) => {
+			const badgeHash = createHash('md5')
+				.update(b.salt + seriesTag)
+				.digest('hex');
+			return badgeHash.includes(b.hashedTag);
+		});
+
+		return specialBadge
+			? {
+					imageSrc: `${ASSET_ORIGIN}static/frontend/${specialBadge.imageSrc}`,
+					href: `/${seriesTag}`,
+			  }
+			: undefined; // No badge or special badge found
+	}
 };
 
 /**
- * Fetches special badge if the seriesTag matches the hashed series tag
- */
-const findSpecialBadgeBySeriesTag = (
-	seriesTag: string,
-): SpecialBadgeType | undefined =>
-	SPECIAL_BADGES.find((b) => {
-		const badgeHash = createHash('md5')
-			.update(b.salt + seriesTag)
-			.digest('hex');
-
-		return badgeHash.includes(b.hashedTag);
-	});
-
-/**
- * Construct a badge based on the series tag or container branding
+ * Return a badge based on the series tag or container branding
+ *
+ * Try to fetch badge using series tag first
+ * Otherwise fetch badge using branding elements
  */
 export const decideBadge = (
 	allBranding: Branding[],
-	tagId?: string,
+	seriesTag?: string,
 ): DCRBadgeType | undefined => {
-	if (tagId) {
-		return (
-			getBadgeFromSeriesTag(tagId) ?? getBadgeFromBranding(allBranding)
-		);
-	} else {
-		return getBadgeFromBranding(allBranding);
-	}
+	const badgeFromSeriesTag = seriesTag
+		? getBadgeFromSeriesTag(seriesTag)
+		: undefined;
+
+	return badgeFromSeriesTag ?? getBadgeFromBranding(allBranding);
 };
