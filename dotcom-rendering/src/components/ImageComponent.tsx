@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { isWideEnough } from '../lib/lightbox';
 import type { Switches } from '../types/config';
 import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -272,7 +273,6 @@ export const ImageComponent = ({
 	/**
 	 * We use height and width for two things.
 	 *
-	 * 1) To decide if an image is large enough to be used in lightbox (>620) and
 	 * 2) To get a true ratio value to apply to the image in the page, so the browser's pre-parser can reserve the space
 	 *
 	 * On the second point, see this PR for more detail
@@ -335,7 +335,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					imageWidth > 620 &&
+					isWideEnough(master) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -385,7 +385,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					imageWidth > 620 &&
+					isWideEnough(master) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -474,7 +474,7 @@ export const ImageComponent = ({
 				)}
 
 				{switches?.lightbox === true &&
-					imageWidth > 620 &&
+					isWideEnough(master) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
