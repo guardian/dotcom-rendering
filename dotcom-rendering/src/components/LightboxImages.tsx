@@ -105,10 +105,7 @@ const asideStyles = css`
 	}
 	background-color: ${neutral[7]};
 
-	padding-left: ${space[3]}px;
-	padding-right: ${space[3]}px;
-	padding-top: ${space[3]}px;
-	padding-bottom: ${space[3]}px;
+	padding: ${space[3]}px;
 
 	${from.tablet} {
 		padding-left: ${space[5]}px;
