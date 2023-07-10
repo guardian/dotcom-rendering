@@ -65,7 +65,9 @@ const nonCollapsableCallout = (): ReactElement => {
 				status: 201,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
+
 	return (
 		<Callout
 			isNonCollapsible={true}
@@ -90,7 +92,9 @@ const minimalCallout = (): ReactElement => {
 				status: 201,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
+
 	return (
 		<>A callouts prompt, title and description are optional
 		<Callout
@@ -117,7 +121,9 @@ const calloutWithFormFailure = (): ReactElement => {
 				status: 400,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
+
 	return (
 		<Callout
 			isNonCollapsible={true}

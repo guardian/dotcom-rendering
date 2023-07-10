@@ -27,7 +27,8 @@ const goodRequest = () => {
 				status: 201,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
 };
 
 const badRequest = () => {
@@ -39,7 +40,8 @@ const badRequest = () => {
 				status: 400,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
 };
 
 export const Default = () => {
