@@ -216,14 +216,23 @@ const CaptionToggle = () => (
 	</>
 );
 
+const descendingByWidthComparator = (a: Image, b: Image) => {
+	return parseInt(b.fields.width, 10) - parseInt(a.fields.width, 10);
+};
+
+const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
 export const getMaster = (images: Image[]) => {
 	return images.find((image) => image.fields.isMaster);
 };
+
 export const getLargest = (images: Image[]) => {
-	const descendingByWidth = (a: Image, b: Image) => {
-		return parseInt(b.fields.width) - parseInt(a.fields.width);
-	};
-	return images.slice().sort(descendingByWidth)[0];
+	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
 export const ImageComponent = ({
@@ -254,13 +263,6 @@ export const ImageComponent = ({
 	const master =
 		getMaster(element.media.allImages) ??
 		getLargest(element.media.allImages);
-
-	const isSupported = (imageUrl: string): boolean => {
-		const supportedImages = ['jpg', 'jpeg', 'png'];
-		return supportedImages.some((extension) =>
-			imageUrl.endsWith(`.${extension}`),
-		);
-	};
 
 	if (!master?.url || !isSupported(master.url)) {
 		// We should only try to render images that are supported by Fastly
