@@ -260,12 +260,12 @@ export const ImageComponent = ({
 		format.design !== ArticleDesign.Comment &&
 		format.design !== ArticleDesign.Editorial;
 
-	// Legacy images do not have a master so we fallback to the largest available
-	const master =
+	/** Legacy images do not have a master so we fallback to the largest available */
+	const image =
 		getMaster(element.media.allImages) ??
 		getLargest(element.media.allImages);
 
-	if (!master?.url || !isSupported(master.url)) {
+	if (!image?.url || !isSupported(image.url)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
@@ -279,8 +279,8 @@ export const ImageComponent = ({
 	 * https://github.com/guardian/dotcom-rendering/pull/1879
 	 *
 	 */
-	const imageWidth = parseInt(master.fields.width, 10);
-	const imageHeight = parseInt(master.fields.height, 10);
+	const imageWidth = parseInt(image.fields.width, 10);
+	const imageHeight = parseInt(image.fields.height, 10);
 
 	const palette = decidePalette(format);
 
@@ -324,7 +324,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -335,7 +335,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					isWideEnough(master) &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -371,7 +371,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -385,7 +385,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					isWideEnough(master) &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -421,7 +421,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -474,7 +474,7 @@ export const ImageComponent = ({
 				)}
 
 				{switches?.lightbox === true &&
-					isWideEnough(master) &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
