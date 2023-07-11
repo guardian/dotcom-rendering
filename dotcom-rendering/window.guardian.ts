@@ -7,6 +7,8 @@ import type {
 } from '@guardian/consent-management-platform/dist/types';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
+import type { google } from './src/components/YoutubeAtom/ima';
+import type { ImaManager } from './src/components/YoutubeAtom/YoutubeAtomPlayer';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { Guardian } from './src/model/guardian';
@@ -69,6 +71,14 @@ declare global {
 			) => boolean;
 		};
 		mockLiveUpdate: (data: LiveUpdateType) => void;
+		/**
+		 * Here we want to type the google object that will be added to window.
+		 * Since the imported google namespace is a value rather than a type, use typeof.
+		 */
+		google?: typeof google;
+		YT?: {
+			ImaManager: typeof ImaManager;
+		};
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

@@ -9,6 +9,8 @@ import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 
+/* stylelint-disable */
+
 const wrapperStyles = css`
 	width: 100%;
 	border-image: repeating-linear-gradient(
