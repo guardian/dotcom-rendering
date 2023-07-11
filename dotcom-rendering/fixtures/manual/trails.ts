@@ -95,6 +95,7 @@ export const trails: [
 			videoId: 'abcd',
 			title: 'some title',
 			duration: 378,
+			category: 'News',
 			width: 480,
 			height: 288,
 			origin: 'The Guardian',

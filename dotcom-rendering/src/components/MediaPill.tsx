@@ -85,7 +85,10 @@ export const MediaPill = ({
 	}
 
 	const hasDuration = mediaDuration !== undefined && mediaDuration > 0;
-	const showPill = hasDuration || mediaCategory !== undefined;
+	const showCategory =
+		!!mediaCategory &&
+		['Livestream', 'Explainer', 'Documentary'].includes(mediaCategory);
+	const showPill = hasDuration || showCategory;
 	if (!showPill) return null;
 	const isLive = mediaCategory === 'Livestream';
 
