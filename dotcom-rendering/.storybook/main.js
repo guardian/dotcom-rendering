@@ -8,7 +8,7 @@ const {
 // Generate dynamic Card and Layout stories
 require('../scripts/gen-stories/gen-stories');
 
-/** @type {import("@storybook/react/types").StorybookConfig} */
+/** @type {import("@storybook/react-webpack5").StorybookConfig} */
 module.exports = {
 	features: {
 		// used in composition
