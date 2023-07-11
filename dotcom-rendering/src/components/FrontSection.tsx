@@ -228,7 +228,6 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 		${flexRowStyles}
 	}
 
-	// The CP Scott header text should sit under the container title on mobile screens
 	${isOpinion && until.mobileLandscape} {
 		flex-direction: column;
 	}
