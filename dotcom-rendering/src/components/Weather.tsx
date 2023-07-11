@@ -40,6 +40,9 @@ const weatherCSS = css`
 	align-items: center;
 	letter-spacing: -0.56px;
 
+	${between.tablet.and.leftCol} {
+		padding-top: 6px;
+	}
 	${until.desktop} {
 		display: none;
 	}
@@ -88,10 +91,10 @@ const nowCSS = css`
 const slotCSS = css`
 	display: flex;
 	flex: 1;
-	padding-top: 4px;
+	padding-top: 6px;
 
 	border-left: var(--border);
-	padding-left: 4px;
+	padding-left: 6px;
 
 	${until.mobileLandscape} {
 		&.forecast-4 {
@@ -107,8 +110,8 @@ const slotCSS = css`
 	}
 
 	${between.tablet.and.desktop} {
-		padding-left: 4px;
-		padding-right: 4px;
+		padding-left: 6px;
+		padding-right: 6px;
 		&.forecast-3,
 		&.forecast-4 {
 			display: none;
@@ -116,6 +119,7 @@ const slotCSS = css`
 	}
 
 	${between.desktop.and.wide} {
+		padding-left: 4px;
 		padding-right: 4px;
 		&.forecast-4 {
 			display: none;

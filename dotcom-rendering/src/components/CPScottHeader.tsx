@@ -17,7 +17,6 @@ const scottAvatarStyles = css`
 	background-color: ${opinion[800]};
 	flex-shrink: 0;
 	${until.mobileLandscape} {
-		margin-top: -35px;
 		width: 70px;
 	}
 `;
@@ -42,8 +41,9 @@ const containerStyles = css`
 	${until.leftCol} {
 		display: flex;
 		flex-direction: row-reverse;
-		margin-top: 5px;
+		margin-top: 6px;
 		${until.mobileLandscape} {
+			align-items: center;
 			justify-content: space-between;
 		}
 	}

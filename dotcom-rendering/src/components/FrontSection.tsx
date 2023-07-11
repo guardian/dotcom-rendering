@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
 	background,
-	between,
 	from,
 	neutral,
 	palette,
@@ -214,21 +213,19 @@ const containerStylesFromLeftCol = css`
 	}
 `;
 
+const flexRowStyles = css`
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
 const sectionHeadlineUntilLeftCol = css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
 	flex-direction: column;
-	${between.tablet.and.leftCol} {
-		flex-direction: row;
-		justify-content: space-between;
-	}
-`;
 
-const opinionStyles = css`
-	${from.mobileLandscape} {
-		flex-direction: row;
-		justify-content: space-between;
+	${until.leftCol} {
+		${flexRowStyles}
 	}
 `;
 
@@ -245,6 +242,12 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 			position: absolute;
 			background-color: ${borderColour};
 		}
+	}
+`;
+
+const leftContentStyles = css`
+	${until.leftCol} {
+		margin-left: ${space[2]}px;
 	}
 `;
 
@@ -507,7 +510,6 @@ export const FrontSection = ({
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
 						),
-					title === 'Opinion' && opinionStyles,
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
@@ -582,7 +584,7 @@ export const FrontSection = ({
 						</div>
 					</>
 				)}
-				{leftContent}
+				<div css={leftContentStyles}>{leftContent}</div>
 			</div>
 
 			{isToggleable && (
