@@ -16,7 +16,7 @@
 		"prettier:fix": "prettier . --write --cache",
 		"lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
 		"tsc": "tsc",
-		"test": "jest --maxWorkers=50% --runInBand",
+		"test": "jest --maxWorkers=50%",
 		"test:watch": "jest --watch --maxWorkers=25%",
 		"test:ci": "jest --runInBand",
 		"createtoc": "doctoc $npm_package_tocList --github --update-only --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
