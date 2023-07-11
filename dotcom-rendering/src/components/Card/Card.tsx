@@ -21,7 +21,7 @@ import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration } from '../MediaDuration';
+import { MediaPill } from '../MediaPill';
 import { MediaMeta } from '../MediaMeta';
 import { Slideshow } from '../Slideshow';
 import { Snap } from '../Snap';
@@ -463,7 +463,7 @@ export const Card = ({
 									alt={media.imageAltText}
 								/>
 								{showPlayIcon && (
-									<MediaDuration
+									<MediaPill
 										mediaDuration={mainMedia.duration}
 										mediaCategory={mainMedia.category}
 										imagePosition={imagePosition}

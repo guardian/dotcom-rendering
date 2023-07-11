@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette, space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { ImagePositionType } from './Card/components/ImageWrapper';
+import type { ImagePositionType } from './Card/components/ImageWrapper';
 
 const pillStyles = css`
 	position: absolute;
@@ -42,7 +42,7 @@ const liveStyles = css`
 const capitalise = (str: string): string =>
 	str.charAt(0).toUpperCase() + str.slice(1);
 
-const transformCategory = (category: string, isLive: boolea): string => {
+const transformCategory = (category: string, isLive: boolean): string => {
 	if (isLive) return 'Live';
 	else return capitalise(category);
 };
@@ -69,7 +69,7 @@ export function secondsToDuration(secs?: number): string {
 	return duration.join(':');
 }
 
-export const MediaDuration = ({
+export const MediaPill = ({
 	mediaDuration,
 	imagePosition,
 	imagePositionOnMobile,
@@ -80,7 +80,6 @@ export const MediaDuration = ({
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 }) => {
-	console.log('*** mediaCategory', mediaCategory);
 	if (imagePosition === 'left') {
 		return null;
 	}
