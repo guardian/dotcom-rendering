@@ -57,8 +57,14 @@ const frontStyles = css`
 `;
 
 const adFreeStyles = css`
+	${between.desktop.and.leftCol} {
+		min-width: 962px;
+	}
 	${between.leftCol.and.wide} {
-		width: 76%;
+		width: 75%;
+	}
+	${from.wide} {
+		min-width: 962px;
 	}
 `;
 
