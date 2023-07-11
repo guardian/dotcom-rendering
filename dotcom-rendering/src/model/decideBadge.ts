@@ -22,7 +22,12 @@ export const getBadgeFromBranding = (
 		({ sponsorName }) => sponsorName === firstBrand.sponsorName,
 	);
 
-	return allBrandingHasSameSponsor
+	// TODO FIXME - temporary hack to stop guardian.org badges appearing
+	const isFoundationFunded =
+		firstBrand.brandingType?.name === 'foundation' ||
+		firstBrand.sponsorName === 'theguardian.org';
+
+	return !isFoundationFunded && allBrandingHasSameSponsor
 		? {
 				imageSrc: firstBrand.logo.src,
 				href: firstBrand.logo.link,

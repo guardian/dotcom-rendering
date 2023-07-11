@@ -28,7 +28,7 @@ const brandingGuardianOrg = {
 	brandingType: {
 		name: 'sponsored',
 	},
-	sponsorName: 'guardian.org',
+	sponsorName: 'theguardian.org',
 	logo: {
 		src: 'https://static.theguardian.com/commercial/sponsor/16/Mar/2022/1e17c6f8-8114-44e9-8e10-02b8e5c6b929-theguardianorg badge.png',
 		dimensions: {
@@ -116,6 +116,13 @@ describe('Decide badge', () => {
 
 			const result2 = getBadgeFromBranding([]);
 			expect(result2).toEqual(expectedResult);
+		});
+
+		it('returns undefined if Guardian org brand supplied', () => {
+			const expectedResult = undefined;
+
+			const result = getBadgeFromBranding([brandingGuardianOrg]);
+			expect(result).toEqual(expectedResult);
 		});
 	});
 
