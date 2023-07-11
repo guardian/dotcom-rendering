@@ -21,7 +21,7 @@ import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
 
 type Props = {
-	section: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
@@ -87,14 +87,14 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
  */
 const usePayload = ({
 	shouldHideReaderRevenue,
-	section,
+	sectionId,
 	isPaidContent,
 	tags,
 	pageId,
 	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
-	section: string;
+	sectionId: string;
 	isPaidContent: boolean;
 	tags: TagType[];
 	pageId: string;
@@ -122,7 +122,7 @@ const usePayload = ({
 		},
 		targeting: {
 			contentType: 'LiveBlog',
-			sectionId: section,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle: true,
 			isPaidContent,
@@ -232,7 +232,7 @@ function insertAfter(referenceNode: HTMLElement, newNode: Element) {
  *    and render the Epic component using it
  */
 export const LiveBlogEpic = ({
-	section,
+	sectionId,
 	shouldHideReaderRevenue,
 	isPaidContent,
 	tags,
@@ -245,7 +245,7 @@ export const LiveBlogEpic = ({
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
-		section,
+		sectionId,
 		isPaidContent,
 		tags,
 		pageId,

@@ -36,8 +36,7 @@ import type {
 
 type Props = {
 	contentType: string;
-	sectionName?: string;
-	section: string;
+	sectionId: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
@@ -101,7 +100,7 @@ const buildRRBannerConfigWith = ({
 		asyncArticleCounts,
 		signInGateWillShow = false,
 		contentType,
-		section,
+		sectionId,
 		shouldHideReaderRevenue,
 		isMinuteArticle,
 		isPaidContent,
@@ -116,7 +115,7 @@ const buildRRBannerConfigWith = ({
 		asyncArticleCounts: Promise<ArticleCounts | undefined>;
 		signInGateWillShow?: boolean;
 		contentType: string;
-		section: string;
+		sectionId: string;
 		shouldHideReaderRevenue: boolean;
 		isMinuteArticle: boolean;
 		isPaidContent: boolean;
@@ -134,7 +133,7 @@ const buildRRBannerConfigWith = ({
 						isSignedIn,
 						asyncCountryCode,
 						contentType,
-						sectionId: section,
+						sectionId,
 						shouldHideReaderRevenue,
 						isMinuteArticle,
 						isPaidContent,
@@ -151,7 +150,6 @@ const buildRRBannerConfigWith = ({
 						signInBannerLastClosedAt: getBannerLastClosedAt(
 							'signInBannerLastClosedAt',
 						),
-						section,
 						isPreview,
 						idApiUrl,
 						signInGateWillShow,
@@ -213,8 +211,7 @@ const buildBrazeBanner = (
 
 export const StickyBottomBanner = ({
 	contentType,
-	sectionName,
-	section,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -242,7 +239,7 @@ export const StickyBottomBanner = ({
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
 		contentType,
-		sectionName,
+		sectionId,
 		tags,
 		isPaidContent,
 		isPreview,
@@ -262,7 +259,7 @@ export const StickyBottomBanner = ({
 				ArticleCounts | undefined
 			>,
 			contentType,
-			section,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,
@@ -282,7 +279,7 @@ export const StickyBottomBanner = ({
 			>,
 			signInGateWillShow,
 			contentType,
-			section,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,
@@ -292,7 +289,7 @@ export const StickyBottomBanner = ({
 			idApiUrl,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: sectionName,
+			section: sectionId,
 		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as BrazeMessagesInterface,

@@ -11,7 +11,7 @@ type Props = {
 	renderedElements: (JSX.Element | null | undefined)[];
 	format: ArticleFormat;
 	contentType: string;
-	sectionName: string;
+	sectionId: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;
@@ -27,7 +27,7 @@ export const withSignInGateSlot = ({
 	renderedElements,
 	format,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -46,7 +46,7 @@ export const withSignInGateSlot = ({
 							<SignInGateSelector
 								format={format}
 								contentType={contentType}
-								sectionName={sectionName}
+								sectionId={sectionId}
 								tags={tags}
 								isPaidContent={isPaidContent}
 								isPreview={!!isPreview}
