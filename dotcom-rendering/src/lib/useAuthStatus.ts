@@ -70,8 +70,8 @@ function getSignedInStatusWithOkta(
 	if (authState.isAuthenticated) {
 		return {
 			kind: 'SignedInWithOkta',
-			accessToken: authState.accessToken as AccessToken<never>,
-			idToken: authState.idToken as IDToken<CustomIdTokenClaims>,
+			accessToken: authState.accessToken,
+			idToken: authState.idToken,
 		};
 	}
 
