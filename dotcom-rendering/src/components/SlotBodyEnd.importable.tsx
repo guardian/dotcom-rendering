@@ -30,7 +30,6 @@ import type {
 
 type Props = {
 	contentType: string;
-	sectionName?: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
@@ -104,7 +103,6 @@ function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
 
 export const SlotBodyEnd = ({
 	contentType,
-	sectionName,
 	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
@@ -166,7 +164,7 @@ export const SlotBodyEnd = ({
 			browserId: browserId ?? undefined,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: sectionName,
+			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as BrazeMessagesInterface,

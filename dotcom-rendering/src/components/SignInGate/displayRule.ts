@@ -40,7 +40,7 @@ export const isValidContentType = (contentType: string): boolean => {
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
-export const isValidSection = (sectionName?: string): boolean => {
+export const isValidSection = (sectionId?: string): boolean => {
 	const invalidSections = [
 		'about',
 		'info',
@@ -53,7 +53,7 @@ export const isValidSection = (sectionName?: string): boolean => {
 	// we check for invalid section by reducing the above array, and then NOT the result so we know
 	// its a valid section
 	return !invalidSections.some(
-		(section: string): boolean => sectionName === section,
+		(section: string): boolean => sectionId === section,
 	);
 };
 
@@ -76,7 +76,7 @@ export const canShowSignInGate = ({
 	isSignedIn,
 	currentTest,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -90,7 +90,7 @@ export const canShowSignInGate = ({
 			) &&
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(contentType) &&
-			isValidSection(sectionName) &&
+			isValidSection(sectionId) &&
 			isValidTag(tags) &&
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
@@ -103,7 +103,7 @@ export const canShowSignInGateMandatory: ({
 	isSignedIn,
 	currentTest,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -111,7 +111,7 @@ export const canShowSignInGateMandatory: ({
 	isSignedIn,
 	currentTest,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -122,7 +122,7 @@ export const canShowSignInGateMandatory: ({
 			isSignedIn,
 			currentTest,
 			contentType,
-			sectionName,
+			sectionId,
 			tags,
 			isPaidContent,
 			isPreview,

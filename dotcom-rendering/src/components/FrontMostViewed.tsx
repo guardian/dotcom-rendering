@@ -75,7 +75,7 @@ export const FrontMostViewed = ({
 				<Island deferUntil="visible">
 					<MostViewedFooter
 						tabs={tabs}
-						sectionName="Most viewed"
+						sectionId="Most viewed"
 						mostCommented={mostCommented}
 						mostShared={mostShared}
 						hasPageSkin={hasPageSkin}
@@ -91,7 +91,7 @@ export const FrontMostViewed = ({
 			) : (
 				<MostViewedFooter
 					tabs={tabs}
-					sectionName="Most viewed"
+					sectionId="Most viewed"
 					mostCommented={mostCommented}
 					mostShared={mostShared}
 					hasPageSkin={hasPageSkin}

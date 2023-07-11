@@ -26,7 +26,7 @@ import type {
 type Props = {
 	format: ArticleFormat;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
@@ -144,7 +144,7 @@ const ShowSignInGate = ({
 export const SignInGateSelector = ({
 	format,
 	contentType,
-	sectionName = '',
+	sectionId = '',
 	tags,
 	isPaidContent,
 	isPreview,
@@ -227,7 +227,7 @@ export const SignInGateSelector = ({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,
-					sectionName,
+					sectionId,
 					tags,
 					isPaidContent,
 					isPreview,
@@ -239,7 +239,7 @@ export const SignInGateSelector = ({
 		gateVariant,
 		isSignedIn,
 		contentType,
-		sectionName,
+		sectionId,
 		tags,
 		isPaidContent,
 		isPreview,

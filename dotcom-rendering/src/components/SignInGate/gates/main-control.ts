@@ -12,7 +12,7 @@ const canShow = ({
 	isSignedIn,
 	currentTest,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -22,7 +22,7 @@ const canShow = ({
 			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(contentType) &&
-			isValidSection(sectionName) &&
+			isValidSection(sectionId) &&
 			isValidTag(tags) &&
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&

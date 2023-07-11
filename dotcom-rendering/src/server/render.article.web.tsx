@@ -279,7 +279,7 @@ export const renderBlocks = ({
 			isAdFreeUser={isAdFreeUser}
 			switches={switches}
 			isLiveUpdate={true}
-			section={section}
+			sectionId={section}
 			// The props below are never used because isLiveUpdate is true but, typescript...
 			shouldHideReaderRevenue={false}
 			tags={[]}

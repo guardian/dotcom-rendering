@@ -104,7 +104,7 @@ const gridContainer = css`
 
 type Props = {
 	data: TrailTabType[];
-	sectionName?: string;
+	sectionId?: string;
 	selectedColour?: string;
 	hasPageSkin?: boolean;
 };
@@ -131,7 +131,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 
 export const MostViewedFooterGrid = ({
 	data,
-	sectionName = '',
+	sectionId = '',
 	selectedColour = neutral[0],
 	hasPageSkin = false,
 }: Props) => {
@@ -230,7 +230,7 @@ export const MostViewedFooterGrid = ({
 						css={gridContainer}
 						data-cy={`tab-body-${i}`}
 						data-link-name={tab.heading}
-						data-link-context={`most-read/${sectionName}`}
+						data-link-context={`most-read/${sectionId}`}
 					>
 						{tab.trails.map((trail: TrailType, j: number) => (
 							<MostViewedFooterItem
