@@ -435,6 +435,7 @@ type CarouselCardProps = {
 	branding?: Branding;
 	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
+	onwardsSource?: string;
 };
 
 const CarouselCard = ({
@@ -450,6 +451,7 @@ const CarouselCard = ({
 	branding,
 	mainMedia,
 	verticalDividerColour,
+	onwardsSource,
 }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
@@ -478,6 +480,7 @@ const CarouselCard = ({
 			isExternalLink={false}
 			mainMedia={mainMedia}
 			videoSize="too small to play: 479px or less"
+			onwardsSource={onwardsSource}
 		/>
 	</LI>
 );
@@ -1004,6 +1007,7 @@ export const Carousel = ({
 								verticalDividerColour={
 									carouselColours.borderColour
 								}
+								onwardsSource={onwardsSource}
 							/>
 						);
 					})}
