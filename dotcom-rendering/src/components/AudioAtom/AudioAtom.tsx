@@ -116,10 +116,11 @@ const progressBarInputStyle = (pillar: ArticleTheme) => css`
 	:focus {
 		${focusHalo}
 	}
-	// Use the pillar to style the colour of the range thumb
+
+	/* Use the pillar to style the colour of the range thumb */
 	&::-webkit-slider-thumb {
 		background: ${pillarPalette[pillar][400]};
-		-webkit-appearance: none;
+		-webkit-appearance: none; /* stylelint-disable-line property-no-vendor-prefix */
 		width: 14px;
 		height: 14px;
 		border-radius: 50px;
