@@ -1,9 +1,9 @@
-import { AudioAtom } from '@guardian/atoms-rendering';
 import {
 	getConsentFor,
 	onConsentChange,
 } from '@guardian/consent-management-platform';
 import { useEffect, useState } from 'react';
+import { AudioAtom } from './AudioAtom/AudioAtom';
 
 type Props = {
 	id: string;
