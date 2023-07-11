@@ -150,7 +150,7 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { abTests, isPaidContent, hasPageSkin },
+		config: { abTests, isPaidContent, hasPageSkin: hasPageSkinConfig },
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
@@ -161,6 +161,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	);
 
 	const renderAds = canRenderAds(front);
+
+	const hasPageSkin = hasPageSkinConfig && renderAds;
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
