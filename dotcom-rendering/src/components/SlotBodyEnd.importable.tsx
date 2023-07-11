@@ -13,9 +13,9 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
-import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import type { TagType } from '../types/tag';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {

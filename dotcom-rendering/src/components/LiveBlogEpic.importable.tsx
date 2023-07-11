@@ -16,8 +16,8 @@ import {
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
-import { useSDCLiveblogEpic } from '../lib/useSDC';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useSDCLiveblogEpic } from '../lib/useSDC';
 import type { TagType } from '../types/tag';
 
 type Props = {

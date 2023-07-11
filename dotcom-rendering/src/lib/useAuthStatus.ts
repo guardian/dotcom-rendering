@@ -63,7 +63,6 @@ export async function eitherInOktaTestOrElse<A, B>(
 	}
 }
 
-//TODO: We will not ship these typecasts, this is only until the identity library update
 function getSignedInStatusWithOkta(
 	authState: OktaAuthState,
 ): SignedOutWithOkta | SignedInWithOkta {

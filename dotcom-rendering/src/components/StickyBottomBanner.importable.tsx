@@ -14,9 +14,9 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
-import { useAuthStatus } from '../lib/useAuthStatus';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import type { TagType } from '../types/tag';
 import {

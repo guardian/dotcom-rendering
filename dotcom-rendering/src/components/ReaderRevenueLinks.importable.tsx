@@ -34,9 +34,9 @@ import {
 import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
-import { useAuthStatus } from '../lib/useAuthStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {

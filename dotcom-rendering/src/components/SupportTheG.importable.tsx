@@ -35,10 +35,10 @@ import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
-import { useIsInView } from '../lib/useIsInView';
-import { useOnce } from '../lib/useOnce';
 import type { AuthStatus } from '../lib/useAuthStatus';
 import { useAuthStatus } from '../lib/useAuthStatus';
+import { useIsInView } from '../lib/useIsInView';
+import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
