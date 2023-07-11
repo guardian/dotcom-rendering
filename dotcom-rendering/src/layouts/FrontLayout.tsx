@@ -707,7 +707,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						isSensitive={front.config.isSensitive}
 						keywordIds={front.config.keywordIds} // a front doesn't really have tags, but frontend generates a keywordId
 						pageId={front.pressedPage.id}
-						section={front.config.section}
+						sectionId={front.config.section}
 						shouldHideReaderRevenue={false} // never defined for fronts
 						remoteBannerSwitch={
 							!!front.config.switches.remoteBanner
