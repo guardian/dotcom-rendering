@@ -13,7 +13,7 @@ import type {
 import { MostViewedFooter } from './MostViewedFooter.importable';
 
 interface Props {
-	sectionName?: string;
+	sectionId?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
 	edition: EditionId;
@@ -22,14 +22,13 @@ interface Props {
 function buildSectionUrl(
 	ajaxUrl: string,
 	edition: EditionId,
-	sectionName?: string,
+	sectionId?: string,
 ) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
-		sectionName !== undefined &&
-		!sectionsWithoutPopular.includes(sectionName);
+		sectionId !== undefined && !sectionsWithoutPopular.includes(sectionId);
 	const endpoint = `/most-read${
-		hasSection ? `/${sectionName}` : ''
+		hasSection ? `/${sectionId}` : ''
 	}.json?_edition=${edition}`;
 	return joinUrl(ajaxUrl, `${endpoint}&dcr=true`);
 }
@@ -48,7 +47,7 @@ interface MostViewedFooterPayloadType {
 }
 
 export const MostViewedFooterData = ({
-	sectionName,
+	sectionId,
 	format,
 	ajaxUrl,
 	edition,
@@ -67,7 +66,7 @@ export const MostViewedFooterData = ({
 	const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 	const variantFromRunnable = runnableTest?.variantToRun.id ?? 'not-runnable';
 
-	const url = buildSectionUrl(ajaxUrl, edition, sectionName);
+	const url = buildSectionUrl(ajaxUrl, edition, sectionId);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | FETrailTabType[]
 	>(url);
@@ -94,7 +93,7 @@ export const MostViewedFooterData = ({
 				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
-				sectionName={sectionName}
+				sectionId={sectionId}
 				selectedColour={palette.background.mostViewedTab}
 			/>
 		);

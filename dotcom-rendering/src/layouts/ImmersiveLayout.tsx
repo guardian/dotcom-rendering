@@ -833,7 +833,7 @@ export const ImmersiveLayout = ({
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
-									sectionName={article.sectionName}
+									sectionId={article.config.section}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}

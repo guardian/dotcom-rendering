@@ -12,7 +12,7 @@ type Props = {
 	mostShared?: TrailType;
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
-	sectionName?: string;
+	sectionId?: string;
 	hasPageSkin?: boolean;
 };
 
@@ -47,7 +47,7 @@ export const MostViewedFooter = ({
 	mostShared,
 	abTestCypressDataAttr,
 	variantFromRunnable,
-	sectionName,
+	sectionId,
 	selectedColour,
 	hasPageSkin = false,
 }: Props) => {
@@ -63,7 +63,7 @@ export const MostViewedFooter = ({
 		>
 			<MostViewedFooterGrid
 				data={tabs}
-				sectionName={sectionName}
+				sectionId={sectionId}
 				selectedColour={selectedColour}
 				hasPageSkin={hasPageSkin}
 			/>
