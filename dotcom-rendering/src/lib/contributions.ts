@@ -2,6 +2,7 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
+import { DCRFrontType } from '../types/front';
 import type { FEArticleType } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
@@ -268,8 +269,9 @@ export const lazyFetchEmailWithTimeout =
 		});
 	};
 
-export const getContributionsServiceUrl = (article: FEArticleType): string =>
-	process.env.SDC_URL ?? article.contributionsServiceUrl;
+export const getContributionsServiceUrl = (
+	config: FEArticleType | DCRFrontType,
+): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = (): PurchaseInfo => {

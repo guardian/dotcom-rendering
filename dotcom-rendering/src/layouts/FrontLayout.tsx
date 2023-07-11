@@ -29,10 +29,12 @@ import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherData } from '../components/WeatherData.importable';
 import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getDesktopAdPositions,
@@ -43,7 +45,7 @@ import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	front: DCRFrontType;
@@ -178,6 +180,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;
 
+	const contributionsServiceUrl = getContributionsServiceUrl(front);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -226,7 +230,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								remoteHeader={
 									!!front.config.switches.remoteHeader
 								}
-								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
 								idApiUrl={front.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
@@ -685,9 +691,34 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
-					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
+
+			<BannerWrapper data-print-layout="hide">
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						contentType={front.config.contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={front.config.idApiUrl}
+						isMinuteArticle={false}
+						isPaidContent={!!front.config.isPaidContent}
+						isPreview={front.config.isPreview}
+						isSensitive={front.config.isSensitive}
+						keywordIds={front.config.keywordIds} // a front doesn't really have tags, but frontend generates a keywordId
+						pageId={front.pressedPage.id}
+						sectionId={front.config.section}
+						shouldHideReaderRevenue={false} // never defined for fronts
+						remoteBannerSwitch={
+							!!front.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							!!front.config.switches.puzzlesBanner
+						}
+						tags={[]} // a front doesn't have tags
+					/>
+				</Island>
+			</BannerWrapper>
 		</>
 	);
 };

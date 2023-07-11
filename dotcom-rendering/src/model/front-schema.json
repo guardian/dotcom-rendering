@@ -383,11 +383,15 @@
             "items": {
                 "$ref": "#/definitions/FETrailType"
             }
+        },
+        "contributionsServiceUrl": {
+            "type": "string"
         }
     },
     "required": [
         "commercialProperties",
         "config",
+        "contributionsServiceUrl",
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
