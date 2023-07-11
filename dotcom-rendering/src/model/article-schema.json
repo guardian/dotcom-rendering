@@ -4359,9 +4359,13 @@
                                     "width"
                                 ]
                             }
+                        },
+                        "category": {
+                            "type": "string"
                         }
                     },
                     "required": [
+                        "category",
                         "duration",
                         "elementId",
                         "expired",

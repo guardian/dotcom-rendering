@@ -14,6 +14,7 @@ type Video = Media & {
 	duration: number;
 	expired: boolean;
 	images: Array<{ url: string; width: number }>;
+	category: string;
 };
 
 type Audio = Media & {

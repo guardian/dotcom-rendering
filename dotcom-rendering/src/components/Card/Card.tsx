@@ -465,6 +465,7 @@ export const Card = ({
 								{showPlayIcon && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
+										mediaCategory={mainMedia.category}
 										imagePosition={imagePosition}
 										imagePositionOnMobile={
 											imagePositionOnMobile

@@ -1,19 +1,51 @@
 import { css } from '@emotion/react';
-import { space, textSans } from '@guardian/source-foundations';
+import { palette, space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { ImagePositionType } from './Card/components/ImageWrapper';
 
-const durationStyles = css`
+const pillStyles = css`
 	position: absolute;
 	top: ${space[2]}px;
 	right: ${space[2]}px;
+	${textSans.xxsmall({ fontWeight: 'bold' })};
 	background-color: rgba(0, 0, 0, 0.7);
-	width: fit-content;
-	padding: ${space[1]}px ${space[3]}px;
+	color: ${palette.neutral[100]};
 	border-radius: ${space[3]}px;
-	color: white;
-	${textSans.xxsmall({ fontWeight: `bold` })}
+	padding: 0 6px;
+	display: inline-flex;
 `;
+
+const pillItemStyles = css`
+	/* Target all but the first element, and add a border */
+	:nth-of-type(n + 2) {
+		border-left: 1px solid rgba(255, 255, 255, 0.5);
+	}
+`;
+
+const pillTextStyles = css`
+	line-height: ${space[4]}px;
+	padding: ${space[1]}px 6px;
+`;
+
+const liveStyles = css`
+	::before {
+		content: '';
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background-color: ${palette.news[500]};
+		display: inline-block;
+		position: relative;
+		margin-right: 0.1875rem;
+	}
+`;
+const capitalise = (str: string): string =>
+	str.charAt(0).toUpperCase() + str.slice(1);
+
+const transformCategory = (category: string, isLive: boolea): string => {
+	if (isLive) return 'Live';
+	else return capitalise(category);
+};
 
 export function secondsToDuration(secs?: number): string {
 	if (typeof secs === `undefined` || secs === 0) {
@@ -41,26 +73,45 @@ export const MediaDuration = ({
 	mediaDuration,
 	imagePosition,
 	imagePositionOnMobile,
+	mediaCategory,
 }: {
-	mediaDuration: number;
+	mediaDuration?: number;
+	mediaCategory?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 }) => {
+	console.log('*** mediaCategory', mediaCategory);
 	if (imagePosition === 'left') {
 		return null;
 	}
-	if (imagePositionOnMobile === 'left')
-		return (
-			<Hide until="tablet">
-				<div css={durationStyles}>
-					<p>{secondsToDuration(mediaDuration)}</p>
-				</div>
-			</Hide>
-		);
 
-	return (
-		<div css={durationStyles}>
-			<p>{secondsToDuration(mediaDuration)}</p>
+	const hasDuration = mediaDuration !== undefined && mediaDuration > 0;
+	const showPill = hasDuration || mediaCategory !== undefined;
+	if (!showPill) return null;
+	const isLive = mediaCategory === 'Livestream';
+
+	const renderPill = () => (
+		<div css={pillStyles}>
+			{!!mediaCategory && (
+				<div css={pillItemStyles}>
+					<div css={[pillTextStyles, isLive && liveStyles]}>
+						{transformCategory(mediaCategory, isLive)}
+					</div>
+				</div>
+			)}
+			{hasDuration && (
+				<div css={pillItemStyles}>
+					<div css={pillTextStyles}>
+						{secondsToDuration(mediaDuration)}
+					</div>
+				</div>
+			)}
 		</div>
 	);
+
+	if (imagePositionOnMobile === 'left') {
+		return <Hide until="tablet">{renderPill()}</Hide>;
+	}
+
+	return renderPill();
 };

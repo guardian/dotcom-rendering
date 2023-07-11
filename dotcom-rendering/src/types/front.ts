@@ -157,6 +157,7 @@ export interface FEMediaAtoms {
 	posterImage?: { allImages: Image[] };
 	expired?: boolean;
 	activeVersion?: number;
+	category?: string;
 	// channelId?: string; // currently unused
 }
 

@@ -209,6 +209,7 @@ const decideMedia = (
 						elementId: mediaAtom.id,
 						videoId: asset.id,
 						duration: mediaAtom.duration ?? 0,
+						category: mediaAtom.category ?? '',
 						title: mediaAtom.title,
 						// Size fixed to a 5:3 ratio
 						width: 500,
