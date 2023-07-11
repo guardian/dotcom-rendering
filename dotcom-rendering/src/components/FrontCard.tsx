@@ -37,6 +37,7 @@ export const FrontCard = (props: Props) => {
 		showPulsingDot: trail.format.design === ArticleDesign.LiveBlog,
 		showClock: false,
 		imageUrl: trail.image,
+		imageAltText: trail.imageAltText,
 		isCrossword: trail.isCrossword,
 		videoSize: 'large enough to play: at least 480px',
 		starRating: trail.starRating,

@@ -298,6 +298,7 @@ export type DCRFrontCard = {
 	starRating?: number;
 	webPublicationDate?: string;
 	image?: string;
+	imageAltText?: string;
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
