@@ -38,7 +38,8 @@ export const ShowMoreSuccess = () => {
 		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr=true`, {
 			status: 200,
 			body: trails.slice(0, 6),
-		});
+		})
+		.spy('end:.hot-update.json');
 
 	return ShowMore(defaultProps);
 };
@@ -52,7 +53,8 @@ export const ShowMoreError = () => {
 		.get(`${ajaxUrl}/${pageId}/show-more/${collectionId}.json?dcr`, {
 			status: 404,
 			body: null,
-		});
+		})
+		.spy('end:.hot-update.json');
 
 	return ShowMore(defaultProps);
 };

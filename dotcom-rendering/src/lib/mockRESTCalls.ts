@@ -483,5 +483,7 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
+			/** @see https://github.com/wheresrhys/fetch-mock/issues/618 */
+			.spy('end:.hot-update.json')
 	);
 };

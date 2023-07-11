@@ -18,7 +18,9 @@ export const Default = () => {
 				status: 201,
 				body: null,
 			},
-		);
+		)
+		.spy('end:.hot-update.json');
+
 	return (
 		<div
 			css={css`
