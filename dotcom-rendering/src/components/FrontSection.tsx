@@ -218,7 +218,7 @@ const flexRowStyles = css`
 	justify-content: space-between;
 `;
 
-const sectionHeadlineUntilLeftCol = css`
+const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
@@ -226,6 +226,12 @@ const sectionHeadlineUntilLeftCol = css`
 
 	${until.leftCol} {
 		${flexRowStyles}
+		margin-right: ${space[2]}px;
+	}
+
+	// The CP Scott header text should sit under the container title on mobile screens
+	${isOpinion && until.mobileLandscape} {
+		flex-direction: column;
 	}
 `;
 
@@ -242,12 +248,6 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 			position: absolute;
 			background-color: ${borderColour};
 		}
-	}
-`;
-
-const leftContentStyles = css`
-	${until.leftCol} {
-		margin-left: ${space[2]}px;
 	}
 `;
 
@@ -505,7 +505,9 @@ export const FrontSection = ({
 
 			<div
 				css={[
-					sectionHeadlineUntilLeftCol,
+					sectionHeadlineUntilLeftCol(
+						title?.toLowerCase() === 'opinion',
+					),
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
@@ -584,7 +586,7 @@ export const FrontSection = ({
 						</div>
 					</>
 				)}
-				<div css={leftContentStyles}>{leftContent}</div>
+				{leftContent}
 			</div>
 
 			{isToggleable && (
