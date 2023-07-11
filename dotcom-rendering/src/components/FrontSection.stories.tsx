@@ -103,7 +103,7 @@ export const LeftContentStory = () => {
 		<FrontSection
 			title="LeftContent"
 			leftContent={
-				<LeftColPlaceholder text="LeftCol" heightInPixels={200} />
+				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
 			}
 		>
 			<Placeholder />
