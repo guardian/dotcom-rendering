@@ -112,6 +112,21 @@ export const LeftContentStory = () => {
 };
 LeftContentStory.storyName = 'with an element passed into the left column';
 
+export const LeftContentOpinionStory = () => {
+	return (
+		<FrontSection
+			title="Opinion"
+			leftContent={
+				<LeftColPlaceholder text="LeftCol" heightInPixels={100} />
+			}
+		>
+			<Placeholder />
+		</FrontSection>
+	);
+};
+LeftContentOpinionStory.storyName =
+	'with an element passed into the left column of opinion section';
+
 export const ToggleableStory = () => {
 	return (
 		<FrontSection

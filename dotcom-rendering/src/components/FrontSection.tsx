@@ -226,7 +226,6 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 
 	${until.leftCol} {
 		${flexRowStyles}
-		margin-right: ${space[2]}px;
 	}
 
 	// The CP Scott header text should sit under the container title on mobile screens
@@ -334,7 +333,7 @@ const bottomPadding = css`
 
 const titleStyle = css`
 	${until.leftCol} {
-		max-width: 74%;
+		margin-right: ${space[1]}px;
 	}
 `;
 
@@ -506,6 +505,9 @@ export const FrontSection = ({
 			<div
 				css={[
 					sectionHeadlineUntilLeftCol(
+						// TODO FIXME:
+						// This relies on sections called "opinion"
+						// only ever having <CPScott> as the leftContent
 						title?.toLowerCase() === 'opinion',
 					),
 					!hasPageSkin &&
