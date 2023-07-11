@@ -17,10 +17,13 @@ export default {
 };
 
 export const defaultStory = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: mockTab1,
-	});
+	fetchMock
+		.restore()
+		.getOnce('*', {
+			status: 200,
+			body: mockTab1,
+		})
+		.spy('end:.hot-update.json');
 
 	return (
 		<Section fullWidth={true}>
@@ -54,10 +57,13 @@ export const defaultStory = () => {
 defaultStory.storyName = 'default';
 
 export const limitItemsStory = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: mockTab1,
-	});
+	fetchMock
+		.restore()
+		.getOnce('*', {
+			status: 200,
+			body: mockTab1,
+		})
+		.spy('end:.hot-update.json');
 
 	return (
 		<Section fullWidth={true}>
@@ -91,10 +97,13 @@ export const limitItemsStory = () => {
 limitItemsStory.storyName = 'with a limit of 3 items';
 
 export const outsideContextStory = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: mockTab1,
-	});
+	fetchMock
+		.restore()
+		.getOnce('*', {
+			status: 200,
+			body: mockTab1,
+		})
+		.spy('end:.hot-update.json');
 
 	return (
 		<Section fullWidth={true}>
