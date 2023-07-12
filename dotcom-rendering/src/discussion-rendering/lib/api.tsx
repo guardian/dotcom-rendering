@@ -199,6 +199,7 @@ export const getPicks = (
 	);
 };
 
+//todo - at some point in the future: would be nice to have a signed in with user, signed in anonymous and signed out options
 export const reportAbuse = ({
 	commentId,
 	categoryId,
@@ -248,6 +249,7 @@ export const recommend = (commentId: number): Promise<boolean> => {
 	}).then((resp) => resp.ok);
 };
 
+//todo: adjust this when the endpoint is ready
 export const addUserName = (userName: string): Promise<UserNameResponse> => {
 	const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
 

@@ -34,9 +34,9 @@ import {
 import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -179,7 +179,10 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<SupportHeaderType | null>(null);
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 
 	useOnce((): void => {
 		setAutomat();

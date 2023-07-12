@@ -3190,10 +3190,10 @@
     "@typescript-eslint/eslint-plugin" "5.46.1"
     "@typescript-eslint/parser" "5.59.9"
 
-"@guardian/identity-auth@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.1.2.tgz#ce357767c0228d7792158770e94173ad6723b7be"
-  integrity sha512-vInqAay30pyRS3EHoQwFYW1Fr6t3lD2zvpnnbPOzqqg/5eAoxNFloVkdmnffdB6XguSd9JUmVYS1XLtpZZswTQ==
+"@guardian/identity-auth@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.2.0.tgz#aaad1667095c5ba4bc7610e1a119ec007c249307"
+  integrity sha512-4bKanidGEH+VKaYQNNcS2y8ubmxfzMicr+wiIDsdosxicn3mLA1Hw0kHiaZm1vroo3JKp4442qVba3Z8Ot5vPA==
 
 "@guardian/libs@15.1.0", "@guardian/libs@^15.0.0":
   version "15.1.0"
