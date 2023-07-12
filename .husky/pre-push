@@ -10,3 +10,4 @@ then
 fi
 
 yarn workspace @guardian/dotcom-rendering tsc
+yarn workspace @guardian/dotcom-rendering createtoc && yarn workspace @guardian/dotcom-rendering addandcommittoc
