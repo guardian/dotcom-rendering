@@ -7,7 +7,7 @@ export type CanShowGateProps = {
 	isSignedIn: boolean;
 	currentTest: CurrentSignInGateABTest;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;

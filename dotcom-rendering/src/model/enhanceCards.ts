@@ -302,6 +302,11 @@ export const enhanceCards = (
 					  ).toISOString()
 					: undefined,
 			image: decideImage(faciaCard),
+			/** This property is coupled to the `image` property above.
+			 * There's room to create a codified coupling, but that has more far reaching changes */
+			imageAltText:
+				faciaCard.properties.maybeContent?.trail.trailPicture
+					?.allImages[0]?.fields.altText,
 			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(

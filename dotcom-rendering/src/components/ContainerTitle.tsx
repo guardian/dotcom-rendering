@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	between,
 	body,
 	headline,
 	neutral,
@@ -71,6 +72,16 @@ const dateTextStyles = (color: Colour) => css`
 	}
 `;
 
+const dateStyles = css`
+	${between.tablet.and.leftCol} {
+		display: flex;
+		flex-direction: row;
+		span:last-child {
+			margin-left: ${space[1]}px;
+		}
+	}
+`;
+
 /**
  * ContainerTitle
  *
@@ -117,10 +128,10 @@ export const ContainerTitle = ({
 				/>
 			)}
 			{showDateHeader && editionId && (
-				<>
+				<div css={dateStyles}>
 					<span
 						css={dateTextStyles(
-							overrides?.text?.containerDate ?? neutral[0],
+							overrides?.text.containerDate ?? neutral[0],
 						)}
 					>
 						{now.toLocaleDateString(locale, { weekday: 'long' })}
@@ -131,7 +142,7 @@ export const ContainerTitle = ({
 								display: block;
 							`,
 							dateTextStyles(
-								overrides?.text?.containerDate ?? news[400],
+								overrides?.text.containerDate ?? news[400],
 							),
 							bottomMargin,
 						]}
@@ -142,7 +153,7 @@ export const ContainerTitle = ({
 							year: 'numeric',
 						})}
 					</span>
-				</>
+				</div>
 			)}
 		</div>
 	);

@@ -29,6 +29,7 @@ export interface FEFrontType {
 	mostCommented?: FETrailType;
 	mostShared?: FETrailType;
 	deeplyRead?: FETrailType[];
+	contributionsServiceUrl: string;
 }
 
 export interface DCRFrontType {
@@ -45,6 +46,7 @@ export interface DCRFrontType {
 	mostShared?: TrailType;
 	deeplyRead?: TrailType[];
 	trendingTopics?: FETagType[];
+	contributionsServiceUrl: string;
 }
 
 interface FEPressedPageType {
@@ -298,6 +300,7 @@ export type DCRFrontCard = {
 	starRating?: number;
 	webPublicationDate?: string;
 	image?: string;
+	imageAltText?: string;
 	kickerText?: string;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
@@ -500,7 +503,31 @@ type FESeoDataType = {
 
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
-	commercial: Record<string, unknown>;
+	commercial: {
+		editionBrandings: Array<{
+			edition: {
+				id: string;
+			};
+			branding?: {
+				brandingType: {
+					name: string;
+				};
+				sponsorName: string;
+				logo: {
+					src: string;
+					dimensions: {
+						width: number;
+						height: number;
+					};
+					link: string;
+					label: string;
+				};
+				aboutThisLink: string;
+			};
+		}>;
+		editionAdTargetings: unknown;
+		prebidIndexSites?: unknown;
+	};
 	isPaidContent?: boolean;
 	onPageDescription?: string;
 };

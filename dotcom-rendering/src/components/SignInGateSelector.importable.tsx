@@ -1,10 +1,11 @@
-import { getCookie, getSwitches } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
 import { constructQuery } from '../lib/querystring';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useOnce } from '../lib/useOnce';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
+import type { Switches } from '../types/config';
 import type { TagType } from '../types/tag';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';
 import {
@@ -25,13 +26,14 @@ import type {
 type Props = {
 	format: ArticleFormat;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
 	host?: string;
 	pageId: string;
 	idUrl?: string;
+	switches: Switches;
 };
 
 // interface for the component which shows the sign in gate
@@ -142,15 +144,19 @@ const ShowSignInGate = ({
 export const SignInGateSelector = ({
 	format,
 	contentType,
-	sectionName = '',
+	sectionId = '',
 	tags,
 	isPaidContent,
 	isPreview,
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
+	switches,
 }: Props) => {
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -212,13 +218,9 @@ export const SignInGateSelector = ({
 	}, [gateSelector]);
 
 	useOnce(() => {
-		void getSwitches().then((switches) => {
-			if (switches.personaliseSignInGateAfterCheckout) {
-				setPersonaliseSwitch(
-					switches.personaliseSignInGateAfterCheckout,
-				);
-			} else setPersonaliseSwitch(false);
-		});
+		if (switches.personaliseSignInGateAfterCheckout) {
+			setPersonaliseSwitch(switches.personaliseSignInGateAfterCheckout);
+		} else setPersonaliseSwitch(false);
 	}, []);
 
 	useEffect(() => {
@@ -228,7 +230,7 @@ export const SignInGateSelector = ({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,
-					sectionName,
+					sectionId,
 					tags,
 					isPaidContent,
 					isPreview,
@@ -240,7 +242,7 @@ export const SignInGateSelector = ({
 		gateVariant,
 		isSignedIn,
 		contentType,
-		sectionName,
+		sectionId,
 		tags,
 		isPaidContent,
 		isPreview,

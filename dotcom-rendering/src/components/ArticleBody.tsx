@@ -26,13 +26,12 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	switches: Switches;
-	section: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
 	contributionsServiceUrl: string;
 	contentType: string;
-	sectionName: string;
 	keywordIds: string;
 	isPreview?: boolean;
 	idUrl: string;
@@ -128,13 +127,12 @@ export const ArticleBody = ({
 	ajaxUrl,
 	switches,
 	isAdFreeUser,
-	section,
+	sectionId,
 	shouldHideReaderRevenue,
 	tags,
 	isPaidContent,
 	contributionsServiceUrl,
 	contentType,
-	sectionName,
 	isPreview,
 	idUrl,
 	isSensitive,
@@ -189,7 +187,7 @@ export const ArticleBody = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					isLiveUpdate={false}
-					section={section}
+					sectionId={sectionId}
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
 					tags={tags}
 					isPaidContent={isPaidContent}
@@ -241,7 +239,7 @@ export const ArticleBody = ({
 					webTitle={webTitle}
 					ajaxUrl={ajaxUrl}
 					contentType={contentType}
-					sectionName={sectionName}
+					sectionId={sectionId}
 					tags={tags}
 					isPaidContent={isPaidContent}
 					isPreview={isPreview}

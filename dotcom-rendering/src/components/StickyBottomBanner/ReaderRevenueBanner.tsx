@@ -57,7 +57,6 @@ type BuildPayloadProps = BaseProps & {
 type CanShowProps = BaseProps & {
 	asyncCountryCode: Promise<string>;
 	remoteBannerConfig: boolean;
-	section: string;
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
@@ -248,11 +247,10 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
-	section,
 	asyncArticleCounts,
 }) => {
 	const isPuzzlesPage =
-		section === 'crosswords' ||
+		sectionId === 'crosswords' ||
 		tags.some((tag) => tag.type === 'Series' && tag.title === 'Sudoku');
 
 	if (shouldHideReaderRevenue) {

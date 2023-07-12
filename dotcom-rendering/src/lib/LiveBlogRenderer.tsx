@@ -26,7 +26,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: Switches;
 	isLiveUpdate?: boolean;
-	section: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
@@ -52,7 +52,7 @@ export const LiveBlogRenderer = ({
 	isAdFreeUser,
 	isSensitive,
 	isLiveUpdate,
-	section,
+	sectionId,
 	shouldHideReaderRevenue,
 	tags,
 	isPaidContent,
@@ -146,7 +146,7 @@ export const LiveBlogRenderer = ({
 			{blocks.length > 4 && (
 				<Island clientOnly={true}>
 					<LiveBlogEpic
-						section={section}
+						sectionId={sectionId}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}
 						tags={tags}
 						isPaidContent={isPaidContent}

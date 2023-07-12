@@ -1,3 +1,4 @@
+import type { AuthStatus } from '../lib/useAuthStatus';
 import { MyAccount } from './HeaderTopBarMyAccount';
 
 export default {
@@ -10,26 +11,30 @@ export default {
 };
 
 export const defaultStory = () => {
+	const authStatus: AuthStatus = { kind: 'SignedOutWithCookies' };
 	return (
 		<MyAccount
 			mmaUrl="mmaUrl"
 			idApiUrl="idApiUrl"
 			idUrl="idUrl"
 			discussionApiUrl="discussionApiUrl"
+			authStatus={authStatus}
 		/>
 	);
 };
 
 defaultStory.storyName = 'not signed in';
 
+//may want to adjust these for the okta case
 export const signedInStory = () => {
+	const authStatus: AuthStatus = { kind: 'SignedInWithCookies' };
 	return (
 		<MyAccount
 			mmaUrl="mmaUrl"
 			idApiUrl="idApiUrl"
 			idUrl="idUrl"
 			discussionApiUrl="discussionApiUrl"
-			isSignedIn={true}
+			authStatus={authStatus}
 		/>
 	);
 };

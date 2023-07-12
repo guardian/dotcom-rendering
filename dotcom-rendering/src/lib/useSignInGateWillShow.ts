@@ -10,7 +10,7 @@ import { useSignInGateSelector } from './useSignInGateSelector';
 type Props = {
 	isSignedIn?: boolean;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
@@ -23,7 +23,7 @@ type Props = {
 export const useSignInGateWillShow = ({
 	isSignedIn,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -54,7 +54,7 @@ export const useSignInGateWillShow = ({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,
-					sectionName,
+					sectionId,
 					tags,
 					isPaidContent,
 					isPreview,
@@ -66,7 +66,7 @@ export const useSignInGateWillShow = ({
 		gateVariant,
 		isSignedIn,
 		contentType,
-		sectionName,
+		sectionId,
 		tags,
 		isPaidContent,
 		isPreview,

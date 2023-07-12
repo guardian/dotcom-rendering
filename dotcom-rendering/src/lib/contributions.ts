@@ -2,11 +2,12 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
+import { DCRFrontType } from '../types/front';
 import type { FEArticleType } from '../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
+import { eitherInOktaTestOrElse } from './useAuthStatus';
 import { useOnce } from './useOnce';
-import { eitherSignedInWithOktaOrElse } from './useSignedInAuthState';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -238,7 +239,7 @@ export const setLocalNoBannerCachePeriod = (): void =>
 
 const getEmail = async (ajaxUrl: string): Promise<string | undefined> =>
 	// TODO Okta: Remove either when at 100% in oktaVariant test, and just use idToken
-	eitherSignedInWithOktaOrElse(
+	eitherInOktaTestOrElse(
 		(authState) => authState.idToken?.claims.email,
 		() =>
 			getIdApiUserData(ajaxUrl)
@@ -268,8 +269,9 @@ export const lazyFetchEmailWithTimeout =
 		});
 	};
 
-export const getContributionsServiceUrl = (article: FEArticleType): string =>
-	process.env.SDC_URL ?? article.contributionsServiceUrl;
+export const getContributionsServiceUrl = (
+	config: FEArticleType | DCRFrontType,
+): string => process.env.SDC_URL ?? config.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = (): PurchaseInfo => {

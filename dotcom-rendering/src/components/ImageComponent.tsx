@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { isWideEnough } from '../lib/lightbox';
 import type { Switches } from '../types/config';
 import type { Image, ImageBlockElement, RoleType } from '../types/content';
 import type { Palette } from '../types/palette';
@@ -216,14 +217,23 @@ const CaptionToggle = () => (
 	</>
 );
 
+const descendingByWidthComparator = (a: Image, b: Image) => {
+	return parseInt(b.fields.width, 10) - parseInt(a.fields.width, 10);
+};
+
+const isSupported = (imageUrl: string): boolean => {
+	const supportedImages = ['jpg', 'jpeg', 'png'];
+	return supportedImages.some((extension) =>
+		imageUrl.endsWith(`.${extension}`),
+	);
+};
+
 export const getMaster = (images: Image[]) => {
 	return images.find((image) => image.fields.isMaster);
 };
+
 export const getLargest = (images: Image[]) => {
-	const descendingByWidth = (a: Image, b: Image) => {
-		return parseInt(b.fields.width) - parseInt(a.fields.width);
-	};
-	return images.slice().sort(descendingByWidth)[0];
+	return images.slice().sort(descendingByWidthComparator)[0];
 };
 
 export const ImageComponent = ({
@@ -250,19 +260,12 @@ export const ImageComponent = ({
 		format.design !== ArticleDesign.Comment &&
 		format.design !== ArticleDesign.Editorial;
 
-	// Legacy images do not have a master so we fallback to the largest available
-	const master =
+	/** Legacy images do not have a master so we fallback to the largest available */
+	const image =
 		getMaster(element.media.allImages) ??
 		getLargest(element.media.allImages);
 
-	const isSupported = (imageUrl: string): boolean => {
-		const supportedImages = ['jpg', 'jpeg', 'png'];
-		return supportedImages.some((extension) =>
-			imageUrl.endsWith(`.${extension}`),
-		);
-	};
-
-	if (!master?.url || !isSupported(master.url)) {
+	if (!image?.url || !isSupported(image.url)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
@@ -270,15 +273,14 @@ export const ImageComponent = ({
 	/**
 	 * We use height and width for two things.
 	 *
-	 * 1) To decide if an image is large enough to be used in lightbox (>620) and
 	 * 2) To get a true ratio value to apply to the image in the page, so the browser's pre-parser can reserve the space
 	 *
 	 * On the second point, see this PR for more detail
 	 * https://github.com/guardian/dotcom-rendering/pull/1879
 	 *
 	 */
-	const imageWidth = master.fields.width;
-	const imageHeight = master.fields.width;
+	const imageWidth = parseInt(image.fields.width, 10);
+	const imageHeight = parseInt(image.fields.height, 10);
 
 	const palette = decidePalette(format);
 
@@ -322,7 +324,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -333,7 +335,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -369,7 +371,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -383,7 +385,7 @@ export const ImageComponent = ({
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}
@@ -419,7 +421,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master.url}
+					master={image.url}
 					alt={element.data.alt ?? ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -472,7 +474,7 @@ export const ImageComponent = ({
 				)}
 
 				{switches?.lightbox === true &&
-					parseInt(imageWidth, 10) > 620 &&
+					isWideEnough(image) &&
 					element.position !== undefined && (
 						<LightboxLink
 							role={role}

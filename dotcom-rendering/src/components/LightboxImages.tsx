@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
 import {
-	brandAltBackground,
 	from,
 	headline,
-	neutral,
+	palette,
 	space,
 	textSans,
 	until,
@@ -98,17 +97,14 @@ const asideStyles = css`
 		max-width: 300px;
 	}
 	${until.tablet} {
-		border-top: 1px solid ${neutral[20]};
+		border-top: 1px solid ${palette.neutral[20]};
 	}
 	${from.tablet} {
-		border-left: 1px solid ${neutral[20]};
+		border-left: 1px solid ${palette.neutral[20]};
 	}
-	background-color: ${neutral[7]};
+	background-color: ${palette.neutral[7]};
 
-	padding-left: ${space[3]}px;
-	padding-right: ${space[3]}px;
-	padding-top: ${space[3]}px;
-	padding-bottom: ${space[3]}px;
+	padding: ${space[3]}px;
 
 	${from.tablet} {
 		padding-left: ${space[5]}px;
@@ -148,7 +144,7 @@ const Selection = ({
 					margin-bottom: ${space[1]}px;
 				}
 				${textSans.xsmall()};
-				color: ${neutral[86]};
+				color: ${palette.neutral[86]};
 				${until.tablet} {
 					margin-bottom: ${space[2]}px;
 				}
@@ -167,7 +163,7 @@ const Selection = ({
 			</span>
 			<span
 				css={css`
-					color: ${neutral[97]};
+					color: ${palette.neutral[97]};
 				`}
 			>
 				{countOfImages}
@@ -206,8 +202,8 @@ export const LightboxImages = ({ format, images }: Props) => {
 								// Height and width are only used here so the browser has a ratio to work with
 								// when laying out the page. The actual size of the image is based on the
 								// viewport
-								height={image.height.toString()}
-								width={image.width.toString()}
+								height={image.height}
+								width={image.width}
 								master={image.masterUrl}
 								format={format}
 								isLightbox={true}
@@ -221,7 +217,7 @@ export const LightboxImages = ({ format, images }: Props) => {
 											${headline.xsmall({
 												fontWeight: 'light',
 											})}
-											color: ${neutral[100]};
+											color: ${palette.neutral[100]};
 											margin-bottom: ${space[1]}px;
 											${from.tablet} {
 												margin-bottom: ${space[2]}px;
@@ -235,7 +231,8 @@ export const LightboxImages = ({ format, images }: Props) => {
 									<div
 										css={css`
 											display: inline-block;
-											background-color: ${brandAltBackground.primary};
+											background-color: ${palette
+												.brandAlt[400]};
 											margin-bottom: ${space[2]}px;
 											${from.tablet} {
 												margin-bottom: ${space[3]}px;
@@ -270,9 +267,10 @@ export const LightboxImages = ({ format, images }: Props) => {
 											priority="secondary"
 											cssOverrides={css`
 												${textSans.xsmall()};
-												color: ${neutral[60]};
+												color: ${palette.neutral[60]};
 												:hover {
-													color: ${neutral[86]};
+													color: ${palette
+														.neutral[86]};
 												}
 											`}
 										>

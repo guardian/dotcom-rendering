@@ -22,7 +22,7 @@ export const LightboxCaption = ({
 			css={css`
 				${textSans.xsmall()};
 				line-height: 135%;
-				word-wrap: break4all;
+				overflow-wrap: break-all;
 				padding-top: ${space[2]}px;
 				padding-bottom: ${space[2]}px;
 				border-top: 3px solid ${palette.background.lightboxDivider};

@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { useEffect } from 'react';
+import { useOnce } from '../lib/useOnce';
 
 /**
  * This small snippet of javascript is executed at page load. It checks to
@@ -15,7 +15,7 @@ import { useEffect } from 'react';
  * url into the browser and unable to access the article under the lightbox.
  */
 export const LightboxHash = () => {
-	useEffect(() => {
+	useOnce(() => {
 		const hash = window.location.hash;
 		if (hash.startsWith('#img-')) {
 			log(
