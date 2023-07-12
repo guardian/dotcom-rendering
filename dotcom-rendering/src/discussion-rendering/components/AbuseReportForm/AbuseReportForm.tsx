@@ -4,7 +4,7 @@ import { log } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
-import {
+import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
 } from '../../../lib/useAuthStatus';
