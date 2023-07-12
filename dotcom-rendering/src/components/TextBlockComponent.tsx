@@ -237,6 +237,10 @@ const buildElementTree =
 				return jsx('a', {
 					href: getAttrs(node)?.getNamedItem('href')?.value,
 					target: getAttrs(node)?.getNamedItem('target')?.value,
+					'data-link-name':
+						getAttrs(node)?.getNamedItem('data-link-name')?.value,
+					'data-component':
+						getAttrs(node)?.getNamedItem('data-component')?.value,
 					key,
 					children,
 				});
