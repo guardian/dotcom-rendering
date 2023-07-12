@@ -478,105 +478,108 @@ export const Card = ({
 						)}
 					</ImageWrapper>
 				)}
-				<ContentWrapper
-					imageType={media?.type}
-					imageSize={imageSize}
-					imagePosition={imagePosition}
-				>
-					<HeadlineWrapper
-						imagePositionOnMobile={imagePositionOnMobile}
+
+				{containerType != 'fixed/video' && (
+					<ContentWrapper
+						imageType={media?.type}
+						imageSize={imageSize}
 						imagePosition={imagePosition}
-						imageUrl={imageUrl}
-						hasStarRating={starRating !== undefined}
 					>
-						<CardHeadline
-							headlineText={headlineText}
-							format={format}
-							containerPalette={containerPalette}
-							size={headlineSize}
-							sizeOnMobile={headlineSizeOnMobile}
-							showQuotes={showQuotes}
-							kickerText={
-								format.design === ArticleDesign.LiveBlog &&
-								!kickerText
-									? 'Live'
-									: kickerText
-							}
-							showPulsingDot={
-								format.design === ArticleDesign.LiveBlog ||
-								showPulsingDot
-							}
-							byline={byline}
-							showByline={showByline}
-							isDynamo={isDynamo}
-							isExternalLink={isExternalLink}
-						/>
-						{starRating !== undefined ? (
-							<StarRatingComponent
-								rating={starRating}
-								cardHasImage={imageUrl !== undefined}
-							/>
-						) : null}
-						{!!mainMedia && mainMedia.type !== 'Video' && (
-							<MediaMeta
-								containerPalette={containerPalette}
+						<HeadlineWrapper
+							imagePositionOnMobile={imagePositionOnMobile}
+							imagePosition={imagePosition}
+							imageUrl={imageUrl}
+							hasStarRating={starRating !== undefined}
+						>
+							<CardHeadline
+								headlineText={headlineText}
 								format={format}
-								mediaType={mainMedia.type}
-								mediaDuration={
-									mainMedia.type === 'Audio'
-										? mainMedia.duration
-										: undefined
+								containerPalette={containerPalette}
+								size={headlineSize}
+								sizeOnMobile={headlineSizeOnMobile}
+								showQuotes={showQuotes}
+								kickerText={
+									format.design === ArticleDesign.LiveBlog &&
+									!kickerText
+										? 'Live'
+										: kickerText
 								}
-								hasKicker={!!kickerText}
-							/>
-						)}
-					</HeadlineWrapper>
-					{/* This div is needed to push this content to the bottom of the card */}
-					<div>
-						{!!trailText && (
-							<TrailTextWrapper
-								containerPalette={containerPalette}
-								format={format}
-								imagePosition={imagePosition}
-								imageSize={imageSize}
-								imageType={media?.type}
-							>
-								<div
-									dangerouslySetInnerHTML={{
-										__html: trailText,
-									}}
-								/>
-							</TrailTextWrapper>
-						)}
-						{showLivePlayable && (
-							<Island>
-								<LatestLinks
-									id={linkTo}
-									format={format}
-									isDynamo={isDynamo}
-									direction={supportingContentAlignment}
-									containerPalette={containerPalette}
-								></LatestLinks>
-							</Island>
-						)}
-						<DecideFooter
-							isOpinion={isOpinion}
-							hasSublinks={hasSublinks}
-							renderFooter={renderFooter}
-						/>
-						{hasSublinks && sublinkPosition === 'inner' ? (
-							<SupportingContent
-								supportingContent={supportingContent}
-								alignment="vertical"
-								containerPalette={containerPalette}
+								showPulsingDot={
+									format.design === ArticleDesign.LiveBlog ||
+									showPulsingDot
+								}
+								byline={byline}
+								showByline={showByline}
 								isDynamo={isDynamo}
-								parentFormat={format}
+								isExternalLink={isExternalLink}
 							/>
-						) : (
-							<></>
-						)}
-					</div>
-				</ContentWrapper>
+							{starRating !== undefined ? (
+								<StarRatingComponent
+									rating={starRating}
+									cardHasImage={imageUrl !== undefined}
+								/>
+							) : null}
+							{!!mainMedia && mainMedia.type !== 'Video' && (
+								<MediaMeta
+									containerPalette={containerPalette}
+									format={format}
+									mediaType={mainMedia.type}
+									mediaDuration={
+										mainMedia.type === 'Audio'
+											? mainMedia.duration
+											: undefined
+									}
+									hasKicker={!!kickerText}
+								/>
+							)}
+						</HeadlineWrapper>
+						{/* This div is needed to push this content to the bottom of the card */}
+						<div>
+							{!!trailText && (
+								<TrailTextWrapper
+									containerPalette={containerPalette}
+									format={format}
+									imagePosition={imagePosition}
+									imageSize={imageSize}
+									imageType={media?.type}
+								>
+									<div
+										dangerouslySetInnerHTML={{
+											__html: trailText,
+										}}
+									/>
+								</TrailTextWrapper>
+							)}
+							{showLivePlayable && (
+								<Island>
+									<LatestLinks
+										id={linkTo}
+										format={format}
+										isDynamo={isDynamo}
+										direction={supportingContentAlignment}
+										containerPalette={containerPalette}
+									></LatestLinks>
+								</Island>
+							)}
+							<DecideFooter
+								isOpinion={isOpinion}
+								hasSublinks={hasSublinks}
+								renderFooter={renderFooter}
+							/>
+							{hasSublinks && sublinkPosition === 'inner' ? (
+								<SupportingContent
+									supportingContent={supportingContent}
+									alignment="vertical"
+									containerPalette={containerPalette}
+									isDynamo={isDynamo}
+									parentFormat={format}
+								/>
+							) : (
+								<></>
+							)}
+						</div>
+					</ContentWrapper>
+				)}
 			</CardLayout>
 
 			{hasSublinks && sublinkPosition === 'outer' ? (
