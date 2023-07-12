@@ -120,8 +120,10 @@ const decideLeftContent = (
 ) => {
 	// show CPScott?
 	if (
-		collection.displayName === 'Opinion' &&
-		['uk/commentisfree', 'au/commentisfree'].includes(front.config.pageId)
+		['uk/commentisfree', 'au/commentisfree'].includes(
+			front.config.pageId,
+		) &&
+		collection.displayName.toLowerCase() === 'opinion'
 	) {
 		return <CPScottHeader />;
 	}

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
 	background,
+	between,
 	from,
 	neutral,
 	palette,
@@ -213,11 +214,27 @@ const containerStylesFromLeftCol = css`
 	}
 `;
 
-const sectionHeadlineUntilLeftCol = css`
+const flexRowStyles = css`
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	grid-row: headline;
 	grid-column: title;
 	display: flex;
 	flex-direction: column;
+
+	${between.tablet.and.leftCol} {
+		${flexRowStyles}
+	}
+
+	${isOpinion && until.mobileLandscape} {
+		flex-direction: column;
+	}
+	${isOpinion && between.mobileLandscape.and.tablet} {
+		${flexRowStyles}
+	}
 `;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`
@@ -490,7 +507,12 @@ export const FrontSection = ({
 
 			<div
 				css={[
-					sectionHeadlineUntilLeftCol,
+					sectionHeadlineUntilLeftCol(
+						// TODO FIXME:
+						// This relies on sections called "opinion"
+						// only ever having <CPScott> as the leftContent
+						title?.toLowerCase() === 'opinion',
+					),
 					!hasPageSkin &&
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
