@@ -229,7 +229,7 @@ const generateImageURL = ({
 		s: 'none',
 	});
 
-	return `https://i.guim.co.uk/img/${getServiceFromUrl(url)}${
+	return `https://fastly-io-code.guim.co.uk/img/${getServiceFromUrl(url)}${
 		url.pathname
 	}?${params.toString()}`;
 };
