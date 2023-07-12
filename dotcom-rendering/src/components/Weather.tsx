@@ -22,7 +22,12 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { SvgExternal } from '@guardian/source-react-components';
+import {
+	SvgChevronDownSingle,
+	SvgChevronUpSingle,
+	SvgExternal,
+} from '@guardian/source-react-components';
+import { useId } from 'react';
 import type { FEFrontConfigType } from '../types/front';
 import type { WeatherData, WeatherForecast } from './WeatherData.importable';
 import { WeatherSlot } from './WeatherSlot';
@@ -40,10 +45,6 @@ const weatherCSS = css`
 	flex-wrap: wrap;
 	align-items: center;
 	letter-spacing: -0.56px;
-
-	${until.desktop} {
-		display: none;
-	}
 
 	${between.tablet.and.leftCol} {
 		padding-top: 6px;
@@ -195,33 +196,78 @@ export interface WeatherProps {
 	edition: FEFrontConfigType['edition'];
 }
 
+const collapsibleStyles = css`
+	.checkbox-label {
+		display: none;
+	}
+
+	.checkbox {
+		display: none;
+	}
+
+	${until.tablet} {
+		.checkbox-label {
+			display: inherit;
+		}
+
+		.checkbox:not(:checked) ~ .now {
+			border-bottom: none;
+		}
+
+		.checkbox:not(:checked) ~ .now > .checkbox-label {
+			svg:first-child {
+				display: none;
+			}
+		}
+
+		.checkbox:checked ~ .now > .checkbox-label {
+			svg:last-child {
+				display: none;
+			}
+		}
+
+		.checkbox:not(:checked) ~ .collapsible {
+			display: none;
+		}
+	}
+`;
+
 export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
+	const checkboxId = useId();
+
 	const isUS = edition === 'US';
 	return (
-		<aside css={weatherCSS}>
-			<div css={locationCSS}>{location.city}</div>
+		<aside css={[collapsibleStyles, weatherCSS]}>
+			<input id={checkboxId} className="checkbox" type="checkbox" />
+
+			<div className="collapsible" css={locationCSS}>
+				{location.city}
+			</div>
 
 			<p css={visuallyHiddenCSS}>Today’s weather for {location.city}:</p>
 
-			{/* Current weather */}
 			<div css={[nowCSS, slotCSS]} className="now">
 				<WeatherSlot {...now} isUS={isUS} />
+				<label htmlFor={checkboxId} className="checkbox-label">
+					<SvgChevronDownSingle size="xsmall"></SvgChevronDownSingle>
+					<SvgChevronUpSingle size="xsmall"></SvgChevronUpSingle>
+				</label>
 			</div>
 
-			{/* Forecast slots */}
-			<div css={slotCSS} className="forecast-1">
+			<div css={slotCSS} className="forecast-1 collapsible">
 				<WeatherSlot isUS={isUS} {...forecast[3]} />
 			</div>
-			<div css={slotCSS} className="forecast-2">
+			<div css={slotCSS} className="forecast-2 collapsible">
 				<WeatherSlot isUS={isUS} {...forecast[6]} />
 			</div>
-			<div css={slotCSS} className="forecast-3">
+			<div css={slotCSS} className="forecast-3 collapsible">
 				<WeatherSlot isUS={isUS} {...forecast[9]} />
 			</div>
-			<div css={slotCSS} className="forecast-4">
+			<div css={slotCSS} className="forecast-4 collapsible">
 				<WeatherSlot isUS={isUS} {...forecast[12]} />
 			</div>
-			<div css={linkCSS}>
+
+			<div css={linkCSS} className="collapsible">
 				<a href={now.link}>
 					View full forecast <ExternalLinkIcon />
 				</a>
