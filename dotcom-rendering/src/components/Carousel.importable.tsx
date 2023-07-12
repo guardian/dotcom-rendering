@@ -481,7 +481,11 @@ const CarouselCard = ({
 			branding={branding}
 			isExternalLink={false}
 			mainMedia={mainMedia}
-			videoSize="too small to play: 479px or less"
+			videoSize={
+				isVideoContainer
+					? 'large enough to play: at least 480px'
+					: 'too small to play: 479px or less'
+			}
 			onwardsSource={onwardsSource}
 			containerType={isVideoContainer ? 'fixed/video' : undefined}
 		/>
