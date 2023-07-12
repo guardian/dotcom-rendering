@@ -285,8 +285,7 @@ export const addUserName = (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	userName: string,
 ): Promise<UserNameResponse> => {
-	const url =
-		options.idApiUrl + `/user/me/username`
+	const url = options.idApiUrl + `/user/me/username`;
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
