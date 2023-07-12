@@ -1,6 +1,8 @@
 # Use Percy/Cypress for integration-style visual regression testing
 
-## Status: Accepted
+## Status: Deprecated
+
+We no longer use Percy.
 
 ## Context
 
