@@ -45,6 +45,7 @@ const weatherCSS = css`
 	flex-wrap: wrap;
 	align-items: center;
 	letter-spacing: -0.56px;
+
 	${between.tablet.and.leftCol} {
 		padding-top: 6px;
 	}
