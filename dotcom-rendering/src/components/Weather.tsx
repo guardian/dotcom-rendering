@@ -41,6 +41,10 @@ const weatherCSS = css`
 	align-items: center;
 	letter-spacing: -0.56px;
 
+	${until.desktop} {
+		display: none;
+	}
+
 	${between.tablet.and.leftCol} {
 		padding-top: 6px;
 	}
