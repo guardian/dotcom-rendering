@@ -346,6 +346,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						  })
 						: trails;
 
+					const editionBranding =
+						front.pressedPage.frontProperties.commercial.editionBrandings.find(
+							(eB) =>
+								eB.edition.id === front.editionId &&
+								!!eB.branding,
+						);
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
 							<Fragment key={ophanName}>
@@ -601,6 +608,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
+								editionBranding={editionBranding}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
