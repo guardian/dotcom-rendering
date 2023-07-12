@@ -63,7 +63,7 @@ type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
 	pillar: ArticleTheme;
-	authStatus: SignedInWithCookies | SignedInWithOkta | undefined;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 };
 
 export const AbuseReportForm = ({
