@@ -8,6 +8,7 @@ type Props = {
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
+	minWidthInPixelsOnMobile?: number;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -26,7 +27,24 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 	}
 };
 
-const decideWidth = (minWidthInPixels?: number) => {
+const decideWidth = (
+	minWidthInPixels?: number,
+	minWidthInPixelsOnMobile?: number,
+) => {
+	if (
+		minWidthInPixels !== undefined &&
+		minWidthInPixels > 0 &&
+		minWidthInPixelsOnMobile !== undefined &&
+		minWidthInPixelsOnMobile > 0
+	) {
+		return css`
+			min-width: ${minWidthInPixels}px;
+			${until.tablet} {
+				min-width: ${minWidthInPixelsOnMobile}px;
+			}
+		`;
+	}
+
 	if (minWidthInPixels !== undefined && minWidthInPixels > 0) {
 		return css`
 			min-width: ${minWidthInPixels}px;
@@ -77,6 +95,7 @@ export const CardLayout = ({
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
+	minWidthInPixelsOnMobile,
 }: Props) => (
 	<div
 		css={[
@@ -84,7 +103,7 @@ export const CardLayout = ({
 				display: flex;
 				flex-basis: 100%;
 			`,
-			decideWidth(minWidthInPixels),
+			decideWidth(minWidthInPixels, minWidthInPixelsOnMobile),
 			decidePosition(imagePosition, imagePositionOnMobile, imageType),
 		]}
 	>

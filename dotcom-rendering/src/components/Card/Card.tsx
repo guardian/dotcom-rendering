@@ -94,6 +94,7 @@ export type Props = {
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
+	minWidthInPixelsOnMobile?: number;
 };
 
 const StarRatingComponent = ({
@@ -282,6 +283,7 @@ export const Card = ({
 	slideshowImages,
 	showLivePlayable = false,
 	onwardsSource,
+	minWidthInPixelsOnMobile,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -394,6 +396,7 @@ export const Card = ({
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
+				minWidthInPixelsOnMobile={minWidthInPixelsOnMobile}
 				imageType={media?.type}
 			>
 				{media && (

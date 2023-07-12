@@ -474,7 +474,7 @@ const CarouselCard = ({
 			showClock={true}
 			showAge={true}
 			imagePositionOnMobile="top"
-			minWidthInPixels={220}
+			minWidthInPixels={isVideoContainer ? 480 : 220}
 			showQuotedHeadline={format.design === ArticleDesign.Comment}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
@@ -487,6 +487,7 @@ const CarouselCard = ({
 					: 'too small to play: 479px or less'
 			}
 			onwardsSource={onwardsSource}
+			minWidthInPixelsOnMobile={isVideoContainer ? 380 : undefined}
 			containerType={isVideoContainer ? 'fixed/video' : undefined}
 		/>
 	</LI>
