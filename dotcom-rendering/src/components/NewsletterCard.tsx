@@ -201,7 +201,7 @@ export const NewsletterCard = ({
 			css={groupItemStyle}
 			aria-label={newsletter.name}
 		>
-			{!!newsletter.illustrationCard && (
+			{newsletter.illustrationCard ? (
 				<div css={illustrationStyle}>
 					<CardPicture
 						imageSize="carousel"
@@ -209,8 +209,7 @@ export const NewsletterCard = ({
 						master={newsletter.illustrationCard}
 					/>
 				</div>
-			)}
-			{!newsletter.illustrationCard && (
+			) : (
 				<IllustrationPlaceholder
 					theme={newsletter.theme}
 					aspectHeight={300}
