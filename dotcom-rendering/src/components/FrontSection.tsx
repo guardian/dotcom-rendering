@@ -332,7 +332,7 @@ const bottomPadding = css`
 
 const titleStyle = css`
 	${until.leftCol} {
-		margin-right: ${space[1]}px;
+		max-width: 74%;
 	}
 `;
 
