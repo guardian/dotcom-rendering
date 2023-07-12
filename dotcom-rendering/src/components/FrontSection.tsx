@@ -15,7 +15,11 @@ import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import type { EditionId } from '../lib/edition';
 import { hideAge } from '../lib/hideAge';
 import type { DCRBadgeType } from '../types/badge';
-import type { DCRContainerPalette, TreatType } from '../types/front';
+import type {
+	DCRContainerPalette,
+	DCRFrontType,
+	TreatType,
+} from '../types/front';
 import type { DCRFrontPagination } from '../types/tagFront';
 import { isAustralianTerritory, type Territory } from '../types/territory';
 import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
@@ -89,6 +93,8 @@ type Props = {
 	 *   the page skin background showing through the containers
 	 */
 	hasPageSkin?: boolean;
+
+	editionBranding?: DCRFrontType['pressedPage']['frontProperties']['commercial']['editionBrandings'][number];
 };
 
 const width = (columns: number, columnWidth: number, columnGap: number) =>
@@ -336,6 +342,25 @@ const decideBackgroundColour = (
 	return undefined;
 };
 
+const labelStyles = css`
+	${textSans.xxsmall()};
+	line-height: 1rem;
+	color: ${palette.neutral[46]};
+	font-weight: bold;
+	margin-top: 0.375rem;
+	padding-right: 0.625rem;
+	padding-bottom: 0.625rem;
+	text-align: left;
+`;
+
+const aboutThisLinkStyles = css`
+	${textSans.xxsmall()};
+	line-height: 11px;
+	color: ${palette.neutral[46]};
+	font-weight: normal;
+	text-decoration: none;
+`;
+
 /**
  * # Front Container
  *
@@ -444,6 +469,7 @@ export const FrontSection = ({
 	index,
 	targetedTerritory,
 	hasPageSkin = false,
+	editionBranding,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -566,6 +592,38 @@ export const FrontSection = ({
 								showDateHeader={showDateHeader}
 								editionId={editionId}
 							/>
+							{!isOnPaidContentFront &&
+								!!editionBranding &&
+								editionBranding?.branding &&
+								index === 0 && (
+									<>
+										<p css={labelStyles}>
+											{
+												editionBranding.branding.logo
+													.label
+											}
+										</p>
+										<Badge
+											imageSrc={
+												editionBranding.branding.logo
+													.src
+											}
+											href={
+												editionBranding.branding.logo
+													.link
+											}
+										/>
+										<a
+											href={
+												editionBranding.branding
+													.aboutThisLink
+											}
+											css={aboutThisLinkStyles}
+										>
+											About this content
+										</a>
+									</>
+								)}
 						</div>
 					</>
 				)}

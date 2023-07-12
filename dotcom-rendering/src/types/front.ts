@@ -503,7 +503,31 @@ type FESeoDataType = {
 
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
-	commercial: Record<string, unknown>;
+	commercial: {
+		editionBrandings: Array<{
+			edition: {
+				id: string;
+			};
+			branding?: {
+				brandingType: {
+					name: string;
+				};
+				sponsorName: string;
+				logo: {
+					src: string;
+					dimensions: {
+						width: number;
+						height: number;
+					};
+					link: string;
+					label: string;
+				};
+				aboutThisLink: string;
+			};
+		}>;
+		editionAdTargetings: unknown;
+		prebidIndexSites?: unknown;
+	};
 	isPaidContent?: boolean;
 	onPageDescription?: string;
 };

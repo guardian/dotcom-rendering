@@ -445,7 +445,100 @@
                             "type": "boolean"
                         },
                         "commercial": {
-                            "$ref": "#/definitions/Record<string,unknown>"
+                            "type": "object",
+                            "properties": {
+                                "editionBrandings": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "edition": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id"
+                                                ]
+                                            },
+                                            "branding": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "brandingType": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "name"
+                                                        ]
+                                                    },
+                                                    "sponsorName": {
+                                                        "type": "string"
+                                                    },
+                                                    "logo": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "src": {
+                                                                "type": "string"
+                                                            },
+                                                            "dimensions": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "width": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "height": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "height",
+                                                                    "width"
+                                                                ]
+                                                            },
+                                                            "link": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "dimensions",
+                                                            "label",
+                                                            "link",
+                                                            "src"
+                                                        ]
+                                                    },
+                                                    "aboutThisLink": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "aboutThisLink",
+                                                    "brandingType",
+                                                    "logo",
+                                                    "sponsorName"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "edition"
+                                        ]
+                                    }
+                                },
+                                "editionAdTargetings": {},
+                                "prebidIndexSites": {}
+                            },
+                            "required": [
+                                "editionAdTargetings",
+                                "editionBrandings"
+                            ]
                         },
                         "isPaidContent": {
                             "type": "boolean"
@@ -2783,9 +2876,6 @@
                 "seoData"
             ]
         },
-        "Record<string,unknown>": {
-            "type": "object"
-        },
         "FEDesign": {
             "enum": [
                 "AnalysisDesign",
@@ -3325,6 +3415,9 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "Record<string,unknown>": {
+            "type": "object"
         },
         "FooterType": {
             "type": "object",
