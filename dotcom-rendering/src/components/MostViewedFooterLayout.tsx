@@ -47,11 +47,11 @@ const mostPopMarginWithPageSkin = css`
 	margin: 9px 0 0 10px;
 `;
 
-const frontStyles = css`
+const frontStyles = (hasPageSkin: boolean) => css`
 	${from.wide} {
 		margin-top: -${space[2]}px;
 	}
-	${between.leftCol.and.wide} {
+	${!hasPageSkin && between.leftCol.and.wide} {
 		margin-top: -${space[12] - 6}px;
 	}
 `;
@@ -83,7 +83,7 @@ export const MostViewedFooterLayout = ({
 			<div
 				css={[
 					hasPageSkin ? fixedWidthsPageSkin : fixedWidths,
-					isFront && frontStyles,
+					isFront && frontStyles(hasPageSkin),
 					!renderAds && !hasPageSkin && adFreeStyles,
 				]}
 			>
