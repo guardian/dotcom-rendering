@@ -232,6 +232,9 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	${isOpinion && until.mobileLandscape} {
 		flex-direction: column;
 	}
+	${isOpinion && between.mobileLandscape.and.tablet} {
+		${flexRowStyles}
+	}
 `;
 
 const sectionHeadlineFromLeftCol = (borderColour: string) => css`

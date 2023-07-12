@@ -18,15 +18,10 @@ const scottAvatarStyles = css`
 	flex-shrink: 0;
 	${until.mobileLandscape} {
 		margin-top: -30px;
-		width: 60px;
-		height: 60px;
 	}
 `;
 
 const imgStyles = css`
-	${until.mobileLandscape} {
-		width: 72px;
-	}
 	width: 82px;
 `;
 
