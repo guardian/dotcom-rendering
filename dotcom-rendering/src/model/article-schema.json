@@ -402,6 +402,9 @@
                 },
                 "regionFocus": {
                     "type": "string"
+                },
+                "illustrationCard": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2424,6 +2427,9 @@
                             "type": "string"
                         },
                         "regionFocus": {
+                            "type": "string"
+                        },
+                        "illustrationCard": {
                             "type": "string"
                         }
                     },

@@ -864,4 +864,5 @@ export type Newsletter = {
 	theme: string;
 	group: string;
 	regionFocus?: string;
+	illustrationCard?: string;
 };
