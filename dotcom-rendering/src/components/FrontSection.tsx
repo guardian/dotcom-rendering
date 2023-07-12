@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { isString } from '@guardian/libs';
 import {
 	background,
+	between,
 	from,
 	neutral,
 	palette,
@@ -224,7 +225,7 @@ const sectionHeadlineUntilLeftCol = (isOpinion: boolean) => css`
 	display: flex;
 	flex-direction: column;
 
-	${until.leftCol} {
+	${between.tablet.and.leftCol} {
 		${flexRowStyles}
 	}
 

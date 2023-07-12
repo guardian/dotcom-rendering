@@ -17,6 +17,7 @@ import {
 	between,
 	from,
 	palette,
+	space,
 	textSans,
 	until,
 	visuallyHidden,
@@ -42,9 +43,6 @@ const weatherCSS = css`
 
 	${between.tablet.and.leftCol} {
 		padding-top: 6px;
-	}
-	${until.desktop} {
-		display: none;
 	}
 `;
 
@@ -78,6 +76,7 @@ const nowCSS = css`
 		border-bottom: var(--border);
 		order: -1;
 		padding-bottom: 4px;
+		margin-top: -${space[9]}px;
 	}
 
 	${from.leftCol} {
