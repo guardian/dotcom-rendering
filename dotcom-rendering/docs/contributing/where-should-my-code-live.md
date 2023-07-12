@@ -4,17 +4,16 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
--   [Where should my code live?](#where-should-my-code-live)
-    -   [File locations](#file-locations)
-    -   [File naming schemes](#file-naming-schemes)
-    -   [Scripts](#scripts)
-    -   [Data Sources \& Extraction](#data-sources--extraction)
-        -   [Articles](#articles)
-        -   [Fronts](#fronts)
-        -   [Other](#other)
-        -   [Considerations](#considerations)
-            -   [Favour computation on the rendering server over computation on the client](#favour-computation-on-the-rendering-server-over-computation-on-the-client)
-            -   [Minimize data over the wire](#minimize-data-over-the-wire)
+- [File locations](#file-locations)
+- [File naming schemes](#file-naming-schemes)
+- [Scripts](#scripts)
+- [Data Sources & Extraction](#data-sources--extraction)
+  - [Articles](#articles)
+  - [Fronts](#fronts)
+  - [Other](#other)
+  - [Considerations](#considerations)
+    - [Favour computation on the rendering server over computation on the client](#favour-computation-on-the-rendering-server-over-computation-on-the-client)
+    - [Minimize data over the wire](#minimize-data-over-the-wire)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
