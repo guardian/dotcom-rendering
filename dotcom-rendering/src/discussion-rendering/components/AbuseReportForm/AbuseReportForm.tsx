@@ -4,13 +4,13 @@ import { log } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
-import { reportAbuse } from '../../lib/api';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
 import {
 	SignedInWithCookies,
 	SignedInWithOkta,
 } from '../../../lib/useAuthStatus';
+import { reportAbuse } from '../../lib/api';
+import { palette } from '../../lib/palette';
+import { pillarToString } from '../../lib/pillarToString';
 
 type FormData = {
 	categoryId: number;

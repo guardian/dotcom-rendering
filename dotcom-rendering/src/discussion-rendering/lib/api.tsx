@@ -281,15 +281,12 @@ export const recommend =
 		}).then((resp) => resp.ok);
 	};
 
-//todo: adjust this when the endpoint is ready
-//is it just adding /username to the /user/me path? https://github.com/guardian/identity/pull/2418
 export const addUserName = (
 	authStatus: SignedInWithCookies | SignedInWithOkta,
 	userName: string,
 ): Promise<UserNameResponse> => {
-	// const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
 	const url =
-		options.idApiUrl + `/user/me/username` + objAsParams(defaultParams);
+		options.idApiUrl + `/user/me/username`
 	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
