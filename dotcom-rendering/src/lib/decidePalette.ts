@@ -2053,7 +2053,7 @@ const hoverPagination = (format: ArticleFormat) => {
 	}
 };
 
-const textAudioAtom = (format: ArticleFormat) => {
+const backgroundAudioAtom = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -2149,7 +2149,7 @@ export const decidePalette = (
 			article: backgroundArticle(format),
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
-			audioAtom: textAudioAtom(format),
+			audioAtom: backgroundAudioAtom(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
