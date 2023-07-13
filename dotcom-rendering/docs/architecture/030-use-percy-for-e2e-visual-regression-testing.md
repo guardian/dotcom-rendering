@@ -2,7 +2,7 @@
 
 ## Status: Deprecated
 
-We no longer use Percy.
+We intended to run a proof of concept on DCR but with other competing priorities we never got to that stage. Commercial implemented Percy into their CI but decided to drop it due to cost reasons which will only be more acute for DCR.
 
 ## Context
 
