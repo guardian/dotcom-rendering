@@ -1,17 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import {
-	brand,
-	brandAlt,
-	brandText,
-	from,
-	headline,
-	until,
-} from '@guardian/source-foundations';
+import type { ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { from, headline, palette, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import type { PillarLinkType } from '../model/extract-nav';
-import type { Palette } from '../types/palette';
 import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
@@ -23,10 +16,7 @@ const preLeftColPillarWidth = 134;
 const preDesktopPillarWidth = 'auto';
 
 // CSS
-const pillarsStyles = (isImmersive: boolean) => css`
-	${until.tablet} {
-		display: ${isImmersive && 'none'};
-	}
+const pillarsStyles = css`
 	clear: right;
 	margin: 0;
 	list-style: none;
@@ -58,18 +48,32 @@ const pillarsStyles = (isImmersive: boolean) => css`
 
 	:after {
 		content: '';
-		border-top: 1px solid ${brand[600]};
+		border-top: 1px solid ${palette.brand[600]};
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: ${isImmersive ? '48px' : '36px'};
+		height: 36px;
+
 		${from.tablet} {
-			border-bottom: 0;
 			height: 49px;
 		}
+
 		${from.desktop} {
-			height: ${isImmersive ? '48px' : '42px'};
+			height: 42px;
+		}
+	}
+`;
+
+const immersivePillarStyles = css`
+	${until.tablet} {
+		display: none;
+	}
+	:after {
+		height: 48px;
+
+		${from.desktop} {
+			height: 48px;
 		}
 	}
 `;
@@ -92,7 +96,7 @@ const showMenuUnderlineStyles = css`
 		:hover,
 		:focus {
 			text-decoration: underline;
-			color: ${brandAlt[400]};
+			color: ${palette.brandAlt[400]};
 		}
 
 		:after {
@@ -134,7 +138,7 @@ const pillarDivider = css`
 		top: 0;
 		bottom: 0;
 		width: 1px;
-		background-color: ${brand[600]};
+		background-color: ${palette.brand[600]};
 
 		${from.tablet} {
 			bottom: 17px;
@@ -146,68 +150,73 @@ const pillarDivider = css`
 	}
 `;
 
-const linkStyle = (isImmersive: boolean) => css`
-	${headline.xxxsmall()};
+const baseLinkStyles = css`
+	${headline.xxxsmall({ fontWeight: 'bold' })};
 	box-sizing: border-box;
-	font-weight: 900;
-	color: ${brandText.primary};
+	color: ${palette.neutral[100]};
 	cursor: pointer;
 	display: block;
+
 	font-size: 15.4px;
-	height: ${isImmersive ? '48px' : '36px'};
-	padding-top: ${isImmersive ? '10px' : '9px'};
-	padding-right: ${isImmersive ? '5px' : '5px'};
-	padding-bottom: ${isImmersive ? '0' : '0'};
-	padding-left: ${isImmersive ? '5px' : '5px'};
+	height: 36px;
+
+	padding-top: 9px;
+	padding-right: 5px;
+	padding-bottom: 0;
+	padding-left: 5px;
+
 	position: relative;
 	overflow: hidden;
 	text-decoration: none;
-	z-index: 1;
+
 	${from.mobileMedium} {
 		font-size: 15.7px;
-		padding-top: ${isImmersive ? '9px' : '9px'};
-		padding-right: ${isImmersive ? '5px' : '5px'};
-		padding-bottom: ${isImmersive ? '0' : '0'};
-		padding-left: ${isImmersive ? '5px' : '5px'};
 	}
 	${from.mobileLandscape} {
 		font-size: 18px;
-		padding-top: ${isImmersive ? '9px' : '9px'};
-		padding-right: ${isImmersive ? '5px' : '5px'};
-		padding-bottom: ${isImmersive ? '0' : '0'};
-		padding-left: ${isImmersive ? '5px' : '5px'};
 	}
 	${from.tablet} {
 		font-size: 22px;
 		height: 48px;
-		padding-top: ${isImmersive ? '9px' : '9px'};
-		padding-right: ${isImmersive ? '20px' : '20px'};
-		padding-bottom: ${isImmersive ? '0' : '0'};
-		padding-left: ${isImmersive ? '9px' : '9px'};
+		padding-right: 20px;
+		padding-left: 9px;
 	}
+
 	${from.desktop} {
-		padding-top: ${isImmersive ? '9px' : '5px'};
-		height: ${isImmersive ? '48px' : '42px'};
+		padding-top: 5px;
+		height: 42px;
 	}
 
 	${from.wide} {
-		padding-top: ${isImmersive ? '10px' : '7px'};
 		font-size: 24px;
+		padding-top: 7px;
 	}
 
-	:focus:after {
-		transform: translateY(4px);
-	}
 	:hover {
 		text-decoration: none;
 	}
-	:hover:after {
+
+	:hover:after,
+	:focus:after {
 		transform: translateY(4px);
 	}
 `;
-const pillarUnderline = (palette: Palette) => css`
+
+const immersiveLinkStyles = css`
+	height: 48px;
+	${from.desktop} {
+		height: 48px;
+		padding-top: 9px;
+	}
+	${from.wide} {
+		font-size: 24px;
+		padding-top: 10px;
+	}
+`;
+
+const pillarUnderline = css`
 	:after {
-		border-top: 4px solid ${palette.border.navPillar};
+		border-top: 4px solid;
 		left: 0;
 		right: 1px;
 		top: -4px;
@@ -254,23 +263,31 @@ export const Pillars = ({
 	showLastPillarDivider = true,
 	dataLinkName,
 }: Props) => (
-	<ul data-testid="pillar-list" css={pillarsStyles(isImmersive)}>
+	<ul
+		data-testid="pillar-list"
+		css={[pillarsStyles, isImmersive && immersivePillarStyles]}
+	>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === selectedPillar;
 			const showDivider =
 				showLastPillarDivider || isNotLastPillar(i, pillars.length);
+			const borderTopColor = decidePalette({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Feature,
+				theme: p.pillar,
+			}).border.navPillar;
 			return (
 				<li key={p.title} css={pillarStyle}>
 					<a
 						css={[
-							linkStyle(isImmersive),
-							pillarUnderline(
-								decidePalette({
-									display: ArticleDisplay.Standard,
-									design: ArticleDesign.Feature,
-									theme: p.pillar,
-								}),
-							),
+							baseLinkStyles,
+							isImmersive && immersiveLinkStyles,
+							pillarUnderline,
+							css({
+								':after': {
+									borderTopColor,
+								},
+							}),
 							isTopNav && showMenuUnderlineStyles,
 							isSelected && forceUnderline,
 							showDivider && pillarDivider,
