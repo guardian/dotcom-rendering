@@ -147,7 +147,8 @@ const styles = (format: ArticleFormat) => css`
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 
-	strong em {
+	strong em,
+	strong u {
 		font-weight: bold;
 	}
 
@@ -304,6 +305,7 @@ const buildElementTree =
 			case 'I':
 			case 'VAR':
 			case 'STRIKE':
+			case 'U':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: styles(format),
 					key,
