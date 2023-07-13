@@ -2066,7 +2066,7 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 		case ArticlePillar.Opinion:
 			return opinion[400];
 		case ArticleSpecial.Labs:
-			return labs[400];
+			return lifestyle[400];
 		case ArticleSpecial.SpecialReport:
 			return news[400];
 		case ArticleSpecial.SpecialReportAlt:
