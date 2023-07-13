@@ -8,7 +8,6 @@ import {
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
-import type { AudioAtomType } from '../../types/audioAtom';
 
 const wrapperStyles = css`
 	width: 100%;
@@ -186,6 +185,16 @@ const buildUrl = (basicUrl: string, shouldUseAcast?: boolean) => {
 		: basicUrl;
 };
 
+type Props = {
+	id: string;
+	trackUrl: string;
+	kicker: string;
+	title?: string;
+	format: ArticleFormat;
+	shouldUseAcast?: boolean;
+	duration: number;
+};
+
 export const AudioAtom = ({
 	id,
 	trackUrl,
@@ -194,7 +203,7 @@ export const AudioAtom = ({
 	format,
 	shouldUseAcast,
 	duration,
-}: AudioAtomType): JSX.Element => {
+}: Props): JSX.Element => {
 	const audioEl = useRef<HTMLAudioElement>(null);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const palette = decidePalette(format);
