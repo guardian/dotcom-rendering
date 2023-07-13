@@ -303,6 +303,7 @@ const buildElementTree =
 			case 'S':
 			case 'I':
 			case 'VAR':
+			case 'STRIKE':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: styles(format),
 					key,
