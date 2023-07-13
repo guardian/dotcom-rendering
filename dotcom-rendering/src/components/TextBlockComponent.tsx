@@ -295,6 +295,7 @@ const buildElementTree =
 			case 'SUP':
 			case 'H2':
 			case 'H3':
+			case 'H4':
 			case 'B':
 			case 'EM':
 			case 'UL':
@@ -306,6 +307,7 @@ const buildElementTree =
 			case 'VAR':
 			case 'STRIKE':
 			case 'U':
+			case 'DEL':
 				return jsx(node.nodeName.toLowerCase(), {
 					css: styles(format),
 					key,
