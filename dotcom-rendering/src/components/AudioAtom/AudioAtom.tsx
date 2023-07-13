@@ -342,8 +342,7 @@ export const AudioAtom = ({
 				>
 					<p>
 						Sorry your browser does not support audio - but you can
-						download here and listen
-						${urlTouse}
+						download here and listen ${urlToUse}
 					</p>
 				</audio>
 				<div css={audioControlsStyle}>
