@@ -2053,6 +2053,27 @@ const hoverPagination = (format: ArticleFormat) => {
 	}
 };
 
+const backgroundAudioAtom = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2078,18 +2099,18 @@ export const decidePalette = (
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
-				overrides?.text?.cardHeadline ?? textCardHeadline(format),
+				overrides?.text.cardHeadline ?? textCardHeadline(format),
 			dynamoHeadline:
-				overrides?.text?.dynamoHeadline ?? textCardHeadline(format),
-			cardByline: overrides?.text?.cardByline ?? textCardByline(format),
-			cardKicker: overrides?.text?.cardKicker ?? textCardKicker(format),
+				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
+			cardByline: overrides?.text.cardByline ?? textCardByline(format),
+			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
 			dynamoKicker:
-				overrides?.text?.dynamoKicker ?? textCardKicker(format),
+				overrides?.text.dynamoKicker ?? textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst:
-				overrides?.text?.cardStandfirst ?? textCardStandfirst(format),
-			cardFooter: overrides?.text?.cardFooter ?? textCardFooter(format),
-			dynamoMeta: overrides?.text?.dynamoMeta ?? textCardFooter(format),
+				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
+			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -2128,10 +2149,11 @@ export const decidePalette = (
 			article: backgroundArticle(format),
 			analysisContrast: backgroundAnalysisContrastColour(),
 			analysisContrastHover: backgroundAnalysisContrastHoverColour(),
+			audioAtom: backgroundAudioAtom(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: overrides?.background?.card ?? backgroundCard(format),
+			card: overrides?.background.card ?? backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -2189,7 +2211,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: overrides?.border?.lines ?? borderLines(format),
+			lines: overrides?.border.lines ?? borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),
