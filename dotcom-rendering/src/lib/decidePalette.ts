@@ -2068,7 +2068,7 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
+			return news[400];
 		case ArticleSpecial.SpecialReportAlt:
 			return news[400];
 	}
