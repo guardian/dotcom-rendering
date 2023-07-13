@@ -218,6 +218,7 @@ const pillarUnderline = (palette: Palette) => css`
 	}
 `;
 
+/** A11Y warning: this styling has no focus state for the selected pillar */
 const forceUnderline = css`
 	:after {
 		transform: translateY(4px);
@@ -231,7 +232,7 @@ const forceUnderline = css`
 	:hover:after {
 		transform: translateY(4px);
 	}
-`; // A11Y warning: this styling has no focus state for the selected pillar
+`;
 
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
