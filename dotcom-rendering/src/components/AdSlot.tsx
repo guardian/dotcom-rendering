@@ -9,6 +9,7 @@ import {
 	space,
 	text,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
@@ -492,8 +493,17 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 						].join(' ')}
 						css={[
+							/**
+							 * commercial code will look for slots that are display: none
+							 * and remove them from the dom
+							 *
+							 * on desktop we hide mobile inline slots
+							 */
 							css`
 								position: relative;
+								${until.tablet} {
+									display: none;
+								}
 							`,
 						]}
 						data-link-name={`ad slot ${advertId}`}
@@ -550,6 +560,17 @@ export const AdSlot = ({
 								min-width: 300px;
 								width: 300px;
 								margin: 12px auto;
+							`,
+							/**
+							 * commercial code will look for slots that are display: none
+							 * and remove them from the dom
+							 *
+							 * on mobile we hide desktop inline slots
+							 */
+							css`
+								${from.tablet} {
+									display: none;
+								}
 							`,
 							fluidFullWidthAdStyles,
 						]}
