@@ -3,7 +3,7 @@ export type AudioAtomType = {
 	trackUrl: string;
 	kicker: string;
 	title?: string;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	shouldUseAcast?: boolean;
 	duration: number;
 };

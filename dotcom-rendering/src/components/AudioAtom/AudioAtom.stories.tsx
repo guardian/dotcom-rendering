@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { AudioAtom } from './AudioAtom';
 
 export default {
@@ -7,7 +7,7 @@ export default {
 	component: AudioAtom,
 };
 
-export const DefaultStory = (): JSX.Element => {
+export const SportStory = (): JSX.Element => {
 	return (
 		<div
 			css={css`
@@ -20,7 +20,11 @@ export const DefaultStory = (): JSX.Element => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title="Q&A and Detective Wilson"
-				pillar={ArticlePillar.Sport}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
+				}}
 				duration={849}
 			/>
 		</div>
@@ -40,7 +44,11 @@ export const NewsStory = (): JSX.Element => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title="Q&A and Detective Wilson"
-				pillar={ArticlePillar.News}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 				duration={849}
 			/>
 		</div>
@@ -60,7 +68,11 @@ export const CultureStory = (): JSX.Element => {
 				trackUrl="https://audio.guim.co.uk/2020/05/05-61553-gnl.fw.200505.jf.ch7DW.mp3"
 				kicker="Football Weekly Extra Extra"
 				title="Q&A and Detective Wilson"
-				pillar={ArticlePillar.Culture}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Culture,
+				}}
 				duration={849}
 			/>
 		</div>

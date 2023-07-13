@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	focusHalo,
 	headline,
@@ -8,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { pillarPalette } from '../../lib/decideAppsRendering';
+import { decidePalette } from '../../lib/decidePalette';
 import type { AudioAtomType } from '../../types/audioAtom';
 
 const wrapperStyles = css`
@@ -30,8 +29,8 @@ const wrapperStyles = css`
 	margin: 16px 0 36px;
 `;
 
-const kickerStyle = (pillar: ArticleTheme) => css`
-	color: ${pillarPalette[pillar][400]};
+const kickerStyle = (color: string) => css`
+	color: ${color};
 	${headline.xxxsmall({ fontWeight: 'bold' })};
 `;
 
@@ -100,14 +99,10 @@ const progressBarStyle = css`
 	display: block;
 `;
 
-const progressBarInputStyle = (pillar: ArticleTheme) => css`
+const progressBarInputStyle = (color: string) => css`
 	width: 100%;
 	appearance: none;
-	background-image: linear-gradient(
-		to right,
-		${pillarPalette[pillar][400]} 0%,
-		${neutral[60]} 0%
-	);
+	background-image: linear-gradient(to right, ${color} 0%, ${neutral[60]} 0%);
 	height: 6px;
 	outline: 0;
 	cursor: pointer;
@@ -119,21 +114,21 @@ const progressBarInputStyle = (pillar: ArticleTheme) => css`
 
 	/* Use the pillar to style the colour of the range thumb */
 	&::-webkit-slider-thumb {
-		background: ${pillarPalette[pillar][400]};
+		background: ${color};
 		-webkit-appearance: none; /* stylelint-disable-line property-no-vendor-prefix */
 		width: 14px;
 		height: 14px;
 		border-radius: 50px;
 	}
 	&::-moz-range-thumb {
-		background: ${pillarPalette[pillar][400]};
+		background: ${color};
 		width: 14px;
 		height: 14px;
 		border: none;
 		border-radius: 50px;
 	}
 	&::-ms-thumb {
-		background: ${pillarPalette[pillar][400]};
+		background: ${color};
 		width: 14px;
 		height: 14px;
 		border: none;
@@ -152,24 +147,19 @@ const timeStyles = css`
 	${textSans.small()}
 `;
 
-const format = (t: number) => t.toFixed(0).padStart(2, '0');
+const formatNum = (t: number) => t.toFixed(0).padStart(2, '0');
 
 const formatTime = (t: number) => {
 	const second = Math.floor(t % 60);
 	const minute = Math.floor((t % 3600) / 60);
 	const hour = Math.floor(t / 3600);
-	return `${format(hour)}:${format(minute)}:${format(second)}`;
+	return `${formatNum(hour)}:${formatNum(minute)}:${formatNum(second)}`;
 };
 
-const PauseSVG = ({ pillar }: { pillar: ArticleTheme }) => (
+const PauseSVG = ({ circleFill }: { circleFill: string }) => (
 	<svg css={svgPauseStyle} width="30px" height="30px" viewBox="0 0 30 30">
 		<g fill="none" fillRule="evenodd">
-			<circle
-				fill={pillarPalette[pillar][400]}
-				cx="15"
-				cy="15"
-				r="15"
-			></circle>
+			<circle fill={circleFill} cx="15" cy="15" r="15"></circle>
 			<path
 				d="M9.429 7.286h3.429v15.429h-3.43zm7.286 0h3.429v15.429h-3.43z"
 				fill={neutral[100]}
@@ -178,15 +168,10 @@ const PauseSVG = ({ pillar }: { pillar: ArticleTheme }) => (
 	</svg>
 );
 
-const PlaySVG = ({ pillar }: { pillar: ArticleTheme }) => (
+const PlaySVG = ({ circleFill }: { circleFill: string }) => (
 	<svg css={svgPlayStyle} width="30px" height="30px" viewBox="0 0 30 30">
 		<g fill="none" fillRule="evenodd">
-			<circle
-				fill={pillarPalette[pillar][400]}
-				cx="15"
-				cy="15"
-				r="15"
-			></circle>
+			<circle fill={circleFill} cx="15" cy="15" r="15"></circle>
 			<path
 				fill={neutral[100]}
 				d="M10.113 8.571l-.47.366V20.01l.472.347 13.456-5.593v-.598z"
@@ -206,12 +191,13 @@ export const AudioAtom = ({
 	trackUrl,
 	kicker,
 	title,
-	pillar,
+	format,
 	shouldUseAcast,
 	duration,
 }: AudioAtomType): JSX.Element => {
 	const audioEl = useRef<HTMLAudioElement>(null);
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
+	const palette = decidePalette(format);
 
 	// update current time and progress bar position
 	const [currentTime, setCurrentTime] = useState<number>(0);
@@ -325,7 +311,9 @@ export const AudioAtom = ({
 					padding-left: 5px;
 				`}
 			>
-				<span css={kickerStyle(pillar)}>{kicker}</span>
+				<span css={kickerStyle(palette.background.audioAtom)}>
+					{kicker}
+				</span>
 				<h4 css={titleStyle}>{title}</h4>
 			</div>
 			<div css={audioBodyStyle}>
@@ -353,9 +341,13 @@ export const AudioAtom = ({
 						css={buttonStyle}
 					>
 						{isPlaying ? (
-							<PauseSVG pillar={pillar} />
+							<PauseSVG
+								circleFill={palette.background.audioAtom}
+							/>
 						) : (
-							<PlaySVG pillar={pillar} />
+							<PlaySVG
+								circleFill={palette.background.audioAtom}
+							/>
 						)}
 					</button>
 				</div>
@@ -365,7 +357,9 @@ export const AudioAtom = ({
 					</div>
 					<div css={progressBarStyle}>
 						<input
-							css={progressBarInputStyle(pillar)}
+							css={progressBarInputStyle(
+								palette.background.audioAtom,
+							)}
 							ref={progressBarEl}
 							type="range"
 							min="0"

@@ -65,6 +65,7 @@ export type Palette = {
 		article: Colour;
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
+		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;

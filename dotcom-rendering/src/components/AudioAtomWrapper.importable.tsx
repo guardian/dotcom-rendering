@@ -2,6 +2,7 @@ import {
 	getConsentFor,
 	onConsentChange,
 } from '@guardian/consent-management-platform';
+import type { ArticleFormat } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { AudioAtom } from './AudioAtom/AudioAtom';
 
@@ -11,7 +12,7 @@ type Props = {
 	kicker: string;
 	title?: string | undefined;
 	duration: number;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	contentIsNotSensitive: boolean;
 	aCastisEnabled: boolean;
 	readerCanBeShownAds: boolean;
@@ -20,14 +21,13 @@ type Props = {
 /**
  * # AudioAtomWrapper
  *
- * Wrapper around [`@guardian/atoms-rendering`’s `AudioAtom`](https://github.com/guardian/csnx/blob/main/libs/%40guardian/atoms-rendering/src/AudioAtom.tsx)
  */
 export const AudioAtomWrapper = ({
 	id,
 	trackUrl,
 	kicker,
 	title,
-	pillar,
+	format,
 	duration,
 	contentIsNotSensitive,
 	aCastisEnabled,
@@ -60,7 +60,7 @@ export const AudioAtomWrapper = ({
 			trackUrl={trackUrl}
 			kicker={kicker}
 			title={title}
-			pillar={pillar}
+			format={format}
 			duration={duration}
 			shouldUseAcast={shouldUseAcast}
 		/>
