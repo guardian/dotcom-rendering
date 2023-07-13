@@ -109,18 +109,14 @@ export const SupportingContent = ({
 				return (
 					<li
 						key={subLink.url}
+						style={{
+							borderColor: decidePalette(
+								parentFormat,
+								containerPalette,
+							).topBar.card,
+						}}
 						css={[
-							isDynamo
-								? [
-										dynamoLiStyles,
-										css`
-											border-color: ${decidePalette(
-												parentFormat,
-												containerPalette,
-											).topBar.card};
-										`,
-								  ]
-								: liStyles,
+							isDynamo ? dynamoLiStyles : liStyles,
 							shouldPadLeft && leftMargin,
 							isLast && bottomMargin,
 						]}

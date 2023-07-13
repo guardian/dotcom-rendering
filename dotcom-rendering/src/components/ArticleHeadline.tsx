@@ -397,14 +397,12 @@ export const ArticleHeadline = ({
 								format={format}
 							>
 								<h1
+									style={{ color: palette.text.headline }}
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
 											: lightFont,
 										invertedText,
-										css`
-											color: ${palette.text.headline};
-										`,
 									]}
 								>
 									{headlineString}

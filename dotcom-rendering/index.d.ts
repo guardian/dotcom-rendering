@@ -286,12 +286,7 @@ interface FEKeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
-type CardImageType =
-	| 'picture'
-	| 'avatar'
-	| 'crossword'
-	| 'slideshow'
-	| 'video';
+type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
 
 type SmallHeadlineSize =
 	| 'tiny'
@@ -534,6 +529,13 @@ declare module '*.svg' {
 interface PerformanceEntry {
 	loadTime: number;
 	renderTime: number;
+}
+
+declare namespace React {
+	interface CSSProperties {
+		/** CSS variables */
+		[key: `--${string}`]: string | number | undefined;
+	}
 }
 
 declare namespace JSX {

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';
+import { visuallyHidden } from '../../../lib/visuallyHidden';
 import type { Branding } from '../../../types/branding';
-import type { Palette } from '../../../types/palette';
 
 type Props = {
 	branding: Branding;
@@ -30,24 +30,19 @@ const brandingWrapperStyle = css`
 	position: relative;
 `;
 
-const labelStyle = (palette: Palette) => {
-	return css`
-		${textSans.xxsmall()}
-		color: ${palette.text.cardFooter};
-	`;
-};
+const labelStyle = css`
+	${textSans.xxsmall()}
+`;
 
 export const CardBranding = ({ branding, format }: Props) => {
 	const logo = decideLogo(format, branding);
 	const palette = decidePalette(format);
 	return (
 		<div css={brandingWrapperStyle}>
-			<div css={labelStyle(palette)}>{logo.label}</div>
-			<span
-				css={css`
-					${visuallyHidden};
-				`}
-			>
+			<div style={{ color: palette.text.cardFooter }} css={labelStyle}>
+				{logo.label}
+			</div>
+			<span css={visuallyHidden}>
 				{branding.sponsorName
 					? `This content was paid for by ${branding.sponsorName} and produced by the Guardian Labs team.`
 					: 'This content has been paid for by an advertiser and produced by the Guardian Labs team.'}

@@ -4,7 +4,7 @@ import { brandAltBackground, from, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
-import { getZIndex } from '../../lib/getZIndex';
+import { decideIndex, getZIndex } from '../../lib/getZIndex';
 import type { Branding } from '../../types/branding';
 import type {
 	DCRContainerPalette,
@@ -96,6 +96,15 @@ export type Props = {
 	onwardsSource?: string;
 };
 
+const starRatingStyles = css`
+	background-color: ${brandAltBackground.primary};
+	display: inline-block;
+
+	${from.tablet} {
+		margin-top: ${space[1]}px;
+	}
+`;
+
 const StarRatingComponent = ({
 	rating,
 	cardHasImage,
@@ -104,15 +113,10 @@ const StarRatingComponent = ({
 	cardHasImage: boolean;
 }) => (
 	<div
-		css={css`
-			background-color: ${brandAltBackground.primary};
-			margin-top: ${cardHasImage ? '2' : space[1]}px;
-			display: inline-block;
-
-			${from.tablet} {
-				margin-top: ${space[1]}px;
-			}
-		`}
+		style={{
+			marginTop: `${cardHasImage ? 2 : space[1]}px`,
+		}}
+		css={starRatingStyles}
 	>
 		<Hide when="above" breakpoint="desktop">
 			<StarRating rating={rating} size="small" breakpoint="mobile" />
@@ -243,6 +247,17 @@ const isWithinTwelveHours = (webPublicationDate: string): boolean => {
 	return timeDiffHours <= 12;
 };
 
+const commentCountStyles = css`
+	/* The following styles turn off those provided by Link */
+	color: inherit;
+	/* stylelint-disable-next-line property-disallowed-list */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	text-decoration: none;
+	min-height: 10px;
+`;
+
 export const Card = ({
 	linkTo,
 	format,
@@ -333,18 +348,11 @@ export const Card = ({
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
-							cssOverrides={css`
+							style={{
 								/* See: https://css-tricks.com/nested-links/ */
-								${getZIndex('card-nested-link')}
-								/* The following styles turn off those provided by Link */
-								color: inherit;
-								/* stylelint-disable-next-line property-disallowed-list */
-								font-family: inherit;
-								font-size: inherit;
-								line-height: inherit;
-								text-decoration: none;
-								min-height: 10px;
-							`}
+								zIndex: decideIndex('card-nested-link'),
+							}}
+							cssOverrides={commentCountStyles}
 						/>
 					) : undefined
 				}

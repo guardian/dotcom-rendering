@@ -6,11 +6,11 @@ import type { DCRContainerPalette } from '../../../types/front';
 
 type Direction = 'row' | 'column' | 'row-reverse';
 
-const ulStyles = (direction: Direction) => css`
+const ulStyles = css`
 	width: 100%;
 	position: relative;
 	display: flex;
-	flex-direction: ${direction};
+
 	row-gap: 12px;
 	${until.tablet} {
 		flex-direction: column;
@@ -56,8 +56,9 @@ export const UL = ({
 
 	return (
 		<ul
+			style={{ flexDirection: direction }}
 			css={[
-				ulStyles(direction),
+				ulStyles,
 				showDivider && verticalDivider(borderColour),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,

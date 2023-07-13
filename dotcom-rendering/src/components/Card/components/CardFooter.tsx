@@ -31,6 +31,12 @@ const flexEnd = css`
 	justify-content: flex-end;
 `;
 
+/* Fill the space */
+const fillSpace = css`
+	flex: 1;
+	align-self: flex-end;
+`;
+
 export const CardFooter = ({
 	format,
 	containerPalette,
@@ -61,13 +67,9 @@ export const CardFooter = ({
 					{age}
 					{displayLines && (
 						<StraightLines
-							cssOverrides={css`
-								/* Fill the space */
-								flex: 1;
-								align-self: flex-end;
-							`}
+							cssOverrides={fillSpace}
 							color={
-								overrides?.border?.lines ?? palette.border.lines
+								overrides?.border.lines ?? palette.border.lines
 							}
 							count={4}
 						/>

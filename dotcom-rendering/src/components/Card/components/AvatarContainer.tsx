@@ -14,11 +14,8 @@ const sideMarginStyles = css`
 
 const topMarginStyles = css`
 	margin-top: ${space[1]}px;
-`;
-
-const largerTopMargin = css`
 	${from.tablet} {
-		margin-top: 50px;
+		margin-top: var(--top-margin);
 	}
 `;
 
@@ -72,10 +69,12 @@ export const AvatarContainer = ({
 
 	return (
 		<div
+			style={{
+				'--top-margin': `${isVertical ? 50 : space[1]}px`,
+			}}
 			css={[
 				sideMarginStyles,
 				topMarginStyles,
-				isVertical && largerTopMargin,
 				sizingStyles(imageSize, imagePosition),
 			]}
 		>

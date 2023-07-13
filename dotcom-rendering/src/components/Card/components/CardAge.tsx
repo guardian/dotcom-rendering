@@ -4,7 +4,6 @@ import { textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
 
 type Props = {
 	format: ArticleFormat;
@@ -14,46 +13,36 @@ type Props = {
 	isDynamo?: true;
 };
 
-const ageStyles = (
-	format: ArticleFormat,
-	palette: Palette,
-	isDynamo?: true,
-) => {
-	return css`
-		${textSans.xxsmall({ lineHeight: 'tight' })};
-		margin-top: -4px;
-		color: ${isDynamo
-			? palette.text.dynamoHeadline
-			: palette.text.cardFooter};
+const ageStyles = css`
+	${textSans.xxsmall({ lineHeight: 'tight' })};
+	margin-top: -4px;
 
-		/* Provide side padding for positioning and also to keep spacing
+	/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
-		padding-left: 5px;
-		padding-right: 5px;
-		${until.tablet} {
-			line-height: 1.25;
-		}
+	padding-left: 5px;
+	padding-right: 5px;
+	${until.tablet} {
+		line-height: 1.25;
+	}
 
-		svg {
-			fill: ${palette.text.cardFooter};
-			margin-bottom: -1px;
-			height: 11px;
-			width: 11px;
-			margin-right: 2px;
-		}
+	svg {
+		margin-bottom: -1px;
+		height: 11px;
+		width: 11px;
+		margin-right: 2px;
+	}
+`;
 
-		> time {
-			${textSans.xxsmall({
-				fontWeight:
-					format.design === ArticleDesign.Gallery ||
-					format.design === ArticleDesign.Audio ||
-					format.design === ArticleDesign.Video
-						? `bold`
-						: `regular`,
-			})};
-		}
-	`;
-};
+const regular = css`
+	${textSans.xxsmall({
+		fontWeight: 'regular',
+	})}
+`;
+const bold = css`
+	${textSans.xxsmall({
+		fontWeight: 'bold',
+	})}
+`;
 
 export const CardAge = ({
 	format,
@@ -70,13 +59,29 @@ export const CardAge = ({
 	}
 
 	return (
-		<span css={ageStyles(format, palette, isDynamo)}>
-			<span>
-				{showClock && <ClockIcon />}
-				<time dateTime={webPublicationDate} data-relativeformat="med">
-					{displayString}
-				</time>
-			</span>
+		<span
+			style={{
+				fill: palette.text.cardFooter,
+				color: isDynamo
+					? palette.text.dynamoHeadline
+					: palette.text.cardFooter,
+			}}
+			css={ageStyles}
+		>
+			{showClock && <ClockIcon />}
+			<time
+				dateTime={webPublicationDate}
+				css={
+					format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
+						? bold
+						: regular
+				}
+				data-relativeformat="med"
+			>
+				{displayString}
+			</time>
 		</span>
 	);
 };

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
+import type { CSSProperties } from 'react';
 import type { ImagePositionType } from './ImageWrapper';
 
 type Props = {
@@ -26,15 +27,11 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 	}
 };
 
-const decideWidth = (minWidthInPixels?: number) => {
+const decideWidth = (minWidthInPixels?: number): CSSProperties => {
 	if (minWidthInPixels !== undefined && minWidthInPixels > 0) {
-		return css`
-			min-width: ${minWidthInPixels}px;
-		`;
+		return { minWidth: minWidthInPixels };
 	}
-	return css`
-		width: 100%;
-	`;
+	return { width: '100%' };
 };
 
 const decidePosition = (
@@ -46,30 +43,35 @@ const decidePosition = (
 		switch (imagePosition) {
 			case 'left':
 			case 'right': {
-				return css`
-					flex-direction: row-reverse;
-					${until.tablet} {
-						flex-direction: row-reverse;
-					}
-				`;
+				return {
+					'--direction': 'row-reverse',
+					'--direction-mobile': 'row-reverse',
+				};
 			}
 			default: {
-				return css`
-					flex-direction: column-reverse;
-					${until.tablet} {
-						flex-direction: row-reverse;
-					}
-				`;
+				return {
+					'--direction': 'column-reverse',
+					'--direction-mobile': 'row-reverse',
+				};
 			}
 		}
 	}
-	return css`
-		flex-direction: ${decideDirection(imagePosition)};
-		${until.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnMobile)};
-		}
-	`;
+
+	return {
+		'--direction': decideDirection(imagePosition),
+		'--direction-mobile': decideDirection(imagePositionOnMobile),
+	};
 };
+
+const positionStyles = css`
+	display: flex;
+	flex-basis: 100%;
+
+	flex-direction: var(--direction);
+	${until.tablet} {
+		flex-direction: var(--direction-mobile);
+	}
+`;
 
 export const CardLayout = ({
 	children,
@@ -79,14 +81,11 @@ export const CardLayout = ({
 	imageType,
 }: Props) => (
 	<div
-		css={[
-			css`
-				display: flex;
-				flex-basis: 100%;
-			`,
-			decideWidth(minWidthInPixels),
-			decidePosition(imagePosition, imagePositionOnMobile, imageType),
-		]}
+		style={{
+			...decideWidth(minWidthInPixels),
+			...decidePosition(imagePosition, imagePositionOnMobile, imageType),
+		}}
+		css={positionStyles}
 	>
 		{children}
 	</div>
