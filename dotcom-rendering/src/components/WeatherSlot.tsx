@@ -100,6 +100,16 @@ const iconCSS = (size: number) => css`
 	}
 `;
 
+const flexRow = css`
+	display: flex;
+	flex-direction: row;
+`;
+
+const flexColumn = css`
+	display: flex;
+	flex-direction: column;
+`;
+
 const LoadingIcon = () => (
 	<span
 		css={css`
@@ -148,23 +158,13 @@ export const WeatherSlot = ({
 				{isNow ? 'The current weather' : 'The forecast for'}
 			</span>
 			{isNow ? (
-				<div
-					css={css`
-						display: flex;
-						flex-direction: row;
-					`}
-				>
+				<div css={flexRow}>
 					<div>
 						<Suspense fallback={<LoadingIcon />}>
 							<Icon size={50} />
 						</Suspense>
 					</div>
-					<div
-						css={css`
-							display: flex;
-							flex-direction: column;
-						`}
-					>
+					<div css={flexColumn}>
 						<span css={nowCSS} aria-hidden={true}>
 							Now
 						</span>
