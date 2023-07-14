@@ -14,7 +14,6 @@ import type { WeatherData } from './WeatherData.importable';
 
 interface IconProps {
 	size?: number;
-	margin?: number;
 }
 
 const formatTemperature = (value: number, unit: string) =>
@@ -86,7 +85,7 @@ const tempCSS = (isNow: boolean) => [
 		`,
 ];
 
-const iconCSS = (size: number, margin: number) => css`
+const iconCSS = (size: number) => css`
 	position: absolute;
 	top: 50%;
 	left: 0px;
@@ -97,7 +96,7 @@ const iconCSS = (size: number, margin: number) => css`
 		margin-top: 0;
 		height: ${size}px;
 		width: ${size}px;
-		margin-right: ${margin}px;
+		margin-right: ${size === 50 ? 8 : 0}px;
 	}
 `;
 
@@ -141,9 +140,9 @@ export const WeatherSlot = ({
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
 			({ default: Component }) => {
 				return {
-					default: ({ size = 32, margin = 0 }: IconProps) => (
+					default: ({ size = 32 }: IconProps) => (
 						<Component
-							css={iconCSS(size, margin)}
+							css={iconCSS(size)}
 							aria-hidden={true}
 							className="icon"
 						/>
@@ -162,7 +161,7 @@ export const WeatherSlot = ({
 				<div css={flexRow}>
 					<div>
 						<Suspense fallback={<LoadingIcon />}>
-							<Icon size={50} margin={8} />
+							<Icon size={50} />
 						</Suspense>
 					</div>
 					<div css={flexColumn}>
