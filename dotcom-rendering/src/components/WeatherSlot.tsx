@@ -94,9 +94,9 @@ const iconCSS = (size: number) => css`
 	${from.leftCol} {
 		position: static;
 		margin-top: 0;
-		margin-right: 8px;
 		height: ${size}px;
 		width: ${size}px;
+		margin-right: ${size === 50 ? 8 : 0}px;
 	}
 `;
 
