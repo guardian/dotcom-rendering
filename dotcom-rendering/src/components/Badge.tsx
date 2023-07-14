@@ -6,6 +6,7 @@ const badgeSizingStyles = (width?: number, height?: number) => {
 	// where the size of the badge is unknown
 	if (width === undefined || height === undefined) {
 		return css`
+			width: auto;
 			height: 42px;
 			${from.leftCol} {
 				height: 54px;
