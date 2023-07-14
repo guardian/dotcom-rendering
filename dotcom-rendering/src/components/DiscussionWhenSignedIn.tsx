@@ -24,5 +24,7 @@ export const DiscussionWhenSignedIn = ({ authStatus, ...props }: Props) => {
 	);
 	if (!data) return null;
 
-	return <Discussion user={data.userProfile} {...props} />;
+	const user = { profile: data.userProfile, authStatus };
+
+	return <Discussion user={user} {...props} />;
 };

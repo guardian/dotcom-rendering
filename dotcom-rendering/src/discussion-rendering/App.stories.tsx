@@ -1,23 +1,26 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { App } from './App';
-import type { UserProfile } from './discussionTypes';
+import type { SignedInUser } from './discussionTypes';
 
 export default { component: App, title: 'Discussion/App' };
 
-const aUser: UserProfile = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
-	apiUrl: '',
-	avatar: '',
-	secureAvatarUrl: '',
-	badge: [],
-	privateFields: {
-		canPostComment: true,
-		isPremoderated: false,
-		hasCommented: true,
+const aUser: SignedInUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
 	},
+	authStatus: { kind: 'SignedInWithCookies' },
 };
 
 export const LoggedOutHiddenPicks = () => (

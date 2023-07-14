@@ -1,13 +1,16 @@
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
 import { RecommendationCount } from './RecommendationCount';
 
 export default { title: 'Discussion/RecommendationCount' };
+
+const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const NeverRecomended = () => (
 	<RecommendationCount
 		commentId={123}
 		initialCount={383}
 		alreadyRecommended={false}
-		isSignedIn={true}
+		authStatus={signedInStatus}
 		userMadeComment={false}
 	/>
 );
@@ -17,7 +20,7 @@ export const AlreadyRecomended = () => (
 		commentId={123}
 		initialCount={83}
 		alreadyRecommended={true}
-		isSignedIn={true}
+		authStatus={signedInStatus}
 		userMadeComment={false}
 	/>
 );
@@ -27,7 +30,6 @@ export const NotSignedIn = () => (
 		commentId={123}
 		initialCount={83}
 		alreadyRecommended={false}
-		isSignedIn={false}
 		userMadeComment={false}
 	/>
 );
@@ -37,7 +39,7 @@ export const OwnPost = () => (
 		commentId={123}
 		initialCount={83}
 		alreadyRecommended={false}
-		isSignedIn={false}
+		authStatus={signedInStatus}
 		userMadeComment={true}
 	/>
 );

@@ -3,7 +3,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../../lib/mockRESTCalls';
-import type { CommentType } from '../../discussionTypes';
+import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { CommentContainer } from './CommentContainer';
 
 mockRESTCalls();
@@ -21,19 +21,22 @@ const commentWithoutReply: CommentType = {
 	responses: [],
 };
 
-const aUser = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
-	apiUrl: '',
-	avatar: '',
-	secureAvatarUrl: '',
-	badge: [],
-	privateFields: {
-		canPostComment: true,
-		isPremoderated: false,
-		hasCommented: true,
+const aUser: SignedInUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
 	},
+	authStatus: { kind: 'SignedInWithCookies' },
 };
 
 describe('CommentContainer', () => {

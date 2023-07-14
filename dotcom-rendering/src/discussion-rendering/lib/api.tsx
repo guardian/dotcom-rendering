@@ -1,5 +1,10 @@
 import { joinUrl } from '@guardian/libs';
 import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../lib/useAuthStatus';
+import { getOptionsHeadersWithOkta } from '../../lib/useAuthStatus';
+import type {
 	AdditionalHeadersType,
 	CommentResponse,
 	CommentType,
@@ -129,54 +134,64 @@ export const preview = (body: string): Promise<string> => {
 	);
 };
 
-export const comment = (
-	shortUrl: string,
-	body: string,
-): Promise<CommentResponse> => {
-	const url =
-		joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
-		objAsParams(defaultParams);
-	const data = new URLSearchParams();
-	data.append('body', body);
+export const comment =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(shortUrl: string, body: string): Promise<CommentResponse> => {
+		const url =
+			joinUrl(options.baseUrl, 'discussion', shortUrl, 'comment') +
+			objAsParams(defaultParams);
+		const data = new URLSearchParams();
+		data.append('body', body);
 
-	return fetch(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-		},
-		credentials: 'include',
-	}).then((resp) => resp.json());
-};
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
 
-export const reply = (
-	shortUrl: string,
-	body: string,
-	parentCommentId: number,
-): Promise<CommentResponse> => {
-	const url =
-		joinUrl(
-			options.baseUrl,
-			'discussion',
-			shortUrl,
-			'comment',
-			parentCommentId.toString(),
-			'reply',
-		) + objAsParams(defaultParams);
-	const data = new URLSearchParams();
-	data.append('body', body);
+		return fetch(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...(authOptions.headers !== undefined
+					? authOptions.headers
+					: {}),
+			},
+			credentials: authOptions.credentials,
+		}).then((resp) => resp.json());
+	};
 
-	return fetch(url, {
-		method: 'POST',
-		body: data.toString(),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			...options.headers,
-		},
-		credentials: 'include',
-	}).then((resp) => resp.json());
-};
+export const reply =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(
+		shortUrl: string,
+		body: string,
+		parentCommentId: number,
+	): Promise<CommentResponse> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'discussion',
+				shortUrl,
+				'comment',
+				parentCommentId.toString(),
+				'reply',
+			) + objAsParams(defaultParams);
+		const data = new URLSearchParams();
+		data.append('body', body);
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+
+		return fetch(url, {
+			method: 'POST',
+			body: data.toString(),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...options.headers,
+				...(authOptions.headers !== undefined
+					? authOptions.headers
+					: {}),
+			},
+			credentials: authOptions.credentials,
+		}).then((resp) => resp.json());
+	};
 
 //todo: come back and parse the response properly and set a proper return type for the error case
 export const getPicks = (
@@ -199,17 +214,18 @@ export const getPicks = (
 	);
 };
 
-//todo - at some point in the future: would be nice to have a signed in with user, signed in anonymous and signed out options
 export const reportAbuse = ({
 	commentId,
 	categoryId,
 	email,
 	reason,
+	authStatus,
 }: {
 	commentId: number;
 	categoryId: number;
 	reason?: string;
 	email?: string;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 }): Promise<CommentResponse> => {
 	const url =
 		joinUrl(
@@ -224,38 +240,56 @@ export const reportAbuse = ({
 	email && data.append('email', email.toString());
 	reason && data.append('reason', reason);
 
+	const authOptions = authStatus
+		? getOptionsHeadersWithOkta(authStatus)
+		: undefined;
+
 	return fetch(url, {
 		method: 'POST',
 		body: data.toString(),
-		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(authOptions?.headers !== undefined ? authOptions.headers : {}),
 		},
+		credentials: authOptions?.credentials,
 	}).then((resp) => resp.json());
 };
 
-export const recommend = (commentId: number): Promise<boolean> => {
-	const url =
-		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'recommend') +
-		objAsParams(defaultParams);
+export const recommend =
+	(authStatus: SignedInWithCookies | SignedInWithOkta) =>
+	(commentId: number): Promise<boolean> => {
+		const url =
+			joinUrl(
+				options.baseUrl,
+				'comment',
+				commentId.toString(),
+				'recommend',
+			) + objAsParams(defaultParams);
+
+		const authOptions = getOptionsHeadersWithOkta(authStatus);
+
+		return fetch(url, {
+			method: 'POST',
+			headers: {
+				...options.headers,
+				...(authOptions.headers !== undefined
+					? authOptions.headers
+					: {}),
+			},
+			credentials: authOptions.credentials,
+		}).then((resp) => resp.ok);
+	};
+
+export const addUserName = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	userName: string,
+): Promise<UserNameResponse> => {
+	const url = options.idApiUrl + `/user/me/username`;
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
-		credentials: 'include',
-		headers: {
-			...options.headers,
-		},
-	}).then((resp) => resp.ok);
-};
-
-//todo: adjust this when the endpoint is ready
-export const addUserName = (userName: string): Promise<UserNameResponse> => {
-	const url = options.idApiUrl + `/user/me` + objAsParams(defaultParams);
-
-	return fetch(url, {
-		method: 'POST',
-		credentials: 'include',
 		body: JSON.stringify({
 			publicFields: {
 				username: userName,
@@ -264,30 +298,40 @@ export const addUserName = (userName: string): Promise<UserNameResponse> => {
 		}),
 		headers: {
 			'Content-Type': 'application/json',
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
 };
 
-export const pickComment = (commentId: number): Promise<CommentResponse> => {
+export const pickComment = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	commentId: number,
+): Promise<CommentResponse> => {
 	const url =
 		joinUrl(options.baseUrl, 'comment', commentId.toString(), 'highlight') +
 		objAsParams(defaultParams);
 
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
-		credentials: 'include',
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));
 };
 
-export const unPickComment = (commentId: number): Promise<CommentResponse> => {
+export const unPickComment = (
+	authStatus: SignedInWithCookies | SignedInWithOkta,
+	commentId: number,
+): Promise<CommentResponse> => {
 	const url =
 		joinUrl(
 			options.baseUrl,
@@ -295,14 +339,16 @@ export const unPickComment = (commentId: number): Promise<CommentResponse> => {
 			commentId.toString(),
 			'unhighlight',
 		) + objAsParams(defaultParams);
+	const authOptions = getOptionsHeadersWithOkta(authStatus);
 
 	return fetch(url, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			...options.headers,
+			...(authOptions.headers !== undefined ? authOptions.headers : {}),
 		},
-		credentials: 'include',
+		credentials: authOptions.credentials,
 	})
 		.then((resp) => resp.json())
 		.catch((error) => console.error(`Error fetching ${url}`, error));

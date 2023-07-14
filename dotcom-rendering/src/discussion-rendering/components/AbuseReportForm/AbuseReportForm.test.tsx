@@ -14,6 +14,7 @@ describe('Dropdown', () => {
 				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 
@@ -28,6 +29,7 @@ describe('Dropdown', () => {
 				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 
@@ -44,6 +46,7 @@ describe('Dropdown', () => {
 				toggleSetShowForm={() => undefined}
 				pillar={ArticlePillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 

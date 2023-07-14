@@ -18,6 +18,7 @@ export const Dialog = () => (
 			toggleSetShowForm={() => {}}
 			pillar={ArticlePillar.Sport}
 			commentId={123}
+			authStatus={undefined}
 		/>
 	</div>
 );

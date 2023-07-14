@@ -8,6 +8,10 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../../lib/useAuthStatus';
 import type { CommentType } from '../../discussionTypes';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
@@ -21,7 +25,7 @@ import { Timestamp } from '../Timestamp/Timestamp';
 type Props = {
 	pillar: ArticleTheme;
 	comment: CommentType;
-	isSignedIn: boolean;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
@@ -163,7 +167,7 @@ const truncateText = (input: string, limit: number) => {
 export const TopPick = ({
 	pillar,
 	comment,
-	isSignedIn,
+	authStatus,
 	userMadeComment,
 	onPermalinkClick,
 	onRecommend,
@@ -241,7 +245,7 @@ export const TopPick = ({
 					commentId={comment.id}
 					initialCount={comment.numRecommends}
 					alreadyRecommended={false}
-					isSignedIn={isSignedIn}
+					authStatus={authStatus}
 					userMadeComment={userMadeComment}
 					onRecommend={onRecommend}
 				/>
