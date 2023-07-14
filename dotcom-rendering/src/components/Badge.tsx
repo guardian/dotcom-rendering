@@ -1,36 +1,95 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from, palette, textSans } from '@guardian/source-foundations';
 
-const badgeSizingStyles = css`
-	height: 42px;
-	${from.leftCol} {
-		height: 54px;
+const badgeSizingStyles = (width?: number, height?: number) => {
+	// This default applies to non-sponsored badges
+	// where the size of the badge is unknown
+	if (width === undefined || height === undefined) {
+		return css`
+			height: 42px;
+			${from.leftCol} {
+				height: 54px;
+			}
+		`;
+	} else {
+		// The sizing here uses the width and height from the branding
+		// The badge is at half size unless at wide viewpoints
+		return css`
+			width: ${width / 2}px;
+			height: ${height / 2}px;
+			${from.wide} {
+				width: ${width}px;
+				height: ${height}px;
+			}
+		`;
 	}
-`;
+};
 
 const imageStyles = css`
 	display: block;
-	width: auto;
 	max-width: 100%;
 	object-fit: contain;
-	${badgeSizingStyles}
 `;
 
 const badgeLink = css`
 	text-decoration: none;
 `;
 
+const labelStyles = css`
+	${textSans.xxsmall()};
+	line-height: 1rem;
+	color: ${palette.neutral[46]};
+	font-weight: bold;
+	margin-top: 0.375rem;
+	padding-right: 0.625rem;
+	padding-bottom: 0.625rem;
+	text-align: left;
+`;
+
+const aboutThisLinkStyles = css`
+	${textSans.xxsmall()};
+	line-height: 11px;
+	color: ${palette.neutral[46]};
+	font-weight: normal;
+	text-decoration: none;
+`;
+
 type Props = {
 	imageSrc: string;
 	href: string;
+	label?: string;
+	aboutThisLinkHref?: string;
+	sponsorName?: string;
+	width?: number;
+	height?: number;
 };
 
-export const Badge = ({ imageSrc, href }: Props) => {
+export const Badge = ({
+	imageSrc,
+	href,
+	label,
+	aboutThisLinkHref,
+	sponsorName,
+	width,
+	height,
+}: Props) => {
 	return (
-		<div css={badgeSizingStyles}>
+		<>
+			{!!label && <p css={labelStyles}>{label}</p>}
+
 			<a href={href} css={badgeLink} role="button">
-				<img css={imageStyles} src={imageSrc} alt="" />
+				<img
+					css={[imageStyles, badgeSizingStyles(width, height)]}
+					src={imageSrc}
+					alt={`${sponsorName ?? 'brand'} logo`}
+				/>
 			</a>
-		</div>
+
+			{!!aboutThisLinkHref && (
+				<a css={aboutThisLinkStyles} href={aboutThisLinkHref}>
+					About this content
+				</a>
+			)}
+		</>
 	);
 };
