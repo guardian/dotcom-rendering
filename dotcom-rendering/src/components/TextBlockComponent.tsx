@@ -290,6 +290,12 @@ const buildElementTree =
 				return jsx('br', {
 					key,
 				});
+			case 'STRIKE':
+				return jsx('s', {
+					css: styles(format),
+					key,
+					children,
+				});
 			case 'FOOTER':
 			case 'SUB':
 			case 'SUP':
@@ -305,7 +311,6 @@ const buildElementTree =
 			case 'S':
 			case 'I':
 			case 'VAR':
-			case 'STRIKE':
 			case 'U':
 			case 'DEL':
 				return jsx(node.nodeName.toLowerCase(), {
