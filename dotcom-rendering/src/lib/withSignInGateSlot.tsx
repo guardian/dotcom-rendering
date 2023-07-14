@@ -11,7 +11,7 @@ type Props = {
 	renderedElements: (JSX.Element | null | undefined)[];
 	format: ArticleFormat;
 	contentType: string;
-	sectionName: string;
+	sectionId: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;
@@ -19,21 +19,22 @@ type Props = {
 	pageId: string;
 	idUrl: string;
 	switches: Switches;
-	isSensitive: boolean;
-	isDev: boolean;
+	isSensitive?: boolean;
+	isDev?: boolean;
 };
 
 export const withSignInGateSlot = ({
 	renderedElements,
 	format,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
 	host,
 	pageId,
 	idUrl,
+	switches,
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
@@ -46,13 +47,14 @@ export const withSignInGateSlot = ({
 							<SignInGateSelector
 								format={format}
 								contentType={contentType}
-								sectionName={sectionName}
+								sectionId={sectionId}
 								tags={tags}
 								isPaidContent={isPaidContent}
 								isPreview={!!isPreview}
 								host={host}
 								pageId={pageId}
 								idUrl={idUrl}
+								switches={switches}
 							/>
 						</Island>
 					</div>

@@ -242,6 +242,7 @@ window.twttr = (function(d, s, id) {
 		renderingTarget: 'Web',
 		borkFCP: article.config.abTests.borkFcpVariant === 'variant',
 		borkFID: article.config.abTests.borkFidVariant === 'variant',
+		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 };
 
@@ -278,7 +279,7 @@ export const renderBlocks = ({
 			isAdFreeUser={isAdFreeUser}
 			switches={switches}
 			isLiveUpdate={true}
-			section={section}
+			sectionId={section}
 			// The props below are never used because isLiveUpdate is true but, typescript...
 			shouldHideReaderRevenue={false}
 			tags={[]}

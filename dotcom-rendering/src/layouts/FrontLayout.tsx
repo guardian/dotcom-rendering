@@ -29,10 +29,12 @@ import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SnapCssSandbox } from '../components/SnapCssSandbox';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
 import { WeatherData } from '../components/WeatherData.importable';
 import { canRenderAds } from '../lib/canRenderAds';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import {
 	getDesktopAdPositions,
@@ -43,7 +45,7 @@ import { hideAge } from '../lib/hideAge';
 import type { NavType } from '../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../types/front';
 import { pageSkinContainer } from './lib/pageSkin';
-import { Stuck } from './lib/stickiness';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	front: DCRFrontType;
@@ -118,8 +120,10 @@ const decideLeftContent = (
 ) => {
 	// show CPScott?
 	if (
-		collection.displayName === 'Opinion' &&
-		['uk/commentisfree', 'au/commentisfree'].includes(front.config.pageId)
+		['uk/commentisfree', 'au/commentisfree'].includes(
+			front.config.pageId,
+		) &&
+		collection.displayName.toLowerCase() === 'opinion'
 	) {
 		return <CPScottHeader />;
 	}
@@ -150,7 +154,7 @@ const decideLeftContent = (
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
-		config: { abTests, isPaidContent, hasPageSkin },
+		config: { abTests, isPaidContent, hasPageSkin: hasPageSkinConfig },
 	} = front;
 
 	const isInEuropeTest = abTests.europeNetworkFrontVariant === 'variant';
@@ -161,6 +165,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	);
 
 	const renderAds = canRenderAds(front);
+
+	const hasPageSkin = hasPageSkinConfig && renderAds;
 
 	const mobileAdPositions = renderAds
 		? getMobileAdPositions(front.pressedPage.collections, merchHighPosition)
@@ -175,6 +181,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		front.isNetworkFront &&
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;
+
+	const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	return (
 		<>
@@ -224,8 +232,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								remoteHeader={
 									!!front.config.switches.remoteHeader
 								}
-								contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-								idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={front.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!front.config.switches
@@ -335,6 +345,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								};
 						  })
 						: trails;
+
+					const editionBranding =
+						front.pressedPage.frontProperties.commercial.editionBrandings.find(
+							(eB) =>
+								eB.edition.id === front.editionId &&
+								!!eB.branding,
+						);
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -533,6 +550,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collectionType={
 												collection.collectionType
 											}
+											hasPageSkin={hasPageSkin}
 										/>
 									</Island>
 								</Section>
@@ -590,6 +608,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index={index}
 								targetedTerritory={collection.targetedTerritory}
 								hasPageSkin={hasPageSkin}
+								editionBranding={editionBranding}
 							>
 								<DecideContainer
 									trails={trailsWithoutBranding}
@@ -682,9 +701,34 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
 					editionId={front.editionId}
-					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
+
+			<BannerWrapper data-print-layout="hide">
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						contentType={front.config.contentType}
+						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={front.config.idApiUrl}
+						isMinuteArticle={false}
+						isPaidContent={!!front.config.isPaidContent}
+						isPreview={front.config.isPreview}
+						isSensitive={front.config.isSensitive}
+						keywordIds={front.config.keywordIds} // a front doesn't really have tags, but frontend generates a keywordId
+						pageId={front.pressedPage.id}
+						sectionId={front.config.section}
+						shouldHideReaderRevenue={false} // never defined for fronts
+						remoteBannerSwitch={
+							!!front.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							!!front.config.switches.puzzlesBanner
+						}
+						tags={[]} // a front doesn't have tags
+					/>
+				</Island>
+			</BannerWrapper>
 		</>
 	);
 };

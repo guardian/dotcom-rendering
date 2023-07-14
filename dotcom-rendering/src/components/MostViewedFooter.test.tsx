@@ -23,7 +23,7 @@ describe('MostViewedFooterData', () => {
 
 		const { getByText, getAllByText, getByTestId } = render(
 			<MostViewedFooterData
-				sectionName="Section Name"
+				sectionId="Section Name"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -60,7 +60,7 @@ describe('MostViewedFooterData', () => {
 
 		const { getByTestId, getByText } = render(
 			<MostViewedFooterData
-				sectionName="Section Name"
+				sectionId="Section Name"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -117,7 +117,7 @@ describe('MostViewedFooterData', () => {
 
 		const { getByText } = render(
 			<MostViewedFooterData
-				sectionName="Section Name"
+				sectionId="Section Name"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -159,7 +159,7 @@ describe('MostViewedFooterData', () => {
 
 		const { queryByText } = render(
 			<MostViewedFooterData
-				sectionName="Section Name"
+				sectionId="Section Name"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -178,7 +178,7 @@ describe('MostViewedFooterData', () => {
 
 		const { asFragment } = render(
 			<MostViewedFooterData
-				sectionName="Section Name"
+				sectionId="Section Name"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,

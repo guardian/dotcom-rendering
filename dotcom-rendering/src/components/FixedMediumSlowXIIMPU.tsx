@@ -1,5 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import {
+	Card100Media100Tall,
 	Card33Media33MobileTopTall,
 	Card33Media33Tall,
 	CardDefault,
@@ -16,6 +17,7 @@ type Props = {
 	showAge?: boolean;
 	adIndex: number;
 	renderAds: boolean;
+	padBottom?: boolean;
 };
 
 type MPUSliceProps = {
@@ -58,6 +60,53 @@ const Card33_Card33_Card33 = ({
 			{cards33.map((trail) => (
 				<LI
 					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					key={trail.url}
+				>
+					<Card33Media33Tall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* .___________.___________.
+ * |###########|###########|
+ * |           |           |
+ * |___________|___________|
+ */
+const Card50_Card50 = ({
+	trails,
+	containerPalette,
+	showAge,
+	padBottom,
+}: {
+	trails: DCRFrontCard[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	padBottom?: boolean;
+}) => {
+	const card50 = trails.slice(0, 1);
+	const cards50 = trails.slice(1);
+	return (
+		<UL direction="row" padBottom={padBottom}>
+			{card50.map((trail) => (
+				<LI percentage="50%" padSides={true} key={trail.url}>
+					<Card33Media33MobileTopTall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+			{cards50.map((trail) => (
+				<LI
+					percentage="50%"
 					padSides={true}
 					showDivider={true}
 					key={trail.url}
@@ -148,17 +197,39 @@ export const FixedMediumSlowXIIMPU = ({
 	showAge,
 	adIndex,
 	renderAds,
+	padBottom,
 }: Props) => {
 	const firstSlice = trails.slice(0, 3);
 	const remaining = trails.slice(3, 9);
 	return (
 		<>
-			<Card33_Card33_Card33
-				trails={firstSlice}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				padBottom={true}
-			/>
+			{trails.length === 1 ? (
+				<UL>
+					<LI padSides={true} percentage="100%">
+						{trails.map((trail) => (
+							<Card100Media100Tall
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								key={trail.url}
+							/>
+						))}
+					</LI>
+				</UL>
+			) : trails.length === 2 ? (
+				<Card50_Card50
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			) : (
+				<Card33_Card33_Card33
+					trails={firstSlice}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					padBottom={true}
+				/>
+			)}
 			{renderAds && remaining.length > 0 ? (
 				<ThreeColumnSliceWithAdSlot
 					trails={remaining}

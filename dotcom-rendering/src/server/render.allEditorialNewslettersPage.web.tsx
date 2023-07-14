@@ -110,5 +110,6 @@ export const renderEditorialNewslettersPage = ({
 		renderingTarget: 'Web',
 		borkFCP: newslettersPage.config.abTests.borkFcpVariant === 'variant',
 		borkFID: newslettersPage.config.abTests.borkFidVariant === 'variant',
+		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});
 };

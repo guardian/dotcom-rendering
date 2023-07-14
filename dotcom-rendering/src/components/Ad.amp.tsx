@@ -112,6 +112,7 @@ export const Ad = ({
 			data-multi-size-validation="false"
 			data-npa-on-unknown-consent={true}
 			data-loading-strategy="prefer-viewability-over-views"
+			data-enable-refresh="30"
 			layout="fixed"
 			type="doubleclick"
 			json={stringify(

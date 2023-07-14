@@ -51,16 +51,15 @@ export const enhanceCollections = (
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
 
-		/**
-		 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
-		 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
-		 * */
-		const canBeBranded = !isPaidContent && allCardsHaveBranding;
-
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
-			canBeBranded,
+			/**
+			 * We do this because Frontend had logic to ignore the "Branded" palette tag in the Fronts tool
+			 * when rendering a paid front or when non-paid content is curated inside a "Branded" container
+			 */
+			{ canBeBranded: !isPaidContent && allCardsHaveBranding },
 		);
+
 		return {
 			id,
 			displayName,
@@ -72,9 +71,9 @@ export const enhanceCollections = (
 			href,
 			containerPalette,
 			badge: decideBadge(
-				// We only try to use branded badge for paid content containers
-				isPaidContent && allCardsHaveBranding ? allBranding : [],
 				collection.config.href,
+				// We only try to use a branded badge for paid content
+				isPaidContent && allCardsHaveBranding ? allBranding : undefined,
 			),
 			grouped: groupCards(
 				collectionType,

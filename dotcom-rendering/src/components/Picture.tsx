@@ -8,15 +8,15 @@ import type { RoleType } from '../types/content';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
-type Orientation = 'portrait' | 'landscape';
+export type Orientation = 'portrait' | 'landscape';
 
 type Props = {
 	role: RoleType;
 	format: ArticleFormat;
 	master: string;
 	alt: string;
-	height: string;
-	width: string;
+	height: number;
+	width: number;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
 	isLightbox?: boolean;
@@ -355,7 +355,7 @@ export const Picture = ({
 	);
 
 	/** portrait if higher than 1 or landscape if lower than 1 */
-	const ratio = parseInt(height, 10) / parseInt(width, 10);
+	const ratio = height / width;
 
 	/**
 	 * Immersive MainMedia elements fill the height of the viewport, meaning on mobile

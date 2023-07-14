@@ -16,12 +16,12 @@ import {
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useSDCLiveblogEpic } from '../lib/useSDC';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
 
 type Props = {
-	section: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
 	tags: TagType[];
@@ -87,14 +87,14 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
  */
 const usePayload = ({
 	shouldHideReaderRevenue,
-	section,
+	sectionId,
 	isPaidContent,
 	tags,
 	pageId,
 	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
-	section: string;
+	sectionId: string;
 	isPaidContent: boolean;
 	tags: TagType[];
 	pageId: string;
@@ -105,7 +105,10 @@ const usePayload = ({
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
-	const isSignedIn = useSignedInStatus() === 'SignedIn';
+	const authStatus = useAuthStatus();
+	const isSignedIn =
+		authStatus.kind === 'SignedInWithOkta' ||
+		authStatus.kind === 'SignedInWithCookies';
 
 	if (articleCounts === 'Pending') return;
 	if (hasOptedOutOfArticleCount === 'Pending') return;
@@ -122,7 +125,7 @@ const usePayload = ({
 		},
 		targeting: {
 			contentType: 'LiveBlog',
-			sectionId: section,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle: true,
 			isPaidContent,
@@ -232,7 +235,7 @@ function insertAfter(referenceNode: HTMLElement, newNode: Element) {
  *    and render the Epic component using it
  */
 export const LiveBlogEpic = ({
-	section,
+	sectionId,
 	shouldHideReaderRevenue,
 	isPaidContent,
 	tags,
@@ -245,7 +248,7 @@ export const LiveBlogEpic = ({
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
-		section,
+		sectionId,
 		isPaidContent,
 		tags,
 		pageId,

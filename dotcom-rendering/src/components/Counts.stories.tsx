@@ -60,7 +60,8 @@ export const Both = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>
@@ -114,7 +115,8 @@ export const Themes = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>
@@ -270,7 +272,8 @@ export const CommentOnly = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>
@@ -324,7 +327,8 @@ export const ZeroComments = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>
@@ -378,7 +382,8 @@ export const BigNumbers = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>
@@ -418,7 +423,8 @@ export const CommentsOff = () => {
 				},
 			},
 			{ overwriteRoutes: false },
-		);
+		)
+		.spy('end:.hot-update.json');
 
 	return (
 		<Wrapper>

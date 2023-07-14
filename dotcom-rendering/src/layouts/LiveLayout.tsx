@@ -822,7 +822,7 @@ export const LiveLayout = ({
 													ajaxUrl={
 														article.config.ajaxUrl
 													}
-													section={
+													sectionId={
 														article.config.section
 													}
 													switches={
@@ -848,10 +848,6 @@ export const LiveLayout = ({
 													}
 													contentType={
 														article.contentType
-													}
-													sectionName={
-														article.sectionName ??
-														''
 													}
 													isPreview={
 														article.config.isPreview
@@ -976,7 +972,7 @@ export const LiveLayout = ({
 													ajaxUrl={
 														article.config.ajaxUrl
 													}
-													section={
+													sectionId={
 														article.config.section
 													}
 													switches={
@@ -1002,10 +998,6 @@ export const LiveLayout = ({
 													}
 													contentType={
 														article.contentType
-													}
-													sectionName={
-														article.sectionName ??
-														''
 													}
 													isPreview={
 														article.config.isPreview
@@ -1241,7 +1233,7 @@ export const LiveLayout = ({
 							<MostViewedFooterLayout renderAds={renderAds}>
 								<Island clientOnly={true} deferUntil="visible">
 									<MostViewedFooterData
-										sectionName={article.sectionName}
+										sectionId={article.config.section}
 										format={format}
 										ajaxUrl={article.config.ajaxUrl}
 										edition={article.editionId}
@@ -1319,8 +1311,7 @@ export const LiveLayout = ({
 						isSensitive={article.config.isSensitive}
 						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
-						section={article.config.section}
-						sectionName={article.sectionName}
+						sectionId={article.config.section}
 						shouldHideReaderRevenue={
 							article.shouldHideReaderRevenue
 						}

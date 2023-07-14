@@ -62,6 +62,7 @@ export type Props = {
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
+	imageAltText?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
@@ -92,6 +93,7 @@ export type Props = {
 	isExternalLink: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	showLivePlayable?: boolean;
+	onwardsSource?: string;
 };
 
 const StarRatingComponent = ({
@@ -188,6 +190,7 @@ const CommentFooter = ({
 
 const getMedia = ({
 	imageUrl,
+	imageAltText,
 	avatarUrl,
 	isCrossword,
 	slideshowImages,
@@ -195,6 +198,7 @@ const getMedia = ({
 	videoSize,
 }: {
 	imageUrl?: string;
+	imageAltText?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
@@ -212,7 +216,7 @@ const getMedia = ({
 	if (avatarUrl) return { type: 'avatar', avatarUrl } as const;
 	if (imageUrl) {
 		const type = isCrossword ? 'crossword' : 'picture';
-		return { type, imageUrl } as const;
+		return { type, imageUrl, imageAltText } as const;
 	}
 	return undefined;
 };
@@ -250,6 +254,7 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	imageUrl,
+	imageAltText,
 	imagePosition = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
@@ -276,6 +281,7 @@ export const Card = ({
 	isExternalLink,
 	slideshowImages,
 	showLivePlayable = false,
+	onwardsSource,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -301,9 +307,10 @@ export const Card = ({
 				containerPalette={containerPalette}
 				displayLines={displayLines}
 				age={
-					showAge &&
-					webPublicationDate &&
-					isWithinTwelveHours(webPublicationDate) ? (
+					(!!onwardsSource && webPublicationDate) ||
+					(showAge &&
+						webPublicationDate &&
+						isWithinTwelveHours(webPublicationDate)) ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
@@ -364,6 +371,7 @@ export const Card = ({
 
 	const media = getMedia({
 		imageUrl,
+		imageAltText,
 		avatarUrl,
 		isCrossword,
 		slideshowImages,
@@ -452,7 +460,7 @@ export const Card = ({
 								<CardPicture
 									master={media.imageUrl}
 									imageSize={imageSize}
-									alt=""
+									alt={media.imageAltText}
 								/>
 								{showPlayIcon && (
 									<MediaDuration

@@ -17,9 +17,12 @@ const scottAvatarStyles = css`
 	background-color: ${opinion[800]};
 	flex-shrink: 0;
 	${until.mobileLandscape} {
-		margin-top: 5px;
-		width: 70px;
+		margin-top: -30px;
 	}
+`;
+
+const imgStyles = css`
+	width: 82px;
 `;
 
 const scottTextStyles = css`
@@ -30,7 +33,6 @@ const scottTextStyles = css`
 		margin-right: 10px;
 	}
 	${until.mobileLandscape} {
-		margin-top: 35px;
 		margin-right: 0px;
 	}
 `;
@@ -43,9 +45,12 @@ const containerStyles = css`
 	${until.leftCol} {
 		display: flex;
 		flex-direction: row-reverse;
-		margin-top: -35px;
+		margin-top: 6px;
+
 		${until.mobileLandscape} {
+			align-items: flex-start;
 			justify-content: space-between;
+			margin-top: 0;
 		}
 	}
 `;
@@ -63,38 +68,35 @@ export const CPScottHeader = () => {
 	);
 	const fallbackSource = getFallbackSource(sources);
 	return (
-		<>
-			<div css={containerStyles}>
-				<div css={scottAvatarStyles}>
-					<img
-						src={fallbackSource.lowResUrl}
-						alt={'Portrait of CP Scott'}
-						width="82px"
-						height="auto"
-					/>
-				</div>
-				<div css={scottTextStyles}>
-					<div css={quoteLineStyles}>
-						<div css={textWrapStyle}>
-							<QuoteIcon colour={neutral[46]} />
-							Comment is free&hellip;
-						</div>
-						<div css={textWrapStyle}>but facts are sacred</div>
-					</div>
-					<Link
-						href={
-							'http://www.theguardian.com/commentisfree/2002/nov/29/1'
-						}
-						cssOverrides={css`
-							color: ${neutral[7]};
-							text-decoration: none;
-							${scottTextStyles}
-						`}
-					>
-						CP Scott, 1921 Guardian editor
-					</Link>
-				</div>
+		<div css={containerStyles}>
+			<div css={scottAvatarStyles}>
+				<img
+					src={fallbackSource.lowResUrl}
+					alt={'Portrait of CP Scott'}
+					css={imgStyles}
+				/>
 			</div>
-		</>
+			<div css={scottTextStyles}>
+				<div css={quoteLineStyles}>
+					<div css={textWrapStyle}>
+						<QuoteIcon colour={neutral[46]} />
+						Comment is free&hellip;
+					</div>
+					<div css={textWrapStyle}>but facts are sacred</div>
+				</div>
+				<Link
+					href={
+						'http://www.theguardian.com/commentisfree/2002/nov/29/1'
+					}
+					cssOverrides={css`
+						color: ${neutral[7]};
+						text-decoration: none;
+						${scottTextStyles}
+					`}
+				>
+					CP Scott, 1921 Guardian editor
+				</Link>
+			</div>
+		</div>
 	);
 };

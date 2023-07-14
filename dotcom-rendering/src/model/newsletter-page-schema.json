@@ -35,6 +35,9 @@
                     },
                     "regionFocus": {
                         "type": "string"
+                    },
+                    "illustrationCard": {
+                        "type": "string"
                     }
                 },
                 "required": [

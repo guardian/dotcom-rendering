@@ -543,7 +543,7 @@ export const ShowcaseLayout = ({
 									switches={article.config.switches}
 									isSensitive={article.config.isSensitive}
 									isAdFreeUser={article.isAdFreeUser}
-									section={article.config.section}
+									sectionId={article.config.section}
 									shouldHideReaderRevenue={
 										article.shouldHideReaderRevenue
 									}
@@ -555,7 +555,6 @@ export const ShowcaseLayout = ({
 										contributionsServiceUrl
 									}
 									contentType={article.contentType}
-									sectionName={article.sectionName ?? ''}
 									isPreview={article.config.isPreview}
 									idUrl={article.config.idUrl ?? ''}
 									isDev={!!article.config.isDev}
@@ -587,7 +586,6 @@ export const ShowcaseLayout = ({
 											}
 											pageId={article.pageId}
 											sectionId={article.config.section}
-											sectionName={article.sectionName}
 											shouldHideReaderRevenue={
 												article.shouldHideReaderRevenue
 											}
@@ -746,7 +744,7 @@ export const ShowcaseLayout = ({
 						<MostViewedFooterLayout renderAds={renderAds}>
 							<Island clientOnly={true} deferUntil="visible">
 								<MostViewedFooterData
-									sectionName={article.sectionName}
+									sectionId={article.config.section}
 									format={format}
 									ajaxUrl={article.config.ajaxUrl}
 									edition={article.editionId}
@@ -816,8 +814,7 @@ export const ShowcaseLayout = ({
 						isSensitive={article.config.isSensitive}
 						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
-						section={article.config.section}
-						sectionName={article.sectionName}
+						sectionId={article.config.section}
 						shouldHideReaderRevenue={
 							article.shouldHideReaderRevenue
 						}

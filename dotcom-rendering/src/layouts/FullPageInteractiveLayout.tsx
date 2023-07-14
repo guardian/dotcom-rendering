@@ -399,8 +399,7 @@ export const FullPageInteractiveLayout = ({ article, NAV, format }: Props) => {
 						isSensitive={article.config.isSensitive}
 						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
-						section={article.config.section}
-						sectionName={article.sectionName}
+						sectionId={article.config.section}
 						shouldHideReaderRevenue={
 							article.shouldHideReaderRevenue
 						}

@@ -251,7 +251,6 @@ const decideBackgroundColour = (
 		return overrideBackgroundColour;
 	}
 	if (hasPageSkin) {
-		// TODO check this is the right background colour to use
 		return background.primary;
 	}
 	return undefined;

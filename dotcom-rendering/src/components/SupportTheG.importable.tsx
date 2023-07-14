@@ -35,10 +35,10 @@ import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
 import { setAutomat } from '../lib/setAutomat';
+import type { AuthStatus } from '../lib/useAuthStatus';
+import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
-import type { SignedInStatus } from '../lib/useSignedInStatus';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
@@ -167,13 +167,15 @@ type ReaderRevenueLinksRemoteProps = {
 	ophanRecord: OphanRecordFunction;
 };
 
-function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
-	switch (signedInStatus) {
+function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
+	switch (authStatus.kind) {
 		case 'Pending':
 			return undefined;
-		case 'SignedIn':
+		case 'SignedInWithCookies':
+		case 'SignedInWithOkta':
 			return true;
-		case 'NotSignedIn':
+		case 'SignedOutWithCookies':
+		case 'SignedOutWithOkta':
 			return false;
 	}
 }
@@ -188,7 +190,7 @@ const ReaderRevenueLinksRemote = ({
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] =
 		useState<React.ElementType | null>(null);
-	const isSignedIn = getIsSignedIn(useSignedInStatus());
+	const isSignedIn = getIsSignedIn(useAuthStatus());
 
 	useOnce((): void => {
 		setAutomat();

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	bodyObjectStyles,
 	headlineObjectStyles,
 	palette,
 	space,
@@ -16,6 +17,7 @@ import {
 } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
+import { CardPicture } from './CardPicture';
 import { NewsletterDetail } from './NewsletterDetail';
 
 interface Props {
@@ -35,19 +37,27 @@ export const ICON_TICK_CLASS =
 
 const groupItemStyle = css`
 	position: relative;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
-	flex-basis: 200px;
-	margin-right: ${space[3]}px;
-	margin-bottom: ${space[3]}px;
-	padding: ${space[1]}px;
-	padding-bottom: ${space[2]}px;
 	min-height: 215px;
 	background-color: ${palette.neutral[97]};
+`;
+
+const contentWrapperStyle = css`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 
 	h3 {
 		${headlineObjectStyles.xxxsmall()};
 		margin-bottom: ${space[3]}px;
+	}
+
+	p {
+		${bodyObjectStyles.xsmall({})};
 	}
 `;
 
@@ -85,11 +95,59 @@ const buttonStyle = css`
 	}
 `;
 
+const illustrationStyle = css`
+	width: 100%;
+	margin-bottom: ${space[1]}px;
+`;
+
 const getButtonInitialAriaAttribute = (newsletterName: string) => ({
 	'aria-label': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-unchecked': `add ${newsletterName} to subscribe list`,
 	'data-aria-label-when-checked': `remove ${newsletterName} from subscribe list`,
 });
+
+const IllustrationPlaceholder = (props: {
+	theme?: string;
+	aspectWidth: number;
+	aspectHeight: number;
+	altText?: string;
+}) => {
+	const getBackground = (theme?: string): string => {
+		switch (theme) {
+			case 'culture':
+			case 'news':
+			case 'sport':
+			case 'lifestyle':
+			case 'opinion':
+				return palette[theme][400];
+			default:
+				return palette.brand[400];
+		}
+	};
+
+	return (
+		<figure
+			role="img"
+			css={[
+				illustrationStyle,
+				css`
+					position: relative;
+				`,
+			]}
+		>
+			<img
+				css={css`
+					background-color: ${getBackground(props.theme)};
+					width: 100%;
+					height: auto;
+				`}
+				width={props.aspectWidth}
+				height={props.aspectHeight}
+				alt={props.altText ?? ''}
+			/>
+		</figure>
+	);
+};
 
 export const NewsletterCard = ({
 	newsletter,
@@ -143,31 +201,48 @@ export const NewsletterCard = ({
 			css={groupItemStyle}
 			aria-label={newsletter.name}
 		>
-			<NewsletterDetail text={newsletter.frequency} />
-			<h3>{newsletter.name}</h3>
-			<p>{newsletter.description}</p>
-			<div css={buttonHolderStyle}>
-				<Button
-					{...getButtonInitialAriaAttribute(newsletter.name)}
-					priority="tertiary"
-					size="xsmall"
-					iconSide="left"
-					icon={
-						<>
-							<span className={ICON_PLUS_CLASS}>
-								<SvgPlus />
-							</span>
-							<span className={ICON_TICK_CLASS}>
-								<SvgCheckmark />
-							</span>
-						</>
-					}
-					cssOverrides={buttonStyle}
-					data-newsletter-id={newsletter.identityName}
-					data-role={BUTTON_ROLE}
-				>
-					Sign up
-				</Button>
+			{newsletter.illustrationCard ? (
+				<div css={illustrationStyle}>
+					<CardPicture
+						imageSize="carousel"
+						alt=""
+						master={newsletter.illustrationCard}
+					/>
+				</div>
+			) : (
+				<IllustrationPlaceholder
+					theme={newsletter.theme}
+					aspectHeight={300}
+					aspectWidth={500}
+				/>
+			)}
+			<div css={contentWrapperStyle}>
+				<NewsletterDetail text={newsletter.frequency} />
+				<h3>{newsletter.name}</h3>
+				<p>{newsletter.description}</p>
+				<div css={buttonHolderStyle}>
+					<Button
+						{...getButtonInitialAriaAttribute(newsletter.name)}
+						priority="tertiary"
+						size="xsmall"
+						iconSide="left"
+						icon={
+							<>
+								<span className={ICON_PLUS_CLASS}>
+									<SvgPlus />
+								</span>
+								<span className={ICON_TICK_CLASS}>
+									<SvgCheckmark />
+								</span>
+							</>
+						}
+						cssOverrides={buttonStyle}
+						data-newsletter-id={newsletter.identityName}
+						data-role={BUTTON_ROLE}
+					>
+						Sign up
+					</Button>
+				</div>
 			</div>
 		</article>
 	);

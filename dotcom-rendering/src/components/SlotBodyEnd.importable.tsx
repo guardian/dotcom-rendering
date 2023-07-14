@@ -13,10 +13,9 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
-import type { SignedInStatus } from '../lib/useSignedInStatus';
-import { useSignedInStatus } from '../lib/useSignedInStatus';
 import type { TagType } from '../types/tag';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
@@ -30,7 +29,6 @@ import type {
 
 type Props = {
 	contentType: string;
-	sectionName?: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
@@ -91,20 +89,21 @@ const buildBrazeEpicConfig = (
 	};
 };
 
-function getIsSignedIn(signedInStatus: SignedInStatus): boolean | undefined {
-	switch (signedInStatus) {
+function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
+	switch (authStatus.kind) {
 		case 'Pending':
 			return undefined;
-		case 'SignedIn':
+		case 'SignedInWithCookies':
+		case 'SignedInWithOkta':
 			return true;
-		case 'NotSignedIn':
+		case 'SignedOutWithCookies':
+		case 'SignedOutWithOkta':
 			return false;
 	}
 }
 
 export const SlotBodyEnd = ({
 	contentType,
-	sectionName,
 	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
@@ -118,7 +117,7 @@ export const SlotBodyEnd = ({
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 	const [countryCode, setCountryCode] = useState<string>();
-	const isSignedIn = getIsSignedIn(useSignedInStatus());
+	const isSignedIn = getIsSignedIn(useAuthStatus());
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
 		null,
@@ -166,7 +165,7 @@ export const SlotBodyEnd = ({
 			browserId: browserId ?? undefined,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: sectionName,
+			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as BrazeMessagesInterface,

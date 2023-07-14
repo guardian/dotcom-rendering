@@ -32,7 +32,7 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	contentType: string;
-	sectionName: string;
+	sectionId: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview?: boolean;
@@ -53,7 +53,7 @@ export const ArticleRenderer = ({
 	webTitle,
 	ajaxUrl,
 	contentType,
-	sectionName,
+	sectionId,
 	tags,
 	isPaidContent,
 	isPreview,
@@ -112,7 +112,7 @@ export const ArticleRenderer = ({
 						renderedElements,
 						format,
 						contentType,
-						sectionName,
+						sectionId,
 						tags,
 						isPaidContent,
 						isPreview,
