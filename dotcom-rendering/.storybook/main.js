@@ -43,6 +43,11 @@ module.exports = {
 			},
 		},
 	],
+	// This just adds the storybook favicon to make the browser tab more easily identifiable
+	managerHead: (head) => `
+    	${head}
+		<link rel="shortcut icon" href="https://storybook.js.org/favicon.svg">
+	`,
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
