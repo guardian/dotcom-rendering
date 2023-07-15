@@ -1,4 +1,5 @@
 // @ts-check
+const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
@@ -31,6 +32,7 @@ module.exports = ({ sessionId }) => ({
 		chunkFilename: `[name].js`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
+		path: path.resolve(__dirname, '..', '..', 'dist', 'server'),
 	},
 	target: 'node',
 	externalsPresets: { node: true },
