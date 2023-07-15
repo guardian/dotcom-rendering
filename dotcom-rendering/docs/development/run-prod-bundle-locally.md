@@ -6,7 +6,7 @@ production build locally.
 To do this:
 
     $ make build
-    $ node dist/frontend-server.js
+    $ node dist/server.js
 
 *Note, you will need AWS `frontend` credentials to run the service.*
 
