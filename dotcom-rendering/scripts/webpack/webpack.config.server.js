@@ -24,7 +24,7 @@ const swcLoader = [
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 module.exports = ({ sessionId }) => ({
 	entry: {
-		'frontend.server': './src/server/index.ts',
+		server: './src/server/index.ts',
 	},
 	output: {
 		filename: `[name].js`,
