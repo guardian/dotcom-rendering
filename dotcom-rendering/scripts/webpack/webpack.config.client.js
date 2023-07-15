@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
@@ -120,6 +121,7 @@ module.exports = ({ bundle, sessionId }) => ({
 		},
 		chunkFilename: generateName(bundle),
 		publicPath: '',
+		path: path.resolve(__dirname, '..', '..', 'dist', bundle),
 	},
 	plugins: [
 		new WebpackManifestPlugin({
