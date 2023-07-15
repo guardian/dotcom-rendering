@@ -191,8 +191,7 @@ const decideCaption = (mainMedia: FEElement | undefined): string => {
 	const caption = [];
 
 	if (
-		mainMedia?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement'
+		mainMedia?._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 	) {
 		if (mainMedia.data.caption) {
 			caption.push(mainMedia.data.caption);
@@ -342,22 +341,16 @@ export const ImmersiveLayout = ({
 					element="nav"
 				>
 					<Nav
-						isImmersive={
-							format.display === ArticleDisplay.Immersive
-						}
+						isImmersive={format.display === ArticleDisplay.Immersive}
 						displayRoundel={
 							format.display === ArticleDisplay.Immersive ||
 							format.theme === ArticleSpecial.Labs
 						}
 						selectedPillar={NAV.selectedPillar}
 						nav={NAV}
-						subscribeUrl={
-							article.nav.readerRevenueLinks.header.contribute
-						}
+						subscribeUrl={article.nav.readerRevenueLinks.header.contribute}
 						editionId={article.editionId}
-						headerTopBarSwitch={
-							!!article.config.switches.headerTopNav
-						}
+						headerTopBarSwitch={!!article.config.switches.headerTopNav}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
@@ -457,9 +450,7 @@ export const ImmersiveLayout = ({
 										webPublicationDateDeprecated={
 											article.webPublicationDateDeprecated
 										}
-										hasStarRating={
-											article.starRating !== undefined
-										}
+										hasStarRating={article.starRating !== undefined}
 									/>
 								</Section>
 							</Box>
@@ -513,9 +504,7 @@ export const ImmersiveLayout = ({
 											tags={article.tags}
 											sectionLabel={article.sectionLabel}
 											sectionUrl={article.sectionUrl}
-											guardianBaseURL={
-												article.guardianBaseURL
-											}
+											guardianBaseURL={article.guardianBaseURL}
 											badge={article.badge?.enhanced}
 										/>
 									</div>
@@ -534,20 +523,14 @@ export const ImmersiveLayout = ({
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={
-												typeof article.starRating ===
-												'number'
-											}
+											hasStarRating={typeof article.starRating === 'number'}
 										/>
 									</div>
 								)}
 							</>
 						</GridItem>
 						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={article.standfirst}
-							/>
+							<Standfirst format={format} standfirst={article.standfirst} />
 						</GridItem>
 						<GridItem area="byline">
 							{!!article.byline && (
@@ -559,22 +542,17 @@ export const ImmersiveLayout = ({
 							)}
 						</GridItem>
 						<GridItem area="lines">
-							{format.design === ArticleDesign.PhotoEssay &&
-							!isLabs ? (
+							{format.design === ArticleDesign.PhotoEssay && !isLabs ? (
 								<></>
 							) : (
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										{format.theme ===
-										ArticleSpecial.Labs ? (
+										{format.theme === ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
 											<DecideLines
 												format={format}
-												color={
-													decidePalette(format).border
-														.article
-												}
+												color={decidePalette(format).border.article}
 											/>
 										)}
 									</div>
@@ -590,22 +568,13 @@ export const ImmersiveLayout = ({
 									webTitle={article.webTitle}
 									byline={article.byline}
 									tags={article.tags}
-									primaryDateline={
-										article.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										article.webPublicationSecondaryDateDisplay
-									}
+									primaryDateline={article.webPublicationDateDisplay}
+									secondaryDateline={article.webPublicationSecondaryDateDisplay}
 									isCommentable={article.isCommentable}
-									discussionApiUrl={
-										article.config.discussionApiUrl
-									}
+									discussionApiUrl={article.config.discussionApiUrl}
 									shortUrlId={article.config.shortUrlId}
 									ajaxUrl={article.config.ajaxUrl}
-									showShareCount={
-										!!article.config.switches
-											.serverShareCounts
-									}
+									showShareCount={!!article.config.switches.serverShareCounts}
 								/>
 							</div>
 						</GridItem>
@@ -622,17 +591,11 @@ export const ImmersiveLayout = ({
 									isSensitive={article.config.isSensitive}
 									isAdFreeUser={article.isAdFreeUser}
 									sectionId={article.config.section}
-									shouldHideReaderRevenue={
-										article.shouldHideReaderRevenue
-									}
+									shouldHideReaderRevenue={article.shouldHideReaderRevenue}
 									tags={article.tags}
-									isPaidContent={
-										!!article.config.isPaidContent
-									}
+									isPaidContent={!!article.config.isPaidContent}
 									keywordIds={article.config.keywordIds}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
+									contributionsServiceUrl={contributionsServiceUrl}
 									contentType={article.contentType}
 									isPreview={article.config.isPreview}
 									idUrl={article.config.idUrl ?? ''}
@@ -640,33 +603,21 @@ export const ImmersiveLayout = ({
 									abTests={article.config.abTests}
 									tableOfContents={article.tableOfContents}
 									lang={article.lang}
-									isRightToLeftLang={
-										article.isRightToLeftLang
-									}
+									isRightToLeftLang={article.isRightToLeftLang}
 									renderingTarget={renderingTarget}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
 											contentType={article.contentType}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
+											contributionsServiceUrl={contributionsServiceUrl}
 											idApiUrl={article.config.idApiUrl}
-											isMinuteArticle={
-												article.pageType.isMinuteArticle
-											}
-											isPaidContent={
-												article.pageType.isPaidContent
-											}
-											keywordIds={
-												article.config.keywordIds
-											}
+											isMinuteArticle={article.pageType.isMinuteArticle}
+											isPaidContent={article.pageType.isPaidContent}
+											keywordIds={article.config.keywordIds}
 											pageId={article.pageId}
 											sectionId={article.config.section}
-											shouldHideReaderRevenue={
-												article.shouldHideReaderRevenue
-											}
+											shouldHideReaderRevenue={article.shouldHideReaderRevenue}
 											stage={article.config.stage}
 											tags={article.tags}
 										/>
@@ -674,24 +625,16 @@ export const ImmersiveLayout = ({
 								)}
 								<StraightLines
 									count={4}
-									color={
-										decidePalette(format).border.secondary
-									}
+									color={decidePalette(format).border.secondary}
 								/>
 								<SubMeta
 									format={format}
-									subMetaKeywordLinks={
-										article.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										article.subMetaSectionLinks
-									}
+									subMetaKeywordLinks={article.subMetaKeywordLinks}
+									subMetaSectionLinks={article.subMetaSectionLinks}
 									pageId={article.pageId}
 									webUrl={article.webURL}
 									webTitle={article.webTitle}
-									showBottomSocialButtons={
-										article.showBottomSocialButtons
-									}
+									showBottomSocialButtons={article.showBottomSocialButtons}
 									badge={article.badge?.enhanced}
 								/>
 							</ArticleContainer>
@@ -725,13 +668,7 @@ export const ImmersiveLayout = ({
 													<AdSlot
 														position="right"
 														display={format.display}
-														shouldHideReaderRevenue={
-															article.shouldHideReaderRevenue
-														}
-														isPaidContent={
-															article.pageType
-																.isPaidContent
-														}
+														isPaidContent={article.pageType.isPaidContent}
 													/>
 												}
 											</div>
@@ -751,10 +688,7 @@ export const ImmersiveLayout = ({
 						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<AdSlot
-							position="merchandising-high"
-							display={format.display}
-						/>
+						<AdSlot position="merchandising-high" display={format.display} />
 					</Section>
 				)}
 
@@ -763,9 +697,7 @@ export const ImmersiveLayout = ({
 						<Island deferUntil="visible">
 							<Carousel
 								heading={article.storyPackage.heading}
-								trails={article.storyPackage.trails.map(
-									decideTrail,
-								)}
+								trails={article.storyPackage.trails.map(decideTrail)}
 								onwardsSource="more-on-this-story"
 								format={format}
 								leftColSize={'compact'}
@@ -774,11 +706,7 @@ export const ImmersiveLayout = ({
 					</Section>
 				)}
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
+				<Island clientOnly={true} deferUntil="visible" placeholderHeight={600}>
 					<OnwardsUpper
 						ajaxUrl={article.config.ajaxUrl}
 						hasRelated={article.hasRelated}
@@ -798,11 +726,7 @@ export const ImmersiveLayout = ({
 				</Island>
 
 				{!isPaidContent && showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						element="aside"
-					>
+					<Section fullWidth={true} sectionId="comments" element="aside">
 						<DiscussionLayout
 							discussionApiUrl={article.config.discussionApiUrl}
 							shortUrlId={article.config.shortUrlId}
@@ -851,10 +775,7 @@ export const ImmersiveLayout = ({
 						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-						/>
+						<AdSlot position="merchandising" display={format.display} />
 					</Section>
 				)}
 			</main>
@@ -903,15 +824,9 @@ export const ImmersiveLayout = ({
 						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
 						sectionId={article.config.section}
-						shouldHideReaderRevenue={
-							article.shouldHideReaderRevenue
-						}
-						remoteBannerSwitch={
-							!!article.config.switches.remoteBanner
-						}
-						puzzleBannerSwitch={
-							!!article.config.switches.puzzlesBanner
-						}
+						shouldHideReaderRevenue={article.shouldHideReaderRevenue}
+						remoteBannerSwitch={!!article.config.switches.remoteBanner}
+						puzzleBannerSwitch={!!article.config.switches.puzzlesBanner}
 						tags={article.tags}
 					/>
 				</Island>

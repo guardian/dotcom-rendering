@@ -14,29 +14,31 @@ import {
 import { Island } from '../components/Island';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
+import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
-type InlinePosition = 'inline' | 'liveblog-inline' | 'mobile-front';
+type InlinePosition =
+	| 'inline'
+	| 'liveblog-inline'
+	| 'liveblog-right'
+	| 'mobile-front';
 
-type InlineProps = {
+type DefaultProps = {
 	display?: ArticleDisplay;
-	position: InlinePosition;
-	index: number;
-	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
 };
 
-// TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
+type InlineProps = {
+	position: InlinePosition;
+	index: number;
+};
+
 type NonInlineProps = {
-	display?: ArticleDisplay;
 	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
 	index?: never;
-	shouldHideReaderRevenue?: boolean;
-	isPaidContent?: boolean;
-	hasPageskin?: boolean;
 };
 
 /**
@@ -44,7 +46,7 @@ type NonInlineProps = {
  * based on position. If `position` is 'inline' or 'mobile-front' then we expect the index
  * value. If not, then we explicitly refuse this property
  */
-type Props = InlineProps | NonInlineProps;
+type Props = DefaultProps & (InlineProps | NonInlineProps);
 
 export const labelHeight = 24;
 
@@ -126,9 +128,9 @@ export const labelStyles = css`
 	.ad-slot--interscroller[data-label-show='true']::before {
 		content: 'Advertisement';
 		position: absolute;
-		top: 0px;
-		left: 0px;
-		right: 0px;
+		top: 0;
+		left: 0;
+		right: 0;
 		border: 0;
 		display: block;
 		${individualLabelCSS}
@@ -327,6 +329,40 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
+		case 'liveblog-right': {
+			const advertId = `liveblog-right-${index}`;
+			return (
+				<div
+					className="ad-slot-container"
+					css={[
+						labelStyles,
+						css`
+							height: ${AD_CONTAINER_HEIGHT}px;
+						`,
+					]}
+				>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--liveblog-right',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: sticky;
+								top: 0;
+							`,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container" css={[adContainerStyles]}>

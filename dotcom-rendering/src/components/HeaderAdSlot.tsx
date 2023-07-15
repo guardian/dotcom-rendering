@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial/dist/esm/core/constants';
+import { constants } from '@guardian/commercial';
 import { border, neutral, space } from '@guardian/source-foundations';
 import { adContainerStyles, AdSlot, labelHeight } from './AdSlot';
 import { Hide } from './Hide';
@@ -14,7 +14,7 @@ const headerAdWrapper = css`
 	z-index: 1080;
 	width: 100%;
 	background-color: ${neutral[97]};
-	min-height: ${TOP_ABOVE_NAV_HEIGHT + padding + labelHeight}px;
+	min-height: ${constants.TOP_ABOVE_NAV_HEIGHT + padding + labelHeight}px;
 	border-bottom: 1px solid ${border.secondary};
 	padding-bottom: ${padding}px;
 
@@ -41,9 +41,7 @@ export const HeaderAdSlot = () => (
 				* Hides the top-above-nav ad-slot container when a
 				* Bonzai TrueSkin (Australian 3rd Party page skin) is shown
 				*/
-				.bz-custom-container
-					~ #bannerandheader
-					.top-banner-ad-container {
+				.bz-custom-container ~ #bannerandheader .top-banner-ad-container {
 					display: none;
 				}
 			`}
