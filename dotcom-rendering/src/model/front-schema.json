@@ -2878,6 +2878,9 @@
                 },
                 "activeVersion": {
                     "type": "number"
+                },
+                "category": {
+                    "type": "string"
                 }
             },
             "required": [
