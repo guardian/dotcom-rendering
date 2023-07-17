@@ -293,6 +293,9 @@ const sectionContentPadded = css`
 const sectionBottomContent = css`
 	grid-row: bottom-content;
 	grid-column: content;
+	.hidden > & {
+		display: none;
+	}
 `;
 
 const sectionTreats = css`
@@ -616,7 +619,7 @@ export const FrontSection = ({
 							/>
 							{!isOnPaidContentFront &&
 								!!editionBranding &&
-								editionBranding?.branding &&
+								editionBranding.branding &&
 								index === 0 && (
 									<>
 										<p css={labelStyles}>
