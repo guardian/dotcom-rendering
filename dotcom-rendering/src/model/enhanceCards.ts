@@ -337,6 +337,7 @@ export const enhanceCards = (
 				format,
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			),
+			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,
