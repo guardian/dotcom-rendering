@@ -183,24 +183,28 @@ export const WeatherSlot = ({
 					</div>
 				</div>
 			) : (
-				<>
-					<time css={timeCSS} dateTime={dateTime}>
-						{formatTime(dateTime, isUS)}
-					</time>
-					<span css={visuallyHiddenCSS}>is</span>
-					<span css={tempCSS(isNow)} className="temp">
-						{formatTemperature(
-							isUS ? temperature.imperial : temperature.metric,
-							isUS ? 'F' : 'C',
-						)}
-					</span>
-					<span css={visuallyHiddenCSS}>
-						, {description.toLowerCase()}.
-					</span>
+				<div css={flexRow}>
+					<div css={flexColumn}>
+						<time css={timeCSS} dateTime={dateTime}>
+							{formatTime(dateTime, isUS)}
+						</time>
+						<span css={visuallyHiddenCSS}>is</span>
+						<span css={tempCSS(isNow)} className="temp">
+							{formatTemperature(
+								isUS
+									? temperature.imperial
+									: temperature.metric,
+								isUS ? 'F' : 'C',
+							)}
+						</span>
+						<span css={visuallyHiddenCSS}>
+							, {description.toLowerCase()}.
+						</span>
+					</div>
 					<Suspense fallback={<LoadingIcon />}>
 						<Icon />
 					</Suspense>
-				</>
+				</div>
 			)}
 		</p>
 	);

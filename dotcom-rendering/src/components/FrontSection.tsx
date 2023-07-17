@@ -263,9 +263,6 @@ const sectionHeadlineHeight = css`
 	${until.tablet} {
 		min-height: 58px;
 	}
-	${between.tablet.and.leftCol} {
-		max-height: 65px;
-	}
 `;
 
 const paddings = css`
