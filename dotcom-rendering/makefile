@@ -112,7 +112,7 @@ cypress: clear clean-dist install build
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
-	$(call log, "starting frontend PROD server and opening Cypress")
+	$(call log, "starting PROD server and opening Cypress")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
 
 ampValidation: clean-dist install
