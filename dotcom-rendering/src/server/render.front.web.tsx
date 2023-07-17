@@ -5,12 +5,13 @@ import {
 } from '../../scripts/webpack/bundles';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
-import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { themeToPillar } from '../lib/themeToPillar';
-import { extractNAV, NavType } from '../model/extract-nav';
+import type { NavType } from '../model/extract-nav';
+import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
@@ -91,16 +92,7 @@ export const renderFront = ({ front }: Props): string => {
 		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = shouldServeVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -112,8 +104,10 @@ export const renderFront = ({ front }: Props): string => {
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
 		]
@@ -192,16 +186,7 @@ export const renderTagFront = ({
 		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = shouldServeVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -213,8 +198,8 @@ export const renderTagFront = ({
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				tagFront.config.commercialBundleUrl,
 		]
