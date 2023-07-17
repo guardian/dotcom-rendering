@@ -1,12 +1,29 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
+import { generateSources, getFallbackSource, Sources } from './Picture';
+
+const widths = [
+	{ breakpoint: breakpoints.mobile, width: 180 },
+	{ breakpoint: breakpoints.mobileLandscape, width: 216 },
+] as const satisfies ReadonlyArray<{ breakpoint: number; width: number }>;
 
 const imageStyles = css`
-	height: 9.375rem;
+	width: ${widths[0].width}px;
 
 	${from.mobileLandscape} {
-		height: 11.25rem;
+		width: ${widths[1].width}px;
 	}
+`;
+
+/**
+ * Used on `picture` and `img` to prevent having a line-height,
+ * as these elements are `inline` by default.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
+ */
+const block = css`
+	display: block;
 `;
 
 type Props = {
@@ -15,5 +32,16 @@ type Props = {
 };
 
 export const ContributorAvatar = ({ imageSrc, imageAlt }: Props) => {
-	return <img src={imageSrc} alt={imageAlt} css={imageStyles} />;
+	const sources = generateSources(getSourceImageUrl(imageSrc), widths);
+
+	return (
+		<picture css={block}>
+			<Sources sources={sources} />
+			<img
+				alt={imageAlt}
+				src={getFallbackSource(sources).lowResUrl}
+				css={[block, imageStyles]}
+			/>
+		</picture>
+	);
 };
