@@ -10,7 +10,7 @@ import {
 import { GuideAtom } from './GuideAtom';
 
 export default {
-	title: 'GuideAtom',
+	title: 'Components/GuideAtom',
 	component: GuideAtom,
 };
 
