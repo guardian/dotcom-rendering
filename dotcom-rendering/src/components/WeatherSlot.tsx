@@ -110,6 +110,18 @@ const flexColumn = css`
 	flex-direction: column;
 `;
 
+const flexRowBelowLeftCol = css`
+	${until.leftCol} {
+		${flexRow}
+	}
+`;
+
+const flexColumnBelowLeftCol = css`
+	${until.leftCol} {
+		${flexColumn}
+	}
+`;
+
 const LoadingIcon = () => (
 	<span
 		css={css`
@@ -183,8 +195,8 @@ export const WeatherSlot = ({
 					</div>
 				</div>
 			) : (
-				<div css={flexRow}>
-					<div css={flexColumn}>
+				<div css={flexRowBelowLeftCol}>
+					<div css={flexColumnBelowLeftCol}>
 						<time css={timeCSS} dateTime={dateTime}>
 							{formatTime(dateTime, isUS)}
 						</time>
