@@ -200,6 +200,8 @@ export const renderTagFront = ({
 			polyfillIO,
 			getPathFromManifest(build, 'frameworks.js'),
 			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				tagFront.config.commercialBundleUrl,
 		]
