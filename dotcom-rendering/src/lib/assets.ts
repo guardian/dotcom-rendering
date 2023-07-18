@@ -61,9 +61,9 @@ const getManifest = (path: string): AssetHash => {
 
 type ManifestPath = `./manifest.${string}.json`;
 
-const getManifestPath = (
-	build: 'apps' | 'modern' | 'variant' | 'legacy',
-): ManifestPath => {
+type Build = 'apps' | 'modern' | 'variant' | 'legacy';
+
+const getManifestPath = (build: Build): ManifestPath => {
 	switch (build) {
 		case 'apps':
 			return './manifest.apps.json';
@@ -77,7 +77,7 @@ const getManifestPath = (
 };
 
 export const getPathFromManifest = (
-	build: 'apps' | 'modern' | 'variant' | 'legacy',
+	build: Build,
 	filename: `${string}.js`,
 ): string => {
 	if (!filename.endsWith('.js'))
@@ -107,8 +107,8 @@ export const getPathFromManifest = (
  * with an optional hash for local development
  * and stripped query parameters.
  */
-const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant' | 'apps') =>
-	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\w{20}\\.)?js(\\?.*)?$`);
+const getScriptRegex = (build: Build) =>
+	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');
