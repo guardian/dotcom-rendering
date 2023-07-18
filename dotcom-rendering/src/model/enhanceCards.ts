@@ -184,10 +184,50 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
  * it *happens to be* correct in the majority of cases.
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
-const decideMedia = (
-	format: ArticleFormat,
+
+const getActiveMediaAtom = (
 	mediaAtom?: FEMediaAtoms,
 ): MainMedia | undefined => {
+	if (mediaAtom) {
+		const asset = mediaAtom.assets.find(
+			({ version }) => version === mediaAtom.activeVersion,
+		);
+		if (asset?.platform === 'Youtube') {
+			return {
+				type: 'Video',
+				elementId: mediaAtom.id,
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				title: mediaAtom.title,
+				// Size fixed to a 5:3 ratio
+				width: 500,
+				height: 300,
+				origin: mediaAtom.source ?? 'Unknown origin',
+				expired: !!mediaAtom.expired,
+				images:
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+			};
+		}
+	}
+	return undefined;
+};
+
+const decideMedia = (
+	format: ArticleFormat,
+	showMainVideo?: boolean,
+	mediaAtom?: FEMediaAtoms,
+): MainMedia | undefined => {
+	// If the showVideo toggle is enabled in the fronts tool,
+	// we should return the active mediaAtom regardless of the design
+	if (showMainVideo) {
+		return getActiveMediaAtom(mediaAtom);
+	}
+
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return { type: 'Gallery' };
@@ -199,33 +239,7 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			if (mediaAtom) {
-				const asset = mediaAtom.assets.find(
-					({ version }) => version === mediaAtom.activeVersion,
-				);
-				if (asset?.platform === 'Youtube') {
-					return {
-						type: 'Video',
-						elementId: mediaAtom.id,
-						videoId: asset.id,
-						duration: mediaAtom.duration ?? 0,
-						title: mediaAtom.title,
-						// Size fixed to a 5:3 ratio
-						width: 500,
-						height: 300,
-						origin: mediaAtom.source ?? 'Unknown origin',
-						expired: !!mediaAtom.expired,
-						images:
-							mediaAtom.posterImage?.allImages.map(
-								({ url, fields: { width } }) => ({
-									url,
-									width: Number(width),
-								}),
-							) ?? [],
-					};
-				}
-			}
-			return undefined;
+			return getActiveMediaAtom(mediaAtom);
 		}
 
 		default:
@@ -335,9 +349,9 @@ export const enhanceCards = (
 					: undefined,
 			mainMedia: decideMedia(
 				format,
+				faciaCard.properties.showMainVideo,
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			),
-			showMainVideo: faciaCard.properties.showMainVideo,
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
 			embedUri: faciaCard.properties.embedUri ?? undefined,
 			branding,

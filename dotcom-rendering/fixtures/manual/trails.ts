@@ -89,7 +89,6 @@ export const trails: [
 		},
 		dataLinkName: 'news | group-0 | card-@2',
 		showQuotedHeadline: false,
-		showMainVideo: true,
 		mainMedia: {
 			type: 'Video',
 			elementId: 'abcdef',

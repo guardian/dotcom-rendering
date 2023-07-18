@@ -72,7 +72,6 @@ export type Props = {
 	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
-	showMainVideo?: boolean;
 	videoSize: VideoSize;
 	kickerText?: string;
 	showPulsingDot?: boolean;
@@ -283,7 +282,6 @@ export const Card = ({
 	slideshowImages,
 	showLivePlayable = false,
 	onwardsSource,
-	showMainVideo = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -367,10 +365,9 @@ export const Card = ({
 		);
 	}
 
-	const showDuration =
+	const showPlayIcon =
 		mainMedia?.type === 'Video' &&
 		videoSize === 'too small to play: 479px or less';
-	const showPlayIcon = showMainVideo || showDuration;
 
 	const media = getMedia({
 		imageUrl,
@@ -465,7 +462,7 @@ export const Card = ({
 									imageSize={imageSize}
 									alt={media.imageAltText}
 								/>
-								{showDuration && (
+								{showPlayIcon && (
 									<MediaDuration
 										mediaDuration={mainMedia.duration}
 										imagePosition={imagePosition}
