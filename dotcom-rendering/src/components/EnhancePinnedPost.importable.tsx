@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { measureDuration } from '../client/measureDuration';
 import { submitComponentEvent } from '../client/ophan/ophan';
+import { createTimer } from '../client/timer';
 import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -89,7 +89,8 @@ export const EnhancePinnedPost = () => {
 		node: pinnedPost ?? undefined,
 	});
 
-	const pinnedPostTiming = useRef<ReturnType<typeof measureDuration>>();
+	const timer = createTimer('dotcom', 'pinned-post-view-duration');
+	const pinnedPostTiming = useRef<ReturnType<typeof timer>>();
 
 	const checkContentHeight = () => {
 		if (pinnedPostContent) {
@@ -131,10 +132,6 @@ export const EnhancePinnedPost = () => {
 		};
 	}, []);
 
-	useEffect(() => {
-		pinnedPostTiming.current = measureDuration('pinned-post-view-duration');
-	}, []);
-
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
@@ -142,10 +139,9 @@ export const EnhancePinnedPost = () => {
 
 		if (isInView) {
 			setHasBeenSeen(true);
-			pinnedPostTiming.current?.clear();
-			pinnedPostTiming.current?.start();
+			pinnedPostTiming.current = timer('start');
 		} else if (hasBeenSeen) {
-			const timeTaken = pinnedPostTiming.current?.end();
+			const timeTaken = pinnedPostTiming.current?.('end');
 			if (timeTaken !== undefined) {
 				const timeTakenInSeconds = timeTaken / 1000;
 				submitComponentEvent({
@@ -158,6 +154,6 @@ export const EnhancePinnedPost = () => {
 				});
 			}
 		}
-	}, [isInView, hasBeenSeen]);
+	}, [isInView, hasBeenSeen, timer]);
 	return null;
 };

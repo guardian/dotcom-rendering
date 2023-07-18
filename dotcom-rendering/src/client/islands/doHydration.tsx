@@ -4,7 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { measureDuration } from '../measureDuration';
+import { createTimer } from '../timer';
 
 /**
  * This function dynamically imports and then hydrates a specific component in
@@ -29,10 +29,7 @@ export const doHydration = async (
 	const alreadyHydrated = element.dataset.guReady;
 	if (alreadyHydrated) return;
 
-	const { start: importStart, end: importEnd } = measureDuration(
-		`import-${name}`,
-	);
-	importStart();
+	const importTimer = createTimer('dotcom', name, 'import')('start');
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
@@ -40,14 +37,10 @@ export const doHydration = async (
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */
-			const importDuration = importEnd();
+			const importDuration = importTimer('end');
 			const clientOnly = element.hasAttribute('clientonly');
 
-			const { start: islandStart, end: islandEnd } = measureDuration(
-				`island-${name}`,
-			);
-			islandStart();
-
+			const islandTimer = createTimer('dotcom', name, 'island')('start');
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
 				const root = createRoot(element);
@@ -67,7 +60,7 @@ export const doHydration = async (
 
 			element.setAttribute('data-gu-ready', 'true');
 			/** The duration of rendering or hydrating this island */
-			const islandDuration = islandEnd();
+			const islandDuration = islandTimer('end');
 
 			return { clientOnly, importDuration, islandDuration };
 		})

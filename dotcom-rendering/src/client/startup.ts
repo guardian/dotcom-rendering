@@ -1,18 +1,16 @@
 import { log } from '@guardian/libs';
-import { measureDuration } from './measureDuration';
+import { createTimer } from './timer';
 
 const measure = (name: string, task: () => Promise<void>): void => {
-	const { start, end } = measureDuration(name);
-
-	start();
+	const timer = createTimer('dotcom', name)('start');
 
 	task()
 		.then(() => {
-			const duration = end();
+			const duration = timer('end');
 			log('dotcom', `🥾 Booted ${name} in ${duration}ms`);
 		})
 		.catch(() => {
-			const duration = end();
+			const duration = timer('end');
 			log('dotcom', `🤒 Failed to boot ${name} in ${duration}ms`);
 		});
 };
