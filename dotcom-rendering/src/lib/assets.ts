@@ -59,9 +59,9 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-type ManifestPath = `./manifest.${string}.json`;
-
 type Build = 'apps' | 'modern' | 'variant' | 'legacy';
+
+type ManifestPath = `./manifest.${Build}.json`;
 
 const getManifestPath = (build: Build): ManifestPath => {
 	switch (build) {
