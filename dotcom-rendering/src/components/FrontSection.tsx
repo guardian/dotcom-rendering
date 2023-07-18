@@ -259,6 +259,12 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	}
 `;
 
+const sectionHeadlineHeight = css`
+	${until.tablet} {
+		min-height: 58px;
+	}
+`;
+
 const paddings = css`
 	padding-top: ${space[2]}px;
 `;
@@ -546,6 +552,8 @@ export const FrontSection = ({
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
 						),
+					title?.toLowerCase() === 'headlines' &&
+						sectionHeadlineHeight,
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}

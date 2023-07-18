@@ -110,6 +110,18 @@ const flexColumn = css`
 	flex-direction: column;
 `;
 
+const flexRowBelowLeftCol = css`
+	${until.leftCol} {
+		${flexRow}
+	}
+`;
+
+const flexColumnBelowLeftCol = css`
+	${until.leftCol} {
+		${flexColumn}
+	}
+`;
+
 const LoadingIcon = () => (
 	<span
 		css={css`
@@ -183,24 +195,28 @@ export const WeatherSlot = ({
 					</div>
 				</div>
 			) : (
-				<>
-					<time css={timeCSS} dateTime={dateTime}>
-						{formatTime(dateTime, isUS)}
-					</time>
-					<span css={visuallyHiddenCSS}>is</span>
-					<span css={tempCSS(isNow)} className="temp">
-						{formatTemperature(
-							isUS ? temperature.imperial : temperature.metric,
-							isUS ? 'F' : 'C',
-						)}
-					</span>
-					<span css={visuallyHiddenCSS}>
-						, {description.toLowerCase()}.
-					</span>
+				<div css={flexRowBelowLeftCol}>
+					<div css={flexColumnBelowLeftCol}>
+						<time css={timeCSS} dateTime={dateTime}>
+							{formatTime(dateTime, isUS)}
+						</time>
+						<span css={visuallyHiddenCSS}>is</span>
+						<span css={tempCSS(isNow)} className="temp">
+							{formatTemperature(
+								isUS
+									? temperature.imperial
+									: temperature.metric,
+								isUS ? 'F' : 'C',
+							)}
+						</span>
+						<span css={visuallyHiddenCSS}>
+							, {description.toLowerCase()}.
+						</span>
+					</div>
 					<Suspense fallback={<LoadingIcon />}>
 						<Icon />
 					</Suspense>
-				</>
+				</div>
 			)}
 		</p>
 	);
