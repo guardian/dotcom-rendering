@@ -1,7 +1,7 @@
+import { submitComponentEvent } from '../../client/ophan/ophan';
 import { Body } from '../ExpandableAtom/Body';
 import { Container } from '../ExpandableAtom/Container';
 import { Footer } from '../ExpandableAtom/Footer';
-import { submitComponentEvent } from '../../client/ophan/ophan';
 
 type Props = {
 	id: string;

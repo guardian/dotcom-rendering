@@ -98,14 +98,14 @@ export const Body = ({
 }): JSX.Element => {
 	return (
 		<div>
-			{image && <img css={imageStyling} src={image} alt="" />}
+			{!!image && <img css={imageStyling} src={image} alt="" />}
 			<div
 				css={[bodyStyling, linkStyling(format)]}
 				dangerouslySetInnerHTML={{
 					__html: html,
 				}}
 			/>
-			{credit && (
+			{!!credit && (
 				<div css={creditStyling}>
 					<SvgInfo />
 					{credit}

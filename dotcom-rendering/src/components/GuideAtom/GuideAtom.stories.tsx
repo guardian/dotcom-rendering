@@ -1,13 +1,13 @@
+import { css } from '@emotion/react';
 import {
+	analysisStoryExpanded,
 	defaultStoryExpanded,
 	imageStoryExpanded,
 	lifestylePillarStoryExpanded,
 	listStoryExpanded,
 	orderedListStoryExpanded,
-	analysisStoryExpanded,
 } from '../../../fixtures/manual/guideAtom';
 import { GuideAtom } from './GuideAtom';
-import { css } from '@emotion/react';
 
 export default {
 	title: 'GuideAtom',
