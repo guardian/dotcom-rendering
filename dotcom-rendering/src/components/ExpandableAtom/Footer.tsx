@@ -88,9 +88,6 @@ export const Footer = ({
 							buttonStyling,
 							css`
 								transform: rotate(180deg);
-								-webkit-transform: rotate(180deg);
-								-moz-transform: rotate(180deg);
-								-o-transform: rotate(180deg);
 							`,
 						]}
 						data-testid="dislike"

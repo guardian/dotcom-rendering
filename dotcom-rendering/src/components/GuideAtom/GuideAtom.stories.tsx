@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { palette } from '@guardian/source-foundations';
 import {
 	analysisStoryExpanded,
 	defaultStoryExpanded,
@@ -44,7 +45,7 @@ export const AnalysisStoryExpanded = (): JSX.Element => {
 	return (
 		<div
 			css={css`
-				background-color: #fff4f2;
+				background-color: ${palette.news[800]};
 			`}
 		>
 			Analysis Articles have a different color background, so quick guide
