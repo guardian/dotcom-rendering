@@ -454,6 +454,7 @@ export const Card = ({
 										hideCaption={true}
 										role="inline"
 										stickyVideos={false}
+										kicker={'Breaking News'}
 									/>
 								</Island>
 							</div>
