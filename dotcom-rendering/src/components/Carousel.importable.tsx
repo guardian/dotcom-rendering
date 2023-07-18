@@ -474,7 +474,7 @@ const CarouselCard = ({
 			showClock={true}
 			showAge={true}
 			imagePositionOnMobile="top"
-			minWidthInPixels={isVideoContainer ? 480 : 220}
+			minWidthInPixels={isVideoContainer ? 600 : 220}
 			showQuotedHeadline={format.design === ArticleDesign.Comment}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
