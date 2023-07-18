@@ -3,7 +3,7 @@ import { Body } from '../ExpandableAtom/Body';
 import { Container } from '../ExpandableAtom/Container';
 import { Footer } from '../ExpandableAtom/Footer';
 
-type Props = {
+export type GuideAtomProps = {
 	id: string;
 	label?: string;
 	title: string;
@@ -28,7 +28,7 @@ export const GuideAtom = ({
 	likeHandler,
 	dislikeHandler,
 	expandCallback,
-}: Props): JSX.Element => {
+}: GuideAtomProps): JSX.Element => {
 	return (
 		<Container
 			id={id}
