@@ -60,6 +60,7 @@ export type Palette = {
 		designTag: Colour;
 		dateLine: Colour;
 		tableOfContents: Colour;
+		expandableAtom: Colour;
 	};
 	background: {
 		article: Colour;
@@ -98,6 +99,7 @@ export type Palette = {
 		pullQuote: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
+		expandableAtom: Colour;
 	};
 	fill: {
 		commentCount: Colour;
