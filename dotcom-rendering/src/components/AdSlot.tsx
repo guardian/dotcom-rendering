@@ -11,10 +11,10 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Island } from '../components/Island';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
+import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlinePosition =
@@ -27,6 +27,7 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
+	isLiveblog?: boolean;
 };
 
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
@@ -290,6 +291,7 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
+	isLiveblog = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -317,7 +319,13 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
-					return (
+					return isLiveblog ? (
+						// We've already created an Island for liveblogs
+						<TopRightAdSlot
+							isPaidContent={isPaidContent}
+							adStyles={[labelStyles]}
+						/>
+					) : (
 						<Island clientOnly={true}>
 							<TopRightAdSlot
 								isPaidContent={isPaidContent}

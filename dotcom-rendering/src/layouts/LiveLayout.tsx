@@ -917,7 +917,10 @@ export const LiveLayout = ({
 											format.design === ArticleDesign.LiveBlog ||
 											format.design === ArticleDesign.DeadBlog ? (
 												<Island clientOnly={true} deferUntil="visible">
-													<LiveblogRightAdSlots isPaidContent={isPaidContent} />
+													<LiveblogRightAdSlots
+														display={format.display}
+														isPaidContent={isPaidContent}
+													/>
 												</Island>
 											) : (
 												<AdSlot

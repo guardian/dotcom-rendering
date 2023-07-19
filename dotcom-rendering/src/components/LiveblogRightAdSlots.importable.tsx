@@ -28,6 +28,7 @@ export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 			position="right"
 			display={display}
 			isPaidContent={isPaidContent}
+			isLiveblog={true}
 		/>
 	);
 };
