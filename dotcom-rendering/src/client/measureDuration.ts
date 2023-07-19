@@ -13,12 +13,15 @@ export const measureDuration = (
 	const startKey = `${prefix}.${name}-start`;
 	const endKey = `${prefix}.${name}-end`;
 
+	// Handle browsers with partial implementations
 	if (!('getEntriesByName' in perf)) {
-		// Handle browsers with partial implementations
 		return { start: () => -1, end: () => -1, clear: () => {} };
 	}
 
-	/** @returns time elapsed since [time origin](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#the_time_origin) in milliseconds */
+	/**
+	 * Starts measuring the duration of the current task.
+	 * @returns The start time of the task (time elapsed since [time origin](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#the_time_origin) in milliseconds).
+	 * */
 	const start = () => {
 		const { startTime = -1 } =
 			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
@@ -29,7 +32,10 @@ export const measureDuration = (
 		return Math.ceil(startTime);
 	};
 
-	/** @returns length of task in milliseconds */
+	/**
+	 * Stops measuring the duration the the current task.
+	 * @returns The duration of task in milliseconds.
+	 * */
 	const end = (): number => {
 		perf.mark(endKey);
 		const { duration = -1 } =
@@ -41,6 +47,9 @@ export const measureDuration = (
 		return Math.ceil(duration);
 	};
 
+	/**
+	 * Removes all marks and measures for the current task.
+	 */
 	const clear = () => {
 		perf.clearMarks(startKey);
 		perf.clearMarks(endKey);
