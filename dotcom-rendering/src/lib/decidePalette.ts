@@ -2079,27 +2079,6 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 const textExpandableAtom = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return lifestyle[400];
-		case ArticleSpecial.SpecialReport:
-			return news[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
-const backgroundExpandableAtom = (format: ArticleFormat) => {
-	switch (format.theme) {
-		case ArticlePillar.News:
 			return news[300];
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
@@ -2115,6 +2094,27 @@ const backgroundExpandableAtom = (format: ArticleFormat) => {
 			return news[300];
 		case ArticleSpecial.SpecialReportAlt:
 			return news[300];
+	}
+};
+
+const backgroundExpandableAtom = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
