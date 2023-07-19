@@ -10,7 +10,8 @@ import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { themeToPillar } from '../lib/themeToPillar';
-import { extractNAV, NavType } from '../model/extract-nav';
+import type { NavType } from '../model/extract-nav';
+import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
@@ -162,8 +163,6 @@ export const renderFront = ({ front }: Props): string => {
 		offerHttp3,
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
-		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
-		borkFID: front.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!front.config.switches.weAreHiring,
 	});
 };
@@ -262,8 +261,6 @@ export const renderTagFront = ({
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
-		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});
 };
