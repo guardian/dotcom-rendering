@@ -9,7 +9,7 @@ import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
-	getScriptsFromManifest,
+	getPathFromManifest,
 } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
@@ -88,21 +88,12 @@ export const renderHtml = ({ article }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const shouldServeVariantBundle: boolean = [
+	const serveVariantBundle: boolean = [
 		BUILD_VARIANT,
 		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = serveVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -114,8 +105,10 @@ export const renderHtml = ({ article }: Props): string => {
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,
 			pageHasNonBootInteractiveElements &&
