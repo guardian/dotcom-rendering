@@ -1,4 +1,4 @@
-import { initPerf } from '../client/initPerf';
+import { measureDuration } from '../client/measureDuration';
 import { record } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
@@ -49,7 +49,7 @@ const timeoutify = <T>(
 	const canShow = (): Promise<CanShowResult<T>> =>
 		new Promise((resolve) => {
 			const perfName = `messagePicker-canShow-${candidateConfig.candidate.id}`;
-			const canShowTiming = initPerf(perfName);
+			const canShowTiming = measureDuration(perfName);
 			canShowTiming.start();
 
 			if (candidateConfig.timeoutMillis !== null) {

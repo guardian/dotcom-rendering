@@ -4,7 +4,7 @@ import { CacheProvider } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { initPerf } from '../initPerf';
+import { measureDuration } from '../measureDuration';
 
 /**
  * This function dynamically imports and then hydrates a specific component in
@@ -29,7 +29,9 @@ export const doHydration = async (
 	const alreadyHydrated = element.dataset.guReady;
 	if (alreadyHydrated) return;
 
-	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
+	const { start: importStart, end: importEnd } = measureDuration(
+		`import-${name}`,
+	);
 	importStart();
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
@@ -41,7 +43,7 @@ export const doHydration = async (
 			const importDuration = importEnd();
 			const clientOnly = element.hasAttribute('clientonly');
 
-			const { start: islandStart, end: islandEnd } = initPerf(
+			const { start: islandStart, end: islandEnd } = measureDuration(
 				`island-${name}`,
 			);
 			islandStart();

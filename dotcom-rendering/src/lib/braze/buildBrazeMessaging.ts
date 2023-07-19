@@ -10,7 +10,7 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { log, storage } from '@guardian/libs';
-import { initPerf } from '../../client/initPerf';
+import { measureDuration } from '../../client/measureDuration';
 import { record } from '../../client/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
@@ -94,7 +94,7 @@ export const buildBrazeMessaging = async (
 	}
 
 	try {
-		const sdkLoadTiming = initPerf('braze-sdk-load');
+		const sdkLoadTiming = measureDuration('braze-sdk-load');
 		sdkLoadTiming.start();
 
 		const appboy = await getInitialisedAppboy(

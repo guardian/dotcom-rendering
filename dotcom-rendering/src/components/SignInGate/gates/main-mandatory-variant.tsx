@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
-import { initPerf } from '../../../client/initPerf';
+import { measureDuration } from '../../../client/measureDuration';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGateMandatory } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateMain = React.lazy(() => {
-	const { start, end } = initPerf('SignInGateMain');
+	const { start, end } = measureDuration('SignInGateMain');
 	start();
 	return import(
 		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'

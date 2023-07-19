@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { initPerf } from '../client/initPerf';
+import { measureDuration } from '../client/measureDuration';
 import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 import { useIsInView } from '../lib/useIsInView';
@@ -89,7 +89,7 @@ export const EnhancePinnedPost = () => {
 		node: pinnedPost ?? undefined,
 	});
 
-	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
+	const pinnedPostTiming = useRef<ReturnType<typeof measureDuration>>();
 
 	const checkContentHeight = () => {
 		if (pinnedPostContent) {
@@ -132,7 +132,7 @@ export const EnhancePinnedPost = () => {
 	}, []);
 
 	useEffect(() => {
-		pinnedPostTiming.current = initPerf('pinned-post-view-duration');
+		pinnedPostTiming.current = measureDuration('pinned-post-view-duration');
 	}, []);
 
 	// calculate duration when user is viewing pinned post

@@ -10,7 +10,7 @@ import type {
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { initPerf } from '../../client/initPerf';
+import { measureDuration } from '../../client/measureDuration';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
@@ -116,7 +116,7 @@ export const canShowReaderRevenueEpic = async (
 		// We never serve Reader Revenue epics in this case
 		return Promise.resolve({ show: false });
 	}
-	const dataPerf = initPerf('contributions-epic-data');
+	const dataPerf = measureDuration('contributions-epic-data');
 	dataPerf.start();
 
 	const contributionsPayload = await buildPayload(data);
@@ -163,7 +163,7 @@ export const ReaderRevenueEpic = ({
 	useEffect(() => {
 		setAutomat();
 
-		const modulePerf = initPerf('contributions-epic-module');
+		const modulePerf = measureDuration('contributions-epic-module');
 		modulePerf.start();
 
 		window
