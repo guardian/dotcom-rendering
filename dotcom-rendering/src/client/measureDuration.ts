@@ -6,7 +6,7 @@ const prefix = 'dotcom.performance';
  * Values are rounded up to the nearest millisecond,
  * in order to not under-report any duration.
  */
-export const initPerf = (
+export const measureDuration = (
 	name: string,
 ): { start: () => number; end: () => number; clear: () => void } => {
 	const perf = window.performance;

@@ -1,8 +1,8 @@
 import { log } from '@guardian/libs';
-import { initPerf } from './initPerf';
+import { measureDuration } from './measureDuration';
 
 const measure = (name: string, task: () => Promise<void>): void => {
-	const { start, end } = initPerf(name);
+	const { start, end } = measureDuration(name);
 
 	start();
 
