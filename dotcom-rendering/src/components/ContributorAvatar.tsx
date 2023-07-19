@@ -3,6 +3,9 @@ import { breakpoints, from } from '@guardian/source-foundations';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { generateSources, getFallbackSource, Sources } from './Picture';
 
+/** All images are authored at 720 × 600 pixels² */
+const ratio = 6 / 5;
+
 const widths = [
 	{ breakpoint: breakpoints.mobile, width: 180 },
 	{ breakpoint: breakpoints.mobileLandscape, width: 216 },
@@ -10,9 +13,11 @@ const widths = [
 
 const imageStyles = css`
 	width: ${widths[0].width}px;
+	height: ${widths[0].width / ratio}px;
 
 	${from.mobileLandscape} {
 		width: ${widths[1].width}px;
+		height: ${widths[1].width / ratio}px;
 	}
 `;
 
