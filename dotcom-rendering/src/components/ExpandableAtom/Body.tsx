@@ -81,7 +81,7 @@ const linkStyling = (format: ArticleFormat) => css`
 
 	a:hover {
 		border-bottom: solid 0.0625rem
-			${decidePalette(format).background.expandableAtom};
+			${decidePalette(format).text.expandableAtomHover};
 	}
 `;
 

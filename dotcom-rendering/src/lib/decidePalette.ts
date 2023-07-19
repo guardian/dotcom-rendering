@@ -2097,7 +2097,7 @@ const textExpandableAtom = (format: ArticleFormat) => {
 	}
 };
 
-const backgroundExpandableAtom = (format: ArticleFormat) => {
+const textExpandableAtomHover = (format: ArticleFormat) => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -2189,6 +2189,7 @@ export const decidePalette = (
 			dateLine: textDateLine(format),
 			tableOfContents: textTableOfContents(),
 			expandableAtom: textExpandableAtom(format),
+			expandableAtomHover: textExpandableAtomHover(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -2227,7 +2228,6 @@ export const decidePalette = (
 			designTag: backgroundDesignTag(format),
 			pullQuote: backgroundPullQuote(format),
 			messageForm: backgroundMessageForm(format),
-			expandableAtom: backgroundExpandableAtom(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

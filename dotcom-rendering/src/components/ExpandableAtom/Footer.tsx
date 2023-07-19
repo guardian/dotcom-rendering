@@ -53,7 +53,7 @@ export const Footer = ({
 		width: 28px;
 		height: 28px;
 		:hover {
-			background: ${decidePalette(format).background.expandableAtom};
+			background: ${decidePalette(format).text.expandableAtomHover};
 		}
 		:focus {
 			border: none;

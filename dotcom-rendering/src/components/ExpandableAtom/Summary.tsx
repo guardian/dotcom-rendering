@@ -61,7 +61,7 @@ export const Summary = ({
 			lineHeight: 'tight',
 			fontWeight: 'bold',
 		})};
-		color: ${decidePalette(format).background.expandableAtom};
+		color: ${decidePalette(format).text.expandableAtomHover};
 	`;
 
 	const showHideStyling = css`
@@ -79,7 +79,7 @@ export const Summary = ({
 		border: 0;
 		margin: 0;
 		:hover {
-			background: ${decidePalette(format).background.expandableAtom};
+			background: ${decidePalette(format).text.expandableAtomHover};
 		}
 	`;
 	const [hasBeenExpanded, setHasBeenExpanded] = useState(false);
