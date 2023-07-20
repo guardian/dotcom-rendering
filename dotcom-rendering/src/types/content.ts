@@ -616,6 +616,22 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 
+export interface CartoonBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
+	role: RoleType;
+	caption: string;
+	credit: string;
+	source: string;
+	displayCredit: boolean;
+	alt: string;
+	variants: Variant[];
+}
+
+type Variant = {
+	viewportSize: string;
+	images: Image[];
+};
+
 export type FEElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
@@ -666,7 +682,8 @@ export type FEElement =
 	| VideoYoutubeBlockElement
 	| VineBlockElement
 	| YoutubeBlockElement
-	| WitnessTypeBlockElement;
+	| WitnessTypeBlockElement
+	| CartoonBlockElement;
 
 // -------------------------------------
 // Misc

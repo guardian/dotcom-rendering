@@ -696,6 +696,9 @@
                 },
                 {
                     "$ref": "#/definitions/WitnessTypeBlockElement"
+                },
+                {
+                    "$ref": "#/definitions/CartoonBlockElement"
                 }
             ]
         },
@@ -3628,6 +3631,64 @@
                 "type",
                 "url",
                 "witnessEmbedType"
+            ]
+        },
+        "CartoonBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "const": "model.dotcomrendering.pageElements.CartoonBlockElement"
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "credit": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "displayCredit": {
+                    "type": "boolean"
+                },
+                "alt": {
+                    "type": "string"
+                },
+                "variants": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "viewportSize": {
+                                "type": "string"
+                            },
+                            "images": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/definitions/Image"
+                                }
+                            }
+                        },
+                        "required": [
+                            "images",
+                            "viewportSize"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "_type",
+                "alt",
+                "caption",
+                "credit",
+                "displayCredit",
+                "role",
+                "source",
+                "variants"
             ]
         },
         "Block": {
