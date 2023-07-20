@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	brand,
 	brandAlt,
@@ -240,7 +241,7 @@ type Props = {
 	isImmersive?: boolean;
 	isTopNav?: boolean;
 	pillars: PillarLinkType[];
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: Pillar;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
 };

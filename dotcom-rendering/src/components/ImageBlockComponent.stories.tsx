@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { ImageBlockComponent } from './ImageBlockComponent';
@@ -55,7 +55,7 @@ export const StandardArticle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="inline"
@@ -65,7 +65,7 @@ export const StandardArticle = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -81,7 +81,7 @@ export const Immersive = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="immersive"
@@ -91,7 +91,7 @@ export const Immersive = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -107,7 +107,7 @@ export const Showcase = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="showcase"
@@ -117,7 +117,7 @@ export const Showcase = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -133,7 +133,7 @@ export const Thumbnail = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="thumbnail"
@@ -143,7 +143,7 @@ export const Thumbnail = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -159,7 +159,7 @@ export const Supporting = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="supporting"
@@ -169,7 +169,7 @@ export const Supporting = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -185,7 +185,7 @@ export const HideCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="inline"
@@ -195,7 +195,7 @@ export const HideCaption = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					hideCaption={true}
 				/>
@@ -212,7 +212,7 @@ export const InlineTitle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="inline"
@@ -222,7 +222,7 @@ export const InlineTitle = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					title="This is the title text"
 					hideCaption={true}
@@ -246,7 +246,7 @@ export const InlineTitleMobile = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="inline"
@@ -256,7 +256,7 @@ export const InlineTitleMobile = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					title="This is the title text"
 					hideCaption={true}
@@ -280,7 +280,7 @@ export const ImmersiveTitle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="immersive"
@@ -290,7 +290,7 @@ export const ImmersiveTitle = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					title="This is the title text"
 					hideCaption={true}
@@ -308,7 +308,7 @@ export const ShowcaseTitle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="showcase"
@@ -318,7 +318,7 @@ export const ShowcaseTitle = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					title="This is the title text"
 					hideCaption={true}
@@ -362,7 +362,7 @@ export const HalfWidth = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="halfWidth"
@@ -372,7 +372,7 @@ export const HalfWidth = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -430,7 +430,7 @@ export const HalfWidthMobile = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="halfWidth"
@@ -440,7 +440,7 @@ export const HalfWidthMobile = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>
@@ -498,7 +498,7 @@ export const HalfWidthWide = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="halfWidth"
@@ -508,7 +508,7 @@ export const HalfWidthWide = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 			</Figure>

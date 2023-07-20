@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
@@ -19,7 +19,7 @@ const basicCardProps: CardProps = {
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	},
 	headlineText: 'Headline text',
 	trailText:
@@ -41,7 +41,7 @@ const aBasicLink = {
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	},
 };
 
@@ -115,7 +115,7 @@ export const CardsWithDifferentThemes = ({
 	title: string;
 }) => {
 	const cards = [];
-	for (const [pillarName, pillarValue] of Object.entries(ArticlePillar)) {
+	for (const [pillarName, pillarValue] of Object.entries(Pillar)) {
 		// We need to check if numeric here because the values are also exported as keynames
 		// See: https://www.typescriptlang.org/play?#code/KYOwrgtgBAggTgFwJYGMA2wAKS1oIZxQDeAsAFBSVQBywA7gM5QC8UADADTlVQDyADkhBIA9iBZQAjFwpUAyvxGIJAJhk8AwmDQIwcYBIDM6qgBkkAM2AMEATwwSALDIC+5cijEMRGAHRoRAHMACl4AIwArYBQEX1AEOCRrYPhkdCwcfDgASmyAbnIAegAqcgBtbioygCI2ao4oatpGaoBdE0oayXrGgSFREDaOqBqVHuqFJQQhys7qw3GtHT1gGdk5x3HzKxt7VfbZkab6Bh62A-WjvuExHskLnhrJxB6VB6rqpd19HsN3ue21jsGHqjla5FaUHIxUKQA
 		if (Number.isNaN(Number(pillarName))) {
@@ -124,7 +124,7 @@ export const CardsWithDifferentThemes = ({
 				format: {
 					display,
 					design,
-					theme: pillarValue as ArticlePillar,
+					theme: pillarValue as Pillar,
 				},
 			});
 		}
@@ -270,7 +270,7 @@ export const WithMediaType = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Video,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 					mainMedia={{ ...mainVideo, duration: 30 }}
 					headlineText="Video"
@@ -282,7 +282,7 @@ export const WithMediaType = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Audio,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 					mainMedia={mainAudio}
 					headlineText="Audio"
@@ -294,7 +294,7 @@ export const WithMediaType = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Gallery,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 					mainMedia={mainGallery}
 					headlineText="Gallery"
@@ -465,7 +465,7 @@ export const CommentThemeWithoutQuotes = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 			/>
 		</CardWrapper>
@@ -504,7 +504,7 @@ export const WithAnAvatar = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Comment,
-							theme: ArticlePillar.Opinion,
+							theme: Pillar.Opinion,
 						}}
 					/>
 				</div>
@@ -522,7 +522,7 @@ export const WhenVerticalAndThemeOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="top"
 					showQuotedHeadline={true}
@@ -541,7 +541,7 @@ export const WithSublinksWhenVerticalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="top"
 					supportingContent={[
@@ -577,7 +577,7 @@ export const WhenHorizontalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="right"
 					showQuotedHeadline={true}
@@ -589,7 +589,7 @@ export const WhenHorizontalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="right"
 					supportingContentAlignment="horizontal"
@@ -622,7 +622,7 @@ export const WhenHorizontalAndOpinion = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="right"
 					supportingContent={[
@@ -679,7 +679,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="small"
@@ -692,7 +692,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="small"
@@ -733,7 +733,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="medium"
@@ -746,7 +746,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="medium"
@@ -787,7 +787,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="large"
@@ -800,7 +800,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="large"
@@ -841,7 +841,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="jumbo"
@@ -854,7 +854,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="left"
 					imageSize="jumbo"
@@ -895,7 +895,7 @@ export const WhenOpinionWithImageAtBottom = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 					imagePosition="bottom"
 					supportingContent={[
@@ -935,7 +935,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="top"
 						imageSize="jumbo"
@@ -951,7 +951,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="right"
 						imageSize="large"
@@ -965,7 +965,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="top"
 						mainMedia={mainVideo}
@@ -980,7 +980,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="top"
 						imageSize="medium"
@@ -996,7 +996,7 @@ export const WhenVideoWithPlayButton = () => {
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Video,
-									theme: ArticlePillar.News,
+									theme: Pillar.News,
 								}}
 								imagePosition="left"
 								mainMedia={mainVideo}
@@ -1009,7 +1009,7 @@ export const WhenVideoWithPlayButton = () => {
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Video,
-									theme: ArticlePillar.News,
+									theme: Pillar.News,
 								}}
 								imagePosition="right"
 								mainMedia={mainVideo}
@@ -1023,7 +1023,7 @@ export const WhenVideoWithPlayButton = () => {
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Video,
-									theme: ArticlePillar.News,
+									theme: Pillar.News,
 								}}
 								imagePosition="right"
 								mainMedia={mainVideo}
@@ -1041,7 +1041,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="right"
 						imageSize="large"
@@ -1055,7 +1055,7 @@ export const WhenVideoWithPlayButton = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Video,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						imagePosition="top"
 						imagePositionOnMobile="left"
@@ -1077,7 +1077,7 @@ export const WithLetterDesign = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Letter,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 			/>
 		</CardWrapper>
@@ -1097,7 +1097,7 @@ export const WithLetterDesignAndShowQuotedHeadline = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Letter,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 			/>
 		</CardWrapper>

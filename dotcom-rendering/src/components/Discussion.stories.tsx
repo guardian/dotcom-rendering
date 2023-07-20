@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useEffect } from 'react';
 import { doStorybookHydration } from '../client/islands/doStorybookHydration';
 import { DiscussionLayout } from './DiscussionLayout';
@@ -28,7 +28,7 @@ export const Basic = () => {
 				format={{
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"

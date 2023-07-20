@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { AudioAtom } from './AudioAtom';
 
 export default {
@@ -23,7 +23,7 @@ export const SportStory = (): JSX.Element => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				duration={849}
 			/>
@@ -47,7 +47,7 @@ export const NewsStory = (): JSX.Element => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				duration={849}
 			/>
@@ -71,7 +71,7 @@ export const CultureStory = (): JSX.Element => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				duration={849}
 			/>

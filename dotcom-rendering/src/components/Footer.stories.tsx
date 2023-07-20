@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import {
 	brand,
 	breakpoints,
@@ -47,7 +47,7 @@ export const Footers = () => (
 				<Wrapper>
 					<Footer
 						pageFooter={Standard.pageFooter}
-						selectedPillar={ArticlePillar.News}
+						selectedPillar={Pillar.News}
 						pillars={extractNAV(Standard.nav).pillars}
 						urls={Standard.nav.readerRevenueLinks.header}
 						editionId={editionId}
