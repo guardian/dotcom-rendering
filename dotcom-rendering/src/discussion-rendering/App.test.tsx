@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import {
 	render,
 	screen,
@@ -16,7 +16,7 @@ describe('App', () => {
 			<App
 				shortUrl="p/39f5z"
 				baseUrl="https://discussion.theguardian.com/discussion-api"
-				pillar={ArticlePillar.Culture}
+				pillar={Pillar.Culture}
 				isClosedForComments={false}
 				additionalHeaders={{
 					'D2-X-UID': 'testD2Header',
