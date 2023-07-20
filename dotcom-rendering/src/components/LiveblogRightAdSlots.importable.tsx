@@ -1,6 +1,7 @@
 import { useAB } from '../lib/useAB';
-import { AdSlot } from './AdSlot';
+import { labelStyles } from './AdSlot';
 import { LiveblogRightMultipleAdSlots } from './LiveblogRightMultipleAdSlots';
+import { TopRightAdSlot } from './TopRightAdSlot';
 
 type Props = {
 	display?: ArticleDisplay;
@@ -24,13 +25,17 @@ export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 		);
 	}
 
+	const restrictStickyHeight =
+		ABTestAPI?.isUserInVariant(
+			'LiveblogRightColumnAds',
+			'minimum-stickiness',
+		) ?? false;
+
 	return (
-		<AdSlot
-			data-right-ad="1"
-			position="right"
-			display={display}
+		<TopRightAdSlot
 			isPaidContent={isPaidContent}
-			isLiveblog={true}
+			adStyles={[labelStyles]}
+			restrictStickyHeight={restrictStickyHeight}
 		/>
 	);
 };

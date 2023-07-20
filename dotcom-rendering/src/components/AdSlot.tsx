@@ -14,8 +14,7 @@ import {
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
-import { Island } from './Island';
-import { TopRightAdSlot } from './TopRightAdSlot.importable';
+import { TopRightAdSlot } from './TopRightAdSlot';
 
 type InlinePosition =
 	| 'inline'
@@ -27,7 +26,6 @@ type DefaultProps = {
 	display?: ArticleDisplay;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
-	isLiveblog?: boolean;
 };
 
 // TODO move to commercial
@@ -292,7 +290,6 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	hasPageskin = false,
-	isLiveblog = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -323,20 +320,11 @@ export const AdSlot = ({
 					);
 				}
 				case ArticleDisplay.Standard: {
-					return isLiveblog ? (
-						// We've already created an Island for liveblogs. This can be
-						// simplified when we remove the liveblogRightColumnAds ab test
+					return (
 						<TopRightAdSlot
 							isPaidContent={isPaidContent}
 							adStyles={[labelStyles]}
 						/>
-					) : (
-						<Island clientOnly={true}>
-							<TopRightAdSlot
-								isPaidContent={isPaidContent}
-								adStyles={[labelStyles]}
-							/>
-						</Island>
 					);
 				}
 				default:

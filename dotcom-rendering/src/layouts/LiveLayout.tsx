@@ -1113,32 +1113,19 @@ export const LiveLayout = ({
 									`}
 								>
 									<RightColumn>
-										{renderAds ? (
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											format.design ===
-												ArticleDesign.DeadBlog ? (
-												<Island
-													clientOnly={true}
-													deferUntil="visible"
-												>
-													<LiveblogRightAdSlots
-														display={format.display}
-														isPaidContent={
-															isPaidContent
-														}
-													/>
-												</Island>
-											) : (
-												<AdSlot
-													data-right-ad="1"
-													position="right"
+										{renderAds && (
+											<Island
+												clientOnly={true}
+												deferUntil="visible"
+											>
+												<LiveblogRightAdSlots
+													display={format.display}
 													isPaidContent={
 														isPaidContent
 													}
 												/>
-											)
-										) : null}
+											</Island>
+										)}
 									</RightColumn>
 								</div>
 							</GridItem>

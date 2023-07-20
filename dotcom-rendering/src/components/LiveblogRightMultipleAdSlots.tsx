@@ -1,16 +1,11 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { isServer } from '../lib/isServer';
 import {
 	AD_CONTAINER_HEIGHT,
 	PADDING_BOTTOM,
 	SPACE_BETWEEN_ADS,
 } from '../lib/liveblog-right-ad-constants';
 import { AdSlot } from './AdSlot';
-
-const rightColumn: HTMLElement | null = !isServer
-	? window.document.querySelector('[data-gu-name="right-column"]')
-	: null;
 
 const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
@@ -54,6 +49,8 @@ export const LiveblogRightMultipleAdSlots = ({
 		setNumberAdvertsThatFit(numAdsThatFit);
 	}, [rightColHeight]);
 
+	// If a new ad slot has been created, send an event
+	// to commercial to fill the slot with an advert.
 	useEffect(() => {
 		if (numberAdvertsThatFit === numberAdvertsInserted) return;
 
@@ -82,6 +79,9 @@ export const LiveblogRightMultipleAdSlots = ({
 			},
 		);
 
+		const rightColumn: HTMLElement | null = window.document.querySelector(
+			'[data-gu-name="right-column"]',
+		);
 		if (rightColumn !== null) {
 			setRightColHeight(rightColumn.offsetHeight);
 			resizeObserver.observe(rightColumn);

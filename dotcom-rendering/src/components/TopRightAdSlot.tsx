@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { useAB } from '../lib/useAB';
 
 /**
  * # Top Right Ad Slot
@@ -11,29 +10,17 @@ import { useAB } from '../lib/useAB';
  * **Currently**, `ShadyPie` is  disabled, pending the rollout
  * of the new supporter plus product.
  *
- * ## Why does this need to be an Island?
- *
- *  - It relies on running `useAdBlockInUse` on the client.
- *  - It is required for the LiveblogRightColumnAds AB test.
- *
- * ---
- *
  * (No visual story exists)
  */
 export const TopRightAdSlot = ({
 	adStyles,
-	isPaidContent,
+	isPaidContent = false,
+	restrictStickyHeight = false,
 }: {
 	adStyles: SerializedStyles[];
-	isPaidContent: boolean;
+	isPaidContent?: boolean;
+	restrictStickyHeight?: boolean;
 }) => {
-	const ABTestAPI = useAB()?.api;
-	const restrictStickyHeight =
-		ABTestAPI?.isUserInVariant(
-			'LiveblogRightColumnAds',
-			'minimum-stickiness',
-		) ?? false;
-
 	return (
 		<div
 			id="top-right-ad-slot"
