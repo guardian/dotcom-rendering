@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
@@ -62,7 +62,7 @@ const decidePresentationFormat = ({
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return { ...containerFormat, theme: ArticlePillar.News };
+		return { ...containerFormat, theme: Pillar.News };
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;

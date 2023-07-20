@@ -1,4 +1,4 @@
-import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
 import type { DCRBadgeType } from './badge';
@@ -559,7 +559,7 @@ export type DCRSupportingContent = {
 
 export type TreatType = {
 	links: { text: string; title?: string; linkTo: string }[];
-	theme?: typeof ArticlePillar | ArticleSpecial;
+	theme?: Pillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;
 	altText?: string;

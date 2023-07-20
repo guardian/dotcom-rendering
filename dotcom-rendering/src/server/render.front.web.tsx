@@ -1,4 +1,4 @@
-import { ArticlePillar, isString } from '@guardian/libs';
+import { isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -31,15 +31,15 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 			// The pillar name is "arts" in CAPI, but "culture" everywhere else
 			case 'Arts':
 			case 'Culture':
-				return ArticlePillar.Culture;
+				return Pillar.Culture;
 			case 'Opinion':
-				return ArticlePillar.Opinion;
+				return Pillar.Opinion;
 			case 'News':
-				return ArticlePillar.News;
+				return Pillar.News;
 			case 'Sport':
-				return ArticlePillar.Sport;
+				return Pillar.Sport;
 			case 'Lifestyle':
-				return ArticlePillar.Lifestyle;
+				return Pillar.Lifestyle;
 			default:
 				return undefined;
 		}
@@ -50,10 +50,7 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 		// Annoyingly "Football" appears in "News" and "Sport" pillars, so we exclude this case in "News"
 		// As "Football" is always "Sport". You can see the corresponding `frontend` code here:
 		// https://github.com/guardian/frontend/blob/main/common/app/navigation/Navigation.scala#L141-L143
-		if (
-			pillar.pillar === ArticlePillar.News &&
-			currentNavLink === 'Football'
-		) {
+		if (pillar.pillar === Pillar.News && currentNavLink === 'Football') {
 			return false;
 		}
 

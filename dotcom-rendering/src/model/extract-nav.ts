@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { findPillar } from './find-pillar';
 
@@ -37,7 +37,7 @@ interface BaseNavType {
 
 export interface NavType extends BaseNavType {
 	pillars: PillarLinkType[];
-	selectedPillar?: typeof ArticlePillar;
+	selectedPillar?: typeof Pillar;
 }
 
 const getLink = (data: FELinkType): LinkType => {
@@ -53,7 +53,7 @@ const getLink = (data: FELinkType): LinkType => {
 
 const getPillar = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
-	pillar: findPillar(data.title) ?? ArticlePillar.News,
+	pillar: findPillar(data.title) ?? Pillar.News,
 });
 
 const buildRRLinkCategories = (

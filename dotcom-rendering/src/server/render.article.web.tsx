@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, isString } from '@guardian/libs';
+import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -32,10 +32,7 @@ interface Props {
 }
 
 const decideTitle = (article: FEArticleType): string => {
-	if (
-		decideTheme(article.format) === ArticlePillar.Opinion &&
-		article.byline
-	) {
+	if (decideTheme(article.format) === Pillar.Opinion && article.byline) {
 		return `${article.headline} | ${article.byline} | The Guardian`;
 	}
 	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
