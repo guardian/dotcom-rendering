@@ -51,13 +51,14 @@ export const TrailTextWrapper = ({
 					display: flex;
 					flex-direction: column;
 					color: ${palette.text.cardStandfirst};
-
 					${body.small({ lineHeight: 'regular' })};
 					font-size: 14px;
-
 					padding-left: 5px;
 					padding-right: 5px;
 					padding-bottom: 8px;
+					strong {
+						font-weight: bold;
+					}
 				`,
 				showTrailText(imagePosition, imageSize, imageType),
 			]}
