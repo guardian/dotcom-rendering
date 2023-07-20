@@ -10,8 +10,10 @@ type Props = {
 export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 	const ABTestAPI = useAB()?.api;
 	const shouldInsertMultipleAdverts =
-		ABTestAPI?.isUserInVariant('LiveblogRightColumnAds', 'multiple-adverts') ??
-		false;
+		ABTestAPI?.isUserInVariant(
+			'LiveblogRightColumnAds',
+			'multiple-adverts',
+		) ?? false;
 
 	if (shouldInsertMultipleAdverts) {
 		return (

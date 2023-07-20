@@ -279,7 +279,9 @@ export const LiveLayout = ({
 	const palette = decidePalette(format);
 
 	const footballMatchUrl =
-		article.matchType === 'FootballMatchType' ? article.matchUrl : undefined;
+		article.matchType === 'FootballMatchType'
+			? article.matchUrl
+			: undefined;
 
 	const cricketMatchUrl =
 		article.matchType === 'CricketMatchType' ? article.matchUrl : undefined;
@@ -326,7 +328,9 @@ export const LiveLayout = ({
 							mmaUrl={article.config.mmaUrl}
 							discussionApiUrl={article.config.discussionApiUrl}
 							urls={article.nav.readerRevenueLinks.header}
-							remoteHeader={!!article.config.switches.remoteHeader}
+							remoteHeader={
+								!!article.config.switches.remoteHeader
+							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={article.config.idApiUrl}
 							isInEuropeTest={isInEuropeTest}
@@ -347,9 +351,13 @@ export const LiveLayout = ({
 						<Nav
 							nav={NAV}
 							selectedPillar={NAV.selectedPillar}
-							subscribeUrl={article.nav.readerRevenueLinks.header.subscribe}
+							subscribeUrl={
+								article.nav.readerRevenueLinks.header.subscribe
+							}
 							editionId={article.editionId}
-							headerTopBarSwitch={!!article.config.switches.headerTopNav}
+							headerTopBarSwitch={
+								!!article.config.switches.headerTopNav
+							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
@@ -366,7 +374,9 @@ export const LiveLayout = ({
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
-									linkHoverColour={palette.text.articleLinkHover}
+									linkHoverColour={
+										palette.text.articleLinkHover
+									}
 									borderColour={palette.border.subNav}
 								/>
 							</Island>
@@ -468,13 +478,19 @@ export const LiveLayout = ({
 											webPublicationDateDeprecated={
 												article.webPublicationDateDeprecated
 											}
-											hasStarRating={typeof article.starRating === 'number'}
+											hasStarRating={
+												typeof article.starRating ===
+												'number'
+											}
 										/>
 									)}
 								</div>
 								{article.starRating !== undefined ? (
 									<div css={starWrapper}>
-										<StarRating rating={article.starRating} size="large" />
+										<StarRating
+											rating={article.starRating}
+											size="large"
+										/>
 									</div>
 								) : (
 									<></>
@@ -492,14 +508,20 @@ export const LiveLayout = ({
 				>
 					<StandFirstGrid>
 						<GridItem area="standfirst">
-							<Standfirst format={format} standfirst={article.standfirst} />
+							<Standfirst
+								format={format}
+								standfirst={article.standfirst}
+							/>
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{article.blocks[0]?.blockLastUpdated !== undefined && (
+								{article.blocks[0]?.blockLastUpdated !==
+									undefined && (
 									<ArticleLastUpdated
 										format={format}
-										lastUpdated={article.blocks[0].blockLastUpdated}
+										lastUpdated={
+											article.blocks[0].blockLastUpdated
+										}
 									/>
 								)}
 							</Hide>
@@ -510,7 +532,8 @@ export const LiveLayout = ({
 									<DecideLines
 										format={format}
 										color={
-											format.design === ArticleDesign.LiveBlog
+											format.design ===
+											ArticleDesign.LiveBlog
 												? 'rgba(255, 255, 255, 0.4)'
 												: undefined
 										}
@@ -528,15 +551,22 @@ export const LiveLayout = ({
 										webTitle={article.webTitle}
 										byline={article.byline}
 										tags={article.tags}
-										primaryDateline={article.webPublicationDateDisplay}
+										primaryDateline={
+											article.webPublicationDateDisplay
+										}
 										secondaryDateline={
 											article.webPublicationSecondaryDateDisplay
 										}
 										isCommentable={article.isCommentable}
-										discussionApiUrl={article.config.discussionApiUrl}
+										discussionApiUrl={
+											article.config.discussionApiUrl
+										}
 										shortUrlId={article.config.shortUrlId}
 										ajaxUrl={article.config.ajaxUrl}
-										showShareCount={!!article.config.switches.serverShareCounts}
+										showShareCount={
+											!!article.config.switches
+												.serverShareCounts
+										}
 										messageUs={article.messageUs}
 									/>
 								</div>
@@ -548,7 +578,9 @@ export const LiveLayout = ({
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
-						backgroundColour={palette.background.keyEventFromDesktop}
+						backgroundColour={
+							palette.background.keyEventFromDesktop
+						}
 						borderColour={palette.border.article}
 					>
 						<Hide until={'desktop'}>
@@ -600,12 +632,16 @@ export const LiveLayout = ({
 									ajaxUrl={article.config.ajaxUrl}
 									filterKeyEvents={article.filterKeyEvents}
 									format={format}
-									enhanceTweetsSwitch={!!article.config.switches.enhanceTweets}
+									enhanceTweetsSwitch={
+										!!article.config.switches.enhanceTweets
+									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={article.webURL}
 									// We default to string here because the property is optional but we
 									// know it will exist for all blogs
-									mostRecentBlockId={article.mostRecentBlockId ?? ''}
+									mostRecentBlockId={
+										article.mostRecentBlockId ?? ''
+									}
 									hasPinnedPost={!!article.pinnedPost}
 									selectedTopics={article.selectedTopics}
 								/>
@@ -624,7 +660,10 @@ export const LiveLayout = ({
 							<GridItem area="media">
 								<div css={maxWidth}>
 									{!!footballMatchUrl && (
-										<Island clientOnly={true} placeholderHeight={40}>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
 											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
@@ -632,7 +671,10 @@ export const LiveLayout = ({
 										</Island>
 									)}
 									{!!cricketMatchUrl && (
-										<Island clientOnly={true} placeholderHeight={172}>
+										<Island
+											clientOnly={true}
+											placeholderHeight={172}
+										>
 											<GetCricketScoreboard
 												matchUrl={cricketMatchUrl}
 												format={format}
@@ -669,16 +711,25 @@ export const LiveLayout = ({
 											webTitle={article.webTitle}
 											byline={article.byline}
 											tags={article.tags}
-											primaryDateline={article.webPublicationDateDisplay}
+											primaryDateline={
+												article.webPublicationDateDisplay
+											}
 											secondaryDateline={
 												article.webPublicationSecondaryDateDisplay
 											}
-											isCommentable={article.isCommentable}
-											discussionApiUrl={article.config.discussionApiUrl}
-											shortUrlId={article.config.shortUrlId}
+											isCommentable={
+												article.isCommentable
+											}
+											discussionApiUrl={
+												article.config.discussionApiUrl
+											}
+											shortUrlId={
+												article.config.shortUrlId
+											}
 											ajaxUrl={article.config.ajaxUrl}
 											showShareCount={
-												!!article.config.switches.serverShareCounts
+												!!article.config.switches
+													.serverShareCounts
 											}
 											messageUs={article.messageUs}
 										/>
@@ -689,12 +740,20 @@ export const LiveLayout = ({
 									<Hide until="desktop">
 										<div css={sidePaddingDesktop}>
 											<TopicFilterBank
-												availableTopics={article.availableTopics}
-												selectedTopics={article.selectedTopics}
+												availableTopics={
+													article.availableTopics
+												}
+												selectedTopics={
+													article.selectedTopics
+												}
 												format={format}
 												keyEvents={article.keyEvents}
-												filterKeyEvents={article.filterKeyEvents}
-												id={'key-events-carousel-desktop'}
+												filterKeyEvents={
+													article.filterKeyEvents
+												}
+												id={
+													'key-events-carousel-desktop'
+												}
 											/>
 										</div>
 									</Hide>
@@ -719,7 +778,9 @@ export const LiveLayout = ({
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
-													filterKeyEvents={article.filterKeyEvents}
+													filterKeyEvents={
+														article.filterKeyEvents
+													}
 													id="filter-toggle-desktop"
 												/>
 											</Island>
@@ -730,12 +791,21 @@ export const LiveLayout = ({
 									{showTopicFilterBank ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
-												{pagination.currentPage !== 1 && (
+												{pagination.currentPage !==
+													1 && (
 													<Pagination
-														currentPage={pagination.currentPage}
-														totalPages={pagination.totalPages}
-														newest={pagination.newest}
-														oldest={pagination.oldest}
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -744,43 +814,95 @@ export const LiveLayout = ({
 												<ArticleBody
 													format={format}
 													blocks={article.blocks}
-													pinnedPost={article.pinnedPost}
+													pinnedPost={
+														article.pinnedPost
+													}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}
-													ajaxUrl={article.config.ajaxUrl}
-													sectionId={article.config.section}
-													switches={article.config.switches}
-													isSensitive={article.config.isSensitive}
-													isAdFreeUser={article.isAdFreeUser}
+													ajaxUrl={
+														article.config.ajaxUrl
+													}
+													sectionId={
+														article.config.section
+													}
+													switches={
+														article.config.switches
+													}
+													isSensitive={
+														article.config
+															.isSensitive
+													}
+													isAdFreeUser={
+														article.isAdFreeUser
+													}
 													shouldHideReaderRevenue={
 														article.shouldHideReaderRevenue
 													}
 													tags={article.tags}
-													isPaidContent={!!article.config.isPaidContent}
-													contributionsServiceUrl={contributionsServiceUrl}
-													contentType={article.contentType}
-													isPreview={article.config.isPreview}
-													idUrl={article.config.idUrl ?? ''}
-													isDev={!!article.config.isDev}
-													onFirstPage={pagination.currentPage === 1}
-													keyEvents={article.keyEvents}
-													filterKeyEvents={article.filterKeyEvents}
-													availableTopics={article.availableTopics}
-													selectedTopics={article.selectedTopics}
-													keywordIds={article.config.keywordIds}
+													isPaidContent={
+														!!article.config
+															.isPaidContent
+													}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													contentType={
+														article.contentType
+													}
+													isPreview={
+														article.config.isPreview
+													}
+													idUrl={
+														article.config.idUrl ??
+														''
+													}
+													isDev={
+														!!article.config.isDev
+													}
+													onFirstPage={
+														pagination.currentPage ===
+														1
+													}
+													keyEvents={
+														article.keyEvents
+													}
+													filterKeyEvents={
+														article.filterKeyEvents
+													}
+													availableTopics={
+														article.availableTopics
+													}
+													selectedTopics={
+														article.selectedTopics
+													}
+													keywordIds={
+														article.config
+															.keywordIds
+													}
 													isInLiveblogAdSlotTest={
 														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant === 'variant'
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
 													}
-													renderingTarget={renderingTarget}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
-														currentPage={pagination.currentPage}
-														totalPages={pagination.totalPages}
-														newest={pagination.newest}
-														oldest={pagination.oldest}
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -795,27 +917,45 @@ export const LiveLayout = ({
 												/>
 												<SubMeta
 													format={format}
-													subMetaKeywordLinks={article.subMetaKeywordLinks}
-													subMetaSectionLinks={article.subMetaSectionLinks}
+													subMetaKeywordLinks={
+														article.subMetaKeywordLinks
+													}
+													subMetaSectionLinks={
+														article.subMetaSectionLinks
+													}
 													pageId={article.pageId}
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge?.enhanced}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion accordionTitle="Live feed" context="liveFeed">
+										<Accordion
+											accordionTitle="Live feed"
+											context="liveFeed"
+										>
 											<ArticleContainer format={format}>
-												{pagination.currentPage !== 1 && (
+												{pagination.currentPage !==
+													1 && (
 													<Pagination
-														currentPage={pagination.currentPage}
-														totalPages={pagination.totalPages}
-														newest={pagination.newest}
-														oldest={pagination.oldest}
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -824,45 +964,99 @@ export const LiveLayout = ({
 												<ArticleBody
 													format={format}
 													blocks={article.blocks}
-													pinnedPost={article.pinnedPost}
+													pinnedPost={
+														article.pinnedPost
+													}
 													host={host}
 													pageId={article.pageId}
 													webTitle={article.webTitle}
-													ajaxUrl={article.config.ajaxUrl}
-													sectionId={article.config.section}
-													switches={article.config.switches}
-													isSensitive={article.config.isSensitive}
-													isAdFreeUser={article.isAdFreeUser}
+													ajaxUrl={
+														article.config.ajaxUrl
+													}
+													sectionId={
+														article.config.section
+													}
+													switches={
+														article.config.switches
+													}
+													isSensitive={
+														article.config
+															.isSensitive
+													}
+													isAdFreeUser={
+														article.isAdFreeUser
+													}
 													shouldHideReaderRevenue={
 														article.shouldHideReaderRevenue
 													}
 													tags={article.tags}
-													isPaidContent={!!article.config.isPaidContent}
-													contributionsServiceUrl={contributionsServiceUrl}
-													contentType={article.contentType}
-													isPreview={article.config.isPreview}
-													idUrl={article.config.idUrl ?? ''}
-													isDev={!!article.config.isDev}
-													onFirstPage={pagination.currentPage === 1}
-													keyEvents={article.keyEvents}
-													filterKeyEvents={article.filterKeyEvents}
-													availableTopics={article.availableTopics}
-													selectedTopics={article.selectedTopics}
-													keywordIds={article.config.keywordIds}
+													isPaidContent={
+														!!article.config
+															.isPaidContent
+													}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													contentType={
+														article.contentType
+													}
+													isPreview={
+														article.config.isPreview
+													}
+													idUrl={
+														article.config.idUrl ??
+														''
+													}
+													isDev={
+														!!article.config.isDev
+													}
+													onFirstPage={
+														pagination.currentPage ===
+														1
+													}
+													keyEvents={
+														article.keyEvents
+													}
+													filterKeyEvents={
+														article.filterKeyEvents
+													}
+													availableTopics={
+														article.availableTopics
+													}
+													selectedTopics={
+														article.selectedTopics
+													}
+													keywordIds={
+														article.config
+															.keywordIds
+													}
 													isInLiveblogAdSlotTest={
 														article.config.abTests
-															.serverSideLiveblogInlineAdsVariant === 'variant'
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
 													}
 													lang={article.lang}
-													isRightToLeftLang={article.isRightToLeftLang}
-													renderingTarget={renderingTarget}
+													isRightToLeftLang={
+														article.isRightToLeftLang
+													}
+													renderingTarget={
+														renderingTarget
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
-														currentPage={pagination.currentPage}
-														totalPages={pagination.totalPages}
-														newest={pagination.newest}
-														oldest={pagination.oldest}
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
@@ -877,15 +1071,21 @@ export const LiveLayout = ({
 												/>
 												<SubMeta
 													format={format}
-													subMetaKeywordLinks={article.subMetaKeywordLinks}
-													subMetaSectionLinks={article.subMetaSectionLinks}
+													subMetaKeywordLinks={
+														article.subMetaKeywordLinks
+													}
+													subMetaSectionLinks={
+														article.subMetaSectionLinks
+													}
 													pageId={article.pageId}
 													webUrl={article.webURL}
 													webTitle={article.webTitle}
 													showBottomSocialButtons={
 														article.showBottomSocialButtons
 													}
-													badge={article.badge?.enhanced}
+													badge={
+														article.badge?.enhanced
+													}
 												/>
 											</ArticleContainer>
 										</Accordion>
@@ -914,19 +1114,28 @@ export const LiveLayout = ({
 								>
 									<RightColumn>
 										{renderAds ? (
-											format.design === ArticleDesign.LiveBlog ||
-											format.design === ArticleDesign.DeadBlog ? (
-												<Island clientOnly={true} deferUntil="visible">
+											format.design ===
+												ArticleDesign.LiveBlog ||
+											format.design ===
+												ArticleDesign.DeadBlog ? (
+												<Island
+													clientOnly={true}
+													deferUntil="visible"
+												>
 													<LiveblogRightAdSlots
 														display={format.display}
-														isPaidContent={isPaidContent}
+														isPaidContent={
+															isPaidContent
+														}
 													/>
 												</Island>
 											) : (
 												<AdSlot
 													data-right-ad="1"
 													position="right"
-													isPaidContent={isPaidContent}
+													isPaidContent={
+														isPaidContent
+													}
 												/>
 											)
 										) : null}
@@ -959,7 +1168,9 @@ export const LiveLayout = ({
 							<Island deferUntil="visible">
 								<Carousel
 									heading={article.storyPackage.heading}
-									trails={article.storyPackage.trails.map(decideTrail)}
+									trails={article.storyPackage.trails.map(
+										decideTrail,
+									)}
 									onwardsSource="more-on-this-story"
 									format={format}
 									leftColSize={'wide'}
@@ -980,7 +1191,9 @@ export const LiveLayout = ({
 							isAdFreeUser={article.isAdFreeUser}
 							pageId={article.pageId}
 							isPaidContent={!!article.config.isPaidContent}
-							showRelatedContent={article.config.showRelatedContent}
+							showRelatedContent={
+								article.config.showRelatedContent
+							}
 							keywordIds={article.config.keywordIds}
 							contentType={article.contentType}
 							tags={article.tags}
@@ -1000,7 +1213,9 @@ export const LiveLayout = ({
 							element="section"
 						>
 							<DiscussionLayout
-								discussionApiUrl={article.config.discussionApiUrl}
+								discussionApiUrl={
+									article.config.discussionApiUrl
+								}
 								shortUrlId={article.config.shortUrlId}
 								format={format}
 								discussionD2Uid={article.config.discussionD2Uid}
@@ -1008,7 +1223,8 @@ export const LiveLayout = ({
 									article.config.discussionApiClientHeader
 								}
 								enableDiscussionSwitch={
-									!!article.config.switches.enableDiscussionSwitch
+									!!article.config.switches
+										.enableDiscussionSwitch
 								}
 								isAdFreeUser={article.isAdFreeUser}
 								shouldHideAds={article.shouldHideAds}
@@ -1051,7 +1267,10 @@ export const LiveLayout = ({
 							backgroundColour={neutral[93]}
 							element="aside"
 						>
-							<AdSlot position="merchandising" display={format.display} />
+							<AdSlot
+								position="merchandising"
+								display={format.display}
+							/>
 						</Section>
 					)}
 				</div>
@@ -1107,9 +1326,15 @@ export const LiveLayout = ({
 						keywordIds={article.config.keywordIds}
 						pageId={article.pageId}
 						sectionId={article.config.section}
-						shouldHideReaderRevenue={article.shouldHideReaderRevenue}
-						remoteBannerSwitch={!!article.config.switches.remoteBanner}
-						puzzleBannerSwitch={!!article.config.switches.puzzlesBanner}
+						shouldHideReaderRevenue={
+							article.shouldHideReaderRevenue
+						}
+						remoteBannerSwitch={
+							!!article.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							!!article.config.switches.puzzlesBanner
+						}
 						tags={article.tags}
 					/>
 				</Island>

@@ -44,7 +44,8 @@ export const LiveblogRightMultipleAdSlots = ({
 }: Props) => {
 	const [rightColHeight, setRightColHeight] = useState<number | null>(null);
 	const [numberAdvertsThatFit, setNumberAdvertsThatFit] = useState<number>(0);
-	const [numberAdvertsInserted, setNumberAdvertsInserted] = useState<number>(0);
+	const [numberAdvertsInserted, setNumberAdvertsInserted] =
+		useState<number>(0);
 
 	useEffect(() => {
 		if (rightColHeight === null) return;
@@ -73,7 +74,9 @@ export const LiveblogRightMultipleAdSlots = ({
 		const resizeObserver = new ResizeObserver(
 			(entries: ResizeObserverEntry[]) => {
 				for (const entry of entries) {
-					const newRightColHeight = Math.round(entry.contentRect.height);
+					const newRightColHeight = Math.round(
+						entry.contentRect.height,
+					);
 					setRightColHeight(newRightColHeight);
 				}
 			},

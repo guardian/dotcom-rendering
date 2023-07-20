@@ -43,7 +43,9 @@ export const HeaderAdSlot = () => (
 				* Hides the top-above-nav ad-slot container when a
 				* Bonzai TrueSkin (Australian 3rd Party page skin) is shown
 				*/
-				.bz-custom-container ~ #bannerandheader .top-banner-ad-container {
+				.bz-custom-container
+					~ #bannerandheader
+					.top-banner-ad-container {
 					display: none;
 				}
 			`}

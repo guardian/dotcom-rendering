@@ -301,7 +301,10 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div className="ad-slot-container" css={[adContainerStyles]}>
+						<div
+							className="ad-slot-container"
+							css={[adContainerStyles]}
+						>
 							<div
 								id="dfp-ad--right"
 								className={[
@@ -412,7 +415,11 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[fluidAdStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					css={[
+						fluidAdStyles,
+						fluidFullWidthAdStyles,
+						adSlotAboveNav,
+					]}
 					data-link-name="ad slot top-above-nav"
 					data-name="top-above-nav"
 					aria-hidden="true"
@@ -459,7 +466,11 @@ export const AdSlot = ({
 							'ad-slot',
 							'ad-slot--merchandising-high',
 						].join(' ')}
-						css={[merchandisingAdStyles, fluidAdStyles, fluidFullWidthAdStyles]}
+						css={[
+							merchandisingAdStyles,
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
 						data-refresh="false"
@@ -482,10 +493,16 @@ export const AdSlot = ({
 				>
 					<div
 						id="dfp-ad--merchandising"
-						className={['js-ad-slot', 'ad-slot', 'ad-slot--merchandising'].join(
-							' ',
-						)}
-						css={[merchandisingAdStyles, fluidAdStyles, fluidFullWidthAdStyles]}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--merchandising',
+						].join(' ')}
+						css={[
+							merchandisingAdStyles,
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+						]}
 						data-link-name="ad slot merchandising"
 						data-name="merchandising"
 						aria-hidden="true"
@@ -497,7 +514,11 @@ export const AdSlot = ({
 			return (
 				<div
 					id="dfp-ad--survey"
-					className={['js-ad-slot', 'ad-slot', 'ad-slot--survey'].join(' ')}
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--survey',
+					].join(' ')}
 					css={[outOfPageStyles, adSlotCollapseStyles]}
 					data-link-name="ad slot survey"
 					data-name="survey"
@@ -639,5 +660,7 @@ export const AdSlot = ({
 };
 
 export const MobileStickyContainer = () => {
-	return <div className="mobilesticky-container" css={mobileStickyAdStyles} />;
+	return (
+		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
+	);
 };

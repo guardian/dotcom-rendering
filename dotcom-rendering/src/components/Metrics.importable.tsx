@@ -103,7 +103,9 @@ export const Metrics = ({ commercialMetricsEnabled }: Props) => {
 					}
 				})
 				.catch((e) =>
-					console.error(`Error initialising commercial metrics: ${String(e)}`),
+					console.error(
+						`Error initialising commercial metrics: ${String(e)}`,
+					),
 				);
 		},
 		[abTestApi, adBlockerInUse, commercialMetricsEnabled],
