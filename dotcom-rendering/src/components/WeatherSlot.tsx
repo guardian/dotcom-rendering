@@ -12,6 +12,10 @@ import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
 import type { WeatherData } from './WeatherData.importable';
 
+interface IconProps {
+	size?: number;
+}
+
 const formatTemperature = (value: number, unit: string) =>
 	`${value}°${unit.toLocaleUpperCase()}`;
 
@@ -78,14 +82,10 @@ const tempCSS = (isNow: boolean) => [
 				${textSans.xlarge()};
 				line-height: 1;
 			}
-			${from.leftCol} {
-				${textSans.xlarge()};
-				line-height: 1;
-			}
 		`,
 ];
 
-const iconCSS = css`
+const iconCSS = (size: number) => css`
 	position: absolute;
 	top: 50%;
 	left: 0px;
@@ -94,6 +94,31 @@ const iconCSS = css`
 	${from.leftCol} {
 		position: static;
 		margin-top: 0;
+		height: ${size}px;
+		width: ${size}px;
+		margin-right: ${size === 50 ? 8 : 0}px;
+	}
+`;
+
+const flexRow = css`
+	display: flex;
+	flex-direction: row;
+`;
+
+const flexColumn = css`
+	display: flex;
+	flex-direction: column;
+`;
+
+const flexRowBelowLeftCol = css`
+	${until.leftCol} {
+		${flexRow}
+	}
+`;
+
+const flexColumnBelowLeftCol = css`
+	${until.leftCol} {
+		${flexColumn}
 	}
 `;
 
@@ -127,9 +152,9 @@ export const WeatherSlot = ({
 		import(`../static/icons/weather/weather-${icon}.svg`).then(
 			({ default: Component }) => {
 				return {
-					default: () => (
+					default: ({ size = 32 }: IconProps) => (
 						<Component
-							css={iconCSS}
+							css={iconCSS(size)}
 							aria-hidden={true}
 							className="icon"
 						/>
@@ -145,25 +170,54 @@ export const WeatherSlot = ({
 				{isNow ? 'The current weather' : 'The forecast for'}
 			</span>
 			{isNow ? (
-				<span css={nowCSS} aria-hidden={true}>
-					Now
-				</span>
+				<div css={flexRow}>
+					<div>
+						<Suspense fallback={<LoadingIcon />}>
+							<Icon size={50} />
+						</Suspense>
+					</div>
+					<div css={flexColumn}>
+						<span css={nowCSS} aria-hidden={true}>
+							Now
+						</span>
+						<span css={visuallyHiddenCSS}>is</span>
+						<span css={tempCSS(isNow)} className="temp">
+							{formatTemperature(
+								isUS
+									? temperature.imperial
+									: temperature.metric,
+								isUS ? 'F' : 'C',
+							)}
+						</span>
+						<span css={visuallyHiddenCSS}>
+							, {description.toLowerCase()}.
+						</span>
+					</div>
+				</div>
 			) : (
-				<time css={timeCSS} dateTime={dateTime}>
-					{formatTime(dateTime, isUS)}
-				</time>
+				<div css={flexRowBelowLeftCol}>
+					<div css={flexColumnBelowLeftCol}>
+						<time css={timeCSS} dateTime={dateTime}>
+							{formatTime(dateTime, isUS)}
+						</time>
+						<span css={visuallyHiddenCSS}>is</span>
+						<span css={tempCSS(isNow)} className="temp">
+							{formatTemperature(
+								isUS
+									? temperature.imperial
+									: temperature.metric,
+								isUS ? 'F' : 'C',
+							)}
+						</span>
+						<span css={visuallyHiddenCSS}>
+							, {description.toLowerCase()}.
+						</span>
+					</div>
+					<Suspense fallback={<LoadingIcon />}>
+						<Icon />
+					</Suspense>
+				</div>
 			)}
-			<span css={visuallyHiddenCSS}>is</span>
-			<span css={tempCSS(isNow)} className="temp">
-				{formatTemperature(
-					isUS ? temperature.imperial : temperature.metric,
-					isUS ? 'F' : 'C',
-				)}
-			</span>
-			<span css={visuallyHiddenCSS}>, {description.toLowerCase()}.</span>
-			<Suspense fallback={<LoadingIcon />}>
-				<Icon />
-			</Suspense>
 		</p>
 	);
 };

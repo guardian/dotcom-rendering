@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import type {
 	CommentResponse,
 	CommentType,
-	UserProfile,
+	SignedInUser,
 } from '../../discussionTypes';
 import {
 	addUserName,
@@ -22,7 +22,7 @@ import { Row } from '../Row/Row';
 type Props = {
 	shortUrl: string;
 	pillar: ArticleTheme;
-	user: UserProfile;
+	user: SignedInUser;
 	onAddComment: (response: CommentType) => void;
 	setCommentBeingRepliedTo?: () => void;
 	commentBeingRepliedTo?: CommentType;
@@ -259,8 +259,8 @@ export const CommentForm = ({
 		setInfo('');
 
 		if (body) {
-			const comment = onComment ?? defaultComment;
-			const reply = onReply ?? defaultReply;
+			const comment = onComment ?? defaultComment(user.authStatus);
+			const reply = onReply ?? defaultReply(user.authStatus);
 			const response: CommentResponse = commentBeingRepliedTo
 				? await reply(shortUrl, body, commentBeingRepliedTo.id)
 				: await comment(shortUrl, body);
@@ -336,7 +336,7 @@ export const CommentForm = ({
 						// it is returned as a string, so we need to cast to an number to be compatable
 						parseInt(response.message),
 						body,
-						user,
+						user.profile,
 						commentBeingRepliedTo,
 					),
 				);
@@ -354,7 +354,7 @@ export const CommentForm = ({
 			return;
 		}
 
-		const response = await addUserName(userName);
+		const response = await addUserName(user.authStatus, userName);
 		if (response.status === 'ok') {
 			// If we are able to submit userName we should continue with submitting comment
 			void submitForm();
@@ -410,7 +410,7 @@ export const CommentForm = ({
 							.
 						</p>
 
-						{user.privateFields?.isPremoderated && (
+						{user.profile.privateFields?.isPremoderated && (
 							<p css={[errorTextStyles, linkStyles]}>
 								Your comments are currently being pre-moderated
 								(

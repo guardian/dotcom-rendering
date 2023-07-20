@@ -1,14 +1,18 @@
 import { css } from '@emotion/react';
-import { ArticleTheme } from '@guardian/libs';
+import type { ArticleTheme } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
-import { CommentType, UserProfile } from '../../discussionTypes';
+import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../../lib/useAuthStatus';
+import type { CommentType, UserProfile } from '../../discussionTypes';
 import { TopPick } from '../TopPick/TopPick';
 
 type Props = {
 	pillar: ArticleTheme;
 	user?: UserProfile;
 	comments: CommentType[];
-	isSignedIn: boolean;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	onPermalinkClick: (commentId: number) => void;
 	onRecommend?: (commentId: number) => Promise<boolean>;
 };
@@ -50,7 +54,7 @@ export const TopPicks = ({
 	pillar,
 	user,
 	comments,
-	isSignedIn,
+	authStatus,
 	onPermalinkClick,
 	onRecommend,
 }: Props) => {
@@ -70,7 +74,7 @@ export const TopPicks = ({
 							key={comment.id}
 							pillar={pillar}
 							comment={comment}
-							isSignedIn={isSignedIn}
+							authStatus={authStatus}
 							userMadeComment={
 								!!user &&
 								user.userId === comment.userProfile.userId
@@ -86,7 +90,7 @@ export const TopPicks = ({
 							key={comment.id}
 							pillar={pillar}
 							comment={comment}
-							isSignedIn={isSignedIn}
+							authStatus={authStatus}
 							userMadeComment={
 								!!user &&
 								user.userId === comment.userProfile.userId
@@ -103,7 +107,7 @@ export const TopPicks = ({
 						key={comment.id}
 						pillar={pillar}
 						comment={comment}
-						isSignedIn={isSignedIn}
+						authStatus={authStatus}
 						userMadeComment={
 							!!user && user.userId === comment.userProfile.userId
 						}

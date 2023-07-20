@@ -673,10 +673,12 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 const textCardStandfirst = textCardHeadline;
 
-/** same as textByline except for SpecialReport */
 const textCardByline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[700];
+
+	if (format.display === ArticleDisplay.Immersive)
+		return pillarPalette[format.theme].main;
 
 	return textByline(format);
 };

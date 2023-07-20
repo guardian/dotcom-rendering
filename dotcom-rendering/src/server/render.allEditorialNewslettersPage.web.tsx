@@ -3,7 +3,7 @@ import {
 	dcrJavascriptBundle,
 } from '../../scripts/webpack/bundles';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
-import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -42,16 +42,7 @@ export const renderEditorialNewslettersPage = ({
 			'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = shouldServeVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -63,8 +54,10 @@ export const renderEditorialNewslettersPage = ({
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				newslettersPage.config.commercialBundleUrl,
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),

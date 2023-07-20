@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
 import type { CommentType } from '../../discussionTypes';
 import { TopPick } from './TopPick';
 
@@ -70,6 +71,8 @@ const contributorCommentWithShortBody: CommentType = {
 	body: "<p>It's still there FrankDeFord - and thanks, I will pass that on</p>",
 };
 
+const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
+
 export const LongPick = () => (
 	<div
 		css={css`
@@ -80,7 +83,6 @@ export const LongPick = () => (
 		<TopPick
 			pillar={ArticlePillar.News}
 			comment={comment}
-			isSignedIn={false}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>
@@ -98,7 +100,7 @@ export const ShortPick = () => (
 		<TopPick
 			pillar={ArticlePillar.Opinion}
 			comment={commentWithShortBody}
-			isSignedIn={true}
+			authStatus={signedInStatus}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>
@@ -116,7 +118,6 @@ export const LongPickContributor = () => (
 		<TopPick
 			pillar={ArticlePillar.News}
 			comment={commentContributor}
-			isSignedIn={false}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>
@@ -134,7 +135,7 @@ export const ShortPickContributor = () => (
 		<TopPick
 			pillar={ArticlePillar.Opinion}
 			comment={contributorCommentWithShortBody}
-			isSignedIn={true}
+			authStatus={signedInStatus}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
 		/>

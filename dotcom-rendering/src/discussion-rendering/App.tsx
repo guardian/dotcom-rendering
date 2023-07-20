@@ -15,8 +15,8 @@ import type {
 	FilterOptions,
 	OrderByType,
 	PageSizeType,
+	SignedInUser,
 	ThreadsType,
-	UserProfile,
 } from './discussionTypes';
 import { getDiscussion, getPicks, initialiseApi } from './lib/api';
 
@@ -29,7 +29,7 @@ type Props = {
 	initialPage?: number;
 	pageSizeOverride?: PageSizeType;
 	orderByOverride?: OrderByType;
-	user?: UserProfile;
+	user?: SignedInUser;
 	additionalHeaders: AdditionalHeadersType;
 	expanded: boolean;
 	onPermalinkClick: (commentId: number) => void;
@@ -213,6 +213,7 @@ const writeMutes = (mutes: string[]) => {
 	}
 };
 
+//todo: should probably rename this to Comments?
 export const App = ({
 	baseUrl,
 	shortUrl,
@@ -427,7 +428,7 @@ export const App = ({
 							<TopPicks
 								pillar={pillar}
 								comments={picks.slice(0, 2)}
-								isSignedIn={!!user}
+								authStatus={user?.authStatus}
 								onPermalinkClick={onPermalinkClick}
 								onRecommend={onRecommend}
 							/>
@@ -511,7 +512,7 @@ export const App = ({
 					<TopPicks
 						pillar={pillar}
 						comments={picks}
-						isSignedIn={!!user}
+						authStatus={user?.authStatus}
 						onPermalinkClick={onPermalinkClick}
 						onRecommend={onRecommend}
 					/>

@@ -4,6 +4,10 @@ import { log } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
+import type {
+	SignedInWithCookies,
+	SignedInWithOkta,
+} from '../../../lib/useAuthStatus';
 import { reportAbuse } from '../../lib/api';
 import { palette } from '../../lib/palette';
 import { pillarToString } from '../../lib/pillarToString';
@@ -59,12 +63,14 @@ type Props = {
 	commentId: number;
 	toggleSetShowForm: () => void;
 	pillar: ArticleTheme;
+	authStatus?: SignedInWithCookies | SignedInWithOkta;
 };
 
 export const AbuseReportForm = ({
 	commentId,
 	toggleSetShowForm,
 	pillar,
+	authStatus,
 }: Props) => {
 	const modalRef = useRef<HTMLDivElement>(null);
 	// TODO: use ref once forwardRef is implemented @guardian/src-button
@@ -163,6 +169,7 @@ export const AbuseReportForm = ({
 			reason,
 			email,
 			commentId,
+			authStatus,
 		})
 			.then((response) => {
 				if (response.status !== 'ok') {

@@ -72,7 +72,7 @@ const headerStyles = css`
 		padding-top: ${space[1]}px;
 		padding-bottom: ${space[3]}px;
 		padding-left: ${space[5]}px;
-		max-width: 340px;
+		max-width: 400px;
 	}
 
 	${from.desktop} {

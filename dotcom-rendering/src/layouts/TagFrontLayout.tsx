@@ -261,7 +261,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 					return (
 						<Fragment key={containedId}>
 							<FrontSection
-								title={date.toLocaleDateString(locale, {
+								title={date.toLocaleDateString('en-GB', {
 									day:
 										groupedTrails.day !== undefined
 											? 'numeric'
