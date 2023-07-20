@@ -858,19 +858,18 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 						)}
 
 						{!isPaidContent && (
-							<Section
-								title="Most viewed"
-								padContent={false}
-								verticalMargins={false}
-								element="aside"
-								data-print-layout="hide"
-								data-link-name="most-popular"
-								data-component="most-popular"
-							>
-								<MostViewedFooterLayout renderAds={renderAds}>
-									<Island
-										clientOnly={true}
-										deferUntil="visible"
+							<Island clientOnly={true} deferUntil="visible">
+								<Section
+									title="Most viewed"
+									padContent={false}
+									verticalMargins={false}
+									element="aside"
+									data-print-layout="hide"
+									data-link-name="most-popular"
+									data-component="most-popular"
+								>
+									<MostViewedFooterLayout
+										renderAds={renderAds}
 									>
 										<MostViewedFooterData
 											sectionId={article.config.section}
@@ -878,9 +877,9 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											ajaxUrl={article.config.ajaxUrl}
 											edition={article.editionId}
 										/>
-									</Island>
-								</MostViewedFooterLayout>
-							</Section>
+									</MostViewedFooterLayout>
+								</Section>
+							</Island>
 						)}
 
 						{renderAds && !isLabs && (
