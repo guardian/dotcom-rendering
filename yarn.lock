@@ -3195,15 +3195,20 @@
   resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.2.0.tgz#aaad1667095c5ba4bc7610e1a119ec007c249307"
   integrity sha512-4bKanidGEH+VKaYQNNcS2y8ubmxfzMicr+wiIDsdosxicn3mLA1Hw0kHiaZm1vroo3JKp4442qVba3Z8Ot5vPA==
 
-"@guardian/libs@15.1.0", "@guardian/libs@^15.0.0":
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
-  integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
+"@guardian/libs@15.3.0":
+  version "15.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.3.0.tgz#fbb133b33a9704bb5699ea2be5a9fcd556e7a5bb"
+  integrity sha512-qWQy6L6HsXgZEJwVREWLmsJRZ6jwkQM5d6kSXV+arlQipkrRMy3n2eacNTqC/bn7WTBcVBPkbLWFslTsig9Vyg==
 
 "@guardian/libs@^10.0.0":
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-10.1.1.tgz#7048c365a68dda068f707d46c78979f430221963"
   integrity sha512-OdWReBHRWhdbErVmS15hihVzlkdU8DkKrjDsUIN0P8QZiF4twuzcU3qsPwto2UfibAwPkWqKkNwH1k8b6xNclA==
+
+"@guardian/libs@^15.0.0":
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
+  integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
 
 "@guardian/prettier@4.0.0", "@guardian/prettier@^4.0.0":
   version "4.0.0"

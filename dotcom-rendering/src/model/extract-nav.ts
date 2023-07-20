@@ -37,7 +37,7 @@ interface BaseNavType {
 
 export interface NavType extends BaseNavType {
 	pillars: PillarLinkType[];
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: typeof ArticlePillar;
 }
 
 const getLink = (data: FELinkType): LinkType => {

@@ -559,7 +559,7 @@ export type DCRSupportingContent = {
 
 export type TreatType = {
 	links: { text: string; title?: string; linkTo: string }[];
-	theme?: ArticlePillar | ArticleSpecial;
+	theme?: typeof ArticlePillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;
 	altText?: string;
