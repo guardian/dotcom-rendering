@@ -13,9 +13,8 @@ import { useAB } from '../lib/useAB';
  *
  * ## Why does this need to be an Island?
  *
- * It relies on running `useAdBlockInUse` on the client.
- *
- * **Currently**, it does not need to be.
+ *  - It relies on running `useAdBlockInUse` on the client.
+ *  - It is required for the LiveblogRightColumnAds AB test.
  *
  * ---
  *
@@ -29,7 +28,7 @@ export const TopRightAdSlot = ({
 	isPaidContent: boolean;
 }) => {
 	const ABTestAPI = useAB()?.api;
-	const shouldRestrictRightAdStickyHeight =
+	const restrictStickyHeight =
 		ABTestAPI?.isUserInVariant(
 			'LiveblogRightColumnAds',
 			'minimum-stickiness',
@@ -43,7 +42,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
-					max-height: ${shouldRestrictRightAdStickyHeight ? '1059px' : '100%'};
+					max-height: ${restrictStickyHeight ? '1059px' : '100%'};
 				`,
 				adStyles,
 			]}

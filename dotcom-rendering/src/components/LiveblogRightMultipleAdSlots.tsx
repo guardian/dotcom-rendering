@@ -56,7 +56,7 @@ export const LiveblogRightMultipleAdSlots = ({
 	useEffect(() => {
 		if (numberAdvertsThatFit === numberAdvertsInserted) return;
 
-		// Dispatch event so commercial will display ad in new slot
+		// Dispatch event to instruct commercial to display an ad in new slot(s).
 		const event = new CustomEvent('liveblog-right-ads-inserted', {
 			detail: {
 				numAdsToInsert: numberAdvertsThatFit - numberAdvertsInserted,

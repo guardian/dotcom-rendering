@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -30,6 +30,7 @@ type DefaultProps = {
 	isLiveblog?: boolean;
 };
 
+// TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
 type InlineProps = {
@@ -43,13 +44,13 @@ type NonInlineProps = {
 };
 
 /**
- * This union type allows us to conditionally require the index property
- * based on position. If `position` is 'inline' or 'mobile-front' then we expect the index
- * value. If not, then we explicitly refuse this property
+ * This allows us to conditionally require the index property based
+ * on position. If `position` is an inline type then we expect the
+ * index value. If not, then we explicitly refuse this property
  */
 type Props = DefaultProps & (InlineProps | NonInlineProps);
 
-export const labelHeight = 24;
+export const labelHeight = constants.AD_LABEL_HEIGHT.toString();
 
 const individualLabelCSS = css`
 	${textSans.xxsmall()};
@@ -320,7 +321,8 @@ export const AdSlot = ({
 				}
 				case ArticleDisplay.Standard: {
 					return isLiveblog ? (
-						// We've already created an Island for liveblogs
+						// We've already created an Island for liveblogs. This can be
+						// simplified when we remove the liveblogRightColumnAds ab test
 						<TopRightAdSlot
 							isPaidContent={isPaidContent}
 							adStyles={[labelStyles]}
