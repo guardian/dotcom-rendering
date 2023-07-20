@@ -95,6 +95,7 @@ export type Props = {
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	minWidthInPixelsOnMobile?: number;
+	pauseOffscreenVideo?: boolean;
 };
 
 const StarRatingComponent = ({
@@ -284,6 +285,7 @@ export const Card = ({
 	showLivePlayable = false,
 	onwardsSource,
 	minWidthInPixelsOnMobile,
+	pauseOffscreenVideo = false,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -455,6 +457,9 @@ export const Card = ({
 										role="inline"
 										stickyVideos={false}
 										kicker={'Breaking News'}
+										pauseOffscreenVideo={
+											pauseOffscreenVideo
+										}
 									/>
 								</Island>
 							</div>
