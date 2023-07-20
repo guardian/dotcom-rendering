@@ -33,6 +33,15 @@ const cardStyles = (
 		so this is required here */
 		position: relative;
 
+		/* Media query for Safari 10.1 and Safari 10.3 */
+		@media screen and (-webkit-min-device-pixel-ratio: 0) {
+			@media not all and (min-resolution: 0.001dpcm) {
+				@media {
+					display: -webkit-box;
+				}
+			}
+		}
+
 		:hover .image-overlay {
 			position: absolute;
 			top: 0;
