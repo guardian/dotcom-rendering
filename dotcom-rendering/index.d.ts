@@ -574,10 +574,13 @@ declare namespace JSX {
 		'data-link-name'?: string;
 
 		/**
-		 * Elements with this attribute will fetch their comment count on
-		 * the client-side.
+		 * **Build an initial set of discussions**
 		 *
-		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
+		 * Setting this attribute helps build an initial set of discussion IDs.
+		 * Without it, there is a risk that each new usage of `useCommentCount`
+		 * leads to a distinct request to the discussion API
+		 *
+		 * @see {@link ../src/lib/useCommentCount.ts}
 		 */
 		'data-discussion-id'?: string;
 	}

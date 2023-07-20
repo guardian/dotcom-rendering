@@ -175,6 +175,17 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				},
 				{ overwriteRoutes: false },
 			)
+			.get(
+				/^https:\/\/discussion.theguardian.com\/discussion-api\/getCommentCounts\?/,
+				{
+					status: 200,
+					body: {
+						'/p/d8ex5': 496,
+						'/p/zemg8': 11_000,
+					},
+				},
+				{ overwriteRoutes: false },
+			)
 			// Most read by category
 			.get(
 				/.*api.nextgen.guardianapps.co.uk\/most-read.*/,

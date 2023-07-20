@@ -16,6 +16,7 @@ import type {
 import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
+import { CardCommentCount } from '../CardCommentCount.importable';
 import { CardHeadline } from '../CardHeadline';
 import type { Loading } from '../CardPicture';
 import { CardPicture } from '../CardPicture';
@@ -88,6 +89,7 @@ export type Props = {
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
 	showAge?: boolean;
+	discussionApiUrl?: string;
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
@@ -274,6 +276,7 @@ export const Card = ({
 	containerPalette,
 	containerType,
 	showAge = true,
+	discussionApiUrl = 'http://discussion.theguardian.com/discussion-api', // should require a value
 	discussionId,
 	isDynamo,
 	isCrossword,
@@ -321,15 +324,9 @@ export const Card = ({
 					) : undefined
 				}
 				commentCount={
-					discussionId ? (
+					discussionId !== undefined ? (
 						<Link
-							// This a tag is initially rendered empty. It gets populated later
-							// after a fetch call is made to get all the counts for each Card
-							// on the page with a discussion (see FetchCommentCounts.tsx)
 							data-discussion-id={discussionId}
-							data-format={JSON.stringify(format)}
-							data-is-dynamo={isDynamo ? 'true' : undefined}
-							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
@@ -345,7 +342,15 @@ export const Card = ({
 								text-decoration: none;
 								min-height: 10px;
 							`}
-						/>
+						>
+							<Island deferUntil="visible">
+								<CardCommentCount
+									format={format}
+									discussionApiUrl={discussionApiUrl}
+									discussionId={discussionId}
+								/>
+							</Island>
+						</Link>
 					) : undefined
 				}
 				cardBranding={
