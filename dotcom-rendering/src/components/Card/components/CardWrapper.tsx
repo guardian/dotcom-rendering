@@ -33,6 +33,17 @@ const cardStyles = (
 		so this is required here */
 		position: relative;
 
+		/* Target Safari 10.1 */
+		/* https://www.browserstack.com/guide/create-browser-specific-css */
+		@media not all and (min-resolution: 0.001dpcm) {
+			@supports (-webkit-appearance: none) and
+				(not (stroke-color: transparent)) {
+				display: grid;
+				grid-auto-rows: min-content;
+				align-content: start;
+			}
+		}
+
 		:hover .image-overlay {
 			position: absolute;
 			top: 0;
