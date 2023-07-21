@@ -3,8 +3,9 @@ name: DCR Chromatic 👓
 on:
   push:
     branches: [main]
-  pull_request:
-    types: [opened, labeled, synchronize]
+  # Temporarily removed until we've found a fix for the chromatic permission issues
+  # pull_request:
+  #   types: [opened, labeled, synchronize]
 
 jobs:
   chromatic:
