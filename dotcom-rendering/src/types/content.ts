@@ -158,9 +158,9 @@ export interface DividerBlockElement {
 export interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
 	elementId: string;
-	embedUrl: string;
-	height: number;
-	width: number;
+	embedUrl?: string;
+	height?: number;
+	width?: number;
 	title?: string;
 	role?: RoleType;
 }

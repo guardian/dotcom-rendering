@@ -1,8 +1,5 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { fcp } from '../bork/fcp';
-import { fid } from '../bork/fid';
-import { remap } from '../bork/remap';
 import { islandNoscriptStyles } from '../components/Island';
 import { ASSET_ORIGIN } from '../lib/assets';
 import { getFontsCss } from '../lib/fonts-css';
@@ -23,8 +20,6 @@ type BaseProps = {
 	initTwitter?: string;
 	recipeMarkup?: string;
 	canonicalUrl?: string;
-	borkFCP: boolean;
-	borkFID: boolean;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
 	hasPageSkin?: boolean;
@@ -74,8 +69,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		renderingTarget,
 		offerHttp3,
 		hasPageSkin = false,
-		borkFCP,
-		borkFID,
 		weAreHiring,
 	} = props;
 
@@ -331,48 +324,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				${
-					borkFID || borkFCP
-						? `
-				<script>
-				try {
-					function getCookieValue(name) {
-						var nameEq = name + "=",
-							cookies = document.cookie.split(';'),
-							value = null;
-						cookies.forEach(function (cookie) {
-							while (cookie.charAt(0) === ' ') {
-								cookie = cookie.substring(1, cookie.length);
-							}
-							if (cookie.indexOf(nameEq) === 0) {
-								value = cookie.substring(nameEq.length, cookie.length);
-							}
-						});
-						return value;
-					}
-
-					// sorry
-					${
-						borkFID
-							? `var fidDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 1000);
-							(${fid.toString()})(fidDelay);`
-							: ''
-					}
-					${
-						borkFCP
-							? `var fcpDelay = (${remap.toString()})(getCookieValue('GU_mvt_id'), 10000, 4000);
-							(${fcp.toString()})(fcpDelay);`
-							: ''
-					}
-				} catch (e) {
-					// do nothing (not sorry)
-				}
-				</script>
-				`
-						: '<!-- no borking -->'
-				}
-
-
 				${initTwitter ?? ''}
 
 				${
@@ -400,26 +351,6 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style>${resets.resetCSS}</style>
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
-				${
-					borkFCP
-						? `
-				<style>
-					@keyframes bork-fcp-paint {
-						to {
-							opacity: 1;
-						}
-					}
-  					html.bork-fcp body {
-						opacity: 0.001;
-						animation-duration: var(--bork-fcp-amount);
-						animation-name: bork-fcp-paint;
-						animation-timing-function: steps(1);
-						animation-iteration-count: 1;
-						animation-fill-mode: forwards;
-					}
-				</style>`
-						: ''
-				}
 
 			</head>
 
