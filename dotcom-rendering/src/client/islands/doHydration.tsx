@@ -6,6 +6,16 @@ import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { measureDuration } from '../measureDuration';
 
+declare global {
+	interface DOMStringMap {
+		/**
+		 * Defines the current state of the Island.
+		 * `undefined` at server-side rendering
+		 */
+		islandStatus?: 'identified' | 'imported' | 'rendered' | 'hydrated';
+	}
+}
+
 /**
  * This function dynamically imports and then hydrates a specific component in
  * a specific part of the page
@@ -26,8 +36,8 @@ export const doHydration = async (
 ): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
-	const alreadyHydrated = element.dataset.guReady;
-	if (alreadyHydrated) return;
+	if (element.dataset.islandStatus !== undefined) return;
+	else element.dataset.islandStatus = 'identified';
 
 	const { start: importStart, end: importEnd } = measureDuration(
 		`import-${name}`,
@@ -42,6 +52,7 @@ export const doHydration = async (
 			/** The duration of importing the module for this island */
 			const importDuration = importEnd();
 			const clientOnly = element.hasAttribute('clientonly');
+			element.dataset.islandStatus = 'imported';
 
 			const { start: islandStart, end: islandEnd } = measureDuration(
 				`island-${name}`,
@@ -65,7 +76,6 @@ export const doHydration = async (
 				);
 			}
 
-			element.setAttribute('data-gu-ready', 'true');
 			/** The duration of rendering or hydrating this island */
 			const islandDuration = islandEnd();
 
@@ -74,14 +84,16 @@ export const doHydration = async (
 		.then(({ clientOnly, importDuration, islandDuration }) => {
 			if (!('getEntriesByType' in window.performance)) return;
 
-			const action = clientOnly ? 'Rendered' : 'Hydrated';
+			const action = clientOnly ? 'rendered' : 'hydrated';
+			element.dataset.islandStatus = action;
 
 			log(
 				'dotcom',
-				`🏝 ${action} <${name} /> in ${islandDuration}ms (imported in ${importDuration}ms)`,
+				`🏝 <${name} /> ${action} in ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
 		})
 		.catch((error) => {
+			element.dataset.islandStatus = undefined; // remove any island status
 			if (name && error.message.includes(name)) {
 				console.error(
 					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨`,

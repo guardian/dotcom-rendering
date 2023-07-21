@@ -61,8 +61,8 @@ describe('Interactivity', function () {
 			);
 			cy.get('gu-island[name=DiscussionContainer]').should(
 				'have.attr',
-				'data-gu-ready',
-				'true',
+				'data-island-status',
+				'rendered',
 			);
 			cy.get('[id=comment-154433663]').should('be.visible');
 		});
@@ -100,7 +100,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=MostViewedFooterData]')
 					.last()
-					.should('have.attr', 'data-gu-ready', 'true');
+					.should('have.attr', 'data-island-status', 'rendered');
 				cy.wait('@getMostRead');
 				cy.wait('@getMostReadGeo');
 				cy.get('[data-cy=mostviewed-footer]').should('exist');
@@ -210,7 +210,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.first()
-					.should('have.attr', 'data-gu-ready', 'true');
+					.should('have.attr', 'data-island-status', 'hydrated');
 				// Both subnav buttons show 'More'
 				cy.get('[data-cy=subnav-toggle]').first().contains('More');
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
@@ -227,7 +227,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.last()
-					.should('have.attr', 'data-gu-ready', 'true');
+					.should('have.attr', 'data-island-status', 'hydrated');
 				// The other subnav still shows 'More'
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
 				// Click Show more on the last sub nav

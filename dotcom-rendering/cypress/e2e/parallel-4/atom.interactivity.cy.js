@@ -105,7 +105,7 @@ describe('Why do wombats do square poos?', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()
@@ -132,7 +132,7 @@ describe('Why do wombats do square poos?', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()

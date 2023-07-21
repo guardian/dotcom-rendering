@@ -113,7 +113,7 @@ describe('Elements', function () {
 			// Wait for hydration
 			cy.get('gu-island[name=EmbedBlockComponent]')
 				.first({ timeout: 30000 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'hydrated');
 
 			cy.contains('hosted on wnyc.org');
 
