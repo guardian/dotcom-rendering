@@ -14,7 +14,8 @@ import type { Palette } from '../types/palette';
 import type { TagType } from '../types/tag';
 import { Badge } from './Badge';
 import { Hide } from './Hide';
-import { PulsingDot } from './PulsingDot';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -381,7 +382,9 @@ export const SeriesSectionLink = ({
 										`,
 									]}
 								>
-									<PulsingDot />
+									<Island deferUntil="visible">
+										<PulsingDot />
+									</Island>
 								</span>
 							)}
 						</Hide>
@@ -446,7 +449,9 @@ export const SeriesSectionLink = ({
 									`,
 								]}
 							>
-								<PulsingDot />
+								<Island deferUntil="visible">
+									<PulsingDot />
+								</Island>
 							</span>
 						)}
 					</Hide>
