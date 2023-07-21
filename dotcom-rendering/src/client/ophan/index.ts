@@ -1,4 +1,3 @@
-import type { OphanABEvent } from '@guardian/libs';
 import { abTestPayload, record, recordPerformance } from './ophan';
 
 // side effect only
@@ -10,18 +9,6 @@ export const ophan = (): Promise<void> => {
 
 	// Record server-side AB test variants (i.e. control or variant)
 	record(abTestPayload(window.guardian.config.tests));
-
-	const borked = Object.entries(window.guardian.borkWebVitals);
-	if (borked.length > 0) {
-		const abTestRegister: { [key: string]: OphanABEvent } = {};
-		borked.forEach(([testName, variantName]) => {
-			abTestRegister[`abBork${testName}`] = {
-				variantName,
-				complete: false,
-			};
-		});
-		record({ abTestRegister });
-	}
 
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {
