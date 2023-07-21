@@ -138,6 +138,17 @@ const captionStyles = css`
 	);
 	color: ${neutral[100]};
 	padding: 60px 8px 8px;
+
+	${from.tablet} {
+		top: 0;
+		bottom: initial;
+		padding-top: 8px;
+		background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.8) 0%,
+			rgba(0, 0, 0, 0) 100%
+		);
+	}
 `;
 
 /**
