@@ -3,11 +3,20 @@ import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
 
-const handleGuCookieError = () => {
+const handleCommercialErrors = () => {
 	cy.on('uncaught:exception', (err, runnable) => {
 		// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
 		// something with the url which is failing in Cypress with a malformed URI error
 		if (err.message.includes('URI malformed')) {
+			// This error is unrelated to the test in question so return  false to prevent
+			// this commercial error from failing this test
+			return false;
+		}
+		if (
+			err.message.includes(
+				"Cannot read properties of undefined (reading 'map')",
+			)
+		) {
 			// This error is unrelated to the test in question so return  false to prevent
 			// this commercial error from failing this test
 			return false;
@@ -26,7 +35,7 @@ const cmpIframe = () => {
 describe('Braze messaging', function () {
 	beforeEach(function () {
 		cy.clearLocalStorage();
-		handleGuCookieError();
+		handleCommercialErrors();
 		setLocalBaseUrl();
 	});
 
