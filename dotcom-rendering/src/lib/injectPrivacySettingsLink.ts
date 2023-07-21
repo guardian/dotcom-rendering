@@ -49,3 +49,18 @@ export const injectPrivacySettingsLink = (): void => {
 		}
 	}
 };
+
+// Inject privacy link when document has finished loading
+export const injectPrivacySettingsLinkWhenReady = (): void => {
+	if (document.readyState === 'loading') {
+		document.addEventListener(
+			'readystatechange',
+			() => {
+				injectPrivacySettingsLink();
+			},
+			{ once: true },
+		);
+	} else {
+		injectPrivacySettingsLink();
+	}
+};
