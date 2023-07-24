@@ -172,7 +172,7 @@ export const NewsletterCard = ({
 		submitComponentEvent(
 			{
 				component: {
-					componentType: 'NEWSLETTER_SUBSCRIPTION', // TO DO - change to CONTAINER_CARD when Ophan package updated
+					componentType: 'CARD',
 					id: `DCR NewsletterCard ${newsletter.identityName}`,
 				},
 				action: 'VIEW',
