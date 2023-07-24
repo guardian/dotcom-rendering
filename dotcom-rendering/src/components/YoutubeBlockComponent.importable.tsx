@@ -232,8 +232,9 @@ export const YoutubeBlockComponent = ({
 				isMainMedia={isMainMedia}
 				imaEnabled={imaEnabled}
 				abTestParticipations={abTestParticipations}
+				// Temp commenting as couldn't get prepush commit to work with locally linked atoms rendering
 				// kicker={kicker}
-				shouldPauseOutOfView={pauseOffscreenVideo}
+				// shouldPauseOutOfView={pauseOffscreenVideo}
 			/>
 			{!hideCaption && (
 				<Caption
