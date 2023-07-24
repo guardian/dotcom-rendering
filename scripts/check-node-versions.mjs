@@ -41,6 +41,14 @@ const requiredNodeVersionMatches =
 			filepath: 'apps-rendering/riff-raff.yaml',
 			pattern: /^ +Recipe: .+-mobile-node(\d+\.\d+\.\d+).*$/m,
 		},
+		{
+			filepath: 'dotcom-rendering/package.json',
+			pattern: /^\s*"@types\/node": "(\d+\.\d+\.\d+)",?$/m,
+		},
+		{
+			filepath: 'apps-rendering/package.json',
+			pattern: /^\s*"@types\/node": "(\d+\.\d+\.\d+)",?$/m,
+		},
 	]);
 
 const problems = (
