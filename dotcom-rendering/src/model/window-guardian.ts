@@ -108,7 +108,6 @@ export const makeWindowGuardian = ({
 		};
 	};
 	GAData?: GADataType;
-	borkWebVitals: typeof window.guardian.borkWebVitals;
 } => {
 	return {
 		config: {
@@ -158,6 +157,5 @@ export const makeWindowGuardian = ({
 			},
 		},
 		GAData,
-		borkWebVitals: {},
 	};
 };

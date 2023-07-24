@@ -1666,10 +1666,7 @@
             "required": [
                 "_type",
                 "elementId",
-                "embedUrl",
-                "height",
-                "isThirdPartyTracking",
-                "width"
+                "isThirdPartyTracking"
             ]
         },
         "EmbedBlockElement": {
