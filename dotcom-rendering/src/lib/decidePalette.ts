@@ -2076,6 +2076,48 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 	}
 };
 
+const textExpandableAtom = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return lifestyle[300];
+		case ArticleSpecial.SpecialReport:
+			return news[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
+	}
+};
+
+const textExpandableAtomHover = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2146,6 +2188,8 @@ export const decidePalette = (
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
 			tableOfContents: textTableOfContents(),
+			expandableAtom: textExpandableAtom(format),
+			expandableAtomHover: textExpandableAtomHover(format),
 		},
 		background: {
 			article: backgroundArticle(format),
