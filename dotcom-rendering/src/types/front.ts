@@ -147,7 +147,7 @@ interface MediaAsset {
 }
 
 /** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
-export interface FEMediaAtoms {
+export interface FEMediaAtom {
 	id: string;
 	// defaultHtml: string; // currently unused
 	assets: MediaAsset[];
@@ -206,7 +206,7 @@ export type FEFrontCard = {
 			};
 			elements: {
 				mainVideo?: unknown;
-				mediaAtoms: FEMediaAtoms[];
+				mediaAtoms: FEMediaAtom[];
 			};
 			tags: { tags: FETagType[] };
 		};

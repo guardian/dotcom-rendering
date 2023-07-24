@@ -10,7 +10,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
-	FEMediaAtoms,
+	FEMediaAtom,
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
@@ -185,9 +185,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (
-	mediaAtom?: FEMediaAtoms,
-): MainMedia | undefined => {
+const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
@@ -220,7 +218,7 @@ const getActiveMediaAtom = (
 const decideMedia = (
 	format: ArticleFormat,
 	showMainVideo?: boolean,
-	mediaAtom?: FEMediaAtoms,
+	mediaAtom?: FEMediaAtom,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design
