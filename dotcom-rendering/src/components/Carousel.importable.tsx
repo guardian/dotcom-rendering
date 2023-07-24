@@ -98,7 +98,6 @@ const isLastCardShowing = (index: number, totalStories: number) =>
 
 const containerMargins = css`
 	margin-top: 6px;
-	margin-bottom: 24px;
 
 	margin-left: 0px;
 	margin-right: 0px;
@@ -439,6 +438,16 @@ type CarouselCardProps = {
 	isVideoContainer?: boolean;
 };
 
+const CarouselCardStyles = css`
+	min-width: 320px;
+	width: calc((100vw - 40px) / 1.5); // Show 1.5 cards
+	overflow: hidden;
+
+	${until.phablet} {
+		width: calc((100vw - 40px)); // Show 1 card on small screens
+	}
+`;
+
 const CarouselCard = ({
 	format,
 	linkTo,
@@ -463,34 +472,34 @@ const CarouselCard = ({
 		snapAlignStart={true}
 		verticalDividerColour={verticalDividerColour}
 	>
-		<Card
-			linkTo={linkTo}
-			format={format}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText}
-			imageUrl={imageUrl}
-			imageSize={'small'}
-			showClock={true}
-			showAge={true}
-			imagePositionOnMobile="top"
-			minWidthInPixels={isVideoContainer ? 600 : 220}
-			pauseOffscreenVideo={isVideoContainer}
-			showQuotedHeadline={format.design === ArticleDesign.Comment}
-			dataLinkName={dataLinkName}
-			discussionId={discussionId}
-			branding={branding}
-			isExternalLink={false}
-			mainMedia={mainMedia}
-			videoSize={
-				isVideoContainer
-					? 'large enough to play: at least 480px'
-					: 'too small to play: 479px or less'
-			}
-			onwardsSource={onwardsSource}
-			minWidthInPixelsOnMobile={isVideoContainer ? 380 : undefined}
-			containerType={isVideoContainer ? 'fixed/video' : undefined}
-		/>
+		<div css={CarouselCardStyles}>
+			<Card
+				linkTo={linkTo}
+				format={format}
+				headlineText={headlineText}
+				webPublicationDate={webPublicationDate}
+				kickerText={kickerText}
+				imageUrl={imageUrl}
+				imageSize={'small'}
+				showClock={true}
+				showAge={true}
+				imagePositionOnMobile="top"
+				pauseOffscreenVideo={isVideoContainer}
+				showQuotedHeadline={format.design === ArticleDesign.Comment}
+				dataLinkName={dataLinkName}
+				discussionId={discussionId}
+				branding={branding}
+				isExternalLink={false}
+				mainMedia={mainMedia}
+				videoSize={
+					isVideoContainer
+						? 'large enough to play: at least 480px'
+						: 'too small to play: 479px or less'
+				}
+				onwardsSource={onwardsSource}
+				containerType={isVideoContainer ? 'fixed/video' : undefined}
+			/>
+		</div>
 	</LI>
 );
 
