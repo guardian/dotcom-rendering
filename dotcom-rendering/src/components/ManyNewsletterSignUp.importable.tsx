@@ -8,7 +8,7 @@ import {
 import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { ReCAPTCHA } from 'react-google-recaptcha';
 import {
 	getCaptchaSiteKey,
 	mockRequestMultipleSignUps,
