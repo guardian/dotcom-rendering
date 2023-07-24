@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body } from '@guardian/source-foundations';
 import { DropCap } from './DropCap';
 
@@ -32,7 +32,7 @@ export const Article = () => {
 					format={{
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				/>
 				here once was a dropcap. Lorem ipsum dolor sit amet, consectetur
@@ -62,7 +62,7 @@ export const OpinionArticle = () => {
 					format={{
 						design: ArticleDesign.Standard,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 				/>
 				ong, long ago, there lived a dropcap. Lorem ipsum dolor sit
@@ -92,7 +92,7 @@ export const Feature = () => {
 					format={{
 						design: ArticleDesign.Feature,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Culture,
+						theme: Pillar.Culture,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
@@ -122,7 +122,7 @@ export const PhotoEssay = () => {
 					format={{
 						design: ArticleDesign.PhotoEssay,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
@@ -152,7 +152,7 @@ export const Interview = () => {
 					format={{
 						design: ArticleDesign.Interview,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Lifestyle,
+						theme: Pillar.Lifestyle,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
@@ -182,7 +182,7 @@ export const Comment = () => {
 					format={{
 						design: ArticleDesign.Comment,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Opinion,
+						theme: Pillar.Opinion,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
@@ -212,7 +212,7 @@ export const CommentSport = () => {
 					format={{
 						design: ArticleDesign.Comment,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,
@@ -242,7 +242,7 @@ export const CommentCulture = () => {
 					format={{
 						design: ArticleDesign.Comment,
 						display: ArticleDisplay.Standard,
-						theme: ArticlePillar.Culture,
+						theme: Pillar.Culture,
 					}}
 				/>
 				nce upon a time there was a dropcap. Lorem ipsum dolor sit amet,

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { SignedInAs } from './SignedInAs';
 
@@ -39,7 +39,7 @@ export const SignedIn = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -57,7 +57,7 @@ export const Image = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -78,7 +78,7 @@ export const Banned = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -102,7 +102,7 @@ export const NoDisplayName = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -123,7 +123,7 @@ export const NotSignedIn = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -140,7 +140,7 @@ export const DiscussionClosed = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -160,7 +160,7 @@ export const DiscussionClosedSignedOut = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -179,7 +179,7 @@ export const DiscussionDisabled = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}
@@ -199,7 +199,7 @@ export const DiscussionDisabledSignedOut = () => {
 		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				})}

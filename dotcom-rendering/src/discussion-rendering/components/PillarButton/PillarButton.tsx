@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { palette } from '../../lib/palette';
@@ -22,15 +22,15 @@ type Props = {
 // likely caused by the fact labs only uses 300 & 400 so the union is restricted
 const dark = (pillar: ArticleTheme): string => {
 	switch (pillar) {
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return '#FBF6EF';
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return '#FEF9F5';
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return '#FEEEF7';
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return '#F1F8FC';
-		case ArticlePillar.News:
+		case Pillar.News:
 		case ArticleSpecial.SpecialReport:
 		case ArticleSpecial.Labs:
 		default:

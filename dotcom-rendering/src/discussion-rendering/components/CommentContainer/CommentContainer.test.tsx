@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../../lib/mockRESTCalls';
@@ -59,7 +59,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -97,7 +97,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -134,7 +134,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithReply} //TODO: should be comments with reponses
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}
@@ -172,7 +172,7 @@ describe('CommentContainer', () => {
 			<CommentContainer
 				shortUrl=""
 				comment={commentWithoutReply} //TODO: should be comments with reponses
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				user={aUser}
 				threads="collapsed"
 				commentBeingRepliedTo={commentBeingRepliedTo}

@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { SubMeta } from './SubMeta';
@@ -65,7 +65,7 @@ export const News = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -86,7 +86,7 @@ export const Sport = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -107,7 +107,7 @@ export const Culture = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -128,7 +128,7 @@ export const Lifestyle = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}
@@ -149,7 +149,7 @@ export const Opinion = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 				subMetaKeywordLinks={subMetaKeywordLinks}
 				subMetaSectionLinks={subMetaSectionLinks}

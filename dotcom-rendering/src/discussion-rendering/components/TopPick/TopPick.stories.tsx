@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
 import type { CommentType } from '../../discussionTypes';
 import { TopPick } from './TopPick';
@@ -81,7 +81,7 @@ export const LongPick = () => (
 		`}
 	>
 		<TopPick
-			pillar={ArticlePillar.News}
+			pillar={Pillar.News}
 			comment={comment}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -98,7 +98,7 @@ export const ShortPick = () => (
 		`}
 	>
 		<TopPick
-			pillar={ArticlePillar.Opinion}
+			pillar={Pillar.Opinion}
 			comment={commentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}
@@ -116,7 +116,7 @@ export const LongPickContributor = () => (
 		`}
 	>
 		<TopPick
-			pillar={ArticlePillar.News}
+			pillar={Pillar.News}
 			comment={commentContributor}
 			userMadeComment={false}
 			onPermalinkClick={() => {}}
@@ -133,7 +133,7 @@ export const ShortPickContributor = () => (
 		`}
 	>
 		<TopPick
-			pillar={ArticlePillar.Opinion}
+			pillar={Pillar.Opinion}
 			comment={contributorCommentWithShortBody}
 			authStatus={signedInStatus}
 			userMadeComment={false}

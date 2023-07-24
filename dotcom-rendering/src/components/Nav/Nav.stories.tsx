@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
 import { userEvent, within } from '@storybook/testing-library';
 import { Section } from '../Section';
@@ -20,7 +20,7 @@ export const StandardStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				selectedPillar={ArticlePillar.News}
+				selectedPillar={Pillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -42,7 +42,7 @@ export const StandardStoryTopBarHeader = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				selectedPillar={ArticlePillar.News}
+				selectedPillar={Pillar.News}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -64,7 +64,7 @@ export const OpinionStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				selectedPillar={ArticlePillar.Opinion}
+				selectedPillar={Pillar.Opinion}
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
@@ -87,7 +87,7 @@ export const ImmersiveStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				selectedPillar={ArticlePillar.News}
+				selectedPillar={Pillar.News}
 				displayRoundel={true}
 				isImmersive={true}
 				nav={nav}
@@ -112,7 +112,7 @@ export const ExpandedMenuStory = () => {
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
-				selectedPillar={ArticlePillar.News}
+				selectedPillar={Pillar.News}
 				displayRoundel={false}
 				isImmersive={false}
 				nav={nav}

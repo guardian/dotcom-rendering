@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { DropdownOptionType } from '../../discussionTypes';
 import { Dropdown } from './Dropdown';
@@ -35,7 +35,7 @@ describe('Dropdown', () => {
 		render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={label}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -49,7 +49,7 @@ describe('Dropdown', () => {
 		render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={'The label'}
 				options={noActiveOptions}
 				onSelect={() => {}}
@@ -65,7 +65,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -80,7 +80,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -97,7 +97,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -115,7 +115,7 @@ describe('Dropdown', () => {
 		const { container } = render(
 			<Dropdown
 				id="abc"
-				pillar={ArticlePillar.News}
+				pillar={Pillar.News}
 				label={'The label'}
 				options={threadOptions}
 				onSelect={() => {}}
@@ -135,7 +135,7 @@ it('should trigger the correct onSelect callbacks when an option is clicked', (
 	render(
 		<Dropdown
 			id="abc"
-			pillar={ArticlePillar.News}
+			pillar={Pillar.News}
 			label={'The label'}
 			options={threadOptions}
 			onSelect={mockCallback}
