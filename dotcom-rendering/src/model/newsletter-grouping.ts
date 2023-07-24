@@ -45,7 +45,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'inside-saturday',
 				'house-to-home',
-				'save-for-later',
+				'saved-for-later',
 				'five-great-reads',
 				'the-upside',
 			],
@@ -63,7 +63,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'football-daily',
+				'the-fiver',
 				'moving-the-goalposts',
 				'the-spin',
 				'the-breakdown',
@@ -85,7 +85,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'International correspondents',
 			newsletters: [
-				'first-thing',
+				'us-morning-newsletter',
 				'morning-mail',
 				'afternoon-update',
 				'patriarchy',
@@ -99,7 +99,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Get started',
 			newsletters: [
-				'first-thing',
+				'us-morning-newsletter',
 				'today-us',
 				'green-light',
 				'best-of-opinion-us',
@@ -135,7 +135,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'inside-saturday',
 				'house-to-home',
-				'save-for-later',
+				'saved-for-later',
 				'the-upside',
 				'the-long-read',
 			],
@@ -153,7 +153,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Sport',
 			newsletters: [
-				'football-daily',
+				'the-fiver',
 				'moving-the-goalposts',
 				'the-spin',
 				'the-breakdown',
@@ -205,7 +205,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		{
 			title: 'Culture Picks',
 			newsletters: [
-				'save-for-later',
+				'saved-for-later',
 				'hear-here',
 				'sleeve-notes',
 				'design-review',
@@ -216,7 +216,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 		},
 		{
 			title: 'Weekend reads',
-			newsletters: ['five-great-reads', 'The-upside', 'the-long-read'],
+			newsletters: ['five-great-reads', 'the-upside', 'the-long-read'],
 		},
 		{
 			title: 'Go deeper',
@@ -231,7 +231,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Sport',
 			newsletters: [
 				'sports-au',
-				'football-daily',
+				'the-fiver',
 				'moving-the-goalposts',
 				'the-spin',
 				'the-recap',
@@ -254,7 +254,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'International correspondents',
 			newsletters: [
 				'morning-briefing',
-				'first-thing',
+				'us-morning-newsletter',
 				'this-is-europe',
 				'business-today',
 				'word-of-mouth',
