@@ -46,11 +46,6 @@ import type {
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
 
-/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size */
-export type VideoSize =
-	| 'large enough to play: at least 480px'
-	| 'too small to play: 479px or less';
-
 export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
@@ -72,7 +67,8 @@ export type Props = {
 	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
-	videoSize: VideoSize;
+	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size */
+	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	starRating?: number;
@@ -197,7 +193,7 @@ const getMedia = ({
 	isCrossword,
 	slideshowImages,
 	mainMedia,
-	videoSize,
+	isPlayableMediaCard,
 }: {
 	imageUrl?: string;
 	imageAltText?: string;
@@ -205,13 +201,9 @@ const getMedia = ({
 	isCrossword?: boolean;
 	slideshowImages?: DCRSlideshowImage[];
 	mainMedia?: MainMedia;
-	videoSize: VideoSize;
+	isPlayableMediaCard?: boolean;
 }) => {
-	if (
-		mainMedia &&
-		mainMedia.type === 'Video' &&
-		videoSize === 'large enough to play: at least 480px'
-	) {
+	if (mainMedia && mainMedia.type === 'Video' && !!isPlayableMediaCard) {
 		return { type: 'video', mainMedia } as const;
 	}
 	if (slideshowImages) return { type: 'slideshow', slideshowImages } as const;
@@ -264,7 +256,7 @@ export const Card = ({
 	avatarUrl,
 	showClock,
 	mainMedia,
-	videoSize,
+	isPlayableMediaCard,
 	kickerText,
 	showPulsingDot,
 	starRating,
@@ -369,9 +361,9 @@ export const Card = ({
 		);
 	}
 
-	const showPlayIcon =
-		mainMedia?.type === 'Video' &&
-		videoSize === 'too small to play: 479px or less';
+	// If the card isn't playable, we need to show a play icon.
+	// Otherwise, this is handled by the YoutubeAtom
+	const showPlayIcon = mainMedia?.type === 'Video' && !isPlayableMediaCard;
 
 	const media = getMedia({
 		imageUrl,
@@ -380,7 +372,7 @@ export const Card = ({
 		isCrossword,
 		slideshowImages,
 		mainMedia,
-		videoSize,
+		isPlayableMediaCard,
 	});
 	return (
 		<CardWrapper

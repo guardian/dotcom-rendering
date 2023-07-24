@@ -39,7 +39,7 @@ export const FrontCard = (props: Props) => {
 		imageUrl: trail.image,
 		imageAltText: trail.imageAltText,
 		isCrossword: trail.isCrossword,
-		videoSize: 'large enough to play: at least 480px',
+		isPlayableMediaCard: true,
 		starRating: trail.starRating,
 		dataLinkName: trail.dataLinkName,
 		snapData: trail.snapData,
