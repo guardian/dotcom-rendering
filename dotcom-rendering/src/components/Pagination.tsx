@@ -85,7 +85,8 @@ export const Pagination = ({
 									icon={<SvgChevronLeftDouble />}
 									iconSide="left"
 									hideLabel={true}
-									href={newest}
+									// There’s no pagination at the top of the newest page
+									href={`${newest}#maincontent`}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -97,7 +98,8 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronLeftDouble />}
 									iconSide="left"
-									href={newest}
+									// There’s no pagination at the top of the newest page
+									href={`${newest}#maincontent`}
 									cssOverrides={cssOverrides}
 								>
 									Newest
@@ -111,7 +113,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronLeftSingle />}
 							hideLabel={true}
-							href={newer}
+							href={`${newer}#${id}`}
 							cssOverrides={cssOverrides}
 						>
 							Previous
@@ -142,7 +144,7 @@ export const Pagination = ({
 							priority="tertiary"
 							icon={<SvgChevronRightSingle />}
 							hideLabel={true}
-							href={older}
+							href={`${older}#${id}`}
 							cssOverrides={cssOverrides}
 						>
 							Next
@@ -156,7 +158,7 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={oldest}
+									href={`${oldest}#${id}`}
 									hideLabel={true}
 									cssOverrides={cssOverrides}
 								>
@@ -169,7 +171,7 @@ export const Pagination = ({
 									priority="tertiary"
 									icon={<SvgChevronRightDouble />}
 									iconSide="right"
-									href={oldest}
+									href={`${oldest}#${id}`}
 									cssOverrides={cssOverrides}
 								>
 									Oldest
