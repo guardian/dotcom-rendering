@@ -136,6 +136,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'inside-saturday',
 				'house-to-home',
 				'saved-for-later',
+				'five-great-reads',
 				'the-upside',
 				'the-long-read',
 			],
