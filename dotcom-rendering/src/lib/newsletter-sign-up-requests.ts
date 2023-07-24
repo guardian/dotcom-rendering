@@ -124,9 +124,6 @@ type TrackingEventDescription =
 	| 'captcha-execute'
 	| 'captcha-not-loaded-when-needed'
 	| 'form-submit'
-	| 'add-newsletter'
-	| 'remove-newsletter'
-	| 'remove-all-newsletters'
 	| 'failure-response'
 	| 'success-response';
 
@@ -144,9 +141,6 @@ const trackingEventDescriptionToOphanAction = (
 		case 'captcha-not-loaded-when-needed':
 			return 'CLOSE';
 		case 'form-submit':
-		case 'add-newsletter':
-		case 'remove-newsletter':
-		case 'remove-all-newsletters':
 			return 'CLICK';
 		case 'failure-response':
 			return 'RETURN';
