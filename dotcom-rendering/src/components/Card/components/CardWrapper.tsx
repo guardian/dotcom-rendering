@@ -156,7 +156,7 @@ const topBarStyles = ({
 			? palette.text.dynamoKicker
 			: palette.topBar.card};
 		content: '';
-		height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
+		height: 1px;
 		z-index: 2;
 		width: 100%;
 	`;
