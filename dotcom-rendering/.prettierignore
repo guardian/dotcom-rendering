@@ -25,6 +25,7 @@ node_modules/
 !/cypress/**/*.ts
 !/scripts/**/*.js
 !/.storybook/**/*.js
+!/index.d.ts
 !package.json
 
 # Ignore specific files

@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { FEFrontCard, TreatType } from '../types/front';
 
@@ -24,7 +24,7 @@ const PLATFORM_TREATS: TreatType[] = [
 				text: 'Get the headlines & more in a daily email',
 			},
 		],
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 		containerTitle: 'Spotlight',
 		editionId: 'US',
 		imageUrl:
@@ -40,7 +40,7 @@ const PLATFORM_TREATS: TreatType[] = [
 				text: 'Get the headlines & more in a daily email',
 			},
 		],
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 		containerTitle: 'US headlines',
 		imageUrl:
 			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
@@ -54,7 +54,7 @@ const PLATFORM_TREATS: TreatType[] = [
 				text: 'Qatar: beyond the football',
 			},
 		],
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 		containerTitle: 'Qatar: beyond the football',
 		imageUrl:
 			'https://uploads.guim.co.uk/2023/06/02/BALL-nugget-grass_5.png',

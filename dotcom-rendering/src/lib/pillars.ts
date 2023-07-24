@@ -1,5 +1,5 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { ArticleTheme } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import {
 	border,
 	culture,
@@ -61,12 +61,12 @@ type SpecialAltPalette = {
 };
 
 // pillarPalette_DO_NOT_USE should no longer be used. Use palette from  decidePalette instead
-// eslint-disable-next-line @typescript-eslint/naming-convention
+
 export const pillarPalette_DO_NOT_USE: Record<
 	ArticleTheme,
 	PillarPalette | SpecialPalette | LabsPalette | SpecialAltPalette
 > = {
-	[ArticlePillar.News]: {
+	[Pillar.News]: {
 		dark: news[300],
 		main: news[400],
 		bright: news[500],
@@ -78,7 +78,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 		600: news[600],
 		800: news[800],
 	},
-	[ArticlePillar.Opinion]: {
+	[Pillar.Opinion]: {
 		dark: opinion[300],
 		main: opinion[300],
 		bright: opinion[500],
@@ -90,7 +90,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 		600: opinion[600],
 		800: opinion[800],
 	},
-	[ArticlePillar.Sport]: {
+	[Pillar.Sport]: {
 		dark: sport[300],
 		main: sport[400],
 		bright: sport[500],
@@ -102,7 +102,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 		600: sport[600],
 		800: sport[800],
 	},
-	[ArticlePillar.Culture]: {
+	[Pillar.Culture]: {
 		dark: culture[300],
 		main: culture[400],
 		bright: culture[500],
@@ -114,7 +114,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 		600: culture[600],
 		800: culture[800],
 	},
-	[ArticlePillar.Lifestyle]: {
+	[Pillar.Lifestyle]: {
 		dark: lifestyle[300],
 		main: lifestyle[400],
 		bright: lifestyle[500],
@@ -165,11 +165,11 @@ It returns an object with each pillar as the keys and f('pillar') as the value
 export const pillarMap: <T>(f: (name: ArticleTheme) => T) => {
 	[K in ArticleTheme]: T;
 } = (f) => ({
-	[ArticlePillar.News]: f(ArticlePillar.News),
-	[ArticlePillar.Opinion]: f(ArticlePillar.Opinion),
-	[ArticlePillar.Sport]: f(ArticlePillar.Sport),
-	[ArticlePillar.Culture]: f(ArticlePillar.Culture),
-	[ArticlePillar.Lifestyle]: f(ArticlePillar.Lifestyle),
+	[Pillar.News]: f(Pillar.News),
+	[Pillar.Opinion]: f(Pillar.Opinion),
+	[Pillar.Sport]: f(Pillar.Sport),
+	[Pillar.Culture]: f(Pillar.Culture),
+	[Pillar.Lifestyle]: f(Pillar.Lifestyle),
 	[ArticleSpecial.Labs]: f(ArticleSpecial.Labs),
 	[ArticleSpecial.SpecialReport]: f(ArticleSpecial.SpecialReport),
 	[ArticleSpecial.SpecialReportAlt]: f(ArticleSpecial.SpecialReportAlt),

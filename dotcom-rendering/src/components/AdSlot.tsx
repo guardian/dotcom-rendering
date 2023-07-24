@@ -424,6 +424,7 @@ export const AdSlot = ({
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
+						data-refresh="false"
 						aria-hidden="true"
 					/>
 				</div>

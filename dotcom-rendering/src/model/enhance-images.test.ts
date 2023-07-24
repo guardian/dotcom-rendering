@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
@@ -532,7 +532,7 @@ describe('Enhance Images', () => {
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							pillar: ArticlePillar.News,
+							pillar: Pillar.News,
 							role: 'inline',
 						},
 						image,
@@ -553,7 +553,7 @@ describe('Enhance Images', () => {
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							pillar: ArticlePillar.News,
+							pillar: Pillar.News,
 							role: 'inline',
 						},
 						{

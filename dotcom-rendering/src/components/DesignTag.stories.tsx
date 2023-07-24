@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { DesignTag } from './DesignTag';
 
@@ -18,7 +18,7 @@ export const Analysis = () => {
 			format={{
 				design: ArticleDesign.Analysis,
 				display: ArticleDisplay.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	);
@@ -36,7 +36,7 @@ export const Interview = () => {
 				format={{
 					design: ArticleDesign.Interview,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</div>
@@ -55,7 +55,7 @@ export const Explainer = () => {
 				format={{
 					design: ArticleDesign.Explainer,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</div>
@@ -74,7 +74,7 @@ export const Letter = () => {
 				format={{
 					design: ArticleDesign.Letter,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</div>
@@ -106,7 +106,7 @@ export const Timeline = () => {
 				format={{
 					design: ArticleDesign.Timeline,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</div>
@@ -125,7 +125,7 @@ export const Profile = () => {
 				format={{
 					design: ArticleDesign.Profile,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 			/>
 		</div>

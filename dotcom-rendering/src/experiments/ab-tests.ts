@@ -1,6 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
-import { billboardsInMerch } from './tests/billboards-in-merch';
+import { billboardsInMerchHigh } from './tests/billboards-in-merch-high';
 import { consentlessAds } from './tests/consentless-ads';
 import { elementsManager } from './tests/elements-manager';
 import { integrateIma } from './tests/integrate-ima';
@@ -18,7 +18,7 @@ export const tests: ABTest[] = [
 	signInGateCopyTestJan2023,
 	consentlessAds,
 	integrateIma,
-	billboardsInMerch,
+	billboardsInMerchHigh,
 	elementsManager,
 	limitInlineMerch,
 ];

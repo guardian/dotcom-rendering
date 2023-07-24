@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
@@ -32,7 +32,7 @@ export const Unquoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				})}
 			/>
 			<h1>Short</h1>
@@ -41,7 +41,7 @@ export const Unquoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				})}
 			/>
 		</div>
@@ -58,7 +58,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				})}
 				quoted={true}
 			/>
@@ -68,7 +68,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				})}
 				quoted={true}
 			/>
@@ -78,7 +78,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				})}
 				quoted={true}
 			/>
@@ -88,7 +88,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				})}
 				quoted={true}
 			/>
@@ -98,7 +98,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				})}
 				quoted={true}
 			/>
@@ -128,7 +128,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				})}
 				quoted={true}
 			/>
@@ -138,7 +138,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.DeadBlog,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				})}
 				quoted={true}
 			/>
@@ -148,7 +148,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				})}
 				quoted={true}
 			/>
@@ -158,7 +158,7 @@ export const Quoted = () => {
 				palette={decidePalette({
 					design: ArticleDesign.DeadBlog,
 					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				})}
 				quoted={true}
 			/>

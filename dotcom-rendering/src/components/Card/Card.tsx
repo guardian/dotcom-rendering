@@ -409,6 +409,7 @@ export const Card = ({
 							<Slideshow
 								images={media.slideshowImages}
 								imageSize={imageSize}
+								isDynamo={isDynamo}
 							/>
 						)}
 						{media.type === 'avatar' && (

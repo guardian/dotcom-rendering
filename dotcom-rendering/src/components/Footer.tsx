@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import type { Pillar } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -318,7 +318,7 @@ export const Footer = ({
 	contributionsServiceUrl,
 }: {
 	pillars: PillarLinkType[];
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: Pillar;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
 	editionId: EditionId;

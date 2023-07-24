@@ -1,19 +1,17 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 
-export const themeToPillar = (
-	theme?: ArticleTheme,
-): ArticlePillar | undefined => {
+export const themeToPillar = (theme?: ArticleTheme): Pillar | undefined => {
 	switch (theme) {
-		case ArticlePillar.News:
-			return ArticlePillar.News;
-		case ArticlePillar.Sport:
-			return ArticlePillar.Sport;
-		case ArticlePillar.Opinion:
-			return ArticlePillar.Opinion;
-		case ArticlePillar.Culture:
-			return ArticlePillar.Culture;
-		case ArticlePillar.Lifestyle:
-			return ArticlePillar.Lifestyle;
+		case Pillar.News:
+			return Pillar.News;
+		case Pillar.Sport:
+			return Pillar.Sport;
+		case Pillar.Opinion:
+			return Pillar.Opinion;
+		case Pillar.Culture:
+			return Pillar.Culture;
+		case Pillar.Lifestyle:
+			return Pillar.Lifestyle;
 		default:
 			return undefined;
 	}

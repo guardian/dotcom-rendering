@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { NavType } from '../../model/extract-nav';
 
 export const nav: NavType = {
@@ -7,7 +7,7 @@ export const nav: NavType = {
 			title: 'News',
 			longTitle: 'Headlines',
 			url: '/',
-			pillar: ArticlePillar.News,
+			pillar: Pillar.News,
 			children: [
 				{
 					title: 'UK',
@@ -444,7 +444,7 @@ export const nav: NavType = {
 			title: 'Opinion',
 			longTitle: 'Opinion home',
 			url: '/commentisfree',
-			pillar: ArticlePillar.Opinion,
+			pillar: Pillar.Opinion,
 			children: [
 				{
 					title: 'The Guardian view',
@@ -488,7 +488,7 @@ export const nav: NavType = {
 			title: 'Sport',
 			longTitle: 'Sport home',
 			url: '/sport',
-			pillar: ArticlePillar.Sport,
+			pillar: Pillar.Sport,
 			children: [
 				{
 					title: 'Football',
@@ -617,7 +617,7 @@ export const nav: NavType = {
 			title: 'Culture',
 			longTitle: 'Culture home',
 			url: '/culture',
-			pillar: ArticlePillar.Culture,
+			pillar: Pillar.Culture,
 			children: [
 				{
 					title: 'Film',
@@ -682,7 +682,7 @@ export const nav: NavType = {
 			title: 'Lifestyle',
 			longTitle: 'Lifestyle home',
 			url: '/lifeandstyle',
-			pillar: ArticlePillar.Lifestyle,
+			pillar: Pillar.Lifestyle,
 			children: [
 				{
 					title: 'Fashion',
@@ -1574,5 +1574,5 @@ export const nav: NavType = {
 				'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_supporter_cta&acquisitionData=%7B"source":"GUARDIAN_WEB","componentType":"ACQUISITIONS_FOOTER","componentId":"amp_footer_support_supporter_cta"%7D',
 		},
 	},
-	selectedPillar: ArticlePillar.News,
+	selectedPillar: Pillar.News,
 };

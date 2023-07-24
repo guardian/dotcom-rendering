@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar, joinUrl } from '@guardian/libs';
+import { joinUrl, Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { OnwardsSource } from '../types/onwards';
 import type { TagType } from '../types/tag';
@@ -115,31 +115,31 @@ const getContainerDataUrl = (
 	ajaxUrl: string,
 ) => {
 	switch (pillar) {
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return joinUrl(
 				ajaxUrl,
 				'container/data',
 				`${getContainer('sport', editionId)}.json`,
 			);
-		case ArticlePillar.News:
+		case Pillar.News:
 			return joinUrl(
 				ajaxUrl,
 				'container/data',
 				`${getContainer('headlines', editionId)}.json`,
 			);
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return joinUrl(
 				ajaxUrl,
 				'container/data',
 				`${getContainer('culture', editionId)}.json`,
 			);
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return joinUrl(
 				ajaxUrl,
 				'container/data',
 				`${getContainer('lifestyle', editionId)}.json`,
 			);
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return joinUrl(
 				ajaxUrl,
 				'container/data',
