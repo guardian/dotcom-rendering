@@ -52,11 +52,6 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;
-			borkWebVitals: {
-				cls?: string;
-				fcp?: string;
-				fid?: string;
-			};
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

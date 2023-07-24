@@ -46,7 +46,8 @@ const StatsGrid = ({
 							display: grid;
 
 							${until.desktop} {
-								grid-template-columns: 50% 50%;
+								grid-template-columns: 49% 49%;
+								column-gap: 2%;
 								grid-template-areas:
 									'title          .'
 									'possession     attempts'
@@ -58,6 +59,7 @@ const StatsGrid = ({
 
 							${from.desktop} {
 								grid-template-columns: 100%;
+								column-gap: 0%;
 								grid-template-areas:
 									'title'
 									'possession'
@@ -70,6 +72,7 @@ const StatsGrid = ({
 							}
 							${until.phablet} {
 								grid-template-columns: 50% 50%;
+								column-gap: 0%;
 								grid-template-areas:
 									'title			title'
 									'possession		possession'
@@ -99,7 +102,8 @@ const StatsGrid = ({
 							display: grid;
 
 							${from.wide} {
-								grid-template-columns: 50% 50%;
+								grid-template-columns: 49% 49%;
+								column-gap: 2%;
 								grid-template-areas:
 									'title          .'
 									'possession     attempts'
@@ -110,7 +114,8 @@ const StatsGrid = ({
 							}
 
 							${until.wide} {
-								grid-template-columns: 50% 50%;
+								grid-template-columns: 49% 49%;
+								column-gap: 2%;
 								grid-template-areas:
 									'title          .'
 									'possession     attempts'
@@ -122,6 +127,7 @@ const StatsGrid = ({
 
 							${until.phablet} {
 								grid-template-columns: 50% 50%;
+								column-gap: 0%;
 								grid-template-areas:
 									'title			title'
 									'possession		possession'

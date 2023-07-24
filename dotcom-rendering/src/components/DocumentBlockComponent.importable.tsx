@@ -25,14 +25,14 @@ export const getDocumentCloudAssetUrl = (
 
 type Props = {
 	embedUrl?: string;
-	height: number;
+	height?: number;
 	isMainMedia: boolean;
 	isTracking: boolean;
 	role?: RoleType;
 	source?: string;
 	sourceDomain?: string;
 	title?: string;
-	width: number;
+	width?: number;
 };
 
 export const DocumentBlockComponent = ({

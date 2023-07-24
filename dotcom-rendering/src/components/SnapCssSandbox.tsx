@@ -16,6 +16,10 @@ export const SnapCssSandbox = ({ snapData, children }: Props) => {
 			<div
 				css={[
 					css`
+						/* LIs that contain cards are set to flex,
+						   setting this allows the contents to take up
+						   all the available space in the LI */
+						flex-grow: 1;
 						${snapData.embedCss};
 					`,
 				]}
