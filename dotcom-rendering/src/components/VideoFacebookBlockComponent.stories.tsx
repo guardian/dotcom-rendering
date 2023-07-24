@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent.importable';
 
 export default {
@@ -32,7 +32,7 @@ export const largeAspectRatio = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isTracking={false}
 				isMainMedia={false}
@@ -60,7 +60,7 @@ export const verticalAspectRatio = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isTracking={false}
 				isMainMedia={false}

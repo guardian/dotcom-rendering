@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../types/front';
@@ -38,7 +38,7 @@ export const Avatar = () => {
 			format: {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
+				theme: Pillar.Opinion,
 			},
 		};
 	});

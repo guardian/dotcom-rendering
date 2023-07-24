@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { TopicFilterBank } from './TopicFilterBank';
 
 const availableTopics: Topic[] = [
@@ -30,7 +30,7 @@ const onlyAvailableTopicsWithLowCount: Topic[] = [
 const selectedTopics: Topic[] = [{ type: 'GPE', value: 'United Kingdom' }];
 
 const format = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.LiveBlog,
 	display: ArticleDisplay.Standard,
 };

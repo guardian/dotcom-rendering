@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 import { Section } from './Section';
@@ -20,7 +20,7 @@ export const SingleImage = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={oneImage}
 			/>
@@ -36,7 +36,7 @@ export const SingleImageWithCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={oneImage}
 				caption="This is the caption for a single image"
@@ -53,7 +53,7 @@ export const SideBySide = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={twoImages}
 			/>
@@ -69,7 +69,7 @@ export const SideBySideWithCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={twoImages}
 				caption="This is the caption for side by side"
@@ -86,7 +86,7 @@ export const OneAboveTwo = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={threeImages}
 			/>
@@ -102,7 +102,7 @@ export const OneAboveTwoWithCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={threeImages}
 				caption="This is the caption for one above two"
@@ -119,7 +119,7 @@ export const GridOfFour = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={fourImages}
 			/>
@@ -135,7 +135,7 @@ export const GridOfFourWithCaption = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				images={fourImages}
 				caption="This is the caption for grid of four"

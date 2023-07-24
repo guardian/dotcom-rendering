@@ -1,18 +1,18 @@
 import type { ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { CAPIPillar } from '../discussionTypes';
 
 export const pillarToString = (pillar: ArticleTheme): CAPIPillar => {
 	switch (pillar) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return 'news';
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return 'opinion';
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return 'culture';
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return 'sport';
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return 'lifestyle';
 		case ArticleSpecial.Labs:
 			return 'labs';

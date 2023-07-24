@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
@@ -72,7 +72,7 @@ export const ArticleStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -114,7 +114,7 @@ export const BrandingStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -141,7 +141,7 @@ export const FeatureStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -167,7 +167,7 @@ export const FeatureWithMismatchedContributor = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -194,7 +194,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 				}}
 				pageId=""
 				webTitle=""
@@ -272,7 +272,7 @@ export const CommentStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 				}}
 				pageId=""
 				webTitle=""
@@ -298,7 +298,7 @@ export const InterviewStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Interview,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				pageId=""
 				webTitle=""
@@ -324,7 +324,7 @@ export const ImmersiveStory = () => {
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""
@@ -350,7 +350,7 @@ export const TwoContributorsStory = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 				}}
 				pageId=""
 				webTitle=""
@@ -406,7 +406,7 @@ export const Dateline = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				pageId=""
 				webTitle=""

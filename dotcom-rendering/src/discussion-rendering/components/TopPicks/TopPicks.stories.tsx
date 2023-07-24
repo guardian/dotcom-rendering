@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
 import type { CommentType } from '../../discussionTypes';
 import { TopPicks } from './TopPicks';
@@ -53,7 +53,7 @@ const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const SingleComment = () => (
 	<TopPicks
-		pillar={ArticlePillar.News}
+		pillar={Pillar.News}
 		comments={[commentWithShortBody]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
@@ -63,7 +63,7 @@ SingleComment.storyName = 'Single Comment';
 
 export const MulitColumn = () => (
 	<TopPicks
-		pillar={ArticlePillar.Culture}
+		pillar={Pillar.Culture}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -78,7 +78,7 @@ MulitColumn.storyName = 'Mulitple Columns Comments';
 
 export const SingleColumn = () => (
 	<TopPicks
-		pillar={ArticlePillar.Sport}
+		pillar={Pillar.Sport}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,

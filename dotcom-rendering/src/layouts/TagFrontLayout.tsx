@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
@@ -69,7 +69,7 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 
 	const palette = decidePalette(format);

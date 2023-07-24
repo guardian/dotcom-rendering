@@ -8,6 +8,7 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
+import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { limitInlineMerch } from '../experiments/tests/limit-inline-merch';
 import { useAB } from '../lib/useAB';
@@ -27,6 +28,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	/* keep array multi-line */
 	integrateIma,
 	limitInlineMerch,
+	billboardsInMerchHigh,
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {

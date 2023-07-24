@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import type { TableOfContentsItem } from '../types/frontend';
 import { TableOfContents } from './TableOfContents.importable';
@@ -41,19 +41,19 @@ const headline3: TableOfContentsItem = {
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const immersiveDisplayFormat: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Immersive,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const numberedListDisplayFormat: ArticleFormat = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.NumberedList,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const tableItems = [headline1, headline2, headline3];

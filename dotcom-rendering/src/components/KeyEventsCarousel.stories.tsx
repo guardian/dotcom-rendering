@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import {
 	LongKeyEvents,
@@ -16,7 +16,7 @@ const getFormat = (theme: ArticleTheme) => {
 	};
 };
 
-const format = getFormat(ArticlePillar.News);
+const format = getFormat(Pillar.News);
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (

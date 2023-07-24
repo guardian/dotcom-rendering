@@ -1,8 +1,8 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { Avatar } from './Avatar';
@@ -18,7 +18,7 @@ const leahHarper = 'https://uploads.guim.co.uk/2017/10/06/Leah-Harper,-L.png';
 const sideLowe = 'https://uploads.guim.co.uk/2018/05/25/Sid_Lowe,_L.png';
 
 const format: ArticleFormat = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };
@@ -30,7 +30,7 @@ export const defaultStory = () => (
 			alt="The alt of the image"
 			format={{
 				...format,
-				theme: ArticlePillar.Opinion,
+				theme: Pillar.Opinion,
 			}}
 		/>
 	</div>
@@ -44,7 +44,7 @@ export const largeStory = () => (
 			alt="The alt of the image"
 			format={{
 				...format,
-				theme: ArticlePillar.Lifestyle,
+				theme: Pillar.Lifestyle,
 			}}
 		/>
 	</div>
@@ -65,7 +65,7 @@ export const largeStoryCulture = () => (
 			alt="The alt of the image"
 			format={{
 				...format,
-				theme: ArticlePillar.Culture,
+				theme: Pillar.Culture,
 			}}
 		/>
 	</div>
@@ -93,7 +93,7 @@ export const smallStory = () => (
 			alt="The alt of the image"
 			format={{
 				...format,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 		/>
 	</div>
