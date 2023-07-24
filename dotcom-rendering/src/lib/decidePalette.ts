@@ -2078,15 +2078,15 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 
 const textExpandableAtom = (format: ArticleFormat) => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[300];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[300];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[300];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[300];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
 			return lifestyle[300];
@@ -2099,15 +2099,15 @@ const textExpandableAtom = (format: ArticleFormat) => {
 
 const textExpandableAtomHover = (format: ArticleFormat) => {
 	switch (format.theme) {
-		case ArticlePillar.News:
+		case Pillar.News:
 			return news[400];
-		case ArticlePillar.Lifestyle:
+		case Pillar.Lifestyle:
 			return lifestyle[400];
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return sport[400];
-		case ArticlePillar.Culture:
+		case Pillar.Culture:
 			return culture[400];
-		case ArticlePillar.Opinion:
+		case Pillar.Opinion:
 			return opinion[400];
 		case ArticleSpecial.Labs:
 			return lifestyle[400];
