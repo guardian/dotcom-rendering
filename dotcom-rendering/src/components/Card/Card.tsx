@@ -382,7 +382,6 @@ export const Card = ({
 		<CardWrapper
 			format={format}
 			containerPalette={containerPalette}
-			containerType={containerType}
 			isDynamo={isDynamo}
 		>
 			<CardLink
