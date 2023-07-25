@@ -254,6 +254,7 @@ export const BrazeStyleableBannerComponent = (
 			styleHighlightBackground: args.styleHighlightBackground,
 			buttonText: args.buttonText,
 			buttonUrl: args.buttonUrl,
+			showPaymentIcons: args.showPaymentIcons,
 			styleButton: args.styleButton,
 			styleButtonBackground: args.styleButtonBackground,
 			styleButtonHover: args.styleButtonHover,
@@ -302,6 +303,7 @@ BrazeStyleableBannerComponent.args = {
 	buttonText: 'Take a look back',
 	buttonUrl:
 		'https://www.theguardian.com/info/ng-interactive/2020/dec/21/the-guardian-in-2020?INTCMP=gdnwb_mrtn_banner_edtrl_MK_SU_WorkingReport2020Canvas',
+	showPaymentIcons: 'false',
 	styleButton: '#ffffff',
 	styleButtonBackground: '#052962',
 	styleButtonHover: '#234b8a',
