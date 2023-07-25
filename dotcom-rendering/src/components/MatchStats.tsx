@@ -273,18 +273,6 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
 	</h4>
 );
 
-const cleanTeamCode = (code: string) => {
-	switch (code) {
-		case 'JAP':
-			return 'JPN';
-		case 'HOL':
-		case 'NET':
-			return 'NED';
-		default:
-			return code;
-	}
-};
-
 const DecideDoughnut = ({
 	home,
 	away,
@@ -297,12 +285,12 @@ const DecideDoughnut = ({
 	const sections = [
 		{
 			value: home.possession,
-			label: cleanTeamCode(home.codename),
+			label: home.codename,
 			color: home.colours,
 		},
 		{
 			value: away.possession,
-			label: cleanTeamCode(away.codename),
+			label: away.codename,
 			color: away.colours,
 		},
 	].reverse();
