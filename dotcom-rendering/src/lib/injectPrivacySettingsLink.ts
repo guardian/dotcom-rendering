@@ -38,10 +38,10 @@ export const injectPrivacySettingsLink = (): void => {
 						newPrivacyLinkListItem,
 					);
 
-					newPrivacyLink.addEventListener(
-						'click',
-						cmp.showPrivacyManager,
-					);
+					newPrivacyLink.addEventListener('click', (event) => {
+						event.preventDefault();
+						cmp.showPrivacyManager();
+					});
 				})
 				.catch((e) =>
 					console.error(`privacy settings - error: ${String(e)}`),
