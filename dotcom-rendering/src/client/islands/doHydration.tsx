@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { log } from '@guardian/libs';
+import { log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { measureDuration } from '../measureDuration';
 
 /**
  * This function dynamically imports and then hydrates a specific component in
@@ -29,10 +28,8 @@ export const doHydration = async (
 	const alreadyHydrated = element.dataset.guReady;
 	if (alreadyHydrated) return;
 
-	const { start: importStart, end: importEnd } = measureDuration(
-		`import-${name}`,
-	);
-	importStart();
+	const { endPerformanceMeasure: endImportPerformanceMeasure } =
+		startPerformanceMeasure('dotcom', name, 'import');
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
@@ -40,13 +37,11 @@ export const doHydration = async (
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */
-			const importDuration = importEnd();
+			const importDuration = endImportPerformanceMeasure();
 			const clientOnly = element.hasAttribute('clientonly');
 
-			const { start: islandStart, end: islandEnd } = measureDuration(
-				`island-${name}`,
-			);
-			islandStart();
+			const { endPerformanceMeasure: endIslandPerformanceMeasure } =
+				startPerformanceMeasure('dotcom', name, 'island');
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
@@ -67,7 +62,7 @@ export const doHydration = async (
 
 			element.setAttribute('data-gu-ready', 'true');
 			/** The duration of rendering or hydrating this island */
-			const islandDuration = islandEnd();
+			const islandDuration = endIslandPerformanceMeasure();
 
 			return { clientOnly, importDuration, islandDuration };
 		})
