@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
+import { type ArticleTheme } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import { guard } from '../lib/guard';
 import { CommentContainer } from './components/CommentContainer/CommentContainer';
 import { CommentForm } from './components/CommentForm/CommentForm';
 import { Filters } from './components/Filters/Filters';
@@ -71,11 +72,11 @@ const picksWrapper = css`
 	justify-content: space-between;
 `;
 
-const DEFAULT_FILTERS: FilterOptions = {
+const DEFAULT_FILTERS = {
 	orderBy: 'newest',
 	pageSize: 100,
 	threads: 'collapsed',
-};
+} as const satisfies FilterOptions;
 
 const NoComments = () => (
 	<div
@@ -137,6 +138,19 @@ const initialiseFilters = ({
 	};
 };
 
+const decideDefaultOrderBy = (isClosedForComment: boolean): OrderByType =>
+	isClosedForComment ? 'oldest' : 'newest';
+
+const checkPageSize = (size: unknown): PageSizeType => {
+	// This function handles the fact that some readers have legacy values
+	// stored in the browsers
+	if (!size) return DEFAULT_FILTERS.pageSize; // Default
+	if (size === 'All') return DEFAULT_FILTERS.pageSize; // Convert 'All' to default
+	const supportedSizes: PageSizeType[] = [25, 50, 100];
+	if (!guard(supportedSizes)(size)) return DEFAULT_FILTERS.pageSize; // Convert anything else to default
+	return size; // size is acceptable
+};
+
 const initFiltersFromLocalStorage = ({
 	isClosedForComments,
 }: {
@@ -156,20 +170,6 @@ const initFiltersFromLocalStorage = ({
 			...DEFAULT_FILTERS,
 			orderBy: decideDefaultOrderBy(isClosedForComments),
 		};
-	}
-
-	function checkPageSize(size: any): PageSizeType {
-		// This function handles the fact that some readers have legacy values
-		// stored in the browsers
-		if (!size) return DEFAULT_FILTERS.pageSize; // Default
-		if (size === 'All') return DEFAULT_FILTERS.pageSize; // Convert 'All' to default
-		const supportedSizes: PageSizeType[] = [25, 50, 100];
-		if (!supportedSizes.includes(size)) return DEFAULT_FILTERS.pageSize; // Convert anything else to default
-		return size; // size is acceptable
-	}
-
-	function decideDefaultOrderBy(isClosedForComment: boolean): OrderByType {
-		return isClosedForComments ? 'oldest' : 'newest';
 	}
 
 	// If we found something in LS, use it, otherwise return defaults
@@ -318,10 +318,8 @@ export const Comments = ({
 		setFilters((oldFilters) => {
 			return {
 				...oldFilters,
-				orderBy: orderByOverride ? orderByOverride : oldFilters.orderBy,
-				pageSize: pageSizeOverride
-					? pageSizeOverride
-					: oldFilters.pageSize,
+				orderBy: orderByOverride ?? oldFilters.orderBy,
+				pageSize: pageSizeOverride ?? oldFilters.pageSize,
 			};
 		});
 	}, [pageSizeOverride, orderByOverride]);
