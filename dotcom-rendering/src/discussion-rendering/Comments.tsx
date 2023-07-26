@@ -248,7 +248,6 @@ export const Comments = ({
 		expanded || window.location.hash === '#comments',
 	);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [loadingMore, setLoadingMore] = useState<boolean>(false);
 	const [totalPages, setTotalPages] = useState<number>(0);
 	const [page, setPage] = useState<number>(initialPage ?? 1);
 	const [picks, setPicks] = useState<CommentType[]>([]);
@@ -260,6 +259,8 @@ export const Comments = ({
 	const [commentCount, setCommentCount] = useState<number>(0);
 	const [mutes, setMutes] = useState<string[]>(readMutes());
 
+	const loadingMore = !loading && comments.length !== numberOfCommentsToShow;
+
 	useEffect(() => {
 		if (isExpanded) {
 			// We want react to complete the current work and render, without trying to batch this update
@@ -269,7 +270,6 @@ export const Comments = ({
 			// the remaining comments.
 			const timer = setTimeout(() => {
 				setNumberOfCommentsToShow(comments.length);
-				setLoadingMore(false);
 			}, 0);
 			return () => clearTimeout(timer);
 		} else return;
@@ -286,7 +286,6 @@ export const Comments = ({
 		//todo: come back and handle the error case
 		void getDiscussion(shortUrl, { ...filters, page }).then((json) => {
 			setLoading(false);
-			setLoadingMore(true);
 			if (json && json.status !== 'error') {
 				setComments(
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- we'll come back and fix this by properly parsing the json
@@ -394,9 +393,9 @@ export const Comments = ({
 	};
 
 	const onAddComment = (comment: CommentType) => {
-		comments.pop(); // Remove last item from our local array
+		// Remove last item from our local array
 		// Replace it with this new comment at the start
-		setComments([comment, ...comments]);
+		setComments([comment, ...comments.slice(0, -1)]);
 
 		if (!isExpanded) {
 			// It's possible to post a comment without the view being expanded
