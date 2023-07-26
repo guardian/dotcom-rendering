@@ -51,7 +51,7 @@ start-ci: install
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
+	NODE_ENV=production pm2 start dist/server.js -i max
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@NODE_ENV=production pm2 logs
@@ -62,7 +62,7 @@ start: install
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
+	NODE_ENV=production /usr/local/node/pm2 start dist/server.js -i max
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
