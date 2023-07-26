@@ -14,7 +14,7 @@ deployments:
       cloudFormationStackName: rendering
       templateStageParameters:
         CODE:
-          InstanceType: t4g.medium
+          InstanceType: t4g.large
         PROD:
           InstanceType: t4g.small
       amiParametersToTags:
