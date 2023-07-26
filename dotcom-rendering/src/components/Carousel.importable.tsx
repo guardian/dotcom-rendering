@@ -98,6 +98,7 @@ const isLastCardShowing = (index: number, totalStories: number) =>
 
 const containerMargins = css`
 	margin-top: 6px;
+	margin-bottom: 24px;
 
 	margin-left: 0px;
 	margin-right: 0px;
@@ -108,6 +109,11 @@ const containerMargins = css`
 		margin-left: -10px;
 		margin-right: -10px;
 	}
+`;
+
+const videoContainerMargins = css`
+	margin-bottom: 0;
+	min-height: 0;
 `;
 
 const containerMarginsFromLeftCol = css`
@@ -123,6 +129,10 @@ const containerStyles = css`
 	flex-direction: column;
 	position: relative;
 	overflow: hidden; /* Needed for scrolling to work */
+`;
+
+const videoContainerHeight = css`
+	min-height: 0;
 `;
 
 const carouselStyle = css`
@@ -948,6 +958,7 @@ export const Carousel = ({
 					containerStyles,
 					containerMargins,
 					!hasPageSkin && containerMarginsFromLeftCol,
+					isVideoContainer && videoContainerMargins,
 				]}
 				data-component={onwardsSource}
 				data-link={formatAttrString(heading)}
@@ -966,7 +977,10 @@ export const Carousel = ({
 					hasPageSkin={hasPageSkin}
 				/>
 				<ul
-					css={carouselStyle}
+					css={[
+						carouselStyle,
+						isVideoContainer && videoContainerHeight,
+					]}
 					ref={carouselRef}
 					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
