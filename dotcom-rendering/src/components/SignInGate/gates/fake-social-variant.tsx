@@ -1,16 +1,19 @@
+import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
-import { measureDuration } from '../../../client/measureDuration';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGate } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateFakeSocial = React.lazy(() => {
-	const { start, end } = measureDuration('SignInGateFakeSocial');
-	start();
+	const { endPerformanceMeasure } = startPerformanceMeasure(
+		'identity',
+		'SignInGateFakeSocial',
+	);
+
 	return import(
 		/* webpackChunkName: "SignInGateFakeSocial" */ '../gateDesigns/SignInGateFakeSocial'
 	).then((module) => {
-		end();
+		endPerformanceMeasure();
 		return { default: module.SignInGateFakeSocial };
 	});
 });
