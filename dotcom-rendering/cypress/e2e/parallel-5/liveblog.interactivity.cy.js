@@ -47,7 +47,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('center');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -75,7 +75,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -92,7 +92,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -122,7 +122,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
 				numNewBlocks: 1,
@@ -164,7 +164,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]', { timeout: 30000 })
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom');
 		cy.get(`[data-cy="toast"]`).should('not.exist');
 		cy.window().then(function (win) {
@@ -191,7 +191,7 @@ describe('Liveblogs', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=Liveness]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.scrollTo('bottom', { duration: 1000 });
 		cy.window().then(function (win) {
 			win.mockLiveUpdate({
