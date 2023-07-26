@@ -65,10 +65,12 @@ const youtubeAPIReady = () => {
 
 const loadYouTubeAPI = (enableIma = false): Promise<typeof YT> => {
 	/* If another part of the code has already loaded youtube api, return early. */
-	// if (window.YT.Player instanceof Function) {
-	// 	log('dotcom', 'loadYT: returning window.YT');
-	// 	return Promise.resolve(window.YT);
-	// }
+
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- This is needed to avoid a type error when window.YT is undefined
+	if (window.YT?.Player instanceof Function) {
+		log('dotcom', 'loadYT: returning window.YT');
+		return Promise.resolve(window.YT);
+	}
 
 	/* Create youtubeAPIReady promise before loading scripts so that
 	 * window.onYouTubeIframeAPIReady is guaranteed to be defined
