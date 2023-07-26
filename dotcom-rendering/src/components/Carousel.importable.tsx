@@ -438,16 +438,6 @@ type CarouselCardProps = {
 	isVideoContainer?: boolean;
 };
 
-const CarouselCardStyles = css`
-	min-width: 320px;
-	width: calc((100vw - 40px) / 1.5); // Show 1.5 cards
-	overflow: hidden;
-
-	${until.phablet} {
-		width: calc((100vw - 40px)); // Show 1 card on small screens
-	}
-`;
-
 const CarouselCard = ({
 	format,
 	linkTo,
@@ -472,30 +462,29 @@ const CarouselCard = ({
 		snapAlignStart={true}
 		verticalDividerColour={verticalDividerColour}
 	>
-		<div css={CarouselCardStyles}>
-			<Card
-				linkTo={linkTo}
-				format={format}
-				headlineText={headlineText}
-				webPublicationDate={webPublicationDate}
-				kickerText={kickerText}
-				imageUrl={imageUrl}
-				imageSize={'small'}
-				showClock={true}
-				showAge={true}
-				imagePositionOnMobile="top"
-				pauseOffscreenVideo={isVideoContainer}
-				showQuotedHeadline={format.design === ArticleDesign.Comment}
-				dataLinkName={dataLinkName}
-				discussionId={discussionId}
-				branding={branding}
-				isExternalLink={false}
-				mainMedia={mainMedia}
-				isPlayableMediaCard={isVideoContainer}
-				onwardsSource={onwardsSource}
-				containerType={isVideoContainer ? 'fixed/video' : undefined}
-			/>
-		</div>
+		<Card
+			linkTo={linkTo}
+			format={format}
+			headlineText={headlineText}
+			webPublicationDate={webPublicationDate}
+			kickerText={kickerText}
+			imageUrl={imageUrl}
+			imageSize={'small'}
+			showClock={true}
+			showAge={true}
+			imagePositionOnMobile="top"
+			pauseOffscreenVideo={isVideoContainer}
+			showQuotedHeadline={format.design === ArticleDesign.Comment}
+			dataLinkName={dataLinkName}
+			discussionId={discussionId}
+			branding={branding}
+			isExternalLink={false}
+			mainMedia={mainMedia}
+			minWidthInPixels={220}
+			isPlayableMediaCard={isVideoContainer}
+			onwardsSource={onwardsSource}
+			containerType={isVideoContainer ? 'fixed/video' : undefined}
+		/>
 	</LI>
 );
 
