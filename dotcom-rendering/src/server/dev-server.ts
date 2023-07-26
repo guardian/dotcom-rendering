@@ -66,7 +66,10 @@ export const devServer = (): Handler => {
 				return handleAppsArticle(req, res, next);
 			default: {
 				// Do not redirect assets urls
-				if (req.url.match(ASSETS_URL)) return next();
+				if (req.url.match(ASSETS_URL)) {
+					console.log('!!!!!!!!!req.url', req.url);
+					return next();
+				}
 
 				if (req.url.match(ARTICLE_URL)) {
 					const url = new URL(
