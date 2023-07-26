@@ -466,7 +466,7 @@ const CarouselCard = ({
 }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
-		showDivider={!isFirst}
+		showDivider={!isFirst && !isVideoContainer}
 		padSides={true}
 		padSidesOnMobile={true}
 		snapAlignStart={true}
