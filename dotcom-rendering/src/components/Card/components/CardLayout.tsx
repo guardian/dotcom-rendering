@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
 import type { ImagePositionType } from './ImageWrapper';
+import { DCRContainerType } from 'src/types/front';
 
 type Props = {
 	children: React.ReactNode;
@@ -8,7 +9,7 @@ type Props = {
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
-	minWidthInPixelsOnMobile?: number;
+	containerType?: DCRContainerType;
 };
 
 const decideDirection = (imagePosition: ImagePositionType) => {
@@ -29,30 +30,31 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 
 const decideWidth = (
 	minWidthInPixels?: number,
-	minWidthInPixelsOnMobile?: number,
+	containerType?: DCRContainerType,
 ) => {
-	if (
-		minWidthInPixels !== undefined &&
-		minWidthInPixels > 0 &&
-		minWidthInPixelsOnMobile !== undefined &&
-		minWidthInPixelsOnMobile > 0
-	) {
-		return css`
-			min-width: ${minWidthInPixels}px;
-			${until.tablet} {
-				min-width: ${minWidthInPixelsOnMobile}px;
-			}
-		`;
-	}
+	switch (containerType) {
+		case 'fixed/video':
+			return css`
+				min-width: 300px;
+				max-width: 600px;
+				width: calc((100vw - 40px) / 1.5); // Show 1.5 cards
+				overflow: hidden;
 
-	if (minWidthInPixels !== undefined && minWidthInPixels > 0) {
-		return css`
-			min-width: ${minWidthInPixels}px;
-		`;
+				${until.mobileLandscape} {
+					width: calc((100vw - 40px)); // Show 1 card on small screens
+				}
+			`;
+
+		default:
+			if (minWidthInPixels !== undefined && minWidthInPixels > 0) {
+				return css`
+					min-width: ${minWidthInPixels}px;
+				`;
+			}
+			return css`
+				width: 100%;
+			`;
 	}
-	return css`
-		width: 100%;
-	`;
 };
 
 const decidePosition = (
@@ -95,7 +97,7 @@ export const CardLayout = ({
 	imagePositionOnMobile,
 	minWidthInPixels,
 	imageType,
-	minWidthInPixelsOnMobile,
+	containerType,
 }: Props) => (
 	<div
 		css={[
@@ -103,7 +105,7 @@ export const CardLayout = ({
 				display: flex;
 				flex-basis: 100%;
 			`,
-			decideWidth(minWidthInPixels, minWidthInPixelsOnMobile),
+			decideWidth(minWidthInPixels, containerType),
 			decidePosition(imagePosition, imagePositionOnMobile, imageType),
 		]}
 	>
