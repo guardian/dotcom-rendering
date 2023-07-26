@@ -60,6 +60,19 @@ const overlayStyles = css`
 	}
 `;
 
+const svgStyles = css`
+	/* Nudge Icon to the right, so it appears optically centered
+/* https://medium.com/design-bridges/optical-effects-9fca82b4cd9a#f9d2 */
+	padding-left: ${space[2]}px;
+	svg {
+		transform-origin: center;
+		fill: ${palette.neutral[100]};
+		height: 60px;
+		transform: scale(1.15);
+		transition-duration: 300ms;
+	}
+`;
+
 const playButtonStyling = css`
 	position: absolute;
 	top: 50%;
@@ -76,12 +89,6 @@ const playButtonStyling = css`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
-	svg {
-		fill: ${palette.neutral[100]};
-		width: 75px;
-		height: 60px;
-	}
 `;
 
 const pillStyles = css`
@@ -175,13 +182,10 @@ export const YoutubeAtomOverlay = ({
 					)}
 				</div>
 			)}
-			<div
-				className="overlay-play-button"
-				css={css`
-					${playButtonStyling}
-				`}
-			>
-				<SvgMediaControlsPlay />
+			<div className="overlay-play-button" css={playButtonStyling}>
+				<span css={svgStyles}>
+					<SvgMediaControlsPlay />
+				</span>
 			</div>
 		</button>
 	);

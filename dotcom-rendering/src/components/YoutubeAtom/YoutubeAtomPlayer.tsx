@@ -145,7 +145,7 @@ const createOnStateChangeListener =
 			}
 
 			const checkProgress = () => {
-				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- we check for player below
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- we check for player below
 				if (!player) return null;
 				const currentTime = player.getCurrentTime();
 				const duration = player.getDuration();
@@ -292,7 +292,7 @@ const createInstantiateImaManager =
 		const adUnit =
 			adTargetingEnabled && adTargeting.adUnit ? adTargeting.adUnit : '';
 		const customParams =
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- TODO
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- TODO
 			adTargetingEnabled && adTargeting.customParams
 				? adTargeting.customParams
 				: {};
@@ -411,7 +411,7 @@ export const YoutubeAtomPlayer = ({
 				});
 
 				const adsConfig: AdsConfig =
-					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Todo
+					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions -- TODO
 					!adTargeting || adTargeting.disableAds || enableIma
 						? disabledAds
 						: buildAdsConfigWithConsent({
@@ -491,6 +491,7 @@ export const YoutubeAtomPlayer = ({
 								player.current?.getPlayerState();
 							void playerStatePromise?.then((playerState) => {
 								if (
+									// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions -- TODO
 									playerState &&
 									playerState === YT.PlayerState.PLAYING
 								) {
