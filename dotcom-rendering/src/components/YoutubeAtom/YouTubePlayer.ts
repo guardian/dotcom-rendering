@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method -- TODO */
 import type { AdsConfig } from '@guardian/commercial';
 import { log } from '@guardian/libs';
 import { loadYouTubeAPI } from './loadYouTubeIframeApi';
@@ -48,7 +47,7 @@ class YouTubePlayer {
 				return player.getPlayerState();
 			})
 
-			.catch(this.logError);
+			.catch((e: Error) => this.logError(e));
 	}
 
 	playVideo(): Promise<void> {
@@ -56,7 +55,7 @@ class YouTubePlayer {
 			.then((player) => {
 				player.playVideo();
 			})
-			.catch(this.logError);
+			.catch((e: Error) => this.logError(e));
 	}
 
 	pauseVideo(): Promise<void> {
@@ -64,7 +63,7 @@ class YouTubePlayer {
 			.then((player) => {
 				player.pauseVideo();
 			})
-			.catch(this.logError);
+			.catch((e: Error) => this.logError(e));
 	}
 
 	stopVideo(): Promise<void> {
@@ -72,7 +71,7 @@ class YouTubePlayer {
 			.then((player) => {
 				player.stopVideo();
 			})
-			.catch(this.logError);
+			.catch((e: Error) => this.logError(e));
 	}
 
 	removeEventListener<T extends YT.PlayerEvent>(

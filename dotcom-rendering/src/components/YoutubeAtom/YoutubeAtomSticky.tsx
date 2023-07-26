@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { log } from '@guardian/libs';
 import { from, neutral, space } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
-// eslint-disable-next-line import/no-extraneous-dependencies -- TODO
 import detectMobile from 'is-mobile';
 import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
