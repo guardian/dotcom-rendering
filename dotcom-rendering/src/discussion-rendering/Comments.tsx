@@ -420,110 +420,150 @@ export const Comments = ({
 
 	if (!isExpanded) {
 		return (
-			<>
-				<div css={commentContainerStyles} data-component="discussion">
-					{picks.length !== 0 ? (
-						<div css={picksWrapper}>
-							<TopPicks
-								pillar={pillar}
-								comments={picks.slice(0, 2)}
-								authStatus={user?.authStatus}
-								onPermalinkClick={onPermalinkClick}
-								onRecommend={onRecommend}
-							/>
-						</div>
-					) : (
-						<>
-							<Filters
-								pillar={pillar}
-								filters={filters}
-								onFilterChange={onFilterChange}
+			<div data-component="discussion" css={commentContainerStyles}>
+				{picks.length !== 0 ? (
+					<div css={picksWrapper}>
+						<TopPicks
+							pillar={pillar}
+							comments={picks.slice(0, 2)}
+							authStatus={user?.authStatus}
+							onPermalinkClick={onPermalinkClick}
+							onRecommend={onRecommend}
+						/>
+					</div>
+				) : (
+					<>
+						<Filters
+							pillar={pillar}
+							filters={filters}
+							onFilterChange={onFilterChange}
+							totalPages={totalPages}
+							commentCount={commentCount}
+						/>
+						{showPagination && (
+							<Pagination
 								totalPages={totalPages}
+								currentPage={page}
+								setCurrentPage={(newPage: number) => {
+									onPageChange(newPage);
+								}}
 								commentCount={commentCount}
+								filters={filters}
 							/>
-							{showPagination && (
-								<Pagination
-									totalPages={totalPages}
-									currentPage={page}
-									setCurrentPage={(newPage: number) => {
-										onPageChange(newPage);
-									}}
-									commentCount={commentCount}
-									filters={filters}
-								/>
-							)}
-							{!comments.length ? (
-								<NoComments />
-							) : (
-								<ul css={commentContainerStyles}>
-									{comments.slice(0, 2).map((comment) => (
-										<li key={comment.id}>
-											<CommentContainer
-												comment={comment}
-												pillar={pillar}
-												isClosedForComments={
-													isClosedForComments
-												}
-												shortUrl={shortUrl}
-												user={user}
-												threads={filters.threads}
-												commentBeingRepliedTo={
-													commentBeingRepliedTo
-												}
-												setCommentBeingRepliedTo={
-													setCommentBeingRepliedTo
-												}
-												mutes={mutes}
-												toggleMuteStatus={
-													toggleMuteStatus
-												}
-												onPermalinkClick={
-													onPermalinkClick
-												}
-												onRecommend={onRecommend}
-											/>
-										</li>
-									))}
-								</ul>
-							)}
-						</>
-					)}
-				</div>
-			</>
+						)}
+						{!comments.length ? (
+							<NoComments />
+						) : (
+							<ul css={commentContainerStyles}>
+								{comments.slice(0, 2).map((comment) => (
+									<li key={comment.id}>
+										<CommentContainer
+											comment={comment}
+											pillar={pillar}
+											isClosedForComments={
+												isClosedForComments
+											}
+											shortUrl={shortUrl}
+											user={user}
+											threads={filters.threads}
+											commentBeingRepliedTo={
+												commentBeingRepliedTo
+											}
+											setCommentBeingRepliedTo={
+												setCommentBeingRepliedTo
+											}
+											mutes={mutes}
+											toggleMuteStatus={toggleMuteStatus}
+											onPermalinkClick={onPermalinkClick}
+											onRecommend={onRecommend}
+										/>
+									</li>
+								))}
+							</ul>
+						)}
+					</>
+				)}
+			</div>
 		);
 	}
 
 	return (
-		<>
-			<div data-component="discussion" css={commentColumnWrapperStyles}>
-				{user && !isClosedForComments && (
-					<CommentForm
-						pillar={pillar}
-						shortUrl={shortUrl}
-						onAddComment={onAddComment}
-						user={user}
-						onComment={onComment}
-						onReply={onReply}
-						onPreview={onPreview}
-					/>
-				)}
-				{!!picks.length && (
-					<TopPicks
-						pillar={pillar}
-						comments={picks}
-						authStatus={user?.authStatus}
-						onPermalinkClick={onPermalinkClick}
-						onRecommend={onRecommend}
-					/>
-				)}
-				<Filters
+		<div data-component="discussion" css={commentColumnWrapperStyles}>
+			{user && !isClosedForComments && (
+				<CommentForm
 					pillar={pillar}
-					filters={filters}
-					onFilterChange={onFilterChange}
-					totalPages={totalPages}
-					commentCount={commentCount}
+					shortUrl={shortUrl}
+					onAddComment={onAddComment}
+					user={user}
+					onComment={onComment}
+					onReply={onReply}
+					onPreview={onPreview}
 				/>
-				{showPagination && (
+			)}
+			{!!picks.length && (
+				<TopPicks
+					pillar={pillar}
+					comments={picks}
+					authStatus={user?.authStatus}
+					onPermalinkClick={onPermalinkClick}
+					onRecommend={onRecommend}
+				/>
+			)}
+			<Filters
+				pillar={pillar}
+				filters={filters}
+				onFilterChange={onFilterChange}
+				totalPages={totalPages}
+				commentCount={commentCount}
+			/>
+			{showPagination && (
+				<Pagination
+					totalPages={totalPages}
+					currentPage={page}
+					setCurrentPage={(newPage: number) => {
+						onPageChange(newPage);
+					}}
+					commentCount={commentCount}
+					filters={filters}
+				/>
+			)}
+			{loading ? (
+				<LoadingComments />
+			) : !comments.length ? (
+				<NoComments />
+			) : (
+				<ul css={commentContainerStyles}>
+					{comments
+						.slice(0, numberOfCommentsToShow)
+						.map((comment) => (
+							<li key={comment.id}>
+								<CommentContainer
+									comment={comment}
+									pillar={pillar}
+									isClosedForComments={isClosedForComments}
+									shortUrl={shortUrl}
+									user={user}
+									threads={filters.threads}
+									commentBeingRepliedTo={
+										commentBeingRepliedTo
+									}
+									setCommentBeingRepliedTo={
+										setCommentBeingRepliedTo
+									}
+									commentToScrollTo={commentToScrollTo}
+									mutes={mutes}
+									toggleMuteStatus={toggleMuteStatus}
+									onPermalinkClick={onPermalinkClick}
+									onRecommend={onRecommend}
+									onReply={onReply}
+								/>
+							</li>
+						))}
+				</ul>
+			)}
+			{loadingMore && <LoadingComments />}
+			{showPagination && (
+				<footer css={footerStyles}>
 					<Pagination
 						totalPages={totalPages}
 						currentPage={page}
@@ -533,69 +573,19 @@ export const Comments = ({
 						commentCount={commentCount}
 						filters={filters}
 					/>
-				)}
-				{loading ? (
-					<LoadingComments />
-				) : !comments.length ? (
-					<NoComments />
-				) : (
-					<ul css={commentContainerStyles}>
-						{comments
-							.slice(0, numberOfCommentsToShow)
-							.map((comment) => (
-								<li key={comment.id}>
-									<CommentContainer
-										comment={comment}
-										pillar={pillar}
-										isClosedForComments={
-											isClosedForComments
-										}
-										shortUrl={shortUrl}
-										user={user}
-										threads={filters.threads}
-										commentBeingRepliedTo={
-											commentBeingRepliedTo
-										}
-										setCommentBeingRepliedTo={
-											setCommentBeingRepliedTo
-										}
-										commentToScrollTo={commentToScrollTo}
-										mutes={mutes}
-										toggleMuteStatus={toggleMuteStatus}
-										onPermalinkClick={onPermalinkClick}
-										onRecommend={onRecommend}
-										onReply={onReply}
-									/>
-								</li>
-							))}
-					</ul>
-				)}
-				{loadingMore && <LoadingComments />}
-				{showPagination && (
-					<footer css={footerStyles}>
-						<Pagination
-							totalPages={totalPages}
-							currentPage={page}
-							setCurrentPage={(newPage: number) => {
-								onPageChange(newPage);
-							}}
-							commentCount={commentCount}
-							filters={filters}
-						/>
-					</footer>
-				)}
-				{user && !isClosedForComments && comments.length > 10 && (
-					<CommentForm
-						pillar={pillar}
-						shortUrl={shortUrl}
-						onAddComment={onAddComment}
-						user={user}
-						onComment={onComment}
-						onReply={onReply}
-						onPreview={onPreview}
-					/>
-				)}
-			</div>
-		</>
+				</footer>
+			)}
+			{user && !isClosedForComments && comments.length > 10 && (
+				<CommentForm
+					pillar={pillar}
+					shortUrl={shortUrl}
+					onAddComment={onAddComment}
+					user={user}
+					onComment={onComment}
+					onReply={onReply}
+					onPreview={onPreview}
+				/>
+			)}
+		</div>
 	);
 };
