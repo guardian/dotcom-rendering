@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import { App } from './App';
+import { Comments } from './Comments';
 import type { SignedInUser } from './discussionTypes';
 
-export default { component: App, title: 'Discussion/App' };
+export default { component: Comments, title: 'Discussion/App' };
 
 const aUser: SignedInUser = {
 	profile: {
@@ -30,7 +30,7 @@ export const LoggedOutHiddenPicks = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			pillar={Pillar.Culture}
@@ -55,7 +55,7 @@ export const InitialPage = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5z"
 			initialPage={3}
 			baseUrl="https://discussion.theguardian.com/discussion-api"
@@ -81,7 +81,7 @@ export const Overrides = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5z"
 			initialPage={3}
 			pageSizeOverride={50}
@@ -109,7 +109,7 @@ export const LoggedInHiddenNoPicks = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/abc123"
 			pillar={Pillar.News}
 			isClosedForComments={false}
@@ -136,7 +136,7 @@ export const LoggedIn = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/abc123"
 			pillar={Pillar.News}
 			isClosedForComments={false}
@@ -162,7 +162,7 @@ export const LoggedInShortDiscussion = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5a" // Two comments"
 			pillar={Pillar.News}
 			isClosedForComments={false}
@@ -188,7 +188,7 @@ export const LoggedOutHiddenNoPicks = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/abc123"
 			pillar={Pillar.Sport}
 			isClosedForComments={false}
@@ -214,7 +214,7 @@ export const Closed = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5z"
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			pillar={Pillar.Lifestyle}
@@ -240,7 +240,7 @@ export const NoComments = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/39f5x" // A discussion with zero comments
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			pillar={Pillar.Culture}
@@ -265,7 +265,7 @@ export const LegacyDiscussion = () => (
 			max-width: 620px;
 		`}
 	>
-		<App
+		<Comments
 			shortUrl="p/32255" // A 'legacy' discussion that doesn't allow threading
 			baseUrl="https://discussion.theguardian.com/discussion-api"
 			pillar={Pillar.Culture}
