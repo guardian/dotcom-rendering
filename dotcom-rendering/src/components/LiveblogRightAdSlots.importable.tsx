@@ -16,15 +16,6 @@ export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 			'multiple-adverts',
 		) ?? false;
 
-	if (shouldInsertMultipleAdverts) {
-		return (
-			<LiveblogRightMultipleAdSlots
-				display={display}
-				isPaidContent={isPaidContent}
-			/>
-		);
-	}
-
 	const restrictStickyHeight =
 		ABTestAPI?.isUserInVariant(
 			'LiveblogRightColumnAds',
@@ -32,10 +23,20 @@ export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 		) ?? false;
 
 	return (
-		<TopRightAdSlot
-			isPaidContent={isPaidContent}
-			adStyles={[labelStyles]}
-			restrictStickyHeight={restrictStickyHeight}
-		/>
+		<>
+			<TopRightAdSlot
+				isPaidContent={isPaidContent}
+				adStyles={[labelStyles]}
+				restrictStickyHeight={
+					restrictStickyHeight || shouldInsertMultipleAdverts
+				}
+			/>
+			{shouldInsertMultipleAdverts ? (
+				<LiveblogRightMultipleAdSlots
+					display={display}
+					isPaidContent={isPaidContent}
+				/>
+			) : null}
+		</>
 	);
 };

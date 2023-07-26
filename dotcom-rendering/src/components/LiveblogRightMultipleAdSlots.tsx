@@ -10,9 +10,14 @@ import { AdSlot } from './AdSlot';
 const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
 
+	const rightAdTotalSpace = 1059 + PADDING_BOTTOM;
+
 	return (
 		Math.floor(
-			(rightColHeight - PADDING_BOTTOM + SPACE_BETWEEN_ADS) /
+			(rightColHeight -
+				rightAdTotalSpace -
+				PADDING_BOTTOM +
+				SPACE_BETWEEN_ADS) /
 				(AD_CONTAINER_HEIGHT + SPACE_BETWEEN_ADS),
 		) || 1
 	);
@@ -25,6 +30,7 @@ const rightAdContainerStyles = css`
 	display: flex;
 	flex-direction: column;
 	gap: ${SPACE_BETWEEN_ADS}px;
+	margin-top: ${SPACE_BETWEEN_ADS}px;
 	padding-bottom: ${PADDING_BOTTOM}px;
 `;
 
