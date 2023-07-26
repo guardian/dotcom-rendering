@@ -59,83 +59,56 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-const getManifestPaths = (
-	manifests: 'control' | 'variant' | 'apps',
-): [ManifestPath, ManifestPath] | [ManifestPath] => {
-	switch (manifests) {
+type Build = 'apps' | 'modern' | 'variant' | 'legacy';
+
+type ManifestPath = `./manifest.${Build}.json`;
+
+const getManifestPath = (build: Build): ManifestPath => {
+	switch (build) {
 		case 'apps':
-			return ['./manifest.apps.json'];
+			return './manifest.apps.json';
+		case 'modern':
+			return './manifest.modern.json';
 		case 'variant':
-			return ['./manifest.variant.json', './manifest.legacy.json'];
-		case 'control':
-			return ['./manifest.modern.json', './manifest.legacy.json'];
+			return './manifest.variant.json';
+		case 'legacy':
+			return './manifest.legacy.json';
 	}
 };
 
-type ManifestPath = `./manifest.${string}.json`;
-
-const getScripts = (
-	manifestPaths: Array<ManifestPath>,
-	file: `${string}.js`,
-): string[] => {
-	if (!file.endsWith('.js'))
+export const getPathFromManifest = (
+	build: Build,
+	filename: `${string}.js`,
+): string => {
+	if (!filename.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
 
 	if (isDev) {
-		if (manifestPaths.every((path) => path.includes('.apps.'))) {
-			return [`${ASSET_ORIGIN}assets/${file.replace('.js', '.apps.js')}`];
-		}
-		return [
-			`${ASSET_ORIGIN}assets/${file.replace('.js', '.modern.js')}`,
-			`${ASSET_ORIGIN}assets/${file.replace('.js', '.legacy.js')}`,
-		];
+		return `${ASSET_ORIGIN}assets/${filename.replace(
+			'.js',
+			`.${build}.js`,
+		)}`;
 	}
 
-	return manifestPaths.map((manifestPath) => {
-		const manifest = getManifest(manifestPath);
-		const filename = manifest[file];
+	const manifest = getManifest(getManifestPath(build));
+	const filenameFromManifest = manifest[filename];
 
-		if (!filename) {
-			throw new Error(`Missing manifest for ${file}`);
-		}
+	if (!filenameFromManifest) {
+		throw new Error(`Missing manifest for ${filename}`);
+	}
 
-		return `${ASSET_ORIGIN}assets/${filename}`;
-	});
+	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
 };
 
 /**
- * A curried function that takes an array of manifests.
- *
- * The returned function takes a script name and returns
- * an array of scripts found in the manifests.
- */
-export const getScriptsFromManifest =
-	(
-		opts:
-			| { platform: 'apps' }
-			| { platform: 'web'; shouldServeVariantBundle: boolean },
-	) =>
-	(file: `${string}.js`): ReturnType<typeof getScripts> => {
-		if (opts.platform === 'apps') {
-			return getScripts(getManifestPaths('apps'), file);
-		} else {
-			return getScripts(
-				getManifestPaths(
-					opts.shouldServeVariantBundle ? 'variant' : 'control',
-				),
-				file,
-			);
-		}
-	};
-
-/** To ensure this only applies to guardian scripts,
- * we check that it is served from a asset/ directory
+ * To ensure this only applies to guardian scripts,
+ * we check that it is served from an asset/ directory
  * and that it ends with the bundle type and extension,
  * with an optional hash for local development
  * and stripped query parameters.
  */
-const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant' | 'apps') =>
-	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\w{20}\\.)?js(\\?.*)?$`);
+const getScriptRegex = (build: Build) =>
+	new RegExp(`assets\\/\\w+\\.${build}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');

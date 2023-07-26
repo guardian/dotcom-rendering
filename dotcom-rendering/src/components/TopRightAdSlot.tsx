@@ -10,22 +10,16 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
  * **Currently**, `ShadyPie` is  disabled, pending the rollout
  * of the new supporter plus product.
  *
- * ## Why does this need to be an Island?
- *
- * It relies on running `useAdBlockInUse` on the client.
- *
- * **Currently**, it does not need to be.
- *
- * ---
- *
  * (No visual story exists)
  */
 export const TopRightAdSlot = ({
 	adStyles,
-	isPaidContent,
+	isPaidContent = false,
+	restrictStickyHeight = false,
 }: {
 	adStyles: SerializedStyles[];
-	isPaidContent: boolean;
+	isPaidContent?: boolean;
+	restrictStickyHeight?: boolean;
 }) => {
 	return (
 		<div
@@ -35,6 +29,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
+					max-height: ${restrictStickyHeight ? '1059px' : '100%'};
 				`,
 				adStyles,
 			]}

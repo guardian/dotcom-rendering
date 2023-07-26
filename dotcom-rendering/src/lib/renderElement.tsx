@@ -155,7 +155,7 @@ export const renderElement = ({
 						kicker={element.kicker}
 						title={element.title}
 						duration={element.duration}
-						pillar={format.theme}
+						format={format}
 						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
@@ -318,7 +318,7 @@ export const renderElement = ({
 						html={element.html}
 						image={element.img}
 						credit={element.credit}
-						pillar={format.theme}
+						format={format}
 					/>
 				</Island>
 			);

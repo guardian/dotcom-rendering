@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { CardCommentCount } from './CardCommentCount';
 
 export default {
@@ -23,7 +23,7 @@ export const CommentCountStory = () => {
 			<CardCommentCount
 				format={{
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					display: ArticleDisplay.Standard,
 				}}
 				short="11k"
@@ -40,7 +40,7 @@ export const GalleryStory = () => {
 			<CardCommentCount
 				format={{
 					design: ArticleDesign.Gallery,
-					theme: ArticlePillar.Culture,
+					theme: Pillar.Culture,
 					display: ArticleDisplay.Standard,
 				}}
 				short="11k"

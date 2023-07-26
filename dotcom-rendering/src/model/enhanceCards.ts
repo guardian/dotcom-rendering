@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
@@ -10,7 +10,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
-	FEMediaAtoms,
+	FEMediaAtom,
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
@@ -62,7 +62,7 @@ const decidePresentationFormat = ({
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return { ...containerFormat, theme: ArticlePillar.News };
+		return { ...containerFormat, theme: Pillar.News };
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -184,10 +184,48 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
  * it *happens to be* correct in the majority of cases.
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
+
+const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
+	if (mediaAtom) {
+		const asset = mediaAtom.assets.find(
+			({ version }) => version === mediaAtom.activeVersion,
+		);
+		if (asset?.platform === 'Youtube') {
+			return {
+				type: 'Video',
+				elementId: mediaAtom.id,
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				title: mediaAtom.title,
+				// Size fixed to a 5:3 ratio
+				width: 500,
+				height: 300,
+				origin: mediaAtom.source ?? 'Unknown origin',
+				expired: !!mediaAtom.expired,
+				images:
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+			};
+		}
+	}
+	return undefined;
+};
+
 const decideMedia = (
 	format: ArticleFormat,
-	mediaAtom?: FEMediaAtoms,
+	showMainVideo?: boolean,
+	mediaAtom?: FEMediaAtom,
 ): MainMedia | undefined => {
+	// If the showVideo toggle is enabled in the fronts tool,
+	// we should return the active mediaAtom regardless of the design
+	if (showMainVideo) {
+		return getActiveMediaAtom(mediaAtom);
+	}
+
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return { type: 'Gallery' };
@@ -199,33 +237,7 @@ const decideMedia = (
 			};
 
 		case ArticleDesign.Video: {
-			if (mediaAtom) {
-				const asset = mediaAtom.assets.find(
-					({ version }) => version === mediaAtom.activeVersion,
-				);
-				if (asset?.platform === 'Youtube') {
-					return {
-						type: 'Video',
-						elementId: mediaAtom.id,
-						videoId: asset.id,
-						duration: mediaAtom.duration ?? 0,
-						title: mediaAtom.title,
-						// Size fixed to a 5:3 ratio
-						width: 500,
-						height: 300,
-						origin: mediaAtom.source ?? 'Unknown origin',
-						expired: !!mediaAtom.expired,
-						images:
-							mediaAtom.posterImage?.allImages.map(
-								({ url, fields: { width } }) => ({
-									url,
-									width: Number(width),
-								}),
-							) ?? [],
-					};
-				}
-			}
-			return undefined;
+			return getActiveMediaAtom(mediaAtom);
 		}
 
 		default:
@@ -335,6 +347,7 @@ export const enhanceCards = (
 					: undefined,
 			mainMedia: decideMedia(
 				format,
+				faciaCard.properties.showMainVideo,
 				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
 			),
 			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',

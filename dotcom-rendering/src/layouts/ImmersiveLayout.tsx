@@ -725,9 +725,6 @@ export const ImmersiveLayout = ({
 													<AdSlot
 														position="right"
 														display={format.display}
-														shouldHideReaderRevenue={
-															article.shouldHideReaderRevenue
-														}
 														isPaidContent={
 															article.pageType
 																.isPaidContent

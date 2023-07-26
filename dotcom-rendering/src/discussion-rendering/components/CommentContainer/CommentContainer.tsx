@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import type {
 	CommentResponse,
 	CommentType,
+	SignedInUser,
 	ThreadsType,
-	UserProfile,
 } from '../../discussionTypes';
 import { getMoreResponses } from '../../lib/api';
 import { Comment } from '../Comment/Comment';
@@ -20,7 +20,7 @@ type Props = {
 	pillar: ArticleTheme;
 	isClosedForComments: boolean;
 	shortUrl: string;
-	user?: UserProfile;
+	user?: SignedInUser;
 	threads: ThreadsType;
 	commentBeingRepliedTo?: CommentType;
 	setCommentBeingRepliedTo: (commentBeingRepliedTo?: CommentType) => void;

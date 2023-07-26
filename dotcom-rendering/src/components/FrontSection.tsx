@@ -259,6 +259,12 @@ const sectionHeadlineFromLeftCol = (borderColour: string) => css`
 	}
 `;
 
+const sectionHeadlineHeight = css`
+	${until.tablet} {
+		min-height: 58px;
+	}
+`;
+
 const paddings = css`
 	padding-top: ${space[2]}px;
 `;
@@ -293,6 +299,9 @@ const sectionContentPadded = css`
 const sectionBottomContent = css`
 	grid-row: bottom-content;
 	grid-column: content;
+	.hidden > & {
+		display: none;
+	}
 `;
 
 const sectionTreats = css`
@@ -543,6 +552,8 @@ export const FrontSection = ({
 						sectionHeadlineFromLeftCol(
 							overrides?.border.container ?? neutral[86],
 						),
+					title?.toLowerCase() === 'headlines' &&
+						sectionHeadlineHeight,
 				]}
 			>
 				{/* Only show the badge with a "Paid for by" label on the FIRST card of a paid front */}
@@ -616,7 +627,7 @@ export const FrontSection = ({
 							/>
 							{!isOnPaidContentFront &&
 								!!editionBranding &&
-								editionBranding?.branding &&
+								editionBranding.branding &&
 								index === 0 && (
 									<>
 										<p css={labelStyles}>
@@ -684,7 +695,7 @@ export const FrontSection = ({
 			>
 				{isString(targetedTerritory) &&
 				isAustralianTerritory(targetedTerritory) ? (
-					<Island deferUntil="interaction">
+					<Island deferUntil="visible">
 						<AustralianTerritorySwitcher
 							targetedTerritory={targetedTerritory}
 						/>

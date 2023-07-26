@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial';
+import { adSizes, constants } from '@guardian/commercial';
 import type { SlotName } from '@guardian/commercial';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -9,18 +9,21 @@ import {
 	space,
 	text,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
-import { TopRightAdSlot } from './TopRightAdSlot.importable';
+import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
+import { TopRightAdSlot } from './TopRightAdSlot';
 
-type InlinePosition = 'inline' | 'liveblog-inline' | 'mobile-front';
+type InlinePosition =
+	| 'inline'
+	| 'liveblog-inline'
+	| 'liveblog-right'
+	| 'mobile-front';
 
-type InlineProps = {
+type DefaultProps = {
 	display?: ArticleDisplay;
-	position: InlinePosition;
-	index: number;
-	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
 	hasPageskin?: boolean;
 };
@@ -28,23 +31,24 @@ type InlineProps = {
 // TODO move to commercial
 type SlotNamesWithPageSkin = SlotName | 'pageskin';
 
+type InlineProps = {
+	position: InlinePosition;
+	index: number;
+};
+
 type NonInlineProps = {
-	display?: ArticleDisplay;
 	position: Exclude<SlotNamesWithPageSkin, InlinePosition>;
 	index?: never;
-	shouldHideReaderRevenue?: boolean;
-	isPaidContent?: boolean;
-	hasPageskin?: boolean;
 };
 
 /**
- * This union type allows us to conditionally require the index property
- * based on position. If `position` is 'inline' or 'mobile-front' then we expect the index
- * value. If not, then we explicitly refuse this property
+ * This allows us to conditionally require the index property based
+ * on position. If `position` is an inline type then we expect the
+ * index value. If not, then we explicitly refuse this property
  */
-type Props = InlineProps | NonInlineProps;
+type Props = DefaultProps & (InlineProps | NonInlineProps);
 
-export const labelHeight = 24;
+export const labelHeight = constants.AD_LABEL_HEIGHT.toString();
 
 const individualLabelCSS = css`
 	${textSans.xxsmall()};
@@ -124,9 +128,9 @@ export const labelStyles = css`
 	.ad-slot--interscroller[data-label-show='true']::before {
 		content: 'Advertisement';
 		position: absolute;
-		top: 0px;
-		left: 0px;
-		right: 0px;
+		top: 0;
+		left: 0;
+		right: 0;
 		border: 0;
 		display: block;
 		${individualLabelCSS}
@@ -326,6 +330,40 @@ export const AdSlot = ({
 				default:
 					return null;
 			}
+		case 'liveblog-right': {
+			const advertId = `liveblog-right-${index}`;
+			return (
+				<div
+					className="ad-slot-container"
+					css={[
+						labelStyles,
+						css`
+							height: ${AD_CONTAINER_HEIGHT}px;
+						`,
+					]}
+				>
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--liveblog-right',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: sticky;
+								top: 0;
+							`,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'comments': {
 			return (
 				<div className="ad-slot-container" css={[adContainerStyles]}>
@@ -423,6 +461,7 @@ export const AdSlot = ({
 						]}
 						data-link-name="ad slot merchandising-high"
 						data-name="merchandising-high"
+						data-refresh="false"
 						aria-hidden="true"
 					/>
 				</div>
@@ -492,8 +531,17 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 						].join(' ')}
 						css={[
+							/**
+							 * commercial code will look for slots that are display: none
+							 * and remove them from the dom
+							 *
+							 * on desktop we hide mobile inline slots
+							 */
 							css`
 								position: relative;
+								${until.tablet} {
+									display: none;
+								}
 							`,
 						]}
 						data-link-name={`ad slot ${advertId}`}
@@ -550,6 +598,17 @@ export const AdSlot = ({
 								min-width: 300px;
 								width: 300px;
 								margin: 12px auto;
+							`,
+							/**
+							 * commercial code will look for slots that are display: none
+							 * and remove them from the dom
+							 *
+							 * on mobile we hide desktop inline slots
+							 */
+							css`
+								${from.tablet} {
+									display: none;
+								}
 							`,
 							fluidFullWidthAdStyles,
 						]}

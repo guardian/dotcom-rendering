@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { CommentCount } from './CommentCount.importable';
@@ -26,7 +26,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 const format = {
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 };
@@ -120,83 +120,83 @@ export const Themes = () => {
 
 	return (
 		<Wrapper>
-			<Counts format={{ ...format, theme: ArticlePillar.News }}>
+			<Counts format={{ ...format, theme: Pillar.News }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.News }}
+						format={{ ...format, theme: Pillar.News }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.News }}
+						format={{ ...format, theme: Pillar.News }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Culture }}>
+			<Counts format={{ ...format, theme: Pillar.Culture }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Culture }}
+						format={{ ...format, theme: Pillar.Culture }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Culture }}
+						format={{ ...format, theme: Pillar.Culture }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Sport }}>
+			<Counts format={{ ...format, theme: Pillar.Sport }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Sport }}
+						format={{ ...format, theme: Pillar.Sport }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Sport }}
+						format={{ ...format, theme: Pillar.Sport }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Lifestyle }}>
+			<Counts format={{ ...format, theme: Pillar.Lifestyle }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+						format={{ ...format, theme: Pillar.Lifestyle }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+						format={{ ...format, theme: Pillar.Lifestyle }}
 					/>
 				</div>
 			</Counts>
-			<Counts format={{ ...format, theme: ArticlePillar.Opinion }}>
+			<Counts format={{ ...format, theme: Pillar.Opinion }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={{ ...format, theme: ArticlePillar.Opinion }}
+						format={{ ...format, theme: Pillar.Opinion }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						discussionApiUrl="https://discussion.theguardian.com"
 						shortUrlId="p/3bdii8"
-						format={{ ...format, theme: ArticlePillar.Opinion }}
+						format={{ ...format, theme: Pillar.Opinion }}
 					/>
 				</div>
 			</Counts>

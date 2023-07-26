@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Caption } from './Caption';
@@ -34,7 +34,7 @@ export const Article = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</Section>
@@ -48,7 +48,7 @@ export const Analysis = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</Section>
@@ -62,7 +62,7 @@ export const PhotoEssay = () => (
 			format={{
 				display: ArticleDisplay.Immersive,
 				design: ArticleDesign.PhotoEssay,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 		/>
 	</Section>
@@ -90,7 +90,7 @@ export const PhotoEssayLimitedWidth = () => (
 			format={{
 				display: ArticleDisplay.Immersive,
 				design: ArticleDesign.PhotoEssay,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			shouldLimitWidth={true}
 		/>
@@ -105,7 +105,7 @@ export const Credit = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Feature,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			credit="Credited to Able Jones"
 			displayCredit={true}
@@ -121,7 +121,7 @@ export const WidthLimited = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			shouldLimitWidth={true}
 		/>
@@ -136,7 +136,7 @@ export const Padded = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			padCaption={true}
 		/>
@@ -169,7 +169,7 @@ export const Overlaid = () => (
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				padCaption={true}
 			/>
@@ -203,7 +203,7 @@ export const OverlaidWithStars = () => (
 				format={{
 					display: ArticleDisplay.Showcase,
 					design: ArticleDesign.Review,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				padCaption={true}
 			/>
@@ -228,7 +228,7 @@ export const VideoCaption = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			mediaType="Video"
 		/>

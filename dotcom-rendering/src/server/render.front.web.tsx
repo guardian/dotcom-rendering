@@ -1,16 +1,17 @@
-import { ArticlePillar, isString } from '@guardian/libs';
+import { isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../scripts/webpack/bundles';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
-import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
 import { themeToPillar } from '../lib/themeToPillar';
-import { extractNAV, NavType } from '../model/extract-nav';
+import type { NavType } from '../model/extract-nav';
+import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRFrontType } from '../types/front';
 import type { DCRTagFrontType } from '../types/tagFront';
@@ -30,15 +31,15 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 			// The pillar name is "arts" in CAPI, but "culture" everywhere else
 			case 'Arts':
 			case 'Culture':
-				return ArticlePillar.Culture;
+				return Pillar.Culture;
 			case 'Opinion':
-				return ArticlePillar.Opinion;
+				return Pillar.Opinion;
 			case 'News':
-				return ArticlePillar.News;
+				return Pillar.News;
 			case 'Sport':
-				return ArticlePillar.Sport;
+				return Pillar.Sport;
 			case 'Lifestyle':
-				return ArticlePillar.Lifestyle;
+				return Pillar.Lifestyle;
 			default:
 				return undefined;
 		}
@@ -49,10 +50,7 @@ const extractFrontNav = (front: DCRFrontType): NavType => {
 		// Annoyingly "Football" appears in "News" and "Sport" pillars, so we exclude this case in "News"
 		// As "Football" is always "Sport". You can see the corresponding `frontend` code here:
 		// https://github.com/guardian/frontend/blob/main/common/app/navigation/Navigation.scala#L141-L143
-		if (
-			pillar.pillar === ArticlePillar.News &&
-			currentNavLink === 'Football'
-		) {
+		if (pillar.pillar === Pillar.News && currentNavLink === 'Football') {
 			return false;
 		}
 
@@ -91,16 +89,7 @@ export const renderFront = ({ front }: Props): string => {
 		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = shouldServeVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -112,8 +101,10 @@ export const renderFront = ({ front }: Props): string => {
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
 		]
@@ -162,8 +153,6 @@ export const renderFront = ({ front }: Props): string => {
 		offerHttp3,
 		renderingTarget: 'Web',
 		hasPageSkin: front.config.hasPageSkin,
-		borkFCP: front.config.abTests.borkFcpVariant === 'variant',
-		borkFID: front.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!front.config.switches.weAreHiring,
 	});
 };
@@ -192,16 +181,7 @@ export const renderTagFront = ({
 		tagFront.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'web',
-		shouldServeVariantBundle,
-	});
+	const build = shouldServeVariantBundle ? 'variant' : 'modern';
 
 	/**
 	 * The highest priority scripts.
@@ -213,8 +193,10 @@ export const renderTagFront = ({
 	const scriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('frameworks.js'),
-			...getScriptArrayFromFile('index.js'),
+			getPathFromManifest(build, 'frameworks.js'),
+			getPathFromManifest(build, 'index.js'),
+			getPathFromManifest('legacy', 'frameworks.js'),
+			getPathFromManifest('legacy', 'index.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				tagFront.config.commercialBundleUrl,
 		]
@@ -262,8 +244,6 @@ export const renderTagFront = ({
 		keywords,
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: tagFront.config.abTests.borkFcpVariant === 'variant',
-		borkFID: tagFront.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!tagFront.config.switches.weAreHiring,
 	});
 };

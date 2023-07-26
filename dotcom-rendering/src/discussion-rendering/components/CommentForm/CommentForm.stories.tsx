@@ -1,24 +1,27 @@
-import { ArticlePillar } from '@guardian/libs';
-import type { CommentType } from '../../discussionTypes';
+import { Pillar } from '@guardian/libs';
+import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { CommentForm } from './CommentForm';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
 
 const shortUrl = '/p/39f5z';
 
-const aUser = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
-	apiUrl: '',
-	avatar: '',
-	secureAvatarUrl: '',
-	badge: [],
-	privateFields: {
-		canPostComment: true,
-		isPremoderated: false,
-		hasCommented: true,
+const aUser: SignedInUser = {
+	profile: {
+		userId: 'abc123',
+		displayName: 'Jane Smith',
+		webUrl: '',
+		apiUrl: '',
+		avatar: '',
+		secureAvatarUrl: '',
+		badge: [],
+		privateFields: {
+			canPostComment: true,
+			isPremoderated: false,
+			hasCommented: true,
+		},
 	},
+	authStatus: { kind: 'SignedInWithCookies' },
 };
 
 const aComment: CommentType = {
@@ -53,7 +56,7 @@ const aComment: CommentType = {
 export const Default = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={ArticlePillar.News}
+		pillar={Pillar.News}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
@@ -64,7 +67,7 @@ Default.storyName = 'default';
 export const Error = () => (
 	<CommentForm
 		shortUrl={'/p/g8g7v'}
-		pillar={ArticlePillar.News}
+		pillar={Pillar.News}
 		user={aUser}
 		onAddComment={(comment) => {}}
 	/>
@@ -74,7 +77,7 @@ Error.storyName = 'form with errors';
 export const Active = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={ArticlePillar.Culture}
+		pillar={Pillar.Culture}
 		user={aUser}
 		onAddComment={(comment) => {}}
 		commentBeingRepliedTo={aComment}
@@ -85,12 +88,16 @@ Active.storyName = 'form is active';
 export const Premoderated = () => (
 	<CommentForm
 		shortUrl={shortUrl}
-		pillar={ArticlePillar.Opinion}
+		pillar={Pillar.Opinion}
 		user={{
 			...aUser,
-			privateFields: {
-				...aUser.privateFields,
-				isPremoderated: true,
+			profile: {
+				...aUser.profile,
+				privateFields: {
+					canPostComment: true,
+					isPremoderated: true,
+					hasCommented: true,
+				},
 			},
 		}}
 		onAddComment={(comment) => {}}

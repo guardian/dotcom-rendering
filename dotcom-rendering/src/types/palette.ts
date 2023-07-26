@@ -60,11 +60,14 @@ export type Palette = {
 		designTag: Colour;
 		dateLine: Colour;
 		tableOfContents: Colour;
+		expandableAtom: Colour;
+		expandableAtomHover: Colour;
 	};
 	background: {
 		article: Colour;
 		analysisContrast: Colour;
 		analysisContrastHover: Colour;
+		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;

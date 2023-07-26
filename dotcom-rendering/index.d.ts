@@ -286,12 +286,7 @@ interface FEKeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
-type CardImageType =
-	| 'picture'
-	| 'avatar'
-	| 'crossword'
-	| 'slideshow'
-	| 'video';
+type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
 
 type SmallHeadlineSize =
 	| 'tiny'

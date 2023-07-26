@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../lib/byline';
 import type { TagType } from '../types/tag';
@@ -107,7 +107,7 @@ describe('BylineLink', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 			/>,
 		);
@@ -140,7 +140,7 @@ describe('BylineLink', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 			/>,
 		);
@@ -175,7 +175,7 @@ describe('BylineLink', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 			/>,
 		);

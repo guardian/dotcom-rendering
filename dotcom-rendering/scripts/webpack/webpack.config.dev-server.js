@@ -79,7 +79,7 @@ module.exports = {
 				name: 'server',
 				// @ts-expect-error -- it’s a MultiCompiler
 				middleware: webpackHotServerMiddleware(devServer.compiler, {
-					chunkName: 'frontend.server',
+					chunkName: 'server',
 				}),
 			});
 

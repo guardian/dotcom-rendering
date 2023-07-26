@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { Standfirst } from './Standfirst';
@@ -8,7 +8,7 @@ describe('Standfirst', () => {
 		const { container } = render(
 			<Standfirst
 				format={{
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 					design: ArticleDesign.Interactive,
 					display: ArticleDisplay.Immersive,
 				}}
@@ -25,7 +25,7 @@ describe('Standfirst', () => {
 		const { container } = render(
 			<Standfirst
 				format={{
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}

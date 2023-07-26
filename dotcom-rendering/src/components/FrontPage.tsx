@@ -13,6 +13,7 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { Metrics } from './Metrics.importable';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SetAdTargeting } from './SetAdTargeting.importable';
 import { ShowHideContainers } from './ShowHideContainers.importable';
@@ -92,6 +93,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={front.config.idApiUrl} />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<ReaderRevenueDev shouldHideReaderRevenue={false} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>

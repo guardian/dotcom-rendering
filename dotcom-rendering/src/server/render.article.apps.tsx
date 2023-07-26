@@ -1,6 +1,6 @@
 import { isString } from '@guardian/libs';
 import { ArticlePage } from '../components/ArticlePage';
-import { generateScriptTags, getScriptsFromManifest } from '../lib/assets';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { decideFormat } from '../lib/decideFormat';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
@@ -24,11 +24,7 @@ export const renderArticle = (
 		/>,
 	);
 
-	const getScriptArrayFromFile = getScriptsFromManifest({
-		platform: 'apps',
-	});
-
-	const clientScripts = getScriptArrayFromFile('index.js');
+	const clientScripts = [getPathFromManifest('apps', 'index.js')];
 	const scriptTags = generateScriptTags([...clientScripts].filter(isString));
 
 	/**
@@ -65,8 +61,6 @@ export const renderArticle = (
 		windowGuardian,
 		renderingTarget: 'Apps',
 		offerHttp3: false,
-		borkFCP: false,
-		borkFID: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 

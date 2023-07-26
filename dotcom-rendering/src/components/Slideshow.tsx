@@ -140,6 +140,19 @@ const captionStyles = css`
 	padding: 60px 8px 8px;
 `;
 
+const additionalDynamoCaptionStyles = css`
+	${from.tablet} {
+		top: 0;
+		bottom: initial;
+		padding-top: 8px;
+		background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.8) 0%,
+			rgba(0, 0, 0, 0) 100%
+		);
+	}
+`;
+
 /**
  * **Slildeshow**
  *
@@ -166,9 +179,11 @@ const captionStyles = css`
 export const Slideshow = ({
 	images,
 	imageSize,
+	isDynamo,
 }: {
 	images: DCRSlideshowImage[];
 	imageSize: ImageSizeType;
+	isDynamo?: boolean;
 }) => {
 	return (
 		<>
@@ -197,6 +212,9 @@ export const Slideshow = ({
 						<figcaption
 							css={[
 								captionStyles,
+								isDynamo
+									? additionalDynamoCaptionStyles
+									: undefined,
 								// Don't show captions on mobile for small images
 								imageSize === 'small' && hideOnMobile,
 							]}

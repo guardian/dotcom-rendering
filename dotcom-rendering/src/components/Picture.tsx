@@ -272,7 +272,7 @@ type ImageSource = {
  */
 export const generateSources = (
 	master: string,
-	imageWidths: [ImageWidthType, ...ImageWidthType[]],
+	imageWidths: readonly [ImageWidthType, ...ImageWidthType[]],
 ): ImageSource[] =>
 	imageWidths
 		.slice()

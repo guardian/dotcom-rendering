@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { mockRESTCalls } from '../../../lib/mockRESTCalls';
@@ -12,8 +12,9 @@ describe('Dropdown', () => {
 		const { getByText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={ArticlePillar.Sport}
+				pillar={Pillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 
@@ -26,8 +27,9 @@ describe('Dropdown', () => {
 		const { getByText } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={ArticlePillar.Sport}
+				pillar={Pillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 
@@ -42,8 +44,9 @@ describe('Dropdown', () => {
 		const { getByText, getByLabelText, getByRole } = render(
 			<AbuseReportForm
 				toggleSetShowForm={() => undefined}
-				pillar={ArticlePillar.Sport}
+				pillar={Pillar.Sport}
 				commentId={123}
+				authStatus={undefined}
 			/>,
 		);
 
