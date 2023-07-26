@@ -1,5 +1,5 @@
+import { check } from 'k6';
 import http from 'k6/http';
-import { check } from 'scripts/perf/k6';
 
 export default function () {
 	const response = http.get(
