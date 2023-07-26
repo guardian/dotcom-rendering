@@ -23,5 +23,5 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
-	instanceType: 't4g.micro',
+	instanceType: 't4g.small',
 });
