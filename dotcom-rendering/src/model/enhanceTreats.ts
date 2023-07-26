@@ -2,6 +2,19 @@ import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { FEFrontCard, TreatType } from '../types/front';
 
+const SOCCER_TREAT: TreatType = {
+	links: [
+		{
+			linkTo: '/football/2023/jul/20/sign-up-for-soccer-with-jonathan-wilson-his-free-weekly-newsletter-on-european-soccer',
+			title: 'Soccer with Jonathan Wilson: ',
+			text: 'The latest on the global game',
+		},
+	],
+	theme: Pillar.Sport,
+	imageUrl: 'https://uploads.guim.co.uk/2023/07/26/soccer-treat-v1.png',
+	altText: 'Soccer ball',
+};
+
 /**
  * PLATFORM_TREATS
  *
@@ -60,6 +73,11 @@ const PLATFORM_TREATS: TreatType[] = [
 			'https://uploads.guim.co.uk/2023/06/02/BALL-nugget-grass_5.png',
 		altText: 'Image of football covered in bank notes',
 		pageId: 'football/world-cup-2022',
+	},
+	{
+		...SOCCER_TREAT,
+		pageId:'us',
+		containerTitle: 'Sports',
 	},
 ];
 
