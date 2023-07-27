@@ -1,5 +1,4 @@
-import { log as libsLog } from '@guardian/libs';
-import { measureDuration } from '../client/measureDuration';
+import { log as libsLog, startPerformanceMeasure } from '@guardian/libs';
 
 const START = performance.now();
 
@@ -154,8 +153,11 @@ async function run() {
 
 				const { name, task, resolver } = nextTask;
 
-				const { start, end } = measureDuration(name);
-				const startTime = start();
+				const { endPerformanceMeasure } = startPerformanceMeasure(
+					'dotcom',
+					'scheduler',
+					name,
+				);
 
 				const result = await (window.scheduler
 					? window.scheduler.postTask(task)
@@ -163,10 +165,10 @@ async function run() {
 
 				resolver(result);
 
-				const duration = end();
+				const duration = endPerformanceMeasure();
 				log(
 					`ran "${name}" in ${duration}ms (after ${
-						startTime + duration - START
+						performance.now() - START
 					}ms) 🥳`,
 				);
 			} else {
