@@ -38,14 +38,29 @@ export const injectPrivacySettingsLink = (): void => {
 						newPrivacyLinkListItem,
 					);
 
-					newPrivacyLink.addEventListener(
-						'click',
-						cmp.showPrivacyManager,
-					);
+					newPrivacyLink.addEventListener('click', (event) => {
+						event.preventDefault();
+						cmp.showPrivacyManager();
+					});
 				})
 				.catch((e) =>
 					console.error(`privacy settings - error: ${String(e)}`),
 				);
 		}
+	}
+};
+
+// Inject privacy link when document has finished loading
+export const injectPrivacySettingsLinkWhenReady = (): void => {
+	if (document.readyState === 'loading') {
+		document.addEventListener(
+			'readystatechange',
+			() => {
+				injectPrivacySettingsLink();
+			},
+			{ once: true },
+		);
+	} else {
+		injectPrivacySettingsLink();
 	}
 };
