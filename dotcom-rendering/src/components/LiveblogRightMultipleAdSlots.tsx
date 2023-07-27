@@ -6,20 +6,18 @@ import {
 	SPACE_BETWEEN_ADS,
 } from '../lib/liveblog-right-ad-constants';
 import { AdSlot } from './AdSlot';
+import { TOP_RIGHT_AD_STICKY_HEIGHT } from './TopRightAdSlot';
 
-const calculateNumAdsThatFit = (rightColHeight: number) => {
+export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
 
-	const rightAdTotalSpace = 1059 + PADDING_BOTTOM;
+	const rightAdTotalSpace = TOP_RIGHT_AD_STICKY_HEIGHT + SPACE_BETWEEN_ADS;
+	const spaceForLiveblogAds =
+		rightColHeight - rightAdTotalSpace - PADDING_BOTTOM;
 
-	return (
-		Math.floor(
-			(rightColHeight -
-				rightAdTotalSpace -
-				PADDING_BOTTOM +
-				SPACE_BETWEEN_ADS) /
-				(AD_CONTAINER_HEIGHT + SPACE_BETWEEN_ADS),
-		) || 1
+	return Math.floor(
+		(spaceForLiveblogAds + SPACE_BETWEEN_ADS) /
+			(AD_CONTAINER_HEIGHT + SPACE_BETWEEN_ADS),
 	);
 };
 
@@ -39,6 +37,10 @@ type Props = {
 	isPaidContent?: boolean;
 };
 
+/**
+ * In the right hand column, there will be the right ad slot, followed
+ * by as many liveblog-right ad slots that can fit
+ */
 export const LiveblogRightMultipleAdSlots = ({
 	display,
 	isPaidContent,
@@ -48,6 +50,8 @@ export const LiveblogRightMultipleAdSlots = ({
 	const [numberAdvertsInserted, setNumberAdvertsInserted] =
 		useState<number>(0);
 
+	// Recalculate whether we have room to insert a new ad
+	// each time the height of the right column changes.
 	useEffect(() => {
 		if (rightColHeight === null) return;
 
