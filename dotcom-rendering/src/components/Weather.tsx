@@ -28,9 +28,9 @@ import {
 	SvgExternal,
 } from '@guardian/source-react-components';
 import { useId } from 'react';
-import type { FEFrontConfigType } from '../types/front';
 import type { WeatherData, WeatherForecast } from './WeatherData.importable';
 import { WeatherSlot } from './WeatherSlot';
+import type { EditionId } from '../lib/edition';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}
@@ -193,7 +193,7 @@ export interface WeatherProps {
 	};
 	now: WeatherData;
 	forecast: WeatherForecast;
-	edition: FEFrontConfigType['edition'];
+	edition: EditionId;
 }
 
 const collapsibleStyles = css`
@@ -235,7 +235,6 @@ const collapsibleStyles = css`
 export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const checkboxId = useId();
 
-	const isUS = edition === 'US';
 	return (
 		<aside css={[collapsibleStyles, weatherCSS]}>
 			<input id={checkboxId} className="checkbox" type="checkbox" />
@@ -247,7 +246,7 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 			<p css={visuallyHiddenCSS}>Today’s weather for {location.city}:</p>
 
 			<div css={[nowCSS, slotCSS]} className="now">
-				<WeatherSlot {...now} isUS={isUS} />
+				<WeatherSlot {...now} edition={edition} />
 				<label htmlFor={checkboxId} className="checkbox-label">
 					<SvgChevronDownSingle size="xsmall"></SvgChevronDownSingle>
 					<SvgChevronUpSingle size="xsmall"></SvgChevronUpSingle>
@@ -255,16 +254,16 @@ export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 			</div>
 
 			<div css={slotCSS} className="forecast-1 collapsible">
-				<WeatherSlot isUS={isUS} {...forecast[3]} />
+				<WeatherSlot edition={edition} {...forecast[3]} />
 			</div>
 			<div css={slotCSS} className="forecast-2 collapsible">
-				<WeatherSlot isUS={isUS} {...forecast[6]} />
+				<WeatherSlot edition={edition} {...forecast[6]} />
 			</div>
 			<div css={slotCSS} className="forecast-3 collapsible">
-				<WeatherSlot isUS={isUS} {...forecast[9]} />
+				<WeatherSlot edition={edition} {...forecast[9]} />
 			</div>
 			<div css={slotCSS} className="forecast-4 collapsible">
-				<WeatherSlot isUS={isUS} {...forecast[12]} />
+				<WeatherSlot edition={edition} {...forecast[12]} />
 			</div>
 
 			<div css={linkCSS} className="collapsible">

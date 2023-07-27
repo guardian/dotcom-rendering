@@ -142,7 +142,7 @@ const decideLeftContent = (
 			<Island clientOnly={true} deferUntil={'idle'}>
 				<WeatherData
 					ajaxUrl={front.config.ajaxUrl}
-					edition={front.config.edition}
+					edition={front.editionId}
 				/>
 			</Island>
 		);
