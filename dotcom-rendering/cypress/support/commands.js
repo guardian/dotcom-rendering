@@ -33,11 +33,15 @@ Cypress.Commands.add('hydrate', () => {
 			const deferuntil = el.attr('deferuntil');
 			const name = el.attr('name');
 			const islandMeta = `island: ${name} defer: ${deferuntil}`;
+
 			if (['idle', 'visible', undefined].includes(deferuntil)) {
+				const action = !!el.attr('clientOnly')
+					? 'rendered'
+					: 'hydrated';
 				cy.log(`Scrolling to ${islandMeta}`);
 				cy.wrap(el)
 					.scrollIntoView({ duration: 1000, timeout: 30000 })
-					.should('have.attr', 'data-gu-ready', 'true', {
+					.should('have.attr', 'data-island-status', action, {
 						timeout: 30000,
 					});
 				// Additional wait to ensure island defer=visible has triggered

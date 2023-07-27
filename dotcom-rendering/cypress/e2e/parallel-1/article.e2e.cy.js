@@ -89,7 +89,7 @@ describe('E2E Page rendering', function () {
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
 				'be.visible',
@@ -115,7 +115,7 @@ describe('E2E Page rendering', function () {
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
 				'be.visible',
