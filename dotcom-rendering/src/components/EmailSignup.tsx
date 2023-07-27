@@ -11,8 +11,6 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { buildDetailText } from '../lib/buildNewsletterSignUpText';
-import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
