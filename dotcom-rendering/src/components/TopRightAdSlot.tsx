@@ -17,11 +17,9 @@ export const TOP_RIGHT_AD_STICKY_HEIGHT = 1059;
 export const TopRightAdSlot = ({
 	adStyles,
 	isPaidContent = false,
-	restrictStickyHeight = false,
 }: {
 	adStyles: SerializedStyles[];
 	isPaidContent?: boolean;
-	restrictStickyHeight?: boolean;
 }) => {
 	return (
 		<div
@@ -31,9 +29,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
-					max-height: ${restrictStickyHeight
-						? `${TOP_RIGHT_AD_STICKY_HEIGHT}px`
-						: '100%'};
+					max-height: 100%;
 				`,
 				adStyles,
 			]}

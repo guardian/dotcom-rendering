@@ -16,20 +16,11 @@ export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 			'multiple-adverts',
 		) ?? false;
 
-	const restrictStickyHeight =
-		ABTestAPI?.isUserInVariant(
-			'LiveblogRightColumnAds',
-			'minimum-stickiness',
-		) ?? false;
-
 	return (
 		<>
 			<TopRightAdSlot
 				isPaidContent={isPaidContent}
 				adStyles={[labelStyles]}
-				restrictStickyHeight={
-					restrictStickyHeight || shouldInsertMultipleAdverts
-				}
 			/>
 			{shouldInsertMultipleAdverts ? (
 				<LiveblogRightMultipleAdSlots

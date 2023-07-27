@@ -1,4 +1,4 @@
-import { calculateNumAdsThatFit } from "./LiveblogRightMultipleAdSlots";
+import { calculateNumAdsThatFit } from './LiveblogRightMultipleAdSlots';
 
 /**
  	Right ad height = 1059px
@@ -15,10 +15,18 @@ import { calculateNumAdsThatFit } from "./LiveblogRightMultipleAdSlots";
 
 describe(`LiveblogRightMultipleAdSlots`, () => {
 	describe(`calculateNumAdsThatFit`, () => {
-		const cases = [[3394, 0], [3395, 1], [5694, 1], [5695, 2]]
-		test.each(cases)(`inserts the correct number of ads`, (rightColHeight, expectedAds) => {
-			const result = calculateNumAdsThatFit(rightColHeight);
-			expect(result).toEqual(expectedAds)
-		});
+		const cases = [
+			[3394, 0],
+			[3395, 1],
+			[5694, 1],
+			[5695, 2],
+		];
+		test.each(cases)(
+			`inserts the correct number of ads`,
+			(rightColHeight, expectedAds) => {
+				const result = calculateNumAdsThatFit(rightColHeight);
+				expect(result).toEqual(expectedAds);
+			},
+		);
 	});
 });
