@@ -9,6 +9,31 @@ const isServer = typeof window === 'undefined';
 export const getCaptchaSiteKey = (): string | undefined =>
 	isServer ? undefined : window.guardian.config.page.googleRecaptchaSiteKey;
 
+/**
+ * get the value for the emailSignupRecaptcha, allowing
+ * for switches being undefined within stories
+ */
+const isEmailSignupRecaptchaSwitchOn = (): boolean => {
+	const { switches } = window.guardian.config;
+	if (typeof switches === 'undefined') {
+		return false;
+	}
+	return !!switches.emailSignupRecaptcha;
+};
+
+/**
+ * Get the ajaxUrl, returing an empty string
+ * if window.guardian.config.page is undefined
+ * (as it will be in stories)
+ */
+const getAjaxUrl = (): string => {
+	const { page } = window.guardian.config;
+	if (typeof page === 'undefined') {
+		return '';
+	}
+	return page.ajaxUrl;
+};
+
 const buildNewsletterSignUpFormData = (
 	emailAddress: string,
 	newsletterIdOrList: string | string[],
@@ -32,7 +57,7 @@ const buildNewsletterSignUpFormData = (
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
-	if (window.guardian.config.switches.emailSignupRecaptcha) {
+	if (isEmailSignupRecaptchaSwitchOn()) {
 		formData.append('g-recaptcha-response', recaptchaToken);
 	}
 
@@ -74,10 +99,7 @@ export const requestMultipleSignUps = async (
 		recaptchaToken,
 	);
 
-	return await postFormData(
-		window.guardian.config.page.ajaxUrl + '/email/many',
-		data,
-	);
+	return await postFormData(getAjaxUrl() + '/email/many', data);
 };
 
 export const requestSingleSignUp = async (
@@ -91,30 +113,7 @@ export const requestSingleSignUp = async (
 		recaptchaToken,
 	);
 
-	return await postFormData(
-		window.guardian.config.page.ajaxUrl + '/email',
-		data,
-	);
-};
-
-export const mockRequestMultipleSignUps = async (
-	emailAddress: string,
-	newsletterIds: string[],
-	recaptchaToken: string,
-): Promise<Response> => {
-	await new Promise((resolve) => {
-		setTimeout(resolve, 2000);
-	});
-
-	const fail = emailAddress.includes('example');
-
-	return {
-		ok: !fail,
-		status: fail ? 400 : 200,
-		message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}]. reCaptchaToken is ${
-			recaptchaToken.length
-		} characters.`,
-	} as unknown as Response;
+	return await postFormData(getAjaxUrl() + '/email', data);
 };
 
 type TrackingEventDescription =

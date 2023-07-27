@@ -484,6 +484,26 @@ export const mockRESTCalls = (): typeof fetchMock => {
 				{ overwriteRoutes: false },
 			)
 			/** @see https://github.com/wheresrhys/fetch-mock/issues/618 */
+
+			// Return an error response if the request body includes the
+			// phrase 'example.com', otherwise, return a success response.
+			// For use on stories involving posts to the '/email/many'
+			// api enpoint eg:
+			// dotcom-rendering/src/components/ManyNewsletterSignUp.stories.tsx
+			.post(
+				'/email/many',
+				(url, mockRequest) => {
+					const decodedBody = decodeURIComponent(
+						mockRequest.body?.toString() ?? '',
+					);
+
+					return decodedBody.includes('example.com')
+						? { status: 500 }
+						: { status: 200 };
+				},
+				{ overwriteRoutes: false },
+			)
+
 			.spy('end:.hot-update.json')
 	);
 };

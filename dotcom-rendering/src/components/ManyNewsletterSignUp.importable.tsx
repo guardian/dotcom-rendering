@@ -11,7 +11,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ReCAPTCHA } from 'react-google-recaptcha';
 import {
 	getCaptchaSiteKey,
-	mockRequestMultipleSignUps,
 	reportTrackingEvent,
 	requestMultipleSignUps,
 } from '../lib/newsletter-sign-up-requests';
@@ -21,13 +20,6 @@ import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
 interface Props {
-	/**
-	 * Whether to use the mocked request function.
-	 *
-	 * This option is to allow a functional Story to be published for the component.
-	 * TO DO - find a better way to do that!
-	 */
-	useMockedRequestFunction?: boolean;
 	useReCaptcha: boolean;
 }
 
@@ -108,10 +100,7 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
-export const ManyNewsletterSignUp = ({
-	useMockedRequestFunction,
-	useReCaptcha,
-}: Props) => {
+export const ManyNewsletterSignUp = ({ useReCaptcha }: Props) => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
@@ -193,10 +182,7 @@ export const ManyNewsletterSignUp = ({
 			newsletterIds: newslettersToSignUpFor,
 		});
 
-		const functionToUse = useMockedRequestFunction
-			? mockRequestMultipleSignUps
-			: requestMultipleSignUps;
-		const response = await functionToUse(
+		const response = await requestMultipleSignUps(
 			email,
 			newslettersToSignUpFor,
 			reCaptchaToken,
