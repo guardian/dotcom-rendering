@@ -10,8 +10,8 @@ import {
 } from '@guardian/source-foundations';
 import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
-import type { WeatherData } from './WeatherData.importable';
 import { type EditionId, getEditionFromId } from '../lib/edition';
+import type { WeatherData } from './WeatherData.importable';
 
 interface IconProps {
 	size?: number;
