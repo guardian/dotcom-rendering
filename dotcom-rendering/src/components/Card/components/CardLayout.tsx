@@ -32,16 +32,19 @@ const decideWidth = (
 	minWidthInPixels?: number,
 	containerType?: DCRContainerType,
 ) => {
+	const padding = 20;
 	switch (containerType) {
 		case 'fixed/video':
 			return css`
 				min-width: 300px;
 				max-width: 600px;
-				width: calc((100vw - 40px) / 1.5); // Show 1.5 cards
+				width: calc((100vw - ${padding}px) / 1.5); // Show 1.5 cards
 				overflow: hidden;
 
 				${until.mobileLandscape} {
-					width: calc((100vw - 40px)); // Show 1 card on small screens
+					width: calc(
+						100vw - ${padding}px
+					); // Show 1 card on small screens
 				}
 			`;
 
