@@ -13,7 +13,6 @@ import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 
 const FORBIDDEN_CONTAINERS = [
-	'Palette styles new do not delete',
 	'Palette styles',
 	'culture-treat',
 	'newsletter treat',
