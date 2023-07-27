@@ -93,11 +93,20 @@ export const decideAdSlot = (
 		index === getMerchHighPosition(collectionCount, isNetworkFront)
 	) {
 		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="merchandising-high"
-				hasPageskin={hasPageSkin}
-			/>
+			<Section
+				fullWidth={true}
+				padSides={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={neutral[93]}
+				element="aside"
+			>
+				<AdSlot
+					data-print-layout="hide"
+					position="merchandising-high"
+					hasPageskin={hasPageSkin}
+				/>
+			</Section>
 		);
 	} else if (mobileAdPositions.includes(index)) {
 		return (
