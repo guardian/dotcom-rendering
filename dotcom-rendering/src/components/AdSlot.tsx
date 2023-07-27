@@ -141,6 +141,12 @@ const adContainerCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
 	}
+
+	.ad-slot--billboard {
+		${until.desktop} {
+			display: none;
+		}
+	}
 `;
 
 const adSlotCollapseStyles = css`
