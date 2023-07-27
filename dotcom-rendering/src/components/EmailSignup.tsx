@@ -128,7 +128,6 @@ export const EmailSignup = ({
 							Sign up to <span>{name}</span>
 						</span>
 					</div>
-					</span>
 				</summary>
 				<div>
 					<p css={descriptionStyles}>{description}</p>
