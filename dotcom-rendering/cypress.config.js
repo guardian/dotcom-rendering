@@ -8,6 +8,7 @@ module.exports = defineConfig({
 	viewportHeight: 860,
 	video: false,
 	chromeWebSecurity: false,
+	numTestsKeptInMemory: 5,
 	blockHosts: [
 		'*ophan.theguardian.com',
 		'pixel.adsafeprotected.com',
@@ -22,7 +23,7 @@ module.exports = defineConfig({
 		'*openx.net',
 	],
 	retries: {
-		runMode: 2,
+		runMode: 5,
 		openMode: 0,
 	},
 	e2e: {

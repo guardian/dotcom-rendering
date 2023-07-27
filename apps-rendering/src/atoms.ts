@@ -1,4 +1,3 @@
-import type { TimelineEvent } from '@guardian/atoms-rendering';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { fromNullable } from '@guardian/types';
@@ -9,6 +8,15 @@ import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
+
+interface TimelineEvent {
+    title: string;
+    date: string;
+    unixDate: number;
+    body?: string;
+    toDate?: string;
+    toUnixDate?: number;
+}
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
 	if (date === undefined) return undefined;
@@ -27,6 +35,10 @@ function parseAtom(
 	}
 
 	const id = element.contentAtomTypeData.atomId;
+
+	if (id === 'interactives/2022/10/tr/default-about-the-series') {
+		return Result.ok({ kind: ElementKind.SpecialReportAltAtom });
+	}
 
 	switch (element.contentAtomTypeData.atomType) {
 		case 'interactive': {
@@ -352,5 +364,7 @@ function parseAtom(
 		}
 	}
 }
+
+export type { TimelineEvent };
 
 export { parseAtom, formatOptionalDate };

@@ -10,6 +10,7 @@
         "stylelint.vscode-stylelint",
         "eamodio.gitlens",
         "streetsidesoftware.code-spell-checker",
-        "denoland.vscode-deno"
+        "denoland.vscode-deno",
+		"redhat.vscode-yaml"
     ]
 }

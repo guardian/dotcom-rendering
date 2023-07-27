@@ -5,7 +5,7 @@
             "$ref": "#/definitions/FEPressedPageType"
         },
         "nav": {
-            "$ref": "#/definitions/CAPINavType"
+            "$ref": "#/definitions/FENavType"
         },
         "editionId": {
             "$ref": "#/definitions/EditionId"
@@ -59,22 +59,14 @@
                     "type": "string"
                 },
                 "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
+                    "$ref": "#/definitions/SharedAdTargeting"
                 },
                 "buildNumber": {
                     "type": "string"
                 },
                 "abTests": {
-                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
-                    "type": "object",
-                    "additionalProperties": {
-                        "enum": [
-                            "control",
-                            "variant"
-                        ],
-                        "type": "string"
-                    }
+                    "description": "Narrowest representation of the server-side tests\nobject shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).\n\n**Note:** This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object"
                 },
                 "pbIndexSites": {
                     "type": "array",
@@ -127,9 +119,7 @@
                 },
                 "isFront": {
                     "type": "boolean",
-                    "enum": [
-                        true
-                    ]
+                    "const": true
                 },
                 "idWebAppUrl": {
                     "type": "string"
@@ -379,19 +369,29 @@
         "mostViewed": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/CAPITrailType"
+                "$ref": "#/definitions/FETrailType"
             }
         },
         "mostCommented": {
-            "$ref": "#/definitions/CAPITrailType"
+            "$ref": "#/definitions/FETrailType"
         },
         "mostShared": {
-            "$ref": "#/definitions/CAPITrailType"
+            "$ref": "#/definitions/FETrailType"
+        },
+        "deeplyRead": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/FETrailType"
+            }
+        },
+        "contributionsServiceUrl": {
+            "type": "string"
         }
     },
     "required": [
         "commercialProperties",
         "config",
+        "contributionsServiceUrl",
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
@@ -445,10 +445,106 @@
                             "type": "boolean"
                         },
                         "commercial": {
-                            "$ref": "#/definitions/Record<string,unknown>"
+                            "type": "object",
+                            "properties": {
+                                "editionBrandings": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "edition": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id"
+                                                ]
+                                            },
+                                            "branding": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "brandingType": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "name": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "name"
+                                                        ]
+                                                    },
+                                                    "sponsorName": {
+                                                        "type": "string"
+                                                    },
+                                                    "logo": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "src": {
+                                                                "type": "string"
+                                                            },
+                                                            "dimensions": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "width": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "height": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "height",
+                                                                    "width"
+                                                                ]
+                                                            },
+                                                            "link": {
+                                                                "type": "string"
+                                                            },
+                                                            "label": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "dimensions",
+                                                            "label",
+                                                            "link",
+                                                            "src"
+                                                        ]
+                                                    },
+                                                    "aboutThisLink": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "aboutThisLink",
+                                                    "brandingType",
+                                                    "logo",
+                                                    "sponsorName"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "edition"
+                                        ]
+                                    }
+                                },
+                                "editionAdTargetings": {},
+                                "prebidIndexSites": {}
+                            },
+                            "required": [
+                                "editionAdTargetings",
+                                "editionBrandings"
+                            ]
                         },
                         "isPaidContent": {
                             "type": "boolean"
+                        },
+                        "onPageDescription": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -542,9 +638,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -612,13 +706,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -655,7 +749,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtom"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -714,6 +820,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -758,6 +883,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -791,6 +933,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -799,6 +944,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -920,7 +1068,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1009,13 +1157,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -1094,13 +1242,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -1119,7 +1267,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1212,9 +1360,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1282,13 +1428,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1325,7 +1471,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtom"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -1384,6 +1542,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -1428,6 +1605,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -1461,6 +1655,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -1469,6 +1666,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -1590,7 +1790,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -1679,13 +1879,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -1764,13 +1964,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -1789,7 +1989,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -1882,9 +2082,7 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "credit",
                                                                                             "height",
-                                                                                            "mediaId",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1952,13 +2150,13 @@
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "design": {
-                                                                            "$ref": "#/definitions/CAPIDesign"
+                                                                            "$ref": "#/definitions/FEDesign"
                                                                         },
                                                                         "theme": {
-                                                                            "$ref": "#/definitions/CAPITheme"
+                                                                            "$ref": "#/definitions/FETheme"
                                                                         },
                                                                         "display": {
-                                                                            "$ref": "#/definitions/CAPIDisplay"
+                                                                            "$ref": "#/definitions/FEDisplay"
                                                                         }
                                                                     },
                                                                     "required": [
@@ -1995,7 +2193,19 @@
                                                             ]
                                                         },
                                                         "elements": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "mainVideo": {},
+                                                                "mediaAtoms": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "$ref": "#/definitions/FEMediaAtom"
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "mediaAtoms"
+                                                            ]
                                                         },
                                                         "tags": {
                                                             "type": "object",
@@ -2054,6 +2264,25 @@
                                                                                     "tagType",
                                                                                     "webTitle"
                                                                                 ]
+                                                                            },
+                                                                            "pagination": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "currentPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "lastPage": {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    "totalContent": {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "currentPage",
+                                                                                    "lastPage",
+                                                                                    "totalContent"
+                                                                                ]
                                                                             }
                                                                         },
                                                                         "required": [
@@ -2098,6 +2327,23 @@
                                                             "properties": {
                                                                 "imageSrc": {
                                                                     "type": "string"
+                                                                },
+                                                                "assets": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "imageSrc": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "imageCaption": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "imageSrc"
+                                                                        ]
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -2131,6 +2377,9 @@
                                                                 "required": [
                                                                     "id"
                                                                 ]
+                                                            },
+                                                            "branding": {
+                                                                "$ref": "#/definitions/Branding"
                                                             }
                                                         },
                                                         "required": [
@@ -2139,6 +2388,9 @@
                                                     }
                                                 },
                                                 "href": {
+                                                    "type": "string"
+                                                },
+                                                "embedUri": {
                                                     "type": "string"
                                                 }
                                             },
@@ -2260,7 +2512,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string"
+                                                            "$ref": "#/definitions/FEFrontCardStyle"
                                                         }
                                                     },
                                                     "required": [
@@ -2349,13 +2601,13 @@
                                             "type": "object",
                                             "properties": {
                                                 "design": {
-                                                    "$ref": "#/definitions/CAPIDesign"
+                                                    "$ref": "#/definitions/FEDesign"
                                                 },
                                                 "theme": {
-                                                    "$ref": "#/definitions/CAPITheme"
+                                                    "$ref": "#/definitions/FETheme"
                                                 },
                                                 "display": {
-                                                    "$ref": "#/definitions/CAPIDisplay"
+                                                    "$ref": "#/definitions/FEDisplay"
                                                 }
                                             },
                                             "required": [
@@ -2434,13 +2686,13 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "design": {
-                                                                "$ref": "#/definitions/CAPIDesign"
+                                                                "$ref": "#/definitions/FEDesign"
                                                             },
                                                             "theme": {
-                                                                "$ref": "#/definitions/CAPITheme"
+                                                                "$ref": "#/definitions/FETheme"
                                                             },
                                                             "display": {
-                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                                "$ref": "#/definitions/FEDisplay"
                                                             }
                                                         },
                                                         "required": [
@@ -2459,7 +2711,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEFrontCardStyle"
                                                 }
                                             },
                                             "required": [
@@ -2593,6 +2845,9 @@
                             },
                             "hasMore": {
                                 "type": "boolean"
+                            },
+                            "targetedTerritory": {
+                                "$ref": "#/definitions/Territory"
                             }
                         },
                         "required": [
@@ -2621,10 +2876,7 @@
                 "seoData"
             ]
         },
-        "Record<string,unknown>": {
-            "type": "object"
-        },
-        "CAPIDesign": {
+        "FEDesign": {
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
@@ -2645,14 +2897,16 @@
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
+                "ProfileDesign",
                 "QuizDesign",
                 "RecipeDesign",
                 "ReviewDesign",
+                "TimelineDesign",
                 "VideoDesign"
             ],
             "type": "string"
         },
-        "CAPITheme": {
+        "FETheme": {
             "enum": [
                 "CulturePillar",
                 "Labs",
@@ -2665,7 +2919,7 @@
             ],
             "type": "string"
         },
-        "CAPIDisplay": {
+        "FEDisplay": {
             "enum": [
                 "ImmersiveDisplay",
                 "NumberedListDisplay",
@@ -2674,6 +2928,124 @@
             ],
             "type": "string"
         },
+        "FEMediaAtom": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "assets": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MediaAsset"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "posterImage": {
+                    "type": "object",
+                    "properties": {
+                        "allImages": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Image"
+                            }
+                        }
+                    },
+                    "required": [
+                        "allImages"
+                    ]
+                },
+                "expired": {
+                    "type": "boolean"
+                },
+                "activeVersion": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "assets",
+                "id",
+                "title"
+            ]
+        },
+        "MediaAsset": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "number"
+                },
+                "platform": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "platform",
+                "version"
+            ]
+        },
+        "Image": {
+            "type": "object",
+            "properties": {
+                "index": {
+                    "type": "number"
+                },
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "height": {
+                            "type": "string"
+                        },
+                        "width": {
+                            "type": "string"
+                        },
+                        "isMaster": {
+                            "type": "string"
+                        },
+                        "source": {
+                            "type": "string"
+                        },
+                        "caption": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "height",
+                        "width"
+                    ]
+                },
+                "mediaType": {
+                    "type": "string"
+                },
+                "mimeType": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "fields",
+                "index",
+                "mediaType",
+                "mimeType",
+                "url"
+            ]
+        },
         "EditionId": {
             "enum": [
                 "AU",
@@ -2681,395 +3053,6 @@
                 "INT",
                 "UK",
                 "US"
-            ],
-            "type": "string"
-        },
-        "FEContainerType": {
-            "enum": [
-                "dynamic/fast",
-                "dynamic/package",
-                "dynamic/slow",
-                "dynamic/slow-mpu",
-                "fixed/large/slow-XIV",
-                "fixed/medium/fast-XI",
-                "fixed/medium/fast-XII",
-                "fixed/medium/slow-VI",
-                "fixed/medium/slow-VII",
-                "fixed/medium/slow-XII-mpu",
-                "fixed/small/fast-VIII",
-                "fixed/small/slow-I",
-                "fixed/small/slow-III",
-                "fixed/small/slow-IV",
-                "fixed/small/slow-V-half",
-                "fixed/small/slow-V-mpu",
-                "fixed/small/slow-V-third",
-                "fixed/thrasher",
-                "fixed/video",
-                "nav/list",
-                "nav/media-list",
-                "news/most-popular"
-            ],
-            "type": "string"
-        },
-        "FEContainerPalette": {
-            "enum": [
-                "Branded",
-                "Breaking",
-                "BreakingPalette",
-                "Canonical",
-                "Dynamo",
-                "DynamoLike",
-                "EventAltPalette",
-                "EventPalette",
-                "InvestigationPalette",
-                "LongRunningAltPalette",
-                "LongRunningPalette",
-                "Podcast",
-                "SombreAltPalette",
-                "SombrePalette",
-                "Special",
-                "SpecialReportAltPalette"
-            ],
-            "type": "string"
-        },
-        "CAPINavType": {
-            "type": "object",
-            "properties": {
-                "currentUrl": {
-                    "type": "string"
-                },
-                "pillars": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "otherLinks": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "brandExtensions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "currentNavLink": {
-                    "$ref": "#/definitions/CAPILinkType"
-                },
-                "currentNavLinkTitle": {
-                    "type": "string"
-                },
-                "currentPillarTitle": {
-                    "type": "string"
-                },
-                "subNavSections": {
-                    "type": "object",
-                    "properties": {
-                        "parent": {
-                            "$ref": "#/definitions/CAPILinkType"
-                        },
-                        "links": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/CAPILinkType"
-                            }
-                        }
-                    },
-                    "required": [
-                        "links"
-                    ]
-                },
-                "readerRevenueLinks": {
-                    "$ref": "#/definitions/ReaderRevenuePositions"
-                }
-            },
-            "required": [
-                "brandExtensions",
-                "currentUrl",
-                "otherLinks",
-                "pillars",
-                "readerRevenueLinks"
-            ]
-        },
-        "CAPILinkType": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "longTitle": {
-                    "type": "string"
-                },
-                "iconName": {
-                    "type": "string"
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
-                },
-                "more": {
-                    "type": "boolean"
-                },
-                "classList": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "url"
-            ]
-        },
-        "LegacyPillar": {
-            "enum": [
-                "culture",
-                "labs",
-                "lifestyle",
-                "news",
-                "opinion",
-                "sport"
-            ],
-            "type": "string"
-        },
-        "ReaderRevenuePositions": {
-            "type": "object",
-            "properties": {
-                "header": {
-                    "$ref": "#/definitions/ReaderRevenueCategories"
-                },
-                "footer": {
-                    "$ref": "#/definitions/ReaderRevenueCategories"
-                },
-                "sideMenu": {
-                    "$ref": "#/definitions/ReaderRevenueCategories"
-                },
-                "ampHeader": {
-                    "$ref": "#/definitions/ReaderRevenueCategories"
-                },
-                "ampFooter": {
-                    "$ref": "#/definitions/ReaderRevenueCategories"
-                }
-            },
-            "required": [
-                "ampFooter",
-                "ampHeader",
-                "footer",
-                "header",
-                "sideMenu"
-            ]
-        },
-        "ReaderRevenueCategories": {
-            "type": "object",
-            "properties": {
-                "contribute": {
-                    "type": "string"
-                },
-                "subscribe": {
-                    "type": "string"
-                },
-                "support": {
-                    "type": "string"
-                },
-                "supporter": {
-                    "type": "string"
-                },
-                "gifting": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "contribute",
-                "subscribe",
-                "support",
-                "supporter"
-            ]
-        },
-        "Switches": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "boolean"
-            }
-        },
-        "StageType": {
-            "enum": [
-                "CODE",
-                "DEV",
-                "PROD"
-            ],
-            "type": "string"
-        },
-        "FooterType": {
-            "type": "object",
-            "properties": {
-                "footerLinks": {
-                    "type": "array",
-                    "items": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/FooterLink"
-                        }
-                    }
-                }
-            },
-            "required": [
-                "footerLinks"
-            ]
-        },
-        "FooterLink": {
-            "type": "object",
-            "properties": {
-                "text": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "dataLinkName": {
-                    "type": "string"
-                },
-                "extraClasses": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dataLinkName",
-                "text",
-                "url"
-            ]
-        },
-        "CAPITrailType": {
-            "type": "object",
-            "properties": {
-                "format": {
-                    "type": "object",
-                    "properties": {
-                        "design": {
-                            "$ref": "#/definitions/CAPIDesign"
-                        },
-                        "theme": {
-                            "$ref": "#/definitions/CAPITheme"
-                        },
-                        "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
-                        }
-                    },
-                    "required": [
-                        "design",
-                        "display",
-                        "theme"
-                    ]
-                },
-                "designType": {
-                    "type": "string"
-                },
-                "pillar": {
-                    "type": "string"
-                },
-                "carouselImages": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                },
-                "isLiveBlog": {
-                    "type": "boolean"
-                },
-                "masterImage": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                },
-                "headline": {
-                    "type": "string"
-                },
-                "webPublicationDate": {
-                    "type": "string"
-                },
-                "image": {
-                    "type": "string"
-                },
-                "avatarUrl": {
-                    "type": "string"
-                },
-                "mediaType": {
-                    "$ref": "#/definitions/MediaType"
-                },
-                "mediaDuration": {
-                    "type": "number"
-                },
-                "ageWarning": {
-                    "type": "string"
-                },
-                "byline": {
-                    "type": "string"
-                },
-                "showByline": {
-                    "type": "boolean"
-                },
-                "kickerText": {
-                    "type": "string"
-                },
-                "shortUrl": {
-                    "type": "string"
-                },
-                "commentCount": {
-                    "type": "number"
-                },
-                "starRating": {
-                    "type": "number"
-                },
-                "linkText": {
-                    "type": "string"
-                },
-                "branding": {
-                    "$ref": "#/definitions/Branding"
-                },
-                "isSnap": {
-                    "type": "boolean"
-                },
-                "isCrossword": {
-                    "type": "boolean"
-                },
-                "snapData": {
-                    "type": "object",
-                    "properties": {
-                        "embedHtml": {
-                            "type": "string"
-                        },
-                        "embedCss": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "showQuotedHeadline": {
-                    "type": "boolean"
-                }
-            },
-            "required": [
-                "format",
-                "headline",
-                "url"
-            ]
-        },
-        "MediaType": {
-            "enum": [
-                "Audio",
-                "Gallery",
-                "Video"
             ],
             "type": "string"
         },
@@ -3168,6 +3151,613 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "FEFrontCardStyle": {
+            "enum": [
+                "Analysis",
+                "Comment",
+                "DeadBlog",
+                "DefaultCardstyle",
+                "Editorial",
+                "ExternalLink",
+                "Feature",
+                "Letters",
+                "LiveBlog",
+                "Media",
+                "Review",
+                "SpecialReport",
+                "SpecialReportAlt"
+            ],
+            "type": "string"
+        },
+        "FEContainerType": {
+            "enum": [
+                "dynamic/fast",
+                "dynamic/package",
+                "dynamic/slow",
+                "dynamic/slow-mpu",
+                "fixed/large/slow-XIV",
+                "fixed/medium/fast-XI",
+                "fixed/medium/fast-XII",
+                "fixed/medium/slow-VI",
+                "fixed/medium/slow-VII",
+                "fixed/medium/slow-XII-mpu",
+                "fixed/small/fast-VIII",
+                "fixed/small/slow-I",
+                "fixed/small/slow-III",
+                "fixed/small/slow-IV",
+                "fixed/small/slow-V-half",
+                "fixed/small/slow-V-mpu",
+                "fixed/small/slow-V-third",
+                "fixed/thrasher",
+                "fixed/video",
+                "fixed/video/vertical",
+                "nav/list",
+                "nav/media-list",
+                "news/most-popular"
+            ],
+            "type": "string"
+        },
+        "FEContainerPalette": {
+            "enum": [
+                "Branded",
+                "Breaking",
+                "BreakingPalette",
+                "Canonical",
+                "Dynamo",
+                "DynamoLike",
+                "EventAltPalette",
+                "EventPalette",
+                "InvestigationPalette",
+                "LongRunningAltPalette",
+                "LongRunningPalette",
+                "Podcast",
+                "SombreAltPalette",
+                "SombrePalette",
+                "Special",
+                "SpecialReportAltPalette"
+            ],
+            "type": "string"
+        },
+        "Territory": {
+            "description": "List of territories that can be targetted against.",
+            "enum": [
+                "AU-NSW",
+                "AU-QLD",
+                "AU-VIC",
+                "EU-27",
+                "NZ",
+                "US-East-Coast",
+                "US-West-Coast",
+                "XX"
+            ],
+            "type": "string"
+        },
+        "FENavType": {
+            "type": "object",
+            "properties": {
+                "currentUrl": {
+                    "type": "string"
+                },
+                "pillars": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "otherLinks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "brandExtensions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "currentNavLink": {
+                    "$ref": "#/definitions/FELinkType"
+                },
+                "currentNavLinkTitle": {
+                    "type": "string"
+                },
+                "currentPillarTitle": {
+                    "type": "string"
+                },
+                "subNavSections": {
+                    "type": "object",
+                    "properties": {
+                        "parent": {
+                            "$ref": "#/definitions/FELinkType"
+                        },
+                        "links": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FELinkType"
+                            }
+                        }
+                    },
+                    "required": [
+                        "links"
+                    ]
+                },
+                "readerRevenueLinks": {
+                    "$ref": "#/definitions/ReaderRevenuePositions"
+                }
+            },
+            "required": [
+                "brandExtensions",
+                "currentUrl",
+                "otherLinks",
+                "pillars",
+                "readerRevenueLinks"
+            ]
+        },
+        "FELinkType": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FELinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "title",
+                "url"
+            ]
+        },
+        "LegacyPillar": {
+            "enum": [
+                "culture",
+                "labs",
+                "lifestyle",
+                "news",
+                "opinion",
+                "sport"
+            ],
+            "type": "string"
+        },
+        "ReaderRevenuePositions": {
+            "type": "object",
+            "properties": {
+                "header": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "footer": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "sideMenu": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampHeader": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                },
+                "ampFooter": {
+                    "$ref": "#/definitions/ReaderRevenueCategories"
+                }
+            },
+            "required": [
+                "ampFooter",
+                "ampHeader",
+                "footer",
+                "header",
+                "sideMenu"
+            ]
+        },
+        "ReaderRevenueCategories": {
+            "type": "object",
+            "properties": {
+                "contribute": {
+                    "type": "string"
+                },
+                "subscribe": {
+                    "type": "string"
+                },
+                "support": {
+                    "type": "string"
+                },
+                "supporter": {
+                    "type": "string"
+                },
+                "gifting": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "contribute",
+                "subscribe",
+                "support",
+                "supporter"
+            ]
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "SharedAdTargeting": {
+            "type": "object"
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "Record<string,unknown>": {
+            "type": "object"
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
+            ]
+        },
+        "FETrailType": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/FEDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/FETheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/FEDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
+                },
+                "designType": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "masterImage": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "mediaDuration": {
+                    "type": "number"
+                },
+                "ageWarning": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "showByline": {
+                    "type": "boolean"
+                },
+                "kickerText": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "commentCount": {
+                    "type": "number"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "linkText": {
+                    "type": "string"
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                },
+                "isSnap": {
+                    "type": "boolean"
+                },
+                "isCrossword": {
+                    "type": "boolean"
+                },
+                "snapData": {
+                    "type": "object",
+                    "properties": {
+                        "embedHtml": {
+                            "type": "string"
+                        },
+                        "embedCss": {
+                            "type": "string"
+                        },
+                        "embedJs": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "showQuotedHeadline": {
+                    "type": "boolean"
+                },
+                "discussion": {
+                    "type": "object",
+                    "properties": {
+                        "isCommentable": {
+                            "type": "boolean"
+                        },
+                        "isClosedForComments": {
+                            "type": "boolean"
+                        },
+                        "discussionId": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "isClosedForComments",
+                        "isCommentable"
+                    ]
+                },
+                "mainMedia": {
+                    "$ref": "#/definitions/MainMedia"
+                }
+            },
+            "required": [
+                "format",
+                "headline",
+                "url"
+            ]
+        },
+        "MainMedia": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Video",
+                    "description": "For displaying embedded, playable videos directly in cards"
+                },
+                {
+                    "$ref": "#/definitions/Audio"
+                },
+                {
+                    "$ref": "#/definitions/Gallery"
+                }
+            ]
+        },
+        "Video": {
+            "description": "For displaying embedded, playable videos directly in cards",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Video"
+                        },
+                        "elementId": {
+                            "type": "string"
+                        },
+                        "videoId": {
+                            "type": "string"
+                        },
+                        "height": {
+                            "type": "number"
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "origin": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "duration": {
+                            "type": "number"
+                        },
+                        "expired": {
+                            "type": "boolean"
+                        },
+                        "images": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "url": {
+                                        "type": "string"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "url",
+                                    "width"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "elementId",
+                        "expired",
+                        "height",
+                        "images",
+                        "origin",
+                        "title",
+                        "type",
+                        "videoId",
+                        "width"
+                    ]
+                }
+            ]
+        },
+        "Audio": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Audio"
+                        },
+                        "duration": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "duration",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Gallery": {
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Audio",
+                                "Gallery",
+                                "Video"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "Gallery"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
             ]
         }
     },

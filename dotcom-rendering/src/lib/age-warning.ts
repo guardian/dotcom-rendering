@@ -6,10 +6,13 @@ export const getAgeWarning = (
 ): string | undefined => {
 	const isNews = tags.some((t) => t.id === 'tone/news');
 	const isOpinion = tags.some((t) => t.id === 'tone/comment');
+	const isCottonCapital = tags.some(
+		(t) => t.id === 'news/series/cotton-capital',
+	);
 	let message;
 
 	// Only show an age warning for news or opinion pieces
-	if (isNews || isOpinion) {
+	if ((isNews || isOpinion) && !isCottonCapital) {
 		const warnLimitDays = 30;
 		const currentDate = new Date();
 		const dateThreshold = new Date();

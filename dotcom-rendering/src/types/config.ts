@@ -1,4 +1,5 @@
-import type { EditionId } from '../web/lib/edition';
+import type { SharedAdTargeting } from '../lib/ad-targeting';
+import type { EditionId } from '../lib/edition';
 
 export interface CommercialConfigType {
 	isPaidContent?: boolean;
@@ -13,14 +14,21 @@ export interface CommercialConfigType {
 	toneIds?: string;
 	contentType: string;
 	ampIframeUrl: string;
+	hasInlineMerchandise?: boolean;
 }
 
-/** This type is not support by JSON-schema, it evaluates as `object` */
+/**
+ * Narrowest representation of the server-side tests
+ * object shape, which is [defined in `frontend`](https://github.com/guardian/frontend/blob/23743723030a041e4f4f59fa265ee2be0bb51825/common/app/experiments/ExperimentsDefinition.scala#L24-L26).
+ *
+ * **Note:** This type is not support by JSON-schema, it evaluates as `object`
+ */
 export type ServerSideTests = {
-	[k: string]: 'variant' | 'control';
+	[key: `${string}Variant`]: 'variant';
+	[key: `${string}Control`]: 'control';
 };
 
-export type ServerSideTestNames = `${string}Control` | `${string}Variant`;
+export type ServerSideTestNames = keyof ServerSideTests;
 
 export interface Switches {
 	[key: string]: boolean | undefined;
@@ -54,7 +62,7 @@ export interface ConfigType extends CommercialConfigType {
 	edition: EditionId;
 	section: string;
 
-	sharedAdTargeting: { [key: string]: any };
+	sharedAdTargeting: SharedAdTargeting;
 	isPaidContent?: boolean;
 	keywordIds: string;
 	showRelatedContent: boolean;

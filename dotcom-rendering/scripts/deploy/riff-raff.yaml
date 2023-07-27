@@ -7,7 +7,9 @@ deployments:
   frontend-cfn:
     type: cloud-formation
     parameters:
-      templatePath: cloudformation.yml
+      templateStagePaths:
+        CODE: DotcomRendering-CODE.template.json
+        PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       templateStageParameters:
@@ -17,7 +19,8 @@ deployments:
           InstanceType: t4g.small
       amiParametersToTags:
         AMI:
-          Recipe: dotcom-rendering-ARM
+          # Keep the Node version in sync with `.nvmrc`
+          Recipe: dotcom-rendering-ARM-jammy-node-18.17.0
           BuiltBy: amigo
           AmigoStage: PROD
   rendering:
@@ -30,7 +33,7 @@ deployments:
   frontend-static:
     type: aws-s3
     parameters:
-      bucket: aws-frontend-static
-      cacheControl: public, max-age=315360000
+      bucketSsmKey: /account/services/dotcom-static.bucket
+      cacheControl: public, max-age=315360000, immutable
       prefixStack: false
       publicReadAcl: false

@@ -1,15 +1,15 @@
-import type { CAPITrailType } from './trails';
+import type { FETrailType } from './trails';
 
 /**
  * Onwards
  */
-export type CAPIOnwards = {
+export type FEOnwards = {
 	heading: string;
-	trails: CAPITrailType[];
+	trails: FETrailType[];
 	description?: string;
 	url?: string;
 	onwardsSource: OnwardsSource;
-	format: CAPIFormat;
+	format: FEFormat;
 	isCuratedContent?: boolean;
 };
 
@@ -21,4 +21,5 @@ export type OnwardsSource =
 	| 'more-media-in-section'
 	| 'more-galleries'
 	| 'curated-content'
+	| 'newsletters-page'
 	| 'unknown-source'; // We should never see this in the analytics data!

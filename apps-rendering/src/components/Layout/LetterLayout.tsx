@@ -1,18 +1,13 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	breakpoints,
-	from,
-	neutral,
-	opinion,
-	palette,
-} from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
-import DesignTag from 'components/DesignTag';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
@@ -22,8 +17,10 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -34,18 +31,15 @@ import {
 
 // ----- Styles ----- //
 
-const Styles = css`
-	background: ${neutral[97]};
-`;
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	background: ${background.articleContent(format)};
 
-const DarkStyles = darkModeCss`
-	background: ${palette.neutral[10]}
+	${darkModeCss`
+		background: ${background.articleContentDark(format)};
+	`}
 `;
 
 const BorderStyles = css`
-	background: ${opinion[800]};
-	${darkModeCss`background: ${palette.neutral[10]};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -60,54 +54,60 @@ interface Props {
 	item: LetterItem;
 }
 
-const LetterLayout: FC<Props> = ({ item }) => (
-	<main css={[Styles, DarkStyles]}>
-		<article css={BorderStyles}>
-			<header>
-				<Series item={item} />
+const LetterLayout: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+	return (
+		<main css={styles(format)}>
+			<article css={BorderStyles}>
+				<header>
+					<WithAgeWarning
+						tags={item.tags}
+						series={item.series}
+						publishDate={item.publishDate}
+						format={format}
+					/>
+					<Series item={item} />
+					<Headline item={item} />
 
-				<DesignTag format={item} />
-
-				<Headline item={item} />
-
-				<Cutout
-					contributors={item.contributors}
-					className={articleWidthStyles}
+					<Cutout
+						contributors={item.contributors}
+						className={articleWidthStyles}
+						format={item}
+					/>
+					<StraightLines
+						cssOverrides={[linePosition, lineStyles(format)]}
+						count={8}
+					/>
+					<div css={articleWidthStyles}>
+						<Standfirst item={item} />
+						<Byline {...item} />
+						<Metadata item={item} />
+					</div>
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
+					<section css={articleWidthStyles}>
+						<Logo item={item} />
+					</section>
+				</header>
+				<ArticleBody
+					className={[articleWidthStyles]}
 					format={item}
-				/>
-				<StraightLines
-					cssOverrides={[linePosition, lineStyles]}
-					count={8}
-				/>
-				<div css={articleWidthStyles}>
-					<Standfirst item={item} />
-					<Byline {...item} />
-					<Metadata item={item} />
-				</div>
-				<MainMedia
-					format={getFormat(item)}
-					mainMedia={item.mainMedia}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
 				/>
 				<section css={articleWidthStyles}>
-					<Logo item={item} />
+					<Tags item={item} />
 				</section>
-			</header>
-			<ArticleBody
-				className={[articleWidthStyles]}
-				format={item}
-				body={item.body}
-				shouldHideAdverts={item.shouldHideAdverts}
-			/>
-			<section css={articleWidthStyles}>
-				<Tags item={item} />
+			</article>
+			<section css={onwardStyles}>
+				<RelatedContent item={item} />
 			</section>
-		</article>
-		<section css={onwardStyles}>
-			<RelatedContent item={item} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</main>
-);
+			<Footer isCcpa={false} format={item} />
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 

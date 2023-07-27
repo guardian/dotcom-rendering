@@ -540,6 +540,78 @@ const map7 =
  * Similar to `map2`, but for more parsers. See the docs for that function for
  * more details and examples.
  */
+const map9 =
+	<A, B, C, D, E, F, G, H, I, J>(
+		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i:I) => J,
+	) =>
+	(
+		pa: Parser<A>,
+		pb: Parser<B>,
+		pc: Parser<C>,
+		pd: Parser<D>,
+		pe: Parser<E>,
+		pf: Parser<F>,
+		pg: Parser<G>,
+		ph: Parser<H>,
+		pi: Parser<I>,
+	): Parser<J> =>
+		parser((a) =>
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.flatMap((resD) =>
+											pe
+												.run(a)
+												.flatMap((resE) =>
+													pf
+														.run(a)
+														.flatMap((resF) =>
+															pg
+																.run(a)
+																.flatMap(
+																	(resG) =>
+																		ph
+																			.run(a)
+																			.flatMap(
+																				(resH) =>
+																					pi
+																						.run(a)
+																						.map(
+																					(resI) =>
+
+																					f(
+																						resA,
+																						resB,
+																						resC,
+																						resD,
+																						resE,
+																						resF,
+																						resG,
+																						resH,
+																						resI,
+																					),
+																			),
+																),
+														),
+												),
+										),
+								),
+						),
+				),
+		),
+	);
+/**
+ * Similar to `map2`, but for more parsers. See the docs for that function for
+ * more details and examples.
+ */
 const map8 =
 	<A, B, C, D, E, F, G, H, I>(
 		f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => I,
@@ -729,6 +801,7 @@ export {
 	map6,
 	map7,
 	map8,
+	map9,
 	andThen,
 	oneOf,
 };

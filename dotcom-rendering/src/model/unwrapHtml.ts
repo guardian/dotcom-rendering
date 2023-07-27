@@ -45,7 +45,7 @@ export const unwrapHtml = ({
 		: html;
 
 	/** `p` is the default unwrappedElement */
-	const unwrappedElement = matchingFix?.unwrappedElement || 'p';
+	const unwrappedElement = matchingFix?.unwrappedElement ?? 'p';
 
 	return {
 		unwrappedHtml,

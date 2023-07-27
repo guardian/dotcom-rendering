@@ -8,21 +8,18 @@ import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-/**
- * Removing this enhancer temporarily because it's causing a bug in production
- */
-// import { enhanceRecipes } from './enhance-recipes';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+import { validateAsBlock } from './validate';
 
 class BlockEnhancer {
 	blocks: Block[];
 
-	format: CAPIFormat;
+	format: FEFormat;
 
 	options: Options;
 
-	constructor(blocks: Block[], format: CAPIFormat, options: Options) {
+	constructor(blocks: Block[], format: FEFormat, options: Options) {
 		this.blocks = blocks;
 		this.format = format;
 		this.options = options;
@@ -99,11 +96,12 @@ type Options = {
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (
 	blocks: Block[],
-	format: CAPIFormat,
+	format: FEFormat,
 	options?: Options,
 ): Block[] => {
 	const { promotedNewsletter } = options ?? {};
 
+	blocks.forEach((block) => validateAsBlock(block));
 	return new BlockEnhancer(blocks, format, { promotedNewsletter })
 		.enhanceDividers()
 		.enhanceH3s()

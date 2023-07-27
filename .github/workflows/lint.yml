@@ -1,19 +1,20 @@
-name: DCR lint 🔎
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+  workflow_call:
+
 
 jobs:
-  lint:
-    name: DCR Lint
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: guardian/actions-setup-node@main
+      - uses: actions/setup-node@v3
         with:
-          cache: "yarn"
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
       - run: make install
+        working-directory: dotcom-rendering
+      - name: Lint Project
+        run: make lint-project
         working-directory: dotcom-rendering
       - name: Lint
         run: make lint

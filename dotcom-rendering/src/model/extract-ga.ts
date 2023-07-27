@@ -1,8 +1,8 @@
 // All GA fields should  fall back to default values -
 
+import type { EditionId } from '../lib/edition';
 import type { FEArticleType } from '../types/frontend';
 import type { TagType } from '../types/tag';
-import { EditionId } from '../web/lib/edition';
 
 const filterTags = (
 	tags: FEArticleType['tags'],
@@ -16,7 +16,7 @@ const filterTags = (
 			[],
 		);
 
-	return (arrOfvalues && arrOfvalues.join(',')) || '';
+	return (Array.isArray(arrOfvalues) && arrOfvalues.join(',')) || '';
 };
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately
@@ -26,10 +26,10 @@ const getCommissioningDesk = (
 	const tag = tags.find((thisTag) =>
 		thisTag.id.includes('tracking/commissioningdesk'),
 	);
-	return (tag && tag.title) || '';
+	return tag?.title ?? '';
 };
 
-const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
+const convertToLegacyPillar = (theme: FETheme): LegacyPillar => {
 	switch (theme) {
 		case 'NewsPillar':
 			return 'news';
@@ -60,7 +60,7 @@ export const extractGA = ({
 	beaconURL,
 }: {
 	webTitle: string;
-	format: CAPIFormat;
+	format: FEFormat;
 	sectionName?: string;
 	contentType: string;
 	tags: TagType[];
@@ -70,7 +70,7 @@ export const extractGA = ({
 }): GADataType => ({
 	webTitle,
 	pillar: convertToLegacyPillar(format.theme),
-	section: sectionName || '',
+	section: sectionName ?? '',
 	contentType: formatStringForGa(contentType),
 	commissioningDesks: formatStringForGa(getCommissioningDesk(tags)),
 	contentId: pageId,

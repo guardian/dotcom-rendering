@@ -1,73 +1,108 @@
 import { octokit } from './github.ts';
+import {
+	DOMParser,
+	Element,
+} from 'https://deno.land/x/deno_dom@v0.1.34-alpha/deno-dom-wasm.ts';
 
-type Platform = 'frontend' | 'dcr';
 type OphanAttribute = 'data-link-name' | 'data-component';
 
-const URLS: Record<Platform, string> = {
-	frontend: 'https://www.theguardian.com/international?dcr=false',
-	dcr: 'https://www.theguardian.com/international?dcr=true',
+const url = 'https://www.theguardian.com/international';
+
+const html = await Promise.all(
+	['?dcr=false', '?dcr=true'].map((params) =>
+		fetch(url + params).then((response) => response.text()),
+	),
+);
+
+/** for things we know will never match */
+const known_errors = new Set([
+	// it only appears in DCR after hydration if signed in
+	'nav3 : topbar : my account',
+	'nav3 : topbar : account overview',
+	'nav3 : topbar : billing',
+	'nav3 : topbar : profile',
+	'nav3 : topbar : email prefs',
+	'nav3 : topbar : data privacy',
+	'nav3 : topbar : settings',
+	'nav3 : topbar : help',
+	'nav3 : topbar : comment activity',
+	'nav3 : topbar : sign out',
+
+	// Palette thrasher related
+	'container-0 | palette-styles-new-do-not-delete',
+	'palette-styles-new-do-not-delete',
+	'external | group-0 | card-@1',
+
+	// These elements don't exist anymore in the DOM after Deeply Read component was added
+	'6 | text',
+	'7 | text',
+	'8 | text',
+	'9 | text',
+	'10 | text',
+	'most-viewed',
+	'tab 1 Most viewed',
+	'tab 2 Across the guardian',
+	'Most viewed',
+	'Across the guardian',
+
+	// Not visible when JS is disabled
+	'nav2 : overlay',
+	'nav3 : edition picker',
+
+	// In frontend there is <input> and <label>. In DCR it's a <button>
+	'nav3 : topbar : edition-picker: toggle',
+
+	// It's an island with deferUntil="visible"
+	'footer : contribute-cta'
+
+]);
+
+const getOphanComponents = (
+	html: string,
+	attribute: OphanAttribute,
+): Element[] => {
+	const doc = new DOMParser().parseFromString(html, 'text/html');
+	if (!doc) throw new Error('Unable to parse DOM');
+
+	return [...doc.querySelectorAll(`[${attribute}]:not(.is-hidden,.is-hidden *)`)].filter(
+		(node): node is Element => node instanceof Element,
+	);
 };
 
-const html: Record<Platform, string> = {
-	frontend: await fetch(URLS.frontend).then((response) => response.text()),
-	dcr: await fetch(URLS.dcr).then((response) => response.text()),
-};
-
-const regexLinkName = /<([a-zA-Z]+)[^>]+?\bdata-link-name="(.+?)"/gi;
-const regexComponent = /<([a-zA-Z]+)[^>]+?\bdata-component="(.+?)"/gi;
-const tagMatch = (attribute: OphanAttribute) =>
-	attribute === 'data-link-name' ? regexLinkName : regexComponent;
-
-type TagPair = [name: string, tag: string];
-const getOphanComponents = (html: string, tag: OphanAttribute): TagPair[] =>
-	[...html.matchAll(tagMatch(tag))].map((match) => [match[2], match[1]]);
-
-const issues: Record<OphanAttribute, number> = {
+const issues = {
 	'data-link-name': 4692,
 	'data-component': 4698,
-};
+} as const satisfies Record<OphanAttribute, number>;
 
 const updateIssue = async (attribute: OphanAttribute) => {
-	const frontend = getOphanComponents(html.frontend, attribute);
-	const dcr = getOphanComponents(html.dcr, attribute);
+	const frontend = getOphanComponents(html[0], attribute);
+	const dcr = getOphanComponents(html[1], attribute);
 
 	type ExistsOnDcr = 'identical' | 'tag-mismatch' | 'missing';
 	type OphanComponent<T extends ExistsOnDcr = ExistsOnDcr> = {
 		name: string;
-		tag: string;
-		dcrTag?: string;
+		element: Element;
+		matches: Element[];
 		existsOnDcr: T;
 	};
 
-	const components: OphanComponent[] = frontend
-		// remove duplicate component
-		.reduce<[Set<string>, TagPair[]]>(
-			([set, array], [name, tag]) => {
-				if (!set.has(name)) array.push([name, tag]);
-				set.add(name);
-				return [set, array];
-			},
-			[new Set(), []],
-		)[1]
-		.map(([name, tag]) => {
-			const fullMatch = dcr.find(
-				([nameDcr, tagDcr]) => nameDcr === name && tagDcr === tag,
-			);
-			if (fullMatch) return { name, tag, existsOnDcr: 'identical' };
+	const components: OphanComponent[] = frontend.map((element) => {
+		const name = element.getAttribute(attribute);
+		if (!name) throw new Error('Invalid name');
 
-			const partialMatch = dcr.find(([nameDcr]) => nameDcr === name);
+		const tag = element.tagName;
+		const matches = dcr.filter(
+			(element) => element.getAttribute(attribute) === name,
+		);
 
-			if (partialMatch) {
-				return {
-					name,
-					tag,
-					dcrTag: partialMatch[1],
-					existsOnDcr: 'tag-mismatch',
-				};
-			}
+		const existsOnDcr = matches.some(({ tagName }) => tagName === tag)
+			? 'identical'
+			: matches.length > 0
+			? 'tag-mismatch'
+			: 'missing';
 
-			return { name, tag, existsOnDcr: 'missing' };
-		});
+		return { name, element, matches, existsOnDcr };
+	});
 
 	const isIssueType =
 		<T extends ExistsOnDcr>(existsOnDcr: T) =>
@@ -83,8 +118,8 @@ const updateIssue = async (attribute: OphanAttribute) => {
 
 Comparing **\`${attribute}\`** on the international Front between [Frontend][] & [DCR][].
 
-[Frontend]: ${URLS.frontend}
-[DCR]: ${URLS.dcr}
+[Frontend]: ${url}?dcr=false
+[DCR]: ${url}?dcr=true
 
 ### Missing from DCR (${missing.length} / ${components.length})
 
@@ -92,8 +127,10 @@ ${
 	missing.length
 		? missing
 				.map(
-					({ tag, name }) =>
-						`- [ ] **\`${name}\`** &rarr; \`<${tag}/>\``,
+					({ name, element: { tagName } }) =>
+						`- [${
+							known_errors.has(name) ? 'X' : ' '
+						}] **\`${name}\`** &rarr; \`<${tagName}/>\``,
 				)
 				.join('\n')
 		: 'No missing component in DCR 🎉'
@@ -105,8 +142,10 @@ ${
 	mismatches.length
 		? mismatches
 				.map(
-					({ tag, name, dcrTag }) =>
-						`- [X] **\`${name}\`** : \`<${dcrTag} />\` &cross; should be &rarr; \`<${tag}/>\``,
+					({ name, element: { tagName }, matches }) =>
+						`- [X] **\`${name}\`** : \`<${matches.map(
+							({ tagName }) => tagName,
+						)} />\` &cross; should be &rarr; \`<${tagName}/>\``,
 				)
 				.join('\n')
 		: 'No tag mismatches'
@@ -120,8 +159,8 @@ ${
 	identical.length
 		? identical
 				.map(
-					({ tag, name }) =>
-						`- [X] **\`${name}\`** &rarr; \`<${tag}/>\``,
+					({ name, element: { tagName } }) =>
+						`- [X] **\`${name}\`** &rarr; \`<${tagName}/>\``,
 				)
 				.join('\n')
 		: 'No identical match'

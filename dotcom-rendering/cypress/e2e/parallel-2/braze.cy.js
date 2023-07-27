@@ -3,11 +3,20 @@ import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
 
-const handleGuCookieError = () => {
+const handleCommercialErrors = () => {
 	cy.on('uncaught:exception', (err, runnable) => {
 		// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
 		// something with the url which is failing in Cypress with a malformed URI error
 		if (err.message.includes('URI malformed')) {
+			// This error is unrelated to the test in question so return  false to prevent
+			// this commercial error from failing this test
+			return false;
+		}
+		if (
+			err.message.includes(
+				"Cannot read properties of undefined (reading 'map')",
+			)
+		) {
 			// This error is unrelated to the test in question so return  false to prevent
 			// this commercial error from failing this test
 			return false;
@@ -26,7 +35,7 @@ const cmpIframe = () => {
 describe('Braze messaging', function () {
 	beforeEach(function () {
 		cy.clearLocalStorage();
-		handleGuCookieError();
+		handleCommercialErrors();
 		setLocalBaseUrl();
 	});
 
@@ -46,7 +55,7 @@ describe('Braze messaging', function () {
 		storage.local.set('gu.geo.override', 'GB');
 
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
@@ -55,7 +64,7 @@ describe('Braze messaging', function () {
 		// eslint-disable-next-line cypress/no-unnecessary-waiting
 		cy.wait('@tcfRequest');
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
@@ -77,7 +86,7 @@ describe('Braze messaging', function () {
 
 		storage.local.set('gu.geo.override', 'GB');
 		cy.visit(
-			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
+			'/Article/https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 
 		cy.intercept('POST', '**/choice/gdpr/**').as('tcfRequest');

@@ -1,12 +1,9 @@
 module.exports = {
 	ci: {
 		collect: {
-			url: [
-				'http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads',
-				'http://localhost:9000/Front?url=https://www.theguardian.com/uk',
-			],
+			url: [process.env.LHCI_URL],
 			startServerCommand:
-				'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js',
+				'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js',
 			numberOfRuns: '10',
 			puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
 			settings: {
@@ -39,28 +36,28 @@ module.exports = {
 					},
 				},
 				{
-					matchingUrlPattern: 'http://localhost:9000/Article?.+',
+					matchingUrlPattern: 'http://localhost:9000/Article/.+',
 					assertions: {
 						'total-blocking-time': [
 							'warn',
-							{ maxNumericValue: 219 }
+							{ maxNumericValue: 219 },
 						],
 						'categories:accessibility': [
 							'error',
-							{ minScore: 0.97 },
+							{ minScore: 0.98 },
 						],
 					},
 				},
 				{
-					matchingUrlPattern: 'http://localhost:9000/Front?.+',
+					matchingUrlPattern: 'http://localhost:9000/Front/.+',
 					assertions: {
 						'total-blocking-time': [
 							'warn',
-							{ maxNumericValue: 716 }
+							{ maxNumericValue: 716 },
 						],
 						'categories:accessibility': [
 							'warn',
-							{ minScore: 0.97 },
+							{ minScore: 0.98 },
 						],
 					},
 				},

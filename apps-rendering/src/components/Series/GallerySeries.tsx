@@ -2,23 +2,20 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 const styles = css`
-	grid-row: 2;
+	grid-row: 3/4;
 	${grid.span('viewport-start', 4)}
 
 	${from.tablet} {

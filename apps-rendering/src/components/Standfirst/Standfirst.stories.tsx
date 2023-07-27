@@ -1,11 +1,7 @@
 // ----- Imports ----- //
 
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { getAllThemes, getThemeNameAsString } from 'fixtures/article';
 import {
 	analysis,
 	article,
@@ -16,7 +12,6 @@ import {
 } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import AnalysisStandfirst from './AnalysisStandfirst';
 import Standfirst from './';
 
@@ -26,10 +21,8 @@ const Default = (): ReactElement => (
 	<Standfirst
 		item={{
 			...article,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -38,10 +31,8 @@ const Review = (): ReactElement => (
 	<Standfirst
 		item={{
 			...review,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Culture),
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -50,10 +41,8 @@ const Feature = (): ReactElement => (
 	<Standfirst
 		item={{
 			...feature,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Sport),
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.Sport,
 		}}
 	/>
 );
@@ -62,10 +51,8 @@ const Comment = (): ReactElement => (
 	<Standfirst
 		item={{
 			...comment,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Opinion),
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.Opinion,
 		}}
 	/>
 );
@@ -75,7 +62,7 @@ const Link = (): ReactElement => (
 		item={{
 			...articleWithStandfirstLink,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
 	/>
 );
@@ -106,10 +93,8 @@ const Analysis = (): ReactElement => (
 	<AnalysisStandfirst
 		item={{
 			...analysis,
-			display: boolean('Immersive', false)
-				? ArticleDisplay.Immersive
-				: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Culture),
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.Culture,
 		}}
 	/>
 );
@@ -119,7 +104,6 @@ const Analysis = (): ReactElement => (
 export default {
 	component: Standfirst,
 	title: 'AR/Standfirst',
-	decorators: [withKnobs],
 };
 
 export { Default, Review, Feature, Comment, Link, Deadblog, Analysis };

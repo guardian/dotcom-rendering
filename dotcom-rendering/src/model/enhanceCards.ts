@@ -1,15 +1,20 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
+import { decideFormat } from '../lib/decideFormat';
+import type { EditionId } from '../lib/edition';
+import type { Group } from '../lib/getDataLinkName';
+import { getDataLinkNameCard } from '../lib/getDataLinkName';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
+	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
+	FEMediaAtom,
 	FESupportingContent,
 } from '../types/front';
+import type { MainMedia } from '../types/mainMedia';
 import type { FETagType, TagType } from '../types/tag';
-import { decideFormat } from '../web/lib/decideFormat';
-import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
 
 /**
@@ -57,7 +62,7 @@ const decidePresentationFormat = ({
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return { ...containerFormat, theme: ArticlePillar.News };
+		return { ...containerFormat, theme: Pillar.News };
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -84,13 +89,14 @@ const enhanceSupportingContent = (
 		const supportingContentIsLive =
 			subLink.format?.design === 'LiveBlogDesign';
 
+		const kickerText = subLink.header?.kicker?.item?.properties.kickerText;
+
 		return {
 			format: presentationFormat,
-			headline: subLink.header?.headline || '',
-			url: subLink.properties.href || subLink.header?.url,
-			kickerText: supportingContentIsLive
-				? 'Live'
-				: subLink.header?.kicker?.item?.properties.kickerText,
+			headline: subLink.header?.headline ?? '',
+			url: subLink.properties.href ?? subLink.header?.url,
+			kickerText:
+				supportingContentIsLive && !kickerText ? 'Live' : kickerText,
 		};
 	});
 };
@@ -120,10 +126,35 @@ const decideImage = (trail: FEFrontCard) => {
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
-const decideKicker = (trail: FEFrontCard) => {
-	return trail.properties.isBreaking
-		? 'Breaking news'
-		: trail.header.kicker?.item?.properties.kickerText;
+const decideKicker = (
+	trail: FEFrontCard,
+	cardInTagFront: boolean,
+	pageId?: string,
+) => {
+	if (trail.properties.isBreaking) {
+		return 'Breaking news';
+	}
+
+	if (cardInTagFront) {
+		return pageId && !pageId.includes('/series')
+			? trail.header.seriesOrBlogKicker?.name
+			: undefined;
+	}
+
+	return trail.header.kicker?.item?.properties.kickerText;
+};
+
+const decideSlideshowImages = (
+	trail: FEFrontCard,
+): DCRSlideshowImage[] | undefined => {
+	const assets = trail.properties.image?.item.assets;
+	const shouldShowSlideshow =
+		trail.properties.image?.type === 'ImageSlideshow' &&
+		trail.properties.imageSlideshowReplace;
+	if (shouldShowSlideshow && assets && assets.length > 0) {
+		return assets;
+	}
+	return undefined;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {
@@ -148,23 +179,107 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 	});
 };
 
+/**
+ * While the first Media Atom is *not* guaranteed to be the main media,
+ * it *happens to be* correct in the majority of cases.
+ * @see https://github.com/guardian/frontend/pull/26247 for inspiration
+ */
+
+const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
+	if (mediaAtom) {
+		const asset = mediaAtom.assets.find(
+			({ version }) => version === mediaAtom.activeVersion,
+		);
+		if (asset?.platform === 'Youtube') {
+			return {
+				type: 'Video',
+				elementId: mediaAtom.id,
+				videoId: asset.id,
+				duration: mediaAtom.duration ?? 0,
+				title: mediaAtom.title,
+				// Size fixed to a 5:3 ratio
+				width: 500,
+				height: 300,
+				origin: mediaAtom.source ?? 'Unknown origin',
+				expired: !!mediaAtom.expired,
+				images:
+					mediaAtom.posterImage?.allImages.map(
+						({ url, fields: { width } }) => ({
+							url,
+							width: Number(width),
+						}),
+					) ?? [],
+			};
+		}
+	}
+	return undefined;
+};
+
+const decideMedia = (
+	format: ArticleFormat,
+	showMainVideo?: boolean,
+	mediaAtom?: FEMediaAtom,
+): MainMedia | undefined => {
+	// If the showVideo toggle is enabled in the fronts tool,
+	// we should return the active mediaAtom regardless of the design
+	if (showMainVideo) {
+		return getActiveMediaAtom(mediaAtom);
+	}
+
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return { type: 'Gallery' };
+
+		case ArticleDesign.Audio:
+			return {
+				type: 'Audio',
+				duration: mediaAtom?.duration ?? 0,
+			};
+
+		case ArticleDesign.Video: {
+			return getActiveMediaAtom(mediaAtom);
+		}
+
+		default:
+			return undefined;
+	}
+};
+
 export const enhanceCards = (
 	collections: FEFrontCard[],
-	containerPalette?: DCRContainerPalette,
+	{
+		cardInTagFront,
+		offset = 0,
+		editionId,
+		containerPalette,
+		pageId,
+	}: {
+		cardInTagFront: boolean;
+		offset?: number;
+		editionId?: EditionId;
+		containerPalette?: DCRContainerPalette;
+		pageId?: string;
+	},
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
 		const format = decideFormat(
-			faciaCard.format || {
+			faciaCard.format ?? {
 				design: 'ArticleDesign',
 				theme: 'NewsPillar',
 				display: 'StandardDisplay',
 			},
 		);
-		const group = `${faciaCard.card.group}${
+		const group: Group = `${Number(faciaCard.card.group)}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+
+		const dataLinkName = getDataLinkNameCard(
+			format,
+			group,
+			offset + index,
+			faciaCard.card.cardStyle.type,
+		);
 
 		const tags = faciaCard.properties.maybeContent?.tags.tags
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
@@ -181,6 +296,10 @@ export const enhanceCards = (
 				? faciaCard.properties.href
 				: faciaCard.header.url;
 
+		const branding = faciaCard.properties.editionBrandings.find(
+			(editionBranding) => editionBranding.edition.id === editionId,
+		)?.branding;
+
 		return {
 			format,
 			dataLinkName,
@@ -188,13 +307,19 @@ export const enhanceCards = (
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
 			starRating: faciaCard.card.starRating,
-			webPublicationDate: faciaCard.card.webPublicationDateOption
-				? new Date(
-						faciaCard.card.webPublicationDateOption,
-				  ).toISOString()
-				: undefined,
+			webPublicationDate:
+				faciaCard.card.webPublicationDateOption !== undefined
+					? new Date(
+							faciaCard.card.webPublicationDateOption,
+					  ).toISOString()
+					: undefined,
 			image: decideImage(faciaCard),
-			kickerText: decideKicker(faciaCard),
+			/** This property is coupled to the `image` property above.
+			 * There's room to create a codified coupling, but that has more far reaching changes */
+			imageAltText:
+				faciaCard.properties.maybeContent?.trail.trailPicture
+					?.allImages[0]?.fields.altText,
+			kickerText: decideKicker(faciaCard, cardInTagFront, pageId),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,
@@ -205,15 +330,13 @@ export const enhanceCards = (
 			discussionId: faciaCard.discussion.isCommentable
 				? faciaCard.discussion.discussionId
 				: undefined,
-			// nb. there is a distinct 'byline' property on FEFrontCard, at
-			// card.properties.byline
-			byline:
-				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			byline: faciaCard.properties.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
 			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
+			showLivePlayable: faciaCard.display.showLivePlayable,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
 				faciaCard.properties.image?.type === 'Cutout'
@@ -222,5 +345,14 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
+			mainMedia: decideMedia(
+				format,
+				faciaCard.properties.showMainVideo,
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0],
+			),
+			isExternalLink: faciaCard.card.cardStyle.type === 'ExternalLink',
+			embedUri: faciaCard.properties.embedUri ?? undefined,
+			branding,
+			slideshowImages: decideSlideshowImages(faciaCard),
 		};
 	});

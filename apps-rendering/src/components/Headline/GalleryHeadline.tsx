@@ -2,13 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
+import { background, text } from 'palette';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -19,7 +16,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.headline(format)};
 	padding: ${remSpace[1]} ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.column.centre}
-	grid-row: 3 / 5;
+	grid-row: 4/7;
 
 	${from.mobileLandscape} {
 		padding-top: ${remSpace[3]};
@@ -45,7 +42,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headline(format)};
 	${grid.between('viewport-start', 'centre-column-end')}
-	grid-row: 3 / 5;
+	grid-row: 4 / 7;
 
 	${from.mobileLandscape} {
 		${grid.column.all}

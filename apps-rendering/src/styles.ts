@@ -11,6 +11,7 @@ import {
 import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
+import { fill } from 'palette';
 
 export const sidePadding = css`
 	padding-left: ${remSpace[3]};
@@ -81,7 +82,7 @@ export const liveblogWidthStyles: SerializedStyles = css`
 	}
 `;
 
-export const lineStyles = css`
+export const lineStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: block;
 
 	${from.wide} {
@@ -93,12 +94,12 @@ export const lineStyles = css`
 	${darkModeCss`
 		// Straight, Dashed, Squiggly
 		&[stroke], defs pattern[stroke], defs pattern g[stroke] {
-			stroke: ${neutral[20]};
+			stroke: ${fill.linesDark(format)};
 		}
 
 		// Dotted
 		defs pattern circle[fill]  {
-			fill: ${neutral[20]};
+			fill: ${fill.linesDark(format)};
 		}
     `}
 `;

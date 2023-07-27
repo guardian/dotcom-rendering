@@ -2,10 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	fill,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground, from } from '@guardian/source-foundations';
@@ -23,6 +19,7 @@ import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import { Optional } from 'optional';
+import { background, fill } from 'palette';
 import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
@@ -207,7 +204,6 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						className={some(
 							getImageStyle(image, format, isPicture),
 						)}
-						supportsDarkMode={false}
 						lightbox={some({
 							className: 'js-launch-slideshow js-main-image',
 							caption: none,

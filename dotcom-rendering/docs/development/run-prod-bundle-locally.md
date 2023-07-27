@@ -6,7 +6,7 @@ production build locally.
 To do this:
 
     $ make build
-    $ node dist/frontend-server.js
+    $ node dist/server.js
 
 *Note, you will need AWS `frontend` credentials to run the service.*
 
@@ -18,7 +18,7 @@ You can then use the provided GET endpoints for testing:
 Similar to the dev server, both endpoints support a `url` parameter to customise
 the article used. E.g.
 
-    GET /Article?url=https://www.theguardian.com/my-test-article.
+    GET /Article/https://www.theguardian.com/my-test-article.
 
 *Note, PROD Frontend doesn't use these endpoints. Instead, it `POSTs` data to
 DCR and receives a JSON response. A tool like Postman can help if you want to

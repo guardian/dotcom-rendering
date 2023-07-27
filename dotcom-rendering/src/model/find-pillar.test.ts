@@ -1,4 +1,4 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import { findPillar } from './find-pillar';
 
 jest.mock('../lib/pillars', () => ({
@@ -7,7 +7,7 @@ jest.mock('../lib/pillars', () => ({
 
 describe('findPillar', () => {
 	it('returns pillar if valid', () => {
-		expect(findPillar('News')).toBe(ArticlePillar.News);
+		expect(findPillar('News')).toBe(Pillar.News);
 	});
 
 	it('returns undefined if not valid', () => {
@@ -15,7 +15,7 @@ describe('findPillar', () => {
 	});
 
 	it('returns "culture" if "arts"', () => {
-		expect(findPillar('Arts', [])).toBe(ArticlePillar.Culture);
+		expect(findPillar('Arts', [])).toBe(Pillar.Culture);
 	});
 
 	it('returns "labs" if paid content tagging exists', () => {

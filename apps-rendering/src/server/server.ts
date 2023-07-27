@@ -418,6 +418,27 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
+/**
+To enable testing in the mobile device emulators,
+this route handler adds compatability with DCR's route for apps articles.
+The DCR route follows the pattern:
+/AppsArticle/https://www.theguardian.com/cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked
+*/
+app.get(
+	'/AppsArticle/*',
+	express.raw(),
+	(req, res, next) => {
+		const contentWebUrl = req.params[0];
+		const articleId = new URL(contentWebUrl).pathname;
+		req.params = {
+			0: articleId,
+		};
+
+		next();
+	},
+	serveArticleGet,
+);
+
 app.get(
 	'/:edition(uk|us|au|europe|international)?/rendered-items/*',
 	express.raw(),
@@ -437,6 +458,6 @@ app.listen(port, () => {
 	if (process.env.NODE_ENV === 'production') {
 		logger.info(`Server listening on port ${port}!`);
 	} else {
-		logger.info(`Webpack dev server is listening on port 8080`);
+		logger.info(`Webpack dev server is listening on port 3030`);
 	}
 });

@@ -10,10 +10,10 @@ import type { FC } from 'react';
 import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
 import {
-	bold,
 	calloutLinkContainer,
 	calloutPrimaryButton,
-	success,
+	heading,
+	successMessage,
 } from './styles';
 
 interface CalloutFormProps {
@@ -81,6 +81,16 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		return Object.keys(errors).length === 0;
 	};
 
+	const cleanFormData = (
+		data: undefined | string | string[],
+	): string | undefined => {
+		if (Array.isArray(data)) {
+			return data.join('\n');
+		}
+
+		return data;
+	};
+
 	const onSubmit = async (formData: FormDataType): Promise<void> => {
 		// Reset error for new submission attempt
 		setSubmissionError('');
@@ -91,7 +101,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur): SubmitDataType => ({
 				...acc,
-				[`field_${cur}`]: formData[cur],
+				[`field_${cur}`]: cleanFormData(formData[cur]),
 			}),
 			{},
 		);
@@ -125,16 +135,16 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 	return (
 		<div className="js-callout-form-tab" css={calloutLinkContainer}>
 			{submissionSuccess ? (
-				<div css={success}>
+				<div css={successMessage}>
 					<div>
-						<SvgTickRound size="medium" />
+						<SvgTickRound />
 					</div>
-					<p css={bold}>Thank you!</p>
-					<p>Your story has been submitted successfully.</p>
-					<p>
-						One of our journalists will be in touch if we wish to
-						take your submission further.
-					</p>
+					<div css={heading}>Thank you!</div>
+					<div>
+						Your story has been submitted successfully. One of our
+						journalists will be in touch if we wish to take your
+						submission further.
+					</div>
 				</div>
 			) : (
 				<form
@@ -167,6 +177,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields }) => {
 										<Link
 											href="mailto:customer.help@theguardian.com"
 											target="_blank"
+											rel="noreferrer"
 										>
 											customer.help@theguardian.com
 										</Link>

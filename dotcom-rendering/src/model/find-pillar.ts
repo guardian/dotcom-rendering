@@ -1,4 +1,4 @@
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { TagType } from '../types/tag';
 
 export const findPillar: (
@@ -6,10 +6,12 @@ export const findPillar: (
 	tags?: TagType[],
 ) => ArticleTheme | undefined = (name, tags?) => {
 	// Flag paid content for Labs pillar (for styling purposes)
-	const isPaidContent = (tag: TagType) =>
-		tag.type === 'Tone' && tag.id === 'tone/advertisement-features';
+	const hasPaidContent = !!tags?.some(
+		({ type, id }) =>
+			type === 'Tone' && id === 'tone/advertisement-features',
+	);
 
-	if (tags && tags.some(isPaidContent)) {
+	if (hasPaidContent) {
 		return ArticleSpecial.Labs;
 	}
 
@@ -19,15 +21,15 @@ export const findPillar: (
 		// The pillar name is "arts" in CAPI, but "culture" everywhere else
 		case 'arts':
 		case 'culture':
-			return ArticlePillar.Culture;
+			return Pillar.Culture;
 		case 'opinion':
-			return ArticlePillar.Opinion;
+			return Pillar.Opinion;
 		case 'news':
-			return ArticlePillar.News;
+			return Pillar.News;
 		case 'sport':
-			return ArticlePillar.Sport;
+			return Pillar.Sport;
 		case 'lifestyle':
-			return ArticlePillar.Lifestyle;
+			return Pillar.Lifestyle;
 		default:
 			return undefined;
 	}

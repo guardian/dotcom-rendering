@@ -1,32 +1,29 @@
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 import { transformDots } from './transformDots';
 
-const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
+const checkForDots = (elements: FEElement[]): FEElement[] =>
 	// Loop over elements and check if a dot is in the TextBlockElement
-	const enhanced: CAPIElement[] = [];
-	elements.forEach((element, i) => {
+	elements.map<FEElement>((element, i) => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			element.html.includes('•')
 		) {
 			if (elements.length - 1 === i) {
-				enhanced.push({
+				return {
 					...element,
 					html: `<footer>${transformDots(element.html)}</footer>`,
-				});
+				};
 			} else {
-				enhanced.push({
+				return {
 					...element,
 					html: transformDots(element.html),
-				});
+				};
 			}
 		} else {
-			enhanced.push(element);
+			return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceDots = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {

@@ -7,19 +7,21 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT } = require('./bundles');
+const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
+const dist = path.resolve(__dirname, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+
+const BUILD_LEGACY = process.env.BUILD_LEGACY === 'true';
+const BUILD_VARIANT = process.env.BUILD_VARIANT === 'true';
 
 const sessionId = uuidv4();
 
 let builds = 0;
 
 /**
- * @param {{ platform: 'server' | 'browser.legacy' | 'browser.modern' | 'browser.variant'}} options
+ * @param {{ platform: 'server' | 'client.legacy' | 'client.modern' | 'client.variant' | 'client.apps'}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -42,6 +44,26 @@ const commonConfigs = ({ platform }) => ({
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
 	},
+	ignoreWarnings: [
+		/**
+		 * Express uses dynamic imports to load template engines. As we're not currently using a template engine in DCR
+		 * we can ignore this error.
+		 */
+		{
+			module: /..\/node_modules\/express\/lib\/view.js/,
+			message:
+				/Critical dependency: the request of a dependency is an expression/,
+		},
+		/**
+		 * Log4js uses dynamic imports to load non-core appenders. We're only using 'console' and 'file' appenders in DCR
+		 * which are specifically imported by log4js without using dynamic imports.
+		 */
+		{
+			module: /..\/node_modules\/log4js\/lib\/appenders\/index.js/,
+			message:
+				/Critical dependency: the request of a dependency is an expression/,
+		},
+	],
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -85,9 +107,20 @@ const commonConfigs = ({ platform }) => ({
 					new BundleAnalyzerPlugin({
 						reportFilename: path.join(
 							dist,
+							'stats',
 							`${platform}-bundles.html`,
 						),
 						analyzerMode: 'static',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							'stats',
+							`${platform}-bundles.json`,
+						),
+						analyzerMode: 'json',
 						openAnalyzer: false,
 						logLevel: 'warn',
 					}),
@@ -99,7 +132,6 @@ const commonConfigs = ({ platform }) => ({
 });
 
 module.exports = [
-	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
@@ -107,40 +139,46 @@ module.exports = [
 		require(`./webpack.config.server`)({ sessionId }),
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
-	// browser bundle configs
-	// TODO: ignore static files for legacy compilation
-	...(INCLUDE_LEGACY
+	merge(
+		commonConfigs({
+			platform: 'client.modern',
+		}),
+		require(`./webpack.config.client`)({
+			bundle: 'modern',
+			sessionId,
+		}),
+	),
+	merge(
+		commonConfigs({
+			platform: 'client.apps',
+		}),
+		require(`./webpack.config.client`)({
+			bundle: 'apps',
+			sessionId,
+		}),
+	),
+	...((PROD && BUILD_VARIANT_SWITCH) || BUILD_VARIANT
 		? [
 				merge(
 					commonConfigs({
-						platform: 'browser.legacy',
+						platform: 'client.variant',
 					}),
-					require(`./webpack.config.browser`)({
-						bundle: 'legacy',
+					require(`./webpack.config.client`)({
+						bundle: 'variant',
 						sessionId,
 					}),
 				),
 		  ]
 		: []),
-	merge(
-		commonConfigs({
-			platform: 'browser.modern',
-		}),
-		require(`./webpack.config.browser`)({
-			bundle: 'modern',
-			sessionId,
-		}),
-	),
-	// Only build the variant if in production mode
-	// Use `make build` or remove the PROD check temporarily to build the variant in development
-	...(PROD && BUILD_VARIANT
+	// TODO: ignore static files for legacy compilation
+	...(PROD || BUILD_LEGACY
 		? [
 				merge(
 					commonConfigs({
-						platform: 'browser.variant',
+						platform: 'client.legacy',
 					}),
-					require(`./webpack.config.browser`)({
-						bundle: 'variant',
+					require(`./webpack.config.client`)({
+						bundle: 'legacy',
 						sessionId,
 					}),
 				),

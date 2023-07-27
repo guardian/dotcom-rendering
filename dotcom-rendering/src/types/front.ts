@@ -1,13 +1,19 @@
-import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { EditionId } from '../web/lib/edition';
+import type { ArticleSpecial, Pillar } from '@guardian/libs';
+import type { SharedAdTargeting } from '../lib/ad-targeting';
+import type { EditionId } from '../lib/edition';
+import type { DCRBadgeType } from './badge';
+import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
+import type { Image } from './content';
 import type { FooterType } from './footer';
+import type { MainMedia } from './mainMedia';
 import type { FETagType } from './tag';
-import type { CAPITrailType, TrailType } from './trails';
+import type { Territory } from './territory';
+import type { FETrailType, TrailType } from './trails';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
-	nav: CAPINavType;
+	nav: FENavType;
 	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
@@ -19,14 +25,16 @@ export interface FEFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
-	mostViewed: CAPITrailType[];
-	mostCommented?: CAPITrailType;
-	mostShared?: CAPITrailType;
+	mostViewed: FETrailType[];
+	mostCommented?: FETrailType;
+	mostShared?: FETrailType;
+	deeplyRead?: FETrailType[];
+	contributionsServiceUrl: string;
 }
 
 export interface DCRFrontType {
 	pressedPage: DCRPressedPageType;
-	nav: CAPINavType;
+	nav: FENavType;
 	editionId: EditionId;
 	webTitle: string;
 	config: FEFrontConfigType;
@@ -36,6 +44,9 @@ export interface DCRFrontType {
 	mostViewed: TrailType[];
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
+	deeplyRead?: TrailType[];
+	trendingTopics?: FETagType[];
+	contributionsServiceUrl: string;
 }
 
 interface FEPressedPageType {
@@ -72,6 +83,7 @@ type FEContainerType =
 	| 'fixed/small/slow-V-third'
 	| 'fixed/thrasher'
 	| 'fixed/video'
+	| 'fixed/video/vertical'
 	| 'nav/list'
 	| 'nav/media-list'
 	| 'news/most-popular';
@@ -94,6 +106,21 @@ export type FEContainerPalette =
 	| 'BreakingPalette'
 	| 'SpecialReportAltPalette';
 
+export type FEFrontCardStyle =
+	| 'SpecialReport'
+	| 'SpecialReportAlt'
+	| 'LiveBlog'
+	| 'DeadBlog'
+	| 'Feature'
+	| 'Editorial'
+	| 'Comment'
+	| 'Media'
+	| 'Analysis'
+	| 'Review'
+	| 'Letters'
+	| 'ExternalLink'
+	| 'DefaultCardstyle';
+
 export type DCRContainerPalette =
 	| 'EventPalette'
 	| 'SombreAltPalette'
@@ -103,10 +130,35 @@ export type DCRContainerPalette =
 	| 'LongRunningPalette'
 	| 'SombrePalette'
 	| 'BreakingPalette'
-	| 'SpecialReportAltPalette';
+	| 'SpecialReportAltPalette'
+	| 'Branded'
+	| 'MediaPalette'
+	| 'PodcastPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
+
+/** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L191-L196 */
+interface MediaAsset {
+	id: string;
+	version: number;
+	platform: string;
+	mimeType?: string;
+}
+
+/** @see https://github.com/guardian/frontend/blob/0bf69f55a/common/app/model/content/Atom.scala#L158-L169 */
+export interface FEMediaAtom {
+	id: string;
+	// defaultHtml: string; // currently unused
+	assets: MediaAsset[];
+	title: string;
+	duration?: number;
+	source?: string;
+	posterImage?: { allImages: Image[] };
+	expired?: boolean;
+	activeVersion?: number;
+	// channelId?: string; // currently unused
+}
 
 export type FEFrontCard = {
 	properties: {
@@ -127,8 +179,8 @@ export type FEFrontCard = {
 							isMaster?: string;
 							altText?: string;
 							height: string;
-							credit: string;
-							mediaId: string;
+							credit?: string;
+							mediaId?: string;
 							width: string;
 						};
 						mediaType: string;
@@ -145,14 +197,17 @@ export type FEFrontCard = {
 				webUrl: string;
 				type: string;
 				sectionId?: { value: string };
-				format: CAPIFormat;
+				format: FEFormat;
 			};
 			fields: {
 				main: string;
 				body: string;
 				standfirst?: string;
 			};
-			elements: Record<string, unknown>;
+			elements: {
+				mainVideo?: unknown;
+				mediaAtoms: FEMediaAtom[];
+			};
 			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
@@ -163,13 +218,18 @@ export type FEFrontCard = {
 			type: string;
 			item: {
 				imageSrc?: string;
+				assets?: {
+					imageSrc: string;
+					imageCaption?: string;
+				}[];
 			};
 		};
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId } }[];
+		editionBrandings: { edition: { id: EditionId }; branding?: Branding }[];
 		href?: string;
+		embedUri?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -199,7 +259,7 @@ export type FEFrontCard = {
 	card: {
 		id: string;
 		cardStyle: {
-			type: string;
+			type: FEFrontCardStyle;
 		};
 		webPublicationDateOption?: number;
 		lastModifiedOption?: number;
@@ -222,11 +282,11 @@ export type FEFrontCard = {
 		imageHide: boolean;
 		showLivePlayable: boolean;
 	};
-	format?: CAPIFormat;
+	format?: FEFormat;
 	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
-		type: string;
+		type: FEFrontCardStyle;
 	};
 	type: string;
 };
@@ -240,14 +300,29 @@ export type DCRFrontCard = {
 	starRating?: number;
 	webPublicationDate?: string;
 	image?: string;
+	imageAltText?: string;
 	kickerText?: string;
+	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
+	isBoosted?: boolean;
+	isCrossword?: boolean;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
+	mainMedia?: MainMedia;
+	isExternalLink: boolean;
+	embedUri?: string;
+	branding?: Branding;
+	slideshowImages?: DCRSlideshowImage[];
+	showLivePlayable: boolean;
+};
+
+export type DCRSlideshowImage = {
+	imageSrc: string;
+	imageCaption?: string;
 };
 
 export type FESnapType = {
@@ -259,6 +334,7 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+	embedJs?: string;
 };
 
 type FECollectionConfigType = {
@@ -298,6 +374,7 @@ export type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: FECollectionConfigType;
 	hasMore: boolean;
+	targetedTerritory?: Territory;
 };
 
 export type DCRCollectionType = {
@@ -321,17 +398,19 @@ export type DCRCollectionType = {
 	 * will always be `false`.
 	 **/
 	canShowMore?: boolean;
+	badge?: DCRBadgeType;
+	targetedTerritory?: Territory;
 };
 
 export type DCRGroupedTrails = {
-	snap: TrailType[];
-	huge: TrailType[];
-	veryBig: TrailType[];
-	big: TrailType[];
-	standard: TrailType[];
+	snap: DCRFrontCard[];
+	huge: DCRFrontCard[];
+	veryBig: DCRFrontCard[];
+	big: DCRFrontCard[];
+	standard: DCRFrontCard[];
 };
 
-type FEFrontConfigType = {
+export type FEFrontConfigType = {
 	avatarApiUrl: string;
 	externalEmbedHost: string;
 	ajaxUrl: string;
@@ -342,7 +421,7 @@ type FEFrontConfigType = {
 	section: string;
 	keywordIds: string;
 	locationapiurl: string;
-	sharedAdTargeting: { [key: string]: unknown };
+	sharedAdTargeting: SharedAdTargeting;
 	buildNumber: string;
 	abTests: ServerSideTests;
 	pbIndexSites: { [key: string]: unknown }[];
@@ -424,8 +503,33 @@ type FESeoDataType = {
 
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
-	commercial: Record<string, unknown>;
+	commercial: {
+		editionBrandings: Array<{
+			edition: {
+				id: string;
+			};
+			branding?: {
+				brandingType: {
+					name: string;
+				};
+				sponsorName: string;
+				logo: {
+					src: string;
+					dimensions: {
+						width: number;
+						height: number;
+					};
+					link: string;
+					label: string;
+				};
+				aboutThisLink: string;
+			};
+		}>;
+		editionAdTargetings: unknown;
+		prebidIndexSites?: unknown;
+	};
 	isPaidContent?: boolean;
+	onPageDescription?: string;
 };
 
 export type FESupportingContent = {
@@ -443,7 +547,7 @@ export type FESupportingContent = {
 		headline: string;
 		url: string;
 	};
-	format?: CAPIFormat;
+	format?: FEFormat;
 };
 
 export type DCRSupportingContent = {
@@ -454,8 +558,8 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	links: { text: string; linkTo: string }[];
-	theme?: ArticlePillar | ArticleSpecial;
+	links: { text: string; title?: string; linkTo: string }[];
+	theme?: Pillar | ArticleSpecial;
 	editionId?: EditionId;
 	imageUrl?: string;
 	altText?: string;

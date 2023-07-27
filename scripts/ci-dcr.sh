@@ -42,21 +42,12 @@ else
 
 	if [ $currentBranch == "main" ]
 	then
-		#Code Validation
 		make validate-ci
-
-		# Cypress Tests
-		# see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
-		# apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 		make cypress
 	else
-		#Run bundle size?
-		make bundlesize
-
 		printf "Skipping code checks when not on main"
 	fi
 
-    #RiffRaff publish
     make riffraff-publish
 fi
 

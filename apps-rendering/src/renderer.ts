@@ -1,18 +1,6 @@
 // ----- Imports ----- //
 
 import { css, jsx as styledH } from '@emotion/react';
-import {
-	AudioAtom,
-	ChartAtom,
-	ExplainerAtom,
-	GuideAtom,
-	ProfileAtom,
-	QandaAtom,
-	TimelineAtom,
-} from '@guardian/atoms-rendering';
-import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
@@ -28,39 +16,29 @@ import {
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
-import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
-	AudioAtom as AudioAtomElement,
 	BodyElement,
-	GuideAtom as GuideAtomElement,
 	Image,
-	InteractiveAtom as InteractiveAtomElement,
 	MediaAtom as MediaAtomElement,
-	ProfileAtom as ProfileAtomElement,
-	QandaAtom as QandaAtomElement,
 	Text,
-	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/Anchor';
-import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
 import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
 import Callout from 'components/Callout';
 import Caption from 'components/caption';
+import { CaptionIconVariant } from 'components/CaptionIcon';
 import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import FigCaption from 'components/FigCaption';
 import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
-import InteractiveAtom, {
-	atomCss,
-	atomScript,
-} from 'components/InteractiveAtom';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
@@ -69,7 +47,10 @@ import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
 import RichLink from 'components/RichLink';
+import SpecialReportAltAtom from 'components/SpecialReportAltAtom';
 import { isElement, pipe } from 'lib';
+import { Optional } from 'optional';
+import { border, text } from 'palette';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';
@@ -193,26 +174,6 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
-/**
- * This regular expression checks that a string begins with a word that is at least
- * three characters long, ignoring the initial quotation mark.
- *
- *  The regex can be broken down as follows:
- *
- * - `["'\u2018\u201c]?` matches an optional quotation mark, apostrophe, open single quote
- * or open double quote.
- *
- * - `(?!I)` is a negative lookahead checking that the first letter is not "I".
- *
- * - The rest of the expression matches 3 or more characters in the Latin-1 Unicode block,
- * which includes diacritics (e.g. å, č, Ë, etc.).
- *
- * The regex sits outside the rendering function so it is only compiled once
- * for better performance.
- */
-const dropCapRegex =
-	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{3,}/;
-
 const shouldShowDropCap = (
 	text: string,
 	format: ArticleFormat,
@@ -221,9 +182,7 @@ const shouldShowDropCap = (
 	if (isEditions) {
 		return false;
 	}
-	return (
-		allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text)
-	);
+	return allowsDropCaps(format) && text.length >= 200;
 };
 
 const textElement =
@@ -442,19 +401,18 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 
-	const maybeCaption =
+	const maybeCaption: Optional<ReactNode> =
 		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
-			? some([
+			? Optional.some([
 					h(Caption, { format, caption }),
 					h(Credit, { credit, format, key }),
 			  ])
-			: none;
+			: Optional.none();
 
 	return h(BodyImage, {
 		caption: maybeCaption,
 		format,
 		key,
-		supportsDarkMode: true,
 		lightbox: some({
 			className: 'js-launch-slideshow',
 			caption: nativeCaption,
@@ -474,109 +432,6 @@ const textRenderer = (
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
 		: renderText(element.doc, format, isEditions);
-};
-
-const guideAtomRenderer = (
-	format: ArticleFormat,
-	element: GuideAtomElement,
-): ReactNode => {
-	return h(GuideAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const qandaAtomRenderer = (
-	format: ArticleFormat,
-	element: QandaAtomElement,
-): ReactNode => {
-	return h(QandaAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const profileAtomRenderer = (
-	format: ArticleFormat,
-	element: ProfileAtomElement,
-): ReactNode => {
-	return h(ProfileAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const timelineAtomRenderer = (
-	format: ArticleFormat,
-	element: TimelineAtomElement,
-): ReactNode => {
-	return h(TimelineAtom, {
-		...element,
-		pillar: themeToPillar(format.theme),
-		likeHandler: () => {
-			console.log('like clicked');
-		},
-		dislikeHandler: () => {
-			console.log('dislike clicked');
-		},
-		expandCallback: () => {
-			console.log('expand clicked');
-		},
-	});
-};
-
-const interactiveAtomRenderer = (
-	format: ArticleFormat,
-	element: InteractiveAtomElement,
-): ReactNode => {
-	const { html, css: styles, js } = element;
-	if (format.design !== ArticleDesign.Interactive) {
-		const fenced = `
-			<html>
-				<head>
-					<meta charset="utf-8">
-					<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-					<style>${styles}</style>
-					<style>${atomCss}</style>
-				</head>
-				<body>
-					${html}
-					<script>${withDefault('')(js)}</script>
-					<script>${atomScript}</script>
-				</body>
-			</html>
-		`;
-		return h('iframe', { srcdoc: fenced });
-	} else {
-		return h(InteractiveAtom, { html, styles, js, format });
-	}
 };
 
 const mediaAtomRenderer = (
@@ -611,8 +466,7 @@ const mediaAtomRenderer = (
 	};
 	const figcaption = h(FigCaption, {
 		format: format,
-		supportsDarkMode: true,
-		children: some(h(Caption, { caption, format })),
+		children: Optional.some(h(Caption, { caption, format })),
 		variant: CaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
@@ -624,28 +478,6 @@ const mediaAtomRenderer = (
 			: styledH('div', attributes),
 		figcaption,
 	]);
-};
-
-const audioAtomRenderer = (
-	format: ArticleFormat,
-	element: AudioAtomElement,
-): ReactNode => {
-	const pillar = themeToPillar(format.theme);
-	const audioAtomStyles = css`
-		figure {
-			margin: 0;
-		}
-	`;
-	return styledH(
-		'div',
-		{
-			...element,
-			pillar,
-			className: 'js-audio-atom',
-			css: audioAtomStyles,
-		},
-		h(AudioAtom, { ...element, pillar, duration: 0 }),
-	);
 };
 
 const renderElement =
@@ -696,41 +528,31 @@ const renderElement =
 					editions: false,
 				});
 
-			case ElementKind.ExplainerAtom: {
-				return h(ExplainerAtom, { ...element });
-			}
-
+			// These atoms are not supported in AR.
+			case ElementKind.ExplainerAtom:
 			case ElementKind.GuideAtom:
-				return guideAtomRenderer(format, element);
-
 			case ElementKind.QandaAtom:
-				return qandaAtomRenderer(format, element);
-
 			case ElementKind.ProfileAtom:
-				return profileAtomRenderer(format, element);
-
 			case ElementKind.TimelineAtom:
-				return timelineAtomRenderer(format, element);
-
-			case ElementKind.ChartAtom: {
-				return h(ChartAtom, { ...element });
-			}
-
+			case ElementKind.ChartAtom:
 			case ElementKind.InteractiveAtom:
-				return interactiveAtomRenderer(format, element);
+			case ElementKind.AudioAtom:
+			case ElementKind.KnowledgeQuizAtom:
+			case ElementKind.PersonalityQuizAtom:
+				return null;
 
 			case ElementKind.MediaAtom:
 				return mediaAtomRenderer(format, element, false);
 
-			case ElementKind.AudioAtom:
-				return audioAtomRenderer(format, element);
-
-			case ElementKind.KnowledgeQuizAtom:
-			case ElementKind.PersonalityQuizAtom:
-				return h(Quiz, { format, element });
-
 			case ElementKind.NewsletterSignUp:
-				return h(NewsletterSignup, { format, element });
+				return h(NewsletterSignup, {
+					format,
+					element,
+					skipLinkIdSuffix: key.toString(),
+				});
+
+			case ElementKind.SpecialReportAltAtom:
+				return h(SpecialReportAltAtom, { format });
 		}
 	};
 

@@ -2,12 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	fill,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { between, from, remSpace } from '@guardian/source-foundations';
+import { between, from, palette, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
@@ -19,10 +15,12 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { DeadBlog, Item, LiveBlog } from 'item';
 import { getFormat } from 'item';
+import { background, fill } from 'palette';
 import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -31,17 +29,19 @@ import { darkModeCss } from 'styles';
 
 const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
-		background-color: ${background.articleContentDark(format)}
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
 const mainContentStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
-		background-color: ${background.articleContentDark(format)}
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
@@ -55,6 +55,10 @@ const bodyStyles = css`
 	${from.leftCol} {
 		grid-row: 1 / 6;
 	}
+
+	${darkModeCss`
+		color: ${palette.neutral[86]};
+	`}
 `;
 
 const linesStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -96,6 +100,12 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
+						<WithAgeWarning
+							tags={item.tags}
+							series={item.series}
+							publishDate={item.publishDate}
+							format={format}
+						/>
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
@@ -113,7 +123,7 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 						</div>
 						<Metadata item={item} />
 						<div css={bodyStyles}>
-							{item.outline.length > 0 && (
+							{item.outline.length >= 3 && (
 								<section>
 									<TableOfContents
 										format={getFormat(item)}

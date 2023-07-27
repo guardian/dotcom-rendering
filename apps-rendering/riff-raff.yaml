@@ -11,7 +11,8 @@ templates:
       amiParameter: AMIMobileappsrendering
       amiEncrypted: true
       amiTags:
-        Recipe: bionic-mobile-node-ARM
+        # Keep the Node version in sync with `.nvmrc`
+        Recipe: jammy-mobile-node18.17.0-ARM
         AmigoStage: PROD
 deployments:
   mobile-apps-rendering-cfn:
@@ -38,7 +39,8 @@ deployments:
   mobile-assets:
     type: aws-s3
     parameters:
-      bucket: mobile-apps-rendering-assets
+      bucketSsmLookup: true
+      bucketSsmKey: /account/services/apps-rendering-static.bucket
       cacheControl: public, max-age=315360000
       prefixStack: false
       publicReadAcl: false

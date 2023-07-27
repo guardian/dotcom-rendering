@@ -1,17 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
+import { border, text } from 'palette';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-bottom: ${remSpace[2]};
 	${grid.column.centre}
-	grid-row: 6/7;
+	grid-row: 8/9;
 	color: ${text.gallery(format)};
 	${headline.xxxsmall({ fontWeight: 'medium', fontStyle: 'italic' })}
 

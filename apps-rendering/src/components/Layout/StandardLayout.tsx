@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
@@ -10,10 +9,7 @@ import {
 	DottedLines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { map, withDefault } from '@guardian/types';
-import { pillarToId, themeToPillar } from 'articleFormat';
-import ArticleBody from 'components/ArticleBody';
-import DesignTag from 'components/DesignTag';
+import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
@@ -26,6 +22,7 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { MatchScores } from 'football';
 import { getFormat } from 'item';
 import type {
@@ -39,13 +36,16 @@ import type {
 	Obituary,
 	PhotoEssay,
 	PrintShop,
+	Profile,
 	Quiz,
 	Recipe,
 	Review,
 	Standard,
+	Timeline,
 } from 'item';
-import { maybeRender, pipe } from 'lib';
+import { maybeRender } from 'lib';
 import { Optional } from 'optional';
+import { background } from 'palette';
 import type { FC } from 'react';
 import {
 	articleWidthStyles,
@@ -97,7 +97,9 @@ interface Props {
 		| Interview
 		| Recipe
 		| PrintShop
-		| PhotoEssay;
+		| PhotoEssay
+		| Timeline
+		| Profile;
 }
 
 const StandardLayout: FC<Props> = ({ item }) => {
@@ -108,26 +110,6 @@ const StandardLayout: FC<Props> = ({ item }) => {
 			<Epic />
 		</div>
 	);
-
-	const commentContainer = item.commentable
-		? pipe(
-				item.internalShortId,
-				map((id) => (
-					<section
-						css={onwardStyles}
-						id="comments"
-						data-closed={false}
-						data-pillar={pipe(
-							item.theme,
-							themeToPillar,
-							pillarToId,
-						)}
-						data-short-id={id}
-					></section>
-				)),
-				withDefault(<></>),
-		  )
-		: null;
 
 	const matchScores: Optional<MatchScores> =
 		'football' in item ? item.football : Optional.none();
@@ -150,22 +132,25 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
 					/>
+					<WithAgeWarning
+						tags={item.tags}
+						series={item.series}
+						publishDate={item.publishDate}
+						format={format}
+					/>
 					<Series item={item} />
-					{item.design !== ArticleDesign.Interview && (
-						<DesignTag format={item} />
-					)}
 
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
 					</div>
-					{decideLines(item, lineStyles)}
+					{decideLines(item, lineStyles(format))}
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
 
-					{item.outline.length > 0 && (
+					{item.outline.length >= 3 && (
 						<section css={articleWidthStyles}>
 							<TableOfContents
 								format={getFormat(item)}
@@ -174,7 +159,7 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						</section>
 					)}
 				</header>
-				<ArticleBody
+				<Body
 					className={[articleWidthStyles]}
 					format={item}
 					body={item.body}
@@ -188,7 +173,6 @@ const StandardLayout: FC<Props> = ({ item }) => {
 			<section css={onwardStyles}>
 				<RelatedContent item={item} />
 			</section>
-			{commentContainer}
 			<Footer isCcpa={false} format={item} />
 		</main>
 	);

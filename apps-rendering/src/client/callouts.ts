@@ -1,3 +1,4 @@
+import type { Contact } from '@guardian/apps-rendering-api-models/contact';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
@@ -13,7 +14,9 @@ import {
 	fieldParser,
 	map,
 	map2,
-	map7,
+	map4,
+	map8,
+	map9,
 	maybe,
 	numberParser,
 	parse,
@@ -48,6 +51,7 @@ const makeFormFields = (
 	type: string,
 	mandatory: boolean,
 	options: FormOption[],
+	hidden: boolean,
 	description?: string,
 ): FormField => ({
 	id,
@@ -57,6 +61,19 @@ const makeFormFields = (
 	mandatory,
 	options,
 	description,
+	hidden,
+});
+
+const makeContacts = (
+	name: string,
+	value: string,
+	urlPrefix: string,
+	guidance?: string,
+): Contact => ({
+	name,
+	value,
+	urlPrefix,
+	guidance,
 });
 
 const makeCalloutProps = (
@@ -68,15 +85,18 @@ const makeCalloutProps = (
 });
 
 const makeCallout = (
-	heading: string,
 	formId: number,
 	formFields: FormField[],
 	isNonCollapsible: boolean,
 	name: string,
+	prompt: string,
+	heading: string,
 	description?: DocumentFragment,
 	activeUntil?: number,
+	contacts?: Contact[],
 ): Callout => ({
 	kind: ElementKind.Callout,
+	prompt,
 	heading,
 	formId,
 	formFields,
@@ -84,6 +104,7 @@ const makeCallout = (
 	name,
 	description,
 	activeUntil,
+	contacts,
 });
 
 const makeArticleFormat = (theme: ArticleTheme): ArticleFormatProps => ({
@@ -123,24 +144,34 @@ const optionParser: Parser<FormOption> = map2(makeFormOption)(
 	fieldParser('value', stringParser),
 );
 
-const formFieldsParser: Parser<FormField> = map7(makeFormFields)(
+const formFieldsParser: Parser<FormField> = map8(makeFormFields)(
 	fieldParser('id', stringParser),
 	fieldParser('label', stringParser),
 	fieldParser('name', stringParser),
 	fieldParser('type', stringParser),
 	fieldParser('mandatory', booleanParser),
 	fieldParser('options', arrayParser(optionParser)),
+	fieldParser('hidden', booleanParser),
 	aOrUndefinedParser(fieldParser('description', stringParser)),
 );
 
-const calloutParser: Parser<Callout> = map7(makeCallout)(
-	fieldParser('heading', stringParser),
+const contactsParser: Parser<Contact> = map4(makeContacts)(
+	fieldParser('name', stringParser),
+	fieldParser('value', stringParser),
+	fieldParser('urlPrefix', stringParser),
+	aOrUndefinedParser(fieldParser('guidance', stringParser)),
+);
+
+const calloutParser: Parser<Callout> = map9(makeCallout)(
 	fieldParser('formId', numberParser),
 	fieldParser('formFields', arrayParser(formFieldsParser)),
 	fieldParser('isNonCollapsible', booleanParser),
 	fieldParser('name', stringParser),
+	fieldParser('prompt', stringParser),
+	fieldParser('heading', stringParser),
 	fieldParser('description', documentFragmentParser),
 	aOrUndefinedParser(fieldParser('activeUntil', numberParser)),
+	aOrUndefinedParser(fieldParser('contacts', arrayParser(contactsParser))),
 );
 
 const calloutPropsParser: Parser<CalloutProps> = map2(makeCalloutProps)(

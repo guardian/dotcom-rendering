@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -10,6 +9,7 @@ import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
+import { text } from 'palette';
 import type { ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -54,6 +54,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xsmall({ fontWeight: 'light' })}
 	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 	color: ${text.standfirst(format)};
+	grid-row: 7/8;
 
 	${from.mobileLandscape} {
 		padding-top: ${remSpace[4]};
@@ -61,10 +62,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	${from.tablet} {
 		padding-top: ${remSpace[1]};
-	}
-
-	${from.leftCol} {
-		grid-row: 5;
 	}
 
 	${darkModeCss`

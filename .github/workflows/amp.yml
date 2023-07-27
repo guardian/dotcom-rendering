@@ -1,0 +1,30 @@
+on:
+  workflow_call:
+    inputs:
+      container-image:
+        description: 'Image used by DCR service'
+        required: true
+        type: string
+
+jobs:
+    validate:
+        runs-on: ubuntu-latest
+        services:
+          DCR:
+            image: ${{ inputs.container-image }}
+            ports:
+              - 9000:9000
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - uses: actions/setup-node@v3
+              with:
+                node-version-file: '.nvmrc'
+                cache: 'yarn'
+
+            - run: yarn install --frozen-lockfile
+
+            - name: Validate AMP
+              run: make ampValidation
+              working-directory: dotcom-rendering

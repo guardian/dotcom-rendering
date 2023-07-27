@@ -1,5 +1,4 @@
 // ----- Imports ----- //
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
@@ -45,7 +44,7 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 			return (
 				<DefaultByline
 					bylineHtml={bylineHtml}
-					styles={defaultStyles(text.bylineLeftColumn(format))}
+					styles={defaultStyles(format)}
 					anchorStyles={defaultAnchorStyles(format)}
 					format={format}
 				/>

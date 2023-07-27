@@ -2,12 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { Optional } from 'optional';
+import { text } from 'palette';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -17,7 +17,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	color: ${text.standfirst(format)};
-	grid-row: 5/6;
+	grid-row: 7/8;
 	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 
 	${from.mobileLandscape} {

@@ -157,7 +157,6 @@ const getThirdPartyEmbeds = (content: Content): ThirdPartyEmbeds => {
 
 const requiresInlineStyles = (renderingRequest: RenderingRequest): boolean => {
 	// return !!(
-	//	   content.fields?.commentable ??
 	//	   content.atoms?.quizzes ??
 	//	   content.atoms?.audios ??
 	//	   content.atoms?.charts
@@ -189,7 +188,6 @@ const capiEndpoint = (articleId: string, key: string): string => {
 		'displayHint',
 		'starRating',
 		'commentable',
-		'internalShortId',
 		'liveBloggingNow',
 		'lastModified',
 		'isInappropriateForSponsorship',
@@ -262,7 +260,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 			fields: {
 				kind: 'callout',
 				callout: {
-					callout: 'Share your experiences',
+					callout: 'Are you affected by the issues in this story?',
 					formId: 3936020,
 					tagName: 'callout-breaking-news-event',
 					description:
@@ -277,6 +275,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							type: 'textarea',
 							mandatory: true,
 							options: [],
+							hidden: false,
 						},
 						{
 							id: '94480028',
@@ -287,6 +286,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							type: 'text',
 							mandatory: true,
 							options: [],
+							hidden: false,
 						},
 						{
 							id: '94480031',
@@ -294,6 +294,7 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 							name: 'can_we_publish_your_response',
 							type: 'radio',
 							mandatory: true,
+							hidden: false,
 							options: [
 								{
 									label: 'Yes, but please contact me first',
@@ -304,6 +305,27 @@ const getMockCampaigns = (content: Content): Campaign[] => {
 									value: 'No, this is information only',
 								},
 							],
+						},
+					],
+					contacts: [
+						{
+							name: 'whatsapp',
+							value: '+447766780300',
+							urlPrefix: 'https://wa.me/',
+							guidance:
+								'https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian',
+						},
+						{
+							name: 'signal',
+							value: '+447766780300',
+							urlPrefix: 'https://signal.me/#p/',
+						},
+						{
+							name: 'telegram',
+							value: '+1234',
+							urlPrefix: 'https://telegram.me/',
+							guidance:
+								'https://www.theguardian.com/info/2022/mar/15/telegram-sharing-stories-with-the-guardian',
 						},
 					],
 					formUrl:

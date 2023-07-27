@@ -2,10 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -18,6 +14,7 @@ import {
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
+import { background, text } from 'palette';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import GallerySeries from './GallerySeries';
@@ -121,6 +118,7 @@ const immersiveStyles = (format: ArticleFormat): SerializedStyles => css`
 const standardStyles: SerializedStyles = css`
 	${articleWidthStyles}
 	padding-top: ${remSpace[1]};
+	padding-bottom: ${remSpace[2]};
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {

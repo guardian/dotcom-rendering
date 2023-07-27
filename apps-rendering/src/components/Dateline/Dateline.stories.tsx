@@ -3,9 +3,7 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
-import { date, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import Dateline from './';
 
 // ----- Stories ----- //
@@ -15,11 +13,9 @@ const Default: FC = () => (
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Opinion),
+			theme: ArticlePillar.Opinion,
 		}}
-		date={some(
-			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
-		)}
+		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.UK}
 	/>
 );
@@ -29,11 +25,9 @@ const LiveBlogDateline: FC = () => (
 		format={{
 			design: ArticleDesign.LiveBlog,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
+			theme: ArticlePillar.News,
 		}}
-		date={some(
-			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
-		)}
+		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.US}
 	/>
 );
@@ -43,11 +37,9 @@ const DeadBlogDateline: FC = () => (
 		format={{
 			design: ArticleDesign.DeadBlog,
 			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.Culture),
+			theme: ArticlePillar.Culture,
 		}}
-		date={some(
-			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
-		)}
+		date={some(new Date('2019-12-17T03:24:00'))}
 		edition={Edition.AU}
 	/>
 );
@@ -57,7 +49,6 @@ const DeadBlogDateline: FC = () => (
 export default {
 	component: Dateline,
 	title: 'AR/Dateline',
-	decorators: [withKnobs],
 };
 
 export { Default, LiveBlogDateline, DeadBlogDateline };

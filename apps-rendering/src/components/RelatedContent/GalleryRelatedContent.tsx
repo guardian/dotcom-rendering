@@ -2,10 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -15,6 +11,7 @@ import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import type { ResizedRelatedContent } from 'item';
 import { maybeRender } from 'lib';
+import { background, border } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import {
@@ -65,15 +62,15 @@ const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 		${grid.column.left}
 		position: relative;
 		grid-row: 1;
-	}
 
-	&::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		border-left: 1px solid ${neutral[86]};
-		right: -10px;
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			border-left: 1px solid ${neutral[86]};
+			right: -10px;
+		}
 	}
 
 	${darkModeCss`

@@ -14,11 +14,11 @@ describe('Consent tests', function () {
 	});
 
 	it('should make calls to Google Analytics after the reader consents', function () {
-		cy.visit(`Article?url=${firstPage}`);
+		cy.visit(`/Article/${firstPage}`);
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find('button.sp_choice_type_12').click();
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
@@ -36,19 +36,19 @@ describe('Consent tests', function () {
 				return false;
 			}
 		});
-		cy.visit(`Article?url=${firstPage}`);
+		cy.visit(`/Article/${firstPage}`);
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
+		cmpIframe().find('button.sp_choice_type_12').click();
 		// Reject tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Reject all']").click();
 		// We force window.ga to be null upon consent rejection to prevent subsequent requests
-		cy.window().its('ga').should('equal', null);
+		cy.window().its('ga').should('be.null');
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
 		// to see if the ga property remains correctly unset
 		cy.reload();
-		cy.window().its('ga').should('equal', null);
+		cy.window().its('ga').should('be.null');
 	});
 });

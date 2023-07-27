@@ -2,10 +2,14 @@ name: ⏰ Scheduled daily jobs
 on:
   schedule:
     # Every work day of the week at 08:08
-    - cron: "8 8 * * MON-FRI"
+    - cron: '8 8 * * MON-FRI'
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
 
 jobs:
   scheduled:
@@ -14,13 +18,55 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup deno
-        uses: denoland/setup-deno@v1
+      # https://github.com/denoland/setup-deno#latest-stable-for-a-major
+      - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.26.2
+          deno-version: v1.x
 
-      - name: Run Deno scripts
-        run: scripts/ci-deno.sh
+      - name: Components Ophan attributes tracker
+        run: |
+          deno run \
+            --allow-read \
+            --allow-net=www.theguardian.com,api.github.com \
+            --allow-env=HOME,GITHUB_TOKEN \
+            scripts/deno/ophan-components.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Thrasher tracker
+        run: |
+          deno run \
+            --allow-read \
+            --allow-net \
+            --allow-env=HOME,GITHUB_TOKEN \
+            scripts/deno/thrasher-tracker.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: iFrame titles tracker
+        run: |
+          deno run \
+            --allow-read \
+            --allow-net \
+            --allow-env=HOME,GITHUB_TOKEN,CAPI_KEY \
+            scripts/deno/iframe-titles.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CAPI_KEY: ${{ secrets.CAPI_KEY }}
+
+      # The peer dependencies script relies on `yarn`
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: DCR peer dependencies tracker
+        run: |
+          deno run \
+            --allow-read \
+            --allow-net \
+            --allow-env=HOME,GITHUB_TOKEN \
+            --allow-run=yarn,npm \
+            scripts/deno/peer-dependencies.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
