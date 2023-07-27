@@ -38,7 +38,9 @@ const decideWidth = (
 			return css`
 				min-width: 300px;
 				max-width: 600px;
-				width: calc((100vw - ${padding}px) / 1.5); // Show 1.5 cards
+				width: calc(
+					80vw - ${padding}px
+				); // Show 1 full card and min 20vw of second card
 				overflow: hidden;
 
 				${until.mobileLandscape} {
