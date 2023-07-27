@@ -20,7 +20,7 @@ const FORBIDDEN_CONTAINERS = [
 	'qatar treat',
 ];
 const isSupported = (collection: FECollectionType): boolean =>
-	!FORBIDDEN_CONTAINERS.includes(collection.displayName);
+	!FORBIDDEN_CONTAINERS.some((name) => collection.displayName.includes(name));
 
 function getBrandingFromCards(
 	allCards: FEFrontCard[],
