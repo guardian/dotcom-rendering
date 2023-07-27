@@ -4,9 +4,10 @@ import {
 	AD_CONTAINER_HEIGHT,
 	PADDING_BOTTOM,
 	SPACE_BETWEEN_ADS,
+	TOP_RIGHT_AD_STICKY_HEIGHT,
 } from '../lib/liveblog-right-ad-constants';
+import { useAB } from '../lib/useAB';
 import { AdSlot } from './AdSlot';
-import { TOP_RIGHT_AD_STICKY_HEIGHT } from './TopRightAdSlot';
 
 export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
@@ -22,8 +23,6 @@ export const calculateNumAdsThatFit = (rightColHeight: number) => {
 };
 
 const rightAdContainerStyles = css`
-	height: 100%;
-	max-height: 100%;
 	width: 300px;
 	display: flex;
 	flex-direction: column;
@@ -102,10 +101,19 @@ export const LiveblogRightMultipleAdSlots = ({
 		};
 	}, []);
 
+	const ABTestAPI = useAB()?.api;
+	const shouldInsertMultipleAdverts =
+		ABTestAPI?.isUserInVariant(
+			'LiveblogRightColumnAds',
+			'multiple-adverts',
+		) ?? false;
+
+	if (!shouldInsertMultipleAdverts) return null;
+
 	if (numberAdvertsThatFit === 0) return null;
 
 	return (
-		<div id="right-ad-container" css={[rightAdContainerStyles]}>
+		<div css={[rightAdContainerStyles]}>
 			{[...new Array<undefined>(numberAdvertsThatFit)].map((_, i) => {
 				return (
 					<AdSlot

@@ -1,4 +1,4 @@
-import { calculateNumAdsThatFit } from './LiveblogRightMultipleAdSlots';
+import { calculateNumAdsThatFit } from './LiveblogRightMultipleAdSlots.importable';
 
 /**
  	Right ad height = 1059px

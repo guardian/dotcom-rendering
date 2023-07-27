@@ -2,8 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 
-export const TOP_RIGHT_AD_STICKY_HEIGHT = 1059;
-
 /**
  * # Top Right Ad Slot
  *
