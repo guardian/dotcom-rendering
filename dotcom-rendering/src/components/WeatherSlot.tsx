@@ -23,7 +23,12 @@ const formatTemperature = (value: number, unit: string) =>
 const formatTime = (dateTime: string, edition: EditionId) =>
 	new Date(dateTime).toLocaleTimeString(getEditionFromId(edition).locale, {
 		hour: 'numeric',
-		minute: 'numeric',
+		// US and AU dates include AM/PM markers that cause the timestamp to
+		// wrap onto the next line, which we don't want for the design.
+		// Given that the times are always on the hour, i.e. the minutes are
+		// always "00", we can choose to show the hour only without losing
+		// information. This shortens the timestamp and keeps it on one line.
+		minute: edition === 'US' || edition === 'AU' ? undefined : 'numeric',
 	});
 
 const visuallyHiddenCSS = css`
