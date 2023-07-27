@@ -1,4 +1,4 @@
-import { measureDuration } from '../client/measureDuration';
+import { startPerformanceMeasure } from '@guardian/libs';
 import { record } from '../client/ophan/ophan';
 
 export type MaybeFC = React.FC | null;
@@ -49,8 +49,10 @@ const timeoutify = <T>(
 	const canShow = (): Promise<CanShowResult<T>> =>
 		new Promise((resolve) => {
 			const perfName = `messagePicker-canShow-${candidateConfig.candidate.id}`;
-			const canShowTiming = measureDuration(perfName);
-			canShowTiming.start();
+			const { endPerformanceMeasure } = startPerformanceMeasure(
+				'tx',
+				perfName,
+			);
 
 			if (candidateConfig.timeoutMillis !== null) {
 				timer = window.setTimeout(() => {
@@ -67,7 +69,7 @@ const timeoutify = <T>(
 				.then((result) => {
 					resolve(result);
 
-					const canShowTimeTaken = canShowTiming.end();
+					const canShowTimeTaken = endPerformanceMeasure();
 
 					if (candidateConfig.reportTiming) {
 						record({

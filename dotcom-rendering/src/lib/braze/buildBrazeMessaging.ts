@@ -9,8 +9,7 @@ import {
 	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { log, storage } from '@guardian/libs';
-import { measureDuration } from '../../client/measureDuration';
+import { log, startPerformanceMeasure, storage } from '@guardian/libs';
 import { record } from '../../client/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
@@ -94,14 +93,16 @@ export const buildBrazeMessaging = async (
 	}
 
 	try {
-		const sdkLoadTiming = measureDuration('braze-sdk-load');
-		sdkLoadTiming.start();
+		const { endPerformanceMeasure } = startPerformanceMeasure(
+			'tx',
+			'braze-sdk-load',
+		);
 
 		const appboy = await getInitialisedAppboy(
 			dependenciesResult.data.apiKey as string,
 		);
 
-		const sdkLoadTimeTaken = sdkLoadTiming.end();
+		const sdkLoadTimeTaken = endPerformanceMeasure();
 		record({
 			component: 'braze-sdk-load-timing',
 			value: sdkLoadTimeTaken,
