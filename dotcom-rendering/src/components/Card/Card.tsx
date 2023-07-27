@@ -446,9 +446,12 @@ export const Card = ({
 										hideCaption={true}
 										role="inline"
 										stickyVideos={false}
-										kicker={'Breaking News'}
+										kickerText={kickerText}
 										pauseOffscreenVideo={
 											pauseOffscreenVideo
+										}
+										showTextOverlay={
+											containerType === 'fixed/video'
 										}
 									/>
 								</Island>

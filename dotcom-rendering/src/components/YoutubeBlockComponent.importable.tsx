@@ -32,8 +32,9 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
-	kicker?: string;
+	kickerText?: string;
 	pauseOffscreenVideo?: boolean;
+	showTextOverlay?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -91,8 +92,9 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
-	kicker,
+	kickerText,
 	pauseOffscreenVideo = false,
+	showTextOverlay,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -232,9 +234,9 @@ export const YoutubeBlockComponent = ({
 				isMainMedia={isMainMedia}
 				imaEnabled={imaEnabled}
 				abTestParticipations={abTestParticipations}
-				// Temp commenting as couldn't get prepush commit to work with locally linked atoms rendering
-				// kicker={kicker}
-				// shouldPauseOutOfView={pauseOffscreenVideo}
+				kicker={kickerText}
+				shouldPauseOutOfView={pauseOffscreenVideo}
+				showTextOverlay={showTextOverlay}
 			/>
 			{!hideCaption && (
 				<Caption
