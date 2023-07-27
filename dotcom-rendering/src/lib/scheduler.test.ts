@@ -53,7 +53,7 @@ describe('scheduler', () => {
 		const enhancement = jest.fn().mockResolvedValue('task result');
 		const feature = jest.fn().mockResolvedValue('task result');
 
-		jest.advanceTimersByTime(10000);
+		jest.advanceTimersByTime(10_000);
 
 		void schedule('enhancement', enhancement, {
 			priority: 'enhancement',
