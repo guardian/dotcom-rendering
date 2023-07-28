@@ -42,7 +42,7 @@ type ArticleProps = Props & {
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
-	collectionType?: string;
+	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
 };
 
@@ -852,7 +852,7 @@ export const Carousel = ({
 
 	const isCuratedContent = onwardsSource === 'curated-content';
 	const containerType =
-		'collectionType' in props ? props.collectionType : undefined;
+		'containerType' in props ? props.containerType : undefined;
 
 	const isVideoContainer = containerType === 'fixed/video';
 
