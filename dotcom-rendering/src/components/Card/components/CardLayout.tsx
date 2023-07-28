@@ -30,15 +30,15 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 	}
 };
 
+// Until mobile landscape, show 1 card on small screens
+// Above mobile landscape, show 1 full card and min 20vw of second card
 const videoWidth = css`
 	min-width: 300px;
 	max-width: 600px;
-	// Show 1 full card and min 20vw of second card
 	width: calc(80vw - ${padding}px);
 	overflow: hidden;
 
 	${until.mobileLandscape} {
-		// Show 1 card on small screens
 		width: calc(100vw - ${padding}px);
 	}
 `;
