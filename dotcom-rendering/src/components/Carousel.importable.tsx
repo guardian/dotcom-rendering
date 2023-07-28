@@ -851,9 +851,10 @@ export const Carousel = ({
 	const arrowName = 'carousel-small-arrow';
 
 	const isCuratedContent = onwardsSource === 'curated-content';
+	const containerType =
+		'collectionType' in props ? props.collectionType : undefined;
 
-	const isVideoContainer =
-		'collectionType' in props && props.collectionType === 'fixed/video';
+	const isVideoContainer = containerType === 'fixed/video';
 
 	const hasPageSkin = 'hasPageSkin' in props && (props.hasPageSkin ?? false);
 
