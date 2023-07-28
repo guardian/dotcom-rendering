@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
 import { DCRContainerType } from '../../../types/front';
 import type { ImagePositionType } from './ImageWrapper';
+
 const padding = 20;
 
 type Props = {
