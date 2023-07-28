@@ -470,7 +470,7 @@ type CarouselCardProps = {
 	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
 	onwardsSource?: string;
-	isVideoContainer?: boolean;
+	containerType?: DCRContainerType;
 };
 
 const CarouselCard = ({
@@ -487,41 +487,44 @@ const CarouselCard = ({
 	mainMedia,
 	verticalDividerColour,
 	onwardsSource,
-	isVideoContainer,
-}: CarouselCardProps) => (
-	<LI
-		percentage="25%"
-		showDivider={!isFirst && !isVideoContainer}
-		padSides={true}
-		padSidesOnMobile={true}
-		snapAlignStart={true}
-		verticalDividerColour={verticalDividerColour}
-	>
-		<Card
-			linkTo={linkTo}
-			format={format}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText}
-			imageUrl={imageUrl}
-			imageSize={'small'}
-			showClock={true}
-			showAge={true}
-			imagePositionOnMobile="top"
-			pauseOffscreenVideo={isVideoContainer}
-			showQuotedHeadline={format.design === ArticleDesign.Comment}
-			dataLinkName={dataLinkName}
-			discussionId={discussionId}
-			branding={branding}
-			isExternalLink={false}
-			mainMedia={mainMedia}
-			minWidthInPixels={220}
-			isPlayableMediaCard={isVideoContainer}
-			onwardsSource={onwardsSource}
-			containerType={isVideoContainer ? 'fixed/video' : undefined}
-		/>
-	</LI>
-);
+	containerType,
+}: CarouselCardProps) => {
+	const isVideoContainer = containerType === 'fixed/video';
+	return (
+		<LI
+			percentage="25%"
+			showDivider={!isFirst && !isVideoContainer}
+			padSides={true}
+			padSidesOnMobile={true}
+			snapAlignStart={true}
+			verticalDividerColour={verticalDividerColour}
+		>
+			<Card
+				linkTo={linkTo}
+				format={format}
+				headlineText={headlineText}
+				webPublicationDate={webPublicationDate}
+				kickerText={kickerText}
+				imageUrl={imageUrl}
+				imageSize={'small'}
+				showClock={true}
+				showAge={true}
+				imagePositionOnMobile="top"
+				pauseOffscreenVideo={isVideoContainer}
+				showQuotedHeadline={format.design === ArticleDesign.Comment}
+				dataLinkName={dataLinkName}
+				discussionId={discussionId}
+				branding={branding}
+				isExternalLink={false}
+				mainMedia={mainMedia}
+				minWidthInPixels={220}
+				isPlayableMediaCard={isVideoContainer}
+				onwardsSource={onwardsSource}
+				containerType={containerType}
+			/>
+		</LI>
+	);
+};
 
 type HeaderAndNavProps = {
 	heading: string;
@@ -1062,7 +1065,7 @@ export const Carousel = ({
 									carouselColours.borderColour
 								}
 								onwardsSource={onwardsSource}
-								isVideoContainer={isVideoContainer}
+								containerType={containerType}
 							/>
 						);
 					})}
