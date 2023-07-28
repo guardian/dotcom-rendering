@@ -13,13 +13,19 @@ import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 
 const FORBIDDEN_CONTAINERS = [
-	'Palette styles',
 	'culture-treat',
 	'newsletter treat',
 	'qatar treat',
 ];
 const isSupported = (collection: FECollectionType): boolean =>
-	!FORBIDDEN_CONTAINERS.some((name) => collection.displayName.includes(name));
+	!(
+		FORBIDDEN_CONTAINERS.includes(collection.displayName) ||
+		collection.curated.some(
+			(card) =>
+				card.properties.embedUri ===
+				'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default',
+		)
+	);
 
 function getBrandingFromCards(
 	allCards: FEFrontCard[],
