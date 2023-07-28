@@ -17,7 +17,7 @@ import { formatAttrString } from '../lib/formatAttrString';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { getZIndex } from '../lib/getZIndex';
 import type { Branding } from '../types/branding';
-import type { DCRContainerPalette } from '../types/front';
+import type { DCRContainerPalette, DCRContainerType } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
 import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
@@ -93,8 +93,11 @@ const wrapperStyle = (length: number) => css`
 `;
 
 // For desktop and above, are we at the last card. Is one less than the dots style equivalent
-const isLastCardShowing = (index: number, totalStories: number) =>
-	index >= totalStories - 4;
+const isLastCardShowing = (
+	index: number,
+	totalStories: number,
+	totalCardsShowing: number,
+) => index >= totalStories - totalCardsShowing;
 
 const containerMargins = css`
 	margin-top: 6px;
@@ -191,20 +194,31 @@ const activeDotStyles = (activeDotColour: string) => css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (index: number, totalStories: number) => {
-	return css`
-		${from.phablet} {
-			display: ${index >= totalStories - 1 ? 'none' : 'auto'};
-		}
+const adjustNumberOfDotsStyle = (
+	index: number,
+	totalStories: number,
+	containerType?: DCRContainerType,
+) => {
+	switch (containerType) {
+		case 'fixed/video':
+			return css`
+				display: ${index >= totalStories ? 'none' : 'auto'};
+			`;
+		default:
+			return css`
+				${from.phablet} {
+					display: ${index >= totalStories - 1 ? 'none' : 'auto'};
+				}
 
-		${from.tablet} {
-			display: ${index >= totalStories - 2 ? 'none' : 'auto'};
-		}
+				${from.tablet} {
+					display: ${index >= totalStories - 2 ? 'none' : 'auto'};
+				}
 
-		${from.desktop} {
-			display: ${index >= totalStories - 3 ? 'none' : 'auto'};
-		}
-	`;
+				${from.desktop} {
+					display: ${index >= totalStories - 3 ? 'none' : 'auto'};
+				}
+			`;
+	}
 };
 
 // Not used for buttons above carousel
@@ -321,20 +335,31 @@ const prevButtonStyle = (
 const nextButtonStyle = (
 	index: number,
 	totalStories: number,
+	totalCardsShowing: number,
 	arrowColour?: string,
 	arrowBackgroundColour?: string,
 	arrowBackgroundHoverColour?: string,
 ) => css`
 	padding-left: 5px; /* Fix centering of SVG*/
 	margin-left: 10px;
-	background-color: ${!isLastCardShowing(index, totalStories)
+	background-color: ${!isLastCardShowing(
+		index,
+		totalStories,
+		totalCardsShowing,
+	)
 		? arrowBackgroundColour ?? neutral[0]
 		: neutral[46]};
-	cursor: ${!isLastCardShowing(index, totalStories) ? 'pointer' : 'default'};
+	cursor: ${!isLastCardShowing(index, totalStories, totalCardsShowing)
+		? 'pointer'
+		: 'default'};
 
 	&:hover,
 	&:focus {
-		background-color: ${!isLastCardShowing(index, totalStories)
+		background-color: ${!isLastCardShowing(
+			index,
+			totalStories,
+			totalCardsShowing,
+		)
 			? arrowBackgroundHoverColour ?? brandAlt[400]
 			: neutral[46]};
 
@@ -507,6 +532,7 @@ type HeaderAndNavProps = {
 	index: number;
 	goToIndex: (newIndex: number) => void;
 	isCuratedContent?: boolean;
+	containerType?: DCRContainerType;
 };
 
 const HeaderAndNav = ({
@@ -518,34 +544,41 @@ const HeaderAndNav = ({
 	index,
 	goToIndex,
 	isCuratedContent,
-}: HeaderAndNavProps) => (
-	<div>
-		<Title
-			title={heading}
-			titleColour={titleColour}
-			titleHighlightColour={titleHighlightColour}
-			isCuratedContent={isCuratedContent}
-		/>
-		<div css={dotsStyle}>
-			{trails.map((_, i) => (
-				<span
-					onClick={() => goToIndex(i)}
-					// This button is not particularly useful for keyboard users as the stories
-					// are tabb-able themselves so we hide them with aria and make them
-					// not available to keyboard
-					aria-hidden="true"
-					key={`dot-${i}`}
-					css={[
-						dotStyle,
-						i === index && activeDotStyles(activeDotColour),
-						adjustNumberOfDotsStyle(i, trails.length),
-					]}
-					data-link-name={`carousel-small-nav-dot-${i}`}
-				/>
-			))}
+	containerType,
+}: HeaderAndNavProps) => {
+	return (
+		<div>
+			<Title
+				title={heading}
+				titleColour={titleColour}
+				titleHighlightColour={titleHighlightColour}
+				isCuratedContent={isCuratedContent}
+			/>
+			<div css={dotsStyle}>
+				{trails.map((_, i) => (
+					<span
+						onClick={() => goToIndex(i)}
+						// This button is not particularly useful for keyboard users as the stories
+						// are tabb-able themselves so we hide them with aria and make them
+						// not available to keyboard
+						aria-hidden="true"
+						key={`dot-${i}`}
+						css={[
+							dotStyle,
+							i === index && activeDotStyles(activeDotColour),
+							adjustNumberOfDotsStyle(
+								i,
+								trails.length,
+								containerType,
+							),
+						]}
+						data-link-name={`carousel-small-nav-dot-${i}`}
+					/>
+				))}
+			</div>
 		</div>
-	</div>
-);
+	);
+};
 
 const Header = ({
 	heading,
@@ -583,6 +616,7 @@ const Header = ({
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
+				containerType={isVideoContainer ? 'fixed/video' : undefined}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -623,6 +657,7 @@ const Header = ({
 						nextButtonStyle(
 							index,
 							trails.length,
+							isVideoContainer ? 1 : 4,
 							carouselColours.arrowColour,
 							carouselColours.arrowBackgroundColour,
 							carouselColours.arrowBackgroundHoverColour,
@@ -728,6 +763,7 @@ const InlineChevrons = ({
 					nextButtonStyle(
 						index,
 						trails.length,
+						isVideoContainer ? 1 : 4,
 						carouselColours.arrowColour,
 						carouselColours.arrowBackgroundColour,
 						carouselColours.arrowBackgroundHoverColour,
