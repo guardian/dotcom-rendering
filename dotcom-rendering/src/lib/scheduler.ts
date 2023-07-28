@@ -75,7 +75,8 @@ const queue: Record<
 /**
  * Standardised console logging.
  */
-const log = (message: string) => libsLog('dotcom', `🧑‍💻 Scheduler ${message}`);
+const log = (message: string) =>
+	libsLog('openJournalism', `🧑‍💻 Scheduler ${message}`);
 
 /**
  * Gets the next task to run, according to priority and the order they were
