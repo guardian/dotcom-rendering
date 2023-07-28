@@ -593,7 +593,7 @@ const Header = ({
 	next,
 	arrowName,
 	isCuratedContent,
-	isVideoContainer,
+	containerType,
 	hasPageSkin,
 }: {
 	heading: string;
@@ -605,9 +605,10 @@ const Header = ({
 	next: () => void;
 	arrowName: string;
 	isCuratedContent: boolean;
-	isVideoContainer: boolean;
+	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
 }) => {
+	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
 		<div css={headerRowStyles}>
 			<HeaderAndNav
@@ -619,7 +620,7 @@ const Header = ({
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
-				containerType={isVideoContainer ? 'fixed/video' : undefined}
+				containerType={containerType}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -1013,7 +1014,7 @@ export const Carousel = ({
 					next={next}
 					arrowName={arrowName}
 					isCuratedContent={isCuratedContent}
-					isVideoContainer={isVideoContainer}
+					containerType={containerType}
 					hasPageSkin={hasPageSkin}
 				/>
 				<ul
