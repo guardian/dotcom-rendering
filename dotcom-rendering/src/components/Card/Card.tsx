@@ -67,7 +67,10 @@ export type Props = {
 	avatarUrl?: string;
 	showClock?: boolean;
 	mainMedia?: MainMedia;
-	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size */
+	/** Note YouTube recommends a minimum width of 480px @see https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-youtube-player-size
+	 * At 300px or below, the player will begin to lose functionality e.g. volume controls being omitted.
+	 * Youtube requires a minimum width 200px.
+	 */
 	isPlayableMediaCard?: boolean;
 	kickerText?: string;
 	showPulsingDot?: boolean;
