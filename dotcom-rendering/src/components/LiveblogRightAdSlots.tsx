@@ -1,7 +1,7 @@
 import { labelStyles } from './AdSlot';
 import { Island } from './Island';
 import { LiveblogRightMultipleAdSlots } from './LiveblogRightMultipleAdSlots.importable';
-import { TopRightAdSlot } from './TopRightAdSlot.importable';
+import { TopRightAdSlot } from './TopRightAdSlot';
 
 type Props = {
 	display?: ArticleDisplay;
@@ -11,12 +11,10 @@ type Props = {
 export const LiveblogRightAdSlots = ({ display, isPaidContent }: Props) => {
 	return (
 		<>
-			<Island deferUntil="visible">
-				<TopRightAdSlot
-					isPaidContent={isPaidContent}
-					adStyles={[labelStyles]}
-				/>
-			</Island>
+			<TopRightAdSlot
+				isPaidContent={isPaidContent}
+				adStyles={[labelStyles]}
+			/>
 			<Island clientOnly={true} deferUntil="idle">
 				<LiveblogRightMultipleAdSlots
 					display={display}

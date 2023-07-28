@@ -14,7 +14,7 @@ import {
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { getZIndex } from '../lib/getZIndex';
 import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
-import { TopRightAdSlot } from './TopRightAdSlot.importable';
+import { TopRightAdSlot } from './TopRightAdSlot';
 
 type InlinePosition =
 	| 'inline'
