@@ -146,7 +146,7 @@ const styles = (format: ArticleFormat) => css`
 	margin-bottom: 14px;
 	word-break: break-word;
 	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
-	line-height: 1.4;
+
 	strong em,
 	strong u {
 		font-weight: bold;
