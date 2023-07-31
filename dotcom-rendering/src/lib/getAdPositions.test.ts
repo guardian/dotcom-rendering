@@ -43,7 +43,6 @@ describe('Mobile Ads', () => {
 	it('Should not insert ad after a thrasher container', () => {
 		const merchHighPosition = getMerchHighPosition(
 			defaultTestCollections.length,
-			false,
 		);
 		const testCollections = [...defaultTestCollections];
 		testCollections.splice(6, 0, { collectionType: 'fixed/thrasher' });
@@ -76,10 +75,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -118,10 +114,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			true,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -191,10 +184,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			true,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -225,10 +215,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
@@ -257,10 +244,7 @@ describe('Mobile Ads', () => {
 			{ collectionType: 'news/most-popular' },
 		];
 
-		const merchHighPosition = getMerchHighPosition(
-			testCollections.length,
-			false,
-		);
+		const merchHighPosition = getMerchHighPosition(testCollections.length);
 
 		const mobileAdPositions = getMobileAdPositions(
 			testCollections,
