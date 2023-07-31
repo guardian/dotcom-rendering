@@ -43,6 +43,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
-          # onlyChanged: true
-          # untraced: '**/(package*.json|yarn.lock|preview.js)'
+          onlyChanged: true
+          untraced: '**/(package*.json|yarn.lock|preview.js)'
           workingDir: dotcom-rendering
