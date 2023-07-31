@@ -42,7 +42,7 @@ type ArticleProps = Props & {
 
 type FrontProps = Props & {
 	palette: DCRContainerPalette;
-	collectionType?: string;
+	containerType?: DCRContainerType;
 	hasPageSkin?: boolean;
 };
 
@@ -470,7 +470,7 @@ type CarouselCardProps = {
 	mainMedia?: MainMedia;
 	verticalDividerColour?: string;
 	onwardsSource?: string;
-	isVideoContainer?: boolean;
+	containerType?: DCRContainerType;
 };
 
 const CarouselCard = ({
@@ -487,41 +487,44 @@ const CarouselCard = ({
 	mainMedia,
 	verticalDividerColour,
 	onwardsSource,
-	isVideoContainer,
-}: CarouselCardProps) => (
-	<LI
-		percentage="25%"
-		showDivider={!isFirst && !isVideoContainer}
-		padSides={true}
-		padSidesOnMobile={true}
-		snapAlignStart={true}
-		verticalDividerColour={verticalDividerColour}
-	>
-		<Card
-			linkTo={linkTo}
-			format={format}
-			headlineText={headlineText}
-			webPublicationDate={webPublicationDate}
-			kickerText={kickerText}
-			imageUrl={imageUrl}
-			imageSize={'small'}
-			showClock={true}
-			showAge={true}
-			imagePositionOnMobile="top"
-			pauseOffscreenVideo={isVideoContainer}
-			showQuotedHeadline={format.design === ArticleDesign.Comment}
-			dataLinkName={dataLinkName}
-			discussionId={discussionId}
-			branding={branding}
-			isExternalLink={false}
-			mainMedia={mainMedia}
-			minWidthInPixels={220}
-			isPlayableMediaCard={isVideoContainer}
-			onwardsSource={onwardsSource}
-			containerType={isVideoContainer ? 'fixed/video' : undefined}
-		/>
-	</LI>
-);
+	containerType,
+}: CarouselCardProps) => {
+	const isVideoContainer = containerType === 'fixed/video';
+	return (
+		<LI
+			percentage="25%"
+			showDivider={!isFirst && !isVideoContainer}
+			padSides={true}
+			padSidesOnMobile={true}
+			snapAlignStart={true}
+			verticalDividerColour={verticalDividerColour}
+		>
+			<Card
+				linkTo={linkTo}
+				format={format}
+				headlineText={headlineText}
+				webPublicationDate={webPublicationDate}
+				kickerText={kickerText}
+				imageUrl={imageUrl}
+				imageSize={'small'}
+				showClock={true}
+				showAge={true}
+				imagePositionOnMobile="top"
+				pauseOffscreenVideo={isVideoContainer}
+				showQuotedHeadline={format.design === ArticleDesign.Comment}
+				dataLinkName={dataLinkName}
+				discussionId={discussionId}
+				branding={branding}
+				isExternalLink={false}
+				mainMedia={mainMedia}
+				minWidthInPixels={220}
+				isPlayableMediaCard={isVideoContainer}
+				onwardsSource={onwardsSource}
+				containerType={containerType}
+			/>
+		</LI>
+	);
+};
 
 type HeaderAndNavProps = {
 	heading: string;
@@ -590,7 +593,7 @@ const Header = ({
 	next,
 	arrowName,
 	isCuratedContent,
-	isVideoContainer,
+	containerType,
 	hasPageSkin,
 }: {
 	heading: string;
@@ -602,9 +605,10 @@ const Header = ({
 	next: () => void;
 	arrowName: string;
 	isCuratedContent: boolean;
-	isVideoContainer: boolean;
+	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
 }) => {
+	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
 		<div css={headerRowStyles}>
 			<HeaderAndNav
@@ -616,7 +620,7 @@ const Header = ({
 				index={index}
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
-				containerType={isVideoContainer ? 'fixed/video' : undefined}
+				containerType={containerType}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -851,9 +855,10 @@ export const Carousel = ({
 	const arrowName = 'carousel-small-arrow';
 
 	const isCuratedContent = onwardsSource === 'curated-content';
+	const containerType =
+		'containerType' in props ? props.containerType : undefined;
 
-	const isVideoContainer =
-		'collectionType' in props && props.collectionType === 'fixed/video';
+	const isVideoContainer = containerType === 'fixed/video';
 
 	const hasPageSkin = 'hasPageSkin' in props && (props.hasPageSkin ?? false);
 
@@ -1009,7 +1014,7 @@ export const Carousel = ({
 					next={next}
 					arrowName={arrowName}
 					isCuratedContent={isCuratedContent}
-					isVideoContainer={isVideoContainer}
+					containerType={containerType}
 					hasPageSkin={hasPageSkin}
 				/>
 				<ul
@@ -1061,7 +1066,7 @@ export const Carousel = ({
 									carouselColours.borderColour
 								}
 								onwardsSource={onwardsSource}
-								isVideoContainer={isVideoContainer}
+								containerType={containerType}
 							/>
 						);
 					})}
