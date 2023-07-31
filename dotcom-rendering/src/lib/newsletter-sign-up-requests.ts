@@ -161,9 +161,6 @@ export const reportTrackingEvent = (
 		timestamp: Date.now(),
 	};
 
-	// eslint-disable-next-line no-console -- debugging
-	console.warn(`captcha event`, payload);
-
 	submitComponentEvent(
 		{
 			component: {
