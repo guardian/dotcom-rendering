@@ -551,6 +551,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 												collection.collectionType
 											}
 											hasPageSkin={hasPageSkin}
+											url={collection.href}
 										/>
 									</Island>
 								</Section>
