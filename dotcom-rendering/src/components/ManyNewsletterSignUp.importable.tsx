@@ -9,6 +9,7 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ReCAPTCHA } from 'react-google-recaptcha';
+import { isServer } from '../lib/isServer';
 import {
 	getCaptchaSiteKey,
 	reportTrackingEvent,
@@ -103,8 +104,9 @@ export const ManyNewsletterSignUp = () => {
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReCAPTCHA>(null);
-	const useReCaptcha =
-		!!window.guardian.config.switches['emailSignupRecaptcha'];
+	const useReCaptcha = isServer
+		? false
+		: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const toggleNewsletter = useCallback(

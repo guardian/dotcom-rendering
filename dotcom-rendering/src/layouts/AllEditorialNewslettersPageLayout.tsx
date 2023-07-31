@@ -162,7 +162,7 @@ export const AllEditorialNewslettersPageLayout = ({
 				/>
 
 				<Island deferUntil="idle">
-					<ManyNewsletterSignUp useReCaptcha={true} />
+					<ManyNewsletterSignUp />
 				</Island>
 			</main>
 
