@@ -490,7 +490,7 @@ export const mockRESTCalls = (): typeof fetchMock => {
 			// api endpoint eg:
 			// dotcom-rendering/src/components/ManyNewsletterSignUp.stories.tsx
 			.post(
-				'/email/many',
+				/.*api.nextgen.guardianapps.co.uk\/email\/many.*/,
 				(url, mockRequest) => {
 					const decodedBody = decodeURIComponent(
 						mockRequest.body?.toString() ?? '',
