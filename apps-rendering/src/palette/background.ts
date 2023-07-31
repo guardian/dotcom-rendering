@@ -80,6 +80,7 @@ const headline = ({ design, display, theme }: ArticleFormat): Colour => {
 			return neutral[7];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return neutral[10];
 		case ArticleDesign.Interview:
 			return neutral[0];
@@ -769,6 +770,7 @@ const relatedCard = (format: ArticleFormat): Colour => {
 			}
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 		case ArticleDesign.Gallery:
 			return neutral[10];
 	}
@@ -798,6 +800,7 @@ const relatedCardDark = (format: ArticleFormat): Colour => {
 			}
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 		case ArticleDesign.Gallery:
 			return neutral[10];
 	}
