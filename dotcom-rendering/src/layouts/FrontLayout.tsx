@@ -321,6 +321,18 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				id="maincontent"
 				css={hasPageSkin && pageSkinContainer}
 			>
+				<Section
+					fullWidth={true}
+					data-print-layout="hide"
+					padSides={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
+					element="aside"
+					hasPageSkin={hasPageSkin}
+				>
+					<div id="thrasher-ad"></div>
+				</Section>
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
