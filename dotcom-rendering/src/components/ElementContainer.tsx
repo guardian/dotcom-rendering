@@ -4,8 +4,8 @@ import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 
 const sidePadding = css`
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 12px;
+	padding-right: 12px;
 
 	${from.mobileLandscape} {
 		padding-left: 20px;
