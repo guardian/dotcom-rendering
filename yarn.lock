@@ -3157,15 +3157,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.5.0.tgz#61a97c823f6b18f62a6517a3374f6e7bdfca121d"
   integrity sha512-9iz04lyonWAbUeZ7B+fNp0KbgAervsWDO3A4CE/3e+d876AQj0I3TwU7W4jpWxI4tthcA6UVk7Y6faaS8l+lFw==
 
-"@guardian/core-web-vitals@5.1.0":
+"@guardian/core-web-vitals@5.1.0", "@guardian/core-web-vitals@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.1.0.tgz#1a7224ff69e773e30698fa16bdd5be608a554ebf"
   integrity sha512-/6L5Ri+/bXBAZ6na8zQ30I1+eHXBHyGFNiLAGvw1bryOnbq2PjCLkmyHQq0EisWCXBWMvdB7p2HdS1DmFLM3Jg==
-
-"@guardian/core-web-vitals@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.0.0.tgz#ab74da6001427f3414a84d15f57bac1a888a140a"
-  integrity sha512-Mq3v8Y/YJGs7p/8NWmYHFKdVqRThjDJSfpoo1zSb6DgpQ1Ko8RjvOa2Q9P9ABWfKJCaDp0kcGK3dk0AjDSi/Qw==
 
 "@guardian/eslint-config-typescript@6.0.1":
   version "6.0.1"
