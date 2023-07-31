@@ -17,13 +17,15 @@ const FORBIDDEN_CONTAINERS = [
 	'newsletter treat',
 	'qatar treat',
 ];
+
+const PALETTE_STYLES_URI =
+	'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default';
+
 const isSupported = (collection: FECollectionType): boolean =>
 	!(
 		FORBIDDEN_CONTAINERS.includes(collection.displayName) ||
 		collection.curated.some(
-			(card) =>
-				card.properties.embedUri ===
-				'https://content.guardianapis.com/atom/interactive/interactives/2022/03/29/fronts-container-colours/default',
+			(card) => card.properties.embedUri === PALETTE_STYLES_URI,
 		)
 	);
 
