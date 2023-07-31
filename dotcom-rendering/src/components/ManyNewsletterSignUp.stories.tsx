@@ -44,7 +44,7 @@ export const Default = () => {
 					],
 				}}
 			/>
-			<ManyNewsletterSignUp useReCaptcha={false} />
+			<ManyNewsletterSignUp />
 		</>
 	);
 };

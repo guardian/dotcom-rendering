@@ -19,10 +19,6 @@ import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
-interface Props {
-	useReCaptcha: boolean;
-}
-
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
 
 const sectionWrapperStyle = (hide: boolean) => css`
@@ -100,13 +96,15 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
-export const ManyNewsletterSignUp = ({ useReCaptcha }: Props) => {
+export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const useReCaptcha =
+		!!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const toggleNewsletter = useCallback(
