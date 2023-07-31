@@ -60,7 +60,11 @@ describe('requestMultipleSignUps', () => {
 
 	it('makes a form-urlencoded POST request to /email/many', async () => {
 		setWindow(FAKE_WINDOW);
-		await requestMultipleSignUps(TEST_EMAIL, TEST_NEWSLETTER_IDS, '');
+		await requestMultipleSignUps(
+			TEST_EMAIL,
+			TEST_NEWSLETTER_IDS,
+			TEST_RECAPTCHA_TOKEN,
+		);
 		const [url, requestInit] = fetchMock.lastCall() ?? [
 			undefined,
 			undefined,
@@ -116,6 +120,90 @@ describe('requestMultipleSignUps', () => {
 		await requestMultipleSignUps(
 			TEST_EMAIL,
 			TEST_NEWSLETTER_IDS,
+			TEST_RECAPTCHA_TOKEN,
+		);
+		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+
+		const decodedBody = decodeURIComponent(
+			requestInit?.body?.toString() ?? '',
+		);
+
+		expect(decodedBody.includes(TEST_EMAIL)).toBe(true);
+		expect(decodedBody.includes(TEST_RECAPTCHA_TOKEN)).toBe(false);
+	});
+});
+
+describe('requestSingleSignUp', () => {
+	let windowSpy: jest.SpyInstance;
+
+	beforeEach(() => {
+		windowSpy = jest.spyOn(window, 'window', 'get');
+	});
+
+	afterEach(() => {
+		windowSpy.mockRestore();
+	});
+
+	const setWindow = (windowData: { [key: string]: unknown }) =>
+		windowSpy.mockImplementation(() => windowData);
+
+	it('makes a form-urlencoded POST request to /email', async () => {
+		setWindow(FAKE_WINDOW);
+		await requestSingleSignUp(
+			TEST_EMAIL,
+			TEST_NEWSLETTER_IDS[0],
+			TEST_RECAPTCHA_TOKEN,
+		);
+		const [url, requestInit] = fetchMock.lastCall() ?? [
+			undefined,
+			undefined,
+		];
+		const method = requestInit?.method;
+		const headers = (requestInit?.headers ?? {}) as Record<string, unknown>;
+
+		expect(url).toBe(`${FAKE_WINDOW.guardian.config.page.ajaxUrl}/email`);
+		expect(method).toBe('POST');
+		expect(headers['Accept']).toEqual('application/json');
+		expect(headers['Content-Type']).toEqual(
+			'application/x-www-form-urlencoded',
+		);
+	});
+
+	it('encodes its arguments with the refViewId and page reference in the body', async () => {
+		setWindow(FAKE_WINDOW);
+
+		await requestSingleSignUp(
+			TEST_EMAIL,
+			TEST_NEWSLETTER_IDS[0],
+			TEST_RECAPTCHA_TOKEN,
+		);
+		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];
+
+		const decodedEntries = decodeURIComponent(
+			requestInit?.body?.toString() ?? '',
+		).split('&');
+
+		expect(decodedEntries).toContainEqual(`email=${TEST_EMAIL}`);
+		expect(decodedEntries).toContainEqual(
+			`listName=${TEST_NEWSLETTER_IDS[0]}`,
+		);
+		expect(decodedEntries).toContainEqual(
+			`g-recaptcha-response=${TEST_RECAPTCHA_TOKEN}`,
+		);
+		expect(decodedEntries).toContainEqual(
+			`refViewId=${FAKE_WINDOW.guardian.ophan.pageViewId}`,
+		);
+		expect(decodedEntries).toContainEqual(
+			`ref=${FAKE_WINDOW.location.origin}${FAKE_WINDOW.location.pathname}`,
+		);
+	});
+
+	it('will omit the recaptchaToken if the emailSignupRecaptcha is false', async () => {
+		setWindow(FAKE_WINDOW_NO_RECAPTCHA);
+
+		await requestSingleSignUp(
+			TEST_EMAIL,
+			TEST_NEWSLETTER_IDS[0],
 			TEST_RECAPTCHA_TOKEN,
 		);
 		const [, requestInit] = fetchMock.lastCall() ?? [undefined, undefined];

@@ -486,11 +486,12 @@ export const mockRESTCalls = (): typeof fetchMock => {
 
 			// Return an error response if the request body includes the
 			// phrase 'example.com', otherwise, return a success response.
-			// For use on stories involving posts to the '/email/many'
+			// For use on stories and tests involving posts to the '/email/many'
+			// or '/email'
 			// api endpoint eg:
 			// dotcom-rendering/src/components/ManyNewsletterSignUp.stories.tsx
 			.post(
-				/.*api.nextgen.guardianapps.co.uk\/email\/many.*/,
+				/.*api.nextgen.guardianapps.co.uk\/email[/many]{0,1}.*/,
 				(url, mockRequest) => {
 					const decodedBody = decodeURIComponent(
 						mockRequest.body?.toString() ?? '',
