@@ -222,7 +222,7 @@ describe('Mobile Ads', () => {
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([0, 3, 6, 9, 12, 14]);
+		expect(mobileAdPositions).toEqual([0, 4, 8, 10, 13]);
 	});
 
 	// We used https://www.theguardian.com/tone/recipes as a blueprint
@@ -251,7 +251,7 @@ describe('Mobile Ads', () => {
 			merchHighPosition,
 		);
 
-		expect(mobileAdPositions).toEqual([2, 4, 6, 8, 10, 12]);
+		expect(mobileAdPositions).toEqual([1, 4, 6, 8, 10, 12]);
 	});
 });
 
