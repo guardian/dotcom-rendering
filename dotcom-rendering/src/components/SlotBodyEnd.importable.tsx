@@ -17,6 +17,7 @@ import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
+import { AdSlot } from './AdSlot';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -39,6 +40,9 @@ type Props = {
 	stage: string;
 	pageId: string;
 	keywordIds: string;
+	renderAds?: boolean;
+	isLabs?: boolean;
+	articleDisplay?: ArticleDisplay;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -114,6 +118,9 @@ export const SlotBodyEnd = ({
 	stage,
 	pageId,
 	keywordIds,
+	renderAds,
+	isLabs,
+	articleDisplay,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 	const [countryCode, setCountryCode] = useState<string>();
@@ -193,6 +200,16 @@ export const SlotBodyEnd = ({
 			<div id="slot-body-end">
 				<SelectedEpic />
 			</div>
+		);
+	}
+
+	if (renderAds && !isLabs) {
+		return (
+			<AdSlot
+				data-print-layout="hide"
+				position="article-end"
+				display={articleDisplay}
+			/>
 		);
 	}
 

@@ -642,6 +642,32 @@ export const AdSlot = ({
 				</div>
 			);
 		}
+		case 'article-end': {
+			return (
+				<div className="ad-slot-container" css={[adContainerStyles]}>
+					<div
+						id="dfp-ad--article-end"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--article-end',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+								min-height: 250px;
+							`,
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
+						]}
+						data-link-name="ad slot article-end"
+						data-name="article-end"
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		default:
 			return null;
 	}
