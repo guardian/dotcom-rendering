@@ -1114,10 +1114,7 @@ export const LiveLayout = ({
 								>
 									<RightColumn>
 										{renderAds && (
-											<Island
-												clientOnly={true}
-												deferUntil="visible"
-											>
+											<Island deferUntil="visible">
 												<LiveblogRightAdSlots
 													display={format.display}
 													isPaidContent={

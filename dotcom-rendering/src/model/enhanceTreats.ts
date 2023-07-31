@@ -2,6 +2,32 @@ import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import type { FEFrontCard, TreatType } from '../types/front';
 
+const SOCCER_TREAT: TreatType = {
+	links: [
+		{
+			linkTo: '/football/2023/jul/20/sign-up-for-soccer-with-jonathan-wilson-his-free-weekly-newsletter-on-european-soccer',
+			title: 'Soccer with Jonathan Wilson: ',
+			text: 'The latest on the global game',
+		},
+	],
+	theme: Pillar.Sport,
+	imageUrl: 'https://uploads.guim.co.uk/2023/07/26/soccer-treat-v1.png',
+	altText: 'Soccer ball',
+};
+
+const HEADLINES_US_TREAT: TreatType = {
+	links: [
+		{
+			linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
+			title: 'Guardian Today US: ',
+			text: 'Get the headlines & more in a daily email',
+		},
+	],
+	theme: Pillar.News,
+	imageUrl: 'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
+	altText: 'The White House',
+};
+
 /**
  * PLATFORM_TREATS
  *
@@ -17,35 +43,15 @@ import type { FEFrontCard, TreatType } from '../types/front';
  */
 const PLATFORM_TREATS: TreatType[] = [
 	{
-		links: [
-			{
-				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
-				title: 'Guardian Today US: ',
-				text: 'Get the headlines & more in a daily email',
-			},
-		],
-		theme: Pillar.News,
+		...HEADLINES_US_TREAT,
+		pageId: 'us',
 		containerTitle: 'Spotlight',
 		editionId: 'US',
-		imageUrl:
-			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
-		altText: 'The White House',
-		pageId: 'us',
 	},
 	{
-		links: [
-			{
-				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
-				title: 'Guardian Today US: ',
-				text: 'Get the headlines & more in a daily email',
-			},
-		],
-		theme: Pillar.News,
-		containerTitle: 'US headlines',
-		imageUrl:
-			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
-		altText: 'The White House',
+		...HEADLINES_US_TREAT,
 		pageId: 'us-news',
+		containerTitle: 'US headlines',
 	},
 	{
 		links: [
@@ -55,11 +61,16 @@ const PLATFORM_TREATS: TreatType[] = [
 			},
 		],
 		theme: Pillar.News,
-		containerTitle: 'Qatar: beyond the football',
 		imageUrl:
 			'https://uploads.guim.co.uk/2023/06/02/BALL-nugget-grass_5.png',
 		altText: 'Image of football covered in bank notes',
 		pageId: 'football/world-cup-2022',
+		containerTitle: 'Qatar: beyond the football',
+	},
+	{
+		...SOCCER_TREAT,
+		pageId: 'us',
+		containerTitle: 'Sports',
 	},
 ];
 

@@ -4,7 +4,7 @@ import { neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { App as Comments } from '../discussion-rendering/App';
+import { Comments } from '../discussion-rendering/Comments';
 import type { SignedInUser } from '../discussion-rendering/discussionTypes';
 import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';

@@ -142,7 +142,7 @@ const decideLeftContent = (
 			<Island clientOnly={true} deferUntil={'idle'}>
 				<WeatherData
 					ajaxUrl={front.config.ajaxUrl}
-					edition={front.config.edition}
+					edition={front.editionId}
 				/>
 			</Island>
 		);
@@ -547,7 +547,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											onwardsSource={'unknown-source'}
 											palette={containerPalette}
 											leftColSize={'compact'}
-											collectionType={
+											containerType={
 												collection.collectionType
 											}
 											hasPageSkin={hasPageSkin}
