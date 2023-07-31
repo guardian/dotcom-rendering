@@ -9,10 +9,13 @@ export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
 		super(scope, id, props);
 
-		const vpc = GuVpc.fromIdParameter(this, 'vpc');
+		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
+			vpcCidrBlock: '10.248.136.0/22',
+		});
 
 		const cfnParameters = {
 			VpcId: vpc.vpcId,
+			VPCIpBlock: vpc.vpcCidrBlock,
 		};
 
 		const yamlTemplateFilePath = join(
