@@ -11,6 +11,14 @@ export interface NewslettersListProps {
 	newsletterCount: number;
 }
 
+// To align the heading content with the carousel below
+// from desktop
+const contentWrapperStyle = css`
+	${from.leftCol} {
+		padding-left: 10px;
+	}
+`;
+
 const headlineStyle = css`
 	display: inline-flex;
 	flex-direction: row;
@@ -50,33 +58,35 @@ export const NewslettersPageHeading = ({
 	return (
 		<Section
 			element="header"
-			padSides={false}
+			padSides={true}
 			stretchRight={true}
 			verticalMargins={false}
+			leftColSize="wide"
+			padContent={false}
 		>
-			<div>
+			<div css={contentWrapperStyle}>
 				<h1 css={headlineStyle}>
 					<span>Newsletters</span>
 				</h1>
-			</div>
-			<p css={subtitleStyle}>
-				Choose from {newsletterCount} available newsletters
-			</p>
+				<p css={subtitleStyle}>
+					Choose from {newsletterCount} available newsletters
+				</p>
 
-			{!!mmaUrl && (
-				<div css={manageLinkContainer}>
-					<LinkButton
-						href={`${mmaUrl}/email-prefs`}
-						size={'xsmall'}
-						priority="subdued"
-						icon={<SvgChevronRightSingle size="small" />}
-						iconSide="right"
-						cssOverrides={linkStyle}
-					>
-						Manage my newsletters
-					</LinkButton>
-				</div>
-			)}
+				{!!mmaUrl && (
+					<div css={manageLinkContainer}>
+						<LinkButton
+							href={`${mmaUrl}/email-prefs`}
+							size={'xsmall'}
+							priority="subdued"
+							icon={<SvgChevronRightSingle size="small" />}
+							iconSide="right"
+							cssOverrides={linkStyle}
+						>
+							Manage my newsletters
+						</LinkButton>
+					</div>
+				)}
+			</div>
 		</Section>
 	);
 };
