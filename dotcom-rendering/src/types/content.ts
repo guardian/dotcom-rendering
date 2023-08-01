@@ -628,7 +628,7 @@ export interface CartoonBlockElement {
 }
 
 type Variant = {
-	viewportSize: string;
+	viewportSize: 'small' | 'large';
 	images: Image[];
 };
 
