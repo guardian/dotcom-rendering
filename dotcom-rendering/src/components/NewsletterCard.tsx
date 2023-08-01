@@ -63,6 +63,7 @@ const contentWrapperStyle = css`
 
 const buttonHolderStyle = css`
 	margin-top: auto;
+	padding-top: ${space[6]}px;
 `;
 
 const buttonStyle = css`
