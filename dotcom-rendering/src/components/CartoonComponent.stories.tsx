@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { CartoonComponent } from './CartoonComponent';
 import { cartoon } from './CartoonComponent.mocks';
 import { Figure } from './Figure';
@@ -42,7 +42,7 @@ export const Cartoon = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="inline"
