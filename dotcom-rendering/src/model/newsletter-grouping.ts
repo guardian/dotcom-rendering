@@ -196,7 +196,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			],
 		},
 		{
-			title: 'From our correspondents',
+			title: 'In depth',
 			newsletters: [
 				'green-light',
 				'global-dispatch',
@@ -206,7 +206,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			],
 		},
 		{
-			title: 'Culture Picks',
+			title: 'Culture picks',
 			newsletters: [
 				'saved-for-later',
 				'hear-here',
@@ -222,7 +222,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: ['five-great-reads', 'the-upside', 'the-long-read'],
 		},
 		{
-			title: 'Go deeper',
+			title: 'The world explained',
 			newsletters: [
 				'cotton-capital',
 				'documentaries',
@@ -239,6 +239,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'the-spin',
 				'the-recap',
 				'the-breakdown',
+				'soccer-with-jonathan-wilson',
 			],
 		},
 		{
