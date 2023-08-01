@@ -89,7 +89,7 @@ const buttonStyle = css`
 		background-color: ${palette.neutral[86]};
 	}
 
-	&.${BUTTON_SELECTED_CLASS}:hover {
+	&${'.'}${BUTTON_SELECTED_CLASS}:hover {
 		background-color: ${palette.neutral[46]};
 		border-color: ${palette.neutral[46]};
 	}
