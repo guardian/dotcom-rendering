@@ -84,7 +84,7 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 		? headlineObjectStyles.xsmall({
 				fontWeight: 'regular',
 		  })
-		: headlineObjectStyles.xxsmall({
+		: headlineObjectStyles.xxxsmall({
 				fontWeight: 'bold',
 		  });
 

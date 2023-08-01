@@ -28,7 +28,7 @@ const LegalLink = ({ href, children }: LegalLinkProps) => (
 const termsStyle = (textColor: 'supporting' | 'regular') => css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${textColor === 'regular'
-		? palette.neutral[7]
+		? palette.neutral[20]
 		: palette.neutral[46]};
 	a {
 		${textSans.xxsmall()};
