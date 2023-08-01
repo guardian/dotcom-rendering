@@ -422,15 +422,7 @@ const Title = ({
 	url?: string;
 }) =>
 	url ? (
-		<a
-			css={[linkStyles]}
-			href={url}
-			data-link-name={
-				title === 'Videos'
-					? 'video-container-title Videos'
-					: 'section heading'
-			}
-		>
+		<a css={[linkStyles]} href={url} data-link-name={'section heading'}>
 			<h2 css={headerStyles}>
 				<span
 					css={[
