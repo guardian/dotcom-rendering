@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 import { from, headline, palette, space } from '@guardian/source-foundations';
-import {
-	LinkButton,
-	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
+import { Link, SvgChevronRightSingle } from '@guardian/source-react-components';
 import { Section } from './Section';
 
 export interface NewslettersListProps {
@@ -47,10 +44,6 @@ const manageLinkContainer = css`
 	}
 `;
 
-const linkStyle = css`
-	color: ${palette.brand[500]};
-`;
-
 export const NewslettersPageHeading = ({
 	mmaUrl,
 	newsletterCount,
@@ -74,16 +67,13 @@ export const NewslettersPageHeading = ({
 
 				{!!mmaUrl && (
 					<div css={manageLinkContainer}>
-						<LinkButton
+						<Link
 							href={`${mmaUrl}/email-prefs`}
-							size={'xsmall'}
-							priority="subdued"
 							icon={<SvgChevronRightSingle size="small" />}
 							iconSide="right"
-							cssOverrides={linkStyle}
 						>
 							Manage my newsletters
-						</LinkButton>
+						</Link>
 					</div>
 				)}
 			</div>
