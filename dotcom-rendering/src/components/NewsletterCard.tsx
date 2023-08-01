@@ -52,7 +52,7 @@ const contentWrapperStyle = css`
 	padding-bottom: ${space[2]}px;
 
 	h3 {
-		${headlineObjectStyles.xxxsmall()};
+		${headlineObjectStyles.xxsmall()};
 		margin-bottom: ${space[3]}px;
 	}
 
@@ -216,7 +216,10 @@ export const NewsletterCard = ({
 				/>
 			)}
 			<div css={contentWrapperStyle}>
-				<NewsletterDetail text={newsletter.frequency} />
+				<NewsletterDetail
+					text={newsletter.frequency}
+					iconSize="small"
+				/>
 				<h3>{newsletter.name}</h3>
 				<p>{newsletter.description}</p>
 				<div css={buttonHolderStyle}>
