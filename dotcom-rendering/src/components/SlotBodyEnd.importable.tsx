@@ -13,6 +13,7 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
@@ -131,6 +132,9 @@ export const SlotBodyEnd = ({
 	);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
+	const ABTestAPI = useAB()?.api;
+	const isInPublicGoodTest =
+		ABTestAPI?.isUserInVariant('PublicGoodTest', 'variant') ?? false;
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -203,7 +207,10 @@ export const SlotBodyEnd = ({
 		);
 	}
 
-	if (renderAds && !isLabs) {
+	const shouldShowPublicGood =
+		isInPublicGoodTest && renderAds && !isLabs && countryCode === 'US';
+
+	if (shouldShowPublicGood) {
 		return (
 			<AdSlot
 				data-print-layout="hide"
