@@ -76,7 +76,6 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 
 	const merchHighPosition = getMerchHighPosition(
 		tagFront.groupedTrails.length,
-		false,
 	);
 
 	/**
