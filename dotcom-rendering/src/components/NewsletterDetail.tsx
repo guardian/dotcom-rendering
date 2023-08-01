@@ -4,8 +4,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgNewsletter } from './SvgNewsletter';
-// TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
+import { SvgNewsletter } from '@guardian/source-react-components';
 
 type Props = {
 	text: string;
