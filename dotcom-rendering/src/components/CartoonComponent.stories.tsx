@@ -47,7 +47,7 @@ export const Cartoon = () => {
 				isMainMedia={false}
 				role="inline"
 			>
-				<CartoonComponent element={cartoon}></CartoonComponent>
+				<CartoonComponent element={cartoon} />
 			</Figure>
 		</Wrapper>
 	);
