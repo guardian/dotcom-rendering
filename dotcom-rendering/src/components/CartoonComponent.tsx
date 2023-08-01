@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { Hide } from '@guardian/source-react-components';
 import type { CartoonBlockElement } from '../types/content';
 import { Caption } from './Caption';
@@ -50,7 +50,7 @@ export const CartoonComponent = ({ element }: Props) => {
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Standard,
-									theme: ArticlePillar.News,
+									theme: Pillar.News,
 								}}
 								alt={element.alt}
 								height={parseInt(image.fields.height, 10)}
@@ -69,7 +69,7 @@ export const CartoonComponent = ({ element }: Props) => {
 								format={{
 									display: ArticleDisplay.Standard,
 									design: ArticleDesign.Standard,
-									theme: ArticlePillar.News,
+									theme: Pillar.News,
 								}}
 								alt={`${element.alt}, panel ${image.index + 1}`}
 								height={parseInt(image.fields.height, 10)}
@@ -85,7 +85,7 @@ export const CartoonComponent = ({ element }: Props) => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					credit={`Comic by ${fullCredit}`}
 					displayCredit={element.displayCredit}
