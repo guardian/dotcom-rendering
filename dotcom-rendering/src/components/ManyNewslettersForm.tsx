@@ -22,6 +22,8 @@ interface FormProps {
 	newsletterCount: number;
 }
 
+// The design brief requires the layout of the form to align with the
+// CarouselForNewsletters placed above it on desktop.
 const CARD_CONTAINER_WIDTH = 240;
 const CARD_CONTAINER_PADDING = 10;
 
