@@ -4,27 +4,30 @@ import {
 	AD_CONTAINER_HEIGHT,
 	PADDING_BOTTOM,
 	SPACE_BETWEEN_ADS,
+	TOP_RIGHT_AD_STICKY_HEIGHT,
 } from '../lib/liveblog-right-ad-constants';
+import { useAB } from '../lib/useAB';
 import { AdSlot } from './AdSlot';
 
-const calculateNumAdsThatFit = (rightColHeight: number) => {
+export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;
 
-	return (
-		Math.floor(
-			(rightColHeight - PADDING_BOTTOM + SPACE_BETWEEN_ADS) /
-				(AD_CONTAINER_HEIGHT + SPACE_BETWEEN_ADS),
-		) || 1
+	const rightAdTotalSpace = TOP_RIGHT_AD_STICKY_HEIGHT + SPACE_BETWEEN_ADS;
+	const spaceForLiveblogAds =
+		rightColHeight - rightAdTotalSpace - PADDING_BOTTOM;
+
+	return Math.floor(
+		(spaceForLiveblogAds + SPACE_BETWEEN_ADS) /
+			(AD_CONTAINER_HEIGHT + SPACE_BETWEEN_ADS),
 	);
 };
 
 const rightAdContainerStyles = css`
-	height: 100%;
-	max-height: 100%;
 	width: 300px;
 	display: flex;
 	flex-direction: column;
 	gap: ${SPACE_BETWEEN_ADS}px;
+	margin-top: ${SPACE_BETWEEN_ADS}px;
 	padding-bottom: ${PADDING_BOTTOM}px;
 `;
 
@@ -33,6 +36,10 @@ type Props = {
 	isPaidContent?: boolean;
 };
 
+/**
+ * In the right hand column, there will be the right ad slot, followed
+ * by as many liveblog-right ad slots that can fit
+ */
 export const LiveblogRightMultipleAdSlots = ({
 	display,
 	isPaidContent,
@@ -42,6 +49,8 @@ export const LiveblogRightMultipleAdSlots = ({
 	const [numberAdvertsInserted, setNumberAdvertsInserted] =
 		useState<number>(0);
 
+	// Recalculate whether we have room to insert a new ad
+	// each time the height of the right column changes.
 	useEffect(() => {
 		if (rightColHeight === null) return;
 
@@ -92,10 +101,19 @@ export const LiveblogRightMultipleAdSlots = ({
 		};
 	}, []);
 
+	const ABTestAPI = useAB()?.api;
+	const shouldInsertMultipleAdverts =
+		ABTestAPI?.isUserInVariant(
+			'LiveblogRightColumnAds',
+			'multiple-adverts',
+		) ?? false;
+
+	if (!shouldInsertMultipleAdverts) return null;
+
 	if (numberAdvertsThatFit === 0) return null;
 
 	return (
-		<div id="right-ad-container" css={[rightAdContainerStyles]}>
+		<div css={[rightAdContainerStyles]}>
 			{[...new Array<undefined>(numberAdvertsThatFit)].map((_, i) => {
 				return (
 					<AdSlot

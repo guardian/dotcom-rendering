@@ -35,7 +35,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveblogRightAdSlots } from '../components/LiveblogRightAdSlots.importable';
+import { LiveblogRightAdSlots } from '../components/LiveblogRightAdSlots';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -1114,14 +1114,10 @@ export const LiveLayout = ({
 								>
 									<RightColumn>
 										{renderAds && (
-											<Island deferUntil="visible">
-												<LiveblogRightAdSlots
-													display={format.display}
-													isPaidContent={
-														isPaidContent
-													}
-												/>
-											</Island>
+											<LiveblogRightAdSlots
+												display={format.display}
+												isPaidContent={isPaidContent}
+											/>
 										)}
 									</RightColumn>
 								</div>
