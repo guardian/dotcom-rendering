@@ -23,7 +23,7 @@ interface FormProps {
 }
 
 export const formFrameStyle = css`
-	border: ${palette.neutral[0]} 3px dashed;
+	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
 
@@ -118,7 +118,7 @@ export const ManyNewslettersForm = ({
 					id={'man-newsletter-form-inline-skip-to-wrapper'}
 					blockDescription="Privacy Notice"
 				>
-					<NewsletterPrivacyMessage />
+					<NewsletterPrivacyMessage textColor="regular" />
 				</InlineSkipToWrapper>
 			</aside>
 

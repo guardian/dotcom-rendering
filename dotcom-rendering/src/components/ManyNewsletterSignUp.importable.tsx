@@ -55,6 +55,7 @@ interface ClearButtonProps {
 }
 const ClearButton = ({ removeAll }: ClearButtonProps) => (
 	<Button
+		size="small"
 		color={palette.neutral[0]}
 		onClick={removeAll}
 		hideLabel={true}
