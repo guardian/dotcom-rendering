@@ -66,7 +66,6 @@ const buttonHolderStyle = css`
 `;
 
 const buttonStyle = css`
-	background-color: ${palette.neutral[100]};
 	color: ${palette.neutral[7]};
 	border-color: ${palette.neutral[7]};
 	.${ICON_TICK_CLASS} {
