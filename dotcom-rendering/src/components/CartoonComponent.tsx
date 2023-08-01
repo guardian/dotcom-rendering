@@ -17,21 +17,17 @@ export const CartoonComponent = ({ element }: Props) => {
 		(variant) => variant.viewportSize === 'large',
 	);
 
-	const makeFullCredit = (credit: string, source: string) => {
-		let fullCredit = '';
-
-		if (credit) {
-			if (source) {
-				fullCredit = `${credit} / ${source}`;
-			} else {
-				fullCredit = credit;
-			}
-		} else if (source) {
-			fullCredit = source;
-		}
-
-		return fullCredit;
+	const getFullCredit = (credit: string, source: string) => {
+		if (credit && source) {
+			return `${credit} / ${source}`;
+		} else if (!credit && source) {
+			return source;
+		} else if (credit && !source) {
+			return credit;
+		} else return '';
 	};
+
+	const fullCredit = getFullCredit(element.credit, element.source);
 
 	return (
 		<>
@@ -91,10 +87,7 @@ export const CartoonComponent = ({ element }: Props) => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					credit={`Comic by ${makeFullCredit(
-						element.credit,
-						element.source,
-					)}`}
+					credit={`Comic by ${fullCredit}`}
 					displayCredit={element.displayCredit}
 				/>
 			</div>
