@@ -413,17 +413,23 @@ const Title = ({
 	titleColour,
 	titleHighlightColour,
 	isCuratedContent,
+	url,
 }: {
 	title: string;
 	titleColour: string;
 	titleHighlightColour: string;
 	isCuratedContent?: boolean;
+	url?: string;
 }) =>
-	title === 'Videos' ? (
+	url ? (
 		<a
 			css={[linkStyles]}
-			href="https://www.theguardian.com/video"
-			data-link-name="video-container-title Videos"
+			href={url}
+			data-link-name={
+				title === 'Videos'
+					? 'video-container-title Videos'
+					: 'section heading'
+			}
 		>
 			<h2 css={headerStyles}>
 				<span
@@ -454,7 +460,6 @@ const Title = ({
 			</span>
 		</h2>
 	);
-
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: ArticleFormat;
@@ -536,6 +541,7 @@ type HeaderAndNavProps = {
 	goToIndex: (newIndex: number) => void;
 	isCuratedContent?: boolean;
 	containerType?: DCRContainerType;
+	url?: string;
 };
 
 const HeaderAndNav = ({
@@ -548,6 +554,7 @@ const HeaderAndNav = ({
 	goToIndex,
 	isCuratedContent,
 	containerType,
+	url,
 }: HeaderAndNavProps) => {
 	return (
 		<div>
@@ -556,6 +563,7 @@ const HeaderAndNav = ({
 				titleColour={titleColour}
 				titleHighlightColour={titleHighlightColour}
 				isCuratedContent={isCuratedContent}
+				url={url}
 			/>
 			<div css={dotsStyle}>
 				{trails.map((_, i) => (
@@ -595,6 +603,7 @@ const Header = ({
 	isCuratedContent,
 	containerType,
 	hasPageSkin,
+	url,
 }: {
 	heading: string;
 	trails: TrailType[];
@@ -607,6 +616,7 @@ const Header = ({
 	isCuratedContent: boolean;
 	containerType?: DCRContainerType;
 	hasPageSkin: boolean;
+	url?: string;
 }) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	const header = (
@@ -621,6 +631,7 @@ const Header = ({
 				isCuratedContent={isCuratedContent}
 				goToIndex={goToIndex}
 				containerType={containerType}
+				url={url}
 			/>
 			<Hide when="below" breakpoint="desktop">
 				<button
@@ -981,6 +992,7 @@ export const Carousel = ({
 					index={index}
 					isCuratedContent={isCuratedContent}
 					goToIndex={goToIndex}
+					url={props.url}
 				/>
 			</LeftColumn>
 			<InlineChevrons
@@ -1016,6 +1028,7 @@ export const Carousel = ({
 					isCuratedContent={isCuratedContent}
 					containerType={containerType}
 					hasPageSkin={hasPageSkin}
+					url={props.url}
 				/>
 				<ul
 					css={[
