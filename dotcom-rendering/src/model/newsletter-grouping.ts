@@ -109,26 +109,25 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			],
 		},
 		{
-			title: 'From our correspondents',
+			title: 'In depth',
 			newsletters: [
 				'this-is-europe',
-				'whats-on',
-				'cotton-capital',
+				'the-guide-staying-in',
 				'tech-scape',
 				'fashion-statement',
+				'word-of-mouth',
 				'pushing-buttons',
 			],
 		},
 		{
-			title: 'Culture Picks',
+			title: 'Culture picks',
 			newsletters: [
 				'film-today',
 				'sleeve-notes',
+				'whats-on',
 				'hear-here',
 				'art-weekly',
 				'design-review',
-				'the-guide-staying-in',
-				'word-of-mouth',
 			],
 		},
 		{
@@ -143,18 +142,20 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			],
 		},
 		{
-			title: 'Go deeper',
+			title: 'The world explained',
 			newsletters: [
 				'global-dispatch',
-				'guardian-traveller',
+				'cotton-capital',
 				'business-today',
 				'documentaries',
 				'her-stage',
+				'guardian-traveller',
 			],
 		},
 		{
 			title: 'Sport',
 			newsletters: [
+				'soccer-with-jonathan-wilson',
 				'the-fiver',
 				'moving-the-goalposts',
 				'the-spin',
