@@ -22,6 +22,9 @@ interface FormProps {
 	newsletterCount: number;
 }
 
+const CARD_CONTAINER_WIDTH = 240;
+const CARD_CONTAINER_PADDING = 10;
+
 export const formFrameStyle = css`
 	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
@@ -31,6 +34,8 @@ export const formFrameStyle = css`
 	flex-direction: column-reverse;
 
 	${from.desktop} {
+		flex-basis: ${4 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING}px;
+
 		flex-direction: row-reverse;
 		align-items: center;
 		justify-content: space-between;
@@ -44,7 +49,7 @@ export const formFieldsStyle = css`
 	padding-bottom: ${space[1]}px;
 
 	${from.desktop} {
-		flex: 1;
+		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
 		flex-direction: row;
 		flex-shrink: 0;
 		align-items: flex-end;
@@ -62,7 +67,8 @@ export const inputWrapperStyle = css`
 
 export const formAsideStyle = css`
 	${from.desktop} {
-		flex-basis: 400px;
+		flex: 1;
+		padding-left: ${CARD_CONTAINER_PADDING}px;
 	}
 `;
 
