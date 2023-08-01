@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { ArticleContainer } from './ArticleContainer';
 import { Figure } from './Figure';
@@ -16,7 +16,7 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		format={{
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		}}
@@ -64,7 +64,7 @@ export const InlineStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -72,7 +72,7 @@ export const InlineStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 					>
@@ -100,7 +100,7 @@ export const SupportingStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -109,7 +109,7 @@ export const SupportingStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 						role="supporting"
@@ -142,7 +142,7 @@ export const ImmersiveStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -150,7 +150,7 @@ export const ImmersiveStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 						role="immersive"
@@ -179,7 +179,7 @@ export const ThumbnailStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -187,7 +187,7 @@ export const ThumbnailStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 						role="thumbnail"
@@ -217,7 +217,7 @@ export const ShowcaseStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -225,7 +225,7 @@ export const ShowcaseStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 						role="showcase"
@@ -254,7 +254,7 @@ export const HalfWidthStory = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 				>
 					<SomeText />
@@ -262,7 +262,7 @@ export const HalfWidthStory = () => {
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						}}
 						isMainMedia={false}
 						role="halfWidth"

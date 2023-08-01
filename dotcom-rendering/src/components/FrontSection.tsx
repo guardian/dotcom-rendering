@@ -695,7 +695,7 @@ export const FrontSection = ({
 			>
 				{isString(targetedTerritory) &&
 				isAustralianTerritory(targetedTerritory) ? (
-					<Island deferUntil="interaction">
+					<Island deferUntil="visible">
 						<AustralianTerritorySwitcher
 							targetedTerritory={targetedTerritory}
 						/>

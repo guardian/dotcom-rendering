@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Props as CardProps } from './Card/Card';
@@ -20,7 +20,7 @@ const basicCardProps: CardProps = {
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	},
 	headlineText: 'Headline text',
 	trailText:
@@ -41,7 +41,7 @@ const aBasicLink = {
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	},
 };
 
@@ -80,7 +80,7 @@ export const Themes = () => {
 						kickerText: 'News',
 						format: {
 							...aBasicLink.format,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						},
 					},
 					{
@@ -88,7 +88,7 @@ export const Themes = () => {
 						kickerText: 'Sport',
 						format: {
 							...aBasicLink.format,
-							theme: ArticlePillar.Sport,
+							theme: Pillar.Sport,
 						},
 					},
 					{
@@ -96,7 +96,7 @@ export const Themes = () => {
 						kickerText: 'Lifestyle',
 						format: {
 							...aBasicLink.format,
-							theme: ArticlePillar.Lifestyle,
+							theme: Pillar.Lifestyle,
 						},
 					},
 					{
@@ -104,7 +104,7 @@ export const Themes = () => {
 						kickerText: 'Opinion',
 						format: {
 							...aBasicLink.format,
-							theme: ArticlePillar.Opinion,
+							theme: Pillar.Opinion,
 						},
 					},
 					{
@@ -112,7 +112,7 @@ export const Themes = () => {
 						kickerText: 'Culture',
 						format: {
 							...aBasicLink.format,
-							theme: ArticlePillar.Culture,
+							theme: Pillar.Culture,
 						},
 					},
 					{
@@ -136,7 +136,7 @@ export const Themes = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="Different themes"
@@ -172,7 +172,7 @@ export const Vertical = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="Vertical"
@@ -210,7 +210,7 @@ export const Horizontal = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="Horizontal"
@@ -247,7 +247,7 @@ export const HorizontalOnMobile = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="Horizontal"
@@ -301,7 +301,7 @@ export const LongText = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="Very long sublinks"
@@ -352,7 +352,7 @@ export const MoreThanThree = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="With five links"
@@ -383,7 +383,7 @@ export const OneSublink = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="With one link"
@@ -419,7 +419,7 @@ export const TwoSublinks = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="With two links"
@@ -445,7 +445,7 @@ export const LiveSublink = () => {
 						format: {
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.LiveBlog,
-							theme: ArticlePillar.News,
+							theme: Pillar.News,
 						},
 					},
 				]}
@@ -455,7 +455,7 @@ export const LiveSublink = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				linkTo=""
 				headlineText="With one link"

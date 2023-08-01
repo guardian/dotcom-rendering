@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import { images } from '../../fixtures/generated/images';
 import { liveBlock } from '../../fixtures/manual/liveBlock';
@@ -65,7 +65,7 @@ export const VideoAsSecond = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -110,7 +110,7 @@ export const Title = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -176,7 +176,7 @@ export const Video = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -217,7 +217,7 @@ export const RichLink = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -249,7 +249,7 @@ export const FirstImage = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -307,7 +307,7 @@ export const ImageRoles = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -354,7 +354,7 @@ export const Thumbnail = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -387,7 +387,7 @@ export const ImageAndTitle = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -416,7 +416,7 @@ export const Updated = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -449,7 +449,7 @@ export const Contributor = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -480,7 +480,7 @@ export const NoAvatar = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.Opinion,
+					theme: Pillar.Opinion,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}
@@ -514,7 +514,7 @@ export const TitleAndContributor = () => {
 		<Wrapper>
 			<LiveBlock
 				format={{
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					design: ArticleDesign.LiveBlog,
 					display: ArticleDisplay.Standard,
 				}}

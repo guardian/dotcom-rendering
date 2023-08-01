@@ -1,20 +1,21 @@
-import { ArticlePillar, ArticleSpecial, ArticleTheme } from '@guardian/libs';
-import { CAPIPillar } from '../discussionTypes';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticleSpecial, Pillar } from '@guardian/libs';
+import type { CAPIPillar } from '../discussionTypes';
 
 export const pillarToEnum = (pillar: CAPIPillar): ArticleTheme => {
 	switch (pillar) {
 		case 'opinion':
-			return ArticlePillar.Opinion;
+			return Pillar.Opinion;
 		case 'culture':
-			return ArticlePillar.Culture;
+			return Pillar.Culture;
 		case 'sport':
-			return ArticlePillar.Sport;
+			return Pillar.Sport;
 		case 'lifestyle':
-			return ArticlePillar.Lifestyle;
+			return Pillar.Lifestyle;
 		case 'labs':
 			return ArticleSpecial.Labs;
 		case 'news':
 		default:
-			return ArticlePillar.News;
+			return Pillar.News;
 	}
 };

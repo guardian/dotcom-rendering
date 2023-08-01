@@ -9,7 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import type { EditionId } from '../lib/edition';
+import { type EditionId, getEditionFromId } from '../lib/edition';
 import type { DCRContainerPalette } from '../types/front';
 import type { Colour } from '../types/palette';
 import { localisedTitle } from './Localisation';
@@ -102,6 +102,9 @@ export const ContainerTitle = ({
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const now = new Date();
+
+	const { timeZone } = getEditionFromId(editionId ?? 'UK');
+
 	return (
 		<div css={marginStyles}>
 			{url ? (
@@ -132,7 +135,10 @@ export const ContainerTitle = ({
 							overrides?.text.containerDate ?? neutral[0],
 						)}
 					>
-						{now.toLocaleDateString('en-GB', { weekday: 'long' })}
+						{now.toLocaleString('en-GB', {
+							weekday: 'long',
+							timeZone,
+						})}
 					</span>
 					<span
 						css={[
@@ -145,10 +151,11 @@ export const ContainerTitle = ({
 							bottomMargin,
 						]}
 					>
-						{now.toLocaleDateString('en-GB', {
+						{now.toLocaleString('en-GB', {
 							day: 'numeric',
 							month: 'long',
 							year: 'numeric',
+							timeZone,
 						})}
 					</span>
 				</div>

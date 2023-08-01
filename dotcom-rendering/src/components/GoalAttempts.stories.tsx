@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { GoalAttempts } from './GoalAttempts';
 
 export default {
@@ -35,7 +35,7 @@ export const Default = () => {
 				}}
 				format={{
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Sport,
+					theme: Pillar.Sport,
 					display: ArticleDisplay.Standard,
 				}}
 			/>

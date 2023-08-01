@@ -3088,17 +3088,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-5.0.0.tgz#cce32ff4cdfb6b24c013723bf352dcd61135d34d"
   integrity sha512-Td5gtK2sARl+fXj1Qe6RuFqf/zxuZjW1q2Jck09zXPIfMgU+sJoTi549zbNeC1cldCBhPWy/qPQ0r+8klfF7jg==
 
-"@guardian/atoms-rendering@32.2.0":
-  version "32.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-32.2.0.tgz#00db2120252060e5e0c5b3b4b45897d18864cec4"
-  integrity sha512-14BFR+rb6iQ4qYcqX/aPt/C3iVYSfKrHZj5ps9EbDeOx8dKejohsLyPiPKaNkPj+M0CTH42r8kcOjatx4Yx1yw==
+"@guardian/atoms-rendering@32.2.3":
+  version "32.2.3"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-32.2.3.tgz#2abea32bf948844988c4a9fe4b4edd1c8c5d4e12"
+  integrity sha512-mwxDvJys+lbe7GyzyK7zi7dcjddYotGtKh7kOsYXZwDy4E5ptJ1m2BJwT7dXnzZ40B+Idys7rK3pyLynIIiqZg==
   dependencies:
     is-mobile "3.1.1"
 
-"@guardian/braze-components@14.1.0":
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.1.0.tgz#3b362f66cc4c37920ed452187a7cc33dec9314a0"
-  integrity sha512-SsTrqdYfNq9k63VhicCrnF0WhWCwhxZKyERVzTt5NMt4mG4iWqrrpa+G7SdVQockf3OYEizv4WJtPRt/N1F9pg==
+"@guardian/braze-components@14.1.1":
+  version "14.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.1.1.tgz#12672e3992ad3eab3bade848861ca01631a0edf5"
+  integrity sha512-wHuJwdOC2hsTBie+zWJYFyasP4fOJXOPcKXpN2Cp+GlljPah3YtS2Fbgn8pcxxt8d5JKO9ra7sHKvX8FNxkAyg==
 
 "@guardian/bridget@2.3.0":
   version "2.3.0"
@@ -3129,10 +3129,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@10.6.0":
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.6.0.tgz#315325ce9625540bb22574bad9eace2552543706"
-  integrity sha512-xs50dVkUrSwRtH3Y3e1ruDkQTpL+lT1nbZHyiml5JYYzs1VCOoVBWlFdTbuKeXRLoMrmWQB6A2/wkS+eGUccZg==
+"@guardian/commercial@10.8.0":
+  version "10.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.8.0.tgz#2033142e874dffba725319e5d23ce3dd0a044c66"
+  integrity sha512-tHrzUyKBBoFS0JUha4kiv5aPD5Q3ej0pjVFiseu6NtPGijaK5JmAnlF4UitbRUP46dlOnoDA3RVAVZ02hcBTbw==
   dependencies:
     "@changesets/cli" "^2.26.1"
     "@guardian/ab-core" "^5.0.0"
@@ -3195,15 +3195,20 @@
   resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.2.0.tgz#aaad1667095c5ba4bc7610e1a119ec007c249307"
   integrity sha512-4bKanidGEH+VKaYQNNcS2y8ubmxfzMicr+wiIDsdosxicn3mLA1Hw0kHiaZm1vroo3JKp4442qVba3Z8Ot5vPA==
 
-"@guardian/libs@15.1.0", "@guardian/libs@^15.0.0":
-  version "15.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
-  integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
+"@guardian/libs@15.4.0":
+  version "15.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.4.0.tgz#725191fab57a036f7180f7e3a127214d0c20736c"
+  integrity sha512-UnLLRnVNHhuBE8uRSx3b0rjpjovFK7lSbnfCZ5jZqabEutkZimkNdW4DX95y3QWDHJT/faHo3kV7heiXKbiO3g==
 
 "@guardian/libs@^10.0.0":
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-10.1.1.tgz#7048c365a68dda068f707d46c78979f430221963"
   integrity sha512-OdWReBHRWhdbErVmS15hihVzlkdU8DkKrjDsUIN0P8QZiF4twuzcU3qsPwto2UfibAwPkWqKkNwH1k8b6xNclA==
+
+"@guardian/libs@^15.0.0":
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
+  integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
 
 "@guardian/prettier@4.0.0", "@guardian/prettier@^4.0.0":
   version "4.0.0"
@@ -5458,10 +5463,15 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@18.16.18":
+"@types/node@*":
   version "18.16.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.18.tgz#85da09bafb66d4bc14f7c899185336d0c1736390"
   integrity sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw==
+
+"@types/node@18.17.0":
+  version "18.17.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.17.0.tgz#35d44267a33dd46b49ee0f73d31b05fd7407e290"
+  integrity sha512-GXZxEtOxYGFchyUzxvKI14iff9KZ2DI+A6a37o6EQevtg6uO9t+aUZKcaC1Te5Ng1OnLM7K9NVVj+FbecD9cJg==
 
 "@types/node@^12.7.1":
   version "12.20.55"

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 
@@ -12,7 +12,7 @@ export const LiveBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.LiveBlog,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const palette = decidePalette(format);
 
@@ -31,7 +31,7 @@ export const DeadBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.DeadBlog,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const palette = decidePalette(format);
 

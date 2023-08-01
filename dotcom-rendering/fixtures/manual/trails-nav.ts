@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { TrailType } from '../../src/types/trails';
 
 export const trails: [
@@ -17,7 +17,7 @@ export const trails: [
 		headline: 'Athletics',
 		image: 'http://media.guim.co.uk/49c197838ba04557dbdd6f5077a7a98afe5bd299/0_133_3275_1964/master/3275.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -28,7 +28,7 @@ export const trails: [
 		headline: 'Olympic Games',
 		image: 'https://media.guim.co.uk/690a725111db015304868628774a70aa1e2b18c5/702_902_2735_1640/master/2735.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -39,7 +39,7 @@ export const trails: [
 		headline: 'Motor sports',
 		image: 'https://media.guim.co.uk/503c85b6cd242a8a79bea3fb6a6d5545fa33a903/3_59_1393_835/master/1393.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -50,7 +50,7 @@ export const trails: [
 		headline: 'Chess',
 		image: 'https://media.guim.co.uk/5c41d87e7155700711aef81c2034b0d9f2818e3b/0_268_4992_2995/master/4992.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -61,7 +61,7 @@ export const trails: [
 		headline: 'Australia Sport',
 		image: 'https://media.guim.co.uk/56b2199f0d43210a106d45f1a6510995c7999cb4/261_0_3683_2210/master/3683.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -72,7 +72,7 @@ export const trails: [
 		headline: 'Sailing',
 		image: 'https://media.guim.co.uk/1121e6cddc5de615c739575f102b2ffd709b2912/173_248_3208_1925/master/3208.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -83,7 +83,7 @@ export const trails: [
 		headline: 'Snooker',
 		image: 'https://media.guim.co.uk/a5f620941b6c1ddfbf6f8fe6fbb2e9f9da2a79c9/101_119_3399_2039/master/3399.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -94,7 +94,7 @@ export const trails: [
 		headline: 'Darts',
 		image: 'https://media.guim.co.uk/049a6192c14f31032d3f42313051903eea55ae18/213_51_4717_2830/master/4717.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},
@@ -105,7 +105,7 @@ export const trails: [
 		headline: 'Disability Sport',
 		image: 'https://media.guim.co.uk/cfdbb1d5668fdefac1166f3e445e58c2afdebc58/246_20_4893_2935/master/4893.jpg',
 		format: {
-			theme: ArticlePillar.News,
+			theme: Pillar.News,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		},

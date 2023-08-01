@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { KeyEventsContainer } from './KeyEventsContainer';
 
@@ -17,7 +17,7 @@ describe('KeyEventsContainer', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				keyEvents={[
 					{
@@ -38,7 +38,7 @@ describe('KeyEventsContainer', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				keyEvents={[
 					{
@@ -61,7 +61,7 @@ describe('KeyEventsContainer', () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				keyEvents={[
 					{

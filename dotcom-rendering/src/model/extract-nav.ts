@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { EditionId } from '../lib/edition';
 import { findPillar } from './find-pillar';
 
@@ -16,6 +16,7 @@ export interface LinkType extends BaseLinkType {
 export interface EditionLinkType extends LinkType {
 	editionId: EditionId;
 	locale: string;
+	timeZone: string;
 }
 
 export interface PillarLinkType extends LinkType {
@@ -37,7 +38,7 @@ interface BaseNavType {
 
 export interface NavType extends BaseNavType {
 	pillars: PillarLinkType[];
-	selectedPillar?: ArticlePillar;
+	selectedPillar?: Pillar;
 }
 
 const getLink = (data: FELinkType): LinkType => {
@@ -53,7 +54,7 @@ const getLink = (data: FELinkType): LinkType => {
 
 const getPillar = (data: FELinkType): PillarLinkType => ({
 	...getLink(data),
-	pillar: findPillar(data.title) ?? ArticlePillar.News,
+	pillar: findPillar(data.title) ?? Pillar.News,
 });
 
 const buildRRLinkCategories = (

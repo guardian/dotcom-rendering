@@ -382,7 +382,6 @@ export const Card = ({
 		<CardWrapper
 			format={format}
 			containerPalette={containerPalette}
-			containerType={containerType}
 			isDynamo={isDynamo}
 		>
 			<CardLink
@@ -409,6 +408,7 @@ export const Card = ({
 							<Slideshow
 								images={media.slideshowImages}
 								imageSize={imageSize}
+								isDynamo={isDynamo}
 							/>
 						)}
 						{media.type === 'avatar' && (

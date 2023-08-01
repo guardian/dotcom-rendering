@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { HeadlineByline } from './HeadlineByline';
 
@@ -18,7 +18,7 @@ export const interviewStory = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Interview,
-				theme: ArticlePillar.Culture,
+				theme: Pillar.Culture,
 			}}
 			byline="Jane Smith"
 			tags={[]}
@@ -33,7 +33,7 @@ export const commentStory = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 			byline="Jane Smith"
 			tags={[]}
@@ -64,7 +64,7 @@ export const commentWithBylineImageStory = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -88,7 +88,7 @@ export const immersiveStory = () => {
 			format={{
 				display: ArticleDisplay.Immersive,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Lifestyle,
+				theme: Pillar.Lifestyle,
 			}}
 			byline="Jane Smith"
 			tags={[
@@ -115,7 +115,7 @@ export const ImmersiveComment = () => {
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Lifestyle,
+					theme: Pillar.Lifestyle,
 				}}
 				byline="Jane Smith"
 				tags={[
@@ -137,7 +137,7 @@ export const MultipleStory = () => {
 			format={{
 				display: ArticleDisplay.Immersive,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Lifestyle,
+				theme: Pillar.Lifestyle,
 			}}
 			byline="Jane Smith, John Doe and Nae Bevan"
 			tags={[
@@ -168,7 +168,7 @@ export const MultipleDuplicateStory = () => {
 			format={{
 				display: ArticleDisplay.Immersive,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Lifestyle,
+				theme: Pillar.Lifestyle,
 			}}
 			byline="Duncan Campbell and Duncan Campbell"
 			tags={[
@@ -195,7 +195,7 @@ export const noBylineStory = () => {
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Interview,
-				theme: ArticlePillar.Culture,
+				theme: Pillar.Culture,
 			}}
 			byline=""
 			tags={[]}

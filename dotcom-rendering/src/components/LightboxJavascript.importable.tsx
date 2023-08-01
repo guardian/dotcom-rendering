@@ -480,7 +480,7 @@ function initialiseLightbox(lightbox: HTMLElement) {
 	}
 
 	// Mark the lightbox as ready so that we don't try to re-initialise it later
-	lightbox.setAttribute('data-gu-ready', 'true');
+	lightbox.setAttribute('data-island-status', 'rendered');
 }
 
 export const LightboxJavascript = ({

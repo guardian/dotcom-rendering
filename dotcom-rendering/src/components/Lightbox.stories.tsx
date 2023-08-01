@@ -1,8 +1,8 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
@@ -96,7 +96,7 @@ export const Default = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [{ ...testImage }];
 	return (
@@ -110,7 +110,7 @@ export const WithTitle = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [{ ...testImage, title: 'Title' }];
 	return (
@@ -124,7 +124,7 @@ export const WithCredit = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [{ ...testImage, displayCredit: true }];
 	return (
@@ -138,7 +138,7 @@ export const WithRating = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [{ ...testImage, starRating: 3 }];
 	return (
@@ -152,7 +152,7 @@ export const WhenLiveBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.LiveBlog,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [
 		{
@@ -175,7 +175,7 @@ export const WithEverything = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [
 		{
@@ -196,7 +196,7 @@ export const WithoutCaption = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
+		theme: Pillar.News,
 	};
 	const images = [{ ...testImage }];
 	return (
@@ -210,7 +210,7 @@ export const WithSport = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Sport,
+		theme: Pillar.Sport,
 	};
 	const images = [
 		{
@@ -231,7 +231,7 @@ export const WithCulture = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Culture,
+		theme: Pillar.Culture,
 	};
 	const images = [
 		{
@@ -252,7 +252,7 @@ export const WithLifestyle = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Lifestyle,
+		theme: Pillar.Lifestyle,
 	};
 	const images = [
 		{
@@ -273,7 +273,7 @@ export const WithOpinion = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Opinion,
+		theme: Pillar.Opinion,
 	};
 	const images = [
 		{

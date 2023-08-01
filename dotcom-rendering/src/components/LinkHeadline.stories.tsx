@@ -1,8 +1,8 @@
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { LinkHeadline } from './LinkHeadline';
 import { Section } from './Section';
@@ -19,7 +19,7 @@ export const xsmallStory = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			size="large"
 		/>
@@ -34,7 +34,7 @@ export const liveStory = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 		/>
@@ -49,7 +49,7 @@ export const noLinebreak = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 			hideLineBreak={true}
@@ -65,7 +65,7 @@ export const pulsingDot = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			kickerText="Live"
 			showPulsingDot={true}
@@ -81,7 +81,7 @@ export const cultureVariant = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Culture,
+				theme: Pillar.Culture,
 			}}
 			kickerText="Art and stuff"
 		/>
@@ -96,7 +96,7 @@ export const opinionxxxsmall = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
+				theme: Pillar.Opinion,
 			}}
 			showQuotes={true}
 			size="small"
@@ -113,7 +113,7 @@ export const OpinionKicker = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
+				theme: Pillar.Opinion,
 			}}
 			showQuotes={true}
 			kickerText="George Monbiot"
@@ -145,7 +145,7 @@ export const InUnderlinedState = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showUnderline={true}
 			size="small"
@@ -165,7 +165,7 @@ export const linkStory = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			}}
 			kickerText="I am not a link"
 			link={{
@@ -183,7 +183,7 @@ export const LiveBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Large live"
@@ -196,7 +196,7 @@ export const LiveBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Medium live"
@@ -209,7 +209,7 @@ export const LiveBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Small live"
@@ -222,7 +222,7 @@ export const LiveBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Tiny live"
@@ -240,7 +240,7 @@ export const DeadBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Large dead"
@@ -253,7 +253,7 @@ export const DeadBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Medium dead"
@@ -266,7 +266,7 @@ export const DeadBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Small dead"
@@ -279,7 +279,7 @@ export const DeadBlogSizes = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Tiny dead"
@@ -297,7 +297,7 @@ export const Updated = () => (
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
+				theme: Pillar.News,
 			}}
 			showPulsingDot={true}
 			hideLineBreak={true}

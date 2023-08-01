@@ -1,22 +1,22 @@
 import '@testing-library/jest-dom/extend-expect';
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import {
 	render,
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
-import { App } from './App';
+import { Comments } from './Comments';
 
 mockRESTCalls();
 
 describe('App', () => {
 	it('should not render the comment form if user is logged out', async () => {
 		render(
-			<App
+			<Comments
 				shortUrl="p/39f5z"
 				baseUrl="https://discussion.theguardian.com/discussion-api"
-				pillar={ArticlePillar.Culture}
+				pillar={Pillar.Culture}
 				isClosedForComments={false}
 				additionalHeaders={{
 					'D2-X-UID': 'testD2Header',

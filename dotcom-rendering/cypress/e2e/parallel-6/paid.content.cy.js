@@ -67,8 +67,8 @@ describe('Paid content tests', function () {
 
 		cy.get('gu-island[name=Branding]', { timeout: 30000 }).should(
 			'have.attr',
-			'data-gu-ready',
-			'true',
+			'data-island-status',
+			'hydrated',
 		);
 
 		cy.get('[data-cy=branding-logo]').should('be.visible');
@@ -108,8 +108,8 @@ describe('Paid content tests', function () {
 
 		cy.get('gu-island[name=OnwardsUpper]', { timeout: 30000 }).should(
 			'have.attr',
-			'data-gu-ready',
-			'true',
+			'data-island-status',
+			'rendered',
 		);
 
 		cy.get('[data-cy=card-branding-logo]').should('be.visible');

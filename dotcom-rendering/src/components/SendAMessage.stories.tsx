@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { MessageForm } from '../../fixtures/manual/message-us-form';
 import { Section } from './Section';
@@ -15,7 +15,7 @@ export default {
 const defaultFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 
 const goodRequest = () => {
