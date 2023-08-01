@@ -19,18 +19,17 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			],
 		},
 		{
-			title: 'From our correspondents',
+			title: 'In depth',
 			newsletters: [
-				'this-is-europe',
 				'whats-on',
-				'cotton-capital',
 				'tech-scape',
 				'fashion-statement',
 				'pushing-buttons',
+				'cotton-capital',
 			],
 		},
 		{
-			title: 'Culture Picks',
+			title: 'Culture picks',
 			newsletters: [
 				'film-today',
 				'sleeve-notes',
@@ -44,18 +43,18 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			title: 'Weekend reads',
 			newsletters: [
 				'inside-saturday',
+				'five-great-reads',
 				'house-to-home',
 				'saved-for-later',
-				'five-great-reads',
 				'the-upside',
+				'guardian-traveller',
 			],
 		},
 		{
-			title: 'Go deeper',
+			title: 'The world explained',
 			newsletters: [
+				'this-is-europe',
 				'global-dispatch',
-				'guardian-traveller',
-				'business-today',
 				'documentaries',
 				'her-stage',
 			],
@@ -65,6 +64,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 			newsletters: [
 				'the-fiver',
 				'moving-the-goalposts',
+				'soccer-with-jonathan-wilson',
 				'the-spin',
 				'the-breakdown',
 				'the-recap',
@@ -80,6 +80,7 @@ export const groups: Partial<Record<EditionId, StaticGroups>> = {
 				'best-of-opinion',
 				'best-of-opinion-us',
 				'best-of-opinion-au',
+				'business-today',
 			],
 		},
 		{
