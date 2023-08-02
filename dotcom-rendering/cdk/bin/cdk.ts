@@ -13,5 +13,3 @@ new DotcomRendering(app, 'DotcomRendering-CODE', {
 	stack: 'frontend',
 	stage: 'CODE',
 });
-
-app.synth();
