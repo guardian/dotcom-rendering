@@ -3195,6 +3195,10 @@
                         "type": "object",
                         "properties": {
                             "viewportSize": {
+                                "enum": [
+                                    "large",
+                                    "small"
+                                ],
                                 "type": "string"
                             },
                             "images": {

@@ -51,7 +51,7 @@ export const CartoonComponent = ({ element }: Props) => {
 								design: ArticleDesign.Standard,
 								theme: Pillar.News,
 							}}
-							alt={element.alt}
+							alt={`${element.alt}, panel ${image.index + 1}`}
 							height={parseInt(image.fields.height, 10)}
 							width={parseInt(image.fields.width, 10)}
 							key={image.index}
