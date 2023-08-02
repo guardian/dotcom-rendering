@@ -656,7 +656,7 @@ export const AdSlot = ({
 						css={[
 							css`
 								position: relative;
-								min-height: 250px;
+								min-height: 450px;
 							`,
 							fluidAdStyles,
 							fluidFullWidthAdStyles,
