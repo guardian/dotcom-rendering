@@ -2,15 +2,14 @@ import { doHydration } from './islands/doHydration';
 import { getEmotionCache } from './islands/emotion';
 import { getProps } from './islands/getProps';
 
-function forceHydration() {
+const forceHydration = async () => {
 	try {
 		const name = 'DiscussionContainer';
 
 		// Select the Discussion island element
-		const guElement = document.querySelector<HTMLElement>(
-			`gu-island[name=${name}]`,
-		);
-		if (!guElement) return;
+		const guElement = document.querySelector(`gu-island[name=${name}]`);
+
+		if (!(guElement instanceof HTMLElement)) return;
 
 		// Read the props from where they have been serialised in the dom using an Island
 		const props = getProps(guElement);
@@ -19,21 +18,18 @@ function forceHydration() {
 		props.expanded = true;
 
 		// Force hydration
-		void doHydration(name, props, guElement, getEmotionCache());
+		return doHydration(name, props, guElement, getEmotionCache());
 	} catch (err) {
 		// Do nothing
 	}
-}
-
-export const discussion = (): Promise<void> => {
-	/**
-	 * If we have either a #comment-123456 permalink or the #comments link in the url
-	 * then we want to hydrate and expand the discussion without waiting for the
-	 * reader to scroll down to it
-	 *
-	 */
-	const hashLink = window.location.hash;
-	if (hashLink.includes('comment')) forceHydration();
-
-	return Promise.resolve();
 };
+
+/**
+ * If we have either a #comment-123456 permalink or the #comments link in the url
+ * then we want to hydrate and expand the discussion without waiting for the
+ * reader to scroll down to it
+ */
+export const discussion = (): Promise<void> =>
+	window.location.hash.includes('comment')
+		? forceHydration()
+		: Promise.resolve();
