@@ -591,6 +591,9 @@ export const ShowcaseLayout = ({
 											}
 											stage={article.config.stage}
 											tags={article.tags}
+											renderAds={renderAds}
+											isLabs={isLabs}
+											articleDisplay={format.display}
 										/>
 									</Island>
 								)}

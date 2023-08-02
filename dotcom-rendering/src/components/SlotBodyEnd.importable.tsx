@@ -41,9 +41,9 @@ type Props = {
 	stage: string;
 	pageId: string;
 	keywordIds: string;
-	renderAds?: boolean;
-	isLabs?: boolean;
-	articleDisplay?: ArticleDisplay;
+	renderAds: boolean;
+	isLabs: boolean;
+	articleDisplay: ArticleDisplay;
 };
 
 const buildReaderRevenueEpicConfig = (
