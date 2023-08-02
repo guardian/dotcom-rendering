@@ -52,7 +52,8 @@ export class DotcomRendering extends GuStack {
 			parameters: {
 				VpcId: vpc.vpcId,
 				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup: lbSecurityGroup,
+				InternalLoadBalancerSecurityGroup:
+					lbSecurityGroup.securityGroupId,
 			},
 		});
 	}

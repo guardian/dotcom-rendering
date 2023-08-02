@@ -362,7 +362,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "FromPort": 9000,
             "IpProtocol": "tcp",
             "SourceSecurityGroupId": {
-              "Ref": "InternalLoadBalancerSecurityGroup",
+              "Fn::GetAtt": [
+                "InternalLoadBalancerSecurityGroupRendering26706C0C",
+                "GroupId",
+              ],
             },
             "ToPort": 9000,
           },
@@ -454,7 +457,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Scheme": "internal",
         "SecurityGroups": [
           {
-            "Ref": "InternalLoadBalancerSecurityGroup",
+            "Fn::GetAtt": [
+              "InternalLoadBalancerSecurityGroupRendering26706C0C",
+              "GroupId",
+            ],
           },
         ],
         "Subnets": {
@@ -491,61 +497,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
     },
-    "InternalLoadBalancerSecurityGroup": {
-      "Properties": {
-        "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
-        "SecurityGroupIngress": [
-          {
-            "CidrIp": "10.248.136.0/22",
-            "FromPort": 80,
-            "IpProtocol": "tcp",
-            "ToPort": 80,
-          },
-          {
-            "CidrIp": "10.248.136.0/22",
-            "FromPort": 443,
-            "IpProtocol": "tcp",
-            "ToPort": 443,
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
     "InternalLoadBalancerSecurityGroupRendering26706C0C": {
       "Properties": {
         "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
-        "GroupName": "InternalLoadBalancerSecurityGroup",
         "SecurityGroupEgress": [
           {
             "CidrIp": "255.255.255.255/32",

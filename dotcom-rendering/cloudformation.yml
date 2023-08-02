@@ -58,10 +58,9 @@ Parameters:
   FrontendConfigKey:
     Description: Parameter store KMS key
     Type: String
-  # TODO - check if this is ok?
   InternalLoadBalancerSecurityGroup:
     Description: Load balancer security group, now defined outside of this file
-    Type: AWS::EC2::SecurityGroup
+    Type: String
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
