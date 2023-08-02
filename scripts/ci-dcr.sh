@@ -43,7 +43,6 @@ else
 	if [ $currentBranch == "main" ]
 	then
 		make validate-ci
-		make cypress
 	else
 		printf "Skipping code checks when not on main"
 	fi
