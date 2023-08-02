@@ -212,11 +212,13 @@ export const SlotBodyEnd = ({
 
 	if (shouldShowPublicGood) {
 		return (
-			<AdSlot
-				data-print-layout="hide"
-				position="article-end"
-				display={articleDisplay}
-			/>
+			<div id="slot-body-end">
+				<AdSlot
+					data-print-layout="hide"
+					position="article-end"
+					display={articleDisplay}
+				/>
+			</div>
 		);
 	}
 
