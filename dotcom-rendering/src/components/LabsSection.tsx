@@ -14,7 +14,9 @@ import {
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 import type { DCRBadgeType } from '../types/badge';
+import type { Branding } from '../types/branding';
 import { Badge } from './Badge';
+import { CardBranding } from './Card/components/CardBranding';
 import { Details } from './Details';
 import { Island } from './Island';
 import { Section } from './Section';
@@ -55,6 +57,10 @@ type Props = {
 
 	/** A sponsor badge can be displayed under the content cards */
 	badge?: DCRBadgeType;
+
+	branding?: Branding;
+
+	format?: ArticleFormat;
 
 	/** Usually the content cards that will be displayed inside the container */
 	children?: React.ReactNode;
@@ -373,10 +379,13 @@ export const LabsSection = ({
 	canShowMore,
 	url,
 	badge,
+	branding,
+	format,
 	children,
 	hasPageSkin = false,
 }: Props) => {
 	const overrides = decideContainerOverrides('Branded');
+	console.log('badge', badge);
 
 	return (
 		<Section
@@ -460,8 +469,12 @@ export const LabsSection = ({
 							/>
 						</div>
 					)}
+					{branding && format && (
+						<CardBranding branding={branding} format={format} />
+					)}
 				</Content>
 			</Container>
+			END OF CVONTAINNERR????
 		</Section>
 	);
 };

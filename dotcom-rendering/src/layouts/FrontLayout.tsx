@@ -322,6 +322,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				css={hasPageSkin && pageSkinContainer}
 			>
 				{front.pressedPage.collections.map((collection, index) => {
+					console.log('Collection', collection.displayName);
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -352,6 +353,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								eB.edition.id === front.editionId &&
 								!!eB.branding,
 						);
+
+					// Populate a variable for badge; if collection has a badge, use it.
+					// If not, create an object of DCRBadgeType populated with data from the Branding object
+					// of the first item in backfill.
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -483,7 +488,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerName={collection.collectionType}
 								canShowMore={collection.canShowMore}
 								url={collection.href}
-								badge={collection.badge}
+								badge={collection.badge} // this branding obj
+								branding={collection.backfill[0]?.branding}
+								format={collection.backfill[0]?.format}
 								data-print-layout="hide"
 								hasPageSkin={hasPageSkin}
 							>
