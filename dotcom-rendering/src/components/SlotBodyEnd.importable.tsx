@@ -132,9 +132,13 @@ export const SlotBodyEnd = ({
 	);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
+
 	const ABTestAPI = useAB()?.api;
 	const isInPublicGoodTest =
 		ABTestAPI?.isUserInVariant('PublicGoodTest', 'variant') ?? false;
+
+	const showArticleEndSlot =
+		isInPublicGoodTest && renderAds && !isLabs && countryCode === 'US';
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -205,12 +209,7 @@ export const SlotBodyEnd = ({
 				<SelectedEpic />
 			</div>
 		);
-	}
-
-	const shouldShowPublicGood =
-		isInPublicGoodTest && renderAds && !isLabs && countryCode === 'US';
-
-	if (shouldShowPublicGood) {
+	} else if (showArticleEndSlot) {
 		return (
 			<div id="slot-body-end">
 				<AdSlot
