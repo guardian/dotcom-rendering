@@ -45,7 +45,7 @@ const PLATFORM_TREATS: TreatType[] = [
 	{
 		...HEADLINES_US_TREAT,
 		pageId: 'us',
-		containerTitle: 'Spotlight',
+		containerTitle: 'Headlines',
 		editionId: 'US',
 	},
 	{
