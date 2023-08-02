@@ -1,4 +1,4 @@
-import type { RequestHandler } from 'express';
+import type { Handler } from 'hono';
 import { decideTrail } from '../lib/decideTrail';
 import { enhanceCards } from '../model/enhanceCards';
 import { enhanceCollections } from '../model/enhanceCollections';
@@ -86,28 +86,34 @@ const enhanceTagFront = (body: unknown): DCRTagFrontType => {
 	};
 };
 
-export const handleFront: RequestHandler = ({ body }, res) => {
+export const handleFront: Handler = async (context) => {
 	recordTypeAndPlatform('front');
+	const body = await context.req.json();
 	const front = enhanceFront(body);
 	const html = renderFront({
 		front,
 	});
-	res.status(200).send(html);
+	context.status(200);
+	return context.html(html);
 };
 
-export const handleFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceFront(body));
+export const handleFrontJson: Handler = async (context) => {
+	const body = await context.req.json();
+	return context.json(enhanceFront(body));
 };
 
-export const handleTagFront: RequestHandler = ({ body }, res) => {
+export const handleTagFront: Handler = async (context) => {
 	recordTypeAndPlatform('tagFront');
+	const body = await context.req.json();
 	const tagFront = enhanceTagFront(body);
 	const html = renderTagFront({
 		tagFront,
 	});
-	res.status(200).send(html);
+	context.status(200);
+	return context.html(html);
 };
 
-export const handleTagFrontJson: RequestHandler = ({ body }, res) => {
-	res.json(enhanceTagFront(body));
+export const handleTagFrontJson: Handler = async (context) => {
+	const body = await context.req.json();
+	return context.json(enhanceTagFront(body));
 };

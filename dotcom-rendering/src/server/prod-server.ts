@@ -1,6 +1,8 @@
-import compression from 'compression';
-import type { ErrorRequestHandler, Request, Response } from 'express';
-import express from 'express';
+import { serve } from '@hono/node-server';
+import type { MiddlewareHandler } from 'hono';
+import { Hono } from 'hono';
+import { compress } from 'hono/compress';
+import { timing } from 'hono/timing';
 import responseTime from 'response-time';
 import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
 import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
@@ -42,21 +44,21 @@ const logRenderTime = responseTime(
 export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
-	const app = express();
+	const app = new Hono();
 
-	app.use(express.json({ limit: '50mb' }));
-	app.use(requestLoggerMiddleware);
-	app.use(compression());
+	app.use('*', requestLoggerMiddleware);
+	app.use('*', compress());
+	app.use('*', timing());
 
-	app.get('/_healthcheck', (req: Request, res: Response) => {
-		res.status(200).send('OKAY');
+	app.get('/_healthcheck', (c) => {
+		c.status(200);
+		return c.text('OKAY');
 	});
 
 	// if running prod server locally, serve local assets
 	if (!process.env.GU_PUBLIC) {
-		app.use('/static/frontend', express.static(__dirname));
-
-		app.use('/assets', express.static(__dirname));
+		// app.use('/static/frontend', express.static(__dirname));
+		// app.use('/assets', express.static(__dirname));
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
@@ -183,8 +185,9 @@ export const prodServer = (): void => {
 		}, 10 * 1000);
 	}
 
-	const port = process.env.PORT ?? 9000;
-	app.listen(port);
+	const port = Number(process.env.PORT ?? 9000);
+
+	serve({ ...app, port });
 
 	console.log(`Started production server on port ${port}\nready`);
 };

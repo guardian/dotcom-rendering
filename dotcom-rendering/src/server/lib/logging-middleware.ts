@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import type { MiddlewareHandler } from 'hono';
 import { logger } from './logging';
 import { loggingStore } from './logging-store';
 
@@ -15,24 +15,28 @@ const hasPageId = (body: unknown): body is { pageId: string } => {
  * An Express middleware which handles creating our logger store and logging requests after they've
  * completed.
  */
-export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
+export const requestLoggerMiddleware: MiddlewareHandler = async (c, next) => {
 	const loggerState = {
 		request: {
-			pageId: hasPageId(req.body) ? req.body.pageId : 'no-page-id-found',
-			path: req.path,
-			method: req.method,
+			pageId: hasPageId(c.req.body)
+				? c.req.body.pageId
+				: 'no-page-id-found',
+			path: c.req.path,
+			method: c.req.method,
 		},
 		timing: {},
 	};
 
-	res.on('finish', () => {
+	await next();
+
+	loggingStore.run(loggerState, () => {
 		const { request, error } = loggingStore.getStore() ?? {};
 
 		if (!request?.type) return;
 
 		logger.info('Rendered page', {
 			response: {
-				status: res.statusCode,
+				status: c.res.status,
 			},
 			// Anything could extend the error type and have all sorts of fields.
 			// We should be explicit in which fields we're looking for.
@@ -41,9 +45,5 @@ export const requestLoggerMiddleware: RequestHandler = (req, res, next) => {
 				stack: error?.stack,
 			},
 		});
-	});
-
-	loggingStore.run(loggerState, () => {
-		next();
 	});
 };

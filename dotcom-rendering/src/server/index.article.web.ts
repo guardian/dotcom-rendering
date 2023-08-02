@@ -1,4 +1,4 @@
-import type { RequestHandler } from 'express';
+import type { Handler } from 'hono';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { addImageIDs } from '../model/addImageIDs';
 import { buildLightboxImages } from '../model/buildLightboxImages';
@@ -72,19 +72,20 @@ export const enhanceArticleType = (body: unknown): FEArticleType => {
 	};
 };
 
-export const handleArticle: RequestHandler = ({ body }, res) => {
+export const handleArticle: Handler = (context) => {
 	recordTypeAndPlatform('article', 'web');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(context.req.body);
 	const resp = renderHtml({
 		article,
 	});
 
-	res.status(200).send(resp);
+	context.status(200);
+	return context.html(resp);
 };
 
-export const handleArticleJson: RequestHandler = ({ body }, res) => {
+export const handleArticleJson: Handler = (context) => {
 	recordTypeAndPlatform('article', 'json');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(context.req.body);
 	const resp = {
 		data: {
 			// TODO: We should rename this to 'article' or 'FEArticle', but first we need to investigate
@@ -93,26 +94,31 @@ export const handleArticleJson: RequestHandler = ({ body }, res) => {
 		},
 	};
 
-	res.status(200).send(resp);
+	context.status(200);
+	return context.json(resp);
 };
 
-export const handleArticlePerfTest: RequestHandler = (req, res, next) => {
-	req.body = ExampleArticle;
-	handleArticle(req, res, next);
+export const handleArticlePerfTest: Handler = async (context, next) => {
+	context.body = () => new Response(JSON.stringify(ExampleArticle));
+	return handleArticle(context, next);
 };
 
-export const handleInteractive: RequestHandler = ({ body }, res) => {
+export const handleInteractive: Handler = (context) => {
 	recordTypeAndPlatform('interactive', 'web');
-	const article = enhanceArticleType(body);
+	const article = enhanceArticleType(context.req.body);
 	const resp = renderHtml({
 		article,
 	});
 
-	res.status(200).send(resp);
+	context.status(200);
+	return context.html(resp);
 };
 
-export const handleBlocks: RequestHandler = ({ body }, res) => {
+export const handleBlocks: Handler = async (context) => {
 	recordTypeAndPlatform('blocks');
+
+	const body = await context.req.json();
+
 	const {
 		blocks,
 		format,
@@ -152,11 +158,14 @@ export const handleBlocks: RequestHandler = ({ body }, res) => {
 		keywordIds,
 	});
 
-	res.status(200).send(html);
+	context.status(200);
+	return context.html(html);
 };
 
-export const handleKeyEvents: RequestHandler = ({ body }, res) => {
+export const handleKeyEvents: Handler = async (context) => {
 	// TODO: This endpoint is unused - we should consider removing it, talk to Olly 24/05/2023
+
+	const body = await context.req.json();
 
 	recordTypeAndPlatform('keyEvents');
 	const { keyEvents, format, filterKeyEvents } =
@@ -169,5 +178,6 @@ export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 		filterKeyEvents,
 	});
 
-	res.status(200).send(html);
+	context.status(200);
+	return context.html(html);
 };

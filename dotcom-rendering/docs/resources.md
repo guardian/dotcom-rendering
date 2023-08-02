@@ -24,15 +24,13 @@
 - https://babeljs.io/docs/en/
 - https://babeljs.io/docs/en/plugins
 - https://babeljs.io/docs/en/config-files
-    
-## ExpressJS
 
-- https://expressjs.com/en/guide/routing.html
-- https://expressjs.com/en/guide/writing-middleware.html
-- https://expressjs.com/en/guide/using-middleware.html
-- https://expressjs.com/en/guide/error-handling.html
-- https://expressjs.com/en/guide/debugging.html
-- https://expressjs.com/en/advanced/best-practice-performance.html
+## Hono
+
+- https://hono.dev/en/guide/routing.html
+- https://hono.dev/concepts/middleware
+- https://hono.dev/guides/middleware
+- https://hono.dev/api/exception
 
 ## Pm2
 
