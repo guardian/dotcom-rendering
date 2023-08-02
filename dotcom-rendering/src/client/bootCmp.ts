@@ -85,19 +85,21 @@ export const bootCmp = async (): Promise<void> => {
 		submitComponentEvent(event);
 	});
 
-	// Manually updates the footer DOM because it's not hydrated
-	void injectPrivacySettingsLinkWhenReady();
-
-	cmp.init({
-		pubData: {
-			platform: 'next-gen',
-			// If `undefined`, the resulting consent signal cannot be joined to a page view.
-			browserId: browserId ?? undefined,
-			pageViewId,
-		},
-		country: (await getLocaleCode()) ?? undefined,
-	});
-	log('dotcom', 'CMP initialised');
-
-	return Promise.resolve();
+	await Promise.all([
+		// Manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLinkWhenReady(),
+		getLocaleCode().then((code) => {
+			const country = code ?? undefined;
+			cmp.init({
+				pubData: {
+					platform: 'next-gen',
+					// If `undefined`, the resulting consent signal cannot be joined to a page view.
+					browserId: browserId ?? undefined,
+					pageViewId,
+				},
+				country,
+			});
+			log('dotcom', 'CMP initialised');
+		}),
+	]);
 };
