@@ -52,7 +52,7 @@ const contentWrapperStyle = css`
 	padding-bottom: ${space[2]}px;
 
 	h3 {
-		${headlineObjectStyles.xxsmall()};
+		${headlineObjectStyles.xxsmall({ fontWeight: 'bold' })};
 		margin-bottom: ${space[3]}px;
 	}
 
