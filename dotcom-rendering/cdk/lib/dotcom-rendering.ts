@@ -13,6 +13,8 @@ export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
 
+		// This fetches the VPC using the SSM parameter defined for this account
+		// and specifies the CIDR block to use with it here
 		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
 			vpcCidrBlock: '10.248.136.0/22',
 		});
