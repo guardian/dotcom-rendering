@@ -45,6 +45,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
+      "GuSecurityGroup",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -517,6 +518,63 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 "Value",
               ],
             },
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "InternalLoadBalancerSecurityGroupRendering26706C0C": {
+      "Properties": {
+        "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
+        "GroupName": "InternalLoadBalancerSecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "255.255.255.255/32",
+            "Description": "Disallow all traffic",
+            "FromPort": 252,
+            "IpProtocol": "icmp",
+            "ToPort": 86,
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "10.248.136.0/22",
+            "Description": "TCP 80 ingress",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+          {
+            "CidrIp": "10.248.136.0/22",
+            "Description": "TCP 443 ingress",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
