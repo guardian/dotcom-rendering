@@ -77,7 +77,7 @@ const HydratedLayout = ({
 			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
 		// Manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
+		void injectPrivacySettingsLink();
 		doStorybookHydration();
 	}, [serverArticle]);
 
