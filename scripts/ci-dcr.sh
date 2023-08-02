@@ -45,6 +45,8 @@ else
 		make validate-ci
 		make cypress
 	else
+        # Temporarily running cypress on the branch to test if this works
+		make cypress
 		printf "Skipping code checks when not on main"
 	fi
 
