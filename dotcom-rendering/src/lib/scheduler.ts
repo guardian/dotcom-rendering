@@ -1,4 +1,5 @@
-import { log as libsLog, startPerformanceMeasure } from '@guardian/libs';
+import { log as libsLog } from '@guardian/libs';
+import { startPerformanceMeasure } from './startPerformanceMeasure';
 
 const START = performance.now();
 

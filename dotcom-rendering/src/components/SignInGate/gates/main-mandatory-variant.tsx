@@ -1,5 +1,5 @@
-import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
+import { startPerformanceMeasure } from '../../../lib/startPerformanceMeasure';
 import { Lazy } from '../../Lazy';
 import { canShowSignInGateMandatory } from '../displayRule';
 import type { SignInGateComponent } from '../types';
