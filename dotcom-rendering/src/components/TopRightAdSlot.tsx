@@ -15,11 +15,9 @@ import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 export const TopRightAdSlot = ({
 	adStyles,
 	isPaidContent = false,
-	restrictStickyHeight = false,
 }: {
 	adStyles: SerializedStyles[];
 	isPaidContent?: boolean;
-	restrictStickyHeight?: boolean;
 }) => {
 	return (
 		<div
@@ -29,7 +27,7 @@ export const TopRightAdSlot = ({
 				css`
 					position: static;
 					height: 100%;
-					max-height: ${restrictStickyHeight ? '1059px' : '100%'};
+					max-height: 100%;
 				`,
 				adStyles,
 			]}

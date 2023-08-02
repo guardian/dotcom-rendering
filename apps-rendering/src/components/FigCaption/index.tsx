@@ -44,6 +44,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return css(styles(format), mediaStyles);
 		default:
 			return styles(format);

@@ -17,3 +17,9 @@ export const SPACE_BETWEEN_ADS = 900;
  * Unit: pixels
  */
 export const PADDING_BOTTOM = 36;
+
+/**
+ * The height of the right ad slot container
+ * Unit: pixels
+ */
+export const TOP_RIGHT_AD_STICKY_HEIGHT = 1059;
