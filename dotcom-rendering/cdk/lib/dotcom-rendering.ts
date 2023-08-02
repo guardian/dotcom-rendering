@@ -50,9 +50,9 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: cfnParameters,
-			// VpcId: vpc.vpcId,
-			// VPCIpBlock: vpc.vpcCidrBlock,
-			// InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+			VpcId: vpc.vpcId,
+			VPCIpBlock: vpc.vpcCidrBlock,
+			InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
 		});
 	}
 }
