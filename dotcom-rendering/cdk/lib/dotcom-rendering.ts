@@ -22,7 +22,6 @@ export class DotcomRendering extends GuStack {
 			'InternalLoadBalancerSecurityGroup',
 			{
 				app: props.app,
-				securityGroupName: 'InternalLoadBalancerSecurityGroup',
 				description:
 					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
