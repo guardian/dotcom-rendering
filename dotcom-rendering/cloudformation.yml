@@ -104,29 +104,29 @@ Resources:
           Value:
             Fn::FindInMap: [Constants, App, Value]
 
-  InstanceSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: rendering instance
-      VpcId:
-        Ref: VpcId
-      SecurityGroupIngress:
-        # allow ELB to talk to instance
-        - IpProtocol: tcp
-          FromPort: 9000
-          ToPort: 9000
-          SourceSecurityGroupId:
-            Ref: InternalLoadBalancerSecurityGroup
-      Tags:
-        - Key: Stage
-          Value:
-            Ref: Stage
-        - Key: Stack
-          Value:
-            Fn::FindInMap: [Constants, Stack, Value]
-        - Key: App
-          Value:
-            Fn::FindInMap: [Constants, App, Value]
+  # InstanceSecurityGroup:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: rendering instance
+  #     VpcId:
+  #       Ref: VpcId
+  #     SecurityGroupIngress:
+  #       # allow ELB to talk to instance
+  #       - IpProtocol: tcp
+  #         FromPort: 9000
+  #         ToPort: 9000
+  #         SourceSecurityGroupId:
+  #           Ref: InternalLoadBalancerSecurityGroup
+  #     Tags:
+  #       - Key: Stage
+  #         Value:
+  #           Ref: Stage
+  #       - Key: Stack
+  #         Value:
+  #           Fn::FindInMap: [Constants, Stack, Value]
+  #       - Key: App
+  #         Value:
+  #           Fn::FindInMap: [Constants, App, Value]
 
   InstanceRole:
     Type: AWS::IAM::Role
