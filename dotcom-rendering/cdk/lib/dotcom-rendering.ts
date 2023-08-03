@@ -42,6 +42,10 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
+		this.overrideLogicalId(lbSecurityGroup, {
+			logicalId: "InternalLoadBalancerSecurityGroup",
+			reason: "Retaining a stateful resource previously defined in YAML"
+		  });
 
 		const yamlTemplateFilePath = join(
 			__dirname,
