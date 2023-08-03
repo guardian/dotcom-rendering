@@ -85,6 +85,8 @@ export const renderEditorialNewslettersPage = ({
 				switches: newslettersPage.config.switches,
 				abTests: newslettersPage.config.abTests,
 				brazeApiKey: newslettersPage.config.brazeApiKey,
+				googleRecaptchaSiteKey:
+					newslettersPage.config.googleRecaptchaSiteKey,
 			}),
 		),
 	);

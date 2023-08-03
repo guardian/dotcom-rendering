@@ -18,7 +18,7 @@ interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
-	handleSubmitButton: { (): Promise<void> };
+	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
 }
 

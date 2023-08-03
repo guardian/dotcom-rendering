@@ -6,19 +6,19 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
-import type { ChangeEventHandler } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import type { ChangeEventHandler, ReactEventHandler } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ReCAPTCHA } from 'react-google-recaptcha';
+import { isServer } from '../lib/isServer';
+import {
+	getCaptchaSiteKey,
+	reportTrackingEvent,
+	requestMultipleSignUps,
+} from '../lib/newsletter-sign-up-requests';
 import { Flex } from './Flex';
 import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
-
-interface Props {
-	/** The endpoint to send the sign-up request to. An empty string will
-	 * make the component use test results instead of making an actual request.
-	 */
-	apiEndpoint: string;
-}
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
 
@@ -107,44 +107,17 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 	);
 };
 
-/**
- * Placeholder function to represent API call.
- */
-const sendSignUpRequest = async (
-	emailAddress: string,
-	newsletterIds: string[],
-	apiEndpoint: string,
-): Promise<{ ok: boolean; message?: string }> => {
-	if (apiEndpoint === '') {
-		await new Promise((resolve) => {
-			setTimeout(resolve, 2000);
-		});
-
-		if (emailAddress.includes('example')) {
-			return {
-				ok: false,
-				message: `Simulated failed sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
-			};
-		}
-
-		return {
-			ok: true,
-			message: `Simulated sign up of "${emailAddress}" to [${newsletterIds.join()}].`,
-		};
-	}
-
-	return {
-		ok: false,
-		message: `A non-empty endpoint was provided, but actual API calls are not implemented.`,
-	};
-};
-
-export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
+export const ManyNewsletterSignUp = () => {
 	const [newslettersToSignUpFor, setNewslettersToSignUpFor] = useState<
 		string[]
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
+	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const useReCaptcha = isServer
+		? false
+		: !!window.guardian.config.switches['emailSignupRecaptcha'];
+	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
@@ -214,23 +187,73 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 		};
 	}, [toggleNewsletter, newslettersToSignUpFor]);
 
+	const sendRequest = async (reCaptchaToken: string): Promise<void> => {
+		reportTrackingEvent('ManyNewsletterSignUp', 'form-submit', {
+			newsletterIds: newslettersToSignUpFor,
+		});
+
+		const response = await requestMultipleSignUps(
+			email,
+			newslettersToSignUpFor,
+			reCaptchaToken,
+		);
+
+		if (!response.ok) {
+			const responseText = await response.text();
+			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
+				newsletterIds: newslettersToSignUpFor,
+				responseText,
+			});
+
+			return setStatus('Failed');
+		}
+
+		reportTrackingEvent('ManyNewsletterSignUp', 'success-response', {
+			newsletterIds: newslettersToSignUpFor,
+		});
+		setStatus('Success');
+	};
+
 	const handleSubmitButton = async () => {
 		if (status !== 'NotSent') {
 			return;
 		}
-		setStatus('Loading');
 
-		const result = await sendSignUpRequest(
-			email,
-			newslettersToSignUpFor,
-			apiEndpoint,
-		);
-
-		if (result.message) {
-			console.log(result.message);
+		if (!useReCaptcha) {
+			setStatus('Loading');
+			void sendRequest('');
+			return;
 		}
 
-		setStatus(result.ok ? 'Success' : 'Failed');
+		if (!reCaptchaRef.current) {
+			reportTrackingEvent(
+				'ManyNewsletterSignUp',
+				'captcha-not-loaded-when-needed',
+			);
+			return;
+		}
+		setStatus('Loading');
+		// successful execution triggers a call to sendRequest
+		// with the onChange prop on the captcha Component
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-execute');
+		const result = await reCaptchaRef.current.executeAsync();
+
+		if (typeof result !== 'string') {
+			reportTrackingEvent('ManyNewsletterSignUp', 'captcha-failure');
+			setStatus('Failed');
+			return;
+		}
+
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-success');
+		return sendRequest(result);
+	};
+
+	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
+		reportTrackingEvent('ManyNewsletterSignUp', 'captcha-error', {
+			eventType: event.type,
+			status,
+		});
+		reCaptchaRef.current?.reset();
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
@@ -274,6 +297,28 @@ export const ManyNewsletterSignUp = ({ apiEndpoint }: Props) => {
 						<div css={desktopClearButtonWrapperStyle}>
 							<ClearButton removeAll={removeAll} />
 						</div>
+
+						{useReCaptcha && !!captchaSiteKey && (
+							<div
+								css={css`
+									.grecaptcha-badge {
+										visibility: hidden;
+									}
+								`}
+							>
+								<ReCAPTCHA
+									sitekey={captchaSiteKey}
+									ref={reCaptchaRef}
+									onError={handleCaptchaError}
+									size="invisible"
+									// Note - the component supports an onExpired callback
+									// (for when the user completed a challenge, but did
+									// not submit the form before the token expired.
+									// We don't need that here as setting the token
+									// triggers the submission (onChange callback)
+								/>
+							</div>
+						)}
 					</Flex>
 				</div>
 			</Section>
