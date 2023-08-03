@@ -25,6 +25,10 @@ export const notFirstPage = () => (
 				currentPage={2}
 				totalPages={6}
 				format={format}
+				oldest="oldest"
+				older="older"
+				newer="newer"
+				newest="newest"
 			/>
 		))}
 	</>
@@ -40,9 +44,30 @@ export const firstPageStory = () => (
 				currentPage={1}
 				totalPages={4}
 				format={format}
+				oldest="oldest"
+				older="older"
+				newer="newer"
+				newest="newest"
 			/>
 		))}
 	</>
 );
 
 firstPageStory.storyName = 'First page';
+
+export const lastPage = () => (
+	<>
+		{formats.map((format) => (
+			<Pagination
+				key={JSON.stringify(format)}
+				currentPage={9}
+				totalPages={9}
+				format={format}
+				oldest="oldest"
+				older="older"
+				newer="newer"
+				newest="newest"
+			/>
+		))}
+	</>
+);

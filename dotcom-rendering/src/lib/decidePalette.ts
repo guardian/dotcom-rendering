@@ -1446,7 +1446,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return opinion[550];
 				default:
-					return neutral[46];
+					return neutral[86];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -1464,7 +1464,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 					return brandAlt[400];
 				case ArticleSpecial.Labs:
 				default:
-					return BLACK;
+					return neutral[86];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -1486,6 +1486,8 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 					return culture[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
+				default:
+					return neutral[86];
 			}
 		default:
 			switch (format.theme) {
@@ -2076,6 +2078,48 @@ const backgroundAudioAtom = (format: ArticleFormat) => {
 	}
 };
 
+const textExpandableAtom = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[300];
+		case Pillar.Lifestyle:
+			return lifestyle[300];
+		case Pillar.Sport:
+			return sport[300];
+		case Pillar.Culture:
+			return culture[300];
+		case Pillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return lifestyle[300];
+		case ArticleSpecial.SpecialReport:
+			return news[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
+	}
+};
+
+const textExpandableAtomHover = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case Pillar.News:
+			return news[400];
+		case Pillar.Lifestyle:
+			return lifestyle[400];
+		case Pillar.Sport:
+			return sport[400];
+		case Pillar.Culture:
+			return culture[400];
+		case Pillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return news[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2146,6 +2190,8 @@ export const decidePalette = (
 			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
 			tableOfContents: textTableOfContents(),
+			expandableAtom: textExpandableAtom(format),
+			expandableAtomHover: textExpandableAtomHover(format),
 		},
 		background: {
 			article: backgroundArticle(format),

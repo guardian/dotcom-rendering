@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { space, textSans, until } from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -22,74 +22,33 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const NavWrapper = ({ children }: { children: React.ReactNode }) => (
-	<nav
-		// Used to scroll the page to this point when using permalinks
-		id="liveblog-navigation"
-		css={css`
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			padding-top: ${space[1]}px;
-			padding-bottom: ${space[4]}px;
-		`}
-	>
-		{children}
-	</nav>
-);
+/** Used to scroll the page to this point when using permalinks */
+const id = 'liveblog-navigation';
 
-const FlexSection = ({
-	hide = false,
-	children,
-}: {
-	hide?: boolean;
-	children: React.ReactNode;
-}) => (
-	<section
-		css={css`
-			display: flex;
-			align-items: center;
-			visibility: ${hide ? 'hidden' : 'visible'};
-		`}
-	>
-		{children}
-	</section>
-);
+const grid = css`
+	display: grid;
+	grid-template-areas: 'newer position older';
+	grid-template-columns: 1fr auto 1fr;
+	grid-gap: ${space[2]}px;
+	align-items: center;
 
-const Bold = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			font-weight: bold;
-		`}
-	>
-		{children}
-	</div>
-);
+	padding-top: ${space[1]}px;
+	padding-bottom: ${space[4]}px;
+`;
 
-const Position = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: row;
-			${textSans.small()}
-		`}
-	>
-		{children}
-	</div>
-);
+const flexSection = css`
+	display: flex;
+	align-items: center;
+	gap: ${space[2]}px;
 
-const Of = () => <span>&nbsp;of&nbsp;</span>;
+	${from.phablet} {
+		gap: ${space[4]}px;
+	}
+`;
 
-const Space = () => (
-	<div
-		css={css`
-			${until.phablet} {
-				width: ${space[2]}px;
-			}
-			width: ${space[4]}px;
-		`}
-	/>
-);
+const bold = css`
+	font-weight: bold;
+`;
 
 const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
 	color: ${decidePalette(format).text.pagination};
@@ -111,90 +70,117 @@ export const Pagination = ({
 	const cssOverrides = decidePaginationCss(format);
 
 	return (
-		<NavWrapper>
-			<FlexSection hide={currentPage === 1}>
-				<Hide above="phablet">
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronLeftDouble />}
-						iconSide="left"
-						hideLabel={true}
-						href={newest}
-						cssOverrides={cssOverrides}
-					>
-						Newest
-					</LinkButton>
-				</Hide>
-				<Hide below="phablet">
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronLeftDouble />}
-						iconSide="left"
-						href={newest}
-						cssOverrides={cssOverrides}
-					>
-						Newest
-					</LinkButton>
-				</Hide>
-				<Space />
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronLeftSingle />}
-					hideLabel={true}
-					href={newer}
-					cssOverrides={cssOverrides}
+		<nav id={id} css={grid}>
+			{currentPage !== 1 && (
+				<section
+					style={{ gridArea: 'newer', justifySelf: 'start' }}
+					css={flexSection}
 				>
-					Previous
-				</LinkButton>
-			</FlexSection>
-			<FlexSection>
-				<Position>
-					<Bold>{currentPage}</Bold>
-					<Of />
-					<Bold>{totalPages}</Bold>
-				</Position>
-			</FlexSection>
-			<FlexSection hide={currentPage === totalPages}>
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronRightSingle />}
-					hideLabel={true}
-					href={older}
-					cssOverrides={cssOverrides}
+					{!!newest && (
+						<>
+							<Hide from="phablet">
+								<LinkButton
+									size="small"
+									priority="tertiary"
+									icon={<SvgChevronLeftDouble />}
+									iconSide="left"
+									hideLabel={true}
+									// There’s no pagination at the top of the newest page
+									href={`${newest}#maincontent`}
+									cssOverrides={cssOverrides}
+								>
+									Newest
+								</LinkButton>
+							</Hide>
+							<Hide until="phablet">
+								<LinkButton
+									size="small"
+									priority="tertiary"
+									icon={<SvgChevronLeftDouble />}
+									iconSide="left"
+									// There’s no pagination at the top of the newest page
+									href={`${newest}#maincontent`}
+									cssOverrides={cssOverrides}
+								>
+									Newest
+								</LinkButton>
+							</Hide>
+						</>
+					)}
+					{!!newer && (
+						<LinkButton
+							size="small"
+							priority="tertiary"
+							icon={<SvgChevronLeftSingle />}
+							hideLabel={true}
+							href={`${newer}#${id}`}
+							cssOverrides={cssOverrides}
+						>
+							Previous
+						</LinkButton>
+					)}
+				</section>
+			)}
+
+			<section
+				style={{ gridArea: 'position' }}
+				css={css`
+					${textSans.small()}
+				`}
+			>
+				<strong css={bold}>{currentPage}</strong>
+				&nbsp;of&nbsp;
+				<strong css={bold}>{totalPages}</strong>
+			</section>
+
+			{currentPage !== totalPages && (
+				<section
+					style={{ gridArea: 'older', justifySelf: 'end' }}
+					css={flexSection}
 				>
-					Next
-				</LinkButton>
-				<Space />
-				<Hide above="phablet">
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronRightDouble />}
-						iconSide="right"
-						href={oldest}
-						hideLabel={true}
-						cssOverrides={cssOverrides}
-					>
-						Oldest
-					</LinkButton>
-				</Hide>
-				<Hide below="phablet">
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronRightDouble />}
-						iconSide="right"
-						href={oldest}
-						cssOverrides={cssOverrides}
-					>
-						Oldest
-					</LinkButton>
-				</Hide>
-			</FlexSection>
-		</NavWrapper>
+					{!!older && (
+						<LinkButton
+							size="small"
+							priority="tertiary"
+							icon={<SvgChevronRightSingle />}
+							hideLabel={true}
+							href={`${older}#${id}`}
+							cssOverrides={cssOverrides}
+						>
+							Next
+						</LinkButton>
+					)}
+					{!!oldest && (
+						<>
+							<Hide from="phablet">
+								<LinkButton
+									size="small"
+									priority="tertiary"
+									icon={<SvgChevronRightDouble />}
+									iconSide="right"
+									href={`${oldest}#${id}`}
+									hideLabel={true}
+									cssOverrides={cssOverrides}
+								>
+									Oldest
+								</LinkButton>
+							</Hide>
+							<Hide until="phablet">
+								<LinkButton
+									size="small"
+									priority="tertiary"
+									icon={<SvgChevronRightDouble />}
+									iconSide="right"
+									href={`${oldest}#${id}`}
+									cssOverrides={cssOverrides}
+								>
+									Oldest
+								</LinkButton>
+							</Hide>
+						</>
+					)}
+				</section>
+			)}
+		</nav>
 	);
 };

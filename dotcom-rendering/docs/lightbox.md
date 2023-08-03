@@ -78,7 +78,7 @@ This file contains the logic for how lightbox operates.
 
 The React aspect of this file is small. It immediately returns a call to React.createPortal to insert the `LightboxImages` html and then executes a useEffect to run the `initialiseLightbox` function.
 
-Both of these calls only happen once. There is no react state to trigger re-renders and the Islands archetecure prevents hydration repeating using the `data-gu-ready` flag. This flag is set at the end of the `initialiseLightbox` function.
+Both of these calls only happen once. There is no react state to trigger re-renders and the Islands archetecure prevents hydration repeating using the `data-island-status` flag. This flag is set at the end of the `initialiseLightbox` function.
 
 #### `initialiseLightbox`
 

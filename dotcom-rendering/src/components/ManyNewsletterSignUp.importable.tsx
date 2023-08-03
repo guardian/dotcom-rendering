@@ -22,6 +22,14 @@ import { Section } from './Section';
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
 
+// To align the heading content with the carousel below
+// from desktop
+const contentWrapperStyle = css`
+	${from.leftCol} {
+		padding-left: 10px;
+	}
+`;
+
 const sectionWrapperStyle = (hide: boolean) => css`
 	display: ${hide ? 'none' : 'unset'};
 	position: fixed;
@@ -34,7 +42,8 @@ const sectionWrapperStyle = (hide: boolean) => css`
 
 const desktopClearButtonWrapperStyle = css`
 	display: none;
-	padding: ${space[1]}px;
+	padding-left: ${space[1]}px;
+	margin-right: -10px;
 	${from.leftCol} {
 		display: block;
 	}
@@ -55,6 +64,7 @@ interface ClearButtonProps {
 }
 const ClearButton = ({ removeAll }: ClearButtonProps) => (
 	<Button
+		size="small"
 		color={palette.neutral[0]}
 		onClick={removeAll}
 		hideLabel={true}
@@ -74,7 +84,7 @@ const Caption = ({ count, forDesktop = false }: CaptionProps) => {
 		? headlineObjectStyles.xsmall({
 				fontWeight: 'regular',
 		  })
-		: headlineObjectStyles.xxsmall({
+		: headlineObjectStyles.xxxsmall({
 				fontWeight: 'bold',
 		  });
 
@@ -259,6 +269,8 @@ export const ManyNewsletterSignUp = () => {
 				backgroundColour={palette.brand[800]}
 				showSideBorders={false}
 				stretchRight={true}
+				leftColSize="wide"
+				padContent={false}
 				leftContent={
 					<Caption
 						count={newslettersToSignUpFor.length}
@@ -271,42 +283,44 @@ export const ManyNewsletterSignUp = () => {
 					<ClearButton removeAll={removeAll} />
 				</div>
 
-				<Flex>
-					<ManyNewslettersForm
-						{...{
-							email,
-							handleSubmitButton,
-							handleTextInput,
-							status,
-						}}
-						newsletterCount={newslettersToSignUpFor.length}
-					/>
-					<div css={desktopClearButtonWrapperStyle}>
-						<ClearButton removeAll={removeAll} />
-					</div>
-
-					{useReCaptcha && !!captchaSiteKey && (
-						<div
-							css={css`
-								.grecaptcha-badge {
-									visibility: hidden;
-								}
-							`}
-						>
-							<ReCAPTCHA
-								sitekey={captchaSiteKey}
-								ref={reCaptchaRef}
-								onError={handleCaptchaError}
-								size="invisible"
-								// Note - the component supports an onExpired callback
-								// (for when the user completed a challenge, but did
-								// not submit the form before the token expired.
-								// We don't need that here as setting the token
-								// triggers the submission (onChange callback)
-							/>
+				<div css={contentWrapperStyle}>
+					<Flex>
+						<ManyNewslettersForm
+							{...{
+								email,
+								handleSubmitButton,
+								handleTextInput,
+								status,
+							}}
+							newsletterCount={newslettersToSignUpFor.length}
+						/>
+						<div css={desktopClearButtonWrapperStyle}>
+							<ClearButton removeAll={removeAll} />
 						</div>
-					)}
-				</Flex>
+
+						{useReCaptcha && !!captchaSiteKey && (
+							<div
+								css={css`
+									.grecaptcha-badge {
+										visibility: hidden;
+									}
+								`}
+							>
+								<ReCAPTCHA
+									sitekey={captchaSiteKey}
+									ref={reCaptchaRef}
+									onError={handleCaptchaError}
+									size="invisible"
+									// Note - the component supports an onExpired callback
+									// (for when the user completed a challenge, but did
+									// not submit the form before the token expired.
+									// We don't need that here as setting the token
+									// triggers the submission (onChange callback)
+								/>
+							</div>
+						)}
+					</Flex>
+				</div>
 			</Section>
 		</div>
 	);

@@ -509,7 +509,7 @@ const media: Item = {
 };
 
 const cartoon: Item = {
-	design: ArticleDesign.Gallery,
+	design: ArticleDesign.Picture,
 	...fields,
 	body: [],
 };

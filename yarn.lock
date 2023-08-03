@@ -3088,17 +3088,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-5.0.0.tgz#cce32ff4cdfb6b24c013723bf352dcd61135d34d"
   integrity sha512-Td5gtK2sARl+fXj1Qe6RuFqf/zxuZjW1q2Jck09zXPIfMgU+sJoTi549zbNeC1cldCBhPWy/qPQ0r+8klfF7jg==
 
-"@guardian/atoms-rendering@32.2.0":
-  version "32.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-32.2.0.tgz#00db2120252060e5e0c5b3b4b45897d18864cec4"
-  integrity sha512-14BFR+rb6iQ4qYcqX/aPt/C3iVYSfKrHZj5ps9EbDeOx8dKejohsLyPiPKaNkPj+M0CTH42r8kcOjatx4Yx1yw==
+"@guardian/atoms-rendering@33.0.0":
+  version "33.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-33.0.0.tgz#aee296d42b928feb53f10dbdde761c96a4df7af1"
+  integrity sha512-nOVNewOTydkg/silbls/15v+fG/4bWqa+RcOwiDGu00Awev6wdRfUir0vG+cqVBXVxXhZ5HcOfX6bkPnCg8l0g==
   dependencies:
     is-mobile "3.1.1"
 
-"@guardian/braze-components@14.1.0":
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.1.0.tgz#3b362f66cc4c37920ed452187a7cc33dec9314a0"
-  integrity sha512-SsTrqdYfNq9k63VhicCrnF0WhWCwhxZKyERVzTt5NMt4mG4iWqrrpa+G7SdVQockf3OYEizv4WJtPRt/N1F9pg==
+"@guardian/braze-components@14.1.1":
+  version "14.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-14.1.1.tgz#12672e3992ad3eab3bade848861ca01631a0edf5"
+  integrity sha512-wHuJwdOC2hsTBie+zWJYFyasP4fOJXOPcKXpN2Cp+GlljPah3YtS2Fbgn8pcxxt8d5JKO9ra7sHKvX8FNxkAyg==
 
 "@guardian/bridget@2.3.0":
   version "2.3.0"
@@ -3129,10 +3129,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.6.2"
 
-"@guardian/commercial@10.6.0":
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.6.0.tgz#315325ce9625540bb22574bad9eace2552543706"
-  integrity sha512-xs50dVkUrSwRtH3Y3e1ruDkQTpL+lT1nbZHyiml5JYYzs1VCOoVBWlFdTbuKeXRLoMrmWQB6A2/wkS+eGUccZg==
+"@guardian/commercial@10.10.0":
+  version "10.10.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial/-/commercial-10.10.0.tgz#d610162aab654bee0b38d7f2d9d6e088a5e2eb53"
+  integrity sha512-QnSRLI9vuOOREZtFC5PP8y7YQXF5FjJIGbcf/DNIAbJTRxejeA2Mr4nj5SzYL6zryvUtRjeGXhilCTk5cMFSkA==
   dependencies:
     "@changesets/cli" "^2.26.1"
     "@guardian/ab-core" "^5.0.0"
@@ -3157,10 +3157,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-13.5.0.tgz#61a97c823f6b18f62a6517a3374f6e7bdfca121d"
   integrity sha512-9iz04lyonWAbUeZ7B+fNp0KbgAervsWDO3A4CE/3e+d876AQj0I3TwU7W4jpWxI4tthcA6UVk7Y6faaS8l+lFw==
 
-"@guardian/core-web-vitals@5.0.0", "@guardian/core-web-vitals@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.0.0.tgz#ab74da6001427f3414a84d15f57bac1a888a140a"
-  integrity sha512-Mq3v8Y/YJGs7p/8NWmYHFKdVqRThjDJSfpoo1zSb6DgpQ1Ko8RjvOa2Q9P9ABWfKJCaDp0kcGK3dk0AjDSi/Qw==
+"@guardian/core-web-vitals@5.1.0", "@guardian/core-web-vitals@^5.0.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-5.1.0.tgz#1a7224ff69e773e30698fa16bdd5be608a554ebf"
+  integrity sha512-/6L5Ri+/bXBAZ6na8zQ30I1+eHXBHyGFNiLAGvw1bryOnbq2PjCLkmyHQq0EisWCXBWMvdB7p2HdS1DmFLM3Jg==
 
 "@guardian/eslint-config-typescript@6.0.1":
   version "6.0.1"
@@ -3182,23 +3182,23 @@
     eslint-plugin-eslint-comments "3.2.0"
     eslint-plugin-import "2.27.5"
 
-"@guardian/eslint-plugin-source-react-components@17.0.0":
-  version "17.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-17.0.0.tgz#56a2545c62ff3864fd51ea91b1ca5220fcad681d"
-  integrity sha512-E2F47A4Cin8vVt2oRBnc9yUxyXqZHLs2DKvjpfHX35O5uQ3ubdGa4QrOIgUayy+Ar27lEtLv7HhJkdH+Y3FLeA==
+"@guardian/eslint-plugin-source-react-components@18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-18.0.0.tgz#a1b3279d90c2fc9250b6437c21cebdd30a969321"
+  integrity sha512-dIQsHg5T9gPvfR0Sd/EO1cWmqbFVort/9ScZc7lXLlSSAmPv0Sui0+Pz8NwhDjtnVDRbW+4A9gmVoIKw+bEwOQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.46.1"
     "@typescript-eslint/parser" "5.59.9"
 
-"@guardian/identity-auth@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.2.0.tgz#aaad1667095c5ba4bc7610e1a119ec007c249307"
-  integrity sha512-4bKanidGEH+VKaYQNNcS2y8ubmxfzMicr+wiIDsdosxicn3mLA1Hw0kHiaZm1vroo3JKp4442qVba3Z8Ot5vPA==
+"@guardian/identity-auth@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.4.0.tgz#11fc3b9daec7b4186cf0822b18d6379dbdac8ce5"
+  integrity sha512-+lXmoMhrACvibKYBIwKQ15zyWGiGKC+mOg8831R8ilwF3vwXuXnzCLy1EpLTlSfDf72IOAuGyX4gDOqdQP8R/w==
 
-"@guardian/libs@15.3.0":
-  version "15.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.3.0.tgz#fbb133b33a9704bb5699ea2be5a9fcd556e7a5bb"
-  integrity sha512-qWQy6L6HsXgZEJwVREWLmsJRZ6jwkQM5d6kSXV+arlQipkrRMy3n2eacNTqC/bn7WTBcVBPkbLWFslTsig9Vyg==
+"@guardian/libs@15.6.1":
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.6.1.tgz#ee6ad1fc33631c4c9c23892114c90c8d915ba41c"
+  integrity sha512-uicGZF7HRzodAa2zhhD5Qm4NK0iBSLwRPOGG7j8H2Y5VUgoMHz4hPYTGUg8FfFi3QApuxfxqN5QjCh2dJrsIvw==
 
 "@guardian/libs@^10.0.0":
   version "10.1.1"
@@ -3210,7 +3210,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.1.0.tgz#a919fd08cb298cba0b7363d128f0da38e598ec98"
   integrity sha512-1USL3EuhwhyUANjWeVBZx2mRVCydE0QAzUIOV2ukojp92ZAWyt2RqxV8luTEPgUxbDAtma9MuO6lgTshTk5nYw==
 
-"@guardian/prettier@4.0.0", "@guardian/prettier@^4.0.0":
+"@guardian/prettier@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-5.0.0.tgz#0cd36b105512510192ea9fd18da3d3df2d7b3b72"
+  integrity sha512-gJSQuuP7JVDOWQj4EUrwyJTnMt+frLkw0D2sLg70nHn76L3LmH2xTQtYMPUsqyqn37qocDPzgdvBdmATi50zRQ==
+
+"@guardian/prettier@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-4.0.0.tgz#1ad1d7d079194937bfd0107789dde7b0fb84fa11"
   integrity sha512-JvvnDnI04NcmpuD2mF5ZXTWI7tand1pj1s33fh4JxHNAV00QXwTWZBI2/QWS3ck7KjpYjpRaz8CDUcMz35hReg==
@@ -3222,22 +3227,29 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-foundations@12.0.0", "@guardian/source-foundations@^12.0.0":
+"@guardian/source-foundations@13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-13.0.0.tgz#3e8f4e67dcd5fe706001fd04df582f69210b132f"
+  integrity sha512-1+z20ySfwm0K2GiQXh2JlWIjOKBwHxISRdAgAKivOdT1QUCh5VdU+2xCVE07juMI4lBBfIzXe/qZXAI7II6tQQ==
+  dependencies:
+    mini-svg-data-uri "1.4.4"
+
+"@guardian/source-foundations@^12.0.0":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/source-foundations/-/source-foundations-12.0.0.tgz#3f75d5dd26dae0d3fe13fd93aabe1e837cf0ddbb"
   integrity sha512-sq+htAsvPlaZBjfSZ8ISZZdAnFQwuZ7xeCrI/C369HA+MDl3pQ1dFWz3YmqCP/vkXS8Wr3qVlxXNqWGwKKrYrw==
   dependencies:
     mini-svg-data-uri "1.4.4"
 
-"@guardian/source-react-components-development-kitchen@13.0.1":
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-13.0.1.tgz#c8072f9369cbb06272d9f9174c2f6637d258c885"
-  integrity sha512-aQ39E0qQ6KCDgJqTnxG7d36HWfmHcLVImbDq/4TnbFGV100CUtPe19VBzMKgGP7/CYYnC22QKDa6cNgVcZysjQ==
+"@guardian/source-react-components-development-kitchen@14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-14.0.0.tgz#9678ae07aa745f62df6b44d2d56f4a502c8f569e"
+  integrity sha512-hl295B88dKpkv7NJl7vzx0wT+luUSSXcZes64B0F1lW0y6NtiRGkEsLQ6gnSTPfXM04FDd2jeZR4nFMsMypieQ==
 
-"@guardian/source-react-components@15.0.1":
-  version "15.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-15.0.1.tgz#c584f507181fc88761bf702b7a6068b28a54003b"
-  integrity sha512-a4IBy0wmvb7UvnsT41I7VRdxeGaYz7l3LTV8PUE7swmS5UC/6SCQjOmsmXE54UiasdolUGMEt6C5p5oTxTDrdg==
+"@guardian/source-react-components@16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-16.0.0.tgz#2d04a3cd2443ed46de2533351f89082eaccc2365"
+  integrity sha512-oSRa1TjRvbnfYIEa+qMz23aCM6V73pIvP2ca64dP9dNopNR1PgooNlf7PihjXDEkyBo4ks9udMRzzAd3nfst6A==
 
 "@guardian/support-dotcom-components@1.0.7", "@guardian/support-dotcom-components@^1.0.7":
   version "1.0.7"
@@ -5782,10 +5794,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/yarnpkg__lockfile@1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@types/yarnpkg__lockfile/-/yarnpkg__lockfile-1.1.5.tgz#9639020e1fb65120a2f4387db8f1e8b63efdf229"
-  integrity sha512-8NYnGOctzsI4W0ApsP/BIHD/LnxpJ6XaGf2AZmz4EyDYJMxtprN4279dLNI1CPZcwC9H18qYcaFv4bXi0wmokg==
+"@types/yarnpkg__lockfile@1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@types/yarnpkg__lockfile/-/yarnpkg__lockfile-1.1.6.tgz#60a35ede6197d8cbedd5bb8393f3921e8d56d44b"
+  integrity sha512-kbdQa3J+hVCkqmGQm31fthEwGxszZtepw84p9QGCiJB7TmiPqPAf3/g9eZUnkCeanmiFOaG4pVhiPDyqJxaoaw==
 
 "@types/yauzl@^2.9.1":
   version "2.10.0"

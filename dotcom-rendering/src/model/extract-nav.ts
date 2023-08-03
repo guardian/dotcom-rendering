@@ -16,6 +16,7 @@ export interface LinkType extends BaseLinkType {
 export interface EditionLinkType extends LinkType {
 	editionId: EditionId;
 	locale: string;
+	timeZone: string;
 }
 
 export interface PillarLinkType extends LinkType {

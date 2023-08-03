@@ -35,6 +35,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
+import { LiveblogRightAdSlots } from '../components/LiveblogRightAdSlots';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
@@ -175,7 +176,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
-					grid-template-columns: 240px 700px 1fr;
+					grid-template-columns: 240px 700px 300px;
 					grid-template-areas:
 						'info		media		right-column'
 						'info		body		right-column';
@@ -1113,16 +1114,9 @@ export const LiveLayout = ({
 								>
 									<RightColumn>
 										{renderAds && (
-											<AdSlot
-												position="right"
+											<LiveblogRightAdSlots
 												display={format.display}
-												shouldHideReaderRevenue={
-													article.shouldHideReaderRevenue
-												}
-												isPaidContent={
-													article.pageType
-														.isPaidContent
-												}
+												isPaidContent={isPaidContent}
 											/>
 										)}
 									</RightColumn>

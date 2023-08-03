@@ -12,7 +12,7 @@ See: https://addyosmani.com/blog/rehydration/
 
 ### Before
 
-We used App.tsx which was a global react app that let us have shared state between isands. For lazy loading we employed React Loadable Components. From there, we used a component called `HydrateOnce` which was designed to only execute once even though the global react was triggering re-renders as state changed.
+We used App.tsx which was a global react app that let us have shared state between islands. For lazy loading we employed React Loadable Components. From there, we used a component called `HydrateOnce` which was designed to only execute once even though the global react was triggering re-renders as state changed.
 
 This was problematic because sometimes you had dependencies on global state so to get around this we added the `waitFor` prop.
 
@@ -27,7 +27,7 @@ To create a new island you had to:
 
 ### After
 
-PRs #3629 & #3784 simplify the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
+PRs #[3629](https://github.com/guardian/dotcom-rendering/pull/3629) & [#3784](https://github.com/guardian/dotcom-rendering/pull/3784) simplify the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
 
 To create a new island you now:
 
