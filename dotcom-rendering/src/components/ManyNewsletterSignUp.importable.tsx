@@ -124,9 +124,7 @@ export const ManyNewsletterSignUp = () => {
 			: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
-	const userCanInteract = ['NotSent', 'Failed', 'InvalidEmail'].includes(
-		status,
-	);
+	const userCanInteract = status !== 'Success' && status !== 'Loading';
 
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
