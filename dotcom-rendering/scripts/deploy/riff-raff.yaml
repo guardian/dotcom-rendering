@@ -35,7 +35,6 @@ deployments:
   frontend-static:
     type: aws-s3
     parameters:
-	  asgMigrationInProgress: true
       bucketSsmKey: /account/services/dotcom-static.bucket
       cacheControl: public, max-age=315360000, immutable
       prefixStack: false
