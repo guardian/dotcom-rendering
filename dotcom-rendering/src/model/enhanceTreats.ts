@@ -11,7 +11,7 @@ const SOCCER_TREAT: TreatType = {
 		},
 	],
 	theme: Pillar.Sport,
-	imageUrl: 'https://uploads.guim.co.uk/2023/07/26/soccer-treat-v1.png',
+	imageUrl: 'https://uploads.guim.co.uk/2023/08/03/Soccer-v7_TREAT.png',
 	altText: 'Soccer ball',
 };
 
