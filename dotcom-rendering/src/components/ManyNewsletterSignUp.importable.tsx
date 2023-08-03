@@ -199,10 +199,14 @@ export const ManyNewsletterSignUp = () => {
 			email,
 			newslettersToSignUpFor,
 			reCaptchaToken,
-		);
+		).catch(() => {
+			return undefined;
+		});
 
-		if (!response.ok) {
-			const responseText = await response.text();
+		if (!response?.ok) {
+			const responseText = response
+				? await response.text()
+				: '[fetch failure - no response]';
 			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
 				newsletterIds: newslettersToSignUpFor,
 				responseText,
