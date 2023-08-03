@@ -9,14 +9,13 @@ import {
 	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { log, storage } from '@guardian/libs';
+import { log, startPerformanceMeasure, storage } from '@guardian/libs';
 import { record } from '../../client/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
 } from '../hasCurrentBrazeUser';
-import { startPerformanceMeasure } from '../startPerformanceMeasure';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
 

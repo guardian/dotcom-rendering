@@ -1,25 +1,17 @@
-import { log } from '@guardian/libs';
-import { startPerformanceMeasure } from '../lib/startPerformanceMeasure';
+import { log, startPerformanceMeasure } from '@guardian/libs';
 
 const measure = (name: string, task: () => Promise<void>): void => {
-	try {
-		const { endPerformanceMeasure } = startPerformanceMeasure(
-			'dotcom',
-			name,
-		);
+	const { endPerformanceMeasure } = startPerformanceMeasure('dotcom', name);
 
-		task()
-			.then(() => {
-				const duration = endPerformanceMeasure();
-				log('dotcom', `🥾 Booted ${name} in ${duration}ms`);
-			})
-			.catch(() => {
-				const duration = endPerformanceMeasure();
-				log('dotcom', `🤒 Failed to boot ${name} in ${duration}ms`);
-			});
-	} catch (error) {
-		// performance APIs are unsupported or broken…
-	}
+	task()
+		.then(() => {
+			const duration = endPerformanceMeasure();
+			log('dotcom', `🥾 Booted ${name} in ${duration}ms`);
+		})
+		.catch(() => {
+			const duration = endPerformanceMeasure();
+			log('dotcom', `🤒 Failed to boot ${name} in ${duration}ms`);
+		});
 };
 
 export const startup = (name: string, task: () => Promise<void>): void => {

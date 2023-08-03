@@ -3195,10 +3195,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/identity-auth/-/identity-auth-0.4.0.tgz#11fc3b9daec7b4186cf0822b18d6379dbdac8ce5"
   integrity sha512-+lXmoMhrACvibKYBIwKQ15zyWGiGKC+mOg8831R8ilwF3vwXuXnzCLy1EpLTlSfDf72IOAuGyX4gDOqdQP8R/w==
 
-"@guardian/libs@15.4.0":
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.4.0.tgz#725191fab57a036f7180f7e3a127214d0c20736c"
-  integrity sha512-UnLLRnVNHhuBE8uRSx3b0rjpjovFK7lSbnfCZ5jZqabEutkZimkNdW4DX95y3QWDHJT/faHo3kV7heiXKbiO3g==
+"@guardian/libs@15.6.1":
+  version "15.6.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-15.6.1.tgz#ee6ad1fc33631c4c9c23892114c90c8d915ba41c"
+  integrity sha512-uicGZF7HRzodAa2zhhD5Qm4NK0iBSLwRPOGG7j8H2Y5VUgoMHz4hPYTGUg8FfFi3QApuxfxqN5QjCh2dJrsIvw==
 
 "@guardian/libs@^10.0.0":
   version "10.1.1"
