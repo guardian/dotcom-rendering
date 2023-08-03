@@ -363,7 +363,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "IpProtocol": "tcp",
             "SourceSecurityGroupId": {
               "Fn::GetAtt": [
-                "InternalLoadBalancerSecurityGroupRendering26706C0C",
+                "InternalLoadBalancerSecurityGroup",
                 "GroupId",
               ],
             },
@@ -458,7 +458,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "InternalLoadBalancerSecurityGroupRendering26706C0C",
+              "InternalLoadBalancerSecurityGroup",
               "GroupId",
             ],
           },
@@ -497,7 +497,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
     },
-    "InternalLoadBalancerSecurityGroupRendering26706C0C": {
+    "InternalLoadBalancerSecurityGroup": {
       "Properties": {
         "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupEgress": [
