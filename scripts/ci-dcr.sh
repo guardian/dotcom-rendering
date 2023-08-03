@@ -53,6 +53,7 @@ else
 		fi
 	else
 		printf "Skipping code checks when not on main"
+		make cypress
 	fi
 
     make riffraff-publish
