@@ -9,7 +9,6 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-/** @type {{ object: import('@types/yarnpkg__lockfile').LockFileObject }}*/
 const { object: json } = lockfile.parse(
 	fs.readFileSync('../yarn.lock', 'utf8'),
 );
