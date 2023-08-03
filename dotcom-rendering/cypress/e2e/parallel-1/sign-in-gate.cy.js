@@ -254,7 +254,7 @@ describe('Sign In Gate Tests', function () {
 				);
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
-					.and('contains', '/signin?returnUrl=')
+					.and('contains', '/register?returnUrl=')
 					.and('match', /componentId%3Dmain_variant_\d/)
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
@@ -489,7 +489,7 @@ describe('Sign In Gate Tests', function () {
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
-						.and('contains', '/signin?returnUrl=')
+						.and('contains', '/register?returnUrl=')
 						.and(
 							'not.match',
 							/componentId%3Dmain_variant_\d_personalised/,
