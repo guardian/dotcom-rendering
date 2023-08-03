@@ -19,6 +19,7 @@ export const polyfillIO = new URL(
 				'navigator.sendBeacon',
 				'performance.now',
 				'Promise.allSettled',
+				'Promise.prototype.finally',
 			].join(','),
 			flags: 'gated',
 			callback: 'guardianPolyfilled',
