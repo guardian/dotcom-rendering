@@ -91,7 +91,12 @@ export const successMessageStyle = css`
 		fontWeight: 'bold',
 	})}
 
+	padding-bottom: ${space[12]}px;
+	max-width: 340px;
+
 	${from.desktop} {
+		padding-bottom: 0;
+		max-width: unset;
 		flex-basis: 340px;
 	}
 `;
@@ -133,34 +138,36 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			{status !== 'Success' ? (
-				<div css={formFieldsStyle}>
-					<span css={inputWrapperStyle}>
-						<TextInput
-							label="Enter your email"
-							value={email}
-							onChange={handleTextInput}
-							error={errorMessage}
-							disabled={status === 'Loading'}
-						/>
-					</span>
-					<Button
-						aria-label={ariaLabel}
-						isLoading={status === 'Loading'}
-						iconSide="right"
-						onClick={() => {
-							void handleSubmitButton();
-						}}
-						cssOverrides={signUpButtonStyle}
-					>
-						Sign up
-					</Button>
-				</div>
-			) : (
-				<p css={successMessageStyle}>
-					You are now a subscriber! Thank you for signing up
-				</p>
-			)}
+			<div css={formFieldsStyle}>
+				{status !== 'Success' ? (
+					<>
+						<span css={inputWrapperStyle}>
+							<TextInput
+								label="Enter your email"
+								value={email}
+								onChange={handleTextInput}
+								error={errorMessage}
+								disabled={status === 'Loading'}
+							/>
+						</span>
+						<Button
+							aria-label={ariaLabel}
+							isLoading={status === 'Loading'}
+							iconSide="right"
+							onClick={() => {
+								void handleSubmitButton();
+							}}
+							cssOverrides={signUpButtonStyle}
+						>
+							Sign up
+						</Button>
+					</>
+				) : (
+					<p css={successMessageStyle}>
+						You are now a subscriber! Thank you for signing up
+					</p>
+				)}
+			</div>
 		</form>
 	);
 };
