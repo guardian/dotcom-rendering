@@ -20,9 +20,6 @@ import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
-// TO DO - remove before merging
-const IN_DEV_MODE = true as boolean;
-
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 
@@ -118,10 +115,9 @@ export const ManyNewsletterSignUp = () => {
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
 	const reCaptchaRef = useRef<ReCAPTCHA>(null);
-	const useReCaptcha =
-		isServer || IN_DEV_MODE
-			? false
-			: !!window.guardian.config.switches['emailSignupRecaptcha'];
+	const useReCaptcha = isServer
+		? false
+		: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
 	const userCanInteract = status !== 'Success' && status !== 'Loading';
@@ -199,28 +195,11 @@ export const ManyNewsletterSignUp = () => {
 			newsletterIds: newslettersToSignUpFor,
 		});
 
-		const response = IN_DEV_MODE
-			? await new Promise<Response>((resolve) => {
-					setTimeout(() => {
-						resolve({
-							ok: false,
-							text() {
-								return new Promise<string>((resolveText) => {
-									resolveText(
-										`fake response text ${Math.random().toPrecision(
-											5,
-										)}`,
-									);
-								});
-							},
-						} as Response);
-					}, 2000);
-			  })
-			: await requestMultipleSignUps(
-					email,
-					newslettersToSignUpFor,
-					reCaptchaToken,
-			  );
+		const response = await requestMultipleSignUps(
+			email,
+			newslettersToSignUpFor,
+			reCaptchaToken,
+		);
 
 		if (!response.ok) {
 			const responseText = await response.text();
