@@ -654,12 +654,16 @@ export const AdSlot = ({
 							'ad-slot--rendered',
 						].join(' ')}
 						css={[
+							fluidAdStyles,
+							fluidFullWidthAdStyles,
 							css`
 								position: relative;
 								min-height: 450px;
+
+								&.ad-slot--fluid {
+									min-height: 450px;
+								}
 							`,
-							fluidAdStyles,
-							fluidFullWidthAdStyles,
 						]}
 						data-link-name="ad slot article-end"
 						data-name="article-end"
