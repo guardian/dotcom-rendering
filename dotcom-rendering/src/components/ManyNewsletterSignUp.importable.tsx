@@ -23,7 +23,8 @@ import { Section } from './Section';
 // TO DO - remove before merging
 const IN_DEV_MODE = true as boolean;
 
-type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 
 // To align the heading content with the carousel below
 // from desktop
@@ -123,9 +124,13 @@ export const ManyNewsletterSignUp = () => {
 			: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
+	const userCanInteract = ['NotSent', 'Failed', 'InvalidEmail'].includes(
+		status,
+	);
+
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (status !== 'NotSent') {
+			if (!userCanInteract) {
 				return;
 			}
 			const { target: button } = event;
@@ -156,11 +161,11 @@ export const ManyNewsletterSignUp = () => {
 				button.setAttribute('aria-label', ariaLabelText);
 			}
 		},
-		[newslettersToSignUpFor, status],
+		[newslettersToSignUpFor, userCanInteract],
 	);
 
 	const removeAll = useCallback(() => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
 		}
 		const signUpButtons = [
@@ -175,7 +180,7 @@ export const ManyNewsletterSignUp = () => {
 		});
 
 		setNewslettersToSignUpFor([]);
-	}, [status]);
+	}, [userCanInteract]);
 
 	useEffect(() => {
 		const signUpButtons = [
@@ -236,7 +241,12 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleSubmitButton = async () => {
-		if (status !== 'NotSent' && status !== 'Failed') {
+		if (!userCanInteract) {
+			return;
+		}
+
+		if (!emailRegex.test(email)) {
+			setStatus('InvalidEmail');
 			return;
 		}
 
@@ -278,8 +288,11 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
+		}
+		if (status === 'InvalidEmail' && emailRegex.test(email)) {
+			setStatus('NotSent');
 		}
 		setEmail(ev.target.value);
 	};

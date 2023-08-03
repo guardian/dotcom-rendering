@@ -11,7 +11,7 @@ import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 interface FormProps {
-	status: 'NotSent' | 'Loading' | 'Success' | 'Failed';
+	status: 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
 	handleSubmitButton: { (): Promise<void> | void };
@@ -108,6 +108,13 @@ export const ManyNewslettersForm = ({
 			? 'Sign up for the newsletter you selected'
 			: `Sign up for the ${newsletterCount} newsletters you selected`;
 
+	const errorMessage =
+		status === 'Failed'
+			? 'Sign up failed. Please try again'
+			: status === 'InvalidEmail'
+			? 'Please enter a valid email address'
+			: undefined;
+
 	return (
 		<form
 			aria-label="sign-up confirmation form"
@@ -126,20 +133,15 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			{(status === 'NotSent' ||
-				status === 'Loading' ||
-				status === 'Failed') && (
+			{status !== 'Success' ? (
 				<div css={formFieldsStyle}>
 					<span css={inputWrapperStyle}>
 						<TextInput
 							label="Enter your email"
 							value={email}
 							onChange={handleTextInput}
-							error={
-								status === 'Failed'
-									? 'Sign up failed. Please try again.'
-									: undefined
-							}
+							error={errorMessage}
+							disabled={status === 'Loading'}
 						/>
 					</span>
 					<Button
@@ -154,9 +156,7 @@ export const ManyNewslettersForm = ({
 						Sign up
 					</Button>
 				</div>
-			)}
-
-			{status === 'Success' && (
+			) : (
 				<p css={successMessageStyle}>
 					You are now a subscriber! Thank you for signing up
 				</p>
