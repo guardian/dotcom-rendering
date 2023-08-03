@@ -81,32 +81,6 @@ Mappings:
       MaxCapacity: 4
 
 Resources:
-  # InternalLoadBalancerSecurityGroup:
-  #   Type: AWS::EC2::SecurityGroup
-  #   Properties:
-  #     GroupDescription: Allows HTTP and HTTPS inbound connections from within the VPC
-  #     VpcId:
-  #       Ref: VpcId
-  #     SecurityGroupIngress:
-  #       - IpProtocol: tcp
-  #         FromPort: '80'
-  #         ToPort: '80'
-  #         CidrIp: !Ref VPCIpBlock
-  #       - IpProtocol: tcp
-  #         FromPort: '443'
-  #         ToPort: '443'
-  #         CidrIp: !Ref VPCIpBlock
-  #     Tags:
-  #       - Key: Stage
-  #         Value:
-  #           Ref: Stage
-  #       - Key: Stack
-  #         Value:
-  #           Fn::FindInMap: [Constants, Stack, Value]
-  #       - Key: App
-  #         Value:
-  #           Fn::FindInMap: [Constants, App, Value]
-
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
