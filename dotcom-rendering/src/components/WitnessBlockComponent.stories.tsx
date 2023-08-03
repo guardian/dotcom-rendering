@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 import type { WitnessAssetType } from '../types/content';
 import {
@@ -30,7 +30,7 @@ export const WitnessTextBlockComponentDefault = () => (
 			authorName="Louise Griffiths"
 			dateCreated="2016-01-29T22:19:51Z"
 			palette={decidePalette({
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
 			})}
@@ -122,7 +122,7 @@ export const WitnessImageBlockComponentDefault = () => (
 			palette={decidePalette({
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			})}
 		/>
 	</div>
@@ -144,7 +144,7 @@ export const WitnessVideoBlockComponentDefault = () => (
 			palette={decidePalette({
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Sport,
+				theme: Pillar.Sport,
 			})}
 		/>
 	</div>

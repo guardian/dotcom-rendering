@@ -61,6 +61,7 @@ export const makeWindowGuardian = ({
 	brazeApiKey,
 	GAData,
 	hasInlineMerchandise,
+	googleRecaptchaSiteKey,
 	unknownConfig = {},
 }: {
 	stage: StageType;
@@ -82,6 +83,7 @@ export const makeWindowGuardian = ({
 	brazeApiKey?: string;
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
+	googleRecaptchaSiteKey?: string;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -106,7 +108,6 @@ export const makeWindowGuardian = ({
 		};
 	};
 	GAData?: GADataType;
-	borkWebVitals: typeof window.guardian.borkWebVitals;
 } => {
 	return {
 		config: {
@@ -133,6 +134,7 @@ export const makeWindowGuardian = ({
 				isPaidContent: !!isPaidContent,
 				brazeApiKey,
 				hasInlineMerchandise,
+				googleRecaptchaSiteKey,
 			}),
 			libs: {
 				googletag: googletagUrl,
@@ -155,6 +157,5 @@ export const makeWindowGuardian = ({
 			},
 		},
 		GAData,
-		borkWebVitals: {},
 	};
 };

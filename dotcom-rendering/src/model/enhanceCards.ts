@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
@@ -10,7 +10,7 @@ import type {
 	DCRSlideshowImage,
 	DCRSupportingContent,
 	FEFrontCard,
-	FEMediaAtoms,
+	FEMediaAtom,
 	FESupportingContent,
 } from '../types/front';
 import type { MainMedia } from '../types/mainMedia';
@@ -62,7 +62,7 @@ const decidePresentationFormat = ({
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return { ...containerFormat, theme: ArticlePillar.News };
+		return { ...containerFormat, theme: Pillar.News };
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -185,9 +185,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
  * @see https://github.com/guardian/frontend/pull/26247 for inspiration
  */
 
-const getActiveMediaAtom = (
-	mediaAtom?: FEMediaAtoms,
-): MainMedia | undefined => {
+const getActiveMediaAtom = (mediaAtom?: FEMediaAtom): MainMedia | undefined => {
 	if (mediaAtom) {
 		const asset = mediaAtom.assets.find(
 			({ version }) => version === mediaAtom.activeVersion,
@@ -220,7 +218,7 @@ const getActiveMediaAtom = (
 const decideMedia = (
 	format: ArticleFormat,
 	showMainVideo?: boolean,
-	mediaAtom?: FEMediaAtoms,
+	mediaAtom?: FEMediaAtom,
 ): MainMedia | undefined => {
 	// If the showVideo toggle is enabled in the fronts tool,
 	// we should return the active mediaAtom regardless of the design

@@ -47,6 +47,7 @@ const CaptionIcon: FC<IconProps> = ({ format, variant }) => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return null;
 		default:
 			return (

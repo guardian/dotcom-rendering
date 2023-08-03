@@ -1,4 +1,4 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import type { CommentType, SignedInUser } from '../../discussionTypes';
 import { CommentContainer } from './CommentContainer';
 
@@ -174,7 +174,7 @@ const commentDataThreadedWithLongUserNames: CommentType = {
 export const defaultStory = () => (
 	<CommentContainer
 		comment={commentData}
-		pillar={ArticlePillar.Sport}
+		pillar={Pillar.Sport}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -190,7 +190,7 @@ defaultStory.storyName = 'default';
 export const threadedComment = () => (
 	<CommentContainer
 		comment={commentDataThreaded}
-		pillar={ArticlePillar.Lifestyle}
+		pillar={Pillar.Lifestyle}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -206,7 +206,7 @@ threadedComment.storyName = 'threaded';
 export const threadedCommentWithShowMore = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongThread}
-		pillar={ArticlePillar.Lifestyle}
+		pillar={Pillar.Lifestyle}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -222,7 +222,7 @@ threadedCommentWithShowMore.storyName = 'threaded with show more button';
 export const threadedCommentWithLongUsernames = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		pillar={ArticlePillar.Lifestyle}
+		pillar={Pillar.Lifestyle}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}
@@ -238,7 +238,7 @@ threadedCommentWithLongUsernames.storyName = 'threaded with long usernames';
 export const threadedCommentWithLongUsernamesMobile = () => (
 	<CommentContainer
 		comment={commentDataThreadedWithLongUserNames}
-		pillar={ArticlePillar.Lifestyle}
+		pillar={Pillar.Lifestyle}
 		isClosedForComments={false}
 		shortUrl="randomShortURL"
 		user={aUser}

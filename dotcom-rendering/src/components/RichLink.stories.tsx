@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
-	ArticlePillar,
 	ArticleSpecial,
+	Pillar,
 } from '@guardian/libs';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
@@ -28,27 +28,27 @@ export default {
 const mockFormatNews = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.News,
+	theme: Pillar.News,
 };
 const mockFormatCulture = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Culture,
+	theme: Pillar.Culture,
 };
 const mockFormatSport = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Sport,
+	theme: Pillar.Sport,
 };
 const mockFormatLifestyle = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Lifestyle,
+	theme: Pillar.Lifestyle,
 };
 const mockFormatOpinion = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Opinion,
+	theme: Pillar.Opinion,
 };
 
 export const Article = () => {
@@ -327,7 +327,7 @@ export const LiveBlog = () => {
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.LiveBlog,
-					theme: ArticlePillar.News,
+					theme: Pillar.News,
 				}}
 				isMainMedia={false}
 				role="richLink"
@@ -342,12 +342,12 @@ export const LiveBlog = () => {
 					linkFormat={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.LiveBlog,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.LiveBlog,
-						theme: ArticlePillar.Sport,
+						theme: Pillar.Sport,
 					}}
 					tags={[]}
 					sponsorName=""
@@ -571,7 +571,7 @@ export const Analysis = () => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Analysis,
-						theme: ArticlePillar.News,
+						theme: Pillar.News,
 					}}
 					isMainMedia={false}
 					role="richLink"
@@ -586,12 +586,12 @@ export const Analysis = () => {
 						linkFormat={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Analysis,
-							theme: ArticlePillar.Culture,
+							theme: Pillar.Culture,
 						}}
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Analysis,
-							theme: ArticlePillar.Culture,
+							theme: Pillar.Culture,
 						}}
 						tags={[]}
 						sponsorName=""

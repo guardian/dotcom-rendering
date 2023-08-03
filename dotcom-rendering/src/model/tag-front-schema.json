@@ -190,7 +190,7 @@
                                             "mediaAtoms": {
                                                 "type": "array",
                                                 "items": {
-                                                    "$ref": "#/definitions/FEMediaAtoms"
+                                                    "$ref": "#/definitions/FEMediaAtom"
                                                 }
                                             }
                                         },
@@ -1243,7 +1243,7 @@
             ],
             "type": "string"
         },
-        "FEMediaAtoms": {
+        "FEMediaAtom": {
             "type": "object",
             "properties": {
                 "id": {

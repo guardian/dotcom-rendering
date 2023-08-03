@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { Contributor } from './Contributor';
@@ -6,7 +6,7 @@ import { Contributor } from './Contributor';
 describe('Contributor', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {
 		const format = {
-			theme: ArticlePillar.Lifestyle,
+			theme: Pillar.Lifestyle,
 			design: ArticleDesign.Interactive,
 			display: ArticleDisplay.Immersive,
 		};
@@ -32,7 +32,7 @@ describe('Contributor', () => {
 
 	it("It should not contain legacy class names for articles that aren't interactives", () => {
 		const format = {
-			theme: ArticlePillar.Lifestyle,
+			theme: Pillar.Lifestyle,
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
 		};

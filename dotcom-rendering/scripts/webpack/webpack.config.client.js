@@ -76,7 +76,10 @@ const getLoaders = (bundle) => {
  */
 module.exports = ({ bundle, sessionId }) => ({
 	entry: {
-		index: './src/client/index.ts',
+		index:
+			bundle === 'variant'
+				? './src/client/index.scheduled.ts'
+				: './src/client/index.ts',
 		debug: './src/client/debug/index.ts',
 	},
 	optimization:

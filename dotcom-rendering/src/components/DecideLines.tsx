@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, Pillar } from '@guardian/libs';
 import {
 	DottedLines,
 	StraightLines,
@@ -14,7 +14,7 @@ export const DecideLines = ({ format, color }: Props) => {
 	const count = format.design === ArticleDesign.Comment ? 8 : 4;
 
 	switch (format.theme) {
-		case ArticlePillar.Sport:
+		case Pillar.Sport:
 			return (
 				<DottedLines
 					cssOverrides={css`

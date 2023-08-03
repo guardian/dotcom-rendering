@@ -61,8 +61,6 @@ export const renderArticle = (
 		windowGuardian,
 		renderingTarget: 'Apps',
 		offerHttp3: false,
-		borkFCP: false,
-		borkFID: false,
 		weAreHiring: !!article.config.switches.weAreHiring,
 	});
 

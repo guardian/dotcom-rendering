@@ -128,7 +128,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
 		const overlaySelector = `[data-cy^="youtube-overlay-S0CE1n-R3OY"]`;
@@ -178,7 +178,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
 		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
@@ -228,7 +228,7 @@ describe('YouTube Atom', function () {
 			.each((item) => {
 				cy.wrap(item)
 					.parent()
-					.should('have.attr', 'data-gu-ready', 'true');
+					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 
 		// Make sure overlays for both videos are displayed
@@ -344,7 +344,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 
 		// Make sure overlay is displayed
 		const overlaySelector = `[data-cy^="youtube-overlay-NtN-a6inr1E"]`;
@@ -394,7 +394,7 @@ describe('YouTube Atom', function () {
 			.each((item) => {
 				cy.wrap(item)
 					.parent()
-					.should('have.attr', 'data-gu-ready', 'true');
+					.should('have.attr', 'data-island-status', 'hydrated');
 			});
 
 		const mediaDiv = 'div[data-gu-name="media"]';

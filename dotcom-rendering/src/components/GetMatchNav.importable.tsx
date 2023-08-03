@@ -5,6 +5,7 @@ import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import type { TagType } from '../types/tag';
 import { ArticleHeadline } from './ArticleHeadline';
+import { cleanTeamData } from './GetMatchStats.importable';
 import { MatchNav } from './MatchNav';
 import { Placeholder } from './Placeholder';
 
@@ -87,8 +88,8 @@ export const GetMatchNav = ({
 	if (data) {
 		return (
 			<MatchNav
-				homeTeam={data.homeTeam}
-				awayTeam={data.awayTeam}
+				homeTeam={cleanTeamData(data.homeTeam)}
+				awayTeam={cleanTeamData(data.awayTeam)}
 				comments={data.comments}
 			/>
 		);

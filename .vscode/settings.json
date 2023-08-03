@@ -42,5 +42,6 @@
 		"!Sub scalar",
 		"!Transform mapping",
 		"!Ref scalar"
-	]
+	],
+	"cSpell.words": ["Queueable"]
 }

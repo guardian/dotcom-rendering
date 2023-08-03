@@ -90,7 +90,7 @@ export const decideAdSlot = (
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount, isNetworkFront)
+		index === getMerchHighPosition(collectionCount)
 	) {
 		return (
 			<AdSlot
@@ -142,7 +142,7 @@ const decideLeftContent = (
 			<Island clientOnly={true} deferUntil={'idle'}>
 				<WeatherData
 					ajaxUrl={front.config.ajaxUrl}
-					edition={front.config.edition}
+					edition={front.editionId}
 				/>
 			</Island>
 		);
@@ -161,7 +161,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
-		front.isNetworkFront,
 	);
 
 	const renderAds = canRenderAds(front);
@@ -547,10 +546,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											onwardsSource={'unknown-source'}
 											palette={containerPalette}
 											leftColSize={'compact'}
-											collectionType={
+											containerType={
 												collection.collectionType
 											}
 											hasPageSkin={hasPageSkin}
+											url={collection.href}
 										/>
 									</Island>
 								</Section>

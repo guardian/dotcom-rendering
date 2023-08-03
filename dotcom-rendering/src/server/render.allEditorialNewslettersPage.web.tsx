@@ -85,6 +85,8 @@ export const renderEditorialNewslettersPage = ({
 				switches: newslettersPage.config.switches,
 				abTests: newslettersPage.config.abTests,
 				brazeApiKey: newslettersPage.config.brazeApiKey,
+				googleRecaptchaSiteKey:
+					newslettersPage.config.googleRecaptchaSiteKey,
 			}),
 		),
 	);
@@ -99,8 +101,6 @@ export const renderEditorialNewslettersPage = ({
 		keywords: '',
 		offerHttp3,
 		renderingTarget: 'Web',
-		borkFCP: newslettersPage.config.abTests.borkFcpVariant === 'variant',
-		borkFID: newslettersPage.config.abTests.borkFidVariant === 'variant',
 		weAreHiring: !!newslettersPage.config.switches.weAreHiring,
 	});
 };

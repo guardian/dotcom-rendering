@@ -18,12 +18,17 @@ interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed';
 	email: string;
 	handleTextInput: ChangeEventHandler<HTMLInputElement>;
-	handleSubmitButton: { (): Promise<void> };
+	handleSubmitButton: { (): Promise<void> | void };
 	newsletterCount: number;
 }
 
+// The design brief requires the layout of the form to align with the
+// CarouselForNewsletters placed above it on desktop.
+const CARD_CONTAINER_WIDTH = 240;
+const CARD_CONTAINER_PADDING = 10;
+
 export const formFrameStyle = css`
-	border: ${palette.neutral[0]} 3px dashed;
+	border: ${palette.brand[400]} 2px dashed;
 	border-radius: 12px;
 	padding: ${space[2]}px;
 
@@ -31,6 +36,8 @@ export const formFrameStyle = css`
 	flex-direction: column-reverse;
 
 	${from.desktop} {
+		flex-basis: ${4 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING}px;
+
 		flex-direction: row-reverse;
 		align-items: center;
 		justify-content: space-between;
@@ -44,7 +51,7 @@ export const formFieldsStyle = css`
 	padding-bottom: ${space[1]}px;
 
 	${from.desktop} {
-		flex: 1;
+		flex-basis: ${2 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING * 2}px;
 		flex-direction: row;
 		flex-shrink: 0;
 		align-items: flex-end;
@@ -62,7 +69,8 @@ export const inputWrapperStyle = css`
 
 export const formAsideStyle = css`
 	${from.desktop} {
-		flex-basis: 400px;
+		flex: 1;
+		padding-left: ${CARD_CONTAINER_PADDING}px;
 	}
 `;
 
@@ -118,7 +126,7 @@ export const ManyNewslettersForm = ({
 					id={'man-newsletter-form-inline-skip-to-wrapper'}
 					blockDescription="Privacy Notice"
 				>
-					<NewsletterPrivacyMessage />
+					<NewsletterPrivacyMessage textColor="regular" />
 				</InlineSkipToWrapper>
 			</aside>
 
