@@ -5,11 +5,7 @@ import {
 	palette,
 	space,
 } from '@guardian/source-foundations';
-import {
-	Button,
-	InlineError,
-	TextInput,
-} from '@guardian/source-react-components';
+import { Button, TextInput } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -39,7 +35,7 @@ export const formFrameStyle = css`
 		flex-basis: ${4 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING}px;
 
 		flex-direction: row-reverse;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 	}
 `;
@@ -130,13 +126,20 @@ export const ManyNewslettersForm = ({
 				</InlineSkipToWrapper>
 			</aside>
 
-			{(status === 'NotSent' || status === 'Loading') && (
+			{(status === 'NotSent' ||
+				status === 'Loading' ||
+				status === 'Failed') && (
 				<div css={formFieldsStyle}>
 					<span css={inputWrapperStyle}>
 						<TextInput
 							label="Enter your email"
 							value={email}
 							onChange={handleTextInput}
+							error={
+								status === 'Failed'
+									? 'Sign up failed. Please try again.'
+									: undefined
+							}
 						/>
 					</span>
 					<Button
@@ -152,8 +155,6 @@ export const ManyNewslettersForm = ({
 					</Button>
 				</div>
 			)}
-
-			{status === 'Failed' && <InlineError>Sign up failed.</InlineError>}
 
 			{status === 'Success' && (
 				<p css={successMessageStyle}>

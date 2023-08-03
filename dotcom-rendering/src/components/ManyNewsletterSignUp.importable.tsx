@@ -236,7 +236,7 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleSubmitButton = async () => {
-		if (status !== 'NotSent') {
+		if (status !== 'NotSent' && status !== 'Failed') {
 			return;
 		}
 
