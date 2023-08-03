@@ -46,6 +46,10 @@ else
 		# If $SKIP_CYPRESS is not set, run the Cypress tests
 		if [ -z $SKIP_CYPRESS ]; then
 			make cypress
+			cypressExitCode=$?
+			if [ $cypressExitCode -ne 0 ]; then
+				echo "Cypress failed. If you're trying to release something urgently, set \$SKIP_CYPRESS to any non-empty value\n\n"
+			fi
 		fi
 	else
 		printf "Skipping code checks when not on main"
