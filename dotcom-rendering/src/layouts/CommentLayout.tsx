@@ -634,7 +634,6 @@ export const CommentLayout = ({
 												tags={article.tags}
 												renderAds={renderAds}
 												isLabs={false}
-												articleDisplay={format.display}
 											/>
 										</Island>
 									)}

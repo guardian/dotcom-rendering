@@ -570,7 +570,6 @@ export const InteractiveLayout = ({
 								tags={article.tags}
 								renderAds={renderAds}
 								isLabs={false}
-								articleDisplay={format.display}
 							/>
 						</Island>
 					</div>

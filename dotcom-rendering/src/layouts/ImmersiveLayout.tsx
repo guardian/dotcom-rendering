@@ -671,7 +671,6 @@ export const ImmersiveLayout = ({
 											tags={article.tags}
 											renderAds={renderAds}
 											isLabs={isLabs}
-											articleDisplay={format.display}
 										/>
 									</Island>
 								)}

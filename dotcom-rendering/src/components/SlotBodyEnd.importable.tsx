@@ -43,7 +43,6 @@ type Props = {
 	keywordIds: string;
 	renderAds: boolean;
 	isLabs: boolean;
-	articleDisplay: ArticleDisplay;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -121,7 +120,6 @@ export const SlotBodyEnd = ({
 	keywordIds,
 	renderAds,
 	isLabs,
-	articleDisplay,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 	const [countryCode, setCountryCode] = useState<string>();
@@ -212,11 +210,7 @@ export const SlotBodyEnd = ({
 	} else if (showArticleEndSlot) {
 		return (
 			<div id="slot-body-end">
-				<AdSlot
-					data-print-layout="hide"
-					position="article-end"
-					display={articleDisplay}
-				/>
+				<AdSlot data-print-layout="hide" position="article-end" />
 			</div>
 		);
 	}
