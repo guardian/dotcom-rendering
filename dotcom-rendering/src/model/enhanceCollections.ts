@@ -50,6 +50,9 @@ export const enhanceCollections = (
 		const allCards = [...collection.curated, ...collection.backfill];
 		const allBranding = getBrandingFromCards(allCards, editionId);
 		const allCardsHaveBranding = allCards.length === allBranding.length;
+		const isCollectionPaidContent = allBranding.every(
+			({ brandingType }) => brandingType?.name === 'paid-content',
+		);
 
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -73,7 +76,9 @@ export const enhanceCollections = (
 			badge: decideBadge(
 				collection.config.href,
 				// We only try to use a branded badge for paid content
-				isPaidContent && allCardsHaveBranding ? allBranding : undefined,
+				isCollectionPaidContent && allCardsHaveBranding
+					? allBranding
+					: undefined,
 			),
 			grouped: groupCards(
 				collectionType,
