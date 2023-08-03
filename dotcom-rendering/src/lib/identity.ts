@@ -44,6 +44,8 @@ function getIdentityAuth() {
 			issuer: getIssuer(stage),
 			clientId: getClientId(stage),
 			redirectUri: getRedirectUri(stage),
+			idCookieSessionRefresh:
+				window.guardian.config.switches.idCookieRefresh ?? false,
 			scopes: [
 				'openid', // required for open id connect, returns an id token
 				'profile', // populates the id token with basic profile information
