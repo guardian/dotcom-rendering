@@ -59,7 +59,7 @@ export const inputWrapperStyle = css`
 	${from.desktop} {
 		margin-bottom: 0;
 		margin-right: ${space[2]}px;
-		flex-basis: 280px;
+		flex-basis: 296px;
 	}
 `;
 
