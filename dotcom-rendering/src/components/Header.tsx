@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brand } from '@guardian/source-foundations';
+import { brand, from } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
 import type { EditionId } from '../lib/edition';
@@ -9,6 +9,21 @@ import { Island } from './Island';
 import { Logo } from './Logo';
 import { Snow } from './Snow.importable';
 import { SupportTheG } from './SupportTheG.importable';
+
+/** Ensures we do not cause CLS from lazy loaded component height */
+const explicitHeight = css`
+	overflow: hidden;
+	height: 80px;
+	${from.mobileMedium} {
+		height: 100px;
+	}
+	${from.tablet} {
+		height: 120px;
+	}
+	${from.desktop} {
+		height: 150px;
+	}
+`;
 
 const headerStyles = css`
 	background-color: ${brand[400]};
@@ -60,14 +75,7 @@ export const Header = ({
 			/>
 		</Island>
 
-		<div
-			css={[
-				hasPageSkin ? pageSkinContainer : center,
-				css`
-					overflow: hidden;
-				`,
-			]}
-		>
+		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
 			<Island deferUntil="hash" clientOnly={true}>
 				<Snow />
 			</Island>
