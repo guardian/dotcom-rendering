@@ -176,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.config.switches.deeplyReadSwitch &&
+		front.config.switches.deeplyRead &&
 		front.isNetworkFront &&
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;
