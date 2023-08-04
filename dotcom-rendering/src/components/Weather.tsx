@@ -48,6 +48,7 @@ const weatherCSS = css`
 
 	${between.tablet.and.leftCol} {
 		padding-top: 6px;
+		height: 52px;
 	}
 `;
 
@@ -231,6 +232,10 @@ const collapsibleStyles = css`
 		}
 	}
 `;
+
+export const WeatherPlaceholder = () => (
+	<aside css={[collapsibleStyles, weatherCSS]}></aside>
+);
 
 export const Weather = ({ location, now, forecast, edition }: WeatherProps) => {
 	const checkboxId = useId();

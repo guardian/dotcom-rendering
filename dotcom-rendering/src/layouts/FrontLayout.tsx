@@ -139,7 +139,7 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island clientOnly={true} deferUntil={'idle'}>
+			<Island deferUntil={'idle'}>
 				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
