@@ -11,7 +11,7 @@ import {
 import { isNull } from 'lodash';
 import { lazy, Suspense } from 'react';
 import { type EditionId, getEditionFromId } from '../lib/edition';
-import type { WeatherData } from './WeatherData.importable';
+import type { WeatherData } from './WeatherWrapper.importable';
 
 interface IconProps {
 	size?: number;
