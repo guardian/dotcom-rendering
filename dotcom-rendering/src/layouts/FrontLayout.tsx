@@ -32,7 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
-import { WeatherData } from '../components/WeatherData.importable';
+import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -140,7 +140,7 @@ const decideLeftContent = (
 	) {
 		return (
 			<Island clientOnly={true} deferUntil={'idle'}>
-				<WeatherData
+				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
 				/>
