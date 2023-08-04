@@ -1,6 +1,6 @@
 import type { EditionId } from '../lib/edition';
 import { useApi } from '../lib/useApi';
-import { Weather } from './Weather';
+import { Weather, WeatherPlaceholder } from './Weather';
 
 /**
  * Our weather API returns 24 forecast.
@@ -66,7 +66,9 @@ export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 		window.guardian.modules.sentry.reportError(error, 'weather');
 	}
 
-	return !data ? null : (
+	return !data ? (
+		<WeatherPlaceholder />
+	) : (
 		<Weather
 			location={data.location}
 			now={data.weather}
