@@ -2523,7 +2523,8 @@
                 "RecipeDesign",
                 "ReviewDesign",
                 "TimelineDesign",
-                "VideoDesign"
+                "VideoDesign",
+				"PictureDesign"
             ],
             "type": "string"
         },

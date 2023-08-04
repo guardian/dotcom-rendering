@@ -67,6 +67,7 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
+import { CartoonComponent } from '../components/CartoonComponent';
 
 type Props = {
 	format: ArticleFormat;
@@ -208,6 +209,8 @@ export const renderElement = ({
 					isOverlaid={element.isOverlaid}
 				/>
 			);
+		case 'model.dotcomrendering.pageElements.CartoonBlockElement':
+			return <CartoonComponent element={element} />;
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return (
 				<Island deferUntil="visible">
