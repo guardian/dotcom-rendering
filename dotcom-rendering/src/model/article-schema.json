@@ -3970,6 +3970,9 @@
                 "isPreview": {
                     "type": "boolean"
                 },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
                 "pageId": {
                     "type": "string"
                 },
