@@ -43,7 +43,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Metadata": {
-    "gu:cdk:constructs": [],
+    "gu:cdk:constructs": [
+      "GuVpcParameter",
+    ],
     "gu:cdk:version": "TEST",
   },
   "Outputs": {
@@ -116,14 +118,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Description": "The subnets where rendering instances will run",
       "Type": "List<AWS::EC2::Subnet::Id>",
     },
-    "VPCIpBlock": {
-      "Default": "10.248.136.0/22",
-      "Description": "CIDR block for IP addresses inside this VPC",
-      "Type": "String",
-    },
     "VpcId": {
-      "Description": "The VPC in which rendering instances will run",
-      "Type": "AWS::EC2::VPC::Id",
+      "Default": "/account/vpc/primary/id",
+      "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::VPC::Id>",
     },
   },
   "Resources": {
@@ -497,17 +495,13 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupIngress": [
           {
-            "CidrIp": {
-              "Ref": "VPCIpBlock",
-            },
+            "CidrIp": "10.248.136.0/22",
             "FromPort": 80,
             "IpProtocol": "tcp",
             "ToPort": 80,
           },
           {
-            "CidrIp": {
-              "Ref": "VPCIpBlock",
-            },
+            "CidrIp": "10.248.136.0/22",
             "FromPort": 443,
             "IpProtocol": "tcp",
             "ToPort": 443,

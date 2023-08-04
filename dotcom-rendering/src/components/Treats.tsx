@@ -112,6 +112,7 @@ const ImageTreat = ({
 						key={link.linkTo}
 						href={link.linkTo}
 						data-ignore="global-link-styling"
+						data-link-name={`treat | ${index + 1} | ${link.text}`}
 						css={css`
 							text-decoration: none;
 						`}
