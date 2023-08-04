@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { comment } from '../../../fixtures/manual/comment';
 import { mockedMessageID, mockRESTCalls } from '../../lib/mockRESTCalls';

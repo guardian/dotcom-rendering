@@ -1,5 +1,5 @@
-const execa = require('execa');
-const { warn, log } = require('../env/log');
+import execa from 'execa';
+import { log, warn } from '../env/log.js';
 
 const run = async () => {
 	try {
@@ -19,4 +19,4 @@ const run = async () => {
 	}
 };
 
-void run();
+await run();

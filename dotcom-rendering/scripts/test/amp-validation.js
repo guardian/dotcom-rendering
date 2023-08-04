@@ -1,6 +1,6 @@
 /* eslint-disable */
-const amphtmlValidator = require('amphtml-validator');
-const http = require('http');
+import amphtmlValidator from 'amphtml-validator';
+import http from 'node:http';
 
 const domain = 'http://localhost:9000';
 

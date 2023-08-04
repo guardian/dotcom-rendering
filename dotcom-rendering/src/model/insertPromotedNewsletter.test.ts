@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Live as exampleLiveBlog } from '../../fixtures/generated/articles/Live';
 import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
@@ -5,7 +6,12 @@ import type {
 	Newsletter,
 	NewsletterSignupBlockElement,
 } from '../types/content';
-import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+
+jest.unstable_mockModule('../../src/server/lib/logging', () => ({
+	logger: jest.fn(),
+}));
+
+const { insertPromotedNewsletter } = await import('./insertPromotedNewsletter');
 
 const NEWSLETTER: Newsletter = {
 	listId: 123,

@@ -8,11 +8,11 @@ export SHELL := /usr/bin/env bash
 # messaging #########################################
 
 define log
-    @node scripts/env/log $(1)
+    @node scripts/env/log.js $(1)
 endef
 
 define warn
-    @node scripts/env/log $(1) warn
+    @node scripts/env/log.js $(1) warn
 endef
 
 # deployment #########################################
@@ -22,7 +22,7 @@ cdk-synth:
 
 riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
-	@node ./scripts/deploy/build-riffraff-bundle.mjs
+	@node ./scripts/deploy/build-riffraff-bundle.js
 
 # prod #########################################
 
@@ -30,7 +30,7 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
 	$(call log, "generating Islands report card")
-	@node ./scripts/islands/island-descriptions.mjs
+	@node ./scripts/islands/island-descriptions.js
 
 
 build-ci: clean-dist install
@@ -39,12 +39,12 @@ build-ci: clean-dist install
 
 start-ci: install
 	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.cjs
 
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production pm2 start dist/server.js
+	NODE_ENV=production pm2 start dist/server.cjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@NODE_ENV=production pm2 logs
@@ -55,7 +55,7 @@ start: install
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	NODE_ENV=production /usr/local/node/pm2 start dist/server.js
+	NODE_ENV=production /usr/local/node/pm2 start dist/server.cjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -102,11 +102,11 @@ storybook-dev: clear clean-dist install
 
 cypress: clear clean-dist install build
 	$(call log, "starting PROD server for Cypress")
-	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.cjs' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: clear clean-dist install build
 	$(call log, "starting PROD server and opening Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.cjs' 9000 'cypress open --e2e --browser electron'
 
 ampValidation: clean-dist install
 	$(call log, "starting AMP Validation test")

@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { fireEvent, screen } from '@testing-library/dom';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -12,8 +13,8 @@ const format = {
 const title = 'Q&A and Detective Wilson';
 describe('AudioAtom', () => {
 	it('should render', () => {
-		const playStub = jest.fn();
-		const pauseStub = jest.fn();
+		const playStub = jest.fn<() => Promise<void>>();
+		const pauseStub = jest.fn<() => void>();
 		window.HTMLMediaElement.prototype.play = playStub;
 		window.HTMLMediaElement.prototype.pause = pauseStub;
 		const { getByText } = render(
@@ -29,8 +30,8 @@ describe('AudioAtom', () => {
 		expect(getByText(title)).toBeInTheDocument();
 	});
 	it('should have play/pause function called', () => {
-		const playStub = jest.fn();
-		const pauseStub = jest.fn();
+		const playStub = jest.fn<() => Promise<void>>();
+		const pauseStub = jest.fn<() => void>();
 		window.HTMLMediaElement.prototype.play = playStub;
 		window.HTMLMediaElement.prototype.pause = pauseStub;
 

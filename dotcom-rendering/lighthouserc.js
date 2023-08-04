@@ -3,7 +3,7 @@ module.exports = {
 		collect: {
 			url: [process.env.LHCI_URL],
 			startServerCommand:
-				'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js',
+				'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.cjs',
 			numberOfRuns: '10',
 			puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
 			settings: {

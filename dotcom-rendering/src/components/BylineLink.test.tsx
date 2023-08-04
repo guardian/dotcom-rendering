@@ -1,15 +1,17 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../lib/byline';
 import type { TagType } from '../types/tag';
-import {
-	bylineAsTokens,
-	BylineLink,
-	SPECIAL_REGEX_CHARACTERS,
-} from './BylineLink';
 import { ConfigProvider } from './ConfigContext';
 
-jest.mock('../lib/bridgetApi', jest.fn());
+jest.unstable_mockModule('../../src/lib/bridgetApi', () => ({
+	getNotificationsClient: jest.fn(),
+}));
+
+const { bylineAsTokens, BylineLink, SPECIAL_REGEX_CHARACTERS } = await import(
+	'./BylineLink'
+);
 
 describe('SPECIAL_REGEX_CHARACTERS', () => {
 	it('Correctly match all special regex characters', () => {

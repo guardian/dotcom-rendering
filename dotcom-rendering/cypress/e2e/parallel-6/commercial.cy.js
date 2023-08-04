@@ -1,5 +1,5 @@
 import { cmpIframe } from '../../lib/cmpIframe.js';
-import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { storage } from '@guardian/libs';
 

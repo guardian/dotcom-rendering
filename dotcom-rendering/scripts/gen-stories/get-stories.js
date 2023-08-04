@@ -12,17 +12,14 @@ It should be run whenever any of the Display, Design, or Theme `format` properti
 
 */
 
-const { writeFileSync, readFileSync, mkdirSync } = require('node:fs');
-const path = require('node:path');
-const { log, success, warn } = require('../env/log');
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { log, success, warn } from '../env/log.js';
 
-const STORIES_PATH = path.resolve(
-	__dirname,
-	'..',
-	'..',
-	'stories',
-	'generated',
-);
+const dir = path.dirname(fileURLToPath(import.meta.url));
+
+const STORIES_PATH = path.resolve(dir, '..', '..', 'stories', 'generated');
 const LAYOUT_STORIES_FILE = path.resolve(STORIES_PATH, 'Layout.stories.tsx');
 const CARD_STORIES_FILE = path.resolve(STORIES_PATH, 'Card.stories.tsx');
 const README_FILE = (componentName) =>
@@ -255,7 +252,4 @@ const checkStories = () => {
 	);
 };
 
-module.exports = {
-	saveStories,
-	checkStories,
-};
+export { saveStories, checkStories };

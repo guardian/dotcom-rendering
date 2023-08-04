@@ -180,10 +180,15 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['**/**.js'],
+			files: ['**/**.cjs'],
 			rules: {
 				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+		{
+			files: ['**/**.js', '**/**.cjs'],
+			rules: {
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},
@@ -195,7 +200,7 @@ module.exports = {
 			},
 		},
 		{
-			files: ['**/**.d.ts'],
+			files: ['**/**.d.ts', '**/**.test.ts?(x)'],
 			rules: {
 				'@typescript-eslint/consistent-type-imports': [
 					'error',

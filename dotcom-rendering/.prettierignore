@@ -28,6 +28,7 @@ node_modules/
 !/index.d.ts
 !/*.js
 !package.json
+!/*.cjs
 
 # Ignore specific files
 /**/*/curl-with-js-and-domReady.js

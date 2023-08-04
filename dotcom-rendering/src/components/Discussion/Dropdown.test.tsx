@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 import type { DropdownOptionType } from '../../types/discussion';
 import { Dropdown } from './Dropdown';
@@ -151,11 +152,11 @@ it('should trigger the correct onSelect callbacks when an option is clicked', (
 	fireEvent.click(screen.getByRole('button'));
 	fireEvent.click(screen.getByText(threadOptions[2].title));
 	expect(mockCallback).toHaveBeenCalled();
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- the element exists
-	expect(mockCallback.mock.calls[0][0]).toBe('unthreaded');
+
+	expect(mockCallback.mock.calls[0]?.[0]).toBe('unthreaded');
 	fireEvent.click(screen.getByRole('button'));
 	fireEvent.click(screen.getByText(threadOptions[1].title));
 	expect(mockCallback).toHaveBeenCalled();
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- the element exists
-	expect(mockCallback.mock.calls[1][0]).toBe('expanded');
+
+	expect(mockCallback.mock.calls[1]?.[0]).toBe('expanded');
 });

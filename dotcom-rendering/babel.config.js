@@ -1,4 +1,5 @@
-module.exports = {
+// eslint-disable-next-line import/no-default-export -- it’s what Babel wants
+export default {
 	plugins: [
 		// Be careful when adding plugins here!
 		// They can dramatically alter the build size

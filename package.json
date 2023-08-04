@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"repository": "git@github.com:guardian/dotcom-rendering.git",
 	"license": "Apache-2.0",
+	"type": "module",
 	"private": true,
 	"workspaces": {
 		"packages": [

@@ -1,4 +1,4 @@
-import { parseURL } from './get-content-from-url';
+import { parseURL } from './get-content-from-url.js';
 
 describe('URL parser', () => {
 	test('parse source URL when one query is present', () => {

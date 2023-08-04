@@ -1,22 +1,34 @@
 import { setImmediate } from 'node:timers';
-import { checkBrazeDependencies } from './checkBrazeDependencies';
+import { jest } from '@jest/globals';
 
 let mockBrazeUuid: string | null;
-jest.mock('../getBrazeUuid', () => ({
+jest.unstable_mockModule('../../src/lib/getBrazeUuid', () => ({
 	getBrazeUuid: () => {
 		return Promise.resolve(mockBrazeUuid);
 	},
 }));
 
 let mockConsentsPromise: Promise<boolean>;
-jest.mock('./hasRequiredConsents', () => ({
-	hasRequiredConsents: () => {
-		return mockConsentsPromise;
-	},
+jest.unstable_mockModule('../../src/lib/braze/hasRequiredConsents', () => ({
+	hasRequiredConsents: () => mockConsentsPromise,
 }));
 
+const { checkBrazeDependencies } = await import('./checkBrazeDependencies');
+
+type WindowData = {
+	guardian: {
+		config: {
+			switches: Window['guardian']['config']['switches'];
+			page: Pick<
+				Window['guardian']['config']['page'],
+				'brazeApiKey' | 'isPaidContent'
+			>;
+		};
+	};
+};
+
 describe('checkBrazeDependecies', () => {
-	let windowSpy: jest.SpyInstance;
+	let windowSpy: jest.SpiedGetter<WindowData>;
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');
@@ -33,7 +45,7 @@ describe('checkBrazeDependecies', () => {
 		return flushPromises;
 	});
 
-	const setWindow = (windowData: { [key: string]: any }) =>
+	const setWindow = (windowData: WindowData) =>
 		windowSpy.mockImplementation(() => windowData);
 
 	it('succeeds if all dependencies are fulfilled', async () => {
@@ -134,6 +146,7 @@ describe('checkBrazeDependecies', () => {
 						brazeSwitch: true,
 					},
 					page: {
+						// @ts-expect-error -- we’re testing
 						brazeApiKey: null,
 						isPaidContent: false,
 					},

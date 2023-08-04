@@ -1,10 +1,14 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { ArticleMeta } from './ArticleMeta';
 import { ConfigProvider } from './ConfigContext';
 
-jest.mock('../lib/bridgetApi', () => jest.fn());
+jest.unstable_mockModule('../../src/lib/bridgetApi', () => ({
+	getNotificationsClient: jest.fn(),
+}));
+
+const { ArticleMeta } = await import('./ArticleMeta');
 
 describe('ArticleMeta', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {

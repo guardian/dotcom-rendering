@@ -3,11 +3,11 @@
 /* eslint-disable mocha/no-skipped-tests */
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { mockApi } from '../../lib/mocks';
-import { disableCMP } from '../../lib/disableCMP';
+import { mockApi } from '../../lib/mocks.js';
+import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { tweetBlock } from '../../fixtures/manual/tweet-block';
-import { match1, match2 } from '../../fixtures/manual/cricket-match';
+import { tweetBlock } from '../../fixtures/manual/tweet-block.js';
+import { match1, match2 } from '../../fixtures/manual/cricket-match.js';
 
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';

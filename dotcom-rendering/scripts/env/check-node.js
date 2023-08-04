@@ -1,12 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const { join } = require('node:path');
-const { promisify } = require('node:util');
-const readFile = promisify(require('node:fs').readFile);
-const ensure = require('./ensure');
+import { readFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { ensure } from './ensure.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	try {
+		/** @type {[typeof import('semver')]} */
 		const [semver] = await ensure('semver');
 
 		const nodeVersion = /^v(\d+\.\d+\.\d+)/.exec(process.version)[1];
@@ -15,7 +17,7 @@ const ensure = require('./ensure');
 		).trim();
 
 		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-			const { warn, prompt, log } = require('./log');
+			const { warn, prompt, log } = await import('./log.js');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
 				`You are using v${nodeVersion ?? '(unknown)'}`,

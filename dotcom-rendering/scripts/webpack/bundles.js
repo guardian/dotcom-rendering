@@ -29,9 +29,4 @@ const adaptive = (variant) => `adaptiveSite${variant}`;
 /** @type {(variant: 'Variant' | 'Control') => import("../../src/types/config").ServerSideTestNames} */
 const ophanEsm = (variant) => `ophanEsm${variant}`;
 
-module.exports = {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-	adaptive,
-	ophanEsm,
-};
+export { BUILD_VARIANT, dcrJavascriptBundle, adaptive, ophanEsm };

@@ -1,15 +1,20 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
-import { useApi as useApi_ } from '../lib/useApi';
 import { ConfigProvider } from './ConfigContext';
 import { responseWithTwoTabs } from './MostViewed.mocks';
-import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
-const useApi: { [key: string]: any } = useApi_;
-
-jest.mock('../lib/useApi', () => ({
-	useApi: jest.fn(),
+jest.unstable_mockModule('../../src/lib/useApi', () => ({
+	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
 }));
+
+const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
+	typeof import('../lib/useApi')
+>;
+
+const { MostViewedFooterData } = await import(
+	'./MostViewedFooterData.importable'
+);
 
 const VISIBLE = 'display: block';
 const HIDDEN = 'display: none';
