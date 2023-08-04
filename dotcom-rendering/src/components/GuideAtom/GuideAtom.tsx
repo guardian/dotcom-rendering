@@ -1,7 +1,7 @@
-import { submitComponentEvent } from '../../client/ophan/ophan';
-import { Body } from '../ExpandableAtom/Body';
-import { Container } from '../ExpandableAtom/Container';
-import { Footer } from '../ExpandableAtom/Footer';
+import { submitComponentEvent } from '../../client/ophan/ophan.ts';
+import { Body } from '../ExpandableAtom/Body.tsx';
+import { Container } from '../ExpandableAtom/Container.tsx';
+import { Footer } from '../ExpandableAtom/Footer.tsx';
 
 export type GuideAtomProps = {
 	id: string;

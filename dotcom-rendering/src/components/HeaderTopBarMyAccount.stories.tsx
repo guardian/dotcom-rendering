@@ -1,5 +1,5 @@
-import type { AuthStatus } from '../lib/useAuthStatus';
-import { MyAccount } from './HeaderTopBarMyAccount';
+import type { AuthStatus } from '../lib/useAuthStatus.ts';
+import { MyAccount } from './HeaderTopBarMyAccount.tsx';
 
 export default {
 	component: MyAccount,

@@ -1,4 +1,4 @@
-import type { ImageBlockElement } from '../types/content';
+import type { ImageBlockElement } from '../types/content.ts';
 
 export const image: ImageBlockElement = {
 	role: 'inline',

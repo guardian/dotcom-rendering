@@ -11,10 +11,10 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { getZIndex } from '../lib/getZIndex';
-import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { pageSkinContainer } from '../layouts/lib/pageSkin.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { AD_CONTAINER_HEIGHT } from '../lib/liveblog-right-ad-constants.ts';
+import { TopRightAdSlot } from './TopRightAdSlot.tsx';
 
 type InlinePosition =
 	| 'inline'

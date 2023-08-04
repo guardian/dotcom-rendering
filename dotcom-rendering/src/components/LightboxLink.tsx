@@ -7,7 +7,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgArrowExpand } from '@guardian/source-react-components';
-import type { RoleType } from '../types/content';
+import type { RoleType } from '../types/content.ts';
 
 type Props = {
 	elementId: string;

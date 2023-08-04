@@ -13,7 +13,7 @@ import {
 	SvgArrowRightStraight,
 	SvgCross,
 } from '@guardian/source-react-components';
-import { getZIndex } from '../lib/getZIndex';
+import { getZIndex } from '../lib/getZIndex.ts';
 
 type Props = {
 	imageCount: number;

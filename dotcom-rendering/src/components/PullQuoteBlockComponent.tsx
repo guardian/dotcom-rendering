@@ -7,10 +7,10 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
-import { unescapeData } from '../lib/escapeData';
-import { transparentColour } from '../lib/transparentColour';
-import type { Palette } from '../types/palette';
-import { QuoteIcon } from './QuoteIcon';
+import { unescapeData } from '../lib/escapeData.tsx';
+import { transparentColour } from '../lib/transparentColour.ts';
+import type { Palette } from '../types/palette.ts';
+import { QuoteIcon } from './QuoteIcon.tsx';
 
 const partiallyLeft = css`
 	width: 220px;

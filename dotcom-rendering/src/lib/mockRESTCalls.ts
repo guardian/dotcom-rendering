@@ -1,19 +1,19 @@
 import fetchMock from 'fetch-mock';
-import { matchReport } from '../../fixtures/generated/match-report';
-import { series } from '../../fixtures/generated/series';
-import { storyPackage } from '../../fixtures/generated/story-package';
-import { comment } from '../../fixtures/manual/comment';
-import { discussion } from '../../fixtures/manual/discussion';
-import { discussionNoTopComments } from '../../fixtures/manual/discussion-no-top-comments';
-import { discussionWithNoComments } from '../../fixtures/manual/discussionWithNoComments';
-import { discussionWithTwoComments } from '../../fixtures/manual/discussionWithTwoComments';
-import { legacyDiscussionWithoutThreading } from '../../fixtures/manual/legacyDiscussionWithoutThreading';
-import { mostRead } from '../../fixtures/manual/most-read';
-import { mostReadGeo } from '../../fixtures/manual/most-read-geo';
-import { noTopPicks } from '../../fixtures/manual/noTopPicks';
-import { related } from '../../fixtures/manual/related';
-import { shortDiscussion } from '../../fixtures/manual/short-discussion';
-import { topPicks } from '../../fixtures/manual/topPicks';
+import { matchReport } from '../../fixtures/generated/match-report.ts';
+import { series } from '../../fixtures/generated/series.ts';
+import { storyPackage } from '../../fixtures/generated/story-package.ts';
+import { comment } from '../../fixtures/manual/comment.ts';
+import { discussionNoTopComments } from '../../fixtures/manual/discussion-no-top-comments.ts';
+import { discussion } from '../../fixtures/manual/discussion.ts';
+import { discussionWithNoComments } from '../../fixtures/manual/discussionWithNoComments.ts';
+import { discussionWithTwoComments } from '../../fixtures/manual/discussionWithTwoComments.ts';
+import { legacyDiscussionWithoutThreading } from '../../fixtures/manual/legacyDiscussionWithoutThreading.ts';
+import { mostReadGeo } from '../../fixtures/manual/most-read-geo.ts';
+import { mostRead } from '../../fixtures/manual/most-read.ts';
+import { noTopPicks } from '../../fixtures/manual/noTopPicks.ts';
+import { related } from '../../fixtures/manual/related.ts';
+import { shortDiscussion } from '../../fixtures/manual/short-discussion.ts';
+import { topPicks } from '../../fixtures/manual/topPicks.ts';
 
 export const mockedMessageID = '123456';
 

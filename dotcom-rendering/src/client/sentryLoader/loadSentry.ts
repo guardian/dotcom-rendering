@@ -1,4 +1,4 @@
-import '../webpackPublicPath';
+import '../webpackPublicPath.ts';
 import { isAdBlockInUse } from '@guardian/commercial';
 
 const loadSentry = (): void => {
@@ -33,7 +33,7 @@ const loadSentry = (): void => {
 
 			// Load sentry.ts
 			const { reportError } = await import(
-				/* webpackChunkName: "sentry" */ './sentry'
+				/* webpackChunkName: "sentry" */ './sentry.ts'
 			);
 
 			// Sentry takes over control of the window.onerror and

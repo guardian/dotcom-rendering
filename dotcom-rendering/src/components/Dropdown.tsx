@@ -15,12 +15,12 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useMemo, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
-import { getZIndex } from '../lib/getZIndex';
-import { linkNotificationCount } from '../lib/linkNotificationCount';
-import type { Notification } from '../lib/notification';
-import { useIsInView } from '../lib/useIsInView';
-import { useOnce } from '../lib/useOnce';
+import { submitComponentEvent } from '../client/ophan/ophan.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { linkNotificationCount } from '../lib/linkNotificationCount.ts';
+import type { Notification } from '../lib/notification.ts';
+import { useIsInView } from '../lib/useIsInView.ts';
+import { useOnce } from '../lib/useOnce.ts';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {

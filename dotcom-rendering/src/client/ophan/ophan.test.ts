@@ -1,5 +1,5 @@
-import type { ServerSideTests } from '../../types/config';
-import { abTestPayload } from './ophan';
+import type { ServerSideTests } from '../../types/config.ts';
+import { abTestPayload } from './ophan.ts';
 
 describe('abTestPayload', () => {
 	test('constructs payload correctly from config test data', () => {

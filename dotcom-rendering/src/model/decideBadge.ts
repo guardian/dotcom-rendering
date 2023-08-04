@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
-import { ASSET_ORIGIN } from '../lib/assets';
-import type { DCRBadgeType } from '../types/badge';
-import type { Branding } from '../types/branding';
-import { BADGES, SPECIAL_BADGES } from './badges';
+import { ASSET_ORIGIN } from '../lib/assets.ts';
+import type { DCRBadgeType } from '../types/badge.ts';
+import type { Branding } from '../types/branding.ts';
+import { BADGES, SPECIAL_BADGES } from './badges.ts';
 
 /**
  * Fetches the badge properties only if ALL branding has the same sponsor.

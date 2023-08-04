@@ -1,5 +1,5 @@
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import { findPillar } from './find-pillar';
+import { findPillar } from './find-pillar.ts';
 
 describe('findPillar', () => {
 	it('returns pillar if valid', () => {

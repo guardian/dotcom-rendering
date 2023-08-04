@@ -6,9 +6,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { liveBlock } from '../../fixtures/manual/liveBlock';
-import { LiveBlock } from './LiveBlock';
-import { PinnedPost } from './PinnedPost';
+import { liveBlock } from '../../fixtures/manual/liveBlock.ts';
+import { LiveBlock } from './LiveBlock.tsx';
+import { PinnedPost } from './PinnedPost.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (

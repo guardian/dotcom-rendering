@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 
 export const Border = ({ format }: { format: ArticleFormat }) => (
 	<div

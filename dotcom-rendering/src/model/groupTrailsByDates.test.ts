@@ -1,6 +1,6 @@
-import { trails } from '../../fixtures/manual/trails';
-import type { DCRFrontCard } from '../types/front';
-import { groupTrailsByDates } from './groupTrailsByDates';
+import { trails } from '../../fixtures/manual/trails.ts';
+import type { DCRFrontCard } from '../types/front.ts';
+import { groupTrailsByDates } from './groupTrailsByDates.ts';
 
 const datesToTrails = (dates: Date[]): DCRFrontCard[] => {
 	return dates.map((date) => ({

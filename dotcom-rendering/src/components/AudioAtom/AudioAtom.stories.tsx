@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { AudioAtom } from './AudioAtom';
+import { AudioAtom } from './AudioAtom.tsx';
 
 export default {
 	title: 'Components/AudioAtom',

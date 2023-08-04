@@ -6,7 +6,7 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
 

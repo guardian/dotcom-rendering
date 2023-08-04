@@ -6,18 +6,18 @@ import type {
 	CommentResponse,
 	CommentType,
 	SignedInUser,
-} from '../../discussionTypes';
+} from '../../discussionTypes.ts';
 import {
 	addUserName,
 	comment as defaultComment,
 	preview as defaultPreview,
 	reply as defaultReply,
-} from '../../lib/api';
-import { simulateNewComment } from '../../lib/simulateNewComment';
-import { FirstCommentWelcome } from '../FirstCommentWelcome/FirstCommentWelcome';
-import { PillarButton } from '../PillarButton/PillarButton';
-import { Preview } from '../Preview/Preview';
-import { Row } from '../Row/Row';
+} from '../../lib/api.tsx';
+import { simulateNewComment } from '../../lib/simulateNewComment.ts';
+import { FirstCommentWelcome } from '../FirstCommentWelcome/FirstCommentWelcome.tsx';
+import { PillarButton } from '../PillarButton/PillarButton.tsx';
+import { Preview } from '../Preview/Preview.tsx';
+import { Row } from '../Row/Row.tsx';
 
 type Props = {
 	shortUrl: string;

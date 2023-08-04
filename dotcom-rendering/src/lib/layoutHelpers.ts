@@ -1,6 +1,6 @@
 import type { Pillar } from '@guardian/libs';
-import type { FEArticleType } from '../types/frontend';
-import { decideNavPillar } from './decideNavPillar';
+import type { FEArticleType } from '../types/frontend.ts';
+import { decideNavPillar } from './decideNavPillar.ts';
 
 export const getCurrentPillar = (
 	article: FEArticleType,

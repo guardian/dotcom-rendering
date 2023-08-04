@@ -13,15 +13,15 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import type { EditionId } from '../lib/edition';
-import { useApi } from '../lib/useApi';
-import { useOnce } from '../lib/useOnce';
-import { enhanceCards } from '../model/enhanceCards';
-import type { DCRContainerPalette, FEFrontCard } from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices.tsx';
+import type { EditionId } from '../lib/edition.ts';
+import { useApi } from '../lib/useApi.tsx';
+import { useOnce } from '../lib/useOnce.ts';
+import { enhanceCards } from '../model/enhanceCards.ts';
+import type { DCRContainerPalette, FEFrontCard } from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
+import { FrontCard } from './FrontCard.tsx';
 
 const decideButtonText = ({
 	isOpen,

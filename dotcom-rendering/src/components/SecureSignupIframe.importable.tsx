@@ -15,8 +15,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
-} from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
+} from '../client/ophan/ophan.ts';
+import { isServer } from '../lib/isServer.ts';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the

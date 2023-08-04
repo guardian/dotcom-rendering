@@ -1,6 +1,6 @@
 import { ClassNames } from '@emotion/react';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { ShowMoreButton } from './ShowMoreButton.amp';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr.ts';
+import { ShowMoreButton } from './ShowMoreButton.amp.tsx';
 
 type Props = {
 	url?: string;

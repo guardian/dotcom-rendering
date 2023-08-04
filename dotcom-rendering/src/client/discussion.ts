@@ -1,6 +1,6 @@
-import { doHydration } from './islands/doHydration';
-import { getEmotionCache } from './islands/emotion';
-import { getProps } from './islands/getProps';
+import { doHydration } from './islands/doHydration.tsx';
+import { getEmotionCache } from './islands/emotion.ts';
+import { getProps } from './islands/getProps.ts';
 
 function forceHydration() {
 	try {

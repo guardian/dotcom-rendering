@@ -4,9 +4,9 @@ import {
 	palette as sourcePalette,
 	textSans,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { isLight } from '../lib/isLight';
-import { transparentColour } from '../lib/transparentColour';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { isLight } from '../lib/isLight.ts';
+import { transparentColour } from '../lib/transparentColour.ts';
 
 type Props = {
 	left: SectionType;

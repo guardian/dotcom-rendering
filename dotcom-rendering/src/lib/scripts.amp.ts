@@ -1,5 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 
 const unique = (value: string | null, index: number, self: (string | null)[]) =>
 	value && self.indexOf(value) === index;

@@ -1,4 +1,4 @@
-import { updateTimeElements } from './updateTimeElements';
+import { updateTimeElements } from './updateTimeElements.ts';
 
 export const relativeTime = (): Promise<void> => {
 	updateTimeElements();

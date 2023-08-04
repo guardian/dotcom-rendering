@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import { MessageForm } from '../../fixtures/manual/message-us-form';
-import { Section } from './Section';
-import { SendAMessage } from './SendAMessage.importable';
+import { MessageForm } from '../../fixtures/manual/message-us-form.ts';
+import { Section } from './Section.tsx';
+import { SendAMessage } from './SendAMessage.importable.tsx';
 
 export default {
 	component: SendAMessage,

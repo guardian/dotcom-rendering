@@ -8,12 +8,12 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
 import type {
 	EditionLinkType,
 	PillarLinkType,
-} from '../../../model/extract-nav';
-import { CollapseColumnButton } from './CollapseColumnButton';
+} from '../../../model/extract-nav.ts';
+import { CollapseColumnButton } from './CollapseColumnButton.tsx';
 
 // CSS
 const hideDesktop = css`

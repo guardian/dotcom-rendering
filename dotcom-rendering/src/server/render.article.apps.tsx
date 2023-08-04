@@ -1,12 +1,12 @@
 import { isString } from '@guardian/libs';
-import { ArticlePage } from '../components/ArticlePage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
-import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
-import { makeWindowGuardian } from '../model/window-guardian';
-import type { FEArticleType } from '../types/frontend';
-import { htmlPageTemplate } from './htmlPageTemplate';
+import { ArticlePage } from '../components/ArticlePage.tsx';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets.ts';
+import { decideFormat } from '../lib/decideFormat.ts';
+import { renderToStringWithEmotion } from '../lib/emotion.tsx';
+import { escapeData } from '../lib/escapeData.tsx';
+import { makeWindowGuardian } from '../model/window-guardian.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import { htmlPageTemplate } from './htmlPageTemplate.ts';
 
 export const renderArticle = (
 	article: FEArticleType,

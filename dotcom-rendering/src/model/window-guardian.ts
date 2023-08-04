@@ -1,5 +1,5 @@
-import type { EditionId } from '../lib/edition';
-import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type { EditionId } from '../lib/edition.ts';
+import type { ConfigType, ServerSideTests, Switches } from '../types/config.ts';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;

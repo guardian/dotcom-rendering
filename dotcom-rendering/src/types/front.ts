@@ -1,15 +1,15 @@
 import type { ArticleSpecial, Pillar } from '@guardian/libs';
-import type { SharedAdTargeting } from '../lib/ad-targeting';
-import type { EditionId } from '../lib/edition';
-import type { DCRBadgeType } from './badge';
-import type { Branding } from './branding';
-import type { ServerSideTests, Switches } from './config';
-import type { Image } from './content';
-import type { FooterType } from './footer';
-import type { MainMedia } from './mainMedia';
-import type { FETagType } from './tag';
-import type { Territory } from './territory';
-import type { FETrailType, TrailType } from './trails';
+import type { SharedAdTargeting } from '../lib/ad-targeting.ts';
+import type { EditionId } from '../lib/edition.ts';
+import type { DCRBadgeType } from './badge.ts';
+import type { Branding } from './branding.ts';
+import type { ServerSideTests, Switches } from './config.ts';
+import type { Image } from './content.ts';
+import type { FooterType } from './footer.ts';
+import type { MainMedia } from './mainMedia.ts';
+import type { FETagType } from './tag.ts';
+import type { Territory } from './territory.ts';
+import type { FETrailType, TrailType } from './trails.ts';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;

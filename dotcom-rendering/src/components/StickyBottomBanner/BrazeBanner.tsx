@@ -5,16 +5,16 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../../client/ophan/ophan';
-import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
-import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
-import { getZIndex } from '../../lib/getZIndex';
+import { submitComponentEvent } from '../../client/ophan/ophan.ts';
+import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage.ts';
+import { suppressForTaylorReport } from '../../lib/braze/taylorReport.ts';
+import { getZIndex } from '../../lib/getZIndex.ts';
 import type { CanShowResult } from '../../lib/messagePicker';
 import {
 	getOptionsHeadersWithOkta,
 	useAuthStatus,
-} from '../../lib/useAuthStatus';
-import type { TagType } from '../../types/tag';
+} from '../../lib/useAuthStatus.ts';
+import type { TagType } from '../../types/tag.ts';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };

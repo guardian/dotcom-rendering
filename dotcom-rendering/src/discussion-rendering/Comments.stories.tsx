@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import { Comments } from './Comments';
-import type { SignedInUser } from './discussionTypes';
+import { Comments } from './Comments.tsx';
+import type { SignedInUser } from './discussionTypes.ts';
 
 export default { component: Comments, title: 'Discussion/App' };
 

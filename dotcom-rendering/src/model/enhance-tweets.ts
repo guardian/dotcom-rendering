@@ -1,4 +1,4 @@
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 
 const removeTweetClass = (elements: FEElement[]): FEElement[] =>
 	elements.map<FEElement>((element) => {

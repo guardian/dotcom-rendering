@@ -10,14 +10,14 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { log, startPerformanceMeasure, storage } from '@guardian/libs';
-import { record } from '../../client/ophan/ophan';
+import { record } from '../../client/ophan/ophan.ts';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
-} from '../hasCurrentBrazeUser';
-import { checkBrazeDependencies } from './checkBrazeDependencies';
-import { getInitialisedAppboy } from './initialiseAppboy';
+} from '../hasCurrentBrazeUser.ts';
+import { checkBrazeDependencies } from './checkBrazeDependencies.ts';
+import { getInitialisedAppboy } from './initialiseAppboy.ts';
 
 const maybeWipeUserData = async (
 	apiKey?: string,

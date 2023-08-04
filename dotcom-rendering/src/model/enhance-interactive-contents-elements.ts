@@ -1,6 +1,6 @@
-import type { FEElement, SubheadingBlockElement } from '../types/content';
-import { isLegacyTableOfContents } from './isLegacyTableOfContents';
-import { stripHTML } from './sanitise';
+import type { FEElement, SubheadingBlockElement } from '../types/content.ts';
+import { isLegacyTableOfContents } from './isLegacyTableOfContents.ts';
+import { stripHTML } from './sanitise.ts';
 
 const enhance = (elements: FEElement[]): FEElement[] => {
 	const updatedElements: FEElement[] = [];

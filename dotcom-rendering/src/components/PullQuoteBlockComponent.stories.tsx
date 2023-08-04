@@ -4,9 +4,9 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
-import { Section } from './Section';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { PullQuoteBlockComponent } from './PullQuoteBlockComponent.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: PullQuoteBlockComponent,

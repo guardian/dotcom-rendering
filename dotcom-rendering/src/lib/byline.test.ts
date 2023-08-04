@@ -1,4 +1,4 @@
-import { getBylineComponentsFromTokens, getSoleContributor } from './byline';
+import { getBylineComponentsFromTokens, getSoleContributor } from './byline.ts';
 
 describe('Byline utilities', () => {
 	it('should link a single tag by linking name tokens with Contributor tag titles', () => {

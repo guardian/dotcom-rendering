@@ -11,26 +11,26 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import type { EditionId } from '../lib/edition';
-import { hideAge } from '../lib/hideAge';
-import type { DCRBadgeType } from '../types/badge';
+import { pageSkinContainer } from '../layouts/lib/pageSkin.ts';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { hideAge } from '../lib/hideAge.ts';
+import type { DCRBadgeType } from '../types/badge.ts';
 import type {
 	DCRContainerPalette,
 	DCRFrontType,
 	TreatType,
-} from '../types/front';
-import type { DCRFrontPagination } from '../types/tagFront';
-import { isAustralianTerritory, type Territory } from '../types/territory';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
-import { Badge } from './Badge';
-import { ContainerTitle } from './ContainerTitle';
-import { FrontPagination } from './FrontPagination';
-import { Island } from './Island';
-import { ShowHideButton } from './ShowHideButton';
-import { ShowMore } from './ShowMore.importable';
-import { Treats } from './Treats';
+} from '../types/front.ts';
+import type { DCRFrontPagination } from '../types/tagFront.ts';
+import { isAustralianTerritory, type Territory } from '../types/territory.ts';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable.tsx';
+import { Badge } from './Badge.tsx';
+import { ContainerTitle } from './ContainerTitle.tsx';
+import { FrontPagination } from './FrontPagination.tsx';
+import { Island } from './Island.tsx';
+import { ShowHideButton } from './ShowHideButton.tsx';
+import { ShowMore } from './ShowMore.importable.tsx';
+import { Treats } from './Treats.tsx';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */

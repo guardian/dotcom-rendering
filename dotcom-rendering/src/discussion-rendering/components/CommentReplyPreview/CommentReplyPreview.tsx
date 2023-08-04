@@ -3,10 +3,10 @@ import type { ArticleTheme } from '@guardian/libs';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { Button, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType } from '../../discussionTypes';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
-import { Row } from '../Row/Row';
+import type { CommentType } from '../../discussionTypes.ts';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
+import { Row } from '../Row/Row.tsx';
 
 type Props = {
 	pillar: ArticleTheme;

@@ -1,4 +1,4 @@
-import { decideLanguage, decideLanguageDirection } from './lang';
+import { decideLanguage, decideLanguageDirection } from './lang.ts';
 
 describe('decideLanguage', () => {
 	test('returns undefined if input is "en"', () => {

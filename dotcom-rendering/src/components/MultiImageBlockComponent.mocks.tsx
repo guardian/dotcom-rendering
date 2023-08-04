@@ -1,4 +1,4 @@
-import { ImageBlockElement } from '../types/content';
+import { ImageBlockElement } from '../types/content.ts';
 
 export const fourImages: ImageBlockElement[] = [
 	{

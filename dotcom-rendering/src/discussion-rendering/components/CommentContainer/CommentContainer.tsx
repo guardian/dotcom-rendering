@@ -8,12 +8,12 @@ import type {
 	CommentType,
 	SignedInUser,
 	ThreadsType,
-} from '../../discussionTypes';
-import { getMoreResponses } from '../../lib/api';
-import { Comment } from '../Comment/Comment';
-import { CommentForm } from '../CommentForm/CommentForm';
-import { CommentReplyPreview } from '../CommentReplyPreview/CommentReplyPreview';
-import { PillarButton } from '../PillarButton/PillarButton';
+} from '../../discussionTypes.ts';
+import { getMoreResponses } from '../../lib/api.tsx';
+import { Comment } from '../Comment/Comment.tsx';
+import { CommentForm } from '../CommentForm/CommentForm.tsx';
+import { CommentReplyPreview } from '../CommentReplyPreview/CommentReplyPreview.tsx';
+import { PillarButton } from '../PillarButton/PillarButton.tsx';
 
 type Props = {
 	comment: CommentType;

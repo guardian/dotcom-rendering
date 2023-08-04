@@ -1,4 +1,4 @@
-import { getHttp3Url } from '../lib/getHttp3Url';
+import { getHttp3Url } from '../lib/getHttp3Url.ts';
 
 type FontFamily =
 	| 'GH Guardian Headline'

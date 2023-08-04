@@ -1,7 +1,7 @@
-import type { EditionId } from '../lib/edition';
-import type { CommercialProperties } from './commercial';
-import type { FEElement } from './content';
-import type { TagType } from './tag';
+import type { EditionId } from '../lib/edition.ts';
+import type { CommercialProperties } from './commercial.ts';
+import type { FEElement } from './content.ts';
+import type { TagType } from './tag.ts';
 
 // This is a subset of FEArticleType for use in AMP and as a result there needs to be parity between the types of shared fields.
 export interface AMPArticleModel {

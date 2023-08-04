@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
-import { isLegacyTableOfContents } from './isLegacyTableOfContents';
+import type { FEElement, SubheadingBlockElement } from '../types/content.ts';
+import { isLegacyTableOfContents } from './isLegacyTableOfContents.ts';
 
 const shouldUseLegacyIDs = (elements: FEElement[]): boolean => {
 	return elements.some(

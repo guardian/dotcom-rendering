@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { DesignTag } from './DesignTag';
+import { DesignTag } from './DesignTag.tsx';
 
 export default {
 	component: DesignTag,

@@ -1,4 +1,4 @@
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 
 const scriptUrls = [
 	'https://interactive.guim.co.uk/page-enhancers/nav/boot.js',

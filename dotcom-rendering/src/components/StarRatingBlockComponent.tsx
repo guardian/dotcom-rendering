@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/source-foundations';
-import type { RatingSizeType } from '../types/content';
-import { StarRating } from './StarRating/StarRating';
+import type { RatingSizeType } from '../types/content.ts';
+import { StarRating } from './StarRating/StarRating.tsx';
 
 type Props = {
 	rating: number;

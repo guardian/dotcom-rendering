@@ -5,9 +5,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import type { TrailType } from '../types/trails';
-import { Carousel } from './Carousel.importable';
-import { Section } from './Section';
+import type { TrailType } from '../types/trails.ts';
+import { Carousel } from './Carousel.importable.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: Carousel,

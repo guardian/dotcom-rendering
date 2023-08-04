@@ -6,11 +6,11 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgGuardianLogo } from '@guardian/source-react-components';
-import type { EditionId } from '../lib/edition';
-import { getZIndex } from '../lib/getZIndex';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo';
-import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo';
+import type { EditionId } from '../lib/edition.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { SvgGuardianAustraliaLogo } from './SvgGuardianAustraliaLogo.tsx';
+import { SvgGuardianBestNewspaperLogo } from './SvgGuardianBestNewspaperLogo.tsx';
 
 const linkStylesUntilLeftCol = css`
 	float: right;

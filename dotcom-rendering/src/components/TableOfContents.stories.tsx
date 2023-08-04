@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import type { TableOfContentsItem } from '../types/frontend';
-import { TableOfContents } from './TableOfContents.importable';
+import type { TableOfContentsItem } from '../types/frontend.ts';
+import { TableOfContents } from './TableOfContents.importable.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (

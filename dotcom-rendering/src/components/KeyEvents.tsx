@@ -4,8 +4,8 @@ import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import { from, neutral, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import { Accordion } from './Accordion';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { Accordion } from './Accordion.tsx';
 
 export type KeyEvent = {
 	date: Date;

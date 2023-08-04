@@ -1,9 +1,9 @@
-import { takeFirst } from '../lib/tuple';
+import { takeFirst } from '../lib/tuple.ts';
 import type {
 	GroupedTrails,
 	GroupedTrailsFastMpu,
 	GroupedTrailsSlowMpu,
-} from '../types/tagFront';
+} from '../types/tagFront.ts';
 
 /**
  * Injects an MPU container into a list of grouped trails

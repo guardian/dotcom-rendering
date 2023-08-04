@@ -1,6 +1,6 @@
 import { isNonNullable } from '@guardian/libs';
-import type { ImageSource, SrcSetItem } from '../types/content';
-import { bestFitImage } from './image-fit.amp';
+import type { ImageSource, SrcSetItem } from '../types/content.ts';
+import { bestFitImage } from './image-fit.amp.ts';
 
 const containerWidths: number[] = [600, 800, 1000, 1200, 1600];
 // This distribution of numbers is a balance between providing enough pictures

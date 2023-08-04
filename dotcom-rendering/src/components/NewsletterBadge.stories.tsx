@@ -1,4 +1,4 @@
-import { NewsletterBadge } from './NewsletterBadge';
+import { NewsletterBadge } from './NewsletterBadge.tsx';
 
 export default {
 	component: NewsletterBadge,

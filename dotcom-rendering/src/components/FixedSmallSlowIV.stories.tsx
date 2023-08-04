@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { FixedSmallSlowIV } from './FixedSmallSlowIV.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: FixedSmallSlowIV,

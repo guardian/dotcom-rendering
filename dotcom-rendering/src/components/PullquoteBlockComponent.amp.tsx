@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 import Quote from '../static/icons/quote.svg';
 
 const styles = (pillar: ArticleTheme) => css`

@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
 import { from, neutral, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { transparentColour } from '../lib/transparentColour';
-import type { DCRContainerPalette, DCRSupportingContent } from '../types/front';
-import { CardHeadline } from './CardHeadline';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { transparentColour } from '../lib/transparentColour.ts';
+import type {
+	DCRContainerPalette,
+	DCRSupportingContent,
+} from '../types/front.ts';
+import { CardHeadline } from './CardHeadline.tsx';
 
 export type Alignment = 'vertical' | 'horizontal';
 

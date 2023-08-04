@@ -8,10 +8,10 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 import CameraSvg from '../static/icons/camera.svg';
 import VideoSvg from '../static/icons/video-icon.svg';
-import type { Palette } from '../types/palette';
+import type { Palette } from '../types/palette.ts';
 
 type Props = {
 	captionText?: string;

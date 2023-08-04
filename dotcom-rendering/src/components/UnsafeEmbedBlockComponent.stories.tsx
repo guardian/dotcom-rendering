@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import { embedIframe } from '../client/embedIframe';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
+import { embedIframe } from '../client/embedIframe.ts';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable.tsx';
 
 export default {
 	component: UnsafeEmbedBlockComponent,

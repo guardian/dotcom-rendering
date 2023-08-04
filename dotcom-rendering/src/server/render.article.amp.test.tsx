@@ -1,10 +1,10 @@
 import validator from 'amphtml-validator';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
 import type { AnalyticsModel } from '../components/Analytics.amp';
-import { AmpArticlePage } from '../components/ArticlePage.amp';
+import { AmpArticlePage } from '../components/ArticlePage.amp.tsx';
 import type { PermutiveModel } from '../components/Permutive.amp';
-import { extractNAV } from '../model/extract-nav';
-import { renderArticle } from './render.article.amp';
+import { extractNAV } from '../model/extract-nav.ts';
+import { renderArticle } from './render.article.amp.tsx';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
 	const v = await validator.getInstance();

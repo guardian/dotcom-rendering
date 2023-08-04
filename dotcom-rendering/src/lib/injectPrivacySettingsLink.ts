@@ -1,5 +1,5 @@
 import { cmp } from '@guardian/consent-management-platform';
-import { getPrivacyFramework } from './getPrivacyFramework';
+import { getPrivacyFramework } from './getPrivacyFramework.ts';
 
 const newPrivacyLinkName = 'privacy-settings';
 

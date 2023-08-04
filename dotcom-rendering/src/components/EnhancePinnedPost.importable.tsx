@@ -1,8 +1,8 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../client/ophan/ophan';
-import { isServer } from '../lib/isServer';
-import { useIsInView } from '../lib/useIsInView';
+import { submitComponentEvent } from '../client/ophan/ophan.ts';
+import { isServer } from '../lib/isServer.ts';
+import { useIsInView } from '../lib/useIsInView.ts';
 
 const pinnedPost: HTMLElement | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')

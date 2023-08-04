@@ -8,7 +8,7 @@ Logs are shipped from the appplication instance to the central elk stack, you ca
 
 To log something:
 
-    import { logger } from './logging';
+    import { logger } from './logging.ts';
 
     logger.info('Logging can be useful');
     logger.warn('But also expensive');

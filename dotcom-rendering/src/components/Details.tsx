@@ -4,7 +4,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import { getZIndex } from '../lib/getZIndex';
+import { getZIndex } from '../lib/getZIndex.ts';
 
 type LabelSize = 'xsmall' | 'small';
 

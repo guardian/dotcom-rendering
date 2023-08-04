@@ -6,8 +6,8 @@ import {
 	OrderByType,
 	PageSizeType,
 	ThreadsType,
-} from '../../discussionTypes';
-import { Dropdown } from '../Dropdown/Dropdown';
+} from '../../discussionTypes.ts';
+import { Dropdown } from '../Dropdown/Dropdown.tsx';
 
 type Props = {
 	filters: FilterOptions;

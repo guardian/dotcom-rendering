@@ -1,14 +1,14 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
-import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout';
-import type { NavType } from '../model/extract-nav';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { AlreadyVisited } from './AlreadyVisited.importable';
-import { FocusStyles } from './FocusStyles.importable';
-import { Island } from './Island';
-import { Metrics } from './Metrics.importable';
-import { SkipTo } from './SkipTo';
+import { AllEditorialNewslettersPageLayout } from '../layouts/AllEditorialNewslettersPageLayout.tsx';
+import type { NavType } from '../model/extract-nav.ts';
+import type { DCRNewslettersPageType } from '../types/newslettersPage.ts';
+import { AlreadyVisited } from './AlreadyVisited.importable.tsx';
+import { FocusStyles } from './FocusStyles.importable.tsx';
+import { Island } from './Island.tsx';
+import { Metrics } from './Metrics.importable.tsx';
+import { SkipTo } from './SkipTo.tsx';
 
 type Props = {
 	newslettersPage: DCRNewslettersPageType;

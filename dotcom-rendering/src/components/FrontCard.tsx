@@ -1,7 +1,7 @@
 import { ArticleDesign } from '@guardian/libs';
-import type { DCRFrontCard } from '../types/front';
-import type { Props as CardProps } from './Card/Card';
-import { Card } from './Card/Card';
+import type { DCRFrontCard } from '../types/front.ts';
+import type { Props as CardProps } from './Card/Card.tsx';
+import { Card } from './Card/Card.tsx';
 
 type Props = {
 	trail: DCRFrontCard;

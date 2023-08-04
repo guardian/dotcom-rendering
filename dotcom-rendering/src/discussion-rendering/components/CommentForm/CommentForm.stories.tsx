@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
-import type { CommentType, SignedInUser } from '../../discussionTypes';
-import { CommentForm } from './CommentForm';
+import type { CommentType, SignedInUser } from '../../discussionTypes.ts';
+import { CommentForm } from './CommentForm.tsx';
 
 export default { component: CommentForm, title: 'Discussion/CommentForm' };
 

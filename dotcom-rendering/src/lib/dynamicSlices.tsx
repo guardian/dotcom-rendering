@@ -1,11 +1,11 @@
-import { LI } from '../components/Card/components/LI';
-import { UL } from '../components/Card/components/UL';
+import { LI } from '../components/Card/components/LI.tsx';
+import { UL } from '../components/Card/components/UL.tsx';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import type { TrailType } from '../types/trails';
+} from '../types/front.ts';
+import type { TrailType } from '../types/trails.ts';
 import {
 	Card100Media100,
 	Card100Media75,
@@ -16,7 +16,7 @@ import {
 	Card75Media50Left,
 	Card75Media50Right,
 	CardDefaultMedia,
-} from './cardWrappers';
+} from './cardWrappers.tsx';
 
 /**
  * A place for shared slices which are used across multiple dynamic/ containers

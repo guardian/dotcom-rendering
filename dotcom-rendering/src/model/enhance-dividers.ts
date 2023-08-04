@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 
 const isDinkus = (element: FEElement): boolean => {
 	// Classic dinkus do not trigger dropcaps

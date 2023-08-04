@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgCheckmark } from '@guardian/source-react-components';
-import { Row } from '../Row/Row';
-import { PillarButton } from './PillarButton';
+import { Row } from '../Row/Row.tsx';
+import { PillarButton } from './PillarButton.tsx';
 
 const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 	<div

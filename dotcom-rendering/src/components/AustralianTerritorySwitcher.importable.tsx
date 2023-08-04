@@ -10,7 +10,7 @@ import {
 } from '@guardian/source-react-components';
 import { isString } from 'lodash';
 import { useState } from 'react';
-import type { AustralianTerritory } from '../types/territory';
+import type { AustralianTerritory } from '../types/territory.ts';
 
 const styles = css`
 	padding: ${space[2]}px;

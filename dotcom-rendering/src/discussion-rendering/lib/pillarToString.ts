@@ -1,6 +1,6 @@
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import type { CAPIPillar } from '../discussionTypes';
+import type { CAPIPillar } from '../discussionTypes.ts';
 
 export const pillarToString = (pillar: ArticleTheme): CAPIPillar => {
 	switch (pillar) {

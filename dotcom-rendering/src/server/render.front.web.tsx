@@ -2,21 +2,21 @@ import { isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles.js';
-import { FrontPage } from '../components/FrontPage';
-import { TagFrontPage } from '../components/TagFrontPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
-import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
-import { getHttp3Url } from '../lib/getHttp3Url';
-import { polyfillIO } from '../lib/polyfill.io';
-import { themeToPillar } from '../lib/themeToPillar';
-import type { NavType } from '../model/extract-nav';
-import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
-import type { DCRFrontType } from '../types/front';
-import type { DCRTagFrontType } from '../types/tagFront';
-import { htmlPageTemplate } from './htmlPageTemplate';
+} from '../../scripts/webpack/bundles.js.js';
+import { FrontPage } from '../components/FrontPage.tsx';
+import { TagFrontPage } from '../components/TagFrontPage.tsx';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets.ts';
+import { renderToStringWithEmotion } from '../lib/emotion.tsx';
+import { escapeData } from '../lib/escapeData.tsx';
+import { getHttp3Url } from '../lib/getHttp3Url.ts';
+import { polyfillIO } from '../lib/polyfill.io.ts';
+import { themeToPillar } from '../lib/themeToPillar.ts';
+import type { NavType } from '../model/extract-nav.ts';
+import { extractNAV } from '../model/extract-nav.ts';
+import { makeWindowGuardian } from '../model/window-guardian.ts';
+import type { DCRFrontType } from '../types/front.ts';
+import type { DCRTagFrontType } from '../types/tagFront.ts';
+import { htmlPageTemplate } from './htmlPageTemplate.ts';
 
 interface Props {
 	front: DCRFrontType;

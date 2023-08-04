@@ -1,4 +1,4 @@
-import { ShadyPie } from './ShadyPie';
+import { ShadyPie } from './ShadyPie.tsx';
 
 export default {
 	component: ShadyPie,

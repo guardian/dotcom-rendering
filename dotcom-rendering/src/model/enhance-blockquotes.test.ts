@@ -1,7 +1,7 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { FEArticleType } from '../types/frontend';
-import { enhanceBlockquotes } from './enhance-blockquotes';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import { enhanceBlockquotes } from './enhance-blockquotes.ts';
 
 const example: FEArticleType = ExampleArticle;
 

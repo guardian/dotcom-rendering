@@ -3,8 +3,8 @@ import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial, Pillar } from '@guardian/libs';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
 
 type Props = {
 	pillar: ArticleTheme;

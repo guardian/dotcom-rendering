@@ -1,5 +1,5 @@
-import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
+import type { FEElement } from '../types/content.ts';
+import type { FEArticleType } from '../types/frontend.ts';
 
 /**
  * This function adds the position property to each image

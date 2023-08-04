@@ -1,5 +1,5 @@
-import { Standard as standardPage } from '../../fixtures/generated/articles/Standard';
-import { canRenderAds } from './canRenderAds';
+import { Standard as standardPage } from '../../fixtures/generated/articles/Standard.ts';
+import { canRenderAds } from './canRenderAds.ts';
 
 describe('canRenderAds', () => {
 	it('shows ads by default', () => {

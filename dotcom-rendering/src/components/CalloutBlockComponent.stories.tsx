@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2';
-import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
+import { calloutCampaign as calloutCampaignV2 } from '../../fixtures/manual/calloutCampaignV2.ts';
+import { CalloutBlockComponent } from './CalloutBlockComponent.importable.tsx';
 
 const tomorrow = new Date().setDate(new Date().getDate() + 1) / 1000;
 const yesterday = new Date().setDate(new Date().getDate() - 1) / 1000;

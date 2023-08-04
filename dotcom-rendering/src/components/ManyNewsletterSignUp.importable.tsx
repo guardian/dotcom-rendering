@@ -9,16 +9,16 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ReCAPTCHA } from 'react-google-recaptcha';
-import { isServer } from '../lib/isServer';
+import { isServer } from '../lib/isServer.ts';
 import {
 	getCaptchaSiteKey,
 	reportTrackingEvent,
 	requestMultipleSignUps,
-} from '../lib/newsletter-sign-up-requests';
-import { Flex } from './Flex';
-import { ManyNewslettersForm } from './ManyNewslettersForm';
-import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
-import { Section } from './Section';
+} from '../lib/newsletter-sign-up-requests.ts';
+import { Flex } from './Flex.tsx';
+import { ManyNewslettersForm } from './ManyNewslettersForm.tsx';
+import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard.tsx';
+import { Section } from './Section.tsx';
 
 type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
 

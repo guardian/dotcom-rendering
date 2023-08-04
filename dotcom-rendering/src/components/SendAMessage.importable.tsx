@@ -19,9 +19,9 @@ import {
 } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import type { MessageUsFieldType } from '../types/content';
-import { FormField } from './Callout/FormField';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { MessageUsFieldType } from '../types/content.ts';
+import { FormField } from './Callout/FormField.tsx';
 
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';

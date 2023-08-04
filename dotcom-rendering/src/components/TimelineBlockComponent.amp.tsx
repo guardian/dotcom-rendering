@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { TimelineEvent } from '@guardian/atoms-rendering';
 import { brandAlt, neutral } from '@guardian/source-foundations';
-import { Expandable } from './Expandable.amp';
+import { Expandable } from './Expandable.amp.tsx';
 
 const eventsWrapper = css`
 	margin-left: 8px;

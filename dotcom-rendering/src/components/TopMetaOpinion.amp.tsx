@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { headline, neutral } from '@guardian/source-foundations';
-import { getAgeWarning } from '../lib/age-warning';
-import { getSoleContributor } from '../lib/byline';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import { getSharingUrls } from '../lib/sharing-urls';
+import { getAgeWarning } from '../lib/age-warning.ts';
+import { getSoleContributor } from '../lib/byline.ts';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import { getSharingUrls } from '../lib/sharing-urls.ts';
 import type { AMPArticleModel } from '../types/article.amp';
-import { Branding, BrandingRegionContainer } from './Branding.amp';
-import { Byline } from './Byline.amp';
-import { MainMedia } from './MainMedia.amp';
-import { SeriesLink } from './SeriesLink.amp';
-import { Standfirst } from './Standfirst.amp';
-import { TopMetaExtras } from './TopMetaExtras.amp';
+import { Branding, BrandingRegionContainer } from './Branding.amp.tsx';
+import { Byline } from './Byline.amp.tsx';
+import { MainMedia } from './MainMedia.amp.tsx';
+import { SeriesLink } from './SeriesLink.amp.tsx';
+import { Standfirst } from './Standfirst.amp.tsx';
+import { TopMetaExtras } from './TopMetaExtras.amp.tsx';
 
 const headerStyle = css`
 	${headline.small()};

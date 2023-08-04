@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { images } from '../../fixtures/generated/images';
-import { liveBlock } from '../../fixtures/manual/liveBlock';
-import { LiveBlock } from './LiveBlock';
+import { images } from '../../fixtures/generated/images.ts';
+import { liveBlock } from '../../fixtures/manual/liveBlock.ts';
+import { LiveBlock } from './LiveBlock.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (

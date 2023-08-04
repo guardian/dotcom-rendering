@@ -18,27 +18,27 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
+import type { OphanRecordFunction } from '../client/ophan/ophan.ts';
 import {
 	getOphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
-} from '../client/ophan/ophan';
-import { addTrackingCodesToUrl } from '../lib/acquisitions';
+} from '../client/ophan/ophan.ts';
+import { addTrackingCodesToUrl } from '../lib/acquisitions.ts';
 import {
 	getLastOneOffContributionDate,
 	getPurchaseInfo,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
-} from '../lib/contributions';
-import type { EditionId } from '../lib/edition';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { setAutomat } from '../lib/setAutomat';
-import type { AuthStatus } from '../lib/useAuthStatus';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { useIsInView } from '../lib/useIsInView';
-import { useOnce } from '../lib/useOnce';
+} from '../lib/contributions.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { getLocaleCode } from '../lib/getCountryCode.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { setAutomat } from '../lib/setAutomat.ts';
+import type { AuthStatus } from '../lib/useAuthStatus.ts';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import { useIsInView } from '../lib/useIsInView.ts';
+import { useOnce } from '../lib/useOnce.ts';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {

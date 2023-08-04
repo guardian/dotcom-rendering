@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, headline, textSans, until } from '@guardian/source-foundations';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { getSoleContributor } from '../lib/byline.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
 import TwitterIcon from '../static/icons/twitter.svg';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
-import { BylineLink } from './BylineLink';
+import type { Palette } from '../types/palette.ts';
+import type { TagType } from '../types/tag.ts';
+import { BylineLink } from './BylineLink.tsx';
 
 const twitterHandleColour = (palette: Palette) => css`
 	color: ${palette.text.twitterHandleBelowDesktop};

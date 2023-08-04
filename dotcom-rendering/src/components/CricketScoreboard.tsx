@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { between, space, textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
 
 const ALL_OUT_WICKETS = 10;
 

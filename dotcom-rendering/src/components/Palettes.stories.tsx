@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { DynamicFast } from './DynamicFast';
-import { FrontSection } from './FrontSection';
-import { LabsSection } from './LabsSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { DynamicFast } from './DynamicFast.tsx';
+import { FrontSection } from './FrontSection.tsx';
+import { LabsSection } from './LabsSection.tsx';
 
 export default {
 	title: 'Layouts/Palettes',

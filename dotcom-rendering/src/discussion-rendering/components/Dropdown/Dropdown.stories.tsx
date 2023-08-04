@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
 import { useState } from 'react';
-import type { DropdownOptionType } from '../../discussionTypes';
-import { Dropdown } from './Dropdown';
+import type { DropdownOptionType } from '../../discussionTypes.ts';
+import { Dropdown } from './Dropdown.tsx';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div

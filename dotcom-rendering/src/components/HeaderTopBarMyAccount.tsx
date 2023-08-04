@@ -2,24 +2,24 @@ import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { getZIndex } from '../lib/getZIndex';
-import { createAuthenticationEventParams } from '../lib/identity-component-event';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { createAuthenticationEventParams } from '../lib/identity-component-event.ts';
 import {
 	addNotificationsToDropdownLinks,
 	mapBrazeCardsToNotifications,
-} from '../lib/notification';
-import type { Notification } from '../lib/notification';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { useApi } from '../lib/useApi';
+} from '../lib/notification.ts';
+import type { Notification } from '../lib/notification.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { useApi } from '../lib/useApi.tsx';
 import type {
 	AuthStatus,
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../lib/useAuthStatus';
-import { useBraze } from '../lib/useBraze';
+} from '../lib/useAuthStatus.ts';
+import { useBraze } from '../lib/useBraze.ts';
 import ProfileIcon from '../static/icons/profile.svg';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.tsx';
+import { Dropdown } from './Dropdown.tsx';
 
 interface MyAccountProps {
 	mmaUrl: string;

@@ -1,7 +1,7 @@
 import sha256 from 'crypto-js/sha256';
 import React from 'react';
-import { guard } from '../lib/guard';
-import type { Switches } from '../types/config';
+import { guard } from '../lib/guard.ts';
+import type { Switches } from '../types/config.ts';
 
 const AB_TEST_GROUPS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
 

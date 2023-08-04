@@ -3,7 +3,7 @@ import {
 	Card33Media33,
 	CardDefault,
 	CardDefaultMediaMobile,
-} from '../lib/cardWrappers';
+} from '../lib/cardWrappers.tsx';
 import {
 	Card25_Card25_Card25_Card25,
 	Card25_Card75,
@@ -12,15 +12,15 @@ import {
 	Card75_Card25,
 	ColumnOfCards50_Card25_Card25,
 	filterGroupedTrails,
-} from '../lib/dynamicSlices';
+} from '../lib/dynamicSlices.tsx';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import { AdSlot } from './AdSlot';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+} from '../types/front.ts';
+import { AdSlot } from './AdSlot.tsx';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;

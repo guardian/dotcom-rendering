@@ -1,4 +1,4 @@
-import { Placeholder } from './Placeholder';
+import { Placeholder } from './Placeholder.tsx';
 
 /**
  * An island can be server-side rendered and then hydrated on the client,

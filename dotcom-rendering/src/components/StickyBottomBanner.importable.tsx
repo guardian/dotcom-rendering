@@ -4,35 +4,35 @@ import type {
 } from '@guardian/braze-components/logic';
 import { cmp } from '@guardian/consent-management-platform';
 import { useEffect, useState } from 'react';
-import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
-import { getArticleCounts } from '../lib/articleCount';
-import type { ArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited.ts';
+import { getArticleCounts } from '../lib/articleCount.ts';
+import type { ArticleCounts } from '../lib/articleCount.ts';
+import { getLocaleCode } from '../lib/getCountryCode.ts';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
-} from '../lib/messagePicker';
-import { pickMessage } from '../lib/messagePicker';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { useBraze } from '../lib/useBraze';
-import { useOnce } from '../lib/useOnce';
-import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
-import type { TagType } from '../types/tag';
+} from '../lib/messagePicker.ts';
+import { pickMessage } from '../lib/messagePicker.ts';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import { useBraze } from '../lib/useBraze.ts';
+import { useOnce } from '../lib/useOnce.ts';
+import { useSignInGateWillShow } from '../lib/useSignInGateWillShow.ts';
+import type { TagType } from '../types/tag.ts';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
-} from './StickyBottomBanner/BrazeBanner';
+} from './StickyBottomBanner/BrazeBanner.tsx';
 import {
 	canShowPuzzlesBanner,
 	canShowRRBanner,
 	PuzzlesBanner,
 	ReaderRevenueBanner,
-} from './StickyBottomBanner/ReaderRevenueBanner';
+} from './StickyBottomBanner/ReaderRevenueBanner.tsx';
 import type {
 	BannerProps,
 	CanShowFunctionType,
-} from './StickyBottomBanner/ReaderRevenueBanner';
+} from './StickyBottomBanner/ReaderRevenueBanner.tsx';
 
 type Props = {
 	contentType: string;

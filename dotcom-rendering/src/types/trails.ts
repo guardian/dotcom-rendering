@@ -1,6 +1,6 @@
-import type { Branding } from './branding';
-import type { DCRSnapType, DCRSupportingContent } from './front';
-import type { MainMedia } from './mainMedia';
+import type { Branding } from './branding.ts';
+import type { DCRSnapType, DCRSupportingContent } from './front.ts';
+import type { MainMedia } from './mainMedia.ts';
 
 interface BaseTrailType {
 	url: string;

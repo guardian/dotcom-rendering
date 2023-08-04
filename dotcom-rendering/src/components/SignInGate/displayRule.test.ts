@@ -1,12 +1,12 @@
 import { jest } from '@jest/globals';
-import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
+import { incrementDailyArticleCount } from '../../lib/dailyArticleCount.ts';
 import {
 	isIOS9,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-} from './displayRule';
+} from './displayRule.ts';
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {

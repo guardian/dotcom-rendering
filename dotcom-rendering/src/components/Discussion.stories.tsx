@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useEffect } from 'react';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
-import { DiscussionLayout } from './DiscussionLayout';
+import { doStorybookHydration } from '../client/islands/doStorybookHydration.js';
+import { DiscussionLayout } from './DiscussionLayout.tsx';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {

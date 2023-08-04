@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { DecideContainerByTrails } from './DecideContainerByTrails';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { DecideContainerByTrails } from './DecideContainerByTrails.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: DecideContainerByTrails,

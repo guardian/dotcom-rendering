@@ -1,4 +1,4 @@
-import { takeFirst } from './tuple';
+import { takeFirst } from './tuple.ts';
 
 describe('takeFirst', () => {
 	it('Always returns the correct array length when the array is one less, the same as, or one more than n', () => {

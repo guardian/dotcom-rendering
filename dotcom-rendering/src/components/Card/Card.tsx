@@ -3,48 +3,48 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, from, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decidePalette } from '../../lib/decidePalette';
-import { getZIndex } from '../../lib/getZIndex';
-import type { Branding } from '../../types/branding';
+import { decidePalette } from '../../lib/decidePalette.ts';
+import { getZIndex } from '../../lib/getZIndex.ts';
+import type { Branding } from '../../types/branding.ts';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRSlideshowImage,
 	DCRSnapType,
 	DCRSupportingContent,
-} from '../../types/front';
-import type { MainMedia } from '../../types/mainMedia';
-import type { Palette } from '../../types/palette';
-import { Avatar } from '../Avatar';
-import { CardHeadline } from '../CardHeadline';
-import { CardPicture } from '../CardPicture';
-import { Hide } from '../Hide';
-import { Island } from '../Island';
-import { LatestLinks } from '../LatestLinks.importable';
-import { MediaDuration } from '../MediaDuration';
-import { MediaMeta } from '../MediaMeta';
-import { Slideshow } from '../Slideshow';
-import { Snap } from '../Snap';
-import { SnapCssSandbox } from '../SnapCssSandbox';
-import { StarRating } from '../StarRating/StarRating';
-import type { Alignment } from '../SupportingContent';
-import { SupportingContent } from '../SupportingContent';
-import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable';
-import { AvatarContainer } from './components/AvatarContainer';
-import { CardAge } from './components/CardAge';
-import { CardBranding } from './components/CardBranding';
-import { CardFooter } from './components/CardFooter';
-import { CardLayout } from './components/CardLayout';
-import { CardLink } from './components/CardLink';
-import { CardWrapper } from './components/CardWrapper';
-import { ContentWrapper } from './components/ContentWrapper';
-import { HeadlineWrapper } from './components/HeadlineWrapper';
+} from '../../types/front.ts';
+import type { MainMedia } from '../../types/mainMedia.ts';
+import type { Palette } from '../../types/palette.ts';
+import { Avatar } from '../Avatar.tsx';
+import { CardHeadline } from '../CardHeadline.tsx';
+import { CardPicture } from '../CardPicture.tsx';
+import { Hide } from '../Hide.tsx';
+import { Island } from '../Island.tsx';
+import { LatestLinks } from '../LatestLinks.importable.tsx';
+import { MediaDuration } from '../MediaDuration.tsx';
+import { MediaMeta } from '../MediaMeta.tsx';
+import { Slideshow } from '../Slideshow.tsx';
+import { Snap } from '../Snap.tsx';
+import { SnapCssSandbox } from '../SnapCssSandbox.tsx';
+import { StarRating } from '../StarRating/StarRating.tsx';
+import type { Alignment } from '../SupportingContent.tsx';
+import { SupportingContent } from '../SupportingContent.tsx';
+import { YoutubeBlockComponent } from '../YoutubeBlockComponent.importable.tsx';
+import { AvatarContainer } from './components/AvatarContainer.tsx';
+import { CardAge } from './components/CardAge.tsx';
+import { CardBranding } from './components/CardBranding.tsx';
+import { CardFooter } from './components/CardFooter.tsx';
+import { CardLayout } from './components/CardLayout.tsx';
+import { CardLink } from './components/CardLink.tsx';
+import { CardWrapper } from './components/CardWrapper.tsx';
+import { ContentWrapper } from './components/ContentWrapper.tsx';
+import { HeadlineWrapper } from './components/HeadlineWrapper.tsx';
 import type {
 	ImagePositionType,
 	ImageSizeType,
-} from './components/ImageWrapper';
-import { ImageWrapper } from './components/ImageWrapper';
-import { TrailTextWrapper } from './components/TrailTextWrapper';
+} from './components/ImageWrapper.tsx';
+import { ImageWrapper } from './components/ImageWrapper.tsx';
+import { TrailTextWrapper } from './components/TrailTextWrapper.tsx';
 
 export type Props = {
 	linkTo: string;

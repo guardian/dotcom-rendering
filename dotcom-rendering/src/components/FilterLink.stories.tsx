@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { FilterLink } from './FilterLink';
+import { FilterLink } from './FilterLink.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div

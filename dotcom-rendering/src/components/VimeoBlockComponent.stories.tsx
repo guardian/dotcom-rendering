@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { VimeoBlockComponent } from './VimeoBlockComponent';
+import { VimeoBlockComponent } from './VimeoBlockComponent.tsx';
 
 export default {
 	component: VimeoBlockComponent,

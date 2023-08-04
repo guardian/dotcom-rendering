@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import {
 	calloutCampaign,
 	calloutCampaignOnlyTwoRadio,
-} from '../../../fixtures/manual/calloutCampaign';
-import { Form } from './Form';
+} from '../../../fixtures/manual/calloutCampaign.ts';
+import { Form } from './Form.tsx';
 
 export default {
 	component: Form,

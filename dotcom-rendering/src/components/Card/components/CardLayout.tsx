@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
-import { DCRContainerType } from '../../../types/front';
-import type { ImagePositionType } from './ImageWrapper';
+import { DCRContainerType } from '../../../types/front.ts';
+import type { ImagePositionType } from './ImageWrapper.tsx';
 
 const padding = 20;
 

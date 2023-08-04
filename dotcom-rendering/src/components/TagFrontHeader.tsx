@@ -8,12 +8,12 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Fragment, type ReactNode } from 'react';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { isElement, parseHtml } from '../lib/domUtils';
-import { logger } from '../server/lib/logging';
-import type { DCRContainerPalette } from '../types/front';
-import { ContainerTitle } from './ContainerTitle';
-import { generateSources, Sources } from './Picture';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import { isElement, parseHtml } from '../lib/domUtils.ts';
+import { logger } from '../server/lib/logging.ts';
+import type { DCRContainerPalette } from '../types/front.ts';
+import { ContainerTitle } from './ContainerTitle.tsx';
+import { generateSources, Sources } from './Picture.tsx';
 
 type Props = {
 	title: string;
@@ -290,7 +290,7 @@ export const TagFrontHeader = ({
 				fallbackStyles,
 				containerStyles,
 				css`
-					background-color: ${overrides?.background?.container};
+					background-color: ${overrides?.background.container};
 				`,
 			]}
 		>
@@ -299,7 +299,7 @@ export const TagFrontHeader = ({
 			<div css={[sectionHeadline, titleStyle, paddings]}>
 				<ContainerTitle
 					title={title}
-					fontColour={overrides?.text?.container}
+					fontColour={overrides?.text.container}
 					containerPalette={containerPalette}
 				/>
 			</div>

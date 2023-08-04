@@ -133,6 +133,7 @@ module.exports = {
 
 		'object-shorthand': ['error', 'always'],
 
+		'import/extensions': ['error', 'always', { ignorePackages: true }],
 		'import/no-extraneous-dependencies': [
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options

@@ -1,4 +1,4 @@
-import { formatAttrString } from './formatAttrString';
+import { formatAttrString } from './formatAttrString.ts';
 
 const expectedOutput = 'this-headline-should-be-converted';
 

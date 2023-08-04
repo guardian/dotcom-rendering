@@ -1,6 +1,6 @@
 import { jest } from '@jest/globals';
 import { render, waitFor } from '@testing-library/react';
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../lib/edition.ts';
 
 jest.mock('@guardian/libs', () => ({
 	log: jest.fn(),
@@ -18,10 +18,12 @@ jest.unstable_mockModule('../../src/lib/contributions', async () => ({
 }));
 
 const { shouldHideSupportMessaging } = (await import(
-	'../lib/contributions'
-)) as jest.Mocked<typeof import('../lib/contributions')>;
+	'../lib/contributions.ts'
+)) as jest.Mocked<typeof import('../lib/contributions.ts')>;
 
-const { ReaderRevenueLinks } = await import('./ReaderRevenueLinks.importable');
+const { ReaderRevenueLinks } = await import(
+	'./ReaderRevenueLinks.importable.tsx'
+);
 
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';

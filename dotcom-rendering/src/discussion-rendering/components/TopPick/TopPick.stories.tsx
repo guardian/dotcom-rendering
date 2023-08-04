@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
-import type { CommentType } from '../../discussionTypes';
-import { TopPick } from './TopPick';
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus.ts';
+import type { CommentType } from '../../discussionTypes.ts';
+import { TopPick } from './TopPick.tsx';
 
 export default { component: TopPick, title: 'Discussion/TopPick' };
 

@@ -1,8 +1,8 @@
-import { adJson, stringify } from '../lib/ad-json.amp';
-import type { EditionId } from '../lib/edition';
+import { adJson, stringify } from '../lib/ad-json.amp.ts';
+import type { EditionId } from '../lib/edition.ts';
 import type { AdType } from '../lib/real-time-config.amp';
-import { realTimeConfig } from '../lib/real-time-config.amp';
-import type { CommercialProperties } from '../types/commercial';
+import { realTimeConfig } from '../lib/real-time-config.amp.ts';
+import type { CommercialProperties } from '../types/commercial.ts';
 
 // Largest size first
 const inlineSizes = [

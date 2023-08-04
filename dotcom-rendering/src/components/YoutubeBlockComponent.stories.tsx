@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
-import { RightColumn } from './RightColumn';
-import { Section } from './Section';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
+import { Flex } from './Flex.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { RightColumn } from './RightColumn.tsx';
+import { Section } from './Section.tsx';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable.tsx';
 
 export default {
 	component: YoutubeBlockComponent,

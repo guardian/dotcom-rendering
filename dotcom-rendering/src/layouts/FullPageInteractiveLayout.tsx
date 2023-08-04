@@ -11,27 +11,30 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { adContainerStyles, MobileStickyContainer } from '../components/AdSlot';
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
-import { Nav } from '../components/Nav/Nav';
-import { Section } from '../components/Section';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
-import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
-import { getZIndex } from '../lib/getZIndex';
-import { decideLanguage, decideLanguageDirection } from '../lib/lang';
-import { renderElement } from '../lib/renderElement';
-import type { NavType } from '../model/extract-nav';
-import type { Switches } from '../types/config';
-import type { FEElement } from '../types/content';
-import type { FEArticleType } from '../types/frontend';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
-import { BannerWrapper, Stuck } from './lib/stickiness';
+import {
+	adContainerStyles,
+	MobileStickyContainer,
+} from '../components/AdSlot.tsx';
+import { Footer } from '../components/Footer.tsx';
+import { Header } from '../components/Header.tsx';
+import { HeaderAdSlot } from '../components/HeaderAdSlot.tsx';
+import { Island } from '../components/Island.tsx';
+import { LabsHeader } from '../components/LabsHeader.tsx';
+import { Nav } from '../components/Nav/Nav.tsx';
+import { Section } from '../components/Section.tsx';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable.tsx';
+import { SubNav } from '../components/SubNav.importable.tsx';
+import { canRenderAds } from '../lib/canRenderAds.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { decideLanguage, decideLanguageDirection } from '../lib/lang.ts';
+import { renderElement } from '../lib/renderElement.tsx';
+import type { NavType } from '../model/extract-nav.ts';
+import type { Switches } from '../types/config.ts';
+import type { FEElement } from '../types/content.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling.ts';
+import { BannerWrapper, Stuck } from './lib/stickiness.tsx';
 
 interface Props {
 	article: FEArticleType;

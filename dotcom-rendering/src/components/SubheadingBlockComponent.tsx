@@ -1,8 +1,8 @@
 import { jsx } from '@emotion/react';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
-import { isElement, parseHtml } from '../lib/domUtils';
-import { logger } from '../server/lib/logging';
+import { isElement, parseHtml } from '../lib/domUtils.ts';
+import { logger } from '../server/lib/logging.ts';
 
 type Props = { html: string };
 

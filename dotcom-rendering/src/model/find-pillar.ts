@@ -1,5 +1,5 @@
 import { ArticleSpecial, Pillar } from '@guardian/libs';
-import type { TagType } from '../types/tag';
+import type { TagType } from '../types/tag.ts';
 
 export const findPillar: (
 	name: string,

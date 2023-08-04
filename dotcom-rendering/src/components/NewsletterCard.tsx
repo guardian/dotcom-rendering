@@ -14,11 +14,11 @@ import { useCallback, useEffect, useState } from 'react';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
-} from '../client/ophan/ophan';
-import { useIsInView } from '../lib/useIsInView';
-import type { Newsletter } from '../types/content';
-import { CardPicture } from './CardPicture';
-import { NewsletterDetail } from './NewsletterDetail';
+} from '../client/ophan/ophan.ts';
+import { useIsInView } from '../lib/useIsInView.ts';
+import type { Newsletter } from '../types/content.ts';
+import { CardPicture } from './CardPicture.tsx';
+import { NewsletterDetail } from './NewsletterDetail.tsx';
 
 interface Props {
 	newsletter: Newsletter;

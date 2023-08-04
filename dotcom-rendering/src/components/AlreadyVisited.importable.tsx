@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { incrementAlreadyVisited } from '../lib/alreadyVisited';
+import { incrementAlreadyVisited } from '../lib/alreadyVisited.ts';
 
 /**
  * # AlreadyVisited

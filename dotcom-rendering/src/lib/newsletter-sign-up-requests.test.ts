@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
-import { mockRESTCalls } from './mockRESTCalls';
+import { mockRESTCalls } from './mockRESTCalls.ts';
 import {
 	requestMultipleSignUps,
 	requestSingleSignUp,
-} from './newsletter-sign-up-requests';
+} from './newsletter-sign-up-requests.ts';
 
 const fetchMock = mockRESTCalls();
 

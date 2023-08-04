@@ -1,9 +1,9 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { AMPArticleModel } from '../types/article.amp';
-import { TopMetaAnalysis } from './TopMetaAnalysis.amp';
-import { TopMetaNews } from './TopMetaNews.amp';
-import { TopMetaOpinion } from './TopMetaOpinion.amp';
-import { TopMetaPaidContent } from './TopMetaPaidContent.amp';
+import { TopMetaAnalysis } from './TopMetaAnalysis.amp.tsx';
+import { TopMetaNews } from './TopMetaNews.amp.tsx';
+import { TopMetaOpinion } from './TopMetaOpinion.amp.tsx';
+import { TopMetaPaidContent } from './TopMetaPaidContent.amp.tsx';
 
 type Props = {
 	data: AMPArticleModel;

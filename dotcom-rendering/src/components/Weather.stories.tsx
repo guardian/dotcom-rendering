@@ -1,5 +1,5 @@
-import type { WeatherProps } from './Weather';
-import { Weather } from './Weather';
+import type { WeatherProps } from './Weather.tsx';
+import { Weather } from './Weather.tsx';
 
 export default {
 	component: Weather,

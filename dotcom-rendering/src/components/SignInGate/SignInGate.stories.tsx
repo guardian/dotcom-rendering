@@ -1,11 +1,11 @@
-import { Section } from '../Section';
-import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023';
-import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
-import { SignInGateMain } from './gateDesigns/SignInGateMain';
-import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete';
-import type { CheckoutCompleteCookieData } from './types';
-import { ALL_PRODUCTS, ALL_USER_TYPES } from './types';
+import { Section } from '../Section.tsx';
+import { SignInGateSelector } from '../SignInGateSelector.importable.tsx';
+import { SignInGateCopyTestJan2023 } from './gateDesigns/SignInGateCopyTestJan2023.tsx';
+import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial.tsx';
+import { SignInGateMain } from './gateDesigns/SignInGateMain.tsx';
+import { SignInGateMainCheckoutComplete } from './gateDesigns/SignInGateMainCheckoutComplete.tsx';
+import type { CheckoutCompleteCookieData } from './types.ts';
+import { ALL_PRODUCTS, ALL_USER_TYPES } from './types.ts';
 
 export default {
 	component: SignInGateSelector,

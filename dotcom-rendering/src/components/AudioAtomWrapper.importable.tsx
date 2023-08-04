@@ -4,7 +4,7 @@ import {
 } from '@guardian/consent-management-platform';
 import type { ArticleFormat } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { AudioAtom } from './AudioAtom/AudioAtom';
+import { AudioAtom } from './AudioAtom/AudioAtom.tsx';
 
 type Props = {
 	id: string;

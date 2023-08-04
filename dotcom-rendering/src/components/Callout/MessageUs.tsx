@@ -7,8 +7,8 @@ import {
 	SvgWhatsAppBrand,
 } from '@guardian/source-react-components';
 import type { FC, ReactElement } from 'react';
-import type { CalloutContactType } from '../../types/content';
-import { calloutLinkStyles } from './CalloutComponents';
+import type { CalloutContactType } from '../../types/content.ts';
+import { calloutLinkStyles } from './CalloutComponents.tsx';
 
 const calloutPrimaryButtonStyles = css`
 	width: 100%;

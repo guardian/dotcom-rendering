@@ -1,5 +1,5 @@
-import type { Guard } from '../lib/guard';
-import { guard } from '../lib/guard';
+import type { Guard } from '../lib/guard.ts';
+import { guard } from '../lib/guard.ts';
 
 type AmericanTerritories = 'US-East-Coast' | 'US-West-Coast';
 

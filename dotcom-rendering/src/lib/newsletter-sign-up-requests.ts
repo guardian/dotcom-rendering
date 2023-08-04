@@ -2,7 +2,7 @@ import type { OphanAction } from '@guardian/libs';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
-} from '../client/ophan/ophan';
+} from '../client/ophan/ophan.ts';
 
 const isServer = typeof window === 'undefined';
 

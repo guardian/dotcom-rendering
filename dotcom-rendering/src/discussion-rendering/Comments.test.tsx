@@ -5,8 +5,8 @@ import {
 	screen,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { mockRESTCalls } from '../lib/mockRESTCalls';
-import { Comments } from './Comments';
+import { mockRESTCalls } from '../lib/mockRESTCalls.ts';
+import { Comments } from './Comments.tsx';
 
 mockRESTCalls();
 

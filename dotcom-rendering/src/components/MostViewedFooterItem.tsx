@@ -9,10 +9,10 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
-import { AgeWarning } from './AgeWarning';
-import { BigNumber } from './BigNumber/BigNumber';
-import { LinkHeadline } from './LinkHeadline';
-import { generateSources } from './Picture';
+import { AgeWarning } from './AgeWarning.tsx';
+import { BigNumber } from './BigNumber/BigNumber.tsx';
+import { LinkHeadline } from './LinkHeadline.tsx';
+import { generateSources } from './Picture.tsx';
 
 const gridItem = (
 	position: number,

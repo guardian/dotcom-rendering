@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { ArticleContainer } from './ArticleContainer';
-import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
-import { MatchNav } from './MatchNav';
-import { RightColumn } from './RightColumn';
-import { Section } from './Section';
+import { ArticleContainer } from './ArticleContainer.tsx';
+import { Flex } from './Flex.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { MatchNav } from './MatchNav.tsx';
+import { RightColumn } from './RightColumn.tsx';
+import { Section } from './Section.tsx';
 
 const homeTeam: TeamType = {
 	name: 'Liverpool',

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
+import { DocumentBlockComponent } from './DocumentBlockComponent.importable.tsx';
 
 export default {
 	component: DocumentBlockComponent,

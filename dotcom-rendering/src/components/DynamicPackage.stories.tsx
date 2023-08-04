@@ -1,9 +1,9 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import type { DCRGroupedTrails } from '../types/front';
-import { DynamicPackage } from './DynamicPackage';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import type { DCRGroupedTrails } from '../types/front.ts';
+import { DynamicPackage } from './DynamicPackage.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],

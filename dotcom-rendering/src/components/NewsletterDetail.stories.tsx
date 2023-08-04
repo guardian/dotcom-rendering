@@ -1,4 +1,4 @@
-import { NewsletterDetail } from './NewsletterDetail';
+import { NewsletterDetail } from './NewsletterDetail.tsx';
 
 export default {
 	component: NewsletterDetail,

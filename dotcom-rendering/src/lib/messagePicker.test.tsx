@@ -1,8 +1,8 @@
 import { setImmediate } from 'node:timers';
 import { jest } from '@jest/globals';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
-import type { CanShowResult, SlotConfig } from './messagePicker';
-import { pickMessage } from './messagePicker';
+import type { OphanRecordFunction } from '../client/ophan/ophan.ts';
+import type { CanShowResult, SlotConfig } from './messagePicker.ts';
+import { pickMessage } from './messagePicker.ts';
 
 const record = jest.fn<OphanRecordFunction>();
 

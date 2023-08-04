@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decideTrail } from '../lib/decideTrail';
-import { useApi } from '../lib/useApi';
-import type { FETrailTabType, TrailType } from '../types/trails';
-import { MostViewedRightItem } from './MostViewedRightItem';
+import { decideTrail } from '../lib/decideTrail.ts';
+import { useApi } from '../lib/useApi.tsx';
+import type { FETrailTabType, TrailType } from '../types/trails.ts';
+import { MostViewedRightItem } from './MostViewedRightItem.tsx';
 
 const wrapperStyles = css`
 	margin-top: 24px;

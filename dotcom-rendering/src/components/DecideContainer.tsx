@@ -3,25 +3,25 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import { DynamicFast } from './DynamicFast';
-import { DynamicPackage } from './DynamicPackage';
-import { DynamicSlow } from './DynamicSlow';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
-import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
-import { FixedMediumFastXI } from './FixedMediumFastXI';
-import { FixedMediumFastXII } from './FixedMediumFastXII';
-import { FixedMediumSlowVI } from './FixedMediumSlowVI';
-import { FixedMediumSlowVII } from './FixedMediumSlowVII';
-import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { FixedSmallFastVIII } from './FixedSmallFastVIII';
-import { FixedSmallSlowI } from './FixedSmallSlowI';
-import { FixedSmallSlowIII } from './FixedSmallSlowIII';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
-import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf';
-import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
-import { FixedSmallSlowVThird } from './FixedSmallSlowVThird';
-import { NavList } from './NavList';
+} from '../types/front.ts';
+import { DynamicFast } from './DynamicFast.tsx';
+import { DynamicPackage } from './DynamicPackage.tsx';
+import { DynamicSlow } from './DynamicSlow.tsx';
+import { DynamicSlowMPU } from './DynamicSlowMPU.tsx';
+import { FixedLargeSlowXIV } from './FixedLargeSlowXIV.tsx';
+import { FixedMediumFastXI } from './FixedMediumFastXI.tsx';
+import { FixedMediumFastXII } from './FixedMediumFastXII.tsx';
+import { FixedMediumSlowVI } from './FixedMediumSlowVI.tsx';
+import { FixedMediumSlowVII } from './FixedMediumSlowVII.tsx';
+import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU.tsx';
+import { FixedSmallFastVIII } from './FixedSmallFastVIII.tsx';
+import { FixedSmallSlowI } from './FixedSmallSlowI.tsx';
+import { FixedSmallSlowIII } from './FixedSmallSlowIII.tsx';
+import { FixedSmallSlowIV } from './FixedSmallSlowIV.tsx';
+import { FixedSmallSlowVHalf } from './FixedSmallSlowVHalf.tsx';
+import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU.tsx';
+import { FixedSmallSlowVThird } from './FixedSmallSlowVThird.tsx';
+import { NavList } from './NavList.tsx';
 
 type Props = {
 	trails: DCRFrontCard[];

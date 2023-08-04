@@ -2,7 +2,7 @@ import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
-} from './hasCurrentBrazeUser';
+} from './hasCurrentBrazeUser.ts';
 
 beforeEach(() => clearHasCurrentBrazeUser);
 

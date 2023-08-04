@@ -5,7 +5,7 @@ import {
 	brandBorder,
 	breakpoints,
 } from '@guardian/source-foundations';
-import { Section } from './Section';
+import { Section } from './Section.tsx';
 
 export default {
 	component: Section,

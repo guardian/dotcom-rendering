@@ -4,9 +4,9 @@ import { from, until } from '@guardian/source-foundations';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../../../lib/useAuthStatus';
-import type { CommentType, UserProfile } from '../../discussionTypes';
-import { TopPick } from '../TopPick/TopPick';
+} from '../../../lib/useAuthStatus.ts';
+import type { CommentType, UserProfile } from '../../discussionTypes.ts';
+import { TopPick } from '../TopPick/TopPick.tsx';
 
 type Props = {
 	pillar: ArticleTheme;

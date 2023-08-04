@@ -1,4 +1,4 @@
-import { Byline } from './Byline.amp';
+import { Byline } from './Byline.amp.tsx';
 
 const guardianBaseURL = 'https://theguardian.com';
 

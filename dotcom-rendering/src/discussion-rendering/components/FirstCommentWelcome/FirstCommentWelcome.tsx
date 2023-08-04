@@ -8,9 +8,9 @@ import {
 } from '@guardian/source-foundations';
 import { Link, TextInput } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { preview as defaultPreview } from '../../lib/api';
-import { PillarButton } from '../PillarButton/PillarButton';
-import { Row } from '../Row/Row';
+import { preview as defaultPreview } from '../../lib/api.tsx';
+import { PillarButton } from '../PillarButton/PillarButton.tsx';
+import { Row } from '../Row/Row.tsx';
 
 type Props = {
 	body: string;

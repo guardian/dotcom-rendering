@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, headline, palette, space } from '@guardian/source-foundations';
 import { Link, SvgChevronRightSingle } from '@guardian/source-react-components';
-import { Section } from './Section';
+import { Section } from './Section.tsx';
 
 export interface NewslettersListProps {
 	mmaUrl?: string;

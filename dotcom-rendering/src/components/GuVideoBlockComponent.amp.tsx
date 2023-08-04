@@ -1,5 +1,5 @@
-import type { GuVideoBlockElement } from '../types/content';
-import { Caption } from './Caption.amp';
+import type { GuVideoBlockElement } from '../types/content.ts';
+import { Caption } from './Caption.amp.tsx';
 
 type Props = {
 	element: GuVideoBlockElement;

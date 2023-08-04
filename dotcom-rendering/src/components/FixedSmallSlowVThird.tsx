@@ -1,8 +1,8 @@
-import { Card25Media25 } from '../lib/cardWrappers';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+import { Card25Media25 } from '../lib/cardWrappers.tsx';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
+import { FrontCard } from './FrontCard.tsx';
 
 type Props = {
 	trails: DCRFrontCard[];

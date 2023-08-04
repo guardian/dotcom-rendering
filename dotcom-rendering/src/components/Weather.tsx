@@ -28,9 +28,12 @@ import {
 	SvgExternal,
 } from '@guardian/source-react-components';
 import { useId } from 'react';
-import type { EditionId } from '../lib/edition';
-import { WeatherSlot } from './WeatherSlot';
-import type { WeatherData, WeatherForecast } from './WeatherWrapper.importable';
+import type { EditionId } from '../lib/edition.ts';
+import { WeatherSlot } from './WeatherSlot.tsx';
+import type {
+	WeatherData,
+	WeatherForecast,
+} from './WeatherWrapper.importable.tsx';
 
 const visuallyHiddenCSS = css`
 	${visuallyHidden}

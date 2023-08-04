@@ -1,4 +1,4 @@
-import { HeaderTopBar } from './HeaderTopBar.importable';
+import { HeaderTopBar } from './HeaderTopBar.importable.tsx';
 
 export default {
 	component: HeaderTopBar,

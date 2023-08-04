@@ -1,6 +1,6 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceDividers } from './enhance-dividers';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceDividers } from './enhance-dividers.ts';
 
 const example = ExampleArticle;
 

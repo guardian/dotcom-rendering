@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, space, textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 
 type Props = {
 	captionText?: string;

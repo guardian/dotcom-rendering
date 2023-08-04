@@ -7,8 +7,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { SubNavType } from '../model/extract-nav';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import type { SubNavType } from '../model/extract-nav.ts';
 
 type Props = {
 	subNavSections: SubNavType;

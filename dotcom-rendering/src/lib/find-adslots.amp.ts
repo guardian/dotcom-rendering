@@ -17,7 +17,7 @@
  * around the ad and it can be placed.
  */
 
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 
 interface ElementWithLength {
 	element: FEElement;

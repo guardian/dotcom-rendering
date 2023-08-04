@@ -1,9 +1,9 @@
-import type { DCRCollectionType } from '../types/front';
+import type { DCRCollectionType } from '../types/front.ts';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
-} from './getAdPositions';
+} from './getAdPositions.ts';
 
 const defaultTestCollections: Pick<DCRCollectionType, 'collectionType'>[] = [
 	...Array<number>(12),

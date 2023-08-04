@@ -1,4 +1,4 @@
-import { JsonScript } from './JsonScript.amp';
+import { JsonScript } from './JsonScript.amp.tsx';
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
 

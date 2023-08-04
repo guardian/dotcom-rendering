@@ -2,31 +2,31 @@ import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles.js';
-import { ArticlePage } from '../components/ArticlePage';
-import { isAmpSupported } from '../components/Elements.amp';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
+} from '../../scripts/webpack/bundles.js.js';
+import { ArticlePage } from '../components/ArticlePage.tsx';
+import { isAmpSupported } from '../components/Elements.amp.tsx';
+import { KeyEventsContainer } from '../components/KeyEventsContainer.tsx';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getPathFromManifest,
-} from '../lib/assets';
-import { decideFormat } from '../lib/decideFormat';
-import { decideTheme } from '../lib/decideTheme';
-import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
-import { getHttp3Url } from '../lib/getHttp3Url';
-import { getCurrentPillar } from '../lib/layoutHelpers';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
-import { polyfillIO } from '../lib/polyfill.io';
-import { extractGA } from '../model/extract-ga';
-import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
-import type { FEElement } from '../types/content';
-import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
-import type { TagType } from '../types/tag';
-import { htmlPageTemplate } from './htmlPageTemplate';
-import { recipeSchema } from './temporaryRecipeStructuredData';
+} from '../lib/assets.ts';
+import { decideFormat } from '../lib/decideFormat.ts';
+import { decideTheme } from '../lib/decideTheme.ts';
+import { renderToStringWithEmotion } from '../lib/emotion.tsx';
+import { escapeData } from '../lib/escapeData.tsx';
+import { getHttp3Url } from '../lib/getHttp3Url.ts';
+import { getCurrentPillar } from '../lib/layoutHelpers.ts';
+import { LiveBlogRenderer } from '../lib/LiveBlogRenderer.tsx';
+import { polyfillIO } from '../lib/polyfill.io.ts';
+import { extractGA } from '../model/extract-ga.ts';
+import { extractNAV } from '../model/extract-nav.ts';
+import { makeWindowGuardian } from '../model/window-guardian.ts';
+import type { FEElement } from '../types/content.ts';
+import type { FEArticleType, FEBlocksRequest } from '../types/frontend.ts';
+import type { TagType } from '../types/tag.ts';
+import { htmlPageTemplate } from './htmlPageTemplate.ts';
+import { recipeSchema } from './temporaryRecipeStructuredData.ts';
 
 interface Props {
 	article: FEArticleType;

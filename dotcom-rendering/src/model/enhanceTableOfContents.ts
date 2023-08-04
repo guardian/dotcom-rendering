@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
-import type { FEElement, SubheadingBlockElement } from '../types/content';
-import type { TableOfContentsItem } from '../types/frontend';
+import type { FEElement, SubheadingBlockElement } from '../types/content.ts';
+import type { TableOfContentsItem } from '../types/frontend.ts';
 
 const isH2 = (element: FEElement): element is SubheadingBlockElement => {
 	return (

@@ -1,6 +1,6 @@
 import { border, labs } from '@guardian/source-foundations';
-import { LabsHeader } from './LabsHeader';
-import { Section } from './Section';
+import { LabsHeader } from './LabsHeader.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: LabsHeader,

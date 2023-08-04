@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
-import { TextBlockComponent } from './TextBlockComponent';
+import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable.tsx';
+import { TextBlockComponent } from './TextBlockComponent.tsx';
 
 export default {
 	component: InteractiveBlockComponent,

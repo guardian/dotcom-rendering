@@ -1,4 +1,4 @@
-import { isLight } from './isLight';
+import { isLight } from './isLight.ts';
 
 describe('isLight', () => {
 	it('should return the correct response for dark hex colours', () => {

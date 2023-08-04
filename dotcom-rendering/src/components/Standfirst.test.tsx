@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { Standfirst } from './Standfirst';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { Standfirst } from './Standfirst.tsx';
 
 describe('Standfirst', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {

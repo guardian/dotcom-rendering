@@ -9,9 +9,9 @@ import {
 import { Button, SvgTickRound } from '@guardian/source-react-components';
 import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CampaignFieldType } from '../../types/content';
-import { CalloutTermsAndConditions } from './CalloutComponents';
-import { FormField } from './FormField';
+import type { CampaignFieldType } from '../../types/content.ts';
+import { CalloutTermsAndConditions } from './CalloutComponents.tsx';
+import { FormField } from './FormField.tsx';
 
 const textStyles = css`
 	${textSans.xsmall()};

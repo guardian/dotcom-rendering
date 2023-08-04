@@ -7,8 +7,8 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import { navInputCheckboxId, showMoreButtonId } from '../config';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
+import { navInputCheckboxId, showMoreButtonId } from '../config.ts';
 
 const screenReadable = css`
 	${visuallyHidden};

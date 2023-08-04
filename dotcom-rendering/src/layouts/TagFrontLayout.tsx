@@ -9,31 +9,31 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
-import { AdSlot } from '../components/AdSlot';
-import { DecideContainerByTrails } from '../components/DecideContainerByTrails';
-import { Footer } from '../components/Footer';
-import { FrontSection } from '../components/FrontSection';
-import { Header } from '../components/Header';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Island } from '../components/Island';
-import { Nav } from '../components/Nav/Nav';
-import { Section } from '../components/Section';
-import { SubNav } from '../components/SubNav.importable';
-import { TagFrontFastMpu } from '../components/TagFrontFastMpu';
-import { TagFrontHeader } from '../components/TagFrontHeader';
-import { TagFrontSlowMpu } from '../components/TagFrontSlowMpu';
-import { TrendingTopics } from '../components/TrendingTopics';
-import { canRenderAds } from '../lib/canRenderAds';
-import { decidePalette } from '../lib/decidePalette';
-import { getEditionFromId } from '../lib/edition';
+import { AdSlot } from '../components/AdSlot.tsx';
+import { DecideContainerByTrails } from '../components/DecideContainerByTrails.tsx';
+import { Footer } from '../components/Footer.tsx';
+import { FrontSection } from '../components/FrontSection.tsx';
+import { Header } from '../components/Header.tsx';
+import { HeaderAdSlot } from '../components/HeaderAdSlot.tsx';
+import { Island } from '../components/Island.tsx';
+import { Nav } from '../components/Nav/Nav.tsx';
+import { Section } from '../components/Section.tsx';
+import { SubNav } from '../components/SubNav.importable.tsx';
+import { TagFrontFastMpu } from '../components/TagFrontFastMpu.tsx';
+import { TagFrontHeader } from '../components/TagFrontHeader.tsx';
+import { TagFrontSlowMpu } from '../components/TagFrontSlowMpu.tsx';
+import { TrendingTopics } from '../components/TrendingTopics.tsx';
+import { canRenderAds } from '../lib/canRenderAds.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getEditionFromId } from '../lib/edition.ts';
 import {
 	getMerchHighPosition,
 	getTagFrontMobileAdPositions,
-} from '../lib/getAdPositions';
-import type { NavType } from '../model/extract-nav';
-import type { DCRTagFrontType } from '../types/tagFront';
-import { decideAdSlot } from './FrontLayout';
-import { Stuck } from './lib/stickiness';
+} from '../lib/getAdPositions.ts';
+import type { NavType } from '../model/extract-nav.ts';
+import type { DCRTagFrontType } from '../types/tagFront.ts';
+import { decideAdSlot } from './FrontLayout.tsx';
+import { Stuck } from './lib/stickiness.tsx';
 
 interface Props {
 	tagFront: DCRTagFrontType;

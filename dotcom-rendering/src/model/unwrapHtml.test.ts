@@ -1,4 +1,4 @@
-import { unwrapHtml } from './unwrapHtml';
+import { unwrapHtml } from './unwrapHtml.ts';
 
 type Params = Parameters<typeof unwrapHtml>[0];
 

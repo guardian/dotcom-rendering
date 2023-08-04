@@ -11,9 +11,9 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants.ts';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
-import { Details } from './Details';
+import { Details } from './Details.tsx';
 
 const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div

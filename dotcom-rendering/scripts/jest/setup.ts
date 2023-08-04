@@ -2,7 +2,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { TextDecoder, TextEncoder } from 'node:util';
 import { jest } from '@jest/globals';
-import type { WindowGuardianConfig } from '../../src/model/window-guardian';
+import type { WindowGuardianConfig } from '../../src/model/window-guardian.ts';
 
 const windowGuardianConfig = {
 	page: {

@@ -1,9 +1,12 @@
 import { joinUrl } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import { useApi } from '../lib/useApi';
-import { getOptionsHeadersWithOkta, useAuthStatus } from '../lib/useAuthStatus';
-import { useDiscussion } from '../lib/useDiscussion';
-import { SignedInAs } from './SignedInAs';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { useApi } from '../lib/useApi.tsx';
+import {
+	getOptionsHeadersWithOkta,
+	useAuthStatus,
+} from '../lib/useAuthStatus.ts';
+import { useDiscussion } from '../lib/useDiscussion.ts';
+import { SignedInAs } from './SignedInAs.tsx';
 
 type Props = {
 	format: ArticleFormat;

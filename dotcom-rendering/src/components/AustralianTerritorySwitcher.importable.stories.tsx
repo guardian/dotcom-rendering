@@ -1,5 +1,5 @@
 import { userEvent, within } from '@storybook/testing-library';
-import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable';
+import { AustralianTerritorySwitcher } from './AustralianTerritorySwitcher.importable.tsx';
 
 export default {
 	component: AustralianTerritorySwitcher,

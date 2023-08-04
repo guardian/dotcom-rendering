@@ -5,7 +5,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { Fragment } from 'react';
-import { formatCount } from '../lib/formatCount';
+import { formatCount } from '../lib/formatCount.ts';
 
 type Props = {
 	pageId: string;

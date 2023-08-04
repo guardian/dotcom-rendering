@@ -8,9 +8,9 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
-import { getZIndex } from '../lib/getZIndex';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { useApi } from '../lib/useApi';
+import { getZIndex } from '../lib/getZIndex.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { useApi } from '../lib/useApi.tsx';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import SearchIcon from '../static/icons/search.svg';
 import XIcon from '../static/icons/x.svg';

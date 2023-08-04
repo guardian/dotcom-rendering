@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { DisclaimerBlockComponent } from './DisclaimerBlockComponent';
+import { DisclaimerBlockComponent } from './DisclaimerBlockComponent.tsx';
 
 export default {
 	component: DisclaimerBlockComponent,

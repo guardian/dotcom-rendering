@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Treats } from './Treats';
+import { Treats } from './Treats.tsx';
 
 export default {
 	component: Treats,

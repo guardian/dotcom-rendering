@@ -1,4 +1,4 @@
-import { GuardianRoundel } from './GuardianRoundel';
+import { GuardianRoundel } from './GuardianRoundel.tsx';
 
 export default {
 	component: GuardianRoundel,

@@ -5,12 +5,12 @@ import {
 	timeAgo as timeAgoHasAWeirdInterface,
 } from '@guardian/libs';
 import { palette, space, textSans } from '@guardian/source-foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
-import { revealStyles } from '../lib/revealStyles';
-import { useApi } from '../lib/useApi';
-import type { DCRContainerPalette } from '../types/front';
-import { WithLink } from './CardHeadline';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { revealStyles } from '../lib/revealStyles.ts';
+import { useApi } from '../lib/useApi.tsx';
+import type { DCRContainerPalette } from '../types/front.ts';
+import { WithLink } from './CardHeadline.tsx';
 
 type Props = {
 	id: string;

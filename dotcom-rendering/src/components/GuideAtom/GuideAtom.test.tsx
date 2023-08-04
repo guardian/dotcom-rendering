@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { defaultStory } from '../../../fixtures/manual/guideAtom';
-import { GuideAtom } from './GuideAtom';
+import { defaultStory } from '../../../fixtures/manual/guideAtom.ts';
+import { GuideAtom } from './GuideAtom.tsx';
 
 describe('GuideAtom', () => {
 	it('should render', () => {

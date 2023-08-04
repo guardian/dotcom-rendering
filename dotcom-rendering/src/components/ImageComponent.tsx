@@ -8,16 +8,16 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { isWideEnough } from '../lib/lightbox';
-import type { Switches } from '../types/config';
-import type { Image, ImageBlockElement, RoleType } from '../types/content';
-import type { Palette } from '../types/palette';
-import { Caption } from './Caption';
-import { Hide } from './Hide';
-import { LightboxLink } from './LightboxLink';
-import { Picture } from './Picture';
-import { StarRating } from './StarRating/StarRating';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { isWideEnough } from '../lib/lightbox.ts';
+import type { Switches } from '../types/config.ts';
+import type { Image, ImageBlockElement, RoleType } from '../types/content.ts';
+import type { Palette } from '../types/palette.ts';
+import { Caption } from './Caption.tsx';
+import { Hide } from './Hide.tsx';
+import { LightboxLink } from './LightboxLink.tsx';
+import { Picture } from './Picture.tsx';
+import { StarRating } from './StarRating/StarRating.tsx';
 
 type Props = {
 	element: ImageBlockElement;

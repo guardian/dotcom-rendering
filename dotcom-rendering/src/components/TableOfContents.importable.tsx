@@ -13,9 +13,9 @@ import {
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import type { TableOfContentsItem } from '../types/frontend';
-import type { Palette } from '../types/palette';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { TableOfContentsItem } from '../types/frontend.ts';
+import type { Palette } from '../types/palette.ts';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];

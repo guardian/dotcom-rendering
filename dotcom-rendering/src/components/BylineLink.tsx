@@ -3,8 +3,8 @@ import {
 	getBylineComponentsFromTokens,
 	getSoleContributor,
 	isContributor,
-} from '../lib/byline';
-import type { TagType } from '../types/tag';
+} from '../lib/byline.ts';
+import type { TagType } from '../types/tag.ts';
 
 type Props = {
 	byline: string;

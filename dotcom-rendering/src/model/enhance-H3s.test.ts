@@ -1,7 +1,7 @@
-import { Analysis as AnalysisArticle } from '../../fixtures/generated/articles/Analysis';
-import { Standard as StandardArticle } from '../../fixtures/generated/articles/Standard';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceH3s } from './enhance-H3s';
+import { Analysis as AnalysisArticle } from '../../fixtures/generated/articles/Analysis.ts';
+import { Standard as StandardArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceH3s } from './enhance-H3s.ts';
 
 describe('Enhance H3s', () => {
 	it('does set a h3 if there is more than one strong tag', () => {

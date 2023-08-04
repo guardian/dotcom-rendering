@@ -3,7 +3,10 @@
  * Utility function to convert between FE and DCR container palettes
  */
 
-import type { DCRContainerPalette, FEContainerPalette } from '../types/front';
+import type {
+	DCRContainerPalette,
+	FEContainerPalette,
+} from '../types/front.ts';
 
 export const decideContainerPalette = (
 	palettes?: FEContainerPalette[],

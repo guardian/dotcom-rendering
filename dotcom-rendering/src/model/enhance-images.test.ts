@@ -1,9 +1,9 @@
 import { Pillar } from '@guardian/libs';
-import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { images } from '../../fixtures/generated/images';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceImages } from './enhance-images';
+import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay.ts';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { images } from '../../fixtures/generated/images.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceImages } from './enhance-images.ts';
 
 const image = {
 	...images[0],

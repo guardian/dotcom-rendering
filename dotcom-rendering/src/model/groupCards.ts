@@ -1,11 +1,11 @@
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../lib/edition.ts';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRGroupedTrails,
 	FEFrontCard,
-} from '../types/front';
-import { enhanceCards } from './enhanceCards';
+} from '../types/front.ts';
+import { enhanceCards } from './enhanceCards.ts';
 
 /**
  * Groups cards based on their group specified in fronts tool

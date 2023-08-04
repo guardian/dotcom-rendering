@@ -7,12 +7,12 @@ const userIdentifiers = {
 	googleTagId: 'googleTagIdValue',
 };
 
-jest.unstable_mockModule('../../src/lib/getIdapiUserData', () => ({
+jest.unstable_mockModule('../../src/lib/getIdapiUserData.ts', () => ({
 	getIdapiUserIdentifiers: jest.fn(() => Promise.resolve(userIdentifiers)),
 }));
 
-const { getBrazeUuid } = await import('./getBrazeUuid');
-const { getIdapiUserIdentifiers } = await import('./getIdapiUserData');
+const { getBrazeUuid } = await import('./getBrazeUuid.ts');
+const { getIdapiUserIdentifiers } = await import('./getIdapiUserData.ts');
 
 describe('getBrazeUuid', () => {
 	it('gets the braze uuid using Identity user identifiers api', async () => {

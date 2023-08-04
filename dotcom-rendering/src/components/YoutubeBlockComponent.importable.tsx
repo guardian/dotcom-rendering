@@ -4,12 +4,12 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { trackVideoInteraction } from '../client/ga/ga';
-import { record } from '../client/ophan/ophan';
-import { useAB } from '../lib/useAB';
-import { useAdTargeting } from '../lib/useAdTargeting';
-import type { RoleType } from '../types/content';
-import { Caption } from './Caption';
+import { trackVideoInteraction } from '../client/ga/ga.ts';
+import { record } from '../client/ophan/ophan.ts';
+import { useAB } from '../lib/useAB.ts';
+import { useAdTargeting } from '../lib/useAdTargeting.ts';
+import type { RoleType } from '../types/content.ts';
+import { Caption } from './Caption.tsx';
 
 type Props = {
 	id: string;

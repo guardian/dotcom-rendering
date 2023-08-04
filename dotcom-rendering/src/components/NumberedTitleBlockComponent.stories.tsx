@@ -1,4 +1,4 @@
-import { NumberedTitleBlockComponent } from './NumberedTitleBlockComponent';
+import { NumberedTitleBlockComponent } from './NumberedTitleBlockComponent.tsx';
 
 export default {
 	component: NumberedTitleBlockComponent,

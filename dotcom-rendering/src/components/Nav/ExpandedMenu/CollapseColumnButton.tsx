@@ -6,7 +6,7 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
 
 const hideDesktop = css`
 	${from.desktop} {

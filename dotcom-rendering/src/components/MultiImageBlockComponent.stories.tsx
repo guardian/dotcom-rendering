@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { MultiImageBlockComponent } from './MultiImageBlockComponent';
-import { fourImages } from './MultiImageBlockComponent.mocks';
-import { Section } from './Section';
+import { fourImages } from './MultiImageBlockComponent.mocks.tsx';
+import { MultiImageBlockComponent } from './MultiImageBlockComponent.tsx';
+import { Section } from './Section.tsx';
 
 const oneImage = fourImages.slice(0, 1);
 const twoImages = fourImages.slice(0, 2);

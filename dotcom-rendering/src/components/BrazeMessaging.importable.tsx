@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { useBraze } from '../lib/useBraze';
+import { useBraze } from '../lib/useBraze.ts';
 
 type Props = {
 	idApiUrl: string;

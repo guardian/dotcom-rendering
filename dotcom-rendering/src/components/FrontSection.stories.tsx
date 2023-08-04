@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
-import { LI } from './Card/components/LI';
-import { FrontSection } from './FrontSection';
+import { LI } from './Card/components/LI.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: FrontSection,

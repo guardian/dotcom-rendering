@@ -6,19 +6,19 @@ import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { submitComponentEvent } from '../client/ophan/ophan';
-import { useArticleCounts } from '../lib/articleCount';
+import { submitComponentEvent } from '../client/ophan/ophan.ts';
+import { useArticleCounts } from '../lib/articleCount.ts';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
 	shouldHideSupportMessaging,
 	useHasOptedOutOfArticleCount,
-} from '../lib/contributions';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { setAutomat } from '../lib/setAutomat';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { useSDCLiveblogEpic } from '../lib/useSDC';
-import type { TagType } from '../types/tag';
+} from '../lib/contributions.ts';
+import { getLocaleCode } from '../lib/getCountryCode.ts';
+import { setAutomat } from '../lib/setAutomat.ts';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import { useSDCLiveblogEpic } from '../lib/useSDC.ts';
+import type { TagType } from '../types/tag.ts';
 
 type Props = {
 	sectionId: string;

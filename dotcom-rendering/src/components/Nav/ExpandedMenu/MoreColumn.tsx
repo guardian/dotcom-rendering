@@ -7,8 +7,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import type { LinkType } from '../../../model/extract-nav';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
+import type { LinkType } from '../../../model/extract-nav.ts';
 import FacebookIcon from '../../../static/icons/facebook.svg';
 import TwitterIconPadded from '../../../static/icons/twitter-padded.svg';
 

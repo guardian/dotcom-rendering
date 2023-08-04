@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { updateIframeHeight } from '../client/updateIframeHeight';
-import type { RoleType } from '../types/content';
-import { ClickToView } from './ClickToView';
+import { updateIframeHeight } from '../client/updateIframeHeight.tsx';
+import type { RoleType } from '../types/content.ts';
+import { ClickToView } from './ClickToView.tsx';
 
 type Props = {
 	html: string;

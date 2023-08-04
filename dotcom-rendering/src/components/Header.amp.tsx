@@ -10,9 +10,9 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import type { NavType, PillarLinkType } from '../model/extract-nav';
-import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import type { NavType, PillarLinkType } from '../model/extract-nav.ts';
+import { ReaderRevenueButton } from './ReaderRevenueButton.amp.tsx';
 
 const headerStyles = css`
 	background-color: ${brand[400]};

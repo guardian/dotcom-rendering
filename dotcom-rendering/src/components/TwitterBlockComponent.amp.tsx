@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import type { TweetBlockElement } from '../types/content';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import type { TweetBlockElement } from '../types/content.ts';
 
 const ListStyle = (iconColour: string) => css`
 	li {

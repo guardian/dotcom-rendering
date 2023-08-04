@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import { AbuseReportForm } from './AbuseReportForm';
+import { AbuseReportForm } from './AbuseReportForm.tsx';
 
 export default { title: 'Discussion/Abuse Report Form' };
 

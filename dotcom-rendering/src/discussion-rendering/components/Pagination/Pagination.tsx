@@ -11,7 +11,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import type { FilterOptions } from '../../discussionTypes';
+import type { FilterOptions } from '../../discussionTypes.ts';
 
 type Props = {
 	totalPages: number;

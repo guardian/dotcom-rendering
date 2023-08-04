@@ -12,20 +12,20 @@ import type {
 	TweetBlockElement,
 	VideoVimeoBlockElement,
 	VineBlockElement,
-} from '../types/content';
-import { ClickToView } from './ClickToView';
-import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
-import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
-import { Figure } from './Figure';
-import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
-import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
-import { Section } from './Section';
-import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
-import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
-import { TweetBlockComponent } from './TweetBlockComponent.importable';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
-import { VimeoBlockComponent } from './VimeoBlockComponent';
-import { VineBlockComponent } from './VineBlockComponent.importable';
+} from '../types/content.ts';
+import { ClickToView } from './ClickToView.tsx';
+import { DocumentBlockComponent } from './DocumentBlockComponent.importable.tsx';
+import { EmbedBlockComponent } from './EmbedBlockComponent.importable.tsx';
+import { Figure } from './Figure.tsx';
+import { InstagramBlockComponent } from './InstagramBlockComponent.importable.tsx';
+import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable.tsx';
+import { Section } from './Section.tsx';
+import { SoundcloudBlockComponent } from './SoundcloudBlockComponent.tsx';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable.tsx';
+import { TweetBlockComponent } from './TweetBlockComponent.importable.tsx';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable.tsx';
+import { VimeoBlockComponent } from './VimeoBlockComponent.tsx';
+import { VineBlockComponent } from './VineBlockComponent.importable.tsx';
 
 export default {
 	component: ClickToView,

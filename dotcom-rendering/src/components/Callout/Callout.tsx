@@ -5,10 +5,10 @@ import { useState } from 'react';
 import type {
 	CalloutContactType,
 	CampaignFieldType,
-} from '../../types/content';
-import { CalloutDescription, CalloutShare } from './CalloutComponents';
-import { Form } from './Form';
-import { conditionallyRenderContactIcon, MessageUs } from './MessageUs';
+} from '../../types/content.ts';
+import { CalloutDescription, CalloutShare } from './CalloutComponents.tsx';
+import { Form } from './Form.tsx';
+import { conditionallyRenderContactIcon, MessageUs } from './MessageUs.tsx';
 
 const summaryContentWrapper = (isNonCollapsible: boolean) => css`
 	visibility: visible;

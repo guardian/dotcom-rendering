@@ -1,4 +1,4 @@
-import { getIdFromUrl } from './get-video-id.amp';
+import { getIdFromUrl } from './get-video-id.amp.ts';
 
 describe('getIdFromUrl', () => {
 	it('Returns matching ID for YouTube formats', () => {

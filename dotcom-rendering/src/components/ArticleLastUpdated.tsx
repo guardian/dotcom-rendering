@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
-import { PulsingDot } from './PulsingDot';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
+import { PulsingDot } from './PulsingDot.tsx';
 
 const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}

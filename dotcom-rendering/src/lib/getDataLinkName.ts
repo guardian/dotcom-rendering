@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { FEFrontCardStyle } from '../types/front';
+import type { FEFrontCardStyle } from '../types/front.ts';
 
 /**
  * TODO: missing "podcast"

@@ -5,9 +5,9 @@ import { resets } from '@guardian/source-foundations';
 import he from 'he';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { epicChoiceCardCss } from '../components/Epic.amp';
-import { stickyAdLabelCss } from '../components/StickyAd.amp';
-import { getFontsCss } from '../lib/fonts-css';
+import { epicChoiceCardCss } from '../components/Epic.amp.tsx';
+import { stickyAdLabelCss } from '../components/StickyAd.amp.tsx';
+import { getFontsCss } from '../lib/fonts-css.ts';
 
 interface RenderToStringResult {
 	html: string;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { headline, text, textSans } from '@guardian/source-foundations';
-import { isLight } from '../lib/isLight';
+import { isLight } from '../lib/isLight.ts';
 
 type Props = {
 	sections: SectionType[];

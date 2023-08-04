@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import type { TagType } from '../types/tag';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import type { TagType } from '../types/tag.ts';
 
 const seriesStyle = (pillar: ArticleTheme) => css`
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};

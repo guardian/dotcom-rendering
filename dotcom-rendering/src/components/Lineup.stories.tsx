@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Lineup } from './Lineup';
+import { Lineup } from './Lineup.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div

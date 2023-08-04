@@ -2,10 +2,10 @@
 import { onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
-import { getDailyArticleCount } from '../../lib/dailyArticleCount';
-import type { TagType } from '../../types/tag';
-import { hasUserDismissedGateMoreThanCount } from './dismissGate';
-import type { CanShowGateProps } from './types';
+import { getDailyArticleCount } from '../../lib/dailyArticleCount.ts';
+import type { TagType } from '../../types/tag.ts';
+import { hasUserDismissedGateMoreThanCount } from './dismissGate.ts';
+import type { CanShowGateProps } from './types.tsx';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n = 2): boolean => {

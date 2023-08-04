@@ -1,5 +1,5 @@
 import { ClassNames } from '@emotion/react';
-import { ShowMoreButton } from './ShowMoreButton.amp';
+import { ShowMoreButton } from './ShowMoreButton.amp.tsx';
 
 // We look in the html field of the atom for a hint for the height of the atom
 // We look for an html comment <!-- MobileHeight: 100 --> and if we find it use

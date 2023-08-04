@@ -1,4 +1,4 @@
-import type { FETrailTabType } from '../types/trails';
+import type { FETrailTabType } from '../types/trails.ts';
 
 export const mockTab1: FETrailTabType = {
 	heading: 'Across The Guardian',

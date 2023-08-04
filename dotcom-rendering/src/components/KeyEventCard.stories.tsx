@@ -6,9 +6,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
-import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events';
-import { events } from '../../fixtures/manual/key-events';
-import { KeyEventCard } from './KeyEventCard';
+import type { KeyEventCard as KeyEventCardType } from '../../fixtures/manual/key-events.ts';
+import { events } from '../../fixtures/manual/key-events.ts';
+import { KeyEventCard } from './KeyEventCard.tsx';
 
 const getFormat = (theme: ArticleTheme) => {
 	return {

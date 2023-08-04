@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { body, neutral, text, textSans } from '@guardian/source-foundations';
-import { getAgeWarning } from '../lib/age-warning';
-import { getSoleContributor } from '../lib/byline';
-import { getSharingUrls } from '../lib/sharing-urls';
+import { getAgeWarning } from '../lib/age-warning.ts';
+import { getSoleContributor } from '../lib/byline.ts';
+import { getSharingUrls } from '../lib/sharing-urls.ts';
 import type { AMPArticleModel } from '../types/article.amp';
-import type { Branding } from '../types/branding';
-import { BrandingRegionContainer } from './Branding.amp';
-import { Byline } from './Byline.amp';
-import { MainMedia } from './MainMedia.amp';
-import { PaidForBand } from './PaidForBand.amp';
-import { Standfirst } from './Standfirst.amp';
-import { TopMetaExtras } from './TopMetaExtras.amp';
+import type { Branding } from '../types/branding.ts';
+import { BrandingRegionContainer } from './Branding.amp.tsx';
+import { Byline } from './Byline.amp.tsx';
+import { MainMedia } from './MainMedia.amp.tsx';
+import { PaidForBand } from './PaidForBand.amp.tsx';
+import { Standfirst } from './Standfirst.amp.tsx';
+import { TopMetaExtras } from './TopMetaExtras.amp.tsx';
 
 const headerStyle = css`
 	${textSans.xlarge()};

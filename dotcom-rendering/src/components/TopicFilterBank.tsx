@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { from, headline, space, textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
-import { FilterLink } from './FilterLink';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
+import { FilterLink } from './FilterLink.tsx';
 
 type Props = {
 	availableTopics?: Topic[];

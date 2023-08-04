@@ -1,5 +1,5 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { extractGA } from './extract-ga';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { extractGA } from './extract-ga.ts';
 
 const pillar: LegacyPillar = 'news';
 const base = {

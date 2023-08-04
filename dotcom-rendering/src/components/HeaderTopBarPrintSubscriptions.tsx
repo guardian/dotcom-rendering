@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { addTrackingCodesToUrl } from '../lib/acquisitions';
-import type { EditionId } from '../lib/edition';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { addTrackingCodesToUrl } from '../lib/acquisitions.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
 import NewspaperIcon from '../static/icons/newspaper.svg';
 
 interface PrintSubscriptionsProps {

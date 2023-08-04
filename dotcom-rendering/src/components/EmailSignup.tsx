@@ -7,9 +7,9 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import { buildDetailText } from '../lib/buildNewsletterSignUpText';
-import { NewsletterDetail } from './NewsletterDetail';
-import { SecureSignup } from './SecureSignup';
+import { buildDetailText } from '../lib/buildNewsletterSignUpText.tsx';
+import { NewsletterDetail } from './NewsletterDetail.tsx';
+import { SecureSignup } from './SecureSignup.tsx';
 
 type Props = {
 	identityName: string;

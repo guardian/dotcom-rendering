@@ -1,7 +1,7 @@
 import { Pillar } from '@guardian/libs';
-import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
-import type { CommentType } from '../../discussionTypes';
-import { TopPicks } from './TopPicks';
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus.ts';
+import type { CommentType } from '../../discussionTypes.ts';
+import { TopPicks } from './TopPicks.tsx';
 
 export default { component: TopPicks, title: 'Discussion/TopPicks' };
 

@@ -8,8 +8,8 @@ import {
 	neutral,
 	space,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { FirstPublished } from './FirstPublished';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { FirstPublished } from './FirstPublished.tsx';
 
 type BlockContributor = {
 	name: string;

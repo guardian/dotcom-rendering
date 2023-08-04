@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, text } from '@guardian/source-foundations';
-import { Summary } from './Summary';
+import { Summary } from './Summary.tsx';
 
 const containerStyling = css`
 	display: block;

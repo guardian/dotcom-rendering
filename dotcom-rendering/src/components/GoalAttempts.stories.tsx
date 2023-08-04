@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { GoalAttempts } from './GoalAttempts';
+import { GoalAttempts } from './GoalAttempts.tsx';
 
 export default {
 	component: GoalAttempts,

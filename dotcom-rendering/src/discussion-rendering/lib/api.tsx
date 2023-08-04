@@ -2,8 +2,8 @@ import { joinUrl } from '@guardian/libs';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../../lib/useAuthStatus';
-import { getOptionsHeadersWithOkta } from '../../lib/useAuthStatus';
+} from '../../lib/useAuthStatus.ts';
+import { getOptionsHeadersWithOkta } from '../../lib/useAuthStatus.ts';
 import type {
 	AdditionalHeadersType,
 	CommentResponse,
@@ -13,7 +13,7 @@ import type {
 	OrderByType,
 	ThreadsType,
 	UserNameResponse,
-} from '../discussionTypes';
+} from '../discussionTypes.ts';
 
 const options = {
 	// Defaults

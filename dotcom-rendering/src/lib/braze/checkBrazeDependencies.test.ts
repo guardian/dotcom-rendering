@@ -1,5 +1,5 @@
 import { setImmediate } from 'node:timers';
-import { jest } from '@jest/globals';
+import { jest } from '@jest/globals.ts';
 
 let mockBrazeUuid: string | null;
 jest.unstable_mockModule('../../src/lib/getBrazeUuid', () => ({

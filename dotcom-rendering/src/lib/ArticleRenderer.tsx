@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { adContainerStyles } from '../components/AdSlot';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import type { ServerSideTests, Switches } from '../types/config';
-import type { FEElement } from '../types/content';
-import type { RenderingTarget } from '../types/renderingTarget';
-import type { TagType } from '../types/tag';
-import { RenderArticleElement } from './renderElement';
-import { withSignInGateSlot } from './withSignInGateSlot';
+import { adContainerStyles } from '../components/AdSlot.tsx';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import type { ServerSideTests, Switches } from '../types/config.ts';
+import type { FEElement } from '../types/content.ts';
+import type { RenderingTarget } from '../types/renderingTarget.ts';
+import type { TagType } from '../types/tag.ts';
+import { RenderArticleElement } from './renderElement.tsx';
+import { withSignInGateSlot } from './withSignInGateSlot.tsx';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`

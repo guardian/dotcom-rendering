@@ -4,11 +4,11 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
-import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp';
+import { bestFitImage, heightEstimate } from '../lib/image-fit.amp.ts';
+import { scrsetStringFromImagesSources } from '../lib/srcset-utils.amp.ts';
 import InfoIcon from '../static/icons/info.svg';
-import type { FEElement, ImageBlockElement } from '../types/content';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp';
+import type { FEElement, ImageBlockElement } from '../types/content.ts';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.amp.tsx';
 
 const figureStyle = css`
 	margin: 0 0;

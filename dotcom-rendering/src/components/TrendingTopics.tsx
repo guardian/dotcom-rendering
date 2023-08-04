@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { palette, textSans } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { FETagType } from '../types/tag';
+import type { FETagType } from '../types/tag.ts';
 
 type Props = {
 	trendingTopics: FETagType[] | undefined;

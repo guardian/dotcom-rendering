@@ -13,7 +13,7 @@ import { useEffect, useRef } from 'react';
 import type {
 	CampaignFieldType,
 	MessageUsFieldType,
-} from '../../types/content';
+} from '../../types/content.ts';
 
 type FormDataType = { [key in string]: any };
 

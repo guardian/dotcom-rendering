@@ -10,8 +10,8 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 	MoustacheVariable,
-} from './Moustache.amp';
-import { ShowMoreButton } from './ShowMoreButton.amp';
+} from './Moustache.amp.tsx';
+import { ShowMoreButton } from './ShowMoreButton.amp.tsx';
 
 const inner = css`
 	padding-top: 3px;

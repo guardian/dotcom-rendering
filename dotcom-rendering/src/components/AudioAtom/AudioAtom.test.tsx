@@ -3,7 +3,7 @@ import { jest } from '@jest/globals';
 import { fireEvent, screen } from '@testing-library/dom';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { AudioAtom } from './AudioAtom';
+import { AudioAtom } from './AudioAtom.tsx';
 
 const format = {
 	display: ArticleDisplay.Standard,

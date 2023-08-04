@@ -1,5 +1,5 @@
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceH2s } from './enhance-H2s';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceH2s } from './enhance-H2s.ts';
 
 describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {

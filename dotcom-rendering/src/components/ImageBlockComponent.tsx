@@ -1,6 +1,6 @@
-import type { Switches } from '../types/config';
-import type { ImageBlockElement } from '../types/content';
-import { ImageComponent } from './ImageComponent';
+import type { Switches } from '../types/config.ts';
+import type { ImageBlockElement } from '../types/content.ts';
+import { ImageComponent } from './ImageComponent.tsx';
 
 type Props = {
 	format: ArticleFormat;

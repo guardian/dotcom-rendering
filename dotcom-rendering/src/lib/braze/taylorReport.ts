@@ -1,4 +1,4 @@
-import type { TagType } from '../../types/tag';
+import type { TagType } from '../../types/tag.ts';
 
 const tagId = 'news/series/cotton-capital';
 

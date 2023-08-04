@@ -1,5 +1,5 @@
-import { FrontCard } from '../components/FrontCard';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
+import { FrontCard } from '../components/FrontCard.tsx';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front.ts';
 
 type TrailProps = {
 	trail: DCRFrontCard;

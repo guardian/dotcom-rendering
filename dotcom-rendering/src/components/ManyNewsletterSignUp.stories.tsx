@@ -1,6 +1,6 @@
-import { mockRESTCalls } from '../lib/mockRESTCalls';
-import { GroupedNewslettersList } from './GroupedNewsletterList';
-import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.importable';
+import { mockRESTCalls } from '../lib/mockRESTCalls.ts';
+import { GroupedNewslettersList } from './GroupedNewsletterList.tsx';
+import { ManyNewsletterSignUp } from './ManyNewsletterSignUp.importable.tsx';
 
 mockRESTCalls();
 

@@ -1,4 +1,4 @@
-import { addTrackingCodesToUrl } from './acquisitions';
+import { addTrackingCodesToUrl } from './acquisitions.ts';
 
 describe('acquisitions', () => {
 	it('should addTrackingCodesToUrl', () => {

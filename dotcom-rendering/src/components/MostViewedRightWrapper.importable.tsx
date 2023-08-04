@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
-import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { MostViewedRight } from './MostViewedRight';
+import { useAdBlockInUse } from '../lib/useAdBlockInUse.ts';
+import { MostViewedRight } from './MostViewedRight.tsx';
 
 type Props = {
 	componentDataAttribute: string;

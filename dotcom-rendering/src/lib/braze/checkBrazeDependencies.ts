@@ -1,5 +1,5 @@
-import { getBrazeUuid } from '../getBrazeUuid';
-import { hasRequiredConsents } from './hasRequiredConsents';
+import { getBrazeUuid } from '../getBrazeUuid.ts';
+import { hasRequiredConsents } from './hasRequiredConsents.ts';
 
 type SuccessResult = {
 	isSuccessful: true;

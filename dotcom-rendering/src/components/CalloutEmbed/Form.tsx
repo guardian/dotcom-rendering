@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CampaignFieldType } from '../../types/content';
-import { FileUpload } from './FormFields/FileUpload';
-import { MultiSelect } from './FormFields/MultiSelect';
-import { Select } from './FormFields/Select';
-import { TextArea } from './FormFields/TextArea';
-import { TextInput } from './FormFields/TextInput';
+import type { CampaignFieldType } from '../../types/content.ts';
+import { FileUpload } from './FormFields/FileUpload.tsx';
+import { MultiSelect } from './FormFields/MultiSelect.tsx';
+import { Select } from './FormFields/Select.tsx';
+import { TextArea } from './FormFields/TextArea.tsx';
+import { TextInput } from './FormFields/TextInput.tsx';
 
 const formStyles = css`
 	display: flex;

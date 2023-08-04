@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { unescapeData } from '../lib/escapeData';
-import { SoundcloudBlockElement } from '../types/content';
+import { unescapeData } from '../lib/escapeData.tsx';
+import type { SoundcloudBlockElement } from '../types/content.ts';
 
 const widthOverride = css`
 	iframe {

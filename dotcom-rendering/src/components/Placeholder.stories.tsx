@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Placeholder } from './Placeholder';
+import { Placeholder } from './Placeholder.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div

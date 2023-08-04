@@ -1,5 +1,5 @@
-import { logger } from '../server/lib/logging';
-import type { FEElement, Newsletter } from '../types/content';
+import { logger } from '../server/lib/logging.ts';
+import type { FEElement, Newsletter } from '../types/content.ts';
 
 type PlaceInArticle = {
 	position: number;

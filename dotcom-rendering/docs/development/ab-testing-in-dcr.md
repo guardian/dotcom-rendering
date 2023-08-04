@@ -26,7 +26,7 @@ The library docs above explain the integration and the API.
 
 ```ts
 // Within the components
-import { useAB } from '../lib/useAB';
+import { useAB } from '../lib/useAB.ts';
 
 // Example usage of AB Tests
 // Used in the Cypress tests as smoke test of the AB tests framework integration

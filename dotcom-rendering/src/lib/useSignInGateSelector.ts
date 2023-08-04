@@ -2,12 +2,12 @@ import type { ABTest, Runnable } from '@guardian/ab-core';
 import {
 	signInGateTests,
 	signInGateTestVariantToGateMapping,
-} from '../components/SignInGate/signInGate';
+} from '../components/SignInGate/signInGate.ts';
 import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-} from '../components/SignInGate/types';
-import { useAB } from './useAB';
+} from '../components/SignInGate/types.ts';
+import { useAB } from './useAB.ts';
 
 /**
  * @description

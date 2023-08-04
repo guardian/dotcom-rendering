@@ -1,4 +1,4 @@
-import { NewsletterFrequency } from './NewsletterFrequency';
+import { NewsletterFrequency } from './NewsletterFrequency.tsx';
 
 export default {
 	component: NewsletterFrequency,

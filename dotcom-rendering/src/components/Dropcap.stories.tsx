@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { body } from '@guardian/source-foundations';
-import { DropCap } from './DropCap';
+import { DropCap } from './DropCap.tsx';
 
 export default {
 	component: DropCap,

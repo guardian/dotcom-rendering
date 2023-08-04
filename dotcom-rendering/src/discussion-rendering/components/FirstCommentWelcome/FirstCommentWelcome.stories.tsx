@@ -1,5 +1,5 @@
 import { Pillar } from '@guardian/libs';
-import { FirstCommentWelcome } from './FirstCommentWelcome';
+import { FirstCommentWelcome } from './FirstCommentWelcome.tsx';
 
 export default { title: 'Discussion/FirstCommentWelcome' };
 

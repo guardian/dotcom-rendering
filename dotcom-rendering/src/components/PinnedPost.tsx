@@ -15,8 +15,8 @@ import {
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
 
 const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};

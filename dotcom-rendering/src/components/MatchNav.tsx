@@ -7,7 +7,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { Score } from './Score';
+import { Score } from './Score.tsx';
 
 type Props = {
 	homeTeam: TeamType;

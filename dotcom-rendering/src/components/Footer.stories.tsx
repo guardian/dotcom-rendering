@@ -7,11 +7,11 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Standard } from '../../fixtures/generated/articles/Standard';
-import { editionList } from '../lib/edition';
-import { extractNAV } from '../model/extract-nav';
-import { Footer } from './Footer';
-import { Section } from './Section';
+import { Standard } from '../../fixtures/generated/articles/Standard.ts';
+import { editionList } from '../lib/edition.ts';
+import { extractNAV } from '../model/extract-nav.ts';
+import { Footer } from './Footer.tsx';
+import { Section } from './Section.tsx';
 
 const Wrapper = ({ children }: { children: JSX.Element }) => (
 	<Section

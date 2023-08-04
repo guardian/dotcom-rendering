@@ -5,7 +5,7 @@ import type {
 } from '@guardian/identity-auth';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { CustomIdTokenClaims } from './identity';
+import type { CustomIdTokenClaims } from './identity.ts';
 
 type OktaAuthState = IdentityAuthState<never, CustomIdTokenClaims>;
 
@@ -43,7 +43,7 @@ export const getOptionsHeadersWithOkta = (
 };
 
 export async function getAuthState(): Promise<OktaAuthState> {
-	const { isSignedInWithOktaAuthState } = await import('./identity');
+	const { isSignedInWithOktaAuthState } = await import('./identity.ts');
 	const authState = await isSignedInWithOktaAuthState();
 	return authState;
 }

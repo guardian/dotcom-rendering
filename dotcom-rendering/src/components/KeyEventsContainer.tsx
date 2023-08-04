@@ -1,5 +1,5 @@
-import type { KeyEvent } from './KeyEvents';
-import { KeyEvents } from './KeyEvents';
+import type { KeyEvent } from './KeyEvents.tsx';
+import { KeyEvents } from './KeyEvents.tsx';
 
 type Props = {
 	keyEvents: Block[];

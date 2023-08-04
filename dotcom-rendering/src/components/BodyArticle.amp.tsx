@@ -12,21 +12,21 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import React from 'react';
-import { buildAdTargeting } from '../lib/ad-targeting';
-import { decideDesign } from '../lib/decideDesign';
-import { decideTheme } from '../lib/decideTheme';
-import { findAdSlots } from '../lib/find-adslots.amp';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import { getSharingUrls } from '../lib/sharing-urls';
+import { buildAdTargeting } from '../lib/ad-targeting.ts';
+import { decideDesign } from '../lib/decideDesign.ts';
+import { decideTheme } from '../lib/decideTheme.ts';
+import { findAdSlots } from '../lib/find-adslots.amp.ts';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import { getSharingUrls } from '../lib/sharing-urls.ts';
 import type { AMPArticleModel } from '../types/article.amp';
-import type { ConfigType } from '../types/config';
-import { Elements } from './Elements.amp';
-import { Epic } from './Epic.amp';
-import { InlineAd } from './InlineAd.amp';
-import { StickyAd } from './StickyAd.amp';
-import { SubMeta } from './SubMeta.amp';
-import { TextBlockComponent } from './TextBlockComponent.amp';
-import { TopMeta } from './TopMeta.amp';
+import type { ConfigType } from '../types/config.ts';
+import { Elements } from './Elements.amp.tsx';
+import { Epic } from './Epic.amp.tsx';
+import { InlineAd } from './InlineAd.amp.tsx';
+import { StickyAd } from './StickyAd.amp.tsx';
+import { SubMeta } from './SubMeta.amp.tsx';
+import { TextBlockComponent } from './TextBlockComponent.amp.tsx';
+import { TopMeta } from './TopMeta.amp.tsx';
 
 const getNewsletterSignupDefaultHTML = (webURL: string): string =>
 	`<p><strong>No sign-up button?</strong> Users viewing this page via Google Amp may experience a technical fault. <a href="${webURL}">Please click here to reload the page on theguardian.com</a> which should correct the problem.</p>`;

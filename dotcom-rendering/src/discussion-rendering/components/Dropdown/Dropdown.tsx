@@ -10,9 +10,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { DropdownOptionType } from '../../discussionTypes';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
+import type { DropdownOptionType } from '../../discussionTypes.ts';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
 
 type Props = {
 	id: string;

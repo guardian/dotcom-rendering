@@ -1,4 +1,4 @@
-import { getZIndex } from './getZIndex';
+import { getZIndex } from './getZIndex.ts';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {

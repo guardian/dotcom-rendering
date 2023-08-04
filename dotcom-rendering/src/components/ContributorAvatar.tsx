@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
-import { generateSources, getFallbackSource, Sources } from './Picture';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix.ts';
+import { generateSources, getFallbackSource, Sources } from './Picture.tsx';
 
 /** All images are authored at 720 × 600 pixels² */
 const ratio = 6 / 5;

@@ -10,7 +10,7 @@ import {
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 
 type Props = {
 	currentPage: number;

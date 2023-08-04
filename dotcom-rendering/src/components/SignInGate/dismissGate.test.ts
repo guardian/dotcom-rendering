@@ -4,7 +4,7 @@ import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 	unsetUserDismissedGate,
-} from './dismissGate';
+} from './dismissGate.ts';
 
 describe('SignInGate - dismissGate methods', () => {
 	beforeEach(() => {

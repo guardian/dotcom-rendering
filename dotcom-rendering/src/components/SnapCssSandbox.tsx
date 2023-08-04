@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { DCRSnapType } from '../types/front';
+import type { DCRSnapType } from '../types/front.ts';
 
 type Props = {
 	snapData?: DCRSnapType;

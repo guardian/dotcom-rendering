@@ -5,29 +5,29 @@ import type {
 import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { getArticleCounts } from '../lib/articleCount';
-import { getLocaleCode } from '../lib/getCountryCode';
+import { getArticleCounts } from '../lib/articleCount.ts';
+import { getLocaleCode } from '../lib/getCountryCode.ts';
 import type {
 	CandidateConfig,
 	MaybeFC,
 	SlotConfig,
-} from '../lib/messagePicker';
-import { pickMessage } from '../lib/messagePicker';
-import { useAB } from '../lib/useAB';
-import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
-import { useBraze } from '../lib/useBraze';
-import { useOnce } from '../lib/useOnce';
-import type { TagType } from '../types/tag';
-import { AdSlot } from './AdSlot';
-import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
-import {
-	canShowReaderRevenueEpic,
-	ReaderRevenueEpic,
-} from './SlotBodyEnd/ReaderRevenueEpic';
+} from '../lib/messagePicker.ts';
+import { pickMessage } from '../lib/messagePicker.ts';
+import { useAB } from '../lib/useAB.ts';
+import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus.ts';
+import { useBraze } from '../lib/useBraze.ts';
+import { useOnce } from '../lib/useOnce.ts';
+import type { TagType } from '../types/tag.ts';
+import { AdSlot } from './AdSlot.tsx';
+import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic.tsx';
 import type {
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
-} from './SlotBodyEnd/ReaderRevenueEpic';
+} from './SlotBodyEnd/ReaderRevenueEpic.tsx';
+import {
+	canShowReaderRevenueEpic,
+	ReaderRevenueEpic,
+} from './SlotBodyEnd/ReaderRevenueEpic.tsx';
 
 type Props = {
 	contentType: string;

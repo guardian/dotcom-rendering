@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { type ArticleTheme, isString, storage } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { CommentContainer } from './components/CommentContainer/CommentContainer';
-import { CommentForm } from './components/CommentForm/CommentForm';
-import { Filters } from './components/Filters/Filters';
-import { LoadingComments } from './components/LoadingComments/LoadingComments';
-import { Pagination } from './components/Pagination/Pagination';
-import { TopPicks } from './components/TopPicks/TopPicks';
+import { CommentContainer } from './components/CommentContainer/CommentContainer.tsx';
+import { CommentForm } from './components/CommentForm/CommentForm.tsx';
+import { Filters } from './components/Filters/Filters.tsx';
+import { LoadingComments } from './components/LoadingComments/LoadingComments.tsx';
+import { Pagination } from './components/Pagination/Pagination.tsx';
+import { TopPicks } from './components/TopPicks/TopPicks.tsx';
 import {
 	type AdditionalHeadersType,
 	type CommentResponse,
@@ -19,8 +19,8 @@ import {
 	type OrderByType,
 	type PageSizeType,
 	type SignedInUser,
-} from './discussionTypes';
-import { getDiscussion, getPicks, initialiseApi } from './lib/api';
+} from './discussionTypes.ts';
+import { getDiscussion, getPicks, initialiseApi } from './lib/api.tsx';
 
 type Props = {
 	shortUrl: string;

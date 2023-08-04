@@ -1,5 +1,5 @@
-import type { SharedAdTargeting } from '../lib/ad-targeting';
-import type { EditionId } from '../lib/edition';
+import type { SharedAdTargeting } from '../lib/ad-targeting.ts';
+import type { EditionId } from '../lib/edition.ts';
 
 export interface CommercialConfigType {
 	isPaidContent?: boolean;

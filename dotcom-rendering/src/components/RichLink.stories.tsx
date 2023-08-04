@@ -5,9 +5,9 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { Figure } from './Figure';
-import { RichLink } from './RichLink';
-import { Section } from './Section';
+import { Figure } from './Figure.tsx';
+import { RichLink } from './RichLink.tsx';
+import { Section } from './Section.tsx';
 
 const someContributor =
 	'https://uploads.guim.co.uk/2017/10/09/Oliver-Wainwright,-L.png';

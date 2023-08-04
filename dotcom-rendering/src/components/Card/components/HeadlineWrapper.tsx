@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
-import type { ImagePositionType } from './ImageWrapper';
+import type { ImagePositionType } from './ImageWrapper.tsx';
 
 type Props = {
 	children: React.ReactNode;

@@ -1,4 +1,4 @@
-import type { AudioAtomBlockElement } from '../types/content';
+import type { AudioAtomBlockElement } from '../types/content.ts';
 
 type Props = {
 	element: AudioAtomBlockElement;

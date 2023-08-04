@@ -5,7 +5,7 @@ import type {
 	MultiImageBlockElement,
 	SubheadingBlockElement,
 	TextBlockElement,
-} from '../types/content';
+} from '../types/content.ts';
 
 interface HalfWidthImageBlockElement extends ImageBlockElement {
 	role: 'halfWidth';

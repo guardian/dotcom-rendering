@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { BlockquoteBlockElement, FEElement } from '../types/content';
+import type { BlockquoteBlockElement, FEElement } from '../types/content.ts';
 
 const isQuoted = (element: BlockquoteBlockElement): boolean => {
 	// A quoted blockquote: <blockquote class="quoted"><p>I think therefore I am</p></blockquote>

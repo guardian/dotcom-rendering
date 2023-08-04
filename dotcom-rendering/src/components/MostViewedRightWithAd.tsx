@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { AdSlot } from './AdSlot';
-import { Island } from './Island';
-import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable';
+import { AdSlot } from './AdSlot.tsx';
+import { Island } from './Island.tsx';
+import { MostViewedRightWrapper } from './MostViewedRightWrapper.importable.tsx';
 
 type Props = {
 	display: ArticleDisplay;

@@ -1,4 +1,4 @@
-import { Caption } from './Caption';
+import { Caption } from './Caption.tsx';
 
 type Props = {
 	captionText?: string;

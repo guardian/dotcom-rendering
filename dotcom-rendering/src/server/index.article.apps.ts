@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import { enhanceArticleType } from './index.article.web';
-import { renderArticle } from './render.article.apps';
+import { recordTypeAndPlatform } from '../server/lib/logging-store.ts';
+import { enhanceArticleType } from './index.article.web.ts';
+import { renderArticle } from './render.article.apps.tsx';
 
 /**
  * Formats script paths as a Link header

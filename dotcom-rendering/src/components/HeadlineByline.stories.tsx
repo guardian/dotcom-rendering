@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { HeadlineByline } from './HeadlineByline';
+import { HeadlineByline } from './HeadlineByline.tsx';
 
 export default {
 	component: HeadlineByline,

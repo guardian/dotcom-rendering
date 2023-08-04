@@ -5,7 +5,7 @@ import {
 	text as textColor,
 	textSans,
 } from '@guardian/source-foundations';
-import { unescapeData } from '../lib/escapeData';
+import { unescapeData } from '../lib/escapeData.tsx';
 
 type Props = {
 	body: string;

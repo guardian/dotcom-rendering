@@ -1,6 +1,6 @@
 import { text, textSans } from '@guardian/source-foundations';
-import type { BaseAdProps } from './Ad.amp';
-import { Ad } from './Ad.amp';
+import type { BaseAdProps } from './Ad.amp.tsx';
+import { Ad } from './Ad.amp.tsx';
 
 // This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky
 export const stickyAdLabelCss = `

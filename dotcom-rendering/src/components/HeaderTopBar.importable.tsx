@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { center } from '../lib/center';
-import type { EditionId } from '../lib/edition';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
-import { MyAccount } from './HeaderTopBarMyAccount';
-import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
-import { Search } from './HeaderTopBarSearch';
-import { HeaderTopBarSearchCapi } from './HeaderTopBarSearchCapi';
-import { SearchJobs } from './HeaderTopBarSearchJobs';
-import { Hide } from './Hide';
+import { pageSkinContainer } from '../layouts/lib/pageSkin.ts';
+import { center } from '../lib/center.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown.tsx';
+import { MyAccount } from './HeaderTopBarMyAccount.tsx';
+import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions.tsx';
+import { Search } from './HeaderTopBarSearch.tsx';
+import { HeaderTopBarSearchCapi } from './HeaderTopBarSearchCapi.tsx';
+import { SearchJobs } from './HeaderTopBarSearchJobs.tsx';
+import { Hide } from './Hide.tsx';
 
 interface HeaderTopBarProps {
 	editionId: EditionId;

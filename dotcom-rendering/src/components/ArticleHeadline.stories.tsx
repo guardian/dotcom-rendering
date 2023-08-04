@@ -6,14 +6,14 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { news } from '@guardian/source-foundations';
-import { ArticleContainer } from './ArticleContainer';
-import { ArticleHeadline } from './ArticleHeadline';
-import { mainMediaElements } from './ArticleHeadline.mocks';
-import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
-import { MainMedia } from './MainMedia';
-import { Section } from './Section';
-import { Standfirst } from './Standfirst';
+import { ArticleContainer } from './ArticleContainer.tsx';
+import { mainMediaElements } from './ArticleHeadline.mocks.ts';
+import { ArticleHeadline } from './ArticleHeadline.tsx';
+import { Flex } from './Flex.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { MainMedia } from './MainMedia.tsx';
+import { Section } from './Section.tsx';
+import { Standfirst } from './Standfirst.tsx';
 
 export default {
 	component: ArticleHeadline,

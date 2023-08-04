@@ -1,4 +1,4 @@
-import { StarRatingBlockComponent } from './StarRatingBlockComponent';
+import { StarRatingBlockComponent } from './StarRatingBlockComponent.tsx';
 
 export default {
 	component: StarRatingBlockComponent,

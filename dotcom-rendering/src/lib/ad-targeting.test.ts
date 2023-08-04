@@ -1,4 +1,4 @@
-import { buildAdTargeting } from './ad-targeting';
+import { buildAdTargeting } from './ad-targeting.ts';
 
 const sharedAdTargeting = {
 	co: ['rob-davies'],

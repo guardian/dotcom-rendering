@@ -1,7 +1,7 @@
-import { trails } from '../../fixtures/manual/trails';
-import { MostPopularFooterGrid } from './MostPopularFooterGrid';
-import { MostViewedFooterLayout } from './MostViewedFooterLayout';
-import { Section } from './Section';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { MostPopularFooterGrid } from './MostPopularFooterGrid.tsx';
+import { MostViewedFooterLayout } from './MostViewedFooterLayout.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: MostPopularFooterGrid,

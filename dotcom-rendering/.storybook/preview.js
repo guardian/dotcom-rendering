@@ -8,10 +8,10 @@ import { getFontsCss } from '../src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations';
 
-import { Lazy } from '../src/components/Lazy';
-import { Picture } from '../src/components/Picture';
-import { mockRESTCalls } from '../src/lib/mockRESTCalls';
-import { setABTests } from '../src/lib/useAB';
+import { Lazy } from '../src/components/Lazy.tsx';
+import { Picture } from '../src/components/Picture.tsx';
+import { mockRESTCalls } from '../src/lib/mockRESTCalls.ts';
+import { setABTests } from '../src/lib/useAB.ts';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();

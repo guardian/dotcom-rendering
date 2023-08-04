@@ -16,15 +16,15 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import type { EditionId } from '../lib/edition';
-import { clearFix } from '../lib/mixins';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { PillarLinkType } from '../model/extract-nav';
-import type { FooterType } from '../types/footer';
-import { BackToTop } from './BackToTop';
-import { Island } from './Island';
-import { Pillars } from './Pillars';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import type { EditionId } from '../lib/edition.ts';
+import { clearFix } from '../lib/mixins.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import type { PillarLinkType } from '../model/extract-nav.ts';
+import type { FooterType } from '../types/footer.ts';
+import { BackToTop } from './BackToTop.tsx';
+import { Island } from './Island.tsx';
+import { Pillars } from './Pillars.tsx';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable.tsx';
 
 // CSS vars
 const footerBorders = `1px solid ${brand[600]}`;

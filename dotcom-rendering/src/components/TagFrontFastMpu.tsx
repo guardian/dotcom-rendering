@@ -1,11 +1,11 @@
 import { Hide } from '@guardian/source-react-components';
-import { Card33Media33, CardDefault } from '../lib/cardWrappers';
-import { type Tuple } from '../lib/tuple';
-import type { DCRFrontCard } from '../types/front';
-import type { GroupedTrailsFastMpu } from '../types/tagFront';
-import { AdSlot } from './AdSlot';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+import { Card33Media33, CardDefault } from '../lib/cardWrappers.tsx';
+import { type Tuple } from '../lib/tuple.ts';
+import type { DCRFrontCard } from '../types/front.ts';
+import type { GroupedTrailsFastMpu } from '../types/tagFront.ts';
+import { AdSlot } from './AdSlot.tsx';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 const TwoCard = ({
 	trails,

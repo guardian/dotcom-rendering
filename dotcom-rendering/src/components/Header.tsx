@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import { pageSkinContainer } from '../layouts/lib/pageSkin';
-import { center } from '../lib/center';
-import type { EditionId } from '../lib/edition';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { HeaderTopBar } from './HeaderTopBar.importable';
-import { Island } from './Island';
-import { Logo } from './Logo';
-import { Snow } from './Snow.importable';
-import { SupportTheG } from './SupportTheG.importable';
+import { pageSkinContainer } from '../layouts/lib/pageSkin.ts';
+import { center } from '../lib/center.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { HeaderTopBar } from './HeaderTopBar.importable.tsx';
+import { Island } from './Island.tsx';
+import { Logo } from './Logo.tsx';
+import { Snow } from './Snow.importable.tsx';
+import { SupportTheG } from './SupportTheG.importable.tsx';
 
 const headerStyles = css`
 	background-color: ${brand[400]};

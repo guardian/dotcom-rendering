@@ -1,4 +1,4 @@
-import { isValidUrl } from './isValidUrl';
+import { isValidUrl } from './isValidUrl.ts';
 
 describe('isValidUrl', () => {
 	describe('invalidInputs', () => {

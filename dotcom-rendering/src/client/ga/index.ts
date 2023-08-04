@@ -4,7 +4,7 @@ import {
 } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { loadScript, log } from '@guardian/libs';
-import { init, sendPageView } from './ga';
+import { init, sendPageView } from './ga.ts';
 
 export const ga = (): Promise<void> => {
 	// Check if we have consent for GA so that if the reader removes consent for tracking we

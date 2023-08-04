@@ -1,4 +1,4 @@
-import { getForcedParticipationsFromUrl } from './getAbUrlHash';
+import { getForcedParticipationsFromUrl } from './getAbUrlHash.ts';
 
 describe('getForcedParticipationsFromUrl', () => {
 	it('Returns a single forced ab test variant', () => {

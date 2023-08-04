@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { match } from '../../fixtures/manual/cricket-scoreboard';
-import { CricketScoreboard } from './CricketScoreboard';
+import { match } from '../../fixtures/manual/cricket-scoreboard.ts';
+import { CricketScoreboard } from './CricketScoreboard.tsx';
 
 export default {
 	component: CricketScoreboard,

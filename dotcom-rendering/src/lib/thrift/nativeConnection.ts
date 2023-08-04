@@ -15,7 +15,7 @@ import {
 	ThriftConnection,
 } from '@creditkarma/thrift-server-core';
 import * as uuid from 'uuid';
-import { TMultiplexedProtocol } from './protocols';
+import { TMultiplexedProtocol } from './protocols.ts';
 
 declare global {
 	interface Window {

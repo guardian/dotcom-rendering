@@ -1,4 +1,4 @@
-import { Timestamp } from './Timestamp';
+import { Timestamp } from './Timestamp.tsx';
 
 export default { component: Timestamp, title: 'Discussion/Timestamp' };
 

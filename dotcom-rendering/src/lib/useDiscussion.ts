@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi } from './useApi.tsx';
 
 type DiscussionResponse = {
 	status: string;

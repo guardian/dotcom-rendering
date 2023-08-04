@@ -5,8 +5,8 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { BlockquoteBlockComponent } from './BlockquoteBlockComponent.tsx';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</p> \n<p>A second paragraph</p> \n</blockquote>';

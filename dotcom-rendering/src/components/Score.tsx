@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { text } from '@guardian/source-foundations';
-import { Eight } from './numbers/Eight';
-import { Five } from './numbers/Five';
-import { Four } from './numbers/Four';
-import { Nine } from './numbers/Nine';
-import { One } from './numbers/One';
-import { Seven } from './numbers/Seven';
-import { Six } from './numbers/Six';
-import { Ten } from './numbers/Ten';
-import { Three } from './numbers/Three';
-import { Two } from './numbers/Two';
-import { Zero } from './numbers/Zero';
+import { Eight } from './numbers/Eight.tsx';
+import { Five } from './numbers/Five.tsx';
+import { Four } from './numbers/Four.tsx';
+import { Nine } from './numbers/Nine.tsx';
+import { One } from './numbers/One.tsx';
+import { Seven } from './numbers/Seven.tsx';
+import { Six } from './numbers/Six.tsx';
+import { Ten } from './numbers/Ten.tsx';
+import { Three } from './numbers/Three.tsx';
+import { Two } from './numbers/Two.tsx';
+import { Zero } from './numbers/Zero.tsx';
 
 type Props = {
 	score: number;

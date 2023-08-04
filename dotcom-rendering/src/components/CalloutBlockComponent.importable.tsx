@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
-import type { CalloutBlockElementV2 } from '../types/content';
-import { CalloutBlock } from './Callout/Callout';
-import { CalloutExpired } from './Callout/CalloutComponents';
-import { Deadline } from './Callout/Deadline';
+import type { CalloutBlockElementV2 } from '../types/content.ts';
+import { CalloutBlock } from './Callout/Callout.tsx';
+import { CalloutExpired } from './Callout/CalloutComponents.tsx';
+import { Deadline } from './Callout/Deadline.tsx';
 
 const collapsibleCalloutStyle = css`
 	background-color: ${palette.neutral[97]};

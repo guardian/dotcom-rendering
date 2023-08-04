@@ -1,7 +1,7 @@
 import {
 	getTopFiveIncludingSelected,
 	hasRelevantTopics,
-} from './TopicFilterBank';
+} from './TopicFilterBank.tsx';
 
 describe('hasRelevantTopics', () => {
 	describe('should be false', () => {

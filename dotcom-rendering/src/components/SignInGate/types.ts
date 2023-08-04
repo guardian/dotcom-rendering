@@ -1,7 +1,7 @@
 import { isObject, isString } from '@guardian/libs';
-import type { Guard } from '../../lib/guard';
-import { guard } from '../../lib/guard';
-import type { TagType } from '../../types/tag';
+import type { Guard } from '../../lib/guard.ts';
+import { guard } from '../../lib/guard.ts';
+import type { TagType } from '../../types/tag.ts';
 
 export type CanShowGateProps = {
 	isSignedIn: boolean;

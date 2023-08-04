@@ -1,5 +1,5 @@
 import { Select as SourceSelect } from '@guardian/source-react-components';
-import type { CampaignFieldSelect } from '../../../types/content';
+import type { CampaignFieldSelect } from '../../../types/content.ts';
 
 type Props = {
 	validationErrors?: { [key in string]: string };

@@ -1,4 +1,4 @@
-import { createAuthenticationEventParams } from './identity-component-event';
+import { createAuthenticationEventParams } from './identity-component-event.ts';
 
 describe('createAuthenticationEventParams', () => {
 	it('creates authentication event params given a component Id', () => {

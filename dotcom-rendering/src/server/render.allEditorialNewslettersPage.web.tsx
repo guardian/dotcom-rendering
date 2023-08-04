@@ -1,17 +1,17 @@
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles.js';
-import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
-import { generateScriptTags, getPathFromManifest } from '../lib/assets';
-import { renderToStringWithEmotion } from '../lib/emotion';
-import { escapeData } from '../lib/escapeData';
-import { getHttp3Url } from '../lib/getHttp3Url';
-import { polyfillIO } from '../lib/polyfill.io';
-import { extractNAV } from '../model/extract-nav';
-import { makeWindowGuardian } from '../model/window-guardian';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { htmlPageTemplate } from './htmlPageTemplate';
+} from '../../scripts/webpack/bundles.js.js';
+import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage.tsx';
+import { generateScriptTags, getPathFromManifest } from '../lib/assets.ts';
+import { renderToStringWithEmotion } from '../lib/emotion.tsx';
+import { escapeData } from '../lib/escapeData.tsx';
+import { getHttp3Url } from '../lib/getHttp3Url.ts';
+import { polyfillIO } from '../lib/polyfill.io.ts';
+import { extractNAV } from '../model/extract-nav.ts';
+import { makeWindowGuardian } from '../model/window-guardian.ts';
+import type { DCRNewslettersPageType } from '../types/newslettersPage.ts';
+import { htmlPageTemplate } from './htmlPageTemplate.ts';
 
 interface Props {
 	newslettersPage: DCRNewslettersPageType;

@@ -7,9 +7,9 @@ import {
 import { breakpoints } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import type { ImageForLightbox } from '../types/content';
-import { LightboxImages } from './LightboxImages';
-import { LightboxLayout } from './LightboxLayout';
+import type { ImageForLightbox } from '../types/content.ts';
+import { LightboxImages } from './LightboxImages.tsx';
+import { LightboxLayout } from './LightboxLayout.tsx';
 
 const testImage: ImageForLightbox = {
 	elementId: 'mockId',

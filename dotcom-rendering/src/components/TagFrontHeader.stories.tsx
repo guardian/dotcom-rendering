@@ -1,4 +1,4 @@
-import { TagFrontHeader } from './TagFrontHeader';
+import { TagFrontHeader } from './TagFrontHeader.tsx';
 
 export default {
 	component: TagFrontHeader,

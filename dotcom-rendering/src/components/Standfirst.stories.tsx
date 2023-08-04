@@ -5,8 +5,8 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { news } from '@guardian/source-foundations';
-import { Section } from './Section';
-import { Standfirst } from './Standfirst';
+import { Section } from './Section.tsx';
+import { Standfirst } from './Standfirst.tsx';
 
 export default {
 	component: Standfirst,

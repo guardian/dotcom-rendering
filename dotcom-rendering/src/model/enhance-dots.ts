@@ -1,5 +1,5 @@
-import type { FEElement } from '../types/content';
-import { transformDots } from './transformDots';
+import type { FEElement } from '../types/content.ts';
+import { transformDots } from './transformDots.ts';
 
 const checkForDots = (elements: FEElement[]): FEElement[] =>
 	// Loop over elements and check if a dot is in the TextBlockElement

@@ -1,4 +1,4 @@
-import { adJson, stringify } from './ad-json.amp';
+import { adJson, stringify } from './ad-json.amp.ts';
 
 const paramSet: AdTargetParam[] = [
 	{

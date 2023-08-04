@@ -1,6 +1,6 @@
-import { constructQuery } from '../lib/querystring';
-import type { YoutubeBlockElement } from '../types/content';
-import { Caption } from './Caption.amp';
+import { constructQuery } from '../lib/querystring.ts';
+import type { YoutubeBlockElement } from '../types/content.ts';
+import { Caption } from './Caption.amp.tsx';
 
 type EmbedConfig = {
 	adsConfig:

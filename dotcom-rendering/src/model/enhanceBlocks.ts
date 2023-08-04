@@ -1,16 +1,16 @@
-import type { Newsletter } from '../types/content';
-import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceDividers } from './enhance-dividers';
-import { enhanceDots } from './enhance-dots';
-import { enhanceEmbeds } from './enhance-embeds';
-import { enhanceH2s } from './enhance-H2s';
-import { enhanceH3s } from './enhance-H3s';
-import { enhanceImages } from './enhance-images';
-import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
-import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceTweets } from './enhance-tweets';
-import { insertPromotedNewsletter } from './insertPromotedNewsletter';
-import { validateAsBlock } from './validate';
+import type { Newsletter } from '../types/content.ts';
+import { enhanceBlockquotes } from './enhance-blockquotes.ts';
+import { enhanceDividers } from './enhance-dividers.ts';
+import { enhanceDots } from './enhance-dots.ts';
+import { enhanceEmbeds } from './enhance-embeds.ts';
+import { enhanceH2s } from './enhance-H2s.ts';
+import { enhanceH3s } from './enhance-H3s.ts';
+import { enhanceImages } from './enhance-images.ts';
+import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements.ts';
+import { enhanceNumberedLists } from './enhance-numbered-lists.ts';
+import { enhanceTweets } from './enhance-tweets.ts';
+import { insertPromotedNewsletter } from './insertPromotedNewsletter.ts';
+import { validateAsBlock } from './validate.ts';
 
 class BlockEnhancer {
 	blocks: Block[];

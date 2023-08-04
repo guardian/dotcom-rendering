@@ -1,4 +1,4 @@
-import { constructQuery } from './querystring';
+import { constructQuery } from './querystring.ts';
 
 type AuthenticationComponentId =
 	| 'amp_sidebar_signin'

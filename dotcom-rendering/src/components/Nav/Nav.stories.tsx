@@ -1,9 +1,9 @@
 import { Pillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
 import { userEvent, within } from '@storybook/testing-library';
-import { Section } from '../Section';
-import { Nav } from './Nav';
-import { nav } from './Nav.mock';
+import { Section } from '../Section.tsx';
+import { nav } from './Nav.mock.tsx';
+import { Nav } from './Nav.tsx';
 
 export default {
 	component: Nav,

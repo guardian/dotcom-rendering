@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import React from 'react';
-import { isEditionId } from '../lib/edition';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import { regionClasses } from '../lib/region-classes.amp';
-import type { Branding as BrandingType } from '../types/branding';
-import type { CommercialProperties } from '../types/commercial';
+import { isEditionId } from '../lib/edition.ts';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import { regionClasses } from '../lib/region-classes.amp.ts';
+import type { Branding as BrandingType } from '../types/branding.ts';
+import type { CommercialProperties } from '../types/commercial.ts';
 
 const LinkStyle = (pillar: ArticleTheme) => css`
 	a {

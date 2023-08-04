@@ -8,8 +8,8 @@ import type {
 	CampaignFieldSelect,
 	CampaignFieldText,
 	CampaignFieldTextArea,
-} from '../../types/content';
-import { Form } from './Form';
+} from '../../types/content.ts';
+import { Form } from './Form.tsx';
 
 const textField: CampaignFieldText = {
 	textSize: 50,

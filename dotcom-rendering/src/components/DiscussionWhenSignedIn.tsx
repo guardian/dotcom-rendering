@@ -1,12 +1,12 @@
 import { joinUrl } from '@guardian/libs';
-import { useApi } from '../lib/useApi';
+import { useApi } from '../lib/useApi.tsx';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../lib/useAuthStatus';
-import { getOptionsHeadersWithOkta } from '../lib/useAuthStatus';
-import type { Props as DiscussionProps } from './Discussion';
-import { Discussion } from './Discussion';
+} from '../lib/useAuthStatus.ts';
+import { getOptionsHeadersWithOkta } from '../lib/useAuthStatus.ts';
+import type { Props as DiscussionProps } from './Discussion.tsx';
+import { Discussion } from './Discussion.tsx';
 
 type Props = DiscussionProps & {
 	authStatus: SignedInWithOkta | SignedInWithCookies;

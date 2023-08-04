@@ -7,8 +7,8 @@ import {
 	lifestylePillarStoryExpanded,
 	listStoryExpanded,
 	orderedListStoryExpanded,
-} from '../../../fixtures/manual/guideAtom';
-import { GuideAtom } from './GuideAtom';
+} from '../../../fixtures/manual/guideAtom.ts';
+import { GuideAtom } from './GuideAtom.tsx';
 
 export default {
 	title: 'Components/GuideAtom',

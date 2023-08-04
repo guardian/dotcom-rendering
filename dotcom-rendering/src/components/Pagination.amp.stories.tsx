@@ -1,4 +1,4 @@
-import { Pagination } from './Pagination.amp';
+import { Pagination } from './Pagination.amp.tsx';
 
 export default {
 	component: Pagination,

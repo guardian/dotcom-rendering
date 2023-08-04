@@ -1,12 +1,12 @@
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices.tsx';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
+} from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
+import { FrontCard } from './FrontCard.tsx';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;

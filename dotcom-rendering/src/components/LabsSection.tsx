@@ -11,14 +11,14 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
 import LabsLogo from '../static/logos/the-guardian-labs.svg';
-import type { DCRBadgeType } from '../types/badge';
-import { Badge } from './Badge';
-import { Details } from './Details';
-import { Island } from './Island';
-import { Section } from './Section';
-import { ShowMore } from './ShowMore.importable';
+import type { DCRBadgeType } from '../types/badge.ts';
+import { Badge } from './Badge.tsx';
+import { Details } from './Details.tsx';
+import { Island } from './Island.tsx';
+import { Section } from './Section.tsx';
+import { ShowMore } from './ShowMore.importable.tsx';
 
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */

@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import type { SWRConfiguration } from 'swr';
-import { useApi } from '../lib/useApi';
-import type { TagType } from '../types/tag';
-import { ArticleHeadline } from './ArticleHeadline';
-import { cleanTeamData } from './GetMatchStats.importable';
-import { MatchNav } from './MatchNav';
-import { Placeholder } from './Placeholder';
+import { useApi } from '../lib/useApi.tsx';
+import type { TagType } from '../types/tag.ts';
+import { ArticleHeadline } from './ArticleHeadline.tsx';
+import { cleanTeamData } from './GetMatchStats.importable.tsx';
+import { MatchNav } from './MatchNav.tsx';
+import { Placeholder } from './Placeholder.tsx';
 
 type Props = {
 	matchUrl: string;

@@ -1,4 +1,4 @@
-import { constructQuery } from './querystring';
+import { constructQuery } from './querystring.ts';
 
 describe('constructQuery', () => {
 	it('constructs the correct query string from an object', () => {

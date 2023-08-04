@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
-import { bestFitImage, heightEstimate } from '../lib/image-fit.amp';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { bestFitImage, heightEstimate } from '../lib/image-fit.amp.ts';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 import TriangleIcon from '../static/icons/triangle.svg';
-import type { ImageBlockElement } from '../types/content';
+import type { ImageBlockElement } from '../types/content.ts';
 
 const figureStyle = css`
 	margin-top: 16px;

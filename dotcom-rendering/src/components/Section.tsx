@@ -2,18 +2,18 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { background, from, space, until } from '@guardian/source-foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import type { EditionId } from '../lib/edition';
-import { hiddenStyles } from '../lib/hiddenStyles';
-import type { DCRContainerPalette, TreatType } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
-import { ContainerTitle } from './ContainerTitle';
-import { ElementContainer } from './ElementContainer';
-import { Flex } from './Flex';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
-import { ShowHideButton } from './ShowHideButton';
-import { Treats } from './Treats';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { hiddenStyles } from '../lib/hiddenStyles.tsx';
+import type { DCRContainerPalette, TreatType } from '../types/front.ts';
+import type { ContainerOverrides } from '../types/palette.ts';
+import { ContainerTitle } from './ContainerTitle.tsx';
+import { ElementContainer } from './ElementContainer.tsx';
+import { Flex } from './Flex.tsx';
+import { Hide } from './Hide.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { ShowHideButton } from './ShowHideButton.tsx';
+import { Treats } from './Treats.tsx';
 
 /**
  * ----- First time here? -----

@@ -4,7 +4,7 @@ import {
 	decideBadge,
 	getBadgeFromBranding,
 	getBadgeFromSeriesTag,
-} from './decideBadge';
+} from './decideBadge.ts';
 
 jest.unstable_mockModule('../../src/model/badges', () => ({
 	/** Mocked version of BADGES for testing */

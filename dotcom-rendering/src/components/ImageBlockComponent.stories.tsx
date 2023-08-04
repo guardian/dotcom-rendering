@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { Figure } from './Figure';
-import { Flex } from './Flex';
-import { ImageBlockComponent } from './ImageBlockComponent';
-import { image } from './ImageBlockComponent.mocks';
-import { LeftColumn } from './LeftColumn';
-import { RightColumn } from './RightColumn';
-import { Section } from './Section';
+import { Figure } from './Figure.tsx';
+import { Flex } from './Flex.tsx';
+import { image } from './ImageBlockComponent.mocks.ts';
+import { ImageBlockComponent } from './ImageBlockComponent.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { RightColumn } from './RightColumn.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: ImageBlockComponent,

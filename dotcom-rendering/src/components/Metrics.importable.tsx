@@ -8,14 +8,14 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high';
-import { integrateIma } from '../experiments/tests/integrate-ima';
-import { limitInlineMerch } from '../experiments/tests/limit-inline-merch';
-import { liveblogRightColumnAds } from '../experiments/tests/liveblog-right-column-ads';
-import { publicGoodTest } from '../experiments/tests/public-good';
-import { useAB } from '../lib/useAB';
-import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { useOnce } from '../lib/useOnce';
+import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-high.ts';
+import { integrateIma } from '../experiments/tests/integrate-ima.ts';
+import { limitInlineMerch } from '../experiments/tests/limit-inline-merch.ts';
+import { liveblogRightColumnAds } from '../experiments/tests/liveblog-right-column-ads.ts';
+import { publicGoodTest } from '../experiments/tests/public-good.ts';
+import { useAB } from '../lib/useAB.ts';
+import { useAdBlockInUse } from '../lib/useAdBlockInUse.ts';
+import { useOnce } from '../lib/useOnce.ts';
 
 type Props = {
 	commercialMetricsEnabled: boolean;

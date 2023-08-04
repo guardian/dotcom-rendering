@@ -1,8 +1,8 @@
 import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
-import { useApi } from '../lib/useApi';
-import { CricketScoreboard } from './CricketScoreboard';
-import { Placeholder } from './Placeholder';
+import { useApi } from '../lib/useApi.tsx';
+import { CricketScoreboard } from './CricketScoreboard.tsx';
+import { Placeholder } from './Placeholder.tsx';
 
 type Props = {
 	matchUrl: string;

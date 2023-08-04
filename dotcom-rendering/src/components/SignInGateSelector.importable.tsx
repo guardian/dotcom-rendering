@@ -1,27 +1,27 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData';
-import { constructQuery } from '../lib/querystring';
-import { useAuthStatus } from '../lib/useAuthStatus';
-import { useOnce } from '../lib/useOnce';
-import { useSignInGateSelector } from '../lib/useSignInGateSelector';
-import type { Switches } from '../types/config';
-import type { TagType } from '../types/tag';
-import type { ComponentEventParams } from './SignInGate/componentEventTracking';
+import { parseCheckoutCompleteCookieData } from '../lib/parser/parseCheckoutOutCookieData.ts';
+import { constructQuery } from '../lib/querystring.ts';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import { useOnce } from '../lib/useOnce.ts';
+import { useSignInGateSelector } from '../lib/useSignInGateSelector.ts';
+import type { Switches } from '../types/config.ts';
+import type { TagType } from '../types/tag.ts';
+import type { ComponentEventParams } from './SignInGate/componentEventTracking.tsx';
 import {
 	submitViewEventTracking,
 	withComponentId,
-} from './SignInGate/componentEventTracking';
+} from './SignInGate/componentEventTracking.tsx';
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
-} from './SignInGate/dismissGate';
-import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
+} from './SignInGate/dismissGate.ts';
+import { signInGateTestIdToComponentId } from './SignInGate/signInGate.ts';
 import type {
 	CheckoutCompleteCookieData,
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-} from './SignInGate/types';
+} from './SignInGate/types.ts';
 
 type Props = {
 	format: ArticleFormat;

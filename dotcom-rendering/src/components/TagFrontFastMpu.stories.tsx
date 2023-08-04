@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { FrontSection } from './FrontSection';
-import { TagFrontFastMpu } from './TagFrontFastMpu';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { FrontSection } from './FrontSection.tsx';
+import { TagFrontFastMpu } from './TagFrontFastMpu.tsx';
 
 export default {
 	component: TagFrontFastMpu,

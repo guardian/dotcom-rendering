@@ -13,39 +13,39 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Fragment } from 'react';
-import { AdSlot } from '../components/AdSlot';
-import { Carousel } from '../components/Carousel.importable';
-import { CPScottHeader } from '../components/CPScottHeader';
-import { DecideContainer } from '../components/DecideContainer';
-import { Footer } from '../components/Footer';
-import { FrontMostViewed } from '../components/FrontMostViewed';
-import { FrontSection } from '../components/FrontSection';
-import { Header } from '../components/Header';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Island } from '../components/Island';
-import { LabsHeader } from '../components/LabsHeader';
-import { LabsSection } from '../components/LabsSection';
-import { Nav } from '../components/Nav/Nav';
-import { Section } from '../components/Section';
-import { Snap } from '../components/Snap';
-import { SnapCssSandbox } from '../components/SnapCssSandbox';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { SubNav } from '../components/SubNav.importable';
-import { TrendingTopics } from '../components/TrendingTopics';
-import { WeatherWrapper } from '../components/WeatherWrapper.importable';
-import { canRenderAds } from '../lib/canRenderAds';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { AdSlot } from '../components/AdSlot.tsx';
+import { Carousel } from '../components/Carousel.importable.tsx';
+import { CPScottHeader } from '../components/CPScottHeader.tsx';
+import { DecideContainer } from '../components/DecideContainer.tsx';
+import { Footer } from '../components/Footer.tsx';
+import { FrontMostViewed } from '../components/FrontMostViewed.tsx';
+import { FrontSection } from '../components/FrontSection.tsx';
+import { Header } from '../components/Header.tsx';
+import { HeaderAdSlot } from '../components/HeaderAdSlot.tsx';
+import { Island } from '../components/Island.tsx';
+import { LabsHeader } from '../components/LabsHeader.tsx';
+import { LabsSection } from '../components/LabsSection.tsx';
+import { Nav } from '../components/Nav/Nav.tsx';
+import { Section } from '../components/Section.tsx';
+import { Snap } from '../components/Snap.tsx';
+import { SnapCssSandbox } from '../components/SnapCssSandbox.tsx';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable.tsx';
+import { SubNav } from '../components/SubNav.importable.tsx';
+import { TrendingTopics } from '../components/TrendingTopics.tsx';
+import { WeatherWrapper } from '../components/WeatherWrapper.importable.tsx';
+import { canRenderAds } from '../lib/canRenderAds.ts';
+import { getContributionsServiceUrl } from '../lib/contributions.ts';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
 import {
 	getDesktopAdPositions,
 	getMerchHighPosition,
 	getMobileAdPositions,
-} from '../lib/getAdPositions';
-import { hideAge } from '../lib/hideAge';
-import type { NavType } from '../model/extract-nav';
-import type { DCRCollectionType, DCRFrontType } from '../types/front';
-import { pageSkinContainer } from './lib/pageSkin';
-import { BannerWrapper, Stuck } from './lib/stickiness';
+} from '../lib/getAdPositions.ts';
+import { hideAge } from '../lib/hideAge.ts';
+import type { NavType } from '../model/extract-nav.ts';
+import type { DCRCollectionType, DCRFrontType } from '../types/front.ts';
+import { pageSkinContainer } from './lib/pageSkin.ts';
+import { BannerWrapper, Stuck } from './lib/stickiness.tsx';
 
 interface Props {
 	front: DCRFrontType;

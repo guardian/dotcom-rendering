@@ -7,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import type { MouseEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { decidePalette } from '../../lib/decidePalette.ts';
 
 const wrapperStyles = css`
 	width: 100%;

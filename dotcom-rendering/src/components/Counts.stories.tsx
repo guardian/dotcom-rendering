@@ -6,9 +6,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import { CommentCount } from './CommentCount.importable';
-import { Counts } from './Counts';
-import { ShareCount } from './ShareCount.importable';
+import { CommentCount } from './CommentCount.importable.tsx';
+import { Counts } from './Counts.tsx';
+import { ShareCount } from './ShareCount.importable.tsx';
 
 export default {
 	component: Counts,

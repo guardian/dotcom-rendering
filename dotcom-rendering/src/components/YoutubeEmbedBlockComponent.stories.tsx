@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
+import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent.tsx';
 
 export default {
 	component: YoutubeEmbedBlockComponent,

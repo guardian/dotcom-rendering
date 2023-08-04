@@ -2,7 +2,7 @@ import {
 	Card25Media25,
 	Card50Media50Tall,
 	CardDefault,
-} from '../lib/cardWrappers';
+} from '../lib/cardWrappers.tsx';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -12,14 +12,14 @@ import {
 	Card75_Card25,
 	filterGroupedTrails,
 	shouldPadWrappableRows,
-} from '../lib/dynamicSlices';
+} from '../lib/dynamicSlices.tsx';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+} from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features

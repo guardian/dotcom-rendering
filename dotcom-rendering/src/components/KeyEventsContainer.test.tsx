@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
-import { KeyEventsContainer } from './KeyEventsContainer';
+import { KeyEventsContainer } from './KeyEventsContainer.tsx';
 
 const baseProperties = {
 	id: '123',

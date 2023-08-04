@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
-import type { CommentType, SignedInUser } from '../../discussionTypes';
-import { Comment } from './Comment';
+import type { CommentType, SignedInUser } from '../../discussionTypes.ts';
+import { Comment } from './Comment.tsx';
 
 export default { title: 'Discussion/Comment' };
 

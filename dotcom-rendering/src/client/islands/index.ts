@@ -1,4 +1,4 @@
-import { initHydration } from './initHydration';
+import { initHydration } from './initHydration.ts';
 
 export const islands = (): Promise<void> => {
 	const elements = document.querySelectorAll('gu-island');

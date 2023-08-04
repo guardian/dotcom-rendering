@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import type { RoleType } from '../types/content';
-import { Caption } from './Caption';
-import { ClickToView } from './ClickToView';
+import type { RoleType } from '../types/content.ts';
+import { Caption } from './Caption.tsx';
+import { ClickToView } from './ClickToView.tsx';
 
 /**
  * Example article

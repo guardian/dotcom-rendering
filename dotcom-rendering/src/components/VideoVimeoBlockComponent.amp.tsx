@@ -1,6 +1,6 @@
-import { getIdFromUrl } from '../lib/get-video-id.amp';
-import type { VideoVimeoBlockElement } from '../types/content';
-import { Caption } from './Caption.amp';
+import { getIdFromUrl } from '../lib/get-video-id.amp.ts';
+import type { VideoVimeoBlockElement } from '../types/content.ts';
+import { Caption } from './Caption.amp.tsx';
 
 type Props = {
 	element: VideoVimeoBlockElement;

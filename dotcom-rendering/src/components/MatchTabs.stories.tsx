@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { MatchTabs } from './MatchTabs';
+import { MatchTabs } from './MatchTabs.tsx';
 
 export default {
 	component: MatchTabs,

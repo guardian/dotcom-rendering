@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
 import React from 'react';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 import TriangleIcon from '../static/icons/triangle.svg';
 
 const figureStyle = css`

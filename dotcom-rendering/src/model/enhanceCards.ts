@@ -1,9 +1,9 @@
 import { ArticleDesign, ArticleSpecial, Pillar } from '@guardian/libs';
-import { getSoleContributor } from '../lib/byline';
-import { decideFormat } from '../lib/decideFormat';
-import type { EditionId } from '../lib/edition';
-import type { Group } from '../lib/getDataLinkName';
-import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { getSoleContributor } from '../lib/byline.ts';
+import { decideFormat } from '../lib/decideFormat.ts';
+import type { EditionId } from '../lib/edition.ts';
+import type { Group } from '../lib/getDataLinkName.ts';
+import { getDataLinkNameCard } from '../lib/getDataLinkName.ts';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
@@ -12,10 +12,10 @@ import type {
 	FEFrontCard,
 	FEMediaAtom,
 	FESupportingContent,
-} from '../types/front';
-import type { MainMedia } from '../types/mainMedia';
-import type { FETagType, TagType } from '../types/tag';
-import { enhanceSnaps } from './enhanceSnaps';
+} from '../types/front.ts';
+import type { MainMedia } from '../types/mainMedia.ts';
+import type { FETagType, TagType } from '../types/tag.ts';
+import { enhanceSnaps } from './enhanceSnaps.ts';
 
 /**
  *

@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
-import { KeyEvents } from './KeyEvents';
-import type { KeyEvent } from './KeyEvents';
+import { getAllThemes, getThemeNameAsString } from '../lib/format.ts';
+import { KeyEvents } from './KeyEvents.tsx';
+import type { KeyEvent } from './KeyEvents.tsx';
 
 const events: KeyEvent[] = [
 	{

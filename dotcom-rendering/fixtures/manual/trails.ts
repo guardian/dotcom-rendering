@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import type { DCRFrontCard } from '../../src/types/front';
+import type { DCRFrontCard } from '../../src/types/front.ts';
 
 export const trails: [
 	DCRFrontCard,

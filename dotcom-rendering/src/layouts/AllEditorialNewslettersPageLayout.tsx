@@ -6,19 +6,19 @@ import {
 	palette,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Footer } from '../components/Footer';
-import { GroupedNewslettersList } from '../components/GroupedNewsletterList';
-import { Header } from '../components/Header';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { Island } from '../components/Island';
-import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable';
-import { Nav } from '../components/Nav/Nav';
-import { NewslettersPageHeading } from '../components/NewsletterPageHeading';
-import { Section } from '../components/Section';
-import { SubNav } from '../components/SubNav.importable';
-import type { NavType } from '../model/extract-nav';
-import type { DCRNewslettersPageType } from '../types/newslettersPage';
-import { Stuck } from './lib/stickiness';
+import { Footer } from '../components/Footer.tsx';
+import { GroupedNewslettersList } from '../components/GroupedNewsletterList.tsx';
+import { Header } from '../components/Header.tsx';
+import { HeaderAdSlot } from '../components/HeaderAdSlot.tsx';
+import { Island } from '../components/Island.tsx';
+import { ManyNewsletterSignUp } from '../components/ManyNewsletterSignUp.importable.tsx';
+import { Nav } from '../components/Nav/Nav.tsx';
+import { NewslettersPageHeading } from '../components/NewsletterPageHeading.tsx';
+import { Section } from '../components/Section.tsx';
+import { SubNav } from '../components/SubNav.importable.tsx';
+import type { NavType } from '../model/extract-nav.ts';
+import type { DCRNewslettersPageType } from '../types/newslettersPage.ts';
+import { Stuck } from './lib/stickiness.tsx';
 
 type Props = {
 	newslettersPage: DCRNewslettersPageType;

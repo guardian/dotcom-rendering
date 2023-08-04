@@ -1,7 +1,7 @@
 import { ClassNames } from '@emotion/react';
-import { adRegions, regionClasses } from '../lib/region-classes.amp';
-import type { BaseAdProps } from './Ad.amp';
-import { Ad } from './Ad.amp';
+import { adRegions, regionClasses } from '../lib/region-classes.amp.ts';
+import type { BaseAdProps } from './Ad.amp.tsx';
+import { Ad } from './Ad.amp.tsx';
 
 /**
  * Component for an advert that appears inline in articles / liveblogs

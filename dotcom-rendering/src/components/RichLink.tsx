@@ -9,14 +9,14 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 import ArrowInCircle from '../static/icons/arrow-in-circle.svg';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
-import { Avatar } from './Avatar';
-import { Hide } from './Hide';
-import { QuoteIcon } from './QuoteIcon';
-import { StarRating } from './StarRating/StarRating';
+import type { Palette } from '../types/palette.ts';
+import type { TagType } from '../types/tag.ts';
+import { Avatar } from './Avatar.tsx';
+import { Hide } from './Hide.tsx';
+import { QuoteIcon } from './QuoteIcon.tsx';
+import { StarRating } from './StarRating/StarRating.tsx';
 
 interface Props {
 	richLinkIndex: number;

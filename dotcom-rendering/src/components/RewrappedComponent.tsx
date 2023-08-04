@@ -1,8 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx } from '@emotion/react';
-import { unescapeData } from '../lib/escapeData';
-import type { HTMLTag } from '../model/unwrapHtml';
-import { logger } from '../server/lib/logging';
+import { unescapeData } from '../lib/escapeData.tsx';
+import type { HTMLTag } from '../model/unwrapHtml.ts';
+import { logger } from '../server/lib/logging.ts';
 
 /**
  * React requires a wrapping element for `dangerouslySetInnerHTML` so we

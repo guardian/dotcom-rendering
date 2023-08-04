@@ -1,4 +1,4 @@
-import { abTestPayload, record, recordPerformance } from './ophan';
+import { abTestPayload, record, recordPerformance } from './ophan.ts';
 
 // side effect only
 import 'ophan-tracker-js';

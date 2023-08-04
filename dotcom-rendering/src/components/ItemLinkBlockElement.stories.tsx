@@ -1,4 +1,4 @@
-import { ItemLinkBlockElement } from './ItemLinkBlockElement';
+import { ItemLinkBlockElement } from './ItemLinkBlockElement.tsx';
 
 export default {
 	component: ItemLinkBlockElement,

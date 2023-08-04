@@ -1,5 +1,5 @@
-import type { CalloutContactType } from '../../types/content';
-import { formatContactNumbers, formatContactType } from './MessageUs';
+import type { CalloutContactType } from '../../types/content.ts';
+import { formatContactNumbers, formatContactType } from './MessageUs.tsx';
 
 describe('formatContactType', () => {
 	it('treats whatsapp as a special case', () => {

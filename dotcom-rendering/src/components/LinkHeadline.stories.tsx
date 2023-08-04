@@ -4,8 +4,8 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { LinkHeadline } from './LinkHeadline';
-import { Section } from './Section';
+import { LinkHeadline } from './LinkHeadline.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: LinkHeadline,

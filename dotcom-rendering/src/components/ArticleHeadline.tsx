@@ -8,15 +8,15 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { getAgeWarning } from '../lib/age-warning';
-import { decidePalette } from '../lib/decidePalette';
-import { getZIndex } from '../lib/getZIndex';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
-import { AgeWarning } from './AgeWarning';
-import { DesignTag } from './DesignTag';
-import { HeadlineByline } from './HeadlineByline';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { getAgeWarning } from '../lib/age-warning.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import type { Palette } from '../types/palette.ts';
+import type { TagType } from '../types/tag.ts';
+import { AgeWarning } from './AgeWarning.tsx';
+import { DesignTag } from './DesignTag.tsx';
+import { HeadlineByline } from './HeadlineByline.tsx';
 
 type Props = {
 	headlineString: string;

@@ -1,8 +1,8 @@
-import { Card25Media25, CardDefault } from '../lib/cardWrappers';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+import { Card25Media25, CardDefault } from '../lib/cardWrappers.tsx';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices.tsx';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 type Props = {
 	trails: DCRFrontCard[];

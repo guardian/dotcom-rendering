@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants.ts';
 
 /**
  * # Top Right Ad Slot

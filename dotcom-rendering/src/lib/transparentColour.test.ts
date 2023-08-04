@@ -1,4 +1,4 @@
-import { transparentColour } from './transparentColour';
+import { transparentColour } from './transparentColour.ts';
 
 describe('transparentColour', () => {
 	test.each([

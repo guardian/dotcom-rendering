@@ -8,9 +8,9 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
 
 type Props = {
 	format: ArticleFormat;

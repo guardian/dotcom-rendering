@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { RenderArticleElement } from '../lib/renderElement';
-import type { Switches } from '../types/config';
-import { LastUpdated } from './LastUpdated';
-import { LiveBlockContainer } from './LiveBlockContainer';
-import { ShareIcons } from './ShareIcons';
+import { RenderArticleElement } from '../lib/renderElement.tsx';
+import type { Switches } from '../types/config.ts';
+import { LastUpdated } from './LastUpdated.tsx';
+import { LiveBlockContainer } from './LiveBlockContainer.tsx';
+import { ShareIcons } from './ShareIcons.tsx';
 
 type Props = {
 	format: ArticleFormat;

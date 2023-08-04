@@ -1,11 +1,11 @@
 import { CacheProvider } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { getEmotionCache } from '../client/islands/emotion';
-import { formatCount } from '../lib/formatCount';
-import { useApi } from '../lib/useApi';
-import type { DCRContainerPalette } from '../types/front';
-import { CardCommentCount } from './CardCommentCount';
+import { getEmotionCache } from '../client/islands/emotion.ts';
+import { formatCount } from '../lib/formatCount.ts';
+import { useApi } from '../lib/useApi.tsx';
+import type { DCRContainerPalette } from '../types/front.ts';
+import { CardCommentCount } from './CardCommentCount.tsx';
 
 type Props = {
 	repeat?: boolean;

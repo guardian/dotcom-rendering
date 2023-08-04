@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import { SignedInAs } from './SignedInAs';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { SignedInAs } from './SignedInAs.tsx';
 
 const aUser = {
 	userId: 'abc123',

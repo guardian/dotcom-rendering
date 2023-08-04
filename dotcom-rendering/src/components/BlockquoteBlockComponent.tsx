@@ -2,10 +2,10 @@ import { css, jsx } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
 import type { ReactNode } from 'react';
 import { Fragment } from 'react';
-import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
-import { logger } from '../server/lib/logging';
-import type { Palette } from '../types/palette';
-import { QuoteIcon } from './QuoteIcon';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils.ts';
+import { logger } from '../server/lib/logging.ts';
+import type { Palette } from '../types/palette.ts';
+import { QuoteIcon } from './QuoteIcon.tsx';
 
 type Props = {
 	html: string;

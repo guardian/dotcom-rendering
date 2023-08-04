@@ -1,10 +1,10 @@
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
-} from '../lib/liveblogAdSlots';
-import type { Switches } from '../types/config';
-import { AdSlot } from './AdSlot';
-import { LiveBlock } from './LiveBlock';
+} from '../lib/liveblogAdSlots.ts';
+import type { Switches } from '../types/config.ts';
+import { AdSlot } from './AdSlot.tsx';
+import { LiveBlock } from './LiveBlock.tsx';
 
 type Props = {
 	format: ArticleFormat;

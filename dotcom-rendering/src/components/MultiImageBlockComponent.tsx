@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
-import type { Switches } from '../types/config';
-import type { ImageBlockElement } from '../types/content';
-import { Caption } from './Caption';
-import { GridItem } from './GridItem';
-import { ImageComponent } from './ImageComponent';
+import type { Switches } from '../types/config.ts';
+import type { ImageBlockElement } from '../types/content.ts';
+import { Caption } from './Caption.tsx';
+import { GridItem } from './GridItem.tsx';
+import { ImageComponent } from './ImageComponent.tsx';
 
 type Props = {
 	images: ImageBlockElement[];

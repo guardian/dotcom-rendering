@@ -1,5 +1,5 @@
-import type { SignedInWithCookies } from '../../../lib/useAuthStatus';
-import { RecommendationCount } from './RecommendationCount';
+import type { SignedInWithCookies } from '../../../lib/useAuthStatus.ts';
+import { RecommendationCount } from './RecommendationCount.tsx';
 
 export default { title: 'Discussion/RecommendationCount' };
 

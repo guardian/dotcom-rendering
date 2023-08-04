@@ -1,12 +1,12 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
-import { getContributorTagsForToken } from '../lib/byline';
-import type { TagType } from '../types/tag';
+import { getContributorTagsForToken } from '../lib/byline.ts';
+import type { TagType } from '../types/tag.ts';
 import {
 	bylineAsTokens,
 	BylineLink,
 	SPECIAL_REGEX_CHARACTERS,
-} from './BylineLink';
+} from './BylineLink.tsx';
 
 describe('SPECIAL_REGEX_CHARACTERS', () => {
 	it('Correctly match all special regex characters', () => {

@@ -1,5 +1,5 @@
 import { isNonNullable } from '@guardian/libs';
-import type { FETagType } from '../types/tag';
+import type { FETagType } from '../types/tag.ts';
 
 /**
  * Extracts sectionId from a given tag if its a section tag

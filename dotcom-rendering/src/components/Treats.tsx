@@ -10,10 +10,10 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { Fragment } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import type { TreatType } from '../types/front';
-import { generateSources, getFallbackSource } from './Picture';
-import { SvgCrossword } from './SvgCrossword';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { TreatType } from '../types/front.ts';
+import { generateSources, getFallbackSource } from './Picture.tsx';
+import { SvgCrossword } from './SvgCrossword.tsx';
 
 const TextTreat = ({
 	text,

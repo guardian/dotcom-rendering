@@ -5,9 +5,9 @@ import { useState } from 'react';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../../../lib/useAuthStatus';
-import { recommend as recommendDefault } from '../../lib/api';
-import { Row } from '../Row/Row';
+} from '../../../lib/useAuthStatus.ts';
+import { recommend as recommendDefault } from '../../lib/api.tsx';
+import { Row } from '../Row/Row.tsx';
 
 type Props = {
 	commentId: number;

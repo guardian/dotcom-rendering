@@ -6,9 +6,9 @@ import {
 	neutral,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { getZIndex } from '../../../lib/getZIndex';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import { navInputCheckboxId, veggieBurgerId } from '../config';
+import { getZIndex } from '../../../lib/getZIndex.ts';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
+import { navInputCheckboxId, veggieBurgerId } from '../config.ts';
 
 const screenReadable = css`
 	${visuallyHidden};

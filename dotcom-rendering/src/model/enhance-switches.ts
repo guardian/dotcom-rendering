@@ -1,4 +1,4 @@
-import type { Switches } from '../types/config';
+import type { Switches } from '../types/config.ts';
 
 export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
 

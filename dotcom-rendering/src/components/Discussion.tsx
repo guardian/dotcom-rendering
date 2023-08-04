@@ -4,14 +4,14 @@ import { neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { Comments } from '../discussion-rendering/Comments';
+import { Comments } from '../discussion-rendering/Comments.tsx';
 import type { SignedInUser } from '../discussion-rendering/discussionTypes';
-import { decidePalette } from '../lib/decidePalette';
-import { getCommentContext } from '../lib/getCommentContext';
-import { revealStyles } from '../lib/revealStyles';
-import { useDiscussion } from '../lib/useDiscussion';
-import { Hide } from './Hide';
-import { SignedInAs } from './SignedInAs';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getCommentContext } from '../lib/getCommentContext.ts';
+import { revealStyles } from '../lib/revealStyles.ts';
+import { useDiscussion } from '../lib/useDiscussion.ts';
+import { Hide } from './Hide.tsx';
+import { SignedInAs } from './SignedInAs.tsx';
 
 export type Props = {
 	format: ArticleFormat;

@@ -5,10 +5,10 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { shouldHideSupportMessaging } from '../lib/contributions';
-import type { EditionId } from '../lib/edition';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import { Hide } from './Hide';
+import { shouldHideSupportMessaging } from '../lib/contributions.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import { Hide } from './Hide.tsx';
 
 type InteractiveSupportButtonProps = {
 	editionId: EditionId;

@@ -1,8 +1,8 @@
-import { CardDefault } from '../lib/cardWrappers';
-import { Card50_Card25_Card25 } from '../lib/dynamicSlices';
-import type { DCRContainerPalette, DCRFrontCard } from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+import { CardDefault } from '../lib/cardWrappers.tsx';
+import { Card50_Card25_Card25 } from '../lib/dynamicSlices.tsx';
+import type { DCRContainerPalette, DCRFrontCard } from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 type Props = {
 	trails: DCRFrontCard[];

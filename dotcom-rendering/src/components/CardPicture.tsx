@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
-import type { ImageWidthType } from './Picture';
-import { generateSources, getFallbackSource } from './Picture';
+import type { ImageSizeType } from './Card/components/ImageWrapper.tsx';
+import type { ImageWidthType } from './Picture.tsx';
+import { generateSources, getFallbackSource } from './Picture.tsx';
 
 type Props = {
 	imageSize: ImageSizeType;

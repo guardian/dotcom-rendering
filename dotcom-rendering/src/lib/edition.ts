@@ -1,5 +1,5 @@
-import type { EditionLinkType } from '../model/extract-nav';
-import { guard } from './guard';
+import type { EditionLinkType } from '../model/extract-nav.ts';
+import { guard } from './guard.ts';
 
 export type EditionId = (typeof editionList)[number]['editionId'];
 

@@ -1,7 +1,7 @@
 import { userEvent, within } from '@storybook/testing-library';
 import fetchMock from 'fetch-mock';
-import { trails } from '../../fixtures/manual/show-more-trails';
-import { ShowMore } from './ShowMore.importable';
+import { trails } from '../../fixtures/manual/show-more-trails.ts';
+import { ShowMore } from './ShowMore.importable.tsx';
 
 /**
  * Clicks the 'show more' button so that Chromatic can capture it the component

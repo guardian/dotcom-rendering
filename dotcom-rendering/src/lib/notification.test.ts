@@ -1,4 +1,4 @@
-import { addNotificationsToDropdownLinks } from './notification';
+import { addNotificationsToDropdownLinks } from './notification.ts';
 
 describe('addNotificationsToDropdownLinks', () => {
 	it('augments dropdown links with notifications', () => {

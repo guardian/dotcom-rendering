@@ -1,11 +1,11 @@
-import type { EditionId } from '../lib/edition';
-import type { DCRFrontCard } from '../types/front';
-import type { TrailTabType, TrailType } from '../types/trails';
-import { Island } from './Island';
-import { localisedTitle } from './Localisation';
-import { MostPopularFooterGrid } from './MostPopularFooterGrid';
-import { MostViewedFooter } from './MostViewedFooter.importable';
-import { MostViewedFooterLayout } from './MostViewedFooterLayout';
+import type { EditionId } from '../lib/edition.ts';
+import type { DCRFrontCard } from '../types/front.ts';
+import type { TrailTabType, TrailType } from '../types/trails.ts';
+import { Island } from './Island.tsx';
+import { localisedTitle } from './Localisation.ts';
+import { MostPopularFooterGrid } from './MostPopularFooterGrid.tsx';
+import { MostViewedFooter } from './MostViewedFooter.importable.tsx';
+import { MostViewedFooterLayout } from './MostViewedFooterLayout.tsx';
 
 type Props = {
 	trails: DCRFrontCard[];

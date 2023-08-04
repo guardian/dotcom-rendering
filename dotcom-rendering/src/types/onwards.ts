@@ -1,4 +1,4 @@
-import type { FETrailType } from './trails';
+import type { FETrailType } from './trails.ts';
 
 /**
  * Onwards

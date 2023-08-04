@@ -1,8 +1,8 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
-import { Lazy } from '../../Lazy';
-import { canShowSignInGateMandatory } from '../displayRule';
-import type { SignInGateComponent } from '../types';
+import { Lazy } from '../../Lazy.tsx';
+import { canShowSignInGateMandatory } from '../displayRule.ts';
+import type { SignInGateComponent } from '../types.ts';
 
 const SignInGateMain = React.lazy(() => {
 	const { endPerformanceMeasure } = startPerformanceMeasure(
@@ -10,7 +10,7 @@ const SignInGateMain = React.lazy(() => {
 		'SignInGateMain',
 	);
 	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain'
+		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateMain.tsx'
 	).then((module) => {
 		endPerformanceMeasure();
 		return { default: module.SignInGateMain };

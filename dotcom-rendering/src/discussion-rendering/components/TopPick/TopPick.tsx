@@ -11,16 +11,16 @@ import { Link } from '@guardian/source-react-components';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../../../lib/useAuthStatus';
-import type { CommentType } from '../../discussionTypes';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
-import { Avatar } from '../Avatar/Avatar';
-import { GuardianContributor, GuardianStaff } from '../Badges/Badges';
-import { Column } from '../Column/Column';
-import { RecommendationCount } from '../RecommendationCount/RecommendationCount';
-import { Row } from '../Row/Row';
-import { Timestamp } from '../Timestamp/Timestamp';
+} from '../../../lib/useAuthStatus.ts';
+import type { CommentType } from '../../discussionTypes.ts';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
+import { Avatar } from '../Avatar/Avatar.tsx';
+import { GuardianContributor, GuardianStaff } from '../Badges/Badges.tsx';
+import { Column } from '../Column/Column.tsx';
+import { RecommendationCount } from '../RecommendationCount/RecommendationCount.tsx';
+import { Row } from '../Row/Row.tsx';
+import { Timestamp } from '../Timestamp/Timestamp.tsx';
 
 type Props = {
 	pillar: ArticleTheme;

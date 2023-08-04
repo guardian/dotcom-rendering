@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
-import { unwrapHtml } from '../model/unwrapHtml';
-import { RewrappedComponent } from './RewrappedComponent';
+import { unwrapHtml } from '../model/unwrapHtml.ts';
+import { RewrappedComponent } from './RewrappedComponent.tsx';
 
 type Props = {
 	html: string;

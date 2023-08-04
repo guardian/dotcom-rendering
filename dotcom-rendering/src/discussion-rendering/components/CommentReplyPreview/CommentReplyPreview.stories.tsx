@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Pillar } from '@guardian/libs';
-import type { CommentType } from '../../discussionTypes';
-import { CommentReplyPreview, Preview } from './CommentReplyPreview';
+import type { CommentType } from '../../discussionTypes.ts';
+import { CommentReplyPreview, Preview } from './CommentReplyPreview.tsx';
 
 export default { title: 'Discussion/CommentReplyPreview' };
 

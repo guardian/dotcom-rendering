@@ -7,12 +7,12 @@ import {
 } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import React from 'react';
-import type { MainMedia } from '../../types/mainMedia';
-import { Section } from '../Section';
-import type { Props as CardProps } from './Card';
-import { Card } from './Card';
-import { LI } from './components/LI';
-import { UL } from './components/UL';
+import type { MainMedia } from '../../types/mainMedia.ts';
+import { Section } from '../Section.tsx';
+import type { Props as CardProps } from './Card.tsx';
+import { Card } from './Card.tsx';
+import { LI } from './components/LI.tsx';
+import { UL } from './components/UL.tsx';
 
 const basicCardProps: CardProps = {
 	linkTo: '',

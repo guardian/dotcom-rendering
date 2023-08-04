@@ -1,5 +1,5 @@
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import type { EmbedBlockElement } from '../types/content';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr.ts';
+import type { EmbedBlockElement } from '../types/content.ts';
 
 type Props = {
 	element: EmbedBlockElement;

@@ -12,13 +12,13 @@ import {
 } from '@guardian/source-foundations';
 import { Link, SvgExternal } from '@guardian/source-react-components';
 import React from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import { getZIndex } from '../lib/getZIndex';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
-import { Byline } from './Byline';
-import { Kicker } from './Kicker';
-import { QuoteIcon } from './QuoteIcon';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import type { DCRContainerPalette } from '../types/front.ts';
+import type { Palette } from '../types/palette.ts';
+import { Byline } from './Byline.tsx';
+import { Kicker } from './Kicker.tsx';
+import { QuoteIcon } from './QuoteIcon.tsx';
 
 type Props = {
 	headlineText: string; // The text shown

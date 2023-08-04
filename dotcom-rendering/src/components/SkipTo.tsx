@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { border, neutral, textSans } from '@guardian/source-foundations';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
 
 type Identifier =
 	| 'maincontent'

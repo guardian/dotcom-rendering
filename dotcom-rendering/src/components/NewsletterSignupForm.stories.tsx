@@ -1,4 +1,4 @@
-import { NewsletterSignupForm } from './NewsletterSignupForm';
+import { NewsletterSignupForm } from './NewsletterSignupForm.tsx';
 
 export default {
 	component: NewsletterSignupForm,

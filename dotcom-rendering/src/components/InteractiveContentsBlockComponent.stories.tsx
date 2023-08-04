@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
-import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements';
-import { InteractiveContentsBlockElement } from '../types/content';
-import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable';
+import { NumberedList } from '../../fixtures/generated/articles/NumberedList.ts';
+import { enhanceInteractiveContentsElements } from '../model/enhance-interactive-contents-elements.ts';
+import type { InteractiveContentsBlockElement } from '../types/content.ts';
+import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent.importable.tsx';
 
 const interactiveContentsBlock = enhanceInteractiveContentsElements(
 	NumberedList.blocks,

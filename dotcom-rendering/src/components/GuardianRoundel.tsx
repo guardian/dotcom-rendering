@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, neutral } from '@guardian/source-foundations';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
 
 const title = 'Back to homepage';
 

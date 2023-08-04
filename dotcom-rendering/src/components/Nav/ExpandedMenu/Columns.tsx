@@ -16,13 +16,16 @@ import {
 	SvgMagnifyingGlass,
 	TextInput,
 } from '@guardian/source-react-components';
-import type { EditionId } from '../../../lib/edition';
-import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
-import { nestedOphanComponents } from '../../../lib/ophan-helpers';
-import type { NavType } from '../../../model/extract-nav';
-import { Column, lineStyle } from './Column';
-import { MoreColumn } from './MoreColumn';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import type { EditionId } from '../../../lib/edition.ts';
+import {
+	getEditionFromId,
+	getRemainingEditions,
+} from '../../../lib/edition.ts';
+import { nestedOphanComponents } from '../../../lib/ophan-helpers.ts';
+import type { NavType } from '../../../model/extract-nav.ts';
+import { Column, lineStyle } from './Column.tsx';
+import { MoreColumn } from './MoreColumn.tsx';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.tsx';
 
 const columnsStyle = (isImmersive: boolean) => css`
 	box-sizing: border-box;

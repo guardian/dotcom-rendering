@@ -1,8 +1,8 @@
-import type { FEElement } from '../types/content';
+import type { FEElement } from '../types/content.ts';
 import {
 	calculateApproximateBlockHeight,
 	shouldDisplayAd,
-} from './liveblogAdSlots';
+} from './liveblogAdSlots.ts';
 
 describe('calculateApproximateBlockHeight', () => {
 	const textElementOneLine: FEElement[] = [

@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
-import type { EditionId } from '../lib/edition';
-import { findPillar } from './find-pillar';
+import type { EditionId } from '../lib/edition.ts';
+import { findPillar } from './find-pillar.ts';
 
 export interface BaseLinkType {
 	url: string;

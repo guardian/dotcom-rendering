@@ -1,4 +1,4 @@
-import { Search } from './HeaderTopBarSearch';
+import { Search } from './HeaderTopBarSearch.tsx';
 
 export default {
 	component: Search,

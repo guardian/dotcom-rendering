@@ -1,5 +1,5 @@
-import type { DropdownLinkType } from '../components/Dropdown';
-import { linkNotificationCount } from './linkNotificationCount';
+import type { DropdownLinkType } from '../components/Dropdown.tsx';
+import { linkNotificationCount } from './linkNotificationCount.ts';
 
 describe('linksNotificationCount', () => {
 	it('returns the sum of notifications across all links', () => {

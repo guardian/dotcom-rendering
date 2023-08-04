@@ -1,4 +1,4 @@
-import type { TagType } from '../types/tag';
+import type { TagType } from '../types/tag.ts';
 
 interface ContributorTag extends TagType {
 	type: 'Contributor';

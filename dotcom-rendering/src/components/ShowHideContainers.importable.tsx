@@ -1,5 +1,5 @@
 import { isObject, isString, storage } from '@guardian/libs';
-import { useOnce } from '../lib/useOnce';
+import { useOnce } from '../lib/useOnce.ts';
 
 type ContainerStates = { [id: string]: string };
 

@@ -2,15 +2,15 @@ import { css } from '@emotion/react';
 import { brand, neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 import MinusIcon from '../static/icons/minus.svg';
 import PlusIcon from '../static/icons/plus.svg';
 import type {
 	CalloutBlockElement,
 	CalloutBlockElementV2,
-} from '../types/content';
-import type { Palette } from '../types/palette';
-import { Form } from './CalloutEmbed/Form';
+} from '../types/content.ts';
+import type { Palette } from '../types/palette.ts';
+import { Form } from './CalloutEmbed/Form.tsx';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;

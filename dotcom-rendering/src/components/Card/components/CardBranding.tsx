@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
-import { trackSponsorLogoLinkClick } from '../../../client/ga/ga';
-import { decideLogo } from '../../../lib/decideLogo';
-import { decidePalette } from '../../../lib/decidePalette';
-import { getZIndex } from '../../../lib/getZIndex';
-import type { Branding } from '../../../types/branding';
-import type { Palette } from '../../../types/palette';
+import { trackSponsorLogoLinkClick } from '../../../client/ga/ga.ts';
+import { decideLogo } from '../../../lib/decideLogo.ts';
+import { decidePalette } from '../../../lib/decidePalette.ts';
+import { getZIndex } from '../../../lib/getZIndex.ts';
+import type { Branding } from '../../../types/branding.ts';
+import type { Palette } from '../../../types/palette.ts';
 
 type Props = {
 	branding: Branding;

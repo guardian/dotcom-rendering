@@ -1,4 +1,4 @@
-import { ContainerTitle } from './ContainerTitle';
+import { ContainerTitle } from './ContainerTitle.tsx';
 
 export default {
 	component: ContainerTitle,

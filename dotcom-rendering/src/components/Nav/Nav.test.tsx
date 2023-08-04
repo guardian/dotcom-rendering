@@ -1,7 +1,7 @@
 import { Pillar } from '@guardian/libs';
 import { render, within } from '@testing-library/react';
-import { Nav } from './Nav';
-import { nav } from './Nav.mock';
+import { nav } from './Nav.mock.tsx';
+import { Nav } from './Nav.tsx';
 
 describe('Nav', () => {
 	it('should display pillar titles', () => {

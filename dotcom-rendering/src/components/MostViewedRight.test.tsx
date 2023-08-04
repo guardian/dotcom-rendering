@@ -1,18 +1,18 @@
 import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
-import { mockTab1 } from './MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks.ts';
 
 const response = { data: mockTab1, loading: false };
 
-jest.unstable_mockModule('../../src/lib/useApi', () => ({
-	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
+jest.unstable_mockModule('../../src/lib/useApi.tsx', () => ({
+	useApi: jest.fn<typeof import('../lib/useApi.tsx').useApi>(),
 }));
 
-const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
-	typeof import('../lib/useApi')
+const { useApi } = (await import('../lib/useApi.tsx')) as jest.MockedObject<
+	typeof import('../lib/useApi.tsx')
 >;
 
-const { MostViewedRight } = await import('./MostViewedRight');
+const { MostViewedRight } = await import('./MostViewedRight.tsx');
 
 describe('MostViewedList', () => {
 	beforeEach(() => {

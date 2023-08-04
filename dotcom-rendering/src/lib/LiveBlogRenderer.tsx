@@ -1,18 +1,18 @@
 import { Hide } from '@guardian/source-react-components';
-import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Island } from '../components/Island';
-import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { LiveBlock } from '../components/LiveBlock';
-import { LiveBlogBlocksAndAdverts } from '../components/LiveBlogBlocksAndAdverts';
-import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
-import { PinnedPost } from '../components/PinnedPost';
+import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable.tsx';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable.tsx';
+import { Island } from '../components/Island.tsx';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable.tsx';
+import { LiveBlock } from '../components/LiveBlock.tsx';
+import { LiveBlogBlocksAndAdverts } from '../components/LiveBlogBlocksAndAdverts.tsx';
+import { LiveBlogEpic } from '../components/LiveBlogEpic.importable.tsx';
+import { PinnedPost } from '../components/PinnedPost.tsx';
 import {
 	hasRelevantTopics,
 	TopicFilterBank,
-} from '../components/TopicFilterBank';
-import type { Switches } from '../types/config';
-import type { TagType } from '../types/tag';
+} from '../components/TopicFilterBank.tsx';
+import type { Switches } from '../types/config.ts';
+import type { TagType } from '../types/tag.ts';
 
 type Props = {
 	format: ArticleFormat;

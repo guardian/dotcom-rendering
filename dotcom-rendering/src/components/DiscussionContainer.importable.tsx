@@ -1,7 +1,7 @@
-import { useAuthStatus } from '../lib/useAuthStatus';
-import type { Props as DiscussionProps } from './Discussion';
-import { Discussion } from './Discussion';
-import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
+import { useAuthStatus } from '../lib/useAuthStatus.ts';
+import type { Props as DiscussionProps } from './Discussion.tsx';
+import { Discussion } from './Discussion.tsx';
+import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn.tsx';
 
 /**
  * DiscussionContainer

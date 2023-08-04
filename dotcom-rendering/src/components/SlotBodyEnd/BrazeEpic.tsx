@@ -5,17 +5,17 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../../client/ophan/ophan';
-import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
-import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
+import { submitComponentEvent } from '../../client/ophan/ophan.ts';
+import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage.ts';
+import { suppressForTaylorReport } from '../../lib/braze/taylorReport.ts';
 import type { CanShowResult } from '../../lib/messagePicker';
 import {
 	getOptionsHeadersWithOkta,
 	useAuthStatus,
-} from '../../lib/useAuthStatus';
-import { useIsInView } from '../../lib/useIsInView';
-import { useOnce } from '../../lib/useOnce';
-import type { TagType } from '../../types/tag';
+} from '../../lib/useAuthStatus.ts';
+import { useIsInView } from '../../lib/useIsInView.ts';
+import { useOnce } from '../../lib/useOnce.ts';
+import type { TagType } from '../../types/tag.ts';
 
 const wrapperMargins = css`
 	margin: 18px 0;

@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
+import { decidePalette } from '../../../lib/decidePalette.ts';
 import ClockIcon from '../../../static/icons/clock.svg';
-import type { DCRContainerPalette } from '../../../types/front';
-import type { Palette } from '../../../types/palette';
+import type { DCRContainerPalette } from '../../../types/front.ts';
+import type { Palette } from '../../../types/palette.ts';
 
 type Props = {
 	format: ArticleFormat;

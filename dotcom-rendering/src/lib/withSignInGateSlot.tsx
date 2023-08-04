@@ -2,10 +2,10 @@
 // if the SignInGateSelector determines a gate should be rendered.
 
 import React from 'react';
-import { Island } from '../components/Island';
-import { SignInGateSelector } from '../components/SignInGateSelector.importable';
-import type { Switches } from '../types/config';
-import type { TagType } from '../types/tag';
+import { Island } from '../components/Island.tsx';
+import { SignInGateSelector } from '../components/SignInGateSelector.importable.tsx';
+import type { Switches } from '../types/config.ts';
+import type { TagType } from '../types/tag.ts';
 
 type Props = {
 	renderedElements: (JSX.Element | null | undefined)[];

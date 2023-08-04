@@ -7,7 +7,7 @@ import type {
 	SubheadingBlockElement,
 	TextBlockElement,
 	TweetBlockElement,
-} from '../types/content';
+} from '../types/content.ts';
 
 /**
  * Maximum number of inline ads to display on liveblog pages.

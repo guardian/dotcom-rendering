@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { Fragment } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
-import type { DCRContainerPalette } from '../types/front';
-import type { Palette } from '../types/palette';
-import { generateSources, getFallbackSource } from './Picture';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix.ts';
+import type { DCRContainerPalette } from '../types/front.ts';
+import type { Palette } from '../types/palette.ts';
+import { generateSources, getFallbackSource } from './Picture.tsx';
 
 const picture = css`
 	border-radius: 100%;

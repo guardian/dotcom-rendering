@@ -1,13 +1,13 @@
 import type { ABTest } from '@guardian/ab-core';
 // Sign in Gate A/B Tests
-import { signInGateCopyTestJan2023 } from '../../experiments/tests/sign-in-gate-copy-test-variants';
-import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
-import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
+import { signInGateCopyTestJan2023 } from '../../experiments/tests/sign-in-gate-copy-test-variants.ts';
+import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control.ts';
+import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant.ts';
 // Sign in Gate Types
-import { signInGateComponent as gateMainControl } from './gates/main-control';
-import { signInGateComponent as gateMainVariant } from './gates/main-variant';
-import { signInGateCopyTestJan2023Component } from './gates/sign-in-gate-copy-test-jan2023';
-import type { SignInGateTestMap } from './types';
+import { signInGateComponent as gateMainControl } from './gates/main-control.ts';
+import { signInGateComponent as gateMainVariant } from './gates/main-variant.tsx';
+import { signInGateCopyTestJan2023Component } from './gates/sign-in-gate-copy-test-jan2023.tsx';
+import type { SignInGateTestMap } from './types.tsx';
 
 /* When adding a new test, you need to add the test name to the tests array below,
    and add a entry for each variant that maps it to a SignInGateComponent in

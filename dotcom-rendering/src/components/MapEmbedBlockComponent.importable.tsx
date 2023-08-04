@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { RoleType } from '../types/content';
-import { Caption } from './Caption';
-import { ClickToView } from './ClickToView';
-import { MaintainAspectRatio } from './MaintainAspectRatio';
+import { RoleType } from '../types/content.ts';
+import { Caption } from './Caption.tsx';
+import { ClickToView } from './ClickToView.tsx';
+import { MaintainAspectRatio } from './MaintainAspectRatio.tsx';
 
 type Props = {
 	embedUrl?: string;

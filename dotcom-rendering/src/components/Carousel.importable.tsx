@@ -11,21 +11,21 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { decidePalette } from '../lib/decidePalette';
-import { formatAttrString } from '../lib/formatAttrString';
-import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
-import { getZIndex } from '../lib/getZIndex';
-import type { Branding } from '../types/branding';
-import type { DCRContainerPalette, DCRContainerType } from '../types/front';
-import type { MainMedia } from '../types/mainMedia';
-import type { OnwardsSource } from '../types/onwards';
-import type { TrailType } from '../types/trails';
-import { Card } from './Card/Card';
-import { LI } from './Card/components/LI';
-import { FetchCommentCounts } from './FetchCommentCounts.importable';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { formatAttrString } from '../lib/formatAttrString.ts';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import type { Branding } from '../types/branding.ts';
+import type { DCRContainerPalette, DCRContainerType } from '../types/front.ts';
+import type { MainMedia } from '../types/mainMedia.ts';
+import type { OnwardsSource } from '../types/onwards.ts';
+import type { TrailType } from '../types/trails.ts';
+import { Card } from './Card/Card.tsx';
+import { LI } from './Card/components/LI.tsx';
+import { FetchCommentCounts } from './FetchCommentCounts.importable.tsx';
+import { Hide } from './Hide.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
 
 type Props = {
 	heading: string;

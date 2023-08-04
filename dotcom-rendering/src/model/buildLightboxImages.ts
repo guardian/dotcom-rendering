@@ -1,13 +1,13 @@
 import { randomUUID } from 'node:crypto';
-import { getLargest, getMaster } from '../components/ImageComponent';
-import type { Orientation } from '../components/Picture';
-import { isHighEnough, isWideEnough } from '../lib/lightbox';
+import { getLargest, getMaster } from '../components/ImageComponent.tsx';
+import type { Orientation } from '../components/Picture.tsx';
+import { isHighEnough, isWideEnough } from '../lib/lightbox.ts';
 import type {
 	FEElement,
 	ImageBlockElement,
 	ImageForLightbox,
-} from '../types/content';
-import { isImage } from './enhance-images';
+} from '../types/content.ts';
+import { isImage } from './enhance-images.ts';
 
 /**
  * Only allow the lightbox to show images that have a source with a width greater

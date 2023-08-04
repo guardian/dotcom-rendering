@@ -1,4 +1,4 @@
-import type { SoundcloudBlockElement } from '../types/content';
+import type { SoundcloudBlockElement } from '../types/content.ts';
 
 type Props = {
 	element: SoundcloudBlockElement;

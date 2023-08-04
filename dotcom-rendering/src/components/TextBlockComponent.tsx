@@ -12,10 +12,10 @@ import type { ReactNode } from 'react';
 import { Fragment } from 'react';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-import { decidePalette } from '../lib/decidePalette';
-import { getAttrs, isElement, parseHtml } from '../lib/domUtils';
-import { logger } from '../server/lib/logging';
-import { DropCap } from './DropCap';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { getAttrs, isElement, parseHtml } from '../lib/domUtils.ts';
+import { logger } from '../server/lib/logging.ts';
+import { DropCap } from './DropCap.tsx';
 
 type Props = {
 	html: string;

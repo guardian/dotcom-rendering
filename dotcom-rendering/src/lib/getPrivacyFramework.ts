@@ -1,4 +1,4 @@
-import { getLocaleCode } from './getCountryCode';
+import { getLocaleCode } from './getCountryCode.ts';
 
 let frameworks: Record<string, boolean>;
 

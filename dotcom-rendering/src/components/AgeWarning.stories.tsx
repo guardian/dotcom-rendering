@@ -1,4 +1,4 @@
-import { AgeWarning } from './AgeWarning';
+import { AgeWarning } from './AgeWarning.tsx';
 
 export default {
 	component: AgeWarning,

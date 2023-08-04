@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { neutral, text, textSans } from '@guardian/source-foundations';
-import { blockLink } from '../lib/block-link.amp';
-import type { EditionId } from '../lib/edition';
-import { findBlockAdSlots } from '../lib/find-adslots.amp';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
-import type { CommercialProperties } from '../types/commercial';
-import type { Switches } from '../types/config';
-import { Elements } from './Elements.amp';
-import { InlineAd } from './InlineAd.amp';
+import { blockLink } from '../lib/block-link.amp.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { findBlockAdSlots } from '../lib/find-adslots.amp.ts';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
+import type { CommercialProperties } from '../types/commercial.ts';
+import type { Switches } from '../types/config.ts';
+import { Elements } from './Elements.amp.tsx';
+import { InlineAd } from './InlineAd.amp.tsx';
 
 const adStyle = css`
 	background: ${neutral[93]};

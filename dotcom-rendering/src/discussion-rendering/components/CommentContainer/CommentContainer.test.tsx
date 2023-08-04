@@ -2,10 +2,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { Pillar } from '@guardian/libs';
 import { jest } from '@jest/globals';
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { comment } from '../../../../fixtures/manual/comment';
-import { mockedMessageID, mockRESTCalls } from '../../../lib/mockRESTCalls';
-import type { CommentType, SignedInUser } from '../../discussionTypes';
-import { CommentContainer } from './CommentContainer';
+import { comment } from '../../../../fixtures/manual/comment.ts';
+import { mockedMessageID, mockRESTCalls } from '../../../lib/mockRESTCalls.ts';
+import type { CommentType, SignedInUser } from '../../discussionTypes.ts';
+import { CommentContainer } from './CommentContainer.tsx';
 
 mockRESTCalls();
 

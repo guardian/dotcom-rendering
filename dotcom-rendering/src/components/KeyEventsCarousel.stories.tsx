@@ -5,8 +5,8 @@ import {
 	LongKeyEvents,
 	ShortKeyEvents,
 	SingleKeyEvent,
-} from '../../fixtures/manual/live-blog-key-events';
-import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
+} from '../../fixtures/manual/live-blog-key-events.ts';
+import { KeyEventsCarousel } from './KeyEventsCarousel.importable.tsx';
 
 const getFormat = (theme: ArticleTheme) => {
 	return {

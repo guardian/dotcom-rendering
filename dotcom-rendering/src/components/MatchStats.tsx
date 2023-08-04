@@ -9,13 +9,13 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { Distribution } from './Distribution';
-import { Doughnut } from './Doughnut';
-import { GoalAttempts } from './GoalAttempts';
-import { GridItem } from './GridItem';
-import { Hide } from './Hide';
-import { Lineup } from './Lineup';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { Distribution } from './Distribution.tsx';
+import { Doughnut } from './Doughnut.tsx';
+import { GoalAttempts } from './GoalAttempts.tsx';
+import { GridItem } from './GridItem.tsx';
+import { Hide } from './Hide.tsx';
+import { Lineup } from './Lineup.tsx';
 
 type Props = {
 	home: TeamType;

@@ -1,15 +1,19 @@
 import { css, Global } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
 import { until, visuallyHidden } from '@guardian/source-foundations';
-import type { EditionId } from '../../lib/edition';
-import { clearFix } from '../../lib/mixins';
-import type { NavType } from '../../model/extract-nav';
-import { GuardianRoundel } from '../GuardianRoundel';
-import { InteractiveSupportButton } from '../InteractiveSupportButton.importable';
-import { Island } from '../Island';
-import { Pillars } from '../Pillars';
-import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
-import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
+import type { EditionId } from '../../lib/edition.ts';
+import { clearFix } from '../../lib/mixins.ts';
+import type { NavType } from '../../model/extract-nav.ts';
+import { GuardianRoundel } from '../GuardianRoundel.tsx';
+import { InteractiveSupportButton } from '../InteractiveSupportButton.importable.tsx';
+import { Island } from '../Island.tsx';
+import { Pillars } from '../Pillars.tsx';
+import {
+	navInputCheckboxId,
+	showMoreButtonId,
+	veggieBurgerId,
+} from './config.ts';
+import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu.tsx';
 
 type Props = {
 	nav: NavType;

@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import type { DCRGroupedTrails } from '../types/front';
-import { DynamicFast } from './DynamicFast';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import type { DCRGroupedTrails } from '../types/front.ts';
+import { DynamicFast } from './DynamicFast.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: DynamicFast,

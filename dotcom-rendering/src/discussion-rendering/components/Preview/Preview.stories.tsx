@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Preview } from './Preview';
+import { Preview } from './Preview.tsx';
 
 export default { component: Preview, title: 'Discussion/Preview' };
 

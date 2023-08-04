@@ -1,8 +1,8 @@
 import { css, keyframes } from '@emotion/react';
 import { from, neutral, textSans, until } from '@guardian/source-foundations';
-import type { DCRSlideshowImage } from '../types/front';
-import type { ImageSizeType } from './Card/components/ImageWrapper';
-import { CardPicture } from './CardPicture';
+import type { DCRSlideshowImage } from '../types/front.ts';
+import type { ImageSizeType } from './Card/components/ImageWrapper.tsx';
+import { CardPicture } from './CardPicture.tsx';
 
 /**
  * It might look like you can change these and expect the animation to adapt accordingly

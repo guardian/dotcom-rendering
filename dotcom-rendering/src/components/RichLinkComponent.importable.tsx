@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { decideFormat } from '../lib/decideFormat';
-import { useApi } from '../lib/useApi';
-import type { RichLinkBlockElement } from '../types/content';
-import type { TagType } from '../types/tag';
-import type { RichLinkImageData } from './RichLink';
-import { RichLink } from './RichLink';
+import { decideFormat } from '../lib/decideFormat.ts';
+import { useApi } from '../lib/useApi.tsx';
+import type { RichLinkBlockElement } from '../types/content.ts';
+import type { TagType } from '../types/tag.ts';
+import type { RichLinkImageData } from './RichLink.tsx';
+import { RichLink } from './RichLink.tsx';
 
 type Props = {
 	element: RichLinkBlockElement;

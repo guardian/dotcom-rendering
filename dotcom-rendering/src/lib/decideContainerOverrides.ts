@@ -1,7 +1,7 @@
 import { palette } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
-import { transparentColour } from './transparentColour';
+import type { DCRContainerPalette } from '../types/front.ts';
+import type { ContainerOverrides } from '../types/palette.ts';
+import { transparentColour } from './transparentColour.ts';
 
 const {
 	brand,

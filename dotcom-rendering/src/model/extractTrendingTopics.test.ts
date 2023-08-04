@@ -1,9 +1,9 @@
-import type { FETagType } from '../types/tag';
+import type { FETagType } from '../types/tag.ts';
 import type {
 	NarrowedFECollectionType,
 	NarrowedFEFrontCard,
-} from './extractTrendingTopics';
-import { extractTrendingTopicsFomFront } from './extractTrendingTopics';
+} from './extractTrendingTopics.ts';
+import { extractTrendingTopicsFomFront } from './extractTrendingTopics.ts';
 
 const tag = (
 	id: string,

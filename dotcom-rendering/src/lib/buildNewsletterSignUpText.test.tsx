@@ -1,4 +1,4 @@
-import { buildDetailText } from './buildNewsletterSignUpText';
+import { buildDetailText } from './buildNewsletterSignUpText.tsx';
 
 describe('buildDetailText', () => {
 	it('will return the fallback text if the input is not recognised', () => {

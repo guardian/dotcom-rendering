@@ -1,13 +1,13 @@
-import type { SharedAdTargeting } from '../lib/ad-targeting';
-import type { EditionId } from '../lib/edition';
-import type { FEArticleBadgeType } from './badge';
-import type { CommercialProperties } from './commercial';
-import type { ConfigType } from './config';
-import type { FEElement, ImageForLightbox, Newsletter } from './content';
-import type { FooterType } from './footer';
-import type { FEOnwards } from './onwards';
-import type { TagType } from './tag';
-import type { FETrailType } from './trails';
+import type { SharedAdTargeting } from '../lib/ad-targeting.ts';
+import type { EditionId } from '../lib/edition.ts';
+import type { FEArticleBadgeType } from './badge.ts';
+import type { CommercialProperties } from './commercial.ts';
+import type { ConfigType } from './config.ts';
+import type { FEElement, ImageForLightbox, Newsletter } from './content.ts';
+import type { FooterType } from './footer.ts';
+import type { FEOnwards } from './onwards.ts';
+import type { TagType } from './tag.ts';
+import type { FETrailType } from './trails.ts';
 
 /**
  * This type is what we receive from `frontend`,

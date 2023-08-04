@@ -9,11 +9,11 @@ import {
 	headline,
 	until,
 } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
-import { nestedOphanComponents } from '../lib/ophan-helpers';
-import type { PillarLinkType } from '../model/extract-nav';
-import type { Palette } from '../types/palette';
-import { navInputCheckboxId } from './Nav/config';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { nestedOphanComponents } from '../lib/ophan-helpers.ts';
+import type { PillarLinkType } from '../model/extract-nav.ts';
+import type { Palette } from '../types/palette.ts';
+import { navInputCheckboxId } from './Nav/config.ts';
 
 // CSS Vars
 

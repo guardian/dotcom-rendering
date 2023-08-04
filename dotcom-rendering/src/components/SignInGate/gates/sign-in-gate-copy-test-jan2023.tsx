@@ -1,8 +1,8 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
-import { Lazy } from '../../Lazy';
-import { canShowSignInGate } from '../displayRule';
-import type { SignInGateComponent } from '../types';
+import { Lazy } from '../../Lazy.tsx';
+import { canShowSignInGate } from '../displayRule.ts';
+import type { SignInGateComponent } from '../types.ts';
 
 const SignInGateCopyTestJan2023 = React.lazy(() => {
 	const { endPerformanceMeasure } = startPerformanceMeasure(
@@ -10,7 +10,7 @@ const SignInGateCopyTestJan2023 = React.lazy(() => {
 		'SignInGateCopyTestJan2023',
 	);
 	return import(
-		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023'
+		/* webpackChunkName: "SignInGateMain" */ '../gateDesigns/SignInGateCopyTestJan2023.tsx'
 	).then((module) => {
 		endPerformanceMeasure();
 		return { default: module.SignInGateCopyTestJan2023 };

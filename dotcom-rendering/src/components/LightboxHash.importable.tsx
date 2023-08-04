@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { useOnce } from '../lib/useOnce';
+import { useOnce } from '../lib/useOnce.ts';
 
 /**
  * This small snippet of javascript is executed at page load. It checks to

@@ -9,22 +9,22 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
-import type { Branding as BrandingType } from '../types/branding';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
-import { Avatar } from './Avatar';
-import { Branding } from './Branding.importable';
-import { CommentCount } from './CommentCount.importable';
-import { Contributor } from './Contributor';
-import { Counts } from './Counts';
-import { Dateline } from './Dateline';
-import { Island } from './Island';
-import { SendAMessage } from './SendAMessage.importable';
-import { ShareCount } from './ShareCount.importable';
-import { ShareIcons } from './ShareIcons';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { getSoleContributor } from '../lib/byline.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Branding as BrandingType } from '../types/branding.ts';
+import type { Palette } from '../types/palette.ts';
+import type { TagType } from '../types/tag.ts';
+import { Avatar } from './Avatar.tsx';
+import { Branding } from './Branding.importable.tsx';
+import { CommentCount } from './CommentCount.importable.tsx';
+import { Contributor } from './Contributor.tsx';
+import { Counts } from './Counts.tsx';
+import { Dateline } from './Dateline.tsx';
+import { Island } from './Island.tsx';
+import { SendAMessage } from './SendAMessage.importable.tsx';
+import { ShareCount } from './ShareCount.importable.tsx';
+import { ShareIcons } from './ShareIcons.tsx';
 
 type Props = {
 	format: ArticleFormat;

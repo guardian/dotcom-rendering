@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { body, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import type { DCRContainerPalette } from '../types/front';
-import type { ContainerOverrides } from '../types/palette';
-import type { TrailType } from '../types/trails';
-import { generateSources } from './Picture';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import type { DCRContainerPalette } from '../types/front.ts';
+import type { ContainerOverrides } from '../types/palette.ts';
+import type { TrailType } from '../types/trails.ts';
+import { generateSources } from './Picture.tsx';
 
 const imageStyles = css`
 	width: 120px;
@@ -21,7 +21,7 @@ const linkStyles = css`
 `;
 
 const linkOverrideStyles = (containerOverrides?: ContainerOverrides) => css`
-	${containerOverrides?.text?.cardHeadline &&
+	${containerOverrides?.text.cardHeadline &&
 	`color: ${containerOverrides.text.cardHeadline};`}
 `;
 

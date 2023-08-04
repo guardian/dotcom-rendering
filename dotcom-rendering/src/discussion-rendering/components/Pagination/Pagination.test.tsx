@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import type { FilterOptions } from '../../discussionTypes';
-import { Pagination } from './Pagination';
+import type { FilterOptions } from '../../discussionTypes.ts';
+import { Pagination } from './Pagination.tsx';
 
 const DEFAULT_FILTERS: FilterOptions = {
 	orderBy: 'newest',

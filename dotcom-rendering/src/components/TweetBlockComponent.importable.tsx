@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { body, border } from '@guardian/source-foundations';
 import { useEffect } from 'react';
-import { unescapeData } from '../lib/escapeData';
-import type { TweetBlockElement } from '../types/content';
+import { unescapeData } from '../lib/escapeData.tsx';
+import type { TweetBlockElement } from '../types/content.ts';
 
 type Props = {
 	element: TweetBlockElement;

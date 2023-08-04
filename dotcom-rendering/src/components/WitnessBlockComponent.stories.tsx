@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import type { WitnessAssetType } from '../types/content';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { WitnessAssetType } from '../types/content.ts';
 import {
 	WitnessImageBlockComponent,
 	WitnessTextBlockComponent,
 	WitnessVideoBlockComponent,
-} from './WitnessBlockComponent';
+} from './WitnessBlockComponent.tsx';
 
 export default {
 	title: 'Components/WitnessBlockComponent',

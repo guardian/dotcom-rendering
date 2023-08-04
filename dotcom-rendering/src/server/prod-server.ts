@@ -2,13 +2,13 @@ import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr.ts';
+import { handleAllEditorialNewslettersPage } from '../server/index.allEditorialNewslettersPage.web.ts';
 import {
 	handleAMPArticle,
 	handlePerfTest as handleAMPArticlePerfTest,
-} from '../server/index.article.amp';
-import { handleAppsArticle } from '../server/index.article.apps';
+} from '../server/index.article.amp.tsx';
+import { handleAppsArticle } from '../server/index.article.apps.ts';
 import {
 	handleArticle,
 	handleArticleJson,
@@ -16,18 +16,18 @@ import {
 	handleBlocks,
 	handleInteractive,
 	handleKeyEvents,
-} from '../server/index.article.web';
+} from '../server/index.article.web.ts';
 import {
 	handleFront,
 	handleFrontJson,
 	handleTagFront,
 	handleTagFrontJson,
-} from '../server/index.front.web';
-import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
-import { getContentFromURLMiddleware } from './lib/get-content-from-url.js';
-import { logger } from './lib/logging';
-import { requestLoggerMiddleware } from './lib/logging-middleware';
-import { recordError } from './lib/logging-store';
+} from '../server/index.front.web.ts';
+import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline.ts';
+import { getContentFromURLMiddleware } from './lib/get-content-from-url.js.js';
+import { requestLoggerMiddleware } from './lib/logging-middleware.ts';
+import { recordError } from './lib/logging-store.ts';
+import { logger } from './lib/logging.ts';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { unescapeData } from '../lib/escapeData';
-import { Caption } from './Caption';
+import { unescapeData } from '../lib/escapeData.tsx';
+import { Caption } from './Caption.tsx';
 
 type Props = {
 	html: string;

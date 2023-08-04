@@ -1,4 +1,4 @@
-import { LoadingComments } from './LoadingComments';
+import { LoadingComments } from './LoadingComments.tsx';
 
 export default {
 	component: LoadingComments,

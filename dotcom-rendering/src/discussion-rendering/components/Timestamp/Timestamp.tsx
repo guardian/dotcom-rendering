@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { dateFormatter } from '../../lib/dateFormatter';
-import { useInterval } from '../../lib/useInterval';
+import { dateFormatter } from '../../lib/dateFormatter.ts';
+import { useInterval } from '../../lib/useInterval.ts';
 
 type Props = {
 	isoDateTime: string;

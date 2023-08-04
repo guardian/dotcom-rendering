@@ -8,15 +8,15 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
-import { trackLink } from '../componentEventTracking';
-import type { Product, SignInGateProps, UserType } from '../types';
+import { trackLink } from '../componentEventTracking.tsx';
+import type { Product, SignInGateProps, UserType } from '../types.ts';
 import {
 	firstParagraphOverlay,
 	hideElementsCss,
 	registerButton,
 	signInGateContainer,
-} from './shared';
-import { SignInGateMain } from './SignInGateMain';
+} from './shared.tsx';
+import { SignInGateMain } from './SignInGateMain.tsx';
 
 const personalisedHeadingStyles = css`
 	${headline.small({ fontWeight: 'bold' })};

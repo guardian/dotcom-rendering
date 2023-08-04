@@ -7,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgCheckmark } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { RoleType } from '../types/content';
+import type { RoleType } from '../types/content.ts';
 
 type Props = {
 	children: React.ReactNode;

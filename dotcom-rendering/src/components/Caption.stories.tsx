@@ -6,9 +6,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Caption } from './Caption';
-import { Section } from './Section';
-import { StarRating } from './StarRating/StarRating';
+import { Caption } from './Caption.tsx';
+import { Section } from './Section.tsx';
+import { StarRating } from './StarRating/StarRating.tsx';
 
 export default {
 	component: Caption,

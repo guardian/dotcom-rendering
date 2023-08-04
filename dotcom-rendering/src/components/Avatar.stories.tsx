@@ -5,7 +5,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { Avatar } from './Avatar';
+import { Avatar } from './Avatar.tsx';
 
 export default {
 	component: Avatar,

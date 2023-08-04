@@ -1,4 +1,4 @@
-import { nestedOphanComponents } from './ophan-helpers';
+import { nestedOphanComponents } from './ophan-helpers.ts';
 
 describe('Ophan helpers', () => {
 	it('should handle nested values', () => {

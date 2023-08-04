@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { decidePublicPath } from './decidePublicPath';
+import { decidePublicPath } from './decidePublicPath.ts';
 
 const mockHostname = (hostname: string | undefined) => {
 	Object.defineProperty(window, 'location', {

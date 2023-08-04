@@ -1,7 +1,7 @@
-import { labelStyles } from './AdSlot';
-import { Island } from './Island';
-import { LiveblogRightMultipleAdSlots } from './LiveblogRightMultipleAdSlots.importable';
-import { TopRightAdSlot } from './TopRightAdSlot';
+import { labelStyles } from './AdSlot.tsx';
+import { Island } from './Island.tsx';
+import { LiveblogRightMultipleAdSlots } from './LiveblogRightMultipleAdSlots.importable.tsx';
+import { TopRightAdSlot } from './TopRightAdSlot.tsx';
 
 type Props = {
 	display?: ArticleDisplay;

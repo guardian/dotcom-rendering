@@ -6,11 +6,11 @@ import {
 	neutral,
 	text,
 } from '@guardian/source-foundations';
-import type { TrailType } from '../types/trails';
-import { AgeWarning } from './AgeWarning';
-import { Avatar } from './Avatar';
-import { Flex } from './Flex';
-import { LinkHeadline } from './LinkHeadline';
+import type { TrailType } from '../types/trails.ts';
+import { AgeWarning } from './AgeWarning.tsx';
+import { Avatar } from './Avatar.tsx';
+import { Flex } from './Flex.tsx';
+import { LinkHeadline } from './LinkHeadline.tsx';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;

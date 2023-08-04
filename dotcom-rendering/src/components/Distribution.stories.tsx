@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Distribution } from './Distribution';
+import { Distribution } from './Distribution.tsx';
 
 export default {
 	component: Distribution,

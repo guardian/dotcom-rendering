@@ -4,8 +4,8 @@ import { lifestyle, space, textSans } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
 import { useEffect, useState } from 'react';
-import { isServer } from '../lib/isServer';
-import { useOnce } from '../lib/useOnce';
+import { isServer } from '../lib/isServer.ts';
+import { useOnce } from '../lib/useOnce.ts';
 
 const colours = `
 gu-recipe {

@@ -1,11 +1,11 @@
-import type { Newsletter } from '../types/content';
+import type { Newsletter } from '../types/content.ts';
 import type {
 	DCRNewslettersPageType,
 	FENewslettersPageType,
 	GroupedNewsletters,
-} from '../types/newslettersPage';
-import type { StaticGroups } from './newsletter-grouping';
-import { groups } from './newsletter-grouping';
+} from '../types/newslettersPage.ts';
+import type { StaticGroups } from './newsletter-grouping.ts';
+import { groups } from './newsletter-grouping.ts';
 
 const mapStaticGroups = (
 	staticGroups: StaticGroups,

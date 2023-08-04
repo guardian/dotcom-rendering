@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { ShareIcons } from './ShareIcons';
+import { ShareIcons } from './ShareIcons.tsx';
 
 export default {
 	component: ShareIcons,

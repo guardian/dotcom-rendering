@@ -1,4 +1,4 @@
-import { secondsToDuration } from './MediaDuration';
+import { secondsToDuration } from './MediaDuration.tsx';
 
 describe(`MediaText`, () => {
 	it(`converts from a number of seconds to a duration string`, () => {

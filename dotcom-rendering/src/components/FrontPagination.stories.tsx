@@ -1,4 +1,4 @@
-import { FrontPagination } from './FrontPagination';
+import { FrontPagination } from './FrontPagination.tsx';
 
 export default {
 	component: FrontPagination,

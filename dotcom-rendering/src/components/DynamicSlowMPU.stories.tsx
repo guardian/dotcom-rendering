@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { DynamicSlowMPU } from './DynamicSlowMPU';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { DynamicSlowMPU } from './DynamicSlowMPU.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: DynamicSlowMPU,

@@ -1,4 +1,4 @@
-import type { BadgeType, SpecialBadgeType } from '../types/badge';
+import type { BadgeType, SpecialBadgeType } from '../types/badge.ts';
 
 /**
  * Badges migrated from [frontend implementation](https://github.com/guardian/frontend/blob/c52cc1d35cec5a0ec95075f5e2079595d26dc35f/common/app/model/Badges.scala)

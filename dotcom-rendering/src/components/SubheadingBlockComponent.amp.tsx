@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial as Special } from '@guardian/libs';
 import { headline, neutral, textSans } from '@guardian/source-foundations';
-import { pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 
 const style = (pillar: ArticleTheme) => css`
 	h2 {

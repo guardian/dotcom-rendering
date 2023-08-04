@@ -10,14 +10,14 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
-import { formatAttrString } from '../lib/formatAttrString';
-import { getZIndex } from '../lib/getZIndex';
-import type { Newsletter } from '../types/content';
-import type { OnwardsSource } from '../types/onwards';
-import { LI } from './Card/components/LI';
-import { Hide } from './Hide';
-import { LeftColumn } from './LeftColumn';
-import { NewsletterCard } from './NewsletterCard';
+import { formatAttrString } from '../lib/formatAttrString.ts';
+import { getZIndex } from '../lib/getZIndex.ts';
+import type { Newsletter } from '../types/content.ts';
+import type { OnwardsSource } from '../types/onwards.ts';
+import { LI } from './Card/components/LI.tsx';
+import { Hide } from './Hide.tsx';
+import { LeftColumn } from './LeftColumn.tsx';
+import { NewsletterCard } from './NewsletterCard.tsx';
 
 type Props = {
 	heading: string;

@@ -1,4 +1,4 @@
-import { LoadingPicks } from './LoadingPicks';
+import { LoadingPicks } from './LoadingPicks.tsx';
 
 export default { component: LoadingPicks, title: 'Discussion/LoadingPicks' };
 

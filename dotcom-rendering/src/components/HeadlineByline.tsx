@@ -9,11 +9,11 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { getSoleContributor } from '../lib/byline';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
-import type { TagType } from '../types/tag';
-import { BylineLink } from './BylineLink';
+import { getSoleContributor } from '../lib/byline.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
+import type { TagType } from '../types/tag.ts';
+import { BylineLink } from './BylineLink.tsx';
 
 const wrapperStyles = css`
 	margin-left: 6px;

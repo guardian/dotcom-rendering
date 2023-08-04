@@ -2,9 +2,9 @@
 import { css } from '@emotion/react';
 import { space, text, textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
-import type { CampaignFieldFile } from '../../../types/content';
-import { stringifyFileBase64 } from '.././../../lib/stringifyFileBase64';
-import { FieldLabel } from './FieldLabel';
+import type { CampaignFieldFile } from '../../../types/content.ts';
+import { stringifyFileBase64 } from '.././../../lib/stringifyFileBase64.ts';
+import { FieldLabel } from './FieldLabel.tsx';
 
 const fileUploadInputStyles = css`
 	padding-top: 10px;

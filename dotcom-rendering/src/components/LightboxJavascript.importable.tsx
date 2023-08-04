@@ -3,8 +3,8 @@ import libDebounce from 'lodash.debounce';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import screenfull from 'screenfull';
-import type { ImageForLightbox } from '../types/content';
-import { LightboxImages } from './LightboxImages';
+import type { ImageForLightbox } from '../types/content.ts';
+import { LightboxImages } from './LightboxImages.tsx';
 
 /**
  * 💡 Lightbox

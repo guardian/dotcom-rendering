@@ -6,9 +6,9 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import type { Props as CardProps } from './Card/Card';
-import { Card } from './Card/Card';
-import { SupportingContent } from './SupportingContent';
+import type { Props as CardProps } from './Card/Card.tsx';
+import { Card } from './Card/Card.tsx';
+import { SupportingContent } from './SupportingContent.tsx';
 
 export default {
 	component: SupportingContent,

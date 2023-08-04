@@ -1,7 +1,7 @@
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { getName } from './getName';
-import { getProps } from './getProps';
+import { getName } from './getName.ts';
+import { getProps } from './getProps.ts';
 
 /**
  * This is a cut down version of the islands/doHydration function that is

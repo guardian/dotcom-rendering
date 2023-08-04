@@ -1,10 +1,10 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
-import { islandNoscriptStyles } from '../components/Island';
-import { ASSET_ORIGIN } from '../lib/assets';
-import { getFontsCss } from '../lib/fonts-css';
-import { getHttp3Url } from '../lib/getHttp3Url';
-import type { RenderingTarget } from '../types/renderingTarget';
+import { islandNoscriptStyles } from '../components/Island.tsx';
+import { ASSET_ORIGIN } from '../lib/assets.ts';
+import { getFontsCss } from '../lib/fonts-css.ts';
+import { getHttp3Url } from '../lib/getHttp3Url.ts';
+import type { RenderingTarget } from '../types/renderingTarget.ts';
 
 type BaseProps = {
 	css: string;

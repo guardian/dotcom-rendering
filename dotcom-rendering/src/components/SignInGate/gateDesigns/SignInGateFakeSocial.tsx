@@ -9,8 +9,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, Link, LinkButton } from '@guardian/source-react-components';
-import { trackLink } from '../componentEventTracking';
-import type { SignInGateProps } from '../types';
+import { trackLink } from '../componentEventTracking.tsx';
+import type { SignInGateProps } from '../types.ts';
 import {
 	actionButtons,
 	bodyBold,
@@ -24,7 +24,7 @@ import {
 	registerButton,
 	signInGateContainer,
 	signInLink,
-} from './shared';
+} from './shared.tsx';
 
 const heading = css`
 	${headline.small({ fontWeight: 'bold' })};

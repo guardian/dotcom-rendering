@@ -11,7 +11,7 @@
  *    gen-fixtures.js directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend.ts';
 
 export const Interview: FEArticleType = {
 	slotMachineFlags: '',

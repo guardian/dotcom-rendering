@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails-nav';
-import { FrontSection } from './FrontSection';
-import { NavList } from './NavList';
+import { trails } from '../../fixtures/manual/trails-nav.ts';
+import { FrontSection } from './FrontSection.tsx';
+import { NavList } from './NavList.tsx';
 
 export default {
 	component: NavList,

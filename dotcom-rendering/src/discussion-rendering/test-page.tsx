@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Comments } from './Comments';
-import type { CAPIPillar } from './discussionTypes';
-import { pillarToEnum } from './lib/pillarToEnum';
+import { Comments } from './Comments.tsx';
+import type { CAPIPillar } from './discussionTypes.ts';
+import { pillarToEnum } from './lib/pillarToEnum.ts';
 
 const getQueryParam = (queryParam: string, defaultValue: string): string =>
 	new URLSearchParams(window.location.search).get(queryParam) ?? defaultValue;

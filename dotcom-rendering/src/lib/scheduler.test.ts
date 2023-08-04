@@ -3,7 +3,7 @@ import {
 	schedule,
 	setSchedulerConcurrency,
 	setSchedulerPriorityLastStartTime,
-} from './scheduler';
+} from './scheduler.ts';
 
 jest.useFakeTimers();
 

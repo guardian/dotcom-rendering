@@ -1,8 +1,8 @@
 // All GA fields should  fall back to default values -
 
-import type { EditionId } from '../lib/edition';
-import type { FEArticleType } from '../types/frontend';
-import type { TagType } from '../types/tag';
+import type { EditionId } from '../lib/edition.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import type { TagType } from '../types/tag.ts';
 
 const filterTags = (
 	tags: FEArticleType['tags'],

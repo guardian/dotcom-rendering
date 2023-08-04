@@ -1,16 +1,16 @@
 import { isNonNullable } from '@guardian/libs';
-import type { EditionId } from '../lib/edition';
-import type { Branding } from '../types/branding';
+import type { EditionId } from '../lib/edition.ts';
+import type { Branding } from '../types/branding.ts';
 import type {
 	DCRCollectionType,
 	FECollectionType,
 	FEFrontCard,
-} from '../types/front';
-import { decideBadge } from './decideBadge';
-import { decideContainerPalette } from './decideContainerPalette';
-import { enhanceCards } from './enhanceCards';
-import { enhanceTreats } from './enhanceTreats';
-import { groupCards } from './groupCards';
+} from '../types/front.ts';
+import { decideBadge } from './decideBadge.ts';
+import { decideContainerPalette } from './decideContainerPalette.ts';
+import { enhanceCards } from './enhanceCards.ts';
+import { enhanceTreats } from './enhanceTreats.ts';
+import { groupCards } from './groupCards.ts';
 
 const FORBIDDEN_CONTAINERS = [
 	'culture-treat',

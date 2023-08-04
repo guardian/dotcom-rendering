@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { DividerBlockComponent } from './DividerBlockComponent';
-import { TextBlockComponent } from './TextBlockComponent';
+import { DividerBlockComponent } from './DividerBlockComponent.tsx';
+import { TextBlockComponent } from './TextBlockComponent.tsx';
 
 export default {
 	component: DividerBlockComponent,

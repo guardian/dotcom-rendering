@@ -1,6 +1,6 @@
-import { RequestHandler } from 'express';
-import { logger } from './logging';
-import { loggingStore } from './logging-store';
+import type { RequestHandler } from 'express';
+import { loggingStore } from './logging-store.ts';
+import { logger } from './logging.ts';
 
 const hasPageId = (body: unknown): body is { pageId: string } => {
 	return (

@@ -1,4 +1,4 @@
-import type { CalloutBlockElement } from '../../src/types/content';
+import type { CalloutBlockElement } from '../../src/types/content.ts';
 
 export const calloutCampaign: CalloutBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement',

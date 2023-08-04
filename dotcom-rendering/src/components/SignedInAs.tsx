@@ -9,8 +9,8 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { createAuthenticationEventParams } from '../lib/identity-component-event';
-import type { Palette } from '../types/palette';
+import { createAuthenticationEventParams } from '../lib/identity-component-event.ts';
+import type { Palette } from '../types/palette.ts';
 
 type Props = {
 	commentCount?: number;

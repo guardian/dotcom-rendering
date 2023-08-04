@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { ContentABTestProvider } from './ContentABTest.amp';
-import { InlineAd } from './InlineAd.amp';
+import { ContentABTestProvider } from './ContentABTest.amp.tsx';
+import { InlineAd } from './InlineAd.amp.tsx';
 
 describe('RegionalAd', () => {
 	const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';

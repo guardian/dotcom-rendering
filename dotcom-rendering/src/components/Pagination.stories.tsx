@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { getAllThemes } from '../lib/format';
-import { Pagination } from './Pagination';
+import { getAllThemes } from '../lib/format.ts';
+import { Pagination } from './Pagination.tsx';
 
 export default {
 	component: Pagination,

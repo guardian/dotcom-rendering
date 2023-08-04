@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import type { RoleType, VineBlockElement } from '../types/content';
-import { ClickToView } from './ClickToView';
-import { MaintainAspectRatio } from './MaintainAspectRatio';
+import type { RoleType, VineBlockElement } from '../types/content.ts';
+import { ClickToView } from './ClickToView.tsx';
+import { MaintainAspectRatio } from './MaintainAspectRatio.tsx';
 
 const titleStyle = css`
 	p {

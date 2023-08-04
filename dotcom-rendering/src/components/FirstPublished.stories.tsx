@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { FirstPublished } from './FirstPublished';
+import { FirstPublished } from './FirstPublished.tsx';
 
 export default {
 	component: FirstPublished,

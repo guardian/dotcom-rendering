@@ -1,9 +1,9 @@
 import type {
 	CampaignFieldCheckbox,
 	CampaignFieldRadio,
-} from '../../../types/content';
-import { CheckboxSelect } from './CheckboxSelect';
-import { RadioSelect } from './RadioSelect';
+} from '../../../types/content.ts';
+import { CheckboxSelect } from './CheckboxSelect.tsx';
+import { RadioSelect } from './RadioSelect.tsx';
 
 type Props = {
 	validationErrors?: { [key in string]: string };

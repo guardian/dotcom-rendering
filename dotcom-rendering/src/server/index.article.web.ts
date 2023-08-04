@@ -1,21 +1,21 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { addImageIDs } from '../model/addImageIDs';
-import { buildLightboxImages } from '../model/buildLightboxImages';
-import { addLightboxData } from '../model/enhance-images';
-import { enhanceBlocks } from '../model/enhanceBlocks';
-import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties';
-import { enhanceStandfirst } from '../model/enhanceStandfirst';
-import { enhanceTableOfContents } from '../model/enhanceTableOfContents';
-import { validateAsArticleType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import type { FEArticleBadgeType } from '../types/badge';
-import type { FEArticleType, FEBlocksRequest } from '../types/frontend';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { addImageIDs } from '../model/addImageIDs.ts';
+import { buildLightboxImages } from '../model/buildLightboxImages.ts';
+import { addLightboxData } from '../model/enhance-images.ts';
+import { enhanceBlocks } from '../model/enhanceBlocks.ts';
+import { enhanceCommercialProperties } from '../model/enhanceCommercialProperties.ts';
+import { enhanceStandfirst } from '../model/enhanceStandfirst.ts';
+import { enhanceTableOfContents } from '../model/enhanceTableOfContents.ts';
+import { validateAsArticleType } from '../model/validate.ts';
+import { recordTypeAndPlatform } from '../server/lib/logging-store.ts';
+import type { FEArticleBadgeType } from '../types/badge.ts';
+import type { FEArticleType, FEBlocksRequest } from '../types/frontend.ts';
 import {
 	renderBlocks,
 	renderHtml,
 	renderKeyEvents,
-} from './render.article.web';
+} from './render.article.web.tsx';
 
 const enhancePinnedPost = (format: FEFormat, block?: Block) => {
 	return block ? enhanceBlocks([block], format)[0] : block;

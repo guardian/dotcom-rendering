@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { TagType } from '../types/tag';
-import { OnwardContainer } from './OnwardContainer.amp';
+import type { TagType } from '../types/tag.ts';
+import { OnwardContainer } from './OnwardContainer.amp.tsx';
 
 const wrapper = css`
 	background-color: white;

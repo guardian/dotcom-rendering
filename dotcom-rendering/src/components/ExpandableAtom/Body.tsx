@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { body, neutral, textSans } from '@guardian/source-foundations';
 import { SvgInfo } from '@guardian/source-react-components';
-import { decidePalette } from '../../lib/decidePalette';
+import { decidePalette } from '../../lib/decidePalette.ts';
 
 const imageStyling = css`
 	float: left;

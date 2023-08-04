@@ -1,4 +1,4 @@
-import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
+import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown.tsx';
 
 export default {
 	component: HeaderTopBarEditionDropdown,

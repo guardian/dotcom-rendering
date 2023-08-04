@@ -1,16 +1,16 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { NavType } from '../model/extract-nav';
-import type { FEArticleType } from '../types/frontend';
-import type { RenderingTarget } from '../types/renderingTarget';
-import { CommentLayout } from './CommentLayout';
-import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
-import { LiveLayout } from './LiveLayout';
-import { NewsletterSignupLayout } from './NewsletterSignupLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
-import { StandardLayout } from './StandardLayout';
+import type { NavType } from '../model/extract-nav.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import type { RenderingTarget } from '../types/renderingTarget.ts';
+import { CommentLayout } from './CommentLayout.tsx';
+import { FullPageInteractiveLayout } from './FullPageInteractiveLayout.tsx';
+import { ImmersiveLayout } from './ImmersiveLayout.tsx';
+import { InteractiveLayout } from './InteractiveLayout.tsx';
+import { LiveLayout } from './LiveLayout.tsx';
+import { NewsletterSignupLayout } from './NewsletterSignupLayout.tsx';
+import { ShowcaseLayout } from './ShowcaseLayout.tsx';
+import { StandardLayout } from './StandardLayout.tsx';
 
 interface BaseProps {
 	article: FEArticleType;

@@ -8,11 +8,11 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { type EditionId, getEditionFromId } from '../lib/edition';
-import type { DCRContainerPalette } from '../types/front';
-import type { Colour } from '../types/palette';
-import { localisedTitle } from './Localisation';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides.ts';
+import { type EditionId, getEditionFromId } from '../lib/edition.ts';
+import type { DCRContainerPalette } from '../types/front.ts';
+import type { Colour } from '../types/palette.ts';
+import { localisedTitle } from './Localisation.ts';
 
 type Props = {
 	title?: string;

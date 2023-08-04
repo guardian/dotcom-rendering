@@ -1,4 +1,4 @@
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage.tsx';
 
 export default {
 	component: NewsletterPrivacyMessage,

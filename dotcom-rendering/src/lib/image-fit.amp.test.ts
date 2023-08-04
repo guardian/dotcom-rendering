@@ -1,5 +1,5 @@
-import type { Image, ImageSource } from '../types/content';
-import { bestFitImage, heightEstimate } from './image-fit.amp';
+import type { Image, ImageSource } from '../types/content.ts';
+import { bestFitImage, heightEstimate } from './image-fit.amp.ts';
 
 test('chooses smallest image that is still greater than column width', () => {
 	const images: ImageSource[] = [

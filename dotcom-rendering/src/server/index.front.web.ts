@@ -1,19 +1,22 @@
 import type { RequestHandler } from 'express';
-import { decideTrail } from '../lib/decideTrail';
-import { enhanceCards } from '../model/enhanceCards';
-import { enhanceCollections } from '../model/enhanceCollections';
+import { decideTrail } from '../lib/decideTrail.ts';
+import { enhanceCards } from '../model/enhanceCards.ts';
+import { enhanceCollections } from '../model/enhanceCollections.ts';
 import {
 	extractTrendingTopics,
 	extractTrendingTopicsFomFront,
-} from '../model/extractTrendingTopics';
-import { groupTrailsByDates } from '../model/groupTrailsByDates';
-import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails';
-import { getSpeedFromTrails } from '../model/slowOrFastByTrails';
-import { validateAsFrontType, validateAsTagFrontType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import type { DCRFrontType, FEFrontType } from '../types/front';
-import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront';
-import { renderFront, renderTagFront } from './render.front.web';
+} from '../model/extractTrendingTopics.ts';
+import { groupTrailsByDates } from '../model/groupTrailsByDates.ts';
+import { injectMpuIntoGroupedTrails } from '../model/injectMpuIntoGroupedTrails.ts';
+import { getSpeedFromTrails } from '../model/slowOrFastByTrails.ts';
+import {
+	validateAsFrontType,
+	validateAsTagFrontType,
+} from '../model/validate.ts';
+import { recordTypeAndPlatform } from '../server/lib/logging-store.ts';
+import type { DCRFrontType, FEFrontType } from '../types/front.ts';
+import type { DCRTagFrontType, FETagFrontType } from '../types/tagFront.ts';
+import { renderFront, renderTagFront } from './render.front.web.tsx';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);

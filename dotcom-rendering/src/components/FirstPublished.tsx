@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { joinUrl, timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { SvgPinned } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette.ts';
 
 const fallbackDate = (date: Date) =>
 	[date.getHours(), date.getMinutes()]

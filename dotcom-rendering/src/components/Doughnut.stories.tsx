@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { palette } from '@guardian/source-foundations';
-import { Doughnut } from './Doughnut';
+import { Doughnut } from './Doughnut.tsx';
 
 export default {
 	component: Doughnut,

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import MockDate from 'mockdate';
-import { updateTimeElements } from './updateTimeElements';
+import { updateTimeElements } from './updateTimeElements.ts';
 
 function setup(html: string) {
 	function TestComponent() {

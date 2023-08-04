@@ -9,9 +9,9 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { useRef } from 'react';
-import { decidePalette } from '../lib/decidePalette';
-import type { Palette } from '../types/palette';
-import { KeyEventCard } from './KeyEventCard';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { Palette } from '../types/palette.ts';
+import { KeyEventCard } from './KeyEventCard.tsx';
 
 interface Props {
 	keyEvents: Block[];

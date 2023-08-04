@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
-import { ArticleLastUpdated } from './ArticleLastUpdated';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { ArticleLastUpdated } from './ArticleLastUpdated.tsx';
 
 export default {
 	component: ArticleLastUpdated,

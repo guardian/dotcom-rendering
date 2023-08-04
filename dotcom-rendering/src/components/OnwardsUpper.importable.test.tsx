@@ -1,4 +1,4 @@
-import { firstPopularTag } from './OnwardsUpper.importable';
+import { firstPopularTag } from './OnwardsUpper.importable.tsx';
 
 describe('firstPopularTag', () => {
 	it('finds a matching tag', () => {

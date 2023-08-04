@@ -5,8 +5,8 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints, specialReport } from '@guardian/source-foundations';
-import { CardHeadline } from './CardHeadline';
-import { Section } from './Section';
+import { CardHeadline } from './CardHeadline.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: CardHeadline,

@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { EmailSignup } from './EmailSignup';
-import { Section } from './Section';
+import { EmailSignup } from './EmailSignup.tsx';
+import { Section } from './Section.tsx';
 
 const withSectionWrapper = (Story: typeof NewsTheme) => (
 	<Section

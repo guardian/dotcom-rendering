@@ -1,6 +1,6 @@
-import type { EditionId } from '../lib/edition';
-import { useApi } from '../lib/useApi';
-import { Weather, WeatherPlaceholder } from './Weather';
+import type { EditionId } from '../lib/edition.ts';
+import { useApi } from '../lib/useApi.tsx';
+import { Weather, WeatherPlaceholder } from './Weather.tsx';
 
 /**
  * Our weather API returns 24 forecast.

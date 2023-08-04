@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
-import type { TrailTabType, TrailType } from '../types/trails';
-import { MostViewedFooterGrid } from './MostViewedFooterGrid';
-import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
+import type { TrailTabType, TrailType } from '../types/trails.ts';
+import { MostViewedFooterGrid } from './MostViewedFooterGrid.tsx';
+import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem.tsx';
 
 type Props = {
 	tabs: TrailTabType[];

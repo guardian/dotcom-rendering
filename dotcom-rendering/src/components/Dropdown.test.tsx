@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
-import type { DropdownLinkType } from './Dropdown';
-import { Dropdown } from './Dropdown';
+import type { DropdownLinkType } from './Dropdown.tsx';
+import { Dropdown } from './Dropdown.tsx';
 
 const links: [
 	DropdownLinkType,

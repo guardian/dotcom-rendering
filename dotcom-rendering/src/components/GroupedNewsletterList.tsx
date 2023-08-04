@@ -1,8 +1,8 @@
 import { palette } from '@guardian/source-foundations';
-import type { GroupedNewsletters } from '../types/newslettersPage';
-import { CarouselForNewsletters } from './CarouselForNewsletters.importable';
-import { Island } from './Island';
-import { Section } from './Section';
+import type { GroupedNewsletters } from '../types/newslettersPage.ts';
+import { CarouselForNewsletters } from './CarouselForNewsletters.importable.tsx';
+import { Island } from './Island.tsx';
+import { Section } from './Section.tsx';
 
 interface Props {
 	groupedNewsletters: GroupedNewsletters;

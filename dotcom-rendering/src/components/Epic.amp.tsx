@@ -16,7 +16,7 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 	MoustacheVariable,
-} from './Moustache.amp';
+} from './Moustache.amp.tsx';
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {

@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import React from 'react';
-import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../lib/pillars.ts';
 import InfoIcon from '../static/icons/info.svg';
 import PlusIcon from '../static/icons/plus.svg';
 

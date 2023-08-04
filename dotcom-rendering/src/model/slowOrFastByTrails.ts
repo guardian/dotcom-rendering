@@ -1,4 +1,4 @@
-import type { FEFrontCard } from '../types/front';
+import type { FEFrontCard } from '../types/front.ts';
 
 /**
  * An 'arbitrary list of slow tags' once defined in Frontend.

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { decidePalette } from '../../lib/decidePalette.ts';
 
 /// LIKE/DISLIKE FEEDBACK FOOTER
 const footerStyling = css`

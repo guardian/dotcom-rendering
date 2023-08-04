@@ -1,6 +1,6 @@
-import type { DCRFrontType } from '../types/front';
-import type { FEArticleType } from '../types/frontend';
-import type { DCRTagFrontType } from '../types/tagFront';
+import type { DCRFrontType } from '../types/front.ts';
+import type { FEArticleType } from '../types/frontend.ts';
+import type { DCRTagFrontType } from '../types/tagFront.ts';
 
 /**
  * Checks the page for a number of conditions that should

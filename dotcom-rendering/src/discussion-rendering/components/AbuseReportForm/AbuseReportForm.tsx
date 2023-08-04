@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
-} from '../../../lib/useAuthStatus';
-import { reportAbuse } from '../../lib/api';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
+} from '../../../lib/useAuthStatus.ts';
+import { reportAbuse } from '../../lib/api.tsx';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
 
 type FormData = {
 	categoryId: number;

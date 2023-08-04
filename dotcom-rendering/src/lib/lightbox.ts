@@ -1,4 +1,4 @@
-import type { Image } from '../types/content';
+import type { Image } from '../types/content.ts';
 
 /** Used to determine if a lightbox can be created */
 const THRESHOLD = 620;

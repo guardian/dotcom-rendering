@@ -11,10 +11,10 @@ import {
 } from '@guardian/source-foundations';
 import { Hide, Link } from '@guardian/source-react-components';
 import { StarRating } from '@guardian/source-react-components-development-kitchen';
-import type { ImageForLightbox } from '../types/content';
-import { LightboxCaption } from './LightboxCaption';
-import { LightboxLoader } from './LightboxLoader';
-import { Picture } from './Picture';
+import type { ImageForLightbox } from '../types/content.ts';
+import { LightboxCaption } from './LightboxCaption.tsx';
+import { LightboxLoader } from './LightboxLoader.tsx';
+import { Picture } from './Picture.tsx';
 
 type Props = {
 	format: ArticleFormat;

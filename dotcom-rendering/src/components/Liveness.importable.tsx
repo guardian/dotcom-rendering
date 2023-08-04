@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { initHydration } from '../client/islands/initHydration';
-import { updateTimeElement } from '../client/relativeTime/updateTimeElements';
-import { isServer } from '../lib/isServer';
-import { useApi } from '../lib/useApi';
-import { Toast } from './Toast';
+import { initHydration } from '../client/islands/initHydration.ts';
+import { updateTimeElement } from '../client/relativeTime/updateTimeElements.ts';
+import { isServer } from '../lib/isServer.ts';
+import { useApi } from '../lib/useApi.tsx';
+import { Toast } from './Toast.tsx';
 
 type Props = {
 	pageId: string;

@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/react';
 import { neutral, space } from '@guardian/source-foundations';
-import { Column } from '../Column/Column';
-import { Row } from '../Row/Row';
+import { Column } from '../Column/Column.tsx';
+import { Row } from '../Row/Row.tsx';
 
 const BACKGROUND_COLOUR = neutral[93];
 

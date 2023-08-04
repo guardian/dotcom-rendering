@@ -6,9 +6,9 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import type { NavType } from '../model/extract-nav';
-import { useContentABTestGroup } from './ContentABTest.amp';
-import { ReaderRevenueButton } from './ReaderRevenueButton.amp';
+import type { NavType } from '../model/extract-nav.ts';
+import { useContentABTestGroup } from './ContentABTest.amp.tsx';
+import { ReaderRevenueButton } from './ReaderRevenueButton.amp.tsx';
 
 export interface Link {
 	title: string;

@@ -1,5 +1,5 @@
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceDots } from './enhance-dots';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceDots } from './enhance-dots.ts';
 
 describe('Middot Tests', () => {
 	it('Output should not be the same as input as dot has been replaced', () => {

@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../fixtures/manual/trails';
-import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU';
-import { FrontSection } from './FrontSection';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { FixedMediumSlowXIIMPU } from './FixedMediumSlowXIIMPU.tsx';
+import { FrontSection } from './FrontSection.tsx';
 
 export default {
 	component: FixedMediumSlowXIIMPU,

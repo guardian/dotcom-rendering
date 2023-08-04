@@ -1,4 +1,4 @@
-import type { CommercialConfigType } from '../types/config';
+import type { CommercialConfigType } from '../types/config.ts';
 
 export interface PermutivePayload {
 	'properties.content.premium'?: string;

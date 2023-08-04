@@ -5,9 +5,9 @@ import {
 	PADDING_BOTTOM,
 	SPACE_BETWEEN_ADS,
 	TOP_RIGHT_AD_STICKY_HEIGHT,
-} from '../lib/liveblog-right-ad-constants';
-import { useAB } from '../lib/useAB';
-import { AdSlot } from './AdSlot';
+} from '../lib/liveblog-right-ad-constants.ts';
+import { useAB } from '../lib/useAB.ts';
+import { AdSlot } from './AdSlot.tsx';
 
 export const calculateNumAdsThatFit = (rightColHeight: number) => {
 	if (rightColHeight < AD_CONTAINER_HEIGHT) return 0;

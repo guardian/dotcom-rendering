@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ClickToView } from './ClickToView';
+import { ClickToView } from './ClickToView.tsx';
 
 describe('ClickToView', () => {
 	it('It should render the third party content if it is not tracking', () => {

@@ -1,6 +1,6 @@
 import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
-import { isServer } from '../../lib/isServer';
-import type { CurrentSignInGateABTest } from './types';
+import { isServer } from '../../lib/isServer.ts';
+import type { CurrentSignInGateABTest } from './types.tsx';
 
 export type ComponentEventParams = {
 	componentType: string;

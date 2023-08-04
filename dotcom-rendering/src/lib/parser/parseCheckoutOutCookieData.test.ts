@@ -1,4 +1,4 @@
-import { parseCheckoutCompleteCookieData } from './parseCheckoutOutCookieData';
+import { parseCheckoutCompleteCookieData } from './parseCheckoutOutCookieData.ts';
 
 describe('parseCheckoutCompleteCookieData', () => {
 	const encodeCheckoutCompleteCookieDataObj = (

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useIsInView } from '../lib/useIsInView';
+import { useIsInView } from '../lib/useIsInView.ts';
 
 type Props = {
 	children: JSX.Element;

@@ -2,15 +2,15 @@ import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
 
-jest.unstable_mockModule('../../src/lib/useApi', () => ({
-	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
+jest.unstable_mockModule('../../src/lib/useApi.tsx', () => ({
+	useApi: jest.fn<typeof import('../lib/useApi.tsx').useApi>(),
 }));
 
-const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
-	typeof import('../lib/useApi')
+const { useApi } = (await import('../lib/useApi.tsx')) as jest.MockedObject<
+	typeof import('../lib/useApi.tsx')
 >;
 
-const { ShareCount } = await import('./ShareCount.importable');
+const { ShareCount } = await import('./ShareCount.importable.tsx');
 
 describe('ShareCount', () => {
 	const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';

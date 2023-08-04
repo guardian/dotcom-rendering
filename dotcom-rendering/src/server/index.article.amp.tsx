@@ -1,19 +1,19 @@
 import type { RequestHandler } from 'express';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import type { AnalyticsModel } from '../components/Analytics.amp';
-import { AmpArticlePage } from '../components/ArticlePage.amp';
-import { isAmpSupported } from '../components/Elements.amp';
-import type { PermutiveModel } from '../components/Permutive.amp';
-import { enhance } from '../lib/enhance.amp';
-import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr';
-import { generatePermutivePayload } from '../lib/permutive.amp';
-import { extractScripts } from '../lib/scripts.amp';
-import { findBySubsection } from '../model/article-sections';
-import { extractNAV } from '../model/extract-nav';
-import { validateAsArticleType } from '../model/validate';
-import { recordTypeAndPlatform } from '../server/lib/logging-store';
-import { getAmpExperimentCache } from './AMPExperimentCache.amp';
-import { renderArticle } from './render.article.amp';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import type { AnalyticsModel } from '../components/Analytics.amp.ts';
+import { AmpArticlePage } from '../components/ArticlePage.amp.tsx';
+import { isAmpSupported } from '../components/Elements.amp.tsx';
+import type { PermutiveModel } from '../components/Permutive.amp.ts';
+import { enhance } from '../lib/enhance.amp.ts';
+import { NotRenderableInDCR } from '../lib/errors/not-renderable-in-dcr.ts';
+import { generatePermutivePayload } from '../lib/permutive.amp.ts';
+import { extractScripts } from '../lib/scripts.amp.ts';
+import { findBySubsection } from '../model/article-sections.ts';
+import { extractNAV } from '../model/extract-nav.ts';
+import { validateAsArticleType } from '../model/validate.ts';
+import { recordTypeAndPlatform } from '../server/lib/logging-store.ts';
+import { getAmpExperimentCache } from './AMPExperimentCache.amp.ts';
+import { renderArticle } from './render.article.amp.tsx';
 
 export const handleAMPArticle: RequestHandler = ({ body }, res, next) => {
 	(async () => {

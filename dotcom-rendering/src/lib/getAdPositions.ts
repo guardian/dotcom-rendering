@@ -1,5 +1,5 @@
-import type { DCRCollectionType } from '../types/front';
-import type { GroupedTrailsBase } from '../types/tagFront';
+import type { DCRCollectionType } from '../types/front.ts';
+import type { GroupedTrailsBase } from '../types/tagFront.ts';
 
 type AdCandidate = Pick<DCRCollectionType, 'collectionType'>;
 

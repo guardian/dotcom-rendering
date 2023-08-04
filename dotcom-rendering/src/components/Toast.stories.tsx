@@ -6,7 +6,7 @@ import {
 	Pillar,
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Toast } from './Toast';
+import { Toast } from './Toast.tsx';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div

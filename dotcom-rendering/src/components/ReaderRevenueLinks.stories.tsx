@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable.tsx';
 
 export default {
 	component: ReaderRevenueLinks,

@@ -5,7 +5,7 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import { blockLink } from '../lib/block-link.amp';
+import { blockLink } from '../lib/block-link.amp.ts';
 import DownArrow from '../static/icons/down-arrow.svg';
 
 const headingStyle = css`

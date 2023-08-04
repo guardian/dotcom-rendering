@@ -5,17 +5,17 @@ import {
 	news,
 	textSans,
 } from '@guardian/source-foundations';
-import { buildAdTargeting } from '../lib/ad-targeting';
-import { decideTheme } from '../lib/decideTheme';
-import { getSharingUrls } from '../lib/sharing-urls';
+import { buildAdTargeting } from '../lib/ad-targeting.ts';
+import { decideTheme } from '../lib/decideTheme.ts';
+import { getSharingUrls } from '../lib/sharing-urls.ts';
 import RefreshIcon from '../static/icons/refresh.svg';
 import type { AMPArticleModel } from '../types/article.amp';
-import type { ConfigType } from '../types/config';
-import { Blocks } from './Blocks.amp';
-import { KeyEvents } from './KeyEvents.amp';
-import { Pagination } from './Pagination.amp';
-import { SubMeta } from './SubMeta.amp';
-import { TopMetaLiveblog } from './TopMetaLiveblog.amp';
+import type { ConfigType } from '../types/config.ts';
+import { Blocks } from './Blocks.amp.tsx';
+import { KeyEvents } from './KeyEvents.amp.tsx';
+import { Pagination } from './Pagination.amp.tsx';
+import { SubMeta } from './SubMeta.amp.tsx';
+import { TopMetaLiveblog } from './TopMetaLiveblog.amp.tsx';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is

@@ -6,7 +6,7 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import { createAuthenticationEventParams } from '../lib/identity-component-event';
+import { createAuthenticationEventParams } from '../lib/identity-component-event.ts';
 
 export const Sidebar = () => {
 	// this next line is necessary cos react has a 'template' object with no 'type' property.

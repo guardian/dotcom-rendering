@@ -12,22 +12,22 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Link, SvgIndent } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CommentType, SignedInUser } from '../../discussionTypes';
-import { pickComment, unPickComment } from '../../lib/api';
-import { createAuthenticationEventParams } from '../../lib/identity-component-event';
-import { palette } from '../../lib/palette';
-import { pillarToString } from '../../lib/pillarToString';
-import { AbuseReportForm } from '../AbuseReportForm/AbuseReportForm';
-import { Avatar } from '../Avatar/Avatar';
+import type { CommentType, SignedInUser } from '../../discussionTypes.ts';
+import { pickComment, unPickComment } from '../../lib/api.tsx';
+import { createAuthenticationEventParams } from '../../lib/identity-component-event.ts';
+import { palette } from '../../lib/palette.ts';
+import { pillarToString } from '../../lib/pillarToString.ts';
+import { AbuseReportForm } from '../AbuseReportForm/AbuseReportForm.tsx';
+import { Avatar } from '../Avatar/Avatar.tsx';
 import {
 	GuardianContributor,
 	GuardianPick,
 	GuardianStaff,
-} from '../Badges/Badges';
-import { Column } from '../Column/Column';
-import { RecommendationCount } from '../RecommendationCount/RecommendationCount';
-import { Row } from '../Row/Row';
-import { Timestamp } from '../Timestamp/Timestamp';
+} from '../Badges/Badges.tsx';
+import { Column } from '../Column/Column.tsx';
+import { RecommendationCount } from '../RecommendationCount/RecommendationCount.tsx';
+import { Row } from '../Row/Row.tsx';
+import { Timestamp } from '../Timestamp/Timestamp.tsx';
 
 type Props = {
 	user?: SignedInUser;

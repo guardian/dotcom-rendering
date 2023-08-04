@@ -1,5 +1,5 @@
 import { log } from '@guardian/libs';
-import { record } from './ophan/ophan';
+import { record } from './ophan/ophan.ts';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);

@@ -5,13 +5,13 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import type { EditionId } from '../../../lib/edition';
-import { getZIndex } from '../../../lib/getZIndex';
-import type { NavType } from '../../../model/extract-nav';
-import { navInputCheckboxId } from '../config';
-import { Columns } from './Columns';
-import { ShowMoreMenu } from './ShowMoreMenu';
-import { VeggieBurgerMenu } from './VeggieBurgerMenu';
+import type { EditionId } from '../../../lib/edition.ts';
+import { getZIndex } from '../../../lib/getZIndex.ts';
+import type { NavType } from '../../../model/extract-nav.ts';
+import { navInputCheckboxId } from '../config.ts';
+import { Columns } from './Columns.tsx';
+import { ShowMoreMenu } from './ShowMoreMenu.tsx';
+import { VeggieBurgerMenu } from './VeggieBurgerMenu.tsx';
 
 const wrapperMainMenuStyles = css`
 	background-color: rgba(0, 0, 0, 0.5);

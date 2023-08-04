@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { brand, neutral, space, textSans } from '@guardian/source-foundations';
-import { editionList } from '../lib/edition';
-import { Logo } from './Logo';
+import { editionList } from '../lib/edition.ts';
+import { Logo } from './Logo.tsx';
 
 export const Logos = () => (
 	<ul

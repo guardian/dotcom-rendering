@@ -5,7 +5,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import type { NavType } from '../model/extract-nav';
+import type { NavType } from '../model/extract-nav.ts';
 import ArrowRight from '../static/icons/arrow-right.svg';
 
 const supportStyles = css`

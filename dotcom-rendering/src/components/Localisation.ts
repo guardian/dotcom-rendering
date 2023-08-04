@@ -1,4 +1,4 @@
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../lib/edition.ts';
 
 type LocalisedTitles = {
 	[edition in EditionId]?: {

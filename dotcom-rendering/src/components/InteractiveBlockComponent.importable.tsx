@@ -3,14 +3,14 @@ import { ArticleSpecial } from '@guardian/libs';
 import { body, space, textSans } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
-import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
-import { useOnce } from '../lib/useOnce';
-import type { RoleType } from '../types/content';
-import type { Palette } from '../types/palette';
-import { Caption } from './Caption';
-import { defaultRoleStyles } from './Figure';
-import { Placeholder } from './Placeholder';
+import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { useOnce } from '../lib/useOnce.ts';
+import type { RoleType } from '../types/content.ts';
+import type { Palette } from '../types/palette.ts';
+import { Caption } from './Caption.tsx';
+import { defaultRoleStyles } from './Figure.tsx';
+import { Placeholder } from './Placeholder.tsx';
 
 type Props = {
 	url?: string;

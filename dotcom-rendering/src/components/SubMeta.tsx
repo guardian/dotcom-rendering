@@ -8,12 +8,12 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
-import type { BaseLinkType } from '../model/extract-nav';
-import type { DCRBadgeType } from '../types/badge';
-import type { Palette } from '../types/palette';
-import { Badge } from './Badge';
-import { ShareIcons } from './ShareIcons';
+import { decidePalette } from '../lib/decidePalette.ts';
+import type { BaseLinkType } from '../model/extract-nav.ts';
+import type { DCRBadgeType } from '../types/badge.ts';
+import type { Palette } from '../types/palette.ts';
+import { Badge } from './Badge.tsx';
+import { ShareIcons } from './ShareIcons.tsx';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};

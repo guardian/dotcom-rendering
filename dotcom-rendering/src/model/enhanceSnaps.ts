@@ -1,4 +1,4 @@
-import type { DCRSnapType, FESnapType } from '../types/front';
+import type { DCRSnapType, FESnapType } from '../types/front.ts';
 
 /**
  *

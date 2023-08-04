@@ -1,8 +1,8 @@
-import type { EditionId } from '../lib/edition';
-import type { Tuple } from '../lib/tuple';
-import type { FooterType } from './footer';
-import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front';
-import type { FETagType } from './tag';
+import type { EditionId } from '../lib/edition.ts';
+import type { Tuple } from '../lib/tuple.ts';
+import type { FooterType } from './footer.ts';
+import type { DCRFrontCard, FEFrontCard, FEFrontConfigType } from './front.ts';
+import type { FETagType } from './tag.ts';
 
 export interface FETagFrontType {
 	contents: FEFrontCard[];

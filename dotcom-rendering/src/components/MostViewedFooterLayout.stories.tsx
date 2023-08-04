@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { trails } from '../../fixtures/manual/trails';
-import { doStorybookHydration } from '../client/islands/doStorybookHydration';
-import { MostViewedFooter } from './MostViewedFooter.importable';
-import { MostViewedFooterLayout } from './MostViewedFooterLayout';
-import { Section } from './Section';
+import { trails } from '../../fixtures/manual/trails.ts';
+import { doStorybookHydration } from '../client/islands/doStorybookHydration.js';
+import { MostViewedFooter } from './MostViewedFooter.importable.tsx';
+import { MostViewedFooterLayout } from './MostViewedFooterLayout.tsx';
+import { Section } from './Section.tsx';
 
 const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {

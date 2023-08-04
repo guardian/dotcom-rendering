@@ -2,14 +2,14 @@ import type {
 	FEElement,
 	ImageBlockElement,
 	TextBlockElement,
-} from '../types/content';
+} from '../types/content.ts';
 import {
 	AD_LIMIT,
 	findAdSlots,
 	findBlockAdSlots,
 	getElementLength,
 	SMALL_PARA_CHARS,
-} from './find-adslots.amp';
+} from './find-adslots.amp.ts';
 
 const getTextBlockElement = (length: number): TextBlockElement => {
 	return {

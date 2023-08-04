@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { AdSlot, labelStyles } from './AdSlot';
-import { DiscussionContainer } from './DiscussionContainer.importable';
-import { DiscussionMeta } from './DiscussionMeta.importable';
-import { Flex } from './Flex';
-import { Island } from './Island';
-import { RightColumn } from './RightColumn';
-import { Section } from './Section';
+import { AdSlot, labelStyles } from './AdSlot.tsx';
+import { DiscussionContainer } from './DiscussionContainer.importable.tsx';
+import { DiscussionMeta } from './DiscussionMeta.importable.tsx';
+import { Flex } from './Flex.tsx';
+import { Island } from './Island.tsx';
+import { RightColumn } from './RightColumn.tsx';
+import { Section } from './Section.tsx';
 
 type Props = {
 	format: ArticleFormat;

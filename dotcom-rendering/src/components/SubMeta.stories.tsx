@@ -5,8 +5,8 @@ import {
 	ArticleSpecial,
 	Pillar,
 } from '@guardian/libs';
-import { getAllThemes, getThemeNameAsString } from '../lib/format';
-import { SubMeta } from './SubMeta';
+import { getAllThemes, getThemeNameAsString } from '../lib/format.ts';
+import { SubMeta } from './SubMeta.tsx';
 
 export default {
 	component: SubMeta,

@@ -1,6 +1,6 @@
 import { log } from '@guardian/libs';
-import { isServer } from '../lib/isServer';
-import { setAdTargeting } from '../lib/useAdTargeting';
+import { isServer } from '../lib/isServer.ts';
+import { setAdTargeting } from '../lib/useAdTargeting.ts';
 
 type Props = {
 	adTargeting: AdTargeting;

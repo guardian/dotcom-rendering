@@ -1,8 +1,8 @@
-import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { images } from '../../fixtures/generated/images';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceNumberedLists } from './enhance-numbered-lists';
+import { NumberedList } from '../../fixtures/generated/articles/NumberedList.ts';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard.ts';
+import { images } from '../../fixtures/generated/images.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceNumberedLists } from './enhance-numbered-lists.ts';
 
 describe('Enhance Numbered Lists', () => {
 	it('does not enhance articles if they are not numbered lists', () => {

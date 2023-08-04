@@ -11,8 +11,8 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { ChangeEventHandler } from 'react';
-import { InlineSkipToWrapper } from './InlineSkipToWrapper';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { InlineSkipToWrapper } from './InlineSkipToWrapper.tsx';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage.tsx';
 
 interface FormProps {
 	status: 'NotSent' | 'Loading' | 'Success' | 'Failed';

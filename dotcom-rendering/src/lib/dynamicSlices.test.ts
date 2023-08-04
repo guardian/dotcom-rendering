@@ -1,4 +1,4 @@
-import { shouldPadWrappableRows } from './dynamicSlices';
+import { shouldPadWrappableRows } from './dynamicSlices.tsx';
 
 describe('shouldPadWrappableRows', () => {
 	describe('Three columns', () => {

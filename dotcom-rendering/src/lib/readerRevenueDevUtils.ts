@@ -1,13 +1,13 @@
 import { getCookie, removeCookie, setCookie, storage } from '@guardian/libs';
-import { setAlreadyVisited } from './alreadyVisited';
+import { setAlreadyVisited } from './alreadyVisited.ts';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 	RECURRING_CONTRIBUTOR_COOKIE,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
-} from './contributions';
-import { getLocaleCode } from './getCountryCode';
+} from './contributions.ts';
+import { getLocaleCode } from './getCountryCode.ts';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,

@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { Doughnut } from './Doughnut';
+import { Doughnut } from './Doughnut.tsx';
 
 const one = {
 	value: 29,

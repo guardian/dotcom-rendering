@@ -7,8 +7,8 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import useSWRImmutable from 'swr/immutable';
-import { buildBrazeMessaging } from './braze/buildBrazeMessaging';
-import { useAuthStatus } from './useAuthStatus';
+import { buildBrazeMessaging } from './braze/buildBrazeMessaging.ts';
+import { useAuthStatus } from './useAuthStatus.ts';
 
 /**
  * Returns brazeMessaging as BrazeMessagesInterface and BrazeCardsInterface

@@ -1,5 +1,5 @@
-import type { ConfigType } from '../types/config';
-import { generatePermutivePayload } from './permutive.amp';
+import type { ConfigType } from '../types/config.ts';
+import { generatePermutivePayload } from './permutive.amp.ts';
 
 describe('generatePermutivePayload', () => {
 	test('generates the right payload given a complete config', () => {

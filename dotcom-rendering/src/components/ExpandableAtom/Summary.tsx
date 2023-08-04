@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { decidePalette } from '../../lib/decidePalette';
+import { decidePalette } from '../../lib/decidePalette.ts';
 
 /// SUMMARY ELEMENT
 

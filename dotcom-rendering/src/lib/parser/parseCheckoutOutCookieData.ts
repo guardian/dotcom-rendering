@@ -1,6 +1,6 @@
-import type { CheckoutCompleteCookieData } from '../../components/SignInGate/types';
-import { isCheckoutCompleteCookieData } from '../../components/SignInGate/types';
-import { safeJsonParse } from './jsonParser';
+import type { CheckoutCompleteCookieData } from '../../components/SignInGate/types.ts';
+import { isCheckoutCompleteCookieData } from '../../components/SignInGate/types.ts';
+import { safeJsonParse } from './jsonParser.ts';
 
 export const parseCheckoutCompleteCookieData = (
 	checkoutCompleteStr: string,

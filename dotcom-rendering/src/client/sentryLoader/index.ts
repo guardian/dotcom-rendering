@@ -2,7 +2,7 @@ import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles.js';
-import { loadSentry } from './loadSentry';
+import { loadSentry } from './loadSentry.ts';
 
 type IsSentryEnabled = {
 	enableSentryReporting: boolean;

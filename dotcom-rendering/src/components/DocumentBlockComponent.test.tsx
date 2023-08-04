@@ -1,4 +1,4 @@
-import { getDocumentCloudAssetUrl } from './DocumentBlockComponent.importable';
+import { getDocumentCloudAssetUrl } from './DocumentBlockComponent.importable.tsx';
 
 describe('DocumentBlockComponent.getDocumentCloudAssetUrl', () => {
 	it('convert the document cloud embed url to the raw asset url', () => {

@@ -1,5 +1,5 @@
-import { CodeBlockComponent } from './CodeBlockComponent';
-import { Section } from './Section';
+import { CodeBlockComponent } from './CodeBlockComponent.tsx';
+import { Section } from './Section.tsx';
 
 export default {
 	component: CodeBlockComponent,

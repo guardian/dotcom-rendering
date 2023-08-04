@@ -1,4 +1,4 @@
-import { escapeData, unescapeData } from './escapeData';
+import { escapeData, unescapeData } from './escapeData.tsx';
 
 describe('Escaping html', () => {
 	it('should escape script tags', () => {

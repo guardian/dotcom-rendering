@@ -1,8 +1,8 @@
 import { startPerformanceMeasure } from '@guardian/libs';
 import React, { Suspense } from 'react';
-import { Lazy } from '../../Lazy';
-import { canShowSignInGate } from '../displayRule';
-import type { SignInGateComponent } from '../types';
+import { Lazy } from '../../Lazy.tsx';
+import { canShowSignInGate } from '../displayRule.ts';
+import type { SignInGateComponent } from '../types.ts';
 
 const SignInGateFakeSocial = React.lazy(() => {
 	const { endPerformanceMeasure } = startPerformanceMeasure(
@@ -11,7 +11,7 @@ const SignInGateFakeSocial = React.lazy(() => {
 	);
 
 	return import(
-		/* webpackChunkName: "SignInGateFakeSocial" */ '../gateDesigns/SignInGateFakeSocial'
+		/* webpackChunkName: "SignInGateFakeSocial" */ '../gateDesigns/SignInGateFakeSocial.tsx'
 	).then((module) => {
 		endPerformanceMeasure();
 		return { default: module.SignInGateFakeSocial };

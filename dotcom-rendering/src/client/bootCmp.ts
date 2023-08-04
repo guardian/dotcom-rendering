@@ -2,9 +2,9 @@ import { cmp, onConsentChange } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { OphanAction, OphanComponentType } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { injectPrivacySettingsLinkWhenReady } from '../lib/injectPrivacySettingsLink';
-import { submitComponentEvent } from './ophan/ophan';
+import { getLocaleCode } from '../lib/getCountryCode.ts';
+import { injectPrivacySettingsLinkWhenReady } from '../lib/injectPrivacySettingsLink.ts';
+import { submitComponentEvent } from './ophan/ophan.ts';
 
 export const bootCmp = async (): Promise<void> => {
 	/**

@@ -1,6 +1,6 @@
 import { Pillar } from '@guardian/libs';
-import type { EditionId } from '../lib/edition';
-import type { FEFrontCard, TreatType } from '../types/front';
+import type { EditionId } from '../lib/edition.ts';
+import type { FEFrontCard, TreatType } from '../types/front.ts';
 
 const SOCCER_TREAT: TreatType = {
 	links: [

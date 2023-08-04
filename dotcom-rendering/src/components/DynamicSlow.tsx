@@ -2,7 +2,7 @@ import {
 	Card50Media50,
 	CardDefaultMedia,
 	CardDefaultMediaMobile,
-} from '../lib/cardWrappers';
+} from '../lib/cardWrappers.tsx';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -12,14 +12,14 @@ import {
 	ColumnOfCards50_Card25_Card25,
 	filterGroupedTrails,
 	shouldPadWrappableRows,
-} from '../lib/dynamicSlices';
+} from '../lib/dynamicSlices.tsx';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRGroupedTrails,
-} from '../types/front';
-import { LI } from './Card/components/LI';
-import { UL } from './Card/components/UL';
+} from '../types/front.ts';
+import { LI } from './Card/components/LI.tsx';
+import { UL } from './Card/components/UL.tsx';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;

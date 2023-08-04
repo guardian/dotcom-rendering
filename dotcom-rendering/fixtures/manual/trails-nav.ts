@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import type { TrailType } from '../../src/types/trails';
+import type { TrailType } from '../../src/types/trails.ts';
 
 export const trails: [
 	TrailType,

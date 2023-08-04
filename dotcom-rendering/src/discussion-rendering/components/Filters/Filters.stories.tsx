@@ -1,7 +1,7 @@
 import { Pillar } from '@guardian/libs';
 import { useState } from 'react';
-import type { FilterOptions } from '../../discussionTypes';
-import { Filters } from './Filters';
+import type { FilterOptions } from '../../discussionTypes.ts';
+import { Filters } from './Filters.tsx';
 
 export default { title: 'Discussion/Filters' };
 

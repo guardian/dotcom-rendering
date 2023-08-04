@@ -1,16 +1,16 @@
 import { joinUrl } from '@guardian/libs';
-import { abTestTest } from '../experiments/tests/ab-test-test';
-import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
-import type { EditionId } from '../lib/edition';
-import { useAB } from '../lib/useAB';
-import { useApi } from '../lib/useApi';
+import { abTestTest } from '../experiments/tests/ab-test-test.ts';
+import { decidePalette } from '../lib/decidePalette.ts';
+import { decideTrail } from '../lib/decideTrail.ts';
+import type { EditionId } from '../lib/edition.ts';
+import { useAB } from '../lib/useAB.ts';
+import { useApi } from '../lib/useApi.tsx';
 import type {
 	FETrailTabType,
 	FETrailType,
 	TrailTabType,
-} from '../types/trails';
-import { MostViewedFooter } from './MostViewedFooter.importable';
+} from '../types/trails.ts';
+import { MostViewedFooter } from './MostViewedFooter.importable.tsx';
 
 interface Props {
 	sectionId?: string;

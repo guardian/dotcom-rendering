@@ -1,6 +1,6 @@
-import { Explainer as ExampleArticle } from '../../fixtures/generated/articles/Explainer';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceTableOfContents } from './enhanceTableOfContents';
+import { Explainer as ExampleArticle } from '../../fixtures/generated/articles/Explainer.ts';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data.ts';
+import { enhanceTableOfContents } from './enhanceTableOfContents.ts';
 
 describe('Enhance Table of Contents', () => {
 	it('does not generate a toc where an existing table of contents exists', () => {

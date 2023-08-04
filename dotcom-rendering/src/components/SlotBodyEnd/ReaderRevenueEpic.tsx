@@ -10,7 +10,7 @@ import type {
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../../client/ophan/ophan';
+import { submitComponentEvent } from '../../client/ophan/ophan.ts';
 import {
 	getLastOneOffContributionTimestamp,
 	hasCmpConsentForArticleCount,
@@ -20,10 +20,10 @@ import {
 	lazyFetchEmailWithTimeout,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
-} from '../../lib/contributions';
+} from '../../lib/contributions.ts';
 import type { CanShowResult } from '../../lib/messagePicker';
-import { setAutomat } from '../../lib/setAutomat';
-import type { TagType } from '../../types/tag';
+import { setAutomat } from '../../lib/setAutomat.ts';
+import type { TagType } from '../../types/tag.ts';
 
 export type EpicConfig = {
 	module: ModuleData;

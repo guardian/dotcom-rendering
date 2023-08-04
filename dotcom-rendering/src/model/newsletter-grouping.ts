@@ -1,4 +1,4 @@
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../lib/edition.ts';
 
 export type StaticGroups = {
 	title: string;

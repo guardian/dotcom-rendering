@@ -4,7 +4,7 @@ import {
 	LEGACY_SCRIPT,
 	MODERN_SCRIPT,
 	VARIANT_SCRIPT,
-} from './assets';
+} from './assets.ts';
 
 describe('decideAssetOrigin for stage', () => {
 	it('PROD', () => {

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSans } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import { ImagePositionType } from './Card/components/ImageWrapper';
+import { ImagePositionType } from './Card/components/ImageWrapper.tsx';
 
 const durationStyles = css`
 	position: absolute;

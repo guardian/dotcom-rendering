@@ -2,8 +2,8 @@ import '@testing-library/jest-dom/extend-expect';
 import { Pillar } from '@guardian/libs';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { mockRESTCalls } from '../../../lib/mockRESTCalls';
-import { AbuseReportForm } from './AbuseReportForm';
+import { mockRESTCalls } from '../../../lib/mockRESTCalls.ts';
+import { AbuseReportForm } from './AbuseReportForm.tsx';
 
 const fetchMock = mockRESTCalls();
 

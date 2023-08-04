@@ -1,8 +1,8 @@
-import type { Branding } from '../types/branding';
+import type { Branding } from '../types/branding.ts';
 import type {
 	CommercialProperties,
 	EditionCommercialProperties,
-} from '../types/commercial';
+} from '../types/commercial.ts';
 
 /**
  * Sponsorship logo should never be wider than 140px.

@@ -1,5 +1,5 @@
-import type { DCRFrontCard } from '../types/front';
-import type { GroupedTrails } from '../types/tagFront';
+import type { DCRFrontCard } from '../types/front.ts';
+import type { GroupedTrails } from '../types/tagFront.ts';
 
 /**
  * The number of trails per day required (on average) for trails to be

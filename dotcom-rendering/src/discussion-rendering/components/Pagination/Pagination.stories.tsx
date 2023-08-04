@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import type { FilterOptions } from '../../discussionTypes';
-import { Pagination } from './Pagination';
+import type { FilterOptions } from '../../discussionTypes.ts';
+import { Pagination } from './Pagination.tsx';
 
 export default { component: Pagination, title: 'Discussion/Pagination' };
 

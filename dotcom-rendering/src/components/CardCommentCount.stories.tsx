@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { CardCommentCount } from './CardCommentCount';
+import { CardCommentCount } from './CardCommentCount.tsx';
 
 export default {
 	component: CardCommentCount,

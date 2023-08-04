@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import type { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
+import type { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils.ts';
 
 type Props = {
 	shouldHideReaderRevenue: boolean;
@@ -12,7 +12,7 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
 			(asExistingSupporter: boolean) =>
 				import(
-					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils'
+					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils.ts'
 				)
 					.then((utils) =>
 						utils[key](

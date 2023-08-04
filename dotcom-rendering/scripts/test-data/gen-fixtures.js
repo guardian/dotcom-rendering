@@ -162,7 +162,7 @@ const requests = articles.map((article) => {
 			// Write the new fixture data
 			const contents = `${HEADER}
 
-			import type { FEArticleType } from '../../../src/types/frontend';
+			import type { FEArticleType } from '../../../src/types/frontend.ts';
 
 			export const ${article.name}: FEArticleType = ${JSON.stringify(json, null, 4)}`;
 			return fs.writeFile(
@@ -198,7 +198,7 @@ requests.push(
 
 			// Write the new fixture data
 			const contents = `${HEADER}
-			import type { ImageBlockElement } from '../../src/types/content';
+			import type { ImageBlockElement } from '../../src/types/content.ts';
 
 			export const images: ${type} = ${JSON.stringify(images, null, 4)}`;
 			return fs.writeFile(

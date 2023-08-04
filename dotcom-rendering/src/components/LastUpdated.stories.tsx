@@ -1,4 +1,4 @@
-import { LastUpdated } from './LastUpdated';
+import { LastUpdated } from './LastUpdated.tsx';
 
 export default {
 	component: LastUpdated,

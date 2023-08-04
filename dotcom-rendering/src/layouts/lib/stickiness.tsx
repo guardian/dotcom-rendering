@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import type { ZIndex } from '../../lib/getZIndex';
-import { getZIndex, getZIndexImportant } from '../../lib/getZIndex';
+import type { ZIndex } from '../../lib/getZIndex.ts';
+import { getZIndex, getZIndexImportant } from '../../lib/getZIndex.ts';
 
 type Props = {
 	children?: React.ReactNode;

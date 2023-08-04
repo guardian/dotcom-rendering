@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
-import { decidePalette } from '../../../lib/decidePalette';
-import type { DCRContainerPalette } from '../../../types/front';
-import type { ImagePositionType, ImageSizeType } from './ImageWrapper';
+import { decidePalette } from '../../../lib/decidePalette.ts';
+import type { DCRContainerPalette } from '../../../types/front.ts';
+import type { ImagePositionType, ImageSizeType } from './ImageWrapper.tsx';
 
 type Props = {
 	children: string | React.ReactNode;

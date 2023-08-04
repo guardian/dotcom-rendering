@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { body, breakpoints, from, space } from '@guardian/source-foundations';
-import { Accordion } from './Accordion';
+import { Accordion } from './Accordion.tsx';
 
 const textStyle = css`
 	${body.medium({ lineHeight: 'loose' })};

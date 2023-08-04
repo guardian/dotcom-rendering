@@ -5,7 +5,7 @@ import {
 	neutralBorder,
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
-} from '../lib/pillars';
+} from '../lib/pillars.ts';
 import EmailIcon from '../static/icons/email.svg';
 import FacebookIcon from '../static/icons/facebook.svg';
 import LinkedInIcon from '../static/icons/linked-in.svg';

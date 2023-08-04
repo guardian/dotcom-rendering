@@ -1,4 +1,4 @@
-import { interactiveLegacyFigureClasses } from './interactiveLegacyStyling';
+import { interactiveLegacyFigureClasses } from './interactiveLegacyStyling.ts';
 
 describe('interactiveLegacyStyling', () => {
 	it('should add correct legacy classes for immersive interactive block element', () => {
