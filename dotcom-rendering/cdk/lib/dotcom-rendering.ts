@@ -27,7 +27,6 @@ export class DotcomRendering extends GuStack {
 				description:
 					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
-				allowAllOutbound: false,
 				ingresses: [
 					{
 						range: Peer.ipv4(vpc.vpcCidrBlock),
@@ -43,9 +42,9 @@ export class DotcomRendering extends GuStack {
 			},
 		);
 		this.overrideLogicalId(lbSecurityGroup, {
-			logicalId: "InternalLoadBalancerSecurityGroup",
-			reason: "Retaining a stateful resource previously defined in YAML"
-		  });
+			logicalId: 'InternalLoadBalancerSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 
 		const yamlTemplateFilePath = join(
 			__dirname,

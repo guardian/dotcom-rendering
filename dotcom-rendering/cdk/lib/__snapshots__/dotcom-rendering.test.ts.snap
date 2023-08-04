@@ -502,11 +502,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "GroupDescription": "Allows HTTP and HTTPS inbound connections from within the VPC",
         "SecurityGroupEgress": [
           {
-            "CidrIp": "255.255.255.255/32",
-            "Description": "Disallow all traffic",
-            "FromPort": 252,
-            "IpProtocol": "icmp",
-            "ToPort": 86,
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
           },
         ],
         "SecurityGroupIngress": [
