@@ -59,7 +59,7 @@ type Props = {
 	edition: EditionId;
 };
 
-export const WeatherData = ({ ajaxUrl, edition }: Props) => {
+export const WeatherWrapper = ({ ajaxUrl, edition }: Props) => {
 	const { data, error } = useApi<WeatherApiData>(`${ajaxUrl}/weather.json`);
 
 	if (error) {
