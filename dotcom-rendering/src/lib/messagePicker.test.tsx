@@ -1,11 +1,14 @@
 import { setImmediate } from 'node:timers';
-import { record } from '../client/ophan/ophan';
+import { jest } from '@jest/globals';
+import type { OphanRecordFunction } from '../client/ophan/ophan';
 import type { CanShowResult, SlotConfig } from './messagePicker';
-import { pickMessage } from './messagePicker';
 
-jest.mock('../client/ophan/ophan', () => ({
-	record: jest.fn(),
+jest.unstable_mockModule('../../src/client/ophan/ophan', () => ({
+	record: jest.fn<OphanRecordFunction>(),
 }));
+
+const { record } = await import('../client/ophan/ophan');
+const { pickMessage } = await import('./messagePicker');
 
 jest.useFakeTimers();
 

@@ -5,9 +5,9 @@
 // 1. That the manifest files are output
 // 2. That the manifest files contain at least the entry points under the expected property
 
-const find = require('find');
-const loadJsonFile = require('load-json-file');
-const { BUILD_VARIANT } = require('../webpack/bundles');
+import find from 'find';
+import loadJsonFile from 'load-json-file';
+import { BUILD_VARIANT } from '../webpack/bundles.js';
 
 const errorAndThrow = (error) => {
 	console.error(error);

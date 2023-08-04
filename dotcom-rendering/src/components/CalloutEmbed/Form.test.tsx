@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { fireEvent, render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import type {
@@ -138,8 +139,8 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[textField.id]: 'textInput',
 		});
 	});
@@ -167,8 +168,8 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[textAreaField.id]: 'textAreaInput',
 		});
 	});
@@ -199,8 +200,8 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[radioField.id]: 'radio 2',
 		});
 	});
@@ -231,8 +232,8 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
 	});
@@ -285,8 +286,8 @@ describe('Callout form', () => {
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[selectField.id]: selectText,
 		});
 	});
@@ -325,8 +326,8 @@ describe('Callout form', () => {
 		) as HTMLButtonElement;
 		fireEvent.click(submitButton);
 		expect(mockSubmit.mock.calls.length).toBe(1);
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		expect(mockSubmit.mock.calls[0][0]).toMatchObject({
+
+		expect(mockSubmit.mock.calls[0]?.[0]).toMatchObject({
 			[checkboxField.id]: ['checkbox 1', 'checkbox 2'],
 			[radioField.id]: 'radio 1',
 		});

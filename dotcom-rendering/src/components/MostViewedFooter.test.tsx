@@ -1,14 +1,19 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
+import { jest } from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
-import { useApi as useApi_ } from '../lib/useApi';
 import { responseWithTwoTabs } from './MostViewed.mocks';
-import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
-const useApi: { [key: string]: any } = useApi_;
-
-jest.mock('../lib/useApi', () => ({
-	useApi: jest.fn(),
+jest.unstable_mockModule('../../src/lib/useApi', () => ({
+	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
 }));
+
+const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
+	typeof import('../lib/useApi')
+>;
+
+const { MostViewedFooterData } = await import(
+	'./MostViewedFooterData.importable'
+);
 
 const VISIBLE = 'display: block';
 const HIDDEN = 'display: none';
@@ -19,7 +24,7 @@ describe('MostViewedFooterData', () => {
 	});
 
 	it('should call the api and render the response as expected', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByText, getAllByText, getByTestId } = render(
 			<MostViewedFooterData
@@ -56,7 +61,7 @@ describe('MostViewedFooterData', () => {
 	});
 
 	it('should change the items shown when the associated tab is clicked', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { getByTestId, getByText } = render(
 			<MostViewedFooterData
@@ -113,6 +118,7 @@ describe('MostViewedFooterData', () => {
 					],
 				},
 			],
+			loading: false,
 		});
 
 		const { getByText } = render(
@@ -155,6 +161,7 @@ describe('MostViewedFooterData', () => {
 					],
 				},
 			],
+			loading: false,
 		});
 
 		const { queryByText } = render(
@@ -174,7 +181,7 @@ describe('MostViewedFooterData', () => {
 	});
 
 	it('should render the Ophan data link names as expected', async () => {
-		useApi.mockReturnValue({ data: responseWithTwoTabs });
+		useApi.mockReturnValue({ data: responseWithTwoTabs, loading: false });
 
 		const { asFragment } = render(
 			<MostViewedFooterData

@@ -2,7 +2,7 @@ import { ArticleDesign, isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
+} from '../../scripts/webpack/bundles.js';
 import { ArticlePage } from '../components/ArticlePage';
 import { isAmpSupported } from '../components/Elements.amp';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
