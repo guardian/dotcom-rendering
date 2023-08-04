@@ -13,6 +13,7 @@ describe('The DotcomRendering stack', () => {
 		const stack = new DotcomRendering(app, 'DotcomRendering', {
 			stack: 'frontend',
 			stage: 'TEST',
+			app: 'rendering',
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();
