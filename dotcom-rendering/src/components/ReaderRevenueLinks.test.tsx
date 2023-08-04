@@ -1,20 +1,27 @@
+import { jest } from '@jest/globals';
 import { render, waitFor } from '@testing-library/react';
-import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import type { EditionId } from '../lib/edition';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
-const shouldHideSupportMessaging: {
-	[key: string]: any;
-} = shouldHideSupportMessaging_;
-
-jest.mock('../lib/contributions', () => ({
-	shouldHideSupportMessaging: jest.fn(() => true),
-}));
 jest.mock('@guardian/libs', () => ({
+	log: jest.fn(),
+	getCookie: jest.fn(),
 	getLocale: async () => {
 		return 'GB';
 	},
 }));
+
+jest.unstable_mockModule('../../src/lib/contributions', async () => ({
+	shouldHideSupportMessaging: jest.fn<() => boolean>(() => true),
+	MODULES_VERSION: 'v3',
+	getLastOneOffContributionDate: jest.fn(() => undefined),
+	getPurchaseInfo: jest.fn(),
+}));
+
+const { shouldHideSupportMessaging } = (await import(
+	'../lib/contributions'
+)) as jest.Mocked<typeof import('../lib/contributions')>;
+
+const { ReaderRevenueLinks } = await import('./ReaderRevenueLinks.importable');
 
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';

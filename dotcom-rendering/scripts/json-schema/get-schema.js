@@ -1,7 +1,8 @@
-const path = require('node:path');
-const TJS = require('typescript-json-schema');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import * as TJS from 'typescript-json-schema';
 
-const root = path.resolve(__dirname, '..', '..');
+const root = path.resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 
 const program = TJS.getProgramFromFiles(
 	[
@@ -57,7 +58,7 @@ const getBlockSchema = () => {
 	);
 };
 
-module.exports = {
+export {
 	getArticleSchema,
 	getFrontSchema,
 	getTagFrontSchema,

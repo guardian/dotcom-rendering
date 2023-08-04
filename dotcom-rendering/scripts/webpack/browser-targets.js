@@ -3,9 +3,8 @@
  * 1) derive browser targets from @guardian/browserslist-config
  * 2) upgrade any unsupported browsers as described below.
  */
-const getTargetsFromBrowsersList =
-	require('@babel/helper-compilation-targets').default;
-const browserslist = require('browserslist');
+import getTargetsFromBrowsersList from '@babel/helper-compilation-targets';
+import browserslist from 'browserslist';
 
 /**
  * Browserslist tries to resolve the stats file relative to the working directory.
@@ -17,7 +16,8 @@ const browsers = browserslist('extends @guardian/browserslist-config');
 /**
  * Transform a list of browsers to targets
  */
-const rawTargets = getTargetsFromBrowsersList({ browsers });
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- it works
+const rawTargets = getTargetsFromBrowsersList.default({ browsers });
 
 /**
  * The current browserslist query via @guardian/browserslist-config is:
@@ -84,8 +84,4 @@ const upgradeTargets = (targets) => {
 
 const getBrowserTargets = () => upgradeTargets(rawTargets);
 
-module.exports = {
-	getBrowserTargets,
-	rawTargets,
-	upgradeTargets,
-};
+export { getBrowserTargets, rawTargets, upgradeTargets };

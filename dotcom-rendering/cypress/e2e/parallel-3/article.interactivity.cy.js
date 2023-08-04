@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { mockApi } from '../../lib/mocks';
-import { disableCMP } from '../../lib/disableCMP';
+import { mockApi } from '../../lib/mocks.js';
+import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const READER_REVENUE_TITLE_TEXT = 'Support the';

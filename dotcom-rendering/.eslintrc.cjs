@@ -179,10 +179,15 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['**/**.js'],
+			files: ['**/**.cjs'],
 			rules: {
 				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+		{
+			files: ['**/**.js', '**/**.cjs'],
+			rules: {
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},
@@ -227,6 +232,15 @@ module.exports = {
 						},
 						extendDefaults: true,
 					},
+				],
+			},
+		},
+		{
+			files: ['**/**.test.ts', '**/**.test.tsx'],
+			rules: {
+				'@typescript-eslint/consistent-type-imports': [
+					'warn',
+					{ prefer: 'type-imports', disallowTypeAnnotations: false },
 				],
 			},
 		},

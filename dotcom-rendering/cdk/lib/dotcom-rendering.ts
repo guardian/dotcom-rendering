@@ -1,10 +1,13 @@
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import type { App } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 interface DCRProps extends GuStackProps {
 	app: string;

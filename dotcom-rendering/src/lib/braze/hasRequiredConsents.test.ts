@@ -1,16 +1,22 @@
-import { hasRequiredConsents } from './hasRequiredConsents';
+import { jest } from '@jest/globals';
 
 const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
 let mockOnConsentChangeResult: any;
-jest.mock('@guardian/consent-management-platform', () => ({
-	onConsentChange: (callback: any) => {
-		callback(mockOnConsentChangeResult);
-	},
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
-		.getConsentFor,
-}));
+jest.mock('@guardian/consent-management-platform', () => {
+	const { getConsentFor } = jest.requireActual<
+		typeof import('@guardian/consent-management-platform')
+	>('@guardian/consent-management-platform');
+
+	return {
+		onConsentChange: (callback: any) => {
+			callback(mockOnConsentChangeResult);
+		},
+		getConsentFor,
+	};
+});
+
+const { hasRequiredConsents } = await import('./hasRequiredConsents');
 
 afterEach(() => {
 	mockOnConsentChangeResult = undefined;

@@ -1,7 +1,7 @@
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
+} from '../../scripts/webpack/bundles.js';
 import { AllEditorialNewslettersPage } from '../components/AllEditorialNewslettersPage';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';

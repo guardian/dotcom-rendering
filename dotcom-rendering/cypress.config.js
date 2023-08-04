@@ -1,11 +1,13 @@
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import { defineConfig } from 'cypress';
 import { babelExclude } from './scripts/webpack/webpack.config.client.js';
 
 // https://docs.cypress.io/guides/references/configuration
 
-module.exports = defineConfig({
+// eslint-disable-next-line import/no-default-export -- it’s what Cypress wants
+export default defineConfig({
 	viewportWidth: 1500,
 	viewportHeight: 860,
 	video: false,
@@ -42,8 +44,8 @@ module.exports = defineConfig({
 			// Adding this here so that we can import the fixture in the sign-in-gate.cy.js file
 			rules.push({
 				test: path.resolve(
-					__dirname,
-					`./fixtures/generated/articles/Standard.ts`,
+					path.dirname(fileURLToPath(import.meta.url)),
+					`fixtures/generated/articles/Standard.ts`,
 				),
 				exclude: ['/node_modules/'],
 				loader: 'ts-loader',

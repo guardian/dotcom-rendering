@@ -1,11 +1,19 @@
 import { setImmediate } from 'node:timers';
-import { record } from '../client/ophan/ophan';
+import { jest } from '@jest/globals';
+import type { OphanRecordFunction } from '../client/ophan/ophan';
 import type { CanShowResult, SlotConfig } from './messagePicker';
 import { pickMessage } from './messagePicker';
 
-jest.mock('../client/ophan/ophan', () => ({
-	record: jest.fn(),
-}));
+const record = jest.fn<OphanRecordFunction>();
+
+beforeAll(() => {
+	record.mockReset();
+	if (window.guardian.ophan) {
+		window.guardian.ophan.record = record;
+	} else {
+		throw new Error('Ophan not on window object. Impossible to test');
+	}
+});
 
 jest.useFakeTimers();
 
@@ -249,10 +257,13 @@ describe('pickMessage', () => {
 		const got = await messagePromise;
 
 		expect(got()).toEqual(null);
-		expect(record).toHaveBeenCalledWith({
-			component: 'banner-picker-timeout-dcr',
-			value: config.candidates[0]?.candidate.id,
-		});
+		expect(record).toHaveBeenCalledWith(
+			{
+				component: 'banner-picker-timeout-dcr',
+				value: config.candidates[0]?.candidate.id,
+			},
+			expect.any(Function),
+		);
 
 		clearTimeout(timer);
 	});
@@ -311,6 +322,7 @@ describe('pickMessage', () => {
 			expect.objectContaining({
 				component: 'messagePicker-canShow-candidate-1',
 			}),
+			expect.any(Function),
 		);
 
 		expect(record).not.toHaveBeenCalledWith(

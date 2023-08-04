@@ -3,6 +3,7 @@ const swcConfig = require('./scripts/webpack/.swcrc.json');
 module.exports = {
 	testEnvironment: 'jsdom',
 	moduleDirectories: ['node_modules', 'src'],
+	extensionsToTreatAsEsm: ['.ts', '.tsx'],
 	transform: {
 		'^.+\\.(ts|tsx)$': ['@swc/jest', swcConfig],
 	},

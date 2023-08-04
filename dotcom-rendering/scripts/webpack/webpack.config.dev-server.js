@@ -1,11 +1,12 @@
 // @ts-check
-const path = require('node:path');
-const bodyParser = require('body-parser');
-const chalk = require('chalk');
-const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const {
-	getContentFromURLMiddleware,
-} = require('../../src/server/lib/get-content-from-url');
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import bodyParser from 'body-parser';
+import chalk from 'chalk';
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+import { getContentFromURLMiddleware } from '../../src/server/lib/get-content-from-url.js';
+
+const dir = dirname(fileURLToPath(import.meta.url));
 
 const port = 3030;
 
@@ -15,7 +16,8 @@ console.log(
 	)}`,
 );
 
-module.exports = {
+// eslint-disable-next-line import/no-default-export -- this is what Webpack wants
+export default {
 	/** @type {import('webpack-dev-server').Configuration} */
 	devServer: {
 		compress: false,
@@ -27,7 +29,7 @@ module.exports = {
 		},
 		port,
 		static: {
-			directory: path.join(__dirname, '..', '..', 'src', 'static'),
+			directory: path.join(dir, '..', '..', 'src', 'static'),
 			publicPath: '/static/frontend',
 		},
 		allowedHosts: ['r.thegulocal.com'],
@@ -64,7 +66,7 @@ module.exports = {
 			devServer.app.get('/', (req, res) => {
 				res.sendFile(
 					path.join(
-						__dirname,
+						dir,
 						'..',
 						'..',
 						'src',
