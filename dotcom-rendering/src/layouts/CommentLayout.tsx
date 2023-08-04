@@ -632,6 +632,8 @@ export const CommentLayout = ({
 												}
 												stage={article.config.stage}
 												tags={article.tags}
+												renderAds={renderAds}
+												isLabs={false}
 											/>
 										</Island>
 									)}
