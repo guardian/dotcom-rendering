@@ -49,6 +49,7 @@ export const renderArticle = (
 				abTests: article.config.abTests,
 				isPaidContent: article.pageType.isPaidContent,
 				contentType: article.contentType,
+				googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
 				unknownConfig: article.config,
 			}),
 		),

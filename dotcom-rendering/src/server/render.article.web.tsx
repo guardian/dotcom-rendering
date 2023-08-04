@@ -137,6 +137,7 @@ export const renderHtml = ({ article }: Props): string => {
 				isPaidContent: article.pageType.isPaidContent,
 				contentType: article.contentType,
 				shouldHideReaderRevenue: article.shouldHideReaderRevenue,
+				googleRecaptchaSiteKey: article.config.googleRecaptchaSiteKey,
 				GAData: extractGA({
 					webTitle: article.webTitle,
 					format: article.format,
