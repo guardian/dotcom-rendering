@@ -703,6 +703,8 @@ export const StandardLayout = (props: WebProps | AppProps) => {
 											}
 											stage={article.config.stage}
 											tags={article.tags}
+											renderAds={renderAds}
+											isLabs={isLabs}
 										/>
 									</Island>
 								)}

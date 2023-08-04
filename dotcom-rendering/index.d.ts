@@ -482,12 +482,26 @@ declare module 'dynamic-import-polyfill' {
 	}) => void;
 }
 
-// ------------------------------------- //
-// AMP types                             //
-// ------------------------------------- //
+// SVG handling
+declare module '*.svg' {
+	const content: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
+	export default content;
+}
+
+// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
+// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
+// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
+interface PerformanceEntry {
+	loadTime: number;
+	renderTime: number;
+}
 
 declare namespace JSX {
 	interface IntrinsicElements {
+		// ------------------------------------- //
+		// AMP types                             //
+		// ------------------------------------- //
 		'amp-accordion': any;
 		'amp-ad': any;
 		'amp-analytics': any;
@@ -513,26 +527,8 @@ declare namespace JSX {
 		'amp-video': any;
 		'amp-vimeo': any;
 		'amp-youtube': any;
-	}
-}
 
-// SVG handling
-declare module '*.svg' {
-	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
-	export default content;
-}
-
-// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
-// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
-// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
-interface PerformanceEntry {
-	loadTime: number;
-	renderTime: number;
-}
-
-declare namespace JSX {
-	interface IntrinsicElements {
+		/** Island {@link ./src/components/Island.tsx} */
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';

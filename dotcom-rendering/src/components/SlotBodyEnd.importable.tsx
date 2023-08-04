@@ -13,10 +13,12 @@ import type {
 	SlotConfig,
 } from '../lib/messagePicker';
 import { pickMessage } from '../lib/messagePicker';
+import { useAB } from '../lib/useAB';
 import { type AuthStatus, useAuthStatus } from '../lib/useAuthStatus';
 import { useBraze } from '../lib/useBraze';
 import { useOnce } from '../lib/useOnce';
 import type { TagType } from '../types/tag';
+import { AdSlot } from './AdSlot';
 import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
 	canShowReaderRevenueEpic,
@@ -39,6 +41,8 @@ type Props = {
 	stage: string;
 	pageId: string;
 	keywordIds: string;
+	renderAds: boolean;
+	isLabs: boolean;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -114,6 +118,8 @@ export const SlotBodyEnd = ({
 	stage,
 	pageId,
 	keywordIds,
+	renderAds,
+	isLabs,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 	const [countryCode, setCountryCode] = useState<string>();
@@ -124,6 +130,13 @@ export const SlotBodyEnd = ({
 	);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
+
+	const ABTestAPI = useAB()?.api;
+	const isInPublicGoodTest =
+		ABTestAPI?.isUserInVariant('PublicGoodTest', 'variant') ?? false;
+
+	const showArticleEndSlot =
+		isInPublicGoodTest && renderAds && !isLabs && countryCode === 'US';
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -192,6 +205,12 @@ export const SlotBodyEnd = ({
 		return (
 			<div id="slot-body-end">
 				<SelectedEpic />
+			</div>
+		);
+	} else if (showArticleEndSlot) {
+		return (
+			<div id="slot-body-end">
+				<AdSlot data-print-layout="hide" position="article-end" />
 			</div>
 		);
 	}
