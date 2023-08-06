@@ -1,94 +1,82 @@
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { hasRequiredConsents } from './hasRequiredConsents';
 
 const brazeVendorId = '5ed8c49c4b8ce4571c7ad801';
 
-let mockOnConsentChangeResult: any;
-jest.mock('@guardian/consent-management-platform', () => ({
-	onConsentChange: (callback: any) => {
-		callback(mockOnConsentChangeResult);
-	},
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	getConsentFor: jest.requireActual('@guardian/consent-management-platform')
-		.getConsentFor,
-}));
-
-afterEach(() => {
-	mockOnConsentChangeResult = undefined;
-});
-
 describe('hasRequiredConsents', () => {
 	describe('when the user is covered by tcfv2 and consent is given', () => {
-		it('returns a promise which resolves with true', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with true', () => {
+			const mockState = {
 				tcfv2: {
 					vendorConsents: {
 						[brazeVendorId]: true,
 					},
 				},
-			};
-			await expect(hasRequiredConsents()).resolves.toBe(true);
+			} as unknown as ConsentState;
+
+			expect(hasRequiredConsents(mockState)).toBe(true);
 		});
 	});
 
 	describe('when the user is covered by tcfv2 and consent is not given', () => {
-		it('returns a promise which resolves with false', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with false', () => {
+			const mockState = {
 				tcfv2: {
 					vendorConsents: {
 						[brazeVendorId]: false,
 					},
 				},
-			};
+			} as unknown as ConsentState;
 
-			await expect(hasRequiredConsents()).resolves.toBe(false);
+			expect(hasRequiredConsents(mockState)).toBe(false);
 		});
 	});
 
 	describe('when the user is covered by ccpa and consent is given', () => {
-		it('returns a promise which resolves with true', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with true', () => {
+			const mockState = {
 				ccpa: {
 					doNotSell: false,
 				},
-			};
+			} as unknown as ConsentState;
 
-			await expect(hasRequiredConsents()).resolves.toBe(true);
+			expect(hasRequiredConsents(mockState)).toBe(true);
 		});
 	});
 
 	describe('when the user is covered by ccpa and consent is not given', () => {
-		it('returns a promise which resolves with false', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with false', () => {
+			const mockState = {
 				ccpa: {
 					doNotSell: true,
 				},
-			};
+			} as unknown as ConsentState;
 
-			await expect(hasRequiredConsents()).resolves.toBe(false);
+			expect(hasRequiredConsents(mockState)).toBe(false);
 		});
 	});
 
 	describe('when the user is covered by aus and consent is given', () => {
-		it('returns a promise which resolves with true', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with true', () => {
+			const mockState = {
 				aus: {
 					personalisedAdvertising: true,
 				},
-			};
+			} as unknown as ConsentState;
 
-			await expect(hasRequiredConsents()).resolves.toBe(true);
+			expect(hasRequiredConsents(mockState)).toBe(true);
 		});
 	});
 
 	describe('when the user is covered by aus and consent is not given', () => {
-		it('returns a promise which resolves with false', async () => {
-			mockOnConsentChangeResult = {
+		it('returns a promise which resolves with false', () => {
+			const mockState = {
 				aus: {
 					personalisedAdvertising: false,
 				},
-			};
+			} as unknown as ConsentState;
 
-			await expect(hasRequiredConsents()).resolves.toBe(false);
+			expect(hasRequiredConsents(mockState)).toBe(false);
 		});
 	});
 });

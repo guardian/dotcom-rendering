@@ -1,3 +1,4 @@
+import { onConsent } from '@guardian/consent-management-platform';
 import { getBrazeUuid } from '../getBrazeUuid';
 import { hasRequiredConsents } from './hasRequiredConsents';
 
@@ -51,7 +52,7 @@ const buildDependencies = (
 		},
 		{
 			name: 'consent',
-			value: hasRequiredConsents(),
+			value: onConsent().then(hasRequiredConsents),
 		},
 		{
 			name: 'isNotPaidContent',
