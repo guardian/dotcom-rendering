@@ -9,6 +9,7 @@
 		"lint": "yarn lint:src && yarn lint:cypress",
 		"lint:fix": "yarn lint:src --fix && yarn lint:cypress --fix",
 		"lint:src": "eslint . --ext .ts,.tsx --quiet",
+		"lint:scripts": "eslint scripts --quiet",
 		"lint:cypress": "eslint ./cypress",
 		"lint-staged": "lint-staged",
 		"prettier:check": "prettier . --check --cache",

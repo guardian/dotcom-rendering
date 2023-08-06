@@ -88,16 +88,19 @@ const commonConfigs = ({ platform }) => ({
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
 							if (builds < module.exports.length * 2) {
-								message = message
-									.replace('Building', 'Building initial')
-									.replace('Completed', 'Completed initial');
+								console.log(
+									message
+										.replace('Building', 'Building initial')
+										.replace(
+											'Completed',
+											'Completed initial',
+										),
+								);
 							} else {
-								message = message.replace(
-									'Building',
-									'Rebuilding',
+								console.log(
+									message.replace('Building', 'Rebuilding'),
 								);
 							}
-							console.log(message);
 							builds += 1;
 						},
 					}),
