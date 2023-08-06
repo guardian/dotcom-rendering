@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const TJS = require('typescript-json-schema');
 
 const root = path.resolve(__dirname, '..', '..');

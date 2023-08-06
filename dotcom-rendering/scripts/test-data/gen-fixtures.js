@@ -2,8 +2,8 @@
 
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-const fs = require('fs/promises');
-const { resolve } = require('path');
+const fs = require('node:fs/promises');
+const { resolve } = require('node:path');
 const execa = require('execa');
 const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');

@@ -1,6 +1,6 @@
 /* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
-const path = require('path');
+const path = require('node:path');
 const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');

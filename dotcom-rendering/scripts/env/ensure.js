@@ -10,7 +10,7 @@ module.exports = (...packages) =>
 			resolve(packages.map(require));
 		} catch (e) {
 			log(`Pre-installing dependency (${packages.join(', ')})...`);
-			const npmInstallProcess = require('child_process')
+			const npmInstallProcess = require('node:child_process')
 				.spawn('npm', [
 					'i',
 					...packages,

@@ -1,5 +1,5 @@
-const { promisify } = require('util');
-const exec = promisify(require('child_process').execFile);
+const { promisify } = require('node:util');
+const exec = promisify(require('node:child_process').execFile);
 
 const ensure = require('./ensure');
 
