@@ -127,6 +127,7 @@ module.exports = {
 		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
+		'no-redeclare': 'error',
 		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
@@ -171,7 +172,7 @@ module.exports = {
 		...rulesToOverrideGuardianConfig,
 	},
 	settings: {
-		'import/resolver': 'typescript'
+		'import/resolver': 'typescript',
 	},
 	overrides: [
 		{

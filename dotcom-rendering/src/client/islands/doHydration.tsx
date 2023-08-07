@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import type { EmotionCache } from '@emotion/react';
 import { CacheProvider } from '@emotion/react';
-import { log } from '@guardian/libs';
+import { log, startPerformanceMeasure } from '@guardian/libs';
 import { createElement } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
-import { startPerformanceMeasure } from '../../lib/startPerformanceMeasure';
 
 declare global {
 	interface DOMStringMap {

@@ -7,6 +7,7 @@ import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { polyfillIO } from '../lib/polyfill.io';
 import { extractNAV } from '../model/extract-nav';
 import { makeWindowGuardian } from '../model/window-guardian';
 import type { DCRNewslettersPageType } from '../types/newslettersPage';
@@ -32,9 +33,6 @@ export const renderEditorialNewslettersPage = ({
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = newslettersPage.config.switches;
-
-	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
@@ -85,6 +83,8 @@ export const renderEditorialNewslettersPage = ({
 				switches: newslettersPage.config.switches,
 				abTests: newslettersPage.config.abTests,
 				brazeApiKey: newslettersPage.config.brazeApiKey,
+				googleRecaptchaSiteKey:
+					newslettersPage.config.googleRecaptchaSiteKey,
 			}),
 		),
 	);

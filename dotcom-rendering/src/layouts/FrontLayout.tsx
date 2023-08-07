@@ -32,7 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
-import { WeatherData } from '../components/WeatherData.importable';
+import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -139,8 +139,8 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island clientOnly={true} deferUntil={'idle'}>
-				<WeatherData
+			<Island deferUntil={'idle'}>
+				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
 					edition={front.editionId}
 				/>
@@ -176,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.config.switches.deeplyReadSwitch &&
+		front.config.switches.deeplyRead &&
 		front.isNetworkFront &&
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;

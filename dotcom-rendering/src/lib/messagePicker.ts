@@ -1,5 +1,5 @@
+import { startPerformanceMeasure } from '@guardian/libs';
 import { record } from '../client/ophan/ophan';
-import { startPerformanceMeasure } from './startPerformanceMeasure';
 
 export type MaybeFC = React.FC | null;
 type ShowMessage<T> = (meta: T) => MaybeFC;
