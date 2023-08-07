@@ -568,6 +568,8 @@ export const InteractiveLayout = ({
 								}
 								stage={article.config.stage}
 								tags={article.tags}
+								renderAds={renderAds}
+								isLabs={false}
 							/>
 						</Island>
 					</div>
