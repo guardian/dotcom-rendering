@@ -133,6 +133,10 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 								!!tagFront.config.switches
 									.headerTopBarSearchCapi
 							}
+							fixedHeaderHeightControl={
+								tagFront.config.abTests
+									.fixedHeaderHeightControl === 'control'
+							}
 						/>
 					</Section>
 					<Section

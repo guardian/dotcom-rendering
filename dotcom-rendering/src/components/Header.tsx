@@ -10,6 +10,10 @@ import { Logo } from './Logo';
 import { Snow } from './Snow.importable';
 import { SupportTheG } from './SupportTheG.importable';
 
+const implicitHeight = css`
+	overflow: hidden;
+`;
+
 /** Ensures we do not cause CLS from lazy loaded component height */
 const explicitHeight = css`
 	overflow: hidden;
@@ -40,6 +44,7 @@ type Props = {
 	idApiUrl: string;
 	isInEuropeTest: boolean;
 	headerTopBarSearchCapiSwitch: boolean;
+	fixedHeaderHeightControl: boolean;
 	hasPageSkin?: boolean;
 };
 
@@ -55,6 +60,7 @@ export const Header = ({
 	headerTopBarSearchCapiSwitch,
 	isInEuropeTest,
 	hasPageSkin = false,
+	fixedHeaderHeightControl,
 }: Props) => (
 	<div css={headerStyles} data-component="nav3">
 		<Island>
@@ -75,7 +81,12 @@ export const Header = ({
 			/>
 		</Island>
 
-		<div css={[hasPageSkin ? pageSkinContainer : center, explicitHeight]}>
+		<div
+			css={[
+				hasPageSkin ? pageSkinContainer : center,
+				fixedHeaderHeightControl ? implicitHeight : explicitHeight,
+			]}
+		>
 			<Island deferUntil="hash" clientOnly={true}>
 				<Snow />
 			</Island>

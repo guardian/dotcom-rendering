@@ -258,6 +258,10 @@ export const NewsletterSignupLayout = ({ article, NAV, format }: Props) => {
 						headerTopBarSearchCapiSwitch={
 							!!article.config.switches.headerTopBarSearchCapi
 						}
+						fixedHeaderHeightControl={
+							article.config.abTests.fixedHeaderHeightControl ===
+							'control'
+						}
 					/>
 				</Section>
 

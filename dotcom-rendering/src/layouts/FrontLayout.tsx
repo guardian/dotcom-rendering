@@ -241,6 +241,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.headerTopBarSearchCapi
 								}
 								hasPageSkin={hasPageSkin}
+								fixedHeaderHeightControl={
+									front.config.abTests
+										.fixedHeaderHeightControl === 'control'
+								}
 							/>
 						</Section>
 					)}

@@ -96,6 +96,10 @@ export const AllEditorialNewslettersPageLayout = ({
 								!!newslettersPage.config.switches
 									.headerTopBarSearchCapi
 							}
+							fixedHeaderHeightControl={
+								newslettersPage.config.abTests
+									.fixedHeaderHeightControl === 'control'
+							}
 						/>
 					</Section>
 					<Section

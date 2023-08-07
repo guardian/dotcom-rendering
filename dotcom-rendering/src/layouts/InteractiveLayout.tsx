@@ -287,6 +287,10 @@ export const InteractiveLayout = ({
 									!!article.config.switches
 										.headerTopBarSearchCapi
 								}
+								fixedHeaderHeightControl={
+									article.config.abTests
+										.fixedHeaderHeightControl === 'control'
+								}
 							/>
 						</Section>
 					</div>

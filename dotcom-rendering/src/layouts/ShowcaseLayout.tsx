@@ -290,6 +290,11 @@ export const ShowcaseLayout = ({
 										!!article.config.switches
 											.headerTopBarSearchCapi
 									}
+									fixedHeaderHeightControl={
+										article.config.abTests
+											.fixedHeaderHeightControl ===
+										'control'
+									}
 								/>
 							</Section>
 							<Section

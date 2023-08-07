@@ -29,6 +29,7 @@ export const defaultStory = () => {
 			idApiUrl="https://idapi.theguardian.com"
 			headerTopBarSearchCapiSwitch={false}
 			isInEuropeTest={false}
+			fixedHeaderHeightControl={false}
 		/>
 	);
 };
