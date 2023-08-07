@@ -6,7 +6,7 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { Button, TextInput } from '@guardian/source-react-components';
-import type { ChangeEventHandler } from 'react';
+import { type ChangeEventHandler, useState } from 'react';
 import { InlineSkipToWrapper } from './InlineSkipToWrapper';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
@@ -33,7 +33,6 @@ export const formFrameStyle = css`
 
 	${from.desktop} {
 		flex-basis: ${4 * CARD_CONTAINER_WIDTH - CARD_CONTAINER_PADDING}px;
-
 		flex-direction: row-reverse;
 		align-items: flex-start;
 		justify-content: space-between;
@@ -63,10 +62,21 @@ export const inputWrapperStyle = css`
 	}
 `;
 
-export const formAsideStyle = css`
+export const formAsideStyle = (hideOnMobile: boolean) => css`
+	overflow: hidden;
+	transition: max-height 1s;
+	max-height: 200px;
+
+	${hideOnMobile &&
+	css`
+		max-height: 0;
+	`}
+
 	${from.desktop} {
 		flex: 1;
 		padding-left: ${CARD_CONTAINER_PADDING}px;
+		max-height: unset;
+		transition: none;
 	}
 `;
 
@@ -108,6 +118,9 @@ export const ManyNewslettersForm = ({
 	handleSubmitButton,
 	newsletterCount,
 }: FormProps) => {
+	const [formHasFocus, setFormHasFocus] = useState(false);
+	const hidePrivacyOnMobile = !formHasFocus && email.length === 0;
+
 	const ariaLabel =
 		newsletterCount === 1
 			? 'Sign up for the newsletter you selected'
@@ -128,8 +141,14 @@ export const ManyNewslettersForm = ({
 			onSubmit={(submitEvent) => {
 				submitEvent.preventDefault();
 			}}
+			onFocus={() => {
+				setFormHasFocus(true);
+			}}
+			onBlur={() => {
+				setFormHasFocus(false);
+			}}
 		>
-			<aside css={formAsideStyle}>
+			<aside css={formAsideStyle(hidePrivacyOnMobile)}>
 				<InlineSkipToWrapper
 					id={'man-newsletter-form-inline-skip-to-wrapper'}
 					blockDescription="Privacy Notice"
