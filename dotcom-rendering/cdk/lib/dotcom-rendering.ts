@@ -1,7 +1,8 @@
 import { join } from 'path';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
-import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
+import { GuSecurityGroup, GuVpc,  } from '@guardian/cdk/lib/constructs/ec2';
+import { GuAllowPolicy, GuInstanceRole } from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
@@ -70,11 +71,41 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const instancePolicy = new GuAllowPolicy(this, 'instance-policy', {
+			actions: [
+			  's3:GetObject',
+			  'cloudwatch:*',
+			  'logs:*',
+			  'ec2:DescribeTags',
+			  'ec2:DescribeInstances',
+			  'autoscaling:DescribeAutoScalingGroups',
+			  'autoscaling:DescribeAutoScalingInstances',
+			  'kms:Decrypt',
+			  'kms:DescribeKey',
+			  'ssm:GetParametersByPath',
+			  'ssm:GetParameter'
+			],
+			resources: [
+			  'arn:aws:s3:::aws-frontend-artifacts/*',
+			  '*'
+			]
+		  });
+
+		const instanceRole = new GuInstanceRole(this, {
+				app: props.app,
+				additionalPolicies: [instancePolicy]
+			  });
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
 			'cloudformation.yml',
 		);
+
+		this.overrideLogicalId(instanceRole, {
+			logicalId: 'InstanceRole',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
@@ -83,6 +114,7 @@ export class DotcomRendering extends GuStack {
 				VPCIpBlock: vpc.vpcCidrBlock,
 				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+				InstanceRole: instanceRole.roleName,
 			}
 		});
 	}
