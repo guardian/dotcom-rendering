@@ -152,6 +152,12 @@ const testLayoutFormats = [
 		theme: 'NewsPillar',
 		renderingTarget: 'Apps',
 	},
+	{
+		display: 'Showcase',
+		design: 'Picture',
+		theme: 'OpinionPillar',
+		renderingTarget: 'Web',
+	},
 ];
 
 const generateLayoutStories = () => {

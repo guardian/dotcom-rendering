@@ -103,7 +103,7 @@ const stretchLines = css`
 
 const borderColourWhenBackgroundDark = css`
 	${until.desktop} {
-		border-top: 1px solid rgba(255, 255, 255, 0.4);
+		border-top: 1px solid rgba(255, 0, 0, 0.4);
 	}
 `;
 

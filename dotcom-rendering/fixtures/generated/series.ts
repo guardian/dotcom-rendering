@@ -19,17 +19,17 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/11/elizabeth-a-life-through-the-lens-review-the-late-queens-reign-looks-like-one-long-marketing-campaign',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/aug/01/wonders-of-the-moon-with-dara-obriain-review-beautiful-cosmically-compelling-tv',
 			linkText:
-				'Elizabeth: A Life Through the Lens review – the late queen’s reign looks like one long marketing campaign',
+				'Wonders of the Moon with Dara Ó Briain review – comic turns love for the lunar into cosmically compelling TV',
 			showByline: false,
-			byline: 'Jack Seale',
+			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/9ce2b84fd9d1047442ea6945c8daa25cd69cecca/0_83_3945_2368/master/3945.jpg',
-			image: 'https://i.guim.co.uk/img/media/9ce2b84fd9d1047442ea6945c8daa25cd69cecca/0_83_3945_2368/master/3945.jpg?width=300&quality=85&auto=format&fit=max&s=3f5ffdc3d852161185ab172a3b3ccccb',
+				'https://media.guim.co.uk/301ab24146168733d6c59c1589723e728c33148d/0_27_5000_3000/master/5000.jpg',
+			image: 'https://i.guim.co.uk/img/media/301ab24146168733d6c59c1589723e728c33148d/0_27_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=f0d606fccd721436a8101cdab642e56d',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/9ce2b84fd9d1047442ea6945c8daa25cd69cecca/0_83_3945_2368/master/3945.jpg?width=300&quality=85&auto=format&fit=max&s=3f5ffdc3d852161185ab172a3b3ccccb',
-				'460': 'https://i.guim.co.uk/img/media/9ce2b84fd9d1047442ea6945c8daa25cd69cecca/0_83_3945_2368/master/3945.jpg?width=460&quality=85&auto=format&fit=max&s=507fe629f8aff36f261d06883de8692c',
+				'300': 'https://i.guim.co.uk/img/media/301ab24146168733d6c59c1589723e728c33148d/0_27_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=f0d606fccd721436a8101cdab642e56d',
+				'460': 'https://i.guim.co.uk/img/media/301ab24146168733d6c59c1589723e728c33148d/0_27_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=8500540025dafbe518b61d3d21327ca7',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -39,61 +39,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-06-11T19:00:00.000Z',
+			webPublicationDate: '2023-08-01T21:00:11.000Z',
 			headline:
-				'Elizabeth: A Life Through the Lens review – the late queen’s reign looks like one long marketing campaign',
-			shortUrl: 'https://www.theguardian.com/p/z72yt',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z72yt',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/08/davina-mccalls-pill-revolution-review-this-powerful-documentary-could-save-lives',
-			linkText:
-				'Davina McCall’s Pill Revolution review – this powerful documentary could save lives',
-			showByline: false,
-			byline: 'Leila Latif',
-			masterImage:
-				'https://media.guim.co.uk/49afc705bc753c5888ed95afd674e0bb31ad8cc3/316_1361_6277_3768/master/6277.jpg',
-			image: 'https://i.guim.co.uk/img/media/49afc705bc753c5888ed95afd674e0bb31ad8cc3/316_1361_6277_3768/master/6277.jpg?width=300&quality=85&auto=format&fit=max&s=ace9eac287625ce8318b903a474c1b88',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/49afc705bc753c5888ed95afd674e0bb31ad8cc3/316_1361_6277_3768/master/6277.jpg?width=300&quality=85&auto=format&fit=max&s=ace9eac287625ce8318b903a474c1b88',
-				'460': 'https://i.guim.co.uk/img/media/49afc705bc753c5888ed95afd674e0bb31ad8cc3/316_1361_6277_3768/master/6277.jpg?width=460&quality=85&auto=format&fit=max&s=bf38dde99404be71b4ac04f99ea0d810',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-08T21:00:41.000Z',
-			headline:
-				'Davina McCall’s Pill Revolution review – this powerful documentary could save lives',
-			shortUrl: 'https://www.theguardian.com/p/z6dgk',
+				'Wonders of the Moon with Dara Ó Briain review – beautiful, cosmically compelling TV',
+			shortUrl: 'https://www.theguardian.com/p/zhcc4',
 			starRating: 4,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/z6dgk',
+				discussionId: '/p/zhcc4',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/08/significant-other-review-nothing-about-this-catastrophic-romcom-makes-any-sense',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/31/shadow-of-truth-review-an-utterly-gripping-case-about-conspiracy-and-corruption',
 			linkText:
-				'Significant Other review – nothing about this catastrophic romcom makes any sense',
+				'Shadow of Truth review – an utterly gripping case about murder, conspiracy and corruption',
 			showByline: false,
-			byline: 'Jack Seale',
+			byline: 'Rebecca Nicholson',
 			masterImage:
-				'https://media.guim.co.uk/b5fc1b067b74de35bd4378059496cf200519d5bf/0_70_5980_3588/master/5980.jpg',
-			image: 'https://i.guim.co.uk/img/media/b5fc1b067b74de35bd4378059496cf200519d5bf/0_70_5980_3588/master/5980.jpg?width=300&quality=85&auto=format&fit=max&s=82ce74dcc33a58996cb190e6132c7f38',
+				'https://media.guim.co.uk/54b2b0305648ccd647488e193612c8aba2e4458b/0_292_1481_888/master/1481.jpg',
+			image: 'https://i.guim.co.uk/img/media/54b2b0305648ccd647488e193612c8aba2e4458b/0_292_1481_888/master/1481.jpg?width=300&quality=85&auto=format&fit=max&s=4702aa0d060e816462b69ef055e628d0',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/b5fc1b067b74de35bd4378059496cf200519d5bf/0_70_5980_3588/master/5980.jpg?width=300&quality=85&auto=format&fit=max&s=82ce74dcc33a58996cb190e6132c7f38',
-				'460': 'https://i.guim.co.uk/img/media/b5fc1b067b74de35bd4378059496cf200519d5bf/0_70_5980_3588/master/5980.jpg?width=460&quality=85&auto=format&fit=max&s=ffadd7003a91ecf3e9c938d4dd4902f7',
+				'300': 'https://i.guim.co.uk/img/media/54b2b0305648ccd647488e193612c8aba2e4458b/0_292_1481_888/master/1481.jpg?width=300&quality=85&auto=format&fit=max&s=4702aa0d060e816462b69ef055e628d0',
+				'460': 'https://i.guim.co.uk/img/media/54b2b0305648ccd647488e193612c8aba2e4458b/0_292_1481_888/master/1481.jpg?width=460&quality=85&auto=format&fit=max&s=dc969b27a016ebfca4e50ddcdc9d51e4',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -103,61 +71,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-06-08T15:50:45.000Z',
+			webPublicationDate: '2023-07-31T22:30:04.000Z',
 			headline:
-				'Significant Other review – nothing about this catastrophic romcom makes any sense',
-			shortUrl: 'https://www.theguardian.com/p/z6z47',
-			starRating: 1,
+				'Shadow of Truth review – an utterly gripping case about murder, conspiracy and corruption',
+			shortUrl: 'https://www.theguardian.com/p/zgnb2',
+			starRating: 4,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/z6z47',
+				discussionId: '/p/zgnb2',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/08/based-on-a-true-story-review-kaley-cuoco',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/31/wolf-review-this-totally-wild-thriller-has-to-be-seen-to-be-believed',
 			linkText:
-				'Based on a True Story review – a couple makes a killer podcast in fun, flimsy series',
-			showByline: false,
-			byline: 'Benjamin Lee',
-			masterImage:
-				'https://media.guim.co.uk/ce6bc6acdd6df12d4b6a583b2f4fb6450e597067/0_66_1000_600/master/1000.jpg',
-			image: 'https://i.guim.co.uk/img/media/ce6bc6acdd6df12d4b6a583b2f4fb6450e597067/0_66_1000_600/master/1000.jpg?width=300&quality=85&auto=format&fit=max&s=8aea20964c756206e1f5821eda76f3d4',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/ce6bc6acdd6df12d4b6a583b2f4fb6450e597067/0_66_1000_600/master/1000.jpg?width=300&quality=85&auto=format&fit=max&s=8aea20964c756206e1f5821eda76f3d4',
-				'460': 'https://i.guim.co.uk/img/media/ce6bc6acdd6df12d4b6a583b2f4fb6450e597067/0_66_1000_600/master/1000.jpg?width=460&quality=85&auto=format&fit=max&s=8deb081ef6754589b300b532163da690',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-08T13:01:41.000Z',
-			headline:
-				'Based on a True Story review – a couple makes a killer podcast in fun, flimsy series',
-			shortUrl: 'https://www.theguardian.com/p/z6fj3',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z6fj3',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/08/the-crowded-room-review-tom-holland-and-amanda-seyfrieds-new-drama-drags-on-and-on-and-on',
-			linkText:
-				'The Crowded Room review – Tom Holland and Amanda Seyfried’s new drama drags on and on (and on)',
+				'Wolf review – this totally wild thriller has to be seen to be believed',
 			showByline: false,
 			byline: 'Lucy Mangan',
 			masterImage:
-				'https://media.guim.co.uk/9f01271bcc114475d54f5ec543531553f4f8ae34/0_16_8033_4822/master/8033.jpg',
-			image: 'https://i.guim.co.uk/img/media/9f01271bcc114475d54f5ec543531553f4f8ae34/0_16_8033_4822/master/8033.jpg?width=300&quality=85&auto=format&fit=max&s=414987985184b5fbc824452bc6cbbc9b',
+				'https://media.guim.co.uk/6dcea3ccbff5619b1e7ddc9b051ef960cdcd1cfa/431_0_4437_2664/master/4437.jpg',
+			image: 'https://i.guim.co.uk/img/media/6dcea3ccbff5619b1e7ddc9b051ef960cdcd1cfa/431_0_4437_2664/master/4437.jpg?width=300&quality=85&auto=format&fit=max&s=899d53c343b53ea402478f5205b283b5',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/9f01271bcc114475d54f5ec543531553f4f8ae34/0_16_8033_4822/master/8033.jpg?width=300&quality=85&auto=format&fit=max&s=414987985184b5fbc824452bc6cbbc9b',
-				'460': 'https://i.guim.co.uk/img/media/9f01271bcc114475d54f5ec543531553f4f8ae34/0_16_8033_4822/master/8033.jpg?width=460&quality=85&auto=format&fit=max&s=663732747cc7c6ad9144eafc61521188',
+				'300': 'https://i.guim.co.uk/img/media/6dcea3ccbff5619b1e7ddc9b051ef960cdcd1cfa/431_0_4437_2664/master/4437.jpg?width=300&quality=85&auto=format&fit=max&s=899d53c343b53ea402478f5205b283b5',
+				'460': 'https://i.guim.co.uk/img/media/6dcea3ccbff5619b1e7ddc9b051ef960cdcd1cfa/431_0_4437_2664/master/4437.jpg?width=460&quality=85&auto=format&fit=max&s=50e7fee16add884551a39b6ad758d096',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -167,157 +103,29 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-06-08T05:00:04.000Z',
+			webPublicationDate: '2023-07-31T21:00:03.000Z',
 			headline:
-				'The Crowded Room review – Tom Holland and Amanda Seyfried’s new drama drags on and on (and on)',
-			shortUrl: 'https://www.theguardian.com/p/z6tjh',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z6tjh',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/07/saint-x-review-like-the-white-lotus-but-much-much-worse',
-			linkText:
-				'Saint X review – like The White Lotus, but much, much worse',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			masterImage:
-				'https://media.guim.co.uk/269e08d32f3c886a67744a7057fe559e669fe99e/0_200_6000_3600/master/6000.jpg',
-			image: 'https://i.guim.co.uk/img/media/269e08d32f3c886a67744a7057fe559e669fe99e/0_200_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=5184275eddc5e340a3c664a4130d6af4',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/269e08d32f3c886a67744a7057fe559e669fe99e/0_200_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=5184275eddc5e340a3c664a4130d6af4',
-				'460': 'https://i.guim.co.uk/img/media/269e08d32f3c886a67744a7057fe559e669fe99e/0_200_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=a1407388ce1eda6916953041d0917ffe',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-07T05:00:28.000Z',
-			headline:
-				'Saint X review – like The White Lotus, but much, much worse',
-			shortUrl: 'https://www.theguardian.com/p/z6d9d',
-			starRating: 3,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z6d9d',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/06/somebody-somewhere-season-two-review-even-this-uplifting-comedys-quietest-moments-are-dazzling',
-			linkText:
-				'Somebody Somewhere season two review – even this uplifting comedy’s quietest moments are dazzling',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/ed7516c4fdee5883a268a7355802a599de49a405/0_99_6000_3600/master/6000.jpg',
-			image: 'https://i.guim.co.uk/img/media/ed7516c4fdee5883a268a7355802a599de49a405/0_99_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=d38c88727b67d14fc8f6542ab6c71a06',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/ed7516c4fdee5883a268a7355802a599de49a405/0_99_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=d38c88727b67d14fc8f6542ab6c71a06',
-				'460': 'https://i.guim.co.uk/img/media/ed7516c4fdee5883a268a7355802a599de49a405/0_99_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=4827c373a876408f5da48b1ee7f64645',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-06T20:35:17.000Z',
-			headline:
-				'Somebody Somewhere season two review – even this uplifting comedy’s quietest moments are dazzling',
-			shortUrl: 'https://www.theguardian.com/p/z5k2z',
-			starRating: 5,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z5k2z',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/05/the-idol-review-light-bondage-and-lots-of-sleaze-make-for-the-ultimate-try-hard-tv',
-			linkText:
-				'The Idol review – light bondage and heavy sleaze make for the ultimate try-hard TV',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/ed11c3b16169ffc17a842782ca3e5e8560ad3cbb/0_196_3130_1879/master/3130.jpg',
-			image: 'https://i.guim.co.uk/img/media/ed11c3b16169ffc17a842782ca3e5e8560ad3cbb/0_196_3130_1879/master/3130.jpg?width=300&quality=85&auto=format&fit=max&s=026bb8015641ead4f6774120a1044d91',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/ed11c3b16169ffc17a842782ca3e5e8560ad3cbb/0_196_3130_1879/master/3130.jpg?width=300&quality=85&auto=format&fit=max&s=026bb8015641ead4f6774120a1044d91',
-				'460': 'https://i.guim.co.uk/img/media/ed11c3b16169ffc17a842782ca3e5e8560ad3cbb/0_196_3130_1879/master/3130.jpg?width=460&quality=85&auto=format&fit=max&s=c93c1f3c405dc3d65edb6de6fa7d4e3b',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-05T21:05:06.000Z',
-			headline:
-				'The Idol review – light bondage and heavy sleaze make for the ultimate try-hard TV',
-			shortUrl: 'https://www.theguardian.com/p/z67jk',
-			starRating: 2,
-			discussion: {
-				isCommentable: false,
-				isClosedForComments: true,
-				discussionId: '/p/z67jk',
-			},
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/05/vicky-mcclure-my-grandads-war-review-a-beautiful-tale-of-bravery-that-will-make-you-weep',
-			linkText:
-				'Vicky McClure: My Grandad’s War review – a beautiful tale of bravery that will make you weep',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			masterImage:
-				'https://media.guim.co.uk/490689013de663272af980496b0069ba5bedc2e6/120_0_3600_2160/master/3600.jpg',
-			image: 'https://i.guim.co.uk/img/media/490689013de663272af980496b0069ba5bedc2e6/120_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=53c210e7221ac0c44ed5fa0286be8bc2',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/490689013de663272af980496b0069ba5bedc2e6/120_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=53c210e7221ac0c44ed5fa0286be8bc2',
-				'460': 'https://i.guim.co.uk/img/media/490689013de663272af980496b0069ba5bedc2e6/120_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=4b8e629d391fd9d4d05ce3dbe204560a',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2023-06-05T21:00:05.000Z',
-			headline:
-				'Vicky McClure: My Grandad’s War review – a beautiful tale of bravery that will make you weep',
-			shortUrl: 'https://www.theguardian.com/p/z5ked',
+				'Wolf review – this totally wild thriller has to be seen to be believed',
+			shortUrl: 'https://www.theguardian.com/p/zhbgn',
 			starRating: 4,
 			discussion: {
 				isCommentable: true,
 				isClosedForComments: true,
-				discussionId: '/p/z5ked',
+				discussionId: '/p/zhbgn',
 			},
 		},
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2023/jun/04/gods-of-tennis-review-a-hefty-tale-of-the-epic-battles-that-rocked-tennis',
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/29/nothing-compares-review-the-profound-striking-tale-of-sinead-oconnor-born-rebel',
 			linkText:
-				'Gods of Tennis review – a hefty tale of the epic battles that rocked tennis ',
+				'Nothing Compares review – the profound, striking tale of Sinéad O’Connor, born rebel',
 			showByline: false,
-			byline: 'Lucy Mangan',
+			byline: "Shaad D'Souza",
 			masterImage:
-				'https://media.guim.co.uk/70b50688930c4dd873e125430c155f421e8cb5b7/121_633_3911_2347/master/3911.jpg',
-			image: 'https://i.guim.co.uk/img/media/70b50688930c4dd873e125430c155f421e8cb5b7/121_633_3911_2347/master/3911.jpg?width=300&quality=85&auto=format&fit=max&s=10d5d7e51c377c42fd7515c4313a88de',
+				'https://media.guim.co.uk/5452d83526bb9eb5cc4e423a836cf319138bf965/0_197_4846_2908/master/4846.jpg',
+			image: 'https://i.guim.co.uk/img/media/5452d83526bb9eb5cc4e423a836cf319138bf965/0_197_4846_2908/master/4846.jpg?width=300&quality=85&auto=format&fit=max&s=2f3a033da441e3615d0213b8676aed6c',
 			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/70b50688930c4dd873e125430c155f421e8cb5b7/121_633_3911_2347/master/3911.jpg?width=300&quality=85&auto=format&fit=max&s=10d5d7e51c377c42fd7515c4313a88de',
-				'460': 'https://i.guim.co.uk/img/media/70b50688930c4dd873e125430c155f421e8cb5b7/121_633_3911_2347/master/3911.jpg?width=460&quality=85&auto=format&fit=max&s=21c651bbd67750a05a72baa12a9b54a0',
+				'300': 'https://i.guim.co.uk/img/media/5452d83526bb9eb5cc4e423a836cf319138bf965/0_197_4846_2908/master/4846.jpg?width=300&quality=85&auto=format&fit=max&s=2f3a033da441e3615d0213b8676aed6c',
+				'460': 'https://i.guim.co.uk/img/media/5452d83526bb9eb5cc4e423a836cf319138bf965/0_197_4846_2908/master/4846.jpg?width=460&quality=85&auto=format&fit=max&s=85a053dd37f7d86f81744fe6701f79ea',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -327,15 +135,207 @@ export const series = {
 				theme: 'CulturePillar',
 				display: 'StandardDisplay',
 			},
-			webPublicationDate: '2023-06-04T21:00:09.000Z',
+			webPublicationDate: '2023-07-29T22:00:06.000Z',
 			headline:
-				'Gods of Tennis review – a hefty tale of the epic battles that rocked tennis ',
-			shortUrl: 'https://www.theguardian.com/p/z5dm2',
+				'Nothing Compares review – the profound, striking tale of Sinéad O’Connor, born rebel',
+			shortUrl: 'https://www.theguardian.com/p/zgmjx',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zgmjx',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/29/clean-sweep-review',
+			linkText:
+				'Clean Sweep review – silly crime fun with the most incredible beard I’ve ever seen ',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/76115c32b69906cdba1a7caeb5d5687dc887b7fb/0_0_520_312/master/520.jpg',
+			image: 'https://i.guim.co.uk/img/media/76115c32b69906cdba1a7caeb5d5687dc887b7fb/0_0_520_312/master/520.jpg?width=300&quality=85&auto=format&fit=max&s=2b5abb932e21b10224d3b5da7c2d3fb2',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/76115c32b69906cdba1a7caeb5d5687dc887b7fb/0_0_520_312/master/520.jpg?width=300&quality=85&auto=format&fit=max&s=2b5abb932e21b10224d3b5da7c2d3fb2',
+				'460': 'https://i.guim.co.uk/img/media/76115c32b69906cdba1a7caeb5d5687dc887b7fb/0_0_520_312/master/520.jpg?width=460&quality=85&auto=format&fit=max&s=dc1028b09c399fd47a3de73693f6d0cb',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-29T21:40:05.000Z',
+			headline:
+				'Clean Sweep review – silly crime fun with the most incredible beard I’ve ever seen ',
+			shortUrl: 'https://www.theguardian.com/p/zghgf',
 			starRating: 3,
 			discussion: {
 				isCommentable: false,
 				isClosedForComments: true,
-				discussionId: '/p/z5dm2',
+				discussionId: '/p/zghgf',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/28/reframed-marilyn-monroe-review',
+			linkText:
+				'Reframed: Marilyn Monroe review – a persuasive look at the icon’s ferocious intelligence',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/547d884c160802f1796f3bc9bb36307c21a5e12d/120_0_1800_1080/master/1800.jpg',
+			image: 'https://i.guim.co.uk/img/media/547d884c160802f1796f3bc9bb36307c21a5e12d/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=033a72b87892eb599d6a6227cbed9809',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/547d884c160802f1796f3bc9bb36307c21a5e12d/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=033a72b87892eb599d6a6227cbed9809',
+				'460': 'https://i.guim.co.uk/img/media/547d884c160802f1796f3bc9bb36307c21a5e12d/120_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=f30731fc3fd3cbc2cd80411720b9ec3a',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-28T21:30:20.000Z',
+			headline:
+				'Reframed: Marilyn Monroe review – a persuasive look at the icon’s ferocious intelligence',
+			shortUrl: 'https://www.theguardian.com/p/zgxzx',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zgxzx',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/28/bbc-the-power-of-parker-review-90s-set-comedy-drama-victoria-wood-vibes',
+			linkText:
+				'The Power of Parker review – this comedy-drama wishes it was a Victoria Wood show',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			masterImage:
+				'https://media.guim.co.uk/4847193b1cc0be880a6905339b238df2ab56e49c/0_55_4295_2578/master/4295.jpg',
+			image: 'https://i.guim.co.uk/img/media/4847193b1cc0be880a6905339b238df2ab56e49c/0_55_4295_2578/master/4295.jpg?width=300&quality=85&auto=format&fit=max&s=030daeb09a779e9783fac3deb2948d51',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/4847193b1cc0be880a6905339b238df2ab56e49c/0_55_4295_2578/master/4295.jpg?width=300&quality=85&auto=format&fit=max&s=030daeb09a779e9783fac3deb2948d51',
+				'460': 'https://i.guim.co.uk/img/media/4847193b1cc0be880a6905339b238df2ab56e49c/0_55_4295_2578/master/4295.jpg?width=460&quality=85&auto=format&fit=max&s=afb72d15b039687c835494a72d1d5c1f',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-28T21:00:19.000Z',
+			headline:
+				'The Power of Parker review – this comedy-drama wishes it was a Victoria Wood show',
+			shortUrl: 'https://www.theguardian.com/p/zghgq',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zghgq',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/28/good-omens-series-two-have-david-tennant-and-michael-sheen-really-only-been-a-double-act-since-2019',
+			linkText:
+				'Good Omens series two – have David Tennant and Michael Sheen really only been a double act since 2019?',
+			showByline: false,
+			byline: 'Jack Seale',
+			masterImage:
+				'https://media.guim.co.uk/60985278c9aec243b1f4f12e377d1fd3cf6bd956/0_0_3000_1800/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/60985278c9aec243b1f4f12e377d1fd3cf6bd956/0_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=537e49c0949455b814d0e7cf8baba64f',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/60985278c9aec243b1f4f12e377d1fd3cf6bd956/0_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=537e49c0949455b814d0e7cf8baba64f',
+				'460': 'https://i.guim.co.uk/img/media/60985278c9aec243b1f4f12e377d1fd3cf6bd956/0_0_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c4ae11793272c7763ebe99a445c199f8',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-28T04:00:03.000Z',
+			headline:
+				'Good Omens series two – have David Tennant and Michael Sheen really only been a double act since 2019?',
+			shortUrl: 'https://www.theguardian.com/p/zghxf',
+			starRating: 3,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zghxf',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/27/david-harewood-on-blackface-review-a-shocking-deeply-moving-piece-of-television',
+			linkText:
+				'David Harewood on Blackface review – a shocking, deeply moving piece of television',
+			showByline: false,
+			byline: 'Leila Latif',
+			masterImage:
+				'https://media.guim.co.uk/2248f41973a1af37cacf2cbd1c39e7c05b3ab17b/266_0_4384_2632/master/4384.jpg',
+			image: 'https://i.guim.co.uk/img/media/2248f41973a1af37cacf2cbd1c39e7c05b3ab17b/266_0_4384_2632/master/4384.jpg?width=300&quality=85&auto=format&fit=max&s=b100e7f1a09f5de9c6137b71787b16d3',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/2248f41973a1af37cacf2cbd1c39e7c05b3ab17b/266_0_4384_2632/master/4384.jpg?width=300&quality=85&auto=format&fit=max&s=b100e7f1a09f5de9c6137b71787b16d3',
+				'460': 'https://i.guim.co.uk/img/media/2248f41973a1af37cacf2cbd1c39e7c05b3ab17b/266_0_4384_2632/master/4384.jpg?width=460&quality=85&auto=format&fit=max&s=a1c85636d40f0788fb60047384a2221a',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-27T21:00:07.000Z',
+			headline:
+				'David Harewood on Blackface review – a shocking, deeply moving piece of television',
+			shortUrl: 'https://www.theguardian.com/p/zgvzj',
+			starRating: 4,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zgvzj',
+			},
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2023/jul/26/drag-me-to-dinner-review-so-stressful-and-chaotic-it-makes-the-bear-look-like-a-picnic',
+			linkText:
+				'Drag Me to Dinner review – so stressful and chaotic, it makes The Bear look like a picnic ',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			masterImage:
+				'https://media.guim.co.uk/52c9226019524c3dd09aba64e0cdab14e03a5954/0_199_3000_1800/master/3000.jpg',
+			image: 'https://i.guim.co.uk/img/media/52c9226019524c3dd09aba64e0cdab14e03a5954/0_199_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=df5f68027d2310aeae4e1fc2f43a3915',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/52c9226019524c3dd09aba64e0cdab14e03a5954/0_199_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=df5f68027d2310aeae4e1fc2f43a3915',
+				'460': 'https://i.guim.co.uk/img/media/52c9226019524c3dd09aba64e0cdab14e03a5954/0_199_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c9e20373648001c467b7b552938f95c1',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2023-07-26T13:51:48.000Z',
+			headline:
+				'Drag Me to Dinner review – so stressful and chaotic, it makes The Bear look like a picnic ',
+			shortUrl: 'https://www.theguardian.com/p/zgbtj',
+			starRating: 2,
+			discussion: {
+				isCommentable: false,
+				isClosedForComments: true,
+				discussionId: '/p/zgbtj',
 			},
 		},
 	],

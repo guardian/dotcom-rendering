@@ -88,6 +88,7 @@ const textHeadline = (format: ArticleFormat): string => {
 					return pillarPalette[format.theme].dark;
 				case ArticleDesign.Interview:
 				case ArticleDesign.LiveBlog:
+				case ArticleDesign.Picture:
 					return WHITE;
 				default:
 					return BLACK;
@@ -145,6 +146,8 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 					return blogsGrayBackgroundPalette(format);
 				case ArticleDesign.MatchReport:
 					return BLACK;
+				case ArticleDesign.Picture:
+					return palette.neutral[86];
 				default:
 					return pillarPalette[format.theme].main;
 			}
@@ -215,6 +218,8 @@ const textByline = (format: ArticleFormat): string => {
 				}
 				case ArticleDesign.Interview:
 					return BLACK;
+				case ArticleDesign.Picture:
+					return palette.neutral[86];
 				default:
 					return pillarPalette[format.theme].main;
 			}
@@ -267,7 +272,11 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const textStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.Picture
+	)
+		return palette.neutral[86];
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
@@ -332,6 +341,8 @@ const textCaption = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.PhotoEssay:
 			return pillarPalette[format.theme].dark;
+		case ArticleDesign.Picture:
+			return palette.neutral[86];
 		default:
 			return text.supporting;
 	}
@@ -354,6 +365,7 @@ const textCaptionLink = (format: ArticleFormat): string => {
 
 const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
 	if (
@@ -382,11 +394,13 @@ const textSubMetaLabel = (format: ArticleFormat): string => {
 		format.design != ArticleDesign.DeadBlog
 	)
 		return palette.specialReportAlt[100];
+	if (format.design === ArticleDesign.Picture) return palette.neutral[60];
 	return text.supporting;
 };
 
 const textSubMetaLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return text.supporting;
@@ -818,6 +832,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		format.display !== ArticleDisplay.Immersive
 	)
 		return neutral[97];
+	if (format.design === ArticleDesign.Picture) return BLACK;
 
 	return 'transparent';
 };
@@ -1125,6 +1140,9 @@ const fillCommentCount = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
+	if (format.design === ArticleDesign.Picture) {
+		return palette.neutral[86];
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1181,6 +1199,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	)
 		return BLACK;
 
+	if (format.design === ArticleDesign.Picture) return palette.neutral[86];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -1623,7 +1642,10 @@ const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
 const borderArticle: (format: ArticleFormat) => string = (format) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (
+		format.theme === ArticleSpecial.SpecialReportAlt ||
+		format.design === ArticleDesign.Picture
+	)
 		return transparentColour(neutral[60], 0.3);
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
@@ -1645,6 +1667,8 @@ const borderLines = (format: ArticleFormat): string => {
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
 	)
+		return transparentColour(neutral[60], 0.3);
+	if (format.design === ArticleDesign.Picture)
 		return transparentColour(neutral[60], 0.3);
 
 	return neutral[86];
@@ -1675,7 +1699,10 @@ const borderKeyEvent = (): string => neutral[46];
 const borderFilterButton = (): string => neutral[60];
 
 const borderSecondary = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
+	if (
+		format.theme === ArticleSpecial.SpecialReportAlt ||
+		format.design === ArticleDesign.Picture
+	)
 		return transparentColour(neutral[60], 0.3);
 
 	return neutral[86];

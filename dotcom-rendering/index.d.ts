@@ -28,6 +28,7 @@ type FETheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type FEDesign =
 	| 'ArticleDesign'
+	| 'PictureDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'

@@ -31,6 +31,7 @@ import { extractNAV } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { DecideLayout } from './DecideLayout';
+import { Picture } from '../../fixtures/generated/articles/CurrentCartoons';
 
 const Fixtures: { [key: string]: FEArticleType } = {
 	Standard,
@@ -56,6 +57,7 @@ const Fixtures: { [key: string]: FEArticleType } = {
 	NumberedList,
 	NewsletterSignup,
 	Explainer,
+	Picture,
 };
 
 mockRESTCalls();

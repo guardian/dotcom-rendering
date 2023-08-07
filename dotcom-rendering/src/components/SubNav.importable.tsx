@@ -3,6 +3,7 @@ import {
 	from,
 	neutral,
 	news,
+	palette,
 	text,
 	textSans,
 } from '@guardian/source-foundations';
@@ -53,7 +54,9 @@ const collapsedStyles = css`
 		max-width: calc(100% - 70px);
 	}
 `;
-
+// if (format.design === ArticleDesign.Picture) {
+// 	return palette.neutral[86]
+// }
 const fontStyle = css`
 	${textSans.small()};
 	font-size: 14px;
@@ -62,7 +65,7 @@ const fontStyle = css`
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${neutral[7]};
+	color: ${palette.neutral[86]};
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */

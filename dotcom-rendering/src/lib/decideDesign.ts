@@ -11,6 +11,8 @@ export const decideDesign = ({
 	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
+		case 'PictureDesign':
+			return ArticleDesign.Picture;
 		case 'GalleryDesign':
 			return ArticleDesign.Gallery;
 		case 'AudioDesign':

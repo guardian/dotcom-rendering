@@ -378,7 +378,7 @@ export const ArticleHeadline = ({
 							</WithAgeWarning>
 						</div>
 					);
-				case ArticleDesign.Comment:
+				// case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
@@ -779,6 +779,31 @@ export const ArticleHeadline = ({
 									{headlineString}
 								</h1>
 							</WithAgeWarning>
+						</div>
+					);
+				case ArticleDesign.Picture:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<DesignTag format={format} />
+							<h1
+								css={[
+									format.theme === ArticleSpecial.Labs
+										? labsFont
+										: standardFont,
+									topPadding,
+									css`
+										color: ${palette.text.headline};
+									`,
+								]}
+							>
+								{headlineString}
+							</h1>
 						</div>
 					);
 				default:

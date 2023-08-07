@@ -87,6 +87,16 @@ const DecideLayoutWeb = ({
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
 			switch (format.design) {
+				//this should ensure the picture stuff gets a showcase layout, but maybe not necessary?
+				case ArticleDesign.Picture:
+					return (
+						<ShowcaseLayout
+							article={article}
+							NAV={NAV}
+							format={format}
+							renderingTarget={renderingTarget}
+						/>
+					);
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
@@ -153,8 +163,9 @@ const DecideLayoutWeb = ({
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
+					//cartoons are still coming up as articledesign.comment, so will use this standard layout for now, but will need to adjust back to commentlayout
 					return (
-						<CommentLayout
+						<ShowcaseLayout
 							article={article}
 							NAV={NAV}
 							format={format}

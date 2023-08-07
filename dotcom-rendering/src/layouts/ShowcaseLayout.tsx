@@ -246,6 +246,17 @@ export const ShowcaseLayout = ({
 		<>
 			{!isLabs ? (
 				<>
+					{' '}
+					<div>I'm a showcase</div>
+					{format.design === ArticleDesign.Comment && (
+						<div>
+							I'm gonna be a picture but right now really a
+							comment
+						</div>
+					)}
+					{format.design === ArticleDesign.Picture && (
+						<div>Am I a picture yet? </div>
+					)}
 					<div>
 						{renderAds && (
 							<Stuck>

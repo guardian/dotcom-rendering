@@ -482,6 +482,11 @@ export const NumberedList: FEArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -512,11 +517,6 @@ export const NumberedList: FEArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
-					},
-					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -682,6 +682,11 @@ export const NumberedList: FEArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's World Cup",
+								url: '/football/womens-world-cup-2023',
+								longTitle: 'football/womens-world-cup-2023',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1178,6 +1183,11 @@ export const NumberedList: FEArticleType = {
 					url: '/football',
 					children: [
 						{
+							title: "Women's World Cup",
+							url: '/football/womens-world-cup-2023',
+							longTitle: 'football/womens-world-cup-2023',
+						},
+						{
 							title: 'Live scores',
 							url: '/football/live',
 							longTitle: 'football/live',
@@ -1208,11 +1218,6 @@ export const NumberedList: FEArticleType = {
 							longTitle: 'football/teams',
 						},
 					],
-				},
-				{
-					title: 'Coronavirus',
-					url: '/world/coronavirus-outbreak',
-					longTitle: 'Coronavirus',
 				},
 				{
 					title: 'Business',
@@ -1610,7 +1615,7 @@ export const NumberedList: FEArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
+					url: 'https://uploads.guim.co.uk/2023/07/25/Modern_Slavery_Statement_GMG_and_Scott_Trust_2023.docx.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1796,7 +1801,7 @@ export const NumberedList: FEArticleType = {
 					'300': 'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=300&quality=85&auto=format&fit=max&s=c70ee134c0ee3d53b14d72fb6dfc9ed0',
 					'460': 'https://i.guim.co.uk/img/media/014b6456e9f2b316c03d02ba00dcc8d6122cb085/0_258_5906_3545/master/5906.jpg?width=460&quality=85&auto=format&fit=max&s=b11621cdb5e756be78c2d3be91c2daf8',
 				},
-				ageWarning: '8 months',
+				ageWarning: '9 months',
 				isLiveBlog: false,
 				pillar: 'news',
 				designType: 'Article',
@@ -2273,7 +2278,7 @@ export const NumberedList: FEArticleType = {
 					],
 				},
 			],
-			elementId: '59a4ec4a-3be0-4d2f-895b-43eb4b627039',
+			elementId: '7fe95da1-b4b9-411a-a37c-a29e9ed2f738',
 		},
 	],
 	canonicalUrl:
@@ -2285,17 +2290,17 @@ export const NumberedList: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Need a new smartphone but don’t know which one is the very best? Here’s a guide comparing the current top-end smartphones from Apple, <a href="https://www.theguardian.com/technology/samsung" data-component="auto-linked-tag">Samsung</a>, Huawei, OnePlus and others to help you pick the best handset for you.</p>',
-					elementId: '129d88b3-a5cb-447b-92b5-d26518282b8a',
+					elementId: 'b181f4f8-e412-4c5a-ad4c-1a022771acab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There has never been a better time to buy a new flagship smartphone with many quality handsets available at a wider range of prices than ever before. Whether your priority is two-day battery life, fantastic camera performance or a spectacular screen, there’s plenty to choose from.</p>',
-					elementId: 'ca185816-17f7-4c92-9d26-9b0432d908e4',
+					elementId: '0da8e731-3a49-4b81-93bb-1a552c358eb4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This Guardian buyer’s guide to top-end smartphones was last updated on 17 December 2019, and represents the best available models at the time. As new models are released and tested, this guide will be updated to help you choose the right flagship phone for you.</p>',
-					elementId: 'd2ea9356-df52-48d5-baa7-2d0363df4bbd',
+					elementId: 'c5997714-bce8-4d7b-98e1-ced73b86d053',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -2303,27 +2308,27 @@ export const NumberedList: FEArticleType = {
 					title: "What is a buyer's guide?",
 					html: "<p>Welcome to one of the Guardian’s new buyer’s guides. This article represents hundreds of hours of testing by the author to bring together a succinct list of recommended products or services so you can pick from the best and ignore the rest without having to do hours of your own research.</p><p>While the Guardian may earn a small commission from items bought through affiliate links, the items featured in this buyer's guide have been tested and included without influence from any advertiser or commercial initiative.</p>",
 					credit: '',
-					elementId: '4f0062f7-0815-4c75-94cb-bedcb6c43f2b',
+					elementId: '16d30d21-e163-46cb-9401-6b694caec2c5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					scriptUrl: 'https://uploads.guim.co.uk/2019/03/20/boot.js',
-					elementId: 'c9c705dc-e52e-4946-a090-ff9e6afde2b2',
+					elementId: '029b7e0f-5f3b-412b-90de-4dec77db8e50',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best overall: </strong>OnePlus 7T Pro</h2>',
-					elementId: 'ef7671cf-b289-4e1c-8a89-236f585b6bd7',
+					elementId: '429135d6-8088-4ca4-b5bd-1ab35b1cbbfc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£699</a></p>',
-					elementId: '914a7312-de19-4e78-844f-0db767b1c84b',
+					elementId: '3426ad66-95d2-4a9a-9632-2950dcbe0291',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'ff8b8106-99fb-447d-ac19-d5dd6ae2f341',
+					elementId: 'f7cf3020-2460-4bfb-b7de-f4ee388f2177',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2632,7 +2637,7 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '6fc05b73-b004-40d5-8efc-4b8ab33238e3',
+					elementId: '82bb445a-1ca0-4c09-8236-f1df2a5412e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -2645,82 +2650,82 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '1ec463f7-1821-4666-a760-c246fb65d076',
+					elementId: 'c4e328ef-b6f2-4a4e-84d2-c0a685c52ac2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The follow-up to the <a href="https://www.theguardian.com/technology/2019/may/31/oneplus-7-pro-review-an-absolute-beast-in-every-way">best smartphone of the first half of 2019</a> is, unsurprisingly, the best phone to end 2019. The OnePlus 7T Pro is a minor update to the stellar OnePlus 7 Pro that keeps all the good bits, improves the camera, and speeds up the fingerprint scanner.</p>',
-					elementId: '9961416d-fa46-4cc6-90fe-b8b5309776b9',
+					elementId: '836d93ea-8c6d-4781-9189-e75ae526d784',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The monster 6.67in QHD+ AMOLED screen runs at 90Hz – compared with 60Hz for most of the competition – is arguably the best in the business. It’s bright, crisp and super smooth, plus it’s free of holes or camera notches. The selfie camera pops up from the top on command – a consistent crowd-pleaser.</p>',
-					elementId: '00a41e53-ac35-46da-8bfe-e11865c649aa',
+					elementId: '5cc717fa-0b16-4fe3-8f6a-b794cdef9545',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 7T Pro is the fastest-feeling phone – everything zips along. It has Qualcomm’s top chip, the Snapdragon 855+, 8GB of RAM and 256GB of fast UFS3.0 storage – plenty for practically everything. The optical in-display fingerprint scanner is even faster than before continuing to put the competition to shame.</p>',
-					elementId: '9f01dc42-a1cc-4e4d-b09b-2ed348dcd498',
+					elementId: '04d9fe96-e5cb-4f42-bd39-edc0d2332b5e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The latest OxygenOS 10, the firm’s super-slick version of <a href="https://www.theguardian.com/technology/2019/sep/04/android-10-released-everything-you-need-to-know-about-google-update">Android 10</a>, is arguably the best in the business too, and you’ll get prompt updates for three years.</p>',
-					elementId: '1d54aa4f-29e8-4fd5-8839-08b073fbbdd3',
+					elementId: '1837baf0-8672-4826-b986-24fd803d5c35',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The triple camera system on the back is good too, combining a 48MP main, a 16MP ultra-wide angle and an 8MP telephoto camera. New for the 7T Pro is a super-macro mode, which is surprisingly good, producing crisp images up to just 2.5cm from the lens – great fun. The 7T Pro can’t quite beat the <a href="https://www.theguardian.com/technology/iphone" data-component="auto-linked-tag">iPhone</a> 11 Pro or Pixel 4XL, but it matches or beats the rest on detail and utility.</p>',
-					elementId: '32f19551-d220-43c9-9d4d-413a6e77aa8c',
+					elementId: '9d49262d-2cc9-4b81-b756-da1629e7b1ae',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 7T Pro lasts about 32 hours between charges, making it one of the better performers. Charging is exceptionally fast via the firm’s WarpCharge system too, hitting 70% in just 34 minutes via cable. There’s no wireless charging though.</p>',
-					elementId: 'a7cf2792-93cb-4273-90e2-2e9f299a9bb5',
+					elementId: '214feb28-444e-4b65-9227-eb76556ed2d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Dual-sim support is handy for work or travelling. It’s water resistant to some extent, but has no IP rating. There’s a McLaren limited edition and a 5G version in the US, but not UK where the OnePlus 7 Pro 5G is still the current model.</p>',
-					elementId: 'bb651097-97d3-491e-a8e3-d5ab914cf0ab',
+					elementId: '89041417-c8ed-4fb4-8a74-a039c69b38ed',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: 'ac87cafa-ba62-4a85-98ca-1d92ba889149',
+					elementId: '01fcf6f4-9723-4f5f-9184-229a50ab7add',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The unrivalled screen, sheer speed and in-display fingerprint scanner, combined with the slick OxygenOS 10 make even mundane tasks a joy. The massive OnePlus 7T Pro is a stretch worth making.</p>',
-					elementId: '9474ebb3-4d1d-4b0c-bb18-ce3b8cc8e51d',
+					elementId: 'b64df8db-f035-4d5d-9a57-83bb0bb05b82',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best and fastest superphone experience</p>',
-					elementId: '72e5b9ff-1737-462e-8610-2c7de6d21ccd',
+					elementId: '996b2834-8bf2-4b25-9751-5fc1793e2d7b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you don’t want to stretch to such a big phone</p>',
-					elementId: 'f06dff34-6fe7-4239-94e5-24de2858c6da',
+					elementId: '0fe4e6f3-448f-4d03-b7c2-9017a3e6c6bc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li>\n</ul>',
-					elementId: 'f9b97e60-e060-43ef-a70c-401ad8b58417',
+					elementId: '5e12693d-2d6c-4fae-9e48-370f0b7112c7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best iOS:</strong> Apple iPhone 11 Pro</h2>',
-					elementId: '16bf0e46-5ae3-4964-8a2b-008106aeb33c',
+					elementId: 'd3f10325-5409-4a58-839c-50f84f72088b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,049</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					elementId: 'd95650b4-747c-4ed0-9ffc-fd89f87414fe',
+					elementId: '394a1dd4-da2a-4e6a-97fe-e90ba9cb3c17',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'cf282538-6d76-4b13-9a86-d9c9330479b2',
+					elementId: 'fcddc64b-dcef-40f0-ad94-f1cabdb5c8b6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3029,7 +3034,7 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: 'a249621f-d4bd-4a47-9885-fc4adcc26ef9',
+					elementId: '48b66c54-6405-4ae3-bb46-b83a84b12f62',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -3042,82 +3047,82 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: 'ff7f8ad6-5a30-4407-a109-d43745c23186',
+					elementId: 'b67a433f-df6c-44fa-be07-0afa31fe0328',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Good things come in smaller packages. The iPhone 11 Pro isn’t the biggest or the most expensive of Apple’s 2019 smartphones, but it is the best and very nearly the best phone of the year.</p>',
-					elementId: '3af8f1ee-665d-4772-b240-2075628e984d',
+					elementId: '226254e3-3396-4338-9d28-daf140964b0e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The iPhone 11 Pro combines a stunning, big-enough 5.8in screen, svelte, luxurious-feeling body, top-notch performance and battery life to keep up with most of the competition.</p>',
-					elementId: '72a02c61-77f7-43a2-a9b6-db5385c9b516',
+					elementId: 'c0840ace-3006-4a49-9b4f-463bee70dfaa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Truth be told, the design is basically uncharged since the mould-breaking <a href="https://www.theguardian.com/technology/2017/nov/10/iphone-x-review-apple-face-id-all-screen-design-home-button">iPhone X from 2017</a>. The back is now frosted glass, which looks particularly good in silver, and has a triple camera lump in the top left. The rest stays pretty much unchanged.</p>',
-					elementId: '5ed4de9e-87f9-4897-8c96-0881d8f821f0',
+					elementId: 'ea92fdc8-3f44-4bb0-8aad-bcc2c3b323ca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Apple’s Face ID is still the best, most widely-supported face recognition system in the business. The new A13 Bionic chip continues to lead the pack. The gesture navigation system continues to be one of the best, and you’re in line for around five years of <a href="https://www.theguardian.com/technology/ios" data-component="auto-linked-tag">iOS</a> software updates from release - at least two more than any other manufacturer will provide.</p>',
-					elementId: '002208f3-3cdf-49d0-a5e6-529860212805',
+					elementId: 'a4db828f-4fc5-431c-910a-d327203246d8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This year the iPhone 11 Pro introduces a significantly improved triple camera with ultra-wide, wide and telephoto lenses, which matches the best rivals in photography and beats them in video. It even has an effective night mode now.</p>',
-					elementId: 'ba9e4e21-6e57-40bc-a227-25f5ef9c40b5',
+					elementId: '3a4330f2-af96-469d-99c1-5af3ba1d2492',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s not all gravy – starting with just 64GB of storage is poor. The old Lightning connector still persists, rather than the newer standard of USB-C. There’s no 5G option and it is exceedingly expensive – you don’t buy the iPhone 11 Pro looking for value for money. Plus iOS 13 has been a mixed bag since its introduction, with a lot of bugs that needed fixing.</p>',
-					elementId: 'd05acd60-163b-4c2a-864b-641a0a4b3903',
+					elementId: 'bc5e944e-93b8-4b06-a527-215277fed7d9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But as a whole, no other phone can match the iPhone 11 Pro in power, capability and size. The iPhone 11 Pro is the smaller phone to buy and the best running iOS.</p>',
-					elementId: 'b95d8aa8-d69d-4e2a-b350-553e444de801',
+					elementId: '67c44b33-da59-41f9-9fc2-3330d67590d4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: '61ea9cf7-8b3b-4be0-838b-1937ec05fa3b',
+					elementId: '2dec26ec-1f25-4f84-8b1f-f612109bdb10',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>You want the best smaller phone, or simply the best Apple phone, then the iPhone 11 Pro is fantastic, but comes at a considerable cost</p>',
-					elementId: '1e2929d7-6efc-4cbf-899b-669a6b5c80a1',
+					elementId: '9e073ef7-d1a7-4d0f-b278-bc6d6ea97f82',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best iPhone</p>',
-					elementId: '59e18e8f-3789-48f8-87e0-b60334519b31',
+					elementId: '924623af-3b49-4330-9647-698e7c111a93',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you don’t want to spend £1,049 or want to use Android</p>',
-					elementId: 'e7a5df80-1c16-4dff-9ab4-0ceb393807cc',
+					elementId: 'f4f14649-3d12-41b1-a74e-957d3b6a9109',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro review: the best small phone available</a></p></li>\n</ul>',
-					elementId: 'a87cb814-ae0c-4d81-b2c8-2d6ed2956af7',
+					elementId: 'ec663266-7251-4511-b95b-68541c4c68e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best smaller Android:</strong> Samsung Galaxy S10</h2>',
-					elementId: 'bb4017a4-7f1c-4543-9f79-4458d7bdaca7',
+					elementId: '96b3b9a6-f7d4-4dc2-9d77-fc97c95ac66c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£799</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$899</a></p>',
-					elementId: '1fe54dc4-b22f-4e6d-b121-20bd2c79adb0',
+					elementId: '7c9808bd-3429-4a14-84f9-d1ed087b4712',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'c00f6908-8e82-4ccf-8da2-b9c826a2a9bf',
+					elementId: '1ddb5689-cf63-4310-a0cf-fb807b0d436c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3426,7 +3431,7 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '097209db-a078-4e52-be1f-2714635f9fd7',
+					elementId: '19d13aa5-2cbb-4aaf-bc93-c3d58918ee47',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -3439,77 +3444,77 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: '768db02f-df3e-4e20-ac34-76a68c1ae561',
+					elementId: 'df0cca87-34a6-475a-8980-4ffc4bad3e66',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If you want the Android sweet-spot between a big, stunning screen and smaller phone size that’s easier to handle and fit in a pocket, that’s the Galaxy S10.</p>',
-					elementId: '28e6587f-8dee-4128-9911-1ea5bbd1b79e',
+					elementId: '28ed19d1-62c8-44c4-ad81-65d1e5e8657b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 6.1in QHD+ AMOLED screen with a small hole-punch notch in the top right is one of the best on the market and is big enough to make the most of apps and movies look great.</p>',
-					elementId: 'f3089472-0590-48de-a008-61b1aa78e29e',
+					elementId: '4181de9e-068b-4b3d-bf6e-0bdb3b5b76d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Small bezels all round make the phone pretty compact compared with rivals, and it’s light too. It’s still a glass and metal sandwich, which means you might need a case to protect against falls.</p>',
-					elementId: 'f93f5535-d73b-4bec-83a1-e8eec803b749',
+					elementId: 'eabfb2cc-6de6-4653-a5d2-3ef813caa587',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Galaxy S10 was recently updated with Samsung’s new One UI 2 software, based on the latest Android 10 including much-improved navigation gestures. You should get about three years of software support from release from Samsung, although the company is usually slower than <a href="https://www.theguardian.com/technology/google" data-component="auto-linked-tag">Google</a> and OnePlus to deliver big Android version updates.</p>',
-					elementId: '05ec53e7-f874-4e0a-9e3e-2ee7f64abea1',
+					elementId: 'd25b3b39-06cb-4f6a-9b3d-a70b070a3013',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rear triple camera is good allowing you to zoom from 0.5 through 2x, and on to a 10x hybrid zoom. It won’t beat the <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Pixel 4 XL</a> or <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a>, but gets the job done. The selfie camera pokes straight though the screen and is one of the better ones on the market.</p>',
-					elementId: '249405ce-b4c0-4f1d-b33d-13e8c987397e',
+					elementId: 'ff335666-857f-4404-9033-14542b336c09',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Performance is good but battery life is a bit weak, lasting a day of usage but not much more. The ultrasonic fingerprint sensor mounted under the display has proved to be a bit slow and finickity over time, which can be annoying.</p>',
-					elementId: '9193e4dc-050e-4243-8a39-f646e1460a3f',
+					elementId: '15df9ee6-52be-43d5-9c49-1301884bf0e1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: '8e9ae663-9469-4ba6-8425-a57999fe75e2',
+					elementId: '704b7c7b-881e-48fd-b108-762d984b02cb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A big screen Android experience in a relatively small phone is the main selling point, but the good camera, performance and looks help too.</p>',
-					elementId: '63e754d7-270e-48f8-a9a1-56c7a05c4247',
+					elementId: 'd9d62cb4-0b95-4e01-ab0c-93f925668f4a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want a good balance of screen and phone size without breaking the bank</p>',
-					elementId: '8ee718e5-0a4b-4969-b3b1-60d711438243',
+					elementId: '3534f900-ee5f-42e3-a053-524f0d5c7611',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want brilliant battery life</p>',
-					elementId: 'd506a535-3eed-44e0-bf7b-912dadc19f14',
+					elementId: '40aca6ec-8448-41e1-8dfa-eebebdaf3aca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review: </strong><a href="https://www.theguardian.com/technology/2019/jun/06/samsung-galaxy-s10-review-the-sweet-spot">Samsung Galaxy S10 review: the sweet spot</a></p></li>\n</ul>',
-					elementId: '699a6f66-03bc-4288-8b17-2fd7e47cb4b9',
+					elementId: '89681ce8-f778-4940-a0f8-ffdacfef5578',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best camera: </strong>Huawei P30 Pro</h2>',
-					elementId: '6ba97ad2-d4c5-4ac1-89bb-d091b766b48f',
+					elementId: '906b414c-16cf-47c6-82ec-c3ae74f92199',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fconsumer.huawei.com%2Fuk%2Fphones%2Fp30-pro%2F%23buy&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£750</a></p>',
-					elementId: '6f66a295-918f-4b6e-8988-1b7767047da9',
+					elementId: '455ba720-8d6f-46d6-b1d3-6378b389859b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '023020f1-5501-4993-aac3-d4425ccb98ba',
+					elementId: 'a80e3108-ab1d-41e6-81c6-bec238a53bfd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3818,7 +3823,7 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '7e0a83fd-7e35-4ed9-9c61-7451812e3e26',
+					elementId: 'a9fdae1b-559c-4e5c-afc1-134294b450df',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -3831,77 +3836,77 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'a00e1273-b71f-4f43-ae1c-8ac7a611bb12',
+					elementId: '0104e674-2e62-4cbd-af84-3adf7a527659',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The best camera on a phone is the <a href="https://www.theguardian.com/technology/huawei" data-component="auto-linked-tag">Huawei</a> P30 Pro by some margin. Even at the end of 2019, no other phone provides as comprehensive a combination as Huawei’s new Leica quad camera.</p>',
-					elementId: 'e7c31a50-d78f-4d5c-a59d-186e4db1c630',
+					elementId: 'ff9954bc-408a-46ec-af19-a0b07f46a985',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 20MP 0.6x ultra-wide angle camera is fun, the main 40MP camera is terrific and it’s joined by a new periscopic 5x optical zoom camera that gets you closer than any other smartphone. If five times magnification wasn’t enough, there’s an excellent 10x hybrid zoom on top and then a digital zoom all the way up to 50x. A 3D depth-sensing time-of-flight sensor rounds out the modules on the back.</p>',
-					elementId: 'd2736335-5778-4c16-8d35-e83891d3a7b9',
+					elementId: 'e8987968-331c-4129-afe8-5bb243f94bca',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Remarkable levels of zoom aside, the P30 Pro also has low-light performance that instantly turns night into day without having to wait for a couple of seconds of capture. The P30 Pro might not have the best Night Sight rival, but most of the time it simply doesn’t need it.</p>',
-					elementId: '66125316-f476-4943-a19a-822ea1cd652f',
+					elementId: '45f4691a-0d2d-496a-b51a-999859d3c1f6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rest of the phone is excellent, too, with stunning colour options. The large 6.47in FHD+ OLED is great, with a small notch in the top containing the selfie camera and slim bezels all round. The curved edges keep the width of the phone to a narrow 73.4mm wide, meaning it’s still relatively manageable and easier to wield day-to-day particularly compared with the <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro</a> or <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max</a>.</p>',
-					elementId: '1c471cf0-2fb8-4977-98b8-45cc73dc609e',
+					elementId: '01534d73-a104-4667-9096-1f82d68e2afb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The in-screen optical fingerprint sensor is second only to the OnePlus 7T Pro’s. Huawei’s Kirin 980 processor, 8GB of RAM and 128GB of storage, provides great performance and a battery that will last about two days. Plus the battery charges super fast and has wireless charging and power sharing.</p>',
-					elementId: '2d111751-a1cc-4aea-8ff1-aedc15cf004f',
+					elementId: '96552841-c113-4420-bf37-fa0debe07c39',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Huawei’s modified Android 10, EMUI 10, is highly customisable and has plenty of features but may not be to everyone’s tastes. Huawei is still facing sanctions from the US as part of the <a href="https://www.theguardian.com/technology/2019/may/20/trump-us-ban-huawei-google-trade-war">US-China trade war</a>, which <a href="https://www.theguardian.com/technology/2019/may/19/google-huawei-trump-blacklist-report">makes its future uncertain</a>. The P30 Pro’s recent Android 10 update showed that it should <a href="https://www.theguardian.com/technology/2019/may/20/huawei-blockade-do-i-need-to-stop-using-my-android-phone">continue to receive updates as normal</a>, however.</p>',
-					elementId: 'e2d9cf72-2f20-4d01-8b83-b74ec4917f84',
+					elementId: '0470f9ab-9372-41ad-ac77-7f80f9028ccc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: '55368fba-d0b0-4be4-9c4f-8b23764b8a50',
+					elementId: '71c25c57-f409-4891-8d99-9315a8bef4d1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The camera is game-changing in meaningful, not gimmick-filled ways, while the rest of the phone is excellent</p>',
-					elementId: '053d29e6-0220-4e0c-befa-61404639c16a',
+					elementId: 'b0583ea5-c1f9-4f26-90cc-a1ff3c7be73c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best camera on a great phone</p>',
-					elementId: '2f568a0a-1d81-4e32-a946-da24a1ee3d2e',
+					elementId: 'a570af5e-6914-4a33-b3ed-9c5e71df9764',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want a smaller phone or are worried about US blockade of Huawei</p>',
-					elementId: '2e572396-8315-4582-823a-2ddf436aa394',
+					elementId: '16d7de3b-9bb8-4f53-bc79-02c9059e5d69',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/apr/24/huawei-p30-pro-review-leica-quad-camera-zoom">Huawei P30 Pro review: game-changing camera, stellar battery life</a></p></li>\n</ul>',
-					elementId: '7f8e1b6a-2708-45c2-87e5-3887613b1e86',
+					elementId: '9bfe5044-64d8-4dbc-a652-f3fa68ac1542',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best value:</strong> OnePlus 7T</h2>',
-					elementId: '182830ea-93b1-4263-bd7d-dedf02aff32d',
+					elementId: '75d7b872-ade7-416c-9a58-a76112aa8524',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£549</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$599</a></p>',
-					elementId: 'ee152bef-450c-4b34-8ac8-6499c60c5b61',
+					elementId: 'a8216c92-7f9d-41f4-b8f9-87fa59e25872',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'df4c4f3f-d2b4-4907-a4f3-429662851876',
+					elementId: 'd32414e1-2d8e-4395-b534-0e785e657570',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4210,7 +4215,7 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '94ae41d2-08a0-414b-b74d-8ba65b1190dc',
+					elementId: '59028f11-be2a-4e79-be66-f8ba7b1b6aa1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4223,57 +4228,57 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '89d2a15f-4394-46a7-81a7-fedd7b4c597a',
+					elementId: 'b58f8928-4815-47da-b8c5-157091f260c3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Pound for pound the OnePlus 7T offers the best performance, design and experience than any other smartphone.</p>',
-					elementId: '65dfbb66-cb72-45d4-a88f-3cd3c9ff7908',
+					elementId: '65a297f7-c390-41cd-9bd3-acb041e71041',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s got the big, good-looking 6.41in full HD OLED screen, with a small, widow’s-peak-like notch at the top for a selfie camera. New for the 7T is a 90Hz refresh rate, which like its <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">bigger sibling the 7T Pro</a>, makes even the mundane silky smooth.</p>',
-					elementId: '775760d5-ccce-4476-a95f-05a21a5aa01d',
+					elementId: '5ae6357e-bd41-4dc1-921a-ef878b46a4a2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s got 2019’s top-of-the-line Snapdragon 855+ processor, 8GB of RAM and 128GB of fast UFS3.0 storage. It also lasts a good 31 hours on a charge, and its OxygenOS 10 Android software is fast and slick. OnePlus guarantees two years of software updates and an additional year of bi-monthly security updates from the release date of the phone too.</p>',
-					elementId: '2e91cbca-470e-4e94-8a3b-d78cd6a31427',
+					elementId: 'e25e824f-a12a-4fb5-ad50-9fe2e68da99e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It even has the fastest and best in-display fingerprint scanner currently available, which is as good as the best dedicated capacitive sensors, good haptics and dual-sim support for having two mobile phone network connections at the same time.</p>',
-					elementId: 'a89f4635-fedc-4e68-bca9-9b940f7cc475',
+					elementId: '1c4ef11c-ba77-49b8-8d22-6fa36138979f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The triple camera is good too, with ultra-wide, wide and 2x telephoto lenses, plus a dedicated macro mode, but it can’t beat the very best in the market. There’s no formal water resistance rating and no wireless charging, but WarpCharge sees it hit full charge in 60 minutes flat.</p>',
-					elementId: '7ea4a90c-3937-4604-9bae-b8a520817f63',
+					elementId: 'fc1d9da5-9862-406a-95ad-b3375b666448',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: '4945395a-5df6-40aa-8eb9-c1dd947c1eb2',
+					elementId: '44c820a3-af18-406e-ad3f-254271ba1aab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A great 90Hz screen, excellent software and the best performance, in-display fingerprint scanner and a good camera mean you have to spend significantly more to get a better phone than this</p>',
-					elementId: 'f88c41ef-2f2e-4e82-acc7-2a0a16ea2a5f',
+					elementId: 'b8bf4539-8b5e-4c5f-8ff0-7de2a15f1af6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want a top-notch phone but don’t want to spend more than £549</p>',
-					elementId: 'ecd7a043-6573-47e3-a0b3-a77b0c341df5',
+					elementId: 'c817a3e7-e72c-4dff-9f2a-dc8104548574',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want a really good camera</p>',
-					elementId: 'b0c3acf5-8a0d-4cd2-a1d3-279038c5b6ab',
+					elementId: 'f040be4c-2bca-4c33-ae03-b260d563c6bc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/16/oneplus-7t-review-the-new-cut-price-flagship-king">OnePlus 7T review: the new cut-price flagship king</a></p></li>\n</ul>',
-					elementId: 'f139f020-d665-4901-b35f-de7dfdf609bd',
+					elementId: '1792707a-3939-4071-9ea6-f723ff30f792',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement',
@@ -4282,32 +4287,32 @@ export const NumberedList: FEArticleType = {
 					title: 'Smartphone jargon',
 					html: "<p><strong>Size</strong></p><p>Smartphones are rated by screen size measured on the diagonal in inches. The bigger the number the larger the phone, but different phones use different ratios of height to width.</p><p>How easy it is to handle comes down to the width of the phone and its weight. The narrower and lighter it is, the easier it is to hold in one hand and the less likely you are to drop it.</p><p><strong>Processor</strong></p><p>What is commonly called the processor in a phone is actually a system-on-a-chip combining the processor, graphics and other essential systems into one.</p><p>Generally the newer the processor the more powerful and battery efficient it will be. Samsung, Huawei and Apple make their own, while Qualcomm is the largest supplier to other brands at the high end, with its Snapdragon 8-series range at the top.</p><p><strong>RAM</strong></p><p>The RAM (memory) is where your apps and processes are stored when in use, so the you more your phone has the better, up to a point.</p><p>Android requires more RAM than iOS, so it's difficult to directly compare them. But with Android at least 4GB of RAM is currently recommended.</p><p><strong>Storage</strong></p><p>Different from memory, storage is where everything is stored on the phone, including apps and media. While a few phones can have their storage expanded with microSD cards, most cannot.</p><p>That means you should aim for 64GB of storage at a minimum, but more if you want to store lots of photos. Cloud services such as Spotify or Google's Photos can help offload your music, photos or videos to the internet.</p><p><strong>Software updates</strong></p><p>Keeping your phone secure from hackers is essential, which makes software updates critical to patch bugs and security holes, as well as adding new features and improving things such as battery life and the camera.</p><p>Not all phones receive regular updates. Apple's support of older phones is the best in the business of around 5 years, followed by Samsung and Google's three years, both from when the phone was released - not when you buy it.</p><p><strong>Battery life</strong></p><p>Battery life varies drastically between devices, and \"all-day battery\" often doesn't mean 24 hours between charges. Some may not last long enough, particularly if you're out in the evening.</p><p>Battery life gets worse as the battery ages too, so a two-day battery will likely make sure the phone lasts at least a day two years later.</p><p><strong>Camera</strong></p><p>Cameras are the current battleground between the big players, but the margins between them are slimming.</p><p>Most use computational photography that combines hardware with advanced software algorithms, typically allowing multiple cameras to combine to make one image.</p><p>As such the camera software makes as much difference as the hardware, and is one of the few areas that actually improves over time with updates.</p><p>Multi-camera systems often offer more, such as useful zooms, portrait modes and better low-light performance, but they are not all created equally. There are also 3D cameras, which can detect facial expressions and other fun tricks.</p><p>The number of megapixels (MP) also makes a difference. Having more MP doesn't necessarily equal a better image, but modern smartphone cameras combine multiple pixels to improve image quality producing 12MP shots from 48MP sensors, for example.</p><p><strong>Other things to consider</strong></p><p><b>Wireless charging:</b>&nbsp;convenient, but slower than via cable and normally a charging pad doesn't come in the box</p><p><b>Durability:</b>&nbsp;generally glass on the front and back of the phone makes it more fragile</p><p><b>Resale value:</b>&nbsp;iPhones hold their value better than most others</p><p><b>OLED versus LCD:</b> OLED screens emit their own light so have much deeper blacks and more vibrant colours, while LCD screens are cheaper</p>",
 					credit: '',
-					elementId: '90e6a74a-0052-4e37-b21c-3913a5374010',
+					elementId: 'd146c1c8-79f5-4eb1-b37e-4178ec669b8b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Runners up</h2>',
-					elementId: 'c3dcff62-8b4e-480d-9c4b-baa3a3b32223',
+					elementId: 'a847ce21-5686-4a86-9b07-acc2570bcfaf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>These are good phones still worth buying if none of the top smartphones fit the bill.</p>',
-					elementId: '3d6bc5e0-42e1-4101-99e4-8901d1381b2e',
+					elementId: '21f9edc1-b1cc-4627-8eab-ee4c8224162b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Apple iPhone 11</strong></p>',
-					elementId: 'fa360158-e577-4a49-9e9b-38d215e55df1',
+					elementId: 'f22050f4-4901-4345-b432-9ae7d78f4078',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£729</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$699</a></p>',
-					elementId: '72ab34d1-e965-4323-911c-995d9134ff25',
+					elementId: 'a56dad4e-ef9f-4d31-a1c7-c4919b6c6f16',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: 'd83cd6e9-6394-4d47-8331-f457817b7bf0',
+					elementId: '4791a03d-138f-4d9d-997b-f08d5eeeaa74',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4604,17 +4609,17 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '46d95f67-7848-42b2-bf15-5dae916fd555',
+					elementId: '0c06b57b-2171-473a-9de8-c5e8e64c0d82',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Apple’s cheaper iPhone 11 is the follow-up to last year’s iPhone XR and offers most of the features of the iPhone 11 Pro. It has slightly battery life too, but is missing the excellent ultra-wide angle camera, has a slightly larger, but worse screen. It is made of aluminium and glass, instead of stainless steel, losing its luxurious feel and the knowledge that it’s the best Apple can make.</p>',
-					elementId: 'ef65e180-7249-49e0-b888-a35e85f4f2a6',
+					elementId: '0fcd2c4d-e319-4f8b-8d04-69906a637b1d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The iPhone 11 looks great in red or white, but it’s not cheap by any stretch of the imagination, costing as much or more as true flagship phones from competitors. The iPhone 11 certainly holds its own for the money, but the <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a> still the one to buy if you want the best iPhone. If you want a cheaper phone, switch to Android or buy last <a href="https://www.theguardian.com/technology/2018/oct/31/iphone-xr-review-apple-big-bezels-battery-face-id-screen">year’s iPhone XR</a>.</p>',
-					elementId: '83edab31-5d07-4eb5-a1dd-d92e1eedd01e',
+					elementId: 'edbde81c-8bca-402d-92de-4cf52bd8f19a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4627,27 +4632,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: '75a218cc-552b-4b82-851d-b707f1ffaaf1',
+					elementId: '32eae15b-4a44-4d6b-92b8-412976f4d424',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/01/iphone-11-review-iphone-xr-dual-camera-a13-smartphone">iPhone 11 review: an iPhone XR with a better camera</a></p></li>\n</ul>',
-					elementId: 'e9036950-450e-4ef8-89a9-c7b301d5dfb7',
+					elementId: '7a039843-430c-4b71-aa6a-9f8f526df733',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Apple iPhone 11 Pro Max</strong></p>',
-					elementId: '3fdf5d25-e243-40f8-82e9-8a02286c81b5',
+					elementId: '5ba0327a-37ec-42f9-b6be-fe5736b4a2b2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP: </strong><a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,149</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					elementId: 'd9b34c4a-6054-483f-b414-7cc4542bb96a',
+					elementId: 'fa97807d-76d7-4b2e-906d-0fb510a2667c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '48563ea0-b0f3-4ac7-899b-bb3253546c30',
+					elementId: '2fd05444-f3fa-453c-b51c-06e0c08e5635',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4944,12 +4949,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '2613cebd-723c-4dbe-b049-d3d7aab0be58',
+					elementId: '79afe119-1cab-4aab-a146-736f4cb15088',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If you must have an iPhone and it must have a massive screen or epic battery life then the iPhone 11 Pro Max is your only option. But it has really poor ergonomics, is big, expensive and heavy, making the smaller iPhone 11 Pro or iPhone 11 are better options.</p>',
-					elementId: '2d2b54ba-c3e4-41c6-a236-f4844d9a35c0',
+					elementId: 'bdbbf90f-d11c-479c-abe7-04bc7a07109f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4962,27 +4967,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '14c5c303-c2bf-45fe-8011-37b100752ebd',
+					elementId: '30a4393c-91fc-4e81-b182-e491b4589c8b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max review: salvaged by epic battery life</a></p></li>\n</ul>',
-					elementId: '374d0660-d637-4281-add3-f6825714b1ce',
+					elementId: '1617afb1-12c3-489e-90c9-69ad53558eaa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10e</strong></p>',
-					elementId: '7398ac7c-3f55-4f31-9eed-7d45def0001e',
+					elementId: '5c88b839-3878-4625-8318-9cb88df9496d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£669</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$650</a></p>',
-					elementId: '90fcd943-ca00-4b1f-9877-afb4ff95c948',
+					elementId: '599ad778-0421-4a55-b606-f2152eb4fa3d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '72b85c05-af5d-47bf-bc33-d2a456df16f2',
+					elementId: '48e59249-1cf0-464a-af60-ba04fae84a92',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5289,17 +5294,17 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '824b8f33-c174-41f5-bbbb-bbf8f36d1ce4',
+					elementId: '5dc90298-470f-4042-92c4-c96f4178b4d4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The smallest, cheapest variant of Samsung’s current S10 line is still good, but falls slightly short of the high bar set by the regular Galaxy S10. The Galaxy S10e loses the optical zoom with only two cameras on the back, has a flat, slightly smaller screen and a lower capacity battery. It also ditches in the in-screen fingerprint scanner for one embedded in the power button – great for right-handed users but not so for the left handed.</p>',
-					elementId: '99c26d7e-cf33-47d4-8cea-fdd04afa161b',
+					elementId: '9d6da0b1-990e-41b4-8e7a-1d0be80d0e7b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It doesn’t feel any smaller in the hand, but can be had for less if you must have a top-end Samsung for the lowest possible cost or dislike curved screens.</p>',
-					elementId: '43e55011-b777-465a-930b-572205dd6729',
+					elementId: 'd52408fa-2eac-48ab-8e60-e04f4484af76',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5312,22 +5317,22 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '56cb9056-4b09-49e8-9422-d666f06517cb',
+					elementId: '9068dc9b-39eb-4a05-a238-218b7bf8e4e1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10+</strong></p>',
-					elementId: '6bced79f-91ae-40cc-b3b3-03fc3d192fcc',
+					elementId: '54a2ce16-78d1-41a0-bc8c-4e215dd45528',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£899</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					elementId: 'e3d0902e-277f-4dcb-b813-ee603c37183f',
+					elementId: '351eb840-4890-4b6e-95d4-3d6137db5411',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '786244ae-2a79-490a-9172-2766272449bb',
+					elementId: 'e6f35021-9052-4a64-a824-233c34fad505',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5634,12 +5639,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '79a1b597-e9b2-41a0-ba5c-2ed36d43b40b',
+					elementId: '78f29162-5ee1-462d-9a37-5dab461abdb8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The bigger version of the Galaxy S10 with a 6.4in QHD+ display has the best screen available on any device. The oval-shaped hole-punch notch is novel, containing two good selfie cameras. The triple rear camera is good, but not a patch on the Huawei P30 Pro. Performance is good, so is the software, but the battery life is slightly disappointing compared with the best. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					elementId: '514a9de8-9249-495e-a3ed-7b5dd84995be',
+					elementId: '29b3fc63-2951-484f-88ef-be27f46b930e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5652,27 +5657,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '9507e5c6-67db-42bc-a2f1-207e26f81f93',
+					elementId: '3739e89c-8f10-4713-8edb-8dfa81d2b358',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/mar/11/samsung-galaxy-s10-plus-review-smartphone-ultrasonic-triple-camera">Samsung Galaxy S10+ review: a simply stunning screen</a></p></li>\n</ul>',
-					elementId: '314ae908-a543-4625-933c-4416be1d6635',
+					elementId: 'd5928926-b8f2-4c0a-a7d3-9303160b279f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy Note 10+</strong></p>',
-					elementId: '73d620d7-c08e-4072-b7be-b9aa4fc4b692',
+					elementId: '55e9cd2b-cd5c-44af-b3d3-da1bd86390f6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-note10plus-sm-n975%2FSM-N975FZSDBTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£999</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-note10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					elementId: '4a7f32f4-51a6-4903-bebb-6f4679be6d1b',
+					elementId: '6d0af40a-35b7-4541-9d71-9da5523c7afd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '19a64af6-cf56-4935-8080-0fd34353fd6a',
+					elementId: '509d2348-0bd1-4f7b-a1c6-8fc0a59754d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5969,12 +5974,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '131f2b32-639b-4d94-a012-69576ac49f05',
+					elementId: '98eacc8f-8d7d-43e7-837d-ad0bc196a1fc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Galaxy Note 10+ is a Samsung super-fan’s dream. It has the biggest screen on a Samsung with a monstrous 6.8in on the diagonal, new faster UFS3.0 storage, reasonable battery life and plenty of party tricks. The stylus can now be used as a magic wand for gestures, there are three cameras on the back and is available in a 5G version too. The fingerprint scanner is a bit slow and can be a bit frustrating to use.</p>',
-					elementId: '716014d7-4cd9-431d-8b1c-efa6fde2c28c',
+					elementId: '24718b77-c152-4c9c-8903-a214226b6a2c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5987,27 +5992,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '3c0bb164-d390-4a41-8273-1df0fb154b62',
+					elementId: '5b986620-63ef-4a05-8243-c94eb7e17216',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/sep/12/samsung-galaxy-note-10-review-bigger-and-now-with-a-magic-wand">Samsung Galaxy Note 10+ review: bigger and now with a magic wand</a></p></li>\n</ul>',
-					elementId: 'f7aefa61-f376-4a62-8cb0-4d2130d23f8d',
+					elementId: 'ff9e2abc-a54c-4e69-98c3-83d3937d48cd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10 5G</strong></p>',
-					elementId: 'ef645790-c1ca-4207-9de6-aec5c3747bc5',
+					elementId: '5bce79e2-d520-41d4-b156-729e1f14465b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10-sm-g977-5g%2FSM-G977BZAABTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,099</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2Fv2%2F%3Flink%3Dgalaxy-s10%2B&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,299</a></p>',
-					elementId: '66de985b-54b8-4172-a4d9-182868bc4eae',
+					elementId: 'fd810e43-8eaa-4dca-9b80-86628b7c7c78',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: 'c4d3896b-5bea-4bc4-8c09-fa2834f4af0f',
+					elementId: '47aab404-b924-4b80-9eef-9a0f5e8db16a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6304,12 +6309,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '5d202511-dbfb-4fda-a9ae-2891c7408d89',
+					elementId: '5f6920a6-436f-4915-9d43-3ca831b53a4e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The biggest, most powerful version of Samsung’s S-line is the S10 5G and it’s huge with a 6.7in QHD+ AMOLED screen, long oval-shaped hole-punch notch for the selfie cameras, and four cameras on the back. Performance, software and battery are good, but it’s not as slick or ergonomic as the OnePlus 7 Pro 5G. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					elementId: '47ac428a-8d6d-4a59-9d9f-6ec0e976b3f8',
+					elementId: '8adc4c5e-3fe9-4f5e-ad4b-c408da756406',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -6322,27 +6327,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: '450741bd-c450-4693-9ea3-d2993a278ffa',
+					elementId: '199da3bd-e55e-49ed-8b07-ce3f7fabc80a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/aug/21/samsung-galaxy-s10-5g-review-bigger-faster-and-lasts-longer">Samsung Galaxy S10 5G review: bigger, faster and lasts longer</a></p></li>\n</ul>',
-					elementId: '013aad36-e75d-4258-ae49-7c1013fe34f7',
+					elementId: '0704c15a-b437-4b79-9291-23db3322da0f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Huawei Mate 20 Pro</strong></p>',
-					elementId: '9644395c-341e-4b57-b1f1-627190f0ec79',
+					elementId: '0914a1f4-7a41-406c-bc28-37213836725a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP: </strong>£899.99</p>',
-					elementId: '6057c059-748f-4921-82ed-44f0311649c8',
+					elementId: '6813761a-dfd9-4599-893a-0616f686261b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'c0d9e996-687d-4d43-9776-55e1a48d11e4',
+					elementId: 'cfa708e5-acee-411f-83cf-ce135206801e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6649,12 +6654,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '5c32fa86-2097-4cc7-82a3-f39d6e4b7fd2',
+					elementId: '1ea58fd5-4e1c-447b-a139-d0beba683bb0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Mate 20 Pro has the big, attractive 6.39in QHD+ screen, svelte body, long battery life and great performance that made it the top phone of 2018. However, its excellent triple camera system with 3x optical zoom has been outdone by Huawei’s newer P30 Pro, which has a Leica quad camera with 5x optical zoom. It recently received EMUI 10 (Android 10) and is worth looking out for deals, particularly if you want the 3D face unlock option.</p>',
-					elementId: 'fc29ed68-8d2b-4201-9e85-33e31e4c4177',
+					elementId: '436295c4-4e49-4e8a-b0f2-04e183a168ed',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -6667,27 +6672,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'd5749d90-4ae0-45dd-a8a2-3abf77f4674a',
+					elementId: '256b7240-32e3-432f-8505-60f8bcaa95a5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2018/oct/29/huawei-mate-20-pro-cutting-edge-brilliance-in-display-fingerprint-and-3d-face-scanning-triple-camera-long-battery-life">Huawei Mate 20 Pro review: cutting-edge brilliance</a></p></li>\n</ul>',
-					elementId: 'd518b025-0316-4881-b29a-d4aea9288fef',
+					elementId: '06a074eb-839a-4848-8163-b43308f5417a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Google Pixel 4 XL</strong></p>',
-					elementId: '18bf6eea-63fe-43b7-bb38-cc51eb0e3118',
+					elementId: 'e836b3d6-3220-44ae-b1d0-d86a891b9a8b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://store.google.com/gb/config/pixel_4">£829</a> / <a href="https://store.google.com/config/pixel_4">$899</a></p>',
-					elementId: '2fc03c59-b34a-485c-acad-376eb07882ae',
+					elementId: '8378f5ac-acdb-432a-96ad-f230564ce40e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '9b08972a-cc19-40d0-bcdc-3834d037bc26',
+					elementId: '43d15e3a-7d68-43fd-b357-fbf56fe88169',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6984,12 +6989,12 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '1b89e0bc-870f-4dac-ae9e-af93c1c50410',
+					elementId: 'add7d9a5-9cdd-4d6e-b058-43d30a1981ff',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Google Pixel 4 XL is a mixed bag. On the one hand you have a good-looking 6.3in QHD+ AMOLED display running at 90Hz, a stellar camera, new Soli radar gesture system, amazing new on-device AI and super-fast 3D Face Unlock. But on the other you have no fingerprint scanner, meaning until apps are updated to use the Face Unlock you’re forced back to using the old pin or password, the battery life is fairly short and there have been quite a few bugs that have needed fixing since launch. One day it might be great.</p>',
-					elementId: '68223e62-6496-43e1-9657-9b91420b5ad6',
+					elementId: '7ac46700-6317-4197-9bc1-dfdaac857860',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -7002,27 +7007,27 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '6f410e16-5b05-4a25-976d-a70f166c4dda',
+					elementId: 'f1e739d2-6b55-463d-8e2b-3f18bd10ec21',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Google Pixel 4 XL review: not quite ready for primetime</a></p></li>\n</ul>',
-					elementId: '7f957c65-bcc0-4031-ae96-89bbc0d8e868',
+					elementId: 'af87c03c-edbc-454b-b258-0efca87a0d47',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Xiaomi Mi Mix 3</strong></p>',
-					elementId: '6832f65e-1895-4b19-a2f6-13f078c4b77d',
+					elementId: '605f73a7-7133-43f3-b4b0-1da81fd0fe8d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://buy.mi.com/uk/buy/product/mix3">£499</a></p>',
-					elementId: '837045a2-8ce7-415b-a887-748b1f0b9448',
+					elementId: 'add58937-9b0e-46d6-bdd4-923d36d4e622',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: 'e390ee28-b474-45a0-8d9b-e43f0009a316',
+					elementId: '7b2b08fe-92be-42df-aaf1-46fb3770a292',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7329,17 +7334,17 @@ export const NumberedList: FEArticleType = {
 							],
 						},
 					],
-					elementId: '9d2bcb46-a77c-47a5-aafc-da89de12dc49',
+					elementId: '22ad6ba4-c4f9-4687-9314-43bfecf36e5f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Xiaomi’s first slider phone offers more than most for the money, with top-flight specs for 2018 competing directly with the OnePlus 6T and Honor View20. It takes a different approach to the problem of where to put the selfie camera in an all-screen design, hiding it behind the screen on slide-out section.</p>',
-					elementId: '8630a256-7be7-41bd-92ae-686106a73b70',
+					elementId: 'aa958ba5-f1bb-409f-b36d-275176c4956f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Good, but quite as great as its competition, this huge phone is held back by a heavy weight and a software experience that just isn’t as good, despite solid gesture navigation options.</p>',
-					elementId: 'e73286c1-f1e7-400c-9732-0ca02a3c38c2',
+					elementId: '70be7ca4-ad4f-41e9-bdda-11692b866a12',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -7352,42 +7357,42 @@ export const NumberedList: FEArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '9592bc61-b790-4c76-af04-e0bd1f985a3a',
+					elementId: '09ccbdf6-491a-4a3a-8f77-f3dcbb4f398a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/feb/27/xiaomi-mi-mix-3-review-novel-slider-finally-hits-the-uk">Xiaomi Mi Mix 3 review: novel slider finally hits the UK</a></p></li>\n</ul>',
-					elementId: '21cd2acb-b537-4ead-be3e-a386dd424520',
+					elementId: '3f0d5dbc-e0c8-4f27-b37b-721a8b888327',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Not recommended</h2>',
-					elementId: '31c320e7-f2be-4f13-85be-e530befc200d',
+					elementId: '6f43b456-2264-4df8-8a6a-213f87c37fd0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Google Pixel 4</strong> - Great phone utterly ruined by <a href="https://www.theguardian.com/technology/2019/oct/31/google-pixel-4-review-battery-life-camera">terrible battery life</a> - £669</p>',
-					elementId: 'a95ff54a-df76-4d3b-806e-bed45a58e81f',
+					elementId: '4512304c-121d-4c79-bb77-c4cd99e52aea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Razer Phone 2</strong> - Gaming phone beast that falls down on camera performance – £500</p>',
-					elementId: 'b55ff6f0-a283-4d98-9da7-ca24a8836dc6',
+					elementId: '7a49edc7-e910-4392-97f3-13d0e5c06df1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Sony Xperia XZ3</strong> – Good, but not great phone that misses the mark – £699</p>',
-					elementId: '3524d2bd-f13c-495f-a4a9-b3072263cc37',
+					elementId: '18fd8e09-9784-4a33-9405-9208aa55e29b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p><strong><a href="https://www.theguardian.com/technology/2019/may/01/best-true-wireless-earbuds-airpods-samsung-jabra-sennheiser-anker-compared-and-ranked">Best true wireless earbuds: AirPods, Samsung, Jabra and Anker compared and ranked</a></strong></p></li>\n</ul>',
-					elementId: '7cedb1e9-f1ef-42ec-965c-889d514fff1d',
+					elementId: '79504155-51c4-4f86-94f3-339d1ba961be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement',
 					html: '\n\n\n\n\n\n\n    <p><em><sup>\n        This article contains affiliate links, which means we may earn a small commission if a reader clicks through and\n        makes a purchase. All our journalism is independent and is in no way influenced by any advertiser or commercial initiative.\n        By clicking on an affiliate link, you accept that third-party cookies will be set.\n        <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links" data-link-name="in body link" class="u-underline">More information</a>.\n    </sup></em></p>\n\n',
-					elementId: 'f123e209-79d4-4267-8586-61822cca0a8d',
+					elementId: 'eef9a033-83cb-4948-9082-282c927ca615',
 				},
 			],
 			attributes: {
