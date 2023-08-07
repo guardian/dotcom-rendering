@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import {
-	from,
-	headline,
-	space,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { ArticleDesign } from '@guardian/libs';
+import { from, space, textSans, until } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 import type { BaseLinkType } from '../model/extract-nav';
@@ -71,22 +65,18 @@ const listWrapper = (palette: Palette) => css`
 `;
 
 const listItemStyles = (palette: Palette) => css`
-	margin-right: 5px;
 	display: inline-block;
+	${textSans.xsmall()};
+	border: 1px solid ${palette.text.subMeta};
+	border-radius: 12px;
+	padding: 2px 9px;
+	margin-right: 7px;
 	a {
 		position: relative;
 		display: block;
-		padding-right: 5px;
 		text-decoration: none;
 	}
-	a::after {
-		content: '/';
-		position: absolute;
-		pointer-events: none;
-		top: 0;
-		right: -3px;
-		color: ${palette.text.subMetaLink};
-	}
+
 	a:hover {
 		text-decoration: underline;
 	}
@@ -98,28 +88,6 @@ const linkStyles = (palette: Palette) => css`
 		text-decoration: underline;
 	}
 	color: ${palette.text.subMeta};
-`;
-
-const sectionStyles = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return css`
-			${textSans.medium()}
-			line-height: 19px;
-		`;
-	}
-	return css`
-		${headline.xxxsmall()};
-	`;
-};
-
-const keywordStyles = css`
-	${textSans.small()};
-`;
-
-const hideSlash = css`
-	a::after {
-		content: '';
-	}
 `;
 
 type Props = {
@@ -152,8 +120,16 @@ export const SubMeta = ({
 	badge,
 }: Props) => {
 	const palette = decidePalette(format);
-	const hasSectionLinks = subMetaSectionLinks.length > 0;
-	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
+	const createLinks = () => {
+		const links: BaseLinkType[] = [];
+		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
+		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
+		return {
+			links: links,
+			hasLinks: links.length > 0,
+		};
+	};
+	const { links, hasLinks } = createLinks();
 	return (
 		<div
 			data-print-layout="hide"
@@ -168,56 +144,27 @@ export const SubMeta = ({
 					<Badge imageSrc={badge.imageSrc} href={badge.href} />
 				</div>
 			)}
-			{(hasSectionLinks || hasKeywordLinks) && (
+			{hasLinks && (
 				<>
-					<span css={labelStyles(palette)}>Topics</span>
+					<span css={labelStyles(palette)}>
+						Explore more on these topics
+					</span>
 					<div css={listWrapper(palette)}>
-						{hasSectionLinks && (
-							<ul css={listStyleNone}>
-								{subMetaSectionLinks.map((link, i) => (
-									<li
-										css={[
-											listItemStyles(palette),
-											sectionStyles(format),
-											i ===
-												subMetaSectionLinks.length -
-													1 && hideSlash,
-										]}
-										key={link.url}
+						<ul css={listStyleNone}>
+							{links.map((link) => (
+								<li
+									css={listItemStyles(palette)}
+									key={link.url}
+								>
+									<a
+										css={linkStyles(palette)}
+										href={link.url}
 									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
-											{link.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
-						{hasKeywordLinks && (
-							<ul css={listStyleNone}>
-								{subMetaKeywordLinks.map((link, i) => (
-									<li
-										css={[
-											listItemStyles(palette),
-											keywordStyles,
-											i ===
-												subMetaKeywordLinks.length -
-													1 && hideSlash,
-										]}
-										key={link.url}
-									>
-										<a
-											css={linkStyles(palette)}
-											href={link.url}
-										>
-											{link.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
+										{link.title}
+									</a>
+								</li>
+							))}
+						</ul>
 					</div>
 				</>
 			)}
