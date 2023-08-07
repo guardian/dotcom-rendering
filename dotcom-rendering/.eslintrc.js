@@ -89,6 +89,7 @@ module.exports = {
 		'jsx-a11y',
 		'jsx-expressions',
 		'custom-elements',
+		'unicorn',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -166,6 +167,8 @@ module.exports = {
 				allowAny: true,
 			},
 		],
+
+		'unicorn/prefer-node-protocol': 'error',
 
 		...rulesToReview,
 		...rulesToEnforce,

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
 import { loggingStore } from './logging-store';

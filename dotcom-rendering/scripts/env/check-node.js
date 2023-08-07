@@ -1,6 +1,6 @@
-const { promisify } = require('util');
-const { join } = require('path');
-const readFile = promisify(require('fs').readFile);
+const { join } = require('node:path');
+const { promisify } = require('node:util');
+const readFile = promisify(require('node:fs').readFile);
 
 const ensure = require('./ensure');
 

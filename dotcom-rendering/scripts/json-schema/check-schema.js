@@ -1,6 +1,6 @@
 /* eslint-disable no-console -- logs are useful in scripts */
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 const {
 	getArticleSchema,
 	getFrontSchema,
