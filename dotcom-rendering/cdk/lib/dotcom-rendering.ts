@@ -5,6 +5,8 @@ import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import type { App } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
+import { InstanceProfile } from 'aws-cdk-lib/aws-iam';
+
 
 interface DCRProps extends GuStackProps {
 	app: string;
@@ -46,6 +48,15 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const instanceProfile = new InstanceProfile(this, 'InstanceProfile', {
+			role: instanceRole
+		});
+
+		this.overrideLogicalId(InstanceProfile, {
+			logicalId: 'InstanceProfile',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -57,8 +68,7 @@ export class DotcomRendering extends GuStack {
 			parameters: {
 				VpcId: vpc.vpcId,
 				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup:
-					lbSecurityGroup.securityGroupId,
+				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 			},
 		});
 	}

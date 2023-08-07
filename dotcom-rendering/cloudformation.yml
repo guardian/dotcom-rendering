@@ -61,6 +61,9 @@ Parameters:
   InternalLoadBalancerSecurityGroup:
     Description: Load balancer security group, now defined outside of this file
     Type: String
+  InstanceProfile:
+    Description: Id of instance profile
+    Type: String
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -157,12 +160,12 @@ Resources:
                 Resource:
                   - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/dotcom/*
 
-  InstanceProfile:
-    Type: AWS::IAM::InstanceProfile
-    Properties:
-      Path: /
-      Roles:
-        - Ref: InstanceRole
+  # InstanceProfile:
+  #   Type: AWS::IAM::InstanceProfile
+  #   Properties:
+  #     Path: /
+  #     Roles:
+  #       - Ref: InstanceRole
 
   InternalLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
