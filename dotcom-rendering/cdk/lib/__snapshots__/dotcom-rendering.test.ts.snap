@@ -46,6 +46,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "gu:cdk:constructs": [
       "GuVpcParameter",
       "GuSecurityGroup",
+      "GuSecurityGroup",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -357,29 +358,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "InstanceSecurityGroup": {
       "Properties": {
         "GroupDescription": "rendering instance",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
         "SecurityGroupIngress": [
           {
+            "CidrIp": "10.248.136.0/22",
+            "Description": "TCP 9000 ingress",
             "FromPort": 9000,
             "IpProtocol": "tcp",
-            "SourceSecurityGroupId": {
-              "Fn::GetAtt": [
-                "InternalLoadBalancerSecurityGroup",
-                "GroupId",
-              ],
-            },
             "ToPort": 9000,
           },
         ],
         "Tags": [
           {
             "Key": "App",
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -600,7 +598,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
         "SecurityGroups": [
           {
-            "Ref": "InstanceSecurityGroup",
+            "Fn::GetAtt": [
+              "InstanceSecurityGroup",
+              "GroupId",
+            ],
           },
         ],
         "UserData": {

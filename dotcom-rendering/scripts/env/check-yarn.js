@@ -1,6 +1,5 @@
-const { promisify } = require('util');
-const exec = promisify(require('child_process').execFile);
-
+const { promisify } = require('node:util');
+const exec = promisify(require('node:child_process').execFile);
 const ensure = require('./ensure');
 
 // Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn

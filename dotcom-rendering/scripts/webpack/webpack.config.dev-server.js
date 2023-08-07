@@ -1,5 +1,5 @@
 // @ts-check
-const path = require('path');
+const path = require('node:path');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');

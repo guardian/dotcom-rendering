@@ -1,7 +1,7 @@
-const { promisify } = require('util');
-const { join } = require('path');
-const readFile = promisify(require('fs').readFile);
-
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { join } = require('node:path');
+const { promisify } = require('node:util');
+const readFile = promisify(require('node:fs').readFile);
 const ensure = require('./ensure');
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -18,7 +18,7 @@ const ensure = require('./ensure');
 			const { warn, prompt, log } = require('./log');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
-				`You are using v${nodeVersion}`,
+				`You are using v${nodeVersion ?? '(unknown)'}`,
 			);
 			if (process.env.NVM_DIR) {
 				prompt('Run `nvm install` from the repo root and try again.');

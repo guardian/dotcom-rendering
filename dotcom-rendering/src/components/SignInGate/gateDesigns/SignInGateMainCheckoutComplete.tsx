@@ -166,6 +166,7 @@ const getBodyText: (product: Product) => string[] = (product) => {
 
 export const SignInGateMainCheckoutComplete = ({
 	signInUrl,
+	registerUrl,
 	guUrl,
 	dismissGate,
 	abTest,
@@ -182,6 +183,7 @@ export const SignInGateMainCheckoutComplete = ({
 		return (
 			<SignInGateMain
 				signInUrl={signInUrl}
+				registerUrl={registerUrl}
 				guUrl={guUrl}
 				dismissGate={dismissGate}
 				abTest={abTest}
