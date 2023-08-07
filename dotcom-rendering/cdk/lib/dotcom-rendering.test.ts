@@ -14,6 +14,7 @@ describe('The DotcomRendering stack', () => {
 			stack: 'frontend',
 			stage: 'TEST',
 			app: 'rendering',
+			region: 'eu-west-1',
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

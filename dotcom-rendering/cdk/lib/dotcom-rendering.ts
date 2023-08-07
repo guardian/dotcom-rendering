@@ -1,7 +1,7 @@
 import { join } from 'path';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
-import { GuSecurityGroup, GuVpc,  } from '@guardian/cdk/lib/constructs/ec2';
+import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import { GuAllowPolicy, GuInstanceRole } from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
@@ -9,6 +9,7 @@ import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 
 interface DCRProps extends GuStackProps {
 	app: string;
+	region: string;
 }
 
 export class DotcomRendering extends GuStack {
@@ -71,30 +72,38 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const instancePolicy = new GuAllowPolicy(this, 'instance-policy', {
-			actions: [
-			  's3:GetObject',
-			  'cloudwatch:*',
-			  'logs:*',
-			  'ec2:DescribeTags',
-			  'ec2:DescribeInstances',
-			  'autoscaling:DescribeAutoScalingGroups',
-			  'autoscaling:DescribeAutoScalingInstances',
-			  'kms:Decrypt',
-			  'kms:DescribeKey',
-			  'ssm:GetParametersByPath',
-			  'ssm:GetParameter'
-			],
-			resources: [
-			  'arn:aws:s3:::aws-frontend-artifacts/*',
-			  '*'
-			]
-		  });
-
 		const instanceRole = new GuInstanceRole(this, {
 				app: props.app,
-				additionalPolicies: [instancePolicy]
-			  });
+				additionalPolicies: [
+					//todo: do we need the first two policies? They are provided by default?
+						new GuAllowPolicy(this, 'instance-policy1', {
+					  actions: ['s3:GetObject'],
+					  resources: ['arn:aws:s3:::aws-frontend-artifacts/*']
+					}),
+					new GuAllowPolicy(this, 'instance-policy2', {
+						actions: ['cloudwatch:*', 'logs:*'],
+						resources: ['*']
+					  }),
+					  new GuAllowPolicy(this, 'instance-policy3', {
+						actions: [
+							'ec2:DescribeTags',
+							'ec2:DescribeInstances',
+							'autoscaling:DescribeAutoScalingGroups',
+							'autoscaling:DescribeAutoScalingInstances'
+						  ],
+						  resources: ['*']
+					  }),
+					  new GuAllowPolicy(this, 'instance-policy4', {
+						actions: ['kms:Decrypt', 'kms:DescribeKey'],
+						resources: [`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`],
+
+					  }),
+					  new GuAllowPolicy(this, 'instance-policy5', {
+						actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
+						resources: [`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`, `arn:aws:ssm:${props.region}}:${this.account}:parameter/dotcom/*`]
+					  }),
+				  ]
+				});
 
 		const yamlTemplateFilePath = join(
 			__dirname,
