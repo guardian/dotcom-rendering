@@ -13,6 +13,7 @@ const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};
 	display: block;
 	color: ${palette.text.subMetaLabel};
+	margin-bottom: 8px;
 `;
 
 const badgeWrapper = css`
@@ -71,6 +72,7 @@ const listItemStyles = (palette: Palette) => css`
 	border-radius: 12px;
 	padding: 2px 9px;
 	margin-right: 7px;
+	margin-bottom: 8px;
 	a {
 		position: relative;
 		display: block;
