@@ -100,7 +100,7 @@ export class DotcomRendering extends GuStack {
 					  }),
 					  new GuAllowPolicy(this, 'instance-policy5', {
 						actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
-						resources: [`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`, `arn:aws:ssm:${props.region}}:${this.account}:parameter/dotcom/*`]
+						resources: [`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`, `arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`]
 					  }),
 				  ]
 				});
