@@ -64,6 +64,9 @@ Parameters:
   InstanceSecurityGroup:
     Description: Id of instance security group
     Type: String
+  InternalLoadBalancer:
+    Description: Id of internal load balancer
+    Type: String
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -143,45 +146,45 @@ Resources:
       Roles:
         - Ref: InstanceRole
 
-  InternalLoadBalancer:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
-    Properties:
-      Scheme: internal
-      LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
-      Listeners:
-        - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
-      CrossZone: true
-      HealthCheck:
-        Target: HTTP:9000/_healthcheck
-        HealthyThreshold: 2
-        UnhealthyThreshold: 10
-        Interval: 30
-        Timeout: 10
-      Subnets:
-        Ref: Subnets
-      SecurityGroups:
-        - Ref: InternalLoadBalancerSecurityGroup
-      AccessLoggingPolicy:
-        EmitInterval: 5
-        Enabled: true
-        S3BucketName: gu-elb-logs
-        S3BucketPrefix:
-          Fn::Join:
-            - '/'
-            - - ELBLogs
-              - Fn::FindInMap: [Constants, Stack, Value]
-              - Fn::FindInMap: [Constants, App, Value]
-              - Ref: Stage
-      Tags:
-        - Key: Stage
-          Value:
-            Ref: Stage
-        - Key: Stack
-          Value:
-            Fn::FindInMap: [Constants, Stack, Value]
-        - Key: App
-          Value:
-            Fn::FindInMap: [Constants, App, Value]
+  # InternalLoadBalancer:
+  #   Type: AWS::ElasticLoadBalancing::LoadBalancer
+  #   Properties:
+  #     Scheme: internal
+  #     LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
+  #     Listeners:
+  #       - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
+  #     CrossZone: true
+  #     HealthCheck:
+  #       Target: HTTP:9000/_healthcheck
+  #       HealthyThreshold: 2
+  #       UnhealthyThreshold: 10
+  #       Interval: 30
+  #       Timeout: 10
+  #     Subnets:
+  #       Ref: Subnets
+  #     SecurityGroups:
+  #       - Ref: InternalLoadBalancerSecurityGroup
+  #     AccessLoggingPolicy:
+  #       EmitInterval: 5
+  #       Enabled: true
+  #       S3BucketName: gu-elb-logs
+  #       S3BucketPrefix:
+  #         Fn::Join:
+  #           - '/'
+  #           - - ELBLogs
+  #             - Fn::FindInMap: [Constants, Stack, Value]
+  #             - Fn::FindInMap: [Constants, App, Value]
+  #             - Ref: Stage
+  #     Tags:
+  #       - Key: Stage
+  #         Value:
+  #           Ref: Stage
+  #       - Key: Stack
+  #         Value:
+  #           Fn::FindInMap: [Constants, Stack, Value]
+  #       - Key: App
+  #         Value:
+  #           Fn::FindInMap: [Constants, App, Value]
 
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
