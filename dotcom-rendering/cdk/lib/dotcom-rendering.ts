@@ -9,6 +9,7 @@ import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 interface DCRProps extends GuStackProps {
 	app: string;
 }
+
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
@@ -46,6 +47,29 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const instanceSecurityGroup = new GuSecurityGroup(
+			this,
+			'InstanceSecurityGroup',
+			{
+				app: props.app,
+				description:
+					'rendering instance',
+				vpc,
+				ingresses: [
+					{
+						range: Peer.ipv4(vpc.vpcCidrBlock),
+						port: 9000,
+						description: 'TCP 9000 ingress',
+					},
+				],
+			},
+		);
+
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -57,9 +81,9 @@ export class DotcomRendering extends GuStack {
 			parameters: {
 				VpcId: vpc.vpcId,
 				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup:
-					lbSecurityGroup.securityGroupId,
-			},
+				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
+				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+			}
 		});
 	}
 }
