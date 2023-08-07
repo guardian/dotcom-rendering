@@ -71,15 +71,19 @@ export class DotcomRendering extends GuStack {
 			},
 		);
 
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
-			parameters: cfnParameters,
+			parameters: {
 			VpcId: vpc.vpcId,
 			VPCIpBlock: vpc.vpcCidrBlock,
-      InternalLoadBalancerSecurityGroup:
-					lbSecurityGroup.securityGroupId,
-			},
+      		InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 			InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+		}
 		});
 	}
 }
