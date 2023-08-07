@@ -17,10 +17,6 @@ import { renderFront, renderTagFront } from './render.front.web';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
-	console.log(
-		'>>>',
-		data.pressedPage.collections.map((name) => name.displayName),
-	);
 	return {
 		...data,
 		webTitle: `${
