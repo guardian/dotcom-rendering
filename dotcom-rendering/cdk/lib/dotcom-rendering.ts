@@ -47,12 +47,6 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const yamlTemplateFilePath = join(
-			__dirname,
-			'../..',
-			'cloudformation.yml',
-		);
-
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
 			'InstanceSecurityGroup',
@@ -76,14 +70,20 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const yamlTemplateFilePath = join(
+			__dirname,
+			'../..',
+			'cloudformation.yml',
+		);
+
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-			VpcId: vpc.vpcId,
-			VPCIpBlock: vpc.vpcCidrBlock,
-      		InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
-			InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-		}
+				VpcId: vpc.vpcId,
+				VPCIpBlock: vpc.vpcCidrBlock,
+				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
+				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
+			}
 		});
 	}
 }
