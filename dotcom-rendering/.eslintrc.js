@@ -181,6 +181,7 @@ module.exports = {
 		{
 			files: ['**/**.js'],
 			rules: {
+				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
