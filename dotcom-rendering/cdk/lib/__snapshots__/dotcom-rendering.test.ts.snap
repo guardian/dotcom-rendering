@@ -922,7 +922,7 @@ make start-prod
                   "Fn::Join": [
                     "",
                     [
-                      "arn:aws:ssm:eu-west-1}:",
+                      "arn:aws:ssm:eu-west-1:",
                       {
                         "Ref": "AWS::AccountId",
                       },
