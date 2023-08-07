@@ -4,8 +4,8 @@ import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import type { App } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import { InstanceProfile } from 'aws-cdk-lib/aws-iam';
+import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 
 
 interface DCRProps extends GuStackProps {
