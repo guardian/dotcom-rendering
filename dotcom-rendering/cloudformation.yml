@@ -59,7 +59,10 @@ Parameters:
     Description: Parameter store KMS key
     Type: String
   InternalLoadBalancerSecurityGroup:
-    Description: Load balancer security group, now defined outside of this file
+    Description: Id of load balancer security group
+    Type: String
+  InstanceSecurityGroup:
+    Description: Id of instance security group
     Type: String
 
 Conditions:
@@ -81,30 +84,6 @@ Mappings:
       MaxCapacity: 4
 
 Resources:
-  # InstanceSecurityGroup:
-  #   Type: AWS::EC2::SecurityGroup
-  #   Properties:
-  #     GroupDescription: rendering instance
-  #     VpcId:
-  #       Ref: VpcId
-  #     SecurityGroupIngress:
-  #       # allow ELB to talk to instance
-  #       - IpProtocol: tcp
-  #         FromPort: 9000
-  #         ToPort: 9000
-  #         SourceSecurityGroupId:
-  #           Ref: InternalLoadBalancerSecurityGroup
-  #     Tags:
-  #       - Key: Stage
-  #         Value:
-  #           Ref: Stage
-  #       - Key: Stack
-  #         Value:
-  #           Fn::FindInMap: [Constants, Stack, Value]
-  #       - Key: App
-  #         Value:
-  #           Fn::FindInMap: [Constants, App, Value]
-
   InstanceRole:
     Type: AWS::IAM::Role
     Properties:
