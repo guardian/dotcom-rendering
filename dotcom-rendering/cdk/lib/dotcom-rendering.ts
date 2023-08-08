@@ -1,18 +1,19 @@
 import { join } from 'node:path';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
+import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import type { App } from 'aws-cdk-lib';
-import { Peer } from 'aws-cdk-lib/aws-ec2';
+import { Duration } from 'aws-cdk-lib';
+import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
-
-interface DCRProps extends GuStackProps {
-	app: string;
-}
+import type { DCRProps } from './types';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
+
+		const { app, region, stack, stage } = props;
 
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
@@ -24,7 +25,7 @@ export class DotcomRendering extends GuStack {
 			this,
 			'InternalLoadBalancerSecurityGroup',
 			{
-				app: props.app,
+				app,
 				description:
 					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
@@ -42,18 +43,13 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
-		this.overrideLogicalId(lbSecurityGroup, {
-			logicalId: 'InternalLoadBalancerSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
 
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
 			'InstanceSecurityGroup',
 			{
-				app: props.app,
-				description:
-					'rendering instance',
+				app,
+				description: 'rendering instance',
 				vpc,
 				ingresses: [
 					{
@@ -65,10 +61,67 @@ export class DotcomRendering extends GuStack {
 			},
 		);
 
+		const elkStream = new GuStringParameter(this, 'ELKStreamId', {
+			fromSSM: true,
+			default: `/${stack}/${stage.toLowerCase()}/logstash.stream.name`,
+		});
+
+		const userData = `
+		#!/bin/bash -ev
+
+		groupadd frontend
+		useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+		usermod -a -G frontend aws-kinesis-agent-user
+		cd /home/dotcom-rendering
+
+		aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.zip ./
+		unzip -q ${app}.zip -d ${app}
+
+		chown -R dotcom-rendering:frontend ${app}
+
+		cd ${app}
+
+		export TERM=xterm-256color
+		export NODE_ENV=production
+		export GU_STAGE=${stage}
+
+		mkdir /var/log/dotcom-rendering
+		chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+
+		make start-prod
+
+		/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStream.valueAsString} /var/log/dotcom-rendering/dotcom-rendering.log
+		`;
+
+		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
+			app,
+			vpc,
+			instanceType: new InstanceType(props.instanceType),
+			minimumInstances: props.minCapacity,
+			maximumInstances: props.maxCapacity,
+			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
+			userData,
+			imageRecipe: props.amiRecipe,
+			// role: instanceRole,
+			additionalSecurityGroups: [instanceSecurityGroup],
+			vpcSubnets: { subnets: vpc.publicSubnets },
+		});
+
+		// ----------------------------------------------------------------- //
+		// Temporarily overriding logical IDs during CDK migration
+		this.overrideLogicalId(lbSecurityGroup, {
+			logicalId: 'InternalLoadBalancerSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 		this.overrideLogicalId(instanceSecurityGroup, {
 			logicalId: 'InstanceSecurityGroup',
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
+		this.overrideLogicalId(asg, {
+			logicalId: 'AutoscalingGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+		// ----------------------------------------------------------------- //
 
 		const yamlTemplateFilePath = join(
 			__dirname,
@@ -79,11 +132,10 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-				VpcId: vpc.vpcId,
-				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
-				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-			}
+				InternalLoadBalancerSecurityGroup:
+					lbSecurityGroup.securityGroupId,
+				AutoscalingGroup: asg.autoScalingGroupArn,
+			},
 		});
 	}
 }

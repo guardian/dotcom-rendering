@@ -31,22 +31,24 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Value": "frontend",
       },
     },
-    "StageMap": {
-      "CODE": {
-        "MaxCapacity": 4,
-        "MinCapacity": 1,
-      },
-      "PROD": {
-        "MaxCapacity": 60,
-        "MinCapacity": 15,
-      },
-    },
   },
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
       "GuSecurityGroup",
       "GuSecurityGroup",
+      "GuStringParameter",
+      "GuAmiParameter",
+      "GuInstanceRole",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuHttpsEgressSecurityGroup",
+      "GuWazuhAccess",
+      "GuAutoScalingGroup",
     ],
     "gu:cdk:version": "TEST",
   },
@@ -61,8 +63,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
-    "AMI": {
-      "Description": "AMI to use for instances",
+    "AMIRendering": {
+      "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
       "Type": "AWS::EC2::Image::Id",
     },
     "App": {
@@ -85,9 +87,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Description": "(Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered",
       "Type": "String",
     },
-    "ELKStream": {
-      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
-      "Type": "String",
+    "DistributionBucketName": {
+      "Default": "/account/services/artifact.bucket",
+      "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ELKStreamId": {
+      "Default": "/frontend/test/logstash.stream.name",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "FrontendConfigKey": {
       "Description": "Parameter store KMS key",
@@ -96,6 +103,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "InstanceType": {
       "Description": "EC2 Instance Type to use for dotcom-rendering",
       "Type": "String",
+    },
+    "LoggingStreamName": {
+      "Default": "/account/services/logging.stream.name",
+      "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "NotificationAlarmAction": {
       "Default": "",
@@ -129,48 +141,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   "Resources": {
     "AutoscalingGroup": {
       "Properties": {
-        "AvailabilityZones": {
-          "Fn::GetAZs": "",
-        },
         "HealthCheckGracePeriod": 120,
         "HealthCheckType": "ELB",
-        "LaunchConfigurationName": {
-          "Ref": "LaunchConfig",
-        },
-        "LoadBalancerNames": [
-          {
-            "Ref": "InternalLoadBalancer",
+        "LaunchTemplate": {
+          "LaunchTemplateId": {
+            "Ref": "frontendTESTrenderingF3FD9600",
           },
-        ],
-        "MaxSize": {
-          "Fn::FindInMap": [
-            "StageMap",
-            {
-              "Ref": "Stage",
-            },
-            "MaxCapacity",
-          ],
+          "Version": {
+            "Fn::GetAtt": [
+              "frontendTESTrenderingF3FD9600",
+              "LatestVersionNumber",
+            ],
+          },
         },
-        "MinSize": {
-          "Fn::FindInMap": [
-            "StageMap",
-            {
-              "Ref": "Stage",
-            },
-            "MinCapacity",
-          ],
-        },
+        "MaxSize": "4",
+        "MinSize": "1",
         "Tags": [
           {
             "Key": "App",
             "PropagateAtLaunch": true,
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -193,9 +183,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
         ],
-        "VPCZoneIdentifier": {
-          "Ref": "Subnets",
-        },
+        "VPCZoneIdentifier": [],
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
@@ -235,6 +223,146 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
       },
       "Type": "AWS::CloudWatch::Alarm",
+    },
+    "DescribeEC2PolicyFF5F9295": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "describe-ec2-policy",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleRenderingB06D827E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GetDistributablePolicyRenderingCA2FF5C7": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "DistributionBucketName",
+                    },
+                    "/frontend/TEST/rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetDistributablePolicyRenderingCA2FF5C7",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleRenderingB06D827E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GuHttpsEgressSecurityGroupRenderingE17B2710": {
+      "Properties": {
+        "GroupDescription": "Allow all outbound HTTPS traffic",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound HTTPS traffic",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "GuLogShippingPolicy981BFE5A": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kinesis:Describe*",
+                "kinesis:Put*",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kinesis:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":stream/",
+                    {
+                      "Ref": "LoggingStreamName",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GuLogShippingPolicy981BFE5A",
+        "Roles": [
+          {
+            "Ref": "InstanceRoleRenderingB06D827E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
     "InstanceProfile": {
       "Properties": {
@@ -335,6 +463,60 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "InstanceRoleRenderingB06D827E": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AmazonSSMManagedInstanceCore",
+              ],
+            ],
+          },
+        ],
+        "Path": "/",
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -584,63 +766,90 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
-    "LaunchConfig": {
+    "ParameterStoreReadRenderingFDC91AAA": {
       "Properties": {
-        "AssociatePublicIpAddress": true,
-        "IamInstanceProfile": {
-          "Ref": "InstanceProfile",
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/TEST/frontend/rendering",
+                  ],
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssm:GetParameters",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:ssm:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter/TEST/frontend/rendering/*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
         },
-        "ImageId": {
-          "Ref": "AMI",
-        },
-        "InstanceType": {
-          "Ref": "InstanceType",
-        },
-        "SecurityGroups": [
+        "PolicyName": "parameter-store-read-policy",
+        "Roles": [
           {
-            "Fn::GetAtt": [
-              "InstanceSecurityGroup",
-              "GroupId",
-            ],
+            "Ref": "InstanceRoleRenderingB06D827E",
           },
         ],
-        "UserData": {
-          "Fn::Base64": {
-            "Fn::Sub": "#!/bin/bash -ev
-
-groupadd frontend
-useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-usermod -a -G frontend aws-kinesis-agent-user
-cd /home/dotcom-rendering
-
-aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/\${Stage}/\${App}/\${App}.zip ./
-unzip -q \${App}.zip -d \${App}
-
-chown -R dotcom-rendering:frontend \${App}
-
-cd \${App}
-
-export TERM=xterm-256color
-export NODE_ENV=production
-export GU_STAGE=\${Stage}
-
-mkdir /var/log/dotcom-rendering
-chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-
-make start-prod
-
-/opt/aws-kinesis-agent/configure-aws-kinesis-agent \${AWS::Region} \${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
-",
-          },
-        },
       },
-      "Type": "AWS::AutoScaling::LaunchConfiguration",
+      "Type": "AWS::IAM::Policy",
     },
     "ScaleDownPolicy": {
       "Properties": {
         "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":autoscaling:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":autoScalingGroup:*:autoScalingGroupName/",
+              {
+                "Ref": "AutoscalingGroup",
+              },
+            ],
+          ],
         },
         "Cooldown": "120",
         "ScalingAdjustment": -1,
@@ -651,12 +860,245 @@ make start-prod
       "Properties": {
         "AdjustmentType": "PercentChangeInCapacity",
         "AutoScalingGroupName": {
-          "Ref": "AutoscalingGroup",
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition",
+              },
+              ":autoscaling:",
+              {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId",
+              },
+              ":autoScalingGroup:*:autoScalingGroupName/",
+              {
+                "Ref": "AutoscalingGroup",
+              },
+            ],
+          ],
         },
         "Cooldown": "600",
         "ScalingAdjustment": 100,
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
+    },
+    "WazuhSecurityGroup": {
+      "Properties": {
+        "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh event logging",
+            "FromPort": 1514,
+            "IpProtocol": "tcp",
+            "ToPort": 1514,
+          },
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Wazuh agent registration",
+            "FromPort": 1515,
+            "IpProtocol": "tcp",
+            "ToPort": 1515,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "frontendTESTrenderingF3FD9600": {
+      "Properties": {
+        "LaunchTemplateData": {
+          "IamInstanceProfile": {
+            "Arn": {
+              "Fn::GetAtt": [
+                "frontendTESTrenderingProfileA2D2425E",
+                "Arn",
+              ],
+            },
+          },
+          "ImageId": {
+            "Ref": "AMIRendering",
+          },
+          "InstanceType": "t4g.micro",
+          "MetadataOptions": {
+            "HttpTokens": "required",
+          },
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "GuHttpsEgressSecurityGroupRenderingE17B2710",
+                "GroupId",
+              ],
+            },
+            {
+              "Fn::GetAtt": [
+                "WazuhSecurityGroup",
+                "GroupId",
+              ],
+            },
+            {
+              "Fn::GetAtt": [
+                "InstanceSecurityGroup",
+                "GroupId",
+              ],
+            },
+          ],
+          "TagSpecifications": [
+            {
+              "ResourceType": "instance",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+            {
+              "ResourceType": "volume",
+              "Tags": [
+                {
+                  "Key": "gu:cdk:version",
+                  "Value": "TEST",
+                },
+                {
+                  "Key": "gu:repo",
+                  "Value": "guardian/dotcom-rendering",
+                },
+                {
+                  "Key": "Name",
+                  "Value": "DotcomRendering/frontend-TEST-rendering",
+                },
+                {
+                  "Key": "Stack",
+                  "Value": "frontend",
+                },
+                {
+                  "Key": "Stage",
+                  "Value": "TEST",
+                },
+              ],
+            },
+          ],
+          "UserData": {
+            "Fn::Base64": {
+              "Fn::Join": [
+                "",
+                [
+                  "
+		#!/bin/bash -ev
+
+		groupadd frontend
+		useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+		usermod -a -G frontend aws-kinesis-agent-user
+		cd /home/dotcom-rendering
+
+		aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/TEST/rendering/rendering.zip ./
+		unzip -q rendering.zip -d rendering
+
+		chown -R dotcom-rendering:frontend rendering
+
+		cd rendering
+
+		export TERM=xterm-256color
+		export NODE_ENV=production
+		export GU_STAGE=TEST
+
+		mkdir /var/log/dotcom-rendering
+		chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+
+		make start-prod
+
+		/opt/aws-kinesis-agent/configure-aws-kinesis-agent eu-west-1 ",
+                  {
+                    "Ref": "ELKStreamId",
+                  },
+                  " /var/log/dotcom-rendering/dotcom-rendering.log
+		",
+                ],
+              ],
+            },
+          },
+        },
+        "TagSpecifications": [
+          {
+            "ResourceType": "launch-template",
+            "Tags": [
+              {
+                "Key": "gu:cdk:version",
+                "Value": "TEST",
+              },
+              {
+                "Key": "gu:repo",
+                "Value": "guardian/dotcom-rendering",
+              },
+              {
+                "Key": "Name",
+                "Value": "DotcomRendering/frontend-TEST-rendering",
+              },
+              {
+                "Key": "Stack",
+                "Value": "frontend",
+              },
+              {
+                "Key": "Stage",
+                "Value": "TEST",
+              },
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::EC2::LaunchTemplate",
+    },
+    "frontendTESTrenderingProfileA2D2425E": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "InstanceRoleRenderingB06D827E",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
     },
   },
 }
