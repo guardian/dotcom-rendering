@@ -17,7 +17,7 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import { CfnScalingPolicy, HealthCheck, AdjustmentType } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
@@ -211,7 +211,30 @@ export class DotcomRendering extends GuStack {
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: privateSubnets },
-			withoutImdsv2: true,
+		});
+
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
+		  });
+
+		// ----------------------------------------------------------------- //
+		// Temporarily overriding logical IDs during CDK migration
+		const reason =
+			'Retaining a stateful resource previously defined in YAML';
+		this.overrideLogicalId(lbSecurityGroup, {
+			logicalId: 'InternalLoadBalancerSecurityGroup',
+			reason,
+		});
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason,
+		});
+		this.overrideLogicalId(instanceRole, {
+			logicalId: 'InstanceRole',
+			reason,
 		});
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
@@ -232,6 +255,7 @@ export class DotcomRendering extends GuStack {
 				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
+				ScaleDownPolicy: scaleDownPolicy.logicalId,
 			},
 		});
 

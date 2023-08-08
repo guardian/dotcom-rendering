@@ -51,6 +51,9 @@ Parameters:
   InstanceRole:
     Description: Name of instance role
     Type: String
+  ScaleDownPolicy:
+    Description: Id of scale down policy
+    Type: String
   # ! These params are not used but should be kept until the migration is finished
   ELKStream:
     Description: name of the kinesis stream to use to send logs to the central ELK stack
@@ -58,6 +61,7 @@ Parameters:
   AMI:
     Description: AMI to use for instances
     Type: AWS::EC2::Image::Id
+
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -78,13 +82,45 @@ Resources:
       Roles:
         - Ref: InstanceRole
 
-  ScaleDownPolicy:
-    Type: AWS::AutoScaling::ScalingPolicy
+  InternalLoadBalancer:
+    Type: AWS::ElasticLoadBalancing::LoadBalancer
     Properties:
-      AdjustmentType: ChangeInCapacity
-      AutoScalingGroupName: !Ref AutoscalingGroup
-      Cooldown: '120'
-      ScalingAdjustment: '-1'
+      Scheme: internal
+      LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
+      Listeners:
+        - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
+      CrossZone: true
+      HealthCheck:
+        Target: HTTP:9000/_healthcheck
+        HealthyThreshold: 2
+        UnhealthyThreshold: 10
+        Interval: 30
+        Timeout: 10
+      Subnets:
+        Ref: Subnets
+      SecurityGroups:
+        - Ref: InternalLoadBalancerSecurityGroup
+      AccessLoggingPolicy:
+        EmitInterval: 5
+        Enabled: true
+        S3BucketName: gu-elb-logs
+        S3BucketPrefix:
+          Fn::Join:
+            - '/'
+            - - ELBLogs
+              - Fn::FindInMap: [Constants, Stack, Value]
+              - Fn::FindInMap: [Constants, App, Value]
+              - Ref: Stage
+      Tags:
+        - Key: Stage
+          Value:
+            Ref: Stage
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
 
   ScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
