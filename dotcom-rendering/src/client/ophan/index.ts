@@ -1,9 +1,9 @@
-import { abTestPayload, record, recordPerformance } from './ophan';
+import { getOphan } from './ophan';
+import { abTestPayload, recordPerformance } from './ophan';
 
-// side effect only
-import 'ophan-tracker-js';
+export const ophan = async (): Promise<void> => {
+	const { record } = await getOphan();
 
-export const ophan = (): Promise<void> => {
 	record({ experiences: 'dotcom-rendering' });
 	record({ edition: window.guardian.config.page.edition });
 
@@ -15,6 +15,4 @@ export const ophan = (): Promise<void> => {
 		recordPerformance();
 		window.removeEventListener('load', load, false);
 	});
-
-	return Promise.resolve();
 };

@@ -11,14 +11,12 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { CardPicture } from './CardPicture';
 import { NewsletterDetail } from './NewsletterDetail';
+import { getOphan } from '../client/ophan/ophan';
 
 interface Props {
 	newsletter: Newsletter;
@@ -158,8 +156,8 @@ export const NewsletterCard = ({
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
 
-	const reportSeen = useCallback(() => {
-		const record = getOphanRecordFunction();
+	const reportSeen = useCallback(async () => {
+		const { record } = await getOphan();
 		const valueData = {
 			eventDescription: 'card-viewed',
 			newsletterId: newsletter.identityName,

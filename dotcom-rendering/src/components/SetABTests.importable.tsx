@@ -1,13 +1,13 @@
 import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core';
 import { getCookie, log } from '@guardian/libs';
-import { getOphanRecordFunction } from '../client/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 import type { ABTestSwitches } from '../model/enhance-switches';
+import { useOphan } from '../lib/useOphan';
 
 type Props = {
 	abTestSwitches: ABTestSwitches;
@@ -22,6 +22,12 @@ export const SetABTests = ({
 	abTestSwitches,
 	forcedTestVariants,
 }: Props) => {
+	const ophan = useOphan();
+
+	if (!ophan) {
+		return null;
+	}
+
 	const mvtId = Number(
 		(isDev &&
 			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
@@ -31,8 +37,6 @@ export const SetABTests = ({
 		// 0 is default and falsy here
 		console.log('There is no MVT ID set, see SetABTests.importable.tsx');
 	}
-
-	const ophanRecord = getOphanRecordFunction();
 
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress
@@ -51,7 +55,7 @@ export const SetABTests = ({
 			...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
 		},
 		arrayOfTestObjects: tests,
-		ophanRecord,
+		ophanRecord: ophan.record,
 		forcedTestVariants: allForcedTestVariants,
 	});
 

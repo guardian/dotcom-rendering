@@ -12,11 +12,9 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
+import { getOphan } from '../client/ophan/ophan';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -120,11 +118,11 @@ type EventDescription =
 	| 'captcha-not-passed'
 	| 'captcha-passed';
 
-const sendTracking = (
+const sendTracking = async (
 	newsletterId: string,
 	eventDescription: EventDescription,
-): void => {
-	const ophanRecord = getOphanRecordFunction();
+): Promise<void> => {
+	const { record } = await getOphan();
 
 	let action: OphanAction = 'CLICK';
 
@@ -170,7 +168,7 @@ const sendTracking = (
 				id: `DCR SecureSignupIframe ${newsletterId}`,
 			},
 		},
-		ophanRecord,
+		record,
 	);
 };
 

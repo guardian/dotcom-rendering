@@ -20,7 +20,6 @@ import type {
 import { useEffect, useState } from 'react';
 import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
-	getOphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
 } from '../client/ophan/ophan';
@@ -40,6 +39,7 @@ import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 import ArrowRightIcon from '../static/icons/arrow-right.svg';
+import { useOphan } from '../lib/useOphan';
 
 type Props = {
 	editionId: EditionId;
@@ -419,9 +419,14 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
+	const ophan = useOphan();
+
+	if (!ophan) {
+		return null;
+	}
+
 	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian.config.ophan.pageViewId;
-	const ophanRecord = getOphanRecordFunction();
+	const { pageViewId } = ophan;
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -443,7 +448,7 @@ export const SupportTheG = ({
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
+					ophanRecord={ophan.record}
 				/>
 			);
 		}
@@ -453,7 +458,7 @@ export const SupportTheG = ({
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}
-				ophanRecord={ophanRecord}
+				ophanRecord={ophan.record}
 				pageViewId={pageViewId}
 				hasPageSkin={hasPageSkin}
 			/>

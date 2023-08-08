@@ -8,22 +8,23 @@ import type {
 import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
 
+export const getOphan = async (): Promise<
+	NonNullable<typeof window.guardian.ophan>
+> => {
+	// @ts-expect-error -- no definitions, side effect only
+	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
+
+	if (!window.guardian.ophan) {
+		throw new Error('window.guardian.ophan is not available');
+	}
+
+	return window.guardian.ophan;
+};
+
 export type OphanRecordFunction = (
 	event: { [key: string]: unknown },
 	callback?: () => void,
 ) => void;
-
-export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record = window.guardian.ophan?.record;
-
-	if (record) return record;
-
-	// eslint-disable-next-line no-console -- worth informing all users
-	console.warn('window.guardian.ophan.record is not available');
-	return () => {
-		/* do nothing */
-	};
-};
 
 export const record: OphanRecordFunction = (event) => {
 	if (window.guardian.ophan?.record) {

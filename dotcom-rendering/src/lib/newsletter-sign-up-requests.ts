@@ -1,8 +1,6 @@
 import type { OphanAction } from '@guardian/libs';
-import {
-	getOphanRecordFunction,
-	submitComponentEvent,
-} from '../client/ophan/ophan';
+import { submitComponentEvent } from '../client/ophan/ophan';
+import { getOphan } from '../client/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 
@@ -129,12 +127,12 @@ const trackingEventDescriptionToOphanAction = (
 	}
 };
 
-export const reportTrackingEvent = (
+export const reportTrackingEvent = async (
 	componentName: string,
 	eventDescription: TrackingEventDescription,
 	extraDetails?: Partial<Record<string, string | string[]>>,
-): void => {
-	const record = getOphanRecordFunction();
+): Promise<void> => {
+	const { record } = await getOphan();
 
 	const payload = {
 		...extraDetails,
