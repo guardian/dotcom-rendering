@@ -1,5 +1,6 @@
 import type { CustomClaims, IdentityAuthState } from '@guardian/identity-auth';
 import { IdentityAuth } from '@guardian/identity-auth';
+import { reportError } from '../client/sentryLoader/sentry';
 
 // the `id_token.profile.theguardian` scope is used to get custom claims
 export type CustomIdTokenClaims = CustomClaims & {
@@ -66,5 +67,17 @@ function getIdentityAuth() {
 export async function isSignedInWithOktaAuthState(): Promise<
 	IdentityAuthState<never, CustomIdTokenClaims>
 > {
-	return getIdentityAuth().isSignedInWithAuthState();
+	return getIdentityAuth()
+		.isSignedInWithAuthState()
+		.catch((e) => {
+			if (e instanceof Error) {
+				reportError(e, 'okta');
+			}
+
+			return {
+				isAuthenticated: false,
+				accessToken: undefined,
+				idToken: undefined,
+			};
+		});
 }
