@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
@@ -95,8 +95,12 @@ export class DotcomRendering extends GuStack {
 			accessLoggingPolicy: {
 				enabled: true,
 				emitInterval: 5,
-				s3BucketName: 'gu-elb-logs',
-				s3BucketPrefix: `ELBLogs/${props.stack}/${props.app}/${props.stage}`,
+				s3BucketName: new GuStringParameter(this, 'ELBLogsParameter', {
+					default: `/${props.stack}/${props.app}/${props.stage}/elb.logs.bucketName`,
+					fromSSM: true,
+					description: 'S3 Bucket Name for ELB logs',
+				}).valueAsString,
+				s3BucketPrefix: `/ELBLogs/${props.stack}/${props.app}/${props.stage}`,
 			},
 		});
 
