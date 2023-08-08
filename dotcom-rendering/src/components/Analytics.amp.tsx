@@ -34,15 +34,23 @@ export const Analytics = ({
 			<script type="application/json">
 				{
 					"requests": {
-						"pageviewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
+						"pageviewWithConsent": "\${additionalBase}&componentEvent=\${componentObject}"
 					},
 					"triggers": {
 						"trackPageview": {
 							"on": "visible",
 							"request": "pageviewWithConsent",
-							"vars" : {
-								"componentObject": {"component":{"componentType":"CONSENT","products":[],"labels":["08:\${consentState}","09:\${consentString}"]},"action":"MANAGE_CONSENT"},
-                "componentEvent": "%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%5B%2208:\${consentState}%22,%2209:\${consentString}%22%5D%7D,%22action%22:%22MANAGE_CONSENT%22%7D"
+						}
+					},
+					"extraUrlParams": {
+						"componentObject": {
+							"component": {
+								"componentType":"CONSENT",
+								"products": [],
+								"labels":["08:\${consentState}","09:\${consentString}"],
+								"action":"MANAGE_CONSENT",
+
+
 							}
 						}
 					}
