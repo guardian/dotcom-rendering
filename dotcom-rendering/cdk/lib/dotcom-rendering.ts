@@ -76,15 +76,15 @@ export class DotcomRendering extends GuStack {
 				app: props.app,
 				additionalPolicies: [
 					//todo: do we need the first two policies? They are provided by default?
-						new GuAllowPolicy(this, 'instance-policy1', {
+						new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					  actions: ['s3:GetObject'],
 					  resources: ['arn:aws:s3:::aws-frontend-artifacts/*']
 					}),
-					new GuAllowPolicy(this, 'instance-policy2', {
+					new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
 						actions: ['cloudwatch:*', 'logs:*'],
 						resources: ['*']
 					  }),
-					  new GuAllowPolicy(this, 'instance-policy3', {
+					  new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
 						actions: [
 							'ec2:DescribeTags',
 							'ec2:DescribeInstances',
@@ -93,16 +93,21 @@ export class DotcomRendering extends GuStack {
 						  ],
 						  resources: ['*']
 					  }),
-					  new GuAllowPolicy(this, 'instance-policy4', {
+					  new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 						actions: ['kms:Decrypt', 'kms:DescribeKey'],
 						resources: [`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`],
 
 					  }),
-					  new GuAllowPolicy(this, 'instance-policy5', {
+					  new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 						actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 						resources: [`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`, `arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`]
 					  }),
 				  ]
+				});
+
+				this.overrideLogicalId(instanceRole, {
+					logicalId: 'InstanceRole',
+					reason: 'Retaining a stateful resource previously defined in YAML',
 				});
 
 		const yamlTemplateFilePath = join(
@@ -111,11 +116,6 @@ export class DotcomRendering extends GuStack {
 			'cloudformation.yml',
 		);
 
-		this.overrideLogicalId(instanceRole, {
-			logicalId: 'InstanceRole',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
-
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
@@ -123,7 +123,7 @@ export class DotcomRendering extends GuStack {
 				VPCIpBlock: vpc.vpcCidrBlock,
 				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-				InstanceRole: instanceRole.roleName,
+				InstanceRole: instanceRole.roleId,
 			}
 		});
 	}

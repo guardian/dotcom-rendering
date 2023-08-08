@@ -149,6 +149,165 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeEc2AutoscalingE4175956": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeEc2AutoscalingE4175956",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetArtifactsBucket2A1CDA44": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetArtifactsBucket2A1CDA44",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "AutoscalingGroup": {
       "Properties": {
         "AvailabilityZones": {
@@ -363,7 +522,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Path": "/",
         "Roles": [
           {
-            "Ref": "InstanceRole",
+            "Fn::GetAtt": [
+              "InstanceRole",
+              "RoleId",
+            ],
           },
         ],
       },
@@ -784,165 +946,6 @@ make start-prod
         "ScalingAdjustment": 100,
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
-    },
-    "instancepolicy18B8F3E93": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "s3:GetObject",
-              "Effect": "Allow",
-              "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "instancepolicy18B8F3E93",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "instancepolicy24FAB312E": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "cloudwatch:*",
-                "logs:*",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "instancepolicy24FAB312E",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "instancepolicy3F043662C": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "ec2:DescribeTags",
-                "ec2:DescribeInstances",
-                "autoscaling:DescribeAutoScalingGroups",
-                "autoscaling:DescribeAutoScalingInstances",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "instancepolicy3F043662C",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "instancepolicy4024869D2": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "kms:Decrypt",
-                "kms:DescribeKey",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:aws:kms:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId",
-                    },
-                    ":FrontendConfigKey",
-                  ],
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "instancepolicy4024869D2",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
-    },
-    "instancepolicy56032AEF5": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "ssm:GetParametersByPath",
-                "ssm:GetParameter",
-              ],
-              "Effect": "Allow",
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:ssm:eu-west-1:",
-                      {
-                        "Ref": "AWS::AccountId",
-                      },
-                      ":parameter/frontend/*",
-                    ],
-                  ],
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:ssm:eu-west-1:",
-                      {
-                        "Ref": "AWS::AccountId",
-                      },
-                      ":parameter/dotcom/*",
-                    ],
-                  ],
-                },
-              ],
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "instancepolicy56032AEF5",
-        "Roles": [
-          {
-            "Ref": "InstanceRole",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
   },
 }
