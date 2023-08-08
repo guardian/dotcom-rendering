@@ -47,6 +47,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuVpcParameter",
       "GuSecurityGroup",
       "GuSecurityGroup",
+      "GuStringParameter",
+      "GuClassicLoadBalancer",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -100,6 +102,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "DistributionBucketName": {
       "Default": "/account/services/artifact.bucket",
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ELBLogsParameter": {
+      "Default": "/frontend/rendering/TEST/elb.logs.bucketName",
+      "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELKStream": {
@@ -634,32 +641,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "AccessLoggingPolicy": {
           "EmitInterval": 5,
           "Enabled": true,
-          "S3BucketName": "gu-elb-logs",
-          "S3BucketPrefix": {
-            "Fn::Join": [
-              "/",
-              [
-                "ELBLogs",
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "Stack",
-                    "Value",
-                  ],
-                },
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "App",
-                    "Value",
-                  ],
-                },
-                {
-                  "Ref": "Stage",
-                },
-              ],
-            ],
+          "S3BucketName": {
+            "Ref": "ELBLogsParameter",
           },
+          "S3BucketPrefix": "/ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -671,36 +656,26 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
         "Listeners": [
           {
-            "InstancePort": "9000",
-            "LoadBalancerPort": "80",
-            "Protocol": "HTTP",
+            "InstancePort": "80",
+            "InstanceProtocol": "http",
+            "LoadBalancerPort": "9000",
+            "Protocol": "http",
           },
         ],
-        "LoadBalancerName": {
-          "Fn::Sub": "\${Stack}-\${Stage}-\${App}-ELB",
-        },
         "Scheme": "internal",
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "InternalLoadBalancerSecurityGroup",
+              "InternalLoadBalancerRenderingSecurityGroup53E3F9A7",
               "GroupId",
             ],
           },
         ],
-        "Subnets": {
-          "Ref": "Subnets",
-        },
+        "Subnets": [],
         "Tags": [
           {
             "Key": "App",
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
+            "Value": "rendering",
           },
           {
             "Key": "gu:cdk:version",
@@ -721,6 +696,55 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+    },
+    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
+      "Properties": {
+        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "255.255.255.255/32",
+            "Description": "Disallow all traffic",
+            "FromPort": 252,
+            "IpProtocol": "icmp",
+            "ToPort": 86,
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Default rule allow on 9000",
+            "FromPort": 9000,
+            "IpProtocol": "tcp",
+            "ToPort": 9000,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {

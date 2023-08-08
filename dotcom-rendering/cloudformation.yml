@@ -259,9 +259,9 @@ Resources:
       AlarmActions: !Ref NotificationAlarmAction
       OKActions: !Ref NotificationAlarmAction
 
-Outputs:
-  LoadBalancerUrl:
-    Value:
-      'Fn::GetAtt':
-        - InternalLoadBalancer
-        - DNSName
+# Outputs:
+#   LoadBalancerUrl:
+#     Value:
+#       'Fn::GetAtt':
+#         - InternalLoadBalancer
+#         - DNSName
