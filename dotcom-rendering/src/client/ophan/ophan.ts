@@ -1,9 +1,10 @@
-import type {
-	OphanABEvent,
-	OphanABPayload,
-	OphanABTestMeta,
-	OphanAction,
-	OphanComponentEvent,
+import {
+	log,
+	type OphanABEvent,
+	type OphanABPayload,
+	type OphanABTestMeta,
+	type OphanAction,
+	type OphanComponentEvent,
 } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
 
@@ -13,27 +14,24 @@ export const getOphan = async (): Promise<
 	// @ts-expect-error -- no definitions, side effect only
 	await import(/* webpackMode: "eager" */ 'ophan-tracker-js');
 
-	if (!window.guardian.ophan) {
+	const { ophan } = window.guardian;
+
+	if (!ophan) {
 		throw new Error('window.guardian.ophan is not available');
 	}
 
-	return window.guardian.ophan;
+	const record: OphanRecordFunction = (event, callback) => {
+		log('dotcom', '🧿 Ophan event recorded:', event);
+		ophan.record(event, callback);
+	};
+
+	return { ...ophan, record };
 };
 
 export type OphanRecordFunction = (
 	event: { [key: string]: unknown },
 	callback?: () => void,
 ) => void;
-
-// export const record: OphanRecordFunction = (event) => {
-// 	if (window.guardian.ophan?.record) {
-// 		window.guardian.ophan.record(event, () =>
-// 			log('dotcom', '🧿 Ophan event recorded:', event),
-// 		);
-// 	} else {
-// 		throw new Error("window.guardian.ophan.record doesn't exist");
-// 	}
-// };
 
 export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
