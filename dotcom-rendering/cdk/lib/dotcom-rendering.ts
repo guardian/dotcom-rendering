@@ -91,14 +91,14 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
 					resources: [
-						`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`,
+						`arn:aws:kms:${region}:${this.account}:FrontendConfigKey`,
 					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`,
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
 					],
 				}),
 			],
