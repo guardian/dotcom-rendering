@@ -15,10 +15,12 @@ export class DotcomRendering extends GuStack {
 
 		const { app, region, stack, stage } = props;
 
+		const vpcCidrBlock = '10.248.136.0/22';
+
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
 		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
-			vpcCidrBlock: '10.248.136.0/22',
+			vpcCidrBlock,
 		});
 
 		const lbSecurityGroup = new GuSecurityGroup(
@@ -31,12 +33,12 @@ export class DotcomRendering extends GuStack {
 				vpc,
 				ingresses: [
 					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
+						range: Peer.ipv4(vpcCidrBlock),
 						port: 80,
 						description: 'TCP 80 ingress',
 					},
 					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
+						range: Peer.ipv4(vpcCidrBlock),
 						port: 443,
 						description: 'TCP 443 ingress',
 					},
@@ -53,7 +55,7 @@ export class DotcomRendering extends GuStack {
 				vpc,
 				ingresses: [
 					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
+						range: Peer.ipv4(vpcCidrBlock),
 						port: 9000,
 						description: 'TCP 9000 ingress',
 					},
