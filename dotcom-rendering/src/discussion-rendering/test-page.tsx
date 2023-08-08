@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from './App';
+import { Comments } from './Comments';
 import type { CAPIPillar } from './discussionTypes';
 import { pillarToEnum } from './lib/pillarToEnum';
 
@@ -99,7 +99,7 @@ const IndexPageWrapper = () => {
 
 			<hr />
 			<main>
-				<App
+				<Comments
 					baseUrl="https://discussion.theguardian.com/discussion-api"
 					pillar={pillarToEnum(pillar)}
 					isClosedForComments={closed}

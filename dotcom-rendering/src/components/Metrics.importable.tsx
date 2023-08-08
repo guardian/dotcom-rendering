@@ -12,6 +12,7 @@ import { billboardsInMerchHigh } from '../experiments/tests/billboards-in-merch-
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { limitInlineMerch } from '../experiments/tests/limit-inline-merch';
 import { liveblogRightColumnAds } from '../experiments/tests/liveblog-right-column-ads';
+import { publicGoodTest } from '../experiments/tests/public-good';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -31,6 +32,7 @@ const clientSideTestsToForceMetrics: ABTest[] = [
 	limitInlineMerch,
 	billboardsInMerchHigh,
 	liveblogRightColumnAds,
+	publicGoodTest,
 ];
 
 export const Metrics = ({ commercialMetricsEnabled }: Props) => {

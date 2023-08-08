@@ -1,6 +1,6 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
-import { TextDecoder, TextEncoder } from 'util';
+import { TextDecoder, TextEncoder } from 'node:util';
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {

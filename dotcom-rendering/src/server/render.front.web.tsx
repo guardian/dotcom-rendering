@@ -9,6 +9,7 @@ import { generateScriptTags, getPathFromManifest } from '../lib/assets';
 import { renderToStringWithEmotion } from '../lib/emotion';
 import { escapeData } from '../lib/escapeData';
 import { getHttp3Url } from '../lib/getHttp3Url';
+import { polyfillIO } from '../lib/polyfill.io';
 import { themeToPillar } from '../lib/themeToPillar';
 import type { NavType } from '../model/extract-nav';
 import { extractNAV } from '../model/extract-nav';
@@ -81,9 +82,6 @@ export const renderFront = ({ front }: Props): string => {
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = front.config.switches;
 
-	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
-
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
 		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
@@ -133,6 +131,7 @@ export const renderFront = ({ front }: Props): string => {
 				switches: front.config.switches,
 				abTests: front.config.abTests,
 				brazeApiKey: front.config.brazeApiKey,
+				googleRecaptchaSiteKey: front.config.googleRecaptchaSiteKey,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: front.config,
@@ -172,9 +171,6 @@ export const renderTagFront = ({
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = tagFront.config.switches;
-
-	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
@@ -225,6 +221,7 @@ export const renderTagFront = ({
 				switches: tagFront.config.switches,
 				abTests: tagFront.config.abTests,
 				brazeApiKey: tagFront.config.brazeApiKey,
+				googleRecaptchaSiteKey: tagFront.config.googleRecaptchaSiteKey,
 				// Until we understand exactly what config we need to make available client-side,
 				// add everything we haven't explicitly typed as unknown config
 				unknownConfig: tagFront.config,

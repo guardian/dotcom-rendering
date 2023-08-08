@@ -10,6 +10,8 @@ deployments:
       templateStagePaths:
         CODE: DotcomRendering-CODE.template.json
         PROD: DotcomRendering-PROD.template.json
+      templateParameters:
+        VpcId: "/account/vpc/primary/id"
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
       templateStageParameters:

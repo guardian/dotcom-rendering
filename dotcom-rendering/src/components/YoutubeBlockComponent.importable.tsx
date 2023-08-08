@@ -32,6 +32,9 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
+	kickerText?: string;
+	pauseOffscreenVideo?: boolean;
+	showTextOverlay?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -89,6 +92,9 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
+	kickerText,
+	pauseOffscreenVideo = false,
+	showTextOverlay,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -228,6 +234,9 @@ export const YoutubeBlockComponent = ({
 				isMainMedia={isMainMedia}
 				imaEnabled={imaEnabled}
 				abTestParticipations={abTestParticipations}
+				kicker={kickerText}
+				shouldPauseOutOfView={pauseOffscreenVideo}
+				showTextOverlay={showTextOverlay}
 			/>
 			{!hideCaption && (
 				<Caption

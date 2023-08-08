@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('node:fs');
 const lockfile = require('@yarnpkg/lockfile');
 const pkg = require('../../package.json');
 const { warn, log } = require('./log');
@@ -9,7 +9,6 @@ if (pkg.devDependencies) {
 	process.exit(1);
 }
 
-/** @type {{ object: import('@types/yarnpkg__lockfile').LockFileObject }}*/
 const { object: json } = lockfile.parse(
 	fs.readFileSync('../yarn.lock', 'utf8'),
 );

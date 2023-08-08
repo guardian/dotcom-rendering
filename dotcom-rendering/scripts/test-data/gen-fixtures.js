@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 
-/* eslint-disable @typescript-eslint/no-floating-promises */
-
-const fs = require('fs/promises');
-const { resolve } = require('path');
+const fs = require('node:fs/promises');
+const { resolve } = require('node:path');
 const execa = require('execa');
 const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
@@ -303,7 +301,7 @@ Promise.allSettled(requests)
 		if (successful.length > 0) {
 			console.log(
 				`\n✅ Successfully created ${successful.length} / ${requests.length} fixtures:\n`,
-				...successful.map(({ value }) => `${value}\n`),
+				...successful.map(({ value }) => `${String(value)}\n`),
 			);
 		}
 

@@ -1,4 +1,4 @@
-import { createHash } from 'crypto';
+import { createHash } from 'node:crypto';
 import { ASSET_ORIGIN } from '../lib/assets';
 import type { DCRBadgeType } from '../types/badge';
 import type { Branding } from '../types/branding';

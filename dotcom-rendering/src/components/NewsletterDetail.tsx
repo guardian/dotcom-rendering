@@ -4,11 +4,11 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgNewsletter } from './SvgNewsletter';
-// TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
+import { SvgNewsletter } from '@guardian/source-react-components';
 
 type Props = {
 	text: string;
+	iconSize?: 'normal' | 'small';
 };
 
 const containerStyle = css`
@@ -16,8 +16,8 @@ const containerStyle = css`
 	align-items: center;
 `;
 
-const svgStyle = css`
-	height: 28px;
+const svgStyle = (iconSize: 'normal' | 'small') => css`
+	height: ${iconSize === 'small' ? '20px' : '28px'};
 
 	svg {
 		background: ${brandAltBackground.primary};
@@ -32,9 +32,9 @@ const spanStyle = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 `;
 
-export const NewsletterDetail = ({ text }: Props) => (
+export const NewsletterDetail = ({ text, iconSize = 'normal' }: Props) => (
 	<div css={containerStyle}>
-		<div css={svgStyle}>
+		<div css={svgStyle(iconSize)}>
 			<SvgNewsletter />
 		</div>
 		<span css={spanStyle}>{text}</span>

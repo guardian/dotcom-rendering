@@ -186,24 +186,24 @@ describe('Sign In Gate Tests', function () {
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
 		});
 
-		it('register button should contain profile.theguardian.com href', function () {
+		it('register CTA button should contain correct profile.theguardian.com href', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 
 			cy.get('[data-cy=sign-in-gate-main_register]')
 				.invoke('attr', 'href')
-				.should('contains', 'profile.theguardian.com');
+				.should('contains', 'profile.theguardian.com/register');
 		});
 
-		it('sign in link should contain profile.theguardian.com href', function () {
+		it('sign in link should contain correct profile.theguardian.com href', function () {
 			visitArticleAndScrollToGateForLazyLoad();
 
 			cy.get('[data-cy=sign-in-gate-main]').should('be.visible');
 
 			cy.get('[data-cy=sign-in-gate-main_signin]')
 				.invoke('attr', 'href')
-				.should('contains', 'profile.theguardian.com');
+				.should('contains', 'profile.theguardian.com/signin');
 		});
 
 		it('should show cmp ui when privacy settings link is clicked', function () {
@@ -254,7 +254,7 @@ describe('Sign In Gate Tests', function () {
 				);
 				cy.get('[data-cy=sign-in-gate-main_register]')
 					.should('have.attr', 'href')
-					.and('contains', '/signin?returnUrl=')
+					.and('contains', '/register?returnUrl=')
 					.and('match', /componentId%3Dmain_variant_\d/)
 					.and('not.contains', 'personalised_new_SupporterPlus');
 			});
@@ -489,7 +489,7 @@ describe('Sign In Gate Tests', function () {
 					);
 					cy.get('[data-cy=sign-in-gate-main_register]')
 						.should('have.attr', 'href')
-						.and('contains', '/signin?returnUrl=')
+						.and('contains', '/register?returnUrl=')
 						.and(
 							'not.match',
 							/componentId%3Dmain_variant_\d_personalised/,

@@ -39,6 +39,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return <MediaHeadline item={item} />;
 
 		case ArticleDesign.LiveBlog:

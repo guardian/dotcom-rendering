@@ -128,6 +128,7 @@ const isFullWidthImage = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Interview ||
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
+	format.design === ArticleDesign.Picture ||
 	format.design === ArticleDesign.Video;
 
 const getStyles = (

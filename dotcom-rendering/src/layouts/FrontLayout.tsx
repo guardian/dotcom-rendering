@@ -32,7 +32,7 @@ import { SnapCssSandbox } from '../components/SnapCssSandbox';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { TrendingTopics } from '../components/TrendingTopics';
-import { WeatherData } from '../components/WeatherData.importable';
+import { WeatherWrapper } from '../components/WeatherWrapper.importable';
 import { canRenderAds } from '../lib/canRenderAds';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -90,7 +90,7 @@ export const decideAdSlot = (
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
 		collectionCount > minContainers &&
-		index === getMerchHighPosition(collectionCount, isNetworkFront)
+		index === getMerchHighPosition(collectionCount)
 	) {
 		return (
 			<AdSlot
@@ -139,10 +139,10 @@ const decideLeftContent = (
 		!hasPageSkin
 	) {
 		return (
-			<Island clientOnly={true} deferUntil={'idle'}>
-				<WeatherData
+			<Island deferUntil={'idle'}>
+				<WeatherWrapper
 					ajaxUrl={front.config.ajaxUrl}
-					edition={front.config.edition}
+					edition={front.editionId}
 				/>
 			</Island>
 		);
@@ -161,7 +161,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	const merchHighPosition = getMerchHighPosition(
 		front.pressedPage.collections.length,
-		front.isNetworkFront,
 	);
 
 	const renderAds = canRenderAds(front);
@@ -177,7 +176,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		: [];
 
 	const showMostPopular =
-		front.config.switches.deeplyReadSwitch &&
+		front.config.switches.deeplyRead &&
 		front.isNetworkFront &&
 		front.deeplyRead &&
 		front.deeplyRead.length > 0;
@@ -547,10 +546,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											onwardsSource={'unknown-source'}
 											palette={containerPalette}
 											leftColSize={'compact'}
-											collectionType={
+											containerType={
 												collection.collectionType
 											}
 											hasPageSkin={hasPageSkin}
+											url={collection.href}
 										/>
 									</Island>
 								</Section>
