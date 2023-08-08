@@ -1,6 +1,10 @@
 import { join } from 'node:path';
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuAmiParameter,
+	GuStack,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import {
 	GuAllowPolicy,
@@ -100,6 +104,7 @@ export class DotcomRendering extends GuStack {
 					resources: [
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/${stage}/frontend/*`,
 					],
 				}),
 			],
@@ -107,7 +112,7 @@ export class DotcomRendering extends GuStack {
 
 		const elkStream = new GuStringParameter(this, 'ELKStreamId', {
 			fromSSM: true,
-			default: `/${stack}/${stage.toLowerCase()}/logstash.stream.name`,
+			default: `/${stage}/${stack}/${app}/logstash.stream.name`,
 		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
@@ -122,6 +127,11 @@ export class DotcomRendering extends GuStack {
 				region,
 				stage,
 				elkStreamId: elkStream.valueAsString,
+			}),
+			imageId: new GuAmiParameter(this, {
+				app,
+				fromSSM: true,
+				default: `/${stage}/${stack}/${app}/ami.imageId`,
 			}),
 			imageRecipe: props.amiRecipe,
 			role: instanceRole,

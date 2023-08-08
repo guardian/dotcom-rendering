@@ -69,8 +69,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   },
   "Parameters": {
     "AMIRendering": {
+      "Default": "/TEST/frontend/rendering/ami.imageId",
       "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
-      "Type": "AWS::EC2::Image::Id",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
     },
     "App": {
       "Default": "rendering",
@@ -98,7 +99,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELKStreamId": {
-      "Default": "/frontend/test/logstash.stream.name",
+      "Default": "/TEST/frontend/rendering/logstash.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "FrontendConfigKey": {
@@ -282,6 +283,18 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                         "Ref": "AWS::AccountId",
                       },
                       ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/TEST/frontend/*",
                     ],
                   ],
                 },
