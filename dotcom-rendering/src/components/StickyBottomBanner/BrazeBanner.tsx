@@ -15,6 +15,7 @@ import {
 	useAuthStatus,
 } from '../../lib/useAuthStatus';
 import type { TagType } from '../../types/tag';
+import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 
 type Meta = {
 	dataFromBraze: { [key: string]: string };
@@ -148,6 +149,9 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		}
 	};
 
+	const fetchEmail: () => Promise<string | null> =
+		lazyFetchEmailWithTimeout(idApiUrl);
+
 	return (
 		<div css={containerStyles}>
 			<BrazeComponent
@@ -156,6 +160,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
 				subscribeToNewsletter={subscribeToNewsletter}
+				fetchEmail={fetchEmail}
 			/>
 		</div>
 	);

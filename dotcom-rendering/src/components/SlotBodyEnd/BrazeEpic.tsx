@@ -16,6 +16,7 @@ import {
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
+import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 
 const wrapperMargins = css`
 	margin: 18px 0;
@@ -156,6 +157,9 @@ const BrazeEpicWithSatisfiedDependencies = ({
 		}
 	};
 
+	const fetchEmail: () => Promise<string | null> =
+		lazyFetchEmailWithTimeout(idApiUrl);
+
 	return (
 		<div ref={setNode} css={wrapperMargins}>
 			<div ref={epicRef}>
@@ -166,6 +170,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					countryCode={countryCode}
 					logButtonClickWithBraze={meta.logButtonClickWithBraze}
 					submitComponentEvent={submitComponentEvent}
+					fetchEmail={fetchEmail}
 				/>
 			</div>
 		</div>
