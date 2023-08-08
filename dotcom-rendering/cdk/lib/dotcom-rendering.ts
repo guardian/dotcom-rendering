@@ -75,7 +75,7 @@ export class DotcomRendering extends GuStack {
 
 		const lb = new GuClassicLoadBalancer(this, 'InternalLoadBalancer', {
 			app: props.app,
-			vpc: vpc,
+			vpc,
 			listeners: [{
 				internalProtocol: LoadBalancingProtocol.HTTP,
 				internalPort: 80,
