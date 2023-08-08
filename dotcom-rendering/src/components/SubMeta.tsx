@@ -127,7 +127,7 @@ export const SubMeta = ({
 		if (subMetaSectionLinks.length > 0) links.push(...subMetaSectionLinks);
 		if (subMetaKeywordLinks.length > 0) links.push(...subMetaKeywordLinks);
 		return {
-			links: links,
+			links,
 			hasLinks: links.length > 0,
 		};
 	};
