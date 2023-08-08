@@ -227,6 +227,13 @@ export class DotcomRendering extends GuStack {
 			scalingAdjustment: -1,
 		  });
 
+		const scaleUpPolicy = new CfnScalingPolicy(this, 'ScaleUpPolicy', {
+			adjustmentType: AdjustmentType.PERCENT_CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '600',
+			scalingAdjustment: 100,
+		  });
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -240,6 +247,7 @@ export class DotcomRendering extends GuStack {
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
 				ScaleDownPolicy: scaleDownPolicy.logicalId,
+				ScaleUpPolicy: scaleUpPolicy.logicalId,
 			},
 		});
 
