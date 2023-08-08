@@ -89,6 +89,21 @@ export interface CalloutBlockElementV2 {
 	contacts?: CalloutContactType[];
 }
 
+export interface CartoonBlockElement {
+	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
+	role: RoleType;
+	caption: string;
+	credit: string;
+	displayCredit: boolean;
+	alt: string;
+	variants: Variant[];
+}
+
+type Variant = {
+	viewportSize: 'small' | 'large';
+	images: Image[];
+};
+
 interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
@@ -615,23 +630,6 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataVideo
 		| WitnessTypeDataText;
 }
-
-export interface CartoonBlockElement {
-	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement';
-	role: RoleType;
-	caption: string;
-	credit: string;
-	source: string;
-	displayCredit: boolean;
-	alt: string;
-	variants: Variant[];
-}
-
-type Variant = {
-	viewportSize: 'small' | 'large';
-	images: Image[];
-};
-
 export type FEElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
@@ -639,6 +637,7 @@ export type FEElement =
 	| CaptionBlockElement
 	| CalloutBlockElement
 	| CalloutBlockElementV2
+	| CartoonBlockElement
 	| ChartAtomBlockElement
 	| CodeBlockElement
 	| CommentBlockElement
@@ -682,8 +681,7 @@ export type FEElement =
 	| VideoYoutubeBlockElement
 	| VineBlockElement
 	| YoutubeBlockElement
-	| WitnessTypeBlockElement
-	| CartoonBlockElement;
+	| WitnessTypeBlockElement;
 
 // -------------------------------------
 // Misc

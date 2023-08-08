@@ -4,8 +4,7 @@ export const cartoon: CartoonBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.CartoonBlockElement',
 	role: 'inline',
 	caption: 'The Mary Poppins Method – cleaning house.',
-	credit: 'Simone Lia',
-	source: 'The Observer',
+	credit: 'Comic by: Simone Lia / The Observer',
 	displayCredit: true,
 	alt: 'The Mary Poppins Method',
 	variants: [

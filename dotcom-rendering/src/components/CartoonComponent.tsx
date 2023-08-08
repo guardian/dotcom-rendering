@@ -17,18 +17,6 @@ export const CartoonComponent = ({ element }: Props) => {
 		(variant) => variant.viewportSize === 'large',
 	);
 
-	const getFullCredit = (credit: string, source: string) => {
-		if (credit && source) {
-			return `${credit} / ${source}`;
-		} else if (!credit && source) {
-			return source;
-		} else if (credit && !source) {
-			return credit;
-		} else return '';
-	};
-
-	const fullCredit = getFullCredit(element.credit, element.source);
-
 	return (
 		<div
 			css={css`
@@ -86,7 +74,7 @@ export const CartoonComponent = ({ element }: Props) => {
 					design: ArticleDesign.Standard,
 					theme: Pillar.News,
 				}}
-				credit={`Comic by ${fullCredit}`}
+				credit={element.credit}
 				displayCredit={element.displayCredit}
 			/>
 		</div>
