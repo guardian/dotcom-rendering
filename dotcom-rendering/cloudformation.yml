@@ -55,7 +55,7 @@ Parameters:
     Description: Id of scale down policy
     Type: String
   ScaleUpPolicy:
-    Description: Id of scale down policy
+    Description: Id of scale up policy
     Type: String
   # ! These params are not used but should be kept until the migration is finished
   ELKStream:
