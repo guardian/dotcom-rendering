@@ -57,6 +57,27 @@ const listStyleNone = css`
 		height: 0;
 		width: 0;
 	}
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem 0.25rem;
+	background-image: repeating-linear-gradient(
+			to bottom,
+			#fff 0px,
+			#fff 36px,
+			transparent 36px,
+			transparent 37px,
+			#fff 37px,
+			#fff 46px
+		),
+		repeating-linear-gradient(
+			to right,
+			#ccc 0px,
+			#ccc 3px,
+			transparent 3px,
+			transparent 5px
+		);
+	background-position: top;
+	background-repeat: no-repeat;
 `;
 
 const listWrapper = (palette: Palette) => css`
@@ -66,13 +87,10 @@ const listWrapper = (palette: Palette) => css`
 `;
 
 const listItemStyles = (palette: Palette) => css`
-	display: inline-block;
 	${textSans.xsmall()};
 	border: 1px solid ${palette.text.subMeta};
 	border-radius: 12px;
 	padding: 2px 9px;
-	margin-right: 7px;
-	margin-bottom: 8px;
 	a {
 		position: relative;
 		display: block;
