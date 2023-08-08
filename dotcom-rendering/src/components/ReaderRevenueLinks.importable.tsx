@@ -18,7 +18,6 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
 	sendOphanComponentEvent,
 	submitComponentEvent,
@@ -36,8 +35,8 @@ import { setAutomat } from '../lib/setAutomat';
 import { useAuthStatus } from '../lib/useAuthStatus';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
-import ArrowRightIcon from '../static/icons/arrow-right.svg';
 import { useOphan } from '../lib/useOphan';
+import ArrowRightIcon from '../static/icons/arrow-right.svg';
 
 type Props = {
 	editionId: EditionId;
@@ -166,14 +165,12 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
-	ophanRecord: OphanRecordFunction;
 };
 
 const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
-	ophanRecord,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
@@ -245,7 +242,7 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => submitComponentEvent(componentEvent, ophanRecord)}
+					) => submitComponentEvent(componentEvent)}
 					{...supportHeaderResponse.props}
 				/>
 			</div>
@@ -264,7 +261,6 @@ type ReaderRevenueLinksNativeProps = {
 		support: string;
 		contribute: string;
 	};
-	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 };
 
@@ -273,7 +269,6 @@ const ReaderRevenueLinksNative = ({
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
-	ophanRecord,
 	pageViewId,
 }: ReaderRevenueLinksNativeProps) => {
 	const hideSupportMessaging = shouldHideSupportMessaging();
@@ -295,14 +290,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+			void sendOphanComponentEvent('INSERT', tracking);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+			void sendOphanComponentEvent('VIEW', tracking);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);
@@ -406,13 +401,7 @@ export const ReaderRevenueLinks = ({
 	contributionsServiceUrl,
 }: Props) => {
 	const ophan = useOphan();
-
-	if (!ophan) {
-		return null;
-	}
-
 	const [countryCode, setCountryCode] = useState<string>();
-	const { pageViewId } = ophan;
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -427,6 +416,11 @@ export const ReaderRevenueLinks = ({
 		callFetch();
 	}, []);
 
+	if (!ophan) {
+		return null;
+	}
+	const { pageViewId } = ophan;
+
 	if (countryCode) {
 		if (inHeader && remoteHeader) {
 			return (
@@ -434,7 +428,6 @@ export const ReaderRevenueLinks = ({
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophan.record}
 				/>
 			);
 		}
@@ -444,7 +437,6 @@ export const ReaderRevenueLinks = ({
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}
-				ophanRecord={ophan.record}
 				pageViewId={pageViewId}
 			/>
 		);

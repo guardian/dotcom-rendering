@@ -10,7 +10,7 @@ import {
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { log, startPerformanceMeasure, storage } from '@guardian/libs';
-import { record } from '../../client/ophan/ophan';
+import { getOphan } from '../../client/ophan/ophan';
 import {
 	clearHasCurrentBrazeUser,
 	hasCurrentBrazeUser,
@@ -103,6 +103,8 @@ export const buildBrazeMessaging = async (
 		);
 
 		const sdkLoadTimeTaken = endPerformanceMeasure();
+
+		const { record } = await getOphan();
 		record({
 			component: 'braze-sdk-load-timing',
 			value: sdkLoadTimeTaken,

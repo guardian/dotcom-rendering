@@ -1,11 +1,11 @@
 import { log } from '@guardian/libs';
-import { record } from './ophan/ophan';
+import { getOphan } from './ophan/ophan';
 
 const logPerformanceInfo = (name: string, data?: unknown) =>
 	log('openJournalism', '⏱', name, data);
 
 const reasons = new Set<string>();
-const recordPoorDeviceConnectivity = (reason: string) => {
+const recordPoorDeviceConnectivity = async (reason: string) => {
 	reasons.add(reason);
 	log('openJournalism', '🐌', reasons);
 	if (reasons.size >= 2) {
@@ -13,6 +13,7 @@ const recordPoorDeviceConnectivity = (reason: string) => {
 		const experiences = ['dotcom-rendering', 'poor-page-performance'].join(
 			',',
 		);
+		const { record } = await getOphan();
 		record({ experiences });
 	}
 };
@@ -27,8 +28,11 @@ export const performanceMonitoring = (): Promise<void> => {
 					case 'first-contentful-paint': {
 						logPerformanceInfo(name, { startTime, duration });
 						if (startTime > 2400) {
-							recordPoorDeviceConnectivity('FCP over 2.4s');
-							observer.disconnect();
+							void recordPoorDeviceConnectivity(
+								'FCP over 2.4s',
+							).then(() => {
+								observer.disconnect();
+							});
 						}
 					}
 				}
@@ -50,7 +54,7 @@ export const performanceMonitoring = (): Promise<void> => {
 			logPerformanceInfo('navigation', info);
 			const ttfb = nav.responseStart - nav.startTime;
 			if (ttfb > 1200) {
-				recordPoorDeviceConnectivity('TTFB over 1.2s');
+				void recordPoorDeviceConnectivity('TTFB over 1.2s');
 			}
 		}
 	} catch (error) {

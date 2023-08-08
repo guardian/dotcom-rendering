@@ -16,7 +16,6 @@ import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
 import { CardPicture } from './CardPicture';
 import { NewsletterDetail } from './NewsletterDetail';
-import { getOphan } from '../client/ophan/ophan';
 
 interface Props {
 	newsletter: Newsletter;
@@ -156,8 +155,7 @@ export const NewsletterCard = ({
 	const [hasBeenSeen, setIsInViewRef] = useIsInView({ threshold: 0.9 });
 	const [haveReportedBeingSeen, setHaveReportedBeingSeen] = useState(false);
 
-	const reportSeen = useCallback(async () => {
-		const { record } = await getOphan();
+	const reportSeen = useCallback(() => {
 		const valueData = {
 			eventDescription: 'card-viewed',
 			newsletterId: newsletter.identityName,
@@ -167,17 +165,14 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		submitComponentEvent(
-			{
-				component: {
-					componentType: 'CARD',
-					id: `DCR NewsletterCard ${newsletter.identityName}`,
-				},
-				action: 'VIEW',
-				value: JSON.stringify(valueData),
+		submitComponentEvent({
+			component: {
+				componentType: 'CARD',
+				id: `DCR NewsletterCard ${newsletter.identityName}`,
 			},
-			record,
-		);
+			action: 'VIEW',
+			value: JSON.stringify(valueData),
+		});
 	}, [cardPosition, carouselPosition, groupTitle, newsletter.identityName]);
 
 	useEffect(() => {

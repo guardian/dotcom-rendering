@@ -5,7 +5,6 @@ import type {
 	OphanAction,
 	OphanComponentEvent,
 } from '@guardian/libs';
-import { log } from '@guardian/libs';
 import type { ServerSideTests } from '../../types/config';
 
 export const getOphan = async (): Promise<
@@ -26,32 +25,31 @@ export type OphanRecordFunction = (
 	callback?: () => void,
 ) => void;
 
-export const record: OphanRecordFunction = (event) => {
-	if (window.guardian.ophan?.record) {
-		window.guardian.ophan.record(event, () =>
-			log('dotcom', '🧿 Ophan event recorded:', event),
-		);
-	} else {
-		throw new Error("window.guardian.ophan.record doesn't exist");
-	}
-};
+// export const record: OphanRecordFunction = (event) => {
+// 	if (window.guardian.ophan?.record) {
+// 		window.guardian.ophan.record(event, () =>
+// 			log('dotcom', '🧿 Ophan event recorded:', event),
+// 		);
+// 	} else {
+// 		throw new Error("window.guardian.ophan.record doesn't exist");
+// 	}
+// };
 
-export const submitComponentEvent = (
+export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
-	ophanRecord({ componentEvent });
+): Promise<void> => {
+	const { record } = await getOphan();
+	record({ componentEvent });
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
-export const sendOphanComponentEvent = (
+export const sendOphanComponentEvent = async (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
-	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
-): void => {
+): Promise<void> => {
 	const {
 		abTestName,
 		abTestVariant,
@@ -76,7 +74,7 @@ export const sendOphanComponentEvent = (
 		action,
 	};
 
-	submitComponentEvent(componentEvent, ophanRecord);
+	return submitComponentEvent(componentEvent);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
@@ -91,7 +89,7 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	return { abTestRegister: records };
 };
 
-export const recordPerformance = (): void => {
+export const recordPerformance = async (): Promise<void> => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety on browsers
@@ -117,6 +115,7 @@ export const recordPerformance = (): void => {
 		redirectCount: performanceAPI.navigation.redirectCount,
 	};
 
+	const { record } = await getOphan();
 	record({
 		performance,
 	});

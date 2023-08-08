@@ -1,10 +1,11 @@
 import { setImmediate } from 'node:timers';
-import { record } from '../client/ophan/ophan';
 import type { CanShowResult, SlotConfig } from './messagePicker';
 import { pickMessage } from './messagePicker';
 
+const ophanRecordSpy = jest.fn();
+
 jest.mock('../client/ophan/ophan', () => ({
-	record: jest.fn(),
+	getOphan: () => Promise.resolve({ record: ophanRecordSpy }),
 }));
 
 jest.useFakeTimers();
@@ -249,7 +250,7 @@ describe('pickMessage', () => {
 		const got = await messagePromise;
 
 		expect(got()).toEqual(null);
-		expect(record).toHaveBeenCalledWith({
+		expect(ophanRecordSpy).toHaveBeenCalledWith({
 			component: 'banner-picker-timeout-dcr',
 			value: config.candidates[0]?.candidate.id,
 		});
@@ -307,13 +308,13 @@ describe('pickMessage', () => {
 		jest.advanceTimersByTime(150);
 		await messagePromise;
 
-		expect(record).toHaveBeenCalledWith(
+		expect(ophanRecordSpy).toHaveBeenCalledWith(
 			expect.objectContaining({
 				component: 'messagePicker-canShow-candidate-1',
 			}),
 		);
 
-		expect(record).not.toHaveBeenCalledWith(
+		expect(ophanRecordSpy).not.toHaveBeenCalledWith(
 			expect.objectContaining({
 				component: 'messagePicker-canShow-candidate-2',
 			}),
