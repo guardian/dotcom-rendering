@@ -111,17 +111,19 @@ export class DotcomRendering extends GuStack {
 
 		// ----------------------------------------------------------------- //
 		// Temporarily overriding logical IDs during CDK migration
+		const reason =
+			'Retaining a stateful resource previously defined in YAML';
 		this.overrideLogicalId(lbSecurityGroup, {
 			logicalId: 'InternalLoadBalancerSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason,
 		});
 		this.overrideLogicalId(instanceSecurityGroup, {
 			logicalId: 'InstanceSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason,
 		});
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
+			reason,
 		});
 		// ----------------------------------------------------------------- //
 
