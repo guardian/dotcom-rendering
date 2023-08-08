@@ -99,7 +99,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELKStreamId": {
-      "Default": "/TEST/frontend/rendering/logstash.stream.name",
+      "Default": "/TEST/frontend/rendering/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "FrontendConfigKey": {

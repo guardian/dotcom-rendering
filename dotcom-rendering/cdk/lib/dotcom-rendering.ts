@@ -110,11 +110,6 @@ export class DotcomRendering extends GuStack {
 			],
 		});
 
-		const elkStream = new GuStringParameter(this, 'ELKStreamId', {
-			fromSSM: true,
-			default: `/${stage}/${stack}/${app}/logstash.stream.name`,
-		});
-
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
 			app,
 			vpc,
@@ -126,7 +121,10 @@ export class DotcomRendering extends GuStack {
 				app,
 				region,
 				stage,
-				elkStreamId: elkStream.valueAsString,
+				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
+					fromSSM: true,
+					default: `/${stage}/${stack}/${app}/logging.stream.name`,
+				}).valueAsString,
 			}),
 			imageId: new GuAmiParameter(this, {
 				app,
