@@ -54,6 +54,9 @@ Parameters:
   InstanceRole:
     Description: Name of instance role
     Type: String
+  ScaleDownPolicy:
+    Description: Id of scale down policy
+    Type: String
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -113,14 +116,6 @@ Resources:
         - Key: App
           Value:
             Fn::FindInMap: [Constants, App, Value]
-
-  ScaleDownPolicy:
-    Type: AWS::AutoScaling::ScalingPolicy
-    Properties:
-      AdjustmentType: ChangeInCapacity
-      AutoScalingGroupName: !Ref AutoscalingGroup
-      Cooldown: '120'
-      ScalingAdjustment: '-1'
 
   ScaleUpPolicy:
     Type: AWS::AutoScaling::ScalingPolicy

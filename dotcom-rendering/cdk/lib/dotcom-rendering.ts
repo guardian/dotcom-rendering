@@ -8,7 +8,7 @@ import {
 } from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
 import { Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
+import { CfnScalingPolicy, HealthCheck, AdjustmentType } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import { getUserData } from './launch-config';
@@ -129,6 +129,13 @@ export class DotcomRendering extends GuStack {
 			vpcSubnets: { subnets: vpc.publicSubnets },
 		});
 
+		const scaleDownPolicy = new CfnScalingPolicy(this, 'ScaleDownPolicy', {
+			adjustmentType: AdjustmentType.CHANGE_IN_CAPACITY,
+			autoScalingGroupName: asg.autoScalingGroupName,
+			cooldown: '120',
+			scalingAdjustment: -1,
+		  });
+
 		// ----------------------------------------------------------------- //
 		// Temporarily overriding logical IDs during CDK migration
 		const reason =
@@ -164,6 +171,7 @@ export class DotcomRendering extends GuStack {
 					lbSecurityGroup.securityGroupId,
 				InstanceRole: instanceRole.roleName,
 				AutoscalingGroup: asg.autoScalingGroupArn,
+				ScaleDownPolicy: scaleDownPolicy.logicalId,
 			},
 		});
 	}
