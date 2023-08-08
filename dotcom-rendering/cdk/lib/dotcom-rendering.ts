@@ -123,7 +123,7 @@ export class DotcomRendering extends GuStack {
 				VPCIpBlock: vpc.vpcCidrBlock,
 				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-				InstanceRole: instanceRole.roleId,
+				InstanceRole: instanceRole.roleName,
 			}
 		});
 	}

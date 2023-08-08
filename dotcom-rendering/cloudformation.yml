@@ -65,7 +65,7 @@ Parameters:
     Description: Id of instance security group
     Type: String
   InstanceRole:
-    Description: Id of instance role
+    Description: Name of instance role
     Type: String
 
 Conditions:
