@@ -850,9 +850,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Condition": "HasLatencyScalingAlarm",
       "Properties": {
         "AlarmActions": [
-          {
-            "Ref": "ScaleUpPolicy",
-          },
+          "ScaleUpPolicy",
         ],
         "AlarmDescription": {
           "Fn::Sub": "Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
