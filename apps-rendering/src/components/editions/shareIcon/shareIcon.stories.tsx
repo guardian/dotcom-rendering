@@ -2,12 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticlePillar } from '@guardian/libs';
-import { withKnobs } from '@storybook/addon-knobs';
 import { article } from 'fixtures/item';
+import { text } from 'palette';
 import type { ReactElement } from 'react';
-import { selectPillar } from 'storybookHelpers';
 import ShareIcon from '.';
 
 // ----- Setup ----- //
@@ -36,7 +34,7 @@ const styles = (kickerColor: string): SerializedStyles => {
 const Default = (): ReactElement => {
 	const item = {
 		...article,
-		theme: selectPillar(ArticlePillar.News),
+		theme: ArticlePillar.News,
 	};
 	const kicker = text.editionsKicker(item);
 
@@ -52,7 +50,6 @@ const Default = (): ReactElement => {
 export default {
 	component: ShareIcon,
 	title: 'AR/Editions/ShareIcon',
-	decorators: [withKnobs],
 };
 
 export { Default };

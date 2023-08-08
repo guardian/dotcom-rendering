@@ -10,8 +10,14 @@ module.exports = (...packages) =>
 			resolve(packages.map(require));
 		} catch (e) {
 			log(`Pre-installing dependency (${packages.join(', ')})...`);
-			require('child_process')
-				.spawn('npm', ['i', ...packages, '--no-save'])
+			const npmInstallProcess = require('node:child_process')
+				.spawn('npm', [
+					'i',
+					...packages,
+					'--no-save',
+					'--legacy-peer-deps',
+					'--package-lock=false',
+				])
 				.on('close', (code) => {
 					if (code !== 0) {
 						process.exit(code);
@@ -23,6 +29,9 @@ module.exports = (...packages) =>
 						console.log(e2);
 						process.exit(1);
 					}
-				});
+				})
+				.stderr.on('data', (data) =>
+					console.error(Buffer.from(data).toString()),
+				);
 		}
 	});

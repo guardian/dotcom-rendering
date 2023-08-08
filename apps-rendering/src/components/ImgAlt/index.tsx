@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
@@ -16,6 +15,7 @@ import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
 import type { Optional } from 'optional';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Functions ----- //
 
@@ -24,6 +24,7 @@ const backgroundColour = (format: ArticleFormat): string => {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return neutral[20];
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -40,7 +41,6 @@ type Props = {
 	sizes: Sizes;
 	className: Option<SerializedStyles>;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 };
 
@@ -53,7 +53,6 @@ type Props = {
  */
 const placeholderBackground = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 	imageSubtype: Optional<ImageSubtype>,
 ): SerializedStyles => {
 	if (
@@ -66,7 +65,7 @@ const placeholderBackground = (
 
 	return css`
 		background-color: ${backgroundColour(format)};
-		${darkModeCss(supportsDarkMode)`
+		${darkModeCss`
 			background-color: ${neutral[20]};
 		`}
 	`;
@@ -74,22 +73,14 @@ const placeholderBackground = (
 
 const styles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean,
 	imageSubtype: Optional<ImageSubtype>,
 ): SerializedStyles => css`
-	${placeholderBackground(format, supportsDarkMode, imageSubtype)}
+	${placeholderBackground(format, imageSubtype)}
 	color: ${neutral[60]};
 	display: block;
 `;
 
-const Img: FC<Props> = ({
-	image,
-	sizes,
-	className,
-	format,
-	supportsDarkMode,
-	lightbox,
-}) => (
+const Img: FC<Props> = ({ image, sizes, className, format, lightbox }) => (
 	<picture>
 		<source
 			sizes={sizesAttribute(sizes)}
@@ -103,7 +94,7 @@ const Img: FC<Props> = ({
 			className={getClassName(image.width, lightbox)}
 			css={[
 				sizeStyles(sizes, image.width, image.height),
-				styles(format, supportsDarkMode, image.imageSubtype),
+				styles(format, image.imageSubtype),
 				withDefault<SerializedStyles | undefined>(undefined)(className),
 			]}
 			data-ratio={image.height / image.width}

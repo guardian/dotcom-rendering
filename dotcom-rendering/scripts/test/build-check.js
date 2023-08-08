@@ -41,17 +41,11 @@ const fileExists = async (glob) => {
 	}
 
 	[
-		'sentryLoader.js',
-		'bootCmp.js',
-		'ga.js',
-		'ophan.js',
-		'islands.js',
-		'dynamicImport.js',
+		'index.js',
 		'atomIframe.js',
 		'embedIframe.js',
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
-		'initDiscussion.js',
 	].forEach((name) => {
 		for (const manifest of manifests) {
 			if (manifest[name]) {

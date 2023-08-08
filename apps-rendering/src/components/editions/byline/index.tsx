@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type {
@@ -20,6 +19,7 @@ import {
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import EditionsAvatar from '../avatar';
 import ShareIcon from '../shareIcon';
@@ -202,7 +202,8 @@ const getBylineStyles = (
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video
+		format.design === ArticleDesign.Video ||
+		format.design === ArticleDesign.Picture
 	) {
 		return css(styles(iconColor, hasAvatar, shareIcon), galleryStyles);
 	}
@@ -253,12 +254,14 @@ const hasAvatar = (format: Item): boolean => {
 const ignoreIconColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
-	format.design === ArticleDesign.Video;
+	format.design === ArticleDesign.Video ||
+	format.design === ArticleDesign.Picture;
 
 const ignoreTextColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
 	format.design === ArticleDesign.Video ||
+	format.design === ArticleDesign.Picture ||
 	format.display === ArticleDisplay.Immersive;
 
 const Byline: FC<Props> = ({ item, shareIcon = true }) => {

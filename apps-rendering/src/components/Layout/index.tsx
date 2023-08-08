@@ -55,6 +55,10 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Comment ||
 		item.design === ArticleDesign.Editorial
 	) {
+		if (item.display === ArticleDisplay.Immersive) {
+			return <ImmersiveLayout item={item} />;
+		}
+
 		return <CommentLayout item={item} />;
 	}
 
@@ -84,7 +88,9 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
 		item.design === ArticleDesign.Interview ||
-		item.design === ArticleDesign.Recipe
+		item.design === ArticleDesign.Recipe ||
+		item.design === ArticleDesign.Timeline ||
+		item.design === ArticleDesign.Profile
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return <ImmersiveLayout item={item} />;

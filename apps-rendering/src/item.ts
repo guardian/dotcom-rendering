@@ -67,7 +67,6 @@ interface Fields extends ArticleFormat {
 	tags: Tag[];
 	shouldHideReaderRevenue: boolean;
 	branding: Option<Branding>;
-	internalShortId: Option<string>;
 	commentCount: Option<number>;
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
@@ -215,6 +214,21 @@ interface FullPageInteractive extends Fields {
 	body: BodyElement[];
 }
 
+interface Timeline extends Fields {
+	design: ArticleDesign.Timeline;
+	body: BodyElement[];
+}
+
+interface Profile extends Fields {
+	design: ArticleDesign.Profile;
+	body: BodyElement[];
+}
+
+interface Picture extends Fields {
+	design: ArticleDesign.Picture;
+	body: BodyElement[];
+}
+
 type Item =
 	| LiveBlog
 	| DeadBlog
@@ -239,7 +253,10 @@ type Item =
 	| NewsletterSignup
 	| PhotoEssay
 	| PrintShop
-	| FullPageInteractive;
+	| FullPageInteractive
+	| Timeline
+	| Profile
+	| Picture;
 
 // ----- Convenience Types ----- //
 
@@ -341,7 +358,6 @@ const parseItemFields = (
 		shouldHideReaderRevenue:
 			content.fields?.shouldHideReaderRevenue ?? false,
 		branding: getBranding(request),
-		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
 		relatedContent: pipe(
 			relatedContent,
@@ -396,6 +412,8 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
+const isNews = hasTag('tone/news');
+
 const isReview = hasSomeTag([
 	'tone/reviews',
 	'tone/livereview',
@@ -427,6 +445,10 @@ const isQuiz = hasTag('tone/quizzes');
 const isLabs = hasTag('tone/advertisement-features');
 
 const isMatchReport = hasTag('tone/matchreports');
+
+const isTimeline = hasTag('tone/timelines');
+
+const isProfile = hasTag('tone/profiles');
 
 const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
@@ -484,10 +506,7 @@ const fromCapi =
 				body,
 				...itemFields,
 			};
-			// This isn't accurate, picture pieces look different to galleries.
-			// This is to prevent accidentally breaking Editions until we have
-			// a model for pictures.
-		} else if (isGallery(tags) || isPicture(tags)) {
+		} else if (isGallery(tags)) {
 			return {
 				design: ArticleDesign.Gallery,
 				body,
@@ -598,6 +617,24 @@ const fromCapi =
 				body,
 				...itemFields,
 			};
+		} else if (isTimeline(tags)) {
+			return {
+				design: ArticleDesign.Timeline,
+				body,
+				...itemFields,
+			};
+		} else if (isProfile(tags)) {
+			return {
+				design: ArticleDesign.Profile,
+				body,
+				...itemFields,
+			};
+		} else if (isPicture(tags)) {
+			return {
+				design: ArticleDesign.Picture,
+				body,
+				...itemFields,
+			};
 		}
 
 		return {
@@ -635,6 +672,8 @@ export {
 	NewsletterSignup,
 	Obituary,
 	Correction,
+	Timeline,
+	Profile,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
@@ -648,4 +687,7 @@ export {
 	isLetter,
 	isObituary,
 	isReview,
+	isNews,
+	isTimeline,
+	isProfile,
 };

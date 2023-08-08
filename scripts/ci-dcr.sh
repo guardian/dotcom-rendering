@@ -42,21 +42,19 @@ else
 
 	if [ $currentBranch == "main" ]
 	then
-		#Code Validation
 		make validate-ci
-
-		# Cypress Tests
-		# see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
-		# apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
-		make cypress
+		# If $SKIP_CYPRESS is not set, run the Cypress tests
+		if [ -z $SKIP_CYPRESS ]; then
+			make cypress
+			cypressExitCode=$?
+			if [ $cypressExitCode -ne 0 ]; then
+				echo "Cypress failed. If you're trying to release something urgently, set \$SKIP_CYPRESS to any non-empty value\n\n"
+			fi
+		fi
 	else
-		#Run bundle size?
-		make bundlesize
-
 		printf "Skipping code checks when not on main"
 	fi
 
-    #RiffRaff publish
     make riffraff-publish
 fi
 

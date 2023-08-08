@@ -2,8 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
-import { maybeRender } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandAlt,
@@ -19,9 +17,12 @@ import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import { grid } from 'grid/grid';
 import { getFormat } from 'item';
 import type { NewsletterSignup } from 'item';
+import { maybeRender } from 'lib';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from '../InPageNewsletterSignup';
@@ -101,6 +102,12 @@ const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 					/>
 				</header>
 				<section css={contentRow}>
+					<WithAgeWarning
+						tags={item.tags}
+						series={item.series}
+						publishDate={item.publishDate}
+						format={format}
+					/>
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<>
 							{newsletter.regionFocus && (

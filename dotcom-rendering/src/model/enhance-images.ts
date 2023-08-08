@@ -1,6 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type {
-	CAPIElement,
+	FEElement,
 	ImageBlockElement,
 	MultiImageBlockElement,
 	SubheadingBlockElement,
@@ -12,7 +12,7 @@ interface HalfWidthImageBlockElement extends ImageBlockElement {
 }
 
 const isHalfWidthImage = (
-	element?: CAPIElement,
+	element?: FEElement,
 ): element is HalfWidthImageBlockElement => {
 	if (!element) return false;
 	return (
@@ -23,7 +23,7 @@ const isHalfWidthImage = (
 };
 
 const isMultiImage = (
-	element?: CAPIElement,
+	element?: FEElement,
 ): element is MultiImageBlockElement => {
 	if (!element) return false;
 	return (
@@ -32,14 +32,14 @@ const isMultiImage = (
 	);
 };
 
-const isImage = (element?: CAPIElement): element is ImageBlockElement => {
+export const isImage = (element?: FEElement): element is ImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 	);
 };
 
-const isTitle = (element?: CAPIElement): element is SubheadingBlockElement => {
+const isTitle = (element?: FEElement): element is SubheadingBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
 	if (
@@ -65,7 +65,7 @@ const extractTitle = (element: SubheadingBlockElement): string => {
 	return '';
 };
 
-const isCaption = (element?: CAPIElement): element is TextBlockElement => {
+const isCaption = (element?: FEElement): element is TextBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
 	if (
@@ -120,8 +120,22 @@ const constructMultiImageElement = (
 	};
 };
 
-const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
-	const withMultiImageElements: CAPIElement[] = [];
+export const addLightboxData = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) =>
+		isImage(thisElement)
+			? {
+					...thisElement,
+					// Copy caption and credit
+					lightbox: {
+						caption: thisElement.data.caption,
+						credit: thisElement.data.credit,
+					},
+			  }
+			: thisElement,
+	);
+
+const addMultiImageElements = (elements: FEElement[]): FEElement[] => {
+	const withMultiImageElements: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		if (isHalfWidthImage(thisElement) && isHalfWidthImage(nextElement)) {
@@ -139,8 +153,8 @@ const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
 	return withMultiImageElements;
 };
 
-const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
-	const withTitles: CAPIElement[] = [];
+const addTitles = (elements: FEElement[]): FEElement[] => {
+	const withTitles: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -172,8 +186,8 @@ const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
 	return withTitles;
 };
 
-const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
-	const withSpecialCaptions: CAPIElement[] = [];
+const addCaptionsToImages = (elements: FEElement[]): FEElement[] => {
+	const withSpecialCaptions: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -211,8 +225,8 @@ const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
 	return withSpecialCaptions;
 };
 
-const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
-	const withSpecialCaptions: CAPIElement[] = [];
+const addCaptionsToMultis = (elements: FEElement[]): FEElement[] => {
+	const withSpecialCaptions: FEElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
@@ -242,59 +256,67 @@ const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
 	return withSpecialCaptions;
 };
 
-const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
+const stripCaptions = (elements: FEElement[]): FEElement[] =>
 	// Remove all captions from all images
-	const withoutCaptions: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement'
 		) {
 			// Remove the caption from this image
-			withoutCaptions.push({
+			return {
 				...thisElement,
 				data: {
 					...thisElement.data,
 					caption: '',
 				},
-			});
+			};
 		} else {
 			// Pass through
-			withoutCaptions.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withoutCaptions;
-};
 
-const removeCredit = (elements: CAPIElement[]): CAPIElement[] => {
+const removeCredit = (elements: FEElement[]): FEElement[] =>
 	// Remove credit from all images
-	const withoutCredit: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement'
 		) {
 			// Remove the credit from this image
-			withoutCredit.push({
+			return {
 				...thisElement,
 				data: {
 					...thisElement.data,
 					credit: '',
 				},
-			});
+			};
 		} else {
 			// Pass through
-			withoutCredit.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withoutCredit;
-};
 
 class Enhancer {
-	elements: CAPIElement[];
+	elements: FEElement[];
 
-	constructor(elements: CAPIElement[]) {
+	constructor(elements: FEElement[]) {
 		this.elements = elements;
+	}
+
+	/**
+	 * To support photo essays and multi image elements, some images have their captions
+	 * and credit values remmoved. For example, when we might have two iamges side by side
+	 * we want to display a single caption for both so we remove each images own caption
+	 * and use the ul/li trick to render a new, special caption. (See `stripCaption`)
+	 *
+	 * But for lightbox we still want to show the original caption so we copy it into a new
+	 * property here to preserve it.
+	 */
+	addLightboxData() {
+		this.elements = addLightboxData(this.elements);
+		return this;
 	}
 
 	/**
@@ -348,12 +370,10 @@ class Enhancer {
 	}
 }
 
-const enhance = (
-	elements: CAPIElement[],
-	isPhotoEssay: boolean,
-): CAPIElement[] => {
+const enhance = (elements: FEElement[], isPhotoEssay: boolean): FEElement[] => {
 	if (isPhotoEssay) {
 		return new Enhancer(elements)
+			.addLightboxData()
 			.stripCaptions()
 			.removeCredit()
 			.addMultiImageElements()
@@ -364,6 +384,7 @@ const enhance = (
 
 	return (
 		new Enhancer(elements)
+			.addLightboxData()
 			// Replace pairs of halfWidth images with MultiImageBlockElements
 			.addMultiImageElements()
 			// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
@@ -372,7 +393,7 @@ const enhance = (
 	);
 };
 
-export const enhanceImages = (blocks: Block[], format: CAPIFormat): Block[] => {
+export const enhanceImages = (blocks: Block[], format: FEFormat): Block[] => {
 	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 
 	return blocks.map((block: Block) => {

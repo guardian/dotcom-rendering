@@ -1,11 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-	fill,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
@@ -15,6 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
+import { background, border, fill, text } from 'palette';
 import type { ReactElement } from 'react';
 import { darkModeCss, darkModeStyles } from 'styles';
 
@@ -53,6 +48,13 @@ const liveBlogRichLinkStyles = css`
 	width: auto;
 	${from.wide} {
 		margin-left: 0;
+	}
+`;
+
+const analysisRichLinkStyles = css`
+	background-color: ${background.analysisContrastColour};
+	:hover {
+		background-color: ${background.analysisContrastHoverColour};
 	}
 `;
 
@@ -176,6 +178,8 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return css(richLinkStyles(format), liveBlogRichLinkStyles);
+		case ArticleDesign.Analysis:
+			return css(richLinkStyles(format), analysisRichLinkStyles);
 		default:
 			return richLinkStyles(format);
 	}

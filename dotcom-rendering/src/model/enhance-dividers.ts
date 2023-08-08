@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
-import type { CAPIElement } from '../types/content';
+import type { FEElement } from '../types/content';
 
-const isDinkus = (element: CAPIElement): boolean => {
+const isDinkus = (element: FEElement): boolean => {
 	// Classic dinkus do not trigger dropcaps
 	if (
 		element._type !==
@@ -11,7 +11,7 @@ const isDinkus = (element: CAPIElement): boolean => {
 		return false;
 
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstChild) return false;
+	if (!frag.firstChild) return false;
 	// A dinkus is can be spaced or unspaced
 	return (
 		frag.textContent === '***' ||
@@ -21,23 +21,22 @@ const isDinkus = (element: CAPIElement): boolean => {
 	);
 };
 
-const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
+const checkForDividers = (elements: FEElement[]): FEElement[] =>
 	// checkForDividers loops the array of article elements looking for star flags and
 	// enhancing the data accordingly. In short, if a h2 tag is equal to * * * then we
 	// insert a divider and any the text element immediately afterwards should have dropCap
 	// set to true
-	const enhanced: CAPIElement[] = [];
-	elements.forEach((element, i) => {
+	elements.map<FEElement>((element, i) => {
 		const previous = elements[i - 1];
 
 		if (i === 0) {
 			// Always pass first element through
-			enhanced.push(element);
+			return element;
 		} else if (isDinkus(element)) {
 			// If this element is a dinkus, replace it with a divider
-			enhanced.push({
+			return {
 				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-			});
+			};
 		} else if (
 			previous &&
 			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
@@ -45,17 +44,15 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement'
 		) {
-			enhanced.push({
+			return {
 				...element,
 				dropCap: true,
-			});
+			};
 		} else {
 			// Otherwise, do nothing
-			enhanced.push(element);
+			return element;
 		}
 	});
-	return enhanced;
-};
 
 export const enhanceDividers = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {

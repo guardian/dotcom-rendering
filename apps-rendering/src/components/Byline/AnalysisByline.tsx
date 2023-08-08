@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
+import { text } from 'palette';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
@@ -26,6 +26,10 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		})}
 	}
 	padding-bottom: ${remSpace[6]};
+
+	${darkModeCss`
+		color: ${text.bylineDark(format)};
+	`}
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`

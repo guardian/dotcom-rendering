@@ -23,13 +23,8 @@ const rulesToOverrideGuardianConfig = {
 		},
 	],
 
+	// This is not safe to remove whilst we have noUncheckedIndexedAccess
 	'@typescript-eslint/no-unnecessary-condition': 'warn',
-
-	// use `foo ?? 'a string'` instead of `foo !== null && foo !== undefined ? foo : 'a string'`
-	'@typescript-eslint/prefer-nullish-coalescing': 'warn',
-
-	// use `a?.b` instead of `a && a.b`
-	'@typescript-eslint/prefer-optional-chain': 'warn',
 };
 
 /** @TODO Review these */
@@ -39,16 +34,19 @@ const rulesToReview = {
 	'@typescript-eslint/require-await': 'warn', // 22 problems
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
+	'@typescript-eslint/no-explicit-any': 'warn', // 99 problems
 
 	// ES Lint 8
 	'@typescript-eslint/no-unsafe-argument': 'warn',
 	'@typescript-eslint/default-param-last': 'warn',
 	'@typescript-eslint/no-misused-promises': 'warn',
 
+	// We use prettier to format code. Some eslint rules conflict with prettier
+	'react/jsx-indent-props': 'off',
+	'react/jsx-indent': 'off',
+
 	// More rules
 	'eslint-comments/require-description': 'warn',
-	'import/order': 'warn',
-	'sort-imports': 'warn',
 	'eslint-comments/no-unused-disable': 'warn',
 	'eslint-comments/disable-enable-pair': 'warn',
 	'@typescript-eslint/naming-convention': 'warn',
@@ -72,9 +70,10 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
-		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
+		// prettier needs to go last so it can override other configuration. See https://github.com/prettier/eslint-config-prettier#installation
+		'prettier',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -89,14 +88,14 @@ module.exports = {
 		'import',
 		'jsx-a11y',
 		'jsx-expressions',
+		'custom-elements',
+		'unicorn',
 	],
 	rules: {
 		// React, Hooks & JSX
 		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
 		'react/jsx-boolean-value': [2, 'always'],
-		'react/jsx-indent-props': [2, 'tab'],
-		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
@@ -125,9 +124,12 @@ module.exports = {
 		'no-empty-pattern': 'error',
 		'no-fallthrough': 'off', // We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
 		'no-param-reassign': 'error',
-		'no-shadow': 'warn',
+		'no-shadow': 'off', // We use the typescript-eslint version as eslint false positives on enums
+		'@typescript-eslint/no-shadow': ['error'],
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
+		'no-redeclare': 'error',
+		'custom-elements/file-name-matches-element': 'error',
 
 		'object-shorthand': ['error', 'always'],
 
@@ -151,19 +153,35 @@ module.exports = {
 
 		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
 
+		'@typescript-eslint/strict-boolean-expressions': [
+			'error',
+			{
+				// This rule also errors on any ambiguous type comparisons (e.g !! on a type `null | undefined | ""`)
+				// https://typescript-eslint.io/rules/strict-boolean-expressions/
+				allowString: true,
+				allowNumber: true,
+				allowNullableObject: true,
+				allowNullableBoolean: true,
+				allowNullableString: true,
+				allowNullableNumber: false, // We only want to enforce this for numbers
+				allowAny: true,
+			},
+		],
+
+		'unicorn/prefer-node-protocol': 'error',
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,
 	},
 	settings: {
-		'import/resolver': {
-			'babel-module': { extensions: ['.ts', '.tsx', '.js'] },
-		},
+		'import/resolver': 'typescript',
 	},
 	overrides: [
 		{
 			files: ['**/**.js'],
 			rules: {
+				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',

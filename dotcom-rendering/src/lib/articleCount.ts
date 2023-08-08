@@ -5,12 +5,12 @@ import {
 } from '@guardian/support-dotcom-components';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { hasOptedOutOfArticleCount } from '../web/lib/contributions';
-import type { DailyArticleHistory } from '../web/lib/dailyArticleCount';
+import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import type { DailyArticleHistory } from '../lib/dailyArticleCount';
 import {
 	getDailyArticleCount,
 	incrementDailyArticleCount,
-} from '../web/lib/dailyArticleCount';
+} from '../lib/dailyArticleCount';
 
 export interface ArticleCounts {
 	weeklyArticleHistory: WeeklyArticleHistory;
@@ -45,8 +45,8 @@ export const getArticleCounts = async (
 	}
 
 	return {
-		weeklyArticleHistory: window.guardian.weeklyArticleCount || [],
-		dailyArticleHistory: window.guardian.dailyArticleCount || [],
+		weeklyArticleHistory: window.guardian.weeklyArticleCount ?? [],
+		dailyArticleHistory: window.guardian.dailyArticleCount ?? [],
 	};
 };
 

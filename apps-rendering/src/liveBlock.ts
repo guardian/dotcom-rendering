@@ -9,6 +9,7 @@ import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { tagToContributor } from 'contributor';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
 
@@ -17,7 +18,7 @@ import { Result } from 'result';
 type LiveBlock = {
 	id: string;
 	isKeyEvent: boolean;
-	title: string;
+	title: Optional<string>;
 	firstPublished: Date;
 	lastModified: Date;
 	body: Body;
@@ -60,7 +61,7 @@ const parse =
 		return Result.ok({
 			id: block.id,
 			isKeyEvent: block.attributes.keyEvent ?? false,
-			title: block.title ?? '',
+			title: Optional.fromNullable(block.title),
 			firstPublished: firstPublishedDate.value,
 			lastModified: lastModifiedDate.value,
 			body: Result.partition(

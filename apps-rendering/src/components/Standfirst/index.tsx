@@ -54,6 +54,7 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			);
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return <MediaStandfirst item={item} />;
 		case ArticleDesign.Review:
 		case ArticleDesign.Feature:
@@ -66,6 +67,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Analysis:
 			return <AnalysisStandfirst item={item} />;
 		case ArticleDesign.Explainer:
+		case ArticleDesign.Timeline:
+		case ArticleDesign.Profile:
 			return <ExplainerStandfirst item={item} />;
 		case ArticleDesign.NewsletterSignup:
 			return <NewsletterSignupStandfirst item={item} />;

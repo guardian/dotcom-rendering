@@ -32,6 +32,7 @@ import type {
 	Letter,
 	MatchReport,
 	NewsletterSignup,
+	Obituary,
 	PhotoEssay,
 	PrintShop,
 	Quiz,
@@ -100,8 +101,8 @@ const docFixture = (): Node => {
 
 	const el = document.createElement('p');
 
-	el.innerText =
-		'Readers of Prospect magazine recently voted him the world’s fourth-best thinker. And right now he is thinking about 3 November, and whether the United States will reject or endorse Donald Trump. No one knows what will happen; not even West, not least because in the US he sees contradictions that even he can’t fully explain.';
+	el.innerHTML =
+		'Readers of Prospect magazine recently voted him the world’s fourth-best thinker. And right now he is <a href="https://www.theguardian.com">thinking</a> about 3 November, and whether the United States will reject or endorse Donald Trump. No one knows what will happen; not even West, not least because in the US he sees contradictions that even he can’t fully explain.';
 
 	doc.appendChild(el);
 
@@ -231,6 +232,9 @@ const body: Body = [
 		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	},
 	{
+		kind: ElementKind.SpecialReportAltAtom,
+	},
+	{
 		kind: ElementKind.Text,
 		doc,
 	},
@@ -282,7 +286,7 @@ const body: Body = [
 const pinnedBlock: LiveBlock = {
 	id: '5',
 	isKeyEvent: false,
-	title: 'Block Five',
+	title: Optional.some('Block Five'),
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
 	body: [
@@ -323,6 +327,15 @@ const matchScores: MatchScores = {
 };
 
 const tags: Tag[] = [
+	{
+		id: 'tone/news',
+		type: 6,
+		webTitle: 'News',
+		webUrl: 'https://www.theguardian.com/tone/news',
+		apiUrl: 'https://content.guardianapis.com/tone/news',
+		references: [],
+		internalName: 'News (Tone)',
+	},
 	{
 		id: 'world/refugees',
 		type: TagType.SERIES,
@@ -389,16 +402,21 @@ const fields = {
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00Z')),
 	contributors: contributors,
 	mainMedia: mainMedia,
 	series: Optional.some({
-		id: '',
-		type: 0,
-		webTitle: '',
-		webUrl: '',
-		apiUrl: '',
+		id: 'travel/series/readers-coronavirus-travel-questions',
+		type: 2,
+		sectionId: 'travel',
+		sectionName: 'Travel',
+		webTitle: 'Coronavirus travel Q&A',
+		webUrl: 'https://www.theguardian.com/travel/series/readers-coronavirus-travel-questions',
+		apiUrl: 'https://content.guardianapis.com/travel/series/readers-coronavirus-travel-questions',
 		references: [],
+		description:
+			"<p>A weekly series answering readers' questions&nbsp;about how the coronavirus outbreak is impacting on their travel plans and holidays</p>",
+		internalName: 'Coronavirus travel Q&A',
 	}),
 	commentable: false,
 	tags: tags,
@@ -414,7 +432,6 @@ const fields = {
 		sponsorName: 'Judith Nielson Institute',
 		sponsorUri: 'https://jninstitute.org/',
 	}),
-	internalShortId: none,
 	commentCount: none,
 	relatedContent: relatedContent,
 	footballContent: none,
@@ -492,7 +509,7 @@ const media: Item = {
 };
 
 const cartoon: Item = {
-	design: ArticleDesign.Gallery,
+	design: ArticleDesign.Picture,
 	...fields,
 	body: [],
 };
@@ -538,6 +555,11 @@ const explainer: Explainer = {
 	outline: fromBodyElements(fields.body),
 };
 
+const obituary: Obituary = {
+	design: ArticleDesign.Obituary,
+	...fields,
+};
+
 const newsletterSignUp: NewsletterSignup = {
 	...fields,
 	design: ArticleDesign.NewsletterSignup,
@@ -549,6 +571,13 @@ const standardImmersive: Standard = {
 	...fields,
 	display: ArticleDisplay.Immersive,
 	outline: fromBodyElements(fields.body),
+};
+
+const commentImmersive: Comment = {
+	design: ArticleDesign.Comment,
+	...fields,
+	display: ArticleDisplay.Immersive,
+	theme: ArticlePillar.Opinion,
 };
 
 const gallery: Gallery = {
@@ -582,8 +611,10 @@ export {
 	explainer,
 	newsletterSignUp,
 	standardImmersive,
+	commentImmersive,
 	gallery,
 	parseHtml,
 	setTheme,
 	setEdition,
+	obituary,
 };

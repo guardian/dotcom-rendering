@@ -1,12 +1,7 @@
 import { JSDOM } from 'jsdom';
-import type {
-	CAPIElement,
-	ImageBlockElement,
-	TextBlockElement,
-} from '../types/content';
+import type { FEElement, TextBlockElement } from '../types/content';
 
-const isFalseH3 = (element: CAPIElement): boolean => {
-	if (!element) return false;
+const isFalseH3 = (element: FEElement): boolean => {
 	// Checks if this element is a 'false h3' based on the convention: <p><strong><H3 text</strong></p>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
@@ -14,7 +9,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstElementChild) return false;
+	if (!frag.firstElementChild) return false;
 	const html = frag.firstElementChild.outerHTML;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
@@ -35,7 +30,7 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	);
 };
 
-const extractH3 = (element: CAPIElement): string => {
+const extractH3 = (element: FEElement): string => {
 	// Extract the text based on the convention: <p><strong><H3 text</strong></p>
 	const textElement = element as TextBlockElement;
 	const frag = JSDOM.fragment(textElement.html);
@@ -45,24 +40,23 @@ const extractH3 = (element: CAPIElement): string => {
 				.split('<strong>')
 				.join('')
 				.split('</strong>')
-				.join('') || ''
+				.join('') ?? ''
 		);
 	}
 	return '';
 };
 
-const isStarRating = (element: CAPIElement): boolean => {
+const isStarRating = (element: FEElement): boolean => {
 	const isStar = (charactor: string): boolean => {
 		return charactor === '★' || charactor === '☆';
 	};
 
-	if (!element) return false;
 	// Checks if this element is a 'star rating' based on the convention: <p>★★★★☆</p>
 	if (element._type !== 'model.dotcomrendering.pageElements.TextBlockElement')
 		return false;
 	const frag = JSDOM.fragment(element.html);
 	const hasPTags = frag.firstElementChild?.nodeName === 'P';
-	const text = frag.textContent || '';
+	const text = frag.textContent ?? '';
 	// Loop the string making sure each letter is a star
 	for (const letter of text) {
 		if (!isStar(letter)) return false;
@@ -71,14 +65,14 @@ const isStarRating = (element: CAPIElement): boolean => {
 	return hasPTags && hasFiveStars;
 };
 
-const extractStarCount = (element: CAPIElement): number => {
+const extractStarCount = (element: FEElement): number => {
 	const isSelectedStar = (charactor: string): boolean => {
 		return charactor === '★';
 	};
 	// Returns the count of stars
 	const textElement = element as TextBlockElement;
 	const frag = JSDOM.fragment(textElement.html);
-	const text = frag.textContent || '';
+	const text = frag.textContent ?? '';
 	// Loop the string counting selected stars
 	let starCount = 0;
 	for (const letter of text) {
@@ -87,7 +81,7 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
-const isStarableImage = (element: CAPIElement | undefined): boolean => {
+const isStarableImage = (element: FEElement | undefined): boolean => {
 	return (
 		element?._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement' &&
@@ -95,8 +89,8 @@ const isStarableImage = (element: CAPIElement | undefined): boolean => {
 	);
 };
 
-const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
-	const starified: CAPIElement[] = [];
+const starifyImages = (elements: FEElement[]): FEElement[] => {
+	const starified: FEElement[] = [];
 	let previousRating: number | undefined;
 	elements.forEach((thisElement, index) => {
 		switch (thisElement._type) {
@@ -136,9 +130,8 @@ const starifyImages = (elements: CAPIElement[]): CAPIElement[] => {
 	return starified;
 };
 
-const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
-	const withStars: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
+const inlineStarRatings = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&
@@ -146,43 +139,37 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 		) {
 			const rating = extractStarCount(thisElement);
 			// Inline this image
-			withStars.push({
+			return {
 				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
-			});
+			};
 		} else {
 			// Pass through
-			withStars.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withStars;
-};
 
-const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
-	const inlined: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
+const makeThumbnailsRound = (elements: FEElement[]): FEElement[] =>
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			thisElement.role === 'thumbnail'
 		) {
 			// Make this image round
-			inlined.push({
+			return {
 				...thisElement,
 				isAvatar: true,
-			} as ImageBlockElement);
+			};
 		} else {
 			// Pass through
-			inlined.push(thisElement);
+			return thisElement;
 		}
 	});
-	return inlined;
-};
 
-const isItemLink = (element: CAPIElement): boolean => {
-	if (!element) return false;
+const isItemLink = (element: FEElement): boolean => {
 	// Checks if this element is a 'item link' based on the convention: <ul> <li>...</li> </ul>
 	if (
 		element._type !== 'model.dotcomrendering.pageElements.TextBlockElement'
@@ -190,7 +177,7 @@ const isItemLink = (element: CAPIElement): boolean => {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstElementChild) return false;
+	if (!frag.firstElementChild) return false;
 
 	const hasULWrapper = frag.firstElementChild.nodeName === 'UL';
 	const hasOnlyOneChild = frag.firstElementChild.childElementCount === 1;
@@ -200,7 +187,7 @@ const isItemLink = (element: CAPIElement): boolean => {
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
-const removeGlobalH2Styles = (elements: CAPIElement[]): CAPIElement[] => {
+const removeGlobalH2Styles = (elements: FEElement[]): FEElement[] =>
 	/**
 	 * Article pages come with some global style rules, one of which affects h2
 	 * tags. But for numbered lists we don't want these styles because we use
@@ -208,31 +195,28 @@ const removeGlobalH2Styles = (elements: CAPIElement[]): CAPIElement[] => {
 	 * css war, this enhancer uses the `data-ignore` attribute which is a contract
 	 * established to allow global styles to be ignored.
 	 *
-	 * All h2 tags inside an article of Design: NumberedList have this attirbute
+	 * All h2 tags inside an article of Design: NumberedList have this attribute
 	 * set.
 	 */
-	const withH2StylesIgnored: CAPIElement[] = [];
-	elements.forEach((thisElement) => {
+	elements.map<FEElement>((thisElement) => {
 		if (
 			thisElement._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
-			withH2StylesIgnored.push({
+			return {
 				...thisElement,
 				html: thisElement.html.replace(
 					'<h2>',
 					'<h2 data-ignore="global-h2-styling">',
 				),
-			});
+			};
 		} else {
 			// Pass through
-			withH2StylesIgnored.push(thisElement);
+			return thisElement;
 		}
 	});
-	return withH2StylesIgnored;
-};
 
-const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
+const addH3s = (elements: FEElement[]): FEElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
 	 * Truth is, you can't. So to get around this there's a convention that says if
@@ -243,8 +227,8 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
 	 * the same time as this code.
 	 */
-	const withH3s: CAPIElement[] = [];
-	let previousItem: CAPIElement | undefined;
+	const withH3s: FEElement[] = [];
+	let previousItem: FEElement | undefined;
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
@@ -280,8 +264,8 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
-const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
-	const withItemLink: CAPIElement[] = [];
+const addItemLinks = (elements: FEElement[]): FEElement[] => {
+	const withItemLink: FEElement[] = [];
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
@@ -307,10 +291,7 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 	return withItemLink;
 };
 
-const addTitles = (
-	elements: CAPIElement[],
-	format: CAPIFormat,
-): CAPIElement[] => {
+const addTitles = (elements: FEElement[], format: FEFormat): FEElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
 	 * Truth is, you can't. So to get around this there's a convention that says if
@@ -321,7 +302,7 @@ const addTitles = (
 	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
 	 * the same time as this code.
 	 */
-	const withTitles: CAPIElement[] = [];
+	const withTitles: FEElement[] = [];
 	let position = 1;
 	elements.forEach((thisElement) => {
 		if (
@@ -353,11 +334,11 @@ const addTitles = (
 };
 
 class Enhancer {
-	elements: CAPIElement[];
+	elements: FEElement[];
 
-	format: CAPIFormat;
+	format: FEFormat;
 
-	constructor(elements: CAPIElement[], format: CAPIFormat) {
+	constructor(elements: FEElement[], format: FEFormat) {
 		this.elements = elements;
 		this.format = format;
 	}
@@ -398,10 +379,7 @@ class Enhancer {
 	}
 }
 
-const enhance = (
-	elements: CAPIElement[],
-	format: CAPIFormat,
-): CAPIElement[] => {
+const enhance = (elements: FEElement[], format: FEFormat): FEElement[] => {
 	return (
 		new Enhancer(elements, format)
 			// Add the data-ignore='global-h2-styling' attribute
@@ -423,7 +401,7 @@ const enhance = (
 
 export const enhanceNumberedLists = (
 	blocks: Block[],
-	format: CAPIFormat,
+	format: FEFormat,
 ): Block[] => {
 	const isNumberedList = format.display === 'NumberedListDisplay';
 

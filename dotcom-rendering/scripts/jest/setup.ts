@@ -1,6 +1,6 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
-import { TextDecoder, TextEncoder } from 'util';
+import { TextDecoder, TextEncoder } from 'node:util';
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
@@ -14,6 +14,8 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
+	tests: {
+	}
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -58,7 +60,6 @@ const windowGuardian = {
 		showNextVariant: () => {},
 		showPreviousVariant: () => {},
 	},
-	gaPath: '/assets/ga.js',
 };
 
 // Stub global Guardian object
@@ -76,7 +77,7 @@ const localStorageMock = (function () {
 	} = {};
 	return {
 		getItem(key: string) {
-			return store[key] || null;
+			return store[key] ?? null;
 		},
 		setItem(key: string, value: string) {
 			store[key] = value.toString();
@@ -109,3 +110,6 @@ Object.defineProperty(window, 'localStorage', {
  */
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;
+
+// Mocks the version number used by CDK, we don't want our tests to fail every time we update our cdk dependency.
+jest.mock('@guardian/cdk/lib/constants/tracking-tag');

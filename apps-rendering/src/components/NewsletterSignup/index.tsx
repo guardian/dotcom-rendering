@@ -2,11 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	border,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
@@ -19,9 +14,11 @@ import {
 } from '@guardian/source-foundations';
 import { SvgNewsletter } from '@guardian/source-react-components';
 import type { NewsletterSignUp } from 'bodyElement';
+import { background, border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
+import InlineSkipToWrapper from '../InlineSkipToWrapper';
 import PrivacyWording from './PrivacyWording';
 
 // ----- Component ----- //
@@ -30,12 +27,15 @@ interface Props {
 	format: ArticleFormat;
 	element: NewsletterSignUp;
 	showByDefault?: boolean;
+	skipLinkIdSuffix?: string;
 }
 
-const containerStyles = (
-	format: ArticleFormat,
-	showByDefault: boolean,
-): SerializedStyles => css`
+const containerStyles = (showByDefault: boolean): SerializedStyles => css`
+	display: ${showByDefault ? 'block' : 'none'};
+	clear: both;
+`;
+
+const frameStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
 	border: ${border.newsletterSignUpForm(format)} 0.1875rem dashed;
 	color: ${text.newsletterSignUpForm(format)};
@@ -52,8 +52,6 @@ const containerStyles = (
 		border-color: ${border.newsletterSignUpFormDark(format)};
 		color: ${text.newsletterSignUpFormDark(format)};
 	`}
-
-	display: ${showByDefault ? 'block' : 'none'};
 `;
 
 const stackBelowTabletStyles = css`
@@ -109,13 +107,11 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-/**
- * NOTE: this component is non functional and is for demonstration only.
- */
 const NewsletterSignup: FC<Props> = ({
 	format,
 	element,
 	showByDefault = false,
+	skipLinkIdSuffix = '',
 }) => {
 	const {
 		name,
@@ -126,33 +122,44 @@ const NewsletterSignup: FC<Props> = ({
 		successDescription,
 	} = element;
 	return (
-		<aside
-			css={containerStyles(format, showByDefault)}
+		<div
+			role="none"
 			className="js-signup-form-container"
+			css={containerStyles(showByDefault)}
 		>
-			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span>
-				</p>
+			<InlineSkipToWrapper
+				id={`newsletter-promotion-for-${identityName}${skipLinkIdSuffix}`}
+				blockDescription="newsletter promotion"
+			>
+				<aside
+					css={frameStyles(format)}
+					aria-label="newsletter promotion"
+				>
+					<div css={stackBelowTabletStyles}>
+						<p css={titleStyles(theme)}>
+							Sign up to <span>{name}</span>
+						</p>
 
-				<div css={noHeightFromTabletStyles}>
-					<div css={iconHolderStyles}>
-						<SvgNewsletter size="small" />
-						<b>{frequency}</b>
+						<div css={noHeightFromTabletStyles}>
+							<div css={iconHolderStyles}>
+								<SvgNewsletter size="small" />
+								<b>{frequency}</b>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
 
-			<p css={descriptionStyles}>{description}</p>
+					<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm
-				identityName={identityName}
-				format={format}
-				successDescription={successDescription}
-			/>
+					<EmailSignupForm
+						identityName={identityName}
+						format={format}
+						successDescription={successDescription}
+					/>
 
-			<PrivacyWording useCaptcha={false} format={format} />
-		</aside>
+					<PrivacyWording useCaptcha={false} format={format} />
+				</aside>
+			</InlineSkipToWrapper>
+		</div>
 	);
 };
 

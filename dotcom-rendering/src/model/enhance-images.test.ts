@@ -1,9 +1,8 @@
-import { ArticlePillar } from '@guardian/libs';
+import { Pillar } from '@guardian/libs';
 import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { TextBlockElement } from '../types/content';
 import { enhanceImages } from './enhance-images';
 
 const image = {
@@ -11,6 +10,10 @@ const image = {
 	data: {
 		...images[0].data,
 		caption: 'The original caption',
+	},
+	lightbox: {
+		caption: 'The original caption',
+		credit: 'Photograph: Cat Vinton/The Guardian',
 	},
 };
 
@@ -529,7 +532,7 @@ describe('Enhance Images', () => {
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							pillar: ArticlePillar.News,
+							pillar: Pillar.News,
 							role: 'inline',
 						},
 						image,
@@ -550,7 +553,7 @@ describe('Enhance Images', () => {
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							pillar: ArticlePillar.News,
+							pillar: Pillar.News,
 							role: 'inline',
 						},
 						{
@@ -666,38 +669,46 @@ describe('Enhance Images', () => {
 				expectedOutput,
 			);
 		});
-		it('does nothing with normal articles', () => {
-			const someText: TextBlockElement = {
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				elementId: 'mockId',
-				html: '<p>Just some normal text</p>',
-			};
-
+		it('adds the lightbox property with caption and credit values set', () => {
 			const input: Block[] = [
 				{
 					...blockMetaData,
 					elements: [
-						{ ...images[0], role: 'inline' },
-						someText,
-						someText,
-						{ ...images[1], role: 'showcase' },
-						someText,
-						someText,
-						someText,
-						{ ...images[2], role: 'inline' },
-						someText,
-						someText,
-						someText,
-						{ ...images[3], role: 'immersive' },
-						someText,
-						someText,
+						{
+							...image,
+							role: 'inline',
+							data: {
+								caption:
+									'This text starts in data but gets removed for photo essays',
+								credit: 'but it is copied into the lightbox property so we can use it there',
+							},
+						},
 					],
 				},
 			];
 
-			const expectedOutput = input;
+			const expectedOutput: Block[] = [
+				{
+					...blockMetaData,
+					elements: [
+						{
+							...image,
+							role: 'inline',
+							data: {
+								caption: '',
+								credit: '',
+							},
+							lightbox: {
+								caption:
+									'This text starts in data but gets removed for photo essays',
+								credit: 'but it is copied into the lightbox property so we can use it there',
+							},
+						},
+					],
+				},
+			];
 
-			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
+			expect(enhanceImages(input, PhotoEssay.format)).toEqual(
 				expectedOutput,
 			);
 		});

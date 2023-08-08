@@ -12,7 +12,6 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
   - [Environment Variables](#environment-variables)
   - [Detailed Setup](#detailed-setup)
   - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
   - [UI Design System](#ui-design-system)
   - [Concepts](#concepts)
   - [Visual Debugging](#visual-debugging)
@@ -48,8 +47,9 @@ Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subd
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
+$ cd dotcom-rendering
 $ yarn install
-$ cd dotcom-rendering/dotcom-rendering
+$ cd dotcom-rendering
 $ make dev
 ```
 
@@ -58,7 +58,7 @@ $ make dev
 
 Visit the [root path of the dev server](http://localhost:3030) for some example URLs to visit.
 
-You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
+You can render a specific article by [specifying the production URL in the query string](http://localhost:3030/Article/https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey).
 
 You can view the JSON representation of an article, as per the model sent to the renderer on the server, by going to
 
@@ -73,7 +73,6 @@ http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul
 | `GU_STAGE`                    | `PROD` or `DEV`. Typically used to decide if DCR should call Production downstream API's or CODE downstream API's                              |
 | `GU_PUBLIC`                   | Any value, undefined will disable. Toggles serving assets on the `/assets/` endpoint                                                           |
 | `DISABLE_LOGGING_AND_METRICS` | Boolean. Toggle for enabling Log4js                                                                                                            |
-| `SKIP_LEGACY`                 | Boolean. Toggles building Legacy browser bundles                                                                                               |
 
 Most of these variables are set by our make scripts and you don't need to worry about setting them.
 
@@ -95,10 +94,6 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 | <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
 | <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
 | <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
-
-### Architecture Diagram
-
-You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
 ### UI Design System
 

@@ -1,6 +1,7 @@
-import path from 'path';
+import path from 'node:path';
 import type { LoggingEvent } from 'log4js';
 import { addLayout, configure, getLogger, shutdown } from 'log4js';
+import { loggingStore } from './logging-store';
 
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
@@ -14,6 +15,10 @@ const stage =
 		: 'DEV';
 
 const logFields = (logEvent: LoggingEvent): unknown => {
+	const { request } = loggingStore.getStore() ?? {
+		request: { pageId: 'outside-request-context' },
+	};
+
 	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',
@@ -22,21 +27,17 @@ const logFields = (logEvent: LoggingEvent): unknown => {
 		'@version': 1,
 		level: logEvent.level.levelStr,
 		level_value: logEvent.level.level,
+		request,
 	};
 	// log4js uses any[] to type data but we want to coerce it here
 	// because we now depend on the type to log the result properly
-	const data = logEvent.data[0] as unknown as
-		| Record<string, unknown>
-		| string;
+	const [arg1, arg2] = logEvent.data;
 
-	if (typeof data === 'string') {
-		return {
-			...coreFields,
-			message: data,
-		};
-	}
+	const message = typeof arg1 === 'string' ? arg1 : 'DCR Render Event';
+	const data = typeof arg2 === 'object' ? arg2 : {};
+
 	return {
-		message: 'DCR Render event',
+		message,
 		...coreFields,
 		...data,
 	};
@@ -64,7 +65,7 @@ const enableLog4j = {
 		fileAppender: {
 			type: 'file',
 			filename: logLocation,
-			maxLogSize: 10000,
+			maxLogSize: '5M',
 			backups: 5,
 			compress: true,
 			layout: { type: 'json', separator: ',' },
@@ -90,7 +91,9 @@ if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 // doesn't clear up old listeners.
 if (process.env.NODE_ENV === 'development') {
 	shutdown((e) => {
+		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Stops undefined from being logged
 		if (e) {
+			// eslint-disable-next-line no-console  -- Seems okay to log this
 			console.log(e);
 		}
 	});

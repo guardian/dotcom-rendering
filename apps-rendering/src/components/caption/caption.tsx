@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -15,6 +14,7 @@ import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import Anchor from 'components/Anchor';
 import { maybeRender } from 'lib';
+import { text } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -35,7 +35,8 @@ const emStyles = css`
 const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 	format.design === ArticleDesign.Gallery ||
 	format.design === ArticleDesign.Audio ||
-	format.design === ArticleDesign.Video
+	format.design === ArticleDesign.Video ||
+	format.design === ArticleDesign.Picture
 		? css`
 				color: ${neutral[86]};
 		  `
@@ -63,9 +64,7 @@ const captionElement =
 
 		switch (node.nodeName) {
 			case 'STRONG':
-				return format.design === ArticleDesign.Gallery ||
-					format.design === ArticleDesign.Audio ||
-					format.design === ArticleDesign.Video ? (
+				return format.design === ArticleDesign.Gallery ? (
 					<h2 css={headingStyles} key={key}>
 						{children}
 					</h2>

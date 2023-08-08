@@ -1,4 +1,4 @@
-import { array, object, string } from 'https://cdn.skypack.dev/zod@3.17?dts';
+import { array, object, string } from 'npm:zod@3';
 import {
 	DOMParser,
 	Element,
@@ -83,8 +83,8 @@ const promises = results.map(async ({ id, webTitle: title }) => {
 			switch (attr) {
 				case 'title': {
 					// Check if the title contains less than 9 different letters
-					const warning =
-						attr === 'title' && new Set(value?.split('')).size < 9;
+					const warning = attr === 'title' &&
+						new Set(value?.split('')).size < 9;
 					return {
 						status: warning ? 'warning' : 'ok',
 						attr,
@@ -146,12 +146,14 @@ const formatter = (articles: Article[], checked: boolean): string =>
 		.flatMap(({ url, title, iframes }) => {
 			const frames = iframes.length
 				? iframes.map(
-						({ attr, value, status }) =>
-							`  - ${statusEmoji[status]} \`${attr}\`: \`${value}\``,
-				  )
+					({ attr, value, status }) =>
+						`  - ${statusEmoji[status]} \`${attr}\`: \`${value}\``,
+				)
 				: [
-						`  - ${statusEmoji['missing']} All iframes are renderd Client-side`,
-				  ];
+					`  - ${
+						statusEmoji['missing']
+					} All iframes are renderd Client-side`,
+				];
 			return [`- [${checked ? 'X' : ' '}] [${title}](${url})`, ...frames];
 		})
 		.join('\n');

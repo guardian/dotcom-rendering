@@ -27,12 +27,12 @@ describe('Epics', function () {
 	it('should render the liveblog epic in the list of blocks', function () {
 		stubUpdates();
 		storage.local.set('gu.geo.override', 'GB');
-		cy.visit(`/Article?url=${blogUrl}?live=true&force-liveblog-epic=true`);
+		cy.visit(`/Article/${blogUrl}?live=true&force-liveblog-epic=true`);
 
 		// Wait for hydration of the Epic
 		cy.get('gu-island[name=LiveBlogEpic]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'rendered');
 		cy.get('[data-cy=contributions-liveblog-epic]').scrollIntoView();
 		cy.get('[data-cy=contributions-liveblog-epic]').should('be.visible');
 	});

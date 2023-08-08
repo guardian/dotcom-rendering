@@ -2,7 +2,6 @@ export type Colour = string;
 
 export type Palette = {
 	text: {
-		calloutAccent: Colour;
 		headline: Colour;
 		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
@@ -60,9 +59,15 @@ export type Palette = {
 		betaLabel: Colour;
 		designTag: Colour;
 		dateLine: Colour;
+		tableOfContents: Colour;
+		expandableAtom: Colour;
+		expandableAtomHover: Colour;
 	};
 	background: {
 		article: Colour;
+		analysisContrast: Colour;
+		analysisContrastHover: Colour;
+		audioAtom: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		avatar: Colour;
@@ -77,7 +82,6 @@ export type Palette = {
 		imageTitle: Colour;
 		speechBubble: Colour;
 		carouselDot: Colour;
-		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;
@@ -94,6 +98,8 @@ export type Palette = {
 		treat: Colour;
 		designTag: Colour;
 		pullQuote: Colour;
+		lightboxDivider: Colour;
+		messageForm: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -149,29 +155,38 @@ export type Palette = {
 
 export type ContainerOverrides = {
 	text: {
-		cardHeadline: Colour;
-		cardStandfirst: Colour;
-		cardKicker: Colour;
-		cardByline: Colour;
-		cardFooter: Colour;
-		cardCommentCount: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoSublinkKicker: Colour;
-		dynamoMeta: Colour;
+		cardHeadline?: Colour;
+		cardStandfirst?: Colour;
+		cardKicker?: Colour;
+		cardByline?: Colour;
+		cardFooter?: Colour;
+		cardCommentCount?: Colour;
+		dynamoHeadline?: Colour;
+		dynamoKicker?: Colour;
+		dynamoSublinkKicker?: Colour;
+		dynamoMeta?: Colour;
 		container: Colour;
+		containerFooter: Colour;
 		containerToggle: Colour;
 		containerDate: Colour;
+		containerSummary: Colour;
 	};
 	border: {
 		container: Colour;
 		lines: Colour;
+		carouselArrow: Colour;
 	};
 	background: {
 		container: Colour;
-		card: Colour;
+		containerLeftColumn?: Colour;
+		containerOuter?: Colour;
+		containerSummary?: Colour;
+		card?: Colour;
+		carouselDot: Colour;
+		carouselArrow: Colour;
+		carouselArrowHover: Colour;
 	};
-	topBar: {
-		card: Colour;
+	topBar?: {
+		card?: Colour;
 	};
 };

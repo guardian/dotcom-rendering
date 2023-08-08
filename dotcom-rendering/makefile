@@ -17,9 +17,12 @@ endef
 
 # deployment #########################################
 
-riffraff-bundle: clean-dist build
+cdk-synth:
+	@yarn cdk:synth
+
+riffraff-bundle: clean-dist build cdk-synth
 	$(call log, "creating riffraff bundle")
-	@node ./scripts/deploy/build-riffraff-bundle.js
+	@node ./scripts/deploy/build-riffraff-bundle.mjs
 
 riffraff-publish: riffraff-bundle
 	$(call log, "publishing riff-raff bundle")
@@ -30,38 +33,36 @@ deploy:
 
 # prod #########################################
 
-build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@webpack --config ./scripts/webpack/webpack.config.js --progress
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	$(call log, "generating Islands report card")
+	@node ./scripts/islands/island-descriptions.mjs
 
-build-ci: export NODE_ENV=production
+
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
 
-start-ci: export NODE_ENV=production
 start-ci: install
 	$(call log, "starting PROD server...")
-	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/server.js
 
-start: export NODE_ENV=production
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start dist/frontend.server.js
+	NODE_ENV=production pm2 start dist/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
-	@pm2 logs
+	@NODE_ENV=production pm2 logs
 
 # Used in cloudformation.yml which specifically:
 # - Launches pm2 from /usr/local/node rather than /node_modules
 # - Does not run 'install' task as its not needed & adds time to startup
-start-prod: export NODE_ENV=production
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	NODE_ENV=production /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -81,32 +82,42 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: export NODE_ENV=development
 dev: clear clean-dist install
-	$(call log, "starting DEV server")
-	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
-
-dev-legacy: export NODE_ENV=development
-dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
+dev-variant: clear clean-dist install
+	$(call log, "starting DEV server")
+	@NODE_ENV=development BUILD_VARIANT=true webpack serve --config ./scripts/webpack/webpack.config.js
+
+dev-legacy: clear clean-dist install
+	$(call log, "starting DEV server")
+	@NODE_ENV=development BUILD_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+
+dev-debug: clear clean-dist install
+	$(call log, "starting DEV server and debugger")
+	$(call log, "Open chrome://inspect in Chrome to attach to the debugger")
+	@NODE_ENV=development NODE_OPTIONS="--inspect" webpack serve --config ./scripts/webpack/webpack.config.js
+
+# storybook #########################################
+
+storybook-dev: clear clean-dist install
+	$(call log, "starting Storybook DEV server")
+	yarn storybook
+
 # tests #####################################
 
-cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
-	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*" --env isInTeamCity=true'
+	$(call log, "starting PROD server for Cypress")
+	@NODE_ENV=production NODE_OPTIONS="--max-old-space-size=8192" DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
-cypress-open: export NODE_ENV=production
 cypress-open: clear clean-dist install build
-	$(call log, "starting frontend PROD server and opening Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --e2e --browser electron'
+	$(call log, "starting PROD server and opening Cypress")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/server.js' 9000 'cypress open --e2e --browser electron'
 
-ampValidation: export NODE_ENV=production
-ampValidation: clean-dist install build
-	$(call log, "starting frontend PROD server for AMP Validation")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+ampValidation: clean-dist install
+	$(call log, "starting AMP Validation test")
+	@node scripts/test/amp-validation.js
 
 buildCheck:
 	$(call log, "checking build files")
@@ -120,7 +131,7 @@ tsc: clean-dist install
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
-	@yarn lint --fix
+	@yarn lint:fix
 	@yarn prettier:fix
 
 snapshot: clear clean-dist install
@@ -130,6 +141,10 @@ snapshot: clear clean-dist install
 lint: clean-dist install
 	$(call log, "checking for lint errors")
 	@yarn lint
+
+lint-project:
+	$(call log, "linting project")
+	@node ../scripts/check-node-versions.mjs
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
@@ -144,16 +159,10 @@ test-ci: clear clean-dist install
 	$(call log, "running tests")
 	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
 
-bundlesize: clear clean-dist install build
-	@bundlesize
-
-validate: clean-dist install tsc lint stylelint test validate-build
+validate: clean-dist install lint-project tsc lint stylelint test validate-build
 	$(call log, "everything seems 👌")
 
-validate-prepush:
-	@run-p tsc prettier:check lint-staged "test:ci -- --verbose --onlyChanged"
-
-validate-ci: install tsc lint stylelint test-ci bundlesize
+validate-ci: install lint-project tsc lint stylelint test-ci
 	$(call log, "everything seems 👌")
 
 # helpers #########################################
@@ -168,7 +177,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent
+	@yarn --silent --frozen-lockfile
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -196,6 +205,8 @@ gen-schema:
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
+	@git add src/model/block-schema.json
+	@git add src/model/tag-front-schema.json
 
 check-stories:
 	$(call log, "Checking Storybook stories")
@@ -213,8 +224,19 @@ gen-fixtures:
 perf-test:
 	@node scripts/perf/perf-test.js
 
-arch-diagram:
-	@npx arkit
+# Because Snyk finds vulnerabilities snyk test command exits with error code 1 and make picks it up.
+# Adding - at the beginning of the command ignores the error and we're getting:
+# make: [snyk] Error 1 (ignored)
+# See docs: https://www.gnu.org/software/make/manual/html_node/Errors.html#:~:text=To%20ignore%20errors%20in%20a,to%20the%20shell%20for%20execution.&text=This%20causes%20make%20to%20continue,unable%20to%20remove%20a%20file
 
 snyk:
-	@snyk wizard
+	-@snyk test --severity-threshold=high --file="../package.json"
+
+snyk-dcr:
+	-@snyk test --severity-threshold=high --file=package.json
+
+snyk-ar:
+	-@snyk test --severity-threshold=high --file=../apps-rendering/package.json
+
+snyk-storybooks:
+	-@snyk test --severity-threshold=high --file=../storybooks/package.json

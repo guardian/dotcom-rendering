@@ -31,6 +31,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 	switch (format.design) {
 		case ArticleDesign.Feature:
 			return <FeatureHeadline item={item} />;
+
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -38,16 +39,22 @@ const Headline: React.FC<Props> = ({ item }) => {
 
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
+		case ArticleDesign.Picture:
 			return <MediaHeadline item={item} />;
+
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return <BlogHeadline item={item} />;
+
 		case ArticleDesign.Interview:
 			return <InterviewHeadline item={item} />;
+
 		case ArticleDesign.Review:
 			return <ReviewHeadline item={item} />;
+
 		case ArticleDesign.Gallery:
 			return <GalleryHeadline headline={item.headline} format={format} />;
+
 		default:
 			return (
 				<DefaultHeadline

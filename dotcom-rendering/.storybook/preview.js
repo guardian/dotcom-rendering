@@ -8,10 +8,10 @@ import { getFontsCss } from '../src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations';
 
-import { Lazy } from '../src/web/components/Lazy';
-import { Picture } from '../src/web/components/Picture';
-import { mockRESTCalls } from '../src/web/lib/mockRESTCalls';
-import { setABTests } from '../src/web/lib/useAB';
+import { Lazy } from '../src/components/Lazy';
+import { Picture } from '../src/components/Picture';
+import { mockRESTCalls } from '../src/lib/mockRESTCalls';
+import { setABTests } from '../src/lib/useAB';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -54,6 +54,14 @@ window.guardian = {
 		ophan: {
 			pageViewId: 'mockPageViewId',
 		},
+		page: {
+			googleRecaptchaSiteKey: 'TEST_RECAPTCHA_SITE_KEY',
+			ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+		},
+		switches: {
+			emailSignupRecaptcha: false,
+		},
+		tests: {},
 	},
 	ophan: {
 		record: ({}) => {},

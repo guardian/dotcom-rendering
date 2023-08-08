@@ -5,7 +5,6 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { pipe } from '@guardian/common-rendering/src/lib';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, resets } from '@guardian/source-foundations';
@@ -20,6 +19,7 @@ import Scripts from 'components/Scripts';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
+import { pipe } from 'lib';
 import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
@@ -60,7 +60,8 @@ const styles = (format: ArticleFormat): string => `
         background: ${
 			format.design === ArticleDesign.Gallery ||
 			format.design === ArticleDesign.Audio ||
-			format.design === ArticleDesign.Video
+			format.design === ArticleDesign.Video ||
+			format.design === ArticleDesign.Picture
 				? background.inverse
 				: 'white'
 		};

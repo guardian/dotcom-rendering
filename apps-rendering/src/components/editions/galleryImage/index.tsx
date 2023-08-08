@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -14,6 +13,7 @@ import type { Image } from 'bodyElement';
 import Img from 'components/ImgAlt';
 import type { Sizes } from 'image/sizes';
 import { maybeRender, pipe } from 'lib';
+import { text } from 'palette';
 import type { FC } from 'react';
 
 const width = '100%';
@@ -210,7 +210,6 @@ const GalleryImage: FC<Props> = ({ image, format }) => {
 					sizes={sizes}
 					className={none}
 					format={format}
-					supportsDarkMode={false}
 					lightbox={some({
 						className: 'js-launch-slideshow',
 						caption: none,

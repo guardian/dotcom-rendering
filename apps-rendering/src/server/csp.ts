@@ -102,7 +102,7 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com ${
+    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com https://datawrapper.dwcdn.net ${
 		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
 	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''
@@ -114,7 +114,7 @@ const buildCsp = (
 			: ''
 	};
     font-src 'self' https://interactive.guim.co.uk;
-    connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
+    connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
     media-src 'self' https://audio.guim.co.uk/
 `.trim();
 
@@ -146,7 +146,7 @@ function buildCspEditions(
 			: ''
 	};
 	font-src 'self' https://interactive.guim.co.uk https://editions-published-code.s3.eu-west-1.amazonaws.com https://editions-published-prod.s3.eu-west-1.amazonaws.com;
-	connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
+	connect-src 'self' https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
 	media-src 'self' https://audio.guim.co.uk/
 	`;
 }

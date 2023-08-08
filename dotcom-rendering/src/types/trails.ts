@@ -1,7 +1,6 @@
 import type { Branding } from './branding';
 import type { DCRSnapType, DCRSupportingContent } from './front';
-
-type MediaType = 'Video' | 'Audio' | 'Gallery';
+import type { MainMedia } from './mainMedia';
 
 interface BaseTrailType {
 	url: string;
@@ -9,7 +8,6 @@ interface BaseTrailType {
 	webPublicationDate?: string;
 	image?: string;
 	avatarUrl?: string;
-	mediaType?: MediaType;
 	mediaDuration?: number;
 	ageWarning?: string;
 	byline?: string;
@@ -24,6 +22,12 @@ interface BaseTrailType {
 	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
+	discussion?: {
+		isCommentable: boolean;
+		isClosedForComments: boolean;
+		discussionId?: string;
+	};
+	mainMedia?: MainMedia;
 }
 
 export interface TrailType extends BaseTrailType {
@@ -37,8 +41,8 @@ export interface TrailType extends BaseTrailType {
 	isBoosted?: boolean;
 }
 
-export interface CAPITrailType extends BaseTrailType {
-	format: CAPIFormat;
+export interface FETrailType extends BaseTrailType {
+	format: FEFormat;
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
 	 * We should remove this property upstream in the future
@@ -59,7 +63,7 @@ export interface TrailTabType {
 	trails: TrailType[];
 }
 
-export interface CAPITrailTabType {
+export interface FETrailTabType {
 	heading: string;
-	trails: CAPITrailType[];
+	trails: FETrailType[];
 }

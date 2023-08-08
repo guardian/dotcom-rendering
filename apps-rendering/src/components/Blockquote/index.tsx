@@ -2,9 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { fill } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
+import { fill } from 'palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 

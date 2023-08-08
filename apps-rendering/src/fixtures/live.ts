@@ -259,7 +259,6 @@ const fields = {
 		sponsorName: 'Judith Nielson Institute',
 		sponsorUri: 'https://jninstitute.org/',
 	}),
-	internalShortId: none,
 	commentCount: some(1223),
 	relatedContent: none,
 	footballContent: none,
@@ -274,7 +273,7 @@ const fields = {
 const pinnedBlock: LiveBlock = {
 	id: '5',
 	isKeyEvent: false,
-	title: 'Block Five',
+	title: Optional.some('Block Five'),
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
 	body: [],
@@ -286,7 +285,7 @@ const blocks: LiveBlock[] = [
 	{
 		id: '1',
 		isKeyEvent: true,
-		title: 'Block One',
+		title: Optional.some('Block One'),
 		firstPublished: new Date('2021-11-02T12:00:00Z'),
 		lastModified: new Date('2021-11-02T13:13:13Z'),
 		body: [],
@@ -316,7 +315,7 @@ const blocks: LiveBlock[] = [
 	{
 		id: '2',
 		isKeyEvent: false,
-		title: 'Block Two',
+		title: Optional.some('Block Two'),
 		firstPublished: new Date('2021-11-02T11:20:00Z'),
 		lastModified: new Date('2021-11-02T13:03:13Z'),
 		body: [],
@@ -326,7 +325,7 @@ const blocks: LiveBlock[] = [
 	{
 		id: '3',
 		isKeyEvent: true,
-		title: 'Block Three',
+		title: Optional.some('Block Three'),
 		firstPublished: new Date('2021-11-02T11:05:12Z'),
 		lastModified: new Date('2021-11-02T12:13:13Z'),
 		body: [],
@@ -336,7 +335,7 @@ const blocks: LiveBlock[] = [
 	{
 		id: '4',
 		isKeyEvent: true,
-		title: 'Block Four',
+		title: Optional.some('Block Four'),
 		firstPublished: new Date('2021-11-02T10:55:03Z'),
 		lastModified: new Date('2021-11-02T11:13:13Z'),
 		body: [],

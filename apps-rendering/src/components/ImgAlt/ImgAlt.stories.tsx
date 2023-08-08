@@ -22,7 +22,6 @@ const Default: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		lightbox={none}
 	/>
 );
@@ -42,7 +41,6 @@ const Placeholder: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: ArticlePillar.News,
 		}}
-		supportsDarkMode={true}
 		lightbox={none}
 	/>
 );

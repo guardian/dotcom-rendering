@@ -2,14 +2,10 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import {
-	background,
-	border,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
+import { background, border, text } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
@@ -69,6 +65,11 @@ const footerStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	${from.desktop} {
 		${grid.between('centre-column-start', 'right-column-end')}
+	}
+
+	${from.wide} {
+		margin: 0;
+		width: unset;
 	}
 
 	${darkModeCss`

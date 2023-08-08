@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import { withKnobs } from '@storybook/addon-knobs';
 import { article } from 'fixtures/item';
 import type { FC } from 'react';
 import Footer from './';
@@ -16,7 +15,6 @@ const Default: FC = () => <Footer isCcpa={false} format={article} />;
 export default {
 	component: Footer,
 	title: 'AR/Footer',
-	decorators: [withKnobs],
 };
 
 export { Default, WithCcpa };

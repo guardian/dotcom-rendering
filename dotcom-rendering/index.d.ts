@@ -1,5 +1,5 @@
 // ------------------------  //
-// CAPIArticleType and its subtypes //
+// Frontend format types     //
 // ------------------------- //
 
 // Pillars are used for styling
@@ -22,11 +22,11 @@ type ThemePillar =
 	| 'LifestylePillar';
 
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
-type CAPITheme = ThemePillar | ThemeSpecial;
+type FETheme = ThemePillar | ThemeSpecial;
 
-// CAPIDesign is what CAPI gives us on the Format field
+// FEDesign is what frontend gives (originating in the capi scala client) us on the Format field
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
-type CAPIDesign =
+type FEDesign =
 	| 'ArticleDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
@@ -49,23 +49,25 @@ type CAPIDesign =
 	| 'PrintShopDesign'
 	| 'ObituaryDesign'
 	| 'FullPageInteractiveDesign'
-	| 'NewsletterSignupDesign';
+	| 'NewsletterSignupDesign'
+	| 'TimelineDesign'
+	| 'ProfileDesign';
 
-// CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
+// FEDisplay is the display information passed through from frontend (originating in the capi scala client) and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
-type CAPIDisplay =
+type FEDisplay =
 	| 'StandardDisplay'
 	| 'ImmersiveDisplay'
 	| 'ShowcaseDisplay'
 	| 'NumberedListDisplay';
 
-// CAPIFormat is the stringified version of Format passed through from CAPI.
+// FEFormat is the stringified version of Format passed through from Frontend.
 // It gets converted to the @guardian/libs format on platform
 
-type CAPIFormat = {
-	design: CAPIDesign;
-	theme: CAPITheme;
-	display: CAPIDisplay;
+type FEFormat = {
+	design: FEDesign;
+	theme: FETheme;
+	display: FEDisplay;
 };
 
 type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
@@ -153,7 +155,7 @@ interface BlockContributor {
 
 interface Block {
 	id: string;
-	elements: import('./src/types/content').CAPIElement[];
+	elements: import('./src/types/content').FEElement[];
 	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
@@ -241,32 +243,34 @@ type CricketMatch = {
 };
 
 // Data types for the API request bodies from clients that require
-// transformation before internal use. If we use the data as-is, we avoid the
-// CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
-// misleading - the model is *not* the same as the Content API content models.
+// transformation before internal use.
+// Where data types are coming from Frontend we try to use the 'FE' prefix.
+//
+// Prior to this we used 'CAPI' as a prefix which wasn't entirely accurate,
+// and some data structures never received the prefix, meaning some are still missing it.
 
-interface CAPILinkType {
+interface FELinkType {
 	url: string;
 	title: string;
 	longTitle?: string;
 	iconName?: string;
-	children?: CAPILinkType[];
+	children?: FELinkType[];
 	pillar?: LegacyPillar;
 	more?: boolean;
 	classList?: string[];
 }
 
-interface CAPINavType {
+interface FENavType {
 	currentUrl: string;
-	pillars: CAPILinkType[];
-	otherLinks: CAPILinkType[];
-	brandExtensions: CAPILinkType[];
-	currentNavLink?: CAPILinkType;
+	pillars: FELinkType[];
+	otherLinks: FELinkType[];
+	brandExtensions: FELinkType[];
+	currentNavLink?: FELinkType;
 	currentNavLinkTitle?: string;
 	currentPillarTitle?: string;
 	subNavSections?: {
-		parent?: CAPILinkType;
-		links: CAPILinkType[];
+		parent?: FELinkType;
+		links: FELinkType[];
 	};
 	readerRevenueLinks: ReaderRevenuePositions;
 }
@@ -274,40 +278,15 @@ interface CAPINavType {
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 /**
- * BlocksRequest is the expected body format for POST requests made to /Blocks
- */
-interface BlocksRequest {
-	blocks: Block[];
-	format: CAPIFormat;
-	host?: string;
-	pageId: string;
-	webTitle: string;
-	ajaxUrl: string;
-	isAdFreeUser: boolean;
-	isSensitive: boolean;
-	edition: string;
-	section: string;
-	sharedAdTargeting: Record<string, unknown>;
-	adUnit: string;
-	videoDuration?: number;
-	switches: { [key: string]: boolean };
-	keywordIds: string;
-}
-
-/**
  * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
  */
-interface KeyEventsRequest {
+interface FEKeyEventsRequest {
 	keyEvents: Block[];
-	format: CAPIFormat;
+	format: FEFormat;
 	filterKeyEvents: boolean;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
-
-type CardImageType = 'mainMedia' | 'avatar' | 'crossword';
+type CardImageType = 'picture' | 'avatar' | 'crossword' | 'slideshow' | 'video';
 
 type SmallHeadlineSize =
 	| 'tiny'
@@ -318,8 +297,6 @@ type SmallHeadlineSize =
 	| 'ginormous';
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
-
-type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
@@ -416,6 +393,11 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
+interface MessageUs {
+	formId: string;
+	formFields: import('./src/types/content').MessageUsFieldType[];
+}
+
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -484,18 +466,6 @@ type RichLinkCardType =
 	| 'external'
 	| 'news';
 
-// ----------
-// AdSlots //
-// ----------
-type AdSlotType =
-	| 'right'
-	| 'top-above-nav'
-	| 'mostpop'
-	| 'merchandising-high'
-	| 'merchandising'
-	| 'comments'
-	| 'survey';
-
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
@@ -512,12 +482,26 @@ declare module 'dynamic-import-polyfill' {
 	}) => void;
 }
 
-// ------------------------------------- //
-// AMP types                             //
-// ------------------------------------- //
+// SVG handling
+declare module '*.svg' {
+	const content: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
+	export default content;
+}
+
+// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
+// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
+// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
+interface PerformanceEntry {
+	loadTime: number;
+	renderTime: number;
+}
 
 declare namespace JSX {
 	interface IntrinsicElements {
+		// ------------------------------------- //
+		// AMP types                             //
+		// ------------------------------------- //
 		'amp-accordion': any;
 		'amp-ad': any;
 		'amp-analytics': any;
@@ -543,31 +527,13 @@ declare namespace JSX {
 		'amp-video': any;
 		'amp-vimeo': any;
 		'amp-youtube': any;
-	}
-}
 
-// SVG handling
-declare module '*.svg' {
-	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
-	export default content;
-}
-
-// Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
-// lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
-// Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing
-interface PerformanceEntry {
-	loadTime: number;
-	renderTime: number;
-}
-
-declare namespace JSX {
-	interface IntrinsicElements {
+		/** Island {@link ./src/components/Island.tsx} */
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
+			rootMargin?: string;
 			clientOnly?: boolean;
-			expediteLoading?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};
@@ -610,7 +576,7 @@ declare namespace JSX {
 		 * Elements with this attribute will fetch their comment count on
 		 * the client-side.
 		 *
-		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
+		 * @see {@link ../src/components/FetchCommentCounts.importable.tsx}
 		 */
 		'data-discussion-id'?: string;
 	}

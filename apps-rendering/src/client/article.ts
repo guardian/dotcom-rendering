@@ -2,12 +2,7 @@
 
 import './liveblog';
 
-import 'regenerator-runtime/runtime.js';
-import { AudioAtom } from '@guardian/atoms-rendering';
-import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
-import { App } from '@guardian/discussion-rendering/build/App';
-import { getPillarFromId } from 'articleFormat';
 import {
 	ads,
 	getAdSlots,
@@ -25,17 +20,14 @@ import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	commercialClient,
-	discussionClient,
 	navigationClient,
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
-import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
-import { hydrate as hydrateAtoms } from './atoms';
 import { callouts } from './callouts';
 import { initSignupForms } from './newsletterSignupForm';
 
@@ -151,68 +143,6 @@ function insertEpic(): void {
 	}
 }
 
-function renderComments(): void {
-	const commentContainer = document.getElementById('comments');
-	const pillar = Optional.fromNullable(
-		commentContainer?.getAttribute('data-pillar'),
-	).flatMap(getPillarFromId);
-	const shortUrl = commentContainer?.getAttribute('data-short-id');
-	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
-
-	if (pillar.isSome() && shortUrl) {
-		const user = {
-			userId: 'abc123',
-			displayName: 'Jane Smith',
-			webUrl: '',
-			apiUrl: '',
-			secureAvatarUrl: '',
-			avatar: '',
-			badge: [],
-		};
-
-		const additionalHeaders = {};
-
-		const props = {
-			shortUrl,
-			baseUrl: 'https://discussion.theguardian.com/discussion-api',
-			pillar: pillar.value,
-			user,
-			isClosedForComments,
-			additionalHeaders,
-			expanded: false,
-			apiKey: 'ios',
-			onPermalinkClick: (commentId: number): void => {
-				console.log(commentId);
-			},
-			onRecommend: (commentId: number): Promise<boolean> => {
-				return discussionClient.recommend(commentId);
-			},
-			onComment: (
-				shortUrl: string,
-				body: string,
-			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
-				return discussionClient
-					.comment(shortUrl, body)
-					.then((response) => ({ ...response, status: 'ok' }));
-			},
-			onReply: (
-				shortUrl: string,
-				body: string,
-				parentCommentId: number,
-			): Promise<CommentResponse & { status: 'ok' | 'error' }> => {
-				return discussionClient
-					.reply(shortUrl, body, parentCommentId)
-					.then((response) => ({ ...response, status: 'ok' }));
-			},
-			onPreview: (body: string): Promise<string> => {
-				return discussionClient.preview(body);
-			},
-		};
-
-		ReactDOM.render(h(App, props), commentContainer);
-	}
-}
-
 function footerLinks(): void {
 	const privacySettingsLink = document.getElementById('js-privacy-settings');
 	const privacyPolicyLink = document.getElementById('js-privacy-policy');
@@ -252,24 +182,6 @@ function hasSeenCards(): void {
 				.querySelector(`.js-card[data-article-id='${id}']`)
 				?.classList.add('fade');
 		});
-	});
-}
-
-function initAudioAtoms(): void {
-	Array.from(document.querySelectorAll('.js-audio-atom')).forEach((atom) => {
-		const id = atom.getAttribute('id');
-		const trackUrl = atom.getAttribute('trackurl');
-		const kicker = atom.getAttribute('kicker');
-		const title = atom.getAttribute('title');
-		const pillar = parseInt(atom.getAttribute('pillar') ?? '0');
-		// Work required to provide the audio atom duration server side.
-		const duration = parseInt(atom.getAttribute('duration') ?? '0');
-		if (id && trackUrl && kicker && title && pillar) {
-			ReactDOM.hydrate(
-				h(AudioAtom, { id, trackUrl, pillar, kicker, title, duration }),
-				atom,
-			);
-		}
 	});
 }
 
@@ -359,10 +271,7 @@ slideshow();
 footerInit();
 insertEpic();
 callouts();
-renderComments();
 hasSeenCards();
-initAudioAtoms();
-hydrateAtoms();
 richLinks();
 hydrateClickToView();
 void initSignupForms();

@@ -1,4 +1,3 @@
-import { articles, AMPArticles } from '../../lib/articles.js';
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
@@ -18,7 +17,7 @@ describe('E2E Page rendering', function () {
 					'ab-CuratedContainerTest2': 'control',
 				},
 			);
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			const roughLoadPositionOfMostView = 1400;
 			cy.scrollTo(0, roughLoadPositionOfMostView, { duration: 500 });
 			cy.contains('Lifestyle');
@@ -85,12 +84,12 @@ describe('E2E Page rendering', function () {
 			});
 
 			cy.visit(
-				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-variant]').should(
 				'be.visible',
@@ -111,12 +110,12 @@ describe('E2E Page rendering', function () {
 			});
 
 			cy.visit(
-				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
+				'/Article/https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
 			cy.get('gu-island[name=MostViewedFooterData]', { timeout: 30000 })
 				.scrollIntoView({ duration: 100 })
-				.should('have.attr', 'data-gu-ready', 'true');
+				.should('have.attr', 'data-island-status', 'rendered');
 
 			cy.get('[data-cy-ab-user-in-variant=ab-test-not-in-test]').should(
 				'be.visible',
@@ -129,16 +128,14 @@ describe('E2E Page rendering', function () {
 	});
 
 	describe('for AMP', function () {
-		it(`It should load designType articles under the pillar`, function () {
-			AMPArticles.map((article, index) => {
-				const { url, pillar, designType } = article;
-				cy.log(`designType: ${designType}, pillar: ${pillar}`);
-				// Prevent the Privacy consent banner from obscuring snapshots
-				cy.setCookie('GU_TK', 'true');
+		it(`It should load render an AMP page`, function () {
+			// Prevent the Privacy consent banner from obscuring snapshots
+			cy.setCookie('GU_TK', 'true');
 
-				cy.visit(`/AMPArticle?url=${url}`);
-				cy.contains('Opinion');
-			});
+			cy.visit(
+				`/AMPArticle/https://amp.theguardian.com/commentisfree/2019/oct/16/impostor-syndrome-class-unfairness`,
+			);
+			cy.contains('Opinion');
 		});
 	});
 });

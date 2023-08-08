@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
+import { remSpace } from '@guardian/source-foundations';
 import {
 	Column,
 	Columns,
@@ -14,8 +14,10 @@ import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
+import { background } from 'palette';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -39,6 +41,10 @@ const standfirstContainerStyles = (
 	`}
 `;
 
+const seriesStyles = css`
+	padding-bottom: ${remSpace[1]};
+`;
+
 interface Props {
 	item: LiveBlog | DeadBlog;
 }
@@ -51,9 +57,22 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 			<Container element="div" css={containerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
-						<Series item={item} />
+						<Hide until="desktop">
+							<Series item={item} />
+						</Hide>
 					</Column>
 					<Column span={8}>
+						<WithAgeWarning
+							tags={item.tags}
+							series={item.series}
+							publishDate={item.publishDate}
+							format={format}
+						/>
+						<Hide from="desktop">
+							<div css={seriesStyles}>
+								<Series item={item} />
+							</div>
+						</Hide>
 						<Headline item={item} />
 					</Column>
 				</Columns>

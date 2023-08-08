@@ -1,5 +1,5 @@
 // @ts-check
-const path = require('path');
+const path = require('node:path');
 const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
@@ -79,7 +79,7 @@ module.exports = {
 				name: 'server',
 				// @ts-expect-error -- it’s a MultiCompiler
 				middleware: webpackHotServerMiddleware(devServer.compiler, {
-					chunkName: 'frontend.server',
+					chunkName: 'server',
 				}),
 			});
 

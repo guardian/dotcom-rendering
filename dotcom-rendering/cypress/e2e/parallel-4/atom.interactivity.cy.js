@@ -28,12 +28,12 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should render', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 		});
 
 		it('should expand on click', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 			cy.get(`[data-snippet-type=${type}]`)
 				.contains('Show')
@@ -45,7 +45,7 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should expand then contract on second click', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 			cy.get(`[data-snippet-type=${type}]`)
 				.contains('Show')
@@ -61,14 +61,14 @@ const atomExpandableTests = (type, url) => {
 		});
 
 		it('should show feedback message when like is clicked', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).click();
 			cy.get('[data-testid="like"]').click();
 			cy.get('[data-testid="feedback"]').should('be.visible');
 		});
 
 		it('should show feedback message when dislike is clicked', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).click();
 			cy.get('[data-testid="dislike"]').click();
 			cy.get('[data-testid="feedback"]').should('be.visible');
@@ -83,7 +83,7 @@ const atomGenericTests = (type, url) => {
 		});
 
 		it('should render', function () {
-			cy.visit(`/Article?url=${url}`);
+			cy.visit(`/Article/${url}`);
 			cy.get(`[data-snippet-type=${type}]`).should('be.visible');
 		});
 	});
@@ -101,11 +101,11 @@ describe('Why do wombats do square poos?', function () {
 	});
 
 	it('when I get the answer wrong, it should display the right answer when I click Reveal', function () {
-		cy.visit(`/Article?url=${quizAtomUrl}`);
+		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()
@@ -122,17 +122,17 @@ describe('Why do wombats do square poos?', function () {
 		// We got the question wrong!
 		// Our choice is shown as wrong (red) and the actual correct answer is shown in green
 		cy.get('[data-answer-type=incorrect-answer]').should('exist');
-		cy.get('[data-answer-type=non-selected-correct-answer]').should(
-			'exist',
-		);
+		cy.get('[data-answer-type=non-selected-correct-answer]', {
+			timeout: 30000,
+		}).should('exist');
 	});
 
 	it('when I get the answer right, it should commend my skills when I click Reveal', function () {
-		cy.visit(`/Article?url=${quizAtomUrl}`);
+		cy.visit(`/Article/${quizAtomUrl}`);
 		// Wait for hydration
 		cy.get('gu-island[name=KnowledgeQuizAtomWrapper]')
 			.first()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.attr', 'data-island-status', 'hydrated');
 		// Establish that the elements showing the results are not present
 		cy.get('[data-atom-type=knowledgequiz] fieldset')
 			.first()
@@ -143,6 +143,8 @@ describe('Why do wombats do square poos?', function () {
 		// Click Reveal to show the results
 		cy.get('[data-atom-type=knowledgequiz]').contains('Reveal').click();
 		// We were right!
-		cy.get('[data-answer-type=correct-selected-answer]').should('exist');
+		cy.get('[data-answer-type=correct-selected-answer]', {
+			timeout: 30000,
+		}).should('exist');
 	});
 });

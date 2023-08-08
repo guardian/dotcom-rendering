@@ -1,5 +1,7 @@
+import path from 'node:path';
+import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import { defineConfig } from 'cypress';
-import plugins from './cypress/plugins';
+import { babelExclude } from './scripts/webpack/webpack.config.client.js';
 
 // https://docs.cypress.io/guides/references/configuration
 
@@ -8,6 +10,7 @@ module.exports = defineConfig({
 	viewportHeight: 860,
 	video: false,
 	chromeWebSecurity: false,
+	numTestsKeptInMemory: 5,
 	blockHosts: [
 		'*ophan.theguardian.com',
 		'pixel.adsafeprotected.com',
@@ -22,12 +25,36 @@ module.exports = defineConfig({
 		'*openx.net',
 	],
 	retries: {
-		runMode: 2,
+		runMode: 5,
 		openMode: 0,
 	},
 	e2e: {
 		setupNodeEvents(on, config) {
-			return plugins(on, config);
+			config.env = { ...config.env, ...process.env };
+
+			const webpackConfig = webpackPreprocessor.defaultOptions;
+			webpackConfig.webpackOptions.resolve = {
+				extensions: ['.ts', '.js'],
+			};
+			const rules = webpackConfig.webpackOptions.module.rules;
+			rules[0].exclude = babelExclude;
+
+			// Adding this here so that we can import the fixture in the sign-in-gate.cy.js file
+			rules.push({
+				test: path.resolve(
+					__dirname,
+					`./fixtures/generated/articles/Standard.ts`,
+				),
+				exclude: ['/node_modules/'],
+				loader: 'ts-loader',
+				options: {
+					compilerOptions: {
+						noEmit: false,
+					},
+				},
+			});
+			on('file:preprocessor', webpackPreprocessor(webpackConfig));
+			return config;
 		},
 		baseUrl: 'http://localhost:9000/',
 	},
