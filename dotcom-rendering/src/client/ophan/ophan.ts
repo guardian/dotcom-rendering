@@ -21,11 +21,23 @@ export const getOphan = async (): Promise<
 	}
 
 	const record: OphanRecordFunction = (event, callback) => {
-		log('dotcom', '🧿 Ophan event recorded:', event);
 		ophan.record(event, callback);
+		log('dotcom', '🧿 Ophan event recorded:', event);
 	};
 
-	return { ...ophan, record };
+	const trackComponentAttention: typeof ophan.trackComponentAttention = (
+		name,
+		el,
+		visiblityThreshold,
+	) => {
+		ophan.trackComponentAttention(name, el, visiblityThreshold);
+		log('dotcom', '🧿 Ophan tracking component attention:', name, {
+			el,
+			visiblityThreshold,
+		});
+	};
+
+	return { ...ophan, record, trackComponentAttention };
 };
 
 export type OphanRecordFunction = (
