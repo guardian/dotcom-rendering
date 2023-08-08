@@ -1,5 +1,4 @@
-import { getOphan } from './ophan';
-import { abTestPayload, recordPerformance } from './ophan';
+import { abTestPayload, getOphan, recordPerformance } from './ophan';
 
 export const ophan = async (): Promise<void> => {
 	const { record } = await getOphan();
@@ -12,7 +11,7 @@ export const ophan = async (): Promise<void> => {
 
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {
-		recordPerformance();
+		void recordPerformance();
 		window.removeEventListener('load', load, false);
 	});
 };

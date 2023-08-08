@@ -18,7 +18,6 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
 	sendOphanComponentEvent,
 	submitComponentEvent,
@@ -164,7 +163,6 @@ type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
-	ophanRecord: OphanRecordFunction;
 };
 
 function getIsSignedIn(authStatus: AuthStatus): boolean | undefined {
@@ -184,7 +182,6 @@ const ReaderRevenueLinksRemote = ({
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
-	ophanRecord,
 }: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
@@ -272,7 +269,6 @@ type ReaderRevenueLinksNativeProps = {
 		support: string;
 		contribute: string;
 	};
-	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 	hasPageSkin: boolean;
 };
@@ -282,7 +278,6 @@ const ReaderRevenueLinksNative = ({
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
-	ophanRecord,
 	pageViewId,
 	hasPageSkin,
 }: ReaderRevenueLinksNativeProps) => {
@@ -419,14 +414,8 @@ export const SupportTheG = ({
 	contributionsServiceUrl,
 	hasPageSkin = false,
 }: Props) => {
-	const ophan = useOphan();
-
-	if (!ophan) {
-		return null;
-	}
-
 	const [countryCode, setCountryCode] = useState<string>();
-	const { pageViewId } = ophan;
+	const ophan = useOphan();
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -441,14 +430,15 @@ export const SupportTheG = ({
 		callFetch();
 	}, []);
 
-	if (countryCode) {
+	if (countryCode && ophan) {
+		const { pageViewId } = ophan;
+
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophan.record}
 				/>
 			);
 		}
@@ -458,7 +448,6 @@ export const SupportTheG = ({
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}
-				ophanRecord={ophan.record}
 				pageViewId={pageViewId}
 				hasPageSkin={hasPageSkin}
 			/>

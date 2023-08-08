@@ -137,7 +137,7 @@ export const reportTrackingEvent = async (
 		timestamp: Date.now(),
 	};
 
-	submitComponentEvent({
+	await submitComponentEvent({
 		component: {
 			componentType: 'NEWSLETTER_SUBSCRIPTION',
 			id: componentName,

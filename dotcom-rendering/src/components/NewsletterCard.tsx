@@ -165,7 +165,7 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		submitComponentEvent({
+		void submitComponentEvent({
 			component: {
 				componentType: 'CARD',
 				id: `DCR NewsletterCard ${newsletter.identityName}`,

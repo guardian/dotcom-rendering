@@ -82,7 +82,7 @@ export const bootCmp = async (): Promise<void> => {
 			action,
 		};
 
-		submitComponentEvent(event);
+		void submitComponentEvent(event);
 	});
 
 	// Manually updates the footer DOM because it's not hydrated

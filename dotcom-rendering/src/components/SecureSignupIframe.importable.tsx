@@ -156,7 +156,7 @@ const sendTracking = async (
 		timestamp: Date.now(),
 	});
 
-	submitComponentEvent({
+	await submitComponentEvent({
 		action,
 		value,
 		component: {
@@ -209,7 +209,7 @@ export const SecureSignupIframe = ({
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'form-submission');
+		await sendTracking(newsletterId, 'form-submission');
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -222,7 +222,7 @@ export const SecureSignupIframe = ({
 		setIsWaitingForResponse(false);
 		setResponseOk(response.ok);
 
-		sendTracking(
+		await sendTracking(
 			newsletterId,
 			response.ok ? 'submission-confirmed' : 'submission-failed',
 		);
@@ -235,22 +235,22 @@ export const SecureSignupIframe = ({
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
-		sendTracking(newsletterId, 'captcha-load-error');
+		void sendTracking(newsletterId, 'captcha-load-error');
 		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
 		recaptchaRef.current?.reset();
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
-			sendTracking(newsletterId, 'captcha-not-passed');
+			void sendTracking(newsletterId, 'captcha-not-passed');
 			return;
 		}
-		sendTracking(newsletterId, 'captcha-passed');
+		void sendTracking(newsletterId, 'captcha-passed');
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
-			sendTracking(newsletterId, 'form-submit-error');
+			void sendTracking(newsletterId, 'form-submit-error');
 			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
 		});
@@ -276,7 +276,7 @@ export const SecureSignupIframe = ({
 	};
 
 	const handleClickInIFrame = (): void => {
-		sendTracking(newsletterId, 'click-button');
+		void sendTracking(newsletterId, 'click-button');
 	};
 
 	const handleSubmitInIFrame = (event: Event): void => {
@@ -285,7 +285,7 @@ export const SecureSignupIframe = ({
 			return;
 		}
 		setErrorMessage(undefined);
-		sendTracking(newsletterId, 'open-captcha');
+		void sendTracking(newsletterId, 'open-captcha');
 		recaptchaRef.current?.execute();
 	};
 

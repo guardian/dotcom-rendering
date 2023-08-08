@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getOphan } from '../client/ophan/ophan';
 
-export const useOphan = () => {
-	const [ophan, setOphan] = useState<Awaited<ReturnType<typeof getOphan>>>();
+type Ophan = Awaited<ReturnType<typeof getOphan>>;
+
+export const useOphan = (): Ophan | undefined => {
+	const [ophan, setOphan] = useState<Ophan>();
 
 	useEffect(() => {
-		getOphan().then(setOphan);
+		void getOphan().then(setOphan);
 	}, []);
 
 	return ophan;
