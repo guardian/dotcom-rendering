@@ -2,6 +2,10 @@ import { join } from 'node:path';
 import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
+import {
+	GuAllowPolicy,
+	GuInstanceRole,
+} from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
 import { Duration } from 'aws-cdk-lib';
 import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
@@ -63,6 +67,43 @@ export class DotcomRendering extends GuStack {
 			},
 		);
 
+		const instanceRole = new GuInstanceRole(this, {
+			app: props.app,
+			additionalPolicies: [
+				//todo: do we need the first two policies? They are provided by default?
+				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
+					actions: ['s3:GetObject'],
+					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
+					actions: ['cloudwatch:*', 'logs:*'],
+					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
+					actions: [
+						'ec2:DescribeTags',
+						'ec2:DescribeInstances',
+						'autoscaling:DescribeAutoScalingGroups',
+						'autoscaling:DescribeAutoScalingInstances',
+					],
+					resources: ['*'],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
+					actions: ['kms:Decrypt', 'kms:DescribeKey'],
+					resources: [
+						`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`,
+					],
+				}),
+				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
+					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
+					resources: [
+						`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`,
+					],
+				}),
+			],
+		});
+
 		const elkStream = new GuStringParameter(this, 'ELKStreamId', {
 			fromSSM: true,
 			default: `/${stack}/${stage.toLowerCase()}/logstash.stream.name`,
@@ -104,7 +145,7 @@ export class DotcomRendering extends GuStack {
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
 			userData,
 			imageRecipe: props.amiRecipe,
-			// role: instanceRole,
+			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: vpc.publicSubnets },
 		});
@@ -119,6 +160,10 @@ export class DotcomRendering extends GuStack {
 		});
 		this.overrideLogicalId(instanceSecurityGroup, {
 			logicalId: 'InstanceSecurityGroup',
+			reason,
+		});
+		this.overrideLogicalId(instanceRole, {
+			logicalId: 'InstanceRole',
 			reason,
 		});
 		this.overrideLogicalId(asg, {
@@ -138,6 +183,7 @@ export class DotcomRendering extends GuStack {
 			parameters: {
 				InternalLoadBalancerSecurityGroup:
 					lbSecurityGroup.securityGroupId,
+				InstanceRole: instanceRole.roleName,
 				AutoscalingGroup: asg.autoScalingGroupArn,
 			},
 		});

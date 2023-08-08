@@ -37,8 +37,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuVpcParameter",
       "GuSecurityGroup",
       "GuSecurityGroup",
-      "GuStringParameter",
-      "GuAmiParameter",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
+      "GuAllowPolicy",
       "GuInstanceRole",
       "GuDescribeEC2Policy",
       "GuLoggingStreamNameParameter",
@@ -46,6 +49,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuDistributionBucketParameter",
       "GuGetDistributablePolicy",
       "GuParameterStoreReadPolicy",
+      "GuStringParameter",
+      "GuAmiParameter",
       "GuHttpsEgressSecurityGroup",
       "GuWazuhAccess",
       "GuAutoScalingGroup",
@@ -139,6 +144,165 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Resources": {
+    "AllowPolicyCloudwatchLogsA783E5B4": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "cloudwatch:*",
+                "logs:*",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyCloudwatchLogsA783E5B4",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeDecryptKmsE91286F3": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "kms:Decrypt",
+                "kms:DescribeKey",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:kms:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":FrontendConfigKey",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeDecryptKmsE91286F3",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyDescribeEc2AutoscalingE4175956": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ec2:DescribeTags",
+                "ec2:DescribeInstances",
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyDescribeEc2AutoscalingE4175956",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetArtifactsBucket2A1CDA44": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:GetObject",
+              "Effect": "Allow",
+              "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetArtifactsBucket2A1CDA44",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "AllowPolicyGetSsmParamsByPathB54B2DE8": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "ssm:GetParametersByPath",
+                "ssm:GetParameter",
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/frontend/*",
+                    ],
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:ssm:eu-west-1:",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":parameter/dotcom/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AllowPolicyGetSsmParamsByPathB54B2DE8",
+        "Roles": [
+          {
+            "Ref": "InstanceRole",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "AutoscalingGroup": {
       "Properties": {
         "HealthCheckGracePeriod": 120,
@@ -244,7 +408,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "describe-ec2-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -276,7 +440,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GetDistributablePolicyRenderingCA2FF5C7",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -358,7 +522,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "GuLogShippingPolicy981BFE5A",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -376,114 +540,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::IAM::InstanceProfile",
     },
     "InstanceRole": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "sts:AssumeRole",
-              ],
-              "Effect": "Allow",
-              "Principal": {
-                "Service": [
-                  "ec2.amazonaws.com",
-                ],
-              },
-            },
-          ],
-        },
-        "ManagedPolicyArns": [
-          "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM",
-        ],
-        "Path": "/",
-        "Policies": [
-          {
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Action": "s3:GetObject",
-                  "Effect": "Allow",
-                  "Resource": "arn:aws:s3:::aws-frontend-artifacts/*",
-                },
-                {
-                  "Action": [
-                    "cloudwatch:*",
-                    "logs:*",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": "*",
-                },
-                {
-                  "Action": [
-                    "ec2:DescribeTags",
-                    "ec2:DescribeInstances",
-                    "autoscaling:DescribeAutoScalingGroups",
-                    "autoscaling:DescribeAutoScalingInstances",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": "*",
-                },
-                {
-                  "Action": [
-                    "kms:Decrypt",
-                    "kms:DescribeKey",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": {
-                    "Ref": "FrontendConfigKey",
-                  },
-                },
-                {
-                  "Action": [
-                    "ssm:GetParametersByPath",
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": [
-                    {
-                      "Fn::Sub": "arn:aws:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/frontend/*",
-                    },
-                  ],
-                },
-                {
-                  "Action": [
-                    "ssm:GetParametersByPath",
-                    "ssm:GetParameter",
-                  ],
-                  "Effect": "Allow",
-                  "Resource": [
-                    {
-                      "Fn::Sub": "arn:aws:ssm:\${AWS::Region}:\${AWS::AccountId}:parameter/dotcom/*",
-                    },
-                  ],
-                },
-              ],
-            },
-            "PolicyName": "instance-policy",
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "InstanceRoleRenderingB06D827E": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -819,7 +875,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "PolicyName": "parameter-store-read-policy",
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
@@ -1094,7 +1150,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "Roles": [
           {
-            "Ref": "InstanceRoleRenderingB06D827E",
+            "Ref": "InstanceRole",
           },
         ],
       },
