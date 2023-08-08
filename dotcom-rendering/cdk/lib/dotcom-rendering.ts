@@ -11,6 +11,7 @@ import { Duration } from 'aws-cdk-lib';
 import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
+import { getUserData } from './launch-config';
 import type { DCRProps } from './types';
 
 export class DotcomRendering extends GuStack {
@@ -109,33 +110,6 @@ export class DotcomRendering extends GuStack {
 			default: `/${stack}/${stage.toLowerCase()}/logstash.stream.name`,
 		});
 
-		const userData = `
-		#!/bin/bash -ev
-
-		groupadd frontend
-		useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-		usermod -a -G frontend aws-kinesis-agent-user
-		cd /home/dotcom-rendering
-
-		aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${stage}/${app}/${app}.zip ./
-		unzip -q ${app}.zip -d ${app}
-
-		chown -R dotcom-rendering:frontend ${app}
-
-		cd ${app}
-
-		export TERM=xterm-256color
-		export NODE_ENV=production
-		export GU_STAGE=${stage}
-
-		mkdir /var/log/dotcom-rendering
-		chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
-
-		make start-prod
-
-		/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${region} ${elkStream.valueAsString} /var/log/dotcom-rendering/dotcom-rendering.log
-		`;
-
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
 			app,
 			vpc,
@@ -143,7 +117,12 @@ export class DotcomRendering extends GuStack {
 			minimumInstances: props.minCapacity,
 			maximumInstances: props.maxCapacity,
 			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
-			userData,
+			userData: getUserData({
+				app,
+				region,
+				stage,
+				elkStreamId: elkStream.valueAsString,
+			}),
 			imageRecipe: props.amiRecipe,
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
