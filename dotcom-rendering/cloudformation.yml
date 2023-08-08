@@ -39,12 +39,6 @@ Parameters:
     Type: String
     Description: (Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered
     Default: '5'
-  InstanceType:
-    Type: String
-    Description: EC2 Instance Type to use for dotcom-rendering
-  FrontendConfigKey:
-    Description: Parameter store KMS key
-    Type: String
   InternalLoadBalancerSecurityGroup:
     Description: Id of load balancer security group
     Type: String
