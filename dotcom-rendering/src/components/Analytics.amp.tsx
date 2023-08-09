@@ -29,30 +29,34 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		// The componentEvent is the encoded version of componentObject using https://www.urlencoder.org/
-		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent>
+		`<amp-analytics data-block-on-consent>
 			<script type="application/json">
 				{
 					"requests": {
-						"pageviewWithConsent": "\${additionalBase}&componentEvent=\${componentObject}"
+						"pageViewWithConsentTest": "http://localhost:8000/receive",
+						"pageViewWithConsent": "\${additionalBase}"
 					},
 					"triggers": {
 						"trackPageview": {
 							"on": "visible",
-							"request": "pageviewWithConsent",
+							"request": "pageViewWithConsentTest"
 						}
 					},
 					"extraUrlParams": {
-						"componentObject": {
+						"componentEvent": {
 							"component": {
 								"componentType":"CONSENT",
 								"products": [],
-								"labels":["08:\${consentState}","09:\${consentString}"],
-								"action":"MANAGE_CONSENT",
-
-
+                                "labels":"['08:\${consentState}','09:\${consentString}']",
+								"action":"MANAGE_CONSENT"
 							}
 						}
+					},
+					"transport": {
+						"beacon": true,
+						"xhrpost": true,
+						"useBody": true,
+						"image": false
 					}
 				}
 			</script>
