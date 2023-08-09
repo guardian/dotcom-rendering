@@ -33,6 +33,7 @@ export const NoBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -51,6 +52,7 @@ export const OneBig = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -69,6 +71,7 @@ export const TwoBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -91,6 +94,7 @@ export const FirstBigBoosted = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -113,6 +117,7 @@ export const SecondBigBoosted = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -131,6 +136,7 @@ export const ThreeBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -149,6 +155,7 @@ export const AllBigs = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -167,6 +174,7 @@ export const AllBigsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -185,6 +193,7 @@ export const TwoBigsThreeStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -203,6 +212,7 @@ export const NoBigsTwoStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -221,6 +231,7 @@ export const NoBigsFiveStandardsNoMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

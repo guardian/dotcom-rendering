@@ -19,7 +19,11 @@ export default {
 
 export const Default = () => (
 	<FrontSection title="Fixed Small Fast VIII" showTopBorder={true}>
-		<FixedSmallFastVIII trails={trails} showAge={true} />
+		<FixedSmallFastVIII
+			trails={trails}
+			showAge={true}
+			imageLoading="eager"
+		/>
 	</FrontSection>
 );
 Default.storyName = 'FixedSmallFastVIII';
