@@ -47,7 +47,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuVpcParameter",
       "GuSecurityGroup",
       "GuSecurityGroup",
-      "GuStringParameter",
+      "GuSubnetListParameter",
       "GuStringParameter",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -134,7 +134,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "PublicSubnets": {
       "Default": "/TEST/frontend/rendering/vpc.subnets.public",
       "Description": "Public subnets",
-      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "Stack": {
       "Default": "frontend",
@@ -676,11 +676,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "Subnets": [
-          {
-            "Ref": "PublicSubnets",
-          },
-        ],
+        "Subnets": {
+          "Ref": "PublicSubnets",
+        },
         "Tags": [
           {
             "Key": "gu:cdk:version",

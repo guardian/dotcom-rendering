@@ -1,6 +1,10 @@
 import { join } from 'node:path';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuStack,
+	GuStringParameter,
+	GuSubnetListParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import {
 	GuAllowPolicy,
@@ -78,11 +82,11 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const publicSubnets = new GuStringParameter(this, 'PublicSubnets', {
+		const publicSubnets = new GuSubnetListParameter(this, 'PublicSubnets', {
 			default: `${ssmPrefix}/vpc.subnets.public`,
 			fromSSM: true,
 			description: 'Public subnets',
-		}).valueAsString.split(',');
+		}).valueAsList;
 
 		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
 			listeners: [
