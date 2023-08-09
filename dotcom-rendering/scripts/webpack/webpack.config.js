@@ -1,19 +1,15 @@
+/* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { v4 as uuidv4 } from 'uuid';
-import webpack from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
-import { merge } from 'webpack-merge';
-import WebpackMessages from 'webpack-messages';
-import { BUILD_VARIANT as BUILD_VARIANT_SWITCH } from './bundles.js';
-import webpackConfigClient from './webpack.config.client.js';
-import webpackConfigServer from './webpack.config.server.js';
+const path = require('node:path');
+const { v4: uuidv4 } = require('uuid');
+const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+const { merge } = require('webpack-merge');
+const WebpackMessages = require('webpack-messages');
+const { BUILD_VARIANT: BUILD_VARIANT_SWITCH } = require('./bundles');
 
-const dir = path.dirname(fileURLToPath(import.meta.url));
-
-const dist = path.resolve(dir, '..', '..', 'dist');
+const dist = path.resolve(__dirname, '..', '..', 'dist');
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -73,6 +69,7 @@ const commonConfigs = ({ platform }) => ({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
@@ -81,15 +78,16 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		...(DEV
 			? // DEV plugins
 			  [
+					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
+						/** @type {(message: string) => void} */
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
-							if (builds < configs.length * 2) {
+							if (builds < module.exports.length * 2) {
 								console.log(
 									message
 										.replace('Building', 'Building initial')
@@ -136,19 +134,19 @@ const commonConfigs = ({ platform }) => ({
 	},
 });
 
-const configs = [
+module.exports = [
 	merge(
 		commonConfigs({
 			platform: 'server',
 		}),
-		webpackConfigServer({ sessionId }),
-		DEV ? (await import('./webpack.config.dev-server.js')).default : {},
+		require(`./webpack.config.server`)({ sessionId }),
+		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	merge(
 		commonConfigs({
 			platform: 'client.modern',
 		}),
-		webpackConfigClient({
+		require(`./webpack.config.client`)({
 			bundle: 'modern',
 			sessionId,
 		}),
@@ -157,7 +155,7 @@ const configs = [
 		commonConfigs({
 			platform: 'client.apps',
 		}),
-		webpackConfigClient({
+		require(`./webpack.config.client`)({
 			bundle: 'apps',
 			sessionId,
 		}),
@@ -168,7 +166,7 @@ const configs = [
 					commonConfigs({
 						platform: 'client.variant',
 					}),
-					webpackConfigClient({
+					require(`./webpack.config.client`)({
 						bundle: 'variant',
 						sessionId,
 					}),
@@ -182,7 +180,7 @@ const configs = [
 					commonConfigs({
 						platform: 'client.legacy',
 					}),
-					webpackConfigClient({
+					require(`./webpack.config.client`)({
 						bundle: 'legacy',
 						sessionId,
 					}),
@@ -190,6 +188,3 @@ const configs = [
 		  ]
 		: []),
 ];
-
-// eslint-disable-next-line import/no-default-export -- this is what WebPack wants
-export default configs;

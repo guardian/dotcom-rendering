@@ -179,15 +179,10 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['**/**.cjs'],
+			files: ['**/**.js'],
 			rules: {
 				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
-			},
-		},
-		{
-			files: ['**/**.js', '**/**.cjs'],
-			rules: {
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},

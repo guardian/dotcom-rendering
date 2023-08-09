@@ -23,4 +23,7 @@ const BUILD_VARIANT = true;
  */
 const dcrJavascriptBundle = (variant) => `adaptiveSite${variant}`;
 
-export { BUILD_VARIANT, dcrJavascriptBundle };
+module.exports = {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+};

@@ -1,12 +1,12 @@
 // @ts-check
-import nodeExternals from 'webpack-node-externals';
-import swcConfig from './.swcrc.json' assert { type: 'json' };
-import GuStatsReportPlugin from './plugins/gu-stats-report-plugin.js';
+const nodeExternals = require('webpack-node-externals');
+const swcConfig = require('./.swcrc.json');
+const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
-export const swcLoader = [
+const swcLoader = [
 	{
 		loader: 'swc-loader',
 		options: {
@@ -22,14 +22,13 @@ export const swcLoader = [
 ];
 
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
-// eslint-disable-next-line import/no-default-export -- this is what Webpack wants
-export default ({ sessionId }) => ({
+module.exports = ({ sessionId }) => ({
 	entry: {
 		server: './src/server/index.ts',
 	},
 	output: {
-		filename: `[name].cjs`,
-		chunkFilename: `[name].cjs`,
+		filename: `[name].js`,
+		chunkFilename: `[name].js`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
 	},

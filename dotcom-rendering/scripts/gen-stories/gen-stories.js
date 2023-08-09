@@ -1,3 +1,3 @@
-import { saveStories } from './get-stories.js';
+const { saveStories } = require('./get-stories');
 
 saveStories();

@@ -54,7 +54,8 @@ export class DotcomRendering extends GuStack {
 			'InstanceSecurityGroup',
 			{
 				app: props.app,
-				description: 'rendering instance',
+				description:
+					'rendering instance',
 				vpc,
 				ingresses: [
 					{
@@ -120,8 +121,7 @@ export class DotcomRendering extends GuStack {
 			parameters: {
 				VpcId: vpc.vpcId,
 				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup:
-					lbSecurityGroup.securityGroupId,
+				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
 				InstanceRole: instanceRole.roleName,
 			}

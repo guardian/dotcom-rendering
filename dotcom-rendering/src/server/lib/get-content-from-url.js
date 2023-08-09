@@ -1,5 +1,7 @@
+const { URLSearchParams } = require('url');
+
 // @ts-check
-import fetch, { FetchError } from 'node-fetch';
+const fetch = require('node-fetch').default;
 
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
@@ -11,7 +13,7 @@ const isStringTuple = (_) => typeof _[1] === 'string';
  * @param {URL} url
  * @param {import('http').IncomingHttpHeaders} _headers
  */
-export const getContentFromURL = async (url, _headers) => {
+async function getContentFromURL(url, _headers) {
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
 	const searchparams = url.searchParams.toString();
 
@@ -34,7 +36,7 @@ export const getContentFromURL = async (url, _headers) => {
 	const { html, ...config } = await fetch(jsonUrl, { headers })
 		.then((response) => response.json())
 		.catch((error) => {
-			if (error instanceof FetchError && error.type === 'invalid-json')
+			if (error?.type === 'invalid-json')
 				throw new Error(
 					'Did not receive JSON response - are you sure this URL supports .json?dcr requests?',
 				);
@@ -42,13 +44,15 @@ export const getContentFromURL = async (url, _headers) => {
 		});
 
 	return config;
-};
+}
+
+exports.default = getContentFromURL;
 
 /**
  * @param {string} requestUrl
  * @returns {URL | undefined} the parsed URL, or false if there’s no fully qualified path
  */
-export const parseURL = (requestUrl) => {
+const parseURL = (requestUrl) => {
 	try {
 		return new URL(
 			decodeURIComponent(requestUrl.split('/').slice(2).join('/')),
@@ -58,8 +62,10 @@ export const parseURL = (requestUrl) => {
 	}
 };
 
+exports.parseURL = parseURL;
+
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
-export const getContentFromURLMiddleware = async (req, res, next) => {
+exports.getContentFromURLMiddleware = async (req, res, next) => {
 	const sourceURL = parseURL(req.originalUrl);
 
 	if (sourceURL) {

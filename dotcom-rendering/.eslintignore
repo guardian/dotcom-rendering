@@ -1,4 +1,3 @@
 node_modules
-.eslintrc.cjs
-cypress.config.js
+.eslintrc.js
 storybook-static/
