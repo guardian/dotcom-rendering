@@ -3,11 +3,10 @@ import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import { GuAllowPolicy, GuInstanceRole } from '@guardian/cdk/lib/constructs/iam';
-import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput, Duration } from "aws-cdk-lib";
+import { CfnOutput } from "aws-cdk-lib";
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import { CfnLoadBalancer, LoadBalancingProtocol } from "aws-cdk-lib/aws-elasticloadbalancing";
+import { CfnLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancing";
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 
 interface DCRProps extends GuStackProps {
@@ -164,5 +163,5 @@ export class DotcomRendering extends GuStack {
 				InstanceRole: instanceRole.roleName,
 			}
 		});
-	}
+	    }
 }
