@@ -46,9 +46,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "gu:cdk:constructs": [
       "GuVpcParameter",
       "GuSecurityGroup",
-      "GuSecurityGroup",
       "GuSubnetListParameter",
       "GuStringParameter",
+      "GuSecurityGroup",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -111,10 +111,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
     "ELKStream": {
       "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
-      "Type": "String",
-    },
-    "FrontendConfigKey": {
-      "Description": "Parameter store KMS key",
       "Type": "String",
     },
     "InstanceType": {
