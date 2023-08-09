@@ -1,11 +1,7 @@
-import { jest } from '@jest/globals';
+import { isSentryEnabled } from '.';
 
 // Stubbed to prevent parsing of __webpack_public_path__
-jest.unstable_mockModule('../../src/client/sentryLoader/loadSentry', () => ({
-	loadSentry: jest.fn(),
-}));
-
-const { isSentryEnabled } = await import('./index');
+jest.mock('./loadSentry', () => ({ loadSentry: jest.fn() }));
 
 describe('Enable Sentry when it passes loading conditions', () => {
 	it('does NOT enable Sentry when enableSentryReporting switch is false', () => {

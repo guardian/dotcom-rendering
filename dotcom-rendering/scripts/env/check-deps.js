@@ -1,25 +1,23 @@
-import { readFileSync } from 'node:fs';
-import lockfile from '@yarnpkg/lockfile';
-import { log, warn } from './log.js';
+const fs = require('node:fs');
+const lockfile = require('@yarnpkg/lockfile');
+const pkg = require('../../package.json');
+const { warn, log } = require('./log');
 
-/** @type {Record<string, Record<string, string>>} */
-const { devDependencies, dependencies } = JSON.parse(
-	readFileSync('./package.json', 'utf8'),
-);
-
-if (devDependencies) {
+if (pkg.devDependencies) {
 	warn('Don’t use devDependencies');
 	log('See https://github.com/guardian/dotcom-rendering/pull/4001');
 	process.exit(1);
 }
 
-const { object: json } = lockfile.parse(readFileSync('../yarn.lock', 'utf8'));
+const { object: json } = lockfile.parse(
+	fs.readFileSync('../yarn.lock', 'utf8'),
+);
 
 const knownNonSemver = /** @type {const} */ ([
 	'https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0',
 ]);
 
-const mismatches = Object.entries(dependencies)
+const mismatches = Object.entries(pkg.dependencies)
 	.filter(([name, version]) => {
 		const pinned = json[name + '@' + version]?.version;
 		return version !== pinned;

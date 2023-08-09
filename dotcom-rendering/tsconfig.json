@@ -1,7 +1,6 @@
 {
 	"extends": "@guardian/tsconfig/tsconfig.json",
 	"compilerOptions": {
-		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"baseUrl": "./",
 		"forceConsistentCasingInFileNames": true,
@@ -17,12 +16,5 @@
 		},
 		"preserveConstEnums": true
 	},
-	"exclude": [
-		"cypress",
-		//Required to prevent polluting Jest global types
-		// https://github.com/cypress-io/cypress/issues/22059#issuecomment-1148921141
-		"./cypress.config.js",
-		"storybook-static",
-		"target"
-	]
+	"exclude": ["cypress", "./cypress.config.js", "storybook-static", "target"]
 }

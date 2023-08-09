@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
 	isIOS9,

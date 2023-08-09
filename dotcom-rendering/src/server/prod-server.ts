@@ -24,7 +24,7 @@ import {
 	handleTagFrontJson,
 } from '../server/index.front.web';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
-import { getContentFromURLMiddleware } from './lib/get-content-from-url.js';
+import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
 import { requestLoggerMiddleware } from './lib/logging-middleware';
 import { recordError } from './lib/logging-store';

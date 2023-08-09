@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { decidePublicPath } from './decidePublicPath';
 
 const mockHostname = (hostname: string | undefined) => {
