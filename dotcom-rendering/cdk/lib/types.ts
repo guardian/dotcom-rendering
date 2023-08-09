@@ -6,7 +6,7 @@ export interface DCRProps extends GuStackProps {
 	 */
 	app: string;
 	/**
-	 * The minimum number of instances in the autoscaling group
+	 * The region in AWS where the application will run
 	 */
 	region: string;
 }
