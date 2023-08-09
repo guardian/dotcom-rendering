@@ -4,7 +4,6 @@ import {
 	GuAmiParameter,
 	GuStack,
 	GuStringParameter,
-	GuSubnetListParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import {
 	GuSecurityGroup,
