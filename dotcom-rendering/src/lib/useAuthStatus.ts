@@ -105,8 +105,8 @@ export const useAuthStatus = (): AuthStatus => {
 };
 
 export const identity = async (): Promise<void> => {
-	window.guardian.isSignedInAuthState = async () => {
+	window.guardian.isSignedInAuthStateResolve(async () => {
 		const { isSignedInWithOktaAuthState } = await import('./identity');
 		return isSignedInWithOktaAuthState();
-	};
+	});
 };

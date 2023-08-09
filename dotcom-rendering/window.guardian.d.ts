@@ -53,7 +53,8 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;
-			isSignedInAuthState?: () => Promise<OktaAuthState>
+			isSignedInAuthStateResolve: (value: () => Promise<OktaAuthState>) => void;
+			isSignedInAuthState: Promise<() => Promise<OktaAuthState>>;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

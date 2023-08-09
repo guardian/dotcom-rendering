@@ -322,6 +322,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				<script>
+					window.guardian.isSignedInAuthState = new Promise(r => window.guardian.isSignedInAuthStateResolve = r)
+				</script>
+
 				${initTwitter ?? ''}
 
 				${
