@@ -6,7 +6,11 @@ import {
 	GuStringParameter,
 	GuSubnetListParameter,
 } from '@guardian/cdk/lib/constructs/core';
-import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
+import {
+	GuSecurityGroup,
+	GuVpc,
+	SubnetType,
+} from '@guardian/cdk/lib/constructs/ec2';
 import {
 	GuAllowPolicy,
 	GuInstanceRole,
@@ -31,7 +35,12 @@ export class DotcomRendering extends GuStack {
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
 		const vpcCidrBlock = '10.248.136.0/22';
-		const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
+		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
+			vpcCidrBlock,
+		});
+		const publicSubnets = GuVpc.subnetsFromParameter(this, {
+			type: SubnetType.PUBLIC,
+		});
 
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
@@ -75,11 +84,7 @@ export class DotcomRendering extends GuStack {
 				unhealthyThreshold: '10',
 				healthyThreshold: '2',
 			},
-			subnets: new GuSubnetListParameter(this, 'PublicSubnets', {
-				default: `${ssmPrefix}/vpc.subnets.public`,
-				fromSSM: true,
-				description: 'Public subnets',
-			}).valueAsList,
+			subnets: publicSubnets.map((subnet) => subnet.subnetId),
 			scheme: 'internal',
 			securityGroups: [lbSecurityGroup.securityGroupId],
 			crossZone: true,
@@ -183,7 +188,7 @@ export class DotcomRendering extends GuStack {
 			imageRecipe: props.amiRecipe,
 			role: instanceRole,
 			additionalSecurityGroups: [instanceSecurityGroup],
-			vpcSubnets: { subnets: vpc.publicSubnets },
+			vpcSubnets: { subnets: publicSubnets },
 		});
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
@@ -199,7 +204,7 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-				AutoscalingGroup: asg.autoScalingGroupArn,
+				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: lb.ref,
 				InstanceRole: instanceRole.roleName,
 			},

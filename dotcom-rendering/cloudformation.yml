@@ -43,7 +43,7 @@ Parameters:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
   AutoscalingGroup:
-    Description: ARN of the Autoscaling group
+    Description: Name of the Autoscaling group
     Type: String
   InternalLoadBalancer:
     Description: Id of internal load balancer

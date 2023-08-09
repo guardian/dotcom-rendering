@@ -35,8 +35,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
   "Metadata": {
     "gu:cdk:constructs": [
       "GuVpcParameter",
-      "GuSecurityGroup",
       "GuSubnetListParameter",
+      "GuSecurityGroup",
       "GuStringParameter",
       "GuSecurityGroup",
       "GuAllowPolicy",
@@ -124,8 +124,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "CommaDelimitedList",
     },
     "PublicSubnets": {
-      "Default": "/TEST/frontend/rendering/vpc.subnets.public",
-      "Description": "Public subnets",
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "Stack": {
@@ -364,7 +364,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
         ],
-        "VPCZoneIdentifier": [],
+        "VPCZoneIdentifier": {
+          "Ref": "PublicSubnets",
+        },
       },
       "Type": "AWS::AutoScaling::AutoScalingGroup",
     },
@@ -868,27 +870,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "ChangeInCapacity",
         "AutoScalingGroupName": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":autoscaling:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":autoScalingGroup:*:autoScalingGroupName/",
-              {
-                "Ref": "AutoscalingGroup",
-              },
-            ],
-          ],
+          "Ref": "AutoscalingGroup",
         },
         "Cooldown": "120",
         "ScalingAdjustment": -1,
@@ -899,27 +881,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Properties": {
         "AdjustmentType": "PercentChangeInCapacity",
         "AutoScalingGroupName": {
-          "Fn::Join": [
-            "",
-            [
-              "arn:",
-              {
-                "Ref": "AWS::Partition",
-              },
-              ":autoscaling:",
-              {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              {
-                "Ref": "AWS::AccountId",
-              },
-              ":autoScalingGroup:*:autoScalingGroupName/",
-              {
-                "Ref": "AutoscalingGroup",
-              },
-            ],
-          ],
+          "Ref": "AutoscalingGroup",
         },
         "Cooldown": "600",
         "ScalingAdjustment": 100,
