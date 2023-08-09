@@ -93,8 +93,8 @@ export const __OLD__submitComponentEvent = (
 export const submitComponentEvent = async (
 	componentEvent: OphanComponentEvent,
 ): Promise<void> => {
-	const { record } = await getOphan();
-	__OLD__submitComponentEvent(componentEvent, record);
+	const ophan = await getOphan();
+	__OLD__submitComponentEvent(componentEvent, ophan.record);
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
@@ -141,8 +141,8 @@ export const sendOphanComponentEvent = async (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
 ): Promise<void> => {
-	const { record } = await getOphan();
-	__OLD__sendOphanComponentEvent(action, testMeta, record);
+	const ophan = await getOphan();
+	__OLD__sendOphanComponentEvent(action, testMeta, ophan.record);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {

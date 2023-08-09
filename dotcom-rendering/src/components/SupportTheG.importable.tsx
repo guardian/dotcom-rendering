@@ -20,9 +20,9 @@ import type {
 import { useEffect, useState } from 'react';
 import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
-	getOphanRecordFunction,
 	__OLD__sendOphanComponentEvent,
 	__OLD__submitComponentEvent,
+	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {

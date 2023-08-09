@@ -12,8 +12,8 @@ import {
 } from '@guardian/source-react-components';
 import { useCallback, useEffect, useState } from 'react';
 import {
-	getOphanRecordFunction,
 	__OLD__submitComponentEvent,
+	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';

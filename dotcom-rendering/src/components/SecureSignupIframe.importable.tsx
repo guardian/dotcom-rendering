@@ -16,8 +16,8 @@ import { useRef, useState } from 'react';
 // Use the default export instead.
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
-	getOphanRecordFunction,
 	__OLD__submitComponentEvent,
+	getOphanRecordFunction,
 } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 
