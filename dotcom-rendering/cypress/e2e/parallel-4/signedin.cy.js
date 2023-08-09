@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
-import { disableCMP } from '../../lib/disableCMP';
+import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 
 const articleUrl =

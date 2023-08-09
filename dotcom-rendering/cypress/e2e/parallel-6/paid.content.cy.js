@@ -1,7 +1,7 @@
 /* eslint-disable mocha/no-setup-in-describe */
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { cmpIframe } from '../../lib/cmpIframe';
-import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
+import { cmpIframe } from '../../lib/cmpIframe.js';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe.js';
 import { storage } from '@guardian/libs';
 
 const handleCommercialErrors = () => {

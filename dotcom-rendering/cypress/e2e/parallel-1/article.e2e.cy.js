@@ -1,7 +1,7 @@
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { mockApi } from '../../lib/mocks';
+import { mockApi } from '../../lib/mocks.js';
 
 describe('E2E Page rendering', function () {
 	beforeEach(function () {

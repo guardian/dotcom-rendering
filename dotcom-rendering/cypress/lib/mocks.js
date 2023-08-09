@@ -1,5 +1,5 @@
-import { mostRead } from '../fixtures/manual/most-read';
-import { mostReadGeo } from '../fixtures/manual/most-read-geo';
+import { mostRead } from '../fixtures/manual/most-read.js';
+import { mostReadGeo } from '../fixtures/manual/most-read-geo.js';
 
 export const mockApi = () => {
 	// Mock share count
