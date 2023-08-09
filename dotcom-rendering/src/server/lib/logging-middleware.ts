@@ -42,7 +42,7 @@ export const loggingStoreMiddleware: RequestHandler = (req, res, next) => {
 			method: req.method,
 		},
 		timing: {
-			total: Date.now(),
+			total: performance.now(),
 		},
 	};
 

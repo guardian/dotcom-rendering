@@ -54,7 +54,7 @@ export const recordTimeStart = (metric: RecordablePeriod): void => {
 	const { timing } = loggingStore.getStore() ?? {};
 
 	if (timing) {
-		timing[metric] = Date.now();
+		timing[metric] = performance.now();
 	}
 };
 
@@ -62,7 +62,7 @@ export const recordTimeStop = (metric: RecordablePeriod): void => {
 	const { timing } = loggingStore.getStore() ?? {};
 
 	if (timing) {
-		timing[metric] = timing[metric] ?? 0 - Date.now();
+		timing[metric] = timing[metric] ?? 0 - performance.now();
 	}
 };
 
