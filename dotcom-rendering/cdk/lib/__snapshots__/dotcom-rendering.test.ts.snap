@@ -48,7 +48,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuSecurityGroup",
       "GuSecurityGroup",
       "GuStringParameter",
-      "GuClassicLoadBalancer",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -326,9 +325,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "Ref": "LaunchConfig",
         },
         "LoadBalancerNames": [
-          {
-            "Ref": "InternalLoadBalancer",
-          },
+          "InternalLoadBalancer",
         ],
         "MaxSize": {
           "Fn::FindInMap": [
@@ -401,9 +398,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
-            "Value": {
-              "Ref": "InternalLoadBalancer",
-            },
+            "Value": "InternalLoadBalancer",
           },
         ],
         "EvaluationPeriods": {
@@ -656,27 +651,23 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         },
         "Listeners": [
           {
-            "InstancePort": "80",
-            "InstanceProtocol": "http",
-            "LoadBalancerPort": "9000",
-            "Protocol": "http",
+            "InstancePort": "9000",
+            "LoadBalancerPort": "80",
+            "Protocol": "HTTP",
           },
         ],
+        "LoadBalancerName": "frontend-TEST-rendering-ELB",
         "Scheme": "internal",
         "SecurityGroups": [
           {
             "Fn::GetAtt": [
-              "InternalLoadBalancerRenderingSecurityGroup53E3F9A7",
+              "InternalLoadBalancerSecurityGroup",
               "GroupId",
             ],
           },
         ],
         "Subnets": [],
         "Tags": [
-          {
-            "Key": "App",
-            "Value": "rendering",
-          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -696,55 +687,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
-    },
-    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
-      "Properties": {
-        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
-        "SecurityGroupEgress": [
-          {
-            "CidrIp": "255.255.255.255/32",
-            "Description": "Disallow all traffic",
-            "FromPort": 252,
-            "IpProtocol": "icmp",
-            "ToPort": 86,
-          },
-        ],
-        "SecurityGroupIngress": [
-          {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Default rule allow on 9000",
-            "FromPort": 9000,
-            "IpProtocol": "tcp",
-            "ToPort": 9000,
-          },
-        ],
-        "Tags": [
-          {
-            "Key": "App",
-            "Value": "rendering",
-          },
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/dotcom-rendering",
-          },
-          {
-            "Key": "Stack",
-            "Value": "frontend",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-        "VpcId": {
-          "Ref": "VpcId",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {
@@ -816,9 +758,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
-            "Value": {
-              "Ref": "InternalLoadBalancer",
-            },
+            "Value": "InternalLoadBalancer",
           },
         ],
         "EvaluationPeriods": 1,
