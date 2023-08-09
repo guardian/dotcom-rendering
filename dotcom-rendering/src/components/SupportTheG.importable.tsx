@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react';
 import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
 	getOphanRecordFunction,
-	sendOphanComponentEvent,
+	__OLD__sendOphanComponentEvent,
 	__OLD__submitComponentEvent,
 } from '../client/ophan/ophan';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
@@ -307,14 +307,14 @@ const ReaderRevenueLinksNative = ({
 
 	useEffect(() => {
 		if (!hideSupportMessaging && inHeader) {
-			sendOphanComponentEvent('INSERT', tracking, ophanRecord);
+			__OLD__sendOphanComponentEvent('INSERT', tracking, ophanRecord);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		if (hasBeenSeen && inHeader) {
-			sendOphanComponentEvent('VIEW', tracking, ophanRecord);
+			__OLD__sendOphanComponentEvent('VIEW', tracking, ophanRecord);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasBeenSeen]);

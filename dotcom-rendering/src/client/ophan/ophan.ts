@@ -101,7 +101,10 @@ interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
-export const sendOphanComponentEvent = (
+/**
+ * @deprecated use `sendOphanComponentEvent` instead
+ */
+export const __OLD__sendOphanComponentEvent = (
 	action: OphanAction,
 	testMeta: SdcTestMeta,
 	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
@@ -131,6 +134,15 @@ export const sendOphanComponentEvent = (
 	};
 
 	__OLD__submitComponentEvent(componentEvent, ophanRecord);
+};
+
+// temporarily wrap __OLD__sendOphanComponentEvent while using `getOphan`
+export const sendOphanComponentEvent = async (
+	action: OphanAction,
+	testMeta: SdcTestMeta,
+): Promise<void> => {
+	const { record } = await getOphan();
+	__OLD__sendOphanComponentEvent(action, testMeta, record);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
