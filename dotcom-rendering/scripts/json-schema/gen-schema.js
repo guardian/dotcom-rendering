@@ -1,15 +1,16 @@
 /* eslint-disable no-console -- Logs are useful for scripts */
-const fs = require('fs');
-const path = require('path');
-const {
+import fs from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import {
 	getArticleSchema,
+	getBlockSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
 	getTagFrontSchema,
-	getBlockSchema,
-} = require('./get-schema');
+} from './get-schema.js';
 
-const root = path.resolve(__dirname, '..', '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();

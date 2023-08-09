@@ -1,7 +1,11 @@
-import { isSentryEnabled } from '.';
+import { jest } from '@jest/globals';
 
 // Stubbed to prevent parsing of __webpack_public_path__
-jest.mock('./loadSentry', () => ({ loadSentry: jest.fn() }));
+jest.unstable_mockModule('../../src/client/sentryLoader/loadSentry', () => ({
+	loadSentry: jest.fn(),
+}));
+
+const { isSentryEnabled } = await import('./index');
 
 describe('Enable Sentry when it passes loading conditions', () => {
 	it('does NOT enable Sentry when enableSentryReporting switch is false', () => {
@@ -10,6 +14,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: false,
 				isInBrowserVariantTest: true,
+				isInOktaVariantTest: false,
 				randomCentile: 99,
 			}),
 		).toEqual(false);
@@ -20,6 +25,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: true,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
+				isInOktaVariantTest: true,
 				randomCentile: 1,
 			}),
 		).toEqual(false);
@@ -30,6 +36,18 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: true,
+				isInOktaVariantTest: false,
+				randomCentile: 1,
+			}),
+		).toEqual(true);
+	});
+	it('does enable Sentry when the user is in the Okta variant test', () => {
+		expect(
+			isSentryEnabled({
+				isDev: false,
+				enableSentryReporting: true,
+				isInBrowserVariantTest: false,
+				isInOktaVariantTest: true,
 				randomCentile: 1,
 			}),
 		).toEqual(true);
@@ -40,6 +58,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
+				isInOktaVariantTest: false,
 				randomCentile: 1,
 			}),
 		).toEqual(false);
@@ -48,6 +67,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
+				isInOktaVariantTest: false,
 				randomCentile: 99,
 			}),
 		).toEqual(false);
@@ -56,6 +76,7 @@ describe('Enable Sentry when it passes loading conditions', () => {
 				isDev: false,
 				enableSentryReporting: true,
 				isInBrowserVariantTest: false,
+				isInOktaVariantTest: false,
 				randomCentile: 100,
 			}),
 		).toEqual(true);

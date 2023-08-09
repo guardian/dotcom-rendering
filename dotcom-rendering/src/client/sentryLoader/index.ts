@@ -1,13 +1,14 @@
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
+} from '../../../scripts/webpack/bundles.js';
 import { loadSentry } from './loadSentry';
 
 type IsSentryEnabled = {
 	enableSentryReporting: boolean;
 	isDev: boolean;
 	isInBrowserVariantTest: boolean;
+	isInOktaVariantTest: boolean;
 	randomCentile: number;
 };
 
@@ -15,6 +16,7 @@ const isSentryEnabled = ({
 	enableSentryReporting,
 	isDev,
 	isInBrowserVariantTest,
+	isInOktaVariantTest,
 	randomCentile,
 }: IsSentryEnabled): boolean => {
 	// We don't send errors on the dev server, or if the enableSentryReporting switch is off
@@ -25,6 +27,8 @@ const isSentryEnabled = ({
 	// the variant and control so they each represent 1% of the overall traffic.
 	// This will allow a like for like comparison in Sentry.
 	if (isInBrowserVariantTest) return true;
+	// We want to log all errors for users in the Okta variant test.
+	if (isInOktaVariantTest) return true;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
 	// measures page views in the billions so we only want to log 1% of errors that
@@ -46,12 +50,17 @@ export const sentryLoader = (): Promise<void> => {
 	const enableSentryReporting = !!switches.enableSentryReporting;
 	const isInBrowserVariantTest =
 		BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant';
+
+	const isInOktaVariantTest =
+		!!switches.okta && tests.oktaVariant === 'variant';
+
 	// Generate a number between 1 - 100
 	const randomCentile = Math.floor(Math.random() * 100) + 1;
 	const canLoadSentry = isSentryEnabled({
 		enableSentryReporting,
 		isDev,
 		isInBrowserVariantTest,
+		isInOktaVariantTest,
 		randomCentile,
 	});
 	canLoadSentry ? loadSentry() : stubSentry();

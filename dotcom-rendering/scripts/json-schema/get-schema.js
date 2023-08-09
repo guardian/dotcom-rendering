@@ -1,7 +1,8 @@
-const path = require('path');
-const TJS = require('typescript-json-schema');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import * as TJS from 'typescript-json-schema';
 
-const root = path.resolve(__dirname, '..', '..');
+const root = path.resolve(fileURLToPath(import.meta.url), '..', '..', '..');
 
 const program = TJS.getProgramFromFiles(
 	[
@@ -17,40 +18,50 @@ const program = TJS.getProgramFromFiles(
 
 const settings = { rejectDateType: true, required: true };
 
-module.exports = {
-	getArticleSchema: () => {
-		return JSON.stringify(
-			TJS.generateSchema(program, 'FEArticleType', settings),
-			null,
-			4,
-		);
-	},
-	getFrontSchema: () => {
-		return JSON.stringify(
-			TJS.generateSchema(program, 'FEFrontType', settings),
-			null,
-			4,
-		);
-	},
-	getTagFrontSchema: () => {
-		return JSON.stringify(
-			TJS.generateSchema(program, 'FETagFrontType', settings),
-			null,
-			4,
-		);
-	},
-	getNewsletterPageSchema: () => {
-		return JSON.stringify(
-			TJS.generateSchema(program, 'FENewslettersPageType', settings),
-			null,
-			4,
-		);
-	},
-	getBlockSchema: () => {
-		return JSON.stringify(
-			TJS.generateSchema(program, 'Block', settings),
-			null,
-			4,
-		);
-	},
+const getArticleSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FEArticleType', settings),
+		null,
+		4,
+	);
+};
+
+const getFrontSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FEFrontType', settings),
+		null,
+		4,
+	);
+};
+
+const getTagFrontSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FETagFrontType', settings),
+		null,
+		4,
+	);
+};
+
+const getNewsletterPageSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'FENewslettersPageType', settings),
+		null,
+		4,
+	);
+};
+
+const getBlockSchema = () => {
+	return JSON.stringify(
+		TJS.generateSchema(program, 'Block', settings),
+		null,
+		4,
+	);
+};
+
+export {
+	getArticleSchema,
+	getFrontSchema,
+	getTagFrontSchema,
+	getNewsletterPageSchema,
+	getBlockSchema,
 };

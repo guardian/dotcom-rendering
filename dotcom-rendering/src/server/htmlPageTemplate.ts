@@ -18,7 +18,6 @@ type BaseProps = {
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
-	recipeMarkup?: string;
 	canonicalUrl?: string;
 	renderingTarget: RenderingTarget;
 	offerHttp3: boolean;
@@ -64,7 +63,6 @@ export const htmlPageTemplate = (props: WebProps | AppProps): string => {
 		openGraphData,
 		twitterData,
 		initTwitter,
-		recipeMarkup,
 		canonicalUrl,
 		renderingTarget,
 		offerHttp3,
@@ -356,11 +354,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 			<body class="${hasPageSkin ? 'has-page-skin' : ''}">
                 ${html}
-				${
-					recipeMarkup !== undefined
-						? `<script type="application/ld+json">${recipeMarkup}</script>`
-						: '<!-- no recipe markup -->'
-				}
             </body>
         </html>`;
 };

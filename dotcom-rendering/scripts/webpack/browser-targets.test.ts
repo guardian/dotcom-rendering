@@ -2,7 +2,7 @@ import {
 	getBrowserTargets,
 	rawTargets,
 	upgradeTargets,
-} from './browser-targets';
+} from './browser-targets.cjs';
 
 describe('Browser targets are as expected', () => {
 	test('raw targets from browserslist', () => {

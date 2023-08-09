@@ -1,12 +1,14 @@
-const { promisify } = require('util');
-const { join } = require('path');
-const readFile = promisify(require('fs').readFile);
+import { readFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { ensure } from './ensure.js';
 
-const ensure = require('./ensure');
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	try {
+		/** @type {[typeof import('semver')]} */
 		const [semver] = await ensure('semver');
 
 		const nodeVersion = /^v(\d+\.\d+\.\d+)/.exec(process.version)[1];
@@ -15,10 +17,10 @@ const ensure = require('./ensure');
 		).trim();
 
 		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-			const { warn, prompt, log } = require('./log');
+			const { warn, prompt, log } = await import('./log.js');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
-				`You are using v${nodeVersion}`,
+				`You are using v${nodeVersion ?? '(unknown)'}`,
 			);
 			if (process.env.NVM_DIR) {
 				prompt('Run `nvm install` from the repo root and try again.');

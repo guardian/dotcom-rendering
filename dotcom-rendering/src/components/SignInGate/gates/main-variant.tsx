@@ -48,6 +48,7 @@ export const signInGateComponent: SignInGateComponent = {
 		dismissGate,
 		guUrl,
 		signInUrl,
+		registerUrl,
 		abTest,
 		checkoutCompleteCookieData,
 		personaliseSignInGateAfterCheckoutSwitch,
@@ -62,6 +63,7 @@ export const signInGateComponent: SignInGateComponent = {
 							dismissGate={dismissGate}
 							guUrl={guUrl}
 							signInUrl={signInUrl}
+							registerUrl={registerUrl}
 							abTest={abTest}
 							checkoutCompleteCookieData={
 								checkoutCompleteCookieData
@@ -73,6 +75,7 @@ export const signInGateComponent: SignInGateComponent = {
 							dismissGate={dismissGate}
 							guUrl={guUrl}
 							signInUrl={signInUrl}
+							registerUrl={registerUrl}
 							abTest={abTest}
 						/>
 					)}

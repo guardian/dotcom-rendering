@@ -18,9 +18,9 @@ type Props = {
 const wrapperStyles = css`
 	position: relative;
 	display: flex;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
 `;
 
 const directionStyles = (alignment: Alignment) => {

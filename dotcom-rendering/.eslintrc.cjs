@@ -89,6 +89,7 @@ module.exports = {
 		'jsx-a11y',
 		'jsx-expressions',
 		'custom-elements',
+		'unicorn',
 	],
 	rules: {
 		// React, Hooks & JSX
@@ -167,6 +168,8 @@ module.exports = {
 			},
 		],
 
+		'unicorn/prefer-node-protocol': 'error',
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,
@@ -176,9 +179,15 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['**/**.js'],
+			files: ['**/**.cjs'],
 			rules: {
+				'global-require': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
+			},
+		},
+		{
+			files: ['**/**.js', '**/**.cjs'],
+			rules: {
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
 			},

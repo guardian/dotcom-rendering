@@ -1,9 +1,14 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import { defineConfig } from 'cypress';
-import plugins from './cypress/plugins';
+import { babelExclude } from './scripts/webpack/webpack.config.client.js';
+import { swcLoader } from './scripts/webpack/webpack.config.server.js';
 
 // https://docs.cypress.io/guides/references/configuration
 
-module.exports = defineConfig({
+// eslint-disable-next-line import/no-default-export -- it’s what Cypress wants
+export default defineConfig({
 	viewportWidth: 1500,
 	viewportHeight: 860,
 	video: false,
@@ -28,7 +33,22 @@ module.exports = defineConfig({
 	},
 	e2e: {
 		setupNodeEvents(on, config) {
-			return plugins(on, config);
+			config.env = { ...config.env, ...process.env };
+
+			const webpackConfig = webpackPreprocessor.defaultOptions;
+			webpackConfig.webpackOptions.resolve = {
+				extensions: ['.js', '.ts', '.tsx', '.cts', '.ctsx'],
+			};
+			webpackConfig.webpackOptions.module.rules = [
+				{
+					test: /\.c?tsx?$/,
+					exclude: babelExclude,
+					use: swcLoader,
+				},
+			];
+
+			on('file:preprocessor', webpackPreprocessor(webpackConfig));
+			return config;
 		},
 		baseUrl: 'http://localhost:9000/',
 	},
