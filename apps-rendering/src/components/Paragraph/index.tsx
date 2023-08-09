@@ -83,7 +83,6 @@ const styles = (
 		overflow-wrap: break-word;
 		margin: 0 0 0.875rem;
 		color: ${text.paragraph(format)};
-		line-height: 1.4;
 
 		${isEditions
 			? null
