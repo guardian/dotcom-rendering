@@ -22,7 +22,7 @@ import type { OphanRecordFunction } from '../client/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	sendOphanComponentEvent,
-	submitComponentEvent,
+	__OLD__submitComponentEvent,
 } from '../client/ophan/ophan';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
@@ -253,7 +253,9 @@ const ReaderRevenueLinksRemote = ({
 				<SupportHeader
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
-					) => submitComponentEvent(componentEvent, ophanRecord)}
+					) =>
+						__OLD__submitComponentEvent(componentEvent, ophanRecord)
+					}
 					{...supportHeaderResponse.props}
 				/>
 			</div>

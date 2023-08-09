@@ -17,7 +17,7 @@ import { useRef, useState } from 'react';
 import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
 	getOphanRecordFunction,
-	submitComponentEvent,
+	__OLD__submitComponentEvent,
 } from '../client/ophan/ophan';
 import { isServer } from '../lib/isServer';
 
@@ -164,7 +164,7 @@ const sendTracking = (
 		timestamp: Date.now(),
 	});
 
-	submitComponentEvent(
+	__OLD__submitComponentEvent(
 		{
 			action,
 			value,

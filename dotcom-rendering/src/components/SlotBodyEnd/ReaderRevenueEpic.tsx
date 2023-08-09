@@ -10,7 +10,7 @@ import type {
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../../client/ophan/ophan';
+import { __OLD__submitComponentEvent } from '../../client/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	hasCmpConsentForArticleCount,
@@ -199,7 +199,7 @@ export const ReaderRevenueEpic = ({
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
-					submitComponentEvent={submitComponentEvent}
+					submitComponentEvent={__OLD__submitComponentEvent}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}
 					stage={stage}

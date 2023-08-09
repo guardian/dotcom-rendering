@@ -6,7 +6,7 @@ import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { submitComponentEvent } from '../client/ophan/ophan';
+import { __OLD__submitComponentEvent } from '../client/ophan/ophan';
 import { useArticleCounts } from '../lib/articleCount';
 import {
 	getLastOneOffContributionTimestamp,
@@ -207,7 +207,7 @@ const Fetch = ({
 	// Add submitComponentEvent function to props to enable Ophan tracking in the component
 	const props = {
 		...response.data.module.props,
-		submitComponentEvent,
+		submitComponentEvent: __OLD__submitComponentEvent,
 	};
 
 	// Take any returned module and render it

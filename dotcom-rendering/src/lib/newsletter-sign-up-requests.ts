@@ -1,7 +1,7 @@
 import type { OphanAction } from '@guardian/libs';
 import {
 	getOphanRecordFunction,
-	submitComponentEvent,
+	__OLD__submitComponentEvent,
 } from '../client/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
@@ -142,7 +142,7 @@ export const reportTrackingEvent = (
 		timestamp: Date.now(),
 	};
 
-	submitComponentEvent(
+	__OLD__submitComponentEvent(
 		{
 			component: {
 				componentType: 'NEWSLETTER_SUBSCRIPTION',

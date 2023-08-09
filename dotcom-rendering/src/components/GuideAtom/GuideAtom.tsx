@@ -1,4 +1,4 @@
-import { submitComponentEvent } from '../../client/ophan/ophan';
+import { __OLD__submitComponentEvent } from '../../client/ophan/ophan';
 import { Body } from '../ExpandableAtom/Body';
 import { Container } from '../ExpandableAtom/Container';
 import { Footer } from '../ExpandableAtom/Footer';
@@ -40,7 +40,7 @@ export const GuideAtom = ({
 			expandCallback={
 				expandCallback ??
 				(() =>
-					submitComponentEvent({
+					__OLD__submitComponentEvent({
 						component: {
 							componentType: 'GUIDE_ATOM',
 							id,
@@ -57,7 +57,7 @@ export const GuideAtom = ({
 				dislikeHandler={
 					dislikeHandler ??
 					(() =>
-						submitComponentEvent({
+						__OLD__submitComponentEvent({
 							component: {
 								componentType: 'GUIDE_ATOM',
 								id,
@@ -70,7 +70,7 @@ export const GuideAtom = ({
 				likeHandler={
 					likeHandler ??
 					(() =>
-						submitComponentEvent({
+						__OLD__submitComponentEvent({
 							component: {
 								componentType: 'GUIDE_ATOM',
 								id,

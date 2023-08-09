@@ -13,7 +13,7 @@ import {
 import { useCallback, useEffect, useState } from 'react';
 import {
 	getOphanRecordFunction,
-	submitComponentEvent,
+	__OLD__submitComponentEvent,
 } from '../client/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
 import type { Newsletter } from '../types/content';
@@ -169,7 +169,7 @@ export const NewsletterCard = ({
 			timestamp: Date.now(),
 		};
 
-		submitComponentEvent(
+		__OLD__submitComponentEvent(
 			{
 				component: {
 					componentType: 'CARD',

@@ -5,7 +5,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useEffect, useRef, useState } from 'react';
-import { submitComponentEvent } from '../../client/ophan/ophan';
+import { __OLD__submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
 import type { CanShowResult } from '../../lib/messagePicker';
@@ -111,7 +111,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	const epicRef = useRef(null);
 
 	useOnce(() => {
-		submitComponentEvent({
+		__OLD__submitComponentEvent({
 			component: {
 				componentType: COMPONENT_TYPE,
 				id: meta.dataFromBraze.ophanComponentId,
@@ -125,7 +125,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 			meta.logImpressionWithBraze();
 
 			// Log VIEW event with Ophan
-			submitComponentEvent({
+			__OLD__submitComponentEvent({
 				component: {
 					componentType: COMPONENT_TYPE,
 					id: meta.dataFromBraze.ophanComponentId,
@@ -165,7 +165,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 					subscribeToNewsletter={subscribeToNewsletter}
 					countryCode={countryCode}
 					logButtonClickWithBraze={meta.logButtonClickWithBraze}
-					submitComponentEvent={submitComponentEvent}
+					submitComponentEvent={__OLD__submitComponentEvent}
 				/>
 			</div>
 		</div>

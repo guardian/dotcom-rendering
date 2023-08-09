@@ -79,11 +79,22 @@ export const record: OphanRecordFunction = (event) => {
 	}
 };
 
-export const submitComponentEvent = (
+/**
+ * @deprecated use `submitComponentEvent` instead
+ */
+export const __OLD__submitComponentEvent = (
 	componentEvent: OphanComponentEvent,
 	ophanRecord: OphanRecordFunction = record, // TODO - migrate uses and make this mandatory
 ): void => {
 	ophanRecord({ componentEvent });
+};
+
+// temporarily wrap __OLD__submitComponentEvent while using `getOphan`
+export const submitComponentEvent = async (
+	componentEvent: OphanComponentEvent,
+): Promise<void> => {
+	const { record } = await getOphan();
+	__OLD__submitComponentEvent(componentEvent, record);
 };
 
 interface SdcTestMeta extends OphanABTestMeta {
@@ -119,7 +130,7 @@ export const sendOphanComponentEvent = (
 		action,
 	};
 
-	submitComponentEvent(componentEvent, ophanRecord);
+	__OLD__submitComponentEvent(componentEvent, ophanRecord);
 };
 
 export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
