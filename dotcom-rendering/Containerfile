@@ -11,4 +11,4 @@ EXPOSE 9000
 ENV DISABLE_LOGGING_AND_METRICS=true
 ENV NODE_ENV=production
 
-ENTRYPOINT ["node", "dist/server.cjs"]
+ENTRYPOINT ["node", "dist/server.js"]

@@ -1,18 +1,14 @@
-import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
+import { useApi as useApi_ } from '../lib/useApi';
 import { mockTab1 } from './MostViewed.mocks';
+import { MostViewedRight } from './MostViewedRight';
 
-const response = { data: mockTab1, loading: false };
+const response = { data: mockTab1 };
+const useApi: { [key: string]: any } = useApi_;
 
-jest.unstable_mockModule('../../src/lib/useApi', () => ({
-	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
+jest.mock('../lib/useApi', () => ({
+	useApi: jest.fn(),
 }));
-
-const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
-	typeof import('../lib/useApi')
->;
-
-const { MostViewedRight } = await import('./MostViewedRight');
 
 describe('MostViewedList', () => {
 	beforeEach(() => {

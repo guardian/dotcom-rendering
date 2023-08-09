@@ -1,13 +1,14 @@
-import fs from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import execa from 'execa';
-import fetch from 'node-fetch';
-import { config } from '../../fixtures/config';
-import { configOverrides } from '../../fixtures/config-overrides';
-import { switchOverrides } from '../../fixtures/switch-overrides';
+/* eslint-disable @typescript-eslint/unbound-method */
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const fs = require('node:fs/promises');
+const { resolve } = require('node:path');
+const execa = require('execa');
+const fetch = require('node-fetch');
+const { config } = require('../../fixtures/config');
+const { configOverrides } = require('../../fixtures/config-overrides');
+const { switchOverrides } = require('../../fixtures/switch-overrides');
+
+const root = resolve(__dirname, '..', '..');
 
 /**
  * gen-fixtures.js

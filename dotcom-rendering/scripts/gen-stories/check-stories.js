@@ -1,3 +1,3 @@
-import { checkStories } from './get-stories.js';
+const { checkStories } = require('./get-stories');
 
 checkStories();

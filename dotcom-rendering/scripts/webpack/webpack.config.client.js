@@ -1,8 +1,8 @@
-import webpack from 'webpack';
-import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import swcConfig from './.swcrc.json' assert { type: 'json' };
-import { getBrowserTargets } from './browser-targets.cjs';
-import GuStatsReportPlugin from './plugins/gu-stats-report-plugin.js';
+const webpack = require('webpack');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const swcConfig = require('./.swcrc.json');
+const { getBrowserTargets } = require('./browser-targets');
+const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -74,8 +74,7 @@ const getLoaders = (bundle) => {
  * @param {{ bundle: 'legacy' | 'modern'  | 'variant' | 'apps', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-// eslint-disable-next-line import/no-default-export -- this is what Webpack wants
-export default ({ bundle, sessionId }) => ({
+module.exports = ({ bundle, sessionId }) => ({
 	entry: {
 		index:
 			bundle === 'variant'
@@ -151,7 +150,7 @@ export default ({ bundle, sessionId }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: babelExclude,
+				exclude: module.exports.babelExclude,
 				use: getLoaders(bundle),
 			},
 			{
@@ -166,7 +165,7 @@ export default ({ bundle, sessionId }) => ({
 	},
 });
 
-export const babelExclude = {
+module.exports.babelExclude = {
 	and: [/node_modules/],
 	not: [
 		// Include all @guardian modules, except automat-modules
@@ -176,4 +175,4 @@ export const babelExclude = {
 	],
 };
 
-export { getLoaders };
+module.exports.getLoaders = getLoaders;

@@ -1,16 +1,13 @@
 import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
-import { jest } from '@jest/globals';
 import { render } from '@testing-library/react';
+import { useApi as useApi_ } from '../lib/useApi';
+import { ShareCount } from './ShareCount.importable';
 
-jest.unstable_mockModule('../../src/lib/useApi', () => ({
-	useApi: jest.fn<typeof import('../lib/useApi').useApi>(),
+const useApi: { [key: string]: any } = useApi_;
+
+jest.mock('../lib/useApi', () => ({
+	useApi: jest.fn(),
 }));
-
-const { useApi } = (await import('../lib/useApi')) as jest.MockedObject<
-	typeof import('../lib/useApi')
->;
-
-const { ShareCount } = await import('./ShareCount.importable');
 
 describe('ShareCount', () => {
 	const ajaxUrl = 'https://api.nextgen.guardianapps.co.uk';
@@ -24,7 +21,6 @@ describe('ShareCount', () => {
 	it('It should render null if share_count is zero', () => {
 		useApi.mockReturnValue({
 			data: { share_count: 0 },
-			loading: false,
 		});
 
 		const { container } = render(
@@ -43,10 +39,7 @@ describe('ShareCount', () => {
 	});
 
 	it('It should not render anything if there was a share count error', () => {
-		useApi.mockReturnValue({
-			error: { name: 'test', message: 'Bad' },
-			loading: false,
-		});
+		useApi.mockReturnValue({ error: { message: 'Bad' } });
 
 		const { container } = render(
 			<ShareCount
@@ -64,10 +57,7 @@ describe('ShareCount', () => {
 	});
 
 	it('It should format long share counts correctly', () => {
-		useApi.mockReturnValue({
-			data: { share_count: 25001 },
-			loading: false,
-		});
+		useApi.mockReturnValue({ data: { share_count: 25001 } });
 
 		const { getByTestId } = render(
 			<ShareCount

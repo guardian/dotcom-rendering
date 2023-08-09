@@ -1,8 +1,8 @@
 // @ts-check
-import { exec } from 'node:child_process';
-import os from 'node:os';
-import chalk from 'chalk';
-import fetch from 'node-fetch';
+const { exec } = require('node:child_process');
+const os = require('node:os');
+const chalk = require('chalk');
+const fetch = require('node-fetch');
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
@@ -72,6 +72,7 @@ class GuStatsReportPlugin {
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
+			// @ts-expect-error -- the type declaration isn’t playing nice
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({
@@ -158,5 +159,4 @@ class GuStatsReportPlugin {
 	}
 }
 
-// eslint-disable-next-line import/no-default-export -- it’s what Webpack wants
-export default GuStatsReportPlugin;
+module.exports = GuStatsReportPlugin;
