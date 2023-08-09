@@ -1,6 +1,7 @@
 import './webpackPublicPath';
 
 // these modules are bundled in the initial (i.e. this) chunk, so that they run ASAP
+import { identity } from '../lib/useAuthStatus';
 import { bootCmp } from './bootCmp';
 import { dynamicImport } from './dynamicImport';
 import { ga } from './ga';
@@ -17,6 +18,7 @@ startup('sentryLoader', sentryLoader);
 startup('dynamicImport', dynamicImport);
 startup('islands', islands);
 startup('performanceMonitoring', performanceMonitoring);
+startup('identity', identity);
 
 // these modules are loaded as separate chunks, so that they can be lazy-loaded
 void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(

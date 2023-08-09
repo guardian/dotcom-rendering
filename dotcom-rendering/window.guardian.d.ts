@@ -9,6 +9,7 @@ import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/d
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
+import type { OktaAuthState } from "./src/lib/useAuthStatus"
 import type { WindowGuardianConfig } from './src/model/window-guardian';
 
 declare global {
@@ -52,6 +53,7 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;
+			isSignedInAuthState?: () => Promise<OktaAuthState>
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

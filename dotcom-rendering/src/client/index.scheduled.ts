@@ -9,6 +9,7 @@ import './webpackPublicPath';
 
 import type { ScheduleOptions } from '../lib/scheduler';
 import { schedule, setSchedulerConcurrency } from '../lib/scheduler';
+import { identity } from '../lib/useAuthStatus';
 import { bootCmp } from './bootCmp';
 import { dynamicImport } from './dynamicImport';
 import { ga } from './ga';
@@ -45,6 +46,7 @@ boot('sentryLoader', sentryLoader);
 boot('dynamicImport', dynamicImport);
 boot('islands', islands);
 boot('performanceMonitoring', performanceMonitoring);
+boot('identity', identity);
 
 // these modules are loaded as separate chunks, so that they can be lazy-loaded
 void import(/* webpackChunkName: 'atomIframe' */ './atomIframe').then(
