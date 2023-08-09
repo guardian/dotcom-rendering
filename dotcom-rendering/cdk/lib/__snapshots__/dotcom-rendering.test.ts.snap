@@ -195,11 +195,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:kms:",
-                    {
-                      "Ref": "AWS::Region",
-                    },
-                    ":",
+                    "arn:aws:kms:eu-west-1:",
                     {
                       "Ref": "AWS::AccountId",
                     },

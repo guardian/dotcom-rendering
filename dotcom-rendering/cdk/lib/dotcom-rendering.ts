@@ -20,7 +20,7 @@ export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
 
-		const { app, stack, stage } = props;
+		const { app, region, stack, stage } = props;
 
 		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
@@ -87,9 +87,9 @@ export class DotcomRendering extends GuStack {
 					fromSSM: true,
 					description: 'S3 Bucket Name for ELB logs',
 				}).valueAsString,
-				s3BucketPrefix: `ELBLogs/${props.stack}/${props.app}/${props.stage}`,
+				s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
 			},
-			loadBalancerName: `${props.stack}-${props.stage}-${props.app}-ELB`,
+			loadBalancerName: `${stack}-${stage}-${app}-ELB`,
 		});
 
 		const instanceSecurityGroup = new GuSecurityGroup(
@@ -137,14 +137,14 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
 					resources: [
-						`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`,
+						`arn:aws:kms:${region}:${this.account}:FrontendConfigKey`,
 					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`,
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
 					],
 				}),
 			],
