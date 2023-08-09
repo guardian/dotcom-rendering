@@ -176,7 +176,7 @@ export class DotcomRendering extends GuStack {
 				InternalLoadBalancerSecurityGroup:
 					lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-				InternalLoadBalancer: lb.loadBalancerName,
+				InternalLoadBalancer: lb.ref,
 				InstanceRole: instanceRole.roleName,
 			},
 		});
