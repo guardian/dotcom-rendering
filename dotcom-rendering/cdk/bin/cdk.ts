@@ -12,17 +12,17 @@ const sharedProps = {
 };
 
 new DotcomRendering(app, 'DotcomRendering-PROD', {
+	...sharedProps,
 	stage: 'PROD',
 	minCapacity: 15,
 	maxCapacity: 60,
 	instanceType: 't4g.small',
-	...sharedProps,
 });
 
 new DotcomRendering(app, 'DotcomRendering-CODE', {
+	...sharedProps,
 	stage: 'CODE',
 	minCapacity: 1,
 	maxCapacity: 4,
 	instanceType: 't4g.micro',
-	...sharedProps,
 });

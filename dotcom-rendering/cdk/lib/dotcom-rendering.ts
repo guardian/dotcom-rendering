@@ -4,6 +4,7 @@ import {
 	GuAmiParameter,
 	GuStack,
 	GuStringParameter,
+	GuSubnetListParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
 import {
@@ -11,9 +12,10 @@ import {
 	GuInstanceRole,
 } from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
-import { Duration } from 'aws-cdk-lib';
+import { CfnOutput, Duration } from 'aws-cdk-lib';
 import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
+import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import { getUserData } from './launch-config';
 import type { DCRProps } from './types';
@@ -24,13 +26,12 @@ export class DotcomRendering extends GuStack {
 
 		const { app, region, stack, stage } = props;
 
-		const vpcCidrBlock = '10.248.136.0/22';
+		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
-		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
-			vpcCidrBlock,
-		});
+		const vpcCidrBlock = '10.248.136.0/22';
+		const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
 
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
@@ -54,6 +55,46 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
+		this.overrideLogicalId(lbSecurityGroup, {
+			logicalId: 'InternalLoadBalancerSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
+
+		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
+			listeners: [
+				{
+					instancePort: '9000',
+					protocol: 'HTTP',
+					loadBalancerPort: '80',
+				},
+			],
+			healthCheck: {
+				target: 'HTTP:9000/_healthcheck',
+				interval: '30',
+				timeout: '10',
+				unhealthyThreshold: '10',
+				healthyThreshold: '2',
+			},
+			subnets: new GuSubnetListParameter(this, 'PublicSubnets', {
+				default: `${ssmPrefix}/vpc.subnets.public`,
+				fromSSM: true,
+				description: 'Public subnets',
+			}).valueAsList,
+			scheme: 'internal',
+			securityGroups: [lbSecurityGroup.securityGroupId],
+			crossZone: true,
+			accessLoggingPolicy: {
+				enabled: true,
+				emitInterval: 5,
+				s3BucketName: new GuStringParameter(this, 'ELBLogsParameter', {
+					default: `${ssmPrefix}/elb.logs.bucketName`,
+					fromSSM: true,
+					description: 'S3 Bucket Name for ELB logs',
+				}).valueAsString,
+				s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
+			},
+			loadBalancerName: `${stack}-${stage}-${app}-ELB`,
+		});
 
 		const instanceSecurityGroup = new GuSecurityGroup(
 			this,
@@ -71,6 +112,10 @@ export class DotcomRendering extends GuStack {
 				],
 			},
 		);
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 
 		const instanceRole = new GuInstanceRole(this, {
 			app: props.app,
@@ -109,6 +154,10 @@ export class DotcomRendering extends GuStack {
 				}),
 			],
 		});
+		this.overrideLogicalId(instanceRole, {
+			logicalId: 'InstanceRole',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 
 		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
 			app,
@@ -136,28 +185,10 @@ export class DotcomRendering extends GuStack {
 			additionalSecurityGroups: [instanceSecurityGroup],
 			vpcSubnets: { subnets: vpc.publicSubnets },
 		});
-
-		// ----------------------------------------------------------------- //
-		// Temporarily overriding logical IDs during CDK migration
-		const reason =
-			'Retaining a stateful resource previously defined in YAML';
-		this.overrideLogicalId(lbSecurityGroup, {
-			logicalId: 'InternalLoadBalancerSecurityGroup',
-			reason,
-		});
-		this.overrideLogicalId(instanceSecurityGroup, {
-			logicalId: 'InstanceSecurityGroup',
-			reason,
-		});
-		this.overrideLogicalId(instanceRole, {
-			logicalId: 'InstanceRole',
-			reason,
-		});
 		this.overrideLogicalId(asg, {
 			logicalId: 'AutoscalingGroup',
-			reason,
+			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
-		// ----------------------------------------------------------------- //
 
 		const yamlTemplateFilePath = join(
 			__dirname,
@@ -168,11 +199,14 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-				InternalLoadBalancerSecurityGroup:
-					lbSecurityGroup.securityGroupId,
-				InstanceRole: instanceRole.roleName,
 				AutoscalingGroup: asg.autoScalingGroupArn,
+				InternalLoadBalancer: lb.ref,
+				InstanceRole: instanceRole.roleName,
 			},
+		});
+
+		new CfnOutput(this, 'LoadBalancerUrl', {
+			value: lb.attrDnsName,
 		});
 	}
 }

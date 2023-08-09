@@ -20,7 +20,8 @@ import { ManyNewslettersForm } from './ManyNewslettersForm';
 import { BUTTON_ROLE, BUTTON_SELECTED_CLASS } from './NewsletterCard';
 import { Section } from './Section';
 
-type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed';
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type FormStatus = 'NotSent' | 'Loading' | 'Success' | 'Failed' | 'InvalidEmail';
 
 // To align the heading content with the carousel below
 // from desktop
@@ -119,9 +120,11 @@ export const ManyNewsletterSignUp = () => {
 		: !!window.guardian.config.switches['emailSignupRecaptcha'];
 	const captchaSiteKey = useReCaptcha ? getCaptchaSiteKey() : undefined;
 
+	const userCanInteract = status !== 'Success' && status !== 'Loading';
+
 	const toggleNewsletter = useCallback(
 		(event: Event) => {
-			if (status !== 'NotSent') {
+			if (!userCanInteract) {
 				return;
 			}
 			const { target: button } = event;
@@ -152,11 +155,11 @@ export const ManyNewsletterSignUp = () => {
 				button.setAttribute('aria-label', ariaLabelText);
 			}
 		},
-		[newslettersToSignUpFor, status],
+		[newslettersToSignUpFor, userCanInteract],
 	);
 
 	const removeAll = useCallback(() => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
 		}
 		const signUpButtons = [
@@ -171,7 +174,7 @@ export const ManyNewsletterSignUp = () => {
 		});
 
 		setNewslettersToSignUpFor([]);
-	}, [status]);
+	}, [userCanInteract]);
 
 	useEffect(() => {
 		const signUpButtons = [
@@ -196,10 +199,14 @@ export const ManyNewsletterSignUp = () => {
 			email,
 			newslettersToSignUpFor,
 			reCaptchaToken,
-		);
+		).catch(() => {
+			return undefined;
+		});
 
-		if (!response.ok) {
-			const responseText = await response.text();
+		if (!response?.ok) {
+			const responseText = response
+				? await response.text()
+				: '[fetch failure - no response]';
 			reportTrackingEvent('ManyNewsletterSignUp', 'failure-response', {
 				newsletterIds: newslettersToSignUpFor,
 				responseText,
@@ -215,7 +222,12 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleSubmitButton = async () => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
+			return;
+		}
+
+		if (!emailRegex.test(email)) {
+			setStatus('InvalidEmail');
 			return;
 		}
 
@@ -257,8 +269,11 @@ export const ManyNewsletterSignUp = () => {
 	};
 
 	const handleTextInput: ChangeEventHandler<HTMLInputElement> = (ev) => {
-		if (status !== 'NotSent') {
+		if (!userCanInteract) {
 			return;
+		}
+		if (status === 'InvalidEmail' && emailRegex.test(email)) {
+			setStatus('NotSent');
 		}
 		setEmail(ev.target.value);
 	};

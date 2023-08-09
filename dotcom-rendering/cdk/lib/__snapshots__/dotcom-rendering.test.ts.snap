@@ -36,6 +36,8 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     "gu:cdk:constructs": [
       "GuVpcParameter",
       "GuSecurityGroup",
+      "GuSubnetListParameter",
+      "GuStringParameter",
       "GuSecurityGroup",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -98,13 +100,14 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Description": "SSM parameter containing the S3 bucket name holding distribution artifacts",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "ELBLogsParameter": {
+      "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
+      "Description": "S3 Bucket Name for ELB logs",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "ELKStreamId": {
       "Default": "/TEST/frontend/rendering/logging.stream.name",
       "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "FrontendConfigKey": {
-      "Description": "Parameter store KMS key",
-      "Type": "String",
     },
     "InstanceType": {
       "Description": "EC2 Instance Type to use for dotcom-rendering",
@@ -119,6 +122,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "",
       "Description": "(Optional) ARN of action to execute when notification alarms change state",
       "Type": "CommaDelimitedList",
+    },
+    "PublicSubnets": {
+      "Default": "/TEST/frontend/rendering/vpc.subnets.public",
+      "Description": "Public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
     "Stack": {
       "Default": "frontend",
@@ -654,32 +662,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "AccessLoggingPolicy": {
           "EmitInterval": 5,
           "Enabled": true,
-          "S3BucketName": "gu-elb-logs",
-          "S3BucketPrefix": {
-            "Fn::Join": [
-              "/",
-              [
-                "ELBLogs",
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "Stack",
-                    "Value",
-                  ],
-                },
-                {
-                  "Fn::FindInMap": [
-                    "Constants",
-                    "App",
-                    "Value",
-                  ],
-                },
-                {
-                  "Ref": "Stage",
-                },
-              ],
-            ],
+          "S3BucketName": {
+            "Ref": "ELBLogsParameter",
           },
+          "S3BucketPrefix": "ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -696,9 +682,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             "Protocol": "HTTP",
           },
         ],
-        "LoadBalancerName": {
-          "Fn::Sub": "\${Stack}-\${Stage}-\${App}-ELB",
-        },
+        "LoadBalancerName": "frontend-TEST-rendering-ELB",
         "Scheme": "internal",
         "SecurityGroups": [
           {
@@ -709,19 +693,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           },
         ],
         "Subnets": {
-          "Ref": "Subnets",
+          "Ref": "PublicSubnets",
         },
         "Tags": [
-          {
-            "Key": "App",
-            "Value": {
-              "Fn::FindInMap": [
-                "Constants",
-                "App",
-                "Value",
-              ],
-            },
-          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",

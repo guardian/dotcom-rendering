@@ -39,11 +39,14 @@ Parameters:
     Type: String
     Description: (Optional) Number of consecutive periods the threshold needs to be reached before 5XX alarm is triggered
     Default: '5'
-  InternalLoadBalancerSecurityGroup:
-    Description: Id of load balancer security group
+  InstanceType:
     Type: String
+    Description: EC2 Instance Type to use for dotcom-rendering
   AutoscalingGroup:
     Description: ARN of the Autoscaling group
+    Type: String
+  InternalLoadBalancer:
+    Description: Id of internal load balancer
     Type: String
   InstanceRole:
     Description: Name of instance role
@@ -67,46 +70,6 @@ Resources:
       Path: /
       Roles:
         - Ref: InstanceRole
-
-  InternalLoadBalancer:
-    Type: AWS::ElasticLoadBalancing::LoadBalancer
-    Properties:
-      Scheme: internal
-      LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
-      Listeners:
-        - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
-      CrossZone: true
-      HealthCheck:
-        Target: HTTP:9000/_healthcheck
-        HealthyThreshold: 2
-        UnhealthyThreshold: 10
-        Interval: 30
-        Timeout: 10
-      Subnets:
-        Ref: Subnets
-      SecurityGroups:
-        - Ref: InternalLoadBalancerSecurityGroup
-      AccessLoggingPolicy:
-        EmitInterval: 5
-        Enabled: true
-        S3BucketName: gu-elb-logs
-        S3BucketPrefix:
-          Fn::Join:
-            - '/'
-            - - ELBLogs
-              - Fn::FindInMap: [Constants, Stack, Value]
-              - Fn::FindInMap: [Constants, App, Value]
-              - Ref: Stage
-      Tags:
-        - Key: Stage
-          Value:
-            Ref: Stage
-        - Key: Stack
-          Value:
-            Fn::FindInMap: [Constants, Stack, Value]
-        - Key: App
-          Value:
-            Fn::FindInMap: [Constants, App, Value]
 
   ScaleDownPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
@@ -164,9 +127,3 @@ Resources:
       AlarmActions: !Ref NotificationAlarmAction
       OKActions: !Ref NotificationAlarmAction
 
-Outputs:
-  LoadBalancerUrl:
-    Value:
-      'Fn::GetAtt':
-        - InternalLoadBalancer
-        - DNSName
