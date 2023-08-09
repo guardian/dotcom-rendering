@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import {
 	schedule,
 	setSchedulerConcurrency,
@@ -6,6 +7,8 @@ import {
 
 jest.useFakeTimers();
 
+type Task = () => Promise<string>;
+
 describe('scheduler', () => {
 	beforeEach(() => {
 		jest.clearAllTimers();
@@ -13,7 +16,7 @@ describe('scheduler', () => {
 	});
 
 	it('should run scheduled tasks', async () => {
-		const task = jest.fn().mockResolvedValue('task result');
+		const task = jest.fn<Task>().mockResolvedValue('task result');
 		const result = await schedule('testTask', task, {
 			priority: 'feature',
 		});
@@ -23,9 +26,11 @@ describe('scheduler', () => {
 	});
 
 	it('should not run tasks that should not run', async () => {
-		const taskWillRun = jest.fn().mockResolvedValue('will run result');
+		const taskWillRun = jest
+			.fn<Task>()
+			.mockResolvedValue('will run result');
 		const taskWillNotRun = jest
-			.fn()
+			.fn<Task>()
 			.mockResolvedValue('will not run result');
 
 		const willRunResult = schedule('will run', taskWillRun, {
@@ -50,8 +55,8 @@ describe('scheduler', () => {
 	it('should not run tasks after their last start time', () => {
 		setSchedulerPriorityLastStartTime('enhancement', 1000);
 
-		const enhancement = jest.fn().mockResolvedValue('task result');
-		const feature = jest.fn().mockResolvedValue('task result');
+		const enhancement = jest.fn<Task>().mockResolvedValue('task result');
+		const feature = jest.fn<Task>().mockResolvedValue('task result');
 
 		jest.advanceTimersByTime(10_000);
 
@@ -69,9 +74,9 @@ describe('scheduler', () => {
 	it('should use concurrency', async () => {
 		setSchedulerConcurrency(2);
 
-		const task1 = jest.fn().mockResolvedValue('task1 result');
-		const task2 = jest.fn().mockResolvedValue('task2 result');
-		const task3 = jest.fn().mockResolvedValue('task3 result');
+		const task1 = jest.fn<Task>().mockResolvedValue('task1 result');
+		const task2 = jest.fn<Task>().mockResolvedValue('task2 result');
+		const task3 = jest.fn<Task>().mockResolvedValue('task3 result');
 
 		const scheduledTask1 = schedule('testTask1', task1, {
 			priority: 'feature',
@@ -99,7 +104,7 @@ describe('scheduler', () => {
 
 		const mockResolvedValueAfterDelay = (value: string, delay: number) =>
 			jest
-				.fn()
+				.fn<Task>()
 				.mockImplementation(
 					() =>
 						new Promise((res) =>

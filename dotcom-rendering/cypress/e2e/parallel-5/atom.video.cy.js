@@ -1,5 +1,5 @@
-import { cmpIframe } from '../../lib/cmpIframe';
-import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
+import { cmpIframe } from '../../lib/cmpIframe.js';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe.js';
 import { storage } from '@guardian/libs';
 
 const interceptPlayEvent = ({ id, times = 1 }) => {

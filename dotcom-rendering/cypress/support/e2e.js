@@ -13,8 +13,7 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands';
+import './commands.js';
 import 'cypress-plugin-tab';
 import 'cypress-real-events';
 

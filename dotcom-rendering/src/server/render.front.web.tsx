@@ -2,7 +2,7 @@ import { isString, Pillar } from '@guardian/libs';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../scripts/webpack/bundles';
+} from '../../scripts/webpack/bundles.js';
 import { FrontPage } from '../components/FrontPage';
 import { TagFrontPage } from '../components/TagFrontPage';
 import { generateScriptTags, getPathFromManifest } from '../lib/assets';
