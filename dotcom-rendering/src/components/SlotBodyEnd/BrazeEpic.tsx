@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../../client/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { suppressForTaylorReport } from '../../lib/braze/taylorReport';
+import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import {
 	getOptionsHeadersWithOkta,
@@ -16,7 +17,6 @@ import {
 import { useIsInView } from '../../lib/useIsInView';
 import { useOnce } from '../../lib/useOnce';
 import type { TagType } from '../../types/tag';
-import { lazyFetchEmailWithTimeout } from '../../lib/contributions';
 
 const wrapperMargins = css`
 	margin: 18px 0;
