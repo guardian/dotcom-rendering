@@ -105,7 +105,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "ELBLogsParameter": {
-      "Default": "/frontend/rendering/TEST/elb.logs.bucketName",
+      "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },

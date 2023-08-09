@@ -98,7 +98,7 @@ export class DotcomRendering extends GuStack {
 				enabled: true,
 				emitInterval: 5,
 				s3BucketName: new GuStringParameter(this, 'ELBLogsParameter', {
-					default: `/${props.stack}/${props.app}/${props.stage}/elb.logs.bucketName`,
+					default: `/${props.stage}/${props.stack}/${props.app}/elb.logs.bucketName`,
 					fromSSM: true,
 					description: 'S3 Bucket Name for ELB logs',
 				}).valueAsString,
