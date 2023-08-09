@@ -1,7 +1,6 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
 import { TextDecoder, TextEncoder } from 'node:util';
-import { jest } from '@jest/globals';
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
@@ -15,7 +14,8 @@ const windowGuardianConfig = {
 		browserId: 'jest-browser-id',
 		pageViewId: 'jest-page-view-id',
 	},
-	tests: {},
+	tests: {
+	}
 } as WindowGuardianConfig;
 
 const windowGuardian = {

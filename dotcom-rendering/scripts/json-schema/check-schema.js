@@ -1,16 +1,15 @@
 /* eslint-disable no-console -- logs are useful in scripts */
-import fs from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import {
+const fs = require('node:fs');
+const path = require('node:path');
+const {
 	getArticleSchema,
-	getBlockSchema,
 	getFrontSchema,
 	getNewsletterPageSchema,
 	getTagFrontSchema,
-} from './get-schema.js';
+	getBlockSchema,
+} = require('./get-schema');
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const root = path.resolve(__dirname, '..', '..');
 
 const existingArticleSchema = fs.readFileSync(
 	`${root}/src/model/article-schema.json`,

@@ -4,7 +4,7 @@ import { CaptureConsole } from '@sentry/integrations';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles.js';
+} from '../../../scripts/webpack/bundles';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,

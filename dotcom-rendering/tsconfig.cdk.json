@@ -1,8 +1,7 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"module": "NodeNext",
-		"allowImportingTsExtensions": true
+		"module": "CommonJS",
 	},
-	"include": ["cdk/**/*"]
+	"include": ["cdk/**/*"],
 }

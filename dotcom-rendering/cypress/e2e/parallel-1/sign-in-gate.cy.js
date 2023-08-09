@@ -1,6 +1,6 @@
-import { disableCMP } from '../../lib/disableCMP.js';
+import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
-import { Standard } from '../../../fixtures/generated/articles/Standard.ts';
+import { Standard } from '../../../fixtures/generated/articles/Standard';
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
 
