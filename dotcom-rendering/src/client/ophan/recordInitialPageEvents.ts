@@ -11,7 +11,7 @@ export const recordInitialPageEvents = async (): Promise<void> => {
 
 	// We wait for the load event so that we can be sure our assetPerformance is reported as expected.
 	window.addEventListener('load', function load() {
-		recordPerformance();
 		window.removeEventListener('load', load, false);
+		void recordPerformance();
 	});
 };

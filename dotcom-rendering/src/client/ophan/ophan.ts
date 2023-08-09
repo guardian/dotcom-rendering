@@ -157,7 +157,7 @@ export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	return { abTestRegister: records };
 };
 
-export const recordPerformance = (): void => {
+export const recordPerformance = async (): Promise<void> => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Safety on browsers
@@ -183,7 +183,8 @@ export const recordPerformance = (): void => {
 		redirectCount: performanceAPI.navigation.redirectCount,
 	};
 
-	record({
+	const ophan = await getOphan();
+	ophan.record({
 		performance,
 	});
 };
