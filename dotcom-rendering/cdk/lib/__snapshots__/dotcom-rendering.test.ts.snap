@@ -49,8 +49,6 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuSubnetListParameter",
       "GuStringParameter",
       "GuSecurityGroup",
-      "GuSubnetListParameter",
-      "GuStringParameter",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
