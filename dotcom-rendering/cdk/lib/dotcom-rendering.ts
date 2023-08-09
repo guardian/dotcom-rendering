@@ -2,11 +2,14 @@ import { join } from 'node:path';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack, GuStringParameter } from '@guardian/cdk/lib/constructs/core';
 import { GuSecurityGroup, GuVpc } from '@guardian/cdk/lib/constructs/ec2';
-import { GuAllowPolicy, GuInstanceRole } from '@guardian/cdk/lib/constructs/iam';
+import {
+	GuAllowPolicy,
+	GuInstanceRole,
+} from '@guardian/cdk/lib/constructs/iam';
 import type { App } from 'aws-cdk-lib';
-import { CfnOutput } from "aws-cdk-lib";
+import { CfnOutput } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
-import { CfnLoadBalancer } from "aws-cdk-lib/aws-elasticloadbalancing";
+import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 
 interface DCRProps extends GuStackProps {
@@ -56,8 +59,7 @@ export class DotcomRendering extends GuStack {
 			'InstanceSecurityGroup',
 			{
 				app: props.app,
-				description:
-					'rendering instance',
+				description: 'rendering instance',
 				vpc,
 				ingresses: [
 					{
@@ -75,11 +77,13 @@ export class DotcomRendering extends GuStack {
 		});
 
 		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
-			listeners: [{
-				instancePort: '9000',
-				protocol: 'HTTP',
-				loadBalancerPort: '80',
-					}],
+			listeners: [
+				{
+					instancePort: '9000',
+					protocol: 'HTTP',
+					loadBalancerPort: '80',
+				},
+			],
 			healthCheck: {
 				target: 'HTTP:9000/_healthcheck',
 				interval: '30',
@@ -87,7 +91,7 @@ export class DotcomRendering extends GuStack {
 				unhealthyThreshold: '10',
 				healthyThreshold: '2',
 			},
-			subnets: vpc.publicSubnets.map(subnet => subnet.subnetId),
+			subnets: vpc.publicSubnets.map((subnet) => subnet.subnetId),
 			scheme: 'internal',
 			securityGroups: [lbSecurityGroup.securityGroupId],
 			crossZone: true,
@@ -110,31 +114,35 @@ export class DotcomRendering extends GuStack {
 				//todo: do we need the first two policies? They are provided by default?
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
 					actions: ['s3:GetObject'],
-					resources: ['arn:aws:s3:::aws-frontend-artifacts/*']
+					resources: ['arn:aws:s3:::aws-frontend-artifacts/*'],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyCloudwatchLogs', {
 					actions: ['cloudwatch:*', 'logs:*'],
-					resources: ['*']
+					resources: ['*'],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeEc2Autoscaling', {
 					actions: [
 						'ec2:DescribeTags',
 						'ec2:DescribeInstances',
 						'autoscaling:DescribeAutoScalingGroups',
-						'autoscaling:DescribeAutoScalingInstances'
+						'autoscaling:DescribeAutoScalingInstances',
 					],
-					resources: ['*']
+					resources: ['*'],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
-					resources: [`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`],
-
+					resources: [
+						`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`,
+					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
-					resources: [`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`, `arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`]
+					resources: [
+						`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`,
+					],
 				}),
-			]
+			],
 		});
 
 		this.overrideLogicalId(instanceRole, {
@@ -150,18 +158,19 @@ export class DotcomRendering extends GuStack {
 
 		new CfnOutput(this, 'LoadBalancerUrl', {
 			value: lb.attrDnsName,
-		})
+		});
 
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
 				VpcId: vpc.vpcId,
 				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
+				InternalLoadBalancerSecurityGroup:
+					lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
-				InternalLoadBalancer: lb.logicalId,
+				InternalLoadBalancer: lb.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
-			}
+			},
 		});
-	    }
+	}
 }

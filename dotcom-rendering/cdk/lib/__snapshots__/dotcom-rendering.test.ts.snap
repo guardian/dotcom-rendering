@@ -325,7 +325,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "Ref": "LaunchConfig",
         },
         "LoadBalancerNames": [
-          "InternalLoadBalancer",
+          "frontend-TEST-rendering-ELB",
         ],
         "MaxSize": {
           "Fn::FindInMap": [
@@ -398,7 +398,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
-            "Value": "InternalLoadBalancer",
+            "Value": "frontend-TEST-rendering-ELB",
           },
         ],
         "EvaluationPeriods": {
@@ -758,7 +758,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Dimensions": [
           {
             "Name": "LoadBalancerName",
-            "Value": "InternalLoadBalancer",
+            "Value": "frontend-TEST-rendering-ELB",
           },
         ],
         "EvaluationPeriods": 1,
