@@ -21,6 +21,8 @@ export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
 
+		const ssmPrefix = `/${props.stage}/${props.stack}/${props.app}`;
+
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
 		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
@@ -76,6 +78,12 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		const publicSubnets = new GuStringParameter(this, 'PublicSubnets', {
+			default: `${ssmPrefix}/vpc.subnets.public`,
+			fromSSM: true,
+			description: 'Public subnets',
+		}).valueAsString.split(',');
+
 		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
 			listeners: [
 				{
@@ -91,7 +99,7 @@ export class DotcomRendering extends GuStack {
 				unhealthyThreshold: '10',
 				healthyThreshold: '2',
 			},
-			subnets: vpc.publicSubnets.map((subnet) => subnet.subnetId),
+			subnets: publicSubnets,
 			scheme: 'internal',
 			securityGroups: [lbSecurityGroup.securityGroupId],
 			crossZone: true,
@@ -99,11 +107,11 @@ export class DotcomRendering extends GuStack {
 				enabled: true,
 				emitInterval: 5,
 				s3BucketName: new GuStringParameter(this, 'ELBLogsParameter', {
-					default: `/${props.stage}/${props.stack}/${props.app}/elb.logs.bucketName`,
+					default: `${ssmPrefix}/elb.logs.bucketName`,
 					fromSSM: true,
 					description: 'S3 Bucket Name for ELB logs',
 				}).valueAsString,
-				s3BucketPrefix: `/ELBLogs/${props.stack}/${props.app}/${props.stage}`,
+				s3BucketPrefix: `ELBLogs/${props.stack}/${props.app}/${props.stage}`,
 			},
 			loadBalancerName: `${props.stack}-${props.stage}-${props.app}-ELB`,
 		});

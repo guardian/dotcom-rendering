@@ -48,6 +48,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuSecurityGroup",
       "GuSecurityGroup",
       "GuStringParameter",
+      "GuStringParameter",
       "GuAllowPolicy",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -129,6 +130,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "",
       "Description": "(Optional) ARN of action to execute when notification alarms change state",
       "Type": "CommaDelimitedList",
+    },
+    "PublicSubnets": {
+      "Default": "/TEST/frontend/rendering/vpc.subnets.public",
+      "Description": "Public subnets",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "Stack": {
       "Default": "frontend",
@@ -639,7 +645,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "S3BucketName": {
             "Ref": "ELBLogsParameter",
           },
-          "S3BucketPrefix": "/ELBLogs/frontend/rendering/TEST",
+          "S3BucketPrefix": "ELBLogs/frontend/rendering/TEST",
         },
         "CrossZone": true,
         "HealthCheck": {
@@ -666,7 +672,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         ],
-        "Subnets": [],
+        "Subnets": [
+          {
+            "Ref": "PublicSubnets",
+          },
+        ],
         "Tags": [
           {
             "Key": "gu:cdk:version",
