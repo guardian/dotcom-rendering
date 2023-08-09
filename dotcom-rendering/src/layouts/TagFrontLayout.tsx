@@ -213,7 +213,11 @@ export const TagFrontLayout = ({ tagFront, NAV }: Props) => {
 						groupedTrails.day !== undefined,
 					);
 
-					const imageLoading = index > 0 ? 'lazy' : 'eager';
+					const imageLoading =
+						tagFront.config.abTests.lazyLoadImagesVariant ===
+							'variant' && index > 0
+							? 'lazy'
+							: 'eager';
 
 					const ContainerComponent = () => {
 						if (

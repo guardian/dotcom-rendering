@@ -330,7 +330,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (!trail) return null;
 
-					const imageLoading = index > 0 ? 'lazy' : 'eager';
+					const imageLoading =
+						front.config.abTests.lazyLoadImagesVariant ===
+							'variant' && index > 0
+							? 'lazy'
+							: 'eager';
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${
