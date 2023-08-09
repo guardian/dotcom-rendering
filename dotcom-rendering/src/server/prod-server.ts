@@ -37,6 +37,16 @@ export const prodServer = (): void => {
 
 	const app = express();
 
+	/**
+	 * The order of these middleware is important for correctly collecting statistics
+	 *
+	 * - loggingStoreMiddleware needs to be the first middleware to run in order to
+	 *   setup the logging store before timedExpressJsonMiddleware and to record when
+	 *   the request has started.
+	 *
+	 * - requestLoggerMiddleware needs access to the parsed request body meaning it
+	 *	 has to run after the timedExpressJsonMiddleware
+	 */
 	app.use(loggingStoreMiddleware);
 	app.use(timedExpressJsonMiddleware);
 	app.use(requestLoggerMiddleware);
