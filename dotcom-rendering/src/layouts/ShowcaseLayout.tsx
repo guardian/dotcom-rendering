@@ -242,6 +242,17 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
+	// const navTextColour = format.design === ArticleDesign.Picture ? '#333' : '#121212'
+
+	function getColour(format: ArticleFormat) {
+		if (format.design === ArticleDesign.Picture) {
+			return '#22874D';
+		} else return '#000000';
+	}
+	const navTextColour = getColour(format);
+	console.log('format', format.design);
+	console.log('navcolour: ', navTextColour);
+
 	return (
 		<>
 			{!isLabs ? (
@@ -310,6 +321,7 @@ export const ShowcaseLayout = ({
 								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
+								format={format}
 							>
 								<Nav
 									nav={NAV}
@@ -343,6 +355,7 @@ export const ShowcaseLayout = ({
 									}
 									padSides={false}
 									element="aside"
+									format={format}
 								>
 									<Island deferUntil="idle">
 										<SubNav
@@ -352,6 +365,7 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
+											textColour={navTextColour}
 										/>
 									</Island>
 								</Section>
@@ -362,9 +376,20 @@ export const ShowcaseLayout = ({
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
+								borderColour={
+									format.design === ArticleDesign.Picture
+										? '#333'
+										: '#DCDCDC'
+								}
 							>
 								<StraightLines
 									count={4}
+									//todo: maybe pull this to palette?
+									color={
+										format.design === ArticleDesign.Picture
+											? '#333'
+											: '#DCDCDC'
+									}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -448,6 +473,12 @@ export const ShowcaseLayout = ({
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
+					//bring this up to palette?
+					borderColour={
+						format.design === ArticleDesign.Picture
+							? '#333'
+							: '#DCDCDC'
+					}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -510,7 +541,16 @@ export const ShowcaseLayout = ({
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<DecideLines format={format} />
+									<DecideLines
+										format={format}
+										//todo: maybe pull this to palette?
+										color={
+											format.design ===
+											ArticleDesign.Picture
+												? '#333'
+												: '#DCDCDC'
+										}
+									/>
 								</div>
 							</div>
 						</GridItem>
@@ -609,6 +649,12 @@ export const ShowcaseLayout = ({
 								)}
 								<StraightLines
 									count={4}
+									//todo: maybe pull this to palette?
+									color={
+										format.design === ArticleDesign.Picture
+											? '#333'
+											: '#DCDCDC'
+									}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -792,6 +838,7 @@ export const ShowcaseLayout = ({
 							currentNavLink={NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
+							textColour={navTextColour}
 						/>
 					</Island>
 				</Section>

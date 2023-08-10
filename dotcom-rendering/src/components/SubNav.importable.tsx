@@ -16,6 +16,7 @@ type Props = {
 	currentNavLink: string;
 	borderColour: string;
 	linkHoverColour: string;
+	textColour?: string;
 };
 
 const wrapperCollapsedStyles = css`
@@ -55,9 +56,11 @@ const collapsedStyles = css`
 	}
 `;
 // if (format.design === ArticleDesign.Picture) {
-// 	return palette.neutral[86]
+// 	color palette.neutral[86]
 // }
-const fontStyle = css`
+// else color = palette.neutral[7]
+
+const fontStyle = (textColour: string) => css`
 	${textSans.small()};
 	font-size: 14px;
 	${from.tablet} {
@@ -65,7 +68,7 @@ const fontStyle = css`
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${palette.neutral[86]};
+	color: ${textColour};
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -79,7 +82,6 @@ const fontStyle = css`
 `;
 
 const linkStyle = (linkHoverColour: string) => css`
-	${fontStyle};
 	float: left;
 	text-decoration: none;
 
@@ -109,8 +111,6 @@ const spaceBetween = css`
 `;
 
 const showMoreStyle = css`
-	${fontStyle};
-
 	padding-left: 10px;
 	padding-right: 10px;
 
@@ -152,6 +152,7 @@ export const SubNav = ({
 	currentNavLink,
 	borderColour,
 	linkHoverColour,
+	textColour,
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -176,6 +177,11 @@ export const SubNav = ({
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
 
+	// const navTextColour = palette.error[400]
+	const navTextColour = textColour ? '#FFFFFF' : palette.neutral[7];
+
+	console.log('subnav text', textColour);
+
 	return (
 		<div
 			data-print-layout="hide"
@@ -197,7 +203,10 @@ export const SubNav = ({
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={linkStyle(linkHoverColour)}
+							css={[
+								linkStyle(linkHoverColour),
+								fontStyle(navTextColour),
+							]}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -218,7 +227,10 @@ export const SubNav = ({
 						}
 					>
 						<a
-							css={linkStyle(linkHoverColour)}
+							css={[
+								linkStyle(linkHoverColour),
+								fontStyle(navTextColour),
+							]}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={nestedOphanComponents(

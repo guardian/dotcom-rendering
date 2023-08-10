@@ -2,6 +2,7 @@ import { css, jsx } from '@emotion/react';
 import { from, palette, space } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
+import { ArticleDesign } from '@guardian/libs';
 
 const sidePadding = css`
 	padding-left: 10px;
@@ -17,6 +18,8 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
+// needs to be... palette neutral?
+const foo = '#333';
 const sideBorderStyles = (colour: string) => css`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
@@ -58,6 +61,14 @@ type Props = {
 	containerName?: string;
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
+	format?: ArticleFormat;
+};
+
+const decideFallbackBorderColour = (format: ArticleFormat | undefined) => {
+	console.log('here', format);
+	return format?.design === ArticleDesign.Picture
+		? '#333'
+		: palette.neutral[86];
 };
 
 /**
@@ -72,7 +83,8 @@ export const ElementContainer = ({
 	showTopBorder = true,
 	padSides = true,
 	padBottom = false,
-	borderColour = palette.neutral[86],
+	format,
+	borderColour = decideFallbackBorderColour(format),
 	backgroundColour,
 	innerBackgroundColour,
 	shouldCenter = true,
