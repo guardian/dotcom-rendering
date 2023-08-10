@@ -117,7 +117,7 @@ export const ManyNewsletterSignUp = () => {
 	>([]);
 	const [status, setStatus] = useState<FormStatus>('NotSent');
 	const [email, setEmail] = useState('');
-	const reCaptchaRef = useRef<ReCAPTCHA>(null);
+	const reCaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 	const useReCaptcha = isServer
 		? false
 		: !!window.guardian.config.switches['emailSignupRecaptcha'];
