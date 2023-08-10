@@ -22,6 +22,18 @@ type Props = {
 	extraClasses?: string;
 };
 
+/**
+ * A Link/Button that opens the privacy settings modal.
+ *
+ * ## Why does this need to be an Island?
+ *
+ * We need to respond to clicks by calling the consent management platform’s
+ * privacy settings modal.
+ *
+ * To prevent this island from creating a distinct network request,
+ * we tell webpack to eagerly load it, so it ends up in the entry chunk.
+ * @see `eagerlyImportPrivacySettingsLinkIsland`
+ */
 export const PrivacySettingsLink = ({ extraClasses }: Props) => {
 	const [framework, setFramework] = useState<Framework>();
 

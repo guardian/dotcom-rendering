@@ -99,6 +99,15 @@ const initialiseCmp = () =>
 	});
 
 /**
+ * Hydrating this island is so critical that it should not be imported
+ * as a separate chunk. @see {PrivacySettingsLink.importable.tsx}
+ */
+const eagerlyImportPrivacySettingsLinkIsland = () =>
+	import(
+		/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
+	);
+
+/**
  * Keep this file in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
  * mark: CONSENT_TIMING
  */
@@ -107,9 +116,7 @@ export const bootCmp = async (): Promise<void> => {
 
 	await Promise.all([
 		initialiseCmp(),
-		import(
-			/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
-		),
+		eagerlyImportPrivacySettingsLinkIsland(),
 		submitConsentEventsToOphan(),
 	]);
 };
