@@ -36,6 +36,7 @@ export const One = () => (
 				standard: trails.slice(0, 1),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -50,6 +51,7 @@ export const Two = () => (
 				standard: trails.slice(0, 2),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -64,6 +66,7 @@ export const Three = () => (
 				standard: trails.slice(0, 3),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -78,6 +81,7 @@ export const Four = () => (
 				standard: trails.slice(0, 4),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -92,6 +96,7 @@ export const Five = () => (
 				standard: trails.slice(0, 5),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -106,6 +111,7 @@ export const Six = () => (
 				standard: trails.slice(0, 6),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -120,6 +126,7 @@ export const Seven = () => (
 				standard: trails.slice(0, 7),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -134,6 +141,7 @@ export const Eight = () => (
 				standard: trails.slice(0, 8),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -148,6 +156,7 @@ export const Nine = () => (
 				standard: trails.slice(0, 9),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -166,6 +175,7 @@ export const Boosted1 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -186,6 +196,7 @@ export const Boosted2 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -206,6 +217,7 @@ export const Boosted3 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -226,6 +238,7 @@ export const Boosted4 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -246,6 +259,7 @@ export const Boosted5 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -266,6 +280,7 @@ export const Boosted8 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -286,6 +301,7 @@ export const Boosted9 = () => {
 				}}
 				showAge={true}
 				containerPalette="LongRunningPalette"
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -301,6 +317,7 @@ export const OneSnapThreeStandard = () => (
 				standard: trails.slice(1, 4),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -315,6 +332,7 @@ export const ThreeSnapTwoStandard = () => (
 				standard: trails.slice(3, 5),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -329,6 +347,7 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 				standard: trails.slice(3, 5),
 			}}
 			containerPalette="LongRunningPalette"
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -369,6 +388,7 @@ export const SpecialReportWithoutPalette = () => (
 					},
 				],
 			}}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

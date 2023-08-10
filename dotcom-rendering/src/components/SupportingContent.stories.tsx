@@ -33,6 +33,7 @@ const basicCardProps: CardProps = {
 	isExternalLink: false,
 	showLivePlayable: false,
 	isPlayableMediaCard: true,
+	imageLoading: 'eager',
 };
 
 const aBasicLink = {

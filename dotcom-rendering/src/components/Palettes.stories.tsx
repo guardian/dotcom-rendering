@@ -34,6 +34,7 @@ export const EventPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="EventPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -60,6 +61,7 @@ export const EventAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="EventAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -75,6 +77,7 @@ export const SombrePalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SombrePalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -90,6 +93,7 @@ export const SombreAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -105,6 +109,7 @@ export const BreakingPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="BreakingPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -120,6 +125,7 @@ export const LongRunningPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -135,6 +141,7 @@ export const LongRunningAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -150,6 +157,7 @@ export const InvestigationPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -165,6 +173,7 @@ export const SpecialReportAltPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="SpecialReportAltPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -183,6 +192,7 @@ export const BrandedPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="Branded"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</LabsSection>
 );
@@ -198,6 +208,7 @@ export const MediaPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="MediaPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -216,6 +227,7 @@ export const PodcastPalette = () => (
 			groupedTrails={groupedTrails}
 			containerPalette="PodcastPalette"
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

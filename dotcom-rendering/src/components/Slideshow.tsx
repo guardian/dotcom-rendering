@@ -188,6 +188,7 @@ export const Slideshow = ({
 	return (
 		<>
 			{images.map((slideshowImage, index) => {
+				const loading = index === 0 ? 'eager' : 'lazy';
 				return (
 					<figure
 						key={slideshowImage.imageSrc}
@@ -208,6 +209,7 @@ export const Slideshow = ({
 							master={slideshowImage.imageSrc}
 							imageSize={imageSize}
 							alt={slideshowImage.imageCaption}
+							loading={loading}
 						/>
 						<figcaption
 							css={[

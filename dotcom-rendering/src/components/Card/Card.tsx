@@ -17,7 +17,7 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import { CardPicture } from '../CardPicture';
+import { CardPicture, Loading } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -62,6 +62,7 @@ export type Props = {
 	imagePositionOnMobile?: ImagePositionType;
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
+	imageLoading: Loading;
 	isCrossword?: boolean;
 	trailText?: string;
 	avatarUrl?: string;
@@ -254,6 +255,7 @@ export const Card = ({
 	imagePosition = 'top',
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
+	imageLoading,
 	trailText,
 	avatarUrl,
 	showClock,
@@ -466,6 +468,7 @@ export const Card = ({
 									master={media.imageUrl}
 									imageSize={imageSize}
 									alt={media.imageAltText}
+									loading={imageLoading}
 								/>
 								{showPlayIcon && (
 									<MediaDuration

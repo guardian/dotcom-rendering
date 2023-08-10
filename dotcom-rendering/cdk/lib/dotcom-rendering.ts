@@ -34,9 +34,7 @@ export class DotcomRendering extends GuStack {
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
 		const vpcCidrBlock = '10.248.136.0/22';
-		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
-			vpcCidrBlock,
-		});
+		const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
 		const publicSubnets = GuVpc.subnetsFromParameter(this, {
 			type: SubnetType.PUBLIC,
 		});
