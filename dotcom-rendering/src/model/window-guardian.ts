@@ -83,10 +83,20 @@ export const makeWindowGuardian = ({
 	brazeApiKey?: string;
 	GAData?: GADataType;
 	hasInlineMerchandise?: boolean;
-	googleRecaptchaSiteKey?: string;
 	/**
-	 * In the case of articles we don't know the exact values that need to exist
-	 * on the window.guardian.config.page property so rather than filter them we
+	 * Using `string | undefined` rather than an optional `string` so the
+	 * `googleRecaptchaSiteKey` key needs to be explicitly set on the
+	 * config object (even if undefined) rather than included in `unknownConfig`.
+	 *
+	 * Even thought the value will included in `unknownConfig` if the config from
+	 * frontend is used, the value will be overwritten by the `Object.assign` below.
+	 *
+	 * @see https://github.com/guardian/dotcom-rendering/pull/8483
+	 */
+	googleRecaptchaSiteKey: string | undefined;
+	/**
+	 * In the case of articles and fronts we don't know the exact values that need to
+	 * exist on the window.guardian.config.page property so rather than filter them we
 	 * allow the entire object to be passed through here and we then extend it
 	 * using Object.assigns
 	 *
