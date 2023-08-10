@@ -48,7 +48,7 @@ type NonInlineProps = {
  */
 type Props = DefaultProps & (InlineProps | NonInlineProps);
 
-export const labelHeight = constants.AD_LABEL_HEIGHT.toString();
+export const labelHeight = constants.AD_LABEL_HEIGHT;
 
 const individualLabelCSS = css`
 	${textSans.xxsmall()};
@@ -156,7 +156,7 @@ const merchandisingAdStyles = css`
 
 const mostPopAdStyles = css`
 	position: relative;
-	min-height: 274px;
+	min-height: ${250 + labelHeight}px;
 	min-width: 300px;
 	width: 300px;
 	margin: 12px auto;
@@ -166,7 +166,7 @@ const mostPopAdStyles = css`
 		width: auto;
 	}
 	${from.wide} {
-		padding-top: 25px;
+		margin-top: 25px;
 	}
 `;
 
