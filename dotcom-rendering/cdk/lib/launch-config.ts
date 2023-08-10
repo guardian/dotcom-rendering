@@ -5,7 +5,7 @@ type UserDataProps = Pick<DCRProps, 'app' | 'region' | 'stage'> & {
 };
 
 /**
- * Fetches user data configuration for instances in the rendering app ASG
+ * Returns user data configuration for instances in the rendering app
  * @see https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
  */
 export const getUserData = ({
