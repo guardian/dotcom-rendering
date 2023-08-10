@@ -153,7 +153,7 @@ export class DotcomRendering extends GuStack {
 					resources: [
 						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
 						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
-						`arn:aws:ssm:${region}:${this.account}:parameter/${stage}/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/${ssmPrefix}/*`,
 					],
 				}),
 			],
@@ -176,13 +176,13 @@ export class DotcomRendering extends GuStack {
 				stage,
 				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
 					fromSSM: true,
-					default: `/${stage}/${stack}/${app}/logging.stream.name`,
+					default: `${ssmPrefix}/logging.stream.name`,
 				}).valueAsString,
 			}),
 			imageId: new GuAmiParameter(this, {
 				app,
 				fromSSM: true,
-				default: `/${stage}/${stack}/${app}/ami.imageId`,
+				default: `${ssmPrefix}/ami.imageId`,
 			}),
 			imageRecipe: props.amiRecipe,
 			role: instanceRole,

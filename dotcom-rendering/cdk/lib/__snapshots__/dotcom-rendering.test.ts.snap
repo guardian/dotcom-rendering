@@ -302,7 +302,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
                       {
                         "Ref": "AWS::AccountId",
                       },
-                      ":parameter/TEST/frontend/*",
+                      ":parameter//TEST/frontend/rendering/*",
                     ],
                   ],
                 },
