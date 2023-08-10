@@ -18,8 +18,6 @@ const bottomPadding = css`
 	padding-bottom: ${space[9]}px;
 `;
 
-// needs to be... palette neutral?
-const foo = '#333';
 const sideBorderStyles = (colour: string) => css`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
