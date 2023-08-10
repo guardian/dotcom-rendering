@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { Pillar } from '@guardian/libs';
+import { isNonNullable } from '@guardian/libs';
 import {
 	between,
 	brand,
@@ -16,7 +17,6 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { Fragment } from 'react';
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -241,29 +241,29 @@ const FooterLinks = ({
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
-		const linkList = linkGroup.map(
-			({ url, extraClasses, dataLinkName, text }) => (
-				<Fragment key={url}>
-					{dataLinkName === 'privacy' && (
-						<li key="client-side-island">
+		const linkList = linkGroup.flatMap(
+			({ url, extraClasses, dataLinkName, text }) =>
+				[
+					dataLinkName === 'privacy' ? (
+						<li key="privacy-settings-link">
 							<Island>
 								<PrivacySettingsLink
 									extraClasses={extraClasses}
 								/>
 							</Island>
 						</li>
-					)}
-					<li>
+					) : null,
+					<li key={url}>
 						<a
-							css={[footerLink, extraClasses]}
+							className={extraClasses}
+							css={footerLink}
 							href={url}
 							data-link-name={dataLinkName}
 						>
 							{text}
 						</a>
-					</li>
-				</Fragment>
-			),
+					</li>,
+				].filter(isNonNullable),
 		);
 		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
