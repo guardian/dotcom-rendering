@@ -16,6 +16,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
+import { Fragment } from 'react';
 import type { EditionId } from '../lib/edition';
 import { clearFix } from '../lib/mixins';
 import { nestedOphanComponents } from '../lib/ophan-helpers';
@@ -24,6 +25,7 @@ import type { FooterType } from '../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
+import { PrivacySettingsLink } from './PrivacySettingsLink.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
@@ -241,15 +243,26 @@ const FooterLinks = ({
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map(
 			({ url, extraClasses, dataLinkName, text }) => (
-				<li key={`${url}`}>
-					<a
-						css={[footerLink, extraClasses]}
-						href={url}
-						data-link-name={dataLinkName}
-					>
-						{text}
-					</a>
-				</li>
+				<Fragment key={url}>
+					{dataLinkName === 'privacy' && (
+						<li key="client-side-island">
+							<Island>
+								<PrivacySettingsLink
+									extraClasses={extraClasses}
+								/>
+							</Island>
+						</li>
+					)}
+					<li>
+						<a
+							css={[footerLink, extraClasses]}
+							href={url}
+							data-link-name={dataLinkName}
+						>
+							{text}
+						</a>
+					</li>
+				</Fragment>
 			),
 		);
 		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');

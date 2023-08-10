@@ -7,7 +7,6 @@ import type {
 } from '@guardian/libs';
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../lib/getCountryCode';
-import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { submitComponentEvent } from './ophan/ophan';
 
 const submitConsentEventsToOphan = () =>
@@ -108,7 +107,9 @@ export const bootCmp = async (): Promise<void> => {
 
 	await Promise.all([
 		initialiseCmp(),
-		injectPrivacySettingsLink(),
+		import(
+			/* webpackMode: 'eager' */ '../components/PrivacySettingsLink.importable'
+		),
 		submitConsentEventsToOphan(),
 	]);
 };
