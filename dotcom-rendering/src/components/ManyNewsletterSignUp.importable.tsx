@@ -318,13 +318,13 @@ export const ManyNewsletterSignUp = () => {
 
 						{useReCaptcha && !!captchaSiteKey && (
 							<div
+								// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+								// their T+C's must be displayed instead. While this component hides the
+								// badge, the T+C's are inluded in the ManyNewslettersForm component.
+								// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 								css={css`
 									.grecaptcha-badge {
 										visibility: hidden;
-										// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
-										// their T+C's must be displayed instead. While this component hides the
-										// badge, the T+C's are inluded in the ManyNewslettersForm component.
-										// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 									}
 								`}
 							>
