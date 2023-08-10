@@ -23,6 +23,7 @@ import type { OnwardsSource } from '../types/onwards';
 import type { TrailType } from '../types/trails';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
+import type { Loading } from './CardPicture';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
@@ -466,6 +467,7 @@ type CarouselCardProps = {
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
+	imageLoading: Loading;
 	kickerText?: string;
 	imageUrl?: string;
 	dataLinkName?: string;
@@ -493,6 +495,7 @@ const CarouselCard = ({
 	verticalDividerColour,
 	onwardsSource,
 	containerType,
+	imageLoading,
 }: CarouselCardProps) => {
 	const isVideoContainer = containerType === 'fixed/video';
 	return (
@@ -526,6 +529,7 @@ const CarouselCard = ({
 				isPlayableMediaCard={isVideoContainer}
 				onwardsSource={onwardsSource}
 				containerType={containerType}
+				imageLoading={imageLoading}
 			/>
 		</LI>
 	);
@@ -1057,6 +1061,8 @@ export const Carousel = ({
 
 						const imageUrl = image && getSourceImageUrl(image);
 
+						const imageLoading = i > 3 ? 'lazy' : 'eager';
+
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}
@@ -1080,6 +1086,7 @@ export const Carousel = ({
 								}
 								onwardsSource={onwardsSource}
 								containerType={containerType}
+								imageLoading={imageLoading}
 							/>
 						);
 					})}

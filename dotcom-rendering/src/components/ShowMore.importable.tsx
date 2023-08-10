@@ -170,6 +170,7 @@ export const ShowMore = ({
 											containerPalette={containerPalette}
 											showAge={showAge}
 											headlineSize="small"
+											imageLoading="eager"
 										/>
 									</LI>
 								);
