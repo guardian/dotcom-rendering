@@ -1,17 +1,18 @@
-import { cmp, onConsent } from '@guardian/consent-management-platform';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type {
 	OphanAction,
 	OphanComponentEvent,
 	OphanComponentType,
 } from '@guardian/libs';
-import { getCookie, log } from '@guardian/libs';
-import { getLocaleCode } from '../lib/getCountryCode';
-import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
-import { submitComponentEvent } from './ophan/ophan';
+import { log } from '@guardian/libs';
 
 const submitConsentEventsToOphan = () =>
-	onConsent().then((consentState: ConsentState) => {
+	Promise.all([
+		import('@guardian/consent-management-platform').then(({ onConsent }) =>
+			onConsent(),
+		),
+		import('@guardian/libs'),
+		import('./ophan/ophan'),
+	]).then(([consentState, { getCookie }, { submitComponentEvent }]) => {
 		// eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unnecessary-condition -- Review if this check is needed
 		if (!consentState) return;
 		// Register changes in consent state with Ophan
@@ -82,7 +83,13 @@ const submitConsentEventsToOphan = () =>
 	});
 
 const initialiseCmp = () =>
-	getLocaleCode().then((code) => {
+	Promise.all([
+		import('../lib/getCountryCode').then(({ getLocaleCode }) =>
+			getLocaleCode(),
+		),
+		import('@guardian/consent-management-platform'),
+		import('@guardian/libs'),
+	]).then(([code, { cmp }, { getCookie }]) => {
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 		const { pageViewId } = window.guardian.config.ophan;
 
@@ -109,7 +116,9 @@ export const bootCmp = async (): Promise<void> => {
 	await Promise.all([
 		initialiseCmp(),
 		// Manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink(),
+		import('../lib/injectPrivacySettingsLink').then(
+			({ injectPrivacySettingsLink }) => injectPrivacySettingsLink(),
+		),
 		submitConsentEventsToOphan(),
 	]);
 };
