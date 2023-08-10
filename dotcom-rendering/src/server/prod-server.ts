@@ -132,6 +132,22 @@ export const prodServer = (): void => {
 		handleAppsArticle,
 	);
 
+	// To test CDK latency alarm
+	app.get('/trigger-latency', (req: Request, res: Response) => {
+		if (
+			req.headers['x-trigger-latency'] === 'true' ||
+			req.cookies['trigger-latency'] === 'true'
+		) {
+			setTimeout(() => {
+				res.status(200).send('Latency introduced for testing.');
+			}, 5000);
+		} else {
+			res.status(200).send(
+				'Endpoint for testing LatencyAlarm. Use the correct header or cookie to introduce latency.',
+			);
+		}
+	});
+
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
