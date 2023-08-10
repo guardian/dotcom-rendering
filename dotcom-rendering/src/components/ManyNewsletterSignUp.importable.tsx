@@ -8,7 +8,10 @@ import {
 import { Button, SvgCross } from '@guardian/source-react-components';
 import type { ChangeEventHandler, ReactEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ReCAPTCHA } from 'react-google-recaptcha';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import { isServer } from '../lib/isServer';
 import {
 	getCaptchaSiteKey,
@@ -318,10 +321,14 @@ export const ManyNewsletterSignUp = () => {
 								css={css`
 									.grecaptcha-badge {
 										visibility: hidden;
+										// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+										// their T+C's must be displayed instead. While this component hides the
+										// badge, the T+C's are inluded in the ManyNewslettersForm component.
+										// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 									}
 								`}
 							>
-								<ReCAPTCHA
+								<ReactGoogleRecaptcha
 									sitekey={captchaSiteKey}
 									ref={reCaptchaRef}
 									onError={handleCaptchaError}

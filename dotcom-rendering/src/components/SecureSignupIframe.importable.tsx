@@ -11,7 +11,10 @@ import {
 } from '@guardian/source-react-components';
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// Note - the package also exports a component as a named export "ReCAPTCHA",
+// that version will compile and render but is non-functional.
+// Use the default export instead.
+import ReactGoogleRecaptcha from 'react-google-recaptcha';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -196,7 +199,7 @@ export const SecureSignupIframe = ({
 	successDescription,
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
-	const recaptchaRef = useRef<ReCAPTCHA>(null);
+	const recaptchaRef = useRef<ReactGoogleRecaptcha>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
@@ -421,7 +424,7 @@ export const SecureSignupIframe = ({
 						}
 					`}
 				>
-					<ReCAPTCHA
+					<ReactGoogleRecaptcha
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}
