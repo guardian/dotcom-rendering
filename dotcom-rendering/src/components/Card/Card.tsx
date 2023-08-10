@@ -377,6 +377,7 @@ export const Card = ({
 		mainMedia,
 		isPlayableMediaCard,
 	});
+
 	return (
 		<CardWrapper
 			format={format}

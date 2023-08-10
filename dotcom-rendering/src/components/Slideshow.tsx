@@ -1,5 +1,6 @@
 import { css, keyframes } from '@emotion/react';
 import { from, neutral, textSans, until } from '@guardian/source-foundations';
+import { takeFirst } from '../lib/tuple';
 import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
@@ -41,7 +42,6 @@ function decideDuration({ slideshowLength }: { slideshowLength: number }) {
 }
 
 /**
- *
  * Decide how long each image should wait to start their animation sequence based
  * on how many images there are and how long we show each image for.
  */
@@ -52,10 +52,8 @@ function decideDelay({
 	imageIndex: number;
 	slideshowLength: number;
 }) {
-	if (imageIndex === 0) return 0;
 	const totalLoopTime = slideshowLength * (HANG_TIME + FADE_TIME);
-	const delay = (totalLoopTime / slideshowLength) * imageIndex;
-	return delay;
+	return (totalLoopTime / slideshowLength) * imageIndex - FADE_TIME;
 }
 
 const hideOnMobile = css`
@@ -187,22 +185,21 @@ export const Slideshow = ({
 }) => {
 	return (
 		<>
-			{images.map((slideshowImage, index) => {
-				const loading = index === 0 ? 'eager' : 'lazy';
+			{takeFirst(images, 5).map((slideshowImage, index) => {
+				const isNotFirst = index > 0;
+				const loading = isNotFirst ? 'lazy' : 'eager';
 				return (
 					<figure
 						key={slideshowImage.imageSrc}
 						css={[
-							index !== 0 && overlayImage,
+							isNotFirst && overlayImage,
 							animationStyles({
 								imageIndex: index,
 								slideshowLength: images.length,
 								imageSize,
 							}),
 							// When small and on mobile, hide all images except the first one
-							index !== 0 &&
-								imageSize === 'small' &&
-								hideOnMobile,
+							isNotFirst && imageSize === 'small' && hideOnMobile,
 						]}
 					>
 						<CardPicture
