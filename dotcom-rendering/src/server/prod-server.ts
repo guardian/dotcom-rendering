@@ -132,6 +132,20 @@ export const prodServer = (): void => {
 		handleAppsArticle,
 	);
 
+	// To test CDK 5xx alarm
+	app.get('/trigger-5xx', (req: Request, res: Response) => {
+		if (
+			req.headers['x-trigger-alarm'] === 'true' ||
+			req.cookies['trigger-alarm'] === 'true'
+		) {
+			throw new Error('Intentionally triggered 5xx for alarm testing.');
+		} else {
+			res.status(200).send(
+				'Endpoint for testing Backend5xxAlarm. Use the correct header or cookie to trigger a 5xx error.',
+			);
+		}
+	});
+
 	app.use('/ArticlePerfTest/*', handleArticlePerfTest);
 	app.use('/AMPArticlePerfTest/*', handleAMPArticlePerfTest);
 
