@@ -48,19 +48,9 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
-  VPCIpBlock:
-    Type: String
-    Description: CIDR block for IP addresses inside this VPC
-    Default: 10.248.136.0/22
   ELKStream:
     Type: String
     Description: name of the kinesis stream to use to send logs to the central ELK stack
-  FrontendConfigKey:
-    Description: Parameter store KMS key
-    Type: String
-  InternalLoadBalancerSecurityGroup:
-    Description: Id of load balancer security group
-    Type: String
   InstanceSecurityGroup:
     Description: Id of instance security group
     Type: String

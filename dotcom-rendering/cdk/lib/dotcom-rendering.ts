@@ -1,5 +1,4 @@
 import { join } from 'node:path';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import {
 	GuStack,
 	GuStringParameter,
@@ -15,29 +14,26 @@ import { CfnOutput } from 'aws-cdk-lib';
 import { Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
-
-interface DCRProps extends GuStackProps {
-	app: string;
-	region: string;
-}
+import { DCRProps } from './types';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
 		super(scope, id, props);
 
-		const ssmPrefix = `/${props.stage}/${props.stack}/${props.app}`;
+		const { app, region, stack, stage } = props;
+
+		const ssmPrefix = `/${stage}/${stack}/${app}`;
 
 		// This fetches the VPC using the SSM parameter defined for this account
 		// and specifies the CIDR block to use with it here
-		const vpc = GuVpc.fromIdParameter(this, 'vpc', {
-			vpcCidrBlock: '10.248.136.0/22',
-		});
+		const vpcCidrBlock = '10.248.136.0/22';
+		const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
 
 		const lbSecurityGroup = new GuSecurityGroup(
 			this,
 			'InternalLoadBalancerSecurityGroup',
 			{
-				app: props.app,
+				app,
 				description:
 					'Allows HTTP and HTTPS inbound connections from within the VPC',
 				vpc,
@@ -60,35 +56,6 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const instanceSecurityGroup = new GuSecurityGroup(
-			this,
-			'InstanceSecurityGroup',
-			{
-				app: props.app,
-				description:
-					'rendering instance',
-				vpc,
-				ingresses: [
-					{
-						range: Peer.ipv4(vpc.vpcCidrBlock),
-						port: 9000,
-						description: 'TCP 9000 ingress',
-					},
-				],
-			},
-		);
-
-		this.overrideLogicalId(instanceSecurityGroup, {
-			logicalId: 'InstanceSecurityGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
-		});
-
-		const publicSubnets = new GuSubnetListParameter(this, 'PublicSubnets', {
-			default: `${ssmPrefix}/vpc.subnets.public`,
-			fromSSM: true,
-			description: 'Public subnets',
-		}).valueAsList;
-
 		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
 			listeners: [
 				{
@@ -104,7 +71,11 @@ export class DotcomRendering extends GuStack {
 				unhealthyThreshold: '10',
 				healthyThreshold: '2',
 			},
-			subnets: publicSubnets,
+			subnets: new GuSubnetListParameter(this, 'PublicSubnets', {
+				default: `${ssmPrefix}/vpc.subnets.public`,
+				fromSSM: true,
+				description: 'Public subnets',
+			}).valueAsList,
 			scheme: 'internal',
 			securityGroups: [lbSecurityGroup.securityGroupId],
 			crossZone: true,
@@ -116,13 +87,34 @@ export class DotcomRendering extends GuStack {
 					fromSSM: true,
 					description: 'S3 Bucket Name for ELB logs',
 				}).valueAsString,
-				s3BucketPrefix: `ELBLogs/${props.stack}/${props.app}/${props.stage}`,
+				s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
 			},
-			loadBalancerName: `${props.stack}-${props.stage}-${props.app}-ELB`,
+			loadBalancerName: `${stack}-${stage}-${app}-ELB`,
+		});
+
+		const instanceSecurityGroup = new GuSecurityGroup(
+			this,
+			'InstanceSecurityGroup',
+			{
+				app,
+				description: 'rendering instance',
+				vpc,
+				ingresses: [
+					{
+						range: Peer.ipv4(vpcCidrBlock),
+						port: 9000,
+						description: 'TCP 9000 ingress',
+					},
+				],
+			},
+		);
+		this.overrideLogicalId(instanceSecurityGroup, {
+			logicalId: 'InstanceSecurityGroup',
+			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
 		const instanceRole = new GuInstanceRole(this, {
-			app: props.app,
+			app,
 			additionalPolicies: [
 				//todo: do we need the first two policies? They are provided by default?
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
@@ -145,19 +137,18 @@ export class DotcomRendering extends GuStack {
 				new GuAllowPolicy(this, 'AllowPolicyDescribeDecryptKms', {
 					actions: ['kms:Decrypt', 'kms:DescribeKey'],
 					resources: [
-						`arn:aws:kms:${this.region}:${this.account}:FrontendConfigKey`,
+						`arn:aws:kms:${region}:${this.account}:FrontendConfigKey`,
 					],
 				}),
 				new GuAllowPolicy(this, 'AllowPolicyGetSsmParamsByPath', {
 					actions: ['ssm:GetParametersByPath', 'ssm:GetParameter'],
 					resources: [
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/frontend/*`,
-						`arn:aws:ssm:${props.region}:${this.account}:parameter/dotcom/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/frontend/*`,
+						`arn:aws:ssm:${region}:${this.account}:parameter/dotcom/*`,
 					],
 				}),
 			],
 		});
-
 		this.overrideLogicalId(instanceRole, {
 			logicalId: 'InstanceRole',
 			reason: 'Retaining a stateful resource previously defined in YAML',
@@ -169,20 +160,18 @@ export class DotcomRendering extends GuStack {
 			'cloudformation.yml',
 		);
 
-		new CfnOutput(this, 'LoadBalancerUrl', {
-			value: lb.attrDnsName,
-		});
-
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
 				VpcId: vpc.vpcId,
-				VPCIpBlock: vpc.vpcCidrBlock,
-				InternalLoadBalancerSecurityGroup: lbSecurityGroup.securityGroupId,
 				InstanceSecurityGroup: instanceSecurityGroup.securityGroupId,
 				InternalLoadBalancer: lb.ref,
 				InstanceRole: instanceRole.roleName,
 			},
+		});
+
+		new CfnOutput(this, 'LoadBalancerUrl', {
+			value: lb.attrDnsName,
 		});
 	}
 }
