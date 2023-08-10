@@ -122,7 +122,7 @@ export class DotcomRendering extends GuStack {
 		});
 
 		const instanceRole = new GuInstanceRole(this, {
-			app: props.app,
+			app,
 			additionalPolicies: [
 				//todo: do we need the first two policies? They are provided by default?
 				new GuAllowPolicy(this, 'AllowPolicyGetArtifactsBucket', {
