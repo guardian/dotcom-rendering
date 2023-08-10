@@ -88,7 +88,7 @@ export const makeWindowGuardian = ({
 	 * `googleRecaptchaSiteKey` key needs to be explicitly set on the
 	 * config object (even if undefined) rather than included in `unknownConfig`.
 	 *
-	 * Even thought the value will included in `unknownConfig` if the config from
+	 * Even though the value will included in `unknownConfig` if the config from
 	 * frontend is used, the value will be overwritten by the `Object.assign` below.
 	 *
 	 * @see https://github.com/guardian/dotcom-rendering/pull/8483
