@@ -38,6 +38,7 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "GuSubnetListParameter",
       "GuSecurityGroup",
       "GuStringParameter",
+      "GuClassicLoadBalancer",
       "GuSecurityGroup",
       "GuAllowPolicy",
       "GuAllowPolicy",
@@ -688,8 +689,9 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         "Listeners": [
           {
             "InstancePort": "9000",
+            "InstanceProtocol": "http",
             "LoadBalancerPort": "80",
-            "Protocol": "HTTP",
+            "Protocol": "http",
           },
         ],
         "LoadBalancerName": "frontend-TEST-rendering-ELB",
@@ -706,6 +708,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
           "Ref": "PublicSubnets",
         },
         "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
@@ -725,6 +731,55 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::ElasticLoadBalancing::LoadBalancer",
+    },
+    "InternalLoadBalancerRenderingSecurityGroup53E3F9A7": {
+      "Properties": {
+        "GroupDescription": "DotcomRendering/InternalLoadBalancerRendering/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "255.255.255.255/32",
+            "Description": "Disallow all traffic",
+            "FromPort": 252,
+            "IpProtocol": "icmp",
+            "ToPort": 86,
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Default rule allow on 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "App",
+            "Value": "rendering",
+          },
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/dotcom-rendering",
+          },
+          {
+            "Key": "Stack",
+            "Value": "frontend",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+        "VpcId": {
+          "Ref": "VpcId",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
     },
     "InternalLoadBalancerSecurityGroup": {
       "Properties": {
