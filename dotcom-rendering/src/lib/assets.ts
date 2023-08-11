@@ -53,7 +53,7 @@ const getManifest = (path: string): AssetHash => {
 
 		return assetHash;
 	} catch (e) {
-		console.error('Could not load manifest in: ', path);
+		console.error('Could not load manifest in: ', __dirname, path);
 		console.error('Some filename lookups will fail');
 		return {};
 	}
@@ -61,20 +61,10 @@ const getManifest = (path: string): AssetHash => {
 
 type Build = 'apps' | 'modern' | 'variant' | 'legacy';
 
-type ManifestPath = `./manifest.${Build}.json`;
+type ManifestPath = `../${Build}/manifest.${Build}.json`;
 
-const getManifestPath = (build: Build): ManifestPath => {
-	switch (build) {
-		case 'apps':
-			return './manifest.apps.json';
-		case 'modern':
-			return './manifest.modern.json';
-		case 'variant':
-			return './manifest.variant.json';
-		case 'legacy':
-			return './manifest.legacy.json';
-	}
-};
+const getManifestPath = (build: Build): ManifestPath =>
+	`../${build}/manifest.${build}.json`;
 
 export const getPathFromManifest = (
 	build: Build,
@@ -97,7 +87,7 @@ export const getPathFromManifest = (
 		throw new Error(`Missing manifest for ${filename}`);
 	}
 
-	return `${ASSET_ORIGIN}assets/${filenameFromManifest}`;
+	return `${ASSET_ORIGIN}assets/${build}/${filenameFromManifest}`;
 };
 
 /**
