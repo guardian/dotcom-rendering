@@ -139,6 +139,12 @@ export const labelStyles = css`
 	}
 `;
 
+const adContainerCollapseStyles = css`
+	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+`;
+
 const adSlotCollapseStyles = css`
 	&.ad-slot.ad-slot--collapse {
 		display: none;
@@ -349,7 +355,7 @@ const mobileStickyAdStyles = css`
 	}
 `;
 
-export const adContainerStyles = [adSlotCollapseStyles, labelStyles];
+export const adContainerStyles = [adContainerCollapseStyles, labelStyles];
 
 export const AdSlot = ({
 	position,
