@@ -356,21 +356,10 @@ export const ShowcaseLayout = ({
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
-								borderColour={
-									palette.border.secondary
-									// format.design === ArticleDesign.Picture
-									// 	? '#333'
-									// 	: '#DCDCDC'
-								}
+								borderColour={palette.border.secondary}
 							>
 								<StraightLines
 									count={4}
-									//todo: maybe pull this to palette?
-									// color={
-									// 	format.design === ArticleDesign.Picture
-									// 		? '#333'
-									// 		: '#DCDCDC'
-									// }
 									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
@@ -455,13 +444,7 @@ export const ShowcaseLayout = ({
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
-					//bring this up to palette?
-					borderColour={
-						// format.design === ArticleDesign.Picture
-						// 	? '#333'
-						// 	: '#DCDCDC'
-						palette.border.secondary
-					}
+					borderColour={palette.border.secondary}
 				>
 					<ShowcaseGrid>
 						<GridItem area="media">
@@ -526,13 +509,6 @@ export const ShowcaseLayout = ({
 								<div css={stretchLines}>
 									<DecideLines
 										format={format}
-										//todo: maybe pull this to palette?
-										// color={
-										// 	format.design ===
-										// 	ArticleDesign.Picture
-										// 		? '#333'
-										// 		: '#DCDCDC'
-										// }
 										color={palette.border.secondary}
 									/>
 								</div>
@@ -633,12 +609,7 @@ export const ShowcaseLayout = ({
 								)}
 								<StraightLines
 									count={4}
-									//todo: maybe pull this to palette?
-									color=// 	format.design === ArticleDesign.Picture // {
-									// 		? '#333'
-									// 		: '#DCDCDC'
-									// }
-									{palette.border.secondary}
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
