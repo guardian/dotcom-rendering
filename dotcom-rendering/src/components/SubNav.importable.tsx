@@ -177,6 +177,7 @@ export const SubNav = ({
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
 
+	//todo: find a slightly better solution
 	const navTextColour = textColour ? textColour : palette.neutral[7];
 
 	console.log('subnav text', textColour);

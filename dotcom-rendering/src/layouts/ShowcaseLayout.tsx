@@ -242,11 +242,7 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	//todo: bring up to palette?
-	const navTextColour =
-		format.design === ArticleDesign.Picture ? '#FFFFFF' : '#121212';
-	console.log('format', format.design);
-	console.log('navcolour: ', navTextColour);
+	console.log('format', format);
 
 	return (
 		<>
@@ -349,7 +345,7 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
-											textColour={navTextColour}
+											textColour={palette.text.subNavLink}
 										/>
 									</Island>
 								</Section>
@@ -361,19 +357,21 @@ export const ShowcaseLayout = ({
 								padSides={false}
 								showTopBorder={false}
 								borderColour={
-									format.design === ArticleDesign.Picture
-										? '#333'
-										: '#DCDCDC'
+									palette.border.secondary
+									// format.design === ArticleDesign.Picture
+									// 	? '#333'
+									// 	: '#DCDCDC'
 								}
 							>
 								<StraightLines
 									count={4}
 									//todo: maybe pull this to palette?
-									color={
-										format.design === ArticleDesign.Picture
-											? '#333'
-											: '#DCDCDC'
-									}
+									// color={
+									// 	format.design === ArticleDesign.Picture
+									// 		? '#333'
+									// 		: '#DCDCDC'
+									// }
+									color={palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -459,9 +457,10 @@ export const ShowcaseLayout = ({
 					element="article"
 					//bring this up to palette?
 					borderColour={
-						format.design === ArticleDesign.Picture
-							? '#333'
-							: '#DCDCDC'
+						// format.design === ArticleDesign.Picture
+						// 	? '#333'
+						// 	: '#DCDCDC'
+						palette.border.secondary
 					}
 				>
 					<ShowcaseGrid>
@@ -528,12 +527,13 @@ export const ShowcaseLayout = ({
 									<DecideLines
 										format={format}
 										//todo: maybe pull this to palette?
-										color={
-											format.design ===
-											ArticleDesign.Picture
-												? '#333'
-												: '#DCDCDC'
-										}
+										// color={
+										// 	format.design ===
+										// 	ArticleDesign.Picture
+										// 		? '#333'
+										// 		: '#DCDCDC'
+										// }
+										color={palette.border.secondary}
 									/>
 								</div>
 							</div>
@@ -634,11 +634,11 @@ export const ShowcaseLayout = ({
 								<StraightLines
 									count={4}
 									//todo: maybe pull this to palette?
-									color={
-										format.design === ArticleDesign.Picture
-											? '#333'
-											: '#DCDCDC'
-									}
+									color=// 	format.design === ArticleDesign.Picture // {
+									// 		? '#333'
+									// 		: '#DCDCDC'
+									// }
+									{palette.border.secondary}
 									cssOverrides={css`
 										display: block;
 									`}
@@ -822,7 +822,7 @@ export const ShowcaseLayout = ({
 							currentNavLink={NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
-							textColour={navTextColour}
+							textColour={palette.text.subNavLink}
 						/>
 					</Island>
 				</Section>

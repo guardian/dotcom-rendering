@@ -26,6 +26,7 @@ import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
+import { SubNav } from 'src/components/SubNav.importable';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -2148,6 +2149,15 @@ const textExpandableAtomHover = (format: ArticleFormat) => {
 	}
 };
 
+const textSubNavLink = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Picture:
+			return WHITE;
+		default:
+			return palette.neutral[7];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2220,6 +2230,7 @@ export const decidePalette = (
 			tableOfContents: textTableOfContents(),
 			expandableAtom: textExpandableAtom(format),
 			expandableAtomHover: textExpandableAtomHover(format),
+			subNavLink: textSubNavLink(format),
 		},
 		background: {
 			article: backgroundArticle(format),
