@@ -152,6 +152,7 @@ export type Palette = {
 		summaryEventBullet: Colour;
 		pagination: Colour;
 	};
+	discussion: Colour;
 };
 
 export type ContainerOverrides = {
