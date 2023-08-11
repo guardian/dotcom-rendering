@@ -879,7 +879,7 @@ export GU_STAGE=\${Stage}
 mkdir /var/log/dotcom-rendering
 chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 
-make start-prod
+sudo -u dotcom-rendering -g frontend make start-prod
 
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent \${AWS::Region} \${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
 ",
