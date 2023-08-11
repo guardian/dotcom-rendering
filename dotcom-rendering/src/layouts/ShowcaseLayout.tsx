@@ -242,14 +242,9 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	// const navTextColour = format.design === ArticleDesign.Picture ? '#333' : '#121212'
-
-	function getColour(format: ArticleFormat) {
-		if (format.design === ArticleDesign.Picture) {
-			return '#22874D';
-		} else return '#000000';
-	}
-	const navTextColour = getColour(format);
+	//todo: bring up to palette?
+	const navTextColour =
+		format.design === ArticleDesign.Picture ? '#FFFFFF' : '#121212';
 	console.log('format', format.design);
 	console.log('navcolour: ', navTextColour);
 
@@ -257,17 +252,6 @@ export const ShowcaseLayout = ({
 		<>
 			{!isLabs ? (
 				<>
-					{' '}
-					<div>I'm a showcase</div>
-					{format.design === ArticleDesign.Comment && (
-						<div>
-							I'm gonna be a picture but right now really a
-							comment
-						</div>
-					)}
-					{format.design === ArticleDesign.Picture && (
-						<div>Am I a picture yet? </div>
-					)}
 					<div>
 						{renderAds && (
 							<Stuck>
