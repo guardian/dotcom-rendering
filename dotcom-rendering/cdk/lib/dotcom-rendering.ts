@@ -20,8 +20,8 @@ import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
 import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
-import { getUserData } from './launch-config';
 import type { DCRProps } from './types';
+import { getUserData } from './userData';
 
 export class DotcomRendering extends GuStack {
 	constructor(scope: App, id: string, props: DCRProps) {
