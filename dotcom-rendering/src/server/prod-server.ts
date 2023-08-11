@@ -1,3 +1,4 @@
+import path from 'node:path';
 import compression from 'compression';
 import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
@@ -55,8 +56,7 @@ export const prodServer = (): void => {
 	// if running prod server locally, serve local assets
 	if (!process.env.GU_PUBLIC) {
 		app.use('/static/frontend', express.static(__dirname));
-
-		app.use('/assets', express.static(__dirname));
+		app.use('/assets', express.static(path.resolve(__dirname, '..')));
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
