@@ -70,6 +70,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
     },
   },
   "Parameters": {
+    "AMI": {
+      "Description": "AMI to use for instances",
+      "Type": "AWS::EC2::Image::Id",
+    },
     "AMIRendering": {
       "Default": "/TEST/frontend/rendering/ami.imageId",
       "Description": "Amazon Machine Image ID for the app rendering. Use this in conjunction with AMIgo to keep AMIs up to date.",
@@ -104,6 +108,10 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
       "Default": "/TEST/frontend/rendering/elb.logs.bucketName",
       "Description": "S3 Bucket Name for ELB logs",
       "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "ELKStream": {
+      "Description": "name of the kinesis stream to use to send logs to the central ELK stack",
+      "Type": "String",
     },
     "ELKStreamId": {
       "Default": "/TEST/frontend/rendering/logging.stream.name",
