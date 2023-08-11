@@ -56,6 +56,7 @@ export const Avatar = () => {
 					standard: avatarTrails.slice(4, 8),
 				}}
 				showAge={true}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -76,6 +77,7 @@ export const OneHugeTwoBigsFourStandards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -94,6 +96,7 @@ export const OneVeryBigTwoBigsFourStandards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -113,6 +116,7 @@ export const TwoVeryBigsTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -132,6 +136,7 @@ export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -151,6 +156,7 @@ export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -170,6 +176,7 @@ export const TwoVeryBigs8Standards = () => (
 				standard: trails.slice(2, 10),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -188,6 +195,7 @@ export const TwoVeryBigsOneBig4Standards = () => (
 				standard: trails.slice(3, 7),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -207,6 +215,7 @@ export const TwoVeryBigsTwoBigs4Standards = () => (
 				standard: trails.slice(4, 8),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -228,6 +237,7 @@ export const TwoVeryBigsFiveStandards = () => (
 				standard: trails.slice(2, 7),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -246,6 +256,7 @@ export const ThreeVeryBigsFiveStandards = () => (
 				standard: trails.slice(3, 8),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -264,6 +275,7 @@ export const TwoVeryBigsOneBig = () => (
 				big: trails.slice(2, 3),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -282,6 +294,7 @@ export const TwoBigsThreeStandards = () => (
 				standard: trails.slice(2, 5),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -301,6 +314,7 @@ export const OneVeryBigTwoBigsOneStandard = () => (
 				standard: trails.slice(4, 5),
 			}}
 			showAge={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

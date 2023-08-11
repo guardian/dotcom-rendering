@@ -24,6 +24,7 @@ export const OneTrail = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -36,6 +37,7 @@ export const TwoTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -48,6 +50,7 @@ export const ThreeTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -60,6 +63,7 @@ export const FourTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -72,6 +76,7 @@ export const FiveTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -84,6 +89,7 @@ export const SixTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -96,6 +102,7 @@ export const SevenTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -108,6 +115,7 @@ export const EightTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -120,6 +128,7 @@ export const NineTrails = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -132,6 +141,7 @@ export const EightTrailsNoAds = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );

@@ -28,6 +28,7 @@ export const WithTwoCards = () => {
 				year={2023}
 				trails={[trails[0], trails[1]]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -45,6 +46,7 @@ export const WithFourCards = () => {
 				year={2023}
 				trails={[trails[0], trails[1], trails[2], trails[3]]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -69,6 +71,7 @@ export const WithSixCards = () => {
 					trails[5],
 				]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);
@@ -96,6 +99,7 @@ export const WithNineCards = () => {
 					trails[8],
 				]}
 				adIndex={1}
+				imageLoading="eager"
 			/>
 		</FrontSection>
 	);

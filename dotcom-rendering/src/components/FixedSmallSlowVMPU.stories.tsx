@@ -24,6 +24,7 @@ export const FourCards = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -37,6 +38,7 @@ export const ThreeCards = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -50,6 +52,7 @@ export const TwoCards = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -63,6 +66,7 @@ export const OneCard = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={true}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
@@ -76,6 +80,7 @@ export const AdfreeFixedSmallSlowVMPU = () => (
 			showAge={true}
 			adIndex={1}
 			renderAds={false}
+			imageLoading="eager"
 		/>
 	</FrontSection>
 );
