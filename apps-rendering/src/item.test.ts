@@ -27,22 +27,24 @@ const articleContent = {
 	isHosted: false,
 };
 
-const contentWithTag = (tagId: string) => {
-	const tags: Tag[] = [
-		{
-			id: tagId,
+const contentWithTags = (tagIds: string[]) => {
+	const tags: Tag[] = tagIds.map(id =>
+		({
+			id,
 			type: TagType.TONE,
 			webTitle: '',
 			webUrl: '',
 			apiUrl: '',
 			references: [],
-		},
-	];
+		}),
+	);
 	return {
 		...articleContent,
 		tags,
 	};
-};
+}
+
+const contentWithTag = (tagId: string) => contentWithTags([tagId]);
 
 const reviewContent = {
 	...contentWithTag('tone/reviews'),
@@ -197,9 +199,25 @@ const getFirstBody = (item: Review | Standard) =>
 		});
 
 describe('fromCapi returns correct Item', () => {
-	test('media', () => {
+	test('audio', () => {
 		const item = f(contentWithTag('type/audio'));
 		expect(item.design).toBe(ArticleDesign.Audio);
+	});
+
+	test('gallery', () => {
+		const item = f(contentWithTag('type/gallery'));
+		expect(item.design).toBe(ArticleDesign.Gallery);
+	});
+
+	test('video', () => {
+		const item = f(contentWithTag('type/video'));
+		expect(item.design).toBe(ArticleDesign.Video);
+	});
+
+	test('picture', () => {
+		// Picture should take precedence over Comment
+		const item = f(contentWithTags(['tone/comment', 'type/picture']));
+		expect(item.design).toBe(ArticleDesign.Picture);
 	});
 
 	test('review', () => {
