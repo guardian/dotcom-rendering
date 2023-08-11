@@ -114,7 +114,9 @@ export const BylineLink = ({ byline, tags, format }: Props) => {
 				format.design === ArticleDesign.Analysis && hasSingleContributor
 					? removeComma(bylineComponent)
 					: bylineComponent;
-			return displayString ? <span>{displayString}</span> : null;
+			return displayString ? (
+				<span key={bylineComponent}>{displayString}</span>
+			) : null;
 		}
 		return (
 			<ContributorLink
