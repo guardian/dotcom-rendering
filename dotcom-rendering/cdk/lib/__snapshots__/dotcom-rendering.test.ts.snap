@@ -344,6 +344,11 @@ exports[`The DotcomRendering stack matches the snapshot 1`] = `
             ],
           },
         },
+        "LoadBalancerNames": [
+          {
+            "Ref": "InternalLoadBalancer",
+          },
+        ],
         "MaxSize": "4",
         "MinSize": "1",
         "Tags": [

@@ -214,6 +214,8 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		asg.attachToClassicLB(loadBalancer);
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
