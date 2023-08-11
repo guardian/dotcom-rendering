@@ -11,50 +11,38 @@ import type { DCRSlideshowImage } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
 
+/** in second */
+const SLIDE_DISPLAY_DURATION = 5;
 /** in seconds */
-const DISPLAY_DURATION = 5;
-const FADING_DURATION = DISPLAY_DURATION / 5;
+const SLIDE_FADE_DURATION = 1;
+/** in seconds */
+const SLIDE_TOTAL_DURATION = SLIDE_DISPLAY_DURATION + SLIDE_FADE_DURATION;
 
 /**
  * We pass the result of the Emotion `keyframes` utility (decided here) to the animation-name
  * css property
  */
-function decideAnimationName(slideshowLength: number) {
-	if (slideshowLength === 1) {
-		return keyframes`from {opacity: 1} to {opacity:1}`;
-	}
-
-	const totalLoopTime = decideDuration(slideshowLength) / 100;
-	// Calculate the percentages for how long each animation stage lasts
+const decideAnimationName = (duration: number, isLastSlide: boolean) => {
+	const EXTRA_LENGTH = isLastSlide ? 0 : SLIDE_FADE_DURATION * 1.1;
 	const stages = [
-		0,
-		FADING_DURATION,
-		FADING_DURATION + DISPLAY_DURATION + FADING_DURATION,
-		FADING_DURATION + DISPLAY_DURATION + FADING_DURATION + FADING_DURATION,
-	] as const;
-	// Generate and return a keyframes name for this animation
-	return keyframes`
-		${`${stages[0] / totalLoopTime}%`} {opacity: 0;}
-		${`${stages[1] / totalLoopTime}%`} {opacity: 1;}
-		${`${stages[2] / totalLoopTime}%`} {opacity: 1;}
-		${`${stages[3] / totalLoopTime}%`} {opacity: 0;}
-	`;
-}
-
-/**
- * How long the whole animation loop will last for before it starts again
- */
-function decideDuration(slideshowLength: number) {
-	return slideshowLength * (DISPLAY_DURATION + FADING_DURATION);
-}
-
-/**
- * Decide how long each image should wait to start their animation sequence based
- * on how many images there are and how long we show each image for.
- */
-function decideDelay(imageIndex: number) {
-	return (DISPLAY_DURATION + FADING_DURATION) * imageIndex - FADING_DURATION;
-}
+		{ time: 0, opacity: 0 },
+		{ time: SLIDE_FADE_DURATION, opacity: 1 },
+		{ time: SLIDE_TOTAL_DURATION + EXTRA_LENGTH, opacity: 1 },
+		{
+			time: SLIDE_TOTAL_DURATION + SLIDE_FADE_DURATION + EXTRA_LENGTH,
+			opacity: 0,
+		},
+	] as const satisfies ReadonlyArray<{
+		time: number;
+		opacity: number;
+	}>;
+	return keyframes(
+		stages.map(
+			({ time, opacity }) =>
+				`${(time / duration) * 100}% { opacity: ${opacity}; }`,
+		),
+	);
+};
 
 const hideOnMobile = css`
 	${until.tablet} {
@@ -62,33 +50,31 @@ const hideOnMobile = css`
 	}
 `;
 
-/**
- * Applied to all images except the first one. The first image holds the space open for
- * all the others to be positioned on top of
- */
-const overlayImage = css`
-	position: absolute;
-	width: 100%;
-	top: 0;
-	left: 0;
-`;
-
+/** Only applied to images beyond the first one */
 const animationStyles = ({
-	imageIndex,
+	slideIndex,
 	slideshowLength,
 	imageSize,
 }: {
-	imageIndex: number;
+	slideIndex: number;
 	slideshowLength: number;
 	imageSize: ImageSizeType;
 }) => {
-	const delay = decideDelay(imageIndex);
+	const delay = SLIDE_TOTAL_DURATION * slideIndex - SLIDE_FADE_DURATION;
 
-	const duration = decideDuration(slideshowLength);
+	const duration = SLIDE_TOTAL_DURATION * slideshowLength;
 
-	const animationName = decideAnimationName(slideshowLength);
+	const animationName = decideAnimationName(
+		duration,
+		slideIndex == slideshowLength - 1,
+	);
 
 	const animationCss = css`
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+
 		animation-delay: ${delay}s;
 		animation-direction: normal;
 		animation-duration: ${duration}s;
@@ -100,7 +86,7 @@ const animationStyles = ({
 		/* https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion */
 		@media (prefers-reduced-motion: reduce) {
 			animation: none;
-			opacity: ${imageIndex === 0 ? 1 : 0};
+			opacity: ${slideIndex === 0 ? 1 : 0};
 		}
 	`;
 
@@ -157,11 +143,11 @@ const additionalDynamoCaptionStyles = css`
  *   causing the slideshow effect
  *
  *  ```
- *                 time ->
- *   image-1 > ####|----|----|----
- *   image-2 > ----|####|----|----
- *   image-3 > ----|----|####|----
- *   image-4 > ----|----|----|####
+ *   image 1 : ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔ (always visible)
+ *   image 2 : ▁▁▁▁▁╱▔▔▔▔▔▔╲▁▁▁▁▁▁▁▁▁▁▁ (fades after next is fully opaque)
+ *   image 3 : ▁▁▁▁▁▁▁▁▁▁▁╱▔▔▔▔▔▔╲▁▁▁▁▁ (fades after next is fully opaque)
+ *   image 4 : ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁╱▔▔▔▔▔╲ (fades directly after display)
+ *       time →     →     →     →     →
  *  ```
  *
  * What's a perpetual canon?
@@ -187,12 +173,12 @@ export const Slideshow = ({
 				<figure
 					key={slideshowImage.imageSrc}
 					css={[
-						isNotFirst && overlayImage,
-						animationStyles({
-							imageIndex: index,
-							slideshowLength: images.length,
-							imageSize,
-						}),
+						isNotFirst &&
+							animationStyles({
+								slideIndex: index,
+								slideshowLength: images.length,
+								imageSize,
+							}),
 						// When small and on mobile, hide all images except the first one
 						isNotFirst && imageSize === 'small' && hideOnMobile,
 					]}
