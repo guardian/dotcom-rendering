@@ -5,9 +5,11 @@ import type {
 	ConsentState,
 	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
+import type { IdentityAuth } from '@guardian/identity-auth';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { OphanRecordFunction } from './src/client/ophan/ophan';
 import type { DailyArticleHistory } from './src/lib/dailyArticleCount';
+import type { CustomIdTokenClaims } from './src/lib/identity';
 import type { ReaderRevenueDevUtils } from './src/lib/readerRevenueDevUtils';
 import type { WindowGuardianConfig } from './src/model/window-guardian';
 
@@ -52,6 +54,7 @@ declare global {
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
 			GAData: GADataType;
+			identityAuth?: IdentityAuth<never, CustomIdTokenClaims>;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

@@ -34,14 +34,14 @@ const getRedirectUri = (stage: StageType) => {
 	}
 };
 
-let identityAuth: IdentityAuth<never, CustomIdTokenClaims> | undefined =
-	undefined;
-
 function getIdentityAuth() {
-	if (identityAuth === undefined) {
+	if (window.guardian.identityAuth === undefined) {
 		const stage = getStage();
 
-		identityAuth = new IdentityAuth<never, CustomIdTokenClaims>({
+		window.guardian.identityAuth = new IdentityAuth<
+			never,
+			CustomIdTokenClaims
+		>({
 			issuer: getIssuer(stage),
 			clientId: getClientId(stage),
 			redirectUri: getRedirectUri(stage),
@@ -61,7 +61,8 @@ function getIdentityAuth() {
 			],
 		});
 	}
-	return identityAuth;
+
+	return window.guardian.identityAuth;
 }
 
 export async function isSignedInWithOktaAuthState(): Promise<
