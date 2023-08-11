@@ -1338,11 +1338,8 @@ const borderSubNav = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
-	if (format.design === ArticleDesign.Picture) {
-		return palette.brandAlt[400];
-	}
-	// return pillarPalette[format.theme].main;
-	return palette.brandAlt[400];
+
+	return pillarPalette[format.theme].main;
 };
 
 const borderLiveBlock = (format: ArticleFormat): string => {
