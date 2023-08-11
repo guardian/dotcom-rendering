@@ -26,7 +26,6 @@ import type { DCRContainerPalette } from '../types/front';
 import type { Palette } from '../types/palette';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
-import { SubNav } from 'src/components/SubNav.importable';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
