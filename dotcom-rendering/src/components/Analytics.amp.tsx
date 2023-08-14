@@ -29,34 +29,26 @@ export const Analytics = ({
 }: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
-		`<amp-analytics data-block-on-consent>
+		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-block-on-consent data-credentials="include">
 			<script type="application/json">
 				{
 					"requests": {
-						"pageViewWithConsentTest": "http://localhost:8000/receive",
-						"pageViewWithConsent": "\${additionalBase}"
+						"pageViewWithConsent": "\${additionalBase}&componentEvent=\${componentEvent}"
 					},
 					"triggers": {
 						"trackPageview": {
 							"on": "visible",
-							"request": "pageViewWithConsentTest"
-						}
-					},
-					"extraUrlParams": {
-						"componentEvent": {
-							"component": {
-								"componentType":"CONSENT",
-								"products": [],
-                                "labels":"['08:\${consentState}','09:\${consentString}']",
-								"action":"MANAGE_CONSENT"
+							"request": "pageViewWithConsent",
+							"vars": {
+								"componentEvent": "%7B%22componentEvent%22:%7B%22component%22:%7B%22componentType%22:%22CONSENT%22,%22products%22:%5B%5D,%22labels%22:%22%5B'08:\${consentState}','09:\${consentString}'%5D%22%7D,%22action%22:%22MANAGE_CONSENT%22%7D%7D"
 							}
 						}
 					},
 					"transport": {
-						"beacon": true,
-						"xhrpost": true,
-						"useBody": true,
-						"image": false
+						"beacon": false,
+						"xhrpost": false,
+						"useBody": false,
+						"image": true
 					}
 				}
 			</script>
