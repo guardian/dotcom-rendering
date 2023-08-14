@@ -4,12 +4,12 @@ import { neutral, space } from '@guardian/source-foundations';
 import { SvgPlus } from '@guardian/source-react-components';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
-import { Comments } from '../discussion-rendering/Comments';
-import type { SignedInUser } from '../discussion-rendering/discussionTypes';
 import { decidePalette } from '../lib/decidePalette';
 import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
 import { useDiscussion } from '../lib/useDiscussion';
+import type { SignedInUser } from '../types/discussion';
+import { Comments } from './Discussion/Comments';
 import { Hide } from './Hide';
 import { SignedInAs } from './SignedInAs';
 
