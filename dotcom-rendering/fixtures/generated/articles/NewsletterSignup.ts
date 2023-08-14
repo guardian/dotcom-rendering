@@ -1690,7 +1690,7 @@ export const NewsletterSignup: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'bcd31441-5f99-489a-a43e-85e9aaa9335b',
+			elementId: '64905fba-06f6-4f5d-b575-2c6d9cefc412',
 		},
 	],
 	canonicalUrl:
@@ -1702,7 +1702,7 @@ export const NewsletterSignup: FEArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our newsletter, which will now run twice-weekly through the World Cup in Australia and New Zealand. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: 'ca6613db-2b10-404f-b476-b48c1d7311ea',
+					elementId: 'd6b5c0d6-ead3-4143-8ea0-4ce02b4a5d17',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1713,22 +1713,22 @@ export const NewsletterSignup: FEArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: '74365621-1563-4f1a-9f09-21d80bebd07b',
+					elementId: 'ec06a340-1bf8-42e3-a5c6-59d916b26dd0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul>\n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li>\n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li>\n</ul>',
-					elementId: 'b79ee5ae-0ab1-4fe1-9bff-15ecc6030fe7',
+					elementId: '5fd27c33-8513-46c1-8032-f346918dc478',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: '5353f39a-d28d-4c3d-af22-99972bc6262a',
+					elementId: '73b5d2a0-8772-478e-92c1-a1e4703d71d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '3678ef42-c0cf-477f-a58f-af0746d9a438',
+					elementId: '98e6ceb9-43b7-4e71-97a7-b05dfb25251b',
 				},
 			],
 			attributes: {

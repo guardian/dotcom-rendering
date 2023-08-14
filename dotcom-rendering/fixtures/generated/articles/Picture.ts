@@ -1662,7 +1662,7 @@ export const Picture: FEArticleType = {
 					],
 				},
 			],
-			elementId: 'd6a38c7c-6359-44d4-b990-34a87667c32d',
+			elementId: '3ef72f59-e961-42a4-b484-baaa0a49f25c',
 		},
 	],
 	canonicalUrl:
