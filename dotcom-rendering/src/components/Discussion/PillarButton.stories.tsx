@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
 import { SvgCheckmark } from '@guardian/source-react-components';
 import { PillarButton } from './PillarButton';
@@ -15,13 +15,27 @@ const Space = ({ amount }: { amount: 1 | 2 | 3 | 4 | 5 | 6 | 9 | 12 | 24 }) => (
 
 export default { component: PillarButton, title: 'Discussion/PillarButton' };
 
+const makeFormatForPillar = (pillar: Pillar): ArticleFormat => ({
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: pillar,
+});
+
+const formats = {
+	lifestyle: makeFormatForPillar(Pillar.Lifestyle),
+	sport: makeFormatForPillar(Pillar.Sport),
+	news: makeFormatForPillar(Pillar.News),
+	opinion: makeFormatForPillar(Pillar.Opinion),
+	culture: makeFormatForPillar(Pillar.Culture),
+} as const;
+
 export const EachPillar = () => (
 	<Row>
 		<PillarButton
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Lifestyle}
+			format={formats.lifestyle}
 			linkName=""
 		>
 			Lifestyle
@@ -31,7 +45,7 @@ export const EachPillar = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Sport}
+			format={formats.sport}
 			linkName=""
 		>
 			Sport
@@ -41,7 +55,7 @@ export const EachPillar = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			linkName=""
 		>
 			News
@@ -51,7 +65,7 @@ export const EachPillar = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Opinion}
+			format={formats.opinion}
 			linkName=""
 		>
 			Opinion
@@ -61,7 +75,7 @@ export const EachPillar = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Culture}
+			format={formats.culture}
 			linkName=""
 		>
 			Culture
@@ -76,7 +90,7 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			linkName=""
 			size="xsmall"
 		>
@@ -87,7 +101,7 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			linkName=""
 			size="small"
 		>
@@ -98,7 +112,7 @@ export const EachSize = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			linkName=""
 			size="default"
 		>
@@ -113,7 +127,7 @@ export const IconLeft = () => (
 		onClick={() => {
 			alert('Clicked!');
 		}}
-		pillar={Pillar.Lifestyle}
+		format={formats.lifestyle}
 		icon={<SvgCheckmark />}
 		iconSide="left"
 		linkName="left"
@@ -128,7 +142,7 @@ export const IconRight = () => (
 		onClick={() => {
 			alert('Clicked!');
 		}}
-		pillar={Pillar.Sport}
+		format={formats.sport}
 		icon={<SvgCheckmark />}
 		iconSide="right"
 		linkName=""
@@ -143,7 +157,7 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Lifestyle}
+			format={formats.lifestyle}
 			priority="secondary"
 			linkName=""
 		>
@@ -154,7 +168,7 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Sport}
+			format={formats.sport}
 			priority="secondary"
 			linkName=""
 		>
@@ -165,7 +179,7 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			priority="secondary"
 			linkName=""
 		>
@@ -176,7 +190,7 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Opinion}
+			format={formats.opinion}
 			priority="secondary"
 			linkName=""
 		>
@@ -187,7 +201,7 @@ export const Secondary = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Culture}
+			format={formats.culture}
 			priority="secondary"
 			linkName=""
 		>
@@ -203,7 +217,7 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Lifestyle}
+			format={formats.lifestyle}
 			priority="subdued"
 			linkName=""
 		>
@@ -214,7 +228,7 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Sport}
+			format={formats.sport}
 			priority="subdued"
 			linkName=""
 		>
@@ -225,7 +239,7 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.News}
+			format={formats.news}
 			priority="subdued"
 			linkName=""
 		>
@@ -236,7 +250,7 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Opinion}
+			format={formats.opinion}
 			priority="subdued"
 			linkName=""
 		>
@@ -247,7 +261,7 @@ export const Subdued = () => (
 			onClick={() => {
 				alert('Clicked!');
 			}}
-			pillar={Pillar.Culture}
+			format={formats.culture}
 			priority="subdued"
 			linkName=""
 		>

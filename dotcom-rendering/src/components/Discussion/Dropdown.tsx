@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -10,15 +9,14 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { palette } from '../../lib/discussionPalette';
-import { pillarToString } from '../../lib/pillarToString';
+import { decidePalette } from '../../lib/decidePalette';
 import type { DropdownOptionType } from '../../types/discussion';
 
 type Props = {
 	id: string;
 	label: string;
 	options: DropdownOptionType[];
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	onSelect: (value: string) => void;
 };
 
@@ -86,12 +84,12 @@ const firstStyles = css`
 	margin-top: 0;
 `;
 
-const activeStyles = (pillar: ArticleTheme) => css`
+const activeStyles = (format: ArticleFormat) => css`
 	font-weight: bold;
 
 	:after {
 		content: '';
-		border: 2px solid ${palette[pillarToString(pillar)][400]};
+		border: 2px solid ${decidePalette(format).discussionGeneric};
 		border-top: 0px;
 		border-right: 0px;
 		position: absolute;
@@ -154,7 +152,7 @@ const labelStyles = css`
 	color: ${neutral[46]};
 `;
 
-export const Dropdown = ({ id, label, options, pillar, onSelect }: Props) => {
+export const Dropdown = ({ id, label, options, format, onSelect }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	useEffect(() => {
@@ -211,7 +209,7 @@ export const Dropdown = ({ id, label, options, pillar, onSelect }: Props) => {
 							onClick={() => onSelect(option.value)}
 							css={[
 								linkStyles(!!option.disabled),
-								option.isActive && activeStyles(pillar),
+								option.isActive && activeStyles(format),
 								index === 0 && firstStyles,
 							]}
 							disabled={!!option.isActive || !!option.disabled}

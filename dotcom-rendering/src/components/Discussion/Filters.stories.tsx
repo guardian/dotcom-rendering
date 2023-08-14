@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import { useState } from 'react';
 import type { FilterOptions } from '../../types/discussion';
 import { Filters } from './Filters';
@@ -13,7 +13,11 @@ export const Default = () => {
 	});
 	return (
 		<Filters
-			pillar={Pillar.Culture}
+			format={{
+				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+			}}
 			filters={filters}
 			onFilterChange={setFilters}
 			totalPages={5}

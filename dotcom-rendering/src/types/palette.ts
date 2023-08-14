@@ -101,6 +101,7 @@ export type Palette = {
 		pullQuote: Colour;
 		lightboxDivider: Colour;
 		messageForm: Colour;
+		discussionPillarButton: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -152,7 +153,7 @@ export type Palette = {
 		summaryEventBullet: Colour;
 		pagination: Colour;
 	};
-	discussion: Colour;
+	discussionGeneric: Colour;
 };
 
 export type ContainerOverrides = {

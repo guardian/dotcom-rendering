@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import type {
 	SignedInWithCookies,
@@ -9,7 +8,7 @@ import type { CommentType, UserProfile } from '../../types/discussion';
 import { TopPick } from './TopPick';
 
 type Props = {
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	user?: UserProfile;
 	comments: CommentType[];
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
@@ -51,7 +50,7 @@ const oneColCommentsStyles = css`
 `;
 
 export const TopPicks = ({
-	pillar,
+	format,
 	user,
 	comments,
 	authStatus,
@@ -71,7 +70,7 @@ export const TopPicks = ({
 					{leftColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							pillar={pillar}
+							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -87,7 +86,7 @@ export const TopPicks = ({
 					{rightColComments.map((comment) => (
 						<TopPick
 							key={comment.id}
-							pillar={pillar}
+							format={format}
 							comment={comment}
 							authStatus={authStatus}
 							userMadeComment={
@@ -104,7 +103,7 @@ export const TopPicks = ({
 				{comments.map((comment) => (
 					<TopPick
 						key={comment.id}
-						pillar={pillar}
+						format={format}
 						comment={comment}
 						authStatus={authStatus}
 						userMadeComment={

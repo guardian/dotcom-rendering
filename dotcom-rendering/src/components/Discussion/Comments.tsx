@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { type ArticleTheme, isString, storage } from '@guardian/libs';
+import { isString, storage } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import {
@@ -29,7 +29,7 @@ import { TopPicks } from './TopPicks';
 type Props = {
 	shortUrl: string;
 	baseUrl: string;
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	isClosedForComments: boolean;
 	commentToScrollTo?: number;
 	initialPage?: number;
@@ -181,7 +181,7 @@ const writeMutes = (mutes: string[]) => {
 export const Comments = ({
 	baseUrl,
 	shortUrl,
-	pillar,
+	format,
 	isClosedForComments,
 	initialPage,
 	commentToScrollTo,
@@ -380,7 +380,7 @@ export const Comments = ({
 				{picks.length !== 0 ? (
 					<div css={picksWrapper}>
 						<TopPicks
-							pillar={pillar}
+							format={format}
 							comments={picks.slice(0, 2)}
 							authStatus={user?.authStatus}
 							onPermalinkClick={onPermalinkClick}
@@ -390,7 +390,7 @@ export const Comments = ({
 				) : (
 					<>
 						<Filters
-							pillar={pillar}
+							format={format}
 							filters={filters}
 							onFilterChange={onFilterChange}
 							totalPages={totalPages}
@@ -415,7 +415,7 @@ export const Comments = ({
 									<li key={comment.id}>
 										<CommentContainer
 											comment={comment}
-											pillar={pillar}
+											format={format}
 											isClosedForComments={
 												isClosedForComments
 											}
@@ -447,7 +447,7 @@ export const Comments = ({
 		<div data-component="discussion" css={commentColumnWrapperStyles}>
 			{user && !isClosedForComments && (
 				<CommentForm
-					pillar={pillar}
+					format={format}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}
@@ -458,7 +458,7 @@ export const Comments = ({
 			)}
 			{!!picks.length && (
 				<TopPicks
-					pillar={pillar}
+					format={format}
 					comments={picks}
 					authStatus={user?.authStatus}
 					onPermalinkClick={onPermalinkClick}
@@ -466,7 +466,7 @@ export const Comments = ({
 				/>
 			)}
 			<Filters
-				pillar={pillar}
+				format={format}
 				filters={filters}
 				onFilterChange={onFilterChange}
 				totalPages={totalPages}
@@ -495,7 +495,7 @@ export const Comments = ({
 							<li key={comment.id}>
 								<CommentContainer
 									comment={comment}
-									pillar={pillar}
+									format={format}
 									isClosedForComments={isClosedForComments}
 									shortUrl={shortUrl}
 									user={user}
@@ -533,7 +533,7 @@ export const Comments = ({
 			)}
 			{user && !isClosedForComments && comments.length > 10 && (
 				<CommentForm
-					pillar={pillar}
+					format={format}
 					shortUrl={shortUrl}
 					onAddComment={onAddComment}
 					user={user}

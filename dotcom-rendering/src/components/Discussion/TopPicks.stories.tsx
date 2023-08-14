@@ -1,9 +1,15 @@
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { SignedInWithCookies } from '../../lib/useAuthStatus';
 import type { CommentType } from '../../types/discussion';
 import { TopPicks } from './TopPicks';
 
 export default { component: TopPicks, title: 'Discussion/TopPicks' };
+
+const format = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: Pillar.News,
+};
 
 const comment: CommentType = {
 	id: 25488498,
@@ -53,7 +59,7 @@ const signedInStatus: SignedInWithCookies = { kind: 'SignedInWithCookies' };
 
 export const SingleComment = () => (
 	<TopPicks
-		pillar={Pillar.News}
+		format={format}
 		comments={[commentWithShortBody]}
 		authStatus={signedInStatus}
 		onPermalinkClick={() => {}}
@@ -63,7 +69,7 @@ SingleComment.storyName = 'Single Comment';
 
 export const MulitColumn = () => (
 	<TopPicks
-		pillar={Pillar.Culture}
+		format={format}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,
@@ -78,7 +84,7 @@ MulitColumn.storyName = 'Mulitple Columns Comments';
 
 export const SingleColumn = () => (
 	<TopPicks
-		pillar={Pillar.Sport}
+		format={format}
 		comments={[
 			commentWithLongBody,
 			commentWithShortBody,

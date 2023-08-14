@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Pillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, Pillar } from '@guardian/libs';
 import type { CommentType } from '../../types/discussion';
 import { CommentReplyPreview, Preview } from './CommentReplyPreview';
 
@@ -52,7 +52,11 @@ const padding = css`
 
 export const Default = () => (
 	<CommentReplyPreview
-		pillar={Pillar.News}
+		format={{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: Pillar.News,
+		}}
 		commentBeingRepliedTo={commentBeingRepliedTo}
 	/>
 );

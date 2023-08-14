@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
 import {
 	brand,
 	from,
@@ -8,8 +7,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { palette } from '../../lib/discussionPalette';
-import { pillarToString } from '../../lib/pillarToString';
+import { decidePalette } from '../../lib/decidePalette';
 import type {
 	SignedInWithCookies,
 	SignedInWithOkta,
@@ -23,7 +21,7 @@ import { Row } from './Row';
 import { Timestamp } from './Timestamp';
 
 type Props = {
-	pillar: ArticleTheme;
+	format: ArticleFormat;
 	comment: CommentType;
 	authStatus?: SignedInWithCookies | SignedInWithOkta;
 	userMadeComment: boolean;
@@ -52,11 +50,11 @@ const pickStyles = css`
 const arrowSize = 25;
 const bg = neutral[93];
 
-const userNameStyles = (pillar: ArticleTheme) => css`
+const userNameStyles = (format: ArticleFormat) => css`
 	margin-top: 3px;
 	margin-bottom: -6px;
 	font-weight: bold;
-	color: ${palette[pillarToString(pillar)][400]};
+	color: ${decidePalette(format).discussionGeneric};
 `;
 
 const avatarMargin = css`
@@ -165,7 +163,7 @@ const truncateText = (input: string, limit: number) => {
 };
 
 export const TopPick = ({
-	pillar,
+	format,
 	comment,
 	authStatus,
 	userMadeComment,
@@ -220,7 +218,7 @@ export const TopPick = ({
 						/>
 					</div>
 					<Column>
-						<span css={userNameStyles(pillar)}>
+						<span css={userNameStyles(format)}>
 							<a
 								href={comment.userProfile.webUrl}
 								css={[linkStyles, inheritColour]}
