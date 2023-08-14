@@ -238,6 +238,10 @@ const frontsBannerAdContainerStyles = css`
 	}
 `;
 
+const frontsBannerCollapseStyles = css`
+	display: none;
+`;
+
 const frontsBannerAdStyles = css`
 	max-width: ${breakpoints['wide']}px;
 	overflow: hidden;
@@ -616,14 +620,14 @@ export const AdSlot = ({
 			);
 		}
 		case 'fronts-banner': {
-			const advertId = `fronts-banner-${index + 1}`;
+			const advertId = `fronts-banner-${index}`;
 			return (
 				<div
 					className="ad-slot-container"
 					css={[
-						hasPageskin && pageSkinContainer,
 						adContainerStyles,
 						frontsBannerAdContainerStyles,
+						hasPageskin && frontsBannerCollapseStyles,
 					]}
 				>
 					<div
@@ -633,6 +637,7 @@ export const AdSlot = ({
 							'ad-slot',
 							`ad-slot--${advertId}`,
 							'ad-slot--rendered',
+							hasPageskin && 'ad-slot--collapse',
 						].join(' ')}
 						css={[
 							fluidAdStyles,

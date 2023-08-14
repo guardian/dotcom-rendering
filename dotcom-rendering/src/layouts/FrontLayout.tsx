@@ -12,7 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Fragment } from 'react';
+import { Fragment, useRef } from 'react';
 import { AdSlot } from '../components/AdSlot';
 import { Carousel } from '../components/Carousel.importable';
 import { CPScottHeader } from '../components/CPScottHeader';
@@ -128,6 +128,7 @@ export const decideFrontsBannerAdSlot = (
 	isInFrontsBannerTest: boolean,
 	pageId: string,
 	collectionName: string,
+	numBannerAdsInserted: React.MutableRefObject<number>,
 ) => {
 	// We're not using contentType === "Network Front", just
 	// in case Europe goes live before the testing concludes.
@@ -144,13 +145,13 @@ export const decideFrontsBannerAdSlot = (
 		return null;
 	}
 
-	const adIndex = targetedSections.findIndex((ad) => ad === collectionName);
+	numBannerAdsInserted.current = numBannerAdsInserted.current + 1;
 
 	return (
 		<AdSlot
 			data-print-layout="hide"
 			position="fronts-banner"
-			index={adIndex}
+			index={numBannerAdsInserted.current}
 			hasPageskin={hasPageSkin}
 		/>
 	);
@@ -225,6 +226,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const desktopAdPositions = renderAds
 		? getDesktopAdPositions(front.pressedPage.collections)
 		: [];
+
+	const numBannerAdsInserted = useRef(0);
 
 	const renderMpuAds = !isInFrontsBannerTest && renderAds;
 
@@ -421,6 +424,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										isInFrontsBannerTest,
 										front.config.pageId,
 										collection.displayName,
+										numBannerAdsInserted,
 									)}
 									{!!trail.embedUri && (
 										<SnapCssSandbox
@@ -481,6 +485,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInFrontsBannerTest,
 									front.config.pageId,
 									collection.displayName,
+									numBannerAdsInserted,
 								)}
 								<FrontSection
 									toggleable={true}
@@ -592,6 +597,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									isInFrontsBannerTest,
 									front.config.pageId,
 									collection.displayName,
+									numBannerAdsInserted,
 								)}
 								<Section
 									title={collection.displayName}
@@ -660,6 +666,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								isInFrontsBannerTest,
 								front.config.pageId,
 								collection.displayName,
+								numBannerAdsInserted,
 							)}
 							<FrontSection
 								title={collection.displayName}
