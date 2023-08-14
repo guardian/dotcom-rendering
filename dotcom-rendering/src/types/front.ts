@@ -1,6 +1,7 @@
 import type { ArticleSpecial, Pillar } from '@guardian/libs';
 import type { SharedAdTargeting } from '../lib/ad-targeting';
 import type { EditionId } from '../lib/edition';
+import type { Tuple } from '../lib/tuple';
 import type { DCRBadgeType } from './badge';
 import type { Branding } from './branding';
 import type { ServerSideTests, Switches } from './config';
@@ -316,11 +317,13 @@ export type DCRFrontCard = {
 	isExternalLink: boolean;
 	embedUri?: string;
 	branding?: Branding;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshow;
 	showLivePlayable: boolean;
 };
 
-export type DCRSlideshowImage = {
+export type DCRSlideshow = Tuple<DCRSlideshowImage, 1 | 2 | 3 | 4 | 5>;
+
+type DCRSlideshowImage = {
 	imageSrc: string;
 	imageCaption?: string;
 };

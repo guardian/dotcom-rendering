@@ -9,7 +9,7 @@ import type { Branding } from '../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
-	DCRSlideshowImage,
+	DCRSlideshow,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../types/front';
@@ -17,7 +17,8 @@ import type { MainMedia } from '../../types/mainMedia';
 import type { Palette } from '../../types/palette';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import { CardPicture, Loading } from '../CardPicture';
+import type { Loading } from '../CardPicture';
+import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { Island } from '../Island';
 import { LatestLinks } from '../LatestLinks.importable';
@@ -91,7 +92,7 @@ export type Props = {
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
 	isExternalLink: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshow;
 	showLivePlayable?: boolean;
 	onwardsSource?: string;
 	pauseOffscreenVideo?: boolean;
@@ -202,7 +203,7 @@ const getMedia = ({
 	imageAltText?: string;
 	avatarUrl?: string;
 	isCrossword?: boolean;
-	slideshowImages?: DCRSlideshowImage[];
+	slideshowImages?: DCRSlideshow;
 	mainMedia?: MainMedia;
 	isPlayableMediaCard?: boolean;
 }) => {

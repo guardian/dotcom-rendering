@@ -7,8 +7,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { takeFirst } from '../lib/tuple';
-import type { DCRSlideshowImage } from '../types/front';
+import type { DCRSlideshow } from '../types/front';
 import type { ImageSizeType } from './Card/components/ImageWrapper';
 import { CardPicture } from './CardPicture';
 
@@ -143,14 +142,14 @@ export const Slideshow = ({
 	fade = 1,
 	display = 5,
 }: {
-	images: readonly DCRSlideshowImage[];
+	images: DCRSlideshow;
 	imageSize: ImageSizeType;
 	fade?: number;
 	display?: number;
 	isDynamo?: boolean;
 }) => (
 	<>
-		{takeFirst(images, 5).map((slideshowImage, index, { length }) => {
+		{images.map((slideshowImage, index, { length }) => {
 			const isNotFirst = index > 0;
 			const loading = isNotFirst ? 'lazy' : 'eager';
 

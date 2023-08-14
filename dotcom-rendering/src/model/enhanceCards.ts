@@ -4,10 +4,11 @@ import { decideFormat } from '../lib/decideFormat';
 import type { EditionId } from '../lib/edition';
 import type { Group } from '../lib/getDataLinkName';
 import { getDataLinkNameCard } from '../lib/getDataLinkName';
+import { takeFirst } from '../lib/tuple';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
-	DCRSlideshowImage,
+	DCRSlideshow,
 	DCRSupportingContent,
 	FEFrontCard,
 	FEMediaAtom,
@@ -146,15 +147,12 @@ const decideKicker = (
 
 const decideSlideshowImages = (
 	trail: FEFrontCard,
-): DCRSlideshowImage[] | undefined => {
-	const assets = trail.properties.image?.item.assets;
+): DCRSlideshow | undefined => {
+	const assets = takeFirst(trail.properties.image?.item.assets ?? [], 5);
 	const shouldShowSlideshow =
 		trail.properties.image?.type === 'ImageSlideshow' &&
 		trail.properties.imageSlideshowReplace;
-	if (shouldShowSlideshow && assets && assets.length > 0) {
-		return assets;
-	}
-	return undefined;
+	return shouldShowSlideshow && assets.length != 0 ? assets : undefined;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {

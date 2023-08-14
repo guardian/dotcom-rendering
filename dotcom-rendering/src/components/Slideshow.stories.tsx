@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { breakpoints, space } from '@guardian/source-foundations';
 import type { PropsWithChildren } from 'react';
-import type { DCRSlideshowImage } from '../types/front';
+import type { DCRSlideshow } from '../types/front';
 import { Slideshow } from './Slideshow';
 
 export default {
@@ -23,7 +23,7 @@ const one = [
 		imageSrc:
 			'https://media.guim.co.uk/d9ede9177cd8a01c7a7e87da54fb15e0615adf20/0_1597_6000_3599/master/6000.jpg',
 	},
-] as const satisfies readonly DCRSlideshowImage[];
+] as const satisfies DCRSlideshow;
 
 const two = [
 	{
@@ -36,7 +36,7 @@ const two = [
 			'https://media.guim.co.uk/fe310d0ab79125e2f55680b02b9347e45832e1f0/0_0_4800_3536/master/4800.jpg',
 		imageCaption: 'Dog Splash',
 	},
-] as const satisfies readonly DCRSlideshowImage[];
+] as const satisfies DCRSlideshow;
 
 const six = [
 	{
@@ -59,11 +59,7 @@ const six = [
 		imageSrc:
 			'https://media.guim.co.uk/cc9dc53d0eff3b047c6d045fa49cb48846a860b3/0_36_2048_1500/2048.jpg',
 	},
-	{
-		imageSrc:
-			'https://media.guim.co.uk/ed66e9dc6a84de6bc0afe1965833f0fa4047c22d/0_324_3500_2100/3500.jpg',
-	},
-] as const satisfies readonly DCRSlideshowImage[];
+] as const satisfies DCRSlideshow;
 
 const wrapper = css`
 	margin: ${space[3]}px;
@@ -85,13 +81,6 @@ const Wrapper = ({
 	>
 		{children}
 	</div>
-);
-
-/** this one makes no sense, but it’s technically possible so let’s capture it */
-export const WithoutAnyImage = () => (
-	<Wrapper maxWidth={480}>
-		<Slideshow images={[]} imageSize="medium" />
-	</Wrapper>
 );
 
 /** this one makes no sense, but it’s technically possible so let’s capture it */
