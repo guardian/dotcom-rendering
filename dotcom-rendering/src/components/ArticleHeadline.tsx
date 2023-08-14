@@ -378,7 +378,7 @@ export const ArticleHeadline = ({
 							</WithAgeWarning>
 						</div>
 					);
-				// case ArticleDesign.Comment:
+				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (

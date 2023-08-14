@@ -1,8 +1,8 @@
 import { css, jsx } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, palette, space } from '@guardian/source-foundations';
 import { pageSkinContainer } from '../layouts/lib/pageSkin';
 import { center } from '../lib/center';
-import { ArticleDesign } from '@guardian/libs';
 
 const sidePadding = css`
 	padding-left: 10px;
@@ -33,6 +33,14 @@ const setBackgroundColour = (colour: string) => css`
 	background-color: ${colour};
 `;
 
+//Previously, borderColour would be set to palette.neutral[86] if the parameter being passed was undefined. We still want this as a fallback, but not for ArticleDesign.Picture pages (and probably not for any future pages with a similar design).
+//Setting this to #333 for parity with existing design.
+const decideFallbackBorderColour = (format: ArticleFormat | undefined) => {
+	return format?.design === ArticleDesign.Picture
+		? '#333'
+		: palette.neutral[86];
+};
+
 type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
@@ -60,13 +68,6 @@ type Props = {
 	hasPageSkin?: boolean;
 	hasPageSkinContentSelfConstrain?: boolean;
 	format?: ArticleFormat;
-};
-
-const decideFallbackBorderColour = (format: ArticleFormat | undefined) => {
-	console.log('here', format);
-	return format?.design === ArticleDesign.Picture
-		? '#333'
-		: palette.neutral[86];
 };
 
 /**

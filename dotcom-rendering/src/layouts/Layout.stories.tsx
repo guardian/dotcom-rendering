@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Analysis } from '../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../fixtures/generated/articles/Audio';
 import { Comment } from '../../fixtures/generated/articles/Comment';
+import { Picture } from '../../fixtures/generated/articles/CurrentCartoons';
 import { Editorial } from '../../fixtures/generated/articles/Editorial';
 import { Explainer } from '../../fixtures/generated/articles/Explainer';
 import { Feature } from '../../fixtures/generated/articles/Feature';
@@ -31,7 +32,6 @@ import { extractNAV } from '../model/extract-nav';
 import type { FEArticleType } from '../types/frontend';
 import type { RenderingTarget } from '../types/renderingTarget';
 import { DecideLayout } from './DecideLayout';
-import { Picture } from '../../fixtures/generated/articles/CurrentCartoons';
 
 const Fixtures: { [key: string]: FEArticleType } = {
 	Standard,

@@ -11,6 +11,7 @@ import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
+import { CartoonComponent } from '../components/CartoonComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
@@ -67,7 +68,6 @@ import { getSharingUrls } from '../lib/sharing-urls';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { FEElement, RoleType } from '../types/content';
 import { decidePalette } from './decidePalette';
-import { CartoonComponent } from '../components/CartoonComponent';
 
 type Props = {
 	format: ArticleFormat;

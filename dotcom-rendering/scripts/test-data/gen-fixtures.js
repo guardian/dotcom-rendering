@@ -118,7 +118,7 @@ const articles = [
 		url: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	},
 	{
-		name: 'CurrentCartoons',
+		name: 'Picture',
 		url: 'https://www.theguardian.com/commentisfree/picture/2021/apr/25/nicola-jennings-no-10-boris-johnson-conservatives-sleaze-scandal-cartoon',
 	},
 ];

@@ -242,8 +242,6 @@ export const ShowcaseLayout = ({
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
-	console.log('format', format);
-
 	return (
 		<>
 			{!isLabs ? (

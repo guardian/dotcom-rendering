@@ -1338,7 +1338,6 @@ const borderSubNav = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
-
 	return pillarPalette[format.theme].main;
 };
 
