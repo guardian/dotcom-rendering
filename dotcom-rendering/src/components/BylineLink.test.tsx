@@ -8,7 +8,7 @@ import {
 	SPECIAL_REGEX_CHARACTERS,
 } from './BylineLink';
 
-jest.mock('../lib/bridgetApi', () => jest.fn());
+jest.mock('../lib/bridgetApi', jest.fn());
 
 describe('SPECIAL_REGEX_CHARACTERS', () => {
 	it('Correctly match all special regex characters', () => {
