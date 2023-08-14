@@ -42,22 +42,15 @@ Parameters:
   InstanceType:
     Type: String
     Description: EC2 Instance Type to use for dotcom-rendering
-  AutoscalingGroup:
-    Description: Name of the Autoscaling group
-    Type: String
   InternalLoadBalancer:
     Description: Id of internal load balancer
     Type: String
   InstanceRole:
     Description: Name of instance role
     Type: String
-  # ! These params are not used but should be kept until the migration is finished
-  ELKStream:
-    Description: name of the kinesis stream to use to send logs to the central ELK stack
-    Type: String
-  AMI:
-    Description: AMI to use for instances
-    Type: AWS::EC2::Image::Id
+  LaunchTemplate:
+    Description: ID of the launch template
+    Type: AWS::EC2::LaunchTemplate
 
 Conditions:
   HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
@@ -69,6 +62,13 @@ Mappings:
       Value: frontend
     App:
       Value: rendering
+  StageMap:
+    PROD:
+      MinCapacity: 15
+      MaxCapacity: 60
+    CODE:
+      MinCapacity: 1
+      MaxCapacity: 4
 
 Resources:
   InstanceProfile:
@@ -77,6 +77,34 @@ Resources:
       Path: /
       Roles:
         - Ref: InstanceRole
+
+  AutoscalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones: !GetAZs ''
+      VPCZoneIdentifier:
+        Ref: Subnets
+      LaunchTemplate:
+        Ref: LaunchTemplate
+      MinSize: !FindInMap [StageMap, !Ref Stage, MinCapacity]
+      MaxSize: !FindInMap [StageMap, !Ref Stage, MaxCapacity]
+      HealthCheckType: ELB
+      HealthCheckGracePeriod: 120
+      LoadBalancerNames:
+        - Ref: InternalLoadBalancer
+      Tags:
+        - Key: Stage
+          Value:
+            Ref: Stage
+          PropagateAtLaunch: true
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+          PropagateAtLaunch: true
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
+          PropagateAtLaunch: true
 
   ScaleDownPolicy:
     Type: AWS::AutoScaling::ScalingPolicy

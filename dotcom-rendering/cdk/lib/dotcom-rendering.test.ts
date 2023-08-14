@@ -14,11 +14,9 @@ describe('The DotcomRendering stack', () => {
 			stack: 'frontend',
 			stage: 'TEST',
 			app: 'rendering',
-			minCapacity: 1,
-			maxCapacity: 4,
-			instanceType: 't4g.micro',
 			region: 'eu-west-1',
-			amiRecipe: 'amiRecipe',
+			amiRecipe: 'node-18',
+			instanceType: 't4g.micro',
 		});
 		const template = Template.fromStack(stack);
 		expect(template.toJSON()).toMatchSnapshot();

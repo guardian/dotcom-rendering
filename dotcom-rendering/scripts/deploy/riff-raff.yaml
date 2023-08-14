@@ -12,6 +12,14 @@ deployments:
         PROD: DotcomRendering-PROD.template.json
       cloudFormationStackByTags: false
       cloudFormationStackName: rendering
+<<<<<<< Updated upstream
+=======
+      templateStageParameters:
+        CODE:
+          InstanceType: t4g.micro
+        PROD:
+          InstanceType: t4g.small
+>>>>>>> Stashed changes
   rendering:
     type: autoscaling
     parameters:

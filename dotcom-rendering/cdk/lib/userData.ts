@@ -1,8 +1,4 @@
-import type { DCRProps } from './types';
-
-type UserDataProps = Pick<DCRProps, 'app' | 'region' | 'stage'> & {
-	elkStreamId: string;
-};
+import type { UserDataProps } from './types';
 
 /**
  * Returns user data configuration for instances in the rendering app

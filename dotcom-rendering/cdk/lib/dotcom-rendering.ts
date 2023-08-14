@@ -1,13 +1,14 @@
 import { join } from 'node:path';
-import { GuAutoScalingGroup } from '@guardian/cdk/lib/constructs/autoscaling';
 import {
 	GuAmiParameter,
 	GuStack,
 	GuStringParameter,
 } from '@guardian/cdk/lib/constructs/core';
 import {
+	GuHttpsEgressSecurityGroup,
 	GuSecurityGroup,
 	GuVpc,
+	GuWazuhAccess,
 	SubnetType,
 } from '@guardian/cdk/lib/constructs/ec2';
 import {
@@ -17,8 +18,14 @@ import {
 import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
-import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
-import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
+import type { MachineImageConfig } from 'aws-cdk-lib/aws-ec2';
+import {
+	InstanceType,
+	LaunchTemplate,
+	OperatingSystemType,
+	Peer,
+	UserData,
+} from 'aws-cdk-lib/aws-ec2';
 import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
@@ -37,6 +44,7 @@ export class DotcomRendering extends GuStack {
 		const vpcCidrBlock = '10.248.136.0/22';
 		const vpc = GuVpc.fromIdParameter(this, 'vpc', { vpcCidrBlock });
 		const publicSubnets = GuVpc.subnetsFromParameter(this, {
+			app,
 			type: SubnetType.PUBLIC,
 		});
 
@@ -183,38 +191,53 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const asg = new GuAutoScalingGroup(this, 'AutoscalingGroup', {
-			app,
-			vpc,
+		const elkStreamId = new GuStringParameter(this, 'ELKStreamId', {
+			fromSSM: true,
+			default: `${ssmPrefix}/logging.stream.name`,
+		}).valueAsString;
+
+		const userData = UserData.custom(
+			getUserData({ app, region, stage, elkStreamId }),
+		);
+
+		const launchTemplate = new LaunchTemplate(this, 'LaunchTemplate', {
+			launchTemplateName: `${stack}-${stage}-${app}`,
 			instanceType: new InstanceType(props.instanceType),
-			minimumInstances: props.minCapacity,
-			maximumInstances: props.maxCapacity,
-			healthCheck: HealthCheck.elb({ grace: Duration.minutes(2) }),
-			userData: getUserData({
+			machineImage: {
+				getImage: (): MachineImageConfig => {
+					return {
+						osType: OperatingSystemType.LINUX,
+						userData,
+						imageId: new GuAmiParameter(this, {
+							app,
+							fromSSM: true,
+							default: `${ssmPrefix}/ami.imageId`,
+						}).valueAsString,
+					};
+				},
+			},
+			// Do not use the default AWS security group which allows egress on any port.
+			// Favour HTTPS only egress rules by default.
+			securityGroup: GuHttpsEgressSecurityGroup.forVpc(this, {
 				app,
-				region,
-				stage,
-				elkStreamId: new GuStringParameter(this, 'ELKStreamId', {
-					fromSSM: true,
-					default: `${ssmPrefix}/logging.stream.name`,
-				}).valueAsString,
+				vpc,
 			}),
-			imageId: new GuAmiParameter(this, {
-				app,
-				fromSSM: true,
-				default: `${ssmPrefix}/ami.imageId`,
-			}),
-			imageRecipe: props.amiRecipe,
+			requireImdsv2: true,
+			userData,
 			role: instanceRole,
-			additionalSecurityGroups: [instanceSecurityGroup],
-			vpcSubnets: { subnets: publicSubnets },
-		});
-		this.overrideLogicalId(asg, {
-			logicalId: 'AutoscalingGroup',
-			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		asg.attachToClassicLB(loadBalancer);
+		// Add Wazuh & additional consumer specified Security Groups
+		// Note: Launch templates via CDK allow specifying only one SG, so use connections
+		// https://github.com/aws/aws-cdk/issues/18712
+		[GuWazuhAccess.getInstance(this, vpc), instanceSecurityGroup].forEach(
+			(sg) => launchTemplate.connections.addSecurityGroup(sg),
+		);
+
+		this.overrideLogicalId(launchTemplate, {
+			logicalId: 'LaunchTemplate',
+			reason: 'Retaining a stateful resource previously defined in YAML',
+		});
 
 		const yamlTemplateFilePath = join(
 			__dirname,
@@ -225,9 +248,9 @@ export class DotcomRendering extends GuStack {
 		new CfnInclude(this, 'YamlTemplate', {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
-				AutoscalingGroup: asg.autoScalingGroupName,
 				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
+				LaunchTemplate: launchTemplate.launchTemplateId,
 			},
 		});
 
