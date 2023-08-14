@@ -16,7 +16,7 @@ type Props = {
 	currentNavLink: string;
 	borderColour: string;
 	linkHoverColour: string;
-	textColour?: string;
+	subNavLinkColour?: string;
 };
 
 const wrapperCollapsedStyles = css`
@@ -55,12 +55,8 @@ const collapsedStyles = css`
 		max-width: calc(100% - 70px);
 	}
 `;
-// if (format.design === ArticleDesign.Picture) {
-// 	color palette.neutral[86]
-// }
-// else color = palette.neutral[7]
 
-const fontStyle = (textColour: string) => css`
+const fontStyle = (subNavLinkColour: string) => css`
 	${textSans.small()};
 	font-size: 14px;
 	${from.tablet} {
@@ -68,7 +64,7 @@ const fontStyle = (textColour: string) => css`
 		font-size: 16px;
 	}
 	font-weight: 500;
-	color: ${textColour};
+	color: ${subNavLinkColour};
 	padding: 0 5px;
 	height: 36px;
 	/* Design System: Line height is being used here for centering layout, we need the primitives */
@@ -152,7 +148,7 @@ export const SubNav = ({
 	currentNavLink,
 	borderColour,
 	linkHoverColour,
-	textColour,
+	subNavLinkColour = palette.neutral[7],
 }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -177,11 +173,6 @@ export const SubNav = ({
 	const collapseWrapper = !showMore || !isExpanded;
 	const expandSubNav = !showMore || isExpanded;
 
-	//todo: find a slightly better solution
-	const navTextColour = textColour ? textColour : palette.neutral[7];
-
-	console.log('subnav text', textColour);
-
 	return (
 		<div
 			data-print-layout="hide"
@@ -205,7 +196,7 @@ export const SubNav = ({
 							data-src-focus-disabled={true}
 							css={[
 								linkStyle(linkHoverColour),
-								fontStyle(navTextColour),
+								fontStyle(subNavLinkColour),
 							]}
 							href={subNavSections.parent.url}
 						>
@@ -229,7 +220,7 @@ export const SubNav = ({
 						<a
 							css={[
 								linkStyle(linkHoverColour),
-								fontStyle(navTextColour),
+								fontStyle(subNavLinkColour),
 							]}
 							data-src-focus-disabled={true}
 							href={link.url}

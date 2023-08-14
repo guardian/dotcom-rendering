@@ -343,7 +343,9 @@ export const ShowcaseLayout = ({
 												palette.text.articleLinkHover
 											}
 											borderColour={palette.border.subNav}
-											textColour={palette.text.subNavLink}
+											subNavLinkColour={
+												palette.text.subNavLink
+											}
 										/>
 									</Island>
 								</Section>
@@ -791,7 +793,7 @@ export const ShowcaseLayout = ({
 							currentNavLink={NAV.currentNavLink}
 							linkHoverColour={palette.text.articleLinkHover}
 							borderColour={palette.border.subNav}
-							textColour={palette.text.subNavLink}
+							subNavLinkColour={palette.text.subNavLink}
 						/>
 					</Island>
 				</Section>
