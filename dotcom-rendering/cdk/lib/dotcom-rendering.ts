@@ -14,11 +14,12 @@ import {
 	GuAllowPolicy,
 	GuInstanceRole,
 } from '@guardian/cdk/lib/constructs/iam';
+import { GuClassicLoadBalancer } from '@guardian/cdk/lib/constructs/loadbalancing';
 import type { App } from 'aws-cdk-lib';
 import { CfnOutput, Duration } from 'aws-cdk-lib';
 import { HealthCheck } from 'aws-cdk-lib/aws-autoscaling';
 import { InstanceType, Peer } from 'aws-cdk-lib/aws-ec2';
-import { CfnLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancing';
+import { LoadBalancingProtocol } from 'aws-cdk-lib/aws-elasticloadbalancing';
 import { CfnInclude } from 'aws-cdk-lib/cloudformation-include';
 import type { DCRProps } from './types';
 import { getUserData } from './userData';
@@ -66,36 +67,57 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
-		const lb = new CfnLoadBalancer(this, 'InternalLoadBalancer', {
-			listeners: [
-				{
-					instancePort: '9000',
-					protocol: 'HTTP',
-					loadBalancerPort: '80',
+		const loadBalancer = new GuClassicLoadBalancer(
+			this,
+			'InternalLoadBalancer',
+			{
+				app,
+				vpc,
+				accessLoggingPolicy: {
+					enabled: true,
+					s3BucketName: new GuStringParameter(
+						this,
+						'ELBLogsParameter',
+						{
+							default: `${ssmPrefix}/elb.logs.bucketName`,
+							fromSSM: true,
+							description: 'S3 Bucket Name for ELB logs',
+						},
+					).valueAsString,
+					emitInterval: 5,
+					s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
 				},
-			],
-			healthCheck: {
-				target: 'HTTP:9000/_healthcheck',
-				interval: '30',
-				timeout: '10',
-				unhealthyThreshold: '10',
-				healthyThreshold: '2',
+				crossZone: true,
+				healthCheck: {
+					interval: Duration.seconds(30),
+					port: 9000,
+					protocol: LoadBalancingProtocol.HTTP,
+					timeout: Duration.seconds(10),
+					healthyThreshold: 2,
+					unhealthyThreshold: 10,
+					path: '/_healthcheck',
+				},
+				listeners: [
+					{
+						externalPort: 80,
+						externalProtocol: LoadBalancingProtocol.HTTP,
+						internalPort: 9000,
+						internalProtocol: LoadBalancingProtocol.HTTP,
+					},
+				],
+				subnetSelection: { subnets: publicSubnets },
+				propertiesToOverride: {
+					LoadBalancerName: `${stack}-${stage}-${app}-ELB`,
+					// Note: this does not prevent the GuClassicLoadBalancer
+					// from creating a default security group, though it does
+					// override which one is used/associated with the load balancer
+					SecurityGroups: [lbSecurityGroup.securityGroupId],
+				},
 			},
-			subnets: publicSubnets.map((subnet) => subnet.subnetId),
-			scheme: 'internal',
-			securityGroups: [lbSecurityGroup.securityGroupId],
-			crossZone: true,
-			accessLoggingPolicy: {
-				enabled: true,
-				emitInterval: 5,
-				s3BucketName: new GuStringParameter(this, 'ELBLogsParameter', {
-					default: `${ssmPrefix}/elb.logs.bucketName`,
-					fromSSM: true,
-					description: 'S3 Bucket Name for ELB logs',
-				}).valueAsString,
-				s3BucketPrefix: `ELBLogs/${stack}/${app}/${stage}`,
-			},
-			loadBalancerName: `${stack}-${stage}-${app}-ELB`,
+		);
+		this.overrideLogicalId(loadBalancer, {
+			logicalId: 'InternalLoadBalancer',
+			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
 		const instanceSecurityGroup = new GuSecurityGroup(
@@ -192,6 +214,8 @@ export class DotcomRendering extends GuStack {
 			reason: 'Retaining a stateful resource previously defined in YAML',
 		});
 
+		asg.attachToClassicLB(loadBalancer);
+
 		const yamlTemplateFilePath = join(
 			__dirname,
 			'../..',
@@ -202,13 +226,13 @@ export class DotcomRendering extends GuStack {
 			templateFile: yamlTemplateFilePath,
 			parameters: {
 				AutoscalingGroup: asg.autoScalingGroupName,
-				InternalLoadBalancer: lb.ref,
+				InternalLoadBalancer: loadBalancer.loadBalancerName,
 				InstanceRole: instanceRole.roleName,
 			},
 		});
 
 		new CfnOutput(this, 'LoadBalancerUrl', {
-			value: lb.attrDnsName,
+			value: loadBalancer.loadBalancerDnsName,
 		});
 	}
 }
