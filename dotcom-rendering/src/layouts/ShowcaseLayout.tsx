@@ -499,6 +499,7 @@ export const ShowcaseLayout = ({
 									hasStarRating={
 										article.starRating !== undefined
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</PositionHeadline>
 						</GridItem>
@@ -543,6 +544,7 @@ export const ShowcaseLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>

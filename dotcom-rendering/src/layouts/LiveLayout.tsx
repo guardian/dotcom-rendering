@@ -446,6 +446,7 @@ export const LiveLayout = ({
 								webPublicationDateDeprecated={
 									article.webPublicationDateDeprecated
 								}
+								renderingTarget={renderingTarget}
 							/>
 						</Island>
 					</Section>
@@ -482,6 +483,7 @@ export const LiveLayout = ({
 												typeof article.starRating ===
 												'number'
 											}
+											renderingTarget={renderingTarget}
 										/>
 									)}
 								</div>
@@ -568,6 +570,7 @@ export const LiveLayout = ({
 												.serverShareCounts
 										}
 										messageUs={article.messageUs}
+										renderingTarget={renderingTarget}
 									/>
 								</div>
 							</Hide>
@@ -732,6 +735,7 @@ export const LiveLayout = ({
 													.serverShareCounts
 											}
 											messageUs={article.messageUs}
+											renderingTarget={renderingTarget}
 										/>
 									</div>
 								</Hide>

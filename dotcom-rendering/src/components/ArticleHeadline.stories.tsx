@@ -38,6 +38,7 @@ export const ArticleStory = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -64,6 +65,7 @@ export const Feature = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -96,6 +98,7 @@ export const ShowcaseInterview = () => {
 							tags={[]}
 							webPublicationDateDeprecated=""
 							byline="Byline text"
+							renderingTarget="Web"
 						/>
 					</div>
 					<MainMedia
@@ -140,6 +143,7 @@ export const ShowcaseInterviewNobyline = () => {
 							tags={[]}
 							webPublicationDateDeprecated=""
 							byline=""
+							renderingTarget="Web"
 						/>
 					</div>
 					<MainMedia
@@ -179,6 +183,7 @@ export const Interview = () => {
 						tags={[]}
 						webPublicationDateDeprecated=""
 						byline="Byline text"
+						renderingTarget="Web"
 					/>
 					<Standfirst
 						format={format}
@@ -221,6 +226,7 @@ export const InterviewSpecialReport = () => {
 						tags={[]}
 						webPublicationDateDeprecated=""
 						byline="Byline text"
+						renderingTarget="Web"
 					/>
 					<Standfirst
 						format={format}
@@ -264,6 +270,7 @@ export const InterviewNoByline = () => {
 						tags={[]}
 						webPublicationDateDeprecated=""
 						byline=""
+						renderingTarget="Web"
 					/>
 					<Standfirst
 						format={format}
@@ -305,6 +312,7 @@ export const Comment = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -342,6 +350,7 @@ export const Analysis = () => {
 									format={format(theme)}
 									tags={[]}
 									webPublicationDateDeprecated=""
+									renderingTarget="Web"
 								/>
 							</ArticleContainer>
 						</Flex>
@@ -372,6 +381,7 @@ export const Gallery = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -398,6 +408,7 @@ export const Review = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -424,6 +435,7 @@ export const PhotoEssay = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -450,6 +462,7 @@ export const Explainer = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -476,6 +489,7 @@ export const Quiz = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -502,6 +516,7 @@ export const Recipe = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -528,6 +543,7 @@ export const Immersive = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -554,6 +570,7 @@ export const ImmersiveNoMainMedia = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -585,6 +602,7 @@ export const ImmersiveComment = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -611,6 +629,7 @@ export const Editorial = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -637,6 +656,7 @@ export const MatchReport = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -663,6 +683,7 @@ export const SpecialReport = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -689,6 +710,7 @@ export const SpecialReportAlt = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -715,6 +737,7 @@ export const LiveBlog = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -754,6 +777,7 @@ export const DeadBlog = () => {
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
+						renderingTarget="Web"
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -781,6 +805,7 @@ export const ReviewWithoutStars = () => {
 						tags={[]}
 						webPublicationDateDeprecated=""
 						byline="Byline text"
+						renderingTarget="Web"
 					/>
 					<Standfirst
 						format={format}
@@ -831,6 +856,7 @@ export const AgeWarning = () => {
 										},
 									]}
 									webPublicationDateDeprecated="2020-03-28T07:27:19.000Z"
+									renderingTarget="Web"
 								/>
 							</ArticleContainer>
 						</Flex>

@@ -490,6 +490,7 @@ export const CommentLayout = ({
 											'number'
 										}
 										hasAvatar={!!avatarUrl}
+										renderingTarget={renderingTarget}
 									/>
 									{/* BOTTOM */}
 									<div>
@@ -558,6 +559,7 @@ export const CommentLayout = ({
 										!!article.config.switches
 											.serverShareCounts
 									}
+									renderingTarget={renderingTarget}
 								/>
 							</div>
 						</GridItem>

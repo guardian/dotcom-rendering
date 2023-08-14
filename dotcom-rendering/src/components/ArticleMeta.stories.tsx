@@ -85,6 +85,7 @@ export const ArticleStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -127,6 +128,7 @@ export const BrandingStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -154,6 +156,7 @@ export const FeatureStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -180,6 +183,7 @@ export const FeatureWithMismatchedContributor = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -207,6 +211,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -233,6 +238,7 @@ export const SpecialReportStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -259,6 +265,7 @@ export const SpecialReportAlt = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -285,6 +292,7 @@ export const CommentStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -311,6 +319,7 @@ export const InterviewStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -337,6 +346,7 @@ export const ImmersiveStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -363,6 +373,7 @@ export const TwoContributorsStory = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
@@ -391,6 +402,7 @@ export const DeadBlogStory = () => {
 						shortUrlId=""
 						ajaxUrl=""
 						showShareCount={true}
+						renderingTarget="Web"
 					/>
 				</Wrapper>
 			))}
@@ -419,6 +431,7 @@ export const Dateline = () => {
 				shortUrlId=""
 				ajaxUrl=""
 				showShareCount={true}
+				renderingTarget="Web"
 			/>
 		</Wrapper>
 	);
